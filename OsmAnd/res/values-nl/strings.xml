@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
   <string name="play_commands_of_currently_selected_voice">Speel instructies af met de geselecteerde stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
@@ -123,7 +122,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
   <string name="fav_export_confirmation">Favorietenbestand bestaat al, wilt u dit vervangen?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Profielspecifieke instellingen</string>
   <string name="settings_preset">Gebruiksprofiel</string>
   <string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
@@ -150,14 +148,11 @@
   <string name="tip_day_night_mode_t">\tDe kaartweegave kan voor sommige vectorkaarten worden ingesteld op dag (helderder) en nacht (donkerder). \n\tNachtkleuren zijn veiliger voor nachtelijke ritten. \n\tJe kan de dag/nacht-omschakeling instellen bij \'Instellingen\' -&gt; \'Kaart uiterlijk\' -&gt;\'Dag/nacht modus\'. \n\tDe keuzes zijn: \n\t\'Zonsopkomst/Zonsondergang\' - automatische modus, gerelateerd aan de positie van de zon (standaardinstelling) \n\t\'Dag\' - gebruik altijd de dag-modus \n\t\'Nacht\' - gebruik altijd de nacht-modus \n\t\'Lichtsensor\' - de kaartweegave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)</string>
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
   <string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. Je kan eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet je eerst je OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM bewerken\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt en bevestig de wijziging. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
-  <!-- end of string wijzigingen for new Preferences structure -->
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
   <string name="download_files_question_space">Vrije ruimte is nu {2} MB! Download {0} bestand(en) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selecteer bestemming</string>
   <string name="tip_select_destination_point_t">\tJe kan een bestemming direct opgeven op de kaart (contextmenu, dan \'Zet als bestemming\'), bij alle zoekactiviteiten, of via lang drukken op een regel in uw lijst van interessepunten. \n\tDe bestemming wordt gemarkeerd als een oranje punt op de kaart en OsmAnd toont de afstand en richting hiernaartoe (oranje driehoek).</string>
-  <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_9_t">♦</string>
-  <!-- End: this block not translated, is obsolete -->
   <string name="use_transparent_map_theme_descr">Gebruik transparante kaarttoetsen</string>
   <string name="use_transparent_map_theme">Transparant thema</string>
   <string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
@@ -181,9 +176,7 @@
   <string name="layer_poi_label">interessepunt labels</string>
   <string name="animate_route_off">Stop animatie</string>
   <string name="animate_route">Start animatie</string>
-  <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_8_t">"Wijzigingen in 0.6.8 : \n\t- Completely redesigned zoek (interessepunt, Address)! Make address zoek much faster and more responsive. Create one Zoek interface with many different options. \n\t- Implement interessepunt zoek by name in big areas (countries) \n\t- Fix flickering kaart screen for tablets (Issue 641) \n\t- Auto follow route option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- interessepunt gegevens included in .obf bestand (all download indexes after 01/10/11) \n\t- Stem prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
-  <!-- End: this block not translated, is obsolete -->
   <string name="file_can_not_be_renamed">Bestandsnaam kan niet worden gewijzigd.</string>
   <string name="file_with_name_already_exists">Er bestaat al een bestand met die naam.</string>
   <string name="gpx_navigation">GPX route</string>
@@ -202,12 +195,10 @@
   <string name="search_position_map_view">Laatste kaartweergave</string>
   <string name="select_search_position">Zoek dichtbij:</string>
   <string name="context_menu_item_search">Zoek dichtbij hier</string>
-  <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_7_t">"Recent wijzigingen for 0.6.7 : \n\t- Offline gegevens manager (download, verwijder, activate / deactivate offline gegevens directly in OsmAnd) \n\t- Favorite points and groups (categorize, verwijder, manage favorites) \n\t- GPX Explorer in application (beeld track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline gebruik \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector oplevering \n\t- Improvement of stemgenerator engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
-  <!-- End: this block not translated, is obsolete -->
   <string name="save_route_dialog_title">Sla route op als GPX track</string>
   <string name="route_successfully_saved_at">Route succesvol opgeslagen als \'%1$s\'.</string>
-  <string name="filename_input">"Bestandsnaam: "</string>
+  <string name="filename_input">Bestandsnaam: </string>
   <string name="file_with_name_already_exist">Er bestaat al een bestand met dezelfde naam.</string>
   <string name="default_buttons_save">Bewaar</string>
   <string name="menu_save_directions">Bewaar navigatie-aanwijzingen</string>
@@ -263,9 +254,7 @@
   <string name="trace_rendering">Spoor-oplevering debug info</string>
   <string name="trace_rendering_descr">Weergavesnelheid</string>
   <string name="tip_recent_changes">Recente wijzigingen</string>
-  <!-- this block not translated, is obsolete -->
   <string name="tip_recent_changes_0_6_6_t">"Recente wijzigingen for 0.6.6 : \n\t- Text To Speech engine for stem navigation \n\t- Make kaart renderer more detailed \n\t- Basemap for whole world packaged with app \n\t- Tweak offline routing (still experimental) \n\t- GPX routing options \n\t- UI actualisatie and large bug fixing "</string>
-  <!-- End: this block not translated, is obsolete -->
   <string name="voice_not_use">Niet gebruiken</string>
   <string name="voice_not_specified">Niet gespecificeerd</string>
   <string name="installing_new_resources">Installeren nieuwe gegevens…</string>
@@ -302,7 +291,7 @@
   <string name="install_more">Installeer meer…</string>
   <string name="tip_update_index">Actualisatie van Offline Gegevens</string>
   <string name="tip_update_index_t">"\tHet is essentieel, dat de kaartgegevens up-to-date zijn. OsmAnd bevat een download manager, die kan controleren of er updates van offline-gegevens beschikbaar zijn. \n\tOm te controleren op updates, ga naar \'Instellingen\' -&gt; \'Offline-gegevens\' -&gt; \'Download offline-gegevens\'. Nadat een regiolijst van het Internet is opgehaald, selecteer de optie \'Menu\' -&gt; \'Filter gedownloade gegevens\' om alleen de gegevens te zien, die al op je apparaat aanwezig zijn. \n\tDe beschikbaarheid van updates wordt weergegeven in de volgende kleuren: \n\t\'Groen\' - De gegevens op je apparaat en op de server zijn identiek \n\t\'Blauw\' - Er is een update beschikbaar op de server \n\t\'Donker Groen\' - gedeactiveerde kaart, deze is up-to-date \n\t\'Donker Blauw\' - gedeactiveerde kaart, er is een update beschikbaar "</string>
-  <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken.</string>
+  <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken</string>
   <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
   <string name="tip_location_sharing">Locatie delen</string>
   <string name="tip_location_sharing_t">\tJe kan de locatie van interessepunten op je tocht delen met familie of vrienden. \n\tOm een locatie te delen: \n\tGebruik het \'Kaart contextmenu\' -&gt; \'Deel locatie\' menu. \n\tSelecteer dan de methode van delen van je locatie. De opties zijn: E-Mail, SMS(tekst), of kopieer de locatiecoördinaten naar het prikbord.</string>
@@ -348,7 +337,7 @@
   <string name="context_menu_item_add_waypoint">Voeg GPX routepunt toe</string>
   <string name="amenity_type_administrative">Diensten</string>
   <string name="amenity_type_barrier">Blokkade</string>
-  <string name="amenity_type_education">Scholen e.d.</string>
+  <string name="amenity_type_education">Onderwijs</string>
   <string name="amenity_type_emergency">Noodgevallen</string>
   <string name="amenity_type_entertainment">Entertainment</string>
   <string name="amenity_type_finance">Financieel</string>
@@ -416,7 +405,7 @@
   <string name="select_all">Selecteer alles</string>
   <string name="reload">Ververs</string>
   <string name="fast_route_mode">Snelste route</string>
-  <string name="fast_route_mode_descr">"Activeer voor de snelste route of deactiveer voor de kortste route "</string>
+  <string name="fast_route_mode_descr">Activeer voor de snelste route of deactiveer voor de kortste route </string>
   <string name="tiles_to_download_estimated_size">Op zoom {0} omvat de download {1} kaartsegmenten ({2} MB)</string>
   <string name="context_menu_item_download_map">Download kaart</string>
   <string name="select_max_zoom_preload_area">Selecteer maximum zoom om vooraf te laden</string>
@@ -430,7 +419,7 @@
   <string name="renderers">Vector kaartgenerator</string>
   <string name="renderers_descr">Selecteer (offline) vectorkaartweergave</string>
   <string name="poi_context_menu_website">Toon interessepunt website</string>
-  <string name="poi_context_menu_call">Toon interessepunt telefoon</string>
+  <string name="poi_context_menu_call">Telefoneer interessepunt</string>
   <string name="website">website</string>
   <string name="phone">telefoon</string>
   <string name="download_type_to_filter">type filtering</string>
@@ -496,7 +485,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">seconden</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Stel interval in voor plaatsbepaling door achtergrondservice</string>
+  <string name="background_service_int_descr">Stel interval in voor plaatsbepaling door achtergrondservice </string>
   <string name="background_service_int">Plaatsbepaling-interval</string>
   <string name="background_service_provider_descr">Selecteer achtergrondservice-provider</string>
   <string name="background_service_provider">Achtergrondservice-provider</string>
@@ -675,7 +664,7 @@
   <string name="show_view_angle_descr">Richtingweergave gebaseerd op het kompas</string>
   <string name="show_view_angle">Richtingweergave</string>
   <string name="stop_navigation">Wis betemming</string>
-  <string name="navigate_to_point">Zet als bestemming</string>
+  <string name="navigate_to_point">Zet als best.</string>
   <string name="map_view_3d_descr">Activeer 3D kaartbeeld</string>
   <string name="map_view_3d">Kaartbeeld 3D</string>
   <string name="show_poi_over_map_description">Toon interessepunt op kaart (gebruik laatstgekozen filter)</string>
@@ -743,7 +732,7 @@
   <string name="favourites_context_menu_edit">Bewerk favoriet</string>
   <string name="favourites_context_menu_delete">Verwijder favoriet</string>
   <string name="favourites_remove_dialog_msg">Verwijder favoriet \'%s\'?</string>
-  <string name="favourites_remove_dialog_success">Favoriet {0} is verwijderd</string>
+  <string name="favourites_remove_dialog_success">Favoriet {0} is verwijderd.</string>
   <string name="osb_add_dialog_title">Geef bug tekst in</string>
   <string name="osb_add_dialog_success">Bug is aangemaakt</string>
   <string name="osb_add_dialog_error">Fout opgetreden: bug is niet aangemaakt</string>
@@ -768,7 +757,7 @@
   <string name="poi_remove_success">interessepunt is verwijderd</string>
   <string name="poi_action_add">Voeg toe</string>
   <string name="poi_action_change">wijzigen</string>
-  <string name="poi_action_succeded_template">Actie {0} succesvol verwerkt</string>
+  <string name="poi_action_succeded_template">Actie {0} succesvol verwerkt.</string>
   <string name="poi_error_unexpected_template">Fout opgetreden bij het uitvoeren van actie {0}.</string>
   <string name="poi_error_io_error_template">Lees/schrijffout opgetreden bij het uitvoeren van actie {0}.</string>
   <string name="poi_error_info_not_loaded">Info over interessepunt niet geladen</string>
@@ -789,7 +778,7 @@
   <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
   <string name="left_side_navigation">Links verkeer navigatie</string>
   <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt</string>
-  <string name="download_link_and_local_description">"Download of update offline gegevens.\nKlik op een item om meer details te zien, druk lang om ze te deactiveren, te hernoemen of te verwijderen.\nHuidige data op apparaat (%1$s vrij): "</string>
+  <string name="download_link_and_local_description">Download of update offline gegevens.\nKlik op een item om meer details te zien, druk lang om ze te deactiveren, te hernoemen of te verwijderen.\nHuidige data op apparaat (%1$s vrij):</string>
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
   <string name="context_menu_item_directions">Aanwijzingen naar hier</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
@@ -810,7 +799,7 @@
   <string name="osmand_extra_settings_description">Met deze plugin kan je geavanceerde kaartinstellingen en enkele apparaatspecifieke instellingen wijzigen.</string>
   <string name="osmand_development_plugin_description">Met deze plugin kan je ontwikkeling en fout-opsporing opties activeren zoals navigatie met animatie of de kaartgeneratie snelheid.</string>
   <string name="plugins_screen">Plugin manager</string>
-  <string name="select_plugin_to_activate">Toets een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten).</string>
+  <string name="select_plugin_to_activate">Toets een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
   <string name="prefs_plugins_descr">Plugins geven extra functionaliteit zoals tracking, rasterkaarten, scherm-uit mode, toegankelijkheidsinstellingen en meer.</string>
   <string name="prefs_plugins">Plugin manager</string>
   <string name="tip_recent_changes_0_8_0_t">"Wijzigingen in 0.8.0 : \n\t- *Plugin functionaliteit* \n\t- De meeste functionaliteit is gegroepeerd op features en kan worden geactiveerd/gedeactiveerd in de Plugin Manager. Dit omvat rasterkaarten (online of opgeslagen), tracking-instellingen en vele andere nieuwe en al eerder bestaande features)\n\t- *Nieuw offline kaartformaat*\n\t- kaartgeneratie sneller en nauwkeuriger (problemen met kustlijnen en doorlopende vlakken opgelost)\n\t- Alle offline gegevens moeten worden vernieuwd (de oude gegevens werken niet meer)\n\t- *Offline navigatie is sterk verbeterd*\n\t- *gebruiksvriendelijkheid en interface*\n\t- Op vele punten verbeterd"</string>
@@ -843,7 +832,15 @@
   <string name="rendering_attr_contourLines_name">Toon hoogtelijnen</string>
   <string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string>
   <string name="rendering_attr_hmRendered_name">Toon meer details</string>
-  <string name="tip_recent_changes_0_8_1_t">"Wijzigingen in 0.8.1 : \n\t* Nauwkeuriger routeberekening (iets trager) \n\t* Slimme en snelle route-herberekening \n\t* Rijstrook begeleiding\n\t* Informatie over maximum snelheden, snelheidscamera\'s en verkeersdrempels\n\t* Verbeterde stembegeleiding op snelwegen \n\t* Parkeer plugin (\"Waar staat mijn auto geparkeerd?\")\n* Toon/verberg track-registratie widget"</string>
+  <string name="tip_recent_changes_0_8_1_t">"Wijzigingen in 0.8.1 : 
+\n\t* Nauwkeuriger routeberekening (iets trager) 
+\n\t* Slimme en snelle route-herberekening 
+\n\t* Rijstrook begeleiding
+\n\t* Informatie over maximum snelheden, snelheidscamera\'s en verkeersdrempels
+\n\t* Verbeterde stembegeleiding op snelwegen 
+\n\t* Parkeer plugin (\"Waar staat mijn auto geparkeerd?\")
+\n\t* Toon/verberg track-registratie widget"
+ </string>
   <string name="gpxup_public">Openbaar</string>
   <string name="gpxup_identifiable">Identificeerbaar</string>
   <string name="gpxup_trackable">Traceerbaar</string>
@@ -890,7 +887,10 @@
   <string name="show_cameras">Toon snelheidscontroles</string>
   <string name="show_speed_limits">Toon maximumsnelheden</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Verbeterde routeberekening"</string>
+  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 : 
+   \n\t* Verbeterde routeberekening
+   \n\t* Dynamische kaartenwidgets
+   </string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
   <string name="map_widget_map_select">Kaartselectie</string>
