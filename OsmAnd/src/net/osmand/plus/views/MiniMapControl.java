@@ -36,11 +36,6 @@ public class MiniMapControl extends MapInfoControl {
 		paintMiniRoute = new Paint();
 		paintMiniRoute.setStyle(Style.STROKE);
 		paintMiniRoute.setStrokeWidth(35 * scaleCoefficient);
-		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
-			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track_fluorescent));
-		} else {
-			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
-		}
 		paintMiniRoute.setStrokeJoin(Join.ROUND);
 		paintMiniRoute.setStrokeCap(Cap.ROUND);
 		paintMiniRoute.setAntiAlias(true);

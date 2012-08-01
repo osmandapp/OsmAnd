@@ -22,6 +22,7 @@ public class MapInfoControls {
 	public static final int RIGHT_CONTROL = 1;
 	public static final int MAIN_CONTROL = 0;
 	
+	private Set<MapInfoControlRegInfo> appearanceWidgets = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> left = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> right = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> top = new TreeSet<MapInfoControls.MapInfoControlRegInfo>(new Comparator<MapInfoControlRegInfo>() {
@@ -63,6 +64,30 @@ public class MapInfoControls {
 			}
 		}
 		
+	}
+	
+	public MapInfoControlRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
+			EnumSet<ApplicationMode> appDefaultModes) {
+		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		ii.defaultModes = appDefaultModes.clone();
+		ii.defaultCollapsible = null;
+		ii.key = key;
+		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
+		ii.visibleCollapsible = null;
+		for(ApplicationMode ms : ApplicationMode.values() ) {
+			boolean def = appDefaultModes.contains(ms);
+			Set<String> set = visibleElements.get(ms);
+			if(set != null) {
+				def = set.contains(key);
+			}
+			if(def){
+				ii.visibleModes.add(ms);
+			}
+		}
+		ii.drawable = drawable;
+		ii.messageId = messageId;
+		this.appearanceWidgets.add(ii);
+		return ii;
 	}
 	
 	public MapInfoControlRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
@@ -167,6 +192,9 @@ public class MapInfoControls {
 			bs.append(ks).append(";");
 		}
 		settings.MAP_INFO_CONTROLS.set(bs.toString());
+		if(m.stateChangeListener != null) {
+			m.stateChangeListener.run();
+		}
 	}
 	
 	public Set<MapInfoControlRegInfo> getLeft() {
@@ -179,6 +207,10 @@ public class MapInfoControls {
 	
 	public Set<MapInfoControlRegInfo> getTop() {
 		return top;
+	}
+	
+	public Set<MapInfoControlRegInfo> getAppearanceWidgets() {
+		return appearanceWidgets;
 	}
 	
 	public void populateStackControl(MapStackControl stack, OsmandMapTileView v, boolean left){
@@ -237,7 +269,6 @@ public class MapInfoControls {
 		}
 		return true;
 	}
-
 	
 	
 	public static class MapInfoControlRegInfo implements Comparable<MapInfoControlRegInfo>  {
@@ -250,6 +281,7 @@ public class MapInfoControls {
 		private EnumSet<ApplicationMode> defaultCollapsible;
 		private EnumSet<ApplicationMode> visibleModes;
 		private EnumSet<ApplicationMode> visibleCollapsible;
+		private Runnable stateChangeListener = null;
 		public int priorityOrder;
 		
 		public boolean visibleCollapsed(ApplicationMode mode){
@@ -271,6 +303,10 @@ public class MapInfoControls {
 			return this;
 		}
 		
+		
+		public void setStateChangeListener(Runnable stateChangeListener) {
+			this.stateChangeListener = stateChangeListener;
+		}
 		
 		@Override
 		public int hashCode() {

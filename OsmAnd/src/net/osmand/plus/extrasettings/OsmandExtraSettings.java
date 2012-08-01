@@ -1,11 +1,18 @@
 package net.osmand.plus.extrasettings;
 
+import java.util.EnumSet;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.MapInfoControls;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
 import net.osmand.plus.voice.CommandPlayer;
 import android.media.AudioManager;
 import android.preference.ListPreference;
@@ -18,6 +25,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 	private static final String ID = "osmand.extrasettings";
 	private OsmandSettings settings;
 	private OsmandApplication app;
+	private boolean registerControls;
 	
 	public OsmandExtraSettings(OsmandApplication app) {
 		this.app = app;
@@ -43,6 +51,40 @@ public class OsmandExtraSettings extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
+		if (registerControls) {
+			registerControls = true;
+			final OsmandMapTileView view = activity.getMapView();
+			final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+			final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
+			final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
+					"transparent", EnumSet.of(ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT));
+			transparent.setStateChangeListener(new Runnable() {
+				@Override
+				public void run() {
+					ApplicationMode am = view.getSettings().getApplicationMode();
+					view.getSettings().TRANSPARENT_MAP_THEME.set(transparent.visible(am));
+					mapInfoLayer.recreateControls();
+				}
+			});
+
+			final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_fluorescent,
+					"fluorescent", EnumSet.noneOf(ApplicationMode.class));
+			fluorescent.setStateChangeListener(new Runnable() {
+				@Override
+				public void run() {
+					ApplicationMode am = view.getSettings().getApplicationMode();
+					view.getSettings().FLUORESCENT_OVERLAYS.set(fluorescent.visible(am));
+					view.refreshMap();
+				}
+			});
+		}
+	}
+	
+	@Override
+	public void updateLayers(final OsmandMapTileView view, MapActivity activity) {
+		if(!registerControls) {
+			registerLayers(activity);
+		}
 	}
 	
 
@@ -86,20 +128,19 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		vectorSettings.setKey("custom_vector_rendering");
 		appearance.addPreference(vectorSettings);
 
-		cat = new PreferenceCategory(app);
-		cat.setTitle(R.string.extra_settings);
-		appearance.addPreference(cat);
-		
-		cat.addPreference(activity.createCheckBoxPreference(settings.TRANSPARENT_MAP_THEME, 
-				R.string.use_transparent_map_theme, R.string.use_transparent_map_theme_descr));
-		cat.addPreference(activity.createCheckBoxPreference(settings.SHOW_RULER, 
-				R.string.show_ruler_level, R.string.show_ruler_level_descr));
-		cat.addPreference(activity.createCheckBoxPreference(settings.FLUORESCENT_OVERLAYS,
-				R.string.use_fluorescent_overlays, R.string.use_fluorescent_overlays_descr));
-		
-		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
-				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
-				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
-				R.string.position_on_map_descr));		
+		// Not used any more TODO remove strings
+//		cat = new PreferenceCategory(app);
+//		cat.setTitle(R.string.extra_settings);
+//		appearance.addPreference(cat);
+//		cat.addPreference(activity.createCheckBoxPreference(settings.FLUORESCENT_OVERLAYS,
+//				R.string.use_fluorescent_overlays, R.string.use_fluorescent_overlays_descr));
+//		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
+//				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
+//				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
+//				R.string.position_on_map_descr));
+//		cat.addPreference(activity.createCheckBoxPreference(settings.TRANSPARENT_MAP_THEME, 
+//				R.string.use_transparent_map_theme, R.string.use_transparent_map_theme_descr));
+//		cat.addPreference(activity.createCheckBoxPreference(settings.SHOW_RULER, 
+//				R.string.show_ruler_level, R.string.show_ruler_level_descr));
 	}
 }

@@ -9,6 +9,10 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_widget_fluorescent">Fluorescent colors</string>
+    <string name="map_widget_appearance">Appearance</string>
+    <string name="map_widget_view_direction">View direction</string>
+    <string name="map_widget_transparent">Transparent views</string>
     <string name="monitoring_mode_off">GPX rec</string>
     <string name="monitoring_mode_on">GPX off</string>
     <string name="bg_service_sleep_mode_off">Stop background</string>
