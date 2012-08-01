@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
   <string name="offline_edition">Edición sin conexión</string>
   <string name="offline_edition_descr">Usa siempre edición sin conexión</string>
@@ -46,7 +45,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (sin conexión)</string>
   <string name="amenity_type_user_defined">Definido por el usuario</string>
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil de usuario</string>
   <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
@@ -74,7 +72,6 @@
   <string name="tip_day_night_mode_t">\tLa apariencia del mapa se puede cambiar, para algunos mapas vectoriales, entre Día (más brillante) y Noche (más oscuro). \n\tLos colores Noche son más seguros para la conducción nocturna. \n\tPuede definir la política para cambiar entre Día y Noche en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt;\'Modo Día/Noche\'. \n\tLas opciones son: \n\t\'Alba/Ocaso\' - modo automático, controlado por la posición del sol (por defecto) \n\t\'Día\' - siempre usa el modo Día \n\t\'Noche\' - siempre usa el modo Noche \n\t\'Sensor de luz\' - la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si lo tiene)</string>
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y -además de para ver mapas y navegación- se puede utilizar para mejorar la calidad de los datos OSM. Puede crear y enviar fácilmente nuevos PDI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesita primero proporcionar su información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'Edición OSM\'. \n\tPara añadir un nuevo PDI use la opción \'Crear PDI\' en el menú contextual del mapa. Introduzca la información sobre el nuevo PDI en el formulario \'Crear PDI\' y por último envíela. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM use la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escriba la descripción detallada del problema y por último envíela pulsando el botón \'Añadir\'. \n\tNecesita conexión a Internet para enviar sus contribuciones a PDIs y fallos OSM.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selección de Destino</string>
@@ -131,7 +128,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 : \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en OsmAnd) \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos) \n\t- Explorador de GPX en la aplicación (ver detalle del trayecto, distancia, velocidad media, elevación, etc.) \n\t- Navegación GPX (más opciones, continuar la navegación tras un fallo de aplicación, soportar rotondas) \n\t- Función para guardar la ruta como traza GPX para uso sin conexión \n\t- Mejora de la monitorización GPX (filtra alguna posición incorrecta y guarda precisión/elevación/velocidad) \n\t- Envía GPX a la comunidad OSM (http://download.osmand.net/gpx/) \n\t- Mejora del dibujo vectorial \n\t- Mejora del motor TTS (anuncia la distancia exacta, permite millas) \n\t- Arreglo de fallos "</string>
   <string name="save_route_dialog_title">Guarda la ruta como traza GPX</string>
   <string name="route_successfully_saved_at">Ruta guardada correctamente como \'%1$s\'.</string>
-  <string name="filename_input">"Nombre de archivo: "</string>
+  <string name="filename_input">Nombre de archivo: </string>
   <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
   <string name="default_buttons_save">Guardar</string>
   <string name="menu_save_directions">Guardar direcciones</string>
@@ -338,7 +335,7 @@
   <string name="select_all">Seleccionar todo</string>
   <string name="reload">Recargar</string>
   <string name="fast_route_mode">Ruta más rápida</string>
-  <string name="fast_route_mode_descr">"Habilitar para calcular la ruta más rápida o deshabilitar para la más corta "</string>
+  <string name="fast_route_mode_descr">Habilitar para calcular la ruta más rápida o deshabilitar para la más corta </string>
   <string name="tiles_to_download_estimated_size">En zoom {0} descarga {1} teselas ({2} MB)</string>
   <string name="context_menu_item_download_map">Descargar mapa</string>
   <string name="select_max_zoom_preload_area">Seleccione el zooom máximo para precargar</string>
@@ -419,7 +416,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Fijar el intervalo entre lecturas del servicio de fondo</string>
+  <string name="background_service_int_descr">Fijar el intervalo entre lecturas del servicio </string>
   <string name="background_service_int">Intervalo de lectura</string>
   <string name="background_service_provider_descr">Elegir el proveedor de localización para la ejecución de fondo</string>
   <string name="background_service_provider">Proveedor de localización</string>
@@ -437,7 +434,7 @@
   <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
   <string name="voice_data_corrupted">El dato de voz especificado está corrupto</string>
   <string name="voice_data_unavailable">El dato de voz escogido no está disponible</string>
-  <string name="stop_routing">Detener navegación</string>
+  <string name="stop_routing">Parar nave.</string>
   <string name="sd_unmounted">No se puede acceder a la tarjeta SD.\nNo puede ver mapas ni encontrar cosas.</string>
   <string name="sd_mounted_ro">La tarjeta SD está en modo sólo lectura. \nSolamente puede ver el mapa precargado y no puede descargar de Internet.</string>
   <string name="unzipping_file">Descomprimiendo archivo…</string>
@@ -516,7 +513,7 @@
   <string name="downloading">Descargando…</string>
   <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
   <string name="list_index_files_was_not_loaded">La lista de regiones no se ha descargado de osmand.net.</string>
-  <string name="select_index_file_to_download">Si no puede encontrar su región, puede hacerla usted mismo. Visite osmand.net</string>
+  <string name="select_index_file_to_download">Nada fue encontrado. Si no puede encontrar su región, puede hacerla usted (Visite http://osmand.net).</string>
   <string name="show_poi_on_map">Mostrar en mapa</string>
   <string name="fav_points_edited">Se editó el punto favorito</string>
   <string name="fav_points_not_exist">No hay puntos favoritos</string>
