@@ -1,14 +1,13 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="live_monitoring_mode_off">Start Live tracking</string>
+<resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
-  <string name="layer_map_appearance">Configureer scherm&#8230;</string>
+  <string name="layer_map_appearance">Configureer scherm…</string>
   <string name="show_lanes">Toon rijstroken</string>
   <string name="avoid_unpaved">Vermijd onverharde wegen</string>
   <string name="avoid_ferries">Vermijd veerboten</string>
-  <string name="avoid_in_routing_title">Vermijd&#8230;</string>
+  <string name="avoid_in_routing_title">Vermijd…</string>
   <string name="avoid_in_routing_descr">Vermijd tolwegen, onverharde wegen, veerboten</string>
-  <string name="show_warnings_title">Toon alarm&#8230;</string>
+  <string name="show_warnings_title">Toon alarm…</string>
   <string name="show_warnings_descr">Toon snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
   <string name="map_widget_fluorescent">Fluorescerende routes</string>
   <string name="map_widget_show_ruler">Lineaal</string>
@@ -938,4 +937,5 @@
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
   <string name="bg_service_sleep_mode_off">Slaap modus aanzetten</string>
   <string name="bg_service_sleep_mode_on">Slaap modus uitzetten</string>
+<string name="email">email</string>
 </resources>
