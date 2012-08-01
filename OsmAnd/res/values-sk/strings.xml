@@ -1,5 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="map_widget_top_text">Názov ulice</string>
+<resources>
+  <string name="monitoring_mode_off">GPX zázn.</string>
+  <string name="monitoring_mode_on">GPX vyp</string>
+  <string name="bg_service_sleep_mode_off">Zastaviť pozadie</string>
+  <string name="bg_service_sleep_mode_on">Spustiť na pozadí</string>  
+  <string name="map_widget_top_text">Názov ulice</string>
   <string name="map_widget_config">Konfigurácia</string>
   <string name="map_widget_map_select">Výber mapy</string>
   <string name="map_widget_back_to_loc">Kde som</string>
@@ -907,6 +912,4 @@
   \n\t* Dynamické mapové widgety</string>
   <string name="screen_is_locked">Na odomknutie obrazovky, kliknite na ikonu zámky</string>
   <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
-  <string name="bg_service_sleep_mode_off">Vypnúť režim spánku</string>
-  <string name="bg_service_sleep_mode_on">Zapnúť režim spánku</string>
 </resources>
