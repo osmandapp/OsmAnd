@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <string name="plugins_screen">Spraudņi</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
   <string name="prefs_plugins">Spraudņi</string>
@@ -71,7 +70,7 @@
   <string name="direction_style_sidewise">Sāniski (8 sektori)</string>
   <string name="direction_style_clockwise">Pulksteņrādītāja (12 sektori)</string>
   <string name="settings_direction_style">Virziena stils</string>
-  <string name="settings_direction_style_descr">Izvēlaties relatīvās virziena norādes izteiksmes stilus kustības laikā.</string>
+  <string name="settings_direction_style_descr">Izvēlaties relatīvās virziena norādes izteiksmes stilus kustības laikā</string>
   <string name="auto_announce_on">Sākt autoziņošanu</string>
   <string name="auto_announce_off">Pārtraukt autoziņošanu</string>
   <string name="scroll_map_by_gestures_descr">Ritināt karti ar \"guestures\" palīdzību</string>
@@ -130,7 +129,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (bezsaistes)</string>
   <string name="amenity_type_user_defined">Lietotāja definēts</string>
   <string name="fav_export_confirmation">Eksistē fails ar iepriekš eksportētu izlases sarakstu. Vai vēlaties to pārrakstīt?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Ar profilu saistītie uzstādījumi</string>
   <string name="settings_preset">Lietotāju profils</string>
   <string name="settings_preset_descr">Izvēlaties lietotāja profilu ar specifiskiem kartes un navigācijas uzstādījumuiem.</string>
@@ -157,7 +155,6 @@
   <string name="tip_day_night_mode_t">\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišāku) un nakts (tumšāku). \n\tNakts krāsas ir drošākas braukšanai. \n\tJūs variet izvēlēties noteikumus dienas/nakts pārslēgšana ar \'Uzstādījumi\' -&gt; \'Kartes izskats\' -&gt;\'Dienas/nakts režīms\'. \n\tJūs variet izvēlēties: \n\t\'Ausma/Saulriets\' - automātiskais režīms, kas ir atkarīgs no saules (noklusētais) \n\t\'Diena\' - vienmēr lietot dienas režīmu \n\t\'Night\' - vienmēr lietot nakts režīmu \n\t\'Gaismas sensors\' - kartes izskats tiek kontrolēts izmantojot jūsu iekārtas gaismas sensoru (ja tāds jūsu iekārtai ir)</string>
   <string name="tip_osm_improve">OSM datu uzlabošana</string>
   <string name="tip_osm_improve_t">\tOsmAnd lieto kartes kuras ir bāzētas uz Openstreetmap.org (OSM) datiem un, kopā ar kartes skatīšanos un navigāciju, var tikt izmantota, lai uzlabotu OSM datu kvalitāti. Jūs variet vienkārši augšuplādēt jaunus POI vai OSM kļūdas pieteikumus ar dažām dabībām! \n\tLai tas strādātu jums vispirms ir jānorāda OSM pieslēguma informācija \'Uzstādījumi\' -&gt; \'Vispārīgie uzstādījumi\' -&gt; \'OSM labošana\'. \n\tLai pievienotu jaunu POI lietojiet opciju \'Izveidot POI\' kartes konteksta izvēlnē. Turpiniet ievadot POI informāciju par jauno punktu \'Izveidot POI\' dialogā un pabeidzot darbību apstipriniet ievadu. \n\tJums ir iespēja nekavējoties ziņot par kļūdām kartē ar OSM kļūdas pieteikuma palīdzību, tad OSM kopiena var ātrāk šo kļūdu izlabot. \n\tLai pievienotu OSM kļūdas pieteikumu izmantojiet opciju \'Pieteikt OSM kļūdu\' kartes konteksta izvēlnē. Tad ievadiet detalizētu kļūdas aprakstu un nobeidzot apstipriniet pieteikumu piespiežot pogu \'Pievienot\'. \n\tŅemiet vērā. OSM POI un kļūdu pieteikšanai ir nepieciešams datu savienojums.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">Nepietiek brīvas vietas lai lejuplādētu %1$s MB (brīvi: %2$s).</string>
   <string name="download_files_question_space">Patreiz ir brīvi {2} MB! Lejuplādēt {0} failu(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Izvelēties galamērķi</string>
@@ -214,7 +211,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi"</string>
   <string name="save_route_dialog_title">Saglabāt ceļu kā GPX treku</string>
   <string name="route_successfully_saved_at">Ceļš veiksmīgi saglabāts kā \'%1$s\'.</string>
-  <string name="filename_input">"Faila nosaukums : "</string>
+  <string name="filename_input">Faila nosaukums : </string>
   <string name="file_with_name_already_exist">Fails ar šādu nosaukumu jau eksistē.</string>
   <string name="default_buttons_save">Saglabāt</string>
   <string name="menu_save_directions">Saglabāt norādījumus</string>
@@ -248,7 +245,7 @@
   <string name="local_index_mi_restore">Aktivizēt</string>
   <string name="local_index_mi_backup">Deaktivizēt</string>
   <string name="local_index_mi_delete">Dzēst</string>
-  <string name="local_index_mi_reload">Nolasīt no sd kartes.</string>
+  <string name="local_index_mi_reload">Nolasīt no sd kartes</string>
   <string name="local_index_download">Lejupielādes...</string>
   <string name="local_index_tile_data">Bilžu dati: %1$s \nMinimālais palielinājums : %2$d\nMaksimālais palielinājums : %3$d\nLejuplādējams : %4$s \nLejuplādēti palielinājumi : %5$s</string>
   <string name="local_index_poi_data">POI dati</string>
@@ -421,7 +418,7 @@
   <string name="select_all">Iezīmēt visu</string>
   <string name="reload">Atsvaidzināt</string>
   <string name="fast_route_mode">Ātrākais maršruts</string>
-  <string name="fast_route_mode_descr">"Iespējot lai rēķinātu ātrāko maršrutu vai atspējot īsākam maršrutam"</string>
+  <string name="fast_route_mode_descr">Iespējot lai rēķinātu ātrāko maršrutu vai atspējot īsākam maršrutam </string>
   <string name="tiles_to_download_estimated_size">Palielinājumam {0} lejuplādēt {1} attēlus ({2} MB)</string>
   <string name="context_menu_item_download_map">Lejuplādēt karti</string>
   <string name="select_max_zoom_preload_area">Izvēlēties maksimālo palielinājumu pirmsielādei</string>
@@ -475,7 +472,7 @@
   <string name="export_fav">Eksportēt</string>
   <string name="error_occurred_loading_gpx">Kļūda ielādējot GPX</string>
   <string name="send_report">Sūtīt atskaiti</string>
-  <string name="none_region_found">"Nav atrasti bezsaistes dati uz SD kartes. Lejuplādējiet reģionus no Interneta. "</string>
+  <string name="none_region_found">Nav atrasti bezsaistes dati uz SD kartes. Lejuplādējiet reģionus no Interneta.</string>
   <string name="poi_namefinder_query_empty">Ievadiet meklēšanas pieprasījumu lai atrastu POI</string>
   <string name="any_poi">Jebkurš</string>
   <string name="layer_transport_route">Transporta maršruts</string>
@@ -501,7 +498,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekundes</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">"Uzstādiet pamošanās intervālu strādājot fonā"</string>
+  <string name="background_service_int_descr">Uzstādiet pamošanās intervālu strādājot fonā </string>
   <string name="background_service_int">Pamošanās intervāls</string>
   <string name="background_service_provider_descr">Izvēlaties pozīcijas sniedzēju kamēr darbojas fona režīmā</string>
   <string name="background_service_provider">"Pozīcijas sniedzējs"</string>
@@ -705,7 +702,7 @@
   <string name="search_POI_level_btn">Atrast vairāk</string>
   <string name="incremental_search_city">Pieaugoši meklēt pilsētas. Lai atrastu pilsētu ievadiet 3 vai vairāk simbolus.</string>
   <string name="incremental_search_street">"Pieaugoši meklēt ielas. "</string>
-  <string name="incremental_search_building">Pieaugoši meklēt ēkas.</string>
+  <string name="incremental_search_building">Pieaugoši meklēt ēkas</string>
   <string name="choose_available_region">Izvēlieties reģionu no saraksta</string>
   <string name="choose_intersected_street">Izvēlēties ielu krustojumu</string>
   <string name="Closest_Amenities">Tuvākie servisi</string>
@@ -835,7 +832,13 @@
   <string name="route_kr">Turēties pa labi</string>
   <string name="save_route_as_gpx">Saglabāt maršrutu kā GPX failu</string>
   <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"Izmaiņas versijā 0.8.1 :\n\t* Daudz precīzāki maršruti (aprēķins nedaudz ilgāks)\n\t* Gudrāka un ātrāka ceļa pārrēķināšana\n\t* Virziens joslās\n\t* Kartes informācija, fotoradari un ātruma ierobežojumi\n\t* Uzlabota balss vadība lielceļiem\n\t* Parokšanās spraudnis (\'Kur ir noparkots mans auto?)\n\t* Logošanas iespējošana/atspējošana"</string>
+  <string name="tip_recent_changes_0_8_1_t">Izmaiņas versijā 0.8.1 :
+\n\t* Daudz precīzāki maršruti (aprēķins nedaudz ilgāks)
+\n\t* Gudrāka un ātrāka ceļa pārrēķināšana
+\n\t* Virziens joslās\n\t* Kartes informācija, fotoradari un ātruma ierobežojumi
+\n\t* Uzlabota balss vadība lielceļiem
+\n\t* Parokšanās spraudnis (\'Kur ir noparkots mans auto?)
+\n\t* Logošanas iespējošana/atspējošana</string>
   <string name="gpxup_public">Publisks</string>
   <string name="gpxup_identifiable">Identificējami</string>
   <string name="gpxup_trackable">Treisojami</string>
@@ -882,7 +885,9 @@
   <string name="show_cameras">Rādīt radarus</string>
   <string name="show_speed_limits">Rādīt ātruma ierobežojumus</string>
   <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Uzlabota navigācija "</string>
+  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 :
+\n\t* Uzlabota navigācija
+\n\t* Dinamiski kartes instrumenti</string>
   <string name="map_widget_top_text">Ielas nosaukums</string>
   <string name="map_widget_config">Konfigurācija</string>
   <string name="map_widget_map_select">Kartes izvēle</string>
@@ -906,8 +911,8 @@
   <string name="bg_service_screen_lock">Noslēgt/atslēgt ekrānu</string>
   <string name="bg_service_screen_lock_toast">Ekrāns ir noslēgts</string>
   <string name="bg_service_interval">Uzstādīt pamošanās intervālu:</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
+  <string name="screen_is_locked">Lai atslēgtu ekrānu nospiežat atslēgas ikonu</string>
+  <string name="bg_service_screen_unlock">Atslēgt ekrānu</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
 </resources>
