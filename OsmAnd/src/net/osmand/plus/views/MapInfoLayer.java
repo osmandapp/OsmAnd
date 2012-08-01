@@ -71,6 +71,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapInfoControls mapInfoControls;
 	private TopTextView topText;
 
+	private LockInfoControl lockInfoControl;
+
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
@@ -117,6 +119,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 
 		mapInfoControls = new MapInfoControls(map.getMyApplication().getSettings());
+		lockInfoControl = new LockInfoControl();
 	}
 	
 	
@@ -134,6 +137,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	public Paint getPaintSubText() {
 		return paintSubText;
+	}
+	
+	public LockInfoControl getLockInfoControl() {
+		return lockInfoControl;
 	}
 	
 	public MapInfoControls getMapInfoControls() {
@@ -185,15 +192,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
 		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
 				paintSubText, false);
-		mapInfoControls.registerSideWidget(bigInfoControl, 0, R.string.map_widget_next_turn,"next_turn", true, all, none, 5);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, all, none, 5);
 		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(smallInfoControl, 0, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
+		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
 		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(nextNextInfoControl, 0, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
 		MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
-		mapInfoControls.registerSideWidget(miniMap, 0, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
+		mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(dist, R.drawable.info_target, R.string.map_widget_distance, "distance", false, all, none, 5);
@@ -210,7 +217,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
 
-		LockInfoControl lockInfoControl = new LockInfoControl();
 		ImageView bgServiceView = lockInfoControl.createLockScreenWidget(view);
 		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		
@@ -482,28 +488,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	private View createGlobusAndProgress(){
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
-//		FrameLayout fl = new FrameLayout(view.getContext());
-//		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		ImageView globus = new ImageView(view.getContext());
 		globus.setImageDrawable(globusDrawable);
 		globus.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.getMapLayers().selectMapLayer(view);
+				map.getMapLayers().openLayerSelectionDialog(view);
+				//map.getMapLayers().selectMapLayer(view);
 			}
 		});
 		return globus;
-//		fl.addView(globus, fparams);
-//		fparams = new FrameLayout.LayoutParams(globusDrawable.getMinimumWidth(), globusDrawable.getMinimumHeight());
-//		progressBar = new View(view.getContext());
-//		progressBar.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				map.getMapLayers().selectMapLayer(view);
-//			}
-//		});
-//		fl.addView(progressBar, fparams);
-//		return fl;
 	}
 	
 	private ImageView createBackToLocation(final MapActivity map){

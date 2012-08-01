@@ -198,8 +198,8 @@ public class RouteInfoControls {
 //				showMiniMap = true;
 			}
 		});
-		// initial state
-//		nextTurnInfo.setVisibility(View.GONE);
+		// initial state 
+		nextTurnInfo.setVisibility(View.GONE);
 		return nextTurnInfo;
 	}
 	

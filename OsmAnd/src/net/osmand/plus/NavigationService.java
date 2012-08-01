@@ -93,8 +93,17 @@ public class NavigationService extends Service implements LocationListener {
 		handler = new Handler();
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
-		serviceOffProvider = settings.SERVICE_OFF_PROVIDER.get();
-		serviceError = settings.SERVICE_OFF_WAIT_INTERVAL.get();
+		// use only gps provider
+		serviceOffProvider = LocationManager.GPS_PROVIDER;
+		serviceError = serviceOffInterval / 5;
+		// 1. not more than 12 mins
+		serviceError = Math.min(serviceError, 12 * 60 * 1000);
+		// 2. not less than 30 seconds
+		serviceError = Math.max(serviceError, 30 * 1000);
+		// 3. not more than serviceOffInterval
+		serviceError = Math.min(serviceError, serviceOffInterval);
+		
+		
 		savingTrackHelper = ((OsmandApplication) getApplication()).getSavingTrackHelper();
 		liveMonitoringHelper = ((OsmandApplication) getApplication()).getLiveMonitoringHelper();
 		
