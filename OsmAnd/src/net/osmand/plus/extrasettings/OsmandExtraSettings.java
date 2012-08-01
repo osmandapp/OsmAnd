@@ -51,33 +51,31 @@ public class OsmandExtraSettings extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
-		if (registerControls) {
-			registerControls = true;
-			final OsmandMapTileView view = activity.getMapView();
-			final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-			final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
-			final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
-					"transparent", EnumSet.of(ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT));
-			transparent.setStateChangeListener(new Runnable() {
-				@Override
-				public void run() {
-					ApplicationMode am = view.getSettings().getApplicationMode();
-					view.getSettings().TRANSPARENT_MAP_THEME.set(transparent.visible(am));
-					mapInfoLayer.recreateControls();
-				}
-			});
+		registerControls = true;
+		final OsmandMapTileView view = activity.getMapView();
+		final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
+		final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
+		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
+				"transparent", EnumSet.of(ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT));
+		transparent.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				ApplicationMode am = view.getSettings().getApplicationMode();
+				view.getSettings().TRANSPARENT_MAP_THEME.set(transparent.visible(am));
+				mapInfoLayer.recreateControls();
+			}
+		});
 
-			final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_fluorescent,
-					"fluorescent", EnumSet.noneOf(ApplicationMode.class));
-			fluorescent.setStateChangeListener(new Runnable() {
-				@Override
-				public void run() {
-					ApplicationMode am = view.getSettings().getApplicationMode();
-					view.getSettings().FLUORESCENT_OVERLAYS.set(fluorescent.visible(am));
-					view.refreshMap();
-				}
-			});
-		}
+		final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_fluorescent,
+				"fluorescent", EnumSet.noneOf(ApplicationMode.class));
+		fluorescent.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				ApplicationMode am = view.getSettings().getApplicationMode();
+				view.getSettings().FLUORESCENT_OVERLAYS.set(fluorescent.visible(am));
+				view.refreshMap();
+			}
+		});
 	}
 	
 	@Override

@@ -232,7 +232,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	
 	private void registerAppearanceWidgets() {
-		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent, 
+		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_ruler, 
 				"showRuler", EnumSet.allOf(ApplicationMode.class));
 		showRuler.setStateChangeListener(new Runnable() {
 			@Override

@@ -1090,6 +1090,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
 			mapView.setRotate(0);
 		}
+		int resId = R.string.rotate_map_none_opt;
+		if(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS){
+			resId = R.string.rotate_map_compass_opt;
+		} else if(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING){
+			resId = R.string.rotate_map_bearing_opt;
+		}
+		
+		AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
 		mapView.refreshMap();
 	}
 	
