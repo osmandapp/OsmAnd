@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="asap">ASAP</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="asap">ASAP</string>
   <string name="save_route_as_gpx">Route als GPX Datei speichern</string>
   <string name="route_roundabout">Kreisverkehr : Nehmen Sie die %1$d Ausfahrt, dann</string>
   <string name="route_kl">Links halten, dann</string>
@@ -15,7 +14,7 @@
   <string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
   <string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
   <string name="map_online_data">Online-Karten (Kacheln)</string>
-  <string name="map_online_data_descr">Verwende Online-Karten (lade sie herunter und speicher sie temporär auf der SD-Karte)</string>
+  <string name="map_online_data_descr">Verwende Online-Karten (lade sie herunter und speichere sie temporär auf der SD-Karte)</string>
   <string name="online_map_settings">Online-Karten</string>
   <string name="online_map_settings_descr">Konfiguration von online oder gecachten Kachel-Kartenquellen</string>
   <string name="map_settings">- Karten-Einstellungen</string>
@@ -157,7 +156,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Benutzerdefiniert</string>
   <string name="fav_export_confirmation">Eine Datei mit exportierten Favoriten existiert bereits. Überschreiben?</string>
-  <!-- this block re-worked for new menu structure -->
   <string name="profile_settings">Profilspezifische Einstellungen</string>
   <string name="settings_preset">Nutzerprofil</string>
   <string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Verwendungszweck separat gespeichert.</string>
@@ -184,7 +182,6 @@
   <string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. \n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer. \n\tDer Umschaltmechanismus kann unter \'Einstellungen\' -&gt; \'Anzeigenkonfiguration\' -&gt; \'Tag/Nacht Modus\' geändert werden. \n\tZur Auswahl stehen: \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung) \n\t\'Tag\' - permanente Tagesansicht \n\t\'Nacht\' - permanente Nachtansicht \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>
   <string name="tip_osm_improve">OSM Bearbeitung</string>
   <string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden. \n\tDazu müssen Sie zunächst unter \'Einstellungen\' -&gt; \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen. \n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! \n\tGefundene Fehler auf der Karte können direkt gemeldet werden. \n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü. \n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
-  <!-- end of string changes for new menu structure -->
   <string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
   <string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
   <string name="tip_select_destination_point">Ziel wählen</string>
