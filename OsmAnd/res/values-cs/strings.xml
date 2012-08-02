@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <string name="switch_to_raster_map_to_see">" Vektorové mapy toto místo neobsahují. \n\t\n\tMapová data můžete stáhnout v \'Nastavení\' -&gt; \'Offline data\', nebo přepnout na online mapy v \'Nastavení\' -&gt; \'Mapa\'. "</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="switch_to_raster_map_to_see">" Vektorové mapy toto místo neobsahují. \n\t\n\tMapová data můžete stáhnout v \'Nastavení\' -&gt; \'Offline data\', nebo přepnout na online mapy v \'Nastavení\' -&gt; \'Mapa\'. "</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 : \n\t- Native rendering pro všechna zařízení \n\t- Offline editace POI \n\t- Usnadnění \n\t- Oprava mnoha chyb "</string>
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
   <string name="gpx_visibility_txt">Viditelnost</string>
@@ -67,7 +66,6 @@
   <string name="zoom_by_trackball_descr">Měnit zvětšení vodorovnými pohyby trackballu</string>
   <string name="zoom_by_trackball">Ovládat zvětšení pomocí trackballu</string>
   <string name="use_short_object_names_descr">Použít krátká jména objektů</string>
-  <!-- FIXME "in touch exploration mode" -->
   <string name="use_short_object_names">Krátká jména objektů</string>
   <string name="accessibility_preferences_descr">Konfigurace usnadnění pro uživatele s omezením zraku</string>
   <string name="accessibility_preferences">Usnadnění</string>
@@ -117,7 +115,6 @@
   <string name="amenity_type_wikiosm">Wikipedie (offline)</string>
   <string name="amenity_type_user_defined">Uživatelsky definované</string>
   <string name="fav_export_confirmation">Soubor se záložkami již existuje. Chcete ho nahradit?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Nastavení profilu</string>
   <string name="settings_preset">Uživatelský profil</string>
   <string name="settings_preset_descr">Vyberte uživatelský profil. V každém profilu je možno upravit vzhled mapy a způsob navigace.</string>
@@ -143,7 +140,6 @@
   <string name="tip_day_night_mode_t">" \t OsmAnd dokáže ručně nebo automaticky přepínat mezi denním a nočním barevným režimem. \n\t Pokud řídíte v noci, tmavší zobrazovací režim je vhodnější, neboť méně oslňuje. Naopak, světlé zobrazení v denním režimu je za denního světla lépe čitelné. \n\t Zobrazovací režim lze nastavit v \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Mapa\'-&gt;\'Denní/noční režim\'. \n Volby jsou následující: \n\t \'Východ/západ slunce\' - automatický režim, řízený polohou slunce \n\t \'Den\' - stále používat denní režim \n\t \'Noc\' - stále používat noční režim \n\t \'Senzor osvětlení\' - zobrazení mapy se řídí senzorem osvětlení (pouze pokud je dostupný) "</string>
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
   <string name="tip_osm_improve_t">" \t OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'. \n\t Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka ho odeslat. \n\t Pokud v mapě najdete chybu, můžete ji nahlásit a přispět tak k jejímu rychlejšímu opravení. \n\t OSM chybu nahlásíte pomocí volby \'Otevřít chybu OSM\' v kontextovém menu mapy. Tím se otevře dialog, kde můžete zadat detailní popis problému. Chybu odešlete tlačítkem \'Přidat\'. \n\t Pro zmíněné funkce je nutné internetové připojení. "</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
   <string name="download_files_question_space">Stáhnout {0} soubor(y) ({1} MB)? Volné místo: {2} MB.</string>
   <string name="tip_select_destination_point">Výbrat cíl</string>
@@ -908,7 +904,7 @@
   <string name="bg_service_screen_lock_toast">The screen is locked</string>
   <string name="bg_service_interval">Set wake-up interval:</string>
   <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
+  <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
 </resources>
