@@ -1,20 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-  <string name="route_updated_loc_found">Roete sal herbereken word wanneer ligging bepaal is.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
-  <string name="tip_recent_changes_0_8_1_t">"Veranderings in 0.8.1 : \n\t* Meer presiese roetes (effens stadiger) \n\t* Slim en vinnige Roete herberekening \n\t* Aanwysings per lane \n\t* Inligting omtrent spoed beperkings, spoed kameras, en spoed hobbels \n\t* Verbeterde stembegeleiding op snelweë\n\t* Parkering plugin (\'Waar is my motor geparkeer?\') \n\t* Aktiveer/versper rekordskryf widget "</string>
-  <string name="use_compass_navigation_descr">Gebruik kompas wanneer rigting nie opgemerk is nie.</string>
+  <string name="tip_recent_changes_0_8_1_t">"Veranderings in 0.8.1:
+\n\t* Meer presiese roetes (effens stadiger)
+\n\t* Slim en vinnige Roete herberekening
+\n\t* Aanwysings per lane
+\n\t* Inligting omtrent spoed beperkings, spoed kameras, en spoed hobbels
+\n\t* Verbeterde stembegeleiding op snelweë
+\n\t* Parkering plugin (\'Waar is my motor geparkeer?\')
+\n\t* Aktiveer/versper rekordskryf widget
+ "</string>
+  <string name="use_compass_navigation_descr">Gebruik kompas wanneer rigting nie opgemerk is nie</string>
   <string name="use_compass_navigation">Gebruik kompas</string>
   <string name="select_animate_speedup">Kies lewendige roete versnelling</string>
   <string name="global_app_allocated_memory_descr">Toegekende geheue %1$s MB (Android beperking %2$s MB, Dalvik %3$s MB).</string>
@@ -60,7 +58,7 @@
   <string name="rendering_attr_appMode_description">Kaart optimalisering vir onderskeie Gebruikersprofiele</string>
   <string name="rendering_attr_contourLines_description">Kies minimum vergrotingsvlak om in die kaart te vertoon indien beskikbaar. Aparte SRTM-dokument mag dalk benodig word.</string>
   <string name="rendering_attr_contourLines_name">Wys kontoerlyne</string>
-  <string name="rendering_attr_hmRendered_description">Vermeerder die detail wat in die kaart getoon word.</string>
+  <string name="rendering_attr_hmRendered_description">Vermeerder die detail wat in die kaart vertoon word</string>
   <string name="rendering_attr_hmRendered_name">Wys meer kaart detail</string>
   <string name="local_index_routing_data">Roete inligting</string>
   <string name="navigate_point_format">Formaat :</string>
@@ -74,7 +72,7 @@
   <string name="left_side_navigation">Linkerhand bestuur</string>
   <string name="left_side_navigation_descr">Kies vir gebiede met linkerhand verkeer</string>
   <string name="download_link_and_local_description">Druk hier om van-lyn-af inligting af te laai of op datum te bring.\nDruk op enige bestaande item om meer inligting te sien, druk en hou om af te skakel of uit te vee. Huidige inligting op toestel (%1$s beskikbaar):</string>
-  <string name="unknown_from_location">Beginpunt is nog nie bepaal nie.</string>
+  <string name="unknown_from_location">Beginpunt is nog nie bepaal nie</string>
   <string name="unknown_location">Posisie is nog nie bekend nie</string>
   <string name="context_menu_item_directions">Aanwysings hiernatoe</string>
   <string name="modify_transparency">Verander deursigtigheid (0 - Deursigtig, 255 - Solied)</string>
@@ -90,9 +88,9 @@
   <string name="map_online_data">Internet kaarte (teëls)</string>
   <string name="map_online_data_descr">Gebruik internet kaarte (Laai teëls af en berg dit in kasgeheue op die SD kaart)</string>
   <string name="online_map_settings">Internet kaarte</string>
-  <string name="online_map_settings_descr">Stel die bronne op vir internet of kasgeheue-teël kaarte.</string>
+  <string name="online_map_settings_descr">Stel die bronne op vir internet of kasgeheue-teël kaarte</string>
   <string name="map_settings">- kaart stellings</string>
-  <string name="map_settings_descr">Stel op hoe die kaart sal lyk.</string>
+  <string name="map_settings_descr">Stel op hoe die kaart sal vertoon</string>
   <string name="osmand_rastermaps_plugin_description">Stellings om verskeie internet of kasgeheue-teël kaarte as basis kaart of as bolê- / onderlê-kaarte op te stel. Hierdie kaarte kan ook op jou rekenaar voorberei word en na die OsmAnd leêr gestuur word.</string>
   <string name="osmand_background_plugin_description">Wys stellings om spoor-natrek en navigasie aan te skakel in rustoestand (skerm af) deur kort-kort die GPS aan te sit.</string>
   <string name="osmand_accessibility_description">Wys stellings vir spesiale toegankliksheidsfunksies.</string>
@@ -190,8 +188,8 @@
   <string name="offline_edition_descr">Gebruik altyd aflyn redigering</string>
   <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n\ t-aflyn interessante plek redigering\n\ t-Lewendige natrekking opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n\ t-Wys opgeneemde spoor op die kaart\n\ t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n\ t-Nieu-stem aankondiging \"Roete herbereken \'\n\ t-Optiese aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n\ t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n\ t-ander veranderinge"</string>
   <string name="update_poi_does_not_change_indexes">Interessante plek veranderinge binne die toepassing raak nie afgelaaide kaart lêers nie, veranderinge word eerder in `n plaaslike lêer gestoor.</string>
-  <string name="local_openstreetmap_uploading">Uploading…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} interessante plek / Foute is opgelaai.</string>
+  <string name="local_openstreetmap_uploading">Besig om op te laai…</string>
+  <string name="local_openstreetmap_were_uploaded">{0} interessante plek / Foute is opgelaai</string>
   <string name="local_openstreetmap_uploadall">Laai alles op</string>
   <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show">Wys op kaart</string>
@@ -230,7 +228,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (aflyn)</string>
   <string name="amenity_type_user_defined">gebruiker gedefinieerde</string>
   <string name="fav_export_confirmation">Lêer met voorheen uitgevoerde gunstelinge bestaan ​​reeds. Wil jy dit vervang?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Profiel Besondere Stellings</string>
   <string name="settings_preset">Gebruikersprofiel</string>
   <string name="settings_preset_descr">Kies \'n gebruiker profiel met \'n persoonlike kaart en navigasie instellings.</string>
@@ -250,13 +247,17 @@
   <string name="osmand_service">Slaap Gebruikswyse Funksionaliteit</string>
   <string name="osmand_service_descr">Gebruik om OsmAnd aan te hou terwyl skerm af is</string>
   <string name="tip_rotation_switching">Kaart oriëntasie</string>
-  <string name="tip_rotation_switching_t">"\ tJy kan kies of en hoe die kaart vertoon gedraai word in \'Stellings\' -&gt; \'Kaart voorkoms \"-&gt;\" kaart rotasie \".\n\ ddie keuses is:\n\ t\'moet nie draai nie - Kaart sal nie gedraai word nie. Noord sal altyd bo wees\n\ t\'Met rigting van beweging \"- Kaart sal deurlopend in lyn gebring word met jou bewegingsrigting\n\ t\'Met kompas - Kaart sal deurlopend in lyn gebring word met toestel kompas lesing\n\ Twenk: Om vinnig tussen rotasie deur kompas en die een wat jy gekies in instellings te verander, kan jy net tik op die kompas naald in die kaart vertoon.\n"</string>
+  <string name="tip_rotation_switching_t">"\tJy kan kies hoe die kaart vertoon roteer word in \'Stellings\' -&gt; \'Kaart voorkoms \'-&gt;\'Kaart rotasie\'.
+\n\tDie keuses is:
+\n\t\'moet nie roteer nie\' - Kaart sal nie roteer word nie. Noord sal altyd bo wees
+\n\t\'Met rigting van beweging\'- Kaart sal deurlopend gerig word in jou bewegingsrigting
+\n\t\'Met kompas\' - Kaart sal deurlopend gerig word met toestel kompas lesing
+\n\tWenk: Om vinnig tussen rotasie deur kompas en die een wat jy gekies het in instellings te verander, kan jy net tik op die kompas naald in die kaart vertoon."</string>
   <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Stellings\' -&gt; \'uitleg\' -&gt; \'aflyn vektor kaarte.</string>
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
   <string name="tip_day_night_mode_t">"\tdie kaart voorkoms kan vir \'n paar vektor kaarte verander word tussen die dag (helder) en nag (donker).\n\tNag kleure is veiliger vir nag bestuur.\n\tJy kan \'n beleid vir die dag / nag opstel in \'Stellings\' -&gt; \'Kaart voorkoms\'-&gt; \'Dag / nag gebruikswyse\'.\n\tKeuses is:\n\t\'Sonsopkoms / Sonsondergang\' - outomatiese gebruikswyse, beheer deur posisie van die son (verstek)\n\t\'Day\' - gebruik altyd dag gebruikswyse\n\t\'Night\' - gebruik altyd nag gebruikswyse\n\t\'Lig sensor\' - kaart voorkoms word beheer deur lig sensor van jou toestel (slegs indien toegerus)\n"</string>
   <string name="tip_osm_improve">Verbetering van OSM data</string>
   <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) data en-behalwe die kaart vir besigtiging en navigasie-kan ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \"Algemene verstellings\" -&gt; \"OSM Redigeer \' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik opsie \'skep interessante plek\' in die kaart konteks kieslys. Gaan voort om die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in te tik en stuur dit uiteindelik in.\n\tverskrikkinge in kaarte kan onmiddellik aangemeld word via OSM fout, en OSM gemeenskap kan dan vinniger kan hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaartinhoud kieslys kaart. Tik dan die gedetailleerde beskrywing van die probleem en pos dit uiteindelik met die \'Voeg by\" knoppie.\n\tLet daarop dat Internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">Daar is nie genoeg oop spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
   <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer (s) ({1} MB) af ?</string>
   <string name="tip_select_destination_point">Kies bestemming</string>
@@ -265,7 +266,7 @@
   <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
   <string name="native_library_not_supported">Inheemse biblioteek word nie op hierdie toestel ondersteun nie.</string>
-  <string name="init_native_library">Inisialiseer inheemse biblioteek ...</string>
+  <string name="init_native_library">Besig om inheemse biblioteek gereed te maak…</string>
   <string name="choose_auto_follow_route">Outo-senter kaart uitsig</string>
   <string name="choose_auto_follow_route_descr">Tyd tot kaart uitsig ooreenkom met die huidige posisie</string>
   <string name="auto_follow_route_never">Nooit</string>
@@ -300,13 +301,13 @@
   <string name="show_gpx_route">Wys op kaart</string>
   <string name="poi_filter_nominatim">Internet Nominatim</string>
   <string name="search_select_point">Kies</string>
-  <string name="search_position_current_location_search">Soek ligging ...</string>
+  <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>
   <string name="search_position_current_location_found">Ligging (gevind)</string>
   <string name="search_position_address">Adres…</string>
   <string name="search_position_favorites">Gunstelinge...</string>
   <string name="search_position_undefined">ongedefinieerd</string>
   <string name="search_position_fixed">Vasgestel</string>
-  <string name="search_position_current_location">Huidige ligging ...</string>
+  <string name="search_position_current_location">Huidige posisie…</string>
   <string name="search_position_map_view">Laaste kaart uitsig</string>
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
@@ -348,7 +349,7 @@
   <string name="local_index_mi_backup">Deaktiveer</string>
   <string name="local_index_mi_delete">Verwyder</string>
   <string name="local_index_mi_reload">Herlaai van sd kaart</string>
-  <string name="local_index_download">Aflaai ...</string>
+  <string name="local_index_download">Aflaai…</string>
   <string name="local_index_tile_data">Teël data: %1$s\nMinimum vergroting: %2$d\nMaksimum vergroting: %3$d\nNuut: %4$s\nVergrotings afgelaai: %5$s</string>
   <string name="local_index_poi_data">Interessante plek inligting</string>
   <string name="local_index_address_data">Adres data</string>
@@ -358,7 +359,7 @@
   <string name="local_indexes_cat_backup">gedeaktiveer</string>
   <string name="local_indexes_cat_tts">Stem data (TTS)</string>
   <string name="local_indexes_cat_voice">Stem data (opgeneemd)</string>
-  <string name="local_indexes_cat_gpx">GPX data</string>
+  <string name="local_indexes_cat_gpx">GPX inligting</string>
   <string name="local_indexes_cat_poi">Interessante plek inligting</string>
   <string name="ttsvoice">TTS Stem</string>
   <string name="search_offline_clear_search">Nuwe soektog</string>
@@ -370,7 +371,7 @@
   <string name="tip_recent_changes_0_6_6_t">"Onlangse wysigings 0.6.6:\n\t- teks-na-spraak enjin vir stem navigasie\n\t- Laat kaart vertoner meer volledig lewer\n\t- Basiskaart vir hele wêreld verpak met app\n\t- Fynverstel aflyn navigasie (nog steeds eksperimenteel)\n\t- GPX navigasie keuses\n\t- Opgradeer die gebruikerskoppelvlak en werk aan groot foute"</string>
   <string name="voice_not_use">Moet nie gebruik nie</string>
   <string name="voice_not_specified">Geen</string>
-  <string name="installing_new_resources">Pak nuwe inligting uit ...</string>
+  <string name="installing_new_resources">Besig om nuwe inligting uit te pak…</string>
   <string name="internet_connection_required_for_online_route">\'n Aanlyn navigasie diens is gekies, maar geen internetverbinding is beskikbaar nie.</string>
   <string name="tts_language_not_supported_title">Taal word nie ondersteun nie</string>
   <string name="tts_language_not_supported">Die gekose taal word nie ondersteun deur die geïnstalleerde Android TTS (teks-tot-spraak) enjin nie. Wil jy in die mark soek vir \'n ander TTS-enjin? Andersins sal die beskikbare TTS taal gebruik word.</string>
@@ -393,14 +394,14 @@
   <string name="layer_underlay">Onderliggende kaart…</string>
   <string name="map_underlay">Onderliggende kaart</string>
   <string name="map_underlay_descr">Kies onderliggende kaart</string>
-  <string name="layer_overlay">Oorleg kaart ...</string>
+  <string name="layer_overlay">Oorliggende kaart…</string>
   <string name="default_none">Geen</string>
   <string name="map_overlay">Oorleg kaart</string>
   <string name="map_overlay_descr">Kies oorleg kaart</string>
   <string name="tile_source_already_installed">Kaart is reeds geïnstalleer, instellings sal opdateer word</string>
   <string name="select_tile_source_to_install">Kies (teël) kaarte om te installeer of opgradeer</string>
   <string name="internet_not_available">Internet verbinding benodig vir bewerking is nie beskikbaar nie</string>
-  <string name="install_more">Installeer meer ...</string>
+  <string name="install_more">Installeer meer…</string>
   <string name="tip_update_index">Opgradeer aflyn inligting</string>
   <string name="tip_update_index_t">\tBesit van die jongste kaart inligting is noodsaaklik. OsmAnd bied `n aflaaibestuurder wat kan kyk virr beskikbare aflyn inligting opgraderings.\n\tOm te kyk vir opgraderings gaan na \'Stellings\' -&gt; \'Aflyn inligting\' -&gt; \'Laai aflyn data af\'. Na streek lys van die internet verkry is, kan jy keuse \'Kieslys\' -&gt; \'Filter afgelaai\' kies om te beperk tot inligting reeds op jou selfoon.\n\tDie beskikbaarheid van bywerkings word uitgebeeld deur die volgende kleure:\n\t\'Groen \'- dui datalêers identies op apparaat en internet\n\t\'Blou - dui beskikbare bywerkings op internet</string>
   <string name="level_to_switch_vector_raster_descr">Minimum vergroting vlak om vektor kaarte te gebruik</string>
@@ -438,7 +439,7 @@
   <string name="yard">Jrt</string>
   <string name="foot">vt</string>
   <string name="mile_per_hour">mph</string>
-  <string name="mile">mi</string>
+  <string name="mile">myl</string>
   <string name="send_location_way_choose_title">Deel ligging met gebruik van</string>
   <string name="send_location_sms_pattern">Ligging: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Om die ligging te sien volg die webskakel %1$s of Android opsetskakel %2$s</string>
@@ -468,9 +469,9 @@
   <string name="amenity_type_sustenance">lewensmiddele</string>
   <string name="amenity_type_tourism">Toerisme</string>
   <string name="amenity_type_transportation">Vervoer</string>
-  <string name="indexing_address">Skep adres indeks ...</string>
-  <string name="indexing_map">Skep kaartindeks...</string>
-  <string name="indexing_poi">Skep interessante plek indeks ...</string>
+  <string name="indexing_address">Besig om `n adres indeks te skep…</string>
+  <string name="indexing_map">Besig om `n kaartindeks te skep…</string>
+  <string name="indexing_poi">Besig om `n interessante plek indeks te skep…</string>
   <string name="indexing_transport">Skep vervoer indeks …</string>
   <string name="input_output_error">I/O fout het voorgekom</string>
   <string name="km">km</string>
@@ -484,7 +485,7 @@
   <string name="poi_filter_for_tourists">Vir toeriste</string>
   <string name="poi_filter_fuel">Brandstof</string>
   <string name="poi_filter_namefinder">Aanlyn Naamvinder</string>
-  <string name="reading_cached_tiles">Lees kas teëls ...</string>
+  <string name="reading_cached_tiles">Lees kas teëls…</string>
   <string name="version_index_is_big_for_memory">Die indeks \"{0}\" pas nie in die geheue nie</string>
   <string name="version_index_is_not_supported">Die weergawe van indeks \"{0}\'\' word nie ondersteun nie</string>
   <string name="use_osmand_routing_service">OsmAnd navigasie &gt;20km</string>
@@ -495,7 +496,7 @@
   <string name="application_dir_change_warning">Verandering van die bergingsadres sal nie die data beweeg of verwyder nie. Dit moet afsonderlik en buite OsmAnd gedoen word. Nogtans voortgaan?</string>
   <string name="osmand_net_previously_installed">\'n Vorige OsmAnd weergawe is geïnstalleer. Alle aflyn inligting sal ondersteun word deur die nuwe toepassing. Maar Gunsteling punte moet uitgevoer word van die ou toepassing en later ingevoer word deur die nuwe een.</string>
   <string name="build_installed">\'Build\' {0} suksesvol geïnstalleer ({1}).</string>
-  <string name="downloading_build">aflaai van \'build\' ...</string>
+  <string name="downloading_build">Besig om weergawe af te laai…</string>
   <string name="install_selected_build">Wil jy OsmAnd - {0} van {1} {2} MB installeer ?</string>
   <string name="loading_builds_failed">die verkryging van die lys van OsmAnd \'builds\' het misluk</string>
   <string name="loading_builds">Laai OsmAnd \'builds\'…</string>
@@ -517,7 +518,7 @@
   <string name="select_all">Kies alles</string>
   <string name="reload">Verfris</string>
   <string name="fast_route_mode">Vinnigste roete</string>
-  <string name="fast_route_mode_descr">"Skaklel aan om vinnigste roete te bereken of skakel af vir kortste roete"</string>
+  <string name="fast_route_mode_descr">"Skakel aan om vinnigste roete te bereken of skakel af vir kortste roete"</string>
   <string name="tiles_to_download_estimated_size">Teen vergroting {0} laai {1} teëls af ({2} MB)</string>
   <string name="context_menu_item_download_map">laai kaart af</string>
   <string name="select_max_zoom_preload_area">Kies maksimum vergroting om vooraf te laai</string>
@@ -581,7 +582,7 @@
   <string name="layer_osm_bugs">OSM foute</string>
   <string name="layer_transport">Vervoer stilhouplekke</string>
   <string name="layer_poi">Interessante plek…</string>
-  <string name="layer_map">Kaartbron...</string>
+  <string name="layer_map">Kaartbron…</string>
   <string name="menu_layers">Definieer uitsig</string>
   <string name="context_menu_item_search_poi">Soek interessante plek</string>
   <string name="context_menu_item_show_route">Wys roete van hier af</string>
@@ -610,14 +611,14 @@
   <string name="menu_mute_on">Klank is af</string>
   <string name="voice_provider_descr">Kies stem begeleiding vir navigasie</string>
   <string name="voice_provider">Stem begeleiding</string>
-  <string name="voice_data_initializing">Inisialiseer stem inligting ...</string>
+  <string name="voice_data_initializing">Besig om stem inligting gereed te maak…</string>
   <string name="voice_data_not_supported">Die weergawe van stem inligting word nie ondersteun nie</string>
   <string name="voice_data_corrupted">Gespesifiseerde stem is beskadig</string>
   <string name="voice_data_unavailable">gekose stem is nie beskikbaar nie</string>
   <string name="stop_routing">Staak navigasie</string>
   <string name="sd_unmounted">SD kaart is nie toeganklik nie.\nJy sal nie in staat wees om kaarte te sien of dinge te vind nie.</string>
-  <string name="sd_mounted_ro">SD kaart is slegs-lees.\nJy kan net die vooraf geïnstalleerde kaart sien en kan nie van die internet aflaai nie</string>
-  <string name="unzipping_file">Haal  lêer uit argief ...</string>
+  <string name="sd_mounted_ro">SD kaart is slegs-lees.\nJy kan net die vooraf geïnstalleerde kaart sien en kan nie van die internet aflaai nie.</string>
+  <string name="unzipping_file">Haal lêer uit argief…</string>
   <string name="route_tr">Draai regs en ry</string>
   <string name="route_tshr">Draai skerp regs en ry</string>
   <string name="route_tslr">Draai effens regs en ry</string>
@@ -628,10 +629,10 @@
   <string name="route_head">Mik</string>
   <string name="first_time_continue">Later</string>
   <string name="first_time_download">laai gebiede af</string>
-  <string name="search_poi_location">Soek vir die sein ...</string>
+  <string name="search_poi_location">Besig om `n sein te soek…</string>
   <string name="search_near_map">Soek naby die laaste kaart ligging</string>
   <string name="search_nearby">Soek naby</string>
-  <string name="map_orientation_default">Dieselfde as toestel.</string>
+  <string name="map_orientation_default">Dieselfde as toestel</string>
   <string name="map_orientation_portrait">Portret</string>
   <string name="map_orientation_landscape">Landskap</string>
   <string name="map_screen_orientation">skerm oriëntasie</string>
@@ -672,7 +673,7 @@
   <string name="uploading">Besig met oplaai…</string>
   <string name="search_nothing_found">Niks gevind nie</string>
   <string name="searching">Besig om te soek…</string>
-  <string name="searching_address">Besig om die adres te soek...</string>
+  <string name="searching_address">Besig om die adres te soek…</string>
   <string name="search_osm_nominatim">Soek adres met OSM Nominatim</string>
   <string name="hint_search_online">Huis nommer, straat, stad</string>
   <string name="search_offline_address">Aflyn</string>
@@ -682,7 +683,7 @@
   <string name="route_general_information">Totale afstand %1$s, reistyd %2$d h %3$d m.</string>
   <string name="router_service_descr">Kies \'n aanlyn of aflyn navigasie diens</string>
   <string name="router_service">Navigasie diens</string>
-  <string name="sd_dir_not_accessible">Berg adres op SD kaart is nie toeganklik nie.</string>
+  <string name="sd_dir_not_accessible">Berg adres op SD kaart is nie toeganklik nie</string>
   <string name="download_question">Laai {0} - {1} af?</string>
   <string name="download_question_exist">Aflyn inligting vir {0} bestaan alreeds ({1}). Wiljy dit opgradeer ({2}) ?</string>
   <string name="address">Adres</string>
@@ -698,23 +699,23 @@
   <string name="update_existing">Vervang</string>
   <string name="only_show">Wys slegs</string>
   <string name="follow">Volg</string>
-  <string name="recalculate_route_to_your_location">Kies vervoerwyse (opsioneel)</string>
+  <string name="recalculate_route_to_your_location">Kies vervoerwyse (opsioneel):</string>
   <string name="mark_final_location_first">Kies asseblief eers die bestemming</string>
   <string name="get_directions">Aanwysings</string>
   <string name="show_gps_status">Wys GPS status</string>
   <string name="opening_hours">Openingsure</string>
   <string name="opening_changeset">Besig om wysiging-stel te open…</string>
-  <string name="closing_changeset">Besig om wysiging-stel te sluit...</string>
-  <string name="commiting_node">Committing node…</string>
+  <string name="closing_changeset">Besig om wysiging-stel te sluit…</string>
+  <string name="commiting_node">Besig om node by te voeg…</string>
   <string name="loading_poi_obj">Besig om POI te laai…</string>
   <string name="auth_failed">Magtiging het misluk</string>
   <string name="failed_op">misluk</string>
   <string name="converting_names">omskakeling van inheemse/Engelse name…</string>
   <string name="loading_streets_buildings">Besig om strate/geboue te laai…</string>
-  <string name="loading_postcodes">Besig om poskodes te laai...</string>
-  <string name="loading_streets">Besig om strate te laai...</string>
-  <string name="loading_cities">Besig om stede te laai...</string>
-  <string name="loading">Besig om te laai...</string>
+  <string name="loading_postcodes">Besig om poskodes te laai…</string>
+  <string name="loading_streets">Besig om strate te laai…</string>
+  <string name="loading_cities">Besig om stede te laai…</string>
+  <string name="loading">Besig om te laai…</string>
   <string name="poi">POI (interessante punt)</string>
   <string name="error_occurred_saving_gpx">Fout tydes GPX berging</string>
   <string name="error_calculating_route">Fout tydens roeteberekening</string>
@@ -727,7 +728,7 @@
   <string name="close">Sluit</string>
   <string name="loading_data">Besig om inligting te laai…</string>
   <string name="reading_indexes">Besig om plaaslike inligting te lees…</string>
-  <string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
+  <string name="previous_run_crashed">Die vorige gebruik van OsmAnd het gefaal. Die Log lêer is by {0}. Raporteer asseblief die probleem en heg die log lêer daarby aan.</string>
   <string name="saving_gpx_tracks">Saving GPX tracks to SD…</string>
   <string name="finished_task">Klaar</string>
   <string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
@@ -772,7 +773,7 @@
   <string name="map_specify_point">Stel as bestemming</string>
   <string name="show_view_angle_descr">Display viewing direction on the map</string>
   <string name="show_view_angle">Wys uitsig rigting</string>
-  <string name="stop_navigation">Maak bestemming skoon</string>
+  <string name="stop_navigation">Maak bestemming skoon.</string>
   <string name="navigate_to_point">Stel as bestemming</string>
   <string name="map_view_3d_descr">Skakel 3D kaart aan</string>
   <string name="map_view_3d">"Kaart 3D "</string>
@@ -891,5 +892,8 @@
   <string name="show_cameras">Wys spoedkameras</string>
   <string name="show_speed_limits">Wys spoedbeperkings</string>
   <string name="avoid_toll_roads">Vermy tolpaaie</string>
-  <string name="tip_recent_changes_0_8_2_t">"Veranderinge in 0.8.2:\n\t* Verbeterde Roeteberekening"</string>
+  <string name="tip_recent_changes_0_8_2_t">"Veranderinge in 0.8.2:
+ \n\t* Verbeterde Roeteberekening
+ \n\t* Dinamiese kaart wiggies
+ "</string>
 <string name="screen_is_locked">To unlock screen press lock icon</string><string name="map_widget_top_text">Street name</string><string name="map_widget_config">Configuration</string><string name="map_widget_map_select">Map selection</string><string name="map_widget_back_to_loc">Where am I</string><string name="map_widget_lock_screen">Lock screen</string><string name="map_widget_compass">Compass</string><string name="map_widget_top_stack">Status bar</string><string name="map_widget_reset">Reset to default</string><string name="map_widget_right_stack">Right side</string><string name="map_widget_left_stack">Left side</string><string name="map_widget_parking">Parking</string><string name="map_widget_monitoring">Monitoring</string><string name="map_widget_speed">Speed</string><string name="map_widget_distance">Target</string><string name="map_widget_altitude">Altitude</string><string name="map_widget_time">Time to go</string><string name="map_widget_next_turn">Next turn</string><string name="map_widget_next_turn_small">Next turn (small)</string><string name="map_widget_next_next_turn">Second next turn</string><string name="map_widget_mini_route">Mini route map</string><string name="bg_service_screen_lock">Lock/unlock screen</string><string name="bg_service_screen_unlock">Unlock screen</string><string name="bg_service_sleep_mode_off">Disable Sleep mode</string><string name="bg_service_sleep_mode_on">Enable Sleep mode</string><string name="bg_service_screen_lock_toast">The screen is locked</string><string name="bg_service_interval">Set wake-up interval:</string></resources>
