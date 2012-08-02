@@ -594,8 +594,8 @@
   <string name="map_specify_point">Fijar como destino</string>
   <string name="show_view_angle_descr">Mostrar la dirección de la vista en el mapa</string>
   <string name="show_view_angle">Mostrar dirección de vista</string>
-  <string name="stop_navigation">Borrar destino</string>
-  <string name="navigate_to_point">Fijar destino</string>
+  <string name="stop_navigation">Borrar dest.</string>
+  <string name="navigate_to_point">Fijar dest.</string>
   <string name="map_view_3d_descr">Habilitar visión 3D del mapa</string>
   <string name="map_view_3d">Visión 3D del mapa</string>
   <string name="show_poi_over_map_description">Mostrar PDI sobre el mapa (usar el último filtro seleccionado)</string>
@@ -832,7 +832,15 @@
   <string name="route_kr">Manténgase a la derecha y continúe</string>
   <string name="save_route_as_gpx">Guardar ruta como fichero GPX</string>
   <string name="asap">En cuanto puedas</string>
-  <string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 :\n\t* Rutas más precisas (algo más lento)\n\t* Recálculo inteligente y rápido de la ruta\n\t* Direcciones por carriles\n\t* Información sobre radares, limites de velocidad y resaltos\n\t* Mejoras en la guía por voz en autopistas\n\t* Plugin de parking (¿Dónde está aparcado mi coche?)\n\t* Activar/Desactivar mecanismo de monitorización"</string>
+  <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
+\n\t* Rutas más precisas (algo más lento)
+\n\t* Recálculo inteligente y rápido de la ruta
+\n\t* Direcciones por carriles
+\n\t* Información sobre radares, limites de velocidad y resaltos
+\n\t* Mejoras en la guía por voz en autopistas
+\n\t* Plugin de parking (¿Dónde está aparcado mi coche?)
+\n\t* Activar/Desactivar mecanismo de monitorización
+    </string>
   <string name="gpxup_public">Público</string>
   <string name="gpxup_identifiable">Identificable</string>
   <string name="gpxup_trackable">Trazable</string>
@@ -879,7 +887,10 @@
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_speed_limits">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
-  <string name="tip_recent_changes_0_8_2_t">"Cambios en 0.8.2 :\n\t* Mejoras en Ruteado"</string>
+  <string name="tip_recent_changes_0_8_2_t">Cambios en 0.8.2 :
+\n\t* Mejoras en Ruteado
+\n\t* Widgets de mapa dinamicos
+    </string>
   <string name="map_widget_top_text">Nombre de calle</string>
   <string name="map_widget_config">Configuración</string>
   <string name="map_widget_map_select">Selección de mapa</string>
