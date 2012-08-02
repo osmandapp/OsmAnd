@@ -22,7 +22,7 @@ public class MapInfoControls {
 	public static final int RIGHT_CONTROL = 1;
 	public static final int MAIN_CONTROL = 0;
 	
-	private Set<MapInfoControlRegInfo> appearanceWidgets = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
+	private Set<MapInfoControlRegInfo> appearanceWidgets = new LinkedHashSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> left = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> right = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
 	private Set<MapInfoControlRegInfo> top = new TreeSet<MapInfoControls.MapInfoControlRegInfo>(new Comparator<MapInfoControlRegInfo>() {
