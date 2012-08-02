@@ -1,15 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-  <string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
   <string name="left_side_navigation">Trafikoa ezkerraldetik</string>
   <string name="left_side_navigation_descr">Trafikoa ezkerraldetik duten herrialdeentzako hautatu</string>
   <string name="download_link_and_local_description">Klikatu hemen offlineko datuak deskargatzeko edo eguneratzeko.\nKlikatu edozein elementu xehetasunak ikusteko, klikatu eta mantendu desaktibatzeko edo ezabatzeko. Oraingo datuak (%1$s libre):</string>
@@ -169,7 +159,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">User defined</string>
   <string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Profile Specific Settings</string>
   <string name="settings_preset">User Profile</string>
   <string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
@@ -195,7 +184,6 @@
   <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
   <string name="tip_osm_improve">Improving OSM Data</string>
   <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
   <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Select Destination</string>
@@ -768,11 +756,11 @@
   <string name="context_menu_item_update_map">Update map</string>
   <string name="context_menu_item_open_bug">Open OSM bug</string>
   <string name="context_menu_item_create_poi">Create POI</string>
-  <string name="default_buttons_yes">Yes</string>
+  <string name="default_buttons_yes">Bai</string>
   <string name="default_buttons_cancel">Cancel</string>
   <string name="default_buttons_apply">Apply</string>
   <string name="default_buttons_add">Add</string>
-  <string name="default_buttons_no">No</string>
+  <string name="default_buttons_no">Ez</string>
   <string name="add_favorite_dialog_top_text">Enter favorite name</string>
   <string name="add_favorite_dialog_default_favourite_name">Favorite</string>
   <string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
