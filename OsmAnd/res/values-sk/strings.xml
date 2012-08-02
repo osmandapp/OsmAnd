@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
+<resources><string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
   <string name="int_continuosly">Priebežne</string>
   <string name="monitoring_mode_off">GPX zázn.</string>
   <string name="monitoring_mode_on">GPX vyp</string>
