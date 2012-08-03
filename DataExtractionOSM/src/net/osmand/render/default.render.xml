@@ -926,6 +926,7 @@
 			<filter minzoom="15" color="#ccfff1" tag="leisure" value="playground"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="garden"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="common"/>
+			<filter minzoom="15" color="#cfeca8" tag="amenity" value="place_of_worship"/>
 
 			<groupFilter nightMode="true" color="#004333"/>
 		</group>
