@@ -760,9 +760,9 @@
   <string name="accessibility_extensions">Extensiones de accesibilidad</string>
   <string name="accessibility_mode">Modo accesibilidad</string>
   <string name="accessibility_mode_descr">Activar las características de accesibilidad</string>
-  <string name="accessibility_on">Sí</string>
-  <string name="accessibility_off">No</string>
-  <string name="accessibility_default">Usar valores de configuración globales del sistema</string>
+  <string name="accessibility_on">On</string>
+  <string name="accessibility_off">Off</string>
+  <string name="accessibility_default">Usar configuración global del sistema</string>
   <string name="backToMenu">Volver al Menú</string>
   <string name="zoomOut">Alejar</string>
   <string name="zoomIn">Acercar</string>
@@ -888,8 +888,8 @@
   <string name="show_speed_limits">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
   <string name="tip_recent_changes_0_8_2_t">Cambios en 0.8.2 :
-\n\t* Mejoras en Ruteado
-\n\t* Widgets de mapa dinamicos
+\n\t* Mejoras en Ruteo
+\n\t* Widgets de mapas dinámicos
     </string>
   <string name="map_widget_top_text">Nombre de calle</string>
   <string name="map_widget_config">Configuración</string>
