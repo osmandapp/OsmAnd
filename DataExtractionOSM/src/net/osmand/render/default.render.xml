@@ -1180,10 +1180,10 @@
 				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
 					<filter additional="tracktype=grade1" pathEffect=""/>
-					<filter additional="tracktype=grade2" pathEffect="10_3" />
+					<filter additional="tracktype=grade2" pathEffect="10_3"/>
 					<filter additional="tracktype=grade3" pathEffect="5_2"/>
 					<filter additional="tracktype=grade4" pathEffect="5_3_2_3"/>
-					<filter additional="tracktype=grade5" pathEffect="3_3" />
+					<filter additional="tracktype=grade5" pathEffect="3_3"/>
 				</groupFilter>
 			</filter>
 
@@ -1203,7 +1203,15 @@
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
 				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
 				<filter minzoom="14" strokeWidth="1" />
-				<groupFilter nightMode="true" color="#787878"/> 
+				<groupFilter>
+					<filter additional="sac_scale=hiking" color="#fa5073" pathEffect=""/>
+					<filter additional="sac_scale=mountain_hiking" color="#fa5073" pathEffect="10_3"/>
+					<filter additional="sac_scale=demanding_mountain_hiking" color="#fa5073" pathEffect="5_2"/>
+					<filter additional="sac_scale=alpine_hiking" color="#fa5073" pathEffect="5_3_2_3"/>
+					<filter additional="sac_scale=demanding_alpine_hiking" color="#fa5073" pathEffect="3_3"/>
+					<filter additional="sac_scale=difficult_alpine_hiking" color="#fa5073" pathEffect="2_3"/>
+					<filter nightMode="true" color="#787878"/> 
+				</groupFilter>
 			</filter>
 
 			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="2_2" >
