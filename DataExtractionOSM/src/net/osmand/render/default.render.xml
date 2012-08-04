@@ -926,7 +926,6 @@
 			<filter minzoom="15" color="#ccfff1" tag="leisure" value="playground"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="garden"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="common"/>
-			<filter minzoom="15" color="#cfeca8" tag="amenity" value="place_of_worship"/>
 
 			<groupFilter nightMode="true" color="#004333"/>
 		</group>
@@ -956,6 +955,7 @@
 				<filter minzoom="15" color="#cfeca8" color_2="#ff0000" strokeWidth_2="1" tag="landuse" value="retail"/>
 			<!-- Tourism -->
 			<filter minzoom="13" color="#f2caea" tag="tourism" value="attraction"/>
+			<filter minzoom="15" color="#f2caea" tag="amenity" value="place_of_worship"/>
 			<filter minzoom="12" maxzoom="15" color="#f2caea" color_2="#734a08" strokeWidth_2="1" pathEffect_2="9_3" tag="tourism" value="theme_park"/>
 				<filter minzoom="16" color="#f2caea" color_2="#734a08" strokeWidth_2="2" pathEffect_2="9_3" tag="tourism" value="theme_park"/>
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="camp_site"/>
