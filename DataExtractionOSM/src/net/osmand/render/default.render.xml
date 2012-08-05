@@ -95,7 +95,7 @@
 		
 		<group>
 			<filter tag="railway" value="platform"/>
-			<filter tag="railway" value="station" />
+			<filter tag="railway" value="station"/>
 			<filter tag="public_transport" value="station"/>
 			<filter tag="public_transport" value="platform"/>
 			<groupFilter>
@@ -145,7 +145,7 @@
 				<filter tag="highway" value="unclassified" order="52"/>
 				<filter layer="1" tag="highway" value="residential" order="66" area="false"/>
 				<filter tag="highway" value="residential" order="51" area="false"/> 
-				 <filter layer="1" tag="highway" value="service" order="66" />
+				 <filter layer="1" tag="highway" value="service" order="66"/>
 				<filter tag="highway" value="service" order="51"/>
 				 <filter layer="1" tag="highway" value="living_street" order="66"/>
 				<filter tag="highway" value="living_street" order="50"/>
@@ -1049,17 +1049,17 @@
 
 		<group>
 				<filter hmRendered="true" tag="highway" value="motorway" color="#809bff"/>
-			<filter tag="highway" value="motorway" color="#a58dff" />
+			<filter tag="highway" value="motorway" color="#a58dff"/>
 				<filter hmRendered="true" tag="highway" value="motorway_link" color="#809bff"/>
-			<filter tag="highway" value="motorway_link" color="#a58dff" />
-				<filter hmRendered="true" tag="highway" value="trunk" color="#df1346" />
-			<filter tag="highway" value="trunk" color="#ffaf80" />
-				<filter hmRendered="true" tag="highway" value="trunk_link" color="#df1346" />
-			<filter tag="highway" value="trunk_link" color="#ffaf80" />
-			<filter tag="highway" value="primary" color="#eb989a" />
-			<filter tag="highway" value="primary_link" color="#eb989a" />
-			<filter tag="highway" value="secondary" color="#fdd6a4" />
-			<filter tag="highway" value="secondary_link" color="#fdd6a4" />
+			<filter tag="highway" value="motorway_link" color="#a58dff"/>
+				<filter hmRendered="true" tag="highway" value="trunk" color="#df1346"/>
+			<filter tag="highway" value="trunk" color="#ffaf80"/>
+				<filter hmRendered="true" tag="highway" value="trunk_link" color="#df1346"/>
+			<filter tag="highway" value="trunk_link" color="#ffaf80"/>
+			<filter tag="highway" value="primary" color="#eb989a"/>
+			<filter tag="highway" value="primary_link" color="#eb989a"/>
+			<filter tag="highway" value="secondary" color="#fdd6a4"/>
+			<filter tag="highway" value="secondary_link" color="#fdd6a4"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter>
 					<filter minzoom="14" maxzoom="14" strokeWidth="10"/>
@@ -1071,11 +1071,11 @@
 				<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				<!-- Bridges -->
 				<groupFilter layer="1" color_0="#000000" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
-					<filter minzoom="14" maxzoom="14" strokeWidth_0="12" />
-					<filter minzoom="15" maxzoom="15" strokeWidth_0="14" />
-					<filter minzoom="16" maxzoom="16" strokeWidth_0="17" />
-					<filter minzoom="17" maxzoom="17" strokeWidth_0="21" />
-					<filter minzoom="18" strokeWidth_0="26" />
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="12"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="14"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="17"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth_0="21"/>
+					<filter minzoom="18" strokeWidth_0="26"/>
 					<groupFilter nightMode="true" color_0="#ffffff"/>
 				</groupFilter>
 			</groupFilter>
@@ -1090,29 +1090,29 @@
 				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
 				<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
 				
-				<filter color_0="#000000" >
+				<filter color_0="#000000">
 					<filter minzoom="14" maxzoom="14" strokeWidth="6"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="8"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="10"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
 					<filter minzoom="18" strokeWidth="18"/>
 					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
-					<groupFilter nightMode="true" color_0="#ffffff" />
+					<groupFilter nightMode="true" color_0="#ffffff"/>
 					<!-- Bridges --> 
 					<groupFilter layer="1" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
-						<filter minzoom="14" maxzoom="14" strokeWidth_0="8" />
-						<filter minzoom="15" maxzoom="15" strokeWidth_0="10" />
-						<filter minzoom="16" maxzoom="16" strokeWidth_0="12" />
-						<filter minzoom="17" maxzoom="17" strokeWidth_0="15" />
-						<filter minzoom="18" strokeWidth_0="20" />
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="8"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="10"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="12"/>
+						<filter minzoom="17" maxzoom="17" strokeWidth_0="15"/>
+						<filter minzoom="18" strokeWidth_0="20"/>
 			 		</groupFilter>
 				</filter>
 			</groupFilter>
 		</group>
 
 		<group>
-			<filter tag="highway" value="road" />
-			<filter tag="highway" value="unclassified" />
+			<filter tag="highway" value="road"/>
+			<filter tag="highway" value="unclassified"/>
 			<filter tag="highway" value="residential"/>
 			<groupFilter color="#ffffff" color_0="#000000" shadowRadius="1" cap="ROUND">
 				<filter>
@@ -1126,7 +1126,7 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="13"/>
 					<filter minzoom="18" strokeWidth="18"/>
 				</filter>
-				<groupFilter nightMode="true" color="#9F9F9F" color_0="#ffffff" />
+				<groupFilter nightMode="true" color="#9F9F9F" color_0="#ffffff"/>
 				<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				<!-- Bridges --> 
 				<groupFilter layer="1" minzoom="14" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
@@ -1158,11 +1158,11 @@
 				<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				<!-- Bridges --> 
 				<groupFilter layer="1" color_0="#000000" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
-					<filter hmRendered="true" minzoom="14" maxzoom="14" strokeWidth_0="5" />
-					<filter minzoom="15" maxzoom="15" strokeWidth_0="6" />
-					<filter minzoom="16" maxzoom="16" strokeWidth_0="7" />
+					<filter hmRendered="true" minzoom="14" maxzoom="14" strokeWidth_0="5"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="6"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="7"/>
 					<filter minzoom="17" maxzoom="17" strokeWidth_0="10"/>
-					<filter minzoom="18" strokeWidth_0="13" />
+					<filter minzoom="18" strokeWidth_0="13"/>
 					<groupFilter nightMode="true" color_0="#ffffff"/>
 			 	</groupFilter>
 				<groupFilter minzoom="15" additional="access=no" color_3="#F7D4D4" strokeWidth_3="3" pathEffect_3="10_3"/> 
@@ -1170,16 +1170,16 @@
 			</groupFilter>
 		</group>
 
-		<!-- next segment: Highways without grade distinction (cycleway, bridleway, black path): pathEffect 4_2. Base setting for highways with possible grade distinction but none specified (track, byway, red footway): 5_5 -->
+		<!-- Next segment: Highways without grade distinction (cycleway, bridleway, black path): pathEffect 4_2. Base setting for highways with possible grade distinction but none specified (track, byway, red footway): 5_5 -->
 		<group>
 			<filter tag="highway" value="track" color="#996600" pathEffect="5_5">
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" />
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" />
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
-					<!-- path coverage for grades: 100%, 77%, 71%, 54%, 50%(short dash). None specified: 50%(long dash) -->
+					<!-- Path coverage for grades: 100%, 77%, 71%, 54%, 50%(short dash). None specified: 50%(long dash) -->
 					<filter additional="tracktype=grade1" pathEffect=""/>
 					<filter additional="tracktype=grade2" pathEffect="10_3"/>
 					<filter additional="tracktype=grade3" pathEffect="5_2"/>
@@ -1198,15 +1198,15 @@
 				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="path" color="#000000" pathEffect="4_2" >
+			<filter tag="highway" value="path" color="#000000" pathEffect="4_2">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="14" strokeWidth="1" />
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
-					<!-- path coverage for sac_scale in analogyx with 'track-grade': 100%, 77%, 71%, 54%, 50%(short dash), 40%. None specified: 50%(long dash) -->
-					<!-- also switch color to 'pedestrian-red' to better indicate these special ratings in line with many alpine maps -->
+					<!-- Path coverage for sac_scale in analogy with 'track-grade': 100%, 77%, 71%, 54%, 50%(short dash), 40%. None specified: 50%(long dash) -->
+					<!-- Also: switch color to 'pedestrian-red' to better indicate these special ratings in line with many alpine maps -->
 					<filter additional="sac_scale=hiking" color="#fa5073" pathEffect=""/>
 					<filter additional="sac_scale=mountain_hiking" color="#fa5073" pathEffect="10_3"/>
 					<filter additional="sac_scale=demanding_mountain_hiking" color="#fa5073" pathEffect="5_2"/>
@@ -1217,7 +1217,7 @@
 				</groupFilter>
 			</filter>
 
-			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="4_2" >
+			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="4_2">
 				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
@@ -1233,11 +1233,11 @@
 				<filter minzoom="16" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="steps" color="#fa5073" pathEffect="1_2" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="4" pathEffect="2_2" />
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="4" pathEffect="2_2" />
-				<filter hmRendered="true" minzoom="14" strokeWidth="4" />
-				<filter minzoom="16" strokeWidth="4" />
+			<filter tag="highway" value="steps" color="#fa5073" pathEffect="1_2">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="4" pathEffect="2_2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="4" pathEffect="2_2"/>
+				<filter hmRendered="true" minzoom="14" strokeWidth="4"/>
+				<filter minzoom="16" strokeWidth="4"/>
 			</filter>
 
 			<filter tag="highway" value="bridleway" color="#339900" pathEffect="4_2">
@@ -1261,10 +1261,10 @@
 		</group>
 
 		<filter tag="cycleway" value="lane">
-			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4"/>
 		</filter>
 		<filter tag="cycleway" value="opposite_lane">
-			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4"/>
 		</filter>
 
 		<filter tag="highway" value="services" minzoom="14" color="#000000" strokeWidth="2"/>
@@ -1406,7 +1406,7 @@
 			<filter tag="railway" value="platform"/>
 			<filter tag="public_transport" value="platform"/>
 			<groupFilter  color="#888888" strokeWidth="4" strokeWidth_2="2" color_2="#bababa" minzoom="16">
-				<filter minzoom="18" strokeWidth="6" strokeWidth_2="4" />
+				<filter minzoom="18" strokeWidth="6" strokeWidth_2="4"/>
 			</groupFilter>
 		</group>
 
