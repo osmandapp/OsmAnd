@@ -196,7 +196,6 @@
 			<filter layer="1" tag="highway" value="track" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="track" order="60"/>
 			<filter tag="highway" value="track" order="37"/>
-			<!-- Additional attributes can be used in this way: additional="tracktype=grade1" -->
 
 			<filter layer="1" tag="highway" value="path" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="path" order="60"/>
@@ -1171,6 +1170,7 @@
 			</groupFilter>
 		</group>
 
+		<!-- next segment: Highways without grade distinction (black path, cycleway, bridleway): pathEffect 4_2. Base setting for highways with possible grade distincttion (but none specified) 5_5 (track, byway, red footway) -->
 		<group>
 			<filter tag="highway" value="track" color="#996600" pathEffect="5_5">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" />
@@ -1188,7 +1188,7 @@
 			</filter>
 
 			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
-			<filter tag="highway" value="byway" color="#996600" pathEffect="6_3">
+			<filter tag="highway" value="byway" color="#996600" pathEffect="5_5">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
@@ -1197,7 +1197,7 @@
 				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="path" color="#000000" pathEffect="6_3" >
+			<filter tag="highway" value="path" color="#000000" pathEffect="4_2" >
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
@@ -1222,7 +1222,7 @@
 				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="footway" color="#fa5073" pathEffect="4_2">
+			<filter tag="highway" value="footway" color="#fa5073" pathEffect="5_5">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
