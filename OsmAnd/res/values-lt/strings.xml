@@ -326,8 +326,18 @@
   <string name="layer_poi_label">LV užrašai</string>
   <string name="animate_route_off">Sustabdyti animaciją</string>
   <string name="animate_route">Paleisti animaciją</string>
-  <string name="tip_recent_changes_0_6_8_t">"Pakeitimai 0.6.8 versijoje: \n\t- Visiškai pakeistas paieškos (LV, adresų) dizainas! Adresų paieška tapo greitesnė. Viena paieškos sąsaja su įvairiomis galimybėmis. \n\t- Įdiegta LV paieška pagal pavadinimą dideliuose regijonuose (šalyse) \n\t- Pašalintas ekrano mirksėjimas planšetiniuose kompiuteriuose (641 problema) \n\t- Galimybė pasirinkti automatinį žemėlapio centravimą (356 problema) \n\t- Navigacija pagal GPX perkelta į \'Maršrutas\' ir \'Išsaugoti maršrutą\' perkelta į \'Apie maršrutą\' \n\t- LV duomenys įtraukti į .obf failą (visi po 2011-10-01 parsiųsti indeksai) \n\t- Voice prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
-  <string name="file_can_not_be_renamed">Failo pavadinimo pakeisti nepavyksta.</string>
+  <string name="tip_recent_changes_0_6_8_t">Pakeitimai 0.6.8 versijoje: 
+\n\t- Visiškai pakeistas paieškos (LV, adresų) dizainas! Adresų paieška tapo greitesnė. Viena paieškos sąsaja su įvairiomis galimybėmis. 
+\n\t- Įdiegta LV paieška pagal pavadinimą dideliuose regijonuose (šalyse) 
+\n\t- Pašalintas ekrano mirksėjimas planšetiniuose kompiuteriuose (641 problema) 
+\n\t- Galimybė pasirinkti automatinį žemėlapio centravimą (356 problema) 
+\n\t- Navigacija pagal GPX perkelta į \'Maršrutas\' ir \'Išsaugoti maršrutą\' perkelta į \'Apie maršrutą\' 
+\n\t- LV duomenys įtraukti į .obf failą (visi po 2011-10-01 parsiųsti indeksai) 
+\n\t- Pataisyti balso pranešimais (GPS vietos pataisymas, praleidžiama pirma komanda) 
+\n\t- Smulkūs patobulinimai
+
+</string>
+  <string name="file_can_not_be_renamed">Failo pavadinimo pakeisti negalima.</string>
   <string name="file_with_name_already_exists">Failas tokiu pavadinimu jau yra.</string>
   <string name="gpx_navigation">GPX maršrutas</string>
   <string name="poi_query_by_name_matches_categories">Rastos kelios LV kategorijos, kurios atitinka jūsų užklausą :</string>
@@ -339,22 +349,34 @@
   <string name="map_version_changed_info">Serveryje patalpinti žemėlapių failai netinka jūsų turimos programos versijai. Norėdami parsisiųsti žemėlapius pirmiausia atnaujinkite pragramą.</string>
   <string name="local_index_mi_rename">Pakeisti pavadinimą</string>
   <string name="show_gpx_route">Rodyti žemėlapyje</string>
-  <string name="poi_filter_nominatim">Online Nominatim</string>
+  <string name="poi_filter_nominatim">Nominatim įrankis internete</string>
   <string name="search_select_point">Pasirinkti</string>
   <string name="search_position_current_location_search">Ieškoma vietos…</string>
   <string name="search_position_current_location_found">Vieta (rasta)</string>
   <string name="search_position_address">Adresas…</string>
   <string name="search_position_favorites">Įsimintos…</string>
   <string name="search_position_undefined">Nenurodyta</string>
-  <string name="search_position_fixed">Fixed</string>
+  <string name="search_position_fixed">Fiksuota</string>
   <string name="search_position_current_location">Esama vieta…</string>
   <string name="search_position_map_view">Paskutinė žiūrėta žemėlapio veita</string>
   <string name="select_search_position">Ieškoti šalia :</string>
   <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
-  <string name="tip_recent_changes_0_6_7_t">"Pakeitimai 0.6.7 versijoje : \n\t- Parsiųstų duomenų valdymas (parsiųsti, ištrinti, aktyvuoti / deaktyvuoti parsiųstus duomenis tiesiogiai OsmAnd programoje) \n\t- Įsimintos vietos ir grupės (priskirti kategorijas, ištrinti, valdyti įsimintas vietas) \n\t- GPX naršyklė (peržiūrėti maršruto informaciją, atstumą, vidutinį greitį, aukščius ir kt.) \n\t- Navigacija pagal GPX (daugiau galimybių, tęsti navigaciją po programos lūžimo, palaiko žiedines sankryžas) \n\t- Galimybė išsaugoti suplanuotą maršrutą GPX faile naudojimui neprisijungus prie interneto \n\t- Patobulintas sekimas išsaugant į GPX (filtruoja dalį netikslių pozicijų ir išsaugo pozicijos tikslumo/aukščio/greičio informaciją) \n\t- Įkelti GPX į OSM puslapį (http://download.osmand.net/gpx/) \n\t- Pagerintas vektorinių žemėlapių vaizdavimas \n\t- Patobulintas TTS variklis (pranešimai apie tikslų atstumą, pranešimai myliomis) \n\t- Klaidų ištaisymai "</string>
+  <string name="tip_recent_changes_0_6_7_t">Pakeitimai 0.6.7 versijoje : 
+\n\t- Parsiųstų duomenų valdymas (parsiųsti, ištrinti, aktyvuoti / deaktyvuoti parsiųstus duomenis tiesiogiai OsmAnd programoje) 
+\n\t- Įsimintos vietos ir grupės (priskirti kategorijas, ištrinti, valdyti įsimintas vietas) 
+\n\t- GPX naršyklė (peržiūrėti maršruto informaciją, atstumą, vidutinį greitį, aukščius ir kt.) 
+\n\t- Navigacija pagal GPX (daugiau galimybių, tęsti navigaciją po programos lūžimo, palaiko žiedines sankryžas) 
+\n\t- Galimybė išsaugoti suplanuotą maršrutą GPX faile naudojimui neprisijungus prie interneto 
+\n\t- Patobulintas sekimas išsaugant į GPX (filtruoja dalį netikslių pozicijų ir išsaugo pozicijos tikslumo/aukščio/greičio informaciją) 
+\n\t- Įkelti GPX į OSM puslapį (http://download.osmand.net/gpx/) 
+\n\t- Pagerintas vektorinių žemėlapių vaizdavimas 
+\n\t- Patobulintas TTS variklis (pranešimai apie tikslų atstumą, pranešimai myliomis) 
+\n\t- Klaidų ištaisymai
+
+</string>
   <string name="save_route_dialog_title">Išsaugoti maršrutą į GPX failą</string>
   <string name="route_successfully_saved_at">Maršrutas sėkmingai išsaugotas faile \'%1$s\'.</string>
-  <string name="filename_input">"Failo pavadinimas : "</string>
+  <string name="filename_input">Failo pavadinimas : </string>
   <string name="file_with_name_already_exist">Failas tokiu pavadinimu jau egzistuoja.</string>
   <string name="default_buttons_save">Išsaugoti</string>
   <string name="menu_save_directions">Išsaugoti maršrutą</string>
