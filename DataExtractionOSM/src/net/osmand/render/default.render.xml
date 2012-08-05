@@ -1170,7 +1170,7 @@
 			</groupFilter>
 		</group>
 
-		<!-- next segment: Highways without grade distinction (black path, cycleway, bridleway): pathEffect 4_2. Base setting for highways with possible grade distincttion (but none specified) 5_5 (track, byway, red footway) -->
+		<!-- next segment: Highways without grade distinction (cycleway, bridleway, black path): pathEffect 4_2. Base setting for highways with possible grade distinction but none specified (track, byway, red footway): 5_5 -->
 		<group>
 			<filter tag="highway" value="track" color="#996600" pathEffect="5_5">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" />
@@ -1179,6 +1179,7 @@
 				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
 				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
+					<!-- path coverage for grades: 100%, 77%, 71%, 54%, 50%(short dash). None specified: 50%(long dash) -->
 					<filter additional="tracktype=grade1" pathEffect=""/>
 					<filter additional="tracktype=grade2" pathEffect="10_3"/>
 					<filter additional="tracktype=grade3" pathEffect="5_2"/>
@@ -1204,6 +1205,8 @@
 				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
 				<filter minzoom="14" strokeWidth="1" />
 				<groupFilter>
+					<!-- path coverage for sac_scale in analogyx with 'track-grade': 100%, 77%, 71%, 54%, 50%(short dash), 40%. None specified: 50%(long dash) -->
+					<!-- also switch color to 'pedestrian-red' to better indicate these special ratings in line with many alpine maps -->
 					<filter additional="sac_scale=hiking" color="#fa5073" pathEffect=""/>
 					<filter additional="sac_scale=mountain_hiking" color="#fa5073" pathEffect="10_3"/>
 					<filter additional="sac_scale=demanding_mountain_hiking" color="#fa5073" pathEffect="5_2"/>
