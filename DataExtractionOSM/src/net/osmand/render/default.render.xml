@@ -1188,18 +1188,18 @@
 			</filter>
 
 			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
-			<filter tag="highway" value="byway" color="#996600" pathEffect="6_3" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3" />
-				<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter tag="highway" value="byway" color="#996600" pathEffect="6_3">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="14" strokeWidth="1" />
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
 			<filter tag="highway" value="path" color="#000000" pathEffect="6_3" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3" />
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3" />
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
 				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
 				<filter minzoom="14" strokeWidth="1" />
@@ -1215,16 +1215,16 @@
 			</filter>
 
 			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="2_2" >
-				<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="14" strokeWidth="1" />
+				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3"/>
+			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="16" strokeWidth="1"/>
@@ -1238,11 +1238,11 @@
 			</filter>
 
 			<filter tag="highway" value="bridleway" color="#339900" pathEffect="2_2">
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3" />
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="16" strokeWidth="1" />
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="16" strokeWidth="1"/>
 			</filter>
 
 			<!-- Bridges -->
