@@ -1214,7 +1214,7 @@
 				</groupFilter>
 			</filter>
 
-			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="2_2" >
+			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="4_2" >
 				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
@@ -1222,7 +1222,7 @@
 				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2">
+			<filter tag="highway" value="footway" color="#fa5073" pathEffect="4_2">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
@@ -1237,7 +1237,7 @@
 				<filter minzoom="16" strokeWidth="4" />
 			</filter>
 
-			<filter tag="highway" value="bridleway" color="#339900" pathEffect="2_2">
+			<filter tag="highway" value="bridleway" color="#339900" pathEffect="4_2">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
