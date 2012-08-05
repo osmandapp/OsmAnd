@@ -578,14 +578,13 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();
 	
-	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", true).makeGlobal().cache();
-	
-	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_SPEED_LIMITS = new BooleanPreference("show_speed_limits", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", true).makeGlobal().cache();
 
-	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference("avoid_toll_roads", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> AVOID_UNPAVED_ROADS = new BooleanPreference("avoid_unpaved_roads", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> AVOID_FERRIES = new BooleanPreference("avoid_ferries", false).makeGlobal().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5).makeProfile();

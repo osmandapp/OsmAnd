@@ -9,9 +9,12 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="avoid_in_routing_title">Avoid..</string>
+    <string name="show_lanes">Show lanes</string>
+    <string name="avoid_unpaved">Avoid unpaved roads</string>
+    <string name="avoid_ferries">Avoid ferries</string>
+    <string name="avoid_in_routing_title">Avoid&#8230;</string>
     <string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
-    <string name="show_warnings_title">Show alarms</string>
+    <string name="show_warnings_title">Show alarms&#8230;</string>
     <string name="show_warnings_descr">Show speed limits, speed cameras and traffic bumps</string>
     <string name="map_widget_fluorescent">Fluorescent colors</string>
     <string name="map_widget_show_ruler">Ruler</string>
@@ -49,9 +52,6 @@
     <string name="bg_service_screen_unlock">Unlock screen</string>
     <string name="bg_service_screen_lock_toast">The screen is locked</string>
     <string name="bg_service_interval">Set wake-up interval:</string>
-    <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-    <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
-    <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
     <string name="show_cameras">Show speed cameras</string>
     <string name="show_speed_limits">Show speed limits</string>
     <string name="avoid_toll_roads">Avoid toll roads</string>

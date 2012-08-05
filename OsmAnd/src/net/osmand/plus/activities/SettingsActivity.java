@@ -38,6 +38,7 @@ import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
@@ -69,6 +70,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	
 	private Preference bidforfix;
 	private Preference plugins;
+	private Preference avoidRouting;
+	private Preference showAlarms;
 
 	private EditTextPreference applicationDir;
 	private ListPreference applicationModePreference;
@@ -375,8 +378,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		bidforfix.setOnPreferenceClickListener(this);
 		plugins = (Preference) screen.findPreference("plugins");
 		plugins.setOnPreferenceClickListener(this);
-		
-		
+		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");
+		avoidRouting.setOnPreferenceClickListener(this);
+		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
+		showAlarms.setOnPreferenceClickListener(this);
 		
 		
 		Intent intent = getIntent();
@@ -744,6 +749,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return super.onPreferenceTreeClick(preferenceScreen, preference);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if(preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)){
@@ -759,8 +765,38 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		} else if(preference == plugins){
 			startActivity(new Intent(this, PluginsActivity.class));
 			return true;
+		} else if (preference == avoidRouting) {
+			showBooleanSettings(new String[] { getString(R.string.avoid_toll_roads), getString(R.string.avoid_ferries),
+					getString(R.string.avoid_unpaved) }, new OsmandPreference[] { osmandSettings.AVOID_TOLL_ROADS,
+					osmandSettings.AVOID_FERRIES, osmandSettings.AVOID_UNPAVED_ROADS });
+			return true;
+		} else if(preference == showAlarms){
+			showBooleanSettings(new String[] { getString(R.string.show_cameras), getString(R.string.show_speed_limits),
+					getString(R.string.show_lanes) },
+					new OsmandPreference[] { osmandSettings.SHOW_CAMERAS, osmandSettings.SHOW_SPEED_LIMITS,
+					osmandSettings.SHOW_LANES});
+			return true;
+		} else if(preference.getKey().equals("show_routing_alarms")){
+			startActivity(new Intent(this, PluginsActivity.class));
+			return true;
 		}
 		return false;
+	}
+	
+	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs) {
+		Builder bld = new AlertDialog.Builder(this);
+		boolean[]  checkedItems = new boolean[prefs.length];
+		for(int i=0; i<prefs.length; i++) {
+			checkedItems[i] = prefs[i].get();
+		}
+		bld.setMultiChoiceItems(vals, checkedItems, new OnMultiChoiceClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				prefs[which].set(isChecked);
+			}
+		});
+		bld.show();
 	}
 
 	
