@@ -31,7 +31,6 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.location.LocationManager;
 import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -1225,10 +1224,6 @@ public class OsmandSettings {
 	
 	// for background service
 	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference("map_activity_enabled", false).makeGlobal();
-	
-	// test animate routing
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> TEST_ANIMATE_ROUTING = new BooleanPreference("animate_routing", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> NATIVE_RENDERING = new BooleanPreference("native_rendering", true).makeGlobal();

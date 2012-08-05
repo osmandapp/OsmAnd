@@ -23,17 +23,17 @@
 				android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
 			<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
 			
-						<CheckBoxPreference android:summary="@string/show_speed_limits_descr" android:title="@string/show_speed_limits"
+			<!-- 			<CheckBoxPreference android:summary="@string/show_speed_limits_descr" android:title="@string/show_speed_limits"
 				android:key="show_speed_limits"></CheckBoxPreference>
 			<CheckBoxPreference android:summary="@string/show_cameras_descr" android:title="@string/show_cameras"
 				android:key="show_cameras"></CheckBoxPreference>
 			<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
 			<CheckBoxPreference android:summary="@string/avoid_toll_roads_descr" android:title="@string/avoid_toll_roads"
-				android:key="avoid_toll_roads"></CheckBoxPreference>
-			<!-- 
+				android:key="avoid_toll_roads"></CheckBoxPreference> -->
+			
 			<Preference android:title="@string/show_warnings_title" android:summary="@string/show_warnings_descr" android:key="show_routing_alarms"/>
 			<Preference android:title="@string/avoid_in_routing_title" android:summary="@string/avoid_in_routing_descr" android:key="avoid_in_routing"/>
-			 -->
+			 
 			<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
 				android:key="use_compass_navigation"></CheckBoxPreference>
 		</PreferenceScreen>

@@ -273,9 +273,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.USE_COMPASS_IN_NAVIGATION, screen);
 		registerBooleanPreference(osmandSettings.LEFT_SIDE_NAVIGATION, screen);
 
-		registerBooleanPreference(osmandSettings.SHOW_CAMERAS, screen);
-		registerBooleanPreference(osmandSettings.SHOW_SPEED_LIMITS, screen);
-		registerBooleanPreference(osmandSettings.AVOID_TOLL_ROADS, screen);
+//		registerBooleanPreference(osmandSettings.SHOW_CAMERAS, screen);
+//		registerBooleanPreference(osmandSettings.SHOW_SPEED_LIMITS, screen);
+//		registerBooleanPreference(osmandSettings.AVOID_TOLL_ROADS, screen);
 		
 		
 		CheckBoxPreference nativeCheckbox = registerBooleanPreference(osmandSettings.NATIVE_RENDERING,screen);
