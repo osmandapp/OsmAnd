@@ -284,7 +284,11 @@ public class MapControlsLayer extends OsmandMapLayer {
                 public void onClick(View v) {
                     
                     final Intent placePicker = new Intent(activity, PlacePickerActivity.class);
-                    //search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    // TODO(natashaj): what happens if map is not loaded yet?
+                    LatLon loc = activity.getMapLocation();
+                    placePicker.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+                    placePicker.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+                    //placePicker.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     activity.startActivityForResult(placePicker, MapActivity.SELECT_PLACE_FOR_ROUTING);
                 }
             });

@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
+import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.Version;
@@ -97,7 +98,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private static final int LONG_KEYPRESS_DELAY = 500;
 
 	public static final int SELECT_PLACE_FOR_ROUTING = 0;
-	public static final int SELECT_PLACE_FOR_DISPLAY = 0;
+	public static final int SELECT_PLACE_FOR_DISPLAY = 1;
 
 	private long lastTimeAutoZooming = 0;
 	private long lastTimeSensorRotation = 0;
@@ -465,7 +466,20 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
             super.onActivityResult(requestCode, resultCode, data);
             
             if (requestCode == SELECT_PLACE_FOR_ROUTING && resultCode == PlacePickerActivity.SELECT_PLACE_RESULT_OK) {
-                // TODO(natashaj): show route to user
+                Bundle bundle = data.getExtras();
+                double latitude = bundle.getDouble("PLACE_LATITUDE");
+                double longitude = bundle.getDouble("PLACE_LONGITUDE");
+                String name = bundle.getString("PLACE_NAME");
+
+                // Set destination point
+                settings.setPointToNavigate(latitude, longitude, name);
+
+                // Show route + directions to destination
+                Location loc = new Location("map");
+                loc.setLatitude(latitude);
+                loc.setLongitude(longitude);
+                // TODO(natashaj): followEnabled should be chosen based on user choice
+                getMapActions().getDirections(loc, true /*followEnabled*/);
             } else if (requestCode == SELECT_PLACE_FOR_DISPLAY && resultCode == PlacePickerActivity.SELECT_PLACE_RESULT_OK) {
                 // TODO(natashaj): show places to user
             }

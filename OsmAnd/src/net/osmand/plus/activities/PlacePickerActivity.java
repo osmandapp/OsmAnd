@@ -1,9 +1,13 @@
 package net.osmand.plus.activities;
 
+import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.fragments.PlaceDetailsFragment;
+import net.osmand.plus.fragments.PlaceTypesFragment;
+import net.osmand.plus.fragments.SearchPOIFragment;
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -13,8 +17,9 @@ public class PlacePickerActivity extends Activity {
 
     public static final int SELECT_PLACE_RESULT_OK = 1;
     
-    public static final String SEARCH_LAT = "net.osmand.search_lat"; //$NON-NLS-1$
-    public static final String SEARCH_LON = "net.osmand.search_lon"; //$NON-NLS-1$
+    public static final String PLACE_LATITUDE = "net.osmand.place_latitude"; //$NON-NLS-1$
+    public static final String PLACE_LONGITUDE = "net.osmand.place_longitude"; //$NON-NLS-1$
+    public static final String PLACE_NAME = "net.osmand.place_name"; //$NON-NLS-1$
 
     private PlacePickerListener placePickerListener;
 
@@ -37,7 +42,7 @@ public class PlacePickerActivity extends Activity {
         
         // TODO(natashaj): how to cancel when touched outside?
     }
-    
+   
     public PlacePickerListener getPlacePickerListener() {
         if (placePickerListener == null) {
             placePickerListener = new MapPlacePickerListener();
@@ -49,6 +54,8 @@ public class PlacePickerActivity extends Activity {
         public void onPlacePickerCreated(PlacePickerActivity placePicker);
        
         public void onPlaceTypeChanged(int placeTypeIndex);
+        
+        public void onPlacePicked(LatLon location, String name);
     }
 
     private class MapPlacePickerListener implements PlacePickerListener {
@@ -67,8 +74,11 @@ public class PlacePickerActivity extends Activity {
                     placePicker.getFragmentManager().findFragmentById(R.id.placeDetails);
             if (details == null || details.getShownIndex() != placeTypeIndex) {
                 
-                details = PlaceDetailsFragment.newInstance(placeTypeIndex);
-                
+                if (placeTypeIndex == PlaceTypesFragment.ADDRESS_SEARCH_INDEX) {
+                    details = SearchPOIFragment.newInstance();
+                } else {
+                    details = PlaceDetailsFragment.newInstance(placeTypeIndex);
+                }
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = placePicker.getFragmentManager().beginTransaction();
@@ -77,7 +87,17 @@ public class PlacePickerActivity extends Activity {
                 ft.commit();
             }
         }
-        
+
+        @Override
+        public void onPlacePicked(LatLon location, String name) {
+            Intent intent = placePicker.getIntent();
+            intent.putExtra("PLACE_LATITUDE", location.getLatitude());
+            intent.putExtra("PLACE_LONGITUDE", location.getLongitude());
+            intent.putExtra("PLACE_NAME", name);
+            placePicker.setResult(SELECT_PLACE_RESULT_OK, intent);
+            placePicker.finish();
+        }
+       
     }
 
 }

@@ -12,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class PlaceTypesFragment extends ListFragment {
+    public static final int FAVORITES_INDEX = 0; 
+    public static final int ADDRESS_SEARCH_INDEX = 1; 
+    
     boolean mDualPane;
     int mCurCheckPosition = 0;
     ArrayList<String> places;

@@ -1,7 +1,7 @@
 package net.osmand.plus.fragments;
 
+import net.osmand.plus.R;
 import android.app.Fragment;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +32,7 @@ public class PlaceDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         TextView text = new TextView(getActivity());
-        text.setTextColor(Color.GRAY);
+        text.setBackgroundResource(R.color.color_light_gray);
         text.setText("Hello " + String.valueOf(getShownIndex()));
         return text;
     }
