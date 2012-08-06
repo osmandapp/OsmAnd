@@ -154,7 +154,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		createControls();
 	}
 	
-	public void applyTheme() {
+	private void applyTheme() {
 		int boxTop = R.drawable.box_top_stack;
 		int boxTopR = R.drawable.box_top_r;
 		int boxTopL = R.drawable.box_top_l;
@@ -210,25 +210,53 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerSideWidget(speed, R.drawable.info_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
-		
+
+		// Top widgets
 		ImageViewControl compassView = createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
-		
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
-
-		ImageView bgServiceView = lockInfoControl.createLockScreenWidget(view);
-		mapInfoControls.registerTopWidget(bgServiceView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
-		
+		ImageView lockView = lockInfoControl.createLockScreenWidget(view);
+		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		backToLocation = createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
-		View globus = createGlobusAndProgress();
+		View globus = createGlobus();
 		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
 		
 		topText = new TopTextView(routingHelper, map);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text, "street_name", MapInfoControls.MAIN_CONTROL, all, 100);
+		
+		// Register appearance widgets
+		registerAppearanceWidgets();
 	}
 	
+	
+	private void registerAppearanceWidgets() {
+		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_ruler, 
+				"showRuler", EnumSet.allOf(ApplicationMode.class));
+		showRuler.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				ApplicationMode am = view.getSettings().getApplicationMode();
+				view.getSettings().SHOW_RULER.set(showRuler.visible(am));
+				view.refreshMap();
+			}
+		});
+		
+		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_view_direction, 
+				"viewDirection", EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN));
+		displayViewDirections.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				ApplicationMode am = view.getSettings().getApplicationMode();
+				view.getSettings().SHOW_VIEW_ANGLE.set(displayViewDirections.visible(am));
+				map.updateApplicationModeSettings();
+			}
+		});
+		
+	}
+
+
 	public void recreateControls(){
 		rightStack.clearAllViews();
 		mapInfoControls.populateStackControl(rightStack, view, false);
@@ -240,6 +268,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		statusBar.removeAllViews();
 		mapInfoControls.populateStatusBar(statusBar);
+		applyTheme();
 	}
 	
 	public void createControls() {
@@ -305,7 +334,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl.setVisibility(View.GONE);
 		
 		// update and create controls
-		applyTheme();
 		recreateControls();
 	}
 
@@ -320,6 +348,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		list.addAll(mapInfoControls.getRight());
 		list.add(map.getString(R.string.map_widget_left_stack));
 		list.addAll(mapInfoControls.getLeft());
+		list.add(map.getString(R.string.map_widget_appearance));
+		list.addAll(mapInfoControls.getAppearanceWidgets());
 		
 
 		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
@@ -480,13 +510,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		progressBar.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.getMapLayers().selectMapLayer(view);
+				openViewConfigureDialog();
 			}
 		});
 		fl.addView(progressBar, fparams);
 		return fl;
 	}
-	private View createGlobusAndProgress(){
+	private View createGlobus(){
 		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
 		ImageView globus = new ImageView(view.getContext());
 		globus.setImageDrawable(globusDrawable);

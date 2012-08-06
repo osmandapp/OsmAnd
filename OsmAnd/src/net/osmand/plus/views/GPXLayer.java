@@ -24,17 +24,10 @@ public class GPXLayer extends OsmandMapLayer {
 	private Path path;
 
 	private OsmandSettings settings;
-	private boolean fluorescent;
 	
 	
 	private void initUI() {
 		paint = new Paint();
-		fluorescent = view.getSettings().FLUORESCENT_OVERLAYS.get();
-		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
-			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
-		} else {
-			paint.setColor(view.getResources().getColor(R.color.gpx_track));
-		}
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
@@ -60,8 +53,10 @@ public class GPXLayer extends OsmandMapLayer {
 			return;
 		}
 		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
-		if(view.getSettings().FLUORESCENT_OVERLAYS.get() != fluorescent) {
-			initUI(); //to change color immediately when needed
+		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
+		} else {
+			paint.setColor(view.getResources().getColor(R.color.gpx_track));
 		}
 		
 		for (List<WptPt> l : points) {

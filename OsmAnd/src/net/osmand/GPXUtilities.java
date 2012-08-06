@@ -147,7 +147,17 @@ public class GPXUtilities {
 		}
 
 		public boolean isEmpty() {
-			return tracks.isEmpty() && points.isEmpty() && routes.isEmpty();
+			for (Track t : tracks) {
+				if (t.segments != null) {
+					for (TrkSegment s : t.segments) {
+						boolean tracksEmpty = s.points.isEmpty();
+						if (!tracksEmpty) {
+							return false;
+						}
+					}
+				}
+			}
+			return points.isEmpty() && routes.isEmpty();
 		}
 		
 		
