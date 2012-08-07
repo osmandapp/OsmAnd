@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
   <string name="offline_edition">Edición sin conexión</string>
   <string name="offline_edition_descr">Usa siempre edición sin conexión</string>
@@ -46,17 +45,16 @@
   <string name="amenity_type_wikiosm">Wikipedia (sin conexión)</string>
   <string name="amenity_type_user_defined">Definido por el usuario</string>
   <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quiere sustituirlo?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Opciones específicas por perfil</string>
   <string name="settings_preset">Perfil de usuario</string>
   <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
   <string name="monitor_preferences">Seguimiento</string>
   <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
   <string name="routing_settings">- Navegación</string>
-  <string name="routing_settings_descr">Especifica las opciones de ruteo</string>
+  <string name="routing_settings_descr">Especifica opciones de navegación</string>
   <string name="global_settings">Opciones Globales</string>
   <string name="index_settings">Datos descargados</string>
-  <string name="index_settings_descr">Descargue, mire detalles y gestione mapas sin conexión</string>
+  <string name="index_settings_descr">Descargue, vea detalles y gestione mapas sin conexión</string>
   <string name="general_settings">Opciones Generales</string>
   <string name="general_settings_descr">Configura la presentación y otras opciones globales</string>
   <string name="global_app_settings">Opciones Globales de la aplicación</string>
@@ -74,7 +72,6 @@
   <string name="tip_day_night_mode_t">\tLa apariencia del mapa se puede cambiar, para algunos mapas vectoriales, entre Día (más brillante) y Noche (más oscuro). \n\tLos colores Noche son más seguros para la conducción nocturna. \n\tPuede definir la política para cambiar entre Día y Noche en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt;\'Modo Día/Noche\'. \n\tLas opciones son: \n\t\'Alba/Ocaso\' - modo automático, controlado por la posición del sol (por defecto) \n\t\'Día\' - siempre usa el modo Día \n\t\'Noche\' - siempre usa el modo Noche \n\t\'Sensor de luz\' - la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si lo tiene)</string>
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y -además de para ver mapas y navegación- se puede utilizar para mejorar la calidad de los datos OSM. Puede crear y enviar fácilmente nuevos PDI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesita primero proporcionar su información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'Edición OSM\'. \n\tPara añadir un nuevo PDI use la opción \'Crear PDI\' en el menú contextual del mapa. Introduzca la información sobre el nuevo PDI en el formulario \'Crear PDI\' y por último envíela. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM use la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escriba la descripción detallada del problema y por último envíela pulsando el botón \'Añadir\'. \n\tNecesita conexión a Internet para enviar sus contribuciones a PDIs y fallos OSM.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selección de Destino</string>
@@ -131,7 +128,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Cambios en 0.6.7 : \n\t- Gestor de datos descargados (descargar, borrar, activar/desactivar datos descargados directamente en OsmAnd) \n\t- Puntos y grupos favoritos (categorizar, borrar, gestionar favoritos) \n\t- Explorador de GPX en la aplicación (ver detalle del trayecto, distancia, velocidad media, elevación, etc.) \n\t- Navegación GPX (más opciones, continuar la navegación tras un fallo de aplicación, soportar rotondas) \n\t- Función para guardar la ruta como traza GPX para uso sin conexión \n\t- Mejora de la monitorización GPX (filtra alguna posición incorrecta y guarda precisión/elevación/velocidad) \n\t- Envía GPX a la comunidad OSM (http://download.osmand.net/gpx/) \n\t- Mejora del dibujo vectorial \n\t- Mejora del motor TTS (anuncia la distancia exacta, permite millas) \n\t- Arreglo de fallos "</string>
   <string name="save_route_dialog_title">Guarda la ruta como traza GPX</string>
   <string name="route_successfully_saved_at">Ruta guardada correctamente como \'%1$s\'.</string>
-  <string name="filename_input">"Nombre de archivo: "</string>
+  <string name="filename_input">Nombre de archivo: </string>
   <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
   <string name="default_buttons_save">Guardar</string>
   <string name="menu_save_directions">Guardar direcciones</string>
@@ -338,7 +335,7 @@
   <string name="select_all">Seleccionar todo</string>
   <string name="reload">Recargar</string>
   <string name="fast_route_mode">Ruta más rápida</string>
-  <string name="fast_route_mode_descr">"Habilitar para calcular la ruta más rápida o deshabilitar para la más corta "</string>
+  <string name="fast_route_mode_descr">Habilitar para calcular la ruta más rápida o deshabilitar para la más corta </string>
   <string name="tiles_to_download_estimated_size">En zoom {0} descarga {1} teselas ({2} MB)</string>
   <string name="context_menu_item_download_map">Descargar mapa</string>
   <string name="select_max_zoom_preload_area">Seleccione el zooom máximo para precargar</string>
@@ -419,7 +416,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Fijar el intervalo entre lecturas del servicio de fondo</string>
+  <string name="background_service_int_descr">Fijar el intervalo entre lecturas del servicio </string>
   <string name="background_service_int">Intervalo de lectura</string>
   <string name="background_service_provider_descr">Elegir el proveedor de localización para la ejecución de fondo</string>
   <string name="background_service_provider">Proveedor de localización</string>
@@ -437,7 +434,7 @@
   <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
   <string name="voice_data_corrupted">El dato de voz especificado está corrupto</string>
   <string name="voice_data_unavailable">El dato de voz escogido no está disponible</string>
-  <string name="stop_routing">Detener navegación</string>
+  <string name="stop_routing">Parar nave.</string>
   <string name="sd_unmounted">No se puede acceder a la tarjeta SD.\nNo puede ver mapas ni encontrar cosas.</string>
   <string name="sd_mounted_ro">La tarjeta SD está en modo sólo lectura. \nSolamente puede ver el mapa precargado y no puede descargar de Internet.</string>
   <string name="unzipping_file">Descomprimiendo archivo…</string>
@@ -516,7 +513,7 @@
   <string name="downloading">Descargando…</string>
   <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
   <string name="list_index_files_was_not_loaded">La lista de regiones no se ha descargado de osmand.net.</string>
-  <string name="select_index_file_to_download">Si no puede encontrar su región, puede hacerla usted mismo. Visite osmand.net</string>
+  <string name="select_index_file_to_download">Nada fue encontrado. Si no puede encontrar su región, puede hacerla usted (Visite http://osmand.net).</string>
   <string name="show_poi_on_map">Mostrar en mapa</string>
   <string name="fav_points_edited">Se editó el punto favorito</string>
   <string name="fav_points_not_exist">No hay puntos favoritos</string>
@@ -597,8 +594,8 @@
   <string name="map_specify_point">Fijar como destino</string>
   <string name="show_view_angle_descr">Mostrar la dirección de la vista en el mapa</string>
   <string name="show_view_angle">Mostrar dirección de vista</string>
-  <string name="stop_navigation">Borrar destino</string>
-  <string name="navigate_to_point">Fijar destino</string>
+  <string name="stop_navigation">Borrar dest.</string>
+  <string name="navigate_to_point">Fijar dest.</string>
   <string name="map_view_3d_descr">Habilitar visión 3D del mapa</string>
   <string name="map_view_3d">Visión 3D del mapa</string>
   <string name="show_poi_over_map_description">Mostrar PDI sobre el mapa (usar el último filtro seleccionado)</string>
@@ -718,7 +715,7 @@
   <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de fichero?</string>
   <string name="basemap_was_selected_to_download">El MapaBase es necesario para el correcto funcionamiento de la aplicación y ha sido seleccionado para descargar.</string>
   <string name="gpx_index_settings_descr">" (incluye analizador GPX)"</string>
-  <string name="map_online_plugin_is_not_installed">Habilita el plugin de mapas online para seleccionar diferentes fuentes de mapas</string>
+  <string name="map_online_plugin_is_not_installed">Activa el extra de mapas online para seleccionar diferentes fuentes de mapas</string>
   <string name="map_online_data">Mapas Online (teselas)</string>
   <string name="map_online_data_descr">Usar mapas online (descargar y guardar teselas en la tarjeta SD)</string>
   <string name="online_map_settings">Mapas Online</string>
@@ -726,17 +723,17 @@
   <string name="map_settings">- Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Mostrar configuraciones para habilitar rastreo o navegación en modo de bajo consumo (pantalla apagada) despertando periódicamente el dispositivo GPS.</string>
+  <string name="osmand_background_plugin_description">Mostrar configuraciones para habilitar seguimiento y navegación en modo de bajo consumo (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
   <string name="osmand_accessibility_description">Mostrar configuraciones para características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Este plugin facilita el registro de sus excursiones a un fichero GPX o monitorizarlo en directo usando un servicio web.</string>
   <string name="osmand_extra_settings_description">Muestra opciones para configuraciones avanzadas de mapa (como aumentar detalles del mapa) y algunas especificas de dispositivos.</string>
   <string name="osmand_development_plugin_description">Muestra opciones de características de desarrollo y depuración como navegación animada o mostrar el rendimiento de la visualización.</string>
   <string name="plugins_screen">Gestor de Extras</string>
-  <string name="select_plugin_to_activate">Toque un Plugin para activarlo o desactivarlo. (Puede ser necesario reiniciar OsmAnd.)</string>
+  <string name="select_plugin_to_activate">Toque un extra para activarlo o desactivarlo. (Puede ser necesario reiniciar OsmAnd.)</string>
   <string name="prefs_plugins_descr">Los extras permiten configuración en modo experto y proporcionan funcionalidades adicionales, como mapas teselados, seguimiento, modo de pantalla apagada, opciones de accesibilidad, y otros.</string>
-  <string name="prefs_plugins">Gestor de Plugin</string>
-  <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 : \n\t - *Funcionalidad de plugins*\n\t - La mayoría de funcionalidades esta agrupada por características y pueden ser habilitadas/des-habilitadas en el Gestor de Plugins. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras nuevas y anteriores características.\n\t - *Soporte para nuevos datos de mapa offline*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (Los datos antiguos no están soportados)\n\t - *Navegación sin conexión* \n\t - La navegación sin conexión es más robusta\n\t -*Usabilidad e interfaz de usuario* \n\t - Mejoras en otros aspectos"</string>
+  <string name="prefs_plugins">Gestor de Extras</string>
+  <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 : \n\t - *Funcionalidad de extras*\n\t - La mayoría de funcionalidades esta agrupada por características y pueden ser habilitadas/des-habilitadas en el Gestor de Extras. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras características nuevas y existentes.\n\t - *Soporte para nuevos datos de mapa descargados*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (Los datos antiguos no están soportados)\n\t - *Navegación sin conexión* \n\t - La navegación sin conexión es más robusta\n\t -*Usabilidad e interfaz de usuario* \n\t - Mejoras en muchas áreas"</string>
   <string name="osm_editing_plugin_description">Muestra parámetros para la colaboración con OSM como recolectar / modificar objetos PDI de OSM, crear / comentar fallos de OSM, y contribuir con trazas GPX (requiere credenciales OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funciona correctamente en algunos dispositivos.</string>
   <string name="simulate_route_progression_manually">Simular la progresión de la ruta manualmente</string>
@@ -765,11 +762,11 @@
   <string name="accessibility_mode_descr">Activar las características de accesibilidad</string>
   <string name="accessibility_on">On</string>
   <string name="accessibility_off">Off</string>
-  <string name="accessibility_default">Usar valores de configuración globales del sistema</string>
+  <string name="accessibility_default">Usar configuración global del sistema</string>
   <string name="backToMenu">Volver al Menú</string>
   <string name="zoomOut">Alejar</string>
   <string name="zoomIn">Acercar</string>
-  <string name="zoomIs">Zoom is</string>
+  <string name="zoomIs">Zoom es</string>
   <string name="north">norte</string>
   <string name="north_north_east">nornordeste</string>
   <string name="north_east">nordeste</string>
@@ -835,7 +832,15 @@
   <string name="route_kr">Manténgase a la derecha y continúe</string>
   <string name="save_route_as_gpx">Guardar ruta como fichero GPX</string>
   <string name="asap">En cuanto puedas</string>
-  <string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 :\n\t* Rutas más precisas (algo más lento)\n\t* Recálculo inteligente y rápido de la ruta\n\t* Direcciones por carriles\n\t* Información sobre radares, limites de velocidad y resaltos\n\t* Mejoras en la guía por voz en autopistas\n\t* Plugin de parking (¿Dónde está aparcado mi coche?)\n\t* Activar/Desactivar mecanismo de monitorización"</string>
+  <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
+\n\t* Rutas más precisas (algo más lento)
+\n\t* Recálculo inteligente y rápido de la ruta
+\n\t* Direcciones por carriles
+\n\t* Información sobre radares, limites de velocidad y puntos negros
+\n\t* Mejoras en la guía por voz en autopistas
+\n\t* Plugin de parking (¿Dónde está aparcado mi coche?)
+\n\t* Activar/Desactivar mecanismo de monitorización
+    </string>
   <string name="gpxup_public">Público</string>
   <string name="gpxup_identifiable">Identificable</string>
   <string name="gpxup_trackable">Trazable</string>
@@ -843,12 +848,12 @@
   <string name="osmand_parking_event">Recoger el coche del parking</string>
   <string name="osmand_parking_warning">Advertencia</string>
   <string name="osmand_parking_warning_text">La notificación para recoger el coche ha sido previamente añadida a su Calendario. Seguirá ahí hasta que la borre manualmente.</string>
-  <string name="osmand_parking_time_limit_title">Asignar tiempo límite de parking</string>
+  <string name="osmand_parking_time_limit_title">Fijar límite de tiempo de parking</string>
   <string name="osmand_parking_delete_confirm">¿Desea eliminar la localización del coche aparcado?</string>
   <string name="osmand_parking_delete">Borrar marcador de parking</string>
   <string name="osmand_parking_choose_type">Elija el tipo de parking</string>
-  <string name="osmand_parking_lim_text">Con tiempo límite</string>
-  <string name="osmand_parking_no_lim_text">Sin tiempo límite</string>
+  <string name="osmand_parking_lim_text">Tiempo limitado</string>
+  <string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
   <string name="osmand_parking_add_event">Añadir notificación a la aplicación de Calendario</string>
   <string name="osmand_parking_time_limit">Parking con tiempo límite</string>
   <string name="osmand_parking_time_no_limit">Parking sin tiempo límite</string>
@@ -857,8 +862,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto de parking</string>
-  <string name="osmand_parking_plugin_description">Este plugin le permite almacenar la localización de su coche aparcado.</string>
-  <string name="osmand_parking_plugin_name">Plugin de Posición de Parking</string>
+  <string name="osmand_parking_plugin_description">Este extra le permite guardar la localización de su coche aparcado.</string>
+  <string name="osmand_parking_plugin_name">Extra de Posición de Parking</string>
   <string name="context_menu_item_add_parking_point">Marcar como posición de parking</string>
   <string name="context_menu_item_delete_parking_point">Borrar marcador de parking</string>
   <string name="starting_point_too_far">Punto de inicio demasiado lejos de la carretera más cercana.</string>
@@ -866,48 +871,52 @@
   <string name="update_downlod_list">Recargar lista</string>
   <string name="global_app_allocated_memory_descr">Memoria asignada %1$s MB (Limite Android %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Memoria asignada</string>
-  <string name="native_app_allocated_memory_descr">Memoria nativa total usada por la app %1$s MB (Dalvik %2$s MB, otros %3$s MB). Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
+  <string name="native_app_allocated_memory_descr">Memoria nativa total usada por la app %1$s MB (Dalvik %2$s MB, otros %3$s MB).↵
+Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Memoria nativa total</string>
   <string name="select_animate_speedup">Seleccionar aceleración de ruta animada</string>
   <string name="osmand_parking_hours">Horas</string>
   <string name="osmand_parking_minutes">Minutos</string>
-  <string name="osmand_parking_position_description_add_time">El coche está aparcado a:</string>
-  <string name="use_compass_navigation_descr">Usar brújula cuando la dirección no es detectada</string>
+  <string name="osmand_parking_position_description_add_time">El coche fue aparcado a:</string>
+  <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
   <string name="use_compass_navigation">Usar brújula</string>
   <string name="route_updated_loc_found">La ruta será recalculada cuando se encuentre la localización</string>
   <string name="continue_follow_previous_route_auto">La navegación anterior no ha finalizado. ¿Continuar siguiéndola? (%1$s segundos)</string>
-  <string name="show_cameras_descr">Mostrar radares (pueden estar prohibidos en algunos países)</string>
-  <string name="show_speed_limits_descr">Mostrar límites de velocidad y resaltos</string>
+  <string name="show_cameras_descr">Muestra radares (puede estar prohibido en algunos países)</string>
+  <string name="show_speed_limits_descr">Muestra límites de velocidad y puntos negros</string>
   <string name="avoid_toll_roads_descr">Evitar peajes para cálculo de la ruta</string>
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_speed_limits">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
-  <string name="tip_recent_changes_0_8_2_t">"Cambios en 0.8.2 :\n\t* Mejoras en Ruteado"</string>
-  <string name="map_widget_top_text">Street name</string>
-  <string name="map_widget_config">Configuration</string>
-  <string name="map_widget_map_select">Map selection</string>
-  <string name="map_widget_back_to_loc">Where am I</string>
-  <string name="map_widget_lock_screen">Lock screen</string>
-  <string name="map_widget_compass">Compass</string>
-  <string name="map_widget_top_stack">Status bar</string>
-  <string name="map_widget_reset">Reset to default</string>
-  <string name="map_widget_right_stack">Right side</string>
-  <string name="map_widget_left_stack">Left side</string>
-  <string name="map_widget_parking">Parking</string>
-  <string name="map_widget_monitoring">Monitoring</string>
-  <string name="map_widget_speed">Speed</string>
-  <string name="map_widget_distance">Target</string>
-  <string name="map_widget_altitude">Altitude</string>
-  <string name="map_widget_time">Time to go</string>
-  <string name="map_widget_next_turn">Next turn</string>
-  <string name="map_widget_next_turn_small">Next turn (small)</string>
-  <string name="map_widget_next_next_turn">Second next turn</string>
-  <string name="map_widget_mini_route">Mini route map</string>
+  <string name="tip_recent_changes_0_8_2_t">Cambios en 0.8.2 :
+\n\t* Mejoras en Navegación
+\n\t* Widgets de mapas dinámicos
+    </string>
+  <string name="map_widget_top_text">Nombre de calle</string>
+  <string name="map_widget_config">Configuración</string>
+  <string name="map_widget_map_select">Selección de mapa</string>
+  <string name="map_widget_back_to_loc">¿Dónde estoy?</string>
+  <string name="map_widget_lock_screen">Bloquear pantalla</string>
+  <string name="map_widget_compass">Brújula</string>
+  <string name="map_widget_top_stack">Barra de estado</string>
+  <string name="map_widget_reset">Cambiar a valores por defecto</string>
+  <string name="map_widget_right_stack">Lado derecho</string>
+  <string name="map_widget_left_stack">Lado izquierdo</string>
+  <string name="map_widget_parking">Aparcamiento</string>
+  <string name="map_widget_monitoring">Seguimiento</string>
+  <string name="map_widget_speed">Velocidad</string>
+  <string name="map_widget_distance">Destino</string>
+  <string name="map_widget_altitude">Altitud</string>
+  <string name="map_widget_time">Tiempo de llegada</string>
+  <string name="map_widget_next_turn">Próximo giro</string>
+  <string name="map_widget_next_turn_small">Próximo giro (pequeño)</string>
+  <string name="map_widget_next_next_turn">Segundo giro</string>
+  <string name="map_widget_mini_route">Minimapa de ruta</string>
   <string name="bg_service_screen_lock">Bloquear/Desbloquear pantalla</string>
   <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
-  <string name="bg_service_interval">Intervalo de despertar:</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
+  <string name="bg_service_interval">Intervalo de activación:</string>
+  <string name="screen_is_locked">Para desbloquear la pantalla presione el icono de candado</string>
+  <string name="bg_service_screen_unlock">Desbloquear pantalla</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
 </resources>

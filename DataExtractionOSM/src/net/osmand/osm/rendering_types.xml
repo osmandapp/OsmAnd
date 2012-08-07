@@ -90,7 +90,16 @@
 		<type tag="tracktype" value="grade4" minzoom="12" additional="true"/>
 		<type tag="tracktype" value="grade5" minzoom="12" additional="true"/>
 	</category>
-	
+
+	<category name="sac_scale">
+		<type tag="sac_scale" value="hiking" minzoom="12" additional="true"/>
+		<type tag="sac_scale" value="mountain_hiking" minzoom="12" additional="true"/>
+		<type tag="sac_scale" value="demanding_mountain_hiking" minzoom="12" additional="true"/>
+		<type tag="sac_scale" value="alpine_hiking" minzoom="12" additional="true"/>
+		<type tag="sac_scale" value="demanding_alpine_hiking" minzoom="12" additional="true"/>
+		<type tag="sac_scale" value="difficult_alpine_hiking" minzoom="12" additional="true"/>
+	</category>
+
 	<category name="cycleway">
 		<type tag="cycleway" value="lane" minzoom="12"/>
 		<type tag="cycleway" value="opposite_lane" minzoom="12"/>

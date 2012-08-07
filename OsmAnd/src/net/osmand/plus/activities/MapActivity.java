@@ -1089,19 +1089,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	public void updateApplicationModeSettings(){
-		boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get(); 
 		int currentMapRotation = settings.ROTATE_MAP.get();
 		if(currentMapRotation == OsmandSettings.ROTATE_MAP_NONE){
 			mapView.setRotate(0);
-		}
-		if(!currentShowingAngle){
-			mapLayers.getLocationLayer().setHeading(null);
 		}
 		routingHelper.setAppMode(settings.getApplicationMode());
 		mapView.setMapPosition(settings.POSITION_ON_MAP.get());
 		registerUnregisterSensor(getLastKnownLocation(), false);
 		mapLayers.getMapInfoLayer().recreateControls();
-		mapLayers.getMapInfoLayer().applyTheme();
 		mapLayers.updateLayers(mapView);
 		
 		getMyApplication().getDaynightHelper().setDayNightMode(settings.DAYNIGHT_MODE.get());
@@ -1119,6 +1114,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
 			mapView.setRotate(0);
 		}
+		int resId = R.string.rotate_map_none_opt;
+		if(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS){
+			resId = R.string.rotate_map_compass_opt;
+		} else if(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING){
+			resId = R.string.rotate_map_bearing_opt;
+		}
+		
+		AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
 		mapView.refreshMap();
 	}
 	
@@ -1147,6 +1150,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				changeZoom(mapView.getZoom() + 1);
 				return true;
 			}
+		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || 
+				keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ||keyCode == KeyEvent.KEYCODE_DPAD_DOWN || 
+				keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? - 15 : 0);
+			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
+			LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + dx, mapView.getCenterPointY() + dy);
+			setMapLocation(l.getLatitude(), l.getLongitude());
+			return true;
 		}
 		return super.onKeyUp(keyCode,event);
 	}

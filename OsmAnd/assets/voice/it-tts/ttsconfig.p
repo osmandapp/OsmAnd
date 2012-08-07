@@ -7,10 +7,10 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['girate a sinistra ']).
+turn('left', ['girare a sinistra ']).
 turn('left_sh', ['subito a sinistra ']).
-turn('left_sl', ['girate leggermente a sinistra ']).
-turn('right', ['girate a destra ']).
+turn('left_sl', ['girare leggermente a sinistra ']).
+turn('right', ['girare a destra ']).
 turn('right_sh', ['subito a destra ']).
 turn('right_sl', ['girate leggermente a destra ']).
 turn('right_keep', ['tenersi sulla destra']).
@@ -34,15 +34,15 @@ go_ahead(Dist) == ['Sempre dritto per ',  D]:- distance(Dist) == D.
 
 and_arrive_destination == ['e arrivate a destinazione'].
 
-then == ['Dopo '].
+then == [', poi '].
 reached_destination == ['arrivato a destinazione'].
 bear_right == ['tenersi sulla destra'].
 bear_left == ['tenersi sulla sinistra'].
 
-route_new_calc(_Dist) == ['Il viaggio è ', D] :- distance(Dist) == D.
-route_recalc(Dist) == ['Ricalcolo percorso , il viaggio è ', D] :- distance(Dist) == D.
+route_new_calc(_Dist) == ['Il viaggio è lungo ', D] :- distance(Dist) == D.
+route_recalc(Dist) == ['Ricalcolo percorso , lunghezza ', D] :- distance(Dist) == D.
 
-location_lost == ['g p s signal lost '].
+location_lost == ['Segnale G P S perso '].
 
 
 %% 
@@ -62,12 +62,12 @@ nth(13, 'tredicesima uscita').
 nth(14, 'quattordicesima uscita').
 nth(15, 'quindicesima uscita').
 nth(16, 'sedicesima uscita').
-nth(17, 'deciassettesima uscita').
+nth(17, 'diciassettesima uscita').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' metri'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' metri'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' metri '] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
+distance(Dist) == [ X, ' metri '] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
 distance(Dist) == ['circa un chilometro '] :- Dist < 1500.
 distance(Dist) == ['circa ', X, ' chilometri '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
 distance(Dist) == [ X, ' chilometri '] :- D is round(Dist/1000), num_atom(D, X).

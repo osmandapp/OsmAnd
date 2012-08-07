@@ -9,6 +9,21 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="avoid_in_routing_title">Avoid..</string>
+    <string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
+    <string name="show_warnings_title">Show alarms</string>
+    <string name="show_warnings_descr">Show speed limits, speed cameras and traffic bumps</string>
+    <string name="map_widget_fluorescent">Fluorescent colors</string>
+    <string name="map_widget_show_ruler">Ruler</string>
+    <string name="map_widget_appearance">Appearance</string>
+    <string name="map_widget_view_direction">View direction</string>
+    <string name="map_widget_transparent">Transparent views</string>
+    <string name="monitoring_mode_off">GPX rec</string>
+    <string name="monitoring_mode_on">GPX off</string>
+    <string name="bg_service_sleep_mode_off">Run in background</string>
+    <string name="bg_service_sleep_mode_on">Stop background</string>
+    <string name="gps_wakeup_interval">GPS wakeup interval : %s</string>
+    <string name="int_continuosly">Continuously</string>
     <string name="screen_is_locked">To unlock screen press lock icon</string>
     <string name="map_widget_top_text">Street name</string>
     <string name="map_widget_config">Configuration</string>
@@ -32,8 +47,6 @@
     <string name="map_widget_mini_route">Mini route map</string>
     <string name="bg_service_screen_lock">Lock screen</string>
     <string name="bg_service_screen_unlock">Unlock screen</string>
-    <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-    <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
     <string name="bg_service_screen_lock_toast">The screen is locked</string>
     <string name="bg_service_interval">Set wake-up interval:</string>
     <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>

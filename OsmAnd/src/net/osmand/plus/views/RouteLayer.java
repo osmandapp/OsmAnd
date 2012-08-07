@@ -29,8 +29,6 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private Path path;
 
-	private Boolean fluorescent;
-	
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
 	}
@@ -40,12 +38,7 @@ public class RouteLayer extends OsmandMapLayer {
 		boundsRect = new Rect(0, 0, view.getWidth(), view.getHeight());
 		latlonRect = new RectF();
 		paint = new Paint();
-		fluorescent = view.getSettings().FLUORESCENT_OVERLAYS.get();
-		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
-			paint.setColor(view.getResources().getColor(R.color.nav_track_fluorescent));
-		} else {
-			paint.setColor(view.getResources().getColor(R.color.nav_track));
-		}
+		
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(14);
 		paint.setAntiAlias(true);
@@ -66,8 +59,10 @@ public class RouteLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			if(view.getSettings().FLUORESCENT_OVERLAYS.get() != fluorescent) {
-				initUI(); //to change color immediately when needed
+			if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+				paint.setColor(view.getResources().getColor(R.color.nav_track_fluorescent));
+			} else {
+				paint.setColor(view.getResources().getColor(R.color.nav_track));
 			}
 			int w = view.getWidth();
 			int h = view.getHeight();

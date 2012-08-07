@@ -95,7 +95,7 @@
 		
 		<group>
 			<filter tag="railway" value="platform"/>
-			<filter tag="railway" value="station" />
+			<filter tag="railway" value="station"/>
 			<filter tag="public_transport" value="station"/>
 			<filter tag="public_transport" value="platform"/>
 			<groupFilter>
@@ -145,7 +145,7 @@
 				<filter tag="highway" value="unclassified" order="52"/>
 				<filter layer="1" tag="highway" value="residential" order="66" area="false"/>
 				<filter tag="highway" value="residential" order="51" area="false"/> 
-				 <filter layer="1" tag="highway" value="service" order="66" />
+				 <filter layer="1" tag="highway" value="service" order="66"/>
 				<filter tag="highway" value="service" order="51"/>
 				 <filter layer="1" tag="highway" value="living_street" order="66"/>
 				<filter tag="highway" value="living_street" order="50"/>
@@ -196,7 +196,6 @@
 			<filter layer="1" tag="highway" value="track" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="track" order="60"/>
 			<filter tag="highway" value="track" order="37"/>
-			<!-- Additional attributes can be used in this way: additional="tracktype=grade1" -->
 
 			<filter layer="1" tag="highway" value="path" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="path" order="60"/>
@@ -952,6 +951,7 @@
 			<filter minzoom="15" color="#cfeca8" tag="landuse" value="retail"/>
 			<!-- Tourism -->
 			<filter minzoom="15" color="#f2caea" tag="tourism" value="attraction"/>
+			<filter minzoom="15" color="#f2caea" tag="amenity" value="place_of_worship"/>
 			<filter minzoom="15" color="#f2caea" color_2="#734a08" strokeWidth_2="1" pathEffect_2="9_3" tag="tourism" value="theme_park"/>
 			<filter minzoom="15" color="#a0ccff99" tag="tourism" value="camp_site"/>
 			<filter minzoom="15" color="#a0ccff99" tag="tourism" value="caravan_site"/>
@@ -1088,7 +1088,7 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="7"/>
 					<filter minzoom="18" strokeWidth="9"/>
 					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
-					<groupFilter nightMode="true" color_0="#ffffff" />
+					<groupFilter nightMode="true" color_0="#ffffff"/>
 					<!-- Bridges --> 
 					<groupFilter layer="1">
 						<filter minzoom="16" maxzoom="16" strokeWidth_0="7" />
@@ -1111,8 +1111,8 @@
 					<filter minzoom="17" maxzoom="17" strokeWidth="4" />
 					<filter minzoom="18" strokeWidth="5" />
 				</filter>
-				<groupFilter nightMode="true" color="#9F9F9F" color_0="#ffffff" />
-				<groupFilter layer="-1" pathEffect="4_4" cap="BUTT" />
+				<groupFilter nightMode="true" color="#9F9F9F" color_0="#ffffff"/>
+				<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 				<!-- Bridges --> 
 				<groupFilter layer="1" minzoom="14">
 					<filter minzoom="16" maxzoom="16" strokeWidth_0="4" />
@@ -1151,70 +1151,82 @@
 			</groupFilter>
 		</group>
 
+		<!-- Next segment: Highways without grade distinction (cycleway, bridleway, black path): pathEffect 4_2. Base setting for highways with possible grade distinction but none specified (track, byway, red footway): 5_5 -->
 		<group>
 			<filter tag="highway" value="track" color="#996600" pathEffect="5_5">
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" />
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" />
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
+					<!-- Path coverage for grades: 100%, 77%, 71%, 54%, 50%(short dash). None specified: 50%(long dash) -->
 					<filter additional="tracktype=grade1" pathEffect=""/>
-					<filter additional="tracktype=grade2" pathEffect="10_3" />
+					<filter additional="tracktype=grade2" pathEffect="10_3"/>
 					<filter additional="tracktype=grade3" pathEffect="5_2"/>
 					<filter additional="tracktype=grade4" pathEffect="5_3_2_3"/>
-					<filter additional="tracktype=grade5" pathEffect="3_3" />
+					<filter additional="tracktype=grade5" pathEffect="3_3"/>
 				</groupFilter>
 			</filter>
 
 			<!-- byway is deprecated tag, describes UK-only road. Proper tag should be highway=track or highway=path -->
-			<filter tag="highway" value="byway" color="#996600" pathEffect="6_3" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3" />
-				<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
+			<filter tag="highway" value="byway" color="#996600" pathEffect="5_5">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="14" strokeWidth="1" />
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="path" color="#000000" pathEffect="6_3" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3" />
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3" />
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="14" strokeWidth="1" />
-				<groupFilter nightMode="true" color="#787878"/> 
+			<filter tag="highway" value="path" color="#000000" pathEffect="4_2">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="14" strokeWidth="1"/>
+				<groupFilter>
+					<!-- Path coverage for sac_scale in analogy with 'track-grade': 100%, 77%, 71%, 54%, 50%(short dash), 40%. None specified: 50%(long dash) -->
+					<!-- Also: switch color to 'pedestrian-red' to better indicate these special ratings in line with many alpine maps -->
+					<filter additional="sac_scale=hiking" color="#fa5073" pathEffect=""/>
+					<filter additional="sac_scale=mountain_hiking" color="#fa5073" pathEffect="10_3"/>
+					<filter additional="sac_scale=demanding_mountain_hiking" color="#fa5073" pathEffect="5_2"/>
+					<filter additional="sac_scale=alpine_hiking" color="#fa5073" pathEffect="5_3_2_3"/>
+					<filter additional="sac_scale=demanding_alpine_hiking" color="#fa5073" pathEffect="3_3"/>
+					<filter additional="sac_scale=difficult_alpine_hiking" color="#fa5073" pathEffect="2_3"/>
+					<filter nightMode="true" color="#787878"/> 
+				</groupFilter>
 			</filter>
 
-			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="2_2" >
-				<filter appMode="bicycle" minzoom="14" strokeWidth="2" pathEffect="10_3" />
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="14" strokeWidth="1" />
+			<filter tag="highway" value="cycleway" color="#0000ff" pathEffect="4_2">
+				<filter appMode="bicycle" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="footway" color="#fa5073" pathEffect="2_2" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3"/>
+			<filter tag="highway" value="footway" color="#fa5073" pathEffect="5_5">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="16" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="steps" color="#fa5073" pathEffect="1_2" >
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="4" pathEffect="2_2" />
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="4" pathEffect="2_2" />
-				<filter hmRendered="true" minzoom="14" strokeWidth="4" />
-				<filter minzoom="16" strokeWidth="4" />
+			<filter tag="highway" value="steps" color="#fa5073" pathEffect="1_2">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="4" pathEffect="2_2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="4" pathEffect="2_2"/>
+				<filter hmRendered="true" minzoom="14" strokeWidth="4"/>
+				<filter minzoom="16" strokeWidth="4"/>
 			</filter>
 
-			<filter tag="highway" value="bridleway" color="#339900" pathEffect="2_2">
-				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2" pathEffect="10_3"/>
-				<filter appMode="pedestrian" minzoom="15" strokeWidth="2" pathEffect="10_3" />
-				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5" />
-				<filter hmRendered="true" minzoom="13" strokeWidth="1" />
-				<filter minzoom="16" strokeWidth="1" />
+			<filter tag="highway" value="bridleway" color="#339900" pathEffect="4_2">
+				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
+				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
+				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
+				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
+				<filter minzoom="16" strokeWidth="1"/>
 			</filter>
 
 			<!-- Bridges -->
@@ -1230,10 +1242,10 @@
 		</group>
 
 		<filter tag="cycleway" value="lane">
-			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4"/>
 		</filter>
 		<filter tag="cycleway" value="opposite_lane">
-			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4" />
+			<filter appMode="bicycle" minzoom="14" color="#0000ff" strokeWidth="2" pathEffect="8_4"/>
 		</filter>
 
 		<filter tag="highway" value="services" minzoom="14" color="#000000" strokeWidth="2"/>
@@ -1375,7 +1387,7 @@
 			<filter tag="railway" value="platform"/>
 			<filter tag="public_transport" value="platform"/>
 			<groupFilter  color="#888888" strokeWidth="4" strokeWidth_2="2" color_2="#bababa" minzoom="16">
-				<filter minzoom="18" strokeWidth="6" strokeWidth_2="4" />
+				<filter minzoom="18" strokeWidth="6" strokeWidth_2="4"/>
 			</groupFilter>
 		</group>
 

@@ -492,7 +492,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
-		new BooleanAccessibilityPreference("zoom_by_trackball", true).makeGlobal();
+		new BooleanAccessibilityPreference("zoom_by_trackball", false).makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SCROLL_MAP_BY_GESTURES =
@@ -1240,18 +1240,11 @@ public class OsmandSettings {
 	public static final String SERVICE_OFF_ENABLED = "service_off_enabled"; //$NON-NLS-1$
 	
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<String> SERVICE_OFF_PROVIDER = new StringPreference("service_off_provider", LocationManager.GPS_PROVIDER).makeGlobal();
-	
-	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> SERVICE_OFF_INTERVAL = new IntPreference("service_off_interval", 
 			5 * 60 * 1000).makeGlobal();
 	
 	public final CommonPreference<Boolean> SHOW_CURRENT_GPX_TRACK = 
 			new BooleanPreference("show_current_gpx_track", false).makeGlobal().cache();
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> SERVICE_OFF_WAIT_INTERVAL = new IntPreference("service_off_wait_interval", 
-			90 * 1000).makeGlobal();
 	
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 	

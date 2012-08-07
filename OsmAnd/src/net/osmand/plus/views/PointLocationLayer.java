@@ -101,7 +101,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 						locationPaint);
 			}
 
-			if (heading != null) {
+			if (heading != null && view.getSettings().SHOW_VIEW_ANGLE.get()) {
 				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE, true, headingPaint);
 			}
 

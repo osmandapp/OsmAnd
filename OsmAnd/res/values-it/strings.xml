@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="use_fluorescent_overlays">Overlay fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Overlay fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Editing offline</string>
   <string name="offline_edition_descr">Usa sempre l\'editing offline</string>
@@ -31,7 +30,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Definito dall\'utente</string>
   <string name="fav_export_confirmation">"Esistono file con preferiti già esportati. Vuoi sostituirli? "</string>
-  <!-- this block re-worked for new menu structure -->
   <string name="profile_settings">Impostazioni particolari per il profilo</string>
   <string name="settings_preset">Profilo d\'uso</string>
   <string name="settings_preset_descr">Seleziona un profilo d\'uso con impostazioni per mappa e navigazione personalizzata.</string>
@@ -59,7 +57,6 @@
   <string name="tip_day_night_mode_t">\tL\'aspetto della mappa può essere cambiato per alcune mappe vettoriali tra giorno (più luminoso) e notte (più scuro). \n\tI colori scuri sono più sicuri per la guida notturna. \n\tPuoi impostare una regola per il cambio giorno/notte in \'Impostazioni\' -&gt; \'Aspetto delle mappe\' -&gt; \'Modo giorno/notte\'. \n\tLe scelte sono: \n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (default) \n\t\'Giorno\' - usa sempre la modalità giorno \n\t\'Notte\' - usa sempre la modalità notte \n\t\'Sensore luminosità\' - l\'aspetto della mappa è controllato dal sensore del tuo device (solo se è presente)</string>
   <string name="tip_osm_improve">Migliorare i dati OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di bug con solo un paio di click! \n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'Editing OSM\'. \n\tPer aggiungere un nuovo PDI usa l\'opzione \'Crea un PDI\' nel menù contestuale. Procedi inserendo le informazioni relative al nuovo PDI nella finestra \'Crea PDI\' e infine invialo. \n\tGli errori sulle mappe possono essere immediatamente segnalati tramite un bug OSM, e la comunità OSM può correggere velocemente il problema. \n\tPer aggiungere un bug OSM usa l\'opzione \'Apri un bug OSM\' nel menù contestuale. Inserisci una descrizione dettagliata del problema e infine inviala con il bottone \'Aggiungi\'. \n\tNota che è necessaria la connessione ad Internet per contribuire PDI e bug.</string>
-  <!-- end of string changes for new menu structure -->
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
@@ -253,7 +250,7 @@
   <string name="context_menu_item_add_waypoint">Aggiungi waypoint GPX</string>
   <string name="amenity_type_administrative">Amministrativo</string>
   <string name="amenity_type_barrier">Barriera</string>
-  <string name="amenity_type_education">Educazione</string>
+  <string name="amenity_type_education">Istruzione</string>
   <string name="amenity_type_emergency">Emergenza</string>
   <string name="amenity_type_entertainment">Intrattenimento</string>
   <string name="amenity_type_finance">Finanza</string>
@@ -882,7 +879,7 @@
   <string name="show_cameras">Mostra autovelox</string>
   <string name="show_speed_limits">Mostra limiti di velocità</string>
   <string name="avoid_toll_roads">Evita strade a pedaggio</string>
-  <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2 : \n\t* Migliorato il routing"</string>
+  <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2 : \n\t* Migliorato il routing\n\t* Widget dinamici per le mappe"</string>
   <string name="map_widget_top_text">Nome della strada</string>
   <string name="map_widget_config">Configurazione</string>
   <string name="map_widget_map_select">Selezione della mappa</string>
@@ -903,11 +900,11 @@
   <string name="map_widget_next_turn_small">Prossima svolta (piccola)</string>
   <string name="map_widget_next_next_turn">Svolta successiva a questa</string>
   <string name="map_widget_mini_route">Minimappa del percorso</string>
-  <string name="bg_service_screen_lock">Blocca/sblocca schermo</string>
+  <string name="bg_service_screen_lock">Blocca schermo</string>
   <string name="bg_service_screen_lock_toast">Lo schermo è bloccato</string>
   <string name="bg_service_interval">Imposta l\'intervallo di risveglio:</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="screen_is_locked">Per sbloccare lo schermo premi l\'icona del lucchetto</string>
+  <string name="bg_service_screen_unlock">Sblocca schermo</string>
+  <string name="bg_service_sleep_mode_off">Disabilita modalità sleep</string>
+  <string name="bg_service_sleep_mode_on">Abilita modalità sleep</string>
 </resources>

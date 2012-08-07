@@ -267,7 +267,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 //		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
 		OsmandPlugin.onSettingsActivityCreate(this, screen);
 		
-		registerBooleanPreference(osmandSettings.SHOW_VIEW_ANGLE, screen);
 		registerBooleanPreference(osmandSettings.USE_ENGLISH_NAMES, screen);
 		registerBooleanPreference(osmandSettings.AUTO_ZOOM_MAP, screen);
 		registerBooleanPreference(osmandSettings.FAST_ROUTE_MODE, screen);

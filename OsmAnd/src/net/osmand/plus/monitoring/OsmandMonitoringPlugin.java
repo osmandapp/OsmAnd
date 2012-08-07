@@ -2,6 +2,8 @@ package net.osmand.plus.monitoring;
 
 import java.util.EnumSet;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
 import net.osmand.plus.ContextMenuAdapter;
@@ -15,6 +17,10 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.background.OsmandBackgroundServicePlugin;
+import net.osmand.plus.views.LockInfoControl;
+import net.osmand.plus.views.LockInfoControl.LockInfoControlActions;
+import net.osmand.plus.views.LockInfoControl.ValueHolder;
 import net.osmand.plus.views.MapInfoControl;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -24,6 +30,7 @@ import org.apache.commons.logging.Log;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
@@ -32,7 +39,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
-public class OsmandMonitoringPlugin extends OsmandPlugin {
+public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoControlActions {
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
@@ -79,6 +86,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if(monitoringControl == null) {
 			registerLayers(activity);
+		}
+		LockInfoControl lock = activity.getMapLayers().getMapInfoLayer().getLockInfoControl();
+		if(lock != null && !lock.getLockActions().contains(this)) {
+			lock.getLockActions().add(this);
 		}
 	}
 
@@ -238,6 +249,37 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			}
 		});
 		return monitoringControl;
+	}
+
+	@Override
+	public void addLockActions(final QuickAction qa, final LockInfoControl li, final OsmandMapTileView view) {
+		final ActionItem bgServiceAction = new ActionItem();
+		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
+		bgServiceAction.setTitle(view.getResources().getString(off? R.string.monitoring_mode_off : R.string.monitoring_mode_on));
+		bgServiceAction.setIcon(view.getResources().getDrawable(!off?R.drawable.monitoring_rec_big:R.drawable.monitoring_rec_inactive));
+		bgServiceAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (off) {
+					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
+					vs.value = view.getSettings().SAVE_TRACK_INTERVAL.get();
+					li.showIntervalChooseDialog(view, view.getContext().getString(R.string.save_track_interval) + " : %s", 
+							view.getContext().getString(R.string.save_track_to_gpx), OsmandBackgroundServicePlugin.SECONDS, OsmandBackgroundServicePlugin.MINUTES,
+							vs, new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							view.getSettings().SAVE_TRACK_INTERVAL.set(vs.value);
+							view.getSettings().SAVE_TRACK_TO_GPX.set(true);
+						}
+					});
+				} else {
+					view.getSettings().SAVE_TRACK_TO_GPX.set(false);
+				}
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(bgServiceAction);
+		
 	}
 
 }
