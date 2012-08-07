@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="switch_to_raster_map_to_see">" Vektorové mapy toto místo neobsahují. \n\t\n\tMapová data můžete stáhnout v \'Nastavení\' -&gt; \'Offline data\', nebo přepnout na online mapy v \'Nastavení\' -&gt; \'Mapa\'. "</string>
+<resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 : \n\t- Native rendering pro všechna zařízení \n\t- Offline editace POI \n\t- Usnadnění \n\t- Oprava mnoha chyb "</string>
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
   <string name="gpx_visibility_txt">Viditelnost</string>
@@ -134,8 +134,13 @@
   <string name="osmand_service">Služba na pozadí</string>
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
   <string name="tip_rotation_switching">Natočení mapy</string>
-  <string name="tip_rotation_switching_t">" Můžete si zvolit, jak se mapa bude otáčet, pomocí menu \Nastavení\' -&gt; \'Mapa\' -&gt; \Natočení mapy\'. \n Možnosti jsou: \n\t \'Neotáčet\' - Mapa se nebude otáčet. Sever bude stále nahoře. \n\t \'Ve směru pohybu\' - Mapa se bude natáčet podle toho, kterým směrem se pohybujete. \n\t \'Podle kompasu\' - Mapa se bude natáčet podle kompasu. \n Pro rychlé přepnutí na otáčení podle kompasu a zpět klepněte na střelku kompasu na mapové obrazovce. "</string>
-  <string name="binary_map_download_success">Stahování dokončeno. Na vektorové mapy můžete přepnout v menu (Vrstvy -&gt; Mapa-&gt; Vektorové mapy)</string>
+  <string name="tip_rotation_switching_t">\tMůžete si zvolit, jak se mapa bude otáčet, pomocí menu \Nastavení\' -&gt; \'Mapa\' -&gt; \Natočení mapy\'.
+\n\tMožnosti jsou:
+\n\t\'Neotáčet\' - Mapa se nebude otáčet. Sever bude stále nahoře.
+\n\t \'Ve směru pohybu\' - Mapa se bude natáčet podle toho, kterým směrem se pohybujete.
+\n\t \'Podle kompasu\' - Mapa se bude natáčet podle kompasu.
+\n Pro rychlé přepnutí na otáčení podle kompasu a zpět klepněte na střelku kompasu na mapové obrazovce.</string>
+  <string name="binary_map_download_success">Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Vrstvy -&gt; Mapa-&gt; Vektorové mapy)</string>
   <string name="tip_day_night_mode">Denní/noční režim</string>
   <string name="tip_day_night_mode_t">" \t OsmAnd dokáže ručně nebo automaticky přepínat mezi denním a nočním barevným režimem. \n\t Pokud řídíte v noci, tmavší zobrazovací režim je vhodnější, neboť méně oslňuje. Naopak, světlé zobrazení v denním režimu je za denního světla lépe čitelné. \n\t Zobrazovací režim lze nastavit v \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Mapa\'-&gt;\'Denní/noční režim\'. \n Volby jsou následující: \n\t \'Východ/západ slunce\' - automatický režim, řízený polohou slunce \n\t \'Den\' - stále používat denní režim \n\t \'Noc\' - stále používat noční režim \n\t \'Senzor osvětlení\' - zobrazení mapy se řídí senzorem osvětlení (pouze pokud je dostupný) "</string>
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
