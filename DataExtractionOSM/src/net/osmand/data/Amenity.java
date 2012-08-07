@@ -47,6 +47,9 @@ public class Amenity extends MapObject {
 					this.site = entity.getTag(OSMTagKey.CONTACT_WEBSITE);
 				}
 			}
+			if (this.site.indexOf("://") == -1){
+				this.site = "http://"+this.site;
+			}
 		}
 		this.description = entity.getTag(OSMTagKey.DESCRIPTION);
 	}
