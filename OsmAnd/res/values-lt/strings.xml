@@ -396,9 +396,9 @@
   <string name="vector_map_not_needed">Ačiū, ne.</string>
   <string name="basemap_missing">Trūksta bazinio viso pasaulio (mažo mąstelio, dengiančio visą pasaulį) žemėlapio. Kad programa galėtų skalndžiai veikti parsisiųskite World_basemap_x.obf.</string>
   <string name="vector_data_missing">SD kortelėje nėra parsiųstų žemėlapių. Pirmiausia parsisiųskite žemėlapius, kad vėliau galėtumėte jais naudotis be interneto.</string>
-  <string name="local_index_gpx_info_show">"\n\nPaspauskite ir laikykite nustatymams atidaryti"</string>
-  <string name="local_index_gpx_info_speed">"\nVidutinis greitis : %1$s \nDidžiausias greitis : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nVidutinis aukštis : %1$.0f m\nMažiausias aukštis : %2$.0f m\nDidžiausias aukštis : %3$.0f m\nKopimas : %4$.0f m\nNusileidimas : %5$.0f m"</string>
+  <string name="local_index_gpx_info_show">\n\nPaspauskite ir laikykite nustatymams atidaryti</string>
+  <string name="local_index_gpx_info_speed">\nVidutinis greitis : %1$s \nDidžiausias greitis : %2$s</string>
+  <string name="local_index_gpx_info_elevation">\nVidutinis aukštis : %1$.0f m\nMažiausias aukštis : %2$.0f m\nDidžiausias aukštis : %3$.0f m\nKopimas : %4$.0f m\nNusileidimas : %5$.0f m</string>
   <string name="local_index_gpx_info">Sudėtinai maršrutai : %1$d\nIš viso taškų : %2$d\nMaršruto taškų : %3$d\nBendras atstumas : %4$s\nPradžios laikas : %5$tF, %5$tR\nPabaigos laikas : %6$tF, %6$tR</string>
   <string name="local_index_installed">Leidimas</string>
   <string name="local_index_items_backuped">Sėkmingai deaktyvuota(-as) %1$d iš %2$d elementų(-o).</string>
@@ -410,7 +410,7 @@
   <string name="local_index_mi_restore">Aktyvuoti</string>
   <string name="local_index_mi_backup">Deaktyvuoti</string>
   <string name="local_index_mi_delete">Ištrinti</string>
-  <string name="local_index_mi_reload">Atnaujinti</string>
+  <string name="local_index_mi_reload">Atnaujinti iš SD kortelės</string>
   <string name="local_index_download">Parsiųsti...</string>
   <string name="local_index_tile_data">Duomenų: %1$s \nMažiausias dydis : %2$d\nDidžiausias dydis : %3$d\nParsiunčiama : %4$s \nParsiųsti dydžiai : %5$s</string>
   <string name="local_index_poi_data">LV duomenys</string>
@@ -427,10 +427,17 @@
   <string name="search_offline_clear_search">Nauja paieška</string>
   <string name="map_text_size_descr">Pasirinkti žemėlapyje rodomų pavadinimų dydį</string>
   <string name="map_text_size">Teksto dydis</string>
-  <string name="trace_rendering">"Techninė atvaizdavimo informacija "</string>
+  <string name="trace_rendering">Techninė atvaizdavimo informacija</string>
   <string name="trace_rendering_descr">Rodyti atvaizdavimo našumą</string>
   <string name="tip_recent_changes">Naujausi pakeitimai</string>
-  <string name="tip_recent_changes_0_6_6_t">"Naujausi pakeitimai 0.6.6 versijoje : \n\t- Teksto skaitymo balsu (TTS) variklis nuorodoms balsu \n\t- Detalesnis žemėlapio atvaizdavimas \n\t- bazinis pasaulio žemėlapis pateikiamas kartu su programa \n\t- Patobulinimai navigacijai be interneto (dar eksperimentinė) \n\t- GPX navigacija su nustatymais \n\t- Vartotojo sąsajos atnaujinimas ir pašalinta daug klaidų "</string>
+  <string name="tip_recent_changes_0_6_6_t">Naujausi pakeitimai 0.6.6 versijoje : 
+\n\t- Teksto skaitymo balsu (TTS) variklis nuorodoms balsu 
+\n\t- Detalesnis žemėlapio atvaizdavimas 
+\n\t- Bazinis pasaulio žemėlapis pateikiamas kartu su programa 
+\n\t- Patobulinimai navigacijai be interneto (dar eksperimentinė) 
+\n\t- GPX navigacija su nustatymais 
+\n\t- Vartotojo sąsajos atnaujinimas ir pašalinta daug klaidų
+</string>
   <string name="voice_not_use">Nenaudoti</string>
   <string name="voice_not_specified">Nėra</string>
   <string name="installing_new_resources">Išpakuojami nauji duomenys...</string>
@@ -438,72 +445,90 @@
   <string name="tts_language_not_supported_title">Ši kalba nepalaikoma</string>
   <string name="tts_language_not_supported">Įdiegtas Android TTS (teksto skaitymo balsu) variklis jūsų pasirinktos kalbos nepalaiko. Ar norite Parduotuvėje ieškoti kito TTS variklio? Priešingu atveju bus naudojama anksčiau nustatyta TTS kalba.</string>
   <string name="tts_missing_language_data_title">Trūksta duomenų</string>
-  <string name="tts_missing_language_data">Pasirinktai kalbai nėra įdiegti reikalingi duomenys. Ar norite eiti į Parduotuvę juos įdiegti?</string>
+  <string name="tts_missing_language_data">Pasirinktai kalbai reikalingi duomenys neįdiegti. Ar norite eiti į Parduotuvę juos įdiegti?</string>
   <string name="gpx_option_reverse_route">GPX maršrutą apsukti priešinga kryptimi</string>
   <string name="gpx_option_destination_point">Naudoti dabartinį kelionės tikslą</string>
-  <string name="gpx_option_from_start_point">Pravažiuoti visą įrašytą maršrutą</string>
+  <string name="gpx_option_from_start_point">Peržiūrėti visą įrašytą maršrutą</string>
   <string name="switch_to_vector_map_to_see">Šiai vietovei yra parsiųstas žemėlapis. \n\t\n\tJo aktyvavimui nueikite į \'Meniu\' -&gt; \'Nustatyti vaizdavimą\' -&gt; \'Žemėlapių šaltiniai…\' -&gt; \'Parsiųsti vektoriniai žemėlapiai\'.</string>
-  <string name="choose_audio_stream">Voice guidance output</string>
-  <string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
-  <string name="voice_stream_voice_call">Voice call audio</string>
-  <string name="voice_stream_notification">Notification audio</string>
-  <string name="voice_stream_music">Media/music audio</string>
-  <string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
-  <string name="overlay_transparency_descr">Modify overlay transparency</string>
-  <string name="overlay_transparency">Overlay transparency</string>
-  <string name="map_transparency_descr">Modify base map transparency</string>
-  <string name="map_transparency">Base map transparency</string>
-  <string name="layer_underlay">Underlay map…</string>
-  <string name="map_underlay">Underlay map</string>
-  <string name="map_underlay_descr">Choose underlay map</string>
-  <string name="layer_overlay">Overlay map…</string>
-  <string name="default_none">None</string>
-  <string name="map_overlay">Overlay map</string>
-  <string name="map_overlay_descr">Choose overlay map</string>
-  <string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
-  <string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
-  <string name="internet_not_available">Internet connection required for operation is not available</string>
-  <string name="install_more">Install more…</string>
-  <string name="tip_update_index">Update of Offline Data</string>
-  <string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
-  <string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
-  <string name="level_to_switch_vector_raster">Min. vector zoom level</string>
-  <string name="tip_location_sharing">Location Sharing</string>
-  <string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
-  <string name="tip_favorites">Favorite Points</string>
-  <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
+  <string name="choose_audio_stream">Balso nurodymų išvestis</string>
+  <string name="choose_audio_stream_descr">Pasirinkite kanalą kuriuo skambės balso nurodymai (priklauso nuo sistemos)</string>
+  <string name="voice_stream_voice_call">Balso skambučio audio</string>
+  <string name="voice_stream_notification">Perspėjimų audio</string>
+  <string name="voice_stream_music">Multimedijos/muzikos audio</string>
+  <string name="warning_tile_layer_not_downloadable">Programai neišeina parsiųsti žemėlapio sluoksnio %1$s, todėl įdiekite programą iš naujo.</string>
+  <string name="overlay_transparency_descr">Pakeisti viršutinio sluoksnio skaidrumą</string>
+  <string name="overlay_transparency">Viršutinio sluoksnio skaidrumas</string>
+  <string name="map_transparency_descr">Pakeisti bazinio žemėlapio skaidrumą</string>
+  <string name="map_transparency">Bazinio žemėlapio skaidrumas</string>
+  <string name="layer_underlay">Apatinis žemėlapio sluoksnis...</string>
+  <string name="map_underlay">Apatinis žemėlapio sluoksnis</string>
+  <string name="map_underlay_descr">Pasirinkti apatinį žemėlapio sluoksnį</string>
+  <string name="layer_overlay">Viršutinis žemėlapio sluoksnis...</string>
+  <string name="default_none">Nėra</string>
+  <string name="map_overlay">Viršutinis žemėlapio sluoksnis</string>
+  <string name="map_overlay_descr">Pasirinkti viršutinį žemėlapio sluoksnį</string>
+  <string name="tile_source_already_installed">Žemėlapis jau įdiegtas, nustatymai bus atnaujinti</string>
+  <string name="select_tile_source_to_install">Pasirinkite žemėlapius įdiegimui ar atnaujinimui</string>
+  <string name="internet_not_available">Nėra šiam veiksmui reikalingo interneto ryšio</string>
+  <string name="install_more">Įdiegti daugiau...</string>
+  <string name="tip_update_index">Parsiųstų duomenų atnaujinimas</string>
+  <string name="tip_update_index_t">\tTurėti naujausius žemėlapius yra labai svarbu. OsmAnd turi parsiųstų duomenų valdymo funkcijas, kurios patikrina ar yra atnaujintų žemėlapių. 
+\n\tNorėdami patikrinti ar yra atnaujinimų eikite į \'Nustatymai\' -&gt; \'Parsiųsti duomenys\' -&gt; \'Parsisiųsti duomenų\'. Po to kai bus parsiųstas regionų sąrašas, jūs galėsite pasirinkti \'Meniu\' -&gt; \'Rodyti parsiųstus\' kad būtų rodomi tik parsiųstų žemėlapių atnaujinimai. 
+\n\tAtnaujinimai yra žymimi spalvomis: 
+\n\t\'Žalia\' - rodo kad jūsų žemėlapiai identiški esantiems serveryje 
+\n\t\'Mėlyna\' - rodo kad serveryje yra atnaujinimų
+</string>
+  <string name="level_to_switch_vector_raster_descr">Mažiausias dydis, kuriuo rodyti vektorinius žemėlapius</string>
+  <string name="level_to_switch_vector_raster">Mažiausias vektorinių žemėl. dydis</string>
+  <string name="tip_location_sharing">Vietos bendrinimas</string>
+  <string name="tip_location_sharing_t">\tJūs galite pasidalinti savo kelionės metu aplankytų įdomių objektų vietomis su savo giminėmis ir draugais. 
+\n\tNorėdami bendrinti jūsų pasirinktą vietą: 
+\n\tNaudokite \'Žemėlapio kontekstinis meniu\' -&gt; \'Bendrinti vietą\' meniu punktu. 
+\n\tPo to pasirinkite kaip nusiųsite savo pasirinktą vietą. Turėsite tokį pasirinkimą: elektroniniu paštu, SMS(tekstu), ar papraščiausiai nukopijuoti koordinates.</string>
+  <string name="tip_favorites">Įsiminti taškai</string>
+  <string name="tip_favorites_t">\tDažnai naudojamos vietos gali būti išsaugotos kaip Įsimintos vietos. 
+\n\tNorėdami išsaugoti Įsimintą vietą atverkite žemėlapio kontekstinį meniu ir pasirinkite \'Pridėti prie įsimintų\' bei įveskite pavadinimą. Išsaugota Įsiminta vieta bus prieinama per \'Pagrindinis meniu\' -&gt; \'Įsimintos vietos\'. 
+\n\tIlgai paspaudus ant įsimintos vietos sąraše \'Įsimintos vietos\' leis tą vietą nustatyti kelionės tikslu, ją redaguoti ar ištrinti. 
+\n\tNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Žemėlapio kontekstinis meniu\' -&gt;\'Nustatyti vaizdą\'.</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
-  <string name="error_doing_search">Error occurred in offline search</string>
-  <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
-  <string name="search_osm_offline">Search address using offline maps</string>
-  <string name="system_locale">System</string>
-  <string name="preferred_locale_descr">Select display language</string>
-  <string name="preferred_locale">Display language</string>
-  <string name="tip_map_switch">Map Source</string>
-  <string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -&gt; \'Define view\' in map view. \n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC. \n\tOsmAnd also supports custom sources.</string>
-  <string name="tip_app_mode">User Profile</string>
-  <string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
-  <string name="tip_navigation">Navigation</string>
-  <string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
-  <string name="tip_search">Searching</string>
-  <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite. \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
-  <string name="tip_map_context_menu">Map Context Menu</string>
-  <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
-  <string name="tip_initial">Tips and Tricks</string>
-  <string name="tip_initial_t">\tOsmAnd is a navigation application with many features. \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
-  <string name="next_button">Next</string>
-  <string name="previous_button">Previous</string>
-  <string name="unit_of_length_descr">Change units of length and speed</string>
-  <string name="unit_of_length">Unit of measure</string>
-  <string name="si_mi_foots">Miles/feet</string>
-  <string name="si_mi_yard">Miles/yards</string>
-  <string name="si_km_m">Kilometers/meters</string>
-  <string name="yard">yd</string>
-  <string name="foot">ft</string>
-  <string name="mile_per_hour">mph</string>
-  <string name="mile">mi</string>
-  <string name="send_location_way_choose_title">Share location using</string>
-  <string name="send_location_sms_pattern">Location: %1$s\n%2$s</string>
+  <string name="error_doing_search">Įvyko klaida vykdant paiešką be interneto</string>
+  <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'</string>
+  <string name="search_osm_offline">Ieškoti adreso parsiųstuose žemėlapiuose</string>
+  <string name="system_locale">Sistemos</string>
+  <string name="preferred_locale_descr">Pasirinkite programos kalbą</string>
+  <string name="preferred_locale">Progamos kalba</string>
+  <string name="tip_map_switch">Žemėlapių šaltinis</string>
+  <string name="tip_map_switch_t">\tGreičiausiai pakeisti žemėlapių šaltinius ir sluoksnius galima paspaudus \'Meniu\' -&gt; \'Nustatyti vaizdą\' žemėlapio rodinyje. 
+\n\tEilutėje \'Žemėlapio šaltinis…\' galite pasirinkti į įrenginį parsiųstus vektorinius žemėlapiusyou, iš anksto nustatytus (interneto) žemėlapius, ar savarankiškai pagamintus žemėlapius (pvz. naudojant OsmAndMapCreator kompiuteryje). 
+\n\tOsmAnd taip pat palaiko ir kitokius žemėlapių šaltinius.</string>
+  <string name="tip_app_mode">Vartotojo profilis</string>
+  <string name="tip_app_mode_t">\tOsmAnd palaiko įvairius (konfigūruojamus) profilius skirtingiems programos panaudojimo būdams. 
+\n\tProfilį pasikeisti galima \'Meniu\' -&gt; \'Nustatymai\' -&gt; \'Vartotojo profilis\' arba kuriant maršrutą.</string>
+  <string name="tip_navigation">Navigacija</string>
+  <string name="tip_navigation_t">\tPrieš pradedant navigaciją būtina pasirinkti kelionės tikslą. Vėliau žemėlapio rodinyje paspaudus \'Meniu\' -&gt; \'Maršrutas\' bus galima pasirinkti navigacijos tipą.</string>
+  <string name="tip_search">Ieškoma</string>
+  <string name="tip_search_t">\tPaiešką galima vykdyti tiesiog žemėlapyje, pagal adresą, koordinates, LV arba pasirenkant Įsimintą vietą. 
+\n\tPagrindiniame meniu paspaudus \'Paieška\' atsivers paieškos langas. Visoms rastoms vietoms kontekstinis meniu pasiūlys dvi galimybes: \'Nustatyti kelionės tikslu\' arba \'Rodyti ant žemėlapio\'.</string>
+  <string name="tip_map_context_menu">Žemėlapio kontekstinis meniu</string>
+  <string name="tip_map_context_menu_t">\tŽemėlapio kontekstinis meniu yra pasiekiamas ant žemėlapio paspaudus ir laikant arba paspaudus valdymo rutulį. 
+\n\tTai pant žemėlapio uždės dėžutę su koordinatėmis. Norėdami atverti žemėlapio kontekstinį meniu tai dėžutei - paspauskite ant jos. (Arba paspauskite ir laikykite ją paspaudę norėdami, kad ji pradingtų.) 
+\n\tŽemėlapio kontekstiniame meniu rasite visus veiksmuis reikalingus darbui su taško vieta (koordinatėmis).</string>
+  <string name="tip_initial">Patarimai ir triukai</string>
+  <string name="tip_initial_t">\tOsmAnd yra daug funkcijų turinti navigacijos programa. 
+\n\tPradiniam supažindinimui keletas pagrindinių patarimų būna rodomi pagrindinio meniu rodinyje.</string>
+  <string name="next_button">Kitas</string>
+  <string name="previous_button">Ankstesnis</string>
+  <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
+  <string name="unit_of_length">Matavimo vienetas</string>
+  <string name="si_mi_foots">Mylios/pėdos</string>
+  <string name="si_mi_yard">Mylios/jardai</string>
+  <string name="si_km_m">Kilometrai/metrai</string>
+  <string name="yard">jd</string>
+  <string name="foot">pėd</string>
+  <string name="mile_per_hour">my/h</string>
+  <string name="mile">my</string>
+  <string name="send_location_way_choose_title">Bendrinti vietą naudojant</string>
+  <string name="send_location_sms_pattern">Vieta: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
   <string name="send_location">Send location</string>
   <string name="context_menu_item_share_location">Share location</string>
