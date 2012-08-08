@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="layer_map_appearance">Map appearance&#8230;</string>
     <string name="show_lanes">Show lanes</string>
     <string name="avoid_unpaved">Avoid unpaved roads</string>
     <string name="avoid_ferries">Avoid ferries</string>

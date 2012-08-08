@@ -199,8 +199,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
-		MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
-		mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
+		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
+		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(dist, R.drawable.info_target, R.string.map_widget_distance, "distance", false, all, none, 5);
