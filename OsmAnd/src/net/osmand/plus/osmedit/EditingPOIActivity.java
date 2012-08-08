@@ -17,6 +17,7 @@ import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
+import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -323,7 +324,7 @@ public class EditingPOIActivity implements DialogProvider {
 	
 
 	private Dialog createOpenHoursDlg(){
-		List<OpeningHoursRule> time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
+		OpeningHours time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
 		if(time == null){
 			AccessibleToast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
 			return null;
@@ -332,7 +333,7 @@ public class EditingPOIActivity implements DialogProvider {
 		List<BasicDayOpeningHourRule> simple = null;
 		if(time != null){
 			simple = new ArrayList<BasicDayOpeningHourRule>();
-			for(OpeningHoursRule r : time){
+			for(OpeningHoursRule r : time.getRules()){
 				if(r instanceof BasicDayOpeningHourRule){
 					simple.add((BasicDayOpeningHourRule) r);
 				} else {
@@ -348,7 +349,8 @@ public class EditingPOIActivity implements DialogProvider {
 		builder.setPositiveButton(ctx.getString(R.string.default_buttons_apply), new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				openingHours.setText(OpeningHoursParser.toStringOpenedHours(v.getTime()));
+				OpeningHours oh = new OpeningHours((ArrayList<OpeningHoursRule>) v.getTime());
+				openingHours.setText(oh.toString());
 				ctx.removeDialog(DIALOG_OPENING_HOURS);
 			}
 		});

@@ -1,48 +1,260 @@
 package net.osmand.osm;
 
 
+
+
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.List;
 
+
+/**
+ * Class used to parse opening hours
+ * 
+ * the method "parseOpenedHours" will parse an OSM opening_hours string and return
+ * an object of the type OpeningHours. That object can be used to check if the OSM feature
+ * is open at a certain time. 
+ */
 public class OpeningHoursParser {
 	private static final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
 	
+	/**
+	 * This class contains the entire OpeningHours schema and 
+	 * offers methods to check directly weather something is open
+	 * 
+	 * @author sander
+	 */
+	public static class OpeningHours {
+		
+		/**
+		 * list of the different rules
+		 */
+		private ArrayList<OpeningHoursRule> rules;
+		
+		/**
+		 * Constructor
+		 * 
+		 * @param rules  List of OpeningHoursRule to be given
+		 */
+		public OpeningHours(ArrayList<OpeningHoursRule> rules) {
+			this.rules = rules;
+		}
+		
+		/**
+		 * Empty constructor
+		 */
+		public OpeningHours(){
+			rules = new ArrayList<OpeningHoursRule>();
+		}
+		
+		/**
+		 * add a rule to the opening hours
+		 * @param r  rule to add
+		 */
+		public void addRule(OpeningHoursRule r){
+			rules.add(r);
+		}
+		
+		/**
+		 * return the list of rules
+		 * 
+		 * @return the rules
+		 */
+		public ArrayList<OpeningHoursRule> getRules(){
+			return rules;
+		}
+		
+		/**
+		 * check if the feature is opened at time "cal"
+		 * @param cal  the time to check
+		 * @return true if feature is open
+		 */
+		public boolean isOpenedForTime(Calendar cal){
+			/*
+			 * first check for rules that contain the current day
+			 * afterwards check for rules that contain the previous
+			 * day with overlapping times (times after midnight)
+			 */
+			boolean isOpenDay = false;
+			for (OpeningHoursRule r : rules){
+				if(r.containsDay(cal)){
+					isOpenDay = r.isOpenedForTime(cal, false);
+				}
+			}
+			boolean isOpenPrevious = false;
+			for (OpeningHoursRule r : rules){
+				if(r.containsPreviousDay(cal)){
+					isOpenPrevious = r.isOpenedForTime(cal, true);
+				}
+			}
+			return isOpenDay || isOpenPrevious;
+		}
+		
+		@Override
+		public String toString(){
+			StringBuilder s = new StringBuilder();
+			
+			for (OpeningHoursRule r : rules) {
+				s.append(r.toString()).append("; ");
+			}
+			
+			return s.toString();
+		}
+		
+	}
+	
+	/**
+	 * Interface to represent a single rule
+	 * 
+	 * A rule consist out of 
+	 *  - a collection of days/dates
+	 *  - a time range
+	 */
 	public static interface OpeningHoursRule {
 		
-		public boolean isOpenedForTime(Calendar cal);
+		/**
+		 * Check if, for this rule, the feature is opened for time "cal"
+		 * @param cal  the time to check
+		 * @param checkPrevious only check for overflowing times (after midnight) or don't check for it
+		 * @return true if the feature is open
+		 */
+		public boolean isOpenedForTime(Calendar cal, boolean checkPrevious);
+		
+		/**
+		 * Check if the previous day before "cal" is part of this rule
+		 * @param cal; the time to check 
+		 * @return true if the previous day is part of the rule
+		 */
+		public boolean containsPreviousDay(Calendar cal);
+
+		/**
+		 * Check if the day of "cal" is part of this rule
+		 * @param cal; the time to check 
+		 * @return true if the day is part of the rule
+		 */
+		public boolean containsDay(Calendar cal);
 		
 		public String toRuleString();
 	}
 	
+	/**
+	 * implementation of the basic OpeningHoursRule
+	 * 
+	 * This implementation only supports day of weeks and numeral times, or the value "off"
+	 *
+	 */
 	public static class BasicDayOpeningHourRule  implements OpeningHoursRule {
+		/**
+		 * represents the list on which days it is open.
+		 * Day number 0 is ???? TODO
+		 */
 		private boolean[] days = new boolean[7];
-		private int startTime = -1;
-		private int endTime = -1;
+		/**
+		 * lists of equal size representing the start and end times
+		 */
+		private int[] startTimes, endTimes;
 		
+		/**
+		 * return an array representing the days of the rule
+		 * @return the days of the rule
+		 */
 		public boolean[] getDays() {
 			return days;
 		}
 		
-		public void setStartEndTime(int startTime, int endTime) {
-			this.startTime = startTime;
-			this.endTime = endTime;
+		@Deprecated
+		/**
+		 * set a single start time, erase all previously added start times
+		 * @param s startTime to set
+		 */
+		public void setStartTime(int s) {
+			startTimes = new int[]{s};
+			if(endTimes.length != 1) {
+				endTimes = new int[]{0};
+			}
 		}
 		
+		@Deprecated
+		/**
+		 * set a single end time, erase all previously added end times
+		 * @param e endTime to set
+		 */
+		public void setEndTime(int e) {
+			endTimes = new int[]{e};
+			if(startTimes.length != 1) {
+				startTimes = new int[]{0};
+			}
+		}
+		
+		/**
+		 * get a single start time
+		 * @return a single start time
+		 */
 		public int getStartTime() {
-			return startTime;
+			try {
+				return startTimes[0];
+			} catch (Exception e){
+				return 0;
+			}
 		}
 		
+		/**
+		 * get a single end time
+		 * @return a single end time
+		 */
 		public int getEndTime() {
-			return endTime;
+			try {
+				return endTimes[0];
+			} catch (Exception e){
+				return 0;
+			}
+		}
+		
+		@Override 
+		/**
+		 * Check if the weekday of time "cal" is part of this rule
+		 * @param cal the time to check
+		 * @return true if this day is part of the rule
+		 */
+		public boolean containsDay(Calendar cal){
+			int i = cal.get(Calendar.DAY_OF_WEEK);
+			int d = (i + 5) % 7;
+			if (days[d]) {	
+				return true;	
+			}
+			return false;
+			
+		}
+		
+		@Override 
+		/**
+		 * Check if the previous weekday of time "cal" is part of this rule
+		 * @param cal the time to check
+		 * @return true if the previous day is part of the rule
+		 */
+		public boolean containsPreviousDay(Calendar cal){
+			int i = cal.get(Calendar.DAY_OF_WEEK);
+			int p = (i + 4) % 7;
+			if (days[p]) {	
+				return true;	
+			}
+			return false;
+			
 		}
 		
 		@Override
-		public boolean isOpenedForTime(Calendar cal) {
-			if (startTime == -1) {
+		/**
+		 * Check if this rule says the feature is open at time "cal"
+		 * @param cal the time to check
+		 * @return true if this rule contains the day to check and the start and end times denote it's open
+		 * @return true if this rule contains the previous day and an endTime>startTime such that the time to check falls before the endtime
+		 * @return false in all other cases, also if only day is wrong
+		 */
+		public boolean isOpenedForTime(Calendar cal, boolean checkPrevious) {
+			if (startTimes == null) {
 				return false;
 			}
 			int i = cal.get(Calendar.DAY_OF_WEEK);
@@ -52,26 +264,29 @@ public class OpeningHoursParser {
 				p += 7;
 			}
 			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
-			int startTime = this.startTime;
-			int endTime = this.endTime;
-			// one day working 10 - 20 (not 20 - 04)
-			if (startTime < endTime || endTime == -1) {
-				if (days[d]) {
-					if (time >= startTime && (endTime == -1 || time <= endTime)) {
+			for (i = 0; i<startTimes.length; i++){
+				int startTime = this.startTimes[i];
+				int endTime = this.endTimes[i];
+				// one day working 10 - 20 (not 20 - 04)
+				if (startTime < endTime || endTime == -1) {
+					if (days[d] && !checkPrevious) {
+						if (time >= startTime && (endTime == -1 || time <= endTime)) {
+							return true;
+						}
+					}
+				} else {
+					if (time >= startTime && days[p] && checkPrevious) {
+						// check in previous day
+						return true;
+					} else if (time <= endTime && days[d] && !checkPrevious) {
 						return true;
 					}
-				}
-			} else {
-				if (time >= startTime && days[p]) {
-					// check in previous day
-					return true;
-				} else if (time <= endTime && days[d]) {
-					// check in previous day
-					return true;
 				}
 			}
 			return false;
 		}
+		
+		
 		@Override
 		public String toRuleString() {
 			StringBuilder b = new StringBuilder(25);
@@ -98,17 +313,26 @@ public class OpeningHoursParser {
 					open24_7 = false;
 				}
 			}
-			if (open24_7 && startTime == 0 && endTime / 60 == 24) {
-				return "24/7";
+			if (startTimes == null || startTimes.length == 0){
+				b.append(" off ");
+			} else {
+				for (int i = 0; i<startTimes.length; i++) {
+					int startTime = startTimes[i];
+					int endTime = endTimes[i];
+					if (open24_7 && startTime == 0 && endTime / 60 == 24) {
+						return "24/7";
+					}
+					b.append(" "); //$NON-NLS-1$
+					int stHour = startTime / 60;
+					int stTime = startTime - stHour * 60;
+					int enHour = endTime / 60;
+					int enTime = endTime - enHour * 60;
+					formatTime(stHour, stTime, b);
+					b.append("-"); //$NON-NLS-1$
+					formatTime(enHour, enTime, b);
+					b.append(", ");
+				}
 			}
-			b.append(" "); //$NON-NLS-1$
-			int stHour = startTime / 60;
-			int stTime = startTime - stHour * 60;
-			int enHour = endTime / 60;
-			int enTime = endTime - enHour * 60;
-			formatTime(stHour, stTime, b);
-			b.append("-"); //$NON-NLS-1$
-			formatTime(enHour, enTime, b);
 			return b.toString();
 		}
 		
@@ -117,17 +341,40 @@ public class OpeningHoursParser {
 			return toRuleString();
 		}
 
-		public void setStartTime(int startTime) {
-			this.startTime = startTime;
+		/**
+		 * Add a time range (startTime-endTime) to this rule
+		 * @param startTime startTime to add
+		 * @param endTime endTime to add
+		 */
+		public void addTimeRange(int startTime, int endTime) {
+			if (startTimes == null){
+				startTimes = new int[] {startTime};
+				endTimes = new int[] {endTime};
+			} else {
+				int l = startTimes.length;
+				int[] newStartTimes = new int[l+1];
+				int[] newEndTimes = new int[l+1];
+				for (int i=0; i<l; i++){
+					newStartTimes[i] = startTimes[i];
+					newEndTimes[i] = endTimes[i];
+				}
+				newStartTimes[l] = startTime;
+				newEndTimes[l] = endTime;
+				
+				startTimes = newStartTimes;
+				endTimes = newEndTimes;
+			}
 		}
 		
-		public void setEndTime(int endTime) {
-			this.endTime = endTime;
-		}
 	}
 	
-	
-	public static OpeningHoursRule parseRule(String r, List<OpeningHoursRule> rs){
+	/**
+	 * Parse an opening_hours string from OSM to an OpeningHours object which can be used to check
+	 * @param r the string to parse
+	 * @param rs the resulting object representing the opening hours of the feature
+	 * @return true if the String is successfully parsed
+	 */
+	public static boolean parseRule(String r, OpeningHours rs){
 		int startDay = -1;
 		int previousDay = -1;
 		int k = 0;
@@ -136,9 +383,9 @@ public class OpeningHoursParser {
 		boolean[] days = basic.getDays();
 		if("24/7".equals(r)){
 			Arrays.fill(days, true);
-			basic.setStartEndTime(0, 24*60);
-			rs.add(basic);
-			return basic;
+			basic.addTimeRange(0, 24*60);
+			rs.addRule(basic);
+			return true;
 		}
 		
 		for (; k < r.length(); k++) {
@@ -147,13 +394,17 @@ public class OpeningHoursParser {
 				// time starts
 				break;
 			}
+			if (ch == 'o' && r.charAt(k+1) == 'f' && r.charAt(k+1) == 'f'){
+				// value "off" is found
+				break;
+			}
 			if(Character.isWhitespace(ch) || ch == ','){
 				continue;
 			} else if(ch == '-'){
 				if(previousDay != -1){
 					startDay = previousDay; 
 				} else {
-					return null;
+					return false;
 				}
 			} else if(k < r.length() - 1){
 				int i = 0;
@@ -175,11 +426,11 @@ public class OpeningHoursParser {
 					previousDay = i;
 				}
 			} else {
-				return null;
+				return false;
 			}
 		}
 		if(previousDay == -1){
-			return null;
+			return false;
 		}
 		String timeSubstr = r.substring(k);
 		String[] times = timeSubstr.split(",");
@@ -188,6 +439,9 @@ public class OpeningHoursParser {
 			time = time.trim();
 			if(time.length() == 0){
 				continue;
+			}
+			if(time.equals("off")){
+				break; // add no time values
 			}
 			String[] stEnd = time.split("-"); //$NON-NLS-1$
 			if (stEnd.length != 2) {
@@ -200,60 +454,47 @@ public class OpeningHoursParser {
 				int i1 = stEnd[0].indexOf(':');
 				int i2 = stEnd[1].indexOf(':');
 				if (i1 == -1 || i2 == -1) {
-					return null;
+					return false;
 				}
 				st = Integer.parseInt(stEnd[0].substring(0, i1).trim()) * 60 + Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
 				end = Integer.parseInt(stEnd[1].substring(0, i2).trim()) * 60 + Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
 			} catch (NumberFormatException e) {
-				return null;
+				return false;
 			}
-			basic.setStartEndTime(st, end);
-			rs.add(basic);
-			BasicDayOpeningHourRule nbasic = new BasicDayOpeningHourRule();
-			nbasic.days = basic.days;
-			basic = nbasic;
+			basic.addTimeRange(st, end);
 		}
+		rs.addRule(basic);
 		if(!timesExist){
-			return null;
+			return false;
 		}
-		return basic;
+		return true;
 	}
 	
-	
-	public static List<OpeningHoursRule> parseOpenedHours(String format){
+	/**
+	 * parse OSM opening_hours string to an OpeningHours object
+	 * @param format the string to parse
+	 * @return the OpeningHours object when parsing was successful
+	 * @return null when parsing was unsuccessful
+	 */
+	public static OpeningHours parseOpenedHours(String format){
+		// split the OSM string in multiple rules
 		String[] rules = format.split(";"); //$NON-NLS-1$
-		List<OpeningHoursRule> rs = new ArrayList<OpeningHoursRule>();
+		OpeningHours rs = new OpeningHours();
 		for(String r : rules){
 			r = r.trim();
 			if(r.length() == 0){
 				continue;
 			}
 			// check if valid
-			OpeningHoursRule rule = parseRule(r, rs);
-			if(rule == null){
+			boolean rule = parseRule(r, rs);
+			if(!rule){
 				return null;
 			}
 		}
 		return rs;
 	}
-	public static String toStringOpenedHours(List<? extends OpeningHoursRule> rules){
-		StringBuilder b = new StringBuilder(100);
-		// check 24/7
-		boolean first = true;
-		for (OpeningHoursRule p : rules) {
-			if(p == null){
-				continue;
-			}
-			if (first) {
-				first = false;
-			} else {
-				b.append("; "); //$NON-NLS-1$
-			}
-			b.append(p.toRuleString());
-		}
-		
-		return b.toString();
-	}
+	
+	
 	private static void formatTime(int h, int t, StringBuilder b){
 		if(h < 10){
 			b.append("0"); //$NON-NLS-1$
@@ -265,39 +506,39 @@ public class OpeningHoursParser {
 		b.append(t);
 	}
 	
-	private static void testOpened(String time, List<OpeningHoursRule> hours, boolean expected) throws ParseException {
-		boolean opened = false;
+	
+	private static void testOpened(String time, OpeningHours hours, boolean expected) throws ParseException {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new SimpleDateFormat("dd.MM.yyyy hh:mm").parse(time));
-		for(OpeningHoursRule r : hours) {
-			if(r.isOpenedForTime(cal)){
-				opened = true;
-				break;
-			}
-		}
-		System.out.println("Expected " + expected +" = " + opened);
+		System.out.println("Expected " + time+": " + expected +" = " + hours.isOpenedForTime(cal));
 	}
 	
 	public static void main(String[] args) throws ParseException {
-		
-		List<OpeningHoursRule> hours = parseOpenedHours("Mo-Fr 08:30-14:40; Sa 08:00 - 14:00"); //$NON-NLS-1$
+		//Test basic case
+		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40" ); //$NON-NLS-1$
 		System.out.println(hours);
-		System.out.println(toStringOpenedHours(hours));
-		hours = parseOpenedHours("Mo-Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$
-		testOpened("20.04.2012 14:00", hours, true);
-		testOpened("20.04.2012 15:00", hours, true);
-		testOpened("20.04.2012 14:50", hours, false);
+		testOpened("09.08.2012 12:00", hours, true);
+		testOpened("09.08.2012 16:00", hours, false);
+		// two time and date ranges
+		hours = parseOpenedHours("Mo-We, Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$
 		System.out.println(hours);
-		System.out.println(toStringOpenedHours(hours));
-		hours = parseOpenedHours("Mo, We-Fr, Th, Sa 08:30-14:40; Sa 08:00 - 14:00"); //$NON-NLS-1$
+		testOpened("08.08.2012 14:00", hours, true);
+		testOpened("10.08.2012 15:00", hours, true);
+		testOpened("08.08.2012 14:50", hours, false);
+		// test exception on general schema
+		hours = parseOpenedHours("Mo-Sa 08:30-14:40; Tu 08:00 - 14:00"); //$NON-NLS-1$
 		System.out.println(hours);
-		System.out.println(toStringOpenedHours(hours));
-		hours = parseOpenedHours("Mo-Su 00:00-24:00"); //$NON-NLS-1$
+		testOpened("07.08.2012 14:20", hours, false);
+		// test off value
+		hours = parseOpenedHours("Mo-Sa 00:00-24:00; Th off"); //$NON-NLS-1$
 		System.out.println(hours);
-		System.out.println(toStringOpenedHours(hours));
+		testOpened("08.08.2012 23:59", hours, true);
+		testOpened("09.08.2012 00:15", hours, false);
+		//test 24/7
 		hours = parseOpenedHours("24/7"); //$NON-NLS-1$
 		System.out.println(hours);
-		System.out.println(toStringOpenedHours(hours));
+		testOpened("08.08.2012 23:59", hours, true);
 	}
 	
 }
+
