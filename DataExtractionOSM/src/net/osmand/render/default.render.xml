@@ -1009,10 +1009,10 @@
 		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="1"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
-			<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#8585CC"/>
+			<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#6666CC"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
 			<filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
-			<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#8585CC"/>
+			<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#6666CC"/>
 				<filter tag="highway" value="motorway_link" maxzoom="13" color="#a58dff"/>
 			<filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#df1346"/>
 			<filter viRendered="true" tag="highway" value="trunk" maxzoom="13" color="#A02067"/>
@@ -1059,10 +1059,10 @@
 
 		<group>
 				<filter hmRendered="true" tag="highway" value="motorway" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="motorway" color="#8585CC"/>
+				<filter viRendered="true" tag="highway" value="motorway" color="#6666CC"/>
 			<filter tag="highway" value="motorway" color="#a58dff"/>
 				<filter hmRendered="true" tag="highway" value="motorway_link" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="motorway_link" color="#8585CC"/>
+				<filter viRendered="true" tag="highway" value="motorway_link" color="#6666CC"/>
 			<filter tag="highway" value="motorway_link" color="#a58dff"/>
 				<filter hmRendered="true" tag="highway" value="trunk" color="#df1346"/>
 				<filter viRendered="true" tag="highway" value="trunk" color="#A02067"/>
