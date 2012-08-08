@@ -25,6 +25,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
+import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
@@ -727,17 +728,12 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
-				List<OpeningHoursRule> rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
 					boolean work = false;
-					for (OpeningHoursRule p : rs) {
-						if (p.isOpenedForTime(inst)) {
-							work = true;
-							break;
-						}
-					}
+					work = rs.isOpenedForTime(inst);
 					if (work) {
 						opened = 0;
 					} else {
