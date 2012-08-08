@@ -101,7 +101,7 @@ public class OpeningHoursParser {
 				s.append(r.toString()).append("; ");
 			}
 			
-			return s.toString();
+			return s.substring(0, s.length()-2);
 		}
 		
 	}
@@ -333,7 +333,7 @@ public class OpeningHoursParser {
 					b.append(", ");
 				}
 			}
-			return b.toString();
+			return b.substring(0, b.length()-2);
 		}
 		
 		@Override
@@ -443,6 +443,11 @@ public class OpeningHoursParser {
 			if(time.equals("off")){
 				break; // add no time values
 			}
+			if(time.equals("24/7")){
+				// for some reason, this is used. See tagwatch.
+				basic.addTimeRange(0, 24*60);
+				break;
+			}
 			String[] stEnd = time.split("-"); //$NON-NLS-1$
 			if (stEnd.length != 2) {
 				continue;
@@ -453,11 +458,25 @@ public class OpeningHoursParser {
 			try {
 				int i1 = stEnd[0].indexOf(':');
 				int i2 = stEnd[1].indexOf(':');
-				if (i1 == -1 || i2 == -1) {
-					return false;
+				int startHour, startMin, endHour, endMin;
+				if(i1 == -1) {
+					// if no minutes are given, try complete value as hour
+					startHour = Integer.parseInt(stEnd[0].trim());
+					startMin = 0;
+				} else {
+					startHour = Integer.parseInt(stEnd[0].substring(0, i1).trim());
+					startMin = Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
 				}
-				st = Integer.parseInt(stEnd[0].substring(0, i1).trim()) * 60 + Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
-				end = Integer.parseInt(stEnd[1].substring(0, i2).trim()) * 60 + Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
+				if(i2 == -1) {
+					// if no minutes are given, try complete value as hour
+					endHour = Integer.parseInt(stEnd[0].trim());
+					endMin = 0;
+				} else {
+					endHour = Integer.parseInt(stEnd[0].substring(0, i1).trim());
+					endMin = Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
+				}
+				st = startHour * 60 + startMin;
+				end = endHour * 60 + endMin;
 			} catch (NumberFormatException e) {
 				return false;
 			}
@@ -530,7 +549,7 @@ public class OpeningHoursParser {
 		System.out.println(hours);
 		testOpened("07.08.2012 14:20", hours, false);
 		// test off value
-		hours = parseOpenedHours("Mo-Sa 00:00-24:00; Th off"); //$NON-NLS-1$
+		hours = parseOpenedHours("Mo-Th 09:00-18:25; Fr 09:00-18:55; Sa 09:00-17:55"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("08.08.2012 23:59", hours, true);
 		testOpened("09.08.2012 00:15", hours, false);
@@ -538,7 +557,11 @@ public class OpeningHoursParser {
 		hours = parseOpenedHours("24/7"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("08.08.2012 23:59", hours, true);
+		// some people seem to use the following syntax:
+		hours = parseOpenedHours("Sa-Su 24/7");
+		System.out.println(hours);
+		hours = parseOpenedHours("Mo-Fr 9-19");
+		System.out.println(hours);
 	}
 	
 }
-
