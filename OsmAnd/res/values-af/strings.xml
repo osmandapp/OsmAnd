@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer ligging bepaal is</string>
+<resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
   <string name="osmand_parking_position_description_add_time">Die motor was geparkeer om:</string>
@@ -92,7 +92,7 @@
   <string name="map_settings">- kaart stellings</string>
   <string name="map_settings_descr">Stel op hoe die kaart sal vertoon</string>
   <string name="osmand_rastermaps_plugin_description">Stellings om verskeie internet of kasgeheue-teël kaarte as basis kaart of as bolê- / onderlê-kaarte op te stel. Hierdie kaarte kan ook op jou rekenaar voorberei word en na die OsmAnd leêr gestuur word.</string>
-  <string name="osmand_background_plugin_description">Wys stellings om spoor-natrek en navigasie aan te skakel in rustoestand (skerm af) deur kort-kort die GPS aan te sit.</string>
+  <string name="osmand_background_plugin_description">Wys stellings om spoor-natrek en navigasie aan te skakel in sluimertoestand (skerm af) deur kort-kort die GPS aan te sit.</string>
   <string name="osmand_accessibility_description">Wys stellings vir spesiale toegankliksheidsfunksies.</string>
   <string name="extra_settings">Gevorderde stellings</string>
   <string name="osmand_monitoring_description">Wys stellings wat jou in staat stel om roetes op te neem in GPX dokumente of om dit lewendig na te trek deur die gebruik van `n web diens.</string>
@@ -100,7 +100,7 @@
   <string name="osmand_development_plugin_description">Wys stellings vir ontwikkeling en ontfoutingsfunksies bv. bewegende navigasie of beeldvertoon werkverrigting.</string>
   <string name="plugins_screen">Inlegmodule bestuurder</string>
   <string name="select_plugin_to_activate">Druk op `n inlegmodule om dit aan of af te skakel. (Dit mag nodig wees om OsmAnd oor te begin.)</string>
-  <string name="prefs_plugins_descr">Inlegmodule stel die spesialis toestand in werking en voorsien ekstra funksionaliteit soos teël kaarte, natrekking, sleep mode operation, accessibility settings, and others.</string>
+  <string name="prefs_plugins_descr">Inlegmodule stel die spesialis toestand in werking en voorsien ekstra funksionaliteit soos teël kaarte, natrekking, sluimertoestand werking, toeganklikheidstellings, en andere.</string>
   <string name="prefs_plugins">Inlegmodule bestuurder</string>
   <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlegmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlegmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter"</string>
   <string name="osm_editing_plugin_description">Wys stellings nodig vir OSM terugvoer bv. versamel / aanpas van OSM POI voorwerpe, oopmaak / komentaarlewer op OSM foute, en bydra van opgeneemde GPX dokumente (vereis OSM inlog besonderhede).</string>
@@ -244,7 +244,7 @@
   <string name="user_name_descr">Vereis vir openstreetmap.org voorleggings</string>
   <string name="user_password">Jou OSM wagwoord</string>
   <string name="user_password_descr">Vereis vir openstreetmap.org voorleggings</string>
-  <string name="osmand_service">Slaap Gebruikswyse Funksionaliteit</string>
+  <string name="osmand_service">Sluimertoestand Funksionaliteit</string>
   <string name="osmand_service_descr">Gebruik om OsmAnd aan te hou terwyl skerm af is</string>
   <string name="tip_rotation_switching">Kaart oriëntasie</string>
   <string name="tip_rotation_switching_t">"\tJy kan kies hoe die kaart vertoon roteer word in \'Stellings\' -&gt; \'Kaart voorkoms \'-&gt;\'Kaart rotasie\'.
@@ -279,7 +279,7 @@
   <string name="pref_vector_map">Vektor kaart instellings</string>
   <string name="delete_confirmation_msg">Vee %1$s uit?</string>
   <string name="city_type_suburb">Voorstad</string>
-  <string name="city_type_hamlet">Hamlet</string>
+  <string name="city_type_hamlet">Dorpie</string>
   <string name="city_type_village">Dorpie</string>
   <string name="city_type_town">Dorp</string>
   <string name="city_type_city">Stad</string>
@@ -485,7 +485,7 @@
   <string name="poi_filter_for_tourists">Vir toeriste</string>
   <string name="poi_filter_fuel">Brandstof</string>
   <string name="poi_filter_namefinder">Aanlyn Naamvinder</string>
-  <string name="reading_cached_tiles">Lees kas teëls…</string>
+  <string name="reading_cached_tiles">Lees gekaste teëls…</string>
   <string name="version_index_is_big_for_memory">Die indeks \"{0}\" pas nie in die geheue nie</string>
   <string name="version_index_is_not_supported">Die weergawe van indeks \"{0}\'\' word nie ondersteun nie</string>
   <string name="use_osmand_routing_service">OsmAnd navigasie &gt;20km</string>
@@ -498,9 +498,9 @@
   <string name="build_installed">\'Build\' {0} suksesvol geïnstalleer ({1}).</string>
   <string name="downloading_build">Besig om weergawe af te laai…</string>
   <string name="install_selected_build">Wil jy OsmAnd - {0} van {1} {2} MB installeer ?</string>
-  <string name="loading_builds_failed">die verkryging van die lys van OsmAnd \'builds\' het misluk</string>
-  <string name="loading_builds">Laai OsmAnd \'builds\'…</string>
-  <string name="select_build_to_install">Kies een van die OsmAnd \'builds\' om te instaleer</string>
+  <string name="loading_builds_failed">die verkryging van die lys van OsmAnd boue het misluk</string>
+  <string name="loading_builds">Laai OsmAnd boue…</string>
+  <string name="select_build_to_install">Kies een van die OsmAnd boue om te instaleer</string>
   <string name="contribution_activity">Spesiale aktiwiteit vir bydrae weergawe</string>
   <string name="gps_status_app_not_found">GPS Status toepasing nie geïnstalleer. Soek in die mark?</string>
   <string name="voice_is_not_available_msg">Stem begeleiding is nie beskikbaar nie. Gaan asseblief na stellings, kies voorkeur stempakket, en laai dit af.</string>
@@ -750,17 +750,17 @@
   <string name="save_current_track">Berg huidige spoor</string>
   <string name="save_track_interval">Log tussenpose</string>
   <string name="save_track_interval_descr">Kies posisioneringstussenpose vir spore</string>
-  <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
-  <string name="save_track_to_gpx">Log track to GPX file</string>
+  <string name="save_track_to_gpx_descrp">Spore sal geberg word in die spoor bergadres in daaglikse groepe</string>
+  <string name="save_track_to_gpx">Skryf die spoor in `n GPX dokument</string>
   <string name="navigate_to">Stel as bestemming</string>
   <string name="update_tile">Opgradeer kaart</string>
   <string name="reload_tile">Laai teël weer af</string>
   <string name="mark_point">Teiken</string>
-  <string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
+  <string name="show_osm_bugs_descr">Wys OpenStreetBugs op die kaart</string>
   <string name="show_osm_bugs">Wys OpenStreetBugs</string>
   <string name="favourites_activity">Gunstelinge</string>
   <string name="add_to_favourite">Voeg by gunstelinge</string>
-  <string name="use_english_names_descr">Select between native and English names</string>
+  <string name="use_english_names_descr">Kies tussen plaaslike en engelse name</string>
   <string name="use_english_names">Gebruik Engelse name in die kaart</string>
   <string name="app_settings">Toepassing stellings</string>
   <string name="search_address">Soek adres</string>
@@ -771,23 +771,23 @@
   <string name="position_on_map_descr">Kies die plaasing van die posisie merker op die kaart</string>
   <string name="position_on_map">Posisie merker</string>
   <string name="map_specify_point">Stel as bestemming</string>
-  <string name="show_view_angle_descr">Display viewing direction on the map</string>
+  <string name="show_view_angle_descr">Vertoon die kyk-rigting op die kaart</string>
   <string name="show_view_angle">Wys uitsig rigting</string>
   <string name="stop_navigation">Maak bestemming skoon.</string>
   <string name="navigate_to_point">Stel as bestemming</string>
   <string name="map_view_3d_descr">Skakel 3D kaart aan</string>
   <string name="map_view_3d">"Kaart 3D "</string>
-  <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
+  <string name="show_poi_over_map_description">Wys interessante plekke bo-oor die kaart (gebruik die vorige gekose filter)</string>
   <string name="show_poi_over_map">Wys POI</string>
-  <string name="map_tile_source_descr">Choose the source of online or cached map tiles</string>
+  <string name="map_tile_source_descr">Kies die bron vir aanlyn of gekaste kaart teëls</string>
   <string name="map_tile_source">Teël kaart bron</string>
   <string name="map_source">Kaartbron</string>
   <string name="use_internet">Gebruik Internet</string>
   <string name="show_location">Wys ligging</string>
   <string name="map_preferences">Kaart</string>
   <string name="settings_activity">Stellings</string>
-  <string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
-  <string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
+  <string name="show_gps_coordinates_text">Wys die GPS koordinate op die kaart</string>
+  <string name="use_internet_to_download_tile">Gebruik die internet om ontbrekende teëls af te laai</string>
   <string name="app_description">Navigasie toepassing</string>
   <string name="exit_Button">Verlaat</string>
   <string name="map_Button">Kaart</string>
@@ -797,24 +797,24 @@
   <string name="search_activity">Soek</string>
   <string name="searchpoi_activity">Kies POI</string>
   <string name="search_POI_level_btn">Vind mer</string>
-  <string name="incremental_search_city">Search city incrementally. To find towns/postcodes, enter the first 3 or more characters.</string>
-  <string name="incremental_search_street">Search street incrementally</string>
+  <string name="incremental_search_city">Soek stad op toenemende wyse. Om dorpe/poskodes op te spoor, tik 3 of meer karakters in.</string>
+  <string name="incremental_search_street">Soek strate op toenemende wyse</string>
   <string name="incremental_search_building">Soek gebou toenemend</string>
   <string name="choose_available_region">Kies gebied vanaf die lys</string>
   <string name="choose_intersected_street">Kies kruisende straat</string>
-  <string name="Closest_Amenities">Closest amenities</string>
+  <string name="Closest_Amenities">Naaste geriewe</string>
   <string name="app_mode_default">Verstek</string>
   <string name="app_mode_car">Motor</string>
   <string name="app_mode_bicycle">Fiets</string>
   <string name="app_mode_pedestrian">Voetganger</string>
   <string name="position_on_map_center">Senter</string>
   <string name="position_on_map_bottom">Onder</string>
-  <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
+  <string name="navigate_point_top_text">Tik lengte- &amp; breedtegrade in die gekose formaat in(G - grade, M - minute, S - sekondes)</string>
   <string name="navigate_point_latitude">Breedtegraad</string>
   <string name="navigate_point_longitude">Lengtegraad</string>
-  <string name="navigate_point_format_D">DDD.DD</string>
-  <string name="navigate_point_format_DM">DDD MM.MM</string>
-  <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+  <string name="navigate_point_format_D">GGG.GG</string>
+  <string name="navigate_point_format_DM">GGG MM.MM</string>
+  <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
   <string name="search_shown_on_map">Wys op kaart</string>
   <string name="navigate_point_cancel">Kanseleer</string>
   <string name="search_address_top_text">Kies adres</string>
@@ -876,7 +876,7 @@
   <string name="poi_dialog_comment">Kommentaar</string>
   <string name="poi_dialog_comment_default">interessante plek verander</string>
   <string name="poi_dialog_other_tags_message">Alle ander naamplaatjies word bewaar</string>
-  <string name="default_buttons_commit">Commit</string>
+  <string name="default_buttons_commit">Handig in</string>
   <string name="default_buttons_reset">Herstel</string>
   <string name="filter_current_poiButton">Filter</string>
   <string name="edit_filter_delete_menu_item">Verwyder</string>
@@ -896,4 +896,4 @@
  \n\t* Verbeterde Roeteberekening
  \n\t* Dinamiese kaart wiggies
  "</string>
-<string name="screen_is_locked">To unlock screen press lock icon</string><string name="map_widget_top_text">Street name</string><string name="map_widget_config">Configuration</string><string name="map_widget_map_select">Map selection</string><string name="map_widget_back_to_loc">Where am I</string><string name="map_widget_lock_screen">Lock screen</string><string name="map_widget_compass">Compass</string><string name="map_widget_top_stack">Status bar</string><string name="map_widget_reset">Reset to default</string><string name="map_widget_right_stack">Right side</string><string name="map_widget_left_stack">Left side</string><string name="map_widget_parking">Parking</string><string name="map_widget_monitoring">Monitoring</string><string name="map_widget_speed">Speed</string><string name="map_widget_distance">Target</string><string name="map_widget_altitude">Altitude</string><string name="map_widget_time">Time to go</string><string name="map_widget_next_turn">Next turn</string><string name="map_widget_next_turn_small">Next turn (small)</string><string name="map_widget_next_next_turn">Second next turn</string><string name="map_widget_mini_route">Mini route map</string><string name="bg_service_screen_lock">Lock/unlock screen</string><string name="bg_service_screen_unlock">Unlock screen</string><string name="bg_service_sleep_mode_off">Disable Sleep mode</string><string name="bg_service_sleep_mode_on">Enable Sleep mode</string><string name="bg_service_screen_lock_toast">The screen is locked</string><string name="bg_service_interval">Set wake-up interval:</string></resources>
+<string name="screen_is_locked">Om die skerm oop te sluit, druk op die slot simbool</string><string name="map_widget_top_text">Straat naam</string><string name="map_widget_config">Instelling</string><string name="map_widget_map_select">Kaart keuse</string><string name="map_widget_back_to_loc">Waar is ek</string><string name="map_widget_lock_screen">Sluit die skerm</string><string name="map_widget_compass">Kompas</string><string name="map_widget_top_stack">Status staaf</string><string name="map_widget_reset">Herstel verstek</string><string name="map_widget_right_stack">Regterkant</string><string name="map_widget_left_stack">Linkerkant</string><string name="map_widget_parking">Parkering</string><string name="map_widget_monitoring">Monitoring</string><string name="map_widget_speed">Spoed</string><string name="map_widget_distance">Teiken</string><string name="map_widget_altitude">Hoogte</string><string name="map_widget_time">Tyd oor</string><string name="map_widget_next_turn">Volgende draai</string><string name="map_widget_next_turn_small">Volgende draai (klein)</string><string name="map_widget_next_next_turn">Daaropvolgende draai</string><string name="map_widget_mini_route">Mini roete kaart</string><string name="bg_service_screen_lock">Lock/unlock screen</string><string name="bg_service_screen_unlock">Sluit skerm oop</string><string name="bg_service_sleep_mode_off">Disable Sleep mode</string><string name="bg_service_sleep_mode_on">Enable Sleep mode</string><string name="bg_service_screen_lock_toast">Die skerm is gesluit</string><string name="bg_service_interval">Stel die wakker-tussenpose:</string></resources>
