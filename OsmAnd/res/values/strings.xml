@@ -9,29 +9,29 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="layer_map_appearance">Map appearance&#8230;</string>
+    <string name="layer_map_appearance">Configure screen&#8230;</string>
     <string name="show_lanes">Show lanes</string>
     <string name="avoid_unpaved">Avoid unpaved roads</string>
     <string name="avoid_ferries">Avoid ferries</string>
     <string name="avoid_in_routing_title">Avoid&#8230;</string>
     <string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
     <string name="show_warnings_title">Show alarms&#8230;</string>
-    <string name="show_warnings_descr">Show speed limits, speed cameras and traffic bumps</string>
-    <string name="map_widget_fluorescent">Fluorescent colors</string>
+    <string name="show_warnings_descr">Show speed limits, speed cameras, and traffic bumps</string>
+    <string name="map_widget_fluorescent">Fluorescent routes</string>
     <string name="map_widget_show_ruler">Ruler</string>
-    <string name="map_widget_appearance">Appearance</string>
-    <string name="map_widget_view_direction">View direction</string>
-    <string name="map_widget_transparent">Transparent views</string>
-    <string name="monitoring_mode_off">GPX rec</string>
-    <string name="monitoring_mode_on">GPX off</string>
-    <string name="bg_service_sleep_mode_off">Run in background</string>
-    <string name="bg_service_sleep_mode_on">Stop background</string>
-    <string name="gps_wakeup_interval">GPS wakeup interval : %s</string>
+    <string name="map_widget_appearance">Miscellaneous</string>
+    <string name="map_widget_view_direction">Viewing direction</string>
+    <string name="map_widget_transparent">Transparent skin</string>
+    <string name="monitoring_mode_off">Record GPX</string>
+    <string name="monitoring_mode_on">Stop GPX rec.</string>
+    <string name="bg_service_sleep_mode_off">Enable sleep mode</string>
+    <string name="bg_service_sleep_mode_on">Stop sleep mode</string>
+    <string name="gps_wakeup_interval">GPS wake-up interval : %s</string>
     <string name="int_continuosly">Continuously</string>
     <string name="screen_is_locked">To unlock screen press lock icon</string>
     <string name="map_widget_top_text">Street name</string>
-    <string name="map_widget_config">Configuration</string>
-    <string name="map_widget_map_select">Map selection</string>
+    <string name="map_widget_config">Configure screen</string>
+    <string name="map_widget_map_select">Map source</string>
     <string name="map_widget_back_to_loc">Where am I</string>
     <string name="map_widget_lock_screen">Lock screen</string>
     <string name="map_widget_compass">Compass</string>
@@ -59,6 +59,7 @@
     <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
     \n\t* Improved Routing
     \n\t* Dynamic map widgets
+    \n\t* Map settings moved to map screen
     </string>
     <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
     <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
