@@ -2,8 +2,6 @@ package net.osmand.osm;
 
 
 
-
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,6 +18,17 @@ import java.util.Calendar;
  */
 public class OpeningHoursParser {
 	private static final String[] daysStr = new String[] {"Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"}; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$ //$NON-NLS-7$
+	/**
+	 * default values for sunrise and sunset. Might be computed afterwards, not final
+	 */
+	private static String sunrise = "07:00", sunset = "21:00";
+	/**
+	 * hour of when you would expect a day to be ended.
+	 * This is to be used when no end hour is known (like pubs that open at a certain time, 
+	 * but close at a variable time, depending on the number of clients).
+	 * OsmAnd needs to show a value, so there is some arbitrary default value chosen.
+	 */
+	private static String endOfDay = "24:00";
 	
 	/**
 	 * This class contains the entire OpeningHours schema and 
@@ -189,6 +198,7 @@ public class OpeningHoursParser {
 			}
 		}
 		
+		@Deprecated
 		/**
 		 * get a single start time
 		 * @return a single start time
@@ -201,6 +211,7 @@ public class OpeningHoursParser {
 			}
 		}
 		
+		@Deprecated
 		/**
 		 * get a single end time
 		 * @return a single end time
@@ -330,10 +341,10 @@ public class OpeningHoursParser {
 					formatTime(stHour, stTime, b);
 					b.append("-"); //$NON-NLS-1$
 					formatTime(enHour, enTime, b);
-					b.append(", ");
+					b.append(",");
 				}
 			}
-			return b.substring(0, b.length()-2);
+			return b.substring(0, b.length()-1);
 		}
 		
 		@Override
@@ -375,6 +386,11 @@ public class OpeningHoursParser {
 	 * @return true if the String is successfully parsed
 	 */
 	public static boolean parseRule(String r, OpeningHours rs){
+		// replace words "sunrise" and "sunset" by real hours
+		r = r.replaceAll("sunset", sunset);
+		r = r.replaceAll("sunrise", sunrise);
+		// replace the '+' by an arbitrary value
+		r = r.replaceAll("\\+", "-" + endOfDay);
 		int startDay = -1;
 		int previousDay = -1;
 		int k = 0;
@@ -419,6 +435,14 @@ public class OpeningHoursParser {
 						for (int j = startDay; j <= i; j++) {
 							days[j] = true;
 						}
+						if(startDay > i){// overflow handling, e.g. Su-We
+							for (int j = startDay; j <= 6; j++) {
+								days[j] = true;
+							}
+							for (int j = 0; j <= i; j++){
+								days[j] = true;
+							}
+						}
 						startDay = -1;
 					} else {
 						days[i] = true;
@@ -430,7 +454,10 @@ public class OpeningHoursParser {
 			}
 		}
 		if(previousDay == -1){
-			return false;
+			// no days given => take all days.
+			for (int i = 0; i<7; i++){
+				days[i] = true;
+			}
 		}
 		String timeSubstr = r.substring(k);
 		String[] times = timeSubstr.split(",");
@@ -469,11 +496,11 @@ public class OpeningHoursParser {
 				}
 				if(i2 == -1) {
 					// if no minutes are given, try complete value as hour
-					endHour = Integer.parseInt(stEnd[0].trim());
+					endHour = Integer.parseInt(stEnd[1].trim());
 					endMin = 0;
 				} else {
-					endHour = Integer.parseInt(stEnd[0].substring(0, i1).trim());
-					endMin = Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
+					endHour = Integer.parseInt(stEnd[1].substring(0, i2).trim());
+					endMin = Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
 				}
 				st = startHour * 60 + startMin;
 				end = endHour * 60 + endMin;
@@ -528,15 +555,17 @@ public class OpeningHoursParser {
 	
 	private static void testOpened(String time, OpeningHours hours, boolean expected) throws ParseException {
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(new SimpleDateFormat("dd.MM.yyyy hh:mm").parse(time));
+		cal.setTime(new SimpleDateFormat("dd.MM.yyyy HH:mm").parse(time));
 		System.out.println("Expected " + time+": " + expected +" = " + hours.isOpenedForTime(cal));
 	}
 	
 	public static void main(String[] args) throws ParseException {
+		
+		
 		//Test basic case
 		OpeningHours hours = parseOpenedHours("Mo-Fr 08:30-14:40" ); //$NON-NLS-1$
 		System.out.println(hours);
-		testOpened("09.08.2012 12:00", hours, true);
+		testOpened("09.08.2012 11:00", hours, true);
 		testOpened("09.08.2012 16:00", hours, false);
 		// two time and date ranges
 		hours = parseOpenedHours("Mo-We, Fr 08:30-14:40,15:00-19:00"); //$NON-NLS-1$
@@ -549,10 +578,10 @@ public class OpeningHoursParser {
 		System.out.println(hours);
 		testOpened("07.08.2012 14:20", hours, false);
 		// test off value
-		hours = parseOpenedHours("Mo-Th 09:00-18:25; Fr 09:00-18:55; Sa 09:00-17:55"); //$NON-NLS-1$
+		hours = parseOpenedHours("Mo-Sa 09:00-18:25; Th off"); //$NON-NLS-1$
 		System.out.println(hours);
-		testOpened("08.08.2012 23:59", hours, true);
-		testOpened("09.08.2012 00:15", hours, false);
+		testOpened("08.08.2012 12:00", hours, true);
+		testOpened("09.08.2012 12:00", hours, false);
 		//test 24/7
 		hours = parseOpenedHours("24/7"); //$NON-NLS-1$
 		System.out.println(hours);
@@ -562,6 +591,18 @@ public class OpeningHoursParser {
 		System.out.println(hours);
 		hours = parseOpenedHours("Mo-Fr 9-19");
 		System.out.println(hours);
+		hours = parseOpenedHours("09:00-17:00");
+		System.out.println(hours);
+		hours = parseOpenedHours("sunrise-sunset");
+		System.out.println(hours);
+		hours = parseOpenedHours("10:00+");
+		System.out.println(hours);
+		hours = parseOpenedHours("Su-Th sunset-24:00, 04:00-sunrise; Fr-Sa sunset-sunrise");
+		System.out.println(hours);
+		testOpened("12.08.2012 04:00", hours, true);
+		testOpened("12.08.2012 23:00", hours, true);
+		testOpened("08.08.2012 12:00", hours, false);
+		testOpened("08.08.2012 05:00", hours, true);
 	}
 	
 }
