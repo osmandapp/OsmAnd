@@ -54,11 +54,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -157,26 +160,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
             searchPOILevel.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String query = searchFilter.getText().toString();
-                    if (query.length() < 2 && (isNameFinderFilter() || isSearchByNameFilter())) {
-                        AccessibleToast.makeText(getContext(), R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    if(isNameFinderFilter() && 
-                            !Algoritms.objectEquals(((NameFinderPoiFilter) filter).getQuery(), query)){
-                        filter.clearPreviousZoom();
-                        ((NameFinderPoiFilter) filter).setQuery(query);
-                        runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
-                    } else if(isSearchByNameFilter() && 
-                            !Algoritms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
-                        showFilter.setVisibility(View.INVISIBLE);
-                        filter.clearPreviousZoom();
-                        showPoiCategoriesByNameFilter(query, location);
-                        ((SearchByNameFilter) filter).setQuery(query);
-                        runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
-                    } else {
-                        runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.SEARCH_FURTHER));
-                    }
+                    searchAddress();
                 }
             });
 		
@@ -223,6 +207,18 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                 }
+            });
+            
+            searchFilter.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId,
+                        KeyEvent event) {
+                    if (actionId == EditorInfo.IME_NULL  
+                            && event.getAction() == KeyEvent.ACTION_DOWN) { 
+                            searchAddress(); // 'Enter' key results in same behavior as clicking 'Search' button
+                    }
+                    return true;
+                }  
             });
 
             // TODO(natashaj): Show on map not supported yet
@@ -281,6 +277,35 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
         
         private ListView getListView(View view) {
             return (ListView) view.findViewById(R.id.list);
+        }
+        
+        private void searchAddress() {
+            String query = searchFilter.getText().toString();
+            if (query.length() < 2 && (isNameFinderFilter() || isSearchByNameFilter())) {
+                AccessibleToast.makeText(getContext(), R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
+                return;
+            }
+            
+            InputMethodManager inputManager =(InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE); 
+            inputManager.hideSoftInputFromWindow(
+                    this.getActivity().getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
+            
+            if(isNameFinderFilter() && 
+                    !Algoritms.objectEquals(((NameFinderPoiFilter) filter).getQuery(), query)){
+                filter.clearPreviousZoom();
+                ((NameFinderPoiFilter) filter).setQuery(query);
+                runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
+            } else if(isSearchByNameFilter() && 
+                    !Algoritms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
+                showFilter.setVisibility(View.INVISIBLE);
+                filter.clearPreviousZoom();
+                showPoiCategoriesByNameFilter(query, location);
+                ((SearchByNameFilter) filter).setQuery(query);
+                runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
+            } else {
+                runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.SEARCH_FURTHER));
+            }
         }
         
 	private Path createDirectionPath() {

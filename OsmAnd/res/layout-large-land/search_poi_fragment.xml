@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-	<!-- This file is at /res/layout/list.xml -->
-	
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@color/color_light_gray">
 	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
 		<LinearLayout android:orientation="horizontal" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:id="@+id/SearchFilterLayout">
-			<EditText android:layout_marginLeft = "5dp" android:layout_marginRight = "5dp" android:layout_width="fill_parent" android:text="" android:id="@+id/SearchFilter" android:layout_height="wrap_content" />
+			<EditText android:layout_marginLeft = "5dp" android:layout_marginRight = "5dp" android:layout_width="fill_parent" android:text="" android:id="@+id/SearchFilter" android:layout_height="wrap_content" android:imeOptions="actionDone"/>
 		</LinearLayout>
 		<LinearLayout android:orientation="horizontal" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1">
 			<Button  android:text="@string/search_POI_level_btn"   
