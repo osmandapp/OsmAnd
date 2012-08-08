@@ -1009,10 +1009,10 @@
 		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="1"/>
 		<group>
 			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
-			<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#2929CC"/>
+			<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#8585CC"/>
 				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
 			<filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
-			<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#2929CC"/>
+			<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#8585CC"/>
 				<filter tag="highway" value="motorway_link" maxzoom="13" color="#a58dff"/>
 			<filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#df1346"/>
 			<filter viRendered="true" tag="highway" value="trunk" maxzoom="13" color="#A02067"/>
@@ -1030,10 +1030,10 @@
 		</group>
 
 		<group>
+				<filter viRendered="true" tag="highway" value="primary" color="#C04D61"  maxzoom="13"/>
 			<filter tag="highway" value="primary" color="#eb989a"  maxzoom="13"/>
-				<filter viRendered="true" tag="highway" value="primary" color="#C02641"  maxzoom="13"/>
+				<filter viRendered="true" tag="highway" value="primary_link" color="#C04D61"  maxzoom="13"/>
 			<filter tag="highway" value="primary_link" color="#eb989a"  maxzoom="13"/>
-				<filter viRendered="true" tag="highway" value="primary_link" color="#C02641"  maxzoom="13"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="4"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
@@ -1044,10 +1044,10 @@
 		</group>
 
 		<group>
-			<filter tag="highway" value="secondary" color="#fdd6a4"  maxzoom="13"/>
 				<filter viRendered="true" tag="highway" value="secondary" color="#F7D131"  maxzoom="13"/>
-			<filter tag="highway" value="secondary_link" color="#fdd6a4"  maxzoom="13"/>
+			<filter tag="highway" value="secondary" color="#fdd6a4"  maxzoom="13"/>
 				<filter viRendered="true" tag="highway" value="secondary_link" color="#F7D131"  maxzoom="13"/>
+			<filter tag="highway" value="secondary_link" color="#fdd6a4"  maxzoom="13"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter minzoom="9" maxzoom="9" strokeWidth="3"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
@@ -1059,10 +1059,10 @@
 
 		<group>
 				<filter hmRendered="true" tag="highway" value="motorway" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="motorway" color="#2929CC"/>
+				<filter viRendered="true" tag="highway" value="motorway" color="#8585CC"/>
 			<filter tag="highway" value="motorway" color="#a58dff"/>
 				<filter hmRendered="true" tag="highway" value="motorway_link" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="motorway_link" color="#2929CC"/>
+				<filter viRendered="true" tag="highway" value="motorway_link" color="#8585CC"/>
 			<filter tag="highway" value="motorway_link" color="#a58dff"/>
 				<filter hmRendered="true" tag="highway" value="trunk" color="#df1346"/>
 				<filter viRendered="true" tag="highway" value="trunk" color="#A02067"/>
@@ -1070,9 +1070,9 @@
 				<filter hmRendered="true" tag="highway" value="trunk_link" color="#df1346"/>
 				<filter viRendered="true" tag="highway" value="trunk_link" color="#A02067"/>
 			<filter tag="highway" value="trunk_link" color="#ffaf80"/>
-				<filter viRendered="true" tag="highway" value="primary" color="#C02641"/>
+				<filter viRendered="true" tag="highway" value="primary" color="#C04D61"/>
 			<filter tag="highway" value="primary" color="#eb989a"/>
-				<filter viRendered="true" tag="highway" value="primary_link" color="#C02641"/>
+				<filter viRendered="true" tag="highway" value="primary_link" color="#C04D61"/>
 			<filter tag="highway" value="primary_link" color="#eb989a"/>
 				<filter viRendered="true" tag="highway" value="secondary" color="#F7D131"/>
 			<filter tag="highway" value="secondary" color="#fdd6a4"/>
