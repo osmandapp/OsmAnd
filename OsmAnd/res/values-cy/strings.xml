@@ -14,15 +14,15 @@
 <string name="bg_service_sleep_mode_on">Atal y cefndir</string>
 <string name="gps_wakeup_interval">Cyfnod deffro GPS: %S</string>
 <string name="int_continuosly">Parhaus</string>
-<string name="screen_is_locked">I ddatgloi'r sgrin pwyswch yr eicon cloi</string>
+<string name="screen_is_locked">I ddatgloi\'r sgrin pwyswch yr eicon cloi</string>
 <string name="map_widget_top_text">Enw stryd</string>
 <string name="map_widget_config">Ffurfweddiad</string>
 <string name="map_widget_map_select">Dewis map</string>
-<string name="map_widget_back_to_loc">Lle'r ydw i</string>
-<string name="map_widget_lock_screen">Cloi'e sgrin</string>
+<string name="map_widget_back_to_loc">Lle\'r ydw i</string>
+<string name="map_widget_lock_screen">Cloi\'e sgrin</string>
 <string name="map_widget_compass">Cwmpawd</string>
 <string name="map_widget_top_stack">Bar statws</string>
-<string name="map_widget_reset">Ailosod i'r rhagosodiad</string>
+<string name="map_widget_reset">Ailosod i\'r rhagosodiad</string>
 <string name="map_widget_right_stack">Ochr dde</string>
 <string name="map_widget_left_stack">Ochr chwith</string>
 <string name="map_widget_parking">Parcio</string>
@@ -37,7 +37,7 @@
 <string name="map_widget_mini_route">Map taith bach</string>
 <string name="bg_service_screen_lock">Sgrin cloi</string>
 <string name="bg_service_screen_unlock">Sgrin datgloi</string>
-<string name="bg_service_screen_lock_toast">Mae'r sgrin wedi cloi</string>
+<string name="bg_service_screen_lock_toast">Mae\'r sgrin wedi cloi</string>
 <string name="bg_service_interval">Gosod cyfnod deffro:</string>
 <string name="show_speed_limits_descr">Dangos terfynau cyflymder a thwmpathau traffig</string>
 <string name="avoid_toll_roads_descr">Osgoi tollffyrdd wrth gyfrifo taith</string>
@@ -47,7 +47,7 @@
 <string name="tip_recent_changes_0_8_2_t"> 	Newidiadau yn 0.8.2 :↵ 
 \n\t* Gwell Cynllunio Taith↵ 
 \n\t* Teclynnau map dynamig↵ </string>
-<string name="continue_follow_previous_route_auto">Nid oedd y llywio diwethaf wedi ei gwblhau. Parhau i'w ddilyn? (%1$s eiliad)</string>
+<string name="continue_follow_previous_route_auto">Nid oedd y llywio diwethaf wedi ei gwblhau. Parhau i\'w ddilyn? (%1$s eiliad)</string>
 <string name="route_updated_loc_found">Bydd y daith yn cael ei ail-gyfrifo ar ôl canfod y lleoliad</string>
 <string name="osmand_parking_hours">Awr</string>
 <string name="osmand_parking_minutes">Munud</string>
@@ -60,7 +60,7 @@
 \n\t* Gwell gyfarwyddid llais ar briffyrdd↵
 \n\t* Ategyn parcio (\'Lle mae fy nghar wedi ei barcio?\')↵
 \n\t* Enable/disable logging widget↵</string>
-<string name="use_compass_navigation_descr">Defnyddio cwmpawd lle nad yw'r cyfeiriad wedi ei ganfod</string>
+<string name="use_compass_navigation_descr">Defnyddio cwmpawd lle nad yw\'r cyfeiriad wedi ei ganfod</string>
 <string name="use_compass_navigation">Defnyddio cwmpawd</string>
 <string name="select_animate_speedup">Defnyddio cyflymu animeiddio taith</string>
 <string name="global_app_allocated_memory_descr">Cof Dynodedig %1$s MB (Terfyn Android %2$s MB, Dalvik %3$s MB).</string>
