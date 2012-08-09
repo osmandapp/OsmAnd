@@ -100,6 +100,7 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 
 	private void showPOIDialog(int dialogID, Node n, AmenityType type, String subType) {
+		System.out.println("showing dialog: "+n.toString());
 		Amenity a = new Amenity(n, type, subType);
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);

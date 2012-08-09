@@ -106,6 +106,10 @@ public class OpeningHoursParser {
 		public String toString(){
 			StringBuilder s = new StringBuilder();
 			
+			if (rules.isEmpty()) {
+				return "";
+			}
+			
 			for (OpeningHoursRule r : rules) {
 				s.append(r.toString()).append("; ");
 			}
