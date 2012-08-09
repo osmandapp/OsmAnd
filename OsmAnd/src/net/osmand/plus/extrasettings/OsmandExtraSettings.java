@@ -1,6 +1,5 @@
 package net.osmand.plus.extrasettings;
 
-import java.util.EnumSet;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -126,19 +125,5 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		vectorSettings.setKey("custom_vector_rendering");
 		appearance.addPreference(vectorSettings);
 
-		// Not used any more TODO remove strings
-//		cat = new PreferenceCategory(app);
-//		cat.setTitle(R.string.extra_settings);
-//		appearance.addPreference(cat);
-//		cat.addPreference(activity.createCheckBoxPreference(settings.FLUORESCENT_OVERLAYS,
-//				R.string.use_fluorescent_overlays, R.string.use_fluorescent_overlays_descr));
-//		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
-//				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
-//				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
-//				R.string.position_on_map_descr));
-//		cat.addPreference(activity.createCheckBoxPreference(settings.TRANSPARENT_MAP_THEME, 
-//				R.string.use_transparent_map_theme, R.string.use_transparent_map_theme_descr));
-//		cat.addPreference(activity.createCheckBoxPreference(settings.SHOW_RULER, 
-//				R.string.show_ruler_level, R.string.show_ruler_level_descr));
 	}
 }

@@ -116,7 +116,7 @@ public class LockInfoControl {
 		final ActionItem lockScreenAction = new ActionItem();
 		lockScreenAction.setTitle(view.getResources().getString(
 				isScreenLocked ? R.string.bg_service_screen_unlock : R.string.bg_service_screen_lock));
-		lockScreenAction.setIcon(view.getResources().getDrawable(isScreenLocked ? R.drawable.lock_enabled : R.drawable.lock_disabled));
+		lockScreenAction.setIcon(view.getResources().getDrawable(isScreenLocked ? R.drawable.lock_disabled : R.drawable.lock_enabled));
 		lockScreenAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -144,10 +144,10 @@ public class LockInfoControl {
 	}
 	
 	public void showIntervalChooseDialog(final OsmandMapTileView view, final String patternMsg,
-			String startText, final int[] seconds, final int[] minutes, final ValueHolder<Integer> v, OnClickListener onclick){
+			String title, final int[] seconds, final int[] minutes, final ValueHolder<Integer> v, OnClickListener onclick){
 		final Context ctx = view.getContext();
 		Builder dlg = new AlertDialog.Builder(view.getContext());
-		dlg.setTitle(startText);
+		dlg.setTitle(title);
 		LinearLayout ll = new LinearLayout(view.getContext());
 		final TextView tv = new TextView(view.getContext());
 		tv.setPadding(7, 3, 7, 0);
