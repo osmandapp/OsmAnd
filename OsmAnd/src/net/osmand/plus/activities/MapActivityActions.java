@@ -15,6 +15,7 @@ import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -972,16 +973,20 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		});
-		optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status, android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
-			@Override
-			public void prepareOptionsMenu(Menu menu, MenuItem item) {
-			}
-			@Override
-			public boolean onClick(MenuItem item) {
-				startGpsStatusIntent();
-				return false;
-			}
-		});
+		if (Version.isGpsStatusEnabled(mapActivity)) {
+			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
+					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
+						@Override
+						public void prepareOptionsMenu(Menu menu, MenuItem item) {
+						}
+
+						@Override
+						public boolean onClick(MenuItem item) {
+							startGpsStatusIntent();
+							return false;
+						}
+					});
+		}
 		optionsMenuHelper.registerOptionsMenuItem(R.string.show_point_options, R.string.show_point_options, new OnOptionsMenuClick() {
 			@Override
 			public void prepareOptionsMenu(Menu menu, MenuItem item) {
@@ -1015,21 +1020,24 @@ public class MapActivityActions implements DialogProvider {
 		if (resolved != null) {
 			mapActivity.startActivity(intent);
 		} else {
-			AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
-			builder.setMessage(getString(R.string.gps_status_app_not_found));
-			builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
-					try {
-						mapActivity.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
+			if (Version.isGooglePlayEnabled(mapActivity)) {
+				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+				builder.setMessage(getString(R.string.gps_status_app_not_found));
+				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+						try {
+							mapActivity.startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+						}
 					}
-				}
-			});
-			builder.setNegativeButton(
-					getString(R.string.default_buttons_no), null);
-			builder.show();
+				});
+				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+				builder.show();
+			} else {
+				Toast.makeText(mapActivity, R.string.gps_status_app_not_found, Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 

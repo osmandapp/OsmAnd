@@ -12,6 +12,19 @@ public class Version {
 	private final String appName;
 	private final static String FREE_VERSION_NAME = "net.osmand";
 	
+	
+	public static boolean isGpsStatusEnabled(Context ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+gps_status");
+	}
+	
+	public static boolean isGooglePlayEnabled(Context ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+play_market");
+	}
+	
+	public static boolean isParkingPluginInlined(Context ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+parking_plugin");
+	}
+	
 	private Version(Context ctx) {
 		appVersion = ctx.getString(R.string.app_version);
 		appName = ctx.getString(R.string.app_name);
