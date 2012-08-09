@@ -56,7 +56,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
 		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
-				"transparent", EnumSet.of(ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT));
+				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
 		transparent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
@@ -67,7 +67,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		});
 
 		final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_fluorescent,
-				"fluorescent", EnumSet.noneOf(ApplicationMode.class));
+				"fluorescent", view.getSettings().FLUORESCENT_OVERLAYS);
 		fluorescent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {

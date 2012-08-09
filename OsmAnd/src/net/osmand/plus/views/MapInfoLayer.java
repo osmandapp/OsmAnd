@@ -233,7 +233,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	private void registerAppearanceWidgets() {
 		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_ruler, 
-				"showRuler", EnumSet.allOf(ApplicationMode.class));
+				"showRuler", view.getSettings().SHOW_RULER);
 		showRuler.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
@@ -244,7 +244,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 		
 		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_view_direction, 
-				"viewDirection", EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN));
+				"viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
 		displayViewDirections.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {

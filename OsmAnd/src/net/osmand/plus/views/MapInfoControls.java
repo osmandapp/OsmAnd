@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.ApplicationMode;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,23 +68,14 @@ public class MapInfoControls {
 	}
 	
 	public MapInfoControlRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
-			EnumSet<ApplicationMode> appDefaultModes) {
+			CommonPreference<Boolean> pref) {
 		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
-		ii.defaultModes = appDefaultModes.clone();
+		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
 		ii.defaultCollapsible = null;
 		ii.key = key;
+		ii.blPreference = pref;
 		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
 		ii.visibleCollapsible = null;
-		for(ApplicationMode ms : ApplicationMode.values() ) {
-			boolean def = appDefaultModes.contains(ms);
-			Set<String> set = visibleElements.get(ms);
-			if(set != null) {
-				def = set.contains(key);
-			}
-			if(def){
-				ii.visibleModes.add(ms);
-			}
-		}
 		ii.drawable = drawable;
 		ii.messageId = messageId;
 		this.appearanceWidgets.add(ii);
@@ -281,18 +273,22 @@ public class MapInfoControls {
 		private EnumSet<ApplicationMode> defaultCollapsible;
 		private EnumSet<ApplicationMode> visibleModes;
 		private EnumSet<ApplicationMode> visibleCollapsible;
+		private CommonPreference<Boolean> blPreference = null;
 		private Runnable stateChangeListener = null;
 		public int priorityOrder;
 		
 		public boolean visibleCollapsed(ApplicationMode mode){
-			return visibleCollapsible != null && visibleCollapsible.contains(mode);
+			return blPreference == null && visibleCollapsible != null && visibleCollapsible.contains(mode);
 		}
 		
 		public boolean collapseEnabled(ApplicationMode mode){
-			return visibleCollapsible != null;
+			return visibleCollapsible != null && blPreference == null;
 		}
 		
 		public boolean visible(ApplicationMode mode){
+			if(blPreference != null) {
+				return blPreference.getModeValue(mode);
+			}
 			return visibleModes.contains(mode);
 		}
 		
@@ -301,6 +297,10 @@ public class MapInfoControls {
 				visibleModes.add(ms);
 			}
 			return this;
+		}
+		
+		public void setPreference(CommonPreference<Boolean> blPreference) {
+			this.blPreference = blPreference;
 		}
 		
 		
