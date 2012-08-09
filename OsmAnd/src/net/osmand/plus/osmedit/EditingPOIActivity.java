@@ -17,6 +17,7 @@ import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
+import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -55,6 +56,8 @@ public class EditingPOIActivity implements DialogProvider {
 	private Button openHoursButton;
 	private EditText openingHours;
 	private EditText commentText;
+	private EditText websiteText;
+	private EditText phoneText;
 
 //	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
@@ -155,6 +158,10 @@ public class EditingPOIActivity implements DialogProvider {
 		nameText.setText(a.getName());
 		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		openingHours.setText(a.getOpeningHours());
+		EditText phoneText = ((EditText)dlg.findViewById(R.id.Phone));
+		phoneText.setText(a.getPhone());
+		EditText websiteText = ((EditText)dlg.findViewById(R.id.Website));
+		websiteText.setText(a.getSite());
 		updateType(a);
 	}
 	
@@ -169,6 +176,9 @@ public class EditingPOIActivity implements DialogProvider {
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeText.setThreshold(1);
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
+		phoneText = ((EditText)dlg.findViewById(R.id.Phone));
+		websiteText = ((EditText)dlg.findViewById(R.id.Website));
+		
 		
 		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
 		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
@@ -279,6 +289,14 @@ public class EditingPOIActivity implements DialogProvider {
 				} else {
 					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
 				}
+				String website = websiteText.getText().toString();
+				if (website.length() > 0 ){
+					n.putTag(OSMTagKey.WEBSITE.getValue(),website);
+				}
+				String phone = phoneText.getText().toString();
+				if (phone.length() > 0 ){
+					n.putTag(OSMTagKey.PHONE.getValue(),phone);
+				}
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), new Runnable() {
 					@Override
 					public void run() {
@@ -323,7 +341,7 @@ public class EditingPOIActivity implements DialogProvider {
 	
 
 	private Dialog createOpenHoursDlg(){
-		List<OpeningHoursRule> time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
+		OpeningHours time = OpeningHoursParser.parseOpenedHours(openingHours.getText().toString());
 		if(time == null){
 			AccessibleToast.makeText(ctx, ctx.getString(R.string.opening_hours_not_supported), Toast.LENGTH_LONG).show();
 			return null;
@@ -332,7 +350,7 @@ public class EditingPOIActivity implements DialogProvider {
 		List<BasicDayOpeningHourRule> simple = null;
 		if(time != null){
 			simple = new ArrayList<BasicDayOpeningHourRule>();
-			for(OpeningHoursRule r : time){
+			for(OpeningHoursRule r : time.getRules()){
 				if(r instanceof BasicDayOpeningHourRule){
 					simple.add((BasicDayOpeningHourRule) r);
 				} else {
@@ -348,7 +366,8 @@ public class EditingPOIActivity implements DialogProvider {
 		builder.setPositiveButton(ctx.getString(R.string.default_buttons_apply), new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				openingHours.setText(OpeningHoursParser.toStringOpenedHours(v.getTime()));
+				OpeningHours oh = new OpeningHours((ArrayList<OpeningHoursRule>) v.getTime());
+				openingHours.setText(oh.toString());
 				ctx.removeDialog(DIALOG_OPENING_HOURS);
 			}
 		});
