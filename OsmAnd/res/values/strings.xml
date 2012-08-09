@@ -1122,4 +1122,5 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
 <string name="edit_filter_create_message">Filter {0} has been created</string>
 <string name="default_buttons_selectall">Select All</string>
-</resources>
+
+<string name="email">email</string></resources>

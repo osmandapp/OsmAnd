@@ -56,6 +56,8 @@ public class EditingPOIActivity implements DialogProvider {
 	private Button openHoursButton;
 	private EditText openingHours;
 	private EditText commentText;
+	private EditText websiteText;
+	private EditText phoneText;
 
 //	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
@@ -157,6 +159,10 @@ public class EditingPOIActivity implements DialogProvider {
 		nameText.setText(a.getName());
 		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		openingHours.setText(a.getOpeningHours());
+		EditText phoneText = ((EditText)dlg.findViewById(R.id.Phone));
+		phoneText.setText(a.getPhone());
+		EditText websiteText = ((EditText)dlg.findViewById(R.id.Website));
+		websiteText.setText(a.getSite());
 		updateType(a);
 	}
 	
@@ -171,6 +177,9 @@ public class EditingPOIActivity implements DialogProvider {
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeText.setThreshold(1);
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
+		phoneText = ((EditText)dlg.findViewById(R.id.Phone));
+		websiteText = ((EditText)dlg.findViewById(R.id.Website));
+		
 		
 		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
 		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
@@ -280,6 +289,14 @@ public class EditingPOIActivity implements DialogProvider {
 					n.removeTag(OSMTagKey.OPENING_HOURS.getValue());
 				} else {
 					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
+				}
+				String website = websiteText.getText().toString();
+				if (website.length() > 0 ){
+					n.putTag(OSMTagKey.WEBSITE.getValue(),website);
+				}
+				String phone = phoneText.getText().toString();
+				if (phone.length() > 0 ){
+					n.putTag(OSMTagKey.PHONE.getValue(),phone);
 				}
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), new Runnable() {
 					@Override
