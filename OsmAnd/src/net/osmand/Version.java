@@ -25,6 +25,10 @@ public class Version {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
 	}
 	
+	public static boolean isFreeVersionEnabled(Context ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+free_version");
+	}
+	
 	public static boolean isParkingPluginInlined(Context ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+parking_plugin");
 	}
@@ -71,7 +75,7 @@ public class Version {
 	}
 	
 	public static boolean isFreeVersion(Context ctx){
-		return ctx.getPackageName().equals(FREE_VERSION_NAME);
+		return ctx.getPackageName().equals(FREE_VERSION_NAME) || isFreeVersionEnabled(ctx);
 		
 	}
 	
