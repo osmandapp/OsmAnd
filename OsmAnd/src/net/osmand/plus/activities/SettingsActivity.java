@@ -283,13 +283,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			applicationDir.setKey("external_storage_dir");
 			applicationDir.setDialogTitle(R.string.application_dir);
 			applicationDir.setOnPreferenceChangeListener(this);
-			applicationDir.setOnPreferenceChangeListener(this);
+			cat.addPreference(applicationDir);
 		}
 		
-//		<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
-
-		
-
 //		BidForFixHelper bidForFixHelper = getMyApplication().getBidForFix();
 //		bidForFixHelper.generatePreferenceList(screen, getString(R.string.support_new_features), this);
 		OsmandPlugin.onSettingsActivityCreate(this, screen);
