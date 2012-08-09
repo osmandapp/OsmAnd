@@ -973,7 +973,7 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		});
-		if (Version.isGpsStatusEnabled(mapActivity)) {
+		if (Version.isGpsStatusEnabled(mapActivity) && !Version.isBlackberry(mapActivity)) {
 			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
 					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
 						@Override

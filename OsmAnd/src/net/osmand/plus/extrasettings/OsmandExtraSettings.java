@@ -1,6 +1,7 @@
 package net.osmand.plus.extrasettings;
 
 
+import net.osmand.Version;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -95,28 +96,32 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		
 		cat.addPreference(activity.createCheckBoxPreference(settings.USE_HIGH_RES_MAPS, 
 				R.string.use_high_res_maps, R.string.use_high_res_maps_descr));
-		cat.addPreference(activity.createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, 
-				R.string.use_trackball, R.string.use_trackball_descr));
 		
-		ListPreference lp = activity.createListPreference(settings.AUDIO_STREAM_GUIDANCE, 
-				new String[] {app.getString(R.string.voice_stream_music), app.getString(R.string.voice_stream_notification),
-				app.getString(R.string.voice_stream_voice_call)},
-				new Integer[] {AudioManager.STREAM_MUSIC, AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL},
-				R.string.choose_audio_stream, R.string.choose_audio_stream_descr);
-		final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-		lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		if (!Version.isBlackberry(activity)) {
+			cat.addPreference(activity.createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, 
+					R.string.use_trackball, R.string.use_trackball_descr));
 			
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				prev.onPreferenceChange(preference, newValue);
-				CommandPlayer player = app.getPlayer();
-				if(player != null) {
-					player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+			ListPreference lp = activity.createListPreference(
+					settings.AUDIO_STREAM_GUIDANCE,
+					new String[] { app.getString(R.string.voice_stream_music), app.getString(R.string.voice_stream_notification),
+							app.getString(R.string.voice_stream_voice_call) }, new Integer[] { AudioManager.STREAM_MUSIC,
+							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL }, R.string.choose_audio_stream,
+					R.string.choose_audio_stream_descr);
+			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					prev.onPreferenceChange(preference, newValue);
+					CommandPlayer player = app.getPlayer();
+					if (player != null) {
+						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+					}
+					return true;
 				}
-				return true;
-			}
-		});
-		cat.addPreference(lp);
+			});
+			cat.addPreference(lp);
+		}
 		
 		
 		PreferenceScreen appearance = (PreferenceScreen) screen.findPreference("appearance_settings");

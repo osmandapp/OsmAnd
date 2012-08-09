@@ -32,7 +32,7 @@
 
 	<PreferenceCategory android:title="@string/global_settings" android:key="global_settings" >
 		<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr">
-			<PreferenceCategory android:title="@string/global_app_settings">
+			<PreferenceCategory android:title="@string/global_app_settings" android:key="global_app_settings">
 				<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
 				<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
 				<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
@@ -40,8 +40,6 @@
 				<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
 				<CheckBoxPreference android:summary="@string/left_side_navigation_descr" android:title="@string/left_side_navigation"
 					android:key="left_side_navigation"></CheckBoxPreference>
-				<CheckBoxPreference android:key="native_rendering" android:title="@string/native_rendering" android:summary="@string/vector_maps_may_display_faster_on_some_devices"></CheckBoxPreference>
-				<EditTextPreference android:title="@string/application_dir" android:key="external_storage_dir"></EditTextPreference>
 			</PreferenceCategory>
 		</PreferenceScreen>
 

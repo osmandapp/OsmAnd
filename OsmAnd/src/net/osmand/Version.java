@@ -17,6 +17,10 @@ public class Version {
 		return ctx.getString(R.string.versionFeatures).contains("+gps_status");
 	}
 	
+	public static boolean isBlackberry(Context ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+blackberry");
+	}
+	
 	public static boolean isGooglePlayEnabled(Context ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+play_market");
 	}
