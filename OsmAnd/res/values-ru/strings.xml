@@ -1,14 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    -->
-  <string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите ее в списке. Удерживайте карту, если вы хотите удалить или деактивировать. \nДанные на устройстве (%1$s свободно):</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите ее в списке. Удерживайте карту, если вы хотите удалить или деактивировать. \nДанные на устройстве (%1$s свободно):</string>
   <string name="unknown_from_location">Начальное местоположение еще не определено.</string>
   <string name="unknown_location">Местоположение еще не определено</string>
   <string name="context_menu_item_directions">Маршрут к</string>
@@ -106,7 +97,6 @@
   <string name="amenity_type_wikiosm">Википедия (локально)</string>
   <string name="amenity_type_user_defined">Пользовательские</string>
   <string name="fav_export_confirmation">Файл с избранными уже существует. Вы хотите его заменить?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Настройка профиля</string>
   <string name="settings_preset">Профиль</string>
   <string name="settings_preset_descr">Выберите профиль работы приложения (в каждом профиле настройки хранятся отдельно).</string>
@@ -917,4 +907,6 @@
   <string name="bg_service_sleep_mode_on">Включить спящий режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал просыпания</string>
+<string name="layer_map_appearance">Настройка экрана...</string>
+<string name="show_lanes">Показывать полосы движения</string>
 </resources>
