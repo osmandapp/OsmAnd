@@ -907,14 +907,14 @@
   <string name="map_widget_distance">Цель</string>
   <string name="map_widget_altitude">Высота</string>
   <string name="map_widget_time">Время в пути</string>
-  <string name="map_widget_next_turn">Следующий поворот</string>
-  <string name="map_widget_next_turn_small">Следующий поворот (маленький)</string>
-  <string name="map_widget_next_next_turn">Второй следующий поворот</string>
+  <string name="map_widget_next_turn">След. поворот</string>
+  <string name="map_widget_next_turn_small">След. поворот (мал.)</string>
+  <string name="map_widget_next_next_turn">Второй след. поворот</string>
   <string name="map_widget_mini_route">Малая карта маршрута</string>
-  <string name="bg_service_screen_lock">Заблокировать/Разблокировать экран</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="bg_service_screen_lock">Блокировка экрана</string>
+  <string name="bg_service_screen_unlock">Блокировать экран</string>
+  <string name="bg_service_sleep_mode_off">Отключить спящий режим</string>
+  <string name="bg_service_sleep_mode_on">Включить спящий режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал просыпания</string>
 </resources>
