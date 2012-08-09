@@ -191,7 +191,7 @@ public class AHSupermarketResolver {
 				newTags.put("addr:postcode", props.get("zip")+"");
 				
 				JSONArray o = (JSONArray) props.get("hours");
-				List<OpeningHoursParser.OpeningHoursRule> rules = new ArrayList<OpeningHoursRule>();
+				OpeningHoursParser.OpeningHours rules = new OpeningHoursParser.OpeningHours();
 				BasicDayOpeningHourRule prev = null;
 				for(int i=0; i<7; i++){
 					JSONObject obj = o.getJSONObject(i);
@@ -207,14 +207,14 @@ public class AHSupermarketResolver {
 						} else {
 							BasicDayOpeningHourRule rule = new OpeningHoursParser.BasicDayOpeningHourRule();
 							rule.getDays()[i] = true;
-							rule.setStartEndTime(start, end);
+							rule.addTimeRange(start, end);
 							prev = rule;
-							rules.add(rule);
+							rules.addRule(rule);
 						}
 					}
 					
 				}
-				newTags.put("opening_hours", OpeningHoursParser.toStringOpenedHours(rules));
+				newTags.put("opening_hours", rules.toString());
 				
 				// Check distance to info
 				LatLon real = new LatLon((Double)props.get("lat"), (Double) props.get("lng"));
