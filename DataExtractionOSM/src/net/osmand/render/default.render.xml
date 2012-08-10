@@ -1128,11 +1128,11 @@
 		<group>
 				<filter viRendered="true" tag="highway" value="tertiary" color="#F0CE30"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="highway" value="tertiary" color="#fefe7f"/>
+				<filter hmRendered="true" tag="highway" value="tertiary" color="#ffff80"/>
 			<filter tag="highway" value="tertiary" color="#fefeb3"/>
 				<filter viRendered="true" tag="highway" value="tertiary_link" color="#F0CE30"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefe7f"/>
+				<filter hmRendered="true" tag="highway" value="tertiary_link" color="#ffff80"/>
 			<filter tag="highway" value="tertiary_link" color="#fefeb3"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
