@@ -1,7 +1,7 @@
 package net.osmand.plus.extrasettings;
 
-import java.util.EnumSet;
 
+import net.osmand.Version;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -56,7 +56,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
 		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
-				"transparent", EnumSet.of(ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT));
+				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
 		transparent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
@@ -67,7 +67,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		});
 
 		final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_fluorescent,
-				"fluorescent", EnumSet.noneOf(ApplicationMode.class));
+				"fluorescent", view.getSettings().FLUORESCENT_OVERLAYS);
 		fluorescent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
@@ -96,28 +96,32 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		
 		cat.addPreference(activity.createCheckBoxPreference(settings.USE_HIGH_RES_MAPS, 
 				R.string.use_high_res_maps, R.string.use_high_res_maps_descr));
-		cat.addPreference(activity.createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, 
-				R.string.use_trackball, R.string.use_trackball_descr));
 		
-		ListPreference lp = activity.createListPreference(settings.AUDIO_STREAM_GUIDANCE, 
-				new String[] {app.getString(R.string.voice_stream_music), app.getString(R.string.voice_stream_notification),
-				app.getString(R.string.voice_stream_voice_call)},
-				new Integer[] {AudioManager.STREAM_MUSIC, AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL},
-				R.string.choose_audio_stream, R.string.choose_audio_stream_descr);
-		final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-		lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		if (!Version.isBlackberry(activity)) {
+			cat.addPreference(activity.createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, 
+					R.string.use_trackball, R.string.use_trackball_descr));
 			
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				prev.onPreferenceChange(preference, newValue);
-				CommandPlayer player = app.getPlayer();
-				if(player != null) {
-					player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+			ListPreference lp = activity.createListPreference(
+					settings.AUDIO_STREAM_GUIDANCE,
+					new String[] { app.getString(R.string.voice_stream_music), app.getString(R.string.voice_stream_notification),
+							app.getString(R.string.voice_stream_voice_call) }, new Integer[] { AudioManager.STREAM_MUSIC,
+							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL }, R.string.choose_audio_stream,
+					R.string.choose_audio_stream_descr);
+			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+
+				@Override
+				public boolean onPreferenceChange(Preference preference, Object newValue) {
+					prev.onPreferenceChange(preference, newValue);
+					CommandPlayer player = app.getPlayer();
+					if (player != null) {
+						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+					}
+					return true;
 				}
-				return true;
-			}
-		});
-		cat.addPreference(lp);
+			});
+			cat.addPreference(lp);
+		}
 		
 		
 		PreferenceScreen appearance = (PreferenceScreen) screen.findPreference("appearance_settings");
@@ -126,19 +130,5 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		vectorSettings.setKey("custom_vector_rendering");
 		appearance.addPreference(vectorSettings);
 
-		// Not used any more TODO remove strings
-//		cat = new PreferenceCategory(app);
-//		cat.setTitle(R.string.extra_settings);
-//		appearance.addPreference(cat);
-//		cat.addPreference(activity.createCheckBoxPreference(settings.FLUORESCENT_OVERLAYS,
-//				R.string.use_fluorescent_overlays, R.string.use_fluorescent_overlays_descr));
-//		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
-//				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
-//				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
-//				R.string.position_on_map_descr));
-//		cat.addPreference(activity.createCheckBoxPreference(settings.TRANSPARENT_MAP_THEME, 
-//				R.string.use_transparent_map_theme, R.string.use_transparent_map_theme_descr));
-//		cat.addPreference(activity.createCheckBoxPreference(settings.SHOW_RULER, 
-//				R.string.show_ruler_level, R.string.show_ruler_level_descr));
 	}
 }

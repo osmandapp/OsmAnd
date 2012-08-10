@@ -128,6 +128,14 @@
                 <exclude name="**/*.java" />
             </fileset>
         </copy>
+    	<if>
+    	    <condition>
+    	        <isset property="versionFeatures" />
+    	    </condition>
+    		<then>
+    			<replaceregexp file="res/values/no_translate.xml" match='versionFeatures"&gt;(.*)&lt;' replace='versionFeatures"&gt;${versionFeatures}&lt;' byline="true" />
+    		</then>
+    	</if>
         <if>
             <condition>
                 <isset property="net.osmand" />
@@ -137,6 +145,8 @@
                 <replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
                 <replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand.plus"' replace='android:process="net.osmand"' byline="true" />
                 <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;' byline="true" />
+            	<replaceregexp file="res/layout/search_address.xml" match='net.osmand.plus' replace='net.osmand' byline="true" />
+            	<replaceregexp file="res/layout/navigate_point.xml" match='net.osmand.plus' replace='net.osmand' byline="true" />
             </then>
             <else>
                 <replaceregexp file="AndroidManifest.xml" match='"@drawable/icon_free"' replace='"@drawable/icon"' byline="true" />

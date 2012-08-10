@@ -17,7 +17,6 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.views.LockInfoControl;
 import net.osmand.plus.views.LockInfoControl.LockInfoControlActions;
 import net.osmand.plus.views.LockInfoControl.ValueHolder;
@@ -106,7 +105,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		};
 		adapter.registerItem(R.string.context_menu_item_add_waypoint, R.drawable.list_activities_gpx_waypoint, listener, -1);
 	}
-
+	
+	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
+	public static final int[] SECONDS = new int[] { 1, 2, 3, 5};
+	
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
 		Preference offlineData = screen.findPreference("local_indexes");
@@ -115,20 +117,25 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		} else {
 			offlineData.setSummary(offlineData.getSummary() + " " + app.getString(R.string.gpx_index_settings_descr));
 		}
-		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
-		grp.setTitle(R.string.monitor_preferences);
-		grp.setSummary(R.string.monitor_preferences_descr);
-		grp.setKey("monitor_settings");
-		((PreferenceCategory) screen.findPreference("profile_dep_cat")).addPreference(grp);
+		PreferenceScreen general = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS);
+		general.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
+				R.string.live_monitoring_url_descr));
+		
+		// TODO remove strings
+//		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
+//		grp.setTitle(R.string.monitor_preferences);
+//		grp.setSummary(R.string.monitor_preferences_descr);
+//		grp.setKey("monitor_settings");
+//		((PreferenceScreen) screen.findPreference("routing_settings")).addPreference(grp);
 
 		PreferenceCategory cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.save_track_to_gpx);
-		grp.addPreference(cat);
+		((PreferenceScreen) screen.findPreference("routing_settings")).addPreference(cat);
 
 		cat.addPreference(activity.createCheckBoxPreference(settings.SAVE_TRACK_TO_GPX, R.string.save_track_to_gpx,
 				R.string.save_track_to_gpx_descrp));
-		cat.addPreference(activity.createTimeListPreference(settings.SAVE_TRACK_INTERVAL, new int[] { 1, 2, 3, 5, 10, 15, 20, 30 },
-				new int[] { 1, 2, 3, 5 }, 1, R.string.save_track_interval, R.string.save_track_interval_descr));
+		cat.addPreference(activity.createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
+				MINUTES, 1, R.string.save_track_interval, R.string.save_track_interval_descr));
 
 		Preference pref = new Preference(activity);
 		pref.setTitle(R.string.save_current_track);
@@ -150,14 +157,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 
 		cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.live_monitoring);
-		grp.addPreference(cat);
+		((PreferenceScreen) screen.findPreference("routing_settings")).addPreference(cat);
 
 		cat.addPreference(activity.createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring,
 				R.string.live_monitoring_descr));
 		cat.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
 				R.string.live_monitoring_url_descr));
-		cat.addPreference(activity.createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, new int[] { 1, 2, 3, 5, 10, 15, 20, 30 },
-				new int[] { 1, 2, 3, 5 }, 1, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
+		cat.addPreference(activity.createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, SECONDS,
+				MINUTES, 1, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
 
 	}
 
@@ -256,7 +263,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
 		bgServiceAction.setTitle(view.getResources().getString(off? R.string.monitoring_mode_off : R.string.monitoring_mode_on));
-		bgServiceAction.setIcon(view.getResources().getDrawable(!off?R.drawable.monitoring_rec_big:R.drawable.monitoring_rec_inactive));
+		bgServiceAction.setIcon(view.getResources().getDrawable(off ? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive));
 		bgServiceAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -264,7 +271,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = view.getSettings().SAVE_TRACK_INTERVAL.get();
 					li.showIntervalChooseDialog(view, view.getContext().getString(R.string.save_track_interval) + " : %s", 
-							view.getContext().getString(R.string.save_track_to_gpx), OsmandBackgroundServicePlugin.SECONDS, OsmandBackgroundServicePlugin.MINUTES,
+							view.getContext().getString(R.string.save_track_to_gpx), SECONDS, MINUTES,
 							vs, new OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -279,6 +286,34 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 			}
 		});
 		qa.addActionItem(bgServiceAction);
+		
+		final ActionItem liveAction = new ActionItem();
+		final boolean liveoff = !view.getSettings().LIVE_MONITORING.get();
+		liveAction.setTitle(view.getResources().getString(liveoff? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on));
+		liveAction.setIcon(view.getResources().getDrawable(liveoff?R.drawable.monitoring_rec_big:R.drawable.monitoring_rec_inactive));
+		liveAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (liveoff) {
+					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
+					vs.value = view.getSettings().LIVE_MONITORING_INTERVAL.get();
+					li.showIntervalChooseDialog(view, view.getContext().getString(R.string.live_monitoring_interval) + " : %s", 
+							view.getContext().getString(R.string.live_monitoring), SECONDS, MINUTES,
+							vs, new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							view.getSettings().LIVE_MONITORING_INTERVAL.set(vs.value);
+							view.getSettings().LIVE_MONITORING.set(true);
+						}
+					});
+				} else {
+					view.getSettings().LIVE_MONITORING.set(false);
+				}
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(liveAction);
+
 		
 	}
 

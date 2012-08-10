@@ -16,7 +16,8 @@
 	<!-- LAYER and SPECIAL PURPOSE consistency colors -->
 
 	<color name="gpx_track">#B4A00AD7</color>
-	<color name="gpx_track_fluorescent">#B400FFFF</color>
+	<!-- try magenta instead of cyan color name="gpx_track_fluorescent">#B400FFFF</color>
+	<color name="gpx_track_fluorescent">#B4FF00FF</color>
 	<color name="pos_heading">#320000FF</color>
 	<color name="pos_area">#280000FF</color>
 	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
