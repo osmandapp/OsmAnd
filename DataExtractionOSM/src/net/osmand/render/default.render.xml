@@ -37,11 +37,11 @@
 	</renderingAttribute>
 
 	<!--
-		All-Purpose Renderer (by Hardy Mueller), v023:
-		- with ShowMoreMapDetails some roads already rendered at lower zooms (travel/orienteering)
-		- with ShowMoreMapDetails motorways shown blue and trunk roads red, aligned with conventional road atlas
-		  (road color scheme intensified on 2012-08-10. Old values commented with PALE-SCHEME)
-		- with ShowMoreMapDetails map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
+		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
+		- some roads already rendered at lower zooms (travel/orienteering)
+		- motorways shown blue and trunk roads red to assimilate primaries, aligned with conventional road atlas
+		  (road color scheme intensified and unfied to Brightness=100, Saturation=50 on 2012-08-10. Old values commented with PALE-SCHEME)
+		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
 		Typical zoom level use (zX) and alignment of features displayed:
 		 - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
 		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
