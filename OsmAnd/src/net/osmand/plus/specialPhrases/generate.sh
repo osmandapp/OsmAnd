@@ -40,7 +40,7 @@ import java.util.Map;
     while read line; do 
         arr=(${line//\|/ })
 
-        echo '        sp.put( "'${arr[1]}'_'${arr[2]}'", "'${arr[0]}'");' >> SpecialPhrases${lang}.java
+        echo '        sp.put( "'${arr[2]}'", "'${arr[0]}'");' >> SpecialPhrases${lang}.java
 
     done < /tmp/automatedJavaGenarationFile2.txt
     

@@ -27,6 +27,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.specialPhrases.SpecialPhrases;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
@@ -247,6 +248,11 @@ public class OsmandApplication extends Application {
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
+				if (osmandSettings.usingEnglishNames()) {
+					SpecialPhrases.setLanguage(new Locale("en"));
+				} else {
+					SpecialPhrases.setLanguage(Locale.getDefault());
+				}
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);

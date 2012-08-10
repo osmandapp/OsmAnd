@@ -7,6 +7,14 @@ public class SpecialPhrases {
 
 
 	private static Map<String,String> m;
+	
+	/**
+	 * Check if the language has been set
+	 * @return true if language has been set
+	 */
+	public static boolean isLanguageSet(){
+		return m!= null;
+	}
 
 	/**
 	 * Use this method to set the language.
@@ -90,6 +98,9 @@ public class SpecialPhrases {
 			m = SpecialPhrasesUK.createMap();
 		} else if (lang.getLanguage().equals(new Locale("vi").getLanguage())) {
 			m = SpecialPhrasesVI.createMap();
+		} else {
+			// default case
+			m = SpecialPhrasesEN.createMap();
 		}
 
 	}

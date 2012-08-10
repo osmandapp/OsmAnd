@@ -1,6 +1,7 @@
 package net.osmand;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -9,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.specialPhrases.SpecialPhrases;
 import android.content.Context;
 
 public class OsmAndFormatter {
@@ -184,10 +186,20 @@ public class OsmAndFormatter {
 	}
 	
 	public static String getPoiStringWithoutType(Amenity amenity, boolean en){
+		String type = SpecialPhrases.getSpecialPhrase(amenity.getSubType());
 		String n = amenity.getName(en);
-		if(n.length() == 0){
-			return amenity.getSubType();
+		
+		if(type == null) type = amenity.getSubType();
+		if(n.indexOf(type) != -1){
+			// type is contained in name e.g.
+			// n = "Bakery the Corner"
+			// type = "Bakery"
+			// no need to repeat this
+			return n; 
 		}
-		return amenity.getSubType() + " " + n; //$NON-NLS-1$
+		if(n.length() == 0){
+			return type;
+		}
+		return type + " " + n; //$NON-NLS-1$
 	}
 }

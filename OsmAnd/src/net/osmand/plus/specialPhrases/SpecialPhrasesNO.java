@@ -25,9 +25,9 @@ import java.util.Map;
  public class SpecialPhrasesNO {
      public static Map<String,String> createMap(){
         HashMap<String,String> sp = new HashMap<String,String>(); // maybe search an optimal load factor and initial capacity
-        sp.put( "aeroway_aerodrome", "Flyplass");
-        sp.put( "amenity_arts_centre", "Kunstsenter");
-        sp.put( "amenity_atm", "Minibank");
+        sp.put( "aerodrome", "Flyplass");
+        sp.put( "arts_centre", "Kunstsenter");
+        sp.put( "atm", "Minibank");
         return sp;
     }
 }

@@ -25,30 +25,30 @@ import java.util.Map;
  public class SpecialPhrasesJA {
      public static Map<String,String> createMap(){
         HashMap<String,String> sp = new HashMap<String,String>(); // maybe search an optimal load factor and initial capacity
-        sp.put( "aeroway_aerodrome", "空港");
-        sp.put( "amenity_bank", "銀行");
-        sp.put( "amenity_car_rental", "レンタカー");
-        sp.put( "amenity_car_wash", "洗車");
-        sp.put( "amenity_casino", "賭場");
-        sp.put( "amenity_college", "大学");
-        sp.put( "amenity_dentist", "歯科医");
-        sp.put( "amenity_embassy", "大使館");
-        sp.put( "amenity_hotel", "ホテル");
-        sp.put( "amenity_kindergarten", "幼稚園");
-        sp.put( "amenity_library", "図書館");
-        sp.put( "amenity_pub", "パブ（立ち吞み屋）");
-        sp.put( "amenity_sauna", "サウナ");
-        sp.put( "amenity_school", "学校");
-        sp.put( "amenity_shop", "店舗");
-        sp.put( "amenity_taxi", "タクシー乗り場");
-        sp.put( "amenity_university", "大学");
-        sp.put( "amenity_wifi", "WiFiアクセスポイント");
-        sp.put( "highway_bus_stop", "バス停");
-        sp.put( "highway_steps", "階段");
-        sp.put( "place_city", "市");
-        sp.put( "tourism_theme_park", "テーマパーク");
-        sp.put( "tourism_valley", "谷");
-        sp.put( "tourism_zoo", "動物園");
+        sp.put( "aerodrome", "空港");
+        sp.put( "bank", "銀行");
+        sp.put( "car_rental", "レンタカー");
+        sp.put( "car_wash", "洗車");
+        sp.put( "casino", "賭場");
+        sp.put( "college", "大学");
+        sp.put( "dentist", "歯科医");
+        sp.put( "embassy", "大使館");
+        sp.put( "hotel", "ホテル");
+        sp.put( "kindergarten", "幼稚園");
+        sp.put( "library", "図書館");
+        sp.put( "pub", "パブ（立ち吞み屋）");
+        sp.put( "sauna", "サウナ");
+        sp.put( "school", "学校");
+        sp.put( "shop", "店舗");
+        sp.put( "taxi", "タクシー乗り場");
+        sp.put( "university", "大学");
+        sp.put( "wifi", "WiFiアクセスポイント");
+        sp.put( "bus_stop", "バス停");
+        sp.put( "steps", "階段");
+        sp.put( "city", "市");
+        sp.put( "theme_park", "テーマパーク");
+        sp.put( "valley", "谷");
+        sp.put( "zoo", "動物園");
         return sp;
     }
 }
