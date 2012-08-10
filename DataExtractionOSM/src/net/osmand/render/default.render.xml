@@ -1037,7 +1037,7 @@
 				<filter hmRendered="true" tag="highway" value="primary" maxzoom="13" color="#ed5a7f"/>
 				<filter viRendered="true" tag="highway" value="primary" maxzoom="13" color="#C04D61"/>
 			<filter tag="highway" value="primary" maxzoom="13" color="#eb989a"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#eb989a" --/>
+				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#eb989a"/ -->
 				<filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#ed5a7f"/>
 				<filter viRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#C04D61"/>
 			<filter tag="highway" value="primary_link" maxzoom="13" color="#eb989a"/>
