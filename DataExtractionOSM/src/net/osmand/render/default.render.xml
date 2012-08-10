@@ -12,7 +12,7 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-		<renderingProperty attr="viRendered" name="New colors" description="Experiment with road colors"
+		<renderingProperty attr="viRendered" name="New road colors" description="Experiment with road colors"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
 		type="string" possibleValues="never,13,12,11"/>
@@ -1008,18 +1008,18 @@
 	<line>
 		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="1"/>
 		<group>
-			<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
-			<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#6666CC"/>
-				<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
-			<filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
-			<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#6666CC"/>
-				<filter tag="highway" value="motorway_link" maxzoom="13" color="#a58dff"/>
-			<filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#df1346"/>
-			<filter viRendered="true" tag="highway" value="trunk" maxzoom="13" color="#A02067"/>
-				<filter tag="highway" value="trunk" maxzoom="13" color="#ffaf80"/>
-			<filter hmRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#df1346"/>
-			<filter viRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#A02067"/>
-				<filter tag="highway" value="trunk_link" maxzoom="13" color="#ffaf80"/>
+				<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
+				<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#6666CC"/>
+			<filter tag="highway" value="motorway" maxzoom="13" color="#a58dff"/>
+				<filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
+				<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#6666CC"/>
+			<filter tag="highway" value="motorway_link" maxzoom="13" color="#a58dff"/>
+				<filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#df1346"/>
+				<filter viRendered="true" tag="highway" value="trunk" maxzoom="13" color="#A02067"/>
+			<filter tag="highway" value="trunk" maxzoom="13" color="#ffaf80"/>
+				<filter hmRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#df1346"/>
+				<filter viRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#A02067"/>
+			<filter tag="highway" value="trunk_link" maxzoom="13" color="#ffaf80"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="5" maxzoom="9" strokeWidth="5"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="6"/>
@@ -1101,10 +1101,10 @@
 		</group>
 
 		<group>
-			<filter tag="highway" value="tertiary" color="#fefeb3"/>
 				<filter viRendered="true" tag="tertiary" value="trunk_link" color="#F0CE30"/>
-			<filter tag="highway" value="tertiary_link" color="#fefeb3"/>
+			<filter tag="highway" value="tertiary" color="#fefeb3"/>
 				<filter viRendered="true" tag="tertiary_link" value="trunk_link" color="#F0CE30"/>
+			<filter tag="highway" value="tertiary_link" color="#fefeb3"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
