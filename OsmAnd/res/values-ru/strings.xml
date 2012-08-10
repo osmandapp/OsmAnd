@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите ее в списке. Удерживайте карту, если вы хотите удалить или деактивировать. \nДанные на устройстве (%1$s свободно):</string>
-  <string name="unknown_from_location">Начальное местоположение еще не определено.</string>
+  <string name="unknown_from_location">Начальное местоположение еще не определено</string>
   <string name="unknown_location">Местоположение еще не определено</string>
   <string name="context_menu_item_directions">Маршрут к</string>
   <string name="modify_transparency">Изменить прозрачность (0 - прозрачный, 255 - непрозрачный)</string>
@@ -880,7 +880,7 @@
   <string name="show_speed_limits">Показать ограничения скорости</string>
   <string name="avoid_toll_roads">Избегать платных дорог</string>
   <string name="tip_recent_changes_0_8_2_t">"Изменения в 0.8.2 : \n\t* Улучшенная прокладка маршрута"</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
+  <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>
   <string name="map_widget_top_text">Название улицы</string>
   <string name="map_widget_config">Конфигурация</string>
   <string name="map_widget_map_select">Выделить на карте</string>
@@ -909,4 +909,19 @@
   <string name="bg_service_interval">Установить интервал просыпания</string>
 <string name="layer_map_appearance">Настройка экрана...</string>
 <string name="show_lanes">Показывать полосы движения</string>
+<string name="avoid_unpaved">Избегать проселочных дорог</string>
+<string name="avoid_ferries">Избегать паромов</string>
+<string name="avoid_in_routing_title">Избегать при прокладке маршрута...</string>
+<string name="avoid_in_routing_descr">Избегать платных и проселочных дорог, паромов</string>
+<string name="show_warnings_descr">Показывать ограничения скорости, камеры и искусственные неровности</string>
+<string name="map_widget_fluorescent">Флуоресцентные маршруты</string>
+<string name="show_warnings_title">Показывать сигналы...</string>
+<string name="map_widget_show_ruler">Линейка</string>
+<string name="map_widget_appearance">Разное</string>
+<string name="map_widget_view_direction">Направление взгляда</string>
+<string name="map_widget_transparent">Прозрачность</string>
+<string name="monitoring_mode_off">Записывать GPX</string>
+<string name="monitoring_mode_on">Остановить запись GPX</string>
+<string name="int_continuosly">Постоянно</string>
+<string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
 </resources>
