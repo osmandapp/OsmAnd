@@ -653,7 +653,7 @@ public class RouteCalculationResult {
 		return null;
 	}
 	
-	public AlarmInfo getMostImportantAlarm(Location fromLoc, AlarmInfo speedAlarm) {
+	public AlarmInfo getMostImportantAlarm(Location fromLoc, AlarmInfo speedAlarm, boolean showCameras) {
 		int aInfo = currentDirectionInfo;
 		int cRoute = currentRoute;
 		AlarmInfo mostImportant = speedAlarm;
@@ -676,7 +676,7 @@ public class RouteCalculationResult {
 				}
 				float time = speed > 0 ? d / speed : 0;
 				int vl = inf.updateDistanceAndGetPriority(time, d);
-				if(vl < value){
+				if(vl < value && (!showCameras || inf.getType() == AlarmInfo.SPEED_CAMERA)){
 					mostImportant = inf;
 					value = vl;
 				}

@@ -321,7 +321,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		flp = new FrameLayout.LayoutParams((int)(78 * scaleCoefficient),
 				(int)(78 * scaleCoefficient), Gravity.RIGHT | Gravity.BOTTOM);
-		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		flp.rightMargin = (int) (10*scaleCoefficient);
 		flp.bottomMargin = (int) (85*scaleCoefficient);
 		alarmControl.setLayoutParams(flp);
 

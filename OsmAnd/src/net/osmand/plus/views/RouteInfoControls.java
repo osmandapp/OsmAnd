@@ -16,6 +16,8 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.TurnType;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
@@ -516,6 +518,7 @@ public class RouteInfoControls {
 		paintCircle.setStrokeWidth(11 * scaleCoefficient);
 		paintCircle.setStyle(Style.STROKE);
 		paintCircle.setAntiAlias(true);
+		paintCircle.setDither(true);
 		final Paint content = new Paint();
 		content.setColor(Color.WHITE);
 		content.setStyle(Style.FILL);
@@ -527,18 +530,22 @@ public class RouteInfoControls {
 		
 		final MapInfoControl alarm = new MapInfoControl(ctx) {
 			private String text = "";
+			private Bitmap img = null;
+			private int imgId;
 			@Override
 			public boolean updateInfo() {
 				boolean limits = settings.SHOW_SPEED_LIMITS.get();
 				boolean cams = settings.SHOW_CAMERAS.get();
 				boolean visible = false;
 				if ((limits || cams) && routingHelper != null && routingHelper.isFollowingMode()) {
-					AlarmInfo alarm = routingHelper.getMostImportantAlarm(settings.METRIC_SYSTEM.get());
+					AlarmInfo alarm = routingHelper.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
 					if(alarm != null) {
+						int locimgId = 0;
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
 						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 							text = "CAM";
+							locimgId = R.drawable.warnings_speed_camera;
 						} else if(alarm.getType() == AlarmInfo.BORDER_CONTROL) {
 							text = "CLO";
 						} else if(alarm.getType() == AlarmInfo.TOLL_BOOTH) {
@@ -546,6 +553,7 @@ public class RouteInfoControls {
 						} else if(alarm.getType() == AlarmInfo.TRAFFIC_CALMING) {
 							// temporary omega
 							text = "~^~";
+							locimgId = R.drawable.warnings_speed_bump;
 						} else if(alarm.getType() == AlarmInfo.STOP) {
 							// text = "STOP";
 						}
@@ -557,6 +565,16 @@ public class RouteInfoControls {
 								visible = limits;
 							}
 						}
+						if(visible) {
+							if(locimgId != imgId) {
+								imgId = locimgId;
+								if(imgId == 0) {
+									img = null;
+								} else {
+									img = BitmapFactory.decodeResource(getResources(), locimgId);
+								}
+							}
+						}
 					}
 				}
 				updateVisibility(visible);
@@ -565,10 +583,14 @@ public class RouteInfoControls {
 
 			@Override
 			protected void onDraw(Canvas canvas) {
-				RectF f = new RectF(th / 2, th / 2, getWidth() - th / 2, getHeight() - th / 2);
-				canvas.drawOval(f, content);
-				canvas.drawOval(f, paintCircle);
-				canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
+				if(img == null) {
+					RectF f = new RectF(th / 2, th / 2, getWidth() - th / 2, getHeight() - th / 2);
+					canvas.drawOval(f, content);
+					canvas.drawOval(f, paintCircle);
+					canvas.drawText(text, getWidth() / 2, getHeight() / 2 + ptext.descent() + 3 * scaleCoefficient, ptext);
+				} else {
+					canvas.drawBitmap(img, 0, 0, paintCircle);
+				}
 			}
 
 		};

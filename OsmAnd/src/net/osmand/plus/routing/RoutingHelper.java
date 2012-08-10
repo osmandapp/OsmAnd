@@ -467,7 +467,7 @@ public class RoutingHelper {
 		return i;
 	}
 	
-	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc){
+	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras){
 		float mxspeed = route.getCurrentMaxSpeed();
 		AlarmInfo speedAlarm = null;
 		if(mxspeed != 0 && lastFixedLocation != null && lastFixedLocation.hasSpeed()) {
@@ -482,7 +482,7 @@ public class RoutingHelper {
 				speedAlarm = AlarmInfo.createSpeedLimit(speed);
 			}
 		}
-		return route.getMostImportantAlarm(lastFixedLocation, speedAlarm);
+		return route.getMostImportantAlarm(lastFixedLocation, speedAlarm, showCameras);
 	}
 	
 	public String formatStreetName(String name, String ref) {
