@@ -1,3 +1,16 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="screen_is_locked">För att låsa upp skärmen trycker låsikon</string>
+<string name="map_widget_top_text">Gatunamn</string>
+<string name="map_widget_back_to_loc">Var är jag</string>
+<string name="map_widget_lock_screen">Lås skärmen</string>
+<string name="map_widget_compass">Kompass</string>
+<string name="map_widget_top_stack">Statusfält</string>
+<string name="map_widget_right_stack">Höger sida</string>
+<string name="map_widget_left_stack">Vänster sida</string>
+<string name="map_widget_parking">Parkering</string>
+<string name="map_widget_monitoring">Spårning</string>
+<string name="map_widget_speed">Hastighet</string>
+<string name="map_widget_distance">Målet</string>
+<string name="map_widget_altitude">Höjd</string>
+<string name="map_widget_next_turn">Nästa kurva</string>
 </resources>
