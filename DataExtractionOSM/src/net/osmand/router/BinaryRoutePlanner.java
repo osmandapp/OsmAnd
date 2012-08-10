@@ -757,6 +757,8 @@ public class BinaryRoutePlanner {
 		return false;
 	}
 	
+	private static final float TURN_DEGREE_MIN = 45;
+	
 	/**
 	 * Helper method to prepare final result 
 	 */
@@ -826,12 +828,12 @@ public class BinaryRoutePlanner {
 				if (next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null) {
 					float before = rr.getBearing(next, !plus);
 					float after = rr.getBearing(next, plus);
-					boolean straight = Math.abs(MapUtils.degreesDiff(before + 180, after)) < 70;
+					boolean straight = Math.abs(MapUtils.degreesDiff(before + 180, after)) < TURN_DEGREE_MIN;
 					boolean split = false;
 					// split if needed
 					for (RouteSegmentResult rs : attachedRoutes) {
 						double diff = MapUtils.degreesDiff(before + 180, rs.getBearingBegin());
-						if (Math.abs(diff) < 50) {
+						if (Math.abs(diff) <= TURN_DEGREE_MIN) {
 							split = true;
 						} else if (!straight && Math.abs(diff) < 100) {
 							split = true;
@@ -988,7 +990,7 @@ public class BinaryRoutePlanner {
 		if (prev != null) {
 			// add description about turn
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
-			if (mpi >= 50) {
+			if (mpi >= TURN_DEGREE_MIN) {
 				if (mpi < 60) {
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
@@ -998,7 +1000,7 @@ public class BinaryRoutePlanner {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
-			} else if (mpi < -50) {
+			} else if (mpi < -TURN_DEGREE_MIN) {
 				if (mpi > -60) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
 				} else if (mpi > -120) {
@@ -1062,14 +1064,15 @@ public class BinaryRoutePlanner {
 		if(attachedRoutes != null){
 			for(RouteSegmentResult rs : attachedRoutes){
 				double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-				if(ex < 45 && ex >= 0) {
+				double mpi = Math.abs(MapUtils.degreesDiff(prev.getBearingEnd(), rs.getBearingBegin())) ;
+				if((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
 					kl = true;
 					int lns = rs.getObject().getLanes();
 					if (lns > 0) {
 						right += lns;
 					}
 					speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
-				} else if(ex > -45 && ex <= 0) {
+				} else if((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
 					kr = true;
 					int lns = rs.getObject().getLanes();
 					if (lns > 0) {
