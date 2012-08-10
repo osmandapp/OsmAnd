@@ -17,14 +17,16 @@ public class SpecialPhrases {
 	}
 
 	/**
-	 * Use this method to set the language.
+	 * Use this method to query a special phrase for a certain subtype
 	 * 
-	 * @param key the key to query
+	 * If the language isn't set yet, it will default to English
+	 * 
+	 * @param key the subtype to query
 	 * @return the special phrase according to the asked key
 	 */
 	public static String getSpecialPhrase(String key){
-		if (m == null) {
-			throw new NullPointerException("Use the setLanguage method before trying to get a phrase");
+		if (!isLanguageSet()) {
+			setLanguage(new Locale("en"));
 		}
 		return m.get(key);
 	}
