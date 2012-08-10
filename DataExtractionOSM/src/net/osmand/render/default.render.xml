@@ -1126,13 +1126,13 @@
 		</group>
 
 		<group>
-				<filter viRendered="true" tag="tertiary" value="trunk_link" color="#F0CE30"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="tertiary" value="trunk_link" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="tertiary" value="trunk_link" color="#fefe83"/>
+				<filter viRendered="true" tag="highway" value="tertiary" color="#F0CE30"/>
+				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary" color="#fefeb3"/ -->
+				<filter hmRendered="true" tag="highway" value="tertiary" color="#fefe83"/>
 			<filter tag="highway" value="tertiary" color="#fefeb3"/>
-				<filter viRendered="true" tag="tertiary_link" value="trunk_link" color="#F0CE30"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="tertiary_link" value="trunk_link" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="tertiary_link" value="trunk_link" color="#fefe83"/>
+				<filter viRendered="true" tag="highway" value="tertiary_link" color="#F0CE30"/>
+				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefeb3"/ -->
+				<filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefe83"/>
 			<filter tag="highway" value="tertiary_link" color="#fefeb3"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
