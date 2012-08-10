@@ -1037,11 +1037,11 @@
 		<group>
 				<filter viRendered="true" tag="highway" value="primary" maxzoom="13" color="#C04D61"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary" maxzoom="13" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary" maxzoom="13" color="#ed5a7f"/>
+				<filter hmRendered="true" tag="highway" value="primary" maxzoom="13" color="#ff80a0"/>
 			<filter tag="highway" value="primary" maxzoom="13" color="#eb989a"/>
 				<filter viRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#C04D61"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#ed5a7f"/>
+				<filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#ff80a0"/>
 			<filter tag="highway" value="primary_link" maxzoom="13" color="#eb989a"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="4"/>
@@ -1054,7 +1054,7 @@
 
 		<group>
 				<filter viRendered="true" tag="highway" value="secondary" maxzoom="13" color="#F7D131"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary" maxzoom="13" color="##fdd6a4"/ -->
+				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary" maxzoom="13" color="#fdd6a4"/ -->
 				<filter hmRendered="true" tag="highway" value="secondary" maxzoom="13" color="#ffd080"/>
 			<filter tag="highway" value="secondary" maxzoom="13" color="#fdd6a4"/>
 				<filter viRendered="true" tag="highway" value="secondary_link" maxzoom="13" color="#F7D131"/>
@@ -1089,11 +1089,11 @@
 			<filter tag="highway" value="trunk_link" color="#ffaf80"/>
 				<filter viRendered="true" tag="highway" value="primary" color="#C04D61"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary" color="#ed5a7f"/>
+				<filter hmRendered="true" tag="highway" value="primary" color="#ff80a0"/>
 			<filter tag="highway" value="primary" color="#eb989a"/>
 				<filter viRendered="true" tag="highway" value="primary_link" color="#C04D61"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary_link" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary_link" color="#ed5a7f"/>
+				<filter hmRendered="true" tag="highway" value="primary_link" color="#ff80a0"/>
 			<filter tag="highway" value="primary_link" color="#eb989a"/>
 				<filter viRendered="true" tag="highway" value="secondary" color="#F7D131"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary" color="#fdd6a4"/ -->
@@ -1128,11 +1128,11 @@
 		<group>
 				<filter viRendered="true" tag="highway" value="tertiary" color="#F0CE30"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="highway" value="tertiary" color="#fefe83"/>
+				<filter hmRendered="true" tag="highway" value="tertiary" color="#fefe7f"/>
 			<filter tag="highway" value="tertiary" color="#fefeb3"/>
 				<filter viRendered="true" tag="highway" value="tertiary_link" color="#F0CE30"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefe83"/>
+				<filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefe7f"/>
 			<filter tag="highway" value="tertiary_link" color="#fefeb3"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
