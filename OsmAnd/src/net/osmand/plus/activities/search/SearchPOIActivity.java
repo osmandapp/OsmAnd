@@ -725,9 +725,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 			}
 			String str = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
-			System.out.println(amenity.getType().toString());
-			System.out.println(OsmAndFormatter.getPoiStringWithoutType(amenity, true));
-			System.out.println(OsmAndFormatter.getPoiStringWithoutType(amenity, false));
 			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
