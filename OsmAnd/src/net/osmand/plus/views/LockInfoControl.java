@@ -116,7 +116,7 @@ public class LockInfoControl {
 		final ActionItem lockScreenAction = new ActionItem();
 		lockScreenAction.setTitle(view.getResources().getString(
 				isScreenLocked ? R.string.bg_service_screen_unlock : R.string.bg_service_screen_lock));
-		lockScreenAction.setIcon(view.getResources().getDrawable(isScreenLocked ? R.drawable.lock_disabled : R.drawable.lock_enabled));
+		lockScreenAction.setIcon(view.getResources().getDrawable(isScreenLocked ? R.drawable.lock_enabled : R.drawable.lock_disabled));
 		lockScreenAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
