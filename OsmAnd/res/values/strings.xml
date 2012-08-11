@@ -9,8 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="live_monitoring_mode_off">Live tracking</string>
-    <string name="live_monitoring_mode_on">Stop Live tracking</string>
+    <string name="live_monitoring_mode_off">Start live tracking</string>
+    <string name="live_monitoring_mode_on">Stop live tracking</string>
     <string name="layer_map_appearance">Configure screen&#8230;</string>
     <string name="show_lanes">Show lanes</string>
     <string name="avoid_unpaved">Avoid unpaved roads</string>

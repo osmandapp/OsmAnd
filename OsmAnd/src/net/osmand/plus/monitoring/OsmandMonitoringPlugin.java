@@ -263,7 +263,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
 		bgServiceAction.setTitle(view.getResources().getString(off? R.string.monitoring_mode_off : R.string.monitoring_mode_on));
-		bgServiceAction.setIcon(view.getResources().getDrawable(off ? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive));
+		bgServiceAction.setIcon(view.getResources().getDrawable(off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big));
 		bgServiceAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -290,7 +290,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		final ActionItem liveAction = new ActionItem();
 		final boolean liveoff = !view.getSettings().LIVE_MONITORING.get();
 		liveAction.setTitle(view.getResources().getString(liveoff? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on));
-		liveAction.setIcon(view.getResources().getDrawable(liveoff?R.drawable.monitoring_rec_big:R.drawable.monitoring_rec_inactive));
+		liveAction.setIcon(view.getResources().getDrawable(liveoff? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big));
 		liveAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
