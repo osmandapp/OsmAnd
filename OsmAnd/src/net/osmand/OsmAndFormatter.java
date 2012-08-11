@@ -8,9 +8,9 @@ import net.osmand.data.AmenityType;
 import net.osmand.data.City.CityType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.SpecialPhrases;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
-import net.osmand.plus.specialPhrases.SpecialPhrases;
 import android.content.Context;
 
 public class OsmAndFormatter {
