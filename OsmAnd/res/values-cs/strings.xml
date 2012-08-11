@@ -324,7 +324,7 @@
   <string name="voice_stream_voice_call">Volání</string>
   <string name="voice_stream_notification">Upozornění</string>
   <string name="voice_stream_music">Hudba</string>
-  <string name="warning_tile_layer_not_downloadable">" Data pro mapovou vrstvu {0} nelze stáhnout. Zkuste prosím vrstvu znovu nainstalovat. "</string>
+  <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, zkuste je prosím znovu nainstalovat.</string>
   <string name="overlay_transparency_descr">" Upravit průhlednost překryvné mapy "</string>
   <string name="overlay_transparency">Průhlednost překryvu</string>
   <string name="map_transparency_descr">Upravit průhlednost základní mapy</string>
