@@ -68,7 +68,7 @@ import java.util.Map;
         sp.put( "glacier", "Jökullinn");
         sp.put( "hill", "Hæðin");
         sp.put( "island", "Eyjan");
-        sp.put( "tindurinn", "Fjallið");
+        sp.put( "peak", "Fjallið eða tindurinn");
         sp.put( "reef", "Rifið");
         sp.put( "river", "Áin");
         sp.put( "tree", "Tréð");
