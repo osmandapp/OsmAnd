@@ -153,7 +153,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = view.getApplication().getNavigationService() == null;
 		bgServiceAction.setTitle(view.getResources().getString(!off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
-//		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small));
+		bgServiceAction.setIcon(view.getResources().getDrawable(!off? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive));
 		bgServiceAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
