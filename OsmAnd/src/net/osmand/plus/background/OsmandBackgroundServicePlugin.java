@@ -29,8 +29,8 @@ import android.preference.PreferenceScreen;
 import android.view.View;
 
 public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockInfoControlActions {
-	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
-	public static final int[] SECONDS = new int[]{0, 30, 45, 60};
+	public static final int[] SECONDS = new int[]{0, 30, 60, 90};
+	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
 	private final static boolean REGISTER_BG_SETTINGS = false;
 	private static final String ID = "osmand.backgroundservice";
 	private OsmandSettings settings;

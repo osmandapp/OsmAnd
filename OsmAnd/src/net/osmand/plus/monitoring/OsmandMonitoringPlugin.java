@@ -106,8 +106,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		adapter.registerItem(R.string.context_menu_item_add_waypoint, R.drawable.list_activities_gpx_waypoint, listener, -1);
 	}
 	
-	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
-	public static final int[] SECONDS = new int[] { 1, 2, 3, 5};
+	public static final int[] SECONDS = new int[] {1, 2, 3, 5, 10, 15, 30, 60, 90};
+	public static final int[] MINUTES = new int[] {2, 3, 5};
 	
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
