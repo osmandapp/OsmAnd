@@ -22,6 +22,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,8 +30,11 @@ import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
+import android.view.TouchDelegate;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -207,7 +211,7 @@ public class MainMenuActivity extends Activity {
 			}
 		});
 
-		View closeButton = window.findViewById(R.id.CloseButton);
+		final View closeButton = window.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -220,6 +224,27 @@ public class MainMenuActivity extends Activity {
 					System.runFinalizersOnExit(true);
 					System.exit(0);
 				}
+			}
+		});
+		closeButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				closeButton.performClick();
+				return true;
+			}
+		});
+		//increase touch area for the button
+		final View parent = (View) closeButton.getParent();
+		parent.post( new Runnable() {
+		    // Post in the parent's message queue to make sure the parent
+		    // lays out its children before we call getHitRect()
+		    @Override
+			public void run() {
+				Rect r = new Rect();
+				closeButton.getHitRect(r);
+				r.right += r.width() * 3;
+				r.bottom += r.height() * 3;
+				parent.setTouchDelegate(new TouchDelegate(r, closeButton));
 			}
 		});
 
