@@ -3,7 +3,7 @@
   <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
   <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
   <string name="layer_map_appearance">Konfigurovať obrazovku…</string>
-  <string name="show_lanes">Zobraziť jazdné pruhy</string>
+  <string name="show_lanes">Jazdné pruhy</string>
   <string name="avoid_unpaved">Nespevneným cestám</string>
   <string name="avoid_ferries">Trajektom</string>
   <string name="avoid_in_routing_title">Vyhnúť sa…</string>
@@ -919,9 +919,9 @@
   <string name="show_cameras_descr">Zobrazenie radarov (môže byť zakázané v niektorých krajinách)</string>
   <string name="show_speed_limits_descr">Zobrazenie radarov a spomaľovačov</string>
   <string name="avoid_toll_roads_descr">Vyvarovanie sa plateným cestám pri kalkulácii trasy</string>
-  <string name="show_cameras">Zobrazenie radarov</string>
-  <string name="show_speed_limits">Zobraziť radary</string>
-  <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
+  <string name="show_cameras">Radary</string>
+  <string name="show_speed_limits">Rýchlostné obmedzenia</string>
+  <string name="avoid_toll_roads">Spoplatneným cestám</string>
   <string name="tip_recent_changes_0_8_2_t">Zmeny vo verzii 0.8.2 :
   \n\t* Vylepšená navigácia
   \n\t* Dynamické mapové widgety</string>
