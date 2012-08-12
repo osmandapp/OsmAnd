@@ -617,7 +617,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			if (!text.equals(getText().toString())) {
 				TextPaint pp = new TextPaint(getPaint());
 				if (!text.equals("")) {
-					pp.setTextSize(25 * scaleCoefficient);
+					pp.setTextSize(20 * scaleCoefficient);
 					float ts = pp.measureText(text);
 					int wth = getWidth();
 					while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {

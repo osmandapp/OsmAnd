@@ -528,10 +528,10 @@ public class MapRenderRepositories {
 				boolean loaded;
 				if(nativeLib != null) {
 					cObjects = new LinkedList<BinaryMapDataObject>();
-					loaded = loadVectorDataNative(dataBox, requestedBox.getZoom(), renderingReq, nativeLib);
+					loaded = loadVectorDataNative(dataBox, requestedBox.getIntZoom(), renderingReq, nativeLib);
 				} else {
 					cNativeObjects = null;
-					loaded = loadVectorData(dataBox, requestedBox.getZoom(), renderingReq);
+					loaded = loadVectorData(dataBox, requestedBox.getIntZoom(), renderingReq);
 					
 				}
 				if (!loaded || checkWhetherInterrupted()) {
@@ -542,19 +542,19 @@ public class MapRenderRepositories {
 
 			currentRenderingContext = new OsmandRenderer.RenderingContext(context);
 			renderingReq.clearState();
-			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
+			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getIntZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
 				currentRenderingContext.defaultColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_COLOR_VALUE);
 			}
 			renderingReq.clearState();
-			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getZoom());
+			renderingReq.setIntFilter(renderingReq.ALL.R_MINZOOM, requestedBox.getIntZoom());
 			if(renderingReq.searchRenderingAttribute(RenderingRuleStorageProperties.A_SHADOW_RENDERING)) {
 				currentRenderingContext.shadowRenderingMode = renderingReq.getIntPropertyValue(renderingReq.ALL.R_ATTR_INT_VALUE);
 				currentRenderingContext.shadowRenderingColor = renderingReq.getIntPropertyValue(renderingReq.ALL.R_SHADOW_COLOR);
 			}
-			currentRenderingContext.leftX = (float) requestedBox.getLeftTileX();
-			currentRenderingContext.topY = (float) requestedBox.getTopTileY();
-			currentRenderingContext.zoom = requestedBox.getZoom();
+			currentRenderingContext.leftX = requestedBox.getLeftTileX();
+			currentRenderingContext.topY = requestedBox.getTopTileY() ;
+			currentRenderingContext.zoom = requestedBox.getIntZoom();
 			currentRenderingContext.rotate = requestedBox.getRotate();
 			currentRenderingContext.width = (int) (requestedBox.getTileWidth() * OsmandRenderer.TILE_SIZE);
 			currentRenderingContext.height = (int) (requestedBox.getTileHeight() * OsmandRenderer.TILE_SIZE);
@@ -562,6 +562,8 @@ public class MapRenderRepositories {
 			currentRenderingContext.useEnglishNames = prefs.USE_ENGLISH_NAMES.get();
 			currentRenderingContext.setDensityValue(prefs.USE_HIGH_RES_MAPS.get(), 
 					prefs.MAP_TEXT_SIZE.get(), renderer.getDensity());
+			// init rendering context
+			currentRenderingContext.tileDivisor = (float) MapUtils.getPowZoom(31 - requestedBox.getZoom());
 			if (checkWhetherInterrupted()) {
 				return;
 			}
@@ -573,17 +575,23 @@ public class MapRenderRepositories {
 			if (rr != null) {
 				transparent = renderingReq.getIntPropertyValue(rr) > 0;
 			}
-//			if(transparent) {
-//				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.ARGB_8888);
-//			} else {
-				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
-//			}
 
 			// 1. generate image step by step
+			Bitmap reuse = prevBmp;
 			this.prevBmp = this.bmp;
 			this.prevBmpLocation = this.bmpLocation;
+			if (reuse != null && reuse.getWidth() == currentRenderingContext.width && reuse.getHeight() == currentRenderingContext.height) {
+				bmp = reuse;
+				bmp.eraseColor(currentRenderingContext.defaultColor);
+			} else {
+				if(reuse != null){
+					log.error(String.format("Create new image ? %d != %d (w) %d != %d (h) ", currentRenderingContext.width, reuse.getWidth(), currentRenderingContext.height, reuse.getHeight()));
+				}
+				bmp = Bitmap.createBitmap(currentRenderingContext.width, currentRenderingContext.height, Config.RGB_565);
+			}
 			this.bmp = bmp;
 			this.bmpLocation = tileRect;
+			
 			
 			
 			if(nativeLib != null) {
@@ -601,8 +609,11 @@ public class MapRenderRepositories {
 				// revert if it was interrupted 
 				// (be smart a bit do not revert if road already drawn) 
 				if(currentRenderingContext.lastRenderedKey < 35) {
+					reuse = this.bmp;
 					this.bmp = this.prevBmp;
 					this.bmpLocation = this.prevBmpLocation;
+					this.prevBmp = reuse;
+					this.prevBmpLocation = null;
 				}
 				currentRenderingContext = null;
 				return;
@@ -610,7 +621,8 @@ public class MapRenderRepositories {
 			currentRenderingContext = null;
 
 			// 2. replace whole image
-			this.prevBmp = null;
+			// keep cache
+			// this.prevBmp = null;
 			this.prevBmpLocation = null;
 			if (prefs.DEBUG_RENDERING_INFO.get()) {
 				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
@@ -660,15 +672,16 @@ public class MapRenderRepositories {
 	}
 
 	public Bitmap getPrevBitmap() {
-		return prevBmp;
+		return prevBmpLocation == null ? null : prevBmp ;
 	}
 
 	public synchronized void clearCache() {
 		cObjects = new ArrayList<BinaryMapDataObject>();
 		cObjectsBox = new RectF();
-		prevBmp = null;
+
 		requestedBox = prevBmpLocation = null;
 		// Do not clear main bitmap to not cause a screen refresh
+//		prevBmp = null;
 //		bmp = null;
 //		bmpLocation = null;
 	}

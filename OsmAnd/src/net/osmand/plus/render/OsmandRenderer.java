@@ -160,8 +160,6 @@ public class OsmandRenderer {
 			Bitmap bmp, RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
-			// init rendering context
-			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			try {
@@ -201,8 +199,6 @@ public class OsmandRenderer {
 			cv.drawColor(rc.defaultColor);
 		}
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			// init rendering context
-			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			

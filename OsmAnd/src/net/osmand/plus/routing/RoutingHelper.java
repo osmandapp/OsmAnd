@@ -488,7 +488,7 @@ public class RoutingHelper {
 	public String formatStreetName(String name, String ref) {
 		if(name != null && name.length() > 0){
 			if(ref != null && ref.length() > 0) {
-				name += "(" + ref +")";
+				name = ref + " " + name;
 			}
 			return name;
 		} else {

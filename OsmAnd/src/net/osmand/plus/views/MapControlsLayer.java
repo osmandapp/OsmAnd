@@ -303,11 +303,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				if (view.isZooming()) {
-					activity.changeZoom(view.getZoom() + 2 );
-//					activity.changeZoom(view.getFloatZoom() + 2 * OsmandMapTileView.ZOOM_DELTA_1 );
+//					activity.changeZoom(view.getZoom() + 2 );
+					activity.changeZoom(view.getFloatZoom() + 2 * OsmandMapTileView.ZOOM_DELTA_1 );
 				} else {
-					activity.changeZoom(view.getZoom() + 1 );
-//					activity.changeZoom(view.getFloatZoom() + 1 * OsmandMapTileView.ZOOM_DELTA_1 );
+//					activity.changeZoom(view.getZoom() + 1 );
+					activity.changeZoom(view.getFloatZoom() + 1 * OsmandMapTileView.ZOOM_DELTA_1 );
 				}
 
 			}
@@ -316,8 +316,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activity.changeZoom(view.getZoom() - 1 );
-//				activity.changeZoom(view.getFloatZoom() - 1 * OsmandMapTileView.ZOOM_DELTA_1 );
+//				activity.changeZoom(view.getZoom() - 1 );
+				activity.changeZoom(view.getFloatZoom() - 1 * OsmandMapTileView.ZOOM_DELTA_1 );
 			}
 		});
 	}

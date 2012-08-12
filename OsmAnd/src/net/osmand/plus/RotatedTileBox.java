@@ -10,7 +10,7 @@ public class RotatedTileBox {
 	private float tileWidth;
 	private float tileHeight;
 	private float rotate;
-	private int zoom;
+	private float zoom;
 	private float rotateCos;
 	private float rotateSin;
 
@@ -28,7 +28,7 @@ public class RotatedTileBox {
 		rotateSin = FloatMath.sin(rad);
 	}
 	
-	public void set(float leftTileX, float topTileY, float tileWidth, float tileHeight, float rotate, int zoom) {
+	public void set(float leftTileX, float topTileY, float tileWidth, float tileHeight, float rotate, float zoom) {
 		this.leftTileX = leftTileX;
 		if(rotate < 0){
 			rotate += 360;
@@ -51,8 +51,12 @@ public class RotatedTileBox {
 		return rotateSin;
 	}
 
-	public int getZoom() {
+	public float getZoom() {
 		return zoom;
+	}
+	
+	public int getIntZoom() {
+		return Math.round(zoom);
 	}
 
 	public float getRotate() {
@@ -77,7 +81,7 @@ public class RotatedTileBox {
 
 	public boolean containsTileBox(RotatedTileBox box) {
 		PointF temp = new PointF();
-		if(box.getZoom() != zoom){
+		if(box.zoom != zoom){
 			throw new UnsupportedOperationException();
 		}
 		box.calcPointTile(0, 0, temp);
@@ -105,7 +109,7 @@ public class RotatedTileBox {
 		float tx3 = calcPointTileX(0, tileHeight);
 		float minTileX = Math.min(Math.min(leftTileX, tx), Math.min(tx2, tx3)) ;
 		float maxTileX = Math.max(Math.max(leftTileX, tx), Math.max(tx2, tx3)) ;
-		int max = 1 << zoom;
+		int max = (int) MapUtils.getPowZoom(zoom);
 		if(minTileX < 0){
 			minTileX = 0;
 		}
