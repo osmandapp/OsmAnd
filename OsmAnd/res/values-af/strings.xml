@@ -740,7 +740,7 @@
   <string name="osm_settings_descr">Spesifiseer Openstreetmap.org (OSM) stellings benodig vir OSM toevoegings</string>
   <string name="data_settings_descr">Spesifiseer taal, aflaai/herlaai inligting</string>
   <string name="data_settings">Inligting</string>
-  <string name="map_preferences_descr">Spesifiseer kaart-stellingss: kaartbron, rotasie, merker posisie, skerm oriëntasie</string>
+  <string name="map_preferences_descr">Spesifiseer kaart-stellings: kaartbron, rotasie, merker posisie, skerm oriëntasie</string>
   <string name="osm_settings">OSM wysiging</string>
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
