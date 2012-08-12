@@ -1,5 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="layer_map_appearance">Konfigurovať obrazovku…</string>
+<resources>
+  <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
+  <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
+  <string name="layer_map_appearance">Konfigurovať obrazovku…</string>
   <string name="show_lanes">Zobraziť jazdné pruhy</string>
   <string name="avoid_unpaved">Nespevneným cestám</string>
   <string name="avoid_ferries">Trajektom</string>
@@ -15,9 +18,9 @@
   <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
   <string name="int_continuosly">Priebežne</string>
   <string name="monitoring_mode_off">GPX zázn.</string>
-  <string name="monitoring_mode_on">GPX vyp.</string>
-  <string name="bg_service_sleep_mode_off">Zapnúť režim spánku</string>
-  <string name="bg_service_sleep_mode_on">Vypnúť režim spánku</string>  
+  <string name="monitoring_mode_on">Zastavit\n GPX záznam</string>
+  <string name="bg_service_sleep_mode_off">Zapnúť\n režim spánku</string>
+  <string name="bg_service_sleep_mode_on">Vypnúť\n režim spánku</string>  
   <string name="map_widget_top_text">Názov ulice</string>
   <string name="map_widget_config">Konfigurácia</string>
   <string name="map_widget_map_select">Výber mapy</string>
