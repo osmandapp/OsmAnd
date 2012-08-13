@@ -458,6 +458,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	public void changeZoom(float newZoom){
+		newZoom = Math.round(newZoom * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
 		if (getMyApplication().accessibilityEnabled())
@@ -703,7 +704,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 			if (s != null) {
-				sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI);
+				if(!sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_NORMAL)) {
+					Log.e(LogUtil.TAG, "Sensor could not be enabled");
+				}
 			}
 			sensorRegistered = true;
 		}
@@ -881,22 +884,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	public float defineZoomFromSpeed(float speed) {
-		//  Hardy's old implementation: correct for roughly constant "look ahead" distance on different screens using screen size correction, see Issue 914
-		//  less than 23: show zoom 17
-		// int screenSizeCorrection = (int)Math.round(Math.log(((float)getMapView().getHeight())/320.0f) / Math.log(2.0f));
-		// if(speed < 23f/3.6){
-		// return 17 + screenSizeCorrection;
-		// } else if(speed < 43f/3.6){
-		// return 16 + screenSizeCorrection;
-		// } else if(speed < 63f/3.6){
-		// return 15 + screenSizeCorrection;
-		// } else if(speed < 83f/3.6){
-		// return 14 + screenSizeCorrection;
-		// }
-		// return 13 + screenSizeCorrection;
-
-		// new implementation
-		// TODO Hardy: verify look ahead distance, there still seems bug in calculation
 		if (speed < 7f / 3.6) {
 			return 0;
 		}

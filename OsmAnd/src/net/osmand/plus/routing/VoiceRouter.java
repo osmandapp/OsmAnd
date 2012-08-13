@@ -160,11 +160,22 @@ public class VoiceRouter {
 		return currentStatus <= statusToCheck;
 	}
 	
+	protected void makeUTStatus() {
+		// Mechanism via STATUS_UTWP_TOLD: Until turn in the right direction, or route is re-calculated in forward direction
+		if (currentStatus != STATUS_UTWP_TOLD) {
+			if (playMakeUTwp()) {
+				currentStatus = STATUS_UTWP_TOLD;
+				playGoAheadDist = 0;
+			}
+		}
+
+	}
+	
 	/**
 	 * Updates status of voice guidance 
 	 * @param currentLocation 
 	 */
-	protected void updateStatus(Location currentLocation, boolean makeUturnWhenPossible) {
+	protected void updateStatus(Location currentLocation) {
 		// Directly after turn: goAhead (dist), unless:
 		// < PREPARE_LONG_DISTANCE (3000m): playPrepareTurn
 		// < PREPARE_DISTANCE (1500m): playPrepareTurn
@@ -175,17 +186,7 @@ public class VoiceRouter {
 			speed = Math.max(currentLocation.getSpeed(), speed);
 		}
 
-		// Mechanism via STATUS_UTWP_TOLD: Until turn in the right direction, or route is re-calculated in forward direction
-		if (makeUturnWhenPossible == true) {
-			if (currentStatus != STATUS_UTWP_TOLD) {
-				if (playMakeUTwp()) {
-					currentStatus = STATUS_UTWP_TOLD;
-					playGoAheadDist = 0;
-				}
-			}
-			return;
-		}
-
+		
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
 		// after last turn say:
 		if (nextInfo == null || nextInfo.directionInfo.distance == 0) {

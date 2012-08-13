@@ -49,13 +49,11 @@ public class MapVectorLayer extends BaseMapLayer {
 	}
 	
 	private void updateRotatedTileBox(){
-//		float ts = view.getTileSize();
-		int zm = Math.round(view.getFloatZoom());
-		float xL = view.calcDiffTileX(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getXTile();
-		float yT = view.calcDiffTileY(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getYTile();
-		float mult = (float) Math.pow(2, zm - view.getZoom());
-		float ts = (float) (view.getSourceTileSize() * Math.pow(2, view.getFloatZoom() - (int) zm));
-		rotatedTileBox.set(xL * mult, yT * mult, ((float) pixRect.width()) / ts , ((float) pixRect.height()) / ts, view.getRotate(), zm);
+		float mult = (float) Math.pow(2, view.getFloatZoom() - view.getZoom());
+		float xL = (view.calcDiffTileX(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getXTile());
+		float yT = (view.calcDiffTileY(pixRect.left - view.getCenterPointX(), pixRect.top - view.getCenterPointY()) + view.getYTile()) ;
+		float ts = view.getSourceTileSize(); 
+		rotatedTileBox.set(xL * mult, yT * mult, ((float) pixRect.width()) / ts , ((float) pixRect.height()) / ts, view.getRotate(), view.getFloatZoom());
 	}
 	
 	public boolean isVectorDataVisible() {
@@ -118,21 +116,23 @@ public class MapVectorLayer extends BaseMapLayer {
 		if (bmp != null && bmpLoc != null) {
 			float rot = bmpLoc.getRotate();
 			float mult = (float) MapUtils.getPowZoom(view.getZoom() - bmpLoc.getZoom());
+			float fmult = (float) MapUtils.getPowZoom(view.getFloatZoom() - bmpLoc.getZoom());
 			
-			float tx = view.getXTile();
-			float ty = view.getYTile();
-			float dleftX1 = (bmpLoc.getLeftTileX() * mult - tx) ;
-			float dtopY1 =  (bmpLoc.getTopTileY() * mult - ty);
+			float tx = view.getXTile() / mult;
+			float ty = view.getYTile() / mult;
+			float dleftX1 = bmpLoc.getLeftTileX() - tx;
+			float dtopY1 = bmpLoc.getTopTileY() - ty;
 			
+			float ts = view.getSourceTileSize() * fmult;
 			
 			float cos = bmpLoc.getRotateCos();
 			float sin = bmpLoc.getRotateSin();
-			float x1 = MapUtils.calcDiffPixelX(sin, cos, dleftX1, dtopY1, view.getTileSize()) + view.getCenterPointX();
-			float y1 = MapUtils.calcDiffPixelY(sin, cos, dleftX1, dtopY1, view.getTileSize()) + view.getCenterPointY();
+			float x1 = MapUtils.calcDiffPixelX(sin, cos, dleftX1, dtopY1, ts) + view.getCenterPointX();
+			float y1 = MapUtils.calcDiffPixelY(sin, cos, dleftX1, dtopY1, ts) + view.getCenterPointY();
 			
 			canvas.rotate(-rot, view.getCenterPointX(), view.getCenterPointY());
-			destImage.set(x1, y1, x1 + bmpLoc.getTileWidth() * mult * view.getTileSize(), y1 + bmpLoc.getTileHeight() * mult
-					* view.getTileSize());
+			destImage.set(x1, y1, x1 + bmpLoc.getTileWidth() * ts, y1 + 
+					bmpLoc.getTileHeight() * ts);
 			if(!bmp.isRecycled()){
 				canvas.drawBitmap(bmp, null, destImage, paintImg);
 				shown = true;

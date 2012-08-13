@@ -9,8 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="live_monitoring_mode_off">Live tracking</string>
-    <string name="live_monitoring_mode_on">Stop Live tracking</string>
+    <string name="live_monitoring_mode_off">Start\n live tracking</string>
+    <string name="live_monitoring_mode_on">Stop\n live tracking</string>
     <string name="layer_map_appearance">Configure screen&#8230;</string>
     <string name="show_lanes">Show lanes</string>
     <string name="avoid_unpaved">Avoid unpaved roads</string>
@@ -25,9 +25,9 @@
     <string name="map_widget_view_direction">Viewing direction</string>
     <string name="map_widget_transparent">Transparent skin</string>
     <string name="monitoring_mode_off">Record GPX</string>
-    <string name="monitoring_mode_on">Stop GPX rec.</string>
-    <string name="bg_service_sleep_mode_off">Enable sleep mode</string>
-    <string name="bg_service_sleep_mode_on">Stop sleep mode</string>
+    <string name="monitoring_mode_on">Stop\n GPX rec.</string>
+    <string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
+    <string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
     <string name="gps_wakeup_interval">GPS wake-up interval : %s</string>
     <string name="int_continuosly">Continuously</string>
     <string name="screen_is_locked">To unlock screen press lock icon</string>

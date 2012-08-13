@@ -321,7 +321,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		flp = new FrameLayout.LayoutParams((int)(78 * scaleCoefficient),
 				(int)(78 * scaleCoefficient), Gravity.RIGHT | Gravity.BOTTOM);
-		flp.rightMargin = STATUS_BAR_MARGIN_X;
+		flp.rightMargin = (int) (10*scaleCoefficient);
 		flp.bottomMargin = (int) (85*scaleCoefficient);
 		alarmControl.setLayoutParams(flp);
 
@@ -617,7 +617,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			if (!text.equals(getText().toString())) {
 				TextPaint pp = new TextPaint(getPaint());
 				if (!text.equals("")) {
-					pp.setTextSize(25 * scaleCoefficient);
+					pp.setTextSize(20 * scaleCoefficient);
 					float ts = pp.measureText(text);
 					int wth = getWidth();
 					while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {

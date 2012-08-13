@@ -29,8 +29,8 @@ import android.preference.PreferenceScreen;
 import android.view.View;
 
 public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockInfoControlActions {
-	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
-	public static final int[] SECONDS = new int[]{0, 30, 45, 60};
+	public static final int[] SECONDS = new int[]{0, 30, 60, 90};
+	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
 	private final static boolean REGISTER_BG_SETTINGS = false;
 	private static final String ID = "osmand.backgroundservice";
 	private OsmandSettings settings;
@@ -153,7 +153,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = view.getApplication().getNavigationService() == null;
 		bgServiceAction.setTitle(view.getResources().getString(!off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
-//		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small));
+		bgServiceAction.setIcon(view.getResources().getDrawable(!off? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive));
 		bgServiceAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
