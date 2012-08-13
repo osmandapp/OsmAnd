@@ -601,7 +601,7 @@ public class BinaryRoutePlanner {
 		if (!reverseWay && road.getRestrictionLength() == 0) {
 			return false;
 		}
-		if(!ctx.getRouter().restrictionsAwayre()) {
+		if(!ctx.getRouter().restrictionsAware()) {
 			return false;
 		}
 		while (next != null) {
