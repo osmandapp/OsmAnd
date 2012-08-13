@@ -43,8 +43,9 @@ public class SpecialPhrases {
 	 * This method needs to be used before the getSpecialPhrase method
 	 * 
 	 * @param lang the language to use
+	 * @throws IOException when reading the text file failed
 	 */
-	public static void setLanguage(Context ctx, Locale lang) {
+	public static void setLanguage(Context ctx, Locale lang) throws IOException {
 		if (lang.getLanguage().equals(new Locale("af").getLanguage())) {
 			loadText(ctx, R.raw.specialphrases_af);
 		} else if (lang.getLanguage().equals(new Locale("ar").getLanguage())) {
@@ -114,29 +115,31 @@ public class SpecialPhrases {
 
 	}
 	
-	public static void loadText(Context ctx, int resourceId) {
+	/**
+	 * load text from the specialphrases 
+	 * @param ctx 
+	 * @param resourceId resource representing the file to load
+	 * @throws IOException when reading the file failed
+	 */
+	private static void loadText(Context ctx, int resourceId) throws IOException {
 		m = new HashMap<String,String>();
-		
-	    // The InputStream opens the resourceId and sends it to the buffer
-	    InputStream is = ctx.getResources().openRawResource(resourceId);
-	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
-	    String readLine = null;
 
-	    try {
-	        // While the BufferedReader readLine is not null 
-	        while ((readLine = br.readLine()) != null) {
-	        	String[] arr = readLine.split(",");
-	        	if (arr != null && arr.length == 2) 
-	        		m.put(arr[0], arr[1]);
-	        }
+		// The InputStream opens the resourceId and sends it to the buffer
+		InputStream is = ctx.getResources().openRawResource(resourceId);
+		BufferedReader br = new BufferedReader(new InputStreamReader(is));
+		String readLine = null;
 
-		    // Close the InputStream and BufferedReader
-		    is.close();
-		    br.close();
+		// While the BufferedReader readLine is not null 
+		while ((readLine = br.readLine()) != null) {
+			String[] arr = readLine.split(",");
+			if (arr != null && arr.length == 2) 
+				m.put(arr[0], arr[1]);
+		}
 
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+		// Close the InputStream and BufferedReader
+		is.close();
+		br.close();
+
 	}
 
 }

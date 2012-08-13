@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
@@ -248,9 +250,21 @@ public class OsmandApplication extends Application {
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
 				if (osmandSettings.usingEnglishNames()) {
-					SpecialPhrases.setLanguage(this, new Locale("en"));
+					try {
+						SpecialPhrases.setLanguage(this, new Locale("en"));
+					} catch (IOException e) {
+						LOG.error("I/O exception", e);
+						Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
+						error.show();
+					}
 				} else {
-					SpecialPhrases.setLanguage(this, Locale.getDefault());
+					try {
+						SpecialPhrases.setLanguage(this, Locale.getDefault());
+					} catch (IOException e) {
+						LOG.error("I/O exception", e);
+						Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
+						error.show();
+					}
 				}
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
