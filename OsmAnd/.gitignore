@@ -2,6 +2,7 @@ bin/
 dist/
 gen/
 local.properties
+raw/
 obj/
 cpd.xml
 jni/Local.mk

@@ -67,7 +67,7 @@ park,Park
 parking,Parkeren
 parking,Parking
 pharmacy,Apotheek
-place_of_worship,Religieuze samenkomstplaats
+place_of_worship,Gebedsplaats
 police,Politie
 post_box,Brievenbus
 post_office,Postkantoor
