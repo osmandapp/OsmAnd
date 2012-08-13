@@ -13,10 +13,10 @@ import java.util.Locale;
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
-import net.osmand.Version;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
@@ -247,6 +247,11 @@ public class OsmandApplication extends Application {
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
+				if (osmandSettings.usingEnglishNames()) {
+					SpecialPhrases.setLanguage(this, new Locale("en"));
+				} else {
+					SpecialPhrases.setLanguage(this, Locale.getDefault());
+				}
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);

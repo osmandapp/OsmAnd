@@ -1,0 +1,356 @@
+
+aerodrome,Sân bay
+aerodrome,Phi trường
+aerodrome,Trung tâm Nghệ thuật
+arts_centre,Các Trung tâm Nghệ thuật
+atm,Máy Rút tiền Tự động
+bank,Ngân hàng
+bank,Các Ngân hàng
+bar,Quán Rượu
+bench,Ghế
+bicycle_parking,Chỗ Đậu Xe đạp
+bicycle_rental,Chỗ Mướn Xe đạp
+bus_station,Các Trạm xe buýt
+cafe,Quán Cà phê
+car_rental,Chỗ Mướn Xe
+car_sharing,Chia sẻ Xe cộ
+car_wash,Tiệm Rửa Xe
+casino,Sòng bạc
+cinema,Rạp phim
+club,Câu lạc bộ
+college,Trường Cao đẳng
+community_centre,Trung tâm Cộng đồng
+courthouse,Tòa
+dentist,Nha sĩ
+dentist,Các Nha sĩ
+doctors,Bác sĩ
+dormitory,Ký túc xá
+drinking_water,Vòi Nước uống
+drinking_water,Các Vòi Nước uống
+driving_school,Trường Lái xe
+embassy,Tòa Đại sứ
+emergency_phone,Điện thoại Khẩn cấp
+fast_food,Nhà hàng Ăn nhanh
+fast_food,Các Nhà hàng Ăn nhanh
+ferry_terminal,Trạm Phà
+fire_hydrant,Vòi nước Máy
+fire_station,Trạm Cứu hỏa
+fountain,Vòi nước
+fuel,Cây xăng
+grave_yard,Nghĩa địa
+grave_yard,Các Nghĩa địa
+gym,Nhà Thể dục
+gym,Các Nhà Thể dục
+health_centre,Trung tâm Y tế
+hospital,Bệnh viện
+hotel,Khách sạn
+ice_cream,Tiệm Kem
+kindergarten,Tiểu học
+library,Thư viện
+market,Chợ
+marketplace,Chợ phiên
+nursery,Nhà trẻ
+nursery,Các Nhà trẻ
+office,Văn phòng
+park,Công viên
+parking,Chỗ Đậu xe
+pharmacy,Nhà thuốc
+pharmacy,Các Nhà thuốc
+place_of_worship,Nơi Thờ phụng
+place_of_worship,Các Nơi Thờ phụng
+police,Cảnh sát
+post_box,Hòm thư
+post_office,Bưu điện
+preschool,Trường Mầm non
+prison,Nhà tù
+prison,Các Nhà tù
+pub,Quán rượu
+public_market,Chợ phiên
+restaurant,Nhà hàng
+restaurant,Các Nhà hàng
+sauna,Nhà Tắm hơi
+sauna,Các Nhà Tắm hơi
+school,Trường học
+shop,Tiệm
+shopping,Tiệm
+supermarket,Siêu thị
+taxi,Taxi
+telephone,Điện thoại Công cộng
+theatre,Nhà hát
+theatre,Các Nhà hát
+toilets,Vệ sinh
+townhall,Thị sảnh
+university,Trường Đại học
+vending_machine,Máy Bán hàng
+waste_basket,Thùng rác
+wifi,Điểm Truy cập Không dây
+youth_centre,Trung tâm Thanh niên
+administrative,Biên giới Hành chính
+bunker,Boong ke
+church,Nhà thờ
+church,Các Nhà thờ
+city_hall,Trụ sở Thành phố
+commercial,Tòa nhà Thương mại
+dormitory,Ký túc xá
+entrance,Cửa vào
+garage,Ga ra
+hospital,Tòa nhà Bệnh viện
+hotel,Khách sạn
+house,Nhà ở
+house,Các Nhà ở
+industrial,Tòa nhà Công nghiệp
+office,Tòa nhà Văn phòng
+residential,Nhà ở
+residential,Các Nhà ở
+school,Nhà trường
+school,Các Nhà trường
+shop,Tiệm
+stadium,Sân vận động
+store,Tiệm
+tower,Tháp
+train_station,Nhà ga
+train_station,Các Nhà ga
+university,Tòa nhà Đại học
+&quot;yes&quot;,Tòa nhà
+bridleway,Đường Cưỡi ngựa
+bus_stop,Chỗ Đậu Xe buýt
+construction,Đường Đang Xây
+cycleway,Đường Xe đạp
+distance_marker,Cây số
+footway,Đường bộ
+gate,Cổng
+living_street,Đường Hàng xóm
+minor,Đường Nhỏ
+minor,Các Đường Nhỏ
+motorway,Đường Cao tốc
+motorway_junction,Ngã tư Đường Cao tốc
+motorway_junction,Các Ngã tư Đường Cao tốc
+motorway_link,Đường Cao tốc
+path,Lối
+pedestrian,Đường bộ Lớn
+primary,Đường Chính
+primary_link,Đường Chính
+raceway,Đường đua
+residential,Đường Nhà ở
+residential,Các Đường Nhà ở
+road,Đường
+secondary,Đường Lớn
+secondary_link,Đường Lớn
+service,Đường phụ
+services,Dịch vụ Dọc đường Cao tốc
+steps,Cầu thang
+tertiary,Đường Lớn
+track,Đường mòn
+trail,Đường mòn
+trunk,Xa lộ
+trunk_link,Xa lộ
+unclassified,Đường Không Phân loại
+unsurfaced,Đường Không Lát
+archaeological_site,Khu vực Khảo cổ
+battlefield,Chiến trường
+boundary_stone,Mốc Biên giới
+building,Tòa nhà
+castle,Lâu đài
+church,Nhà thờ
+church,Các Nhà thờ
+house,Nhà ở
+house,Các Nhà ở
+icon,Thánh tượng
+manor,Trang viên
+memorial,Đài Tưởng niệm
+mine,Mỏ
+monument,Đài Kỷ niệm
+museum,Bảo tàng
+ruins,Tàn tích
+tower,Tháp
+wayside_cross,Thánh Giá Dọc đường
+wayside_shrine,Đền thánh Dọc đường
+allotments,Khu Vườn Gia đình
+basin,Lưu vực
+cemetery,Nghĩa địa
+cemetery,Các Nghĩa địa
+commercial,Khu vực Thương mại
+conservation,Bảo tồn
+construction,Công trường Xây dựng
+farm,Trại
+farmland,Trại
+farmyard,Sân Trại
+forest,Rừng Trồng Cây
+grass,Cỏ
+industrial,Khu vực Công nghiệp
+landfill,Nơi Đổ Rác
+landfill,Các Nơi Đổ Rác
+meadow,Đồng cỏ
+military,Khu vực Quân sự
+mine,Mỏ
+mountain,Núi
+mountain,Các Núi
+nature_reserve,Khu Bảo tồn Thiên niên
+park,Công viên
+piste,Đường Trượt tuyết
+plaza,Quảng trường
+quarry,Mỏ Đá
+railway,Đường sắt
+recreation_ground,Sân chơi
+reservoir,Bể nước
+residential,Khu vực Nhà ở
+residential,Các Khu vực Nhà ở
+retail,Khu vực Buôn bán
+vineyard,Vườn Nho
+vineyard,Các Vườn Nho
+wetland,Đầm lầy
+wood,Rừng
+fishing,Hồ Đánh cá
+garden,Vườn
+golf_course,Sân Golf
+ice_rink,Sân băng
+nature_reserve,Khu Bảo tồn Thiên niên
+park,Công viên
+pitch,Bãi Thể thao
+playground,Sân chơi
+recreation_ground,Sân Giải trí
+sports_centre,Trung tâm Thể thao
+stadium,Sân vận động
+swimming_pool,Hồ Bơi
+water_park,Công viên Nước
+water_park,Các Công viên Nước
+bay,Vịnh
+beach,Bãi biển
+cape,Mũi đất
+cave_entrance,Cửa vào Hang
+channel,Eo biển
+cliff,Vách đá
+coastline,Bờ biển
+geyser,Mạch nước Phun
+glacier,Sông băng
+heath,Bãi Hoang
+hill,Đồi
+island,Đảo
+land,Đất
+moor,Truông
+peak,Đỉnh
+reef,Rạn san hô
+river,Sông
+rock,Đá
+spring,Suối
+strait,Eo biển
+tree,Cây
+valley,Thung lũng
+volcano,Núi lửa
+volcano,Các Núi lửa
+water,Nước
+water,Các Nước
+wetlands,Đầm lầy
+wood,Rừng
+city,Thành phố
+country,Quốc gia
+county,Quận hạt
+farm,Trại
+house,Nhà ở
+house,Các Nhà ở
+houses,Dãy Nhà
+houses,Các Dãy Nhà
+island,Đảo
+locality,Địa phương
+postcode,Mã Bưu điện
+region,Miền
+sea,Biển
+state,Tỉnh bang
+subdivision,Hàng xóm
+suburb,Ngoại ô
+suburb,Các Ngoại ô
+town,Thị xã/trấn
+unincorporated_area,Khu Chưa Hợp nhất
+village,Làng
+construction,Đường sắt Đang Xây
+disused_station,Nhà ga Đóng cửa
+disused_station,Các Nhà ga Đóng cửa
+funicular,Đường sắt Leo núi
+historic_station,Nhà ga Lịch sử
+historic_station,Các Nhà ga Lịch sử
+junction,Ga Đầu mối
+monorail,Đường Một Ray
+station,Nhà ga
+station,Các Nhà ga
+subway,Trạm Xe điện Ngầm
+subway,Các Trạm Xe điện Ngầm
+subway_entrance,Cửa vào Nhà ga Xe điện ngầm
+subway_entrance,Các Cửa vào Nhà ga Xe điện ngầm
+tram,Đường Xe điện
+bakery,Tiệm Bánh
+bicycle,Tiệm Xe đạp
+books,Tiệm Sách
+car,Tiệm Xe hơi
+car_dealer,Cửa hàng Xe hơi
+car_repair,Tiệm Sửa Xe
+carpet,Tiệm Thảm
+chemist,Nhà thuốc
+chemist,Các Nhà thuốc
+clothes,Tiệm Quần áo
+computer,Tiệm Máy tính
+confectionery,Tiệm Kẹo
+convenience,Tiệm Tập hóa
+cosmetics,Tiệm Mỹ phẩm
+drugstore,Nhà thuốc
+drugstore,Các Nhà thuốc
+fashion,Tiệm Thời trang
+fish,Tiệm Cá
+florist,Tiệm Hoa
+food,Tiệm Thực phẩm
+grocery,Tiệm Tạp phẩm
+hairdresser,Tiệm Làm tóc
+insurance,Bảo hiểm
+jewelry,Tiệm Kim hoàn
+laundry,Tiệm Giặt Quần áo
+mall,Trung tâm Mua sắm
+market,Chợ
+mobile_phone,Tiệm Điện thoại Di động
+motorcycle,Cửa hàng Xe mô tô
+music,Tiệm Nhạc
+music,Các Tiệm Nhạc
+newsagent,Tiệm Báo
+optician,Tiệm Kính mắt
+organic,Tiệm Thực phẩm Hữu cơ
+photo,Tiệm Rửa Hình
+salon,Tiệm Làm tóc
+shoes,Tiệm Giày
+shopping_centre,Trung tâm Mua sắm
+sports,Tiệm Thể thao
+supermarket,Siêu thị
+toys,Tiệm Đồ chơi
+travel_agency,Văn phòng Du lịch
+video,Tiệm Phim
+alpine_hut,Túp lều Trên Núi
+alpine_hut,Các Túp lều Trên Núi
+artwork,Tác phẩm Nghệ thuật
+artwork,Các Tác phẩm Nghệ thuật
+attraction,Nơi Du lịch
+attraction,Các Nơi Du lịch
+bed_and_breakfast,Nhà trọ
+bed_and_breakfast,Các Nhà trọ
+cabin,Túp lều
+camp_site,Nơi Cắm trại
+camp_site,Các Nơi Cắm trại
+chalet,Nhà ván
+chalet,Các Nhà ván
+hostel,Nhà trọ
+hostel,Các Nhà trọ
+hotel,Khách sạn
+information,Thông tin
+lean_to,Nhà chái
+lean_to,Các Nhà chái
+motel,Khách sạn Dọc đường
+museum,Bảo tàng
+picnic_site,Bàn ăn Ngoài trời
+picnic_site,Các Bàn ăn Ngoài trời
+theme_park,Công viên Giải trí
+valley,Thung lũng
+viewpoint,Thắng cảnh
+zoo,Vườn thú
+canal,Kênh
+dam,Đập
+rapids,Thác ghềnh
+river,Sông
+riverbank,Bờ sông
+stream,Dòng suối
+waterfall,Thác
