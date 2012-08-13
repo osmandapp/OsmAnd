@@ -1,5 +1,25 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
+<resources>
+  <string name="live_monitoring_mode_off">Stop Live tracking</string>
+  <string name="live_monitoring_mode_on">Start Live tracking</string>
+  <string name="layer_map_appearance">Configureer scherm&#8230;</string>
+  <string name="show_lanes">Toon rijstroken</string>
+  <string name="avoid_unpaved">Vermijd onverharde wegen</string>
+  <string name="avoid_ferries">Vermijd veerboten</string>
+  <string name="avoid_in_routing_title">Vermijd&#8230;</string>
+  <string name="avoid_in_routing_descr">Vermijd tolwegen, onverharde wegen, veerboten</string>
+  <string name="show_warnings_title">Toon alarm&#8230;</string>
+  <string name="show_warnings_descr">Toon snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
+  <string name="map_widget_fluorescent">Fluorescerende routes</string>
+  <string name="map_widget_show_ruler">Lineaal</string>
+  <string name="map_widget_appearance">Overige</string>
+  <string name="map_widget_view_direction">Kijkrichting</string>
+  <string name="map_widget_transparent">Transparente skin </string>
+  <string name="monitoring_mode_off">Stop trackregistratie</string>
+  <string name="monitoring_mode_on">Start trackregistratie</string>
+  <string name="gps_wakeup_interval">GPS ontwaak-interval : %s</string>
+  <string name="int_continuosly">Continue</string>
+  <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
   <string name="play_commands_of_currently_selected_voice">Speel instructies af met de geselecteerde stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
@@ -916,6 +936,6 @@
   <string name="bg_service_interval">Zet ontwaak-interval:</string>
   <string name="screen_is_locked">Voor ontgrendelen scherm, toets het slot icoon</string>
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
-  <string name="bg_service_sleep_mode_off">Slaap modus uitzetten</string>
-  <string name="bg_service_sleep_mode_on">Slaap modus aanzetten</string>
+  <string name="bg_service_sleep_mode_off">Slaap modus aanzetten</string>
+  <string name="bg_service_sleep_mode_on">Slaap modus uitzetten</string>
 </resources>
