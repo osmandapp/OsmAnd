@@ -1,0 +1,269 @@
+
+aerodrome,Aireportu
+arts_centre,Arte Zentroa
+auditorium,Entzunareto
+bank,Banku
+bar,Taberna
+bicycle_rental,Txirrindu Alokairua
+brothel,Putetxe
+bureau_de_change,Diru-truke Bulegoa
+bus_station,Autobus-geltoki
+cafe,Kafetegi
+car_rental,Ibilgailu-alokairu
+car_wash,Auto Garbiketa
+casino,Kasino
+cinema,Zinema
+clinic,Klinika
+club,Diskoteka
+community_centre,Komunitate Zentroa
+courthouse,Epaitegia
+crematorium,Errauste labe
+dentist,Dentista
+doctors,Medikuak
+drinking_water,Edateko ur
+driving_school,Autoeskola
+embassy,Enbaxada
+emergency_phone,Larrialdi Telefonoa
+fast_food,Janari Azkarra
+ferry_terminal,Ferry terminal
+fire_station,Suhiltzaileak
+fountain,Iturri
+grave_yard,Hilerri
+gym,Osasun Zentroa / Gimnasioa
+health_centre,Osasun Zentroa
+hospital,Ospitalea
+hotel,Hotel
+ice_cream,Izozkiak
+kindergarten,Haurtzaindegi
+library,Liburutegia
+market,Merkatu
+marketplace,Merkatua
+mountain_rescue,Mendiko Erreskatea
+nightclub,Gau-klub
+nursery,Haurtzaindegi
+office,Bulego
+park,Parke
+parking,Aparkaleku
+pharmacy,Farmazia
+place_of_worship,Otoitzerako Lekua
+police,Polizia
+post_box,Postontzia
+post_office,Postetxe
+preschool,Eskolaurre
+prison,Espetxe
+public_building,Eraikin publiko
+public_market,Herri Azoka
+recycling,Birziklatze gune
+restaurant,Jatetxe
+sauna,Sauna
+school,Ikastetxe
+shop,Denda
+shopping,Erosketak
+studio,Estudio
+supermarket,Supermerkatu
+taxi,Taxi
+telephone,Telefono publiko
+theatre,Antzokia
+toilets,Komunak
+townhall,Udaletxe
+university,Unibertsitate
+vending_machine,Salmenta automatiko
+wifi,WiFi Sarbidea
+youth_centre,Gaztelekua
+administrative,Muga Administratiboa
+bunker,Bunker
+chapel,Kapera
+church,Eliza
+city_hall,Udaletxea
+garage,Garajea
+hospital,Ospitale erakina
+hotel,Hotela
+house,Etxe
+industrial,Eraikin industriala
+public,Eraikin publiko
+school,Eskola eraikina
+shop,Denda
+stadium,Estadio
+store,Denda
+tower,Dorre
+train_station,Tren Geltokia
+university,Unibertsitate eraikina
+&quot;yes&quot;,Eraikina
+bus_stop,Autobus-geraleku
+construction,Eraikitze-lanetan dagoen Autopista
+emergency_access_point,Larrialdi Sarbide Gunea
+footway,Oinezkoen bide
+gate,Ate
+motorway,Autobide
+motorway_link,Autobidea
+platform,Nasa
+platform,Nasas
+primary,Lehen mailako errepide
+primary_link,Errepide nagusi
+residential,Bizileku
+road,Errepide
+secondary,Bigarren mailako errepide
+secondary_link,Bigarren mailako errepide
+service,Zerbitzu Errepidea
+services,Autobide Zerbitzuak
+steps,Eskailera-mailak
+tertiary,Hirugarren mailako errepide
+track,Pista
+archaeological_site,Aztarnategi arkeologiko
+building,Eraikina
+castle,Gaztelu
+church,Eliza
+house,Etxea
+memorial,Memoriala
+mine,Meategi
+monument,Monumentu
+museum,Museo
+tower,Dorre
+cemetery,Hilerri
+commercial,Merkataritza Eremua
+forest,Baso
+meadow,Larre
+military,Eremu Militarra
+mine,Meategi
+mountain,Mendi
+nature_reserve,Natura-erreserba
+nature_reserve,Natura-erreserbas
+park,Parke
+plaza,Enparantza
+quarry,Harrobi
+railway,Trenbide
+reservoir,Urtegi
+beach_resort,Hondartza konplexu
+common,Lur Komunak
+fishing,Arrantza Lekua
+garden,Lorategi
+golf_course,Golf-zelai
+ice_rink,Izotz-pista
+marina,Kirol-portu
+miniature_golf,Minigolfa
+nature_reserve,Natura Erreserba
+nature_reserve,Natura Erreserbas
+park,Parkea
+pitch,Kirolgunea
+playground,Jolastoki
+sports_centre,Kiroldegi
+stadium,Estadio
+swimming_pool,Igerilekua
+bay,Badia
+beach,Hondartza
+cape,Lurmutur
+cave_entrance,Kobazulo Sarrera
+channel,Kanal
+coastline,Itsasertz
+crater,Crater
+fjord,Fiordo
+geyser,Geiser
+glacier,Glaziar
+hill,Muinoa
+island,Irla
+mud,Lohi
+peak,Gailur
+point,Puntu
+reef,Arrezife
+river,Ibai
+rock,Arroka
+scree,Harritza
+shoal,Hondar-banku
+tree,Zuhaitza
+valley,Haran
+volcano,Sumendi
+water,Ura
+wood,Baso
+city,Hiria
+country,Herrialdea
+county,Konderria
+farm,Baserria
+hamlet,Herrixka
+house,Etxe
+houses,Etxeak
+island,Irla
+islet,Uhartea
+locality,Lokalitate
+municipality,Udalerri
+postcode,Posta-kode
+region,Eskualde
+sea,Itsasoa
+state,Estatua
+subdivision,Subdibisio
+suburb,Aldiri
+town,Herria
+unincorporated_area,Elkartu Gabeko Gunea
+village,Herrixka
+construction,Eraikitze-lanetan dagoen Trenbidea
+halt,Tren Geralekua
+historic_station,Tren Geltoki Historikoa
+light_rail,Tren Arina
+monorail,Monoraila
+platform,Trenbide Plataforma
+station,Tren Geltokia
+subway,Metro geltoki
+subway_entrance,Metro Sarbidea
+tram,Tranbia
+tram_stop,Tranbia geltoki
+art,Arte-denda
+bakery,Okindegi
+books,Liburudenda
+butcher,Harategi
+chemist,Farmazia
+clothes,Arropa denda
+computer,Ordenagailu-denda
+confectionery,Gozotegi
+electronics,Elektronika-denda
+estate_agent,Higiezinen agente
+fish,Arrantza-denda
+florist,Loradenda
+food,Janari-denda
+furniture,Altzari
+gallery,Galeria
+gift,Opari-denda
+greengrocer,Barazki-saltzaile
+grocery,Janaridenda
+hairdresser,Ile-apaindegi
+hifi,Hi-Fi
+insurance,Aseguruak
+jewelry,Bitxi-denda
+kiosk,Kiosko
+laundry,Garbitegi
+mall,Merkataritza-gunea
+market,Merkatu
+mobile_phone,Mugikor-denda
+music,Musika-denda
+newsagent,Kioskoa
+optician,Optika
+pet,Animalia-denda
+photo,Argazki-denda
+shoes,Zapatadenda
+shopping_centre,Merkatal Gunea
+sports,Kirol denda
+supermarket,Supermerkatu
+toys,Jostailu Denda
+travel_agency,Bidaia-agentzia
+alpine_hut,Aterpe alpinoa
+attraction,Atrakzio
+bed_and_breakfast,Ohe eta gosari (B&amp;B)
+camp_site,Kanpin
+chalet,Txalet
+guest_house,Aterpe
+hostel,Ostatu
+hotel,Hotel
+information,Informazioa
+motel,Motel
+museum,Museoa
+picnic_site,Piknik-gune
+theme_park,Parke tematiko
+valley,Haran
+viewpoint,Behatoki
+zoo,Zoologiko
+canal,Kanal
+dam,Urtegia
+ditch,Lubakia
+drain,Isurbidea
+rapids,Ur-lasterrak
+river,Ibai
+waterfall,Ur-jauzi
+weir,Uharka

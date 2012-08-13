@@ -247,6 +247,11 @@ public class OsmandApplication extends Application {
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
+				if (osmandSettings.usingEnglishNames()) {
+					SpecialPhrases.setLanguage(this, new Locale("en"));
+				} else {
+					SpecialPhrases.setLanguage(this, Locale.getDefault());
+				}
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);
