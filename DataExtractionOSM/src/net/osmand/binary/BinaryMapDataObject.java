@@ -2,7 +2,6 @@ package net.osmand.binary;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.osm.MapRenderingTypes;
 
 public class BinaryMapDataObject {
@@ -112,10 +111,6 @@ public class BinaryMapDataObject {
 	
 	public void setArea(boolean area) {
 		this.area = area;
-	}
-	
-	public TagValuePair getTagValue(int indType){
-		throw new UnsupportedOperationException("This functions is deprecated and should be deleted");
 	}
 	
 	public long getId() {

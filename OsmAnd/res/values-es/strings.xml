@@ -1,5 +1,23 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
+﻿<?xml version='1.0' encoding='utf-8'?>
+<resources>
+  <string name="live_monitoring_mode_off">Start\n live tracking</string>
+  <string name="live_monitoring_mode_on">Stop\n live tracking</string>
+  <string name="layer_map_appearance">Configure screen&#8230;</string>
+  <string name="show_lanes">Mostrar carriles</string>
+  <string name="avoid_unpaved">Evitar carreteras sin pavimentar</string>
+  <string name="avoid_ferries">Evitar ferries</string>
+  <string name="avoid_in_routing_title">Evitar&#8230;</string>
+  <string name="avoid_in_routing_descr">Evitar carreteras con peaje, sin pavimentar, ferries</string>
+  <string name="show_warnings_title">Mostrar alarmas&#8230;</string>
+  <string name="show_warnings_descr">Mostrar límites de velocidad, radares, y puntos negros</string>
+  <string name="map_widget_fluorescent">Rutas fluorescentes</string>
+  <string name="map_widget_show_ruler">Escala</string>
+  <string name="map_widget_appearance">Miscellaneous</string>
+  <string name="map_widget_view_direction">Viewing direction</string>
+  <string name="map_widget_transparent">Transparent skin</string>
+  <string name="monitoring_mode_off">Grabar GPX</string>
+  <string name="monitoring_mode_on">Parar\n grab. GPX </string>
+  <string name="use_fluorescent_overlays">Usar superpuestos fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Usa colores fluorescentes para mostrar trazas y rutas</string>
   <string name="offline_edition">Edición sin conexión</string>
   <string name="offline_edition_descr">Usa siempre edición sin conexión</string>
@@ -925,6 +943,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="bg_service_interval">Intervalo de activación:</string>
   <string name="screen_is_locked">Para desbloquear la pantalla presione el icono de candado</string>
   <string name="bg_service_screen_unlock">Desbloquear pantalla</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="bg_service_sleep_mode_off">Deshabilitar modo de bajo consumo</string>
+  <string name="bg_service_sleep_mode_on">Habilitar modo de bajo consumo</string>
 </resources>

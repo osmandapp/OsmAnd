@@ -40,7 +40,7 @@ public class RoutingConfiguration {
 	public int planRoadDirection = 0;
 
 	// 1.5 Router specific coefficients and restrictions
-	public VehicleRouter router = new GeneralRouter();
+	public VehicleRouter router = new GeneralRouter(GeneralRouterProfile.CAR, new LinkedHashMap<String, String>());
 	public String routerName = "";
 	
 	// 1.6 Used to calculate route in movement
@@ -50,7 +50,7 @@ public class RoutingConfiguration {
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
-		private Map<String, VehicleRouter> routers = new LinkedHashMap<String, VehicleRouter>();
+		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 
 		public RoutingConfiguration build(String router, boolean useShortestWay) {
@@ -79,6 +79,9 @@ public class RoutingConfiguration {
 				return i;
 			}
 			i.router = routers.get(router);
+			if(useShortestWay) {
+				i.router = i.router.specialization(GeneralRouter.USE_SHORTEST_WAY);
+			}
 			i.routerName = router;
 			return i;
 		}
@@ -148,33 +151,20 @@ public class RoutingConfiguration {
 						config.attributes.put(key, attributes.getValue("value"));
 					} else if("routingProfile".equals(name)) {
 						currentSelectedRouter = attributes.getValue("name");
-						currentRouter = new GeneralRouter();
-						currentRouter.profile = GeneralRouterProfile.valueOf(attributes.getValue("baseProfile").toUpperCase());
+						Map<String, String> attrs = new LinkedHashMap<String, String>();
+						for(int i=0; i< attributes.getLength(); i++) {
+							attrs.put(parser.isNamespaceAware() ? attributes.getLocalName(i) : attributes.getQName(i), attributes.getValue(i));
+						}
+						currentRouter = new GeneralRouter(GeneralRouterProfile.valueOf(attributes.getValue("baseProfile").toUpperCase()), attrs);
 						config.routers.put(currentSelectedRouter, currentRouter);
-						currentRouter.restrictionsAware = parseSilentBoolean(attributes.getValue("restrictionsAware"), 
-								currentRouter.restrictionsAware);
-						currentRouter.followSpeedLimitations = parseSilentBoolean(attributes.getValue("followSpeedLimitations"), 
-								currentRouter.followSpeedLimitations);
-						currentRouter.onewayAware = parseSilentBoolean(attributes.getValue("onewayAware"), 
-								currentRouter.onewayAware);
-						currentRouter.minDefaultSpeed = parseSilentDouble(attributes.getValue("minDefaultSpeed"), 
-								currentRouter.minDefaultSpeed);
-						currentRouter.maxDefaultSpeed = parseSilentDouble(attributes.getValue("maxDefaultSpeed"), 
-								currentRouter.maxDefaultSpeed);
-						currentRouter.leftTurn = parseSilentDouble(attributes.getValue("leftTurn"), 
-								currentRouter.leftTurn);
-						currentRouter.roundaboutTurn = parseSilentDouble(attributes.getValue("roundaboutTurn"), 
-								currentRouter.roundaboutTurn);
-						currentRouter.rightTurn = parseSilentDouble(attributes.getValue("rightTurn"), 
-								currentRouter.rightTurn);
-					} else if("highway".equals(name)) {
-						String key = attributes.getValue("value");
+					} else if("road".equals(name)) {
+						String key = attributes.getValue("tag") +"$" + attributes.getValue("value");
 						currentRouter.highwayPriorities.put(key, parseSilentDouble(attributes.getValue("priority"), 
 								1));
 						currentRouter.highwayFuturePriorities.put(key, parseSilentDouble(attributes.getValue("dynamicPriority"), 
 								1));
 						currentRouter.highwaySpeed.put(key, parseSilentDouble(attributes.getValue("speed"), 
-								currentRouter.minDefaultSpeed));
+								10));
 					} else if("obstacle".equals(name)) {
 						String key = attributes.getValue("tag") + "$" + attributes.getValue("value");
 						currentRouter.obstacles.put(key, parseSilentDouble(attributes.getValue("penalty"), 
