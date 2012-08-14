@@ -17,7 +17,7 @@
   <string name="map_widget_transparent">Transparente skin </string>
   <string name="monitoring_mode_off">Stop trackregistratie</string>
   <string name="monitoring_mode_on">Start trackregistratie</string>
-  <string name="gps_wakeup_interval">GPS ontwaak-interval : %s</string>
+  <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
