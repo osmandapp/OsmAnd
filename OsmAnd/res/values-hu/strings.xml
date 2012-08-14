@@ -405,7 +405,7 @@
   <string name="select_all">Mindet kijelöl</string>
   <string name="reload">Újratölt</string>
   <string name="fast_route_mode">Leggyorsabb útvonal</string>
-  <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása</string>
+  <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása </string>
   <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>
   <string name="context_menu_item_download_map">Térkép letöltése</string>
   <string name="select_max_zoom_preload_area">Maximális nagyítás kiválasztása a látható terület előtöltéséhez</string>
@@ -485,7 +485,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">másodperc</string>
   <string name="int_min">perc</string>
-  <string name="background_service_int_descr">Helymeghatározási időköz megadása a háttérszolgáltatásnak</string>
+  <string name="background_service_int_descr">Helymeghatározási időköz megadása a háttérszolgáltatásnak </string>
   <string name="background_service_int">Helymeghatározási időköz</string>
   <string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása a háttérszolgáltatáshoz</string>
   <string name="background_service_provider">Helymeghatározási szolgáltatás</string>
@@ -910,7 +910,7 @@
   <string name="map_widget_next_turn">Következő kereszteződés</string>
   <string name="map_widget_next_turn_small">Következő kereszteződés (kicsi)</string>
   <string name="map_widget_next_next_turn">Második kereszteződés</string>
-  <string name="map_widget_mini_route">Mini útvonaltérkép</string>
+  <string name="map_widget_mini_route">Kicsi útvonaltérkép</string>
   <string name="bg_service_screen_lock">Képernyőzár be</string>
   <string name="bg_service_screen_lock_toast">Képernyő zárva</string>
   <string name="bg_service_interval">GPS bekapcsolási időköz:</string>
