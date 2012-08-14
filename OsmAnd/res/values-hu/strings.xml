@@ -405,7 +405,7 @@
   <string name="select_all">Mindet kijelöl</string>
   <string name="reload">Újratölt</string>
   <string name="fast_route_mode">Leggyorsabb útvonal</string>
-  <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása </string>
+  <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása a legrövidebb útért</string>
   <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>
   <string name="context_menu_item_download_map">Térkép letöltése</string>
   <string name="select_max_zoom_preload_area">Maximális nagyítás kiválasztása a látható terület előtöltéséhez</string>
