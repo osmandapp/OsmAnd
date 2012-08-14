@@ -170,6 +170,7 @@ public class LockInfoControl {
 				String s;
 				if(progress == 0) {
 					s = ctx.getString(R.string.int_continuosly);
+					v.value = 0;
 				} else {
 					if(progress < secondsLength) {
 						s = seconds[progress] + ctx.getString(R.string.int_seconds);
