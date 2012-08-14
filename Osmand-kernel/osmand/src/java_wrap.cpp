@@ -61,8 +61,6 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMa
 	BinaryMapFile* fl = initBinaryMapFile(inputName);
 	if(fl == NULL) {
 		osmand_log_print(LOG_WARN, "File %s was not initialized", inputName.c_str());
-	} else {
-		osmand_log_print(LOG_INFO, "File %s is initialized.", fl->inputName.c_str());
 	}
 	return fl != NULL;
 }

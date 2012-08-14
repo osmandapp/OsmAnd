@@ -79,7 +79,7 @@ public class BinaryMapPoiReaderAdapter {
 		return map.readInt();
 	}
 	
-	protected void readPoiBoundariesIndex(PoiRegion region) throws IOException {
+	private void readPoiBoundariesIndex(PoiRegion region) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -106,7 +106,9 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 
-	protected void readPoiIndex(PoiRegion region) throws IOException {
+	protected void readPoiIndex(PoiRegion region, boolean readCategories) throws IOException {
+		int length;
+		int oldLimit;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -116,19 +118,21 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();
 				break;
-			case OsmandOdb.OsmAndPoiIndex.BOUNDARIES_FIELD_NUMBER: {
-				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+			case OsmandOdb.OsmAndPoiIndex.BOUNDARIES_FIELD_NUMBER:
+				length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
 				readPoiBoundariesIndex(region);
 				codedIS.popLimit(oldLimit);
-			}
 				break; 
-			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER : {
-				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER :
+				if(!readCategories){
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return;
+				}
+				length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
 				readCategory(region);
 				codedIS.popLimit(oldLimit);
-			} break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER :
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return;
@@ -162,6 +166,10 @@ public class BinaryMapPoiReaderAdapter {
 		}
 	}
 	
+	protected void initCategories(PoiRegion region){
+		
+	}
+	
 	protected void searchPoiByName( PoiRegion region, SearchRequest<Amenity> req) throws IOException {
 		TIntLongHashMap offsets = new TIntLongHashMap();
 		Collator instance = Collator.getInstance();
@@ -170,6 +178,7 @@ public class BinaryMapPoiReaderAdapter {
 				StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 		long time = System.currentTimeMillis();
 		int indexOffset = codedIS.getTotalBytesRead();
+		boolean readCategories = region.categories.isEmpty();
 		while(true){
 			if(req.isCancelled()){
 				return;
@@ -186,6 +195,15 @@ public class BinaryMapPoiReaderAdapter {
 				offsets = readPoiNameIndex(instance, req.nameQuery, req);
 				codedIS.popLimit(oldLimit);
 				break;
+			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER :
+				if(!readCategories){
+					skipUnknownField(t);
+				} else {
+					length = codedIS.readRawVarint32();
+					oldLimit = codedIS.pushLimit(length);
+					readCategory(region);
+					codedIS.popLimit(oldLimit);
+				}
 			case OsmandOdb.OsmAndPoiIndex.POIDATA_FIELD_NUMBER :
 				// also offsets can be randomly skipped by limit
 				Integer[] offKeys = new Integer[offsets.size()];
@@ -349,6 +367,9 @@ public class BinaryMapPoiReaderAdapter {
 			skipTiles = new TLongHashSet();
 			zoomToSkip = req.zoom + ZOOM_TO_SKIP_FILTER;
 		}
+		int length ;
+		int oldLimit ;
+		boolean readCategories = region.categories.isEmpty();
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		while(true){
 			if(req.isCancelled()){
@@ -359,9 +380,18 @@ public class BinaryMapPoiReaderAdapter {
 			switch (tag) {
 			case 0:
 				return;
+			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER :
+				if(!readCategories){
+					skipUnknownField(t);
+				} else {
+					length = codedIS.readRawVarint32();
+					oldLimit = codedIS.pushLimit(length);
+					readCategory(region);
+					codedIS.popLimit(oldLimit);
+				}
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER :
-				int length = readInt();
-				int oldLimit = codedIS.pushLimit(length);
+				length = readInt();
+				oldLimit = codedIS.pushLimit(length);
 				readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap,  skipTiles, req, region);
 				codedIS.popLimit(oldLimit);
 				break;

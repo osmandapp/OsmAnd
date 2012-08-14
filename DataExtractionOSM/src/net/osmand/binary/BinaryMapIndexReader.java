@@ -145,9 +145,7 @@ public class BinaryMapIndexReader {
 				mapIndex.length = readInt();
 				mapIndex.filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(mapIndex.length);
-				// FIXME
-//				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-				readMapIndex(mapIndex);
+				readMapIndex(mapIndex, false);
 				basemap = basemap || mapIndex.isBaseMap();
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(mapIndex.filePointer + mapIndex.length);
@@ -209,7 +207,7 @@ public class BinaryMapIndexReader {
 					oldLimit = codedIS.pushLimit(poiInd.length);
 					// FIXME
 //					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-					poiAdapter.readPoiIndex(poiInd);
+					poiAdapter.readPoiIndex(poiInd, false);
 					codedIS.popLimit(oldLimit);
 					poiIndexes.add(poiInd);
 					indexes.add(poiInd);
@@ -574,8 +572,9 @@ public class BinaryMapIndexReader {
 	 * Map public methods 
 	 */
 
-	private void readMapIndex(MapIndex index) throws IOException {
+	private void readMapIndex(MapIndex index, boolean onlyInitEncodingRules) throws IOException {
 		int defaultId = 1;
+		int oldLimit ;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -583,29 +582,34 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				// encoding rules are required!
-				if(index.encodingRules.isEmpty()){
-					throw new IllegalStateException("Encoding rules are not defined for the map index");
+				if (onlyInitEncodingRules) {
+					index.finishInitializingTags();
 				}
-				index.finishInitializingTags();
 				return;
 			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
 				index.setName(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
-				int len = codedIS.readInt32();
-				int oldLimit = codedIS.pushLimit(len);
-				readMapEncodingRule(index, defaultId++);
-				codedIS.popLimit(oldLimit);
+				if (onlyInitEncodingRules) {
+					int len = codedIS.readInt32();
+					oldLimit = codedIS.pushLimit(len);
+					readMapEncodingRule(index, defaultId++);
+					codedIS.popLimit(oldLimit);
+				} else {
+					skipUnknownField(t);
+				}
 				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
 				int length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
-				oldLimit = codedIS.pushLimit(length);
-				MapRoot mapRoot = readMapLevel(new MapRoot());
-				mapRoot.length = length;
-				mapRoot.filePointer = filePointer;
-				index.getRoots().add(mapRoot);
-				codedIS.popLimit(oldLimit);
+				if (!onlyInitEncodingRules) {
+					oldLimit = codedIS.pushLimit(length);
+					MapRoot mapRoot = readMapLevel(new MapRoot());
+					mapRoot.length = length;
+					mapRoot.filePointer = filePointer;
+					index.getRoots().add(mapRoot);
+					codedIS.popLimit(oldLimit);
+				}
 				codedIS.seek(filePointer + length);
 				break;
 			default:
@@ -748,6 +752,13 @@ public class BinaryMapIndexReader {
 				if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
+					}
+					// lazy initializing rules
+					if(mapIndex.encodingRules.isEmpty()) {
+						codedIS.seek(mapIndex.filePointer);
+						int oldLimit = codedIS.pushLimit(mapIndex.length);
+						readMapIndex(mapIndex, true);
+						codedIS.popLimit(oldLimit);
 					}
 					// lazy initializing trees
 					if(index.trees == null){

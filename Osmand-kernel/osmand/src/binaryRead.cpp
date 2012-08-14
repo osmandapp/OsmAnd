@@ -97,7 +97,7 @@ bool readMapTreeBounds(CodedInputStream* input, MapTreeBounds* tree, MapRoot* ro
 	return true;
 }
 
-bool readMapLevel(CodedInputStream* input, MapRoot* root) {
+bool readMapLevel(CodedInputStream* input, MapRoot* root, bool initSubtrees) {
 	int tag;
 	int si;
 	while ((tag = input->ReadTag()) != 0) {
@@ -131,6 +131,10 @@ bool readMapLevel(CodedInputStream* input, MapRoot* root) {
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kBoxesFieldNumber: {
+			if(!initSubtrees){
+				input->Skip(input->BytesUntilLimit());
+				return true;
+			}
 			MapTreeBounds bounds;
 			readInt(input, &bounds.length);
 			bounds.filePointer = input->getTotalBytesRead();
@@ -345,7 +349,7 @@ bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
 	return true;
 }
 
-bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
+bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex, bool onlyInitEncodingRules) {
 	uint32_t tag;
 	uint32_t defaultId = 1;
 	while ((tag = input->ReadTag()) != 0) {
@@ -355,22 +359,29 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 			break;
 		}
 		case OsmAndMapIndex::kRulesFieldNumber: {
-			int len;
-			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &len);
-			int oldLimit = input->PushLimit(len);
-			readMapEncodingRule(input, mapIndex, defaultId++);
-			input->PopLimit(oldLimit);
+			if(onlyInitEncodingRules) {
+				int len;
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &len);
+				int oldLimit = input->PushLimit(len);
+				readMapEncodingRule(input, mapIndex, defaultId++);
+				input->PopLimit(oldLimit);
+			} else {
+				skipUnknownFields(input, tag);
+			}
 			break;
 		}
 		case OsmAndMapIndex::kLevelsFieldNumber: {
 			MapRoot mapLevel;
 			readInt(input, &mapLevel.length);
 			mapLevel.filePointer = input->getTotalBytesRead();
-			int oldLimit = input->PushLimit(mapLevel.length);
-			readMapLevel(input, &mapLevel);
-			input->PopLimit(oldLimit);
+			if (!onlyInitEncodingRules) {
+				int oldLimit = input->PushLimit(mapLevel.length);
+				readMapLevel(input, &mapLevel, false);
+				input->PopLimit(oldLimit);
+				mapIndex->levels.push_back(mapLevel);
+			}
 			input->Seek(mapLevel.filePointer + mapLevel.length);
-			mapIndex->levels.push_back(mapLevel);
+
 			break;
 		}
 		default: {
@@ -384,7 +395,9 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 		}
 		}
 	}
-	mapIndex->finishInitializingTags();
+	if(onlyInitEncodingRules) {
+		mapIndex->finishInitializingTags();
+	}
 	return true;
 }
 
@@ -410,7 +423,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 			readInt(input, &mapIndex.length);
 			mapIndex.filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(mapIndex.length);
-			readMapIndex(input, &mapIndex);
+			readMapIndex(input, &mapIndex, false);
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
 			file->mapIndexes.push_back(mapIndex);
@@ -830,6 +843,20 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 bool sortTreeBounds (const MapTreeBounds& i,const MapTreeBounds& j) { return (i.mapDataBlock<j.mapDataBlock); }
 
 void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, SearchQuery* req) {
+	// lazy initializing rules
+	if (ind->decodingRules.size() == 0) {
+		input->Seek(ind->filePointer);
+		int oldLimit = input->PushLimit(ind->length);
+		readMapIndex(input, ind, true);
+		input->PopLimit(oldLimit);
+	}
+	// lazy initializing subtrees
+	if (root->bounds.size() == 0) {
+		input->Seek(root->filePointer);
+		int oldLimit = input->PushLimit(root->length);
+		readMapLevel(input, root, true);
+		input->PopLimit(oldLimit);
+	}
 	// search
 	for (std::vector<MapTreeBounds>::iterator i = root->bounds.begin();
 			i != root->bounds.end(); i++) {
@@ -839,6 +866,7 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 		if (i->right < req->left || i->left > req->right || i->top > req->bottom || i->bottom < req->top) {
 			continue;
 		}
+
 		std::vector<MapTreeBounds> foundSubtrees;
 		input->Seek(i->filePointer);
 		int oldLimit = input->PushLimit(i->length);
