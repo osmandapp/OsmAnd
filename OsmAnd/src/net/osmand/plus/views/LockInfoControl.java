@@ -173,10 +173,10 @@ public class LockInfoControl {
 					v.value = 0;
 				} else {
 					if(progress < secondsLength) {
-						s = seconds[progress] + ctx.getString(R.string.int_seconds);
+						s = seconds[progress] + " " + ctx.getString(R.string.int_seconds);
 						v.value = seconds[progress] * 1000;
 					} else {
-						s = minutes[progress - secondsLength] + ctx.getString(R.string.int_min);
+						s = minutes[progress - secondsLength] + " " + ctx.getString(R.string.int_min);
 						v.value = minutes[progress - secondsLength] * 60 * 1000;
 					}
 				}

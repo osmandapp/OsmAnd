@@ -28,7 +28,7 @@
     <string name="monitoring_mode_on">Stop\n GPX rec.</string>
     <string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
     <string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
-    <string name="gps_wakeup_interval">GPS wake-up interval : %s</string>
+    <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
     <string name="int_continuosly">Continuously</string>
     <string name="screen_is_locked">To unlock screen press lock icon</string>
     <string name="map_widget_top_text">Street name</string>
