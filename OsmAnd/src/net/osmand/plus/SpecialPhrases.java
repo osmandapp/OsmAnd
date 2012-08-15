@@ -86,11 +86,11 @@ public class SpecialPhrases {
 	/**
 	 * Returns the preferred language
 	 * @param set the OsmandSettings used
-	 * @return Locale("en") if English names are chosen in the settings, Locale.getDefault otherwise
+	 * @return ENGLISH if English names are chosen in the settings, Locale.getDefault otherwise
 	 */
 	public static Locale getPreferredLanguage(OsmandSettings set){
 		if (set.usingEnglishNames()) {
-			return new Locale("en");
+			return Locale.ENGLISH;
 		} 
 		return Locale.getDefault();
 		
