@@ -249,23 +249,14 @@ public class OsmandApplication extends Application {
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
-				if (osmandSettings.usingEnglishNames()) {
-					try {
-						SpecialPhrases.setLanguage(this, new Locale("en"));
-					} catch (IOException e) {
-						LOG.error("I/O exception", e);
-						Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
-						error.show();
-					}
-				} else {
-					try {
-						SpecialPhrases.setLanguage(this, Locale.getDefault());
-					} catch (IOException e) {
-						LOG.error("I/O exception", e);
-						Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
-						error.show();
-					}
+				try {
+					SpecialPhrases.setLanguage(this, osmandSettings);
+				} catch (IOException e) {
+					LOG.error("I/O exception", e);
+					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
+					error.show();
 				}
+				
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);

@@ -27,10 +27,10 @@ public class SpecialPhrases {
 	/**
 	 * Use this method to query a special phrase for a certain subtype
 	 * 
-	 * If the language isn't set yet, it will default to English
+	 * If the language isn't set yet, a nullpointer exception will be thrown
 	 * 
 	 * @param key the subtype to query
-	 * @return the special phrase according to the asked key
+	 * @return the special phrase according to the asked key, or "null" if the key isn't found
 	 */
 	public static String getSpecialPhrase(String key){
 		if (!isLanguageSet()) {
@@ -46,12 +46,13 @@ public class SpecialPhrases {
 	 * @param lang the language to use
 	 * @throws IOException when reading the text file failed
 	 */
-	public static void setLanguage(Context ctx, Locale lang) throws IOException {
+	public static void setLanguage(Context ctx, OsmandSettings settings) throws IOException {
+		String lang = getPreferredLanguage(settings).getLanguage();
 		m = new HashMap<String,String>();
 		// The InputStream opens the resourceId and sends it to the buffer
 		InputStream is = null;
 		try {
-			is = ctx.getAssets().open("specialphrases/specialphrases_"+lang.getLanguage()+".txt");
+			is = ctx.getAssets().open("specialphrases/specialphrases_"+lang+".txt");
 		} catch (IOException ex) {
 			// second try: default to English, if this fails, the error is thrown outside
 			is = ctx.getAssets().open("specialphrases/specialphrases_en.txt");
@@ -64,7 +65,6 @@ public class SpecialPhrases {
 			String[] arr = readLine.split(",");
 			if (arr != null && arr.length == 2) {
 				m.put(arr[0], arr[1]);
-				System.out.println(arr[0]+" x "+arr[1]);
 			}
 			
 		}
@@ -74,6 +74,19 @@ public class SpecialPhrases {
 		br.close();
 		
 
+	}
+	
+	/**
+	 * Returns the preferred language
+	 * @param set the OsmandSettings used
+	 * @return Locale("en") if English names are chosen in the settings, Locale.getDefault otherwise
+	 */
+	public static Locale getPreferredLanguage(OsmandSettings set){
+		if (set.usingEnglishNames()) {
+			return new Locale("en");
+		} 
+		return Locale.getDefault();
+		
 	}
 	
 	
