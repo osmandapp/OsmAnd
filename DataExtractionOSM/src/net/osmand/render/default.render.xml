@@ -40,7 +40,7 @@
 		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
 		- some roads already rendered at lower zooms (travel/orienteering)
 		- motorways shown blue and trunk roads red to assimilate primaries, aligned with conventional road atlas
-		  (road color scheme intensified and unfied to Brightness=100, Saturation=50 on 2012-08-10. Old values commented with PALE-SCHEME)
+		  (road color scheme intensified and unfied to Saturation=50, Brightness=100 on 2012-08-10. Old values commented with PALE-SCHEME)
 		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
 		Typical zoom level use (zX) and alignment of features displayed:
 		 - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
@@ -610,8 +610,10 @@
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<point>
 		<!-- Locations -->
-		<filter minzoom="4" tag="place" icon="city" value="city"/>
-		<filter minzoom="6" tag="place" icon="city" value="town"/>
+			<filter nightMode="true" minzoom="4" icon="city_night" tag="place" value="city"/>
+		<filter minzoom="4" icon="city" tag="place" value="city"/>
+			<filter nightMode="true" minzoom="6" icon="town_night" tag="place" value="town"/>
+		<filter minzoom="6" icon="town" tag="place" value="town"/>
 
 		<!-- Traffic -->
 		<filter appMode="car" minzoom="16" icon="traffic_light" tag="highway" value="traffic_signals"/>
@@ -740,6 +742,7 @@
 		<filter minzoom="16" icon="shop_mobile_phone" tag="shop" value="mobile_phone"/>
 
 		<!-- Nature -->
+			<filter nightMode="true" minzoom="11" icon="peak_night" tag="natural" value="peak"/>
 		<filter minzoom="11" icon="peak" tag="natural" value="peak"/>
 		<filter minzoom="15" icon="cave_entrance" tag="natural" value="cave_entrance"/>
 		<filter minzoom="14" icon="spring" tag="natural" value="spring"/>
