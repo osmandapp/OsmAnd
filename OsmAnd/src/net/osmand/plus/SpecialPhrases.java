@@ -73,9 +73,6 @@ public class SpecialPhrases {
 
 			}
 
-			// Close the InputStream and BufferedReader
-			is.close();
-			br.close();
 		} finally {
 			Algoritms.closeStream(is);
 			Algoritms.closeStream(br);
