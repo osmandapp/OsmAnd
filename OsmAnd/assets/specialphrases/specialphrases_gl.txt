@@ -1,0 +1,250 @@
+
+aerodrome,Aeroporto
+arts_centre,Centro artístico
+atm,Caixeiro automático
+auditorium,Auditorio
+bank,Banco
+bar,Bar
+bench,Banco
+bicycle_parking,Aparcadoiro de bicicletas
+bicycle_rental,Aluguer de bicicletas
+brothel,Prostíbulo
+bus_station,Estación de autobuses
+cafe,Cafetaría
+car_rental,Aluguer de automóbiles
+car_sharing,Aluguer de automóbiles
+casino,Casino
+cinema,Cine
+clinic,Clínica
+club,Club
+college,Instituto
+community_centre,Centro comunitario
+courthouse,Xulgado
+crematorium,Crematorio
+dentist,Dentista
+dormitory,Residencia universitaria
+drinking_water,Auga potable
+driving_school,Escola de condución
+emergency_phone,Teléfono de emerxencia
+fast_food,Comida rápida
+fire_station,Parque de bombeiros
+fountain,Fonte
+fuel,Combustible
+grave_yard,Cemiterio
+gym,Ximnasio
+health_centre,Centro de saúde
+hospital,Hospital
+hotel,Hotel
+ice_cream,Xeadaría
+kindergarten,Xardín de infancia
+library,Biblioteca
+market,Mercado
+marketplace,Praza de mercado
+nightclub,Club nocturno
+office,Oficina
+park,Parque
+parking,Aparcadoiro
+pharmacy,Farmacia
+place_of_worship,Lugar de culto
+police,Policía
+post_box,Caixa de correos
+post_office,Oficina de correos
+preschool,Preescolar
+prison,Prisión
+pub,Pub
+public_building,Edificio público
+public_market,Mercado público
+recycling,Punto de reciclaxe
+restaurant,Restaurante
+retirement_home,Residencia de xubilados
+sauna,Sauna
+school,Escola
+shelter,Abeiro
+shop,Tenda
+shopping,Comercio
+social_club,Club social
+studio,Estudio
+supermarket,Supermercado
+telephone,Teléfono público
+theatre,Teatro
+toilets,Aseos
+townhall,Concello
+university,Universidade
+vending_machine,Máquina expendedora
+veterinary,Clínica veterinaria
+wifi,Acceso WiFi
+youth_centre,Casa da xuventude
+bridleway,Pista de cabalos
+bus_stop,Parada de autobús
+byway,Camiño secundario
+construction,Autoestrada en construción
+cycleway,Pista de bicicletas
+distance_marker,Indicador quilométrico
+emergency_access_point,Punto de acceso de emerxencia
+footway,Carreiro
+ford,Vao
+gate,Porta
+living_street,Rúa residencial
+minor,Estrada lateral
+motorway,Autoestrada
+motorway_junction,Cruce de autovías
+motorway_link,Enlace de autoestrada
+path,Camiño
+pedestrian,Camiño peonil
+platform,Plataforma
+primary,Estrada primaria
+primary_link,Estrada principal
+raceway,Circuíto
+residential,Residencial
+road,Estrada
+secondary,Estrada secundaria
+secondary_link,Estrada secundaria
+service,Estrada de servizo
+services,Área de servizo
+steps,Chanzos
+stile,Escada
+tertiary,Estrada terciaria
+track,Pista
+trail,Pista
+trunk,Estrada nacional
+trunk_link,Estrada nacional
+unclassified,Estrada sen clasificar
+unsurfaced,Estrada non pavimentada
+beach_resort,Balneario
+common,Terreo común
+fishing,Área de pesca
+garden,Xardín
+golf_course,Campo de golf
+ice_rink,Pista de patinaxe sobre xeo
+marina,Porto deportivo
+miniature_golf,Minigolf
+nature_reserve,Reserva natural
+park,Parque
+pitch,Cancha deportiva
+playground,Patio de recreo
+recreation_ground,Área recreativa
+slipway,Varadoiro
+sports_centre,Centro deportivo
+stadium,Estadio
+swimming_pool,Piscina
+track,Pista de carreiras
+water_park,Parque acuático
+bay,Baía
+beach,Praia
+cape,Cabo
+cave_entrance,Entrada de cova
+channel,Canal
+cliff,Cantil
+coastline,Litoral
+crater,Cráter
+feature,Elemento
+fell,Brañal
+fjord,Fiorde
+geyser,Géiser
+glacier,Glaciar
+hill,Outeiro
+island,Illa
+land,Terra
+marsh,Marisma
+moor,Páramo
+mud,Lama
+peak,Pico
+point,Punto
+reef,Arrecife
+ridge,Crista
+river,Río
+rock,Rocha
+scree,Pedregal
+scrub,Matogueira
+shoal,Cardume
+spring,Primavera
+strait,Estreito
+tree,Árbore
+valley,Val
+volcano,Volcán
+water,Auga
+wetland,Pantano
+wetlands,Pantano
+wood,Bosque
+city,Cidade
+country,País
+county,Condado
+farm,Granxa
+hamlet,Aldea
+house,Casa
+houses,Casas
+island,Illa
+islet,Illote
+locality,Localidade
+moor,Páramo
+municipality,Municipio
+postcode,Código postal
+region,Rexión
+sea,Mar
+state,Estado/Provincia
+subdivision,Subdivisión
+suburb,Barrio
+town,Cidade
+unincorporated_area,Área non incorporada
+village,Vila
+apparel,Tenda de roupa
+art,Tenda de arte
+bakery,Panadaría
+bicycle,Tenda de bicicletas
+books,Libraría
+butcher,Carnizaría
+car_repair,Taller mecánico
+carpet,Tenda de alfombras
+charity,Tenda benéfica
+chemist,Farmacia
+clothes,Tenda de roupa
+computer,Tenda informática
+department_store,Gran almacén
+doityourself,Tenda de bricolaxe
+estate_agent,Axencia inmobiliaria
+fashion,Tenda de moda
+fish,Peixaría
+florist,Floraría
+food,Tenda de alimentación
+gallery,Galería
+general,Tenda de ultramarinos
+hairdresser,Perrucaría
+hardware,Ferraxaría
+hifi,Hi-Fi
+jewelry,Xoiaría
+mall,Centro comercial
+market,Mercado
+mobile_phone,Tenda de telefonía móbil
+motorcycle,Tenda de motocicletas
+music,Tenda de música
+optician,Oftalmólogo
+organic,Tenda de alimentos orgánicos
+outdoor,Tenda de deportes ao aire libre
+photo,Tenda de fotografía
+shoes,Zapataría
+shopping_centre,Centro comercial
+sports,Tenda de deportes
+stationery,Papelaría
+supermarket,Supermercado
+toys,Xoguetaría
+travel_agency,Axencia de viaxes
+alpine_hut,Cabana alpina
+artwork,Obra de arte
+attraction,Atracción
+bed_and_breakfast,Cama e almorzo
+cabin,Cabana
+camp_site,Campamento
+caravan_site,Sitio de caravanas
+chalet,Chalé
+guest_house,Albergue
+hostel,Hostal
+hotel,Hotel
+information,Información
+lean_to,Caseta
+motel,Motel
+museum,Museo
+picnic_site,Sitio de pícnic
+theme_park,Parque temático
+valley,Val
+viewpoint,Miradoiro
+zoo,Zoolóxico

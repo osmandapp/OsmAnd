@@ -1,0 +1,421 @@
+
+aerodrome,Аэропорт
+arts_centre,Дом искусств
+atm,Банкомат
+auditorium,Аудитория
+bank,Банк
+bar,Бар
+bench,Скамья
+bicycle_parking,Велопарковка
+bicycle_rental,Прокат велосипедов
+brothel,Бордель
+bureau_de_change,Обмен валют
+bus_station,Автобусная станция
+cafe,Кафе
+car_rental,Аренда автомобилей
+car_sharing,Прокат автомобилей
+car_wash,Автомойка
+casino,Казино
+cinema,Кинотеатр
+clinic,Поликлиника
+club,Клуб
+college,Колледж
+community_centre,Общественный центр
+courthouse,Помещение суда
+crematorium,Крематорий
+dentist,Стоматология
+doctors,Врач
+dormitory,Общежитие
+drinking_water,Питьевая вода
+driving_school,Автошкола
+embassy,Посольство
+emergency_phone,Телефон экстренных служб
+fast_food,Палатка с едой
+ferry_terminal,Паромная станция
+fire_hydrant,Пожарный гидрант
+fire_station,Пожарная охрана
+fountain,фонтан
+fuel,Заправка
+grave_yard,Место захоронения
+gym,тренажерный зал
+hall,Холл
+health_centre,Оздоровительный центр
+hospital,Госпиталь
+hotel,Гостиница
+hunting_stand,охотничья вышка
+ice_cream,Мороженное
+kindergarten,Детский сад
+library,Библиотека
+market,Магазин
+marketplace,Рыночная площадь
+mountain_rescue,Горная спасательная служба
+nightclub,ночной клуб
+nursery,Пансионат
+nursing_home,Дом престарелых
+office,Офис
+park,Парк
+parking,Стоянка
+pharmacy,Аптека
+place_of_worship,Место поклонения
+police,Полиция
+post_box,Почтовый ящик
+post_office,Почтовое отделение
+preschool,Дошкольное учреждение
+prison,Тюрьма
+pub,Паб
+public_building,общественное здание
+public_market,Городской рынок
+reception_area,Приёмная
+recycling,Место утилизации
+restaurant,Ресторан
+retirement_home,Дом престарелых
+sauna,Сауна
+school,школа
+shelter,Укрытие
+shop,Магазин
+shopping,Торговый центр
+social_club,Сообщество
+studio,Студия
+supermarket,Супермаркет
+taxi,Такси
+telephone,Телефон
+theatre,Театр
+toilets,Туалет
+townhall,Городская администрация
+university,Университет
+vending_machine,торговый автомат
+veterinary,Ветеринарная клиника
+village_hall,Усадьба
+waste_basket,Мусорный бак
+wifi,Вай-Фай
+youth_centre,Молодёжный центр
+administrative,Административная граница
+apartments,Многоквартирный дом
+block,Ряд зданий
+bunker,Бункер
+chapel,Церковь
+church,Церковь
+city_hall,Мэрия
+commercial,Офисное здание
+dormitory,Общежитие
+entrance,Вход в здание
+faculty,Факультетское здание
+farm,Ферма
+flats,Квартиры
+garage,Гараж
+hall,Холл
+hospital,Здание больницы
+hotel,Гостиница
+house,Дом
+industrial,Промышленное здание
+office,Офисное здание
+public,Общественное здание
+residential,Жилой дом
+retail,Здание на продажу
+school,Школа
+shop,Магазин
+stadium,Стадион
+store,Магазин
+terrace,Ряд жилых домов
+tower,Башня
+train_station,трамвайная остановка
+university,Университет
+&quot;yes&quot;,Здание
+bridleway,Конный путь
+bus_guideway,Автобусная полоса-рельс
+bus_stop,Автобусная остановка
+byway,Закоулок
+construction,Ремонт дороги
+cycleway,Велодорожка
+distance_marker,Километровый столб
+emergency_access_point,Пункт первой помощи
+footway,Тротуар
+ford,Брод
+gate,Ворота
+living_street,Жилая улица
+minor,Второстепенная дорога
+motorway,Автомагистраль
+motorway_junction,Перекрёсток
+motorway_link,Развязка на автомагистрали
+path,Тропа
+pedestrian,Дорога для пешеходов
+platform,Платформа
+primary,Главная дорога
+primary_link,Главная дорога
+raceway,Гоночная трасса
+residential,Улица
+road,Дорога
+secondary,Второстепенная дорога
+secondary_link,Примыкающая дорога
+service,Подъездная дорога
+services,Придорожный сервис
+steps,Ступеньки
+stile,Турникет
+tertiary,Дорога третьего класса
+track,Грунтовка
+trail,Тропа
+trunk,Трасса
+trunk_link,Развязка
+unclassified,Дорога
+unsurfaced,Дорога без покрытия
+archaeological_site,Раскопки
+battlefield,Поле боя
+boundary_stone,Пограничный камень
+building,Здание
+castle,Крепость
+church,Церковь
+house,Дом
+icon,Икона
+manor,Поместье
+memorial,Памятник
+mine,Рудник
+monument,Монумент
+museum,Музей
+ruins,Развалины
+tower,Башня
+wayside_cross,Придорожный крест
+wayside_shrine,Придорожная святыня
+wreck,Остов судна
+allotments,Сады-огороды
+basin,Бассейн
+brownfield,Заброшенная зона
+cemetery,Кладбище
+commercial,Офисная территория
+conservation,Законсервированная зона
+construction,Стройка
+farm,Ферма
+farmland,Сельхозугодья
+farmyard,Сельхоздвор
+forest,Дикий лес
+grass,Трава
+greenfield,Неосвоенная территория
+industrial,Промзона
+landfill,Свалка
+meadow,Луг
+military,Военная зона
+mine,Шахта
+mountain,Гора
+nature_reserve,Заповедник
+park,Парк
+piste,Лыжня
+plaza,Открытая площадка
+quarry,Карьер
+railway,Железная дорога
+recreation_ground,Зона отдыха
+reservoir,водохранилище
+residential,Жилой район
+retail,Торговая территория
+village_green,Деревенское поле
+vineyard,Виноградник
+wetland,Заболоченность
+wood,Обслуживаемый лес
+beach_resort,Пляж с насаждениями
+common,Общественная земля
+fishing,Рыбалка
+garden,Сад
+golf_course,Поле для гольфа
+ice_rink,Каток
+marina,Пристань для яхт
+miniature_golf,Минигольф
+nature_reserve,Заповедник
+park,Парк
+pitch,Спортивный газон
+playground,Детская игровая площадка
+recreation_ground,Зона отдыха
+slipway,Эллинг
+sports_centre,Спортивный центр
+stadium,Стадион
+swimming_pool,Бассейн
+track,Спортивная дорожка
+water_park,Аквапарк
+bay,Залив
+beach,Пляж
+cape,Мыс
+cave_entrance,Вход в пещеру
+channel,Канал
+cliff,обрыв
+coastline,Береговая линия
+crater,Кратер
+feature,Природный объект
+fell,Холм
+fjord,Фьорд
+geyser,Гейзер
+glacier,Ледник
+heath,Пустошь
+hill,Холм
+island,Остров
+land,Земля
+marsh,Болото
+moor,Торфяник
+mud,Грязь
+peak,Вершина горы
+point,Полуостров
+reef,Риф
+ridge,Хребет
+river,Река
+rock,Скала
+scree,Осыпь камней
+scrub,Кустарник
+shoal,Мелководье
+spring,Родник
+strait,Пролив
+tree,Дерево
+valley,Долина
+volcano,Вулкан
+water,Водоём
+wetland,Заболоченная территория
+wetlands,Заболоченные земли
+wood,Естественный лес
+city,Город
+country,Страна
+county,Уезд
+farm,Ферма
+hamlet,Посёлок
+house,Дом
+houses,Дома
+island,Остров
+islet,Островок
+locality,Населённый пункт
+moor,Торфяник
+municipality,Муниципалитет
+postcode,Индекс
+region,Регион
+sea,Море
+state,Область/Штат
+subdivision,Участок
+suburb,Пригород
+town,Город
+unincorporated_area,Загородная зона
+village,Деревня
+abandoned,Разобранные железнодорожные пути
+construction,Ремонт ж.д. путей
+disused,Заброшенная ж.д. ветка
+disused_station,Заброшенная ж.д. станция
+funicular,Фуникулер
+halt,Станция ж.д.
+historic_station,Историческая ж.д. станция
+junction,Узел ж.д.
+level_crossing,Железнодорожный переезд
+light_rail,Легкорельсовый ж.д. транспорт
+monorail,Монорельс
+narrow_gauge,Узкоколейка
+platform,Железнодорожная платформа
+preserved,Историческая ж.д.
+spur,Ответвление ж.д. пути
+station,Железнодорожная станция
+subway,Станция метро
+subway_entrance,Вход в метро
+switch,Железнодорожная стрелка
+tram,Трамвай
+tram_stop,Трамвайная остановка
+yard,Депо
+alcohol,Винный магазин
+apparel,Магазин одежды
+art,Художественный салон
+bakery,Булочная
+beauty,Салон красоты
+beverages,Магазин напитков
+bicycle,Веломагазин
+books,Книжный магазин
+butcher,Мясная лавка
+car,Автомагазин
+car_dealer,Автосалон
+car_parts,Автозапчасти
+car_repair,Автомастерская
+carpet,Ковры
+charity,Секонд-хэнд
+chemist,магазин бытовой химии
+clothes,Магазин одежды
+computer,Компьютерный магазин
+confectionery,Кондитерская
+convenience,Ларёк
+copyshop,Услуги копирования
+cosmetics,Косметика
+department_store,Универсам
+discount,Магазин распродаж
+doityourself,Сделай-Сам
+drugstore,Аптека
+dry_cleaning,Химчистка
+electronics,Магазин электротоваров
+estate_agent,Риелтор
+farm,Фермерский магазин
+fashion,Магазин модной одежды
+fish,Рыбный магазин
+florist,Цветочный магазин
+food,Продуктовый магазин
+funeral_directors,Похоронное бюро
+furniture,Мебельный магазин
+gallery,Галерея
+garden_centre,Садоводческий магазин
+general,Магазин
+gift,Магазин подарков
+greengrocer,Овощной магазин
+grocery,Бакалейный магазин
+hairdresser,Парикмахерская
+hardware,Хозяйственный магазин
+hifi,Магазин аудио/видео аппаратуры
+insurance,Страховая компания
+jewelry,Ювелирный магазин
+kiosk,Киоск
+laundry,Прачечная
+mall,Молл
+market,Рынок
+mobile_phone,Магазин мобильных телефонов
+motorcycle,Магазин по продаже мотоциклов
+music,Музыкальный магазин
+newsagent,Газетный киоск
+optician,Магазин оптики
+organic,Магазин экологических продуктов
+outdoor,Место уличной торговли
+pet,Зоомагазин
+photo,Фотомагазин
+salon,Салон
+shoes,Обувной магазин
+shopping_centre,Торговый центр
+sports,Спортивный магазин
+stationery,Магазин канцелярских товаров
+supermarket,Супермаркет
+toys,Магазин игрушек
+travel_agency,Туристической агентство
+video,Магазин видеозаписей
+wine,Винный магазин
+alpine_hut,Горный приют
+artwork,Произведения искусства
+attraction,Достопримечательность
+bed_and_breakfast,Полупансион
+cabin,Кабинка
+camp_site,Лагерь
+caravan_site,Караван-сарай
+chalet,Шале
+guest_house,Домик для гостей
+hostel,Хостел
+hotel,Гостиница
+information,Информация
+lean_to,Навес
+motel,Мотель
+museum,Музей
+picnic_site,Место для пикника
+theme_park,Аттракционы
+valley,Долина
+viewpoint,Смотровая площадка
+zoo,Зоопарк
+boatyard,Верфь
+canal,Канал
+connector,Слияние рек
+dam,Дамба
+derelict_canal,Пересохший канал
+ditch,Водоотлив
+dock,Док
+drain,Сточная канава
+lock,Шлюз
+lock_gate,Шлюз
+mineral_spring,Минеральный родник
+mooring,Место швартовки
+rapids,Речной порог
+river,Река
+riverbank,Берег реки
+stream,Ручей
+wadi,Высохшее русло
+water_point,Пункт водоснабжения
+waterfall,Водопад
+weir,Плотина
