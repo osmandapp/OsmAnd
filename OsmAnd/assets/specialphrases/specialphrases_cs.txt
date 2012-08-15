@@ -1,0 +1,68 @@
+
+cinema,Kino
+parking,Parkoviště
+post_office,Pošta
+toilets,Toalety
+train_station,Železniční stanice
+bus_stop,Autobusová zastávka
+gate,Brána
+residential,Ulice
+secondary,Silnice II. třídy
+steps,Schodiště
+steps,Schody
+museum,Muzeum
+cemetery,Hřbitov
+construction,Staveniště
+vineyard,Vinice
+garden,Zahrada
+golf_course,Golfové hřiště
+ice_rink,Kluziště
+miniature_golf,Minigolf
+nature_reserve,Přírodní rezervace
+park,Park
+pitch,Hřiště
+stadium,Stadion
+swimming_pool,Bazén
+beach,Pláž
+glacier,Ledovec
+hill,Kopec
+island,Ostrov
+tree,Strom
+valley,Údolí
+aerodrome,Letiště
+city,Velkoměsto
+country,Stát
+farm,Farma
+hamlet,Osada
+house,Dům
+houses,Budova
+island,Ostrov
+islet,Ostrůvek
+locality,Oblast
+municipality,Obecní úřad
+postcode,PSČ
+region,Kraj
+sea,Moře
+state,Stát
+suburb,Městská část
+town,Město
+village,Vesnice
+halt,Železniční zastávka
+subway,Stanice metra
+hairdresser,Kadeřnictví
+alpine_hut,Vysokohorská chata
+attraction,Turistická atrakce
+camp_site,Tábořiště, kemp
+caravan_site,Autokemping
+chalet,Velká chata
+guest_house,Penzion
+hostel,Hostel
+hotel,Hotel
+information,Turistické informace
+lean_to,Přístřešek
+motel,Motel
+museum,Muzeum
+theme_park,Zábavní park
+valley,Údolí
+viewpoint,Místo s dobrým výhledem
+zoo,Zoo

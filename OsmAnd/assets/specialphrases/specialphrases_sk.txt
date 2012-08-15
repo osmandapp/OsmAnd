@@ -1,0 +1,405 @@
+
+aerodrome,Letisko
+arts_centre,Kultúrne stredisko
+atm,Bankomat
+bank,Banka
+bar,Bar
+bench,Lavička
+bicycle_parking,Parkovisko bicyklov
+bicycle_rental,Požičovňa bicyklov
+brothel,Nevestinec
+brothel,Nevestinecs
+bureau_de_change,Zmenáreň
+bus_station,Autobusová stanica
+cafe,Kaviareň
+car_rental,Požičovňa áut
+car_sharing,Autopožičovňa
+car_wash,Autoumývareň
+casino,Kasíno
+cinema,Kino
+clinic,Poliklinika
+club,Klub
+college,Vysoká škola
+community_centre,Kultúrne stredisko
+courthouse,Súd
+crematorium,Krematórium
+dentist,Zubár
+dormitory,Študentský domov
+drinking_water,Pitná voda
+driving_school,Autoškola
+embassy,Veľvyslanectvo
+emergency_phone,Núdzový telefón
+emergency_phone,Núdzový telefóns
+fast_food,Rýchle občerstvenie
+ferry_terminal,Terminál trajektu
+fire_hydrant,Požiarny hydrant
+fire_station,Požiarna stanica
+fountain,Fontána
+fuel,Benzínová pumpa
+grave_yard,Cintorín
+gym,Fitnes centrum / telocvičňa
+health_centre,Zdravotné stredisko
+hospital,Nemocnica
+hospital,Nemocnicas
+hotel,Hotel
+hunting_stand,Poľovnícky posed
+ice_cream,Zmrzlina
+kindergarten,Materská škola
+library,Knižnica
+market,Obchod
+marketplace,Tržnica
+mountain_rescue,Horská služba
+nightclub,'Nočný klub'
+nursery,Jasle
+nursing_home,Sanatórium
+office,Úrad
+park,Park
+parking,Parkovisko
+pharmacy,lekáreň
+place_of_worship,Kostol
+police,Polícia
+post_box,Poštová schránka
+post_office,Pošta
+preschool,Škôlka
+prison,Väzenie
+pub,Krčma
+public_building,Verejná budova
+recycling,Recyklačké miesto
+restaurant,Reštaurácia
+retirement_home,Domov dôchodcov
+sauna,Sauna
+school,Škola
+shelter,Altánok
+shop,Obchod
+social_club,Spoločenský klub
+studio,Ateliér
+supermarket,Supermarket
+taxi,Taxi
+telephone,Verejný telefón
+theatre,Divadlo
+toilets,WC
+townhall,Radnica
+university,Univerzita
+vending_machine,Predajný automat
+veterinary,Veterinárna ordinácia
+waste_basket,Odpadkový kôš
+wifi,Prístup Wi-Fi
+youth_centre,Mládežnícke centrum
+administrative,Administratívne hranice
+apartments,Bytový dom
+bunker,Bunker
+chapel,Kaplnka
+church,Kostol,cirkev
+city_hall,Radnica,magistrát
+commercial,Komerčné budovy
+dormitory,Študentský domov
+faculty,Budovy fakulty
+farm,Hospodárska budova
+flats,Byty
+garage,Garáž
+hall,Sála
+hospital,Nemocničné budovy
+hospital,Nemocničné budovys
+hotel,Hotel
+house,Dom
+industrial,Priemyselné budovy
+office,Administratívna budova
+public,Verejná budova
+residential,Obytné budovy
+retail,Maloobchodné budovy
+school,Škola
+shop,Obchod
+stadium,Štadión
+store,Obchod
+terrace,Radová zástavba
+tower,Veža
+train_station,Železničná stanica
+university,Univerzitné budovy
+&quot;yes&quot;,Budova
+bridleway,Cesta pre kone
+bus_guideway,Bus so sprievodcom
+bus_stop,Zastávka autobusu
+byway,Byway (súkromná cesta)
+construction,Cesta vo výstavbe
+cycleway,Cyklistický chodník
+distance_marker,Distance Marker (kilometrovník)
+emergency_access_point,Stanica prvej pomoci
+footway,Chodník
+ford,Brod
+gate,Brána
+living_street,Obytná zóna
+minor,Vedľajšia cesta
+motorway,Diaľnica
+motorway_junction,Motorway Junction (Diaľničná križovatka)
+motorway_link,Diaľnica
+path,Cesta
+pedestrian,Chodník pre chodcov
+platform,Nástupište
+platform,Nástupištes
+primary,Cesta I. triedy
+primary_link,Cesta I. triedy
+residential,Residential(Obytný)
+road,Cesta
+secondary,Cesta II. triedy
+secondary_link,Cesta II. triedy
+service,Service Road (prístupová komunikácia)
+steps,Schody
+stile,Schodíky cez ohradu
+tertiary,Cesta III. triedy
+track,Nespevnené cesty
+track,Nespevnené cestys
+trunk,Cesta pre motorové vozidlá
+trunk_link,Cesta pre motorové vozidlá
+unclassified,Neklasifikovaná cesta
+unclassified,Neklasifikovaná cestas
+unsurfaced,Nespevnená cesta
+unsurfaced,Nespevnená cestas
+archaeological_site,Archeologické nálezisko
+battlefield,Bojisko
+boundary_stone,Hraničný kameň
+building,Budova
+castle,Hrad
+church,Kostol
+house,Dom
+manor,Šľachtické sídlo
+memorial,Pomník
+mine,Baňa
+monument,Pamätník
+museum,Múzeum
+ruins,Ruina
+tower,Veža
+wayside_cross,Božie muky
+wayside_shrine,Malá kaplnka pri ceste
+wreck,Zrúcanina
+allotments,Záhradkárske osady
+basin,Basin (Vodná nádrž)
+cemetery,Cintorín
+commercial,Obchodná štvrť
+construction,Stavba
+farm,Farma
+farmyard,Dvor
+forest,Les
+grass,Tráva
+industrial,Priemyslová oblasť
+landfill,Skládka odpadu
+meadow,Lúka
+military,Vojenský priestor
+mine,Baňa
+mountain,Hora
+nature_reserve,Prírodná rezervácia
+park,Park
+piste,Zjazdovka
+plaza,Námestie
+plaza,Námesties
+quarry,Lom
+railway,Železnica
+residential,Residential Area (Obytná oblasť)
+retail,Retail (Obchodná zóna)
+village_green,Verejná zeleň
+vineyard,Vinica
+wetland,Mokrina
+wood,Drevo
+common,Verejné priestranstvo
+fishing,Rybolov (športový)
+garden,Záhrada
+golf_course,Golfové ihrisko
+ice_rink,Umelé klzisko
+marina,Prístav pre jachty
+miniature_golf,Mini golf
+nature_reserve,Prírodná rezervácia
+park,Park
+pitch,Športové ihrisko
+playground,Detské ihrisko
+recreation_ground,Rekreačná oblasť
+slipway,Lodný sklz
+sports_centre,Športové stredisko
+stadium,Štadión
+swimming_pool,Plaváreň
+track,Bežecká dráha
+water_park,Aquapark
+bay,Zátoka, záliv
+beach,Pláž
+cape,Mys
+cave_entrance,Vstup do jaskyne
+channel,Kanál
+cliff,Útes, kamenná stena
+coastline,Pobrežie
+crater,Kráter
+feature,Vlastnosť
+fell,Horská pastvina
+fjord,Fjord
+geyser,Gejzír
+glacier,Ľadovec
+heath,Vresovisko
+hill,Kopec
+island,Ostrov
+marsh,Bažina
+moor,Močiar
+mud,Bahno
+peak,Vrchol
+point,Bod
+reef,Bradlo, Skalisko
+ridge,Hrebeň
+river,Rieka
+rock,Skala
+scree,Sutina
+scrub,Rúbanisko
+shoal,Plytčina
+spring,Prameň
+strait,Úžina
+tree,Strom
+valley,Dolina
+volcano,Sopka
+water,Voda
+wetland,Mokrina
+wetlands,Mokrina
+wood,Les
+city,Mesto nad 100 tis.
+country,Štát
+county,Okres
+farm,Farma
+hamlet,Osada do 200
+house,Budova
+houses,Budovy
+island,Ostrov
+islet,Ostrovček
+locality,Oblasť
+moor,Močiar
+municipality,Obecný úrad
+postcode,PSČ
+region,Región
+sea,More
+state,Štát
+subdivision,Pododdelenie
+suburb,Mestský obvod
+town,Mesto 10 tis.-100 tis.
+unincorporated_area,Nezaradená oblasť
+unincorporated_area,Nezaradená oblasťs
+village,Obec 200-10 tis.
+abandoned,Opustená železnica
+construction,Železnica vo výstavbe
+disused,Nepoužívaná železnica
+disused,Nepoužívaná železnicas
+disused_station,Nepoužívaná železničná stanica
+disused_station,Nepoužívaná železničná stanicas
+funicular,Lanová dráha
+halt,Zastávka vlaku
+historic_station,Zastávka historickej železnice
+junction,Železničný uzol
+level_crossing,Železničný prejazd
+light_rail,Ľahká železnica
+monorail,Jednokoľajka
+narrow_gauge,Úzkokoľajná železnica
+platform,Železničné nástupište
+preserved,Historická železnica
+spur,Železničná vlečka
+station,Železničná stanica
+subway,Stanica metra
+subway_entrance,Vchod do metra
+switch,Železničná výhybka
+tram,Električka
+tram_stop,Zastávka električky
+yard,Železničné depo
+alcohol,Mimo povolenia
+apparel,Odevy
+art,Obchod s umením
+bakery,Pekáreň
+beauty,Salón krásy
+beverages,Občerstvenie
+bicycle,Obchod s bicylkami
+books,Kníhkupectvo
+butcher,Mäsiarstvo
+car_dealer,Obchod s autami
+car_parts,Mototechna
+car_repair,Autoservis
+carpet,Obchod s kobercami
+charity,Charitatívny obchod
+chemist,Lekáreň
+clothes,Obchod s konfekciou
+computer,Obchod s počítačmi
+confectionery,Cukráreň
+department_store,Obchodný dom
+doityourself,Urob si sám
+drugstore,Lekáreň
+dry_cleaning,Chemická čistiareň
+electronics,Elektro
+estate_agent,Realitná kancelária
+farm,Poľnonákup
+fish,Obchod s rybami
+florist,Kvetinárstvo
+food,Obchod s potravinami
+funeral_directors,Pohrebníctvo
+furniture,Nábytok
+furniture,Nábytoks
+gallery,Galéria
+garden_centre,Záhradnícke centrum
+general,Zmiešaný tovar
+gift,Suveníry
+greengrocer,Obchod so zeleninou
+grocery,Potraviny
+hairdresser,Kaderníctvo,holičstvo
+hardware,Železiarstvo
+hifi,Hi-Fi
+insurance,Poisťovňa
+jewelry,Zlatníctvo
+kiosk,Novinový stánok
+kiosk,Novinový stánoks
+laundry,Práčovňa
+mall,Pešia zóna
+mobile_phone,Obchod s mobilnými telefónmi
+motorcycle,Motocyklový obchod
+music,Hudobniny
+optician,Očná optika
+organic,Obchod so zdravou výživou
+outdoor,Turistický obchod
+pet,Chovprodukt
+photo,Fotokino
+salon,Salón
+shoes,Obuva
+shopping_centre,Nákupné stredisko
+shopping_centre,Nákupné strediskos
+sports,Športový obchod
+stationery,Papierníctvo
+supermarket,Supermarket
+toys,Hračkárstvo
+travel_agency,Cestovná kancelária
+wine,Mimo povolenia
+alpine_hut,Vysokohorská chata
+artwork,Umelecké dielo
+attraction,Atrakcia
+bed_and_breakfast,Nocľah a raňajky
+bed_and_breakfast,Nocľah a raňajkys
+cabin,Malá chata
+camp_site,Kemping
+caravan_site,Autokemping
+chalet,Veľká chata
+guest_house,Penzión
+hostel,Ubytovňa, internát
+hotel,Hotel
+information,Informácie
+lean_to,Prístrešok
+motel,Motel
+museum,Múzeum
+picnic_site,Výletné miesto
+theme_park,Zábavný park
+valley,Údolie
+viewpoint,Rozhľadňa, výhliadka
+zoo,Zoo
+boatyard,Lodenica
+canal,Kanál
+dam,Priehrada,hrádza
+derelict_canal,Opustený kanál
+ditch,Priekopa
+dock,Dok
+drain,Odvodňovací kanál
+lock,Plavebná komora
+lock_gate,Brána plavebnej komory
+mineral_spring,Minerálny prameň
+mooring,Kotvisko
+river,Rieka
+riverbank,Breh rieky
+stream,Potok
+wadi,Občasné riečisko(Vádí)
+water_point,Vodný bod
+waterfall,Vodopád
+weir,Splav
