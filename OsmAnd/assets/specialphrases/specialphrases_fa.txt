@@ -1,0 +1,96 @@
+
+aerodrome,فرودگاه
+atm,عابر بانک
+bank,بانک
+bench,نیمکت
+brothel,فاحشه خانه
+cafe,کافه
+cinema,سینما
+clinic,درمانگاه
+courthouse,دادگاه
+dentist,دندانپزشک
+dormitory,خوابگاه دانشجویی
+embassy,سفارت
+fire_station,آتش نشانی
+fuel,پمپ بنزین
+hospital,بیمارستان
+hotel,هتل
+kindergarten,کودکستان
+library,کتابخانه
+market,بازار
+marketplace,بازار
+office,دفتر
+park,پارک
+parking,پارکینگ
+pharmacy,داروخانه
+police,پلیس
+post_box,صندوق پست
+post_office,اداره پست
+prison,زندان
+pub,میخانه
+recycling,بازیافت
+restaurant,رستوران
+school,مدرسه
+supermarket,سوپرمارکت
+taxi,تاکسی
+theatre,تئاتر
+townhall,شهر داری
+university,دانشگاه
+waste_basket,سطل اشغال
+garage,گاراژ
+hotel,هتل
+house,خانه
+stadium,ورزشگاه
+tower,برج
+bus_stop,ایستگاه اتوبوس
+motorway,اتوبان
+path,مسیر
+road,جاده
+steps,پله
+trunk,بزرگراه
+castle,قلعه
+museum,موزه
+tower,برج
+farmland,زمین کشاورزی
+forest,جنگل
+mountain,کوه
+park,پارک
+railway,ریل
+garden,باغ
+park,پارک
+stadium,ورزشگاه
+beach,ساحل
+channel,کانال
+coastline,ساحل
+hill,تپه
+island,جزیره
+point,نقطه
+river,رود خانه
+rock,صخره
+tree,درخت
+valley,دره
+volcano,کوه آتشفشان
+water,اب
+wood,جنگل
+city,شهر بزرگ
+country,کشور
+farm,مزرعه
+house,خانه
+island,جزیره
+sea,دریا
+suburb,محله
+town,شهر
+village,دهکده
+bakery,نانوایی
+butcher,قصاب
+kiosk,کیوسک
+market,بازار
+supermarket,سوپرمارکت
+hotel,هتل
+motel,متل
+museum,موزه
+valley,دره
+zoo,باغ وحش
+canal,کانال
+river,رودخانه
+waterfall,ابشار

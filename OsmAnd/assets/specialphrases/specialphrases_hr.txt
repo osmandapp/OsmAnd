@@ -1,0 +1,428 @@
+
+aerodrome,Zračna luka
+arts_centre,Umjetnički centar
+atm,Bankomat
+auditorium,Auditorij
+bank,Banka
+bar,Bar
+bench,Klupa
+bicycle_parking,Biciklistički parking
+bicycle_rental,Rent a bicikl
+brothel,Bordel
+bureau_de_change,Mjenjačnica
+bus_station,Autobusni kolodvor
+cafe,Caffe bar
+car_rental,Rent-a-car
+car_sharing,Carsharing
+car_wash,Autopraonica
+casino,Casino
+cinema,Kino
+clinic,Klinika
+club,Klub
+college,Fakultet
+community_centre,Društveni centar
+courthouse,Sud
+crematorium,Krematorij
+dentist,Zubar
+doctors,Doktor
+dormitory,Studentski dom
+drinking_water,Pitka voda
+driving_school,Autoškola
+embassy,Veleposlanstvo
+emergency_phone,Telefon (S.O.S)
+fast_food,Fast food
+ferry_terminal,Trajektni terminal
+fire_hydrant,Hidrant
+fire_station,Vatrogasna postaja
+fountain,Fontana
+fuel,Benzinska
+grave_yard,Groblje
+gym,Fitness centar
+hall,Hala
+health_centre,Zdravstveni centar
+hospital,Bolnica
+hotel,Hotel
+hunting_stand,Čeka
+ice_cream,Slastičarna
+kindergarten,Dječji vrtić
+library,Knjižnica
+market,Tržnica
+marketplace,Tržnica
+mountain_rescue,GSS - Gorska služba spašavanja
+nightclub,'Noćni klub'
+nursery,Čuvanje djece
+nursing_home,Starački dom
+office,Kancelarija
+park,Park
+parking,Parking
+pharmacy,Ljekarna
+place_of_worship,Crkva
+police,Policija
+post_box,Poštanski sandučić
+post_office,Pošta
+preschool,Predškolska ustanova
+prison,Zatvor
+pub,Pub
+public_building,Ustanova
+public_market,Javna tržnica
+reception_area,Recepcija
+recycling,Reciklažna točka
+restaurant,Restoran
+retirement_home,Dom za starije osobe
+sauna,Sauna
+school,Škola
+shelter,Sklonište
+shop,Trgovina
+shopping,Trgovački centar
+social_club,Društveni klub
+studio,Studio
+supermarket,Supermarket
+taxi,Taxi
+telephone,Telefonska govornica
+theatre,Kazalište
+toilets,WC
+townhall,Gradsko poglavarstvo
+university,Sveučilište
+vending_machine,Automat
+veterinary,Veterinar
+village_hall,Seoski Dom
+waste_basket,Kanta za otpatke
+wifi,WiFi pristupna točka
+youth_centre,Centar za mladež
+administrative,Administrativna granica
+apartments,Stambeni blok
+block,Blok zgrada
+bunker,Bunker
+chapel,Kapelica
+church,Crkva
+city_hall,Gradska vjećnica
+commercial,Poslovna zgrada
+dormitory,Studentski dom
+entrance,Ulaz
+faculty,Zgrada fakulteta
+farm,Farma (zgrada)
+flats,Stanovi
+garage,Garaža
+hall,Dvorana
+hospital,Bolnica
+hotel,Hotel
+house,Kuća
+industrial,Industrijska zgrada
+office,Uredska zgrada
+public,Javna zgrada
+residential,Stambena zgrada
+retail,Maloprodajna zgrada
+school,Školska zgrada
+shop,Trgovina
+stadium,Stadion
+store,Trgovina
+terrace,Terasa
+tower,Toranj
+train_station,Željeznički kolodvor
+university,Zgrada Sveučilišta
+&quot;yes&quot;,Zgrada
+bridleway,Konjička staza
+bus_guideway,Autobusna traka
+bus_stop,Autobusno stajalište
+byway,Prečica
+construction,Autocesta u izgradnji
+cycleway,Biciklistička staza
+distance_marker,Oznaka km
+emergency_access_point,S.O.S. točka
+footway,Pješačka staza
+ford,Ford
+gate,Kapija
+living_street,Ulica smirenog prometa
+minor,Drugorazredna cesta
+motorway,Autocesta
+motorway_junction,Čvor (autoputa)
+motorway_link,Autocesta (pristupna cesta)
+path,Staza
+pedestrian,Pješački put
+platform,Platforma
+primary,Državna cesta
+primary_link,Državna cesta
+raceway,Trkalište
+residential,Ulica
+road,Cesta
+secondary,Županijska cesta
+secondary_link,Županijska cesta
+service,Servisna cesta
+services,Autocesta - usluge
+steps,Stepenice
+stile,Prijelaz preko ograde
+tertiary,Lokalna cesta
+track,Makadam
+trail,Staza
+trunk,Cesta rezervirana za motorna vozila
+trunk_link,Cesta rezrevirana za mot. voz. - prilazna cesta
+unclassified,Nerazvrstana cesta
+unclassified,Nerazvrstana cestas
+unsurfaced,Neasfaltirana cesta
+unsurfaced,Neasfaltirana cestas
+archaeological_site,Arheološko nalazište
+battlefield,Bojno polje
+boundary_stone,Granični kamen
+building,Zgrada
+castle,Dvorac
+church,Crkva
+house,Kuća
+icon,Ikona
+manor,Zamak
+memorial,Spomen dom
+mine,Rudnik
+monument,Spomenik
+museum,Muzej
+ruins,Ruševine
+tower,Toranj
+wayside_cross,Krajputaš
+wayside_shrine,Usputno svetište
+wreck,Olupina
+allotments,Vrtovi
+basin,Bazen
+brownfield,Zemljište za prenamjenu
+cemetery,Groblje
+commercial,Poslovno područje
+conservation,Zaštićeno područje
+construction,Gradilište
+farm,Farma
+farmland,Polje
+farmyard,Farma
+forest,Šuma
+grass,Trava
+greenfield,Greenfield zemljište
+industrial,Industrijsko područje
+landfill,Deponija
+meadow,Livada
+military,Vojno područje
+mine,Rudnik
+mountain,Planina
+nature_reserve,Rezervat prirode
+park,Park
+piste,Pista
+plaza,Plaza
+quarry,Kamenolom
+railway,Željeznica
+recreation_ground,Rekreacijsko područje
+reservoir,Rezervoar
+residential,Stambeno područje
+retail,Trgovina
+village_green,Seoski travnjak
+vineyard,Vinograd
+wetland,Močvara
+wood,Šuma
+beach_resort,Plaža
+common,Općinsko zemljište
+fishing,Ribičko područje
+garden,Vrt
+golf_course,Golf igralište
+ice_rink,Klizalište
+marina,Marina
+miniature_golf,Minigolf
+nature_reserve,Rezervat prirode
+park,Park
+pitch,Sportski teren
+playground,Igralište
+recreation_ground,Rekreacijski teren
+slipway,Navoz
+slipway,Navozs
+sports_centre,Sportski centar
+stadium,Stadion
+swimming_pool,Bazen
+track,Staza za trčanje
+water_park,Vodeni park
+bay,Zaljev
+beach,Plaža
+cape,Rt
+cave_entrance,Pećina (ulaz)
+channel,Kanal
+cliff,Litica
+coastline,Obala
+crater,Krater
+feature,Obilježje
+fell,Brdo
+fjord,Fjord
+geyser,Gejzir
+glacier,Glečer
+heath,Ravnica
+hill,Brdo
+island,Otok
+land,Zemlja
+marsh,Močvara
+moor,Močvara
+mud,Blato
+peak,Vrh
+point,Točka
+reef,Greben
+ridge,Greben
+river,Rijeka
+rock,Stijena
+scree,Šljunak
+scrub,Guštara
+shoal,Sprud
+spring,Izvor
+strait,Tjesnac
+tree,Drvo
+valley,Dolina
+volcano,Vulkan
+water,Voda
+wetland,Močvara
+wetlands,Močvara
+wood,Šuma
+city,Grad
+country,Država
+county,Županija/grofovija
+farm,Farma
+hamlet,Zaseok
+house,Kuća
+houses,Kuće
+island,Otok
+islet,Otočić
+locality,Lokalitet
+moor,Močvara
+municipality,Općina
+postcode,Poštanski broj
+region,Područje
+sea,More
+state,Pokrajina / država (USA)
+subdivision,Podgrupa
+suburb,Predgrađe
+town,grad
+unincorporated_area,Slobodna zemlja
+village,Selo
+abandoned,Napuštena pruga
+abandoned,Napuštena prugas
+construction,Pruga u izgradnji
+disused,Napuštena pruga
+disused,Napuštena prugas
+disused_station,Željeznička stanica (nije u upotrebi)
+funicular,Uspinjača
+halt,Željeznička stanica
+historic_station,Povijesna željeznička stanica
+junction,Željeznički čvor
+level_crossing,Pružni prijelaz
+light_rail,Laka željeznica
+monorail,Jednotračna pruga
+narrow_gauge,Uskotračna pruga
+platform,Željeznička platforma
+preserved,Sačuvana pruga
+spur,Pruga
+station,Željeznički kolodvor
+subway,Podzemna - stanica
+subway_entrance,Podzemna - ulaz
+switch,Skretnica
+tram,Tramvaj
+tram_stop,Tramvajska stanica
+yard,Ranžirni kolodvor
+alcohol,Trgovina pićem
+apparel,Trgovina odjećom
+art,Atelje
+bakery,Pekara
+beauty,Parfumerija
+beverages,Trgovina pićem
+bicycle,Trgovina biciklima
+books,Knjižara
+butcher,Mesnica
+car,Autokuća
+car_dealer,Autokuća
+car_parts,Autodijelovi
+car_repair,Autoservis
+carpet,Trgovina tepisima
+charity,Dobrotvorna trgovina
+chemist,Ljekarna
+clothes,Butik
+computer,Computer Shop
+confectionery,Delikatesa
+convenience,Minimarket
+copyshop,Kopiraona
+cosmetics,Parfumerija
+department_store,Robna kuća
+discount,Diskont
+doityourself,Uradi sam
+drugstore,Drogerija
+dry_cleaning,Kemijska čistionica
+electronics,Trgovina elektronikom
+estate_agent,Agencija za nekretnine
+farm,Poljo-apoteka
+fashion,Modna trgovina
+fish,Ribarnica
+florist,Cvjećarnica
+food,Trgovina prehranom
+funeral_directors,Pogrebno poduzeće
+furniture,Namještaj
+furniture,Namještajs
+gallery,Galerija
+garden_centre,Vrtni centar
+general,Trgovina mješovitom robom
+gift,Poklon trgovina
+greengrocer,Voćarna
+grocery,Trgovina prehranom
+hairdresser,Frizer
+hardware,Željezar
+hifi,Hi-Fi
+insurance,Osiguranje
+jewelry,Zlatarna
+kiosk,Kiosk
+laundry,Praonica rublja
+mall,Trgovački centar
+market,Tržnica
+mobile_phone,Trgovina mobitelima
+motorcycle,Moto Shop
+music,Trgovina glazbom
+newsagent,Novinar
+newsagent,Novinars
+optician,Optičar
+organic,Trgovina zdrave hrane
+outdoor,Trgovina za slobodno vrijeme
+pet,Trgovina za kućne ljubimce
+photo,Fotograf
+salon,Salon
+shoes,Trgovina obućom
+shopping_centre,Trgovački centar
+sports,Trgovina sportskom opremom
+stationery,Papirnica
+supermarket,Supermarket
+toys,Trgovina igračkama
+travel_agency,Putnička agencija
+video,Videoteka
+wine,Vinoteka
+alpine_hut,Alpska kuća
+artwork,Umjetničko djelo
+attraction,Atrakcija
+bed_and_breakfast,'Noćenje i doručak'
+cabin,Koliba
+camp_site,Kamp
+caravan_site,Kamp-kućice (mjesto)
+chalet,Planinska kuća
+guest_house,Apartman
+hostel,Hostel
+hotel,Hotel
+information,Informacije
+lean_to,Lean to
+motel,Motel
+museum,Muzej
+picnic_site,Piknik-mjesto
+theme_park,Tematski park
+valley,Dolina
+viewpoint,Vidikovac
+zoo,Zoo
+boatyard,Brodogradilište
+canal,Kanal
+connector,Spoj vodnih puteva
+dam,Brana
+derelict_canal,Zanemaren kanal
+ditch,Jarak
+dock,Dok
+drain,Odvod
+lock,Ustava
+lock_gate,Ustava
+mineral_spring,Mineralni izvor
+mooring,Sidrište
+rapids,Brzaci
+river,Rijeka
+riverbank,Riječna obala
+stream,Potok
+wadi,Suho korito rijeke
+water_point,Točka vodotoka
+waterfall,Vodopad
+weir,Brana

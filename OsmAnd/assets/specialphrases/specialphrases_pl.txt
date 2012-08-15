@@ -1,0 +1,455 @@
+
+aerodrome,Lotnisko
+arts_centre,Centrum sztuki
+atm,Bankomat
+auditorium,Audytorium
+bank,Bank
+bar,Bar
+bench,Ławka
+bicycle_parking,Parking rowerowy
+bicycle_rental,Wypożyczalnia rowerów
+brothel,Burdel
+bureau_de_change,Kantor
+bus_station,Stacja autobusowa
+cafe,Kawiarnia
+car_rental,Wynajem samochodów
+car_sharing,Dzielenie się samochodami
+car_wash,Myjnia samochodowa
+casino,Kasyno
+cinema,Kino
+clinic,Przychodnia
+club,Klub
+college,Uczelnia
+community_centre,Centrum społeczności
+courthouse,Sąd
+crematorium,Krematorium
+dentist,Gabinet dentystyczny
+doctors,Doktorzy
+dormitory,Bursa
+drinking_water,Źródło wody pitnej
+driving_school,Nauka jazdy
+driving_school,Nauka jazdys
+embassy,Ambasada
+emergency_phone,Telefon alarmowy
+fast_food,Fast Food
+ferry_terminal,Terminal promowy
+fire_hydrant,Hydrant
+fire_station,Remiza strażacka
+fountain,Fontanna
+fuel,Stacja benzynowa
+grave_yard,Mniejszy cmentarz
+gym,Centrum Fitness / Sala Gimnastyczna
+hall,Hala
+health_centre,Ośrodek zdrowia
+hospital,Szpital
+hotel,Hotel
+hunting_stand,Stanowisko strzeleckie
+ice_cream,Lodziarnia
+kindergarten,Przedszkole
+library,Biblioteka
+market,Targowisko
+marketplace,Plac targowy
+mountain_rescue,Ratownictwo górskie
+nightclub,Klub nocny
+nursery,Żłobek
+nursing_home,Dom opieki
+office,Biuro
+park,Park
+parking,Parking
+pharmacy,Apteka
+place_of_worship,Miejsce kultu
+police,Posterunek policji
+post_box,Skrzynka pocztowa
+post_office,Poczta
+preschool,Przedszkole
+prison,Więzienie
+pub,Pub
+public_building,Budynek publiczny
+public_market,Rynek publiczny
+reception_area,Recepcja
+recycling,Miejsce recyklingu
+restaurant,Restauracja
+retirement_home,Dom starców
+sauna,Sauna
+school,Szkoła
+shelter,Schron
+shop,Sklep
+shopping,Zakupy
+social_club,Klub towarzyski
+studio,Studio
+supermarket,Supermarket
+taxi,Postój taksówek
+telephone,Budka telefoniczna
+theatre,Teatr
+toilets,Toaleta publiczna
+townhall,Urząd miejski
+university,Uniwersytet
+vending_machine,Automat do sprzedaży
+veterinary,Chirurgia weterynaryjna
+village_hall,Urząd gminy
+waste_basket,Marnowanie koszyka
+wifi,Dostęp do WiFi
+youth_centre,Centrum młodzieżowe
+administrative,Granica administracyjna
+apartments,Blok mieszkalny
+block,Budynek bloku
+bunker,Bunkier
+chapel,Kaplica
+church,Kościół
+city_hall,Ratusz
+commercial,Budynek handlowy
+dormitory,Bursa
+entrance,Wejście do budynku
+faculty,Budynek prawny
+farm,Budynek gospodarczy
+flats,Mieszkania
+garage,Garaż
+hall,Hala
+hospital,Budynek szpitala
+hotel,Hotel
+house,Dom
+industrial,Budynek przemysłowy
+office,Budynek biurowy
+public,Budynek publiczny
+residential,Budynek mieszkalny
+retail,Budynek detaliczny
+school,Budynek szkoły
+shop,Sklep
+stadium,Stadion
+store,Składnica
+terrace,Taras
+tower,Wieża
+train_station,Stacja kolejowa
+university,Budynek uniwersytetu
+&quot;yes&quot;,Budynek
+bridleway,Droga dla koni
+bus_guideway,Droga dla autobusów
+bus_stop,Przystanek autobusowy
+byway,Boczna droga
+construction,Droga budowana
+cycleway,Ścieżka rowerowa
+distance_marker,Znak odległości
+emergency_access_point,Punkt awaryjny
+footway,Chodnik
+ford,Bród
+gate,Bramka
+living_street,Strefa zamieszkania
+minor,Drobna droga
+motorway,Autostrada
+motorway_junction,Skrzyżowanie autostrad
+motorway_link,Autostrada - dojazd
+motorway_link,Autostrada - dojazd w
+motorway_link,Autostrada - dojazd blisko
+motorway_link,Autostrada - dojazd w pobliżu
+motorway_link,Autostrada - dojazd przy
+motorway_link,Autostrada - dojazd niedaleko
+motorway_link,Autostrada - dojazd obok
+motorway_link,Autostrada - dojazd koło
+path,Ścieżka
+pedestrian,Droga dla pieszych
+platform,Podwyższenie
+primary,Droga krajowa
+primary_link,Droga krajowa - dojazd
+primary_link,Droga krajowa - dojazd w
+primary_link,Droga krajowa - dojazd blisko
+primary_link,Droga krajowa - dojazd w pobliżu
+primary_link,Droga krajowa - dojazd przy
+primary_link,Droga krajowa - dojazd niedaleko
+primary_link,Droga krajowa - dojazd obok
+primary_link,Droga krajowa - dojazd koło
+raceway,Tor wyścigowy
+residential,Droga osiedlowa
+road,Droga
+secondary,Droga wojewódzka
+secondary_link,Droga wojewódzka - dojazd
+secondary_link,Droga wojewódzka - dojazd w
+secondary_link,Droga wojewódzka - dojazd blisko
+secondary_link,Droga wojewódzka - dojazd w pobliżu
+secondary_link,Droga wojewódzka - dojazd przy
+secondary_link,Droga wojewódzka - dojazd niedaleko
+secondary_link,Droga wojewódzka - dojazd obok
+secondary_link,Droga wojewódzka - dojazd koło
+service,Droga serwisowa
+services,Usługi autostrady
+steps,Schody
+stile,Przełaz
+tertiary,Droga powiatowa
+track,Droga gruntowa
+trail,Szlak
+trunk,Droga ekspresowa
+trunk_link,Droga ekspresowa - dojazd
+trunk_link,Droga ekspresowa - dojazd w
+trunk_link,Droga ekspresowa - dojazd blisko
+trunk_link,Droga ekspresowa - dojazd w pobliżu
+trunk_link,Droga ekspresowa - dojazd przy
+trunk_link,Droga ekspresowa - dojazd niedaleko
+trunk_link,Droga ekspresowa - dojazd obok
+trunk_link,Droga ekspresowa - dojazd koło
+unclassified,Droga gminna
+unsurfaced,Nierówna droga
+unsurfaced,Nierówna drogas
+archaeological_site,Wykopaliska archeologiczne
+battlefield,Miejsce historycznej bitwy
+boundary_stone,Graniczny głaz
+building,Budynek
+castle,Zamek
+church,Kościół
+house,Dom
+icon,Ikona
+manor,Dwór
+memorial,Mniejszy pomnik
+mine,Kopalnia
+monument,Pomnik
+museum,Muzeum
+ruins,Ruiny
+tower,Wieża
+wayside_cross,Przydrożny krzyż
+wayside_shrine,Przydrożna kaplica
+wreck,Wrak
+allotments,Ogródki działkowe
+basin,Dorzecze
+brownfield,Grunty poprzemysłowe
+cemetery,Cmentarz
+commercial,Obszar handlowo-usługowy
+conservation,Konserwacja
+construction,Teren budowy
+farm,Farma
+farmland,Grunty rolne
+farmyard,Podwórze gospodarskie
+forest,Las
+grass,Trawa
+greenfield,Tereny niezagospodarowane
+industrial,Teren przemysłowy
+landfill,Wysypisko śmieci
+meadow,Łąka
+military,Teren wojskowy
+mine,Kopalnia
+mountain,Góra
+nature_reserve,Rezerwat przyrody
+park,Park
+piste,Trasa
+plaza,Plac
+quarry,Kamieniołom
+railway,Teren kolejowy
+recreation_ground,Ziemia rekreacyjna
+reservoir,Sztuczny zbiornik wodny
+residential,Zabudowa mieszkaniowa
+retail,Handel detaliczny
+village_green,Park miejski
+vineyard,Winnica
+wetland,Tereny podmokłe
+wood,Puszcza
+beach_resort,Strzeżona plaża
+common,Błonie
+fishing,Łowisko
+garden,Ogród
+golf_course,Pole golfowe
+ice_rink,Lodowisko
+marina,Marina
+miniature_golf,Pole do miniaturowego golfa
+nature_reserve,Rezerwat naturalny
+park,Park
+pitch,Boisko sportowe
+playground,Plac zabaw
+recreation_ground,Pole rekreacyjne
+slipway,Pochylnia
+sports_centre,Centrum sportu
+stadium,Stadion
+swimming_pool,Basen
+track,Bieżnia
+water_park,Park wodny
+bay,Zatoka
+beach,Plaża
+cape,Przylądek
+cave_entrance,Wejście do jaskini
+channel,Kanał
+cliff,Urwisko
+coastline,Linia brzegowa
+crater,Krater
+feature,Obiekt
+fell,Hale górskie
+fjord,Fiord
+geyser,Gejzer
+glacier,Lodowiec
+heath,Wrzosowisko
+hill,Wzgórze
+island,Wyspa
+land,Ląd
+marsh,Bagno
+moor,Torfowisko
+mud,Muł
+peak,Szczyt
+point,Punkt
+reef,Rafa
+ridge,Grzbiet
+river,Rzeka
+rock,Skała
+scree,Zsypisko
+scrub,Zagajnik
+shoal,Mielizna
+spring,Źródło
+strait,Cieśnina
+tree,Drzewo
+valley,Dolina
+volcano,Wulkan
+water,Woda
+wetland,Obszar podmokły
+wetlands,Obszary podmokłe
+wood,Puszcza
+city,Miasto
+country,Kraj
+county,Powiat
+farm,Farma
+hamlet,Osada
+house,Dom
+houses,Zabudowanie
+island,Wyspa
+islet,Wysepka
+locality,Rejon
+moor,Torfowisko
+municipality,Gmina
+postcode,Kod pocztowy
+region,Rejon
+sea,Morze
+state,Stan
+subdivision,Dzielnica
+suburb,Osiedle
+town,Miasteczko
+unincorporated_area,Obszar bez osobowości prawnej
+village,Wieś
+abandoned,Dawna linia kolejowa
+construction,Budowana linia kolejowa
+disused,Nieczynna trasa kolejowa
+disused,Nieczynna trasa kolejowas
+disused_station,Nieużywana stacja kolejowa
+disused_station,Nieużywana stacja kolejowas
+funicular,Kolejka linowa
+halt,Przystanek kolejowy
+historic_station,Historyczna stacja kolejowa
+junction,Węzeł Kolejowy
+level_crossing,Przejazd kolejowy
+light_rail,Lekka kolej
+monorail,Kolej jednoszynowa
+narrow_gauge,Kolej wąskotorowa
+platform,Peron
+preserved,Kolej zabytkowa
+spur,Bocznica kolejowa
+station,Stacja kolejowa
+subway,Stacja metra
+subway_entrance,Wejście na stację metra
+switch,Zwrotnica
+tram,Linia tramwajowa
+tram_stop,Przystanek tramwajowy
+yard,Jard kolejowy
+alcohol,Sklep monopolowy
+apparel,Sklep odzieżowy
+art,Sklep z dziełami sztuki
+bakery,Piekarnia
+beauty,Salon kosmetyczny
+beverages,Sklep z napojami
+bicycle,Sklep rowerowy
+books,Księgarnia
+butcher,Rzeźnik
+car,Sklep samochodowy
+car_dealer,Salon samochodowy
+car_parts,Sklep z częściami samochodowymi
+car_repair,Naprawa samochodów
+car_repair,Naprawa samochodóws
+carpet,Sklep z dywanami
+charity,Sklep miłosny
+chemist,Drogeria
+clothes,Sklep odzieżowy
+computer,Sklep komputerowy
+confectionery,Cukiernia
+convenience,Sklep z rzeczami wygodnymi
+copyshop,Ksero
+cosmetics,Sklep kosmetyczny
+department_store,Dom towarowy
+discount,Sklep z produktami po obniżce
+doityourself,Sklep budowlany
+drugstore,Drogeria
+dry_cleaning,Pralnia chemiczna
+electronics,Sklep elektroniczny
+estate_agent,Biuro nieruchomości
+farm,Sklep gospodarski
+fashion,Sklep modelarski
+fish,Sklep rybny
+florist,Kwiaciarnia
+food,Sklep spożywczy
+funeral_directors,Zakłady pogrzebowe
+furniture,Sklep meblowy
+gallery,Galeria
+garden_centre,Centrum ogrodnicze
+general,Sklep ogólny
+gift,Sklep z pamiątkami
+greengrocer,Warzywniak
+grocery,Sklep spożywczy
+hairdresser,Fryzjernia
+hardware,Sklep ze sprzętem
+hifi,Hi-Fi
+insurance,Ubezpieczenie
+jewelry,Sklep z biżuterią
+kiosk,Kiosk
+laundry,Pralnia
+mall,Centrum handlowe
+market,Targowisko
+mobile_phone,Sklep z telefonami komórkowymi
+motorcycle,Sklep z motocyklami
+music,Sklep muzyczny
+newsagent,Kiosk
+optician,Optyk
+organic,Sklep z produktami organicznymi
+outdoor,Sklep na wolnym powietrzu
+pet,Sklep ze zwierzątkami
+photo,Sklep fotograficzny
+salon,Salon
+shoes,Sklep obuwniczy
+shopping_centre,Centrum handlowe
+sports,Sklep sportowy
+stationery,Sklep papierniczy
+supermarket,Supermarket
+toys,Sklep zabawkowy
+travel_agency,Biuro podróży
+video,Sklep filmowy
+wine,Winiarnia
+alpine_hut,Chata Alpejska
+artwork,Sztuka
+attraction,Atrakcja turystyczna
+bed_and_breakfast,Łóżko i Śniadanie
+cabin,Kabina
+camp_site,Miejsce na kamping
+caravan_site,Miejsce na przyczepę campingową
+chalet,Schronisko
+guest_house,Pensjonat
+hostel,Hostel
+hotel,Hotel
+information,Informacja turystyczna
+lean_to,Nachylenie
+lean_to,Nachylenies
+motel,Motel
+museum,Muzeum
+picnic_site,Miejsce na piknik
+theme_park,Park tematyczny
+valley,Dolina
+viewpoint,Punkt widokowy
+zoo,Zoo
+boatyard,Stocznia
+canal,Kanał
+connector,Złącze dróg wodnych
+dam,Tama
+derelict_canal,Opuszczony kanał
+ditch,Rów
+dock,Basen portowy
+drain,Rów odpływowy
+lock,Zastawka
+lock_gate,Śluza
+mineral_spring,Źródło mineralne
+mooring,Kotwicowisko
+rapids,Katarakty
+river,Rzeka
+riverbank,Brzeg rzeki
+stream,Strumień
+wadi,Starorzecze
+water_point,Punkt wodny
+waterfall,Wodospad
+weir,Jaz
