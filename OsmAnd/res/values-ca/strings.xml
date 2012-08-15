@@ -1,3 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
+<resources><string name="show_warnings_title">Mostra els missatges d'avís...</string>
+<string name="map_widget_fluorescent">Rutes amb fluorescència</string>
+<string name="map_widget_show_ruler">Mostra el regle</string>
+<string name="map_widget_transparent">Aparença amb transparència</string>
+<string name="map_widget_top_text">Nom del carrer</string>
+<string name="map_widget_map_select">Font del mapa</string>
+<string name="map_widget_back_to_loc">On sóc</string>
+<string name="map_widget_reset">Reinicia els valors per defecte</string>
+<string name="map_widget_parking">Pàrquing</string>
+<string name="map_widget_speed">Velocitat</string>
+<string name="map_widget_distance">Meta</string>
+<string name="map_widget_altitude">Altitud</string>
+<string name="map_widget_time">Temps per arribar</string>
+<string name="show_cameras">Mostra les càmeres de velocitat</string>
+<string name="show_speed_limits">Mostra els límits de velocitat</string>
+<string name="route_updated_loc_found">La ruta es calcularà de nou quan es determini la localització</string>
+<string name="update_downlod_list">Tornar a carregar la llista</string>
+<string name="starting_point_too_far">El punt d'inici és massa lluny de la carretera més propera.</string>
+<string name="osmand_parking_time_limit_title">Indica el temps límit d'aparcament</string>
+<string name="osmand_parking_choose_type">Tria el tipus de pàrquing</string>
 </resources>
