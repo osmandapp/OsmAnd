@@ -7,9 +7,16 @@
 		android:layout_marginLeft="2dp" android:layout_marginTop="2dp"
 		android:paddingTop="0dp" />
 	
-	<TextView android:id="@+id/poidistance_label"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"
-		android:textSize="22sp" android:maxWidth="80dp" android:minWidth="80dp"/>
+	<TextView
+	    android:id="@+id/poidistance_label"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginRight="3sp"
+	    android:gravity="center"
+	    android:maxWidth="80dp"
+	    android:minWidth="80dp"
+	    android:textSize="22sp" />
+
 	<TextView android:id="@+id/poi_label" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" android:textSize="22sp" />
 
