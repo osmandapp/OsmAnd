@@ -61,7 +61,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			@Override
 			public void run() {
 				ApplicationMode am = view.getSettings().getApplicationMode();
-				view.getSettings().TRANSPARENT_MAP_THEME.set(transparent.visible(am));
+				view.getSettings().TRANSPARENT_MAP_THEME.set(!view.getSettings().TRANSPARENT_MAP_THEME.get());
 				mapInfoLayer.recreateControls();
 			}
 		});
@@ -72,7 +72,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			@Override
 			public void run() {
 				ApplicationMode am = view.getSettings().getApplicationMode();
-				view.getSettings().FLUORESCENT_OVERLAYS.set(fluorescent.visible(am));
+				view.getSettings().FLUORESCENT_OVERLAYS.set(!view.getSettings().FLUORESCENT_OVERLAYS.get());
 				view.refreshMap();
 			}
 		});

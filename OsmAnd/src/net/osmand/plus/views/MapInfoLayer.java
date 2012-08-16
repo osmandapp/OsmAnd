@@ -238,7 +238,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void run() {
 				ApplicationMode am = view.getSettings().getApplicationMode();
-				view.getSettings().SHOW_RULER.set(showRuler.visible(am));
+				view.getSettings().SHOW_RULER.set(!view.getSettings().SHOW_RULER.get());
 				view.refreshMap();
 			}
 		});
@@ -249,7 +249,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void run() {
 				ApplicationMode am = view.getSettings().getApplicationMode();
-				view.getSettings().SHOW_VIEW_ANGLE.set(displayViewDirections.visible(am));
+				view.getSettings().SHOW_VIEW_ANGLE.set(!view.getSettings().SHOW_VIEW_ANGLE.get());
 				map.updateApplicationModeSettings();
 			}
 		});
