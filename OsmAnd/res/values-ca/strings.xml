@@ -159,4 +159,5 @@
 <string name="accessibility_preferences">Accessibilitat</string>
 <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes</string>
 <string name="local_openstreetmap_uploading">S\'està pujant...</string>
+<string name="show_warnings_descr">Mostra límits de velocitat,radars i bandes rugoses</string>
 </resources>
