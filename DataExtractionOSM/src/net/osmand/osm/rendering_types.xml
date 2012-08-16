@@ -77,6 +77,7 @@
 		<type tag="highway" value="emergency_access_point" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="speed_camera" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="street_lamp" minzoom="16" />
+		
 	</category>
 	
 	<category name="routes">
@@ -533,7 +534,10 @@
 		<type tag="amenity" value="car_sharing" minzoom="15" />
 		<type tag="amenity" value="car_wash" minzoom="15" />
 		<type tag="amenity" value="grit_bin" minzoom="15" />
+		<type tag="rwn_ref" value="" minzoom="14" nameTags="rwn_ref" poi_prefix="walking_node_"/>
+		<type tag="rcn_ref" value="" minzoom="14" nameTags="rcn_ref" poi_prefix="cycle_node_"/>
 	</category>
+	
 
 
 	<category name="finance" poi_category="finance">
