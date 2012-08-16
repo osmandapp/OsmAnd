@@ -11,7 +11,7 @@
 	    android:id="@+id/poidistance_label"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:layout_marginRight="3sp"
+	    android:layout_marginRight="11sp"
 	    android:gravity="center"
 	    android:maxWidth="80dp"
 	    android:minWidth="80dp"
