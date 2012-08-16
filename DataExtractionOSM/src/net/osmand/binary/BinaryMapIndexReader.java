@@ -158,8 +158,6 @@ public class BinaryMapIndexReader {
 				region.filePointer = codedIS.getTotalBytesRead();
 				if(addressAdapter != null){
 					oldLimit = codedIS.pushLimit(region.length);
-					// FIXME
-//					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					addressAdapter.readAddressIndex(region);
 					if(region.name != null){
 						addressIndexes.add(region);
@@ -175,8 +173,6 @@ public class BinaryMapIndexReader {
 				ind.filePointer = codedIS.getTotalBytesRead();
 				if (transportAdapter != null) {
 					oldLimit = codedIS.pushLimit(ind.length);
-					// FIXME
-//					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					transportAdapter.readTransportIndex(ind);
 					codedIS.popLimit(oldLimit);
 					transportIndexes.add(ind);
@@ -190,8 +186,6 @@ public class BinaryMapIndexReader {
 				routeReg.filePointer = codedIS.getTotalBytesRead();
 				if (routeAdapter != null) {
 					oldLimit = codedIS.pushLimit(routeReg.length);
-					// FIXME
-//					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					routeAdapter.readRouteIndex(routeReg);
 					codedIS.popLimit(oldLimit);
 					routingIndexes.add(routeReg);
@@ -205,8 +199,6 @@ public class BinaryMapIndexReader {
 				poiInd.filePointer = codedIS.getTotalBytesRead();
 				if (poiAdapter != null) {
 					oldLimit = codedIS.pushLimit(poiInd.length);
-					// FIXME
-//					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 					poiAdapter.readPoiIndex(poiInd, false);
 					codedIS.popLimit(oldLimit);
 					poiIndexes.add(poiInd);
