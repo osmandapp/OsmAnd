@@ -131,18 +131,17 @@ bool readMapLevel(CodedInputStream* input, MapRoot* root, bool initSubtrees) {
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kBoxesFieldNumber: {
-			if(!initSubtrees){
-				input->Skip(input->BytesUntilLimit());
-				return true;
-			}
 			MapTreeBounds bounds;
 			readInt(input, &bounds.length);
 			bounds.filePointer = input->getTotalBytesRead();
-			int oldLimit = input->PushLimit(bounds.length);
-			readMapTreeBounds(input, &bounds, root);
-			root->bounds.push_back(bounds);
-			input->Skip(input->BytesUntilLimit());
-			input->PopLimit(oldLimit);
+			if(initSubtrees){
+				int oldLimit = input->PushLimit(bounds.length);
+				readMapTreeBounds(input, &bounds, root);
+				root->bounds.push_back(bounds);
+				input->PopLimit(oldLimit);
+			} else {
+				input->Skip(input->BytesUntilLimit());
+			}
 			break;
 		}
 
@@ -381,7 +380,6 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex, bool onlyInitEnco
 				mapIndex->levels.push_back(mapLevel);
 			}
 			input->Seek(mapLevel.filePointer + mapLevel.length);
-
 			break;
 		}
 		default: {
@@ -843,20 +841,6 @@ bool readMapDataBlocks(CodedInputStream* input, SearchQuery* req, MapTreeBounds*
 bool sortTreeBounds (const MapTreeBounds& i,const MapTreeBounds& j) { return (i.mapDataBlock<j.mapDataBlock); }
 
 void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, SearchQuery* req) {
-	// lazy initializing rules
-	if (ind->decodingRules.size() == 0) {
-		input->Seek(ind->filePointer);
-		int oldLimit = input->PushLimit(ind->length);
-		readMapIndex(input, ind, true);
-		input->PopLimit(oldLimit);
-	}
-	// lazy initializing subtrees
-	if (root->bounds.size() == 0) {
-		input->Seek(root->filePointer);
-		int oldLimit = input->PushLimit(root->length);
-		readMapLevel(input, root, true);
-		input->PopLimit(oldLimit);
-	}
 	// search
 	for (std::vector<MapTreeBounds>::iterator i = root->bounds.begin();
 			i != root->bounds.end(); i++) {
@@ -866,13 +850,11 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 		if (i->right < req->left || i->left > req->right || i->top > req->bottom || i->bottom < req->top) {
 			continue;
 		}
-
 		std::vector<MapTreeBounds> foundSubtrees;
 		input->Seek(i->filePointer);
 		int oldLimit = input->PushLimit(i->length);
 		searchMapTreeBounds(input, &(*i), root, req, &foundSubtrees);
 		input->PopLimit(oldLimit);
-
 
 		sort(foundSubtrees.begin(), foundSubtrees.end(), sortTreeBounds);
 		uint32_t length;
@@ -907,11 +889,6 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		lseek(file->fd, 0, SEEK_SET);
-		FileInputStream input(file->fd);
-		input.SetCloseOnDelete(false);
-		CodedInputStream cis(&input);
-		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 		if (q->req != NULL) {
 			q->req->clearState();
 		}
@@ -928,6 +905,34 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 					if (mapLevel->right >= q->left && q->right >= mapLevel->left && mapLevel->bottom >= q->top
 							&& q->bottom >= mapLevel->top) {
 						osmand_log_print(LOG_INFO, "Search map %s", mapIndex->name.c_str());
+						// lazy initializing rules
+						if (mapIndex->decodingRules.size() == 0) {
+							lseek(file->fd, 0, SEEK_SET);
+							FileInputStream input(file->fd);
+							input.SetCloseOnDelete(false);
+							CodedInputStream cis(&input);
+							cis.Seek(mapIndex->filePointer);
+							int oldLimit = cis.PushLimit(mapIndex->length);
+							readMapIndex(&cis, mapIndex, true);
+							cis.PopLimit(oldLimit);
+						}
+						// lazy initializing subtrees
+						if (mapLevel->bounds.size() == 0) {
+							lseek(file->fd, 0, SEEK_SET);
+							FileInputStream input(file->fd);
+							input.SetCloseOnDelete(false);
+							CodedInputStream cis(&input);
+							cis.Seek(mapLevel->filePointer);
+							cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
+							int oldLimit = cis.PushLimit(mapLevel->length);
+							readMapLevel(&cis, mapLevel, true);
+							cis.PopLimit(oldLimit);
+						}
+						lseek(file->fd, 0, SEEK_SET);
+						FileInputStream input(file->fd);
+						input.SetCloseOnDelete(false);
+						CodedInputStream cis(&input);
+						cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 						searchMapData(&cis, &(*mapLevel), &(*mapIndex), q);
 					}
 				}

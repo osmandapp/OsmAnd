@@ -855,14 +855,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					}
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
-				if (location.hasBearing() && currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					mapView.setRotate(-location.getBearing());
-				} else if (!location.hasBearing() && routingHelper.isFollowingMode()
-						&& currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15
-							&& now - lastTimeSensorRotation > 1500) {
-						lastTimeSensorRotation = now;
-						mapView.setRotate(-previousSensorValue);
+				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
+					if (location.hasBearing()) {
+						mapView.setRotate(-location.getBearing());
+					} else if (routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
+						if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15
+								&& now - lastTimeSensorRotation > 1500) {
+							lastTimeSensorRotation = now;
+							mapView.setRotate(-previousSensorValue);
+						}
 					}
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());

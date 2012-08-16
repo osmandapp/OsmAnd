@@ -1114,11 +1114,16 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
+	public void initCategories(PoiRegion poiIndex) throws IOException {
+		poiAdapter.initCategories(poiIndex);
+	}
+	
 	public List<Amenity> searchPoiByName(SearchRequest<Amenity> req) throws IOException {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}
 		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			int old = codedIS.pushLimit(poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
@@ -1127,31 +1132,32 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	public Map<AmenityType, List<String>> searchPoiCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+	public Map<AmenityType, List<String>> searchPoiCategoriesByName(String query, Map<AmenityType, List<String>> map) throws IOException {
 		if (query == null || query.length() == 0) {
 			throw new IllegalArgumentException();
 		}
 		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.PRIMARY);
 		for (PoiRegion poiIndex : poiIndexes) {
-			for(int i= 0; i< poiIndex.categories.size(); i++){
+			poiAdapter.initCategories(poiIndex);
+			for (int i = 0; i < poiIndex.categories.size(); i++) {
 				String cat = poiIndex.categories.get(i);
 				AmenityType catType = poiIndex.categoriesType.get(i);
-				if(CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+				if (CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
 					map.put(catType, null);
 				} else {
 					List<String> subcats = poiIndex.subcategories.get(i);
-					for(int j=0; j< subcats.size(); j++){
-						if(CollatorStringMatcher.cmatches(collator, subcats.get(j), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
-							if(!map.containsKey(catType)){
+					for (int j = 0; j < subcats.size(); j++) {
+						if (CollatorStringMatcher.cmatches(collator, subcats.get(j), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
+							if (!map.containsKey(catType)) {
 								map.put(catType, new ArrayList<String>());
 							}
 							List<String> list = map.get(catType);
-							if(list != null){
+							if (list != null) {
 								list.add(subcats.get(j));
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -1165,6 +1171,7 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
 		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			int old = codedIS.pushLimit(poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
@@ -1383,6 +1390,9 @@ public class BinaryMapIndexReader {
 			this.interrupted = interrupted;
 		}
 		
+		public boolean limitExceeded() {
+			return limit != -1 && searchResults.size() > limit;
+		}
 		public boolean isCancelled() {
 			if(this.interrupted){
 				return interrupted;
