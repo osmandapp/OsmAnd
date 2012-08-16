@@ -862,7 +862,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15
 							&& now - lastTimeSensorRotation > 1500) {
 						lastTimeSensorRotation = now;
+						/*
+						//In the map rotation on the direction of travel, with stops to keep the old direction.
 						mapView.setRotate(-previousSensorValue);
+						*/
 					}
 				}
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
