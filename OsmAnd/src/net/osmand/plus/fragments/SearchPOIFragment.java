@@ -80,9 +80,9 @@ import android.widget.Toast;
 public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorEventListener*/ {
 
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
+        public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
-	private static final int GPS_TIMEOUT_REQUEST = 1000;
+        private static final int GPS_TIMEOUT_REQUEST = 1000;
 	private static final int GPS_DIST_REQUEST = 5;
 	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
 	private static final int MIN_DISTANCE_TO_UPDATE = 6;
@@ -114,27 +114,12 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 	// never null represents current running task or last finished
 	private SearchAmenityTask currentSearchTask = new SearchAmenityTask(null); 
 	
-	public static SearchPOIFragment newInstance() {
-	    SearchPOIFragment f = new SearchPOIFragment();
-
-	    Bundle args = new Bundle();
-	    args.putInt("index", PlaceTypesFragment.ADDRESS_SEARCH_INDEX);
-	    f.setArguments(args);
-
-	    return f;
-	}
-
 	private Application getApplication() {
 	    return getActivity().getApplication();
 	}
 	
 	private Context getContext() {
 	    return SearchPOIFragment.this.getActivity();
-	}
-	
-	@Override
-	public void onCreate(Bundle icicle) {
-	    super.onCreate(icicle);
 	}
 	
         @Override
@@ -154,9 +139,15 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 		
             settings = ((OsmandApplication) getApplication()).getSettings();
 
-            // Set up this fragment to act as 'search by name' POI filter 
-            getActivity().getIntent().putExtra(SearchPOIActivity.AMENITY_FILTER, SearchByNameFilter.FILTER_ID);
-            
+            String filterId = null;
+            if (getShownPlaceType() == PlaceTypesFragment.ADDRESS_SEARCH_KEY) {
+                // Set up this fragment to act as 'search by name' POI filter 
+                filterId = SearchByNameFilter.FILTER_ID;
+            } else {
+                filterId = getActivity().getString((int)(PlaceTypesFragment.getPlacesMap().get(getShownPlaceType())));
+            }
+            getActivity().getIntent().putExtra(SearchPOIActivity.AMENITY_FILTER, filterId);
+
             searchPOILevel.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

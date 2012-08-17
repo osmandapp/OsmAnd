@@ -1,8 +1,12 @@
 package net.osmand.plus.fragments;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import net.osmand.plus.activities.PlacePickerActivity;
+import net.osmand.plus.R;
 import android.app.ListFragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,13 +16,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class PlaceTypesFragment extends ListFragment {
-    public static final int FAVORITES_INDEX = 0; 
-    public static final int ADDRESS_SEARCH_INDEX = 1; 
+    public static final String FAVORITES_KEY = "Favorites";
+    public static final String ADDRESS_SEARCH_KEY = "Address";
+    
+    public static TreeMap<String, Integer> places;
     
     boolean mDualPane;
     int mCurCheckPosition = 0;
-    ArrayList<String> places;
 
+    static {
+        places = new TreeMap<String, Integer>();
+        places.put("Food", R.string.poi_filter_food_shop);
+        places.put("Fuel", R.string.poi_filter_fuel);
+    }
+    
+    public static Map<String, Integer> getPlacesMap() {
+        return places;
+    }
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +43,13 @@ public class PlaceTypesFragment extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        // TODO(natashaj): populate in a different way eventually
-        places = new ArrayList<String>();
-        places.add("Favorites");
-        places.add("Address");
-        places.add("Food");
-        places.add("Petrol");
-        
+        if (savedInstanceState != null) {
+            // Restore last state for checked position.
+            mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
+        }
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_activated_1, places) {
+                android.R.layout.simple_list_item_activated_1, getPlacesList()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View itemView = super.getView(position, convertView, parent);
@@ -48,11 +61,6 @@ public class PlaceTypesFragment extends ListFragment {
             }
         };
         setListAdapter(adapter);
-
-        if (savedInstanceState != null) {
-            // Restore last state for checked position.
-            mCurCheckPosition = savedInstanceState.getInt("curChoice", 0);
-        }
 
         getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         getListView().setSelected(true);
@@ -70,6 +78,16 @@ public class PlaceTypesFragment extends ListFragment {
         showDetails(position);
     }
 
+    List<String> getPlacesList() {
+        ArrayList<String> placesList = new ArrayList<String>();
+        placesList.add(PlaceTypesFragment.FAVORITES_KEY);
+        placesList.add(PlaceTypesFragment.ADDRESS_SEARCH_KEY);
+        for (Map.Entry<String, Integer> entry : places.entrySet()) {
+            placesList.add(entry.getKey());
+        }
+        return placesList;
+    }
+    
     /**
      * Helper function to show the details of a selected item, either by
      * displaying a fragment in-place in the current UI, or starting a
@@ -78,7 +96,6 @@ public class PlaceTypesFragment extends ListFragment {
     void showDetails(int index) {
         mCurCheckPosition = index;
         getListView().setItemChecked(index, true);
-        ((PlacePickerActivity)getActivity()).getPlacePickerListener().onPlaceTypeChanged(index);
+        ((PlacePickerActivity)getActivity()).getPlacePickerListener().onPlaceTypeChanged((String)getListView().getItemAtPosition(index));
     }
-
 }

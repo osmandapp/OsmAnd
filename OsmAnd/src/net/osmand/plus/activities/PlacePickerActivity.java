@@ -3,8 +3,6 @@ package net.osmand.plus.activities;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.fragments.PlaceDetailsFragment;
-import net.osmand.plus.fragments.PlaceTypesFragment;
-import net.osmand.plus.fragments.SearchPOIFragment;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -53,7 +51,7 @@ public class PlacePickerActivity extends Activity {
     public interface PlacePickerListener {
         public void onPlacePickerCreated(PlacePickerActivity placePicker);
        
-        public void onPlaceTypeChanged(int placeTypeIndex);
+        public void onPlaceTypeChanged(String placeTypeKey);
         
         public void onPlacePicked(LatLon location, String name);
     }
@@ -68,17 +66,13 @@ public class PlacePickerActivity extends Activity {
         }
 
         @Override
-        public void onPlaceTypeChanged(int placeTypeIndex) {
+        public void onPlaceTypeChanged(String placeTypeKey) {
 
             PlaceDetailsFragment details = (PlaceDetailsFragment)
                     placePicker.getFragmentManager().findFragmentById(R.id.placeDetails);
-            if (details == null || details.getShownIndex() != placeTypeIndex) {
+            if (details == null || details.getShownPlaceType() != placeTypeKey) {
                 
-                if (placeTypeIndex == PlaceTypesFragment.ADDRESS_SEARCH_INDEX) {
-                    details = SearchPOIFragment.newInstance();
-                } else {
-                    details = PlaceDetailsFragment.newInstance(placeTypeIndex);
-                }
+                details = PlaceDetailsFragment.newInstance(placeTypeKey);
                 // Execute a transaction, replacing any existing fragment
                 // with this one inside the frame.
                 FragmentTransaction ft = placePicker.getFragmentManager().beginTransaction();
