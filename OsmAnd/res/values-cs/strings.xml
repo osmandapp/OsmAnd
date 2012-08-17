@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 : \n\t- Native rendering pro všechna zařízení \n\t- Offline editace POI \n\t- Usnadnění \n\t- Oprava mnoha chyb "</string>
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -891,10 +891,10 @@
   <string name="map_widget_back_to_loc">Moje pozice</string>
   <string name="map_widget_lock_screen">Uzamknout obrazovku</string>
   <string name="map_widget_compass">Kompas</string>
-  <string name="map_widget_top_stack">Stavový řádek</string>
+  <string name="map_widget_top_stack">Stavový řádek:</string>
   <string name="map_widget_reset">Vrátit výchozí nastavení</string>
-  <string name="map_widget_right_stack">Pravý sloupec</string>
-  <string name="map_widget_left_stack">Levý sloupec</string>
+  <string name="map_widget_right_stack">Pravý sloupec:</string>
+  <string name="map_widget_left_stack">Levý sloupec:</string>
   <string name="map_widget_parking">Parkování</string>
   <string name="map_widget_monitoring">Záznam trasy</string>
   <string name="map_widget_speed">Aktuální rychlost</string>

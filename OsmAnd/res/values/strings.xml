@@ -21,7 +21,7 @@
     <string name="show_warnings_descr">Show speed limits, speed cameras, and traffic bumps</string>
     <string name="map_widget_fluorescent">Fluorescent routes</string>
     <string name="map_widget_show_ruler">Ruler</string>
-    <string name="map_widget_appearance">Miscellaneous</string>
+    <string name="map_widget_appearance">Miscellaneous:</string>
     <string name="map_widget_view_direction">Viewing direction</string>
     <string name="map_widget_transparent">Transparent skin</string>
     <string name="monitoring_mode_off">Record GPX</string>
@@ -37,10 +37,10 @@
     <string name="map_widget_back_to_loc">Where am I</string>
     <string name="map_widget_lock_screen">Lock screen</string>
     <string name="map_widget_compass">Compass</string>
-    <string name="map_widget_top_stack">Status bar</string>
+    <string name="map_widget_top_stack">Status bar:</string>
     <string name="map_widget_reset">Reset to default</string>
-    <string name="map_widget_right_stack">Right side</string>
-    <string name="map_widget_left_stack">Left side</string>
+    <string name="map_widget_right_stack">Right panel:</string>
+    <string name="map_widget_left_stack">Left panel:</string>
     <string name="map_widget_parking">Parking</string>
     <string name="map_widget_monitoring">Tracking</string>
     <string name="map_widget_speed">Speed</string>

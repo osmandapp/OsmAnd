@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -11,7 +11,7 @@
   <string name="show_warnings_descr">Toon snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
   <string name="map_widget_fluorescent">Fluorescerende routes</string>
   <string name="map_widget_show_ruler">Lineaal</string>
-  <string name="map_widget_appearance">Overige</string>
+  <string name="map_widget_appearance">Overige:</string>
   <string name="map_widget_view_direction">Kijkrichting</string>
   <string name="map_widget_transparent">Transparente skin </string>
   <string name="monitoring_mode_off">Start trackregistratie</string>
@@ -916,10 +916,10 @@
   <string name="map_widget_back_to_loc">Waar ben ik</string>
   <string name="map_widget_lock_screen">Vergrendel scherm</string>
   <string name="map_widget_compass">Kompas</string>
-  <string name="map_widget_top_stack">Statusbalk</string>
+  <string name="map_widget_top_stack">Statusbalk:</string>
   <string name="map_widget_reset">Herstel standaardinstelling</string>
-  <string name="map_widget_right_stack">Rechterkant</string>
-  <string name="map_widget_left_stack">Linkerkant</string>
+  <string name="map_widget_right_stack">Rechterkant:</string>
+  <string name="map_widget_left_stack">Linkerkant:</string>
   <string name="map_widget_parking">Parkeren</string>
   <string name="map_widget_monitoring">Track registratie</string>
   <string name="map_widget_speed">Snelheid</string>

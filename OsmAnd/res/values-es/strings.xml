@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla…</string>
@@ -11,7 +11,7 @@
   <string name="show_warnings_descr">Muestra límites de velocidad, radares, y puntos negros</string>
   <string name="map_widget_fluorescent">Rutas fluorescentes</string>
   <string name="map_widget_show_ruler">Escala</string>
-  <string name="map_widget_appearance">Varios</string>
+  <string name="map_widget_appearance">Varios:</string>
   <string name="map_widget_view_direction">Dirección de visualización</string>
   <string name="map_widget_transparent">Apecto transparente</string>
   <string name="monitoring_mode_off">Grabar GPX</string>
@@ -923,10 +923,10 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="map_widget_back_to_loc">¿Dónde estoy?</string>
   <string name="map_widget_lock_screen">Bloquear pantalla</string>
   <string name="map_widget_compass">Brújula</string>
-  <string name="map_widget_top_stack">Barra de estado</string>
+  <string name="map_widget_top_stack">Barra de estado:</string>
   <string name="map_widget_reset">Cambiar a valores por defecto</string>
-  <string name="map_widget_right_stack">Lado derecho</string>
-  <string name="map_widget_left_stack">Lado izquierdo</string>
+  <string name="map_widget_right_stack">Lado derecho:</string>
+  <string name="map_widget_left_stack">Lado izquierdo:</string>
   <string name="map_widget_parking">Aparcamiento</string>
   <string name="map_widget_monitoring">Seguimiento</string>
   <string name="map_widget_speed">Velocidad</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="asap">ASAP</string>
   <string name="save_route_as_gpx">Route als GPX Datei speichern</string>
   <string name="route_roundabout">Kreisverkehr : Nehmen Sie die %1$d Ausfahrt, dann</string>
@@ -887,10 +887,10 @@
 	<string name="map_widget_back_to_loc">Wo bin ich</string>
 	<string name="map_widget_lock_screen">Bildschimr sperren</string>
 	<string name="map_widget_compass">Kompass</string>
-	<string name="map_widget_top_stack">Statusbalken</string>
+	<string name="map_widget_top_stack">Statusbalken:</string>
 	<string name="map_widget_reset">Auf Voreinstellung setzen</string>
-	<string name="map_widget_right_stack">Rechte Seite</string>
-	<string name="map_widget_left_stack">Linke Seite</string>
+	<string name="map_widget_right_stack">Rechte Seite:</string>
+	<string name="map_widget_left_stack">Linke Seite:</string>
 	<string name="map_widget_parking">Parken</string>
 	<string name="map_widget_monitoring">Positions-Logging</string>
 	<string name="map_widget_speed">Geschwindigkeit</string>

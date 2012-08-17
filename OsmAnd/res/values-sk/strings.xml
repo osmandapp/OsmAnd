@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
   <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
@@ -12,7 +12,7 @@
   <string name="show_warnings_descr">Zobrazenie rýchlostných obmedzení, radarov a spomaľovačov</string>
   <string name="map_widget_fluorescent">Fluorescentné trasy</string>
   <string name="map_widget_show_ruler">Pravítko</string>
-  <string name="map_widget_appearance">Rozličné</string>
+  <string name="map_widget_appearance">Rozličné:</string>
   <string name="map_widget_view_direction">Zorné pole</string>
   <string name="map_widget_transparent">Priehľadná téma</string>
   <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
@@ -27,10 +27,10 @@
   <string name="map_widget_back_to_loc">Kde som</string>
   <string name="map_widget_lock_screen">Zámok obrazovky</string>
   <string name="map_widget_compass">Kompas</string>
-  <string name="map_widget_top_stack">Stavový panel</string>
+  <string name="map_widget_top_stack">Stavový panel:</string>
   <string name="map_widget_reset">Znovunastaviť štandardné</string>
-  <string name="map_widget_right_stack">Pravá strana</string>
-  <string name="map_widget_left_stack">Ľavá strana</string>
+  <string name="map_widget_right_stack">Pravá strana:</string>
+  <string name="map_widget_left_stack">Ľavá strana:</string>
   <string name="map_widget_parking">Parkovanie</string>
   <string name="map_widget_monitoring">Stopovanie</string>
   <string name="map_widget_speed">Rýchlosť</string>

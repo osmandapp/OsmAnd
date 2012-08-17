@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите ее в списке. Удерживайте карту, если вы хотите удалить или деактивировать. \nДанные на устройстве (%1$s свободно):</string>
   <string name="unknown_from_location">Начальное местоположение еще не определено</string>
   <string name="unknown_location">Местоположение еще не определено</string>
@@ -891,10 +891,10 @@
   <string name="map_widget_back_to_loc">Где я</string>
   <string name="map_widget_lock_screen">Заблокировать экран</string>
   <string name="map_widget_compass">Компас</string>
-  <string name="map_widget_top_stack">Строка состояния</string>
+  <string name="map_widget_top_stack">Строка состояния:</string>
   <string name="map_widget_reset">Сбросить по-умолчанию</string>
-  <string name="map_widget_right_stack">Правая сторона</string>
-  <string name="map_widget_left_stack">Левая сторона</string>
+  <string name="map_widget_right_stack">Правая сторона:</string>
+  <string name="map_widget_left_stack">Левая сторона:</string>
   <string name="map_widget_parking">Парковка</string>
   <string name="map_widget_monitoring">Мониторинг</string>
   <string name="map_widget_speed">Скорость</string>
@@ -921,7 +921,7 @@
 <string name="map_widget_fluorescent">Флуоресцентные маршруты</string>
 <string name="show_warnings_title">Показывать сигналы...</string>
 <string name="map_widget_show_ruler">Линейка</string>
-<string name="map_widget_appearance">Разное</string>
+<string name="map_widget_appearance">Разное:</string>
 <string name="map_widget_view_direction">Направление взгляда</string>
 <string name="map_widget_transparent">Прозрачность</string>
 <string name="monitoring_mode_off">Записывать GPX</string>

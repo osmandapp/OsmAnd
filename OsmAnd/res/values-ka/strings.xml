@@ -898,10 +898,10 @@
   <string name="map_widget_back_to_loc">სად ვარ?</string>
   <string name="map_widget_lock_screen">ეკრანის ჩაკეტვა</string>
   <string name="map_widget_compass">კომპასი</string>
-  <string name="map_widget_top_stack">სტატუსის ხაზი</string>
+  <string name="map_widget_top_stack">სტატუსის ხაზი:</string>
   <string name="map_widget_reset">ნაგულისხმევზე დაბრუნება</string>
-  <string name="map_widget_right_stack">მარჯვენა მხარე</string>
-  <string name="map_widget_left_stack">მარცხენა მხარე</string>
+  <string name="map_widget_right_stack">მარჯვენა მხარე:</string>
+  <string name="map_widget_left_stack">მარცხენა მხარე:</string>
   <string name="map_widget_parking">პარკინგი</string>
   <string name="map_widget_monitoring">დევნა</string>
   <string name="map_widget_speed">სიჩქარე</string>

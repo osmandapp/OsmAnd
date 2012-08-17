@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -896,4 +896,31 @@
  \n\t* Verbeterde Roeteberekening
  \n\t* Dinamiese kaart wiggies
  "</string>
-<string name="screen_is_locked">Om die skerm oop te sluit, druk op die slot simbool</string><string name="map_widget_top_text">Straat naam</string><string name="map_widget_config">Instelling</string><string name="map_widget_map_select">Kaart keuse</string><string name="map_widget_back_to_loc">Waar is ek</string><string name="map_widget_lock_screen">Sluit die skerm</string><string name="map_widget_compass">Kompas</string><string name="map_widget_top_stack">Status staaf</string><string name="map_widget_reset">Herstel verstek</string><string name="map_widget_right_stack">Regterkant</string><string name="map_widget_left_stack">Linkerkant</string><string name="map_widget_parking">Parkering</string><string name="map_widget_monitoring">Besig om spoor na te volg</string><string name="map_widget_speed">Spoed</string><string name="map_widget_distance">Teiken</string><string name="map_widget_altitude">Hoogte</string><string name="map_widget_time">Tyd oor</string><string name="map_widget_next_turn">Volgende draai</string><string name="map_widget_next_turn_small">Volgende draai (klein)</string><string name="map_widget_next_next_turn">Daaropvolgende draai</string><string name="map_widget_mini_route">Mini roete kaart</string><string name="bg_service_screen_lock">Sluit skerm</string><string name="bg_service_screen_unlock">Sluit skerm oop</string><string name="bg_service_sleep_mode_off">Disable Sleep mode</string><string name="bg_service_sleep_mode_on">Enable Sleep mode</string><string name="bg_service_screen_lock_toast">Die skerm is gesluit</string><string name="bg_service_interval">Stel die wakker-tussenpose:</string></resources>
+<string name="screen_is_locked">Om die skerm oop te sluit, druk op die slot simbool</string>
+<string name="map_widget_top_text">Straat naam</string>
+<string name="map_widget_config">Instelling</string>
+<string name="map_widget_map_select">Kaart keuse</string>
+<string name="map_widget_back_to_loc">Waar is ek</string>
+<string name="map_widget_lock_screen">Sluit die skerm</string>
+<string name="map_widget_compass">Kompas</string>
+<string name="map_widget_top_stack">Status staaf:</string>
+<string name="map_widget_reset">Herstel verstek</string>
+<string name="map_widget_right_stack">Regterkant:</string>
+<string name="map_widget_left_stack">Linkerkant:</string>
+<string name="map_widget_parking">Parkering</string>
+<string name="map_widget_monitoring">Besig om spoor na te volg</string>
+<string name="map_widget_speed">Spoed</string>
+<string name="map_widget_distance">Teiken</string>
+<string name="map_widget_altitude">Hoogte</string>
+<string name="map_widget_time">Tyd oor</string>
+<string name="map_widget_next_turn">Volgende draai</string>
+<string name="map_widget_next_turn_small">Volgende draai (klein)</string>
+<string name="map_widget_next_next_turn">Daaropvolgende draai</string>
+<string name="map_widget_mini_route">Mini roete kaart</string>
+<string name="bg_service_screen_lock">Sluit skerm</string>
+<string name="bg_service_screen_unlock">Sluit skerm oop</string>
+<string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
+<string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="bg_service_screen_lock_toast">Die skerm is gesluit</string>
+<string name="bg_service_interval">Stel die wakker-tussenpose:</string>
+</resources>

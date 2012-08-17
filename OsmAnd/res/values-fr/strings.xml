@@ -899,10 +899,10 @@ navigate_point_format_D, DM & DMS
   <string name="map_widget_back_to_loc">Où suis-je</string>
   <string name="map_widget_lock_screen">Verrouiller l\'écran</string>
   <string name="map_widget_compass">Boussole</string>
-  <string name="map_widget_top_stack">Barre d\'état</string>
+  <string name="map_widget_top_stack">Barre d\'état:</string>
   <string name="map_widget_reset">Mettre à zéro</string>
-  <string name="map_widget_right_stack">Côté droit</string>
-  <string name="map_widget_left_stack">Côté gauche</string>
+  <string name="map_widget_right_stack">Côté droit:</string>
+  <string name="map_widget_left_stack">Côté gauche:</string>
   <string name="map_widget_parking">Parking</string>
   <string name="map_widget_monitoring">Surveillance</string>
   <string name="map_widget_speed">Vitesse</string>

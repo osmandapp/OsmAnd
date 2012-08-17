@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
@@ -894,10 +894,10 @@
   <string name="map_widget_back_to_loc">Kur es atrodos</string>
   <string name="map_widget_lock_screen">Noslēgt ekrānu</string>
   <string name="map_widget_compass">Kompass</string>
-  <string name="map_widget_top_stack">Statusa josla</string>
+  <string name="map_widget_top_stack">Statusa josla:</string>
   <string name="map_widget_reset">Nostatīt uz noklusēto</string>
-  <string name="map_widget_right_stack">Labā puse</string>
-  <string name="map_widget_left_stack">Kreisā puse</string>
+  <string name="map_widget_right_stack">Labā puse:</string>
+  <string name="map_widget_left_stack">Kreisā puse:</string>
   <string name="map_widget_parking">Parkošanās</string>
   <string name="map_widget_monitoring">Monitorēšana</string>
   <string name="map_widget_speed">Ātrums</string>
