@@ -343,7 +343,7 @@
 			<filter tag="highway" value="ford" textOrder="10"/>
 			<filter tag="highway" value="construction" textOrder="9"/>
 			<filter tag="highway" value="proposed" textOrder="9"/>
-			<groupFilter textOnPath="true">
+			<groupFilter textOnPath="true" nameTag="" >
 				<filter minzoom="14" maxzoom="14" textSize="12"/>
 				<filter minzoom="15" maxzoom="15" textSize="13"/>
 				<filter minzoom="16" maxzoom="16" textSize="14"/>
@@ -359,7 +359,7 @@
 			<filter tag="highway" value="footway" textOrder="15"/>
 			<filter tag="highway" value="steps" textOrder="15"/>
 			<filter tag="highway" value="bridleway" textOrder="15"/>
-			<groupFilter>
+			<groupFilter nameTag="">
 				<filter minzoom="14" maxzoom="14" textSize="12"/>
 				<filter minzoom="15" maxzoom="15" textSize="13"/>
 				<filter minzoom="16" maxzoom="16" textSize="14"/>
