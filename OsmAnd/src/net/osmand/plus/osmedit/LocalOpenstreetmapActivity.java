@@ -29,7 +29,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
@@ -170,7 +169,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		switch (id) {
 		case DIALOG_PROGRESS_UPLOAD:
 			UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask((ProgressDialog) dialog, remotepoi,
-					 remotebug, toUpload.length);
+					remotebug, toUpload.length);
 			uploadTask.execute(toUpload);
 			break;
 		}
@@ -188,10 +187,8 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 		private boolean interruptUploading = false;
 
-		public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress,
-												 OpenstreetmapRemoteUtil remotepoi,
-												 OsmBugsRemoteUtil remotebug,
-												 int listSize) {
+		public UploadOpenstreetmapPointAsyncTask(ProgressDialog progress, OpenstreetmapRemoteUtil remotepoi, OsmBugsRemoteUtil remotebug,
+				int listSize) {
 			this.progress = progress;
 			this.remotepoi = remotepoi;
 			this.remotebug = remotebug;
@@ -203,7 +200,8 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			int uploaded = 0;
 
 			for (OsmPoint point : points) {
-				if (interruptUploading) break;
+				if (interruptUploading)
+					break;
 
 				if (point.getGroup() == OsmPoint.Group.POI) {
 					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
@@ -214,10 +212,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					Node n;
 					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
 						if (point.getId() != n.getId()) {
-							//change all category points...
+							// change all category points...
 							listAdapter.categoryIdChanged(point.getId(), n.getId());
 						}
 						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
+						dbpoi.deleteOpenstreetmap(p);
 						publishProgress(p);
 						uploaded++;
 					}
@@ -225,10 +224,13 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					OsmbugsPoint p = (OsmbugsPoint) point;
 					if (p.getAction() == OsmPoint.Action.CREATE) {
 						remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
+						dbbug.deleteOsmbugs(p);
 					} else if (p.getAction() == OsmPoint.Action.MODIFY) {
 						remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
+						dbbug.deleteOsmbugs(p);
 					} else if (p.getAction() == OsmPoint.Action.DELETE) {
 						remotebug.closingBug(p.getId());
+						dbbug.deleteOsmbugs(p);
 					}
 					publishProgress(p);
 					uploaded++;
@@ -243,11 +245,11 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 			interruptUploading = false;
 
 			progress.setOnCancelListener(new DialogInterface.OnCancelListener() {
-					@Override
-					public void onCancel(DialogInterface dialog) {
-						UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
-					}
-				});
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					UploadOpenstreetmapPointAsyncTask.this.setInterruptUploading(true);
+				}
+			});
 			progress.setIndeterminate(false);
 			progress.setMax(listSize);
 			progress.setProgress(0);
@@ -256,8 +258,10 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPostExecute(Integer result) {
 			listAdapter.notifyDataSetChanged();
-			if(result != null){
-				AccessibleToast.makeText(LocalOpenstreetmapActivity.this, MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result.intValue()), Toast.LENGTH_LONG).show();
+			if (result != null) {
+				AccessibleToast.makeText(LocalOpenstreetmapActivity.this,
+						MessageFormat.format(getString(R.string.local_openstreetmap_were_uploaded), result.intValue()), Toast.LENGTH_LONG)
+						.show();
 			}
 			removeDialog(DIALOG_PROGRESS_UPLOAD);
 		}
