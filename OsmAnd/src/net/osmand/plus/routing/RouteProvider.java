@@ -60,7 +60,7 @@ public class RouteProvider {
 	private static final String OSMAND_ROUTER = "OsmandRouter";
 	
 	public enum RouteService {
-		OSMAND("OsmAnd (offline)", CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		OSMAND("OsmAnd (offline)"), CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
