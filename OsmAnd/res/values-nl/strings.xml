@@ -13,7 +13,7 @@
   <string name="map_widget_show_ruler">Lineaal</string>
   <string name="map_widget_appearance">Overige:</string>
   <string name="map_widget_view_direction">Kijkrichting</string>
-  <string name="map_widget_transparent">Transparente skin </string>
+  <string name="map_widget_transparent">Transparente skin</string>
   <string name="monitoring_mode_off">Start trackregistratie</string>
   <string name="monitoring_mode_on">Stop trackregistratie</string>
   <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
@@ -909,6 +909,7 @@
   <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 : 
    \n\t* Verbeterde routeberekening
    \n\t* Dynamische kaartenwidgets
+   \n\t* Verschillende instellingen verplaatst naar het kaartscherm
    </string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
