@@ -131,17 +131,17 @@ bool readMapLevel(CodedInputStream* input, MapRoot* root, bool initSubtrees) {
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kBoxesFieldNumber: {
+			if (!initSubtrees) {
+				input->Skip(input->BytesUntilLimit());
+				break;
+			}
 			MapTreeBounds bounds;
 			readInt(input, &bounds.length);
 			bounds.filePointer = input->getTotalBytesRead();
-			if(initSubtrees){
-				int oldLimit = input->PushLimit(bounds.length);
-				readMapTreeBounds(input, &bounds, root);
-				root->bounds.push_back(bounds);
-				input->PopLimit(oldLimit);
-			} else {
-				input->Skip(input->BytesUntilLimit());
-			}
+			int oldLimit = input->PushLimit(bounds.length);
+			readMapTreeBounds(input, &bounds, root);
+			root->bounds.push_back(bounds);
+			input->PopLimit(oldLimit);
 			break;
 		}
 
@@ -911,9 +911,10 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 							FileInputStream input(file->fd);
 							input.SetCloseOnDelete(false);
 							CodedInputStream cis(&input);
+							cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 1);
 							cis.Seek(mapIndex->filePointer);
 							int oldLimit = cis.PushLimit(mapIndex->length);
-							readMapIndex(&cis, mapIndex, true);
+							readMapIndex(&cis, &(*mapIndex), true);
 							cis.PopLimit(oldLimit);
 						}
 						// lazy initializing subtrees
@@ -922,10 +923,10 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 							FileInputStream input(file->fd);
 							input.SetCloseOnDelete(false);
 							CodedInputStream cis(&input);
+							cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 1);
 							cis.Seek(mapLevel->filePointer);
-							cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 							int oldLimit = cis.PushLimit(mapLevel->length);
-							readMapLevel(&cis, mapLevel, true);
+							readMapLevel(&cis, &(*mapLevel), true);
 							cis.PopLimit(oldLimit);
 						}
 						lseek(file->fd, 0, SEEK_SET);

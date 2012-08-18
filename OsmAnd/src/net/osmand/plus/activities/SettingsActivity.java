@@ -125,7 +125,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				return getString(in);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		return defValue;
 	}

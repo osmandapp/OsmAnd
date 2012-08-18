@@ -61,6 +61,7 @@
     <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
     \n\t* Improved Routing
     \n\t* Dynamic map widgets
+    \n\t* Lock screen button with logging services 
     \n\t* Map settings moved to map screen
     </string>
     <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
