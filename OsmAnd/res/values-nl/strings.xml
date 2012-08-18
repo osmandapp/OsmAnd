@@ -908,7 +908,7 @@
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
   <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 : 
    \n\t* Verbeterde routeberekening
-   \n\t* Dynamische kaartenwidgets
+   \n\t* Dynamische kaartschermwidgets
    \n\t* Verschillende instellingen verplaatst naar het kaartscherm
    </string>
   <string name="map_widget_top_text">Straatnaam</string>
