@@ -11,6 +11,8 @@
     -->
     <string name="live_monitoring_mode_off">Start\n live tracking</string>
     <string name="live_monitoring_mode_on">Stop\n live tracking</string>
+    <string name="position_on_map_descr">Choose location of position marker on the map</string>
+    <string name="position_on_map">Position marker</string>
     <string name="layer_map_appearance">Configure screen&#8230;</string>
     <string name="show_lanes">Show lanes</string>
     <string name="avoid_unpaved">Avoid unpaved roads</string>

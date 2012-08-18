@@ -6,7 +6,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoControls;
@@ -60,7 +59,6 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		transparent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				ApplicationMode am = view.getSettings().getApplicationMode();
 				view.getSettings().TRANSPARENT_MAP_THEME.set(!view.getSettings().TRANSPARENT_MAP_THEME.get());
 				mapInfoLayer.recreateControls();
 			}
@@ -71,7 +69,6 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		fluorescent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				ApplicationMode am = view.getSettings().getApplicationMode();
 				view.getSettings().FLUORESCENT_OVERLAYS.set(!view.getSettings().FLUORESCENT_OVERLAYS.get());
 				view.refreshMap();
 			}
@@ -130,5 +127,13 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		vectorSettings.setKey("custom_vector_rendering");
 		appearance.addPreference(vectorSettings);
 
+		cat = new PreferenceCategory(app);
+		cat.setTitle(R.string.extra_settings);
+		PreferenceScreen routing = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS);		
+		routing.addPreference(cat);
+		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
+				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
+				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
+				R.string.position_on_map_descr));	
 	}
 }
