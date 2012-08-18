@@ -198,4 +198,5 @@
 <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
 <string name="download_files_question_space">Ara disposeu de {2} MB d'espai lliure. Voleu baixar {0} fitxer(s) ({1} MB)?</string>
 <string name="use_transparent_map_theme">Tema transparent</string>
+<string name="map_widget_appearance">Miscel·lània</string>
 </resources>
