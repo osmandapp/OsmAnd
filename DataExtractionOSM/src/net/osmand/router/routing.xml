@@ -59,22 +59,35 @@
 		<road tag="highway" value="tertiary" speed="45" priority="1" dynamicPriority="0.9"/>
 		<road tag="highway" value="tertiary_link" speed="40" priority="1" dynamicPriority="0.9"/>
 		<!-- lowest form of grid network, usually 90% of urban roads -->
-		<road tag="highway" value="unclassified" speed="35" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="unclassified" speed="35" priority="0.7" dynamicPriority="0.7">
+			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
+		</road>
 		<!-- road = no type, no review and may be not accurate -->
-		<road tag="highway" value="road" speed="35" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="road" speed="35" priority="0.7" dynamicPriority="0.7">
+			<specialization input="short_way" priority="1" speed="45"/>
+		</road>
 		<!-- primarily for access to properties, small roads with 1/2 intersections -->
-		<road tag="highway" value="residential" speed="35" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="residential" speed="35" priority="0.7" dynamicPriority="0.7">
+			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
+		</road>
 		<!-- parking + private roads -->
-		<road tag="highway" value="service" speed="30" priority="0.5" dynamicPriority="0.5"/>
+		<road tag="highway" value="service" speed="30" priority="0.5" dynamicPriority="0.5">
+			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
+		</road>
 		<!-- very bad roads -->
-		<road tag="highway" value="track" speed="15" priority="0.3" dynamicPriority="0.5"/>
+		<road tag="highway" value="track" speed="15" priority="0.3" dynamicPriority="0.5">
+			<specialization input="short_way" priority="0.7" speed="45" dynamicPriority="0.7" />
+			<specialization input="avoid_unpaved" priority="0.1"/>
+		</road>
 		
 		<!-- too small for cars usually -->
-		<road tag="highway" value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>
+		<road tag="highway" value="living_street" speed="25" priority="0.5" dynamicPriority="0.5">
+			<specialization input="short_way" priority="1" dynamicPriority="1" speed="35"/>
+		</road>
 		<!-- car are able to enter in highway=pedestrian with restrictions -->
 		<!-- Time actually is uknown. Currently unsupported -->
 		<road tag="route" value="ferry" speed="15" priority="1.0" dynamicPriority="0.7">
-			<!-- <specialization input="avoid_ferries" speed="0"/>  -->
+			<specialization input="avoid_ferries" speed="0"/> 
 		</road>
 
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
@@ -89,7 +102,9 @@
 		<avoid tag="access" value="no"/>
 		<avoid tag="motorcycle" value="no"/>
 		<avoid tag="motorcar" value="no"/>
-		<!--  <avoid tag="toll" value="yes"/>  -->
+		<avoid tag="toll" value="yes" decreasedPriority="1">
+			<specialization input="avoid_toll"/>
+		</avoid>
 	</routingProfile>
 
 

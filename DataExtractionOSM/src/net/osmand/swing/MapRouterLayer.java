@@ -597,8 +597,9 @@ public class MapRouterLayer implements MapPanelLayer {
 					rs[it++] = new BinaryMapIndexReader(raf, false);
 				}
 				String m = DataExtractionSettings.getSettings().getRouteMode();
+				String[] props = m.split("\\,");
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-				RoutingConfiguration config = builder.build(m, true);
+				RoutingConfiguration config = builder.build(props[0], props);
 				RoutingContext ctx = new RoutingContext(config);
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");

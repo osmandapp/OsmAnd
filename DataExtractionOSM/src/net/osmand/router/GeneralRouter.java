@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -11,6 +12,9 @@ import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
 public class GeneralRouter extends VehicleRouter {
 	public static final String USE_SHORTEST_WAY = "short_way";
+	public static final String AVOID_FERRIES = "avoid_ferries";
+	public static final String AVOID_TOLL = "avoid_toll";
+	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	
 	Map<String, Double> highwaySpeed ;
 	Map<String, Double> highwayPriorities ;
@@ -266,12 +270,27 @@ public class GeneralRouter extends VehicleRouter {
 		}
 		return 0;
 	}
+	
+	private void specialize(String specializationTag, Map<String, Double> m){
+		ArrayList<String> ks = new ArrayList<String>(m.keySet());
+		for(String s : ks){
+			if(s.startsWith(specializationTag +":")) {
+				m.put(s.substring((specializationTag +":").length()), m.get(s));
+			}
+		}
+	}
 
 	@Override
 	public GeneralRouter specialization(String specializationTag) {
 		GeneralRouter gr = new GeneralRouter(this);
+		gr.specialize(specializationTag, gr.highwayFuturePriorities);
+		gr.specialize(specializationTag, gr.highwayPriorities);
+		gr.specialize(specializationTag, gr.highwaySpeed);
+		gr.specialize(specializationTag, gr.avoid);
+		gr.specialize(specializationTag, gr.obstacles);
 		return gr;
 	}
 	
 
 }
+

@@ -539,7 +539,6 @@ public class RoutingHelper {
 		private final GPXRouteParams gpxRoute;
 		private final RouteCalculationResult previousRoute;
 		private RouteService service;
-		private boolean fastRoute;
 		private boolean interrupted = false;
 
 		public RouteRecalculationThread(String name, 
@@ -550,7 +549,7 @@ public class RoutingHelper {
 			this.gpxRoute = gpxRoute;
 			this.previousRoute = previousRoute;
 			service = settings.ROUTER_SERVICE.get();
-			fastRoute = settings.FAST_ROUTE_MODE.get();
+			
 		}
 		
 		public void stopCalculation(){
@@ -565,6 +564,7 @@ public class RoutingHelper {
 		@Override
 		public void run() {
 			boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+			boolean fastRoute = settings.FAST_ROUTE_MODE.get();
 			RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRoute, 
 					leftSide, this);
 			if (interrupted) {
