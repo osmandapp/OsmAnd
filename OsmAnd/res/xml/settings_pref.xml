@@ -5,20 +5,18 @@
 	<PreferenceCategory android:title="@string/profile_settings" android:key="profile_dep_cat">
 		<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
 
+		<!-- 
 		<PreferenceScreen android:key="appearance_settings" android:title="@string/map_settings" android:summary="@string/map_settings_descr">
 			<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
-			<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
-			<PreferenceCategory android:title="@string/pref_vector_map">
-				<ListPreference android:key="renderer" android:title="@string/renderers" android:summary="@string/renderers_descr"></ListPreference>
-				<ListPreference android:key="map_text_size" android:title="@string/map_text_size" android:summary="@string/map_text_size_descr"/>
-			</PreferenceCategory>
 		</PreferenceScreen>
+		 -->
 
 		<PreferenceScreen android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
 			<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
 			<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
 				android:key="fast_route_mode"></CheckBoxPreference>
 			<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
+			<ListPreference android:key="daynight_mode" android:title="@string/daynight" android:summary="@string/daynight_descr"></ListPreference>
 			<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
 				android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
 			<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>

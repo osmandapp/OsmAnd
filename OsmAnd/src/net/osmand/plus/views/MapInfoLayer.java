@@ -2,19 +2,33 @@ package net.osmand.plus.views;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import net.osmand.Algoritms;
+import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
+import net.osmand.render.RenderingRuleProperty;
+import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -34,6 +48,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -73,6 +88,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 	private LockInfoControl lockInfoControl;
 
+	private String ADDITIONAL_VECTOR_RENDERING_CATEGORY;
+
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
 		this.routeLayer = layer;
@@ -86,6 +103,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			scaleCoefficient *= 1.5f;
 		}
 		
+		ADDITIONAL_VECTOR_RENDERING_CATEGORY = map.getString(R.string.map_widget_vector_attributes);
 		paintText = new Paint();
 		paintText.setStyle(Style.FILL_AND_STROKE);
 		paintText.setColor(Color.BLACK);
@@ -232,28 +250,91 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	
 	private void registerAppearanceWidgets() {
-		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_ruler, 
-				"showRuler", view.getSettings().SHOW_RULER);
-		showRuler.setStateChangeListener(new Runnable() {
+		final MapInfoControlRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_renderer,
+				"renderer", view.getSettings().RENDERER);
+		final OsmandApplication app = view.getApplication();
+		vectorRenderer.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				ApplicationMode am = view.getSettings().getApplicationMode();
-				view.getSettings().SHOW_RULER.set(!view.getSettings().SHOW_RULER.get());
-				view.refreshMap();
+				Builder bld = new AlertDialog.Builder(view.getContext());
+				bld.setTitle(R.string.renderers);
+				Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
+				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
+				bld.setItems(items, new OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						String renderer = items[which];
+						RenderingRulesStorage loaded = app.getRendererRegistry().getRenderer(renderer);
+						if (loaded != null) {
+							view.getSettings().RENDERER.set(renderer);
+							app.getRendererRegistry().setCurrentSelectedRender(loaded);
+							app.getResourceManager().getRenderer().clearCache();
+							view.refreshMap(true);
+						} else {
+							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
+						}
+						createCustomRenderingProperties(loaded);
+					}
+				});
+				bld.show();
 			}
 		});
+		
 		
 		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_view_direction, 
 				"viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
 		displayViewDirections.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				ApplicationMode am = view.getSettings().getApplicationMode();
 				view.getSettings().SHOW_VIEW_ANGLE.set(!view.getSettings().SHOW_VIEW_ANGLE.get());
 				map.updateApplicationModeSettings();
 			}
 		});
 		
+		createCustomRenderingProperties(app.getRendererRegistry().getCurrentSelectedRenderer());
+	}
+	
+	private void createCustomRenderingProperties(RenderingRulesStorage renderer) {
+		String categoryName = ADDITIONAL_VECTOR_RENDERING_CATEGORY;
+		mapInfoControls.removeApperanceWidgets(categoryName);
+		final OsmandApplication app = view.getApplication();
+		for (final RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(), p.getName());
+			if(p.isBoolean()) {
+				final CommonPreference<Boolean> pref = view.getApplication().getSettings().getCustomRenderBooleanProperty(p.getAttrName());
+				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(0, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
+				w.setStateChangeListener(new Runnable() {
+					@Override
+					public void run() {
+						pref.set(!pref.get());
+						app.getResourceManager().getRenderer().clearCache();
+						view.refreshMap(true);
+					}
+				});
+				
+			} else {
+				final CommonPreference<String> pref = view.getApplication().getSettings().getCustomRenderProperty(p.getAttrName());
+				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(0, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
+				w.setStateChangeListener(new Runnable() {
+					@Override
+					public void run() {
+						Builder b = new AlertDialog.Builder(view.getContext());
+						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
+						b.setSingleChoiceItems(p.getPossibleValues(), i, new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								pref.set(p.getPossibleValues()[which]);
+								app.getResourceManager().getRenderer().clearCache();
+								view.refreshMap(true);
+								dialog.dismiss();
+							}
+						});
+						b.show();
+					}
+				});
+			}
+		}
 	}
 
 
@@ -336,6 +417,27 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// update and create controls
 		recreateControls();
 	}
+	
+	public Set<String> getSpecificVisibleCategories(Set<MapInfoControlRegInfo> m) {
+		Set<String> s = new LinkedHashSet<String>();
+		for(MapInfoControlRegInfo ms : m){
+			if(ms.getCategory() != null) {
+				s.add(ms.getCategory());
+			}
+		}
+		if(OsmandPlugin.getEnabledPlugin(OsmandExtraSettings.class) == null){
+			s.remove(ADDITIONAL_VECTOR_RENDERING_CATEGORY);
+		}
+		return s;
+	}
+	
+	public void fillAppearanceWidgets(Set<MapInfoControlRegInfo> widgets, String category, ArrayList<Object> registry) {
+		for(MapInfoControlRegInfo w : widgets ) {
+			if(Algoritms.objectEquals(w.getCategory(), category)) {
+				registry.add(w);
+			}
+		}
+	}
 
 	public void openViewConfigureDialog() {
 		final OsmandSettings settings = view.getSettings();
@@ -348,8 +450,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		list.addAll(mapInfoControls.getRight());
 		list.add(map.getString(R.string.map_widget_left_stack));
 		list.addAll(mapInfoControls.getLeft());
+
+		Set<MapInfoControlRegInfo> widgets = mapInfoControls.getAppearanceWidgets();
+		Set<String> cats = getSpecificVisibleCategories(widgets);
 		list.add(map.getString(R.string.map_widget_appearance));
-		list.addAll(mapInfoControls.getAppearanceWidgets());
+		fillAppearanceWidgets(widgets, null, list);
+		for(String cat : cats) {
+			list.add(cat);
+			fillAppearanceWidgets(widgets, cat, list);
+		}
 		
 
 		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
@@ -367,8 +476,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 				Object o = list.get(position);
 				if(o instanceof MapInfoControlRegInfo) {
 					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
+					
 					String s = mi.visibleCollapsed(mode)? " - " : "  ";
-					tv.setText(s +map.getString(mi.messageId) +s);
+					if(mi.message != null) {
+						tv.setText(s +mi.message +s);	
+					} else {
+						tv.setText(s +map.getString(mi.messageId) +s);
+					}
 					// Put the image on the TextView
 					if (mi.drawable != 0) {
 						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
@@ -377,29 +491,31 @@ public class MapInfoLayer extends OsmandMapLayer {
 						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
 					}
-					
-					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
+					final boolean selecteable = mi.selecteable();
 					ch.setOnCheckedChangeListener(null);
-					ch.setChecked(check);
+					if(!mi.selecteable()) {
+						ch.setVisibility(View.INVISIBLE);
+					} else {
+						boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
+						ch.setChecked(check);
+						ch.setVisibility(View.VISIBLE);
+					}
 					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 						@Override
 						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							if(!isChecked) {
-								if(mi.visible(mode) && mi.collapseEnabled(mode)) {
-									mapInfoControls.changeVisibility(mi, true, true);
-									ch.setChecked(true);
-								} else {
-									mapInfoControls.changeVisibility(mi, false, false);
-								}
-							} else {
-								mapInfoControls.changeVisibility(mi, true, false);
+							mapInfoControls.changeVisibility(mi);
+							if (selecteable) {
+								ch.setChecked(mi.visible(mode) || mi.visibleCollapsed(mode));
 							}
 							String s = mi.visibleCollapsed(mode) ? " - " : "  ";
-							tv.setText(s + map.getString(mi.messageId) + s);
+							if(mi.message != null) {
+								tv.setText(s +mi.message +s);	
+							} else {
+								tv.setText(s +map.getString(mi.messageId) +s);
+							}
 							recreateControls();
 						}
 					});
-					ch.setVisibility(View.VISIBLE);
 				} else {
 					tv.setText(o.toString());
 					tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
@@ -417,11 +533,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 				Object o = list.get(position);
 				if (o instanceof MapInfoControlRegInfo) {
 					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
+					final boolean selecteable = mi.selecteable();
 					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
-					if (check) {
-						mapInfoControls.changeVisibility(mi, false, false);
-					} else {
-						mapInfoControls.changeVisibility(mi, true, false);
+					if (check || selecteable) {
+						mapInfoControls.changeVisibility(mi);
 					}
 					recreateControls();
 				} else if(o.toString().equals(map.getString(R.string.map_widget_reset))) {

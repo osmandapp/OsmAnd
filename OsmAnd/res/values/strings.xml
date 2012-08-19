@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_widget_vector_attributes">Rendering attributes:</string>
+    <string name="map_widget_renderer">Rendering style</string>
     <string name="live_monitoring_mode_off">Start\n live tracking</string>
     <string name="live_monitoring_mode_on">Stop\n live tracking</string>
     <string name="position_on_map_descr">Choose location of position marker on the map</string>

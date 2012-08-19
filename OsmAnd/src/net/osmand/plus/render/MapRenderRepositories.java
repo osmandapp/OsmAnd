@@ -486,18 +486,23 @@ public class MapRenderRepositories {
 			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
 			renderingReq.setBooleanFilter(renderingReq.ALL.R_NIGHT_MODE, nightMode);
 			for (RenderingRuleProperty customProp : storage.PROPS.getCustomRules()) {
-				CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
-				String res = settings.get();
-				if (!Algoritms.isEmpty(res)) {
-					if (customProp.isString()) {
-						renderingReq.setStringFilter(customProp, res);
-					} else if (customProp.isBoolean()) {
-						renderingReq.setBooleanFilter(customProp, "true".equalsIgnoreCase(res));
-					} else {
-						try {
-							renderingReq.setIntFilter(customProp, Integer.parseInt(res));
-						} catch (NumberFormatException e) {
-							e.printStackTrace();
+				if (customProp.isBoolean()) {
+					CommonPreference<Boolean> pref = prefs.getCustomRenderBooleanProperty(customProp.getAttrName());
+					renderingReq.setBooleanFilter(customProp, pref.get());
+				} else {
+					CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
+					String res = settings.get();
+					if (!Algoritms.isEmpty(res)) {
+						if (customProp.isString()) {
+							renderingReq.setStringFilter(customProp, res);
+						} else if (customProp.isBoolean()) {
+							renderingReq.setBooleanFilter(customProp, "true".equalsIgnoreCase(res));
+						} else {
+							try {
+								renderingReq.setIntFilter(customProp, Integer.parseInt(res));
+							} catch (NumberFormatException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 				}
