@@ -884,7 +884,11 @@
   <string name="show_cameras">Zobrazovat dopravní radary</string>
   <string name="show_speed_limits">Zobrazovat rychlostní omezení</string>
   <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="tip_recent_changes_0_8_2_t">Změny ve verzi 0.8.2:
+\n\t* Vylepšená navigace
+\n\t* Dynamic map widgets↵
+\n\t* Tlačítko zámku se záznamem trasy
+\n\t* Nastavení mapy přesunuta na mapovou obrazovku</string>
   <string name="map_widget_top_text">Jméno ulice</string>
   <string name="map_widget_config">Nastavení</string>
   <string name="map_widget_map_select">Výběr mapy</string>
