@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 : \n\t- Native rendering pro všechna zařízení \n\t- Offline editace POI \n\t- Usnadnění \n\t- Oprava mnoha chyb "</string>
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -912,4 +912,24 @@
   <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="show_lanes">Zobrazit jízdní pruhy</string>
+<string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
+<string name="avoid_ferries">Vyhnout se trajektům</string>
+<string name="avoid_in_routing_title">Vyhnout se...</string>
+<string name="avoid_in_routing_descr">Vyhnout se trajektům, placeným a nezpevněným cestám</string>
+<string name="show_warnings_title">Zobrazit upozornění...</string>
+<string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary a retardéry</string>
+<string name="map_widget_show_ruler">Měřítko</string>
+<string name="map_widget_appearance">Ostatní:</string>
+<string name="map_widget_transparent">Průhledné ovládání</string>
+<string name="monitoring_mode_off">Záznam trasy do GPX</string>
+<string name="monitoring_mode_on">Zastavit záznam trasy</string>
+<string name="email">E-mail</string>
+<string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
+<string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
+<string name="layer_map_appearance">Nastavení obrazovky...</string>
+<string name="int_continuosly">Souvisle</string>
+<string name="gps_wakeup_interval">Interval zaměřování GPS: %s</string>
+<string name="map_widget_fluorescent">Svítivé barvy trasy</string>
+<string name="map_widget_view_direction">Zorné pole</string>
 </resources>
