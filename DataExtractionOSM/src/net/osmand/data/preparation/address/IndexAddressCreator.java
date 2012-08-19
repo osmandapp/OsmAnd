@@ -1,4 +1,4 @@
-package net.osmand.data.preparation;
+package net.osmand.data.preparation.address;
 
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
@@ -36,7 +36,12 @@ import net.osmand.data.MapObject;
 import net.osmand.data.Multipolygon;
 import net.osmand.data.Street;
 import net.osmand.data.WayBoundary;
-import net.osmand.data.preparation.DBStreetDAO.SimpleStreet;
+import net.osmand.data.preparation.AbstractIndexPartCreator;
+import net.osmand.data.preparation.BinaryFileReference;
+import net.osmand.data.preparation.BinaryMapIndexWriter;
+import net.osmand.data.preparation.DBDialect;
+import net.osmand.data.preparation.OsmDbAccessorContext;
+import net.osmand.data.preparation.address.DBStreetDAO.SimpleStreet;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.LatLon;

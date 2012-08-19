@@ -1,4 +1,4 @@
-package net.osmand.data.preparation;
+package net.osmand.data.preparation.address;
 
 import gnu.trove.set.hash.TLongHashSet;
 
