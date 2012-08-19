@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -18,7 +18,7 @@
 <string name="update_downlod_list">Torna a carregar la llista</string>
 <string name="starting_point_too_far">El punt d\'inici és massa lluny de la carretera més propera.</string>
 <string name="osmand_parking_time_limit_title">Indica el temps límit d\'aparcament</string>
-<string name="osmand_parking_choose_type">Tria el tipus d'aparcament</string>
+<string name="osmand_parking_choose_type">Tria el tipus d\'aparcament</string>
 <string name="avoid_unpaved">Evita les carreteres no pavimentades</string>
 <string name="avoid_in_routing_title">Evita…</string>
 <string name="monitoring_mode_on">Atura\n l\'enregistrament en GPX</string>
@@ -200,8 +200,8 @@
 <string name="use_transparent_map_theme">Tema transparent</string>
 <string name="map_widget_appearance">Miscel·lània</string>
 <string name="gps_wakeup_interval">Interval de despertament del GPS: %s</string>
-<string name="osmand_parking_event">Treu el cotxe de l'aparcament</string>
-<string name="rendering_attr_appMode_description">Optimització del mapa per cada Perfil d'usuari</string>
+<string name="osmand_parking_event">Treu el cotxe de l\'aparcament</string>
+<string name="rendering_attr_appMode_description">Optimització del mapa per cada Perfil d\'usuari</string>
 <string name="play_commands_of_currently_selected_voice">Reprodueix instruccions de la veu seleccionada</string>
 <string name="scroll_map_by_gestures_descr">Desplaçament del mapa per gests a la pantalla tàctil</string>
 <string name="scroll_map_by_gestures">Desplaçament natural del mapa</string>
@@ -209,6 +209,6 @@
 <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
 <string name="use_short_object_names">Utilitza els noms dels objectes</string>
 <string name="local_openstreetmap_were_uploaded">{0} PDI/errors van ser penjats</string>
-<string name="local_openstreetmap_settings">PDI/errors d'OSM desats localment</string>
-<string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/errors d'OSM de les bases de dades locals</string>
+<string name="local_openstreetmap_settings">PDI/errors d\'OSM desats localment</string>
+<string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/errors d\'OSM de les bases de dades locals</string>
 </resources>
