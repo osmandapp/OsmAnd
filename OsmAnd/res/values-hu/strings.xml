@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai: \n\t- Natív renderelő minden eszközre \n\t- Offline POI szerkesztés \n\t- Akadálymentesítés \n\t- Sok egyéb hibajavítás "</string>
   <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
   <string name="gpx_visibility_txt">Láthatóság</string>
@@ -931,4 +931,12 @@
 <string name="monitoring_mode_on">GPX ki</string>
 <string name="gps_wakeup_interval">GPS helymeghatározási időköz: %s</string>
 <string name="int_continuosly">Folyamatos</string>
+<string name="live_monitoring_mode_off">Élő útvonalrögzítés\n indítása</string>
+<string name="live_monitoring_mode_on">Élő útvonalrögzítés\n megállítása</string>
+<string name="layer_map_appearance">Képernyő beállítása...
+</string>
+<string name="show_lanes">Sávok megjelenítése</string>
+<string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
+<string name="avoid_ferries">Komp elkerülése</string>
+<string name="email">email</string>
 </resources>
