@@ -61,6 +61,8 @@ public class OsmandSettings {
 		T getModeValue(ApplicationMode m);
 		
 		String getId();
+		
+		void resetToDefault();
 	}
 	
 	// These settings are stored in SharedPreferences
@@ -119,6 +121,11 @@ public class OsmandSettings {
 		public void overrideDefaultValue(ApplicationMode newDefaultValue) {
 			throw new UnsupportedOperationException();
 		}
+		
+		@Override
+		public void resetToDefault() {
+			set(ApplicationMode.DEFAULT);
+		};
 
 		@Override
 		public boolean set(ApplicationMode val) {
@@ -291,6 +298,11 @@ public class OsmandSettings {
 		@Override
 		public String getId() {
 			return id;
+		}
+		
+		@Override
+		public void resetToDefault(){
+			set(getDefaultValue());
 		}
 
 		@Override
@@ -1195,9 +1207,7 @@ public class OsmandSettings {
 			}
 			RenderingRulesStorage loaded = ctx.getRendererRegistry().getRenderer(val);
 			if (loaded != null) {
-				ctx.getRendererRegistry().setCurrentSelectedRender(loaded);
 				super.setValue(prefs, val);
-				ctx.getResourceManager().getRenderer().clearCache();
 				return true;
 			}
 			return false;
@@ -1208,7 +1218,7 @@ public class OsmandSettings {
 	Map<String, CommonPreference<String>> customRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<String>>();
 	public CommonPreference<String> getCustomRenderProperty(String attrName){
 		if(!customRendersProps.containsKey(attrName)){
-			customRendersProps.put(attrName, new StringPreference("renderer_"+attrName, "").makeProfile());
+			customRendersProps.put(attrName, new StringPreference("nrenderer_"+attrName, "").makeProfile());
 		}
 		return customRendersProps.get(attrName);
 	}
@@ -1217,6 +1227,14 @@ public class OsmandSettings {
 		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
 		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
 		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+	}
+	
+	Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
+	public CommonPreference<Boolean> getCustomRenderBooleanProperty(String attrName){
+		if(!customRendersProps.containsKey(attrName)){
+			customBooleanRendersProps.put(attrName, new BooleanPreference("nrenderer_"+attrName, false).makeProfile());
+		}
+		return customBooleanRendersProps.get(attrName);
 	}
 	
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();

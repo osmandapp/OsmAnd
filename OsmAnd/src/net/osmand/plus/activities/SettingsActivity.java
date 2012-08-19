@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -19,7 +18,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -30,12 +28,12 @@ import net.osmand.plus.activities.CustomTitleBar.CustomTitleBarView;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
-import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
@@ -117,12 +115,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		seekBarPreferences.put(b.getId(), b);
 	}
 
-	public String getStringPropertyName(String propertyName, String defValue) {
+	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
 		try {
 			Field f = R.string.class.getField("rendering_attr_" + propertyName + "_name");
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				return getString(in);
+				return ctx.getString(in);
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -298,9 +296,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 		
 		// List preferences
-		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
-				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)},
-				new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+//		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
+//				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)},
+//				new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 		
 		registerListPreference(osmandSettings.MAP_SCREEN_ORIENTATION, screen, 
 				new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
@@ -344,32 +342,17 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.AUTO_FOLLOW_ROUTE, screen, entries, intValues);
 		
-		Float[] floatValues = new Float[] {0.6f, 0.8f, 1.0f, 1.2f, 1.5f};
-		entries = new String[floatValues.length];
-		for (int i = 0; i < floatValues.length; i++) {
-			entries[i] = (int) (floatValues[i] * 100) +" %";
-		}
-		registerListPreference(osmandSettings.MAP_TEXT_SIZE, screen, entries, floatValues);
-
 		entries = new String[RouteService.values().length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = RouteService.values()[i].getName();
 		}
 		registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
 		
-		
-		
 		entries = new String[ApplicationMode.values().length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = ApplicationMode.values()[i].toHumanString(this);
 		}
 		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
-		
-		Collection<String> rendererNames = getMyApplication().getRendererRegistry().getRendererNames();
-		entries = (String[]) rendererNames.toArray(new String[rendererNames.size()]);
-		registerListPreference(osmandSettings.RENDERER, screen, entries, entries);
-		
-		createCustomRenderingProperties(false);
 		
 		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
 		applicationModePreference.setOnPreferenceChangeListener(this);
@@ -411,38 +394,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
     }
 
-	private void createCustomRenderingProperties(boolean update) {
-		RenderingRulesStorage renderer = getMyApplication().getRendererRegistry().getCurrentSelectedRenderer();
-		PreferenceCategory cat = (PreferenceCategory) findPreference("custom_vector_rendering");
-		if (cat != null) {
-			cat.removeAll();
-			if (renderer != null) {
-				for (RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
-					CommonPreference<String> custom = getMyApplication().getSettings().getCustomRenderProperty(p.getAttrName());
-					ListPreference lp = new ListPreference(this);
-					lp.setOnPreferenceChangeListener(this);
-					lp.setKey(custom.getId());
-					lp.setTitle(getStringPropertyName(p.getAttrName(), p.getName()));
-					lp.setSummary(getStringPropertyDescription(p.getAttrName(), p.getDescription()));
-					cat.addPreference(lp);
-
-					LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
-					screenPreferences.put(custom.getId(), lp);
-					listPreferences.put(custom.getId(), custom);
-					listPrefValues.put(custom.getId(), vals);
-					String[] names = p.getPossibleValues();
-					for (int i = 0; i < names.length; i++) {
-						vals.put(names[i], names[i]);
-					}
-
-				}
-				if (update) {
-					updateAllSettings();
-				}
-			}
-		}
-
-	}
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
@@ -582,14 +533,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  ["
 							+ osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 				}
-			}
-			if (listPref.getId().equals(osmandSettings.RENDERER.getId())) {
-				if (changed) {
-					AccessibleToast.makeText(this, R.string.renderer_load_sucess, Toast.LENGTH_SHORT).show();
-				} else {
-					AccessibleToast.makeText(this, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
-				}
-				createCustomRenderingProperties(true);
 			}
 		} else if (preference == applicationDir) {
 			warnAboutChangingStorage((String) newValue);

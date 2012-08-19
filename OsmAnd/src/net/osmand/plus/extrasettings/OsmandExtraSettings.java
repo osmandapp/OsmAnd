@@ -1,19 +1,26 @@
 package net.osmand.plus.extrasettings;
 
 
+import java.util.Arrays;
+
 import net.osmand.Version;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoControls;
+import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
 import net.osmand.plus.voice.CommandPlayer;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.media.AudioManager;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -50,17 +57,52 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		return app.getString(R.string.extra_settings);
 	}
 	@Override
-	public void registerLayers(MapActivity activity) {
+	public void registerLayers(final MapActivity activity) {
 		registerControls = true;
 		final OsmandMapTileView view = activity.getMapView();
 		final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
+		
+		final OsmandPreference<Float> textSizePref = view.getSettings().MAP_TEXT_SIZE;
+		final MapInfoControlRegInfo textSize = mapInfoControls.registerAppearanceWidget(0, R.string.map_text_size, 
+				"text_size", textSizePref);
+		textSize.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				final Float[] floatValues = new Float[] {0.6f, 0.8f, 1.0f, 1.2f, 1.5f};
+				String[] entries = new String[floatValues.length];
+				for (int i = 0; i < floatValues.length; i++) {
+					entries[i] = (int) (floatValues[i] * 100) +" %";
+				}
+				Builder b = new AlertDialog.Builder(view.getContext());
+				int i = Arrays.binarySearch(floatValues, textSizePref.get());
+				b.setSingleChoiceItems(entries, i, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						textSizePref.set(floatValues[which]);
+						app.getResourceManager().getRenderer().clearCache();
+						view.refreshMap(true);
+						dialog.dismiss();
+					}
+				});
+				b.show();
+			}
+		});
+		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_ruler, 
+				"showRuler", view.getSettings().SHOW_RULER);
+		showRuler.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				view.getSettings().SHOW_RULER.set(!view.getSettings().SHOW_RULER.get());
+				view.refreshMap();
+			}
+		});
+		
 		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
 				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
 		transparent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				ApplicationMode am = view.getSettings().getApplicationMode();
 				view.getSettings().TRANSPARENT_MAP_THEME.set(!view.getSettings().TRANSPARENT_MAP_THEME.get());
 				mapInfoLayer.recreateControls();
 			}
@@ -71,9 +113,31 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		fluorescent.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				ApplicationMode am = view.getSettings().getApplicationMode();
 				view.getSettings().FLUORESCENT_OVERLAYS.set(!view.getSettings().FLUORESCENT_OVERLAYS.get());
 				view.refreshMap();
+			}
+		});
+		
+		final CommonPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
+		final MapInfoControlRegInfo posMap = mapInfoControls.registerAppearanceWidget(0, R.string.position_on_map, 
+				"position_on_map", textSizePref);
+		posMap.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				String[]  entries = new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) };
+				final Integer[] vals = new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT };
+				Builder b = new AlertDialog.Builder(view.getContext());
+				int i = Arrays.binarySearch(vals, posPref.get());
+				b.setSingleChoiceItems(entries, i, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						posPref.set(vals[which]);
+						activity.updateApplicationModeSettings();
+						view.refreshMap(true);
+						dialog.dismiss();
+					}
+				});
+				b.show();
 			}
 		});
 	}
@@ -124,11 +188,13 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		}
 		
 		
-		PreferenceScreen appearance = (PreferenceScreen) screen.findPreference("appearance_settings");
-		PreferenceCategory vectorSettings = new PreferenceCategory(app);
-		vectorSettings.setTitle(R.string.pref_vector_rendering);
-		vectorSettings.setKey("custom_vector_rendering");
-		appearance.addPreference(vectorSettings);
-
+//		cat = new PreferenceCategory(app);
+//		cat.setTitle(R.string.extra_settings);
+//		PreferenceScreen routing = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS);		
+//		routing.addPreference(cat);
+//		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
+//				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
+//				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
+//				R.string.position_on_map_descr));	
 	}
 }
