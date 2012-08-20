@@ -540,7 +540,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="ttsvoice">TTS Voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
-	<string name="map_text_size">Text size</string>
+	<string name="map_text_size">Map font size</string>
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
 	<string name="tip_recent_changes">Recent changes</string>
