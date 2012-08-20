@@ -916,8 +916,8 @@
   <string name="bg_service_interval">GPS bekapcsolási időköz:</string>
   <string name="screen_is_locked">Képernyőzár feloldása a képernyőzár ikonnal</string>
   <string name="bg_service_screen_unlock">Képernyőzár ki</string>
-  <string name="bg_service_sleep_mode_off">Alvó mód bekapcsolása</string>
-  <string name="bg_service_sleep_mode_on">Alvó mód kikapcsolása</string>
+  <string name="bg_service_sleep_mode_off">Alvó mód\n bekapcsolása</string>
+  <string name="bg_service_sleep_mode_on">Alvó mód\n kikapcsolása</string>
 <string name="avoid_in_routing_title">Elkerülés..</string>
 <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
 <string name="show_warnings_title">Riasztások megjelenítése</string>
