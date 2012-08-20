@@ -1069,10 +1069,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	public void switchRotateMapMode(){
 		int vl = (settings.ROTATE_MAP.get() + 1) % 3;
-		Location loc = getLastKnownLocation();
-		if(vl == OsmandSettings.ROTATE_MAP_BEARING && (loc == null || !loc.hasBearing())){
-			vl = (vl + 1) % 3;
-		}
 		settings.ROTATE_MAP.set(vl);
 		registerUnregisterSensor(getLastKnownLocation(), false);
 		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
