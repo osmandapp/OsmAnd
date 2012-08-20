@@ -1,14 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    -->
-  <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
   <string name="left_side_navigation">Left-hand driving</string>
   <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
   <string name="download_link_and_local_description">Click here to download or update offline data.\nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
@@ -168,7 +159,6 @@
   <string name="amenity_type_wikiosm">विकिपेडिया (ऑफलाइन)</string>
   <string name="amenity_type_user_defined">User defined</string>
   <string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Profile Specific Settings</string>
   <string name="settings_preset">User Profile</string>
   <string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
@@ -194,7 +184,6 @@
   <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
   <string name="tip_osm_improve">Improving OSM Data</string>
   <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
-  <!-- end of string changes for new Preferences structure -->
   <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
   <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">इच्छित स्थळ निवडा</string>
@@ -251,7 +240,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Save route as GPX track</string>
   <string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
-  <string name="filename_input">"फाइलचे नाव : "</string>
+  <string name="filename_input">फाइलचे नाव : </string>
   <string name="file_with_name_already_exist">File with same name already exists.</string>
   <string name="default_buttons_save">Save</string>
   <string name="menu_save_directions">Save directions</string>
@@ -455,7 +444,7 @@
   <string name="select_all">सर्व निवडा</string>
   <string name="reload">Refresh</string>
   <string name="fast_route_mode">वेगवान रस्ता</string>
-  <string name="fast_route_mode_descr">"निवडा सर्वात वेगवान रस्त्यासाठी किंवा निवड काढा सर्वात जवळच्या रस्त्यासाठी"</string>
+  <string name="fast_route_mode_descr">निवडा सर्वात वेगवान रस्त्यासाठी किंवा निवड काढा सर्वात जवळच्या रस्त्यासाठी </string>
   <string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
   <string name="context_menu_item_download_map">नकाशा डाउनलोड करा</string>
   <string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
@@ -534,7 +523,7 @@
   <string name="gps_provider">जीपीइस</string>
   <string name="int_seconds">सेकंद</string>
   <string name="int_min">मि.</string>
-  <string name="background_service_int_descr">"Set wake-up interval used by background "</string>
+  <string name="background_service_int_descr">Set wake-up interval used by background </string>
   <string name="background_service_int">Wake-up interval</string>
   <string name="background_service_provider_descr">Choose location provider while running in background mode</string>
   <string name="background_service_provider">Location provider</string>
@@ -552,7 +541,7 @@
   <string name="voice_data_not_supported">Unsupported version of voice data</string>
   <string name="voice_data_corrupted">Specified voice data is corrupted</string>
   <string name="voice_data_unavailable">Selected voice data is not available</string>
-  <string name="stop_routing">मार्गदर्शन थांबवा</string>
+  <string name="stop_routing">मार्गदर्शन थांबवा.</string>
   <string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
   <string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
   <string name="unzipping_file">Unzipping file…</string>
@@ -711,7 +700,7 @@
   <string name="show_view_angle_descr">Display viewing direction on the map</string>
   <string name="show_view_angle">Display viewing direction</string>
   <string name="stop_navigation">इच्छित स्थळ काढून टाका.</string>
-  <string name="navigate_to_point">इच्छित स्थळ म्हणून निवडा</string>
+  <string name="navigate_to_point">इच्छित स्थळ म्हणून निवडा.</string>
   <string name="map_view_3d_descr">Enable 3D view of the map</string>
   <string name="map_view_3d">Map View 3D</string>
   <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
@@ -843,7 +832,15 @@
   <string name="route_kr">Keep right</string>
   <string name="save_route_as_gpx">Save route as GPX</string>
   <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 : "</string>
+  <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
+\n\t* More precise routes (a bit slower)
+\n\t* Smart and fast Route recalculation
+\n\t* Direction by lanes
+\n\t* Information about speed limits, speed cams, and speed bumps 
+\n\t* Improved voice guidance on highways
+\n\t* Parking plugin (\'Where is my car parked at?\')
+\n\t* Enable/disable logging widget
+ </string>
   <string name="gpxup_public">Public</string>
   <string name="gpxup_identifiable">Identifiable</string>
   <string name="gpxup_trackable">Trackable</string>
@@ -890,7 +887,12 @@
   <string name="show_cameras">Show speed cameras</string>
   <string name="show_speed_limits">Show speed limits</string>
   <string name="avoid_toll_roads">Avoid toll roads</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
+ \n\t* Improved Routing
+ \n\t* Dynamic map widgets
+ \n\t* Lock screen button with logging services 
+ \n\t* Map settings moved to map screen
+ </string>
   <string name="map_widget_top_text">Street name</string>
   <string name="map_widget_config">Configuration</string>
   <string name="map_widget_map_select">Map selection</string>
