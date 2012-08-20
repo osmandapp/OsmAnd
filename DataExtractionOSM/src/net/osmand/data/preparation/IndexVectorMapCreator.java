@@ -149,72 +149,96 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					}
 				}
 
-				// That check is not strictly needed on preproccessing step because client can handle it
-				Node nodeOut = checkOuterWaysEncloseInnerWays(completedRings, entities);
-				if (nodeOut != null) {
-					logMapDataWarn.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" + //$NON-NLS-1$
-							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
-				}
+				
 
-				List<Node> outerWaySrc = new ArrayList<Node>();
-				List<List<Node>> innerWays = new ArrayList<List<Node>>();
-
-				TIntArrayList typeToSave = new TIntArrayList(typeUse);
-				long baseId = 0;
-				for (List<Way> l : completedRings) {
+				
+				ArrayList<List<Way>> innerRings = new ArrayList<List<Way>>();
+				ArrayList<List<Way>> outerRings = new ArrayList<List<Way>>();
+				
+				for(List<Way> l : completedRings) {
 					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-					if (!innerType && !outerWaySrc.isEmpty()) {
-						logMapDataWarn.warn("Map bug: Multipoligon contains many 'outer' borders.\n" + //$NON-NLS-1$
-								"Multipolygon id : " + e.getId() + ", outer way id : " + l.get(0).getId()); //$NON-NLS-1$
-						return;
-					}
-					List<Node> toCollect;
 					if (innerType) {
-						toCollect = new ArrayList<Node>();
-						innerWays.add(toCollect);
+						innerRings.add(l);
 					} else {
-						toCollect = outerWaySrc;
+						outerRings.add(l);
 					}
+				}
+				
+				// Add a new multipolygon relation to the database for each outer ring
+				for (List<Way> outerRing : outerRings ) {
+					// TODO
+					// It's silly to split the outer and inner rings before, and now merge them,
+					// but I'm still trying to understand part of the following code
+					// until than, this works fine
+					completedRings = new ArrayList<List<Way>>();
+					completedRings.add(outerRing);
+					completedRings.addAll(innerRings);
+					
+					List<Node> outerWaySrc = new ArrayList<Node>();
+					List<List<Node>> innerWays = new ArrayList<List<Node>>();
 
-					for (Way way : l) {
-						toCollect.addAll(way.getNodes());
-						if (!innerType) {
-							TIntArrayList out = multiPolygonsWays.put(way.getId(), typeToSave);
-							if(out == null){
-								baseId = -way.getId();
+					TIntArrayList typeToSave = new TIntArrayList(typeUse);
+					long baseId = 0;
+					
+					for (List<Way> l : completedRings) {
+						boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
+						List<List<Way>> checkInside = new ArrayList<List<Way>>();
+						checkInside.add(outerRing);
+						checkInside.add(l);
+						// Filter out the inner ways that are not in this outer way
+						Node nodeOut = checkOuterWaysEncloseInnerWays(checkInside, entities);
+						if (nodeOut != null) {
+							continue;
+						}
+						
+						List<Node> toCollect;
+						if (innerType) {
+							toCollect = new ArrayList<Node>();
+							innerWays.add(toCollect);
+						} else {
+							toCollect = outerWaySrc;
+						}
+
+						for (Way way : l) {
+							toCollect.addAll(way.getNodes());
+							if (!innerType) {
+								TIntArrayList out = multiPolygonsWays.put(way.getId(), typeToSave);
+								if(out == null){
+									baseId = -way.getId();
+								}
 							}
 						}
 					}
-				}
-				if(baseId == 0){
-					// use base id as well?
-					baseId = notUsedId --;
-				}
-				nextZoom: for (int level = 0; level < mapZooms.size(); level++) {
-					renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
-							tempNameUse);
-					if (typeUse.isEmpty()) {
-						continue;
+					if(baseId == 0){
+						// use base id as well?
+						baseId = notUsedId --;
 					}
-					long id = convertBaseIdToGeneratedId(baseId, level);
-					// simplify route
-					List<Node> outerWay = outerWaySrc;
-					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
-					if (zoomToSimplify < 15) {
-						outerWay = simplifyCycleWay(outerWay, zoomToSimplify, zoomWaySmothness);
-						if (outerWay == null) {
-							continue nextZoom;
+					nextZoom: for (int level = 0; level < mapZooms.size(); level++) {
+						renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
+								tempNameUse);
+						if (typeUse.isEmpty()) {
+							continue;
 						}
-						List<List<Node>> newinnerWays = new ArrayList<List<Node>>();
-						for (List<Node> ls : innerWays) {
-							ls = simplifyCycleWay(ls, zoomToSimplify, zoomWaySmothness);
-							if (ls != null) {
-								newinnerWays.add(ls);
+						long id = convertBaseIdToGeneratedId(baseId, level);
+						// simplify route
+						List<Node> outerWay = outerWaySrc;
+						int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
+						if (zoomToSimplify < 15) {
+							outerWay = simplifyCycleWay(outerWay, zoomToSimplify, zoomWaySmothness);
+							if (outerWay == null) {
+								continue nextZoom;
 							}
+							List<List<Node>> newinnerWays = new ArrayList<List<Node>>();
+							for (List<Node> ls : innerWays) {
+								ls = simplifyCycleWay(ls, zoomToSimplify, zoomWaySmothness);
+								if (ls != null) {
+									newinnerWays.add(ls);
+								}
+							}
+							innerWays = newinnerWays;
 						}
-						innerWays = newinnerWays;
+						insertBinaryMapRenderObjectIndex(mapTree[level], outerWay, innerWays, namesUse, id, true, typeUse, addtypeUse, true);
 					}
-					insertBinaryMapRenderObjectIndex(mapTree[level], outerWay, innerWays, namesUse, id, true, typeUse, addtypeUse, true);
 				}
 			}
 		}
