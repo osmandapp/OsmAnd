@@ -18,7 +18,6 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
@@ -59,11 +58,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public static final String INTENT_KEY_SETTINGS_SCREEN = "INTENT_KEY_SETTINGS_SCREEN";
 	public static final int SCREEN_GENERAL_SETTINGS = 1;
 	public static final int SCREEN_NAVIGATION_SETTINGS = 2;
-	public static final int SCREEN_MONITORING_SETTINGS = 3;
 
 	public static final String SCREEN_ID_GENERAL_SETTINGS = "general_settings";
 	public static final String SCREEN_ID_NAVIGATION_SETTINGS = "routing_settings";
-	public static final String SCREEN_ID_MONITORING_SETTINGS = "monitor_settings";
 	public static final String MORE_VALUE = "MORE_VALUE";
 
 	private Preference bidforfix;
@@ -72,9 +69,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference showAlarms;
 
 	private EditTextPreference applicationDir;
-	private ListPreference applicationModePreference;
+//	private ListPreference applicationModePreference;
 
-	private ListPreference dayNightModePreference;
 	private ListPreference routerServicePreference;
 
 	public ProgressDialog progressDlg;
@@ -305,12 +301,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		
 		
-		entries = new String[DayNightMode.values().length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = DayNightMode.values()[i].toHumanString(this);
-		}
-		registerListPreference(osmandSettings.DAYNIGHT_MODE, screen, entries, DayNightMode.values());
-		
 		MetricsConstants[] mvls  = new MetricsConstants[] {MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.MILES_AND_FOOTS}; //MetricsConstants.values();
 		entries = new String[mvls.length];
 		for(int i=0; i<entries.length; i++){
@@ -348,17 +338,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
 		
-		entries = new String[ApplicationMode.values().length];
-		for(int i=0; i<entries.length; i++){
-			entries[i] = ApplicationMode.values()[i].toHumanString(this);
-		}
-		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
-		
-		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
-		applicationModePreference.setOnPreferenceChangeListener(this);
+//		entries = new String[ApplicationMode.values().length];
+//		for(int i=0; i<entries.length; i++){
+//			entries[i] = ApplicationMode.values()[i].toHumanString(this);
+//		}
+//		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
+//		
+//		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
+//		applicationModePreference.setOnPreferenceChangeListener(this);
 
-		dayNightModePreference = (ListPreference) screen.findPreference(osmandSettings.DAYNIGHT_MODE.getId());
-		dayNightModePreference.setOnPreferenceChangeListener(this);
+		
 		routerServicePreference = (ListPreference) screen.findPreference(osmandSettings.ROUTER_SERVICE.getId());
 		routerServicePreference.setOnPreferenceChangeListener(this);
 
@@ -382,8 +371,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				pref = SCREEN_ID_GENERAL_SETTINGS;
 			} else if(s == SCREEN_NAVIGATION_SETTINGS){
 				pref = SCREEN_ID_NAVIGATION_SETTINGS;
-			} else if(s == SCREEN_MONITORING_SETTINGS){
-				pref = SCREEN_ID_MONITORING_SETTINGS;
 			} 
 			if(pref != null){
 				Preference toOpen = screen.findPreference(pref);
@@ -473,10 +460,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 		updateApplicationDirTextAndSummary();
 
-		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
-				+ osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
-		dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  ["
-				+ osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
+//		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
+//				+ osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 	}
 
@@ -529,9 +514,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					Intent intent = getIntent();
 					finish();
 					startActivity(intent);
-				} else if (listPref.getId().equals(osmandSettings.DAYNIGHT_MODE.getId())) {
-					dayNightModePreference.setSummary(getString(R.string.daynight_descr) + "  ["
-							+ osmandSettings.DAYNIGHT_MODE.get().toHumanString(this) + "]");
 				}
 			}
 		} else if (preference == applicationDir) {
@@ -653,7 +635,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		// customize the sub-preference title according the selected profile
 		String title = "";
 		if (preference.getKey() != null && preference instanceof PreferenceScreen
-				&& ((PreferenceCategory) findPreference("profile_dep_cat")).findPreference(preference.getKey()) != null) {
+				&& SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS.equals(preference.getKey())) {
 			PreferenceScreen scr = (PreferenceScreen) preference;
 			title = scr.getTitle().toString();
 			if (title.startsWith("-")) {

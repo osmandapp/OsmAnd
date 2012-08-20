@@ -13,8 +13,8 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -26,6 +26,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -44,18 +45,23 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MapInfoLayer extends OsmandMapLayer {
 
@@ -260,7 +266,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 				bld.setTitle(R.string.renderers);
 				Collection<String> rendererNames = app.getRendererRegistry().getRendererNames();
 				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
-				bld.setItems(items, new OnClickListener() {
+				int i = -1;
+				for(int j = 0; j< items.length; j++) {
+					if(items[j].equals(app.getRendererRegistry().getCurrentSelectedRenderer().getName())) {
+						 i = j;
+						 break;
+					}
+				}
+				bld.setSingleChoiceItems(items, i, new OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -275,12 +288,37 @@ public class MapInfoLayer extends OsmandMapLayer {
 							AccessibleToast.makeText(app, R.string.renderer_load_exception, Toast.LENGTH_SHORT).show();
 						}
 						createCustomRenderingProperties(loaded);
+						dialog.dismiss();
 					}
 				});
 				bld.show();
 			}
 		});
 		
+		final MapInfoControlRegInfo dayNight = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_day_night,
+				"dayNight", view.getSettings().DAYNIGHT_MODE);
+		dayNight.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				Builder bld = new AlertDialog.Builder(view.getContext());
+				bld.setTitle(R.string.daynight);
+				final String[] items = new String[OsmandSettings.DayNightMode.values().length];
+				for (int i = 0; i < items.length; i++) {
+					items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(map);
+				}
+				int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
+				bld.setSingleChoiceItems(items,  i, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						view.getSettings().DAYNIGHT_MODE.set(OsmandSettings.DayNightMode.values()[which]);
+						app.getResourceManager().getRenderer().clearCache();
+						view.refreshMap(true);
+						dialog.dismiss();
+					}
+				});
+				bld.show();
+			}
+		});
 		
 		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_view_direction, 
 				"viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
@@ -443,7 +481,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final OsmandSettings settings = view.getSettings();
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
-		list.add(map.getString(R.string.map_widget_reset));
+		String appMode = settings.getApplicationMode().toHumanString(view.getContext());
+		list.add(map.getString(R.string.map_widget_reset) + " (" + appMode  +") ");
 		list.add(map.getString(R.string.map_widget_top_stack));
 		list.addAll(mapInfoControls.getTop());
 		list.add(map.getString(R.string.map_widget_right_stack));
@@ -462,7 +501,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 
 		// final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
-		Builder b = new AlertDialog.Builder(map);
+		
 		final ApplicationMode mode = settings.getApplicationMode();
 		ListAdapter listAdapter = new ArrayAdapter<Object>(map, R.layout.layers_list_activity_item, R.id.title, list) {
 			@Override
@@ -526,11 +565,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 				return v;
 			}
 		};
-
-		b.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+		Builder b = new AlertDialog.Builder(map);
+		b.setAdapter(listAdapter, new OnClickListener() {
+			
 			@Override
-			public void onClick(DialogInterface dialog, int position) {
-				Object o = list.get(position);
+			public void onClick(DialogInterface dialog, int which) {
+				Object o = list.get(which);
 				if (o instanceof MapInfoControlRegInfo) {
 					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
 					final boolean selecteable = mi.selecteable();
@@ -545,7 +585,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 				}
 			}
 		});
-
 		final AlertDialog dlg = b.create();
 		// listener.setDialog(dlg);
 		dlg.setCanceledOnTouchOutside(true);

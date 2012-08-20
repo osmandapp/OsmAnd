@@ -600,6 +600,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				String[] props = m.split("\\,");
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
 				RoutingConfiguration config = builder.build(props[0], props);
+				config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
 				RoutingContext ctx = new RoutingContext(config);
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");

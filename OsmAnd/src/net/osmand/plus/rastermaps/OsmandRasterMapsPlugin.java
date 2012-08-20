@@ -234,14 +234,11 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		PreferenceGroup general = (PreferenceGroup) screen.findPreference("global_settings");
-
 		PreferenceGroup grp = screen.getPreferenceManager().createPreferenceScreen(activity);
 		grp.setSummary(R.string.online_map_settings_descr);
 		grp.setTitle(R.string.online_map_settings);
 		grp.setKey("map_settings");
-		//grp.setOrder(0);
-		general.addPreference(grp);
+		screen.addPreference(grp);
 		
 
 		OnPreferenceChangeListener listener = createPreferenceListener(activity);

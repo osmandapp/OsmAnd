@@ -62,7 +62,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 		grp.setTitle(R.string.accessibility_preferences);
 		grp.setSummary(R.string.accessibility_preferences_descr);
 		grp.setKey("accessibility_preferences");
-		((PreferenceCategory)screen.findPreference("global_settings")).addPreference(grp);
+		screen.addPreference(grp);
 
 		String[] entries = new String[AccessibilityMode.values().length];
 		for (int i = 0; i < entries.length; i++) {
