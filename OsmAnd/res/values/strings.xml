@@ -1132,4 +1132,5 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 <string name="route">Route</string>
 <string name="directionsTo">Directions To</string>
 
+<string name="enter_address">Enter address</string>
 </resources>

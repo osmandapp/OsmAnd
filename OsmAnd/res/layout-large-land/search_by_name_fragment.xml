@@ -12,13 +12,12 @@
 		    android:layout_weight="1"
 		    android:hint="@string/enter_address"
 		    android:imeOptions="actionDone"
-		    android:text=""
-		    android:visibility="gone" />
+		    android:text="" />
 
 		<Button android:text="@string/search_POI_level_btn"   
 				android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="0dp" android:layout_weight="1" android:layout_marginRight="5dp"/>
 		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
-		<!--
+		<!-- 
 		<ImageButton android:src="@android:drawable/ic_input_get" android:text="@string/show_poi_on_map" android:id="@+id/ShowFilter"
 				android:layout_height="wrap_content" android:layout_width="wrap_content" android:contentDescription="@string/search_poi_filter"/>
 		<ImageButton android:src="@android:drawable/ic_dialog_map" android:contentDescription="@string/search_shown_on_map"

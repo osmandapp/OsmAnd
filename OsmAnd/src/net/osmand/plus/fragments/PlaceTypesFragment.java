@@ -19,18 +19,19 @@ public class PlaceTypesFragment extends ListFragment {
     public static final String FAVORITES_KEY = "Favorites";
     public static final String ADDRESS_SEARCH_KEY = "Address";
     
-    public static TreeMap<String, Integer> places;
+    public static TreeMap<String, String> places;
     
     boolean mDualPane;
     int mCurCheckPosition = 0;
 
     static {
-        places = new TreeMap<String, Integer>();
-        places.put("Food", R.string.poi_filter_food_shop);
-        places.put("Fuel", R.string.poi_filter_fuel);
+        // TODO(natashaj): Remove hard-coding once we support adding / removing filters
+        places = new TreeMap<String, String>();
+        places.put("Food", "user_food_shop");
+        places.put("Fuel", "user_fuel");
     }
     
-    public static Map<String, Integer> getPlacesMap() {
+    public static Map<String, String> getPlacesMap() {
         return places;
     }
     
@@ -82,7 +83,7 @@ public class PlaceTypesFragment extends ListFragment {
         ArrayList<String> placesList = new ArrayList<String>();
         placesList.add(PlaceTypesFragment.FAVORITES_KEY);
         placesList.add(PlaceTypesFragment.ADDRESS_SEARCH_KEY);
-        for (Map.Entry<String, Integer> entry : places.entrySet()) {
+        for (Map.Entry<String, String> entry : places.entrySet()) {
             placesList.add(entry.getKey());
         }
         return placesList;

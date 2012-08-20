@@ -91,13 +91,13 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 
 	private Button searchPOILevel;
 	//private ImageButton showOnMap;
-	private ImageButton showFilter;
+	//private ImageButton showFilter;
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
 	private ListAdapter listAdapter;
 	private TextView searchArea;
 	private EditText searchFilter;
-	private View searchFilterLayout;
+	//private View searchFilterLayout;
 	
 	private boolean searchNearBy = false;
 	private Location location = null; 
@@ -126,26 +126,29 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	            Bundle savedInstanceState) {
             navigationInfo = new NavigationInfo(getContext());
-            View view = inflater.inflate(R.layout.search_poi_fragment, null);
+            
+            View view;
+            String filterId;
+            if (getShownPlaceType() == PlaceTypesFragment.ADDRESS_SEARCH_KEY) {
+                // Set up this fragment to act as 'search by name' POI filter 
+                filterId = SearchByNameFilter.FILTER_ID;
+                view = inflater.inflate(R.layout.search_by_name_fragment, null);
+            } else {
+                filterId = PlaceTypesFragment.getPlacesMap().get(getShownPlaceType());
+                view = inflater.inflate(R.layout.search_poi_fragment, null);
+            }
 		
             //uiHandler = new Handler();
             searchPOILevel = (Button) view.findViewById(R.id.SearchPOILevelButton);
             searchArea = (TextView) view.findViewById(R.id.SearchAreaText);
             searchFilter = (EditText) view.findViewById(R.id.SearchFilter);
-            searchFilterLayout = view.findViewById(R.id.SearchFilterLayout);
+            //searchFilterLayout = view.findViewById(R.id.SearchFilterLayout);
             //showOnMap = (ImageButton) view.findViewById(R.id.ShowOnMap);
-            showFilter = (ImageButton) view.findViewById(R.id.ShowFilter);
+            //showFilter = (ImageButton) view.findViewById(R.id.ShowFilter);
             directionPath = createDirectionPath();
 		
             settings = ((OsmandApplication) getApplication()).getSettings();
 
-            String filterId = null;
-            if (getShownPlaceType() == PlaceTypesFragment.ADDRESS_SEARCH_KEY) {
-                // Set up this fragment to act as 'search by name' POI filter 
-                filterId = SearchByNameFilter.FILTER_ID;
-            } else {
-                filterId = getActivity().getString((int)(PlaceTypesFragment.getPlacesMap().get(getShownPlaceType())));
-            }
             getActivity().getIntent().putExtra(SearchPOIActivity.AMENITY_FILTER, filterId);
 
             searchPOILevel.setOnClickListener(new OnClickListener() {
@@ -270,6 +273,10 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
             return (ListView) view.findViewById(R.id.list);
         }
         
+        private View findViewById(int id) {
+            return getView().findViewById(id);
+        }
+        
         private void searchAddress() {
             String query = searchFilter.getText().toString();
             if (query.length() < 2 && (isNameFinderFilter() || isSearchByNameFilter())) {
@@ -289,7 +296,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
                 runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
             } else if(isSearchByNameFilter() && 
                     !Algoritms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
-                showFilter.setVisibility(View.INVISIBLE);
+                //showFilter.setVisibility(View.INVISIBLE);
                 filter.clearPreviousZoom();
                 showPoiCategoriesByNameFilter(query, location);
                 ((SearchByNameFilter) filter).setQuery(query);
@@ -357,7 +364,8 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 	    if(filter != null) {
 	        filter.clearNameFilter();
 	    }
-		
+
+	    /*
 	    if(isNameFinderFilter()){
 	        showFilter.setVisibility(View.GONE);
 	        searchFilterLayout.setVisibility(View.VISIBLE);
@@ -366,10 +374,11 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 	        searchFilterLayout.setVisibility(View.VISIBLE);
 	    } else {
 	        showFilter.setVisibility(View.VISIBLE);
-	        //showOnMap.setEnabled(filter != null);
+	        showOnMap.setEnabled(filter != null);
 	    }
-	    //showOnMap.setVisibility(View.VISIBLE);
-		
+	    showOnMap.setVisibility(View.VISIBLE);
+	    */
+	    
 	    if (filter != null) {
 	        searchArea.setText(filter.getSearchArea());
 	        updateSearchPoiTextButton();
@@ -396,7 +405,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 			if(!map.isEmpty()){
 				PoiFilter filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(PoiFilter.CUSTOM_FILTER_ID);
 				if(filter != null){
-					showFilter.setVisibility(View.VISIBLE);
+					//showFilter.setVisibility(View.VISIBLE);
 					filter.setMapToAccept(map);
 				}
 				
@@ -634,8 +643,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 				Math.max(16, z), name, name, amenity); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(getActivity());
 	}
-	
-	
+		
 	static class SearchAmenityRequest {
 		private static final int SEARCH_AGAIN = 1;
 		private static final int NEW_SEARCH_INIT = 2;
@@ -670,7 +678,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 		@Override
 		protected void onPreExecute() {
 		        // TODO(natashaj)
-			//findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
 			//findViewById(R.id.SearchAreaText).setVisibility(View.GONE);
 			searchPOILevel.setEnabled(false);
 			if(request.type == SearchAmenityRequest.NEW_SEARCH_INIT){
@@ -689,7 +697,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 		@Override
 		protected void onPostExecute(List<Amenity> result) {
 		        // TODO(natashaj)
-			//findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
 			//findViewById(R.id.SearchAreaText).setVisibility(View.VISIBLE);
 			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 			searchPOILevel.setText(R.string.search_POI_level_btn);
