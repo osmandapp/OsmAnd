@@ -291,7 +291,7 @@
   <string name="ttsvoice">TTS Sprachansage</string>
   <string name="search_offline_clear_search">Neue Suche</string>
   <string name="map_text_size_descr">Wähle Textgröße für Bezeichnungen in den Landkarten</string>
-  <string name="map_text_size">Textgröße</string>
+  <string name="map_text_size">Karten-Textgröße</string>
   <string name="tip_recent_changes">Neuerungen</string>
   <string name="tip_recent_changes_0_6_6_t">"Neuerungen in Version 0.6.6 : \n\t- Text-To-Speech (TTS) Sprachansagensupport \n\t- Anzeige von mehr Details in den Landkarten \n\t- World_Basemap für die ganze Welt in der Applikation enthalten \n\t- Verbesserungen der Offline-Navigation (immer noch experimentell) \n\t- GPX-Navigations-Optionen \n\t- Update der Bedienoberfläche und viele Bug-Fixes "</string>
   <string name="voice_not_specified">Keine</string>
