@@ -64,7 +64,7 @@ public class AmenityTypeIcons {
         iconMap.put(new AmenityTypeKey(AmenityType.ENTERTAINMENT, "theatre"), R.drawable.h_theatre);
 
         iconMap.put(new AmenityTypeKey(AmenityType.TOURISM, "camp_site"), R.drawable.h_camp_site);
-        iconMap.put(new AmenityTypeKey(AmenityType.TOURISM, "caravan_site"), R.drawable.h_caravan_site);
+        iconMap.put(new AmenityTypeKey(AmenityType.TOURISM, "caravan_site"), R.drawable.h_caravan_park);
         iconMap.put(new AmenityTypeKey(AmenityType.TOURISM, "picnic_site"), R.drawable.h_picnic_site);
         iconMap.put(new AmenityTypeKey(AmenityType.TOURISM, "alpine_hut"), R.drawable.h_alpine_hut);
         iconMap.put(new AmenityTypeKey(AmenityType.TOURISM, "chalet"), R.drawable.h_chalet);
@@ -132,7 +132,7 @@ public class AmenityTypeIcons {
 
         iconMap.put(new AmenityTypeKey(AmenityType.LEISURE, "playground"), R.drawable.h_playground);
         iconMap.put(new AmenityTypeKey(AmenityType.LEISURE, "water_park"), R.drawable.h_leisure_water_park);
-        iconMap.put(new AmenityTypeKey(AmenityType.LEISURE, "leisure_sports_centre"), R.drawable.h_sports_centre);
+        iconMap.put(new AmenityTypeKey(AmenityType.LEISURE, "sports_centre"), R.drawable.g_leisure_sports_centre);
         iconMap.put(new AmenityTypeKey(AmenityType.LEISURE, "bird_hide"), R.drawable.h_bird_hide);
 
         iconMap.put(new AmenityTypeKey(AmenityType.SPORT, "horse_racing"), R.drawable.h_horse_racing);
