@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.plus.activities.PlacePickerActivity;
-import net.osmand.plus.R;
+import net.osmand.plus.PlaceType;
 import android.app.ListFragment;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,20 +19,20 @@ public class PlaceTypesFragment extends ListFragment {
     public static final String FAVORITES_KEY = "Favorites";
     public static final String ADDRESS_SEARCH_KEY = "Address";
     
-    public static TreeMap<String, String> places;
+    public static TreeMap<String, PlaceType> placeTypes;
     
     boolean mDualPane;
     int mCurCheckPosition = 0;
 
     static {
         // TODO(natashaj): Remove hard-coding once we support adding / removing filters
-        places = new TreeMap<String, String>();
-        places.put("Food", "user_food_shop");
-        places.put("Fuel", "user_fuel");
+        placeTypes = new TreeMap<String, PlaceType>();
+        placeTypes.put("Food", new PlaceType("user_food_shop", null));
+        placeTypes.put("Fuel", new PlaceType("user_fuel", null));
     }
     
-    public static Map<String, String> getPlacesMap() {
-        return places;
+    public static Map<String, PlaceType> getPlaceTypesMap() {
+        return placeTypes;
     }
     
     @Override
@@ -50,7 +50,7 @@ public class PlaceTypesFragment extends ListFragment {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_activated_1, getPlacesList()) {
+                android.R.layout.simple_list_item_activated_1, getPlaceTypesList()) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View itemView = super.getView(position, convertView, parent);
@@ -79,11 +79,11 @@ public class PlaceTypesFragment extends ListFragment {
         showDetails(position);
     }
 
-    List<String> getPlacesList() {
+    List<String> getPlaceTypesList() {
         ArrayList<String> placesList = new ArrayList<String>();
         placesList.add(PlaceTypesFragment.FAVORITES_KEY);
         placesList.add(PlaceTypesFragment.ADDRESS_SEARCH_KEY);
-        for (Map.Entry<String, String> entry : places.entrySet()) {
+        for (Map.Entry<String, PlaceType> entry : placeTypes.entrySet()) {
             placesList.add(entry.getKey());
         }
         return placesList;

@@ -68,7 +68,7 @@ public class OsmAndFormatter {
 		} else if (meters > 9.99f * mainUnitInMeters) {
 			return MessageFormat.format("{0,number,#.#} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$ 
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$
+			return MessageFormat.format("{0,number,#.#} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 				return ((int) meters) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
@@ -190,4 +190,9 @@ public class OsmAndFormatter {
 		}
 		return amenity.getSubType() + " " + n; //$NON-NLS-1$
 	}
+
+	public static String getPoiNameOnly(Amenity amenity, boolean en){
+            String n = amenity.getName(en);
+            return (n.length() == 0) ? amenity.getSubType() : n;
+    }
 }

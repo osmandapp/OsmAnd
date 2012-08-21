@@ -22,9 +22,11 @@ import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import net.osmand.plus.AmenityTypeIcons;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.PlaceType;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.SearchByNameFilter;
@@ -134,7 +136,8 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
                 filterId = SearchByNameFilter.FILTER_ID;
                 view = inflater.inflate(R.layout.search_by_name_fragment, null);
             } else {
-                filterId = PlaceTypesFragment.getPlacesMap().get(getShownPlaceType());
+                PlaceType placeType = PlaceTypesFragment.getPlaceTypesMap().get(getShownPlaceType());
+                filterId = (placeType.getPoiFilterId() == null) ? placeType.getPoiFilterName() : placeType.getPoiFilterId();
                 view = inflater.inflate(R.layout.search_poi_fragment, null);
             }
 		
@@ -798,7 +801,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 				LatLon l = amenity.getLocation();
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 			}
-			String str = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
+			String str = OsmAndFormatter.getPoiNameOnly(amenity, settings.usingEnglishNames());
 			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
@@ -820,6 +823,8 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 					}
 				}
 			}
+			icon.setImageResource(AmenityTypeIcons.getIconResource(amenity));
+			/*
 			if(loc != null){
 				DirectionDrawable draw = new DirectionDrawable();
 				Float h = heading;
@@ -836,6 +841,7 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 					icon.setImageResource(R.drawable.closed_poi);
 				}
 			}
+			*/
 
 			if(mes == null){
 				distanceLabel.setText(""); //$NON-NLS-1$
