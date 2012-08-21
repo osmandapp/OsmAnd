@@ -177,6 +177,9 @@ public class NativeSwingRendering extends NativeLibrary {
 	}
 	
 	public static NativeSwingRendering getDefaultFromSettings() {
+//		if(true) {
+//			return null;
+//		}
 		if(defaultLoadedLibrary != null) {
 			return defaultLoadedLibrary;
 		}

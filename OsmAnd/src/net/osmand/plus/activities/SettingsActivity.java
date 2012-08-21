@@ -708,9 +708,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					getString(R.string.show_lanes) }, new OsmandPreference[] { osmandSettings.SHOW_CAMERAS,
 					osmandSettings.SHOW_SPEED_LIMITS, osmandSettings.SHOW_LANES });
 			return true;
-		} else if (preference.getKey().equals("show_routing_alarms")) {
-			startActivity(new Intent(this, PluginsActivity.class));
-			return true;
 		}
 		return false;
 	}
