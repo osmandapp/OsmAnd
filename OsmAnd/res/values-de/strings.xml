@@ -8,7 +8,7 @@
   <string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
   <string name="rendering_attr_noPolygons_name">Transparente Flächen</string>
   <string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung gemäß Nutzerprofil</string>
-  <string name="rendering_attr_appMode_name">Kartendarstellung</string>
+  <string name="rendering_attr_appMode_name">Darstellungsmodus</string>
   <string name="rendering_attr_contourLines_description">Minimale Vergrößerung, ab der Höhenlinien angezegt werden sollen. Höhenlinien müssen meist in Form von zusätzlichen SRTM-Dateien vorhanden sein.</string>
   <string name="rendering_attr_contourLines_name">Höhenlinien</string>
   <string name="rendering_attr_hmRendered_description">Erhöht die in der Karte angezeigte Detaildichte</string>
@@ -921,7 +921,7 @@
     <string name="avoid_unpaved">Ungeteerte Straßen vermeiden</string>
     <string name="avoid_ferries">Fähren vermeiden</string>
     <string name="avoid_in_routing_title">Vermeide&#8230;</string>
-    <string name="avoid_in_routing_descr">Ungeteerte Straßen, Fähren, Mautstraßen vermeiden</string>
+    <string name="avoid_in_routing_descr">Ungeteerte Straßen, Fähren und Mautstraßen vermeiden</string>
     <string name="show_warnings_title">Warnungen anzeigen&#8230;</string>
     <string name="show_warnings_descr">Warnungen für Geschwindigkeitsbegrenzungen, stationäre Radarfallen und Rüttelschwellen</string>
     <string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
