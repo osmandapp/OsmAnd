@@ -149,7 +149,12 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 					}
 				}
 
-				
+				// That check is not strictly needed on preproccessing step because client can handle it
+				Node nodeOut = checkOuterWaysEncloseInnerWays(completedRings, entities);
+				if (nodeOut != null) {
+					logMapDataWarn.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" + //$NON-NLS-1$
+							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
+				}
 
 				
 				ArrayList<List<Way>> innerRings = new ArrayList<List<Way>>();
