@@ -166,7 +166,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(end);
-		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
+		Action selfRoute = new AbstractAction("Calculate Osmand route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			@Override
@@ -189,7 +189,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		
-		Action recalculate = new AbstractAction("Recalculate OsmAnd route") {
+		Action recalculate = new AbstractAction("Recalculate Osmand route") {
 			private static final long serialVersionUID = 507156107455281238L;
 			
 			@Override

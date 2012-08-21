@@ -26,7 +26,7 @@ public class OpeningHoursParser {
 	 * hour of when you would expect a day to be ended.
 	 * This is to be used when no end hour is known (like pubs that open at a certain time, 
 	 * but close at a variable time, depending on the number of clients).
-	 * OsmAnd needs to show a value, so there is some arbitrary default value chosen.
+	 * Osmand needs to show a value, so there is some arbitrary default value chosen.
 	 */
 	private static String endOfDay = "24:00";
 	
