@@ -1,5 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="asap">ASAP</string>
+<resources>
+  <string name="asap">ASAP</string>
   <string name="save_route_as_gpx">Route als GPX Datei speichern</string>
   <string name="route_roundabout">Kreisverkehr : Nehmen Sie die %1$d Ausfahrt, dann</string>
   <string name="route_kl">Links halten, dann</string>
@@ -159,9 +160,9 @@
   <string name="profile_settings">Profilspezifische Einstellungen</string>
   <string name="settings_preset">Nutzerprofil</string>
   <string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Verwendungszweck separat gespeichert.</string>
-  <string name="monitor_preferences">- Positions-Logging</string>
+  <string name="monitor_preferences">Positions-Logging</string>
   <string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
-  <string name="routing_settings">- Navigation</string>
+  <string name="routing_settings">Navigation</string>
   <string name="routing_settings_descr">Navigationsoptionen</string>
   <string name="global_settings">Globale Einstellungen</string>
   <string name="index_settings">Offline-Daten (laden)</string>
@@ -698,8 +699,6 @@
   <string name="choose_street">Straße wählen</string>
   <string name="choose_city">Ort wählen</string>
   <string name="ChooseCountry">Land wählen</string>
-  <string name="position_on_map_descr">Position des Markers auf der Karte</string>
-  <string name="position_on_map">Positionsmarker</string>
   <string name="map_specify_point">Als Ziel wählen</string>
   <string name="show_view_angle_descr">Blickrichtung gemäß Kompass anzeigen</string>
   <string name="show_view_angle">Blickrichtung einblenden</string>
@@ -879,8 +878,12 @@
   <string name="show_cameras">Radarkontrollen anzeigen</string>
   <string name="show_speed_limits">Geschwindigkeitsbegrenzungen anzeigen</string>
   <string name="avoid_toll_roads">Vermeide Mautstraßen</string>
-  <string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 : \n\t* Improved Routing \n\t* Konfigurierbare Schaltflächen"</string>
-	<string name="screen_is_locked">Zum Bildschirm Entsperren Schloß anklicken</string>
+  <string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
+   \n\t* Verbessertes Routing
+   \n\t* Konfigurierbare Schaltflächen
+   \n\t* Karteneinstellungen auf Kartenbildschirm umgezogen"
+   \n\t* Bildschirmsperrtaste mit Loggin-Einstellungen
+  </string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
 	<string name="map_widget_map_select">Kartenauswahl</string>
@@ -903,8 +906,34 @@
 	<string name="map_widget_mini_route">Mini-Routenkarte</string>
 	<string name="bg_service_screen_lock">Bildschirm sperren</string>
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
-	<string name="bg_service_sleep_mode_off">Schlafmodus auschalten</string>
-	<string name="bg_service_sleep_mode_on">Schlafmodus einschalten</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
+
+    <string name="map_widget_day_night">Tag/Nacht Modus</string>
+    <string name="map_widget_vector_attributes">Karten-Zusatzoptionen:</string>
+    <string name="map_widget_renderer">Kartendarstellung</string>
+    <string name="live_monitoring_mode_off">Live-tracking\n starten</string>
+    <string name="live_monitoring_mode_on">Live-tracking\n stoppen</string>
+    <string name="position_on_map_descr">Position des Markers auf der Karte</string>
+    <string name="position_on_map">Positionsmarker</string>
+    <string name="layer_map_appearance">Bildschirm konfigurieren&#8230;</string>
+    <string name="show_lanes">Fahrspuren anzeigen</string>
+    <string name="avoid_unpaved">Ungeteerte Straßen vermeiden</string>
+    <string name="avoid_ferries">Fähren vermeiden</string>
+    <string name="avoid_in_routing_title">Vermeide&#8230;</string>
+    <string name="avoid_in_routing_descr">Ungeteerte Straßen, Fähren, Mautstraßen vermeiden</string>
+    <string name="show_warnings_title">Warnungen anzeigen&#8230;</string>
+    <string name="show_warnings_descr">Warnungen für Geschwindigkeitsbegrenzungen, stationäre Radarfallen und Rüttelschwellen</string>
+    <string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
+    <string name="map_widget_show_ruler">Maßstab</string>
+    <string name="map_widget_appearance">Verschiedenes:</string>
+    <string name="map_widget_view_direction">Blickrichtung einblenden</string>
+    <string name="map_widget_transparent">Transparentes Layout</string>
+    <string name="monitoring_mode_off">GPX-Track\n aufnehmen</string>
+    <string name="monitoring_mode_on">GPX-Aufnahme\n  stoppen</string>
+    <string name="bg_service_sleep_mode_off">Schlafmodus\n einchalten</string>
+    <string name="bg_service_sleep_mode_on">Schlafmodus\n ausschalten</string>
+    <string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
+    <string name="int_continuosly">Kontinuierlich</string>
+    <string name="screen_is_locked">Zum Bildschirm Entsperren Schloß anklicken</string>
 </resources>
