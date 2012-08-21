@@ -1,6 +1,5 @@
 package net.osmand.plus.fragments;
 
-
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.util.ArrayList;
@@ -69,7 +68,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -803,7 +801,6 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 			}
 			String str = OsmAndFormatter.getPoiNameOnly(amenity, settings.usingEnglishNames());
 			label.setText(str);
-			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
 				List<OpeningHoursRule> rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
@@ -816,32 +813,10 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 							break;
 						}
 					}
-					if (work) {
-						opened = 0;
-					} else {
-						opened = 1;
-					}
 				}
 			}
+
 			icon.setImageResource(AmenityTypeIcons.getIconResource(amenity));
-			/*
-			if(loc != null){
-				DirectionDrawable draw = new DirectionDrawable();
-				Float h = heading;
-				float a = h != null ? h : 0;
-				draw.setAngle(mes[1] - a + 180);
-				draw.setOpenedColor(opened);
-				icon.setImageDrawable(draw);
-			} else {
-				if(opened == -1){
-					icon.setImageResource(R.drawable.poi);
-				} else if(opened == 0){
-					icon.setImageResource(R.drawable.opened_poi);
-				} else {
-					icon.setImageResource(R.drawable.closed_poi);
-				}
-			}
-			*/
 
 			if(mes == null){
 				distanceLabel.setText(""); //$NON-NLS-1$

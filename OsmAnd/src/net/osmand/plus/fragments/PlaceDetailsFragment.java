@@ -18,7 +18,7 @@ public class PlaceDetailsFragment extends Fragment {
     public static PlaceDetailsFragment newInstance(String placeTypeKey) {
         PlaceDetailsFragment f;
         if (placeTypeKey == PlaceTypesFragment.FAVORITES_KEY) {
-            f = new PlaceDetailsFragment();
+            f = new FavouritesFragment();
         } else {
             f = new SearchPOIFragment();
         }
