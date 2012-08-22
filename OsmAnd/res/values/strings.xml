@@ -625,7 +625,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	<string name="tip_app_mode">User Profile</string>
 	<string name="tip_app_mode_t">\tOsmand supports different (customizable) application profiles for different use cases.
-\n\tYou can change profile via the profile button in the lower left corner of the map screen, or when creating a route.</string>
+\n\tYou can change profile via the profile button in the lower left corner of the map screen (icon pedestrian, bicycle, or car), or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>

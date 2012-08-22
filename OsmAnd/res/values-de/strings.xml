@@ -18,7 +18,7 @@
   <string name="map_online_data_descr">Verwende Online-Karten (lade sie herunter und speichere sie temporär auf der SD-Karte)</string>
   <string name="online_map_settings">Online-Karten</string>
   <string name="online_map_settings_descr">Konfiguration von online oder gecachten Kachel-Kartenquellen</string>
-  <string name="map_settings">- Karten-Einstellungen</string>
+  <string name="map_settings">Karten-Einstellungen</string>
   <string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
   <string name="osmand_rastermaps_plugin_description">Zeigt Einstellungen für die Verwendung von online oder gecachter Kachel-Kartenquellen, auch als Overlay- oder Underlay. Solche Karten können auch offline erstellt und in das Osmand-Verzeichnis kopiert werden.</string>
   <string name="osmand_background_plugin_description">Zeigt Einstellungen für das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
@@ -133,7 +133,7 @@
   <string name="live_monitoring_interval">Live-Tracking Intervall</string>
   <string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
-  <string name="gpx_monitoring_disabled_warn">Bitte Positions-Logging in den Einstellungen aktivieren</string>
+  <string name="gpx_monitoring_disabled_warn">Bitte Logging aktivieren unter \'Einstellungen'\ -> \'Navuigation'\</string>
   <string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
   <string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 : \n\t- Offline Wikipedia Daten mit Artikeln \n\t- Aktualisierte Karten \n\t- Weitere kleine Verbesserungen "</string>
   <string name="free_version_message">Diese kostenlose Version von Osmand ist limitiert auf %1$s Downloads %2$s und unterstützt keine offline Wikipedia-Artikel.</string>
@@ -177,10 +177,10 @@
   <string name="osmand_service">Hintergrunddienst</string>
   <string name="osmand_service_descr">Für Verwendung von Osmand bei ausgeschalteter Anzeige</string>
   <string name="tip_rotation_switching">Kartenrotation</string>
-  <string name="tip_rotation_switching_t">\tSie können unter \'Einstellungen\' -&gt; \'Kartendarstellung\' -&gt; \'Kartenrotation\' wählen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt \n\tTipp: Um schnell zwischen der Kompassnachführung und der in den Einstellungen gewählten Option zu wechseln, einfach auf die Kompassnadel in der Kartenansicht drücken.</string>
-  <string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Einstellungen\' -&gt; \'Kartenkonfiguration\' -&gt; \'Offline-Vektor-Karten\'</string>
+  <string name="tip_rotation_switching_t">\tSie können mit wiederholtem Klicken auf die Kompassnadel der Landkarte bestimmen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt</string>
+  <string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Nenü\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'</string>
   <string name="tip_day_night_mode">Tag/Nacht-Modus</string>
-  <string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. \n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer. \n\tDer Umschaltmechanismus kann unter \'Einstellungen\' -&gt; \'Anzeigenkonfiguration\' -&gt; \'Tag/Nacht-Modus\' geändert werden. \n\tZur Auswahl stehen: \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung) \n\t\'Tag\' - permanente Tagesansicht \n\t\'Nacht\' - permanente Nachtansicht \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>
+  <string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. \n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer. \n\tDer Umschaltmechanismus kann unter \'Menü\' -&gt; \'Anzeige konfigurieren\' -&gt; \'Tag/Nacht-Modus\' geändert werden. \n\tZur Auswahl stehen: \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung) \n\t\'Tag\' - permanente Tagesansicht \n\t\'Nacht\' - permanente Nachtansicht \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>
   <string name="tip_osm_improve">OSM Bearbeitung</string>
   <string name="tip_osm_improve_t">\tOsmand verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden. \n\tDazu müssen Sie zunächst unter \'Einstellungen\' -&gt; \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen. \n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! \n\tGefundene Fehler auf der Karte können direkt gemeldet werden. \n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü. \n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
   <string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
@@ -345,9 +345,9 @@
   <string name="preferred_locale_descr">Anzeigesprache wählen</string>
   <string name="preferred_locale">Anzeigesprache</string>
   <string name="tip_map_switch">Kartenquelle</string>
-  <string name="tip_map_switch_t">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -&gt; \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen. \n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmandMapCreator) erstellten Karten wählen. \n\tOsmand unterstützt auch selbst definierte Quellen.</string>
+  <string name="tip_map_switch_t">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -&gt; \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen. \n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmandMapCreator) erstellten Karten wählen. \n\tOsmand unterstützt auch selbst definierte Quellen. (Für Online-Karten entsprechendes Plugin aktivieren.)</string>
   <string name="tip_app_mode">Nutzerprofile</string>
-  <string name="tip_app_mode_t">\tOsmand unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke. \n\tDas Profil kann unter \'Menü\' -&gt; \'Einstellungen\' -&gt; \'Nutzerprofil\' gewechselt werden, oder auch beim Berechnen einer Route.</string>
+  <string name="tip_app_mode_t">\tOsmand unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke. \n\tDas Profil kann mit dem Profilknopf links unten (Bild Fussgänger, Auto, Fahhrad) auf dem Kartenbildsschirm gewählt werden, oder auch beim Berechnen einer Route.</string>
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' -&gt; \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
   <string name="tip_search">Suchen</string>
@@ -916,7 +916,7 @@
     <string name="live_monitoring_mode_on">Live-tracking\n stoppen</string>
     <string name="position_on_map_descr">Position des Markers auf der Karte</string>
     <string name="position_on_map">Positionsmarker</string>
-    <string name="layer_map_appearance">Bildschirm konfigurieren&#8230;</string>
+    <string name="layer_map_appearance">Anzeige konfigurieren&#8230;</string>
     <string name="show_lanes">Fahrspuren anzeigen</string>
     <string name="avoid_unpaved">Ungeteerte Straßen vermeiden</string>
     <string name="avoid_ferries">Fähren vermeiden</string>
