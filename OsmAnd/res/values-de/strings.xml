@@ -177,7 +177,7 @@
   <string name="osmand_service">Hintergrunddienst</string>
   <string name="osmand_service_descr">Für Verwendung von Osmand bei ausgeschalteter Anzeige</string>
   <string name="tip_rotation_switching">Kartenrotation</string>
-  <string name="tip_rotation_switching_t">\tSie können mit wiederholtem Klicken auf die Kompassnadel der Landkarte bestimmen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt</string>
+  <string name="tip_rotation_switching_t">\tSie können mit wiederholtem Klicken auf die Kompassnadel der Landkarte bestimmen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt</string>
   <string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Nenü\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'</string>
   <string name="tip_day_night_mode">Tag/Nacht-Modus</string>
   <string name="tip_day_night_mode_t">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. \n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer. \n\tDer Umschaltmechanismus kann unter \'Menü\' -&gt; \'Anzeige konfigurieren\' -&gt; \'Tag/Nacht-Modus\' geändert werden. \n\tZur Auswahl stehen: \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung) \n\t\'Tag\' - permanente Tagesansicht \n\t\'Nacht\' - permanente Nachtansicht \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>
@@ -487,7 +487,7 @@
   <string name="poi_context_menu_delete">Lösche POI</string>
   <string name="rotate_map_compass_opt">Nach Kompass</string>
   <string name="rotate_map_bearing_opt">Nach Bewegungsrichtung</string>
-  <string name="rotate_map_none_opt">Keine Rotation</string>
+  <string name="rotate_map_none_opt">Keine Rotation (Norden ist oben)</string>
   <string name="rotate_map_to_bearing_descr">Art der Kartenausrichtung wählen</string>
   <string name="rotate_map_to_bearing">Kartenrotation</string>
   <string name="show_route">Routendetails</string>

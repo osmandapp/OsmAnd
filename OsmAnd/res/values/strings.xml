@@ -362,9 +362,9 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	 
 	<string name="tip_rotation_switching">Map Orientation</string>
-	<string name="tip_rotation_switching_t">\tYou can toggle whether and how the map display is rotated by repeteadly clicking on the map screen\'s compass icon.
+	<string name="tip_rotation_switching_t">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 	\n\tThe choices are:
-	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
+	\n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up
 	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
 	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	</string>
@@ -784,7 +784,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="poi_context_menu_delete">Delete POI</string>
 	<string name="rotate_map_compass_opt">To compass</string>
 	<string name="rotate_map_bearing_opt">To direction of movement</string>
-    <string name="rotate_map_none_opt">Don\'t rotate</string>
+    <string name="rotate_map_none_opt">Don\'t rotate (north is up)</string>
 	<string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
     <string name="rotate_map_to_bearing">Map orientation</string>
 	<string name="show_route">Route details</string>
