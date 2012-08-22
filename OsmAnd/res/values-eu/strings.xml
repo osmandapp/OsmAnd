@@ -874,29 +874,29 @@
   <string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (dalvik %2$s MB, other %3$s MB). Proportional memory %4$s MB (Android limit %5$s MB, dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Total native memory</string>
   <string name="select_animate_speedup">Select animate route acceleration</string>
-  <string name="osmand_parking_hours">Hours</string>
-  <string name="osmand_parking_minutes">Minutes</string>
+  <string name="osmand_parking_hours">Orduak</string>
+  <string name="osmand_parking_minutes">Minutuak</string>
   <string name="osmand_parking_position_description_add_time">The car was parked at:</string>
   <string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string>
   <string name="use_compass_navigation">Use compass</string>
   <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
   <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
-  <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
-  <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
-  <string name="show_cameras">Show speed cameras</string>
-  <string name="show_speed_limits">Show speed limits</string>
-  <string name="avoid_toll_roads">Avoid toll roads</string>
+  <string name="show_cameras_descr">Radarrak erakutsi (herrialde batzuetan debekatuta egon daiteke)</string>
+  <string name="show_speed_limits_descr">Abiadura mugak eta puntu arriskutsuak erakutsi</string>
+  <string name="avoid_toll_roads_descr">Saihestu bidesariak ibilbidea kalkulatzeko</string>
+  <string name="show_cameras">Radarrak erakutsi</string>
+  <string name="show_speed_limits">Abiadura mugak erakutsi</string>
+  <string name="avoid_toll_roads">Saihestu bidesariak</string>
   <string name="tip_recent_changes_0_8_2_t">Aldaketak 0.8.2 :↵
     \n\t* Ibilbidearen hobekuntza↵
     \n\t* Mapan widget dinamikoak↵
     \n\t* Pantaila blokeatzeko botoia egunerokoaren zerbitzuarekin ↵
     \n\t* Maparen ezarpenak maparen pantailan↵
     </string>
-  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_top_text">Kale izena</string>
   <string name="map_widget_config">Configuration</string>
   <string name="map_widget_map_select">Map selection</string>
-  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_back_to_loc">Non nago</string>
   <string name="map_widget_lock_screen">Lock screen</string>
   <string name="map_widget_compass">Compass</string>
   <string name="map_widget_top_stack">Status bar:</string>
@@ -904,8 +904,8 @@
   <string name="map_widget_right_stack">Right panel:</string>
   <string name="map_widget_left_stack">Left panel:</string>
   <string name="map_widget_parking">Parking</string>
-  <string name="map_widget_monitoring">Monitoring</string>
-  <string name="map_widget_speed">Speed</string>
+  <string name="map_widget_monitoring">Segimendua</string>
+  <string name="map_widget_speed">Abiadura</string>
   <string name="map_widget_distance">Target</string>
   <string name="map_widget_altitude">Altitude</string>
   <string name="map_widget_time">Time to go</string>
@@ -914,10 +914,11 @@
   <string name="map_widget_next_next_turn">Second next turn</string>
   <string name="map_widget_mini_route">Mini route map</string>
   <string name="bg_service_screen_lock">Lock/unlock screen</string>
-  <string name="bg_service_screen_lock_toast">The screen is locked</string>
-  <string name="bg_service_interval">Set wake-up interval:</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="bg_service_screen_lock_toast">Pantaila blokeatuta dago</string>
+  <string name="bg_service_interval">Esnatze tartea ezarri:</string>
+  <string name="screen_is_locked">Pantaila desblokeatzeko sakatu giltzarrapoaren ikonoa</string>
+  <string name="bg_service_screen_unlock">Pantaila desblokeatu</string>
+  <string name="bg_service_sleep_mode_off">Gaitu\n lo modua</string>
+  <string name="bg_service_sleep_mode_on">Ezgaitu\n lo modua</string>
+<string name="email">email</string>
 </resources>
