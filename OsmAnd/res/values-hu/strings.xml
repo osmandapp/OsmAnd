@@ -918,7 +918,7 @@
   <string name="bg_service_screen_unlock">Képernyőzár ki</string>
   <string name="bg_service_sleep_mode_off">Alvó mód\n bekapcsolása</string>
   <string name="bg_service_sleep_mode_on">Alvó mód\n kikapcsolása</string>
-<string name="avoid_in_routing_title">Elkerülés..</string>
+<string name="avoid_in_routing_title">Elkerülés…</string>
 <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
 <string name="show_warnings_title">Riasztások megjelenítése</string>
 <string name="show_warnings_descr">Sebességhatárok, traffipaxok és fekvőrendőrök jelzése</string>
@@ -933,8 +933,7 @@
 <string name="int_continuosly">Folyamatos</string>
 <string name="live_monitoring_mode_off">Élő útvonalrögzítés\n indítása</string>
 <string name="live_monitoring_mode_on">Élő útvonalrögzítés\n megállítása</string>
-<string name="layer_map_appearance">Képernyő beállítása...
-</string>
+<string name="layer_map_appearance">Képernyő beállítása…</string>
 <string name="show_lanes">Sávok megjelenítése</string>
 <string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
 <string name="avoid_ferries">Komp elkerülése</string>
