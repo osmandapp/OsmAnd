@@ -57,7 +57,7 @@
     <style name="ListText.Small">
         <item name="android:textSize">21sp</item>
     </style>
-    <style name="OsmandDialog" parent="android:style/Theme.Light">
+    <style name="OsmandDialog" parent="android:style/Theme.Dialog">
         <item name="android:background">@color/color_white</item>
         <item name="android:textColor">@color/color_black</item>
     </style>

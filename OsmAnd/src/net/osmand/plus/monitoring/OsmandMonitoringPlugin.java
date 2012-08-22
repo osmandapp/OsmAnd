@@ -121,22 +121,30 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		general.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
 				R.string.live_monitoring_url_descr));
 		
-		// TODO remove strings
-//		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
-//		grp.setTitle(R.string.monitor_preferences);
-//		grp.setSummary(R.string.monitor_preferences_descr);
-//		grp.setKey("monitor_settings");
-//		((PreferenceScreen) screen.findPreference("routing_settings")).addPreference(grp);
 
 		PreferenceCategory cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.save_track_to_gpx);
-		((PreferenceScreen) screen.findPreference("routing_settings")).addPreference(cat);
+		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS)).addPreference(cat);
 
 		cat.addPreference(activity.createCheckBoxPreference(settings.SAVE_TRACK_TO_GPX, R.string.save_track_to_gpx,
 				R.string.save_track_to_gpx_descrp));
 		cat.addPreference(activity.createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
 				MINUTES, 1, R.string.save_track_interval, R.string.save_track_interval_descr));
 
+		cat = new PreferenceCategory(activity);
+		cat.setTitle(R.string.live_monitoring);
+		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS)).addPreference(cat);
+		
+		cat.addPreference(activity.createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring,
+				R.string.live_monitoring_descr));
+		cat.addPreference(activity.createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, SECONDS,
+				MINUTES, 1, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
+
+		cat = new PreferenceCategory(activity);
+		cat.setTitle(R.string.monitor_preferences);
+		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS)).addPreference(cat);
+		cat.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
+				R.string.live_monitoring_url_descr));
 		Preference pref = new Preference(activity);
 		pref.setTitle(R.string.save_current_track);
 		pref.setSummary(R.string.save_current_track_descr);
@@ -155,16 +163,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		});
 		cat.addPreference(pref);
 
-		cat = new PreferenceCategory(activity);
-		cat.setTitle(R.string.live_monitoring);
-		((PreferenceScreen) screen.findPreference("routing_settings")).addPreference(cat);
-
-		cat.addPreference(activity.createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring,
-				R.string.live_monitoring_descr));
-		cat.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
-				R.string.live_monitoring_url_descr));
-		cat.addPreference(activity.createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, SECONDS,
-				MINUTES, 1, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
 
 	}
 

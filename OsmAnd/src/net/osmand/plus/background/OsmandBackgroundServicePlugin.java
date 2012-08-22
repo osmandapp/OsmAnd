@@ -102,10 +102,9 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 	}
 
 	private void registerBackgroundSettings(final SettingsActivity activity, PreferenceScreen screen) {
-		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
-		grp.setTitle(R.string.osmand_service);
-		grp.setSummary(R.string.osmand_service_descr);
-		((PreferenceCategory) screen.findPreference("global_settings")).addPreference(grp);
+		PreferenceCategory cat = new PreferenceCategory(activity);
+		cat.setTitle(R.string.osmand_service);
+		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS)).addPreference(cat);
 
 		//unregister old service. Note, the order of calls of Create/Destroy is not guaranteed!!
 		unregisterReceiver(this.activity);
@@ -141,9 +140,9 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 		routeServiceEnabled.setTitle(R.string.background_router_service);
 		routeServiceEnabled.setSummary(R.string.background_router_service_descr);
 		routeServiceEnabled.setKey(OsmandSettings.SERVICE_OFF_ENABLED);
-		grp.addPreference(routeServiceEnabled);
+		cat.addPreference(routeServiceEnabled);
 		
-		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
+		cat.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
 				R.string.background_service_int, R.string.background_service_int_descr));
 	}
 

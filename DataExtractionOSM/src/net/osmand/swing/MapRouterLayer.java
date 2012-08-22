@@ -166,7 +166,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(end);
-		Action selfRoute = new AbstractAction("Calculate OsmAnd route") {
+		Action selfRoute = new AbstractAction("Calculate Osmand route") {
 			private static final long serialVersionUID = 507156107455281238L;
 
 			@Override
@@ -189,7 +189,7 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		
-		Action recalculate = new AbstractAction("Recalculate OsmAnd route") {
+		Action recalculate = new AbstractAction("Recalculate Osmand route") {
 			private static final long serialVersionUID = 507156107455281238L;
 			
 			@Override
@@ -600,6 +600,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				String[] props = m.split("\\,");
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
 				RoutingConfiguration config = builder.build(props[0], props);
+				config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
 				RoutingContext ctx = new RoutingContext(config);
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");

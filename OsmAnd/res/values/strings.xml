@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="monitor_preferences">Tracking</string>
+    <string name="map_widget_day_night">Day/night map</string>
     <string name="map_widget_vector_attributes">Rendering attributes:</string>
     <string name="map_widget_renderer">Rendering style</string>
     <string name="live_monitoring_mode_off">Start\n live tracking</string>
@@ -33,7 +35,7 @@
     <string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
     <string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
     <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
-    <string name="int_continuosly">Continuously</string>
+    <string name="int_continuosly">Continuous</string>
     <string name="screen_is_locked">To unlock screen press lock icon</string>
     <string name="map_widget_top_text">Street name</string>
     <string name="map_widget_config">Configure screen</string>
@@ -65,8 +67,8 @@
     <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
     \n\t* Improved Routing
     \n\t* Dynamic map widgets
-    \n\t* Lock screen button with logging services 
     \n\t* Map settings moved to map screen
+    \n\t* Lock screen button with logging services
     </string>
     <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
     <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
@@ -344,10 +346,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="profile_settings">Profile Specific Settings</string>
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a user profile with custom map and navigation settings.</string>
-	
-	<string name="monitor_preferences">- Tracking</string>
-	<string name="monitor_preferences_descr">Specify tracking settings</string>
-	<string name="routing_settings">- Navigation</string>
+	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
 	<string name="index_settings">Offline Data (Download)</string>
@@ -540,7 +539,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="ttsvoice">TTS Voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
-	<string name="map_text_size">Text size</string>
+	<string name="map_text_size">Map font size</string>
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
 	<string name="tip_recent_changes">Recent changes</string>
@@ -975,7 +974,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
     <string name="additional_settings">Additional settings</string>
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
-    <string name="save_current_track">Save current track</string>
+    <string name="save_current_track">Save current GPX track</string>
     <string name="save_track_interval">Logging interval</string>
     <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
     <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>

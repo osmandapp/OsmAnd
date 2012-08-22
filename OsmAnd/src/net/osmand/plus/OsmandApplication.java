@@ -253,7 +253,7 @@ public class OsmandApplication extends Application {
 					SpecialPhrases.setLanguage(this, osmandSettings);
 				} catch (IOException e) {
 					LOG.error("I/O exception", e);
-					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
+					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart Osmand if possible", Toast.LENGTH_LONG);
 					error.show();
 				}
 				
