@@ -5,21 +5,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
+import net.londatiga.android.QuickAction;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
+import net.osmand.data.MapObject;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.CustomTitleBar;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 
 import org.apache.commons.logging.Log;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -29,12 +36,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.Filter.FilterListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -56,19 +66,23 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
+	private Button endingButton;
+	private Set<String> endingSet = new HashSet<String>();
+	private T endingObject;
 	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.search_activity, R.drawable.tab_search_address_icon);
 		setContentView(R.layout.search_by_name);
+		titleBar.afterSetContentView();
 
 		initializeTask = getInitializeTask();
 		uiHandler = new UIUpdateHandler();
 		namesFilter = new NamesFilter();
-		NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(),createComparator()); //$NON-NLS-1$
+		final NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
 		collator = Collator.getInstance(Locale.US);
@@ -76,6 +90,24 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
  	    
 		
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);
+		endingButton = (Button) findViewById(R.id.EndingButton);
+		endingButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				T obj = endingObject;
+				LatLon loc = getLocation(obj);
+				if (obj != null && loc != null) {
+					QuickAction qa = new QuickAction(v);
+					// TODO more granular description and text message!
+					MapActivityActions.createDirectionsActions(qa, loc,
+							obj, getText(obj), getZoomToDisplay(endingObject),
+							SearchByNameAbstractActivity.this, true, null);
+					qa.show();
+				}
+
+			}
+		});
 		searchText = (EditText) findViewById(R.id.SearchText);
 		searchText.addTextChangedListener(new TextWatcher(){
 
@@ -98,12 +130,22 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			public void onClick(View v) {
 				searchText.setText("");
 			}
-			
 		});
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		if(initializeTask != null){
 			initializeTask.execute();
 		}
+	}
+	
+	protected int getZoomToDisplay(T item){
+		return 15;
+	}
+	
+	protected LatLon getLocation(T item) {
+		if (item instanceof MapObject) {
+			return ((MapObject) item).getLocation();
+		}
+		return null;
 	}
 	
 
@@ -120,11 +162,41 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	
+	private int MAX_THRESHOLD_UI = 70;
+	private int MAX_VISIBLE_NAME = 20;
 	public void querySearch(final String filter) {
 		currentFilter = filter;
 		progress.setVisibility(View.VISIBLE);
 		namesFilter.cancelPreviousFilter(filter);
 		namesFilter.filter(filter);
+		NamesAdapter listAdapter = getListAdapter();
+		int i = 0;
+		boolean empty = filter.length() == 0;
+		if (!empty) {
+			while (i < listAdapter.getCount() && i < MAX_THRESHOLD_UI) {
+				T item = listAdapter.getItem(i);
+				String text = getText(item);
+				if (endingSet.add(text)) {
+					if (text.length() > MAX_VISIBLE_NAME) {
+						text = text.substring(0, MAX_VISIBLE_NAME);
+					}
+					endingButton.setText(text + "..");
+					endingObject = item;
+				}
+				i++;
+			}
+			if (i >= listAdapter.getCount() || i == MAX_THRESHOLD_UI) {
+				endingButton.setText("...");
+				endingObject = null;
+			}
+		} else {
+			endingButton.setText("...");
+			endingObject = null;
+			endingSet.clear();
+		}
+		
+		endingButton.forceLayout();
+		
 	}
 	
 	protected void addObjectToInitialList(T initial){

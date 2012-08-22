@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
+import android.location.Location;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,10 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 		};
 	}
 	
+	@Override
+	protected LatLon getLocation(RegionAddressRepository item) {
+		return item.getEstimatedRegionCenter();
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
