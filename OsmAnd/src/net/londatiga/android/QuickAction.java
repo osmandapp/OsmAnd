@@ -118,6 +118,15 @@ public class QuickAction extends CustomPopupWindow {
 	}
 	
 	/**
+	 * Add action item
+	 * 
+	 * @param action  {@link ActionItem}
+	 */
+	public void addActionItem(ActionItem action, int pos) {
+		actionList.add(pos, action); 
+	}
+	
+	/**
 	 * Show popup window
 	 */
 	public void show () {

@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
@@ -66,6 +68,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -394,7 +397,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     
-	protected void getDirections(final Location from, boolean followEnabled) {
+	public void getDirections(final Location from, boolean followEnabled) {
 
 		final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 
@@ -1066,4 +1069,53 @@ public class MapActivityActions implements DialogProvider {
                       });
         menu.show();
     }
+    
+    public static void createDirectionsActions(QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
+    		final boolean saveHistory, final OnClickListener onShow){
+		ActionItem showOnMap = new ActionItem();
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		showOnMap.setIcon(activity.getResources().getDrawable(android.R.drawable.ic_dialog_map));
+		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
+		showOnMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setMapLocationToShow( location.getLatitude(), location.getLongitude(), 
+						z, saveHistory ? name : null, name, obj); //$NON-NLS-1$
+				MapActivity.launchMapActivityMoveToTop(activity);
+			}
+		});
+		qa.addActionItem(showOnMap);
+		ActionItem setAsDestination = new ActionItem();
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_view_set_destination));
+		setAsDestination.setTitle(activity.getString(R.string.navigate_to));
+		setAsDestination.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
+				MapActivity.launchMapActivityMoveToTop(activity);
+			}
+		});
+		qa.addActionItem(setAsDestination);
+		
+		ActionItem directionsTo = new ActionItem();
+		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_view_directions_to_here));
+		directionsTo.setTitle(activity.getString(R.string.context_menu_item_directions));
+		directionsTo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), true, name);
+				MapActivity.launchMapActivityMoveToTop(activity);
+			}
+		});
+		qa.addActionItem(directionsTo);
+	}
 }

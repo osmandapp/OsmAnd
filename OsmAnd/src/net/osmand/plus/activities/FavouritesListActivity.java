@@ -6,6 +6,7 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
+import net.londatiga.android.QuickAction;
 import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -24,7 +25,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -85,12 +85,13 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		locationUpdate(location);
 
 		if (!isSelectFavoriteMode()) {
-			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-				@Override
-				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-					return FavouritesListActivity.this.onItemLongClick(position);
-				}
-			});
+			// TODO remove if not needed
+//			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//				@Override
+//				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//					return FavouritesListActivity.this.onItemLongClick(position);
+//				}
+//			});
 		}
 	}
 
@@ -147,11 +148,20 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		
 		if (!isSelectFavoriteMode()) {
+			QuickAction qa = new QuickAction(v);
 			FavouritePoint point = favouritesAdapter.getItem(position);
-			settings.SHOW_FAVORITES.set(true);
-			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,
-					getString(R.string.favorite) + ": \n " + point.getName(), point); //$NON-NLS-1$
-			MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
+			String name = getString(R.string.favorite) + ": " + point.getName();
+			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+			View.OnClickListener onshow = new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					settings.SHOW_FAVORITES.set(true);							
+				}
+			};
+			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this,
+					true, onshow);
+			qa.show();
 		} else {
 			Intent intent = getIntent();
 			intent.putExtra(SELECT_FAVORITE_POINT_INTENT_KEY, favouritesAdapter.getItem(position));

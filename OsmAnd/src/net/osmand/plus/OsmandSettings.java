@@ -966,6 +966,7 @@ public class OsmandSettings {
 
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route"; //$NON-NLS-1$
 
 	public LatLon getPointToNavigate() {
 		float lat = globalPreferences.getFloat(POINT_NAVIGATE_LAT, 0);
@@ -975,13 +976,27 @@ public class OsmandSettings {
 		}
 		return new LatLon(lat, lon);
 	}
-
+	
+	public boolean isRouteToPointNavigateAndClear(){
+		boolean t = globalPreferences.contains(POINT_NAVIGATE_ROUTE);
+		globalPreferences.edit().remove(POINT_NAVIGATE_ROUTE).commit();
+		return t;
+	}
+	
 	public boolean clearPointToNavigate() {
-		return globalPreferences.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).commit();
+		return globalPreferences.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).
+				remove(POINT_NAVIGATE_ROUTE).commit();
+	}
+	
+	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
+		return setPointToNavigate(latitude, longitude, false, historyDescription);
 	}
 
-	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
+	public boolean setPointToNavigate(double latitude, double longitude, boolean navigate, String historyDescription) {
 		boolean add = globalPreferences.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
+		if(navigate) {
+			globalPreferences.edit().putString(POINT_NAVIGATE_ROUTE, "true").commit();
+		}
 		if(add){
 			if(historyDescription != null){
 				SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);

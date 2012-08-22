@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -26,7 +28,6 @@ import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHours;
-import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -36,8 +37,10 @@ import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.CustomTitleBar;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -68,9 +71,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -230,14 +233,15 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
 
-		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				onLongClick(amenity);
-				return true;
-			}
-		});
+		// TODO remove if not needed
+//		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//			@Override
+//			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+//				final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
+//				onLongClick(amenity);
+//				return true;
+//			}
+//		});
 	}
 	
 	private Path createDirectionPath() {
@@ -559,16 +563,58 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			currentLocationProvider = null;
 		}
 	}
+	
+	
 
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		int z = settings.getLastKnownMapZoom();
-		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, settings.usingEnglishNames());
+		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
+		QuickAction qa = new QuickAction(v);
+		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
 		String name = getString(R.string.poi)+" : " + poiSimpleFormat;
-		settings.setMapLocationToShow( amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-				Math.max(16, z), name, name, amenity); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
+		int z = Math.max(16, settings.getLastKnownMapZoom());
+		MapActivityActions.createDirectionsActions(qa, amenity.getLocation(), amenity, name, z, this, true , null);
+		ActionItem poiDescription = new ActionItem();
+		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
+		poiDescription.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Builder bs = new AlertDialog.Builder(v.getContext());
+				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, v.getContext(), settings.USE_ENGLISH_NAMES.get()));
+				StringBuilder d = new StringBuilder();
+				if(amenity.getOpeningHours() != null) {
+					d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
+				}
+				if(amenity.getPhone() != null) {
+					d.append(getString(R.string.phone) + " : ").append(amenity.getPhone()).append("\n");
+				}
+				if(amenity.getSite() != null) {
+					d.append(getString(R.string.website) + " : ").append(amenity.getSite()).append("\n");
+				}
+				if(amenity.getDescription() != null) {
+					d.append(amenity.getDescription());
+				}
+				bs.setMessage(d.toString());
+				bs.show();
+			}
+		});
+		qa.addActionItem(poiDescription, 2);
+		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
+			ActionItem showDetails = new ActionItem();
+			showDetails.setTitle(getString(R.string.show_details));
+			showDetails.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					showPOIDetails(amenity, settings.usingEnglishNames());
+				}
+			});
+			qa.addActionItem(showDetails);
+		}
+		qa.show();
+		
+		
 	}
 	
 	

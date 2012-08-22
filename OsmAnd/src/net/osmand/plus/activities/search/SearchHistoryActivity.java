@@ -2,6 +2,8 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import net.londatiga.android.QuickAction;
+import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -9,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
 import android.app.AlertDialog;
@@ -18,6 +21,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -123,14 +127,22 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		HistoryEntry model = ((HistoryAdapter) getListAdapter()).getItem(position);
-		selectModel(model);
+		selectModel(model, v);
 	}
 
-	private void selectModel(HistoryEntry model) {
-		helper.selectEntry(model, this);
+	private void selectModel(final HistoryEntry model, View v) {
+		QuickAction qa = new QuickAction(v);
+		String name = model.getName();
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName(), null);
-		MapActivity.launchMapActivityMoveToTop(this);
+		OnClickListener onShow = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				helper.selectEntry(model, SearchHistoryActivity.this);				
+			}
+		};
+		MapActivityActions.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
+				model, name, settings.getLastKnownMapZoom(), this, false, onShow);
+		qa.show();
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
@@ -168,18 +180,18 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectModel(model);
+					selectModel(model, v);
 				}
 			};
 
-			View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View v) {
-					return onItemLongClick(position);
-				}
-			};
-			distanceLabel.setOnLongClickListener(longClickListener);
-			label.setOnLongClickListener(longClickListener);
+//			View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
+//				@Override
+//				public boolean onLongClick(View v) {
+//					return onItemLongClick(position);
+//				}
+//			};
+//			distanceLabel.setOnLongClickListener(longClickListener);
+//			label.setOnLongClickListener(longClickListener);
 			distanceLabel.setOnClickListener(clickListener);
 			label.setOnClickListener(clickListener);
 			return row;
