@@ -372,7 +372,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	</string>
 
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map sources...\' -> \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map source...\' -> \'Offline vector maps\'.</string>
 
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
