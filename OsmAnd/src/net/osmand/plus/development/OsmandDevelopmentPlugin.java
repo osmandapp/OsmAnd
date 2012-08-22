@@ -1,5 +1,8 @@
 package net.osmand.plus.development;
 
+import java.text.SimpleDateFormat;
+
+import net.osmand.SunriseSunset;
 import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -120,8 +123,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pref.setSummary(activity.getString(R.string.native_app_allocated_memory_descr 
 				, mem.nativePrivateDirty / 1024, mem.dalvikPrivateDirty / 1024 , mem.otherPrivateDirty / 1024
 				, mem.nativePss / 1024, mem.dalvikPss / 1024 , mem.otherPss / 1024));
-		pref.setKey("test_voice_commands");
 		cat.addPreference(pref);
+		
+		
+		SunriseSunset sunriseSunset = app.getDaynightHelper().getSunriseSunset();
+		if (sunriseSunset != null) {
+			pref = new Preference(app);
+			pref.setTitle(R.string.day_night_info);
+			SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:MM");
+			pref.setSummary(activity.getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
+					prt.format(sunriseSunset.getSunset())));
+			cat.addPreference(pref);
+		}
 		
 		
 	}

@@ -81,15 +81,7 @@ public class DayNightHelper implements SensorEventListener {
 			if (currentTime - lastAutoCall > 60000) {
 				lastAutoCall = System.currentTimeMillis();
 				try {
-					Location lastKnownLocation = getLocation();
-					if (lastKnownLocation == null) {
-						return null;
-					}
-					double longitude = lastKnownLocation.getLongitude();
-					Date actualTime = new Date();
-					SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(),
-																	 longitude < 0 ? 360 - longitude : longitude, actualTime,
-																	 TimeZone.getDefault());
+					SunriseSunset daynightSwitch  = getSunriseSunset();
 					boolean daytime = daynightSwitch.isDaytime();
 					log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
 					lastAutoValue = Boolean.valueOf(daytime);
@@ -109,6 +101,19 @@ public class DayNightHelper implements SensorEventListener {
 		}
 		return null;
 	}
+	
+	public SunriseSunset getSunriseSunset(){
+		Location lastKnownLocation = getLocation();
+		if (lastKnownLocation == null) {
+			return null;
+		}
+		double longitude = lastKnownLocation.getLongitude();
+		Date actualTime = new Date();
+		SunriseSunset daynightSwitch = new SunriseSunset(lastKnownLocation.getLatitude(),
+														 longitude < 0 ? 360 + longitude : longitude, actualTime,
+														 TimeZone.getDefault());
+		return daynightSwitch;
+	}
 
 	private Location getLocation() {
 		Location lastKnownLocation = null;
@@ -124,7 +129,7 @@ public class DayNightHelper implements SensorEventListener {
 		//find location
 		for (String provider : providers) {
 			lastKnownLocation = locationProvider.getLastKnownLocation(provider);
-			if (lastKnownLocation == null) {
+			if (lastKnownLocation != null) {
 				break;
 			}
 		}

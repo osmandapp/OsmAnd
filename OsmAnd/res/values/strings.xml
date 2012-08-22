@@ -10,6 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="monitor_preferences">Tracking</string>
+    <string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
+    <string name="day_night_info">Day/night info</string>
     <string name="map_widget_day_night">Day/night map</string>
     <string name="map_widget_vector_attributes">Rendering attributes:</string>
     <string name="map_widget_renderer">Rendering style</string>

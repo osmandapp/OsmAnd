@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.CustomTitleBar.CustomTitleBarView;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
 import net.osmand.render.RenderingRulesStorage;
@@ -35,6 +36,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -50,8 +52,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
@@ -636,12 +640,66 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		String title = "";
 		if (preference.getKey() != null && preference instanceof PreferenceScreen
 				&& SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS.equals(preference.getKey())) {
+			final ApplicationMode appMode = osmandSettings.getApplicationMode();
 			PreferenceScreen scr = (PreferenceScreen) preference;
 			title = scr.getTitle().toString();
 			if (title.startsWith("-")) {
 				title = title.substring(1);
 			}
+			Builder builder = new AlertDialog.Builder(this);
+			View view = getLayoutInflater().inflate(R.layout.calculate_route, null);
+			builder.setView(view);
+			final AlertDialog dlg = builder.show();
+			
+			final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
+			buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
+			buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
+			buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+			for (int i = 0; i < buttons.length; i++) {
+				if (buttons[i] != null) {
+					final int ind = i;
+					ToggleButton b = buttons[i];
+					b.setChecked(appMode == ApplicationMode.values()[i]);
+					b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+						@Override
+						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+							if (isChecked) {
+								for (int j = 0; j < buttons.length; j++) {
+									if (buttons[j] != null) {
+										if (buttons[j].isChecked() != (ind == j)) {
+											buttons[j].setChecked(ind == j);
+										}
+									}
+								}
+							} else {
+								// revert state
+								boolean revert = true;
+								for (int j = 0; j < buttons.length; j++) {
+									if (buttons[j] != null) {
+										if (buttons[j].isChecked()) {
+											revert = false;
+											break;
+										}
+									}
+								}
+								if (revert) {
+									buttons[ind].setChecked(true);
+								}
+							}
+							dlg.dismiss();
+						}
+					});
+				}
+			}
+
+			
 			scr.getDialog().setTitle("   " + title + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+			scr.getDialog().setOnDismissListener(new OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					osmandSettings.APPLICATION_MODE.set(appMode);
+				}
+			});
 		} else if (preference instanceof PreferenceScreen) {
 			final PreferenceScreen scr = (PreferenceScreen) preference;
 			title = scr.getTitle().toString();
