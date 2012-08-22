@@ -365,7 +365,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	 
 	<string name="tip_rotation_switching">Map Orientation</string>
-	<string name="tip_rotation_switching_t">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
+	<string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 	\n\tThe choices are:
 	\n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up
 	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
@@ -375,7 +375,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map source...\' -> \'Offline vector maps\'.</string>
 
 	<string name="tip_day_night_mode">Day/Night Mode</string>
-	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
+	<string name="tip_day_night_mode_t_v2">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 	\n\tNight colors are safer for night driving.
 	\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen...\' ->\'Day/night map\'.
 	\n\tChoices are:
@@ -622,12 +622,12 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="preferred_locale">Display language</string>
 
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
+	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
 \n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmandMapCreator on a PC.
 \n\tOsmand also supports custom sources.</string>
 
 	<string name="tip_app_mode">User Profile</string>
-	<string name="tip_app_mode_t">\tOsmand supports different (customizable) application profiles for different use cases.
+	<string name="tip_app_mode_t_v2">\tOsmand supports different (customizable) application profiles for different use cases.
 \n\tYou can change profile via the profile button in the lower left corner of the map screen (icon pedestrian, bicycle, or car), or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
