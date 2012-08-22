@@ -86,7 +86,6 @@ public class OsmandRenderer {
 		}
 
 		// use to calculate points
-		float tileDivisor;
 		PointF tempPoint = new PointF();
 		float cosRotateTileSize;
 		float sinRotateTileSize;

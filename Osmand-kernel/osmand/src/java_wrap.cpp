@@ -357,6 +357,7 @@ jfieldID jfield_RenderingContext_topY = NULL;
 jfieldID jfield_RenderingContext_width = NULL;
 jfieldID jfield_RenderingContext_height = NULL;
 jfieldID jfield_RenderingContext_zoom = NULL;
+jfieldID jfield_RenderingContext_tileDivisor = NULL;
 jfieldID jfield_RenderingContext_rotate = NULL;
 jfieldID jfield_RenderingContext_useEnglishNames = NULL;
 jfieldID jfield_RenderingContext_pointCount = NULL;
@@ -394,6 +395,7 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_width = getFid(env,  jclass_RenderingContext, "width", "I" );
 	jfield_RenderingContext_height = getFid(env,  jclass_RenderingContext, "height", "I" );
 	jfield_RenderingContext_zoom = getFid(env,  jclass_RenderingContext, "zoom", "I" );
+	jfield_RenderingContext_tileDivisor = getFid(env,  jclass_RenderingContext, "tileDivisor", "F" );
 	jfield_RenderingContext_rotate = getFid(env,  jclass_RenderingContext, "rotate", "F" );
 	jfield_RenderingContext_useEnglishNames = getFid(env,  jclass_RenderingContext, "useEnglishNames", "Z" );
 	jfield_RenderingContext_pointCount = getFid(env,  jclass_RenderingContext, "pointCount", "I" );
@@ -437,6 +439,7 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 	rc->setDimension(env->GetIntField( jrc, jfield_RenderingContext_width ), env->GetIntField( jrc, jfield_RenderingContext_height ));
 
 	rc->setZoom(env->GetIntField( jrc, jfield_RenderingContext_zoom ));
+	rc->setTileDivisor(env->GetFloatField( jrc, jfield_RenderingContext_tileDivisor ));
 	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
 	rc->setDensityScale(env->GetFloatField( jrc, jfield_RenderingContext_density ));
 	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));

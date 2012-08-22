@@ -205,6 +205,10 @@ public:
 		this->tileDivisor = (1 << (31 - z));
 	}
 
+	void setTileDivisor(float tileDivisor) {
+		this->tileDivisor = tileDivisor;
+	}
+
 	void setDefaultColor(int z) {
 		this->defaultColor = z;
 	}
