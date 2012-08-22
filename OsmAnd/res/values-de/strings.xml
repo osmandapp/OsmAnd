@@ -333,7 +333,14 @@
   <string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
   <string name="install_more">Weitere installieren …</string>
   <string name="tip_update_index">Update der Offline-Daten</string>
-  <string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. Osmand bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können. \n\tUpdates finden Sie via \'Hauptmenü\' -&gt; \'Einstellungen\' -&gt; \'Offline-Daten\'. \n\tNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' -&gt; \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren. \n\tAngezeigt werden verfügbare Updates nach dem folgenden Farbschema: \n\t\'Grün\' - Daten sind aktuell \n\t\'Blau\' - neuere Version vorhanden</string>
+  <string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. Osmand bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
+	\n\tUpdates finden Sie via \'Hauptmenü\' -&gt; \'Einstellungen\' -&gt; \'Offline-Daten\'.
+	\n\tNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' -&gt; \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
+	\n\tAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
+	\n\t\'Grün\' - Daten sind aktuell
+	\n\t\'Blau\' - neuere Version vorhanden
+	\n\t\'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten</string>
+  </string>
   <string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
   <string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
   <string name="tip_location_sharing">Lokation mitteilen</string>
@@ -350,7 +357,7 @@
   <string name="tip_map_switch">Kartenquelle</string>
   <string name="tip_map_switch_t_v2">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -&gt; \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen. \n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmandMapCreator) erstellten Karten wählen. \n\tOsmand unterstützt auch selbst definierte Quellen. (Für Online-Karten entsprechendes Plugin aktivieren.)</string>
   <string name="tip_app_mode">Nutzerprofile</string>
-  <string name="tip_app_mode_t_v2">\tOsmand unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke. \n\tDas Profil kann mit dem Profilknopf links unten (Bild Fussgänger, Auto, Fahhrad) auf dem Kartenbildsschirm gewählt werden, oder auch beim Berechnen einer Route.</string>
+  <string name="tip_app_mode_t_v2">\tOsmand unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke. \n\tDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildsschirm gewählt werden, oder auch beim Berechnen einer Route.</string>
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' -&gt; \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
   <string name="tip_search">Suchen</string>
