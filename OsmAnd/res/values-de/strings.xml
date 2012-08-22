@@ -340,7 +340,6 @@
 	\n\t\'Grün\' - Daten sind aktuell
 	\n\t\'Blau\' - neuere Version vorhanden
 	\n\t\'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten</string>
-  </string>
   <string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
   <string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
   <string name="tip_location_sharing">Lokation mitteilen</string>
