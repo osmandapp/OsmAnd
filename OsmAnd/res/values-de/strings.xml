@@ -133,7 +133,7 @@
   <string name="live_monitoring_interval">Live-Tracking Intervall</string>
   <string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
-  <string name="gpx_monitoring_disabled_warn">Bitte Logging aktivieren unter \'Einstellungen'\ -> \'Navigation\'</string>
+  <string name="gpx_monitoring_disabled_warn">Bitte Logging aktivieren unter \'Einstellungen\' -> \'Navigation\'</string>
   <string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
   <string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 : \n\t- Offline Wikipedia Daten mit Artikeln \n\t- Aktualisierte Karten \n\t- Weitere kleine Verbesserungen "</string>
   <string name="free_version_message">Diese kostenlose Version von Osmand ist limitiert auf %1$s Downloads %2$s und unterstützt keine offline Wikipedia-Artikel.</string>
