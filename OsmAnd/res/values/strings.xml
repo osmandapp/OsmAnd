@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="select_navigation_mode">Select transportation mode</string>
     <string name="monitor_preferences">Tracking</string>
     <string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
     <string name="day_night_info">Day/night info</string>

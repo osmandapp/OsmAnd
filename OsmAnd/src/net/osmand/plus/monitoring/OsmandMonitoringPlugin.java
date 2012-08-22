@@ -117,10 +117,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		} else {
 			offlineData.setSummary(offlineData.getSummary() + " " + app.getString(R.string.gpx_index_settings_descr));
 		}
-		PreferenceScreen general = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS);
-		//general.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
-		//		R.string.live_monitoring_url_descr));
-		
 
 		PreferenceCategory cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.save_track_to_gpx);

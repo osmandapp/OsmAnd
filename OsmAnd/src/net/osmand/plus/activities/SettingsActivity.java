@@ -25,13 +25,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.CustomTitleBar.CustomTitleBarView;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
 import net.osmand.render.RenderingRulesStorage;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -52,10 +52,9 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
-import android.widget.CompoundButton;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class SettingsActivity extends PreferenceActivity implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
@@ -647,53 +646,33 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				title = title.substring(1);
 			}
 			Builder builder = new AlertDialog.Builder(this);
-			View view = getLayoutInflater().inflate(R.layout.calculate_route, null);
+			View view = getLayoutInflater().inflate(R.layout.navigate_mode, null);
 			builder.setView(view);
 			final AlertDialog dlg = builder.show();
 			
-			final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
-			buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
-			buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
-			buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+			final Button[] buttons = new Button[ApplicationMode.values().length];
+			buttons[ApplicationMode.CAR.ordinal()] = (Button) view.findViewById(R.id.CarButton);
+			buttons[ApplicationMode.BICYCLE.ordinal()] = (Button) view.findViewById(R.id.BicycleButton);
+			buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (Button) view.findViewById(R.id.PedestrianButton);
+			final Dialog scrDialog = scr.getDialog();
+			final String tlt = "   " + title;
 			for (int i = 0; i < buttons.length; i++) {
 				if (buttons[i] != null) {
 					final int ind = i;
-					ToggleButton b = buttons[i];
-					b.setChecked(appMode == ApplicationMode.values()[i]);
-					b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					final Button b = buttons[i];
+					b.setOnClickListener(new View.OnClickListener() {
 						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							if (isChecked) {
-								for (int j = 0; j < buttons.length; j++) {
-									if (buttons[j] != null) {
-										if (buttons[j].isChecked() != (ind == j)) {
-											buttons[j].setChecked(ind == j);
-										}
-									}
-								}
-							} else {
-								// revert state
-								boolean revert = true;
-								for (int j = 0; j < buttons.length; j++) {
-									if (buttons[j] != null) {
-										if (buttons[j].isChecked()) {
-											revert = false;
-											break;
-										}
-									}
-								}
-								if (revert) {
-									buttons[ind].setChecked(true);
-								}
-							}
+						public void onClick(View v) {
+							ApplicationMode selected = ApplicationMode.values()[ind];
+							osmandSettings.APPLICATION_MODE.set(selected);
+							updateAllSettings();
+							scrDialog.setTitle(tlt + " [" + selected.toHumanString(SettingsActivity.this) + "]");
 							dlg.dismiss();
 						}
 					});
 				}
 			}
-
-			
-			scr.getDialog().setTitle("   " + title + " [" + osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+			scrDialog.setTitle(tlt);
 			scr.getDialog().setOnDismissListener(new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dialog) {
