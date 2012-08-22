@@ -3,7 +3,7 @@
 	<string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 나타납니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	<string name="simulate_route_progression_manually">경로 진행을 수동으로 시뮬레이션합니다</string>
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 출력합니다</string>
-	<string name="debugging_and_development">OsmAnd 디버깅 및 개발</string>
+	<string name="debugging_and_development">Osmand 디버깅 및 개발</string>
 	<string name="native_rendering">네이티브 렌더링</string>
 	<string name="animate_routing">경로 애니메이션</string>
 	<string name="test_voice_prompts">음성 안내 테스트</string>    
@@ -131,7 +131,7 @@
 	\n\t- 업데이트된 맵들
 	\n\t- 기타 몇몇 기능들
 	</string>    
-	<string name="free_version_message">이 무료 OsmAnd 버전은 %1$s 다운로드를  %2$s 번으로 제한되고 오프라인 위키피디아 기사를 제공하지 않습니다.</string>
+	<string name="free_version_message">이 무료 Osmand 버전은 %1$s 다운로드를  %2$s 번으로 제한되고 오프라인 위키피디아 기사를 제공하지 않습니다.</string>
 	<string name="free_version_title">무료 버전</string>
 	<string name="poi_context_menu_showdescription">POI 설명 보여주기</string>
 
@@ -173,7 +173,7 @@
 	<string name="user_password">OSM 패스워드</string>
 	<string name="user_password_descr">openstreetmap.org 제출을 위해 필요합니다</string>
 	<string name="osmand_service">백그라운드 서비스</string>
-	<string name="osmand_service_descr">화면이 꺼져 있는 동안에도 OsmAnd 를 실행하기 위해 사용합니다</string>
+	<string name="osmand_service_descr">화면이 꺼져 있는 동안에도 Osmand 를 실행하기 위해 사용합니다</string>
 	
 	<string name="tip_rotation_switching">맵 회전</string>
 	<string name="tip_rotation_switching_t">\t여러분은 \'설정\' -> \'맵 모양\' -> \'맵 회전\' 메뉴에서 맵 출력이 회전하는 방식을 선택할 수 있습니다.
@@ -196,7 +196,7 @@
 	\n\t\'광 센서\' - 맵 모양이 장치의 광 센서로 제어됨 (장착된 경우에만)</string>	
 
 	<string name="tip_osm_improve">OSM 데이터 개선하기</string>
-	<string name="tip_osm_improve_t">\tOsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 보기 및 경로 외에- OSM 데이터 질을 개선하는 데 사용할 수 있습니다. 여러분은 몇번의 클릭만으로도 새로운 POI 또는 OSM 버그 리포트를 만들고 업로드할 수 있습니다!
+	<string name="tip_osm_improve_t">\tOsmand 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 보기 및 경로 외에- OSM 데이터 질을 개선하는 데 사용할 수 있습니다. 여러분은 몇번의 클릭만으로도 새로운 POI 또는 OSM 버그 리포트를 만들고 업로드할 수 있습니다!
 	\n\t이렇게 하려면 \'설정\' -> \'일반 설정\' -> \'OSM\' 메뉴에서 OSM 로그인 정보를 제공하여야 합니다.
 	\n\t새로운 POI 를 추가하려면 맵 컨텍스트 메뉴에서 \'POI 생성\' 옵션을 사용합니다. \'POI 생성\' 대화상자에서는 새로운 POI 에 대한 정보를 입력하고 최종 확인합니다.
 	\n\t맵 오류는 OSM 버그를 통해 즉각 리포트될 수 있으며, 이렇게 하면 OSM 커뮤니티는 이 문제를 더 빠르게 고칠 수 있습니다.
@@ -210,7 +210,7 @@
 	<string name="show_zoom_level">줌 레벨 표시</string>
 	<string name="tip_select_destination_point">목적지 선택</string>
 	<string name="tip_select_destination_point_t">\t여러분은 맵(컨텍스트 메뉴->\'목적지로 설정\'), 모든 검색 액티비티, 또는 \'등록지점 목록\'에서 항목을 길게 눌러 직접  목적지를 선택할 수 있습니다. 
-\n\t목적지는 맵 상에서 오렌지 원으로 표시되고 OsmAnd 는 거기까지의 거리와 방향 (오렌지 삼각형)을 나타냅니다.</string> 
+\n\t목적지는 맵 상에서 오렌지 원으로 표시되고 Osmand 는 거기까지의 거리와 방향 (오렌지 삼각형)을 나타냅니다.</string> 
 
 	<string name="tip_recent_changes_0_6_9_t">0.6.9 버전에 대한 변경 사항들 :
 \n\t- 개선된 오프라인 맵 렌더링
@@ -268,7 +268,7 @@
 	<string name="old_poi_file_should_be_deleted">POI 데이터 파일 \'%1$s\' 가 중복되어 있으니 삭제할 수 있습니다.</string>
 	<string name="update_poi_file_not_found">POI 변경을 포함하는 지역 파일을 찾을 수 없으며 만들 수 없습니다.</string>
 
-	<string name="button_upgrade_osmandplus">OsmAnd+ 로 업그레이드</string>
+	<string name="button_upgrade_osmandplus">Osmand+ 로 업그레이드</string>
 	<string name="map_version_changed_info">서버가 현재 앱 버전과 호환되지 않는 맵 파일을 가지고 있습니다. 그것들을 다운로드하고 사용하기 위해, 앱을 새로운 버전으로 업그레이드하세요.</string>
 	
 	<string name="local_index_mi_rename">이름 수정</string>
@@ -287,7 +287,7 @@
 	<string name="select_search_position">주변 검색 :</string>
 	<string name="context_menu_item_search">주변 검색</string>
 	<string name="tip_recent_changes_0_6_7_t">0.6.7 버전에 대한 변경사항들 :
-\n\t- 오프라인 데이터 관리 (OsmAnd 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
+\n\t- 오프라인 데이터 관리 (Osmand 에서 직접 오프라인 데이터 다운로드, 삭제, 활성화 / 비활성화)
 \n\t- 등록지점 및 그룹 (등록지점 그룹화, 삭제, 관리)
 \n\t- 앱 내의 GPX 탐색 (트랙 세부사항, 거리, 평균 속도, 고도 등 보기)
 \n\t- GPX 네비게이션 (다 많은 옵션, 종료 후 네비게이션 계속, 로타리 지원)
@@ -409,7 +409,7 @@
 	<string name="install_more">추가 설치&#8230;</string>
 
 	<string name="tip_update_index">오프라인 데이터 갱신</string>
-	<string name="tip_update_index_t">\t맵 데이터를 갱신할 때 필요합니다. OsmAnd 는 사용가능한 오프라인 갱신 데이터를 찾을 수 있는 다운로드 관리자를 제공합니다.
+	<string name="tip_update_index_t">\t맵 데이터를 갱신할 때 필요합니다. Osmand 는 사용가능한 오프라인 갱신 데이터를 찾을 수 있는 다운로드 관리자를 제공합니다.
 	\n\t갱신 데이터를 찾기 위해 \'설정\' -> \'오프라인 데이터\' -> \'오프라인 데이터 다운로드\' 로 갑니다. 인터넷으로부터 지역 목록을 받은 후에, 장치에 이미 존재하는 데이터에 대해서만 갱신하도록 \'메뉴\' -> \'다운로드된 것들로 필터링\' 옵션을 선택할 수 있습니다.
 	\n\t갱신 데이터에 대한 사용 가능성은 다음 색깔로 구분됩니다:
 	\n\t\'녹색\' - 장치와 서버의 데이터 파일이 같다는 것을 가리킵니다
@@ -442,10 +442,10 @@
 	<string name="tip_map_switch">맵 소스</string>
 	<string name="tip_map_switch_t">\t보여줄 맵 소스와 계층을 바꾸는 가장 빠른 방법은 맵 보기에서 \'메뉴\' -> \'뷰 정의\' 를 누르는 것입니다.
 \n\t\'맵 소스&#8230;\' 에서 미리 적재된 오프라인 벡터 맵, 미리 정의된 (온라인) 타일 소스, 또는 수동으로 생성한 맵 (예를 들면 PC 에서 OsmMapCreater 사용)을 선택합니다.
-\n\t또한 OsmAnd 는 커스텀 소스를 지원합니다.</string>
+\n\t또한 Osmand 는 커스텀 소스를 지원합니다.</string>
 
 	<string name="tip_app_mode">유저 프로파일</string>
-	<string name="tip_app_mode_t">\tOsmAnd 는 서로 다른 (전용의) 사용 목적을 가지는 여러 앱 프로파일을 지원합니다.
+	<string name="tip_app_mode_t">\tOsmand 는 서로 다른 (전용의) 사용 목적을 가지는 여러 앱 프로파일을 지원합니다.
 \n\t\'메뉴\' -> \'설정\' -> \'사용자 프로파일\' 을 선택하거나 경로를 생성할 때 프로파일을 바꿀 수 있습니다.</string>
 
 	<string name="tip_navigation">네비게이션</string>
@@ -461,7 +461,7 @@
 \n\t맵 컨텍스트 메뉴는 한 지점(위치)에 대한 모든 동작을 포함하고 있습니다.</string>
 
 	<string name="tip_initial">팁과 기술</string>
-	<string name="tip_initial_t">\tOsmAnd 는 많은 기능을 가진 네비게이션 앱입니다. 
+	<string name="tip_initial_t">\tOsmand 는 많은 기능을 가진 네비게이션 앱입니다. 
 \n\t기본적인 소개로서, 몇 가지 유용한 팁과 기술을 주 메뉴 화면에 나타냅니다.</string>
 	<string name="next_button">다음</string>
 	<string name="previous_button">이전</string>
@@ -524,20 +524,20 @@
 	<string name="version_index_is_big_for_memory">인덱스 \'\'{0}\'\' 가 메모리에 맞지 않습니다</string>
 	<string name="version_index_is_not_supported">인덱스 \'\'{0}\'\' 버전은 지원하지 않습니다</string>
 
-	<string name="use_osmand_routing_service">OsmAnd 경로</string>
-	<string name="use_osmand_routing_service_descr">긴 거리를 위해 CloudMade 대신에 OsmAnd 오프라인 경로 (실험적)를 사용합니다</string>
-	<string name="osmand_routing_experimental">OsmAnd 오프라인 경로는 실험적인 기능이며  20 km 이상의 거리에서는 동작하지 않습니다.\n\n경로 서비스는 일시적으로 온라인 CloudMade로 변경합니다.</string>
+	<string name="use_osmand_routing_service">Osmand 경로</string>
+	<string name="use_osmand_routing_service_descr">긴 거리를 위해 CloudMade 대신에 Osmand 오프라인 경로 (실험적)를 사용합니다</string>
+	<string name="osmand_routing_experimental">Osmand 오프라인 경로는 실험적인 기능이며  20 km 이상의 거리에서는 동작하지 않습니다.\n\n경로 서비스는 일시적으로 온라인 CloudMade로 변경합니다.</string>
 	<string name="specified_dir_doesnt_exist">지정한 디렉토리를 찾을 수 없습니다.</string>
 	<string name="application_dir">저장 디렉토리</string>
-	<string name="application_dir_change_warning">저장 디렉토리 변경은 데이터를 이동하거나 삭제하지 않습니다. 이것은 OsmAnd 와는 별도로 실행되어야 합니다. 계속할까요?</string>
+	<string name="application_dir_change_warning">저장 디렉토리 변경은 데이터를 이동하거나 삭제하지 않습니다. 이것은 Osmand 와는 별도로 실행되어야 합니다. 계속할까요?</string>
 
-	<string name="osmand_net_previously_installed">이전  OsmAnd 버전이 설치되어 있습니다. 모든 오프라인 데이터는  새로운 프로그램에서 지원합니다. 하지만 등록지점은 예전 앱에서 확인하여 나중에 새로 추가하여야 합니다..</string>
+	<string name="osmand_net_previously_installed">이전  Osmand 버전이 설치되어 있습니다. 모든 오프라인 데이터는  새로운 프로그램에서 지원합니다. 하지만 등록지점은 예전 앱에서 확인하여 나중에 새로 추가하여야 합니다..</string>
 	<string name="build_installed">빌드 {0} 가 성공적으로 설치되었습니다 ({1}).</string>
 	<string name="downloading_build">빌드 다운로드&#8230;</string>
-	<string name="install_selected_build">OsmAnd - {0} from {1} {2} MB - 설치를 계속하시겠습니까 ?</string>
-	<string name="loading_builds_failed">OsmAnd 빌드 목록 추출이 실패하였습니다</string>
-	<string name="loading_builds">OsmAnd 빌드 적재&#8230;</string>
-	<string name="select_build_to_install">설치할 OsmAnd 빌드 선택</string>
+	<string name="install_selected_build">Osmand - {0} from {1} {2} MB - 설치를 계속하시겠습니까 ?</string>
+	<string name="loading_builds_failed">Osmand 빌드 목록 추출이 실패하였습니다</string>
+	<string name="loading_builds">Osmand 빌드 적재&#8230;</string>
+	<string name="select_build_to_install">설치할 Osmand 빌드 선택</string>
 	<string name="contribution_activity">기부 버전을 위한 특별 액티비티</string>
 
 	<string name="gps_status_app_not_found">GPS 상태 앱이 설치되지 않았습니다. 마켓에서 찾을까요?</string>
@@ -641,7 +641,7 @@
 	<string name="background_service_wait_int">대기 시간</string>
 	<string name="service_stop_background_service">백그라운드 네비게이션 서비스 끄기</string>
 	<string name="where_am_i">내 위치</string>
-	<string name="process_navigation_service">OsmAnd 네비게이션 서비스</string>
+	<string name="process_navigation_service">Osmand 네비게이션 서비스</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">초</string>
@@ -678,7 +678,7 @@
 	<string name="route_head">전방</string>
 	<string name="first_time_continue">계속하세요</string>
 	<string name="first_time_download">영역 다운로드</string>
-	<string name="first_time_msg">OsmAnd 를 선택해 주셔서 감사합니다. \n앱의 모든 기능을 사용하려면, 인덱스 파일을 다운로드(설정 -&gt; 데이터)하거나 준비하세요. 그런 다음에 주소, POI, 대중교통을 검색할 수 있습니다.</string>
+	<string name="first_time_msg">Osmand 를 선택해 주셔서 감사합니다. \n앱의 모든 기능을 사용하려면, 인덱스 파일을 다운로드(설정 -&gt; 데이터)하거나 준비하세요. 그런 다음에 주소, POI, 대중교통을 검색할 수 있습니다.</string>
 	<string name="search_poi_location">신호 위치 찾는 중...</string>
 	<string name="search_near_map">지난번 지도 위치 검색</string>
 	<string name="search_nearby">근처 검색</string>
@@ -705,7 +705,7 @@
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">대중교통 정류소를 맵 위에 표시합니다</string>
 	<string name="show_transport_over_map">대중교통 정류소 표시</string>
-	<string name="hello">네비게이션 앱 OsmAnd</string>
+	<string name="hello">네비게이션 앱 Osmand</string>
 	<string name="update_poi_success">POI 데이터가 성공적으로 갱신되었습니다 ({0} 이 적재되었습니다)</string>
 	<string name="update_poi_error_local">지역 색인을 갱신하는 도중 오류가 발생하였습니다</string>
 	<string name="update_poi_error_loading">서버로부터 데이터를 적재하는 도중 오류가 발생하였습니다</string>
@@ -776,7 +776,7 @@
 	<string name="new_route_calculated_dist">새로운 경로를 찾았습니다, 거리</string>
 	<string name="arrived_at_destination">목적지에 도착하였습니다</string>
 	<string name="invalid_locations">위치가 잘못되었습니다</string>
-	<string name="go_back_to_osmand">OsmAnd 맵으로 되돌아감</string>
+	<string name="go_back_to_osmand">Osmand 맵으로 되돌아감</string>
 	<string name="close">닫기</string>
 	<string name="loading_data">데이터 적재중</string>
 	<string name="reading_indexes">인덱스 읽는 중...</string>

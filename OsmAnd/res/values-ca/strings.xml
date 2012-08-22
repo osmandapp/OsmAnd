@@ -87,7 +87,7 @@
 <string name="monitoring_mode_off">Enregistra en un GPX</string>
 <string name="bg_service_sleep_mode_off">Activa\n el mode adormit</string>
 <string name="bg_service_sleep_mode_on">Atura\n el mode adormit</string>
-<string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
+<string name="offline_navigation_not_available">La navegació fora de línia de l\'Osmand no està disponible temporalment.</string>
 <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
 <string name="select_index_file_to_download">No s\'ha trobat res. Si no podeu trobar la vostra regió, podeu crear-la vosaltres mateixos (vegeu http://osmand.net).</string>
 <string name="local_indexes_cat_tile">Mapes en línia (tessel·les)</string>
@@ -102,7 +102,7 @@
 <string name="osmand_accessibility_description">Mostra la configuració per les característiques especials d\'accessibilitat.</string>
 <string name="extra_settings">Configuració avançada</string>
 <string name="plugins_screen">Connector Gestor</string>
-<string name="select_plugin_to_activate">Toqueu un connector per activar-lo o desactivar-lo (caldrà que reinicieu l\'OsmAnd).</string>
+<string name="select_plugin_to_activate">Toqueu un connector per activar-lo o desactivar-lo (caldrà que reinicieu l\'Osmand).</string>
 <string name="poi_search_desc">Cerca PDI (punt d\'interès)</string>
 <string name="prefs_plugins">Connector Gestor</string>
 <string name="native_rendering">Renderització nativa</string>
@@ -168,13 +168,13 @@
 <string name="index_settings_descr">Baixeu, visualitzeu-ne els detalls, i gestioneu mapes fora de línia</string>
 <string name="osmand_extra_settings_description">Mostra els paràmetres per una configuració avançada del mapa (per exemple augmentant els detalls del mapa) i alguns específics del dispositiu.</string>
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
-<string name="debugging_and_development">Desenvolupament de l\'OsmAnd</string>
+<string name="debugging_and_development">Desenvolupament de l\'Osmand</string>
 <string name="local_openstreetmap_show">Mostra al mapa</string>
 <string name="local_openstreetmap_upload">Penja la modificació a OSM</string>
 <string name="local_openstreetmap_delete">Esborra els canvis</string>
 <string name="local_openstreetmap_uploadall">Penja-ho tot</string>
 <string name="show_current_gpx_title">Mostra la traça actual</string>
-<string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s baixades %2$s i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
+<string name="free_version_message">Aquesta versió gratuïta de l\'Osmand està limitada a %1$s baixades %2$s i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
 <string name="free_version_title">Versió gratuïta</string>
 <string name="poi_context_menu_showdescription">Mostra la descripció del PDI</string>
 <string name="index_name_france">Europa - França</string>
