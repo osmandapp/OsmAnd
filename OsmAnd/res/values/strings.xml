@@ -152,7 +152,7 @@
     <string name="context_menu_item_directions">Directions to here</string>
     <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
     <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>    
+	<string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use \'Settings\' ->  \'Offline Data\'). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>    
     <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Online maps (tiles)</string>
@@ -164,7 +164,7 @@
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
     <string name="online_map_settings">Online Maps</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
-	<string name="map_settings">- Map Settings</string>
+	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
 	
 	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the Osmand folder.</string>
@@ -312,7 +312,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="live_monitoring_interval">Live tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
+	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
 	\n\t- Offline wikipedia data with articles
@@ -362,19 +362,19 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	 
 	<string name="tip_rotation_switching">Map Orientation</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'Map appearance\' -> \'Map rotation\'.
+	<string name="tip_rotation_switching_t">\tYou can toggle whether and how the map display is rotated by repeteadly clicking on the map screen\'s compass icon.
 	\n\tThe choices are:
 	\n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up
 	\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
 	\n\t\'To compass\' - Map will continuously be aligned with device compass reading
-	\n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
+	</string>
 
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -> \'Map configuration\' -> \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map sources...\' -> \'Offline vector maps\'.</string>
 
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 	\n\tNight colors are safer for night driving.
-	\n\tYou can set a policy for day/night switching in \'Settings\' -> \'Map appearance\' ->\'Day/night mode\'.
+	\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen...\' ->\'Day/night map\'.
 	\n\tChoices are:
 	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
 	\n\t\'Day\' - always use day mode
@@ -605,9 +605,9 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
-\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -> \'Favorites\'.
+\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -> \'Favorites\'.
 \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
-\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
+\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -> \'Define view\'.</string>
 
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
     <string name="error_doing_search">Error occurred in offline search</string>
@@ -619,20 +619,20 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="preferred_locale">Display language</string>
 
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
-\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmandMapCreator on a PC.
+	<string name="tip_map_switch_t">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
+\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmandMapCreator on a PC.
 \n\tOsmand also supports custom sources.</string>
 
 	<string name="tip_app_mode">User Profile</string>
 	<string name="tip_app_mode_t">\tOsmand supports different (customizable) application profiles for different use cases.
-\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
+\n\tYou can change profile via the profile button in the lower left corner of the map screen, or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
 
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
-\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
+\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
 
 	<string name="tip_map_context_menu">Map Context Menu</string>
 	<string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.
@@ -641,7 +641,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	<string name="tip_initial">Tips and Tricks</string>
 	<string name="tip_initial_t">\tOsmand is a navigation application with many features. 
-\n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
+\n\tAs an basic introduction, some usage tips and tricks are linked on the main screen.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
 
