@@ -9,7 +9,6 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
 	\n\tTo check for updates go to \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
@@ -17,6 +16,7 @@
 	\n\t\'Green\' - indicates data files identical on device and server
 	\n\t\'Blue\' - indicates available updates on server
 	\n\t\'Dark green/blue\' - likewise indicate data de-activated on the device</string>
+    <string name="filterpoi_activity">Create POI filter</string>
     <string name="select_navigation_mode">Select transportation mode</string>
     <string name="monitor_preferences">Tracking</string>
     <string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>

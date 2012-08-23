@@ -37,14 +37,14 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		return new AsyncTask<Object, Void, List<Building>>(){
 			@Override
 			protected void onPostExecute(List<Building> result) {
-				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_building);
+				setLabelText(R.string.incremental_search_building);
 				progress.setVisibility(View.INVISIBLE);
 				finishInitializing(result);
 			}
 			
 			@Override
 			protected void onPreExecute() {
-				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets_buildings);
+				setLabelText(R.string.loading_streets_buildings);
 				progress.setVisibility(View.VISIBLE);
 			}
 			@Override

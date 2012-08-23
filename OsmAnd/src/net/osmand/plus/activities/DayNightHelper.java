@@ -82,9 +82,11 @@ public class DayNightHelper implements SensorEventListener {
 				lastAutoCall = System.currentTimeMillis();
 				try {
 					SunriseSunset daynightSwitch  = getSunriseSunset();
-					boolean daytime = daynightSwitch.isDaytime();
-					log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
-					lastAutoValue = Boolean.valueOf(daytime);
+					if (daynightSwitch != null) {
+						boolean daytime = daynightSwitch.isDaytime();
+						log.debug("Sunrise/sunset setting to day: " + daytime); //$NON-NLS-1$
+						lastAutoValue = Boolean.valueOf(daytime);
+					}
 					return lastAutoValue;
 				} catch (IllegalArgumentException e) {
 					log.warn("Network location provider not available"); //$NON-NLS-1$

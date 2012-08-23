@@ -36,7 +36,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		((TextView)findViewById(R.id.Label)).setText(R.string.choose_available_region);
+		setLabelText(R.string.choose_available_region);
 		if(((OsmandApplication)getApplication()).getResourceManager().getAddressRepositories().isEmpty()){
 			AccessibleToast.makeText(this, R.string.none_region_found, Toast.LENGTH_LONG).show();
 		}

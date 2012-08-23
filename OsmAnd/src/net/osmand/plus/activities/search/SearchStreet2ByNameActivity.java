@@ -28,14 +28,14 @@ public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<St
 		return new AsyncTask<Object, Void, List<Street>>(){
 			@Override
 			protected void onPostExecute(List<Street> result) {
-				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_street);
+				setLabelText(R.string.incremental_search_street);
 				progress.setVisibility(View.INVISIBLE);
 				finishInitializing(result);
 			}
 			
 			@Override
 			protected void onPreExecute() {
-				((TextView)findViewById(R.id.Label)).setText(R.string.loading_streets);
+				setLabelText(R.string.loading_streets);
 				progress.setVisibility(View.VISIBLE);
 			}
 			@Override

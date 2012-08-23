@@ -34,6 +34,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -47,6 +50,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	private Button filterLevel;
 	private PoiFilter filter;
 	private PoiFiltersHelper helper;
+	private CustomTitleBar titleBar;
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
 	
@@ -54,7 +58,9 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	@Override
 	public void onCreate(final Bundle icicle) {
 		super.onCreate(icicle);
+		titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.editing_poi_filter);
+		titleBar.afterSetContentView();
 		
 
 		filterLevel = (Button) findViewById(R.id.filter_currentButton);
@@ -96,12 +102,21 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				}
 			}
 		});
+		
+		((ImageButton) findViewById(R.id.SaveButton)).setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				savePoiFilter();
+			}
+		});
 
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
 		
 		helper = ((OsmandApplication)getApplication()).getPoiFilters();
 		filter = helper.getFilterById(filterId);
+		titleBar.getTitleView().setText(getString(R.string.filterpoi_activity) + " - " + filter.getName());
 
 		setListAdapter(new AmenityAdapter(AmenityType.getCategories()));
 	}
@@ -113,7 +128,31 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		inflater.inflate(R.menu.edit_filter_menu, menu);
 		return true;
 	}
-
+	public void savePoiFilter() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.edit_filter_save_as_menu_item);
+		final EditText editText = new EditText(this);
+		LinearLayout ll = new LinearLayout(this);
+		ll.setPadding(5, 3, 5, 0);
+		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		builder.setView(ll);
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
+				if (helper.createPoiFilter(nFilter)) {
+					AccessibleToast.makeText(
+							EditPOIFilterActivity.this,
+							MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_create_message).toString(),
+									editText.getText().toString()), Toast.LENGTH_SHORT).show();
+				}
+				EditPOIFilterActivity.this.finish();
+			}
+		});
+		builder.create().show();
+		
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.edit_filter_delete) {
@@ -136,25 +175,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			builder.create().show();
 			return true;
 		} else if (item.getItemId() == R.id.edit_filter_save_as) {
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.edit_filter_save_as_menu_item);
-			final EditText editText = new EditText(this);
-			builder.setView(editText);
-			builder.setNegativeButton(R.string.default_buttons_cancel, null);
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					PoiFilter nFilter = new PoiFilter(editText.getText().toString(), null, filter.getAcceptedTypes(), (OsmandApplication) getApplication());
-					if (helper.createPoiFilter(nFilter)) {
-						AccessibleToast.makeText(
-								EditPOIFilterActivity.this,
-								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_create_message).toString(),
-										editText.getText().toString()), Toast.LENGTH_SHORT).show();
-					}
-					EditPOIFilterActivity.this.finish();
-				}
-			});
-			builder.create().show();
+			savePoiFilter();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
