@@ -1,8 +1,9 @@
 package net.osmand.plus.activities;
 
 import android.content.Context;
-import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.text.TextPaint;
+import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -11,38 +12,35 @@ import android.widget.TextView;
  */
 public class FontFitTextView extends TextView {
 
-	private static float MAX_TEXT_SIZE = 20;
-
 	public FontFitTextView(Context context) {
 		this(context, null);
 	}
 
 	public FontFitTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		
-		float size = this.getTextSize();
-		if (size > MAX_TEXT_SIZE)
-			setTextSize(MAX_TEXT_SIZE);
+        setSingleLine();
+        setEllipsize(TruncateAt.MARQUEE);
 	}
 	
     // Default constructor override
     public FontFitTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        
-		float size = this.getTextSize();
-		if (size > MAX_TEXT_SIZE)
-			setTextSize(MAX_TEXT_SIZE);
+        setSingleLine();
+        setEllipsize(TruncateAt.MARQUEE);
     }
 
 	private void refitText(String text, int textWidth) {
 		if (textWidth > 0) {
+			Drawable left = getCompoundDrawables()[0];
+			Drawable right = getCompoundDrawables()[2];
 			float availableWidth = textWidth - this.getPaddingLeft()
-					- this.getPaddingRight();
+					- this.getPaddingRight() - this.getCompoundDrawablePadding()
+					- (left != null ? left.getMinimumWidth() : 0)
+					- (right != null ? right.getMinimumWidth() : 0);
 
+			setTextScaleX(1f);
 			TextPaint tp = getPaint();
-			Rect rect = new Rect();
-			tp.getTextBounds(text, 0, text.length(), rect);
-			float size = rect.width();
+			float size = tp.measureText(text);
 
 			if (size > availableWidth)
 				setTextScaleX(availableWidth / size);
@@ -51,11 +49,9 @@ public class FontFitTextView extends TextView {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
-		int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
 		refitText(this.getText().toString(), parentWidth);
-		this.setMeasuredDimension(parentWidth, parentHeight);
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
 	@Override
@@ -70,18 +66,5 @@ public class FontFitTextView extends TextView {
 			refitText(this.getText().toString(), w);
 		}
 	}
-	
-//    /**
-//     * Resize text after measuring
-//     */
-//    @Override
-//    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-//        if(changed) { // || mNeedsResize) {
-//            int widthLimit = (right - left) - getCompoundPaddingLeft() - getCompoundPaddingRight();
-//            int heightLimit = (bottom - top) - getCompoundPaddingBottom() - getCompoundPaddingTop();
-//            resizeText(widthLimit, heightLimit);
-//        }
-//        super.onLayout(changed, left, top, right, bottom);
-//    }
 
 }

@@ -9,7 +9,7 @@
     android:layout_marginRight="5dip"
     android:weightSum="1" >
 
-    <TextView
+    <net.osmand.plus.activities.FontFitTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

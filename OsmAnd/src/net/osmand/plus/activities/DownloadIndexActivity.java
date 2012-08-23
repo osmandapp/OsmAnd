@@ -62,8 +62,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
-import android.provider.Settings;
-import android.provider.Settings.SettingNotFoundException;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
