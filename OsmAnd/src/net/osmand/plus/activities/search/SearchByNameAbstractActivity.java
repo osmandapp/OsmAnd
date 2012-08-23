@@ -70,8 +70,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	protected Collator collator;
 	protected NamesFilter namesFilter;
 	private String currentFilter = "";
+	private boolean initFilter = false;
 	private String endingText = "";
 	private T endingObject;
+	private StyleSpan previousSpan;
 	private CustomTitleBar titleBar;
 	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class);
 
@@ -189,15 +191,19 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			}
 			f = f.substring(0, f.length() - endingText.length());
 		}
-		if (!currentFilter.equals(f)) {
+		if (!currentFilter.equals(f) || !initFilter) {
 			currentFilter = f;
+			initFilter = true;
 			progress.setVisibility(View.VISIBLE);
 			namesFilter.cancelPreviousFilter(f);
 			namesFilter.filter(f);
 		}
 		if(change) {
-			searchText.getText().clearSpans();
-			searchText.getText().setSpan(new StyleSpan(Typeface.BOLD_ITALIC), currentFilter.length(),
+			if(previousSpan != null) {
+				searchText.getText().removeSpan(previousSpan);
+			}
+			previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+			searchText.getText().setSpan(previousSpan, currentFilter.length(),
 					currentFilter.length() + endingText.length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 	}
@@ -323,7 +329,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				String etext = endingText;
 				endingText = "";
 				searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), "");
-				searchText.setSelection(currentFilter.length());
+				// searchText.setSelection(currentFilter.length());
 			} else if(msg.what == MESSAGE_ADD_ENTITY){
 				getListAdapter().add((T) msg.obj);
 				if (add && currentFilter.length() > 0) {
@@ -340,8 +346,11 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 					String etext = endingText;
 					endingText = text;
 					searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), text);
-					searchText.getText().clearSpans();
-					searchText.getText().setSpan(new StyleSpan(Typeface.BOLD_ITALIC), currentFilter.length(),
+					if(previousSpan != null) {
+						searchText.getText().removeSpan(previousSpan);
+					}
+					previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+					searchText.getText().setSpan(previousSpan, currentFilter.length(),
 							currentFilter.length() + text.length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 					if(searchText.getSelectionEnd() > currentFilter.length()) {
 						searchText.setSelection(currentFilter.length());

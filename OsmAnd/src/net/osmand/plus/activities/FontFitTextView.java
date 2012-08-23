@@ -22,15 +22,11 @@ public class FontFitTextView extends TextView {
 
 	public FontFitTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
-        setSingleLine();
-        setEllipsize(TruncateAt.MARQUEE);
 	}
 	
     // Default constructor override
     public FontFitTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        setSingleLine();
-        setEllipsize(TruncateAt.MARQUEE);
     }
 
 	private void refitText(String text, int textWidth, int textHeight, boolean layout) {
