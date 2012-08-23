@@ -193,23 +193,29 @@ public class MapInfoLayer extends OsmandMapLayer {
 		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
 				paintSubText, false);
 		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, all, none, 5);
+                /*
+                // TODO(natashaj): Remove for prototype
 		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
-		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
-				paintSmallText, paintSmallSubText, true);
+                NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
+                		paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, all, none, 15);
-		MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
+                MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
+		*/
 		// right stack
 		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(dist, R.drawable.info_target, R.string.map_widget_distance, "distance", false, all, none, 5);
+		mapInfoControls.registerSideWidget(dist, R.drawable.info_target, R.string.map_widget_distance, "distance", true, all, none, 5);
 		TextInfoControl time = ric.createTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(time, R.drawable.info_time, R.string.map_widget_time, "time",false, all, none,  10);
+		mapInfoControls.registerSideWidget(time, R.drawable.info_time, R.string.map_widget_time, "time", true, all, none,  10);
 		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.info_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
+		mapInfoControls.registerSideWidget(speed, R.drawable.info_speed, R.string.map_widget_speed, "speed", true, all, none,  15);
+                /*
+                // TODO(natashaj): Remove for prototype
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
+		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", true, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
+		*/
 
 		// Top widgets
 		ImageViewControl compassView = createCompassView(map);
@@ -307,7 +313,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		
 		flp = new FrameLayout.LayoutParams(android.view.ViewGroup.LayoutParams.FILL_PARENT,
-				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT);
+				android.view.ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.LEFT | Gravity.BOTTOM);
 		flp.leftMargin = STATUS_BAR_MARGIN_X;
 		flp.topMargin = topMargin;
 		leftStack.setLayoutParams(flp);

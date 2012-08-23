@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content" android:layout_height="wrap_content" 
+    android:layout_width="fill_parent" android:layout_height="fill_parent" 
     android:gravity="center" 
     android:descendantFocusability="beforeDescendants" android:focusableInTouchMode="true" android:background="@color/color_transparent_gray">
-	<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:gravity="center_horizontal" 
-		 android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp" android:baselineAligned="true">
-		<RelativeLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal">
-		    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/directionsTo" android:typeface="serif" android:textSize="30sp" android:id="@+id/directionsTitle"/>
-		    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:clickable="true" android:layout_alignParentRight="true" android:contentDescription="@string/close" android:id="@+id/place_picker_close" android:layout_marginRight="4dp" android:focusable="true" android:layout_marginTop="9dp" android:src="@drawable/headliner_close"></ImageView>
-	    </RelativeLayout>
-	</LinearLayout>
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal"
+	<RelativeLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="horizontal" android:gravity="center_horizontal" 
+	    android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="10dp" android:baselineAligned="true">
+	    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/directionsTo" android:typeface="serif" android:textSize="30sp" android:id="@+id/directionsTitle"/>
+	    <ImageView android:layout_height="wrap_content" android:layout_width="wrap_content" android:clickable="true" android:layout_alignParentRight="true" android:contentDescription="@string/close" android:id="@+id/place_picker_close" android:layout_marginRight="4dp" android:focusable="true" android:layout_marginTop="9dp" android:src="@drawable/headliner_close"></ImageView>
+	</RelativeLayout>
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="0dp" android:layout_weight="1" android:orientation="horizontal"
     	android:layout_marginLeft="10dp" android:layout_marginRight="10dp" >
         <fragment class="net.osmand.plus.fragments.PlaceTypesFragment"
 	            android:id="@+id/placeTypes" android:layout_weight="1"

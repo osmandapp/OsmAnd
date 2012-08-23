@@ -2,7 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent" android:background="@color/color_light_gray">
-	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:baselineAligned="false">
+	<ListView android:id="@+id/list" android:layout_width="fill_parent" 
+		android:layout_height="0dp" android:layout_weight="1" style="@style/OsmandListView"
+		android:layout_marginBottom="10dp" />
+	
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" android:baselineAligned="false">
 
 		<EditText
 		    android:id="@+id/SearchFilter"
@@ -26,8 +31,5 @@
 		-->
 		<ProgressBar android:layout_width="wrap_content" android:text="" android:id="@+id/ProgressBar" android:layout_height="wrap_content" android:visibility="gone"/>
 	</LinearLayout>
-	
-	<ListView android:id="@+id/list" android:layout_width="fill_parent" 
-		android:layout_height="fill_parent" style="@style/OsmandListView"></ListView>
 	
 </LinearLayout>

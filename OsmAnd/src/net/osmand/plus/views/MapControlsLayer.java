@@ -101,7 +101,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		numInitializedMenuOptions = 0;
 		initRoutingButton(view, parent);
-		initSearchButton(view, parent);
+		// TODO(natashaj): Disabling search button until UI is updated for prototype
+		//initSearchButton(view, parent);
 		initCenterButton(view, parent);
 		initCompass(view, parent);
 		initZoomButtons(view, parent);
@@ -130,7 +131,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 			zoomOutButton.setEnabled(zoomOutEnabled);
 		}
 		
-		drawApplicationMode(canvas);
+		// TODO(natashaj): Disable application mode for prototype (everything uses Car mode)
+		//drawApplicationMode(canvas);
 		
 		if(view.isZooming()){
 			showZoomLevel = true;
@@ -301,13 +303,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
-					Gravity.BOTTOM | Gravity.LEFT);
+					Gravity.TOP | Gravity.LEFT);
 		parent.addView(backToMenuButton, params);
 		backToMenuButton.setEnabled(true);
 		
 		modeShadow = view.getResources().getDrawable(R.drawable.zoom_background);
-		
-		
+				
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -370,10 +371,8 @@ public class MapControlsLayer extends OsmandMapLayer {
                addOption(compassView, view, parent);
        }
 
-       // TODO(natashaj) adjust size and height of buttons
        private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
                ImageView rightShadow = new ImageView(view.getContext());
-               // TODO(natashaj) add a resource for right_shadow
                rightShadow.setBackgroundResource(R.drawable.right_shadow);
                android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.FILL_PARENT,
                                        Gravity.RIGHT | Gravity.CENTER_VERTICAL);
