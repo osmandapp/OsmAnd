@@ -890,8 +890,8 @@
   <string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
    \n\t* Verbessertes Routing
    \n\t* Konfigurierbare Schaltflächen
-   \n\t* Karteneinstellungen auf Kartenbildschirm umgezogen"
-   \n\t* Bildschirmsperrtaste mit Loggin-Einstellungen
+   \n\t* Karteneinstellungen auf Kartenbildschirm umgezogen
+   \n\t* Bildschirmsperrtaste mit Logging-Einstellungen"
   </string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
