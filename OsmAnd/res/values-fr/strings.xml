@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="offline_edition">Modification hors ligne</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_edition">Modification hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser la modification hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Modifications en 0.7.1 : \n\t- Modification hors ligne des POI \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo) \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte \n\t- Détection de la direction: \'Faîtes demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage \n\t- Nouveau message vocal \'Itinéraire recalculé\' \n\t- Indication visuelle d\'un tournant imminent dans les 100m en changeant la couleur de la flèche de direction \n\t- Etat des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé \n\t- Modifications diverses "</string>
   <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
@@ -44,7 +43,6 @@
   <string name="amenity_type_wikiosm">Wikipedia (hors ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
   <string name="fav_export_confirmation">Un fichier de favoris précedemment exporté existe déjà. Voulez vous le remplacer?</string>
-  <!-- this block re-worked for new menu structure -->
   <string name="profile_settings">Paramètres de profil</string>
   <string name="settings_preset">Profil d\'utilisation</string>
   <string name="settings_preset_descr">Sélectionner un profil d\'utilisation avec ses réglages de carte et de navigation.</string>
@@ -615,12 +613,6 @@
   <string name="favorites_Button">Favoris</string>
   <string name="search_button">Rechercher</string>
   <string name="search_activity">Rechercher</string>
-  <!--
-
-6 x colours
-
-
--->
   <string name="searchpoi_activity">Choisir PI</string>
   <string name="search_POI_level_btn">Trouver plus</string>
   <string name="incremental_search_city">Recherche progressive de ville. Afin de trouver les villages/codes postaux, veuillez inscrire au moins les trois premiers caractères.</string>
@@ -638,9 +630,6 @@
   <string name="navigate_point_top_text">Insérez la latitude et la longitude (D - degrés, M - minutes, S - secondes)</string>
   <string name="navigate_point_latitude">Latitude</string>
   <string name="navigate_point_longitude">Longitude</string>
-  <!--
-navigate_point_format_D, DM & DMS
--->
   <string name="search_shown_on_map">Afficher sur la carte</string>
   <string name="navigate_point_cancel">Annuler</string>
   <string name="search_address_top_text">Choisir l\'adresse</string>
@@ -914,9 +903,28 @@ navigate_point_format_D, DM & DMS
   <string name="map_widget_next_next_turn">Deuxième prochain tournant</string>
   <string name="map_widget_mini_route">Mini carte de l\'itinéraire</string>
   <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
-  <string name="bg_service_screen_unlock">Unlock screen</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="bg_service_screen_unlock">Déverrouiller écran</string>
+  <string name="bg_service_sleep_mode_off">Désactiver mode veille</string>
+  <string name="bg_service_sleep_mode_on">Activer mode veille</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
   <string name="bg_service_interval">Positionner intervalle d\'activation:</string>
+<string name="live_monitoring_mode_off">Démarrer\n suivi en ligne</string>
+<string name="live_monitoring_mode_on">Arrêter\n suivi en ligne</string>
+<string name="layer_map_appearance">Configurer l\'écran</string>
+<string name="show_lanes">Afficher les voies</string>
+<string name="avoid_unpaved">Eviter les voies non carrossables</string>
+<string name="avoid_ferries">Eviter les ferries</string>
+<string name="avoid_in_routing_title">Eviter...</string>
+<string name="avoid_in_routing_descr">Eviter routes à péage, non carrossables, ferries</string>
+<string name="show_warnings_title">Afficher les alarmes</string>
+<string name="show_warnings_descr">Afficher les limitations de vitesses, radars et ralentisseurs</string>
+<string name="map_widget_fluorescent">Itinéraires fluorescents</string>
+<string name="map_widget_show_ruler">Echelle</string>
+<string name="map_widget_appearance">Divers</string>
+<string name="map_widget_view_direction">Affichage direction</string>
+<string name="map_widget_transparent">Couche transparente</string>
+<string name="monitoring_mode_off">Enregistrer GPX</string>
+<string name="monitoring_mode_on">Arrêter\n Enr. GPX</string>
+<string name="gps_wakeup_interval">Intervalle activation GPS: %s</string>
+<string name="email">email</string>
 </resources>
