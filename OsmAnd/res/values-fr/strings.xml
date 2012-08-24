@@ -933,4 +933,18 @@
 <string name="day_night_info">Information Jour/Nuit</string>
 <string name="filterpoi_activity">Créer filtre des POI</string>
 <string name="map_widget_renderer">Styles de rendu</string>
+<string name="int_continuosly">En continu</string>
+<string name="tip_rotation_switching_t_v2">\tVous pouvez basculez la façon dont l\'affichage de la carte peut être tournée en tapant sur l\'icône de la boussole
+\n\tLes choix sont:
+\n\t\'Ne pas tourner (Nord vers le haut)\'- La carte ne changera pas d\'orientation, le Nord sera toujours vers le haut
+\n\t\'Direction du déplacement\'- La carte est continuellement alignée dans la direction du déplacement
+\n\t\'Boussole\'- La carte est continuellement alignée sur la valeur de la boussole</string>
+<string name="tip_day_night_mode_t_v2">\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié pour le jour(plus clair) et nuit (plus sombre)
+\n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne
+\n\tVous pouvez configurer la politique de bascule jour/nuit dans \'Navigation\'-&gt;\'Mode Jour/Nuit\'
+\n\tLes choix sont:
+\n\t\'Lever/Coucher du soleil\'
+\n\t\'Jour\'- Toujours utiliser le mode jour
+\n\t\'Nuit\'- Toujours utiliser le mode nuit
+\n\t\'Détection de la luminosité\'- L\'affichage est contrôllé par le capteur de luminosité de votre appareil, s\'il existe</string>
 </resources>
