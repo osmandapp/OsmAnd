@@ -4,7 +4,7 @@
   <string name="tip_recent_changes_0_7_1_t">"Modifications en 0.7.1 : \n\t- Modification hors ligne des POI \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo) \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte \n\t- Détection de la direction: \'Faîtes demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage \n\t- Nouveau message vocal \'Itinéraire recalculé\' \n\t- Indication visuelle d\'un tournant imminent dans les 100m en changeant la couleur de la flèche de direction \n\t- Etat des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé \n\t- Modifications diverses "</string>
   <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
   <string name="local_openstreetmap_uploading">Envoi…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs ont été envoyés</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/Bogues ont été envoyés</string>
   <string name="local_openstreetmap_uploadall">Tout envoyer</string>
   <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show">Afficher sur la carte</string>
@@ -934,8 +934,8 @@
 <string name="filterpoi_activity">Créer filtre des POI</string>
 <string name="map_widget_renderer">Styles de rendu</string>
 <string name="int_continuosly">En continu</string>
-<string name="tip_rotation_switching_t_v2">\tVous pouvez basculez la façon dont l\'affichage de la carte peut être tournée en tapant sur l\'icône de la boussole
-\n\tLes choix sont:
+<string name="tip_rotation_switching_t_v2">\tVous pouvez basculer la façon dont l\'affichage de la carte peut être tournée en tapant sur l\'icône de la boussole
+\n\tLes choix sont :
 \n\t\'Ne pas tourner (Nord vers le haut)\'- La carte ne changera pas d\'orientation, le Nord sera toujours vers le haut
 \n\t\'Direction du déplacement\'- La carte est continuellement alignée dans la direction du déplacement
 \n\t\'Boussole\'- La carte est continuellement alignée sur la valeur de la boussole</string>
