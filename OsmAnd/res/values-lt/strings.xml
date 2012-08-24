@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_event">Pasiimkite automobilį iš statymo vietos</string>
@@ -218,7 +218,7 @@
   <string name="live_monitoring_interval">Sekimo gyvai intervalas</string>
   <string name="live_monitoring_url_descr">Nurodykite interneto adresą su tokia parametrų sintakse : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Sekimo gyvai tarnybos interneto adresas</string>
-  <string name="gpx_monitoring_disabled_warn">Turite įjungti \'Išsaugoti kelionės istoriją į GPX\' sekimo nustatymą</string>
+  <string name="gpx_monitoring_disabled_warn">Turite įjungti \'Išsaugoti kelionės istoriją į GPX\' sekimo nustatymą.</string>
   <string name="show_current_gpx_title">Rodyti dabartinės kelionės istoriją</string>
   <string name="tip_recent_changes_0_7_0_t">Pakeitimai 0.7.0 versijoje :
 \n\t- Įrenginyje išsaugomi Wikipedia straipsniai
@@ -270,8 +270,7 @@
 \n\t\'Nesukti\' - Žemėlapis nebus sukamas. Šiaurė visada bus viršuje
 \n\t\'Pasukti judėjimo kryptimi\' - Žemėlapis visada bus pasuktas judėjimo kryptimi
 \n\t\'Pagal kompasą\' - Žemėlapis bus pasuktas ta kryptimi, kurią rodo įrenginio kompasas
-\n\tPastaba: Norėdami greitai perjungti žemėlapio pasukimo režimą tiesiog palieskite kompaso rodyklę vaizduojamą žemėlapio rodinyje.
-</string>
+\n\tPastaba: Norėdami greitai perjungti žemėlapio pasukimo režimą tiesiog palieskite kompaso rodyklę vaizduojamą žemėlapio rodinyje.</string>
   <string name="binary_map_download_success">Parsiųsta sėkmingai.
 \n\t\n\tTam kad galėtumėte naudoti, aktyvuokite \'Nustatymai\' -&gt; \'Žemėlapio konfigūravimas\' -&gt; \'Parsiųsti vektoriniai žemėlapiai\'.</string>
   <string name="tip_day_night_mode">Dienos/Nakties režimas</string>
@@ -884,7 +883,7 @@
   <string name="search_activity">Ieškoti</string>
   <string name="searchpoi_activity">Pasirinkti LV</string>
   <string name="search_POI_level_btn">Rasti daugiau</string>
-  <string name="incremental_search_city">Ieškoti miesto didėjančia tvarka. Norėdami rasti miestus/pašto kodus, įveskite pirmus 3 arba daugiau ženklų.</string>
+  <string name="incremental_search_city">Ieškoti miesto didėjančia tvarka. Miestų/pašto kodų paieškai, įveskite pirmus 3 arba daugiau ženklų.</string>
   <string name="incremental_search_street">Ieškoti gatvės didėjimo tvarka</string>
   <string name="incremental_search_building">Ieškoti pastatų didėjimo tvarka</string>
   <string name="choose_available_region">Pasirinkti regioną iš sąrašo</string>
@@ -1045,4 +1044,26 @@
 <string name="monitoring_mode_on">Stabdyti\n GPX įraš.</string>
 <string name="live_monitoring_mode_on">Stabdyti\n tiesioginį sekimą</string>
 <string name="live_monitoring_mode_off">Pradėti\n tiesioginį stebėjimą</string>
+<string name="filterpoi_activity">Sukurti LV filtrą</string>
+<string name="select_navigation_mode">Pasirinkite judėjimo režimą</string>
+<string name="day_night_info_description">Saulėtekis : %1$s \nSaulėlydis : %2$s</string>
+<string name="day_night_info">Dienos/nakties info</string>
+<string name="map_widget_day_night">Dieninis/naktinis žemėlapis</string>
+<string name="map_widget_vector_attributes">Atvaizduojami atributai:</string>
+<string name="map_widget_renderer">Atvaizdavimo stilius</string>
+<string name="tip_day_night_mode_t_v2">\tŽemėlapio išvaizda tam tikriems vektoriniams žemėlapiams gali būti keičiama tarp dienos (šviesesni) ir nakties (tamsesni).
+\n\tNaktinės spalvos yra saugesnės vairuoti naktį.
+\n\tDienos/nakties perjungimą galite nustatyti \'Meniu\' -&gt; \'Konfigūruoti ekraną...\' -&gt;\'Dienos/nakties žemėlapis\'.
+\n\tPasirinkimai:
+\n\t\'Saulėtekis/Saulėlydis\' - automatinis režimas, valdomas pagal saulės padėtį (numatytasis)
+\n\t\'Diena\' - visada naudoti dienos režimą
+\n\t\'Naktis\' - visada naudoti nakties režimą
+\n\t\'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas)</string>
+<string name="tip_app_mode_t_v2">\tOsmand palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
+\n\tJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio ekrano kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą.</string>
+<string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.↵
+\n\tPasirinkimai:↵
+\n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up↵
+\n\t\'Į judėjimo kryptį\' - Map will continuously be aligned with your heading↵
+\n\t\'Į kompasą\' - Žemėlapis bus nuolat lygiuojamas pagal prietaiso kompasą↵</string>
 </resources>
