@@ -11,7 +11,7 @@
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
   <string name="local_indexes_cat_map">Локальные карты (векторные)</string>
   <string name="gpx_index_settings_descr">" (включая GPX анализ)"</string>
-  <string name="index_settings_descr">Загрузить и управлять локальными картами</string>
+  <string name="index_settings_descr">Загрузка и управлени локальными картами</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
   <string name="map_online_data">Онлайн карты</string>
   <string name="map_online_data_descr">Использовать онлайн карты (кэшируются на SD-носителе)</string>
@@ -532,7 +532,7 @@
   <string name="update_existing">Заменить</string>
   <string name="only_show">Только показать</string>
   <string name="follow">Следовать</string>
-  <string name="recalculate_route_to_your_location">Пересчитывать маршрут в зависимости от местоположения</string>
+  <string name="recalculate_route_to_your_location">Вид транспорта:</string>
   <string name="mark_final_location_first">Отметьте сначала точку назначения</string>
   <string name="get_directions">Маршрут</string>
   <string name="gps_status_app_not_found">Приложение \'Статус GPS\' не найдено. Искать на маркете?</string>
@@ -571,7 +571,7 @@
   <string name="download_indexes">Загрузить локальные данные</string>
   <string name="use_online_routing_descr">Использовать интернет-сервис для прокладки маршрута</string>
   <string name="use_online_routing">Online маршрутизация</string>
-  <string name="user_password_descr">Указать пароль для работы с OSM</string>
+  <string name="user_password_descr">Укажите пароль для работы с OSM</string>
   <string name="user_password">Пароль</string>
   <string name="osm_settings_descr">Установка логина/пароля OpenStreetMap</string>
   <string name="monitor_preferences_descr">Включение мониторинга, установка интервала сохранения</string>
@@ -593,14 +593,14 @@
   <string name="navigate_to">Идти к</string>
   <string name="update_tile">Обновить карту</string>
   <string name="reload_tile">Обновить часть карты</string>
-  <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>
+  <string name="user_name_descr">Укажите имя пользователя для работы с OSM</string>
   <string name="user_name">Имя пользователя</string>
   <string name="mark_point">Точка</string>
   <string name="show_osm_bugs_descr">Показывать слой Open Street Bugs</string>
   <string name="show_osm_bugs">Open Street Bugs</string>
   <string name="favourites_activity">Список избранных точек</string>
   <string name="add_to_favourite">Добавить к избранным</string>
-  <string name="use_english_names_descr">Использовать местные или английские названия</string>
+  <string name="use_english_names_descr">Включите для использования английских названий вместо местных</string>
   <string name="use_english_names">Использовать английские названия</string>
   <string name="app_settings">Настройки приложения</string>
   <string name="search_address">Искать адрес</string>
@@ -906,9 +906,9 @@
   <string name="map_widget_next_next_turn">Второй след. поворот</string>
   <string name="map_widget_mini_route">Малая карта маршрута</string>
   <string name="bg_service_screen_lock">Блокировка экрана</string>
-  <string name="bg_service_screen_unlock">Блокировать экран</string>
-  <string name="bg_service_sleep_mode_off">Отключить спящий режим</string>
-  <string name="bg_service_sleep_mode_on">Включить спящий режим</string>
+  <string name="bg_service_screen_unlock">Разлокировать экран</string>
+  <string name="bg_service_sleep_mode_off">Включить фоновый режим</string>
+  <string name="bg_service_sleep_mode_on">Отлючить фоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
 <string name="layer_map_appearance">Настройка экрана...</string>
@@ -928,4 +928,8 @@
 <string name="monitoring_mode_on">Остановить запись GPX</string>
 <string name="int_continuosly">Постоянно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
+<string name="map_widget_day_night">Дневной/ночной режим</string>
+<string name="map_widget_vector_attributes">Rendering attributes:</string>
+<string name="map_widget_renderer">Стиль рендеринга карты</string>
+<string name="select_navigation_mode">Выберите вид транспорта</string>
 </resources>
