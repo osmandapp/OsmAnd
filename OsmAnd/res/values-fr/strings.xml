@@ -70,7 +70,6 @@
   <string name="tip_day_night_mode_t">\tLe style des cartes vectorielles peut être changé entre jour (plus clair) et nuit (plus sombre). \n\tLes couleurs de nuit sont moins dangereuses pour la conduite nocturne. \n\tVous pouvez paramétrer une politique pour la bascule jour/nuit dans \'Paramètres\' -&gt; \'Style de la carte\' -&gt;\'Mode Jour/Nuit\'. \n\tLes choix sont: \n\t\'Lever/coucher du soleil\' - mode automatique, controlé par la position du soleil (défaut) \n\t\'Jour\' - toujours utiliser le mode jour \n\t\'Nuit\' - toujours utiliser le mode nuit \n\t\'Capteur de luminosité\' - le style de la carte est contrôlé par le capteur de luminosité de l\'appareil (seulement si celui-ci existe)</string>
   <string name="tip_osm_improve">Améliorer les données OSM</string>
   <string name="tip_osm_improve_t">\tOsmand utilise des cartes issues des données Openstreetmap.org (OSM) - en plus de la visualisation des cartes et du calcul d\'itinéraires- peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux PI ou rapports de bugs cartographiques en quelques clicks! \n\tPour cela il faudra d\'abord fournir vos paramètres de connexion OSM dans \'Paramètres\' -&gt; \'Général\' -&gt; \'Edition OSM\'. \n\tPour ajouter un nouveau PI, utiliser l\'option \'Créer PI\' dans le menu contextuel de la carte. Saisir les informations dans la boite de dialogue \'Créer PI\' avant d\'enregistrer. \n\tLes erreurs de cartographie peuvent être signalées immédiatement via les bugs OSM, permettant à la communauté OSM de corriger plus rapidement le problème. \n\tPour créer un bug OSM bug utiliser l\'option \'Ouvrir bug OSM\' dans le menu contextuel de la carte. Saisir une description detaillée du problème et le poster avec le bouton \'Ajouter\'. \n\tNotez que la connexion internet est nécessaire pour les contributions de PI et de bugs OSM.</string>
-  <!-- end of string changes for new menu structure -->
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB! Télécharger {0} fichier(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Sélectionner le point de destination</string>
@@ -763,10 +762,10 @@
   <string name="zoomIs">Zoom =</string>
   <string name="north">nord</string>
   <string name="north_north_east">nord-nord-est</string>
-  <string name="north_east">north-east</string>
+  <string name="north_east">nord-est</string>
   <string name="east_north_east">est-nord-est</string>
   <string name="east">est</string>
-  <string name="east_south_east">est-sur-est</string>
+  <string name="east_south_east">est-sud-est</string>
   <string name="south_east">sud-est</string>
   <string name="south_south_east">sud-sud-est</string>
   <string name="south">sud</string>
@@ -927,4 +926,11 @@
 <string name="monitoring_mode_on">Arrêter\n Enr. GPX</string>
 <string name="gps_wakeup_interval">Intervalle activation GPS: %s</string>
 <string name="email">email</string>
+<string name="map_widget_day_night">Carte Jour/Nuit</string>
+<string name="map_widget_vector_attributes">Attributs de rendu :</string>
+<string name="select_navigation_mode">Sélectionner le mode de transport</string>
+<string name="day_night_info_description">Lever : %1$s \nCoucher : %2$s</string>
+<string name="day_night_info">Information Jour/Nuit</string>
+<string name="filterpoi_activity">Créer filtre des POI</string>
+<string name="map_widget_renderer">Styles de rendu</string>
 </resources>
