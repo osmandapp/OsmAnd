@@ -41,7 +41,6 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -111,16 +110,17 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 			}
 		});
-		searchText.setOnClickListener(new OnClickListener() {
-			String previousSelect = "";
-			@Override
-			public void onClick(View v) {
-				if(!previousSelect.equals(endingText) && endingText.length() > 0) {
-					previousSelect = endingText;
-					itemSelectedBase(endingObject, v);
-				}
-			}
-		});
+		// Not perfect
+//		searchText.setOnClickListener(new OnClickListener() {
+//			String previousSelect = "";
+//			@Override
+//			public void onClick(View v) {
+//				if(!previousSelect.equals(endingText) && endingText.length() > 0) {
+//					previousSelect = endingText;
+//					itemSelectedBase(endingObject, v);
+//				}
+//			}
+//		});
 		searchText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 		searchText.requestFocus();
 		searchText.setOnEditorActionListener(new OnEditorActionListener() {
@@ -202,9 +202,11 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			if(previousSpan != null) {
 				searchText.getText().removeSpan(previousSpan);
 			}
-			previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
-			searchText.getText().setSpan(previousSpan, currentFilter.length(),
-					currentFilter.length() + endingText.length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			if (endingText.length() > 0) {
+				previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+				searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + endingText.length(),
+						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
 		}
 	}
 	
@@ -328,6 +330,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				}
 				String etext = endingText;
 				endingText = "";
+				if(previousSpan != null) {
+					searchText.getText().removeSpan(previousSpan);
+				}
 				searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), "");
 				// searchText.setSelection(currentFilter.length());
 			} else if(msg.what == MESSAGE_ADD_ENTITY){

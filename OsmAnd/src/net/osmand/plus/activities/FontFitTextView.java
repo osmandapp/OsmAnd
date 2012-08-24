@@ -45,16 +45,16 @@ public class FontFitTextView extends TextView {
 
 			Rect rect = new Rect();
 			tp.getTextBounds(text, 0, text.length(), rect);
-			while (rect.width() > (availableWidth + 5) * lines || rect.height() * lines >  textHeight ) {
+			while (rect.width() > (availableWidth + 5) * lines || rect.height() * lines > textHeight) {
 				tp.setTextSize(tp.getTextSize() - 1);
 				tp.getTextBounds(text, 0, text.length(), rect);
 				// setTextScaleX(availableWidth / size);
 			}
 
 			//if (getLineCount() != lines) {
-				setLines(lines);
-				setMaxLines(lines);
-				setGravity(Gravity.TOP);
+			setLines(lines);
+			setMaxLines(lines);
+			setGravity(Gravity.TOP);
 			//}
 			setTextSize(TypedValue.COMPLEX_UNIT_PX, tp.getTextSize());
 		}
