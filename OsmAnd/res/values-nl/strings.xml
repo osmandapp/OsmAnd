@@ -117,7 +117,7 @@
   <string name="live_monitoring_interval">Live Tracking interval</string>
   <string name="live_monitoring_url_descr">Specificeer het webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
   <string name="live_monitoring_url">Live Tracking webadres</string>
-  <string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen</string>
+  <string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen.</string>
   <string name="show_current_gpx_title">Toon huidige track</string>
   <string name="tip_recent_changes_0_7_0_t">"Wijzigingen in 0.7.0 : \n\t- Offline Wikipedia gegevens met artikelen \n\t- Vernieuwde kaarten \n\t- Andere kleine features "</string>
   <string name="free_version_message">Deze gratis Osmand versie is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
