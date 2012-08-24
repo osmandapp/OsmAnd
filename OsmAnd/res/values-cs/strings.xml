@@ -831,7 +831,7 @@
   <string name="rendering_attr_contourLines_description">Zvolte minimální zvětšení, od kterého se budou v mapě zobrazovat vrstevnice. Pro správné zobrazení je případně potřeba nainstalovat příslušný soubor \'SRTM\'.</string>
   <string name="rendering_attr_contourLines_name">Zobrazit vrstevnice</string>
   <string name="rendering_attr_hmRendered_description">Zvýšit počet detailů vyobrazených v mapě</string>
-  <string name="rendering_attr_hmRendered_name">Zobrazit více mapových detailů</string>
+  <string name="rendering_attr_hmRendered_name">Více mapových detailů</string>
   <string name="asap">hned</string>
   <string name="save_route_as_gpx">Uložit trasu do souboru GPX</string>
   <string name="route_roundabout">Kruhový objezd : vyjeďte %1$d. výjezdem a pokračujte</string>
@@ -896,7 +896,7 @@
   <string name="map_widget_lock_screen">Uzamknout obrazovku</string>
   <string name="map_widget_compass">Kompas</string>
   <string name="map_widget_top_stack">Stavový řádek:</string>
-  <string name="map_widget_reset">Vrátit výchozí nastavení</string>
+  <string name="map_widget_reset">Nastavit výchozí</string>
   <string name="map_widget_right_stack">Pravý sloupec:</string>
   <string name="map_widget_left_stack">Levý sloupec:</string>
   <string name="map_widget_parking">Parkování</string>
@@ -906,7 +906,7 @@
   <string name="map_widget_altitude">Nadmořská výška</string>
   <string name="map_widget_time">Zbývající čas do cíle</string>
   <string name="map_widget_next_turn">Příští odbočka</string>
-  <string name="map_widget_next_turn_small">Příští odbočka (zmenšená)</string>
+  <string name="map_widget_next_turn_small">Příští odbočka (mini)</string>
   <string name="map_widget_next_next_turn">Přespříští odbočka</string>
   <string name="map_widget_mini_route">Miniaturní mapa trasy</string>
   <string name="bg_service_screen_lock">Lock/unlock screen</string>
