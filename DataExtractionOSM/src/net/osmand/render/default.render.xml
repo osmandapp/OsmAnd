@@ -955,9 +955,8 @@
 			<filter minzoom="16" color="#bca9a9" tag="amenity" value="library"/>
 			<filter minzoom="15" color="#f0f0d8" color_2="#d4a89e" strokeWidth_2="1" tag="amenity" value="hospital"/>
 			<filter minzoom="15" color="#cc9999" tag="amenity" value="cinema"/>								
-			<filter minzoom="10" color="#c8b084" tag="landuse" value="allotments"/>
-			<filter minzoom="12" maxzoom="14" color="#cfeca8" tag="landuse" value="retail"/>
-				<filter minzoom="15" color="#cfeca8" color_2="#ff0000" strokeWidth_2="1" tag="landuse" value="retail"/>
+			<filter minzoom="10" color="#bde3cb" tag="landuse" value="allotments"/>
+			<filter minzoom="12" color="#feeaea" tag="landuse" value="retail"/>
 			<!-- Tourism -->
 			<filter minzoom="13" color="#f2caea" tag="tourism" value="attraction"/>
 			<filter minzoom="15" color="#f2caea" tag="amenity" value="place_of_worship"/>
