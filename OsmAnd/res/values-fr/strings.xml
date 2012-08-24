@@ -27,8 +27,8 @@
   <string name="poi_context_menu_showdescription">Afficher description POI</string>
   <string name="index_name_north_america">Amerique du Nord</string>
   <string name="index_name_us">Amerique du Nord - Etats unis</string>
-  <string name="index_name_central_america">Amerique centrale</string>
-  <string name="index_name_south_america">Amerique du Sud</string>
+  <string name="index_name_central_america">Amérique centrale</string>
+  <string name="index_name_south_america">Amérique du Sud</string>
   <string name="index_name_europe">Europe</string>
   <string name="index_name_france">Europe - France</string>
   <string name="index_name_germany">Europe - Allemagne</string>
