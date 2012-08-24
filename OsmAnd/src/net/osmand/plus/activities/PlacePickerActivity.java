@@ -8,6 +8,7 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.View.OnClickListener;
 
@@ -29,6 +30,9 @@ public class PlacePickerActivity extends Activity {
 
         requestWindowFeature(Window.FEATURE_NO_TITLE); 
         setContentView(R.layout.place_picker);
+        
+        // Makes the place picker full screen 
+        getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
         
         View closeButton = findViewById(R.id.place_picker_close);
         closeButton.setOnClickListener(new OnClickListener() {
@@ -53,6 +57,7 @@ public class PlacePickerActivity extends Activity {
        
         public void onPlaceTypeChanged(String placeTypeKey);
         
+
         public void onPlacePicked(LatLon location, String name);
     }
 

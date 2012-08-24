@@ -678,9 +678,8 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 
 		@Override
 		protected void onPreExecute() {
-		        // TODO(natashaj)
-			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
-			//findViewById(R.id.SearchAreaText).setVisibility(View.GONE);
+		        findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+			findViewById(R.id.SearchAreaText).setVisibility(View.GONE);
 			searchPOILevel.setEnabled(false);
 			if(request.type == SearchAmenityRequest.NEW_SEARCH_INIT){
 				amenityAdapter.clear();
@@ -697,9 +696,8 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 		
 		@Override
 		protected void onPostExecute(List<Amenity> result) {
-		        // TODO(natashaj)
-			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-			//findViewById(R.id.SearchAreaText).setVisibility(View.VISIBLE);
+		        findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+			findViewById(R.id.SearchAreaText).setVisibility(View.VISIBLE);
 			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 			searchPOILevel.setText(R.string.search_POI_level_btn);
 			if (isNameFinderFilter()) {

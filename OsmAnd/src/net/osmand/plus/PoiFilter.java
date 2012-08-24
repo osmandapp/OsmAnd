@@ -35,8 +35,7 @@ public class PoiFilter {
 	
 	protected int distanceInd = 1;
 	// in kilometers
-	protected double[] distanceToSearchValues = new double[] {1, 2, 3, 5, 10, 30, 100, 250 };
-	
+	protected double[] distanceToSearchValues = new double[] {2, 5, 10, 25, 100, 250 };
 	
 	// constructor for standard filters
 	public PoiFilter(AmenityType type, OsmandApplication application){
