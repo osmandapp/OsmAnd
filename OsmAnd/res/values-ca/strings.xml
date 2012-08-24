@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -211,4 +211,54 @@
 <string name="local_openstreetmap_were_uploaded">{0} PDI/errors van ser penjats</string>
 <string name="local_openstreetmap_settings">PDI/errors d\'OSM desats localment</string>
 <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/errors d\'OSM de les bases de dades locals</string>
+<string name="position_on_map_descr">Trieu la ubicació del marcador de posició al mapa</string>
+<string name="day_night_info">Informació de dia/nit</string>
+<string name="map_widget_day_night">Mapa dia/nit</string>
+<string name="position_on_map">Marcador de posició</string>
+<string name="show_lanes">Mostra els carrils</string>
+<string name="avoid_ferries">Evita els ferris</string>
+<string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris</string>
+<string name="osmand_parking_warning_text">Notificació per treure el cotxe que vau introduir a Calendari. Es mantindrà fins que l'elimineu manualment.</string>
+<string name="route_kl">Mantingueu-vos a l'esquerra i continueu</string>
+<string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
+<string name="download_link_and_local_description">Feu clic per descarregar o penjar dades fora de línia. \nFeu clic en algun del ítems per veure'n més detalls, mantingueu-lo premut per desactivar-lo o esborrar-lo. Dades que hi ha al dispositiu (%1$s lliures):</string>
+<string name="test_voice_prompts">Prova els indicadors de veu</string>
+<string name="support_new_features">Ajuda per a noves característiques</string>
+<string name="rendering_out_of_memory">No hi ha prou memòria de procés per mostrar l'àrea seleccionada</string>
+<string name="live_monitoring_url_descr">Especifiqueu l'adreça de la pàgina web amb la sintaxi dels paràmetres: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+<string name="index_name_north_america">Amèrica del Nord</string>
+<string name="index_name_us">Amèrica del Nord - Estats Units</string>
+<string name="index_name_central_america">Amèrica Central</string>
+<string name="index_name_south_america">Amèrica del Sud</string>
+<string name="index_name_europe">Europa</string>
+<string name="index_name_tts_voice">Paquets de veu (TTS)</string>
+<string name="native_library_not_supported">La llibreria nativa no està suportada en aquest dispositiu.</string>
+<string name="init_native_library">S'està inicialitzant la llibreria nativa...</string>
+<string name="auto_follow_route_never">Mai</string>
+<string name="pref_vector_rendering">Opcions específiques de renderització dels vectors</string>
+<string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
+<string name="city_type_town">Poble</string>
+<string name="city_type_city">Ciutat</string>
+<string name="layer_poi_label">Etiquetes de PDI</string>
+<string name="animate_route_off">Atura l'animació</string>
+<string name="animate_route">Inicia l'animació</string>
+<string name="file_with_name_already_exists">Ja existeix un fitxer amb aquest nom.</string>
+<string name="gpx_navigation">Ruta GPX</string>
+<string name="data_to_search_poi_not_available">No hi ha dades locals per cercar els PDI.</string>
+<string name="poi_filter_by_name">Cerca pel nom</string>
+<string name="show_gpx_route">Mostra al mapa</string>
+<string name="poi_filter_nominatim">Nominatim en línia</string>
+<string name="search_select_point">Selecciona</string>
+<string name="search_position_current_location_search">S'està cercant la posició...</string>
+<string name="search_position_current_location_found">Posició (trobada)</string>
+<string name="search_position_address">Adreça...</string>
+<string name="search_position_undefined">Indefinida</string>
+<string name="search_position_fixed">Fixada</string>
+<string name="search_position_current_location">Posició actual...</string>
+<string name="context_menu_item_search">Cerca prop d'aquí</string>
+<string name="save_route_dialog_title">Desa la ruta com una traça GPX</string>
+<string name="route_successfully_saved_at">La ruta s'ha desat correctament com a \'%1$s\'.</string>
+<string name="filename_input">Nom del fitxer: </string>
+<string name="default_buttons_save">Desa</string>
+<string name="show_more_map_detail">Mostra més detalls al mapa</string>
 </resources>
