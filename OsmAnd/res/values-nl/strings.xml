@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -939,4 +939,29 @@
   <string name="bg_service_sleep_mode_off">Slaap modus aanzetten</string>
   <string name="bg_service_sleep_mode_on">Slaap modus uitzetten</string>
 <string name="email">email</string>
+<string name="filterpoi_activity">Creëer interessepunt filter</string>
+<string name="select_navigation_mode">Selecteer transportmethode</string>
+<string name="day_night_info_description">Zonsopgang : %1$s \nZonsondergang : %2$s</string>
+<string name="day_night_info">Dag/nacht info</string>
+<string name="map_widget_day_night">Dag/nacht kaart</string>
+<string name="map_widget_vector_attributes">Kaartoplevering attributen:</string>
+<string name="map_widget_renderer">Kaartoplevering stijl</string>
+<string name="tip_rotation_switching_t_v2">\tJe kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te klikken op het kompas-icoon.↵
+\n\tDe keuzen zijn:↵
+\n\t\'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven↵
+\n\t\'In beweegrichting\' - De kaartrotatie wordt permanent aangepast aan de beweegrichting↵
+\n\t\'Volgens kompas\' - De kaartrotatie wordt permanent aangepast aan de kompas-uitlezing van het apparaat↵</string>
+<string name="tip_day_night_mode_t_v2">\tDe kaartpresentatie kan voor sommige vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder).↵
+\n\tNachtkleuren zijn veiliger voor nachtelijke ritten.↵
+\n\tJe kan een voorkeursinstelling kiezen in \'Kaartscherm\' -&gt; \'Configuratie\' -&gt;\'Dag/nacht kaart\'.↵
+\n\tDe keuzen zijn:↵
+\n\t\'Schemering\' - automatiche modus, bepaald door de positie van de zon (standaard)↵
+\n\t\'Dag\' - gebruik altijd de dag modus↵
+\n\t\'Nacht\' - gebruik altijd de nacht modus↵
+\n\t\'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van he apparaat (indien aanwezig)</string>
+<string name="tip_map_switch_t_v2">\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Definieer beeld\'.↵
+\n\tOnder \'Kaartbron\' kan je kiezen uit vooraf gedownloade vectorkaarten, voorgedefinieerde (online) kaartsegmenten (activeer hiervoor de plugin \'Online kaarten\'), of kaarten die je gemaakt hebt met b.v. OsmandMapCreator op een PC.↵
+\n\tOsmand ondersteunt ook zelfgemaakte kaartbronnen.</string>
+<string name="tip_app_mode_t_v2">\tOsmand ondersteunt verschillende transport-profielen.↵
+\n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of tijdens het creëren een route.</string>
 </resources>
