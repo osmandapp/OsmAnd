@@ -941,7 +941,7 @@
 <string name="filterpoi_activity">POI szűrő készítés</string>
 <string name="select_navigation_mode">Közlekedési eszköz kiválasztása</string>
 <string name="day_night_info_description">Napkelte : %1$s \nNapnyugta : %2$s</string>
-<string name="day_night_info">Nap/éjjel információ</string>
+<string name="day_night_info">Nappal/éjjel információ</string>
 <string name="map_widget_day_night">Nappal/Éjjel térkép</string>
 <string name="map_widget_vector_attributes">Térkép megjelenítési beállítások:</string>
 <string name="map_widget_renderer">Térkép megjelenítési stílus</string>
