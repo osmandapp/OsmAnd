@@ -58,16 +58,16 @@ public class BinaryMapIndexReader {
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
 	
 	private final RandomAccessFile raf;
-	private int version;
-	private long dateCreated;
+	/*private*/ int version;
+	/*private */long dateCreated;
 	// keep them immutable inside
-	private boolean basemap = false;
-	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
-	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
-	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
-	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
-	private List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
-	private List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
+	/*private */ boolean basemap = false;
+	/*private */List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
+	/*private */List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
+	/*private */List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
+	/*private */List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
+	/*private */List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
+	/*private */List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
 	
 	protected CodedInputStreamRAF codedIS;
 	
@@ -80,7 +80,27 @@ public class BinaryMapIndexReader {
 
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
-		this(raf, false);
+		this.raf = raf;
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
+		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		transportAdapter = new BinaryMapTransportReaderAdapter(this);
+		addressAdapter = new BinaryMapAddressReaderAdapter(this);
+		poiAdapter = new BinaryMapPoiReaderAdapter(this);
+		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		init();
+	}
+	
+	/*private */BinaryMapIndexReader(final RandomAccessFile raf, boolean init) throws IOException {
+		this.raf = raf;
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
+		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		transportAdapter = new BinaryMapTransportReaderAdapter(this);
+		addressAdapter = new BinaryMapAddressReaderAdapter(this);
+		poiAdapter = new BinaryMapPoiReaderAdapter(this);
+		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		if(init) {
+			init();
+		}
 	}
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, BinaryMapIndexReader referenceToSameFile) throws IOException {
@@ -101,23 +121,6 @@ public class BinaryMapIndexReader {
 		basemap = referenceToSameFile.basemap;
 	}
 	
-	public BinaryMapIndexReader(final RandomAccessFile raf, boolean readOnlyMapData) throws IOException {
-		this.raf = raf;
-		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
-		if(!readOnlyMapData){
-			transportAdapter = new BinaryMapTransportReaderAdapter(this);
-			addressAdapter = new BinaryMapAddressReaderAdapter(this);
-			poiAdapter = new BinaryMapPoiReaderAdapter(this);
-			routeAdapter = new BinaryMapRouteReaderAdapter(this);
-		} else {
-			transportAdapter = null;
-			addressAdapter = null;
-			poiAdapter = null;
-			routeAdapter = null;
-		}
-		init();
-	}
 	
 	public long getDateCreated() {
 		return dateCreated;
@@ -418,6 +421,10 @@ public class BinaryMapIndexReader {
 	
 	public boolean transportStopBelongsTo(TransportStop s){
 		return getTransportIndex(s.getFileOffset()) != null;
+	}
+	
+	public List<TransportIndex> getTransportIndexes() {
+		return transportIndexes;
 	}
 	
 	private TransportIndex getTransportIndex(int filePointer) {

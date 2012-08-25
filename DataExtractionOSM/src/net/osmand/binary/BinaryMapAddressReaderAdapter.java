@@ -46,6 +46,18 @@ public class BinaryMapAddressReaderAdapter {
 		List<CitiesBlock> cities = new ArrayList<BinaryMapAddressReaderAdapter.CitiesBlock>();
 		
 		LatLon calculatedCenter = null;
+		
+		public String getEnName() {
+			return enName;
+		}
+		
+		public List<CitiesBlock> getCities() {
+			return cities;
+		}
+		
+		public int getIndexNameOffset() {
+			return indexNameOffset;
+		}
 	}
 	
 	public static class CitiesBlock extends BinaryIndexPart {

@@ -46,7 +46,7 @@ public class JUnitRouteTest  {
 		int it = 0;
 		for (File f : files) {
 			RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
-			rs[it++] = new BinaryMapIndexReader(raf, false);
+			rs[it++] = new BinaryMapIndexReader(raf);
 		}
 	}
 	

@@ -110,7 +110,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		for (File f : new File(DataExtractionSettings.getSettings().getBinaryFilesDir()).listFiles()) {
 			if (f.getName().endsWith(".obf")) {
 				RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
-				rs.add(new BinaryMapIndexReader(raf, false));
+				rs.add(new BinaryMapIndexReader(raf));
 			}
 		}
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(),

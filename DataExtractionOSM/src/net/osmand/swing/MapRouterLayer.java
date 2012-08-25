@@ -594,7 +594,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				int it = 0;
 				for (File f : files) {
 					RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
-					rs[it++] = new BinaryMapIndexReader(raf, false);
+					rs[it++] = new BinaryMapIndexReader(raf);
 				}
 				String m = DataExtractionSettings.getSettings().getRouteMode();
 				String[] props = m.split("\\,");
