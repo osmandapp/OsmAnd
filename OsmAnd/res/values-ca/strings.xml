@@ -261,4 +261,111 @@
 <string name="filename_input">Nom del fitxer: </string>
 <string name="default_buttons_save">Desa</string>
 <string name="show_more_map_detail">Mostra més detalls al mapa</string>
+<string name="edit_filter_delete_menu_item">Suprimeix</string>
+<string name="tip_update_index">Actualitza les dades fora de línia</string>
+<string name="filterpoi_activity">Crea un filtre de PDI</string>
+<string name="day_night_info_description">Alba: %1$s \nCapvespre: %2$s</string>
+<string name="map_widget_vector_attributes">Atributs de renderització:</string>
+<string name="map_widget_renderer">Estil de renderització</string>
+<string name="map_widget_mini_route">Minimapa de ruta</string>
+<string name="select_animate_speedup">Seleccioneu l'acceleració de la ruta animada</string>
+<string name="select_navigation_mode">Seleccioneu el mitjà de transport</string>
+<string name="offline_edition">Edició fora de línia</string>
+<string name="offline_edition_descr">Utilitza sempre l'edició fora de línia</string>
+<string name="local_openstreetmap_descr_title">Edició asincrònica de l'OSM:</string>
+<string name="tip_recent_changes_0_7_0_t">Canvis a la versió 0.7.0:
+	\n\t- Dades fora de línia amb articles de la Viquipèdia
+	\n\t- Mapes actualitzats
+	\n\t- Altres petites millores
+	</string>
+<string name="accessibility_mode_descr">Activa les característiques d'accessibilitat</string>
+<string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l'aplicació no afecten els fitxers de mapa baixats, els canvis es realitzen sobre un fitxer local.</string>
+<string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l'Android %2$s MB, Dalvik %3$s MB).</string>
+<string name="global_app_allocated_memory">Memòria assignada</string>
+<string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB).
+        Memòria proporcional %4$s MB (límit de l'Android %5$s MB, Dalvik %6$s MB).</string>
+<string name="switch_to_raster_map_to_see">No s'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (dades fora de línia), o canviar a mapes en línia.</string>
+<string name="tip_recent_changes_0_7_2_t">Canvis a la versió 0.7.2:
+\n\t- Renderitzaió nativa per tots els dispositius
+\n\t- Edició fora de línia dels PDI
+\n\t- Accessibilitat
+\n\t- Molts errors de programació solucionats
+	</string>
+<string name="global_app_settings">Paràmetres globals de l'aplicació</string>
+<string name="user_name_descr">És necessari per les trameses a openstreetmap.org</string>
+<string name="user_password_descr">És necessària per les trameses a openstreetmap.org</string>
+<string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI \'%1$s\' és redundant i serà suprimit.</string>
+<string name="search_position_favorites">Preferits...</string>
+<string name="search_position_map_view">Darrera visualització del mapa</string>
+<string name="select_search_position">Cerca a prop:</string>
+<string name="menu_save_directions">Desa les indicacions</string>
+<string name="local_index_upload_gpx_description">Pengeu els fitxers GPX a la comunitat d'OSM. Seran utilitzats per millorar els mapes.</string>
+<string name="local_index_items_uploaded">%1$d de %2$d ítem(s) s'han penjat amb èxit.</string>
+<string name="local_index_mi_upload_gpx">Envia a OSM</string>
+<string name="favourites_delete_multiple_succesful">S'ha suprimit amb èxit el(s) punt(s) preferit(s).</string>
+<string name="favorite_friends_category">Amics</string>
+<string name="favorite_places_category">Llocs</string>
+<string name="favorite_default_category">Altres</string>
+<string name="favourites_edit_dialog_name">Nom</string>
+<string name="favourites_edit_dialog_category">Categoria</string>
+<string name="local_index_gpx_info_speed">\nVelocitat mitjana: %1$s \nVelocitat màxima: %2$s</string>
+<string name="local_index_installed">Edició</string>
+<string name="local_index_items_backuped">S'ha desactivat amb èxit %1$d de %2$d ítem(s).</string>
+<string name="local_index_items_deleted">S'ha suprimit amb èxit %1$d de %2$d ítem(s).</string>
+<string name="local_index_items_restored">S'ha activat amb èxit %1$d de %2$d ítem(s).</string>
+<string name="local_index_descr_title">Gestor de dades fora de línia</string>
+<string name="local_index_mi_restore">Activa</string>
+<string name="local_index_mi_backup">Desactiva</string>
+<string name="local_index_mi_delete">Suprimeix</string>
+<string name="local_index_mi_reload">Torna a carregar des de la targeta SD</string>
+<string name="local_index_download">Baixa...</string>
+<string name="local_index_poi_data">Dades de PDI</string>
+<string name="local_index_address_data">Dades d'adreces</string>
+<string name="local_index_transport_data">Dades de transports</string>
+<string name="local_index_map_data">Dades de mapes</string>
+<string name="local_indexes_cat_backup">Desactivat</string>
+<string name="local_indexes_cat_tts">Dades de veu (TTS)</string>
+<string name="local_indexes_cat_voice">Dades de veu (gravades)</string>
+<string name="local_indexes_cat_gpx">Dades GPX</string>
+<string name="local_indexes_cat_poi">Dades de PDI</string>
+<string name="ttsvoice">Veu TTS</string>
+<string name="search_offline_clear_search">Cerca nova</string>
+<string name="map_text_size_descr">Seleccioneu la mida del text dels noms al mapa</string>
+<string name="map_text_size">Mida de la lletra al mapa</string>
+<string name="tip_recent_changes">Canvis recents</string>
+<string name="installing_new_resources">S'està descomprimint dades noves...</string>
+<string name="tts_language_not_supported_title">La llengua no està suportada</string>
+<string name="gpx_option_reverse_route">Inverteix la direcció del GPX</string>
+<string name="tip_favorites">Punts preferits</string>
+<string name="search_osm_offline">Cerca l'adreça utilitzant mapes fora de línia</string>
+<string name="system_locale">Sistema</string>
+<string name="tip_navigation">Navegació</string>
+<string name="tip_initial">Consells i trucs</string>
+<string name="next_button">Següent</string>
+<string name="previous_button">Anterior</string>
+<string name="unit_of_length_descr">Canvia les unitats de longitud i velocitat</string>
+<string name="unit_of_length">Unitat de mesura</string>
+<string name="si_mi_foots">Milles/peus</string>
+<string name="si_mi_yard">Milles/iardes</string>
+<string name="si_km_m">Quilòmetres\metres</string>
+<string name="send_location_sms_pattern">Ubicació: %1$s\n%2$s</string>
+<string name="send_location">Envia la ubicació</string>
+<string name="context_menu_item_share_location">Comparteix la ubicació</string>
+<string name="amenity_type_administrative">Administratiu</string>
+<string name="amenity_type_barrier">Barreres</string>
+<string name="amenity_type_education">Educació</string>
+<string name="amenity_type_emergency">Emergències</string>
+<string name="amenity_type_entertainment">Entreteniment</string>
+<string name="amenity_type_finance">Finances</string>
+<string name="amenity_type_historic">Històric</string>
+<string name="amenity_type_landuse">Ús del sòl</string>
+<string name="amenity_type_leisure">Oci</string>
+<string name="amenity_type_military">Militar</string>
+<string name="amenity_type_natural">Naturalesa</string>
+<string name="amenity_type_other">Altres</string>
+<string name="amenity_type_shop">Botigues</string>
+<string name="amenity_type_sport">Esports</string>
+<string name="amenity_type_sustenance">Aliments i beure</string>
+<string name="amenity_type_tourism">Turisme</string>
+<string name="amenity_type_transportation">Transports</string>
 </resources>
