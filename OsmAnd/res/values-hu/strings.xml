@@ -91,7 +91,7 @@
   <string name="live_monitoring_interval">Élő rögzítési sűrűség</string>
   <string name="live_monitoring_url_descr">Add meg az Élő Útvonalrögzítéshez használni kívánt webcímet az alábbi paraméterekkel: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Élő rögzítés webcíme</string>
-  <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást</string>
+  <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást.</string>
   <string name="show_current_gpx_title">Aktív útvonalrögzítés</string>
   <string name="tip_recent_changes_0_7_0_t">"A 0.7.0 verzió változásai: \n\t- Internet nélkül is használható Wikipédia szócikkek \n\t- Frissített térképek \n\t- Egyéb hasznos apró funkciók "</string>
   <string name="free_version_message">Az ingyenes verzióval %1$s letöltés engedélyezett %2$s és nem támogatja az offline Wikipédia cikkeket.</string>
@@ -951,8 +951,7 @@
 \n\tA lehetőségek:
 \n\t\'Nem forog (észak felül)\' - A térkép nem fordul el. Mindig észak van felül
 \n\t\'Haladás irányának megfelelően\' - A térkép a haladásnak megfelelően fordul el
-\n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog
-</string>
+\n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog</string>
 <string name="tip_day_night_mode_t_v2">\tBizonyos vektoros térképek megjelenése különbözhet nappal (világosabb) és éjjel (sötétebb).
 \n\tAz éjszakai színek biztonságosabbak éjjeli vezetéshez.
 \n\tA váltáshoz a szabályt a \'Megjelenítés beállítása\' -&gt; \'Megjelenés\' -&gt; \'Nappal/Éjjel térkép\' -nél lehet megváltoztatni.
