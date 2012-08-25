@@ -368,4 +368,11 @@
 <string name="amenity_type_sustenance">Aliments i beure</string>
 <string name="amenity_type_tourism">Turisme</string>
 <string name="amenity_type_transportation">Transports</string>
+<string name="indexing_address">S'està indexant les adreces...</string>
+<string name="indexing_map">S'està indexant el mapa...</string>
+<string name="indexing_poi">S'està indexant els PDI...</string>
+<string name="indexing_transport">S'està indexant els transports...</string>
+<string name="poi_filter_custom_filter">Filtre personalitzat</string>
+<string name="poi_filter_for_tourists">Per turistes</string>
+<string name="poi_filter_fuel">Carburants</string>
 </resources>
