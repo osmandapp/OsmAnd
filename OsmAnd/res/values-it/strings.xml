@@ -934,23 +934,23 @@
 <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
 <string name="int_continuosly">Continua</string>
 <string name="email">e-mail</string>
-<string name="tip_rotation_switching_t_v2">﻿\tTu puoi cambiare se e come vuoi la visualizzazione della rotazione della mappa cliccando ripetutamente sull'icona della bussola nello schermo della mappa.↵
+<string name="tip_rotation_switching_t_v2">﻿\tTu puoi cambiare se e come vuoi la visualizzazione della rotazione della mappa cliccando ripetutamente sull\'icona della bussola nello schermo della mappa.↵
 \n\tLe scelte sono:↵
 \n\t\'Non ruotare (nord in alto)\' - La mappa non sarà ruotata. Il Nord sarà sempre in alto↵
 \n\t\'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione↵
 \n\t\'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo↵
 </string>
-<string name="tip_day_night_mode_t_v2">\tL'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).↵
+<string name="tip_day_night_mode_t_v2">\tL\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).↵
 \n\tI colori notturni sono più sicuri per la guida notturna.↵
 \n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo...\' -&gt;\'Giorno/notte mappa\'.↵
 \n\tLe scelte sono:↵
 \n\t\'Alba/Tramonto\' - automaticamente, in base alla posizione del sole (preimpostato)↵
 \n\t\'Day\' - always use day mode↵
 \n\t\'Night\' - usa sempre il modo notturno ↵
-\n\t\'Sensore di luminosità\' - l'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
+\n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
 <string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\'in visualizzazione mappa.↵
 \n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di piastrelle (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmandMapCreator sul PC.↵
 \n\tOsmand supporta anche sorgenti su misura. </string>
-<string name="tip_app_mode_t_v2">\tOsmand supporta differenti (personalizzabili) profili dell'applicazione per differenti tipi di utilizzo.↵
-\n\tPuoi cambiare profilo attraverso il pulsante profilo nell'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
+<string name="tip_app_mode_t_v2">\tOsmand supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.↵
+\n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
 </resources>
