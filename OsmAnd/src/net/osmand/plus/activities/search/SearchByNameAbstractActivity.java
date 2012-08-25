@@ -238,24 +238,25 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return getText(obj);
 	}
 	public void itemSelectedBase(final T obj, View v) {
-		LatLon loc = getLocation(obj);
-		if (obj != null && loc != null) {
-			QuickAction qa = new QuickAction(v);
-			ActionItem ai = new ActionItem();
-			ai.setTitle("Default");
-			ai.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					itemSelected(obj);
-				}
-			});
-			qa.addActionItem(ai);
-			// TODO more granular description and text message!
-			MapActivityActions.createDirectionsActions(qa, loc,
-					obj, getText(obj), getZoomToDisplay(endingObject),
-					SearchByNameAbstractActivity.this, true, null);
-			qa.show();
-		}
+		itemSelected(obj);
+//		LatLon loc = getLocation(obj);
+//		if (obj != null && loc != null) {
+//			QuickAction qa = new QuickAction(v);
+//			ActionItem ai = new ActionItem();
+//			ai.setTitle("Default");
+//			ai.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					itemSelected(obj);
+//				}
+//			});
+//			qa.addActionItem(ai);
+//			// TODO more granular description and text message!
+//			MapActivityActions.createDirectionsActions(qa, loc,
+//					obj, getText(obj), getZoomToDisplay(endingObject),
+//					SearchByNameAbstractActivity.this, true, null);
+//			qa.show();
+//		}
 	}
 	public abstract void itemSelected(T obj);
 	

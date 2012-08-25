@@ -54,7 +54,11 @@ public class FontFitTextView extends TextView {
 			//if (getLineCount() != lines) {
 			setLines(lines);
 			setMaxLines(lines);
-			setGravity(Gravity.TOP);
+			if( lines == 1) {
+				setGravity(Gravity.CENTER_VERTICAL);
+			} else {
+				setGravity(Gravity.TOP);
+			}
 			//}
 			setTextSize(TypedValue.COMPLEX_UNIT_PX, tp.getTextSize());
 		}
