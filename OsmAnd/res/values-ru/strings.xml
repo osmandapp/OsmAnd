@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите ее в списке. Удерживайте карту, если вы хотите удалить или деактивировать. \nДанные на устройстве (%1$s свободно):</string>
   <string name="unknown_from_location">Начальное местоположение еще не определено</string>
   <string name="unknown_location">Местоположение еще не определено</string>
@@ -532,7 +532,7 @@
   <string name="update_existing">Заменить</string>
   <string name="only_show">Только показать</string>
   <string name="follow">Следовать</string>
-  <string name="recalculate_route_to_your_location">Пересчитывать маршрут в зависимости от местоположения</string>
+  <string name="recalculate_route_to_your_location">Вид транспорта:</string>
   <string name="mark_final_location_first">Отметьте сначала точку назначения</string>
   <string name="get_directions">Маршрут</string>
   <string name="gps_status_app_not_found">Приложение \'Статус GPS\' не найдено. Искать на маркете?</string>
@@ -600,7 +600,7 @@
   <string name="show_osm_bugs">Open Street Bugs</string>
   <string name="favourites_activity">Список избранных точек</string>
   <string name="add_to_favourite">Добавить к избранным</string>
-  <string name="use_english_names_descr">Использовать местные или английские названия</string>
+  <string name="use_english_names_descr">Использовать английские названия вместо местных</string>
   <string name="use_english_names">Использовать английские названия</string>
   <string name="app_settings">Настройки приложения</string>
   <string name="search_address">Искать адрес</string>
@@ -907,8 +907,8 @@
   <string name="map_widget_mini_route">Малая карта маршрута</string>
   <string name="bg_service_screen_lock">Блокировка экрана</string>
   <string name="bg_service_screen_unlock">Блокировать экран</string>
-  <string name="bg_service_sleep_mode_off">Отключить спящий режим</string>
-  <string name="bg_service_sleep_mode_on">Включить спящий режим</string>
+  <string name="bg_service_sleep_mode_off">Включить фоновый режим</string>
+  <string name="bg_service_sleep_mode_on">Выключить фоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
 <string name="layer_map_appearance">Настройка экрана...</string>
@@ -928,4 +928,32 @@
 <string name="monitoring_mode_on">Остановить запись GPX</string>
 <string name="int_continuosly">Постоянно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
+<string name="map_widget_day_night">Дневной/ночной режим</string>
+<string name="filterpoi_activity">Создать фильтр POI</string>
+<string name="select_navigation_mode">Выберите вид транспорта</string>
+<string name="day_night_info_description">Восход : %1$s \nЗакат : %2$s</string>
+<string name="map_widget_vector_attributes">Настройки рендеринга:</string>
+<string name="map_widget_renderer">Стиль рендеринга</string>
+<string name="live_monitoring_mode_off">Включить\nLive слежение</string>
+<string name="live_monitoring_mode_on">Выключить\nLive слежение</string>
+<string name="tip_rotation_switching_t_v2">\tНажав на значок компаса на экране с картой Вы можете переключить режим вращения карты.
+	\n\tДоступные варианты:
+	\n\t\'Не вращать\' - Карта не будет вращаться. Север всегда сверху.
+	\n\t\'По направлению движения\' - Карта будет вращаться в соответствии с направлением Вашего движения. Сверху - направление движения.
+	\n\t\'По направлению компаса\' - Карта будет вращаться так, чтобы совместить север карты и северное направление (используются показания компаса в устройстве).
+	</string>
+<string name="tip_day_night_mode_t_v2">\tДля некоторых векторных карт можно менять оформление между дневным и ночным.
+	\n\tНочное оформление безопаснее для использования в темноте.
+	\n\tДля изменения дневного/ночного оформления нажмите на значок настройки на экране карты и выберите \'Дневной/ночной режим\'.
+	\n\tДоступные варианты:
+	\n\t\'Восход/Закат\' - режим переключается в зависимости от положения солнца (используется по умолчанию)
+	\n\t\'Дневной\' - всегда использовать дневной режим
+	\n\t\'Ночной\' - всегда использовать ночной режим
+	\n\t\'Датчик освещённости\' - режим переключается в зависимости от показаний датчика освещённости (при его наличии) Вашего устройства</string>
+<string name="tip_map_switch_t_v2">\tОтображаемые карты и слои можно изменить выбрав \'Настройка вида\' (значок глобуса) на экране карты.
+\n\tВ \'Источник карты…\' можно выбрать предварительно загруженые векторные карты, онлайн-карты от различных источников (для использования включите плагин \'Онлайн карты\'), или самостоятельно созданные карты (при помощи OsmandMapCreator для ПК, например).
+\n\tOsmand также поддерживает пользовательские источники.</string>
+<string name="tip_app_mode_t_v2">\tOsmand поддерживает настраиваемые профили для различных режимов.
+\n\tВы можете изменить текущий профиль нажав кнопку выбора профилей в нижнем левом углу экрана карты (значок автомобиля, велосипеда или пешехода) или при построении маршрута.</string>
+<string name="email">email</string>
 </resources>
