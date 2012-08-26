@@ -1,6 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
   <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
   <string name="layer_map_appearance">Konfigurovať obrazovku…</string>
   <string name="show_lanes">Jazdné pruhy</string>
@@ -931,4 +930,11 @@
   <string name="screen_is_locked">Na odomknutie obrazovky, kliknite na ikonu zámky</string>
   <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
 <string name="email">email</string>
+<string name="filterpoi_activity">Vytvoriť POI filter</string>
+<string name="select_navigation_mode">Výber režimu prepravy</string>
+<string name="day_night_info_description">Východ slnka: %1$s \nZápad slnka: %2$s</string>
+<string name="day_night_info">Info o dni/noci</string>
+<string name="map_widget_day_night">Denná/nočná mapa</string>
+<string name="map_widget_vector_attributes">Atribúty vykresľovania:</string>
+<string name="map_widget_renderer">Štýl vykresľovania</string>
 </resources>
