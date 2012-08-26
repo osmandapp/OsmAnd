@@ -259,6 +259,11 @@ public class RoutingContext {
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, matcher);
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
 			if(nativeLib != null) {
+				try {
+					r.getKey().initRouteRegionsIfNeeded(request);
+				} catch (IOException e) {
+					throw new RuntimeException("Loading data exception", e);
+				}
 				for(RouteRegion reg : r.getKey().getRoutingIndexes()) {
 					NativeRouteSearchResult rs = nativeLoadRegion(request, reg, nativeLib, loadData);
 					if(rs != null) {

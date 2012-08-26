@@ -412,6 +412,9 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
 		ApplicationMode appMode = settings.getApplicationMode();
+		if(appMode == ApplicationMode.DEFAULT) {
+			appMode = ApplicationMode.CAR;
+		}
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
