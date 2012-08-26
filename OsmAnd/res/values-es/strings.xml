@@ -46,7 +46,7 @@
   <string name="live_monitoring_interval">Intervalo de seguimiento en directo</string>
   <string name="live_monitoring_url_descr">Especifica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Dirección web de Seguimiento en directo</string>
-  <string name="gpx_monitoring_disabled_warn">Por favor, active \'Registrar traza en GPX\' en opciones de Seguimiento</string>
+  <string name="gpx_monitoring_disabled_warn">Por favor, active la opción \'Guardar traza en fichero GPX\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   <string name="tip_recent_changes_0_7_0_t">"Cambios en 0.7.0 : \n\t- Artículos de wikipedia sin conexión de datos \n\t- Mapas actualizados \n\t- Otras pequeñas funcionalidades "</string>
   <string name="free_version_message">Esta versión gratuita de Osmand está limitada a %1$s descargas %2$s y no soporta artículos de wikipedia sin conexión.</string>
@@ -90,7 +90,7 @@
   <string name="osmand_service">Funcionalidad de bajo consumo</string>
   <string name="osmand_service_descr">Para ejecutar Osmand mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
-  <string name="tip_rotation_switching_t">\tPuedes elegir cómo se rota el mapa en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt; \'Rotación del mapa\'. \n\tLas opciones son: \n\t\'No rotar\' - No se girará el mapa. El Norte estará siempre arriba \n\t\'En dirección al movimiento\' - El mapa estará continuamente alineado con la dirección y sentido de su movimiento \n\t\'A la brújula\' - El mapa estará continuamente alineado con la lectura de la brújula del dispositivo \n\tNota: Para cambiar rápidamente entre rotación por brújula y la seleccionada en las opciones, basta con pulsar sobre la aguja de la brújula en el mapa.</string>
+  <string name="tip_rotation_switching_t">\tPuedes elegir cómo se rota el mapa en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt; \'Rotación del mapa\'. \n\tLas opciones son: \n\t\'No rotar\' - No se girará el mapa. El Norte estará siempre arriba \n\t\'En la dirección del movimiento\' - El mapa estará continuamente alineado con la dirección y sentido de su movimiento \n\t\'A la brújula\' - El mapa estará continuamente alineado con la lectura de la brújula del dispositivo \n\tNota: Para cambiar rápidamente entre rotación por brújula y la seleccionada en las opciones, basta con pulsar sobre la aguja de la brújula en el mapa.</string>
   <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. \n\t\n\tPuedes descargarlo en \'Opciones\' -&gt; \'Descarga de datos\', o pasar a mapas en línea vía \'Opciones\' -&gt; \'Mapas\'.</string>
   <string name="binary_map_download_success">Descarga correcta.\n\t\n\tPara usarla, activa \'Opciones\' -&gt; \'Configuración de mapas\' -&gt; \'Mapas descargados\'.</string>
   <string name="tip_day_night_mode">Modo Día/Noche</string>
@@ -734,7 +734,7 @@
   <string name="offline_navigation_not_available">La navegación offline no está disponible temporalmente.</string>
   <string name="left_side_navigation">Conducción por la izquierda</string>
   <string name="left_side_navigation_descr">Seleccionar para países con tráfico por la izquierda</string>
-  <string name="download_link_and_local_description">Pulse aquí para descargar o actualizar datos sin conexión.\nPulse cualquier ítem para ver más detalles, manténga pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
+  <string name="download_link_and_local_description">Pulsa aquí para descargar o actualizar datos para su uso posterior sin conexión.\nPulsa cualquier ítem para ver más detalles, mantén pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
   <string name="unknown_from_location">El punto de inicio no ha sido determinado</string>
   <string name="context_menu_item_directions">Indicaciones hasta aquí</string>
   <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de fichero?</string>
@@ -758,7 +758,7 @@
   <string name="select_plugin_to_activate">Toque un extra para activarlo o desactivarlo. (Puede ser necesario reiniciar Osmand.)</string>
   <string name="prefs_plugins_descr">Los extras permiten configuración en modo experto y proporcionan funcionalidades adicionales, como mapas teselados, seguimiento, modo de pantalla apagada, opciones de accesibilidad, y otros.</string>
   <string name="prefs_plugins">Gestor de Extras</string>
-  <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 : \n\t - *Funcionalidad de extras*\n\t - La mayoría de funcionalidades esta agrupada por características y pueden ser habilitadas/des-habilitadas en el Gestor de Extras. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras características nuevas y existentes.\n\t - *Soporte para nuevos datos de mapa descargados*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (Los datos antiguos no están soportados)\n\t - *Navegación sin conexión* \n\t - La navegación sin conexión es más robusta\n\t -*Usabilidad e interfaz de usuario* \n\t - Mejoras en muchas áreas"</string>
+  <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 : \n*Funcionalidad de extras*\n\t - La mayoría de funcionalidades está agrupada por características y pueden ser habilitadas / deshabilitadas en el Gestor de Extras. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras características nuevas y existentes.\n*Soporte para nuevos datos de mapa descargados*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (los datos antiguos no están soportados)\n*Navegación sin conexión* \n\t - La navegación sin conexión es más robusta\n*Usabilidad e interfaz de usuario* \n\t - Mejoras en muchas áreas"</string>
   <string name="osm_editing_plugin_description">Muestra parámetros para la colaboración con OSM como recolectar / modificar objetos PDI de OSM, crear / comentar fallos de OSM, y contribuir con trazas GPX (requiere credenciales OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funciona correctamente en algunos dispositivos.</string>
   <string name="simulate_route_progression_manually">Simular la progresión de la ruta manualmente</string>
@@ -954,21 +954,21 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_widget_day_night">Mapa día/noche</string>
 <string name="map_widget_vector_attributes">Atributos de dibujado:</string>
 <string name="map_widget_renderer">Estilo de dibujado</string>
-<string name="tip_rotation_switching_t_v2">﻿\tPuedes cambiar si se gira el mapa y cómo pulsando repetidamente el icono de la brújula.↵
+<string name="tip_rotation_switching_t_v2">﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.↵
 \n\tLas opciones son:↵
-\n\t'No girar (el norte está arriba)': el mapa no girará. El norte está siempre arriba↵
-\n\t'En la dirección de movimiento': el mapa está continuamente alineado con tu dirección↵
-\n\t'A la brújula' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
+\n\t- 'No girar (el norte está arriba)': el mapa no girará. El norte está siempre arriba↵
+\n\t- 'En la dirección de movimiento': el mapa está continuamente alineado con tu dirección↵
+\n\t- 'A la brújula' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
 <string name="tip_map_switch_t_v2">\﻿tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.
 \n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (necesitas activar el extra el \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmandMapCreator en un PC.
 \n\tOsmand también soporta fuentes personalizadas.</string>
 <string name="tip_day_night_mode_t_v2">\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).↵
 \n\tLos colores del modo noche son más seguros para la conducción nocturna.↵
-\n\tPuedes establecer una política para la conmutación día/noche en 'Menú'-&gt; 'Configure screen...'-&gt; 'Day/night map'.↵
+\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla...\'-&gt; 'Mapa Día/Noche'.↵
 \n\tLas opciones son:↵
 \n\t- 'Alba/Ocaso': modo automático, controlado por la posición del sol (por defecto)↵
 \n\t- 'Día': utiliza siempre el modo día↵
-\n\t- 'Noche' - utiliza siempre el modo noche↵
+\n\t- 'Noche': utiliza siempre el modo noche↵
 \n\t- 'Sensor de luz': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
 <string name="tip_app_mode_t_v2">\﻿tOsmand admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
 \n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla de mapa (icono de coche, bicicleta o peatón), o al crear una ruta.</string>
