@@ -516,7 +516,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		QuickAction qa = new QuickAction(v);
+		final QuickAction qa = new QuickAction(v);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
 		String name = getString(R.string.poi)+" : " + poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());

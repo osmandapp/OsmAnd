@@ -349,7 +349,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 //////////  JNI Rendering Context //////////////
 
 jclass jclass_JUnidecode;
+jclass jclass_Reshaper;
 jmethodID jmethod_JUnidecode_unidecode;
+jmethodID jmethod_Reshaper_reshape;
 jclass jclass_RenderingContext = NULL;
 jfieldID jfield_RenderingContext_interrupted = NULL;
 jfieldID jfield_RenderingContext_leftX = NULL;
@@ -417,6 +419,8 @@ void loadJniRenderingContext(JNIEnv* env)
 
 	jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
     jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
+    jclass_Reshaper = findClass(env, "net/osmand/Reshaper");
+    jmethod_Reshaper_reshape = env->GetStaticMethodID(jclass_Reshaper, "reshape", "(Ljava/lang/String;)Ljava/lang/String;");
 
     jclass_RouteDataObject = findClass(env, "net/osmand/binary/RouteDataObject");
     jclass_NativeRouteSearchResult = findClass(env, "net/osmand/NativeLibrary$NativeRouteSearchResult");
@@ -664,5 +668,14 @@ std::string JNIRenderingContext::getTranslatedString(const std::string& name) {
 		return res;
 	}
 	return name;
+}
+
+std::string JNIRenderingContext::getReshapedString(const std::string& name) {
+	jstring n = this->env->NewStringUTF(name.c_str());
+	jstring translate = (jstring) this->env->CallStaticObjectMethod(jclass_Reshaper, jmethod_Reshaper_reshape, n);
+	std::string res = getString(this->env, translate);
+	this->env->DeleteLocalRef(translate);
+	this->env->DeleteLocalRef(n);
+	return res;
 }
 

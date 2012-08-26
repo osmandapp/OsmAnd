@@ -9,7 +9,13 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    
+    <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
+    \n\t* Improved Routing
+    \n\t* Dynamic map widgets
+    \n\t* Map settings moved to map screen
+    \n\t* Lock screen button with logging services
+    \n\t* Fixed Arabic, Kannada scripting and RTL languages 
+    </string>
 	<string name="osmand_short_description_80_chars">Osmand is open source navigation application with raster/vector maps</string>
 	<string name="osmand_long_description_1000_chars">
 	        Osmand (Open Street Maps Android)
@@ -114,12 +120,6 @@ OsmAnd is still in active development and relies on "donations" based support to
     <string name="show_cameras">Show speed cameras</string>
     <string name="show_speed_limits">Show speed limits</string>
     <string name="avoid_toll_roads">Avoid toll roads</string>
-    <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
-    \n\t* Improved Routing
-    \n\t* Dynamic map widgets
-    \n\t* Map settings moved to map screen
-    \n\t* Lock screen button with logging services
-    </string>
     <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
     <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
     <string name="osmand_parking_hours">Hours</string>

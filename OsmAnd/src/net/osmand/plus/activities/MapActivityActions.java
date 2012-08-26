@@ -1073,7 +1073,7 @@ public class MapActivityActions implements DialogProvider {
         menu.show();
     }
     
-    public static void createDirectionsActions(QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
+    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
     		final boolean saveHistory, final OnClickListener onShow){
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
@@ -1088,6 +1088,7 @@ public class MapActivityActions implements DialogProvider {
 				app.getSettings().setMapLocationToShow( location.getLatitude(), location.getLongitude(), 
 						z, saveHistory ? name : null, name, obj); //$NON-NLS-1$
 				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
 			}
 		});
 		qa.addActionItem(showOnMap);
@@ -1102,6 +1103,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
 				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
 			}
 		});
 		qa.addActionItem(setAsDestination);
@@ -1117,6 +1119,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), true, name);
 				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
 			}
 		});
 		qa.addActionItem(directionsTo);
