@@ -245,7 +245,7 @@
   <string name="preferred_locale">Локализация</string>
   <string name="tip_map_switch">Источник карты</string>
   <string name="tip_map_switch_t">Быстро изменить источник карты и отображаемые слои можно выбором \'Меню\'-&gt;\'Слои\'.\n\t Используя меню \'Источник карты...\' вы можете выбрать предварительно загруженные локальные векторные карты, online-сервисы растровых карт или карты, собственноручно созданные с помощью OsmandMapCreator.\n\tOsmand поддерживает пользовательские источники карт.</string>
-  <string name="tip_app_mode">Режим работы</string>
+  <string name="tip_app_mode">Профиль приложения</string>
   <string name="tip_app_mode_t">Osmand поддерживает различные типовые режимы отображения карты. \n\tВы можете изменить режим в \'Меню\'-&gt;\'Настройки\'-&gt;\'Режим работы\', при этом меняется большинство настроек карты.</string>
   <string name="tip_navigation">Навигация</string>
   <string name="tip_navigation_t">Чтобы использовать навигацию, необходимо выбрать точку назначения. После этого нажмите \'Меню\'-&gt;\'Навигация\' на карте и выберите тип.</string>
@@ -886,8 +886,8 @@
   <string name="tip_recent_changes_0_8_2_t">Изменения в 0.8.2 :
     \n\t* Улучшенная прокладка маршрута.
     \n\t* Возможность выбора информационных элементов (виджетов), отображаемых на карте (кнопка Настройки в правом верхнему углу карты).
-    \n\t* Изменение стиля отрисовки карты и дневного/ночного режима из окна карты (кнопка Настройки в правом вехнем углу карты).
-    \n\t* Возможность блокировки экрана, запуска записи GPX и Live слежения из окна карты (кнопка в левом верхнем углу).
+    \n\t* Изменение стиля отрисовки карты и дневного/ночного режима с экрана карты (кнопка Настройки в правом вехнем углу карты).
+    \n\t* Возможность блокировки экрана, запуска записи GPX и Live слежения с экрана карты (кнопка в левом верхнем углу карты).
   </string>  
   <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>
   <string name="map_widget_top_text">Название улицы</string>
@@ -937,8 +937,8 @@
 <string name="filterpoi_activity">Создать фильтр POI</string>
 <string name="select_navigation_mode">Выберите вид транспорта</string>
 <string name="day_night_info_description">Восход : %1$s \nЗакат : %2$s</string>
-<string name="map_widget_vector_attributes">Настройки рендеринга:</string>
-<string name="map_widget_renderer">Стиль рендеринга</string>
+<string name="map_widget_vector_attributes">Настройки отрисовкм:</string>
+<string name="map_widget_renderer">Стиль отрисовки</string>
 <string name="live_monitoring_mode_off">Включить\nLive слежение</string>
 <string name="live_monitoring_mode_on">Выключить\nLive слежение</string>
 <string name="tip_rotation_switching_t_v2">\tНажав на значок компаса на экране с картой Вы можете переключить режим вращения карты.
@@ -961,5 +961,5 @@
 <string name="tip_app_mode_t_v2">\tOsmand поддерживает настраиваемые профили для различных режимов.
 \n\tВы можете изменить текущий профиль нажав кнопку выбора профилей в нижнем левом углу экрана карты (значок автомобиля, велосипеда или пешехода) или при построении маршрута.</string>
 <string name="email">email</string>
-<string name="day_night_info">Дневной/ночной вид</string>
+<string name="day_night_info">Восход/закат</string>
 </resources>
