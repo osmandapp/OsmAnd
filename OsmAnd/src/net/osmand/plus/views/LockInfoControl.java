@@ -7,6 +7,7 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -46,7 +47,7 @@ public class LockInfoControl {
 		return lockActions;
 	}
 	
-	public ImageView createLockScreenWidget(final OsmandMapTileView view) {
+	public ImageView createLockScreenWidget(final OsmandMapTileView view, final MapActivity map) {
 		final ImageView lockView = new ImageView(view.getContext());
 		lockEnabled = view.getResources().getDrawable(R.drawable.lock_enabled);
 		lockDisabled = view.getResources().getDrawable(R.drawable.lock_disabled);
@@ -54,7 +55,7 @@ public class LockInfoControl {
 		lockView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showBgServiceQAction(lockView, view);
+				showBgServiceQAction(lockView, view, map);
 			}
 		});
 		return lockView;
@@ -68,7 +69,7 @@ public class LockInfoControl {
 		}
 	}
 
-	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view) {	
+	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view, final MapActivity map) {	
 		final QuickAction qa = new QuickAction(lockView);
 		
 		if (transparentLockView == null) {
@@ -89,7 +90,7 @@ public class LockInfoControl {
 						y += locs[1];
 						if(lockView.getWidth() >= x && x >= 0 && 
 								lockView.getHeight() >= y && y >= 0) {
-							showBgServiceQAction(lockView, view);
+							showBgServiceQAction(lockView, view, map);
 							return true;
 						}
 						blinkIcon();
@@ -122,6 +123,7 @@ public class LockInfoControl {
 			public void onClick(View v) {
 				if (!isScreenLocked) {
 					parent.addView(transparentLockView);
+					map.backToLocationImpl();
 				} else {
 					parent.removeView(transparentLockView);
 				}

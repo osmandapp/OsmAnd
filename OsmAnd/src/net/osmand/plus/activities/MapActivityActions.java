@@ -167,7 +167,9 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
+				// Don't use showDialog because it is impossible to refresh favorite items list
+				createReplaceFavouriteDialog(args).show();
+				// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			
 		});
@@ -203,10 +205,10 @@ public class MapActivityActions implements DialogProvider {
 		final FavouritePoint[] favs = new FavouritePoint[points.size()];
 		Iterator<FavouritePoint> it = points.iterator();
 		int i=0;
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			FavouritePoint fp = it.next();
 			// filter gpx points
-			if(fp.isStored()){
+			if (fp.isStored()) {
 				favs[i] = fp;
 				names[i] = fp.getName();
 				i++;
@@ -223,7 +225,8 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.getMapView().refreshMap();
 			}
 		});
-		return b.create();
+		AlertDialog al = b.create();
+		return al;
 	}
 	
     public void addWaypoint(final double latitude, final double longitude){

@@ -234,7 +234,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
-		ImageView lockView = lockInfoControl.createLockScreenWidget(view);
+		ImageView lockView = lockInfoControl.createLockScreenWidget(view, map);
 		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
 		backToLocation = createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
