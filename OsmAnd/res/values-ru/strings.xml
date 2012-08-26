@@ -918,8 +918,8 @@
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
 <string name="layer_map_appearance">Настройка экрана...</string>
 <string name="show_lanes">Показывать полосы движения</string>
-<string name="avoid_unpaved">Избегать проселочных дорог</string>
-<string name="avoid_ferries">Избегать паромов</string>
+<string name="avoid_unpaved">Избегать проселочные дороги</string>
+<string name="avoid_ferries">Избегать паромы</string>
 <string name="avoid_in_routing_title">Избегать при прокладке маршрута...</string>
 <string name="avoid_in_routing_descr">Избегать платных и проселочных дорог, паромов</string>
 <string name="show_warnings_descr">Показывать ограничения скорости, камеры и искусственные неровности</string>
