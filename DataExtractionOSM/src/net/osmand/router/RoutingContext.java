@@ -285,7 +285,6 @@ public class RoutingContext {
 				}
 			}
 		}
-		System.out.println(matcher);
 		loadedTiles++;
 		if (tile.isUnloaded()) {
 			loadedPrevUnloadedTiles++;
