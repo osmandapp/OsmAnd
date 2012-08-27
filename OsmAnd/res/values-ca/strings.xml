@@ -11,17 +11,17 @@
 <string name="map_widget_speed">Velocitat</string>
 <string name="map_widget_distance">Meta</string>
 <string name="map_widget_altitude">Altitud</string>
-<string name="map_widget_time">Temps per arribar</string>
+<string name="map_widget_time">Temps per arribar-hi</string>
 <string name="show_cameras">Mostra les càmeres de velocitat</string>
 <string name="show_speed_limits">Mostra els límits de velocitat</string>
-<string name="route_updated_loc_found">La ruta es calcularà de nou quan es determini la localització</string>
+<string name="route_updated_loc_found">La ruta es tornarà a calcular quan es determini la ubicació</string>
 <string name="update_downlod_list">Torna a carregar la llista</string>
 <string name="starting_point_too_far">El punt d\'inici és massa lluny de la carretera més propera.</string>
 <string name="osmand_parking_time_limit_title">Indica el temps límit d\'aparcament</string>
 <string name="osmand_parking_choose_type">Tria el tipus d\'aparcament</string>
 <string name="avoid_unpaved">Evita les carreteres no pavimentades</string>
 <string name="avoid_in_routing_title">Evita…</string>
-<string name="monitoring_mode_on">Atura\n l\'enregistrament en GPX</string>
+<string name="monitoring_mode_on">Atura\'n\n l\'enregistrament en GPX</string>
 <string name="int_continuosly">Sense interrupció</string>
 <string name="map_widget_config">Configura la pantalla</string>
 <string name="map_widget_compass">Brúixola</string>
@@ -43,7 +43,7 @@
 <string name="layer_map_appearance">Configura l\'aparença…</string>
 <string name="screen_is_locked">Per desbloquejar la pantalla premeu la icona de bloqueig</string>
 <string name="map_widget_lock_screen">Bloqueja la pantalla</string>
-<string name="map_widget_top_stack">Barra d\'estat</string>
+<string name="map_widget_top_stack">Barra d\'estat:</string>
 <string name="map_widget_next_turn">Proper gir</string>
 <string name="map_widget_next_turn_small">Proper gir (petit)</string>
 <string name="map_widget_next_next_turn">Segon proper gir</string>
@@ -74,19 +74,19 @@
 <string name="rendering_attr_hmRendered_name">Mostra més detalls al mapa</string>
 <string name="navigate_point_format">Format:</string>
 <string name="navpoint_search_desc">Coordenades</string>
-<string name="address_search_desc">Cerca adreces</string>
-<string name="transport_search_desc">Cerca transports</string>
-<string name="favourites_search_desc">Cerca preferits</string>
+<string name="address_search_desc">Cerca d'adreces</string>
+<string name="transport_search_desc">Cerca de transports</string>
+<string name="favourites_search_desc">Cerca de preferits</string>
 <string name="history_search_desc">Cerca a l\'historial</string>
 <string name="left_side_navigation">Conducció per l\'esquerra</string>
-<string name="left_side_navigation_descr">Selecciona pels països amb conducció per l\'esquerra</string>
+<string name="left_side_navigation_descr">Selecciona per als països amb conducció per l\'esquerra</string>
 <string name="unknown_from_location">El punt d\'inici encara no s\'ha determinat</string>
 <string name="unknown_location">La posició encara no es coneix</string>
 <string name="context_menu_item_directions">Direccions fins aquí</string>
 <string name="modify_transparency">Modifica la transparència (0 - transparent, 255 - opac)</string>
 <string name="monitoring_mode_off">Enregistra en un GPX</string>
-<string name="bg_service_sleep_mode_off">Activa\n el mode adormit</string>
-<string name="bg_service_sleep_mode_on">Atura\n el mode adormit</string>
+<string name="bg_service_sleep_mode_off">Activa\'n\n el mode adormit</string>
+<string name="bg_service_sleep_mode_on">Atura\'n\n el mode adormit</string>
 <string name="offline_navigation_not_available">La navegació fora de línia de l\'Osmand no està disponible temporalment.</string>
 <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
 <string name="select_index_file_to_download">No s\'ha trobat res. Si no podeu trobar la vostra regió, podeu crear-la vosaltres mateixos (vegeu http://osmand.net).</string>
@@ -97,20 +97,20 @@
 <string name="map_online_data_descr">Utilitza mapes en línia (baixa i desa les tessel·les a la memòria cau de la targeta SD)</string>
 <string name="online_map_settings">Mapes en línia</string>
 <string name="online_map_settings_descr">Configura les fonts de mapes de tessel·les en línia o desats a la memòria cau</string>
-<string name="map_settings">- Configuració del mapa</string>
-<string name="map_settings_descr">Configura la visualització del mapa</string>
+<string name="map_settings">Configuració del mapa</string>
+<string name="map_settings_descr">Configureu la visualització del mapa</string>
 <string name="osmand_accessibility_description">Mostra la configuració per les característiques especials d\'accessibilitat.</string>
 <string name="extra_settings">Configuració avançada</string>
 <string name="plugins_screen">Connector Gestor</string>
 <string name="select_plugin_to_activate">Toqueu un connector per activar-lo o desactivar-lo (caldrà que reinicieu l\'Osmand).</string>
-<string name="poi_search_desc">Cerca PDI (punt d\'interès)</string>
+<string name="poi_search_desc">Cerca de PDI (punt d\'interès)</string>
 <string name="prefs_plugins">Connector Gestor</string>
 <string name="native_rendering">Renderització nativa</string>
 <string name="send_files_to_osm">Voleu enviar els fitxers GPX a OSM?</string>
 <string name="gpx_visibility_txt">Visibilitat</string>
 <string name="gpx_tags_txt">Etiquetes</string>
 <string name="gpx_description_txt">Descripció</string>
-<string name="validate_gpx_upload_name_pwd">Especifiqueu el nom d\'usuari OSM i la contrasenya per pujar els fitxers GPX.</string>
+<string name="validate_gpx_upload_name_pwd">Especifiqueu el nom d\'usuari a OSM i la contrasenya per penjar els fitxers GPX.</string>
 <string name="default_buttons_support">Suport</string>
 <string name="show_ruler_level">Mostra el regle</string>
 <string name="info_button">Informació</string>
@@ -158,15 +158,15 @@
 <string name="i_am_here">Sóc aquí</string>
 <string name="accessibility_preferences">Accessibilitat</string>
 <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes</string>
-<string name="local_openstreetmap_uploading">S\'està pujant…</string>
-<string name="show_warnings_descr">Mostra límits de velocitat,radars i bandes rugoses</string>
+<string name="local_openstreetmap_uploading">S\'està penjant…</string>
+<string name="show_warnings_descr">Mostra límits de velocitat, radars i bandes rugoses</string>
 <string name="osmand_parking_add_event">Afegeix un avís a l\'aplicació Calendari</string>
 <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa</string>
 <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
 <string name="default_buttons_selectall">Selecciona-ho tot</string>
-<string name="email">correu electrònic</string>
-<string name="index_settings_descr">Baixeu, visualitzeu-ne els detalls, i gestioneu mapes fora de línia</string>
-<string name="osmand_extra_settings_description">Mostra els paràmetres per una configuració avançada del mapa (per exemple augmentant els detalls del mapa) i alguns específics del dispositiu.</string>
+<string name="email">Correu electrònic</string>
+<string name="index_settings_descr">Baixeu, visualitzeu-ne els detalls i gestioneu mapes fora de línia</string>
+<string name="osmand_extra_settings_description">Mostra els paràmetres per a una configuració avançada del mapa (per exemple augmentant-ne els detalls) i alguns d\'específics del dispositiu.</string>
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
 <string name="debugging_and_development">Desenvolupament de l\'Osmand</string>
 <string name="local_openstreetmap_show">Mostra al mapa</string>
@@ -185,7 +185,7 @@
 <string name="index_name_oceania">Oceania</string>
 <string name="index_name_voice">Paquets de veu (gravats)</string>
 <string name="amenity_type_wikiosm">Viquipèdia (fora de línia)</string>
-<string name="routing_settings">- Navegació</string>
+<string name="routing_settings">Navegació</string>
 <string name="routing_settings_descr">Especifiqueu les opcions de navegació</string>
 <string name="global_settings">Paràmetres globals</string>
 <string name="index_settings">Dades fora de línia (baixades)</string>
@@ -203,12 +203,12 @@
 <string name="osmand_parking_event">Treu el cotxe de l\'aparcament</string>
 <string name="rendering_attr_appMode_description">Optimització del mapa per cada Perfil d\'usuari</string>
 <string name="play_commands_of_currently_selected_voice">Reprodueix instruccions de la veu seleccionada</string>
-<string name="scroll_map_by_gestures_descr">Desplaçament del mapa per gests a la pantalla tàctil</string>
+<string name="scroll_map_by_gestures_descr">Desplaçament del mapa per gestos a la pantalla tàctil</string>
 <string name="scroll_map_by_gestures">Desplaçament natural del mapa</string>
 <string name="zoom_by_trackball_descr">Canvia el zoom del mapa amb moviments horitzontals al ratolí de bola</string>
 <string name="zoom_by_trackball">Utilitza el ratolí de bola per controlar el zoom</string>
-<string name="use_short_object_names">Utilitza els noms dels objectes</string>
-<string name="local_openstreetmap_were_uploaded">{0} PDI/errors van ser penjats</string>
+<string name="use_short_object_names">Utilitza el nom dels objectes</string>
+<string name="local_openstreetmap_were_uploaded">Es van penjar {0} PDI/errors</string>
 <string name="local_openstreetmap_settings">PDI/errors d\'OSM desats localment</string>
 <string name="local_openstreetmap_settings_descr">Mostra i gestiona els PDI/errors d\'OSM de les bases de dades locals</string>
 <string name="position_on_map_descr">Trieu la ubicació del marcador de posició al mapa</string>
@@ -218,10 +218,10 @@
 <string name="show_lanes">Mostra els carrils</string>
 <string name="avoid_ferries">Evita els ferris</string>
 <string name="avoid_in_routing_descr">Evita les carreteres de peatge, les no pavimentades i els ferris</string>
-<string name="osmand_parking_warning_text">Notificació per treure el cotxe que vau introduir a Calendari. Es mantindrà fins que l\'elimineu manualment.</string>
+<string name="osmand_parking_warning_text">Notificació que vau introduir a Calendari per treure el cotxe. Es mantindrà fins que l\'elimineu manualment.</string>
 <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
 <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
-<string name="download_link_and_local_description">Feu clic per descarregar o penjar dades fora de línia. \nFeu clic en algun del ítems per veure\'n més detalls, mantingueu-lo premut per desactivar-lo o esborrar-lo. Dades que hi ha al dispositiu (%1$s lliures):</string>
+<string name="download_link_and_local_description">Feu clic per descarregar o actualitzar dades fora de línia. \nFeu clic en algun del ítems per veure\'n més detalls i mantingueu-lo premut per desactivar-lo o esborrar-lo. Dades que hi ha al dispositiu (%1$s lliures):</string>
 <string name="test_voice_prompts">Prova els indicadors de veu</string>
 <string name="support_new_features">Ajuda per a noves característiques</string>
 <string name="rendering_out_of_memory">No hi ha prou memòria de procés per mostrar l\'àrea seleccionada</string>
@@ -239,7 +239,7 @@
 <string name="delete_confirmation_msg">Voleu suprimir %1$s?</string>
 <string name="city_type_town">Poble</string>
 <string name="city_type_city">Ciutat</string>
-<string name="layer_poi_label">Etiquetes de PDI</string>
+<string name="layer_poi_label">Etiquetes dels PDI</string>
 <string name="animate_route_off">Atura l\'animació</string>
 <string name="animate_route">Inicia l\'animació</string>
 <string name="file_with_name_already_exists">Ja existeix un fitxer amb aquest nom.</string>
@@ -263,7 +263,7 @@
 <string name="show_more_map_detail">Mostra més detalls al mapa</string>
 <string name="edit_filter_delete_menu_item">Suprimeix</string>
 <string name="tip_update_index">Actualitza les dades fora de línia</string>
-<string name="filterpoi_activity">Crea un filtre de PDI</string>
+<string name="filterpoi_activity">Crea un filtre pels PDI</string>
 <string name="day_night_info_description">Alba: %1$s \nCapvespre: %2$s</string>
 <string name="map_widget_vector_attributes">Atributs de renderització:</string>
 <string name="map_widget_renderer">Estil de renderització</string>
@@ -279,12 +279,12 @@
 	\n\t- Altres petites millores
 	</string>
 <string name="accessibility_mode_descr">Activa les característiques d\'accessibilitat</string>
-<string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es realitzen sobre un fitxer local.</string>
+<string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es desen en un fitxer local.</string>
 <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Memòria assignada</string>
 <string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l\'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB).
         Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</string>
-<string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (dades fora de línia), o canviar a mapes en línia.</string>
+<string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (dades fora de línia) o canviar a mapes en línia.</string>
 <string name="tip_recent_changes_0_7_2_t">Canvis a la versió 0.7.2:
 \n\t- Renderitzaió nativa per tots els dispositius
 \n\t- Edició fora de línia dels PDI
@@ -292,8 +292,8 @@
 \n\t- Molts errors de programació solucionats
 	</string>
 <string name="global_app_settings">Paràmetres globals de l\'aplicació</string>
-<string name="user_name_descr">És necessari per les trameses a openstreetmap.org</string>
-<string name="user_password_descr">És necessària per les trameses a openstreetmap.org</string>
+<string name="user_name_descr">És necessari per a les trameses a openstreetmap.org</string>
+<string name="user_password_descr">És necessària per a les trameses a openstreetmap.org</string>
 <string name="old_poi_file_should_be_deleted">El fitxer de dades de PDI \'%1$s\' és redundant i serà suprimit.</string>
 <string name="search_position_favorites">Preferits...</string>
 <string name="search_position_map_view">Darrera visualització del mapa</string>
@@ -319,7 +319,7 @@
 <string name="local_index_mi_delete">Suprimeix</string>
 <string name="local_index_mi_reload">Torna a carregar des de la targeta SD</string>
 <string name="local_index_download">Baixa...</string>
-<string name="local_index_poi_data">Dades de PDI</string>
+<string name="local_index_poi_data">Dades dels PDI</string>
 <string name="local_index_address_data">Dades d\'adreces</string>
 <string name="local_index_transport_data">Dades de transports</string>
 <string name="local_index_map_data">Dades de mapes</string>
@@ -327,7 +327,7 @@
 <string name="local_indexes_cat_tts">Dades de veu (TTS)</string>
 <string name="local_indexes_cat_voice">Dades de veu (gravades)</string>
 <string name="local_indexes_cat_gpx">Dades GPX</string>
-<string name="local_indexes_cat_poi">Dades de PDI</string>
+<string name="local_indexes_cat_poi">Dades dels PDI</string>
 <string name="ttsvoice">Veu TTS</string>
 <string name="search_offline_clear_search">Cerca nova</string>
 <string name="map_text_size_descr">Seleccioneu la mida del text dels noms al mapa</string>
@@ -347,7 +347,7 @@
 <string name="unit_of_length">Unitat de mesura</string>
 <string name="si_mi_foots">Milles/peus</string>
 <string name="si_mi_yard">Milles/iardes</string>
-<string name="si_km_m">Quilòmetres\metres</string>
+<string name="si_km_m">Quilòmetres/metres</string>
 <string name="send_location_sms_pattern">Ubicació: %1$s\n%2$s</string>
 <string name="send_location">Envia la ubicació</string>
 <string name="context_menu_item_share_location">Comparteix la ubicació</string>
