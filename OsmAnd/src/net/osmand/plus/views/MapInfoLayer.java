@@ -1,6 +1,7 @@
 package net.osmand.plus.views;
 
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -250,7 +251,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	
 	private void registerAppearanceWidgets() {
-		final MapInfoControlRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_renderer,
+		final MapInfoControlRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, R.string.map_widget_renderer,
 				"renderer", view.getSettings().RENDERER);
 		final OsmandApplication app = view.getApplication();
 		vectorRenderer.setStateChangeListener(new Runnable() {
@@ -289,7 +290,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		
-		final MapInfoControlRegInfo dayNight = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_day_night,
+		final MapInfoControlRegInfo dayNight = mapInfoControls.registerAppearanceWidget(R.drawable.widget_day_night_mode, R.string.map_widget_day_night,
 				"dayNight", view.getSettings().DAYNIGHT_MODE);
 		dayNight.setStateChangeListener(new Runnable() {
 			@Override
@@ -314,7 +315,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		
-		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_view_direction, 
+		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction, 
 				"viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
 		displayViewDirections.setStateChangeListener(new Runnable() {
 			@Override
@@ -335,7 +336,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(), p.getName());
 			if(p.isBoolean()) {
 				final CommonPreference<Boolean> pref = view.getApplication().getSettings().getCustomRenderBooleanProperty(p.getAttrName());
-				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(0, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
+				int icon = 0;
+				try {
+					Field f = R.drawable.class.getField("widget_" + p.getAttrName().toLowerCase());
+					icon = f.getInt(null);
+				} catch(Exception e){
+				}
+				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
 				w.setStateChangeListener(new Runnable() {
 					@Override
 					public void run() {

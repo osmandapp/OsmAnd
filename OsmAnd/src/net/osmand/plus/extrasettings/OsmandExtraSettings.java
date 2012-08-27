@@ -64,7 +64,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
 		
 		final OsmandPreference<Float> textSizePref = view.getSettings().MAP_TEXT_SIZE;
-		final MapInfoControlRegInfo textSize = mapInfoControls.registerAppearanceWidget(0, R.string.map_text_size, 
+		final MapInfoControlRegInfo textSize = mapInfoControls.registerAppearanceWidget(R.drawable.widget_text_size, R.string.map_text_size, 
 				"text_size", textSizePref);
 		textSize.setStateChangeListener(new Runnable() {
 			@Override
@@ -88,7 +88,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 				b.show();
 			}
 		});
-		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_ruler, 
+		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler, 
 				"showRuler", view.getSettings().SHOW_RULER);
 		showRuler.setStateChangeListener(new Runnable() {
 			@Override
@@ -98,7 +98,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 		
-		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_transparent,
+		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
 				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
 		transparent.setStateChangeListener(new Runnable() {
 			@Override
@@ -108,7 +108,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 
-		final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_fluorescent,
+		final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_fluorescent_routes, R.string.map_widget_fluorescent,
 				"fluorescent", view.getSettings().FLUORESCENT_OVERLAYS);
 		fluorescent.setStateChangeListener(new Runnable() {
 			@Override
@@ -119,7 +119,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		});
 		
 		final CommonPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
-		final MapInfoControlRegInfo posMap = mapInfoControls.registerAppearanceWidget(0, R.string.position_on_map, 
+		final MapInfoControlRegInfo posMap = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker, R.string.position_on_map, 
 				"position_on_map", textSizePref);
 		posMap.setStateChangeListener(new Runnable() {
 			@Override
