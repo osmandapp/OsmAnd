@@ -16,69 +16,6 @@
     <property name="raw.absolute.dir" location="raw" />
     <property name="base.dir" location="." />
 	
-	<!-- Altered generic setup -->
-	<!-- Workaround issue that Android SDK17 has a bug that by default and unchangable looks for jars inside libs folder -->
-	<!-- http://code.google.com/p/android/issues/detail?id=28446 -->
-    <target name="-setup">
-        <if>
-            <condition>
-                <not><isset property="setup.done" /></not>
-            </condition>
-            <then>
-                <echo>Creating output directories if needed...</echo>
-                <mkdir dir="${resource.absolute.dir}" />
-                <mkdir dir="${jar.libs.absolute.dir}" />
-                <mkdir dir="${out.absolute.dir}" />
-                <mkdir dir="${out.res.absolute.dir}" />
-
-                <property name="setup.done" value="true" />
-                <echo>Gathering info for ${ant.project.name}...</echo>
-                <!-- load project properties, resolve Android target, library dependencies
-                     and set some properties with the results.
-                     All property names are passed as parameters ending in -Out -->
-                <setup
-                        projectTypeOut="android.project.type"
-                        androidJarFileOut="android.jar"
-                        androidAidlFileOut="android.aidl"
-                        renderScriptExeOut="renderscript"
-                        renderScriptIncludeDirOut="android.rs"
-                        bootclasspathrefOut="android.target.classpath"
-                        projectLibrariesRootOut="project.libraries"
-                        projectLibrariesJarsOut="original.project.libraries.jars"
-                        projectLibrariesResOut="project.libraries.res"
-                        projectLibrariesPackageOut="project.libraries.package"
-                        projectLibrariesLibsOut="project.libraries.libs"
-                        targetApiOut="target.api"
-                        verbose="${verbose}"
-                />
-				
-				<!-- osmchange -->
-				<path id="project.libraries.jars">
-					<path refid="original.project.libraries.jars"/>
-					<fileset dir="${jar.libs.absolute.dir}">
-						<include name="*.jar"/>
-					</fileset>
-				</path>
-				<!-- osmchange -->
-
-                <!-- sets a few boolean based on android.project.type
-                     to make the if task easier -->
-                <condition property="project.is.library" else="false">
-                    <equals arg1="${android.project.type}" arg2="library" />
-                </condition>
-                <condition property="project.is.test" else="false">
-                    <equals arg1="${android.project.type}" arg2="test" />
-                </condition>
-
-                <!-- If a test project, resolve absolute path to tested project. -->
-                <if condition="${project.is.test}">
-                    <then>
-                        <property name="tested.project.absolute.dir" location="${tested.project.dir}" />
-                    </then>
-                </if>
-            </then>
-        </if>
-    </target>
 	
 	<!-- Puts the project's resources into the output package file
          This actually can create multiple resource package in case
