@@ -28,14 +28,14 @@
 		- offline search of addresses and places
 		- custom tile map area download 
 		- car, bicycle, and pedestrian modes
-		- many map layers with customized transparency at a time
+		- several map layers with customized transparency at a time
 		- offline routing for short distance (experimental)
 
 		Limitations of Osmand Free:
 		- number of map downloads
 		- no access to Wikipedia offline POIs
 
-		OsmAnd is still in active development and relies on "donations" based support to further develop the project.
+		Osmand is still in active development and relies on "donations" based support to further develop the project.
 	</string>
     <string name="osmand_plus_short_description_80_chars">Osmand is an open source navigation application with tile/vector maps</string>
     <string name="osmand_plus_long_description_1000_chars">
@@ -51,7 +51,7 @@
 		- offline search of addresses and places
 		- custom tile map area download 
 		- car, bicycle, and pedestrian modes
-		- many map layers with customized transparency at a time
+		- several map layers with customized transparency at a time
 		- offline routing for short distance (experimental)
     </string>
 	<string name="tip_update_index">Update of Offline Data</string>
