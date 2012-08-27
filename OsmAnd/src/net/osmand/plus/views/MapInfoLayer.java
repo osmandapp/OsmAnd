@@ -558,8 +558,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 					});
 				} else {
 					tv.setText(o.toString());
-					tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 					tv.setPadding((int) (5 *scaleCoefficient), 0, 0, 0);
+					// reset 
+					if (position == 0) {
+						tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_reset_to_default, 0, 0, 0);
+					} else {
+						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
+					}
 					ch.setVisibility(View.INVISIBLE);
 				}
 				
