@@ -1,6 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
    \n\t* Verbessertes Routing
    \n\t* Konfigurierbare Schaltflächen
    \n\t* Karteneinstellungen auf Kartenbildschirm umgezogen
@@ -182,7 +181,7 @@
   <string name="live_monitoring_interval">Live-Tracking Intervall</string>
   <string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
-  <string name="gpx_monitoring_disabled_warn">Bitte Logging aktivieren unter \'Einstellungen\' -> \'Navigation\'</string>
+  <string name="gpx_monitoring_disabled_warn">Bitte Logging aktivieren unter \'Einstellungen\' -&gt; \'Navigation\'</string>
   <string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
   <string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 : \n\t- Offline Wikipedia Daten mit Artikeln \n\t- Aktualisierte Karten \n\t- Weitere kleine Verbesserungen "</string>
   <string name="free_version_message">Diese kostenlose Version von Osmand ist limitiert auf %1$s Downloads %2$s und unterstützt keine offline Wikipedia-Artikel.</string>
@@ -227,7 +226,7 @@
   <string name="osmand_service_descr">Für Verwendung von Osmand bei ausgeschalteter Anzeige</string>
   <string name="tip_rotation_switching">Kartenrotation</string>
   <string name="tip_rotation_switching_t_v2">\tSie können mit wiederholtem Klicken auf die Kompassnadel der Landkarte bestimmen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll. \n\tZur Wahl stehen: \n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt</string>
-  <string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Nenü\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle...\' -> \'Offline-Vektor-Karten\'</string>
+  <string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Nenü\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle...\' -&gt; \'Offline-Vektor-Karten\'</string>
   <string name="tip_day_night_mode">Tag/Nacht-Modus</string>
   <string name="tip_day_night_mode_t_v2">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. \n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer. \n\tDer Umschaltmechanismus kann unter \'Menü\' -&gt; \'Anzeige konfigurieren\' -&gt; \'Tag/Nacht-Modus\' geändert werden. \n\tZur Auswahl stehen: \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung) \n\t\'Tag\' - permanente Tagesansicht \n\t\'Nacht\' - permanente Nachtansicht \n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)</string>
   <string name="tip_osm_improve">OSM Bearbeitung</string>
@@ -965,13 +964,13 @@
     <string name="live_monitoring_mode_on">Live-tracking\n stoppen</string>
     <string name="position_on_map_descr">Position des Markers auf der Karte</string>
     <string name="position_on_map">Positionsmarker</string>
-    <string name="layer_map_appearance">Anzeige konfigurieren&#8230;</string>
+    <string name="layer_map_appearance">Anzeige konfigurieren…</string>
     <string name="show_lanes">Fahrspuren anzeigen</string>
-    <string name="avoid_unpaved">Ungeteerte Straßen vermeiden</string>
-    <string name="avoid_ferries">Fähren vermeiden</string>
-    <string name="avoid_in_routing_title">Vermeide&#8230;</string>
-    <string name="avoid_in_routing_descr">Ungeteerte Straßen, Fähren und Mautstraßen vermeiden</string>
-    <string name="show_warnings_title">Warnungen anzeigen&#8230;</string>
+    <string name="avoid_unpaved">Vemreide ungeteerte Straßen</string>
+    <string name="avoid_ferries">Vermeide Fähren</string>
+    <string name="avoid_in_routing_title">Vermeide…</string>
+    <string name="avoid_in_routing_descr">Mautstraßen, Fähren und ungeteerte Straßen vermeiden</string>
+    <string name="show_warnings_title">Warnungen anzeigen…</string>
     <string name="show_warnings_descr">Warnungen für Geschwindigkeitsbegrenzungen, stationäre Radarfallen und Rüttelschwellen</string>
     <string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
     <string name="map_widget_show_ruler">Maßstab</string>
