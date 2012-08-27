@@ -123,9 +123,9 @@
 			</condition>
 			<then>
 				<echo>Not using native, excluding from build</echo>
-				<!--<move file="${native.libs.absolute.dir}/armeabi" tofile="${native.libs.absolute.dir}.skipped/armeabi" />
+				<move file="${native.libs.absolute.dir}/armeabi" tofile="${native.libs.absolute.dir}.skipped/armeabi" />
 				<move file="${native.libs.absolute.dir}/armeabi-v7a" tofile="${native.libs.absolute.dir}.skipped/armeabi-v7a" />
-				<move file="${native.libs.absolute.dir}/x86" tofile="${native.libs.absolute.dir}.skipped/x86" /> -->
+				<move file="${native.libs.absolute.dir}/x86" tofile="${native.libs.absolute.dir}.skipped/x86" /> 
 			</then>
 			<else>
 				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
@@ -158,6 +158,18 @@
 				<src path="${source.absolute.dir}" />
 				<src path="${gen.absolute.dir}" />
 				<compilerarg line="${java.compilerargs}" />
+				 <!-- osmchange -->
+				 <src path="${use.absolute.dir}" />
+				 <exclude name="**/LogUtil.java" />
+				 <exclude name="**/OsmStorageWriter.java" />
+				 <exclude name="**/net/osmand/data/index/" />
+				 <exclude name="**/net/osmand/data/preparation/" />
+				 <exclude name="**/net/osmand/osm/util/" />
+				 <exclude name="**/net/osmand/swing/" />
+				 <exclude name="**/net/osmand/router/test/" />
+				 <exclude name="**/resources/" />
+				 <exclude name="**/rtree/" />
+				<!-- osmchange -->
 			</javac>
 
 			<!-- if the project is instrumented, intrument the classes -->
