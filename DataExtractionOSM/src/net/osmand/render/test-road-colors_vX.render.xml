@@ -1,12 +1,13 @@
-<renderingStyle name="high-contrast-roads-2" depends="default" defaultColor="#F5FFFF" version="1">
+<renderingStyle name="test-road-colors_vX" depends="default" defaultColor="#f1eae4" version="1">
 
 	<!--
 		Depends on All-Purpose Renderer (by Hardy Mueller), based on production version 2012-01-04
 	--> 
 
 	<!--
-		Try high contrast roads, suggested by Dirk Sommer: primary = #C00828, seconfary = #FF8000, tertiary = #F0C810
-		2012-08-27 Simplify to facilitate color customization
+		2012-08-27 to facilitate color customization
+		Orig: motorway=809bff, trunk=ed154b, primary=ff80a0, secondary=ffd080, tertiary=ffff80
+		Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue)
 	--> 
 
 
@@ -28,10 +29,10 @@
 
 	<line>
 		<group>
-			<filter tag="highway" value="motorway" maxzoom="13" color="#3838B0"/>
-			<filter tag="highway" value="motorway_link" maxzoom="13" color="#3838B0"/>
-			<filter tag="highway" value="trunk" maxzoom="13" color="#A01060"/>
-			<filter tag="highway" value="trunk_link" maxzoom="13" color="#A01060"/>
+			<filter tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
+			<filter tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
+			<filter tag="highway" value="trunk" maxzoom="13" color="#ed154b"/>
+			<filter tag="highway" value="trunk_link" maxzoom="13" color="#ed154b"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="5" maxzoom="9" strokeWidth="5"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="6"/>
@@ -44,7 +45,7 @@
 		<group>
 			<filter tag="highway" value="primary" maxzoom="13"/>
 			<filter tag="highway" value="primary_link" maxzoom="13"/>
-			<groupFilter color="#C00828" cap="ROUND">
+			<groupFilter color="#ff80a0" cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="4"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="6"/>
@@ -56,7 +57,7 @@
 		<group>
 			<filter tag="highway" value="secondary" maxzoom="13"/>
 			<filter tag="highway" value="secondary_link" maxzoom="13"/>
-			<groupFilter color="#FF8000" shadowRadius="1" cap="ROUND">
+			<groupFilter color="#ffd080" shadowRadius="1" cap="ROUND">
 				<filter minzoom="9" maxzoom="9" strokeWidth="3"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="5"/>
@@ -66,14 +67,14 @@
 		</group>
 
 		<group>
-			<filter tag="highway" value="motorway" color="#3838B0"/>
-			<filter tag="highway" value="motorway_link" color="#3838B0"/>
-			<filter tag="highway" value="trunk" color="#A01060"/>
-			<filter tag="highway" value="trunk_link" color="#A01060"/>
-			<filter tag="highway" value="primary" color="#C00828"/>
-			<filter tag="highway" value="primary_link" color="#C00828"/>
-			<filter tag="highway" value="secondary" color="#FF8000"/>
-			<filter tag="highway" value="secondary_link" color="#FF8000"/>
+			<filter tag="highway" value="motorway" color="#809bff"/>
+			<filter tag="highway" value="motorway_link" color="#809bff"/>
+			<filter tag="highway" value="trunk" color="#ed154b"/>
+			<filter tag="highway" value="trunk_link" color="#ed154b"/>
+			<filter tag="highway" value="primary" color="#ff80a0"/>
+			<filter tag="highway" value="primary_link" color="#ff80a0"/>
+			<filter tag="highway" value="secondary" color="#ffd080"/>
+			<filter tag="highway" value="secondary_link" color="#ffd080"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<!-- Bridges -->
 				<filter layer="1" color_0="#000000" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
@@ -98,7 +99,7 @@
 		<group>
 			<filter tag="highway" value="tertiary"/>
 			<filter tag="highway" value="tertiary_link"/>
-			<groupFilter color="#F0C810" shadowRadius="1" cap="ROUND">
+			<groupFilter color="#ffff80" shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
@@ -122,6 +123,5 @@
 				</filter>
 			</groupFilter>
 		</group>
-
 	</line>
 </renderingStyle>
