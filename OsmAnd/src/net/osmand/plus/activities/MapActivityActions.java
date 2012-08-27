@@ -167,7 +167,9 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
+				// Don't use showDialog because it is impossible to refresh favorite items list
+				createReplaceFavouriteDialog(args).show();
+				// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			
 		});
@@ -203,10 +205,10 @@ public class MapActivityActions implements DialogProvider {
 		final FavouritePoint[] favs = new FavouritePoint[points.size()];
 		Iterator<FavouritePoint> it = points.iterator();
 		int i=0;
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			FavouritePoint fp = it.next();
 			// filter gpx points
-			if(fp.isStored()){
+			if (fp.isStored()) {
 				favs[i] = fp;
 				names[i] = fp.getName();
 				i++;
@@ -223,7 +225,8 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.getMapView().refreshMap();
 			}
 		});
-		return b.create();
+		AlertDialog al = b.create();
+		return al;
 	}
 	
     public void addWaypoint(final double latitude, final double longitude){
@@ -409,6 +412,9 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
 		ApplicationMode appMode = settings.getApplicationMode();
+		if(appMode == ApplicationMode.DEFAULT) {
+			appMode = ApplicationMode.CAR;
+		}
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
@@ -1070,7 +1076,7 @@ public class MapActivityActions implements DialogProvider {
         menu.show();
     }
     
-    public static void createDirectionsActions(QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
+    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
     		final boolean saveHistory, final OnClickListener onShow){
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
@@ -1085,6 +1091,7 @@ public class MapActivityActions implements DialogProvider {
 				app.getSettings().setMapLocationToShow( location.getLatitude(), location.getLongitude(), 
 						z, saveHistory ? name : null, name, obj); //$NON-NLS-1$
 				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
 			}
 		});
 		qa.addActionItem(showOnMap);
@@ -1099,6 +1106,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
 				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
 			}
 		});
 		qa.addActionItem(setAsDestination);
@@ -1114,6 +1122,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), true, name);
 				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
 			}
 		});
 		qa.addActionItem(directionsTo);

@@ -16,10 +16,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -84,15 +81,6 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		}
 		locationUpdate(location);
 
-		if (!isSelectFavoriteMode()) {
-			// TODO remove if not needed
-//			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//				@Override
-//				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//					return FavouritesListActivity.this.onItemLongClick(position);
-//				}
-//			});
-		}
 	}
 
 	@Override
@@ -121,28 +109,6 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		return selectFavoriteMode;
 	}
 	
-	
-	private boolean onItemLongClick(int pos) {
-		final FavouritePoint entry = favouritesAdapter.getItem(pos);
-		AlertDialog.Builder builder = new AlertDialog.Builder(FavouritesListActivity.this);
-		builder.setTitle(entry.getName());
-		OnClickListener onClickListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
-							 null, getString(R.string.favorite)+":\n " + entry.getName(), entry); //$NON-NLS-1$
-				} else if (which == 1) {
-					settings.setPointToNavigate(entry.getLatitude(),
-							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
-				}
-				MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
-			}
-		};
-		builder.setItems(new String[] { getString(R.string.show_poi_on_map), getString(R.string.navigate_to) }, onClickListener);
-		builder.show();
-		return true;
-	}
 	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {

@@ -956,20 +956,20 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_widget_renderer">Estilo de dibujado</string>
 <string name="tip_rotation_switching_t_v2">﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.↵
 \n\tLas opciones son:↵
-\n\t- 'No girar (el norte está arriba)': el mapa no girará. El norte está siempre arriba↵
-\n\t- 'En la dirección de movimiento': el mapa está continuamente alineado con tu dirección↵
-\n\t- 'A la brújula' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
+\n\t- \'No girar (el norte está arriba)\': el mapa no girará. El norte está siempre arriba↵
+\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección↵
+\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
 <string name="tip_map_switch_t_v2">\﻿tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.
 \n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (necesitas activar el extra el \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmandMapCreator en un PC.
 \n\tOsmand también soporta fuentes personalizadas.</string>
 <string name="tip_day_night_mode_t_v2">\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).↵
 \n\tLos colores del modo noche son más seguros para la conducción nocturna.↵
-\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla...\'-&gt; 'Mapa Día/Noche'.↵
+\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla...\'-&gt; \'Mapa Día/Noche\'.↵
 \n\tLas opciones son:↵
-\n\t- 'Alba/Ocaso': modo automático, controlado por la posición del sol (por defecto)↵
-\n\t- 'Día': utiliza siempre el modo día↵
-\n\t- 'Noche': utiliza siempre el modo noche↵
-\n\t- 'Sensor de luz': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
+\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)↵
+\n\t- \'Día\': utiliza siempre el modo día↵
+\n\t- \'Noche\': utiliza siempre el modo noche↵
+\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
 <string name="tip_app_mode_t_v2">\﻿tOsmand admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
 \n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla de mapa (icono de coche, bicicleta o peatón), o al crear una ruta.</string>
 </resources>

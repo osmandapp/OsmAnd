@@ -9,6 +9,51 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
+    \n\t* Improved Routing
+    \n\t* Dynamic map widgets
+    \n\t* Map settings moved to map screen
+    \n\t* Lock screen button with logging services
+    \n\t* Fixed Arabic, Kannada scripting and RTL languages 
+    </string>
+	<string name="osmand_short_description_80_chars">Osmand is an open source navigation application with tile/vector maps</string>
+	<string name="osmand_long_description_1000_chars">
+	        Osmand (Open Street Maps Android)
+
+		Osmand is an open source navigation application with access to a wide source of popular open street map data. All map data including vector and tile maps can be stored on the phone memory card for offline usage. Osmand also has offline and online routing functionality including voice guidance.
+
+		Some of the core features:
+		- offline data, configurable folder for the vector or tile maps
+		- compact vector maps for whole world
+		- offline search of addresses and places
+		- custom tile map area download 
+		- car, bicycle, and pedestrian modes
+		- several map layers with customized transparency at a time
+		- offline routing for short distance (experimental)
+
+		Limitations of Osmand Free:
+		- number of map downloads
+		- no access to Wikipedia offline POIs
+
+		Osmand is still in active development and relies on "donations" based support to further develop the project.
+	</string>
+    <string name="osmand_plus_short_description_80_chars">Osmand is an open source navigation application with tile/vector maps</string>
+    <string name="osmand_plus_long_description_1000_chars">
+        Osmand+ (OSM Automated Navigation Directions)
+		Osmand is an open source navigation application with access to a wide source of popular open street map data. All map data including vector and tile maps can be stored on the phone memory card for offline usage. Osmand also has offline and online routing functionality including voice guidance.
+
+		Osmand+ is a donation based application. By buying it you are supporting the project and receive the latest updates.
+
+		Some of the core features:
+		- new offline Wikipedia feature (download Wikideia POIs)
+		- offline data, configurable folder for the vector or tile maps
+		- compact vector maps for whole world
+		- offline search of addresses and places
+		- custom tile map area download 
+		- car, bicycle, and pedestrian modes
+		- several map layers with customized transparency at a time
+		- offline routing for short distance (experimental)
+    </string>
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
 	\n\tTo check for updates go to \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
@@ -75,12 +120,6 @@
     <string name="show_cameras">Show speed cameras</string>
     <string name="show_speed_limits">Show speed limits</string>
     <string name="avoid_toll_roads">Avoid toll roads</string>
-    <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
-    \n\t* Improved Routing
-    \n\t* Dynamic map widgets
-    \n\t* Map settings moved to map screen
-    \n\t* Lock screen button with logging services
-    </string>
     <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
     <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
     <string name="osmand_parking_hours">Hours</string>

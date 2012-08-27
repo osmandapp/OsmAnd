@@ -195,6 +195,7 @@ public:
 	virtual bool interrupted();
 	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);
 	virtual std::string getTranslatedString(const std::string& src);
+	virtual std::string getReshapedString(const std::string& src);
 
 	void setDefaultIconsDir(string path) {
 		defaultIconsDir = path;

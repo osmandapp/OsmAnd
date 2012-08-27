@@ -208,6 +208,7 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 		if (it->second.length() > 0) {
 			std::string name = it->second;
 			name =rc->getTranslatedString(name);
+			name =rc->getReshapedString(name);
 			req->setInitialTagValueZoom(tag, value, rc->getZoom(), obj);
 			req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
 			std::string tagName = it->first == "name" ? "" : it->first;

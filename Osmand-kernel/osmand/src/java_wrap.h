@@ -29,6 +29,8 @@ struct JNIRenderingContext : RenderingContext
 
 	virtual SkBitmap* getCachedBitmap(const std::string& bitmapResource);
 	virtual std::string getTranslatedString(const std::string& src);
+	virtual std::string getReshapedString(const std::string& src);
+
 	virtual bool interrupted();
 	virtual ~JNIRenderingContext(){}
 };

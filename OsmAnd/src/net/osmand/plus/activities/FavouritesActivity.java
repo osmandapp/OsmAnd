@@ -230,7 +230,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				favoritesToDelete.remove(model);
 			}
 		} else {
-			QuickAction qa = new QuickAction(v);
+			final QuickAction qa = new QuickAction(v);
 			final OsmandSettings settings = getMyApplication().getSettings();
 			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
 			String name = getString(R.string.favorite) + ": " + point.getName();
@@ -238,7 +238,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			OnClickListener onshow = new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					settings.SHOW_FAVORITES.set(true);							
+					settings.SHOW_FAVORITES.set(true);		
 				}
 			};
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this, 
@@ -250,6 +250,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 					@Override
 					public void onClick(View v) {
 						editPoint(point);
+						qa.dismiss();
 					}
 				});
 				qa.addActionItem(edit);
@@ -260,6 +261,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 					@Override
 					public void onClick(View v) {
 						deletePoint(point);
+						qa.dismiss();
 					}
 				});
 				qa.addActionItem(delete);
