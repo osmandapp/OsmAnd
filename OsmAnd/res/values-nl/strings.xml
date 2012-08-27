@@ -966,4 +966,42 @@
 \n\tOsmand ondersteunt ook zelfgemaakte kaartbronnen.</string>
 <string name="tip_app_mode_t_v2">\tOsmand ondersteunt verschillende transport-profielen.↵
 \n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of tijdens het creëren een route.</string>
+<string name="osmand_short_description_80_chars">Osmand is een open-source navigatiesysteem met raster- en vectorkaarten</string>
+<string name="osmand_plus_short_description_80_chars">Osmand is een open-source navigatiesysteem met raster- en vectorkaarten</string>
+<string name="osmand_long_description_1000_chars">
+Osmand (Open Street Maps Android)↵
+
+Osmand is een open-source navigatiesysteem dat gebruik maakt van vele popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. Osmand biedt zowel offline als online navigatie met stembegeleiding.
+
+Belangrijke eigenschappen:
+- offline data, configureerbare opslagmap
+- compacte vectorkaarten voor de hele wereld
+- offline zoeken naar adressen en plaatsen
+- navigatie voor auto / fiets / voetganger
+- meerdere kaartlagen met instelbare transpantie
+- offline navigatie voor korte afstanden (experimenteel)
+
+Beperkingen van Osmand Free:
+- het aantal kaarten dat je kan downloaden
+- geen toegang tot Wikipedia offline interessepunten
+
+Osmand wordt nog actief ontwikkeld en rekent op ondersteuning via donaties voor de verdere ontwikkeling</string>
+<string name="osmand_plus_long_description_1000_chars">Osmand+ (OSM Automated Navigation Directions)↵
+
+Osmand is een open-source navigatiesysteem dat gebruik maakt van vele
+popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden
+opgeslagen in het telefoongeheugen voor offline gebruik. Osmand biedt
+zowel offline als online navigatie met stembegeleiding.
+
+Osmand+ is a donatie app. Door het te kopen ondersteun je het project en ontvang je de laatste updates.↵
+↵
+Belangrijke eigenschappen:
+- nieuwe offline Wikipedia feature (download Wikideia interessepunten)↵
+- offline data, configureerbare opslagmap
+- compacte vectorkaarten voor de hele wereld
+- offline zoeken naar adressen en plaatsen
+- navigatie voor auto / fiets / voetganger
+- meerdere kaartlagen met instelbare transpantie
+- offline navigatie voor korte afstanden (experimenteel)
+</string>
 </resources>
