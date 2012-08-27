@@ -20,39 +20,39 @@
 	<string name="osmand_long_description_1000_chars">
 	        Osmand (Open Street Maps Android)
 
-		Osmand is an open source navigation application with access to a wide source of popular open street map data. All map data including vector and tile maps can be stored on the phone memory card for offline usage. Osmand also has offline and online routing functionality including voice guidance.
+		Osmand is an open source navigation application with access to a wide variety of popular open street map data. All map data including vector and tile maps can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including voice guidance.
 
 		Some of the core features:
-		- offline data, configurable folder for the vector or tile maps
-		- compact vector maps for whole world
-		- offline search of addresses and places
-		- custom tile map area download 
-		- car, bicycle, and pedestrian modes
-		- several map layers with customized transparency at a time
-		- offline routing for short distance (experimental)
+		- Complete offline functionality, configurable folder for dowloaded vector or tile maps
+		- Compact offline vector maps for the whole world
+		- Offline search of addresses and places
+		- Custom tile map area download 
+		- Overlay of several map layers with customized transparency
+		- Car, bicycle, and pedestrian modes
+		- Offline routing for short distance (experimental)
 
 		Limitations of Osmand Free:
-		- number of map downloads
-		- no access to Wikipedia offline POIs
+		- Number of map downloads
+		- No access to Wikipedia offline POIs
 
 		Osmand is still in active development and relies on "donations" based support to further develop the project.
 	</string>
     <string name="osmand_plus_short_description_80_chars">Osmand is an open source navigation application with tile/vector maps</string>
     <string name="osmand_plus_long_description_1000_chars">
         Osmand+ (OSM Automated Navigation Directions)
-		Osmand is an open source navigation application with access to a wide source of popular open street map data. All map data including vector and tile maps can be stored on the phone memory card for offline usage. Osmand also has offline and online routing functionality including voice guidance.
+		Osmand is an open source navigation application with access to a wide variety of popular open street map data. All map data including vector and tile maps can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including voice guidance.
 
 		Osmand+ is a donation based application. By buying it you are supporting the project and receive the latest updates.
 
 		Some of the core features:
-		- new offline Wikipedia feature (download Wikideia POIs)
-		- offline data, configurable folder for the vector or tile maps
-		- compact vector maps for whole world
-		- offline search of addresses and places
-		- custom tile map area download 
-		- car, bicycle, and pedestrian modes
-		- several map layers with customized transparency at a time
-		- offline routing for short distance (experimental)
+		- Offline Wikipedia feature (download Wikideia POIs)
+		- Complete offline functionality, configurable folder for dowloaded vector or tile maps
+		- Compact offline vector maps for the whole world
+		- Offline search of addresses and places
+		- Custom tile map area download 
+		- Overlay of several map layers with customized transparency
+		- Car, bicycle, and pedestrian modes
+		- Offline routing for short distance (experimental)
     </string>
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
