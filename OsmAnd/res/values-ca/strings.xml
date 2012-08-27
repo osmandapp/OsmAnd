@@ -375,4 +375,96 @@
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
+<string name="osmand_short_description_80_chars">L\'Osmand és una aplicació de codi font obert de navegació amb mapes de tessel·les/vectors</string>
+<string name="osmand_plus_short_description_80_chars">L\'Osmand és una aplicació de codi font obert de navegació amb mapes de tessel·les/vectors</string>
+<string name="local_index_routing_data">Dades de l'itinerari</string>
+<string name="settings_preset">Perfil d'usuari</string>
+<string name="settings_preset_descr">Seleccioneu un perfil d'usuari amb paràmetres personalitzats dels mapes i la navegació.</string>
+<string name="osmand_service">Funcionalitat del mode adormit</string>
+<string name="osmand_service_descr">Utilitzeu per executar l'Osmand mentres la pantalla està apagada</string>
+<string name="pref_raster_map">Configuració de la font del mapa</string>
+<string name="pref_vector_map">Configuració del mapa de vectors</string>
+<string name="button_upgrade_osmandplus">Actualitza a l'Osmand+</string>
+<string name="favorite_home_category">Casa</string>
+<string name="local_index_gpx_info_show">\n\nPremeu i manteniu per veure les opcions</string>
+<string name="local_index_gpx_info_elevation">\nAltitud mitjana: %1$.0f m\nAltitud mínima: %2$.0f m\nAltitud màxima: %3$.0f m\nAscensió: %4$.0f m\nDescensió: %5$.0f m</string>
+<string name="local_index_no_items_to_do">No hi ha ítems per %1$s</string>
+<string name="local_index_tile_data">Dades de tessel·les: %1$s \nNivell de zomm mínim: %2$d\nNivell de zoom màxim: %3$d\nEs pot baixar: %4$s \nNivells de zoom baixats: %5$s</string>
+<string name="voice_not_use">No l'utilitzis</string>
+<string name="voice_not_specified">Cap</string>
+<string name="internet_connection_required_for_online_route">S'ha seleccionat un servei de navegació en línia però no hi ha cap connexió a internet disponible.</string>
+<string name="tts_missing_language_data_title">Falten dades</string>
+<string name="voice_stream_notification">Àudio d'avís</string>
+<string name="voice_stream_music">Àudio de multimèdia/música</string>
+<string name="default_none">Cap</string>
+<string name="tile_source_already_installed">El mapa ja està instal·lat, s'actualitzarà la configuració</string>
+<string name="select_tile_source_to_install">Seleccioneu els mapes (de tessel·les) per instal·lar o actualitzar</string>
+<string name="internet_not_available">Per realitzar l'operació cal una connexió a internet que ara no està disponible</string>
+<string name="level_to_switch_vector_raster_descr">Nivell mínim de zoom per utilitzar als mapes de vectors</string>
+<string name="level_to_switch_vector_raster">Nivell mínim de zoom pels vectors</string>
+<string name="error_doing_search">Ha ocorregut un error en la cerca fora de línia</string>
+<string name="tip_map_switch">Font del mapa</string>
+<string name="tip_app_mode">Perfil d'usuari</string>
+<string name="tip_map_context_menu">Menú contextual del mapa</string>
+<string name="amenity_type_healthcare">Serveis mèdics</string>
+<string name="amenity_type_manmade">Construccions</string>
+<string name="amenity_type_office">Oficines</string>
+<string name="m">m</string>
+<string name="reading_cached_tiles">S'està llegint les tessel·les emmagatzemades...</string>
+<string name="specified_dir_doesnt_exist">No s'ha trobat el directori especificat.</string>
+<string name="application_dir">Directori d'emmagatzematge</string>
+<string name="osmand_long_description_1000_chars">
+	        Osmand (OpenStreetMap Android)
+
+		L'Osmand és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L'Osmand també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
+
+		Algunes de les característiques centrals són:
+		- Dades fora de línia, se'n pot configurar el directori pels mapes de tessel·les o de vectors
+		- Mapes de vectors compactes de tot el món
+		- Cerca fora de línia d'adreces i llocs
+		- Baixada personalitzada de l'àrea d'un mapa de tessel·les 
+		- Modalitats cotxe, bicicleta i vianant
+		- Diverses capes de mapes amb el nivell de transparència personalitzada alhora
+		- Càlcul de rutes fora de línia per distàncies curtes (experimental)
+
+		Limitacions de l'Osmand Free:
+		- Nombre de baixades de mapes
+		- No es té accés fora de línia als PDI de la Viquipèdia
+
+		L'Osmand encara està en desenvolupament actiu i depèn del suport basat en «donacions» per ajudar a què el projecte es continuï desenvolupant.
+	</string>
+<string name="osmand_plus_long_description_1000_chars">
+        Osmand+ (OSM Direccions de navegació automatitzades)
+		L'Osmand és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L'Osmand també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
+
+		L'Osmand+ és una aplicació basada en les donacions. Comprant-lo estareu donant suport al projecte i en rebreu les darreres actualitzacions.
+
+                Algunes de les característiques centrals són:
+                - Nova característica Viquipèdia fora de línia (permet baixar els PDI de la Viquipèdia)
+		- Dades fora de línia, se'n pot configurar el directori pels mapes de tessel·les o de vectors
+		- Mapes de vectors compactes de tot el món
+		- Cerca fora de línia d'adreces i llocs
+		- Baixada personalitzada de l'àrea d'un mapa de tessel·les 
+		- Modalitats cotxe, bicicleta i vianant
+		- Diverses capes de mapes amb el nivell de transparència personalitzada alhora
+		- Càlcul de rutes fora de línia per distàncies curtes (experimental)</string>
+<string name="tip_recent_changes_0_8_1_t">Canvis a la versió 0.8.1:
+	\n\t* Rutes més precises (una mica més lent)
+	\n\t* Torna a calcular rutes intel·ligentment i ràpid
+	\n\t* Direcció per carrils
+	\n\t* Informació sobre límits de velocitat, radars i bandes rugoses
+	\n\t* Millores en l'orientació per veu en carretera
+	\n\t* Connector Aparcament («On he aparcat el meu cotxe?»)
+	\n\t* Giny Habilita/deshabilita el registre
+    </string>
+<string name="rendering_attr_contourLines_description">Selecciona el nivell mínim de zoom per mostrar el mapa si està disponible. Serà necessari el fitxer SRTM separat.</string>
+<string name="gpx_index_settings_descr"> (inclou l'analitzador de GPX)</string>
+<string name="osmand_monitoring_description">Mostra la configuració que us facilitarà l\'enregistrament de les vostres excursions en fitxers GPX o bé el seguiment d'una traça per mitjà d'un servei web.</string>
+<string name="osmand_development_plugin_description">Mostra la configuració de característiques en desenvolupament o que s'estan depurant com ara la navegació animada o la visualització del rendiment de la renderització.</string>
+<string name="accessibility_default">En consonància amb la configuració global del sistema</string>
+<string name="zoomIs">El zoom és</string>
+<string name="settings_direction_style_descr">Trieu l'estil per expressar les direccions relatives mentres s'està movent</string>
+<string name="index_name_other">Mapes mundials i temàtics</string>
+<string name="index_name_wiki">Viquipèdia mundial</string>
+<string name="profile_settings">Configuració específica del perfil</string>
 </resources>
