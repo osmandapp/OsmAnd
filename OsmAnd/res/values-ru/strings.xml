@@ -11,12 +11,12 @@
   <string name="local_indexes_cat_tile">Онлайн карты (растровые)</string>
   <string name="local_indexes_cat_map">Локальные карты (векторные)</string>
   <string name="gpx_index_settings_descr">" (включая GPX анализ)"</string>
-  <string name="index_settings_descr">Загрузить и управлять локальными картами</string>
+  <string name="index_settings_descr">Загрузка и управление локальными картами</string>
   <string name="map_online_plugin_is_not_installed">Активируйте плагин онлайн карт, чтобы выбирать различные источники карт</string>
   <string name="map_online_data">Онлайн карты</string>
   <string name="map_online_data_descr">Использовать онлайн карты (кэшируются на SD-носителе)</string>
   <string name="online_map_settings">Онлайн карты</string>
-  <string name="online_map_settings_descr">Настроить источники онлайн карт</string>
+  <string name="online_map_settings_descr">Настройки источников онлайн карт и слоёв</string>
   <string name="map_settings">Настройки карты</string>
   <string name="map_settings_descr">Настроить отображение карты</string>
   <string name="osmand_rastermaps_plugin_description">Этот плагин позволяет использовать различные источники онлайн карты, а также подготовленные растровые карты в качестве базовой карты или подложки/покрытия. Карты могут быть подготовлены на компьютере и скопированы в папку osmand на scard.</string>
@@ -27,7 +27,7 @@
   <string name="osmand_extra_settings_description">Этот плагин позволяет настраивать отображение карты с учетом параметров устройства.</string>
   <string name="osmand_development_plugin_description">Этот плагин предоставляет такие возможности для отладки и разработки, как моделирование навигации или отображение производительности отрисовки.</string>
   <string name="plugins_screen">Диспетчер плагинов</string>
-  <string name="select_plugin_to_activate">Выберите плагин, чтобы активировать или отключить его (может понадобиться перезагрузка приложения).</string>
+  <string name="select_plugin_to_activate">Выберите плагин, чтобы активировать или отключить его (может понадобиться перезагрузка приложения)</string>
   <string name="prefs_plugins_descr">Плагины предоставляют дополнительные возможности приложения, такие, как запись маршрутов, поддержка онлайн карт, действия, выполняемые в фоновом режиме, настройки дополнительных возможностей (accessibility), и другие.</string>
   <string name="prefs_plugins">Диспетчер плагинов</string>
   <string name="tip_recent_changes_0_8_0_t">Изменения в 0.8.0: \n\t *Поддержка плагинов*\n\t - Большая часть функциональсти разделена на плагины и может быть включена/выключена в Менеджере плагинов. Там вы можете активировать выбор растровых карт, настроек мониторинга и другие, новые и ранее существующие, возможности.\n\t *Новый формат карт*\n\t - Отрисовка карт стала быстрее и более точной (решено большинство проблем прибрежной зоны). \n\t - Вам понадобится полностью обновить локальные карты (старый формат больше не поддерживается и может быть удален)\n\t *Автономная прокладка маршрута* \n\t - Автономная прокладка маршрута стала гораздо стабильней и работает на более дальние расстояния\n\t *Графический интерфейс и взаимодействие*\n\t - Улучшено во многих направлениях</string>
@@ -73,7 +73,7 @@
   <string name="live_monitoring_interval">Интервал Live слежения</string>
   <string name="live_monitoring_url_descr">Укажите адрес Live слежения со следующими параметрами : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Web адрес Live слежения</string>
-  <string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках</string>
+  <string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках.</string>
   <string name="show_current_gpx_title">Показывать текущий путь</string>
   <string name="tip_recent_changes_0_7_0_t">"Изменения в 0.7.0: \n\t- Локальные карты Wikipedia со статьями \n\t- Обновление карт \n\t- Другие изменения "</string>
   <string name="free_version_message">Бесплатная версия Osmand ограничена %1$s загрузками %2$s и не поддерживает геостатьи из wikipedia.</string>
@@ -105,7 +105,8 @@
   <string name="download_files_not_enough_space">Недостаточно места на диске для загрузки %1$s MB (свободно: %2$s).</string>
   <string name="download_files_question_space">Свободное место {2} MB! Загрузить {0} файл(ов) ({1} MB)?</string>
   <string name="tip_select_destination_point">Выбор точки назначения</string>
-  <string name="tip_select_destination_point_t">" \n\tВы можете выбрать точку назначения в контекстном меню карты \'Идти к\' или в поиске. \n\tВы также можете выбрать избранную точку долгим нажатием в \'Избранных\'."</string>
+  <string name="tip_select_destination_point_t">" \n\tВы можете выбрать точку назначения на карте, в результатах поиска или списке избранного через пункт \'Идти к\' в контекстном меню.
+\n\tТочка назначения отображается на карте как оранжевый круг, направление к ней отображается оранжевой стрелкой . Так-же в правом верхнем углу отображается расстояние по прямой до неёю</string>
   <string name="tip_recent_changes_0_6_9_t">"Изменения в 0.6.9: \n\t- Более детальная отрисовка векторных карт \n\t- Быстрая аппаратная отрисовка карт(экспериментальные настройки) \n\t- Существенные изменения внешнего вида \n\t- Информация о высоте \n\t- Исправления ошибок и мелкие улучшения "</string>
   <string name="use_transparent_map_theme_descr">Использовать прозрачные информационные элементы на карте</string>
   <string name="use_transparent_map_theme">Прозрачная тема</string>
@@ -115,8 +116,8 @@
   <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции</string>
   <string name="auto_follow_route_never">Никогда</string>
   <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
-  <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту</string>
-  <string name="auto_follow_location_enabled">Привязка карты к местоположению включена</string>
+  <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
+  <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
   <string name="tip_recent_changes_0_6_8_t">"Изменения в 0.6.8: \n\t- Полностью обновленный поиск (POI, Адрес)! Поиск по адресу более отзывчивый и быстрый. Единственная кнопка поиска с множественными вкладками. \n\t- Поиск POI по имени на больших территориях (страна) в новых картах \n\t- Исправление ошибки мерцающей краты (Issue 641) \n\t- Автовозврат карты (Issue 356) \n\t- GPX навигация перемещена в \'Маршруты\' и сохранение маршрута перенесено в \'О маршруте\' \n\t- POI данные внутри .obf файла (поддерживаются карты старше 01/10/11) \n\t- Исправление голосовых подсказок (потеря GPS сигнала) \n\t- Небольшие улучшения "</string>
   <string name="gpx_navigation">GPX маршрут</string>
   <string name="poi_query_by_name_matches_categories">Некоторые POI категории соответствуют запросу, можете использовать их для создания фильтра:</string>
@@ -151,7 +152,7 @@
   <string name="local_index_items_uploaded">%1$d из %2$d объект(ов) успешно загружены.</string>
   <string name="local_index_mi_upload_gpx">Отправить в OSM</string>
   <string name="show_more_map_detail">Детализированная карта</string>
-  <string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов.</string>
+  <string name="show_more_map_detail_descr">Показывать детали (дороги и др.), начиная с мелких масштабов</string>
   <string name="favourites_delete_multiple_succesful">Избранные точки удалены.</string>
   <string name="favorite_delete_multiple">Вы собираетесь удалить %1$d избранных и %2$d групп. Вы уверены?</string>
   <string name="favorite_home_category">Дома</string>
@@ -343,13 +344,13 @@
   <string name="deselect_all">Снять выбор</string>
   <string name="select_all">Выбрать все</string>
   <string name="reload">Перезагрузить</string>
-  <string name="general_settings_descr">Настроить использование интернета, выбрать ориентацию экрана, вращение карты и другое</string>
+  <string name="general_settings_descr">Настройки экрана, локализации, единиц измерения и другие</string>
   <string name="general_settings">Общие</string>
   <string name="index_settings">Данные</string>
   <string name="osmand_service">Фоновый режим</string>
   <string name="osmand_service_descr">Запустить Osmand в фоновом режиме для записи трека и навигации</string>
   <string name="fast_route_mode">Наибыстрейший маршрут</string>
-  <string name="fast_route_mode_descr">Включите опцию для расчета наибыстрейшего маршрута или отключите для расчета кратчайшего</string>
+  <string name="fast_route_mode_descr">Расчёт наибыстрейшего маршрута вместо кратчайшего </string>
   <string name="tiles_to_download_estimated_size">На масштабе {0} загрузить {1} тайлов ({2} Mb )</string>
   <string name="context_menu_item_download_map">Загрузить карту</string>
   <string name="select_max_zoom_preload_area">Выберите максимальный масштаб для загрузки видимой области</string>
@@ -361,7 +362,7 @@
   <string name="show_point_options">Контекстное меню</string>
   <string name="renderer_load_sucess">Стиль успешно загружен</string>
   <string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
-  <string name="renderers">Рендеринг карты</string>
+  <string name="renderers">Стиль отрисовки векторной карты</string>
   <string name="renderers_descr">Выберите стиль для рендеринга карты</string>
   <string name="poi_context_menu_website">Просмотреть вебсайт POI</string>
   <string name="poi_context_menu_call">Показать телефон POI</string>
@@ -431,10 +432,10 @@
   <string name="background_service_int">Интервал позиционирования</string>
   <string name="background_service_provider_descr">Выберите источник позиционирования для сервиса</string>
   <string name="background_service_provider">Источник позиционирования</string>
-  <string name="background_router_service_descr">Запускает Osmand в фоновом режиме для отслеживания местоположения при выключенном экране.</string>
+  <string name="background_router_service_descr">Запускает Osmand в фоновом режиме для отслеживания местоположения при выключенном экране</string>
   <string name="background_router_service">Сервис навигации</string>
   <string name="off_router_service_no_gps_available">Сервис маршрутизации Osmand включен, если отключить позиционирование, он перестанет вести по маршруту.</string>
-  <string name="routing_settings_descr">Изменить настройки навигации</string>
+  <string name="routing_settings_descr">Настройки навигации</string>
   <string name="routing_settings">Навигация</string>
   <string name="hide_poi_filter">Скрыть фильтр</string>
   <string name="show_poi_filter">Показать фильтр</string>
@@ -447,7 +448,7 @@
   <string name="voice_data_not_supported">Голосовые данные не поддерживаются текущей версией приложения</string>
   <string name="voice_data_corrupted">Выбранные голосовые данные не правильного формата</string>
   <string name="voice_data_unavailable">Выбранные голосовые данные не доступны</string>
-  <string name="stop_routing">Отменить маршрут</string>
+  <string name="stop_routing">Отменить маршрут.</string>
   <string name="sd_unmounted">SD-накопитель недоступен. \nВы не сможете работать с картой.</string>
   <string name="sd_mounted_ro">SD-накопитель доступен только для чтения. \nВы не сможете загружать карты из интернета.</string>
   <string name="unzipping_file">Файл распаковывается</string>
@@ -521,7 +522,7 @@
   <string name="download_question_exist">Локальная карта для {0} уже существует ({1}). Хотите её обновить ({2}) ?</string>
   <string name="address">Адрес</string>
   <string name="download_index_success">Локальная карта успешно загружена</string>
-  <string name="error_io_error">Произошла ошибка ввода/вывода.</string>
+  <string name="error_io_error">Произошла ошибка ввода/вывода</string>
   <string name="downloading_file">Загрузка файла</string>
   <string name="downloading">Загрузка…</string>
   <string name="downloading_list_indexes">Загружается список доступных регионов</string>
@@ -613,8 +614,8 @@
   <string name="map_specify_point">Координаты</string>
   <string name="show_view_angle_descr">Показывать угол обзора в соответствии с компасом</string>
   <string name="show_view_angle">Угол обзора</string>
-  <string name="stop_navigation">Снять отметку</string>
-  <string name="navigate_to_point">Отметить точку</string>
+  <string name="stop_navigation">Снять отметку.</string>
+  <string name="navigate_to_point">Отметить точку.</string>
   <string name="map_view_3d_descr">Включить 3D вид для карты</string>
   <string name="map_view_3d">3D вид</string>
   <string name="show_poi_over_map_description">Показывать слой POI</string>
@@ -689,10 +690,10 @@
   <string name="osb_comment_dialog_title">Добавление коментария к Open Street Bug</string>
   <string name="osb_comment_dialog_add_button">Добавить</string>
   <string name="osb_comment_dialog_success">Коментарий был успешно добавлен</string>
-  <string name="osb_comment_dialog_error">При добавлении коментария произошла ошибка. Коментарий не добавлен.</string>
+  <string name="osb_comment_dialog_error">Ошибка: коментарий не добавлен</string>
   <string name="osb_close_dialog_title">Закрытие неточности</string>
   <string name="osb_close_dialog_close_button">Закрыть</string>
-  <string name="osb_close_dialog_success">Open Street Bug был успешно закрыт.</string>
+  <string name="osb_close_dialog_success">Open Street Bug был успешно закрыт</string>
   <string name="osb_close_dialog_error">При закрытии Open Street Bug произошла ошибка. Open Street Bug не был закрыт.</string>
   <string name="osb_comment_menu_item">Добавить коментарий</string>
   <string name="osb_close_menu_item">Закрыть Open Street Bug</string>
@@ -704,7 +705,7 @@
   <string name="poi_remove_confirm_template">Вы действительно хотите удалить {0}?</string>
   <string name="poi_remove_title">Удаление POI</string>
   <string name="default_buttons_delete">Удалить</string>
-  <string name="poi_remove_success">POI был успешно удалена.</string>
+  <string name="poi_remove_success">POI успешно удалена</string>
   <string name="poi_action_add">добавления</string>
   <string name="poi_action_change">изменения</string>
   <string name="poi_action_succeded_template">Действие {0} успешно завершено.</string>
@@ -800,8 +801,8 @@
   <string name="layer_poi_label">"Названия POI "</string>
   <string name="animate_route_off">Закончить моделирование</string>
   <string name="animate_route">Начать моделирование</string>
-  <string name="file_can_not_be_renamed">Файл не может быть переименован</string>
-  <string name="file_with_name_already_exists">Файл с таким именем уже существует</string>
+  <string name="file_can_not_be_renamed">Файл не может быть переименован.</string>
+  <string name="file_with_name_already_exists">Файл с таким именем уже существует.</string>
   <string name="favourites_edit_dialog_name">Имя</string>
   <string name="favourites_edit_dialog_category">Категория</string>
   <string name="tip_update_index">Обновление локальных данных</string>
@@ -830,7 +831,7 @@
   <string name="rendering_attr_contourLines_description">Выберите минимальный уровень масштаба для отображения горизонталей. Необходимо предварительно загрузить соответствующий SRTM-файл.</string>
   <string name="rendering_attr_contourLines_name">Показывать горизонтали</string>
   <string name="rendering_attr_hmRendered_description">На карте отображается больше подробностей</string>
-  <string name="rendering_attr_hmRendered_name">Увеличить детализацию карты</string>
+  <string name="rendering_attr_hmRendered_name">Больше деталей</string>
   <string name="route_roundabout">Круговое движение, %1$d съезд</string>
   <string name="route_kl">Держитесь левее</string>
   <string name="route_kr">Держитесь правее</string>
@@ -892,12 +893,12 @@
   <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>
   <string name="map_widget_top_text">Название улицы</string>
   <string name="map_widget_config">Конфигурация</string>
-  <string name="map_widget_map_select">Выделить на карте</string>
+  <string name="map_widget_map_select">Источник карты</string>
   <string name="map_widget_back_to_loc">Где я</string>
   <string name="map_widget_lock_screen">Заблокировать экран</string>
   <string name="map_widget_compass">Компас</string>
   <string name="map_widget_top_stack">Строка состояния:</string>
-  <string name="map_widget_reset">Сбросить по-умолчанию</string>
+  <string name="map_widget_reset">Сброс настроек</string>
   <string name="map_widget_right_stack">Правая сторона:</string>
   <string name="map_widget_left_stack">Левая сторона:</string>
   <string name="map_widget_parking">Парковка</string>
@@ -910,10 +911,10 @@
   <string name="map_widget_next_turn_small">След. поворот (мал.)</string>
   <string name="map_widget_next_next_turn">Второй след. поворот</string>
   <string name="map_widget_mini_route">Малая карта маршрута</string>
-  <string name="bg_service_screen_lock">Блокировка экрана</string>
-  <string name="bg_service_screen_unlock">Блокировать экран</string>
-  <string name="bg_service_sleep_mode_off">Включить фоновый режим</string>
-  <string name="bg_service_sleep_mode_on">Выключить фоновый режим</string>
+  <string name="bg_service_screen_lock">Заблокировать\nэкран</string>
+  <string name="bg_service_screen_unlock">Разблокировать\nэкран</string>
+  <string name="bg_service_sleep_mode_off">Включить\nфоновый режим</string>
+  <string name="bg_service_sleep_mode_on">Выключить\nфоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
 <string name="layer_map_appearance">Настройка экрана...</string>
@@ -929,16 +930,16 @@
 <string name="map_widget_appearance">Разное:</string>
 <string name="map_widget_view_direction">Направление взгляда</string>
 <string name="map_widget_transparent">Прозрачность</string>
-<string name="monitoring_mode_off">Записывать GPX</string>
-<string name="monitoring_mode_on">Остановить запись GPX</string>
+<string name="monitoring_mode_off">Включить\nзапись GPX</string>
+<string name="monitoring_mode_on">Остановить\nзапись GPX</string>
 <string name="int_continuosly">Постоянно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
 <string name="map_widget_day_night">Дневной/ночной режим</string>
 <string name="filterpoi_activity">Создать фильтр POI</string>
 <string name="select_navigation_mode">Выберите вид транспорта</string>
 <string name="day_night_info_description">Восход : %1$s \nЗакат : %2$s</string>
-<string name="map_widget_vector_attributes">Настройки отрисовкм:</string>
-<string name="map_widget_renderer">Стиль отрисовки</string>
+<string name="map_widget_vector_attributes">Настройки отрисовки (векторн.):</string>
+<string name="map_widget_renderer">Стиль отрисовки (векторн.)</string>
 <string name="live_monitoring_mode_off">Включить\nLive слежение</string>
 <string name="live_monitoring_mode_on">Выключить\nLive слежение</string>
 <string name="tip_rotation_switching_t_v2">\tНажав на значок компаса на экране с картой Вы можете изменить режим вращения карты.
@@ -999,6 +1000,5 @@ Osmand+  - версия программы с пожертвованием. Ку
 		- загрузка произвольной области для растровых карт
 		- авто, вело и пешеходный режимы
 		- карты покрытия и подложки с настраиваемой прозрачностью
-		- оффлайновая прокладка маршрутов на небольшие расстояния (экспериментально)
-</string>
+		- оффлайновая прокладка маршрутов на небольшие расстояния (экспериментально)</string>
 </resources>
