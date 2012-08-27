@@ -943,28 +943,28 @@
 <string name="avoid_ferries">Komp elkerülése</string>
 <string name="email">email</string>
 <string name="filterpoi_activity">POI szűrő készítés</string>
-<string name="select_navigation_mode">Közlekedési eszköz kiválasztása</string>
+<string name="select_navigation_mode">Közlekedési mód kiválasztása</string>
 <string name="day_night_info_description">Napkelte : %1$s \nNapnyugta : %2$s</string>
 <string name="day_night_info">Nappal/éjjel információ</string>
-<string name="map_widget_day_night">Nappal/Éjjel térkép</string>
+<string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
 <string name="map_widget_vector_attributes">Térkép megjelenítési beállítások:</string>
 <string name="map_widget_renderer">Térkép megjelenítési stílus</string>
 <string name="tip_app_mode_t_v2">\tOsmand több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
-\n\tA módot útvonaltervezésnél vagy a térkép bal alsó sarkában lévő ikonnal lehet (autó, bicikli vagy gyalogos) megváltoztatni.</string>
-<string name="tip_rotation_switching_t_v2">\tA térkép forgatásának módja megváltoztatható a térkép képernyő iránytű ikonjának a megnyomásával.
+\n\tA módot útvonaltervezésnél vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni.</string>
+<string name="tip_rotation_switching_t_v2">\tA térkép forgatásának módja megváltoztatható a térkép képernyőn az iránytű ikon megnyomásával.
 \n\tA lehetőségek:
 \n\t\'Nem forog (észak felül)\' - A térkép nem fordul el. Mindig észak van felül
 \n\t\'Haladás irányának megfelelően\' - A térkép a haladásnak megfelelően fordul el
 \n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog</string>
 <string name="tip_day_night_mode_t_v2">\tBizonyos vektoros térképek megjelenése különbözhet nappal (világosabb) és éjjel (sötétebb).
 \n\tAz éjszakai színek biztonságosabbak éjjeli vezetéshez.
-\n\tA váltáshoz a szabályt a \'Megjelenítés beállítása\' -&gt; \'Megjelenés\' -&gt; \'Nappal/Éjjel térkép\' -nél lehet megváltoztatni.
+\n\tA váltás módját a \'Menü\' -&gt; \'Rétegek\' -&gt; \'Képernyő beállítása\' -&gt; \'Nappali/éjjeli térképmód\' alatt lehet beállítani.
 \n\tLehetőségek:
 \n\t\'Napkelte/Napnyugta\' - automatikus mód, a Nap helyzetének megfelelően (alapértelmezett)
 \n\t\'Nappal\' - mindig a nappali színek használata
 \n\t\'Éjjel\' - mindig az éjjeli színek használata 
-\n\t\'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője (ha az eszköz tartalmaz ilyent) alapján vált a színek között</string>
-<string name="tip_map_switch_t_v2">\tA térkép forrás és a fóliák kicserélhetők a \'Megjelenítési beállítás\' -&gt; \'Define view\' alatt.
-\n\tA \'Térképforrás…\' alatt kiválasztható az előre letöltött vektoros térkép, előre beállított (online) raszteres forrás (az \'Online térkép\' kiterjesztést be kell kapcsolni hozzá), vagy kézzel gyártott térkép pl. OsmandMapCreator-ral készítve PC-n.
-\n\tOsmand egyedi forrásokat is támogat.</string>
+\n\t\'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője alapján vált a színek között (ha az eszköz tartalmaz ilyent)</string>
+<string name="tip_map_switch_t_v2">\tA térképforrás és a rétegek kicserélhetők a \'Menü\' -&gt; \'Rétegek\' alatt.
+\n\tA \'Térképforrás…\' alatt kiválasztható az előre letöltött vektoros térkép, előre beállított (online) raszteres forrás (az \'Online térkép\' kiterjesztést be kell kapcsolni hozzá), vagy kézzel gyártott térkép pl. OsmandMapCreatorral készítve PC-n.
+\n\tAz Osmand egyedi forrásokat is támogat.</string>
 </resources>
