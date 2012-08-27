@@ -930,7 +930,7 @@
   <string name="show_speed_limits_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
   <string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string>
   <string name="show_cameras">Radarkontrollen anzeigen</string>
-  <string name="show_speed_limits">Geschwindigkeitsbegrenzungen anzeigen</string>
+  <string name="show_speed_limits">Tempolimit anzeigen</string>
   <string name="avoid_toll_roads">Vermeide Mautstraßen</string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
@@ -966,12 +966,12 @@
     <string name="position_on_map">Positionsmarker</string>
     <string name="layer_map_appearance">Anzeige konfigurieren…</string>
     <string name="show_lanes">Fahrspuren anzeigen</string>
-    <string name="avoid_unpaved">Vemreide ungeteerte Straßen</string>
+    <string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
     <string name="avoid_ferries">Vermeide Fähren</string>
     <string name="avoid_in_routing_title">Vermeide…</string>
     <string name="avoid_in_routing_descr">Mautstraßen, Fähren und ungeteerte Straßen vermeiden</string>
     <string name="show_warnings_title">Warnungen anzeigen…</string>
-    <string name="show_warnings_descr">Warnungen für Geschwindigkeitsbegrenzungen, stationäre Radarfallen und Rüttelschwellen</string>
+    <string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen und Rüttelschwellen</string>
     <string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
     <string name="map_widget_show_ruler">Maßstab</string>
     <string name="map_widget_appearance">Verschiedenes:</string>
