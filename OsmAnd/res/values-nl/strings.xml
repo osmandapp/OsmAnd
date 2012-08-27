@@ -909,7 +909,9 @@
   <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 : 
    \n\t* Verbeterde routeberekening
    \n\t* Dynamische kaartschermwidgets
-   \n\t* Verschillende instellingen verplaatst naar het kaartscherm
+   \n\t* Kaart-instellingen verplaatst naar het kaartscherm
+   \n\t* Lockscreen knop met track logging services
+   \n\t* Verbeterde talen: Arabisch, Kannada en RNL talen
    </string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
