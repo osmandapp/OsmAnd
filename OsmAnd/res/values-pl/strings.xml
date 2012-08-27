@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_select_destination_point">Wybierz punkt docelowy</string>
   <string name="tip_select_destination_point_t">\tMożesz wybrać punk docelowy bezpośrednio na mapie (menu kontekstowe -&gt; \'Nawiguj do punktu\'), podczas wyszukiwania lub przez naciśnięcie i długie przytrzymanie na wpisie w swojej \'Liście ulubionych punktów\'.\n\tPunkt docelowy jest oznaczony pomarańczowym dyskiem na mapie i Osmand wyświetla odległość oraz kierunek do niego (pomarańczowy trójkąt).</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
@@ -908,4 +908,21 @@
   <string name="bg_service_screen_unlock">Unlock screen</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="filterpoi_activity">Stwórz filtr POI</string>
+<string name="day_night_info_description">Wschód : %1 $s \nZachód : %2$s</string>
+<string name="map_widget_renderer">Styl renderowania</string>
+<string name="layer_map_appearance">Konfiguruj ekran…</string>
+<string name="avoid_unpaved">Unikaj dróg gruntowych</string>
+<string name="avoid_ferries">Unikaj promów</string>
+<string name="avoid_in_routing_title">Unikaj…</string>
+<string name="avoid_in_routing_descr">Unikaj dróg płatnych, gruntowych, promów</string>
+<string name="show_warnings_title">Pokaż ostrzeżenia…</string>
+<string name="show_warnings_descr">Pokaż ograniczenia prędkości, fotoradary i traffic bumps</string>
+<string name="monitoring_mode_off">Zapisuj GPX</string>
+<string name="tip_rotation_switching_t_v2">\tMożesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
+	\n\tMasz do wyboru:
+	\n\t\'Nie obraca (północ jest na górze)\' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
+	\n\t\'To direction of movement\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem, w którym się poruszasz.
+	\n\t\'To compass\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas.
+	</string>
 </resources>
