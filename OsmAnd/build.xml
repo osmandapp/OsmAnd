@@ -23,25 +23,15 @@
          declared in default.properties.
          -->
 	<target name="-package-resources" depends="-crunch">
-		<aapt executable="${aapt}"
-				command="package"
-				versioncode="${version.code}"
-				versionname="${version.name}"
-				debug="${build.is.packaging.debug}"
-				manifest="AndroidManifest.xml"
-				assets="${asset.absolute.dir}"
-				androidjar="${android.jar}"
-				apkfolder="${out.absolute.dir}"
-				nocrunch="${build.packaging.nocrunch}"
-				resourcefilename="${resource.package.file.name}"
-				resourcefilter="${aapt.resource.filter}"
-				projectLibrariesResName="project.libraries.res"
-				projectLibrariesPackageName="project.libraries.package"
-				previousBuildType="${build.last.target}"
-				buildType="${build.target}">
-			<res path="${out.res.absolute.dir}" />
-			<res path="${resource.absolute.dir}" />
-		</aapt>
+		<!-- only package resources if *not* a library project -->
+		<do-only-if-not-library elseText="Library project: do not package resources...">
+			<aapt executable="${aapt}" command="package" versioncode="${version.code}" versionname="${version.name}" debug="${build.is.packaging.debug}" manifest="${out.manifest.abs.file}" assets="${asset.absolute.dir}" androidjar="${project.target.android.jar}" apkfolder="${out.absolute.dir}" nocrunch="${build.packaging.nocrunch}" resourcefilename="${resource.package.file.name}" resourcefilter="${aapt.resource.filter}" libraryResFolderPathRefid="project.library.res.folder.path" libraryPackagesRefid="project.library.packages" previousBuildType="${build.last.target}" buildType="${build.target}" ignoreAssets="${aapt.ignore.assets}">
+				<res path="${out.res.absolute.dir}" />
+				<res path="${resource.absolute.dir}" />
+				<!-- <nocompress /> forces no compression on any files in assets or res/raw -->
+				<!-- <nocompress extension="xml" /> forces no compression on specific file extensions in assets and res/raw -->
+			</aapt>
+		</do-only-if-not-library>
 
 		<!-- osmchange -->
 		<echo>Packaging aditional OsmAnd resources and assets... to ${out.packaged.file} from ${raw.absolute.dir}</echo>
@@ -125,7 +115,7 @@
 				<echo>Not using native, excluding from build</echo>
 				<move file="${native.libs.absolute.dir}/armeabi" tofile="${native.libs.absolute.dir}.skipped/armeabi" />
 				<move file="${native.libs.absolute.dir}/armeabi-v7a" tofile="${native.libs.absolute.dir}.skipped/armeabi-v7a" />
-				<move file="${native.libs.absolute.dir}/x86" tofile="${native.libs.absolute.dir}.skipped/x86" /> 
+				<move file="${native.libs.absolute.dir}/x86" tofile="${native.libs.absolute.dir}.skipped/x86" />
 			</then>
 			<else>
 				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
@@ -147,7 +137,7 @@
 		</copy>
 		<replaceregexp file="${gen.absolute.dir}/net/osmand/plus/R.java" match='package net.osmand;' replace='package net.osmand.plus;' byline="true" />
 		<!-- osmchange : Osmand plus support -->
-		
+
 		<do-only-if-manifest-hasCode elseText="hasCode = false. Skipping...">
 			<!-- merge the project's own classpath and the tested project's classpath -->
 			<path id="project.javac.classpath">
@@ -158,17 +148,17 @@
 				<src path="${source.absolute.dir}" />
 				<src path="${gen.absolute.dir}" />
 				<compilerarg line="${java.compilerargs}" />
-				 <!-- osmchange -->
-				 <src path="${use.absolute.dir}" />
-				 <exclude name="**/LogUtil.java" />
-				 <exclude name="**/OsmStorageWriter.java" />
-				 <exclude name="**/net/osmand/data/index/" />
-				 <exclude name="**/net/osmand/data/preparation/" />
-				 <exclude name="**/net/osmand/osm/util/" />
-				 <exclude name="**/net/osmand/swing/" />
-				 <exclude name="**/net/osmand/router/test/" />
-				 <exclude name="**/resources/" />
-				 <exclude name="**/rtree/" />
+				<!-- osmchange -->
+				<src path="${use.absolute.dir}" />
+				<exclude name="**/LogUtil.java" />
+				<exclude name="**/OsmStorageWriter.java" />
+				<exclude name="**/net/osmand/data/index/" />
+				<exclude name="**/net/osmand/data/preparation/" />
+				<exclude name="**/net/osmand/osm/util/" />
+				<exclude name="**/net/osmand/swing/" />
+				<exclude name="**/net/osmand/router/test/" />
+				<exclude name="**/resources/" />
+				<exclude name="**/rtree/" />
 				<!-- osmchange -->
 			</javac>
 
