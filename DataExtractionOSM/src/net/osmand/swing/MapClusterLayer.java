@@ -279,7 +279,7 @@ public class MapClusterLayer implements MapPanelLayer {
 						int tX = next.getRoad().getPoint31XTile(next.getSegmentStart()) >> zm;
 						int tY = next.getRoad().getPoint31YTile(next.getSegmentStart()) >> zm;
 						String highway = next.getRoad().getHighway();
-						if(notClusterAtAll(highway)) {
+						if(notClusterAtAll(next.getRoad())) {
 							out = true;
 						} else if(tX == tileX && tY == tileY) {
 							nextSegments.add(next);
@@ -308,8 +308,16 @@ public class MapClusterLayer implements MapPanelLayer {
 		return result;
 	}
 	
-	public boolean notClusterAtAll(String h) {
-		return h.equals("trunk") ||  h.equals("motorway");
+	public boolean notClusterAtAll(RouteDataObject obj) {
+		String highway = obj.getHighway();
+		if(highway != null) {
+			return highway.equals("trunk") ||  highway.equals("motorway");
+		}
+		String rte = obj.getRoute();
+		if(rte != null) {
+			return rte.equals("ferry");
+		}
+		return false;
 	}
 	
 	public boolean isMajorHighway(String h) {

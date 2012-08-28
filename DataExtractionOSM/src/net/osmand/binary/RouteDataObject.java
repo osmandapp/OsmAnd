@@ -170,6 +170,17 @@ public class RouteDataObject {
 		}
 		return 0;
 	}
+	
+	public String getRoute() {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if ("route".equals(r.getTag())) {
+				return r.getValue();
+			}
+		}
+		return null;
+	}
 
 	public String getHighway() {
 		String highway = null;
