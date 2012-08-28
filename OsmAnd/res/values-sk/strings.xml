@@ -926,6 +926,7 @@
   \n\t* Dynamické mapové widgety
   \n\t* Tlačidlo uzamknutia obrazovky s logovacími službami
   \n\t* Nastavenia mapy presunuté do mapovej obrazovky
+  \n\t* Opravená Arabština, skriptovanie Kanadských a RTL jazykov
   </string>
   <string name="screen_is_locked">Na odomknutie obrazovky, kliknite na ikonu zámky</string>
   <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
