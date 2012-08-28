@@ -6,7 +6,7 @@
 	    android:paddingLeft="3dp" android:paddingRight="3dp">
 	    <Button  android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:text="@string/filter_current_poiButton" 
 	        android:id="@+id/filter_currentButton"></Button>
-		<ImageButton  android:layout_height="wrap_content" android:layout_marginLeft="4dp" android:layout_width="wrap_content" android:src="@android:drawable/ic_menu_save" 
+		<ImageButton  android:layout_height="wrap_content" android:layout_marginLeft="4dp" android:layout_width="wrap_content" android:src="@drawable/save_btn" 
 		    android:id="@+id/SaveButton"/>
 	</LinearLayout>
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:choiceMode="multipleChoice"

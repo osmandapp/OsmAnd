@@ -693,7 +693,7 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
-		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_view_directions_to_here);
+		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_activities_directions_to_here);
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
 		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
@@ -1080,7 +1080,7 @@ public class MapActivityActions implements DialogProvider {
     		final boolean saveHistory, final OnClickListener onShow){
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		showOnMap.setIcon(activity.getResources().getDrawable(android.R.drawable.ic_dialog_map));
+		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_show_on_map));
 		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1112,7 +1112,7 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(setAsDestination);
 		
 		ActionItem directionsTo = new ActionItem();
-		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_view_directions_to_here));
+		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_directions_to_here));
 		directionsTo.setTitle(activity.getString(R.string.context_menu_item_directions));
 		directionsTo.setOnClickListener(new OnClickListener() {
 			@Override

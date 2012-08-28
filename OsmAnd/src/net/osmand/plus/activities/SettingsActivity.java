@@ -723,7 +723,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(OsmandSettings.LOCAL_INDEXES)) {
-			if (getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
+			boolean empty = getMyApplication().getResourceManager().getIndexFileNames().isEmpty();
+			if (empty) {
+				File folder = getMyApplication().getSettings().extendOsmandPath(ResourceManager.BACKUP_PATH);
+				if (folder.exists() && folder.isDirectory()) {
+					String[] l = folder.list();
+					empty = l == null || l.length == 0;
+				}
+			}
+			if (empty) {
 				startActivity(new Intent(this, OsmandIntents.getDownloadIndexActivity()));
 			} else {
 				startActivity(new Intent(this, OsmandIntents.getLocalIndexActivity()));

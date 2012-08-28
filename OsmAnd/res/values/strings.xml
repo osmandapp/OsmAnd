@@ -62,7 +62,8 @@
 	\n\t\'Blue\' - indicates available updates on server
 	\n\t\'Dark green/blue\' - likewise indicate data de-activated on the device</string>
     <string name="filterpoi_activity">Create POI filter</string>
-    <string name="select_navigation_mode">Select transportation mode</string>
+    <string name="recalculate_route_to_your_location">Transport mode:</string>
+    <string name="select_navigation_mode">Select transport mode</string>
     <string name="monitor_preferences">Tracking</string>
     <string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
     <string name="day_night_info">Day/night info</string>
@@ -190,7 +191,7 @@
 	<string name="poi_search_desc">POI (Point of interest) search</string>
 	<string name="address_search_desc">Address search</string>
 	<string name="navpoint_search_desc">Coordinates</string>
-	<string name="transport_search_desc">Transport search</string>
+	<string name="transport_search_desc">Transportation search</string>
 	<string name="favourites_search_desc">Favorites search</string>
 	<string name="history_search_desc">Search history</string>
     <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
@@ -577,7 +578,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
-	<string name="local_index_transport_data">Transport data</string>
+	<string name="local_index_transport_data">Transportation data</string>
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_index_items"></string>
 	<string name="local_indexes_cat_backup">Deactivated</string>
@@ -729,7 +730,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="indexing_address">Indexing address&#8230;</string>
 	<string name="indexing_map">Indexing map&#8230;</string>
 	<string name="indexing_poi">Indexing POI&#8230;</string>
-	<string name="indexing_transport">Indexing transport&#8230;</string>
+	<string name="indexing_transport">Indexing transportation&#8230;</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -804,11 +805,11 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="use_high_res_maps">High resolution display</string>
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
 	<string name="download_files">Download</string>
-	<string name="context_menu_item_search_transport">Search transport</string>
-	<string name="transport_searching_transport">Transport results (no target):</string>
-	<string name="transport_searching_route">Transport results ({0} to target):</string>
+	<string name="context_menu_item_search_transport">Search transportation</string>
+	<string name="transport_searching_transport">Transportation results (no target):</string>
+	<string name="transport_searching_route">Transportation results ({0} to target):</string>
 	<string name="transport_search_none">none</string>
-	<string name="transport_search_again">Reset Transport search</string>
+	<string name="transport_search_again">Reset Transportation search</string>
 
 	<string name="map_index">Map</string>
 	<string name="voice">Voice</string>
@@ -820,7 +821,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="error_reading_gpx">Error reading GPX data</string>
 
 	<string name="vector_data">Offline vector maps</string>
-	<string name="transport_context_menu">Search transport at stop</string>
+	<string name="transport_context_menu">Search transportation at stop</string>
 	<string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
@@ -843,13 +844,13 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
 	<string name="any_poi">Any</string>
 
-	<string name="layer_transport_route">Transport route</string>
+	<string name="layer_transport_route">Transportation route</string>
 	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
 	<string name="layer_yandex_traffic">Yandex traffic</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs</string>
-	<string name="layer_transport">Transport stops</string>
+	<string name="layer_transport">Transportation stops</string>
 	<string name="layer_poi">POI&#8230;</string>
 	<string name="layer_map">Map source&#8230;</string>
 	<string name="menu_layers">Define view</string>
@@ -920,10 +921,10 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="transport_to_go_before">subsequent distance</string>
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Route distance</string>
-	<string name="transport">Transport</string>
+	<string name="transport">Transportation</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="show_transport_over_map_description">Show public transport stops on map</string>
-	<string name="show_transport_over_map">Show transport stops</string>
+	<string name="show_transport_over_map_description">Show public transportation stops on map</string>
+	<string name="show_transport_over_map">Show transportation stops</string>
 	<string name="hello">Navigation application Osmand</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local POI list</string>
@@ -969,7 +970,6 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="update_existing">Replace</string>
 	<string name="only_show">Only show</string>
 	<string name="follow">Follow</string>
-	<string name="recalculate_route_to_your_location">Select mode of transportation (optional):</string>
 	<string name="mark_final_location_first">Please select destination first</string>
 	<string name="get_directions">Directions</string>
     <string name="show_gps_status">Show GPS Status</string>

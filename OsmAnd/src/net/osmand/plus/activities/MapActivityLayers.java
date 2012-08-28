@@ -448,7 +448,8 @@ public class MapActivityLayers {
 				}
 
 			});
-			builder.show();
+			AlertDialog dlg = builder.show();
+			dlg.getListView().setFastScrollEnabled(true);
 		}
 	}
 	
