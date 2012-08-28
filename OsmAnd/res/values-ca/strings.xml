@@ -484,7 +484,7 @@
 <string name="osb_close_menu_item">Tancar error</string>
 <string name="osb_comment_dialog_author">Nom de l'autor</string>
 <string name="osb_add_dialog_success">Error creat amb èxit</string>
-<string name="default_buttons_yes">Si</string>
+<string name="default_buttons_yes">Sí</string>
 <string name="default_buttons_no">No</string>
 <string name="default_buttons_add">Afegir</string>
 <string name="default_buttons_apply">Aplicar</string>
@@ -522,4 +522,5 @@
 <string name="where_am_i">On estic?</string>
 <string name="map_widget_view_direction">Direcció de visió</string>
 <string name="clear_all">Neteja-ho tot</string>
+<string name="recalculate_route_to_your_location">Mode de transport:</string>
 </resources>
