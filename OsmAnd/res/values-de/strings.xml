@@ -10,7 +10,7 @@
 	<string name="osmand_long_description_1000_chars">
 		Osmand (OSM Automated Navigation Directions)
 
-		Osmand ist eine Open Source Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. Osmand bietet ferner eine Offline und Online Routing-Funktion inklusive Sprachnavigation.
+		Osmand ist eine Open Source Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. Osmand bietet ferner eine Offline und Online Routing-Funktion inklusive Sprachnavigation.
 
 		Einige der Kernfunktionen:
 		- Komplette Offline-Funktionalität (Kartenmaterial kann in einem frei wählbaren Verzeichnis abgelegt werden)
@@ -34,7 +34,7 @@
     <string name="osmand_plus_long_description_1000_chars">
 		Osmand+ (OSM Automated Navigation Directions)
 
-		Osmand ist eine Open Source Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. Osmand bietet ferner eine Offline und Online Routing-Funktion inklusive Sprachnavigation.
+		Osmand ist eine Open Source Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. Osmand bietet ferner eine Offline und Online Routing-Funktion inklusive Sprachnavigation.
 
 		Osmand+ ist die Kaufversion von Osmand, durch den Kauf fördern Sie das Projekt, unterstützen die Entwicklung neuer Funktionen, und erhalten neue Updates.
 

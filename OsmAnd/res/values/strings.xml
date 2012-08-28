@@ -20,7 +20,7 @@
 	<string name="osmand_long_description_1000_chars">
 		Osmand (OSM Automated Navigation Directions)
 
-		Osmand is an open source navigation application with access to a wide variety of global open street map data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including voice guidance.
+		Osmand is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including turn-by-turn voice guidance.
 
 		Some of the core features:
 		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
@@ -44,7 +44,7 @@
     <string name="osmand_plus_long_description_1000_chars">
 		Osmand+ (OSM Automated Navigation Directions)
 
-		Osmand+ is an open source navigation application with access to a wide variety of global open street map data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including voice guidance.
+		Osmand+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including turn-by-turn voice guidance.
 
 		Osmand+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
 
