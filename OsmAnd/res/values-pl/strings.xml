@@ -925,4 +925,25 @@
 	\n\t\'To direction of movement\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem, w którym się poruszasz.
 	\n\t\'To compass\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas.
 	</string>
+<string name="osmand_short_description_80_chars">Osmand to aplikacja nawigacyjna open source  wspierająca mapy kafelkowe oraz wektorowe</string>
+<string name="osmand_long_description_1000_chars">
+	        Osmand (Open Street Maps Android)
+
+		Osmand to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map kafelkowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. Osmand posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej.
+
+		Niektóre z podstawowych funkcji:
+		- Complete offline functionality, configurable folder for dowloaded vector or tile maps
+		- Compact offline vector maps for the whole world
+		- Offline search of addresses and places
+		- Custom tile map area download 
+		- Overlay of several map layers with customized transparency
+		- Car, bicycle, and pedestrian modes
+		- Offline routing for short distance (experimental)
+
+		Ograniczenia wersji darmowej:
+		- Liczba pobrań map
+		- Brak dostępu do POI z Wikipedii
+
+		Osmand jest stale ulepszany i wymaga wsparcia opartego na "donacjach" aby móc się rozwijać.
+	</string>
 </resources>
