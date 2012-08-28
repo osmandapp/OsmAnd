@@ -2,9 +2,10 @@
 option java_package = "net.osmand.binary";
 //protoc --java_out=DataExtractionOSM/src DataExtractionOSM/src/osmand_index.proto
 
-// C++ # cd OsmAnd
-// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=jni/osmand/proto ../DataExtractionOSM/src/osmand_odb.proto
+// C++ # cd OsmAnd-Kernel
+// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=osmand/src/proto ../DataExtractionOSM/src/osmand_index.proto
 
+option optimize_for = LITE_RUNTIME;
 message OsmAndStoredIndex {
    required uint32 version = 1;
 

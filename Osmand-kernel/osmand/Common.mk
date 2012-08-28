@@ -21,7 +21,8 @@ LOCAL_SRC_FILES := \
 	src/multipolygons.cpp \
 	src/renderRules.cpp \
 	src/rendering.cpp \
-	src/binaryRead.cpp
+	src/binaryRead.cpp \
+	src/proto/osmand_index.pb.cpp
 	
 ifdef OSMAND_PROFILE_NATIVE_OPERATIONS
 LOCAL_CFLAGS += \

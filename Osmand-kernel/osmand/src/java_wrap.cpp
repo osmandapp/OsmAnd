@@ -52,6 +52,16 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_closeBinaryMapFi
 	closeBinaryMapFile(inputName);
 }
 
+
+extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initCacheMapFiles(JNIEnv* ienv,
+		jobject obj,
+		jobject path) {
+	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
+	std::string inputName(utf);
+	ienv->ReleaseStringUTFChars((jstring) path, utf);
+	return initMapFilesFromCache(inputName);
+}
+
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is

@@ -45,6 +45,11 @@ public class CachedOsmandIndexes {
 			storedIndexBuilder = OsmandIndex.OsmAndStoredIndex.newBuilder();
 			storedIndexBuilder.setVersion(VERSION);
 			storedIndexBuilder.setDateCreated(System.currentTimeMillis());
+			if(storedIndex != null) {
+				for(FileIndex ex : storedIndex.getFileIndexList()) {
+					storedIndexBuilder.addFileIndex(ex);
+				}
+			}
 		}
 		
 		FileIndex.Builder fileIndex = OsmandIndex.FileIndex.newBuilder();

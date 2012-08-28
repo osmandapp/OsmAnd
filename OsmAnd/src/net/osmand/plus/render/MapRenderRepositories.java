@@ -114,13 +114,13 @@ public class MapRenderRepositories {
 		NativeOsmandLibrary nativeLib = prefs.NATIVE_RENDERING.get() ? NativeOsmandLibrary.getLoadedLibrary() : null;
 		if (nativeLib != null) {
 			if (!nativeLib.initMapFile(file.getAbsolutePath())) {
-				log.debug("Initializing native db " + file.getAbsolutePath() + " failed!"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				log.error("Initializing native db " + file.getAbsolutePath() + " failed!"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			} else {
 				nativeFiles.add(file.getAbsolutePath());
-				long val = System.currentTimeMillis();
-				if (log.isDebugEnabled()) {
-					log.debug("Initializing native db " + file.getAbsolutePath() + " " + (val - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				}
+//				long val = System.currentTimeMillis();
+//				if (log.isDebugEnabled()) {
+//					log.debug("Initializing native db " + file.getAbsolutePath() + " " + (val - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+//				}
 			}
 		}
 	}

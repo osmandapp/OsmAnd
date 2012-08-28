@@ -249,6 +249,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 
 BinaryMapFile* initBinaryMapFile(std::string inputName);
 
+bool initMapFilesFromCache(std::string inputName) ;
+
 bool closeBinaryMapFile(std::string inputName);
 
 #endif

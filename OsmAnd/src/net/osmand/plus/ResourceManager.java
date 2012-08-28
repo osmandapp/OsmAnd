@@ -39,6 +39,7 @@ import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -533,6 +534,11 @@ public class ResourceManager {
 		if(indCache.exists()) {
 			try {
 				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+				NativeOsmandLibrary nativeLib = context.getSettings().NATIVE_RENDERING.get() ? NativeOsmandLibrary.getLoadedLibrary()
+						: null;
+				if(nativeLib != null) {
+					nativeLib.initCacheMapFile(indCache.getAbsolutePath());
+				}
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
@@ -546,7 +552,6 @@ public class ResourceManager {
 						BinaryMapIndexReader index = null;
 						try {
 							index = cachedOsmandIndexes.getReader(f);
-							
 							if (index.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
 								index = null;
 							}
