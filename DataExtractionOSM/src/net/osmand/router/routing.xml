@@ -20,7 +20,7 @@
 	<!-- Coefficient is configurable -->
 	<attribute name="useRelaxingStrategy" value="true" />
 	<attribute name="iterationsToRelaxRoutes" value="100" />
-	<attribute name="relaxNodesIfStartDistSmallCoeff" value="3.0"/>
+	<attribute name="relaxNodesIfStartDistSmallCoeff" value="5"/>
 
 	<!-- 1.4 Build A* graph in backward/forward direction (can affect results) -->
 	<!-- 0 - 2 ways, 1 - direct way, -1 - reverse way -->
