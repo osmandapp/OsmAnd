@@ -198,7 +198,7 @@
 <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
 <string name="download_files_question_space">Ara disposeu de {2} MB d\'espai lliure. Voleu baixar {0} fitxer(s) ({1} MB)?</string>
 <string name="use_transparent_map_theme">Tema transparent</string>
-<string name="map_widget_appearance">Miscel·lània</string>
+<string name="map_widget_appearance">Miscel·lània:</string>
 <string name="gps_wakeup_interval">Interval de despertament del GPS: %s</string>
 <string name="osmand_parking_event">Treu el cotxe de l\'aparcament</string>
 <string name="rendering_attr_appMode_description">Optimització del mapa per cada Perfil d\'usuari</string>
@@ -371,7 +371,7 @@
 <string name="indexing_address">S\'estan indexant les adreces...</string>
 <string name="indexing_map">S\'està indexant el mapa...</string>
 <string name="indexing_poi">S\'estan indexant els PDI...</string>
-<string name="indexing_transport">S\'està indexant els transports...</string>
+<string name="indexing_transport">S\'estan indexant els transports...</string>
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
@@ -447,14 +447,15 @@
 		- Baixada personalitzada de l\'àrea d\'un mapa de tessel·les 
 		- Modalitats cotxe, bicicleta i vianant
 		- Diverses capes de mapes amb el nivell de transparència personalitzada alhora
-		- Càlcul de rutes fora de línia per distàncies curtes (experimental)</string>
+		- Càlcul de rutes fora de línia per distàncies curtes (experimental)
+  </string>
 <string name="tip_recent_changes_0_8_1_t">Canvis a la versió 0.8.1:
 	\n\t* Rutes més precises (una mica més lent)
-	\n\t* Torna a calcular rutes intel·ligentment i ràpid
+	\n\t* Torna a calcular rutes de manera intel·ligent i de pressa
 	\n\t* Direcció per carrils
 	\n\t* Informació sobre límits de velocitat, radars i bandes rugoses
-	\n\t* Millores en l\'orientació per veu en carretera
-	\n\t* Connector Aparcament («On he aparcat el meu cotxe?»)
+	\n\t* Millores en l'orientació per veu en carretera
+	\n\t* Connector Aparcament («On he aparcat el cotxe?»)
 	\n\t* Giny Habilita/deshabilita el registre
     </string>
 <string name="rendering_attr_contourLines_description">Selecciona el nivell mínim de zoom per mostrar el mapa si està disponible. Serà necessari el fitxer SRTM separat.</string>
@@ -507,7 +508,7 @@
 <string name="follow">Seguir</string>
 <string name="address">Adreça</string>
 <string name="search_online_address">Internet</string>
-<string name="searching">Cercant...</string>
+<string name="searching">S'està cercant...</string>
 <string name="search_history_city">Ciutat:\n {0}</string>
 <string name="search_history_street">Carrer:\n {0}, {1}</string>
 <string name="transport">Transport</string>
@@ -520,4 +521,5 @@
 <string name="int_seconds">segons</string>
 <string name="where_am_i">On estic?</string>
 <string name="map_widget_view_direction">Direcció de visió</string>
+<string name="clear_all">Neteja-ho tot</string>
 </resources>
