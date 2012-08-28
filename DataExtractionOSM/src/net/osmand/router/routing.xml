@@ -90,14 +90,18 @@
 		<road tag="route" value="ferry" speed="15" priority="1.0" dynamicPriority="0.7">
 			<specialization input="avoid_ferries" speed="0"/> 
 		</road>
-
-		<obstacle tag="highway" value="traffic_signals" penalty="15"/>
+		
+		<!-- usually traffic_signals are not that bad. 
+		     It is usuall better to pass via secondary route with TS then residential -->
+		<obstacle tag="traffic_calming" value="" routingPenalty="10" penalty="8"/>
+		<obstacle tag="highway" value="traffic_signals" penalty="25" routingPenalty="5"/>
+		
 		<obstacle tag="railway" value="crossing" penalty="25"/>
 		<obstacle tag="railway" value="level_crossing" penalty="25"/>
 		<obstacle tag="motorcar" value="no" penalty="-1"/>  
-		<obstacle tag="barrier" value="lift_gate" penalty="-1000"/>
-		<obstacle tag="barrier" value="gate" penalty="-1000"/>
-		<obstacle tag="barrier" value="bollard" penalty="-1000"/> 
+		<obstacle tag="barrier" value="lift_gate" routingPenalty="1000" penalty="25"/>
+		<obstacle tag="barrier" value="gate" routingPenalty="1000" penalty="25"/>
+		<obstacle tag="barrier" value="bollard" routingPenalty="1000" penalty="25"/> 
 		
 		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
 		<avoid tag="access" value="no"/>

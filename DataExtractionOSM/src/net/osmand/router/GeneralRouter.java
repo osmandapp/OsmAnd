@@ -21,6 +21,7 @@ public class GeneralRouter extends VehicleRouter {
 	Map<String, Double> highwayFuturePriorities ;
 	Map<String, Double> avoid ;
 	Map<String, Double> obstacles;
+	Map<String, Double> routingObstacles;
 	Map<String, String> attributes;
 	
 	
@@ -50,6 +51,7 @@ public class GeneralRouter extends VehicleRouter {
 		highwayFuturePriorities = new LinkedHashMap<String, Double>();
 		avoid = new LinkedHashMap<String, Double>();
 		obstacles = new LinkedHashMap<String, Double>();
+		routingObstacles = new LinkedHashMap<String, Double>();
 	}
 
 	public GeneralRouter(GeneralRouter pr) {
@@ -58,6 +60,7 @@ public class GeneralRouter extends VehicleRouter {
 		this.highwayFuturePriorities = new LinkedHashMap<String, Double>(pr.highwayFuturePriorities);
 		this.avoid = new LinkedHashMap<String, Double>(pr.avoid);
 		this.obstacles = new LinkedHashMap<String, Double>(pr.obstacles);
+		this.routingObstacles = new LinkedHashMap<String, Double>(pr.routingObstacles);
 		this.attributes = new LinkedHashMap<String, String>(pr.attributes);
 		this.profile = pr.profile;
 	}
@@ -110,8 +113,33 @@ public class GeneralRouter extends VehicleRouter {
 		int sz = pointTypes.length;
 		for(int i=0; i<sz; i++) {
 			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
-			String key = r.getTag() + "$" + r.getValue();
-			Double v = obstacles.get(key);
+			Double v = obstacles.get(r.getTag() + "$" + r.getValue());
+			if(v != null ){
+				return v;
+			}
+			v = obstacles.get(r.getTag() + "$");
+			if(v != null ){
+				return v;
+			}
+		}
+		return 0;
+	}
+	
+	@Override
+	public double defineRoutingObstacle(RouteDataObject road, int point) {
+		int[] pointTypes = road.getPointTypes(point);
+		if(pointTypes == null) {
+			return 0;
+		}
+		RouteRegion reg = road.region;
+		int sz = pointTypes.length;
+		for(int i=0; i<sz; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
+			Double v = routingObstacles.get(r.getTag() + "$" + r.getValue());
+			if(v != null ){
+				return v;
+			}
+			v = routingObstacles.get(r.getTag() + "$");
 			if(v != null ){
 				return v;
 			}
@@ -288,6 +316,7 @@ public class GeneralRouter extends VehicleRouter {
 		gr.specialize(specializationTag, gr.highwaySpeed);
 		gr.specialize(specializationTag, gr.avoid);
 		gr.specialize(specializationTag, gr.obstacles);
+		gr.specialize(specializationTag, gr.routingObstacles);
 		return gr;
 	}
 	

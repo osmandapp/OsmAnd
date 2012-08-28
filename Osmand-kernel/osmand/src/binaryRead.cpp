@@ -1445,13 +1445,12 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
 	mapFile->fd = fileDescriptor;
-	struct stat stat;
-	fstat(fileDescriptor, &stat);
 
 	mapFile->routefd = routeDescriptor;
-	bool readFromCache = cache != NULL;
 	FileIndex* fo = NULL;
-	if (readFromCache) {
+	if (cache != NULL) {
+		struct stat stat;
+		fstat(fileDescriptor, &stat);
 		for (int i = 0; i < cache->fileindex_size(); i++) {
 			FileIndex fi = cache->fileindex(i);
 			if (hasEnding(inputName, fi.filename()) && fi.size() == stat.st_size) {

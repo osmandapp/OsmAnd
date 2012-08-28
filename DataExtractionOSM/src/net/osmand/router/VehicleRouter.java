@@ -37,6 +37,11 @@ public abstract class VehicleRouter {
 		// no obstacles
 		return 0;
 	}
+	
+	public double defineRoutingObstacle(RouteDataObject road, int point) {
+		// no obstacles
+		return 0;
+	}
 
 	/**
 	 * return speed in m/s for vehicle for specified road

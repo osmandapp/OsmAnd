@@ -559,25 +559,17 @@ public class BinaryRoutePlanner {
 			
 			// 2.1 calculate possible obstacle plus time
 			if(positive){
-				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
-				if(obstacle < 0){
-					if(obstacle == -1) {
-						plusAllowed = false;
-						continue;
-					} else {
-						obstacle = -obstacle;
-					}
+				double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentEnd);
+				if (obstacle < 0) {
+					plusAllowed = false;
+					continue;
 				}
 				obstaclePlusTime +=  obstacle;
 			} else {
-				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
-				if(obstacle < 0){
-					if(obstacle == -1) {
-						minusAllowed = false;
-						continue;
-					} else {
-						obstacle = -obstacle;
-					} 
+				double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentEnd);
+				if (obstacle < 0) {
+					minusAllowed = false;
+					continue;
 				}
 				obstacleMinusTime +=  obstacle;
 			}
@@ -846,7 +838,7 @@ public class BinaryRoutePlanner {
 				distance += d;
 				double obstacle = ctx.getRouter().defineObstacle(road, j);
 				if(obstacle < 0) {
-					obstacle = 30; // configurable ?
+					obstacle = 0;
 				}
 				distOnRoadToPass += d / speed + obstacle;
 				

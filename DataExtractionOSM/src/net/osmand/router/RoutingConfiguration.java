@@ -167,7 +167,10 @@ public class RoutingConfiguration {
 						if (previousKey != null) {
 							String k = in + ":" + previousKey;
 							if (attributes.getValue("penalty") != null) {
-								currentRouter.obstacles.put(k, parseSilentDouble(attributes.getValue("penalty"), 0));
+								double penalty = parseSilentDouble(attributes.getValue("penalty"), 0);
+								currentRouter.obstacles.put(k, penalty);
+								double routingPenalty = parseSilentDouble(attributes.getValue("routingPenalty"), penalty );
+								currentRouter.routingObstacles.put(k, routingPenalty);
 							}
 							if (attributes.getValue("priority") != null) {
 								currentRouter.highwayPriorities.put(k, parseSilentDouble(attributes.getValue("priority"), 0));
@@ -200,8 +203,10 @@ public class RoutingConfiguration {
 					} else if("obstacle".equals(name)) {
 						previousTag = name;
 						previousKey = attributes.getValue("tag") + "$" + attributes.getValue("value");
-						currentRouter.obstacles.put(previousKey, parseSilentDouble(attributes.getValue("penalty"), 
-								0));
+						double penalty = parseSilentDouble(attributes.getValue("penalty"), 0);
+						currentRouter.obstacles.put(previousKey, penalty);
+						double routingPenalty = parseSilentDouble(attributes.getValue("routingPenalty"), penalty );
+						currentRouter.routingObstacles.put(previousKey, routingPenalty);
 					} else if("avoid".equals(name)) {
 						previousTag = name;
 						previousKey = attributes.getValue("tag") + "$" + attributes.getValue("value");
