@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -454,7 +454,7 @@
 	\n\t* Torna a calcular rutes de manera intel·ligent i de pressa
 	\n\t* Direcció per carrils
 	\n\t* Informació sobre límits de velocitat, radars i bandes rugoses
-	\n\t* Millores en l'orientació per veu en carretera
+	\n\t* Millores en l\'orientació per veu en carretera
 	\n\t* Connector Aparcament («On he aparcat el cotxe?»)
 	\n\t* Giny Habilita/deshabilita el registre
     </string>
@@ -482,7 +482,7 @@
 <string name="osb_comment_dialog_add_button">Afegir comentari</string>
 <string name="osb_comment_dialog_message">Missatge</string>
 <string name="osb_close_menu_item">Tancar error</string>
-<string name="osb_comment_dialog_author">Nom de l'autor</string>
+<string name="osb_comment_dialog_author">Nom de l\'autor</string>
 <string name="osb_add_dialog_success">Error creat amb èxit</string>
 <string name="default_buttons_yes">Si</string>
 <string name="default_buttons_no">No</string>
@@ -508,7 +508,7 @@
 <string name="follow">Seguir</string>
 <string name="address">Adreça</string>
 <string name="search_online_address">Internet</string>
-<string name="searching">S'està cercant...</string>
+<string name="searching">S\'està cercant...</string>
 <string name="search_history_city">Ciutat:\n {0}</string>
 <string name="search_history_street">Carrer:\n {0}, {1}</string>
 <string name="transport">Transport</string>
