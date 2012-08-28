@@ -519,4 +519,5 @@
 <string name="network_provider">Xarxa</string>
 <string name="int_seconds">segons</string>
 <string name="where_am_i">On estic?</string>
+<string name="map_widget_view_direction">Direcció de visió</string>
 </resources>
