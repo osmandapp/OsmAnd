@@ -1344,7 +1344,7 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 
 					cis.Seek(routingIndex->filePointer);
 					uint32_t old = cis.PushLimit(routingIndex->length);
-					readRoutingIndex(&cis, routingIndex);
+					readRoutingIndex(&cis, &(*routingIndex));
 					cis.PopLimit(old);
 				} else {
 					continue;
