@@ -80,7 +80,8 @@
 	</category>
 	
 	<category name="routes">
-		<type tag="route" value="ferry" minzoom="8" />
+		<type tag="route" value="ferry" minzoom="8" relation="true"/>
+		<type tag="route" value="hiking" minzoom="8" relation="true"/>
 	</category>
 
 	<category name="tracktype">
@@ -633,7 +634,6 @@
 	</category>
 
 
-
 	<!-- sport -->
 	<category name="sport" poi_tag="sport" poi_category="sport">
 		<type tag="sport" value="9pin" minzoom="15" />
@@ -686,6 +686,9 @@
 	</category>
 	
 	<category name="osmwiki" poi_tag="osmwiki" poi_category="osmwiki"/>
+	
+	<category name="tiles">
+	</category>
 	
 	<category name="tiles">
 	</category>

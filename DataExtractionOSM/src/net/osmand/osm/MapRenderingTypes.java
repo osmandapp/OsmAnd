@@ -121,6 +121,17 @@ public class MapRenderingTypes {
 		return coastlineRuleType;
 	}
 	
+	public boolean isRelationalTagValuePropogated(String tag, String val) {
+		MapRulType rType = types.get(constructRuleKey(tag, val));
+		if (rType == null) {
+			rType = types.get(constructRuleKey(tag, null));
+		}
+		if(rType != null) {
+			return rType.relation;
+		}
+		return false;
+	}
+	
 	
 	// if type equals 0 no need to save that point
 	public boolean encodeEntityWithType(Entity e, int zoom, TIntArrayList outTypes, 
@@ -286,6 +297,7 @@ public class MapRenderingTypes {
 						}
 						registerRuleType(rtype.tag, rtype.value, rtype);
 						rtype.additional = Boolean.parseBoolean(attributes.getValue("additional")); //$NON-NLS-1$
+						rtype.relation = Boolean.parseBoolean(attributes.getValue("relation")); //$NON-NLS-1$
 						String v = attributes.getValue("nameTags");
 						if(v != null) {
 							String[] names = v.split(",");
@@ -425,6 +437,7 @@ public class MapRenderingTypes {
 		String value;
 		int minzoom;
 		boolean additional;
+		boolean relation;
 		MapRulType targetTagValue;
 		boolean onlyNameRef;
 		
@@ -483,6 +496,10 @@ public class MapRenderingTypes {
 		
 		public boolean isOnlyNameRef() {
 			return onlyNameRef;
+		}
+		
+		public boolean isRelation() {
+			return relation;
 		}
 		
 		public int getFreq() {

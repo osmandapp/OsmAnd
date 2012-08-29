@@ -16,9 +16,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -28,6 +30,7 @@ import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.osm.Entity;
+import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRenderingTypes.MapRulType;
 import net.osmand.osm.MapUtils;
@@ -61,6 +64,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 	TIntArrayList typeUse = new TIntArrayList(8);
 	List<MapRulType> tempNameUse = new ArrayList<MapRenderingTypes.MapRulType>();
 	Map<MapRulType, String> namesUse = new LinkedHashMap<MapRenderingTypes.MapRulType, String>();
+	Map<EntityId, Map<String, String>> propogatedTags = new LinkedHashMap<Entity.EntityId, Map<String, String>>();
 	TIntArrayList addtypeUse = new TIntArrayList(8);
 
 	private PreparedStatement mapBinaryStat;
@@ -84,6 +88,28 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	public void indexMapRelationsAndMultiPolygons(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		indexMultiPolygon(e, ctx);
+		if(e instanceof Relation) {
+			Map<String, String> ts = ((Relation) e).getTags();
+			Map<String, String> propogated = null;
+			Iterator<Entry<String, String>> its = ts.entrySet().iterator();
+			while(its.hasNext()) {
+				Entry<String, String> ev = its.next();
+				if(renderingTypes.isRelationalTagValuePropogated(ev.getKey(), ev.getValue())) {
+					if(propogated == null) {
+						propogated = new LinkedHashMap<String, String>();
+					}
+					propogated.put(ev.getKey(), ev.getValue());
+				}
+			}
+			if(propogated != null) {
+				for(EntityId id : ((Relation) e).getMembersMap().keySet()) {
+					if(!propogatedTags.containsKey(id)) {
+						propogatedTags.put(id, new LinkedHashMap<String, String>());
+					}
+					propogatedTags.get(id).putAll(propogated);
+				}
+			}
+		}
 	}
 
 	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
@@ -514,6 +540,17 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	public void iterateMainEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		if (e instanceof Way || e instanceof Node) {
+			EntityId eid = EntityId.valueOf(e);
+			Map<String, String> tags = propogatedTags.get(eid);
+			if (tags != null) {
+				Iterator<Entry<String, String>> iterator = tags.entrySet().iterator();
+				while (iterator.hasNext()) {
+					Entry<String, String> ts = iterator.next();
+					if (e.getTag(ts.getKey()) == null) {
+						e.putTag(ts.getKey(), ts.getValue());
+					}
+				}
+			}
 			// manipulate what kind of way to load
 			for (int level = 0; level < mapZooms.size(); level++) {
 				boolean area = renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
