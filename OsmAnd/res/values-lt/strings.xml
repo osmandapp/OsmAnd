@@ -57,7 +57,7 @@
   <string name="transport_search_desc">Transporto paieška</string>
   <string name="favourites_search_desc">Išsaugotų vietų paieška</string>
   <string name="history_search_desc">Paieškos istorija</string>
-  <string name="offline_navigation_not_available">Vidinė (be interneto) Osmand navigacija laikinai neprieinama.</string>
+  <string name="offline_navigation_not_available">Vidinė (be interneto) OsmAnd navigacija laikinai neprieinama.</string>
   <string name="left_side_navigation">Važiavimas kairiąja kelio puse</string>
   <string name="left_side_navigation_descr">Pasirinkite šalims, kuriose važiuojama kairiąja kelio puse</string>
   <string name="download_link_and_local_description">Spauskite čia duomenų parsiuntimui į įrenginį arba parsiųstų duomenų atnaujinimui. \nNorėdami pamatyti detalią informaciją paspauskite ant dominančio elemento. Paspauskite ir laikykite elementą norėdami jį deaktyvuoti ar panaikinti. Duomenys įrenginyje (%1$s laisva):</string>
@@ -80,7 +80,7 @@
   <string name="online_map_settings_descr">Nustatykite interneto ar laikinai išsaugotų žemėlapių šaltinius</string>
   <string name="map_settings">- Žemėlapio nustatymai</string>
   <string name="map_settings_descr">Suderinkite žemėlapio rodymą</string>
-  <string name="osmand_rastermaps_plugin_description">Rodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į Osmand segtuvą.</string>
+  <string name="osmand_rastermaps_plugin_description">Rodyti nustatymus įvairiems interneto ir laikinai išsaugotiems žemėlapiams: padaryti baziniu žemėlapiu ar sluoksniais rodomais virš ar po juo. Šie žemėlapiai gali būti sukurti savarankiškai ir įkelti į OsmAnd segtuvą.</string>
   <string name="osmand_background_plugin_description">Rodyti nustatymus sekimui ir navigacijai miego režime (išjungus ekraną) periodiškai žadinant GPS įrenginį.</string>
   <string name="osmand_accessibility_description">Rodyti nustatymus specialiosios prieigos funkcionalumui.</string>
   <string name="extra_settings">Sudėtingesni nustatymai</string>
@@ -88,7 +88,7 @@
   <string name="osmand_extra_settings_description">Rodyti nustatymus sudėtingesniam žemėlapio konfigūravimui (pvz. padidinti rodomų žemėlapio detalių kiekį) ir specifinius įrenginio nustatymus.</string>
   <string name="osmand_development_plugin_description">Rodyti nustatymus kūrimo ir klaidų paieškos funkcionalumui: pavyzdžiui animuotai navigacijai ar atvaizdavimo našumo informacijos rodymui.</string>
   <string name="plugins_screen">Įskiepių valdymas</string>
-  <string name="select_plugin_to_activate">Norėdami aktyvuoti ar deaktyvuoti įskiepį - palieskite jį. (Gali reikėti Osmand paleisti iš naujo.)</string>
+  <string name="select_plugin_to_activate">Norėdami aktyvuoti ar deaktyvuoti įskiepį - palieskite jį. (Gali reikėti OsmAnd paleisti iš naujo.)</string>
   <string name="prefs_plugins_descr">Įskiepiai pateikia eksperto režimo nustatymus ir įgalina papildomą funkcionalumą: parsiųstus žemėlapius, sekimą, veikimą miego režime, prieigos nustatymus ir kita.</string>
   <string name="prefs_plugins">Įskiepių valdymas</string>
   <string name="tip_recent_changes_0_8_0_t">Pakeitimai 0.8.0 versijoje :
@@ -107,7 +107,7 @@
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoriniai žemėlapiai tikriausiai bus atvaizduojami sparčiau. Kaikuriuose įrenginiuose gali veikti prastai.</string>
   <string name="simulate_route_progression_manually">Rankiniu būdu simuliuoti maršruto progresą</string>
   <string name="play_commands_of_currently_selected_voice">Groti šiuo metu pasirinkto balso komandas</string>
-  <string name="debugging_and_development">Osmand vystymas</string>
+  <string name="debugging_and_development">OsmAnd vystymas</string>
   <string name="native_rendering">Aparatinis atvaizdavimas</string>
   <string name="animate_routing">Animuoti navigaciją</string>
   <string name="test_voice_prompts">Patikrinti balso nurodymus</string>
@@ -225,7 +225,7 @@
 \n\t- Atnaujinti žemėlapiai
 \n\t- Kitos smulkios savybės
 </string>
-  <string name="free_version_message">Ši nemokama Osmand versija apribota iki %1$s parsiuntimų %2$s ir nepalaiko įrenginyje išsaugotų Wikipedia straipsnių.</string>
+  <string name="free_version_message">Ši nemokama OsmAnd versija apribota iki %1$s parsiuntimų %2$s ir nepalaiko įrenginyje išsaugotų Wikipedia straipsnių.</string>
   <string name="free_version_title">Nemokama versija</string>
   <string name="poi_context_menu_showdescription">Rodyti LV aprašymą</string>
   <string name="index_name_north_america">Šiaurės Amerika</string>
@@ -263,7 +263,7 @@
   <string name="user_password">Jūsų OSM slaptažodis</string>
   <string name="user_password_descr">Reikalinga norint teikti duomenis į openstreetmap.org</string>
   <string name="osmand_service">Miego režimo funkcionalumas</string>
-  <string name="osmand_service_descr">Reikalinga jei norite naudoti Osmand kai ekranas yra išjungtas</string>
+  <string name="osmand_service_descr">Reikalinga jei norite naudoti OsmAnd kai ekranas yra išjungtas</string>
   <string name="tip_rotation_switching">Žemėlapio orientacija</string>
   <string name="tip_rotation_switching_t">\tNuėję į \'Nustatymai\' -&gt; \'Žemėlapio rodymas\' -&gt; \'Žemėlapio pasukimas\' galite pasirinkti kaip bus rodomas žemėlapis.
 \n\tGalėsite pasirinkti:
@@ -283,7 +283,7 @@
 \n\t\'Šviesos sensorius\' - žemėlapio išvaizda bus valdoma jūsų įrenginyje esančio (jei yra) šviesos sensoriaus
 </string>
   <string name="tip_osm_improve">Tobulinti OSM duomenys</string>
-  <string name="tip_osm_improve_t">\tOsmand naudoja žemėlapius pagamintus Openstreetmap.org (OSM) duomenų pagrindu ir programa šalia žemėlapių peržiūros ar navigacijos gali būti naudojama OSM duomenų kokybei gerinti. Vos keliais paspaudimais jūs galite sukurti ir nusiųsti į OSM naujas LV ar pastebėtas OSM klaidas!
+  <string name="tip_osm_improve_t">\tOsmAnd naudoja žemėlapius pagamintus Openstreetmap.org (OSM) duomenų pagrindu ir programa šalia žemėlapių peržiūros ar navigacijos gali būti naudojama OSM duomenų kokybei gerinti. Vos keliais paspaudimais jūs galite sukurti ir nusiųsti į OSM naujas LV ar pastebėtas OSM klaidas!
 \n\tTam pirmiausia jums reikės nuėjus į \'Nustatymai\' -&gt; \'Bendri nustatymai\' -&gt; \'OSM redagavimas\' nurodyti savo OSM prisijungimo informaciją.
 \n\tNorėdami sukurti naują LV naudokitės \'Sukurti LV\' iš žemėlapio kontekstinio meniu. Įveskite informaciją apie naują LV į atsivėrusį \'Sukurti LV\' dialogą ir galiausiai išsaugokite ją.
 \n\tApie žemėlapio klaidas galima iš karto pranešti OSM ir OSM bendruomenė galės jas ištaisyti.
@@ -293,7 +293,7 @@
   <string name="download_files_question_space">Dabar laisvos vietos yra {2} MB! Parsiųsti {0} failą(-us) ({1} MB)?</string>
   <string name="tip_select_destination_point">Pasirinkti kelionės tikslą</string>
   <string name="tip_select_destination_point_t">\tKelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Kelionės tikslas\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotų vietų sąrašas\' sąraše.
-\n\tKalionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir Osmand rodo kryptį ir atstumą iki jo (oranžinis trikampis).</string>
+\n\tKalionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis).</string>
   <string name="tip_recent_changes_0_6_9_t">Pakeitimai 0.6.9 versijoje :
 \n\t- Patobulintas parsiųstų žemėlapių atvaizdavimas
 \n\t- Greitas aparatinis parsiųstų žemėlapių vaizdavimas - ieškokite eksperimentinėse savybėse (dalyje įrenginių gali neveikti)
@@ -344,7 +344,7 @@
   <string name="poi_filter_by_name">Ieškoti pagal pavadinimą</string>
   <string name="old_poi_file_should_be_deleted">LV duomenų failas \'%1$s\' yra nereikalingas ir gali būti panaikintas.</string>
   <string name="update_poi_file_not_found">Vietinis failas, kuriame laikomi LV pakeitimai, nerastas ir jo nepavyko sukurti.</string>
-  <string name="button_upgrade_osmandplus">Atnaujinti Osmand+</string>
+  <string name="button_upgrade_osmandplus">Atnaujinti OsmAnd+</string>
   <string name="map_version_changed_info">Serveryje patalpinti žemėlapių failai netinka jūsų turimos programos versijai. Norėdami parsisiųsti žemėlapius pirmiausia atnaujinkite programą.</string>
   <string name="local_index_mi_rename">Pakeisti pavadinimą</string>
   <string name="show_gpx_route">Rodyti žemėlapyje</string>
@@ -361,7 +361,7 @@
   <string name="select_search_position">Ieškoti šalia :</string>
   <string name="context_menu_item_search">Ieškoti netoliese nuo čia</string>
   <string name="tip_recent_changes_0_6_7_t">Pakeitimai 0.6.7 versijoje : 
-\n\t- Parsiųstų duomenų valdymas (parsiųsti, ištrinti, aktyvuoti / deaktyvuoti parsiųstus duomenis tiesiogiai Osmand programoje) 
+\n\t- Parsiųstų duomenų valdymas (parsiųsti, ištrinti, aktyvuoti / deaktyvuoti parsiųstus duomenis tiesiogiai OsmAnd programoje) 
 \n\t- Įsimintos vietos ir grupės (priskirti kategorijas, ištrinti, valdyti įsimintas vietas) 
 \n\t- GPX naršyklė (peržiūrėti maršruto informaciją, atstumą, vidutinį greitį, aukščius ir kt.) 
 \n\t- Navigacija pagal GPX (daugiau galimybių, tęsti navigaciją po programos lūžimo, palaiko žiedines sankryžas) 
@@ -471,7 +471,7 @@
   <string name="internet_not_available">Nėra šiam veiksmui reikalingo interneto ryšio</string>
   <string name="install_more">Įdiegti daugiau…</string>
   <string name="tip_update_index">Parsiųstų duomenų atnaujinimas</string>
-  <string name="tip_update_index_t">\tTurėti naujausius žemėlapius yra labai svarbu. Osmand turi parsiųstų duomenų valdymo funkcijas, kurios patikrina ar yra atnaujintų žemėlapių. 
+  <string name="tip_update_index_t">\tTurėti naujausius žemėlapius yra labai svarbu. OsmAnd turi parsiųstų duomenų valdymo funkcijas, kurios patikrina ar yra atnaujintų žemėlapių. 
 \n\tNorėdami patikrinti ar yra atnaujinimų eikite į \'Nustatymai\' -&gt; \'Parsiųsti duomenys\' -&gt; \'Parsisiųsti duomenų\'. Po to kai bus parsiųstas regionų sąrašas, jūs galėsite pasirinkti \'Meniu\' -&gt; \'Rodyti parsiųstus\' kad būtų rodomi tik parsiųstų žemėlapių atnaujinimai. 
 \n\tAtnaujinimai yra žymimi spalvomis: 
 \n\t\'Žalia\' - rodo, kad jūsų žemėlapiai identiški esantiems serveryje 
@@ -498,10 +498,10 @@
   <string name="preferred_locale">Programos kalba</string>
   <string name="tip_map_switch">Žemėlapių šaltinis</string>
   <string name="tip_map_switch_t">\tGreičiausiai pakeisti žemėlapių šaltinius ir sluoksnius galima paspaudus \'Meniu\' -&gt; \'Nustatyti vaizdą\' žemėlapio rodinyje. 
-\n\tEilutėje \'Žemėlapio šaltinis…\' galite pasirinkti į įrenginį parsiųstus vektorinius žemėlapius, iš anksto nustatytus (interneto) žemėlapius, ar savarankiškai pagamintus žemėlapius (pvz., naudojant OsmandMapCreator kompiuteryje). 
-\n\tOsmand taip pat palaiko ir kitokius žemėlapių šaltinius.</string>
+\n\tEilutėje \'Žemėlapio šaltinis…\' galite pasirinkti į įrenginį parsiųstus vektorinius žemėlapius, iš anksto nustatytus (interneto) žemėlapius, ar savarankiškai pagamintus žemėlapius (pvz., naudojant OsmAndMapCreator kompiuteryje). 
+\n\tOsmAnd taip pat palaiko ir kitokius žemėlapių šaltinius.</string>
   <string name="tip_app_mode">Vartotojo profilis</string>
-  <string name="tip_app_mode_t">\tOsmand palaiko įvairius (konfigūruojamus) profilius skirtingiems programos panaudojimo būdams. 
+  <string name="tip_app_mode_t">\tOsmAnd palaiko įvairius (konfigūruojamus) profilius skirtingiems programos panaudojimo būdams. 
 \n\tProfilį pasikeisti galima \'Meniu\' -&gt; \'Nustatymai\' -&gt; \'Vartotojo profilis\' arba kuriant maršrutą.</string>
   <string name="tip_navigation">Navigacija</string>
   <string name="tip_navigation_t">\tPrieš pradedant navigaciją būtina pasirinkti kelionės tikslą. Vėliau žemėlapio rodinyje paspaudus \'Meniu\' -&gt; \'Maršrutas\' bus galima pasirinkti navigacijos tipą.</string>
@@ -513,7 +513,7 @@
 \n\tTai pant žemėlapio uždės dėžutę su koordinatėmis. Norėdami atverti žemėlapio kontekstinį meniu tai dėžutei – paspauskite ant jos. (Arba paspauskite ir laikykite ją paspaudę norėdami, kad ji pradingtų.) 
 \n\tŽemėlapio kontekstiniame meniu rasite visus veiksmus, reikalingus darbui su taško vieta (koordinatėmis).</string>
   <string name="tip_initial">Patarimai ir gudrybės</string>
-  <string name="tip_initial_t">\tOsmand yra daug funkcijų turinti navigacijos programa. 
+  <string name="tip_initial_t">\tOsmAnd yra daug funkcijų turinti navigacijos programa. 
 \n\tPradiniam supažindinimui keletas pagrindinių patarimų būna rodomi pagrindinio meniu rodinyje.</string>
   <string name="next_button">Kitas</string>
   <string name="previous_button">Ankstesnis</string>
@@ -574,19 +574,19 @@
   <string name="reading_cached_tiles">Skaitomi išsaugoti žemėlapiai…</string>
   <string name="version_index_is_big_for_memory">Indeksas \'\'{0}\'\' netilpo į atmintį</string>
   <string name="version_index_is_not_supported">Indekso versija \'\'{0}\'\' nepalaikoma</string>
-  <string name="use_osmand_routing_service">Osmand navigacija &gt;20km</string>
-  <string name="use_osmand_routing_service_descr">Osmand navigaciją be interneto taikyti tik maršrutams &gt; 20 km (ekperimentinė funkcija)</string>
-  <string name="osmand_routing_experimental">Osmand navigacija be interneto yra eksperimentinė funkcija ir ji neveikia didesniems nei 20km atstumams.\n\nLaikinai naudojama CloudMade navigacijos paslauga.</string>
+  <string name="use_osmand_routing_service">OsmAnd navigacija &gt;20km</string>
+  <string name="use_osmand_routing_service_descr">OsmAnd navigaciją be interneto taikyti tik maršrutams &gt; 20 km (ekperimentinė funkcija)</string>
+  <string name="osmand_routing_experimental">OsmAnd navigacija be interneto yra eksperimentinė funkcija ir ji neveikia didesniems nei 20km atstumams.\n\nLaikinai naudojama CloudMade navigacijos paslauga.</string>
   <string name="specified_dir_doesnt_exist">Neina rasti nurodyto segtuvo.</string>
   <string name="application_dir">Segtuvas duomenų talpinimui</string>
-  <string name="application_dir_change_warning">Talpyklos segtuvą pakeitus kitu duomenys perkelti ar ištrinti nebus. Tai turi būti padaryti už Osmand funkcionalumo ribų. Tęsti vis tiek?</string>
-  <string name="osmand_net_previously_installed">Šiuo metu yra įdiegta senesnė Osmand versija. Visi parsiųsti ir išsaugoti duomenys bus palaikomi ir naujos versijos. Išsaugotas vietas iš senosios versijos reikia eksportuoti, o įdiegus naują - importuoti pačiam naudotojui.</string>
+  <string name="application_dir_change_warning">Talpyklos segtuvą pakeitus kitu duomenys perkelti ar ištrinti nebus. Tai turi būti padaryti už OsmAnd funkcionalumo ribų. Tęsti vis tiek?</string>
+  <string name="osmand_net_previously_installed">Šiuo metu yra įdiegta senesnė OsmAnd versija. Visi parsiųsti ir išsaugoti duomenys bus palaikomi ir naujos versijos. Išsaugotas vietas iš senosios versijos reikia eksportuoti, o įdiegus naują - importuoti pačiam naudotojui.</string>
   <string name="build_installed">Versija {0} sėkmingai įdiegta ({1}).</string>
   <string name="downloading_build">Parsisiunčiama versija…</string>
-  <string name="install_selected_build">Ar norite įdiegti Osmand - {0} iš {1} {2} MB ?</string>
-  <string name="loading_builds_failed">Nepavyko parsisiųsti Osmand versijų sąrašo</string>
-  <string name="loading_builds">Įkeliamos Osmand versijos…</string>
-  <string name="select_build_to_install">Įdiegimui pasirinkite vieną iš Osmand versijų</string>
+  <string name="install_selected_build">Ar norite įdiegti OsmAnd - {0} iš {1} {2} MB ?</string>
+  <string name="loading_builds_failed">Nepavyko parsisiųsti OsmAnd versijų sąrašo</string>
+  <string name="loading_builds">Įkeliamos OsmAnd versijos…</string>
+  <string name="select_build_to_install">Įdiegimui pasirinkite vieną iš OsmAnd versijų</string>
   <string name="contribution_activity">Specialūs veiksmai tobulinamai versijai</string>
   <string name="gps_status_app_not_found">GPS statuso programa neįdiegta. Ieškoti Parduotuvėje?</string>
   <string name="voice_is_not_available_msg">Balso nurodymai neprieinami. Eikite į nustatymus, išsirinkite pageidaujamą kalbos paketą ir jį parsisiųskite.</string>
@@ -678,7 +678,7 @@
   <string name="background_service_wait_int">Maksimalus laukimas iki vietos nustatymo</string>
   <string name="service_stop_background_service">Išjungti foninį navigacijos režimą</string>
   <string name="where_am_i">Kur aš?</string>
-  <string name="process_navigation_service">Osmand navigacijos paslauga</string>
+  <string name="process_navigation_service">OsmAnd navigacijos paslauga</string>
   <string name="network_provider">Tinklas</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekundės</string>
@@ -687,7 +687,7 @@
   <string name="background_service_int">Pabudimo intervalas</string>
   <string name="background_service_provider_descr">Pasirinkite vietos nustatymo būdą naudojant foninį režimą</string>
   <string name="background_service_provider">Vietos nustatymo būdas</string>
-  <string name="background_router_service_descr">Osmand veikia fone ir seka jūsų buvimo vietą kai ekranas išjungtas</string>
+  <string name="background_router_service_descr">OsmAnd veikia fone ir seka jūsų buvimo vietą kai ekranas išjungtas</string>
   <string name="background_router_service">Veikti fone</string>
   <string name="off_router_service_no_gps_available">Foniniam navigacijos režimui reikia parinkti vietos nustatymo būdą.</string>
   <string name="hide_poi_filter">Paslėpti filtrą</string>
@@ -740,7 +740,7 @@
   <string name="default_buttons_ok">Gerai</string>
   <string name="show_transport_over_map_description">Rodyti viešo transporto stoteles žemėlapyje</string>
   <string name="show_transport_over_map">Rodyti viešo transporto stoteles</string>
-  <string name="hello">Navigacijos programa Osmand</string>
+  <string name="hello">Navigacijos programa OsmAnd</string>
   <string name="update_poi_success">LV duomenys buvo sėkmingai atnaujinti ({0} įkelta)</string>
   <string name="update_poi_error_local">Įvyko klaida atnaujinant vietinį LV sąrašą</string>
   <string name="update_poi_error_loading">Įvyko klaida parsiunčiant duomenis iš serverio</string>
@@ -810,11 +810,11 @@
   <string name="new_route_calculated_dist">Apskaičiuotas naujas maršrutas, atstumas</string>
   <string name="arrived_at_destination">Jūs pasiekėte savo kelionės tikslą</string>
   <string name="invalid_locations">Koordinatės yra neteisingos!</string>
-  <string name="go_back_to_osmand">Grįžti į Osmand žemėlapį</string>
+  <string name="go_back_to_osmand">Grįžti į OsmAnd žemėlapį</string>
   <string name="close">Uždaryti</string>
   <string name="loading_data">Įkeliami duomenys…</string>
   <string name="reading_indexes">Skaitomi vietiniai duomenys…</string>
-  <string name="previous_run_crashed">Praėjusį kartą Osmand programa nulūžo. Žurnalas yra {0}. Praneškite apie įvykusią problemą ir atsiųskite žurnalą.</string>
+  <string name="previous_run_crashed">Praėjusį kartą OsmAnd programa nulūžo. Žurnalas yra {0}. Praneškite apie įvykusią problemą ir atsiųskite žurnalą.</string>
   <string name="saving_gpx_tracks">GPX failas įrašomas į SD kortelę…</string>
   <string name="finished_task">Baigta</string>
   <string name="reload_indexes_descr">Iš naujo perskaityti SD kortelėje esančius vektorinius žemėlapius ir duomenis</string>
@@ -1059,7 +1059,7 @@
 \n\t\'Diena\' - visada naudoti dienos režimą
 \n\t\'Naktis\' - visada naudoti nakties režimą
 \n\t\'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas)</string>
-<string name="tip_app_mode_t_v2">\tOsmand palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
+<string name="tip_app_mode_t_v2">\tOsmAnd palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
 \n\tJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio ekrano kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą.</string>
 <string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.↵
 \n\tPasirinkimai:↵

@@ -87,7 +87,7 @@
 <string name="monitoring_mode_off">Enregistra en un GPX</string>
 <string name="bg_service_sleep_mode_off">Activa\'n\n el mode adormit</string>
 <string name="bg_service_sleep_mode_on">Atura\'n\n el mode adormit</string>
-<string name="offline_navigation_not_available">La navegació fora de línia de l\'Osmand no està disponible temporalment.</string>
+<string name="offline_navigation_not_available">La navegació fora de línia de l\'OsmAnd no està disponible temporalment.</string>
 <string name="confirm_interrupt_download">Voleu interrompre la baixada del fitxer?</string>
 <string name="select_index_file_to_download">No s\'ha trobat res. Si no podeu trobar la vostra regió, podeu crear-la vosaltres mateixos (vegeu http://osmand.net).</string>
 <string name="local_indexes_cat_tile">Mapes en línia (tessel·les)</string>
@@ -102,7 +102,7 @@
 <string name="osmand_accessibility_description">Mostra la configuració per les característiques especials d\'accessibilitat.</string>
 <string name="extra_settings">Configuració avançada</string>
 <string name="plugins_screen">Connector Gestor</string>
-<string name="select_plugin_to_activate">Toqueu un connector per activar-lo o desactivar-lo (caldrà que reinicieu l\'Osmand).</string>
+<string name="select_plugin_to_activate">Toqueu un connector per activar-lo o desactivar-lo (caldrà que reinicieu l\'OsmAnd).</string>
 <string name="poi_search_desc">Cerca de PDI (punt d\'interès)</string>
 <string name="prefs_plugins">Connector Gestor</string>
 <string name="native_rendering">Renderització nativa</string>
@@ -168,13 +168,13 @@
 <string name="index_settings_descr">Baixeu, visualitzeu-ne els detalls i gestioneu mapes fora de línia</string>
 <string name="osmand_extra_settings_description">Mostra els paràmetres per a una configuració avançada del mapa (per exemple augmentant-ne els detalls) i alguns d\'específics del dispositiu.</string>
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
-<string name="debugging_and_development">Desenvolupament de l\'Osmand</string>
+<string name="debugging_and_development">Desenvolupament de l\'OsmAnd</string>
 <string name="local_openstreetmap_show">Mostra al mapa</string>
 <string name="local_openstreetmap_upload">Penja la modificació a OSM</string>
 <string name="local_openstreetmap_delete">Esborra els canvis</string>
 <string name="local_openstreetmap_uploadall">Penja-ho tot</string>
 <string name="show_current_gpx_title">Mostra la traça actual</string>
-<string name="free_version_message">Aquesta versió gratuïta de l\'Osmand està limitada a %1$s baixades %2$s i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
+<string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s baixades %2$s i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
 <string name="free_version_title">Versió gratuïta</string>
 <string name="poi_context_menu_showdescription">Mostra la descripció del PDI</string>
 <string name="index_name_france">Europa - França</string>
@@ -375,16 +375,16 @@
 <string name="poi_filter_custom_filter">Filtre personalitzat</string>
 <string name="poi_filter_for_tourists">Per turistes</string>
 <string name="poi_filter_fuel">Carburants</string>
-<string name="osmand_short_description_80_chars">L\'Osmand és una aplicació de codi font obert de navegació amb mapes de tessel·les/vectors</string>
-<string name="osmand_plus_short_description_80_chars">L\'Osmand és una aplicació de codi font obert de navegació amb mapes de tessel·les/vectors</string>
+<string name="osmand_short_description_80_chars">L\'OsmAnd és una aplicació de codi font obert de navegació amb mapes de tessel·les/vectors</string>
+<string name="osmand_plus_short_description_80_chars">L\'OsmAnd és una aplicació de codi font obert de navegació amb mapes de tessel·les/vectors</string>
 <string name="local_index_routing_data">Dades de l\'itinerari</string>
 <string name="settings_preset">Perfil d\'usuari</string>
 <string name="settings_preset_descr">Seleccioneu un perfil d\'usuari amb paràmetres personalitzats dels mapes i la navegació.</string>
 <string name="osmand_service">Funcionalitat del mode adormit</string>
-<string name="osmand_service_descr">Utilitzeu per executar l\'Osmand mentres la pantalla està apagada</string>
+<string name="osmand_service_descr">Utilitzeu per executar l\'OsmAnd mentres la pantalla està apagada</string>
 <string name="pref_raster_map">Configuració de la font del mapa</string>
 <string name="pref_vector_map">Configuració del mapa de vectors</string>
-<string name="button_upgrade_osmandplus">Actualitza a l\'Osmand+</string>
+<string name="button_upgrade_osmandplus">Actualitza a l\'OsmAnd+</string>
 <string name="favorite_home_category">Casa</string>
 <string name="local_index_gpx_info_show">\n\nPremeu i manteniu per veure les opcions</string>
 <string name="local_index_gpx_info_elevation">\nAltitud mitjana: %1$.0f m\nAltitud mínima: %2$.0f m\nAltitud màxima: %3$.0f m\nAscensió: %4$.0f m\nDescensió: %5$.0f m</string>
@@ -414,9 +414,9 @@
 <string name="specified_dir_doesnt_exist">No s\'ha trobat el directori especificat.</string>
 <string name="application_dir">Directori d\'emmagatzematge</string>
 <string name="osmand_long_description_1000_chars">
-	        Osmand (OpenStreetMap Android)
+	        OsmAnd (OpenStreetMap Android)
 
-		L\'Osmand és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'Osmand també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
+		L\'OsmAnd és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
 
 		Algunes de les característiques centrals són:
 		- Dades fora de línia, se\'n pot configurar el directori pels mapes de tessel·les o de vectors
@@ -427,17 +427,17 @@
 		- Diverses capes de mapes amb el nivell de transparència personalitzada alhora
 		- Càlcul de rutes fora de línia per distàncies curtes (experimental)
 
-		Limitacions de l\'Osmand Free:
+		Limitacions de l\'OsmAnd Free:
 		- Nombre de baixades de mapes
 		- No es té accés fora de línia als PDI de la Viquipèdia
 
-		L\'Osmand encara està en desenvolupament actiu i depèn del suport basat en «donacions» per ajudar a què el projecte es continuï desenvolupant.
+		L\'OsmAnd encara està en desenvolupament actiu i depèn del suport basat en «donacions» per ajudar a què el projecte es continuï desenvolupant.
 	</string>
 <string name="osmand_plus_long_description_1000_chars">
-        Osmand+ (OSM Direccions de navegació automatitzades)
-		L\'Osmand és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'Osmand també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
+        OsmAnd+ (OSM Direccions de navegació automatitzades)
+		L\'OsmAnd és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
 
-		L\'Osmand+ és una aplicació basada en les donacions. Comprant-lo estareu donant suport al projecte i en rebreu les darreres actualitzacions.
+		L\'OsmAnd+ és una aplicació basada en les donacions. Comprant-lo estareu donant suport al projecte i en rebreu les darreres actualitzacions.
 
                 Algunes de les característiques centrals són:
                 - Nova característica Viquipèdia fora de línia (permet baixar els PDI de la Viquipèdia)

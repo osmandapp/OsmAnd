@@ -16,11 +16,11 @@
     \n\t* Lock screen button with logging services
     \n\t* Fixed Arabic, Kannada scripting and RTL languages 
     </string>
-	<string name="osmand_short_description_80_chars">Osmand is an open source navigation application for offline and online maps</string>
+	<string name="osmand_short_description_80_chars">OsmAnd is an open source navigation application for offline and online maps</string>
 	<string name="osmand_long_description_1000_chars">
-		Osmand (OSM Automated Navigation Directions)
+		OsmAnd (OSM Automated Navigation Directions)
 
-		Osmand is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including turn-by-turn voice guidance.
+		OsmAnd is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
 
 		Some of the core features:
 		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
@@ -34,19 +34,19 @@
 		- Optional speed-dependent map zooming
 		- Optional map alignment according to compass or direction of motion
 
-		Limitations of this free version of Osmand:
+		Limitations of this free version of OsmAnd:
 		- Number of map downloads limited
 		- No access to Wikipedia offline POIs
 
-		Osmand is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying Osmand+, or funding specific new features or making a general donation on osmand.net.
+		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
 	</string>
-    <string name="osmand_plus_short_description_80_chars">Osmand is an open source navigation application for offline and online maps</string>
+    <string name="osmand_plus_short_description_80_chars">OsmAnd is an open source navigation application for offline and online maps</string>
     <string name="osmand_plus_long_description_1000_chars">
-		Osmand+ (OSM Automated Navigation Directions)
+		OsmAnd+ (OSM Automated Navigation Directions)
 
-		Osmand+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Osmand also offers offline and online routing functionality including turn-by-turn voice guidance.
+		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
 
-		Osmand+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
+		OsmAnd+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
 
 		Some of the core features:
 		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
@@ -62,7 +62,7 @@
 		- Optional map alignment according to compass or direction of motion
     </string>
 	<string name="tip_update_index">Update of Offline Data</string>
-	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. Osmand provides a download manager which can check for available offline data updates.
+	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates.
 	\n\tTo check for updates go to \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
 	\n\tThe availability of updates  is depicted by the following colors:
 	\n\t\'Green\' - indicates data files identical on device and server
@@ -201,7 +201,7 @@
 	<string name="transport_search_desc">Transportation search</string>
 	<string name="favourites_search_desc">Favorites search</string>
 	<string name="history_search_desc">Search history</string>
-    <string name="offline_navigation_not_available">Osmand offline navigation is temporarily not available.</string>
+    <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-hand driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
     <string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
@@ -225,7 +225,7 @@
 	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
 	
-	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the Osmand folder.</string>
+	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
     <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
     <string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
     <string name="extra_settings">Advanced settings</string>
@@ -233,7 +233,7 @@
     <string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
     <string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
     <string name="plugins_screen">Plugin Manager</string>
-    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting Osmand may be required.)</string>
+    <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
     <string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
     <string name="prefs_plugins">Plugin Manager</string>
     <string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
@@ -251,7 +251,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
     <string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
 	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
-	<string name="debugging_and_development">Osmand development</string>
+	<string name="debugging_and_development">OsmAnd development</string>
 	<string name="native_rendering">Native rendering</string>
 	<string name="test_voice_prompts">Test voice prompts</string>    
 	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
@@ -377,7 +377,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	\n\t- Updated maps
 	\n\t- Other small features
 	</string>    
-	<string name="free_version_message">This free Osmand version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
+	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
 
@@ -416,7 +416,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
 	<string name="osmand_service">Sleep Mode Functionality</string>
-	<string name="osmand_service_descr">Use to run Osmand while screen is off</string>
+	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 
 	 
 	<string name="tip_rotation_switching">Map Orientation</string>
@@ -440,7 +440,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>	
 
 	<string name="tip_osm_improve">Improving OSM Data</string>
-	<string name="tip_osm_improve_t">\tOsmand uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
 	\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM Editing\'.
 	\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 	\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
@@ -453,7 +453,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	
 	<string name="tip_select_destination_point">Select Destination</string>
 	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and Osmand displays the distance to it and the direction to it (orange triangle).</string> 
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string> 
 
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
 \n\t- Improved offline map rendering
@@ -508,7 +508,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
 
-	<string name="button_upgrade_osmandplus">Upgrade Osmand+</string>
+	<string name="button_upgrade_osmandplus">Upgrade OsmAnd+</string>
 	<string name="map_version_changed_info">Server contains map files not compatible with your current version of the application. To download and use them, please upgrade the application to newer version.</string>
 	
 	<string name="local_index_mi_rename">Rename</string>
@@ -527,7 +527,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="select_search_position">Search near :</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in Osmand)
+\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
 \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
@@ -671,11 +671,11 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
-\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmandMapCreator on a PC.
-\n\tOsmand also supports custom sources.</string>
+\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
+\n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">User Profile</string>
-	<string name="tip_app_mode_t_v2">\tOsmand supports different (customizable) application profiles for different use cases.
+	<string name="tip_app_mode_t_v2">\tOsmAnd supports different (customizable) application profiles for different use cases.
 \n\tYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route.</string>
 
 	<string name="tip_navigation">Navigation</string>
@@ -691,7 +691,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
 	<string name="tip_initial">Tips and Tricks</string>
-	<string name="tip_initial_t">\tOsmand is a navigation application with many features. 
+	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
 \n\tAs an basic introduction, some usage tips and tricks are linked on the main screen.</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
@@ -754,20 +754,20 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 
-	<string name="use_osmand_routing_service">Osmand navigation >20km</string>
-	<string name="use_osmand_routing_service_descr">Use Osmand offline navigation applies only to routes > 20 km (experimental)</string>
-	<string name="osmand_routing_experimental">Osmand offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
+	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
+	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes > 20 km (experimental)</string>
+	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
-	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside Osmand. Continue anyway?</string>
+	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
 
-	<string name="osmand_net_previously_installed">A previous Osmand version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build&#8230;</string>
-	<string name="install_selected_build">Do you want to install Osmand - {0} from {1} {2} MB ?</string>
-	<string name="loading_builds_failed">Retrieving the list of Osmand builds failed</string>
-	<string name="loading_builds">Loading Osmand builds&#8230;</string>
-	<string name="select_build_to_install">Select one of the Osmand builds to install</string>
+	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
+	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
@@ -869,7 +869,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="background_service_wait_int">Maximum wait for fix</string>
 	<string name="service_stop_background_service">Switch off background navigation service</string>
 	<string name="where_am_i">Where am I?</string>
-	<string name="process_navigation_service">Osmand navigation service</string>
+	<string name="process_navigation_service">OsmAnd navigation service</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
@@ -878,7 +878,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="background_service_int">Wake-up interval</string>
 	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
 	<string name="background_service_provider">Location provider</string>
-	<string name="background_router_service_descr">Runs Osmand in the background to track your position while screen is off</string>
+	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
 	<string name="background_router_service">Run in the background</string>
 	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
@@ -932,7 +932,7 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Show public transportation stops on map</string>
 	<string name="show_transport_over_map">Show transportation stops</string>
-	<string name="hello">Navigation application Osmand</string>
+	<string name="hello">Navigation application OsmAnd</string>
 	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
 	<string name="update_poi_error_local">Error updating local POI list</string>
 	<string name="update_poi_error_loading">Error while loading data from server</string>
@@ -1001,11 +1001,11 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
 	<string name="new_route_calculated_dist">New route calculated, distance</string>
 	<string name="arrived_at_destination">You have arrived at your destination</string>
 	<string name="invalid_locations">Coordinates are invalid!</string>
-	<string name="go_back_to_osmand">Go back to Osmand map</string>
+	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
 	<string name="loading_data">Loading data&#8230;</string>
 	<string name="reading_indexes">Reading local data&#8230;</string>
-	<string name="previous_run_crashed">Last Osmand run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
+	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
 	<string name="saving_gpx_tracks">Saving GPX tracks to SD&#8230;</string>
 	<string name="finished_task">Finished</string>
     <string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>

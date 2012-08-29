@@ -4,7 +4,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
 	<string name="tip_select_destination_point">Chọn điểm đến</string>
 	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and Osmand displays the distance to it and the direction to it (orange triangle).</string>
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
 
 	<string name="choose_auto_follow_route">Auto follow return time</string>
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
@@ -47,7 +47,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
 
-	<string name="button_upgrade_osmandplus">Nâng cấp Osmand+</string>
+	<string name="button_upgrade_osmandplus">Nâng cấp OsmAnd+</string>
 	<string name="map_version_changed_info">Máy chủ lưu trữ tập tin bản đồ không tương thích với phiên bản hiện tại. Để tải về và dùng được các tập tin này, vui lòng nâng cấp ứng dụng lên phiên bản mới hơn.</string>
 	
 	<string name="local_index_mi_rename">Đổi tên</string>
@@ -66,7 +66,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="select_search_position">Tìm kiếm gần:</string>
 	<string name="context_menu_item_search">Tìm kiếm</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-\n\t- Offline data manager (download, delete, backup offline data directly in Osmand)
+\n\t- Offline data manager (download, delete, backup offline data directly in OsmAnd)
 \n\t- Favorite points and groups (categorize, delete, manage favorites)
 \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
@@ -195,7 +195,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="install_more">Cài đặt thêm…</string>
 
 	<string name="tip_update_index">Cập nhật của dữ liệu Offline</string>
-	<string name="tip_update_index_t">\tOsmand cung cấp trình quản lý download có thể kiểm tra các bản cập nhật cho dữ liệu offline. 
+	<string name="tip_update_index_t">\tOsmAnd cung cấp trình quản lý download có thể kiểm tra các bản cập nhật cho dữ liệu offline. 
 	\n\tĐể kiểm tra cập nhật, truy xuất vào \'Main Menu\' -> \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
 	\n\tThe availability of updates  is depicted by the following colors:
 	\n\t\'Green\' - indicates data files identical on device and server
@@ -226,7 +226,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
 
 	<string name="tip_osm_improve">Cải thiện dữ liệu OSM</string>
-	<string name="tip_osm_improve_t">\tOsmand uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
 \n\tFor this you need to first provide your OSM login information in \'Main Menu\' -> \'Settings\' -> \'OSM\'.
 \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
@@ -243,11 +243,11 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
-\n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmandMapCreator on a PC.
-\n\tOsmand also supports custom sources.</string>
+\n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
+\n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">Chế độ Ứng dụng</string>
-	<string name="tip_app_mode_t">\tOsmand supports different (customizable) application profiles for different use cases.
+	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
 \n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
 
 	<string name="tip_navigation">Dẫn đường</string>
@@ -263,7 +263,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 \n\tThe map context menu contains all actions referring to a point (location).</string>
 
 	<string name="tip_initial">Thủ thuật</string>
-	<string name="tip_initial_t">\tOsmand là ứng dụng định vị trên Android với nhiều tính năng. 
+	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 
 \n\tĐMột số thủ thuật và mẹo sử dụng được liên kết với màn hình menu chính.</string>
 	<string name="next_button">Tiếp</string>
 	<string name="previous_button">Quay lại</string>
@@ -326,21 +326,21 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="version_index_is_big_for_memory">Chỉ mục \'\'{0}\'\' lớn hơn bộ nhớ</string>
 	<string name="version_index_is_not_supported">Phiên bản chỉ mục \'\'{0}\'\' không được hỗ trợ</string>
 
-	<string name="use_osmand_routing_service">Tìm đường Osmand >20km</string>
+	<string name="use_osmand_routing_service">Tìm đường OsmAnd >20km</string>
 	<string name="use_osmand_routing_service_descr">Sử dụng tính năng tìm đường Offline với khoảng cách dài(đang thử nghiệm)</string>
-	<string name="osmand_routing_experimental">Tìm đường Offline trên Osmand là tính năng thử nghiệm và
+	<string name="osmand_routing_experimental">Tìm đường Offline trên OsmAnd là tính năng thử nghiệm và
 	nó không thể chạy được với khoảng cách trên 20km.\n\nDịch vụ tìm được sẽ tự động chuyển sang dùng CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Không tìm thấy thư mục.</string>
 	<string name="application_dir">Thư mục lưu trữ</string>
-	<string name="application_dir_change_warning">Việc thay đổi thư mục lưu trữ sẽ không di dời hay xóa dữ liệu. Thao tác này phải được tiến hành ngoài ứng dụng Osmand</string>
+	<string name="application_dir_change_warning">Việc thay đổi thư mục lưu trữ sẽ không di dời hay xóa dữ liệu. Thao tác này phải được tiến hành ngoài ứng dụng OsmAnd</string>
 
-	<string name="osmand_net_previously_installed">A previous Osmand version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build…</string>
-	<string name="install_selected_build">Tiếp tục cài đặt Osmand - {0} từ {1} {2} MB ?</string>
-	<string name="loading_builds_failed">Retrieving the list of Osmand builds failed</string>
-	<string name="loading_builds">Đang tải Osmand…</string>
-	<string name="select_build_to_install">Lựa chọn một bản Osmand để cài đặt</string>
+	<string name="install_selected_build">Tiếp tục cài đặt OsmAnd - {0} từ {1} {2} MB ?</string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+	<string name="loading_builds">Đang tải OsmAnd…</string>
+	<string name="select_build_to_install">Lựa chọn một bản OsmAnd để cài đặt</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 
 	<string name="gps_status_app_not_found">Ứng dụng Tín hiệu GPS chưa được cài đặt. Tìm trong Market?</string>
@@ -366,7 +366,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="index_settings_descr">Tải và Quản lý bản đồ Offline hoặc các dữ liệu khác(GPX)</string>
     <string name="index_settings">Dữ liệu Offline</string>
 	<string name="osmand_service">Chạy ngầm</string>
-	<string name="osmand_service_descr">Osmand vẫn chạy khi tắt màn hình thiết bị</string>
+	<string name="osmand_service_descr">OsmAnd vẫn chạy khi tắt màn hình thiết bị</string>
 	<string name="fast_route_mode">Nhanh nhất</string>
 	<string name="fast_route_mode_descr">Bật/tắt tính năng tìm đường đi nhanh nhất</string>
 	<string name="tiles_to_download_estimated_size">Tại mức zoom {0} tải về {1} tiles ({2} MB)</string>
@@ -451,7 +451,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="background_service_wait_int">Thời gian chờ</string>
 	<string name="service_stop_background_service">Tắt dịch vụ dẫn đường ẩn</string>
 	<string name="where_am_i">Vị trí của tôi?</string>
-	<string name="process_navigation_service">Dịch vụ dẫn đường Osmand</string>
+	<string name="process_navigation_service">Dịch vụ dẫn đường OsmAnd</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">giây</string>
@@ -490,7 +490,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Tiếp tục</string>
 	<string name="first_time_download">Tải bản đồ</string>
-	<string name="first_time_msg">Cảm ơn bạn đã chọn Osmand.\nĐể sử dụng các tính năng của ứng dụng, bạn cần có một số dữ liệu offline mà bạn có thể tải về từ Internet (Xem Thiết lập, Dữ liệu Offline) hoặc dữ liệu bạn tự làm. Sau đó, bạn có thể sử dụng ứng dụng để tìm kiếm theo địa chỉ, theo POI, theo thông tin giao thông</string>
+	<string name="first_time_msg">Cảm ơn bạn đã chọn OsmAnd.\nĐể sử dụng các tính năng của ứng dụng, bạn cần có một số dữ liệu offline mà bạn có thể tải về từ Internet (Xem Thiết lập, Dữ liệu Offline) hoặc dữ liệu bạn tự làm. Sau đó, bạn có thể sử dụng ứng dụng để tìm kiếm theo địa chỉ, theo POI, theo thông tin giao thông</string>
 	<string name="search_poi_location">Đang tìm tín hiệu…</string>
 	<string name="search_near_map">Tìm theo vị trí trên bản đồ gần đây nhất</string>
 	<string name="search_nearby">Tìm xung quanh</string>
@@ -517,7 +517,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Hiện các điểm dừng giao thông công cộng trên bản đồ</string>
 	<string name="show_transport_over_map">Hiện các điểm dừng giao thông</string>
-	<string name="hello">Ứng dụng tìm đường Osmand</string>
+	<string name="hello">Ứng dụng tìm đường OsmAnd</string>
 	<string name="update_poi_success">Dữ liệu POI được cập nhật thành công (Đã thêm {0} POI)</string>
 	<string name="update_poi_error_local">Có lỗi khi cập nhật danh sách POI</string>
 	<string name="update_poi_error_loading">Có lỗi khi tải dữ liệu từ máy chủ</string>
@@ -588,7 +588,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="new_route_calculated_dist">New route is calculated, distance</string>
 	<string name="arrived_at_destination">Bạn đã đến điểm đích</string>
 	<string name="invalid_locations">Khu vực không xác định</string>
-	<string name="go_back_to_osmand">Quay lại bản đồ Osmand</string>
+	<string name="go_back_to_osmand">Quay lại bản đồ OsmAnd</string>
 	<string name="close">Đóng</string>
 	<string name="loading_data">Đang đọc dữ liệu…</string>
 	<string name="reading_indexes">Đang đọc dữ liệu…</string>
@@ -661,7 +661,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="settings_activity">Thiết lập</string>
     <string name="show_gps_coordinates_text">Hiện tọa độ GPS trên bản đồ</string>
     <string name="use_internet_to_download_tile">Dùng Internet để tải các tile bị thiếu</string>
-    <string name="app_name">Osmand</string>
+    <string name="app_name">OsmAnd</string>
     <string name="app_description">Ứng dụng dẫn đường cá nhân</string>
 
 <string name="exit_Button">Thoát</string>
