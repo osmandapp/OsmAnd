@@ -10,6 +10,7 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -42,6 +43,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
+	private int shadowColor = Color.WHITE;
 	
 	
 	private Button zoomInButton;
@@ -203,7 +205,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomShadow.draw(canvas);
 				
 		ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
-				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint);
+				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -436,7 +438,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			rulerDrawable.draw(canvas);
 			Rect bounds = rulerDrawable.getBounds();
 			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
-					rulerTextPaint);
+					rulerTextPaint, shadowColor);
 		}
 	}
 

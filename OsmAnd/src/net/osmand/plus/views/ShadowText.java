@@ -17,13 +17,13 @@ public class ShadowText {
 
 
 	
-	public void draw(Canvas cv, float centerX, float centerY, Paint textPaint) {
-		draw(text, cv, centerX, centerY, textPaint);
+	public void draw(Canvas cv, float centerX, float centerY, Paint textPaint, int shadowColor) {
+		draw(text, cv, centerX, centerY, textPaint, shadowColor);
 	}
-	public static void draw(String text, Canvas cv, float centerX, float centerY, Paint textPaint) {
+	public static void draw(String text, Canvas cv, float centerX, float centerY, Paint textPaint, int shadowColor) {
 		int c = textPaint.getColor();
 		textPaint.setStyle(Style.STROKE);
-		textPaint.setColor(Color.WHITE);
+		textPaint.setColor(shadowColor);
 		textPaint.setStrokeWidth(4);
 		cv.drawText(text, centerX, centerY, textPaint);
 		// reset

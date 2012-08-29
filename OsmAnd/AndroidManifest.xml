@@ -62,11 +62,14 @@
 			<category android:name="android.intent.category.DEFAULT"></category>
 			<data android:scheme="geo"></data>
 			</intent-filter>
+			<!-- requires read permission -->
+			<!-- 
 			<intent-filter android:label="OsmAnd">
 			<action android:name="android.intent.action.VIEW" />
     			<category android:name="android.intent.category.DEFAULT" />
 			<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
 			</intent-filter>
+			 -->
 		</activity>
 		<activity android:name="net.osmand.plus.development.TestVoiceActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.LocalIndexesActivity" android:label="@string/local_index_descr_title"></activity>
@@ -76,15 +79,6 @@
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver"/>
-		
-			
-    	<!-- Used for install referrer tracking -->
-    	<receiver android:name="com.google.android.apps.analytics.AnalyticsReceiver"
-        	      android:exported="true">
-      	<intent-filter>
-        		<action android:name="com.android.vending.INSTALL_REFERRER" />
-      		</intent-filter>
-   		</receiver>
     	<activity android:name="net.osmand.plus.activities.OsmandBidForFixActivity"></activity>
 		
 

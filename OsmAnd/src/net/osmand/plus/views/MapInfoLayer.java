@@ -602,6 +602,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
 		boolean bold = routeLayer.getHelper().isFollowingMode();
 		int color = !nightMode.isNightMode() ? Color.BLACK :  Color.BLACK;
+		int shadowColor = nightMode.isNightMode() ? Color.TRANSPARENT :  Color.WHITE;
 		if(paintText.getColor() != color) {
 			paintText.setColor(color);
 			topText.setTextColor(color);
@@ -616,9 +617,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 			paintSmallText.setFakeBoldText(bold);
 			paintSmallSubText.setFakeBoldText(bold);
 		}
+		if(topText.getShadowColor() != shadowColor) {
+			topText.setShadowColor(shadowColor);
+		}
 		// update data on draw
-		rightStack.updateInfo();
-		leftStack.updateInfo();
+		rightStack.updateInfo(shadowColor);
+		leftStack.updateInfo(shadowColor);
 		lanesControl.updateInfo();
 		alarmControl.updateInfo();
 		for (int i = 0; i < statusBar.getChildCount(); i++) {
@@ -742,6 +746,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private static class TopTextView extends TextView implements MapControlUpdateable {
 		private final RoutingHelper routingHelper;
 		private final MapActivity map;
+		private int shadowColor = Color.WHITE;
 
 		public TopTextView(RoutingHelper routingHelper, MapActivity map) {
 			super(map);
@@ -754,7 +759,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 		@Override
 		protected void onDraw(Canvas canvas) {
 			ShadowText.draw(getText().toString(), canvas, getWidth() / 2, getHeight() - 4 * scaleCoefficient,
-					getPaint());
+					getPaint(), shadowColor);
+		}
+		
+		public void setShadowColor(int shadowColor) {
+			this.shadowColor = shadowColor;
+		}
+		
+		public int getShadowColor() {
+			return shadowColor;
 		}
 
 		@Override
