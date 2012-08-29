@@ -313,7 +313,7 @@
   <string name="tip_app_mode">Működési mód</string>
   <string name="tip_app_mode_t">Az Osmand több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre. \n\tA mód kiválasztható a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Működési mód\' alatt.</string>
   <string name="tip_navigation">Navigáció</string>
-  <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menütét kell választani és megjelölni a közlekedési módot.</string>
+  <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menüjét kell választani és megjelölni a közlekedési módot.</string>
   <string name="tip_search">Cím keresés</string>
   <string name="tip_search_t">A térképen helyet keresni cím alapján, koordináta alapján, POI-k közül, vagy Kedvencek közül lehet. \n\t\'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Beállítás célpontnak\' vagy \'Mutasd a térképen\'.</string>
   <string name="tip_map_context_menu">Térképmenü</string>
@@ -595,7 +595,7 @@
   <string name="follow">Követ</string>
   <string name="recalculate_route_to_your_location">Válaszd ki az utazás módját (opcionális):</string>
   <string name="mark_final_location_first">Először válaszd ki a célpontot</string>
-  <string name="get_directions">Útirány</string>
+  <string name="get_directions">Navigáció</string>
   <string name="show_gps_status">GPS állapot mutatása</string>
   <string name="opening_hours">Nyitvatartás</string>
   <string name="opening_changeset">Változások megnyitása…</string>
@@ -884,7 +884,7 @@
   <string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string>
   <string name="use_compass_navigation">Iránytű használata</string>
   <string name="route_updated_loc_found">Amint megvan a pozíció, az útvonal újra lesz tervezve</string>
-  <string name="continue_follow_previous_route_auto">Az előző útvonal navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
+  <string name="continue_follow_previous_route_auto">Az előző navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
   <string name="show_cameras_descr">Traffipaxok megjelenítése (néhány országban tilos használni)</string>
   <string name="show_speed_limits_descr">Sebességhatárok és fekvőrendőrök megjelenítése</string>
   <string name="avoid_toll_roads_descr">Fizetős útszakaszok elkerülése útvonaltervezéskor</string>
@@ -894,10 +894,12 @@
   <string name="tip_recent_changes_0_8_2_t">0.8.2 verzió változásai:
     \n\t* Továbbfejlesztett útvonaltervezés
     \n\t* Dinamikus térkép widgetek
+    \n\t* A térképbeállítások mostantól a térképképernyőről érhetők el
+    \n\t* Képernyő lezárása gomb rögzítési beállít	ásokkal
     </string>
   <string name="map_widget_top_text">Utca neve</string>
   <string name="map_widget_config">Beállítás</string>
-  <string name="map_widget_map_select">Térkép kiválasztás</string>
+  <string name="map_widget_map_select">Térkép kiválasztása</string>
   <string name="map_widget_back_to_loc">Hol vagyok</string>
   <string name="map_widget_lock_screen">Képernyőzár</string>
   <string name="map_widget_compass">Iránytű</string>
