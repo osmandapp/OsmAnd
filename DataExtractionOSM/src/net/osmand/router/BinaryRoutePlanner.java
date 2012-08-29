@@ -224,6 +224,7 @@ public class BinaryRoutePlanner {
 					rlist.add(rr);
 				}
 			}
+			runRecalculation = rlist.size() > 0;
 			if (rlist.size() > 0) {
 				for (RouteSegmentResult rr : rlist) {
 					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
@@ -234,7 +235,6 @@ public class BinaryRoutePlanner {
 						visitedOppositeSegments.put(t, segment);
 					}
 					previous = segment;
-
 				}
 				end = previous;
 			}
