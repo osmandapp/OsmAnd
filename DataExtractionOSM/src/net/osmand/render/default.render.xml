@@ -989,11 +989,15 @@
 		<!-- Special nature, with shaders, often night color unchanged -->
 		<!-- Looks like shaders are not working without color statement, hence color="#100000" introduced for now where missing -->
 		<filter minzoom="11" shader="beach" color="#100000" tag="natural" value="beach"/>
-		<filter minzoom="12" shader="marsh" color="#100000" tag="natural" value="marsh"/>
-		<filter minzoom="12" shader="mud" color="#100000" tag="natural" value="mud"/>
-		<filter minzoom="12" shader="scrub" color="#100000" tag="natural" value="scrub"/>
-		<filter minzoom="10" shader="marsh" color="#100000" tag="natural" value="wetland"/>
-		<filter minzoom="12" shader="orchard" color="#100000" tag="landuse" value="orchard"/>
+		<group>
+			<filter minzoom="10" shader="marsh" color="#100000" tag="natural" value="wetland"/>
+			<filter minzoom="12" shader="orchard" color="#100000" tag="landuse" value="orchard"/>
+			<filter minzoom="12" shader="marsh" color="#100000" tag="natural" value="marsh"/>
+			<filter minzoom="12" shader="mud" color="#100000" tag="natural" value="mud"/>
+			<filter minzoom="12" shader="scrub" color="#100000" tag="natural" value="scrub"/>
+			<groupFilter nightMode="true" shader="" color="#114433"/>
+		</group>
+		
 		<filter minzoom="12" shader="vineyard" color="#abdf96" tag="landuse" value="vineyard"/>	
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="cemetery"/>
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="amenity" value="grave_yard"/>
@@ -1003,7 +1007,8 @@
 		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
 		<filter minzoom="9" shader="nr2" color="#abdf96" color_2="#66cc33" strokeWidth_2="1" tag="leisure" value="nature_reserve"/>
-		<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
+	
+	<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
 	</group>
 	</polygon>
 
