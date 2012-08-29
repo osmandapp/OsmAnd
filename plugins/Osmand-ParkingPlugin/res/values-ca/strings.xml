@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="default_buttons_yes">Sí</string>
 <string name="default_buttons_no">No</string>
-<string name="osmand_app_not_found">L'Osmand no està instal·lat</string>
+<string name="osmand_app_not_found">L\'Osmand no està instal·lat</string>
 <string name="app_name">OsmAnd Aparcament</string>
-<string name="parking_plugin_installed">El connector OsmAnd Aparcament està instal·lat i activat a la configuració de l'OsmAnd.</string>
+<string name="parking_plugin_installed">El connector OsmAnd Aparcament està instal·lat i activat a la configuració de l\'OsmAnd.</string>
 </resources>
