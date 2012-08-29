@@ -476,7 +476,16 @@ public class IndexCreator {
 			// ////////////////////////////////////////////////////////////////////////
 			// 1. creating nodes db to fast access for all nodes and simply import all relations, ways, nodes to it
 			boolean loadFromExistingFile = createPlainOsmDb(progress, readFile, addFilter, false);
-			
+
+			final RelationPropagator rp = new RelationPropagator(renderingTypes);
+			accessor.iterateOverEntities(progress, EntityType.RELATION, new OsmDbVisitor() {
+				@Override
+				public void iterateEntity(Entity e, OsmDbAccessorContext ctx) throws SQLException {
+					log.info("relation " + e);
+					rp.iterateRelation((Relation)e,ctx);
+				}
+			});
+
 			// do not create temp map file and rtree files
 			if (recreateOnlyBinaryFile) {
 				mapFile = new File(workingDir, getMapFileName());

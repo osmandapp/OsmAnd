@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.io.ByteArrayOutputStream;
+import java.util.Map.Entry;
+
 
 import net.osmand.IProgress;
 import net.osmand.osm.Entity;
@@ -23,10 +26,13 @@ import net.osmand.osm.Node;
 import net.osmand.osm.Relation;
 import net.osmand.osm.Way;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 public class OsmDbAccessor implements OsmDbAccessorContext {
 	
-	//private static final Log log = LogFactory.getLog(OsmDbAccessor.class);
+	private static final Log log = LogFactory.getLog(OsmDbAccessor.class);
 	
 	private PreparedStatement pselectNode;
 	private PreparedStatement pselectWay;
@@ -111,8 +117,35 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 				}
 				rs.close();
 			}
+		e.markClean();
 		}
 	}
+
+	public void saveEntityWay(Way e) throws SQLException {
+		if(!e.isDirty())return;
+		if(e.areNodesDirty()){
+			log.error("Saving way nodes NOT IMPLEMENTED!");
+			return;
+		}
+		if(e.areTagsDirty()){
+			PreparedStatement updateStmt = dbConn.prepareStatement("UPDATE ways SET tags=? WHERE id=?");
+			try {
+				ByteArrayOutputStream tags = new ByteArrayOutputStream();
+				for (Entry<String, String> i : e.getTags().entrySet()) {
+					// UTF-8 default
+					tags.write(i.getKey().getBytes("UTF-8"));
+					tags.write(0);
+					tags.write(i.getValue().getBytes("UTF-8"));
+					tags.write(0);
+				}
+				updateStmt.setBytes(1,tags.toByteArray());
+				updateStmt.setLong(2, e.getId());
+			} catch (Exception ex){}
+			updateStmt.execute();
+			dbConn.commit();
+		}
+	}
+
 	
 	@Override
 	public void loadEntityRelation(Relation e) throws SQLException {
@@ -343,6 +376,7 @@ public class OsmDbAccessor implements OsmDbAccessorContext {
 						e = new Relation(curId);
 						readTags(e, rs.getBytes(2));
 					}
+					e.markClean();
 					if (newEntity) {
 						if (prevEntity != null) {
 							toProcess.put(prevEntity);

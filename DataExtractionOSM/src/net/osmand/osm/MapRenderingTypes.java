@@ -418,6 +418,12 @@ public class MapRenderingTypes {
 		}
 		return null;
 	}
+
+	public boolean ruleExists(String tag, String val){
+		Map<String, MapRulType> rules = getEncodingRuleTypes();
+		MapRulType rt = rules.get(constructRuleKey(tag, val));
+		return rt!=null;
+	}
 	
 	public static class MapRulType {
 		MapRulType[] names;

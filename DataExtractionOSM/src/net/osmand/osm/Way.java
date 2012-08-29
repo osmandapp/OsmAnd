@@ -12,6 +12,7 @@ public class Way extends Entity {
 	// lazy loading
 	private TLongArrayList nodeIds = null;
 	private List<Node> nodes = null;
+	private boolean dirtyNodes = false;
 
 	public Way(long id) {
 		super(id);
@@ -41,6 +42,7 @@ public class Way extends Entity {
 			nodeIds = new TLongArrayList();
 		}
 		nodeIds.add(id);
+		dirtyNodes = true;
 	}
 	
 	public long getFirstNodeId(){
@@ -66,6 +68,7 @@ public class Way extends Entity {
 		}
 		nodeIds.add(n.getId());
 		nodes.add(n);
+		dirtyNodes = true;
 	}
 	
 	public void addNode(Node n, int index){
@@ -77,6 +80,7 @@ public class Way extends Entity {
 		}
 		nodeIds.insert(index, n.getId());
 		nodes.add(index, n);
+		dirtyNodes = true;
 	}
 	
 	public long removeNodeByIndex(int i){
@@ -87,6 +91,7 @@ public class Way extends Entity {
 		if(nodes != null && nodes.size() > i){
 			nodes.remove(i);
 		}
+		dirtyNodes = true;
 		return toReturn;
 	}
 	
@@ -114,6 +119,10 @@ public class Way extends Entity {
 		}
 		return nodes;
 	}
+
+	public boolean areNodesDirty(){
+	 return dirtyNodes;
+	}
 	
 	@Override
 	public void initializeLinks(Map<EntityId, Entity> entities) {
@@ -136,6 +145,18 @@ public class Way extends Entity {
 			return null;
 		}
 		return MapUtils.getWeightCenterForNodes(nodes);
+	}
+
+	@Override
+	public boolean isDirty(){
+	 //log.info(this);
+	 return super.isDirty() || areNodesDirty();
+	}
+
+	@Override
+	public void markClean(){
+	 super.markClean();
+	 dirtyNodes = false;
 	}
 	
 	
