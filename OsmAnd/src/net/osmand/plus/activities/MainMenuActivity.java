@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
@@ -22,7 +23,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,11 +30,8 @@ import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.TouchDelegate;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -226,27 +223,7 @@ public class MainMenuActivity extends Activity {
 				}
 			}
 		});
-		closeButton.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				closeButton.performClick();
-				return true;
-			}
-		});
-		//increase touch area for the button
-		final View parent = (View) closeButton.getParent();
-		parent.post( new Runnable() {
-		    // Post in the parent's message queue to make sure the parent
-		    // lays out its children before we call getHitRect()
-		    @Override
-			public void run() {
-				Rect r = new Rect();
-				closeButton.getHitRect(r);
-				r.right += r.width() * 3;
-				r.bottom += r.height() * 3;
-				parent.setTouchDelegate(new TouchDelegate(r, closeButton));
-			}
-		});
+		AndroidUtils.expandClickableArea(closeButton, 1,1,3,3);
 
 		View searchButton = window.findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new OnClickListener() {
