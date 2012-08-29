@@ -39,7 +39,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class MapClusterLayer implements MapPanelLayer {
 
-	private /*final */ static boolean ANIMATE_CLUSTERING = true;
+	private /*final */ static boolean ANIMATE_CLUSTERING = false;
 	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 5;
 	private Log log = LogFactory.getLog(MapClusterLayer.class);
 	
@@ -196,11 +196,13 @@ public class MapClusterLayer implements MapPanelLayer {
 		queue.add(start);
 		RouteDataObject startRoad = st.getRoad();
 		int ZOOM_LIMIT = 13;
-		int TILE_BOUNDARIES = 3;
+		int TILE_BOUNDARIES = 10;
+		int LOCAL_TILE_BOUNDARIES = 2;
 		int zm = 31 - ZOOM_LIMIT;
 		int tileX = startRoad.getPoint31XTile(st.getSegmentStart()) >> zm;
 		int tileY = startRoad.getPoint31YTile(st.getSegmentStart()) >> zm;
 		int outOfTile = 0;
+		int outOfDistance = 0;
 		int segmentsProcessed = 0;
 		float minRatio = 1f;
 		int segmentsMinProcessed = 0;
@@ -218,7 +220,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			}
 			segmentsProcessed++;
 			if(segmentsProcessed > 50) {
-				float ratio = (float) (queue.size() + outOfTile) / segmentsProcessed;
+				float ratio = (float) (queue.size() + outOfTile + outOfDistance) / segmentsProcessed;
 				if(ratio < minRatio) {
 					minRatio = ratio;
 					segmentsMinProcessed = segmentsProcessed;
@@ -274,6 +276,7 @@ public class MapClusterLayer implements MapPanelLayer {
 				}
 				List<RouteSegment> nextSegments = new ArrayList<BinaryRoutePlanner.RouteSegment>();
 				boolean out = false;
+				boolean outDistance = false;
 				while (next != null) {
 					if (!visitedIds.contains(calculateId(next, next.getSegmentStart()))) {
 						int tX = next.getRoad().getPoint31XTile(next.getSegmentStart()) >> zm;
@@ -281,13 +284,13 @@ public class MapClusterLayer implements MapPanelLayer {
 						String highway = next.getRoad().getHighway();
 						if(notClusterAtAll(next.getRoad())) {
 							out = true;
-						} else if(tX == tileX && tY == tileY) {
+						} else if(Math.abs(tX - tileX) < LOCAL_TILE_BOUNDARIES && Math.abs(tY - tileY) < LOCAL_TILE_BOUNDARIES) {
 							nextSegments.add(next);
 						} else {
 							if (!isMajorHighway(highway) && Math.abs(tX - tileX) < TILE_BOUNDARIES && Math.abs(tY - tileY) < TILE_BOUNDARIES) {
 								nextSegments.add(next);
 							} else {
-								out = true;
+								outDistance = true;
 							}
 						}
 					}
@@ -296,14 +299,19 @@ public class MapClusterLayer implements MapPanelLayer {
 				if(out) {
 					outOfTile++;
 					result.add(segment);
+				} else if(outDistance) {
+					outOfDistance++;
+					result.add(segment);
 				} else if(nextSegments.size() > 0) {
 					queue.add(nextSegments);
 				}
 			}
 		}
-		log.info("Current ratio " + ((float) (queue.size() + outOfTile) / segmentsProcessed) + " min ratio " + minRatio
-				+ " min segments procesed " + segmentsMinProcessed);
-		log.info("Processed " + segmentsProcessed + " and borders are " + outOfTile);
+		log.info("Current ratio " + ((float) (queue.size() + outOfTile + outOfDistance) / segmentsProcessed) + " min ratio " + minRatio
+				+ " min segments procesed " + segmentsMinProcessed );
+		String res = "Processed " + segmentsProcessed + " and borders are " + outOfTile + " out because of distance " + outOfDistance;
+		log.info(res);
+		System.out.println(res);
 		
 		return result;
 	}
@@ -311,7 +319,10 @@ public class MapClusterLayer implements MapPanelLayer {
 	public boolean notClusterAtAll(RouteDataObject obj) {
 		String highway = obj.getHighway();
 		if(highway != null) {
-			return highway.equals("trunk") ||  highway.equals("motorway");
+			return highway.equals("trunk") ||  highway.equals("motorway") 
+				   || highway.equals("primary")
+				   || highway.equals("track");
+			
 		}
 		String rte = obj.getRoute();
 		if(rte != null) {
@@ -325,10 +336,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			return false;
 		}
 		return h.equals("primary")
-				|| h.equals("secondary") 
-				//|| h.startsWith("track");
-				//|| h.startsWith("secondary") || h.startsWith("tertiary")
-				;
+				|| h.equals("secondary");
 	}
 
 	@Override
