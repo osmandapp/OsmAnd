@@ -672,7 +672,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					});
 				}
 			}
-			scrDialog.setTitle(tlt);
+			scrDialog.setTitle(tlt + " [" + appMode  +"] ");
 			scr.getDialog().setOnDismissListener(new OnDismissListener() {
 				@Override
 				public void onDismiss(DialogInterface dialog) {

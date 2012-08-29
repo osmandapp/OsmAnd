@@ -483,7 +483,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
 		String appMode = settings.getApplicationMode().toHumanString(view.getContext());
-		list.add(map.getString(R.string.map_widget_reset) + " (" + appMode  +") ");
+		list.add(map.getString(R.string.map_widget_reset) + " [" + appMode  +"] ");
 		list.add(map.getString(R.string.map_widget_top_stack));
 		list.addAll(mapInfoControls.getTop());
 		list.add(map.getString(R.string.map_widget_right_stack));
