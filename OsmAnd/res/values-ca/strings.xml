@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -273,24 +273,14 @@
 <string name="offline_edition">Edició fora de línia</string>
 <string name="offline_edition_descr">Utilitza sempre l\'edició fora de línia</string>
 <string name="local_openstreetmap_descr_title">Edició asincrònica de l\'OSM:</string>
-<string name="tip_recent_changes_0_7_0_t">Canvis a la versió 0.7.0:
-	\n\t- Dades fora de línia amb articles de la Viquipèdia
-	\n\t- Mapes actualitzats
-	\n\t- Altres petites millores
-	</string>
+<string name="tip_recent_changes_0_7_0_t">Canvis a la versió 0.7.0: \n\t- Dades fora de línia amb articles de la Viquipèdia \n\t- Mapes actualitzats \n\t- Altres petites millores </string>
 <string name="accessibility_mode_descr">Activa les característiques d\'accessibilitat</string>
 <string name="update_poi_does_not_change_indexes">Els canvis realitzats en els PDI a l\'aplicació no afecten els fitxers de mapa baixats, els canvis es desen en un fitxer local.</string>
 <string name="global_app_allocated_memory_descr">Memòria assignada %1$s MB (límit de l\'Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Memòria assignada</string>
-<string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l\'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB).
-        Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</string>
+<string name="native_app_allocated_memory_descr">Memòria nativa total assignada a l\'aplicació %1$s MB (Dalvik %2$s MB, altres %3$s MB). Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="switch_to_raster_map_to_see">No s\'ha trobat cap mapa de vectors fora de línia per aquesta localització. Podeu baixar-ne un a Configuració (dades fora de línia) o canviar a mapes en línia.</string>
-<string name="tip_recent_changes_0_7_2_t">Canvis a la versió 0.7.2:
-\n\t- Renderitzaió nativa per tots els dispositius
-\n\t- Edició fora de línia dels PDI
-\n\t- Accessibilitat
-\n\t- Molts errors de programació solucionats
-	</string>
+<string name="tip_recent_changes_0_7_2_t">Canvis a la versió 0.7.2: \n\t- Renderitzaió nativa per tots els dispositius \n\t- Edició fora de línia dels PDI \n\t- Accessibilitat \n\t- Molts errors de programació solucionats </string>
 <string name="global_app_settings">Paràmetres globals de l\'aplicació</string>
 <string name="user_name_descr">És necessari per a les trameses a openstreetmap.org</string>
 <string name="user_password_descr">És necessària per a les trameses a openstreetmap.org</string>
@@ -413,51 +403,9 @@
 <string name="reading_cached_tiles">S\'està llegint les tessel·les emmagatzemades...</string>
 <string name="specified_dir_doesnt_exist">No s\'ha trobat el directori especificat.</string>
 <string name="application_dir">Directori d\'emmagatzematge</string>
-<string name="osmand_long_description_1000_chars">
-	        OsmAnd (OpenStreetMap Android)
-
-		L\'OsmAnd és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
-
-		Algunes de les característiques centrals són:
-		- Dades fora de línia, se\'n pot configurar el directori pels mapes de tessel·les o de vectors
-		- Mapes de vectors compactes de tot el món
-		- Cerca fora de línia d\'adreces i llocs
-		- Baixada personalitzada de l\'àrea d\'un mapa de tessel·les 
-		- Modalitats cotxe, bicicleta i vianant
-		- Diverses capes de mapes amb el nivell de transparència personalitzada alhora
-		- Càlcul de rutes fora de línia per distàncies curtes (experimental)
-
-		Limitacions de l\'OsmAnd Free:
-		- Nombre de baixades de mapes
-		- No es té accés fora de línia als PDI de la Viquipèdia
-
-		L\'OsmAnd encara està en desenvolupament actiu i depèn del suport basat en «donacions» per ajudar a què el projecte es continuï desenvolupant.
-	</string>
-<string name="osmand_plus_long_description_1000_chars">
-        OsmAnd+ (OSM Direccions de navegació automatitzades)
-		L\'OsmAnd és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu.
-
-		L\'OsmAnd+ és una aplicació basada en les donacions. Comprant-lo estareu donant suport al projecte i en rebreu les darreres actualitzacions.
-
-                Algunes de les característiques centrals són:
-                - Nova característica Viquipèdia fora de línia (permet baixar els PDI de la Viquipèdia)
-		- Dades fora de línia, se\'n pot configurar el directori pels mapes de tessel·les o de vectors
-		- Mapes de vectors compactes de tot el món
-		- Cerca fora de línia d\'adreces i llocs
-		- Baixada personalitzada de l\'àrea d\'un mapa de tessel·les 
-		- Modalitats cotxe, bicicleta i vianant
-		- Diverses capes de mapes amb el nivell de transparència personalitzada alhora
-		- Càlcul de rutes fora de línia per distàncies curtes (experimental)
-  </string>
-<string name="tip_recent_changes_0_8_1_t">Canvis a la versió 0.8.1:
-	\n\t* Rutes més precises (una mica més lent)
-	\n\t* Torna a calcular rutes de manera intel·ligent i de pressa
-	\n\t* Direcció per carrils
-	\n\t* Informació sobre límits de velocitat, radars i bandes rugoses
-	\n\t* Millores en l\'orientació per veu en carretera
-	\n\t* Connector Aparcament («On he aparcat el cotxe?»)
-	\n\t* Giny Habilita/deshabilita el registre
-    </string>
+<string name="osmand_long_description_1000_chars"> OsmAnd (OpenStreetMap Android) L\'OsmAnd és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu. Algunes de les característiques centrals són: - Dades fora de línia, se\'n pot configurar el directori pels mapes de tessel·les o de vectors - Mapes de vectors compactes de tot el món - Cerca fora de línia d\'adreces i llocs - Baixada personalitzada de l\'àrea d\'un mapa de tessel·les - Modalitats cotxe, bicicleta i vianant - Diverses capes de mapes amb el nivell de transparència personalitzada alhora - Càlcul de rutes fora de línia per distàncies curtes (experimental) Limitacions de l\'OsmAnd Free: - Nombre de baixades de mapes - No es té accés fora de línia als PDI de la Viquipèdia L\'OsmAnd encara està en desenvolupament actiu i depèn del suport basat en «donacions» per ajudar a què el projecte es continuï desenvolupant. </string>
+<string name="osmand_plus_long_description_1000_chars"> OsmAnd+ (OSM Direccions de navegació automatitzades) L\'OsmAnd és una aplicació de navegació de codi font obert amb accés a la gran font de dades populars d\'OpenStreetMap. Totes les dades de mapes inclouen mapes de tessel·les i de vectors que poden emmagatzemar-se a la targeta de memòria del telèfon pel seu ús fora de línia. L\'OsmAnd també té la funcionalitat de càlcul de rutes fora de línia i en línia que inclou orientació per veu. L\'OsmAnd+ és una aplicació basada en les donacions. Comprant-lo estareu donant suport al projecte i en rebreu les darreres actualitzacions. Algunes de les característiques centrals són: - Nova característica Viquipèdia fora de línia (permet baixar els PDI de la Viquipèdia) - Dades fora de línia, se\'n pot configurar el directori pels mapes de tessel·les o de vectors - Mapes de vectors compactes de tot el món - Cerca fora de línia d\'adreces i llocs - Baixada personalitzada de l\'àrea d\'un mapa de tessel·les - Modalitats cotxe, bicicleta i vianant - Diverses capes de mapes amb el nivell de transparència personalitzada alhora - Càlcul de rutes fora de línia per distàncies curtes (experimental) </string>
+<string name="tip_recent_changes_0_8_1_t">Canvis a la versió 0.8.1: \n\t* Rutes més precises (una mica més lent) \n\t* Torna a calcular rutes de manera intel·ligent i de pressa \n\t* Direcció per carrils \n\t* Informació sobre límits de velocitat, radars i bandes rugoses \n\t* Millores en l\'orientació per veu en carretera \n\t* Connector Aparcament («On he aparcat el cotxe?») \n\t* Giny Habilita/deshabilita el registre </string>
 <string name="rendering_attr_contourLines_description">Selecciona el nivell mínim de zoom per mostrar el mapa si està disponible. Serà necessari el fitxer SRTM separat.</string>
 <string name="gpx_index_settings_descr"> (inclou l\'analitzador de GPX)</string>
 <string name="osmand_monitoring_description">Mostra la configuració que us facilitarà l\'enregistrament de les vostres excursions en fitxers GPX o bé el seguiment d\'una traça per mitjà d\'un servei web.</string>
@@ -523,4 +471,38 @@
 <string name="map_widget_view_direction">Direcció de visió</string>
 <string name="clear_all">Neteja-ho tot</string>
 <string name="recalculate_route_to_your_location">Mode de transport:</string>
+<string name="use_short_object_names_descr">Utilitza el nom curt dels objectes en el mode d\'exploració tàctil</string>
+<string name="amenity_type_user_defined">Usuari definit</string>
+<string name="tip_osm_improve">Millora de les dades d\'OSM</string>
+<string name="tip_select_destination_point">Selecciona la destinació</string>
+<string name="choose_auto_follow_route">Visualització del mapa centrada automàticament</string>
+<string name="auto_follow_route_navigation">Només centra automàticament en la navegació</string>
+<string name="auto_follow_route_navigation_descr">Visualització del mapa centrada automàticament només quan es navega.</string>
+<string name="auto_follow_location_enabled">S\'està utilitzant la visualització del mapa centrada automàticament.</string>
+<string name="file_can_not_be_renamed">No s\'ha pogut canviar el nom al fitxer.</string>
+<string name="local_index_mi_rename">Canvia el nom</string>
+<string name="file_with_name_already_exist">Ja existeix un fitxer amb el mateix nom.</string>
+<string name="show_more_map_detail_descr">Mostra més detalls als mapes de vectors (carreteres,etc.) des dels nivells inferiors de zoom</string>
+<string name="gpx_option_destination_point">Utilitza la destinació actual</string>
+<string name="install_more">Instal·la\'n més...</string>
+<string name="tip_search">Cerca</string>
+<string name="km_h">km/h</string>
+<string name="downloading">S\'està baixant...</string>
+<string name="closing_changeset">S\'està tancant el conjunt de canvis...</string>
+<string name="loading_cities">S\'està carregant les ciutats...</string>
+<string name="loading">S\'està carregant...</string>
+<string name="daynight_mode_day">Dia</string>
+<string name="daynight_mode_night">Nit</string>
+<string name="daynight_mode_auto">Alba/capvespre</string>
+<string name="daynight_mode_sensor">Sensor de llum</string>
+<string name="daynight">Mode dia/nit</string>
+<string name="download_files_question">Voleu baixar {0} fitxer(s) ({1} MB)?</string>
+<string name="items_were_selected">{0} ítem(s) seleccionat(s)</string>
+<string name="deselect_all">No seleccionis res</string>
+<string name="select_all">Selecciona-ho tot</string>
+<string name="fast_route_mode">La ruta més ràpida</string>
+<string name="fast_route_mode_descr">Activeu per calcular la ruta més ràpida o desactiveu per calcular la més curta </string>
+<string name="context_menu_item_download_map">Baixa el mapa</string>
+<string name="tiles_to_download_estimated_size">Per al nivell de zoom {0} es baixaran {1} tessel·les ({2} MB)</string>
+<string name="default_buttons_ok">D'acord</string>
 </resources>
