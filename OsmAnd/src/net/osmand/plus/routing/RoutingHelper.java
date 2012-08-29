@@ -183,7 +183,7 @@ public class RoutingHelper {
 			} else {
 				float posTolerance = POSITION_TOLERANCE;
 				if(currentLocation.hasAccuracy()) {
-					posTolerance = POSITION_TOLERANCE / 3 + currentLocation.getAccuracy();
+					posTolerance = POSITION_TOLERANCE / 2 + currentLocation.getAccuracy();
 				}
 				// 1. Update current route position status according to latest received location
 				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
@@ -205,7 +205,7 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction (very similar to 2?)
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) >  posTolerance) {
+				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) >  2 * posTolerance) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					calculateRoute = true;
 				}
