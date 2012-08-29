@@ -68,7 +68,7 @@ public class MainMenuActivity extends Activity {
 						intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "osmand.app@gmail.com" }); //$NON-NLS-1$
 						intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 						intent.setType("vnd.android.cursor.dir/email"); //$NON-NLS-1$
-						intent.putExtra(Intent.EXTRA_SUBJECT, "Osmand bug"); //$NON-NLS-1$
+						intent.putExtra(Intent.EXTRA_SUBJECT, "OsmAnd bug"); //$NON-NLS-1$
 						StringBuilder text = new StringBuilder();
 						text.append("\nDevice : ").append(Build.DEVICE); //$NON-NLS-1$
 						text.append("\nBrand : ").append(Build.BRAND); //$NON-NLS-1$

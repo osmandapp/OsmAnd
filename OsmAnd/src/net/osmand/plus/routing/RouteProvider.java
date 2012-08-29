@@ -58,10 +58,10 @@ import android.location.Location;
 
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
-	private static final String OSMAND_ROUTER = "OsmandRouter";
+	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	
 	public enum RouteService {
-		OSMAND("Osmand (offline)"), CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		OSMAND("OsmAnd (offline)"), CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;

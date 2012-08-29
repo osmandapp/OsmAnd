@@ -113,7 +113,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
 		Preference offlineData = screen.findPreference("local_indexes");
 		if (offlineData == null) {
-			log.error("OsmandMonitoringPlugin: Index settings preference not found !");
+			log.error("OsmAndMonitoringPlugin: Index settings preference not found !");
 		} else {
 			offlineData.setSummary(offlineData.getSummary() + " " + app.getString(R.string.gpx_index_settings_descr));
 		}

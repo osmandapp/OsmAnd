@@ -333,7 +333,7 @@ public class BinaryInspector {
 	public static void printFileInformation(String fileName,VerboseInfo verbose) throws IOException {
 		File file = new File(fileName);
 		if(!file.exists()){
-			println("Binary Osmand index " + fileName + " was not found.");
+			println("Binary OsmAnd index " + fileName + " was not found.");
 			return;
 		}
 		printFileInformation(file,verbose);
@@ -573,10 +573,10 @@ public class BinaryInspector {
 		if(warning != null){
 			println(warning);
 		}
-		println("Inspector is console utility for working with binary indexes of Osmand.");
+		println("Inspector is console utility for working with binary indexes of OsmAnd.");
 		println("It allows print info about file, extract parts and merge indexes.");
 		println("\nUsage for print info : inspector [-vaddress] [-vmap] [-vpoi] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLan] [file]");
-		println("  Prints information about [file] binary index of Osmand.");
+		println("  Prints information about [file] binary index of OsmAnd.");
 		println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
 		println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");

@@ -33,7 +33,7 @@ public class MapTileDownloader {
 	private static MapTileDownloader downloader = null;
 	private static Log log = LogUtil.getLog(MapTileDownloader.class);
 	
-	public static String USER_AGENT = "Osmand~";
+	public static String USER_AGENT = "OsmAnd~";
 	
 	
 	private ThreadPoolExecutor threadPoolExecutor;

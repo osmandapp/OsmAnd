@@ -541,7 +541,7 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_OSM_BUG_NAME = 
-		new StringPreference("user_osm_bug_name", "NoName/Osmand").makeGlobal();
+		new StringPreference("user_osm_bug_name", "NoName/OsmAnd").makeGlobal();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> USER_PASSWORD = 
