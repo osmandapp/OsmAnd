@@ -9,8 +9,8 @@ import java.util.Set;
 
 import net.osmand.osm.OSMSettings.OSMTagKey;
 
-
 public abstract class Entity {
+
 	public enum EntityType {
 		NODE,
 		WAY,
@@ -102,6 +102,7 @@ public abstract class Entity {
 	private Map<String, String> tags = null;
 	private final long id;
 	private boolean dataLoaded;
+	private boolean dirtyTags = false;
 	
 	public Entity(long id) {
 		this.id = id;
@@ -118,6 +119,19 @@ public abstract class Entity {
 	public long getId() {
 		return id;
 	}
+
+	public boolean areTagsDirty(){
+	 return dirtyTags;
+	}
+
+	public boolean isDirty(){
+	 //log.info(this);
+	 return areTagsDirty();
+	}
+
+	public void markClean(){
+	 dirtyTags = false;
+	}
 	
 	public String removeTag(String key){
 		return tags.remove(key);
@@ -128,6 +142,7 @@ public abstract class Entity {
 			for (String key : keys){
 				tags.remove(key);
 			}
+			dirtyTags = true;
 		}
 	}
 	
@@ -135,6 +150,7 @@ public abstract class Entity {
 		if(tags == null){
 			tags = new LinkedHashMap<String, String>();
 		}
+		dirtyTags = true;
 		return tags.put(key, value);
 	}
 	

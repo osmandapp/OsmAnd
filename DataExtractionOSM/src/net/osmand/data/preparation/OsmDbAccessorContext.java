@@ -11,6 +11,11 @@ public interface OsmDbAccessorContext {
 	 * Load way with points (with tags) and tags 
 	 */
 	public void loadEntityWay(Way e) throws SQLException;
+
+	/**
+	 * Save way with points (NOT implemented yet) and tags 
+	 */
+	public void saveEntityWay(Way e) throws SQLException;
 	
 	/**
 	 * Load one level relation members :

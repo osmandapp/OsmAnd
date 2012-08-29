@@ -10,6 +10,7 @@ public class Node extends Entity implements Serializable {
 	private double longitude;
 	// currently not used
 //	private boolean visible = true;
+	private boolean dirtyLL = false;
 	
 	public Node(double latitude, double longitude, long id){
 		super(id);
@@ -33,9 +34,11 @@ public class Node extends Entity implements Serializable {
 	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+		dirtyLL = true;
 	}
 	
 	public void setLongitude(double longitude) {
+		dirtyLL = true;
 		this.longitude = longitude;
 	}
 	
@@ -49,5 +52,17 @@ public class Node extends Entity implements Serializable {
 		// nothing to initialize
 		
 	}
+
+	@Override
+	public boolean isDirty(){
+	 return super.isDirty() || dirtyLL;
+	}
+
+	@Override
+	public void markClean(){
+	 super.markClean();
+	 dirtyLL = false;
+	}
+	
 
 }
