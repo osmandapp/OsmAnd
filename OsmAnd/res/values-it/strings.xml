@@ -169,7 +169,7 @@
   <string name="local_indexes_cat_tts">Dati voce (TTS)</string>
   <string name="local_indexes_cat_voice">Dati voce (media)</string>
   <string name="local_indexes_cat_gpx">Dati GPX</string>
-  <string name="local_indexes_cat_tile">Mappe online (tiles)</string>
+  <string name="local_indexes_cat_tile">Mappe online (tasselli)</string>
   <string name="local_indexes_cat_map">Mappe offline (vettori)</string>
   <string name="local_indexes_cat_poi">Dati PDI</string>
   <string name="ttsvoice">Voce TTS</string>
@@ -297,7 +297,7 @@
   <string name="poi_filter_for_tourists">Per Turisti</string>
   <string name="poi_filter_fuel">Benzina</string>
   <string name="poi_filter_namefinder">Ricerca nomi Online</string>
-  <string name="reading_cached_tiles">Lettura tiles dalla cache…</string>
+  <string name="reading_cached_tiles">Lettura tasselli dalla cache…</string>
   <string name="version_index_is_big_for_memory">L\'indice \'\'{0}\'\' è troppo grande per l\'attuale memoria</string>
   <string name="version_index_is_not_supported">La versione di indice \'\'{0}\'\' non è supportata</string>
   <string name="use_osmand_routing_service">Routing OsmAnd &gt; 20km</string>
@@ -331,7 +331,7 @@
   <string name="reload">Ricarica</string>
   <string name="fast_route_mode">Percorso più Veloce</string>
   <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce; disabilita per il percorso più corto </string>
-  <string name="tiles_to_download_estimated_size">Per lo zoom {0} download {1} tiles ({2} MB)</string>
+  <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>
   <string name="context_menu_item_download_map">Download mappa</string>
   <string name="select_max_zoom_preload_area">Seleziona lo zoom massimo per il preload</string>
   <string name="maps_could_not_be_downloaded">Non è stato possibile scaricare questa mappa</string>
@@ -350,7 +350,7 @@
   <string name="phone">Telefono</string>
   <string name="download_type_to_filter">Tipo filtro</string>
   <string name="use_high_res_maps">Display ad alta risoluzione</string>
-  <string name="use_high_res_maps_descr">Migliora la qualità della mappa per dispositivi ad alta densità</string>
+  <string name="use_high_res_maps_descr">Non stira (né offusca) i tasselli della mappa nei dispositivi con display ad alta densità</string>
   <string name="unknown_location">Posizione sconosciuta</string>
   <string name="download_files">Scarica</string>
   <string name="context_menu_item_search_transport">Ricerca trasporto</string>
@@ -451,7 +451,7 @@
   <string name="map_orientation_portrait">Verticale</string>
   <string name="map_orientation_landscape">Orizzontale</string>
   <string name="map_screen_orientation">Orientamento dello schermo mappa</string>
-  <string name="map_screen_orientation_descr">Portrait, landscape, o come il sistema (device)</string>
+  <string name="map_screen_orientation_descr">Ritratto, paesaggio, o come il sistema (device)</string>
   <string name="opening_hours_not_supported">Il formato dell\'ora di apertura non è supportato per la modifica</string>
   <string name="add_new_rule">Aggiungere una nuova regola</string>
   <string name="transport_Routes">Percorsi</string>
@@ -494,7 +494,7 @@
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Max zoom online</string>
-  <string name="max_level_download_tile_descr">Scegliere il massimo livello di zoom usando internet</string>
+  <string name="max_level_download_tile_descr">Scegliere il massimo livello di zoom per scaricare le immagini delle mappe online</string>
   <string name="route_general_information">Distanza totale = %1$s, tempo di viaggio = %2$d h %3$d m.</string>
   <string name="router_service_descr">Scegliere il servizio di generazione percorso</string>
   <string name="router_service">Generazione percorso</string>
@@ -595,7 +595,7 @@
   <string name="map_view_3d">Vista mappa 3D</string>
   <string name="show_poi_over_map_description">Visualizzare POI sulla mappa (usa l\'ultimo filtro scelto)</string>
   <string name="show_poi_over_map">Visualizza PDI</string>
-  <string name="map_tile_source_descr">Scegliere la sorgente per i tasselli</string>
+  <string name="map_tile_source_descr">Scegliere la sorgente per i tasselli online o in cache</string>
   <string name="map_tile_source">Sorgente dei tasselli della mappa</string>
   <string name="map_source">Sorgente mappa</string>
   <string name="use_internet">Usare internet</string>
@@ -603,7 +603,7 @@
   <string name="map_preferences">Mappa</string>
   <string name="settings_activity">Impostazioni</string>
   <string name="show_gps_coordinates_text">Visualizzare coordinate GPS sulla mappa</string>
-  <string name="use_internet_to_download_tile">Utilizzare internet per scaricare i tasselli mancanti</string>
+  <string name="use_internet_to_download_tile">Utilizzare internet per scaricare i tasselli della mappa mancanti</string>
   <string name="app_description">Applicazione di navigazione</string>
   <string name="exit_Button">Uscita</string>
   <string name="map_Button">Mappa</string>
@@ -711,13 +711,13 @@
   <string name="basemap_was_selected_to_download">La mappa di base è richiesta per il funzionamento corretto dell\'applicazione ed è stata selezionata per il download.</string>
   <string name="gpx_index_settings_descr">" (include l\'analizzatore GPX)"</string>
   <string name="map_online_plugin_is_not_installed">Abilita il plugin per le mappe online per visualizzare altre sorgenti</string>
-  <string name="map_online_data">Mappe online (tiles)</string>
-  <string name="map_online_data_descr">Usa le mappe online (scarica e archivia tiles sulla scheda SD)</string>
+  <string name="map_online_data">Mappe online (tasselli)</string>
+  <string name="map_online_data_descr">Usa le mappe online (scarica e archivia i tasselli sulla scheda SD)</string>
   <string name="online_map_settings">Mappe online</string>
-  <string name="online_map_settings_descr">Configura sorgenti di mappe online o da tiles scaricate</string>
+  <string name="online_map_settings_descr">Configura le sorgenti delle mappe online o dei tasselli in cache</string>
   <string name="map_settings">- Impostazioni Mappa</string>
   <string name="map_settings_descr">Configura la visualizzazione della mappa</string>
-  <string name="osmand_rastermaps_plugin_description">Questo plugin facilita l\'uso di una serie di mappe online o a tiles (in cache) come mappe di base o overlay / underlay. Le mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd.</string>
+  <string name="osmand_rastermaps_plugin_description">Questo plugin facilita l\'uso di una serie di mappe online o a tasselli (in cache) come mappe di base o come sovrapposizione/sfondo. Le mappe possono essere anche preparate offline e copiate nella cartella di OsmAnd.</string>
   <string name="osmand_background_plugin_description">Mostra le impostazioni per abilitare il tracking e navigazione in modalità attesa (a schermo spento) tramite il risveglio periodico del GPS.</string>
   <string name="osmand_accessibility_description">Mostra impostazioni per funzionalità speciali per l\'accessibilità.</string>
   <string name="extra_settings">Impostazioni avanzate</string>
@@ -977,4 +977,40 @@
 \n\tOsmAnd supporta anche sorgenti su misura. </string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.↵
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
+<string name="osmand_short_description_80_chars">OsmAnd è un'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
+<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)↵
+OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell'itinerario online che offline compreso la voce guida curva per curva.↵
+
+Alcune delle caratteristiche principali:↵
+- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵
+- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵
+- Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵
+- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵
+- Ricerca offline per indirizzi e luoghi (PDI)↵
+- Calcolo del percorso per brevi distanze (sperimentale)↵
+- Modalità automobile, bicicletta e pedonale con:↵
+- Commutazione opzionale automatica della vista giorno/notte↵
+- Zoom automatico opzionale in base alla velocità↵
+- Allineamento della mappa in base alla direzione o alla bussola↵
+↵
+Limitazioni di questa versione gratuita di OsmAnd:↵
+- Numero di mappe scaricabili limitato
+- Non funziona l'accesso ai PDI offline di Wikipedia↵
+↵
+OsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net↵</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd è un'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
+<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzata Navigazione Direzioni)↵
+OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell'itinerario online che offline compreso la voce guida curva per curva.↵
+
+Alcune delle caratteristiche principali:↵
+- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵
+- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵
+- Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵
+- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵
+- Ricerca offline per indirizzi e luoghi (PDI)↵
+- Calcolo del percorso per brevi distanze (sperimentale)↵
+- Modalità automobile, bicicletta e pedonale con:↵
+- Commutazione opzionale automatica della vista giorno/notte↵
+- Zoom automatico opzionale in base alla velocità↵
+- Allineamento della mappa in base alla direzione o alla bussola↵</string>
 </resources>
