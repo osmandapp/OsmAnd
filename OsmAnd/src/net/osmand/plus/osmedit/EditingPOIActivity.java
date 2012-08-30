@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -38,11 +39,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -166,7 +170,7 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	private Dialog createPOIDialog(final int dialogID, final Bundle args) {
-		Dialog dlg = new Dialog(ctx);
+		final Dialog dlg = new Dialog(ctx);
 		dlg.setContentView(R.layout.editing_poi);
 		nameText = ((EditText)dlg.findViewById(R.id.Name));
 		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
@@ -243,6 +247,116 @@ public class EditingPOIActivity implements DialogProvider {
 			}
 		});
 		
+		final Button advancedModeButton = ((Button)dlg.findViewById(R.id.advancedMode));
+		final Map<String, String> additionalTags = new HashMap<String, String>();
+		advancedModeButton.setOnClickListener(new View.OnClickListener() {	
+			@Override
+			public void onClick(View v) {
+				final TableLayout layout = ((TableLayout)dlg.findViewById(R.id.advancedModeTable));	
+				TableLayout.LayoutParams tlParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);          
+	            layout.setLayoutParams(tlParams);
+	            layout.setColumnStretchable(1, true);
+				layout.setVisibility((layout.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE);
+
+				if (layout.getVisibility() == View.VISIBLE) {
+					Button addTag = (Button) dlg.findViewById(R.id.addTag);
+					addTag.setVisibility((layout.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE);
+					addTag.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+				            final TableRow newTagRow = new TableRow(ctx);				            
+				            TableRow.LayoutParams tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);          
+				            tlp.leftMargin = 5;
+				            newTagRow.setLayoutParams(tlp);
+
+				            final Button tag = new Button(ctx);
+				            final EditText value = new EditText(ctx);				            
+				            final Button delete = new Button(ctx);
+				            
+				            tag.setLayoutParams(tlp);
+				            tag.setText("<Tag>");
+				            tag.setOnClickListener(new View.OnClickListener() {
+				    			@Override
+				    			public void onClick(View v) {
+//				    				Comment: To exclude basic tags OSMTagKey.NAME, OSMTagKey.OPENING_HOURS, OSMTagKey.PHONE, OSMTagKey.WEBSITE;
+				    				final OSMTagKey[] allValues = OSMTagKey.values();
+				    				final OSMTagKey[] values = new OSMTagKey[allValues.length-4];
+				    				int j = 0;
+				    				for (int i = 0; i < allValues.length; i++) {
+				    					if (	(allValues[i] != OSMTagKey.NAME) && 
+				    							(allValues[i] != OSMTagKey.OPENING_HOURS) && 
+				    							(allValues[i] != OSMTagKey.PHONE) && 
+				    							(allValues[i] != OSMTagKey.WEBSITE)		) {
+				    						values[j] = allValues[i];
+				    						j++;
+				    					}
+				    				}
+				    				final String[] vals = new String[values.length];
+				    				for (int i=0; i<values.length; i++) {
+				    					vals[i] = values[i].getValue(); 
+				    				}		
+				    				Builder builder = new AlertDialog.Builder(ctx);
+				    				builder.setItems(vals, new Dialog.OnClickListener() {
+				    					@Override
+				    					public void onClick(DialogInterface dialog, int which) {
+				    						tag.setText(vals[which]);
+				    						tag.invalidate();
+				    					}
+				    					
+				    				});		
+				    				builder.create();
+				    				builder.show();
+				    			}
+				    		});			            
+				            tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.FILL_PARENT);
+				            tlp.leftMargin = 5;
+				            tlp.rightMargin = 5;
+				            tlp.width = 80;
+				            value.setLayoutParams(tlp);
+				            value.setHint("Value");
+				            value.addTextChangedListener(new TextWatcher() {
+				    			@Override
+				    			public void afterTextChanged(Editable s) {
+				    				if ((newTagRow != null) 
+											&& (tag != null) && (value != null) 
+											&& (tag.getText() != null) && (value.getText() != null)
+											&& (!tag.getText().equals("")) && (!value.getText().equals(""))) {
+				    					System.out.println(tag.getText());
+										additionalTags.put(tag.getText().toString(), value.getText().toString());
+									}
+				    			}
+
+				    			@Override
+				    			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+				    			@Override
+				    			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+				    		});
+				            tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
+				            tlp.gravity = Gravity.CENTER;
+				            tlp.rightMargin = 5;
+				            delete.setLayoutParams(tlp);
+				            delete.setText("X");
+				            delete.setOnClickListener(new View.OnClickListener() {
+				            	@Override
+				            	public void onClick(View v) {
+				            		layout.removeView(newTagRow);
+				            		layout.invalidate();
+				            		additionalTags.remove(tag.getText().toString());
+				            	}
+				            });      
+				            newTagRow.addView(tag);
+				            newTagRow.addView(value);
+				            newTagRow.addView(delete);			            
+				            layout.addView(newTagRow);
+				            layout.invalidate();
+						}
+					});
+				}
+				v.invalidate();
+			}
+		});
+		
 		((Button)dlg.findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -296,6 +410,11 @@ public class EditingPOIActivity implements DialogProvider {
 				String phone = phoneText.getText().toString();
 				if (phone.length() > 0 ){
 					n.putTag(OSMTagKey.PHONE.getValue(),phone);
+				}
+				if ((additionalTags != null) && (!additionalTags.isEmpty())) {
+					for (String tk : additionalTags.keySet()) {
+						n.putTag(tk, additionalTags.get(tk));
+					}
 				}
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), new Runnable() {
 					@Override
