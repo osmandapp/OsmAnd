@@ -880,7 +880,7 @@
   <string name="show_speed_limits">Montrer les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
   <string name="tip_recent_changes_0_8_2_t">"Changements en 0.8.2 : \n\t* Itinéraire amélioré "</string>
-  <string name="screen_is_locked">To unlock screen press lock icon</string>
+  <string name="screen_is_locked">Déverrouiller l'écran en appuyant sur le cadenas</string>
   <string name="map_widget_top_text">Nom de rue</string>
   <string name="map_widget_config">Configuration</string>
   <string name="map_widget_map_select">Sélection de la carte</string>
@@ -947,4 +947,6 @@
 \n\t\'Jour\'- Toujours utiliser le mode jour
 \n\t\'Nuit\'- Toujours utiliser le mode nuit
 \n\t\'Détection de la luminosité\'- L\'affichage est contrôllé par le capteur de luminosité de votre appareil, s\'il existe</string>
+<string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
 </resources>
