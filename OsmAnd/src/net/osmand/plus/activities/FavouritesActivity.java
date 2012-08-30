@@ -36,6 +36,8 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
@@ -635,7 +637,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 			
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.favouritedistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
@@ -647,8 +648,9 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this));
-			label.setText(model.getName());
+			String distance = OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this) + "  ";
+			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(R.color.color_distance), 0, distance.length() - 1, 0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			if(selectionMode && model.isStored()){
 				ch.setVisibility(View.VISIBLE);

@@ -66,7 +66,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.Spannable;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -708,7 +710,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			}
 			float[] mes = null;
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.poidistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
 			Location loc = location;
@@ -717,8 +718,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				LatLon l = amenity.getLocation();
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 			}
-			String str = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
-			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
 				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
@@ -751,11 +750,13 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				}
 			}
 
-			if(mes == null){
-				distanceLabel.setText(""); //$NON-NLS-1$
-			} else {
-				distanceLabel.setText(" " + OsmAndFormatter.getFormattedDistance((int) mes[0], SearchPOIActivity.this)); //$NON-NLS-1$
+			String distance = "  ";
+			if(mes != null){
+				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], SearchPOIActivity.this) + "  "; //$NON-NLS-1$
 			}
+			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
+			label.setText(distance + poiType, TextView.BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(R.color.color_distance), 0, distance.length() - 1, 0);
 			return (row);
 		}
 		

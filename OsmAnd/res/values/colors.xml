@@ -11,7 +11,8 @@
 	<color name="color_white">#FFFFFF</color>
 	<color name="color_red">#FF0000</color>
 	<color name="color_orange">#FD9822</color>
-
+	
+	<color name="color_distance">#FD9822</color>
 
 	<!-- LAYER and SPECIAL PURPOSE consistency colors -->
 

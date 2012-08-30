@@ -19,6 +19,8 @@ import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 /**
  * 
@@ -156,7 +159,6 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			}
 
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.favouritedistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
 			if (model.isStored()) {
@@ -164,14 +166,15 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			} else {
 				icon.setImageResource(R.drawable.opened_poi);
 			}
+			String distance = "";
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location
 						.getLongitude()));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesListActivity.this));
-				distanceLabel.setVisibility(View.VISIBLE);
-			} else {
-				distanceLabel.setVisibility(View.GONE);
+				distance = OsmAndFormatter.getFormattedDistance(dist, FavouritesListActivity.this) + "  " ;
 			}
+			
+			label.setText(distance + getName(model), BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(R.color.color_distance), 0, distance.length(), 0);
 
 			label.setText(getName(model));
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
