@@ -932,7 +932,7 @@
 <string name="map_widget_transparent">Прозрачность</string>
 <string name="monitoring_mode_off">Включить\nзапись GPX</string>
 <string name="monitoring_mode_on">Остановить\nзапись GPX</string>
-<string name="int_continuosly">Постоянно</string>
+<string name="int_continuosly">Непрерывно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
 <string name="map_widget_day_night">Дневной/ночной режим</string>
 <string name="filterpoi_activity">Создать фильтр POI</string>
