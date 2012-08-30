@@ -831,7 +831,7 @@
 			</groupFilter>
 		</group>
 
-    <!--  no polygons -->
+    	<!-- for 'no polygons' -->
 	<group> 
 		<!-- Polygon railway -->
 		<filter minzoom="11" tag="railway" value="station" color="#d4aaaa">
@@ -891,6 +891,12 @@
 		</group>
 
 
+		<group>
+		 	<filter nightMode="true" tag="natural" value="land" color="#003333"/>
+			<filter tag="natural" value="land" color="#f1eae4"/>
+	 	</group>
+
+
 		<!-- Forest, night color 000034 -->
 		<group>
 			<filter minzoom="9" color="#aed1a0" tag="natural" value="wood"/>
@@ -900,11 +906,6 @@
 			<groupFilter nightMode="true" color="#000034" shader=""/>
 		</group>
 
-
-	 <group>
-	 	<filter nightMode="true" tag="natural" value="land" color="#003333"/>
-		<filter tag="natural" value="land" color="#f1eae4"/>
-	 </group>
 
 		<!-- Open nature, night color 004333 -->
 		<group>
@@ -991,24 +992,24 @@
 		<filter minzoom="11" shader="beach" color="#100000" tag="natural" value="beach"/>
 		<group>
 			<filter minzoom="10" shader="marsh" color="#100000" tag="natural" value="wetland"/>
-			<filter minzoom="12" shader="orchard" color="#100000" tag="landuse" value="orchard"/>
 			<filter minzoom="12" shader="marsh" color="#100000" tag="natural" value="marsh"/>
 			<filter minzoom="12" shader="mud" color="#100000" tag="natural" value="mud"/>
 			<filter minzoom="12" shader="scrub" color="#100000" tag="natural" value="scrub"/>
+			<filter minzoom="12" shader="orchard" color="#100000" tag="landuse" value="orchard"/>
+			<filter minzoom="12" shader="vineyard" color="#abdf96" tag="landuse" value="vineyard"/>	
 			<groupFilter nightMode="true" shader="" color="#114433"/>
 		</group>
 		
-		<filter minzoom="12" shader="vineyard" color="#abdf96" tag="landuse" value="vineyard"/>	
+		<filter minzoom="9" shader="nr2" color="#abdf96" color_2="#66cc33" strokeWidth_2="1" tag="leisure" value="nature_reserve"/>
+			<filter nightMode="true" minzoom="9" shader="glacier" color="#100000" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier"/>
+		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="landuse" value="cemetery"/>
 		<filter minzoom="12" shader="grave_yard" color="#aacbaf" tag="amenity" value="grave_yard"/>
 		<filter minzoom="12" shader="zoo" color="#100000" tag="tourism" value="zoo"/>
 		<filter minzoom="12" shader="quarry2" color="#100000" tag="landuse" value="quarry"/>
-		<filter nightMode="true" minzoom="9" shader="glacier" color="#100000" color_2="#497CAF" strokeWidth_2="2" tag="natural" value="glacier"/>
-		<filter minzoom="9" shader="glacier" color="#100000" color_2="#99ccff" strokeWidth_2="2" tag="natural" value="glacier"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
-		<filter minzoom="9" shader="nr2" color="#abdf96" color_2="#66cc33" strokeWidth_2="1" tag="leisure" value="nature_reserve"/>
 	
-	<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
+		<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
 	</group>
 	</polygon>
 
