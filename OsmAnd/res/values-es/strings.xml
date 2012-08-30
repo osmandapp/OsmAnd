@@ -972,4 +972,47 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
 <string name="tip_app_mode_t_v2">\﻿tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
 \n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla de mapa (icono de coche, bicicleta o peatón), o al crear una ruta.</string>
+<string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
+<string name="osmand_long_description_1000_chars">
+OsmAnd (OSM Automated Navigation Directions)
+
+OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
+
+Algunas de las características fundamentales:
+- Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable)
+- Mapas de vectores compactos disponibles de todo el planeta
+- Descarga de mapa de país o región directamente desde la app
+- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable
+- Búsqueda sin conexión de direcciones y lugares (PDI)
+- Rutas sin conexión para distancias cortas (experimental)
+- Modos de coche, bicicleta, y peatón con:
+- Cambio automático opcional de vista diurna/nocturna
+- Zoom opcional dependiente de la velocidad
+- Alineamiento del mapa opcional según brújula o dirección de movimiento
+
+Limitaciones de la versión gratuita de OsmAnd:
+- Limite de número de mapas descargados
+- Sin acceso sin conexión a los PDIs de Wikipedia
+
+OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones financieras para financiar el desarrollo y los test en conducción de nuevas funcionalidades. Por favor considere comprar OsmAnd+, o financiar nuevas características o hacer una donación en general en osmand.net.</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd es una aplicación de código abierto para la navegación mapas offline y online</string>
+<string name="osmand_plus_long_description_1000_chars">
+OsmAnd+ (OSM Automated Navigation Directions)
+
+OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
+
+OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones.
+
+Algunas de las características fundamentales:
+- Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable)
+- Mapas de vectores compactos disponibles de todo el planeta
+- Descarga de mapa de país o región directamente desde la app
+- Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable
+- Búsqueda sin conexión de direcciones y lugares (PDI)
+- Rutas sin conexión para distancias cortas (experimental)
+- Modos de coche, bicicleta, y peatón con:
+- Cambio automático opcional de vista diurna/nocturna
+- Zoom opcional dependiente de la velocidad
+- Alineamiento del mapa opcional según brújula o dirección de movimiento
+    </string>
 </resources>
