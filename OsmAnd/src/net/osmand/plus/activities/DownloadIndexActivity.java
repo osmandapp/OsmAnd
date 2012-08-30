@@ -602,7 +602,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				mainView.setKeepScreenOn(false);
 			}
 			updateLoadedFiles();
-			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
+			DownloadIndexAdapter adapter = ((DownloadIndexAdapter) getExpandableListAdapter());
+			if (adapter != null) {
+				adapter.notifyDataSetInvalidated();
+			}
 		}
 		
 		@Override
