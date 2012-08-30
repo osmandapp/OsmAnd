@@ -952,4 +952,49 @@
 <string name="tip_map_switch_t_v2">\tA térképforrás és a rétegek kicserélhetők a \'Menü\' -&gt; \'Rétegek\' alatt.
 \n\tA \'Térképforrás…\' alatt kiválasztható az előre letöltött vektoros térkép, előre beállított (online) raszteres forrás (az \'Online térkép\' kiterjesztést be kell kapcsolni hozzá), vagy kézzel gyártott térkép pl. OsmAndMapCreatorral készítve PC-n.
 \n\tAz OsmAnd egyedi forrásokat is támogat.</string>
+<string name="osmand_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
+<string name="osmand_long_description_1000_chars">
+		OsmAnd (OSM Automated Navigation Directions)
+
+		Az OsmAnd egy nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal.
+
+		Néhány fontosabb funkció:
+		- Teljesen offline működés (a letöltött vektoros és raszteres térképek választható könyvtárban tárolhatók)
+		- A kompakt, offline vektoros térképek az egész világhoz elérhetőek
+		- Az ország vagy régió térképei letölthetők közvetlenül az alkalmazásból
+		- Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal
+		- Címek és helyek offline kereshetősége
+		- Offline útvonaltervezés rövidebb távolságokra (kísérleti)
+		- Autós, kerékpáros és gyalogos módok:
+		- Opcionális automata nappali/éjszakai nézetváltással
+		- Opcionális sebességfüggő nagyítással
+		- Opcionális térképforgatással a mozgás vagy az iránytű alapján
+
+		Az OsmAnd ingyenes változatának korlátozásai:
+		- Korlátozott számú vektoros térképletöltés
+		- Offline Wikipédia cikkek nem elérhetőek
+
+		Az OsmAnd folyamatosan fejlesztés alatt áll és a projektünk nagyban függ a pénzügyi támogatásoktól, amiből finanszírozhatók a fejlesztések és az új funkciók tesztelése. Kérlek, fontold meg az OsmAnd+ megvásárlását, vagy egy-egy funkció támogatását az osmand.net oldalon
+	</string>
+<string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (OSM Automated Navigation Directions)
+
+		Az OsmAnd+ egy nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal.
+
+		Az OsmAnd+ az alkalmazás fizetős változata, aminek megvásárlásával támogatod a projektet, az új funkciók fejlesztésének finanszírozását és megkapod a legújabb frissítéseket.
+
+		Néhány fontosabb funkció:
+		- Teljesen offline működés (a letöltött vektoros és raszteres térképek választható könyvtárban tárolhatók)
+		- A kompakt, offline vektoros térképek az egész világhoz elérhetőek
+		- Az ország vagy régió térképei korlátlan számban letölthetők, közvetlenül az alkalmazásból
+		- Offline Wikipédia szócikkek letöltése, ami hasznos segítség városnézéshez
+		- Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal
+		- Címek és helyek offline kereshetősége
+		- Offline útvonaltervezés rövidebb távolságokra (kísérleti)
+		- Autós, kerékpáros és gyalogos módok:
+		- Opcionális automata nappali/éjszakai nézetváltással
+		- Opcionális sebességfüggő nagyítással
+		- Opcionális térképforgatással a mozgás vagy az iránytű alapján
+    </string>
+<string name="osmand_plus_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
 </resources>
