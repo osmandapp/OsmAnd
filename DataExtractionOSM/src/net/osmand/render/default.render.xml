@@ -12,7 +12,7 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-		<renderingProperty attr="viRendered" name="New road colors" description="Experiment with road colors"
+		<renderingProperty attr="viRendered" name="Trial road colors" description="Experiment with road colors"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
 		type="string" possibleValues="never,13,12,11"/>
