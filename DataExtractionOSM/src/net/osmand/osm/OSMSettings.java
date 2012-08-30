@@ -25,6 +25,8 @@ public class OSMSettings {
 		ROUTE_MASTER("route_master"), //$NON-NLS-1$
 		OPERATOR("operator"), //$NON-NLS-1$
 		REF("ref"), //$NON-NLS-1$
+		RCN_REF("rcn_ref"), //$NON-NLS-1$
+		RWN_REF("rwn_ref"), //$NON-NLS-1$
 		
 		// address
 		PLACE("place"), //$NON-NLS-1$
