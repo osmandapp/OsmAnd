@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modification hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser la modification hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Modifications en 0.7.1 : \n\t- Modification hors ligne des POI \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo) \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte \n\t- Détection de la direction: \'Faîtes demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage \n\t- Nouveau message vocal \'Itinéraire recalculé\' \n\t- Indication visuelle d\'un tournant imminent dans les 100m en changeant la couleur de la flèche de direction \n\t- Etat des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé \n\t- Modifications diverses "</string>
@@ -880,7 +880,7 @@
   <string name="show_speed_limits">Montrer les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
   <string name="tip_recent_changes_0_8_2_t">"Changements en 0.8.2 : \n\t* Itinéraire amélioré "</string>
-  <string name="screen_is_locked">Déverrouiller l'écran en appuyant sur le cadenas</string>
+  <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
   <string name="map_widget_top_text">Nom de rue</string>
   <string name="map_widget_config">Configuration</string>
   <string name="map_widget_map_select">Sélection de la carte</string>
