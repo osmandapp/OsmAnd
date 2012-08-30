@@ -193,6 +193,19 @@ public class MapInfoLayer extends OsmandMapLayer {
 		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
+		
+		int color = Color.BLACK;
+		int shadowColor = !view.getSettings().TRANSPARENT_MAP_THEME.get() ? Color.TRANSPARENT :  Color.WHITE;
+		if(paintText.getColor() != color) {
+			paintText.setColor(color);
+			topText.setTextColor(color);
+			paintSubText.setColor(color);
+			paintSmallText.setColor(color);
+			paintSmallSubText.setColor(color);
+		}
+		if(topText.getShadowColor() != shadowColor) {
+			topText.setShadowColor(shadowColor);
+		}
 	}
 	
 	public void registerAllControls(){
@@ -607,15 +620,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
 		boolean bold = routeLayer.getHelper().isFollowingMode();
-		int color = !nightMode.isNightMode() ? Color.BLACK :  Color.BLACK;
-		int shadowColor = nightMode.isNightMode() ? Color.TRANSPARENT :  Color.WHITE;
-		if(paintText.getColor() != color) {
-			paintText.setColor(color);
-			topText.setTextColor(color);
-			paintSubText.setColor(color);
-			paintSmallText.setColor(color);
-			paintSmallSubText.setColor(color);
-		}
+		
 		if(paintText.isFakeBoldText() != bold) {
 			paintText.setFakeBoldText(bold);
 			topText.getPaint().setFakeBoldText(bold);
@@ -623,12 +628,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 			paintSmallText.setFakeBoldText(bold);
 			paintSmallSubText.setFakeBoldText(bold);
 		}
-		if(topText.getShadowColor() != shadowColor) {
-			topText.setShadowColor(shadowColor);
-		}
+		
 		// update data on draw
-		rightStack.updateInfo(shadowColor);
-		leftStack.updateInfo(shadowColor);
+		rightStack.updateInfo();
+		leftStack.updateInfo();
 		lanesControl.updateInfo();
 		alarmControl.updateInfo();
 		for (int i = 0; i < statusBar.getChildCount(); i++) {

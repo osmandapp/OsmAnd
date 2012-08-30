@@ -72,19 +72,13 @@ public class MapStackControl extends ViewGroup {
 		this.cacheStackDrawables.clear();
 	}
 
-	public void updateInfo(int shadowColor) {
+	public void updateInfo() {
 		for (MapInfoControl v : stackViews) {
 			v.updateInfo();
-			if(v.getShadowColor() != shadowColor) {
-				v.setShadowColor(shadowColor);
-			}
 		}
 		// update even if collapsed to know if view becomes visible
 		for (MapInfoControl v : collapsedViews) {
 			v.updateInfo();
-			if(v.getShadowColor() != shadowColor) {
-				v.setShadowColor(shadowColor);
-			}
 		}
 	}
 	
