@@ -995,7 +995,7 @@ Limitaciones de la versión gratuita de OsmAnd:
 - Sin acceso sin conexión a los PDIs de Wikipedia
 
 OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones financieras para financiar el desarrollo y los test en conducción de nuevas funcionalidades. Por favor considere comprar OsmAnd+, o financiar nuevas características o hacer una donación en general en osmand.net.</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd es una aplicación de código abierto para la navegación mapas offline y online</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd+ es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
 <string name="osmand_plus_long_description_1000_chars">
 OsmAnd+ (OSM Automated Navigation Directions)
 
