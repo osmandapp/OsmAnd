@@ -169,4 +169,3 @@ function updateGoogleCodeIndexes($update=false) {
 
 updateGoogleCodeIndexes(false);
 ?>
-
