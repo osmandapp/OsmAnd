@@ -102,6 +102,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 				}
 			}
 			if(propogated != null) {
+				ctx.loadEntityRelation((Relation) e);
 				for(EntityId id : ((Relation) e).getMembersMap().keySet()) {
 					if(!propogatedTags.containsKey(id)) {
 						propogatedTags.put(id, new LinkedHashMap<String, String>());
