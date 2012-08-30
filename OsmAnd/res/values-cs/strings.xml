@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 : \n\t- Native rendering pro všechna zařízení \n\t- Offline editace POI \n\t- Usnadnění \n\t- Oprava mnoha chyb "</string>
   <string name="send_files_to_osm">Nahrát GPX soubory do OSM?</string>
@@ -91,7 +91,7 @@
   <string name="live_monitoring_interval">Interval přímého přenosu</string>
   <string name="live_monitoring_url_descr">Zadejte webovou adresu serveru pro přímý přenos pozice. Parametry: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Server pro přímý přenos</string>
-  <string name="gpx_monitoring_disabled_warn">Prosím, zapněte funkci \'Uložit trasu do GPX\'</string>
+  <string name="gpx_monitoring_disabled_warn">Prosím, zapněte funkci \'Uložit trasu do GPX\'.</string>
   <string name="show_current_gpx_title">Zobrazit aktuální trasu</string>
   <string name="tip_recent_changes_0_7_0_t">"Změny ve verzi 0.7.0 : \n\t- Offline informace o místech z Wikipedie \n\t- Aktualizované mapy \n\t- Další drobné změny "</string>
   <string name="free_version_message">Tato bezplatná verze OsmAnd je omezena na %1$s downloady %2$s a nepodporuje offline data z Wikipedie.</string>
@@ -936,4 +936,11 @@
 <string name="gps_wakeup_interval">Interval zaměřování GPS: %s</string>
 <string name="map_widget_fluorescent">Svítivé barvy trasy</string>
 <string name="map_widget_view_direction">Zorné pole</string>
+<string name="day_night_info_description">Východ slunce: %1$s \nZápad slunce: %2$s</string>
+<string name="osmand_short_description_80_chars">OsmAnd je open-source navigační program s podporou offline a online map</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd je open-source navigační program s podporou offline a online map</string>
+<string name="filterpoi_activity">Vytvořit filter pro POI</string>
+<string name="select_navigation_mode">Vyberte způsob dopravy</string>
+<string name="day_night_info">Denní/noční info</string>
+<string name="map_widget_day_night">Denní/noční mapa</string>
 </resources>
