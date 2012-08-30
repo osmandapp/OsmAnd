@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
-        * Improved route guidance
+    \n\t* Improved route guidance
     </string>
     <string name="snap_to_road_descr">Snap to road during navigation</string>
     <string name="snap_to_road">Snap to road</string>
