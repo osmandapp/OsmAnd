@@ -910,7 +910,7 @@ public class MapActivityActions implements DialogProvider {
 					public boolean onClick(MenuItem item) {
 						if (mapActivity.getMapLayers().getNavigationLayer().getPointToNavigate() != null) {
 							if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
-								routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+								routingHelper.setFinalAndCurrentLocation(null, mapActivity.getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 								// restore default mode
 								boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
 								mapActivity.updateApplicationModeSettings();

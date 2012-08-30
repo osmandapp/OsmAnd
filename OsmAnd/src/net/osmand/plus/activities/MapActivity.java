@@ -267,7 +267,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 		// if destination point was changed try to recalculate route 
 		if (routingHelper.isFollowingMode() && !Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation())) {
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		}
 
 		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -621,7 +621,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
         final LatLon point = settings.getPointToNavigate();
         if (point != null) {
             if (routingHelper.isRouteCalculated()) {
-                routingHelper.getVoiceRouter().announceCurrentDirection(routingHelper.getLastFixedLocation());
+                routingHelper.getVoiceRouter().announceCurrentDirection(getLastKnownLocation());
             } else {
                 AccessibleToast.makeText(this, getNavigationHint(point), Toast.LENGTH_LONG).show();
             }
@@ -738,8 +738,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
 		// possibly keep using only for emulator case
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
-		if (isRunningOnEmulator()
-			&& locationLayer.getLastKnownLocation() != null) {
+		if (locationLayer.getLastKnownLocation() != null) {
 			if (locationLayer.getLastKnownLocation().distanceTo(location) > 3) {
 				float d = location.distanceTo(locationLayer.getLastKnownLocation());
 				long time = location.getTime() - locationLayer.getLastKnownLocation().getTime();
@@ -758,7 +757,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		if(locationLayer.getLastKnownLocation() != null && !location.hasBearing()){
 			if(locationLayer.getLastKnownLocation().distanceTo(location) > 10 && !isRunningOnEmulator()){
-				// very innacurate?
+				// very innacurate
 				// location.setBearing(locationLayer.getLastKnownLocation().bearingTo(location));
 			}
 		}
@@ -772,6 +771,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if (Log.isLoggable(LogUtil.TAG, Log.DEBUG)) {
 			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
+		// 1. Logging services
 		if (location != null) {
 			// use because there is a bug on some devices with location.getTime()
 			long locationTime = System.currentTimeMillis();
@@ -788,18 +788,25 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 
 			}
+
+		}
+		
+		if(location != null && isRunningOnEmulator()) {
 			// only for emulator
 			updateSpeedBearingEmulator(location);
 		}
+		// 2. accessibility routing
+		navigationInfo.setLocation(location);
 
+		// 3. routing
 		boolean enableSensorNavigation = routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get() ? location == null
 				|| !location.hasBearing() : false;
 		registerUnregisterSensor(location, enableSensorNavigation);
-
+		Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
 				// Update routing position and get location for sticking mode
-				Location updatedLocation = routingHelper.setCurrentLocation(location);
+				updatedLocation = routingHelper.setCurrentLocation(location, settings.SNAP_TO_ROAD.get());
 				if(!routingHelper.isFollowingMode()) {
 					// finished
 					Message msg = Message.obtain(uiHandler, new Runnable() {
@@ -811,7 +818,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					});
 					uiHandler.sendMessage(msg);
 				}
-				location = updatedLocation;
 				// Check with delay that gps location is not lost
 				if (location != null && routingHelper.getLeftDistance() > 0) {
 					final long fixTime = location.getTime();
@@ -834,58 +840,65 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 			}
 		}
-		mapLayers.getLocationLayer().setLastKnownLocation(location);
-		navigationInfo.setLocation(location);
+		
 
+		// Update information 
+		mapLayers.getLocationLayer().setLastKnownLocation(updatedLocation);
 		if (location != null) {
-			long now = System.currentTimeMillis();
-			if (isMapLinkedToLocation()) {
-				if (settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()) {
-					float zdelta = defineZoomFromSpeed(location.getSpeed());
-					if (Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1) {
-						// prevent ui hysteresis (check time interval for autozoom)
-						if (zdelta >= 2) {
-							// decrease a bit
-							zdelta -= 3 * OsmandMapTileView.ZOOM_DELTA_1;
-						} else if (zdelta <= -2) {
-							// decrease a bit
-							zdelta += 3 * OsmandMapTileView.ZOOM_DELTA_1;
-						}
-						if (now - lastTimeAutoZooming > 4500) {
-							lastTimeAutoZooming = now;
-							mapView.setZoom(mapView.getFloatZoom() + zdelta);
-							// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
-						}
-					}
-				}
-				int currentMapRotation = settings.ROTATE_MAP.get();
-				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (location.hasBearing()) {
-						mapView.setRotate(-location.getBearing());
-					} else if (routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
-						if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15
-								&& now - lastTimeSensorRotation > 1500) {
-							lastTimeSensorRotation = now;
-							mapView.setRotate(-previousSensorValue);
-						}
-					}
-				}
-				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-			} else {
-				if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
-					mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
-				}
-				if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode() && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
-					backToLocationWithDelay(1);
-				}
-			}
+			updateAutoMapViewConfiguration(updatedLocation);
 		} else {
 			if (mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 			}
 		}
+		
 		// When location is changed we need to refresh map in order to show movement!
 		mapView.refreshMap();
+	}
+
+	private void updateAutoMapViewConfiguration(Location location) {
+		long now = System.currentTimeMillis();
+		if (isMapLinkedToLocation()) {
+			if (settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()) {
+				float zdelta = defineZoomFromSpeed(location.getSpeed());
+				if (Math.abs(zdelta) >= OsmandMapTileView.ZOOM_DELTA_1) {
+					// prevent ui hysteresis (check time interval for autozoom)
+					if (zdelta >= 2) {
+						// decrease a bit
+						zdelta -= 3 * OsmandMapTileView.ZOOM_DELTA_1;
+					} else if (zdelta <= -2) {
+						// decrease a bit
+						zdelta += 3 * OsmandMapTileView.ZOOM_DELTA_1;
+					}
+					if (now - lastTimeAutoZooming > 4500) {
+						lastTimeAutoZooming = now;
+						mapView.setZoom(mapView.getFloatZoom() + zdelta);
+						// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
+					}
+				}
+			}
+			int currentMapRotation = settings.ROTATE_MAP.get();
+			if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
+				if (location.hasBearing()) {
+					mapView.setRotate(-location.getBearing());
+				} else if (routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
+					if (previousSensorValue != 0 && Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15) {
+						if(now - lastTimeSensorRotation > 1500 && now - lastTimeSensorRotation < 15000) {
+							lastTimeSensorRotation = now;
+							mapView.setRotate(-previousSensorValue);
+						}
+					}
+				}
+			}
+			mapView.setLatLon(location.getLatitude(), location.getLongitude());
+		} else {
+			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
+				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
+			}
+			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode() && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
+				backToLocationWithDelay(1);
+			}
+		}
 	}
 
 	public float defineZoomFromSpeed(float speed) {
@@ -915,7 +928,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else {
 			settings.clearPointToNavigate();
 		}
-		routingHelper.setFinalAndCurrentLocation(point, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
+		routingHelper.setFinalAndCurrentLocation(point, getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		mapLayers.getNavigationLayer().setPointToNavigate(point);
 	}
 	
