@@ -574,11 +574,6 @@ public class OsmandSettings {
 		new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, RouteService.values()).makeProfile();
 	
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", true).makeProfile().cache();
-	{
-		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.CAR, true);
-		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, false);
-		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
-	}
 	
 	public final CommonPreference<Boolean> LEFT_SIDE_NAVIGATION = new BooleanPreference("left_side_navigation", false).makeGlobal();
 
