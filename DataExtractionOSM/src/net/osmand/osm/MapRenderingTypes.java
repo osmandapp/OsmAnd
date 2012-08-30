@@ -122,6 +122,7 @@ public class MapRenderingTypes {
 	}
 	
 	public boolean isRelationalTagValuePropogated(String tag, String val) {
+		Map<String, MapRulType> types = getEncodingRuleTypes();
 		MapRulType rType = types.get(constructRuleKey(tag, val));
 		if (rType == null) {
 			rType = types.get(constructRuleKey(tag, null));
