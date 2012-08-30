@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -977,9 +977,9 @@
 \n\tOsmAnd supporta anche sorgenti su misura.</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.↵
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
-<string name="osmand_short_description_80_chars">OsmAnd è un'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
-<string name="osmand_long_description_1000_chars">↵
-OsmAnd (OSM Automatizzata Navigazione Direzioni)↵
+<string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
+<string name="osmand_long_description_1000_chars">
+OsmAnd (OSM Automatizzata Navigazione Direzioni)
 ↵
 OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell'itinerario online che offline compreso la voce guida curva per curva.↵
 ↵
@@ -1000,9 +1000,9 @@ Limitazioni di questa versione gratuita di OsmAnd:↵
 - Non funziona l'accesso ai PDI offline di Wikipedia↵
 ↵
 OsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net↵</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd è un'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
-<string name="osmand_plus_long_description_1000_chars">↵
-OsmAnd+ (OSM Automatizzata Navigazione Direzioni)↵
+<string name="osmand_plus_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
+<string name="osmand_plus_long_description_1000_chars">
+OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
 ↵
 OsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell'itinerario online che offline compreso la voce guida curva per curva.↵
 ↵
