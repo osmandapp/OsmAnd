@@ -136,7 +136,7 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 				distance = OsmAndFormatter.getFormattedDistance(dist, SearchHistoryActivity.this) + "  ";
 			}
 			label.setText(distance + model.name, BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(R.color.color_distance), 0, distance.length(), 0);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
 			icon.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

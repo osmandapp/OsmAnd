@@ -492,7 +492,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
 			String distance =  OsmAndFormatter.getFormattedDistance(dist, SearchTransportActivity.this) + " "; //$NON-NLS-1$
 			label.setText(distance + labelW.toString(), TextView.BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(R.color.color_distance), 0, distance.length() - 1, 0);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			return (row);
 		}
 	}

@@ -174,9 +174,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			}
 			
 			label.setText(distance + getName(model), BufferType.SPANNABLE);
-			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(R.color.color_distance), 0, distance.length(), 0);
-
-			label.setText(getName(model));
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);
