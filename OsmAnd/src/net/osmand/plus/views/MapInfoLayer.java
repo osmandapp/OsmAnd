@@ -354,7 +354,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 				
 			} else {
 				final CommonPreference<String> pref = view.getApplication().getSettings().getCustomRenderProperty(p.getAttrName());
-				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(0, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
+				int icon = 0;
+				try {
+					Field f = R.drawable.class.getField("widget_" + p.getAttrName().toLowerCase());
+					icon = f.getInt(null);
+				} catch(Exception e){
+				}
+				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
 				w.setStateChangeListener(new Runnable() {
 					@Override
 					public void run() {
