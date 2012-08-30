@@ -57,7 +57,7 @@
 		Main colors for night renderer (road brightness levels aligned with priority), by Hardy Mueller:
 		- default: 003333
 		- forest: 000034
-		- other open (non-forest) nature: 004333
+		- other open (non-forest) nature: 004333 (vegetation shaders replaced by 114433)
 		- water: 330099
 		- built-up areas: 66004B
 		- buildings: 560000
@@ -831,8 +831,8 @@
 			</groupFilter>
 		</group>
 
-    	<!-- for 'no polygons' -->
-	<group> 
+	    <!-- for 'no polygons' -->
+	    <group>
 		<!-- Polygon railway -->
 		<filter minzoom="11" tag="railway" value="station" color="#d4aaaa">
 			<filter nightMode="true" color="#560000"/>
@@ -1009,8 +1009,8 @@
 		<filter minzoom="12" shader="quarry2" color="#100000" tag="landuse" value="quarry"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
 	
-		<groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
-	</group>
+	    <groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
+	    </group>
 	</polygon>
 
 
