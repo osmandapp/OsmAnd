@@ -1,11 +1,17 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
-   \n\t* Verbessertes Routing
-   \n\t* Konfigurierbare Schaltflächen
-   \n\t* Karteneinstellungen auf Kartenbildschirm umgezogen
-   \n\t* Bildschirmsperrtaste mit Logging-Einstellungen"
-   \n\t* Bugfix für Arabische Schrift, Kannada scripting und RTL Sprachen 
-  </string>
+<resources>
+	<string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
+	\n\t* Verbessertes Navigationsverhalten
+	</string>
+	<string name="snap_to_road_descr">Position während der Nvigation auf Straßen einrasten</string>
+	<string name="snap_to_road">Einrasten auf Straße</string>
+	<string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
+	\n\t* Verbessertes Routing
+	\n\t* Konfigurierbare Schaltflächen
+	\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen
+	\n\t* Bildschirmsperrtaste mit Logging-Einstellungen"
+	\n\t* Bugfix für Arabische Schrift, Kannada scripting und RTL Sprachen 
+	</string>
 	<string name="osmand_short_description_80_chars">OsmAnd ist eine OpenSource Navigationsapplikation für Offline- und Onlinekarten</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)

@@ -12,7 +12,7 @@
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
     \n\t* Improved route guidance
     </string>
-    <string name="snap_to_road_descr">Snap to road during navigation</string>
+    <string name="snap_to_road_descr">Snap position to roads during navigation</string>
     <string name="snap_to_road">Snap to road</string>
     <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
     \n\t* Improved Routing
