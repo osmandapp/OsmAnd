@@ -66,12 +66,12 @@ nth(17, 'siedemnasty ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' metrów'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' metrów'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' metrów'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' metrów'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['około jeden kilometr '] :- Dist < 1500.
-distance(Dist) == ['około ', X, ' kilometry '] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == ['około ', X, ' kilometrów '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' kilometrów '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['około ', X, ' kilometry '] :- Dist < 4500, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == ['około ', X, ' kilometrów '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' kilometrów '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

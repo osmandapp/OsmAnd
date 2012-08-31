@@ -82,11 +82,11 @@ nth(17, 'decimoséptima').
 
 %%% distance measure
 
-distance(Dist) == [ X, ' metros'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' metros'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' metros'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' metros'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['cerca de un kilómetro '] :- Dist < 1500.
-distance(Dist) == ['cerca de ', X, ' kilómetros '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' kilómetros '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['cerca de ', X, ' kilómetros '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' kilómetros '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

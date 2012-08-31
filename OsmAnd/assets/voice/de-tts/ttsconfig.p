@@ -67,16 +67,16 @@ nth(17, 'siebzehnte ').
 
 
 %%% distance measure
-distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist, dativ) == [ X, ' metern'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist, dativ) == [ X, ' metern'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist, dativ) == [ X, ' metern'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist, nominativ) == [ X, ' meter'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
+distance(Dist, dativ) == [ X, ' metern'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist, nominativ) == ['zirka einen Kilometer '] :- Dist < 1500.
 distance(Dist, dativ) == ['zirka einem Kilometer '] :- Dist < 1500.
-distance(Dist, nominativ) == ['zirka ', X, ' Kilometer '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist, dativ) == ['zirka ', X, 'Kilometern '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist, nominativ) == [ X, ' Kilometer '] :- D is round(Dist/1000), num_atom(D, X).
-distance(Dist, dativ) == [ X, 'Kilometern '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist, nominativ) == ['zirka ', X, ' Kilometer '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist, dativ) == ['zirka ', X, 'Kilometern '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist, nominativ) == [ X, ' Kilometer '] :- D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist, dativ) == [ X, 'Kilometern '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method
