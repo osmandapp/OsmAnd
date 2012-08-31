@@ -844,7 +844,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 		// Update information 
 		mapLayers.getLocationLayer().setLastKnownLocation(updatedLocation);
-		if (location != null) {
+		if (updatedLocation != null) {
 			updateAutoMapViewConfiguration(updatedLocation);
 		} else {
 			if (mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {

@@ -242,7 +242,7 @@ public class RoutingHelper {
 					route.isCalculated()? route : null);
 		}
 		double projectDist = mode == ApplicationMode.CAR ? posTolerance : posTolerance / 2;
-		if(returnUpdatedLocation && currentLocation.distanceTo(locationProjection) < projectDist) {
+		if(returnUpdatedLocation && locationProjection != null && currentLocation.distanceTo(locationProjection) < projectDist) {
 			return locationProjection;
 		} else {
 			return currentLocation;
