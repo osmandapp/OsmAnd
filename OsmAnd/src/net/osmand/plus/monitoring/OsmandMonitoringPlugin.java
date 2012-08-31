@@ -76,7 +76,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		monitoringControl = createMonitoringControl(activity, layer.getPaintText(), layer.getPaintSubText());
 		
 		layer.getMapInfoControls().registerSideWidget(monitoringControl,
-				R.drawable.monitoring_rec_small, R.string.map_widget_monitoring, "monitoring", false,
+				R.drawable.widget_tracking, R.string.map_widget_monitoring, "monitoring", false,
 				EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN), EnumSet.noneOf(ApplicationMode.class), 18);
 		layer.recreateControls();
 	}
