@@ -14,6 +14,7 @@ public class GeneralRouter extends VehicleRouter {
 	public static final String USE_SHORTEST_WAY = "short_way";
 	public static final String AVOID_FERRIES = "avoid_ferries";
 	public static final String AVOID_TOLL = "avoid_toll";
+	public static final String AVOID_MOTORWAY = "avoid_motorway";
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	
 	Map<String, Double> highwaySpeed ;

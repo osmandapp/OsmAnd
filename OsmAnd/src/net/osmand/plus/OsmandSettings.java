@@ -597,6 +597,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_LANES = new BooleanPreference("show_lanes", true).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> AVOID_TOLL_ROADS = new BooleanPreference("avoid_toll_roads", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> AVOID_MOTORWAY = new BooleanPreference("avoid_motorway", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> AVOID_UNPAVED_ROADS = new BooleanPreference("avoid_unpaved_roads", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> AVOID_FERRIES = new BooleanPreference("avoid_ferries", false).makeGlobal().cache();
 	

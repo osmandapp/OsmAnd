@@ -343,6 +343,9 @@ public class RouteProvider {
 		if(app.getSettings().AVOID_TOLL_ROADS.get()){
 			specs.add(GeneralRouter.AVOID_TOLL);
 		}
+		if(app.getSettings().AVOID_MOTORWAY.get()){
+			specs.add(GeneralRouter.AVOID_MOTORWAY);
+		}
 		if(app.getSettings().AVOID_UNPAVED_ROADS.get()){
 			specs.add(GeneralRouter.AVOID_UNPAVED);
 		}

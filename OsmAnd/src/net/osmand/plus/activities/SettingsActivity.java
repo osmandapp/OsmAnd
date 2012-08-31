@@ -746,8 +746,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			return true;
 		} else if (preference == avoidRouting) {
 			showBooleanSettings(new String[] { getString(R.string.avoid_toll_roads), getString(R.string.avoid_ferries),
-					getString(R.string.avoid_unpaved) }, new OsmandPreference[] { osmandSettings.AVOID_TOLL_ROADS,
-					osmandSettings.AVOID_FERRIES, osmandSettings.AVOID_UNPAVED_ROADS });
+					getString(R.string.avoid_unpaved), getString(R.string.avoid_motorway)
+					}, new OsmandPreference[] { osmandSettings.AVOID_TOLL_ROADS,
+					osmandSettings.AVOID_FERRIES, osmandSettings.AVOID_UNPAVED_ROADS, osmandSettings.AVOID_MOTORWAY });
 			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_cameras), getString(R.string.show_speed_limits),

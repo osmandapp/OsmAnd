@@ -42,8 +42,12 @@
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="130.0" 
 			leftTurn="20" rightTurn="15" roundaboutTurn="20" followSpeedLimitations="true" onewayAware="true">
-		<road tag="highway" value="motorway" speed="110" priority="1.2" dynamicPriority="1"/>
-		<road tag="highway" value="motorway_link" speed="80" priority="1.2" dynamicPriority="1"/>
+		<road tag="highway" value="motorway" speed="110" priority="1.2" dynamicPriority="1">
+			<specialization input="avoid_motorway" speed="0"/>
+		</road>
+		<road tag="highway" value="motorway_link" speed="80" priority="1.2" dynamicPriority="1">
+			<specialization input="avoid_motorway" speed="0"/>
+		</road>
 		
 		<road tag="highway" value="trunk" speed="100" priority="1.2" dynamicPriority="1"/>
 		<road tag="highway" value="trunk_link" speed="75" priority="1.2" dynamicPriority="1"/>
@@ -119,8 +123,12 @@
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
 		<!-- <attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>  -->
 		
-		<road tag="highway" value="motorway" speed="16" priority="0.7" dynamicPriority="0.7"/>
-		<road tag="highway" value="motorway_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="motorway" speed="16" priority="0.7" dynamicPriority="0.7">
+			<specialization input="avoid_motorway" speed="0"/>
+		</road>
+		<road tag="highway" value="motorway_link" speed="16" priority="0.7" dynamicPriority="0.7">
+			<specialization input="avoid_motorway" speed="0"/>
+		</road>
 		
 		<road tag="highway" value="trunk" speed="16" priority="0.7" dynamicPriority="0.7"/>
 		<road tag="highway" value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
@@ -158,8 +166,12 @@
 
 		<attribute name="heuristicCoefficient" value="1.2" />
 
-		<road tag="highway" value="motorway" speed="5" priority="0.7" dynamicPriority="0.7"/>
-		<road tag="highway" value="motorway_link" speed="5" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="motorway" speed="5" priority="0.7" dynamicPriority="0.7">
+			<specialization input="avoid_motorway" speed="0"/>
+		</road>
+		<road tag="highway" value="motorway_link" speed="5" priority="0.7" dynamicPriority="0.7">
+			<specialization input="avoid_motorway" speed="0"/>
+		</road>
 		
 		<road tag="highway" value="trunk" speed="5" priority="0.7" dynamicPriority="0.7"/>
 		<road tag="highway" value="trunk_link" speed="5" priority="0.7" dynamicPriority="0.7"/>

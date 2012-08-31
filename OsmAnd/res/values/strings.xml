@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="avoid_motorway">Avoid motorways</string>
     <string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
