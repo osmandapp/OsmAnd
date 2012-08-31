@@ -541,13 +541,13 @@
 <string name="downloading_file">Baixant fitxer...</string>
 <string name="show_poi_on_map">Mostrar al mapa</string>
 <string name="show_gps_status">Mostrar estat del GPS</string>
-<string name="opening_hours">Horari d'obertura</string>
+<string name="opening_hours">Horari d\'obertura</string>
 <string name="poi">PDI</string>
 <string name="new_route_calculated_dist">Nova ruta calculada,distancia</string>
 <string name="loading_data">Carregant dades...</string>
 <string name="finished_task">Finalitzat</string>
 <string name="update_tile">Actualitzar mapa</string>
-<string name="app_settings">Preferències d'aplicació</string>
+<string name="app_settings">Preferències d\'aplicació</string>
 <string name="map_view_3d_descr">Activar vista 3D del mapa</string>
 <string name="show_gps_coordinates_text">Mostrar coordenades de GPS al mapa</string>
 <string name="map_Button">Mapa</string>
