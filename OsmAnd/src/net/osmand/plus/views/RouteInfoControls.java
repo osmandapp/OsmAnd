@@ -296,7 +296,7 @@ public class RouteInfoControls {
 			}
 		};
 		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(map.getResources().getDrawable(R.drawable.ic_altitude));
+		altitudeControl.setImageDrawable(map.getResources().getDrawable(R.drawable.info_altitude));
 		return altitudeControl;
 	}
 	

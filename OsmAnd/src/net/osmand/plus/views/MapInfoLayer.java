@@ -241,7 +241,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(speed, R.drawable.info_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(alt, R.drawable.ic_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
+		mapInfoControls.registerSideWidget(alt, R.drawable.info_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 
 		// Top widgets
 		ImageViewControl compassView = createCompassView(map);
