@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what's translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
+    <string name="auto_zoom_map">Auto zoom map</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
     \n\t* Improved route guidance
     </string>
@@ -1024,8 +1026,6 @@ You can enable (online or cached) tile map sources, tracking settings, and many 
     <string name="data_settings">Data</string>
     <string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
     <string name="osm_settings">OSM Editing</string>
-    <string name="auto_zoom_map_descr">Auto zoom map according to your speed</string>
-    <string name="auto_zoom_map">Auto zoom map</string>
     <string name="additional_settings">Additional settings</string>
     <string name="settings">Settings</string>
     <string name="save_current_track_descr">Save current track to SD now</string>

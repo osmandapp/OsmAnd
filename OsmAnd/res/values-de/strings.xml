@@ -1,5 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
+	<string name="auto_zoom_map">Automatischer Zoom</string>
 	<string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
 	\n\t* Verbessertes Navigationsverhalten
 	</string>
@@ -740,8 +742,6 @@
   <string name="data_settings">Daten</string>
   <string name="map_preferences_descr">Karteneinstellungen festlegen: Kartenquelle, Ausrichtung, Markerposition, Bildschirmausrichtung</string>
   <string name="osm_settings">OSM-Bearbeitung</string>
-  <string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen</string>
-  <string name="auto_zoom_map">Automatischer Zoom</string>
   <string name="additional_settings">Weitere Einstellungen</string>
   <string name="settings">Einstellungen</string>
   <string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
