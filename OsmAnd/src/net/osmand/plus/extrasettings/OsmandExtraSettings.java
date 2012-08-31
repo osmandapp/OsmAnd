@@ -118,28 +118,29 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 		
-		final CommonPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
-		final MapInfoControlRegInfo posMap = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker, R.string.position_on_map, 
-				"position_on_map", textSizePref);
-		posMap.setStateChangeListener(new Runnable() {
-			@Override
-			public void run() {
-				String[]  entries = new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) };
-				final Integer[] vals = new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT };
-				Builder b = new AlertDialog.Builder(view.getContext());
-				int i = Arrays.binarySearch(vals, posPref.get());
-				b.setSingleChoiceItems(entries, i, new OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						posPref.set(vals[which]);
-						activity.updateApplicationModeSettings();
-						view.refreshMap(true);
-						dialog.dismiss();
-					}
-				});
-				b.show();
-			}
-		});
+		// FIXME delete strings from this code
+//		final CommonPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
+//		final MapInfoControlRegInfo posMap = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker, R.string.position_on_map, 
+//				"position_on_map", textSizePref);
+//		posMap.setStateChangeListener(new Runnable() {
+//			@Override
+//			public void run() {
+//				String[]  entries = new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) };
+//				final Integer[] vals = new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT };
+//				Builder b = new AlertDialog.Builder(view.getContext());
+//				int i = Arrays.binarySearch(vals, posPref.get());
+//				b.setSingleChoiceItems(entries, i, new OnClickListener() {
+//					@Override
+//					public void onClick(DialogInterface dialog, int which) {
+//						posPref.set(vals[which]);
+//						activity.updateApplicationModeSettings();
+//						view.refreshMap(true);
+//						dialog.dismiss();
+//					}
+//				});
+//				b.show();
+//			}
+//		});
 	}
 	
 	@Override
