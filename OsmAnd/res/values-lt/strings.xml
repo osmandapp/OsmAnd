@@ -1066,4 +1066,5 @@
 \n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up↵
 \n\t\'Į judėjimo kryptį\' - Map will continuously be aligned with your heading↵
 \n\t\'Į kompasą\' - Žemėlapis bus nuolat lygiuojamas pagal prietaiso kompasą↵</string>
+<string name="osmand_short_description_80_chars">OsmAnd - atviro kodo navigacijos programa su interneto/parsiųstais žemėlapius</string>
 </resources>
