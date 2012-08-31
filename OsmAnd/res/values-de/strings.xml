@@ -28,9 +28,10 @@
 		- Offline Adress- und POI-Suche
 		- Offlinenavigation für kurze Distanzen (experimentell)
 		- Auto-, Fahhrad und Fußgänger-Modus mit
-		- optional automatischer Tag-Nacht-Umschaltung der Anzeige
-		- optional geschwingikeitsabhängigem Kartenmasstab
-		- optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
+		-  optional automatischer Tag-Nacht-Umschaltung der Anzeige
+		-  optional geschwingikeitsabhängigem Kartenmasstab
+		-  optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
+		-  optional Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 
 		Einschränkungen dieser kostenlosen Version von OsmAnd:
 		- Anzahl der Kartendownloads
@@ -55,9 +56,10 @@
 		- Offline Adress- und POI-Suche
 		- Offlinenavigation für kurze Distanzen (experimentell)
 		- Auto-, Fahhrad und Fußgänger-Modus mit
-		- optional automatischer Tag-Nacht-Umschaltung der Anzeige
-		- optional geschwingikeitsabhängigem Kartenmasstab
-		- optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
+		-  optional automatischer Tag-Nacht-Umschaltung der Anzeige
+		-  optional geschwingikeitsabhängigem Kartenmasstab
+		-  optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
+		-  optional Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
     </string>
 
 	<string name="select_navigation_mode">Transportmittel wählen</string>

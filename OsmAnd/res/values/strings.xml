@@ -37,9 +37,10 @@
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
 		- Car, bicycle, and pedestrian modes with:
-		- Optional automated day/night view switching
-		- Optional speed-dependent map zooming
-		- Optional map alignment according to compass or direction of motion
+		-  optional automated day/night view switching
+		-  optional speed-dependent map zooming
+		-  optional map alignment according to compass or direction of motion
+		-  optional lane guidance, speed limit display, recorded and TTS voices
 
 		Limitations of this free version of OsmAnd:
 		- Number of map downloads limited
@@ -64,9 +65,10 @@
 		- Offline search for addresses and places (POIs)
 		- Offline routing for short distances (experimental)
 		- Car, bicycle, and pedestrian modes with:
-		- Optional automated day/night view switching
-		- Optional speed-dependent map zooming
-		- Optional map alignment according to compass or direction of motion
+		-  optional automated day/night view switching
+		-  optional speed-dependent map zooming
+		-  optional map alignment according to compass or direction of motion
+		-  optional lane guidance, speed limit display, recorded and TTS voices
     </string>
 	<string name="tip_update_index">Update of Offline Data</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates.
