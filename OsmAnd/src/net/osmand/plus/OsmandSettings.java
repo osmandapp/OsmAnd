@@ -21,6 +21,7 @@ import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.activities.FollowMode;
 import net.osmand.plus.activities.search.SearchHistoryHelper;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
@@ -868,7 +869,8 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
-
+	public static final String LAST_KNOWN_MAP_FOLLOW_MODE = "last_known_map_follow_mode"; //$NON-NLS-1$
+        
 	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
 	public static final String MAP_LON_TO_SHOW = "map_lon_to_show"; //$NON-NLS-1$
@@ -954,6 +956,15 @@ public class OsmandSettings {
 		globalPreferences.edit().putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
 	}
 
+	public FollowMode getLastKnownMapFollowMode() {
+	    String name = globalPreferences.getString(LAST_KNOWN_MAP_FOLLOW_MODE, FollowMode.FOLLOW_COMPASS.name());
+	    return FollowMode.valueOf(name);
+	}
+
+	public void setLastKnownMapFollowMode(FollowMode followMode) {
+	    globalPreferences.edit().putString(LAST_KNOWN_MAP_FOLLOW_MODE, followMode.name()).commit();
+	}
+	
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
 

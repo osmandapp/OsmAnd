@@ -32,6 +32,7 @@ import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
@@ -291,6 +292,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoom(settings.getLastKnownMapZoom());
+			mapView.getLayerByClass(MapControlsLayer.class).setFollowMode(settings.getLastKnownMapFollowMode());
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
@@ -1082,6 +1084,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
+                settings.setLastKnownMapFollowMode(mapView.getLayerByClass(MapControlsLayer.class).getFollowMode());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		getMyApplication().getResourceManager().interruptRendering();
 		getMyApplication().getResourceManager().setBusyIndicator(null);
@@ -1123,6 +1126,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		
 		AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
 		mapView.refreshMap();
+	}
+	
+	public void setRotateMapMode(Integer mode) {
+	    settings.ROTATE_MAP.set(mode);
 	}
 	
 	@Override
@@ -1311,7 +1318,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && routingHelper.isFollowingMode()){
+			if(autoFollow > 0 && routingHelper.isFollowingMode() && mapView.getLayerByClass(MapControlsLayer.class).getFollowMode() != FollowMode.FREE_SCROLL){
 				backToLocationWithDelay(autoFollow);
 			}
 		}

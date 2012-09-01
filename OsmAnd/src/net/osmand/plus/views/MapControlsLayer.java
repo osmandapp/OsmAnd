@@ -5,9 +5,11 @@ import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.activities.FollowMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PlacePickerActivity;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -51,12 +53,12 @@ public class MapControlsLayer extends OsmandMapLayer {
         private Button zoomOutButton;
 	private Button routingButton;
 	private Button searchButton;
-	private Button centerButton;
+	private Button followModeButton;
 	private ImageView compassView;
 	
 	private int numInitializedMenuOptions;
 	private float cachedRotate = 0;
-	private boolean isFollowingMode = false;
+	private FollowMode followMode;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
@@ -103,8 +105,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initRoutingButton(view, parent);
 		// TODO(natashaj): Disabling search button until UI is updated for prototype
 		//initSearchButton(view, parent);
-		initCenterButton(view, parent);
-		initCompass(view, parent);
+		initFollowModeButton(view, parent);
 		initZoomButtons(view, parent);
 
 		initBackToMenuButton(view, parent);
@@ -150,7 +151,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		if(view.getRotate() != cachedRotate) {
 		    cachedRotate = view.getRotate();
-		    compassView.invalidate();
+		    // TODO(natashaj): Disable rotating compass button for now
+		    //compassView.invalidate();
 		}
 	}
 
@@ -337,19 +339,72 @@ public class MapControlsLayer extends OsmandMapLayer {
         }
         
 
-       private void initCenterButton(final OsmandMapTileView view, FrameLayout parent) {
-               centerButton = addButtonOption(R.drawable.map_center, view, parent);
-               centerButton.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                               isFollowingMode = !isFollowingMode;
-                               activity.backToLocationImpl();
-                       }
-               });
-        }
-        
+       private void initFollowModeButton(final OsmandMapTileView view, FrameLayout parent) {
+           if (followMode == null) {
+               setFollowMode(FollowMode.FOLLOW_COMPASS);
+           }
+           followModeButton = addButtonOption(getFollowModeResourceId(followMode), view, parent);
+           followModeButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   // Center map on current location in all cases follow mode button is clicked
+                   // Free scrolling is the only case where centering does not occur
+                   activity.backToLocationImpl();
+                   switch (followMode) {
+                   case FOLLOW_COMPASS:
+                   default:
+                       setFollowMode(FollowMode.FOLLOW_BEARING);
+                       break;
+                   case FOLLOW_BEARING:
+                   case FREE_SCROLL:
+                       setFollowMode(FollowMode.FOLLOW_COMPASS);
+                       break;
+                   }
+               }
+           });
+       }
+       
+       public FollowMode getFollowMode() {
+           return this.followMode;
+       }
+       
+       public void setFollowMode(FollowMode followMode) {
+           this.followMode = followMode;
+           if (activity != null) {
+               activity.setRotateMapMode(getFollowModeRotation(followMode));
+           }
+           if (followModeButton != null) {
+               followModeButton.setBackgroundResource(getFollowModeResourceId(followMode));
+           }
+       }
+       
+       private int getFollowModeResourceId(FollowMode followMode) {
+           switch (followMode) {
+           case FOLLOW_COMPASS:
+           default:
+               return R.drawable.map_follow_compass;
+           case FOLLOW_BEARING:
+               return R.drawable.map_follow_bearing;
+           case FREE_SCROLL:
+               return R.drawable.map_center;
+           }
+       }
+       
+       private int getFollowModeRotation(FollowMode followMode) {
+           switch (followMode) {
+           case FOLLOW_COMPASS:
+           default:
+               return OsmandSettings.ROTATE_MAP_NONE;
+           case FOLLOW_BEARING:
+               return OsmandSettings.ROTATE_MAP_BEARING;
+           case FREE_SCROLL:
+               return OsmandSettings.ROTATE_MAP_NONE;
+           }
+       }
+
+       // TODO(natashaj): Disable rotating compass button for now
        private void initCompass(final OsmandMapTileView view, FrameLayout parent) {
-               final Drawable compass = view.getResources().getDrawable(R.drawable.map_compass);
+               final Drawable compass = view.getResources().getDrawable(R.drawable.map_follow_bearing);
                final int mw = (int) compass.getMinimumWidth() ;
                final int mh = (int) compass.getMinimumHeight() ;
                compassView = new ImageView(view.getContext()) {
@@ -417,7 +472,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
-		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
+		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in_vertical).getMinimumHeight();
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 				Gravity.BOTTOM | Gravity.CENTER);
 		params.setMargins(0, 0, 0, minimumHeight + 3);
