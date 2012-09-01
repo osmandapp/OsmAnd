@@ -53,7 +53,7 @@
   <string name="index_name_tts_voice">Packs voix (TTS)</string>
   <string name="amenity_type_wikiosm">Wikipedia (hors ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
-  <string name="fav_export_confirmation">Un fichier de favoris précedemment exporté existe déjà. Voulez vous le remplacer?</string>
+  <string name="fav_export_confirmation">Un fichier de favoris précedemment exporté existe déjà. Voulez vous le remplacer ?</string>
   <string name="profile_settings">Paramètres de profil</string>
   <string name="settings_preset">Profil d\'utilisation</string>
   <string name="settings_preset_descr">Sélectionner un profil d\'utilisation avec ses réglages de carte et de navigation.</string>
@@ -99,7 +99,7 @@
 \n\tPour créer un bug OSM bug utiliser l\'option \'Ouvrir bug OSM\' dans le menu contextuel de la carte. Saisir une description detaillée du problème et le poster avec le bouton \'Ajouter\'.
 \n\tNotez que la connexion internet est nécessaire pour les contributions de PI et de bugs OSM.</string>
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
-  <string name="download_files_question_space">Espace actuellement disponible: {2} MB! Télécharger {0} fichier(s) ({1} MB)?</string>
+  <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="tip_select_destination_point">Sélectionner le point de destination</string>
   <string name="tip_select_destination_point_t">" \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
 \n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange)."</string>
@@ -124,7 +124,7 @@
   <string name="pref_overlay">Surcouche / sous-couche</string>
   <string name="pref_raster_map">Options source de cartes</string>
   <string name="pref_vector_map">Options cartographie vectorielle</string>
-  <string name="delete_confirmation_msg">Supprimer %1$s?</string>
+  <string name="delete_confirmation_msg">Supprimer %1$s ?</string>
   <string name="city_type_suburb">Banlieue</string>
   <string name="city_type_hamlet">Hameau</string>
   <string name="city_type_village">Village</string>
@@ -189,7 +189,7 @@
   <string name="show_more_map_detail">Afficher plus de détails</string>
   <string name="show_more_map_detail_descr">Afficher plus de détails sur les cartes vectorielles (routes etc.) aux niveaux de zooms inférieurs</string>
   <string name="favourites_delete_multiple_succesful">Favoris correctement supprimés.</string>
-  <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Etes vous sûr?</string>
+  <string name="favorite_delete_multiple">Vous allez supprimer %1$d favoris et %2$d groupes de favoris. Êtes vous sûr ?</string>
   <string name="favorite_home_category">Maison</string>
   <string name="favorite_friends_category">Amis</string>
   <string name="favorite_places_category">Lieux</string>
@@ -207,7 +207,7 @@
   <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
   <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
   <string name="local_index_no_items_to_do">Pas d\'éléments à %1$s</string>
-  <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer?</string>
+  <string name="local_index_action_do">Vous allez %1$s %2$s éléments. Continuer ?</string>
   <string name="local_index_descr_title">Gestionnaire de données hors ligne</string>
   <string name="local_index_mi_restore">Restaurer</string>
   <string name="local_index_mi_backup">Sauvegarder</string>
@@ -250,7 +250,7 @@
   <string name="tts_language_not_supported_title">Langue non disponible</string>
   <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale? Sinon la langue par défaut sera utilisée.</string>
   <string name="tts_missing_language_data_title">Données manquantes</string>
-  <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur le Market?</string>
+  <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur le Market ?</string>
   <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
   <string name="gpx_option_destination_point">Utiliser le point de destination en cours</string>
   <string name="gpx_option_from_start_point">Suivre le chemin depuis le début</string>
@@ -389,12 +389,12 @@
   <string name="osmand_net_previously_installed">Vous avez la version antérieure d\'OsmAnd d\'installée. Les données hors-ligne ne sont utilisées que par la nouvelle application. Les favoris doivent être exportés de l\'ancienne application et réimportés.</string>
   <string name="build_installed">Version {0} installée avec succès ({1}).</string>
   <string name="downloading_build">Téléchargement de l\'application…</string>
-  <string name="install_selected_build">Voulez-vous vraiment installer OsmAnd - {0} sur {1} {2} MB.</string>
+  <string name="install_selected_build">Voulez-vous vraiment installer OsmAnd - {0} sur {1} {2} MB ?</string>
   <string name="loading_builds_failed">Le chargement des versions disponibles a échoué.</string>
   <string name="loading_builds">Chargement des versions disponibles…</string>
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
-  <string name="gps_status_app_not_found">L\'application pour le statut du GPS n\'est pas installée. La chercher dans le Market?</string>
+  <string name="gps_status_app_not_found">L\\\'application pour le statut du GPS n\\\'est pas installée. La chercher dans le Market ?</string>
   <string name="voice_is_not_available_msg">Aucune voix n\'est installée. Veuillez aller dans les paramètres et choisir les données vocales à télécharger.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
@@ -403,14 +403,14 @@
   <string name="daynight_mode_sensor">Détection de la luminosité</string>
   <string name="daynight_descr">Définir les paramètres de changement jour/nuit</string>
   <string name="daynight">Mode Jour/Nuit</string>
-  <string name="download_files_question">Voulez vous télécharger {0} fichier(s) ({1} MB)?</string>
+  <string name="download_files_question">Voulez vous télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="items_were_selected">{0} objet(s) sont sélectionnés</string>
   <string name="filter_existing_indexes">Filtre téléchargé</string>
   <string name="deselect_all">Désélectionner tout</string>
   <string name="select_all">Sélectionner tout</string>
   <string name="reload">Recharger</string>
   <string name="fast_route_mode">Itinéraire le plus rapide</string>
-  <string name="fast_route_mode_descr">Activé pour calculer l\'itinéraire le plus rapide et désactivé pour calculer l\'itinéraire le plus court</string>
+  <string name="fast_route_mode_descr">Activer pour calculer l\\\'itinéraire le plus rapide et désactiver pour calculer l\\\'itinéraire le plus court</string>
   <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
   <string name="context_menu_item_download_map">Télécharger la carte</string>
   <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
@@ -559,7 +559,7 @@
   <string name="update_poi_no_offline_poi_index">Il n\'y a pas de données hors ligne pour cette région</string>
   <string name="update_poi_is_not_available_for_zoom">Mise à jour de PI n\'est pas disponible pour un petit niveau de zoom</string>
   <string name="context_menu_item_update_poi">Points d\'Intérêts</string>
-  <string name="context_menu_item_update_map_confirm">Sélectionnez les données que vous voulez mettre à jour depuis internet</string>
+  <string name="context_menu_item_update_map_confirm">Mettre à jour les données locales depuis internet ?</string>
   <string name="search_history_city">Ville:\n {0}</string>
   <string name="search_history_street">Rue:\n {0}, {1}</string>
   <string name="search_history_int_streets">Intersections : {0} x {1} dans {2}</string>
@@ -622,7 +622,7 @@
   <string name="empty_route_calculated">Trajet vide calculé</string>
   <string name="new_route_calculated_dist">Nouveau trajet calculé, distance</string>
   <string name="arrived_at_destination">Vous êtes arrivé à votre destination</string>
-  <string name="invalid_locations">Coordonnées invalides</string>
+  <string name="invalid_locations">Coordonnées invalides !</string>
   <string name="go_back_to_osmand">Retourner à la carte OsmAnd</string>
   <string name="close">Fermer</string>
   <string name="loading_data">Chargement des données</string>
