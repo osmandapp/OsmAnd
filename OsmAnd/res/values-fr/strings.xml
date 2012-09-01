@@ -1081,9 +1081,10 @@ Fonctionnalités principales :
 - Option de vue jour/nuit automatique
 - Option de zoom automatique lors des déplacements
 - Orientation automatique de la carte (fixe, boussole, azimut)</string>
-<string name="tip_map_switch_t_v2">\tLes sources des cartes et des couches affichées sont modifiables via \'Menu\' -> \'Couches\'.
+<string name="tip_map_switch_t_v2">\tLes sources des cartes et des couches affichées sont modifiables via \'Menu\' -&gt; \'Couches\'.
 \n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées, des tuiles en ligne prédéfinies (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées.</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporte différents profils personnalisables pour les différents cas usages.
 \n\tVous pouvez changer les profils via the bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.</string>
+<string name="avoid_motorway">Eviter autoroutes</string>
 </resources>
