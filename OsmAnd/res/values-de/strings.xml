@@ -7,6 +7,10 @@
 	<string name="auto_zoom_map">Automatischer Zoom</string>
 	<string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
 		\n\t* Verbessertes Navigationsverhalten
+		\n\t* Option Vermeide Autobahnen
+		\n\t* Anzeigen von Cycleway=track
+		\n\t* Oberfläche vervollständigt (Icons)
+		\n\t* Einige Bug fixes
 	</string>
 	<string name="snap_to_road_descr">Position während der Nvigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Einrasten auf Straße</string>
