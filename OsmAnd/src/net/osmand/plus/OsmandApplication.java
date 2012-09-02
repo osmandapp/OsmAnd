@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.DayNightHelper;
@@ -44,6 +46,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
@@ -246,6 +249,14 @@ public class OsmandApplication extends Application {
 		startApplication();
 		synchronized (OsmandApplication.this) {
 			if (startDialog != null) {
+				try {
+					SpecialPhrases.setLanguage(this, osmandSettings);
+				} catch (IOException e) {
+					LOG.error("I/O exception", e);
+					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
+					error.show();
+				}
+				
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);
@@ -391,19 +402,21 @@ public class OsmandApplication extends Application {
 	private void startApplicationBackground() {
 		List<String> warnings = new ArrayList<String>();
 		try {
-			if(osmandSettings.NATIVE_RENDERING_FAILED.get()){
-				osmandSettings.NATIVE_RENDERING.set(false);
-				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
-				warnings.add(getString(R.string.native_library_not_supported));
-			} else if (osmandSettings.NATIVE_RENDERING.get()) {
-				osmandSettings.NATIVE_RENDERING_FAILED.set(true);
-				startDialog.startTask(getString(R.string.init_native_library), -1);
-				RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
-				boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
-				osmandSettings.NATIVE_RENDERING_FAILED.set(false);
-				if (!initialized) {
-					LOG.info("Native library could not loaded!");
+			if (!Version.isBlackberry(this)) {
+				if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 					osmandSettings.NATIVE_RENDERING.set(false);
+					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
+					warnings.add(getString(R.string.native_library_not_supported));
+				} else if (osmandSettings.NATIVE_RENDERING.get()) {
+					osmandSettings.NATIVE_RENDERING_FAILED.set(true);
+					startDialog.startTask(getString(R.string.init_native_library), -1);
+					RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
+					boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
+					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
+					if (!initialized) {
+						LOG.info("Native library could not loaded!");
+						osmandSettings.NATIVE_RENDERING.set(false);
+					}
 				}
 			}
 			warnings.addAll(manager.reloadIndexes(startDialog));

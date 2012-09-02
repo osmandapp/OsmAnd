@@ -167,6 +167,10 @@ std::string RenderingContext::getTranslatedString(const std::string& src) {
 	return src;
 }
 
+std::string RenderingContext::getReshapedString(const std::string& src) {
+	return src;
+}
+
 
 inline double getPowZoom(float zoom){
 	if(zoom >= 0 && zoom - floor(zoom) < 0.05f){

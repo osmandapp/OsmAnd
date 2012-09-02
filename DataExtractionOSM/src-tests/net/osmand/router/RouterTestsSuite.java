@@ -96,7 +96,7 @@ public class RouterTestsSuite {
 		int it = 0;
 		for (File f : files) {
 			RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
-			rs[it++] = new BinaryMapIndexReader(raf, false);
+			rs[it++] = new BinaryMapIndexReader(raf);
 		}
 		
 		boolean allSuccess = true;
@@ -159,7 +159,7 @@ public class RouterTestsSuite {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because 'best_percent' attribute is not specified \n\n" );
 			return;
 		}
-		RoutingContext ctx = new RoutingContext(config.build(vehicle, true));
+		RoutingContext ctx = new RoutingContext(config.build(vehicle));
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because '" + skip + "'\n\n" );

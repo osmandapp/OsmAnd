@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.osm.MapUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import android.graphics.Canvas;
@@ -66,8 +65,9 @@ public class RouteLayer extends OsmandMapLayer {
 			}
 			int w = view.getWidth();
 			int h = view.getHeight();
-			if(helper.getCurrentLocation() != null &&
-					view.isPointOnTheRotatedMap(helper.getCurrentLocation().getLatitude(), helper.getCurrentLocation().getLongitude())){
+			Location lastProjection = helper.getLastProjection();
+			if(lastProjection != null &&
+					view.isPointOnTheRotatedMap(lastProjection.getLatitude(), lastProjection.getLongitude())){
 				boundsRect = new Rect(-w / 2, -h, 3 * w / 2, h);
 			} else {
 				boundsRect = new Rect(0, 0, w, h);
@@ -102,11 +102,11 @@ public class RouteLayer extends OsmandMapLayer {
 	public synchronized void fillLocationsToShow(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		points.clear();
 		boolean previousVisible = false;
-		Location lastFixedLocation = helper.getLastFixedLocation();
-		if (lastFixedLocation != null) {
-			if (leftLongitude <= lastFixedLocation.getLongitude() && lastFixedLocation.getLongitude() <= rightLongitude
-					&& bottomLatitude <= lastFixedLocation.getLatitude() && lastFixedLocation.getLatitude() <= topLatitude) {
-				points.add(lastFixedLocation);
+		Location lastProjection = helper.getLastProjection();
+		if (lastProjection != null) {
+			if (leftLongitude <= lastProjection.getLongitude() && lastProjection.getLongitude() <= rightLongitude
+					&& bottomLatitude <= lastProjection.getLatitude() && lastProjection.getLatitude() <= topLatitude) {
+				points.add(lastProjection);
 				previousVisible = true;
 			}
 		}
@@ -119,8 +119,8 @@ public class RouteLayer extends OsmandMapLayer {
 				if (!previousVisible) {
 					if (i > 0) {
 						points.add(0, routeNodes.get(i - 1));
-					} else if (lastFixedLocation != null) {
-						points.add(0, lastFixedLocation);
+					} else if (lastProjection != null) {
+						points.add(0, lastProjection);
 					}
 				}
 				previousVisible = true;

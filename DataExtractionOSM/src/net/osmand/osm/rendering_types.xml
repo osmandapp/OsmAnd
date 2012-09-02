@@ -77,10 +77,12 @@
 		<type tag="highway" value="emergency_access_point" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="speed_camera" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="street_lamp" minzoom="16" />
+		
 	</category>
 	
 	<category name="routes">
-		<type tag="route" value="ferry" minzoom="8" />
+		<type tag="route" value="ferry" minzoom="8" relation="true"/>
+		<type tag="route" value="hiking" minzoom="8" relation="true"/>
 	</category>
 
 	<category name="tracktype">
@@ -103,9 +105,9 @@
 	<category name="cycleway">
 		<type tag="cycleway" value="lane" minzoom="12"/>
 		<type tag="cycleway" value="opposite_lane" minzoom="12"/>
-		<type tag="cycleway" minzoom="12"/>
-		<type tag="cycleway:left" target_tag="cycleway" minzoom="12"/>
-		<type tag="cycleway:right" target_tag="cycleway" minzoom="12"/>
+		<type tag="cycleway" value="track" minzoom="12"/>
+		<type tag="cycleway:left" target_tag="cycleway" value="lane" minzoom="12"/>
+		<type tag="cycleway:right" target_tag="cycleway" value="lane" minzoom="12"/>
 	</category>	
 	
 	
@@ -533,7 +535,10 @@
 		<type tag="amenity" value="car_sharing" minzoom="15" />
 		<type tag="amenity" value="car_wash" minzoom="15" />
 		<type tag="amenity" value="grit_bin" minzoom="15" />
+		<type tag="rwn_ref" value="" minzoom="14" nameTags="rwn_ref" poi_prefix="walking_node_"/>
+		<type tag="rcn_ref" value="" minzoom="14" nameTags="rcn_ref" poi_prefix="cycle_node_"/>
 	</category>
+	
 
 
 	<category name="finance" poi_category="finance">
@@ -633,7 +638,6 @@
 	</category>
 
 
-
 	<!-- sport -->
 	<category name="sport" poi_tag="sport" poi_category="sport">
 		<type tag="sport" value="9pin" minzoom="15" />
@@ -686,6 +690,9 @@
 	</category>
 	
 	<category name="osmwiki" poi_tag="osmwiki" poi_category="osmwiki"/>
+	
+	<category name="tiles">
+	</category>
 	
 	<category name="tiles">
 	</category>

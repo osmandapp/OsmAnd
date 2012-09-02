@@ -13,7 +13,7 @@ public abstract class VehicleRouter {
 	 */
 	public abstract boolean acceptLine(RouteDataObject way);
 	
-	public abstract boolean restrictionsAwayre();
+	public abstract boolean restrictionsAware();
 
 	
 	public int isOneWay(RouteDataObject road) {
@@ -34,6 +34,11 @@ public abstract class VehicleRouter {
 	 * return delay in seconds
 	 */
 	public double defineObstacle(RouteDataObject road, int point) {
+		// no obstacles
+		return 0;
+	}
+	
+	public double defineRoutingObstacle(RouteDataObject road, int point) {
 		// no obstacles
 		return 0;
 	}
@@ -61,6 +66,8 @@ public abstract class VehicleRouter {
 	 * @return maximum speed to calculate shortest distance
 	 */
 	public abstract double getMaxDefaultSpeed();
+	
+	public abstract VehicleRouter specialization(String tag);
 
 	/**
 	 * Calculate turn time 

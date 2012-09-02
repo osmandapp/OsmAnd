@@ -289,8 +289,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 			lonIndex = lonIndex > 0 ? lonIndex : geo.length();
 			if (latIndex > 0) {
 				try {
-					double latitude = Double.parseDouble(geo.substring(0, latIndex));
-					double longitude = Double.parseDouble(geo.substring(latIndex + 1, lonIndex));
+					double latitude = Double.parseDouble(geo.substring(0, latIndex).trim());
+					double longitude = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
 					// TODO zoom is omited for now
 					point = new MapObject(new Node(latitude, longitude, -1)) {
 						private static final long serialVersionUID = -7028586132795853725L;

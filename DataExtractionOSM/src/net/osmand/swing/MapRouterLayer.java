@@ -594,11 +594,14 @@ public class MapRouterLayer implements MapPanelLayer {
 				int it = 0;
 				for (File f : files) {
 					RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
-					rs[it++] = new BinaryMapIndexReader(raf, false);
+					rs[it++] = new BinaryMapIndexReader(raf);
 				}
 				String m = DataExtractionSettings.getSettings().getRouteMode();
+				String[] props = m.split("\\,");
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-				RoutingConfiguration config = builder.build(m, true);
+				RoutingConfiguration config = builder.build(props[0], props);
+				// config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
+				// config.ZOOM_TO_LOAD_TILES = 14;
 				RoutingContext ctx = new RoutingContext(config);
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");

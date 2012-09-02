@@ -2,29 +2,32 @@ package net.osmand.plus.activities.search;
 
 import java.util.List;
 
+import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 public class SearchHistoryActivity extends ListActivity  implements SearchActivityChild {
 	private LatLon location;
@@ -53,13 +56,6 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 				helper.removeAll(SearchHistoryActivity.this);
 				setListAdapter(new HistoryAdapter(helper.getHistoryEntries(SearchHistoryActivity.this)));
 			}
-		});
-		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				return SearchHistoryActivity.this.onItemLongClick(pos);
-			}
-
 		});
 	}
 
@@ -96,41 +92,26 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 		((HistoryAdapter) getListAdapter()).notifyDataSetChanged();
 	}
 
-	private boolean onItemLongClick(int pos) {
-		final HistoryEntry entry = ((HistoryAdapter) getListAdapter()).getItem(pos);
-		AlertDialog.Builder builder = new AlertDialog.Builder(SearchHistoryActivity.this);
-		builder.setTitle(entry.getName());
-		builder.setItems(new String[] { getString(R.string.show_poi_on_map), getString(R.string.navigate_to) },
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						if (which == 0) {
-							OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-							settings.setMapLocationToShow(entry.getLat(), entry.getLon(), settings.getLastKnownMapZoom(), null, entry
-									.getName(), null);
-						} else if (which == 1) {
-							((OsmandApplication) getApplication()).getSettings().setPointToNavigate(entry.getLat(), entry.getLon(), null);
-						}
-						MapActivity.launchMapActivityMoveToTop(SearchHistoryActivity.this);
-					}
-
-				});
-		builder.show();
-		return true;
-	}
 
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		HistoryEntry model = ((HistoryAdapter) getListAdapter()).getItem(position);
-		selectModel(model);
+		selectModel(model, v);
 	}
 
-	private void selectModel(HistoryEntry model) {
-		helper.selectEntry(model, this);
+	private void selectModel(final HistoryEntry model, View v) {
+		QuickAction qa = new QuickAction(v);
+		String name = model.getName();
 		OsmandSettings settings = ((OsmandApplication) getApplication()).getSettings();
-		settings.setMapLocationToShow(model.getLat(), model.getLon(), settings.getLastKnownMapZoom(), null, model.getName(), null);
-		MapActivity.launchMapActivityMoveToTop(this);
+		OnClickListener onShow = new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				helper.selectEntry(model, SearchHistoryActivity.this);				
+			}
+		};
+		MapActivityActions.createDirectionsActions(qa, new LatLon(model.getLat(), model.getLon()),
+				model, name, settings.getLastKnownMapZoom(), this, false, onShow);
+		qa.show();
 	}
 
 	class HistoryAdapter extends ArrayAdapter<HistoryEntry> {
@@ -147,16 +128,15 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 				row = inflater.inflate(R.layout.search_history_list_item, parent, false);
 			}
 			TextView label = (TextView) row.findViewById(R.id.label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.distance_label);
+			String distance = "";
 			ImageButton icon = (ImageButton) row.findViewById(R.id.remove);
 			final HistoryEntry model = getItem(position);
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, SearchHistoryActivity.this));
-			} else {
-				distanceLabel.setText(""); //$NON-NLS-1$
+				distance = OsmAndFormatter.getFormattedDistance(dist, SearchHistoryActivity.this) + "  ";
 			}
-			label.setText(model.name);
+			label.setText(distance + model.name, BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
 			icon.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -168,19 +148,10 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 			View.OnClickListener clickListener = new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					selectModel(model);
+					selectModel(model, v);
 				}
 			};
 
-			View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View v) {
-					return onItemLongClick(position);
-				}
-			};
-			distanceLabel.setOnLongClickListener(longClickListener);
-			label.setOnLongClickListener(longClickListener);
-			distanceLabel.setOnClickListener(clickListener);
 			label.setOnClickListener(clickListener);
 			return row;
 		}

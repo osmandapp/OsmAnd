@@ -154,32 +154,12 @@ public class BinaryMapRouteReaderAdapter {
 	}
 	
 	public static class RouteRegion extends BinaryIndexPart {
-		double leftLongitude;
-		double rightLongitude;
-		double topLatitude;
-		double bottomLatitude;
 		int regionsRead;
 		
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
-		
-		public double getLeftLongitude() {
-			return leftLongitude;
-		}
-		
-		public double getRightLongitude() {
-			return rightLongitude;
-		}
-		
-		public double getTopLatitude() {
-			return topLatitude;
-		}
-		
-		public double getBottomLatitude() {
-			return bottomLatitude;
-		}
 		
 		public RouteTypeRule quickGetEncodingRule(int id) {
 			return routeEncodingRules.get(id);
@@ -199,6 +179,38 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public List<RouteSubregion> getSubregions(){
 			return subregions;
+		}
+
+		public double getLeftLongitude() {
+			double l = 180;
+			for(RouteSubregion s : subregions) {
+				l = Math.min(l, MapUtils.get31LongitudeX(s.left));
+			}
+			return l;
+		}
+
+		public double getRightLongitude() {
+			double l = -180;
+			for(RouteSubregion s : subregions) {
+				l = Math.max(l, MapUtils.get31LongitudeX(s.right));
+			}
+			return l;
+		}
+
+		public double getBottomLatitude() {
+			double l = 90;
+			for(RouteSubregion s : subregions) {
+				l = Math.min(l, MapUtils.get31LatitudeY(s.bottom));
+			}
+			return l;
+		}
+
+		public double getTopLatitude() {
+			double l = -90;
+			for(RouteSubregion s : subregions) {
+				l = Math.max(l, MapUtils.get31LatitudeY(s.top));
+			}
+			return l;
 		}
 	}
 	
@@ -285,10 +297,6 @@ public class BinaryMapRouteReaderAdapter {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
 				
-				region.bottomLatitude = MapUtils.get31LatitudeY(subregion.bottom);
-				region.topLatitude = MapUtils.get31LatitudeY(subregion.top);
-				region.rightLongitude = MapUtils.get31LongitudeX(subregion.right);
-				region.leftLongitude = MapUtils.get31LongitudeX(subregion.left);
 				// Finish reading file!
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 			}	break;
@@ -589,6 +597,27 @@ public class BinaryMapRouteReaderAdapter {
 				break;
 			}
 		}
+	}
+	
+	public void initRouteTypesIfNeeded(SearchRequest<RouteDataObject> req) throws IOException{
+		for(RouteRegion r:  map.getRoutingIndexes() ) {
+			if (r.routeEncodingRules.isEmpty()) {
+				boolean intersect = false;
+				for (RouteSubregion rs : r.subregions) {
+					if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
+						intersect = true;
+						break;
+					}
+				}
+				if(intersect) {
+					codedIS.seek(r.filePointer);
+					int oldLimit = codedIS.pushLimit(r.length);
+					readRouteIndex(r);
+					codedIS.popLimit(oldLimit);
+				}
+			}
+		}
+		
 	}
 	
 	public void searchRouteRegion(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {

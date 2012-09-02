@@ -24,6 +24,7 @@ import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.IndexConstants;
@@ -38,6 +39,7 @@ import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.render.MapRenderRepositories;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -69,6 +71,7 @@ public class ResourceManager {
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String GPX_PATH = APP_DIR + "tracks";
 	public static final String MAPS_PATH = APP_DIR;
+	public static final String INDEXES_CACHE = APP_DIR + "ind.cache";
 	public static final String BACKUP_PATH = APP_DIR + "backup/";
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
@@ -526,12 +529,38 @@ public class ResourceManager {
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
+		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();
+		File indCache = context.getSettings().extendOsmandPath(INDEXES_CACHE);
+		if(indCache.exists()) {
+			try {
+				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
+				NativeOsmandLibrary nativeLib = context.getSettings().NATIVE_RENDERING.get() ? NativeOsmandLibrary.getLoadedLibrary()
+						: null;
+				if(nativeLib != null) {
+					nativeLib.initCacheMapFile(indCache.getAbsolutePath());
+				}
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
+		}
 		if (file.exists() && file.canRead()) {
+			long val = System.currentTimeMillis();
 			for (File f : file.listFiles()) {
 				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 					try {
-						BinaryMapIndexReader index = renderer.initializeNewResource(progress, f);
+						BinaryMapIndexReader index = null;
+						try {
+							index = cachedOsmandIndexes.getReader(f);
+							if (index.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
+								index = null;
+							}
+							if (index != null) {
+								renderer.initializeNewResource(progress, f, index);
+							}
+						} catch (IOException e) {
+							log.error(String.format("File %s could not be read", f.getName()), e);
+						}
 						if (index == null || (Version.isFreeVersion(context) && f.getName().contains("_wiki"))) {
 							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 						} else {
@@ -583,6 +612,14 @@ public class ResourceManager {
 				} else if(f.getName().endsWith(".map.odb")){ //$NON-NLS-1$
 					warnings.add(MessageFormat.format(context.getString(R.string.old_map_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				}
+			}
+			log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
+		}
+		if(!indCache.exists() || indCache.canWrite()){
+			try {
+				cachedOsmandIndexes.writeToFile(indCache);
+			} catch (Exception e) {
+				log.error("Index file could not be written", e);
 			}
 		}
 		return warnings;

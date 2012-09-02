@@ -38,14 +38,14 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		return new AsyncTask<Object, City, List<City>>(){
 			@Override
 			protected void onPostExecute(List<City> result) {
-				((TextView)findViewById(R.id.Label)).setText(R.string.incremental_search_city);
+				setLabelText(R.string.incremental_search_city);
 				progress.setVisibility(View.INVISIBLE);
 				finishInitializing(result);
 			}
 			
 			@Override
 			protected void onPreExecute() {
-				((TextView)findViewById(R.id.Label)).setText(R.string.loading_cities);
+				setLabelText(R.string.loading_cities);
 				progress.setVisibility(View.VISIBLE);
 			}
 			
@@ -110,6 +110,11 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		} else {
 			return obj.getName(region.useEnglishNames());
 		}
+	}
+	
+	@Override
+	public String getShortText(City obj) {
+		return obj.getName(region.useEnglishNames());
 	}
 	
 	@Override

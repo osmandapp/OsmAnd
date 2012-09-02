@@ -1,10 +1,20 @@
 <?php
+
 function updateGoogleCodeIndexes($update=false) {
+        $local_file = false;
+        if( basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 	{
+	     $update = true;
+	     $local_file = true;
+	}
+
 	$localFileName='indexes.xml';
 	// check each 30 minutes
 	if(!$update && file_exists($localFileName) && time() - filemtime($localFileName) < 60 * 30) {
 		return;
 	}
+	if($local_file) {
+	        echo '<h1>File update : </h1> <br>';
+        }
 
 	$dom = new DomDocument();
 
@@ -51,6 +61,9 @@ function updateGoogleCodeIndexes($update=false) {
 	 		$date = trim(substr($description, $i + 1, $i1 - $i -1));
 	 		$size = trim(substr($description, $i1 + 1, $i2 - $i1 -1));
 	 		$description = trim(substr($description, 0, $i));
+            if($local_file) {
+                        	echo $indexName.'   '.$date.'  '.$size.' <br>';
+			}
 
 	 		if(strpos($indexName,"voice.zip") || strpos($indexName,".obf")) {
 	 			$ipart = strpos($indexName,"zip-");
@@ -115,6 +128,9 @@ function updateGoogleCodeIndexes($update=false) {
 				$date= date('d.m.Y',$stat['mtime']);
 				$size=  number_format((filesize($filename) / (1024.0*1024.0)), 1, '.', '');
 				$zip->close();
+                if($local_file) {
+				echo 'Local : '.$indexName.' '.$date.' '.$size.'<br>';
+                     }
 				if (isset($mapNodes[$indexName])) {
 					$exdate = DateTime::createFromFormat('d.m.Y', $mapNodes[$indexName]->getAttribute("date"));
                     $localdate = DateTime::createFromFormat('d.m.Y', $date);
@@ -144,7 +160,12 @@ function updateGoogleCodeIndexes($update=false) {
 	} else {
 		print($dir . " not a directory!\n");
 	}
-
+        if($local_file) {
+	  // header('Content-Type: text/xml');
+	  // echo $output->asXML();
+	}
 	$output->save($localFileName);
 }
+
+updateGoogleCodeIndexes(false);
 ?>

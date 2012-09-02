@@ -86,7 +86,6 @@ public class OsmandRenderer {
 		}
 
 		// use to calculate points
-		float tileDivisor;
 		PointF tempPoint = new PointF();
 		float cosRotateTileSize;
 		float sinRotateTileSize;
@@ -160,8 +159,6 @@ public class OsmandRenderer {
 			Bitmap bmp, RenderingRuleSearchRequest render, final List<IMapDownloaderCallback> notifyList) {
 		long now = System.currentTimeMillis();
 		if (rc.width > 0 && rc.height > 0 && searchResultHandler != null) {
-			// init rendering context
-			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			try {
@@ -201,8 +198,6 @@ public class OsmandRenderer {
 			cv.drawColor(rc.defaultColor);
 		}
 		if (objects != null && !objects.isEmpty() && rc.width > 0 && rc.height > 0) {
-			// init rendering context
-			rc.tileDivisor = (int) (1 << (31 - rc.zoom));
 			rc.cosRotateTileSize = FloatMath.cos((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			rc.sinRotateTileSize = FloatMath.sin((float) Math.toRadians(rc.rotate)) * TILE_SIZE;
 			
@@ -444,6 +439,14 @@ public class OsmandRenderer {
 		}
 		rc.visible++;
 		int len = obj.getPointsLength();
+//		if(len > 150) {
+//			int[] ts = obj.getTypes();
+//			System.err.println("Polygon " + len);
+//			for(int i=0; i<ts.length; i++) {
+//				System.err.println(obj.getMapIndex().decodeType(ts[i]));
+//			}
+//			return;
+//		}
 		for (int i = 0; i < obj.getPointsLength(); i++) {
 
 			PointF p = calcPoint(obj, i, rc);
@@ -663,10 +666,26 @@ public class OsmandRenderer {
 			textPoints = new PointF[length];
 		}
 
+		boolean intersect = false;
+		PointF prev = null;
 		for (int i = 0; i < length ; i++) {
 			PointF p = calcPoint(obj, i, rc);
 			if(textPoints != null) {
 				textPoints[i] = new PointF(p.x, p.y);
+			}
+			if (!intersect) {
+				if (p.x >= 0 && p.y >= 0 && p.x < rc.width && p.y < rc.height) {
+					intersect = true;
+				}
+				if (!intersect && prev != null) {
+					if ((p.x < 0 && prev.x < 0) || (p.y < 0 && prev.y < 0) || (p.x > rc.width && prev.x > rc.width)
+							|| (p.y > rc.height && prev.y > rc.height)) {
+						intersect = false;
+					} else {
+						intersect = true;
+					}
+
+				}
 			}
 			if (path == null) {
 				path = new Path();
@@ -678,6 +697,15 @@ public class OsmandRenderer {
 				}
 				path.lineTo(p.x, p.y);
 			}
+			prev = p;
+		}
+		if (!intersect) {
+//			System.err.println("Not intersect ");
+//			int[] ts = obj.getTypes();
+//			for(int i=0; i<ts.length; i++) {
+//				System.err.println(obj.getMapIndex().decodeType(ts[i]));
+//			}
+			return;
 		}
 		if (path != null) {
 			if(drawOnlyShadow) {

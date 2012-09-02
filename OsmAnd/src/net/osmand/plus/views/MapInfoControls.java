@@ -2,13 +2,17 @@ package net.osmand.plus.views;
 
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import net.osmand.Algoritms;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.activities.ApplicationMode;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,25 +71,42 @@ public class MapInfoControls {
 	}
 	
 	public MapInfoControlRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
-			EnumSet<ApplicationMode> appDefaultModes) {
+			OsmandPreference<?> pref) {
 		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
-		ii.defaultModes = appDefaultModes.clone();
+		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
 		ii.defaultCollapsible = null;
 		ii.key = key;
+		ii.preference = pref;
 		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
 		ii.visibleCollapsible = null;
-		for(ApplicationMode ms : ApplicationMode.values() ) {
-			boolean def = appDefaultModes.contains(ms);
-			Set<String> set = visibleElements.get(ms);
-			if(set != null) {
-				def = set.contains(key);
-			}
-			if(def){
-				ii.visibleModes.add(ms);
-			}
-		}
 		ii.drawable = drawable;
 		ii.messageId = messageId;
+		this.appearanceWidgets.add(ii);
+		return ii;
+	}
+	
+	public void removeApperanceWidgets(String category) {
+		Iterator<MapInfoControlRegInfo> it = appearanceWidgets.iterator();
+		while(it.hasNext()) {
+			if(Algoritms.objectEquals(it.next().category, category)) {
+				it.remove();
+			}
+		}
+	}
+	
+	public MapInfoControlRegInfo registerAppearanceWidget(int drawable, String message, String key, 
+			CommonPreference<?> pref, String subcategory) {
+		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
+		ii.defaultCollapsible = null;
+		ii.key = key;
+		ii.category = subcategory;
+		ii.preference = pref;
+		ii.visibleModes = EnumSet.noneOf(ApplicationMode.class); 
+		ii.visibleCollapsible = null;
+		ii.drawable = drawable;
+		ii.messageId = message.hashCode();
+		ii.message = message;
 		this.appearanceWidgets.add(ii);
 		return ii;
 	}
@@ -101,8 +122,12 @@ public class MapInfoControls {
 		for(ApplicationMode ms : ApplicationMode.values() ) {
 			boolean def = appDefaultModes.contains(ms);
 			Set<String> set = visibleElements.get(ms);
-			if(set != null) {
-				def = set.contains(key);
+			if (set != null) {
+				if (set.contains(key)) {
+					def = true;
+				} else if (set.contains("-" + key)) {
+					def = false;
+				}
 			}
 			if(def){
 				ii.visibleModes.add(ms);
@@ -132,8 +157,13 @@ public class MapInfoControls {
 			boolean def = appDefaultModes.contains(ms);
 			Set<String> set = visibleElements.get(ms);
 			if(set != null) {
-				def = set.contains(key);
-				collapse = set.contains("+"+key);
+				if (set.contains(key)) {
+					def = true;
+				} else if (set.contains("-" + key)) {
+					def = false;
+				} else if(set.contains("+"+key)){
+					collapse = true;	
+				}
 			}
 			if(def){
 				ii.visibleModes.add(ms);
@@ -153,45 +183,58 @@ public class MapInfoControls {
 	}
 	
 	private void restoreModes(Set<String> set, Set<MapInfoControlRegInfo> mi, ApplicationMode mode) {
-		for(MapInfoControlRegInfo m : mi){
-			if(m.visibleModes.contains(mode)) {
-				set.add(m.key) ;
-			} else if(m.visibleCollapsible != null && m.visibleCollapsible.contains(mode)) {
-				set.add("+"+m.key) ;
-			}  
+		for (MapInfoControlRegInfo m : mi) {
+			if (m.preference == null) {
+				if (m.visibleModes.contains(mode)) {
+					set.add(m.key);
+				} else if (m.visibleCollapsible != null && m.visibleCollapsible.contains(mode)) {
+					set.add("+" + m.key);
+				} else {
+					set.add("-" + m.key);
+				}
+			}
 		}
 	}
 	
-	public void changeVisibility(MapInfoControlRegInfo m, boolean visible, boolean collapse) {
-		ApplicationMode mode = settings.APPLICATION_MODE.get();
-		if(this.visibleElements.get(mode) == null){
-			LinkedHashSet<String> set = new LinkedHashSet<String>();
-			restoreModes(set, left, mode);
-			restoreModes(set, right, mode);
-			restoreModes(set, top, mode);
-			this.visibleElements.put(mode, set);
-		}
-		this.visibleElements.get(mode).remove(m.key);
-		this.visibleElements.get(mode).remove("+" + m.key);
-		m.visibleModes.remove(mode);
-		if(m.visibleCollapsible != null) {
-			m.visibleCollapsible.remove(mode);
-		}
-		if(visible) {
-			if(collapse && m.visibleCollapsible != null) {
-				m.visibleCollapsible.add(mode);
-				this.visibleElements.get(mode).add("+" + m.key);
+	public void changeVisibility(MapInfoControlRegInfo m) {
+		boolean selecteable = m.selecteable();
+		if (selecteable) {
+			ApplicationMode mode = settings.APPLICATION_MODE.get();
+			boolean visible = m.visible(mode);
+			boolean collapseEnabled = m.collapseEnabled(mode);
+			boolean collapse = m.visibleCollapsed(mode);
+			if (this.visibleElements.get(mode) == null) {
+				LinkedHashSet<String> set = new LinkedHashSet<String>();
+				restoreModes(set, left, mode);
+				restoreModes(set, right, mode);
+				restoreModes(set, top, mode);
+				this.visibleElements.put(mode, set);
+			}
+			// clear everything
+			this.visibleElements.get(mode).remove(m.key);
+			this.visibleElements.get(mode).remove("+" + m.key);
+			this.visibleElements.get(mode).remove("-" + m.key);
+			m.visibleModes.remove(mode);
+			if (m.visibleCollapsible != null) {
+				m.visibleCollapsible.remove(mode);
+			}
+			if (visible || collapse) {
+				if (collapseEnabled && !collapse) {
+					m.visibleCollapsible.add(mode);
+					this.visibleElements.get(mode).add("+" + m.key);
+				} else {
+					this.visibleElements.get(mode).add("-" + m.key);
+				}
 			} else {
 				m.visibleModes.add(mode);
-				this.visibleElements.get(mode).add(m.key);
-				
+				this.visibleElements.get(mode).add("" + m.key);
 			}
+			StringBuilder bs = new StringBuilder();
+			for (String ks : this.visibleElements.get(mode)) {
+				bs.append(ks).append(";");
+			}
+			settings.MAP_INFO_CONTROLS.set(bs.toString());
 		}
-		StringBuilder bs = new StringBuilder();
-		for(String ks : this.visibleElements.get(mode)){
-			bs.append(ks).append(";");
-		}
-		settings.MAP_INFO_CONTROLS.set(bs.toString());
 		if(m.stateChangeListener != null) {
 			m.stateChangeListener.run();
 		}
@@ -241,15 +284,19 @@ public class MapInfoControls {
 	
 	private void resetDefault(ApplicationMode mode, Set<MapInfoControlRegInfo> set ){
 		for(MapInfoControlRegInfo ri : set) {
-			if(ri.visibleCollapsible != null) { 
-				ri.visibleCollapsible.remove(mode);
-			}
-			ri.visibleModes.remove(mode);
-			if(ri.defaultCollapsible != null && ri.defaultCollapsible.contains(mode)) {
-				ri.visibleCollapsible.add(mode);
-			}
-			if(ri.defaultModes.contains(mode)) {
-				ri.visibleModes.add(mode);
+			if(ri.preference != null) {
+				ri.preference.resetToDefault();
+			} else {
+				if (ri.visibleCollapsible != null) {
+					ri.visibleCollapsible.remove(mode);
+				}
+				ri.visibleModes.remove(mode);
+				if (ri.defaultCollapsible != null && ri.defaultCollapsible.contains(mode)) {
+					ri.visibleCollapsible.add(mode);
+				}
+				if (ri.defaultModes.contains(mode)) {
+					ri.visibleModes.add(mode);
+				}
 			}
 		}
 	}
@@ -259,6 +306,7 @@ public class MapInfoControls {
 		resetDefault(appMode, left);
 		resetDefault(appMode, right);
 		resetDefault(appMode, top);
+		resetDefault(appMode, appearanceWidgets);
 		this.visibleElements.put(appMode, null);
 		settings.MAP_INFO_CONTROLS.set("");
 	}
@@ -275,24 +323,42 @@ public class MapInfoControls {
 		public View m;
 		public int drawable;
 		public int messageId;
+		public String message;
 		private String key;
 		private int position;
+		private String category;
 		private EnumSet<ApplicationMode> defaultModes;
 		private EnumSet<ApplicationMode> defaultCollapsible;
 		private EnumSet<ApplicationMode> visibleModes;
 		private EnumSet<ApplicationMode> visibleCollapsible;
+		private OsmandPreference<?> preference = null;
 		private Runnable stateChangeListener = null;
 		public int priorityOrder;
 		
 		public boolean visibleCollapsed(ApplicationMode mode){
-			return visibleCollapsible != null && visibleCollapsible.contains(mode);
+			return preference == null && visibleCollapsible != null && visibleCollapsible.contains(mode);
 		}
 		
 		public boolean collapseEnabled(ApplicationMode mode){
-			return visibleCollapsible != null;
+			return visibleCollapsible != null && preference == null;
+		}
+		
+		
+		public String getCategory() {
+			return category;
+		}
+		public boolean selecteable(){
+			return preference == null || (preference.get() instanceof Boolean);
 		}
 		
 		public boolean visible(ApplicationMode mode){
+			if(preference != null) {
+				Object value = preference.getModeValue(mode);
+				if(value instanceof Boolean) {
+					return ((Boolean) value).booleanValue();
+				}
+				return true;
+			}
 			return visibleModes.contains(mode);
 		}
 		
@@ -301,6 +367,10 @@ public class MapInfoControls {
 				visibleModes.add(ms);
 			}
 			return this;
+		}
+		
+		public void setPreference(CommonPreference<Boolean> blPreference) {
+			this.preference = blPreference;
 		}
 		
 		

@@ -4,6 +4,7 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
@@ -220,7 +221,7 @@ public class MainMenuActivity extends Activity {
                         }
                 });
 
-		View closeButton = window.findViewById(R.id.CloseButton);
+		final View closeButton = window.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -235,6 +236,7 @@ public class MainMenuActivity extends Activity {
 				}
 			}
 		});
+		AndroidUtils.expandClickableArea(closeButton, 1,1,3,3);
 
 		if(exit){
 			return;

@@ -52,6 +52,16 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_closeBinaryMapFi
 	closeBinaryMapFile(inputName);
 }
 
+
+extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initCacheMapFiles(JNIEnv* ienv,
+		jobject obj,
+		jobject path) {
+	const char* utf = ienv->GetStringUTFChars((jstring) path, NULL);
+	std::string inputName(utf);
+	ienv->ReleaseStringUTFChars((jstring) path, utf);
+	return initMapFilesFromCache(inputName);
+}
+
 extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMapFile(JNIEnv* ienv,
 		jobject obj, jobject path) {
 	// Verify that the version of the library that we linked against is
@@ -61,8 +71,6 @@ extern "C" JNIEXPORT jboolean JNICALL Java_net_osmand_NativeLibrary_initBinaryMa
 	BinaryMapFile* fl = initBinaryMapFile(inputName);
 	if(fl == NULL) {
 		osmand_log_print(LOG_WARN, "File %s was not initialized", inputName.c_str());
-	} else {
-		osmand_log_print(LOG_INFO, "File %s is initialized.", fl->inputName.c_str());
 	}
 	return fl != NULL;
 }
@@ -351,7 +359,9 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 //////////  JNI Rendering Context //////////////
 
 jclass jclass_JUnidecode;
+jclass jclass_Reshaper;
 jmethodID jmethod_JUnidecode_unidecode;
+jmethodID jmethod_Reshaper_reshape;
 jclass jclass_RenderingContext = NULL;
 jfieldID jfield_RenderingContext_interrupted = NULL;
 jfieldID jfield_RenderingContext_leftX = NULL;
@@ -359,6 +369,7 @@ jfieldID jfield_RenderingContext_topY = NULL;
 jfieldID jfield_RenderingContext_width = NULL;
 jfieldID jfield_RenderingContext_height = NULL;
 jfieldID jfield_RenderingContext_zoom = NULL;
+jfieldID jfield_RenderingContext_tileDivisor = NULL;
 jfieldID jfield_RenderingContext_rotate = NULL;
 jfieldID jfield_RenderingContext_useEnglishNames = NULL;
 jfieldID jfield_RenderingContext_pointCount = NULL;
@@ -396,6 +407,7 @@ void loadJniRenderingContext(JNIEnv* env)
 	jfield_RenderingContext_width = getFid(env,  jclass_RenderingContext, "width", "I" );
 	jfield_RenderingContext_height = getFid(env,  jclass_RenderingContext, "height", "I" );
 	jfield_RenderingContext_zoom = getFid(env,  jclass_RenderingContext, "zoom", "I" );
+	jfield_RenderingContext_tileDivisor = getFid(env,  jclass_RenderingContext, "tileDivisor", "F" );
 	jfield_RenderingContext_rotate = getFid(env,  jclass_RenderingContext, "rotate", "F" );
 	jfield_RenderingContext_useEnglishNames = getFid(env,  jclass_RenderingContext, "useEnglishNames", "Z" );
 	jfield_RenderingContext_pointCount = getFid(env,  jclass_RenderingContext, "pointCount", "I" );
@@ -417,6 +429,8 @@ void loadJniRenderingContext(JNIEnv* env)
 
 	jclass_JUnidecode = findClass(env, "net/sf/junidecode/Junidecode");
     jmethod_JUnidecode_unidecode = env->GetStaticMethodID(jclass_JUnidecode, "unidecode", "(Ljava/lang/String;)Ljava/lang/String;");
+    jclass_Reshaper = findClass(env, "net/osmand/Reshaper");
+    jmethod_Reshaper_reshape = env->GetStaticMethodID(jclass_Reshaper, "reshape", "(Ljava/lang/String;)Ljava/lang/String;");
 
     jclass_RouteDataObject = findClass(env, "net/osmand/binary/RouteDataObject");
     jclass_NativeRouteSearchResult = findClass(env, "net/osmand/NativeLibrary$NativeRouteSearchResult");
@@ -439,6 +453,7 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 	rc->setDimension(env->GetIntField( jrc, jfield_RenderingContext_width ), env->GetIntField( jrc, jfield_RenderingContext_height ));
 
 	rc->setZoom(env->GetIntField( jrc, jfield_RenderingContext_zoom ));
+	rc->setTileDivisor(env->GetFloatField( jrc, jfield_RenderingContext_tileDivisor ));
 	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
 	rc->setDensityScale(env->GetFloatField( jrc, jfield_RenderingContext_density ));
 	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));
@@ -663,5 +678,14 @@ std::string JNIRenderingContext::getTranslatedString(const std::string& name) {
 		return res;
 	}
 	return name;
+}
+
+std::string JNIRenderingContext::getReshapedString(const std::string& name) {
+	jstring n = this->env->NewStringUTF(name.c_str());
+	jstring translate = (jstring) this->env->CallStaticObjectMethod(jclass_Reshaper, jmethod_Reshaper_reshape, n);
+	std::string res = getString(this->env, translate);
+	this->env->DeleteLocalRef(translate);
+	this->env->DeleteLocalRef(n);
+	return res;
 }
 

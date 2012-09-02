@@ -8,6 +8,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OptionsMenuHelper;
+import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -333,31 +334,26 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public void registerOptionsMenuItems(MapActivity mapActivity, OptionsMenuHelper helper) {
+	public void registerOptionsMenuItems(final MapActivity mapActivity, OptionsMenuHelper helper) {
 		if (parkingLayer != null) {
 			//NOTE: R.id.parking_lim_text - is used just as a stub
-			helper.registerOptionsMenuItem(R.id.parking_lim_text, R.string.osmand_parking_delete, android.R.drawable.ic_menu_mylocation);
-		}
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MapActivity mapActivity, int itemId) {
-		if (itemId == R.id.parking_lim_text) {
-			showDeleteDialog(mapActivity);
-			return true;
-		}
-		return false;
-	}
-	
-	@Override
-	public void prepareOptionsMenuItems(MapActivity mapActivity, Menu menu) {
-		MenuItem deleteParkingItem = menu.findItem(R.id.parking_lim_text);
-		if (deleteParkingItem != null) {
-			if (settings.getParkingPosition() != null) {
-				deleteParkingItem.setVisible(true);
-			} else {
-				deleteParkingItem.setVisible(false);
-			}
+			helper.registerOptionsMenuItem(R.string.osmand_parking_delete, R.string.osmand_parking_delete, android.R.drawable.ic_menu_mylocation, 
+					new OnOptionsMenuClick() {
+						@Override
+						public void prepareOptionsMenu(Menu menu, MenuItem deleteParkingItem) {
+							if (settings.getParkingPosition() != null) {
+								deleteParkingItem.setVisible(true);
+							} else {
+								deleteParkingItem.setVisible(false);
+							}
+						}
+						
+						@Override
+						public boolean onClick(MenuItem item) {
+							showDeleteDialog(mapActivity);
+							return true;
+						}
+					});
 		}
 	}
 	

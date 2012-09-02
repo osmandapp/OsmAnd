@@ -1,11 +1,18 @@
 package net.osmand.plus.development;
 
+import java.text.SimpleDateFormat;
+
+import net.osmand.SunriseSunset;
+import net.osmand.plus.OptionsMenuHelper;
+import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.routing.RouteAnimation;
+import net.osmand.plus.routing.RoutingHelper;
 import android.content.Intent;
 import android.os.Debug;
 import android.os.Debug.MemoryInfo;
@@ -14,11 +21,14 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
 	private OsmandSettings settings;
 	private OsmandApplication app;
+	private RouteAnimation routeAnimation = new RouteAnimation();
 	
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
@@ -44,7 +54,28 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 	@Override
 	public void registerLayers(MapActivity activity) {
+		
 	}
+	
+	@Override
+	public void registerOptionsMenuItems(final MapActivity mapActivity, OptionsMenuHelper helper) {
+		helper.registerOptionsMenuItem(R.string.animate_route, R.string.animate_route, false, new OnOptionsMenuClick() {
+			@Override
+			public void prepareOptionsMenu(Menu menu, MenuItem animateMenu) {
+				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
+				animateMenu.setVisible(settings.getPointToNavigate() != null);
+			}
+			
+			@Override
+			public boolean onClick(MenuItem item) {
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				// animate moving on route
+				routeAnimation.startStopRouteAnimation(routingHelper, mapActivity);
+				return true;
+			}
+		});
+	}
+	
 	
 
 	@Override
@@ -58,9 +89,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		CheckBoxPreference dbg = activity.createCheckBoxPreference(settings.DEBUG_RENDERING_INFO, 
 				R.string.trace_rendering, R.string.trace_rendering_descr);
 		cat.addPreference(dbg);
-		CheckBoxPreference animate = activity.createCheckBoxPreference(settings.TEST_ANIMATE_ROUTING, 
-				R.string.animate_routing, R.string.simulate_route_progression_manually);
-		cat.addPreference(animate);
 		
 		Preference pref = new Preference(app);
 		pref.setTitle(R.string.test_voice_prompts);
@@ -95,8 +123,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pref.setSummary(activity.getString(R.string.native_app_allocated_memory_descr 
 				, mem.nativePrivateDirty / 1024, mem.dalvikPrivateDirty / 1024 , mem.otherPrivateDirty / 1024
 				, mem.nativePss / 1024, mem.dalvikPss / 1024 , mem.otherPss / 1024));
-		pref.setKey("test_voice_commands");
 		cat.addPreference(pref);
+		
+		
+		SunriseSunset sunriseSunset = app.getDaynightHelper().getSunriseSunset();
+		if (sunriseSunset != null) {
+			pref = new Preference(app);
+			pref.setTitle(R.string.day_night_info);
+			SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:MM");
+			pref.setSummary(activity.getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
+					prt.format(sunriseSunset.getSunset())));
+			cat.addPreference(pref);
+		}
 		
 		
 	}

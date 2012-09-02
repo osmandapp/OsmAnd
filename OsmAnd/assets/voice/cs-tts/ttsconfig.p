@@ -103,29 +103,29 @@ nth(17, instrumental, 'sedmnáctým').
 % SVOX bug: without "dál" says "pokračujte osmdesáti metrů" instead of "pokračujte osmdesát metrů"
 % "pokračujte rovně 80 metrů" does not work either
 % SVOX bug: "pokracujte dal priblizne 3 kilometry" is pronounced as "pokracujte dal priblizne tremi kilometry"
-distance(Dist,workaround) == [ 'dál', X, 'metrů'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist,workaround) == [ 'dál', X, 'metrů'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist,workaround) == [ 'dál', X, 'metrů'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist,workaround) == [ 'dál', X, 'metrů'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist,workaround) == ['přibližně jeden kilometr'] :- Dist < 1500.
-distance(Dist,workaround) == ['přibližně', X, 'kilometry'] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
-distance(Dist,workaround) == ['dál přibližně', X, 'kilometrů'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist,workaround) == [ 'dál', X, 'kilometrů'] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist,workaround) == ['přibližně', X, 'kilometry'] :- Dist < 4500, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist,workaround) == ['dál přibližně', X, 'kilometrů'] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist,workaround) == [ 'dál', X, 'kilometrů'] :- D is round(Dist/1000.0), num_atom(D, X).
 
 %%% distance measure - accusative
 % example: "pokracujte pet metru"
-distance(Dist,accusative) == [ X, 'metrů'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist,accusative) == [ X, 'metrů'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist,accusative) == [ X, 'metrů'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist,accusative) == [ X, 'metrů'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist,accusative) == ['přibližně jeden kilometr'] :- Dist < 1500.
-distance(Dist,accusative) == ['přibližně', X, 'kilometry'] :- Dist < 4500, D is round(Dist/1000), num_atom(D, X).
-distance(Dist,accusative) == ['přibližně', X, 'kilometrů'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist,accusative) == [ X, 'kilometrů'] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist,accusative) == ['přibližně', X, 'kilometry'] :- Dist < 4500, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist,accusative) == ['přibližně', X, 'kilometrů'] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist,accusative) == [ X, 'kilometrů'] :- D is round(Dist/1000.0), num_atom(D, X).
 
 %%% distance measure - locative
 % example: "po peti metrech zabocte vpravo"
-distance(Dist,locative) == [ X, 'metrech'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist,locative) == [ X, 'metrech'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist,locative) == [ X, 'metrech'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist,locative) == [ X, 'metrech'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist,locative) == ['přibližně jednom kilometru'] :- Dist < 1500.
-distance(Dist,locative) == ['přibližně', X, 'kilometrech'] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist,locative) == [ X, 'kilometrech'] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist,locative) == ['přibližně', X, 'kilometrech'] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist,locative) == [ X, 'kilometrech'] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

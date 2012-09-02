@@ -41,11 +41,16 @@ public class SearchByNameFilter extends PoiFilter {
 	protected List<Amenity> searchAmenities(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, final ResultMatcher<Amenity> matcher) {
 		searchedAmenities.clear();
+		final int limit = distanceInd == 0 ? 500 : -1;
 		
 		List<Amenity> result = application.getResourceManager().searchAmenitiesByName(query, 
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, new ResultMatcher<Amenity>() {
+					boolean elimit = false;
 					@Override
 					public boolean publish(Amenity object) {
+						if(limit != -1 && searchedAmenities.size() > limit) {
+							elimit = true;
+						}
 						if(matcher.publish(object)) {
 							searchedAmenities.add(object);
 							return true;
@@ -55,7 +60,7 @@ public class SearchByNameFilter extends PoiFilter {
 
 					@Override
 					public boolean isCancelled() {
-						return matcher.isCancelled();
+						return matcher.isCancelled() || elimit;
 					}
 				});
 		MapUtils.sortListOfMapObject(result, lat, lon);

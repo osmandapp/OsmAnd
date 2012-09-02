@@ -197,9 +197,42 @@ public class RoutingContext {
 			Map<BinaryMapIndexReader, List<RouteSubregion>> map) {
 		
 		long now = System.nanoTime();
+		final int zoomToLoad = 31 - tile.getZoom();
+		final int tileX = tile.getTileX();
+		final int tileY = tile.getTileY();
 		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
+			int intersectionObjects = 0, all = 0, allout = 0;
 			@Override
 			public boolean publish(RouteDataObject o) {
+				if(o.getPointsLength() == 0) {
+					return false;
+				}
+				all++;
+				boolean out = false;
+				int minx, maxx, miny, maxy;
+				minx = maxx = o.getPoint31XTile(0);
+				miny = maxy = o.getPoint31YTile(0);
+				for (int ti = 0; ti < o.getPointsLength(); ti++) {
+					minx = Math.min(o.getPoint31XTile(ti), minx);
+					maxx = Math.max(o.getPoint31XTile(ti), maxx);
+					miny = Math.min(o.getPoint31YTile(ti), miny);
+					maxy = Math.max(o.getPoint31YTile(ti), maxy);
+					if(!tile.checkContains(o.getPoint31XTile(ti), o.getPoint31YTile(ti))) {
+						out = true;
+					}
+				}
+				minx = minx >> zoomToLoad;
+				maxx = maxx >> zoomToLoad;
+				miny = miny >> zoomToLoad;
+				maxy = maxy >> zoomToLoad;
+				if(minx > tileX || maxx < tileX || miny > tileY || maxy < tileY) {
+					allout++;
+					return false;
+				}
+				if(out) {
+					intersectionObjects++;
+				}
+
 				if (toFillIn != null) {
 					if (getRouter().acceptLine(o)) {
 						toFillIn.add(o);
@@ -208,21 +241,29 @@ public class RoutingContext {
 				registerRouteDataObject(o, tile);
 				return false;
 			}
+			
+			@Override
+			public String toString() {
+				return "Tile " + tileX + "/"+ tileY + " boundaries " + intersectionObjects +  " of " + all + " out " + allout;
+			}
 
 			@Override
 			public boolean isCancelled() {
 				return false;
 			}
 		};
-		int zoomToLoad = 31 - tile.getZoom();
-		int tileX = tile.getTileX();
-		int tileY = tile.getTileY();
+		
 		boolean loadData = toFillIn != null;
 		List<NativeRouteSearchResult> nativeRouteSearchResults = new ArrayList<NativeRouteSearchResult>();
 		SearchRequest<RouteDataObject> request = BinaryMapIndexReader.buildSearchRouteRequest(tileX << zoomToLoad,
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, matcher);
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
 			if(nativeLib != null) {
+				try {
+					r.getKey().initRouteRegionsIfNeeded(request);
+				} catch (IOException e) {
+					throw new RuntimeException("Loading data exception", e);
+				}
 				for(RouteRegion reg : r.getKey().getRoutingIndexes()) {
 					NativeRouteSearchResult rs = nativeLoadRegion(request, reg, nativeLib, loadData);
 					if(rs != null) {

@@ -29,8 +29,8 @@ import android.preference.PreferenceScreen;
 import android.view.View;
 
 public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockInfoControlActions {
-	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 45, 60, 90};
-	public static final int[] SECONDS = new int[]{0, 30, 45, 60};
+	public static final int[] SECONDS = new int[]{0, 30, 60, 90};
+	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
 	private final static boolean REGISTER_BG_SETTINGS = false;
 	private static final String ID = "osmand.backgroundservice";
 	private OsmandSettings settings;
@@ -102,10 +102,9 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 	}
 
 	private void registerBackgroundSettings(final SettingsActivity activity, PreferenceScreen screen) {
-		PreferenceScreen grp = screen.getPreferenceManager().createPreferenceScreen(activity);
-		grp.setTitle(R.string.osmand_service);
-		grp.setSummary(R.string.osmand_service_descr);
-		((PreferenceCategory) screen.findPreference("global_settings")).addPreference(grp);
+		PreferenceCategory cat = new PreferenceCategory(activity);
+		cat.setTitle(R.string.osmand_service);
+		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS)).addPreference(cat);
 
 		//unregister old service. Note, the order of calls of Create/Destroy is not guaranteed!!
 		unregisterReceiver(this.activity);
@@ -141,9 +140,9 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 		routeServiceEnabled.setTitle(R.string.background_router_service);
 		routeServiceEnabled.setSummary(R.string.background_router_service_descr);
 		routeServiceEnabled.setKey(OsmandSettings.SERVICE_OFF_ENABLED);
-		grp.addPreference(routeServiceEnabled);
+		cat.addPreference(routeServiceEnabled);
 		
-		grp.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
+		cat.addPreference(activity.createTimeListPreference(settings.SERVICE_OFF_INTERVAL, SECONDS, MINUTES, 1000,
 				R.string.background_service_int, R.string.background_service_int_descr));
 	}
 
@@ -153,7 +152,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = view.getApplication().getNavigationService() == null;
 		bgServiceAction.setTitle(view.getResources().getString(!off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
-//		bgServiceAction.setIcon(view.getResources().getDrawable(R.drawable.car_small));
+		bgServiceAction.setIcon(view.getResources().getDrawable(!off? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive));
 		bgServiceAction.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

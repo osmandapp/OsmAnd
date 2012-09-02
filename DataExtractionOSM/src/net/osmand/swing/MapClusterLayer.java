@@ -10,12 +10,9 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Set;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -30,8 +27,10 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingContext;
 
 import org.apache.commons.logging.Log;
@@ -40,8 +39,8 @@ import org.apache.commons.logging.LogFactory;
 
 public class MapClusterLayer implements MapPanelLayer {
 
-	private /*final */ static boolean ANIMATE_CLUSTERING = true;
-	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 50;
+	private /*final */ static boolean ANIMATE_CLUSTERING = false;
+	private /*final */ static int SIZE_OF_ROUTES_TO_ANIMATE = 5;
 	private Log log = LogFactory.getLog(MapClusterLayer.class);
 	
 	
@@ -65,33 +64,18 @@ public class MapClusterLayer implements MapPanelLayer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				clusteringRoadActions(true);
+				clusteringRoadActions();
 			}
 
 			
 		};
 		menu.add(clustering);
-		clustering= new AbstractAction("Clustering roads with tertiary") {
-			private static final long serialVersionUID = 444678942490247134L;
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				clusteringRoadActions(false);
-			}
-		};
-		menu.add(clustering);
+		
 
 	}
 	
 	
-	private Set<String> notClusterRoads = new LinkedHashSet<String>(Arrays.asList( "trunk", "trunk_link","motorway", "motorway_link",
-			"primary", "primary_link", "secondary", "secondary_link", 
-			"tertiary", "tertiary_link"));
-	
-	
-	private Set<String> notClusterRoadsWOTertiary = new LinkedHashSet<String>(Arrays.asList( "trunk", "trunk_link","motorway", "motorway_link",
-			"primary", "primary_link", "secondary", "secondary_link"));
-	private void clusteringRoadActions(final boolean tertiary) {
+	private void clusteringRoadActions() {
 		Point popupMenuPoint = map.getPopupMenuPoint();
 		double fy = (popupMenuPoint.y - map.getCenterPointY()) / map.getTileSize();
 		double fx = (popupMenuPoint.x - map.getCenterPointX()) / map.getTileSize();
@@ -100,17 +84,24 @@ public class MapClusterLayer implements MapPanelLayer {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				List<Way> ways;
 				try {
-					ways = clustering(latitude, longitude, tertiary ? notClusterRoads : notClusterRoadsWOTertiary);
-					DataTileManager<Way> points = new DataTileManager<Way>();
-					points.setZoom(11);
-					for (Way w : ways) {
-						LatLon n = w.getLatLon();
-						points.registerObject(n.getLatitude(), n.getLongitude(), w);
+					List<RouteSegment> ways = clustering(latitude, longitude);
+					if (!ANIMATE_CLUSTERING) {
+						DataTileManager<Way> points = new DataTileManager<Way>();
+						points.setZoom(11);
+						for (RouteSegment s : ways) {
+							Way w = new Way(-1);
+							for (int i = 0; i < s.getRoad().getPointsLength(); i++) {
+								double lat = MapUtils.get31LatitudeY(s.getRoad().getPoint31YTile(i));
+								double lon = MapUtils.get31LongitudeX(s.getRoad().getPoint31XTile(i));
+								w.addNode(new Node(lat, lon, -1));
+							}
+							LatLon n = w.getLatLon();
+							points.registerObject(n.getLatitude(), n.getLongitude(), w);
+						}
+						map.setPoints(points);
+						map.repaint();
 					}
-					map.setPoints(points);
-					map.repaint();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -120,20 +111,20 @@ public class MapClusterLayer implements MapPanelLayer {
 		}).start();
 	}
 	
-	private List<Way> clustering(double lat, double lon, Set<String> roads) throws IOException{
-		List<Way> res = new ArrayList<Way>();
-		//TODO DataExtractionSettings.getSettings().getBinaryFilesDir()
-		File[] files = new File[0];
-		BinaryMapIndexReader[] rs = new BinaryMapIndexReader[files.length];
-		for(int i=0; i<files.length; i++){
-			RandomAccessFile raf = new RandomAccessFile(files[i], "r"); //$NON-NLS-1$ //$NON-NLS-2$
-			rs[i] = new BinaryMapIndexReader(raf, false);
-			
+	private List<RouteSegment> clustering(double lat, double lon) throws IOException{
+		List<BinaryMapIndexReader> rs = new ArrayList<BinaryMapIndexReader>();
+		for (File f : new File(DataExtractionSettings.getSettings().getBinaryFilesDir()).listFiles()) {
+			if (f.getName().endsWith(".obf")) {
+				RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$ //$NON-NLS-2$
+				rs.add(new BinaryMapIndexReader(raf));
+			}
 		}
-		
-		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-		RoutingContext ctx = new RoutingContext(null);
-		
+		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(),
+				rs.toArray(new BinaryMapIndexReader[rs.size()]));
+		Builder builder = RoutingConfiguration.getDefault();
+		RoutingConfiguration config = builder.build("car");
+		config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
+		RoutingContext ctx = new RoutingContext(config);
 		// find closest way
 		RouteSegment st = router.findRouteSegment(lat, lon, ctx);
 		if (st != null) {
@@ -142,15 +133,12 @@ public class MapClusterLayer implements MapPanelLayer {
 			log.info("ROAD TO START " + highway + " " + //road.getName() + " " 
 					+ road.id);
 		}
-		
-		
 		final DataTileManager<Way> points = new DataTileManager<Way>();
 		points.setZoom(11);
 		map.setPoints(points);
+		
 		ctx.setVisitor(new RouteSegmentVisitor() {
-			
 			private List<RouteSegment> cache = new ArrayList<RouteSegment>();
-			
 			@Override
 			public void visitSegment(RouteSegment s, boolean poll) {
 				if(!ANIMATE_CLUSTERING){
@@ -186,14 +174,8 @@ public class MapClusterLayer implements MapPanelLayer {
 			}
 
 		});
-		searchCluster(ctx, st, router, res, roads);
-		if (ANIMATE_CLUSTERING) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-			}
-		}
-		return res;
+		List<RouteSegment> results = searchCluster(ctx, st, router);
+		return results;
 	}
 	
 	
@@ -204,42 +186,52 @@ public class MapClusterLayer implements MapPanelLayer {
 		return (r.getRoad().getId() << 8) + segment;
 	}
 	
-	private List<RouteSegment> searchCluster(RoutingContext ctx, RouteSegment st, BinaryRoutePlanner router, List<Way> res, Set<String> roads) throws IOException {
-		Queue<RouteSegment> queue  = new LinkedList<RouteSegment>();
+	
+	private List<RouteSegment> searchCluster(RoutingContext ctx, RouteSegment st, BinaryRoutePlanner router) throws IOException {
+		Queue<List<RouteSegment>> queue  = new LinkedList<List<RouteSegment>>();
+		List<RouteSegment> result = new ArrayList<BinaryRoutePlanner.RouteSegment>();
 		TLongHashSet visitedIds = new TLongHashSet();
-		queue.add(st);
+		ArrayList<RouteSegment> start = new ArrayList<RouteSegment>();
+		start.add(st);
+		queue.add(start);
 		RouteDataObject startRoad = st.getRoad();
-		long lstart = (((long) startRoad.getPoint31XTile(st.getSegmentStart())) << 31) + 
-				(long) startRoad.getPoint31YTile(st.getSegmentStart());
-		RouteSegment next = ctx.getRoutingTile((int)lstart>>31, (int) (lstart- (lstart>>31)<<31)).
-				getSegment(lstart, ctx);
-		while (next != null) {
-			if(next.getRoad().getId() != st.getRoad().getId()){
-				queue.add(next);
+		int ZOOM_LIMIT = 13;
+		int TILE_BOUNDARIES = 10;
+		int LOCAL_TILE_BOUNDARIES = 2;
+		int zm = 31 - ZOOM_LIMIT;
+		int tileX = startRoad.getPoint31XTile(st.getSegmentStart()) >> zm;
+		int tileY = startRoad.getPoint31YTile(st.getSegmentStart()) >> zm;
+		int outOfTile = 0;
+		int outOfDistance = 0;
+		int segmentsProcessed = 0;
+		float minRatio = 1f;
+		int segmentsMinProcessed = 0;
+		TLongHashSet onTheMap = new TLongHashSet();
+		while(!queue.isEmpty()){
+			List<RouteSegment> segments = queue.peek();
+			if(segments.size() == 0) {
+				queue.poll();
+				continue;
 			}
-			next = next.getNext();
-		}
-		
-		nextSegment : while(!queue.isEmpty()){
-			RouteSegment segment = queue.poll();
+			RouteSegment segment = segments.remove(segments.size() - 1);
 			RouteDataObject road = segment.getRoad();
-			ctx.getVisitor().visitSegment(segment, true);
 			if(visitedIds.contains(calculateId(segment, segment.getSegmentStart()))){
 				continue;
 			}
+			segmentsProcessed++;
+			if(segmentsProcessed > 50) {
+				float ratio = (float) (queue.size() + outOfTile + outOfDistance) / segmentsProcessed;
+				if(ratio < minRatio) {
+					minRatio = ratio;
+					segmentsMinProcessed = segmentsProcessed;
+				}
+				
+			}
 			visitedIds.add(calculateId(segment, segment.getSegmentStart()));
-			Way w = new Way(-1);
-			res.add(w);
-			int xst = road.getPoint31XTile(segment.getSegmentStart());
-			int yst = road.getPoint31YTile(segment.getSegmentStart());
-			w.addNode(new Node(MapUtils.get31LatitudeY(yst), 
-					MapUtils.get31LongitudeX(xst), -1));
-			
 			boolean minusAllowed = true;
 			boolean plusAllowed = true;
 			int d = 1;
-			
-			while(minusAllowed || plusAllowed){
+			while (minusAllowed || plusAllowed) {
 				int segmentEnd = segment.getSegmentStart() + d;
 				int currentD = d;
 				if (!minusAllowed && d > 0) {
@@ -261,8 +253,8 @@ public class MapClusterLayer implements MapPanelLayer {
 					plusAllowed = false;
 					continue;
 				}
-				if(visitedIds.contains(calculateId(segment, segmentEnd))){
-					if(currentD > 0){
+				if (visitedIds.contains(calculateId(segment, segmentEnd))) {
+					if (currentD > 0) {
 						plusAllowed = false;
 					} else {
 						minusAllowed = false;
@@ -273,45 +265,78 @@ public class MapClusterLayer implements MapPanelLayer {
 
 				int x = road.getPoint31XTile(segmentEnd);
 				int y = road.getPoint31YTile(segmentEnd);
-				if(segmentEnd > segment.getSegmentStart()){
-					w.addNode(new Node(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), -1));
-				} else {
-					w.addNode(new Node(MapUtils.get31LatitudeY(y), MapUtils.get31LongitudeX(x), -1), 0);
-				}
-
 				router.loadRoutes(ctx, x, y);
 				long l = (((long) x) << 31) + (long) y;
-				next = ctx.getRoutingTile(x, y).getSegment(l , ctx);
-				boolean addToQueue = true;;
+				RouteSegment next = ctx.getRoutingTile(x, y).getSegment(l, ctx);
+				RouteSegment toAdd = segment;
+				if (!onTheMap.contains(toAdd.getRoad().getId())) {
+					onTheMap.add(toAdd.getRoad().getId());
+					// Visualization of steps !
+					ctx.getVisitor().visitSegment(toAdd, true);
+				}
+				List<RouteSegment> nextSegments = new ArrayList<BinaryRoutePlanner.RouteSegment>();
+				boolean out = false;
+				boolean outDistance = false;
 				while (next != null) {
-					String h = getHighway(next.getRoad());
-					if (roads.contains(h)) {
-						if(currentD > 0){
-							plusAllowed = false;
+					if (!visitedIds.contains(calculateId(next, next.getSegmentStart()))) {
+						int tX = next.getRoad().getPoint31XTile(next.getSegmentStart()) >> zm;
+						int tY = next.getRoad().getPoint31YTile(next.getSegmentStart()) >> zm;
+						String highway = next.getRoad().getHighway();
+						if(notClusterAtAll(next.getRoad())) {
+							out = true;
+						} else if(Math.abs(tX - tileX) < LOCAL_TILE_BOUNDARIES && Math.abs(tY - tileY) < LOCAL_TILE_BOUNDARIES) {
+							nextSegments.add(next);
 						} else {
-							minusAllowed = false;
+							if (!isMajorHighway(highway) && Math.abs(tX - tileX) < TILE_BOUNDARIES && Math.abs(tY - tileY) < TILE_BOUNDARIES) {
+								nextSegments.add(next);
+							} else {
+								outDistance = true;
+							}
 						}
-						addToQueue = false;
-						break;
 					}
 					next = next.getNext();
 				}
-				
-				if (addToQueue) {
-					next = ctx.getRoutingTile(x, y).getSegment(l, ctx);
-					while (next != null) {
-						if (!visitedIds.contains(calculateId(next, next.getSegmentStart()))) {
-							queue.add(next);
-						}
-						next = next.getNext();
-					}
+				if(out) {
+					outOfTile++;
+					result.add(segment);
+				} else if(outDistance) {
+					outOfDistance++;
+					result.add(segment);
+				} else if(nextSegments.size() > 0) {
+					queue.add(nextSegments);
 				}
 			}
-				
+		}
+		log.info("Current ratio " + ((float) (queue.size() + outOfTile + outOfDistance) / segmentsProcessed) + " min ratio " + minRatio
+				+ " min segments procesed " + segmentsMinProcessed );
+		String res = "Processed " + segmentsProcessed + " and borders are " + outOfTile + " out because of distance " + outOfDistance;
+		log.info(res);
+		System.out.println(res);
+		
+		return result;
+	}
+	
+	public boolean notClusterAtAll(RouteDataObject obj) {
+		String highway = obj.getHighway();
+		if(highway != null) {
+			return highway.equals("trunk") ||  highway.equals("motorway") 
+				   || highway.equals("primary")
+				   || highway.equals("track");
 			
 		}
-		
-		return null;
+		String rte = obj.getRoute();
+		if(rte != null) {
+			return rte.equals("ferry");
+		}
+		return false;
+	}
+	
+	public boolean isMajorHighway(String h) {
+		if(h == null) {
+			return false;
+		}
+		return h.equals("primary")
+				|| h.equals("secondary");
 	}
 
 	@Override

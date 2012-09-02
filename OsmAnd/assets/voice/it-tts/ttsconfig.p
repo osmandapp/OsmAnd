@@ -66,11 +66,11 @@ nth(17, 'diciassettesima uscita').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' metri '] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' metri '] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' metri '] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' metri '] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['circa un chilometro '] :- Dist < 1500.
-distance(Dist) == ['circa ', X, ' chilometri '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' chilometri '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['circa ', X, ' chilometri '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' chilometri '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

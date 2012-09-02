@@ -25,7 +25,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.preference.PreferenceScreen;
-import android.view.Menu;
 
 public abstract class OsmandPlugin {
 	
@@ -120,10 +119,6 @@ public abstract class OsmandPlugin {
 	
 	public void registerOptionsMenuItems(MapActivity mapActivity, OptionsMenuHelper helper) {}
 	
-	public void prepareOptionsMenuItems(MapActivity mapActivity, Menu menu) {}
-
-	public boolean onOptionsItemSelected(MapActivity mapActivity, int itemId) { return false; }
-	
 	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.updateLayers(mapView, activity);
@@ -214,21 +209,6 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.registerOptionsMenuItems(map, helper);
 		}
-	}
-
-	public static void registerOnPrepareOptionsMenu(MapActivity mapActivity, Menu menu) {
-		for (OsmandPlugin plugin : activePlugins) {
-			plugin.prepareOptionsMenuItems(mapActivity, menu);
-		}
-	}
-
-	public static boolean registerOnOptionsMenuItemSelected(MapActivity mapActivity, int itemId) {
-		for (OsmandPlugin plugin : activePlugins) {
-			if (plugin.onOptionsItemSelected(mapActivity, itemId)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	private static void installParkingPlugin(OsmandApplication app) {

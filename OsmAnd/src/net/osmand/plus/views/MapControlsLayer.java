@@ -16,6 +16,7 @@ import net.osmand.plus.activities.search.SearchActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -48,6 +49,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
+	private int shadowColor = Color.WHITE;
 	
         private Button zoomInButton;
         private Button zoomOutButton;
@@ -215,6 +217,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void drawZoomLevel(Canvas canvas) {
 		String zoomText = view.getZoom() + "";
+		float frac = view.getFloatZoom() - view.getZoom();
+		while(frac > OsmandMapTileView.ZOOM_DELTA_1) {
+			frac -= OsmandMapTileView.ZOOM_DELTA_1;
+			zoomText += "'";
+		}
 		float length = zoomTextPaint.measureText(zoomText);
 		if (zoomShadow.getBounds().width() == 0) {
 			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient), zoomInButton.getRight(),
@@ -223,7 +230,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomShadow.draw(canvas);
 				
 		ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
-				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint);
+				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -576,7 +583,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			rulerDrawable.draw(canvas);
 			Rect bounds = rulerDrawable.getBounds();
 			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
-					rulerTextPaint);
+					rulerTextPaint, shadowColor);
 		}
 	}
 

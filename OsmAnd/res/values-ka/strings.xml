@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -32,7 +32,7 @@
   <string name="online_map_settings_descr">მიმდინარე და დაქეშირებული ნაწილოვანი რუკების წყაროების გამართვა</string>
   <string name="map_settings">- რუკის პარამეტრები</string>
   <string name="map_settings_descr">რუკის ჩვენების გამართვა</string>
-  <string name="osmand_rastermaps_plugin_description">დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. ისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და შეინახოს Osmand-ის დასტაში.</string>
+  <string name="osmand_rastermaps_plugin_description">დამატება ამსუბუქებს სხვადასხვა მიმდინარე ან ქეშირებულ ნაწილოვან რუკებს. ისინი შეიძლება მომზადდეს როგორც გათიშული რუკები და შეინახოს OsmAnd-ის დასტაში.</string>
   <string name="osmand_background_plugin_description">დამატება გაძლევთ საშუალებს დევნის ან ნავიგაციის მოწყობილობის ძილის დროს პერიოდულად GPS ჩიპის გააქტიურების საშუალებით.</string>
   <string name="osmand_accessibility_description">დამატება მართავს სპეციალური წვდომის შესაძლებლობებს.</string>
   <string name="extra_settings">მეტი პარამეტრები</string>
@@ -169,7 +169,6 @@
   <string name="amenity_type_wikiosm">ვიკიპედია (გათიშული)</string>
   <string name="amenity_type_user_defined">მომხმარებლის მიერ შექმნილი</string>
   <string name="fav_export_confirmation">რჩეულების ექსპორტირებული ფაილი უკვე არსებობს. გნებავთ თავზე გადაწერა?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">პროფილის პარამეტრები</string>
   <string name="settings_preset">მომხმარებლის პროფილი</string>
   <string name="settings_preset_descr">აირჩიეთ მომხმარებლის პროფილი რუკისა და ნავიგაციის პარამეტრებით.</string>
@@ -233,7 +232,7 @@
   <string name="poi_filter_by_name">სახელით ძებნა</string>
   <string name="old_poi_file_should_be_deleted">POI-ის მონაცემთა ფაილის \'%1$s\', არსებობს ასლი და მისი წაშლა შესაძლებელია.</string>
   <string name="update_poi_file_not_found">ლოკალური ფაილი POI-ის ცვლილებების შესანახად ნაპოვნი არ იქნა და მისი შექმნა შეუძლებელია.</string>
-  <string name="button_upgrade_osmandplus">განახლება Osmand+-მდე</string>
+  <string name="button_upgrade_osmandplus">განახლება OsmAnd+-მდე</string>
   <string name="map_version_changed_info">სერვერი შეიცავს რუკის ფაილებს რომლებიც არაა შესაბამისი აპლიკაციის მიმდინარე ვერსიასთან. გთხოვთ განაახლოთ აპლიკაცია მათ ჩამოსაწერად და გამოსაყენებლად.</string>
   <string name="local_index_mi_rename">სახელის გადარქმევა</string>
   <string name="show_gpx_route">რუკაზე ჩვენება</string>
@@ -249,7 +248,7 @@
   <string name="search_position_map_view">უკანასკნელად ნანახი რუკის ხედი</string>
   <string name="select_search_position">ძებნა ახლოს :</string>
   <string name="context_menu_item_search">ახლოს ძებნა</string>
-  <string name="tip_recent_changes_0_6_7_t">"ცვლილებები 0.6.7-ში : \n\t- გათიშული მონაცემების გამმართველი (ჩამოტვირთეთ, წაშალეთ, გაააქტიურეთ / გაუკეთეთ დეაქტივაცია გათიშულ მონაცემებს პირდაპირ Osmand-ში) \n\t- რჩეული წერტილები და მათი ჯგუფები (დაალაგეთ, წაშალეთ და მართეთ ისინი) \n\t- GPX გამართველი პირდაპირ აპლიკაციაში(იხილეთ ბილიკის დეტალები, სიგრძე, საშუალო სიჩქარე და ა.შ.) \n\t- GPX ნავიგაცია (მეტი პარამეტრები, ნავიგაციის გაგრძელება, გზის პარამეტრების ჩვენება) \n\t- პარამეტრი გზის შესანახავად მისი გათიშულ რეჟიმში გამოყენებისათვის\n\t- გაუმჯობესდაGPX მონიტორინგი (გაიფილტრა ზოგიერთი არაზუსტი პოზიცია და გაიზარდა სიზუსტე)\n\t- GPX-ის ატვირთვა OSM-ში (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
+  <string name="tip_recent_changes_0_6_7_t">"ცვლილებები 0.6.7-ში : \n\t- გათიშული მონაცემების გამმართველი (ჩამოტვირთეთ, წაშალეთ, გაააქტიურეთ / გაუკეთეთ დეაქტივაცია გათიშულ მონაცემებს პირდაპირ OsmAnd-ში) \n\t- რჩეული წერტილები და მათი ჯგუფები (დაალაგეთ, წაშალეთ და მართეთ ისინი) \n\t- GPX გამართველი პირდაპირ აპლიკაციაში(იხილეთ ბილიკის დეტალები, სიგრძე, საშუალო სიჩქარე და ა.შ.) \n\t- GPX ნავიგაცია (მეტი პარამეტრები, ნავიგაციის გაგრძელება, გზის პარამეტრების ჩვენება) \n\t- პარამეტრი გზის შესანახავად მისი გათიშულ რეჟიმში გამოყენებისათვის\n\t- გაუმჯობესდაGPX მონიტორინგი (გაიფილტრა ზოგიერთი არაზუსტი პოზიცია და გაიზარდა სიზუსტე)\n\t- GPX-ის ატვირთვა OSM-ში (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">გზის GPX ბილიკად შენახვა</string>
   <string name="route_successfully_saved_at">გზა შეინახა წარმატებით. სახელი \'%1$s\'.</string>
   <string name="filename_input">"ფაილის სახელი:"</string>
@@ -356,9 +355,9 @@
   <string name="preferred_locale_descr">ენის არჩევა</string>
   <string name="preferred_locale">ენა</string>
   <string name="tip_map_switch">რუკის წყარო</string>
-  <string name="tip_map_switch_t">\tფენებისა და რუკების წყაროების შეცვლის უსწრაფესი მეთოდია შეხვიდეთ \'მენიუ\' -&gt; \'ხედის განსაზღვრა\'.\n\t\'რუკის წყარო…\' თქვენ შეგიძლიათ აირჩიოთ უკვე დაყენებულ გათიშულ ვექტორულ რუკებსა და მიმდინარე, ან კომპიუტერზე OsmandMapCreator -ით შექმნილ რუკებს შორის.\n\tOsmand-ს ასევე გააჩნია მომხმარებლის მიერ არჩეული წყაროების გამოყენების საშუალება.</string>
+  <string name="tip_map_switch_t">\tფენებისა და რუკების წყაროების შეცვლის უსწრაფესი მეთოდია შეხვიდეთ \'მენიუ\' -&gt; \'ხედის განსაზღვრა\'.\n\t\'რუკის წყარო…\' თქვენ შეგიძლიათ აირჩიოთ უკვე დაყენებულ გათიშულ ვექტორულ რუკებსა და მიმდინარე, ან კომპიუტერზე OsmAndMapCreator -ით შექმნილ რუკებს შორის.\n\tOsmAnd-ს ასევე გააჩნია მომხმარებლის მიერ არჩეული წყაროების გამოყენების საშუალება.</string>
   <string name="tip_app_mode">მომხმარებლის პროფილი</string>
-  <string name="tip_app_mode_t">\tOsmand-ს გააჩნია მხარდაჭერა მრავალი პროფილისა მომხმარებლის სხვადასხვა სიტუაციისათვის.\n\tთქვენ შეგიძლიათ აირჩიოთ პროფილი \'მენიუ\' -&gt;\'პარამეტრები\' -&gt; \'მომხმარებლის პროფილი\', ან გზის შექმნისას.</string>
+  <string name="tip_app_mode_t">\tOsmAnd-ს გააჩნია მხარდაჭერა მრავალი პროფილისა მომხმარებლის სხვადასხვა სიტუაციისათვის.\n\tთქვენ შეგიძლიათ აირჩიოთ პროფილი \'მენიუ\' -&gt;\'პარამეტრები\' -&gt; \'მომხმარებლის პროფილი\', ან გზის შექმნისას.</string>
   <string name="tip_navigation">- ნავიგაცია</string>
   <string name="tip_navigation_t">\tნავიგაციის დასაწყებად საჭიროა დანიშნულების წერტილის არჩევა. შემდეგ დააჭირეთ \'მენიუ\' -&gt; \'მიმართულებები\' რუკაზე და აირჩიეთ ნავიგაციის ტიპი.</string>
   <string name="tip_search">მიმდინარეობს ძებნა</string>
@@ -366,7 +365,7 @@
   <string name="tip_map_context_menu">რუკის კონტექსტური მენიუ</string>
   <string name="tip_map_context_menu_t">\tრუკის კონტექსტური მენიუ წვდომადია რუკაზე დაჭერით ან ტრეკბოლის ღილაკზე დაჭერით.\n\tშედეგია ფანჯარა წერტილის კოორდინატებით. რუკის კონტექსტური მენიუს გამოსატანად დაარტყით მას თითი, ან დააჭირეთ მენიუს ღილაკს\n\tრუკის კონტექსტური მენიუ შეიცავს ყველა მოქმედებას მდებარეობასთან დაკავშირებით.</string>
   <string name="tip_initial">მცირედი დახმარება.</string>
-  <string name="tip_initial_t">\tOsmand არის აპლიკაცია ბევრი სასარგებლო თვისებით.\n\tპროგრამის გაშვებისას მისი თვისებები ეკრანზე გამოჩნდება.</string>
+  <string name="tip_initial_t">\tOsmAnd არის აპლიკაცია ბევრი სასარგებლო თვისებით.\n\tპროგრამის გაშვებისას მისი თვისებები ეკრანზე გამოჩნდება.</string>
   <string name="next_button">შემდეგი</string>
   <string name="previous_button">წინა</string>
   <string name="unit_of_length_descr">სიგრძისა და სიჩქარის ერთეულები</string>
@@ -426,19 +425,19 @@
   <string name="reading_cached_tiles">მიმდინარეობს ნაწილების კითხვა…</string>
   <string name="version_index_is_big_for_memory">ინდექსი \'\'{0}\'\' არ ეტევა მეხსიერებაში</string>
   <string name="version_index_is_not_supported">ინდექსის ვერსიის \'\'{0}\'\' მხარდაჭერა არ არსებობს</string>
-  <string name="use_osmand_routing_service">Osmand-ის ნავიგაცია &gt;20კმ</string>
-  <string name="use_osmand_routing_service_descr">Osmand-ის გათიშული ნავიგაცია მუშაობს მხოლოდ გზებზე რომლებიც &gt; 20 კმ (საცდელი)</string>
-  <string name="osmand_routing_experimental">Osmand-ის გათიშული ნავიგაცია არის საცდელი თვისება რომებიც არ მუშაობს 20 კმ-ზე მეტი მანძილებისათვის.\n\nნავიგაციის სერვისი დროებით გადართულია მიმდინარე სერვისზე CloudMade.</string>
+  <string name="use_osmand_routing_service">OsmAnd-ის ნავიგაცია &gt;20კმ</string>
+  <string name="use_osmand_routing_service_descr">OsmAnd-ის გათიშული ნავიგაცია მუშაობს მხოლოდ გზებზე რომლებიც &gt; 20 კმ (საცდელი)</string>
+  <string name="osmand_routing_experimental">OsmAnd-ის გათიშული ნავიგაცია არის საცდელი თვისება რომებიც არ მუშაობს 20 კმ-ზე მეტი მანძილებისათვის.\n\nნავიგაციის სერვისი დროებით გადართულია მიმდინარე სერვისზე CloudMade.</string>
   <string name="specified_dir_doesnt_exist">შეუძლებელია მითითებული დასტის პოვნა.</string>
   <string name="application_dir">შესანახი დასტა</string>
-  <string name="application_dir_change_warning">შესანახი დასტის შეცვლა არ წაშლის ან გადაიტანს მონაცემებს. ოპერაცია უნდა ჩატარდეს ცალკე, Osmand-ის გარეთ. გნებავთ გაგრძელება?</string>
-  <string name="osmand_net_previously_installed">დაყენებულია Osmand-ის წინა ვერსია. მთელი გათიშული მონაცემების მხარდაჭერილია და გამოყენებულ იქნება ახალ აპლიკაციაში. რჩეული წერტილების გამოსაყენებლად ისინი უნდა დააექსპორტოთ ძველიდან და შეიტანოთ ახალში.</string>
+  <string name="application_dir_change_warning">შესანახი დასტის შეცვლა არ წაშლის ან გადაიტანს მონაცემებს. ოპერაცია უნდა ჩატარდეს ცალკე, OsmAnd-ის გარეთ. გნებავთ გაგრძელება?</string>
+  <string name="osmand_net_previously_installed">დაყენებულია OsmAnd-ის წინა ვერსია. მთელი გათიშული მონაცემების მხარდაჭერილია და გამოყენებულ იქნება ახალ აპლიკაციაში. რჩეული წერტილების გამოსაყენებლად ისინი უნდა დააექსპორტოთ ძველიდან და შეიტანოთ ახალში.</string>
   <string name="build_installed">ვერსია {0}-ის ჩადგმა წარმატებულად დამთავრდა ({1}).</string>
   <string name="downloading_build">ვერსიის გადმოწერა…</string>
-  <string name="install_selected_build">გნებავთ დააყენოთ Osmand - {0} დან {1} {2} მბ ?</string>
-  <string name="loading_builds_failed">Osmand-ის ვერსიების სიის გადმოწერა შეუძლებელია</string>
-  <string name="loading_builds">Osmand-ის ვერსიების ჩატვირთვა…</string>
-  <string name="select_build_to_install">დასაყენებლად აირჩიეთ Osmand-ის ვერსია</string>
+  <string name="install_selected_build">გნებავთ დააყენოთ OsmAnd - {0} დან {1} {2} მბ ?</string>
+  <string name="loading_builds_failed">OsmAnd-ის ვერსიების სიის გადმოწერა შეუძლებელია</string>
+  <string name="loading_builds">OsmAnd-ის ვერსიების ჩატვირთვა…</string>
+  <string name="select_build_to_install">დასაყენებლად აირჩიეთ OsmAnd-ის ვერსია</string>
   <string name="contribution_activity">უფასო ვერსიის შეწირულობის აქტივობა</string>
   <string name="gps_status_app_not_found">ვერ ვიპოვე GPS სტატუსის აპლიკაცია. გნებავთ მისი მოძებნა მაღაზიაში?</string>
   <string name="voice_is_not_available_msg">ხმოვანი ბრძანებები მიუწვდომელია. გთხოვთ გადახვიდეთ პარამეტრებში, აირჩიოთ მხარდაჭერილი ხმოვანი პაკეტი და დააყენოთ ის.</string>
@@ -530,7 +529,7 @@
   <string name="background_service_wait_int">ჩასწორების მოლოდინის მაქსიმალური დრო</string>
   <string name="service_stop_background_service">ფონური ნავიგაციის სერვისის გამორთვა</string>
   <string name="where_am_i">სად ვარ?</string>
-  <string name="process_navigation_service">Osmand-ის ნავიგაციის სერვისი</string>
+  <string name="process_navigation_service">OsmAnd-ის ნავიგაციის სერვისი</string>
   <string name="network_provider">ქსელი</string>
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">წამი</string>
@@ -539,7 +538,7 @@
   <string name="background_service_int">გაღვიძების ინტერვალი</string>
   <string name="background_service_provider_descr">აირჩიეთ მდებარეობის მომწოდებელი ფონური რეჟიმის დროს</string>
   <string name="background_service_provider">მდებარეობის მომწოდებელი</string>
-  <string name="background_router_service_descr">"როდესაც ეკრანი გამორთულია, Osmand დარჩეს გაშვებული ფონურ რეჟიმში "</string>
+  <string name="background_router_service_descr">"როდესაც ეკრანი გამორთულია, OsmAnd დარჩეს გაშვებული ფონურ რეჟიმში "</string>
   <string name="background_router_service">ფონად გაშვება</string>
   <string name="off_router_service_no_gps_available">ფონური ნავიგაციის სერვისი მოითხოვს მდებარეობის მომწოდებლის ჩართვას</string>
   <string name="hide_poi_filter">ფილტრის დამალვა</string>
@@ -592,7 +591,7 @@
   <string name="default_buttons_ok">OK</string>
   <string name="show_transport_over_map_description">რუკაზე საზოგადოებრივი ტრანსპორტის გაჩერებების ჩვენება</string>
   <string name="show_transport_over_map">გაჩერებების ჩვენება</string>
-  <string name="hello">Osmand - სანავიგაციო აპლიკაცია</string>
+  <string name="hello">OsmAnd - სანავიგაციო აპლიკაცია</string>
   <string name="update_poi_success">POI მონაცემები წარმატებით განახლდა (ჩატვირთულ იქნა {0})</string>
   <string name="update_poi_error_local">შეცდომა ლოკალური POI სიის განახლებისას</string>
   <string name="update_poi_error_loading">შეცდომა მონაცემების სერვერიდან კითხვისას</string>
@@ -662,11 +661,11 @@
   <string name="new_route_calculated_dist">ახალი გზა დათვლილია. დაშორება</string>
   <string name="arrived_at_destination">თქვენ მიხვედით თქვენს დანიშნულების ადგილას</string>
   <string name="invalid_locations">კოორდინატები არასწორია!</string>
-  <string name="go_back_to_osmand">Osmand-ის რუკაზე დაბრუნება</string>
+  <string name="go_back_to_osmand">OsmAnd-ის რუკაზე დაბრუნება</string>
   <string name="close">დახურვა</string>
   <string name="loading_data">მონაცემების კითხვა...</string>
   <string name="reading_indexes">ლოკალური მონაცემების კითხვა...</string>
-  <string name="previous_run_crashed">ბოლოს გაშვებული Osmand მოკვდა. ჟურნალის ფაილია {0}. გთხოვთ მოგვწეროთ ჟურნალის ფაილი და როგორ მოხდა ეს.</string>
+  <string name="previous_run_crashed">ბოლოს გაშვებული OsmAnd მოკვდა. ჟურნალის ფაილია {0}. გთხოვთ მოგვწეროთ ჟურნალის ფაილი და როგორ მოხდა ეს.</string>
   <string name="saving_gpx_tracks">GPX ძიების SD-ზე შენახვა…</string>
   <string name="finished_task">დამთავრდა</string>
   <string name="reload_indexes_descr">გათიშული ვექტორული რუკებისა და მონაცემების თავიდან წაკითხვა sdcard-დან</string>
@@ -898,10 +897,10 @@
   <string name="map_widget_back_to_loc">სად ვარ?</string>
   <string name="map_widget_lock_screen">ეკრანის ჩაკეტვა</string>
   <string name="map_widget_compass">კომპასი</string>
-  <string name="map_widget_top_stack">სტატუსის ხაზი</string>
+  <string name="map_widget_top_stack">სტატუსის ხაზი:</string>
   <string name="map_widget_reset">ნაგულისხმევზე დაბრუნება</string>
-  <string name="map_widget_right_stack">მარჯვენა მხარე</string>
-  <string name="map_widget_left_stack">მარცხენა მხარე</string>
+  <string name="map_widget_right_stack">მარჯვენა მხარე:</string>
+  <string name="map_widget_left_stack">მარცხენა მხარე:</string>
   <string name="map_widget_parking">პარკინგი</string>
   <string name="map_widget_monitoring">დევნა</string>
   <string name="map_widget_speed">სიჩქარე</string>
@@ -919,4 +918,33 @@
   <string name="bg_service_screen_unlock">ეკრანზე ჩაკეტვის მოხსნა</string>
   <string name="bg_service_sleep_mode_off">ძილის რეჟიმის გამორთვა</string>
   <string name="bg_service_sleep_mode_on">ძილის რეჟიმის ჩართვა</string>
+<string name="filterpoi_activity">POI ფილტრის შექმნა</string>
+<string name="day_night_info">ინფორმაცია დღეღამის შესახებ</string>
+<string name="map_widget_day_night">დღეღამის რუკა</string>
+<string name="map_widget_vector_attributes">რენდერის ატრიბუტები:</string>
+<string name="live_monitoring_mode_off">ცოცხალი დევნის რეჟიმის გამორთვა</string>
+<string name="live_monitoring_mode_on">ცოცხალი დევნის რეჟიმის ჩართვა</string>
+<string name="layer_map_appearance">ეკრანის გამართვა...</string>
+<string name="show_lanes">ბილიკების ჩვენება</string>
+<string name="avoid_unpaved">მოუკირწყლავი გზებისათვის თავის არიდება</string>
+<string name="avoid_ferries">ბორნისათვის თავის არიდება</string>
+<string name="avoid_in_routing_title">თავის არიდება...</string>
+<string name="avoid_in_routing_descr">ცუდი გზებისათვის თავის არიდება</string>
+<string name="show_warnings_title">გაფრთხილებების ჩვენება</string>
+<string name="show_warnings_descr">სიჩქარის ლიმიტის, კამერებისა და საცობების ჩვენება</string>
+<string name="map_widget_fluorescent">მანათობელი გზები</string>
+<string name="map_widget_show_ruler">სახაზავის ჩვენება</string>
+<string name="map_widget_appearance">სხვადასხვა:</string>
+<string name="map_widget_view_direction">ხედვის მიმართულება</string>
+<string name="map_widget_transparent">გამჭირვალე ხედი</string>
+<string name="monitoring_mode_off">GPX-ის ჩაწერის გამორთვა</string>
+<string name="monitoring_mode_on">GPX-ის ჩაწერის ჩართვა.</string>
+<string name="gps_wakeup_interval">GPS-ის გაღვიძების ინტერვალი: %s</string>
+<string name="int_continuosly">გაგრძელებადი</string>
+<string name="email">ელ-ფოსტა</string>
+<string name="day_night_info_description">მზის ამოსვლა: %1$s \nჩასვლა: %2$s</string>
+<string name="map_widget_renderer">რენდერის რეჟიმი</string>
+<string name="tip_app_mode_t_v2">\tOsmand-ს გააჩნია მხარდაჭერა სხვადასხვა (ხელით სამართავი) პროფილებისა სხვადასხვა ადგილას გამოყენების დროს.
+\n\tთქვენ შეგიძლიათ შეცვალოთ პროფილი შესაბამისი ღილაკით რუკაზე ქვედა მარცხენა კუთხეში(ხატულის კუთხე, ველოსიპედი ან ფეხით მოსიარულე), ან როდესაც ქმნით გზას.
+</string>
 </resources>

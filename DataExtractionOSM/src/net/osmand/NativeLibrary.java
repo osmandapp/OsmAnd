@@ -84,6 +84,10 @@ public class NativeLibrary {
 		return initBinaryMapFile(filePath);
 	}
 	
+	public boolean initCacheMapFile(String filePath) {
+		return initCacheMapFiles(filePath);
+	}
+	
 	public boolean closeMapFile(String filePath) {
 		return closeBinaryMapFile(filePath);
 	}
@@ -109,6 +113,8 @@ public class NativeLibrary {
 	protected static native void deleteSearchResult(long searchResultHandle);
 
 	protected static native boolean initBinaryMapFile(String filePath);
+	
+	protected static native boolean initCacheMapFiles(String filePath);
 	
 	protected static native boolean closeBinaryMapFile(String filePath);
 	

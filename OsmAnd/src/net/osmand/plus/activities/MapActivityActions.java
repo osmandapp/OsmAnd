@@ -9,12 +9,15 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
+import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -26,13 +29,13 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OptionsMenuHelper;
+import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -57,7 +60,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings.Secure;
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.util.FloatMath;
@@ -66,6 +68,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -100,7 +103,8 @@ public class MapActivityActions implements DialogProvider {
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
-	private RouteAnimation routeAnimation = new RouteAnimation();
+	private OptionsMenuHelper optionsMenuHelper;
+	
 
 	public MapActivityActions(MapActivity mapActivity){
 		this.mapActivity = mapActivity;
@@ -163,7 +167,9 @@ public class MapActivityActions implements DialogProvider {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
+				// Don't use showDialog because it is impossible to refresh favorite items list
+				createReplaceFavouriteDialog(args).show();
+				// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			
 		});
@@ -199,10 +205,10 @@ public class MapActivityActions implements DialogProvider {
 		final FavouritePoint[] favs = new FavouritePoint[points.size()];
 		Iterator<FavouritePoint> it = points.iterator();
 		int i=0;
-		while(it.hasNext()){
+		while (it.hasNext()) {
 			FavouritePoint fp = it.next();
 			// filter gpx points
-			if(fp.isStored()){
+			if (fp.isStored()) {
 				favs[i] = fp;
 				names[i] = fp.getName();
 				i++;
@@ -219,7 +225,8 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.getMapView().refreshMap();
 			}
 		});
-		return b.create();
+		AlertDialog al = b.create();
+		return al;
 	}
 	
     public void addWaypoint(final double latitude, final double longitude){
@@ -393,7 +400,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     
-	protected void getDirections(final Location from, boolean followEnabled) {
+	public void getDirections(final Location from, boolean followEnabled) {
 
 		final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 
@@ -405,6 +412,9 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
 		ApplicationMode appMode = settings.getApplicationMode();
+		if(appMode == ApplicationMode.DEFAULT) {
+			appMode = ApplicationMode.CAR;
+		}
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
@@ -683,7 +693,7 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
-		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_view_directions_to_here);
+		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_activities_directions_to_here);
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
 		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
@@ -844,138 +854,170 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
-//		NOTE: delete not a "menu.xml" because all id-resources are generated to R-class from there
-		OptionsMenuHelper helper = new OptionsMenuHelper(menu);
-		helper.registerOptionsMenuItem(R.id.map_where_am_i, R.string.where_am_i, android.R.drawable.ic_menu_mylocation);
-		helper.registerOptionsMenuItem(R.id.map_layers, R.string.menu_layers, android.R.drawable.ic_menu_mapmode);		
-		helper.registerOptionsMenuItem(R.id.map_show_settings, R.string.settings_Button, android.R.drawable.ic_menu_preferences);		
-		helper.registerOptionsMenuItem(R.id.map_navigate_to_point, R.string.stop_navigation, android.R.drawable.ic_menu_close_clear_cancel, false);		
-		helper.registerOptionsMenuItem(R.id.map_mute, R.string.menu_mute_off, false);		
-		helper.registerOptionsMenuItem(R.id.map_get_directions, R.string.get_directions, android.R.drawable.ic_menu_directions);
-		helper.registerOptionsMenuItem(R.id.map_animate_route, R.string.animate_route, false);
-		helper.registerOptionsMenuItem(R.id.map_specify_point, R.string.search_button, android.R.drawable.ic_menu_search);
-		helper.registerOptionsMenuItem(R.id.map_show_gps_status, R.string.show_gps_status, android.R.drawable.ic_menu_compass);
-		helper.registerOptionsMenuItem(R.id.map_show_point_options, R.string.show_point_options);		
-		OsmandPlugin.registerOptionsMenu(mapActivity, helper);
+		final OsmandMapTileView mapView = mapActivity.getMapView();
+		optionsMenuHelper =  new OptionsMenuHelper();
+		optionsMenuHelper.registerOptionsMenuItem(R.string.where_am_i, R.string.where_am_i, android.R.drawable.ic_menu_mylocation, 
+				new OnOptionsMenuClick() {
+					@Override
+					public void prepareOptionsMenu(Menu menu, MenuItem item) {
+					}
+					@Override
+					public boolean onClick(MenuItem item) {
+						if (getMyApplication().accessibilityEnabled()) {
+							whereAmIDialog();
+						} else {
+							mapActivity.backToLocationImpl();
+						}
+						return true;
+					}
+				});
+		optionsMenuHelper.registerOptionsMenuItem(R.string.menu_layers, R.string.menu_layers, android.R.drawable.ic_menu_mapmode, 
+				new OnOptionsMenuClick() {
+					@Override
+					public void prepareOptionsMenu(Menu menu, MenuItem item) {
+					}
+					@Override
+					public boolean onClick(MenuItem item) {
+						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
+						return true;
+					}
+				});		
+		optionsMenuHelper.registerOptionsMenuItem(R.string.settings_Button, R.string.settings_Button, android.R.drawable.ic_menu_preferences, 
+				new OnOptionsMenuClick() {
+					@Override
+					public void prepareOptionsMenu(Menu menu, MenuItem item) {
+					}
+					@Override
+					public boolean onClick(MenuItem item) {
+						final Intent intentSettings = new Intent(mapActivity, OsmandIntents.getSettingsActivity());
+						mapActivity.startActivity(intentSettings);
+						return true;
+					}
+				});
+		optionsMenuHelper.registerOptionsMenuItem(R.string.stop_navigation, R.string.stop_navigation, android.R.drawable.ic_menu_close_clear_cancel, false, 
+				new OnOptionsMenuClick() {
+					@Override
+					public void prepareOptionsMenu(Menu menu, MenuItem navigateToPointMenu) {
+							if (settings.getPointToNavigate() != null) {
+								navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || 
+										routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
+								navigateToPointMenu.setVisible(true);
+							} else {
+								navigateToPointMenu.setVisible(false);
+							}
+					}
+					@Override
+					public boolean onClick(MenuItem item) {
+						if (mapActivity.getMapLayers().getNavigationLayer().getPointToNavigate() != null) {
+							if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
+								routingHelper.setFinalAndCurrentLocation(null, mapActivity.getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
+								// restore default mode
+								boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
+								mapActivity.updateApplicationModeSettings();
+								mapView.refreshMap(changed);
+							} else {
+								mapActivity.navigateToPoint(null);
+							}
+						} else {
+							mapActivity.navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+						}
+						mapView.refreshMap();
+						return true;
+					}
+				});
+		optionsMenuHelper.registerOptionsMenuItem(R.string.menu_mute_off, R.string.menu_mute_off, false, new OnOptionsMenuClick() {
+			@Override
+			public void prepareOptionsMenu(Menu menu, MenuItem muteMenu) {
+				if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
+					boolean mute = routingHelper.getVoiceRouter().isMute();
+					muteMenu.setTitle(mute ? R.string.menu_mute_on : R.string.menu_mute_off);
+					muteMenu.setIcon(mute ? R.drawable.ic_menu_soundoff : R.drawable.ic_menu_soundon);
+					muteMenu.setVisible(true);
+				} else {
+					muteMenu.setVisible(false);
+				}
+			}
+			
+			@Override
+			public boolean onClick(MenuItem item) {
+				routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
+				return true;
+			}
+		});		
+		optionsMenuHelper.registerOptionsMenuItem(R.string.get_directions, R.string.get_directions, android.R.drawable.ic_menu_directions, 
+				new OnOptionsMenuClick() {
+					@Override
+					public void prepareOptionsMenu(Menu menu, MenuItem directions) {
+						if(routingHelper.isRouteCalculated()){
+							directions.setTitle(R.string.show_route);
+						} else {
+							directions.setTitle(R.string.get_directions);
+						}
+						
+					}
+					@Override
+					public boolean onClick(MenuItem item) {
+						if (routingHelper.isRouteCalculated()) {
+							aboutRoute();
+						} else {
+							Location loc = mapActivity.getLastKnownLocation();
+							getDirections(loc, true);
+						}
+						return true;
+					}
+				});
+		optionsMenuHelper.registerOptionsMenuItem(R.string.search_button, R.string.search_button, android.R.drawable.ic_menu_search, new OnOptionsMenuClick() {
+			@Override
+			public void prepareOptionsMenu(Menu menu, MenuItem item) {
+			}
+			@Override
+			public boolean onClick(MenuItem item) {
+				Intent newIntent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
+				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				LatLon loc = mapActivity.getMapLocation();
+				newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+				newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				mapActivity.startActivity(newIntent);
+				return true;
+			}
+		});
+		if (Version.isGpsStatusEnabled(mapActivity) && !Version.isBlackberry(mapActivity)) {
+			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
+					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
+						@Override
+						public void prepareOptionsMenu(Menu menu, MenuItem item) {
+						}
+
+						@Override
+						public boolean onClick(MenuItem item) {
+							startGpsStatusIntent();
+							return false;
+						}
+					});
+		}
+		optionsMenuHelper.registerOptionsMenuItem(R.string.show_point_options, R.string.show_point_options, new OnOptionsMenuClick() {
+			@Override
+			public void prepareOptionsMenu(Menu menu, MenuItem item) {
+			}
+			@Override
+			public boolean onClick(MenuItem item) {
+				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
+				return true;
+			}
+		});		
+		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		
+		optionsMenuHelper.registerOptionsMenu(menu);
 		return true;
 	}
 	
 	public void onPrepareOptionsMenu(Menu menu) {
-		MenuItem navigateToPointMenu = menu.findItem(R.id.map_navigate_to_point);
-		if (navigateToPointMenu != null) {
-			if (settings.getPointToNavigate() != null) {
-				navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || 
-						routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
-				navigateToPointMenu.setVisible(true);
-			} else {
-				navigateToPointMenu.setVisible(false);
-			}
-		}
-		MenuItem muteMenu = menu.findItem(R.id.map_mute); 
-		if(muteMenu != null){
-			if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
-				boolean mute = routingHelper.getVoiceRouter().isMute();
-				muteMenu.setTitle(mute ? R.string.menu_mute_on : R.string.menu_mute_off);
-				muteMenu.setIcon(mute ? R.drawable.ic_menu_soundoff : R.drawable.ic_menu_soundon);
-				muteMenu.setVisible(true);
-			} else {
-				muteMenu.setVisible(false);
-			}
-		}
-		MenuItem directions = menu.findItem(R.id.map_get_directions);
-		if(routingHelper.isRouteCalculated()){
-			directions.setTitle(R.string.show_route);
-		} else {
-			directions.setTitle(R.string.get_directions);
-		}
-		
-		MenuItem animateMenu = menu.findItem(R.id.map_animate_route);
-		
-		if (animateMenu != null) {
-			if(settings.TEST_ANIMATE_ROUTING.get()){
-				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off
-					: R.string.animate_route);
-				animateMenu.setVisible("1".equals(Secure.getString(
-					mapActivity.getContentResolver(), Secure.ALLOW_MOCK_LOCATION))
-					&& settings.getPointToNavigate() != null
-					&& routingHelper.isRouteCalculated());
-				animateMenu.setVisible(true);
-			} else {
-				animateMenu.setVisible(false);
-			}
-		}
-		
-		OsmandPlugin.registerOnPrepareOptionsMenu(mapActivity, menu);
+		optionsMenuHelper.prepareOptionsMenu(menu);
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
-		final int itemId = item.getItemId();
-		OsmandMapTileView mapView = mapActivity.getMapView();
-		if (itemId == R.id.map_show_settings) {
-			final Intent intentSettings = new Intent(mapActivity, OsmandIntents.getSettingsActivity());
-			mapActivity.startActivity(intentSettings);
-			return true;
-		} else if (itemId == R.id.map_where_am_i) {
-			if (getMyApplication().accessibilityEnabled()) {
-				whereAmIDialog();
-			} else {
-				mapActivity.backToLocationImpl();
-			}
-			return true;
-		} else if (itemId == R.id.map_show_gps_status) {
-			startGpsStatusIntent();
-			return true;
-		} else if (itemId == R.id.map_specify_point) {
-			Intent newIntent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
-			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-			LatLon loc = mapActivity.getMapLocation();
-			newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-			newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-			newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			mapActivity.startActivity(newIntent);
-			return true;
-		} else {
-			if (itemId == R.id.map_get_directions) {
-				if (routingHelper.isRouteCalculated()) {
-					aboutRoute();
-				} else {
-					Location loc = mapActivity.getLastKnownLocation();
-					getDirections(loc, true);
-				}
-				return true;
-			} else if (itemId == R.id.map_layers) {
-				mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
-				return true;
-			} else if (itemId == R.id.map_mute) {
-				routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
-				return true;
-			} else if (itemId == R.id.map_navigate_to_point) {
-				if (mapActivity.getMapLayers().getNavigationLayer().getPointToNavigate() != null) {
-					if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
-						routingHelper.setFinalAndCurrentLocation(null, routingHelper.getCurrentLocation(), routingHelper.getCurrentGPXRoute());
-						// restore default mode
-						boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
-						mapActivity.updateApplicationModeSettings();
-						mapView.refreshMap(changed);
-					} else {
-						mapActivity.navigateToPoint(null);
-					}
-				} else {
-					mapActivity.navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
-				}
-				mapView.refreshMap();
-				return true;
-			} else if (itemId == R.id.map_show_point_options) {
-				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-				return true;
-			} else if (itemId == R.id.map_animate_route) {
-				// animate moving on route
-				routeAnimation.startStopRouteAnimation(routingHelper, mapActivity);
-				return true;
-			} else {
-				return OsmandPlugin.registerOnOptionsMenuItemSelected(mapActivity, itemId);
-			}
-		}
+		return optionsMenuHelper.onClick(item);
 	}
 
 	private void startGpsStatusIntent() {
@@ -987,21 +1029,24 @@ public class MapActivityActions implements DialogProvider {
 		if (resolved != null) {
 			mapActivity.startActivity(intent);
 		} else {
-			AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
-			builder.setMessage(getString(R.string.gps_status_app_not_found));
-			builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
-					try {
-						mapActivity.startActivity(intent);
-					} catch (ActivityNotFoundException e) {
+			if (Version.isGooglePlayEnabled(mapActivity)) {
+				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+				builder.setMessage(getString(R.string.gps_status_app_not_found));
+				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+						try {
+							mapActivity.startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+						}
 					}
-				}
-			});
-			builder.setNegativeButton(
-					getString(R.string.default_buttons_no), null);
-			builder.show();
+				});
+				builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+				builder.show();
+			} else {
+				Toast.makeText(mapActivity, R.string.gps_status_app_not_found, Toast.LENGTH_LONG).show();
+			}
 		}
 	}
 
@@ -1030,4 +1075,56 @@ public class MapActivityActions implements DialogProvider {
                       });
         menu.show();
     }
+    
+    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
+    		final boolean saveHistory, final OnClickListener onShow){
+		ActionItem showOnMap = new ActionItem();
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_show_on_map));
+		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
+		showOnMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setMapLocationToShow( location.getLatitude(), location.getLongitude(), 
+						z, saveHistory ? name : null, name, obj); //$NON-NLS-1$
+				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(showOnMap);
+		ActionItem setAsDestination = new ActionItem();
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_view_set_destination));
+		setAsDestination.setTitle(activity.getString(R.string.navigate_to));
+		setAsDestination.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
+				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(setAsDestination);
+		
+		ActionItem directionsTo = new ActionItem();
+		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_directions_to_here));
+		directionsTo.setTitle(activity.getString(R.string.context_menu_item_directions));
+		directionsTo.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), true, name);
+				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(directionsTo);
+	}
 }

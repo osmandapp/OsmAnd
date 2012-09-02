@@ -130,6 +130,7 @@ public class NativeSwingRendering extends NativeLibrary {
 			
 		}
 		rctx.zoom = zoom;
+		rctx.tileDivisor = (float) MapUtils.getPowZoom(31 - zoom);
 		long search = time + System.currentTimeMillis();
 		final RenderingGenerationResult rres = NativeSwingRendering.generateRenderingIndirect(rctx, res.nativeHandler,  
 				false, request, true);
@@ -177,6 +178,9 @@ public class NativeSwingRendering extends NativeLibrary {
 	}
 	
 	public static NativeSwingRendering getDefaultFromSettings() {
+//		if(true) {
+//			return null;
+//		}
 		if(defaultLoadedLibrary != null) {
 			return defaultLoadedLibrary;
 		}

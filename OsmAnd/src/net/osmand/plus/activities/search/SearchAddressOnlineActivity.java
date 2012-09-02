@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import net.londatiga.android.QuickAction;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -18,7 +19,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 
@@ -214,9 +215,11 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 		Place item = ((PlacesAdapter) getListAdapter()).getItem(position);
-		settings.setMapLocationToShow(item.lat, item.lon,
-				Math.max(15, settings.getLastKnownMapZoom()), getString(R.string.address)+ " : " + item.displayName); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(this);
+		QuickAction qa = new QuickAction(v);
+		MapActivityActions.createDirectionsActions(qa, new LatLon(item.lat, item.lon), item, 
+				getString(R.string.address)+ " : " + item.displayName, Math.max(15, settings.getLastKnownMapZoom()), 
+				this, true, null);
+		qa.show();
 	}
 	
 	private static class Place {

@@ -31,6 +31,7 @@ public class RenderingContext {
 	public int height;
 
 	public int zoom;
+	public float tileDivisor;
 	public float rotate;
 
 	// debug purpose

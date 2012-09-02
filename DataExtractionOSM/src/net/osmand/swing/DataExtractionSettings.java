@@ -160,7 +160,7 @@ public class DataExtractionSettings {
 	
 	
 	public String getRouteMode(){
-		return preferences.get("routeMode", "car");
+		return preferences.get("routeMode", "car,short_way");
 	}
 	
 	public void setRouteMode(String mode){

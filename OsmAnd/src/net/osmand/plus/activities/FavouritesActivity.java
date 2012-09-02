@@ -16,6 +16,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -34,8 +36,11 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -227,12 +232,46 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				favoritesToDelete.remove(model);
 			}
 		} else {
-			FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
-			OsmandSettings settings = getMyApplication().getSettings();
-			settings.SHOW_FAVORITES.set(true);
-			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
-					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+":\n " + point.getName(), point);
-			MapActivity.launchMapActivityMoveToTop(FavouritesActivity.this);
+			final QuickAction qa = new QuickAction(v);
+			final OsmandSettings settings = getMyApplication().getSettings();
+			final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(groupPosition, childPosition);
+			String name = getString(R.string.favorite) + ": " + point.getName();
+			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+			OnClickListener onshow = new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					settings.SHOW_FAVORITES.set(true);		
+				}
+			};
+			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this, 
+					true, onshow);
+			if (point.isStored()) {
+				ActionItem edit = new ActionItem();
+				edit.setIcon(getResources().getDrawable(R.drawable.list_activities_fav_edit));
+				edit.setTitle(getString(R.string.favourites_context_menu_edit));
+				edit.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						editPoint(point);
+						qa.dismiss();
+					}
+				});
+				qa.addActionItem(edit);
+
+				ActionItem delete = new ActionItem();
+				delete.setTitle(getString(R.string.favourites_context_menu_delete));
+				delete.setIcon(getResources().getDrawable(R.drawable.list_activities_fav_delete));
+				delete.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						deletePoint(point);
+						qa.dismiss();
+					}
+				});
+				qa.addActionItem(delete);
+			}
+			
+			qa.show();
 		}
 		return true;
 	}
@@ -253,55 +292,63 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			getMyApplication().getSettings().setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
 			MapActivity.launchMapActivityMoveToTop(this);
 		} else if (aItem.getItemId() == EDIT_ITEM) {
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setTitle(R.string.favourites_context_menu_edit);
-			final View v = getLayoutInflater().inflate(R.layout.favourite_edit_dialog, getExpandableListView(), false);
-			final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
-			final EditText editText =  (EditText) v.findViewById(R.id.Name);
-			builder.setView(v);
-			editText.setText(point.getName());
-			cat.setText(point.getCategory());
-			cat.setThreshold(1);
-			cat.setAdapter(new ArrayAdapter<String>(this, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
-			builder.setNegativeButton(R.string.default_buttons_cancel, null);
-			builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					boolean editied = helper.editFavouriteName(point, editText.getText().toString(), cat.getText().toString());
-					if (editied) {
-						favouritesAdapter.synchronizeGroups();
-						favouritesAdapter.sort(favoritesComparator);
-					}
-
-				}
-			});
-			builder.create().show();
-			editText.requestFocus();
-			return true;
+			return editPoint(point);
 		}
 		if (aItem.getItemId() == DELETE_ITEM) {
-			final Resources resources = this.getResources();
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
-			builder.setNegativeButton(R.string.default_buttons_no, null);
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					boolean deleted = helper.deleteFavourite(point);
-					if (deleted) {
-						AccessibleToast.makeText(FavouritesActivity.this,
-								MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
-								Toast.LENGTH_SHORT).show();
-						favouritesAdapter.synchronizeGroups();
-						favouritesAdapter.sort(favoritesComparator);
-					}
-
-				}
-			});
-			builder.create().show();
-			return true;
+			return deletePoint(point);
 		}
 		return false;
+	}
+
+	private boolean editPoint(final FavouritePoint point) {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.favourites_context_menu_edit);
+		final View v = getLayoutInflater().inflate(R.layout.favourite_edit_dialog, getExpandableListView(), false);
+		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
+		final EditText editText =  (EditText) v.findViewById(R.id.Name);
+		builder.setView(v);
+		editText.setText(point.getName());
+		cat.setText(point.getCategory());
+		cat.setThreshold(1);
+		cat.setAdapter(new ArrayAdapter<String>(this, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				boolean editied = helper.editFavouriteName(point, editText.getText().toString(), cat.getText().toString());
+				if (editied) {
+					favouritesAdapter.synchronizeGroups();
+					favouritesAdapter.sort(favoritesComparator);
+				}
+
+			}
+		});
+		builder.create().show();
+		editText.requestFocus();
+		return true;
+	}
+
+	private boolean deletePoint(final FavouritePoint point) {
+		final Resources resources = this.getResources();
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getString(R.string.favourites_remove_dialog_msg, point.getName()));
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				boolean deleted = helper.deleteFavourite(point);
+				if (deleted) {
+					AccessibleToast.makeText(FavouritesActivity.this,
+							MessageFormat.format(resources.getString(R.string.favourites_remove_dialog_success), point.getName()),
+							Toast.LENGTH_SHORT).show();
+					favouritesAdapter.synchronizeGroups();
+					favouritesAdapter.sort(favoritesComparator);
+				}
+
+			}
+		});
+		builder.create().show();
+		return true;
 	}
 	
 	@Override
@@ -590,7 +637,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			}
 			
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.favouritedistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
@@ -602,8 +648,9 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this));
-			label.setText(model.getName());
+			String distance = OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this) + "  ";
+			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			if(selectionMode && model.isStored()){
 				ch.setVisibility(View.VISIBLE);

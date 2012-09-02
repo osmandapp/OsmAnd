@@ -336,7 +336,7 @@ public class GPXUtilities {
 		format.setTimeZone(TimeZone.getTimeZone("UTC"));
 		try {
 			XmlPullParser parser = Xml.newPullParser();
-			parser.setInput(new InputStreamReader(f)); //$NON-NLS-1$
+			parser.setInput(new InputStreamReader(f, "UTF-8")); //$NON-NLS-1$
 			Stack<GPXExtensions> parserState = new Stack<GPXExtensions>();
 			boolean extensionReadMode = false;
 			parserState.push(res);

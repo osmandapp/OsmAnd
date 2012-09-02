@@ -6,6 +6,7 @@ package net.osmand.plus.activities;
 import java.util.Comparator;
 import java.util.List;
 
+import net.londatiga.android.QuickAction;
 import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
@@ -15,21 +16,20 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 /**
  * 
@@ -84,14 +84,6 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 		}
 		locationUpdate(location);
 
-		if (!isSelectFavoriteMode()) {
-			getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-				@Override
-				public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-					return FavouritesListActivity.this.onItemLongClick(position);
-				}
-			});
-		}
 	}
 
 	@Override
@@ -121,37 +113,24 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 	}
 	
 	
-	private boolean onItemLongClick(int pos) {
-		final FavouritePoint entry = favouritesAdapter.getItem(pos);
-		AlertDialog.Builder builder = new AlertDialog.Builder(FavouritesListActivity.this);
-		builder.setTitle(entry.getName());
-		OnClickListener onClickListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					settings.setMapLocationToShow(entry.getLatitude(), entry.getLongitude(),  settings.getLastKnownMapZoom(), 
-							 null, getString(R.string.favorite)+":\n " + entry.getName(), entry); //$NON-NLS-1$
-				} else if (which == 1) {
-					settings.setPointToNavigate(entry.getLatitude(),
-							entry.getLongitude(), getString(R.string.favorite) + " : " + entry.getName());
-				}
-				MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
-			}
-		};
-		builder.setItems(new String[] { getString(R.string.show_poi_on_map), getString(R.string.navigate_to) }, onClickListener);
-		builder.show();
-		return true;
-	}
-	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		
 		if (!isSelectFavoriteMode()) {
+			QuickAction qa = new QuickAction(v);
 			FavouritePoint point = favouritesAdapter.getItem(position);
-			settings.SHOW_FAVORITES.set(true);
-			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), settings.getLastKnownMapZoom(), null,
-					getString(R.string.favorite) + ": \n " + point.getName(), point); //$NON-NLS-1$
-			MapActivity.launchMapActivityMoveToTop(FavouritesListActivity.this);
+			String name = getString(R.string.favorite) + ": " + point.getName();
+			LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+			View.OnClickListener onshow = new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					settings.SHOW_FAVORITES.set(true);							
+				}
+			};
+			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this,
+					true, onshow);
+			qa.show();
 		} else {
 			Intent intent = getIntent();
 			intent.putExtra(SELECT_FAVORITE_POINT_INTENT_KEY, favouritesAdapter.getItem(position));
@@ -180,7 +159,6 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			}
 
 			TextView label = (TextView) row.findViewById(R.id.favourite_label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.favouritedistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
 			if (model.isStored()) {
@@ -188,16 +166,15 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			} else {
 				icon.setImageResource(R.drawable.opened_poi);
 			}
+			String distance = "";
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location
 						.getLongitude()));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, FavouritesListActivity.this));
-				distanceLabel.setVisibility(View.VISIBLE);
-			} else {
-				distanceLabel.setVisibility(View.GONE);
+				distance = OsmAndFormatter.getFormattedDistance(dist, FavouritesListActivity.this) + "  " ;
 			}
-
-			label.setText(getName(model));
+			
+			label.setText(distance + getName(model), BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
 			row.findViewById(R.id.favourite_icon).setVisibility(View.VISIBLE);
 			ch.setVisibility(View.GONE);

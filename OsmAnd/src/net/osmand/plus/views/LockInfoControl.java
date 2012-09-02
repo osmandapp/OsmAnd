@@ -7,6 +7,7 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -46,7 +47,7 @@ public class LockInfoControl {
 		return lockActions;
 	}
 	
-	public ImageView createLockScreenWidget(final OsmandMapTileView view) {
+	public ImageView createLockScreenWidget(final OsmandMapTileView view, final MapActivity map) {
 		final ImageView lockView = new ImageView(view.getContext());
 		lockEnabled = view.getResources().getDrawable(R.drawable.lock_enabled);
 		lockDisabled = view.getResources().getDrawable(R.drawable.lock_disabled);
@@ -54,7 +55,7 @@ public class LockInfoControl {
 		lockView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showBgServiceQAction(lockView, view);
+				showBgServiceQAction(lockView, view, map);
 			}
 		});
 		return lockView;
@@ -68,7 +69,7 @@ public class LockInfoControl {
 		}
 	}
 
-	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view) {	
+	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view, final MapActivity map) {	
 		final QuickAction qa = new QuickAction(lockView);
 		
 		if (transparentLockView == null) {
@@ -89,7 +90,7 @@ public class LockInfoControl {
 						y += locs[1];
 						if(lockView.getWidth() >= x && x >= 0 && 
 								lockView.getHeight() >= y && y >= 0) {
-							showBgServiceQAction(lockView, view);
+							showBgServiceQAction(lockView, view, map);
 							return true;
 						}
 						blinkIcon();
@@ -122,6 +123,7 @@ public class LockInfoControl {
 			public void onClick(View v) {
 				if (!isScreenLocked) {
 					parent.addView(transparentLockView);
+					map.backToLocationImpl();
 				} else {
 					parent.removeView(transparentLockView);
 				}
@@ -144,10 +146,10 @@ public class LockInfoControl {
 	}
 	
 	public void showIntervalChooseDialog(final OsmandMapTileView view, final String patternMsg,
-			String startText, final int[] seconds, final int[] minutes, final ValueHolder<Integer> v, OnClickListener onclick){
+			String title, final int[] seconds, final int[] minutes, final ValueHolder<Integer> v, OnClickListener onclick){
 		final Context ctx = view.getContext();
 		Builder dlg = new AlertDialog.Builder(view.getContext());
-		dlg.setTitle(startText);
+		dlg.setTitle(title);
 		LinearLayout ll = new LinearLayout(view.getContext());
 		final TextView tv = new TextView(view.getContext());
 		tv.setPadding(7, 3, 7, 0);
@@ -170,12 +172,13 @@ public class LockInfoControl {
 				String s;
 				if(progress == 0) {
 					s = ctx.getString(R.string.int_continuosly);
+					v.value = 0;
 				} else {
 					if(progress < secondsLength) {
-						s = seconds[progress] + ctx.getString(R.string.int_seconds);
+						s = seconds[progress] + " " + ctx.getString(R.string.int_seconds);
 						v.value = seconds[progress] * 1000;
 					} else {
-						s = minutes[progress - secondsLength] + ctx.getString(R.string.int_min);
+						s = minutes[progress - secondsLength] + " " + ctx.getString(R.string.int_min);
 						v.value = minutes[progress - secondsLength] * 60 * 1000;
 					}
 				}

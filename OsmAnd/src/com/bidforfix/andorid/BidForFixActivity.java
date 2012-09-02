@@ -114,7 +114,7 @@ public abstract class BidForFixActivity extends ListActivity {
 			super.onPostExecute(result);
 			//set the adapter (clear,set)
 			setListAdapter(new BFFIssueArrayAdapter(BidForFixActivity.this, getHelper().getList()));
-			dismissDialog(LOAD_ITEMS);
+			dialog.dismiss();
 		}
 	}
 	

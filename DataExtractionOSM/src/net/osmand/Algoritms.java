@@ -258,7 +258,7 @@ public class Algoritms {
 				conn.setRequestProperty("Authorization", "Basic " + Base64.encode(userNamePassword)); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			
-	        conn.setRequestProperty("User-Agent", "Osmand"); //$NON-NLS-1$ //$NON-NLS-2$
+	        conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
 			log.info("Response code and message : " + conn.getResponseCode() + " " + conn.getResponseMessage());
 			if(conn.getResponseCode() != 200){
 				return conn.getResponseMessage();
@@ -312,7 +312,7 @@ public class Algoritms {
 			}
 			
 	        conn.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + BOUNDARY); //$NON-NLS-1$ //$NON-NLS-2$
-	        conn.setRequestProperty("User-Agent", "Osmand"); //$NON-NLS-1$ //$NON-NLS-2$
+	        conn.setRequestProperty("User-Agent", "OsmAnd"); //$NON-NLS-1$ //$NON-NLS-2$
 
 	        OutputStream ous = conn.getOutputStream();
 //			for (String key : additionalMapData.keySet()) {

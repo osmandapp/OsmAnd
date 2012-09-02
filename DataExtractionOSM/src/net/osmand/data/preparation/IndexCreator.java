@@ -16,6 +16,7 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.data.IndexConstants;
 import net.osmand.data.preparation.OsmDbAccessor.OsmDbVisitor;
+import net.osmand.data.preparation.address.IndexAddressCreator;
 import net.osmand.impl.ConsoleProgressImplementation;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;

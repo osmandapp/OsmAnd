@@ -20,7 +20,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
-import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.plus.AmenityTypeIcons;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
@@ -797,23 +797,25 @@ public class SearchPOIFragment extends PlaceDetailsFragment /*implements SensorE
 				LatLon l = amenity.getLocation();
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 			}
-			String str = OsmAndFormatter.getPoiNameOnly(amenity, settings.usingEnglishNames());
-			label.setText(str);
-			if (amenity.getOpeningHours() != null) {
-				List<OpeningHoursRule> rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
-				if (rs != null) {
-					Calendar inst = Calendar.getInstance();
-					inst.setTimeInMillis(System.currentTimeMillis());
-					boolean work = false;
-					for (OpeningHoursRule p : rs) {
-						if (p.isOpenedForTime(inst)) {
-							work = true;
-							break;
-						}
-					}
-				}
-			}
-
+                        int opened = -1;
+                        if (amenity.getOpeningHours() != null) {
+                                OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+                                if (rs != null) {
+                                        Calendar inst = Calendar.getInstance();
+                                        inst.setTimeInMillis(System.currentTimeMillis());
+                                        boolean work = false;
+                                        work = rs.isOpenedForTime(inst);
+                                        if (work) {
+                                                opened = 0;
+                                        } else {
+                                                opened = 1;
+                                        }
+                                }
+                        }
+                        
+                        String str = OsmAndFormatter.getPoiNameOnly(amenity, settings.usingEnglishNames());
+                        label.setText(str);
+                        
 			icon.setImageResource(AmenityTypeIcons.getIconResource(amenity));
 
 			if(mes == null){

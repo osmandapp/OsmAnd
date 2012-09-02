@@ -27,6 +27,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -465,7 +467,6 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 			LatLon locationToStart = getLocationToStart();
 			
 			TextView label = (TextView) row.findViewById(R.id.label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.distance);
 			ImageView icon = (ImageView) row.findViewById(R.id.search_icon);
 			RouteInfoLocation stop = getItem(position);
 
@@ -480,7 +481,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 				labelW.append(getString(R.string.transport_search_none));
 			}
 			labelW.append("]\n").append(route.getName(settings.usingEnglishNames())); //$NON-NLS-1$
-			label.setText(labelW.toString());
+			
 			// TODO icons
 			if (locationToGo != null && stop.getDistToLocation() < 400) {
 				icon.setImageResource(R.drawable.opened_poi);
@@ -489,8 +490,9 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 			}
 			
 			int dist = locationToStart == null ? 0 : (int) (MapUtils.getDistance(stop.getStart().getLocation(), locationToStart));
-			distanceLabel.setText(" " + OsmAndFormatter.getFormattedDistance(dist, SearchTransportActivity.this)); //$NON-NLS-1$
-
+			String distance =  OsmAndFormatter.getFormattedDistance(dist, SearchTransportActivity.this) + " "; //$NON-NLS-1$
+			label.setText(distance + labelW.toString(), TextView.BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			return (row);
 		}
 	}

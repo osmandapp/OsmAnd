@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_1_t},
-			{R.string.tip_rotation_switching,R.string.tip_rotation_switching_t},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_3_t},
+			{R.string.tip_rotation_switching,R.string.tip_rotation_switching_t_v2},
 			{R.string.tip_update_index,R.string.tip_update_index_t},
-			{R.string.tip_day_night_mode,R.string.tip_day_night_mode_t},
+			{R.string.tip_day_night_mode,R.string.tip_day_night_mode_t_v2},
 			{R.string.tip_location_sharing,R.string.tip_location_sharing_t},
 			{R.string.tip_favorites,R.string.tip_favorites_t},
 			{R.string.tip_osm_improve,R.string.tip_osm_improve_t},
@@ -27,10 +27,10 @@ public class TipsAndTricksActivity {
 			{R.string.tip_search,R.string.tip_search_t},
 			{R.string.tip_select_destination_point,R.string.tip_select_destination_point_t},
 			{R.string.tip_navigation,R.string.tip_navigation_t},
-			{R.string.tip_app_mode,R.string.tip_app_mode_t},
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_0_t},
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_7_1_t},
-			{R.string.tip_map_switch,R.string.tip_map_switch_t},
+			{R.string.tip_app_mode,R.string.tip_app_mode_t_v2},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_2_t},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_1_t},
+			{R.string.tip_map_switch,R.string.tip_map_switch_t_v2},
 			};
 
 	private final Context ctx;

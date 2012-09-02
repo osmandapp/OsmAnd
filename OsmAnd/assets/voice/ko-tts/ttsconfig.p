@@ -67,11 +67,11 @@ nth(17, '열일곱번째 ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' 미터 '] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' 미터 '] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' 미터 '] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' 미터 '] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['약, 1 킬로미터 '] :- Dist < 1500.
-distance(Dist) == ['약, ', X, ' 킬로미터 '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' 킬로미터 '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['약, ', X, ' 킬로미터 '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' 킬로미터 '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

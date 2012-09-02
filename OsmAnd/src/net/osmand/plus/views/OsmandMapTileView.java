@@ -243,20 +243,22 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			res *= (float) Math.pow(2, zoom - (int) zoom);
 		}
 
-		// that trigger allows to scale tiles for certain devices
-		// for example for device with density > 1 draw tiles the same size as with density = 1
-		// It makes text bigger but blurry, the settings could be introduced for that
-		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get() ) {
-			res *= dm.density;
-		}
+		
 		return res;
 	}
 
 	public int getSourceTileSize() {
-		if(mainLayer instanceof MapTileLayer){
-			return ((MapTileLayer) mainLayer).getSourceTileSize();
+		int r = 256;
+		if (mainLayer instanceof MapTileLayer) {
+			r = ((MapTileLayer) mainLayer).getSourceTileSize();
 		}
-		return 256;
+		// that trigger allows to scale tiles for certain devices
+		// for example for device with density > 1 draw tiles the same size as with density = 1
+		// It makes text bigger but blurry, the settings could be introduced for that
+		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get()) {
+			return (int) (r * dm.density);
+		}
+		return r;
 	}
 
 	/**
