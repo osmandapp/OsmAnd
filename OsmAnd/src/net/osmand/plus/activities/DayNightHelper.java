@@ -91,7 +91,7 @@ public class DayNightHelper implements SensorEventListener {
 				} catch (IllegalArgumentException e) {
 					log.warn("Network location provider not available"); //$NON-NLS-1$
 				} catch (SecurityException e) {
-					log.warn("Missing permitions to get actual location!"); //$NON-NLS-1$
+					log.warn("Missing permissions to get actual location!"); //$NON-NLS-1$
 				}
 				return null;
 			} else {
