@@ -77,7 +77,7 @@
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
-  <string name="tip_select_destination_point_t">\tPuoi selezionare una destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o premendo a lungo una voce nella \'Lista dei Punti Preferiti\'.↵
+  <string name="tip_select_destination_point_t">\tPuoi selezionare una destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o premendo a lungo una voce nella \'Lista dei Punti Preferiti\'.
 \n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne mostra la distanza e la direzione (triangolo arancione).</string>
   <string name="tip_recent_changes_0_6_9_t">"Cambiamenti nella versione 0.6.9 :
 \n\t- Improved offline map rendering
