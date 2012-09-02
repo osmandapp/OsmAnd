@@ -10,6 +10,8 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 
+	<string name="show_warnings_title">Show alarms&#8230;</string>
+	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, lane info</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
 	<string name="use_compass_navigation">Use compass</string>
 	<string name="avoid_motorway">Avoid motorways</string>
@@ -104,8 +106,6 @@
 	<string name="avoid_ferries">Avoid ferries</string>
 	<string name="avoid_in_routing_title">Avoid&#8230;</string>
 	<string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
-	<string name="show_warnings_title">Show alarms&#8230;</string>
-	<string name="show_warnings_descr">Show speed limits, speed cameras, and traffic bumps</string>
 	<string name="map_widget_fluorescent">Fluorescent routes</string>
 	<string name="map_widget_show_ruler">Ruler</string>
 	<string name="map_widget_appearance">Miscellaneous:</string>

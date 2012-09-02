@@ -751,9 +751,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					osmandSettings.AVOID_FERRIES, osmandSettings.AVOID_UNPAVED_ROADS, osmandSettings.AVOID_MOTORWAY });
 			return true;
 		} else if (preference == showAlarms) {
-			showBooleanSettings(new String[] { getString(R.string.show_cameras), getString(R.string.show_speed_limits),
-					getString(R.string.show_lanes) }, new OsmandPreference[] { osmandSettings.SHOW_CAMERAS,
-					osmandSettings.SHOW_SPEED_LIMITS, osmandSettings.SHOW_LANES });
+			showBooleanSettings(new String[] { getString(R.string.show_speed_limits), getString(R.string.show_cameras), 
+					getString(R.string.show_lanes) }, new OsmandPreference[] { osmandSettings.SHOW_SPEED_LIMITS, 
+					osmandSettings.SHOW_CAMERAS, osmandSettings.SHOW_LANES });
 			return true;
 		}
 		return false;

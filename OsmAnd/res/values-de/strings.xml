@@ -1,5 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="show_warnings_title">Warnungen anzeigen…</string>
+	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, weiterführende Fahrspuren</string>
 	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
@@ -1107,8 +1109,6 @@
 	<string name="avoid_ferries">Vermeide Fähren</string>
 	<string name="avoid_in_routing_title">Vermeide…</string>
 	<string name="avoid_in_routing_descr">Mautstraßen, Fähren und ungeteerte Straßen vermeiden</string>
-	<string name="show_warnings_title">Warnungen anzeigen…</string>
-	<string name="show_warnings_descr">Warnungen für stationäre Radarfallen, Tempolimits und Rüttelschwellen</string>
 	<string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
 	<string name="map_widget_show_ruler">Maßstab</string>
 	<string name="map_widget_appearance">Verschiedenes:</string>
