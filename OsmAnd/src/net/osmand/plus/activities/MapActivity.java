@@ -32,7 +32,6 @@ import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.Activity;
@@ -202,16 +201,17 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		LatLon pointToNavigate = settings.getPointToNavigate();
 		
 		routingHelper = getMyApplication().getRoutingHelper();
-		// This situtation could be when navigation suddenly crashed and after restarting
-		// it tries to continue the last route
-		if(settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated()){
-			restoreRoutingMode(pointToNavigate);
-		}
 		
 		mapView.setMapLocationListener(this);
 		mapLayers.createLayers(mapView);
 		
-		if(!settings.isLastKnownMapLocation()){
+                // This situtation could be when navigation suddenly crashed and after restarting
+                // it tries to continue the last route
+                if(settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated()){
+                        restoreRoutingMode(pointToNavigate);
+                }
+
+                if(!settings.isLastKnownMapLocation()){
 			// show first time when application ran
 			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
 			Location location = null;
@@ -292,7 +292,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			LatLon l = settings.getLastKnownMapLocation();
 			mapView.setLatLon(l.getLatitude(), l.getLongitude());
 			mapView.setZoom(settings.getLastKnownMapZoom());
-			mapView.getLayerByClass(MapControlsLayer.class).setFollowMode(settings.getLastKnownMapFollowMode());
+			mapLayers.getMapControlsLayer().setFollowMode(settings.getLastKnownMapFollowMode());
 		}
 
 		settings.MAP_ACTIVITY_ENABLED.set(true);
@@ -307,6 +307,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// always enable and follow and let calculate it (GPS is not accessible in garage)
 			mapActions.getDirections(getLastKnownLocation(), true);
 		}
+
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
 			mapLayers.getContextMenuLayer().setLocation(latLonToShow, mapLabelToShow);
@@ -322,9 +323,19 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 
+		if (settings.getPointToNavigate() != null) {
+                    mapLayers.getMapControlsLayer().setCurrentlyRouting(true);
+                }
+
 		OsmandPlugin.onMapActivityResume(this);
 		getMyApplication().getDaynightHelper().onMapResume();
 		mapView.refreshMap(true);
+	}
+
+	public void cancelCurrentRoute() {
+            notRestoreRoutingMode();
+            mapLayers.getNavigationLayer().setPointToNavigate(null);
+            settings.clearPointToNavigate();
 	}
 
 	private void notRestoreRoutingMode(){
@@ -1089,7 +1100,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		
 		settings.setLastKnownMapZoom(mapView.getZoom());
-                settings.setLastKnownMapFollowMode(mapView.getLayerByClass(MapControlsLayer.class).getFollowMode());
+                settings.setLastKnownMapFollowMode(mapLayers.getMapControlsLayer().getFollowMode());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		getMyApplication().getResourceManager().interruptRendering();
 		getMyApplication().getResourceManager().setBusyIndicator(null);
@@ -1323,7 +1334,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && routingHelper.isFollowingMode() && mapView.getLayerByClass(MapControlsLayer.class).getFollowMode() != FollowMode.FREE_SCROLL){
+			if(autoFollow > 0 && routingHelper.isFollowingMode() && mapLayers.getMapControlsLayer().getFollowMode() != FollowMode.FREE_SCROLL){
 				backToLocationWithDelay(autoFollow);
 			}
 		}

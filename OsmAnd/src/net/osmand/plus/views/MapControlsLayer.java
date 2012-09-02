@@ -61,6 +61,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private int numInitializedMenuOptions;
 	private float cachedRotate = 0;
 	private FollowMode followMode;
+	private boolean isCurrentlyRouting = false;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
@@ -278,7 +279,6 @@ public class MapControlsLayer extends OsmandMapLayer {
                return button;
         }
 
-
         private void addOption(View menuOptionView, final OsmandMapTileView view, FrameLayout parent) {
             android.widget.FrameLayout.LayoutParams params =
                     new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
@@ -289,23 +289,42 @@ public class MapControlsLayer extends OsmandMapLayer {
         }
 
         private void initRoutingButton(final OsmandMapTileView view, FrameLayout parent) {
-            routingButton = addButtonOption(R.drawable.map_routing, view, parent);
+            routingButton = addButtonOption(getRoutingResourceId(), view, parent);
             routingButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
-                    final Intent placePicker = new Intent(activity, PlacePickerActivity.class);
-                    // TODO(natashaj): what happens if map is not loaded yet?
-                    LatLon loc = activity.getMapLocation();
-                    placePicker.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-                    placePicker.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-                    //placePicker.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    activity.startActivityForResult(placePicker, MapActivity.SELECT_PLACE_FOR_ROUTING);
+                    if (isCurrentlyRouting) {
+                        setCurrentlyRouting(false);
+                        activity.cancelCurrentRoute();
+                    } else {
+                        final Intent placePicker = new Intent(activity, PlacePickerActivity.class);
+                        // TODO(natashaj): what happens if map is not loaded yet?
+                        LatLon loc = activity.getMapLocation();
+                        placePicker.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+                        placePicker.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+                        //placePicker.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        activity.startActivityForResult(placePicker, MapActivity.SELECT_PLACE_FOR_ROUTING);
+                    }
                 }
             });
         }
 
-	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
+        public boolean isCurrentlyRouting() {
+            return this.isCurrentlyRouting;
+        }
+
+        public void setCurrentlyRouting(boolean isCurrentlyRouting) {
+            this.isCurrentlyRouting = isCurrentlyRouting;
+            if (routingButton != null) {
+                routingButton.setBackgroundResource(getRoutingResourceId());
+            }
+        }
+
+        private int getRoutingResourceId() {
+            return isCurrentlyRouting() ? R.drawable.map_routing_cancel : R.drawable.map_routing;
+        }
+
+        private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
 		android.widget.FrameLayout.LayoutParams params;
 		Context ctx = view.getContext();
 		backToMenuButton = new Button(ctx);

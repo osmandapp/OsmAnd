@@ -563,7 +563,7 @@ public class OsmandSettings {
 	};
 	{
 		DAYNIGHT_MODE.makeProfile();
-		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.CAR, DayNightMode.AUTO);
+		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.CAR, DayNightMode.DAY);
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, DayNightMode.DAY);
 	}
