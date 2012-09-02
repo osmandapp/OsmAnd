@@ -90,12 +90,12 @@
   <string name="use_transparent_map_theme">Tema trasparente</string>
   <string name="native_library_not_supported">La libreria nativa non è supportata da questo dispositivo.</string>
   <string name="init_native_library">Inizializzando la libreria nativa…</string>
-  <string name="choose_auto_follow_route">Impostazioni auto-follow</string>
+  <string name="choose_auto_follow_route">Visualizzazione centra automaticamente la mappa</string>
   <string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
   <string name="auto_follow_route_never">Mai</string>
-  <string name="auto_follow_route_navigation">Navigazione auto-follow</string>
-  <string name="auto_follow_route_navigation_descr">Abilita l\'auto-follow solo durante la navigazione.</string>
-  <string name="auto_follow_location_enabled">Auto follow è attivo.</string>
+  <string name="auto_follow_route_navigation">Centra automaticamente solo in navigazione</string>
+  <string name="auto_follow_route_navigation_descr">Auto-centra la visione della mappa solo durante la navigazione.</string>
+  <string name="auto_follow_location_enabled">Auto-centra la visione della mappa in uso.</string>
   <string name="pref_vector_rendering">Opzioni specifiche per il renderer vettoriale</string>
   <string name="pref_overlay">﻿Sovrapposizione / sfondo</string>
   <string name="pref_raster_map">Impostazioni della fonte mappa</string>
