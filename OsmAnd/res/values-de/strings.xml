@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="show_warnings_title">Warnungen anzeigen…</string>
-	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, u.Ä.</string>
+	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, weiterführende Fahrspuren</string>
 	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
@@ -14,7 +14,7 @@
 		\n\t* Oberfläche vervollständigt (Icons)
 		\n\t* Einige Bug fixes
 	</string>
-	<string name="snap_to_road_descr">Position während der Nvigation auf Straßen einrasten</string>
+	<string name="snap_to_road_descr">Position während der Navigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Einrasten auf Straße</string>
 	<string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
 		\n\t* Verbessertes Routing
@@ -38,7 +38,7 @@
 		- Offlinenavigation für kurze Distanzen (experimentell)
 		- Auto-, Fahhrad und Fußgänger-Modus mit
 		-  optional automatischer Tag-Nacht-Umschaltung der Anzeige
-		-  optional geschwingikeitsabhängigem Kartenmasstab
+		-  optional geschwindigkeitsabhängigem Kartenmaßstab
 		-  optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
 		-  optional Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 
@@ -1094,7 +1094,8 @@
 	<string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>
 	<string name="map_widget_next_next_turn">Übernächste Abzweigung</string>
 	<string name="map_widget_mini_route">Mini-Routenkarte</string>
-	<string name="bg_service_screen_lock">Bildschirm sperren</string>
+	<string name="bg_service_screen_lock">Bildschirm
+ sperren</string>
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
