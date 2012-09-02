@@ -72,7 +72,8 @@
 	</string>
 	<string name="select_navigation_mode">Transportmittel wählen</string>
 	<string name="day_night_info_description">Sonnenaufgang : %1$s
-\nSonnenuntergang : %2$s</string>
+		\nSonnenuntergang : %2$s
+	</string>
 	<string name="day_night_info">Tag/Nacht-Information</string>
 	<string name="asap">ASAP</string>
 	<string name="save_route_as_gpx">Route als GPX Datei speichern</string>
