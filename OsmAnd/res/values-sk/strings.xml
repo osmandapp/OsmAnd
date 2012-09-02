@@ -1035,9 +1035,6 @@
 <string name="map_widget_day_night">Denná/nočná mapa</string>
 <string name="map_widget_vector_attributes">Atribúty vykresľovania:</string>
 <string name="map_widget_renderer">Štýl vykresľovania</string>
-<string name="tip_recent_changes_0_8_3_t"/>
-<string name="snap_to_road_descr"/>
-<string name="snap_to_road"/>
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="osmand_long_description_1000_chars"/>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
