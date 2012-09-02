@@ -1,5 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
+<resources>
+  <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
+  \n\t* Vylepšená navigácia
+  \n\t* Voľba obídenia diaľnic
+  \n\t* Zobrazenie Cycleway=track
+  \n\t* Vylepšený vzhľad rozhrania (ikony)
+  \n\t* Opravy chýb
+  </string>
+  <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
+  <string name="snap_to_road">Prichytiť k ceste</string>
+  <string name="avoid_motorway">Diaľniciam</string>
+  <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
   <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
   <string name="layer_map_appearance">Konfigurovať obrazovku…</string>
   <string name="show_lanes">Jazdné pruhy</string>
