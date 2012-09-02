@@ -11,7 +11,7 @@
     -->
 
 	<string name="show_warnings_title">Show alarms&#8230;</string>
-	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, lane info</string>
+	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, and other warnings</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
 	<string name="use_compass_navigation">Use compass</string>
 	<string name="avoid_motorway">Avoid motorways</string>
