@@ -57,7 +57,7 @@
   <string name="user_name">Nome utente su OSM</string>
   <string name="user_name_descr">Necessario per inviare contributi a openstreetmap.org</string>
   <string name="user_password">Tua password su OSM</string>
-  <string name="user_password_descr">Necessario per inviare contributi a openstreetmap.org</string>
+  <string name="user_password_descr">Necessaria per inviare contributi a openstreetmap.org</string>
   <string name="osmand_service">Servizio in background</string>
   <string name="osmand_service_descr">Usato per eseguire OsmAnd mentre lo schermo è spento</string>
   <string name="tip_rotation_switching">Orientamento della mappa</string>
@@ -66,14 +66,7 @@
 \n\t\n\tNe puoi scaricare una in \'Impostazioni\' -&gt; \'Dati offline\', o passare alle mappe online tramite \'Impostazioni\' -&gt; \'Configurazione delle mappe\'.</string>
   <string name="binary_map_download_success">Download riuscito.\n\t\n\tPer usarle attivare o use activate \'Impostazioni\' -&gt; \'Configurazione delle mappe\' -&gt; \'Mappe vettoriali offline\'.</string>
   <string name="tip_day_night_mode">Modo giorno/notte</string>
-  <string name="tip_day_night_mode_t">\tL\'aspetto della mappa può essere cambiato per alcune mappe vettoriali tra giorno (più luminoso) e notte (più scuro).
-\n\tI colori scuri sono più sicuri per la guida notturna.
-\n\tPuoi impostare una regola per il cambio giorno/notte in \'Impostazioni\' -&gt; \'Aspetto delle mappe\' -&gt; \'Modo giorno/notte\'.
-\n\tLe scelte sono:
-\n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (default)
-\n\t\'Giorno\' - usa sempre la modalità giorno
-\n\t\'Notte\' - usa sempre la modalità notte
-\n\t\'Sensore luminosità\' - l\'aspetto della mappa è controllato dal sensore del tuo device (solo se è presente)</string>
+  <string name="tip_day_night_mode_t">\tL\'aspetto della mappa può essere cambiato per alcune mappe vettoriali tra giorno (più luminoso) e notte (più scuro). \n\tI colori scuri sono più sicuri per la guida notturna. \n\tPuoi impostare una regola per il cambio giorno/notte in \'Impostazioni\' -&gt; \'Aspetto delle mappe\' -&gt; \'Modo giorno/notte\'. \n\tLe scelte sono: \n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (default) \n\t\'Giorno\' - usa sempre la modalità giorno \n\t\'Notte\' - usa sempre la modalità notte \n\t\'Sensore luminosità\' - l\'aspetto della mappa è controllato dal sensore del tuo dispositivo (solo se è presente)</string>
   <string name="tip_osm_improve">Migliorare i dati OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di bug con solo un paio di click!
 \n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'Editing OSM\'.
@@ -95,7 +88,7 @@
 \n\t- Other small features "</string>
   <string name="use_transparent_map_theme_descr">Usa controlli trasparenti</string>
   <string name="use_transparent_map_theme">Tema trasparente</string>
-  <string name="native_library_not_supported">La libreria nativa non è supportata da questo device.</string>
+  <string name="native_library_not_supported">La libreria nativa non è supportata da questo dispositivo.</string>
   <string name="init_native_library">Inizializzando la libreria nativa…</string>
   <string name="choose_auto_follow_route">Impostazioni auto-follow</string>
   <string name="choose_auto_follow_route_descr">Scegli intervallo di tempo per seguire automaticamente la posizione attuale</string>
@@ -114,8 +107,8 @@
   <string name="city_type_town">Cittadina</string>
   <string name="city_type_city">Città</string>
   <string name="layer_poi_label">Etichette PDI</string>
-  <string name="animate_route_off">Animazione off</string>
-  <string name="animate_route">Animazione on</string>
+  <string name="animate_route_off">Ferma animazione</string>
+  <string name="animate_route">Avvia animazione</string>
   <string name="tip_recent_changes_0_6_8_t">"Modifiche 0.6.8 :
 \n\t- Ridisegnato il menu\' ricerca (PDI, Indirizzi)! Ora la ricerca dei civici e\' molto piu\' veloce.
 \n\t- Inserita la ricerda PDI per nome in vaste aree (paesi)
@@ -283,7 +276,7 @@
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
   <string name="search_osm_offline">Ricerca indirizzo usando le mappe offline</string>
   <string name="system_locale">Sistema</string>
-  <string name="preferred_locale_descr">Seleziona linguaggio display</string>
+  <string name="preferred_locale_descr">Seleziona il linguaggio del display</string>
   <string name="preferred_locale">Linguaggio display</string>
   <string name="tip_map_switch">Fonte Mappa</string>
   <string name="tip_map_switch_t">suggerimento_cambia_mappa_t</string>
@@ -410,7 +403,7 @@
   <string name="phone">Telefono</string>
   <string name="download_type_to_filter">Tipo filtro</string>
   <string name="use_high_res_maps">Display ad alta risoluzione</string>
-  <string name="use_high_res_maps_descr">Non stira (né offusca) i tasselli della mappa nei dispositivi con display ad alta densità</string>
+  <string name="use_high_res_maps_descr">Non stira (né offusca) le mattonelle della mappa nei dispositivi con display ad alta densità</string>
   <string name="unknown_location">Posizione sconosciuta</string>
   <string name="download_files">Scarica</string>
   <string name="context_menu_item_search_transport">Ricerca trasporto</string>
@@ -509,11 +502,11 @@
   <string name="search_poi_location">Ricerca posizione PDI…</string>
   <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
-  <string name="map_orientation_default">Default</string>
+  <string name="map_orientation_default">Stessa del dispositivo</string>
   <string name="map_orientation_portrait">Verticale</string>
   <string name="map_orientation_landscape">Orizzontale</string>
   <string name="map_screen_orientation">Orientamento dello schermo mappa</string>
-  <string name="map_screen_orientation_descr">Ritratto, paesaggio, o come il sistema (device)</string>
+  <string name="map_screen_orientation_descr">Ritratto, paesaggio, o come il sistema (dispositivo)</string>
   <string name="opening_hours_not_supported">Il formato dell\'ora di apertura non è supportato per la modifica</string>
   <string name="add_new_rule">Aggiungere una nuova regola</string>
   <string name="transport_Routes">Percorsi</string>
@@ -794,16 +787,14 @@
   <string name="tip_recent_changes_0_8_0_t">"Cambiamenti nella 0.8.0 :
 \n\t - *Funzionalità a plugin*\n\t - Molte delle funzionalità sono raggruppate per features e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tile (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.\n\t - Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)\n\t - *Routing offline*\n\t - Il routing offline diventa più solido\n\t - *Miglioramento usabilità e UI*\n\t- Miglioramenti in svariate aree "</string>
   <string name="osm_editing_plugin_description">Questo plugin facilita il feedback ad OSM come la raccolta/modifica di Punti di interesse, l\'apertura/commento di bug OSM, e l\'invio di tracce registrate (richiede le credenziali OSM).</string>
-  <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi device potrebbe non funzionare bene.</string>
+  <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   <string name="simulate_route_progression_manually">Simula l\'avanzamento del tragitto manualmente</string>
   <string name="play_commands_of_currently_selected_voice">Esegui i comandi della voce attualmente selezionata</string>
   <string name="debugging_and_development">Sviluppo di OsmAnd</string>
   <string name="native_rendering">Rendering nativo</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Prova i comandi vocali</string>
-  <string name="tip_recent_changes_0_7_2_t">Cambiamenti nella 0.7.2 :
-\n\t- Rendering nativo per tutti i device\n\t- Editing offline dei Punti di interesse\n\t- Accessibilità
-\n\t- Svariati bug fix</string>
+  <string name="tip_recent_changes_0_7_2_t">"Cambiamenti nella 0.7.2 : \n\t- Rendering nativo per tutti i dispositivi\n\t- Editing offline dei Punti di interesse\n\t- Accessibilità \n\t- Svariati bug fix"</string>
   <string name="send_files_to_osm">Mandare i file GPX a OSM?</string>
   <string name="gpx_visibility_txt">Visibilità</string>
   <string name="gpx_tags_txt">Etichette</string>
@@ -1034,7 +1025,7 @@
 \n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo...\' -&gt;\'Giorno/notte mappa\'.↵
 \n\tLe scelte sono:↵
 \n\t\'Alba/Tramonto\' - automaticamente, in base alla posizione del sole (preimpostato)↵
-\n\t\'Day\' - always use day mode↵
+\n\t\'Day\' - usa sempre il modo diurno↵
 \n\t\'Night\' - usa sempre il modo notturno ↵
 \n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
 <string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\'in visualizzazione mappa.↵
