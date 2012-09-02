@@ -18,7 +18,7 @@ public class TestSunriseSunset {
 	
 	public static void printSunriseSunset(String date, float lat, float lon, TimeZone tz) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-		SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:MM");
+		SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 		prt.setTimeZone(TimeZone.getTimeZone("GMT"));
 		Date time = sdf.parse(date);
 		Calendar calendar = Calendar.getInstance();
