@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
 	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, u.Ä.</string>
 	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine andere Richtungsbestimmung möglich</string>
@@ -83,7 +83,6 @@
 	<string name="rendering_attr_noPolygons_name">Transparente Flächen</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
-	<!-- string name="rendering_attr_contourLines_description">Minimale Vergrößerung, ab der Höhenlinien angezeigt werden sollen. Höhenlinien müssen meist in Form von zusätzlichen SRTM-Dateien vorhanden sein.</string -->
 	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt SRTM Datei):</string>
 	<string name="rendering_attr_contourLines_name">Höhenlinien</string>
 	<string name="rendering_attr_hmRendered_description">Erhöht die in der Karte angezeigte Detaildichte</string>
@@ -512,10 +511,10 @@
 		\n\tDazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
 		\n\tZur Auswahl stehen mehrere Übertragungswege: E-Mail, SMS, oder die Lokationskoordinaten einfach in die Ablage (Clipboard) kopieren.</string>
 	<string name="tip_favorites">Favoriten</string>
-	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als &lt;i&gt;Favoriten&lt;/i&gt; speichern.
+	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als Favoriten speichern.
 		\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
 		\n\t Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
-		\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' -&gt; \'Darstellung\' einen Haken bei \'Favoriten\' setzen.
+		\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Darstellung\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
