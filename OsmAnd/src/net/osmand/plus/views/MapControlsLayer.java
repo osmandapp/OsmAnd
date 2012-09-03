@@ -329,7 +329,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		Context ctx = view.getContext();
 		backToMenuButton = new Button(ctx);
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
-		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
+		backToMenuButton.setBackgroundResource(R.drawable.map_back_to_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.TOP | Gravity.LEFT);
 		parent.addView(backToMenuButton, params);
