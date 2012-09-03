@@ -75,6 +75,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 					entries[i] = (int) (floatValues[i] * 100) +" %";
 				}
 				Builder b = new AlertDialog.Builder(view.getContext());
+				b.setTitle(R.string.map_text_size);
 				int i = Arrays.binarySearch(floatValues, textSizePref.get());
 				b.setSingleChoiceItems(entries, i, new OnClickListener() {
 					@Override
