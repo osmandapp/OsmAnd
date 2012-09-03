@@ -1,7 +1,6 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-	<string name="show_warnings_title">Warnungen anzeigen…</string>
-	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, weiterführende Fahrspuren</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="show_warnings_title">Warnungen anzeigen…</string>
+	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, u.Ä.</string>
 	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
@@ -638,7 +637,7 @@
 	<string name="reload">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
 	<string name="fast_route_mode_descr">Auswählen für schnellste Route oder deaktivieren für kürzeste Route</string>
-	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln ({2} MB )</string>
+	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
 	<string name="context_menu_item_download_map">Karte herunterladen</string>
 	<string name="select_max_zoom_preload_area">Wähle maximale zu ladende Vergrößerung</string>
 	<string name="maps_could_not_be_downloaded">Diese Karte konnte nicht geladen werden</string>
@@ -1094,8 +1093,7 @@
 	<string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>
 	<string name="map_widget_next_next_turn">Übernächste Abzweigung</string>
 	<string name="map_widget_mini_route">Mini-Routenkarte</string>
-	<string name="bg_service_screen_lock">Bildschirm
- sperren</string>
+	<string name="bg_service_screen_lock">Bildschirm\n sperren</string>
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
