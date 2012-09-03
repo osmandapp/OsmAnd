@@ -412,7 +412,7 @@ public class MapControlsLayer extends OsmandMapLayer {
            case FOLLOW_BEARING:
                return R.drawable.map_follow_bearing;
            case FREE_SCROLL:
-               return R.drawable.map_center;
+               return R.drawable.map_free_scroll;
            }
        }
        
