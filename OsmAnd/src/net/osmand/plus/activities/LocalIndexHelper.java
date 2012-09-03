@@ -355,7 +355,7 @@ public class LocalIndexHelper {
 	private void updateObfFileInformation(LocalIndexInfo info, File mapFile) {
 		try {
 			RandomAccessFile mf = new RandomAccessFile(mapFile, "r");
-			BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, false);
+			BinaryMapIndexReader reader = new BinaryMapIndexReader(mf);
 			
 			info.setNotSupported(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION);
 			List<BinaryIndexPart> indexes = reader.getIndexes();

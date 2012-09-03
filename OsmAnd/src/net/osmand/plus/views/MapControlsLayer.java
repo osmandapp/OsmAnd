@@ -5,15 +5,18 @@ import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.ApplicationMode;
+import net.osmand.plus.activities.FollowMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PlacePickerActivity;
 import net.osmand.plus.activities.search.SearchActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -46,17 +49,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private Handler showUIHandler;
 	
 	private boolean showZoomLevel = false;
+	private int shadowColor = Color.WHITE;
 	
         private Button zoomInButton;
         private Button zoomOutButton;
 	private Button routingButton;
 	private Button searchButton;
-	private Button centerButton;
+	private Button followModeButton;
 	private ImageView compassView;
 	
 	private int numInitializedMenuOptions;
 	private float cachedRotate = 0;
-	private boolean isFollowingMode = false;
+	private FollowMode followMode;
+	private boolean isCurrentlyRouting = false;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
@@ -103,8 +108,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initRoutingButton(view, parent);
 		// TODO(natashaj): Disabling search button until UI is updated for prototype
 		//initSearchButton(view, parent);
-		initCenterButton(view, parent);
-		initCompass(view, parent);
+		initFollowModeButton(view, parent);
 		initZoomButtons(view, parent);
 
 		initBackToMenuButton(view, parent);
@@ -150,7 +154,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		
 		if(view.getRotate() != cachedRotate) {
 		    cachedRotate = view.getRotate();
-		    compassView.invalidate();
+		    // TODO(natashaj): Disable rotating compass button for now
+		    //compassView.invalidate();
 		}
 	}
 
@@ -213,6 +218,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void drawZoomLevel(Canvas canvas) {
 		String zoomText = view.getZoom() + "";
+		float frac = view.getFloatZoom() - view.getZoom();
+		while(frac > OsmandMapTileView.ZOOM_DELTA_1) {
+			frac -= OsmandMapTileView.ZOOM_DELTA_1;
+			zoomText += "'";
+		}
 		float length = zoomTextPaint.measureText(zoomText);
 		if (zoomShadow.getBounds().width() == 0) {
 			zoomShadow.setBounds(zoomInButton.getLeft() - 2, zoomInButton.getTop() - (int) (18 * scaleCoefficient), zoomInButton.getRight(),
@@ -221,7 +231,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomShadow.draw(canvas);
 				
 		ShadowText.draw(zoomText, canvas, zoomInButton.getLeft() + (zoomInButton.getWidth() - length - 2) / 2,
-				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint);
+				zoomInButton.getTop() + 4 * scaleCoefficient, zoomTextPaint, shadowColor);
 	}
 	
 	private void hideZoomLevelInTime(){
@@ -269,7 +279,6 @@ public class MapControlsLayer extends OsmandMapLayer {
                return button;
         }
 
-
         private void addOption(View menuOptionView, final OsmandMapTileView view, FrameLayout parent) {
             android.widget.FrameLayout.LayoutParams params =
                     new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
@@ -280,28 +289,47 @@ public class MapControlsLayer extends OsmandMapLayer {
         }
 
         private void initRoutingButton(final OsmandMapTileView view, FrameLayout parent) {
-            routingButton = addButtonOption(R.drawable.map_routing, view, parent);
+            routingButton = addButtonOption(getRoutingResourceId(), view, parent);
             routingButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    
-                    final Intent placePicker = new Intent(activity, PlacePickerActivity.class);
-                    // TODO(natashaj): what happens if map is not loaded yet?
-                    LatLon loc = activity.getMapLocation();
-                    placePicker.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
-                    placePicker.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
-                    //placePicker.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    activity.startActivityForResult(placePicker, MapActivity.SELECT_PLACE_FOR_ROUTING);
+                    if (isCurrentlyRouting) {
+                        setCurrentlyRouting(false);
+                        activity.cancelCurrentRoute();
+                    } else {
+                        final Intent placePicker = new Intent(activity, PlacePickerActivity.class);
+                        // TODO(natashaj): what happens if map is not loaded yet?
+                        LatLon loc = activity.getMapLocation();
+                        placePicker.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+                        placePicker.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+                        //placePicker.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        activity.startActivityForResult(placePicker, MapActivity.SELECT_PLACE_FOR_ROUTING);
+                    }
                 }
             });
         }
 
-	private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
+        public boolean isCurrentlyRouting() {
+            return this.isCurrentlyRouting;
+        }
+
+        public void setCurrentlyRouting(boolean isCurrentlyRouting) {
+            this.isCurrentlyRouting = isCurrentlyRouting;
+            if (routingButton != null) {
+                routingButton.setBackgroundResource(getRoutingResourceId());
+            }
+        }
+
+        private int getRoutingResourceId() {
+            return isCurrentlyRouting() ? R.drawable.map_routing_cancel : R.drawable.map_routing;
+        }
+
+        private void initBackToMenuButton(final OsmandMapTileView view, FrameLayout parent) {
 		android.widget.FrameLayout.LayoutParams params;
 		Context ctx = view.getContext();
 		backToMenuButton = new Button(ctx);
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
-		backToMenuButton.setBackgroundResource(R.drawable.map_btn_menu);
+		backToMenuButton.setBackgroundResource(R.drawable.map_back_to_menu);
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.TOP | Gravity.LEFT);
 		parent.addView(backToMenuButton, params);
@@ -337,19 +365,72 @@ public class MapControlsLayer extends OsmandMapLayer {
         }
         
 
-       private void initCenterButton(final OsmandMapTileView view, FrameLayout parent) {
-               centerButton = addButtonOption(R.drawable.map_center, view, parent);
-               centerButton.setOnClickListener(new View.OnClickListener() {
-                       @Override
-                       public void onClick(View v) {
-                               isFollowingMode = !isFollowingMode;
-                               activity.backToLocationImpl();
-                       }
-               });
-        }
-        
+       private void initFollowModeButton(final OsmandMapTileView view, FrameLayout parent) {
+           if (followMode == null) {
+               setFollowMode(FollowMode.FOLLOW_COMPASS);
+           }
+           followModeButton = addButtonOption(getFollowModeResourceId(followMode), view, parent);
+           followModeButton.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   // Center map on current location in all cases follow mode button is clicked
+                   // Free scrolling is the only case where centering does not occur
+                   activity.backToLocationImpl();
+                   switch (followMode) {
+                   case FOLLOW_COMPASS:
+                   default:
+                       setFollowMode(FollowMode.FOLLOW_BEARING);
+                       break;
+                   case FOLLOW_BEARING:
+                   case FREE_SCROLL:
+                       setFollowMode(FollowMode.FOLLOW_COMPASS);
+                       break;
+                   }
+               }
+           });
+       }
+       
+       public FollowMode getFollowMode() {
+           return this.followMode;
+       }
+       
+       public void setFollowMode(FollowMode followMode) {
+           this.followMode = followMode;
+           if (activity != null) {
+               activity.setRotateMapMode(getFollowModeRotation(followMode));
+           }
+           if (followModeButton != null) {
+               followModeButton.setBackgroundResource(getFollowModeResourceId(followMode));
+           }
+       }
+       
+       private int getFollowModeResourceId(FollowMode followMode) {
+           switch (followMode) {
+           case FOLLOW_COMPASS:
+           default:
+               return R.drawable.map_follow_compass;
+           case FOLLOW_BEARING:
+               return R.drawable.map_follow_bearing;
+           case FREE_SCROLL:
+               return R.drawable.map_free_scroll;
+           }
+       }
+       
+       private int getFollowModeRotation(FollowMode followMode) {
+           switch (followMode) {
+           case FOLLOW_COMPASS:
+           default:
+               return OsmandSettings.ROTATE_MAP_NONE;
+           case FOLLOW_BEARING:
+               return OsmandSettings.ROTATE_MAP_BEARING;
+           case FREE_SCROLL:
+               return OsmandSettings.ROTATE_MAP_NONE;
+           }
+       }
+
+       // TODO(natashaj): Disable rotating compass button for now
        private void initCompass(final OsmandMapTileView view, FrameLayout parent) {
-               final Drawable compass = view.getResources().getDrawable(R.drawable.map_compass);
+               final Drawable compass = view.getResources().getDrawable(R.drawable.map_follow_bearing);
                final int mw = (int) compass.getMinimumWidth() ;
                final int mh = (int) compass.getMinimumHeight() ;
                compassView = new ImageView(view.getContext()) {
@@ -417,7 +498,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	/////////////////  Transparency bar /////////////////////////
 	private void initTransparencyBar(final OsmandMapTileView view, FrameLayout parent) {
-		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in).getMinimumHeight();
+		int minimumHeight = view.getResources().getDrawable(R.drawable.map_zoom_in_vertical).getMinimumHeight();
 		android.widget.FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 				Gravity.BOTTOM | Gravity.CENTER);
 		params.setMargins(0, 0, 0, minimumHeight + 3);
@@ -521,7 +602,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			rulerDrawable.draw(canvas);
 			Rect bounds = rulerDrawable.getBounds();
 			cacheRulerText.draw(canvas, bounds.left + (bounds.width() - cacheRulerTextLen) / 2, bounds.bottom - 8 * scaleCoefficient,
-					rulerTextPaint);
+					rulerTextPaint, shadowColor);
 		}
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="65">
+	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="80">
 	<meta-data android:name="com.google.android.backup.api_key"
     android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 	
@@ -11,7 +11,6 @@
 
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
-	<uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION"></uses-permission>
 	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
@@ -65,6 +64,14 @@
 			<category android:name="android.intent.category.DEFAULT"></category>
 			<data android:scheme="geo"></data>
 			</intent-filter>
+			<!-- requires read permission -->
+			<!-- 
+			<intent-filter android:label="OsmAnd">
+			<action android:name="android.intent.action.VIEW" />
+    			<category android:name="android.intent.category.DEFAULT" />
+			<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+			</intent-filter>
+			 -->
 		</activity>
 		<activity android:name="net.osmand.plus.development.TestVoiceActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.LocalIndexesActivity" android:label="@string/local_index_descr_title"></activity>
@@ -74,15 +81,6 @@
 			<intent-filter><action android:name="net.osmand.plus.NavigationService"></action></intent-filter>
 		</service>
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver"/>
-		
-			
-    	<!-- Used for install referrer tracking -->
-    	<receiver android:name="com.google.android.apps.analytics.AnalyticsReceiver"
-        	      android:exported="true">
-      	<intent-filter>
-        		<action android:name="com.android.vending.INSTALL_REFERRER" />
-      		</intent-filter>
-   		</receiver>
     	<activity android:name="net.osmand.plus.activities.OsmandBidForFixActivity"></activity>
 		
 

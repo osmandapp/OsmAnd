@@ -32,6 +32,14 @@ public class CustomTitleBar {
 		};
 	}
 	
+	public CustomTitleBarView getView(){
+		return vidw;
+	}
+	
+	public TextView getTitleView(){
+		return getView().getTextView();
+	}
+	
 	public void afterSetContentView(){
 		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, vidw.getTitleBarLayout());
 		vidw.init(activity.getWindow());
@@ -41,6 +49,7 @@ public class CustomTitleBar {
 		protected String titleString;
 		protected int titleImageRes;
 		protected OnClickListener click;
+		private TextView title;
 		public CustomTitleBarView(String text, int img, OnClickListener cl) {
 			this.titleString = text;
 			this.titleImageRes = img;
@@ -62,9 +71,13 @@ public class CustomTitleBar {
 		public void init(Window wnd) {
 			init(wnd.getDecorView());
 		}
+		
+		public TextView getTextView(){
+			return title;
+		}
 
 		public void init(View wnd) {
-			TextView title = (TextView) wnd.findViewById(R.id.title_text);
+			title = (TextView) wnd.findViewById(R.id.title_text);
 			title.setText(titleString);
 			Button backButton = (Button) wnd.findViewById(R.id.back_button);
 			backButton.setContentDescription(wnd.getContext().getString(R.string.close));

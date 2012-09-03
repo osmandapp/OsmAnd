@@ -37,6 +37,7 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.Interruptable;
 import net.osmand.router.RouteSegmentResult;
@@ -57,10 +58,10 @@ import android.location.Location;
 
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
-	private static final String OSMAND_ROUTER = "OsmandRouter";
+	private static final String OSMAND_ROUTER = "OsmAndRouter";
 	
 	public enum RouteService {
-		CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"), OSMAND("OsmAnd (offline)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		OSMAND("OsmAnd (offline)"), CLOUDMADE("CloudMade"), YOURS("YOURS"), ORS("OpenRouteService"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		private final String name;
 		private RouteService(String name){
 			this.name = name;
@@ -167,7 +168,7 @@ public class RouteProvider {
 					if(previousToRecalculate != null) {
 						originalRoute = previousToRecalculate.getOriginalRoute();
 					}
-					res = findVectorMapsRoute(start, end, mode, fast, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide, interruptable);
+					res = findVectorMapsRoute(start, end, mode, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide, interruptable);
 				} else {
 					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
 				}
@@ -307,7 +308,7 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, start, end, null, ctx, leftSide, true);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, OsmandApplication app,
+	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, OsmandApplication app,
 			List<RouteSegmentResult> previousRoute,
 			boolean leftSide, Interruptable interruptable) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
@@ -332,7 +333,24 @@ public class RouteProvider {
 		} else {
 			p = GeneralRouterProfile.CAR;
 		}
-		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), !fast, start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null));
+		List<String> specs = new ArrayList<String>();
+		if (!app.getSettings().FAST_ROUTE_MODE.get()) {
+			specs.add(GeneralRouter.USE_SHORTEST_WAY);
+		}
+		if(app.getSettings().AVOID_FERRIES.get()){
+			specs.add(GeneralRouter.AVOID_FERRIES);
+		}
+		if(app.getSettings().AVOID_TOLL_ROADS.get()){
+			specs.add(GeneralRouter.AVOID_TOLL);
+		}
+		if(app.getSettings().AVOID_MOTORWAY.get()){
+			specs.add(GeneralRouter.AVOID_MOTORWAY);
+		}
+		if(app.getSettings().AVOID_UNPAVED_ROADS.get()){
+			specs.add(GeneralRouter.AVOID_UNPAVED);
+		}
+		String[] specialization = specs.toArray(new String[specs.size()]);
+		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null, specialization));
 		ctx.interruptable = interruptable;
 		ctx.previouslyCalculatedRoute = previousRoute;
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);

@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import net.londatiga.android.ActionItem;
+import net.londatiga.android.QuickAction;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.OsmAndFormatter;
@@ -25,7 +27,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OpeningHoursParser;
-import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -35,8 +37,10 @@ import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.CustomTitleBar;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -62,15 +66,16 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
+import android.text.Spannable;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -119,14 +124,15 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private float height = 24;
 	
 	// never null represents current running task or last finished
-	private SearchAmenityTask currentSearchTask = new SearchAmenityTask(null); 
+	private SearchAmenityTask currentSearchTask = new SearchAmenityTask(null);
+	private CustomTitleBar titleBar; 
 
 	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		navigationInfo = new NavigationInfo(this);
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
+		titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.searchpoi);
 		titleBar.afterSetContentView();
 		
@@ -226,17 +232,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 		setListAdapter(amenityAdapter);
 		
-		// ListActivity has a ListView, which you can get with:
-		ListView lv = getListView();
-
-		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-				final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				onLongClick(amenity);
-				return true;
-			}
-		});
 	}
 	
 	private Path createDirectionPath() {
@@ -285,6 +280,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		if (filter != this.filter) {
 			this.filter = filter;
 			if (filter != null) {
+				titleBar.getTitleView().setText(getString(R.string.searchpoi_activity) + " - " + filter.getName());
 				filter.clearPreviousZoom();
 			} else {
 				amenityAdapter.setNewModel(Collections.<Amenity> emptyList(), "");
@@ -436,48 +432,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	}
 	
 	
-	private void onLongClick(final Amenity amenity) {
-		String format = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.USE_ENGLISH_NAMES.get());
-		if (amenity.getOpeningHours() != null) {
-			AccessibleToast.makeText(this, format + "  " + getString(R.string.opening_hours) + " : " + amenity.getOpeningHours(), Toast.LENGTH_LONG).show();
-		}
-		
-		List<String> items = new ArrayList<String>();
-		items.add(getString(R.string.show_poi_on_map));
-		items.add(getString(R.string.navigate_to));
-		if (((OsmandApplication)getApplication()).accessibilityEnabled())
-			items.add(getString(R.string.show_details));
-
-		AlertDialog.Builder builder = new AlertDialog.Builder(SearchPOIActivity.this);
-		builder.setTitle(format);
-		builder.setItems(items.toArray(new String[items.size()]), new DialogInterface.OnClickListener(){
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if(which == 2){
-					showPOIDetails(amenity, settings.usingEnglishNames());
-					return;
-				}
-				if(which == 0){
-					int z = settings.getLastKnownMapZoom();
-					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
-					String name = getString(R.string.poi)+" : " + poiSimpleFormat;
-					settings.setMapLocationToShow( 
-							amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-							Math.max(16, z), name, name, amenity);
-				} else if(which == 1){
-					LatLon l = amenity.getLocation();
-					String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
-					settings.setPointToNavigate(l.getLatitude(), l.getLongitude(), getString(R.string.poi)+" : " + poiSimpleFormat);
-				}
-				MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
-				
-			}
-			
-		});
-		builder.show();
-	}
-	
 	private boolean isRunningOnEmulator(){
 		if (Build.DEVICE.equals("generic")) { //$NON-NLS-1$ 
 			return true;
@@ -558,16 +512,58 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			currentLocationProvider = null;
 		}
 	}
+	
+	
 
 	@Override
 	public void onListItemClick(ListView parent, View v, int position, long id) {
-		int z = settings.getLastKnownMapZoom();
-		Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
-		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, this, settings.usingEnglishNames());
+		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
+		final QuickAction qa = new QuickAction(v);
+		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
 		String name = getString(R.string.poi)+" : " + poiSimpleFormat;
-		settings.setMapLocationToShow( amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), 
-				Math.max(16, z), name, name, amenity); //$NON-NLS-1$
-		MapActivity.launchMapActivityMoveToTop(SearchPOIActivity.this);
+		int z = Math.max(16, settings.getLastKnownMapZoom());
+		MapActivityActions.createDirectionsActions(qa, amenity.getLocation(), amenity, name, z, this, true , null);
+		ActionItem poiDescription = new ActionItem();
+		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
+		poiDescription.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Builder bs = new AlertDialog.Builder(v.getContext());
+				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, v.getContext(), settings.USE_ENGLISH_NAMES.get()));
+				StringBuilder d = new StringBuilder();
+				if(amenity.getOpeningHours() != null) {
+					d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
+				}
+				if(amenity.getPhone() != null) {
+					d.append(getString(R.string.phone) + " : ").append(amenity.getPhone()).append("\n");
+				}
+				if(amenity.getSite() != null) {
+					d.append(getString(R.string.website) + " : ").append(amenity.getSite()).append("\n");
+				}
+				if(amenity.getDescription() != null) {
+					d.append(amenity.getDescription());
+				}
+				bs.setMessage(d.toString());
+				bs.show();
+			}
+		});
+		qa.addActionItem(poiDescription);
+		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
+			ActionItem showDetails = new ActionItem();
+			showDetails.setTitle(getString(R.string.show_details));
+			showDetails.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					showPOIDetails(amenity, settings.usingEnglishNames());
+				}
+			});
+			qa.addActionItem(showDetails);
+		}
+		qa.show();
+		
+		
 	}
 	
 	
@@ -714,7 +710,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			}
 			float[] mes = null;
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
-			TextView distanceLabel = (TextView) row.findViewById(R.id.poidistance_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
 			Location loc = location;
@@ -723,21 +718,14 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				LatLon l = amenity.getLocation();
 				Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 			}
-			String str = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
-			label.setText(str);
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {
-				List<OpeningHoursRule> rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
+				OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getOpeningHours());
 				if (rs != null) {
 					Calendar inst = Calendar.getInstance();
 					inst.setTimeInMillis(System.currentTimeMillis());
 					boolean work = false;
-					for (OpeningHoursRule p : rs) {
-						if (p.isOpenedForTime(inst)) {
-							work = true;
-							break;
-						}
-					}
+					work = rs.isOpenedForTime(inst);
 					if (work) {
 						opened = 0;
 					} else {
@@ -762,11 +750,13 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 				}
 			}
 
-			if(mes == null){
-				distanceLabel.setText(""); //$NON-NLS-1$
-			} else {
-				distanceLabel.setText(" " + OsmAndFormatter.getFormattedDistance((int) mes[0], SearchPOIActivity.this)); //$NON-NLS-1$
+			String distance = "  ";
+			if(mes != null){
+				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], SearchPOIActivity.this) + "  "; //$NON-NLS-1$
 			}
+			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
+			label.setText(distance + poiType, TextView.BufferType.SPANNABLE);
+			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			return (row);
 		}
 		

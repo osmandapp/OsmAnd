@@ -898,10 +898,10 @@
   <string name="map_widget_back_to_loc">Where am I</string>
   <string name="map_widget_lock_screen">Lock screen</string>
   <string name="map_widget_compass">Compass</string>
-  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_top_stack">Status bar:</string>
   <string name="map_widget_reset">Reset to default</string>
-  <string name="map_widget_right_stack">Right side</string>
-  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_right_stack">Right panel:</string>
+  <string name="map_widget_left_stack">Left panel:</string>
   <string name="map_widget_parking">Parking</string>
   <string name="map_widget_monitoring">Monitoring</string>
   <string name="map_widget_speed">Speed</string>

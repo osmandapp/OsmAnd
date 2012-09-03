@@ -49,7 +49,9 @@ public class RoutingHelper {
 	private RouteCalculationResult route = new RouteCalculationResult("");
 	
 	private LatLon finalLocation;
+	private Location lastProjection;
 	private Location lastFixedLocation;
+	
 	private RouteRecalculationThread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
 	private int evalWaitInterval = 3000;
@@ -63,6 +65,7 @@ public class RoutingHelper {
 	private Handler uiHandler;
 	private boolean makeUturnWhenPossible = false;
 	private long makeUTwpDetected = 0;
+
 
 	public boolean makeUturnWhenPossible() {
 		return makeUturnWhenPossible;
@@ -93,7 +96,7 @@ public class RoutingHelper {
 		clearCurrentRoute(finalLocation);
 		currentGPXRoute = gpxRoute;
 		// to update route
-		setCurrentLocation(currentLocation);
+		setCurrentLocation(currentLocation, false);
 		
 	}
 	
@@ -117,7 +120,7 @@ public class RoutingHelper {
 			settings.FOLLOW_THE_ROUTE.set(false);
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 			// clear last fixed location
-			this.lastFixedLocation = null;
+			this.lastProjection = null;
 			this.isFollowingMode = false;
 		}
 	}
@@ -144,10 +147,6 @@ public class RoutingHelper {
 		return finalLocation;
 	}
 	
-	public Location getLastFixedLocation() {
-		return lastFixedLocation;
-	}
-	
 	public boolean isRouteCalculated(){
 		return route.isCalculated();
 	}
@@ -156,8 +155,8 @@ public class RoutingHelper {
 		return voiceRouter;
 	}
 	
-	public Location getCurrentLocation() {
-		return lastFixedLocation;
+	public Location getLastProjection(){
+		return lastProjection;
 	}
 	
 	public void addListener(IRouteInformationListener l){
@@ -169,13 +168,16 @@ public class RoutingHelper {
 	}
 	
 	
-	public Location setCurrentLocation(Location currentLocation) {
+	public Location setCurrentLocation(Location currentLocation, boolean returnUpdatedLocation ) {
 		Location locationProjection = currentLocation;
 		if (finalLocation == null || currentLocation == null) {
 			makeUturnWhenPossible = false;
 			return locationProjection;
 		}
-
+		float posTolerance = POSITION_TOLERANCE;
+		if(currentLocation.hasAccuracy()) {
+			posTolerance = POSITION_TOLERANCE / 2 + currentLocation.getAccuracy();
+		}
 		boolean calculateRoute = false;
 		synchronized (this) {
 			// 0. Route empty or needs to be extended? Then re-calculate route.
@@ -183,7 +185,7 @@ public class RoutingHelper {
 				calculateRoute = true;
 			} else {
 				// 1. Update current route position status according to latest received location
-				boolean finished = updateCurrentRouteStatus(currentLocation);
+				boolean finished = updateCurrentRouteStatus(currentLocation, posTolerance);
 				if (finished) {
 					return null;
 				}
@@ -191,10 +193,10 @@ public class RoutingHelper {
 				int currentRoute = route.currentRoute;
 
 				// 2. Analyze if we need to recalculate route
-				// >120m off current route (sideways)
+				// >100m off current route (sideways)
 				if (currentRoute > 0) {
 					double dist = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-					if (dist > 2 * POSITION_TOLERANCE) {
+					if (dist > 1.7 * posTolerance) {
 						log.info("Recalculate route, because correlation  : " + dist); //$NON-NLS-1$
 						calculateRoute = true;
 					}
@@ -202,59 +204,64 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction (very similar to 2?)
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) > 2 * POSITION_TOLERANCE) {
+				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) >  2 * posTolerance) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					calculateRoute = true;
 				}
 				// 4. Identify if UTurn is needed
-				boolean uTurnIsNeeded = identifyUTurnIsNeeded(currentLocation);
+				boolean uTurnIsNeeded = identifyUTurnIsNeeded(currentLocation, posTolerance);
 				// 5. Update Voice router
-				if (calculateRoute == false || uTurnIsNeeded == true) {
-					voiceRouter.updateStatus(currentLocation, uTurnIsNeeded);
+				boolean inRecalc = calculateRoute || isRouteBeingCalculated();
+				if (!inRecalc && !uTurnIsNeeded) {
+					voiceRouter.updateStatus(currentLocation);
+				} else if (uTurnIsNeeded) {
+					voiceRouter.makeUTStatus();
 				}
 				
 				// calculate projection of current location
 				if (currentRoute > 0) {
-					double dist = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-					double projectDist = mode == ApplicationMode.CAR ? POSITION_TOLERANCE : POSITION_TOLERANCE / 2;
-					locationProjection = new Location(locationProjection);
-					if (dist < projectDist) {
-						Location nextLocation = routeNodes.get(currentRoute);
-						LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-						
-						locationProjection.setLatitude(project.getLatitude());
-						locationProjection.setLongitude(project.getLongitude());
-						// we need to update bearing too
-						if (locationProjection.hasBearing()) {
-							float bearingTo = locationProjection.bearingTo(nextLocation);
-							locationProjection.setBearing(bearingTo);
-						}
+					locationProjection = new Location(currentLocation);
+					Location nextLocation = routeNodes.get(currentRoute);
+					LatLon project = getProject(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
+
+					locationProjection.setLatitude(project.getLatitude());
+					locationProjection.setLongitude(project.getLongitude());
+					// we need to update bearing too
+					if (locationProjection.hasBearing()) {
+						float bearingTo = locationProjection.bearingTo(nextLocation);
+						locationProjection.setBearing(bearingTo);
 					}
 				}
 			}
-			lastFixedLocation = locationProjection;
+			lastFixedLocation = currentLocation;
+			lastProjection = locationProjection;
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(lastFixedLocation, finalLocation, currentGPXRoute,
+			recalculateRouteInBackground(currentLocation, finalLocation, currentGPXRoute,
 					route.isCalculated()? route : null);
 		}
-		return locationProjection;
+		double projectDist = mode == ApplicationMode.CAR ? posTolerance : posTolerance / 2;
+		if(returnUpdatedLocation && locationProjection != null && currentLocation.distanceTo(locationProjection) < projectDist) {
+			return locationProjection;
+		} else {
+			return currentLocation;
+		}
 	}
 
-	private double getOrthogonalDistance(Location loc, Location from, Location to) {
+	private static double getOrthogonalDistance(Location loc, Location from, Location to) {
 		return MapUtils.getOrthogonalDistance(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());
 	}
 	
-	private LatLon getProject(Location loc, Location from, Location to) {
+	private static LatLon getProject(Location loc, Location from, Location to) {
 		return MapUtils.getProjection(loc.getLatitude(),
 				loc.getLongitude(), from.getLatitude(), from.getLongitude(),
 				to.getLatitude(), to.getLongitude());
 	}
 	
-	private int lookAheadFindMinOrthogonalDistance(Location currentLocation, List<Location> routeNodes, int currentRoute, int iterations) {
+	private static int lookAheadFindMinOrthogonalDistance(Location currentLocation, List<Location> routeNodes, int currentRoute, int iterations) {
 		double newDist;
 		double dist = Double.POSITIVE_INFINITY;
 		int index = currentRoute;
@@ -270,7 +277,7 @@ public class RoutingHelper {
 		return index;
 	}
 
-	private boolean updateCurrentRouteStatus(Location currentLocation) {
+	private boolean updateCurrentRouteStatus(Location currentLocation, float posTolerance) {
 		List<Location> routeNodes = route.getImmutableLocations();
 		int currentRoute = route.currentRoute;
 		// 1. Try to proceed to next point using orthogonal distance (finding minimum orthogonal dist)
@@ -296,7 +303,7 @@ public class RoutingHelper {
 				}
 			} else if (newDist < dist || newDist < 10) {
 				// newDist < 10 (avoid distance 0 till next turn)
-				if (dist > POSITION_TOLERANCE) {
+				if (dist > posTolerance) {
 					processed = true;
 					if (log.isDebugEnabled()) {
 						log.debug("Processed by distance : " + newDist + " " + dist); //$NON-NLS-1$//$NON-NLS-2$
@@ -331,7 +338,7 @@ public class RoutingHelper {
 
 		// 2. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < POSITION_TOLERANCE) {
+		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < posTolerance * 1.5) {
 			showMessage(context.getString(R.string.arrived_at_destination));
 			voiceRouter.arrivedDestinationPoint();
 			clearCurrentRoute(null);
@@ -341,15 +348,14 @@ public class RoutingHelper {
 	}
 	
 
-	public boolean identifyUTurnIsNeeded(Location currentLocation) {
+	public boolean identifyUTurnIsNeeded(Location currentLocation, float posTolerance) {
 		if (finalLocation == null || currentLocation == null || !route.isCalculated()) {
 			this.makeUturnWhenPossible = false;
 			return makeUturnWhenPossible;
 		}
 		boolean makeUturnWhenPossible = false;
-		if (currentLocation.hasBearing() || lastFixedLocation != null) {
-			float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
-					.bearingTo(currentLocation);
+		if (currentLocation.hasBearing()) {
+			float bearingMotion = currentLocation.getBearing() ;
 			Location nextRoutePosition = route.getNextRouteLocation();
 			float bearingToRoute = currentLocation.bearingTo(nextRoutePosition);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
@@ -357,7 +363,7 @@ public class RoutingHelper {
 			if (Math.abs(diff) > 135f) {
 				float d = currentLocation.distanceTo(nextRoutePosition);
 				// 60m tolerance to allow for GPS inaccuracy
-				if (d > POSITION_TOLERANCE) {
+				if (d > posTolerance) {
 					if (makeUTwpDetected == 0) {
 						makeUTwpDetected = System.currentTimeMillis();
 						// require 5 sec since first detection, to avoid false positive announcements
@@ -381,12 +387,12 @@ public class RoutingHelper {
 	 * the difference is more than 90 degrees
 	 */
 	public boolean checkWrongMovementDirection(Location currentLocation, Location nextRouteLocation) {
-		if ((currentLocation.hasBearing() || lastFixedLocation != null) && nextRouteLocation!= null) {
-			float bearingMotion = currentLocation.hasBearing() ? currentLocation.getBearing() : lastFixedLocation
-					.bearingTo(currentLocation);
+		// measuring without bearing could be really error prone (with last fixed location)
+		// this code has an effect on route recalculation which should be detected without mistakes
+		if (currentLocation.hasBearing() && nextRouteLocation != null) {
+			float bearingMotion = currentLocation.getBearing();
 			float bearingToRoute = currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
-			// 6. Suppress turn prompt if prescribed direction of motion is between 45 and 135 degrees off
 			if (Math.abs(diff) > 60f) {
 				return true;
 			}
@@ -398,24 +404,24 @@ public class RoutingHelper {
 		final boolean newRoute = !this.route.isCalculated();
 		route = res;
 		if (isFollowingMode) {
+			if(lastFixedLocation != null) {
+				start = lastFixedLocation;
+			}
 			// try remove false route-recalculated prompts by checking direction to second route node
 			boolean wrongMovementDirection  = false;
-			Location prev = res.getNextRouteLocation();
-			if (prev != null) {
-				int i = 1;
-				while (res.getNextRouteLocation(i) != null && prev.distanceTo(start) < POSITION_TOLERANCE) {
-					prev = res.getNextRouteLocation(i);
-					i++;
-				}
-				// This check could be valid only for Online/GPX services
-				// because offline routing is aware of route directions
-				wrongMovementDirection = checkWrongMovementDirection(start, prev);
-				// set/reset evalWaitInterval only if new route is in forward direction
-				if (!wrongMovementDirection) {
-					evalWaitInterval = 3000;
-				} else {
-					evalWaitInterval = evalWaitInterval * 3 / 2;
-					evalWaitInterval = Math.min(evalWaitInterval, 120000);
+			List<Location> routeNodes = res.getImmutableLocations();
+			if (routeNodes != null && !routeNodes.isEmpty()) {
+				int newCurrentRoute = lookAheadFindMinOrthogonalDistance(start, routeNodes, res.currentRoute, 15);
+				if (newCurrentRoute + 1 < routeNodes.size()) {
+					// This check is valid for Online/GPX services (offline routing is aware of route direction)
+					wrongMovementDirection = checkWrongMovementDirection(start, routeNodes.get(newCurrentRoute + 1));
+					// set/reset evalWaitInterval only if new route is in forward direction
+					if (!wrongMovementDirection) {
+						evalWaitInterval = 3000;
+					} else {
+						evalWaitInterval = evalWaitInterval * 3 / 2;
+						evalWaitInterval = Math.min(evalWaitInterval, 120000);
+					}
 				}
 			}
 
@@ -460,19 +466,19 @@ public class RoutingHelper {
 	}
 	
 	public synchronized NextDirectionInfo getNextRouteDirectionInfo(NextDirectionInfo info, boolean toSpeak){
-		NextDirectionInfo i = route.getNextRouteDirectionInfo(info, lastFixedLocation, toSpeak);
+		NextDirectionInfo i = route.getNextRouteDirectionInfo(info, lastProjection, toSpeak);
 		if(i != null) {
-			i.imminent =  voiceRouter.calculateImminent(i.distanceTo, lastFixedLocation);
+			i.imminent =  voiceRouter.calculateImminent(i.distanceTo, lastProjection);
 		}
 		return i;
 	}
 	
-	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc){
+	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras){
 		float mxspeed = route.getCurrentMaxSpeed();
 		AlarmInfo speedAlarm = null;
-		if(mxspeed != 0 && lastFixedLocation != null && lastFixedLocation.hasSpeed()) {
+		if(mxspeed != 0 && lastProjection != null && lastProjection.hasSpeed()) {
 			float delta = 5f/3.6f; 
-			if(lastFixedLocation.getSpeed() > mxspeed + delta) {
+			if(lastProjection.getSpeed() > mxspeed + delta) {
 				int speed;
 				if(mc == MetricsConstants.KILOMETERS_AND_METERS) {
 					speed = Math.round(mxspeed * 3.6f);
@@ -482,13 +488,13 @@ public class RoutingHelper {
 				speedAlarm = AlarmInfo.createSpeedLimit(speed);
 			}
 		}
-		return route.getMostImportantAlarm(lastFixedLocation, speedAlarm);
+		return route.getMostImportantAlarm(lastProjection, speedAlarm, showCameras);
 	}
 	
 	public String formatStreetName(String name, String ref) {
 		if(name != null && name.length() > 0){
 			if(ref != null && ref.length() > 0) {
-				name += "(" + ref +")";
+				name = ref + " " + name;
 			}
 			return name;
 		} else {
@@ -533,7 +539,6 @@ public class RoutingHelper {
 		private final GPXRouteParams gpxRoute;
 		private final RouteCalculationResult previousRoute;
 		private RouteService service;
-		private boolean fastRoute;
 		private boolean interrupted = false;
 
 		public RouteRecalculationThread(String name, 
@@ -544,7 +549,7 @@ public class RoutingHelper {
 			this.gpxRoute = gpxRoute;
 			this.previousRoute = previousRoute;
 			service = settings.ROUTER_SERVICE.get();
-			fastRoute = settings.FAST_ROUTE_MODE.get();
+			
 		}
 		
 		public void stopCalculation(){
@@ -559,6 +564,7 @@ public class RoutingHelper {
 		@Override
 		public void run() {
 			boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+			boolean fastRoute = settings.FAST_ROUTE_MODE.get();
 			RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRoute, 
 					leftSide, this);
 			if (interrupted) {

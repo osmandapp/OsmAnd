@@ -5,18 +5,12 @@
     android:orientation="horizontal" >
 
     <TextView
-        android:id="@+id/distance_label"
-        style="@style/ListText.Small"
-        android:layout_width="80dp"
-        android:layout_height="fill_parent"
-        android:layout_marginLeft="5dp"
-        android:gravity="left"/>
-
-    <TextView
         android:id="@+id/label"
         style="@style/ListText.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_weight="1"/>
 
     <ImageButton

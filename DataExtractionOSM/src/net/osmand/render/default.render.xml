@@ -12,6 +12,8 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
+		<renderingProperty attr="viRendered" name="Trial road colors" description="Experiment with road colors"
+		type="boolean" possibleValues=""/>
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
 		type="string" possibleValues="never,13,12,11"/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
@@ -35,10 +37,11 @@
 	</renderingAttribute>
 
 	<!--
-		All-Purpose Renderer (by Hardy Mueller), v023:
-		- with ShowMoreMapDetails some roads already rendered at lower zooms (travel/orienteering)
-		- with ShowMoreMapDetails motorways shown blue and trunk roads red, aligned with conventional road atlas
-		- with ShowMoreMapDetails map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
+		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
+		- some roads already rendered at lower zooms (travel/orienteering)
+		- motorways shown blue and trunk roads red to assimilate primaries, aligned with conventional road atlas
+		  (road color scheme intensified and unfied to Saturation=50, Brightness=100 on 2012-08-10. Old values commented with PALE-SCHEME)
+		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
 		Typical zoom level use (zX) and alignment of features displayed:
 		 - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
 		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
@@ -54,7 +57,7 @@
 		Main colors for night renderer (road brightness levels aligned with priority), by Hardy Mueller:
 		- default: 003333
 		- forest: 000034
-		- other open (non-forest) nature: 004333
+		- other open (non-forest) nature: 004333 (vegetation shaders replaced by 114433)
 		- water: 330099
 		- built-up areas: 66004B
 		- buildings: 560000
@@ -336,7 +339,7 @@
 			<filter tag="highway" value="ford" textOrder="10"/>
 			<filter tag="highway" value="construction" textOrder="9"/>
 			<filter tag="highway" value="proposed" textOrder="9"/>
-			<groupFilter textOnPath="true">
+			<groupFilter textOnPath="true" nameTag="" >
 				<filter minzoom="14" maxzoom="14" textSize="12"/>
 				<filter minzoom="15" maxzoom="15" textSize="13"/>
 				<filter minzoom="16" maxzoom="16" textSize="14"/>
@@ -352,7 +355,7 @@
 			<filter tag="highway" value="footway" textOrder="15"/>
 			<filter tag="highway" value="steps" textOrder="15"/>
 			<filter tag="highway" value="bridleway" textOrder="15"/>
-			<groupFilter>
+			<groupFilter nameTag="">
 				<filter minzoom="14" maxzoom="14" textSize="12"/>
 				<filter minzoom="15" maxzoom="15" textSize="13"/>
 				<filter minzoom="16" maxzoom="16" textSize="14"/>
@@ -594,8 +597,10 @@
 	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<point>
 		<!-- Locations -->
-		<filter minzoom="4" tag="place" icon="city" value="city"/>
-		<filter minzoom="6" tag="place" icon="city" value="town"/>
+			<filter nightMode="true" minzoom="4" icon="city_night" tag="place" value="city"/>
+		<filter minzoom="4" icon="city" tag="place" value="city"/>
+			<filter nightMode="true" minzoom="6" icon="town_night" tag="place" value="town"/>
+		<filter minzoom="6" icon="town" tag="place" value="town"/>
 
 		<!-- Traffic -->
 		<!-- filter appMode="car" minzoom="16" icon="traffic_light" tag="highway" value="traffic_signals"/ -->
@@ -716,6 +721,7 @@
 		<filter minzoom="17" icon="shop_mobile_phone" tag="shop" value="mobile_phone"/>
 
 		<!-- Nature -->
+			<filter nightMode="true" minzoom="11" icon="peak_night" tag="natural" value="peak"/>
 		<filter minzoom="11" icon="peak" tag="natural" value="peak"/>
 		<filter minzoom="17" icon="cave_entrance" tag="natural" value="cave_entrance"/>
 		<filter minzoom="17" icon="spring" tag="natural" value="spring"/>
@@ -803,8 +809,8 @@
 			</groupFilter>
 		</group>
 
-    <!--  no polygons -->
-	<group> 
+	    <!-- for 'no polygons' -->
+	    <group>
 		<!-- Polygon railway -->
 		<filter minzoom="11" tag="railway" value="station" color="#d4aaaa">
 			<filter nightMode="true" color="#560000"/>
@@ -912,7 +918,6 @@
 			<filter tag="amenity" value="cinema"/>								
 			<filter tag="landuse" value="allotments"/>
 			<filter tag="landuse" value="retail"/>
-			 
 			<!-- Tourism -->
 			<filter tag="tourism" value="attraction"/>
 			<filter tag="tourism" value="theme_park"/>
@@ -1064,13 +1069,12 @@
 			<groupFilter color="#d4d4d4">
 				<filter minzoom="12" maxzoom="12" strokeWidth="1"/>
 			    <filter minzoom="13" maxzoom="13" strokeWidth="2"/>
-				
-				<filter color="#aaaaaa" color_2="#ffffff" cap_2="ROUND">
-					<filter minzoom="14" maxzoom="14" strokeWidth="5" strokeWidth_2="3"/>
-					<filter minzoom="15" maxzoom="15" strokeWidth="7" strokeWidth_2="5"/>
-					<filter minzoom="16" maxzoom="16" strokeWidth="8" strokeWidth_2="6"/>
-					<filter minzoom="17" maxzoom="17" strokeWidth="11" strokeWidth_2="9"/>
-					<filter minzoom="18" strokeWidth="12" strokeWidth_2="10"/>
+				<filter color="#ffffff">
+					<filter minzoom="14" maxzoom="14" strokeWidth="3"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="5"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="6"/>
+					<filter minzoom="17" maxzoom="17" strokeWidth="9"/>
+					<filter minzoom="18" strokeWidth="10"/>
 					<groupFilter layer="-1" pathEffect="4_4" cap="BUTT"/>
 					<groupFilter nightMode="true" color_0="#ffffff" />
 					<!-- Bridges --> 

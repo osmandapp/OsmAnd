@@ -68,19 +68,19 @@ nth(17, 'seventeenth ').
 distance(Dist) == D :- measure('km-m'), distance_km(Dist) == D.
 distance(Dist) == D :- distance_mi(Dist) == D.
 %%% distance measure
-distance_km(Dist) == [ X, ' meters'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance_km(Dist) == [ X, ' meters'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance_km(Dist) == [ X, ' meters'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance_km(Dist) == [ X, ' meters'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance_km(Dist) == ['about 1 kilometer '] :- Dist < 1500.
-distance_km(Dist) == ['about ', X, ' kilometers '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance_km(Dist) == [ X, ' kilometers '] :- D is round(Dist/1000), num_atom(D, X).
+distance_km(Dist) == ['about ', X, ' kilometers '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance_km(Dist) == [ X, ' kilometers '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 %%% distance measure
-distance_mi(Dist) == [ X, ' feet'] :- Dist < 160, D is round(2*Dist/100/0.3048)*50, num_atom(D, X).
-distance_mi(Dist) == [ X, ' tenth of a mile'] :- Dist < 241, D is round(Dist/161), num_atom(D, X).
-distance_mi(Dist) == [ X, ' tenths of a mile'] :- Dist < 1529, D is round(Dist/161), num_atom(D, X).
+distance_mi(Dist) == [ X, ' feet'] :- Dist < 160, D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
+distance_mi(Dist) == [ X, ' tenth of a mile'] :- Dist < 241, D is round(Dist/161.0), num_atom(D, X).
+distance_mi(Dist) == [ X, ' tenths of a mile'] :- Dist < 1529, D is round(Dist/161.0), num_atom(D, X).
 distance_mi(Dist) == ['about 1 mile '] :- Dist < 2414.
-distance_mi(Dist) == ['about ', X, ' miles '] :- Dist < 16093, D is round(Dist/1609), num_atom(D, X).
-distance_mi(Dist) == [ X, ' miles '] :- D is round(Dist/1609), num_atom(D, X).
+distance_mi(Dist) == ['about ', X, ' miles '] :- Dist < 16093, D is round(Dist/1609.0), num_atom(D, X).
+distance_mi(Dist) == [ X, ' miles '] :- D is round(Dist/1609.0), num_atom(D, X).
 
 
 %% resolve command main method

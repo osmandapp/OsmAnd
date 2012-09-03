@@ -46,7 +46,7 @@ public class BinaryRoutePlanner {
 	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
 		this.nativeLib = nativeLib;
 		if(nativeLib != null) {
-			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 50;
+			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 100;
 		}
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
@@ -224,6 +224,7 @@ public class BinaryRoutePlanner {
 					rlist.add(rr);
 				}
 			}
+			runRecalculation = rlist.size() > 0;
 			if (rlist.size() > 0) {
 				for (RouteSegmentResult rr : rlist) {
 					RouteSegment segment = new RouteSegment(rr.getObject(), rr.getEndPointIndex());
@@ -234,7 +235,6 @@ public class BinaryRoutePlanner {
 						visitedOppositeSegments.put(t, segment);
 					}
 					previous = segment;
-
 				}
 				end = previous;
 			}
@@ -395,7 +395,7 @@ public class BinaryRoutePlanner {
 //		int after = graphSegments.size();
 //		println(statStart.toString());
 //		println(statEnd.toString());
-//		println("Relaxing : before " + before + " after " + after + " maxdiststart " + ((float) maxd) + " minend " + ((float) mine));
+//		println("Relaxing : before " + before + " after " + after + " minend " + ((float) mine));
 	}
 
 	private double h(final RoutingContext ctx, int targetEndX, int targetEndY,
@@ -465,9 +465,25 @@ public class BinaryRoutePlanner {
 		final int middle = segment.segmentStart;
 		double obstaclePlusTime = 0;
 		double obstacleMinusTime = 0;
+		
+		
+		// This is correct way of checking but it has problem with relaxing strategy
+//			long ntf = (segment.road.getId() << ROUTE_POINTS) + segment.segmentStart;
+//			visitedSegments.put(ntf, segment);
+//			if (oppositeSegments.contains(ntf) && oppositeSegments.get(ntf) != null) {
+//				RouteSegment opposite = oppositeSegments.get(ntf);
+//				if (opposite.segmentStart == segment.segmentStart) {
+					// if (reverseWaySearch) {
+					// reverse : segment.parentSegmentEnd - segment.parentRoute
+					// } else {
+					// reverse : opposite.parentSegmentEnd - oppositie.parentRoute
+					// }
+//					return true;
+//				}
+//			}
 
 		// 0. mark route segment as visited
-		long nt = (road.getId() << 11l) + middle;
+		long nt = (road.getId() << ROUTE_POINTS) + middle;
 		// avoid empty segments to connect but mark the point as visited
 		visitedSegments.put(nt, null);
 
@@ -543,21 +559,20 @@ public class BinaryRoutePlanner {
 			
 			// 2.1 calculate possible obstacle plus time
 			if(positive){
-				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
-				if(obstacle < 0){
+				double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentEnd);
+				if (obstacle < 0) {
 					plusAllowed = false;
 					continue;
 				}
 				obstaclePlusTime +=  obstacle;
 			} else {
-				double obstacle = ctx.getRouter().defineObstacle(road, segmentEnd);
-				if(obstacle < 0){
+				double obstacle = ctx.getRouter().defineRoutingObstacle(road, segmentEnd);
+				if (obstacle < 0) {
 					minusAllowed = false;
 					continue;
 				}
 				obstacleMinusTime +=  obstacle;
 			}
-			
 			
 			long l = (((long) x) << 31) + (long) y;
 			RouteSegment next = tile.getSegment(l, ctx);
@@ -601,7 +616,7 @@ public class BinaryRoutePlanner {
 		if (!reverseWay && road.getRestrictionLength() == 0) {
 			return false;
 		}
-		if(!ctx.getRouter().restrictionsAwayre()) {
+		if(!ctx.getRouter().restrictionsAware()) {
 			return false;
 		}
 		while (next != null) {
@@ -689,11 +704,11 @@ public class BinaryRoutePlanner {
 			if(nextIterator != null) {
 				next = nextIterator.next();
 			}
-			long nts = (next.road.getId() << ROUTE_POINTS) + next.segmentStart;
+			 long nts = (next.road.getId() << ROUTE_POINTS) + next.segmentStart;
 			
 			// 1. Check if opposite segment found so we can stop calculations
 			if (oppositeSegments.contains(nts) && oppositeSegments.get(nts) != null) {
-				// check restrictions
+				// restrictions checked
 				RouteSegment opposite = oppositeSegments.get(nts);
 				if (reverseWay) {
 					ctx.finalReverseEndSegment = segmentEnd;
@@ -710,16 +725,20 @@ public class BinaryRoutePlanner {
 			}
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
-			if (!alreadyVisited) {
+			if (!alreadyVisited) {	
 				double distanceToEnd = h(ctx, distToFinalPoint, next);
 				if (next.parentRoute == null
 						|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, distFromStart, distanceToEnd) > 0) {
-					next.distanceFromStart = distFromStart;
-					next.distanceToEnd = distanceToEnd;
 					if (next.parentRoute != null) {
 						// already in queue remove it
-						graphSegments.remove(next);
+						if(!graphSegments.remove(next)){
+							// exist in different queue!
+							RouteSegment cpy = new RouteSegment(next.getRoad(), next.segmentStart);
+							next = cpy;
+						}
 					}
+					next.distanceFromStart = distFromStart;
+					next.distanceToEnd = distanceToEnd;
 					// put additional information to recover whole route after
 					next.parentRoute = segment;
 					next.parentSegmentEnd = segmentEnd;
@@ -756,6 +775,8 @@ public class BinaryRoutePlanner {
 		}
 		return false;
 	}
+	
+	private static final float TURN_DEGREE_MIN = 45;
 	
 	/**
 	 * Helper method to prepare final result 
@@ -816,22 +837,21 @@ public class BinaryRoutePlanner {
 						road.getPoint31YTile(next));
 				distance += d;
 				double obstacle = ctx.getRouter().defineObstacle(road, j);
-				if(obstacle >= 0) { 
-					distOnRoadToPass += d / speed + obstacle;
-				} else {
-					System.err.println("Something completely wrong if we pass obstacle < 0 " + Arrays.toString(road.getPointTypes(j)));
+				if(obstacle < 0) {
+					obstacle = 0;
 				}
+				distOnRoadToPass += d / speed + obstacle;
 				
 				List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(next);
 				if (next != rr.getEndPointIndex() && !rr.getObject().roundabout() && attachedRoutes != null) {
 					float before = rr.getBearing(next, !plus);
 					float after = rr.getBearing(next, plus);
-					boolean straight = Math.abs(MapUtils.degreesDiff(before + 180, after)) < 70;
+					boolean straight = Math.abs(MapUtils.degreesDiff(before + 180, after)) < TURN_DEGREE_MIN;
 					boolean split = false;
 					// split if needed
 					for (RouteSegmentResult rs : attachedRoutes) {
 						double diff = MapUtils.degreesDiff(before + 180, rs.getBearingBegin());
-						if (Math.abs(diff) < 50) {
+						if (Math.abs(diff) <= TURN_DEGREE_MIN) {
 							split = true;
 						} else if (!straight && Math.abs(diff) < 100) {
 							split = true;
@@ -988,7 +1008,7 @@ public class BinaryRoutePlanner {
 		if (prev != null) {
 			// add description about turn
 			double mpi = MapUtils.degreesDiff(prev.getBearingEnd(), rr.getBearingBegin());
-			if (mpi >= 50) {
+			if (mpi >= TURN_DEGREE_MIN) {
 				if (mpi < 60) {
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
@@ -998,7 +1018,7 @@ public class BinaryRoutePlanner {
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
 				}
-			} else if (mpi < -50) {
+			} else if (mpi < -TURN_DEGREE_MIN) {
 				if (mpi > -60) {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
 				} else if (mpi > -120) {
@@ -1062,14 +1082,15 @@ public class BinaryRoutePlanner {
 		if(attachedRoutes != null){
 			for(RouteSegmentResult rs : attachedRoutes){
 				double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-				if(ex < 45 && ex >= 0) {
+				double mpi = Math.abs(MapUtils.degreesDiff(prev.getBearingEnd(), rs.getBearingBegin())) ;
+				if((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
 					kl = true;
 					int lns = rs.getObject().getLanes();
 					if (lns > 0) {
 						right += lns;
 					}
 					speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
-				} else if(ex > -45 && ex <= 0) {
+				} else if((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
 					kr = true;
 					int lns = rs.getObject().getLanes();
 					if (lns > 0) {

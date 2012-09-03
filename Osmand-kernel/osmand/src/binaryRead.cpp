@@ -9,6 +9,7 @@
 #include "google/protobuf/io/zero_copy_stream_impl.h"
 #include "google/protobuf/wire_format_lite.cc"
 #include "proto/osmand_odb.pb.h"
+#include "proto/osmand_index.pb.h"
 #include "osmand_log.h"
 
 using namespace std;
@@ -20,6 +21,7 @@ using google::protobuf::internal::WireFormatLite;
 
 
 std::map< std::string, BinaryMapFile* > openFiles;
+OsmAndStoredIndex* cache = NULL;
 
 inline bool readInt(CodedInputStream* input, uint32_t* sz ){
 	uint8_t buf[4];
@@ -97,7 +99,7 @@ bool readMapTreeBounds(CodedInputStream* input, MapTreeBounds* tree, MapRoot* ro
 	return true;
 }
 
-bool readMapLevel(CodedInputStream* input, MapRoot* root) {
+bool readMapLevel(CodedInputStream* input, MapRoot* root, bool initSubtrees) {
 	int tag;
 	int si;
 	while ((tag = input->ReadTag()) != 0) {
@@ -131,13 +133,16 @@ bool readMapLevel(CodedInputStream* input, MapRoot* root) {
 			break;
 		}
 		case OsmAndMapIndex_MapRootLevel::kBoxesFieldNumber: {
+			if (!initSubtrees) {
+				input->Skip(input->BytesUntilLimit());
+				break;
+			}
 			MapTreeBounds bounds;
 			readInt(input, &bounds.length);
 			bounds.filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(bounds.length);
 			readMapTreeBounds(input, &bounds, root);
 			root->bounds.push_back(bounds);
-			input->Skip(input->BytesUntilLimit());
 			input->PopLimit(oldLimit);
 			break;
 		}
@@ -345,7 +350,7 @@ bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
 	return true;
 }
 
-bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
+bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex, bool onlyInitEncodingRules) {
 	uint32_t tag;
 	uint32_t defaultId = 1;
 	while ((tag = input->ReadTag()) != 0) {
@@ -355,22 +360,28 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 			break;
 		}
 		case OsmAndMapIndex::kRulesFieldNumber: {
-			int len;
-			WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &len);
-			int oldLimit = input->PushLimit(len);
-			readMapEncodingRule(input, mapIndex, defaultId++);
-			input->PopLimit(oldLimit);
+			if(onlyInitEncodingRules) {
+				int len;
+				WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(input, &len);
+				int oldLimit = input->PushLimit(len);
+				readMapEncodingRule(input, mapIndex, defaultId++);
+				input->PopLimit(oldLimit);
+			} else {
+				skipUnknownFields(input, tag);
+			}
 			break;
 		}
 		case OsmAndMapIndex::kLevelsFieldNumber: {
 			MapRoot mapLevel;
 			readInt(input, &mapLevel.length);
 			mapLevel.filePointer = input->getTotalBytesRead();
-			int oldLimit = input->PushLimit(mapLevel.length);
-			readMapLevel(input, &mapLevel);
-			input->PopLimit(oldLimit);
+			if (!onlyInitEncodingRules) {
+				int oldLimit = input->PushLimit(mapLevel.length);
+				readMapLevel(input, &mapLevel, false);
+				input->PopLimit(oldLimit);
+				mapIndex->levels.push_back(mapLevel);
+			}
 			input->Seek(mapLevel.filePointer + mapLevel.length);
-			mapIndex->levels.push_back(mapLevel);
 			break;
 		}
 		default: {
@@ -384,7 +395,9 @@ bool readMapIndex(CodedInputStream* input, MapIndex* mapIndex) {
 		}
 		}
 	}
-	mapIndex->finishInitializingTags();
+	if(onlyInitEncodingRules) {
+		mapIndex->finishInitializingTags();
+	}
 	return true;
 }
 
@@ -410,7 +423,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 			readInt(input, &mapIndex.length);
 			mapIndex.filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(mapIndex.length);
-			readMapIndex(input, &mapIndex);
+			readMapIndex(input, &mapIndex, false);
 			input->PopLimit(oldLimit);
 			input->Seek(mapIndex.filePointer + mapIndex.length);
 			file->mapIndexes.push_back(mapIndex);
@@ -845,7 +858,6 @@ void searchMapData(CodedInputStream* input, MapRoot* root, MapIndex* ind, Search
 		searchMapTreeBounds(input, &(*i), root, req, &foundSubtrees);
 		input->PopLimit(oldLimit);
 
-
 		sort(foundSubtrees.begin(), foundSubtrees.end(), sortTreeBounds);
 		uint32_t length;
 		for (std::vector<MapTreeBounds>::iterator tree = foundSubtrees.begin();
@@ -879,11 +891,6 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		lseek(file->fd, 0, SEEK_SET);
-		FileInputStream input(file->fd);
-		input.SetCloseOnDelete(false);
-		CodedInputStream cis(&input);
-		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 		if (q->req != NULL) {
 			q->req->clearState();
 		}
@@ -900,6 +907,35 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 					if (mapLevel->right >= q->left && q->right >= mapLevel->left && mapLevel->bottom >= q->top
 							&& q->bottom >= mapLevel->top) {
 						osmand_log_print(LOG_INFO, "Search map %s", mapIndex->name.c_str());
+						// lazy initializing rules
+						if (mapIndex->decodingRules.size() == 0) {
+							lseek(file->fd, 0, SEEK_SET);
+							FileInputStream input(file->fd);
+							input.SetCloseOnDelete(false);
+							CodedInputStream cis(&input);
+							cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 1);
+							cis.Seek(mapIndex->filePointer);
+							int oldLimit = cis.PushLimit(mapIndex->length);
+							readMapIndex(&cis, &(*mapIndex), true);
+							cis.PopLimit(oldLimit);
+						}
+						// lazy initializing subtrees
+						if (mapLevel->bounds.size() == 0) {
+							lseek(file->fd, 0, SEEK_SET);
+							FileInputStream input(file->fd);
+							input.SetCloseOnDelete(false);
+							CodedInputStream cis(&input);
+							cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 1);
+							cis.Seek(mapLevel->filePointer);
+							int oldLimit = cis.PushLimit(mapLevel->length);
+							readMapLevel(&cis, &(*mapLevel), true);
+							cis.PopLimit(oldLimit);
+						}
+						lseek(file->fd, 0, SEEK_SET);
+						FileInputStream input(file->fd);
+						input.SetCloseOnDelete(false);
+						CodedInputStream cis(&input);
+						cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 						searchMapData(&cis, &(*mapLevel), &(*mapIndex), q);
 					}
 				}
@@ -1001,21 +1037,22 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	return q->publisher;
 }
 
+
 void searchRouteRegion(CodedInputStream* input, SearchQuery* q, RoutingIndex* ind, std::vector<RouteSubregion>& subregions,
-		std::vector<RouteSubregion>& toLoad) {
+		std::vector<RouteSubregion>& toLoad, BinaryMapFile* file) {
 	for (std::vector<RouteSubregion>::iterator subreg = subregions.begin();
 						subreg != subregions.end(); subreg++) {
 		if (subreg->right >= q->left && q->right >= subreg->left && subreg->bottom >= q->top
 				&& q->bottom >= subreg->top) {
 			if(subreg->subregions.empty()){
 				bool contains = subreg->right <= q->right && q->left <= subreg->left && subreg->top <= q->top
-						&& subreg->bottom >=  q->bottom;
+						&& subreg->bottom >= q->bottom;
 				input->Seek(subreg->filePointer);
-				uint32_t old = input -> PushLimit(subreg->length);
+				uint32_t old = input->PushLimit(subreg->length);
 				readRouteTree(input, &(*subreg), NULL, contains? -1 : 1, false);
 				input->PopLimit(old);
 			}
-			searchRouteRegion(input, q, ind, subreg->subregions, toLoad);
+			searchRouteRegion(input, q, ind, subreg->subregions, toLoad, file);
 			if(subreg->mapDataBlock != 0) {
 				toLoad.push_back(*subreg);
 			}
@@ -1278,11 +1315,6 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
-		lseek(file->routefd, 0, SEEK_SET);
-		FileInputStream input(file->routefd);
-		input.SetCloseOnDelete(false);
-		CodedInputStream cis(&input);
-		cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 		for (std::vector<RoutingIndex>::iterator routingIndex = file->routingIndexes.begin();
 				routingIndex != file->routingIndexes.end(); routingIndex++) {
 			if (q->publisher->isCancelled()) {
@@ -1291,10 +1323,44 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 			if(rs != NULL && (rs->name != routingIndex->name || rs->filePointer != routingIndex->filePointer)){
 				continue;
 			}
+			// check boundaries and init
+			if (routingIndex->decodingRules.size() == 0) {
+				bool contain = false;
+				for (std::vector<RouteSubregion>::iterator subreg = routingIndex->subregions.begin(); subreg != routingIndex->subregions.end();
+						subreg++) {
+					if (subreg->right >= q->left && q->right >= subreg->left && subreg->bottom >= q->top
+							&& q->bottom >= subreg->top) {
+						contain = true;
+					}
+				}
+				if (contain) {
+					routingIndex->subregions.clear();
+					osmand_log_print(LOG_INFO, "Init native index %s", routingIndex->name.c_str());
+					lseek(file->routefd, 0, SEEK_SET);
+					FileInputStream input(file->routefd);
+					input.SetCloseOnDelete(false);
+					CodedInputStream cis(&input);
+					cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
+
+					cis.Seek(routingIndex->filePointer);
+					uint32_t old = cis.PushLimit(routingIndex->length);
+					readRoutingIndex(&cis, &(*routingIndex));
+					cis.PopLimit(old);
+				} else {
+					continue;
+				}
+			}
+			// could be simplified but it will be concurrency with init block
+			lseek(file->routefd, 0, SEEK_SET);
+			FileInputStream input(file->routefd);
+			input.SetCloseOnDelete(false);
+			CodedInputStream cis(&input);
+			cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
+
 			std::vector<RouteSubregion> toLoad;
-			searchRouteRegion(&cis, q, &(*routingIndex), routingIndex->subregions, toLoad);
+			searchRouteRegion(&cis, q, &(*routingIndex), routingIndex->subregions, toLoad, file);
 			sort(toLoad.begin(), toLoad.end(), sortRouteRegions);
-			;
+
 			std::vector<RouteDataObject*> iteration;
 			int cnt = 0;
 			for (std::vector<RouteSubregion>::iterator subreg = toLoad.begin(); subreg != toLoad.end(); subreg++) {
@@ -1323,6 +1389,41 @@ bool closeBinaryMapFile(std::string inputName) {
 	return false;
 }
 
+bool initMapFilesFromCache(std::string inputName) {
+	GOOGLE_PROTOBUF_VERIFY_VERSION;
+#if defined(_WIN32)
+	int fileDescriptor = open(inputName.c_str(), O_RDONLY | O_BINARY);
+#else
+	int fileDescriptor = open(inputName.c_str(), O_RDONLY);
+#endif
+	if (fileDescriptor < 0) {
+		osmand_log_print(LOG_ERROR, "Cache file could not be open to read : %s", inputName.c_str());
+		return false;
+	}
+	FileInputStream input(fileDescriptor);
+	CodedInputStream cis(&input);
+	cis.SetTotalBytesLimit(INT_MAX, INT_MAX);
+	OsmAndStoredIndex* c = new OsmAndStoredIndex();
+	if(c->MergeFromCodedStream(&cis)){
+		osmand_log_print(LOG_INFO, "Native Cache file initialized %s", inputName.c_str());
+		cache = c;
+		for (int i = 0; i < cache->fileindex_size(); i++) {
+			FileIndex fi = cache->fileindex(i);
+		}
+		return true;
+	}
+	return false;
+}
+
+bool hasEnding (std::string const &fullString, std::string const &ending)
+{
+    if (fullString.length() >= ending.length()) {
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    } else {
+        return false;
+    }
+}
+
 BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 	std::map<std::string, BinaryMapFile*>::iterator iterator;
@@ -1344,16 +1445,81 @@ BinaryMapFile* initBinaryMapFile(std::string inputName) {
 	}
 	BinaryMapFile* mapFile = new BinaryMapFile();
 	mapFile->fd = fileDescriptor;
-	mapFile->routefd = routeDescriptor;
-	FileInputStream input(fileDescriptor);
-	input.SetCloseOnDelete(false);
-	CodedInputStream cis(&input);
-	cis.SetTotalBytesLimit(INT_MAX, INT_MAX);
 
-	if (!initMapStructure(&cis, mapFile)) {
-		osmand_log_print(LOG_ERROR, "File not initialised : %s", inputName.c_str());
-		delete mapFile;
-		return NULL;
+	mapFile->routefd = routeDescriptor;
+	FileIndex* fo = NULL;
+	if (cache != NULL) {
+		struct stat stat;
+		fstat(fileDescriptor, &stat);
+		for (int i = 0; i < cache->fileindex_size(); i++) {
+			FileIndex fi = cache->fileindex(i);
+			if (hasEnding(inputName, fi.filename()) && fi.size() == stat.st_size) {
+				fo = cache->mutable_fileindex(i);
+				break;
+			}
+		}
+	}
+	if (fo != NULL) {
+		mapFile->version = fo->version();
+		mapFile->dateCreated = fo->datemodified();
+		for (int i = 0; i < fo->mapindex_size(); i++) {
+			MapIndex mi;
+			MapPart mp = fo->mapindex(i);
+			mi.filePointer = mp.offset();
+			mi.length = mp.size();
+			mi.name = mp.name();
+			for (int j = 0; j < mp.levels_size(); j++) {
+				MapLevel ml = mp.levels(j);
+				MapRoot mr;
+				mr.bottom = ml.bottom();
+				mr.left = ml.left();
+				mr.right = ml.right();
+				mr.top = ml.top();
+				mr.maxZoom = ml.maxzoom();
+				mr.minZoom = ml.minzoom();
+				mr.filePointer = ml.offset();
+				mr.length = ml.size();
+				mi.levels.push_back(mr);
+			}
+			mapFile->basemap = mapFile->basemap || mi.name.find("basemap") != string::npos;
+			mapFile->mapIndexes.push_back(mi);
+			mapFile->indexes.push_back(&mapFile->mapIndexes.back());
+		}
+
+		for (int i = 0; i < fo->routingindex_size(); i++) {
+			RoutingIndex mi;
+			RoutingPart mp = fo->routingindex(i);
+			mi.filePointer = mp.offset();
+			mi.length = mp.size();
+			mi.name = mp.name();
+			for (int j = 0; j < mp.subregions_size(); j++) {
+				RoutingSubregion ml = mp.subregions(j);
+				RouteSubregion mr;
+				mr.bottom = ml.bottom();
+				mr.left = ml.left();
+				mr.right = ml.right();
+				mr.top = ml.top();
+				mr.mapDataBlock = ml.shiftodata();
+				mr.filePointer = ml.offset();
+				mr.length = ml.size();
+				osmand_log_print(LOG_DEBUG, "Native file init subregion %d %d %d ", mr.filePointer, mr.length, mr.mapDataBlock);
+				mi.subregions.push_back(mr);
+			}
+			mapFile->routingIndexes.push_back(mi);
+			mapFile->indexes.push_back(&mapFile->routingIndexes.back());
+		}
+		osmand_log_print(LOG_DEBUG, "Native file initialized from cache %s", inputName.c_str());
+	} else {
+		FileInputStream input(fileDescriptor);
+		input.SetCloseOnDelete(false);
+		CodedInputStream cis(&input);
+		cis.SetTotalBytesLimit(INT_MAX, INT_MAX);
+
+		if (!initMapStructure(&cis, mapFile)) {
+			osmand_log_print(LOG_ERROR, "File not initialised : %s", inputName.c_str());
+			delete mapFile;
+			return NULL;
+		}
 	}
 	mapFile->inputName = inputName;
 	openFiles.insert(std::pair<std::string, BinaryMapFile*>(inputName, mapFile));

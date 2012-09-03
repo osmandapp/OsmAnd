@@ -12,7 +12,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -59,16 +58,16 @@ public class BinaryMapIndexReader {
 	private final static Log log = LogUtil.getLog(BinaryMapIndexReader.class);
 	
 	private final RandomAccessFile raf;
-	private int version;
-	private long dateCreated;
+	/*private*/ int version;
+	/*private */long dateCreated;
 	// keep them immutable inside
-	private boolean basemap = false;
-	private List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
-	private List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
-	private List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
-	private List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
-	private List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
-	private List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
+	/*private */ boolean basemap = false;
+	/*private */List<MapIndex> mapIndexes = new ArrayList<MapIndex>();
+	/*private */List<PoiRegion> poiIndexes = new ArrayList<PoiRegion>();
+	/*private */List<AddressRegion> addressIndexes = new ArrayList<AddressRegion>();
+	/*private */List<TransportIndex> transportIndexes = new ArrayList<TransportIndex>();
+	/*private */List<RouteRegion> routingIndexes = new ArrayList<RouteRegion>();
+	/*private */List<BinaryIndexPart> indexes = new ArrayList<BinaryIndexPart>();
 	
 	protected CodedInputStreamRAF codedIS;
 	
@@ -81,7 +80,27 @@ public class BinaryMapIndexReader {
 
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf) throws IOException {
-		this(raf, false);
+		this.raf = raf;
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
+		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		transportAdapter = new BinaryMapTransportReaderAdapter(this);
+		addressAdapter = new BinaryMapAddressReaderAdapter(this);
+		poiAdapter = new BinaryMapPoiReaderAdapter(this);
+		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		init();
+	}
+	
+	/*private */BinaryMapIndexReader(final RandomAccessFile raf, boolean init) throws IOException {
+		this.raf = raf;
+		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
+		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
+		transportAdapter = new BinaryMapTransportReaderAdapter(this);
+		addressAdapter = new BinaryMapAddressReaderAdapter(this);
+		poiAdapter = new BinaryMapPoiReaderAdapter(this);
+		routeAdapter = new BinaryMapRouteReaderAdapter(this);
+		if(init) {
+			init();
+		}
 	}
 	
 	public BinaryMapIndexReader(final RandomAccessFile raf, BinaryMapIndexReader referenceToSameFile) throws IOException {
@@ -102,23 +121,6 @@ public class BinaryMapIndexReader {
 		basemap = referenceToSameFile.basemap;
 	}
 	
-	public BinaryMapIndexReader(final RandomAccessFile raf, boolean readOnlyMapData) throws IOException {
-		this.raf = raf;
-		codedIS = CodedInputStreamRAF.newInstance(raf, 1024 * 5);
-		codedIS.setSizeLimit(Integer.MAX_VALUE); // 2048 MB
-		if(!readOnlyMapData){
-			transportAdapter = new BinaryMapTransportReaderAdapter(this);
-			addressAdapter = new BinaryMapAddressReaderAdapter(this);
-			poiAdapter = new BinaryMapPoiReaderAdapter(this);
-			routeAdapter = new BinaryMapRouteReaderAdapter(this);
-		} else {
-			transportAdapter = null;
-			addressAdapter = null;
-			poiAdapter = null;
-			routeAdapter = null;
-		}
-		init();
-	}
 	
 	public long getDateCreated() {
 		return dateCreated;
@@ -146,7 +148,7 @@ public class BinaryMapIndexReader {
 				mapIndex.length = readInt();
 				mapIndex.filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(mapIndex.length);
-				readMapIndex(mapIndex);
+				readMapIndex(mapIndex, false);
 				basemap = basemap || mapIndex.isBaseMap();
 				codedIS.popLimit(oldLimit);
 				codedIS.seek(mapIndex.filePointer + mapIndex.length);
@@ -200,7 +202,7 @@ public class BinaryMapIndexReader {
 				poiInd.filePointer = codedIS.getTotalBytesRead();
 				if (poiAdapter != null) {
 					oldLimit = codedIS.pushLimit(poiInd.length);
-					poiAdapter.readPoiIndex(poiInd);
+					poiAdapter.readPoiIndex(poiInd, false);
 					codedIS.popLimit(oldLimit);
 					poiIndexes.add(poiInd);
 					indexes.add(poiInd);
@@ -421,6 +423,10 @@ public class BinaryMapIndexReader {
 		return getTransportIndex(s.getFileOffset()) != null;
 	}
 	
+	public List<TransportIndex> getTransportIndexes() {
+		return transportIndexes;
+	}
+	
 	private TransportIndex getTransportIndex(int filePointer) {
 		TransportIndex ind = null;
 		for(TransportIndex i : transportIndexes){
@@ -565,8 +571,9 @@ public class BinaryMapIndexReader {
 	 * Map public methods 
 	 */
 
-	private void readMapIndex(MapIndex index) throws IOException {
+	private void readMapIndex(MapIndex index, boolean onlyInitEncodingRules) throws IOException {
 		int defaultId = 1;
+		int oldLimit ;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -574,29 +581,34 @@ public class BinaryMapIndexReader {
 			switch (tag) {
 			case 0:
 				// encoding rules are required!
-				if(index.encodingRules.isEmpty()){
-					throw new IllegalStateException("Encoding rules are not defined for the map index");
+				if (onlyInitEncodingRules) {
+					index.finishInitializingTags();
 				}
-				index.finishInitializingTags();
 				return;
 			case OsmandOdb.OsmAndMapIndex.NAME_FIELD_NUMBER :
 				index.setName(codedIS.readString());
 				break;
 			case OsmandOdb.OsmAndMapIndex.RULES_FIELD_NUMBER :
-				int len = codedIS.readInt32();
-				int oldLimit = codedIS.pushLimit(len);
-				readMapEncodingRule(index, defaultId++);
-				codedIS.popLimit(oldLimit);
+				if (onlyInitEncodingRules) {
+					int len = codedIS.readInt32();
+					oldLimit = codedIS.pushLimit(len);
+					readMapEncodingRule(index, defaultId++);
+					codedIS.popLimit(oldLimit);
+				} else {
+					skipUnknownField(t);
+				}
 				break;
 			case OsmandOdb.OsmAndMapIndex.LEVELS_FIELD_NUMBER :
 				int length = readInt();
 				int filePointer = codedIS.getTotalBytesRead();
-				oldLimit = codedIS.pushLimit(length);
-				MapRoot mapRoot = readMapLevel(new MapRoot());
-				mapRoot.length = length;
-				mapRoot.filePointer = filePointer;
-				index.getRoots().add(mapRoot);
-				codedIS.popLimit(oldLimit);
+				if (!onlyInitEncodingRules) {
+					oldLimit = codedIS.pushLimit(length);
+					MapRoot mapRoot = readMapLevel(new MapRoot());
+					mapRoot.length = length;
+					mapRoot.filePointer = filePointer;
+					index.getRoots().add(mapRoot);
+					codedIS.popLimit(oldLimit);
+				}
 				codedIS.seek(filePointer + length);
 				break;
 			default:
@@ -739,6 +751,13 @@ public class BinaryMapIndexReader {
 				if (index.minZoom <= req.zoom && index.maxZoom >= req.zoom) {
 					if (index.right < req.left || index.left > req.right || index.top > req.bottom || index.bottom < req.top) {
 						continue;
+					}
+					// lazy initializing rules
+					if(mapIndex.encodingRules.isEmpty()) {
+						codedIS.seek(mapIndex.filePointer);
+						int oldLimit = codedIS.pushLimit(mapIndex.length);
+						readMapIndex(mapIndex, true);
+						codedIS.popLimit(oldLimit);
 					}
 					// lazy initializing trees
 					if(index.trees == null){
@@ -1094,11 +1113,16 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
+	public void initCategories(PoiRegion poiIndex) throws IOException {
+		poiAdapter.initCategories(poiIndex);
+	}
+	
 	public List<Amenity> searchPoiByName(SearchRequest<Amenity> req) throws IOException {
 		if (req.nameQuery == null || req.nameQuery.length() == 0) {
 			throw new IllegalArgumentException();
 		}
 		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			int old = codedIS.pushLimit(poiIndex.length);
 			poiAdapter.searchPoiByName(poiIndex, req);
@@ -1107,31 +1131,32 @@ public class BinaryMapIndexReader {
 		return req.getSearchResults();
 	}
 	
-	public Map<AmenityType, List<String>> searchPoiCategoriesByName(String query, Map<AmenityType, List<String>> map) {
+	public Map<AmenityType, List<String>> searchPoiCategoriesByName(String query, Map<AmenityType, List<String>> map) throws IOException {
 		if (query == null || query.length() == 0) {
 			throw new IllegalArgumentException();
 		}
 		Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.PRIMARY);
 		for (PoiRegion poiIndex : poiIndexes) {
-			for(int i= 0; i< poiIndex.categories.size(); i++){
+			poiAdapter.initCategories(poiIndex);
+			for (int i = 0; i < poiIndex.categories.size(); i++) {
 				String cat = poiIndex.categories.get(i);
 				AmenityType catType = poiIndex.categoriesType.get(i);
-				if(CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
+				if (CollatorStringMatcher.cmatches(collator, cat, query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
 					map.put(catType, null);
 				} else {
 					List<String> subcats = poiIndex.subcategories.get(i);
-					for(int j=0; j< subcats.size(); j++){
-						if(CollatorStringMatcher.cmatches(collator, subcats.get(j), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)){
-							if(!map.containsKey(catType)){
+					for (int j = 0; j < subcats.size(); j++) {
+						if (CollatorStringMatcher.cmatches(collator, subcats.get(j), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE)) {
+							if (!map.containsKey(catType)) {
 								map.put(catType, new ArrayList<String>());
 							}
 							List<String> list = map.get(catType);
-							if(list != null){
+							if (list != null) {
 								list.add(subcats.get(j));
 							}
 						}
-						
+
 					}
 				}
 			}
@@ -1145,6 +1170,7 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
 		for (PoiRegion poiIndex : poiIndexes) {
+			poiAdapter.initCategories(poiIndex);
 			codedIS.seek(poiIndex.filePointer);
 			int old = codedIS.pushLimit(poiIndex.length);
 			poiAdapter.searchPoiIndex(req.left, req.right, req.top, req.bottom, req, poiIndex);
@@ -1363,6 +1389,9 @@ public class BinaryMapIndexReader {
 			this.interrupted = interrupted;
 		}
 		
+		public boolean limitExceeded() {
+			return limit != -1 && searchResults.size() > limit;
+		}
 		public boolean isCancelled() {
 			if(this.interrupted){
 				return interrupted;
@@ -1929,6 +1958,10 @@ public class BinaryMapIndexReader {
 			}
 		}));
 	}
+	
+	public void initRouteRegionsIfNeeded(SearchRequest<RouteDataObject> req) throws IOException {
+		routeAdapter.initRouteTypesIfNeeded(req);
+	}
 
 	public void searchRouteIndex(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
 		req.numberOfVisitedObjects = 0;
@@ -1936,6 +1969,7 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
 		if(routeAdapter != null){
+			initRouteRegionsIfNeeded(req);
 			routeAdapter.searchRouteRegion(req, list);
 		}
 	}

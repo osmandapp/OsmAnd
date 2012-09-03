@@ -66,11 +66,11 @@ nth(17, '17ème ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' mètres'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' mètres'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' mètres'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' mètres'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['environ 1 kilomètre '] :- Dist < 1500.
-distance(Dist) == ['environ ', X, ' kilomètres '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' kilomètres '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['environ ', X, ' kilomètres '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' kilomètres '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

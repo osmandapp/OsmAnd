@@ -75,16 +75,16 @@ nth(17, 'seitsemästoista ').
 
 
 %%% distance measure
-distance(Dist, metrin) == [ X, ' metrin'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist, metria) == [ X, ' metriä'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist, metrin) == [ X, ' metrin'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist, metria) == [ X, ' metriä'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist, metrin) == [ X, ' metrin'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist, metria) == [ X, ' metriä'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist, metrin) == [ X, ' metrin'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
+distance(Dist, metria) == [ X, ' metriä'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist, metrin) == ['noin 1 kilometrin '] :- Dist < 1500.
 distance(Dist, metria) == ['noin 1 kilometri '] :- Dist < 1500.
-distance(Dist, metrin) == ['noin', X, ' kilometerin '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist, metria) == ['noin', X, ' kilometriä '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist, metrin) == [ X, ' kilometerin '] :- D is round(Dist/1000), num_atom(D, X).
-distance(Dist, metria) == [ X, ' kilometriä '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist, metrin) == ['noin', X, ' kilometerin '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist, metria) == ['noin', X, ' kilometriä '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist, metrin) == [ X, ' kilometerin '] :- D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist, metria) == [ X, ' kilometriä '] :- D is round(Dist/1000.0), num_atom(D, X).
 % Note: do not put space after word "noin" because for some reason the SVOX Finnish Satu Voice announces the number wrong if there is a space
 
 

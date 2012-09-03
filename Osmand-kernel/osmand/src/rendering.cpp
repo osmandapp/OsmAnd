@@ -208,6 +208,7 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 		if (it->second.length() > 0) {
 			std::string name = it->second;
 			name =rc->getTranslatedString(name);
+			name =rc->getReshapedString(name);
 			req->setInitialTagValueZoom(tag, value, rc->getZoom(), obj);
 			req->setIntFilter(req->props()->R_TEXT_LENGTH, name.length());
 			std::string tagName = it->first == "name" ? "" : it->first;
@@ -373,6 +374,9 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 	int i = 0;
 	SkPoint middlePoint;
 	int middle = length / 2;
+	float prevx;
+	float prevy;
+	bool intersect = false;
 	for (; i < length; i++) {
 		calcPoint(mObj->points.at(i), rc);
 		if (i == 0) {
@@ -383,6 +387,27 @@ void drawPolyline(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas
 			}
 			path.lineTo(rc->calcX, rc->calcY);
 		}
+		if (!intersect) {
+			if (rc->calcX >= 0 && rc->calcY >= 0 && rc->calcX < rc->getWidth()&& rc->calcY < rc->getHeight()) {
+				intersect = true;
+			}
+			if (!intersect && i > 0) {
+				if ((rc->calcX < 0 && prevx < 0) || (rc->calcY < 0 && prevy < 0) ||
+						(rc->calcX> rc->getWidth() && prevx > rc->getWidth())
+						|| (rc->calcY > rc->getHeight() && prevy > rc->getHeight())) {
+					intersect = false;
+				} else {
+					intersect = true;
+				}
+
+			}
+		}
+		prevx = rc->calcX;
+		prevy = rc->calcY;
+	}
+
+	if (!intersect) {
+		return;
 	}
 
 	if (i > 0) {
@@ -442,6 +467,10 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 	rc->visible++;
 	SkPath path;
 	int i = 0;
+	float prevx;
+	float prevy;
+	bool intersect = false;
+	int bounds = 0;
 	for (; i < length; i++) {
 		calcPoint(mObj->points.at(i), rc);
 		if (i == 0) {
@@ -451,6 +480,38 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 		}
 		xText += rc->calcX;
 		yText += rc->calcY;
+		if (!intersect) {
+			if (rc->calcX >= 0 && rc->calcY >= 0 && rc->calcX < rc->getWidth() && rc->calcY < rc->getHeight()) {
+				intersect = true;
+			}
+			bounds |= (rc->calcX < 0 ? 1 : 0);
+			bounds |= (rc->calcX >= rc->getWidth() ? 2 : 0);
+			bounds |= (rc->calcY < 0 ? 4 : 0);
+			bounds |= (rc->calcY >= rc->getHeight() ? 8 : 0);
+			if (!intersect && i > 0) {
+				if ((rc->calcX < 0 && prevx < 0) || (rc->calcY < 0 && prevy < 0)
+						|| (rc->calcX > rc->getWidth() && prevx > rc->getWidth())
+						|| (rc->calcY > rc->getHeight() && prevy > rc->getHeight())) {
+					intersect = false;
+				} else {
+					intersect = true;
+				}
+			}
+		}
+	}
+	if(!intersect){
+		if(bounds == 15) {
+			path.reset();
+			path.moveTo(0, 0);
+			path.lineTo(0, rc->getWidth());
+			path.lineTo(rc->getHeight(), rc->getWidth());
+			path.lineTo(rc->getHeight(), 0);
+			path.close();
+			xText = rc->getWidth() / 2;
+			yText = rc->getHeight() / 2;
+		} else {
+			return;
+		}
 	}
 	std::vector<coordinates> polygonInnerCoordinates = mObj->polygonInnerCoordinates;
 	if (polygonInnerCoordinates.size() > 0) {

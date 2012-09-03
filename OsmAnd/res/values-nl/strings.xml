@@ -1,5 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
+<resources><string name="live_monitoring_mode_off">Start Live tracking</string>
+  <string name="live_monitoring_mode_on">Stop Live tracking</string>
+  <string name="layer_map_appearance">Configureer scherm…</string>
+  <string name="show_lanes">Toon rijstroken</string>
+  <string name="avoid_unpaved">Vermijd onverharde wegen</string>
+  <string name="avoid_ferries">Vermijd veerboten</string>
+  <string name="avoid_in_routing_title">Vermijd…</string>
+  <string name="avoid_in_routing_descr">Vermijd tolwegen, onverharde wegen, veerboten</string>
+  <string name="show_warnings_title">Toon alarm…</string>
+  <string name="show_warnings_descr">Toon snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
+  <string name="map_widget_fluorescent">Fluorescerende routes</string>
+  <string name="map_widget_show_ruler">Lineaal</string>
+  <string name="map_widget_appearance">Overige:</string>
+  <string name="map_widget_view_direction">Kijkrichting</string>
+  <string name="map_widget_transparent">Transparante skin</string>
+  <string name="monitoring_mode_off">Start trackregistratie</string>
+  <string name="monitoring_mode_on">Stop trackregistratie</string>
+  <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
+  <string name="int_continuosly">Continue</string>
+  <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
   <string name="play_commands_of_currently_selected_voice">Speel instructies af met de geselecteerde stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
@@ -98,7 +117,7 @@
   <string name="live_monitoring_interval">Live Tracking interval</string>
   <string name="live_monitoring_url_descr">Specificeer het webadres met parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, hoogte={4}, snelheid={5}</string>
   <string name="live_monitoring_url">Live Tracking webadres</string>
-  <string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen</string>
+  <string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen.</string>
   <string name="show_current_gpx_title">Toon huidige track</string>
   <string name="tip_recent_changes_0_7_0_t">"Wijzigingen in 0.7.0 : \n\t- Offline Wikipedia gegevens met artikelen \n\t- Vernieuwde kaarten \n\t- Andere kleine features "</string>
   <string name="free_version_message">Deze gratis OsmAnd versie is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
@@ -889,7 +908,10 @@
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
   <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 : 
    \n\t* Verbeterde routeberekening
-   \n\t* Dynamische kaartenwidgets
+   \n\t* Dynamische kaartschermwidgets
+   \n\t* Kaart-instellingen verplaatst naar het kaartscherm
+   \n\t* Lockscreen knop met track logging services
+   \n\t* Verbeterde talen: Arabisch, Kannada en RNL talen
    </string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
@@ -897,10 +919,10 @@
   <string name="map_widget_back_to_loc">Waar ben ik</string>
   <string name="map_widget_lock_screen">Vergrendel scherm</string>
   <string name="map_widget_compass">Kompas</string>
-  <string name="map_widget_top_stack">Statusbalk</string>
+  <string name="map_widget_top_stack">Statusbalk:</string>
   <string name="map_widget_reset">Herstel standaardinstelling</string>
-  <string name="map_widget_right_stack">Rechterkant</string>
-  <string name="map_widget_left_stack">Linkerkant</string>
+  <string name="map_widget_right_stack">Rechterkant:</string>
+  <string name="map_widget_left_stack">Linkerkant:</string>
   <string name="map_widget_parking">Parkeren</string>
   <string name="map_widget_monitoring">Track registratie</string>
   <string name="map_widget_speed">Snelheid</string>
@@ -916,6 +938,70 @@
   <string name="bg_service_interval">Zet ontwaak-interval:</string>
   <string name="screen_is_locked">Voor ontgrendelen scherm, toets het slot icoon</string>
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
-  <string name="bg_service_sleep_mode_off">Slaap modus uitzetten</string>
-  <string name="bg_service_sleep_mode_on">Slaap modus aanzetten</string>
+  <string name="bg_service_sleep_mode_off">Slaap modus aanzetten</string>
+  <string name="bg_service_sleep_mode_on">Slaap modus uitzetten</string>
+<string name="email">email</string>
+<string name="filterpoi_activity">Creëer interessepunt filter</string>
+<string name="select_navigation_mode">Selecteer transportmethode</string>
+<string name="day_night_info_description">Zonsopgang : %1$s \nZonsondergang : %2$s</string>
+<string name="day_night_info">Dag/nacht info</string>
+<string name="map_widget_day_night">Dag/nacht kaart</string>
+<string name="map_widget_vector_attributes">Kaartoplevering attributen:</string>
+<string name="map_widget_renderer">Kaartoplevering stijl</string>
+<string name="tip_rotation_switching_t_v2">\tJe kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te klikken op het kompas-icoon.↵
+\n\tDe keuzen zijn:↵
+\n\t\'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven↵
+\n\t\'In beweegrichting\' - De kaartrotatie wordt permanent aangepast aan de beweegrichting↵
+\n\t\'Volgens kompas\' - De kaartrotatie wordt permanent aangepast aan de kompas-uitlezing van het apparaat↵</string>
+<string name="tip_day_night_mode_t_v2">\tDe kaartpresentatie kan voor sommige vectorkaarten gewisseld worden tussen dag (helderder) en nacht (donkerder).↵
+\n\tNachtkleuren zijn veiliger voor nachtelijke ritten.↵
+\n\tJe kan een voorkeursinstelling kiezen in \'Kaartscherm\' -&gt; \'Configuratie\' -&gt;\'Dag/nacht kaart\'.↵
+\n\tDe keuzen zijn:↵
+\n\t\'Schemering\' - automatiche modus, bepaald door de positie van de zon (standaard)↵
+\n\t\'Dag\' - gebruik altijd de dag modus↵
+\n\t\'Nacht\' - gebruik altijd de nacht modus↵
+\n\t\'Lichtsensor\' - de kaartweergave wordt bepaald door de lichtsensor van he apparaat (indien aanwezig)</string>
+<string name="tip_map_switch_t_v2">\tDe kaartbron en de kaartlagen kunnen vanuit het kaartscherm worden gewijzigd via \'Menu\' -&gt; \'Definieer beeld\'.↵
+\n\tOnder \'Kaartbron\' kan je kiezen uit vooraf gedownloade vectorkaarten, voorgedefinieerde (online) kaartsegmenten (activeer hiervoor de plugin \'Online kaarten\'), of kaarten die je gemaakt hebt met b.v. OsmAndMapCreator op een PC.↵
+\n\tOsmAnd ondersteunt ook zelfgemaakte kaartbronnen.</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd ondersteunt verschillende transport-profielen.↵
+\n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of tijdens het creëren een route.</string>
+<string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
+<string name="osmand_long_description_1000_chars">
+OsmAnd (Open Street Maps Android)↵
+
+OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding.
+
+Belangrijke eigenschappen:
+- offline data, configureerbare opslagmap
+- compacte vectorkaarten voor de hele wereld
+- offline zoeken naar adressen en plaatsen
+- navigatie voor auto / fiets / voetganger
+- meerdere kaartlagen met instelbare transpantie
+- offline navigatie voor korte afstanden (experimenteel)
+
+Beperkingen van OsmAnd Free:
+- het aantal kaarten dat je kan downloaden
+- geen toegang tot Wikipedia offline interessepunten
+
+OsmAnd wordt nog actief ontwikkeld en rekent op ondersteuning via donaties voor de verdere ontwikkeling</string>
+<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)↵
+
+OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele
+popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden
+opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt
+zowel offline als online navigatie met stembegeleiding.
+
+OsmAnd+ is a donatie app. Door het te kopen ondersteun je het project en ontvang je de laatste updates.↵
+↵
+Belangrijke eigenschappen:
+- nieuwe offline Wikipedia feature (download Wikideia interessepunten)↵
+- offline data, configureerbare opslagmap
+- compacte vectorkaarten voor de hele wereld
+- offline zoeken naar adressen en plaatsen
+- navigatie voor auto / fiets / voetganger
+- meerdere kaartlagen met instelbare transpantie
+- offline navigatie voor korte afstanden (experimenteel)
+</string>
 </resources>

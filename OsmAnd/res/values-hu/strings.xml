@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai: \n\t- Natív renderelő minden eszközre \n\t- Offline POI szerkesztés \n\t- Akadálymentesítés \n\t- Sok egyéb hibajavítás "</string>
+<resources><string name="tip_recent_changes_0_7_2_t">A 0.7.2 kiadás változásai: \n\t- Natív renderelő minden eszközre \n\t- Offline POI szerkesztés \n\t- Akadálymentesítés \n\t- Sok egyéb hibajavítás</string>
   <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
   <string name="gpx_visibility_txt">Láthatóság</string>
   <string name="gpx_tags_txt">Címkék</string>
@@ -73,12 +73,12 @@
   <string name="use_fluorescent_overlays_descr">Élénk színek használata az útvonalak megjelenítéséhez</string>
   <string name="offline_edition">Offline szerkesztés</string>
   <string name="offline_edition_descr">Szerkesztés mindig offline módban</string>
-  <string name="tip_recent_changes_0_7_1_t">"A 0.7.1 verzió változásai: \n\t- Offline POI szerkesztés \n\t- Élő Útvonalrögzítési lehetőség: periodikusan koordinátákat küld egy webes szolgáltatásnak (a beállításról a weboldalunk HowTo cikkében olvashatsz) \n\t- Rögzítés alatt álló útvonal megjeleníthető a térképen \n\t- Irányfelismerés: \'Fordulj vissza\' utasítás megjelenítése és bemondása, ha rossz irányba mész, vagy elvétettél egy lekanyarodást \n\t- Új figyelmeztető hang: \'Útvonal újratervezve\' \n\t- A lekanyarodáshoz közeledve az irányjelző nyíl színe megváltozik \n\t- A letöltéskezelőben a deaktivált indexfájlok sötétebb színnel jelennek meg \n\t- Egyéb javítások "</string>
+  <string name="tip_recent_changes_0_7_1_t">A 0.7.1 verzió változásai: \n\t- Offline POI szerkesztés \n\t- Élő Útvonalrögzítési lehetőség: periodikusan koordinátákat küld egy webes szolgáltatásnak (a beállításról a weboldalunk HowTo cikkében olvashatsz) \n\t- Rögzítés alatt álló útvonal megjeleníthető a térképen \n\t- Irányfelismerés: \'Fordulj vissza\' utasítás megjelenítése és bemondása, ha rossz irányba mész, vagy elvétettél egy lekanyarodást \n\t- Új figyelmeztető hang: \'Útvonal újratervezve\' \n\t- A lekanyarodáshoz közeledve az irányjelző nyíl színe megváltozik \n\t- A letöltéskezelőben a deaktivált indexfájlok sötétebb színnel jelennek meg \n\t- Egyéb javítások </string>
   <string name="update_poi_does_not_change_indexes">Az alkalmazáson belüli POI módosítások nincsenek hatással a letöltött térképre, a változások helyi fájlban tárolódnak.</string>
   <string name="local_openstreetmap_uploading">Feltöltés…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Hiba feltöltve</string>
   <string name="local_openstreetmap_uploadall">Összes feltöltése</string>
-  <string name="local_openstreetmap_items">" "</string>
+  <string name="local_openstreetmap_items"> </string>
   <string name="local_openstreetmap_show">Megjelenítés a térképen</string>
   <string name="local_openstreetmap_upload">Módosítások feltöltése OSM-re</string>
   <string name="local_openstreetmap_delete">Módosítás törlése</string>
@@ -91,9 +91,9 @@
   <string name="live_monitoring_interval">Élő rögzítési sűrűség</string>
   <string name="live_monitoring_url_descr">Add meg az Élő Útvonalrögzítéshez használni kívánt webcímet az alábbi paraméterekkel: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Élő rögzítés webcíme</string>
-  <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást</string>
+  <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást.</string>
   <string name="show_current_gpx_title">Aktív útvonalrögzítés</string>
-  <string name="tip_recent_changes_0_7_0_t">"A 0.7.0 verzió változásai: \n\t- Internet nélkül is használható Wikipédia szócikkek \n\t- Frissített térképek \n\t- Egyéb hasznos apró funkciók "</string>
+  <string name="tip_recent_changes_0_7_0_t">A 0.7.0 verzió változásai: \n\t- Internet nélkül is használható Wikipédia szócikkek \n\t- Frissített térképek \n\t- Egyéb hasznos apró funkciók </string>
   <string name="free_version_message">Az ingyenes verzióval %1$s letöltés engedélyezett %2$s és nem támogatja az offline Wikipédia cikkeket.</string>
   <string name="free_version_title">Ingyenes verzió</string>
   <string name="poi_context_menu_showdescription">POI leírás megjelenítése</string>
@@ -135,18 +135,18 @@
   <string name="osmand_service">Alvó állaptú használat</string>
   <string name="osmand_service_descr">OsmAnd kikapcsolt képernyővel való használatához</string>
   <string name="tip_rotation_switching">Térkép elforgatása</string>
-  <string name="tip_rotation_switching_t">\tBeállítható, hogy mikor és hogyan forduljon el a térkép a \'Beállítások\' -&gt; \'Térkép megjelenítés\' -&gt; \'Térkép forgatása\'. \n\tLehetőségek: \n\t\'Ne forogjon\' - A térkép nem forog. Észak van mindig fönt \n\t\'Mozgás alapján\' - A térkép folyamatosan a mozgás irányába néz \n\t\'Iránytű alapján\' - A térkép mindig a beépített iránytűnek megfelelően fordul el \n\tTanács: A forgás alapjának a kiválasztottról iránytűre és vissza váltásához egyszerűen csak meg kell érinteni a kijelzőn az iránytűt.</string>
+  <string name="tip_rotation_switching_t">\tBeállítható, hogy mikor és hogyan forduljon el a térkép a \'Beállítások\' -&amp;gt; \'Térkép megjelenítés\' -&amp;gt; \'Térkép forgatása\'. \n\tLehetőségek: \n\t\'Ne forogjon\' - A térkép nem forog. Észak van mindig fönt \n\t\'Mozgás alapján\' - A térkép folyamatosan a mozgás irányába néz \n\t\'Iránytű alapján\' - A térkép mindig a beépített iránytűnek megfelelően fordul el \n\tTanács: A forgás alapjának a kiválasztottról iránytűre és vissza váltásához egyszerűen csak meg kell érinteni a kijelzőn az iránytűt.</string>
   <string name="switch_to_raster_map_to_see">Nincs internet nélkül használható térkép erre a területre. Letölthetsz egyet a Beállításokban (Offilne adatok), vagy átválthatsz online térképekre.</string>
-  <string name="binary_map_download_success">Sikeres letöltés.\n\t\n\tHasználatba vétel: \'Beállítások\' -&gt; \'Térkép beállítások\' -&gt; \'Vektoros térképek\'.</string>
+  <string name="binary_map_download_success">Sikeres letöltés.\n\t\n\tHasználatba vétel: \'Beállítások\' -&amp;gt; \'Térkép beállítások\' -&amp;gt; \'Vektoros térképek\'.</string>
   <string name="tip_day_night_mode">Éjjel/nappali mód</string>
-  <string name="tip_day_night_mode_t">\tA térkép megjelenése néhány esetben megváltoztatható nappali (világosabb) és éjszakai (sötétebb) módnak megfelelően. \n\tAz éjszakai színek biztonságosabbak éjszakai vezetésnél. \n\tAz átállítás időzítését be lehet állítani a \'Beállítások\' -&gt; \'Térkép beállítások\' -&gt;\'Éjjel/nappali mód\' alatt. \n\tLehetőségek: \n\t\'Napkelte/Napnyugta\' - automatikus mód, a napkelte és napnyugta alapján (alapértelmezett) \n\t\'Nappal\' - folyamatosan nappali mód \n\t\'Éjjel\' - folyamatosan éjjeli mód \n\t\'Fényérzékelő szenzor\' - a térkép megjelenítése a beépített fényérzékelő alapján áll át (csak, ha az eszközben van fényérzékelő)</string>
+  <string name="tip_day_night_mode_t">\tA térkép megjelenése néhány esetben megváltoztatható nappali (világosabb) és éjszakai (sötétebb) módnak megfelelően. \n\tAz éjszakai színek biztonságosabbak éjszakai vezetésnél. \n\tAz átállítás időzítését be lehet állítani a \'Beállítások\' -&amp;gt; \'Térkép beállítások\' -&amp;gt;\'Éjjel/nappali mód\' alatt. \n\tLehetőségek: \n\t\'Napkelte/Napnyugta\' - automatikus mód, a napkelte és napnyugta alapján (alapértelmezett) \n\t\'Nappal\' - folyamatosan nappali mód \n\t\'Éjjel\' - folyamatosan éjjeli mód \n\t\'Fényérzékelő szenzor\' - a térkép megjelenítése a beépített fényérzékelő alapján áll át (csak, ha az eszközben van fényérzékelő)</string>
   <string name="tip_osm_improve">OSM adatok javítása</string>
-  <string name="tip_osm_improve_t">\tAz OsmAnd OpenStreetMap alapú adatokat használ és - a megjelenítés és navigáció mellett - használható az adatok javításához. Egyszerűen lehet pár kattintással új POI-t feltölteni, vagy OSM hibát bejelenteni! \n\tEhhez először meg kell adnod az OSM bejelentkezési adataidat a \'Beállítások\' -&gt; \'Általános beállítások\' -&gt; \'OSM\' alatt. \n\tÚj POI létrehozásához a \'POI készítés\'-t kell választani a menüben. Be kell írni az új POI adatait a \'POI készítés\' adatlapon, majd el kell küldeni. \n\tA térkép hibáit egyből be lehet jelenteni az OpenStreetBugon keresztül, így az OSM közösség gyorsabban tudja javítani. \n\tHibát bejelenteni az \'OSM bug nyitása\' menün keresztül lehet a térkép helyi menüjében. Utána részletesen le kell írni a hibát és elküldeni a \'Hozzáad\' gombbal. \n\tPOI hozzáadáshoz és a hibabejelentéshez internet elérés szükséges.</string>
+  <string name="tip_osm_improve_t">\tAz OsmAnd OpenStreetMap alapú adatokat használ és - a megjelenítés és navigáció mellett - használható az adatok javításához. Egyszerűen lehet pár kattintással új POI-t feltölteni, vagy OSM hibát bejelenteni! \n\tEhhez először meg kell adnod az OSM bejelentkezési adataidat a \'Beállítások\' -&amp;gt; \'Általános beállítások\' -&amp;gt; \'OSM\' alatt. \n\tÚj POI létrehozásához a \'POI készítés\'-t kell választani a menüben. Be kell írni az új POI adatait a \'POI készítés\' adatlapon, majd el kell küldeni. \n\tA térkép hibáit egyből be lehet jelenteni az OpenStreetBugon keresztül, így az OSM közösség gyorsabban tudja javítani. \n\tHibát bejelenteni az \'OSM bug nyitása\' menün keresztül lehet a térkép helyi menüjében. Utána részletesen le kell írni a hibát és elküldeni a \'Hozzáad\' gombbal. \n\tPOI hozzáadáshoz és a hibabejelentéshez internet elérés szükséges.</string>
   <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
   <string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
   <string name="tip_select_destination_point">Beállítás célpontnak</string>
   <string name="tip_select_destination_point_t">\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással. \n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja.</string>
-  <string name="tip_recent_changes_0_6_9_t">"A 0.6.9-es verzió változásai: \n\t- Javított vektoros térkép megjelenítés \n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik) \n\t- Erőteljesen megváltoztatott kinézet \n\t- Magasság információ kijelzése \n\t- Új fordítások (vietnami, lengyel) \n\t- További kisebb fejlesztések "</string>
+  <string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai: \n\t- Javított vektoros térkép megjelenítés \n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik) \n\t- Erőteljesen megváltoztatott kinézet \n\t- Magasság információ kijelzése \n\t- Új fordítások (vietnami, lengyel) \n\t- További kisebb fejlesztések </string>
   <string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
   <string name="use_transparent_map_theme">Átlátszó téma</string>
   <string name="native_library_not_supported">A natív renderelő nem támogatott ezen az eszközön.</string>
@@ -170,7 +170,7 @@
   <string name="layer_poi_label">POI feliratok</string>
   <string name="animate_route_off">Szimuláció leállítása</string>
   <string name="animate_route">Szimuláció indítása</string>
-  <string name="tip_recent_changes_0_6_8_t">"A 0.6.8 verzió változásai: \n\t- Teljesen újratervezett kereső (POI, cím)! Az új kereső sokkal gyorsabb és lehetőséget ad különféle kiindulópontok szerinti kereséshez. \n\t- Név szerinti POI keresés nagy területekre (akár országnyi) \n\t- Javítva a képernyő villódzása tableteken (641-es hiba) \n\t- Útvonal automatikus követése beállítás (356-os hiba) \n\t- GPX navigáció áthelyezve az \'Útirány\' és az \'Útvonal mentése\' az \'Útvonal mutatása\' alá \n\t- POI adatok becsomagolva az .obf fájlba (tölts le 2011. 10. 01. utáni indexadatokat) \n\t- Hangutasítás javítások (a GPS pozícióval és a parancs első kimondásával kapcsolatban) \n\t- Apró fejlesztések "</string>
+  <string name="tip_recent_changes_0_6_8_t">A 0.6.8 verzió változásai: \n\t- Teljesen újratervezett kereső (POI, cím)! Az új kereső sokkal gyorsabb és lehetőséget ad különféle kiindulópontok szerinti kereséshez. \n\t- Név szerinti POI keresés nagy területekre (akár országnyi) \n\t- Javítva a képernyő villódzása tableteken (641-es hiba) \n\t- Útvonal automatikus követése beállítás (356-os hiba) \n\t- GPX navigáció áthelyezve az \'Útirány\' és az \'Útvonal mentése\' az \'Útvonal mutatása\' alá \n\t- POI adatok becsomagolva az .obf fájlba (tölts le 2011. 10. 01. utáni indexadatokat) \n\t- Hangutasítás javítások (a GPS pozícióval és a parancs első kimondásával kapcsolatban) \n\t- Apró fejlesztések </string>
   <string name="file_can_not_be_renamed">Fájl nem átnevezhető.</string>
   <string name="file_with_name_already_exists">Már létezik ilyen néven fájl.</string>
   <string name="gpx_navigation">GPX útvonal</string>
@@ -195,7 +195,7 @@
   <string name="search_position_map_view">Utolsó térképnézet</string>
   <string name="select_search_position">Keresés helye:</string>
   <string name="context_menu_item_search">Keresés itt</string>
-  <string name="tip_recent_changes_0_6_7_t">"0.6.7 verzió változásai: \n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, aktiválás/deaktiválás közvetlenül az OsmAndban) \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése) \n\t- Beépített GPX böngésző (útvonalak megjelenítése, távolság, átlagsebesség, magasság, stb.) \n\t- GPX navigáció (hasznos opciók, összeomlás után útvonal folytatása, körforgalmak kezelése) \n\t- Útvonal mentése GPX útvonalként kapcsolat nélküli munkához \n\t- GPX adatok kibővítése (pontatlan adatok kiszűrése és pontosság/emelkedés/sebesség mentése) \n\t- GPX útvonal feltöltése az OSM közösséghez (http://download.osmand.net/gpx/) \n\t- Vektoros megjelenítés javítása \n\t- TTS javítások (pontos távolság kimondása, mérföld) \n\t- Hibajavítások "</string>
+  <string name="tip_recent_changes_0_6_7_t">0.6.7 verzió változásai: \n\t- Offline - kapcsolat nélküli - adat kezelés (letöltés, törlés, aktiválás/deaktiválás közvetlenül az OsmAndban) \n\t- Kedvenc pontok és csoportok (csoportosítás, törlés, kedvencek kezelése) \n\t- Beépített GPX böngésző (útvonalak megjelenítése, távolság, átlagsebesség, magasság, stb.) \n\t- GPX navigáció (hasznos opciók, összeomlás után útvonal folytatása, körforgalmak kezelése) \n\t- Útvonal mentése GPX útvonalként kapcsolat nélküli munkához \n\t- GPX adatok kibővítése (pontatlan adatok kiszűrése és pontosság/emelkedés/sebesség mentése) \n\t- GPX útvonal feltöltése az OSM közösséghez (http://download.osmand.net/gpx/) \n\t- Vektoros megjelenítés javítása \n\t- TTS javítások (pontos távolság kimondása, mérföld) \n\t- Hibajavítások </string>
   <string name="save_route_dialog_title">Útvonal mentése GPX fájlba</string>
   <string name="route_successfully_saved_at">Az útvonal sikeresen mentve: \'%1$s\'.</string>
   <string name="filename_input">Fájl neve : </string>
@@ -218,9 +218,9 @@
   <string name="vector_map_not_needed">Nem szükséges</string>
   <string name="basemap_missing">Hiányzik az alap világtérkép (alacsony nagyításon az egész Földet lefedi). A teljes környezethez le lehet tölteni a World_basemap.obf -et.</string>
   <string name="vector_data_missing">Nincsenek offline használható adatok az SD kártyán. A térképek offline használathoz le kell töltened a kívánt területet.</string>
-  <string name="local_index_gpx_info_show">"\n\nHosszan megnyomva további lehetőségek"</string>
-  <string name="local_index_gpx_info_speed">"\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m"</string>
+  <string name="local_index_gpx_info_show">\n\nHosszan megnyomva további lehetőségek</string>
+  <string name="local_index_gpx_info_speed">\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s</string>
+  <string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m</string>
   <string name="local_index_gpx_info">Rész útvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tF, %5$tR\nÉrkezés: %6$tF, %6$tR</string>
   <string name="local_index_installed">Kiadás</string>
   <string name="local_index_items_backuped">%2$d darabból %1$d sikeresen deaktiválva.</string>
@@ -239,7 +239,7 @@
   <string name="local_index_address_data">Cím adat</string>
   <string name="local_index_transport_data">Közlekedési eszköz adat</string>
   <string name="local_index_map_data">Térképadat</string>
-  <string name="local_index_items">" "</string>
+  <string name="local_index_items"> </string>
   <string name="local_indexes_cat_backup">Deaktivált</string>
   <string name="local_indexes_cat_tts">Beszédadat (TTS)</string>
   <string name="local_indexes_cat_voice">Beszédadat (felvett)</string>
@@ -254,7 +254,7 @@
   <string name="trace_rendering">Megjelenítési adatok hibakereséshez</string>
   <string name="trace_rendering_descr">Megjelenítési teljesítmény adatainak kijelzése</string>
   <string name="tip_recent_changes">Legújabb változások</string>
-  <string name="tip_recent_changes_0_6_6_t">"Legújabb változások a 0.6.6 verzióhoz: \n\t- Text To Speech hangnavigációhoz \n\t- Részletesebb térkép megjelenítés \n\t- Alap térkép az egész Földről az alkalmazásban \n\t- Javított kapcsolat nélküli navigáció (még kísérleti) \n\t- GPX navigációs beállítások \n\t- Kezelő felület és egyéb hibajavítások "</string>
+  <string name="tip_recent_changes_0_6_6_t">Legújabb változások a 0.6.6 verzióhoz: \n\t- Text To Speech hangnavigációhoz \n\t- Részletesebb térkép megjelenítés \n\t- Alap térkép az egész Földről az alkalmazásban \n\t- Javított kapcsolat nélküli navigáció (még kísérleti) \n\t- GPX navigációs beállítások \n\t- Kezelő felület és egyéb hibajavítások </string>
   <string name="voice_not_use">Letiltva</string>
   <string name="voice_not_specified">Nincs</string>
   <string name="installing_new_resources">Új adatok kicsomagolása…</string>
@@ -266,7 +266,7 @@
   <string name="gpx_option_reverse_route">GPX irány megfordítása</string>
   <string name="gpx_option_destination_point">Használd a jelenlegi célpontot</string>
   <string name="gpx_option_from_start_point">Végig az egész útvonalon</string>
-  <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'menü\' -&gt; \'Rétegek\' -&gt; \'Térképforrás\' menüben tudod.</string>
+  <string name="switch_to_vector_map_to_see">Offline vektoros térkép érhető el ezen a helyen.\n\t\n\tAktiválni a \'menü\' -&amp;gt; \'Rétegek\' -&amp;gt; \'Térképforrás\' menüben tudod.</string>
   <string name="choose_audio_stream">Hangnavigáció kimenete</string>
   <string name="choose_audio_stream_descr">Hangnavigáció csatornájának kiválasztása (rendszer-konfigurációtól függ)</string>
   <string name="voice_stream_voice_call">Telefonhívás hangcsatorna</string>
@@ -290,14 +290,14 @@
   <string name="internet_not_available">A művelet elvégzéséhez internetelérés szükséges</string>
   <string name="install_more">További telepítése…</string>
   <string name="tip_update_index">Térképadatok frissítése</string>
-  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az OsmAnd program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térképadatokból. \n\tA frissítések ellenőrzéséhez a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Offline adatok\'-&gt;\'Térképadatok letöltése\' menüpontot kell választani. A térképadatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani. \nÍgy most már csak a letöltött térképadatok jelennek meg a következő színekkel jelölve: \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
+  <string name="tip_update_index_t">Fontos az aktuális térképek megléte. Az OsmAnd program tartalmaz egy letöltéskezelőt amivel egyszerűen ellenőrizhető, hogy létezik-e frissebb a meglévő térképadatokból. \n\tA frissítések ellenőrzéséhez a \'Főmenü\'-&amp;gt;\'Beállítások\'-&amp;gt;\'Offline adatok\'-&amp;gt;\'Térképadatok letöltése\' menüpontot kell választani. A térképadatok internetről való frissítése után a \'Letöltöttek szűrése\' menüt kell választani. \nÍgy most már csak a letöltött térképadatok jelennek meg a következő színekkel jelölve: \n\t\'Zöld\' - azt jelenti, hogy az index állomány megegyezik a szerveren lévővel \n\t\'Kék\' - azt jelenti, hogy újabb verzió tölthető le a szerverről</string>
   <string name="level_to_switch_vector_raster_descr">Minimális nagyítási szint vektoros megjelenítéshez térképcsempék helyett</string>
   <string name="level_to_switch_vector_raster">Min. vektoros nagyítás</string>
   <string name="tip_location_sharing">Hely megosztás</string>
-  <string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal? \nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz. \n\tVálaszd a \'Térkép menű\'-&gt;\'Hely megosztása\' pontot. \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
+  <string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal? \nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz. \n\tVálaszd a \'Térkép menű\'-&amp;gt;\'Hely megosztása\' pontot. \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
   <string name="tip_favorites">Kedvencek</string>
   <string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető. \n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el. \n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük. \n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
-  <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
+  <string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Hiba történt az offline keresésben</string>
   <string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'</string>
   <string name="search_osm_offline">Cím keresése offline térképen</string>
@@ -305,11 +305,11 @@
   <string name="preferred_locale_descr">Megjelenített feliratok nyelve</string>
   <string name="preferred_locale">Preferált nyelv</string>
   <string name="tip_map_switch">Térképforrás</string>
-  <string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'menü\'-&gt;\'Rétegek\' menüpont. \n\t\'Térképforrás…\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között. \n\tOsmAnd egyéni forrásokat is támogat.</string>
+  <string name="tip_map_switch_t">A térkép forrásának és rétegeknek a cseréjére a leggyorsabb megoldás a \'menü\'-&amp;gt;\'Rétegek\' menüpont. \n\t\'Térképforrás…\' alatt lehet választani az előre definiált térképek és az OsmAndMapCreator által PC-n készített térképek között. \n\tOsmAnd egyéni forrásokat is támogat.</string>
   <string name="tip_app_mode">Működési mód</string>
-  <string name="tip_app_mode_t">Az OsmAnd több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre. \n\tA mód kiválasztható a \'Főmenü\'-&gt;\'Beállítások\'-&gt;\'Működési mód\' alatt.</string>
+  <string name="tip_app_mode_t">Az OsmAnd több, személyre szabható megjelenítési módot támogat, különböző felhasználási esetekre. \n\tA mód kiválasztható a \'Főmenü\'-&amp;gt;\'Beállítások\'-&amp;gt;\'Működési mód\' alatt.</string>
   <string name="tip_navigation">Navigáció</string>
-  <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menütét kell választani és megjelölni a közlekedési módot.</string>
+  <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menüjét kell választani és megjelölni a közlekedési módot.</string>
   <string name="tip_search">Cím keresés</string>
   <string name="tip_search_t">A térképen helyet keresni cím alapján, koordináta alapján, POI-k közül, vagy Kedvencek közül lehet. \n\t\'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Beállítás célpontnak\' vagy \'Mutasd a térképen\'.</string>
   <string name="tip_map_context_menu">Térképmenü</string>
@@ -356,10 +356,10 @@
   <string name="amenity_type_sustenance">Ellátás</string>
   <string name="amenity_type_tourism">Turizmus</string>
   <string name="amenity_type_transportation">Közlekedési eszköz</string>
-  <string name="indexing_address">"Címek indexelése "</string>
-  <string name="indexing_map">"Térkép indexelése "</string>
-  <string name="indexing_poi">"POI indexelése "</string>
-  <string name="indexing_transport">"Közlekedési eszköz indexelése "</string>
+  <string name="indexing_address">Címek indexelése </string>
+  <string name="indexing_map">Térkép indexelése </string>
+  <string name="indexing_poi">POI indexelése </string>
+  <string name="indexing_transport">Közlekedési eszköz indexelése </string>
   <string name="input_output_error">Be-kimeneti hiba történt</string>
   <string name="km">km</string>
   <string name="km_h">km/ó</string>
@@ -376,7 +376,7 @@
   <string name="version_index_is_big_for_memory">A(z) \'\'{0}\'\' indexadat nem fér a memóriába</string>
   <string name="version_index_is_not_supported">\'\'{0}\'\' index verziója nem támogatott</string>
   <string name="osmand_net_previously_installed">Már telepítettél egy korábbi OsmAnd verziót. Minden internettől független adat használható az új alkalmazással. A Kedvenc pontokat a régi alkalmazásból érdemes kimenteni és az újba betölteni.</string>
-  <string name="use_osmand_routing_service">OsmAnd útvonaltervező &gt;20km</string>
+  <string name="use_osmand_routing_service">OsmAnd útvonaltervező &amp;gt;20km</string>
   <string name="use_osmand_routing_service_descr">OsmAnd offline útvonaltervező használata nagy távolságokra is (kísérleti funkció)</string>
   <string name="osmand_routing_experimental">Az OsmAnd offline útvonaltervezője kísérleti funkció és nem működik 20 kilométernél nagyobb távolságban.\n\nÁtmenetileg átállítva online Cluodmade-re.</string>
   <string name="specified_dir_doesnt_exist">Nem található a megadott könyvtár.</string>
@@ -385,7 +385,7 @@
   <string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
   <string name="downloading_build">OsmAnd verzió letöltése…</string>
   <string name="install_selected_build">Telepíted az OsmAnd alkalmazást - {0} innen: {1} {2} MB?</string>
-  <string name="loading_builds_failed">"Az OsmAnd verziók listájának letöltése nem sikerült "</string>
+  <string name="loading_builds_failed">Az OsmAnd verziók listájának letöltése nem sikerült </string>
   <string name="loading_builds">OsmAnd verziók töltése…</string>
   <string name="select_build_to_install">A telepítéshez válassz egy OsmAnd buildet</string>
   <string name="contribution_activity">Special activity for contribution version</string>
@@ -405,7 +405,7 @@
   <string name="select_all">Mindet kijelöl</string>
   <string name="reload">Újratölt</string>
   <string name="fast_route_mode">Leggyorsabb útvonal</string>
-  <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedése vagy a legrövidebb út tiltása</string>
+  <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása a legrövidebb útért </string>
   <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} képkocka letöltése ({2} Mb )</string>
   <string name="context_menu_item_download_map">Térkép letöltése</string>
   <string name="select_max_zoom_preload_area">Maximális nagyítás kiválasztása a látható terület előtöltéséhez</string>
@@ -485,7 +485,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">másodperc</string>
   <string name="int_min">perc</string>
-  <string name="background_service_int_descr">Helymeghatározási időköz megadása a háttérszolgáltatásnak</string>
+  <string name="background_service_int_descr">Helymeghatározási időköz megadása a háttérszolgáltatásnak </string>
   <string name="background_service_int">Helymeghatározási időköz</string>
   <string name="background_service_provider_descr">Helymeghatározási szolgáltatás kiválasztása a háttérszolgáltatáshoz</string>
   <string name="background_service_provider">Helymeghatározási szolgáltatás</string>
@@ -517,7 +517,7 @@
   <string name="route_head">Előre</string>
   <string name="first_time_continue">Tovább</string>
   <string name="first_time_download">Térképadatok letöltése</string>
-  <string name="first_time_msg">Hogy a program minden lehetőségét kihasználhasd, index állományokra lesz szükséged, amiket az internetről tölthetsz le (Beállítások -&gt; Offline adatok), vagy elkészíthetsz magadnak. Ezt követően tudsz majd címre, POI-ra és tömegközlekedési eszközre keresni.</string>
+  <string name="first_time_msg">Hogy a program minden lehetőségét kihasználhasd, index állományokra lesz szükséged, amiket az internetről tölthetsz le (Beállítások -&amp;gt; Offline adatok), vagy elkészíthetsz magadnak. Ezt követően tudsz majd címre, POI-ra és tömegközlekedési eszközre keresni.</string>
   <string name="search_poi_location">Kereső jelzés…</string>
   <string name="search_near_map">Keresés az utolsó térképpozíció közelében</string>
   <string name="search_nearby">Keresés a közelben</string>
@@ -591,7 +591,7 @@
   <string name="follow">Követ</string>
   <string name="recalculate_route_to_your_location">Válaszd ki az utazás módját (opcionális):</string>
   <string name="mark_final_location_first">Először válaszd ki a célpontot</string>
-  <string name="get_directions">Útirány</string>
+  <string name="get_directions">Navigáció</string>
   <string name="show_gps_status">GPS állapot mutatása</string>
   <string name="opening_hours">Nyitvatartás</string>
   <string name="opening_changeset">Változások megnyitása…</string>
@@ -775,22 +775,22 @@
   <string name="edit_filter_delete_message">{0} szűrő törölve</string>
   <string name="edit_filter_create_message">{0} szűrő létrehozva</string>
   <string name="default_buttons_selectall">Mindet kijelöl</string>
-  <string name="offline_navigation_not_available">Az Osmand offline navigációja átmenetileg nem elérhető.</string>
+  <string name="offline_navigation_not_available">Az OsmAnd offline navigációja átmenetileg nem elérhető.</string>
   <string name="left_side_navigation">Baloldali navigáció</string>
-  <string name="left_side_navigation_descr">"Kapcsold be, ha baloldali közlekedésű országban navigálsz"</string>
+  <string name="left_side_navigation_descr">Kapcsold be, ha baloldali közlekedésű országban navigálsz</string>
   <string name="download_link_and_local_description">Offline adatok letöltése vagy frissítése.\nRészletekért kattints a listaelemre, deaktiváláshoz vagy törléshez nyomd meg hosszan. Adatok jelenleg az eszközön (%1$s szabad):</string>
   <string name="unknown_from_location">Kezdőpozíció még nem meghatározható</string>
   <string name="context_menu_item_directions">Útvonal ide</string>
   <string name="confirm_interrupt_download">Meg szeretnéd szakítani a fájlletöltést?</string>
   <string name="basemap_was_selected_to_download">Az alaptérképre szükség van az alkalmazás megfelelő működéséhez, ezért ki lett jelölve letöltésre.</string>
-  <string name="gpx_index_settings_descr">" (GPX elemzőt tartalmaz)"</string>
+  <string name="gpx_index_settings_descr"> (GPX elemzőt tartalmaz)</string>
   <string name="map_online_plugin_is_not_installed">További térképforrások kiválasztásához engedélyezd az online térképek bővítményt</string>
   <string name="map_online_data">Online térképek (csempék)</string>
   <string name="map_online_data_descr">Internetes térképek használata (letöltés és tárolás az SD kártyán)</string>
   <string name="online_map_settings">Online térkép</string>
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
   <string name="map_settings">- Térképbeállítások</string>
-  <string name="map_settings_descr">"Térképmegjelenítés "</string>
+  <string name="map_settings_descr">Térképmegjelenítés </string>
   <string name="osmand_rastermaps_plugin_description">Internetes és letöltött raszteres térképek alap, vagy rátét / alátét térképként használatához tartozó beállítások megjelenítése. A térképeket előre is el lehet készíteni és bemásolni az OsmAnd könyvárába.</string>
   <string name="osmand_background_plugin_description">Beállítások útvonal felvételéhez vagy a navigációhoz energiatakarékos üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt és felveszi az aktuális pozíciót az útvonalhoz.</string>
   <string name="osmand_accessibility_description">Akadálymentesítési beállítások elérését teszi lehetővé.</string>
@@ -802,7 +802,7 @@
   <string name="select_plugin_to_activate">Bővítmény be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
   <string name="prefs_plugins_descr">A bővítmények további lehetőségeket biztosítanak, mint útvonal mentés, raszteres térképek, kikapcsolt képernyős használat, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
-  <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott"</string>
+  <string name="tip_recent_changes_0_8_0_t">A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott</string>
   <string name="osm_editing_plugin_description">Beállítások kezelése OSM POI objektumok gyűjtéséhez / módosításához, OSM hibajelzések készítéséhez, és felvett GPX fájlok feltöltéséhez. (OSM felhasználói név szükséges.)</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
   <string name="simulate_route_progression_manually">Az útvonalon haladás szimulálása</string>
@@ -832,15 +832,7 @@
   <string name="route_kr">Tarts jobbra és menj</string>
   <string name="save_route_as_gpx">Út mentése GPX fájlba</string>
   <string name="asap">MOST</string>
-  <string name="tip_recent_changes_0_8_1_t">A 0.8.1 kiadás változásai:
-	\n\t* Pontosabb útvonal (egy kicsit lassabb)
-	\n\t* Gyors és intelligens útvonal újratervezés
-	\n\t* Sávonkénti irányok
-	\n\t* Információk  sebességkorlátozásról, traffipaxról, fekvőrendőrről
-	\n\t* Továbbfejlesztett hangnavigáció az autópályán
-	\n\t* Parkolási bővítmény (\'Hol van leparkolva az autó?\')
-	\n\t* Ki-, bekapcsolható útvonalrögzítés gomb
-    </string>
+  <string name="tip_recent_changes_0_8_1_t">A 0.8.1 kiadás változásai: \n\t* Pontosabb útvonal (egy kicsit lassabb) \n\t* Gyors és intelligens útvonal újratervezés \n\t* Sávonkénti irányok \n\t* Információk sebességkorlátozásról, traffipaxról, fekvőrendőrről \n\t* Továbbfejlesztett hangnavigáció az autópályán \n\t* Parkolási bővítmény (\'Hol van leparkolva az autó?\') \n\t* Ki-, bekapcsolható útvonalrögzítés gomb </string>
   <string name="gpxup_public">Nyilvános</string>
   <string name="gpxup_identifiable">Azonosítható</string>
   <string name="gpxup_trackable">Követhető</string>
@@ -880,27 +872,24 @@
   <string name="use_compass_navigation_descr">Iránytű használata navigáláshoz, ha az irány nem érzékelhető</string>
   <string name="use_compass_navigation">Iránytű használata</string>
   <string name="route_updated_loc_found">Amint megvan a pozíció, az útvonal újra lesz tervezve</string>
-  <string name="continue_follow_previous_route_auto">Az előző útvonal navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
+  <string name="continue_follow_previous_route_auto">Az előző navigáció még nem ért véget. Folytassuk? (%1$s másodperc)</string>
   <string name="show_cameras_descr">Traffipaxok megjelenítése (néhány országban tilos használni)</string>
   <string name="show_speed_limits_descr">Sebességhatárok és fekvőrendőrök megjelenítése</string>
   <string name="avoid_toll_roads_descr">Fizetős útszakaszok elkerülése útvonaltervezéskor</string>
   <string name="show_cameras">Traffipaxok megjelenítése</string>
   <string name="show_speed_limits">Sebességhatárok megjelenítése</string>
   <string name="avoid_toll_roads">Fizetős utak elkerülése</string>
-  <string name="tip_recent_changes_0_8_2_t">0.8.2 verzió változásai:
-    \n\t* Továbbfejlesztett útvonaltervezés
-    \n\t* Dinamikus térkép widgetek
-    </string>
+  <string name="tip_recent_changes_0_8_2_t">0.8.2 verzió változásai: \n\t* Továbbfejlesztett útvonaltervezés \n\t* Dinamikus térkép widgetek \n\t* A térképbeállítások mostantól a térképképernyőről érhetők el \n\t* Képernyő lezárása gomb rögzítési beállít ásokkal </string>
   <string name="map_widget_top_text">Utca neve</string>
   <string name="map_widget_config">Beállítás</string>
-  <string name="map_widget_map_select">Térkép kiválasztás</string>
+  <string name="map_widget_map_select">Térkép kiválasztása</string>
   <string name="map_widget_back_to_loc">Hol vagyok</string>
   <string name="map_widget_lock_screen">Képernyőzár</string>
   <string name="map_widget_compass">Iránytű</string>
-  <string name="map_widget_top_stack">Állapotsor</string>
+  <string name="map_widget_top_stack">Állapotsor:</string>
   <string name="map_widget_reset">Alapértékek visszaállítása</string>
-  <string name="map_widget_right_stack">Jobb oldal</string>
-  <string name="map_widget_left_stack">Bal oldal</string>
+  <string name="map_widget_right_stack">Jobb oldal:</string>
+  <string name="map_widget_left_stack">Bal oldal:</string>
   <string name="map_widget_parking">Parkolás</string>
   <string name="map_widget_monitoring">Útvonalrögzítés</string>
   <string name="map_widget_speed">Sebesség</string>
@@ -910,25 +899,102 @@
   <string name="map_widget_next_turn">Következő kereszteződés</string>
   <string name="map_widget_next_turn_small">Következő kereszteződés (kicsi)</string>
   <string name="map_widget_next_next_turn">Második kereszteződés</string>
-  <string name="map_widget_mini_route">Mini útvonaltérkép</string>
+  <string name="map_widget_mini_route">Kicsi útvonaltérkép</string>
   <string name="bg_service_screen_lock">Képernyőzár be</string>
   <string name="bg_service_screen_lock_toast">Képernyő zárva</string>
   <string name="bg_service_interval">GPS bekapcsolási időköz:</string>
   <string name="screen_is_locked">Képernyőzár feloldása a képernyőzár ikonnal</string>
   <string name="bg_service_screen_unlock">Képernyőzár ki</string>
-  <string name="bg_service_sleep_mode_off">Alvó mód bekapcsolása</string>
-  <string name="bg_service_sleep_mode_on">Alvó mód kikapcsolása</string>
-<string name="avoid_in_routing_title">Elkerülés..</string>
+  <string name="bg_service_sleep_mode_off">Alvó mód\n bekapcsolása</string>
+  <string name="bg_service_sleep_mode_on">Alvó mód\n kikapcsolása</string>
+<string name="avoid_in_routing_title">Elkerülés…</string>
 <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
 <string name="show_warnings_title">Riasztások megjelenítése</string>
 <string name="show_warnings_descr">Sebességhatárok, traffipaxok és fekvőrendőrök jelzése</string>
 <string name="map_widget_fluorescent">Élénk színek</string>
 <string name="map_widget_show_ruler">Lépték</string>
-<string name="map_widget_appearance">Megjelenés</string>
+<string name="map_widget_appearance">Megjelenés:</string>
 <string name="map_widget_view_direction">Látómező</string>
 <string name="map_widget_transparent">Átlátszó téma</string>
 <string name="monitoring_mode_off">GPX felv.</string>
-<string name="monitoring_mode_on">GPX ki</string>
+<string name="monitoring_mode_on">GPX ki.</string>
 <string name="gps_wakeup_interval">GPS helymeghatározási időköz: %s</string>
 <string name="int_continuosly">Folyamatos</string>
+<string name="live_monitoring_mode_off">Élő útvonalrögzítés\n indítása</string>
+<string name="live_monitoring_mode_on">Élő útvonalrögzítés\n megállítása</string>
+<string name="layer_map_appearance">Képernyő beállítása…</string>
+<string name="show_lanes">Sávok megjelenítése</string>
+<string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
+<string name="avoid_ferries">Komp elkerülése</string>
+<string name="email">email</string>
+<string name="filterpoi_activity">POI szűrő készítés</string>
+<string name="select_navigation_mode">Közlekedési mód kiválasztása</string>
+<string name="day_night_info_description">Napkelte : %1$s \nNapnyugta : %2$s</string>
+<string name="day_night_info">Nappal/éjjel információ</string>
+<string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
+<string name="map_widget_vector_attributes">Térkép megjelenítési beállítások:</string>
+<string name="map_widget_renderer">Térkép megjelenítési stílus</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
+\n\tA módot útvonaltervezésnél vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni.</string>
+<string name="tip_rotation_switching_t_v2">\tA térkép forgatásának módja megváltoztatható a térkép képernyőn az iránytű ikon megnyomásával.
+\n\tA lehetőségek:
+\n\t\'Nem forog (észak felül)\' - A térkép nem fordul el. Mindig észak van felül
+\n\t\'Haladás irányának megfelelően\' - A térkép a haladásnak megfelelően fordul el
+\n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog</string>
+<string name="tip_day_night_mode_t_v2">\tBizonyos vektoros térképek megjelenése különbözhet nappal (világosabb) és éjjel (sötétebb).
+\n\tAz éjszakai színek biztonságosabbak éjjeli vezetéshez.
+\n\tA váltás módját a \'Menü\' -&gt; \'Rétegek\' -&gt; \'Képernyő beállítása\' -&gt; \'Nappali/éjjeli térképmód\' alatt lehet beállítani.
+\n\tLehetőségek:
+\n\t\'Napkelte/Napnyugta\' - automatikus mód, a Nap helyzetének megfelelően (alapértelmezett)
+\n\t\'Nappal\' - mindig a nappali színek használata
+\n\t\'Éjjel\' - mindig az éjjeli színek használata 
+\n\t\'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője alapján vált a színek között (ha az eszköz tartalmaz ilyent)</string>
+<string name="tip_map_switch_t_v2">\tA térképforrás és a rétegek kicserélhetők a \'Menü\' -&gt; \'Rétegek\' alatt.
+\n\tA \'Térképforrás…\' alatt kiválasztható az előre letöltött vektoros térkép, előre beállított (online) raszteres forrás (az \'Online térkép\' kiterjesztést be kell kapcsolni hozzá), vagy kézzel gyártott térkép pl. OsmAndMapCreatorral készítve PC-n.
+\n\tAz OsmAnd egyedi forrásokat is támogat.</string>
+<string name="osmand_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
+<string name="osmand_long_description_1000_chars">
+		OsmAnd (OSM Automated Navigation Directions)
+
+		Az OsmAnd egy nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal.
+
+		Néhány fontosabb funkció:
+		- Teljesen offline működés (a letöltött vektoros és raszteres térképek választható könyvtárban tárolhatók)
+		- A kompakt, offline vektoros térképek az egész világhoz elérhetőek
+		- Az ország vagy régió térképei letölthetők közvetlenül az alkalmazásból
+		- Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal
+		- Címek és helyek offline kereshetősége
+		- Offline útvonaltervezés rövidebb távolságokra (kísérleti)
+		- Autós, kerékpáros és gyalogos módok:
+		- Opcionális automata nappali/éjszakai nézetváltással
+		- Opcionális sebességfüggő nagyítással
+		- Opcionális térképforgatással a mozgás vagy az iránytű alapján
+
+		Az OsmAnd ingyenes változatának korlátozásai:
+		- Korlátozott számú vektoros térképletöltés
+		- Offline Wikipédia cikkek nem elérhetőek
+
+		Az OsmAnd folyamatosan fejlesztés alatt áll és a projektünk nagyban függ a pénzügyi támogatásoktól, amiből finanszírozhatók a fejlesztések és az új funkciók tesztelése. Kérlek, fontold meg az OsmAnd+ megvásárlását, vagy egy-egy funkció támogatását az osmand.net oldalon
+	</string>
+<string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (OSM Automated Navigation Directions)
+
+		Az OsmAnd+ egy nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal.
+
+		Az OsmAnd+ az alkalmazás fizetős változata, aminek megvásárlásával támogatod a projektet, az új funkciók fejlesztésének finanszírozását és megkapod a legújabb frissítéseket.
+
+		Néhány fontosabb funkció:
+		- Teljesen offline működés (a letöltött vektoros és raszteres térképek választható könyvtárban tárolhatók)
+		- A kompakt, offline vektoros térképek az egész világhoz elérhetőek
+		- Az ország vagy régió térképei korlátlan számban letölthetők, közvetlenül az alkalmazásból
+		- Offline Wikipédia szócikkek letöltése, ami hasznos segítség városnézéshez
+		- Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal
+		- Címek és helyek offline kereshetősége
+		- Offline útvonaltervezés rövidebb távolságokra (kísérleti)
+		- Autós, kerékpáros és gyalogos módok:
+		- Opcionális automata nappali/éjszakai nézetváltással
+		- Opcionális sebességfüggő nagyítással
+		- Opcionális térképforgatással a mozgás vagy az iránytű alapján
+    </string>
+<string name="osmand_plus_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
 </resources>

@@ -103,7 +103,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 			canvas.translate(0, 3 * scaleCoefficient);
 			canvas.drawPath(pathForTurn, paintRouteDirection);
 			canvas.drawPath(pathForTurn, paintBlack);
-			if (exitOut != null && !horisontalMini) {
+			if (exitOut != null && !horisontalMini && !makeUturnWhenPossible) {
 				drawShadowText(canvas, exitOut, width / 2 - 7 * scaleCoefficient, 
 						height / 2 + textPaint.getTextSize() / 2 - 3 * scaleCoefficient, textPaint);
 			}

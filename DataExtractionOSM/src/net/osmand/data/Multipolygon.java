@@ -178,6 +178,9 @@ public class Multipolygon {
 	}
 
 	private Collection<Way> findInnersFor(Way outer, List<Way> inners) {
+		if(inners == null) {
+			return Collections.emptyList();
+		}
 		List<Way> result = new ArrayList<Way>(inners.size());
 		for (Way in : inners) {
 			boolean inIsIn = true;

@@ -1,4 +1,4 @@
-:- op('==', xfy, 500).
+﻿:- op('==', xfy, 500).
 version(101).
 language(zh).
 
@@ -66,11 +66,11 @@ nth(17, '第十七個 ').
 
 
 %%% distance measure
-distance(Dist) == [ X, ' 公尺'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' 公尺'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' 公尺'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' 公尺'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['約 1 公里 '] :- Dist < 1500.
-distance(Dist) == ['約 ', X, ' 公里 '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' 公里 '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['約 ', X, ' 公里 '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' 公里 '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

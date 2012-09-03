@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:paddingLeft="10dp"
-        android:src="@drawable/expandable_category_unpushed" />
+         />
        
 	<TextView android:id="@+id/local_openstreetmap_category_name" android:gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content"
 		android:textSize="21sp" android:layout_marginLeft="10dp"></TextView>

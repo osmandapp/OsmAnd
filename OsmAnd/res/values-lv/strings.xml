@@ -894,10 +894,10 @@
   <string name="map_widget_back_to_loc">Kur es atrodos</string>
   <string name="map_widget_lock_screen">Noslēgt ekrānu</string>
   <string name="map_widget_compass">Kompass</string>
-  <string name="map_widget_top_stack">Statusa josla</string>
+  <string name="map_widget_top_stack">Statusa josla:</string>
   <string name="map_widget_reset">Nostatīt uz noklusēto</string>
-  <string name="map_widget_right_stack">Labā puse</string>
-  <string name="map_widget_left_stack">Kreisā puse</string>
+  <string name="map_widget_right_stack">Labā puse:</string>
+  <string name="map_widget_left_stack">Kreisā puse:</string>
   <string name="map_widget_parking">Parkošanās</string>
   <string name="map_widget_monitoring">Monitorēšana</string>
   <string name="map_widget_speed">Ātrums</string>
@@ -915,4 +915,23 @@
   <string name="bg_service_screen_unlock">Atslēgt ekrānu</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="live_monitoring_mode_off">Sākt\n tiešsaistes sekošanu</string>
+<string name="live_monitoring_mode_on">Pārtraukt\n tiešsaistes sekošanu</string>
+<string name="layer_map_appearance">Konfigurācijas ekrāns...</string>
+<string name="show_lanes">Rādīt joslas</string>
+<string name="avoid_unpaved">Izvairīties no neasvaltētiem ceļiem</string>
+<string name="avoid_ferries">Izvairīties no prāmjiem</string>
+<string name="avoid_in_routing_title">Izvairīties...</string>
+<string name="avoid_in_routing_descr">Izvairīties no maksas ceļiem, neasfaltētiem un prāmjiem</string>
+<string name="show_warnings_title">Rādīt brīdinājumus...</string>
+<string name="show_warnings_descr">Rādīt ātruma limitus, fotoradarus, un guļošos policistus</string>
+<string name="map_widget_fluorescent">Fluorescenti ceļi</string>
+<string name="map_widget_show_ruler">Lineāls</string>
+<string name="map_widget_appearance">Dažādi:</string>
+<string name="map_widget_view_direction">Skata virziens</string>
+<string name="map_widget_transparent">Caurspīdīga ādiņa</string>
+<string name="monitoring_mode_off">Ierakstīt GPX</string>
+<string name="monitoring_mode_on">Pārtraukt\n GPX ier.</string>
+<string name="gps_wakeup_interval">GPS pamošanās intervāls: %s</string>
+<string name="email">e-pasts</string>
 </resources>

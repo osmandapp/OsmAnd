@@ -79,7 +79,7 @@ public class BinaryMapPoiReaderAdapter {
 		return map.readInt();
 	}
 	
-	protected void readPoiBoundariesIndex(PoiRegion region) throws IOException {
+	private void readPoiBoundariesIndex(PoiRegion region) throws IOException {
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -106,7 +106,9 @@ public class BinaryMapPoiReaderAdapter {
 	}
 	
 
-	protected void readPoiIndex(PoiRegion region) throws IOException {
+	protected void readPoiIndex(PoiRegion region, boolean readCategories) throws IOException {
+		int length;
+		int oldLimit;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -116,19 +118,22 @@ public class BinaryMapPoiReaderAdapter {
 			case OsmandOdb.OsmAndPoiIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();
 				break;
-			case OsmandOdb.OsmAndPoiIndex.BOUNDARIES_FIELD_NUMBER: {
-				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+			case OsmandOdb.OsmAndPoiIndex.BOUNDARIES_FIELD_NUMBER:
+				length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
 				readPoiBoundariesIndex(region);
 				codedIS.popLimit(oldLimit);
-			}
 				break; 
-			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER : {
-				int length = codedIS.readRawVarint32();
-				int oldLimit = codedIS.pushLimit(length);
+			case OsmandOdb.OsmAndPoiIndex.CATEGORIESTABLE_FIELD_NUMBER :
+				if(!readCategories){
+					codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
+					return;
+				}
+				length = codedIS.readRawVarint32();
+				oldLimit = codedIS.pushLimit(length);
 				readCategory(region);
 				codedIS.popLimit(oldLimit);
-			} break;
+				break;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER :
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				return;
@@ -159,6 +164,15 @@ public class BinaryMapPoiReaderAdapter {
 				skipUnknownField(t);
 				break;
 			}
+		}
+	}
+	
+	public void initCategories(PoiRegion region) throws IOException {
+		if(region.categories.isEmpty()) {
+			codedIS.seek(region.filePointer);
+			int oldLimit = codedIS.pushLimit(region.length);
+			readPoiIndex(region, true);
+			codedIS.popLimit(oldLimit);
 		}
 	}
 	
@@ -224,7 +238,7 @@ public class BinaryMapPoiReaderAdapter {
 					int oldLim = codedIS.pushLimit(len);
 					readPoiData(matcher, req, region);
 					codedIS.popLimit(oldLim);
-					if(req.isCancelled()){
+					if(req.isCancelled() || req.limitExceeded()){
 						return;
 					}
 				}
@@ -349,6 +363,8 @@ public class BinaryMapPoiReaderAdapter {
 			skipTiles = new TLongHashSet();
 			zoomToSkip = req.zoom + ZOOM_TO_SKIP_FILTER;
 		}
+		int length ;
+		int oldLimit ;
 		TIntLongHashMap offsetsMap = new TIntLongHashMap();
 		while(true){
 			if(req.isCancelled()){
@@ -360,8 +376,8 @@ public class BinaryMapPoiReaderAdapter {
 			case 0:
 				return;
 			case OsmandOdb.OsmAndPoiIndex.BOXES_FIELD_NUMBER :
-				int length = readInt();
-				int oldLimit = codedIS.pushLimit(length);
+				length = readInt();
+				oldLimit = codedIS.pushLimit(length);
 				readBoxField(left31, right31, top31, bottom31, 0, 0, 0, offsetsMap,  skipTiles, req, region);
 				codedIS.popLimit(oldLimit);
 				break;
@@ -398,7 +414,7 @@ public class BinaryMapPoiReaderAdapter {
 		int y = 0;
 		int zoom = 0;
 		while(true){
-			if(req.isCancelled()){
+			if(req.isCancelled() || req.limitExceeded()){
 				return;
 			}
 			int t = codedIS.readTag();

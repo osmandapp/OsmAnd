@@ -103,6 +103,7 @@ public class DownloadOsmandIndexesHelper {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
+				log.info("http://download.osmand.net/get_indexes?" + versionAsUrl);
 				URL url = new URL("http://download.osmand.net/get_indexes?" + versionAsUrl ); //$NON-NLS-1$
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 				parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$

@@ -18,6 +18,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.FollowMode;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
@@ -242,20 +243,22 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			res *= (float) Math.pow(2, zoom - (int) zoom);
 		}
 
-		// that trigger allows to scale tiles for certain devices
-		// for example for device with density > 1 draw tiles the same size as with density = 1
-		// It makes text bigger but blurry, the settings could be introduced for that
-		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get() ) {
-			res *= dm.density;
-		}
+		
 		return res;
 	}
 
 	public int getSourceTileSize() {
-		if(mainLayer instanceof MapTileLayer){
-			return ((MapTileLayer) mainLayer).getSourceTileSize();
+		int r = 256;
+		if (mainLayer instanceof MapTileLayer) {
+			r = ((MapTileLayer) mainLayer).getSourceTileSize();
 		}
-		return 256;
+		// that trigger allows to scale tiles for certain devices
+		// for example for device with density > 1 draw tiles the same size as with density = 1
+		// It makes text bigger but blurry, the settings could be introduced for that
+		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get()) {
+			return (int) (r * dm.density);
+		}
+		return r;
 	}
 
 	/**
@@ -898,6 +901,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
 			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
+			MapControlsLayer mapControlsLayer = getLayerByClass(MapControlsLayer.class);
+			mapControlsLayer.setFollowMode(FollowMode.FREE_SCROLL);
 			return true;
 		}
 

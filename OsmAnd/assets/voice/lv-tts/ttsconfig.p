@@ -66,17 +66,17 @@ nth(17, 'septiņpadsmitajā ').
 
 
 %%% distance measure - Pēc xxx 
-distance(Dist) == [ X, ' meteriem'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' meteriem'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance(Dist) == [ X, ' meteriem'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance(Dist) == [ X, ' meteriem'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance(Dist) == ['aptuveni viena kilometera '] :- Dist < 1500.
-distance(Dist) == ['aptuveni ', X, ' kilometeriem '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' kilometriem '] :- D is round(Dist/1000), num_atom(D, X).
+distance(Dist) == ['aptuveni ', X, ' kilometeriem '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == [ X, ' kilometriem '] :- D is round(Dist/1000.0), num_atom(D, X).
 %%% distance mesure - Attālums ir xxx ....metri...
-distance2(Dist) == [ X, ' meteri'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance2(Dist) == [ X, ' meteri'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
+distance2(Dist) == [ X, ' meteri'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance2(Dist) == [ X, ' meteri'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
 distance2(Dist) == ['aptuveni 1 kilometrs '] :- Dist < 1500.
-distance2(Dist) == ['aptuveni ', X, ' kilometri '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance2(Dist) == [ X, ' kilometri '] :- D is round(Dist/1000), num_atom(D, X).
+distance2(Dist) == ['aptuveni ', X, ' kilometri '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance2(Dist) == [ X, ' kilometri '] :- D is round(Dist/1000.0), num_atom(D, X).
 
 
 %% resolve command main method

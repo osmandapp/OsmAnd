@@ -210,7 +210,7 @@ public class NavigationService extends Service implements LocationListener {
 			liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 					location.getSpeed(), location.getAccuracy(), locationTime, settings);
 			if(routingHelper.isFollowingMode()){
-				routingHelper.setCurrentLocation(location);
+				routingHelper.setCurrentLocation(location, false);
 			}
 		}
 		

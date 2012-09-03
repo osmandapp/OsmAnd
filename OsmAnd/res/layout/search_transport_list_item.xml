@@ -7,9 +7,6 @@
 		android:paddingLeft="2dp" android:paddingRight="2dp"
 		android:paddingTop="2dp" android:layout_height="fill_parent" />
 	
-	<TextView android:id="@+id/distance"
-		android:layout_width="wrap_content" android:layout_height="fill_parent" android:gravity="left|center_vertical"
-		android:maxWidth="70dp" android:minWidth="70dp" style="@style/ListText.Small"/>
 	<TextView android:id="@+id/label" android:layout_width="wrap_content"
 		android:layout_height="wrap_content" style="@style/ListText.Small"/>
 

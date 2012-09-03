@@ -1,27 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
-    -->
-  <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
-  <string name="left_side_navigation">Left-hand driving</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
+  <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
   <string name="download_link_and_local_description">Click here to download or update offline data.\nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
   <string name="unknown_from_location">Starting point is not yet determined</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
-  <string name="context_menu_item_directions">Directions to here</string>
+  <string name="context_menu_item_directions">इथपर्य़ंत दिशा</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, 255 - अपारदर्शक)</string>
-  <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
+  <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
   <string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
   <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
   <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
-  <string name="local_indexes_cat_tile">Online maps (tiles)</string>
-  <string name="local_indexes_cat_map">Offline maps (vector)</string>
+  <string name="local_indexes_cat_tile">ऑनलाइन नकाशे (टाइल्स)</string>
+  <string name="local_indexes_cat_map">ऑफलाइन नकाशे (वेक्टर)</string>
   <string name="gpx_index_settings_descr">"(includes GPX analyzer)"</string>
   <string name="index_settings_descr">Download, view details and manage offline maps</string>
   <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
@@ -38,22 +29,22 @@
   <string name="osmand_monitoring_description">Show settings facilitating to record your trips to GPX files or to live track using a web service.</string>
   <string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
   <string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
-  <string name="plugins_screen">Plugin Manager</string>
+  <string name="plugins_screen">प्लगिन मॅनेजर</string>
   <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
   <string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
-  <string name="prefs_plugins">Plugin Manager</string>
+  <string name="prefs_plugins">प्लगिन मॅनेजर</string>
   <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 :\n\t- *Plugin functionality*\n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.\n\t- *New offline map data support*\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).\n\t - You need to download completely new offline data (old data will not be supported anymore)\n\t- *Offline Routing*\n\t - Offline routing becomes more robust\n\t *Usability and UI experience*\n\t - Improved in many areas"</string>
   <string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
-  <string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
+  <string name="play_commands_of_currently_selected_voice">सध्या निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
   <string name="debugging_and_development">OsmAnd development</string>
   <string name="native_rendering">Native rendering</string>
   <string name="animate_routing">Animate navigation</string>
-  <string name="test_voice_prompts">Test voice prompts</string>
+  <string name="test_voice_prompts">आवाज तपासा</string>
   <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
   <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Native rendering for all devices \n\t- Offline POI editing \n\t- Accessibility \n\t- Lots of bug fixes "</string>
-  <string name="send_files_to_osm">Send GPX files to OSM?</string>
+  <string name="send_files_to_osm">जिपीएक्स फाइल्स ओएसएम ला पाठवायच्या का?</string>
   <string name="gpx_visibility_txt">Visibility</string>
   <string name="gpx_tags_txt">Tags</string>
   <string name="gpx_description_txt">वर्णन</string>
@@ -121,25 +112,25 @@
   <string name="use_short_object_names">Use object names</string>
   <string name="accessibility_preferences_descr">Accessibility related preferences</string>
   <string name="accessibility_preferences">Accessibility</string>
-  <string name="rendering_out_of_memory">Not enough process memory to display selected area</string>
+  <string name="rendering_out_of_memory">निवडलेले क्षेत्र दाखवण्यासाठी पुरेशी प्रोसेस मेमरी नाही</string>
   <string name="use_fluorescent_overlays">Fluorescent overlays</string>
   <string name="use_fluorescent_overlays_descr">Use fluorescent colors to display tracks and routes</string>
   <string name="offline_edition">Offline editing</string>
   <string name="offline_edition_descr">Always use offline editing</string>
   <string name="tip_recent_changes_0_7_1_t">"Changes in 0.7.1 : \n\t- Offline POI editing \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles) \n\t- Show currently recorded track on map \n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn \n\t- New voice prompt \'Route recalculated\' \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue \n\t- Other changes "</string>
   <string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
-  <string name="local_openstreetmap_uploading">Uploading…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
+  <string name="local_openstreetmap_uploading">अपलोड करत आहे…</string>
+  <string name="local_openstreetmap_were_uploaded">{0} पीओआय/बग्स अपलोड झाले</string>
   <string name="local_openstreetmap_uploadall">Upload all</string>
   <string name="local_openstreetmap_items">""</string>
-  <string name="local_openstreetmap_show">Show on map</string>
-  <string name="local_openstreetmap_upload">Upload modification to OSM</string>
-  <string name="local_openstreetmap_delete">Delete modification</string>
+  <string name="local_openstreetmap_show">नकाशावर दाखवा</string>
+  <string name="local_openstreetmap_upload">बदल ओएसएम मधे अपलोड करा</string>
+  <string name="local_openstreetmap_delete">बदल काढून टाका</string>
   <string name="local_openstreetmap_descr_title">Asynchronous OSM Editing:</string>
   <string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
   <string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
   <string name="live_monitoring_descr">Send tracking to a specified web service</string>
-  <string name="live_monitoring">Online live tracking</string>
+  <string name="live_monitoring">ऑनलइन लाइव्ह ट्रॅकिंग</string>
   <string name="live_monitoring_interval_descr">Specify live tracking interval</string>
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
@@ -168,17 +159,16 @@
   <string name="amenity_type_wikiosm">विकिपेडिया (ऑफलाइन)</string>
   <string name="amenity_type_user_defined">User defined</string>
   <string name="fav_export_confirmation">File with previously exported favorites already exists. Do you want to replace it?</string>
-  <!-- this block re-worked for new Preferences structure -->
   <string name="profile_settings">Profile Specific Settings</string>
   <string name="settings_preset">User Profile</string>
   <string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
-  <string name="monitor_preferences">Tracking</string>
+  <string name="monitor_preferences">ट्रॅकिंग</string>
   <string name="monitor_preferences_descr">Specify tracking settings</string>
   <string name="routing_settings">- दिशादर्शन</string>
   <string name="routing_settings_descr">दिशादर्शनाचे पर्याय ठरवा</string>
   <string name="global_settings">Global Settings</string>
   <string name="index_settings">ऑफलाइन डेटा (डाउनलोड)</string>
-  <string name="general_settings">General Settings</string>
+  <string name="general_settings">सर्वसाधारण पर्याय</string>
   <string name="general_settings_descr">Configure global settings</string>
   <string name="global_app_settings">Global app settings</string>
   <string name="user_name">तुमचे ओएसएम युजरनेम</string>
@@ -190,13 +180,12 @@
   <string name="tip_rotation_switching">Map Orientation</string>
   <string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
   <string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
-  <string name="tip_day_night_mode">Day/Night Mode</string>
+  <string name="tip_day_night_mode">दिवस/रात्र पर्याय</string>
   <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
   <string name="tip_osm_improve">Improving OSM Data</string>
   <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
-  <!-- end of string changes for new Preferences structure -->
-  <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
-  <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
+  <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
+  <string name="download_files_question_space">शिल्लक जागा आता {2} एमबी! {0} फाइल डाउनलोड करायच्या का ({1} एमबी)?</string>
   <string name="tip_select_destination_point">इच्छित स्थळ निवडा</string>
   <string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
   <string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
@@ -213,8 +202,8 @@
   <string name="pref_vector_rendering">Vector renderer specific options</string>
   <string name="pref_overlay">Overlay / underlay</string>
   <string name="pref_raster_map">Map source settings</string>
-  <string name="pref_vector_map">Vector map settings</string>
-  <string name="delete_confirmation_msg">Delete %1$s?</string>
+  <string name="pref_vector_map">वेक्टर नकाशाचे पर्याय</string>
+  <string name="delete_confirmation_msg">%1$s काढून टाकायचे का?</string>
   <string name="city_type_suburb">उपनगर</string>
   <string name="city_type_hamlet">खेडं</string>
   <string name="city_type_village">गाव</string>
@@ -237,11 +226,11 @@
   <string name="local_index_mi_rename">नाव बदला</string>
   <string name="show_gpx_route">नकाशावर दाखवा</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
-  <string name="search_select_point">Select</string>
-  <string name="search_position_current_location_search">Searching position…</string>
-  <string name="search_position_current_location_found">Position (Found)</string>
+  <string name="search_select_point">निवडा</string>
+  <string name="search_position_current_location_search">स्थान शोधत आहे…</string>
+  <string name="search_position_current_location_found">स्थान (सापडले)</string>
   <string name="search_position_address">पत्ता...</string>
-  <string name="search_position_favorites">Favorites…</string>
+  <string name="search_position_favorites">आवडती ठिकाणे…</string>
   <string name="search_position_undefined">Undefined</string>
   <string name="search_position_fixed">Fixed</string>
   <string name="search_position_current_location">सध्याचे स्थान…</string>
@@ -251,14 +240,14 @@
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Save route as GPX track</string>
   <string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
-  <string name="filename_input">"फाइलचे नाव : "</string>
-  <string name="file_with_name_already_exist">File with same name already exists.</string>
-  <string name="default_buttons_save">Save</string>
-  <string name="menu_save_directions">Save directions</string>
+  <string name="filename_input">फाइलचे नाव : </string>
+  <string name="file_with_name_already_exist">ह्या नावाने फाइल आधीच अस्तित्वात आहे.</string>
+  <string name="default_buttons_save">साठवा</string>
+  <string name="menu_save_directions">दिशा साठवा</string>
   <string name="local_index_upload_gpx_description">Upload GPX files to OSM community. They will be used to improve maps.</string>
   <string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
-  <string name="local_index_mi_upload_gpx">Send to OSM</string>
-  <string name="show_more_map_detail">Show more map detail</string>
+  <string name="local_index_mi_upload_gpx">ओएसएम ला पाठवा</string>
+  <string name="show_more_map_detail">नकाशा सविस्तरपणे दाखवा</string>
   <string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
   <string name="favourites_delete_multiple_succesful">Favorite point(s) deleted successfully.</string>
   <string name="favorite_delete_multiple">You are going to delete %1$d favorite(s) and %2$d favorite group(s). Are you sure?</string>
@@ -455,7 +444,7 @@
   <string name="select_all">सर्व निवडा</string>
   <string name="reload">Refresh</string>
   <string name="fast_route_mode">वेगवान रस्ता</string>
-  <string name="fast_route_mode_descr">"निवडा सर्वात वेगवान रस्त्यासाठी किंवा निवड काढा सर्वात जवळच्या रस्त्यासाठी"</string>
+  <string name="fast_route_mode_descr">निवडा सर्वात वेगवान रस्त्यासाठी किंवा निवड काढा सर्वात जवळच्या रस्त्यासाठी </string>
   <string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
   <string name="context_menu_item_download_map">नकाशा डाउनलोड करा</string>
   <string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
@@ -534,7 +523,7 @@
   <string name="gps_provider">जीपीइस</string>
   <string name="int_seconds">सेकंद</string>
   <string name="int_min">मि.</string>
-  <string name="background_service_int_descr">"Set wake-up interval used by background "</string>
+  <string name="background_service_int_descr">Set wake-up interval used by background </string>
   <string name="background_service_int">Wake-up interval</string>
   <string name="background_service_provider_descr">Choose location provider while running in background mode</string>
   <string name="background_service_provider">Location provider</string>
@@ -552,7 +541,7 @@
   <string name="voice_data_not_supported">Unsupported version of voice data</string>
   <string name="voice_data_corrupted">Specified voice data is corrupted</string>
   <string name="voice_data_unavailable">Selected voice data is not available</string>
-  <string name="stop_routing">मार्गदर्शन थांबवा</string>
+  <string name="stop_routing">मार्गदर्शन थांबवा.</string>
   <string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
   <string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
   <string name="unzipping_file">Unzipping file…</string>
@@ -711,7 +700,7 @@
   <string name="show_view_angle_descr">Display viewing direction on the map</string>
   <string name="show_view_angle">Display viewing direction</string>
   <string name="stop_navigation">इच्छित स्थळ काढून टाका.</string>
-  <string name="navigate_to_point">इच्छित स्थळ म्हणून निवडा</string>
+  <string name="navigate_to_point">इच्छित स्थळ म्हणून निवडा.</string>
   <string name="map_view_3d_descr">Enable 3D view of the map</string>
   <string name="map_view_3d">Map View 3D</string>
   <string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
@@ -843,7 +832,15 @@
   <string name="route_kr">Keep right</string>
   <string name="save_route_as_gpx">Save route as GPX</string>
   <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"Changes in 0.8.1 : "</string>
+  <string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
+\n\t* More precise routes (a bit slower)
+\n\t* Smart and fast Route recalculation
+\n\t* Direction by lanes
+\n\t* Information about speed limits, speed cams, and speed bumps 
+\n\t* Improved voice guidance on highways
+\n\t* Parking plugin (\'Where is my car parked at?\')
+\n\t* Enable/disable logging widget
+ </string>
   <string name="gpxup_public">Public</string>
   <string name="gpxup_identifiable">Identifiable</string>
   <string name="gpxup_trackable">Trackable</string>
@@ -890,17 +887,22 @@
   <string name="show_cameras">Show speed cameras</string>
   <string name="show_speed_limits">Show speed limits</string>
   <string name="avoid_toll_roads">Avoid toll roads</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
+  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
+ \n\t* Improved Routing
+ \n\t* Dynamic map widgets
+ \n\t* Lock screen button with logging services 
+ \n\t* Map settings moved to map screen
+ </string>
   <string name="map_widget_top_text">Street name</string>
   <string name="map_widget_config">Configuration</string>
   <string name="map_widget_map_select">Map selection</string>
   <string name="map_widget_back_to_loc">Where am I</string>
   <string name="map_widget_lock_screen">Lock screen</string>
   <string name="map_widget_compass">Compass</string>
-  <string name="map_widget_top_stack">Status bar</string>
+  <string name="map_widget_top_stack">Status bar:</string>
   <string name="map_widget_reset">Reset to default</string>
-  <string name="map_widget_right_stack">Right side</string>
-  <string name="map_widget_left_stack">Left side</string>
+  <string name="map_widget_right_stack">Right panel:</string>
+  <string name="map_widget_left_stack">Left panel:</string>
   <string name="map_widget_parking">Parking</string>
   <string name="map_widget_monitoring">Monitoring</string>
   <string name="map_widget_speed">Speed</string>
@@ -918,4 +920,19 @@
   <string name="bg_service_screen_unlock">Unlock screen</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="select_navigation_mode">परिवहन पर्याय निवडा</string>
+<string name="day_night_info_description">सुर्योदय : %1$s \nसूर्यास्त : %2$s</string>
+<string name="day_night_info">दिवस/रात्र माहिती</string>
+<string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
+<string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग चालू करा</string>
+<string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग बंद करा</string>
+<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
+<string name="avoid_unpaved">कच्चे रस्ते टाळा</string>
+<string name="avoid_in_routing_title">टाळा…</string>
+<string name="map_widget_show_ruler">पट्टी</string>
+<string name="map_widget_view_direction">बघण्याची दिशा</string>
+<string name="monitoring_mode_off">जिपीएक्स रेकॉर्ड करा</string>
+<string name="monitoring_mode_on">जिपीएक्स रेकॉर्ड थांबवा.</string>
+<string name="int_continuosly">सलग</string>
+<string name="email">इमेल</string>
 </resources>

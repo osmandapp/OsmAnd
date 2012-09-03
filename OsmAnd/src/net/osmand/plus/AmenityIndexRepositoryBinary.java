@@ -61,7 +61,12 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 	
 	
 	public Map<AmenityType, List<String>> searchAmenityCategoriesByName(String query, Map<AmenityType, List<String>> map) {
-		return index.searchPoiCategoriesByName(query, map);
+		try {
+			return index.searchPoiCategoriesByName(query, map);
+		} catch (IOException e) {
+			log.error("Error searching amenities", e); //$NON-NLS-1$
+		}
+		return map;
 	}
 	
 	

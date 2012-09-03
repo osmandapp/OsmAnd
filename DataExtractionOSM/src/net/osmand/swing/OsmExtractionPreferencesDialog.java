@@ -140,7 +140,7 @@ public class OsmExtractionPreferencesDialog extends JDialog {
 		constr.gridy = gridY++;
 		l.setConstraints(nativeFilesDirectory, constr);
 		
-		label = new JLabel("Routing mode (car/bicycle/pedestrian) : ");
+		label = new JLabel("Routing (car|bicycle|pedestrian,[short_way],[avoid_ferries]...) : ");
         panel.add(label);
         constr = new GridBagConstraints();
         constr.ipadx = 5;

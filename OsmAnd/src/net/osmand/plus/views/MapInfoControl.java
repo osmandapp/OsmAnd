@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,7 @@ public abstract class MapInfoControl extends View implements MapControlUpdateabl
 	int width = 0;
 	int height = 0;
 	Rect padding = new Rect();
+	int shadowColor = Color.WHITE;
 
 	public MapInfoControl(Context ctx) {
 		super(ctx);
@@ -46,7 +48,15 @@ public abstract class MapInfoControl extends View implements MapControlUpdateabl
 	}
 	
 	protected void drawShadowText(Canvas cv, String text, float centerX, float centerY, Paint textPaint) {
-		ShadowText.draw(text, cv, centerX, centerY, textPaint);
+		ShadowText.draw(text, cv, centerX, centerY, textPaint, shadowColor);
+	}
+	
+	public void setShadowColor(int shadowColor) {
+		this.shadowColor = shadowColor;
+	}
+	
+	public int getShadowColor() {
+		return shadowColor;
 	}
 	
 	@Override

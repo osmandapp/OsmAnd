@@ -1,0 +1,429 @@
+
+aerodrome,Aéroport
+arts_centre,Centre artistique
+atm,Distributeur automatique de billets
+atm,Dab
+auditorium,Auditorium
+bank,Banque
+bar,Bar
+bench,Banc
+bicycle_parking,Parking à vélos
+bicycle_rental,Location de vélos
+brothel,Bordel
+bureau_de_change,Bureau de change
+bus_station,Arrêt de bus
+cafe,Café
+car_rental,Location de voitures
+car_sharing,Covoiturage
+car_wash,Lavage de voitures
+laundry,Laverie
+casino,Casino
+cinema,Cinéma
+clinic,Clinique
+club,Club
+college,Établissement d'enseignement supérieur
+community_centre,Salle polyvalente
+courthouse,Palais de justice
+crematorium,Crématorium
+dentist,Dentiste
+doctors,Docteurs
+dormitory,Dortoir
+drinking_water,Eau potable
+driving_school,École de conduite
+embassy,Ambassade
+emergency_phone,Téléphone d'urgence
+fast_food,Restauration rapide
+ferry_terminal,Terminal de ferry
+fire_hydrant,Bouche d'incendie
+fire_station,Caserne de pompiers
+fountain,Fontaine
+fuel,Carburant
+grave_yard,Cimetière
+gym,Fitness
+gym,Salle de gymnastique
+hall,Salle
+health_centre,Centre de santé
+hospital,Hôpital
+hotel,Hôtel
+hunting_stand,Stand de tir
+ice_cream,Crème glacée
+kindergarten,Jardin d'enfants
+library,Bibliothèque
+market,Marché
+marketplace,Place de marché
+mountain_rescue,Secours en montagne
+nightclub,Boîte de nuit
+nursery,Nurserie
+nursery,Nurseries
+nursing_home,Maison de santé
+office,Bureau
+park,Parc
+parking,Parking
+pharmacy,Pharmacie
+place_of_worship,Lieu de culte
+police,Police
+post_box,Boîtes aux lettres
+post_office,Bureau de poste
+preschool,Préscolaire
+prison,Prison
+pub,Bar
+public_building,Bâtiment public
+public_market,Marché public
+reception_area,Zone de réception
+recycling,Point de recyclage
+restaurant,Restaurant
+retirement_home,Maison de retraite
+sauna,Sauna
+school,École
+shelter,Refuge
+shop,Magasin
+shopping,Commerce
+social_club,Club social
+studio,Studio
+supermarket,Supermarché
+taxi,Taxi
+telephone,Téléphone public
+theatre,Théâtre
+toilets,Toilettes
+townhall,Hôtel de ville
+university,Université
+vending_machine,Distributeur automatique
+veterinary,Vétérinaire
+village_hall,Salle communale
+waste_basket,Corbeille
+wifi,Accès WiFi
+youth_centre,Centre pour la jeunesse
+administrative,Limite administrative
+apartments,Immeuble
+block,Immeuble
+bunker,Bunker
+chapel,Chapelle
+church,Église
+city_hall,Hôtel de ville
+commercial,Bâtiment de bureaux
+dormitory,Dortoir
+entrance,Entrée de bâtiment
+faculty,Bâtiment de faculté
+farm,Bâtiment de ferme
+flats,Appartements
+garage,Garage
+hall,Salle
+hospital,Bâtiment hospitalier
+hotel,Hôtel
+house,Maison
+industrial,Bâtiment industriel
+office,Bâtiment de bureaux
+public,Bâtiment public
+residential,Bâtiment résidentiel
+retail,Magasin
+school,Bâtiment d'école
+shop,Magasin
+stadium,Stade
+store,Magasin
+terrace,Terrasse
+tower,Tour
+train_station,Gare ferroviaire
+university,Bâtiment d'université
+&quot;yes&quot;,Bâtiment
+bridleway,Chemin pour cavaliers
+bus_guideway,Voie de bus guidée
+bus_stop,Arrêt de bus
+byway,Route secondaire
+construction,Route en construction
+cycleway,Piste cyclable
+distance_marker,Borne kilométrique
+emergency_access_point,Point d'accès d'urgence
+footway,Chemin piéton
+ford,Gué
+gate,Porte
+living_street,Rue résidentielle
+minor,Route mineure
+motorway,Autoroute
+motorway_junction,Jonction d'autoroutes
+motorway_link,Bretelle autoroutière
+path,Chemin
+pedestrian,Chemin piéton
+platform,Plateforme
+primary,Route principale
+primary_link,Route principale
+raceway,Circuit
+residential,Rue Résidentiel
+road,Route
+secondary,Route secondaire
+secondary_link,Route secondaire
+service,Voie de service
+services,Aire de service
+steps,Escalier
+stile,Échalier
+tertiary,Route tertiaire
+track,Chemin
+trail,Piste
+trunk,Voie express
+trunk_link,Bretelle de Voie express
+unclassified,Route mineure
+unsurfaced,Route non revêtue
+archaeological_site,Site archéologique
+battlefield,Champ de bataille
+boundary_stone,Borne frontière
+building,Bâtiment
+castle,Château
+church,Église
+house,Maison
+icon,Icône
+manor,Manoir
+memorial,Mémorial
+mine,Mine
+monument,Monument
+museum,Musée
+ruins,Ruines
+tower,Tour
+wayside_cross,Croix de chemin
+wayside_cross,Calvaire
+wayside_shrine,Oratoire
+wreck,Épave
+allotments,Jardins familiaux
+basin,Bassin
+brownfield,Terrain rasé
+cemetery,Cimetière
+commercial,Zone tertiaire
+conservation,Zone protégée
+construction,Zone en construction
+farm,Zone agricole
+farmland,Terrains agricoles
+farmyard,Bâtiments de ferme
+forest,Forêt
+grass,Zone herborée
+greenfield,Zone de construction future
+industrial,Zone industrielle
+landfill,Décharge
+meadow,Prairie
+military,Zone militaire
+mine,Mine
+mountain,Montagne
+nature_reserve,Réserve naturelle
+park,Parc
+piste,Piste
+plaza,Plaza
+quarry,Carrière
+railway,Voie ferrée
+recreation_ground,Aire de jeux
+reservoir,Réservoir
+residential,Zone résidentielle
+retail,Zone commerciale
+village_green,Zone publique herborée
+vineyard,Vignoble
+wetland,Zone humide
+wood,Bois
+beach_resort,Station balnéaire
+common,Terrains communaux
+fishing,Zone de pêche
+garden,Jardin
+golf_course,Terrain de golf
+ice_rink,Patinoire
+marina,Port de plaisance
+miniature_golf,Golf miniature
+nature_reserve,Réserve naturelle
+park,Parc
+pitch,Terrain de sport
+playground,Aire de jeux
+recreation_ground,Terrain de jeux
+slipway,Cale de lancement
+sports_centre,Centre sportif
+stadium,Stade
+swimming_pool,Piscine
+track,Piste
+water_park,Parc aquatique
+bay,Baie
+beach,Plage
+cape,Cap
+cave_entrance,Entrée de grotte
+channel,Canal
+cliff,Falaise
+coastline,Littoral
+crater,Cratère
+feature,Élément
+fell,Fell
+fjord,Fjord
+geyser,Geyser
+glacier,Glacier
+heath,Bruyère
+hill,Colline
+island,Île
+land,Terre
+marsh,Marécage
+moor,Maure
+mud,Boue
+peak,Pic
+point,Pointe
+reef,Récif
+ridge,Crête
+river,Rivière
+rock,Roche
+scree,Éboulis
+scrub,Broussailles
+shoal,Haut-fond
+spring,Cascade
+strait,Détroit
+tree,Arbre
+valley,Vallée
+volcano,Volcan
+water,Eau
+wetland,Zone humide
+wetlands,Zones humides
+wood,Forêt
+city,Ville
+country,Pays
+county,Comté
+farm,Ferme
+hamlet,Hameau
+house,Maison
+houses,Maisons
+island,Île
+islet,Îlot
+locality,Localité
+moor,Maure
+municipality,Municipalité
+postcode,Code postal
+region,Région
+sea,Mer
+state,État
+subdivision,Subdivision
+suburb,Quartier
+town,Ville
+unincorporated_area,Lieu non organisé
+village,Village
+abandoned,Voie ferrée abandonnée
+construction,Voie ferrée en construction
+disused,Voie ferrée désaffectée
+disused_station,Gare désaffectée
+funicular,Voie de funiculaire
+halt,Arrêt de train
+historic_station,Arrêt de train historique
+junction,Jonction ferroviaire
+level_crossing,Passage à niveau
+light_rail,Petite voie ferrée
+monorail,Monorail
+narrow_gauge,Chemin de fer à voie étroite
+platform,Plateforme ferroviaire
+preserved,Voie ferrée conservée
+spur,Voie de connexion
+station,Gare ferroviaire
+subway,Station de métro
+subway_entrance,Bouche de métro
+switch,Aiguillage
+tram,Tramway
+tram_stop,Arrêt de tram
+yard,Voie de triage
+alcohol,Magasin officiel d'alcool
+apparel,Magasin d'habillement
+art,Boutique d'art
+bakery,Boulangerie
+beauty,Magasin de produits de beauté
+beverages,Magasin de boissons
+bicycle,Magasin de vélos
+books,Librairie
+butcher,Boucher
+butcher,Boucherie
+car,Magasin de voitures
+car_dealer,Vendeur de voitures
+car_parts,Pièces d'automobile
+car_repair,Réparation de voitures
+carpet,Magasin de tapis
+charity,Magasin de bienfaisance
+chemist,Magasin de produits d'hygiène
+clothes,Magasin de vêtements
+computer,Magasin informatique
+confectionery,Confiserie
+convenience,Épicerie
+copyshop,Magasin de photocopies
+cosmetics,Magasin de cosmétiques
+department_store,Grand magasin
+discount,Magasin discount
+doityourself,Magasin de bricolage
+drugstore,Pharmacie
+dry_cleaning,Nettoyage à sec
+dry_cleaning,Nettoyages à sec
+electronics,Magasin d'électronique
+estate_agent,Agent immobilier
+farm,Magasin de produits agricoles
+fashion,Magasin de mode
+fish,Poissonnerie
+florist,Fleuriste
+food,Magasin d'alimentation
+funeral_directors,Pompes funèbres
+furniture,Magasin d'ameublement
+gallery,Galerie
+garden_centre,Jardinerie
+general,Magasin généraliste
+gift,Boutique de cadeaux
+greengrocer,Marchand de fruits et légumes
+grocery,Épicerie
+hairdresser,Coiffeur
+hardware,Quincaillerie
+hifi,Magasin Hi-Fi
+insurance,Assurance
+jewelry,Bijouterie
+kiosk,Kiosque
+laundry,Blanchisserie
+mall,Galerie marchande
+market,Marché
+mobile_phone,Magasin de téléphones mobiles
+motorcycle,Magasin de moto
+music,Magasin de musique
+newsagent,Marchand de journaux
+optician,Opticien
+organic,Magasin bio
+outdoor,Magasin d'activités de plein air
+pet,Magasin d'animaux
+photo,Magasin de photographie
+salon,Salon
+shoes,Magasin de chaussures
+shopping_centre,Centre commercial
+sports,Magasin de sport
+stationery,Papeterie
+supermarket,Supermarché
+toys,Magasin de jouets
+travel_agency,Agence de voyage
+video,Magasin de vidéos
+wine,Caviste
+alpine_hut,Refuge
+artwork,Œuvre d’art
+attraction,Attraction
+bed_and_breakfast,Gîte
+cabin,Hutte
+camp_site,Camping
+caravan_site,Site de caravane
+chalet,Chalet
+guest_house,Maison d'hôte
+hostel,Auberge
+hotel,Hôtel
+information,Informations
+lean_to,Stand
+motel,Motel
+museum,Musée
+picnic_site,Site de pique-nique
+theme_park,Parc à thème
+valley,Vallée
+viewpoint,Point de vue
+zoo,Zoo
+boatyard,Chantier naval
+canal,Canal
+connector,Connexion hydrographique
+dam,Digue
+derelict_canal,Canal de délaissement
+ditch,Fossé
+dock,Dock
+drain,Drain
+lock,Écluse
+lock_gate,Porte d'écluse
+mineral_spring,Source d'eau minérale
+mooring,Mouillage
+rapids,Rapides
+river,Rivière
+riverbank,Lit de rivière
+stream,Ruisseau
+wadi,Oued
+water_point,Point d'eau
+waterfall,Chute d'eau
+weir,Barrage
+butcher,Charcuterie
