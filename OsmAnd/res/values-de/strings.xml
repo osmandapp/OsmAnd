@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
 	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, u.Ä.</string>
 	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine andere Richtungsbestimmung möglich</string>
@@ -81,9 +81,10 @@
 	<string name="route_kr">Rechts halten, dann</string>
 	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
 	<string name="rendering_attr_noPolygons_name">Transparente Flächen</string>
-	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung gemäß Nutzerprofil</string>
+	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
-	<string name="rendering_attr_contourLines_description">Minimale Vergrößerung, ab der Höhenlinien angezegt werden sollen. Höhenlinien müssen meist in Form von zusätzlichen SRTM-Dateien vorhanden sein.</string>
+	<!-- string name="rendering_attr_contourLines_description">Minimale Vergrößerung, ab der Höhenlinien angezeigt werden sollen. Höhenlinien müssen meist in Form von zusätzlichen SRTM-Dateien vorhanden sein.</string -->
+	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt SRTM Datei):</string>
 	<string name="rendering_attr_contourLines_name">Höhenlinien</string>
 	<string name="rendering_attr_hmRendered_description">Erhöht die in der Karte angezeigte Detaildichte</string>
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>

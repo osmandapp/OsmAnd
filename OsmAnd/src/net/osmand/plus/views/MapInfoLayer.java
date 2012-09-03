@@ -347,6 +347,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final OsmandApplication app = view.getApplication();
 		for (final RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(), p.getName());
+			//test old descr as title
+			final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(), p.getAttrName(), p.getName());
 			if(p.isBoolean()) {
 				final CommonPreference<Boolean> pref = view.getApplication().getSettings().getCustomRenderBooleanProperty(p.getAttrName());
 				int icon = 0;
@@ -378,6 +380,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 					@Override
 					public void run() {
 						Builder b = new AlertDialog.Builder(view.getContext());
+						//test old descr as title
+						b.setTitle(propertyDescr);
 						int i = Arrays.asList(p.getPossibleValues()).indexOf(pref.get());
 						b.setSingleChoiceItems(p.getPossibleValues(), i, new OnClickListener() {
 							@Override

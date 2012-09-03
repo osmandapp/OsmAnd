@@ -127,15 +127,16 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return defValue;
 	}
 
-	public String getStringPropertyDescription(String propertyName, String defValue) {
+	public static String getStringPropertyDescription(Context ctx, String propertyName, String defValue) {
 		try {
 			Field f = R.string.class.getField("rendering_attr_" + propertyName + "_description");
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
-				return getString(in);
+				return ctx.getString(in);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.err.println(e.getMessage());
 		}
 		return defValue;
 	}
