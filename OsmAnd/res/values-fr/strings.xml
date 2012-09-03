@@ -1,24 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modification hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser la modification hors ligne</string>
-  <string name="tip_recent_changes_0_7_1_t">"Modifications en 0.7.1 :
-\n\t- Modification hors ligne des POI
+  <string name="tip_recent_changes_0_7_1_t">Modifications en 0.7.1 :
+\n\t- Modification hors ligne des PI
 \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo)
 \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte
 \n\t- Détection de la direction: \'Faîtes demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage
 \n\t- Nouveau message vocal \'Itinéraire recalculé\'
 \n\t- Indication visuelle d\'un tournant imminent dans les 100m en changeant la couleur de la flèche de direction
 \n\t- Etat des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé
-\n\t- Modifications diverses "</string>
+\n\t- Modifications diverses</string>
   <string name="update_poi_does_not_change_indexes">Les modifications de POI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
   <string name="local_openstreetmap_uploading">Envoi…</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Bogues ont été envoyés</string>
+  <string name="local_openstreetmap_were_uploaded">{0} PI/Bogues ont été envoyés</string>
   <string name="local_openstreetmap_uploadall">Tout envoyer</string>
   <string name="local_openstreetmap_items">" "</string>
   <string name="local_openstreetmap_show">Afficher sur la carte</string>
   <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
   <string name="local_openstreetmap_delete">Supprimer la modification</string>
-  <string name="local_openstreetmap_descr_title">Modification asynchrone de points OSM:</string>
+  <string name="local_openstreetmap_descr_title">Édition asynchrone d\'OSM:</string>
   <string name="local_openstreetmap_settings">Points/Bugs OSM enregistrés en local</string>
   <string name="local_openstreetmap_settings_descr">Afficher et gérer les points/Bugs OSM enregistrés dans la base de données locale</string>
   <string name="live_monitoring_descr">Activer l\'envoi de requêtes HTTP à un service web donné</string>
@@ -29,15 +29,15 @@
   <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
   <string name="gpx_monitoring_disabled_warn">Veuillez activer \'Enregistrer l\'itinéraire en GPX\' en paramètre de suivi.</string>
   <string name="show_current_gpx_title">Afficher l\'itinéraire en cours</string>
-  <string name="tip_recent_changes_0_7_0_t">"Changements en 0.7.0 :
+  <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
 \n\t- Données wikipedia hors ligne avec articles
 \n\t- Cartes mises à jour
-\n\t- Petites amélioration diverses "</string>
+\n\t- Petites amélioration diverses</string>
   <string name="free_version_message">Cette version gratuite de OsmAnd est limitée à %1$s téléchargements (%2$s réalisés) et ne supporte pas les articles Wikipedia hors ligne.</string>
   <string name="free_version_title">Version gratuite</string>
-  <string name="poi_context_menu_showdescription">Afficher description POI</string>
-  <string name="index_name_north_america">Amerique du Nord</string>
-  <string name="index_name_us">Amerique du Nord - Etats unis</string>
+  <string name="poi_context_menu_showdescription">Afficher description PI</string>
+  <string name="index_name_north_america">Amérique du Nord</string>
+  <string name="index_name_us">Amérique du Nord - États unis</string>
   <string name="index_name_central_america">Amérique centrale</string>
   <string name="index_name_south_america">Amérique du Sud</string>
   <string name="index_name_europe">Europe</string>
@@ -47,13 +47,13 @@
   <string name="index_name_africa">Afrique</string>
   <string name="index_name_asia">Asie</string>
   <string name="index_name_oceania">Océanie</string>
-  <string name="index_name_other">Cartes mondiales et thematiques</string>
-  <string name="index_name_wiki">Wikipedia Monde</string>
+  <string name="index_name_other">Cartes mondiales et thématiques</string>
+  <string name="index_name_wiki">Wikipédia Monde</string>
   <string name="index_name_voice">Packs voix (enregistrés)</string>
   <string name="index_name_tts_voice">Packs voix (TTS)</string>
-  <string name="amenity_type_wikiosm">Wikipedia (hors ligne)</string>
+  <string name="amenity_type_wikiosm">Wikipédia (hors ligne)</string>
   <string name="amenity_type_user_defined">Défini par l\'utilisateur</string>
-  <string name="fav_export_confirmation">Un fichier de favoris précedemment exporté existe déjà. Voulez vous le remplacer ?</string>
+  <string name="fav_export_confirmation">Un fichier de favoris précédemment exporté existe déjà. Voulez vous le remplacer ?</string>
   <string name="profile_settings">Paramètres de profil</string>
   <string name="settings_preset">Profil d\'utilisation</string>
   <string name="settings_preset_descr">Sélectionner un profil d\'utilisation avec ses réglages de carte et de navigation.</string>
@@ -101,15 +101,15 @@
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="tip_select_destination_point">Sélectionner le point de destination</string>
-  <string name="tip_select_destination_point_t">" \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
-\n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange)."</string>
-  <string name="tip_recent_changes_0_6_9_t">"Changements en 0.6.9 :
+  <string name="tip_select_destination_point_t"> \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
+\n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
+  <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amélioration du rendu des cartes hors ligne
 \n\t- Rendu hors ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
 \n\t- Changements cosmétiques
 \n\t- Infos d\'altitude
 \n\t- Nouvelles traductions (Vietnamien, Polonais)
-\n\t- Améliorations diverses "</string>
+\n\t- Améliorations diverses </string>
   <string name="use_transparent_map_theme_descr">Utiliser les contrôles de transparence de la carte</string>
   <string name="use_transparent_map_theme">Thème de transparence</string>
   <string name="native_library_not_supported">Rendu acceléré non supporté sur cet appareil.</string>
@@ -133,15 +133,15 @@
   <string name="layer_poi_label">Etiquettes PI</string>
   <string name="animate_route_off">Arrêt animation</string>
   <string name="animate_route">Démarrage animation</string>
-  <string name="tip_recent_changes_0_6_8_t">"Changements en 0.6.8 :
+  <string name="tip_recent_changes_0_6_8_t">Changements en 0.6.8 :
 \n\t- Refonte totale de la recherche (PI, Adresse). Rend la recherche d\'adresses plus rapide. Possibilité de rechercher selon différents critères.
 \n\t- Possibilité de chercher les PI par nom sur grande zone (pays)
-\n\t- Résolution clignotement écran sur tablettes(Bug 641)
+\n\t- Résolution clignotement écran sur tablettes (Bug 641)
 \n\t- Option d\'auto-suivi (Bug 356)
 \n\t- Itinéraires GPX déplacés dans le menu \'Directions\' et \'Enregistrer Directions\' déplacé dans \'A propos itinéraire\'
 \n\t- Données PI dans un fichier .obf (téléchargements après le 01/10/11)
 \n\t- Corrections des instructions vocales (sur l\'emplacement GPS et supprimer la première instruction)
-\n\t- Petites améliorations diverses "</string>
+\n\t- Petites améliorations diverses </string>
   <string name="file_can_not_be_renamed">Fichier ne peut être renommé.</string>
   <string name="file_with_name_already_exists">Un fichier avec ce nom existe déjà.</string>
   <string name="gpx_navigation">Itinéraire GPX</string>
@@ -166,7 +166,7 @@
   <string name="search_position_map_view">Dernière vue</string>
   <string name="select_search_position">Recherche autour de :</string>
   <string name="context_menu_item_search">Recherche</string>
-  <string name="tip_recent_changes_0_6_7_t">"Changement pour 0.6.7 :
+  <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
 \n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans OsmAnd)
 \n\t- Favoris et groupes (categorisation, suppression, gestion)
 \n\t- Explorateur GPX dans l\'application (voir les itinéraires, distance, vitesse moyenne, altitude, etc.)
@@ -176,10 +176,10 @@
 \n\t- Téléchargement des traces GPX à la communauté OSM (http://download.osmand.net/gpx/)
 \n\t- Améliorations du rendu vectoriel
 \n\t- Améliorations du moteur de synthèse vocale (distance exacte, support des miles)
-\n\t- Corrections de Bogues "</string>
+\n\t- Corrections de Bogues</string>
   <string name="save_route_dialog_title">Enregistrer l\'itinéraire au format GPX</string>
   <string name="route_successfully_saved_at">Itinéraire correctement enregistré dans \'%1$s\'.</string>
-  <string name="filename_input">"Nom du fichier : "</string>
+  <string name="filename_input">Nom du fichier : </string>
   <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
   <string name="default_buttons_save">Enregistrer</string>
   <string name="menu_save_directions">Enregistrer l\'itinéraire</string>
@@ -221,7 +221,7 @@
   <string name="local_index_address_data">Données adresses</string>
   <string name="local_index_transport_data">Données des transports</string>
   <string name="local_index_map_data">Cartes</string>
-  <string name="local_index_items">" "</string>
+  <string name="local_index_items"> </string>
   <string name="local_indexes_cat_backup">Sauvegarde</string>
   <string name="local_indexes_cat_tts">Données voix (Synt.)</string>
   <string name="local_indexes_cat_voice">Données voix (media)</string>
@@ -236,19 +236,19 @@
   <string name="trace_rendering">Infos de déboggage du rendu</string>
   <string name="trace_rendering_descr">Afficher les performances du rendu pour le déboggage</string>
   <string name="tip_recent_changes">Modifications récentes</string>
-  <string name="tip_recent_changes_0_6_6_t">"Modifications récentes pour 0.6.6 :
+  <string name="tip_recent_changes_0_6_6_t">Modifications récentes pour 0.6.6 :
 \n\t- Moteur de synthèse vocale pour le guidage vocal
 \n\t- Ajout de détail dans le rendu de la carte
 \n\t- Carte mondiale de base incluse dans l\'application
 \n\t- Amélioration du calcul d\'itinéraire hors-ligne (toujours experimental)
 \n\t- Options d\'itinéraire GPX
-\n\t- Améliorations de l\'interface et correction de défauts "</string>
+\n\t- Améliorations de l\'interface et correction de défauts</string>
   <string name="voice_not_use">Non utilisé</string>
   <string name="voice_not_specified">Aucun</string>
   <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
   <string name="internet_connection_required_for_online_route">Vous vous apprêtez à utiliser le calcul d\'itinéraire en ligne mais vous n\'avez pas de connexion internet.</string>
   <string name="tts_language_not_supported_title">Langue non disponible</string>
-  <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale? Sinon la langue par défaut sera utilisée.</string>
+  <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
   <string name="tts_missing_language_data_title">Données manquantes</string>
   <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur le Market ?</string>
   <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
@@ -295,7 +295,7 @@
 \n\tPour créer un lieu Favori, aller dans le Menu contextuel de la carte, selectionner l\'option \'Ajouter aux favoris\' saisir un nom adapté. Après enregistrement, ce lieu est facilement accessible par le menu \'Menu principal\'-&gt;\'Favoris\'.
 \n\tUn long click sur un favoris dans le menu \'Favoris\' permet de le modifier, le supprimer ou de créer un itinéraire pour s\'y rendre.
 \n\tPour afficher tous les favoris sur la carte, activer le calque affichant tous les favoris directement sur la carte dans \'Menu contextuel de la carte\'-&gt;\'Couches\'.</string>
-  <string name="create_poi_link_to_osm_doc">" "<u>OSM en ligne</u> classification des cartes en images"</string>
+  <string name="create_poi_link_to_osm_doc"> <u>OSM en ligne</u> classification des cartes en images</string>
   <string name="error_doing_search">Une erreur est survenue lors de la recherche hors-ligne</string>
   <string name="search_offline_geo_error">Ne peut interpréter le geo intent:\'%s\'</string>
   <string name="search_osm_offline">Recherche d\'adresse dans les cartes hors-ligne</string>
@@ -337,7 +337,7 @@
   <string name="send_location_email_pattern">Pour voir ce lieu, suivre le lien web %1$s ou android %2$s</string>
   <string name="send_location">Envoyer le lieu</string>
   <string name="context_menu_item_share_location">Partager lieu</string>
-  <string name="add_waypoint_dialog_added">Etape \'\'{0}\'\' ajoutée avec succès</string>
+  <string name="add_waypoint_dialog_added">Étape \'\'{0}\'\' ajoutée avec succès</string>
   <string name="add_waypoint_dialog_title">Ajouter une étape à une trace GPX enregistrée</string>
   <string name="context_menu_item_add_waypoint">Ajouter une étape GPX</string>
   <string name="amenity_type_administrative">Administratif</string>
@@ -361,10 +361,10 @@
   <string name="amenity_type_sustenance">Restauration</string>
   <string name="amenity_type_tourism">Tourisme</string>
   <string name="amenity_type_transportation">Transport</string>
-  <string name="indexing_address">"Indexation de l\'adresse "</string>
-  <string name="indexing_map">"Indexation de la carte "</string>
-  <string name="indexing_poi">"Indexation du PI "</string>
-  <string name="indexing_transport">"Indexation du transport "</string>
+  <string name="indexing_address">Indexation de l\'adresse </string>
+  <string name="indexing_map">Indexation de la carte </string>
+  <string name="indexing_poi">Indexation du PI </string>
+  <string name="indexing_transport">Indexation du transport </string>
   <string name="input_output_error">Erreur d\'entrée/sortie</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
@@ -394,7 +394,7 @@
   <string name="loading_builds">Chargement des versions disponibles…</string>
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
-  <string name="gps_status_app_not_found">L\\\'application pour le statut du GPS n\\\'est pas installée. La chercher dans le Market ?</string>
+  <string name="gps_status_app_not_found">L\'application pour le statut du GPS n\'est pas installée. La chercher dans le Market ?</string>
   <string name="voice_is_not_available_msg">Aucune voix n\'est installée. Veuillez aller dans les paramètres et choisir les données vocales à télécharger.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
@@ -410,7 +410,7 @@
   <string name="select_all">Sélectionner tout</string>
   <string name="reload">Recharger</string>
   <string name="fast_route_mode">Itinéraire le plus rapide</string>
-  <string name="fast_route_mode_descr">Activer pour calculer l\\\'itinéraire le plus rapide et désactiver pour calculer l\\\'itinéraire le plus court</string>
+  <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus court</string>
   <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
   <string name="context_menu_item_download_map">Télécharger la carte</string>
   <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
@@ -784,12 +784,12 @@
   <string name="offline_navigation_not_available">Navigation hors ligne OsmAnd temporairement indisponible</string>
   <string name="left_side_navigation">Conduite à gauche</string>
   <string name="left_side_navigation_descr">Activer dans les pays on l\'on conduit à gauche</string>
-  <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élement, pour le désactiver ou le supprimer, faire appui long.\nEspace actuellement disponible sur l\'appareil (%1$s ):</string>
+  <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élément, pour le désactiver ou le supprimer, faire appui long.\nEspace actuellement disponible sur l\'appareil (%1$s ):</string>
   <string name="unknown_from_location">Point de départ pas encore déterminé</string>
   <string name="context_menu_item_directions">Directions à partir d\'ici</string>
-  <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement?</string>
+  <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement ?</string>
   <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement</string>
-  <string name="gpx_index_settings_descr">" (Analyseur GPX inclus)"</string>
+  <string name="gpx_index_settings_descr"> (Analyseur GPX inclus)</string>
   <string name="map_online_plugin_is_not_installed">Activer le greffon des cartes en ligne pour sélectionner différentes sources de cartes</string>
   <string name="map_online_data">Cartes en ligne (images)</string>
   <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharger et conserver en cache sur la carte SD)</string>
@@ -810,7 +810,7 @@
   <string name="prefs_plugins">Gestionnaire de greffons</string>
   <string name="tip_recent_changes_0_8_0_t">Changements en 0.8.0 :
 \n\t- *Fonctionnalité des greffons*\n\t- La majorité des fonctionnalités sont regroupées par familles et peuvent être activées/désactivées dans le Gestionnaire de Greffons. Vous pouvez activer les sources de cartes image (en ligne ou en cache), les paramètres de suivi en ligne et autres nouvelles possibilités.\n\t- *Nouvelles cartes hors ligne*\n\t- Le rendu des cartes devient plus rapide et précis (les côtes et zones d\'eau sont corrigées).\n\t- Vous devez re-télécharger toutes les données de cartes hors-ligne, car les anciennes cartes ne fonctionnent plus.\n\t- *Calcul d\'itinéraire hors-ligne*\n\t- Le calcul d\'itinéraire hors ligne devient beaucoup plus stable\n\t- *Utilisation et ergonomie*\n\t- Améliorée dans de nombreux domaines</string>
-  <string name="osm_editing_plugin_description">Ce greffon permet de gérer la contribution à OSM telle que la collection / modification de POI OSM, l\'ouverture / commentaires de bugs OSM et la contribution de traces GPX (nécessite un compte OSM).</string>
+  <string name="osm_editing_plugin_description">Ce greffon permet de gérer la contribution à OSM telle que la collection / modification de PI OSM, l\'ouverture / commentaires de bugs OSM et la contribution de traces GPX (nécessite un compte OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils</string>
   <string name="simulate_route_progression_manually">Simule la progression sur un itinéraire manuellement</string>
   <string name="play_commands_of_currently_selected_voice">Diffuse les commandes sonores disponibles pour la voix sélectionnée</string>
@@ -910,7 +910,7 @@
   <string name="rendering_attr_noPolygons_name">Pas de polygones</string>
   <string name="rendering_attr_appMode_name">Mode de rendu</string>
   <string name="rendering_attr_appMode_description">Optimisation de la carte par profil utilisateur</string>
-  <string name="rendering_attr_contourLines_description">"Sélectionner le niveau d zoom minimum pour afficher sur la carte si disponible. Un fichier SRTM séparé sera peut-être nécessaire "</string>
+  <string name="rendering_attr_contourLines_description">Sélectionner le niveau d zoom minimum pour afficher sur la carte si disponible. Un fichier SRTM séparé sera peut-être nécessaire.</string>
   <string name="rendering_attr_contourLines_name">Afficher les courbes de niveau</string>
   <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché</string>
   <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
@@ -957,15 +957,15 @@
   <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détecté</string>
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera recalculé quand le lieu sera trouvé</string>
-  <string name="continue_follow_previous_route_auto">La navigation précédente ne s\'était pas terminée. Continuer à la suivre? (%1$s secondes)</string>
+  <string name="continue_follow_previous_route_auto">La navigation précédente ne s\'était pas terminée. Continuer à la suivre ? (%1$s secondes)</string>
   <string name="show_cameras_descr">Montrer les radars (peut être interdit dans certains pays)</string>
   <string name="show_speed_limits_descr">Montrer les limitations de vitesse et les bosses</string>
   <string name="avoid_toll_roads_descr">Éviter les péages lors du calcul de l\'itinéraire</string>
   <string name="show_cameras">Montrer les radars</string>
   <string name="show_speed_limits">Montrer les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changements en 0.8.2 :
-\n\t* Itinéraire amélioré "</string>
+  <string name="tip_recent_changes_0_8_2_t">Changements en 0.8.2 :
+\n\t* Itinéraire amélioré</string>
   <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
   <string name="map_widget_top_text">Nom de rue</string>
   <string name="map_widget_config">Configuration</string>
@@ -1004,7 +1004,7 @@
 <string name="show_warnings_title">Afficher les alarmes</string>
 <string name="show_warnings_descr">Afficher les limitations de vitesses, radars et ralentisseurs</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
-<string name="map_widget_show_ruler">Echelle</string>
+<string name="map_widget_show_ruler">Échelle</string>
 <string name="map_widget_appearance">Divers</string>
 <string name="map_widget_view_direction">Affichage direction</string>
 <string name="map_widget_transparent">Couche transparente</string>
@@ -1036,11 +1036,54 @@
 \n\t\'Détection de la luminosité\'- L\'affichage est contrôllé par le capteur de luminosité de votre appareil, s\'il existe</string>
 <string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
-<string name="tip_recent_changes_0_8_3_t"/>
+<string name="tip_recent_changes_0_8_3_t">Modifications dans la version 0.8.3 :
+\n\t* Amélioration des instructions de navigation</string>
 <string name="snap_to_road_descr">Coller à la route pendant la navigation</string>
 <string name="snap_to_road">Coller à la route</string>
-<string name="osmand_long_description_1000_chars"/>
-<string name="osmand_plus_long_description_1000_chars"/>
-<string name="tip_map_switch_t_v2"/>
-<string name="tip_app_mode_t_v2"/>
+<string name="osmand_long_description_1000_chars">
+OsmAnd (OSM Automated Navigation Directions)
+
+OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas.
+
+Fonctionnalités principales :
+- Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable)
+- Cartes hors lignes compactes disponibles pour le monde entier
+- Téléchargement des cartes pour un pays ou une région directement depuis l\'application
+- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des contours, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable
+- Recherche hors ligne d\'adresses et de lieux (POIs)
+- Navigation hors ligne pour de courtes distances (expérimentale)
+- Mode voiture, vélo et piéton avec :
+- Option de vue jour/nuit automatique
+- Option de zoom automatique lors des déplacements
+- Orientation automatique de la carte (fixe, boussole, azimut)
+
+Limitations de la version gratuite de OsmAnd:
+- Nombre de téléchargement de cartes limité
+- Pas d\'accès aux POIs Wikipedia hors ligne.
+
+OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net.</string>
+<string name="osmand_plus_long_description_1000_chars">
+OsmAnd+ (OSM Automated Navigation Directions)
+
+OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas.
+
+OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
+
+Fonctionnalités principales :
+- Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable)
+- Cartes hors lignes compactes disponibles pour le monde entier
+- Téléchargement ilimités des cartes pour un pays ou une région directement depuis l\'application
+- Points d\'Intérêt (PI) Wikipédia hors ligne, parfait pour le tourisme
+- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des contours, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable
+- Recherche hors ligne d\'adresses et de lieux (PI)
+- Navigation hors ligne pour de courtes distances (expérimentale)
+- Mode voiture, vélo et piéton avec :
+- Option de vue jour/nuit automatique
+- Option de zoom automatique lors des déplacements
+- Orientation automatique de la carte (fixe, boussole, azimut)</string>
+<string name="tip_map_switch_t_v2">\tLes sources des cartes et des couches affichées sont modifiables via \'Menu\' -> \'Couches\'.
+\n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées, des tuiles en ligne prédéfinies (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
+\n\tOsmAnd supporte également des sources personnalisées.</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd supporte différents profils personnalisables pour les différents cas usages.
+\n\tVous pouvez changer les profils via the bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.</string>
 </resources>
