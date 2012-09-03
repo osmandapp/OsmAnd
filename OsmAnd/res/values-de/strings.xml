@@ -6,7 +6,7 @@
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
 	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
 	<string name="auto_zoom_map">Automatischer Zoom</string>
-	<string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
+	<string name="tip_recent_changes_0_8_3_t">Änderungen in 0.8.3 :
 		\n\t* Verbessertes Navigationsverhalten
 		\n\t* Option Vermeide Autobahnen
 		\n\t* Anzeigen von Cycleway=track
@@ -217,7 +217,7 @@
 		\n\t- Die Aktualität auch der deaktivierten Karten wird jetzt im Download-Liste in dunkelgrün und dunkelblau angezeigt
 		\n\t- Weitere Verbesserungen "
 	</string>
-	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb der Applikation beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
+	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
 	<string name="local_openstreetmap_uploading">hochladen…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
@@ -295,7 +295,7 @@
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
 		\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-		\n\tDer Umschaltmechanismus kann unter \'Menü\' -&gt; \'Anzeige konfigurieren\' -&gt; \'Tag/Nacht-Modus\' geändert werden.
+		\n\tDer Umschaltmechanismus kann in der Kartenansicht unter \'Konfigurieren\' -&gt; \'Tag/Nacht-Modus\' geändert werden.
 		\n\tZur Auswahl stehen:
 		\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
 		\n\t\'Tag\' - permanente Tagesansicht
@@ -511,9 +511,9 @@
 		\n\tDazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
 		\n\tZur Auswahl stehen mehrere Übertragungswege: E-Mail, SMS, oder die Lokationskoordinaten einfach in die Ablage (Clipboard) kopieren.</string>
 	<string name="tip_favorites">Favoriten</string>
-	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als Favoriten speichern.
+	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als &lt;i&gt;Favoriten&lt;/i&gt; speichern.
 		\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
-		\n\t Favoriten sind leicht zugänglich über \'Hauptmenü\' -&gt; \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
+		\n\t Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
 		\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' -&gt; \'Darstellung\' einen Haken bei \'Favoriten\' setzen.
 	</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
@@ -1093,7 +1093,7 @@
 	<string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>
 	<string name="map_widget_next_next_turn">Übernächste Abzweigung</string>
 	<string name="map_widget_mini_route">Mini-Routenkarte</string>
-	<string name="bg_service_screen_lock">Bildschirm\n sperren</string>
+	<string name="bg_service_screen_lock">Bildschirm sperren</string>
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
