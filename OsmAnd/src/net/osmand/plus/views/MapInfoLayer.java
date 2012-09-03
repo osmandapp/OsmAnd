@@ -348,7 +348,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		for (final RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(), p.getName());
 			//test old descr as title
-			String propertyDescr = SettingsActivity.getStringPropertyDescription(p.getAttrName(), p.getName());
+			String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(), p.getAttrName(), p.getName());
 			if(p.isBoolean()) {
 				final CommonPreference<Boolean> pref = view.getApplication().getSettings().getCustomRenderBooleanProperty(p.getAttrName());
 				int icon = 0;

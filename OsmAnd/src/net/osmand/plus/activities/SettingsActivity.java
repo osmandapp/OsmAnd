@@ -127,7 +127,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		return defValue;
 	}
 
-	public static String getStringPropertyDescription(String propertyName, String defValue) {
+	public static String getStringPropertyDescription(Context ctx, String propertyName, String defValue) {
 		try {
 			Field f = R.string.class.getField("rendering_attr_" + propertyName + "_description");
 			if (f != null) {
