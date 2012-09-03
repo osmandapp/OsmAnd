@@ -490,11 +490,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
                 // Set destination point
                 settings.setPointToNavigate(latitude, longitude, name);
+                mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate());
 
                 // Show route + directions to destination
                 Location loc = new Location("map");
                 loc.setLatitude(latitude);
                 loc.setLongitude(longitude);
+
                 // TODO(natashaj): followEnabled should be chosen based on user choice
                 getMapActions().getDirections(loc, true /*followEnabled*/);
             } else if (requestCode == SELECT_PLACE_FOR_DISPLAY && resultCode == PlacePickerActivity.SELECT_PLACE_RESULT_OK) {

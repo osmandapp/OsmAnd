@@ -400,8 +400,7 @@ public class MapActivityActions implements DialogProvider {
     }
     
     
-	public void getDirections(final Location from, boolean followEnabled) {
-
+	private void getDirectionsBasedOnOptions(final Location from, boolean followEnabled) {
 		final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 
 		Builder builder = new AlertDialog.Builder(mapActivity);
@@ -530,7 +529,44 @@ public class MapActivityActions implements DialogProvider {
 		}
 		builder.show();
 	}
-    
+
+	// For the prototype, change getDirections method to not show an alert dialog.
+	// Assume ApplicationMode.CAR mode which always chooses to follow the route.
+	public void getDirections(final Location from, boolean followEnabled) {
+            final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+	    if (!checkPointToNavigate()) {
+                return;
+	    }
+            boolean msg = true;
+            Location current = from;
+            if (!mapActivity.isPointAccurateForRouting(from)) {
+                    current = null;
+            }
+            Location lastKnownLocation = mapActivity.getLastKnownLocation();
+            if (mapActivity.isPointAccurateForRouting(lastKnownLocation)) {
+                    current = lastKnownLocation;
+                    msg = false;
+            }
+            if (msg) {
+                    AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
+            }
+            ApplicationMode mode = ApplicationMode.CAR;
+            // change global settings
+            settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+            boolean changed = settings.APPLICATION_MODE.set(mode);
+            if (changed) {
+                    mapActivity.updateApplicationModeSettings();
+                    mapActivity.getMapView().refreshMap(true);
+            }
+
+            routingHelper.setAppMode(mode);
+            settings.FOLLOW_THE_ROUTE.set(true);
+            settings.FOLLOW_THE_GPX_ROUTE.set(null);
+            routingHelper.setFollowingMode(true);
+            routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), current);
+            getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
+	}
+
     protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
