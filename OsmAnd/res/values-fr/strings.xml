@@ -965,7 +965,11 @@
   <string name="show_speed_limits">Montrer les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
   <string name="tip_recent_changes_0_8_2_t">Changements en 0.8.2 :
-\n\t* Itinéraire amélioré</string>
+\n\t* Navigation améliorée
+\n\t* Widgets de carte dynamiques
+\n\t* Configuration de la carte déplacée sur l\'écran
+\n\t* Bouton de verrouillage écran avec services d\'enregistrement de traces
+\n\t* Correction pour langues écrites de droite à gauche (Arabe, Hébreux, etc.)</string>
   <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
   <string name="map_widget_top_text">Nom de rue</string>
   <string name="map_widget_config">Configuration</string>
