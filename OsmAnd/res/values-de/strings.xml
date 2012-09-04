@@ -68,26 +68,25 @@
 		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 	</string>
 	<string name="select_navigation_mode">Transportmittel wählen</string>
-	<string name="day_night_info_description">Sonnenaufgang : %1$s
-		\nSonnenuntergang : %2$s
+	<string name="day_night_info_description">Sonnenaufgang: %1$s \nSonnenuntergang: %2$s
 	</string>
 	<string name="day_night_info">Tag/Nacht-Information</string>
-	<string name="asap">ASAP</string>
-	<string name="save_route_as_gpx">Route als GPX Datei speichern</string>
-	<string name="route_roundabout">Kreisverkehr : Nehmen Sie die %1$d Ausfahrt, dann</string>
+	<string name="asap">So bald wie möglich</string>
+	<string name="save_route_as_gpx">Route als GPX-Datei speichern</string>
+	<string name="route_roundabout">Kreisverkehr: Nehmen Sie die %1$d Ausfahrt, dann</string>
 	<string name="route_kl">Links halten, dann</string>
 	<string name="route_kr">Rechts halten, dann</string>
 	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
 	<string name="rendering_attr_noPolygons_name">Transparente Flächen</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
-	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt SRTM Datei):</string>
-	<string name="rendering_attr_contourLines_name">Höhenlinien</string>
-	<string name="rendering_attr_hmRendered_description">Erhöht die in der Karte angezeigte Detaildichte</string>
+	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt SRTM-Datei):</string>
+	<string name="rendering_attr_contourLines_name">Höhenlinien anzeigen</string>
+	<string name="rendering_attr_hmRendered_description">Erhöht den dargestellten Detailgrad der Karte</string>
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
 	<string name="map_online_data">Online-Karten (Kacheln)</string>
-	<string name="map_online_data_descr">"Verwende Online-Karten (lädt Kacheln aus dem Internet und speichert sie im Unterordner 'tiles')"</string>
+	<string name="map_online_data_descr">Online-Karten verwenden (lädt Kacheln aus dem Internet und speichert diese auf der SD-Karte)</string>
 	<string name="online_map_settings">Online-Karten</string>
 	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen</string>
 	<string name="map_settings">Karten-Einstellungen</string>
