@@ -89,7 +89,7 @@
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
 	<string name="map_online_data">Online-Karten (Kacheln)</string>
-	<string name="map_online_data_descr">Verwende Online-Karten (lädt Kacheln aus dem Internet und speichert sie im Unterordner \'tiles\')</string>
+	<string name="map_online_data_descr">"Verwende Online-Karten (lädt Kacheln aus dem Internet und speichert sie im Unterordner 'tiles')"</string>
 	<string name="online_map_settings">Online-Karten</string>
 	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen</string>
 	<string name="map_settings">Karten-Einstellungen</string>
