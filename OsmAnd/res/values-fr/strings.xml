@@ -917,7 +917,7 @@
   <string name="save_route_as_gpx">Enregistrer l\'itinéraire au format GPX</string>
   <string name="asap">ASAP</string>
   <string name="tip_recent_changes_0_8_1_t">Changements en 0.8.1 :
-\n\t* Routes plus précises (un peu lent)\n\t* Correction de parcours rapide et efficace\n\t* Direction par voies\n\t* Information à propos des limitations de vitesse, radars et des bosses\n\t* Guidage par la voix sur autoroute amélioré\n\t* Plugin parking (\"Où est-ce que ma voiture est garée ?\")\n\t* Activation/désactivation widget d\'enregistrement</string>
+\n\t* Routes plus précises (un peu lent)\n\t* Correction de parcours rapide et efficace\n\t* Direction par voies\n\t* Information à propos des limitations de vitesse, radars et des bosses\n\t* Guidage par la voix sur autoroute amélioré\n\t* Greffon parking (\"Où est-ce que ma voiture est garée ?\")\n\t* Activation/désactivation du gadget d\'enregistrement</string>
   <string name="gpxup_public">Public</string>
   <string name="gpxup_identifiable">Identifiable</string>
   <string name="gpxup_trackable">Suivi</string>
@@ -966,7 +966,7 @@
   <string name="avoid_toll_roads">Éviter les péages</string>
   <string name="tip_recent_changes_0_8_2_t">Changements en 0.8.2 :
 \n\t* Navigation améliorée
-\n\t* Widgets de carte dynamiques
+\n\t* Gadgets de carte dynamiques
 \n\t* Configuration de la carte déplacée sur l\'écran
 \n\t* Bouton de verrouillage écran avec services d\'enregistrement de traces
 \n\t* Correction pour langues écrites de droite à gauche (Arabe, Hébreux, etc.)</string>
@@ -1090,5 +1090,5 @@ Fonctionnalités principales :
 \n\tOsmAnd supporte également des sources personnalisées.</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporte différents profils personnalisables pour les différents cas usages.
 \n\tVous pouvez changer les profils via the bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.</string>
-<string name="avoid_motorway">Eviter autoroutes</string>
+<string name="avoid_motorway">Éviter les autoroutes</string>
 </resources>
