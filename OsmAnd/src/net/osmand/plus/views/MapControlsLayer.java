@@ -41,8 +41,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int SHOW_ZOOM_LEVEL_MSG_ID = 3;
 	private static final int SHOW_ZOOM_LEVEL_DELAY = 2000;
+	private static final double MENU_OPTION_MARGIN_PERCENT = 0.125;
 	
-
 	private OsmandMapTileView view;
 	private DisplayMetrics dm;
 	private final MapActivity activity;
@@ -62,6 +62,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private float cachedRotate = 0;
 	private FollowMode followMode;
 	private boolean isCurrentlyRouting = false;
+	private int menuOptionHeightNoMargin;
 	
 	private TextPaint zoomTextPaint;
 	private Drawable zoomShadow;
@@ -105,6 +106,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		showUIHandler = new Handler();
 		
 		numInitializedMenuOptions = 0;
+		menuOptionHeightNoMargin = getMenuOptionHeight(view);
 		initRoutingButton(view, parent);
 		// TODO(natashaj): Disabling search button until UI is updated for prototype
 		//initSearchButton(view, parent);
@@ -267,29 +269,38 @@ public class MapControlsLayer extends OsmandMapLayer {
 	    rulerDrawable = view.getResources().getDrawable(R.drawable.ruler);
 	}
 
-
-	private double getMinimumButtonHeight(final OsmandMapTileView view) {
-	    return view.getResources().getDrawable(R.drawable.map_zoom_in_vertical).getMinimumHeight() * 1.25;
-        }
- 
-        private Button addButtonOption(int backgroundResourceId, final OsmandMapTileView view, FrameLayout parent) {
-               Button button = new Button(view.getContext());
-               button.setBackgroundResource(backgroundResourceId);
-               addOption(button, view, parent);
-               return button;
+        private int getMenuOptionHeight(final OsmandMapTileView view) {
+            return (int)view.getResources().getDrawable(R.drawable.map_zoom_in_vertical).getMinimumHeight();
         }
 
-        private void addOption(View menuOptionView, final OsmandMapTileView view, FrameLayout parent) {
+	private int getMinimumMenuOptionHeight() {
+	    return menuOptionHeightNoMargin + getMenuOptionMargin() * 2 /* top + bottom */;
+        }
+
+	private int getMenuOptionMargin() {
+	    return (int)(menuOptionHeightNoMargin * MENU_OPTION_MARGIN_PERCENT);
+	}
+
+        private Button addButtonOption(int backgroundResourceId, FrameLayout parent) {
+            Button button = new Button(view.getContext());
+            button.setBackgroundResource(backgroundResourceId);
+            addOption(button, parent);
+            return button;
+        }
+
+        private void addOption(View menuOptionView, FrameLayout parent) {
             android.widget.FrameLayout.LayoutParams params =
                     new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                             LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
-            params.setMargins(0, (int)(getMinimumButtonHeight(view) * numInitializedMenuOptions), 0, 0);
+            int margin = getMenuOptionMargin();
+            params.setMargins(0, margin + getMinimumMenuOptionHeight() * numInitializedMenuOptions,
+                    margin, margin);
             parent.addView(menuOptionView, params);
             numInitializedMenuOptions++;
         }
 
         private void initRoutingButton(final OsmandMapTileView view, FrameLayout parent) {
-            routingButton = addButtonOption(getRoutingResourceId(), view, parent);
+            routingButton = addButtonOption(getRoutingResourceId(), parent);
             routingButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -330,8 +341,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton = new Button(ctx);
 		backToMenuButton.setContentDescription(ctx.getString(R.string.backToMenu));
 		backToMenuButton.setBackgroundResource(R.drawable.map_back_to_menu);
+		
 		params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 					Gravity.TOP | Gravity.LEFT);
+		params.setMargins(getMenuOptionMargin(), getMenuOptionMargin(), 0, 0);
 		parent.addView(backToMenuButton, params);
 		backToMenuButton.setEnabled(true);
 		
@@ -348,7 +361,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 	
         private void initSearchButton(final OsmandMapTileView view, FrameLayout parent) {
-            searchButton = addButtonOption(R.drawable.map_search, view, parent);
+            searchButton = addButtonOption(R.drawable.map_search, parent);
             searchButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -364,12 +377,11 @@ public class MapControlsLayer extends OsmandMapLayer {
             });
         }
         
-
        private void initFollowModeButton(final OsmandMapTileView view, FrameLayout parent) {
            if (followMode == null) {
                setFollowMode(FollowMode.FOLLOW_COMPASS);
            }
-           followModeButton = addButtonOption(getFollowModeResourceId(followMode), view, parent);
+           followModeButton = addButtonOption(getFollowModeResourceId(followMode), parent);
            followModeButton.setOnClickListener(new View.OnClickListener() {
                @Override
                public void onClick(View v) {
@@ -449,7 +461,7 @@ public class MapControlsLayer extends OsmandMapLayer {
                        }
                });
                compassView.setImageDrawable(compass);
-               addOption(compassView, view, parent);
+               addOption(compassView, parent);
        }
 
        private void initZoomButtons(final OsmandMapTileView view, FrameLayout parent) {
@@ -467,8 +479,8 @@ public class MapControlsLayer extends OsmandMapLayer {
                
                zoomShadow = view.getResources().getDrawable(R.drawable.zoom_background_vertical);
                
-               zoomInButton = addButtonOption(R.drawable.map_zoom_in_vertical, view, parent);
-               zoomOutButton = addButtonOption(R.drawable.map_zoom_out_vertical, view, parent);
+               zoomInButton = addButtonOption(R.drawable.map_zoom_in_vertical, parent);
+               zoomOutButton = addButtonOption(R.drawable.map_zoom_out_vertical, parent);
 	
 		activity.accessibleContent.add(zoomInButton);
 		activity.accessibleContent.add(zoomOutButton);
@@ -605,8 +617,5 @@ public class MapControlsLayer extends OsmandMapLayer {
 					rulerTextPaint, shadowColor);
 		}
 	}
-
-
-	
 
 }
