@@ -4,14 +4,14 @@
 	android:orientation="horizontal">
 
 	<ImageView android:id="@+id/poi_icon" android:layout_width="26dp" android:layout_height="26dp"
-		android:layout_marginLeft="2dp" android:layout_marginTop="2dp"
-		android:paddingTop="0dp" />
+	    android:layout_marginLeft="8dp" android:layout_gravity="center_vertical"
+	    android:contentDescription="@string/poi"/>
 	
 	<TextView android:id="@+id/poidistance_label"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"
+		android:layout_width="wrap_content" android:layout_height="60dp" android:gravity="center"
 		android:textSize="22sp" android:maxWidth="120dp" android:minWidth="120dp"/>
 
 	<TextView android:id="@+id/poi_label" android:layout_width="wrap_content"
-		android:layout_height="wrap_content" android:textSize="22sp" />
+		android:layout_height="wrap_content" android:textSize="22sp"/>
 
 </LinearLayout>
