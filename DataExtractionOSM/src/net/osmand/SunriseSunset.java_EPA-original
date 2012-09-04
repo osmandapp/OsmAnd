@@ -171,7 +171,11 @@ package net.osmand;
 *				
 *----------------------------------------------------------------------------*/
 
-import java.util.Calendar;
+// Import required classes and packages
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.text.NumberFormat;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -214,10 +218,15 @@ public class SunriseSunset
 	private	int		iDay;					// day of date of interest
 	private	int		iCount;					// a simple counter
 	private	int		iSign;					// SUNUP.BAS: S
-	private int  	dfHourRise, dfHourSet;	// hour of event: SUNUP.BAS H3
-	private int 	dfMinRise, dfMinSet;	// minute of event: SUNUP.BAS M3
+	private double	dfHourRise, dfHourSet;	// hour of event: SUNUP.BAS H3
+	private double	dfMinRise, dfMinSet;	// minute of event: SUNUP.BAS M3
 	private	double	dfSinLat, dfCosLat;		// sin and cos of latitude
 	private	double	dfZenith;				// SUNUP.BAS Z: Zenith
+//	private	SimpleDateFormat dfmtDate;		// formatting for date alone
+	private	SimpleDateFormat dfmtDateTime;	// formatting for date and time
+	private	SimpleDateFormat dfmtYear;		// formatting for year
+	private	SimpleDateFormat dfmtMonth;		// formatting for month
+	private	SimpleDateFormat dfmtDay;		// formatting for day
 	// Many variables in SUNUP.BAS have undocumented meanings, 
 	// and so are translated rather directly to avoid confusion:
 	private	double	dfAA1 = 0, dfAA2 = 0;	// SUNUP.BAS A(2)
@@ -235,6 +244,9 @@ public class SunriseSunset
 	private	double	dfL0, dfL2;				// SUNUP.BAS L0, L2
 	private	double	dfT, dfT0, dfTT;		// SUNUP.BAS T, T0, TT
 	private	double	dfV0, dfV1, dfV2;		// SUNUP.BAS V0, V1, V2
+	
+	private TimeZone tz = TimeZone.getTimeZone( "GMT" );
+	private double origTimeZone;
 	
 	
 /******************************************************************************
@@ -261,6 +273,7 @@ public class SunriseSunset
 		dfLon 		= dfLonIn;
 		dateInput 	= dateInputIn;
 		dfTimeZone 	= dfTimeZoneIn;
+		origTimeZone= dfTimeZoneIn;
 
 		// Call the method to do the calculations.
 		doCalculations();
@@ -277,18 +290,30 @@ public class SunriseSunset
 *----------------------------------------------------------------------------*/
 	private void doCalculations()
 	{
-			// Break out day, month, and year from date provided using local time zone.
-			// (This is necessary for the math algorithms.)
-			Calendar cin = Calendar.getInstance();
-			cin.setTime(dateInput);
-	
-			iYear  = cin.get(Calendar.YEAR); 
-			iMonth = cin.get(Calendar.MONTH) + 1; 
-			iDay   = cin.get(Calendar.DAY_OF_MONTH); 
-	
+		try
+		{
+			// Break out day, month, and year from date provided.
+			// (This is necesary for the math algorithms.)
+
+			dfmtYear  = new SimpleDateFormat( "yyyy" );
+			dfmtYear.setLenient( false );
+			dfmtYear.setTimeZone( tz );
+
+			dfmtMonth = new SimpleDateFormat( "M" );
+			dfmtMonth.setLenient( false );
+			dfmtMonth.setTimeZone( tz );
+
+			dfmtDay   = new SimpleDateFormat( "d" );
+			dfmtDay.setLenient( false );
+			dfmtDay.setTimeZone( tz );
+			
+			iYear  = Integer.parseInt(  dfmtYear.format( dateInput ) );
+			iMonth = Integer.parseInt( dfmtMonth.format( dateInput ) );
+			iDay   = Integer.parseInt(   dfmtDay.format( dateInput ) );
+					
 			// Convert time zone hours to decimal days (SUNUP.BAS line 50)
 			dfTimeZone = dfTimeZone / 24.0;
-	
+
 			// NOTE: (7 Feb 2001) Here is a non-standard part of SUNUP.BAS:
 			// It (and this algorithm) assumes that the time zone is 
 			// positive west, instead of the standard negative west.
@@ -296,10 +321,10 @@ public class SunriseSunset
 			// times zones are specified in negative west, so here the 
 			// sign is changed so that the SUNUP algorithm works:
 			dfTimeZone = -dfTimeZone;
-	
+
 			// Convert longitude to fraction (SUNUP.BAS line 50)
 			dfLon = dfLon / 360.0;
-	
+
 			// Convert calendar date to Julian date:
 			// Check to see if it's later than 1583: Gregorian calendar
 			// When declared, bGregorian is initialized to false.
@@ -307,18 +332,18 @@ public class SunriseSunset
 			if( iYear >= 1583 ) bGregorian = true;
 			// SUNUP.BAS 1210
 			dfJ = -Math.floor( 7.0		// SUNUP used INT, not floor
-					* ( Math.floor( 
-							( iMonth + 9.0 )
-							/ 12.0
-							) + iYear
-							) / 4.0
-					)
-					// add SUNUP.BAS 1240 and 1250 for G = 0
-					+ Math.floor( iMonth * 275.0 / 9.0 )
-					+ iDay
-					+ 1721027.0
-					+ iYear * 367.0;
-	
+							 * ( Math.floor( 
+										    ( iMonth + 9.0 )
+										    / 12.0
+										   ) + iYear
+							    ) / 4.0
+							 )
+				// add SUNUP.BAS 1240 and 1250 for G = 0
+				+ Math.floor( iMonth * 275.0 / 9.0 )
+				+ iDay
+				+ 1721027.0
+				+ iYear * 367.0;
+				
 			if ( bGregorian )
 			{
 				// SUNUP.BAS 1230
@@ -327,22 +352,22 @@ public class SunriseSunset
 				dfA = Math.abs( iMonth - 9.0 );
 				// SUNUP.BAS 1240 and 1250
 				dfJ3 = -Math.floor(
-						(
-								Math.floor(
-										Math.floor( iYear 
-												+ (double)iSign 
-												* Math.floor( dfA / 7.0 )
-												)
-												/ 100.0
-										) + 1.0
-								) * 0.75
-						);
+								  (
+						 Math.floor(
+					 	  Math.floor( iYear 
+									 + (double)iSign 
+									   * Math.floor( dfA / 7.0 )
+								    )
+								    / 100.0
+								   ) + 1.0
+								  ) * 0.75
+								 );
 				// correct dfJ as in SUNUP.BAS 1240 and 1250 for G = 1
 				dfJ = dfJ + dfJ3 + 2.0;
 			}
 			// SUNUP.BAS 1290
 			iJulian = (int)dfJ - 1;
-	
+			
 			// SUNUP.BAS 60 and 70 (see also line 1290)
 			dfT = (double)iJulian - 2451545.0 + 0.5;
 			dfTT = dfT / 36525.0 + 1.0;				// centuries since 1900
@@ -353,13 +378,13 @@ public class SunriseSunset
 					+ 24110.5
 					+ dfTimeZone * 86636.6
 					+ dfLon * 86400.0
-					)
-					/ 86400.0;
+				  )
+				  / 86400.0;
 			dfT0 = dfT0 - Math.floor( dfT0 );	// NOTE: SUNUP.BAS uses INT()
 			dfT0 = dfT0 * 2.0 * Math.PI;
 			// SUNUP.BAS 90
 			dfT = dfT + dfTimeZone;
-	
+
 			// SUNUP.BAS 110: Get Sun's position
 			for( iCount=0; iCount<=1; iCount++ )	// Loop thru only twice
 			{
@@ -367,7 +392,7 @@ public class SunriseSunset
 				//   at the start and end of each day.
 				// SUNUP.BAS 910 - 1160: Fundamental arguments
 				//   from van Flandern and Pulkkinen, 1979
-	
+				
 				// declare local temporary doubles for calculations
 				double	dfGG;						// SUNUP.BAS G
 				double	dfLL;						// SUNUP.BAS L
@@ -388,27 +413,27 @@ public class SunriseSunset
 						- 0.01000 * Math.sin( dfLL - dfGG )
 						+ 0.00333 * Math.sin( dfLL + dfGG )
 						- 0.00021 * Math.sin( dfLL ) * dfTT;
-	
+						
 				dfUU = 1
-						- 0.03349 * Math.cos( dfGG )
+					    - 0.03349 * Math.cos( dfGG )
 						- 0.00014 * Math.cos( dfLL * 2.0 )
 						+ 0.00008 * Math.cos( dfLL );
-	
+		
 				dfWW = - 0.00010
 						- 0.04129 * Math.sin( dfLL * 2.0 )
 						+ 0.03211 * Math.sin( dfGG )
 						- 0.00104 * Math.sin( 2.0 * dfLL - dfGG )
 						- 0.00035 * Math.sin( 2.0 * dfLL + dfGG )
 						- 0.00008 * Math.sin( dfGG ) * dfTT;
-	
+						
 				// Compute Sun's RA and Dec; SUNUP.BAS 1120 - 1140
 				dfSS = dfWW / Math.sqrt( dfUU - dfVV * dfVV );
 				dfA5 = dfLL 
-						+ Math.atan( dfSS / Math.sqrt( 1.0 - dfSS * dfSS ));
-	
+					   + Math.atan( dfSS / Math.sqrt( 1.0 - dfSS * dfSS ));
+					
 				dfSS = dfVV / Math.sqrt( dfUU );
 				dfD5 = Math.atan( dfSS / Math.sqrt( 1 - dfSS * dfSS ));					
-	
+					
 				// Set values and increment t
 				if ( iCount == 0 )		// SUNUP.BAS 125
 				{
@@ -422,30 +447,30 @@ public class SunriseSunset
 				}
 				dfT = dfT + 1.0;		// SUNUP.BAS 130
 			}	// end of Get Sun's Position for loop
-	
+				
 			if ( dfAA2 < dfAA1 ) dfAA2 = dfAA2 + 2.0 * Math.PI;
-			// SUNUP.BAS 150
+															// SUNUP.BAS 150
 	
 			dfZenith = Math.PI * 90.833 / 180.0;			// SUNUP.BAS 160
 			dfSinLat = Math.sin( dfLat * Math.PI / 180.0 );	// SUNUP.BAS 170
 			dfCosLat = Math.cos( dfLat * Math.PI / 180.0 );	// SUNUP.BAS 170
-	
+				
 			dfA0 = dfAA1;									// SUNUP.BAS 190
 			dfD0 = dfDD1;									// SUNUP.BAS 190
 			dfDA = dfAA2 - dfAA1;							// SUNUP.BAS 200
 			dfDD = dfDD2 - dfDD1;							// SUNUP.BAS 200
-	
+				
 			dfK1 = 15.0 * 1.0027379 * Math.PI / 180.0;		// SUNUP.BAS 330
 	
 			// Initialize sunrise and sunset times, and other variables
 			// hr and min are set to impossible times to make errors obvious
-			dfHourRise = 99;
-			dfMinRise  = 99;
-			dfHourSet  = 99;
-			dfMinSet   = 99;
+			dfHourRise = 99.0;
+			dfMinRise  = 99.0;
+			dfHourSet  = 99.0;
+			dfMinSet   = 99.0;
 			dfV0 = 0.0;		// initialization implied by absence in SUNUP.BAS
 			dfV2 = 0.0;		// initialization implied by absence in SUNUP.BAS
-	
+				
 			// Test each hour to see if the Sun crosses the horizon
 			//   and which way it is heading.
 			for( iCount=0; iCount<24; iCount++ )			// SUNUP.BAS 210
@@ -454,7 +479,7 @@ public class SunriseSunset
 				double	tempB;								// SUNUP.BAS B
 				double	tempD;								// SUNUP.BAS D
 				double	tempE;								// SUNUP.BAS E
-	
+					
 				dfC0 = (double)iCount;
 				dfP = ( dfC0 + 1.0 ) / 24.0;				// SUNUP.BAS 220
 				dfA2 = dfAA1 + dfP * dfDA;					// SUNUP.BAS 230
@@ -467,44 +492,44 @@ public class SunriseSunset
 				dfH1 = ( dfH2 + dfH0 ) / 2.0;				// SUNUP.BAS 520
 				// declination at half hour
 				dfD1 = ( dfD2 + dfD0 ) / 2.0;				// SUNUP.BAS 530
-	
+					
 				// Set value of dfV0 only if this is the first hour, 
 				// otherwise, it will get set to the last dfV2 (SUNUP.BAS 250)
 				if ( iCount == 0 )							// SUNUP.BAS 550
 				{	
 					dfV0 = dfSinLat * Math.sin( dfD0 )
-							+ dfCosLat * Math.cos( dfD0 ) * Math.cos( dfH0 )
-							- Math.cos( dfZenith );			// SUNUP.BAS 560
+						 + dfCosLat * Math.cos( dfD0 ) * Math.cos( dfH0 )
+						 - Math.cos( dfZenith );			// SUNUP.BAS 560
 				}
 				else
 					dfV0 = dfV2;	// That is, dfV2 from the previous hour.
-	
+				
 				dfV2 = dfSinLat * Math.sin( dfD2 )
-						+ dfCosLat * Math.cos( dfD2 ) * Math.cos( dfH2 )
-						- Math.cos( dfZenith );			// SUNUP.BAS 570
-	
+						 + dfCosLat * Math.cos( dfD2 ) * Math.cos( dfH2 )
+						 - Math.cos( dfZenith );			// SUNUP.BAS 570
+					
 				// if dfV0 and dfV2 have the same sign, then proceed to next hr
 				if ( 
-						( dfV0 >= 0.0 && dfV2 >= 0.0 )		// both are positive
-						||								// or
-						( dfV0 < 0.0 && dfV2 < 0.0 ) 		// both are negative
-						)
+					 ( dfV0 >= 0.0 && dfV2 >= 0.0 )		// both are positive
+					 ||								// or
+					 ( dfV0 < 0.0 && dfV2 < 0.0 ) 		// both are negative
+				   )
 				{
 					// Break iteration and proceed to test next hour
 					dfA0 = dfA2;							// SUNUP.BAS 250
 					dfD0 = dfD2;							// SUNUP.BAS 250
 					continue;								// SUNUP.BAS 610
 				}
-	
+					
 				dfV1 = dfSinLat * Math.sin( dfD1 )
-						+ dfCosLat * Math.cos( dfD1 ) * Math.cos( dfH1 )
-						- Math.cos( dfZenith );				// SUNUP.BAS 590
+					 + dfCosLat * Math.cos( dfD1 ) * Math.cos( dfH1 )
+					 - Math.cos( dfZenith );				// SUNUP.BAS 590
 	
 				tempA = 2.0 * dfV2 - 4.0 * dfV1 + 2.0 * dfV0;
-				// SUNUP.BAS 600
+															// SUNUP.BAS 600
 				tempB = 4.0 * dfV1 - 3.0 * dfV0 - dfV2;		// SUNUP.BAS 600
 				tempD = tempB * tempB - 4.0 * tempA * dfV0;	// SUNUP.BAS 610
-	
+					
 				if ( tempD < 0.0 ) 
 				{
 					// Break iteration and proceed to test next hour
@@ -512,11 +537,11 @@ public class SunriseSunset
 					dfD0 = dfD2;							// SUNUP.BAS 250
 					continue;								// SUNUP.BAS 610
 				}
-	
+					
 				tempD = Math.sqrt( tempD );					// SUNUP.BAS 620
 	
 				// Determine occurence of sunrise or sunset.
-	
+					
 				// Flags to identify occurrence during this day are 
 				// bSunriseToday and bSunsetToday, and are initialized false.
 				// These are set true only if sunrise or sunset occurs 
@@ -525,7 +550,7 @@ public class SunriseSunset
 				// Flags to identify occurrence during this hour:
 				bSunrise = false;				// reset before test
 				bSunset  = false;				// reset before test
-	
+					
 				if ( dfV0 < 0.0 && dfV2 > 0.0 )	// sunrise occurs this hour
 				{
 					bSunrise = true;			// SUNUP.BAS 640
@@ -537,41 +562,41 @@ public class SunriseSunset
 					bSunset = true;				// SUNUP.BAS 660
 					bSunsetToday = true;		// sunset occurred today
 				}
-	
+					
 				tempE = ( tempD - tempB ) / ( 2.0 * tempA );
 				if ( tempE > 1.0 || tempE < 0.0 )	// SUNUP.BAS 670, 680
 					tempE = ( -tempD - tempB ) / ( 2.0 * tempA );					
-	
+					
 				// Set values of hour and minute of sunset or sunrise
 				// only if sunrise/set occurred this hour.
 				if ( bSunrise )
 				{
-					dfHourRise = (int)( dfC0 + tempE + 1.0/120.0 );
-					dfMinRise  = (int) ( 
-							( dfC0 + tempE + 1.0/120.0 
-									- dfHourRise 
-									)
-									* 60.0
-							);
+					dfHourRise = Math.floor( dfC0 + tempE + 1.0/120.0 );
+					dfMinRise  = Math.floor( 
+											 ( dfC0 + tempE + 1.0/120.0 
+											    - dfHourRise 
+											 )
+											 * 60.0
+											);
 				}
 	
 				if ( bSunset )
 				{
-					dfHourSet  = (int) ( dfC0 + tempE + 1.0/120.0 );
-					dfMinSet   = (int)( 
-							( dfC0 + tempE + 1.0/120.0
-									- dfHourSet 
-									) 
-									* 60.0
-							);
+					dfHourSet  = Math.floor( dfC0 + tempE + 1.0/120.0 );
+					dfMinSet   = Math.floor( 
+											 ( dfC0 + tempE + 1.0/120.0
+											    - dfHourSet 
+											 ) 
+											 * 60.0
+											);
 				}
 	
 				// Change settings of variables for next loop
 				dfA0 = dfA2;								// SUNUP.BAS 250
 				dfD0 = dfD2;								// SUNUP.BAS 250
-	
+					
 			}	// end of loop testing each hour for an event	
-	
+				
 			// After having checked all hours, set flags if no rise or set
 			// bSunUpAllDay and bSundownAllDay are initialized as false
 			if ( !bSunriseToday && !bSunsetToday )
@@ -583,29 +608,48 @@ public class SunriseSunset
 			}
 	
 			// Load dateSunrise with data
-	
+			dfmtDateTime = new SimpleDateFormat( "d M yyyy HH:mm z" );
+
+			// Timezone signal is reversed in SunriseSunset class
+			String tz_signal = origTimeZone <= 0?"-":"+";
+			double abs_tz = Math.abs(origTimeZone);
+			NumberFormat formatter = new DecimalFormat("00");
+
+			String tz_offset_hours = formatter.format((int)abs_tz);
+			String tz_offset_minutes = formatter.format((int)(60 * (abs_tz - (int)abs_tz)));
+
 			if( bSunriseToday )
 			{
-				Calendar c = Calendar.getInstance();
-				c.set(Calendar.YEAR, iYear);
-				c.set(Calendar.MONTH, iMonth-1);
-				c.set(Calendar.DAY_OF_MONTH, iDay);
-				c.set(Calendar.HOUR_OF_DAY, dfHourRise);
-				c.set(Calendar.MINUTE, dfMinRise);
-				dateSunrise = c.getTime();
+				dateSunrise = dfmtDateTime.parse( iDay 
+										+ " " + iMonth 
+										+ " " + iYear 
+										+ " " + (int)dfHourRise
+										+ ":" + (int)dfMinRise 
+										+ " GMT"
+									    + tz_signal + tz_offset_hours
+										+":" + tz_offset_minutes );
 			}
-	
+		
 			// Load dateSunset with data
 			if( bSunsetToday )
 			{
-				Calendar c = Calendar.getInstance();
-				c.set(Calendar.YEAR, iYear);
-				c.set(Calendar.MONTH, iMonth-1);
-				c.set(Calendar.DAY_OF_MONTH, iDay);
-				c.set(Calendar.HOUR_OF_DAY, dfHourSet);
-				c.set(Calendar.MINUTE, dfMinSet);
-				dateSunset = c.getTime();
+				dateSunset = dfmtDateTime.parse( iDay 
+										+ " " + iMonth 
+										+ " " + iYear 
+										+ " " + (int)dfHourSet
+										+ ":" + (int)dfMinSet 
+										+ " GMT"
+									    + tz_signal + tz_offset_hours
+										+":" + tz_offset_minutes );
 			}
+		} // end of try
+
+		// Catch errors
+		catch( ParseException e )
+		{
+			e.printStackTrace();
+		} // end of catch
+
 	}
 	
 	
@@ -775,9 +819,9 @@ public class SunriseSunset
 
 		return( bDaytime );
 	}
+
 } // end of class 
 
 /*-----------------------------------------------------------------------------
 *							end of class
 *----------------------------------------------------------------------------*/
-
