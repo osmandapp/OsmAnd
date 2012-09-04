@@ -130,15 +130,13 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pref = new Preference(app);
 		pref.setTitle(R.string.day_night_info);
 		if (sunriseSunset != null) {
-			SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat prt = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
 			pref.setSummary(activity.getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
 					prt.format(sunriseSunset.getSunset())));
 		} else {
 			pref.setSummary(activity.getString(R.string.day_night_info_description, "null",
 					"null"));
 		}
-		cat.addPreference(pref);
-		
-		
+		cat.addPreference(pref);		
 	}
 }
