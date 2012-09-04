@@ -1,5 +1,6 @@
 package net.osmand.plus.development;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 import net.osmand.SunriseSunset;
@@ -130,9 +131,14 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		pref = new Preference(app);
 		pref.setTitle(R.string.day_night_info);
 		if (sunriseSunset != null) {
-			SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-			pref.setSummary(activity.getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
-					prt.format(sunriseSunset.getSunset())));
+			//SimpleDateFormat prt = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			//pref.setSummary(activity.getString(R.string.day_night_info_description, prt.format(sunriseSunset.getSunrise()),
+			//		prt.format(sunriseSunset.getSunset())));
+			//new approach for previous 3 lines from Issue 1313
+			  DateFormat format = SimpleDateFormat.getDateTimeInstance();
+			  String sunrise = format.format(sunriseSunset.getSunrise());
+			  String sunset = format.format(sunriseSunset.getSunset());
+			  pref.setSummary(activity.getString(R.string.day_night_info_description, sunrise, sunset)); 
 		} else {
 			pref.setSummary(activity.getString(R.string.day_night_info_description, "null",
 					"null"));
