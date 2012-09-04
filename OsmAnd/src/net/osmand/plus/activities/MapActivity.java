@@ -1125,10 +1125,18 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		getMyApplication().getDaynightHelper().setDayNightMode(settings.DAYNIGHT_MODE.get());
 	}
 	
-	
+        public void setRotateMapMode(Integer mode) {
+            settings.ROTATE_MAP.set(mode);
+            refreshRotateMap();
+        }
+
 	public void switchRotateMapMode(){
 		int vl = (settings.ROTATE_MAP.get() + 1) % 3;
 		settings.ROTATE_MAP.set(vl);
+		refreshRotateMap();
+	}
+
+	private void refreshRotateMap() {
 		registerUnregisterSensor(getLastKnownLocation(), false);
 		if(settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_COMPASS){
 			mapView.setRotate(0);
@@ -1144,10 +1152,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		
 		AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
 		mapView.refreshMap();
-	}
-	
-	public void setRotateMapMode(Integer mode) {
-	    settings.ROTATE_MAP.set(mode);
 	}
 	
 	@Override
