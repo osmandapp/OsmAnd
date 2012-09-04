@@ -1,73 +1,71 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
-	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen, u.Ä.</string>
-	<string name="use_compass_navigation_descr">Verwende Kompass, wenn keine andere Richtungsbestimmung möglich</string>
+	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen u.Ä.</string>
+	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
-	<string name="avoid_motorway">Vermeide Autobahnen</string>
+	<string name="avoid_motorway">Autobahnen vermeiden</string>
 	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
 	<string name="auto_zoom_map">Automatischer Zoom</string>
 	<string name="tip_recent_changes_0_8_3_t">Änderungen in 0.8.3 :
 		\n\t* Verbessertes Navigationsverhalten
-		\n\t* Option Vermeide Autobahnen
-		\n\t* Anzeigen von Cycleway=track
+		\n\t* Option "Autobahnen vermeiden"
+		\n\t* Anzeige von cycleway=track
 		\n\t* Oberfläche vervollständigt (Icons)
-		\n\t* Einige Bug fixes
-	</string>
+		\n\t* Einige Fehlerbehebungen</string>
 	<string name="snap_to_road_descr">Position während der Navigation auf Straßen einrasten</string>
-	<string name="snap_to_road">Einrasten auf Straße</string>
+	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
 		\n\t* Verbessertes Routing
 		\n\t* Konfigurierbare Schaltflächen
 		\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen
 		\n\t* Bildschirmsperrtaste mit Logging-Einstellungen"
-		\n\t* Bugfix für Arabische Schrift, Kannada scripting und RTL Sprachen 
-	</string>
-	<string name="osmand_short_description_80_chars">OsmAnd ist eine OpenSource Navigationsapplikation für Offline- und Onlinekarten</string>
+		\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften</string>
+	<string name="osmand_short_description_80_chars">OsmAnd ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
-		OsmAnd ist eine Open Source Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline und Online Routing-Funktion inklusive Sprachnavigation.
+		OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation.
 
 		Einige der Kernfunktionen:
 		- Komplette Offline-Funktionalität (Kartenmaterial kann in einem frei wählbaren Verzeichnis abgelegt werden)
 		- Kompakte Vektorkarten für die ganze Welt verfügbar
 		- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
-		- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV Haltestellen, zusätzliche Karten mit wählbarer Transparenz
+		- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
 		- Offline Adress- und POI-Suche
 		- Offlinenavigation für kurze Distanzen (experimentell)
-		- Auto-, Fahhrad und Fußgänger-Modus mit
-		-  optional automatischer Tag-Nacht-Umschaltung der Anzeige
-		-  optional geschwindigkeitsabhängigem Kartenmaßstab
-		-  optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
-		-  optional Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
+		- Auto-, Fahrrad- und Fußgänger-Modus mit
+		-  optionaler automatischer Tag-Nacht-Umschaltung der Anzeige
+		-  optionalem geschwindigkeitsabhängigem Kartenmaßstab
+		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
+		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 
 		Einschränkungen dieser kostenlosen Version von OsmAnd:
 		- Anzahl der Kartendownloads
 		- Kein Zugriff auf Wikipedia Offline-POIs
 
-		OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, oder die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
-	</string>
-	<string name="osmand_plus_short_description_80_chars">OsmAnd+ ist eine OpenSource Navigationsapplikation für Offline- und Onlinekarten</string>
+		OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
+</string>
+	<string name="osmand_plus_short_description_80_chars">OsmAnd+ ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
-		OsmAnd ist eine Open Source Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline und Online Routing-Funktion inklusive Sprachnavigation.
+		OsmAnd ist eine Open-Source-Navigationsapplikation mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap (OSM) Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine offline und online Routing-Funktion inklusive Sprachnavigation.
 
-		OsmAnd+ ist die Kaufversion von OsmAnd, durch den Kauf fördern Sie das Projekt, unterstützen die Entwicklung neuer Funktionen, und erhalten neue Updates.
+		OsmAnd+ ist die Kaufversion von OsmAnd. Durch den Kauf fördern Sie das Projekt, unterstützen die Entwicklung neuer Funktionen und erhalten neue Aktualisierungen.
 
 		Einige der Kernfunktionen:
 		- Komplette Offline-Funktionalität (Kartenmaterial kann in einem frei wählbaren Verzeichnis abgelegt werden)
 		- Kompakte Vektorkarten für die ganze Welt verfügbar
 		- Unbeschränktes, direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
-		- Offline Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützliuch für Besichtigungstouren
-		- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV Haltestellen, zusätzliche Karten mit wählbarer Transparenz
+		- Offline Wikipedia-Funktion (Anzeige von Wikipedia-POIs), sehr nützlich für Besichtigungstouren
+		- Darstellung mehrerer überlagerter Kartenschichten wie GPX- oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
 		- Offline Adress- und POI-Suche
 		- Offlinenavigation für kurze Distanzen (experimentell)
-		- Auto-, Fahhrad und Fußgänger-Modus mit
-		-  optional automatischer Tag-Nacht-Umschaltung der Anzeige
-		-  optional geschwingikeitsabhängigem Kartenmasstab
-		-  optional Kartenausrichtung nach Kompass oder nach Bewegungsrichtung
-		-  optional Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
+		- Auto-, Fahrrad- und Fußgänger-Modus mit
+		-  optionaler automatischer Tag-Nacht-Umschaltung der Anzeige
+		-  optionalem geschwindigkeitsabhängigem Kartenmasstab
+		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
+		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 	</string>
 	<string name="select_navigation_mode">Transportmittel wählen</string>
 	<string name="day_night_info_description">Sonnenaufgang : %1$s
@@ -234,7 +232,7 @@
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
-	<string name="gpx_monitoring_disabled_warn">Bitte Logging aktivieren unter \'Einstellungen\' -&gt; \'Navigation\'</string>
+	<string name="gpx_monitoring_disabled_warn">Bitte Logging unter \'Einstellungen\' -&gt; \'Navigation\' aktivieren.</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 :
 		\n\t- Offline Wikipedia Daten mit Artikeln
@@ -303,18 +301,17 @@
 		\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
-	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM), und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
+	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
 		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' -&gt; \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\tGefundene Fehler auf der Karte können direkt gemeldet werden.
-		\n\tOSM Fehlerberichte erstellen Sie mittels \'OSM Fehlerbericht einsenden\' im Karten-Kontextmenü.
-		\n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.
-	</string>
+		\n\tOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im Karten-Kontextmenü.
+		\n\tAchtung: Für alle OSM-Aktivitäten wird eine Internetverbindung benötigt.</string>
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_select_destination_point">Ziel wählen</string>
-	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte gewählt werden via Kontextmenü -&gt; \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken.
-		\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd in der Karte die Entfernung und die Richtung (oranges Dreieck) an.</string>
+	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte über das Kontextmenü -&gt; \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.
+		\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.</string>
 	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9 :
 		\n\t- Verbesserte Offline-Kartenanzeige 
 		\n\t- Schnelles \"Native Rendering\" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
@@ -330,8 +327,8 @@
 	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
 	<string name="auto_follow_route_never">Nie</string>
-	<string name="auto_follow_route_navigation">Nachführung nur bei Nav.</string>
-	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation</string>
+	<string name="auto_follow_route_navigation">Nachführung nur bei Nav</string>
+	<string name="auto_follow_route_navigation_descr">Kartennachführung erfolgt nur während Navigation.</string>
 	<string name="auto_follow_location_enabled">Kartennachführung aktiv</string>
 	<string name="pref_vector_rendering">Vektor Renderer spezif. Optionen</string>
 	<string name="pref_overlay">Overlay / Underlay</string>
@@ -394,7 +391,7 @@
 	</string>
 	<string name="save_route_dialog_title">Route als GPX-Track speichern</string>
 	<string name="route_successfully_saved_at">Route erfolgreich gespeichert als \'%1$s\'.</string>
-	<string name="filename_input">"Dateiname: "</string>
+	<string name="filename_input">Dateiname: </string>
 	<string name="file_with_name_already_exist">Datei mit gleichem Namen besteht bereits.</string>
 	<string name="default_buttons_save">Speichern</string>
 	<string name="menu_save_directions">Route speichern</string>
@@ -468,10 +465,9 @@
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
-	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte für diese Lokation vorhanden.
+	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
-		\n\tFür Verwendung aktivieren: \'Menu\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle…\' -&gt; \'Offline-Vektor-Karten\'.
-	</string>
+		\n\tZur Verwendung aktivieren: \'Menu\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle…\' -&gt; \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
