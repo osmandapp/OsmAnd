@@ -184,19 +184,21 @@ public class OsmAndFormatter {
 		return toPublicString(amenity.getType(), ctx) + " : " + getPoiStringWithoutType(amenity, en); //$NON-NLS-1$
 	}
 	
-	public static String getPoiStringWithoutType(Amenity amenity, boolean en){
+	public static String getPoiStringWithoutType(Amenity amenity, boolean en) {
 		String type = SpecialPhrases.getSpecialPhrase(amenity.getSubType());
 		String n = amenity.getName(en);
-		
-		if(type == null) type = amenity.getSubType();
-		if(n.indexOf(type) != -1){
+
+		if (type == null) {
+			type = amenity.getSubType();
+		}
+		if (n.indexOf(type) != -1) {
 			// type is contained in name e.g.
 			// n = "Bakery the Corner"
 			// type = "Bakery"
 			// no need to repeat this
-			return n; 
+			return n;
 		}
-		if(n.length() == 0){
+		if (n.length() == 0) {
 			return type;
 		}
 		return type + " " + n; //$NON-NLS-1$
