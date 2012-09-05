@@ -679,6 +679,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				@Override
 				public void onDismiss(DialogInterface dialog) {
 					osmandSettings.APPLICATION_MODE.set(appMode);
+					updateAllSettings();
 				}
 			});
 		} else if (preference instanceof PreferenceScreen) {
