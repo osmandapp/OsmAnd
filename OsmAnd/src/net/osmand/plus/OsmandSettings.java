@@ -880,7 +880,6 @@ public class OsmandSettings {
 		return new File(getExternalStorageDirectory(), path);
 	}
 
-
 	// This value is a key for saving last known location shown on the map
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
@@ -1193,7 +1192,6 @@ public class OsmandSettings {
 		return globalPreferences.edit().putString(LAST_SEARCHED_INTERSECTED_STREET, street).commit();
 	}
 
-
 	public static final String SELECTED_POI_FILTER_FOR_MAP = "selected_poi_filter_for_map"; //$NON-NLS-1$
 
 	public boolean setPoiFilterForMap(String filterId) {
@@ -1208,7 +1206,6 @@ public class OsmandSettings {
 		}
 		return new PoiFilter(null, application);
 	}
-	
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE"; 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1216,7 +1213,11 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new BooleanPreference("use_compass_navigation", true).makeProfile().cache();
-	
+	{
+		//Issue 1346
+		USE_COMPASS_IN_NAVIGATION.setModeDefaultValue(ApplicationMode.CAR, false);
+	}
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> RENDERER = new StringPreference("renderer", RendererRegistry.DEFAULT_RENDER) {
 		{
