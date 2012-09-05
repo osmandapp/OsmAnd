@@ -289,7 +289,7 @@
 <string name="search_position_map_view">Darrera visualització del mapa</string>
 <string name="select_search_position">Cerca a prop:</string>
 <string name="menu_save_directions">Desa les indicacions</string>
-<string name="local_index_upload_gpx_description">Pengeu els fitxers GPX a la comunitat d'OSM. Es faran servir per millorar els mapes.</string>
+<string name="local_index_upload_gpx_description">Pengeu els fitxers GPX a la comunitat d\'OSM. Es faran servir per millorar els mapes.</string>
 <string name="local_index_items_uploaded">%1$d de %2$d ítem(s) s\'han penjat amb èxit.</string>
 <string name="local_index_mi_upload_gpx">Envia a OSM</string>
 <string name="favourites_delete_multiple_succesful">S\'ha suprimit amb èxit el(s) punt(s) preferit(s).</string>
