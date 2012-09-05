@@ -384,7 +384,7 @@
   <string name="installing_new_resources">Rozbaluji nová data…</string>
   <string name="internet_connection_required_for_online_route">Snažíte se použít online navigaci, ale nemáte internetové připojení.</string>
   <string name="tts_language_not_supported_title">Jazyk není podporován</string>
-  <string name="tts_language_not_supported">" Vybraný jazyk není podporován nainstalovaným TTS enginem. Chcete zkusit nainstalovat jiný z Marketu? "</string>
+  <string name="tts_language_not_supported">Vybraný jazyk není podporován nainstalovaným TTS enginem. Chcete zkusit nainstalovat jiný z Marketu? Jinak bude použit výchozí jazyk.</string>
   <string name="tts_missing_language_data_title">Chybějící data</string>
   <string name="tts_missing_language_data">Data pro vybraný jazyk nejsou nainstalována. Chcete je zkusit nainstalovat z Marketu?</string>
   <string name="gpx_option_reverse_route">Obrátit GPX trasu</string>
@@ -995,8 +995,8 @@
   <string name="bg_service_interval">Interval sledování polohy:</string>
   <string name="screen_is_locked">Klikněte na ikonu zámku pro odemčení obrazovky</string>
   <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
-  <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
-  <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+  <string name="bg_service_sleep_mode_off">Zapnout službu na pozadí</string>
+  <string name="bg_service_sleep_mode_on">Vypnout službu na pozadí</string>
 <string name="show_lanes">Zobrazit jízdní pruhy</string>
 <string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
 <string name="avoid_ferries">Vyhnout se trajektům</string>
@@ -1025,15 +1025,5 @@
 <string name="select_navigation_mode">Vyberte způsob dopravy</string>
 <string name="day_night_info">Denní/noční info</string>
 <string name="map_widget_day_night">Denní/noční režim</string>
-<string name="tip_recent_changes_0_8_3_t"/>
-<string name="snap_to_road_descr"/>
-<string name="snap_to_road"/>
-<string name="osmand_long_description_1000_chars"/>
-<string name="osmand_plus_long_description_1000_chars"/>
-<string name="map_widget_vector_attributes"/>
 <string name="map_widget_renderer">Vektorový vykreslovač</string>
-<string name="tip_rotation_switching_t_v2"/>
-<string name="tip_day_night_mode_t_v2"/>
-<string name="tip_map_switch_t_v2"/>
-<string name="tip_app_mode_t_v2"/>
 </resources>
