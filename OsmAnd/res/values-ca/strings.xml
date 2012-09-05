@@ -646,4 +646,5 @@
 <string name="add_new_rule">Afegir nova regla</string>
 <string name="update_poi_no_offline_poi_index">No hi ha dades PDI fora de linía per a aquesta area</string>
 <string name="update_poi_error_local">Error actualitzant la llista de PDIs</string>
+<string name="max_level_download_tile">Max. zooms en linía</string>
 </resources>
