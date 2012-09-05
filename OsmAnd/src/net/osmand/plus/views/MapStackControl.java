@@ -238,4 +238,14 @@ public class MapStackControl extends ViewGroup {
 		}
 	}
 
+	public void setShadowColor(int shadowColor) {
+		for(MapInfoControl c : stackViews) {
+			c.setShadowColor(shadowColor);
+		}
+		for(MapInfoControl c : collapsedViews) {
+			c.setShadowColor(shadowColor);
+		}
+		
+	}
+
 }

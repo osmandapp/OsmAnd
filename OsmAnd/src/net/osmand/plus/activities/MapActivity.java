@@ -270,18 +270,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		}
 
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		try {
-			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
-		} catch (IllegalArgumentException e) {
-			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
-		}
-		// try to always ask for network provide : it is faster way to find location
-		try {
-			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
-		} catch (IllegalArgumentException e) {
-			Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
-		}
+		startLocationRequests();
 
 		if (settings != null && settings.isLastKnownMapLocation()) {
 			LatLon l = settings.getLastKnownMapLocation();
@@ -319,6 +308,21 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		OsmandPlugin.onMapActivityResume(this);
 		getMyApplication().getDaynightHelper().onMapResume();
 		mapView.refreshMap(true);
+	}
+
+	public void startLocationRequests() {
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		try {
+			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
+		} catch (IllegalArgumentException e) {
+			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+		}
+		// try to always ask for network provide : it is faster way to find location
+		try {
+			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
+		} catch (IllegalArgumentException e) {
+			Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+		}
 	}
 
 	private void notRestoreRoutingMode(){
@@ -1045,9 +1049,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	protected void onPause() {
 		super.onPause();
-		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-		service.removeUpdates(gpsListener);
-		service.removeUpdates(networkListener);
+		stopLocationRequests();
 		
 		SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 		sensorMgr.unregisterListener(this);
@@ -1067,6 +1069,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		getMyApplication().getResourceManager().interruptRendering();
 		getMyApplication().getResourceManager().setBusyIndicator(null);
 		OsmandPlugin.onMapActivityPause(this);
+	}
+
+	public void stopLocationRequests() {
+		LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
+		service.removeUpdates(gpsListener);
+		service.removeUpdates(networkListener);
 	}
 	
 	public void updateApplicationModeSettings(){

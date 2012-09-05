@@ -8,23 +8,18 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 
 public class SpecialPhrases {
 
 
 	private static Map<String,String> m;
-	
-	/**
-	 * Check if the language has been set
-	 * @return true if language has been set
-	 */
-	public static boolean isLanguageSet(){
-		return m!= null;
-	}
+	private static final Log log = LogUtil.getLog(SpecialPhrases.class);
 
 	/**
 	 * Use this method to query a special phrase for a certain subtype
@@ -34,9 +29,13 @@ public class SpecialPhrases {
 	 * @param key the subtype to query
 	 * @return the special phrase according to the asked key, or "null" if the key isn't found
 	 */
-	public static String getSpecialPhrase(String key){
-		if (!isLanguageSet()) {
-			throw new NullPointerException("The language has not been set");
+	public static String getSpecialPhrase(String key) {
+		if (m == null) {
+			// do not throw exception because OsmAndApplication is not always initiliazed before 
+			// this call
+			log.warn("The language has not been set for special phrases");
+			return null;
+			
 		}
 		return m.get(key);
 	}
@@ -50,13 +49,13 @@ public class SpecialPhrases {
 	 */
 	public static void setLanguage(Context ctx, OsmandSettings settings) throws IOException {
 		String lang = getPreferredLanguage(settings).getLanguage();
-		m = new HashMap<String,String>();
+		m = new HashMap<String, String>();
 		// The InputStream opens the resourceId and sends it to the buffer
 		InputStream is = null;
 		BufferedReader br = null;
-		try{
+		try {
 			try {
-				is = ctx.getAssets().open("specialphrases/specialphrases_"+lang+".txt");
+				is = ctx.getAssets().open("specialphrases/specialphrases_" + lang + ".txt");
 			} catch (IOException ex) {
 				// second try: default to English, if this fails, the error is thrown outside
 				is = ctx.getAssets().open("specialphrases/specialphrases_en.txt");
@@ -64,7 +63,7 @@ public class SpecialPhrases {
 			br = new BufferedReader(new InputStreamReader(is));
 			String readLine = null;
 
-			// While the BufferedReader readLine is not null 
+			// While the BufferedReader readLine is not null
 			while ((readLine = br.readLine()) != null) {
 				String[] arr = readLine.split(",");
 				if (arr != null && arr.length == 2) {

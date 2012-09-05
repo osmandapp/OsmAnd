@@ -205,6 +205,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		}
 		if(topText.getShadowColor() != shadowColor) {
 			topText.setShadowColor(shadowColor);
+			leftStack.setShadowColor(shadowColor);
+			rightStack.setShadowColor(shadowColor);
 		}
 	}
 	

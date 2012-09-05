@@ -42,6 +42,12 @@
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="130.0" 
 			leftTurn="20" rightTurn="15" roundaboutTurn="20" followSpeedLimitations="true" onewayAware="true">
+	    <!--		
+		<attribute name="useDynamicRoadPrioritising" value="true" />
+	    <attribute name="dynamicRoadPriorityDistance" value="0" /> 
+		<attribute name="heuristicCoefficient" value="1.5" />
+		-->
+		
 		<road tag="highway" value="motorway" speed="110" priority="1.2" dynamicPriority="1">
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
@@ -113,11 +119,10 @@
 		<avoid tag="motorcycle" value="no"/>
 		<avoid tag="motorcar" value="no"/>
 		<avoid tag="toll" value="yes" decreasedPriority="1">
-			<specialization input="avoid_toll"/>
+			<specialization input="avoid_toll" />
 		</avoid>
 	</routingProfile>
-
-
+	
 	
 	<routingProfile name="bicycle" baseProfile="bicycle" restrictionsAware="true" minDefaultSpeed="7" maxDefaultSpeed="16" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
