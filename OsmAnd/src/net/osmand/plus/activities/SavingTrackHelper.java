@@ -268,7 +268,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		if ((time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000)) {
+		//* 1000 in next line seems to be wrong with new IntervalChooseDialog
+		//if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get() * 1000) {
+		if (time - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()) {
 			execWithClose(updateScript, new Object[] { lat, lon, alt, speed, hdop, time });
 			boolean newSegment = false;
 			if (lastPoint == null || (time - lastTimeUpdated) > 180 * 1000) {
