@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
-  <string name="offline_edition_descr">Toujours utiliser l'édition hors ligne</string>
+  <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">Changements en 0.7.1 :
 \n\t- Modification hors ligne des PI
 \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo)
@@ -165,7 +165,7 @@
   <string name="search_position_current_location">Emplacement actuel…</string>
   <string name="search_position_map_view">Dernière vue</string>
   <string name="select_search_position">Recherche autour de :</string>
-  <string name="context_menu_item_search">Rechercher autour d'ici</string>
+  <string name="context_menu_item_search">Rechercher autour d\'ici</string>
   <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
 \n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans OsmAnd)
 \n\t- Favoris et groupes (categorisation, suppression, gestion)
@@ -1001,7 +1001,7 @@
   <string name="bg_service_sleep_mode_off">Désactiver mode veille</string>
   <string name="bg_service_sleep_mode_on">Activer mode veille</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
-  <string name="bg_service_interval">Positionner l'intervalle d\'activation :</string>
+  <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
 <string name="live_monitoring_mode_off">Démarrer\n suivi en ligne</string>
 <string name="live_monitoring_mode_on">Arrêter\n suivi en ligne</string>
 <string name="layer_map_appearance">Configurer l\'écran</string>

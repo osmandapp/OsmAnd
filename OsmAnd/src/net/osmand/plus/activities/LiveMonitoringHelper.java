@@ -39,7 +39,9 @@ public class LiveMonitoringHelper  {
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){
-		if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
+		//* 1000 in next line seems to be wrong with new IntervalChooseDialog
+		//if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get() * 1000) {
+		if (time - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
 			LiveMonitoringData data = new LiveMonitoringData((float)lat, (float)lon,(float) alt,(float) speed,(float) hdop, time );
 			new LiveSender().execute(data);
 			lastTimeUpdated = time;
