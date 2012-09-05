@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
 	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen u.Ä.</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
@@ -744,7 +744,7 @@
 	<string name="route_head">Geradeaus</string>
 	<string name="first_time_continue">Weiter</string>
 	<string name="first_time_download">Offline-Daten herunterladen</string>
-	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nUm alle Funktionen verwenden zu können, sind Offline-Daten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Adressen, POI und ÖPNV finden.</string>
+	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nFür viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Suche Signal …</string>
 	<string name="search_near_map">Suche um Lokation</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>

@@ -573,7 +573,11 @@ public class OsmandSettings {
 	public final OsmandPreference<RouteService> ROUTER_SERVICE = 
 		new EnumIntPreference<RouteService>("router_service", RouteService.OSMAND, RouteService.values()).makeProfile();
 	
-	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", true).makeProfile().cache();
+	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();
+	{
+		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.CAR, true);
+		SNAP_TO_ROAD.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+	}
 	
 	public final CommonPreference<Boolean> LEFT_SIDE_NAVIGATION = new BooleanPreference("left_side_navigation", false).makeGlobal();
 
@@ -585,8 +589,8 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile();
 	{
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -651,11 +655,11 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// seconds to auto_follow 
-	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 10).makeProfile();
+	public final CommonPreference<Integer> AUTO_FOLLOW_ROUTE = new IntPreference("auto_follow_route", 30).makeProfile();
 	{
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 10);
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 10);
-		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 15);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.CAR, 15);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.BICYCLE, 15);
+		AUTO_FOLLOW_ROUTE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 30);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -671,7 +675,7 @@ public class OsmandSettings {
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, ROTATE_MAP_BEARING);
-		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_BEARING);
+		ROTATE_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, ROTATE_MAP_COMPASS);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
