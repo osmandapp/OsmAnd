@@ -241,10 +241,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", true, all, none, 5);
 		TextInfoControl time = ric.createTimeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",true, all, none,  10);
-		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", true, all, none,  15);
                 /*
                 // TODO(natashaj): Remove for prototype
+		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", true, all, none,  15);
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", true, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 		*/

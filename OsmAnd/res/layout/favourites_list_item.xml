@@ -9,10 +9,12 @@
 	</LinearLayout>
 
 	<ImageView android:id="@+id/favourite_icon" android:layout_width="25dp"
-		android:paddingRight="2dp" android:paddingTop="2dp" android:layout_height="fill_parent" />
+		android:paddingRight="2dp" android:paddingTop="2dp" android:layout_height="fill_parent"
+		android:layout_gravity="center_vertical"
+		android:contentDescription="@string/favorite"/>
 	
 	<TextView android:id="@+id/favouritedistance_label"
-		android:layout_width="wrap_content" android:layout_height="wrap_content" android:gravity="center"
+		android:layout_width="wrap_content" android:layout_height="60dp" android:gravity="center"
 		android:textSize="22sp" android:maxWidth="120dp" android:minWidth="120dp"/>
 
 	<TextView android:id="@+id/favourite_label" android:layout_width="wrap_content" android:layout_marginLeft="10dp"
