@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -593,4 +593,57 @@
 <string name="use_trackball_descr">Utilitzeu el ratolí de bola per moure el mapa</string>
 <string name="use_trackball">Utilitza el ratolí de bola</string>
 <string name="process_navigation_service">Servei de navegació de l\'OsmAnd</string>
+<string name="monitor_preferences">Seguint</string>
+<string name="live_monitoring_mode_off">Iniciar\n seguiment en viu</string>
+<string name="live_monitoring_mode_on">Parar\n seguiment en viu</string>
+<string name="osmand_parking_position_description_add">Per recollir el cotxe a:</string>
+<string name="live_monitoring_descr">Enviar el seguiment a un servei web especific</string>
+<string name="live_monitoring">Seguiment en línia en viu</string>
+<string name="live_monitoring_interval">Interval de seguiment en viu</string>
+<string name="live_monitoring_interval_descr">Interval de seguiment en viu especific</string>
+<string name="live_monitoring_url">Adreça web de seguiment en viu</string>
+<string name="gpx_monitoring_disabled_warn">Si us plau habilita l'opció \'Enregistrar camí a fitxer GPX\'</string>
+<string name="binary_map_download_success">Baixada amb èxit.\n\t\n\tPer usar-ho activar \'Menú\' -&gt; \'Definir vista\' -&gt; \'Font de mapa...\' -&gt; \'Mapes de vectors fora de línia\'.</string>
+<string name="pref_overlay">Capa de fons/Cap superposada</string>
+<string name="map_version_changed_info">El servidor conte fitxers de mapes que no son compatibles amb l'actual versió de l'aplicació. Per descarregar-los i usar-los si us plau actualitza a l'ultima versió.</string>
+<string name="local_index_action_do">Estas a punt de %1$s %2$s element(s). Continuar?</string>
+<string name="warning_tile_layer_not_downloadable">L'aplicació no pot descarregar la capa del mapa %1$s, si us plau prova a reinstal·lar-lo.</string>
+<string name="layer_overlay">Mapa de fons…</string>
+<string name="map_overlay">Mapa superposat</string>
+<string name="tip_select_destination_point_t">\tPots seleccionar la destinació directament en el mapa (menú contextual ,llavors \'Marcar com a destinació\'), en totes les activitats de certa o  per mitja d'una pressió llarga en una entrada de la teva \'Llista de Punts Preferits\'. 
+		\n\tLa destinació es marcada com a un disc taronja en el mapa  OsmAnd mostra la distancia fins a ella (triangle taronja)</string>
+<string name="choose_auto_follow_route_descr">Temps fins que la vista es sincronitzi amb la posició actual</string>
+<string name="map_underlay">Mapa de fons</string>
+<string name="map_underlay_descr">Escull mapa de fons</string>
+<string name="map_overlay_descr">Escull mapa superposat</string>
+<string name="tip_location_sharing">Compartir Ubicacio</string>
+<string name="preferred_locale_descr">Selecciona la llengua a mostrar</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd suporta diferents (personalitzables) perfils d'aplicació per a diferents usos.
+		\n\tPots canviar de perfil amb el boto a la cantonada inferior esquerra de la pantalla de mapa(icona de cotxe,bici o vianant), o quan crees una ruta.	</string>
+<string name="foot">peu</string>
+<string name="km">km</string>
+<string name="poi_filter_food_shop">Botiga d'aliments</string>
+<string name="use_osmand_routing_service">Navegacio d'OsmAnd&gt;20Km</string>
+<string name="osmand_net_previously_installed">Hi ha una versió preveia d'OsmAnd instal·lada. Totes les dades offline seran suportades per la nova aplicació .Peró els punts preferits hauran de ser exportats a la versió vella i després importats a la nova.</string>
+<string name="install_selected_build">Vols instal·lar OsmAnd - {0} de {1} {2} MB ?</string>
+<string name="gps_status_app_not_found">Aplicació GPS Status no instal·lada. Buscar en el Market?</string>
+<string name="filter_existing_indexes">Filtre baixat</string>
+<string name="continuous_rendering">Dibuixat continu</string>
+<string name="use_high_res_maps">Pantalla d'alta resolució</string>
+<string name="transport_search_none">cap</string>
+<string name="voice">veu</string>
+<string name="error_reading_gpx">Error llegint dedes GPX</string>
+<string name="thanks_yandex_traffic">Gracies a Yandex per informació del transit.</string>
+<string name="no_fav_to_save">Cap punt preferit per guardar</string>
+<string name="background_router_service_descr">Executa OsmAnd en segon pla per seguir la teva posició mentre la pantalla esta parada</string>
+<string name="voice_data_not_supported">Versió no suportada de les dades de veu</string>
+<string name="voice_data_corrupted">Les dades se veu especificades estan corruptes</string>
+<string name="sd_unmounted">La tarja SD no es accessible.\nNo podràs veure mapes o cercar coses.</string>
+<string name="first_time_continue">Mes tard</string>
+<string name="search_nearby">Cerca a prop</string>
+<string name="map_orientation_landscape">Apaisat</string>
+<string name="map_orientation_default">El mateix que el dispositiu</string>
+<string name="add_new_rule">Afegir nova regla</string>
+<string name="update_poi_no_offline_poi_index">No hi ha dades PDI fora de linía per a aquesta area</string>
+<string name="update_poi_error_local">Error actualitzant la llista de PDIs</string>
 </resources>
