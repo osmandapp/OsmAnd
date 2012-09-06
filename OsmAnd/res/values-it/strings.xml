@@ -966,7 +966,7 @@
   <string name="route_updated_loc_found">Il percorso verrà ricalcolato quando verrà individuata la posizione</string>
   <string name="continue_follow_previous_route_auto">La precedente navigazione non è stata terminata. Continuare a seguirla? (%1$s secondi)</string>
   <string name="show_cameras_descr">Mostra gli autovelox (potrebbe essere vietato in qualche nazione)</string>
-  <string name="show_speed_limits_descr">Mostra limiti di velocità e dossi</string>
+  <string name="show_speed_limits_descr">Mostra limiti di velocità descr</string>
   <string name="avoid_toll_roads_descr">Evita strade a pedaggio per il calcolo dell\'itinerario</string>
   <string name="show_cameras">Mostra autovelox</string>
   <string name="show_speed_limits">Mostra limiti di velocità</string>
@@ -1020,7 +1020,7 @@
 <string name="avoid_in_routing_title">﻿Evitare…</string>
 <string name="avoid_in_routing_descr">Evitare strade a pagamento, sterrate, traghetti</string>
 <string name="show_warnings_title">Mostra avvertimenti…</string>
-<string name="show_warnings_descr">Mostra limiti di velocità, autovelox e dossi rallentatori</string>
+<string name="show_warnings_descr">Mostra limiti di velocità, autovelox, dossi rallentatori e altri avvertimenti</string>
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
 <string name="map_widget_show_ruler">Righello</string>
 <string name="map_widget_appearance">Varie:</string>
