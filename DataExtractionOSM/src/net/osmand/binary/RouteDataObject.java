@@ -231,7 +231,17 @@ public class RouteDataObject {
 			py = getPoint31YTile(nx);
 			// translate into meters
 			total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
-		} while (total < 70);
+			// Victor : the problem to put more than 5 meters that BinaryRoutePlanner will treat
+			// 2 consequent Turn Right as UT and here 2 points will have same turn angle
+			// So it should be fix in both places
+		} while (total < 5);
 		return -Math.atan2( x - px, y - py );
+	}
+	
+	@Override
+	public String toString() {
+		String name = getName();
+		String rf = getRef();
+		return String.format("Road id %s name %s ref %s", getId()+"", name == null ? "" : name, rf == null ? "" : rf);
 	}
 }

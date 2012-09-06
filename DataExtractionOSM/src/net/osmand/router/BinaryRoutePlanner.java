@@ -982,12 +982,16 @@ public class BinaryRoutePlanner {
 		}
 	}
 	
-	private boolean highwayLowEnd(String highway) {
-		if (highway == null || highway.endsWith("_link") || highway.endsWith("services") || highway.endsWith("service")
-				|| highway.endsWith("unclassified") || highway.endsWith("road")) {
-			return true;
+	private static final int MAX_SPEAK_PRIORITY = 5;
+	private int highwaySpeakPriority(String highway) {
+		if(highway == null || highway.endsWith("track") || highway.endsWith("services") || highway.endsWith("service")
+				|| highway.endsWith("path")) {
+			return MAX_SPEAK_PRIORITY;
 		}
-		return false;
+		if (highway.endsWith("_link")  || highway.endsWith("unclassified") || highway.endsWith("road") )  {
+			return 1;
+		}
+		return 0;
 	}
 
 
@@ -1078,25 +1082,29 @@ public class BinaryRoutePlanner {
 		int ls = prev.getObject().getLanes();
 		int left = 0;
 		int right = 0;
-		boolean speak = highwayLowEnd(prev.getObject().getHighway()) || highwayLowEnd(rr.getObject().getHighway());
+		boolean speak = false;
+		int speakPriority = Math.max(highwaySpeakPriority(prev.getObject().getHighway()), highwaySpeakPriority(rr.getObject().getHighway()));
 		if (attachedRoutes != null) {
 			for (RouteSegmentResult rs : attachedRoutes) {
 				double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
 				double mpi = Math.abs(MapUtils.degreesDiff(prev.getBearingEnd(), rs.getBearingBegin()));
-				if ((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
-					kl = true;
-					int lns = rs.getObject().getLanes();
-					if (lns > 0) {
-						right += lns;
+				int rsSpeakPriority = highwaySpeakPriority(rs.getObject().getHighway());
+				if (rsSpeakPriority != MAX_SPEAK_PRIORITY || speakPriority == MAX_SPEAK_PRIORITY) {
+					if ((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
+						kl = true;
+						int lns = rs.getObject().getLanes();
+						if (lns > 0) {
+							right += lns;
+						}
+						speak = speak || rsSpeakPriority <= speakPriority;
+					} else if ((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
+						kr = true;
+						int lns = rs.getObject().getLanes();
+						if (lns > 0) {
+							left += lns;
+						}
+						speak = speak || rsSpeakPriority <= speakPriority;
 					}
-					speak = speak || !highwayLowEnd(rs.getObject().getHighway());
-				} else if ((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
-					kr = true;
-					int lns = rs.getObject().getLanes();
-					if (lns > 0) {
-						left += lns;
-					}
-					speak = speak || !highwayLowEnd(rs.getObject().getHighway());
 				}
 			}
 		}
