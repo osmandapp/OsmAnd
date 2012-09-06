@@ -31,10 +31,10 @@
   <string name="live_monitoring_url">Indirizzo internet per il Live Tracking</string>
   <string name="gpx_monitoring_disabled_warn">Per favore abilita \'Registrazione della traccia in GPX file\' impostazioni.</string>
   <string name="show_current_gpx_title">Mostra la traccia corrente</string>
-  <string name="tip_recent_changes_0_7_0_t">Cambiamenti nella versione 0.7.0:↵
-\n\t- Articoli di Wikipedia accessibili offline↵
-\n\t- Aggiornate le mappe↵
-\n\t- Altre funzionalità minori↵</string>
+  <string name="tip_recent_changes_0_7_0_t">Cambiamenti nella versione 0.7.0:
+\n\t- Articoli di Wikipedia accessibili offline
+\n\t- Aggiornate le mappe
+\n\t- Altre funzionalità minori</string>
   <string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$s download %2$s e non supporta gli articoli offline di Wikipedia.</string>
   <string name="free_version_title">Versione gratuita</string>
   <string name="poi_context_menu_showdescription">Mostra la descrizione dei POI</string>
@@ -78,14 +78,15 @@
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
   <string name="tip_select_destination_point_t">\tPuoi selezionare una destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o premendo a lungo una voce nella \'Lista dei Punti Preferiti\'.
-\n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne mostra la distanza e la direzione (triangolo arancione).</string>
-  <string name="tip_recent_changes_0_6_9_t">"Cambiamenti nella versione 0.6.9 :
-\n\t- Improved offline map rendering
-\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
-\n\t- Massive look and feel changes
-\n\t- Altitude info
-\n\t- New translations (Vienamese, Polish)
-\n\t- Other small features "</string>
+\n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne mostra la distanza e la direzione (triangolo arancione).
+</string>
+  <string name="tip_recent_changes_0_6_9_t">"Cambiamenti nella versione 0.6.9:
+\n\t- Migliorato il disegno delle mappe offline
+\n\t- Disegno veloce nativo delle mappe offline - vedi nelle funzionalità sperimentali (potrebbe non funzionare su alcuni dispositivi)
+\n\t- Massicci cambiamenti dell\'aspetto
+\n\t- Informazioni sull\'altitudine
+\n\t- Nuove lingue (Vietnamita, Polacco)
+\n\t- Altre piccole funzionalità"</string>
   <string name="use_transparent_map_theme_descr">Usa controlli trasparenti</string>
   <string name="use_transparent_map_theme">Tema trasparente</string>
   <string name="native_library_not_supported">La libreria nativa non è supportata da questo dispositivo.</string>
@@ -142,7 +143,7 @@
   <string name="search_position_map_view">Ultima vista mappa</string>
   <string name="select_search_position">Cerca vicino a:</string>
   <string name="context_menu_item_search">Cerca</string>
-  <string name="tip_recent_changes_0_6_7_t">"Modifiche recenti versione 0.6.7 :
+  <string name="tip_recent_changes_0_6_7_t">"Modifiche recenti versione 0.6.7:
 \n\t- Manager dati offline (scaricare, cancellare e backup di dati offlina direttamente da OsmAnd)
 \n\t- Punti e gruppi Preferiti (categorizza, cancella, gestisci preferiti)
 \n\t- GPX Explorer nella applicazione (vedere percorsi, distanze, velocità, elevazione, ecc.)
@@ -265,12 +266,14 @@
   <string name="tip_location_sharing_t">\tPuoi condividere posizione di posti interessanti con familiari e amici.
 \n\tPer farlo devi:
 \n\tUsare il \'Menu contestuale mappa\' -&gt; \'Condividi Posizione\'.
-\n\tSeleziona una modo per condividere la posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sulla clipboard.</string>
+\n\tSeleziona una modo per condividere la posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sulla clipboard.
+</string>
   <string name="tip_favorites">Punti Preferiti</string>
   <string name="tip_favorites_t">\tI punti usati di frequente possono essere salvati come Preferiti.
 \n\tPer salvare un punto come Preferito vai nel menu contestuale, seleziona \'Aggiungi ai preferiti\' e inserisci il nome desiderato. Dopo il salvataggio sarà accessibile nel \'Menu Principale\' -&gt; \'Preferiti\'.
 \n\tPremendo a lungo su un Preferito nel menu \'Preferiti\' aprirà le opzioni Naviga verso, modifica, elimina.
-\n\tPer visualizzare i preferiti direttamente sulla mappa attiva il layer \'Preferiti\' su \'Menu contestuale mappa\' -&gt;\'Definisci vista\'.</string>
+\n\tPer visualizzare i preferiti direttamente sulla mappa attiva il layer \'Preferiti\' su \'Menu contestuale mappa\' -&gt;\'Definisci vista\'.
+</string>
   <string name="create_poi_link_to_osm_doc">"Classificazione mappa "<u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
@@ -286,14 +289,17 @@
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata premi \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
   <string name="tip_search_t">\tPuoi cercare i posti direttamente sulla mappa, per indirizzo, luogo, PDI, o preferito predefinito.
-\n\tPremendo \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.</string>
+\n\tPremendo \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.
+</string>
   <string name="tip_map_context_menu">Menu contestuale</string>
   <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato premendo a lungo sulla mappa o premendo il pulsante trackball.
 \n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci sopra. (O premi a lungo per nascondere il menù.)
-\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (luogo).</string>
+\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (luogo).
+</string>
   <string name="tip_initial">Consigli</string>
   <string name="tip_initial_t">\tOsmAnd è una applicazione di navigazione con molte funzioni.
-\n\tPer una introduzione base, alcuni consigli d\'uso sono linkati nel menù principale.</string>
+\n\tPer una introduzione base, alcuni consigli d\'uso sono linkati nel menù principale.
+</string>
   <string name="next_button">Prossimo</string>
   <string name="previous_button">Precedente</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per spazio e velocità</string>
@@ -305,7 +311,7 @@
   <string name="foot">ft</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
-  <string name="send_location_way_choose_title">Condividi la posizione</string>
+  <string name="send_location_way_choose_title">Condividi la posizione usando</string>
   <string name="send_location_sms_pattern">Luogo: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Per vedere la posizione segui il link web %1$s o il link %2$s</string>
   <string name="send_location">Invia posizione</string>
@@ -785,7 +791,13 @@
   <string name="prefs_plugins_descr">I plugins abilitano funzionalità extra dell\'applicazione come il live tracking, le mappe a mattonelle, la modalità a schermo spento, impostazioni per l\'accessibilità, e altro.</string>
   <string name="prefs_plugins">Gestore Plugin</string>
   <string name="tip_recent_changes_0_8_0_t">"Cambiamenti nella 0.8.0 :
-\n\t - *Funzionalità a plugin*\n\t - Molte delle funzionalità sono raggruppate per features e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tile (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.\n\t - Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)\n\t - *Routing offline*\n\t - Il routing offline diventa più solido\n\t - *Miglioramento usabilità e UI*\n\t- Miglioramenti in svariate aree "</string>
+\n\t - *Funzionalità a plugin*
+\n\t - Molte delle funzionalità sono raggruppate per features e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tile (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.
+\n\t - Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)
+\n\t - *Calcolo dei percorsi offline*
+\n\t - Il calcolo dei percorsi offline diventa più solido
+\n\t - *Miglioramento usabilità e UI*
+\n\t- Miglioramenti in svariate aree "</string>
   <string name="osm_editing_plugin_description">Questo plugin facilita il feedback ad OSM come la raccolta/modifica di Punti di interesse, l\'apertura/commento di bug OSM, e l\'invio di tracce registrate (richiede le credenziali OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   <string name="simulate_route_progression_manually">Simula l\'avanzamento del tragitto manualmente</string>
@@ -794,7 +806,11 @@
   <string name="native_rendering">Rendering nativo</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Prova i comandi vocali</string>
-  <string name="tip_recent_changes_0_7_2_t">"Cambiamenti nella 0.7.2 : \n\t- Rendering nativo per tutti i dispositivi\n\t- Editing offline dei Punti di interesse\n\t- Accessibilità \n\t- Svariati bug fix"</string>
+  <string name="tip_recent_changes_0_7_2_t">"Cambiamenti nella 0.7.2 : 
+\n\t- Disegno nativo per tutti i dispositivi
+\n\t- Creazione offline dei PDI
+\n\t- Accessibilità 
+\n\t- Svariate correzioni di errori"</string>
   <string name="send_files_to_osm">Mandare i file GPX a OSM?</string>
   <string name="gpx_visibility_txt">Visibilità</string>
   <string name="gpx_tags_txt">Etichette</string>
@@ -901,14 +917,14 @@
   <string name="route_kr">Tieni la destra e prosegui</string>
   <string name="save_route_as_gpx">Salva il percorso come file GPX</string>
   <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"Cambiamenti nella versione 0.8.1:↵
-\n\t* Rotte più precise (un po\' più lento)↵
-\n\t* Ricalcolo del percorso intelligente e veloce↵
-\n\t* Direzione in base alle corsie↵
-\n\t* Informazioni su dossi rallentatori, autovelox e limiti di velocità↵
-\n\t* Migliorata la voce guida sulle autostrade↵
-\n\t* Plugin per i parcheggi (\'Dov\'e\' la mia macchina?\')↵
-\n\t* Abilita/disabilita il widget per i monitoraggio↵ "</string>
+  <string name="tip_recent_changes_0_8_1_t">"Cambiamenti nella versione 0.8.1:
+\n\t* Rotte più precise (un po\' più lento)
+\n\t* Ricalcolo del percorso intelligente e veloce
+\n\t* Direzione in base alle corsie
+\n\t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
+\n\t* Migliorata la voce guida sulle autostrade
+\n\t* Plugin per i parcheggi (\'Dov\'e\' la mia macchina?\')
+\n\t* Abilita/disabilita il widget per i monitoraggio"</string>
   <string name="gpxup_public">Pubblico</string>
   <string name="gpxup_identifiable">Identificabile</string>
   <string name="gpxup_trackable">Tracciabile</string>
@@ -955,11 +971,11 @@
   <string name="show_cameras">Mostra autovelox</string>
   <string name="show_speed_limits">Mostra limiti di velocità</string>
   <string name="avoid_toll_roads">Evita strade a pedaggio</string>
-  <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2:↵
-\n\t* Migliorato il calcolo dei percorsi↵
-\n\t* Widget dinamici per le mappe↵
-\n\t* Impostazioni della mappa spostate nello schermo della mappa↵
-\n\t* Pulsante blocco schermo con servizi di registrazione↵ "</string>
+  <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2:
+\n\t* Migliorato il calcolo dei percorsi
+\n\t* Widget dinamici per le mappe
+\n\t* Impostazioni della mappa spostate nello schermo della mappa
+\n\t* Pulsante blocco schermo con servizi di registrazione"</string>
   <string name="map_widget_top_text">Nome della strada</string>
   <string name="map_widget_config">Configurazione</string>
   <string name="map_widget_map_select">Selezione della mappa</string>
@@ -1034,12 +1050,17 @@
 <string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.↵
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
 <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automatizzata Navigazione Direzioni) ↵ OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.↵ ↵ Alcune delle caratteristiche principali:↵ - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵ - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵ - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵ - Ricerca offline per indirizzi e luoghi (PDI)↵ - Calcolo del percorso per brevi distanze (sperimentale)↵ - Modalità automobile, bicicletta e pedonale con:↵ - Commutazione opzionale automatica della vista giorno/notte↵ - Zoom automatico opzionale in base alla velocità↵ - Allineamento della mappa in base alla direzione o alla bussola↵ ↵ Limitazioni di questa versione gratuita di OsmAnd:↵ - Numero di mappe scaricabili limitato - Non funziona l\'accesso ai PDI offline di Wikipedia↵ ↵ OsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net↵"</string>
+<string name="osmand_long_description_1000_chars">
+" OsmAnd (OSM Automatizzata Navigazione Direzioni)  OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità - Allineamento della mappa in base alla direzione o alla bussola Limitazioni di questa versione gratuita di OsmAnd: - Numero di mappe scaricabili limitato - Non funziona l\'accesso ai PDI offline di Wikipedia OsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net"</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatizzata Navigazione Direzioni) ↵ OsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.↵ ↵ OsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti.↵ ↵ Alcune delle caratteristiche principali:↵ - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)↵ - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione↵ - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile↵ - Ricerca offline per indirizzi e luoghi (PDI)↵ - Calcolo del percorso per brevi distanze (sperimentale)↵ - Modalità automobile, bicicletta e pedonale con:↵ - Commutazione opzionale automatica della vista giorno/notte↵ - Zoom automatico opzionale in base alla velocità↵ - Allineamento della mappa in base alla direzione o alla bussola↵ "</string>
-<string name="tip_recent_changes_0_8_3_t">Cambiamenti nella 0.8.3:↵
-\n\t* Migliorata la guida dell\'itinerario↵
-</string>
+<string name="osmand_plus_long_description_1000_chars">
+" OsmAnd+ (OSM Automatizzata Navigazione Direzioni)  OsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva. OsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con:↵ - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità↵ - Allineamento della mappa in base alla direzione o alla bussola"</string>
+<string name="tip_recent_changes_0_8_3_t">Cambiamenti nella 0.8.3:
+\n\t* Migliorata la guida dell\'itinerario
+\n\t* Opzione evita autostrade
+\n\t* Pista ciclabile=viusalizza traccia
+\n\t* Migliore aspetto interfaccia utente (icone)
+\n\t* Alcune correzioni di errori</string>
 <string name="snap_to_road_descr">Blocca la posizione sulle strade durante la navigazione</string>
 <string name="snap_to_road">Blocca sulle strade</string>
 <string name="avoid_motorway">Evita le autostrade</string>
