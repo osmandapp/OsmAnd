@@ -165,7 +165,7 @@
   <string name="search_position_current_location">Emplacement actuel…</string>
   <string name="search_position_map_view">Dernière vue</string>
   <string name="select_search_position">Recherche autour de :</string>
-  <string name="context_menu_item_search">Rechercher autour d\'ici</string>
+  <string name="context_menu_item_search">Rechercher autour du point</string>
   <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
 \n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans OsmAnd)
 \n\t- Favoris et groupes (categorisation, suppression, gestion)
@@ -337,11 +337,11 @@
   <string name="foot">ft</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
-  <string name="send_location_way_choose_title">Partager un lieu utilisant</string>
+  <string name="send_location_way_choose_title">Partager un lieu en utilisant</string>
   <string name="send_location_sms_pattern">Emplacement : %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Pour voir ce lieu, suivre le lien web %1$s ou android %2$s</string>
   <string name="send_location">Envoyer le lieu</string>
-  <string name="context_menu_item_share_location">Partager lieu</string>
+  <string name="context_menu_item_share_location">Partager le lieu</string>
   <string name="add_waypoint_dialog_added">Étape \'\'{0}\'\' ajoutée avec succès</string>
   <string name="add_waypoint_dialog_title">Ajouter une étape à une trace GPX enregistrée</string>
   <string name="context_menu_item_add_waypoint">Ajouter une étape GPX</string>
@@ -374,7 +374,7 @@
   <string name="km">km</string>
   <string name="km_h">km/h</string>
   <string name="m">m</string>
-  <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'est pas supporté</string>
+  <string name="old_map_index_is_not_supported">Le format obsolète de la carte \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="poi_filter_car_aid">Aide voiture</string>
   <string name="poi_filter_closest_poi">PI le plus près</string>
   <string name="poi_filter_custom_filter">Filtre Personnalisé</string>
@@ -384,7 +384,7 @@
   <string name="poi_filter_namefinder">Recherche PI en-ligne</string>
   <string name="reading_cached_tiles">Lecture carreaux en cache…</string>
   <string name="version_index_is_big_for_memory">L\'index \'\'{0}\'\' est trop gros pour la mémoire</string>
-  <string name="version_index_is_not_supported">La version \'\'{0}\'\' de l\'index n\'est pas supporté</string>
+  <string name="version_index_is_not_supported">La version de l\'\'index \'\'{0}\'\' n\'\'est pas supporté</string>
   <string name="use_osmand_routing_service">Navigation hors-ligne OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Utiliser la navigation hors-ligne pour les longues distances (expérimental)</string>
   <string name="osmand_routing_experimental">La navigation hors-ligne OsmAnd est une fonction expérimentale ne fonctionnant pas pour une distance de plus de 20 km.\n\nLe service utilise alors automatiquement le service en-ligne CloudMade.</string>
@@ -484,7 +484,7 @@
   <string name="layer_map">Source de la carte…</string>
   <string name="menu_layers">Couches</string>
   <string name="context_menu_item_search_poi">Chercher un Point d\'Intérêt</string>
-  <string name="context_menu_item_show_route">Se déplacer depuis ici</string>
+  <string name="context_menu_item_show_route">Partir depuis ce point</string>
   <string name="use_trackball_descr">Utiliser le pointeur pour se déplacer sur la carte</string>
   <string name="use_trackball">Utiliser le pointeur</string>
   <string name="background_service_wait_int_descr">Configurer le délai d\'attente pour déterminer l\'emplacement</string>
@@ -791,7 +791,7 @@
   <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche</string>
   <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élément, pour le désactiver ou le supprimer, faire appui long.\nEspace disponible sur l\'appareil : %1$s</string>
   <string name="unknown_from_location">Point de départ pas encore déterminé</string>
-  <string name="context_menu_item_directions">Se déplacer vers ici</string>
+  <string name="context_menu_item_directions">Se déplacer vers ce point</string>
   <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement ?</string>
   <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
   <string name="gpx_index_settings_descr"> (Analyseur GPX inclus)</string>
