@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
+<resources><string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
   \n\t* Vylepšená navigácia
   \n\t* Voľba obídenia diaľnic
   \n\t* Zobrazenie Cycleway=track
@@ -1036,11 +1035,5 @@
 <string name="map_widget_vector_attributes">Atribúty vykresľovania:</string>
 <string name="map_widget_renderer">Štýl vykresľovania</string>
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
-<string name="osmand_long_description_1000_chars"/>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
-<string name="osmand_plus_long_description_1000_chars"/>
-<string name="tip_rotation_switching_t_v2"/>
-<string name="tip_day_night_mode_t_v2"/>
-<string name="tip_map_switch_t_v2"/>
-<string name="tip_app_mode_t_v2"/>
 </resources>
