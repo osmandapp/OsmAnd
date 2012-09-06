@@ -229,8 +229,9 @@ public class RouteDataObject {
 			}
 			px = getPoint31XTile(nx);
 			py = getPoint31YTile(nx);
-			total += Math.abs(px - x) + Math.abs(py - y);
-		} while (total < 100);
+			// translate into meters
+			total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
+		} while (total < 70);
 		return -Math.atan2( x - px, y - py );
 	}
 }

@@ -41,6 +41,7 @@ public class BinaryRoutePlanner {
 	protected static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
 	private static final int ROUTE_POINTS = 11;
+	private static final float TURN_DEGREE_MIN = 45;
 	
 	
 	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
@@ -776,7 +777,6 @@ public class BinaryRoutePlanner {
 		return false;
 	}
 	
-	private static final float TURN_DEGREE_MIN = 45;
 	
 	/**
 	 * Helper method to prepare final result 
@@ -1079,24 +1079,24 @@ public class BinaryRoutePlanner {
 		int left = 0;
 		int right = 0;
 		boolean speak = highwayLowEnd(prev.getObject().getHighway()) || highwayLowEnd(rr.getObject().getHighway());
-		if(attachedRoutes != null){
-			for(RouteSegmentResult rs : attachedRoutes){
+		if (attachedRoutes != null) {
+			for (RouteSegmentResult rs : attachedRoutes) {
 				double ex = MapUtils.degreesDiff(rs.getBearingBegin(), rr.getBearingBegin());
-				double mpi = Math.abs(MapUtils.degreesDiff(prev.getBearingEnd(), rs.getBearingBegin())) ;
-				if((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
+				double mpi = Math.abs(MapUtils.degreesDiff(prev.getBearingEnd(), rs.getBearingBegin()));
+				if ((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
 					kl = true;
 					int lns = rs.getObject().getLanes();
 					if (lns > 0) {
 						right += lns;
 					}
-					speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
-				} else if((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
+					speak = speak || !highwayLowEnd(rs.getObject().getHighway());
+				} else if ((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
 					kr = true;
 					int lns = rs.getObject().getLanes();
 					if (lns > 0) {
 						left += lns;
 					}
-					speak = speak  || !highwayLowEnd(rs.getObject().getHighway());
+					speak = speak || !highwayLowEnd(rs.getObject().getHighway());
 				}
 			}
 		}
@@ -1128,10 +1128,14 @@ public class BinaryRoutePlanner {
 			t = TurnType.valueOf(TurnType.KR, leftSide);
 			t.setSkipToSpeak(!speak);
 		}
-		if (t!= null && lanes != null) {
+		if (t != null && lanes != null) {
 			t.setLanes(lanes);
 		}
 		return t;
+	}
+	
+	private long getPoint(RouteDataObject road, int pointInd) {
+		return (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
 	}
 
 
@@ -1139,7 +1143,9 @@ public class BinaryRoutePlanner {
 		RouteSegmentResult rr = result.get(routeInd);
 		RouteDataObject road = rr.getObject();
 		RoutingTile tl = loadRoutes(ctx, road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd));
-		long l = (((long) road.getPoint31XTile(pointInd)) << 31) + (long) road.getPoint31YTile(pointInd);
+		long l = getPoint(road, pointInd);
+		long nextL = pointInd < road.getPointsLength() - 1 ? getPoint(road, pointInd + 1) : 0;
+		long prevL = pointInd > 0 ? getPoint(road, pointInd - 1) : 0;
 		
 		// attach additional roads to represent more information about the route
 		RouteSegmentResult previousResult = null;
@@ -1165,13 +1171,22 @@ public class BinaryRoutePlanner {
 		while (routeSegment != null) {
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {
 				RouteDataObject addRoad = routeSegment.road;
+				
 				// TODO restrictions can be considered as well
 				int oneWay = ctx.getRouter().isOneWay(addRoad);
 				if (oneWay >= 0 && routeSegment.segmentStart < addRoad.getPointsLength() - 1) {
-					rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, addRoad.getPointsLength() - 1));
+					long pointL = getPoint(addRoad, routeSegment.segmentStart + 1);
+					if(pointL != nextL && pointL != prevL) {
+						// if way contains same segment (nodes) as different way (do not attach it)
+						rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, addRoad.getPointsLength() - 1));
+					}
 				}
 				if (oneWay <= 0 && routeSegment.segmentStart > 0) {
-					rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, 0));
+					long pointL = getPoint(addRoad, routeSegment.segmentStart - 1);
+					// if way contains same segment (nodes) as different way (do not attach it)
+					if(pointL != nextL && pointL != prevL) {
+						rr.attachRoute(pointInd, new RouteSegmentResult(addRoad, routeSegment.segmentStart, 0));
+					}
 				}
 			}
 			routeSegment = routeSegment.next;
