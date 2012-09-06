@@ -464,7 +464,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="background_router_service">Dùng dịch vụ chạy ngầm</string>
 	<string name="off_router_service_no_gps_available">Cần phải bật GPS khi sử dụng dịch vụ chạy ngầm.</string>
 	<string name="routing_settings_descr">Các thiết lập tìm đường</string>
-	<string name="routing_settings">- Tìm đường</string>
+	<string name="routing_settings">Tìm đường</string>
 	<string name="hide_poi_filter">Ẩn bộ lọc</string>
 	<string name="show_poi_filter">Hiện bộ lọc</string>
 	<string name="search_poi_filter">Bộ lọc</string>

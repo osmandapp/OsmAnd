@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_event">Pasiimkite automobilį iš statymo vietos</string>
@@ -251,7 +251,7 @@
   <string name="settings_preset_descr">Pasirinkite vartotojo profilį su individualiu žemėlapiu ir navigacijos nustatymais.</string>
   <string name="monitor_preferences">- Sekimas</string>
   <string name="monitor_preferences_descr">Nurodykite sekimo nustatymus</string>
-  <string name="routing_settings">- Navigacija</string>
+  <string name="routing_settings">Navigacija</string>
   <string name="routing_settings_descr">Nurodykite navigacijos nustatymus</string>
   <string name="global_settings">Globalūs nustatymai</string>
   <string name="index_settings">Duomenys įrenginyje (parsiųsti)</string>

@@ -416,7 +416,7 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="off_router_service_no_gps_available">背景ルーティングサービスを動かすには
 位置ソースを動作させる必要があります。</string>
      <string name="routing_settings_descr">ルーティングオプションを指定</string>
-     <string name="routing_settings">- ナビゲーション</string>
+     <string name="routing_settings">ナビゲーション</string>
      <string name="hide_poi_filter">フィルタを非表示</string>
      <string name="show_poi_filter">フィルタを表示</string>
      <string name="search_poi_filter">フィルタ</string>

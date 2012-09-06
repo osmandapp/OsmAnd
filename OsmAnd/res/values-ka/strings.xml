@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -174,7 +174,7 @@
   <string name="settings_preset_descr">აირჩიეთ მომხმარებლის პროფილი რუკისა და ნავიგაციის პარამეტრებით.</string>
   <string name="monitor_preferences">- დევნა</string>
   <string name="monitor_preferences_descr">დევნის პარამეტრების მითითება</string>
-  <string name="routing_settings">- ნავიგაცია</string>
+  <string name="routing_settings">ნავიგაცია</string>
   <string name="routing_settings_descr">მიუთითეთ ნავიგაციის პარამეტრები</string>
   <string name="global_settings">გლობალური პარამეტრები</string>
   <string name="index_settings">გათიშული მონაცემები\n(გადმოწერა)</string>

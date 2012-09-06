@@ -233,7 +233,7 @@
   <string name="settings_preset_descr">Kies \'n gebruiker profiel met \'n persoonlike kaart en navigasie instellings.</string>
   <string name="monitor_preferences">- Natrekking</string>
   <string name="monitor_preferences_descr">Spesifiseer natrekking instellings</string>
-  <string name="routing_settings">- Navigasie</string>
+  <string name="routing_settings">Navigasie</string>
   <string name="routing_settings_descr">Spesifiseer navigasie opsies</string>
   <string name="global_settings">Oorhoofse instellings</string>
   <string name="index_settings">aflyn Data (Aflaai)</string>

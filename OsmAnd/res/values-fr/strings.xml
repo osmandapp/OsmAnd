@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">Changements en 0.7.1 :
@@ -59,7 +59,7 @@
   <string name="settings_preset_descr">Sélectionner un profil d\'utilisation avec ses réglages de carte et de navigation.</string>
   <string name="monitor_preferences">Traces</string>
   <string name="monitor_preferences_descr">Configurer les paramètres d\'enregistrement du parcours</string>
-  <string name="routing_settings">- Navigation</string>
+  <string name="routing_settings">Navigation</string>
   <string name="routing_settings_descr">Configurer les options de la navigation</string>
   <string name="global_settings">Paramètres globaux</string>
   <string name="index_settings">Données hors ligne</string>
