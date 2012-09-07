@@ -462,11 +462,11 @@ public class MapActivityActions implements DialogProvider {
 					return;
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
-				routingHelper.setAppMode(mode);
 				// Do not overwrite PREV_APPLICATION_MODE if already navigating
 				if (!routingHelper.isFollowingMode()) {
 					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				}
+				routingHelper.setAppMode(mode);
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
@@ -504,7 +504,6 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.updateApplicationModeSettings();
 					mapActivity.getMapView().refreshMap(true);
 				}
-
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
