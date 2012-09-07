@@ -316,6 +316,7 @@ public class MapRenderRepositories {
 				searchFilter = null;
 			}
 			boolean ocean = false;
+			boolean land = false;
 			MapIndex mi = null;
 			searchRequest = BinaryMapIndexReader.buildSearchRequest(leftX, rightX, topY, bottomY, zoom, searchFilter);
 			for (BinaryMapIndexReader c : files.values()) {
@@ -353,8 +354,10 @@ public class MapRenderRepositories {
 				if (searchRequest.isOcean()) {
 					mi = c.getMapIndexes().get(0);
 					ocean = true;
-				} else if (searchRequest.isLand()) {
+				}  
+				if (searchRequest.isLand()) {
 					mi = c.getMapIndexes().get(0);
+					land = true;
 				}
 			}
 
@@ -379,7 +382,7 @@ public class MapRenderRepositories {
 			}
 			if(addBasemapCoastlines && mi != null){
 				BinaryMapDataObject o = new BinaryMapDataObject(new int[] { leftX, topY, rightX, topY, rightX, bottomY, leftX, bottomY, leftX,
-						topY }, new int[] { ocean ? mi.coastlineEncodingType : (mi.landEncodingType) }, null, -1);
+						topY }, new int[] { ocean && !land ? mi.coastlineEncodingType : (mi.landEncodingType) }, null, -1);
 				o.setMapIndex(mi);
 				tempResult.add(o);
 			}
