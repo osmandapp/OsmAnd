@@ -313,9 +313,14 @@
   <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken</string>
   <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
   <string name="tip_location_sharing">Locatie delen</string>
-  <string name="tip_location_sharing_t">\tJe kan de locatie van interessepunten op je tocht delen met familie of vrienden. \n\tOm een locatie te delen: \n\tGebruik het \'Kaart contextmenu\' -&gt; \'Deel locatie\' menu. \n\tSelecteer dan de methode van delen van je locatie. De opties zijn: E-Mail, SMS(tekst), of kopieer de locatiecoördinaten naar het prikbord.</string>
+  <string name="tip_location_sharing_t">\tJe kan de locatie van interessepunten op je tocht delen met familie of vrienden.
+\n\tOm een locatie te delen:
+\n\tGebruik het \'Kaart contextmenu\' -&gt; \'Deel locatie\' menu. \n\tSelecteer dan de methode van delen van je locatie. De opties zijn: E-Mail, SMS(tekst), of kopieer de locatiecoördinaten naar het prikbord.</string>
   <string name="tip_favorites">Favorieten</string>
-  <string name="tip_favorites_t">\tVaak gebruikte punten kunnen worden bewaard als Favorieten. \n\tOm een punt als Favoriet te bewaren, ga naar het kaartcontextmenu, selecteer de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Nadat het bewaard is, is het te toegankelijk via \'Hoofdmenu\' -&gt; \'Favorieten\'. \n\tEen lange druk op een favoriet in het menu \'Favorieten\' geeft de optie om het als bestemming te kiezen, te bewerken of te verwijderen. \n\tOm alle Favorieten direct op de kaart weer te geven, activeer de laag \'Favorieten\' in \'Kaart-contextmenu\' -&gt;\'Definieer beeld\'.</string>
+  <string name="tip_favorites_t">\tVaak gebruikte punten kunnen worden bewaard als Favorieten.
+\n\tOm een punt als Favoriet te bewaren, ga naar het kaartcontextmenu, selecteer de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Nadat het bewaard is, is het te toegankelijk via \'Hoofdmenu\' -&gt; \'Favorieten\'.
+\n\tEen lange druk op een favoriet in het menu \'Favorieten\' geeft de optie om het als bestemming te kiezen, te bewerken of te verwijderen.
+\n\tOm alle Favorieten direct op de kaart weer te geven, activeer de laag \'Favorieten\' in \'Kaart-contextmenu\' -&gt;\'Definieer beeld\'.</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
   <string name="error_doing_search">Fout bij offline zoeken</string>
   <string name="search_offline_geo_error">Kan de locatie oproep niet verwerken \'%s\'</string>
@@ -330,11 +335,15 @@
   <string name="tip_navigation">Navigatie</string>
   <string name="tip_navigation_t">\tVoordat u een navigatie start (routing), moet u eerst een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en selecteer het type navigatie.</string>
   <string name="tip_search">Zoeken</string>
-  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een adres, een locatie, een interessepunt of een favoriet. \n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat, biedt het contextmenu 2 opties: \'Selecteer als bestemming\' of \'Toon op kaart\'.</string>
+  <string name="tip_search_t">\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een adres, een locatie, een interessepunt of een favoriet.
+\n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat, biedt het contextmenu 2 opties: \'Selecteer als bestemming\' of \'Toon op kaart\'.</string>
   <string name="tip_map_context_menu">Kaart-ContextMenu</string>
-  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart of door op de trackball knop te drukken. \n\tDit toont een venster met de puntcoördinaten. Om de kaart-contextmenu dialoog te openen, druk er op. (Een lange druk verbergt het venster weer) \n\tHet kaart-contextmenu bevat alle acties met betrekking tot een punt (locatie).</string>
+  <string name="tip_map_context_menu_t">\tHet kaart-contextmenu is beschikbaar door een lange druk op de kaart of door op de trackball knop te drukken.
+\n\tDit toont een venster met de puntcoördinaten. Om de kaart-contextmenu dialoog te openen, druk er op. (Een lange druk verbergt het venster weer)
+\n\tHet kaart-contextmenu bevat alle acties met betrekking tot een punt (locatie).</string>
   <string name="tip_initial">Tips and Trucs</string>
-  <string name="tip_initial_t">\tOsmAnd is een navigatieprogramma met vele mogelijkheden. \n\tAls introductie worden sommige tips en trucs getoond op het hoofdmenu scherm.</string>
+  <string name="tip_initial_t">\tOsmAnd is een navigatieprogramma met vele mogelijkheden.
+\n\tAls introductie worden sommige tips en trucs getoond op het hoofdmenu scherm.</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Wijzig eenheden van lengte en snelheid</string>
@@ -847,7 +856,7 @@
   <string name="rendering_attr_noPolygons_name">Geen vlakken</string>
   <string name="rendering_attr_appMode_name">Weergave modus</string>
   <string name="rendering_attr_appMode_description">Kaartoptimalisatie voor dit gebruiksprofiel</string>
-  <string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn.</string>
+  <string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn:</string>
   <string name="rendering_attr_contourLines_name">Toon hoogtelijnen</string>
   <string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string>
   <string name="rendering_attr_hmRendered_name">Toon meer details</string>
@@ -858,8 +867,7 @@
 \n\t* Informatie over maximum snelheden, snelheidscamera\'s en verkeersdrempels
 \n\t* Verbeterde stembegeleiding op snelwegen 
 \n\t* Parkeer plugin (\"Waar staat mijn auto geparkeerd?\")
-\n\t* Toon/verberg track-registratie widget"
- </string>
+\n\t* Toon/verberg track-registratie widget"</string>
   <string name="gpxup_public">Openbaar</string>
   <string name="gpxup_identifiable">Identificeerbaar</string>
   <string name="gpxup_trackable">Traceerbaar</string>
@@ -911,8 +919,7 @@
    \n\t* Dynamische kaartschermwidgets
    \n\t* Kaart-instellingen verplaatst naar het kaartscherm
    \n\t* Lockscreen knop met track logging services
-   \n\t* Verbeterde talen: Arabisch, Kannada en RNL talen
-   </string>
+   \n\t* Verbeterde talen: Arabisch, Kannada en RNL talen</string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
   <string name="map_widget_map_select">Kaartselectie</string>
@@ -986,7 +993,8 @@ Beperkingen van OsmAnd Free:
 - geen toegang tot Wikipedia offline interessepunten
 
 OsmAnd wordt nog actief ontwikkeld en rekent op ondersteuning via donaties voor de verdere ontwikkeling</string>
-<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)↵
+<string name="osmand_plus_long_description_1000_chars">
+OsmAnd+ (OSM Automated Navigation Directions)↵
 
 OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele
 popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden
@@ -1002,8 +1010,7 @@ Belangrijke eigenschappen:
 - offline zoeken naar adressen en plaatsen
 - navigatie voor auto / fiets / voetganger
 - meerdere kaartlagen met instelbare transpantie
-- offline navigatie voor korte afstanden (experimenteel)
-</string>
+- offline navigatie voor korte afstanden (experimenteel)</string>
 <string name="avoid_motorway">Vermijd snelwegen</string>
 <string name="tip_recent_changes_0_8_3_t">Wijzigingen 0.8.3 :
 		\n\t* Verbeterde routebegeleiding
