@@ -221,7 +221,7 @@ struct SearchQuery {
 
 	coordinates cacheCoordinates;
 	bool ocean;
-	bool land;
+	bool mixed;
 
 	int numberOfVisitedObjects;
 	int numberOfAcceptedObjects;
@@ -232,7 +232,7 @@ struct SearchQuery {
 			req(req), left(l), right(r), top(t), bottom(b),publisher(publisher) {
 		numberOfAcceptedObjects = numberOfVisitedObjects = 0;
 		numberOfAcceptedSubtrees = numberOfReadSubtrees = 0;
-		ocean = land = false;
+		ocean = mixed = false;
 	}
 	SearchQuery(int l, int r, int t, int b) :
 				req(req), left(l), right(r), top(t), bottom(b) {

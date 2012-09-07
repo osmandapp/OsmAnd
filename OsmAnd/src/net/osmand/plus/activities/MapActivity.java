@@ -932,7 +932,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else {
 			settings.clearPointToNavigate();
 		}
-		routingHelper.setFinalAndCurrentLocation(point, getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
+		if(routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
+				routingHelper.isFollowingMode()) {
+			routingHelper.setFinalAndCurrentLocation(point, getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
+		}
 		mapLayers.getNavigationLayer().setPointToNavigate(point);
 	}
 	

@@ -744,7 +744,7 @@ bool searchMapTreeBounds(CodedInputStream* input, MapTreeBounds* current, MapTre
 			if(current->ocean){
 				req->ocean = true;
 			} else {
-				req->land = true;
+				req->mixed = true;
 			}
 			break;
 		}
@@ -882,7 +882,6 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	UNORDERED(set)<long long> ids;
 	int count = 0;
-	bool ocean = false;
 	std::vector<MapDataObject*> basemapResult;
 	std::vector<MapDataObject*> tempResult;
 	std::vector<MapDataObject*> coastLines;
@@ -941,9 +940,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 				}
 			}
 		}
-		if (q->ocean) {
-			ocean = true;
-		}
+
 		if (!q->publisher->isCancelled()) {
 			std::vector<MapDataObject*>::iterator r = q->publisher->result.begin();
 			tempResult.reserve((size_t)(q->publisher->result.size() + tempResult.size()));
@@ -982,6 +979,8 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 		deleteObjects(basemapCoastLines);
 		deleteObjects(basemapResult);
 	} else {
+		bool ocean = q->ocean;
+		bool land = q->mixed;
 		bool addBasemapCoastlines = true;
 		bool emptyData = q->zoom > BASEMAP_ZOOM && tempResult.empty() && coastLines.empty();
 		bool basemapMissing = q->zoom <= BASEMAP_ZOOM && basemapCoastLines.empty() && !basemapExists;
@@ -1006,7 +1005,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 			o->points.push_back(int_pair(q->right, q->bottom));
 			o->points.push_back(int_pair(q->left, q->bottom));
 			o->points.push_back(int_pair(q->left, q->top));
-			if (ocean) {
+			if (ocean && !land) {
 				o->types.push_back(tag_value("natural", "coastline"));
 			} else {
 				o->types.push_back(tag_value("natural", "land"));

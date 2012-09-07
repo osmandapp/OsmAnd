@@ -88,9 +88,6 @@ public class RoutingHelper {
 	}
 	
 	
-	public void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation){
-		setFinalAndCurrentLocation(finalLocation, currentLocation, null);
-	}
 	
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, GPXRouteParams gpxRoute){
 		clearCurrentRoute(finalLocation);

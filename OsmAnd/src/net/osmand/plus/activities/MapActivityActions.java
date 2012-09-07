@@ -467,7 +467,7 @@ public class MapActivityActions implements DialogProvider {
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
-				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), from);
+				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), from, null);
 			}
 		};
 
@@ -503,7 +503,7 @@ public class MapActivityActions implements DialogProvider {
 				settings.FOLLOW_THE_ROUTE.set(true);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(true);
-				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), current);
+				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), current, null);
 				dialog.dismiss();
 				getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
 			}
