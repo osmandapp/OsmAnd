@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
   <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
@@ -164,7 +164,7 @@
   <string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
   <string name="monitor_preferences">ट्रॅकिंग</string>
   <string name="monitor_preferences_descr">Specify tracking settings</string>
-  <string name="routing_settings">- दिशादर्शन</string>
+  <string name="routing_settings">दिशादर्शन</string>
   <string name="routing_settings_descr">दिशादर्शनाचे पर्याय ठरवा</string>
   <string name="global_settings">Global Settings</string>
   <string name="index_settings">ऑफलाइन डेटा (डाउनलोड)</string>

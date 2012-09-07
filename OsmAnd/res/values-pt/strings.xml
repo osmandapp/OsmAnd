@@ -154,7 +154,7 @@
   <string name="background_router_service">Usar serviço em segundo plano</string>
   <string name="off_router_service_no_gps_available">O serviço em segundo plano exige a ativação de alguma fonte de localização</string>
   <string name="routing_settings_descr">Especifique opções da rota</string>
-  <string name="routing_settings">- Navegação</string>
+  <string name="routing_settings">Navegação</string>
   <string name="hide_poi_filter">Ocultar filtro</string>
   <string name="show_poi_filter">Mostrar filtro</string>
   <string name="search_poi_filter">Filtro</string>

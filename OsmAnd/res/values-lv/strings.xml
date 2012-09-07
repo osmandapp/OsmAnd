@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
@@ -134,7 +134,7 @@
   <string name="settings_preset_descr">Izvēlaties lietotāja profilu ar specifiskiem kartes un navigācijas uzstādījumuiem.</string>
   <string name="monitor_preferences">- Sekošana</string>
   <string name="monitor_preferences_descr">Norādīt sekošanas uzstādījumus</string>
-  <string name="routing_settings">- Navigācija</string>
+  <string name="routing_settings">Navigācija</string>
   <string name="routing_settings_descr">Norādīt navigācijas opcijas</string>
   <string name="global_settings">Globālie uzstādījumi</string>
   <string name="index_settings">Bezsaistes dati</string>

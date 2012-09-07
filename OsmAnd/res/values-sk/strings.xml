@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
   \n\t* Vylepšená navigácia
   \n\t* Voľba obídenia diaľnic
@@ -646,7 +646,7 @@
   <string name="background_router_service">Použiť službu na pozadí</string>
   <string name="off_router_service_no_gps_available">Služba na pozadí pre navigovanie vyžaduje zapnutý zdroj umiestnenia.</string>
   <string name="routing_settings_descr">Určenie možností navigácie</string>
-  <string name="routing_settings">- Navigácia</string>
+  <string name="routing_settings">Navigácia</string>
   <string name="hide_poi_filter">Skryť filter</string>
   <string name="show_poi_filter">Zobraziť filter</string>
   <string name="search_poi_filter">Filter</string>

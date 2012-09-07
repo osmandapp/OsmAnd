@@ -160,7 +160,7 @@
 	<string name="settings_preset_descr">사용자 프로파일을 선택합니다. (각 프로파일의 맵, 트래킹, 네비게이션 설정은 아래처럼 지정할 수 있습니다.)</string>
 	<string name="monitor_preferences">트래킹</string>
 	<string name="monitor_preferences_descr">트래킹 옵션을 설정합니다</string>
-	<string name="routing_settings">- 네비게이션</string>
+	<string name="routing_settings">네비게이션</string>
 	<string name="routing_settings_descr">경로 옵션을 설정합니다</string>
 	<string name="global_settings">전체 설정</string>
 	<string name="index_settings">오프라인 데이터</string>
