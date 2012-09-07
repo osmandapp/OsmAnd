@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -1004,4 +1004,14 @@ Belangrijke eigenschappen:
 - meerdere kaartlagen met instelbare transpantie
 - offline navigatie voor korte afstanden (experimenteel)
 </string>
+<string name="avoid_motorway">Vermijd snelwegen</string>
+<string name="tip_recent_changes_0_8_3_t">Wijzigingen 0.8.3 :
+		\n\t* Verbeterde routebegeleiding
+		\n\t* Vermijd snelwegen optie
+		\n\t* Weergave van fietspaden (tracks)
+		\n\t* Verbeterde interface (iconen)
+		\n\t* Enige bugs opgelost
+	</string>
+<string name="snap_to_road_descr">Houd positie op de weg tijdens navigatie</string>
+<string name="snap_to_road">Houd op weg</string>
 </resources>
