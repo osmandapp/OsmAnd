@@ -308,11 +308,13 @@ public class RouteInfoControls {
 			public boolean updateInfo() {
 				// draw speed
 				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
-					// .3 mps == 1.08 kph
-					float minDelta = .3f;
+					// .1 mps == 0.36 kph
+					float minDelta = .1f;
 					// Update more often at walk/run speeds, since we give higher resolution
 					// and use .02 instead of .03 to account for rounding effects.
-					if (cachedSpeed < 6) minDelta = .015f;
+					if (cachedSpeed < 6) {
+						minDelta = .015f;
+					}
 					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > minDelta) {
 						cachedSpeed = map.getLastKnownLocation().getSpeed();
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
@@ -601,7 +603,7 @@ public class RouteInfoControls {
 	
 	
 	public boolean distChanged(int oldDist, int dist){
-		if(oldDist != 0 && oldDist - dist < 100 && Math.abs(((float) dist - oldDist)/oldDist) < 0.01){
+		if(oldDist != 0 && oldDist - dist < 10){
 			return false;
 		}
 		return true;

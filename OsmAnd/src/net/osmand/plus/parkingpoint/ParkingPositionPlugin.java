@@ -409,7 +409,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			 * @return
 			 */
 			private boolean distChanged(int oldDist, int dist){
-				if(oldDist != 0 && oldDist - dist < 100 && Math.abs(((float) dist - oldDist)/oldDist) < 0.01){
+				if(oldDist != 0 && oldDist - dist < 30){
 					return false;
 				}
 				return true;

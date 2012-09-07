@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.SpecialPhrases;
+import net.osmand.plus.activities.ApplicationMode;
 import android.content.Context;
 
 public class OsmAndFormatter {
@@ -97,16 +98,21 @@ public class OsmAndFormatter {
 	public static String getFormattedSpeed(float metersperseconds, Context ctx) {
 		OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
+		ApplicationMode am = settings.getApplicationMode();
 		float kmh = metersperseconds * 3.6f;
-		if(mc == MetricsConstants.KILOMETERS_AND_METERS){
-			return ((int) kmh) + " " + ctx.getString(R.string.km_h);
+		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+			if (kmh >= 15 || (am == ApplicationMode.CAR)) {
+				return ((int) kmh) + " " + ctx.getString(R.string.km_h);
+			}
+			kmh = ((int) kmh * 10f) / 10f;
+			return kmh + " " + ctx.getString(R.string.km_h);
 		} else {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
-			if(mph >= 10) {
-				return ((int) (mph)) + " "+ ctx.getString(R.string.mile_per_hour);
+			if (mph >= 10) {
+				return ((int) (mph)) + " " + ctx.getString(R.string.mile_per_hour);
 			} else {
-				mph = ((int)mph*10f)/10f;
-				return mph + " "+ ctx.getString(R.string.mile_per_hour);
+				mph = ((int) mph * 10f) / 10f;
+				return mph + " " + ctx.getString(R.string.mile_per_hour);
 			}
 		}
 	}
