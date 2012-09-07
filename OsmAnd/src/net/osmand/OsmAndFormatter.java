@@ -104,15 +104,23 @@ public class OsmAndFormatter {
 			if (kmh >= 15 || (am == ApplicationMode.CAR)) {
 				return ((int) kmh) + " " + ctx.getString(R.string.km_h);
 			}
-			kmh = ((int) kmh * 10f) / 10f;
-			return kmh + " " + ctx.getString(R.string.km_h);
+			int kmh10 = (int) (kmh * 10f);
+			if (kmh10 % 10 == 0) {
+				return (kmh10 / 10) + " " + ctx.getString(R.string.km_h);
+			} else {
+				return (kmh10 / 10f) + " " + ctx.getString(R.string.km_h);
+			}
 		} else {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 10) {
 				return ((int) (mph)) + " " + ctx.getString(R.string.mile_per_hour);
 			} else {
-				mph = ((int) mph * 10f) / 10f;
-				return mph + " " + ctx.getString(R.string.mile_per_hour);
+				int mph10 = (int) (mph * 10f);
+				if(mph10 % 10 == 0) {
+					return (mph10 / 10) + " " + ctx.getString(R.string.mile_per_hour);
+				} else { 
+					return (mph10 / 10f) + " " + ctx.getString(R.string.mile_per_hour);
+				}
 			}
 		}
 	}

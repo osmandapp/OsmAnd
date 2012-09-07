@@ -603,7 +603,7 @@ public class RouteInfoControls {
 	
 	
 	public boolean distChanged(int oldDist, int dist){
-		if(oldDist != 0 && oldDist - dist < 10){
+		if(oldDist != 0 && Math.abs(oldDist - dist) < 10){
 			return false;
 		}
 		return true;
