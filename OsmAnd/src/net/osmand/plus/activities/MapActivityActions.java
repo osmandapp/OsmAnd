@@ -589,6 +589,10 @@ public class MapActivityActions implements DialogProvider {
 							}
 						}
 						// change global settings
+						// Do not overwrite PREV_APPLICATION_MODE if already navigating
+						if (!routingHelper.isFollowingMode()) {
+							settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+						}
 						boolean changed = settings.APPLICATION_MODE.set(appMode);
 						if (changed) {
 							mapActivity.updateApplicationModeSettings();	
