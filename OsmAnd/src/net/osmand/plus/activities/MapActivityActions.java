@@ -463,7 +463,10 @@ public class MapActivityActions implements DialogProvider {
 					return;
 				}
 				routingHelper.setAppMode(mode);
-				settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+				// Do not overwrite PREV_APPLICATION_MODE if already navigating
+				if (!routingHelper.isFollowingMode()) {
+					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+				}
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
@@ -492,7 +495,10 @@ public class MapActivityActions implements DialogProvider {
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				// change global settings
-				settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+				// Do not overwrite PREV_APPLICATION_MODE if already navigating
+				if (!routingHelper.isFollowingMode()) {
+					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+				}
 				boolean changed = settings.APPLICATION_MODE.set(mode);
 				if (changed) {
 					mapActivity.updateApplicationModeSettings();
