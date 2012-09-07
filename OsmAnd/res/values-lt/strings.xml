@@ -65,7 +65,7 @@
   <string name="context_menu_item_directions">Maršrutas į čia</string>
   <string name="modify_transparency">Pakeisti skaidrumą (0 - permatoma, 255 - nepermatoma)</string>
   <string name="confirm_interrupt_download">Ar norite nutraukti failų parsiuntimą?</string>
-  <string name="first_time_msg">Pagrindinių programos funkcijų naudojimui įrenginyje turi būti regiono duomenys, kuriuos galite parsisiųsti (atverkite Nustatymus, Vietinius duomenis). Tik po to galėsite ieškoti adreso, LV ar viešojo transporto.</string>
+  <string name="first_time_msg">Ačiū kad naudojate OsmAnd. Pagrindinių programos funkcijų naudojimui įrenginyje turi būti regiono duomenys, kuriuos galite parsisiųsti \'Nustatymai\' -&gt;  \'Parsiųsti duomenys\'. Tik po to galėsite ieškoti adreso, LV ar viešojo transporto.</string>
   <string name="basemap_was_selected_to_download">Programos funkcionavimui reikalingas bazinis žemėlapis. Jis buvo pažymėtas parsiuntimui.</string>
   <string name="select_index_file_to_download">Nieko nerasta. Jei nerandate savo regiono, jį galite pasigaminti patys (eikite į http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Žemėlapiai internete</string>
@@ -473,7 +473,7 @@
 \n\tAtnaujinimai yra žymimi spalvomis: 
 \n\t\'Žalia\' - rodo, kad jūsų žemėlapiai identiški esantiems serveryje 
 \n\t\'Mėlyna\' - rodo, kad serveryje yra atnaujinimų
-</string>
+\n\t\'Tamsiai žalia/mėlyna\' - atitinkamai deaktyvuotus įrenginio duomenis</string>
   <string name="level_to_switch_vector_raster_descr">Mažiausias dydis, kuriuo rodyti vektorinius žemėlapius</string>
   <string name="level_to_switch_vector_raster">Mažiausias vektorinių žemėl. dydis</string>
   <string name="tip_location_sharing">Vietos bendrinimas</string>
@@ -506,9 +506,9 @@
   <string name="tip_search_t">\tPaiešką galima vykdyti tiesiog žemėlapyje, pagal adresą, koordinates, LV arba pasirenkant Įsimintą vietą. 
 \n\tPagrindiniame meniu paspaudus \'Paieška\' atsivers paieškos langas. Visoms rastoms vietoms kontekstinis meniu pasiūlys dvi galimybes: \'Nustatyti kelionės tikslu\' arba \'Rodyti ant žemėlapio\'.</string>
   <string name="tip_map_context_menu">Žemėlapio kontekstinis meniu</string>
-  <string name="tip_map_context_menu_t">\tŽemėlapio kontekstinis meniu yra pasiekiamas ant žemėlapio paspaudus ir laikant arba paspaudus valdymo rutulį. 
-\n\tTai pant žemėlapio uždės dėžutę su koordinatėmis. Norėdami atverti žemėlapio kontekstinį meniu tai dėžutei – paspauskite ant jos. (Arba paspauskite ir laikykite ją paspaudę norėdami, kad ji pradingtų.) 
-\n\tŽemėlapio kontekstiniame meniu rasite visus veiksmus, reikalingus darbui su taško vieta (koordinatėmis).</string>
+  <string name="tip_map_context_menu_t">\tŽemėlapio kontekstinis meniu yra pasiekiamas paspaudus ir laikant ant žemėlapio arba paspaudus valdymo rutulį. 
+\n\tTaip ant žemėlapio bus uždėtas taškas su koordinatėmis. Norėdami atverti žemėlapio kontekstinį meniu tam taškui – paspauskite ant jo. (Arba paspauskite ir laikykite jį paspaudę, jei norite, kad jis pradingtų.) 
+\n\tŽemėlapio kontekstiniame meniu rasite visus veiksmus, reikalingus darbui su pažymėtu tašku.</string>
   <string name="tip_initial">Patarimai ir gudrybės</string>
   <string name="tip_initial_t">\tOsmAnd yra daug funkcijų turinti navigacijos programa. 
 \n\tPradiniam supažindinimui keletas pagrindinių patarimų būna rodomi pagrindinio meniu rodinyje.</string>
@@ -989,11 +989,13 @@
   <string name="show_speed_limits">Rodyti greičio ribojimus</string>
   <string name="avoid_toll_roads">Vengti mokamų kelių</string>
   <string name="tip_recent_changes_0_8_2_t">Pakeitimai 0.8.2 versijoje :
-    \n\t* Patobulintas maršruto sudarymas
-    \n\t* Dinaminiai žemėlapių valdikliai
-    \n\t* Ekrano užrakto mygtukas su stebėjimo servisais
-    \n\t* Žemėlapio nustatymai perkelti į žemėlapio rodinį
- </string>
+\n\t* Patobulintas maršruto sudarymas
+\n\t* Dinaminiai žemėlapių valdikliai
+\n\t* Ekrano užrakto mygtukas su stebėjimo servisais
+\n\t* Žemėlapio nustatymai perkelti į žemėlapio rodinį
+\n\t* Ekrano užrakinimo mygtukas su sekimo paslaugomis
+\n\t* Sutvarkyti arabų, kanadų skriptai ir kalbos, kuriomis rašoma iš dešinės į kairę
+</string>
   <string name="map_widget_top_text">Gatvės pavadinimas</string>
   <string name="map_widget_config">Konfigūruoti ekraną</string>
   <string name="map_widget_map_select">Žemėlapio šaltinis</string>
@@ -1058,17 +1060,17 @@
 \n\t\'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas)</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
 \n\tJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio ekrano kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą.</string>
-<string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.↵
-\n\tPasirinkimai:↵
-\n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up↵
-\n\t\'Į judėjimo kryptį\' - Map will continuously be aligned with your heading↵
-\n\t\'Į kompasą\' - Žemėlapis bus nuolat lygiuojamas pagal prietaiso kompasą↵</string>
+<string name="tip_rotation_switching_t_v2">\tJūs galite pasirinkti ar ir kaip bus pasukamas žemėlapis paspaudus ant kompaso ikonos žemėlapio rodinyje. Turėsite tokias galimybes:
+\n\t\'Nesukti (šiaurė viršuje)\' - Žemėlapis nebus sukamas. Šiaurė visada bus viršuje
+\n\t\'Į judėjimo kryptį\' - Žemėlapis visą laiką bus pasuktas judėjimo kryptimi
+\n\t\'Į kompasą\' - Žemėlapis visą laiką bus pasuktas į kompasi rodomą kryptį (gali būti netiksli, tinka einant)
+</string>
 <string name="osmand_short_description_80_chars">OsmAnd - atviro kodo navigacijos programa su interneto/parsiųstais žemėlapius</string>
 <string name="avoid_motorway">Vengti greitkelių</string>
 <string name="tip_recent_changes_0_8_3_t">Pakeitimai 0.8.3 versijoje :
 \n\t* Patobulintas kelio vedimas
 \n\t* Galimybė vengti greitkelių
-\n\t* Cycleway=track display
+\n\t* Važiavimas dviračiu = nuvažiuoto kelio rodymas
 \n\t* Vartotojo sąsajos išbaigtumas (ikonos)
 \n\t* Keli klaidų pataisymai
 </string>
