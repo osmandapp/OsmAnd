@@ -454,7 +454,6 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode mode = getAppMode(buttons, settings);
 				if (!checkPointToNavigate()) {
 					return;
 				}
@@ -462,11 +461,12 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
 					return;
 				}
-				routingHelper.setAppMode(mode);
+				ApplicationMode mode = getAppMode(buttons, settings);
 				// Do not overwrite PREV_APPLICATION_MODE if already navigating
 				if (!routingHelper.isFollowingMode()) {
 					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				}
+				routingHelper.setAppMode(mode);
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
@@ -504,7 +504,6 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.updateApplicationModeSettings();
 					mapActivity.getMapView().refreshMap(true);
 				}
-
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_THE_ROUTE.set(true);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -589,6 +588,10 @@ public class MapActivityActions implements DialogProvider {
 							}
 						}
 						// change global settings
+						// Do not overwrite PREV_APPLICATION_MODE if already navigating
+						if (!routingHelper.isFollowingMode()) {
+							settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+						}
 						boolean changed = settings.APPLICATION_MODE.set(appMode);
 						if (changed) {
 							mapActivity.updateApplicationModeSettings();	
