@@ -454,7 +454,6 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode mode = getAppMode(buttons, settings);
 				if (!checkPointToNavigate()) {
 					return;
 				}
@@ -462,6 +461,7 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
 					return;
 				}
+				ApplicationMode mode = getAppMode(buttons, settings);
 				routingHelper.setAppMode(mode);
 				// Do not overwrite PREV_APPLICATION_MODE if already navigating
 				if (!routingHelper.isFollowingMode()) {
