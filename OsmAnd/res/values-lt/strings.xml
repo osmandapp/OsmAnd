@@ -43,7 +43,7 @@
   <string name="rendering_attr_noPolygons_description">Visus aplinkos objektus pažymėtus žemėlapyje daryti skaidriais</string>
   <string name="rendering_attr_noPolygons_name">Jokių daugiakampių</string>
   <string name="rendering_attr_appMode_name">Vaizdavimo režimas</string>
-  <string name="rendering_attr_appMode_description">Žemėlapio optimizavimas atitinkamam vartotojo profiliui</string>
+  <string name="rendering_attr_appMode_description">Žemėlapį optimizuoti</string>
   <string name="rendering_attr_contourLines_description">Rodyti pradedant masteliu (reikia SRTM failo):</string>
   <string name="rendering_attr_contourLines_name">Rodyti kontūrų linijas</string>
   <string name="rendering_attr_hmRendered_description">Padidinti rodomų žemėlapio detalių kiekį</string>
