@@ -26,18 +26,22 @@ public class SpecialPhrases {
 	 * 
 	 * If the language isn't set yet, a nullpointer exception will be thrown
 	 * 
-	 * @param key the subtype to query
+	 * @param value the subtype to query
 	 * @return the special phrase according to the asked key, or "null" if the key isn't found
 	 */
-	public static String getSpecialPhrase(String key) {
+	public static String getSpecialPhrase(String value) {
 		if (m == null) {
 			// do not throw exception because OsmAndApplication is not always initiliazed before 
 			// this call
 			log.warn("The language has not been set for special phrases");
-			return null;
+			return value;
 			
 		}
-		return m.get(key);
+		String specialValue = m.get(value);
+		if(Algoritms.isEmpty(specialValue)) {
+			return value;
+		}
+		return specialValue;
 	}
 
 	/**

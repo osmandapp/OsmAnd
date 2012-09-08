@@ -3,7 +3,10 @@
  */
 package net.osmand.plus.activities;
 
+import java.text.Collator;
 import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -16,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
+import net.osmand.plus.SpecialPhrases;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchPOIActivity;
 import android.app.AlertDialog;
@@ -197,8 +201,22 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		}
 
 		final String[] array = subCategories.toArray(new String[0]);
+		final Collator cl = Collator.getInstance();
+		cl.setStrength(Collator.SECONDARY);
+		Arrays.sort(array, 0, array.length, new Comparator<String>() {
+
+			@Override
+			public int compare(String object1, String object2) {
+				String v1 = SpecialPhrases.getSpecialPhrase(object1).replace('_', ' ');
+				String v2 = SpecialPhrases.getSpecialPhrase(object2).replace('_', ' ');
+				return cl.compare(v1, v2);
+			}
+		});
+		final String[] visibleNames = new String[array.length];
 		final boolean[] selected = new boolean[array.length];
-		for (int i = 0; i < selected.length; i++) {
+		
+		for (int i = 0; i < array.length; i++) {
+			visibleNames[i] = SpecialPhrases.getSpecialPhrase(array[i]).replace('_', ' ');			
 			if (acceptedCategories == null) {
 				selected[i] = true;
 			} else {
@@ -239,7 +257,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			}
 		});
 
-		builder.setMultiChoiceItems(array, selected, new DialogInterface.OnMultiChoiceClickListener() {
+		builder.setMultiChoiceItems(visibleNames, selected, new DialogInterface.OnMultiChoiceClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int item, boolean isChecked) {

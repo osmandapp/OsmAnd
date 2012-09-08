@@ -201,10 +201,6 @@ public class OsmAndFormatter {
 	public static String getPoiStringWithoutType(Amenity amenity, boolean en) {
 		String type = SpecialPhrases.getSpecialPhrase(amenity.getSubType());
 		String n = amenity.getName(en);
-
-		if (type == null) {
-			type = amenity.getSubType();
-		}
 		if (n.indexOf(type) != -1) {
 			// type is contained in name e.g.
 			// n = "Bakery the Corner"
