@@ -15,12 +15,16 @@
    url_template="public static String eqt(int z, int x, int y) {static final char[] NUM_CHAR = { &apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos; };char[] tn = new char[z];for (int i = z - 1; i &gt;= 0; i--) {int num = (x % 2) | ((y % 2) &lt;&lt; 1);tn[i] = NUM_CHAR[num];x &gt;&gt;= 1;y &gt;&gt;= 1;}return new String(tn);} String getTileUrl(int z, int x, int y) { return &quot;http://&quot; + &quot;a&quot; + &quot;0&quot; + &quot;.ortho.tiles.virtualearth.net/tiles/&quot; + &quot;a&quot; + eqt(z,x,y) + &quot;.jpg&quot; + &quot;?g=45&quot;;}"/>
    
    <tile_source name="ÖPNV Transit" url_template="http://tile.xn--pnvkarte-m4a.de/tilegen/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="18" tile_size="256" img_density="16" avg_img_size="18000"/> 
+   <tile_source name="Public Transport" url_template="http://openptmap.org/tiles/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="16" avg_img_size="5000"/> 
+
    <tile_source name="Hike Bike Map" url_template="http://toolserver.org/tiles/hikebike/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="8" avg_img_size="18000"/>
    <tile_source name="Hike Bike Map (Hills Underlay)" url_template="http://toolserver.org/~cmarqu/hill/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="16" avg_img_size="18000"/>
 
 
    <tile_source name="OpenPisteMap" url_template="http://openpistemap.org/tiles/contours/{0}/{1}/{2}.png" ext=".png" min_zoom="5" max_zoom="17" tile_size="256" img_density="32" avg_img_size="18000"/>
    <tile_source name="Relief" url_template="http://www.maps-for-free.com/layer/relief/z{0}/row{2}/{0}_{1}-{2}.jpg" ext=".jpg" min_zoom="1" max_zoom="12" tile_size="256" img_density="32" avg_img_size="24000"/>
+
+   <tile_source name="Fire Hydrants" url_template="http://openfiremap.org/hytiles/{0}/{1}/{2}.png" ext=".png" min_zoom="1" max_zoom="17" tile_size="256" img_density="16" avg_img_size="2000"/> 
 
 <!--
    <tile_source name="Cykloatlas CZ" url_template="http://services.tmapserver.cz/tiles/gm/shc/{0}/{1}/{2}.png" ext=".png" min_zoom="7" max_zoom="16" tile_size="256" img_density="16" avg_img_size="26000"/>
