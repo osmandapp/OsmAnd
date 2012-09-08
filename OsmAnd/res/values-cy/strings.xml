@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="avoid_in_routing_title">Osgoi...</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau</string>
@@ -65,4 +65,14 @@
 <string name="select_animate_speedup">Defnyddio cyflymu animeiddio taith</string>
 <string name="global_app_allocated_memory_descr">Cof Dynodedig %1$s MB (Terfyn Android %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Cof Dynodedig</string>
+<string name="live_monitoring_mode_off">Cychwyn\n tracio byw</string>
+<string name="live_monitoring_mode_on">Atal\n tracio byw</string>
+<string name="layer_map_appearance">Ffurfweddu/'r sgrin...</string>
+<string name="show_lanes">Dangos lonydd</string>
+<string name="avoid_unpaved">Osgoi ffyrdd heb wyneb caled</string>
+<string name="avoid_ferries">Osgoi fferïau</string>
+<string name="native_app_allocated_memory">Cyfanswm cof cynhenid</string>
+<string name="update_downlod_list">Ail lwytho rhestr</string>
+<string name="starting_point_too_far">Man cychwyn yn rhy bell o/'r ffordd agosaf</string>
+<string name="shared_location">Lleoliad rhanedig</string>
 </resources>
