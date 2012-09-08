@@ -1031,30 +1031,63 @@
 <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
 <string name="int_continuosly">Continuo</string>
 <string name="email">e-mail</string>
-<string name="tip_rotation_switching_t_v2">﻿\tTu puoi cambiare, se e come vuoi, la rotazione della visualizzazione della mappa cliccando ripetutamente sull\'icona della bussola nello schermo della mappa.↵
-\n\tLe scelte sono:↵
-\n\t\'Non ruotare (nord in alto)\' - La mappa non sarà ruotata. Il Nord sarà sempre in alto↵
-\n\t\'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione↵
-\n\t\'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo↵</string>
-<string name="tip_day_night_mode_t_v2">\tL\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).↵
-\n\tI colori notturni sono più sicuri per la guida notturna.↵
-\n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo...\' -&gt;\'Giorno/notte mappa\'.↵
-\n\tLe scelte sono:↵
-\n\t\'Alba/Tramonto\' - automaticamente, in base alla posizione del sole (preimpostato)↵
-\n\t\'Day\' - usa sempre il modo diurno↵
-\n\t\'Night\' - usa sempre il modo notturno ↵
+<string name="tip_rotation_switching_t_v2">﻿\tTu puoi cambiare, se e come vuoi, la rotazione della visualizzazione della mappa cliccando ripetutamente sull\'icona della bussola nello schermo della mappa.
+\n\tLe scelte sono:
+\n\t\'Non ruotare (nord in alto)\' - La mappa non sarà ruotata. Il Nord sarà sempre in alto
+\n\t\'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione
+\n\t\'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo</string>
+<string name="tip_day_night_mode_t_v2">\tL\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).
+\n\tI colori notturni sono più sicuri per la guida notturna.
+\n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo...\' -&gt;\'Giorno/notte mappa\'.
+\n\tLe scelte sono:
+\n\t\'Alba/Tramonto\' - automaticamente, in base alla posizione del sole (preimpostato)
+\n\t\'Day\' - usa sempre il modo diurno
+\n\t\'Night\' - usa sempre il modo notturno
 \n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
 <string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\'in visualizzazione mappa.↵
 \n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.↵
 \n\tOsmAnd supporta anche sorgenti su misura.</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.↵
+<string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
 <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
 <string name="osmand_long_description_1000_chars">
-" OsmAnd (OSM Automatizzata Navigazione Direzioni)  OsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità - Allineamento della mappa in base alla direzione o alla bussola Limitazioni di questa versione gratuita di OsmAnd: - Numero di mappe scaricabili limitato - Non funziona l\'accesso ai PDI offline di Wikipedia OsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net"</string>
+" OsmAnd (OSM Automatizzata Navigazione Direzioni)
+
+\n\tOsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva. 
+
+\n\tAlcune delle caratteristiche principali: 
+\n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) 
+\n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione 
+\n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma 
+\n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile 
+\n\t- Ricerca offline per indirizzi e luoghi (PDI) 
+\n\t- Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità - Allineamento della mappa in base alla direzione o alla bussola 
+\n\t
+Limitazioni di questa versione gratuita di OsmAnd: 
+\n\t- Numero di mappe scaricabili limitato 
+\n\t- Non funziona l\'accesso ai PDI offline di Wikipedia 
+\n\t
+\n\tOsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net"</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
-<string name="osmand_plus_long_description_1000_chars">
-" OsmAnd+ (OSM Automatizzata Navigazione Direzioni)  OsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva. OsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo intero a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dal programma↵ - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con:↵ - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità↵ - Allineamento della mappa in base alla direzione o alla bussola"</string>
+<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
+\n\t
+\n\tOsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.
+\n\t
+\n\tOsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. 
+\n\t
+\n\tAlcune delle caratteristiche principali: 
+\n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) 
+\n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione 
+\n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma 
+\n\t- WIkipedia Offline Wikipedia (scarica i PDI Wikipedia), ottimo per la visualizzazione
+\n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile 
+\n\t- Ricerca offline per indirizzi e luoghi (PDI) 
+\n\t- Calcolo del percorso per brevi distanze (sperimentale) 
+\n\t- Modalità automobile, bicicletta e pedonale con: 
+\n\t- commutazione opzionale automatica della vista giorno/notte 
+\n\t- zoom automatico opzionale in base alla velocità 
+\n\t- allineamento della mappa in base alla direzione o alla bussola
+\n\t- opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS</string>
 <string name="tip_recent_changes_0_8_3_t">Cambiamenti nella 0.8.3:
 \n\t* Migliorata la guida dell\'itinerario
 \n\t* Opzione evita autostrade
