@@ -354,7 +354,7 @@
   <string name="poi_filter_custom_filter">Filtro personalizzato</string>
   <string name="poi_filter_food_shop">Alimentari</string>
   <string name="poi_filter_for_tourists">Per Turisti</string>
-  <string name="poi_filter_fuel">Benzina</string>
+  <string name="poi_filter_fuel">Carburante</string>
   <string name="poi_filter_namefinder">Ricerca nomi Online</string>
   <string name="reading_cached_tiles">Lettura tasselli dalla cache…</string>
   <string name="version_index_is_big_for_memory">L\'indice \'\'{0}\'\' è troppo grande per l\'attuale memoria</string>
@@ -636,7 +636,7 @@
   <string name="show_osm_bugs_descr">Visualizza OpenStreetBugs sulla mappa</string>
   <string name="show_osm_bugs">Visualizza OpenStreetBugs</string>
   <string name="favourites_activity">Lista dei punti preferiti</string>
-  <string name="add_to_favourite">Aggiungere ai Preferiti</string>
+  <string name="add_to_favourite">Aggiungi ai Preferiti</string>
   <string name="use_english_names_descr">Selezionare l\'uso dei nomi locali o inglesi</string>
   <string name="use_english_names">Utilizzare nomi inglesi nelle mappe</string>
   <string name="app_settings">Impostazioni applicazione</string>
@@ -702,11 +702,11 @@
   <string name="search_address_building_option">Civico</string>
   <string name="search_address_street_option">Incrocio</string>
   <string name="search_tabs_location">Luogo</string>
-  <string name="context_menu_item_navigate_point">Navigare verso qui</string>
+  <string name="context_menu_item_navigate_point">Naviga verso qui</string>
   <string name="context_menu_item_add_favorite">Aggiungere ai preferiti</string>
   <string name="context_menu_item_update_map">Aggiornare la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
-  <string name="context_menu_item_create_poi">Creare un PDI</string>
+  <string name="context_menu_item_create_poi">Sostentamento</string>
   <string name="default_buttons_yes">Si</string>
   <string name="default_buttons_cancel">Annulla</string>
   <string name="default_buttons_apply">Applica</string>
