@@ -524,6 +524,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 		MapActivityActions.createDirectionsActions(qa, amenity.getLocation(), amenity, name, z, this, true , null);
 		ActionItem poiDescription = new ActionItem();
+		poiDescription.setIcon(getResources().getDrawable(R.drawable.list_activities_show_poi_description));
 		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
 		poiDescription.setOnClickListener(new OnClickListener() {
 			
