@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
-	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarfallen, Rüttelschwellen u.Ä.</string>
+	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarkontrollen, Rüttelschwellen u.Ä.</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Autobahnen vermeiden</string>
@@ -67,7 +67,7 @@
 		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
 		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 	</string>
-	<string name="select_navigation_mode">Transportmittel wählen</string>
+	<string name="select_navigation_mode">Nutzerprofil wählen</string>
 	<string name="day_night_info_description">Sonnenaufgang: %1$s \nSonnenuntergang: %2$s
 	</string>
 	<string name="day_night_info">Tag/Nacht-Information</string>
@@ -264,7 +264,7 @@
 	<string name="monitor_preferences">Positions-Logging</string>
 	<string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
 	<string name="routing_settings">Navigation</string>
-	<string name="routing_settings_descr">Navigationsoptionen</string>
+	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
 	<string name="index_settings">Offline-Daten</string>
 	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten</string>
@@ -528,8 +528,14 @@
 	<string name="tip_navigation">Navigation</string>
 	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' → \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
 	<string name="tip_search">Suchen</string>
-	<string name="tip_search_t">\tSie können Orte über Eingabe der Adresse, Angabe der Koordinaten, als POI, oder mittels Ihrer Favoriten suchen.
-		\n\tUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für einen Treffer bietet zwei Optionen: \'Als Ziel wählen\' oder \'Auf Karte zeigen\'.
+	<string name="tip_search_t">\tUm einen bestimmten Ort zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
+\n+Eingabe der Adresse
+\n+Angabe der Koordinaten
+\n+als POI
+\n+mittels Ihrer Favoriten
+\n\tUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für einen Treffer bietet zwei Optionen: 
+\n+\'Als Ziel wählen\' und 
+\n+\'Auf Karte zeigen\'
 	</string>
 	<string name="tip_map_context_menu">Kontextmenü in der Karte</string>
 	<string name="tip_map_context_menu_t">\tDas Karten-Kontextmenü wird über ein langes Drücken auf einen Punkt in der Karte oder das Drücken des Trackball-Knopfes in der Kartenansicht aufgerufen.
@@ -1007,7 +1013,7 @@
 	<string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>
 	<string name="local_index_routing_data">Routing-Daten</string>
 	<string name="navigate_point_format">Format :</string>
-	<string name="poi_search_desc">POI-(Point of interest) Suche</string>
+	<string name="poi_search_desc">POI-(Point of Interest) Suche</string>
 	<string name="address_search_desc">Adress-Suche</string>
 	<string name="navpoint_search_desc">Koordinaten</string>
 	<string name="transport_search_desc">ÖPNV-Suche</string>
@@ -1063,7 +1069,7 @@
 	<string name="show_cameras_descr">Radarkontrollen anzeigen (in einigen Ländern illegal!)</string>
 	<string name="show_speed_limits_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
 	<string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string>
-	<string name="show_cameras">Radarkontrollen anzeigen</string>
+	<string name="show_cameras">Radarfallen anzeigen</string>
 	<string name="show_speed_limits">Tempolimit anzeigen</string>
 	<string name="avoid_toll_roads">Vermeide Mautstraßen</string>
 	<string name="map_widget_top_text">Straßenname</string>
@@ -1102,7 +1108,7 @@
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
 	<string name="avoid_ferries">Vermeide Fähren</string>
 	<string name="avoid_in_routing_title">Vermeide…</string>
-	<string name="avoid_in_routing_descr">Mautstraßen, Fähren und ungeteerte Straßen vermeiden</string>
+	<string name="avoid_in_routing_descr">Bestimmte Straßentypen von der Routenberechnung ausschließen</string>
 	<string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
 	<string name="map_widget_show_ruler">Maßstab</string>
 	<string name="map_widget_appearance">Verschiedenes:</string>
