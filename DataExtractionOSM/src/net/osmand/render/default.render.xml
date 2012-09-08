@@ -216,7 +216,8 @@
 			<filter appMode="pedestrian" tag="highway" value="bridleway" order="59"/>
 			<filter tag="highway" value="bridleway" order="36"/>
 			
-			<filter tag="natural" value="coastline_broken" order="35"/> 
+			<filter tag="natural" value="coastline_broken" order="35"/>
+			<filter tag="natural" value="coastline_line" order="35"/>
 			<filter tag="route" value="ferry" order="35"/>
 			<filter tag="aeroway" value="" order="32"/>
 			<filter tag="contour" value="" order="15"/>
@@ -1016,6 +1017,7 @@
 
 	<line>
 		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="1"/>
+		<filter minzoom="11" tag="natural" value="coastline_line" color="#cc999999" strokeWidth="1"/>
 		<group>
 				<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#6666CC"/>
 				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/ -->
