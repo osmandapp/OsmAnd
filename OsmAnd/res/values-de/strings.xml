@@ -123,7 +123,7 @@
 	<string name="test_voice_prompts">Sprachansagen testen</string>
 	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden.
 		\n\t
-		\n\tBitte Vektor-Karte via \'Einstellungen\' -&gt; \'Offline-Daten\' laden, oder Online-Karte via \'Einstellungen\' -&gt; \'Landkarten\' verwenden.</string>
+		\n\tBitte Vektor-Karte via \'Einstellungen\' → \'Offline-Daten\' laden, oder Online-Karte via \'Einstellungen\' → \'Landkarten\' verwenden.</string>
 	<string name="tip_recent_changes_0_7_2_t">"Änderungen in 0.7.2 :
 		\n\t- Native rendering auf allen Geräten
 		\n\t- Editiere POIs offline
@@ -230,7 +230,7 @@
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
-	<string name="gpx_monitoring_disabled_warn">Bitte Logging unter \'Einstellungen\' -&gt; \'Navigation\' aktivieren.</string>
+	<string name="gpx_monitoring_disabled_warn">Bitte Logging unter \'Einstellungen\' → \'Navigation\' aktivieren.</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 :
 		\n\t- Offline Wikipedia Daten mit Artikeln
@@ -266,8 +266,8 @@
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Navigationsoptionen</string>
 	<string name="global_settings">Globale Einstellungen</string>
-	<string name="index_settings">Offline-Daten (laden)</string>
-	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten für Offline-Verwendung</string>
+	<string name="index_settings">Offline-Daten</string>
+	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
@@ -286,11 +286,11 @@
 	</string>
 	<string name="binary_map_download_success">Download erfolgreich.
 		\n\t
-		\n\tAktivieren unter: \'Menü\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle...\' -&gt; \'Offline-Vektor-Karten\'</string>
+		\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle...\' → \'Offline-Vektor-Karten\'</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
 		\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-		\n\tDer Umschaltmechanismus kann in der Kartenansicht unter \'Konfigurieren\' -&gt; \'Tag/Nacht-Modus\' geändert werden.
+		\n\tDer Umschaltmechanismus kann in der Kartenansicht unter \'Konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 		\n\tZur Auswahl stehen:
 		\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
 		\n\t\'Tag\' - permanente Tagesansicht
@@ -299,7 +299,7 @@
 	</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
 	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
-		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' -&gt; \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
+		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' → \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
 		\n\tEinen neuen POI erstellen Sie ganz einfach mittels \'POI erstellen\' im Karten-Kontextmenü. Anschließend die Informationen zum POI eintragen und über die Menüführung zu OSM hochladen. Fertig! 
 		\n\tGefundene Fehler auf der Karte können direkt gemeldet werden.
 		\n\tOSM-Fehlerberichte erstellen Sie mittels \'OSM-Fehlerbericht einsenden\' im Karten-Kontextmenü.
@@ -307,7 +307,7 @@
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_select_destination_point">Ziel wählen</string>
-	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte über das Kontextmenü -&gt; \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.
+	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte über das Kontextmenü → \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.
 		\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.</string>
 	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9 :
 		\n\t- Verbesserte Offline-Kartenanzeige 
@@ -464,7 +464,7 @@
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
-		\n\tZur Verwendung aktivieren: \'Menu\' -&gt; \'Darstellung\' -&gt; \'Kartenquelle…\' -&gt; \'Offline-Vektor-Karten\'.</string>
+		\n\tZur Verwendung aktivieren: \'Menu\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -489,8 +489,8 @@
 	<string name="install_more">Weitere installieren …</string>
 	<string name="tip_update_index">Update der Offline-Daten</string>
 	<string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
-		\n\tUpdates finden Sie via \'Hauptmenü\' -&gt; \'Einstellungen\' -&gt; \'Offline-Daten\'.
-		\n\tNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' -&gt; \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
+		\n\tUpdates finden Sie via \'Hauptmenü\' → \'Einstellungen\' → \'Offline-Daten\'.
+		\n\tNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
 		\n\tAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
 		\n\t\'Grün\' - Daten sind aktuell
 		\n\t\'Blau\' - neuere Version vorhanden
@@ -517,8 +517,8 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' -&gt; \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen.
-		\n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAndMapCreator) erstellten Karten wählen.
+	<string name="tip_map_switch_t_v2">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' → \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen.
+		\n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAnd-MapCreator) erstellten Karten wählen.
 		\n\tOsmAnd unterstützt auch selbst definierte Quellen. (Für Online-Karten entsprechendes Plugin aktivieren.)
 	</string>
 	<string name="tip_app_mode">Nutzerprofile</string>
@@ -526,7 +526,7 @@
 		\n\tDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildsschirm gewählt werden, oder auch beim Berechnen einer Route.
 	</string>
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' -&gt; \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
+	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' → \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">\tSie können Orte über Eingabe der Adresse, Angabe der Koordinaten, als POI, oder mittels Ihrer Favoriten suchen.
 		\n\tUnter \'Suche\' im Hauptmenü finden Sie alle genannten Such-Möglichkeiten. Ein Kontextmenü für einen Treffer bietet zwei Optionen: \'Als Ziel wählen\' oder \'Auf Karte zeigen\'.
