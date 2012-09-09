@@ -150,6 +150,12 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		return new File(voiceDir, CONFIG_FILE).exists();
 	}
 	
+	/**
+	 * This helper class allows API level 8 calls to be isolated from the rest of the app.
+	 * This class is only be instantiated on OS versions which support it. 
+	 * @author genly
+	 *
+	 */
 	// We Use API level 8 calls here, suppress warnings.
 	@SuppressLint("NewApi")
     public class AudioFocusHelper implements AudioManager.OnAudioFocusChangeListener {
@@ -167,15 +173,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		}
 
 		public boolean abandonFocus() {
-			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED ==
-					mAudioManager.abandonAudioFocus(this);
+			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
 		}
 	    @Override
 	    public void onAudioFocusChange(int focusChange) {
-	    	if (focusChange == AudioManager.AUDIOFOCUS_GAIN)
-	    		playQueue();
-	    	else
-	    		log.error("Unable to gain audio focus");
+	    		log.error("MediaCommandPlayerImpl.onAudioFocusChange(): Unexpected audio focus change: "+focusChange);
 	    }
 	}
 }
