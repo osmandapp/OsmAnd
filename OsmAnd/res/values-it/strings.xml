@@ -27,7 +27,7 @@
   <string name="live_monitoring">﻿Tracking live online</string>
   <string name="live_monitoring_interval_descr">Specifica l\'intervallo del Live Tracking</string>
   <string name="live_monitoring_interval">Intervallo del Live tracking</string>
-  <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url_descr">Specifica l\'indirizzo internet con la sintassi dei parametri: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Indirizzo internet per il Live Tracking</string>
   <string name="gpx_monitoring_disabled_warn">Per favore abilita \'Registrazione della traccia in GPX file\' impostazioni.</string>
   <string name="show_current_gpx_title">Mostra la traccia corrente</string>
@@ -50,7 +50,7 @@
   <string name="routing_settings_descr">Specifica le opzioni di navigazione</string>
   <string name="global_settings">Impostazioni globali</string>
   <string name="index_settings">Dati Offline (Scarica)</string>
-  <string name="index_settings_descr">Scarica, visualizza i dettagli, e gestisci le mappe offline</string>
+  <string name="index_settings_descr">Scarica, visualizza i dettagli e gestisci le mappe offline</string>
   <string name="general_settings">Impostazioni generali</string>
   <string name="general_settings_descr">Configura le impostazioni globali</string>
   <string name="global_app_settings">Impostazioni globali app</string>
@@ -143,8 +143,8 @@
   <string name="search_position_map_view">Ultima vista mappa</string>
   <string name="select_search_position">Cerca vicino a:</string>
   <string name="context_menu_item_search">Cerca</string>
-  <string name="tip_recent_changes_0_6_7_t">"Modifiche recenti versione 0.6.7:
-\n\t- Manager dati offline (scaricare, cancellare e backup di dati offlina direttamente da OsmAnd)
+  <string name="tip_recent_changes_0_6_7_t">Modifiche recenti versione 0.6.7:
+\n\t- Manager dati offline (scaricare, cancellare e backup di dati offline direttamente da OsmAnd)
 \n\t- Punti e gruppi Preferiti (categorizza, cancella, gestisci preferiti)
 \n\t- GPX Explorer nella applicazione (vedere percorsi, distanze, velocità, elevazione, ecc.)
 \n\t- Navigazione GPX (opzioni utili, continua la navigazione post crash, supporto rotonde)
@@ -153,7 +153,7 @@
 \n\t- Invio di file GPX alla comunità OSM (http://download.osmand.net/gpx/)
 \n\t- Migliorie al rendering dei vettori
 \n\t- Migliorie al motore TTS (distanza esatta, miglia abilitate)
-\n\t- Fix di bug vari "</string>
+\n\t- Fix di bug vari</string>
   <string name="save_route_dialog_title">Salva il percorso in formato GPX</string>
   <string name="route_successfully_saved_at">Percorso salvato come \'%1$s\'.</string>
   <string name="filename_input">Nome file: </string>
@@ -175,10 +175,10 @@
   <string name="basemap_missing">la mappa di Base del mondo (che ricopre il mondo per zoom piccoli) è mancante. Puoi scaricare World_basemap_x.obf per ottenerla.</string>
   <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
   <string name="local_index_gpx_info_show">\n\nClick lungo per mostrare opzioni</string>
-  <string name="local_index_gpx_info_speed">\nVelocità media : %1$s
-\nVelocità massima : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nAltitudine media : %1$.0f m\nAltitudine minima : %2$.0f m\nAltitudine massima : %3$.0f m\nSalite : %4$.0f m\nDiscese : %5$.0f m</string>
-  <string name="local_index_gpx_info">Subtracks : %1$d\nPunti totali : %2$d\nWay points : %3$d\nDistanza totale : %4$s\nOra partenza : %5$tF, %5$tR\nOra arrivo : %6$tF, %6$tR</string>
+  <string name="local_index_gpx_info_speed">\nVelocità media: %1$s
+\nVelocità massima: %2$s</string>
+  <string name="local_index_gpx_info_elevation">\nAltitudine media: %1$.0f m\nAltitudine minima: %2$.0f m\nAltitudine massima: %3$.0f m\nSalite: %4$.0f m\nDiscese: %5$.0f m</string>
+  <string name="local_index_gpx_info">Sottotraccia: %1$d\nPunti totali: %2$d\nWay points: %3$d\nDistanza totale: %4$s\nOra partenza: %5$tF, %5$tR\nOra arrivo: %6$tF, %6$tR</string>
   <string name="local_index_installed">Edizione</string>
   <string name="local_index_items_backuped">%1$d su %2$d oggetto/i backuppato/i.</string>
   <string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i.</string>
@@ -186,14 +186,14 @@
   <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
   <string name="local_index_action_do">Stai per %1$s %2$s oggetti/i. Continuare?</string>
   <string name="local_index_descr_title">Manager Dati Offline</string>
-  <string name="local_index_mi_restore">Ripristina</string>
-  <string name="local_index_mi_backup">Backup</string>
+  <string name="local_index_mi_restore">Attiva</string>
+  <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
   <string name="local_index_mi_reload">Ricarica dalla scheda sd</string>
   <string name="local_index_download">Scarica…</string>
-  <string name="local_index_tile_data">Dati tile: %1$s
-\nZoom minimo : %2$d\nZoom massimo : %3$d\nScaricabile : %4$s
-\nZoom scaricati : %5$s</string>
+  <string name="local_index_tile_data">Dati mattonelle: %1$s
+\nZoom minimo: %2$d\nZoom massimo: %3$d\nScaricabile: %4$s
+\nZoom scaricati: %5$s</string>
   <string name="local_index_poi_data">Dati PDI</string>
   <string name="local_index_address_data">Dati indirizzi</string>
   <string name="local_index_transport_data">Dati trasporti</string>
@@ -209,23 +209,23 @@
   <string name="ttsvoice">Voce TTS</string>
   <string name="search_offline_clear_search">Nuova Ricerca</string>
   <string name="map_text_size_descr">Seleziona la dimensione del testo per i nomi sulla mappa</string>
-  <string name="map_text_size">Dimensione testo</string>
-  <string name="trace_rendering">Info rendering debug</string>
-  <string name="trace_rendering_descr">Visualizza le performance del rendering a scopo di debug</string>
+  <string name="map_text_size">Dimensione testo mappa</string>
+  <string name="trace_rendering">Informazioni diagnostiche disegno</string>
+  <string name="trace_rendering_descr">Visualizza le performance del disegno a scopo di debug</string>
   <string name="tip_recent_changes">Modifiche recenti</string>
-  <string name="tip_recent_changes_0_6_6_t">"Modifiche alla 0.6.6 :
+  <string name="tip_recent_changes_0_6_6_t">Modifiche alla 0.6.6:
 \n\t- motore Text To Speech per la navigazione vocale
 \n\t- Renderer mappa più dettagliato
 \n\t- Mappa mondiale base con il pacchetto app
 \n\t- Migliorie routing offline (sempre sperimentale)
-\n\t- opzioni routing GPX
-\n\t- UI update e fix bug "</string>
+\n\t- Opzioni navigazione GPX
+\n\t- UI aggiornamento e correzione errori</string>
   <string name="voice_not_use">Non usare</string>
   <string name="voice_not_specified">Nessuna</string>
-  <string name="installing_new_resources">Installando nuovi file…</string>
-  <string name="internet_connection_required_for_online_route">Stai per usare un servizio di routing online ma non sei su internet.</string>
+  <string name="installing_new_resources">Scompattando nuovi dati…</string>
+  <string name="internet_connection_required_for_online_route">E' selezionato un servizio di navigazione online ma la connessione a internet non è disponibile.</string>
   <string name="tts_language_not_supported_title">Lingua non supportata</string>
-  <string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere nel Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS di default.</string>
+  <string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere nel Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS preimpostata.</string>
   <string name="tts_missing_language_data_title">Dati mancanti</string>
   <string name="tts_missing_language_data">Nessun dato per la lingua selezionata è stato installato. Vuoi installarlo tramite il Market?</string>
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
@@ -897,7 +897,7 @@
   <string name="favourites_edit_dialog_name">Nome</string>
   <string name="favourites_edit_dialog_category">Categoria</string>
   <string name="local_index_routing_data">Dati per il routing</string>
-  <string name="navigate_point_format">Formato :</string>
+  <string name="navigate_point_format">Formato:</string>
   <string name="poi_search_desc">Ricerca PDI (Punti di Interesse)</string>
   <string name="address_search_desc">Ricerca degli indirizzi</string>
   <string name="navpoint_search_desc">Coordinate</string>
