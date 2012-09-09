@@ -57,6 +57,13 @@ bool processCoastlines(std::vector<MapDataObject*>&  coastLines, int leftX, int 
 			o->types.push_back(tag_value("natural", "coastline_broken"));
 			res.push_back(o);
 		}
+		// draw completed for debug purpose
+		for (int i = 0; i < completedRings.size(); i++) {
+			MapDataObject* o = new MapDataObject();
+			o->points = completedRings[i];
+			o->types.push_back(tag_value("natural", "coastline_line"));
+			res.push_back(o);
+		}
 
 	}
 	if (!showIfThereIncompleted && uncompletedRings.size() > 0) {

@@ -353,7 +353,7 @@ public class EditingPOIActivity implements DialogProvider {
 						}
 					});
 				}
-				v.invalidate();
+				layout.requestLayout();
 			}
 		});
 		

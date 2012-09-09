@@ -451,6 +451,7 @@ public class RouteProvider {
 						RouteDirectionInfo last = directions.get(directions.size() - 1);
 						// update speed using time and idstance
 						last.setAverageSpeed((distanceToEnd[last.routePointOffset] - distanceToEnd[offset])/last.getAverageSpeed());
+						last.distance = (int) (distanceToEnd[last.routePointOffset] - distanceToEnd[offset]);
 					} 
 					// save time as a speed because we don't know distance of the route segment
 					float avgSpeed = time;

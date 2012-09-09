@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -218,7 +219,7 @@ public class MapRenderingTypes {
 			for(MapRulType type : types.values()){
 				if(type.poiCategory != null && type.targetTagValue == null) {
 					if(!amenityTypeNameToTagVal.containsKey(type.poiCategory)) {
-						amenityTypeNameToTagVal.put(type.poiCategory, new LinkedHashMap<String, String>());
+						amenityTypeNameToTagVal.put(type.poiCategory, new TreeMap<String, String>());
 					}
 					String name = type.value;
 					if (name != null) {

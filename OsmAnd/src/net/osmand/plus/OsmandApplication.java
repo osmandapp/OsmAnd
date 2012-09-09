@@ -46,7 +46,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
@@ -510,10 +509,10 @@ public class OsmandApplication extends Application {
 				PrintStream printStream = new PrintStream(out);
 				ex.printStackTrace(printStream);
 				StringBuilder msg = new StringBuilder();
-				msg.append(
-						"Exception occured in thread " + thread.toString() + " : "). //$NON-NLS-1$ //$NON-NLS-2$
-						append(DateFormat.format("MMMM dd, yyyy h:mm:ss", System.currentTimeMillis())).append("\n"). //$NON-NLS-1$//$NON-NLS-2$
-						append(new String(out.toByteArray()));
+				msg.append("Version  " + Version.getFullVersion(OsmandApplication.this)). //$NON-NLS-1$ 
+					append("Exception occured in thread " + thread.toString() + " : "). //$NON-NLS-1$ //$NON-NLS-2$
+					append(DateFormat.format("MMMM dd, yyyy h:mm:ss", System.currentTimeMillis())).append("\n"). //$NON-NLS-1$//$NON-NLS-2$
+					append(new String(out.toByteArray()));
 
 				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));

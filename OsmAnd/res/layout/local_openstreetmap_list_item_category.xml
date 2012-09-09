@@ -4,6 +4,7 @@
 	android:background="@drawable/tab_menu_item_small">
 
     <ImageView
+        android:src="@drawable/expandable_category_unpushed"
         android:id="@+id/explist_indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
