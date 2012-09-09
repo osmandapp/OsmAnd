@@ -38,9 +38,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		throws CommandPlayerException
 	{
 		super(ctx, settings, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
-		mediaPlayer = new MediaPlayer();
 		this.streamType = settings.AUDIO_STREAM_GUIDANCE.get();  
-		mediaPlayer.setAudioStreamType(streamType);
 	}
 	
 	@Override
@@ -61,32 +59,37 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	}
 	
 	private synchronized void playQueue() {
-		while (!filesToPlay.isEmpty() && playNext) {
+		if (!playNext)
+			return;
+		while (!filesToPlay.isEmpty()) {
 			String f = filesToPlay.remove(0);
 			if (f != null && voiceDir != null) {
-				boolean exists = false;
 //				if(voiceZipFile != null){
 //					ZipEntry entry = voiceZipFile.getEntry(f);
 //					exists = entry != null;
 //					voiceZipFile.getInputStream(entry);
 //					
 //				} else {
-					File file = new File(voiceDir, f);
-					exists = file.exists();
-//				}
-				if (exists) {
+				File file = new File(voiceDir, f);
+				if (file.exists()) {
 					log.debug("Playing file : " + f); //$NON-NLS-1$
 					playNext = false;
 					try {
+						if (mediaPlayer == null) {
+							mediaPlayer = new MediaPlayer();
+						}
+
 						// Can't play sound file from zip it seams to be impossible only unpack and play!!!
+						mediaPlayer.setAudioStreamType(streamType);
 						mediaPlayer.setDataSource(file.getAbsolutePath());
 						mediaPlayer.prepare();
 						mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 							@Override
 							public void onCompletion(MediaPlayer mp) {
-								mp.release();
-								mediaPlayer = new MediaPlayer();
-								mediaPlayer.setAudioStreamType(streamType);
+								// Reset prepares to speak again. Don't release because if we have more to 
+								// say, we don't want our speech interrupted by other audio, such as music
+								// or a podcast.  We will release when we are done speaking.
+								mp.reset();
 								int sleep = 60;
 								boolean delay = true;
 								while (!filesToPlay.isEmpty() && delay) {
@@ -112,12 +115,16 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					} catch (Exception e) {
 						log.error("Error while playing voice command", e); //$NON-NLS-1$
 						playNext = true;
-						
 					}
 				} else {
 					log.info("Play file not found : " + f); //$NON-NLS-1$
 				}
 			} 
+		}
+		// Release the media player only when we are done speaking.  
+		if (mediaPlayer != null) {
+			mediaPlayer.release();
+			mediaPlayer = null;
 		}
 	}
 	
