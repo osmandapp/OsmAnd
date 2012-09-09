@@ -1,5 +1,6 @@
 package net.osmand.data;
 
+import net.osmand.Algoritms;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.OSMSettings.OSMTagKey;
@@ -88,6 +89,46 @@ public class Building extends MapObject {
 		}
 		return name;
 	}	
+	
+
+	public float interpolation(String hno) {
+		if(getInterpolationType() != null || getInterpolationInterval() > 0) {
+			int num = Algoritms.extractFirstIntegerNumber(hno);
+			int numB = Algoritms.extractFirstIntegerNumber(super.getName());
+			int numT = numB; 
+			if (num >= numB) {
+				if (getName2() != null) {
+					numT = Algoritms.extractFirstIntegerNumber(getName2());
+					if(numT < num) {
+						return -1;
+					}
+				}
+				if (getInterpolationType() == BuildingInterpolation.EVEN && num % 2 == 1) {
+					return -1;
+				}
+				if (getInterpolationType() == BuildingInterpolation.ODD && num % 2 == 0) {
+					return -1;
+				}
+				if (getInterpolationInterval() != 0 && (num - numB) % getInterpolationInterval() != 0) {
+					return -1;
+				}
+			}
+			if(numT > numB){
+				if(getInterpolationType() == BuildingInterpolation.EVEN || getInterpolationType() == BuildingInterpolation.ODD){
+					return ((float)num - numB) / (((float)numT - numB)*2f);
+				}
+				if (getInterpolationInterval() > 0) {
+					return ((float) num - numB) / (((float) numT - numB) * getInterpolationInterval());
+				}
+				return ((float)num - numB) / (((float)numT - numB));
+			}
+			return 0;
+		}
+		return -1;
+	}
+	public boolean belongsToInterpolation(String hno) {
+		return interpolation(hno) >= 0;
+	}
 	
 	@Override
 	public String toString() {
