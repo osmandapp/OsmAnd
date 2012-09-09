@@ -429,7 +429,7 @@
   <string name="point_on_map">Posizione:\n Lat %1$.5f Lon %2$.5f</string>
   <string name="osb_bug_name">Errore</string>
   <string name="poi_context_menu_modify">Modificare PDI</string>
-  <string name="poi_context_menu_delete">Eliminare PDI</string>
+  <string name="poi_context_menu_delete">Elimin PDI</string>
   <string name="rotate_map_compass_opt">Con bussola</string>
   <string name="rotate_map_bearing_opt">Nella direzione del movimento</string>
   <string name="rotate_map_none_opt">Nessuna rotazione</string>
@@ -543,7 +543,7 @@
   <string name="search_history_int_streets">Incrocio: {0} x {1} in {2}</string>
   <string name="search_history_building">Edifici: {0}, {1}, {2}</string>
   <string name="favorite">Preferito</string>
-  <string name="clear_all">Eliminare tutto</string>
+  <string name="clear_all">Cancella tutto</string>
   <string name="history">Recenti</string>
   <string name="uploading_data">Invio dati…</string>
   <string name="uploading">Invio…</string>
@@ -650,7 +650,7 @@
   <string name="map_specify_point">Specificare punto</string>
   <string name="show_view_angle_descr">Mostra aspetto della vista basato sulla bussola</string>
   <string name="show_view_angle">Mostra aspetto della vista</string>
-  <string name="stop_navigation">Eliminare destin.</string>
+  <string name="stop_navigation">Elimina destinaz.</string>
   <string name="navigate_to_point">Imposta come destin.</string>
   <string name="map_view_3d_descr">Abilitare la vista 3D sulla mappa</string>
   <string name="map_view_3d">Vista mappa 3D</string>
@@ -718,7 +718,7 @@
   <string name="favourites_context_menu_navigate">Navigare verso</string>
   <string name="favourites_context_menu_edit">Modifica preferito</string>
   <string name="favourites_context_menu_delete">Elimina preferito</string>
-  <string name="favourites_remove_dialog_msg">Si è sicuri di voler eliminare il punto preferito \'%s\'?</string>
+  <string name="favourites_remove_dialog_msg">Eliminare il punto preferito \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Il punto preferito {0} è stato eliminato.</string>
   <string name="osb_add_dialog_title">Inserire la descrizione del bug</string>
   <string name="osb_add_dialog_success">Il bug è stato creato</string>
@@ -726,10 +726,10 @@
   <string name="osb_comment_menu_item">Aggiungere commento</string>
   <string name="osb_comment_dialog_message">Messaggio</string>
   <string name="osb_comment_dialog_author">Nome Autore</string>
-  <string name="osb_comment_dialog_title">Aggiungere un commento al bug</string>
-  <string name="osb_comment_dialog_add_button">Aggiungi Commento</string>
-  <string name="osb_comment_dialog_success">Il commento è stato aggiunto</string>
-  <string name="osb_comment_dialog_error">Si è verificata un\'eccezione : il commento non è stato aggiunto</string>
+  <string name="osb_comment_dialog_title">Aggiungendo un commento al bug</string>
+  <string name="osb_comment_dialog_add_button">Aggiungi commento</string>
+  <string name="osb_comment_dialog_success">Il commento è stato aggiunto con successo</string>
+  <string name="osb_comment_dialog_error">Si è verificata un\'eccezione: il commento non è stato aggiunto</string>
   <string name="osb_close_menu_item">Chiudere bug</string>
   <string name="osb_close_dialog_title">Chiusura bug</string>
   <string name="osb_close_dialog_close_button">Chiudi bug</string>
@@ -738,7 +738,7 @@
   <string name="poi_edit_title">Modifica PDI</string>
   <string name="poi_create_title">Crea PDI</string>
   <string name="poi_error_poi_not_found">Il nodo non è stato trovato o l\'amenità non è un nodo singolo</string>
-  <string name="poi_remove_confirm_template">Si è sicuri di voler eliminare {0} (inserire commento)?</string>
+  <string name="poi_remove_confirm_template">Eliminare {0} (inserire un commento)?</string>
   <string name="poi_remove_title">Eliminazione PDI</string>
   <string name="default_buttons_delete">Elimina</string>
   <string name="poi_remove_success">PDI eliminato correttamente</string>
@@ -758,7 +758,7 @@
   <string name="filter_current_poiButton">Filtro</string>
   <string name="edit_filter_delete_menu_item">Elimina</string>
   <string name="edit_filter_save_as_menu_item">Salva come</string>
-  <string name="edit_filter_delete_dialog_title">Si è sicuri di eliminare il filtro?</string>
+  <string name="edit_filter_delete_dialog_title">Eliminare il filtro selezionato?</string>
   <string name="edit_filter_delete_message">Il filtro {0} è stato eliminato</string>
   <string name="edit_filter_create_message">Il filtro {0} è stato creato</string>
   <string name="default_buttons_selectall">Selezionare tutto</string>
@@ -798,7 +798,7 @@
 \n\t - Il calcolo dei percorsi offline diventa più solido
 \n\t - *Miglioramento usabilità e UI*
 \n\t- Miglioramenti in svariate aree "</string>
-  <string name="osm_editing_plugin_description">Questo plugin facilita il feedback ad OSM come la raccolta/modifica di Punti di interesse, l\'apertura/commento di bug OSM, e l\'invio di tracce registrate (richiede le credenziali OSM).</string>
+  <string name="osm_editing_plugin_description">Mostra le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
   <string name="simulate_route_progression_manually">Simula l\'avanzamento del tragitto manualmente</string>
   <string name="play_commands_of_currently_selected_voice">Esegui i comandi della voce attualmente selezionata</string>
