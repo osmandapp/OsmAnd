@@ -6,12 +6,12 @@
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
 	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
 	<string name="auto_zoom_map">Automatischer Zoom</string>
-	<string name="tip_recent_changes_0_8_3_t">Änderungen in 0.8.3 :
+	<string name="tip_recent_changes_0_8_3_t">"Änderungen in 0.8.3 :
 		\n\t* Verbessertes Navigationsverhalten
 		\n\t* Option \'Vermeide Autobahnen\'
 		\n\t* Anzeige von cycleway=track
 		\n\t* Oberfläche vervollständigt (Icons)
-		\n\t* Einige Fehlerbehebungen</string>
+		\n\t* Einige Fehlerbehebungen"</string>
 	<string name="snap_to_road_descr">Position während der Navigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="tip_recent_changes_0_8_2_t">Änderungen in 0.8.2 :
@@ -352,7 +352,7 @@
 	</string>
 	<string name="file_can_not_be_renamed">Datei kann nicht umbenannt werden.</string>
 	<string name="file_with_name_already_exists">Datei mit diesem Namen existiert bereits.</string>
-	<string name="gpx_navigation">GPX-Route</string>
+	<string name="gpx_navigation">GPX-Route wählen</string>
 	<string name="poi_query_by_name_matches_categories">Mehrere passende POI-Kategorien gefunden :</string>
 	<string name="data_to_search_poi_not_available">Lokale Daten für POI-Suche nicht vorhanden.</string>
 	<string name="poi_filter_by_name">Nach Namen suchen</string>
@@ -818,9 +818,9 @@
 	<string name="fav_points_edited">Favorit wurde bearbeitet</string>
 	<string name="fav_points_not_exist">Keine Favoriten vorhanden</string>
 	<string name="update_existing">Ersetzen</string>
-	<string name="only_show">Nur anzeigen</string>
-	<string name="follow">Folgen</string>
-	<string name="recalculate_route_to_your_location">Transportmittel:</string>
+	<string name="only_show">Route anzeigen</string>
+	<string name="follow">Navigation starten</string>
+	<string name="recalculate_route_to_your_location">Nutzerprofil wählen:</string>
 	<string name="mark_final_location_first">Bitte erst ein Ziel wählen</string>
 	<string name="get_directions">Navigation</string>
 	<string name="show_gps_status">GPS-Status anzeigen</string>
@@ -1019,7 +1019,7 @@
 	<string name="transport_search_desc">ÖPNV-Suche</string>
 	<string name="favourites_search_desc">Favoriten-Suche</string>
 	<string name="history_search_desc">Suchverlauf</string>
-	<string name="tip_recent_changes_0_8_1_t">"\"Änderungen in 0.8.1 :
+	<string name="tip_recent_changes_0_8_1_t">"Änderungen in 0.8.1 :
 		\n\t* Präzisere Routen (etwas langsamere Berechnung)
 		\n\t* Routenneuberechnung verbessert und beschleunigt
 		\n\t* Anzeige der weiterführenden Fahrspur
