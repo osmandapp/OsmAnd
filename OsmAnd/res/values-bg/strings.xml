@@ -6,7 +6,7 @@
          1. There is no duplicate strings by name
          2. Every apostrophe (quote) is preceded by a backslash (see others).
          If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what's translated).
+         1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
   <string name="starting_point_too_far">Starting point too far from nearest road.</string>
