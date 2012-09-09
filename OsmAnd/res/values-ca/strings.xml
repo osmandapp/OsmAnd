@@ -319,7 +319,7 @@
 <string name="local_indexes_cat_gpx">Dades GPX</string>
 <string name="local_indexes_cat_poi">Dades dels PDI</string>
 <string name="ttsvoice">Veu TTS</string>
-<string name="search_offline_clear_search">Cerca nova</string>
+<string name="search_offline_clear_search">Una altra cerca</string>
 <string name="map_text_size_descr">Seleccioneu la mida del text dels noms al mapa</string>
 <string name="map_text_size">Mida de la lletra al mapa</string>
 <string name="tip_recent_changes">Canvis recents</string>
@@ -691,4 +691,5 @@
 <string name="poi_edit_title">Editar PDI</string>
 <string name="poi_remove_title">Eliminar PDI</string>
 <string name="poi_create_title">Crear PDI</string>
+<string name="first_time_msg">Gracies per usar OsmAnd.Per mes característiques d'aquesta aplicació necessites descarregar informació regional fora de linia a traves de \'Settings\'-&gt;\'Offline Data\'.Després tu podràs veure mapes,cercar adreçes,buscar PDIs i trobar transport public</string>
 </resources>
