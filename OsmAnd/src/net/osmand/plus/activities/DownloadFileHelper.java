@@ -192,7 +192,7 @@ public class DownloadFileHelper {
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
 						remaining -= fin.lastReadCount();
-						progress.progress(remaining / 1024);
+						progress.remaining(remaining / 1024);
 					}
 					out.close();
 					

@@ -449,7 +449,12 @@ public class MapActivityLayers {
 
 			});
 			AlertDialog dlg = builder.show();
-			dlg.getListView().setFastScrollEnabled(true);
+			try {
+				dlg.getListView().setFastScrollEnabled(true);
+			} catch(Exception e) {
+				// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
+				// Unknown reason but on some devices fail
+			}
 		}
 	}
 	
