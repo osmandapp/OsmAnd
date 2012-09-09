@@ -510,7 +510,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		List<String> groups = new ArrayList<String>();
 		
 		public void setFavoriteGroups(Map<String, List<FavouritePoint>> favoriteGroups) {
-			this.sourceFavoriteGroups = new TreeMap<String, List<FavouritePoint>>(favoriteGroups);
+			this.sourceFavoriteGroups = favoriteGroups;
 			synchronizeGroups();
 		}
 		
