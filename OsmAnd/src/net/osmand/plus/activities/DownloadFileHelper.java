@@ -90,7 +90,7 @@ public class DownloadFileHelper {
 						if(part != null){
 							taskName += part;
 						}
-						progress.startTask(taskName, length); //$NON-NLS-1$
+						progress.startTask(taskName, length / 1024); //$NON-NLS-1$
 					}
 
 					first = false;
@@ -99,8 +99,8 @@ public class DownloadFileHelper {
 						 	throw new InterruptedException();
 						 }
 						out.write(buffer, 0, read);
-						progress.progress(read);
 						fileread += read;
+						progress.remaining((length - fileread) / 1024);
 					}
 					if(length <= fileread){
 						triesDownload = 0;
@@ -159,7 +159,7 @@ public class DownloadFileHelper {
 				ZipEntry entry = null;
 				boolean first = true;
 				int len = (int) fileToDownload.length();
-				progress.startTask(ctx.getString(R.string.unzipping_file), len);
+				progress.startTask(ctx.getString(R.string.unzipping_file), len / 1024);
 				while ((entry = zipIn.getNextEntry()) != null) {
 					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)){
 						continue;
@@ -188,9 +188,11 @@ public class DownloadFileHelper {
 					out = new FileOutputStream(fs);
 					int read;
 					byte[] buffer = new byte[BUFFER_SIZE];
+					int remaining = len;
 					while ((read = zipIn.read(buffer)) != -1) {
 						out.write(buffer, 0, read);
-						progress.progress(fin.lastReadCount());
+						remaining -= fin.lastReadCount();
+						progress.progress(remaining / 1024);
 					}
 					out.close();
 					
