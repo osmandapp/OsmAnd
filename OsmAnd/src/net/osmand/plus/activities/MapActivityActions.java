@@ -747,10 +747,10 @@ public class MapActivityActions implements DialogProvider {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true);
 				} else if (standardId == R.string.context_menu_item_directions) {
 					Location loc = mapActivity.getLastKnownLocation();
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude));
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), false);
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
 					getDirections(loc, true);
 				} else if (standardId == R.string.context_menu_item_show_route) {
@@ -917,18 +917,15 @@ public class MapActivityActions implements DialogProvider {
 					}
 					@Override
 					public boolean onClick(MenuItem item) {
-						if (mapActivity.getMapLayers().getNavigationLayer().getPointToNavigate() != null) {
-							if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
-								routingHelper.setFinalAndCurrentLocation(null, mapActivity.getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
-								// restore default mode
-								boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
-								mapActivity.updateApplicationModeSettings();
-								mapView.refreshMap(changed);
-							} else {
-								mapActivity.navigateToPoint(null);
-							}
+						if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
+							routingHelper.setFinalAndCurrentLocation(null, mapActivity.getLastKnownLocation(),
+									routingHelper.getCurrentGPXRoute());
+							// restore default mode
+							boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
+							mapActivity.updateApplicationModeSettings();
+							mapView.refreshMap(changed);
 						} else {
-							mapActivity.navigateToPoint(new LatLon(mapView.getLatitude(), mapView.getLongitude()));
+							mapActivity.navigateToPoint(null, true);
 						}
 						mapView.refreshMap();
 						return true;

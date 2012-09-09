@@ -926,14 +926,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return zoomDelta;
 	}
 
-	public void navigateToPoint(LatLon point){
+	public void navigateToPoint(LatLon point, boolean updateRoute){
 		if(point != null){
 			settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 		} else {
 			settings.clearPointToNavigate();
 		}
-		if(routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
-				routingHelper.isFollowingMode()) {
+		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
+				routingHelper.isFollowingMode())) {
 			routingHelper.setFinalAndCurrentLocation(point, getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		}
 		mapLayers.getNavigationLayer().setPointToNavigate(point);

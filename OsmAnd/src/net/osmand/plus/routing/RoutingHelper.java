@@ -224,10 +224,8 @@ public class RoutingHelper {
 					locationProjection.setLatitude(project.getLatitude());
 					locationProjection.setLongitude(project.getLongitude());
 					// we need to update bearing too
-					if (locationProjection.hasBearing()) {
-						float bearingTo = locationProjection.bearingTo(nextLocation);
-						locationProjection.setBearing(bearingTo);
-					}
+					float bearingTo = locationProjection.bearingTo(nextLocation);
+					locationProjection.setBearing(bearingTo);
 				}
 			}
 			lastFixedLocation = currentLocation;
