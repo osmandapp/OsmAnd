@@ -440,8 +440,8 @@
   <string name="fav_file_to_load_not_found">Il file GPX contenente i preferiti non è stato trovato in {0}</string>
   <string name="fav_saved_sucessfully">Preferiti salvati con successo in {0}</string>
   <string name="no_fav_to_save">Nessun preferiti da salvare</string>
-  <string name="import_fav">Importare</string>
-  <string name="export_fav">Esportare</string>
+  <string name="import_fav">Importa</string>
+  <string name="export_fav">Esporta</string>
   <string name="error_occurred_loading_gpx">Errore durante il caricamento del file GPX</string>
   <string name="send_report">Inviare rapporto</string>
   <string name="none_region_found">Non è stata trovata nessuna regione sulla scheda SD. Scarica una regione da internet.</string>
@@ -703,7 +703,7 @@
   <string name="search_address_street_option">Incrocio</string>
   <string name="search_tabs_location">Posizione</string>
   <string name="context_menu_item_navigate_point">Naviga verso qui</string>
-  <string name="context_menu_item_add_favorite">Aggiungere ai preferiti</string>
+  <string name="context_menu_item_add_favorite">Aggiungi ai preferiti</string>
   <string name="context_menu_item_update_map">Aggiornare la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
   <string name="context_menu_item_create_poi">Crea PDI</string>
@@ -901,7 +901,7 @@
   <string name="poi_search_desc">Ricerca PDI (Punti di Interesse)</string>
   <string name="address_search_desc">Ricerca degli indirizzi</string>
   <string name="navpoint_search_desc">Coordinate</string>
-  <string name="transport_search_desc">Ricerca dei trasporti</string>
+  <string name="transport_search_desc">Ricerca dei trasporti pubblici</string>
   <string name="favourites_search_desc">Ricerca dei preferiti</string>
   <string name="history_search_desc">Cronologia di ricerca</string>
   <string name="rendering_attr_noPolygons_description">Rende trasparenti tutte le aree rappresentanti caratteristiche</string>
@@ -1044,8 +1044,8 @@
 \n\t\'Day\' - usa sempre il modo diurno
 \n\t\'Night\' - usa sempre il modo notturno
 \n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
-<string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\'in visualizzazione mappa.↵
-\n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.↵
+<string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\' in visualizzazione mappa.
+\n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
 \n\tOsmAnd supporta anche sorgenti su misura.</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (e personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
