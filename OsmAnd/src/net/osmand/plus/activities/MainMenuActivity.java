@@ -4,7 +4,6 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
@@ -223,8 +222,6 @@ public class MainMenuActivity extends Activity {
 				}
 			}
 		});
-		AndroidUtils.expandClickableArea(closeButton, 1,1,3,3);
-
 		View searchButton = window.findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new OnClickListener() {
 			@Override

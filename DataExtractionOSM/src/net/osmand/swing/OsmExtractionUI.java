@@ -90,7 +90,9 @@ public class OsmExtractionUI implements IMapLocationListener {
 				if(!(e instanceof ThreadDeath)){
 					ExceptionHandler.handle("Error in thread " + t.getName(), e); //$NON-NLS-1$
 				}
-				defaultHandler.uncaughtException(t, e);
+				if(defaultHandler != null){
+					defaultHandler.uncaughtException(t, e);
+				}
 			}
 		});
 		
