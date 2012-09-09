@@ -685,7 +685,7 @@ public class IndexAddressCreator extends AbstractIndexPartCreator{
 					}
 				}
 			}
-			if (type != null && interpolationInterval > 0) {
+			if (type != null || interpolationInterval > 0) {
 				List<Node> nodesWithHno = new ArrayList<Node>();
 				for (Node n : ((Way) e).getNodes()) {
 					if (n.getTag(OSMTagKey.ADDR_HOUSE_NUMBER) != null && n.getTag(OSMTagKey.ADDR_STREET) != null) {

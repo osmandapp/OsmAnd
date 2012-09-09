@@ -49,7 +49,7 @@ public class BinaryInspector {
 		// test cases show info
 		
 		
-//		 inspector(new String[]{/*"-vmap", "-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/osm-gen/Austria_2.obf"});
+		 //inspector(new String[]{"-vaddress",/* "-bbox=-121.785,37.35,-121.744,37.33", */"/home/victor/projects/OsmAnd/data/osm-gen/Map.obf"});
 		// test case extract parts
 		// test case 
 	}
