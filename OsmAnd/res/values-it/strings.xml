@@ -288,13 +288,13 @@
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata premi \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
-  <string name="tip_search_t">\tPuoi cercare i posti direttamente sulla mappa, per indirizzo, luogo, PDI, o preferito predefinito.
+  <string name="tip_search_t">\tPuoi cercare i posti direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
 \n\tPremendo \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.
 </string>
   <string name="tip_map_context_menu">Menu contestuale</string>
   <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato premendo a lungo sulla mappa o premendo il pulsante trackball.
 \n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci sopra. (O premi a lungo per nascondere il menù.)
-\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (luogo).
+\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione).
 </string>
   <string name="tip_initial">Consigli</string>
   <string name="tip_initial_t">\tOsmAnd è una applicazione di navigazione con molte funzioni.
@@ -312,7 +312,7 @@
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Condividi la posizione usando</string>
-  <string name="send_location_sms_pattern">Luogo: %1$s\n%2$s</string>
+  <string name="send_location_sms_pattern">Posizione: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Per vedere la posizione segui il link web %1$s o il link %2$s</string>
   <string name="send_location">Invia posizione</string>
   <string name="context_menu_item_share_location">Condividi posizione</string>
@@ -426,7 +426,7 @@
   <string name="error_reading_gpx">Errore lettura dati GPX</string>
   <string name="vector_data">Mappe vettoriali offline</string>
   <string name="transport_context_menu">Cercare un trasporto pubblico all\'arrivo</string>
-  <string name="point_on_map">Luogo:\n Lat %1$.5f Lon %2$.5f</string>
+  <string name="point_on_map">Posizione:\n Lat %1$.5f Lon %2$.5f</string>
   <string name="osb_bug_name">Errore</string>
   <string name="poi_context_menu_modify">Modificare PDI</string>
   <string name="poi_context_menu_delete">Eliminare PDI</string>
@@ -660,7 +660,7 @@
   <string name="map_tile_source">Sorgente dei tasselli della mappa</string>
   <string name="map_source">Sorgente mappa</string>
   <string name="use_internet">Usare internet</string>
-  <string name="show_location">Visualizzare luogo</string>
+  <string name="show_location">Visualizzare posizione</string>
   <string name="map_preferences">Mappa</string>
   <string name="settings_activity">Impostazioni</string>
   <string name="show_gps_coordinates_text">Visualizzare coordinate GPS sulla mappa</string>
@@ -701,12 +701,12 @@
   <string name="search_address_building">Civico</string>
   <string name="search_address_building_option">Civico</string>
   <string name="search_address_street_option">Incrocio</string>
-  <string name="search_tabs_location">Luogo</string>
+  <string name="search_tabs_location">Posizione</string>
   <string name="context_menu_item_navigate_point">Naviga verso qui</string>
   <string name="context_menu_item_add_favorite">Aggiungere ai preferiti</string>
   <string name="context_menu_item_update_map">Aggiornare la mappa</string>
   <string name="context_menu_item_open_bug">Segnala un errore OSM</string>
-  <string name="context_menu_item_create_poi">Sostentamento</string>
+  <string name="context_menu_item_create_poi">Crea PDI</string>
   <string name="default_buttons_yes">Si</string>
   <string name="default_buttons_cancel">Annulla</string>
   <string name="default_buttons_apply">Applica</string>
@@ -1047,7 +1047,7 @@
 <string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\'in visualizzazione mappa.↵
 \n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.↵
 \n\tOsmAnd supporta anche sorgenti su misura.</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.
+<string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (e personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
 <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
 <string name="osmand_long_description_1000_chars">
