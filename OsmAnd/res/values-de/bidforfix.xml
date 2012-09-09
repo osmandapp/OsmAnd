@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="bidforfix_loading">Lädt gerade</string>
     <string name="bidforfix_supporters">%1$d Unterstützer</string>
 	<string name="bidforfix_funded">bereits gespendet: %d%%</string>    

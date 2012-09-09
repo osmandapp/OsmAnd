@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">Changements en 0.7.1 :

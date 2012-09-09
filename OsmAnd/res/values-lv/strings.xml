@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>

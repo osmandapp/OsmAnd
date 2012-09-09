@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>

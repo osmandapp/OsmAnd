@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
   <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>

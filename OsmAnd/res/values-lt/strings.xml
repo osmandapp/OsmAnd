@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_event">Pasiimkite automobilį iš statymo vietos</string>

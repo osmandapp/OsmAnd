@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="bidforfix_loading">Chargement</string>
     <string name="bidforfix_supporters">%1$d mécènes</string>
 	<string name="bidforfix_funded">financé: %d%%</string>    

@@ -47,7 +47,7 @@
 	</target>
 
 	<!-- Extra target -->
-	<target name="-pre-build">
+	<target name="-pre-build" depends="fix_apostrophe_issues">
 		<delete dir="${raw.absolute.dir}" verbose="${verbose}" />
 		<mkdir dir="${raw.absolute.dir}/classes" />
 		<copy todir="${raw.absolute.dir}">
@@ -256,6 +256,12 @@
             ignoreLiterals="true" ignoreIdentifiers="true">
 			<fileset dir="${source.absolute.dir}" includes="**/*.java"/>
 		</cpd>
+	</target>
+	
+	<target name="fix_apostrophe_issues">
+		<replaceregexp  match="([^\\])'" replace="\1\\\\'" >
+			<fileset dir="res" includes="**/strings.xml"/>
+		</replaceregexp>
 	</target>
 
 </project>
