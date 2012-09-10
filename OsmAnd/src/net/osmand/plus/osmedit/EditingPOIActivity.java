@@ -257,10 +257,9 @@ public class EditingPOIActivity implements DialogProvider {
 	            layout.setLayoutParams(tlParams);
 	            layout.setColumnStretchable(1, true);
 				layout.setVisibility((layout.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE);
-
+				Button addTag = (Button) dlg.findViewById(R.id.addTag);
+				addTag.setVisibility((layout.getVisibility() == View.VISIBLE) ? View.VISIBLE : View.GONE);
 				if (layout.getVisibility() == View.VISIBLE) {
-					Button addTag = (Button) dlg.findViewById(R.id.addTag);
-					addTag.setVisibility((layout.getVisibility() == View.VISIBLE) ? View.GONE : View.VISIBLE);
 					addTag.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
@@ -269,38 +268,32 @@ public class EditingPOIActivity implements DialogProvider {
 				            tlp.leftMargin = 5;
 				            newTagRow.setLayoutParams(tlp);
 
-				            final Button tag = new Button(ctx);
-				            final EditText value = new EditText(ctx);				            
+				            final AutoCompleteTextView tag = new AutoCompleteTextView(ctx);
+				            final AutoCompleteTextView value = new AutoCompleteTextView(ctx);				            
 				            final Button delete = new Button(ctx);
 				            
 				            tag.setLayoutParams(tlp);
-				            tag.setText("<Tag>");
+				            tag.setHint("Tag");
+
+				            final Set<String> tagKeys = new LinkedHashSet<String>();
+							for (OSMTagKey t : OSMTagKey.values()) {
+								if ((t != OSMTagKey.NAME) && (t != OSMTagKey.OPENING_HOURS) && (t != OSMTagKey.PHONE)
+										&& (t != OSMTagKey.WEBSITE)) {
+									tagKeys.add(t.getValue());
+								}
+							}
+				    		ArrayAdapter<Object> adapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, tagKeys.toArray());
+				            tag.setAdapter(adapter);
+				            tag.setThreshold(1);
 				            tag.setOnClickListener(new View.OnClickListener() {
 				    			@Override
 				    			public void onClick(View v) {
-//				    				Comment: To exclude basic tags OSMTagKey.NAME, OSMTagKey.OPENING_HOURS, OSMTagKey.PHONE, OSMTagKey.WEBSITE;
-				    				final OSMTagKey[] allValues = OSMTagKey.values();
-				    				final OSMTagKey[] values = new OSMTagKey[allValues.length-4];
-				    				int j = 0;
-				    				for (int i = 0; i < allValues.length; i++) {
-				    					if (	(allValues[i] != OSMTagKey.NAME) && 
-				    							(allValues[i] != OSMTagKey.OPENING_HOURS) && 
-				    							(allValues[i] != OSMTagKey.PHONE) && 
-				    							(allValues[i] != OSMTagKey.WEBSITE)		) {
-				    						values[j] = allValues[i];
-				    						j++;
-				    					}
-				    				}
-				    				final String[] vals = new String[values.length];
-				    				for (int i=0; i<values.length; i++) {
-				    					vals[i] = values[i].getValue(); 
-				    				}		
 				    				Builder builder = new AlertDialog.Builder(ctx);
-				    				builder.setItems(vals, new Dialog.OnClickListener() {
+				    				final String[] tags = tagKeys.toArray(new String[tagKeys.size()]);
+				    				builder.setItems(tags, new Dialog.OnClickListener() {
 				    					@Override
 				    					public void onClick(DialogInterface dialog, int which) {
-				    						tag.setText(vals[which]);
-				    						tag.invalidate();
+				    						tag.setText(tags[which]);
 				    					}
 				    					
 				    				});		
@@ -314,24 +307,27 @@ public class EditingPOIActivity implements DialogProvider {
 				            tlp.width = 80;
 				            value.setLayoutParams(tlp);
 				            value.setHint("Value");
-				            value.addTextChangedListener(new TextWatcher() {
-				    			@Override
-				    			public void afterTextChanged(Editable s) {
-				    				if ((newTagRow != null) 
-											&& (tag != null) && (value != null) 
-											&& (tag.getText() != null) && (value.getText() != null)
-											&& (!tag.getText().equals("")) && (!value.getText().equals(""))) {
-				    					System.out.println(tag.getText());
+				            Set<String> subCategories = MapRenderingTypes.getDefault().getAmenityNameToType().keySet();
+				            ArrayAdapter<Object> valueAdapter = new ArrayAdapter<Object>(ctx, R.layout.list_textview, subCategories.toArray());
+				            value.setThreshold(1);
+				            value.setAdapter(valueAdapter);
+							value.addTextChangedListener(new TextWatcher() {
+								@Override
+								public void afterTextChanged(Editable s) {
+									if ((newTagRow != null) && (tag != null) && (value != null) && (tag.getText() != null)
+											&& (value.getText() != null) && (!tag.getText().equals("")) && (!value.getText().equals(""))) {
 										additionalTags.put(tag.getText().toString(), value.getText().toString());
 									}
-				    			}
+								}
 
-				    			@Override
-				    			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+								@Override
+								public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+								}
 
-				    			@Override
-				    			public void onTextChanged(CharSequence s, int start, int before, int count) {}
-				    		});
+								@Override
+								public void onTextChanged(CharSequence s, int start, int before, int count) {
+								}
+							});
 				            tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
 				            tlp.gravity = Gravity.CENTER;
 				            tlp.rightMargin = 5;
