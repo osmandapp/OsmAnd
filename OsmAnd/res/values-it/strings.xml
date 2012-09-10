@@ -68,12 +68,12 @@
   <string name="tip_day_night_mode">Modo giorno/notte</string>
   <string name="tip_day_night_mode_t">\tL\'aspetto della mappa può essere cambiato per alcune mappe vettoriali tra giorno (più luminoso) e notte (più scuro). \n\tI colori scuri sono più sicuri per la guida notturna. \n\tPuoi impostare una regola per il cambio giorno/notte in \'Impostazioni\' -&gt; \'Aspetto delle mappe\' -&gt; \'Modo giorno/notte\'. \n\tLe scelte sono: \n\t\'Alba/Tramonto\' - automatico, controllato dalla posizione del sole (default) \n\t\'Giorno\' - usa sempre la modalità giorno \n\t\'Notte\' - usa sempre la modalità notte \n\t\'Sensore luminosità\' - l\'aspetto della mappa è controllato dal sensore del tuo dispositivo (solo se è presente)</string>
   <string name="tip_osm_improve">Migliorare i dati OSM</string>
-  <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di bug con solo un paio di click!
+  <string name="tip_osm_improve_t">\tOsmAnd usa mappe basate sui dati di Openstreetmap.org (OSM) e -oltre a visualizzare e navigare le mappe- può essere usato per migliorare la qualità dei dati OSM. Puoi creare e caricare facilmente nuovi PDI o segnalazioni di errori con solo un paio di click!
 \n\tPer questo devi prima fornire le credenziali d\'accesso ad OSM in \'Impostazioni\' -&gt; \'Impostazioni generali\' -&gt; \'Editing OSM\'.
 \n\tPer aggiungere un nuovo PDI usa l\'opzione \'Crea un PDI\' nel menù contestuale. Procedi inserendo le informazioni relative al nuovo PDI nella finestra \'Crea PDI\' e infine invialo.
 \n\tGli errori sulle mappe possono essere immediatamente segnalati tramite un bug OSM, e la comunità OSM può correggere velocemente il problema.
 \n\tPer aggiungere un bug OSM usa l\'opzione \'Apri un bug OSM\' nel menù contestuale. Inserisci una descrizione dettagliata del problema e infine inviala con il bottone \'Aggiungi\'.
-\n\tNota che è necessaria la connessione ad Internet per contribuire PDI e bug.</string>
+\n\tNota che è necessaria la connessione ad Internet per contribuire PDI ed errori.</string>
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona Punto Destinazione</string>
@@ -153,7 +153,7 @@
 \n\t- Invio di file GPX alla comunità OSM (http://download.osmand.net/gpx/)
 \n\t- Migliorie al rendering dei vettori
 \n\t- Migliorie al motore TTS (distanza esatta, miglia abilitate)
-\n\t- Fix di bug vari</string>
+\n\t- Correzione di errori vari</string>
   <string name="save_route_dialog_title">Salva il percorso in formato GPX</string>
   <string name="route_successfully_saved_at">Percorso salvato come \'%1$s\'.</string>
   <string name="filename_input">Nome file: </string>
@@ -452,7 +452,7 @@
   <string name="layer_yandex_traffic">Yandex (traffico)</string>
   <string name="layer_route">Percorso</string>
   <string name="layer_favorites">Preferiti</string>
-  <string name="layer_osm_bugs">Bug OSM</string>
+  <string name="layer_osm_bugs">Errori OSM</string>
   <string name="layer_transport">Fermate trasporto pubblico</string>
   <string name="layer_poi">PDI…</string>
   <string name="layer_map">Tipo Mappa…</string>
@@ -818,8 +818,8 @@
   <string name="validate_gpx_upload_name_pwd">Imposta username e password di OSM per caricare file GPX.</string>
   <string name="default_buttons_support">Sostieni</string>
   <string name="support_new_features">Sostieni nuove funzionalità</string>
-  <string name="show_ruler_level_descr">Mostra il righello sulla mappa</string>
-  <string name="show_ruler_level">Mostra il righello</string>
+  <string name="show_ruler_level_descr">Mostra la scala grafica</string>
+  <string name="show_ruler_level">Mostra la scala grafica</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Torna alla posizione</string>
   <string name="help">Aiuto</string>
@@ -906,7 +906,7 @@
   <string name="history_search_desc">Cronologia di ricerca</string>
   <string name="rendering_attr_noPolygons_description">Rende trasparenti tutte le aree rappresentanti caratteristiche</string>
   <string name="rendering_attr_noPolygons_name">No poligoni</string>
-  <string name="rendering_attr_appMode_name">Modalità di rendering</string>
+  <string name="rendering_attr_appMode_name">Modalità di disegno</string>
   <string name="rendering_attr_appMode_description">Ottimizzazione della mappa per i rispettivi Profili Utente</string>
   <string name="rendering_attr_contourLines_description">Mostra lo zoom minimo a cui mostrare la mappa se disponibile. Potrebbe essere necessario un file SRTM separato.</string>
   <string name="rendering_attr_contourLines_name">Mostra curve di livello</string>
@@ -1022,12 +1022,12 @@
 <string name="show_warnings_title">Mostra avvertimenti…</string>
 <string name="show_warnings_descr">Mostra limiti di velocità, autovelox, dossi rallentatori e altri avvertimenti</string>
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
-<string name="map_widget_show_ruler">Righello</string>
+<string name="map_widget_show_ruler">Scala grafica</string>
 <string name="map_widget_appearance">Varie:</string>
 <string name="map_widget_view_direction">﻿Direzione di orientamento</string>
 <string name="map_widget_transparent">Aspetto trasparente</string>
 <string name="monitoring_mode_off">Salva GPX</string>
-<string name="monitoring_mode_on">Ferma\n GPX reg.</string>
+<string name="monitoring_mode_on">Ferma\n reg. GPX</string>
 <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
 <string name="int_continuosly">Continuo</string>
 <string name="email">e-mail</string>
