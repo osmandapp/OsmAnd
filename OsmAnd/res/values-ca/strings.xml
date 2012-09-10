@@ -543,7 +543,7 @@
 <string name="show_poi_filter">Mostrar filtre</string>
 <string name="search_poi_filter">Filtre</string>
 <string name="hide_poi_filter">Ocultar filtre</string>
-<string name="voice_data_initializing">S'està inicialitzant les dades de veu...</string>
+<string name="voice_data_initializing">S\'està inicialitzant les dades de veu...</string>
 <string name="unzipping_file">S'està descomprimint el fitxer...</string>
 <string name="first_time_download">Baixar regions</string>
 <string name="map_screen_orientation">Orientació de pantalla</string>
