@@ -702,37 +702,41 @@ public class BinaryRoutePlanner {
 		RouteSegment next = inputNext;
 		boolean hasNext = nextIterator == null || nextIterator.hasNext();
 		while (hasNext) {
-			if(nextIterator != null) {
+			if (nextIterator != null) {
 				next = nextIterator.next();
 			}
-			 long nts = (next.road.getId() << ROUTE_POINTS) + next.segmentStart;
-			
+			long nts = (next.road.getId() << ROUTE_POINTS) + next.segmentStart;
+
 			// 1. Check if opposite segment found so we can stop calculations
 			if (oppositeSegments.contains(nts) && oppositeSegments.get(nts) != null) {
 				// restrictions checked
 				RouteSegment opposite = oppositeSegments.get(nts);
-				if (reverseWay) {
-					ctx.finalReverseEndSegment = segmentEnd;
-					ctx.finalReverseRoute = segment;
-					ctx.finalDirectEndSegment = next.segmentStart;
-					ctx.finalDirectRoute = opposite;
-				} else {
-					ctx.finalDirectEndSegment = segmentEnd;
-					ctx.finalDirectRoute = segment;
-					ctx.finalReverseEndSegment = next.segmentStart;
-					ctx.finalReverseRoute = opposite;
+				// additional check if opposite way not the same as current one
+				if (next.segmentStart != segmentEnd || 
+						opposite.getRoad().getId() != segment.getRoad().getId()) {
+					if (reverseWay) {
+						ctx.finalReverseEndSegment = segmentEnd;
+						ctx.finalReverseRoute = segment;
+						ctx.finalDirectEndSegment = next.segmentStart;
+						ctx.finalDirectRoute = opposite;
+					} else {
+						ctx.finalDirectEndSegment = segmentEnd;
+						ctx.finalDirectRoute = segment;
+						ctx.finalReverseEndSegment = next.segmentStart;
+						ctx.finalReverseRoute = opposite;
+					}
 				}
 				return true;
 			}
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
-			if (!alreadyVisited) {	
+			if (!alreadyVisited) {
 				double distanceToEnd = h(ctx, distToFinalPoint, next);
 				if (next.parentRoute == null
 						|| ctx.roadPriorityComparator(next.distanceFromStart, next.distanceToEnd, distFromStart, distanceToEnd) > 0) {
 					if (next.parentRoute != null) {
 						// already in queue remove it
-						if(!graphSegments.remove(next)){
+						if (!graphSegments.remove(next)) {
 							// exist in different queue!
 							RouteSegment cpy = new RouteSegment(next.getRoad(), next.segmentStart);
 							next = cpy;
@@ -753,10 +757,10 @@ public class BinaryRoutePlanner {
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
 				if (distFromStart < next.distanceFromStart && next.road.id != segment.road.id) {
 					// That code is incorrect (when segment is processed itself,
-					// then it tries to make wrong u-turn) - 
+					// then it tries to make wrong u-turn) -
 					// this situation should be very carefully checked in future (seems to be fixed)
-//					System.out.println(segment.getRoad().getName() + " " + next.getRoad().getName());
-//					System.out.println(next.distanceFromStart + " ! " + distFromStart);
+					// System.out.println(segment.getRoad().getName() + " " + next.getRoad().getName());
+					// System.out.println(next.distanceFromStart + " ! " + distFromStart);
 					next.distanceFromStart = distFromStart;
 					next.parentRoute = segment;
 					next.parentSegmentEnd = segmentEnd;
@@ -765,9 +769,9 @@ public class BinaryRoutePlanner {
 					}
 				}
 			}
-			
+
 			// iterate to next road
-			if(nextIterator == null) {
+			if (nextIterator == null) {
 				next = next.next;
 				hasNext = next != null;
 			} else {
