@@ -259,7 +259,7 @@
 	</target>
 	
 	<target name="fix_apostrophe_issues">
-		<replaceregexp  match="([^\\])'" replace="\1\\\\'" >
+		<replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off">
 			<fileset dir="res" includes="**/strings.xml"/>
 		</replaceregexp>
 	</target>

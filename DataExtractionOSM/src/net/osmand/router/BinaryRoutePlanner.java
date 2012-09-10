@@ -1131,6 +1131,10 @@ public class BinaryRoutePlanner {
 					lanes[it] = 1;
 				}
 			}
+			// sometimes links are 
+			if ((current <= left + right) && (left > 1 || right > 1)) {
+				speak = true;
+			}
 		}
 		
 		if (kl) {
