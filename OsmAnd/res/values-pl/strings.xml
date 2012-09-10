@@ -151,7 +151,8 @@
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
   <string name="tip_day_night_mode_t">\tWygląd mapy wektorowej może zmieniać się w zależności od pory dnia. \n\tNocne kolory są bezpieczniejsze dla podróży po zmroku. \n\tMożesz zdefiniować kryterium przełączania trybu dzień/noc w \'Ustawienia\' -&gt; \'Wygląd mapy\' -&gt;\'Tryb dzień/noc\'. \n\tDo wyboru jest: \n\t\'Wschód/zachód\' - tryb automatyczny, bazujący na pozycji słońca (domyślny) \n\t\'Dzień\' - zawsze używa trybu dziennego \n\t\'Noc\' - zawsze używa trybu nocnego \n\t\'Czujnik światła \' - wygląd mapy jest ustawiany w zależności od odczytu z czujnika światła w urządzeniu (jeśli występuje)</string>
   <string name="tip_location_sharing">Udostępnianie pozycji</string>
-  <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.</string>
+  <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
+</string>
   <string name="tip_favorites">Ulubione punkty</string>
   <string name="tip_favorites_t">\tCzęsto używane punkty mogą zostać zapisane jako ulubione. \n\tAby zapisać punkt jako ulubiony przejdź do menu kontekstowego, wybierz \'Opcje punktu\' -&gt; \'Dodaj do ulubionych\' i wprowadź jego nazwę. Po zapisaniu, punkt będzie można znaleźć w głównym menu -&gt; \'Ulubione\'. \n\tDłuższe naciśnięcie pozycji w \'Ulubionych\' pokaże opcje dotyczące tego punktu. \n\tAby wyświetlić wszystkie ulubione punkty bezpośrednio na mapie, włącz warstwę \'Ulubione\' w \'Zdefiniuj widok\'.</string>
   <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline</string>
@@ -947,4 +948,18 @@
 		OsmAnd jest stale ulepszany i wymaga wsparcia opartego na "donacjach" aby móc się rozwijać.
 	</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
+<string name="avoid_motorway">Unikaj autostrad</string>
+<string name="snap_to_road_descr">Przyciągaj pozycję do drogi podczas nawigacji</string>
+<string name="snap_to_road">Przyciąganie do drogi</string>
+<string name="tip_recent_changes_0_8_3_t">Zmiany w 0.8.3 :
+		\n\t* Poprawione route guidance
+		\n\t* Opcja unikania autostrad
+		\n\t* Wyświetlanie dróg oznaczonych jako Cycleway=track 
+		\n\t* Lepsze wykończenie UI (ikony)
+		\n\t* Usunięcie niektórych błędów
+	</string>
+<string name="day_night_info">Informacja od dniu/nocy</string>
+<string name="map_widget_day_night">Mapa dzień/noc</string>
+<string name="map_widget_vector_attributes">Atrybuty renderowania:</string>
+<string name="show_lanes">Pokazuj alejki</string>
 </resources>
