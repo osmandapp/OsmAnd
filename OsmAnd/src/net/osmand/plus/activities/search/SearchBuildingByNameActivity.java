@@ -6,7 +6,6 @@ import java.util.List;
 import net.osmand.Algoritms;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
-import net.osmand.data.Building.BuildingInterpolation;
 import net.osmand.data.City;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
@@ -76,12 +75,13 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		};
 	}
 	
+	
 	@Override
 	public String getText(Building obj) {
 		if(obj.getInterpolationInterval() > 0 || obj.getInterpolationType() != null){
-			String hno = getFilter().toString();
-			if(obj.belongsToInterpolation(hno)) {
-				return hno + " [" + obj.getName(region.useEnglishNames())+"] ";
+			String hno = getCurrentFilter();
+			if(hno.length() > 0 && obj.belongsToInterpolation(hno)) {
+				return hno + " [" + obj.getName(region.useEnglishNames())+"]";
 			}
 		}
 		return obj.getName(region.useEnglishNames());
@@ -93,7 +93,7 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		String text = getText(obj);
 		LatLon loc = obj.getLocation();
 		if(obj.getInterpolationInterval() > 0 || obj.getInterpolationType() != null){
-			String hno = getFilter().toString();
+			String hno = getCurrentFilter();
 			float interpolation = obj.interpolation(hno);
 			if (interpolation >= 0) {
 				text = hno;

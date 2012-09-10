@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
@@ -21,7 +19,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.CustomTitleBar;
-import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 
 import org.apache.commons.logging.Log;
@@ -40,7 +37,6 @@ import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
@@ -180,6 +176,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	private int MAX_VISIBLE_NAME = 18;
+	
+	public String getCurrentFilter() {
+		return currentFilter;
+	}
 
 	public void querySearch(final String filter) {
 		String f = filter;
