@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -266,13 +266,16 @@
   <string name="tip_location_sharing_t">\tPuoi condividere posizione di posti interessanti con familiari e amici.
 \n\tPer farlo devi:
 \n\tUsare il \'Menu contestuale mappa\' -&gt; \'Condividi Posizione\'.
-\n\tSeleziona una modo per condividere la posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sulla clipboard.
+\n\tSeleziona una modo per condividere la posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sugli appunti.
 </string>
   <string name="tip_favorites">Punti Preferiti</string>
   <string name="tip_favorites_t">\tI punti usati di frequente possono essere salvati come Preferiti.
+
 \n\tPer salvare un punto come Preferito vai nel menu contestuale, seleziona \'Aggiungi ai preferiti\' e inserisci il nome desiderato. Dopo il salvataggio sarà accessibile nel \'Menu Principale\' -&gt; \'Preferiti\'.
+
 \n\tPremendo a lungo su un Preferito nel menu \'Preferiti\' aprirà le opzioni Naviga verso, modifica, elimina.
-\n\tPer visualizzare i preferiti direttamente sulla mappa attiva il layer \'Preferiti\' su \'Menu contestuale mappa\' -&gt;\'Definisci vista\'.
+
+\n\tPer visualizzare i preferiti direttamente sulla mappa attiva il livello \'Preferiti\' su \'Menu contestuale mappa\' -&gt;\'Definisci vista\'.
 </string>
   <string name="create_poi_link_to_osm_doc">"Classificazione mappa "<u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
@@ -908,7 +911,7 @@
   <string name="rendering_attr_noPolygons_name">No poligoni</string>
   <string name="rendering_attr_appMode_name">Modalità di disegno</string>
   <string name="rendering_attr_appMode_description">Ottimizzazione della mappa per i rispettivi Profili Utente</string>
-  <string name="rendering_attr_contourLines_description">Mostra lo zoom minimo a cui mostrare la mappa se disponibile. Potrebbe essere necessario un file SRTM separato.</string>
+  <string name="rendering_attr_contourLines_description">Mostra dal livello di zoom (necessita del file SRTM):</string>
   <string name="rendering_attr_contourLines_name">Mostra curve di livello</string>
   <string name="rendering_attr_hmRendered_description">Aumenta la quantità di dettagli mostrati</string>
   <string name="rendering_attr_hmRendered_name">Mostra più dettagli sulla mappa</string>
@@ -1046,9 +1049,11 @@
 \n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
 <string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\' in visualizzazione mappa.
 \n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
-\n\tOsmAnd supporta anche sorgenti su misura.</string>
+\n\tOsmAnd supporta anche sorgenti su misura.
+</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd supporta differenti (e personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.
-\n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.</string>
+\n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.
+</string>
 <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
 <string name="osmand_long_description_1000_chars">
 " OsmAnd (OSM Automatizzata Navigazione Direzioni)
@@ -1069,7 +1074,8 @@ Limitazioni di questa versione gratuita di OsmAnd:
 \n\t
 \n\tOsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net"</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
-<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
+<string name="osmand_plus_long_description_1000_chars">
+OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
 \n\t
 \n\tOsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.
 \n\t
