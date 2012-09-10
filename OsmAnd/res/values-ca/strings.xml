@@ -544,7 +544,7 @@
 <string name="search_poi_filter">Filtre</string>
 <string name="hide_poi_filter">Ocultar filtre</string>
 <string name="voice_data_initializing">S\'està inicialitzant les dades de veu...</string>
-<string name="unzipping_file">S'està descomprimint el fitxer...</string>
+<string name="unzipping_file">S\'està descomprimint el fitxer...</string>
 <string name="first_time_download">Baixar regions</string>
 <string name="map_screen_orientation">Orientació de pantalla</string>
 <string name="transport_search_before">Ruta previa</string>
@@ -552,13 +552,13 @@
 <string name="searching_address">Cercant adreça...</string>
 <string name="search_offline_address">Fora de línia</string>
 <string name="download_index_success">Baixada amb èxit</string>
-<string name="downloading_file">S'està baixant el fitxer...</string>
+<string name="downloading_file">S\'està baixant el fitxer...</string>
 <string name="show_poi_on_map">Mostrar al mapa</string>
 <string name="show_gps_status">Mostrar estat del GPS</string>
 <string name="opening_hours">Horari d\'obertura</string>
 <string name="poi">PDI</string>
 <string name="new_route_calculated_dist">Nova ruta calculada,distancia</string>
-<string name="loading_data">S'està carregant les dades...</string>
+<string name="loading_data">S\'està carregant les dades...</string>
 <string name="finished_task">Finalitzat</string>
 <string name="update_tile">Actualitza el mapa</string>
 <string name="app_settings">Preferències d\'aplicació</string>
@@ -706,19 +706,19 @@
 <string name="poi_remove_title">Eliminar PDI</string>
 <string name="poi_create_title">Crear PDI</string>
 <string name="first_time_msg">Gràcies per utilitzar l\'OsmAnd. Per gaudir de més característiques d\'aquesta aplicació necessiteu baixar-vos informació regional fora de línia a través de «Configuració» -&gt; «Dades fora de línia». Llavors podreu veure mapes, cercar adreces, buscar els PDI i trobar transports públics.</string>
-<string name="basemap_was_selected_to_download">Es requereix un mapa base pel correcte funcionament de l'aplicació i s\'ha seleccionat per baixar-lo.</string>
+<string name="basemap_was_selected_to_download">Es requereix un mapa base pel correcte funcionament de l\'aplicació i s\'ha seleccionat per baixar-lo.</string>
 <string name="osmand_background_plugin_description">Mostra els paràmetres per habilitar el seguiment i la navegació en segon pla (pantalla apagada) per mitjà del despertament periòdic del dispositiu GPS.</string>
-<string name="accessibility_preferences_descr">Preferències d'accessibilitat</string>
+<string name="accessibility_preferences_descr">Preferències d\'accessibilitat</string>
 <string name="trace_rendering_descr">Mostra el rendiment de la renderització</string>
 <string name="tip_navigation_t">\tAbans de què inicieu la navegació necessiteu seleccionar una destinació. Després premeu al mapa «Menú» -&gt; «Direccions» i seleccioneu el tipus de navegació.</string>
 <string name="context_menu_item_add_waypoint">Afegeix una fita GPX</string>
 <string name="poi_filter_namefinder">Cercador de noms en línia</string>
 <string name="continuous_rendering_descr">Mostra la renderització continuada en lloc d\'imatge a imatge</string>
 <string name="uploading_data">S\'està penjant les dades...</string>
-<string name="search_nothing_found">No s'ha trobat res</string>
+<string name="search_nothing_found">No s\'ha trobat res</string>
 <string name="list_index_files_was_not_loaded">No s\'ha recuperat la llista de les regions des d\'osmand.net.</string>
 <string name="failed_op">fallada</string>
-<string name="error_occurred_saving_gpx">S'ha produït un error quan s'estava desant el GPX</string>
+<string name="error_occurred_saving_gpx">S\'ha produït un error quan s\'estava desant el GPX</string>
 <string name="osm_settings_descr">Preferències específiques d\'Openstreetmap.org (OSM) necessàries per les trameses a OSM</string>
 <string name="search_address_building">Edifici</string>
 <string name="search_address_building_option">Edifici</string>
@@ -729,7 +729,7 @@
 \n\t* Millora en el guiatge de rutes
 \n\t* Opció per evitar autopistes
 \n\t* Permet mostrar Cycleway=track
-\n\t* Millora en l'acabat de les IU (icones)
+\n\t* Millora en l\'acabat de les IU (icones)
 \n\t* S\'han corregit alguns errors de programació
 	</string>
 <string name="snap_to_road_descr">Desplaça la posició a les carreteres durant la navegació</string>
@@ -751,9 +751,9 @@
 <string name="overlay_transparency">Opacitat de la capa superposada</string>
 <string name="layer_underlay">Mapa de la capa de fons...</string>
 <string name="preferred_locale">Llengua de visualització</string>
-<string name="tip_search_t">\tPodeu cercar llocs directament al mapa o per l'adreça, la localització, com a PDI, o bé com a preferit predefinit.
+<string name="tip_search_t">\tPodeu cercar llocs directament al mapa o per l\'adreça, la localització, com a PDI, o bé com a preferit predefinit.
 \n\tPremeu «Cerca» al menú principal i obrireu les activitats de cerca. Per tots els resultats un menú contextual us ofereix dues opcions: «Estableix com a destinació» o «Mostra al mapa».</string>
-<string name="add_waypoint_dialog_added">La fita \'\'{0}\'\' s'ha afegit correctament</string>
+<string name="add_waypoint_dialog_added">La fita \'\'{0}\'\' s\'ha afegit correctament</string>
 <string name="add_waypoint_dialog_title">Afegeix una fita a la traça GPX enregistrada</string>
 <string name="version_index_is_big_for_memory">L\'índex \'\'{0}\'\' no cap a la memòria</string>
 <string name="version_index_is_not_supported">La versió de l\'índex \'\'{0}\'\' no està suportada</string>
@@ -765,8 +765,8 @@
 <string name="voice_is_not_available_title">Cap guiatge de veu seleccionat</string>
 <string name="daynight_descr">Trieu la regla de commutació del mode dia/nit</string>
 <string name="maps_could_not_be_downloaded">Aquest mapa podria no haver-se baixat</string>
-<string name="rendering_exception">Ha ocorregut un error mentres s'estava renderitzant l'àrea seleccionada</string>
+<string name="rendering_exception">Ha ocorregut un error mentres s\'estava renderitzant l\'àrea seleccionada</string>
 <string name="show_point_options">Opcions de localització</string>
-<string name="renderer_load_sucess">El renderitzador s'ha carregat correctament</string>
+<string name="renderer_load_sucess">El renderitzador s\'ha carregat correctament</string>
 <string name="fav_points_not_exist">No hi ha punts preferits</string>
 </resources>
