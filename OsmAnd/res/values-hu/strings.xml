@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">A 0.7.2 kiadás változásai: \n\t- Natív renderelő minden eszközre \n\t- Offline POI szerkesztés \n\t- Akadálymentesítés \n\t- Sok egyéb hibajavítás</string>
   <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
   <string name="gpx_visibility_txt">Láthatóság</string>
@@ -997,4 +997,14 @@
 		- Opcionális térképforgatással a mozgás vagy az iránytű alapján
     </string>
 <string name="osmand_plus_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
+<string name="avoid_motorway">Autópályák elkerülése</string>
+<string name="tip_recent_changes_0_8_3_t">A 0.8.3 kiadás változásai:
+		\n\t* Továbbfejlesztett útvonalvezetés
+		\n\t* Autópályák elkerülése opció
+		\n\t* Cycleway=track megjelenítése
+		\n\t* javított felhasználói felület (ikonok)
+		\n\t* További hibajavítások
+	</string>
+<string name="snap_to_road_descr">Úthoz rögzítés navigálás közben</string>
+<string name="snap_to_road">Úthoz rögzítés</string>
 </resources>
