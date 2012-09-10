@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla…</string>
@@ -864,8 +864,7 @@
 \n\t* Información sobre radares, limites de velocidad y puntos negros
 \n\t* Mejoras en la guía por voz en autopistas
 \n\t* Extra de parking (¿Dónde está aparcado mi coche?)
-\n\t* Activar/Desactivar mecanismo de monitorización
-    </string>
+\n\t* Activar/Desactivar mecanismo de monitorización</string>
   <string name="gpxup_public">Público</string>
   <string name="gpxup_identifiable">Identificable</string>
   <string name="gpxup_trackable">Trazable</string>
@@ -915,8 +914,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
   <string name="tip_recent_changes_0_8_2_t">Cambios en 0.8.2 :
 \n\t* Mejoras en Navegación
-\n\t* Widgets de mapas dinámicos
-    </string>
+\n\t* Widgets de mapas dinámicos</string>
   <string name="map_widget_top_text">Nombre de calle</string>
   <string name="map_widget_config">Configuración</string>
   <string name="map_widget_map_select">Selección de mapa</string>
@@ -1013,6 +1011,5 @@ Algunas de las características fundamentales:
 - Modos de coche, bicicleta, y peatón con:
 - Cambio automático opcional de vista diurna/nocturna
 - Zoom opcional dependiente de la velocidad
-- Alineamiento del mapa opcional según brújula o dirección de movimiento
-    </string>
+- Alineamiento del mapa opcional según brújula o dirección de movimiento</string>
 </resources>
