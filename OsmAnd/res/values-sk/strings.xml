@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
   \n\t* Vylepšená navigácia
   \n\t* Voľba obídenia diaľnic
   \n\t* Zobrazenie Cycleway=track
   \n\t* Vylepšený vzhľad rozhrania (ikony)
   \n\t* Opravy chýb
-  </string>
+</string>
   <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
   <string name="snap_to_road">Prichytiť k ceste</string>
   <string name="avoid_motorway">Diaľniciam</string>
@@ -295,7 +295,7 @@
 \n\t- Oprava chýb "</string>
   <string name="save_route_dialog_title">Uložiť cestu ako GPX stopu</string>
   <string name="route_successfully_saved_at">Cesta je úspešne uložená v \'%1$s\'.</string>
-  <string name="filename_input">"Názov súboru : "</string>
+  <string name="filename_input">Názov súboru : </string>
   <string name="file_with_name_already_exist">Súbor s takýmto názvom už existuje.</string>
   <string name="default_buttons_save">Uložiť</string>
   <string name="menu_save_directions">Uložiť pokyny</string>
@@ -558,7 +558,7 @@
   <string name="osmand_service">Funkcia v režime spánku</string>
   <string name="osmand_service_descr">Použite pre beh OsmAndu počas vypnutej obrazovky</string>
   <string name="fast_route_mode">Najrýchlejšia trasa</string>
-  <string name="fast_route_mode_descr">"Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu "</string>
+  <string name="fast_route_mode_descr">Zapnite na výpočet najrýchlejšej trasy alebo vypnite pre najkratšiu trasu </string>
   <string name="tiles_to_download_estimated_size">Pri priblížení {0} sa stiahne {1} dlaždíc ({2} Mb )</string>
   <string name="context_menu_item_download_map">Stiahnuť mapu</string>
   <string name="select_max_zoom_preload_area">Vybrať max. priblíženie viditeľnej oblasti na načítanie</string>
