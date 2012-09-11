@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources><string name="tip_recent_changes_0_7_2_t">A 0.7.2 kiadás változásai: \n\t- Natív renderelő minden eszközre \n\t- Offline POI szerkesztés \n\t- Akadálymentesítés \n\t- Sok egyéb hibajavítás</string>
   <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
   <string name="gpx_visibility_txt">Láthatóság</string>
