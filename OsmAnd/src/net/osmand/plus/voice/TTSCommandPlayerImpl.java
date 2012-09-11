@@ -90,8 +90,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	 */
 	private int ttsRequests;
 	
+	// Called from the calculating route thread.
 	@Override
-	public void playCommands(CommandBuilder builder) {
+	public synchronized void playCommands(CommandBuilder builder) {
 		if (mTts != null) {
 			final List<String> execute = builder.execute(); //list of strings, the speech text, play it
 			StringBuilder bld = new StringBuilder();
@@ -101,6 +102,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			if (ttsRequests++ == 0)
 				requestAudioFocus();
 			log.debug("ttsRequests="+ttsRequests);
+			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		}
@@ -160,8 +162,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 				}
 			});
 			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
+				// The call back is on a binder thread.
 				@Override
-				public void onUtteranceCompleted(String utteranceId) {
+				public synchronized void onUtteranceCompleted(String utteranceId) {
 					if (--ttsRequests == 0)
 						abandonAudioFocus();
 					log.debug("ttsRequests="+ttsRequests);

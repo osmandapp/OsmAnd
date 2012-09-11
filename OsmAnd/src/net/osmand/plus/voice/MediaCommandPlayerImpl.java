@@ -46,6 +46,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		mediaPlayer = null;
 	}
 	
+	//  Called from the calculating route thread.
 	@Override
 	public synchronized void playCommands(CommandBuilder builder) {
 		filesToPlay.addAll(builder.execute());
@@ -79,14 +80,13 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	}
 	
 	/**
-	 * Called when the MediaPlayer is done.
+	 * Called when the MediaPlayer is done.  The call back is on the main thread.
 	 */
 	@Override
 	public void onCompletion(MediaPlayer mp) {
 		// Work on the next file to play.
 		playQueue();
 	}
-
 
 	private void performDelays() {
 		int sleep = 0;
@@ -98,8 +98,10 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			}
 		}
 		try {
-			if (sleep != 0)
+			if (sleep != 0) {
+				log.debug("Delaying "+sleep);
 				Thread.sleep(sleep);
+			}
 		} catch (InterruptedException e) {
 		}
 	}
@@ -109,10 +111,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			String f = filesToPlay.remove(0);
 			if (f != null && voiceDir != null) {
 				File file = new File(voiceDir, f);
-				if (file.exists()) 
-					return file;
-				else
-					log.error("Unable to play, does not exist: "+file);
+				return file;
 			}
 		}
 		return null;
@@ -124,8 +123,13 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	 * @param file
 	 */
 	private void playFile(File file)  {
-		log.debug("Playing file : " + file); //$NON-NLS-1$
+		if (!file.exists()) {
+			log.error("Unable to play, does not exist: "+file);
+			playQueue();
+			return;
+		}
 		try {
+			log.debug("Playing file : " + file); //$NON-NLS-1$
 			mediaPlayer.reset();
 			mediaPlayer.setAudioStreamType(streamType);
 			mediaPlayer.setDataSource(file.getAbsolutePath());
