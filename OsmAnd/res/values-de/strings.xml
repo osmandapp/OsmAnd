@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
 	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarkontrollen, Rüttelschwellen u.Ä.</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
@@ -14,12 +14,12 @@
 		\n\t* Einige Fehlerbehebungen"</string>
 	<string name="snap_to_road_descr">Position während der Navigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Auf Straße einrasten</string>
-	<string name="tip_recent_changes_0_8_2_t">Änderungen in 0.8.2 :
+	<string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2 :
 		\n\t* Verbessertes Routing
 		\n\t* Konfigurierbare Schaltflächen
 		\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen
 		\n\t* Bildschirmsperrtaste mit Logging-Einstellungen
-		\n * Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften</string>
+		\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften"</string>
 	<string name="osmand_short_description_80_chars">OsmAnd ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
@@ -488,21 +488,22 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren …</string>
 	<string name="tip_update_index">Update der Offline-Daten</string>
-	<string name="tip_update_index_t">\tAktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
-		\n\tUpdates finden Sie via \'Hauptmenü\' → \'Einstellungen\' → \'Offline-Daten\'.
-		\n\tNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
-		\n\tAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
-		\n\t\'Grün\' - Daten sind aktuell
-		\n\t\'Blau\' - neuere Version vorhanden
-		\n\t\'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten
+	<string name="tip_update_index_t">Aktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
+		\nUpdates finden Sie via \'Einstellungen\' → \'Offline-Daten\'.
+		\nNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
+		\n\nAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
+		\n\ 'Grün\' - Daten sind aktuell
+		\n\ 'Blau\' - neuere Version vorhanden
+		\n\ 'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten
 	</string>
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
 	<string name="tip_location_sharing">Lokation mitteilen</string>
-	<string name="tip_location_sharing_t">\tWollen Sie einen interessanten Ort Freunden oder Familie mitteilen?
-		\n\tMit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden.
-		\n\tDazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
-		\n\tZur Auswahl stehen mehrere Übertragungswege: E-Mail, SMS, oder die Lokationskoordinaten einfach in die Ablage (Clipboard) kopieren.</string>
+	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
+\nZur Auswahl stehen mehrere Übertragungswege:
+\n* E-Mail
+\n* SMS
+\n* Kopieren der Lokationskoordinaten in die Ablage (Clipboard)</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als Favoriten speichern.
 		\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
