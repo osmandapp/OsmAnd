@@ -579,7 +579,7 @@
   <string name="update_existing">Sostituisci</string>
   <string name="only_show">Visualizza solo</string>
   <string name="follow">Segui</string>
-  <string name="recalculate_route_to_your_location">Seleziona il mezzo di trasporto (opzionale):</string>
+  <string name="recalculate_route_to_your_location">Seleziona il mezzo di trasporto:</string>
   <string name="mark_final_location_first">Selezionare prima una destinazione</string>
   <string name="get_directions">Percorsi</string>
   <string name="show_gps_status">Visualizzare lo stato del gps</string>
