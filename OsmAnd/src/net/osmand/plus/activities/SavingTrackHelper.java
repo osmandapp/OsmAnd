@@ -165,6 +165,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 //			db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
 //			db.execSQL("DELETE FROM " + POINT_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
 		}
+		distance = 0;
 		return warnings;
 	}
 
