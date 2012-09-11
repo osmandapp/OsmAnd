@@ -11,10 +11,9 @@ import net.osmand.plus.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
+
 
 /**
  * That class represents command player. 
@@ -33,21 +32,12 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	// indicates that player is ready to play first file
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
 	private int streamType;
-	private final Context mCtx;
-	private AudioFocusHelper mAudioFocusHelper;
 
 	
 	public MediaCommandPlayerImpl(Context ctx, OsmandSettings settings, String voiceProvider)
 		throws CommandPlayerException
 	{
 		super(ctx, settings, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
-		mCtx = ctx;
-		this.streamType = settings.AUDIO_STREAM_GUIDANCE.get();  
-	}
-	
-	@Override
-	public void updateAudioStream(int streamType) {
-		this.streamType = streamType;
 	}
 	
 	@Override
@@ -62,13 +52,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		
 		// If we have not already started to play audio, start.
 		if (mediaPlayer == null) {
-			if (android.os.Build.VERSION.SDK_INT >= 8) {
-			    mAudioFocusHelper = new AudioFocusHelper(mCtx);
-			} else {
-			    mAudioFocusHelper = null;
-			}
-			if (mAudioFocusHelper != null)
-				mAudioFocusHelper.requestFocus();
+			requestAudioFocus();
 			playQueue();
 		}
 	}
@@ -89,14 +73,17 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 				mediaPlayer.release();
 				mediaPlayer = null;
 
-				if (mAudioFocusHelper != null)
-					mAudioFocusHelper.abandonFocus();
+				abandonAudioFocus();
 			}
 		}
 	}
 	
+	/**
+	 * Called when the MediaPlayer is done.
+	 */
 	@Override
 	public void onCompletion(MediaPlayer mp) {
+		// Work on the next file to play.
 		playQueue();
 	}
 
@@ -131,6 +118,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		return null;
 	}
 	
+	/**
+	 * Starts the MediaPlayer playing a file.  This method will return immediately.
+	 * OnCompletionListener() will be called when the MediaPlayer is done.
+	 * @param file
+	 */
 	private void playFile(File file)  {
 		log.debug("Playing file : " + file); //$NON-NLS-1$
 		try {
@@ -150,34 +142,4 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		return new File(voiceDir, CONFIG_FILE).exists();
 	}
 	
-	/**
-	 * This helper class allows API level 8 calls to be isolated from the rest of the app.
-	 * This class is only be instantiated on OS versions which support it. 
-	 * @author genly
-	 *
-	 */
-	// We Use API level 8 calls here, suppress warnings.
-	@SuppressLint("NewApi")
-    public class AudioFocusHelper implements AudioManager.OnAudioFocusChangeListener {
-		private Context mContext;
-		private AudioManager mAudioManager;
-
-		public AudioFocusHelper(Context context) {
-			mContext = context;
-			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-		}
-		
-		public boolean requestFocus() {
-			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED ==
-					mAudioManager.requestAudioFocus(this, streamType, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-		}
-
-		public boolean abandonFocus() {
-			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
-		}
-	    @Override
-	    public void onAudioFocusChange(int focusChange) {
-	    		log.error("MediaCommandPlayerImpl.onAudioFocusChange(): Unexpected audio focus change: "+focusChange);
-	    }
-	}
 }
