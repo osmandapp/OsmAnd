@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.activities.OsmandExpandableListActivity;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -209,10 +210,6 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					}
 					Node n;
 					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
-						if (point.getId() != n.getId()) {
-							// change all category points...
-							listAdapter.categoryIdChanged(point.getId(), n.getId());
-						}
 						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
 						dbpoi.deletePOI(p);
 						publishProgress(p);
@@ -282,19 +279,6 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		public LocalOpenstreetmapAdapter() {
 		}
 		
-		public void categoryIdChanged(long oldID, long newID) {
-			int index = category.indexOf(oldID);
-			if (index != -1) {
-				category.set(index, newID);
-				List<OsmPoint> list = data.remove(oldID);
-				if (list != null) {
-					for (OsmPoint point : list) {
-						point.updateID(newID);
-					}
-					data.put(newID, list);
-				}
-			}
-		}
 
 		public void clear() {
 			data.clear();
@@ -320,15 +304,19 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					data.remove(c);
 					category.remove(c);
 				}
-				repo.deleteAmenities(i.getId() << 1);
-				// We need to re-insert the POI if it is a delete or modify
-				for (OsmPoint point : list) {
-					if (point.getGroup() == OsmPoint.Group.POI) {
-						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
-						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), p.getEntity(), p.getEntity());
-					}
+				if (i.getGroup() == OsmPoint.Group.POI && i.getAction() == Action.CREATE) {
+					repo.deleteAmenities(i.getId() << 1);
+					repo.clearCache();
 				}
-				repo.clearCache();
+				// We need to re-insert the POI if it is a delete or modify
+				// problem with bulk upload
+//				for (OsmPoint point : list) {
+//					if (point.getGroup() == OsmPoint.Group.POI) {
+//						OpenstreetmapPoint p = (OpenstreetmapPoint) point;
+//						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), p.getEntity(), p.getEntity());
+//					}
+//				}
+				
 			}
 			listAdapter.notifyDataSetChanged();
 		}

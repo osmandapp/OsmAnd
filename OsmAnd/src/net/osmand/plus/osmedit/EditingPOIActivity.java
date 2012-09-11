@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
@@ -54,6 +55,7 @@ public class EditingPOIActivity implements DialogProvider {
 	
 	private final MapActivity ctx;
 	private final OpenstreetmapUtil openstreetmapUtil;
+	private final OpenstreetmapUtil openstreetmapUtilToLoad;
 	private AutoCompleteTextView typeText;
 	private EditText nameText;
 	private Button typeButton;
@@ -83,15 +85,21 @@ public class EditingPOIActivity implements DialogProvider {
 		this.ctx = uiContext;
 
 		settings = ((OsmandApplication) uiContext.getApplication()).getSettings();
-		if(settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
+		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)) {
 			this.openstreetmapUtil = new OpenstreetmapLocalUtil(ctx);
+			if (settings.isInternetConnectionAvailable(true)) {
+				this.openstreetmapUtilToLoad = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());
+			} else {
+				this.openstreetmapUtilToLoad = openstreetmapUtil;
+			}
 		} else {
 			this.openstreetmapUtil = new OpenstreetmapRemoteUtil(ctx, ctx.getMapView());
+			this.openstreetmapUtilToLoad= openstreetmapUtil;
 		}
 	}
 	
 	public void showEditDialog(Amenity editA){
-		Node n = openstreetmapUtil.loadNode(editA);
+		Node n = openstreetmapUtilToLoad.loadNode(editA);
 		if(n != null){
 			showPOIDialog(DIALOG_EDIT_POI, n, editA.getType(), editA.getSubType());
 		} else {
@@ -113,7 +121,7 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	public void showDeleteDialog(Amenity a){
-		final Node n = openstreetmapUtil.loadNode(a);
+		final Node n = openstreetmapUtilToLoad.loadNode(a);
 		if(n == null){
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
 			return;
@@ -275,7 +283,7 @@ public class EditingPOIActivity implements DialogProvider {
 				            tag.setLayoutParams(tlp);
 				            tag.setHint("Tag");
 
-				            final Set<String> tagKeys = new LinkedHashSet<String>();
+				            final Set<String> tagKeys = new TreeSet<String>();
 							for (OSMTagKey t : OSMTagKey.values()) {
 								if ((t != OSMTagKey.NAME) && (t != OSMTagKey.OPENING_HOURS) && (t != OSMTagKey.PHONE)
 										&& (t != OSMTagKey.WEBSITE)) {

@@ -5,9 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import com.ibm.icu.impl.locale.StringTokenIterator;
-import com.ibm.icu.util.StringTokenizer;
-
 import net.osmand.osm.Node;
 import android.content.Context;
 import android.database.Cursor;
@@ -16,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 4;
 	public static final String OPENSTREETMAP_DB_NAME = "openstreetmap"; //$NON-NLS-1$
 	private static final String OPENSTREETMAP_TABLE_NAME = "openstreetmaptable"; //$NON-NLS-1$
 	private static final String OPENSTREETMAP_COL_ID = "id"; //$NON-NLS-1$
@@ -40,11 +37,11 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(OPENSTREETMAP_TABLE_CREATE);
 	}
-
+	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		if(newVersion == 2) {
-			// db.execSQL("DROP TABLE " + OPENSTREETMAP_TABLE_NAME);
+		if(newVersion == 4) {
+			db.execSQL("DROP TABLE IF EXISTS " + OPENSTREETMAP_TABLE_NAME);
 			db.execSQL(OPENSTREETMAP_TABLE_CREATE);	
 		}
 	}
@@ -75,6 +72,8 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 	
+	
+	
 	public boolean deletePOI(OpenstreetmapPoint p) {
 		checkOpenstreetmapPoints();
 		SQLiteDatabase db = getWritableDatabase();
@@ -85,6 +84,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 		}
 		return false;
 	}
+	
 
 	private List<OpenstreetmapPoint> checkOpenstreetmapPoints(){
 		SQLiteDatabase db = getWritableDatabase();
