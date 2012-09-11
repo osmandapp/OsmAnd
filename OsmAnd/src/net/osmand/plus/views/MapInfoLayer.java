@@ -222,6 +222,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// register right stack
 		EnumSet<ApplicationMode> all = EnumSet.allOf(ApplicationMode.class);
 		EnumSet<ApplicationMode> bicyclePedestrian = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN);
+		EnumSet<ApplicationMode> exceptCar = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
 		EnumSet<ApplicationMode> none = EnumSet.noneOf(ApplicationMode.class);
 		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
 		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
@@ -249,9 +250,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		ImageViewControl compassView = createCompassView(map);
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.values());
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
 		ImageView lockView = lockInfoControl.createLockScreenWidget(view, map);
-		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, all, 15);
+		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, exceptCar, 15);
 		backToLocation = createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
 		View globus = createGlobus();
@@ -808,7 +809,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					pp.setTextSize(20 * scaleCoefficient);
 					float ts = pp.measureText(text);
 					int wth = getWidth();
-					while (ts > wth && pp.getTextSize() > (14 * scaleCoefficient)) {
+					while (ts > wth && pp.getTextSize() > (16 * scaleCoefficient)) {
 						pp.setTextSize(pp.getTextSize() - 1);
 						ts = pp.measureText(text);
 					}
