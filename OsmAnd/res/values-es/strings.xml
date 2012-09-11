@@ -1012,4 +1012,13 @@ Algunas de las características fundamentales:
 - Cambio automático opcional de vista diurna/nocturna
 - Zoom opcional dependiente de la velocidad
 - Alineamiento del mapa opcional según brújula o dirección de movimiento</string>
+<string name="avoid_motorway">Evitar autopistas</string>
+<string name="tip_recent_changes_0_8_3_t">﻿Cambios en 0.8.3:
+\n\t* Mejoras en indicaciones de ruta
+\n\t* Opción de evitar autopistas
+\n\t* Muestra vía ciclista=pista
+\n\t* Mejor acabado de interfaz de usuario (iconos)
+\n\t* Algunas correcciones de errores</string>
+<string name="snap_to_road_descr">﻿Ajusta la posición a las carreteras durante la navegación</string>
+<string name="snap_to_road">Ajustar a carreteras</string>
 </resources>
