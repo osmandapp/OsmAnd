@@ -884,7 +884,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			int currentMapRotation = settings.ROTATE_MAP.get();
 			if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
 				if (location.hasBearing()) {
-					mapView.setRotate(-location.getBearing());
+					if(location.getBearing() != 0f) {
+						mapView.setRotate(-location.getBearing());
+					}
 				} else if (routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
 					if (previousSensorValue != 0 && Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -previousSensorValue)) > 15) {
 						if(now - lastTimeSensorRotation > 1500 && now - lastTimeSensorRotation < 15000) {
