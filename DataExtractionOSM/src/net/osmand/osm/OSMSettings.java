@@ -44,6 +44,13 @@ public class OSMSettings {
 		// POI
 		AMENITY("amenity"), //$NON-NLS-1$
 		SHOP("shop"), //$NON-NLS-1$
+		LANDUSE("landuse"),  //$NON-NLS-1$
+		OFFICE("office"),  //$NON-NLS-1$
+		EMERGENCY("emergency"),  //$NON-NLS-1$
+		MILITARY("military"),  //$NON-NLS-1$
+		ADMINISTRATIVE("administrative"),  //$NON-NLS-1$
+		MAN_MADE("man_made"),  //$NON-NLS-1$
+		BARRIER("barrier"),  //$NON-NLS-1$
 		LEISURE("leisure"),  //$NON-NLS-1$
 		TOURISM("tourism"), //$NON-NLS-1$
 		SPORT("sport"),  //$NON-NLS-1$

@@ -64,12 +64,6 @@ public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 		return Group.POI;
 	}
 
-	public String getOpeninghours() {
-		String ret = entity.getTag(OSMTagKey.OPENING_HOURS.getValue());
-		if (ret == null)
-			return "";
-		return entity.getTag(ret);
-	}
 
 	public Node getEntity() {
 		return entity;

@@ -6,7 +6,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.EntityInfo;
 import net.osmand.osm.Node;
@@ -97,7 +96,6 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		listAdapter.clear();
 		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
 		List<OsmbugsPoint> l2 = dbbug.getOsmbugsPoints();
-		android.util.Log.d(LogUtil.TAG, "List " + (l1.size() + l2.size()) + " length");
 		for (OpenstreetmapPoint p : l1) {
 			listAdapter.addOsmPoint(p);
 		}
@@ -122,9 +120,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 		} else if(itemId == R.id.deletemod) {
 			OsmPoint info = (OsmPoint) listAdapter.getChild(group, child);
 			if (info.getGroup() == OsmPoint.Group.POI) {
-				dbpoi.deleteAllPOIModifications(info.getId());
+				dbpoi.deletePOI((OpenstreetmapPoint) info);
 			} else if (info.getGroup() == OsmPoint.Group.BUG) {
-				dbbug.deleteAllBugModifications(info.getId());
+				dbbug.deleteAllBugModifications((OsmbugsPoint) info);
 			}
 			listAdapter.delete(info);
 			return true;
@@ -216,7 +214,7 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 							listAdapter.categoryIdChanged(point.getId(), n.getId());
 						}
 						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
-						dbpoi.deleteOpenstreetmap(p);
+						dbpoi.deletePOI(p);
 						publishProgress(p);
 						uploaded++;
 					}
@@ -224,14 +222,12 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 					OsmbugsPoint p = (OsmbugsPoint) point;
 					if (p.getAction() == OsmPoint.Action.CREATE) {
 						remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
-						dbbug.deleteOsmbugs(p);
 					} else if (p.getAction() == OsmPoint.Action.MODIFY) {
 						remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
-						dbbug.deleteOsmbugs(p);
 					} else if (p.getAction() == OsmPoint.Action.DELETE) {
 						remotebug.closingBug(p.getId());
-						dbbug.deleteOsmbugs(p);
 					}
+					dbbug.deleteAllBugModifications(p);
 					publishProgress(p);
 					uploaded++;
 				}
@@ -316,13 +312,6 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 
 		public void delete(OsmPoint i) {
 			final AmenityIndexRepositoryOdb repo = getMyApplication().getResourceManager().getUpdatablePoiDb();
-			android.util.Log.d(LogUtil.TAG, "Delete " + i);
-
-			if (i.getGroup() == OsmPoint.Group.POI) {
-				dbpoi.deleteOpenstreetmap((OpenstreetmapPoint) i);
-			} else if (i.getGroup() == OsmPoint.Group.BUG) {
-				dbbug.deleteOsmbugs((OsmbugsPoint) i);
-			}
 			Long c = i.getId();
 			if(c != null){
 				List<OsmPoint> list = data.get(c);
@@ -412,9 +401,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				LayoutInflater inflater = getLayoutInflater();
 				v = inflater.inflate(net.osmand.plus.R.layout.local_openstreetmap_list_item_category, parent, false);
 			}
+			adjustIndicator(groupPosition, isExpanded, v);
 			StringBuilder t = new StringBuilder();
 			t.append(" id:").append(group);
-			TextView nameView = ((TextView) v.findViewById(R.id.local_openstreetmap_category_name));
 			t.append("  [").append(getChildrenCount(groupPosition));
 			if(getString(R.string.local_openstreetmap_items).length() > 0){
 				t.append(" ").append(getString(R.string.local_openstreetmap_items));
@@ -423,8 +412,9 @@ public class LocalOpenstreetmapActivity extends OsmandExpandableListActivity {
 				t.append(" ").append(getString(R.string.local_openstreetmap_items));
 			}
 			t.append("]");
+			TextView nameView = ((TextView) v.findViewById(R.id.local_openstreetmap_category_name));
 			nameView.setText(t.toString());
-			adjustIndicator(groupPosition, isExpanded, v);
+			
 
 			return v;
 		}

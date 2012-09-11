@@ -1,7 +1,6 @@
 package net.osmand.plus.osmedit;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import android.content.Context;
@@ -25,12 +24,8 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 			OSMBUGS_COL_LAT + " double, " + OSMBUGS_COL_LON + " double, " + //$NON-NLS-1$ //$NON-NLS-2$
 			OSMBUGS_COL_ACTION + " TEXT, " + OSMBUGS_COL_AUTHOR + " TEXT);"; //$NON-NLS-1$ //$NON-NLS-2$
 
-	private List<OsmbugsPoint> cachedOsmbugsPoints = new ArrayList<OsmbugsPoint>();
-//	private final Context context;
-
 	public OsmBugsDbHelper(Context context) {
 		super(context, OSMBUGS_DB_NAME, null, DATABASE_VERSION);
-//		this.context = context;
 	}
 
 	@Override
@@ -43,66 +38,39 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 	}
 
 	public List<OsmbugsPoint> getOsmbugsPoints() {
-		checkOsmbugsPoints();
-		return cachedOsmbugsPoints;
+		return checkOsmbugsPoints();
 	}
 
 	public boolean addOsmbugs(OsmbugsPoint p) {
 		checkOsmbugsPoints();
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
-			db.execSQL("INSERT INTO " + OSMBUGS_TABLE_NAME +
-					" (" + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + "," + OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" +
-					   " VALUES (?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
-			cachedOsmbugsPoints.add(p);
-			p.setStored(true);
+			db.execSQL(
+					"INSERT INTO " + OSMBUGS_TABLE_NAME + " (" + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + ","
+							+ OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + ")" + " VALUES (?, ?, ?, ?, ?, ?)", new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
 			return true;
 		}
 		return false;
 	}
 
-	public boolean deleteOsmbugs(OsmbugsPoint p) {
+	public boolean deleteAllBugModifications(OsmbugsPoint p) {
 		checkOsmbugsPoints();
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
 			db.execSQL("DELETE FROM " + OSMBUGS_TABLE_NAME +
-					" WHERE " + OSMBUGS_COL_ID + " = ? AND " +
-					   OSMBUGS_COL_TEXT + " = ? AND " +
-					   OSMBUGS_COL_LAT + " = ? AND " +
-					   OSMBUGS_COL_LON + " = ? AND " +
-					   OSMBUGS_COL_ACTION + " = ? AND " +
-					   OSMBUGS_COL_AUTHOR + " = ?",
-					   new Object[] { p.getId(), p.getText(), p.getLatitude(), p.getLongitude(), OsmPoint.stringAction.get(p.getAction()), p.getAuthor() }); //$NON-NLS-1$ //$NON-NLS-2$
-			cachedOsmbugsPoints.remove(p);
-			p.setStored(false);
+					" WHERE " + OSMBUGS_COL_ID + " = ?", new Object[] { p.getId() }); //$NON-NLS-1$ //$NON-NLS-2$
 			return true;
 		}
 		return false;
 	}
 
-	public boolean deleteAllBugModifications(long id) {
-		checkOsmbugsPoints();
+	private List<OsmbugsPoint> checkOsmbugsPoints(){
 		SQLiteDatabase db = getWritableDatabase();
-		if (db != null) {
-			db.execSQL("DELETE FROM " + OSMBUGS_TABLE_NAME +
-					" WHERE " + OSMBUGS_COL_ID + " = ?", new Object[] { id }); //$NON-NLS-1$ //$NON-NLS-2$
-			//remove all associated actions with that Bug
-			for (Iterator<OsmbugsPoint> it = cachedOsmbugsPoints.iterator(); it.hasNext();) {
-				if (it.next().getId() == id) {
-					it.remove();
-				}
-			};
-			return true;
-		}
-		return false;
-	}
-
-	private void checkOsmbugsPoints(){
-		SQLiteDatabase db = getWritableDatabase();
+		List<OsmbugsPoint> cachedOsmbugsPoints = new ArrayList<OsmbugsPoint>();
 		if (db != null) {
 			Cursor query = db.rawQuery("SELECT " + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + "," + OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
 					OSMBUGS_TABLE_NAME, null);
-			cachedOsmbugsPoints.clear();
+			
 			if (query.moveToFirst()) {
 				do {
 					OsmbugsPoint p = new OsmbugsPoint();
@@ -113,12 +81,12 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 					p.setLongitude(query.getDouble(3));
 					p.setAction(query.getString(4));
 					p.setAuthor(query.getString(5));
-					p.setStored(true);
 					cachedOsmbugsPoints.add(p);
 				} while (query.moveToNext());
 			}
 			query.close();
 		}
+		return cachedOsmbugsPoints;
 	}
 
 	public long getMinID() {

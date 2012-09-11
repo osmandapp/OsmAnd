@@ -4,10 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class OsmPoint {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 729654300829771469L;
 
 	public static enum Group {BUG, POI};
 
@@ -26,7 +22,6 @@ public abstract class OsmPoint {
 	};
 
 	private Action action;
-	private boolean stored = false;
 
 	public OsmPoint(){
 	}
@@ -45,9 +40,6 @@ public abstract class OsmPoint {
 		return action;
 	}
 
-	public boolean isStored() {
-		return stored;
-	}
 
 	public void setAction(String action) {
 		this.action = actionString.get(action);
@@ -57,9 +49,6 @@ public abstract class OsmPoint {
 		this.action = action;
 	}
 
-	public void setStored(boolean stored) {
-		this.stored = stored;
-	}
 
 	@Override
 	public String toString() {
