@@ -249,9 +249,15 @@
   <string name="level_to_switch_vector_raster_descr">Nivel de zoom mínimo para utilizar dibujo de vectores en vez de teselas de mapa</string>
   <string name="level_to_switch_vector_raster">Mín. zoom vectores</string>
   <string name="tip_location_sharing">Compartir localización</string>
-  <string name="tip_location_sharing_t">\tPuede compartir la localización de lugares interesantes con su familia y amigos. \n\tPara compartir una localización: \n\tUse \'Menú contextual del mapa\' -&gt; \'Compartir localización\'. \n\tLuego seleccione el modo de compartir la localización. Las opciones son: Correo electrónico, SMS(texto), o copiar las coordenadas de la localización al portapapeles.</string>
+  <string name="tip_location_sharing_t">\tPuede compartir la localización de lugares interesantes con su familia y amigos.
+\n\tPara compartir una localización:
+\n\tUse \'Menú contextual del mapa\' -&gt; \'Compartir localización\'.
+\n\tLuego seleccione el modo de compartir la localización. Las opciones son: Correo electrónico, SMS(texto), o copiar las coordenadas de la localización al portapapeles.</string>
   <string name="tip_favorites">Puntos favoritos</string>
-  <string name="tip_favorites_t">\tLos puntos usados frecuentemente se pueden guardar como favoritos. \n\tPara guardar un punto como favorito, vaya al menú contextual del mapa, seleccione la opción \'Añadir a favoritos\' y escriba un nombre. Después de guardarlo, es accessible vía \'Menú Principal\' -&gt; \'Favoritos\'. \n\tUna pulsación larga sobre un favorito en el menú \'Favoritos\' proporciona opciones para ponerlo como destino, editarlo o borrarlo. \n\tPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú contextual del mapa\' -&gt;\'Representación\'.</string>
+  <string name="tip_favorites_t">\tLos puntos usados frecuentemente se pueden guardar como favoritos.
+\n\tPara guardar un punto como favorito, en el menú contextual del mapa, selecciona la opción \'Añadir a favoritos\' y escribe un nombre. Después de guardarlo, es accessible vía \'Menú Principal\' -&gt; \'Favoritos\'.
+\n\tUna pulsación larga sobre un favorito en el menú \'Favoritos\' proporciona opciones para ponerlo como destino, editarlo o borrarlo.
+\n\tPara mostrar todos los puntos favoritos directamente en el mapa, active la capa \'Favoritos\' en \'Menú contextual del mapa\' -&gt;\'Representación\'.</string>
   <string name="create_poi_link_to_osm_doc">" <u>OSM en línea</u> clasificación de mapa con imágenes"</string>
   <string name="error_doing_search">Ocurrió un error en la búsqueda</string>
   <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
@@ -266,11 +272,15 @@
   <string name="tip_navigation">Navegación</string>
   <string name="tip_navigation_t">\tAntes de empezar una navegación necesita seleccionar un destino. Después, pulse \'Menú\' -&gt; \'Indicaciones\' en el mapa y seleccione el tipo de navegación.</string>
   <string name="tip_search">Buscando</string>
-  <string name="tip_search_t">\tPuede buscar lugares directamente en el mapa, por dirección, por coordenadas, como PDI, o como favorito predefinido. \n\tPulsando \'Buscar\' en el menú principal, abre las actividades de búsqueda. Para los puntos encontrados, se ofrece un menú contextual con dos opciones: \'Fijar como destino\' o \'Mostrar en mapa\'.</string>
+  <string name="tip_search_t">\tPuedes buscar lugares directamente en el mapa, por dirección, por coordenadas, como PDI, o como favorito predefinido.
+\n\tPulsando \'Buscar\' en el menú principal, abre las actividades de búsqueda. Para los puntos encontrados, se ofrece un menú contextual con dos opciones: \'Fijar como destino\' o \'Mostrar en mapa\'.</string>
   <string name="tip_map_context_menu">Menú Contextual del Mapa</string>
-  <string name="tip_map_context_menu_t">\tEl menú contextual del mapa aparece con una pulsación larga en el mapa o pulsando el botón del trackball. \n\tEsto muestra una caja con las coordenadas del punto. Para abrir el diálogo del menú contextual del mapa pulse sobre ella (o pulsación larga sobre la caja para ocultarla). \n\tEl menú contextual del mapa contiene todas las acciones relacionadas con el punto (localización).</string>
+  <string name="tip_map_context_menu_t">\tEl menú contextual del mapa aparece con una pulsación larga en el mapa o pulsando el botón del trackball.
+\n\tEsto muestra una caja con las coordenadas del punto. Para abrir el diálogo del menú contextual del mapa pulsa sobre ella (o pulsación larga sobre la caja para ocultarla).
+\n\tEl menú contextual del mapa contiene todas las acciones relacionadas con el punto (localización).</string>
   <string name="tip_initial">Pistas y trucos</string>
-  <string name="tip_initial_t">\tOsmAnd es una aplicación de navegación con muchas características. \n\tComo introducción básica, hay algunas pistas y trucos de uso accesibles de la pantalla del menú principal.</string>
+  <string name="tip_initial_t">\tOsmAnd es una aplicación de navegación con muchas características. 
+\n\tComo introducción básica, hay algunas pistas y trucos de uso accesibles desde la pantalla principal.</string>
   <string name="next_button">Siguiente</string>
   <string name="previous_button">Anterior</string>
   <string name="unit_of_length_descr">Cambia las unidades de longitud y velocidad</string>
@@ -848,7 +858,7 @@
   <string name="rendering_attr_noPolygons_name">Sin polígonos</string>
   <string name="rendering_attr_appMode_name">Modo de dibujo</string>
   <string name="rendering_attr_appMode_description">Optimización de mapa para cada Perfil de Usuario</string>
-  <string name="rendering_attr_contourLines_description">Selecciona el nivel de zoom mínimo para mostrar en el mapa si está disponible. Puede necesitar un fichero SRTM separado.</string>
+  <string name="rendering_attr_contourLines_description">Muestra a partir del nivel de zoom (necesita un fichero SRTM):</string>
   <string name="rendering_attr_contourLines_name">Mostrar líneas de contorno</string>
   <string name="rendering_attr_hmRendered_description">Aumentar el detalle que se muestra del mapa</string>
   <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
@@ -958,7 +968,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección↵
 \n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
 <string name="tip_map_switch_t_v2">\﻿tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.
-\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (necesitas activar el extra el \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.
+\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.
 \n\tOsmAnd también soporta fuentes personalizadas.</string>
 <string name="tip_day_night_mode_t_v2">\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).↵
 \n\tLos colores del modo noche son más seguros para la conducción nocturna.↵
@@ -969,30 +979,31 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\t- \'Noche\': utiliza siempre el modo noche↵
 \n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
 <string name="tip_app_mode_t_v2">\﻿tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
-\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla de mapa (icono de coche, bicicleta o peatón), o al crear una ruta.</string>
+\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta.</string>
 <string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
 <string name="osmand_long_description_1000_chars">
 OsmAnd (OSM Automated Navigation Directions)
 
-OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz.
+OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión incluyendo indicaciones giro-a-giro mediante voz.
 
 Algunas de las características fundamentales:
-- Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable)
-- Mapas de vectores compactos disponibles de todo el planeta
-- Descarga de mapa de país o región directamente desde la app
+- Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en una carpeta seleccionable)
+- Mapas vectoriales compactos disponibles de todo el planeta
+- Descarga de mapas de país o región directamente desde la app
 - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable
 - Búsqueda sin conexión de direcciones y lugares (PDI)
 - Rutas sin conexión para distancias cortas (experimental)
 - Modos de coche, bicicleta, y peatón con:
-- Cambio automático opcional de vista diurna/nocturna
-- Zoom opcional dependiente de la velocidad
-- Alineamiento del mapa opcional según brújula o dirección de movimiento
+- opción de cambio automático de vista diurna/nocturna
+- opción de zoom dependiente de la velocidad
+- opción de alineamiento del mapa opcional según brújula o dirección de movimiento
+- opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas
 
 Limitaciones de la versión gratuita de OsmAnd:
 - Limite de número de mapas descargados
-- Sin acceso sin conexión a los PDIs de Wikipedia
+- Sin acceso a los PDIs de Wikipedia descargados
 
-OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones financieras para financiar el desarrollo y los test en conducción de nuevas funcionalidades. Por favor considere comprar OsmAnd+, o financiar nuevas características o hacer una donación en general en osmand.net.</string>
+OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y klas pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net.</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd+ es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
 <string name="osmand_plus_long_description_1000_chars">
 OsmAnd+ (OSM Automated Navigation Directions)
