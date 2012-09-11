@@ -187,19 +187,19 @@ public class LockInfoControl {
 			}
 		});
 		
-    	for(int i=0; i<secondsLength +minutesLength - 1; i++) {
-    		if(i < secondsLength) {
-    			if(v.value <= seconds[i] * 1000) {
-    				sp.setProgress(i);
-    				break;
-    			}
-    		} else {
-    			if(v.value <= minutes[i - secondsLength] * 1000 * 60) {
-    				sp.setProgress(i);
-    				break;
-    			}	
-    		}
-    	}
+		for (int i = 0; i < secondsLength + minutesLength - 1; i++) {
+			if (i < secondsLength) {
+				if (v.value <= seconds[i] * 1000) {
+					sp.setProgress(i);
+					break;
+				}
+			} else {
+				if (v.value <= minutes[i - secondsLength] * 1000 * 60) {
+					sp.setProgress(i);
+					break;
+				}
+			}
+		}
 		
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(tv);
