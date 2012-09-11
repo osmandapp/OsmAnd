@@ -41,10 +41,15 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public boolean closingBug(long id){
+	public boolean closingBug(long id, String text, String authorName){
 		StringBuilder b = new StringBuilder();
 		b.append(SITE_API).append("closePOIexec?"); //$NON-NLS-1$
 		b.append("id=").append(id); //$NON-NLS-1$
+		if(text != null) {
+			b.append("&text=").append(URLEncoder.encode(text)); //$NON-NLS-1$
+		}
+		b.append("&name=").append(URLEncoder.encode(authorName)); //$NON-NLS-1$
+		
 		return editingPOI(b.toString(),"closing bug"); //$NON-NLS-1$
 	}
 

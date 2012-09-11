@@ -467,7 +467,7 @@ public class RouteInfoControls {
 				boolean visible = false;
 				int locimminent = -1;
 				int[] loclanes = null;
-				if (routingHelper != null && routingHelper.isRouteCalculated()) {
+				if (routingHelper != null && routingHelper.isRouteCalculated() && view.getSettings().SHOW_LANES.get()) {
 					if (routingHelper.isFollowingMode()) {
 						NextDirectionInfo r = routingHelper.getNextRouteDirectionInfo(new NextDirectionInfo(), false);
 						if(r != null && r.directionInfo != null && r.directionInfo.getTurnType() != null) {
