@@ -259,6 +259,13 @@
 	</target>
 	
 	<target name="fix_apostrophe_issues">
+		<replace token="version='1.0'" value="version=&quot;1.0&quot;">
+			<fileset dir="res" includes="**/strings.xml"/>
+		</replace>
+		<replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;">
+			<fileset dir="res" includes="**/strings.xml"/>
+		</replace>
+		
 		<replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off">
 			<fileset dir="res" includes="**/strings.xml"/>
 		</replaceregexp>
