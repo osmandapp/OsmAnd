@@ -20,7 +20,6 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.R.drawable;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
@@ -399,7 +398,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpenStreetBug bug = (OpenStreetBug) args.getSerializable(KEY_BUG);
-				boolean closed = osmbugsUtil.closingBug(bug.getId());
+				boolean closed = osmbugsUtil.closingBug(bug.getId(), "", ((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_OSM_BUG_NAME.get());
 		    	if (closed) {
 		    		AccessibleToast.makeText(activity, activity.getString(R.string.osb_close_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();

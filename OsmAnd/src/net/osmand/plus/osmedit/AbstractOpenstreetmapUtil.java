@@ -12,7 +12,6 @@ import net.osmand.plus.OsmandApplication;
 import android.app.Activity;
 
 public abstract class AbstractOpenstreetmapUtil implements OpenstreetmapUtil  {
-	
 
 
 	@Override

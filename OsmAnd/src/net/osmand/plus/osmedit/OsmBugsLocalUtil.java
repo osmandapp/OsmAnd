@@ -1,14 +1,11 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.LogUtil;
 
-import org.apache.commons.logging.Log;
 
 import android.content.Context;
 
 public class OsmBugsLocalUtil implements OsmBugsUtil {
 
-	private static final Log log = LogUtil.getLog(OsmBugsLocalUtil.class);
 
 	private final Context ctx;
 	private final OsmBugsDbHelper db;
@@ -41,9 +38,11 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public boolean closingBug(long id){
+	public boolean closingBug(long id, String text, String authorName){
 		OsmbugsPoint p = new OsmbugsPoint();
 		p.setId(id);
+		p.setAuthor(authorName);
+		p.setText(text);
 		p.setAction(OsmPoint.Action.DELETE);
 		return db.addOsmbugs(p);
 	}

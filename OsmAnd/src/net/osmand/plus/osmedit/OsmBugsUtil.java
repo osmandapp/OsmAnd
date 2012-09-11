@@ -8,5 +8,5 @@ public interface OsmBugsUtil {
 
 	public boolean addingComment(long id, String text, String authorName);
 
-	public boolean closingBug(long id);
+	public boolean closingBug(long id, String text, String authorName);
 }
