@@ -87,6 +87,20 @@ public class Ring implements Comparable<Ring>{
 	}
 	
 	/**
+	 * check if this ring is closed by nature
+	 * @return true if this ring is closed, false otherwise
+	 */
+	public boolean isClosed() {
+		closeWays();
+		for (int i = closedWays.size()-1; i>=0; i--) {
+			if (!ways.contains(closedWays.get(i))){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	/**
 	 * get a single closed way that represents the border
 	 * this method is CPU intensive
 	 * @return a closed way that represents the border
@@ -176,14 +190,37 @@ public class Ring implements Comparable<Ring>{
 		closedWays = multiLine;
 		
 		long[] endNodes = getMultiLineEndNodes(multiLine);
-		
-		
 		if (endNodes[0] != endNodes[1]) {
-			Way w = new Way(0L);
-			w.addNode(endNodes[0]);
-			w.addNode(endNodes[1]);
-			closedWays.add(w);
+			if(multiLine.get(0).getNodes() == null) {
+				Way w = new Way(0L);
+				w.addNode(endNodes[0]);
+				w.addNode(endNodes[1]);
+				closedWays.add(w);
+			} else {
+				Node n1 = null, n2 = null;
+				if (multiLine.get(0).getFirstNodeId() == endNodes[0]) {
+					n1 = multiLine.get(0).getNodes().get(0);
+				} else {
+					int index = multiLine.get(0).getNodes().size() - 1;
+					n1 = multiLine.get(0).getNodes().get(index);
+				}
+				
+				int lastML = multiLine.size() - 1;
+				if (multiLine.get(lastML).getFirstNodeId() == endNodes[0]) {
+					n2 = multiLine.get(lastML).getNodes().get(0);
+				} else {
+					int index = multiLine.get(lastML).getNodes().size() - 1;
+					n2 = multiLine.get(lastML).getNodes().get(index);
+				}
+				
+				Way w = new Way(0L);
+				w.addNode(n1);
+				w.addNode(n2);
+				closedWays.add(w);
+		 	}
 		}
+		
+		
 		
 		return;
 
@@ -206,7 +243,9 @@ public class Ring implements Comparable<Ring>{
 			 *		logging this creates a whole bunch of log lines for all ways
 			 *		part of a multipolygon but not in the map
 			 */
-			if (toAdd.getNodeIds().size() < 2) continue;
+			if (toAdd.getNodeIds().size() < 2) {
+				continue;
+			}
 
 			long toAddBeginPt = toAdd.getFirstNodeId();
 			long toAddEndPt = toAdd.getLastNodeId();
@@ -332,6 +371,19 @@ public class Ring implements Comparable<Ring>{
 			return new long[] {multiLine.get(0).getFirstNodeId(), multiLine.get(0).getLastNodeId()};
 		}
 		
+		if (multiLine.size() == 2) {
+			// ring of two elements, arbitrary choice of the end nodes
+			if(multiLine.get(0).getFirstNodeId() == multiLine.get(1).getFirstNodeId() && 
+					multiLine.get(0).getLastNodeId() == multiLine.get(1).getLastNodeId()) {
+				return new long[] {multiLine.get(0).getFirstNodeId(), multiLine.get(0).getFirstNodeId()};
+			} else if(multiLine.get(0).getFirstNodeId() == multiLine.get(1).getLastNodeId() && 
+					multiLine.get(0).getLastNodeId() == multiLine.get(1).getFirstNodeId()) {
+				return new long[] {multiLine.get(0).getFirstNodeId(), multiLine.get(0).getFirstNodeId()};
+			}
+		}
+		
+		// For all other multiLine lenghts, or for non-closed multiLines with two elements, proceed
+		
 		long n1 = 0, n2 = 0;
 		
 		if (multiLine.get(0).getFirstNodeId() == multiLine.get(1).getFirstNodeId() ||
@@ -351,7 +403,6 @@ public class Ring implements Comparable<Ring>{
 				multiLine.get(lastIdx).getLastNodeId() == multiLine.get(lastIdx - 1).getLastNodeId()) {
 			n2 = multiLine.get(lastIdx).getFirstNodeId();
 		}
-		
 		
 		return new long[] {n1, n2};
 	}

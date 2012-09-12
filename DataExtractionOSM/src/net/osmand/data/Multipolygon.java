@@ -11,6 +11,8 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 
+import org.apache.commons.logging.Log;
+
 /**
  * The idea of multipolygon:
  * - we treat each outer way as closed polygon
@@ -32,6 +34,11 @@ public class Multipolygon {
 	 * ways added by the user
 	 */
 	private List<Way> outerWays, innerWays;
+	
+	/**
+	 * an optional id of the multipolygon
+	 */
+	private long id;
 	
 	/**
 	 * create a multipolygon with these outer and inner rings
@@ -69,6 +76,32 @@ public class Multipolygon {
 	public Multipolygon(){
 		outerWays = new ArrayList<Way> ();
 		innerWays = new ArrayList<Way> ();
+		id = 0L;
+	}
+	
+	/**
+	 * create a new empty multipolygon with specified id
+	 * @param id the id to set
+	 */
+	public Multipolygon(long id){
+		this();
+		setId(id);
+	}
+	
+	/**
+	 * set the id of the multipolygon
+	 * @param newId id to set
+	 */
+	public void setId(long newId) {
+		id = newId;
+	}
+	
+	/**
+	 * get the id of the multipolygon
+	 * @return id
+	 */
+	public long getId() {
+		return id;
 	}
 	
 	/**
@@ -122,7 +155,7 @@ public class Multipolygon {
 	 * get the Inner Rings
 	 * @return the inner rings
 	 */
-	private SortedSet<Ring> getInnerRings() {
+	public SortedSet<Ring> getInnerRings() {
 		groupInRings();
 		return innerRings;
 	}
@@ -131,7 +164,7 @@ public class Multipolygon {
 	 * get the outer rings 
 	 * @return outer rings
 	 */
-	private SortedSet<Ring> getOuterRings() {
+	public SortedSet<Ring> getOuterRings() {
 		groupInRings();
 		return outerRings;
 	}
@@ -176,6 +209,26 @@ public class Multipolygon {
 	 */
 	public boolean hasOpenedPolygons() {
 	    return zeroSizeIfNull(getOuterWays()) != 0;
+	}
+	
+	/**
+	 * chekc if all rings are closed
+	 * @return true if all rings are closed by nature, false otherwise
+	 */
+	public boolean areRingsComplete() {
+		SortedSet<Ring> set = getOuterRings();
+		for (Ring r : set) {
+			if (!r.isClosed()) {
+				return false;
+			}
+		}
+		set = getInnerRings();
+		for (Ring r : set) {
+			if (!r.isClosed()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 	/**
@@ -272,16 +325,23 @@ public class Multipolygon {
 	
 	/**
 	 * Split this multipolygon in several separate multipolygons with one outer ring each
+	 * @param log the stream to log problems to, if log = null, nothing will be logged
 	 * @return a list with multipolygons which have exactly one outer ring
 	 */
-	public List<Multipolygon> splitPerOuterRing() {
+	public List<Multipolygon> splitPerOuterRing(Log log) {
 		
+		//make a clone of the inners set
+		// this set will be changed through execution of the method
 		SortedSet<Ring> inners = new TreeSet<Ring>(getInnerRings());
 		
+		// get the set of outer rings in a variable. This set will not be changed
 		SortedSet<Ring> outers = getOuterRings();
 		ArrayList<Multipolygon> multipolygons = new ArrayList<Multipolygon>();
 		
+		// loop; start with the smallest outer ring
 		for (Ring outer : outers) {
+			
+			// Search the inners inside this outer ring
 			SortedSet<Ring> innersInsideOuter = new TreeSet<Ring>();
 			for (Ring inner : inners) {
 				if (inner.isIn(outer)) {
@@ -289,14 +349,30 @@ public class Multipolygon {
 				}
 			}
 			
-			SortedSet<Ring> thisOuter = new TreeSet<Ring>();
+			// the inners should belong to this outer, so remove them from the list to check
+			inners.removeAll(innersInsideOuter);
 			
+			SortedSet<Ring> thisOuter = new TreeSet<Ring>();
+			thisOuter.add(outer);
+			
+			// create a new multipolygon with this outer and a list of inners
 			Multipolygon m = new Multipolygon(thisOuter, innersInsideOuter);
 			
 			multipolygons.add(m);
 		}
 		
+		if (inners.size() != 0 && log != null)
+			log.warn("Multipolygon "+getId() + " has a mismatch in outer and inner rings");
+		
 		return multipolygons;
+	}
+	
+	/**
+	 * This method only works when the multipolygon has exaclt one outer Ring
+	 * @return the list of nodes in the outer ring
+	 */
+	public List<Node> getOuterNodes() {
+		return getOuterRings().first().getBorder().getNodes();
 	}
 
 
