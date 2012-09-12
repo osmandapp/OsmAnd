@@ -489,21 +489,21 @@
 	<string name="install_more">Weitere installieren …</string>
 	<string name="tip_update_index">Update der Offline-Daten</string>
 	<string name="tip_update_index_t">Aktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
-		\nUpdates finden Sie via \'Einstellungen\' → \'Offline-Daten\'.
+		\n\nUpdates finden Sie via \'Einstellungen\' → \'Offline-Daten\'.
 		\nNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
 		\n\nAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
-		\n\ 'Grün\' - Daten sind aktuell
-		\n\ 'Blau\' - neuere Version vorhanden
-		\n\ 'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten
+		\n \'Grün\' - Daten sind aktuell
+		\n \'Blau\' - neuere Version vorhanden
+		\n \'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten
 	</string>
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
 	<string name="tip_location_sharing">Lokation mitteilen</string>
 	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
 \nZur Auswahl stehen mehrere Übertragungswege:
-\n* E-Mail
-\n* SMS
-\n* Kopieren der Lokationskoordinaten in die Ablage (Clipboard)</string>
+\n * E-Mail
+\n * SMS
+\n * Kopieren der Koordinaten in die Zwischenablage (Clipboard)</string>
 	<string name="tip_favorites">Favoriten</string>
 	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als Favoriten speichern.
 		\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
@@ -1093,7 +1093,7 @@
 	<string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>
 	<string name="map_widget_next_next_turn">Übernächste Abzweigung</string>
 	<string name="map_widget_mini_route">Mini-Routenkarte</string>
-	<string name="bg_service_screen_lock">Bildschirm sperren</string>
+	<string name="bg_service_screen_lock">Display sperren</string>
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
