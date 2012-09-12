@@ -55,8 +55,11 @@ public class SearchPoiFilterActivity extends ListActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
 				PoiFilter poi = ((AmenityAdapter) getListAdapter()).getItem(pos);
-				showEditActivity(poi);
-				return true;
+				if(!poi.isStandardFilter() || poi.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
+					showEditActivity(poi);
+					return true;
+				}
+				return false;
 			}
 		});
 	}
@@ -97,13 +100,11 @@ public class SearchPoiFilterActivity extends ListActivity {
 	}
 
 	private void showEditActivity(PoiFilter poi) {
-		if(!poi.isStandardFilter()) {
-			Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
-			// folder selected
-			newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
-			updateIntentToLaunch(newIntent);
-			startActivityForResult(newIntent, 0);
-		}
+		Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
+		// folder selected
+		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
+		updateIntentToLaunch(newIntent);
+		startActivityForResult(newIntent, 0);
 	}
 
 	@Override
@@ -131,16 +132,19 @@ public class SearchPoiFilterActivity extends ListActivity {
 
 	class AmenityAdapter extends ArrayAdapter<PoiFilter> {
 		AmenityAdapter(List<PoiFilter> list) {
-			super(SearchPoiFilterActivity.this, R.layout.searchpoi_list, list);
+			super(SearchPoiFilterActivity.this, R.layout.searchpoifolder_list, list);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			LayoutInflater inflater = getLayoutInflater();
-			View row = inflater.inflate(R.layout.searchpoifolder_list, parent, false);
+			View row = convertView;
+			if(row == null) {
+				LayoutInflater inflater = getLayoutInflater();
+				row = inflater.inflate(R.layout.searchpoifolder_list, parent, false);
+			}
 			TextView label = (TextView) row.findViewById(R.id.folder_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.folder_icon);
-			PoiFilter model = getItem(position);
+			final PoiFilter model = getItem(position);
 			label.setText(model.getName());
 			if(model.getFilterId().equals(PoiFilter.CUSTOM_FILTER_ID)) {
 				icon.setImageResource(android.R.drawable.ic_input_get);
@@ -151,6 +155,20 @@ public class SearchPoiFilterActivity extends ListActivity {
 //				label.setTypeface(Typeface.DEFAULT);
 				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.tab_icon_favourite_menu);
 			}
+			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
+			if (model.isStandardFilter()) {
+				editIcon.setVisibility(View.GONE);
+			} else {
+				editIcon.setVisibility(View.VISIBLE);
+			}
+			editIcon.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					showEditActivity(model);
+				}
+			});
+			
 			return (row);
 		}
 

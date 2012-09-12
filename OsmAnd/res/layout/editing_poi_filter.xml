@@ -6,8 +6,11 @@
 	    android:paddingLeft="3dp" android:paddingRight="3dp">
 	    <Button  android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1" android:text="@string/filter_current_poiButton" 
 	        android:id="@+id/filter_currentButton"></Button>
-		<ImageButton  android:layout_height="wrap_content" android:layout_marginLeft="4dp" android:layout_width="wrap_content" android:src="@drawable/save_btn" 
-		    android:id="@+id/SaveButton"/>
+	    <ImageButton  android:layout_height="48dp" android:layout_marginLeft="4dp" android:layout_width="48dp" android:src="@drawable/reset"
+	        android:contentDescription="@string/default_buttons_reset" 
+		    android:id="@+id/DeleteButton"/>
+		<ImageButton  android:layout_height="wrap_content" android:layout_marginLeft="2dp" android:layout_width="wrap_content" android:src="@drawable/save_btn" 
+		    android:id="@+id/SaveButton" android:contentDescription="@string/default_buttons_save"/>
 	</LinearLayout>
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent" android:choiceMode="multipleChoice"
 		android:layout_height="fill_parent" style="@style/OsmandListView"></ListView>

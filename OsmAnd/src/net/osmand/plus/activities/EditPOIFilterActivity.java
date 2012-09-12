@@ -108,20 +108,33 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		});
 		
 		((ImageButton) findViewById(R.id.SaveButton)).setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				savePoiFilter();
 			}
 		});
+		
+		((ImageButton) findViewById(R.id.DeleteButton)).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				removePoiFilter();
+			}
+		});
+		
+		
 
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
 		
 		helper = ((OsmandApplication)getApplication()).getPoiFilters();
 		filter = helper.getFilterById(filterId);
+		if(filter.isStandardFilter()){
+			((ImageButton) findViewById(R.id.DeleteButton)).setVisibility(View.GONE);
+		} else {
+			((ImageButton) findViewById(R.id.DeleteButton)).setVisibility(View.VISIBLE);
+		}
 		titleBar.getTitleView().setText(getString(R.string.filterpoi_activity) + " - " + filter.getName());
-
+		
 		setListAdapter(new AmenityAdapter(AmenityType.getCategories()));
 	}
 
@@ -160,29 +173,34 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == R.id.edit_filter_delete) {
-			Builder builder = new AlertDialog.Builder(this);
-			builder.setMessage(R.string.edit_filter_delete_dialog_title);
-			builder.setNegativeButton(R.string.default_buttons_no, null);
-			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if (helper.removePoiFilter(filter)) {
-						AccessibleToast.makeText(
-								EditPOIFilterActivity.this,
-								MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
-										filter.getName()), Toast.LENGTH_SHORT).show();
-						EditPOIFilterActivity.this.finish();
-					}
-
-				}
-			});
-			builder.create().show();
+			removePoiFilter();
 			return true;
 		} else if (item.getItemId() == R.id.edit_filter_save_as) {
 			savePoiFilter();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+
+	private void removePoiFilter() {
+		Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(R.string.edit_filter_delete_dialog_title);
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (helper.removePoiFilter(filter)) {
+					AccessibleToast.makeText(
+							EditPOIFilterActivity.this,
+							MessageFormat.format(EditPOIFilterActivity.this.getText(R.string.edit_filter_delete_message).toString(),
+									filter.getName()), Toast.LENGTH_SHORT).show();
+					EditPOIFilterActivity.this.finish();
+				}
+
+			}
+		});
+		builder.create().show();
 	}
 	
 	private void showDialog(final AmenityType amenity) {

@@ -11,6 +11,17 @@
     -->
     <string name="btn_add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode...</string>
+    <string name="poi_filter_parking">Parking</string>
+    <string name="poi_filter_emergency">Emergency</string>
+    <string name="poi_filter_public_transport">Public Transport</string>
+    <string name="poi_filter_entertainment">Entertainment</string>
+    <string name="poi_filter_accomodation">Accomodation</string>
+    <string name="poi_filter_restaurants">Restaurants</string>
+    <string name="poi_filter_sightseeing">Sightseeing</string>
+    <string name="poi_filter_car_aid">Car aid</string>
+	<string name="poi_filter_food_shop">Food shop</string>
+	<string name="poi_filter_for_tourists">For tourists</string>
+	<string name="poi_filter_fuel">Fuel</string>
 	<string name="show_warnings_title">Show alarms&#8230;</string>
 	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, and other warnings</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
@@ -716,12 +727,8 @@
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
-	<string name="poi_filter_car_aid">Car aid</string>
 	<string name="poi_filter_closest_poi">Closest POI</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
-	<string name="poi_filter_food_shop">Food shop</string>
-	<string name="poi_filter_for_tourists">For tourists</string>
-	<string name="poi_filter_fuel">Fuel</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
 	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>

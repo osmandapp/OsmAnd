@@ -24,6 +24,20 @@ public class PoiFiltersHelper {
 	private List<PoiFilter> cacheUserDefinedFilters;
 	private List<PoiFilter> cacheOsmDefinedFilters;
 	
+	private static final String UDF_CAR_AID = "car_aid";
+	private static final String UDF_FOR_TOURISTS = "for_tourists";
+	private static final String UDF_FOOD_SHOP = "food_shop";
+	private static final String UDF_FUEL = "fuel";
+	private static final String UDF_SIGHTSEEING = "sightseeing";
+	private static final String UDF_EMERGENCY = "emergency";
+	private static final String UDF_PUBLIC_TRANSPORT = "public_transport";
+	private static final String UDF_ENTERTAINMENT = "entertainment";
+	private static final String UDF_ACCOMODATION = "accomodation";
+	private static final String UDF_RESTAURANTS = "restaurants";
+	private static final String UDF_PARKING = "parking";
+	
+	private static final String[] DEL = new String[] {};
+	
 	public PoiFiltersHelper(OsmandApplication application){
 		this.application = application;
 	}
@@ -60,76 +74,125 @@ public class PoiFiltersHelper {
 		return null;
 	}
 	
-	private List<PoiFilter> getUserDefinedDefaultFilters(){
-		List<PoiFilter> filters = new ArrayList<PoiFilter>();
-		Map<AmenityType, LinkedHashSet<String>> types = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
-
+	private void putAll(Map<AmenityType, LinkedHashSet<String>> types, AmenityType tp){
+		types.put(tp, null);
+	}
+	
+	private void putValues(Map<AmenityType, LinkedHashSet<String>> types, AmenityType tp,String... vls){
 		LinkedHashSet<String> list = new LinkedHashSet<String>();
-		list.add("fuel"); //$NON-NLS-1$
-		list.add("car_wash"); //$NON-NLS-1$
-		list.add("car_repair"); //$NON-NLS-1$
-		types.put(AmenityType.TRANSPORTATION, list);
-		list = new LinkedHashSet<String>();
-		list.add("car"); //$NON-NLS-1$
-		list.add("car_repair"); //$NON-NLS-1$
-		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_car_aid), null, types, application)); //$NON-NLS-1$
-		types.clear();
-		
-		
-		types.put(AmenityType.HISTORIC, null);
-		types.put(AmenityType.TOURISM, null);
-		list = new LinkedHashSet<String>();
-		list.add("place_of_worship"); //$NON-NLS-1$
-		list.add("internet_access"); //$NON-NLS-1$
-		list.add("embassy"); //$NON-NLS-1$
-		list.add("emergency_phone"); //$NON-NLS-1$
-		list.add("marketplace"); //$NON-NLS-1$
-		list.add("post_office"); //$NON-NLS-1$
-		list.add("telephone"); //$NON-NLS-1$
-		list.add("toilets"); //$NON-NLS-1$
-		types.put(AmenityType.OTHER, list);
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_for_tourists), null, types, application)); //$NON-NLS-1$
-		types.clear();
-		
-		list = new LinkedHashSet<String>();
-		list.add("fuel"); //$NON-NLS-1$
-		types.put(AmenityType.TRANSPORTATION, list);
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_fuel), null, types, application)); //$NON-NLS-1$
-		types.clear();
-		
-		list = new LinkedHashSet<String>();
-		list.add("alcohol"); //$NON-NLS-1$
-		list.add("bakery"); //$NON-NLS-1$
-		list.add("beverages"); //$NON-NLS-1$
-		list.add("butcher"); //$NON-NLS-1$
-		list.add("convenience"); //$NON-NLS-1$
-		list.add("department_store"); //$NON-NLS-1$
-		list.add("convenience"); //$NON-NLS-1$
-		list.add("farm"); //$NON-NLS-1$
-		list.add("general"); //$NON-NLS-1$
-		list.add("ice_cream"); //$NON-NLS-1$
-		list.add("kiosk"); //$NON-NLS-1$
-		list.add("supermarket"); //$NON-NLS-1$
-		list.add("variety_store"); //$NON-NLS-1$
-		types.put(AmenityType.SHOP, list);
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_food_shop), null, types, application)); //$NON-NLS-1$
-		types.clear();
-		
+		for(String v: vls){
+			list.add(v);
+		}
+		types.put(tp, list);
+	}
+	
+	private List<PoiFilter> getUserDefinedDefaultFilters() {
+		List<PoiFilter> filters = new ArrayList<PoiFilter>();
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_car_aid), PoiFilter.USER_PREFIX + UDF_CAR_AID,
+				configureDefaultUserDefinedFilter(null, UDF_CAR_AID), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_for_tourists), PoiFilter.USER_PREFIX + UDF_FOR_TOURISTS,
+				configureDefaultUserDefinedFilter(null, UDF_FOR_TOURISTS), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_fuel), PoiFilter.USER_PREFIX + UDF_FUEL,
+				configureDefaultUserDefinedFilter(null, UDF_FUEL), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_food_shop), PoiFilter.USER_PREFIX + UDF_FOOD_SHOP,
+				configureDefaultUserDefinedFilter(null, UDF_FOOD_SHOP), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_sightseeing), PoiFilter.USER_PREFIX + UDF_SIGHTSEEING,
+				configureDefaultUserDefinedFilter(null, UDF_SIGHTSEEING), application));
+
+		// UDF_EMERGENCY = "emergency";
+		// UDF_ENTERTAINMENT = "entertainment";
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_accomodation), PoiFilter.USER_PREFIX + UDF_ACCOMODATION,
+				configureDefaultUserDefinedFilter(null, UDF_ACCOMODATION), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_restaurants), PoiFilter.USER_PREFIX + UDF_RESTAURANTS,
+				configureDefaultUserDefinedFilter(null, UDF_RESTAURANTS), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_public_transport),
+				PoiFilter.USER_PREFIX + UDF_PUBLIC_TRANSPORT, configureDefaultUserDefinedFilter(null, UDF_PUBLIC_TRANSPORT), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_parking), PoiFilter.USER_PREFIX + UDF_PARKING,
+				configureDefaultUserDefinedFilter(null, UDF_PARKING), application));
 		return filters;
 	}
 	
+	private Map<AmenityType, LinkedHashSet<String>> configureDefaultUserDefinedFilter(Map<AmenityType, LinkedHashSet<String>> types, String key) {
+		if(types == null) {
+			types = new LinkedHashMap<AmenityType, LinkedHashSet<String>>();
+		}
+		if(UDF_CAR_AID.equals(key)){
+			putValues(types, AmenityType.TRANSPORTATION, "fuel", "car_wash", "car_repair","car", "car_sharing");
+			putValues(types, AmenityType.SHOP, "fuel", "car_wash", "car_repair","car");
+		} else if(UDF_SIGHTSEEING.equals(key)){
+			putAll(types, AmenityType.HISTORIC);
+			putAll(types, AmenityType.TOURISM);
+			putValues(types, AmenityType.OTHER, "place_of_worship");
+		} else if(UDF_FOR_TOURISTS.equals(key)){
+			putAll(types, AmenityType.HISTORIC);
+			putAll(types, AmenityType.TOURISM);
+			putAll(types, AmenityType.FINANCE);
+			putValues(types, AmenityType.OTHER, "place_of_worship", "internet_access", "embassy","emergency_phone","marketplace",
+					"post_office","telephone", "toilets");
+		} else if(UDF_FUEL.equals(key)){
+			putValues(types, AmenityType.TRANSPORTATION, "fuel");
+		} else if (UDF_FOOD_SHOP.equals(key)) {
+			putValues(types, AmenityType.SHOP, "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
+					"convenience", "farm", "general", "ice_cream", "kiosk", "supermarket", "variety_store");
+		} else if (UDF_SIGHTSEEING.equals(key)) {
+			putAll(types, AmenityType.HISTORIC);
+			putValues(types, AmenityType.TOURISM, "attraction",
+					"artwork","zoo","theme_park", "museum","viewpoint");
+			putValues(types, AmenityType.OTHER, "place_of_worship");
+		} else if (UDF_ACCOMODATION.equals(key)) {
+			putValues(types, AmenityType.TOURISM, "camp_site",
+					"caravan_site","picnic_site","alpine_hut", "chalet","guest_house",
+					"hostel", "hotel","motel");
+		} else if (UDF_PARKING.equals(key)) {
+			putValues(types, AmenityType.TRANSPORTATION, "parking",
+					"bicycle_parking");
+		} else if (UDF_PUBLIC_TRANSPORT.equals(key)) {
+			putValues(types, AmenityType.TRANSPORTATION, "public_transport_stop_position", "public_transport_platform",
+					"public_transport_station",
+					// railway
+					"railway_platform", "railway_station", "halt", "tram_stop", "subway_entrance", "railway_buffer_stop",
+					// bus, cars, bicycle
+					"bus_stop", "platform", "ferry_terminal", "taxi", "bicycle_rental", "bus_station", "car_rental", "car_sharing",
+					// aero
+					"airport", "aerodrome", "terminal", "gate",
+					// aerial ways
+					"aerialway_cable_car", "aerialway_gondola", "aerialway_chair_lift", "aerialway_mixed_lift", "aerialway_drag_lift",
+					"aerialway_goods", "aerialway_station",
+					// ways
+					"rail", "tram", "light_rail", "subway", "railway_narrow_gauge", "railway_monorail", "railway_funicular");
+		} else if (UDF_RESTAURANTS.equals(key)) {
+			putValues(types, AmenityType.SUSTENANCE, "restaurant",
+					"cafe", "food_court", "fast_food", "pub", "bar", "biergarten");
+		} else if (UDF_EMERGENCY.equals(key)) {
+			putAll(types, AmenityType.HEALTHCARE);
+			putAll(types, AmenityType.EMERGENCY);
+		} else if (UDF_ENTERTAINMENT.equals(key)) {
+			putAll(types, AmenityType.ENTERTAINMENT);
+		}
+		
+		return types;
+	}
+	
+	
 	public List<PoiFilter> getUserDefinedPoiFilters(){
 		if(cacheUserDefinedFilters == null){
-			////ctx.deleteDatabase(PoiFilterDbHelper.DATABASE_NAME);
-			
 			cacheUserDefinedFilters = new ArrayList<PoiFilter>();
-			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter), PoiFilter.CUSTOM_FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			PoiFilter filter = new PoiFilter(application.getString(R.string.poi_filter_custom_filter), PoiFilter.CUSTOM_FILTER_ID, 
+					new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application); //$NON-NLS-1$
+			filter.setStandardFilter(true);
 			cacheUserDefinedFilters.add(filter);
 			filter = new SearchByNameFilter(application);
 			cacheUserDefinedFilters.add(filter);
 			PoiFilterDbHelper helper = openDbHelper();
-			cacheUserDefinedFilters.addAll(helper.getFilters());
+			List<PoiFilter> userDefined = helper.getFilters(helper.getReadableDatabase());
+			final Collator instance = Collator.getInstance();
+			Collections.sort(userDefined, new Comparator<PoiFilter>() {
+				@Override
+				public int compare(PoiFilter object1, PoiFilter object2) {
+					return instance.compare(object1.getName(), object2.getName());
+				}
+			});
+			cacheUserDefinedFilters.addAll(userDefined);
 			helper.close();
 		}
 		return Collections.unmodifiableList(cacheUserDefinedFilters);
@@ -137,6 +200,12 @@ public class PoiFiltersHelper {
 	
 	public static String getOsmDefinedFilterId(AmenityType t){
 		return PoiFilter.STD_PREFIX + t;
+	}
+	
+	public void updateFilters(boolean onlyAddFilters){
+		PoiFilterDbHelper helper = openDbHelper();
+		helper.upgradeFilters(helper.getWritableDatabase(), onlyAddFilters);
+		helper.close();	
 	}
 	
 	
@@ -171,7 +240,7 @@ public class PoiFiltersHelper {
 		if(helper == null){
 			return false;
 		}
-		boolean res = helper.deleteFilter(filter);
+		boolean res = helper.deleteFilter(helper.getWritableDatabase(), filter);
 		if(res){
 			cacheUserDefinedFilters.remove(filter);
 		}
@@ -201,7 +270,7 @@ public class PoiFiltersHelper {
 		}
 		PoiFilterDbHelper helper = openDbHelper();
 		if (helper != null) {
-			boolean res = helper.editFilter(filter);
+			boolean res = helper.editFilter(helper.getWritableDatabase(), filter);
 			helper.close();
 			return res;
 		}
@@ -212,7 +281,7 @@ public class PoiFiltersHelper {
 	public class PoiFilterDbHelper extends SQLiteOpenHelper {
 
 		public static final String DATABASE_NAME = "poi_filters"; //$NON-NLS-1$
-	    private static final int DATABASE_VERSION = 1;
+	    private static final int DATABASE_VERSION = 2;
 	    private static final String FILTER_NAME = "poi_filters"; //$NON-NLS-1$
 	    private static final String FILTER_COL_NAME = "name"; //$NON-NLS-1$
 	    private static final String FILTER_COL_ID = "id"; //$NON-NLS-1$
@@ -236,14 +305,45 @@ public class PoiFiltersHelper {
 	    public void onCreate(SQLiteDatabase db) {
 	        db.execSQL(FILTER_TABLE_CREATE);
 	        db.execSQL(CATEGORIES_TABLE_CREATE);
-	        List<PoiFilter> filters = getUserDefinedDefaultFilters();
-	        for(PoiFilter f : filters){
-	        	addFilter(f, db,false);
-	        }
+	        upgradeFilters(db, true);
 	    }
 
+		public void upgradeFilters(SQLiteDatabase db, boolean onlyAdd) {
+			List<PoiFilter> filters = PoiFilterDbHelper.this.getFilters(db);
+			List<PoiFilter> def = getUserDefinedDefaultFilters();
+	        for(PoiFilter f : filters){
+	        	PoiFilter std = null;
+	        	for(PoiFilter d : def){
+	        		if(f.getFilterId().equals(d.getFilterId())){
+	        			std = d;
+	        			break;
+	        		}
+	        	}
+	        	for(String toDel : DEL) {
+	        		if(f.getFilterId().equals(toDel)) {
+	        			deleteFilter(db, f);
+	        		}
+	        	}
+	        	if(std != null){
+	        		if(!onlyAdd){
+	        			editFilter(db, std);
+	        		} else {
+	        			updateName(db, std);
+	        		}
+	        		def.remove(std);
+	        	}
+	        }
+	        for(PoiFilter d : def){
+	        	addFilter(d, db, false);
+	        }
+		}
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+			if (newVersion == 2 || newVersion == 3) {
+				upgradeFilters(db, false);
+			} else {
+				upgradeFilters(db, true);
+			}
 		}
 	    
 	    protected boolean addFilter(PoiFilter p, SQLiteDatabase db, boolean addOnlyCategories){
@@ -274,8 +374,7 @@ public class PoiFiltersHelper {
 	    	return false;
 	    }
 	    
-	    protected List<PoiFilter> getFilters(){
-	    	SQLiteDatabase db = getReadableDatabase();
+	    protected List<PoiFilter> getFilters(SQLiteDatabase db){
 	    	ArrayList<PoiFilter> list = new ArrayList<PoiFilter>();
 	    	if(db != null){
 	    		Cursor query = db.rawQuery("SELECT " + CATEGORIES_FILTER_ID +", " + CATEGORIES_COL_CATEGORY +"," + CATEGORIES_COL_SUBCATEGORY +" FROM " +  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
@@ -319,21 +418,23 @@ public class PoiFiltersHelper {
 	    	return list;
 	    }
 	    
-	    protected boolean editFilter(PoiFilter filter) {
-			SQLiteDatabase db = getWritableDatabase();
+	    protected boolean editFilter(SQLiteDatabase db, PoiFilter filter) {
 			if (db != null) {
 				db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " + CATEGORIES_FILTER_ID + " = ?",  //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 						new Object[] { filter.getFilterId() });
 				addFilter(filter, db, true);
-				db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_FILTERBYNAME + " = ?, " + FILTER_COL_NAME + " = ? " + " WHERE " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
-						+ FILTER_COL_ID + "= ?", new Object[] { filter.getFilterByName(), filter.getName(), filter.getFilterId() }); //$NON-NLS-1$
+				updateName(db, filter);
 				return true;
 			}
 			return false;
 		}
+
+		private void updateName(SQLiteDatabase db, PoiFilter filter) {
+			db.execSQL("UPDATE " + FILTER_NAME + " SET " + FILTER_COL_FILTERBYNAME + " = ?, " + FILTER_COL_NAME + " = ? " + " WHERE " //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+					+ FILTER_COL_ID + "= ?", new Object[] { filter.getFilterByName(), filter.getName(), filter.getFilterId() }); //$NON-NLS-1$
+		}
 	    
-	    protected boolean deleteFilter(PoiFilter p){
-	    	SQLiteDatabase db = getWritableDatabase();
+	    protected boolean deleteFilter(SQLiteDatabase db, PoiFilter p){
 	    	if(db != null){
 	    		db.execSQL("DELETE FROM " + FILTER_NAME + " WHERE " +FILTER_COL_ID + " = ?",new Object[]{p.getFilterId()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 	    		db.execSQL("DELETE FROM " + CATEGORIES_NAME + " WHERE " +CATEGORIES_FILTER_ID + " = ?", new Object[]{p.getFilterId()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

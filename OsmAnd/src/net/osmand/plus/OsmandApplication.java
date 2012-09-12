@@ -153,6 +153,7 @@ public class OsmandApplication extends Application {
 	public PoiFiltersHelper getPoiFilters() {
 		if (poiFilters == null) {
 			poiFilters = new PoiFiltersHelper(this);
+			poiFilters.updateFilters(true);
 		}
 		return poiFilters;
 	}

@@ -29,7 +29,7 @@ public class PoiFilter {
 	protected String filterId;
 	protected String name;
 	protected String nameFilter;
-	private final boolean isStandardFilter;
+	protected boolean isStandardFilter;
 	
 	protected final OsmandApplication application;
 	
@@ -51,7 +51,7 @@ public class PoiFilter {
 		}
 	}
 	
-	// constructor for standard filters
+	// constructor for user defined filters
 	public PoiFilter(String name, String filterId, Map<AmenityType, LinkedHashSet<String>> acceptedTypes, OsmandApplication app){
 		application = app;
 		isStandardFilter = false;
@@ -308,6 +308,10 @@ public class PoiFilter {
 	
 	public boolean isStandardFilter(){
 		return isStandardFilter;
+	}
+	
+	public void setStandardFilter(boolean isStandardFilter) {
+		this.isStandardFilter = isStandardFilter;
 	}
 	
 	public OsmandApplication getApplication() {
