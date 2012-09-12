@@ -28,7 +28,7 @@ public class Multipolygon {
 	/**
 	 * cache with the ways grouped per Ring
 	 */
-	private SortedSet<Ring> innerRings, outerRings;
+	private List<Ring> innerRings, outerRings;
 
 	/**
 	 * ways added by the user
@@ -40,24 +40,7 @@ public class Multipolygon {
 	 */
 	private long id;
 	
-	/**
-	 * create a multipolygon with these outer and inner rings
-	 * the rings have to be well formed or data inconsistency will happen
-	 * @param outerRings the collection of outer rings
-	 * @param innerRings the collection of inner rings
-	 */
-	public Multipolygon(SortedSet<Ring> outerRings, SortedSet<Ring> innerRings) {
-		this();
-		this.outerRings = outerRings;
-		this.innerRings = innerRings;
-		for (Ring r : outerRings) {
-			outerWays.addAll(r.getWays());
-		}
-		
-		for (Ring r : innerRings) {
-			innerWays.addAll(r.getWays());
-		}
-	}
+	
 
 	/**
 	 * Create a multipolygon with initialized outer and inner ways
@@ -155,7 +138,7 @@ public class Multipolygon {
 	 * get the Inner Rings
 	 * @return the inner rings
 	 */
-	public SortedSet<Ring> getInnerRings() {
+	public List<Ring> getInnerRings() {
 		groupInRings();
 		return innerRings;
 	}
@@ -164,7 +147,7 @@ public class Multipolygon {
 	 * get the outer rings 
 	 * @return outer rings
 	 */
-	public SortedSet<Ring> getOuterRings() {
+	public List<Ring> getOuterRings() {
 		groupInRings();
 		return outerRings;
 	}
@@ -204,11 +187,11 @@ public class Multipolygon {
 	}
 	
 	/**
-	 * Check if this multiPolygon has outer ways
-	 * @return true if this has outer ways
+	 * Check if this multiPolygon has uncomplete rings
+	 * @return true it has uncomplete rings
 	 */
 	public boolean hasOpenedPolygons() {
-	    return zeroSizeIfNull(getOuterWays()) != 0;
+	    return !areRingsComplete();
 	}
 	
 	/**
@@ -216,7 +199,7 @@ public class Multipolygon {
 	 * @return true if all rings are closed by nature, false otherwise
 	 */
 	public boolean areRingsComplete() {
-		SortedSet<Ring> set = getOuterRings();
+		List<Ring> set = getOuterRings();
 		for (Ring r : set) {
 			if (!r.isClosed()) {
 				return false;
@@ -335,28 +318,29 @@ public class Multipolygon {
 		SortedSet<Ring> inners = new TreeSet<Ring>(getInnerRings());
 		
 		// get the set of outer rings in a variable. This set will not be changed
-		SortedSet<Ring> outers = getOuterRings();
+		SortedSet<Ring> outers = new TreeSet<Ring>(getOuterRings());
 		ArrayList<Multipolygon> multipolygons = new ArrayList<Multipolygon>();
 		
 		// loop; start with the smallest outer ring
 		for (Ring outer : outers) {
 			
+			// create a new multipolygon with this outer and a list of inners
+			Multipolygon m = new Multipolygon();
+			m.addOuterWays(outer.getWays());
+						
 			// Search the inners inside this outer ring
 			SortedSet<Ring> innersInsideOuter = new TreeSet<Ring>();
 			for (Ring inner : inners) {
 				if (inner.isIn(outer)) {
 					innersInsideOuter.add(inner);
+					for (Way w : inner.getWays()) {
+						m.addInnerWay(w);
+					}
 				}
 			}
 			
 			// the inners should belong to this outer, so remove them from the list to check
 			inners.removeAll(innersInsideOuter);
-			
-			SortedSet<Ring> thisOuter = new TreeSet<Ring>();
-			thisOuter.add(outer);
-			
-			// create a new multipolygon with this outer and a list of inners
-			Multipolygon m = new Multipolygon(thisOuter, innersInsideOuter);
 			
 			multipolygons.add(m);
 		}
@@ -372,7 +356,7 @@ public class Multipolygon {
 	 * @return the list of nodes in the outer ring
 	 */
 	public List<Node> getOuterNodes() {
-		return getOuterRings().first().getBorder().getNodes();
+		return getOuterRings().get(0).getBorder().getNodes();
 	}
 
 

@@ -4,9 +4,8 @@ import gnu.trove.list.array.TLongArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
+import net.osmand.osm.LatLon;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 
@@ -415,10 +414,10 @@ public class Ring implements Comparable<Ring>{
 	 * @param ways the ways to group
 	 * @return a list of Rings
 	 */
-	public static SortedSet<Ring> combineToRings(List<Way> ways){
+	public static ArrayList<Ring> combineToRings(List<Way> ways){
 		ArrayList<ArrayList<Way>> multiLines = createMultiLines(ways);
 		
-		SortedSet<Ring> result = new TreeSet<Ring> ();
+		ArrayList<Ring> result = new ArrayList<Ring> ();
 		
 		for (ArrayList<Way> multiLine : multiLines) {
 			Ring r = new Ring(multiLine);
@@ -537,6 +536,89 @@ public class Ring implements Comparable<Ring>{
 		return 0;
 	}
 
-
+	/**
+	 * If this Ring is not complete 
+	 * (some ways are not initialized 
+	 * because they are not included in the OSM file) <p />
+	 * 
+	 * We are trying to close this Ring by using the other Ring.<p />
+	 * 
+	 * The other Ring must be complete, and the part of this Ring 
+	 * inside the other Ring must also be complete.
+	 * @param other the other Ring (which is complete) used to close this one
+	 */
+	public void closeWithOtherRing(Ring other) {
+		Way thisBorder = getBorder();
+		List<Integer> thisSwitchPoints = new ArrayList<Integer>();
+		
+		boolean insideOther = other.containsNode(thisBorder.getNodes().get(0));
+		
+		// Search the node pairs for which the ring goes inside or out the other
+		for (int i = 0; i<thisBorder.getNodes().size(); i++) {
+			Node n = thisBorder.getNodes().get(i);
+			if (other.containsNode(n) != insideOther) {
+				// we are getting out or in the boundary now.
+				// toggle switch
+				insideOther = !insideOther;
+				
+				thisSwitchPoints.add(i);
+			}
+		}
+		
+		List<Integer> otherSwitchPoints = new ArrayList<Integer>();
+		
+		// Search the according node pairs in the other ring
+		for (int i : thisSwitchPoints) {
+			LatLon a = thisBorder.getNodes().get(i-1).getLatLon();
+			LatLon b = thisBorder.getNodes().get(i).getLatLon();
+			otherSwitchPoints.add(crossRingBorder(a, b));
+		}
+		
+		
+		
+		/*
+		 * TODO:
+		 * 
+		 * * Split the other Ring into ways from splitPoint to splitPoint
+		 * 
+		 * * Split this ring into ways from splitPoint to splitPoint
+		 * 
+		 * * Filter out the parts of way from this that are inside the other Ring
+		 * 		Use the insideOther var and the switchPoints list for this.
+		 * 
+		 * * For each two parts of way from this, search a part of way connecting the two. 
+		 * 		If there are two, take the shortest.
+		 */
+	}
+	
+	/**
+	 * Get the segment of the Ring that intersects a segment 
+	 * going from point a to point b
+	 * 
+	 * @param a the begin point of the segment
+ 	 * @param b the end point of the segment
+	 * @return an integer i which is the index so that the segment 
+	 * 		from getBorder().get(i-1) to getBorder().get(i) intersects with 
+	 * 		the segment from parameters a to b. <p />
+	 * 
+	 * 		0 if the segment from a to b doesn't intersect with the Ring. 
+	 */
+	public int crossRingBorder(LatLon a, LatLon b) {
+		Way border = getBorder();
+		for (int i = 1; i<border.getNodes().size(); i++) {
+			LatLon c = border.getNodes().get(i-1).getLatLon();
+			LatLon d = border.getNodes().get(i).getLatLon();
+			//FIXME find library that can do this not java.awt in Android
+			/*if (Line2D.linesIntersect(
+					a.getLatitude(), a.getLongitude(), 
+					b.getLatitude(), b.getLongitude(), 
+					c.getLatitude(), c.getLongitude(), 
+					d.getLatitude(), d.getLongitude())) {
+				return i;
+			}*/
+		}
+		return 0;
+		
+	}
 
 }
