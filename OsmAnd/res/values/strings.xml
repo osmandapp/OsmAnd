@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="btn_add_tag">Add Tag</string>
+    <string name="btn_advanced_mode">Advanced Mode...</string>
 	<string name="show_warnings_title">Show alarms&#8230;</string>
 	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, and other warnings</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>

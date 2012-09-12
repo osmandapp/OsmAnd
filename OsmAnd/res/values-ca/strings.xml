@@ -778,7 +778,7 @@ Pots habilitat (en línia o emmagatzemats)fonts de tessel·les de mapa, preferè
 \n\t    - Necessites descarregar completament totes les dades fora de línia( les dades antigues no seran suportades)↵
 \n\t- *Calcul de rutes fora línia* ↵
 \n\t	- El calcul de rutes fora línia ha esdevingut mes robust↵
-\n\t  *Usabilitat i experiència d'IU*↵
+\n\t  *Usabilitat i experiència d\'IU*↵
 \n\t	- Millorada en moltes àrees	 ↵</string>
 <string name="tip_recent_changes_0_8_2_t">Canvis a 0.8.2 :
 		\n\t* Calcul de rutes millorat
@@ -788,7 +788,7 @@ Pots habilitat (en línia o emmagatzemats)fonts de tessel·les de mapa, preferè
 		\n\t* Corretgit Arabic, Kannada scripting i llenguatges RTL
 	</string>
 <string name="gpxup_trackable">Seguible</string>
-<string name="search_offline_geo_error">No s'ha pogut analitzar la geo intenció \'%s\'</string>
+<string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció \'%s\'</string>
 <string name="amenity_type_geocache">Geoenmegatzament</string>
-<string name="use_osmand_routing_service_descr">L'us de la navagacio fora de línia d'OsmAnd s'aplica nomes a rutes &gt; 20km (experimental)</string>
+<string name="use_osmand_routing_service_descr">L\'us de la navagacio fora de línia d\'OsmAnd s\'aplica nomes a rutes &gt; 20km (experimental)</string>
 </resources>
