@@ -67,7 +67,7 @@
 		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
 		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 	</string>
-	<string name="select_navigation_mode">Nutzerprofil wählen  </string>
+	<string name="select_navigation_mode">Nutzerprofil wählen:</string>
 	<string name="day_night_info_description">Sonnenaufgang: %1$s \nSonnenuntergang: %2$s
 	</string>
 	<string name="day_night_info">Tag/Nacht-Information</string>
@@ -598,7 +598,7 @@
 	<string name="old_map_index_is_not_supported">Überholtes Karten-Format \'\'{0}\'\' wird nicht mehr unterstützt</string>
 	<string name="poi_filter_car_aid">Autowerkstatt</string>
 	<string name="poi_filter_closest_poi">Nächstgelegene POI</string>
-	<string name="poi_filter_custom_filter">Custom Filter</string>
+	<string name="poi_filter_custom_filter">Eigener Filter</string>
 	<string name="poi_filter_food_shop">Lebensmittelgeschäft</string>
 	<string name="poi_filter_for_tourists">Für Touristen</string>
 	<string name="poi_filter_fuel">Tankstelle</string>
