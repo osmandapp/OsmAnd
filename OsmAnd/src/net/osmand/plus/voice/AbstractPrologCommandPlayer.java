@@ -54,7 +54,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	private final int[] sortedVoiceVersions;
 	private AudioFocusHelper mAudioFocusHelper;
 
-	private int streamType;
+	protected int streamType;
 
 	protected AbstractPrologCommandPlayer(Context ctx, OsmandSettings settings, String voiceProvider, String configFile, int[] sortedVoiceVersions)
 		throws CommandPlayerException 
