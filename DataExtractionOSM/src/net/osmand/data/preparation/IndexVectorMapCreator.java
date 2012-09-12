@@ -26,8 +26,9 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
-import net.osmand.data.Boundary;
 import net.osmand.data.MapAlgorithms;
+import net.osmand.data.Multipolygon;
+import net.osmand.data.Ring;
 import net.osmand.data.preparation.MapZooms.MapZoomPair;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
@@ -113,234 +114,100 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 		}
 	}
 
+	/**
+	 * index a multipolygon into the database
+	 * only multipolygons without admin_level and with type=multipolygon are indexed
+	 * broken multipolygons are also indexed, inner ways are sometimes left out, broken rings are split and closed
+	 * broken multipolygons will normally be logged
+	 * @param e the entity to index
+	 * @param ctx the database context
+	 * @throws SQLException
+	 */
 	private void indexMultiPolygon(Entity e, OsmDbAccessorContext ctx) throws SQLException {
-		if (e instanceof Relation && "multipolygon".equals(e.getTag(OSMTagKey.TYPE))) { //$NON-NLS-1$
-			if(e.getTag(OSMTagKey.ADMIN_LEVEL) != null) {
-				// don't index boundaries as multipolygon (only areas ideally are multipolygon)
-				return;
-			}
-			ctx.loadEntityRelation((Relation) e);
-			Map<Entity, String> entities = ((Relation) e).getMemberEntities();
+		// Don't handle things that aren't multipolygon, and nothing administrative
+		if (! (e instanceof Relation) || 
+				! "multipolygon".equals(e.getTag(OSMTagKey.TYPE)) || 
+				e.getTag(OSMTagKey.ADMIN_LEVEL) != null ) return;
 
-			boolean outerFound = false;
-			for (Entity es : entities.keySet()) {
-				if (es instanceof Way) {
-					boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
-					if (!inner) {
-						outerFound = true;
-						// This is incorrect (it should be intersection of all boundaries)
-						// Currently it causes an issue with coastline (if one line is coastline)
-//						for (String t : es.getTagKeySet()) {
-//							e.putTag(t, es.getTag(t));
-//						}
-						break;
-					}
-				}
-			}
-			if (!outerFound) {
-				logMapDataWarn.warn("Probably map bug: Multipoligon id=" + e.getId() + " contains only inner ways : "); //$NON-NLS-1$ //$NON-NLS-2$
-				return;
-			}
+		ctx.loadEntityRelation((Relation) e);
+		Map<Entity, String> entities = ((Relation) e).getMemberEntities();
 
-			renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), typeUse, addtypeUse, namesUse, tempNameUse);
-			if (typeUse.size() > 0) {
-				List<List<Way>> completedRings = new ArrayList<List<Way>>();
-				List<List<Way>> incompletedRings = new ArrayList<List<Way>>();
-				for (Entity es : entities.keySet()) {
-					if (es instanceof Way) {
-						if (!((Way) es).getNodeIds().isEmpty()) {
-							combineMultiPolygons((Way) es, completedRings, incompletedRings);
-						}
-					}
-				}
-				// skip incompleted rings and do not add whole relation ?
-				if (!incompletedRings.isEmpty()) {
-					logMapDataWarn.warn("In multipolygon  " + e.getId() + " there are incompleted ways : " + incompletedRings);
-					return;
-					// completedRings.addAll(incompletedRings);
-				}
+		// create a multipolygon object for this
+		Multipolygon original = new Multipolygon(e.getId());
 
-				// skip completed rings that are not one type
-				for (List<Way> l : completedRings) {
-					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-					for (Way way : l) {
-						boolean inner = "inner".equals(entities.get(way)); //$NON-NLS-1$
-						if (innerType != inner) {
-							logMapDataWarn
-									.warn("Probably map bug: Multipoligon contains outer and inner ways.\n" + //$NON-NLS-1$
-											"Way:"
-											+ way.getId()
-											+ " is strange part of completed ring. InnerType:" + innerType + " way inner: " + inner + " way inner string:" + entities.get(way)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-							return;
-						}
-					}
-				}
-
-				// That check is not strictly needed on preproccessing step because client can handle it
-				Node nodeOut = checkOuterWaysEncloseInnerWays(completedRings, entities);
-				if (nodeOut != null) {
-					logMapDataWarn.warn("Map bug: Multipoligon contains 'inner' way point outside of 'outer' border.\n" + //$NON-NLS-1$
-							"Multipolygon id : " + e.getId() + ", inner node out id : " + nodeOut.getId()); //$NON-NLS-1$
-				}
-
-				List<Node> outerWaySrc = new ArrayList<Node>();
-				List<List<Node>> innerWays = new ArrayList<List<Node>>();
-
-				TIntArrayList typeToSave = new TIntArrayList(typeUse);
-				long baseId = 0;
-				for (List<Way> l : completedRings) {
-					boolean innerType = "inner".equals(entities.get(l.get(0))); //$NON-NLS-1$
-					if (!innerType && !outerWaySrc.isEmpty()) {
-						logMapDataWarn.warn("Map bug: Multipoligon contains many 'outer' borders.\n" + //$NON-NLS-1$
-								"Multipolygon id : " + e.getId() + ", outer way id : " + l.get(0).getId()); //$NON-NLS-1$
-						return;
-					}
-					List<Node> toCollect;
-					if (innerType) {
-						toCollect = new ArrayList<Node>();
-						innerWays.add(toCollect);
-					} else {
-						toCollect = outerWaySrc;
-					}
-
-					for (Way way : l) {
-						toCollect.addAll(way.getNodes());
-						if (!innerType) {
-							TIntArrayList out = multiPolygonsWays.put(way.getId(), typeToSave);
-							if(out == null){
-								baseId = -way.getId();
-							}
-						}
-					}
-				}
-				if(baseId == 0){
-					// use base id as well?
-					baseId = notUsedId --;
-				}
-				nextZoom: for (int level = 0; level < mapZooms.size(); level++) {
-					renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
-							tempNameUse);
-					if (typeUse.isEmpty()) {
-						continue;
-					}
-					long id = convertBaseIdToGeneratedId(baseId, level);
-					// simplify route
-					List<Node> outerWay = outerWaySrc;
-					int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
-					if (zoomToSimplify < 15) {
-						outerWay = simplifyCycleWay(outerWay, zoomToSimplify, zoomWaySmothness);
-						if (outerWay == null) {
-							continue nextZoom;
-						}
-						List<List<Node>> newinnerWays = new ArrayList<List<Node>>();
-						for (List<Node> ls : innerWays) {
-							ls = simplifyCycleWay(ls, zoomToSimplify, zoomWaySmothness);
-							if (ls != null) {
-								newinnerWays.add(ls);
-							}
-						}
-						innerWays = newinnerWays;
-					}
-					insertBinaryMapRenderObjectIndex(mapTree[level], outerWay, innerWays, namesUse, id, true, typeUse, addtypeUse, true);
-				}
-			}
-		}
-	}
-
-	private Node checkOuterWaysEncloseInnerWays(List<List<Way>> completedRings, Map<Entity, String> entities) {
-		List<List<Way>> innerWays = new ArrayList<List<Way>>();
-		Boundary outerBoundary = new Boundary();
-		Node toReturn = null;
-		for (List<Way> ring : completedRings) {
-			boolean innerType = "inner".equals(entities.get(ring.get(0))); //$NON-NLS-1$
-			if (!innerType) {
-				outerBoundary.addOuterWays(ring);
-			} else {
-				innerWays.add(ring);
-			}
-		}
-
-		for (List<Way> innerRing : innerWays) {
-			ring: for (Way innerWay : innerRing) {
-				for (Node node : innerWay.getNodes()) {
-					if (!outerBoundary.containsPoint(node.getLatitude(), node.getLongitude())) {
-						if (toReturn == null) {
-							toReturn = node;
-						}
-						completedRings.remove(innerRing);
-						break ring;
-					}
-				}
-			}
-		}
-		return toReturn;
-	}
-	
-	private List<Way> reverse(List<Way> l) {
-		Collections.reverse(l);
-		for(Way w : l){
-			w.getNodeIds().reverse();
-			Collections.reverse(w.getNodes());
-		}
-		return l;
-	}
-	
-	private List<Way> appendLists(List<Way> w1, List<Way> w2){
-		w1.addAll(w2);
-		return w1;
-	}
-
-	//TODO Can the Multipolygon class be the one that replaces this?
-	private void combineMultiPolygons(Way w, List<List<Way>> completedRings, List<List<Way>> incompletedRings) {
-		long lId = w.getEntityIds().get(w.getEntityIds().size() - 1).getId().longValue();
-		long fId = w.getEntityIds().get(0).getId().longValue();
-		if (fId == lId) {
-			completedRings.add(Collections.singletonList(w));
-		} else {
-			List<Way> l = new ArrayList<Way>();
-			l.add(w);
-			boolean add = true;
-			for (int k = 0; k < incompletedRings.size();) {
-				boolean remove = false;
-				List<Way> i = incompletedRings.get(k);
-				Way last = i.get(i.size() - 1);
-				Way first = i.get(0);
-				long lastId = last.getEntityIds().get(last.getEntityIds().size() - 1).getId().longValue();
-				long firstId = first.getEntityIds().get(0).getId().longValue();
-				if (fId == lastId) {
-					remove = true;
-					l = appendLists(i, l);
-					fId = firstId;
-				} else if (lId == firstId) {
-					l = appendLists(l, i);
-					remove = true;
-					lId = lastId;
-				} else if (lId == lastId) {
-					l = appendLists(l, reverse(i));
-					remove = true;
-					lId = firstId;
-				} else if (fId == firstId) {
-					l = appendLists(reverse(i), l);
-					remove = true;
-					fId = lastId;
-				}
-				if (remove) {
-					incompletedRings.remove(k);
+		// fill the multipolygon with all ways from the Relation
+		for (Entity es : entities.keySet()) {
+			if (es instanceof Way) {
+				boolean inner = "inner".equals(entities.get(es)); //$NON-NLS-1$
+				if (inner) {
+					original.addInnerWay((Way) es);
 				} else {
-					k++;
-				}
-				if (fId == lId) {
-					completedRings.add(l);
-					add = false;
-					break;
+					original.addOuterWay((Way) es);
 				}
 			}
-			if (add) {
-				incompletedRings.add(l);
+		}
+
+		// Log if something is wrong
+		if (!original.hasOpenedPolygons()) {
+			logMapDataWarn.warn("Multipolygon has unclosed parts: Multipoligon id=" + e.getId()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), typeUse, addtypeUse, namesUse, tempNameUse);
+
+		//Don't add multipolygons with an unknown type
+		if (typeUse.size() == 0) return;
+
+		// Log the fact that Rings aren't complete, but continue with the relation, try to close it as well as possible
+		if (!original.areRingsComplete()) {
+			logMapDataWarn.warn("In multipolygon  " + e.getId() + " there are incompleted ways");
+		}
+		// Rings with different types (inner or outer) in one ring will be logged in the previous case
+		// The Rings are only composed by type, so if one way gets in a different Ring, the rings will be incomplete
+
+		List<Multipolygon> multipolygons = original.splitPerOuterRing(logMapDataWarn);
+
+
+		for (Multipolygon m : multipolygons) {
+
+			// innerWays are new closed ways 
+			List<List<Node>> innerWays = new ArrayList<List<Node>>();
+
+			for (Ring r : m.getInnerRings()) {
+				innerWays.add(r.getBorder().getNodes());
+			}
+
+			// don't use the relation ids. Create new ones
+			long baseId = notUsedId --;
+			nextZoom: for (int level = 0; level < mapZooms.size(); level++) {
+				renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(level).getMaxZoom(), typeUse, addtypeUse, namesUse,
+						tempNameUse);
+				if (typeUse.isEmpty()) {
+					continue;
+				}
+				long id = convertBaseIdToGeneratedId(baseId, level);
+				// simplify route
+				List<Node> outerWay = m.getOuterNodes();
+				int zoomToSimplify = mapZooms.getLevel(level).getMaxZoom() - 1;
+				if (zoomToSimplify < 15) {
+					outerWay = simplifyCycleWay(outerWay, zoomToSimplify, zoomWaySmothness);
+					if (outerWay == null) {
+						continue nextZoom;
+					}
+					List<List<Node>> newinnerWays = new ArrayList<List<Node>>();
+					for (List<Node> ls : innerWays) {
+						ls = simplifyCycleWay(ls, zoomToSimplify, zoomWaySmothness);
+						if (ls != null) {
+							newinnerWays.add(ls);
+						}
+					}
+					innerWays = newinnerWays;
+				}
+				insertBinaryMapRenderObjectIndex(mapTree[level], outerWay, innerWays, namesUse, id, true, typeUse, addtypeUse, true);
+
 			}
 		}
 	}
-
+	
 	public static List<Node> simplifyCycleWay(List<Node> ns, int zoom, int zoomWaySmothness) throws SQLException {
 		if (checkForSmallAreas(ns, zoom + Math.min(zoomWaySmothness / 2, 3), 2, 4)) {
 			return null;

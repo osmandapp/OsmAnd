@@ -2,15 +2,16 @@ package net.osmand.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Stack;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
+
+import org.apache.commons.logging.Log;
 
 /**
  * The idea of multipolygon:
@@ -23,180 +24,155 @@ import net.osmand.osm.Way;
  * @author Pavol Zibrita
  */
 public class Multipolygon {
+	
+	/**
+	 * cache with the ways grouped per Ring
+	 */
+	private SortedSet<Ring> innerRings, outerRings;
 
-	protected List<Way> closedOuterWays;
-	protected List<Way> outerWays;
-	protected List<Way> closedInnerWays;
-	protected List<Way> innerWays;
+	/**
+	 * ways added by the user
+	 */
+	private List<Way> outerWays, innerWays;
 	
-	protected IdentityHashMap<Way,List<Way>> outerInnerMapping;
+	/**
+	 * an optional id of the multipolygon
+	 */
+	private long id;
 	
-	private void addNewPolygonPart(List<Way> polygons, List<Way> closedPolygons, Way newPoly) {
-		if (!newPoly.getNodes().isEmpty()) {
-			if (isClosed(newPoly)) {
-				closedPolygons.add(newPoly); //if closed, put directly to closed polygons
-			} else if (polygons.isEmpty()) { 
-				polygons.add(newPoly); //if open, and first, put to polygons..
-			} else {
-				// now we try to merge the ways to form bigger polygons
-				Stack<Way> wayStack = new Stack<Way>();
-				wayStack.push(newPoly);
-				addAndMergePolygon(polygons, closedPolygons, wayStack);
-			}
-			//reset the mapping
-			outerInnerMapping = null;
-		} //else do nothing
+	/**
+	 * create a multipolygon with these outer and inner rings
+	 * the rings have to be well formed or data inconsistency will happen
+	 * @param outerRings the collection of outer rings
+	 * @param innerRings the collection of inner rings
+	 */
+	public Multipolygon(SortedSet<Ring> outerRings, SortedSet<Ring> innerRings) {
+		this();
+		this.outerRings = outerRings;
+		this.innerRings = innerRings;
+		for (Ring r : outerRings) {
+			outerWays.addAll(r.getWays());
+		}
+		
+		for (Ring r : innerRings) {
+			innerWays.addAll(r.getWays());
+		}
 	}
 
-	private boolean isClosed(Way newPoly) {
-		List<Node> ns = newPoly.getNodes();
-		return !ns.isEmpty() && ns.get(0).getId() == ns.get(ns.size()-1).getId();
+	/**
+	 * Create a multipolygon with initialized outer and inner ways
+	 * @param outers a list of outer ways
+	 * @param inners a list of inner ways
+	 */
+	public Multipolygon(List<Way> outers, List<Way> inners) {
+		this();
+		outerWays.addAll(outers);
+		innerWays.addAll(inners);
+	}
+	
+	/**
+	 * create a new empty multipolygon
+	 */
+	public Multipolygon(){
+		outerWays = new ArrayList<Way> ();
+		innerWays = new ArrayList<Way> ();
+		id = 0L;
+	}
+	
+	/**
+	 * create a new empty multipolygon with specified id
+	 * @param id the id to set
+	 */
+	public Multipolygon(long id){
+		this();
+		setId(id);
+	}
+	
+	/**
+	 * set the id of the multipolygon
+	 * @param newId id to set
+	 */
+	public void setId(long newId) {
+		id = newId;
+	}
+	
+	/**
+	 * get the id of the multipolygon
+	 * @return id
+	 */
+	public long getId() {
+		return id;
+	}
+	
+	/**
+	 * check if this multipolygon contains a point
+	 * @param point point to check
+	 * @return true if this multipolygon is correct and contains the point
+	 */
+	public boolean containsPoint(LatLon point) {
+		
+		return containsPoint(point.getLatitude(), point.getLongitude());
+		
 	}
 
-	private void addAndMergePolygon(List<Way> polygons, List<Way> closedPolygons, Stack<Way> workStack) {
-		while (!workStack.isEmpty()) {
-			Way changedWay = workStack.pop();
-			List<Node> nodes = changedWay.getNodes();
-			if (nodes.isEmpty()) {
-				//don't bother with it!
-				continue;
-			}
-			if (isClosed(changedWay)) {
-				polygons.remove(changedWay);
-				closedPolygons.add(changedWay);
-				continue;
+	/**
+	 * check if this multipolygon contains a point
+	 * @param latitude lat to check
+	 * @param longitude lon to check
+	 * @return true if this multipolygon is correct and contains the point
+	 */
+	public boolean containsPoint(double latitude, double longitude){
+		
+		
+		TreeSet<Ring> outers = new TreeSet<Ring>();
+		TreeSet<Ring> inners = new TreeSet<Ring>();
+		
+			for (Ring outer : getOuterRings()) {
+				if (outer.containsPoint(latitude, longitude)) {
+					outers.add(outer);
+				}
 			}
 			
-			Node first = nodes.get(0);
-			Node last = nodes.get(nodes.size()-1);
-			for (Way anotherWay : polygons) {
-				if (anotherWay == changedWay) {
-					continue;
-				}
-				//try to find way, that matches the one ...
-				if (anotherWay.getNodes().get(0).getId() == first.getId()) {
-					Collections.reverse(changedWay.getNodes());
-					anotherWay.getNodes().addAll(0,changedWay.getNodes());
-					workStack.push(anotherWay);
-					break;
-				} else if (anotherWay.getNodes().get(0).getId() == last.getId()) {
-					anotherWay.getNodes().addAll(0,changedWay.getNodes());
-					workStack.push(anotherWay);
-					break;
-				} else if (anotherWay.getNodes().get(anotherWay.getNodes().size()-1).getId() == first.getId()) {
-					anotherWay.getNodes().addAll(changedWay.getNodes());
-					workStack.push(anotherWay);
-					break;
-				} else if (anotherWay.getNodes().get(anotherWay.getNodes().size()-1).getId() == last.getId()) {
-					Collections.reverse(changedWay.getNodes());
-					anotherWay.getNodes().addAll(changedWay.getNodes());
-					workStack.push(anotherWay);
-					break;
+			for(Ring inner : getInnerRings()) {
+				if (inner.containsPoint(latitude, longitude)) {
+					inners.add(inner);
 				}
 			}
-			//if we could not merge the new polygon, and it is not already there, add it!
-			if (workStack.isEmpty() && !polygons.contains(changedWay)) {
-				polygons.add(changedWay);
-			} else if (!workStack.isEmpty()) {
-				polygons.remove(changedWay);
-			}
-		}
+			
+			if(outers.size() == 0) return false;
+			if(inners.size() == 0) return true;
+			
+			Ring smallestOuter = outers.first();
+			Ring smallestInner = inners.first();
+			
+			// if the smallest outer is in the smallest inner, the multiPolygon contains the point
+			
+			return smallestOuter.isIn(smallestInner);
+		
 	}
 
-	public boolean containsPoint(LatLon point) {
-		return containsPoint(point.getLatitude(), point.getLongitude());
+	/**
+	 * get the Inner Rings
+	 * @return the inner rings
+	 */
+	public SortedSet<Ring> getInnerRings() {
+		groupInRings();
+		return innerRings;
+	}
+	
+	/**
+	 * get the outer rings 
+	 * @return outer rings
+	 */
+	public SortedSet<Ring> getOuterRings() {
+		groupInRings();
+		return outerRings;
 	}
 
-	public boolean containsPoint(double latitude, double longitude) {
-		return containsPointInPolygons(closedOuterWays, latitude, longitude) || containsPointInPolygons(outerWays, latitude, longitude);
-	}
-
-	private boolean containsPointInPolygons(List<Way> outerPolygons, double latitude, double longitude) {
-		if (outerPolygons != null) {
-			for (Way polygon : outerPolygons) {
-				List<Way> inners = getOuterInnerMapping().get(polygon);
-				if (polygonContainsPoint(latitude, longitude, polygon, inners)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	private boolean polygonContainsPoint(double latitude, double longitude,
-			Way polygon, List<Way> inners) {
-		int intersections = 0;
-		intersections = countIntersections(latitude, longitude, polygon,
-				intersections);
-		if (inners != null) {
-			for (Way w : inners) {
-				intersections = countIntersections(latitude, longitude, w,
-						intersections);
-			}
-		}
-		return intersections % 2 == 1;
-	}
-
-	private int countIntersections(double latitude, double longitude,
-			Way polygon, int intersections) {
-		List<Node> polyNodes = polygon.getNodes();
-		for (int i = 0; i < polyNodes.size() - 1; i++) {
-			if (MapAlgorithms.ray_intersect_lon(polyNodes.get(i),
-					polyNodes.get(i + 1), latitude, longitude) != -360d) {
-				intersections++;
-			}
-		}
-		// special handling, also count first and last, might not be closed, but
-		// we want this!
-		if (MapAlgorithms.ray_intersect_lon(polyNodes.get(0),
-				polyNodes.get(polyNodes.size() - 1), latitude, longitude) != -360d) {
-			intersections++;
-		}
-		return intersections;
-	}
-
-	private IdentityHashMap<Way, List<Way>> getOuterInnerMapping() {
-		if (outerInnerMapping == null) {
-			outerInnerMapping = new IdentityHashMap<Way, List<Way>>();
-			//compute the mapping
-			if ((innerWays != null || closedInnerWays != null)
-					&& countOuterPolygons() != 0) {
-				fillOuterInnerMapping(closedOuterWays);
-				fillOuterInnerMapping(outerWays);
-			}
-		}
-		return outerInnerMapping;
-	}
-
-	private void fillOuterInnerMapping(List<Way> outerPolygons) {
-		for (Way outer : outerPolygons) {
-			List<Way> inners = new ArrayList<Way>();
-			inners.addAll(findInnersFor(outer, innerWays));
-			inners.addAll(findInnersFor(outer, closedInnerWays));
-			outerInnerMapping.put(outer, inners);
-		}
-	}
-
-	private Collection<Way> findInnersFor(Way outer, List<Way> inners) {
-		if(inners == null) {
-			return Collections.emptyList();
-		}
-		List<Way> result = new ArrayList<Way>(inners.size());
-		for (Way in : inners) {
-			boolean inIsIn = true;
-			for (Node n : in.getNodes()) {
-				if (!polygonContainsPoint(n.getLatitude(), n.getLongitude(), outer, null)) {
-					inIsIn = false;
-					break;
-				}
-			}
-			if (inIsIn) {
-				result.add(in);
-			}
-		}
-		return result;
-	}
-
+	/**
+	 * get the outer ways
+	 * @return outerWays or empty list if null
+	 */
 	private List<Way> getOuterWays() {
 		if (outerWays == null) {
 			outerWays = new ArrayList<Way>(1);
@@ -204,50 +180,88 @@ public class Multipolygon {
 		return outerWays;
 	}
 
-	private List<Way> getClosedOuterWays() {
-		if (closedOuterWays == null) {
-			closedOuterWays = new ArrayList<Way>(1);
-		}
-		return closedOuterWays;
-	}
-
-	
+	/**
+	 * get the inner ways
+	 * @return innerWays or empty list if null
+	 */
 	private List<Way> getInnerWays() {
 		if (innerWays == null) {
 			innerWays = new ArrayList<Way>(1);
 		}
 		return innerWays;
 	}
+
+	/**
+	 * get the number of outer Rings
+	 * @return
+	 */
+	public int countOuterPolygons() {
+		
+		groupInRings();
+		return zeroSizeIfNull(getOuterRings());
+		
+		
+	}
 	
-	private List<Way> getClosedInnerWays() {
-		if (closedInnerWays == null) {
-			closedInnerWays = new ArrayList<Way>(1);
+	/**
+	 * Check if this multiPolygon has outer ways
+	 * @return true if this has outer ways
+	 */
+	public boolean hasOpenedPolygons() {
+	    return zeroSizeIfNull(getOuterWays()) != 0;
+	}
+	
+	/**
+	 * chekc if all rings are closed
+	 * @return true if all rings are closed by nature, false otherwise
+	 */
+	public boolean areRingsComplete() {
+		SortedSet<Ring> set = getOuterRings();
+		for (Ring r : set) {
+			if (!r.isClosed()) {
+				return false;
+			}
 		}
-		return closedInnerWays;
-	}
-
-	public int countOuterPolygons()
-	{
-		return zeroSizeIfNull(outerWays) + zeroSizeIfNull(closedOuterWays);
-	}
-
-	public boolean hasOpenedPolygons()
-	{
-	    return zeroSizeIfNull(outerWays) != 0;
+		set = getInnerRings();
+		for (Ring r : set) {
+			if (!r.isClosed()) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
-	private int zeroSizeIfNull(List<Way> list) {
-		return list != null ? list.size() : 0;
+	/**
+	 * return 0 if the list is null
+	 * @param l the list to check
+	 * @return the size of the list, or 0 if the list is null
+	 */
+	private int zeroSizeIfNull(Collection<?> l) {
+		return l != null ? l.size() : 0;
 	}
 	
-	public void addInnerWay(Way es) {
-		addNewPolygonPart(getInnerWays(), getClosedInnerWays(), new Way(es));
+	/**
+	 * Add an inner way to the multiPolygon
+	 * @param w the way to add
+	 */
+	public void addInnerWay(Way w) {
+		getInnerWays().add(w);
+		innerRings = null;
 	}
 
-	public void addOuterWay(Way es) {
-		addNewPolygonPart(getOuterWays(), getClosedOuterWays(), new Way(es));
+	/**
+	 * Add an outer way to the multiPolygon
+	 * @param w the way to add
+	 */
+	public void addOuterWay(Way w) {
+		getOuterWays().add(w);
+		outerRings = null;
 	}
 
+	/**
+	 * Add everything from multipolygon to this
+	 * @param multipolygon the MultiPolygon to copy
+	 */
 	public void copyPolygonsFrom(Multipolygon multipolygon) {
 		for (Way inner : multipolygon.getInnerWays()) {
 			addInnerWay(inner);
@@ -255,31 +269,111 @@ public class Multipolygon {
 		for (Way outer : multipolygon.getOuterWays()) {
 			addOuterWay(outer);
 		}
-		getClosedInnerWays().addAll(multipolygon.getClosedInnerWays());
-		getClosedOuterWays().addAll(multipolygon.getClosedOuterWays());
+		// reset cache
+		outerRings = null;
+		innerRings = null;
 	}
 
-	public void addOuterWays(List<Way> ring) {
-		for (Way outer : ring) {
+	/**
+	 * Add outer ways to the outer Ring
+	 * @param ways the ways to add
+	 */
+	public void addOuterWays(List<Way> ways) {
+		for (Way outer : ways) {
 			addOuterWay(outer);
 		}
 	}
 
+	/**
+	 * Get the weighted center of all nodes in this multiPolygon <br />
+	 * This only works when the ways have initialized nodes
+	 * @return the weighted center
+	 */
 	public LatLon getCenterPoint() {
 		List<Node> points = new ArrayList<Node>();
-		collectPoints(points, outerWays);
-		collectPoints(points, closedOuterWays);
-		collectPoints(points, innerWays);
-		collectPoints(points, closedInnerWays);
+		for (Way w : getOuterWays()) {
+			points.addAll(w.getNodes());
+		}
+		
+		for (Way w : getInnerWays()) {
+			points.addAll(w.getNodes());
+		}
+		
 		return MapUtils.getWeightCenterForNodes(points);
 	}
-
-	private void collectPoints(List<Node> points, List<Way> polygons) {
-		if (polygons != null) {
-			for(Way w : polygons){
-				points.addAll(w.getNodes());
-			}
+	
+	/**
+	 * check if a cache has been created
+	 * @return true if the cache exists
+	 */
+	public boolean hasCache() {
+		return outerRings != null && innerRings != null;
+	}
+	
+	/**
+	 * Create the cache <br />
+	 * The cache has to be null before it will be created
+	 */
+	private void groupInRings() {
+		if (outerRings == null) {
+			outerRings = Ring.combineToRings(getOuterWays());
+		}
+		if (innerRings == null) {
+			innerRings = Ring.combineToRings(getInnerWays());
 		}
 	}
+	
+	/**
+	 * Split this multipolygon in several separate multipolygons with one outer ring each
+	 * @param log the stream to log problems to, if log = null, nothing will be logged
+	 * @return a list with multipolygons which have exactly one outer ring
+	 */
+	public List<Multipolygon> splitPerOuterRing(Log log) {
+		
+		//make a clone of the inners set
+		// this set will be changed through execution of the method
+		SortedSet<Ring> inners = new TreeSet<Ring>(getInnerRings());
+		
+		// get the set of outer rings in a variable. This set will not be changed
+		SortedSet<Ring> outers = getOuterRings();
+		ArrayList<Multipolygon> multipolygons = new ArrayList<Multipolygon>();
+		
+		// loop; start with the smallest outer ring
+		for (Ring outer : outers) {
+			
+			// Search the inners inside this outer ring
+			SortedSet<Ring> innersInsideOuter = new TreeSet<Ring>();
+			for (Ring inner : inners) {
+				if (inner.isIn(outer)) {
+					innersInsideOuter.add(inner);
+				}
+			}
+			
+			// the inners should belong to this outer, so remove them from the list to check
+			inners.removeAll(innersInsideOuter);
+			
+			SortedSet<Ring> thisOuter = new TreeSet<Ring>();
+			thisOuter.add(outer);
+			
+			// create a new multipolygon with this outer and a list of inners
+			Multipolygon m = new Multipolygon(thisOuter, innersInsideOuter);
+			
+			multipolygons.add(m);
+		}
+		
+		if (inners.size() != 0 && log != null)
+			log.warn("Multipolygon "+getId() + " has a mismatch in outer and inner rings");
+		
+		return multipolygons;
+	}
+	
+	/**
+	 * This method only works when the multipolygon has exaclt one outer Ring
+	 * @return the list of nodes in the outer ring
+	 */
+	public List<Node> getOuterNodes() {
+		return getOuterRings().first().getBorder().getNodes();
+	}
+
 
 }
