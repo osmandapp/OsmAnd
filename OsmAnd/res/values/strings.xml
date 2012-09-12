@@ -730,7 +730,7 @@
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
-	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build&#8230;</string>
 	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
