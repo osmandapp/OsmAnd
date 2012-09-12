@@ -21,6 +21,7 @@ public class SearchByNameFilter extends PoiFilter {
 	public SearchByNameFilter(OsmandApplication application) {
 		super(application.getString(R.string.poi_filter_by_name), FILTER_ID, new LinkedHashMap<AmenityType, LinkedHashSet<String>>(), application);
 		this.distanceToSearchValues = new double[] {100, 1000, 5000};
+		this.isStandardFilter = true;
 	}
 	
 	@Override

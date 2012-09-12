@@ -9,6 +9,19 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="btn_add_tag">Add Tag</string>
+    <string name="btn_advanced_mode">Advanced Mode...</string>
+    <string name="poi_filter_parking">Parking</string>
+    <string name="poi_filter_emergency">Emergency</string>
+    <string name="poi_filter_public_transport">Public Transport</string>
+    <string name="poi_filter_entertainment">Entertainment</string>
+    <string name="poi_filter_accomodation">Accomodation</string>
+    <string name="poi_filter_restaurants">Restaurants</string>
+    <string name="poi_filter_sightseeing">Sightseeing</string>
+    <string name="poi_filter_car_aid">Car aid</string>
+	<string name="poi_filter_food_shop">Food shop</string>
+	<string name="poi_filter_for_tourists">For tourists</string>
+	<string name="poi_filter_fuel">Fuel</string>
 	<string name="show_warnings_title">Show alarms&#8230;</string>
 	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, and other warnings</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
@@ -714,12 +727,8 @@
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
-	<string name="poi_filter_car_aid">Car aid</string>
 	<string name="poi_filter_closest_poi">Closest POI</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
-	<string name="poi_filter_food_shop">Food shop</string>
-	<string name="poi_filter_for_tourists">For tourists</string>
-	<string name="poi_filter_fuel">Fuel</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
 	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
@@ -730,7 +739,7 @@
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
-	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build&#8230;</string>
 	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>

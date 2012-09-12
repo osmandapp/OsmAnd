@@ -74,7 +74,7 @@
 		<type tag="highway" value="bus_stop" minzoom="15" poi_category="transportation"/>
 		<type tag="highway" value="platform" minzoom="15" poi_category="transportation"/>
 		<type tag="highway" value="turning_circle" minzoom="16" poi_category="transportation"/>
-		<type tag="highway" value="emergency_access_point" minzoom="16" poi_category="transportation"/>
+		<type tag="highway" value="emergency_access_point" minzoom="16" poi_category="emergency"/>
 		<type tag="highway" value="speed_camera" minzoom="16" poi_category="transportation"/>
 		<type tag="highway" value="street_lamp" minzoom="16" />
 		
@@ -379,6 +379,7 @@
 		<type tag="emergency" value="fire_hose" minzoom="15" />
 		<type tag="emergency" value="fire_hydrant" minzoom="15" />
 		<type tag="emergency" value="phone" minzoom="15" />
+		<type tag="emergency" value="access_point" minzoom="15" />
 		<type tag="amenity" value="emergency_phone" target_tag="emergency" target_value="phone" minzoom="15" />
 		<type tag="emergency" value="siren" minzoom="15" />
 		<type tag="amenity" value="fire_station" minzoom="15" poi_category="emergency"/>

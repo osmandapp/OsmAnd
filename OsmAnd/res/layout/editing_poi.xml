@@ -89,7 +89,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Advanced Mode..." />
+        android:text="@string/btn_advanced_mode" />
 
 <TableLayout 
     android:id="@+id/advancedModeTable"
@@ -103,7 +103,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:text="Add Tag" 
+    android:text="@string/btn_add_tag" 
     android:visibility="gone"/>
 <TextView android:text="@string/poi_dialog_other_tags_message" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" 
