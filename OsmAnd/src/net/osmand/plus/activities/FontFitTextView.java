@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 import android.content.Context;
 import android.graphics.Rect;
 import android.text.TextPaint;
-import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -51,16 +50,19 @@ public class FontFitTextView extends TextView {
 				// setTextScaleX(availableWidth / size);
 			}
 
-			//if (getLineCount() != lines) {
-			setLines(lines);
-			setMaxLines(lines);
-			if( lines == 1) {
-				setGravity(Gravity.CENTER_VERTICAL);
-			} else {
-				setGravity(Gravity.TOP);
+			if (getLineCount() != lines) {
+				if (lines == 1) {
+					setGravity(Gravity.CENTER_VERTICAL);
+				} else {
+					setGravity(Gravity.TOP);
+				}
+				setLines(lines);
+				setMaxLines(lines);
+				requestLayout();
 			}
-			//}
-			setTextSize(TypedValue.COMPLEX_UNIT_PX, tp.getTextSize());
+			if (getTextSize() != tp.getTextSize()) {
+				setTextSize(TypedValue.COMPLEX_UNIT_PX, tp.getTextSize());
+			}
 		}
 	}
 	
