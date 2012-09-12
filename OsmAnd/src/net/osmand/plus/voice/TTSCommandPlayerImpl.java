@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+
 import net.osmand.Algoritms;
+import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -21,6 +24,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
+import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
@@ -53,6 +57,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
 	private static final int[] TTS_VOICE_VERSION = new int[] { 100, 101 }; // !! MUST BE SORTED
+	private static final Log log = LogUtil.getLog(TTSCommandPlayerImpl.class);
 	private TextToSpeech mTts;
 	private Context mTtsContext;
 	private String language;
@@ -76,15 +81,30 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	
 
+	/**
+	 * Since TTS requests are asynchronous, playCommands() can be called before
+	 * the TTS engine is done. We use this field to keep track of concurrent tts
+	 * activity. Where tts activity is defined as the time between tts.speak()
+	 * and the call back to onUtteranceCompletedListener().  This allows us to
+	 * optimize use of requesting and abandoning audio focus.
+	 */
+	private int ttsRequests;
+	
+	// Called from the calculating route thread.
 	@Override
-	public void playCommands(CommandBuilder builder) {
+	public synchronized void playCommands(CommandBuilder builder) {
 		if (mTts != null) {
 			final List<String> execute = builder.execute(); //list of strings, the speech text, play it
 			StringBuilder bld = new StringBuilder();
 			for (String s : execute) {
 				bld.append(s).append(' ');
 			}
+			if (ttsRequests++ == 0)
+				requestAudioFocus();
+			log.debug("ttsRequests="+ttsRequests);
+			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
+			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		}
 	}
 
@@ -141,6 +161,15 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					return ctx instanceof SettingsActivity;
 				}
 			});
+			mTts.setOnUtteranceCompletedListener(new OnUtteranceCompletedListener() {
+				// The call back is on a binder thread.
+				@Override
+				public synchronized void onUtteranceCompleted(String utteranceId) {
+					if (--ttsRequests == 0)
+						abandonAudioFocus();
+					log.debug("ttsRequests="+ttsRequests);
+				}
+			});
 		}
 	}
 	
@@ -175,6 +204,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 	@Override
 	public void updateAudioStream(int streamType) {
+		super.updateAudioStream(streamType);
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, streamType+"");		
 	}
 
