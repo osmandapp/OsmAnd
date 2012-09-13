@@ -23,7 +23,7 @@ import org.apache.commons.logging.Log;
  * 
  * @author Pavol Zibrita
  */
-public class Multipolygon {
+public class Multipolygon implements Comparable<Multipolygon> {
 	
 	/**
 	 * cache with the ways grouped per Ring
@@ -357,6 +357,43 @@ public class Multipolygon {
 	 */
 	public List<Node> getOuterNodes() {
 		return getOuterRings().get(0).getBorder().getNodes();
+	}
+	
+	@Override
+	/**
+	 * @return -1 if this Multipolygon is inside m <br />
+	 * 1 if m is inside this Multipolygon <br />
+	 * 0 otherwise (Multipolygon are next to each other, Multipolygon 
+	 * 				intersect or Multipolygon are malformed)
+	 */
+	public int compareTo(Multipolygon m) {
+		if (this.isIn(m)) return -1;
+		if (m.isIn(this)) return 1;
+		return 0;
+	}
+
+	/**
+	 * returns true if all outer rings of this multipolygon 
+	 * are inside an outer ring of the other multipolygon
+	 * @param m the other multipolygon
+	 * @return true if all outer rings of this multipolygon 
+	 * are inside an outer ring of the other multipolygon <br />
+	 * false otherwise
+	 */
+	private boolean isIn(Multipolygon m) {
+		List<Ring> thisOuters = getOuterRings();
+		List<Ring> otherOuters = m.getOuterRings();
+		for(Ring outer : thisOuters) {
+			boolean isincluded = false;
+			for(Ring otherOuter : otherOuters) {
+				if (outer.isIn(otherOuter)){
+					isincluded = true;
+					continue;
+				}
+			}
+			if (isincluded == false) return false;
+		}
+		return true;
 	}
 
 
