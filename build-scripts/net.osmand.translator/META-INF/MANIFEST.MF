@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Translator
+Bundle-SymbolicName: net.osmand.translator;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: net.osmand.translator.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt;bundle-version="3.7.2",
+ org.eclipse.jdt.core;bundle-version="3.7.3",
+ org.eclipse.jdt.ui;bundle-version="3.7.2",
+ org.eclipse.jface.text;bundle-version="3.7.2",
+ org.eclipse.core.resources;bundle-version="3.7.101"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
