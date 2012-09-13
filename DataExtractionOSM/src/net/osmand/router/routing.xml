@@ -128,14 +128,14 @@
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
 		<!-- <attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>  -->
 		
-		<road tag="highway" value="motorway" speed="16" priority="0.7" dynamicPriority="0.7">
+		<road tag="highway" value="motorway" speed="16" priority="0.4" dynamicPriority="0.4">
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
-		<road tag="highway" value="motorway_link" speed="16" priority="0.7" dynamicPriority="0.7">
+		<road tag="highway" value="motorway_link" speed="16" priority="0.4" dynamicPriority="0.4">
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
 		
-		<road tag="highway" value="trunk" speed="16" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="trunk" speed="16" priority="0.6" dynamicPriority="0.6"/>
 		<road tag="highway" value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
 		<road tag="highway" value="primary" speed="16" priority="0.8" dynamicPriority="0.9"/>
 		<road tag="highway" value="primary_link" speed="16" priority="0.8" dynamicPriority="0.9"/>
