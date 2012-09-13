@@ -224,7 +224,7 @@
 
 	<target name="-post-package" if="nativeoff">
 		<echo>Restoring ${native.libs.absolute.dir} to it's place...</echo>
-		<move file="${native.libs.absolute.dir}.skipped" tofile="${native.libs.absolute.dir}" />
+		<move file="${native.libs.absolute.dir}.skipped" tofile="${native.libs.absolute.dir}" failonerror="no"/>
 	</target>
 
 	<!-- Import the actual build file.
