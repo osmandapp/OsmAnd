@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-  <string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
@@ -943,7 +942,7 @@
   <string name="osmand_parking_lim_text">Ad ore</string>
   <string name="osmand_parking_no_lim_text">Senza limiti di tempo</string>
   <string name="osmand_parking_add_event">Aggiungere una notifica all\'applicazione Calendario</string>
-  <string name="osmand_parking_time_limit">Parcheggio ad ore</string>
+  <string name="osmand_parking_time_limit">Parcheggio a tempo</string>
   <string name="osmand_parking_time_no_limit">Parcheggio senza limiti di tempo</string>
   <string name="osmand_parking_position_description">La posizione della tua macchina parcheggiata. %1$s</string>
   <string name="osmand_parking_position_description_add">Recuperare la macchina a:</string>
