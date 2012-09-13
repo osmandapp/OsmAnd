@@ -172,7 +172,7 @@ std::string RenderingContext::getReshapedString(const std::string& src) {
 }
 
 
-inline double getPowZoom(float zoom){
+double getPowZoom(float zoom){
 	if(zoom >= 0 && zoom - floor(zoom) < 0.05f){
 		return 1 << ((int)zoom);
 	} else {

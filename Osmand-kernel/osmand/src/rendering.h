@@ -9,4 +9,6 @@
 
 void doRendering(std::vector <MapDataObject* > mapDataObjects, SkCanvas* canvas,
 		RenderingRuleSearchRequest* req,	RenderingContext* rc);
+
+
 #endif
