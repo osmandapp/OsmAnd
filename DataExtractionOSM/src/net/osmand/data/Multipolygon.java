@@ -104,34 +104,24 @@ public class Multipolygon {
 	 * @param longitude lon to check
 	 * @return true if this multipolygon is correct and contains the point
 	 */
-	public boolean containsPoint(double latitude, double longitude){
-		
-		
-		TreeSet<Ring> outers = new TreeSet<Ring>();
-		TreeSet<Ring> inners = new TreeSet<Ring>();
-		
-			for (Ring outer : getOuterRings()) {
-				if (outer.containsPoint(latitude, longitude)) {
-					outers.add(outer);
-				}
+	public boolean containsPoint(double latitude, double longitude) {
+		boolean outerContain = false;
+		for (Ring outer : getOuterRings()) {
+			if (outer.containsPoint(latitude, longitude)) {
+				outerContain = true;
+				break;
 			}
-			
-			for(Ring inner : getInnerRings()) {
-				if (inner.containsPoint(latitude, longitude)) {
-					inners.add(inner);
-				}
+		}
+		if (!outerContain) {
+			return false;
+		}
+		for (Ring inner : getInnerRings()) {
+			if (inner.containsPoint(latitude, longitude)) {
+				return false;
 			}
-			
-			if(outers.size() == 0) return false;
-			if(inners.size() == 0) return true;
-			
-			Ring smallestOuter = outers.first();
-			Ring smallestInner = inners.first();
-			
-			// if the smallest outer is in the smallest inner, the multiPolygon contains the point
-			
-			return smallestOuter.isIn(smallestInner);
-		
+		}
+
+		return true;
 	}
 
 	/**
@@ -179,11 +169,8 @@ public class Multipolygon {
 	 * @return
 	 */
 	public int countOuterPolygons() {
-		
 		groupInRings();
 		return zeroSizeIfNull(getOuterRings());
-		
-		
 	}
 	
 	/**
@@ -286,14 +273,6 @@ public class Multipolygon {
 	}
 	
 	/**
-	 * check if a cache has been created
-	 * @return true if the cache exists
-	 */
-	public boolean hasCache() {
-		return outerRings != null && innerRings != null;
-	}
-	
-	/**
 	 * Create the cache <br />
 	 * The cache has to be null before it will be created
 	 */
@@ -315,10 +294,10 @@ public class Multipolygon {
 		
 		//make a clone of the inners set
 		// this set will be changed through execution of the method
-		SortedSet<Ring> inners = new TreeSet<Ring>(getInnerRings());
+		ArrayList<Ring> inners = new ArrayList<Ring>(getInnerRings());
 		
 		// get the set of outer rings in a variable. This set will not be changed
-		SortedSet<Ring> outers = new TreeSet<Ring>(getOuterRings());
+		ArrayList<Ring> outers = new ArrayList<Ring>(getOuterRings());
 		ArrayList<Multipolygon> multipolygons = new ArrayList<Multipolygon>();
 		
 		// loop; start with the smallest outer ring
@@ -329,7 +308,7 @@ public class Multipolygon {
 			m.addOuterWays(outer.getWays());
 						
 			// Search the inners inside this outer ring
-			SortedSet<Ring> innersInsideOuter = new TreeSet<Ring>();
+			ArrayList<Ring> innersInsideOuter = new ArrayList<Ring>();
 			for (Ring inner : inners) {
 				if (inner.isIn(outer)) {
 					innersInsideOuter.add(inner);
