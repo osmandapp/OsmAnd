@@ -1128,7 +1128,7 @@
 <string name="btn_advanced_mode">Ergänzende Angaben...</string>
 <string name="poi_filter_parking">Parkplatz</string>
 <string name="poi_filter_emergency">Notfall</string>
-<string name="poi_filter_public_transport">Öffentl. Verkehrsmittel</string>
+<string name="poi_filter_public_transport">ÖPNV</string>
 <string name="poi_filter_entertainment">Unterhaltung</string>
 <string name="poi_filter_accomodation">Unterkunft</string>
 <string name="poi_filter_restaurants">Restaurants</string>
