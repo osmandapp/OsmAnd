@@ -162,10 +162,17 @@
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>
 		<obstacle tag="railway" value="level_crossing" penalty="15"/>
-		
+		<obstacle tag="barrier" value="cycle_barrier" penalty="10"/>
+
+		<avoid tag="surface" value="gravel" decreasedPriority="0.2"/>
+		<avoid tag="surface" value="unpaved" decreasedPriority="0.2"/>
+		<avoid tag="surface" value="grass" decreasedPriority="0.6"/>
+		<avoid tag="tracktype" value="grade4" decreasedPriority="0.3"/>
+		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
+		<avoid tag="access" value="private" decreasedPriority="0.1"/>
 		<avoid tag="bicycle" value="no"/>
 	</routingProfile>
-	
+
 	<routingProfile name="pedestrian" baseProfile="pedestrian" restrictionsAware="false" minDefaultSpeed="3" maxDefaultSpeed="5" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="false">
 
