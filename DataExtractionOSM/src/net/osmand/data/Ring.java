@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 
 /**
- * A ring is a list of ways that form a simple boundary or an area. <p />
+ * A ring is a list of ways that form a simple boundary or an area.
  * 
  * 
  * 
@@ -77,6 +78,7 @@ public class Ring implements Comparable<Ring>{
 	/**
 	 * Get the closed ways that make up the Ring
 	 * This method will sort the ways, so it is CPU intensive
+	 * If extra ways are added to the ring, these ways will have random negative ids
 	 * @return the closed ways
 	 */
 	public List<Way> getClosedWays() {
@@ -90,9 +92,10 @@ public class Ring implements Comparable<Ring>{
 	 * @return true if this ring is closed, false otherwise
 	 */
 	public boolean isClosed() {
-		closeWays();
-		for (int i = closedWays.size()-1; i>=0; i--) {
-			if (!ways.contains(closedWays.get(i))){
+		List<Way> cl = getClosedWays();
+		List<Way> ways = getWays();
+		for (Way w : cl) {
+			if (!ways.contains(w)){
 				return false;
 			}
 		}
@@ -101,7 +104,8 @@ public class Ring implements Comparable<Ring>{
 	
 	/**
 	 * get a single closed way that represents the border
-	 * this method is CPU intensive
+	 * this method is CPU intensive. <p/ >
+	 * The returned border will have a random negative id
 	 * @return a closed way that represents the border
 	 */
 	public Way getBorder() {
@@ -117,8 +121,8 @@ public class Ring implements Comparable<Ring>{
 		if (closedBorder != null) return;
 		
 		closeWays();
-		
-		closedBorder = new Way(0L);
+
+		closedBorder = new Way(Math.round(Math.random()*(-9000000000000000000L)));
 		
 		Long previousConnection = getMultiLineEndNodes(closedWays)[0];
 		
@@ -188,13 +192,21 @@ public class Ring implements Comparable<Ring>{
 		
 		closedWays = multiLine;
 		
+		
 		long[] endNodes = getMultiLineEndNodes(multiLine);
+		
+		
 		if (endNodes[0] != endNodes[1]) {
-			if(multiLine.get(0).getNodes() == null) {
-				Way w = new Way(0L);
+			int lastML = multiLine.size() - 1;
+			
+			Way w = new Way(Math.round(Math.random()*(-9000000000000000000L)));
+			closedWays.add(w);
+			
+			if(multiLine.get(0).getNodes() == null || 
+					multiLine.get(lastML).getNodes() == null) {
+				
 				w.addNode(endNodes[0]);
 				w.addNode(endNodes[1]);
-				closedWays.add(w);
 			} else {
 				Node n1 = null, n2 = null;
 				if (multiLine.get(0).getFirstNodeId() == endNodes[0]) {
@@ -204,7 +216,6 @@ public class Ring implements Comparable<Ring>{
 					n1 = multiLine.get(0).getNodes().get(index);
 				}
 				
-				int lastML = multiLine.size() - 1;
 				if (multiLine.get(lastML).getFirstNodeId() == endNodes[0]) {
 					n2 = multiLine.get(lastML).getNodes().get(0);
 				} else {
@@ -212,17 +223,10 @@ public class Ring implements Comparable<Ring>{
 					n2 = multiLine.get(lastML).getNodes().get(index);
 				}
 				
-				Way w = new Way(0L);
 				w.addNode(n1);
 				w.addNode(n2);
-				closedWays.add(w);
 		 	}
 		}
-		
-		
-		
-		return;
-
 	}
 
 	/**
@@ -296,7 +300,7 @@ public class Ring implements Comparable<Ring>{
 
 					// a Ring may never contain a fork
 					// if there is a third multiline, don't process
-					// hope there is a fourth one, sot these two will be processed later on
+					// hope there is a fourth one, so these two will be processed later on
 				}
 
 			}
@@ -547,48 +551,140 @@ public class Ring implements Comparable<Ring>{
 	 * inside the other Ring must also be complete.
 	 * @param other the other Ring (which is complete) used to close this one
 	 */
-	public void closeWithOtherRing(Ring other) {
+	public Ring closeWithOtherRing(Ring other) {
 		Way thisBorder = getBorder();
-		List<Integer> thisSwitchPoints = new ArrayList<Integer>();
+		Way otherBorder = other.getBorder();
 		
 		boolean insideOther = other.containsNode(thisBorder.getNodes().get(0));
+		boolean firstNodeInOther = insideOther;
+		
+		List<Way> wayPartsInsideOther = new ArrayList<Way>();
+		Way wayPart = new Way(Math.round(Math.random()*(-9000000000000000000L)));
+		wayPartsInsideOther.add(wayPart);
+		
 		
 		// Search the node pairs for which the ring goes inside or out the other
 		for (int i = 0; i<thisBorder.getNodes().size(); i++) {
 			Node n = thisBorder.getNodes().get(i);
+			
 			if (other.containsNode(n) != insideOther) {
+				
 				// we are getting out or in the boundary now.
 				// toggle switch
 				insideOther = !insideOther;
 				
-				thisSwitchPoints.add(i);
+				if(!insideOther) {
+					// we just went out the boundary, add one more node
+					wayPart.addNode(n);
+				} else {
+					// we just went in the boundary, create new way with previous node
+					wayPart = new Way(Math.round(Math.random()*(-9000000000000000000L)));
+					wayPart.addNode(thisBorder.getNodes().get(i-1));
+
+					wayPartsInsideOther.add(wayPart);
+				}
+			}
+			
+			if(insideOther){
+				wayPart.addNode(n);
 			}
 		}
 		
-		List<Integer> otherSwitchPoints = new ArrayList<Integer>();
+		Way finalBorder = new Way(Math.round(Math.random()*(-9000000000000000000L)));
 		
-		// Search the according node pairs in the other ring
-		for (int i : thisSwitchPoints) {
-			LatLon a = thisBorder.getNodes().get(i-1).getLatLon();
-			LatLon b = thisBorder.getNodes().get(i).getLatLon();
-			otherSwitchPoints.add(crossRingBorder(a, b));
+		
+		if (firstNodeInOther) {
+			if(!insideOther) return null; // How can we do this?
+			Way firstWay = wayPartsInsideOther.get(0);
+			Way lastWay = wayPartsInsideOther.get(wayPartsInsideOther.size() - 1);
+			if(firstWay == lastWay) return this; // Nothing to do
+			lastWay.removeNodeByIndex(lastWay.getNodes().size() - 1);
+			for (Node n : firstWay.getNodes()) {
+				lastWay.addNode(n);
+			}
+			wayPartsInsideOther.remove(firstWay);
 		}
 		
-		
-		
 		/*
-		 * TODO:
+		 * Status: 
 		 * 
-		 * * Split the other Ring into ways from splitPoint to splitPoint
+		 * We have now a list of ways of which the first and the last node are inside the other
+		 * Ring, and of which all other nodes are inside the other.
 		 * 
-		 * * Split this ring into ways from splitPoint to splitPoint
-		 * 
-		 * * Filter out the parts of way from this that are inside the other Ring
-		 * 		Use the insideOther var and the switchPoints list for this.
-		 * 
-		 * * For each two parts of way from this, search a part of way connecting the two. 
-		 * 		If there are two, take the shortest.
+		 * We must now connect these ways with the shortest (=less nodes) possible parts of other ring.
 		 */
+		
+		for (int i = 0; i< wayPartsInsideOther.size(); i++) {
+			// add nodes of this to the final border
+			for (Node n : wayPartsInsideOther.get(i).getNodes()) {
+				finalBorder.addNode(n);
+			}
+			
+			int firstWaySize = wayPartsInsideOther.get(i).getNodes().size();
+			// This node is inside the other
+			Node firstWayNode1 = wayPartsInsideOther.get(i).getNodes().get(firstWaySize - 2);
+			// This node is outside the other
+			Node firstWayNode2 = wayPartsInsideOther.get(i).getNodes().get(firstWaySize - 1);
+			LatLon a = firstWayNode1.getLatLon();
+			LatLon b = firstWayNode2.getLatLon();
+			int firstIntersectionIndex = crossRingBorder(a, b);
+			
+			// This node is outside the border
+			Node secondWayNode1 = wayPartsInsideOther.get((i+1) %  wayPartsInsideOther.size()).getNodes().get(0);
+			// This node is inside the border
+			Node secondWayNode2 = wayPartsInsideOther.get((i+1) %  wayPartsInsideOther.size()).getNodes().get(1);
+			
+			a = secondWayNode1.getLatLon();
+			b = secondWayNode2.getLatLon();
+			int secondIntersectionIndex = crossRingBorder(a, b);
+			
+			boolean reversed = firstIntersectionIndex >= secondIntersectionIndex; // used reversed logic
+			
+			int highestInters = Math.max(firstIntersectionIndex, secondIntersectionIndex);
+			int lowestInters = Math.min(firstIntersectionIndex, secondIntersectionIndex);
+			
+			int maxInters = other.getBorder().getNodes().size();
+			
+			if (highestInters - lowestInters < maxInters/2) {
+				// the shortest is going from lowest to highest
+				if (!reversed) {
+					// add some nodes from the other to the final border
+					for (int j = lowestInters + 1; j< highestInters+1; j++) {
+						finalBorder.addNode(otherBorder.getNodes().get(j));
+					}
+				} else {
+					// add some nodes from the other to the final border in reversed order
+					for (int j = highestInters; j> lowestInters; j--) {
+						finalBorder.addNode(otherBorder.getNodes().get(j));
+					}
+				}
+			} else {
+				// the shortest is going from highest to lowest, with a wrap
+				if(!reversed) {
+					// add two parts of nodes to this border
+					for (int j = highestInters + 1; j< maxInters; j++) {
+						finalBorder.addNode(otherBorder.getNodes().get(j));
+					}
+					for (int j = 0; j< lowestInters + 1; j++) {
+						finalBorder.addNode(otherBorder.getNodes().get(j));
+					}
+				} else {
+					// add two parts of nodes to this border
+					for (int j = lowestInters; j >= 0; j--) {
+						finalBorder.addNode(otherBorder.getNodes().get(j));
+					}
+					for (int j = maxInters; j>highestInters; j--) {
+						finalBorder.addNode(otherBorder.getNodes().get(j));
+					}
+				}
+			}
+			
+		}
+		
+		List<Way> borders = new ArrayList<Way>();
+		borders.add(finalBorder);
+		
+		return new Ring(borders);
 	}
 	
 	/**
@@ -598,27 +694,23 @@ public class Ring implements Comparable<Ring>{
 	 * @param a the begin point of the segment
  	 * @param b the end point of the segment
 	 * @return an integer i which is the index so that the segment 
-	 * 		from getBorder().get(i-1) to getBorder().get(i) intersects with 
+	 * 		from getBorder().get(i) to getBorder().get(i+1) intersects with 
 	 * 		the segment from parameters a to b. <p />
 	 * 
 	 * 		0 if the segment from a to b doesn't intersect with the Ring. 
 	 */
 	public int crossRingBorder(LatLon a, LatLon b) {
 		Way border = getBorder();
-		for (int i = 1; i<border.getNodes().size(); i++) {
-			LatLon c = border.getNodes().get(i-1).getLatLon();
-			LatLon d = border.getNodes().get(i).getLatLon();
-			//FIXME find library that can do this not java.awt in Android
-			/*if (Line2D.linesIntersect(
-					a.getLatitude(), a.getLongitude(), 
-					b.getLatitude(), b.getLongitude(), 
-					c.getLatitude(), c.getLongitude(), 
-					d.getLatitude(), d.getLongitude())) {
+		for (int i = 0; i<=border.getNodes().size(); i++) {
+			LatLon c = border.getNodes().get(i).getLatLon();
+			LatLon d = border.getNodes().get(i+1).getLatLon();
+			if (MapUtils.linesIntersect(a,b,c,d)) {
 				return i;
-			}*/
+			}
 		}
 		return 0;
 		
 	}
-
+	
+	
 }

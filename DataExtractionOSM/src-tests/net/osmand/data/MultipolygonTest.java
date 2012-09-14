@@ -12,6 +12,7 @@ import org.junit.Test;
 public class MultipolygonTest {
 
 	private Multipolygon testee;
+	private Ring testRing;
 	private Way poly1_1_of_2;
 	private Way poly1_2_of_2;
 	private int wayid;
@@ -23,6 +24,7 @@ public class MultipolygonTest {
 	public void setUp() 
 	{
 		testee = new Multipolygon();
+		testRing = new Ring();
 		poly1_1_of_2 = polygon(n(0,0),n(1,0),n(1,1),n(1,2));
 		poly1_2_of_2 = polygon(n(1,2),n(0,2),n(-1,2),n(0,0));
 		poly2 = polygon(n(4,4), n(4,5), n(3,5), n(4,4));
@@ -167,6 +169,14 @@ public class MultipolygonTest {
 		assertEquals(2, testee.countOuterPolygons());
 		assertFalse(testee.hasOpenedPolygons());
 	}
+	
+	@Test
+	public void testRing_firstEmptyWayThanOpenedWay()
+	{
+		testRing.addWay(new Way(111));
+		testRing.addWay(poly1_1_of_2);
+		assertFalse(testRing.isClosed());
+	}
 
 	@Test
 	public void test_firstEmptyWayThanOpenedWay()
@@ -174,7 +184,7 @@ public class MultipolygonTest {
 		testee.addOuterWay(new Way(111));
 		testee.addOuterWay(poly1_1_of_2);
 		assertEquals(1, testee.countOuterPolygons());
-		// FIXME assertTrue(testee.hasOpenedPolygons());
+		assertTrue(testee.hasOpenedPolygons());
 	}
 
 	@Test
