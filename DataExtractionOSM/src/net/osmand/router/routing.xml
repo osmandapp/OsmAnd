@@ -114,10 +114,16 @@
 		<obstacle tag="barrier" value="bollard" routingPenalty="1000" penalty="25"/> 
 		
 		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
-		<avoid tag="access" value="no"/>
+		
 		<avoid tag="access" value="private" decreasedPriority="0.1"/>
+		<avoid tag="motor_vehicle" value="private" decreasedPriority="0.1"/>
+		
+		<avoid tag="access" value="no"/>
 		<avoid tag="motorcycle" value="no"/>
 		<avoid tag="motorcar" value="no"/>
+		<avoid tag="motor_vehicle" value="no"/>
+		<avoid tag="motorcar" value="no"/>
+		
 		<avoid tag="toll" value="yes" decreasedPriority="1">
 			<specialization input="avoid_toll" />
 		</avoid>
