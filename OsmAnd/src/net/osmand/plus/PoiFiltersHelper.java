@@ -122,11 +122,13 @@ public class PoiFiltersHelper {
 		} else if(UDF_SIGHTSEEING.equals(key)){
 			putAll(types, AmenityType.HISTORIC);
 			putAll(types, AmenityType.TOURISM);
+			putAll(types, AmenityType.OSMWIKI);
 			putValues(types, AmenityType.OTHER, "place_of_worship");
 		} else if(UDF_FOR_TOURISTS.equals(key)){
 			putAll(types, AmenityType.HISTORIC);
 			putAll(types, AmenityType.TOURISM);
 			putAll(types, AmenityType.FINANCE);
+			putAll(types, AmenityType.OSMWIKI);
 			putValues(types, AmenityType.OTHER, "place_of_worship", "internet_access", "embassy","emergency_phone","marketplace",
 					"post_office","telephone", "toilets");
 		} else if(UDF_FUEL.equals(key)){

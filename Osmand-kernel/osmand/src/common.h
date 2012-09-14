@@ -162,8 +162,8 @@ public:
 	int visible;
 	int allObjects;
 	int lastRenderedKey;
-	class ElapsedTimer textRendering;
-	class ElapsedTimer nativeOperations;
+	ElapsedTimer textRendering;
+	ElapsedTimer nativeOperations;
 
 // because they used in 3rd party functions
 public :
@@ -293,6 +293,8 @@ void purgeCachedBitmaps();
 
 int get31TileNumberX(double longitude);
 int get31TileNumberY( double latitude);
+
+double getPowZoom(float zoom);
 
 double getLongitudeFromTile(float zoom, double x) ;
 double getLatitudeFromTile(float zoom, double y);
