@@ -352,15 +352,16 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							restoreRoutingMode();
+							quit = true;
+							restoreRoutingModeInner();
 
 						}
 					});
 					builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							notRestoreRoutingMode();
 							quit = true;
+							notRestoreRoutingMode();
 						}
 					});
 					final AlertDialog dlg = builder.show();
@@ -383,8 +384,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 								delay --;
 								tv.setText(getString(R.string.continue_follow_previous_route_auto, delay + ""));
 								if(delay <= 0) {
-									dlg.dismiss();
-									restoreRoutingMode();
+									if(dlg.isShowing()) {
+										dlg.dismiss();
+									}
+									quit = true;
+									restoreRoutingModeInner();
 								} else {
 									uiHandler.postDelayed(delayDisplay, 1000);
 								}
@@ -394,8 +398,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					delayDisplay.run();
 				}
 
-				private void restoreRoutingMode() {
-					quit = true;
+				private void restoreRoutingModeInner() {
 					AsyncTask<String, Void, GPXFile> task = new AsyncTask<String, Void, GPXFile>() {
 						@Override
 						protected GPXFile doInBackground(String... params) {

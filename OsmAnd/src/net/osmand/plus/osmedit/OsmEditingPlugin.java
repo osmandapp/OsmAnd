@@ -45,6 +45,9 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity){
+		if (osmBugsLayer == null) {
+			registerLayers(activity);
+		}
 		if(mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()){
 			if(settings.SHOW_OSM_BUGS.get()){
 				mapView.addLayer(osmBugsLayer, 2);
