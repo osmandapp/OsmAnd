@@ -497,7 +497,7 @@ void drawPolygon(MapDataObject* mObj, RenderingRuleSearchRequest* req, SkCanvas*
 		if (tx > rc->getWidth()) {
 			tx = rc->getWidth();
 		}
-		float ty = rc->calcX;
+		float ty = rc->calcY;
 		if (ty < 0) {
 			ty = 0;
 		}

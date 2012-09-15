@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources><string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
+<resources>
+  <string name="poi_filter_parking">Parkovanie</string>
+  <string name="poi_filter_emergency">Pomoc v núdzi</string>
+  <string name="poi_filter_public_transport">Verejná doprava</string>
+  <string name="poi_filter_entertainment">Zábava</string>
+  <string name="poi_filter_accomodation">Ubytovanie</string>
+  <string name="poi_filter_restaurants">Reštaurácie</string>
+  <string name="poi_filter_sightseeing">Pamiatky</string>
+  <string name="poi_filter_car_aid">Pomoc s automobilom</string>
+  <string name="poi_filter_food_shop">Jedlo</string>
+  <string name="poi_filter_for_tourists">Pre turistov</string>
+  <string name="poi_filter_fuel">Palivo</string>
+  <string name="btn_add_tag">Pridať značku</string>
+  <string name="btn_advanced_mode">Pokročilý režim...</string>
+  <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
   \n\t* Vylepšená navigácia
   \n\t* Voľba obídenia diaľnic
   \n\t* Zobrazenie Cycleway=track
   \n\t* Vylepšený vzhľad rozhrania (ikony)
   \n\t* Opravy chýb
-</string>
+  </string>
   <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
   <string name="snap_to_road">Prichytiť k ceste</string>
   <string name="avoid_motorway">Diaľniciam</string>
@@ -512,12 +526,8 @@
   <string name="km_h">km/h</string>
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Verzia indexu \'\'{0}\'\' nie je podporovaná</string>
-  <string name="poi_filter_car_aid">Pomoc s automobilom</string>
   <string name="poi_filter_closest_poi">Najbližsí bod záujmu</string>
   <string name="poi_filter_custom_filter">Vlastný filter</string>
-  <string name="poi_filter_food_shop">Obchody s jedlom</string>
-  <string name="poi_filter_for_tourists">Pre turistov</string>
-  <string name="poi_filter_fuel">Palivo</string>
   <string name="poi_filter_namefinder">Online hľadač mien</string>
   <string name="reading_cached_tiles">Načítavajú sa dlaždice zo zásobníka…</string>
   <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' sa nezmestil do pamäti</string>

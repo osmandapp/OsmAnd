@@ -613,9 +613,12 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						if(ch.isChecked()){
+						if (ch.isChecked()) {
 							groupsToDelete.add(model);
-							favoritesToDelete.addAll(helper.getFavoriteGroups().get(model));
+							List<FavouritePoint> fvs = helper.getFavoriteGroups().get(model);
+							if (fvs != null) {
+								favoritesToDelete.addAll(fvs);
+							}
 							favouritesAdapter.notifyDataSetInvalidated();
 						} else {
 							groupsToDelete.remove(model);
