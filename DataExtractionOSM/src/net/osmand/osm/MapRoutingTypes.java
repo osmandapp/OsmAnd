@@ -33,32 +33,43 @@ public class MapRoutingTypes {
 		TAGS_TEXT.add("destination:lanes");
 		TAGS_TEXT.add("duration");
 		
+		TAGS_TO_SAVE.add("agricultural");
 		TAGS_TO_SAVE.add("barrier");
 		TAGS_TO_SAVE.add("bicycle");
+		TAGS_TO_SAVE.add("boat");
 		TAGS_TO_SAVE.add("bridge");
+		TAGS_TO_SAVE.add("bus");
 		TAGS_TO_SAVE.add("construction");
 		TAGS_TO_SAVE.add("direction");
 		TAGS_TO_SAVE.add("ferry");
 		TAGS_TO_SAVE.add("foot");
 		TAGS_TO_SAVE.add("goods");
 		TAGS_TO_SAVE.add("hgv");
+		TAGS_TO_SAVE.add("horse");
 		TAGS_TO_SAVE.add("lanes");
 		TAGS_TO_SAVE.add("maxspeed");
+		TAGS_TO_SAVE.add("maxweight");
 		TAGS_TO_SAVE.add("minspeed");
+		TAGS_TO_SAVE.add("moped");
+		TAGS_TO_SAVE.add("motorboat");
 		TAGS_TO_SAVE.add("motorcar");
 		TAGS_TO_SAVE.add("motorcycle");
+		TAGS_TO_SAVE.add("motor_vehicle");
 		TAGS_TO_SAVE.add("oneway");
 		TAGS_TO_SAVE.add("roundabout");
 		TAGS_TO_SAVE.add("route");
 		TAGS_TO_SAVE.add("service");
+		TAGS_TO_SAVE.add("ship");
 		TAGS_TO_SAVE.add("toll");
 		TAGS_TO_SAVE.add("toll_booth");
+		TAGS_TO_SAVE.add("train");
 		TAGS_TO_SAVE.add("tracktype");
 		TAGS_TO_SAVE.add("traffic_calming");
 		TAGS_TO_SAVE.add("turn:lanes");
 		TAGS_TO_SAVE.add("turn");
 		TAGS_TO_SAVE.add("tunnel");
 		TAGS_TO_SAVE.add("railway");
+		
 	}
 	
 	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>();

@@ -17,12 +17,12 @@ import net.osmand.osm.Way;
  * @author sander
  *
  */
-public class Ring implements Comparable<Ring>{
+public class Ring {
 	/**
 	 * This is a list of the ways added by the user
 	 * The order can be changed with methods from this class
 	 */
-	private ArrayList<Way> ways;
+	private final ArrayList<Way> ways;
 	/**
 	 * This is the closure of the ways added by the user
 	 * So simple two-node ways are added to close the ring
@@ -40,17 +40,10 @@ public class Ring implements Comparable<Ring>{
 	 * Construct a Ring with a list of ways
 	 * @param ways the ways that make up the Ring
 	 */
-	public Ring(List<Way> ways) {
-		this.ways = new ArrayList<Way>();
-		this.ways.addAll(ways);
+	private Ring(List<Way> ways) {
+		this.ways = new ArrayList<Way>(ways);
 	}
 
-	/**
-	 * Construct an empty Ring
-	 */
-	public Ring() {
-		this.ways = new ArrayList<Way>();
-	}
 
 	/**
 	 * Get the ways added to the Ring.
@@ -61,19 +54,6 @@ public class Ring implements Comparable<Ring>{
 	public List<Way> getWays() {
 		return ways;
 	}
-
-	/**
-	 * Add a way to the Ring
-	 * @param w the way to add
-	 */
-	public void addWay(Way w) {
-		// Reset the cache
-		closedWays = null;
-		closedBorder = null;
-		// Add the way
-		ways.add(w);
-	}
-
 	/**
 	 * Get the closed ways that make up the Ring
 	 * This method will sort the ways, so it is CPU intensive
@@ -178,38 +158,30 @@ public class Ring implements Comparable<Ring>{
 			closedWays = new ArrayList<Way>();
 			return;
 		}
-		ArrayList<ArrayList<Way>> multiLines = createMultiLines(ways);
+		closedWays = new ArrayList<Way>(ways);
 		
-		// TODO try to close rings which consist out of multiple segments.
-		// This is a data fault, but it could be solved a bit by OsmAnd
-		if (multiLines.size() != 1) return;
-		
-		ArrayList<Way> multiLine = multiLines.get(0);
-		
-		closedWays = multiLine;
-		
-		long[] endNodes = getMultiLineEndNodes(multiLine);
+		long[] endNodes = getMultiLineEndNodes(ways);
 		if (endNodes[0] != endNodes[1]) {
-			if(multiLine.get(0).getNodes() == null) {
+			if(ways.get(0).getNodes() == null) {
 				Way w = new Way(0L);
 				w.addNode(endNodes[0]);
 				w.addNode(endNodes[1]);
 				closedWays.add(w);
 			} else {
 				Node n1 = null, n2 = null;
-				if (multiLine.get(0).getFirstNodeId() == endNodes[0]) {
-					n1 = multiLine.get(0).getNodes().get(0);
+				if (ways.get(0).getFirstNodeId() == endNodes[0]) {
+					n1 = ways.get(0).getNodes().get(0);
 				} else {
-					int index = multiLine.get(0).getNodes().size() - 1;
-					n1 = multiLine.get(0).getNodes().get(index);
+					int index = ways.get(0).getNodes().size() - 1;
+					n1 = ways.get(0).getNodes().get(index);
 				}
 				
-				int lastML = multiLine.size() - 1;
-				if (multiLine.get(lastML).getFirstNodeId() == endNodes[0]) {
-					n2 = multiLine.get(lastML).getNodes().get(0);
+				int lastML = ways.size() - 1;
+				if (ways.get(lastML).getFirstNodeId() == endNodes[0]) {
+					n2 = ways.get(lastML).getNodes().get(0);
 				} else {
-					int index = multiLine.get(lastML).getNodes().size() - 1;
-					n2 = multiLine.get(lastML).getNodes().get(index);
+					int index = ways.get(lastML).getNodes().size() - 1;
+					n2 = ways.get(lastML).getNodes().get(index);
 				}
 				
 				Way w = new Way(0L);
@@ -524,18 +496,6 @@ public class Ring implements Comparable<Ring>{
 	}
 
 	
-	@Override
-	/**
-	 * @return -1 if this Ring is inside r <br />
-	 * 1 if r is inside this Ring <br />
-	 * 0 otherwise (Rings are next to each other, Rings intersect or Rings are malformed)
-	 */
-	public int compareTo(Ring r) {
-		if (this.isIn(r)) return -1;
-		if (r.isIn(this)) return 1;
-		return 0;
-	}
-
 	/**
 	 * If this Ring is not complete 
 	 * (some ways are not initialized 

@@ -112,6 +112,8 @@ public class Building extends MapObject {
 				if (getInterpolationInterval() != 0 && (num - numB) % getInterpolationInterval() != 0) {
 					return -1;
 				}
+			} else {
+				return -1;
 			}
 			if(numT > numB){
 				if(getInterpolationType() == BuildingInterpolation.EVEN || getInterpolationType() == BuildingInterpolation.ODD){
