@@ -927,7 +927,7 @@
   <string name="map_widget_lock_screen">Vergrendel scherm</string>
   <string name="map_widget_compass">Kompas</string>
   <string name="map_widget_top_stack">Statusbalk:</string>
-  <string name="map_widget_reset">Herstel standaardinstelling</string>
+  <string name="map_widget_reset">Herstel standaard</string>
   <string name="map_widget_right_stack">Rechterkant:</string>
   <string name="map_widget_left_stack">Linkerkant:</string>
   <string name="map_widget_parking">Parkeren</string>
