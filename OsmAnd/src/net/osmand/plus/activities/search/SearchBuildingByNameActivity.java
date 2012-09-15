@@ -87,6 +87,14 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 		return obj.getName(region.useEnglishNames());
 	}
 	
+	@Override
+	public String getShortText(Building obj) {
+		if(obj.getInterpolationInterval() > 0 || obj.getInterpolationType() != null){
+			return "";
+		}
+		return super.getShortText(obj);
+	}
+	
 	
 	@Override
 	public void itemSelected(Building obj) {
