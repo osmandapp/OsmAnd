@@ -359,7 +359,7 @@ public class RouteProvider {
 		}
 		RouteSegment en = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
 		if (en == null) {
-			return new RouteCalculationResult("End point is far from allowed road.");
+			return new RouteCalculationResult(app.getString(R.string.ending_point_too_far));
 		}
 		try {
 			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, leftSide);

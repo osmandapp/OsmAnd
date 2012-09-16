@@ -146,8 +146,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	public void setLabelText(int res) {
-		titleBar.getTitleView().setText(res);
-		//((TextView)findViewById(R.id.Label)).setText(res);
+		titleBar.getTitleView().setText(getString(res));
 	}
 	
 	protected int getZoomToDisplay(T item){

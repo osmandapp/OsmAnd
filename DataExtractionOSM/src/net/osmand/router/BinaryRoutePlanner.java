@@ -167,8 +167,6 @@ public class BinaryRoutePlanner {
 	
 	
 	
-	// TODO TO-DO U-TURN
-	// TODO fastest/shortest way
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
