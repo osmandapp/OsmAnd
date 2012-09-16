@@ -134,30 +134,30 @@
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
 		<!-- <attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>  -->
 		
-		<road tag="highway" value="motorway" speed="16" priority="0.7" dynamicPriority="0.7">
+		<road tag="highway" value="motorway" speed="16" priority="0.4" dynamicPriority="0.4">
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
-		<road tag="highway" value="motorway_link" speed="16" priority="0.7" dynamicPriority="0.7">
+		<road tag="highway" value="motorway_link" speed="16" priority="0.4" dynamicPriority="0.4">
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
 		
-		<road tag="highway" value="trunk" speed="16" priority="0.7" dynamicPriority="0.7"/>
+		<road tag="highway" value="trunk" speed="16" priority="0.6" dynamicPriority="0.6"/>
 		<road tag="highway" value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
-		<road tag="highway" value="primary" speed="16" priority="0.7" dynamicPriority="0.9"/>
-		<road tag="highway" value="primary_link" speed="16" priority="0.9" dynamicPriority="0.9"/>
+		<road tag="highway" value="primary" speed="16" priority="0.8" dynamicPriority="0.9"/>
+		<road tag="highway" value="primary_link" speed="16" priority="0.8" dynamicPriority="0.9"/>
 		<road tag="highway" value="secondary" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="secondary_link" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="tertiary" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="tertiary_link" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="road" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="residential" speed="16" priority="1" dynamicPriority="1"/>
+		<road tag="highway" value="residential" speed="16" priority="1.1" dynamicPriority="1.1"/>
 		<road tag="highway" value="cycleway" speed="16" priority="1.5" dynamicPriority="1"/>
 		
 		<road tag="highway" value="unclassified" speed="13" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="service" speed="13" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="track" speed="12" priority="1.5" dynamicPriority="1.5"/>
 		<road tag="highway" value="path" speed="12" priority="1.5" dynamicPriority="1.5"/>
-		<road tag="highway" value="living_street" speed="13" priority="1" dynamicPriority="1"/>
+		<road tag="highway" value="living_street" speed="15" priority="1.1" dynamicPriority="1.1"/>
 		<road tag="highway" value="pedestrian" speed="10" priority="0.9" dynamicPriority="0.9"/>
 		<road tag="highway" value="footway" speed="8" priority="0.9" dynamicPriority="0.9"/>
 		<road tag="highway" value="byway" speed="8" priority="1" dynamicPriority="1"/>
@@ -168,10 +168,17 @@
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>
 		<obstacle tag="railway" value="level_crossing" penalty="15"/>
-		
+		<obstacle tag="barrier" value="cycle_barrier" penalty="10"/>
+
+		<avoid tag="surface" value="gravel" decreasedPriority="0.2"/>
+		<avoid tag="surface" value="unpaved" decreasedPriority="0.2"/>
+		<avoid tag="surface" value="grass" decreasedPriority="0.6"/>
+		<avoid tag="tracktype" value="grade4" decreasedPriority="0.3"/>
+		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
+		<avoid tag="access" value="private" decreasedPriority="0.1"/>
 		<avoid tag="bicycle" value="no"/>
 	</routingProfile>
-	
+
 	<routingProfile name="pedestrian" baseProfile="pedestrian" restrictionsAware="false" minDefaultSpeed="3" maxDefaultSpeed="5" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="false">
 
