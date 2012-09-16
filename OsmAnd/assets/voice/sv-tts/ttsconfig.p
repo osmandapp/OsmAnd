@@ -33,6 +33,8 @@ go_ahead == ['Kör rakt fram '].
 go_ahead(Dist) == ['Följ den här vägen ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['och du är framme '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['sedan '].
 reached_destination == ['du är framme '].

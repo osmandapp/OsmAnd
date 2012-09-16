@@ -33,6 +33,8 @@ go_ahead == ['Продолжайте движение прямо '].
 go_ahead(Dist) == ['Продолжайте движение ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['и вы прибудете в пункт назначения '].
+and_arrive_intermediate == ['и вы прибудете в промежуточный пункт '].
+reached_intermediate == ['вы прибыли в промежуточный пункт'].
 
 then == ['затем '].
 reached_destination == ['вы прибыли в пункт назначения '].

@@ -339,62 +339,103 @@ public class RouteInfoControls {
 		return speedControl;
 	}
 	
-	protected TextInfoControl createDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final OsmandMapTileView view = map.getMapView();
-		TextInfoControl distanceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
-			private float[] calculations = new float[1];
-			private int cachedMeters = 0;
-			
-			
-			@Override
-			public boolean updateInfo() {
-				if (map.getPointToNavigate() != null) {
-					int d = 0;
-					if (map.getRoutingHelper().isRouteCalculated()) {
-						d = map.getRoutingHelper().getLeftDistance();
+	public abstract static class DistanceToPointInfoControl extends TextInfoControl {
+
+		private final OsmandMapTileView view;
+		private float[] calculations = new float[1];
+		private int cachedMeters;
+
+		public DistanceToPointInfoControl(Context ctx, int leftMargin, Paint textPaint, Paint subtextPaint, Drawable d,
+				final OsmandMapTileView view) {
+			super(ctx, leftMargin, textPaint, subtextPaint);
+			this.view = view;
+			setImageDrawable(d);
+			setText(null, null);
+			setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
+					LatLon pointToNavigate = getPointToNavigate();
+					if (pointToNavigate != null) {
+						float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
+						thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
 					}
-					if (d == 0) {
-						Location.distanceBetween(view.getLatitude(), view.getLongitude(), map.getPointToNavigate().getLatitude(), map
-								.getPointToNavigate().getLongitude(), calculations);
-						d = (int) calculations[0];
-					}
-					if (distChanged(cachedMeters, d)) {
-						cachedMeters = d;
-						if (cachedMeters <= 20) {
-							cachedMeters = 0;
-							setText(null, null);
-						} else {
-							String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map);
-							int ls = ds.lastIndexOf(' ');
-							if (ls == -1) {
-								setText(ds, null);
-							} else {
-								setText(ds.substring(0, ls), ds.substring(ls + 1));
-							}
-						}
-						return true;
-					}
-				} else if (cachedMeters != 0) {
+				}
+			});
+		}
+		@Override
+		public boolean updateInfo() {
+			int d = getDistance();
+			if (distChanged(cachedMeters, d)) {
+				cachedMeters = d;
+				if (cachedMeters <= 20) {
 					cachedMeters = 0;
 					setText(null, null);
-					return true;
+				} else {
+					String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getContext());
+					int ls = ds.lastIndexOf(' ');
+					if (ls == -1) {
+						setText(ds, null);
+					} else {
+						setText(ds.substring(0, ls), ds.substring(ls + 1));
+					}
 				}
-				return false;
+				return true;
+			}
+			return false;
+		}
+
+		public abstract LatLon getPointToNavigate();
+
+		public int getDistance() {
+			int d = 0;
+			LatLon l = getPointToNavigate();
+			if (l != null) {
+				Location.distanceBetween(view.getLatitude(), view.getLongitude(), l.getLatitude(), l.getLongitude(), calculations);
+				d = (int) calculations[0];
+			}
+			return d;
+		}
+	}
+	
+	protected TextInfoControl createDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final OsmandMapTileView view = map.getMapView();
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
+				.getDrawable(R.drawable.info_target), view) {
+			@Override
+			public LatLon getPointToNavigate() {
+				return map.getPointToNavigate();
+			}
+
+			@Override
+			public int getDistance() {
+				if (map.getRoutingHelper().isRouteCalculated()) {
+					return map.getRoutingHelper().getLeftDistance();
+				}
+				return super.getDistance();
 			}
 		};
-		distanceControl.setOnClickListener(new View.OnClickListener() {
+		return distanceControl;
+	}
+	
+	protected TextInfoControl createIntermediateDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final OsmandMapTileView view = map.getMapView();
+		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
+				.getDrawable(R.drawable.info_intermediate), view) {
 			@Override
-			public void onClick(View v) {
-				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-				LatLon pointToNavigate = view.getSettings().getPointToNavigate();
-				if (pointToNavigate != null) {
-					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
-					thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-				}
+			public LatLon getPointToNavigate() {
+				return map.getFirstIntermediatePoint();
 			}
-		});
-		distanceControl.setText(null, null);
-		distanceControl.setImageDrawable(view.getResources().getDrawable(R.drawable.info_target));
+
+			@Override
+			public int getDistance() {
+				if (getPointToNavigate() != null && map.getRoutingHelper().isRouteCalculated()) {
+					return map.getRoutingHelper().getLeftDistanceNextIntermediate();
+				}
+				return super.getDistance();
+			}
+		};
 		return distanceControl;
 	}
 	
@@ -602,7 +643,7 @@ public class RouteInfoControls {
 	}
 	
 	
-	public boolean distChanged(int oldDist, int dist){
+	public static boolean distChanged(int oldDist, int dist){
 		if(oldDist != 0 && Math.abs(oldDist - dist) < 10){
 			return false;
 		}

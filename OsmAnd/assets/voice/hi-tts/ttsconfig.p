@@ -33,6 +33,8 @@ go_ahead == [' सीधे आगे जाये '].
 go_ahead(Dist) == [D, ' तक रास्ते का पालन करे ']:- distance(Dist) == D.
 
 and_arrive_destination == [' और अपनी मंजिल पर पहोचे '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['और फिर '].
 reached_destination == ['आप अपनी मंजिल पर पहोच चुके है '].

@@ -37,8 +37,12 @@ roundabout(Dist, _Angle, Exit) == ['after-n.ogg',D, 'enter_the_roundabout-e.ogg'
 roundabout(_Angle, Exit) == ['take_the.ogg', E, 'exit-e.ogg'] :- nth(Exit, E).
 
 and_arrive_destination == ['then.ogg', delay_150, 'arrive_at_your_destination-e.ogg'].
-then == ['then.ogg', delay_150].
+
 reached_destination == ['you_have_reached_your_destination.ogg'].
+and_arrive_intermediate == ['arrive_at_viapoint-e.ogg'].
+reached_intermediate == ['you_have_reached_a_viapoint.ogg'].
+
+then == ['then.ogg', delay_150].
 bear_right == ['keep_right-e.ogg'].
 location_lost == ['gps_signal_lost.ogg'].
 bear_left == ['keep_left-e.ogg'].

@@ -33,6 +33,8 @@ go_ahead == ['Haladj tovább egyenesen '].
 go_ahead(Dist) == ['Menj tovább ', D] :- distance(Dist, t) == D.
 
 and_arrive_destination == ['és megérkezel az úti célhoz '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['majd '].
 reached_destination == ['megérkeztél az úti célhoz '].

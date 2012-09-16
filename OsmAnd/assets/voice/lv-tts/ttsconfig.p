@@ -33,6 +33,8 @@ go_ahead == ['Dodaties taisni uz priekšu '].
 go_ahead(Dist) == ['Brauciet pa ceļu ', D]:- distance2(Dist) == D.
 
 and_arrive_destination == ['un ierodaties galapunktā '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['tad '].
 reached_destination == ['jūs esiet nokļuvis galapunktā '].

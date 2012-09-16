@@ -191,9 +191,17 @@ public class VoiceRouter {
 		// after last turn say:
 		if (nextInfo == null || nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){ This caused this prompt to be suppressed when coming back from a
-			// UTwp situation
 			if (currentStatus <= STATUS_UNKNOWN) {
 				if (playGoAheadToDestination()) {
+					currentStatus = STATUS_TOLD;
+					playGoAheadDist = 0;
+				}
+			}
+			return;
+		}
+		if(nextInfo.intermediatePoint){
+			if (currentStatus <= STATUS_UNKNOWN) {
+				if (playGoAheadToIntermediate()) {
 					currentStatus = STATUS_TOLD;
 					playGoAheadDist = 0;
 				}
@@ -338,6 +346,15 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			play.goAhead(router.getLeftDistance()).andArriveAtDestination().play();
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean playGoAheadToIntermediate() {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if(play != null){
+			play.goAhead(router.getLeftDistanceNextIntermediate()).andArriveAtDestination().play();
 			return true;
 		}
 		return false;
@@ -503,6 +520,13 @@ public class VoiceRouter {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
 			play.arrivedAtDestination().play();
+		}
+	}
+	
+	public void arrivedIntermediatePoint() {
+		CommandBuilder play = getNewCommandPlayerToPlay();
+		if(play != null){
+			play.arrivedAtIntermediatePoint().play();
 		}
 	}
 

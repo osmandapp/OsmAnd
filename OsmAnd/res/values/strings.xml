@@ -9,6 +9,10 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="intermediate_point_too_far">Intermediate point %1$s too far from nearest road.</string>
+    <string name="arrived_at_intermediate_point">You have arrived at your intermediate point</string>
+    <string name="context_menu_item_intermediate_point">Add intermediate point</string>
+    <string name="map_widget_intermediate_distance">Intermediate point</string>
     <string name="ending_point_too_far">Starting point too far from nearest road.</string>
     <string name="btn_add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode...</string>

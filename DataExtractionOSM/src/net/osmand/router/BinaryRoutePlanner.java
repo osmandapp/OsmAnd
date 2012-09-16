@@ -165,6 +165,10 @@ public class BinaryRoutePlanner {
 		return road;
 	}
 	
+	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, List<RouteSegment> intermediate, boolean leftSideNavigation) throws IOException {
+		// TODO
+		return searchRoute(ctx, start, end, leftSideNavigation);
+	}
 	
 	
 	/**

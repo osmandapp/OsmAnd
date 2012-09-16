@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class SearchHistoryHelper {
 	
 	private static SearchHistoryHelper helper = new SearchHistoryHelper();
-	private static final int HISTORY_LIMIT = 10;
+	private static final int HISTORY_LIMIT = 50;
 	
 	public static SearchHistoryHelper getInstance(){
 		return helper;

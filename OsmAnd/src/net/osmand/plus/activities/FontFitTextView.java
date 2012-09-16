@@ -10,9 +10,6 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/* Based on 
- * from http://stackoverflow.com/questions/2617266/how-to-adjust-text-font-size-to-fit-textview
- */
 public class FontFitTextView extends LinearLayout {
 
 	private static float MAX_TEXT_SIZE = 28;

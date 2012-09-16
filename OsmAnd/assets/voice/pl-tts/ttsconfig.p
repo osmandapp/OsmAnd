@@ -33,6 +33,8 @@ go_ahead == ['Jedź prosto '].
 go_ahead(Dist) == ['Jedź prosto ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['następnie dojedź do celu '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['następnie '].
 reached_destination == ['Cel został osiągnięty! '].
