@@ -189,7 +189,7 @@ public class VoiceRouter {
 		
 		NextDirectionInfo nextInfo = router.getNextRouteDirectionInfo(new NextDirectionInfo(), true);
 		// after last turn say:
-		if (nextInfo == null || nextInfo.directionInfo.distance == 0) {
+		if (nextInfo == null || nextInfo.directionInfo == null || nextInfo.directionInfo.distance == 0) {
 			// if(currentStatus <= STATUS_UNKNOWN && currentDirection > 0){ This caused this prompt to be suppressed when coming back from a
 			// UTwp situation
 			if (currentStatus <= STATUS_UNKNOWN) {

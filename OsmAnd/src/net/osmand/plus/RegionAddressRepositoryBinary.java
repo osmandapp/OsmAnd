@@ -244,7 +244,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 								addCityToPreloadedList(object);
 								canceled = true;
 							}
-						} else if (object.getId().longValue() == id) {
+						} else if (object.getId() != null && object.getId().longValue() == id) {
 							addCityToPreloadedList((City) object);
 							canceled = true;
 						}

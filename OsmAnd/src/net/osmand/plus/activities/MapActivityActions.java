@@ -168,7 +168,10 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// Don't use showDialog because it is impossible to refresh favorite items list
-				createReplaceFavouriteDialog(args).show();
+				Dialog dlg = createReplaceFavouriteDialog(args);
+				if(dlg != null) {
+					dlg.show();
+				}
 				// mapActivity.showDialog(DIALOG_REPLACE_FAVORITE);
 			}
 			

@@ -145,12 +145,13 @@ public class PoiFilter {
 	}
 	
 	public ResultMatcher<Amenity> getResultMatcher(final ResultMatcher<Amenity> matcher){
-		if(nameFilter != null) {
+		final String filter = nameFilter;
+		if(filter != null) {
 			final boolean en = application.getSettings().USE_ENGLISH_NAMES.get();
 			return new ResultMatcher<Amenity>() {
 				@Override
 				public boolean publish(Amenity object) {
-					if(!OsmAndFormatter.getPoiStringWithoutType(object, en).toLowerCase().contains(nameFilter) || 
+					if(!OsmAndFormatter.getPoiStringWithoutType(object, en).toLowerCase().contains(filter) || 
 							(matcher != null && !matcher.publish(object))) {
 						return false;
 					}
