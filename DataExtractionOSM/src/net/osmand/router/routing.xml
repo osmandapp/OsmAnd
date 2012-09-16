@@ -145,21 +145,20 @@
 		<road tag="highway" value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.7"/>
 		<road tag="highway" value="primary" speed="16" priority="0.8" dynamicPriority="0.9"/>
 		<road tag="highway" value="primary_link" speed="16" priority="0.8" dynamicPriority="0.9"/>
-		<road tag="highway" value="secondary" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="secondary_link" speed="16" priority="1" dynamicPriority="1"/>
+		<road tag="highway" value="secondary" speed="16" priority="0.9" dynamicPriority="0.9"/>
+		<road tag="highway" value="secondary_link" speed="16" priority="0.9" dynamicPriority="0.9"/>
 		<road tag="highway" value="tertiary" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="tertiary_link" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="road" speed="16" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="residential" speed="16" priority="1.1" dynamicPriority="1.1"/>
-		<road tag="highway" value="cycleway" speed="16" priority="1.5" dynamicPriority="1"/>
-		
+		<road tag="highway" value="cycleway" speed="16" priority="1.3" dynamicPriority="1.3"/>
 		<road tag="highway" value="unclassified" speed="13" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="service" speed="13" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="track" speed="12" priority="1.5" dynamicPriority="1.5"/>
-		<road tag="highway" value="path" speed="12" priority="1.5" dynamicPriority="1.5"/>
+		<road tag="highway" value="track" speed="12" priority="1.3" dynamicPriority="1.3"/>
+		<road tag="highway" value="path" speed="12" priority="1.3" dynamicPriority="1.3"/>
 		<road tag="highway" value="living_street" speed="15" priority="1.1" dynamicPriority="1.1"/>
 		<road tag="highway" value="pedestrian" speed="10" priority="0.9" dynamicPriority="0.9"/>
-		<road tag="highway" value="footway" speed="8" priority="0.9" dynamicPriority="0.9"/>
+		<road tag="highway" value="footway" speed="12" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="byway" speed="8" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="services" speed="13" priority="1" dynamicPriority="1"/>
 		<road tag="highway" value="bridleway" speed="8" priority="0.8" dynamicPriority="0.8"/>
