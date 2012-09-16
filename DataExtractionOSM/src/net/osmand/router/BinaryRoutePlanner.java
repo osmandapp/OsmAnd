@@ -166,8 +166,38 @@ public class BinaryRoutePlanner {
 	}
 	
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, List<RouteSegment> intermediate, boolean leftSideNavigation) throws IOException {
-		// TODO
+		if(intermediate != null && intermediate.size() > 0) {
+			// TODO previously calculated route
+			ArrayList<RouteSegment> ps = new ArrayList<RouteSegment>(intermediate);
+			ps.add(end);
+			ps.add(0, start);
+			List<RouteSegmentResult> results = new ArrayList<RouteSegmentResult>();
+			for (int i = 0; i < ps.size() - 1; i++) {
+				RoutingContext local = new RoutingContext(ctx.config);
+				local.visitor = ctx.visitor;
+				List<RouteSegmentResult> res = searchRouteInternal(local, ps.get(i), ps.get(i + 1), leftSideNavigation);
+				results.addAll(res);
+				ctx.distinctLoadedTiles += local.distinctLoadedTiles;
+				ctx.distinctUnloadedTiles.addAll(local.distinctUnloadedTiles);
+				ctx.loadedTiles += local.loadedTiles;
+				ctx.loadedPrevUnloadedTiles += local.loadedPrevUnloadedTiles;
+				ctx.timeToCalculate += local.timeToCalculate;
+				ctx.timeToLoad += local.timeToLoad;
+				ctx.relaxedSegments += local.relaxedSegments;
+			}
+			printResults(ctx, start, end, results);
+			return results;
+		}
 		return searchRoute(ctx, start, end, leftSideNavigation);
+	}
+	
+	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException {
+		List<RouteSegmentResult> result = searchRouteInternal(ctx, start, end, leftSideNavigation);
+		if(result != null) {
+			printResults(ctx, start, end, result);
+		}
+		
+		return result;
 	}
 	
 	
@@ -175,7 +205,7 @@ public class BinaryRoutePlanner {
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException {
+	public List<RouteSegmentResult> searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -318,10 +348,10 @@ public class BinaryRoutePlanner {
 			}
 		}
 		println("Result is found");
+		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		
 		// 4. Route is found : collect all segments and prepare result
 		List<RouteSegmentResult> resultPrepared = prepareResult(ctx, start, end, leftSideNavigation);
-		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		Object[] vls = ctx.tiles.values();
 		for(Object tl : vls) {
 			ctx.unloadTile((RoutingTile) tl, false);
@@ -727,8 +757,8 @@ public class BinaryRoutePlanner {
 						ctx.finalReverseEndSegment = next.segmentStart;
 						ctx.finalReverseRoute = opposite;
 					}
+					return true;
 				}
-				return true;
 			}
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = visitedSegments.contains(nts);
@@ -888,6 +918,11 @@ public class BinaryRoutePlanner {
 			
 		}
 		addTurnInfo(leftside, result);
+		return result;
+	}
+
+
+	private void printResults(RoutingContext ctx, RouteSegment start, RouteSegment end, List<RouteSegmentResult> result) {
 		float completeTime = 0;
 		float completeDistance = 0;
 		for(RouteSegmentResult r : result) {
@@ -936,7 +971,6 @@ public class BinaryRoutePlanner {
 			}
 		}
 		println("</test>");
-		return result;
 	}
 
 

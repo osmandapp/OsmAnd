@@ -369,6 +369,7 @@ public class RouteProvider {
 				if (is == null) {
 					return new RouteCalculationResult(app.getString(R.string.intermediate_point_too_far, "'" + ind + "'"));
 				}
+				inters.add(is);
 				ind++;
 			}
 		}
