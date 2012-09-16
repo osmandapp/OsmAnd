@@ -983,11 +983,15 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 		bool land = q->mixed;
 		bool addBasemapCoastlines = true;
 		bool emptyData = q->zoom > BASEMAP_ZOOM && tempResult.empty() && coastLines.empty();
+		// determine if there are enough objects like land/lake..
 		bool basemapMissing = q->zoom <= BASEMAP_ZOOM && basemapCoastLines.empty() && !basemapExists;
+		bool detailedLandData = q->zoom >= 14 && tempResult.size() > 0;
 		if (!coastLines.empty()) {
 			bool coastlinesWereAdded = processCoastlines(coastLines, q->left, q->right, q->bottom, q->top, q->zoom,
 					basemapCoastLines.empty(), true, tempResult);
-			addBasemapCoastlines = !coastlinesWereAdded || q->zoom <= BASEMAP_ZOOM;
+			addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || q->zoom <= BASEMAP_ZOOM;
+		} else {
+			addBasemapCoastlines = !detailedLandData;
 		}
 		if (addBasemapCoastlines) {
 			addBasemapCoastlines = false;
