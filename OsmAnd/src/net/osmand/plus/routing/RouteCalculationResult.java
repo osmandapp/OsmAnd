@@ -621,6 +621,10 @@ public class RouteCalculationResult {
 		}
 	}
 	
+	public void passIntermediatePoint(){
+		nextIntermediate ++ ;
+	}
+	
 	public Location getLocationFromRouteDirection(RouteDirectionInfo i){
 		if(i.routePointOffset < locations.size()){
 			return locations.get(i.routePointOffset);

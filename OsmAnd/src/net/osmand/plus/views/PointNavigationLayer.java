@@ -97,7 +97,8 @@ public class PointNavigationLayer extends OsmandMapLayer {
 				int locationY = view.getMapYForPoint(ip.getLatitude());
 				canvas.rotate(-view.getRotate(), locationX, locationY);
 				canvas.drawBitmap(intermediatePoint, locationX - marginX, locationY - marginY, bitmapPaint);
-				canvas.drawText(index + "", locationX + marginX, locationY, textPaint);
+				canvas.drawText(index + "", locationX + marginX, locationY - marginY / 2, textPaint);
+				canvas.rotate(view.getRotate(), locationX, locationY);
 			}
 		}
 		if (isLocationVisible(pointToNavigate)) {

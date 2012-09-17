@@ -339,22 +339,23 @@ public class RoutingHelper {
 		}
 		
 		// 2. check if intermediate found
-		if(getLeftDistanceNextIntermediate() < posTolerance * 1.5f){
+		if(route.getIntermediatePointsToPass()  > 0 && route.getDistanceToNextIntermediate(lastFixedLocation) < posTolerance) {
 			showMessage(context.getString(R.string.arrived_at_intermediate_point));
 			voiceRouter.arrivedIntermediatePoint();
-		}
-		if(intermediatePoints != null && intermediatePoints.size() > 0) {
-			while(route.getIntermediatePointsToPass() > settings.getIntermediatePoints().size()) {
+			route.passIntermediatePoint();
+			int toDel = settings.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
+			while(toDel > 0) {
 				settings.deleteIntermediatePoint(0);
+				toDel--;
 			}
-			while(route.getIntermediatePointsToPass() > intermediatePoints.size()) {
+			while(intermediatePoints != null  && route.getIntermediatePointsToPass() < intermediatePoints.size()) {
 				intermediatePoints.remove(0);
 			}
 		}
 
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < posTolerance * 1.5) {
+		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < posTolerance * 1.2) {
 			showMessage(context.getString(R.string.arrived_at_destination));
 			voiceRouter.arrivedDestinationPoint();
 			clearCurrentRoute(null, null);
