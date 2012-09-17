@@ -372,6 +372,24 @@ public class RoutingContext {
 		}
 	}
 	
+	public void copyLoadedDataAndClearCaches(RoutingContext ctx) {
+		for(RoutingTile tl : ctx.tiles.valueCollection()) {
+			if(tl.isLoaded()) {
+				this.tiles.put(tl.getId(), tl);
+				for(RouteSegment rs : tl.routes.valueCollection()) {
+					RouteSegment s = rs;
+					while(s != null) {
+						s.parentRoute = null;
+						s.parentSegmentEnd = 0;
+						s.distanceFromStart = 0;
+						s.distanceToEnd = 0;
+						s = s.next;
+					}
+				}
+			}
+		}
+	}
+	
 	public static class RoutingTile {
 		private int tileX;
 		private int tileY;
@@ -489,4 +507,5 @@ public class RoutingContext {
 		}
 		
 	}
+
 }

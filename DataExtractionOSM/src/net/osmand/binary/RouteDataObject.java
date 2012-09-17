@@ -206,9 +206,16 @@ public class RouteDataObject {
 		}
 		return -1;
 	}
+	
+	public double directionRoute(int startPoint, boolean plus) {
+		// Victor : the problem to put more than 5 meters that BinaryRoutePlanner will treat
+		// 2 consequent Turn Right as UT and here 2 points will have same turn angle
+		// So it should be fix in both places
+		return directionRoute(startPoint, plus, 5);
+	}
 
 	// Gives route direction of EAST degrees from NORTH ]-PI, PI]
-	public double directionRoute(int startPoint, boolean plus) {
+	public double directionRoute(int startPoint, boolean plus, float dist) {
 		int x = getPoint31XTile(startPoint);
 		int y = getPoint31YTile(startPoint);
 		int nx = startPoint;
@@ -231,10 +238,7 @@ public class RouteDataObject {
 			py = getPoint31YTile(nx);
 			// translate into meters
 			total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
-			// Victor : the problem to put more than 5 meters that BinaryRoutePlanner will treat
-			// 2 consequent Turn Right as UT and here 2 points will have same turn angle
-			// So it should be fix in both places
-		} while (total < 5);
+		} while (total < dist);
 		return -Math.atan2( x - px, y - py );
 	}
 	
