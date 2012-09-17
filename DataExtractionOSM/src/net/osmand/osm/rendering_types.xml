@@ -516,11 +516,11 @@
 	</category>
 
 	<category name="education" poi_category="education">
-		<type tag="amenity" value="kindergarten" minzoom="15" />
-		<type tag="amenity" value="school" minzoom="15" />
-		<type tag="amenity" value="college" minzoom="15" />
-		<type tag="amenity" value="library" minzoom="15" />
-		<type tag="amenity" value="university" minzoom="15" />
+		<type tag="amenity" value="kindergarten" minzoom="13" />
+		<type tag="amenity" value="school" minzoom="13" />
+		<type tag="amenity" value="college" minzoom="13" />
+		<type tag="amenity" value="library" minzoom="13" />
+		<type tag="amenity" value="university" minzoom="13" />
 	</category>
 
 	<category name="transportation" poi_category="transportation">

@@ -40,45 +40,33 @@
 	
 
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
-	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="130.0" 
-			leftTurn="20" rightTurn="15" roundaboutTurn="20" followSpeedLimitations="true" onewayAware="true">
-		<road tag="highway" value="motorway" speed="110" priority="1.2" dynamicPriority="1">
-			<specialization input="avoid_motorway" speed="0"/>
-		</road>
-		<road tag="highway" value="motorway_link" speed="80" priority="1.2" dynamicPriority="1">
-			<specialization input="avoid_motorway" speed="0"/>
-		</road>
+	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="110.0" 
+			leftTurn="15" rightTurn="30" roundaboutTurn="15" followSpeedLimitations="true" onewayAware="true">
+		<highway value="motorway" speed="80" priority="1.2" dynamicPriority="1"/>
+		<highway value="motorway_link" speed="60" priority="1.2" dynamicPriority="1"/>
 		
-		<road tag="highway" value="trunk" speed="100" priority="1.2" dynamicPriority="1"/>
-		<road tag="highway" value="trunk_link" speed="75" priority="1.2" dynamicPriority="1"/>
+		<highway value="trunk" speed="40" priority="1.2" dynamicPriority="1"/>
+		<highway value="trunk_link" speed="40" priority="1.2" dynamicPriority="1"/>
 		
 		<!-- generally linking larger towns. -->
-		<road tag="highway" value="primary" speed="65" priority="1.1" dynamicPriority="1"/>
-		<road tag="highway" value="primary_link" speed="50" priority="1.1" dynamicPriority="1"/>
+		<highway value="primary" speed="30" priority="1.1" dynamicPriority="1"/>
+		<highway value="primary_link" speed="30" priority="1.1" dynamicPriority="1"/>
 		
 		<!-- generally linking smaller towns and villages -->
-		<road tag="highway" value="secondary" speed="60" priority="1.05" dynamicPriority="1"/>
-		<road tag="highway" value="secondary_link" speed="50" priority="1.05" dynamicPriority="1"/>
+		<highway value="secondary" speed="25" priority="1.05" dynamicPriority="1"/>
+		<highway value="secondary_link" speed="25" priority="1.05" dynamicPriority="1"/>
 		
 		<!-- important urban roads -->
-		<road tag="highway" value="tertiary" speed="45" priority="1" dynamicPriority="0.9"/>
-		<road tag="highway" value="tertiary_link" speed="40" priority="1" dynamicPriority="0.9"/>
+		<highway value="tertiary" speed="25" priority="1" dynamicPriority="0.9"/>
+		<highway value="tertiary_link" speed="25" priority="1" dynamicPriority="0.9"/>
 		<!-- lowest form of grid network, usually 90% of urban roads -->
-		<road tag="highway" value="unclassified" speed="35" priority="0.7" dynamicPriority="0.7">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
-		</road>
+		<highway value="unclassified" speed="20" priority="0.7" dynamicPriority="0.7"/>
 		<!-- road = no type, no review and may be not accurate -->
-		<road tag="highway" value="road" speed="35" priority="0.7" dynamicPriority="0.7">
-			<specialization input="short_way" priority="1" speed="45"/>
-		</road>
+		<highway value="road" speed="20" priority="0.7" dynamicPriority="0.7"/>
 		<!-- primarily for access to properties, small roads with 1/2 intersections -->
-		<road tag="highway" value="residential" speed="35" priority="0.7" dynamicPriority="0.7">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
-		</road>
+		<highway value="residential" speed="20" priority="0.7" dynamicPriority="0.7"/>
 		<!-- parking + private roads -->
-		<road tag="highway" value="service" speed="30" priority="0.5" dynamicPriority="0.5">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
-		</road>
+		<highway value="service" speed="15" priority="0.5" dynamicPriority="0.5"/>
 		<!-- very bad roads -->
 		<road tag="highway" value="track" speed="15" priority="0.3" dynamicPriority="0.5">
 			<specialization input="short_way" priority="0.7" speed="45" dynamicPriority="0.7" />
