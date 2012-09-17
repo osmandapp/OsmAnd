@@ -354,7 +354,7 @@ public class VoiceRouter {
 	private boolean playGoAheadToIntermediate() {
 		CommandBuilder play = getNewCommandPlayerToPlay();
 		if(play != null){
-			play.goAhead(router.getLeftDistanceNextIntermediate()).andArriveAtDestination().play();
+			play.goAhead(router.getLeftDistanceNextIntermediate()).andArriveAtIntermediatePoint().play();
 			return true;
 		}
 		return false;
