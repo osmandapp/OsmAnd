@@ -147,12 +147,12 @@ public class BasemapProcessor {
 		this.zoomWaySmothness = zoomWaySmothness;
 		constructBitSetInfo();
 		quadTrees = new SimplisticQuadTree[mapZooms.getLevels().size()];
-		for (int i=0;i< mapZooms.getLevels().size(); i++) {
+		for (int i = 0; i < mapZooms.getLevels().size(); i++) {
 			MapZoomPair p = mapZooms.getLevels().get(i);
 			quadTrees[i] = constructTilesQuadTree(Math.min(p.getMaxZoom() - 1, 12));
 		}
 	}
-
+	
 	private void constructBitSetInfo() {
 		try {
 			
@@ -190,7 +190,11 @@ public class BasemapProcessor {
 		}
 	}
 	
-	private boolean isWaterTile(int x, int y, int zoom) {
+	public int getTileZoomLevel(){
+		return TILE_ZOOMLEVEL;
+	}
+	
+	public boolean isWaterTile(int x, int y, int zoom) {
 		if (zoom >= TILE_ZOOMLEVEL) {
 			int x1 = x >> (zoom - TILE_ZOOMLEVEL);
 			int y1 = y >> (zoom - TILE_ZOOMLEVEL);
@@ -204,7 +208,7 @@ public class BasemapProcessor {
 			int max = 1 << TILE_ZOOMLEVEL - zoom;
 			for (int i = 0; i < max; i++) {
 				for (int j = 0; j < max; j++) {
-					if (!seaTileInfo.get((y1 + i) * 4096 + (x1 + i))) {
+					if (!seaTileInfo.get((y1 + j) * 4096 + (x1 + i))) {
 						return false;
 					}
 				}
@@ -213,7 +217,7 @@ public class BasemapProcessor {
 		}
 	}
 	
-	private boolean isLandTile(int x, int y, int zoom) {
+	public boolean isLandTile(int x, int y, int zoom) {
 		if (zoom >= TILE_ZOOMLEVEL) {
 			int x1 = x >> (zoom - TILE_ZOOMLEVEL);
 			int y1 = y >> (zoom - TILE_ZOOMLEVEL);
@@ -224,10 +228,10 @@ public class BasemapProcessor {
 		} else {
 			int x1 = x << (TILE_ZOOMLEVEL - zoom);
 			int y1 = y << (TILE_ZOOMLEVEL - zoom);
-			int max = 1 << TILE_ZOOMLEVEL - zoom;
+			int max = 1 << (TILE_ZOOMLEVEL - zoom);
 			for (int i = 0; i < max; i++) {
 				for (int j = 0; j < max; j++) {
-					if (!landTileInfo.get((y1 + i) * 4096 + (x1 + i))) {
+					if (!landTileInfo.get((y1 + i) * 4096 + (x1 + j))) {
 						return false;
 					}
 				}

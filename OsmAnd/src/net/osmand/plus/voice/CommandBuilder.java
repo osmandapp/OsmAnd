@@ -25,8 +25,11 @@ public class CommandBuilder {
 	protected static final String C_MAKE_UTWP = "make_ut_wp";  //$NON-NLS-1$
 	protected static final String C_PREAMBLE = "preamble";  //$NON-NLS-1$
 	protected static final String C_AND_ARRIVE_DESTINATION = "and_arrive_destination";  //$NON-NLS-1$
-	protected static final String C_THEN = "then";  //$NON-NLS-1$
 	protected static final String C_REACHED_DESTINATION = "reached_destination";  //$NON-NLS-1$
+	protected static final String C_AND_ARRIVE_INTERMEDIATE = "and_arrive_intermediate";  //$NON-NLS-1$
+	protected static final String C_REACHED_INTERMEDIATE = "reached_intermediate";  //$NON-NLS-1$
+	protected static final String C_THEN = "then";  //$NON-NLS-1$
+	
 	protected static final String C_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
 	protected static final String C_BEAR_RIGHT = "bear_right";  //$NON-NLS-1$
 	protected static final String C_ROUTE_RECALC = "route_recalc";  //$NON-NLS-1$
@@ -151,6 +154,14 @@ public class CommandBuilder {
 		return addCommand(C_REACHED_DESTINATION);
 	}
 	
+	public CommandBuilder arrivedAtIntermediatePoint() {
+		return addCommand(C_REACHED_INTERMEDIATE);
+	}
+	
+	public CommandBuilder andArriveAtIntermediatePoint(){
+		return addCommand(C_AND_ARRIVE_INTERMEDIATE);
+	}
+	
 	public CommandBuilder bearLeft(){
 		return addCommand(C_BEAR_LEFT);
 	}
@@ -185,6 +196,7 @@ public class CommandBuilder {
 		alreadyExecuted = true;
 		return this.commandPlayer.execute(listStruct);
 	}
+
 
 	
 }

@@ -2,19 +2,25 @@
 <regions_list>
 
 		<!-- 6. AFRICA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="true">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="true">
 			<region name="africa" esize=""/>
 		</regions>
 		<!-- 6. AFRICA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="false">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/africa/{0}.osm.pbf" region_prefix="" region_suffix="_Africa"  skip="false">
+			<region name="burkina_faso" esize="" />
 			<region name="canary_islands" esize="" />
+			<region name="congo_democratic_republic" esize="" />
+			<region name="egypt" esize="" />
 			<region name="ethiopia" esize="" />
+			<region name="guinea-bissau" esize="" />
 			<region name="guinea" esize="" />
 			<region name="ivory_coast" esize="" />
 			<region name="liberia" esize="" />
 			<region name="libya" esize="" />
 			<region name="madagascar" esize="" />
 			<region name="morocco" esize="" />
+			<region name="nigeria" esize="" />
+			<region name="somalia" esize="" />
 			<region name="south_africa_and_lesotho" esize="" />
 			<region name="tanzania" esize="" />
 		</regions>

@@ -42,6 +42,8 @@ go_ahead == ['Jatka suoraan '].
 go_ahead(Dist) == ['Jatka suoraan ', D]:- distance(Dist, metria) == D.
 
 and_arrive_destination == ['ja olet perillä '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['sitten '].
 reached_destination == ['olet perillä '].

@@ -61,12 +61,18 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity){
 		osmBugsLayer = new OsmBugsLayer(activity);
 	}
+	
+	public OsmBugsLayer getBugsLayer(MapActivity activity) {
+		if(osmBugsLayer == null) {
+			registerLayers(activity);
+		}
+		return osmBugsLayer;
+	}
 
 	@Override
 	public void mapActivityCreate(MapActivity activity) {
-		poiActions = new EditingPOIActivity(activity);
-		activity.addDialogProvider(poiActions);
-		activity.addDialogProvider(osmBugsLayer);
+		activity.addDialogProvider(getPoiActions(activity));
+		activity.addDialogProvider(getBugsLayer(activity));
 	}
 	
 	@Override
@@ -100,24 +106,30 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		cat.addPreference(pref);
 	}
 	
-	public EditingPOIActivity getPoiActions() {
+	public EditingPOIActivity getPoiActions(MapActivity activity) {
+		if(poiActions == null) {
+			poiActions = new EditingPOIActivity(activity);
+		}
 		return poiActions;
 	}
 	
 	@Override
-	public void registerMapContextMenuActions(MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
+	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
 			final Object selectedObj) {
 		OnContextMenuClick listener = new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int resId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (resId == R.string.context_menu_item_create_poi) {
-					poiActions.showCreateDialog(latitude, longitude);
+					getPoiActions(mapActivity).showCreateDialog(latitude, longitude);
 				} else if (resId == R.string.context_menu_item_open_bug) {
+					if(osmBugsLayer == null) {
+						registerLayers(mapActivity);
+					}
 					osmBugsLayer.openBug(latitude, longitude);
 				} else if (resId == R.string.poi_context_menu_delete) {
-					getPoiActions().showDeleteDialog((Amenity) selectedObj);
+					getPoiActions(mapActivity).showDeleteDialog((Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
-					getPoiActions().showEditDialog((Amenity) selectedObj);
+					getPoiActions(mapActivity).showEditDialog((Amenity) selectedObj);
 				}
 			}
 		};

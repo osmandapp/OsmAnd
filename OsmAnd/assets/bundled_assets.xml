@@ -21,6 +21,7 @@
 	<asset source="voice/sk-tts/ttsconfig.p" destination="voice/sk-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/sv-tts/ttsconfig.p" destination="voice/sv-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/zh-tts/ttsconfig.p" destination="voice/zh-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/el-tts/ttsconfig.p" destination="voice/el-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	
 	<asset source="voice/ru3/config.p" destination="voice/ru3/_config.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/ru2/config.p" destination="voice/ru2/_config.p" mode="overwriteOnlyIfExists" />  

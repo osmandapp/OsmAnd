@@ -36,7 +36,7 @@ public class CustomTitleBar {
 		return vidw;
 	}
 	
-	public TextView getTitleView(){
+	public FontFitTextView getTitleView(){
 		return getView().getTextView();
 	}
 	
@@ -49,7 +49,7 @@ public class CustomTitleBar {
 		protected String titleString;
 		protected int titleImageRes;
 		protected OnClickListener click;
-		private TextView title;
+		private FontFitTextView title;
 		public CustomTitleBarView(String text, int img, OnClickListener cl) {
 			this.titleString = text;
 			this.titleImageRes = img;
@@ -72,12 +72,12 @@ public class CustomTitleBar {
 			init(wnd.getDecorView());
 		}
 		
-		public TextView getTextView(){
+		public FontFitTextView getTextView(){
 			return title;
 		}
 
 		public void init(View wnd) {
-			title = (TextView) wnd.findViewById(R.id.title_text);
+			title = (FontFitTextView) wnd.findViewById(R.id.title_text);
 			title.setText(titleString);
 			Button backButton = (Button) wnd.findViewById(R.id.back_button);
 			backButton.setContentDescription(wnd.getContext().getString(R.string.close));

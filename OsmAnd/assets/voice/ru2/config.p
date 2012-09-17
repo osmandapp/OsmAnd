@@ -40,6 +40,9 @@ roundabout(_Angle, Exit) == ['taking_the.ogg', delay_250,  E, 'exit-e.ogg'] :- n
 and_arrive_destination == ['arrive_at_your_destination-e.ogg']. % Miss and?
 then == ['then.ogg', delay_350].
 reached_destination == ['you_have_reached_your_destination.ogg'].
+and_arrive_intermediate == ['arrive_at_viapoint-e.ogg'].
+reached_intermediate == ['you_have_reached_a_viapoint.ogg'].
+
 bear_right == ['keep_right-e.ogg'].
 bear_left == ['keep_left-e.ogg'].
 route_recalc(_Dist) == []. % ['recalc.ogg'].  %nothing to said possibly beep?	

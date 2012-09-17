@@ -49,6 +49,7 @@ public class RoutingHelper {
 	private RouteCalculationResult route = new RouteCalculationResult("");
 	
 	private LatLon finalLocation;
+	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
 	
@@ -65,6 +66,7 @@ public class RoutingHelper {
 	private Handler uiHandler;
 	private boolean makeUturnWhenPossible = false;
 	private long makeUTwpDetected = 0;
+
 
 
 	public boolean makeUturnWhenPossible() {
@@ -89,15 +91,15 @@ public class RoutingHelper {
 	
 	
 	
-	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, Location currentLocation, GPXRouteParams gpxRoute){
-		clearCurrentRoute(finalLocation);
+	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
+		clearCurrentRoute(finalLocation, intermediatePoints);
 		currentGPXRoute = gpxRoute;
 		// to update route
 		setCurrentLocation(currentLocation, false);
 		
 	}
 	
-	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
+	public synchronized void clearCurrentRoute(LatLon newFinalLocation, List<LatLon> newIntermediatePoints) {
 		route = new RouteCalculationResult("");
 		makeUturnWhenPossible = false;
 		evalWaitInterval = 3000;
@@ -110,6 +112,7 @@ public class RoutingHelper {
 			}
 		});
 		this.finalLocation = newFinalLocation;
+		this.intermediatePoints = newIntermediatePoints;
 		if(currentRunningJob != null) {
 			currentRunningJob.stopCalculation();
 		}
@@ -142,6 +145,10 @@ public class RoutingHelper {
 	
 	public LatLon getFinalLocation() {
 		return finalLocation;
+	}
+	
+	public List<LatLon> getIntermediatePoints() {
+		return intermediatePoints;
 	}
 	
 	public boolean isRouteCalculated(){
@@ -233,7 +240,7 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(currentLocation, finalLocation, currentGPXRoute,
+			recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute,
 					route.isCalculated()? route : null);
 		}
 		double projectDist = mode == ApplicationMode.CAR ? posTolerance : posTolerance / 2;
@@ -330,13 +337,28 @@ public class RoutingHelper {
 				break;
 			}
 		}
+		
+		// 2. check if intermediate found
+		if(route.getIntermediatePointsToPass()  > 0 && route.getDistanceToNextIntermediate(lastFixedLocation) < posTolerance) {
+			showMessage(context.getString(R.string.arrived_at_intermediate_point));
+			voiceRouter.arrivedIntermediatePoint();
+			route.passIntermediatePoint();
+			int toDel = settings.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
+			while(toDel > 0) {
+				settings.deleteIntermediatePoint(0);
+				toDel--;
+			}
+			while(intermediatePoints != null  && route.getIntermediatePointsToPass() < intermediatePoints.size()) {
+				intermediatePoints.remove(0);
+			}
+		}
 
-		// 2. check if destination found
+		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
-		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < posTolerance * 1.5) {
+		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < posTolerance * 1.2) {
 			showMessage(context.getString(R.string.arrived_at_destination));
 			voiceRouter.arrivedDestinationPoint();
-			clearCurrentRoute(null);
+			clearCurrentRoute(null, null);
 			return true;
 		}
 		return false;
@@ -444,6 +466,10 @@ public class RoutingHelper {
 		return route.getDistanceToFinish(lastFixedLocation);
 	}
 	
+	public synchronized int getLeftDistanceNextIntermediate() {
+		return route.getDistanceToNextIntermediate(lastFixedLocation);
+	}
+	
 	public synchronized int getLeftTime() {
 		return route.getLeftTime(lastFixedLocation);
 	}
@@ -535,15 +561,17 @@ public class RoutingHelper {
 		private final RouteCalculationResult previousRoute;
 		private RouteService service;
 		private boolean interrupted = false;
+		private final List<LatLon> intermediates;
 
 		public RouteRecalculationThread(String name, 
-				Location start, LatLon end, GPXRouteParams gpxRoute, RouteCalculationResult previousRoute){
+				Location start, LatLon end, List<LatLon> intermediates, GPXRouteParams gpxRoute, RouteCalculationResult previousRoute){
 			super(name);
 			this.start = start;
 			this.end = end;
+			this.intermediates = intermediates;
 			this.gpxRoute = gpxRoute;
 			this.previousRoute = previousRoute;
-			service = settings.ROUTER_SERVICE.get();
+			service = settings.ROUTER_SERVICE.getModeValue(mode);
 			
 		}
 		
@@ -560,7 +588,7 @@ public class RoutingHelper {
 		public void run() {
 			boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
 			boolean fastRoute = settings.FAST_ROUTE_MODE.get();
-			RouteCalculationResult res = provider.calculateRouteImpl(start, end, mode, service, context, gpxRoute, previousRoute, fastRoute, 
+			RouteCalculationResult res = provider.calculateRouteImpl(start, end, intermediates, mode, service, context, gpxRoute, previousRoute, fastRoute, 
 					leftSide, this);
 			if (interrupted) {
 				currentRunningJob = null;
@@ -595,7 +623,7 @@ public class RoutingHelper {
 		
 	}
 	
-	private void recalculateRouteInBackground(final Location start, final LatLon end, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
+	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates, final GPXRouteParams gpxRoute, final RouteCalculationResult previousRoute){
 		if (start == null || end == null) {
 			return;
 		}
@@ -603,7 +631,7 @@ public class RoutingHelper {
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
 				synchronized (this) {
-					currentRunningJob = new RouteRecalculationThread("Calculating route", start, end, gpxRoute, previousRoute); //$NON-NLS-1$
+					currentRunningJob = new RouteRecalculationThread("Calculating route", start, end, intermediates, gpxRoute, previousRoute); //$NON-NLS-1$
 					currentRunningJob.start();
 				}
 			}
@@ -641,5 +669,5 @@ public class RoutingHelper {
 	public GPXFile generateGPXFileWithRoute(){
 		return provider.createOsmandRouterGPX(route);
 	}
-	
+
 }

@@ -148,7 +148,7 @@ public class RouteProvider {
 	
 	
 
-	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, ApplicationMode mode, RouteService type, Context ctx,
+	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, List<LatLon> intermediates, ApplicationMode mode, RouteService type, Context ctx,
 			GPXRouteParams gpxRoute, RouteCalculationResult previousToRecalculate, boolean fast, boolean leftSide, Interruptable interruptable){
 		long time = System.currentTimeMillis();
 		if (start != null && end != null) {
@@ -168,9 +168,9 @@ public class RouteProvider {
 					if(previousToRecalculate != null) {
 						originalRoute = previousToRecalculate.getOriginalRoute();
 					}
-					res = findVectorMapsRoute(start, end, mode, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide, interruptable);
+					res = findVectorMapsRoute(start, end, intermediates, mode, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide, interruptable);
 				} else {
-					res = findCloudMadeRoute(start, end, mode, ctx, fast, leftSide);
+					res = findCloudMadeRoute(start, end, intermediates, mode, ctx, fast, leftSide);
 				}
 				if(log.isInfoEnabled() ){
 					log.info("Finding route contained " + res.getImmutableLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -220,7 +220,7 @@ public class RouteProvider {
 		}
 		ArrayList<Location> sublist = new ArrayList<Location>(gpxRoute.subList(startI, endI));
 		if(params.directions == null){
-			res = new RouteCalculationResult(sublist, params.directions, start, end, null, ctx, leftSide, true);
+			res = new RouteCalculationResult(sublist, params.directions, start, end, null, null, ctx, leftSide, true);
 		} else {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
@@ -235,7 +235,7 @@ public class RouteProvider {
 					subdirections.add(ch);
 				}
 			}
-			res = new RouteCalculationResult(sublist, subdirections, start, end, null, ctx, leftSide, true);
+			res = new RouteCalculationResult(sublist, subdirections, start, end, null, null, ctx, leftSide, true);
 		}
 		return res;
 	}
@@ -305,10 +305,10 @@ public class RouteProvider {
 				
 			}
 		}
-		return new RouteCalculationResult(res, null, start, end, null, ctx, leftSide, true);
+		return new RouteCalculationResult(res, null, start, end, null, null, ctx, leftSide, true);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, ApplicationMode mode, OsmandApplication app,
+	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, List<LatLon> intermediates, ApplicationMode mode, OsmandApplication app,
 			List<RouteSegmentResult> previousRoute,
 			boolean leftSide, Interruptable interruptable) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
@@ -359,11 +359,28 @@ public class RouteProvider {
 		}
 		RouteSegment en = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
 		if (en == null) {
-			return new RouteCalculationResult("End point is far from allowed road.");
+			return new RouteCalculationResult(app.getString(R.string.ending_point_too_far));
+		}
+		List<RouteSegment> inters  = new ArrayList<BinaryRoutePlanner.RouteSegment>();
+		if (intermediates != null) {
+			int ind = 1;
+			for (LatLon il : intermediates) {
+				RouteSegment is = router.findRouteSegment(il.getLatitude(), il.getLongitude(), ctx);
+				if (is == null) {
+					return new RouteCalculationResult(app.getString(R.string.intermediate_point_too_far, "'" + ind + "'"));
+				}
+				inters.add(is);
+				ind++;
+			}
 		}
 		try {
-			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, leftSide);
-			return new RouteCalculationResult(result, start, end, app, leftSide);
+			List<RouteSegmentResult> result; 
+			if(inters.size() > 0){
+				result = router.searchRoute(ctx, st, en, inters, leftSide);
+			} else {
+				result = router.searchRoute(ctx, st, en, leftSide);
+			}
+			return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
 		} catch (OutOfMemoryError e) {
 			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
 			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -373,7 +390,7 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, ApplicationMode mode, Context ctx, boolean fast, boolean leftSide)
+	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, List<LatLon> intermediates, ApplicationMode mode, Context ctx, boolean fast, boolean leftSide)
 			throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
@@ -382,6 +399,20 @@ public class RouteProvider {
 		uri.append("http://routes.cloudmade.com/A6421860EBB04234AB5EF2D049F2CD8F/api/0.3/"); //$NON-NLS-1$
 		uri.append(start.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
 		uri.append(start.getLongitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
+		if(intermediates != null && intermediates.size() > 0) {
+			uri.append("[");
+			boolean first = true;
+			for(LatLon il : intermediates) {
+				if(!first){
+					uri.append(",");
+				} else {
+					first = false;
+				}
+				uri.append(il.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
+				uri.append(il.getLongitude() + ""); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			uri.append("],");
+		}
 		uri.append(end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
 		uri.append(end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -406,7 +437,7 @@ public class RouteProvider {
 		GPXFile gpxFile = GPXUtilities.loadGPXFile(ctx, connection.getInputStream(), false);
 		directions = parseCloudmadeRoute(res, gpxFile, false, leftSide, speed);
 
-		return new RouteCalculationResult(res, directions, start, end, null, ctx, leftSide, true);
+		return new RouteCalculationResult(res, directions, start, end, intermediates, null, ctx, leftSide, true);
 	}
 
 	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
@@ -585,7 +616,7 @@ public class RouteProvider {
 
 			}
 		}
-		return new RouteCalculationResult(res, null, start, end, null, ctx, leftSide, true);
+		return new RouteCalculationResult(res, null, start, end, null, null, ctx, leftSide, true);
 	}
 	
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute){

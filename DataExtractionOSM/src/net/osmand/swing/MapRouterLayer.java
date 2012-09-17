@@ -66,6 +66,7 @@ public class MapRouterLayer implements MapPanelLayer {
 	private MapPanel map;
 	private LatLon startRoute ;
 	private LatLon endRoute ;
+	private List<LatLon> intermediates = new ArrayList<LatLon>();
 	private boolean nextAvailable = true;
 	private boolean pause = true;
 	private boolean stop = false;
@@ -174,7 +175,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				new Thread() {
 					@Override
 					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute, null);
+						List<Way> ways = selfRoute(startRoute, endRoute, intermediates, null);
 						if (ways != null) {
 							DataTileManager<Way> points = new DataTileManager<Way>();
 							points.setZoom(11);
@@ -203,7 +204,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				new Thread() {
 					@Override
 					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute, previousRoute);
+						List<Way> ways = selfRoute(startRoute, endRoute, intermediates,  previousRoute);
 						if (ways != null) {
 							DataTileManager<Way> points = new DataTileManager<Way>();
 							points.setZoom(11);
@@ -274,6 +275,32 @@ public class MapRouterLayer implements MapPanelLayer {
 			}
 		};
 		menu.add(swapLocations);
+		Action addIntermediate = new AbstractAction("Add transit point") {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Point popupMenuPoint = map.getPopupMenuPoint();
+				double fy = (popupMenuPoint.y - map.getCenterPointY()) / map.getTileSize();
+				double fx = (popupMenuPoint.x - map.getCenterPointX()) / map.getTileSize();
+				double latitude = MapUtils.getLatitudeFromTile(map.getZoom(), map.getYTile() + fy);
+				double longitude = MapUtils.getLongitudeFromTile(map.getZoom(), map.getXTile() + fx);
+				intermediates.add(new LatLon(latitude, longitude));
+				map.repaint();
+			}
+		};
+		menu.add(addIntermediate);
+		
+		Action remove = new AbstractAction("Remove transit point") {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(intermediates.size() > 0){
+					intermediates.remove(0);
+				}
+				map.repaint();
+			}
+		};
+		menu.add(remove);
 
 	}
 	
@@ -551,7 +578,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		return res;
 	}
 	
-	public List<Way> selfRoute(LatLon start, LatLon end, List<RouteSegmentResult> previousRoute) {
+	public List<Way> selfRoute(LatLon start, LatLon end, List<LatLon> intermediates, List<RouteSegmentResult> previousRoute) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
 		List<File> files = new ArrayList<File>();
@@ -619,6 +646,19 @@ public class MapRouterLayer implements MapPanelLayer {
 				}
 				System.out.println("ROAD TO END " + e.getRoad().getHighway() + " " + e.getRoad().id);
 				
+				List<RouteSegment> inters  = new ArrayList<BinaryRoutePlanner.RouteSegment>();
+				if (intermediates != null) {
+					int ind = 1;
+					for (LatLon il : intermediates) {
+						RouteSegment is = router.findRouteSegment(il.getLatitude(), il.getLongitude(), ctx);
+						if (is == null) {
+							throw new RuntimeException("Intremediate point "+ind+" was not found.");
+						}
+						inters.add(is);
+						ind++;
+					}
+				}
+				
 				final DataTileManager<Entity> points = new DataTileManager<Entity>();
 				points.setZoom(11);
 				map.setPoints(points);
@@ -675,7 +715,7 @@ public class MapRouterLayer implements MapPanelLayer {
 
 				});
 				
-				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, false);
+				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, inters, false);
 				this.previousRoute = searchRoute;
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);
@@ -789,6 +829,13 @@ public class MapRouterLayer implements MapPanelLayer {
 		if(endRoute != null){
 			int x = map.getMapXForPoint(endRoute.getLongitude());
 			int y = map.getMapYForPoint(endRoute.getLatitude());
+			g.drawOval(x, y, 12, 12);
+			g.fillOval(x, y, 12, 12);
+		}
+		g.setColor(Color.yellow);
+		for(LatLon i : intermediates) {
+			int x = map.getMapXForPoint(i.getLongitude());
+			int y = map.getMapYForPoint(i.getLatitude());
 			g.drawOval(x, y, 12, 12);
 			g.fillOval(x, y, 12, 12);
 		}

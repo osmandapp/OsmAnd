@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <!--
     	 Disclaimer : 
@@ -9,34 +9,29 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="intermediate_point_too_far">Intermediate point %1$s too far from nearest road.</string>
-    <string name="arrived_at_intermediate_point">You have arrived at your intermediate point</string>
-    <string name="context_menu_item_intermediate_point">Add intermediate point</string>
-    <string name="map_widget_intermediate_distance">Intermediate point</string>
-    <string name="ending_point_too_far">Starting point too far from nearest road.</string>
-    <string name="btn_add_tag">Add Tag</string>
+    <string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Advanced Mode...</string>
-    <string name="poi_filter_parking">Parking</string>
-    <string name="poi_filter_emergency">Emergency</string>
-    <string name="poi_filter_public_transport">Public Transport</string>
-    <string name="poi_filter_entertainment">Entertainment</string>
-    <string name="poi_filter_accomodation">Accomodation</string>
-    <string name="poi_filter_restaurants">Restaurants</string>
-    <string name="poi_filter_sightseeing">Sightseeing</string>
-    <string name="poi_filter_car_aid">Car aid</string>
-	<string name="poi_filter_food_shop">Food shop</string>
-	<string name="poi_filter_for_tourists">For tourists</string>
-	<string name="poi_filter_fuel">Fuel</string>
-	<string name="show_warnings_title">Show alarms&#8230;</string>
-	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, and other warnings</string>
+    <string name="poi_filter_parking">Στάθμευση</string>
+    <string name="poi_filter_emergency">Έκτακτη Ανάγκη</string>
+    <string name="poi_filter_public_transport">Δημόσιες Μεταφορές</string>
+    <string name="poi_filter_entertainment">Διασκέδαση</string>
+    <string name="poi_filter_accomodation">Διαμονή</string>
+    <string name="poi_filter_restaurants">Εστιατόρια</string>
+    <string name="poi_filter_sightseeing">Αξιοθέατα</string>
+    <string name="poi_filter_car_aid">Εξυπηρέτηση αυτοκινήτων</string>
+	<string name="poi_filter_food_shop">Κατάστημα Τροφίμων</string>
+	<string name="poi_filter_for_tourists">Τουριστικά</string>
+	<string name="poi_filter_fuel">Καύσιμα</string>
+	<string name="show_warnings_title">Εμφάνιση Προειδοποιήσεων&#8230;</string>
+	<string name="show_warnings_descr">Εμφάνιση ορίων ταχύτητας, Καμερων ταχύτητας, speed bumps, και άλλων προειδοποιήσεων</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
-	<string name="use_compass_navigation">Use compass</string>
-	<string name="avoid_motorway">Avoid motorways</string>
+	<string name="use_compass_navigation">Χρήση Πυξίδας</string>
+	<string name="avoid_motorway">Αποφυγή αυτοκινητόδρομων</string>
 	<string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
 	<string name="auto_zoom_map">Auto zoom map</string>
-	<string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
+	<string name="tip_recent_changes_0_8_3_t">Αλλαγές στην 0.8.3 :
 		\n\t* Improved route guidance
-		\n\t* Avoid motorways option
+		\n\t* Επιλογή αποφυγής αυτοκινητόδρομων
 		\n\t* Cycleway=track display
 		\n\t* better UI finish (icons)
 		\n\t* Some bug fixes
@@ -46,11 +41,11 @@
 	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
 		\n\t* Improved Routing
 		\n\t* Dynamic map widgets
-		\n\t* Map settings moved to map screen
+		\n\t* Οι ρυθμίσεις χάρτη μετακινήθηκαν στην οθόνη του χάρτη
 		\n\t* Lock screen button with logging services
 		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
 	</string>
-	<string name="osmand_short_description_80_chars">OsmAnd is an open source navigation application for offline and online maps</string>
+	<string name="osmand_short_description_80_chars">Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοιχτού κώδικα για χάρτες εντός και εκτός σύνδεσης</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -70,7 +65,7 @@
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 
 		Limitations of this free version of OsmAnd:
-		- Number of map downloads limited
+		- Περιορισμένος αριθμός λήψης χαρτών
 		- No access to Wikipedia offline POIs
 
 		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
@@ -108,8 +103,8 @@
 	<string name="recalculate_route_to_your_location">Transport mode:</string>
 	<string name="select_navigation_mode">Select transport mode</string>
 	<string name="monitor_preferences">Tracking</string>
-	<string name="day_night_info_description">Sunrise : %1$s \nSunset : %2$s</string>
-	<string name="day_night_info">Day/night info</string>
+	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
+	<string name="day_night_info">Πληρ. Ημέρα/Νύχτα</string>
 	<string name="map_widget_day_night">Day/night map</string>
 	<string name="map_widget_vector_attributes">Rendering attributes:</string>
 	<string name="map_widget_renderer">Rendering style</string>
@@ -117,56 +112,56 @@
 	<string name="live_monitoring_mode_on">Stop\n live tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
-	<string name="layer_map_appearance">Configure screen&#8230;</string>
-	<string name="show_lanes">Show lanes</string>
+	<string name="layer_map_appearance">Ρύθμιση οθόνης&#8230;</string>
+	<string name="show_lanes">Εμφάνιση λωρίδων</string>
 	<string name="avoid_unpaved">Avoid unpaved roads</string>
 	<string name="avoid_ferries">Avoid ferries</string>
-	<string name="avoid_in_routing_title">Avoid&#8230;</string>
+	<string name="avoid_in_routing_title">Αποφυγή&#8230;</string>
 	<string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
 	<string name="map_widget_fluorescent">Fluorescent routes</string>
-	<string name="map_widget_show_ruler">Ruler</string>
+	<string name="map_widget_show_ruler">Χάρακας</string>
 	<string name="map_widget_appearance">Miscellaneous:</string>
 	<string name="map_widget_view_direction">Viewing direction</string>
 	<string name="map_widget_transparent">Transparent skin</string>
-	<string name="monitoring_mode_off">Record GPX</string>
+	<string name="monitoring_mode_off">Εγγραφή GPX</string>
 	<string name="monitoring_mode_on">Stop\n GPX rec.</string>
 	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
 	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
 	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
-	<string name="int_continuosly">Continuous</string>
+	<string name="int_continuosly">Συνεχόμενο</string>
 	<string name="screen_is_locked">To unlock screen press lock icon</string>
-	<string name="map_widget_top_text">Street name</string>
-	<string name="map_widget_config">Configure screen</string>
+	<string name="map_widget_top_text">Όνομα οδού</string>
+	<string name="map_widget_config">Ρύθμιση οθόνης</string>
 	<string name="map_widget_map_select">Map source</string>
-	<string name="map_widget_back_to_loc">Where am I</string>
-	<string name="map_widget_lock_screen">Lock screen</string>
-	<string name="map_widget_compass">Compass</string>
-	<string name="map_widget_top_stack">Status bar:</string>
-	<string name="map_widget_reset">Reset to default</string>
+	<string name="map_widget_back_to_loc">Πού είμαι</string>
+	<string name="map_widget_lock_screen">Κλείδωμα οθόνης</string>
+	<string name="map_widget_compass">Πυξίδα</string>
+	<string name="map_widget_top_stack">Γραμμή κατάστασης:</string>
+	<string name="map_widget_reset">Επαναφορά στα προκαθορισμένα</string>
 	<string name="map_widget_right_stack">Right panel:</string>
 	<string name="map_widget_left_stack">Left panel:</string>
-	<string name="map_widget_parking">Parking</string>
+	<string name="map_widget_parking">Στάθμευση</string>
 	<string name="map_widget_monitoring">Tracking</string>
-	<string name="map_widget_speed">Speed</string>
-	<string name="map_widget_distance">Target</string>
-	<string name="map_widget_altitude">Altitude</string>
-	<string name="map_widget_time">Time to go</string>
-	<string name="map_widget_next_turn">Next turn</string>
+	<string name="map_widget_speed">Ταχύτητα</string>
+	<string name="map_widget_distance">Στόχος</string>
+	<string name="map_widget_altitude">Υψόμετρο</string>
+	<string name="map_widget_time">Υπολειπόμενος χρόνος</string>
+	<string name="map_widget_next_turn">Επόμενη στροφή</string>
 	<string name="map_widget_next_turn_small">Next turn (small)</string>
 	<string name="map_widget_next_next_turn">Second next turn</string>
 	<string name="map_widget_mini_route">Mini route map</string>
-	<string name="bg_service_screen_lock">Lock screen</string>
-	<string name="bg_service_screen_unlock">Unlock screen</string>
-	<string name="bg_service_screen_lock_toast">The screen is locked</string>
+	<string name="bg_service_screen_lock">Κλείδωμα οθόνης</string>
+	<string name="bg_service_screen_unlock">Ξεκλείδωμα οθόνης</string>
+	<string name="bg_service_screen_lock_toast">Η οθόνη είναι κλειδωμένη</string>
 	<string name="bg_service_interval">Set wake-up interval:</string>
-	<string name="show_cameras">Show speed cameras</string>
-	<string name="show_speed_limits">Show speed limits</string>
-	<string name="avoid_toll_roads">Avoid toll roads</string>
+	<string name="show_cameras">Εμφάνιση καμερών ταχύτητας</string>
+	<string name="show_speed_limits">Εμφάνιση ορίων ταχύτητας</string>
+	<string name="avoid_toll_roads">Αποφυγή διοδίων</string>
 	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
 	<string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
-	<string name="osmand_parking_hours">Hours</string>
-	<string name="osmand_parking_minutes">Minutes</string>
-	<string name="osmand_parking_position_description_add_time">The car was parked at:</string>
+	<string name="osmand_parking_hours">Ώρες</string>
+	<string name="osmand_parking_minutes">Λεπτά</string>
+	<string name="osmand_parking_position_description_add_time">ο αυτοκίνητο έχει σταθμεύσει στο:</string>
 	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
 		\n\t* More precise routes (a bit slower)
 		\n\t* Smart and fast Route recalculation
@@ -530,8 +525,8 @@
 	<string name="select_search_position">Search near :</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
-		\n\t- Favorite points and groups (categorize, delete, manage favorites)
+		\n\t- Offline data manager (download, διαγραφή, activate / deactivate offline data directly in OsmAnd)
+		\n\t- Favorite points and groups (categorize, διαγραφή, manage favorites)
 		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
 		\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
 		\n\t- Function to save route as GPX track for offline use
@@ -988,11 +983,11 @@
 	<string name="use_online_routing">Use online navigation</string>
 	<string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
 	<string name="data_settings_descr">Specify language, download/reload data</string>
-	<string name="data_settings">Data</string>
+	<string name="data_settings">Δεδομένα</string>
 	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
 	<string name="osm_settings">OSM Editing</string>
-	<string name="additional_settings">Additional settings</string>
-	<string name="settings">Settings</string>
+	<string name="additional_settings">Πρόσθετες ρυθμίσεις</string>
+	<string name="settings">Ρυθμίσεις</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
 	<string name="save_track_interval">Logging interval</string>
@@ -1002,20 +997,20 @@
 	<string name="navigate_to">Set as destination</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
-	<string name="mark_point">Target</string>
+	<string name="mark_point">Στόχος</string>
 	<string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
 	<string name="show_osm_bugs">Show OpenStreetBugs</string>
-	<string name="favourites_activity">Favorites</string>
-	<string name="add_to_favourite">Add to Favorites</string>
-	<string name="use_english_names_descr">Select between native and English names</string>
-	<string name="use_english_names">Use English names in maps</string>
-	<string name="app_settings">Application settings</string>
-	<string name="search_address">Search address</string>
-	<string name="choose_building">Choose building</string>
-	<string name="choose_street">Choose street</string>
-	<string name="choose_city">Choose city</string>
-	<string name="ChooseCountry">Choose country</string>
-	<string name="map_specify_point">Set as destination</string>
+	<string name="favourites_activity">Αγαπημένα</string>
+	<string name="add_to_favourite">Προσθήκη στα αγαπημένα</string>
+	<string name="use_english_names_descr">Επέλεξε μεταξύ ντόπιων και αγγλικών ονομάτων</string>
+	<string name="use_english_names">Χρήση Αγγλικών ονομάτων στους χάρτες</string>
+	<string name="app_settings">Ρυθμίσεις εφαρμογής</string>
+	<string name="search_address">Αναζήτηση διεύθυνσης</string>
+	<string name="choose_building">Επέλεξε κτήριο</string>
+	<string name="choose_street">Επέλεξε οδό</string>
+	<string name="choose_city">Επέλεξε πόλη</string>
+	<string name="ChooseCountry">Επέλεξε χώρα</string>
+	<string name="map_specify_point">Καθορισμός ως προορισμού</string>
 	<string name="show_view_angle">Display viewing direction</string>
 	<string name="stop_navigation">Clear destin.</string>
 	<string name="navigate_to_point">Set as dest.</string>
@@ -1026,32 +1021,32 @@
 	<string name="map_tile_source_descr">Choose the source of online or cached map tiles</string>
 	<string name="map_tile_source">Tile map source</string>
 	<string name="map_source">Map source</string>
-	<string name="use_internet">Use Internet</string>
-	<string name="show_location">Show location</string>
-	<string name="map_preferences">Map</string>
-	<string name="settings_activity">Settings</string>
-	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
+	<string name="use_internet">Χρήση Διαδικτύου</string>
+	<string name="show_location">Εμφάνιση τοποθεσίας</string>
+	<string name="map_preferences">Χάρτης</string>
+	<string name="settings_activity">Ρυθμίσεις</string>
+	<string name="show_gps_coordinates_text">Εμφάνιση συντεταγμένων GPS coordinates on map</string>
 	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
-	<string name="app_description">Navigation application</string>
-	<string name="exit_Button">Exit</string>
-	<string name="map_Button">Map</string>
-	<string name="settings_Button">Settings</string>
-	<string name="favorites_Button">Favorites</string>
-	<string name="search_button">Search</string>
-	<string name="search_activity">Search</string>
+	<string name="app_description">Εφαρμογή πλοήγησης</string>
+	<string name="exit_Button">Έξοδος</string>
+	<string name="map_Button">Χάρτης</string>
+	<string name="settings_Button">Ρυθμίσεις</string>
+	<string name="favorites_Button">Αγαπημένα</string>
+	<string name="search_button">Αναζήτηση</string>
+	<string name="search_activity">Αναζήτηση</string>
 	<string name="searchpoi_activity">Choose POI</string>
-	<string name="search_POI_level_btn">Find more</string>
+	<string name="search_POI_level_btn">Βρες περισσότερα</string>
 	<string name="incremental_search_city">Search city incrementally. To find towns/postcodes, enter the first 3 or more characters.</string>
 	<string name="incremental_search_street">Search street incrementally</string>
 	<string name="incremental_search_building">Search building incrementally</string>
-	<string name="choose_available_region">Choose region from list</string>
-	<string name="choose_intersected_street">Choose intersecting street</string>
+	<string name="choose_available_region">Επιλογή περιοχής από κατάλογο</string>
+	<string name="choose_intersected_street">Επιλογή διασταυρούμενης οδού</string>
 	<string name="Closest_Amenities">Closest amenities</string>
-	<string name="app_mode_default">Default</string>
-	<string name="app_mode_car">Car</string>
-	<string name="app_mode_bicycle">Bicycle</string>
-	<string name="app_mode_pedestrian">Pedestrian</string>
-	<string name="position_on_map_center">Center</string>
+	<string name="app_mode_default">Προκαθορισμένο</string>
+	<string name="app_mode_car">Αυτοκίνητο</string>
+	<string name="app_mode_bicycle">Ποδήλατο</string>
+	<string name="app_mode_pedestrian">Πεζός</string>
+	<string name="position_on_map_center">Κέντρο</string>
 	<string name="position_on_map_bottom">Bottom</string>
 	<string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
 	<string name="navigate_point_latitude">Latitude</string>
@@ -1059,26 +1054,26 @@
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-	<string name="search_shown_on_map">Show on map</string>
-	<string name="navigate_point_cancel">Cancel</string>
-	<string name="search_address_top_text">Select address</string>
-	<string name="search_address_region">Region</string>
-	<string name="search_address_city">City</string>
-	<string name="search_address_street">Street</string>
-	<string name="search_address_building">Building</string>
-	<string name="search_address_building_option">Building</string>
-	<string name="search_address_street_option">Intersecting street</string>
-	<string name="search_tabs_location">Location</string>
-	<string name="context_menu_item_navigate_point">Set as destination</string>
-	<string name="context_menu_item_add_favorite">Add to favorites</string>
+	<string name="search_shown_on_map">Εμφάνιση στο χάρτη</string>
+	<string name="navigate_point_cancel">Ακύρωση</string>
+	<string name="search_address_top_text">Επιλογή διεύθυνσης</string>
+	<string name="search_address_region">Περιοχή</string>
+	<string name="search_address_city">Πόλη</string>
+	<string name="search_address_street">Οδός</string>
+	<string name="search_address_building">Κτήριο</string>
+	<string name="search_address_building_option">Κτήριο</string>
+	<string name="search_address_street_option">Διασταυρούμενη οδός</string>
+	<string name="search_tabs_location">Τοποθεσία</string>
+	<string name="context_menu_item_navigate_point">Καθορισμός ως προορισμός</string>
+	<string name="context_menu_item_add_favorite">Προσθήκη στα αγαπημένα</string>
 	<string name="context_menu_item_update_map">Update map</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>
-	<string name="default_buttons_yes">Yes</string>
-	<string name="default_buttons_cancel">Cancel</string>
-	<string name="default_buttons_apply">Apply</string>
-	<string name="default_buttons_add">Add</string>
-	<string name="default_buttons_no">No</string>
+	<string name="default_buttons_yes">Ναι</string>
+	<string name="default_buttons_cancel">Ακύρωση</string>
+	<string name="default_buttons_apply">Εφαρμογή</string>
+	<string name="default_buttons_add">Προσθήκη</string>
+	<string name="default_buttons_no">Όχι</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
@@ -1105,29 +1100,29 @@
 	<string name="poi_edit_title">Edit POI</string>
 	<string name="poi_create_title">Create POI</string>
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
-	<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
-	<string name="poi_remove_title">Delete POI</string>
-	<string name="default_buttons_delete">Delete</string>
+	<string name="poi_remove_confirm_template">Διαγραφή {0} (εισαγωγή σχολίου)?</string>
+	<string name="poi_remove_title">Διαγραφή POI</string>
+	<string name="default_buttons_delete">Διαγραφή</string>
 	<string name="poi_remove_success">POI was successfully deleted</string>
-	<string name="poi_action_add">add</string>
-	<string name="poi_action_change">change</string>
+	<string name="poi_action_add">προσθήκη</string>
+	<string name="poi_action_change">αλλαγή</string>
 	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
 	<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
 	<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
 	<string name="poi_error_info_not_loaded">Info about node was not loaded</string>
-	<string name="poi_dialog_name">Name</string>
-	<string name="poi_dialog_opening_hours">Open</string>
-	<string name="poi_dialog_comment">Comment</string>
+	<string name="poi_dialog_name">Όνομα</string>
+	<string name="poi_dialog_opening_hours">Άνοιγμα</string>
+	<string name="poi_dialog_comment">Σχόλιο</string>
 	<string name="poi_dialog_comment_default">POI changing</string>
 	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
 	<string name="default_buttons_commit">Commit</string>
-	<string name="default_buttons_reset">Reset</string>
-	<string name="filter_current_poiButton">Filter</string>
-	<string name="edit_filter_delete_menu_item">Delete</string>
-	<string name="edit_filter_save_as_menu_item">Save As</string>
-	<string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
-	<string name="edit_filter_delete_message">Filter {0} has been deleted</string>
-	<string name="edit_filter_create_message">Filter {0} has been created</string>
-	<string name="default_buttons_selectall">Select All</string>
+	<string name="default_buttons_reset">Επαναφορά</string>
+	<string name="filter_current_poiButton">Φίλτρο</string>
+	<string name="edit_filter_delete_menu_item">Διαγραφή</string>
+	<string name="edit_filter_save_as_menu_item">Αποθήκευση Ως</string>
+	<string name="edit_filter_delete_dialog_title">Διαγραφή του επιλεγμένου φίλτρου?</string>
+	<string name="edit_filter_delete_message">Το φίλτρο {0} έχει διαγραφεί</string>
+	<string name="edit_filter_create_message">Το φίλτρο {0} έχει δημιουργηθεί</string>
+	<string name="default_buttons_selectall">Επιλογή Όλων</string>
 	<string name="email">email</string>
 </resources>

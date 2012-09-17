@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -973,6 +974,7 @@ public class OsmandSettings {
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route"; //$NON-NLS-1$
+	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
 
 	public LatLon getPointToNavigate() {
 		float lat = globalPreferences.getFloat(POINT_NAVIGATE_LAT, 0);
@@ -987,6 +989,52 @@ public class OsmandSettings {
 		boolean t = globalPreferences.contains(POINT_NAVIGATE_ROUTE);
 		globalPreferences.edit().remove(POINT_NAVIGATE_ROUTE).commit();
 		return t;
+	}
+	
+	public boolean clearIntermediatePoints() {
+		return globalPreferences.edit().remove(INTERMEDIATE_POINTS).commit();
+	}
+	
+	public List<LatLon> getIntermediatePoints() {
+		List<LatLon> list = new ArrayList<LatLon>();
+		String ip = globalPreferences.getString(INTERMEDIATE_POINTS, "");
+		if (ip.trim().length() > 0) {
+			StringTokenizer tok = new StringTokenizer(ip, ",");
+			while (tok.hasMoreTokens()) {
+				String lat = tok.nextToken();
+				if (!tok.hasMoreTokens()) {
+					break;
+				}
+				String lon = tok.nextToken();
+				list.add(new LatLon(Float.parseFloat(lat), Float.parseFloat(lon)));
+			}
+		}
+		return list;
+	}
+	
+	public boolean setIntermediatePoint(double latitude, double longitude, String historyDescription, int index) {
+		List<LatLon> ps = getIntermediatePoints();
+		ps.add(index, new LatLon(latitude, longitude));
+		if (historyDescription != null) {
+			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
+		}
+		return saveIntermediatePoints(ps);
+	}
+	public boolean deleteIntermediatePoint( int index) {
+		List<LatLon> ps = getIntermediatePoints();
+		ps.remove(index);
+		return saveIntermediatePoints(ps);
+	}
+
+	private boolean saveIntermediatePoints(List<LatLon> ps) {
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<ps.size(); i++) {
+			if(i > 0){
+				sb.append(",");
+			}
+			sb.append(((float)ps.get(i).getLatitude()+"")).append(",").append(((float)ps.get(i).getLongitude()+""));
+		}
+		return globalPreferences.edit().putString(INTERMEDIATE_POINTS, sb.toString()).commit();
 	}
 	
 	public boolean clearPointToNavigate() {

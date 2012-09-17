@@ -259,8 +259,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
 						if(f.renameTo(dest)){
-							asyncLoader = new LoadLocalIndexTask();
-							asyncLoader.execute(LocalIndexesActivity.this);
 							reloadIndexes();
 						} else {
 							AccessibleToast.makeText(LocalIndexesActivity.this, R.string.file_can_not_be_renamed, Toast.LENGTH_LONG).show();
@@ -788,7 +786,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					}
 					AccessibleToast.makeText(LocalIndexesActivity.this, b.toString(), Toast.LENGTH_LONG).show();
 				}
-				asyncLoader.execute(LocalIndexesActivity.this);
+				if(asyncLoader.getStatus() == Status.PENDING) {
+					asyncLoader.execute(LocalIndexesActivity.this);
+				}
 			}
 			
 			@Override

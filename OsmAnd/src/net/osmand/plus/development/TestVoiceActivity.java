@@ -91,8 +91,10 @@ public class TestVoiceActivity extends Activity {
 		addButton(ll, "GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "Route recalculated (23150m)", builder(p).routeRecalculated(23150));
 		addButton(ll, "Continue straight ahead", builder(p).goAhead());
+		addButton(ll, "Arrive at intermediate point", builder(p).andArriveAtIntermediatePoint());
 		addButton(ll, "Follow the road for 2350m", builder(p).goAhead(2350));
 		addButton(ll, "Follow the road for 800m and arrive at destination", builder(p).goAhead(800).andArriveAtDestination());
+		addButton(ll, "Follow the road for 360m and arrive at intermediate point", builder(p).goAhead(360).andArriveAtIntermediatePoint());
 		addButton(ll, "Arrive at destination", builder(p).arrivedAtDestination());
 		ll.forceLayout();
 	}

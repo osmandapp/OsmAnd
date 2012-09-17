@@ -3,12 +3,12 @@
 		
 
 		<!-- 7. AUSTRALIA-OCEANIA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="false">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/{0}.osm.pbf" region_prefix="" region_suffix=""  skip="false">
 			<region name="australia-oceania" esize=""/>
 		</regions>
 				
 		<!-- 7. NEW ZEALAND-AUSTRALIA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Oceania"  skip="false">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/australia-oceania/{0}.osm.pbf" region_prefix="" region_suffix="_Oceania"  skip="false">
 			<region name="new-zealand" esize=""/>
 			<region name="new-caledonia" esize=""/>
 		</regions>			

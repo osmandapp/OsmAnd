@@ -38,6 +38,8 @@ roundabout(Dist, _Angle, Exit) == ['despues_de.ogg', delay_300, D, delay_300, 'e
 roundabout(_Angle, Exit) == ['tomando la.ogg', delay_250,  E, 'salida.ogg'] :- nth(Exit, E).
 
 and_arrive_destination == ['destino.ogg']. % Miss and?
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 then == ['entonces.ogg', delay_350].
 reached_destination == ['llegado.ogg'].
 bear_right == ['mantener_derecha.ogg'].

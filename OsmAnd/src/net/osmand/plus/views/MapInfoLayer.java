@@ -239,23 +239,25 @@ public class MapInfoLayer extends OsmandMapLayer {
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
 		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, carDefault, none, 5);
+		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, all, none, 5);
 		TextInfoControl time = ric.createTimeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, carDefault, none,  10);
+		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, all, none,  10);
 		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, carDefault, none,  15);
+		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
+		TextInfoControl intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, all, none, 17);
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 
 		// Top widgets
 		ImageViewControl compassView = createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, carDefault, 5);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, carDefault, 10).required(ApplicationMode.DEFAULT);
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
 		ImageView lockView = lockInfoControl.createLockScreenWidget(view, map);
 		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, exceptCar, 15);
 		backToLocation = createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, carDefault, 5);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
 		View globus = createGlobus();
 		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
 		

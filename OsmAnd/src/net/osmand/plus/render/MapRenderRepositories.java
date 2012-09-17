@@ -365,14 +365,16 @@ public class MapRenderRepositories {
 			boolean addBasemapCoastlines = true;
 			boolean emptyData = zoom > BASEMAP_ZOOM && tempResult.isEmpty() && coastLines.isEmpty();
 			boolean basemapMissing = zoom <= BASEMAP_ZOOM && basemapCoastLines.isEmpty() && mi == null; 
-			
+			boolean detailedLandData = zoom >= 14 && tempResult.size() > 0;
 			if(!coastLines.isEmpty()) {
 				long ms = System.currentTimeMillis();
 				boolean coastlinesWereAdded = processCoastlines(coastLines, leftX, rightX, bottomY, topY, zoom, 
 						basemapCoastLines.isEmpty(), true, tempResult);
-				addBasemapCoastlines = !coastlinesWereAdded || zoom <= BASEMAP_ZOOM;
+				addBasemapCoastlines = (!coastlinesWereAdded && !detailedLandData) || zoom <= BASEMAP_ZOOM;
 				coastlineTime = "(coastline " + (System.currentTimeMillis() -  ms) + " ms )";
-			} 			
+			} else {
+				addBasemapCoastlines = !detailedLandData;
+			}
 			if(addBasemapCoastlines){
 				long ms = System.currentTimeMillis();
 				boolean coastlinesWereAdded = processCoastlines(basemapCoastLines, leftX, rightX, bottomY, topY, zoom, 

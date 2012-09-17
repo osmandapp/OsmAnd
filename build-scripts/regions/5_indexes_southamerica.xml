@@ -2,29 +2,29 @@
 <regions_list>
 		
 		<!--  5. SOUTH AMERICA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" skip="true"
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/{0}.osm.pbf" region_prefix="" skip="true"
 			region_suffix="">
 			<region name="south-america" esize="22"/>
 		</regions>
 		
-		<regions siteToDownload="http://download.geofabrik.de/osm/south-america/{0}.osm.pbf" region_prefix="" skip="false"
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/south-america/{0}.osm.pbf" region_prefix="" skip="false"
 			region_suffix="_SouthAmerica">
 			<region name="argentina" esize="" />
 			<region name="bolivia" esize="" />
 			<region name="brazil" esize="" />
 			<region name="chile" esize="" />
 			<region name="colombia" esize="" />
+			<region name="ecuador" esize="" />
+			<region name="uruguay" esize="" />
 		</regions>
 		
 		<!--  5. SOUTH AMERICA [SOURCE: CLOUDMADE.COM] --> 
 		<regions siteToDownload="http://downloads.cloudmade.com/americas/south_america/{0}/{0}.osm.bz2" region_prefix=""  
 					skip="false" region_suffix="_SouthAmerica">	
-			<region name="ecuador" esize="" />
 			<region name="guyana" esize="" />
 			<region name="paraguay" esize="" />
 			<region name="peru" esize="" />
 			<region name="suriname" esize="" />
-			<region name="uruguay" esize="" />
 			<region name="venezuela" esize="" />
 		</regions>	
 		

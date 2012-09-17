@@ -51,6 +51,10 @@ public abstract class BidForFixActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		setTheme(android.R.style.Theme_Light);
 		super.onCreate(savedInstanceState);
+		// throws null pointer exception on some devices if lv is not set
+		ListView lv = new ListView(this);
+		lv.setId(android.R.id.list);
+		setContentView(lv);
 		if (getHelper().isReloadNeeded()) {
 			showDialog(LOAD_ITEMS);
 		} else {

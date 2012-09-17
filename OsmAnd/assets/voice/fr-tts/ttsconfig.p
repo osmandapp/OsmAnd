@@ -36,6 +36,8 @@ and_arrive_destination == ['et arrivez à destination '].
 
 then == ['puis '].
 reached_destination == ['vous êtes arrivé à destination '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 bear_right == ['serrez à droite '].
 bear_left == ['serrez à gauche '].
 

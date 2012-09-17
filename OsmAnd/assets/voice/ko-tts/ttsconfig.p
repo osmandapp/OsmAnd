@@ -33,6 +33,8 @@ go_ahead == ['직진을 계속하세요 '].
 go_ahead(Dist) == [D, ' 직진하세요 ']:- distance(Dist) == D.
 
 and_arrive_destination == [' 다음은 목적지에 도착합니다 ']. % Miss and?
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == [', 다음은 '].
 reached_destination == ['목적지에 도착하였습니다 '].

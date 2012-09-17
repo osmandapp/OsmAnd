@@ -33,6 +33,8 @@ go_ahead == ['直直往前開 '].
 go_ahead(Dist) == ['沿著馬路往前 ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['然後可達終點 '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['然後 '].
 reached_destination == ['抵達終點 '].

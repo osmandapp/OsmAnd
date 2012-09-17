@@ -33,6 +33,8 @@ go_ahead == ['Verder dóorrijden '].
 go_ahead(Dist) == ['De weg', D,'volgen']:- distance(Dist) == D.
 
 and_arrive_destination == ['dan heeft u uw bestemming bereikt '].
+and_arrive_intermediate == ['and arrive at your via point '].
+reached_intermediate == ['you have reached your via point'].
 
 then == ['dan '].
 reached_destination == ['Bestemming bereikt '].
