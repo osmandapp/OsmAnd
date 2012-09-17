@@ -4,30 +4,30 @@
         <!-- 2. ASIA -->
 		
 		<!-- 2.2 ASIA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF ASIA IS BELOW FROM CLOUDMADE.COM) -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="false">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/asia/{0}.osm.pbf" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="azerbaijan" esize="15"/>
 			<region name="china" esize="4"/>
 			<region name="gaza" esize="3"/>
 			<region name="india" esize="1"/>
 			<region name="indonesia" esize="3"/>
+			<region name="iran" esize="1"/>
 			<region name="iraq" esize="1"/>
 			<region name="israel_and_palestine" esize="1"/>
 			<region name="japan" esize="1"/>
 			<region name="kazakhstan" esize="1"/>
 			<region name="kyrgyzstan" esize="1"/>
+			<region name="malaysia_singapore_brunei" esize=""/>
 			<region name="mongolia" esize="1"/>
 			<region name="pakistan" esize="1"/>
 			<region name="philippines" esize="1"/>
 			<region name="taiwan" esize="1"/>
+			<region name="tajikistan" esize="3"/>
 			<region name="turkmenistan" esize="1"/>
 			<region name="uzbekistan" esize="1"/>
+			<region name="vietnam" esize="1"/>
 		</regions>
 	    
-		<!-- 2.3 CENTRAL ASIA [SOURCE: CLOUDMADE.COM] -->
-		<regions siteToDownload="http://downloads.cloudmade.com/asia/central_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
-			<region name="tajikistan" esize="3"/>
-		</regions>
-		
+
 		<!-- 2.3 EASTERN ASIA [SOURCE: CLOUDMADE.COM] -->
 		<regions siteToDownload="http://downloads.cloudmade.com/asia/eastern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia" skip="false">
 			<region name="hong_kong" esize="67"/>
@@ -48,7 +48,6 @@
 			<region name="singapore" esize="2"/>
 			<region name="spratly_islands" esize="1"/>
 			<region name="thailand" esize="12"/>
-			<region name="vietnam" esize=""/>
 		</regions>	
 			
 		<!-- 2.3 SOUTHERN ASIA [SOURCE: CLOUDMADE.COM] -->

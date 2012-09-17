@@ -12,7 +12,7 @@
 		
         <!-- Countries to download from geofabrik or cloudmade server -->
 		<!-- 1. EUROPE [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" region_prefix="" skip="false" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/europe/{0}.osm.pbf" region_prefix="" skip="false" region_suffix="_Europe">
 			<region name="albania" esize="6" />
 			<region name="andorra" esize="1" />
 			<region name="austria" esize="110" />
@@ -60,7 +60,7 @@
 		</regions>
 
 		<!-- 1.1 GREAT BRITAIN [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="false" region_suffix="_Europe">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/europe/great_britain/{0}.osm.pbf" region_prefix="GB_" skip="false" region_suffix="_Europe">
 			<region name="scotland" esize=""/>		
 			<region name="wales" esize="10"/>
 			<region name="england" esize="230"/>

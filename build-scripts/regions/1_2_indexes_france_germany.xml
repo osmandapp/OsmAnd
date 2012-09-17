@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <regions_list>
 		<!-- 1.2 FRANCE [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/france/{0}.osm.pbf" region_prefix="France_" 
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/europe/france/{0}.osm.pbf" region_prefix="France_" 
 			skip="false" region_suffix="_Europe">
 			<region name="alsace" esize="" />
 			<region name="aquitaine" esize="" />
@@ -28,7 +28,7 @@
 		</regions>
 
 		<!-- 1.3 GERMANY [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="false" 
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/europe/germany/{0}.osm.pbf" region_prefix="Germany_" skip="false" 
 			region_suffix="_Europe">
 			<region name="baden-wuerttemberg" esize="" cityAdminLevel="7"/>
 			<region name="bayern" esize="" cityAdminLevel="7"/>

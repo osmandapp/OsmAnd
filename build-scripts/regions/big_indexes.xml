@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <regions_list>
    <!--
-   <regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" skip="false" region_suffix="_europe">
+   <regions siteToDownload="http://download.geofabrik.de/openstreetmap/europe/{0}.osm.pbf" skip="false" region_suffix="_europe">
 	    <region name="germany" esize="820"/>
    </regions> -->
    <regions siteToDownload="http://downloads.cloudmade.com/asia/northern_asia/{0}/{0}.osm.bz2" region_prefix="" region_suffix="_Asia"  skip="false">
    		<region name="russia" esize="820"/> 
    </regions>
 
-	<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix="" skip="false"	region_suffix="">
+	<regions siteToDownload="http://download.geofabrik.de/openstreetmap/{0}.osm.pbf" region_prefix="" skip="false"	region_suffix="">
 		 <region name="south-america" esize="22"/>
 	</regions>
-    <regions siteToDownload="http://download.geofabrik.de/osm/europe/{0}.osm.pbf" skip="false" region_suffix="_europe">
+    <regions siteToDownload="http://download.geofabrik.de/openstreetmap/europe/{0}.osm.pbf" skip="false" region_suffix="_europe">
 	     <region name="france" esize="1820"/> 			 			
     </regions>
 							
