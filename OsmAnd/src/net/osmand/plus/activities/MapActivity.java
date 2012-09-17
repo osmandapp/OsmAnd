@@ -323,10 +323,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			getMyApplication().getResourceManager().setBusyIndicator(new BusyIndicator(this, progress));
 		}
 
-		if (settings.getPointToNavigate() != null) {
-                    mapLayers.getMapControlsLayer().setCurrentlyRouting(true);
-                }
-
 		OsmandPlugin.onMapActivityResume(this);
 		getMyApplication().getDaynightHelper().onMapResume();
 		mapView.refreshMap(true);

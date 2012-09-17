@@ -564,6 +564,7 @@ public class MapActivityActions implements DialogProvider {
             settings.FOLLOW_THE_GPX_ROUTE.set(null);
             routingHelper.setFollowingMode(true);
             routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), current);
+            mapActivity.getMapLayers().getMapControlsLayer().setCurrentlyRouting(true);
             getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
 	}
 
