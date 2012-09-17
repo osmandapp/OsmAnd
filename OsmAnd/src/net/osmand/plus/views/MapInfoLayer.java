@@ -238,14 +238,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
+		TextInfoControl intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, all, none, 3);
 		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, all, none, 5);
 		TextInfoControl time = ric.createTimeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, all, none,  10);
 		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
-		TextInfoControl intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, all, none, 17);
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 

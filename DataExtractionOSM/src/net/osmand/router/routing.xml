@@ -165,7 +165,7 @@
 		<road tag="highway" value="bridleway" speed="8" priority="0.8" dynamicPriority="1"/>
 		<road tag="highway" value="steps" speed="3" priority="0.5" dynamicPriority="0.9"/>
 
-		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
+		<obstacle tag="highway" value="traffic_signals" penalty="25" routingPenalty="10"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>
 		<obstacle tag="railway" value="level_crossing" penalty="15"/>
 		<obstacle tag="barrier" value="cycle_barrier" penalty="10"/>
