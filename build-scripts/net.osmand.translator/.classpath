@@ -1,7 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="output" path="bin"/>
+  <classpathentry kind="src" path="src"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/guava/guava/13.0/guava-13.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/findbugs/jsr305/2.0.1/jsr305-2.0.1.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.10/junit-4.10.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/org.eclipse.core.contenttype/3.4.100.v20100505-1235/org.eclipse.core.contenttype-3.4.100.v20100505-1235.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/org.eclipse.core.jobs/3.5.0.v20100515/org.eclipse.core.jobs-3.5.0.v20100515.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/org.eclipse.core.resources/3.6.0.v20100526-0737/org.eclipse.core.resources-3.6.0.v20100526-0737.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/core/org.eclipse.core.runtime/3.6.0.v20100505/org.eclipse.core.runtime-3.6.0.v20100505.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/org.eclipse.equinox.common/3.6.0.v20100503/org.eclipse.equinox.common-3.6.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/equinox/org.eclipse.equinox.preferences/3.3.0.v20100503/org.eclipse.equinox.preferences-3.3.0.v20100503.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/tycho/org.eclipse.jdt.core/3.8.1.v20120531-0637/org.eclipse.jdt.core-3.8.1.v20120531-0637.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/osgi/org.eclipse.osgi/3.6.0.v20100517/org.eclipse.osgi-3.6.0.v20100517.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/jibx/config/3rdparty/org/eclipse/org.eclipse.text/3.5.100.v20110505-0800/org.eclipse.text-3.5.100.v20110505-0800.jar"/>
 </classpath>
