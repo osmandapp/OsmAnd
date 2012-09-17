@@ -1,2 +1,4 @@
-bin
+.project
+.classpath
+.externalToolBuilders
 target

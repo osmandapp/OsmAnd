@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.osmand.translator</groupId>
-	<artifactId>translator</artifactId>
+	<artifactId>OsmAndTranslator</artifactId>
 	<packaging>jar</packaging>
 	<version>1</version>
-	<name>translator</name>
+	<name>OsmAndTranslator</name>
 
 	<build>
 		<directory>target</directory>
@@ -41,7 +41,7 @@
 					<artifactId>maven-eclipse-plugin</artifactId>
 					<version>2.5</version>
 					<goals>
-						<project>net.osmand.translator</project>
+						<project>OsmAndTranslator</project>
 					</goals>
 				</plugin>
 			</plugins>
