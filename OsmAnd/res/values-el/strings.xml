@@ -1,15 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources>
-    <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-    <string name="btn_add_tag">Προσθήκη Ετικέτας</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Advanced Mode...</string>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Έκτακτη Ανάγκη</string>
@@ -22,15 +12,15 @@
 	<string name="poi_filter_food_shop">Κατάστημα Τροφίμων</string>
 	<string name="poi_filter_for_tourists">Τουριστικά</string>
 	<string name="poi_filter_fuel">Καύσιμα</string>
-	<string name="show_warnings_title">Εμφάνιση Προειδοποιήσεων&#8230;</string>
-	<string name="show_warnings_descr">Εμφάνιση ορίων ταχύτητας, Καμερων ταχύτητας, speed bumps, και άλλων προειδοποιήσεων</string>
-	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
-	<string name="use_compass_navigation">Χρήση Πυξίδας</string>
+	<string name="show_warnings_title">Εμφάνιση Προειδοποιήσεων…</string>
+	<string name="show_warnings_descr">Εμφάνιση ορίων ταχύτητας, καμερών ταχύτητας, speed bumps, και άλλων προειδοποιήσεων</string>
+	<string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει εντοπιστεί διαφορετικά</string>
+	<string name="use_compass_navigation">Χρήση πυξίδας</string>
 	<string name="avoid_motorway">Αποφυγή αυτοκινητόδρομων</string>
 	<string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
-	<string name="auto_zoom_map">Auto zoom map</string>
+	<string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
 	<string name="tip_recent_changes_0_8_3_t">Αλλαγές στην 0.8.3 :
-		\n\t* Improved route guidance
+		\n\t* Βελτιωμένη καθοδήγηση δρομολογίου
 		\n\t* Επιλογή αποφυγής αυτοκινητόδρομων
 		\n\t* Cycleway=track display
 		\n\t* better UI finish (icons)
@@ -39,7 +29,7 @@
 	<string name="snap_to_road_descr">Snap position to roads during navigation</string>
 	<string name="snap_to_road">Snap to road</string>
 	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
-		\n\t* Improved Routing
+		\n\t* Βελτιωμένη Δρομολόγηση
 		\n\t* Dynamic map widgets
 		\n\t* Οι ρυθμίσεις χάρτη μετακινήθηκαν στην οθόνη του χάρτη
 		\n\t* Lock screen button with logging services
@@ -47,7 +37,7 @@
 	</string>
 	<string name="osmand_short_description_80_chars">Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοιχτού κώδικα για χάρτες εντός και εκτός σύνδεσης</string>
 	<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
+		OsmAnd (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
 
 		OsmAnd is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
 
@@ -70,9 +60,9 @@
 
 		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
 	</string>
-	<string name="osmand_plus_short_description_80_chars">OsmAnd is an open source navigation application for offline and online maps</string>
+	<string name="osmand_plus_short_description_80_chars">Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα για χάρτες με ή χωρίς σύνδεση</string>
 	<string name="osmand_plus_long_description_1000_chars">
-		OsmAnd+ (OSM Automated Navigation Directions)
+		OsmAnd+ (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
 
 		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
 
@@ -92,47 +82,47 @@
 		-  optional map alignment according to compass or direction of motion
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 	</string>
-	<string name="tip_update_index">Update of Offline Data</string>
+	<string name="tip_update_index">Ανανέωση των εκτός σύνδεσης Δεδομένων</string>
 	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates.
-		\n\tTo check for updates go to \'Settings\' -> \'Offline data\' -> \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -> \'Filter downloaded\' to indicate updates only for data already on your device.
+		\n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device.
 		\n\tThe availability of updates  is depicted by the following colors:
 		\n\t\'Green\' - indicates data files identical on device and server
 		\n\t\'Blue\' - indicates available updates on server
 		\n\t\'Dark green/blue\' - likewise indicate data de-activated on the device</string>
 	<string name="filterpoi_activity">Create POI filter</string>
 	<string name="recalculate_route_to_your_location">Transport mode:</string>
-	<string name="select_navigation_mode">Select transport mode</string>
+	<string name="select_navigation_mode">Επιλογή τρόπου μετακίνησης</string>
 	<string name="monitor_preferences">Tracking</string>
 	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
 	<string name="day_night_info">Πληρ. Ημέρα/Νύχτα</string>
-	<string name="map_widget_day_night">Day/night map</string>
-	<string name="map_widget_vector_attributes">Rendering attributes:</string>
-	<string name="map_widget_renderer">Rendering style</string>
+	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
+	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης:</string>
+	<string name="map_widget_renderer">Τρόπος απεικόνισης</string>
 	<string name="live_monitoring_mode_off">Start\n live tracking</string>
 	<string name="live_monitoring_mode_on">Stop\n live tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
-	<string name="position_on_map">Position marker</string>
-	<string name="layer_map_appearance">Ρύθμιση οθόνης&#8230;</string>
+	<string name="position_on_map">Δείκτης θέσης</string>
+	<string name="layer_map_appearance">Ρύθμιση οθόνης…</string>
 	<string name="show_lanes">Εμφάνιση λωρίδων</string>
-	<string name="avoid_unpaved">Avoid unpaved roads</string>
-	<string name="avoid_ferries">Avoid ferries</string>
-	<string name="avoid_in_routing_title">Αποφυγή&#8230;</string>
-	<string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
+	<string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
+	<string name="avoid_ferries">Αποφυγή πορθμείων</string>
+	<string name="avoid_in_routing_title">Αποφυγή…</string>
+	<string name="avoid_in_routing_descr">Αποφυγή διοδίων, χωματόδρομων, πορθμείων</string>
 	<string name="map_widget_fluorescent">Fluorescent routes</string>
 	<string name="map_widget_show_ruler">Χάρακας</string>
-	<string name="map_widget_appearance">Miscellaneous:</string>
+	<string name="map_widget_appearance">Διάφορα:</string>
 	<string name="map_widget_view_direction">Viewing direction</string>
 	<string name="map_widget_transparent">Transparent skin</string>
 	<string name="monitoring_mode_off">Εγγραφή GPX</string>
-	<string name="monitoring_mode_on">Stop\n GPX rec.</string>
+	<string name="monitoring_mode_on">Σταμάτημα\n εγγρ. GPX.</string>
 	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
 	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
 	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
 	<string name="int_continuosly">Συνεχόμενο</string>
-	<string name="screen_is_locked">To unlock screen press lock icon</string>
+	<string name="screen_is_locked">Για ξεκλείδωμα της οθόνης πάτα την εικόνα της κλειδαριάς</string>
 	<string name="map_widget_top_text">Όνομα οδού</string>
 	<string name="map_widget_config">Ρύθμιση οθόνης</string>
-	<string name="map_widget_map_select">Map source</string>
+	<string name="map_widget_map_select">Πηγή χάρτη</string>
 	<string name="map_widget_back_to_loc">Πού είμαι</string>
 	<string name="map_widget_lock_screen">Κλείδωμα οθόνης</string>
 	<string name="map_widget_compass">Πυξίδα</string>
@@ -147,8 +137,8 @@
 	<string name="map_widget_altitude">Υψόμετρο</string>
 	<string name="map_widget_time">Υπολειπόμενος χρόνος</string>
 	<string name="map_widget_next_turn">Επόμενη στροφή</string>
-	<string name="map_widget_next_turn_small">Next turn (small)</string>
-	<string name="map_widget_next_next_turn">Second next turn</string>
+	<string name="map_widget_next_turn_small">Επόμενη στροφή (μικρή)</string>
+	<string name="map_widget_next_next_turn">Μεθεπόμενη στροφή</string>
 	<string name="map_widget_mini_route">Mini route map</string>
 	<string name="bg_service_screen_lock">Κλείδωμα οθόνης</string>
 	<string name="bg_service_screen_unlock">Ξεκλείδωμα οθόνης</string>
@@ -157,8 +147,8 @@
 	<string name="show_cameras">Εμφάνιση καμερών ταχύτητας</string>
 	<string name="show_speed_limits">Εμφάνιση ορίων ταχύτητας</string>
 	<string name="avoid_toll_roads">Αποφυγή διοδίων</string>
-	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
-	<string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
+	<string name="continue_follow_previous_route_auto">Η προηγούμενη πλοήγηση δεν είχε τελειώσει. Να συνεχιστεί;? (%1$s δευτ.)</string>
+	<string name="route_updated_loc_found">Η διαδρομή θα επαναϋπολογιστεί όταν βρεθεί η τοποθεσία</string>
 	<string name="osmand_parking_hours">Ώρες</string>
 	<string name="osmand_parking_minutes">Λεπτά</string>
 	<string name="osmand_parking_position_description_add_time">ο αυτοκίνητο έχει σταθμεύσει στο:</string>
@@ -177,90 +167,89 @@
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
 		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Total native memory</string>
-	<string name="update_downlod_list">Reload list</string>
-	<string name="starting_point_too_far">Starting point too far from nearest road.</string>
+	<string name="update_downlod_list">Ανανέωση καταλόγου</string>
+	<string name="starting_point_too_far">Το σημείο εκκίνησης είναι πολύ μακριά από τον κοντινότερο δρόμο.</string>
 	<string name="shared_location">Shared location</string>
 	<string name="osmand_parking_event">Pick up the car from parking</string>
-	<string name="osmand_parking_warning">Warning</string>
+	<string name="osmand_parking_warning">Προσοχή</string>
 	<string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>    
 	<string name="osmand_parking_time_limit_title">Set the time limit of parking</string>
 	<string name="osmand_parking_delete_confirm">Do you want to remove the location of the parked car?</string>
-	<string name="osmand_parking_delete">Delete a parking marker</string>
-	<string name="osmand_parking_choose_type">Choose the type of parking</string>
-	<string name="osmand_parking_lim_text">Time-limited</string>
-	<string name="osmand_parking_no_lim_text">Time-unlimited</string>
+	<string name="osmand_parking_delete">﻿Διαγράψτε ένα δείκτη στάθμευσης</string>
+	<string name="osmand_parking_choose_type">﻿Επιλέξτε τον τύπο της στάθμευσης</string>
+	<string name="osmand_parking_lim_text">﻿Ορισμένου χρόνου</string>
+	<string name="osmand_parking_no_lim_text">Απεριόριστου χρόνου</string>
 	<string name="osmand_parking_add_event">Add a notification to Calendar application</string>
-	<string name="osmand_parking_time_limit">Time-limited parking</string>
-	<string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
-	<string name="osmand_parking_position_description">The position of your parked car. %1$s</string>
+	<string name="osmand_parking_time_limit">Στάθμευση περιορισμένου χρόνου</string>
+	<string name="osmand_parking_time_no_limit">Στάθμευση απεριόριστου χρόνου</string>
+	<string name="osmand_parking_position_description">Η τοποθεσία του σταθμευμένου αυτοκινήτου σας. %1$s</string>
 	<string name="osmand_parking_position_description_add">To pick up the car at:</string>
-	<string name="osmand_parking_pm">PM</string>
-	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">Parking point</string>
-	<string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
-	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
-	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
-	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
-	<string name="gpxup_public">Public</string>
-	<string name="gpxup_identifiable">Identifiable</string>
-	<string name="gpxup_trackable">Trackable</string>
-	<string name="gpxup_private">Private</string>
+	<string name="osmand_parking_pm">ΜΜ</string>
+	<string name="osmand_parking_am">ΠΜ</string>
+	<string name="osmand_parking_position_name">﻿Σημείο στάθμευσης</string>
+	<string name="osmand_parking_plugin_description">﻿Αυτό το πρόσθετο σας επιτρέπει να αποθηκεύσετε τη θέση του σταθμευμένου αυτοκινήτου σας.</string>
+	<string name="osmand_parking_plugin_name">Πρόσθετο θέσης Στάθμευσης</string>
+	<string name="context_menu_item_add_parking_point">﻿Σήμανση ως μια θέση στάθμευσης</string>
+	<string name="context_menu_item_delete_parking_point">﻿Διαγραφή ενός δείκτη στάθμευσης</string>
+	<string name="gpxup_public">Δημόσιο</string>
+	<string name="gpxup_identifiable">﻿Αναγνωρίσιμες</string>
+	<string name="gpxup_trackable">﻿Ιχνηλάσιμο</string>
+	<string name="gpxup_private">Ιδιωτικό</string>
 	<string name="asap">ASAP</string>
-	<string name="save_route_as_gpx">Save route as GPX file</string>
+	<string name="save_route_as_gpx">﻿Αποθήκευση διαδρομής ως αρχείο GPX</string>
 	<string name="route_roundabout">Roundabout : take %1$d exit and go</string>
-	<string name="route_kl">Keep left and go</string>
-	<string name="route_kr">Keep right and go</string>
+	<string name="route_kl">﻿Μείνετε αριστερά και προχωρήστε</string>
+	<string name="route_kr">Μείνετε δεξιά και προχωρήστε</string>
 	<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
-	<string name="rendering_attr_noPolygons_name">No polygons</string>
-	<string name="rendering_attr_appMode_name">Rendering mode</string>
+	<string name="rendering_attr_noPolygons_name">Όχι πολύγωνα</string>
+	<string name="rendering_attr_appMode_name">Λειτουργία απεικόνισης</string>
 	<string name="rendering_attr_appMode_description">Optimize map for</string>
-	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string -->
 	<string name="rendering_attr_contourLines_description">Display from zoom level (needs SRTM file):</string>
 	<string name="rendering_attr_contourLines_name">Show contour lines</string>
 	<string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
-	<string name="rendering_attr_hmRendered_name">Show more map detail</string>
-	<string name="local_index_routing_data">Routing data</string>
-	<string name="navigate_point_format">Format :</string>
-	<string name="poi_search_desc">POI (Point of interest) search</string>
-	<string name="address_search_desc">Address search</string>
-	<string name="navpoint_search_desc">Coordinates</string>
+	<string name="rendering_attr_hmRendered_name">﻿Εμφάνιση περισσότερων λεπτομερειών χάρτη</string>
+	<string name="local_index_routing_data">Δεδομένα δρομολόγησης</string>
+	<string name="navigate_point_format">Διάταξη :</string>
+	<string name="poi_search_desc">﻿Αναζήτηση ΣΕ (σημείο ενδιαφέροντος)</string>
+	<string name="address_search_desc">Αναζήτηση ﻿διεύθυνσης</string>
+	<string name="navpoint_search_desc">Συντεταγμένες</string>
 	<string name="transport_search_desc">Transportation search</string>
-	<string name="favourites_search_desc">Favorites search</string>
-	<string name="history_search_desc">Search history</string>
+	<string name="favourites_search_desc">﻿Αναζήτηση Αγαπημένων</string>
+	<string name="history_search_desc">﻿Ιστορικό αναζήτησης</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
-	<string name="left_side_navigation">Left-hand driving</string>
-	<string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
-	<string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
-	<string name="unknown_from_location">Starting point is not yet determined</string>
-	<string name="unknown_location">Position not yet known</string>
-	<string name="context_menu_item_directions">Directions to here</string>
-	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
-	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' ->  \'Offline Data\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="left_side_navigation">Οδήγηση ﻿αριστερά</string>
+	<string name="left_side_navigation_descr">﻿Επιλέξτε για χώρες με κυκλοφορία αριστερά</string>
+	<string name="download_link_and_local_description">﻿Κάντε κλικ εδώ, για να κάνετε λήψη ή να ενημερώσετε δεδομένα χωρίς σύνδεση. \nΚλικ κάποιο υπάρχον στοιχείο για να δείτε περισσότερες λεπτομέρειες, πατήστε και κρατήστε πατημένο για να το απενεργοποιήσετε ή να το διαγράψετε. Τρέχοντα δεδομένα στη συσκευή (%1$s ελεύθερα):</string>
+	<string name="unknown_from_location">﻿Το σημείο εκκίνησης δεν έχει ακόμη καθορισθεί</string>
+	<string name="unknown_location">Η Θέση δεν είναι ακόμα γνωστή</string>
+	<string name="context_menu_item_directions">﻿Οδηγίες για εδώ</string>
+	<string name="modify_transparency">﻿Τροποποίηση διαφάνειας (0 - διάφανο, 255 - αδιαφανές)</string>
+	<string name="confirm_interrupt_download">﻿Θέλετε να διακόψετε τη λήψη αρχείων;</string>
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' -&gt;  \'Offline Data\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online maps (tiles)</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
 	<string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
-	<string name="index_settings_descr">Download, view details, and manage offline maps</string>
+	<string name="index_settings_descr">Λήψη, προβολή λεπτομερειών, και διαχείριση χαρτών για λειτουργία χωρίς σύνδεση</string>
 	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
 	<string name="map_online_data">Online maps (tiles)</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
 	<string name="online_map_settings">Online Maps</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
-	<string name="map_settings">Map Settings</string>
+	<string name="map_settings">Ρυθμίσεις Χάρτη</string>
 	<string name="map_settings_descr">Configure the map display</string>
 	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
 	<string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
 	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
-	<string name="extra_settings">Advanced settings</string>
+	<string name="extra_settings">Ρυθμίσεις για προχωρημένους</string>
 	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to GPX files or to live track using a web service.</string>
 	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
 	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
-	<string name="plugins_screen">Plugin Manager</string>
-	<string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
+	<string name="plugins_screen">Διαχειριστής Προσθέτων</string>
+	<string name="select_plugin_to_activate">﻿Αγγίξτε ένα Πρόσθετο για να το ενεργοποιήσετε ή να το απενεργοποιήσετε. (Επανεκκίνηση του OsmAnd ίσως να απαιτείται.)</string>
 	<string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
-	<string name="prefs_plugins">Plugin Manager</string>
+	<string name="prefs_plugins">Διαχειριστής Προσθέτων</string>
 	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 		\n\t- *Plugin functionality*
 		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager.
@@ -288,41 +277,41 @@
 	</string>
 	<string name="send_files_to_osm">Send GPX files to OSM?</string>
 	<string name="gpx_visibility_txt">Visibility</string>
-	<string name="gpx_tags_txt">Tags</string>
-	<string name="gpx_description_txt">Description</string>
+	<string name="gpx_tags_txt">Ετικέτες</string>
+	<string name="gpx_description_txt">Περιγραφή</string>
 	<string name="validate_gpx_upload_name_pwd">Please specify OSM user name and password to upload GPX files.</string>
-    	<string name="default_buttons_support">Support</string>
+    	<string name="default_buttons_support">Υποστήριξη</string>
 	<string name="support_new_features">Support new features</string>
-	<string name="show_ruler_level">Display ruler</string>	
-	<string name="info_button">Info</string>
-	<string name="back_to_location">Back to location</string>
-	<string name="help">Help</string>
-	<string name="show_details">Show details</string>
+	<string name="show_ruler_level">﻿Εμφάνιση χάρακα</string>	
+	<string name="info_button">Πληροφορίες</string>
+	<string name="back_to_location">﻿Πίσω στη τοποθεσία</string>
+	<string name="help">Βοήθεια</string>
+	<string name="show_details">Εμφάνιση λεπτομερειών</string>
 	<string name="accessibility_extensions_descr">Accessibility extensions for old Android versions</string>
 	<string name="accessibility_extensions">Accessibility extensions</string>
-	<string name="accessibility_mode">Accessibility mode</string>
-	<string name="accessibility_mode_descr">Turns on the accessibility features</string>
-	<string name="accessibility_on">On</string>
-	<string name="accessibility_off">Off</string>
+	<string name="accessibility_mode">﻿Λειτουργία προσβασιμότητας</string>
+	<string name="accessibility_mode_descr">﻿Ενεργοποιεί τις δυνατότητες προσβασιμότητας</string>
+	<string name="accessibility_on">Ενεργό</string>
+	<string name="accessibility_off">Ανενεργό</string>
 	<string name="accessibility_default">According to the global system setting</string>
-	<string name="backToMenu">Back To Menu</string>
-	<string name="zoomOut">Zoom out</string>
-	<string name="zoomIn">Zoom in</string>
+	<string name="backToMenu">﻿Πίσω Στο Μενού</string>
+	<string name="zoomOut">Σμίκρυνση</string>
+	<string name="zoomIn">Μεγέθυνση</string>
 	<string name="zoomIs">Zoom is</string>
-	<string name="north">north</string>
-	<string name="north_north_east">north-north-east</string>
-	<string name="north_east">north-east</string>
-	<string name="east_north_east">east-north-east</string>
-	<string name="east">east</string>
+	<string name="north">βόρεια</string>
+	<string name="north_north_east">﻿βόρεια-βορειοανατολικά</string>
+	<string name="north_east">﻿βορειοανατολικά</string>
+	<string name="east_north_east">﻿ανατολικά-βορειοανατολικά</string>
+	<string name="east">ανατολικά</string>
 	<string name="east_south_east">east-south-east</string>
-	<string name="south_east">south-east</string>
-	<string name="south_south_east">south-south-east</string>
-	<string name="south">south</string>
-	<string name="south_south_west">south-south-west</string>
-	<string name="south_west">south-west</string>
-	<string name="west_south_west">west-south-west</string>
-	<string name="west">west</string>
-	<string name="west_north_west">west-north-west</string>
+	<string name="south_east">νοτιοανατολικά</string>
+	<string name="south_south_east">﻿νότια-νοτιοανατολικά</string>
+	<string name="south">νότια</string>
+	<string name="south_south_west">﻿νότια-νότιοδυτικά</string>
+	<string name="south_west">﻿νοτιοδυτικά</string>
+	<string name="west_south_west">﻿δυτικά-νοτιοδυτικά</string>
+	<string name="west">δυτικά</string>
+	<string name="west_north_west">﻿δυτικά βορειοδυτικά</string>
 	<string name="north_west">north-west</string>
 	<string name="north_north_west">north-north-west</string>
 	<string name="front">Front</string>
@@ -372,7 +361,6 @@
 	<string name="local_openstreetmap_uploading">Uploading…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload all</string>
-	<string name="local_openstreetmap_items"></string>
 	<string name="local_openstreetmap_show">Show on map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete modification</string>
@@ -436,11 +424,11 @@
 		\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
 		\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	</string>
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map source...\' -> \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -&gt; \'Define View\' -&gt; \'Map source...\' -&gt; \'Offline vector maps\'.</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t_v2">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 		\n\tNight colors are safer for night driving.
-		\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen...\' ->\'Day/night map\'.
+		\n\tYou can set a policy for day/night switching in \'Menu\' -&gt; \'Configure screen...\' -&gt;\'Day/night map\'.
 		\n\tChoices are:
 		\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
 		\n\t\'Day\' - always use day mode
@@ -449,7 +437,7 @@
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
-		\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM Editing\'.
+		\n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM Editing\'.
 		\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 		\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
 		\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
@@ -470,7 +458,7 @@
 	</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
-	<string name="init_native_library">Initializing native library&#8230;</string>
+	<string name="init_native_library">Initializing native library…</string>
 	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
 	<string name="auto_follow_route_never">Never</string>
@@ -514,13 +502,13 @@
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="search_select_point">Select</string>
-	<string name="search_position_current_location_search">Searching position&#8230;</string>
+	<string name="search_position_current_location_search">Searching position…</string>
 	<string name="search_position_current_location_found">Position (Found)</string>
-	<string name="search_position_address">Address&#8230;</string>
-	<string name="search_position_favorites">Favorites&#8230;</string>
+	<string name="search_position_address">Address…</string>
+	<string name="search_position_favorites">Favorites…</string>
 	<string name="search_position_undefined">Undefined</string>
 	<string name="search_position_fixed">Fixed</string>
-	<string name="search_position_current_location">Current position&#8230;</string>
+	<string name="search_position_current_location">Current position…</string>
 	<string name="search_position_map_view">Last map view</string>
 	<string name="select_search_position">Search near :</string>
 	<string name="context_menu_item_search">Search near here</string>
@@ -573,13 +561,12 @@
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Reload from sdcard</string>
-	<string name="local_index_download">Download&#8230;</string>
+	<string name="local_index_download">Download…</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transportation data</string>
 	<string name="local_index_map_data">Map data</string>
-	<string name="local_index_items"></string>
 	<string name="local_indexes_cat_backup">Deactivated</string>
 	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
 	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
@@ -602,7 +589,7 @@
 	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
-	<string name="installing_new_resources">Unpacking new data&#8230;</string>
+	<string name="installing_new_resources">Unpacking new data…</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
@@ -611,7 +598,7 @@
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
-	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source&#8230;\' -> \'Offline vector maps\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -&gt; \'Define view\' -&gt; \'Map Source…\' -&gt; \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -622,32 +609,31 @@
 	<string name="overlay_transparency">Overlay transparency</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
 	<string name="map_transparency">Base map transparency</string>
-	<string name="layer_underlay">Underlay map&#8230;</string>
+	<string name="layer_underlay">Underlay map…</string>
 	<string name="map_underlay">Underlay map</string>
 	<string name="map_underlay_descr">Choose underlay map</string>
-	<string name="layer_overlay">Overlay map&#8230;</string>
+	<string name="layer_overlay">Overlay map…</string>
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>
-	<string name="install_more">Install more&#8230;</string>
+	<string name="install_more">Install more…</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 	<string name="tip_location_sharing">Location Sharing</string>
 	<string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip  with family or friends.
 		\n\tTo share any location you want:
-		\n\tUse \'Map context menu\' -> \'Share location\' menu.
+		\n\tUse \'Map context menu\' -&gt; \'Share location\' menu.
 		\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.
 	</string>
 	<string name="tip_favorites">Favorite Points</string>
 	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
-		\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -> \'Favorites\'.
+		\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -&gt; \'Favorites\'.
 		\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
-		\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -> \'Define view\'.
+		\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -&gt; \'Define view\'.
 	</string>
-	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search address using offline maps</string>
@@ -655,8 +641,8 @@
 	<string name="preferred_locale_descr">Select display language</string>
 	<string name="preferred_locale">Display language</string>
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
-		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
+	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -&gt; \'Define view\' in map view.
+		\n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\tOsmAnd also supports custom sources.
 	</string>
 	<string name="tip_app_mode">User Profile</string>
@@ -664,7 +650,7 @@
 		\n\tYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route.
 	</string>
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
+	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 		\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.
@@ -718,10 +704,10 @@
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
 	<string name="amenity_type_transportation">Transportation</string>
-	<string name="indexing_address">Indexing address&#8230;</string>
-	<string name="indexing_map">Indexing map&#8230;</string>
-	<string name="indexing_poi">Indexing POI&#8230;</string>
-	<string name="indexing_transport">Indexing transportation&#8230;</string>
+	<string name="indexing_address">Indexing address…</string>
+	<string name="indexing_map">Indexing map…</string>
+	<string name="indexing_poi">Indexing POI…</string>
+	<string name="indexing_transport">Indexing transportation…</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -730,21 +716,21 @@
 	<string name="poi_filter_closest_poi">Closest POI</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
+	<string name="reading_cached_tiles">Reading cached tiles…</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
-	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
-	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes > 20 km (experimental)</string>
+	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
+	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
 	<string name="application_dir">Storage directory</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
-	<string name="downloading_build">Downloading build&#8230;</string>
+	<string name="downloading_build">Downloading build…</string>
 	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
+	<string name="loading_builds">Loading OsmAnd builds…</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
@@ -794,7 +780,7 @@
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">GPX track&#8230;</string>
+	<string name="layer_gpx_layer">GPX track…</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transportation at stop</string>
@@ -826,8 +812,8 @@
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs</string>
 	<string name="layer_transport">Transportation stops</string>
-	<string name="layer_poi">POI&#8230;</string>
-	<string name="layer_map">Map source&#8230;</string>
+	<string name="layer_poi">POI…</string>
+	<string name="layer_map">Map source…</string>
 	<string name="menu_layers">Define view</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="context_menu_item_show_route">Show route from here</string>
@@ -856,14 +842,14 @@
 	<string name="menu_mute_on">Sound is off</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
-	<string name="voice_data_initializing">Initializing voice data&#8230;</string>
+	<string name="voice_data_initializing">Initializing voice data…</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
 	<string name="voice_data_unavailable">Selected voice data is not available</string>
 	<string name="stop_routing">Stop navigtn.</string>
 	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
-	<string name="unzipping_file">Unzipping file&#8230;</string>
+	<string name="unzipping_file">Unzipping file…</string>
 	<string name="route_tr">Turn right and go</string>
 	<string name="route_tshr">Turn sharply right and go</string>
 	<string name="route_tslr">Turn slightly right and go</string>
@@ -874,7 +860,7 @@
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Later</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="search_poi_location">Searching for signal&#8230;</string>
+	<string name="search_poi_location">Searching for signal…</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
@@ -914,11 +900,11 @@
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
-	<string name="uploading_data">Uploading data&#8230;</string>
-	<string name="uploading">Uploading&#8230;</string>
+	<string name="uploading_data">Uploading data…</string>
+	<string name="uploading">Uploading…</string>
 	<string name="search_nothing_found">Nothing found</string>
-	<string name="searching">Searching&#8230;</string>
-	<string name="searching_address">Searching address&#8230;</string>
+	<string name="searching">Searching…</string>
+	<string name="searching_address">Searching address…</string>
 	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
@@ -934,9 +920,9 @@
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
-	<string name="downloading_file">Downloading file&#8230;</string>
-	<string name="downloading">Downloading&#8230;</string>
-	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
+	<string name="downloading_file">Downloading file…</string>
+	<string name="downloading">Downloading…</string>
+	<string name="downloading_list_indexes">Downloading list of available regions…</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
@@ -948,18 +934,18 @@
 	<string name="get_directions">Directions</string>
 	<string name="show_gps_status">Show GPS Status</string>
 	<string name="opening_hours">Opening hours</string>
-	<string name="opening_changeset">Opening changeset&#8230;</string>
-	<string name="closing_changeset">Closing changeset&#8230;</string>
-	<string name="commiting_node">Committing node&#8230;</string>
-	<string name="loading_poi_obj">Loading POI&#8230;</string>
+	<string name="opening_changeset">Opening changeset…</string>
+	<string name="closing_changeset">Closing changeset…</string>
+	<string name="commiting_node">Committing node…</string>
+	<string name="loading_poi_obj">Loading POI…</string>
 	<string name="auth_failed">Authorization failed</string>
 	<string name="failed_op">failed</string>
-	<string name="converting_names">Converting native/English names&#8230;</string>
-	<string name="loading_streets_buildings">Loading streets/buildings&#8230;</string>
-	<string name="loading_postcodes">Loading postcodes&#8230;</string>
-	<string name="loading_streets">Loading streets&#8230;</string>
-	<string name="loading_cities">Loading cities&#8230;</string>
-	<string name="loading">Loading&#8230;</string>
+	<string name="converting_names">Converting native/English names…</string>
+	<string name="loading_streets_buildings">Loading streets/buildings…</string>
+	<string name="loading_postcodes">Loading postcodes…</string>
+	<string name="loading_streets">Loading streets…</string>
+	<string name="loading_cities">Loading cities…</string>
+	<string name="loading">Loading…</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
@@ -970,10 +956,10 @@
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
-	<string name="loading_data">Loading data&#8230;</string>
-	<string name="reading_indexes">Reading local data&#8230;</string>
+	<string name="loading_data">Loading data…</string>
+	<string name="reading_indexes">Reading local data…</string>
 	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
-	<string name="saving_gpx_tracks">Saving GPX tracks to SD&#8230;</string>
+	<string name="saving_gpx_tracks">Saving GPX tracks to SD…</string>
 	<string name="finished_task">Finished</string>
 	<string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
 	<string name="reload_indexes">Re-read offline data</string>
