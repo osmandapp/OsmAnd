@@ -173,7 +173,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			List<List<Node>> innerWays = new ArrayList<List<Node>>();
 
 			for (Ring r : m.getInnerRings()) {
-				innerWays.add(r.getBorder().getNodes());
+				innerWays.add(r.getBorder());
 			}
 
 			// don't use the relation ids. Create new ones
