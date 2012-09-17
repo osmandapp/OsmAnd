@@ -1150,7 +1150,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING ? OsmandSettings.BOTTOM_CONSTANT : 
 			 OsmandSettings.CENTER_CONSTANT);
 		
-		AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
+		// TODO(natashaj): disable notification
+		//AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
 		mapView.refreshMap();
 	}
 	
@@ -1340,7 +1341,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
-			if(autoFollow > 0 && routingHelper.isFollowingMode() && mapLayers.getMapControlsLayer().getFollowMode() != FollowMode.FREE_SCROLL){
+			if(autoFollow > 0 && routingHelper.isFollowingMode()){
 				backToLocationWithDelay(autoFollow);
 			}
 		}
@@ -1348,6 +1349,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	private void backToLocationWithDelay(int delay) {
+	    // Hacky way to turn off auto center in free scroll for prototype
+	    if (mapLayers.getMapControlsLayer().getFollowMode() == FollowMode.FREE_SCROLL)
+	        return;
+
 		uiHandler.removeMessages(AUTO_FOLLOW_MSG_ID);
 		Message msg = Message.obtain(uiHandler, new Runnable() {
 			@Override
