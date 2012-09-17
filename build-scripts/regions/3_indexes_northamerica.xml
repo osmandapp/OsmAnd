@@ -2,7 +2,7 @@
 <regions_list>
 		<!-- 3. North America  -->		
 		<!-- 3.1 USA-AVAILABLE ON GEOFABRIK.DE [SOURCE: GEOFABRIK.DE] (REST OF USA IS BELOW FROM CLOUDMADE.COM) -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/us/{0}.osm.pbf" skip="false" region_prefix="US_" region_suffix="_NorthAmerica">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/north-america/us/{0}.osm.pbf" skip="false" region_prefix="US_" region_suffix="_NorthAmerica">
 			<region name="alabama" esize=""/>
 			<region name="alaska" esize=""/>
 			<region name="arizona" esize=""/>
@@ -60,7 +60,7 @@
 
 		
 		<!-- 3.2 CANADA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="false" region_suffix="_NorthAmerica">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/north-america/canada/{0}.osm.pbf" region_prefix="Canada_" skip="false" region_suffix="_NorthAmerica">
 			<region name="alberta" esize="36"/>
 			<region name="british-columbia" esize=""/>
 			<region name="manitoba" esize=""/>
