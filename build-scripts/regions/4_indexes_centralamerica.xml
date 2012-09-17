@@ -2,10 +2,10 @@
 <regions_list>
 				
 		<!--  4. CENTRAL AMERICA [SOURCE: GEOFABRIK.DE] -->
-		<regions siteToDownload="http://download.geofabrik.de/osm/{0}.osm.pbf" region_prefix=""  skip="true" region_suffix="">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/{0}.osm.pbf" region_prefix=""  skip="true" region_suffix="">
 			<region name="central-america" esize=""/>
 		</regions>	
-		<regions siteToDownload="http://download.geofabrik.de/osm/central-america/{0}.osm.pbf" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
+		<regions siteToDownload="http://download.geofabrik.de/openstreetmap/central-america/{0}.osm.pbf" region_prefix=""  skip="false" region_suffix="_CentralAmerica">
 			<region name="belize" esize="" />
 			<region name="guatemala" esize="" />
 			<region name="haiti-and-domrep" esize="" />
