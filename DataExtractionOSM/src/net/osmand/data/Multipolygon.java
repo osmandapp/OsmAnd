@@ -105,23 +105,34 @@ public class Multipolygon {
 	 * @return true if this multipolygon is correct and contains the point
 	 */
 	public boolean containsPoint(double latitude, double longitude) {
-		boolean outerContain = false;
-		for (Ring outer : getOuterRings()) {
+		Ring containedInOuter = null;
+		// use a sortedset to get the smallest outer containing the point
+		SortedSet<Ring> outers = new TreeSet<Ring> (getOuterRings());
+		for (Ring outer : outers) {
 			if (outer.containsPoint(latitude, longitude)) {
-				outerContain = true;
+				containedInOuter = outer;
 				break;
 			}
 		}
-		if (!outerContain) {
+		
+		if (containedInOuter == null) {
 			return false;
 		}
-		for (Ring inner : getInnerRings()) {
+		
+		//use a sortedSet to get the smallest inner Ring
+		SortedSet<Ring> inners = new TreeSet<Ring> (getInnerRings());
+		Ring containedInInner = null;
+		for (Ring inner : inners) {
 			if (inner.containsPoint(latitude, longitude)) {
-				return false;
+				containedInInner = inner;
+				break;
 			}
 		}
 
-		return true;
+		if (containedInInner == null) return true;
+		
+		// if it is both, in an inner and in an outer, check if the inner is indeed the smallest one
+		return !containedInInner.isIn(containedInOuter);
 	}
 
 	/**
@@ -331,7 +342,7 @@ public class Multipolygon {
 	}
 	
 	/**
-	 * This method only works when the multipolygon has exaclt one outer Ring
+	 * This method only works when the multipolygon has exactly one outer Ring
 	 * @return the list of nodes in the outer ring
 	 */
 	public List<Node> getOuterNodes() {
