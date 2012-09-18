@@ -308,6 +308,7 @@ public class Multipolygon {
 		ArrayList<Ring> inners = new ArrayList<Ring>(getInnerRings());
 		
 		// get the set of outer rings in a variable. This set will not be changed
+		// sort it to start with the smallest
 		SortedSet<Ring> outers = new TreeSet<Ring>(getOuterRings());
 		ArrayList<Multipolygon> multipolygons = new ArrayList<Multipolygon>();
 		

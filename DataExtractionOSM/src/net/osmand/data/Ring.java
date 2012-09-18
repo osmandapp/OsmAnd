@@ -381,7 +381,7 @@ public class Ring implements Comparable<Ring> {
 			/* 
 			 * Check if the way has at least 2 nodes
 			 * 
-			 * FIXME TO LOG OR NOT TO LOG?
+			 * TO LOG OR NOT TO LOG?
 			 *
 			 *		logging this creates a whole bunch of log lines for all ways
 			 *		part of a multipolygon but not in the map
@@ -499,7 +499,7 @@ public class Ring implements Comparable<Ring> {
 	}
 	
 	/**
-	 * Combine a list of ways to a list of rings
+	 * Combine a list of ways into a list of rings
 	 * 
 	 * The ways must not have initialized nodes for this
 	 * 
