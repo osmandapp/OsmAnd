@@ -30,6 +30,11 @@ public class Ring implements Comparable<Ring> {
 	 */
 	private Way border;
 	
+	/**
+	 * area can be asked a lot of times when comparing rings, chace it
+	 */
+	private double area = -1;
+	
 	
 
 	/**
@@ -349,7 +354,11 @@ public class Ring implements Comparable<Ring> {
 	}
 	
 	public double getArea() {
-		return MapAlgorithms.getArea(getBorder());
+		if (area == -1) {
+			//cache the area
+			area = MapAlgorithms.getArea(getBorder());
+		}
+		return area;
 	}
 	
 	
