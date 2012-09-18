@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -1021,4 +1021,18 @@ Belangrijke eigenschappen:
 	</string>
 <string name="snap_to_road_descr">Houd positie op de weg tijdens navigatie</string>
 <string name="snap_to_road">Houd op weg</string>
+<string name="intermediate_point_too_far">Tussenpunt %1$s te ver van dichtstbijzijnde weg.</string>
+<string name="arrived_at_intermediate_point">Je bent aangekomen op je tussenpunt</string>
+<string name="context_menu_item_intermediate_point">Tussenpunt toevoegen</string>
+<string name="map_widget_intermediate_distance">Tussenpunt</string>
+<string name="ending_point_too_far">Startpunt te ver van dichtstbijzijnde weg.</string>
+<string name="btn_add_tag">Tag toevoegen</string>
+<string name="btn_advanced_mode">Geavanceerde modus...</string>
+<string name="poi_filter_parking">Parkeren</string>
+<string name="poi_filter_emergency">Hulpdiensten</string>
+<string name="poi_filter_public_transport">Openbaar vervoer</string>
+<string name="poi_filter_entertainment">Amusement</string>
+<string name="poi_filter_accomodation">Onderkomen</string>
+<string name="poi_filter_restaurants">Restaurants</string>
+<string name="poi_filter_sightseeing">Bezienswaardigheden</string>
 </resources>
