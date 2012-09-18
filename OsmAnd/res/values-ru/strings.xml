@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="download_link_and_local_description">Загрузите или обновите локальные данные. \nЧтобы получить дополнительную информацию о карте, выделите ее в списке. Удерживайте карту, если вы хотите удалить или деактивировать. \nДанные на устройстве (%1$s свободно):</string>
   <string name="unknown_from_location">Начальное местоположение еще не определено</string>
   <string name="unknown_location">Местоположение еще не определено</string>
@@ -1025,4 +1025,18 @@
 </string>
 <string name="snap_to_road_descr">Привязать текущую позицию к дороге</string>
 <string name="snap_to_road">Привязать к дороге</string>
+<string name="intermediate_point_too_far">Промежуточная точка %1$s слишком далеко от ближайшей дороги.</string>
+<string name="arrived_at_intermediate_point">Вы прибыли на промежуточную точку</string>
+<string name="context_menu_item_intermediate_point">Добавить промежуточную точку</string>
+<string name="map_widget_intermediate_distance">Промежуточная точка</string>
+<string name="ending_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
+<string name="btn_add_tag">Добавить метку</string>
+<string name="btn_advanced_mode">Расширенный режим...</string>
+<string name="poi_filter_parking">Парковки</string>
+<string name="poi_filter_emergency">Чрезвычайные обстоятельства</string>
+<string name="poi_filter_public_transport">Общественный транспорт</string>
+<string name="poi_filter_entertainment">Развлечения</string>
+<string name="poi_filter_accomodation">Жилье</string>
+<string name="poi_filter_restaurants">Рестораны</string>
+<string name="poi_filter_sightseeing">Достопримечательности</string>
 </resources>
