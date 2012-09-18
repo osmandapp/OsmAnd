@@ -1111,4 +1111,9 @@
 	<string name="edit_filter_create_message">Το φίλτρο {0} έχει δημιουργηθεί</string>
 	<string name="default_buttons_selectall">Επιλογή Όλων</string>
 	<string name="email">email</string>
+<string name="intermediate_point_too_far">Το ενδιάμεσο σημείο %1$s είναι πολύ μακριά από το κοντινότερο δρόμο.</string>
+<string name="arrived_at_intermediate_point">Φτάσατε στο ενδιάμεσο σημείο σας</string>
+<string name="context_menu_item_intermediate_point">Προσθήκη ενδιάμεσου σημείου</string>
+<string name="map_widget_intermediate_distance">Ενδιάμεσο σημείο</string>
+<string name="ending_point_too_far">Η αφετηρία είναι πολύ μακριά από το κοντινότερο δρόμο.</string>
 </resources>
