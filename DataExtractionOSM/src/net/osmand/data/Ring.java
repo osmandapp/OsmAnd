@@ -214,6 +214,7 @@ public class Ring implements Comparable<Ring> {
 		int intersections = 0;
 		
 		List<Node> polyNodes = getBorder();
+		if (polyNodes.size() == 0) return 0;
 		for (int i = 0; i < polyNodes.size() - 1; i++) {
 			if (MapAlgorithms.ray_intersect_lon(polyNodes.get(i),
 					polyNodes.get(i + 1), latitude, longitude) != -360d) {
