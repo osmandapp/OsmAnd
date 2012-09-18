@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -778,7 +778,7 @@
   <string name="app_mode_default">Standardní</string>
   <string name="app_mode_car">Auto</string>
   <string name="app_mode_bicycle">Cyklista</string>
-  <string name="app_mode_pedestrian">Chodec</string>
+  <string name="app_mode_pedestrian">Pěší</string>
   <string name="position_on_map_center">Uprostřed</string>
   <string name="position_on_map_bottom">Dole</string>
   <string name="navigate_point_top_text">Zadejte zem. šířku a délku ve vybraném formátu (D - stupně, M - minuty, S - vteřiny)</string>
@@ -1036,7 +1036,7 @@
 \n\t*Hezčí ikony
 \n\t*Opraveno několik chyb
 </string>
-<string name="snap_to_road_descr">Zamknout pozici na nejbližší silnici během navigace</string>
+<string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
 <string name="map_widget_vector_attributes">Vlastnosti vykreslovače:</string>
 <string name="tip_rotation_switching_t_v2">\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
 
@@ -1044,4 +1044,21 @@
 \n\t\'Neotáčet (sever nahoře)\' - mapa se nebude otáčet a zůstane vždy orientovaná severem nahoru
 \n\t\'Ve směru pohybu\' - mapa bude neustále sledovat směr vašeho pohybu
 \n\t\'Podle kompasu\' - mapa se bude neustále natáčet podle kompasu</string>
+<string name="poi_filter_parking">Parkoviště</string>
+<string name="poi_filter_public_transport">Veřejná doprava</string>
+<string name="poi_filter_entertainment">Zábava</string>
+<string name="poi_filter_accomodation">Ubytování</string>
+<string name="poi_filter_restaurants">Restaurace</string>
+<string name="poi_filter_sightseeing">Pamětihodnosti</string>
+<string name="snap_to_road">Pohyb po silnicích</string>
+<string name="intermediate_point_too_far">Postupový cíl %1$s je příliš daleko od nejbližší cesty.</string>
+<string name="arrived_at_intermediate_point">Dorazili jste do postupového cíle</string>
+<string name="context_menu_item_intermediate_point">Přidat postupový cíl</string>
+<string name="map_widget_intermediate_distance">Postupový cíl</string>
+<string name="ending_point_too_far">Start je příliš daleko od nejbližší cesty.</string>
+<string name="btn_add_tag">Přidat označení</string>
+<string name="btn_advanced_mode">Pokročilé...</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
+\t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace. </string>
+<string name="poi_filter_emergency">Pohotovost</string>
 </resources>
