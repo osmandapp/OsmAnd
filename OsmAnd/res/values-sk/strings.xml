@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+  <string name="intermediate_point_too_far">Prechodný bod %1$s je príliš daľeko od najbližšej cesty.</string>
+  <string name="arrived_at_intermediate_point">Dorazili ste k Vášmu prechodnému bodu</string>
+  <string name="context_menu_item_intermediate_point">Pridať prechodný bod</string>
+  <string name="map_widget_intermediate_distance">Prechodný bod</string>
+  <string name="ending_point_too_far">Štartovací bod je príliš ďaleko od najbližšej cesty.</string>
   <string name="poi_filter_parking">Parkovanie</string>
   <string name="poi_filter_emergency">Pomoc v núdzi</string>
   <string name="poi_filter_public_transport">Verejná doprava</string>
