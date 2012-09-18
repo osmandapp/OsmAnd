@@ -1,5 +1,7 @@
 package net.osmand.translator.utils;
 
+import java.io.PrintStream;
+
 import net.osmand.translator.visitor.FieldVisitor;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
@@ -10,7 +12,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 public class FieldsHandler extends AbstractHandler{
 
-	public static void printFieldsInfo(CompilationUnit parse) {
+	public static void printFieldsInfo(CompilationUnit parse, PrintStream out) {
 	    FieldVisitor fVisitor = new FieldVisitor();
 	    parse.accept(fVisitor);
 	    for (FieldDeclaration field : fVisitor.getFields()) {
@@ -23,6 +25,9 @@ public class FieldsHandler extends AbstractHandler{
 //			type
 	    	applyType(field.getType(), buffer);
 //			name
+	    	if(binding == null){
+	    		continue;
+	    	}
 			buffer.append(binding.getJavaElement().getElementName());
 //			array brackets
 			if (binding.getType().isArray()) {
@@ -34,8 +39,8 @@ public class FieldsHandler extends AbstractHandler{
 			}
 //			end of string
 			buffer.append(";");
-			System.out.println(buffer);
-//			System.out.println();
+			out.println(buffer);
+//			out.println();
 	     }
 	}
 	  

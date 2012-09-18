@@ -40,8 +40,8 @@ go_ahead == ['pokračujte rovno'].
 go_ahead(Dist) == ['pokračujte ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['a dorazíte do cieľa'].
-and_arrive_intermediate == ['and arrive at your via point '].
-reached_intermediate == ['you have reached your via point'].
+and_arrive_intermediate == ['a dorazíte cez Váš prechodný bod '].
+reached_intermediate == ['dorazili ste k Vášmu prechodnému bodu'].
 
 then == ['potom '].
 reached_destination == ['dorazili ste do cieľa'].

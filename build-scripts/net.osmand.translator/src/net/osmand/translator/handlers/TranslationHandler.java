@@ -1,5 +1,11 @@
 package net.osmand.translator.handlers;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintStream;
+
 import net.osmand.translator.utils.FieldsHandler;
 import net.osmand.translator.utils.MethodHandler;
 
@@ -10,6 +16,7 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
@@ -22,44 +29,39 @@ import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jface.text.Document;
-//import org.eclipse.jface.text.Document;
+
 
 public class TranslationHandler {
 
-	public static void execute() {
-		IWorkspace workspace = ResourcesPlugin.getWorkspace();
-		IWorkspaceRoot root = workspace.getRoot();
-		IPath path = root.getProject("DataExtactionOSM").getFile("src/net/osmand/osm/MapUtils.java").getFullPath();
+	public static void execute(String inFile, PrintStream out) throws IOException {
 		// parse "MapUtils.java"
-		// IPath path = Path.fromOSString("/DataExtractionOSM/src/net/osmand/osm/MapUtils.java");
-		IFile iFile = root.getFileForLocation(path);
-		ICompilationUnit unit = (ICompilationUnit) JavaCore.create(iFile);
-		CompilationUnit parse = parse(unit);
-		FieldsHandler.printFieldsInfo(parse);
-		System.out.println();
-		MethodHandler.printMethodsInfo(parse);
-	}
-
-	private static CompilationUnit parse(ICompilationUnit unit) {
-		ASTParser parser = ASTParser.newParser(AST.JLS3);
-		parser.setKind(ASTParser.K_COMPILATION_UNIT);
-		parser.setSource(unit);
-		parser.setResolveBindings(true);
-		return (CompilationUnit) parser.createAST(null); // parse
-	}
-
-	// ///////////////////////////////////////////////////////////////////////////
-
-	private void getProjects(IWorkspaceRoot root) {
-		IProject[] projects = root.getProjects();
-		for (IProject project : projects) {
-			try {
-				printProjectInfo(project);
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
+		BufferedReader fr = new BufferedReader(new FileReader(new File(inFile)));
+		String readLine;
+		String buf = "";
+		while ((readLine = fr.readLine())  != null) {
+			buf += readLine;
 		}
+		fr.close();
+		CompilationUnit parse = parse(buf);
+		FieldsHandler.printFieldsInfo(parse, out);
+		out.println();
+		MethodHandler.printMethodsInfo(parse, out);
 	}
+
+	private static CompilationUnit parse(String source) {
+		ASTParser parser = ASTParser.newParser(AST.JLS3);
+		parser.setResolveBindings(true);
+//	    parser.setCompilerOptions(Options.getCompilerOptions());
+	    parser.setSource(source.toCharArray());
+	    parser.setResolveBindings(true);
+//	    parser.setUnitName(name + ".java");
+//	    parser.setEnvironment(new String[] { getComGoogleDevtoolsJ2objcPath() },
+//	        new String[] { tempDir.getAbsolutePath() }, null, true);
+	    CompilationUnit unit = (CompilationUnit) parser.createAST(null);
+//	    assertNoCompilationErrors(unit);
+	    return unit;
+	}
+
 
 	private void printProjectInfo(IProject project) throws CoreException, JavaModelException {
 		System.out.println("Working in project " + project.getName());

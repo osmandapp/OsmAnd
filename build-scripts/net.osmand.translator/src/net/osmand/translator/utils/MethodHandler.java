@@ -1,5 +1,7 @@
 package net.osmand.translator.utils;
 
+import java.io.PrintStream;
+
 import net.osmand.translator.visitor.MethodVisitor;
 
 import org.eclipse.jdt.core.dom.Block;
@@ -9,7 +11,7 @@ import org.eclipse.jdt.core.dom.Type;
 
 public class MethodHandler extends AbstractHandler{
 
-	public static void printMethodsInfo(CompilationUnit parse) {
+	public static void printMethodsInfo(CompilationUnit parse, PrintStream out) {
 		MethodVisitor mVisitor = new MethodVisitor();
 		parse.accept(mVisitor);
 		for (MethodDeclaration method : mVisitor.getMethods()) {
@@ -29,8 +31,8 @@ public class MethodHandler extends AbstractHandler{
 	    	buffer.append("{");
 	    	fillBody(method, buffer);
 	    	buffer.append("}");
-	    	System.out.println(buffer);
-	    	System.out.println();
+	    	out.println(buffer);
+	    	out.println();
 		}
 	}
 
@@ -39,9 +41,9 @@ public class MethodHandler extends AbstractHandler{
 	} 
 	
 	private static void fillBody(MethodDeclaration method, StringBuffer buffer) {
-		Block body = method.getBody();
 		
-		System.out.println(body);
+		Block body = method.getBody();
+		buffer.append(body);
 	}
 	
 	private void parseSimpleForStatement() {
