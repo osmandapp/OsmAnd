@@ -404,7 +404,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 \n\t\Vrid inte (norr är uppåt)\'- Karta inte kommer att roteras. Norr kommer alltid upp
 \n\t\'Till rörelseriktning\' - Karta kommer kontinuerligt anpassas till din kurs
 \n\t\'Till kompass\' - Karta kommer kontinuerligt anpassas till enhetens kompass läsning</string>
-<string name="binary_map_download_success">Ladda framgångsrika.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera Visa\' -&gt; \'Karta källa...\' -&gt; \ \'Offline vektorkartor\'.</string>
+<string name="binary_map_download_success">Ladda framgångsrika.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera Visa\' -&gt; \'Karta källa...\' -&gt; \ 'Offline vektorkartor\'.</string>
 <string name="tip_day_night_mode">Dag/nattläge</string>
 <string name="tip_osm_improve">Förbättra OSM data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (tillgängliga: %2$s).</string>
@@ -527,7 +527,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="gpx_option_reverse_route">Omvänd GPX riktning</string>
 <string name="gpx_option_destination_point">Använd aktuell destination</string>
 <string name="gpx_option_from_start_point">Passera längs hela spåret</string>
-<string name="switch_to_vector_map_to_see">Offline vektor map närvarande för den här platsen. \n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera utsikt\' -&gt; \ \'Kartkälla...\' -&gt; \'Offline vektorkartor\'.</string>
+<string name="switch_to_vector_map_to_see">Offline vektor map närvarande för den här platsen. \n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera utsikt\' -&gt; \ 'Kartkälla...\' -&gt; \'Offline vektorkartor\'.</string>
 <string name="choose_audio_stream">Röstvägledning utgång</string>
 <string name="choose_audio_stream_descr">Välj kanal att spela röstvägledning (systemberoende)</string>
 <string name="voice_stream_voice_call">Röstsamtal ljud</string>
