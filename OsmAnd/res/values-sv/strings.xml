@@ -13,7 +13,7 @@
 <string name="map_widget_distance">Målet</string>
 <string name="map_widget_altitude">Höjd</string>
 <string name="map_widget_next_turn">Nästa kurva</string>
-<string name="show_warnings_title">Visa larm ...</string>
+<string name="show_warnings_title">Visa larm...</string>
 <string name="show_warnings_descr">Visa hastighetsbegränsningar, hastighetskameror, vägbulor och andra varningar</string>
 <string name="use_compass_navigation_descr">Använd kompassen när ingen rubrik upptäcks annars</string>
 <string name="use_compass_navigation">Använd kompassen</string>
@@ -204,4 +204,27 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="altitude">Höjd</string>
 <string name="map_widget_renderer">Rendering stil</string>
 <string name="live_monitoring_mode_off">Start\n lever spårning</string>
+<string name="osmand_parking_position_description_add">Att plocka upp bilen på:</string>
+<string name="osmand_parking_pm">PM</string>
+<string name="osmand_parking_am">AM</string>
+<string name="osmand_parking_position_name">Parkering punkt</string>
+<string name="osmand_parking_plugin_description">Detta plugin gör det möjligt att lagra platsen där du parkerade bilen.</string>
+<string name="osmand_parking_plugin_name">Parkeringsläge Plugin</string>
+<string name="context_menu_item_add_parking_point">Markera som parkeringsläge</string>
+<string name="context_menu_item_delete_parking_point">Ta bort en parkeringsplats markör</string>
+<string name="asap">ASAP</string>
+<string name="route_roundabout">Roundabout: ta %1$d avsluta och gå</string>
+<string name="rendering_attr_noPolygons_description">Gör alla areal mark funktioner på kartan transparent</string>
+<string name="rendering_attr_noPolygons_name">Inga polygoner</string>
+<string name="rendering_attr_appMode_name">Renderingsläge</string>
+<string name="rendering_attr_contourLines_description">Display från zoomnivå (kräver SRTM fil):</string>
+<string name="rendering_attr_contourLines_name">Visa konturlinjer</string>
+<string name="rendering_attr_hmRendered_description">Öka mängden karta detaljer visas</string>
+<string name="rendering_attr_hmRendered_name">Visa mer karta detaljer</string>
+<string name="local_index_routing_data">Dirigeringsdata</string>
+<string name="navigate_point_format">Format:</string>
+<string name="poi_search_desc">POI (Point of Interest) sökning</string>
+<string name="favourites_search_desc">Favoriter Sök</string>
+<string name="history_search_desc">Sökhistorik</string>
+<string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
 </resources>
