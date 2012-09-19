@@ -227,4 +227,18 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="favourites_search_desc">Favoriter Sök</string>
 <string name="history_search_desc">Sökhistorik</string>
 <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
+<string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline data som du kan ladda ner via \'Inställningar\' -&gt;  \'Offline Data\'. Efteråt kommer du att kunna visa kartor, hitta adresser, se upp POI och hitta kollektivtrafik.</string>
+<string name="basemap_was_selected_to_download">Basemap krävs för korrekt tillämpning funktion och valdes för att ladda ner.</string>
+<string name="select_index_file_to_download">Ingenting hittades. Om du kan\'t hitta din region, kan du göra det själv (se http://osmand.net).</string>
+<string name="map_online_plugin_is_not_installed">Aktivera online-kartor plugin för att välja olika karta källor</string>
+<string name="map_online_data">Online kartor (plattor)</string>
+<string name="map_online_data_descr">Använd online-kartor (ladda ner och cache plattor på SD-kort)</string>
+<string name="online_map_settings_descr">Konfigurera online eller cachade källor kakel karta</string>
+<string name="map_settings">Kartinställningar</string>
+<string name="map_settings_descr">Konfigurera kartbilden</string>
+<string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online eller cachad kakel kartor som bas karta eller som overlay / underlag kartor. Dessa kartor kan också framställas offline och kopieras till OsmAnd mappen.</string>
+<string name="osmand_background_plugin_description">Visa inställningarna för att aktivera spårning och navigering i sömnen (skärm av) läge via periodvis vakna upp GPS-enheten.</string>
+<string name="osmand_extra_settings_description">Visa inställningar för avancerad karta konfiguration (som ökar karta detaljer) och vissa enhetsspecifika detaljerna.</string>
+<string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
+<string name="plugins_screen">Plugin Manager</string>
 </resources>
