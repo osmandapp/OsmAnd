@@ -14,7 +14,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -38,8 +37,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -51,7 +48,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -102,29 +98,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
 		getExpandableListView().setAdapter(favouritesAdapter);
 
-		/* Add Context-Menu listener to the ListView. */
-		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener(){
-
-			@Override
-			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-				int child = ExpandableListView.getPackedPositionChild(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
-				int group = ExpandableListView.getPackedPositionGroup(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
-				if (child == -1) {
-					return;
-				}
-				
-				menu.add(0, SHOW_ON_MAP, 0, R.string.show_poi_on_map);
-				menu.add(0, NAVIGATE_TO, 1, R.string.favourites_context_menu_navigate);
-				
-				final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(group, child);
-				if(point.isStored()){
-					menu.add(0, EDIT_ITEM, 2, R.string.favourites_context_menu_edit);
-					menu.add(0, DELETE_ITEM, 3, R.string.favourites_context_menu_delete);
-				}
-			}
-        	
-        });
-		
 		findViewById(R.id.CancelButton).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -276,29 +249,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 		return true;
 	}
 	
-	@Override
-	public boolean onContextItemSelected(MenuItem aItem) {
-		ContextMenuInfo menuInfo = aItem.getMenuInfo();
-		int child = ExpandableListView.getPackedPositionChild(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
-		int group = ExpandableListView.getPackedPositionGroup(((ExpandableListContextMenuInfo)menuInfo).packedPosition);
-		final FavouritePoint point = (FavouritePoint) favouritesAdapter.getChild(group, child);
-		if (aItem.getItemId() == SHOW_ON_MAP) {
-			OsmandSettings settings = getMyApplication().getSettings();
-			settings.SHOW_FAVORITES.set(true);
-			settings.setMapLocationToShow(point.getLatitude(), point.getLongitude(), 
-					Math.max(12, settings.getLastKnownMapZoom()), null, getString(R.string.favorite)+":\n " + point.getName(), point);
-			MapActivity.launchMapActivityMoveToTop(this);
-		} else if (aItem.getItemId() == NAVIGATE_TO) {
-			getMyApplication().getSettings().setPointToNavigate(point.getLatitude(), point.getLongitude(), getString(R.string.favorite)+" : " + point.getName());
-			MapActivity.launchMapActivityMoveToTop(this);
-		} else if (aItem.getItemId() == EDIT_ITEM) {
-			return editPoint(point);
-		}
-		if (aItem.getItemId() == DELETE_ITEM) {
-			return deletePoint(point);
-		}
-		return false;
-	}
 
 	private boolean editPoint(final FavouritePoint point) {
 		Builder builder = new AlertDialog.Builder(this);

@@ -673,8 +673,12 @@ double polygonArea(MapDataObject* obj, float mult) {
 }
 
 
-bool sortByOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimitive& j) { return (i.order<j.order); }
-bool sortByRevOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimitive& j) { return (i.order>j.order); }
+bool sortByOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimitive& j) {
+	if( i.order == j.order) return i.typeInd < j.typeInd;
+	return (i.order<j.order); }
+bool sortPolygonsOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimitive& j) {
+	if( i.order == j.order) return i.typeInd < j.typeInd;
+	return (i.order>j.order); }
 
 void sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 	RenderingRuleSearchRequest* req, RenderingContext* rc,
@@ -726,7 +730,7 @@ void sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 
 			}
 		}
-		sort(polygonsArray.begin(), polygonsArray.end(), sortByRevOrder);
+		sort(polygonsArray.begin(), polygonsArray.end(), sortPolygonsOrder);
 		sort(pointsArray.begin(), pointsArray.end(), sortByOrder);
 		sort(linesArray.begin(), linesArray.end(), sortByOrder);
 	}

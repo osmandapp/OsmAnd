@@ -9,6 +9,26 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
+	</string>
+    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
+        \n\t* Intermediate points
+		\n\t* Improved route guidance
+		\n\t* Avoid motorways option
+		\n\t* Cycleway=track display
+		\n\t* better UI finish (icons)
+		\n\t* lots of bug fixes
+	</string>
+    
+    <string name="navigate_to">Set as destination</string>
+    <string name="context_menu_item_last_intermediate_point">Last intermediate point</string>
+    <string name="context_menu_item_first_intermediate_point">First intermediate point</string>
+    <string name="add_as_last_destination_point">Add as last intermedate point</string>
+    <string name="add_as_first_destination_point">Add as first intermediate point</string>
+    <string name="replace_destination_point">Replace destination point</string>
+    <string name="new_destination_point_dialog">You already have destination point set.</string>
+    <string name="target_point">Target point %1$s</string>
+    <string name="target_points">Targets</string>
     <string name="intermediate_point_too_far">Intermediate point %1$s too far from nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your intermediate point</string>
     <string name="context_menu_item_intermediate_point">Add intermediate point</string>
@@ -34,13 +54,6 @@
 	<string name="avoid_motorway">Avoid motorways</string>
 	<string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
 	<string name="auto_zoom_map">Auto zoom map</string>
-	<string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
-		\n\t* Improved route guidance
-		\n\t* Avoid motorways option
-		\n\t* Cycleway=track display
-		\n\t* better UI finish (icons)
-		\n\t* Some bug fixes
-	</string>
 	<string name="snap_to_road_descr">Snap position to roads during navigation</string>
 	<string name="snap_to_road">Snap to road</string>
 	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
@@ -999,7 +1012,6 @@
 	<string name="save_track_interval_descr">Choose positioning interval for tracks</string>
 	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
 	<string name="save_track_to_gpx">Log track to GPX file</string>
-	<string name="navigate_to">Set as destination</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
