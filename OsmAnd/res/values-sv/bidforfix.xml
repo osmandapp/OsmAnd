@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="bidforfix_loading">Loading</string>
-    <string name="bidforfix_supporters">%1$d Supporters</string>
-	<string name="bidforfix_funded">funded: %d%%</string>    
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="bidforfix_loading">Laddar</string>
+    <string name="bidforfix_supporters">%1$d Anhängare</string>
+	<string name="bidforfix_funded">finansierade: %d%%</string>    
 </resources>
