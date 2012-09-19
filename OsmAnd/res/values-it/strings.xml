@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1103,4 +1103,17 @@ OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
 <string name="snap_to_road_descr">Blocca la posizione sulle strade durante la navigazione</string>
 <string name="snap_to_road">Blocca sulle strade</string>
 <string name="avoid_motorway">Evita le autostrade</string>
+<string name="intermediate_point_too_far">Punto intermedio %1$s è troppo lontano dalla strada più vicina.</string>
+<string name="arrived_at_intermediate_point">Sei arrivato al punto intermedio</string>
+<string name="context_menu_item_intermediate_point">Aggiungi punto intermedio</string>
+<string name="map_widget_intermediate_distance">Punto intermedio</string>
+<string name="ending_point_too_far">Punto di partenza troppo distante dalla strada più vicina.</string>
+<string name="btn_add_tag">Aggiungi etichetta</string>
+<string name="btn_advanced_mode">Modalità avanzata...</string>
+<string name="poi_filter_parking">Parcheggio</string>
+<string name="poi_filter_emergency">Emergenza</string>
+<string name="poi_filter_public_transport">Trasporto pubblico</string>
+<string name="poi_filter_entertainment">Intrattenimento</string>
+<string name="poi_filter_accomodation">Alloggio</string>
+<string name="poi_filter_restaurants">Ristoranti</string>
 </resources>
