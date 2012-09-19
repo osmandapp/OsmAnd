@@ -256,7 +256,14 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			double lon = convert(((TextView) findViewById(R.id.LongitudeEdit)).getText().toString());
 			
 			if(navigate){
-				settings.setPointToNavigate(lat, lon, getString(R.string.point_on_map, lat, lon));
+				if(activity != null) {
+					MapActivityActions.navigateToPoint(activity, lat, lon, getString(R.string.point_on_map, lat, lon));
+				} else {
+					MapActivityActions.navigateToPoint(this, lat, lon, getString(R.string.point_on_map, lat, lon));
+				}
+				if(dlg != null){
+					dlg.dismiss();
+				}
 			} else {
 				// in case when it is dialog
 				if(activity != null) {
@@ -266,8 +273,9 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 					settings.setMapLocationToShow(lat, lon, Math.max(12, settings.getLastKnownMapZoom()), 
 							getString(R.string.point_on_map, lat, lon));
 				}
+				close();
 			}
-			close();
+			
 		} catch (RuntimeException e) {
 			((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 			((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);

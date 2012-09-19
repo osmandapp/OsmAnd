@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="avoid_in_routing_title">Osgoi...</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau</string>
@@ -76,7 +76,7 @@
 <string name="starting_point_too_far">Man cychwyn yn rhy bell o\'r ffordd agosaf</string>
 <string name="shared_location">Lleoliad rhanedig</string>
 <string name="avoid_motorway">Ceisiwch osgoi traffyrdd</string>
-<string name="auto_zoom_map_descr">Zoom Auto mapio yn ôl eich cyflymder (tra map wedi eu cydamseru gyda'r sefyllfa bresennol)</string>
+<string name="auto_zoom_map_descr">Zoom Auto mapio yn ôl eich cyflymder (tra map wedi eu cydamseru gyda\'r sefyllfa bresennol)</string>
 <string name="auto_zoom_map">Auto chwyddo map</string>
 <string name="tip_recent_changes_0_8_3_t">Newidiadau mewn 0.8.3: ↵
 \n\t* cyfarwyddyd llwybr Gwell ↵
@@ -86,7 +86,7 @@
 \n\t* Mae rhai bug chyfyngderau ↵
 tip_recent_changes_0_8_3_t Cyd-destun</string>
 <string name="snap_to_road_descr">Snap sefyllfa i ffyrdd yn ystod llywio</string>
-<string name="snap_to_road">Snap i'r ffordd</string>
+<string name="snap_to_road">Snap i\'r ffordd</string>
 <string name="osmand_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd yn gais ffynhonnell agored ar gyfer llywio fapiau all-lein ac ar-lein</string>
 <string name="tip_update_index">Diweddaru Data All-lein</string>
@@ -115,8 +115,8 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_parking_add_event">Ychwanegwch hysbysiad i calendr cais</string>
 <string name="osmand_parking_time_limit">Amser-gyfyngedig parcio</string>
 <string name="osmand_parking_time_no_limit">Amser-diderfyn parcio</string>
-<string name="osmand_parking_position_description">Mae'r sefyllfa eich car wedi parcio. %1$s</string>
-<string name="osmand_parking_position_description_add">I godi'r car yn:</string>
+<string name="osmand_parking_position_description">Mae\'r sefyllfa eich car wedi parcio. %1$s</string>
+<string name="osmand_parking_position_description_add">I godi\'r car yn:</string>
 <string name="osmand_parking_position_name">Pwynt parcio</string>
 <string name="osmand_parking_plugin_description">Mae hyn yn ategyn yn caniatáu i storio y lleoliad eich car wedi parcio.</string>
 <string name="osmand_parking_plugin_name">Ategyn Safle Parcio</string>
@@ -129,8 +129,8 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="asap">cyn gynted â phosibl</string>
 <string name="save_route_as_gpx">Cadw llwybr fel GPX ffeil</string>
 <string name="route_roundabout">Cylchfan: cymryd %1$d allanfa ac yn mynd</string>
-<string name="route_kl">Cadwch i'r chwith ac ewch</string>
-<string name="route_kr">Cadwch i'r dde ac ewch</string>
+<string name="route_kl">Cadwch i\'r chwith ac ewch</string>
+<string name="route_kr">Cadwch i\'r dde ac ewch</string>
 <string name="rendering_attr_noPolygons_description">Gwneud yr holl nodweddion tir arwynebedd ar fap tryloyw</string>
 <string name="rendering_attr_noPolygons_name">Dim polygonau</string>
 <string name="rendering_attr_appMode_name">Rendro modd</string>
@@ -151,12 +151,12 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="left_side_navigation">Chwith-law gyrru</string>
 <string name="left_side_navigation_descr">Dewiswch ar gyfer gwledydd gyda chwith traffig</string>
 <string name="download_link_and_local_description">Cliciwch yma i lawrlwytho neu ddiweddaru data all-lein. \nCliciwch unrhyw eitem presennol i weld mwy o fanylion, bwyso a dal i deactivate neu ddileu. Data cyfredol ar y ddyfais (%1$s am ddim):</string>
-<string name="unknown_from_location">Nid yw man cychwyn hwn wedi'i benderfynu eto</string>
-<string name="unknown_location">Sefyllfa nad yw'n hysbys eto</string>
+<string name="unknown_from_location">Nid yw man cychwyn hwn wedi\'i benderfynu eto</string>
+<string name="unknown_location">Sefyllfa nad yw\'n hysbys eto</string>
 <string name="context_menu_item_directions">Cyfarwyddiadau i fan hyn</string>
 <string name="modify_transparency">Addasu tryloywder (0 - tryloyw, 255 - afloyw)</string>
 <string name="confirm_interrupt_download">Ydych chi eisiau i dorri ar draws llwytho ffeil?</string>
-<string name="basemap_was_selected_to_download">Basemap yn ofynnol ar gyfer gweithredu'n briodol cais a dewiswyd ef i lawrlwytho.</string>
+<string name="basemap_was_selected_to_download">Basemap yn ofynnol ar gyfer gweithredu\'n briodol cais a dewiswyd ef i lawrlwytho.</string>
 <string name="select_index_file_to_download">Ni ddaethpwyd o hyd. Os gallwch ni all ddod o hyd i\'ch rhanbarth, gallwch wneud eich hun (gweler http://osmand.net).</string>
 <string name="local_indexes_cat_tile">Mapiau Ar-lein (teils)</string>
 <string name="local_indexes_cat_map">Fapiau all-lein (fector)</string>
@@ -181,7 +181,7 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="tip_recent_changes_0_8_0_t">Newidiadau mewn 0.8.0:
 \n\t- *ymarferoldeb Ategyn*
 \n\t - ymarferoldeb y rhan fwyaf o ei grwpio yn ôl nodweddion a gellir eu galluogi / anabl yn y Rheolwr Ategyn
-Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, a nodweddion newydd a fu'n bodoli eraill.
+Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, a nodweddion newydd a fu\'n bodoli eraill.
 \n\t- *data cymorth newydd map offline*
 \n\t - Map rendro yn dod yn gyflymach ac yn fwy manwl gywir (arfordir a phroblemau ardal dan ddŵr yn cael eu gosod yn bennaf).
 \n\t - Mae angen i chi lawrlwytho data all-lein hollol newydd (ni fydd hen ddata yn cael ei gefnogi anymore)
@@ -189,7 +189,7 @@ Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, 
 \n\t - llwybrau All-lein yn dod yn fwy cadarn
 \n\t *Defnyddioldeb a phrofiad UI*
 \n\t - Gwell mewn llawer o ardaloedd</string>
-<string name="vector_maps_may_display_faster_on_some_devices">Mapiau fector debygol arddangos yn gyflymach. Efallai na gweithio'n dda ar rai dyfeisiau.</string>
+<string name="vector_maps_may_display_faster_on_some_devices">Mapiau fector debygol arddangos yn gyflymach. Efallai na gweithio\'n dda ar rai dyfeisiau.</string>
 <string name="play_commands_of_currently_selected_voice">Chwarae gorchmynion llais a ddewiswyd ar hyn o bryd</string>
 <string name="debugging_and_development">OsmAnd datblygu</string>
 <string name="native_rendering">Rendro Brodorol</string>
@@ -239,7 +239,7 @@ Gallwch alluogi (ar-lein neu cached) Ffynonellau teils map, lleoliadau olrhain, 
 <string name="back">Yn ôl</string>
 <string name="back_left">Cefn ar y chwith</string>
 <string name="left">Chwith</string>
-<string name="front_left">Flaen, o'r chwith</string>
+<string name="front_left">Flaen, o\'r chwith</string>
 <string name="accuracy">Cywirdeb</string>
 <string name="altitude">Uchder</string>
 </resources>

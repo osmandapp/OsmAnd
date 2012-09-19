@@ -355,15 +355,20 @@ public class RouteInfoControls {
 
 				@Override
 				public void onClick(View v) {
-					AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-					LatLon pointToNavigate = getPointToNavigate();
-					if (pointToNavigate != null) {
-						float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
-						thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-					}
+					click(view);
 				}
 			});
 		}
+		
+		protected void click(final OsmandMapTileView view) {
+			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
+			LatLon pointToNavigate = getPointToNavigate();
+			if (pointToNavigate != null) {
+				float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
+				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
+			}
+		}
+		
 		@Override
 		public boolean updateInfo() {
 			int d = getDistance();
@@ -423,6 +428,16 @@ public class RouteInfoControls {
 		final OsmandMapTileView view = map.getMapView();
 		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
 				.getDrawable(R.drawable.info_intermediate), view) {
+
+			@Override
+			protected void click(OsmandMapTileView view) {
+				if(map.getIntermediatePoints().size() > 1) {
+					map.getMapActions().openIntermediatePointsDialog();
+				} else {
+					super.click(view);
+				}
+			}
+
 			@Override
 			public LatLon getPointToNavigate() {
 				return map.getFirstIntermediatePoint();

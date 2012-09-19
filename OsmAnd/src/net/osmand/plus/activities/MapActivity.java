@@ -33,7 +33,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -41,6 +40,7 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
@@ -292,7 +292,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		Object toShow = settings.getAndClearObjectToShow();
 		if(settings.isRouteToPointNavigateAndClear()){
 			// always enable and follow and let calculate it (GPS is not accessible in garage)
-			mapActions.getDirections(getLastKnownLocation(), true);
+			mapActions.getDirections(getLastKnownLocation(), false);
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
@@ -934,14 +934,23 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		return zoomDelta;
 	}
+	
+	public void removeIntermediatePoint(boolean updateRoute, int index){
+		mapLayers.getNavigationLayer().getIntermediatePoints().remove(index);
+		settings.deleteIntermediatePoint(index);
+		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
+				routingHelper.isFollowingMode())) {
+			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
+					settings.getIntermediatePoints(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
+		}
+	}
 
-	public void navigateToPoint(LatLon point, boolean updateRoute, boolean intermediate){
+	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate){
 		if(point != null){
-			if(!intermediate) {
+			if(intermediate < 0) {
 				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 			} else {
-				int sz = mapLayers.getNavigationLayer().getIntermediatePoints().size();
-				settings.setIntermediatePoint(point.getLatitude(), point.getLongitude(), null, sz);
+				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, intermediate);
 			}
 		} else {
 			settings.clearPointToNavigate();
@@ -967,7 +976,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return mapLayers.getNavigationLayer().getPointToNavigate();
 	}
 	
-	public List<LatLon> getIntermediatePoitns(){
+	public List<LatLon> getIntermediatePoints(){
 		return mapLayers.getNavigationLayer().getIntermediatePoints();
 	}
 	
@@ -1316,7 +1325,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 	}
 	
-	public static void launchMapActivityMoveToTop(Activity activity){
+	public static void launchMapActivityMoveToTop(Context activity){
 		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		activity.startActivity(newIntent);
