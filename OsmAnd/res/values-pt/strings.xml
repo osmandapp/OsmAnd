@@ -1,6 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -571,7 +570,6 @@
   <string name="local_openstreetmap_uploading">Uploading…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
   <string name="local_openstreetmap_uploadall">Upload all</string>
-  <string name="local_openstreetmap_items" />
   <string name="local_openstreetmap_show">Show on map</string>
   <string name="local_openstreetmap_upload">Upload modification to OSM</string>
   <string name="local_openstreetmap_delete">Delete modification</string>
@@ -714,7 +712,6 @@
   <string name="local_index_address_data">Address data</string>
   <string name="local_index_transport_data">Transport data</string>
   <string name="local_index_map_data">Map data</string>
-  <string name="local_index_items" />
   <string name="local_indexes_cat_backup">Deactivated</string>
   <string name="local_indexes_cat_tts">Voice data (TTS)</string>
   <string name="local_indexes_cat_voice">Voice data (recorded)</string>
@@ -908,4 +905,42 @@
   <string name="bg_service_screen_unlock">Unlock screen</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="show_warnings_title">Mostrar os alarmes...</string>
+<string name="show_warnings_descr">Mostrar os limites de velocidade, câmeras de velocidade, redutores de velocidade, e outros avisos</string>
+<string name="avoid_motorway">Sem auto-estradas</string>
+<string name="tip_recent_changes_0_8_3_t">Alterações na 0.8.3:
+\n\t* orientação de rota Melhorada
+\n\t* Evitar auto-estradas opção
+\n\t* Ciclovia = faixa de exibição
+\n\t* melhor acabamento UI (ícones)
+\n\t* Algumas correções de bugs</string>
+<string name="snap_to_road_descr">Encaixe posição de estradas durante a navegação</string>
+<string name="snap_to_road">Ajustar à estrada</string>
+<string name="osmand_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
+<string name="filterpoi_activity">Criar POI filtro</string>
+<string name="select_navigation_mode">Selecione o modo de transporte</string>
+<string name="day_night_info_description">Nascer do sol: %1$s \nPôr do sol: %2$s</string>
+<string name="day_night_info">Dia/noite Informações</string>
+<string name="map_widget_day_night">Dia/noite mapa</string>
+<string name="map_widget_vector_attributes">Atributos de renderização:</string>
+<string name="map_widget_renderer">Estilo de renderização</string>
+<string name="live_monitoring_mode_off">Iniciar\n viver rastreamento</string>
+<string name="live_monitoring_mode_on">Parar\n viver rastreamento</string>
+<string name="layer_map_appearance">Configurar tela...</string>
+<string name="show_lanes">Mostrar pistas</string>
+<string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
+<string name="avoid_ferries">Evite ferries</string>
+<string name="avoid_in_routing_title">Evitar...</string>
+<string name="avoid_in_routing_descr">Evitar estradas com portagem, não pavimentadas, balsas</string>
+<string name="map_widget_fluorescent">Rotas fluorescentes</string>
+<string name="map_widget_show_ruler">Governante</string>
+<string name="map_widget_appearance">Diversos:</string>
+<string name="map_widget_view_direction">A direção da visão</string>
+<string name="map_widget_transparent">Pele transparente</string>
+<string name="monitoring_mode_off">Registro GPX</string>
+<string name="monitoring_mode_on">Parar\n GPX rec.</string>
+<string name="gps_wakeup_interval">GPS intervalo de despertar: %s</string>
+<string name="int_continuosly">Contínuo</string>
+<string name="email">e-mail</string>
 </resources>
