@@ -1137,4 +1137,5 @@
 <string name="context_menu_item_intermediate_point">Fügen Zwischen punkt</string>
 <string name="map_widget_intermediate_distance">Zwischenpunkt</string>
 <string name="ending_point_too_far">Ausgangspunkt zu weit von der nächsten Straße.</string>
+<string name="intermediate_point_too_far">Zwischenpunkt %1$s zu weit von der nächsten Straße.</string>
 </resources>
