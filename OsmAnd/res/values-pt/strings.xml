@@ -63,7 +63,7 @@
   <string name="osmand_service">Serviço de segundo plano</string>
   <string name="osmand_service_descr">Executar o serviço de segundo plano para usar OsmAnd enquanto a tela está desligada</string>
   <string name="fast_route_mode">Caminho mais rápido</string>
-  <string name="fast_route_mode_descr">Ative para calcular a rota mais rápida ou desative para calcular a rota mais curta</string>
+  <string name="fast_route_mode_descr">Ative para calcular a rota mais rápida ou desative para calcular a rota mais curta </string>
   <string name="tiles_to_download_estimated_size">Zoom {0}: baixar {1} imagens ({2} MB )</string>
   <string name="context_menu_item_download_map">Baixar mapa</string>
   <string name="select_max_zoom_preload_area">Zoom máximo para baixar</string>
@@ -87,8 +87,8 @@
   <string name="unknown_location">Posição atual desconhecida</string>
   <string name="download_files">Baixar</string>
   <string name="context_menu_item_search_transport">Procurar transportes</string>
-  <string name="transport_searching_transport">Resultados de transporte (sem destino)</string>
-  <string name="transport_searching_route">Resultados de transporte ({0} para o destino)</string>
+  <string name="transport_searching_transport">Resultados de transporte (sem destino):</string>
+  <string name="transport_searching_route">Resultados de transporte ({0} para o destino):</string>
   <string name="transport_search_none">nenhum</string>
   <string name="transport_search_again">Pesquisar transportes de novo</string>
   <string name="map_index">Mapa</string>
@@ -145,13 +145,13 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Escolha um intervalo de atualização da sua posição no serviço em segundo plano</string>
+  <string name="background_service_int_descr">Escolha um intervalo de atualização da sua posição no serviço em segundo plano </string>
   <string name="background_service_int">Intervalo de posição</string>
   <string name="background_service_provider_descr">Escolha um provedor de localização para o serviço em segundo plano</string>
   <string name="background_service_provider">Provedor de localização</string>
   <string name="background_router_service_descr">Activar o serviço em segundo plano para monitorar sua posição por longos períodos</string>
   <string name="background_router_service">Usar serviço em segundo plano</string>
-  <string name="off_router_service_no_gps_available">O serviço em segundo plano exige a ativação de alguma fonte de localização</string>
+  <string name="off_router_service_no_gps_available">O serviço em segundo plano exige a ativação de alguma fonte de localização.</string>
   <string name="routing_settings_descr">Especifique opções da rota</string>
   <string name="routing_settings">Navegação</string>
   <string name="hide_poi_filter">Ocultar filtro</string>
@@ -166,21 +166,21 @@
   <string name="voice_data_not_supported">Os dados de voz utilizam uma versão não suportada</string>
   <string name="voice_data_corrupted">Dados de voz corrompidos</string>
   <string name="voice_data_unavailable">Dados de voz selecionados não estão acessíveis</string>
-  <string name="stop_routing">Parar navegação</string>
+  <string name="stop_routing">Parar navegação.</string>
   <string name="sd_unmounted">O cartão SD está inacessível. \n Será impossível ver mapas ou procurar coisas.</string>
   <string name="sd_mounted_ro">O cartão SD está disponivel só para leitura. \nVocê não pode baixar da Internet, só pode visualizar os mapas pré-carregados.</string>
-  <string name="unzipping_file">Descomprimindo arquivo….</string>
+  <string name="unzipping_file">Descomprimindo arquivo...</string>
   <string name="route_tr">Virar à direita e continuar em frente</string>
   <string name="route_tshr">Virar bruscamente à direita e continuar em frente</string>
   <string name="route_tslr">Virar levemente à direita e continuar em frente</string>
   <string name="route_tl">Virar à esquerda e continuar em frente</string>
   <string name="route_tshl">Virar bruscamente à esquerda e continuar em frente</string>
   <string name="route_tsll">Virar levemente à esquerda e continuar em frente</string>
-  <string name="route_tu">Fazer retorno e seguir em frente.</string>
+  <string name="route_tu">Fazer retorno e seguir em frente</string>
   <string name="route_head">Vá</string>
   <string name="first_time_continue">Continuar</string>
   <string name="first_time_download">Download de regiões</string>
-  <string name="first_time_msg">"Obrigado por escolher OsmAnd. \nPara utilizar todos os recursos do aplicativo, você necessidade de alguns dados regionais, que você pode baixar (Configurações -&gt; Dados) ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), um meio de transporte … "</string>
+  <string name="first_time_msg">Obrigado por escolher OsmAnd. \nPara utilizar todos os recursos do aplicativo, você necessidade de alguns dados regionais, que você pode baixar (Configurações -&gt; Dados) ou preparar você mesmo. Depois, Você poderá procurar por um endereço, um Ponto de Interesse (POI), um meio de transporte.</string>
   <string name="search_poi_location">Procurando um sinal…</string>
   <string name="search_near_map">Procure perto do último local conhecido</string>
   <string name="search_nearby">Busca nas proximidades</string>
@@ -230,7 +230,7 @@
   <string name="hint_search_online">Numero, rua, cidade</string>
   <string name="search_offline_address">Offline</string>
   <string name="search_online_address">Internet</string>
-  <string name="max_level_download_tile">Nível de zoom máx.</string>
+  <string name="max_level_download_tile">Nível de zoom máx</string>
   <string name="max_level_download_tile_descr">Escolher um nível máximo de zoom para download</string>
   <string name="route_general_information">Distância total = %1$s tempo de viagem, = %2$dh %3$dm.</string>
   <string name="router_service_descr">Escolha o sistema de navegação</string>
@@ -245,14 +245,14 @@
   <string name="downloading">Baixando…</string>
   <string name="downloading_list_indexes">Baixando lista de regiões disponíveis…</string>
   <string name="list_index_files_was_not_loaded">Os arquivos de índice não puderam ser recuperados de osmand.net.</string>
-  <string name="select_index_file_to_download">Se você não encontra a sua região, você pode criá-la. Veja osmand.net</string>
+  <string name="select_index_file_to_download">Se você não encontra a sua região, você pode criá-la. (Veja http://osmand.net).</string>
   <string name="show_poi_on_map">Mostrar no mapa</string>
   <string name="fav_points_edited">O favorito foi modificado</string>
   <string name="fav_points_not_exist">Não existe nenhum favorito</string>
   <string name="update_existing">Modificar</string>
   <string name="only_show">Mostrar apenas</string>
   <string name="follow">Siga</string>
-  <string name="recalculate_route_to_your_location">Recalculando a rota a partir da sua posição</string>
+  <string name="recalculate_route_to_your_location">Recalculando a rota a partir da sua posição:</string>
   <string name="mark_final_location_first">Por favor, primeiro selecione um destino</string>
   <string name="get_directions">Navegação</string>
   <string name="gps_status_app_not_found">A aplicação de gestão de GPS não está instalada. Procurar no Market?</string>
@@ -277,7 +277,7 @@
   <string name="empty_route_calculated">Trajeto calculado vazio</string>
   <string name="new_route_calculated_dist">Nova rota calculada, distância</string>
   <string name="arrived_at_destination">Você alcançou o seu destino</string>
-  <string name="invalid_locations">Locais inválidos</string>
+  <string name="invalid_locations">Locais inválidos!</string>
   <string name="go_back_to_osmand">Voltar ao mapa do OsmAnd</string>
   <string name="close">Fechar</string>
   <string name="loading_data">Carregando dados…</string>
@@ -302,7 +302,7 @@
   <string name="auto_zoom_map_descr">Zoom automático em função da sua velocidade</string>
   <string name="auto_zoom_map">Zoom automático do mapa</string>
   <string name="additional_settings">Outras definições</string>
-  <string name="settings_preset_descr">Escolher ou definir padrões de uso</string>
+  <string name="settings_preset_descr">Escolher ou definir padrões de uso.</string>
   <string name="settings_preset">Modo da aplicação</string>
   <string name="settings">Configurações</string>
   <string name="save_current_track_descr">Salvar a trilha atual no cartão SD agora</string>
@@ -335,8 +335,8 @@
   <string name="map_specify_point">Especifique um local</string>
   <string name="show_view_angle_descr">Mostrar ângulo de visão baseado na bússola</string>
   <string name="show_view_angle">Mostrar ângulo de visão</string>
-  <string name="stop_navigation">Apagar o ponto</string>
-  <string name="navigate_to_point">Marcar posição</string>
+  <string name="stop_navigation">Apagar o ponto.</string>
+  <string name="navigate_to_point">Marcar posição.</string>
   <string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
   <string name="map_view_3d">Visualização em 3D</string>
   <string name="show_poi_over_map_description">Mostrar POI no mapa (use o último filtro)</string>
@@ -364,7 +364,7 @@
   <string name="incremental_search_building">Pesquisa progressiva dos edificios</string>
   <string name="choose_available_region">Escolher uma região na lista</string>
   <string name="choose_intersected_street">Escolher a rua transversal</string>
-  <string name="Closest_Amenities">Locais mais próximos.</string>
+  <string name="Closest_Amenities">Locais mais próximos</string>
   <string name="app_mode_default">Padrão (também define valores padrão)</string>
   <string name="app_mode_car">Carro</string>
   <string name="app_mode_bicycle">Bicicleta</string>
@@ -582,7 +582,7 @@
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
-  <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
+  <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings.</string>
   <string name="show_current_gpx_title">Show current track</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
   <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
@@ -619,7 +619,9 @@
   <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
   <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Select Destination</string>
-  <string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
+  <string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'.
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+</string>
   <string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Transparent theme</string>
@@ -671,7 +673,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Save route as GPX track</string>
   <string name="route_successfully_saved_at">Route successfully saved as \'%1$s\'.</string>
-  <string name="filename_input">"File name : "</string>
+  <string name="filename_input">O nome do arquivo : </string>
   <string name="file_with_name_already_exist">File with same name already exists.</string>
   <string name="default_buttons_save">Save</string>
   <string name="menu_save_directions">Save directions</string>
@@ -759,7 +761,11 @@
   <string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
   <string name="level_to_switch_vector_raster">Min. vector zoom level</string>
   <string name="tip_location_sharing">Location Sharing</string>
-  <string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
+  <string name="tip_location_sharing_t">\tVocê pode compartilhar a localização de lugares interessantes em sua viagem com a família ou amigos.
+\n\tPara partes qualquer local que você deseja:
+\n\tUsar \'menu de contexto Mapa\' -&gt; \'Compartilhar local\' menu.
+\n\tThen selecionar uma forma de partilhar a sua localização. As opções são: e-mail, SMS (texto), ou apenas a localização cópia coordena a área de transferência.
+</string>
   <string name="tip_favorites">Favorite Points</string>
   <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
@@ -780,7 +786,8 @@
   <string name="tip_map_context_menu">Map Context Menu</string>
   <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
   <string name="tip_initial">Tips and Tricks</string>
-  <string name="tip_initial_t">\tOsmAnd is a navigation application with many features. \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
+  <string name="tip_initial_t">\tOsmAnd é um aplicativo de navegação com muitos recursos.
+\n\tComo uma introdução básica, algumas dicas de uso e truques estão ligados na tela principal.</string>
   <string name="next_button">Next</string>
   <string name="previous_button">Previous</string>
   <string name="unit_of_length_descr">Change units of length and speed</string>
@@ -821,7 +828,7 @@
   <string name="rendering_attr_noPolygons_name">No polygons</string>
   <string name="rendering_attr_appMode_name">Rendering mode</string>
   <string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string>
-  <string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string>
+  <string name="rendering_attr_contourLines_description">Exibir a partir do nível de zoom (precisa arquivo SRTM):</string>
   <string name="rendering_attr_contourLines_name">Show contour lines</string>
   <string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
   <string name="rendering_attr_hmRendered_name">Show more map detail</string>
