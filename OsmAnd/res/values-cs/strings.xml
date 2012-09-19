@@ -413,7 +413,7 @@
   <string name="select_tile_source_to_install">" Vyberte mapy k instalaci a aktualizaci "</string>
   <string name="internet_not_available">" Internetové připojení není dostupné "</string>
   <string name="install_more">Instalovat další…</string>
-  <string name="level_to_switch_vector_raster_descr">" Úroveň zvětšení, od které se zobrazení přepne z rastrového na vektorové. "</string>
+  <string name="level_to_switch_vector_raster_descr">Zobrazovat vektorové mapy od minimálního zvětšení</string>
   <string name="level_to_switch_vector_raster">Zvětšení vektorové mapy</string>
   <string name="create_poi_link_to_osm_doc">" "<u>Online OSM</u> - mapová klasifikace "</string>
   <string name="error_doing_search">Při offline hledání došlo k chybě</string>
@@ -715,7 +715,7 @@
   <string name="data_settings">Data</string>
   <string name="osm_settings">Editace OSM</string>
   <string name="auto_zoom_map_descr">Automaticky měnit zvětšení podle rychlosti pohybu</string>
-  <string name="auto_zoom_map">Automaticky nastavit zvětšení</string>
+  <string name="auto_zoom_map">Automatické zvětšení mapy</string>
   <string name="additional_settings">Další volby</string>
   <string name="settings">Nastavení</string>
   <string name="save_current_track_descr">Uloží aktuální trasu na SD kartu</string>
@@ -999,12 +999,12 @@
   <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
   <string name="bg_service_sleep_mode_off">Zapnout službu na pozadí</string>
   <string name="bg_service_sleep_mode_on">Vypnout službu na pozadí</string>
-<string name="show_lanes">Zobrazit jízdní pruhy</string>
+<string name="show_lanes">Zobrazovat jízdní pruhy</string>
 <string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
 <string name="avoid_ferries">Vyhnout se trajektům</string>
 <string name="avoid_in_routing_title">Vyhnout se...</string>
 <string name="avoid_in_routing_descr">Vyhnout se trajektům, placeným a nezpevněným cestám</string>
-<string name="show_warnings_title">Zobrazit upozornění...</string>
+<string name="show_warnings_title">Dopravní upozornění...</string>
 <string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary a retardéry</string>
 <string name="map_widget_show_ruler">Měřítko</string>
 <string name="map_widget_appearance">Ostatní:</string>
@@ -1059,6 +1059,11 @@
 <string name="btn_add_tag">Přidat označení</string>
 <string name="btn_advanced_mode">Pokročilé...</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
-\t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace. </string>
+\t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace.
+</string>
 <string name="poi_filter_emergency">Pohotovost</string>
+<string name="tip_map_switch_t_v2">\tZdroj map a informace, které se zobrazují, můžete změnit na mapové obrazovce v \'Menu\'-&gt;\'Mapová data\'.
+\n\tPomocí \"Zdroj map...\' můžete zvolit lokálně uložené vektorové mapy nebo online rastrové mapy (pro tuto funkci aktivujte modul \'Online mapy\') nebo vlastní mapy vytvořené na PC pomocí programu OsmAndMapCreator.
+\n\tOsmAnd také podporuje vlastní zdroje map.
+</string>
 </resources>
