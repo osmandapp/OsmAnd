@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="avoid_in_routing_title">Osgoi...</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau</string>
@@ -75,4 +75,14 @@
 <string name="update_downlod_list">Ail lwytho rhestr</string>
 <string name="starting_point_too_far">Man cychwyn yn rhy bell o\'r ffordd agosaf</string>
 <string name="shared_location">Lleoliad rhanedig</string>
+<string name="avoid_motorway">Ceisiwch osgoi traffyrdd</string>
+<string name="auto_zoom_map_descr">Zoom Auto mapio yn ôl eich cyflymder (tra map wedi eu cydamseru gyda'r sefyllfa bresennol)</string>
+<string name="auto_zoom_map">Auto chwyddo map</string>
+<string name="tip_recent_changes_0_8_3_t">Newidiadau mewn 0.8.3: ↵
+\n\t* cyfarwyddyd llwybr Gwell ↵
+\n\t* Osgoi traffyrdd opsiwn ↵
+\n\t* Llwybr Beicio=trac arddangos ↵
+\n\t* well UI gorffen (eiconau) ↵
+\n\t* Mae rhai bug chyfyngderau ↵
+tip_recent_changes_0_8_3_t Cyd-destun</string>
 </resources>
