@@ -768,10 +768,10 @@ public class MapActivityActions implements DialogProvider {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, false);
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 				} else if (standardId == R.string.context_menu_item_directions) {
 					Location loc = mapActivity.getLastKnownLocation();
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), false, false);
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), false, -1);
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
 					getDirections(loc, true);
 				} else if (standardId == R.string.context_menu_item_show_route) {
@@ -782,11 +782,11 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(loc, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, true);
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, mapActivity.getIntermediatePoints().size());
 				} else if (standardId == R.string.context_menu_item_first_intermediate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, true);
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, 0);
 				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, true);
+					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, mapActivity.getIntermediatePoints().size());
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
@@ -952,7 +952,7 @@ public class MapActivityActions implements DialogProvider {
 							mapActivity.updateApplicationModeSettings();
 							mapView.refreshMap(changed);
 						} else {
-							mapActivity.navigateToPoint(null, true, false);
+							mapActivity.navigateToPoint(null, true, -1);
 						}
 						mapView.refreshMap();
 						return true;

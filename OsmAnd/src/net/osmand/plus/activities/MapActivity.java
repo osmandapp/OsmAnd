@@ -945,13 +945,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 
-	public void navigateToPoint(LatLon point, boolean updateRoute, boolean intermediate){
+	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate){
 		if(point != null){
-			if(!intermediate) {
+			if(intermediate < 0) {
 				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 			} else {
-				int sz = mapLayers.getNavigationLayer().getIntermediatePoints().size();
-				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, sz);
+				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, intermediate);
 			}
 		} else {
 			settings.clearPointToNavigate();
