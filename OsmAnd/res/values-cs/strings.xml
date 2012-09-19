@@ -1066,4 +1066,12 @@
 \n\tPomocí \"Zdroj map...\' můžete zvolit lokálně uložené vektorové mapy nebo online rastrové mapy (pro tuto funkci aktivujte modul \'Online mapy\') nebo vlastní mapy vytvořené na PC pomocí programu OsmAndMapCreator.
 \n\tOsmAnd také podporuje vlastní zdroje map.
 </string>
+<string name="tip_day_night_mode_t_v2">\tVzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
+\n\tNoční vzhled je bezpečnější pro jízdu v noci (méně oslňují).
+\n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavení obrazovky...\'-&gt;\'Denní/noční režim\'
+\n\tMožnosti:
+\n\t\'Východ/západ slunce\' - automatické přepínání podle slunce (výchozí)
+\n\t\'Den\' - vždy používá denní režim
+\n\t\'Noc\' - vždy používá noční režim
+\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen)</string>
 </resources>
