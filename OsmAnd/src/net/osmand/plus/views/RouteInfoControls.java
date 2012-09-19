@@ -355,12 +355,12 @@ public class RouteInfoControls {
 
 				@Override
 				public void onClick(View v) {
-					onClick(view);
+					click(view);
 				}
 			});
 		}
 		
-		protected void onClick(final OsmandMapTileView view) {
+		protected void click(final OsmandMapTileView view) {
 			AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
 			LatLon pointToNavigate = getPointToNavigate();
 			if (pointToNavigate != null) {
@@ -430,11 +430,11 @@ public class RouteInfoControls {
 				.getDrawable(R.drawable.info_intermediate), view) {
 
 			@Override
-			protected void onClick(OsmandMapTileView view) {
+			protected void click(OsmandMapTileView view) {
 				if(map.getIntermediatePoints().size() > 1) {
 					map.getMapActions().openIntermediatePointsDialog();
 				} else {
-					super.onClick(view);
+					super.click(view);
 				}
 			}
 
