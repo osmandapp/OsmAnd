@@ -540,7 +540,7 @@ public class MapActivityActions implements DialogProvider {
 		} else {
 			// view.findViewById(R.id.TextView).setVisibility(View.GONE);
 			builder.setPositiveButton(R.string.follow, followCall);
-			builder.setNegativeButton(R.string.only_show, onlyShowCall);
+			builder.setNeutralButton(R.string.only_show, onlyShowCall);
 			builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		}
 		builder.show();
@@ -1064,7 +1064,7 @@ public class MapActivityActions implements DialogProvider {
 		return optionsMenuHelper.onClick(item);
 	}
 	
-	private void openIntermediatePointsDialog(){
+	public void openIntermediatePointsDialog(){
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final ArrayList<LatLon> intermediates = new ArrayList<LatLon>(mapActivity.getIntermediatePoints());
 		final int targetPointInd = mapActivity.getPointToNavigate() == null ? -1 : intermediates.size();
@@ -1220,36 +1220,37 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		qa.addActionItem(showOnMap);
-//		ActionItem setAsDestination = new ActionItem();
-//		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_view_set_destination));
-//		setAsDestination.setTitle(activity.getString(R.string.navigate_to));
-//		setAsDestination.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if(onShow != null) {
-//					onShow.onClick(v);
-//				}
-//				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
-//				MapActivity.launchMapActivityMoveToTop(activity);
-//				qa.dismiss();
-//			}
-//		});
-//		qa.addActionItem(setAsDestination);
-		
-		ActionItem directionsTo = new ActionItem();
-		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_directions_to_here));
-		directionsTo.setTitle(activity.getString(R.string.context_menu_item_directions));
-		directionsTo.setOnClickListener(new OnClickListener() {
+		ActionItem setAsDestination = new ActionItem();
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_view_set_destination));
+		setAsDestination.setTitle(activity.getString(R.string.navigate_to));
+		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
 				navigateToPoint(activity, location.getLatitude(), location.getLongitude(), name);
+//				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
+//				MapActivity.launchMapActivityMoveToTop(activity);
 				qa.dismiss();
 			}
 		});
-		qa.addActionItem(directionsTo);
+		qa.addActionItem(setAsDestination);
+		
+//		ActionItem directionsTo = new ActionItem();
+//		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_directions_to_here));
+//		directionsTo.setTitle(activity.getString(R.string.context_menu_item_directions));
+//		directionsTo.setOnClickListener(new OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				if(onShow != null) {
+//					onShow.onClick(v);
+//				}
+//				navigateToPoint(activity, location.getLatitude(), location.getLongitude(), name);
+//				qa.dismiss();
+//			}
+//		});
+//		qa.addActionItem(directionsTo);
 	}
     
     public static void navigateToPoint(final Context activity, final double lat, final double lon, final String name){
