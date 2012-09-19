@@ -715,7 +715,7 @@ public class MapActivityActions implements DialogProvider {
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
 		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_activities_directions_to_here);
 		if(settings.getPointToNavigate() != null) {
-			if(settings.getIntermediatePoints().size() > 0) {
+			if(mapActivity.getIntermediatePoints().size() == 0) {
 				adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_view_set_intermediate);
 			} else {
 				adapter.registerItem(R.string.context_menu_item_first_intermediate_point, R.drawable.list_view_set_intermediate);

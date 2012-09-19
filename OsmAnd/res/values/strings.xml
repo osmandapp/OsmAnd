@@ -21,8 +21,8 @@
 	</string>
     
     <string name="navigate_to">Set as destination</string>
-    <string name="context_menu_item_last_intermediate_point">Last intermediate point</string>
-    <string name="context_menu_item_first_intermediate_point">First intermediate point</string>
+    <string name="context_menu_item_last_intermediate_point">Set last target point</string>
+    <string name="context_menu_item_first_intermediate_point">Set first target point</string>
     <string name="add_as_last_destination_point">Add as last intermedate point</string>
     <string name="add_as_first_destination_point">Add as first intermediate point</string>
     <string name="replace_destination_point">Replace destination point</string>
