@@ -983,7 +983,7 @@
   <string name="map_widget_config">Configurazione</string>
   <string name="map_widget_map_select">Selezione della mappa</string>
   <string name="map_widget_back_to_loc">Dove sono</string>
-  <string name="map_widget_lock_screen">Blocco schermo</string>
+  <string name="map_widget_lock_screen">Blocca lo schermo</string>
   <string name="map_widget_compass">Bussola</string>
   <string name="map_widget_top_stack">Barra di stato:</string>
   <string name="map_widget_reset">Reimposta i valori di default</string>
@@ -999,13 +999,13 @@
   <string name="map_widget_next_turn_small">Prossima svolta (piccola)</string>
   <string name="map_widget_next_next_turn">Svolta successiva a questa</string>
   <string name="map_widget_mini_route">Minimappa del percorso</string>
-  <string name="bg_service_screen_lock">Blocca schermo</string>
+  <string name="bg_service_screen_lock">Blocca lo schermo</string>
   <string name="bg_service_screen_lock_toast">Lo schermo è bloccato</string>
   <string name="bg_service_interval">Imposta l\'intervallo di risveglio:</string>
   <string name="screen_is_locked">Per sbloccare lo schermo premi l\'icona del lucchetto</string>
   <string name="bg_service_screen_unlock">Sblocca schermo</string>
-  <string name="bg_service_sleep_mode_off">Disabilita modalità sleep</string>
-  <string name="bg_service_sleep_mode_on">Abilita modalità sleep</string>
+  <string name="bg_service_sleep_mode_off">Abilita\n modalità sleep</string>
+  <string name="bg_service_sleep_mode_on">Ferma\n modalità sleep</string>
 <string name="filterpoi_activity">Crea un filtro dei Poi</string>
 <string name="select_navigation_mode">Scelta del mezzo di trasporto</string>
 <string name="day_night_info_description">Alba : %1$s
@@ -1014,7 +1014,7 @@
 <string name="map_widget_day_night">Giorno/notte mappa</string>
 <string name="map_widget_vector_attributes">Attributi del disegno:</string>
 <string name="map_widget_renderer">Stile del disegno</string>
-<string name="live_monitoring_mode_off">Avvio\n tracciatura live</string>
+<string name="live_monitoring_mode_off">Avvia\n tracciatura live</string>
 <string name="live_monitoring_mode_on">Ferma\n tracciatura live</string>
 <string name="layer_map_appearance">Configura lo schermo…</string>
 <string name="show_lanes">Mostra le corsie</string>
