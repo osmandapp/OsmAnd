@@ -943,4 +943,27 @@
 <string name="gps_wakeup_interval">GPS intervalo de despertar: %s</string>
 <string name="int_continuosly">Contínuo</string>
 <string name="email">e-mail</string>
+<string name="osmand_long_description_1000_chars">
+OsmAnd (Direções OSM automatizados de navegação)
+
+OsmAnd é uma aplicação de navegação livre com acesso a uma ampla variedade de globais OpenStreetMap (OSM) de dados. Todos os dados de mapas (mapas vetoriais ou telha) podem ser armazenados no cartão de memória do telefone para uso offline. OsmAnd também oferece offline e online, incluindo a funcionalidade de roteamento turn-by-turn orientação por voz.
+
+Algumas das características principais:
+- Completa funcionalidade offline (mapas baixados da loja vetor ou telha em uma pasta selecionável)
+- Compacto off-line mapas vetoriais para o mundo inteiro disponível
+- Faça o download de mapas de países ou região diretamente do aplicativo
+- Sobreposição de camadas de mapas diversos possíveis, como GPX ou navegação faixas, Pontos de Interesse, favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável
+- Pesquisa offline para endereços e locais (POIs)
+- Encaminhamento offline para distâncias curtas (experimental)
+- Carro, bicicleta, e os modos de pedestres com:
+- Opcional vista de dia/noite automático de comutação
+- Mapa em função da velocidade opcional zoom
+- Alinhamento mapa opcional de acordo com bússola ou direção do movimento
+- Orientação pista opcional, display de limite de velocidade, registradas e vozes TTS
+
+Limitações desta versão gratuita de OsmAnd:
+- Número de downloads de mapa limitado
+- Sem acesso a Wikipedia off-line POIs
+
+OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depende ainda contribuições financeiras para financiar o desenvolvimento e testdriving novas funcionalidades. Por favor, considere a compra de OsmAnd, ou financiar novas funcionalidades específicas ou fazer uma doação geral sobre osmand.net.</string>
 </resources>
