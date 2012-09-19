@@ -279,4 +279,253 @@ Du kan aktivera (online eller cachad) källor kakel karta, spårning inställnin
 \n\t- Offline POI redigering↵
 \n\t- Tillgänglighet↵
 \n\t- Massor av buggfixar↵</string>
+<string name="osmand_long_description_1000_chars">
+OsmAnd (OSM automatiserade Navigation Vägbeskrivning)
+
+OsmAnd är ett open source navigering ansökan med tillgång till ett brett utbud av globala OpenStreetMap (OSM) data. Alla kartdata (vektor-eller kakel kartor) kan lagras i telefonens minne kort för offline användning. OsmAnd erbjuder även offline och online routing-funktionalitet, inklusive turn-by-turn röstguidning.
+
+Några av de viktigaste funktionerna:
+- Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp)
+- Kompakta offline vektorkartor för hela världen finns
+- Nedladdning av land eller region kartor direkt från appen
+- Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens
+- Offline söka efter adresser och platser (POIs)
+- Offline dirigering för korta sträckor (experimentell)
+- Bil, cykel och fotgängare lägen med:
+- Tillval automatisk dag/nattvisning växling
+- Tillval hastighetsberoende karta zoomning
+- Valfri karta inställningen enligt kompass eller rörelseriktningen 
+- Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster
+
+Begränsningar av denna gratis version av OsmAnd:
+- Antal karta nedladdningar begränsad
+- Ingen tillgång till Wikipedia offline POIs
+
+OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväga att köpa OsmAnd + eller finansiera specifika nya funktioner eller göra en allmän donation på osmand.net.</string>
+<string name="native_rendering">Native rendering</string>
+<string name="default_buttons_support">Stöd</string>
+<string name="support_new_features">Stödja nya funktioner</string>
+<string name="show_ruler_level">Visa linjal</string>
+<string name="info_button">Info</string>
+<string name="back_to_location">Tillbaka till plats</string>
+<string name="oclock">O\'klockan</string>
+<string name="accuracy">Noggrannhet</string>
+<string name="no_info">Ingen info</string>
+<string name="direction_style_sidewise">Sidled (8 sektorer)</string>
+<string name="direction_style_clockwise">Medurs (12 sektorer)</string>
+<string name="settings_direction_style">Riktning stil</string>
+<string name="settings_direction_style_descr">Välj stil att uttrycka relativa riktningar när du flyttar</string>
+<string name="auto_announce_on">Börja autoannouncing</string>
+<string name="auto_announce_off">Sluta autoannouncing</string>
+<string name="scroll_map_by_gestures_descr">Bläddra kartan genom gester på pekskärmen</string>
+<string name="scroll_map_by_gestures">Naturliga kartan rullning</string>
+<string name="i_am_here">Jag är här</string>
+<string name="zoom_by_trackball_descr">Ändra karta zoomning med horisontella styrkula flyttar</string>
+<string name="zoom_by_trackball">Använd styrkula för zoom-kontroll</string>
+<string name="use_short_object_names_descr">Använd korta objektnamn i kontakt prospektering läge</string>
+<string name="use_short_object_names">Använd objektnamn</string>
+<string name="accessibility_preferences_descr">Tillgänglighet relaterade inställningar</string>
+<string name="accessibility_preferences">Tillgänglighet</string>
+<string name="rendering_out_of_memory">Inte tillräckligt processminnet att visa valt område</string>
+<string name="use_fluorescent_overlays">fluorescerande överlägg</string>
+<string name="use_fluorescent_overlays_descr">Använd fluorescerande färger för att visa spår och rutter</string>
+<string name="offline_edition">Offline-redigering</string>
+<string name="offline_edition_descr">Använd alltid offline-redigering</string>
+<string name="tip_recent_changes_0_7_1_t">Förändringar i 0.7.1:
+\n\t- Offline POI redigering 
+\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo artiklar) 
+\n\t- Visa för närvarande in spår på kartan 
+\n\t- Riktning upptäckt: \'Gör U-sväng\' anges och meddelas när rubrik i motsatt riktning eller efter saknade en sväng 
+\n\t- New röstmeddelande \'Route räknas\' 
+\n\t- Optisk indikering av en förestående sväng inom 100m från diretion pil ändrar färg 
+\n\t- Aktualitet även om deaktiverade indexfiler nu visas på Download skärm i mörkgrönt och mörkblått 
+\n\t- Övriga förändringar</string>
+<string name="update_poi_does_not_change_indexes">POI förändringar inom programmet inte påverkar nedladdade kartfiler, förändringar sparas lokalt fil istället.</string>
+<string name="local_openstreetmap_uploading">Uppladdning...</string>
+<string name="local_openstreetmap_were_uploaded">{0} POI/Buggar upp</string>
+<string name="local_openstreetmap_uploadall">Ladda upp alla</string>
+<string name="local_openstreetmap_show">Visa på karta</string>
+<string name="local_openstreetmap_upload">Ladda ändringar OSM</string>
+<string name="local_openstreetmap_delete">Ta bort ändringar</string>
+<string name="local_openstreetmap_descr_title">Asynkron OSM Redigering:</string>
+<string name="local_openstreetmap_settings">Lokalt sparade OSM POIs/Buggar</string>
+<string name="local_openstreetmap_settings_descr">Visa och hantera OSM POIs/Buggar noteras i lokal databas</string>
+<string name="live_monitoring_descr">Skicka spårning till ett angivet webbtjänst</string>
+<string name="live_monitoring">Online Live spårning</string>
+<string name="live_monitoring_interval_descr">Ange levande tracking intervall</string>
+<string name="live_monitoring_interval">Live spårning intervall</string>
+<string name="live_monitoring_url_descr">Ange webbadressen med parameter syntax: lat={0}, lon={1}, tidsstämpel={2}, hdop={3}, höjd={4}, hastighet={5}</string>
+<string name="live_monitoring_url">Live spårning webbadress</string>
+<string name="gpx_monitoring_disabled_warn">Vänligen aktivera \'Log spår till GPX fil\' inställningar.</string>
+<string name="show_current_gpx_title">Visa aktuella spåret</string>
+<string name="tip_recent_changes_0_7_0_t">Förändringar i 0.7.0:
+\n\t- Offline wikipedia uppgifter med artiklar
+\n\t- Uppdaterade kartor
+\n\t- Andra små funktioner</string>
+<string name="free_version_message">Detta fria OsmAnd versionen är begränsad till %1$s nedladdningar %2$s och stöder inte offline Wikipedia-artiklar.</string>
+<string name="free_version_title">Gratis version</string>
+<string name="poi_context_menu_showdescription">Visa POI beskrivning</string>
+<string name="index_name_north_america">NordAmerika</string>
+<string name="index_name_us">Nordamerika - USA</string>
+<string name="index_name_central_america">Centralamerika</string>
+<string name="index_name_south_america">Sydamerika</string>
+<string name="index_name_europe">Europa</string>
+<string name="index_name_france">Europa - Frankrike</string>
+<string name="index_name_germany">Europa - Tyskland</string>
+<string name="index_name_russia">Europa/Asien - Ryssland</string>
+<string name="index_name_africa">Afrika</string>
+<string name="index_name_asia">Asien</string>
+<string name="index_name_oceania">oceania</string>
+<string name="index_name_other">Hela världen och ämne kartor</string>
+<string name="index_name_wiki">Världen Wikipedia</string>
+<string name="index_name_voice">Voice förpackningar (inspelad)</string>
+<string name="index_name_tts_voice">Voice förpackningar (TTS)</string>
+<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
+<string name="amenity_type_user_defined">Användardefinierad</string>
+<string name="fav_export_confirmation">Fil med tidigare exporterats favoriter finns redan. Vill du ersätta den?</string>
+<string name="profile_settings">Profil specifika inställningar</string>
+<string name="settings_preset">Användarprofil</string>
+<string name="settings_preset_descr">Välj en användarprofil med anpassade karta och navigering inställningar.</string>
+<string name="routing_settings">Navigering</string>
+<string name="routing_settings_descr">Ange navigeringsalternativ</string>
+<string name="global_settings">Globala inställningar</string>
+<string name="general_settings">Allmänna inställningar</string>
+<string name="general_settings_descr">Konfigurera globala inställningar</string>
+<string name="global_app_settings">Globala app inställningar</string>
+<string name="user_name">Din OSM användarnamn</string>
+<string name="user_name_descr">Behövs för openstreetmap.org inlagor</string>
+<string name="user_password">Din OSM lösenord</string>
+<string name="user_password_descr">Behövs för openstreetmap.org inlagor</string>
+<string name="osmand_service">Viloläge Funktionalitet</string>
+<string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
+<string name="tip_rotation_switching">Kartorientering</string>
+<string name="tip_rotation_switching_t_v2">\tDu kan växla om och hur kartbilden roteras genom att upprepade gånger klicka på kartbilden\'s kompass ikonen.
+\n\tAlternativen är:
+\n\t\Vrid inte (norr är uppåt)\'- Karta inte kommer att roteras. Norr kommer alltid upp
+\n\t\'Till rörelseriktning\' - Karta kommer kontinuerligt anpassas till din kurs
+\n\t\'Till kompass\' - Karta kommer kontinuerligt anpassas till enhetens kompass läsning</string>
+<string name="binary_map_download_success">Ladda framgångsrika.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera Visa\' -&gt; \'Karta källa...\' -&gt; \ 'Offline vektorkartor\'.</string>
+<string name="tip_day_night_mode">Dag/nattläge</string>
+<string name="tip_osm_improve">Förbättra OSM data</string>
+<string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (tillgängliga: %2$s).</string>
+<string name="download_files_question_space">Tillgängliga utrymme nu {2} MB! Ladda {0} fil(er) ({1} MB)?</string>
+<string name="tip_select_destination_point">Välj destination</string>
+<string name="tip_select_destination_point_t">\tDu kan välja en destination direkt i kartan (snabbmenyn, sedan \'Ange som destination\'), i alla sökord aktiviteter, eller via lång knapptryckning en post i \'lista över favoritprogram poäng\'.
+\n\tDen Resmålet markeras som en orange skiva på kartan och OsmAnd visas avståndet till den och riktning till den (orange triangel).</string>
+<string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9:
+\n\t- Förbättrad offline karta rendering
+\n\t- Fast Native offline rendering - titta i experimentella funktioner (kanske inte fungerar på vissa enheter)
+\n\t- Massiv utseende och förändringar känsla
+\n\t- Altitude info
+\n\t- Nya översättningar (Vienamese, polska)
+\n\t- Andra små funktioner</string>
+<string name="use_transparent_map_theme">Genomskinlig tema</string>
+<string name="native_library_not_supported">Native bibliotek stöds inte på den här enheten.</string>
+<string name="init_native_library">Initierar infödda bibliotek...</string>
+<string name="choose_auto_follow_route">Auto-Center kartvy</string>
+<string name="choose_auto_follow_route_descr">Tid till kartvyn synkroniseras med aktuell position</string>
+<string name="auto_follow_route_never">Aldrig</string>
+<string name="auto_follow_route_navigation">Auto-Center nav endast</string>
+<string name="auto_follow_route_navigation_descr">Auto-Center kartvy bara när du navigerar.</string>
+<string name="auto_follow_location_enabled">Auto-Center kartvyn i bruk.</string>
+<string name="pref_vector_rendering">Vektorrenderaren specifika alternativ</string>
+<string name="pref_overlay">Overlay / underlag</string>
+<string name="pref_raster_map">Kartkälla inställningar</string>
+<string name="pref_vector_map">Vektor Kartinställningar</string>
+<string name="delete_confirmation_msg">Ta bort %1$s?</string>
+<string name="city_type_suburb">Förort</string>
+<string name="city_type_hamlet">Hamlet</string>
+<string name="city_type_village">Village</string>
+<string name="city_type_town">Stad</string>
+<string name="city_type_city">Stad</string>
+<string name="layer_poi_label">POI etiketter</string>
+<string name="animate_route_off">Stoppa animering</string>
+<string name="animate_route">Starta animering</string>
+<string name="file_can_not_be_renamed">Fil kan inte döpas om.</string>
+<string name="file_with_name_already_exists">Fil med det namnet finns redan.</string>
+<string name="gpx_navigation">GPX väg</string>
+<string name="poi_query_by_name_matches_categories">Flera POI-kategorier som matchar frågan :</string>
+<string name="data_to_search_poi_not_available">Lokala data för att söka POI inte är närvarande.</string>
+<string name="poi_filter_by_name">Sök på namn</string>
+<string name="old_poi_file_should_be_deleted">POI datafil \'%1$s\' är överflödig och kan tas bort.</string>
+<string name="update_poi_file_not_found">Lokal fil att upprätthålla POI förändringar inte hittas och kunde inte skapas.</string>
+<string name="button_upgrade_osmandplus">Uppgradera OsmAnd+</string>
+<string name="map_version_changed_info">Server innehåller kartfiler inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till nyare version.</string>
+<string name="local_index_mi_rename">Byt namn</string>
+<string name="show_gpx_route">Visa på karta</string>
+<string name="search_select_point">Välj</string>
+<string name="search_position_current_location_search">Söker läge...</string>
+<string name="search_position_current_location_found">Position(Hittade)</string>
+<string name="search_position_address">Adress...</string>
+<string name="search_position_favorites">Favoriter...</string>
+<string name="search_position_undefined">Odefinierad</string>
+<string name="search_position_fixed">Fast</string>
+<string name="search_position_current_location">Aktuell position...</string>
+<string name="search_position_map_view">Load kartvy</string>
+<string name="select_search_position">Sök i närheten :</string>
+<string name="context_menu_item_search">Sök nära här</string>
+<string name="save_route_dialog_title">Spara rutt som GPX spår</string>
+<string name="route_successfully_saved_at">Rutt sparats som \"%1$s\'.</string>
+<string name="filename_input">Filnamn :</string>
+<string name="file_with_name_already_exist">Fil med samma namn finns redan.</string>
+<string name="default_buttons_save">Spara</string>
+<string name="menu_save_directions">Spara vägbeskrivningar</string>
+<string name="local_index_upload_gpx_description">Ladda GPX-filer till OSM gemenskap. De kommer att användas för att förbättra kartor.</string>
+<string name="local_index_items_uploaded">%1$d av %2$d post(er) överförts.</string>
+<string name="local_index_mi_upload_gpx">Skicka till OSM</string>
+<string name="show_more_map_detail">Visa mer karta detaljer</string>
+<string name="show_more_map_detail_descr">Visa lite karta detaljer vektor (vägar, etc.) vid lägre zoomar Redan</string>
+<string name="favourites_delete_multiple_succesful">Favorit(er) har tagits bort.</string>
+<string name="favorite_delete_multiple">Du kommer att ta bort %1$d favorit(er) och %2$d favorit grupp(er). Är du säker?</string>
+<string name="favorite_home_category">Hem</string>
+<string name="favorite_friends_category">Vänner</string>
+<string name="favorite_places_category">Platser</string>
+<string name="favorite_default_category">Andra</string>
+<string name="favourites_edit_dialog_name">Namn</string>
+<string name="favourites_edit_dialog_category">Kategori</string>
+<string name="vector_map_not_needed">Ingen Orsak</string>
+<string name="basemap_missing">Bas världskarta (som omfattar hela världen i små zoomar) saknas. Tänk hämta World_basemap_x.obf för en komplett miljö.</string>
+<string name="vector_data_missing">Ombord (\'offline\') data saknas på SD-kort. Tänk att ladda ner den för att kunna använda kartor offline.</string>
+<string name="local_index_gpx_info_show">\n\nTryck och håll optioner</string>
+<string name="local_index_gpx_info_speed">\nAverage hastighet: %1$s \nMaximum hastighet: %2$s</string>
+<string name="local_index_installed">Edition</string>
+<string name="local_index_items_backuped">%1$d av %2$d post(er) avaktiveras framgångsrikt.</string>
+<string name="local_index_items_deleted">%1$d av %2$d post(er) har tagits bort.</string>
+<string name="local_index_items_restored">%1$d av %2$d post(er) aktiveras framgångsrikt.</string>
+<string name="local_index_no_items_to_do">Inga objekt till %1$s</string>
+<string name="local_index_action_do">Du håller på att %1$s %2$s post(er). Fortsätta?</string>
+<string name="local_index_mi_restore">Aktivera</string>
+<string name="local_index_mi_backup">Inaktivera</string>
+<string name="local_index_mi_delete">Ta bort</string>
+<string name="local_index_mi_reload">Ladda från SDCard</string>
+<string name="local_index_download">Ladda ner...</string>
+<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable :%4$s \nZooms ladda ned : %5$s</string>
+<string name="local_index_poi_data">POI uppgifter</string>
+<string name="local_index_address_data">Adressuppgifter</string>
+<string name="local_index_transport_data">Transport uppgifter</string>
+<string name="local_index_map_data">Kartdata</string>
+<string name="local_indexes_cat_backup">Inaktiverad</string>
+<string name="local_indexes_cat_tts">Röstdata (TTS)</string>
+<string name="local_indexes_cat_voice">Röstdata (inspelad)</string>
+<string name="local_indexes_cat_gpx">GPX uppgifter</string>
+<string name="local_indexes_cat_poi">POI uppgifter</string>
+<string name="ttsvoice">TTS Voice</string>
+<string name="search_offline_clear_search">Ny sökning</string>
+<string name="map_text_size_descr">Välj textstorlek för namn på kartan</string>
+<string name="map_text_size">Karta teckenstorlek</string>
+<string name="trace_rendering">Rendering felsökningsinformation</string>
+<string name="trace_rendering_descr">Visa återgivningsprestanda</string>
+<string name="tip_recent_changes">Senaste ändringarna</string>
+<string name="voice_not_use">Använd inte</string>
+<string name="voice_not_specified">Inga</string>
+<string name="installing_new_resources">Uppackning nya uppgifter...</string>
+<string name="internet_connection_required_for_online_route">En online navigeringstjänst är vald men ingen internet-anslutning är tillgänglig.</string>
+<string name="tts_language_not_supported_title">Språk stöds inte</string>
+<string name="tts_language_not_supported">Det valda språket stöds inte av den installerade Android TTS (text-till-tal) motor. Vill du gå till marknaden för att leta efter en annan TTS motor? Annars förinställda TTS språket kommer att användas.</string>
+<string name="tts_missing_language_data_title">Saknade uppgifter</string>
+<string name="tts_missing_language_data">Inga uppgifter för det valda språket installeras. Vill du gå till marknaden för att installera?</string>
+<string name="gpx_option_reverse_route">Omvänd GPX riktning</string>
+<string name="gpx_option_destination_point">Använd aktuell destination</string>
+<string name="gpx_option_from_start_point">Passera längs hela spåret</string>
+<string name="switch_to_vector_map_to_see">Offline vektor map närvarande för den här platsen. \n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera utsikt\' -&gt; \ 'Kartkälla...\' -&gt; \'Offline vektorkartor\'.</string>
 </resources>
