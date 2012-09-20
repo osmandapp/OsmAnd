@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Warnungen anzeigen…</string>
 	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarkontrollen, Rüttelschwellen u.Ä.</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
@@ -1037,7 +1037,7 @@
 	<string name="osmand_parking_warning_text">Hinweis zum Abholen des Fahrzeugs wurde vormals zum Kalender hinzugefügt. Hinweis besteht solange, bis dieser manuell gelöscht wird.</string>
 	<string name="osmand_parking_time_limit_title">Zeitlimit für Parken setzen</string>
 	<string name="osmand_parking_delete_confirm">Soll die Position des geparkten Fahrzeugs gelöscht werden?</string>
-	<string name="osmand_parking_delete">Parplatz-Marker löschen</string>
+	<string name="osmand_parking_delete">Parkplatz-Marker löschen</string>
 	<string name="osmand_parking_choose_type">Parkplatz-Eigenschaft wählen</string>
 	<string name="osmand_parking_lim_text">zeitlich beschränkt</string>
 	<string name="osmand_parking_no_lim_text">zeitlich unbeschränkt</string>
@@ -1138,4 +1138,13 @@
 <string name="map_widget_intermediate_distance">Zwischenpunkt</string>
 <string name="ending_point_too_far">Ausgangspunkt zu weit von der nächsten Straße.</string>
 <string name="intermediate_point_too_far">Zwischenpunkt %1$s zu weit von der nächsten Straße.</string>
+<string name="tip_recent_changes_0_8_4_t">Änderungen in 0.8.4 :</string>
+<string name="context_menu_item_last_intermediate_point">Letzten Wegpunkt setzen</string>
+<string name="context_menu_item_first_intermediate_point">Ersten Wegpunkt setzen</string>
+<string name="target_point">Zwischenpunkt</string>
+<string name="target_points">Zwischenpunkte</string>
+<string name="add_as_first_destination_point">Als ersten Zwischenpunkt einfügen</string>
+<string name="add_as_last_destination_point">Als letzten Zwischenpunkt einfügen</string>
+<string name="replace_destination_point">Zielpunkt ersetzen</string>
+<string name="new_destination_point_dialog">Sie haben bereits einen Zielpunkt gewählt.</string>
 </resources>
