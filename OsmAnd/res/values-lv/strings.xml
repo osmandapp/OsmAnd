@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
@@ -62,7 +62,7 @@
   <string name="back_left">Atpakaļ pa kreisi</string>
   <string name="left">Pa kreisi</string>
   <string name="front_left">Uz priekšu pa kreisi</string>
-  <string name="oclock">plkst.</string>
+  <string name="oclock">plkst</string>
   <string name="towards">uz priekšu</string>
   <string name="accuracy">Precizitāte</string>
   <string name="altitude">Augstums</string>
@@ -105,7 +105,7 @@
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
   <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Tiešaistes sekošanas web adrese</string>
-  <string name="gpx_monitoring_disabled_warn">Lūdzu iespējojat \'Ierakstīt treku GPX failā\' Sekošanas uzstādījumos</string>
+  <string name="gpx_monitoring_disabled_warn">Lūdzu iespējojat \'Ierakstīt treku GPX failā\' uzstādījumu.</string>
   <string name="show_current_gpx_title">Rādīt tekošo treku</string>
   <string name="tip_recent_changes_0_7_0_t">"Jaunumi 0.7.0 versijā : \n\t- Bezsaistes wikipedia dati \n\t- Atjaunotas kartes \n\t- Citi mazi uzlabojumi "</string>
   <string name="free_version_message">Šajā bezmaksas OsmAnd versijā ir ierobežojums uz %1$s lejuplādētiem %2$s nu tā neatbalsta bezsaistes wikipedia rakstus.</string>
@@ -158,7 +158,8 @@
   <string name="download_files_not_enough_space">Nepietiek brīvas vietas lai lejuplādētu %1$s MB (brīvi: %2$s).</string>
   <string name="download_files_question_space">Patreiz ir brīvi {2} MB! Lejuplādēt {0} failu(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Izvelēties galamērķi</string>
-  <string name="tip_select_destination_point_t">\tJūs variet izvēlēties galamērķi tieši kartē (konteksta izvēlne, tad \'Uzstādīt kā galamērķi\'), visās meklēšanas darbībās, vai arī pieturot piespiestu ierakstu jūsu \'Jūsu favorītu punktu sarakstā\'. \n\tGalamērķis tiks iezīmēts kā oranžš riņķis kartē un OsmAnd attēlos attālumu līdz tam un virzienu uz to (ar oranžu trijstūri).</string>
+  <string name="tip_select_destination_point_t">\tJūs variet izvēlēties galamērķi tieši kartē (konteksta izvēlne, tad \'Uzstādīt kā galamērķi\'), visās meklēšanas darbībās, vai arī pieturot piespiestu ierakstu jūsu \'Jūsu favorītu punktu sarakstā\'.
+\n\tGalamērķis tiks iezīmēts kā oranžš riņķis kartē un OsmAnd attēlos attālumu līdz tam un virzienu uz to (ar oranžu trijstūri).</string>
   <string name="tip_recent_changes_0_6_9_t">"Izmaiņas versijā 0.6.9 : \n\t- Uzlabota kartes renderēšana \n\t- Ātra bezsaistes renderēšana - meklējiet eksperimentālās iespējas (var nestrādāt dažās iekārtās) \n\t- Pamatīgas izskata izmaiņas \n\t- Augstuma informācija \n\t- Jauni tulkojumi (Vjetnamiešu, Poļu) \n\t- Citi nelieli papildinājumi "</string>
   <string name="use_transparent_map_theme_descr">Lietot caurspīdīgas kartes vadības pogas</string>
   <string name="use_transparent_map_theme">Caurspīdīgā tēma</string>
@@ -208,7 +209,7 @@
   <string name="search_position_map_view">Pēdējais kartes skats</string>
   <string name="select_search_position">Meklēt pie :</string>
   <string name="context_menu_item_search">Meklēt apkārtnē</string>
-  <string name="tip_recent_changes_0_6_7_t">"Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi"</string>
+  <string name="tip_recent_changes_0_6_7_t">Izmaiņas 0.6.7 versijā:\n\t- Bezsaistes datu menedžeris (lejuplādēšana, dzēšana un aktivizācija/deaktivizācija neizejot no OsmAnd aplikācijas)\n\t- Izlases punkti un grupas (kategorizēšana, dzēšana, izlases vadība)\n\t- GPX pārlūkošana aplikācijā (skatīt ceļa detaļas, attālumu, vidējo ātrumu, augstuma izmaiņas u.t.t.)\n\t- GPX navigācija (vairāk iespēju, turpināt navigāciju pēc nobrukšanas, loka kustības atbalsts)\n\t- Funkcija GPX ceļa saglabāšanai bezsaistes lietojumam\n\t- Uzlabota GPX monitorēšana (filtrs uz neakurātu pozīciju un saglabāta precizitāte/augstums/ātrums)\n\t- Augšuplādēt GPX uz OSM (http://download.osmand.net/gpx/)\n\t- Uzlabota vektoru renderēšana\n\t- TTS dzinēja uzlabojumi (ziņo precīzu attālumu, jūdžu atbalsts)\n\t- Kļūdu labojumi</string>
   <string name="save_route_dialog_title">Saglabāt ceļu kā GPX treku</string>
   <string name="route_successfully_saved_at">Ceļš veiksmīgi saglabāts kā \'%1$s\'.</string>
   <string name="filename_input">Faila nosaukums : </string>
@@ -307,9 +308,15 @@
   <string name="level_to_switch_vector_raster_descr">Minimālais palielinājuma līmenis ko pielietot vektoru kartēm</string>
   <string name="level_to_switch_vector_raster">Min. vektoru palielinājuma līmenis</string>
   <string name="tip_location_sharing">Atrašanās vietas koplietošana</string>
-  <string name="tip_location_sharing_t">\tJūs variet koplietot jūsu ceļojuma interesantās vietas ar jūsu draugiem un ģimeni. \n\tLai koplietotu atrašanās vietu: \n\tUse \'Kartes konteksta izvēlne\' -&gt; \'Koplietot atrašanās vietu\' izvēlne. \n\tTad izvēlaties veidu kā koplietot jūsu atrašanās vietu. Izvēle ir starp: E-pasts, SMS(teksts), vai vienkārši koordināšu kopēšana starpliktuvē.</string>
+  <string name="tip_location_sharing_t">\tJūs variet koplietot jūsu ceļojuma interesantās vietas ar jūsu draugiem un ģimeni.
+\n\tLai koplietotu atrašanās vietu:
+\n\tUse \'Kartes konteksta izvēlne\' -&gt; \'Koplietot atrašanās vietu\' izvēlne.
+\n\tTad izvēlaties veidu kā koplietot jūsu atrašanās vietu. Izvēle ir starp: E-pasts, SMS(teksts), vai vienkārši koordināšu kopēšana starpliktuvē.</string>
   <string name="tip_favorites">Punktu izlase</string>
-  <string name="tip_favorites_t">\tBiežāk lietotos punktus var saglabāt izlasē. \n\tLai saglabātu punktu izlasē, ejiet uz kartes konteksta izvēlni, izvēlaties opciju \'Pievienot izlasei\' un tad ievadiet nosaukumu. Pēc saglabāšanas izlasē, tas ir pieejams caur \'Galvenā izvēlne\' -&gt; \'Izlase\'. \n\tPieturot piespiestu izlases punktu izvēlnē \'Izlase\' parādās izvēlne lai norādītu punktu kā galapunktu, labotu vai dzēstu to. \n\tLai attēlotu visus Izlases punktus uz kartes, iespējojat slāni \'Izlase\' kartes \'Konteksta izvēlnē\' -&gt;\'Definēt skatu\'.</string>
+  <string name="tip_favorites_t">\tBiežāk lietotos punktus var saglabāt izlasē.
+\n\tLai saglabātu punktu izlasē, ejiet uz kartes konteksta izvēlni, izvēlaties opciju \'Pievienot izlasei\' un tad ievadiet nosaukumu. Pēc saglabāšanas izlasē, tas ir pieejams caur \'Galvenā izvēlne\' -&gt; \'Izlase\'.
+\n\tPieturot piespiestu izlases punktu izvēlnē \'Izlase\' parādās izvēlne lai norādītu punktu kā galapunktu, labotu vai dzēstu to.
+\n\tLai attēlotu visus Izlases punktus uz kartes, iespējojat slāni \'Izlase\' kartes \'Konteksta izvēlnē\' -&gt;\'Definēt skatu\'.</string>
   <string name="create_poi_link_to_osm_doc">" <u>Tiešsaistes OSM</u> kartes klasifikācija ar attēliem"</string>
   <string name="error_doing_search">Notika kļūda bezsaistes meklēšanā</string>
   <string name="search_offline_geo_error">Nevaru nopārsēt geo nolūku \'%s\'</string>
@@ -324,11 +331,15 @@
   <string name="tip_navigation">Navigācija</string>
   <string name="tip_navigation_t">\tPirms sākat navigāciju jums jāizvēlas gala punkts. Pēc tam nospiežat \'Izvēlne\' -&gt; \'Navigācija\' uz kartes un izvēlaties navigācijas tipu.</string>
   <string name="tip_search">Meklēju</string>
-  <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu. \n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
+  <string name="tip_search_t">\tJūs variet meklēt vietas tieši kartē, pēc adreses, atrašanās vietas, kā POI, vai arī kā iepriekš definētu izlases punktu.
+\n\tNospiežot galvenajā izvēlnē \'Meklēt\' atver meklēšanas logu. Katram atrastajam ierakstam tiek piedāvātas divas iespējas: \'Izvēlēties kā galamērķi\' vai \'Rādīt kartē\'.</string>
   <string name="tip_map_context_menu">Kartes konteksta izvēlne</string>
-  <string name="tip_map_context_menu_t">\tKartes konteksta izvēlne ir pieejama nospiežot un turot nospiestu kartes punktu. \n\tPēc darbības kartē parādās iezīme ar koordinātēm. Lai atvērtu kartes konteksta izvēlnes dialogu piespiežat uz tām. (Vai arī pieturiet nospiestu lai koordināšu ieraksts pazustu.) \n\tKartes konteksta izvēlne satur visas darbības kuras saistītas ar punktu (atrašanās vietu).</string>
+  <string name="tip_map_context_menu_t">\tKartes konteksta izvēlne ir pieejama nospiežot un turot nospiestu kartes punktu.
+\n\tPēc darbības kartē parādās iezīme ar koordinātēm. Lai atvērtu kartes konteksta izvēlnes dialogu piespiežat uz tām. (Vai arī pieturiet nospiestu lai koordināšu ieraksts pazustu.)
+\n\tKartes konteksta izvēlne satur visas darbības kuras saistītas ar punktu (atrašanās vietu).</string>
   <string name="tip_initial">Padomi un triki</string>
-  <string name="tip_initial_t">\tOsmAnd ir navigācijas aplikācija ar daudz iespējām. \n\tIevadam, daži lietošanas padomi ir piesaistīti galvenajai ekrāna izvēlnei.</string>
+  <string name="tip_initial_t">\tOsmAnd ir navigācijas aplikācija ar daudz iespējām.
+\n\tIevadam, daži lietošanas padomi ir piesaistīti galvenajai ekrāna izvēlnei.</string>
   <string name="next_button">Tālāk</string>
   <string name="previous_button">Atpakaļ</string>
   <string name="unit_of_length_descr">Izmainīt garuma un ātruma vienības</string>
@@ -701,12 +712,12 @@
   <string name="searchpoi_activity">Izvēlēties POI</string>
   <string name="search_POI_level_btn">Atrast vairāk</string>
   <string name="incremental_search_city">Pieaugoši meklēt pilsētas. Lai atrastu pilsētu ievadiet 3 vai vairāk simbolus.</string>
-  <string name="incremental_search_street">"Pieaugoši meklēt ielas. "</string>
+  <string name="incremental_search_street">Pieaugoši meklēt ielas</string>
   <string name="incremental_search_building">Pieaugoši meklēt ēkas</string>
   <string name="choose_available_region">Izvēlieties reģionu no saraksta</string>
   <string name="choose_intersected_street">Izvēlēties ielu krustojumu</string>
   <string name="Closest_Amenities">Tuvākie servisi</string>
-  <string name="app_mode_default">"Noklusēti "</string>
+  <string name="app_mode_default">Noklusēts</string>
   <string name="app_mode_car">Auto</string>
   <string name="app_mode_bicycle">Velosipēds</string>
   <string name="app_mode_pedestrian">Kājāmgājējs</string>
@@ -742,7 +753,7 @@
   <string name="add_favorite_dialog_default_favourite_name">Izlase</string>
   <string name="add_favorite_dialog_favourite_added_template">Izlases punkts \'\'{0}\'\' veiksmīgi pievienots.</string>
   <string name="favourites_context_menu_navigate">Uzstādīt kā galamērķi</string>
-  <string name="favourites_context_menu_edit">"Labot izlasi "</string>
+  <string name="favourites_context_menu_edit">Labot izlasi</string>
   <string name="favourites_context_menu_delete">Dzēst izlasi</string>
   <string name="favourites_remove_dialog_msg">Dzēst izlases punktu \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Izlases punkts {0} veiksmīgi dzēsts.</string>
@@ -753,7 +764,7 @@
   <string name="osb_comment_dialog_message">Ziņa</string>
   <string name="osb_comment_dialog_author">Autora vārds</string>
   <string name="osb_comment_dialog_title">Pievieno komentāru kļūdas pieteikumam</string>
-  <string name="osb_comment_dialog_add_button">"Pievienot komentāru "</string>
+  <string name="osb_comment_dialog_add_button">Pievienot komentāru</string>
   <string name="osb_comment_dialog_success">Komentārs veiksmīgi pievienots</string>
   <string name="osb_comment_dialog_error">Kļūda:komentārs netika pievienots</string>
   <string name="osb_close_menu_item">Aizvērt kļūdas pieteikumu</string>
@@ -823,7 +834,7 @@
   <string name="rendering_attr_noPolygons_name">Bez poligoniem</string>
   <string name="rendering_attr_appMode_name">Renderēšanas režīms</string>
   <string name="rendering_attr_appMode_description">Kartes optimizēšana atbilstošam lietotāja profilam</string>
-  <string name="rendering_attr_contourLines_description">Izvāleties minimālo palielinājuma līmeni pieejamās kartes attēlošanai. Varētu būt nepieciešams atsevšķš SRTM-fails.</string>
+  <string name="rendering_attr_contourLines_description">Attēlot palielināšanas līmeni (nepieciešams SRTM-fails):</string>
   <string name="rendering_attr_contourLines_name">Rādīt kontūrlīnijas</string>
   <string name="rendering_attr_hmRendered_description">Palielināt kartes attēlošanas detalizāciju</string>
   <string name="rendering_attr_hmRendered_name">Rādīt vairāk detaļu</string>
@@ -885,9 +896,9 @@
   <string name="show_cameras">Rādīt radarus</string>
   <string name="show_speed_limits">Rādīt ātruma ierobežojumus</string>
   <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
-  <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 :
+  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
 \n\t* Uzlabota navigācija
-\n\t* Dinamiski kartes instrumenti</string>
+\n\t* Dinamiski kartes instrumenti\n\t* Kartes uzstādījumi pārvietoti uz kartes ekrānu\n\t* Atslēgas ekrānpoga ar ieraksta servisu\n\t* Izlabotas Arābu, Kanādas skriptēšanas un RTL valodas</string>
   <string name="map_widget_top_text">Ielas nosaukums</string>
   <string name="map_widget_config">Konfigurācija</string>
   <string name="map_widget_map_select">Kartes izvēle</string>
@@ -934,4 +945,37 @@
 <string name="monitoring_mode_on">Pārtraukt\n GPX ier.</string>
 <string name="gps_wakeup_interval">GPS pamošanās intervāls: %s</string>
 <string name="email">e-pasts</string>
-</resources>
+<string name="tip_recent_changes_0_8_4_t">"Izmaiņas 0.8.4: "</string>
+    <string name="tip_recent_changes_0_8_3_t">Izmaiņas versijā 0.8.3 :\n\t* Starppunkti\n\t* Uzlabota navigācija\n\t* Iespēja izlaist ātrgaitas ceļus\n\t* Cycleway=track attēlošana\n\t* labāk pabeigta saskarne (ikonas)\n\t* daudz kļūdu labojumu</string>
+    
+    <string name="context_menu_item_last_intermediate_point">Uzstādīt pēdējo mērķa punktu</string>
+    <string name="context_menu_item_first_intermediate_point">Uzstādīt pirmo mērķa punktu</string>
+    <string name="add_as_last_destination_point">Pievienot kā pēdējo starppunktu</string>
+    <string name="add_as_first_destination_point">Pievienot kā pirmo starppunktu</string>
+    <string name="replace_destination_point">Aizvietot galamērķi</string>
+    <string name="new_destination_point_dialog">Jūs jau esat uzstādījuši galamērķi.</string>
+    <string name="target_point">Galamērķis %1$s</string>
+    <string name="target_points">Mērķi</string>
+    <string name="intermediate_point_too_far">Starppunkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
+    <string name="arrived_at_intermediate_point">Jūs esiet nokļuvis starppunktā</string>
+    <string name="context_menu_item_intermediate_point">Pievienot starppunktu</string>
+    <string name="map_widget_intermediate_distance">Starppunkts</string>
+    <string name="ending_point_too_far">Maršruta sākums ir pārāk tālu no tuvākā ceļa.</string>
+    <string name="btn_add_tag">Pievienot Marķējumu (Tag)</string>
+    <string name="btn_advanced_mode">Paplašinātais režīms...</string>
+    <string name="poi_filter_parking">Parkošanās</string>
+    <string name="poi_filter_emergency">Ātrā palīdzība</string>
+    <string name="poi_filter_public_transport">Sabiedriskais transports</string>
+    <string name="poi_filter_entertainment">Izklaide</string>
+    <string name="poi_filter_accomodation">Izmitināšana</string>
+    <string name="poi_filter_restaurants">Restorāni</string>
+    <string name="poi_filter_sightseeing">Apskates vietas</string>
+    <string name="avoid_motorway">Izvairīties no ātrgaitas ceļiem</string>
+	<string name="snap_to_road_descr">Navigācijas laikā tuvināt pozīciju ceļam</string>
+	<string name="snap_to_road">Tuvināt ceļam</string>
+	<string name="osmand_short_description_80_chars">OsmAnd ir atvērtā koda navigācijas aplikācija bezsaistes un tiešsaistes kartēm</string>
+	<string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem OpenStreetMap (OSM) datiem. Visi kartes dati (vektoru un bilžu kartes) var tikt saglabātas telefona atmiņā, lai vēlāk to izmantotu bezsaistē. OsmAnd arī piedāvā bezsaistes un tiešsaistes navigācijas funkcionalitāti t.sk. balss vadību. Programmas pamata funcionalitāte iekļauj: - Pilnīga bezsaistes funkcionalitāte (vektoru un bilžu kartes saglabātas izvēlētā dierktorijā) - Pieejamas kompaktas bezsaistes kartes visai pasaulei - Valsts vai reģiona kartes ir lejuplādējamas tieši no aplikācijas - Iespējama vairāku karšu pārklāšana ar dažādiem caurspīdīguma līmeņiem (piem. GPX sekošanas ceļš, intereses vietas (POI), favorīti, kontūra līnijas, sabiedriskā transporta pieturas, papildus karte) - Bezsaistes addrešu un POI meklēšana. - Bezsaistes navigācija (eksperimentāla) - Auto, velo un kājāmgājēju režīmi - ieslēdzama dienas un nakts režīmu pārslēgšanās - ieslēdzama joslu uzrādīšana, ātruma ierobežojuma attēlošana, ierakstītas un TTS valodas. Šai bezmaksas OsmAnd versijai ir sekojoši ierobežojumi: - Ierobežots lejuplādējamo karšu skaits - Nav pieejams Wikipēdijas bezsaistes POI.  OsmAnd tiek atkīvi izstrādāts un mūsu projekta tālākais progress ir balstīts uz ziedojumiem, lai finansētu jaunas funkcionalitātes izstrādi un testēšanu. Lūdzu izvēlaties iespēju iegādāties OsmAnd+, vai izvēlaties finansēt speciālās funkcijas vai arī zidojot tieši osmand.net."</string>
+	<string name="osmand_plus_short_description_80_chars">AsmAnd ir atvērtā koda navigācijas aplikācija bezsaistes un tiešsaistes kartēm</string>
+	<string name="filterpoi_activity">Izveidot POI filtru</string>
+	<string name="select_navigation_mode">Izvēlēties transporta veidu</string>
+	</resources>
