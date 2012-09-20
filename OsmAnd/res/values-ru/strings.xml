@@ -1078,4 +1078,7 @@
     <string name="add_as_last_destination_point">Добавить как последний промежуточный пункт</string>
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
+    <string name="new_destination_point_dialog">Вы уже установили пункт назначения.</string>
+    <string name="target_point">Пункт назначения %1$s</string>
+    <string name="target_points">Цели</string>
     </resources>
