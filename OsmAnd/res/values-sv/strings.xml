@@ -677,4 +677,19 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="fast_route_mode_descr">"Aktivera för att beräkna snabbaste vägen eller inaktivera för kortaste resvägen "</string>
 	<string name="tiles_to_download_estimated_size">På zoom {0} download {1} plattor ({2} MB)</string>
 	<string name="context_menu_item_download_map">Hämta</string>
+	<string name="poi_filter_sightseeing">Sevärdheter</string>
+    <string name="index_settings">Offline uppgifter (hämta)</string>
+	<string name="tip_day_night_mode_t_v2">Kartan utseende kan för vissa vektorkartor ändras mellan dagen (ljusare) och natt (mörkare).\nNattfärger är säkrare för mörkerkörning.\nDu kan ange en policy för dag / natt omkoppling i \"Meny\" -&gt; \"Konfigurera skärm ...\" -&gt; \"Dag / natt kartan\".\nAlternativen är:\n\'Soluppgång / Solnedgång \"- automatläge, som kontrolleras av solens position (standard)\n\"Dag\" - alltid använda dagläge\n\"natt\" - använd alltid nattläge\n\"Ljussensor\" - är kartan utseende styrs av ljussensor på enheten (endast om sådan finns)</string>	
+	<string name="select_max_zoom_preload_area">Välj maximal zoom till preload</string>
+	<string name="maps_could_not_be_downloaded">Denna karta kan inte hämtas</string>
+	<string name="continuous_rendering">Kontinuerlig återgivning</string>
+	<string name="continuous_rendering_descr">Visa kontinuerlig återgivning istället för bild-vid-gång</string>
+	<string name="rendering_exception">Fel uppstod när göra utvalt område</string>
+	<string name="show_point_options">Läge alternativ</string>
+	<string name="renderer_load_sucess">Renderare laddad framgångsrikt</string>
+	<string name="renderer_load_exception">Undantag inträffade: renderare inte laddad</string>
+	<string name="renderers">Vektorrenderaren</string>
+	<string name="renderers_descr">Välj rendering utseende</string>
+	<string name="poi_context_menu_website">Visa POI webbplats</string>
+	<string name="poi_context_menu_call">Visa POI telefon</string>
 	</resources>
