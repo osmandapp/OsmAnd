@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
   </string>
@@ -987,7 +987,6 @@
   <string name="rendering_attr_noPolygons_name">Žiadne polygóny</string>
   <string name="rendering_attr_appMode_name">Vykresľovací režim</string>
   <string name="rendering_attr_appMode_description">Prispôsobenie mapy pre príslušný užívateľský profil</string>
-  <string name="rendering_attr_contourLines_description">Výber minimálneho priblíženia na zobrazenie na mape, ak sú dostupné. Môže byť vyžadovaný oddelený SRTM súbor.</string>
   <string name="rendering_attr_contourLines_name">Zobraziť vrstevnice</string>
   <string name="rendering_attr_hmRendered_description">Zvýšenie zobrazených detailov mapy</string>
   <string name="rendering_attr_hmRendered_name">Zobraziť podrobnejšiu mapu</string>
@@ -1062,4 +1061,5 @@
 <string name="map_widget_renderer">Štýl vykresľovania</string>
 <string name="osmand_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd je open source navigácia s offline aj online mapami</string>
-</resources>
+<string name="rendering_attr_contourLines_description">Výber minimálneho priblíženia na zobrazenie na mape, ak sú dostupné. Môže byť vyžadovaný oddelený SRTM súbor:</string>
+  </resources>
