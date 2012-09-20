@@ -149,7 +149,8 @@
   <string name="download_files_not_enough_space">Nincs elég hely %1$s MB letöltéséhez (szabad %2$s).</string>
   <string name="download_files_question_space">Szabad hely jelenleg {2} MB! Letöltesz {0} fájlt ({1} MB)?</string>
   <string name="tip_select_destination_point">Beállítás célpontnak</string>
-  <string name="tip_select_destination_point_t">\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással. \n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja.</string>
+  <string name="tip_select_destination_point_t">"\tA célpontot kiválaszthatod közvetlenül a térképről (helyi menü, \'Beállítás célpontnak\'), kereséssel, vagy a \'Kedvencek\' közül hosszú kattintással.
+\n\tA célpontot a térképen narancssárga pötty jelzi. Az ettől való távolságot a jobb felső sarokban láthatod, irányát pedig egy narancssárga nyíl mutatja. "</string>
   <string name="tip_recent_changes_0_6_9_t">A 0.6.9-es verzió változásai: \n\t- Javított vektoros térkép megjelenítés \n\t- Gyors natív vektoros térkép-megjelenítés - kísérleti állapotban van (egyes eszközökön nem működik) \n\t- Erőteljesen megváltoztatott kinézet \n\t- Magasság információ kijelzése \n\t- Új fordítások (vietnami, lengyel) \n\t- További kisebb fejlesztések </string>
   <string name="use_transparent_map_theme_descr">Átlátszó háttér a térképkezelő gombokhoz</string>
   <string name="use_transparent_map_theme">Átlátszó téma</string>
@@ -298,9 +299,13 @@
   <string name="level_to_switch_vector_raster_descr">Minimális nagyítási szint vektoros megjelenítéshez térképcsempék helyett</string>
   <string name="level_to_switch_vector_raster">Min. vektoros nagyítás</string>
   <string name="tip_location_sharing">Hely megosztás</string>
-  <string name="tip_location_sharing_t">Érdekes helyet találtál az utazásod során és meg akarod osztani a pozíciót a barátoddal, családoddal? \nOsmAnd lehetőséget biztosít, hogy megoszthass másokkal minden helyet amit csak akarsz. \n\tVálaszd a \'Térkép menű\'-&amp;gt;\'Hely megosztása\' pontot. \nEzután meg kell határoznod milyen módon szeretnéd mással megosztani a koordinátákat. Lehetséges választás: E-Mail, SMS vagy a koordináták másolása a vágólapra.</string>
+  <string name="tip_location_sharing_t">"\tAz utazásod érdekes helyeit megoszthatod barátaiddal, családoddal?.\n\tBármelyik hely megosztásához:\n\tVálaszd kattints hosszan és válaszd a \'Hely megosztása\' menüpontot.
+\n\tEzután válaszd ki a megosztás módját. Lehetséges módok: e-mail, SMS vagy a koordináták másolása a vágólapra. "</string>
   <string name="tip_favorites">Kedvencek</string>
-  <string name="tip_favorites_t">Ha hosszadalmas a sűrűn használt helyek előkeresése, hozzá lehet adni a Kedvencekhez, utána pár kattintással előkereshető. \n\tKedvenc pont hozzáadásához a térképmenüben a \'Hozzáadás a kedvencekhez\'-et kell választani és a pontot egy megfelelő névvel ellátni. Mentés után egyszerűen a főmenü \'Kedvencek\' menüponton keresztül érhető el. \n\tA \'Kedvencek\' menüben a pontra hosszan rányomva beállíthatjuk célpontnak, szerkeszthetjük vagy törölhetjük. \n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezni kell a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában.</string>
+  <string name="tip_favorites_t">"\tA gyakran látogatott helyeket elmentheted Kedvencként.
+\n\tKedvenc pont mentéséhez a térképmenüben a \'Hozzáadás a kedvencekhez\' menüpontot kell választani és a helyet egy megfelelő névvel ellátni. Mentés után a főmenüben a Kedvencekre kattintva találod.
+\n\tA \'Kedvencek\' menüben rányomva beállíthatod célpontnak, szerkesztheted vagy törölheted.
+\n\tAz összes kedvenc pont térképen megjelenítéséhez engedélyezd a \'Kedvencek\' réteget a térképmenü \'Rétegek\' pontjában. "</string>
   <string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Hiba történt az offline keresésben</string>
   <string name="search_offline_geo_error">Nem sikerült értelmezni a geo intent által küldött parancsot:\'%s\'</string>
@@ -315,11 +320,15 @@
   <string name="tip_navigation">Navigáció</string>
   <string name="tip_navigation_t">Navigáció indításához először ki kell választani egy célpontot. Ezután a térképmenü \'Útirány\' menüjét kell választani és megjelölni a közlekedési módot.</string>
   <string name="tip_search">Cím keresés</string>
-  <string name="tip_search_t">A térképen helyet keresni cím alapján, koordináta alapján, POI-k közül, vagy Kedvencek közül lehet. \n\t\'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Beállítás célpontnak\' vagy \'Mutasd a térképen\'.</string>
+  <string name="tip_search_t">"\tA térképen helyet keresni cím alapján, koordináta alapján, POI-k közül, vagy Kedvencek közül lehet.
+\n\tA \'Keresés\' menüvel tudsz keresni. A találatokra hosszan kattintva az alábbiak közül lehet választani: \'Beállítás célpontnak\' vagy \'Mutasd a térképen\'. "</string>
   <string name="tip_map_context_menu">Térképmenü</string>
-  <string name="tip_map_context_menu_t">\tA térképmenü a térképen egy pont hosszú megnyomásával vagy a \'trackball\' gombbal érhető el. \n\tA kattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagstring name=y kattints rá hosszan az eltüntetéséhez). \n\tA térképmenü tartalmaz minden olyan műveletet, amit azzal a ponttal tenni tudsz.</string>
+  <string name="tip_map_context_menu_t">"\tA térképmenü a térképen egy pont hosszú megnyomásával vagy a \'trackball\' gombbal érhető el.
+\n\tKattintás után megjelenik egy doboz a koordinátákkal, vagy a POI nevével. A térképmenü megnyitásához kattints erre a dobozra (vagy kattints rá hosszan az eltüntetéséhez).
+\n\tA térképmenü tartalmaz minden olyan műveletet, amit azzal a ponttal tenni tudsz. "</string>
   <string name="tip_initial">Tippek és trükkök</string>
-  <string name="tip_initial_t">\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik. \n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása ami egy linken keresztül elérhető a főmenüből.</string>
+  <string name="tip_initial_t">"\tAz OsmAnd navigációs alkalmazás sok lehetőséggel rendelkezik.
+\n\tA gyorsabb megértés érdekében ajánlott a tippek és trükkök elolvasása, ami a főmenü kérdőjel ikonjára kattintva érhető el. "</string>
   <string name="next_button">Következő</string>
   <string name="previous_button">Előző</string>
   <string name="unit_of_length_descr">Hosszúság és sebesség mértékegységének megváltoztatása</string>
@@ -360,10 +369,10 @@
   <string name="amenity_type_sustenance">Ellátás</string>
   <string name="amenity_type_tourism">Turizmus</string>
   <string name="amenity_type_transportation">Közlekedési eszköz</string>
-  <string name="indexing_address">Címek indexelése </string>
-  <string name="indexing_map">Térkép indexelése </string>
-  <string name="indexing_poi">POI indexelése </string>
-  <string name="indexing_transport">Közlekedési eszköz indexelése </string>
+  <string name="indexing_address">Címek indexelése…</string>
+  <string name="indexing_map">Térkép indexelése…</string>
+  <string name="indexing_poi">POI-k indexelése…</string>
+  <string name="indexing_transport">Közlekedési eszközök indexelése…</string>
   <string name="input_output_error">Be-kimeneti hiba történt</string>
   <string name="km">km</string>
   <string name="km_h">km/ó</string>
@@ -389,10 +398,10 @@
   <string name="build_installed">OsmAnd verzió {0} sikeresen telepítve ({1}).</string>
   <string name="downloading_build">OsmAnd verzió letöltése…</string>
   <string name="install_selected_build">Telepíted az OsmAnd alkalmazást - {0} innen: {1} {2} MB?</string>
-  <string name="loading_builds_failed">Az OsmAnd verziók listájának letöltése nem sikerült </string>
+  <string name="loading_builds_failed">Az OsmAnd verziók listájának letöltése nem sikerült</string>
   <string name="loading_builds">OsmAnd verziók töltése…</string>
   <string name="select_build_to_install">A telepítéshez válassz egy OsmAnd buildet</string>
-  <string name="contribution_activity">Special activity for contribution version</string>
+  <string name="contribution_activity">Speciális tevékenység a támogatói változathoz</string>
   <string name="gps_status_app_not_found">GPS Státusz alkalmazás nincs telepítve. Megkeresed a Marketen?</string>
   <string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállításoknál kiválasztható vagy letölthető.</string>
   <string name="voice_is_not_available_title">Nincs kiválasztva hang adat</string>
@@ -794,7 +803,7 @@
   <string name="online_map_settings">Online térkép</string>
   <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
   <string name="map_settings">- Térképbeállítások</string>
-  <string name="map_settings_descr">Térképmegjelenítés </string>
+  <string name="map_settings_descr">Térképmegjelenítés beállításai</string>
   <string name="osmand_rastermaps_plugin_description">Internetes és letöltött raszteres térképek alap, vagy rátét / alátét térképként használatához tartozó beállítások megjelenítése. A térképeket előre is el lehet készíteni és bemásolni az OsmAnd könyvárába.</string>
   <string name="osmand_background_plugin_description">Beállítások útvonal felvételéhez vagy a navigációhoz energiatakarékos üzemmódban (kikapcsolt képernyővel) úgy, hogy bizonyos időközönként felébreszti a GPS eszközt és felveszi az aktuális pozíciót az útvonalhoz.</string>
   <string name="osmand_accessibility_description">Akadálymentesítési beállítások elérését teszi lehetővé.</string>
@@ -938,24 +947,24 @@
 <string name="map_widget_day_night">Nappali/éjjeli térképmód</string>
 <string name="map_widget_vector_attributes">Térkép megjelenítési beállítások:</string>
 <string name="map_widget_renderer">Térkép megjelenítési stílus</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
-\n\tA módot útvonaltervezésnél vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni.</string>
-<string name="tip_rotation_switching_t_v2">\tA térkép forgatásának módja megváltoztatható a térkép képernyőn az iránytű ikon megnyomásával.
+<string name="tip_app_mode_t_v2">"\tOsmAnd több különböző (személyre szabható) üzemmódot támogat különböző felhasználásokhoz.
+\n\tA módot útvonaltervezésnél, vagy a térkép bal alsó sarkában lévő ikonnal (autó, bicikli vagy gyalogos) tudod megváltoztatni. "</string>
+<string name="tip_rotation_switching_t_v2">"\tA térkép forgatásának módja megváltoztatható a térkép képernyőn az iránytű ikon megnyomásával.
 \n\tA lehetőségek:
 \n\t\'Nem forog (észak felül)\' - A térkép nem fordul el. Mindig észak van felül
-\n\t\'Haladás irányának megfelelően\' - A térkép a haladásnak megfelelően fordul el
-\n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog</string>
-<string name="tip_day_night_mode_t_v2">\tBizonyos vektoros térképek megjelenése különbözhet nappal (világosabb) és éjjel (sötétebb).
+\n\t\'Haladás irányának megfelelően\' - A térkép a haladási irányba fordul el
+\n\t\'Iránytű\' - A térkép az eszköz iránytűjének megfelelően forog "</string>
+<string name="tip_day_night_mode_t_v2">"\tBizonyos vektoros térképek megjelenése különbözhet nappal (világosabb) és éjjel (sötétebb).
 \n\tAz éjszakai színek biztonságosabbak éjjeli vezetéshez.
 \n\tA váltás módját a \'Menü\' -&gt; \'Rétegek\' -&gt; \'Képernyő beállítása\' -&gt; \'Nappali/éjjeli térképmód\' alatt lehet beállítani.
 \n\tLehetőségek:
 \n\t\'Napkelte/Napnyugta\' - automatikus mód, a Nap helyzetének megfelelően (alapértelmezett)
 \n\t\'Nappal\' - mindig a nappali színek használata
-\n\t\'Éjjel\' - mindig az éjjeli színek használata 
-\n\t\'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője alapján vált a színek között (ha az eszköz tartalmaz ilyent)</string>
-<string name="tip_map_switch_t_v2">\tA térképforrás és a rétegek kicserélhetők a \'Menü\' -&gt; \'Rétegek\' alatt.
+\n\t\'Éjjel\' - mindig az éjjeli színek használata
+\n\t\'Fényérzékelő szenzor\' - a térkép az eszköz fényérzékelője alapján vált a színek között (ha az eszköz tartalmaz ilyent) "</string>
+<string name="tip_map_switch_t_v2">"\tA térképforrás és a rétegek kicserélhetők a \'Menü\' -&gt; \'Rétegek\' alatt.
 \n\tA \'Térképforrás…\' alatt kiválasztható az előre letöltött vektoros térkép, előre beállított (online) raszteres forrás (az \'Online térkép\' kiterjesztést be kell kapcsolni hozzá), vagy kézzel gyártott térkép pl. OsmAndMapCreatorral készítve PC-n.
-\n\tAz OsmAnd egyedi forrásokat is támogat.</string>
+\n\tAz OsmAnd saját forrásokat is támogat. "</string>
 <string name="osmand_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
 <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
