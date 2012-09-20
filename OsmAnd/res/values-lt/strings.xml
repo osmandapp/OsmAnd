@@ -290,8 +290,8 @@
   <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
   <string name="download_files_question_space">Dabar laisvos vietos yra {2} MB! Parsiųsti {0} failą(-us) ({1} MB)?</string>
   <string name="tip_select_destination_point">Kelionės tikslo pasirinkimas</string>
-  <string name="tip_select_destination_point_t">Kelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Nustatyti kelionės tikslu\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotos vietos\' sąraše.
-\nKelionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis).</string>
+  <string name="tip_select_destination_point_t">"\tKelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Nustatyti kelionės tikslu\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotos vietos\' sąraše.
+\n\tKelionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis). "</string>
   <string name="tip_recent_changes_0_6_9_t">Pakeitimai 0.6.9 versijoje :
 \n\t- Patobulintas parsiųstų žemėlapių atvaizdavimas
 \n\t- Greitas aparatinis parsiųstų žemėlapių vaizdavimas - ieškokite eksperimentinėse savybėse (dalyje įrenginių gali neveikti)
@@ -502,15 +502,15 @@
   <string name="tip_navigation">Navigacija</string>
   <string name="tip_navigation_t">\tPrieš pradedant navigaciją būtina pasirinkti kelionės tikslą. Vėliau žemėlapio rodinyje paspaudus \'Meniu\' -&gt; \'Maršrutas\' bus galima pasirinkti navigacijos tipą.</string>
   <string name="tip_search">Paieška</string>
-  <string name="tip_search_t">\tPaiešką galima vykdyti tiesiog žemėlapyje, pagal adresą, koordinates, LV arba pasirenkant Įsimintą vietą. 
-\n\tPagrindiniame meniu paspaudus \'Paieška\' atsivers paieškos langas. Visoms rastoms vietoms kontekstinis meniu pasiūlys dvi galimybes: \'Nustatyti kelionės tikslu\' arba \'Rodyti ant žemėlapio\'.</string>
+  <string name="tip_search_t">"\tPaiešką galima vykdyti tiesiog žemėlapyje, pagal adresą, koordinates, LV arba pasirenkant Įsimintą vietą.
+\n\tPagrindiniame meniu paspaudus \'Paieška\' atsivers paieškos langas. Visoms rastoms vietoms kontekstinis meniu pasiūlys dvi galimybes: \'Nustatyti kelionės tikslu\' arba \'Rodyti ant žemėlapio\'. "</string>
   <string name="tip_map_context_menu">Žemėlapio kontekstinis meniu</string>
-  <string name="tip_map_context_menu_t">\tŽemėlapio kontekstinis meniu yra pasiekiamas paspaudus ir laikant ant žemėlapio arba paspaudus valdymo rutulį. 
-\n\tTaip ant žemėlapio bus uždėtas taškas su koordinatėmis. Norėdami atverti žemėlapio kontekstinį meniu tam taškui – paspauskite ant jo. (Arba paspauskite ir laikykite jį paspaudę, jei norite, kad jis pradingtų.) 
-\n\tŽemėlapio kontekstiniame meniu rasite visus veiksmus, reikalingus darbui su pažymėtu tašku.</string>
+  <string name="tip_map_context_menu_t">"\tŽemėlapio kontekstinis meniu yra pasiekiamas paspaudus ir laikant ant žemėlapio arba paspaudus valdymo rutulį.
+\n\tTaip ant žemėlapio bus uždėtas taškas su koordinatėmis. Norėdami atverti žemėlapio kontekstinį meniu tam taškui – paspauskite ant jo. (Arba paspauskite ir laikykite jį paspaudę, jei norite, kad jis pradingtų.)
+\n\tŽemėlapio kontekstiniame meniu rasite visus veiksmus, reikalingus darbui su pažymėtu tašku. "</string>
   <string name="tip_initial">Patarimai ir gudrybės</string>
-  <string name="tip_initial_t">\tOsmAnd yra daug funkcijų turinti navigacijos programa. 
-\n\tPradiniam supažindinimui keletas pagrindinių patarimų būna rodomi pagrindinio meniu rodinyje.</string>
+  <string name="tip_initial_t">"\tOsmAnd yra daug funkcijų turinti navigacijos programa.
+\n\tPradiniam supažindinimui keletas pagrindinių patarimų būna rodomi pagrindinio meniu rodinyje. "</string>
   <string name="next_button">Kitas</string>
   <string name="previous_button">Ankstesnis</string>
   <string name="unit_of_length_descr">Pakeisti ilgio ir greičio matavimo vienetus</string>
@@ -1057,8 +1057,8 @@
 \n\'Diena\' - visada naudoti dienos režimą
 \n\'Naktis\' - visada naudoti nakties režimą
 \n\'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas) "</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
-\n\tJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio ekrano kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą.</string>
+<string name="tip_app_mode_t_v2">"OsmAnd palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
+\nJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą. "</string>
 <string name="tip_rotation_switching_t_v2">\tJūs galite pasirinkti ar ir kaip bus pasukamas žemėlapis paspaudus ant kompaso ikonos žemėlapio rodinyje. Turėsite tokias galimybes:
 \n\t\'Nesukti (šiaurė viršuje)\' - Žemėlapis nebus sukamas. Šiaurė visada bus viršuje
 \n\t\'Į judėjimo kryptį\' - Žemėlapis visą laiką bus pasuktas judėjimo kryptimi
@@ -1110,4 +1110,27 @@ Sąvybės:
 \n\tOsmAnd taip pat gali naudoti ir kitokius šaltinius.
 	</string>
 <string name="osmand_parking_event">Pasiimti automobilį iš stovėjimo vietos</string>
-  </resources>
+  <string name="tip_recent_changes_0_8_4_t">"Pakeitimai 0.8.4 versijoje : "</string>
+    <string name="context_menu_item_last_intermediate_point">Nustatyti paskutinį tarpinį tikslą</string>
+    <string name="context_menu_item_first_intermediate_point">Nustatyti pirmą tarpinį tikslą</string>
+    <string name="add_as_last_destination_point">Pridėti kaip paskutinį tarpinį tikslą</string>
+    <string name="add_as_first_destination_point">Pridėti pirmą tarpinį tikslą</string>
+    <string name="replace_destination_point">Pakeisti kelionės tikslą</string>
+    <string name="new_destination_point_dialog">Jūs jau turite nustatę kelionės tikslą.</string>
+    <string name="target_point">Tikslas %1$s</string>
+    <string name="target_points">Tikslai</string>
+    <string name="intermediate_point_too_far">Tarpinis tikslas %1$s yra per toli nuo artimiausio kelio.</string>
+    <string name="arrived_at_intermediate_point">Jūs atvykote į tarpinį tikslą</string>
+    <string name="context_menu_item_intermediate_point">Pridėti tarpinį tikslą</string>
+    <string name="map_widget_intermediate_distance">Tarpinis tikslas</string>
+    <string name="ending_point_too_far">Pradžios taškas per toli nuo artimiausio kelio.</string>
+    <string name="btn_add_tag">Pridėti žymą</string>
+    <string name="btn_advanced_mode">Eksperto režimas...</string>
+    <string name="poi_filter_parking">Parkingas</string>
+    <string name="poi_filter_emergency">Nelaimės atveju</string>
+    <string name="poi_filter_public_transport">Viešasis transportas</string>
+    <string name="poi_filter_entertainment">Pramogos</string>
+    <string name="poi_filter_accomodation">Nakvynė</string>
+    <string name="poi_filter_restaurants">Restoranai</string>
+    <string name="poi_filter_sightseeing">Įžymybės</string>
+    </resources>
