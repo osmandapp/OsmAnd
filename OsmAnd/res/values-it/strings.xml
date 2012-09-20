@@ -921,13 +921,13 @@
   <string name="save_route_as_gpx">Salva il percorso come file GPX</string>
   <string name="asap">ASAP</string>
   <string name="tip_recent_changes_0_8_1_t">"Cambiamenti nella versione 0.8.1:
-\n\t* Rotte più precise (un po\' più lento)
-\n\t* Ricalcolo del percorso intelligente e veloce
-\n\t* Direzione in base alle corsie
-\n\t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
-\n\t* Migliorata la voce guida sulle autostrade
-\n\t* Plugin per i parcheggi (\'Dov\'e\' la mia macchina?\')
-\n\t* Abilita/disabilita il widget per i monitoraggio "</string>
+\n/t* Rotte più precise (un po\' più lento)
+\n/t* Ricalcolo del percorso intelligente e veloce
+\n/t* Direzione in base alle corsie
+\n/t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
+\n/t* Migliorata la voce guida sulle autostrade
+\n/t* Plugin per i parcheggi (\'Dov\'e\' la mia macchina?\')
+\n/t* Abilita/disabilita il widget per i monitoraggio "</string>
   <string name="gpxup_public">Pubblico</string>
   <string name="gpxup_identifiable">Identificabile</string>
   <string name="gpxup_trackable">Tracciabile</string>
