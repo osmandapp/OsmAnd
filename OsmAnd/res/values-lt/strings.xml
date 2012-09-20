@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
-  <string name="osmand_parking_event">Pasiimkite automobilį iš statymo vietos</string>
   <string name="osmand_parking_warning">Dėmesio</string>
   <string name="osmand_parking_warning_text">Perspėjimas pasiimti automobilį jau buvo įtrauktas į jūsų kalendorių. Perspėjimas ten liks tol, kol jo nepanaikinsite.</string>
   <string name="osmand_parking_time_limit_title">Nustatyti statymo trukmę</string>
@@ -1110,4 +1109,5 @@ Sąvybės:
 \n\tPunkte \'Žemėlapio šaltinis…\' galite pasirinkti parsiųstus vektorinius žemėlapius, priderintus interneto žemėlapių šaltinius (aktyvuokite \'Interneto žemėlapiai\' įskiepį), arba savarankiškai sukurtus žemėlapius (pvz. naudojant OsmAndMapCreator programą kompiuteriui).
 \n\tOsmAnd taip pat gali naudoti ir kitokius šaltinius.
 	</string>
-</resources>
+<string name="osmand_parking_event">Pasiimti automobilį iš stovėjimo vietos</string>
+  </resources>
