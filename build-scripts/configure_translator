@@ -1,0 +1,8 @@
+git clone https://code.google.com/p/j2objc/
+cd j2objc
+git apply ../j2objc.patch
+mvn eclipse:eclipse
+mvn -DskipTests=true install
+cd ../net.osmand.translator
+mvn eclipse:eclipse
+mvn install

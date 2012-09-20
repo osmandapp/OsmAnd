@@ -1,0 +1,42 @@
+diff --git a/pom.xml b/pom.xml
+index 39853de..c04fffb 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -21,7 +21,7 @@
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>com.google.j2objc</groupId>
+   <artifactId>j2objc</artifactId>
+-  <packaging>pom</packaging>
++  <packaging>jar</packaging>
+   <version>0.8</version>
+   <name>j2objc</name>
+   <url>https://code.google.com/p/j2objc/</url>
+@@ -29,6 +29,15 @@
+   <build>
+     <directory>build_result</directory>
+     <plugins>
++    <plugin>
++    <groupId>org.apache.maven.plugins</groupId>
++		<artifactId>maven-compiler-plugin</artifactId>
++		<version>2.0.2</version>
++		<configuration>
++			<source>1.5</source>
++			<target>1.5</target>
++		</configuration>
++	</plugin>
+       <!-- Copy dependent jars -->
+       <plugin>
+         <groupId>org.apache.maven.plugins</groupId>
+diff --git a/src/main/java/com/google/devtools/j2objc/Plugin.java b/src/main/java/com/google/devtools/j2objc/Plugin.java
+index 4f1f883..40b0985 100644
+--- a/src/main/java/com/google/devtools/j2objc/Plugin.java
++++ b/src/main/java/com/google/devtools/j2objc/Plugin.java
+@@ -40,7 +40,7 @@ public abstract class Plugin {
+    * options and interpret them differently. Called before any processing is
+    * started.
+    */
+-  void initPlugin(String pluginOptions) throws IOException {
++  public void initPlugin(String pluginOptions) throws IOException {
+     String[] optionComponents = pluginOptions.split(",");
+ 
+     for (String option : optionComponents) {
