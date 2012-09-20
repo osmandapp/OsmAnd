@@ -33,7 +33,7 @@
   <string name="local_openstreetmap_uploading">Enviando…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PDIs/Fallos enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos</string>
-  <string name="local_openstreetmap_items">""</string>
+  <string name="local_openstreetmap_items"/>
   <string name="local_openstreetmap_show">Mostrar en el mapa</string>
   <string name="local_openstreetmap_upload">Enviar modificación a OSM</string>
   <string name="local_openstreetmap_delete">Suprimir modificación</string>
@@ -100,7 +100,8 @@
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">El espacio disponible ahora es {2} MB. ¿Descargar {0} archivo(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selección de Destino</string>
-  <string name="tip_select_destination_point_t">\tPuedes escoger el destino directamente en el mapa (menú contextual y luego \'Fijar como destino\'), en las búsquedas, o mediante una pulsación larga en tu \'Lista de Puntos Favoritos\'. \n\tEl destino está marcado en el mapa como un disco naranja y OsmAnd muestra la distancia al mismo y la dirección a seguir (triángulo naranja).</string>
+  <string name="tip_select_destination_point_t">\tPuedes escoger el destino directamente en el mapa (menú contextual y luego \'Fijar como destino\'), en las búsquedas, o mediante una pulsación larga en tu \'Lista de Puntos Favoritos\'.
+\n\tEl destino está marcado en el mapa como un disco naranja y OsmAnd muestra la distancia al mismo y la dirección a seguir (triángulo naranja).</string>
   <string name="tip_recent_changes_0_6_9_t">"Cambios en 0.6.9 : \n\t- Mejorado el dibujado de mapas sin conexión \n\t- Dibujado nativo rápido - mira en las funcionalidades experimentales (puede no funcionar en algunos dispositivos) \n\t- Numerosos cambios en el estilo visual \n\t- Información de altitud \n\t- Nuevas traducciones (Vietnamita, Polaco) \n\t- Otras pequeñas funcionalidades "</string>
   <string name="use_transparent_map_theme_descr">Usa controles de mapa transparentes</string>
   <string name="use_transparent_map_theme">Tema transparente</string>
@@ -264,7 +265,7 @@
   <string name="search_osm_offline">Buscar dirección usando mapas sin conexión</string>
   <string name="system_locale">Sistema</string>
   <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
-  <string name="preferred_locale">"Idioma de visualización "</string>
+  <string name="preferred_locale">Idioma de visualización</string>
   <string name="tip_map_switch">Fuente de mapas</string>
   <string name="tip_map_switch_t">\tEl modo más rápido de cambiar la fuente del mapa y las capas mostradas es pulsando \'Menú\' -&gt; \'Definir vista\' en la vista del mapa. \n\tEn \'Fuente del mapa…\' puede elegir usar los mapas vectoriales descargados, fuentes de teselas predefinidas (con conexión), o mapas creados manualmente, por ejemplo con OsmAndMapCreator en un PC. \n\tOsmAnd también soporta fuentes personalizadas.</string>
   <string name="tip_app_mode">Perfil de usuario</string>
@@ -299,7 +300,7 @@
   <string name="context_menu_item_share_location">Compartir localización</string>
   <string name="add_waypoint_dialog_added">El punto de paso \'\'{0}\'\' se añadió correctamente</string>
   <string name="add_waypoint_dialog_title">Añadir punto de paso a la traza GPX grabada</string>
-  <string name="context_menu_item_add_waypoint">"Añadir punto de paso GPX "</string>
+  <string name="context_menu_item_add_waypoint">Añadir punto de paso GPX</string>
   <string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barrera</string>
   <string name="amenity_type_education">Educación</string>
@@ -402,7 +403,7 @@
   <string name="voice">Voz</string>
   <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
   <string name="map_route_by_gpx">Navegar usando GPX</string>
-  <string name="gpx_files_not_found">"No se han encontrado archivos GPX en el directorio /tracks "</string>
+  <string name="gpx_files_not_found">No se han encontrado archivos GPX en el directorio /tracks</string>
   <string name="layer_gpx_layer">Traza GPX…</string>
   <string name="error_reading_gpx">Error leyendo datos GPX</string>
   <string name="vector_data">Mapas vectoriales descargados</string>
@@ -594,7 +595,7 @@
   <string name="use_online_routing_descr">Usa Internet para calcular la ruta</string>
   <string name="use_online_routing">Usar ruteo en línea</string>
   <string name="osm_settings_descr">Especifique las opciones de Openstreetmap.org (OSM) necesarias para envíos a OSM</string>
-  <string name="data_settings_descr">"Especificar idioma, descarga/recarga de datos "</string>
+  <string name="data_settings_descr">Especifica idioma, descarga/recarga de datos</string>
   <string name="data_settings">Datos</string>
   <string name="map_preferences_descr">Especificar opciones del mapa: fuente de datos, rotación, marcador de posición, orientación de pantalla</string>
   <string name="osm_settings">Edición de OSM</string>
@@ -866,7 +867,7 @@
   <string name="route_kl">Manténgase a la izquierda y continúe</string>
   <string name="route_kr">Manténgase a la derecha y continúe</string>
   <string name="save_route_as_gpx">Guardar ruta como fichero GPX</string>
-  <string name="asap">En cuanto puedas</string>
+  <string name="asap">Si puedes</string>
   <string name="tip_recent_changes_0_8_1_t">Cambios en 0.8.1 :
 \n\t* Rutas más precisas (algo más lento)
 \n\t* Recálculo inteligente y rápido de la ruta
@@ -923,8 +924,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="show_speed_limits">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
   <string name="tip_recent_changes_0_8_2_t">Cambios en 0.8.2 :
-\n\t* Mejoras en Navegación
-\n\t* Widgets de mapas dinámicos</string>
+\n\t* Mejoras en Navegación\n\t* Widgets de mapas dinámicos\n\t* Configuración de mapa movido a la pantalla de mapa\n\t* Botón de bloqueo de mapa con servicios de registro\n\t* Arreglado Árabe, Kannada y lenguajes RTL</string>
   <string name="map_widget_top_text">Nombre de calle</string>
   <string name="map_widget_config">Configuración</string>
   <string name="map_widget_map_select">Selección de mapa</string>
@@ -962,24 +962,10 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_widget_day_night">Mapa día/noche</string>
 <string name="map_widget_vector_attributes">Atributos de dibujado:</string>
 <string name="map_widget_renderer">Estilo de dibujado</string>
-<string name="tip_rotation_switching_t_v2">﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.↵
-\n\tLas opciones son:↵
-\n\t- \'No girar (el norte está arriba)\': el mapa no girará. El norte está siempre arriba↵
-\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección↵
-\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
-<string name="tip_map_switch_t_v2">\﻿tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.
-\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.
-\n\tOsmAnd también soporta fuentes personalizadas.</string>
-<string name="tip_day_night_mode_t_v2">\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).↵
-\n\tLos colores del modo noche son más seguros para la conducción nocturna.↵
-\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla...\'-&gt; \'Mapa Día/Noche\'.↵
-\n\tLas opciones son:↵
-\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)↵
-\n\t- \'Día\': utiliza siempre el modo día↵
-\n\t- \'Noche\': utiliza siempre el modo noche↵
-\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
-<string name="tip_app_mode_t_v2">\﻿tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.
-\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta.</string>
+<string name="tip_rotation_switching_t_v2">﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.\n\tLas opciones son:\n\t- \'No girar (el norte está arriba)\': el mapa no girará. El norte está siempre arriba\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo</string>
+<string name="tip_map_switch_t_v2">\tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.\n\tOsmAnd también soporta fuentes personalizadas.</string>
+<string name="tip_day_night_mode_t_v2">\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).\n\tLos colores del modo noche son más seguros para la conducción nocturna.\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla...\'-&gt; \'Mapa Día/Noche\'.\n\tLas opciones son:\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)\n\t- \'Día\': utiliza siempre el modo día\n\t- \'Noche\': utiliza siempre el modo noche\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado)</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta.</string>
 <string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
 <string name="osmand_long_description_1000_chars">
 OsmAnd (OSM Automated Navigation Directions)
@@ -1033,4 +1019,26 @@ Algunas de las características fundamentales:
 <string name="snap_to_road_descr">﻿Ajusta la posición a las carreteras durante la navegación</string>
 <string name="snap_to_road">Ajustar a carreteras</string>
 <string name="tip_recent_changes_0_8_4_t">"Cambios en 0.8.4 : "</string>
+    <string name="context_menu_item_first_intermediate_point">Fijar el primer objetivo</string>
+    <string name="context_menu_item_last_intermediate_point">Fijar el último objetivo</string>
+    <string name="add_as_last_destination_point">Añadir como último punto intermedio</string>
+    <string name="add_as_first_destination_point">Añadir como primer punto intermedio</string>
+    <string name="replace_destination_point">Sustituir punto de destino</string>
+    <string name="new_destination_point_dialog">Ya has fijado el punto de destino.</string>
+    <string name="target_point">Punto objetivo %1$s</string>
+    <string name="target_points">Objetivos</string>
+    <string name="intermediate_point_too_far">Punto intermedio %1$s demasiado lejos de la carretera más cercana.</string>
+    <string name="arrived_at_intermediate_point">Has llegado al punto intermedio</string>
+    <string name="context_menu_item_intermediate_point">Añadir punto intermedio</string>
+    <string name="map_widget_intermediate_distance">Punto intermedio</string>
+    <string name="ending_point_too_far">Punto de partida muy lejos de la carretera más cercana.</string>
+    <string name="btn_add_tag">Añade Etiqueta</string>
+    <string name="btn_advanced_mode">Modo Avanzado…</string>
+    <string name="poi_filter_parking">Parking</string>
+    <string name="poi_filter_emergency">Emergencia</string>
+    <string name="poi_filter_public_transport">Transporte Público</string>
+    <string name="poi_filter_entertainment">Entretenimiento</string>
+    <string name="poi_filter_accomodation">Alojamiento</string>
+    <string name="poi_filter_restaurants">Restaurantes</string>
+    <string name="poi_filter_sightseeing">Turismo</string>
     </resources>
