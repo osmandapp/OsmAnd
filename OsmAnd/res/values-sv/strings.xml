@@ -20,12 +20,7 @@
 <string name="avoid_motorway">Undvik motorvägar</string>
 <string name="auto_zoom_map_descr">Autozoom kartlägga beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk zoom karta</string>
-<string name="tip_recent_changes_0_8_3_t">Förändringar i 0.8.3:↵
-\n\t* Förbättrad vägvisning↵
-\n\t* Undvik motorvägar alternativet↵
-\n\t* Cykelväg=spår display↵
-\n\t* bättre UI finish (ikoner)↵
-\n\t* Vissa buggfixar↵</string>
+<string name="tip_recent_changes_0_8_3_t">Förändringar i 0.8.3:\n* Förbättrad vägvisning\n* Undvik motorvägar alternativet\n* Cykelväg=spår display\n* bättre UI finish (ikoner)\n* Vissa buggfixar</string>
 <string name="snap_to_road_descr">Snap ställning till vägar under navigering</string>
 <string name="snap_to_road">Fäst mot väg</string>
 <string name="tip_update_index">Uppdatering av offlinedata</string>
@@ -628,4 +623,58 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="use_osmand_routing_service">OsmAnd navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
-</resources>
+<string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4 :</string>
+    <string name="navigate_to">Ange som destination</string>
+    <string name="context_menu_item_last_intermediate_point">Ställ sista målpunkt</string>
+    <string name="context_menu_item_first_intermediate_point">Först ställa målpunkt</string>
+    <string name="add_as_last_destination_point">Lägg senast intermedate punkten</string>
+    <string name="add_as_first_destination_point">Lägg till som första mellanliggande punkt</string>
+    <string name="replace_destination_point">Byt destination</string>
+    <string name="new_destination_point_dialog">Du har redan inställd destination.</string>
+    <string name="target_point">Målpunkt %1$s</string>
+    <string name="target_points">Mål</string>
+    <string name="intermediate_point_too_far">Mellanpunkt %1$s för långt från närmaste väg.</string>
+    <string name="arrived_at_intermediate_point">Du har kommit till ditt mellanliggande punkt</string>
+    <string name="context_menu_item_intermediate_point">Lägg mellanliggande punkt</string>
+    <string name="map_widget_intermediate_distance">Mellanliggande punkt</string>
+    <string name="ending_point_too_far">Utgångspunkt för långt från närmaste väg.</string>
+    <string name="btn_add_tag">Ny tagg</string>
+    <string name="btn_advanced_mode">Avancerat läge...</string>
+    <string name="poi_filter_parking">Parkering</string>
+    <string name="poi_filter_emergency">Emergency</string>
+    <string name="poi_filter_public_transport">Kollektivtrafik</string>
+    <string name="poi_filter_entertainment">Underhållning</string>
+    <string name="poi_filter_accomodation">Boende</string>
+    <string name="poi_filter_restaurants">Restauranger</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Karta klassificering med bilder</string><string name="tip_map_context_menu_t">Kartan snabbmenyn finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulan knappen.\nDetta ger en låda med koordinaterna. Öppna kartan dialogrutan snabbmenyn trycker på den. (Eller tryck och håll på den för att dölja lådan igen.)\nKartan Menyn innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
+	<string name="tip_initial_t">OsmAnd är en navigering program med många funktioner.\nSom en introduktion, en del användning tips och tricks länkade på huvudskärmen.</string>
+	<string name="application_dir">Lagringskatalog</string>
+	<string name="application_dir_change_warning">Ändra lagring katalogen kommer inte att flytta eller ta bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
+	<string name="osmand_net_previously_installed">En tidigare OsmAnd version är installerad. Alla offline data kommer att stödjas av den nya ansökan. Men Favorit punkter bör exporteras i gamla ansökan och senare importeras av den nya.</string>
+	<string name="build_installed">Bygga {0} installerats ({1}).</string>
+	<string name="downloading_build">Hämtar bygga...</string>
+	<string name="install_selected_build">Vill du installera OsmAnd - {0} från {1} {2} MB?</string>
+	<string name="loading_builds_failed">Hämtar en lista över OsmAnd byggen misslyckades</string>
+	<string name="loading_builds">Laddar OsmAnd bygger...</string>
+	<string name="select_build_to_install">Välj ett av OsmAnd bygger installera</string>
+	<string name="contribution_activity">Särskild verksamhet för bidrag version</string>
+	<string name="gps_status_app_not_found">GPS-status installerat inte. Sök i marknaden?</string>
+	<string name="voice_is_not_available_msg">Röstvägledning är inte tillgänglig. Gå till inställningar, välj föredraget röstdata paket och hämta den.</string>
+	<string name="voice_is_not_available_title">Ingen röstvägledning valts</string>
+	<string name="daynight_mode_day">Dag</string>
+	<string name="daynight_mode_night">Natt</string>
+	<string name="daynight_mode_auto">Soluppgång/solnedgång</string>
+	<string name="daynight_mode_sensor">Fotodetektor</string>
+	<string name="daynight_descr">Välj dag/natt regel modswitchning</string>
+	<string name="daynight">Dag/nattläge</string>
+	<string name="download_files_question">Ladda {0} fil (er) ({1} MB)?</string>
+	<string name="items_were_selected">{0} produkt (er) valda</string>
+	<string name="filter_existing_indexes">Filter ner</string>
+	<string name="deselect_all">Avmarkera alla</string>
+	<string name="select_all">Markera allt</string>
+	<string name="reload">Uppdatera</string>
+	<string name="fast_route_mode">Snabbaste vägen</string>
+	<string name="fast_route_mode_descr">"Aktivera för att beräkna snabbaste vägen eller inaktivera för kortaste resvägen "</string>
+	<string name="tiles_to_download_estimated_size">På zoom {0} download {1} plattor ({2} MB)</string>
+	<string name="context_menu_item_download_map">Hämta</string>
+	</resources>
