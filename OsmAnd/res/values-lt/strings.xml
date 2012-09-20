@@ -290,8 +290,8 @@
   <string name="download_files_not_enough_space">Neužtenka vietos parsiųsti %1$s MB (laisva: %2$s).</string>
   <string name="download_files_question_space">Dabar laisvos vietos yra {2} MB! Parsiųsti {0} failą(-us) ({1} MB)?</string>
   <string name="tip_select_destination_point">Kelionės tikslo pasirinkimas</string>
-  <string name="tip_select_destination_point_t">\tKelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Nustatyti kelionės tikslu\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotos vietos\' sąraše.
-\n\tKelionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis).</string>
+  <string name="tip_select_destination_point_t">Kelionės tikslą jūs galite pasirinkti tiesiog žemėlapyje (kontekstiniame meniu pasirinkite \'Nustatyti kelionės tikslu\'), visose paieškose arba ilgai paspaudus įrašą esantį \'Išsaugotos vietos\' sąraše.
+\nKelionės tikslas žemėlapyje būna pažymėtas oranžiniu disku ir OsmAnd rodo kryptį ir atstumą iki jo (oranžinis trikampis).</string>
   <string name="tip_recent_changes_0_6_9_t">Pakeitimai 0.6.9 versijoje :
 \n\t- Patobulintas parsiųstų žemėlapių atvaizdavimas
 \n\t- Greitas aparatinis parsiųstų žemėlapių vaizdavimas - ieškokite eksperimentinėse savybėse (dalyje įrenginių gali neveikti)
@@ -476,15 +476,15 @@
   <string name="level_to_switch_vector_raster_descr">Mažiausias dydis, kuriuo rodyti vektorinius žemėlapius</string>
   <string name="level_to_switch_vector_raster">Mažiausias vektorinių žemėl. dydis</string>
   <string name="tip_location_sharing">Vietos bendrinimas</string>
-  <string name="tip_location_sharing_t">\tJūs galite pasidalinti savo kelionės metu aplankytų įdomių objektų vietomis su savo giminėmis ir draugais. 
-\n\tNorėdami bendrinti jūsų pasirinktą vietą: 
-\n\tNaudokite \'Žemėlapio kontekstinis meniu\' -&gt; \'Bendrinti vietą\' meniu punktu. 
-\n\tPo to pasirinkite kaip nusiųsite savo pasirinktą vietą. Turėsite tokį pasirinkimą: elektroniniu paštu, SMS(tekstu), ar paprasčiausiai nukopijuoti koordinates.</string>
+  <string name="tip_location_sharing_t">"Jūs galite pasidalinti savo kelionės metu aplankytų įdomių objektų vietomis su savo giminėmis ir draugais.
+\nNorėdami bendrinti jūsų pasirinktą vietą:
+\nNaudokite \'Žemėlapio kontekstinis meniu\' -&gt; \'Bendrinti vietą\' meniu punktu.
+\nPo to pasirinkite kaip nusiųsite savo pasirinktą vietą. Turėsite tokį pasirinkimą: elektroniniu paštu, SMS(tekstu), ar paprasčiausiai nukopijuoti koordinates. "</string>
   <string name="tip_favorites">Įsimintos vietos</string>
-  <string name="tip_favorites_t">\tDažnai naudojamos vietos gali būti išsaugotos kaip Įsimintos vietos. 
-\n\tNorėdami išsaugoti Įsimintą vietą atverkite žemėlapio kontekstinį meniu ir pasirinkite \'Pridėti prie įsimintų\' bei įveskite pavadinimą. Išsaugota Įsiminta vieta bus prieinama per \'Pagrindinis meniu\' -&gt; \'Įsimintos vietos\'. 
-\n\tIlgai paspaudus ant įsimintos vietos sąraše \'Įsimintos vietos\' leis tą vietą nustatyti kelionės tikslu, ją redaguoti ar ištrinti. 
-\n\tNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Žemėlapio kontekstinis meniu\' -&gt;\'Nustatyti vaizdą\'.</string>
+  <string name="tip_favorites_t">"Dažnai naudojamos vietos gali būti išsaugotos kaip Įsimintos vietos.
+\nNorėdami išsaugoti Įsimintą vietą atverkite žemėlapio kontekstinį meniu ir pasirinkite \'Pridėti prie įsimintų\' bei įveskite pavadinimą. Išsaugota Įsiminta vieta bus prieinama per \'Pagrindinis meniu\' -&gt; \'Įsimintos vietos\'.
+\nIlgai paspaudus ant įsimintos vietos sąraše \'Įsimintos vietos\' leis tą vietą nustatyti kelionės tikslu, ją redaguoti ar ištrinti.
+\nNorėdami Įsimintas vietas matyti tiesiog ant žemėlapio turite įjungti \'Įsimintos vietos\' sluoksnį atsidarę \'Žemėlapio kontekstinis meniu\' -&gt;\'Nustatyti vaizdą\'. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Įvyko klaida vykdant paiešką be interneto</string>
   <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'</string>
@@ -1049,14 +1049,14 @@
 <string name="map_widget_day_night">Dieninis/naktinis žemėlapis</string>
 <string name="map_widget_vector_attributes">Atvaizduojami atributai:</string>
 <string name="map_widget_renderer">Atvaizdavimo stilius</string>
-<string name="tip_day_night_mode_t_v2">\tŽemėlapio išvaizda tam tikriems vektoriniams žemėlapiams gali būti keičiama tarp dienos (šviesesni) ir nakties (tamsesni).
-\n\tNaktinės spalvos yra saugesnės vairuoti naktį.
-\n\tDienos/nakties perjungimą galite nustatyti \'Meniu\' -&gt; \'Konfigūruoti ekraną...\' -&gt;\'Dienos/nakties žemėlapis\'.
-\n\tPasirinkimai:
-\n\t\'Saulėtekis/Saulėlydis\' - automatinis režimas, valdomas pagal saulės padėtį (numatytasis)
-\n\t\'Diena\' - visada naudoti dienos režimą
-\n\t\'Naktis\' - visada naudoti nakties režimą
-\n\t\'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas)</string>
+<string name="tip_day_night_mode_t_v2">"Žemėlapio išvaizda tam tikriems vektoriniams žemėlapiams gali būti keičiama tarp dienos (šviesesnė) ir nakties (tamsesnė).
+\nNaktinės spalvos yra saugesnės vairuoti naktį.
+\nDienos/nakties perjungimą galite nustatyti \'Meniu\' -&gt; \'Konfigūruoti ekraną...\' -&gt;\'Dienos/nakties žemėlapis\'.
+\nPasirinkimai:
+\n\'Saulėtekis/Saulėlydis\' - automatinis režimas, valdomas pagal saulės padėtį (numatytasis)
+\n\'Diena\' - visada naudoti dienos režimą
+\n\'Naktis\' - visada naudoti nakties režimą
+\n\'Šviesos jutiklis\' - žemėlapio išvaizdą valdo jūsų prietaiso šviesos jutiklis (tik jei įrengtas) "</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd palaiko skirtingus (keičiamus) programos profilius skirtingiems naudojimo atvejams.
 \n\tJūs galite pakeisti profilius nuspausdami profilio mygtuką apatiniame kairiajame žemėlapio ekrano kampe (automobilio, dviračio ar pėsčiojo piktogramos) arba, kai kuriate maršrutą.</string>
 <string name="tip_rotation_switching_t_v2">\tJūs galite pasirinkti ar ir kaip bus pasukamas žemėlapis paspaudus ant kompaso ikonos žemėlapio rodinyje. Turėsite tokias galimybes:
