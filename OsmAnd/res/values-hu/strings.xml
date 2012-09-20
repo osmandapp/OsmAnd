@@ -1,5 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<resources><string name="tip_recent_changes_0_7_2_t">A 0.7.2 kiadás változásai: \n\t- Natív renderelő minden eszközre \n\t- Offline POI szerkesztés \n\t- Akadálymentesítés \n\t- Sok egyéb hibajavítás</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
+\n\t- Natív renderelő minden eszközre
+\n\t- Offline POI szerkesztés
+\n\t- Akadálymentesítés 
+\n\t- Sok egyéb hibajavítás "</string>
   <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
   <string name="gpx_visibility_txt">Láthatóság</string>
   <string name="gpx_tags_txt">Címkék</string>
@@ -802,7 +806,7 @@
   <string name="select_plugin_to_activate">Bővítmény be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
   <string name="prefs_plugins_descr">A bővítmények további lehetőségeket biztosítanak, mint útvonal mentés, raszteres térképek, kikapcsolt képernyős használat, akadálymentesítés és mások.</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
-  <string name="tip_recent_changes_0_8_0_t">A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott</string>
+  <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott "</string>
   <string name="osm_editing_plugin_description">Beállítások kezelése OSM POI objektumok gyűjtéséhez / módosításához, OSM hibajelzések készítéséhez, és felvett GPX fájlok feltöltéséhez. (OSM felhasználói név szükséges.)</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
   <string name="simulate_route_progression_manually">Az útvonalon haladás szimulálása</string>
@@ -823,7 +827,7 @@
   <string name="rendering_attr_noPolygons_name">Poligonok elrejtése</string>
   <string name="rendering_attr_appMode_name">Megjelenítési mód</string>
   <string name="rendering_attr_appMode_description">Térkép optimalizálása az adott Felhasználási módhoz</string>
-  <string name="rendering_attr_contourLines_description">Válaszd ki a legkisebb nagyítási szintet, ahol a szintvonalak megjelennek. Külön SRTM fájlok szükségesek.</string>
+  <string name="rendering_attr_contourLines_description">Megjelenítés zoom szinttől (SRTM fájl szükséges):</string>
   <string name="rendering_attr_contourLines_name">Szintvonalak megjelenítése</string>
   <string name="rendering_attr_hmRendered_description">Megnöveli a megjelenített térképrészletek mennyiségét</string>
   <string name="rendering_attr_hmRendered_name">Több térképrészlet</string>
@@ -858,7 +862,7 @@
   <string name="osmand_parking_plugin_name">Parkolási Hely Bővítmény</string>
   <string name="context_menu_item_add_parking_point">Megjelölés parkolási helyként</string>
   <string name="context_menu_item_delete_parking_point">Parkolásjelölő törlése</string>
-  <string name="starting_point_too_far">Az indulási pont túl messze van a legközelebbi úttól.</string>
+  <string name="starting_point_too_far">A kezdőpont közelében nem található út.</string>
   <string name="shared_location">Megosztott hely</string>
   <string name="update_downlod_list">Lista újratöltése</string>
   <string name="global_app_allocated_memory_descr">Lefoglalt memória %1$s MB (Android korlát %2$s MB, Dalvik %3$s MB).</string>
@@ -998,13 +1002,34 @@
     </string>
 <string name="osmand_plus_short_description_80_chars">Az OsmAnd egy nyílt forráskódú navigációs alkalmazás offline és online térképekkel</string>
 <string name="avoid_motorway">Autópályák elkerülése</string>
-<string name="tip_recent_changes_0_8_3_t">A 0.8.3 kiadás változásai:
-		\n\t* Továbbfejlesztett útvonalvezetés
-		\n\t* Autópályák elkerülése opció
-		\n\t* Cycleway=track megjelenítése
-		\n\t* javított felhasználói felület (ikonok)
-		\n\t* További hibajavítások
-	</string>
+<string name="tip_recent_changes_0_8_3_t">"A 0.8.3 kiadás változásai:
+\n\t* Köztes célpontok
+\n\t* Továbbfejlesztett útvonalvezetés
+\n\t* Autópályák elkerülése opció
+\n\t* Cycleway=track megjelenítése
+\n\t* Javított felhasználói felület (ikonok)
+\n\t* További hibajavítások "</string>
 <string name="snap_to_road_descr">Úthoz rögzítés navigáció közben</string>
 <string name="snap_to_road">Úthoz rögzítés</string>
-</resources>
+<string name="tip_recent_changes_0_8_4_t">"A 0.8.4 kiadás változásai: "</string>
+    <string name="add_as_last_destination_point">Beállítás utolsó köztes célpontnak</string>
+    <string name="add_as_first_destination_point">Beállítás első köztes célpontnak</string>
+    <string name="replace_destination_point">Célpont lecserélése</string>
+    <string name="new_destination_point_dialog">Már be van állítva egy célpontod.</string>
+    <string name="target_point">Célpont %1$s</string>
+    <string name="target_points">Célok</string>
+    <string name="intermediate_point_too_far">%1$s. köztes célpont közelében nincsen út.</string>
+    <string name="arrived_at_intermediate_point">Megérkeztél a köztes célponthoz</string>
+    <string name="context_menu_item_intermediate_point">Beállítás köztes célpontnak</string>
+    <string name="map_widget_intermediate_distance">Köztes célpont</string>
+    <string name="ending_point_too_far">A kezdőpont közelében nem található út.</string>
+    <string name="btn_add_tag">Címke hozzáadása</string>
+    <string name="btn_advanced_mode">Haladó mód…</string>
+    <string name="poi_filter_parking">Parkoló</string>
+    <string name="poi_filter_emergency">Vészhelyzet</string>
+    <string name="poi_filter_public_transport">Tömegközlekedés</string>
+    <string name="poi_filter_entertainment">Szórakozás</string>
+    <string name="poi_filter_accomodation">Szállás</string>
+    <string name="poi_filter_restaurants">Éttermek</string>
+    <string name="poi_filter_sightseeing">Városnézés</string>
+    </resources>
