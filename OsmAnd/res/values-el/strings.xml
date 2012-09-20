@@ -331,7 +331,7 @@
 	<string name="auto_announce_off">Stop autoannouncing</string>
 	<string name="scroll_map_by_gestures_descr">Μετακίνηση χάρτη με χειρονομίες στην οθόνη αφής</string>
 	<string name="scroll_map_by_gestures">Natural map scrolling</string>
-	<string name="i_am_here">Είμαι εδώ.</string>
+	<string name="i_am_here">Είμαι εδώ</string>
 	<string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
 	<string name="zoom_by_trackball">Use trackball for zoom control</string>
 	<string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
@@ -442,14 +442,13 @@
 	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
 		\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 	</string> 
-	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
-		\n\t- Improved offline map rendering
-		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
-		\n\t- Massive look and feel changes
-		\n\t- Altitude info
-		\n\t- New translations (Vienamese, Polish)
-		\n\t- Other small features
-	</string>
+	<string name="tip_recent_changes_0_6_9_t">"Αλλαγές στην 0.6.9 :
+\n\t- Improved offline map rendering
+\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
+\n\t- Massive look and feel changes
+\n\t- Altitude info
+\n\t- New translations (Vienamese, Polish)
+\n\t- Other small features "</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
 	<string name="init_native_library">Initializing native library…</string>
@@ -472,16 +471,15 @@
 	<string name="layer_poi_label">POI labels</string>
 	<string name="animate_route_off">Stop animation</string>
 	<string name="animate_route">Start animation</string>
-	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
-		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-		\n\t- Implement POI search by name in big areas (countries)  
-		\n\t- Fix flickering map screen for tablets (Issue 641)
-		\n\t- Auto-center map view option (Issue 356)
-		\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-		\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
-		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
-		\n\t- Small improvements
-	</string>
+	<string name="tip_recent_changes_0_6_8_t">"Αλλαγές στην 0.6.8 :
+\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
+\n\t- Implement POI search by name in big areas (countries)
+\n\t- Fix flickering map screen for tablets (Issue 641)
+\n\t- Auto-center map view option (Issue 356)
+\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
+\n\t- POI data included in .obf file (all download indexes after 01/10/11)
+\n\t- Voice prompt fixes (GPS position fix, omitting first command)
+\n\t- Small improvements "</string>
 	<string name="file_can_not_be_renamed">File can not be renamed.</string>
 	<string name="file_with_name_already_exists">File with that name already exists.</string>
 	<string name="gpx_navigation">GPX route</string>
@@ -572,7 +570,7 @@
 	<string name="map_text_size">Map font size</string>
 	<string name="trace_rendering">Rendering debug info</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
-	<string name="tip_recent_changes">Recent changes</string>
+	<string name="tip_recent_changes">Πρόσφατες αλλαγές</string>
 	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
 		\n\t- Text To Speech engine for voice navigation
 		\n\t- Make map renderer more detailed
@@ -1118,4 +1116,5 @@
     <string name="new_destination_point_dialog">Έχετε ήδη ορισμένο σημείο προορισμού.</string>
     <string name="target_point">Σημείο στόχος %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Ορισμός τελευταίου σημείου στόχου</string>
+    <string name="target_points">Στόχοι</string>
     </resources>
