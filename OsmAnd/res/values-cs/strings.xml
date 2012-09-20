@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -28,7 +28,7 @@
   <string name="backToMenu">Zpět do menu</string>
   <string name="zoomOut">Zmenšit</string>
   <string name="zoomIn">Zvětšit</string>
-  <string name="zoomIs">"Zvětšení je "</string>
+  <string name="zoomIs">Zvětšení je</string>
   <string name="north">sever</string>
   <string name="north_north_east">severoseverovýchod</string>
   <string name="north_east">severovýchod</string>
@@ -177,8 +177,8 @@
   <string name="download_files_not_enough_space">Nedostatek místa pro stažení %1$s MB dat (volné: %2$s).</string>
   <string name="download_files_question_space">Stáhnout {0} soubor(y) ({1} MB)? Volné místo: {2} MB.</string>
   <string name="tip_select_destination_point">Výbrat cíl</string>
-  <string name="tip_select_destination_point_t">\tCílový bod můžete vybrat přímo v mapě (kontextové menu, pak vybrat \'Nastavit jako cíl\'), v každém módu vyhledávání nebo dlouhým stiskem položky ve vašem \'Seznamu oblíbených míst\'.
-\n\tCíl je označen oranžovou tečkou na mapě. OsmAnd zobrazuje vzdálenost a směr do cíle (oranžová šipka).</string>
+  <string name="tip_select_destination_point_t">"\tCílový bod můžete vybrat přímo v mapě (kontextové menu, pak vybrat \'Nastavit jako cíl\'), v každém módu vyhledávání nebo dlouhým stiskem položky ve vašem \'Seznamu oblíbených míst\'.
+\n\tCíl je označen oranžovou tečkou na mapě. OsmAnd zobrazuje vzdálenost a směr do cíle (oranžová šipka). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Změny ve verzi 0.6.9 :
 \n\t- Vylepšené vykreslování offline map
 \n\t- Zrychlené vykreslování offline map pomocí Android native library - najdete v \"experimental features\" (na některých zařízeních nemusí fungovat)
@@ -359,15 +359,15 @@
 \n\t Pro zkontrolování aktualizací \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Offline data\'-&gt;\'Stáhnout offline data\'. Po aktualizaci seznamu z internetu vyberte z kontextového menu \'Zobrazit jen aktualizace\'.
 \n\t Teď se zobrazí jen indexy, které už máte stažené. Navíc jsou zvýrazněné následovně:
 \n\t Zelená - označuje aktuální mapy a data
-\n\t Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi "</string>
+\n\t Modrá - označuje mapy a data, u kterých lze stáhnout novější verzi\n\t Tmavě zelená/Modrá - označuje vypnuté datové spojení"</string>
   <string name="tip_location_sharing">Sdílení polohy</string>
-  <string name="tip_location_sharing_t">\t Našli jste po cestě nějaké zajímavé místo a chcete se o něj podělit s ostatními?
+  <string name="tip_location_sharing_t">"\t Našli jste po cestě nějaké zajímavé místo a chcete se o něj podělit s ostatními?
 \n\t OsmAnd umožňuje vaši polohu snadno sdílet.
-\n\t V kontextovém menu mapy vyberte volbu \'Sdílet polohu\'. Následně můžete zvolit způsob, jak polohu odešlete. Máte na výběr mezi E-Mailem, SMS nebo zkopírováním souřadnic do schránky.</string>
+\n\t V kontextovém menu mapy vyberte volbu \'Sdílet polohu\'. Následně můžete zvolit způsob, jak polohu odešlete. Máte na výběr mezi E-Mailem, SMS nebo zkopírováním souřadnic do schránky. "</string>
   <string name="tip_favorites">Oblíbená místa</string>
-  <string name="tip_favorites_t">\t Často navštěvovaná místa mohou být uložena jako Oblíbená místa.\n\t Pro přidání oblíbeného místa otevřete kontextové menu mapy (dlouhý stisk), vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení se k oblíbeným dostanete skrze \'Hlavní Menu\'-&gt;\'Oblíbené\'.
+  <string name="tip_favorites_t">"\t Často navštěvovaná místa mohou být uložena jako Oblíbená místa.\n\t Pro přidání oblíbeného místa otevřete kontextové menu mapy (dlouhý stisk), vyberte \'Přidat k oblíbeným\' a zadejte vhodné jméno. Po uložení se k oblíbeným dostanete skrze \'Hlavní Menu\'-&gt;\'Oblíbené\'.
 \n\t Dlouhým stisknutím položky v oblíbených vyvoláte další možnosti - nastavení jako cíl, její úpravy nebo vymazání.
-\n\t Pro zobrazení všech oblíbených bodů na mapě zvolte \'Oblíbené\' v menu \'Kontextové menu\' -&gt; \'Mapová data\'.</string>
+\n\t Pro zobrazení všech oblíbených bodů na mapě zvolte \'Oblíbené\' v menu \'Kontextové menu\' -&gt; \'Mapová data\'. "</string>
   <string name="tip_recent_changes">Poslední změny</string>
   <string name="tip_recent_changes_0_6_6_t">" Změny ve verzi 0.6.6 :
 \n\t - Podpora Text To Speech enginu v hlasové navigaci
@@ -392,31 +392,30 @@
   <string name="gpx_option_from_start_point">Projet celou trasu</string>
   <string name="switch_to_vector_map_to_see">Pro tuto oblast je k dispozici offline vektorová mapa.\n\t\n\t Pro zobrazení zvolte \'Menu\' -&gt; \'Mapová data\' -&gt; \'Zdroj map…\' -&gt; \'Vektorové mapy OSM\'.</string>
   <string name="choose_audio_stream">Kanál pro navádění</string>
-  <string name="choose_audio_stream_descr">" Zvolte kanál poskytující hlasové navádění (závisí na systémové konfiguraci) "</string>
+  <string name="choose_audio_stream_descr">Zvolte kanál poskytující hlasové navádění (závisí na systémové konfiguraci)</string>
   <string name="voice_stream_voice_call">Volání</string>
   <string name="voice_stream_notification">Upozornění</string>
   <string name="voice_stream_music">Hudba</string>
   <string name="warning_tile_layer_not_downloadable">Data pro mapovou vrstvu %1$s nelze stáhnout, zkuste je prosím znovu nainstalovat.</string>
-  <string name="overlay_transparency_descr">" Upravit průhlednost překryvné mapy "</string>
+  <string name="overlay_transparency_descr">Upravit průhlednost překryvné mapy</string>
   <string name="overlay_transparency">Průhlednost překryvu</string>
   <string name="map_transparency_descr">Upravit průhlednost základní mapy</string>
   <string name="map_transparency">Průhlednost základní mapy</string>
   <string name="modify_transparency">Upravit průhlednost</string>
   <string name="layer_underlay">Podkres mapy…</string>
   <string name="map_underlay">Podkresová mapa</string>
-  <string name="map_underlay_descr">" Vyberte mapu zobrazenou pod základní mapou "</string>
+  <string name="map_underlay_descr">Vyberte podkladovou mapu</string>
   <string name="layer_overlay">Překryvná mapa…</string>
   <string name="default_none">Žádná</string>
   <string name="map_overlay">Překryvná mapa</string>
-  <string name="map_overlay_descr">" Vyberte mapu zobrazenou nad základní mapou "</string>
-  <string name="tile_source_already_installed">" Mapa je již nainstalovaná, aktualizuji nastavení "</string>
-  <string name="select_tile_source_to_install">" Vyberte mapy k instalaci a aktualizaci "</string>
-  <string name="internet_not_available">" Internetové připojení není dostupné "</string>
+  <string name="map_overlay_descr">Vyberte překryvnou mapu</string>
+  <string name="tile_source_already_installed">Mapa je již nainstalovaná, aktualizuji nastavení</string>
+  <string name="select_tile_source_to_install">Vyberte mapy k instalaci nebo aktualizaci</string>
+  <string name="internet_not_available">Internetové připojení není dostupné</string>
   <string name="install_more">Instalovat další…</string>
   <string name="level_to_switch_vector_raster_descr">Zobrazovat vektorové mapy od minimálního zvětšení</string>
   <string name="level_to_switch_vector_raster">Zvětšení vektorové mapy</string>
-  <string name="create_poi_link_to_osm_doc">" "<u>Online OSM</u> - mapová klasifikace "</string>
-  <string name="error_doing_search">Při offline hledání došlo k chybě</string>
+  <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> - mapová klasifikace s obrázky</string><string name="error_doing_search">Při offline hledání došlo k chybě</string>
   <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:\'%s\'</string>
   <string name="search_osm_offline">Hledat adresu pomocí offline map</string>
   <string name="system_locale">Podle systému</string>
@@ -455,7 +454,7 @@
   <string name="mile">mi</string>
   <string name="send_location_way_choose_title">Sdílet polohu pomocí</string>
   <string name="send_location_sms_pattern">Poloha : %1$s\n%2$s</string>
-  <string name="send_location_email_pattern">" Pro zobrazení polohy následujte link %1$s v prohlížeči nebo android intent link %2$s "</string>
+  <string name="send_location_email_pattern">Pro zobrazení polohy následujte link %1$s v prohlížeči nebo android intent link %2$s</string>
   <string name="send_location">Poslat polohu</string>
   <string name="context_menu_item_share_location">Sdílet polohu</string>
   <string name="add_waypoint_dialog_added">Bod \'\'{0}\'\' byl přidán</string>
@@ -671,7 +670,7 @@
   <string name="update_existing">Nahradit</string>
   <string name="only_show">Pouze zobrazit</string>
   <string name="follow">Následovat</string>
-  <string name="recalculate_route_to_your_location">Přepočítat cestu podle Vaší polohy</string>
+  <string name="recalculate_route_to_your_location">Způsob přepravy:</string>
   <string name="mark_final_location_first">Prosím zadejte nejprve cíl</string>
   <string name="get_directions">Navigace</string>
   <string name="show_gps_status">Zobrazit stav GPS</string>
@@ -881,8 +880,8 @@
   <string name="select_plugin_to_activate">Kliknutím modul zapnete nebo vypnete. (V některých případech je třeba aplikaci restartovat.)</string>
   <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a poskytnout přídavné funkce jako: záznam trasy, rastrové mapy, běh na pozadí, usnadnění a další.</string>
   <string name="prefs_plugins">Moduly</string>
-  <string name="tip_recent_changes_0_8_0_t">Změny ve verzi 0.8.0 :
-\n\t- *Moduly*\n\t- Většina funkcí je uspořádána do skupin, které mohou být zapnuty/vypnuty ve správci modulů. Skupiny: mapová data (online nebo uložená), sledování pozice a mnoho dalších dřívějších funkcí\n\t- *Podpora nového formátu offline map*\n\t- Rychlejší a přesnější vykreslování mapy (problémy s pobřežím a vodní hladinou z větší části vyřešeny)\n\t- Pokud používáte offline mapy, musíte stahnout kompletně nová data, stará nejsou více podporována\n\t- *Offline navigace*\n\t- Robustnější offline navigace\n\t- *Zlepšeno uživatelské rozhraní*\n\t- Opraveno mnoho chyb</string>
+  <string name="tip_recent_changes_0_8_0_t">"Změny ve verzi 0.8.0 :
+\n\t- *Moduly*\n\t- Většina funkcí je uspořádána do skupin, které mohou být zapnuty/vypnuty ve správci modulů. Skupiny: mapová data (online nebo uložená), sledování pozice a mnoho dalších dřívějších funkcí\n\t- *Podpora nového formátu offline map*\n\t- Rychlejší a přesnější vykreslování mapy (problémy s pobřežím a vodní hladinou z větší části vyřešeny)\n\t- Pokud používáte offline mapy, musíte stahnout kompletně nová data, stará nejsou více podporována\n\t- *Offline navigace*\n\t- Robustnější offline navigace\n\t- *Zlepšeno uživatelské rozhraní*\n\t- Opraveno mnoho chyb "</string>
   <string name="osm_editing_plugin_description">Nastavení pro práci s OSM jako: vytváření a úpravu bodů zájmu (POI), vytváření a komentování OSM chyb a nahrávání zaznamenaných GPX souborů (vyžaduje přihlašovací údaje do OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
   <string name="simulate_route_progression_manually">Ručně simulovat postup po trase</string>
@@ -919,8 +918,8 @@
   <string name="route_roundabout">Kruhový objezd : vyjeďte %1$d. výjezdem a pokračujte</string>
   <string name="route_kl">Držte se vlevo a pokračujte</string>
   <string name="route_kr">Držte se vpravo a pokračujte</string>
-  <string name="tip_recent_changes_0_8_1_t">Změny ve verzi 0.8.1 :
-\n\t* Přesnější výpočet trasy (mírně pomalejší)\n\t* Chytré a rychlé přepočítávání trasy\n\t* Řazení do pruhů\n\t* Informace o retardérech, radarech a rychlostních limitech\n\t* Zlepšená hlasová navigace na dálnici\n\t* Modul parkování (\'kde jsem zaparkoval auto?\')\n\t* Tlačítko ovládání zápisu trasy</string>
+  <string name="tip_recent_changes_0_8_1_t">"Změny ve verzi 0.8.1 :
+\n\t* Přesnější výpočet trasy (mírně pomalejší)\n\t* Chytré a rychlé přepočítávání trasy\n\t* Řazení do pruhů\n\t* Informace o retardérech, radarech a rychlostních limitech\n\t* Zlepšená hlasová navigace na dálnici\n\t* Modul parkování (\'kde jsem zaparkoval auto?\')\n\t* Tlačítko ovládání zápisu trasy "</string>
   <string name="gpxup_public">Veřejné</string>
   <string name="gpxup_identifiable">S identifikací</string>
   <string name="gpxup_trackable">Se záznamem trasy</string>
@@ -967,11 +966,10 @@
   <string name="show_cameras">Zobrazovat dopravní radary</string>
   <string name="show_speed_limits">Zobrazovat rychlostní omezení</string>
   <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
-  <string name="tip_recent_changes_0_8_2_t">Změny ve verzi 0.8.2:
+  <string name="tip_recent_changes_0_8_2_t">"Změny ve verzi 0.8.2:
 \n\t* Vylepšená navigace
-\n\t* Dynamic map widgets↵
-\n\t* Tlačítko zámku se záznamem trasy
-\n\t* Nastavení mapy přesunuta na mapovou obrazovku</string>
+\n\t* Dynamické mapové widgety\n\t* Tlačítko zámku se záznamem trasy
+\n\t* Nastavení mapy přesunuta na mapovou obrazovku\n\t* Opraveno psaní arabštiny, kannadštiny a jazyků psaných z prava "</string>
   <string name="map_widget_top_text">Jméno ulice</string>
   <string name="map_widget_config">Nastavení</string>
   <string name="map_widget_map_select">Výběr mapy</string>
@@ -1002,15 +1000,15 @@
 <string name="show_lanes">Zobrazovat jízdní pruhy</string>
 <string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
 <string name="avoid_ferries">Vyhnout se trajektům</string>
-<string name="avoid_in_routing_title">Vyhnout se...</string>
+<string name="avoid_in_routing_title">Vyhnout se…</string>
 <string name="avoid_in_routing_descr">Vyhnout se trajektům, placeným a nezpevněným cestám</string>
-<string name="show_warnings_title">Dopravní upozornění...</string>
+<string name="show_warnings_title">Dopravní upozornění…</string>
 <string name="show_warnings_descr">Zobrazit omezení rychlosti, rychlostní radary a retardéry</string>
 <string name="map_widget_show_ruler">Měřítko</string>
 <string name="map_widget_appearance">Ostatní:</string>
 <string name="map_widget_transparent">Průhledné ovládání</string>
 <string name="monitoring_mode_off">Záznam trasy do GPX</string>
-<string name="monitoring_mode_on">Zastavit záznam trasy</string>
+<string name="monitoring_mode_on">Zastavit\n záznam trasy</string>
 <string name="email">E-mail</string>
 <string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
 <string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
@@ -1038,12 +1036,11 @@
 </string>
 <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
 <string name="map_widget_vector_attributes">Vlastnosti vykreslovače:</string>
-<string name="tip_rotation_switching_t_v2">\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
-
+<string name="tip_rotation_switching_t_v2">"\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
 \n\tMožnosti jsou:
 \n\t\'Neotáčet (sever nahoře)\' - mapa se nebude otáčet a zůstane vždy orientovaná severem nahoru
 \n\t\'Ve směru pohybu\' - mapa bude neustále sledovat směr vašeho pohybu
-\n\t\'Podle kompasu\' - mapa se bude neustále natáčet podle kompasu</string>
+\n\t\'Podle kompasu\' - mapa se bude neustále natáčet podle kompasu "</string>
 <string name="poi_filter_parking">Parkoviště</string>
 <string name="poi_filter_public_transport">Veřejná doprava</string>
 <string name="poi_filter_entertainment">Zábava</string>
@@ -1066,12 +1063,21 @@
 \n\tPomocí \"Zdroj map...\' můžete zvolit lokálně uložené vektorové mapy nebo online rastrové mapy (pro tuto funkci aktivujte modul \'Online mapy\') nebo vlastní mapy vytvořené na PC pomocí programu OsmAndMapCreator.
 \n\tOsmAnd také podporuje vlastní zdroje map.
 </string>
-<string name="tip_day_night_mode_t_v2">\tVzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
+<string name="tip_day_night_mode_t_v2">"\tVzhled mapy může být u některých vektorových map změněn mezi denním (světlejším) a nočním (tmavším).
 \n\tNoční vzhled je bezpečnější pro jízdu v noci (méně oslňují).
 \n\tZpůsob přepínání vzhledu můžete nastavit v \'Menu\'-&gt;\'Nastavení obrazovky...\'-&gt;\'Denní/noční režim\'
 \n\tMožnosti:
 \n\t\'Východ/západ slunce\' - automatické přepínání podle slunce (výchozí)
 \n\t\'Den\' - vždy používá denní režim
 \n\t\'Noc\' - vždy používá noční režim
-\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen)</string>
-</resources>
+\n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "</string>
+<string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4: "</string>
+    <string name="context_menu_item_last_intermediate_point">Nastavit poslední cílový bod</string>
+    <string name="context_menu_item_first_intermediate_point">Nastavit první cílový bod</string>
+    <string name="add_as_last_destination_point">Přidat jako poslední průjezdný bod</string>
+    <string name="add_as_first_destination_point">Přidat jako první průjezdný bod</string>
+    <string name="replace_destination_point">Nahradit cílový bod</string>
+    <string name="new_destination_point_dialog">Cílový bod již máte nastavený.</string>
+    <string name="target_point">Cílový bod %​1$s</string>
+    <string name="target_points">Cíle</string>
+    </resources>
