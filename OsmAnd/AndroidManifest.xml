@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="80">
+	package="net.osmand.plus" android:installLocation="auto" android:versionName="@string/app_version" android:versionCode="90">
 	<meta-data android:name="com.google.android.backup.api_key"
     android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 	
