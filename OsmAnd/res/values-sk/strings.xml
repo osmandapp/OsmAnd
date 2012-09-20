@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
+  <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
+  </string>
+  <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
+  \n\t* Prechodné body
+  \n\t* Vylepšené hlasové povely pri navigácii
+  \n\t* Voľba obídenia diaľnic
+  \n\t* Zobrazenie Cycleway=track
+  \n\t* Vylepšený vzhľad rozhrania (ikony)
+  \n\t* Opravy mnohých chýb
+  </string>
+  <string name="navigate_to">Určiť ako cieľ</string>
+  <string name="context_menu_item_last_intermediate_point">Určiť ako posledný prechodný bod</string>
+  <string name="context_menu_item_first_intermediate_point">Určiť ako prvý prechodný bod</string>
+  <string name="add_as_last_destination_point">Pridať ako posledný prechodný bod</string>
+  <string name="add_as_first_destination_point">Pridať ako prvý prechodný bod</string>
+  <string name="replace_destination_point">Nahradiť cieľový bod</string>
+  <string name="new_destination_point_dialog">Už máte určený cieľový bod.</string>
+  <string name="target_point">Cieľový bod %1$s</string>
+  <string name="target_points">Ciele</string>
   <string name="intermediate_point_too_far">Prechodný bod %1$s je príliš daľeko od najbližšej cesty.</string>
   <string name="arrived_at_intermediate_point">Dorazili ste k Vášmu prechodnému bodu</string>
   <string name="context_menu_item_intermediate_point">Pridať prechodný bod</string>
@@ -18,13 +37,6 @@
   <string name="poi_filter_fuel">Palivo</string>
   <string name="btn_add_tag">Pridať značku</string>
   <string name="btn_advanced_mode">Pokročilý režim...</string>
-  <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
-  \n\t* Vylepšená navigácia
-  \n\t* Voľba obídenia diaľnic
-  \n\t* Zobrazenie Cycleway=track
-  \n\t* Vylepšený vzhľad rozhrania (ikony)
-  \n\t* Opravy chýb
-  </string>
   <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
   <string name="snap_to_road">Prichytiť k ceste</string>
   <string name="avoid_motorway">Diaľniciam</string>
@@ -236,7 +248,7 @@
   <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
   <string name="download_files_question_space">Aktuálne je voľných {2} MB! Stiahnuť {0} súbor(y/ov) ({1} MB)?</string>
   <string name="tip_select_destination_point">Výber cieľového bodu</string>
-  <string name="tip_select_destination_point_t">\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Nastaviť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'.
+  <string name="tip_select_destination_point_t">\tCieľ môžete určiť priamo na mape (kontextové menu, potom \'Určiť ako cieľ\'), vo všetkých hľadacích aktivitách, alebo dlhým kliknutím vo Vašom \'Zozname obľúbených bodov\'.
 \n\tCieľ je označený ako oranžový krúžok na mape a OsmAnd zobrazí vzdialenosť a smer k nemu (oranžový trojuholník).</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmeny vo verzii 0.6.9 :
 \n\t- Vylepšené offline vykresľovanie mapy
@@ -818,7 +830,6 @@
   <string name="monitor_preferences">- Stopovanie</string>
   <string name="save_track_to_gpx_descrp">Stopy budú ukladané do adresára stôp, zoskupené podľa dní</string>
   <string name="save_track_to_gpx">Logovať stopu do GPX súboru</string>
-  <string name="navigate_to">Nastaviť ako cieľ</string>
   <string name="update_tile">Aktualizovať mapu</string>
   <string name="reload_tile">Znovu načítať dlaždicu</string>
   <string name="user_name_descr">Potrebné pre odovzdávanie do openstreetmap.org</string>
@@ -838,7 +849,7 @@
   <string name="ChooseCountry">Vybrať krajinu</string>
   <string name="position_on_map_descr">Výber umiestnenia ukazovateľa pozície na mape</string>
   <string name="position_on_map">Ukazovateľ pozície</string>
-  <string name="map_specify_point">Nastaviť ako cieľ</string>
+  <string name="map_specify_point">Určiť ako cieľ</string>
   <string name="show_view_angle_descr">Uhol pohľadu zobrazenia podľa kompasu</string>
   <string name="show_view_angle">Zobraziť uhol pohľadu</string>
   <string name="stop_navigation">Zmazať cieľ</string>
@@ -890,7 +901,7 @@
   <string name="search_address_building_option">Popisné číslo</string>
   <string name="search_address_street_option">Pretínajúca ulica</string>
   <string name="search_tabs_location">Pozícia</string>
-  <string name="context_menu_item_navigate_point">Nastaviť ako cieľ</string>
+  <string name="context_menu_item_navigate_point">Určiť ako cieľ</string>
   <string name="context_menu_item_add_favorite">Pridať medzi Obľúbené body</string>
   <string name="context_menu_item_update_map">Aktualizovať mapu</string>
   <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
@@ -903,7 +914,7 @@
   <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
   <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
   <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
-  <string name="favourites_context_menu_navigate">Nastaviť ako cieľ</string>
+  <string name="favourites_context_menu_navigate">Určiť ako cieľ</string>
   <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
   <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
   <string name="favourites_remove_dialog_msg">Odstrániť obľúbený bod \'%s\'?</string>
