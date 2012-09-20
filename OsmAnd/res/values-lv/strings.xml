@@ -978,4 +978,10 @@
 	<string name="osmand_plus_short_description_80_chars">AsmAnd ir atvērtā koda navigācijas aplikācija bezsaistes un tiešsaistes kartēm</string>
 	<string name="filterpoi_activity">Izveidot POI filtru</string>
 	<string name="select_navigation_mode">Izvēlēties transporta veidu</string>
+	<string name="day_night_info_description">Ausma: %1$s\nSaulriets: %2$s</string>
+	<string name="day_night_info">Dienas/nakts info</string>
+	<string name="map_widget_day_night">Dienas/nakts karte</string>
+	<string name="map_widget_vector_attributes">Renderēšanas attribūti:</string>
+	<string name="map_widget_renderer">Renderēšnanas stils</string>
+	<string name="int_continuosly">Nepārtraukti</string>
 	</resources>
