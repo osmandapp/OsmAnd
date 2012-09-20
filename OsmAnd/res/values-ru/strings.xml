@@ -694,7 +694,7 @@
   <string name="search_button">Поиск</string>
   <string name="search_activity">Поиск</string>
   <string name="searchpoi_activity">Выберите POI</string>
-  <string name="search_POI_level_btn">Найти еще</string>
+  <string name="search_POI_level_btn">Найти ещё</string>
   <string name="incremental_search_city">Выберите город. Введите 3 первых буквы, чтобы найти деревню, 2 цифры - индекс.</string>
   <string name="incremental_search_street">Выберите улицу</string>
   <string name="incremental_search_building">Выберите дом</string>
@@ -1081,4 +1081,5 @@
     <string name="new_destination_point_dialog">Вы уже установили пункт назначения.</string>
     <string name="target_point">Пункт назначения %1$s</string>
     <string name="target_points">Цели</string>
+    <string name="tip_recent_changes_0_8_4_t">Изменения в 0.8.4 :</string>
     </resources>
