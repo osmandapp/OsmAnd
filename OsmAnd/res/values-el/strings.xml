@@ -218,7 +218,8 @@
 	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
 	<string name="left_side_navigation">Οδήγηση ﻿αριστερά</string>
 	<string name="left_side_navigation_descr">﻿Επιλέξτε για χώρες με κυκλοφορία αριστερά</string>
-	<string name="download_link_and_local_description">﻿Κάντε κλικ εδώ, για να κάνετε λήψη ή να ενημερώσετε δεδομένα χωρίς σύνδεση. \nΚλικ κάποιο υπάρχον στοιχείο για να δείτε περισσότερες λεπτομέρειες, πατήστε και κρατήστε πατημένο για να το απενεργοποιήσετε ή να το διαγράψετε. Τρέχοντα δεδομένα στη συσκευή (%1$s ελεύθερα):</string>
+	<string name="download_link_and_local_description">﻿Κάντε κλικ εδώ, για να κάνετε λήψη ή να ενημερώσετε δεδομένα χωρίς σύνδεση.
+\nΚλικ κάποιο υπάρχων στοιχείο για να δείτε περισσότερες λεπτομέρειες, πατήστε και κρατήστε πατημένο για να το απενεργοποιήσετε ή να το διαγράψετε. Τρέχοντα δεδομένα στη συσκευή (%1$s ελεύθερα):</string>
 	<string name="unknown_from_location">﻿Το σημείο εκκίνησης δεν έχει ακόμη καθορισθεί</string>
 	<string name="unknown_location">Η Θέση δεν είναι ακόμα γνωστή</string>
 	<string name="context_menu_item_directions">﻿Οδηγίες για εδώ</string>
@@ -523,7 +524,7 @@
 	<string name="default_buttons_save">Save</string>
 	<string name="menu_save_directions">Save directions</string>
 	<string name="local_index_upload_gpx_description">Ανεβάστε τα αρχεία GPX στη κοινότητα του OSM. Θα χρησιμοποιηθούν για τη βελτίωση του χάρτη.</string>
-	<string name="local_index_items_uploaded">%1$d of %2$d item(s) successfully uploaded.</string>
+	<string name="local_index_items_uploaded">%1$d από %2$d αντικείμενο(α) μεταφορτώθηκαν επιτυχώς.</string>
 	<string name="local_index_mi_upload_gpx">Send to OSM</string>
 	<string name="show_more_map_detail">Show more map detail</string>
 	<string name="show_more_map_detail_descr">Show some vector map detail (roads etc.) at lower zooms already</string>
@@ -543,11 +544,11 @@
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF,  %5$tR\nEnd time : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
-	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully deactivated.</string>
-	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
-	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully activated.</string>
+	<string name="local_index_items_backuped">%1$d από %2$d αντικείμενο(α) απενεργοποιήθηκαν επιτυχώς.</string>
+	<string name="local_index_items_deleted">%1$d από %2$d αντικείμενο(α) διαγράφηκαν επιτυχώς.</string>
+	<string name="local_index_items_restored">%1$d από %2$d αντικείμενο(α) ενεργοποιήθηκαν επιτυχώς.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
-	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
+	<string name="local_index_action_do">Πρόκειται να %1$s %2$s αντικείμενο(α). Συνέχεια?</string>
 	<string name="local_index_descr_title">Offline Data Manager</string>
 	<string name="local_index_mi_restore">Activate</string>
 	<string name="local_index_mi_backup">Deactivate</string>
@@ -735,7 +736,7 @@
 	<string name="daynight_descr">Choose day/night mode switching rule</string>
 	<string name="daynight">Day/night mode</string>
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
-	<string name="items_were_selected">{0} item(s) selected</string>
+	<string name="items_were_selected">{0} αντικείμενο(α) επιλέχτηκαν</string>
 	<string name="filter_existing_indexes">Filter downloaded</string>
 	<string name="deselect_all">Deselect all</string>
 	<string name="select_all">Select all</string>
