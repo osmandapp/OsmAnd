@@ -3,7 +3,7 @@
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
   <string name="offline_edition_descr">Usa sempre la modifica offline</string>
-  <string name="tip_recent_changes_0_7_1_t">Cambiamenti nella versione 0.7.1:
+  <string name="tip_recent_changes_0_7_1_t">"Cambiamenti nella versione 0.7.1:
 \n\t- Modifica offline dei PDI
 \n\t- Opzione per il Live Tracking - invia le coordinate periodicamente ad un servizio web (leggi come impostare il tuo servizio web negli articoli dell\'HowTo)
 \n\t- Mostra la traccia registrata attuale sulla mappa
@@ -11,7 +11,7 @@
 \n\t- Nuovo avviso vocale \'Ricalcolo percorso\'
 \n\t- Indicazione visiva di una svolta imminente entro 100 metri tramite il cambio del colore della freccia della direzione
 \n\t- Viene mostrato in verde e blu scuro nella schermata di Download dei file di indice disattivati
-\n\t- Altri cambiamenti</string>
+\n\t- Altri cambiamenti "</string>
   <string name="update_poi_does_not_change_indexes">I cambiamenti dei PDI all\'interno dell\'applicazione non si riflettono nelle mappe scaricate, i cambiamenti sono salvati in un file locale.</string>
   <string name="local_openstreetmap_uploading">Caricando…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PDI/Gli errori sono stati caricati</string>
@@ -31,10 +31,10 @@
   <string name="live_monitoring_url">Indirizzo internet per il Live Tracking</string>
   <string name="gpx_monitoring_disabled_warn">Per favore abilita \'Registrazione della traccia in GPX file\' impostazioni.</string>
   <string name="show_current_gpx_title">Mostra la traccia corrente</string>
-  <string name="tip_recent_changes_0_7_0_t">Cambiamenti nella versione 0.7.0:
+  <string name="tip_recent_changes_0_7_0_t">"Cambiamenti nella versione 0.7.0:
 \n\t- Articoli di Wikipedia accessibili offline
 \n\t- Aggiornate le mappe
-\n\t- Altre funzionalità minori</string>
+\n\t- Altre funzionalità minori "</string>
   <string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$s download %2$s e non supporta gli articoli offline di Wikipedia.</string>
   <string name="free_version_title">Versione gratuita</string>
   <string name="poi_context_menu_showdescription">Mostra la descrizione dei POI</string>
@@ -86,7 +86,7 @@
 \n\t- Massicci cambiamenti dell\'aspetto
 \n\t- Informazioni sull\'altitudine
 \n\t- Nuove lingue (Vietnamita, Polacco)
-\n\t- Altre piccole funzionalità"</string>
+\n\t- Altre piccole funzionalità "</string>
   <string name="use_transparent_map_theme_descr">Usa controlli trasparenti</string>
   <string name="use_transparent_map_theme">Tema trasparente</string>
   <string name="native_library_not_supported">La libreria nativa non è supportata da questo dispositivo.</string>
@@ -143,7 +143,7 @@
   <string name="search_position_map_view">Ultima vista mappa</string>
   <string name="select_search_position">Cerca vicino a:</string>
   <string name="context_menu_item_search">Cerca</string>
-  <string name="tip_recent_changes_0_6_7_t">Modifiche recenti versione 0.6.7:
+  <string name="tip_recent_changes_0_6_7_t">"Modifiche recenti versione 0.6.7:
 \n\t- Manager dati offline (scaricare, cancellare e backup di dati offline direttamente da OsmAnd)
 \n\t- Punti e gruppi Preferiti (categorizza, cancella, gestisci preferiti)
 \n\t- GPX Explorer nella applicazione (vedere percorsi, distanze, velocità, elevazione, ecc.)
@@ -153,7 +153,7 @@
 \n\t- Invio di file GPX alla comunità OSM (http://download.osmand.net/gpx/)
 \n\t- Migliorie al rendering dei vettori
 \n\t- Migliorie al motore TTS (distanza esatta, miglia abilitate)
-\n\t- Correzione di errori vari</string>
+\n\t- Correzione di errori vari "</string>
   <string name="save_route_dialog_title">Salva il percorso in formato GPX</string>
   <string name="route_successfully_saved_at">Percorso salvato come \'%1$s\'.</string>
   <string name="filename_input">Nome file: </string>
@@ -213,13 +213,13 @@
   <string name="trace_rendering">Informazioni diagnostiche disegno</string>
   <string name="trace_rendering_descr">Visualizza le performance del disegno a scopo di debug</string>
   <string name="tip_recent_changes">Modifiche recenti</string>
-  <string name="tip_recent_changes_0_6_6_t">Modifiche alla 0.6.6:
+  <string name="tip_recent_changes_0_6_6_t">"Modifiche alla 0.6.6:
 \n\t- motore Text To Speech per la navigazione vocale
 \n\t- Renderer mappa più dettagliato
 \n\t- Mappa mondiale base con il pacchetto app
 \n\t- Migliorie routing offline (sempre sperimentale)
 \n\t- Opzioni navigazione GPX
-\n\t- UI aggiornamento e correzione errori</string>
+\n\t- UI aggiornamento e correzione errori "</string>
   <string name="voice_not_use">Non usare</string>
   <string name="voice_not_specified">Nessuna</string>
   <string name="installing_new_resources">Scompattando nuovi dati…</string>
@@ -538,7 +538,7 @@
   <string name="update_poi_error_local">Errore nell\'aggiornamento degli indici locali</string>
   <string name="update_poi_error_loading">Errore durante il caricamento dati dal server</string>
   <string name="update_poi_no_offline_poi_index">Non ci sono PDI in questa zona</string>
-  <string name="update_poi_is_not_available_for_zoom">"L\'aggiornamento PDI non è disponibile a questo zoom "</string>
+  <string name="update_poi_is_not_available_for_zoom">L\'aggiornamento dei PDI non è disponibile per livelli di zoom bassi</string>
   <string name="context_menu_item_update_poi">Aggiornare PDI</string>
   <string name="context_menu_item_update_map_confirm">Siete sicuri di aggiornare i dati locali via internet?</string>
   <string name="search_history_city">Città:\n {0}</string>
@@ -809,11 +809,11 @@
   <string name="native_rendering">Rendering nativo</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Prova i comandi vocali</string>
-  <string name="tip_recent_changes_0_7_2_t">"Cambiamenti nella 0.7.2 : 
-\n\t- Disegno nativo per tutti i dispositivi
+  <string name="tip_recent_changes_0_7_2_t">"Cambiamenti nella 0.7.2 :
+\n\n\t- Disegno nativo per tutti i dispositivi
 \n\t- Creazione offline dei PDI
-\n\t- Accessibilità 
-\n\t- Svariate correzioni di errori"</string>
+\n\t- Accessibilità
+\n\t- Svariate correzioni di errori "</string>
   <string name="send_files_to_osm">Mandare i file GPX a OSM?</string>
   <string name="gpx_visibility_txt">Visibilità</string>
   <string name="gpx_tags_txt">Etichette</string>
@@ -927,7 +927,7 @@
 \n\t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
 \n\t* Migliorata la voce guida sulle autostrade
 \n\t* Plugin per i parcheggi (\'Dov\'e\' la mia macchina?\')
-\n\t* Abilita/disabilita il widget per i monitoraggio"</string>
+\n\t* Abilita/disabilita il widget per i monitoraggio "</string>
   <string name="gpxup_public">Pubblico</string>
   <string name="gpxup_identifiable">Identificabile</string>
   <string name="gpxup_trackable">Tracciabile</string>
@@ -975,10 +975,10 @@
   <string name="show_speed_limits">Mostra limiti di velocità</string>
   <string name="avoid_toll_roads">Evita strade a pedaggio</string>
   <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2:
-\n\t* Migliorato il calcolo dei percorsi
-\n\t* Widget dinamici per le mappe
-\n\t* Impostazioni della mappa spostate nello schermo della mappa
-\n\t* Pulsante blocco schermo con servizi di registrazione"</string>
+\n* Migliorato il calcolo dei percorsi
+\n* Widget dinamici per le mappe
+\n* Impostazioni della mappa spostate nello schermo della mappa
+\n* Pulsante blocco schermo con servizi di registrazione\n* Migliorate la scrittura in arabo e kannada e lingue RTL "</string>
   <string name="map_widget_top_text">Nome della strada</string>
   <string name="map_widget_config">Configurazione</string>
   <string name="map_widget_map_select">Selezione della mappa</string>
@@ -1034,19 +1034,19 @@
 <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
 <string name="int_continuosly">Continuo</string>
 <string name="email">e-mail</string>
-<string name="tip_rotation_switching_t_v2">﻿\tTu puoi cambiare, se e come vuoi, la rotazione della visualizzazione della mappa cliccando ripetutamente sull\'icona della bussola nello schermo della mappa.
+<string name="tip_rotation_switching_t_v2">"﻿\tTu puoi cambiare, se e come vuoi, la rotazione della visualizzazione della mappa cliccando ripetutamente sull\'icona della bussola nello schermo della mappa.
 \n\tLe scelte sono:
 \n\t\'Non ruotare (nord in alto)\' - La mappa non sarà ruotata. Il Nord sarà sempre in alto
 \n\t\'Nella direzione del movimento\' - La mappa sarà sempre allineata alla vostra direzione
-\n\t\'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo</string>
-<string name="tip_day_night_mode_t_v2">\tL\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).
+\n\t\'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo "</string>
+<string name="tip_day_night_mode_t_v2">"\tL\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).
 \n\tI colori notturni sono più sicuri per la guida notturna.
 \n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo...\' -&gt;\'Giorno/notte mappa\'.
 \n\tLe scelte sono:
 \n\t\'Alba/Tramonto\' - automaticamente, in base alla posizione del sole (preimpostato)
 \n\t\'Day\' - usa sempre il modo diurno
 \n\t\'Night\' - usa sempre il modo notturno
-\n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente)</string>
+\n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente) "</string>
 <string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\' in visualizzazione mappa.
 \n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
 \n\tOsmAnd supporta anche sorgenti su misura.
@@ -1055,51 +1055,45 @@
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando creai un itinerario.
 </string>
 <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
-<string name="osmand_long_description_1000_chars">
-" OsmAnd (OSM Automatizzata Navigazione Direzioni)
-
-\n\tOsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva. 
-
-\n\tAlcune delle caratteristiche principali: 
-\n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) 
-\n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione 
-\n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma 
-\n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile 
-\n\t- Ricerca offline per indirizzi e luoghi (PDI) 
-\n\t- Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità - Allineamento della mappa in base alla direzione o alla bussola 
-\n\t
-Limitazioni di questa versione gratuita di OsmAnd: 
-\n\t- Numero di mappe scaricabili limitato 
-\n\t- Non funziona l\'accesso ai PDI offline di Wikipedia 
-\n\t
-\n\tOsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net"</string>
+<string name="osmand_long_description_1000_chars">"  OsmAnd (OSM Automatizzata Navigazione Direzioni)\n\n\n\tOsmAnd è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.
+\n\n\n\tAlcune delle caratteristiche principali:
+\n\n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)
+\n\n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione
+\n\n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma
+\n\n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
+\n\n\t- Ricerca offline per indirizzi e luoghi (PDI)
+\n\n\t- Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - Commutazione opzionale automatica della vista giorno/notte - Zoom automatico opzionale in base alla velocità - Allineamento della mappa in base alla direzione o alla bussola
+\n\n\t Limitazioni di questa versione gratuita di OsmAnd:
+\n\n\t- Numero di mappe scaricabili limitato
+\n\n\t- Non funziona l\'accesso ai PDI offline di Wikipedia
+\n\n\t
+\n\tOsmAnd è attivamente in fase di sviluppo e il nostri progetto e il suo ulteriore progresso si basa su contribuiti finanziari per lo sviluppo e la prova di nuove funzionalità. Vi preghiamo di considerare l\'acquisto di OsmAnd+ o il finanziamento di specifiche nuove funzioni o una donazione generica su osmand.net "</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto per la navigazione con mappe online e offline</string>
-<string name="osmand_plus_long_description_1000_chars">
-OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatizzata Navigazione Direzioni)
 \n\t
 \n\tOsmAnd+ è una applicazione di navigazione, a sorgente aperto, con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a tasselli) posso essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità del calcolo dell\'itinerario online che offline compreso la voce guida curva per curva.
 \n\t
-\n\tOsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. 
+\n\tOsmANd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti.
 \n\t
-\n\tAlcune delle caratteristiche principali: 
-\n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile) 
-\n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione 
-\n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma 
+\n\tAlcune delle caratteristiche principali:
+\n\t- Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a tasselli in una cartella selezionabile)
+\n\t- Mappe vettoriali offline compatte per tutto il mondo intero a disposizione
+\n\t- Scarica le mappe delle nazioni o delle regioni direttamente dal programma
 \n\t- WIkipedia Offline Wikipedia (scarica i PDI Wikipedia), ottimo per la visualizzazione
-\n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile 
-\n\t- Ricerca offline per indirizzi e luoghi (PDI) 
-\n\t- Calcolo del percorso per brevi distanze (sperimentale) 
-\n\t- Modalità automobile, bicicletta e pedonale con: 
-\n\t- commutazione opzionale automatica della vista giorno/notte 
-\n\t- zoom automatico opzionale in base alla velocità 
+\n\t- Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
+\n\t- Ricerca offline per indirizzi e luoghi (PDI)
+\n\t- Calcolo del percorso per brevi distanze (sperimentale)
+\n\t- Modalità automobile, bicicletta e pedonale con:
+\n\t- commutazione opzionale automatica della vista giorno/notte
+\n\t- zoom automatico opzionale in base alla velocità
 \n\t- allineamento della mappa in base alla direzione o alla bussola
-\n\t- opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS</string>
-<string name="tip_recent_changes_0_8_3_t">Cambiamenti nella 0.8.3:
-\n\t* Migliorata la guida dell\'itinerario
-\n\t* Opzione evita autostrade
-\n\t* Pista ciclabile=visualizza traccia
-\n\t* Migliore aspetto interfaccia utente (icone)
-\n\t* Alcune correzioni di errori</string>
+\n\t- opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS "</string>
+<string name="tip_recent_changes_0_8_3_t">"Cambiamenti nella 0.8.3:
+\n* Migliorata la guida dell\'itinerario
+\n* Opzione evita autostrade
+\n* Pista ciclabile=visualizza traccia
+\n* Migliore aspetto interfaccia utente (icone)
+\n* Alcune correzioni di errori "</string>
 <string name="snap_to_road_descr">Blocca la posizione sulle strade durante la navigazione</string>
 <string name="snap_to_road">Blocca sulle strade</string>
 <string name="avoid_motorway">Evita le autostrade</string>
