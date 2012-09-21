@@ -1126,5 +1126,5 @@ Fonctionnalités principales :
     <string name="poi_filter_entertainment">Divertissements</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="poi_filter_sightseeing">Point de vue</string>
-    <string name="poi_filter_accomodation">Logement</string>
+    <string name="poi_filter_accomodation">Hébergement</string>
     </resources>
