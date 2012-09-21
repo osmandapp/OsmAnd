@@ -93,7 +93,7 @@
 \n\t- Показывать текущий записываемый трек на карте
 \n\t- Другие изменения "</string>
   <string name="update_poi_does_not_change_indexes">Изменение POI в приложении не меняет POI загруженные из интернета, однако все изменения сохраняются в локальный файл.</string>
-  <string name="local_openstreetmap_uploading">Выгрузка...</string>
+  <string name="local_openstreetmap_uploading">Выгрузка…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs были выгружены в OpenStreetMap</string>
   <string name="local_openstreetmap_uploadall">Выгрузить все</string>
   <string name="local_openstreetmap_items">" "</string>
@@ -310,8 +310,7 @@
 \n\tДля добавления POI используйте \'Добавить POI\' в контекстном меню карты.
 \n\tЕсли вы нашли неточность на карте, то можете сообщить об этом сообществу OpenStreetMap.
 \n\tНе забывайте, что для работы этих функций вам понадобится Интернет.</string>
-  <string name="create_poi_link_to_osm_doc">" "<u>Интернет OSM</u> классификация"</string>
-  <string name="error_doing_search">Ошибка автономного поиска</string>
+  <string name="create_poi_link_to_osm_doc"><u>Интернет OSM</u> классификация</string><string name="error_doing_search">Ошибка автономного поиска</string>
   <string name="search_offline_geo_error">Невозможно разобрать запрос: \'%s\'</string>
   <string name="search_osm_offline">Поиск по адресу в локальных картах</string>
   <string name="system_locale">Системная</string>
@@ -329,7 +328,7 @@
 \n\tНажатие поиск на карте открывает поиск. После поиска имеются 2 варианта : \'Идти к\' или \'Показать на карте\'. "</string>
   <string name="tip_map_context_menu">Контесктное меню карты</string>
   <string name="tip_map_context_menu_t">"\tКонтестное меню карты доступно по долгому нажатию на карту или при нажатии кнопки трекбола.
-\n\tПосле этого появится окно с координатами, при нажатии на него откроется меню, при долгом нажатии - окно пропадет. Также контекстное меню доступно по кнопке Меню на карте.
+\n\tПосле этого появится окно с координатами, при нажатии на него откроется меню, при долгом нажатии - окно пропадёт. Также контекстное меню доступно по кнопке Меню на карте.
 \n\tДействия в этом меню зависят от текущей выбранной точки (центр карты). "</string>
   <string name="tip_initial">Советы по использованию</string>
   <string name="tip_initial_t">"\tOsmAnd - навигационное приложение с большим количеством функций.
@@ -374,10 +373,10 @@
   <string name="amenity_type_sustenance">Еда</string>
   <string name="amenity_type_tourism">Туризм</string>
   <string name="amenity_type_transportation">Транспорт</string>
-  <string name="indexing_address">Индексируется адресация</string>
-  <string name="indexing_map">Индексируются карты</string>
-  <string name="indexing_poi">Индексируются POI</string>
-  <string name="indexing_transport">Индексируется транспорт</string>
+  <string name="indexing_address">Индексируется адресация…</string>
+  <string name="indexing_map">Индексируются карты…</string>
+  <string name="indexing_poi">Индексируются POI…</string>
+  <string name="indexing_transport">Индексируется транспорт…</string>
   <string name="input_output_error">Произошла ошибка ввода/вывода</string>
   <string name="km">км</string>
   <string name="km_h">км/ч</string>
@@ -413,7 +412,7 @@
   <string name="daynight_mode_day">Дневной</string>
   <string name="daynight_mode_night">Ночной</string>
   <string name="daynight_mode_auto">Восход/закат</string>
-  <string name="daynight_mode_sensor">Датчик освещенности</string>
+  <string name="daynight_mode_sensor">Датчик освещённости</string>
   <string name="daynight_descr">Выберите режим переключения дневного/ночного вида карты</string>
   <string name="daynight">Дневной/ночной режим</string>
   <string name="download_files_question">Загрузить {0} файл(ов) ({1} MB)?</string>
@@ -434,7 +433,7 @@
   <string name="select_max_zoom_preload_area">Выберите максимальный масштаб для загрузки видимой области</string>
   <string name="maps_could_not_be_downloaded">Выбранная карта не может быть загружена</string>
   <string name="continuous_rendering">Непрерывный рендеринг</string>
-  <string name="continuous_rendering_descr">Выберите способ как отрисовывать карту</string>
+  <string name="continuous_rendering_descr">Выберите способ отрисовки карты</string>
   <string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>
   <string name="rendering_out_of_memory">Ошибка : недостаточно памяти процесса, чтобы отобразить карту</string>
   <string name="show_point_options">Контекстное меню</string>
@@ -442,13 +441,13 @@
   <string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
   <string name="renderers">Стиль отрисовки векторной карты</string>
   <string name="renderers_descr">Выберите стиль для рендеринга карты</string>
-  <string name="poi_context_menu_website">Просмотреть вебсайт POI</string>
+  <string name="poi_context_menu_website">Просмотреть веб-сайт POI</string>
   <string name="poi_context_menu_call">Показать телефон POI</string>
-  <string name="website">вебсайт</string>
+  <string name="website">веб-сайт</string>
   <string name="phone">телефон</string>
   <string name="download_type_to_filter">фильтровать</string>
   <string name="use_high_res_maps">Дисплей высокого разрешения</string>
-  <string name="use_high_res_maps_descr">Не растягивать (с помутнением) растровые карты на дисплеях высокого разрешения</string>
+  <string name="use_high_res_maps_descr">Не растягивать (с размытием) растровые карты на дисплеях высокого разрешения</string>
   <string name="download_files">Загрузить</string>
   <string name="context_menu_item_search_transport">Искать транспорт</string>
   <string name="transport_context_menu">Искать транспорт на остановке</string>
@@ -463,7 +462,7 @@
   <string name="layer_gpx_layer">Трек GPX…</string>
   <string name="error_reading_gpx">Ошибка чтения данных GPX</string>
   <string name="vector_data">Локальные векторные карты</string>
-  <string name="point_on_map">Координаты\n Ш %1$.5f Д %2$.5f</string>
+  <string name="point_on_map">Координаты:\n Ш %1$.5f\n Д %2$.5f</string>
   <string name="osb_bug_name">Ошибка</string>
   <string name="poi_context_menu_modify">Редактировать POI</string>
   <string name="poi_context_menu_delete">Удалить POI</string>
@@ -480,12 +479,12 @@
   <string name="import_fav">Импортировать</string>
   <string name="export_fav">Экспортировать</string>
   <string name="error_occurred_loading_gpx">Произошла ошибка при загрузке GPX</string>
-  <string name="send_report">Отправить отчет</string>
-  <string name="none_region_found">Не найдены локальные векторные карты высокой детализации. Загрузите их из интернета.</string>
+  <string name="send_report">Отправить отчёт</string>
+  <string name="none_region_found">Не найдены локальные векторные карты высокой детализации. Загрузите их из Интернета.</string>
   <string name="poi_namefinder_query_empty">Введите запрос для поиска POI</string>
   <string name="any_poi">Все</string>
   <string name="layer_transport_route">Маршрут на транспорте</string>
-  <string name="thanks_yandex_traffic">Спасибо Яндексу за то, что они предоставили информацию о пробках. Установите Яндекс как домашнюю страницу.</string>
+  <string name="thanks_yandex_traffic">Спасибо Яндексу за предоставление информации о пробках. Установите Яндекс как домашнюю страницу.</string>
   <string name="layer_yandex_traffic">Яндекс.Пробки</string>
   <string name="layer_route">Маршрут</string>
   <string name="layer_favorites">Избранные</string>
@@ -512,7 +511,7 @@
   <string name="background_service_provider">Источник позиционирования</string>
   <string name="background_router_service_descr">Запускает OsmAnd в фоновом режиме для отслеживания местоположения при выключенном экране</string>
   <string name="background_router_service">Сервис навигации</string>
-  <string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включен, если отключить позиционирование, он перестанет вести по маршруту.</string>
+  <string name="off_router_service_no_gps_available">Сервис маршрутизации OsmAnd включён, если отключить позиционирование, он перестанет вести по маршруту.</string>
   <string name="routing_settings_descr">Настройки навигации</string>
   <string name="routing_settings">Навигация</string>
   <string name="hide_poi_filter">Скрыть фильтр</string>
@@ -530,8 +529,8 @@
   <string name="sd_unmounted">SD-накопитель недоступен.
 \nВы не сможете работать с картой.</string>
   <string name="sd_mounted_ro">SD-накопитель доступен только для чтения.
-\nВы не сможете загружать карты из интернета.</string>
-  <string name="unzipping_file">Файл распаковывается</string>
+\nВы не сможете загружать карты из Интернета.</string>
+  <string name="unzipping_file">Файл распаковывается…</string>
   <string name="route_tr">Поверните направо и двигайтесь</string>
   <string name="route_tshr">Поверните резко направо и двигайтесь</string>
   <string name="route_tslr">Поверните направо и двигайтесь</string>
@@ -584,16 +583,16 @@
   <string name="clear_all">Очистить все</string>
   <string name="history">История</string>
   <string name="uploading_data">Загрузка данных…</string>
-  <string name="uploading">Загрузка</string>
+  <string name="uploading">Загрузка…</string>
   <string name="search_nothing_found">По вашему запросу ничего не найдено</string>
-  <string name="searching">Поиск</string>
+  <string name="searching">Поиск…</string>
   <string name="searching_address">Поиск адреса…</string>
   <string name="search_osm_nominatim">Поиск адреса в OSM Nominatim</string>
   <string name="hint_search_online">Город, улица, дом</string>
   <string name="search_offline_address">Локальный</string>
   <string name="search_online_address">Интернет</string>
   <string name="max_level_download_tile">Уровень детализации</string>
-  <string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из интернета</string>
+  <string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из Интернета</string>
   <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч. %3$d мин.</string>
   <string name="router_service_descr">Выберите сервис для прокладки маршрута</string>
   <string name="router_service">Прокладка маршрута</string>
@@ -603,9 +602,9 @@
   <string name="address">Адрес</string>
   <string name="download_index_success">Локальная карта успешно загружена</string>
   <string name="error_io_error">Произошла ошибка ввода/вывода</string>
-  <string name="downloading_file">Загрузка файла</string>
+  <string name="downloading_file">Загрузка файла…</string>
   <string name="downloading">Загрузка…</string>
-  <string name="downloading_list_indexes">Загружается список доступных регионов</string>
+  <string name="downloading_list_indexes">Загружается список доступных регионов…</string>
   <string name="list_index_files_was_not_loaded">Невозможно получить список доступных регионов с osmand.net</string>
   <string name="show_poi_on_map">Показать на карте</string>
   <string name="fav_points_edited">Отредактирована избранная точка</string>
@@ -619,18 +618,18 @@
   <string name="gps_status_app_not_found">Приложение \'Статус GPS\' не найдено. Искать на маркете?</string>
   <string name="show_gps_status">Статус GPS</string>
   <string name="opening_hours">Рабочие часы</string>
-  <string name="opening_changeset">Открытие пакета правок</string>
-  <string name="closing_changeset">Закрытие пакета правок</string>
-  <string name="commiting_node">Сохранение объекта</string>
-  <string name="loading_poi_obj">Загрузка POI</string>
-  <string name="auth_failed">Авторизация не прошла</string>
+  <string name="opening_changeset">Открытие пакета правок…</string>
+  <string name="closing_changeset">Закрытие пакета правок…</string>
+  <string name="commiting_node">Сохранение объекта…</string>
+  <string name="loading_poi_obj">Загрузка POI…</string>
+  <string name="auth_failed">Авторизация не произошла</string>
   <string name="failed_op">, ошибка</string>
-  <string name="converting_names">Конвертация местных/английских имен...</string>
+  <string name="converting_names">Конвертация местных/английских имён…</string>
   <string name="loading_streets_buildings">Загружаются улицы и дома…</string>
   <string name="loading_postcodes">Загружаются почтовые индексы…</string>
   <string name="loading_streets">Загружаются улицы…</string>
   <string name="loading_cities">Загружаются города…</string>
-  <string name="loading">Загрузка...</string>
+  <string name="loading">Загрузка…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Ошибка сохранения пути в GPX файл</string>
   <string name="error_calculating_route">Ошибка прокладки маршрута</string>
@@ -641,23 +640,23 @@
   <string name="invalid_locations">Неправильные координаты</string>
   <string name="go_back_to_osmand">Вернуться к карте OsmAnd</string>
   <string name="close">Закрыть</string>
-  <string name="loading_data">Загрузка данных...</string>
+  <string name="loading_data">Загрузка данных…</string>
   <string name="reading_indexes">Чтение локальных данных…</string>
   <string name="previous_run_crashed">Приложение завершилось некорректно. Лог-файл в {0}. Сообщите разработчику об ошибке и приложите лог-файл.</string>
   <string name="saving_gpx_tracks">Сохранение треков GPX на SD…</string>
   <string name="finished_task">Окончен</string>
   <string name="reload_indexes_descr">Перечитать локальные векторные карты с SD</string>
   <string name="reload_indexes">Перечитать локальные данные</string>
-  <string name="download_indexes_descr">Загрузить или обновить карты для локального использования из интернета</string>
+  <string name="download_indexes_descr">Загрузить или обновить карты для локального использования из Интернета</string>
   <string name="download_indexes">Загрузить локальные данные</string>
-  <string name="use_online_routing_descr">Использовать интернет-сервис для прокладки маршрута</string>
-  <string name="use_online_routing">Online маршрутизация</string>
+  <string name="use_online_routing_descr">Использовать Интернет-сервис для прокладки маршрута</string>
+  <string name="use_online_routing">Онлайн маршрутизация</string>
   <string name="user_password_descr">Указать пароль для работы с OSM</string>
   <string name="user_password">Пароль</string>
   <string name="osm_settings_descr">Установка логина/пароля OpenStreetMap</string>
   <string name="monitor_preferences_descr">Включение мониторинга, установка интервала сохранения</string>
   <string name="data_settings_descr">Настройка данных: язык, обновление данных</string>
-  <string name="map_preferences_descr">Настройка источника, параметров карты, доступа в Интернет</string>
+  <string name="map_preferences_descr">Настройка источника, параметров карты, доступа в Интернет, ориентации экрана</string>
   <string name="data_settings">Данные</string>
   <string name="osm_settings">Редактирование OSM</string>
   <string name="auto_zoom_map_descr">Автоматически изменять масштаб карты при изменении скорости</string>
@@ -665,7 +664,7 @@
   <string name="additional_settings">Дополнительные настройки</string>
   <string name="settings">Настройки</string>
   <string name="save_current_track_descr">Сохранить текущий трек на SD</string>
-  <string name="save_current_track">Сохранить трек</string>
+  <string name="save_current_track">Сохранить GPX трек</string>
   <string name="save_track_interval_descr">Указать интервал сохранения точек трека</string>
   <string name="save_track_interval">Интервал сохранения</string>
   <string name="monitor_preferences">Мониторинг</string>
@@ -699,11 +698,11 @@
   <string name="map_view_3d_descr">Включить 3D вид для карты</string>
   <string name="map_view_3d">3D вид</string>
   <string name="show_poi_over_map_description">Показывать слой POI</string>
-  <string name="show_poi_over_map">POI</string>
-  <string name="map_tile_source_descr">Загружать недостающие части карты из</string>
+  <string name="show_poi_over_map">Отображать POI</string>
+  <string name="map_tile_source_descr">Выберите источник онлайн карт или кэшированных частей карты</string>
   <string name="map_tile_source">Растровые карты</string>
   <string name="map_source">Источник карты</string>
-  <string name="use_internet">Интернет</string>
+  <string name="use_internet">Использовать Интернет</string>
   <string name="show_location">Показать место</string>
   <string name="map_preferences">Карта</string>
   <string name="settings_activity">Настройки</string>
@@ -718,7 +717,7 @@
   <string name="search_activity">Поиск</string>
   <string name="searchpoi_activity">Выберите POI</string>
   <string name="search_POI_level_btn">Найти ещё</string>
-  <string name="incremental_search_city">Выберите город. Введите 3 первых буквы, чтобы найти деревню, 2 цифры - индекс.</string>
+  <string name="incremental_search_city">Выберите город. Введите 3 и более первые буквы, чтобы найти город, 2 цифры - индекс.</string>
   <string name="incremental_search_street">Выберите улицу</string>
   <string name="incremental_search_building">Выберите дом</string>
   <string name="choose_available_region">Выберите регион из списка</string>
@@ -736,7 +735,7 @@
   <string name="navigate_point_format_D">ГГГ.ГГГГ</string>
   <string name="navigate_point_format_DM">ГГГ ММ.МММММ</string>
   <string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
-  <string name="search_shown_on_map">Показать</string>
+  <string name="search_shown_on_map">Отобразить на карте</string>
   <string name="navigate_point_cancel">Отмена</string>
   <string name="search_address_top_text">Выберите адрес</string>
   <string name="search_address_region">Регион</string>
@@ -766,7 +765,7 @@
   <string name="favourites_remove_dialog_success">Точка {0} была успешно удалена из Избранных.</string>
   <string name="osb_add_dialog_title">Подробно опишите ошибку</string>
   <string name="osb_add_dialog_success">Спасибо, ваше замечание добавлено в базу</string>
-  <string name="osb_add_dialog_error">Произошла ошибка. Описание не было создано</string>
+  <string name="osb_add_dialog_error">Произошла ошибка: описание не было создано</string>
   <string name="osb_comment_dialog_title">Добавление коментария к Open Street Bug</string>
   <string name="osb_comment_dialog_add_button">Добавить</string>
   <string name="osb_comment_dialog_success">Коментарий был успешно добавлен</string>
@@ -803,7 +802,7 @@
   <string name="edit_filter_delete_menu_item">Удалить</string>
   <string name="edit_filter_save_as_menu_item">Сохранить как</string>
   <string name="edit_filter_delete_dialog_title">Вы действительно хотите удалить текущий фильтр?</string>
-  <string name="edit_filter_delete_message">Фильтр {0} удален</string>
+  <string name="edit_filter_delete_message">Фильтр {0} удалён</string>
   <string name="edit_filter_create_message">Фильтр {0} создан</string>
   <string name="default_buttons_selectall">Выделить все</string>
   <string name="accessibility_mode">Режим специальных возможностей</string>
@@ -1015,15 +1014,15 @@
   <string name="bg_service_sleep_mode_on">Выключить↵\n фоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
-<string name="layer_map_appearance">Настройка экрана...</string>
+<string name="layer_map_appearance">Настройка экрана…</string>
 <string name="show_lanes">Показывать полосы движения</string>
 <string name="avoid_unpaved">Избегать просёлочные дороги</string>
 <string name="avoid_ferries">Избегать паромы</string>
-<string name="avoid_in_routing_title">Избегать при прокладке маршрута...</string>
+<string name="avoid_in_routing_title">Избегать при прокладке маршрута…</string>
 <string name="avoid_in_routing_descr">Избегать платных и просёлочных дорог, паромов</string>
 <string name="show_warnings_descr">Показывать ограничения скорости, камеры и искусственные неровности</string>
 <string name="map_widget_fluorescent">Флуоресцентные маршруты</string>
-<string name="show_warnings_title">Показывать сигналы...</string>
+<string name="show_warnings_title">Показывать сигналы…</string>
 <string name="map_widget_show_ruler">Линейка</string>
 <string name="map_widget_appearance">Разное:</string>
 <string name="map_widget_view_direction">Направление взгляда</string>
