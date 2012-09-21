@@ -199,7 +199,7 @@
 \n\t- Aktuálne sú tiež deaktivované súbory indexov vyznačené v Sťahovaniach ako tmavo zelené a tmavo modré
 \n\t- Iné zmeny "</string>
   <string name="update_poi_does_not_change_indexes">Zmeny POI v aplikácii neovplyvnia stiahnuté mapové súbory, zmeny sú uložené namiesto toho v lokálnom súbore.</string>
-  <string name="local_openstreetmap_uploading">Nahráva sa...</string>
+  <string name="local_openstreetmap_uploading">Nahráva sa…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/chyby boli nahraté</string>
   <string name="local_openstreetmap_uploadall">Nahrať všetko</string>
   <string name="local_openstreetmap_items">" "</string>
@@ -457,10 +457,10 @@
 \nMôžete to urobiť cez \'Kontextové menu mapy\' -&gt; \'Zdieľať umiestnenie\'.
 \nPotom vyberiete spôsob ako zdieľať Vaše umiestnenie. Na výber je: E-Mail, SMS alebo len skopírovanie súradníc umiestnenia do schránky. "</string>
   <string name="tip_favorites">Obľúbené body</string>
-  <string name="tip_favorites_t">Ak Vás unavuje hľadať miesta, ktoré často navštevujete, môžete si tieto miesta jednoducho pridať medzi Obľúbené a potom ich používať iba pár kliknutiami.
+  <string name="tip_favorites_t">"Ak Vás unavuje hľadať miesta, ktoré často navštevujete, môžete si tieto miesta jednoducho pridať medzi Obľúbené a potom ich používať iba pár kliknutiami.
 \n\tNa vytvorenie Obľúbeného bodu musíte ísť do Kontextového menu mapy, vybrať možnosť \'Pridať do obľúbených\' a zadať preň vhodné meno. Po uložení potom môžte k nemu jednoducho pristupovať cez \'Hlavné Menu\'-&gt;\'Obľúbené\'.
 \n\tDlhým kliknutím na obľúbený bod v ponuke \'Obľúbené\', sa môžete navigovať k tomuto bodu, upraviť alebo zmazať ho.
-\n\tNa zobrazenie všetkých Obľúbených bodov priamo na mape, môžete zapnúť vrstvu \'Obľúbené\' cez \'Kontextové menu mapy\' -&gt; \'Zobrazenie\'.</string>
+\n\tNa zobrazenie všetkých Obľúbených bodov priamo na mape, môžete zapnúť vrstvu \'Obľúbené\' cez \'Kontextové menu mapy\' -&gt; \'Zobrazenie\'. "</string>
   <string name="tip_osm_improve">Vylepšovanie Openstreetmap-u</string>
   <string name="tip_osm_improve_t">OsmAnd používa mapy založené na dátach Openstreetmap.org a nie je navrhnutý len pre cestovanie a navigovanie ale aj pre vylepšovanie a pomoc projektu Openstreetmap. Iba pár kliknutiami môžete jednoducho vytvoriť a nahrať nový bod záujmu(POI) alebo OSM chybu!
 \nAko prvé potrebujete zadať prihlasovacie informácie cez \'Nastavenia\'-&gt;\'Všeobecné nastavenia\'-&gt;\'OSM upravovanie\'.
@@ -485,15 +485,15 @@
   <string name="tip_navigation">Navigácia</string>
   <string name="tip_navigation_t">Na zapnutie navigácie musíte najskôr vybrať cieľový bod. Potom stlačte \'Menu\'-&gt;\'Pokyny\' na mape a vyberte typ navigovania.</string>
   <string name="tip_search">Vyhľadávanie</string>
-  <string name="tip_search_t">Môžete vyhľadať miesto priamo na mape alebo adresou, umiestnením, ako bod záujmu(POI) alebo vo forme obľúbeného bodu.
-\n\tStlačením \'Hľadať\' na mape sa otvorí vyhľadávanie. Tam máte 2 možnosti : \'Navigovať do\' alebo \'Zobraziť na mape\'.</string>
+  <string name="tip_search_t">"Môžete vyhľadať miesto priamo na mape alebo adresou, umiestnením, ako bod záujmu(POI) alebo vo forme obľúbeného bodu.
+\n\tStlačením \'Hľadať\' na mape sa otvorí vyhľadávanie. Tam máte 2 možnosti : \'Navigovať do\' alebo \'Zobraziť na mape\'. "</string>
   <string name="tip_map_context_menu">Kontextové menu</string>
-  <string name="tip_map_context_menu_t">\tKontextové menu mapy je dostupné dlhším držaním na mape alebo stlačením track ball tlačidla.
+  <string name="tip_map_context_menu_t">"\tKontextové menu mapy je dostupné dlhším držaním na mape alebo stlačením track ball tlačidla.
 \n\tPo kliknutí na zobrazený obdĺžnik so súradnicami sa zobrazí kontextové menu. Pre skrytie obdĺžnika ho dlhšie podržte. Kontextové menu je tiež dostupné pod tlačidlom \'Menu\' na mape.
-\n\tKontextové menu mapy pozostáva z akcií, ktoré používaju umiestnenie ako vstup.</string>
+\n\tKontextové menu mapy pozostáva z akcií, ktoré používaju umiestnenie ako vstup. "</string>
   <string name="tip_initial">Tipy a triky</string>
-  <string name="tip_initial_t">\tOsmAnd je navigačná aplikácia, ktorá ma rozmanité funkcie.
-\n\tNa jej lepšie využitie môžete využiť tipy a triky dostupné ako odkaz v hlavnej ponuke.</string>
+  <string name="tip_initial_t">"\tOsmAnd je navigačná aplikácia, ktorá ma rozmanité funkcie.
+\n\tNa jej lepšie využitie môžete využiť tipy a triky dostupné ako odkaz v hlavnej ponuke. "</string>
   <string name="next_button">Ďalší</string>
   <string name="previous_button">Predošlý</string>
   <string name="unit_of_length_descr">Zmena jednotiek dĺžky a rýchlosti</string>
@@ -762,7 +762,7 @@
   <string name="error_io_error">Vyskytla sa vstupno/výstupná chyba</string>
   <string name="downloading_file">Sťahuje sa súbor…</string>
   <string name="downloading">Sťahovanie…</string>
-  <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí</string>
+  <string name="downloading_list_indexes">Sťahuje sa zoznam dostupných oblastí…</string>
   <string name="list_index_files_was_not_loaded">Zoznam oblastí nebol prijatý z osmand.net.</string>
   <string name="select_index_file_to_download">Nič sa nenašlo. Ak nemôžete ručne nájsť Vašu oblasť, môžete si ju vlastnoručne vytvoriť (viď osmand.net).</string>
   <string name="show_poi_on_map">Zobraziť na mape</string>
@@ -798,7 +798,7 @@
   <string name="invalid_locations">Súradnice sú neplatné!</string>
   <string name="go_back_to_osmand">Ísť späť na OsmAnd mapu</string>
   <string name="close">Zavrieť</string>
-  <string name="loading_data">Načítavajú sa údaje</string>
+  <string name="loading_data">Načítavajú sa údaje…</string>
   <string name="reading_indexes">Načítavajú sa miestne údaje…</string>
   <string name="previous_run_crashed">Predošlé spustenie aplikácie malo kritickú chybu. Záznamový súbor je v {0}. Prosím, nahláste problém a priložte záznamový súbor.</string>
   <string name="saving_gpx_tracks">Ukladajú sa GPX stopy na SD kartu…</string>
