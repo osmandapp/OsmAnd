@@ -925,12 +925,7 @@
   <string name="show_cameras">Toon snelheidscontroles</string>
   <string name="show_speed_limits">Toon maximumsnelheden</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
-  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 : 
-   \n\t* Verbeterde routeberekening
-   \n\t* Dynamische kaartschermwidgets
-   \n\t* Kaart-instellingen verplaatst naar het kaartscherm
-   \n\t* Lockscreen knop met track logging services
-   \n\t* Verbeterde talen: Arabisch, Kannada en RNL talen</string>
+  <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:\n\t* Verbeterde routeberekening\n\t* Dynamische kaartschermwidgets\n\t* Kaart-instellingen verplaatst naar het kaartscherm\n\t* Lockscreen knop met track logging services\n\t* Verbeterde talen: Arabisch, Kannada en RNL talen</string>
   <string name="map_widget_top_text">Straatnaam</string>
   <string name="map_widget_config">Configuratie</string>
   <string name="map_widget_map_select">Kaartselectie</string>
@@ -1046,7 +1041,7 @@ Belangrijke eigenschappen:
 <string name="poi_filter_accomodation">Onderkomen</string>
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Bezienswaardigheden</string>
-<string name="tip_recent_changes_0_8_4_t">Wijzigingen 0.8.4 :</string>
+<string name="tip_recent_changes_0_8_4_t">Wijzigingen 0.8.4:</string>
     <string name="context_menu_item_last_intermediate_point">Zet laatste bestemmingspunt</string>
     <string name="context_menu_item_first_intermediate_point">Zet eerste bestemmingspunt</string>
     <string name="add_as_last_destination_point">Voeg toe als laatste tussenliggende punt</string>
