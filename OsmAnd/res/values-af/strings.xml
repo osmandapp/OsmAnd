@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -102,7 +102,7 @@
   <string name="select_plugin_to_activate">Druk op `n inlegmodule om dit aan of af te skakel. (Dit mag nodig wees om OsmAnd oor te begin.)</string>
   <string name="prefs_plugins_descr">Inlegmodule stel die spesialis toestand in werking en voorsien ekstra funksionaliteit soos teël kaarte, natrekking, sluimertoestand werking, toeganklikheidstellings, en andere.</string>
   <string name="prefs_plugins">Inlegmodule bestuurder</string>
-  <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlegmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlegmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter"</string>
+  <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlegmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlegmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter "</string>
   <string name="osm_editing_plugin_description">Wys stellings nodig vir OSM terugvoer bv. versamel / aanpas van OSM POI voorwerpe, oopmaak / komentaarlewer op OSM foute, en bydra van opgeneemde GPX dokumente (vereis OSM inlog besonderhede).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektor kaarte vertoon waarskynlik vinniger. Dit mag egter nie goed werk op sommige toestelle nie.</string>
   <string name="simulate_route_progression_manually">Boots roete vordering met die hand na</string>
@@ -112,7 +112,7 @@
   <string name="animate_routing">Bewegende navigasie</string>
   <string name="test_voice_prompts">Toets stemaanwysings</string>
   <string name="switch_to_raster_map_to_see">Geen aflyn vektor kaart teenwoordig vir hierdie ligging. Jy kan dit aflaai in instellings (Aflyn inligting), of skakel oor na internet kaarte.</string>
-  <string name="tip_recent_changes_0_7_2_t">"Veranderinge in 0.7.2:\n\t- inheemse lewering vir alle toestelle\n\t- aflyn interessante plek redigering\n\t- Toeganklikheid\n\t- baie foutregstellings"</string>
+  <string name="tip_recent_changes_0_7_2_t">"Veranderinge in 0.7.2:\n\t- inheemse lewering vir alle toestelle\n\t- aflyn interessante plek redigering\n\t- Toeganklikheid\n\t- baie foutregstellings "</string>
   <string name="send_files_to_osm">Stuur GPX lêers na OSM?</string>
   <string name="gpx_visibility_txt">Sigbaarheid</string>
   <string name="gpx_tags_txt">Naamplaatjies</string>
@@ -186,7 +186,7 @@
   <string name="use_fluorescent_overlays_descr">Gebruik helder kleure om paaie en roetes te vertoon</string>
   <string name="offline_edition">Aflyn redigering</string>
   <string name="offline_edition_descr">Gebruik altyd aflyn redigering</string>
-  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n\ t-aflyn interessante plek redigering\n\ t-Lewendige natrekking opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n\ t-Wys opgeneemde spoor op die kaart\n\ t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n\ t-Nieu-stem aankondiging \"Roete herbereken \'\n\ t-Optiese aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n\ t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n\ t-ander veranderinge"</string>
+  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige natrekking opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nieu-stem aankondiging \"Roete herbereken \'\n t-Optiese aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "</string>
   <string name="update_poi_does_not_change_indexes">Interessante plek veranderinge binne die toepassing raak nie afgelaaide kaart lêers nie, veranderinge word eerder in `n plaaslike lêer gestoor.</string>
   <string name="local_openstreetmap_uploading">Besig om op te laai…</string>
   <string name="local_openstreetmap_were_uploaded">{0} interessante plek / Foute is opgelaai</string>
@@ -206,7 +206,7 @@
   <string name="live_monitoring_url">Lewendige natrekking webadres</string>
   <string name="gpx_monitoring_disabled_warn">Skakel asseblief \'Meld spoor na GPX\' aan in natrekking instellings</string>
   <string name="show_current_gpx_title">Wys huidige spoor</string>
-  <string name="tip_recent_changes_0_7_0_t">"Veranderinge in 0.7.0:\n\ t-die aflyn wikipedia data met artikels\n\ t-Opgedateerde kaarte\n\ t-ander klein funksies"</string>
+  <string name="tip_recent_changes_0_7_0_t">"Veranderinge in 0.7.0:\n t-die aflyn wikipedia data met artikels\n t-Opgedateerde kaarte\n t-ander klein funksies "</string>
   <string name="free_version_message">Hierdie gratis OsmAnd weergawe is beperk tot %1$s aflaailêers %2$s en ondersteun nie aflyn Wikipedia artikels nie.</string>
   <string name="free_version_title">Gratis weergawe</string>
   <string name="poi_context_menu_showdescription">Wys POI beskrywing</string>
@@ -261,8 +261,8 @@
   <string name="download_files_not_enough_space">Daar is nie genoeg oop spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
   <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer (s) ({1} MB) af ?</string>
   <string name="tip_select_destination_point">Kies bestemming</string>
-  <string name="tip_select_destination_point_t">\tJy kan \'n ​​bestemming direk op die kaart kies (kaartinhoud kieslys, dan \'as bestemming\')\', in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk .\n\tdie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek).</string>
-  <string name="tip_recent_changes_0_6_9_t">"Veranderinge in 0.6.9:\n\t-Verbeterde aflyn kaart lewering\n\t-Vinnige inheemse aflyn lewering - kyk in eksperimentele eienskappe (mag dalk op sommige toestelle nie werk nie)\n\t-Massiewe voorkoms en gevoel veranderinge\n\t-Hoogte inligting\n\t-nuwe vertalings (Vienamese, Pools)\n\t-ander klein funksies"</string>
+  <string name="tip_select_destination_point_t">"\tJy kan \'n ​​bestemming direk op die kaart kies (kaartinhoud kieslys, dan \'as bestemming\')\', in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk .\n\tdie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek). "</string>
+  <string name="tip_recent_changes_0_6_9_t">"Veranderinge in 0.6.9:\n\t-Verbeterde aflyn kaart lewering\n\t-Vinnige inheemse aflyn lewering - kyk in eksperimentele eienskappe (mag dalk op sommige toestelle nie werk nie)\n\t-Massiewe voorkoms en gevoel veranderinge\n\t-Hoogte inligting\n\t-nuwe vertalings (Vienamese, Pools)\n\t-ander klein funksies "</string>
   <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
   <string name="native_library_not_supported">Inheemse biblioteek word nie op hierdie toestel ondersteun nie.</string>
@@ -286,7 +286,7 @@
   <string name="layer_poi_label">Interessante plek etikette</string>
   <string name="animate_route_off">stop animasie</string>
   <string name="animate_route">Begin animasie</string>
-  <string name="tip_recent_changes_0_6_8_t">"Veranderinge in 0.6.8:\n\t-heeltemal herontwerpte soek (interessante plek, adres)! Maak adres soek baie vinniger en meer responsief. Skep \'n soektog koppelvlak met baie verskillende keuses.\n\t-Implementeer interessante plek soek met die naam in groot gebiede (lande)\n\t-Herstel flikkerende kaart skerm vir tablette (Nommer 641)\n\t-Outo-senter kaart uitsig opsie (Nommer 356)\n\t-GPX navigasie verskuif na \'Aanwysings\' en \'Berg Aanwysings \'geskuif na \' Oor roete\n\t-POI data in obf lêer. (alle aflaai indekse na 01/10/11)\n\t-Stem aankondiging oplossing (GPS ligging oplossing, weglating van eerste opdrag)\n\t-klein verbeteringe"</string>
+  <string name="tip_recent_changes_0_6_8_t">"Veranderinge in 0.6.8:\n\t-heeltemal herontwerpte soek (interessante plek, adres)! Maak adres soek baie vinniger en meer responsief. Skep \'n soektog koppelvlak met baie verskillende keuses.\n\t-Implementeer interessante plek soek met die naam in groot gebiede (lande)\n\t-Herstel flikkerende kaart skerm vir tablette (Nommer 641)\n\t-Outo-senter kaart uitsig opsie (Nommer 356)\n\t-GPX navigasie verskuif na \'Aanwysings\' en \'Berg Aanwysings \'geskuif na \' Oor roete\n\t-POI data in obf lêer. (alle aflaai indekse na 01/10/11)\n\t-Stem aankondiging oplossing (GPS ligging oplossing, weglating van eerste opdrag)\n\t-klein verbeteringe "</string>
   <string name="file_can_not_be_renamed">Lêer kan nie herbenoem word nie.</string>
   <string name="file_with_name_already_exists">Lêer met daardie naam bestaan ​​reeds.</string>
   <string name="gpx_navigation">GPX roete</string>
@@ -311,7 +311,7 @@
   <string name="search_position_map_view">Laaste kaart uitsig</string>
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
-  <string name="tip_recent_changes_0_6_7_t">"Onlangse wysigings 0.6.7:\n\t-aflyn data bestuurder (laai, verwyder, aktiveer / deaktiveer aflyn data direk in OsmAnd)\n\t-gunsteling punte en groepe (kategoriseer, verwyder, bestuur gunstelinge)\n\t- GPX Explorer in toepassing (wys spoordetail, afstand, gemiddelde spoed, hoogte, ens.)\n\t- GPX navigasie (meer keuses, gaan aan met navigasie na afskakel, ondersteun verkeersirkels)\n\t-funksie om roete te berg as GPX spoor vir aflyn gebruik\n\t-Verbeter GPX monitering (filter n paar onakkurate posisie en berg akkuraatheid/hoogte/spoed)\n\t-oplaai GPX na OSM gemeenskap (http://download.osmand.net/gpx/)\n\t-vektor lewering verbeter\n\t-Verbetering van TTS enjin (kondig presiese afstand aan, stel in staat om myle te gebruik)\n\t-Fout-herstellings"</string>
+  <string name="tip_recent_changes_0_6_7_t">"Onlangse wysigings 0.6.7:\n\t-aflyn data bestuurder (laai, verwyder, aktiveer / deaktiveer aflyn data direk in OsmAnd)\n\t-gunsteling punte en groepe (kategoriseer, verwyder, bestuur gunstelinge)\n\t- GPX Explorer in toepassing (wys spoordetail, afstand, gemiddelde spoed, hoogte, ens.)\n\t- GPX navigasie (meer keuses, gaan aan met navigasie na afskakel, ondersteun verkeersirkels)\n\t-funksie om roete te berg as GPX spoor vir aflyn gebruik\n\t-Verbeter GPX monitering (filter n paar onakkurate posisie en berg akkuraatheid/hoogte/spoed)\n\t-oplaai GPX na OSM gemeenskap (http://download.osmand.net/gpx/)\n\t-vektor lewering verbeter\n\t-Verbetering van TTS enjin (kondig presiese afstand aan, stel in staat om myle te gebruik)\n\t-Fout-herstellings "</string>
   <string name="save_route_dialog_title">Berg roete as GPX spoor</string>
   <string name="route_successfully_saved_at">Roete suksesvol geberg as \'%1$s\'.</string>
   <string name="filename_input">"Dokument naam: "</string>
@@ -334,9 +334,9 @@
   <string name="vector_map_not_needed">Nee, dankie</string>
   <string name="basemap_missing">Basis wêreld kaart (wat die hele wêreld bevat op klein vergroting) ontbreek. Oorweeg dit asseblief om World_basemap_x.obf af te laai vir \'n volledige omgewing.</string>
   <string name="vector_data_missing">Aan boord (\'aflyn\') data ontbreek op SD-kaart. Oorweeg dit asseblief om dit af te laai om die kaarte aflyn te gebruik.</string>
-  <string name="local_index_gpx_info_show">"Druk en hou vir keuses"</string>
-  <string name="local_index_gpx_info_speed">"Gemiddelde spoed: %1$s\nMaksimum spoed: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"Gemiddelde hoogte: %1$.0f m\nMinimum hoogte: %2$.0f m\nMaksimum hoogte: %3$.0f m\nOpdraandes: %4$.0f m\nAfdraandes: %5$.0f m\n"</string>
+  <string name="local_index_gpx_info_show">\n\nDruk en hou vir keuses</string>
+  <string name="local_index_gpx_info_speed">\nGemiddelde spoed: %1$s\nMaksimum spoed: %2$s</string>
+  <string name="local_index_gpx_info_elevation">\nGemiddelde hoogte: %1$.0f m\nMinimum hoogte: %2$.0f m\nMaksimum hoogte: %3$.0f m\nOpdraandes: %4$.0f m\nAfdraandes: %5$.0f m\n</string>
   <string name="local_index_gpx_info">Subspore : %1$d\nTotale punte : %2$d\nTussenpunte : %3$d\nTotale afstand : %4$s\nBegin tyd : %5$tF, %5$tR\nEnd tyd : %6$tF, %6$tR</string>
   <string name="local_index_installed">Uitgawe</string>
   <string name="local_index_items_backuped">%1$d van %2$d item(s) suksesvol afgeskakel.</string>
@@ -368,7 +368,7 @@
   <string name="trace_rendering">Die lewering van ontfouting inligting</string>
   <string name="trace_rendering_descr">Vertoon lewering prestasie</string>
   <string name="tip_recent_changes">onlangse wysigings</string>
-  <string name="tip_recent_changes_0_6_6_t">"Onlangse wysigings 0.6.6:\n\t- teks-na-spraak enjin vir stem navigasie\n\t- Laat kaart vertoner meer volledig lewer\n\t- Basiskaart vir hele wêreld verpak met app\n\t- Fynverstel aflyn navigasie (nog steeds eksperimenteel)\n\t- GPX navigasie keuses\n\t- Opgradeer die gebruikerskoppelvlak en werk aan groot foute"</string>
+  <string name="tip_recent_changes_0_6_6_t">"Onlangse wysigings 0.6.6:\n\t- teks-na-spraak enjin vir stem navigasie\n\t- Laat kaart vertoner meer volledig lewer\n\t- Basiskaart vir hele wêreld verpak met app\n\t- Fynverstel aflyn navigasie (nog steeds eksperimenteel)\n\t- GPX navigasie keuses\n\t- Opgradeer die gebruikerskoppelvlak en werk aan groot foute "</string>
   <string name="voice_not_use">Moet nie gebruik nie</string>
   <string name="voice_not_specified">Geen</string>
   <string name="installing_new_resources">Besig om nuwe inligting uit te pak…</string>
