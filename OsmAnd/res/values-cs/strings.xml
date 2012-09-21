@@ -327,10 +327,10 @@
   <string name="amenity_type_sustenance">Stravování</string>
   <string name="amenity_type_tourism">Turistika</string>
   <string name="amenity_type_transportation">Doprava</string>
-  <string name="indexing_address">Indexuji adresy</string>
-  <string name="indexing_map">Indexuji mapu</string>
-  <string name="indexing_poi">Indexuji POI</string>
-  <string name="indexing_transport">Indexuji dopravu</string>
+  <string name="indexing_address">Indexuji adresy…</string>
+  <string name="indexing_map">Indexuji mapu…</string>
+  <string name="indexing_poi">Indexuji POI…</string>
+  <string name="indexing_transport">Indexuji dopravu…</string>
   <string name="input_output_error">Došlo k chybě vstupu/výstupu</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
@@ -640,9 +640,9 @@
   <string name="clear_all">Vymazat vše</string>
   <string name="history">Minulé</string>
   <string name="uploading_data">Odesílám data…</string>
-  <string name="uploading">Odesílám</string>
+  <string name="uploading">Odesílám…</string>
   <string name="search_nothing_found">Nic nebylo nalezeno</string>
-  <string name="searching">Hledám</string>
+  <string name="searching">Hledám…</string>
   <string name="searching_address">Hledám adresu…</string>
   <string name="search_osm_nominatim">Hledat adresu pomocí OSM Nominatim</string>
   <string name="hint_search_online">Číslo domu, ulice, město</string>
@@ -661,7 +661,7 @@
   <string name="error_io_error">Došlo k chybě vstupu/výstupu</string>
   <string name="downloading_file">Stahuji soubor…</string>
   <string name="downloading">Stahuji…</string>
-  <string name="downloading_list_indexes">Stahuji seznam dostupných indexů</string>
+  <string name="downloading_list_indexes">Stahuji seznam dostupných indexů…</string>
   <string name="list_index_files_was_not_loaded">Seznam indexů z osmand.net nebyl stažen.</string>
   <string name="select_index_file_to_download">Nic nebylo nalezeno. Pokud nemůžete najít svou oblast, můžete si data vytvořit sami, viz http://osmand.net.</string>
   <string name="show_poi_on_map">Zobrazit na mapě</string>
@@ -686,7 +686,7 @@
   <string name="loading_postcodes">Načítám PSČ…</string>
   <string name="loading_streets">Načítám ulice…</string>
   <string name="loading_cities">Načítám města…</string>
-  <string name="loading">Loading</string>
+  <string name="loading">Loading…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Chyba při ukládání GPX</string>
   <string name="error_calculating_route">Chyba při výpočtu trasy</string>
@@ -697,7 +697,7 @@
   <string name="invalid_locations">Neplatné souřadnice!</string>
   <string name="go_back_to_osmand">Vrátit se k mapě OsmAnd</string>
   <string name="close">Zavřít</string>
-  <string name="loading_data">Načítám data</string>
+  <string name="loading_data">Načítám data…</string>
   <string name="reading_indexes">Načítám indexy…</string>
   <string name="previous_run_crashed">Aplikace při minulém běhu spadla. Soubor s hlášením je v {0}. Prosím ohlaste problém vývojářům a přiložte hlášení o chybě.</string>
   <string name="saving_gpx_tracks">Ukládám GPX trasy na SD…</string>
@@ -1012,7 +1012,7 @@
 <string name="email">E-mail</string>
 <string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
 <string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
-<string name="layer_map_appearance">Nastavení obrazovky...</string>
+<string name="layer_map_appearance">Nastavení obrazovky…</string>
 <string name="int_continuosly">Souvisle</string>
 <string name="gps_wakeup_interval">Interval zaměřování GPS: %s</string>
 <string name="map_widget_fluorescent">Svítivé barvy trasy</string>
