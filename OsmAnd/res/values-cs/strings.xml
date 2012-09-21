@@ -553,7 +553,7 @@
   <string name="layer_map">Zdroj map…</string>
   <string name="menu_layers">Mapová data</string>
   <string name="context_menu_item_search_poi">Hledat POI</string>
-  <string name="context_menu_item_show_route">Cestovat od…</string>
+  <string name="context_menu_item_show_route">Cestovat odsud</string>
   <string name="use_trackball_descr">Použít trackball k posouvání mapy</string>
   <string name="use_trackball">Použít trackball</string>
   <string name="background_service_wait_int_descr">Vyberte čekací dobu pro určení polohy</string>
@@ -670,7 +670,7 @@
   <string name="update_existing">Nahradit</string>
   <string name="only_show">Pouze zobrazit</string>
   <string name="follow">Následovat</string>
-  <string name="recalculate_route_to_your_location">Způsob přepravy:</string>
+  <string name="recalculate_route_to_your_location">Způsob dopravy:</string>
   <string name="mark_final_location_first">Prosím zadejte nejprve cíl</string>
   <string name="get_directions">Navigace</string>
   <string name="show_gps_status">Zobrazit stav GPS</string>
@@ -686,7 +686,7 @@
   <string name="loading_postcodes">Načítám PSČ…</string>
   <string name="loading_streets">Načítám ulice…</string>
   <string name="loading_cities">Načítám města…</string>
-  <string name="loading">Loading…</string>
+  <string name="loading">Nahrávám…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Chyba při ukládání GPX</string>
   <string name="error_calculating_route">Chyba při výpočtu trasy</string>
@@ -1027,11 +1027,10 @@
 <string name="map_widget_day_night">Denní/noční režim</string>
 <string name="map_widget_renderer">Vektorový vykreslovač</string>
 <string name="avoid_motorway">Vyhnout se dálnicím</string>
-<string name="tip_recent_changes_0_8_3_t">"Změny ve verzi 0.8.3:\n\t* Postupové body\n\t* Vylepšené navádění po trase
+<string name="tip_recent_changes_0_8_3_t">"Změny ve verzi 0.8.3:\n\t* Průjezdní body\n\t* Vylepšené navádění po trase
 \n\t* Možnost vyhnutí se dálnicím
 \n\t* Zobrazení Cycleway=track
-\n\t* Hezčí ikony
-\n\t* Opraveno několik chyb "</string>
+\n\t* Hezčí vzhled ikon\n\t* Opraveno několik chyb "</string>
 <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
 <string name="map_widget_vector_attributes">Vlastnosti vykreslovače:</string>
 <string name="tip_rotation_switching_t_v2">"\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
@@ -1046,11 +1045,11 @@
 <string name="poi_filter_restaurants">Restaurace</string>
 <string name="poi_filter_sightseeing">Pamětihodnosti</string>
 <string name="snap_to_road">Pohyb po silnicích</string>
-<string name="intermediate_point_too_far">Postupový cíl %1$s je příliš daleko od nejbližší cesty.</string>
-<string name="arrived_at_intermediate_point">Dorazili jste do postupového cíle</string>
-<string name="context_menu_item_intermediate_point">Přidat postupový cíl</string>
-<string name="map_widget_intermediate_distance">Postupový cíl</string>
-<string name="ending_point_too_far">Start je příliš daleko od nejbližší cesty.</string>
+<string name="intermediate_point_too_far">Průjezdní bod %1$s je příliš daleko od nejbližší cesty.</string>
+<string name="arrived_at_intermediate_point">Dorazili jste do průjezdního bodu</string>
+<string name="context_menu_item_intermediate_point">Přidat průjezdní bod</string>
+<string name="map_widget_intermediate_distance">Průjezdní bod</string>
+<string name="ending_point_too_far">Cíl je příliš daleko od nejbližší cesty.</string>
 <string name="btn_add_tag">Přidat označení</string>
 <string name="btn_advanced_mode">Pokročilé...</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
@@ -1072,10 +1071,13 @@
 <string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4: "</string>
     <string name="context_menu_item_last_intermediate_point">Nastavit poslední cílový bod</string>
     <string name="context_menu_item_first_intermediate_point">Nastavit první cílový bod</string>
-    <string name="add_as_last_destination_point">Přidat jako poslední průjezdný bod</string>
-    <string name="add_as_first_destination_point">Přidat jako první průjezdný bod</string>
+    <string name="add_as_last_destination_point">Přidat jako poslední průjezdní bod</string>
+    <string name="add_as_first_destination_point">Přidat jako první průjezdní bod</string>
     <string name="replace_destination_point">Nahradit cílový bod</string>
-    <string name="new_destination_point_dialog">Cílový bod již máte nastavený.</string>
+    <string name="new_destination_point_dialog">Cílový bod je již nastaven.</string>
     <string name="target_point">Cílový bod %​1$s</string>
     <string name="target_points">Cíle</string>
-    </resources>
+    <string name="osmand_long_description_1000_chars">"OsmAnd\n\nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
+\n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného adresáře)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- stahování národních nebo regionálních map přímo z aplikace\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny
+\n\nOmezení této verze zdarma:\n- omezený počet stažitelných map\n- chybějící přístup na offline Wikipedia POI\n\nOsmAnd je aktivně vyvíjen a náš projekt i jeho budoucí vývoj závisí na finančních příspěvcích. Prosím zvažte zakoupení verze OsmAnd+, sponzorování konkrétní nové funkce nebo obecný dar na osmand.net. "</string>
+	</resources>
