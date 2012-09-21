@@ -1027,13 +1027,11 @@
 <string name="map_widget_day_night">Denní/noční režim</string>
 <string name="map_widget_renderer">Vektorový vykreslovač</string>
 <string name="avoid_motorway">Vyhnout se dálnicím</string>
-<string name="tip_recent_changes_0_8_3_t">Změny ve verzi 0.8.3:
-\n\t*Vylepšené navádění po trase
-\n\t*Možnost vyhnutí se dálnicím
-\n\t*Zobrazení Cycleway=track
-\n\t*Hezčí ikony
-\n\t*Opraveno několik chyb
-</string>
+<string name="tip_recent_changes_0_8_3_t">"Změny ve verzi 0.8.3:\n\t* Postupové body\n\t* Vylepšené navádění po trase
+\n\t* Možnost vyhnutí se dálnicím
+\n\t* Zobrazení Cycleway=track
+\n\t* Hezčí ikony
+\n\t* Opraveno několik chyb "</string>
 <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
 <string name="map_widget_vector_attributes">Vlastnosti vykreslovače:</string>
 <string name="tip_rotation_switching_t_v2">"\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
