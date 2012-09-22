@@ -34,7 +34,7 @@
 	<string name="search_address_building">Hiša</string>
 	<string name="search_address_building_option">Hiša</string>
 	<string name="search_address_street_option">Sekajoča cesta</string>
-	<string name="context_menu_item_navigate_point">Nastavi kot cilj</string>
+	<string name="context_menu_item_navigate_point">Nastavi cilj</string>
 	<string name="context_menu_item_add_favorite">Dodaj med priljubljene</string>
 	<string name="default_buttons_yes">Da</string>
 	<string name="default_buttons_no">Ne</string>
@@ -47,7 +47,7 @@
 	<string name="search_tabs_location">Lokacija</string>
 	<string name="add_favorite_dialog_default_favourite_name">Priljubljene</string>
 	<string name="add_favorite_dialog_top_text">Vnesite priljubljeno ime</string>
-	<string name="favourites_context_menu_navigate">Nastavi kot cilj</string>
+	<string name="favourites_context_menu_navigate">Nastavi cilj</string>
 	<string name="favourites_context_menu_edit">Uredi priljubljeno lokacijo</string>
 	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
 	<string name="add_favorite_dialog_favourite_added_template">Priljubljena lokacija \'\'{0}\'\' je bila dodana.</string>
@@ -80,4 +80,38 @@
 	<string name="edit_filter_create_message">Filter {0} je bil narejen</string>
 	<string name="default_buttons_selectall">Izberi vse</string>
 	<string name="email">E-pošta</string>
-</resources>
+<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4 : "</string>
+    <string name="tip_recent_changes_0_8_3_t">"Spremembe v 0.8.3 :
+\n\t* Vmesne točke
+\n\t* Izboljšano vodenje po poti
+\n\t* Možnost izogibanja avtocest
+\n\t* Kolo=prikaz GPS sledi
+\n\t* Izboljšan izgled (ikone)
+\n\t* Odpravljeno veliko napak "</string>
+    
+    <string name="navigate_to">Nastavi cilj</string>
+    <string name="context_menu_item_first_intermediate_point">Določi prvo vmesno točko</string>
+    <string name="context_menu_item_last_intermediate_point">Določi zadnjo vmesno točko</string>
+    <string name="add_as_last_destination_point">Dodaj kot zadnjo vmesno točko</string>
+    <string name="add_as_first_destination_point">Dodaj kot prvo vmesno točko</string>
+    <string name="replace_destination_point">Zamenjaj cilj</string>
+    <string name="new_destination_point_dialog">Cilj je že nastavljen.</string>
+    <string name="context_menu_item_intermediate_point">Dodaj vmesno točko</string>
+    <string name="arrived_at_intermediate_point">Prispeli ste do vmesne točke</string>
+    <string name="intermediate_point_too_far">Vmesne točke %1$s je predaleč od najbližje ceste.</string>
+    <string name="map_widget_intermediate_distance">Vmesna točka</string>
+    <string name="ending_point_too_far">Cilj je predaleč od najbližje ceste.</string>
+    <string name="btn_add_tag">Dodaj oznako</string>
+    <string name="btn_advanced_mode">Napreden način...</string>
+    <string name="poi_filter_parking">Parkirišče</string>
+    <string name="poi_filter_public_transport">Javni prevoz</string>
+    <string name="poi_filter_accomodation">Nastanitev</string>
+    <string name="poi_filter_restaurants">Restavracije</string>
+    <string name="poi_filter_sightseeing">Turizem</string>
+    <string name="poi_filter_entertainment">Zabava</string>
+    <string name="show_warnings_title">Pokaži alarme…</string>
+	<string name="show_warnings_descr">Prikaz omejitve hitrosti, hitrostne kamere, grbine in druga opozorila</string>
+	<string name="use_compass_navigation_descr">Uporabi kompas, ko ni mogoče določiti smeri</string>
+	<string name="use_compass_navigation">Uporabi kompas</string>
+	<string name="avoid_motorway">Izogibanje avtocest</string>
+	</resources>
