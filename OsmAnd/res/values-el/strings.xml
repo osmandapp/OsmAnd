@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
-    <string name="btn_advanced_mode">Advanced Mode...</string>
+    <string name="btn_advanced_mode"/>
     <string name="poi_filter_parking">Στάθμευση</string>
     <string name="poi_filter_emergency">Επείγοντα</string>
     <string name="poi_filter_public_transport">Δημόσιες Μεταφορές</string>
@@ -17,7 +17,7 @@
 	<string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει εντοπιστεί διαφορετικά</string>
 	<string name="use_compass_navigation">Χρήση πυξίδας</string>
 	<string name="avoid_motorway">Αποφυγή αυτοκινητόδρομων</string>
-	<string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
+	<string name="auto_zoom_map_descr"/>
 	<string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
 	<string name="tip_recent_changes_0_8_3_t">"Αλλαγές στην 0.8.3 :
 \n\t* Ενδιάμεσα σημεία
@@ -83,23 +83,18 @@
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 	</string>
 	<string name="tip_update_index">Ανανέωση των εκτός σύνδεσης Δεδομένων</string>
-	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates.
-		\n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device.
-		\n\tThe availability of updates  is depicted by the following colors:
-		\n\t\'Green\' - indicates data files identical on device and server
-		\n\t\'Blue\' - indicates available updates on server
-		\n\t\'Dark green/blue\' - likewise indicate data de-activated on the device</string>
+	<string name="tip_update_index_t"/>
 	<string name="filterpoi_activity">Δημιουργία φίλτρου ΣΕ</string>
 	<string name="recalculate_route_to_your_location">Τρόπος μετακίνησης:</string>
 	<string name="select_navigation_mode">Επιλογή τρόπου μετακίνησης</string>
-	<string name="monitor_preferences">Tracking</string>
+	<string name="monitor_preferences"/>
 	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
 	<string name="day_night_info">Πληρ. Ημέρα/Νύχτα</string>
 	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
 	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης:</string>
 	<string name="map_widget_renderer">Τρόπος απεικόνισης</string>
-	<string name="live_monitoring_mode_off">Start\n live tracking</string>
-	<string name="live_monitoring_mode_on">Stop\n live tracking</string>
+	<string name="live_monitoring_mode_off"/>
+	<string name="live_monitoring_mode_on"/>
 	<string name="position_on_map_descr">Επιλέξτε την τοποθεσία του δείκτη θέσης στο χάρτη</string>
 	<string name="position_on_map">Δείκτης θέσης</string>
 	<string name="layer_map_appearance">Ρύθμιση οθόνης…</string>
@@ -108,16 +103,16 @@
 	<string name="avoid_ferries">Αποφυγή πορθμείων</string>
 	<string name="avoid_in_routing_title">Αποφυγή…</string>
 	<string name="avoid_in_routing_descr">Αποφυγή διοδίων, χωματόδρομων, πορθμείων</string>
-	<string name="map_widget_fluorescent">Fluorescent routes</string>
+	<string name="map_widget_fluorescent"/>
 	<string name="map_widget_show_ruler">Χάρακας</string>
 	<string name="map_widget_appearance">Διάφορα:</string>
-	<string name="map_widget_view_direction">Viewing direction</string>
+	<string name="map_widget_view_direction"/>
 	<string name="map_widget_transparent">Διάφανο skin</string>
 	<string name="monitoring_mode_off">Εγγραφή GPX</string>
 	<string name="monitoring_mode_on">Σταμάτημα\n εγγρ. GPX.</string>
-	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
-	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
-	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
+	<string name="bg_service_sleep_mode_off"/>
+	<string name="bg_service_sleep_mode_on"/>
+	<string name="gps_wakeup_interval"/>
 	<string name="int_continuosly">Συνεχόμενο</string>
 	<string name="screen_is_locked">Για ξεκλείδωμα της οθόνης πάτα την εικόνα της κλειδαριάς</string>
 	<string name="map_widget_top_text">Όνομα οδού</string>
@@ -131,7 +126,7 @@
 	<string name="map_widget_right_stack">Δεξιός πίνακας:</string>
 	<string name="map_widget_left_stack">Αριστερός πίνακας:</string>
 	<string name="map_widget_parking">Στάθμευση</string>
-	<string name="map_widget_monitoring">Tracking</string>
+	<string name="map_widget_monitoring"></string>
 	<string name="map_widget_speed">Ταχύτητα</string>
 	<string name="map_widget_distance">Στόχος</string>
 	<string name="map_widget_altitude">Υψόμετρο</string>
