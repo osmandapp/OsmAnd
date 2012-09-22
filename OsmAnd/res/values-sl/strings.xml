@@ -1,3 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-</resources>
+<string name="search_button">Iskanje</string>
+	<string name="search_activity">Iskanje</string>
+	<string name="settings_Button">Nastavitve</string>
+	<string name="favorites_Button">Priljubljene</string>
+	<string name="map_Button">Karta</string>
+	</resources>
