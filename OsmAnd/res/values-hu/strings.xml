@@ -1041,4 +1041,6 @@
     <string name="poi_filter_accomodation">Szállás</string>
     <string name="poi_filter_restaurants">Éttermek</string>
     <string name="poi_filter_sightseeing">Városnézés</string>
+    <string name="context_menu_item_last_intermediate_point">Utolsó cél beállítása</string>
+    <string name="context_menu_item_first_intermediate_point">Első cél beállítása</string>
     </resources>
