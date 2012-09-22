@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -465,12 +465,12 @@
   <string name="km_h">km/h</string>
   <string name="m">m</string>
   <string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
-  <string name="poi_filter_car_aid">Car aid</string>
+  <string name="poi_filter_car_aid">Пътна помощ</string>
   <string name="poi_filter_closest_poi">Closest POI</string>
   <string name="poi_filter_custom_filter">Custom filter</string>
-  <string name="poi_filter_food_shop">Food shop</string>
-  <string name="poi_filter_for_tourists">For tourists</string>
-  <string name="poi_filter_fuel">Fuel</string>
+  <string name="poi_filter_food_shop">Хранителен магазин</string>
+  <string name="poi_filter_for_tourists">За туристи</string>
+  <string name="poi_filter_fuel">Гориво</string>
   <string name="poi_filter_namefinder">Online NameFinder</string>
   <string name="reading_cached_tiles">Reading cached tiles…</string>
   <string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
@@ -739,7 +739,7 @@
   <string name="save_track_interval_descr">Choose positioning interval for tracks</string>
   <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
   <string name="save_track_to_gpx">Log track to GPX file</string>
-  <string name="navigate_to">Set as destination</string>
+  <string name="navigate_to">Задай като дестинация</string>
   <string name="update_tile">Update map</string>
   <string name="reload_tile">Reload tile</string>
   <string name="mark_point">Target</string>
@@ -919,4 +919,29 @@
   <string name="bg_service_screen_unlock">Unlock screen</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
-</resources>
+<string name="tip_recent_changes_0_8_4_t">Промени в 0.8.4:</string>
+    <string name="tip_recent_changes_0_8_3_t">Промени в 0.8.3:\n\t* Междинни точки\n\t* Подобрени указания за следване на маршрут\n\t* Опция избягвай магистрали\n\t* Велоалея = показване на път\n\t* по-добър потребителски интерфейс (икони)\n\t* много корекции на грешки</string>
+    
+    <string name="context_menu_item_last_intermediate_point">Задай последна крайна цел</string>
+    <string name="context_menu_item_first_intermediate_point">Задай първа крайна цел</string>
+    <string name="add_as_last_destination_point">Задай като последна междинна точка</string>
+    <string name="add_as_first_destination_point">Задай като първа междинна точка</string>
+    <string name="replace_destination_point">Смени точка на дестинация</string>
+    <string name="new_destination_point_dialog">Вече имаш зададена крайна точка.</string>
+    <string name="target_points">Цели</string>
+    <string name="target_point">Крайна цел %1$s</string>
+    <string name="intermediate_point_too_far">Междинна точка %1$s твърде близо от близката улица.</string>
+    <string name="arrived_at_intermediate_point">Пристигнахте на междинна точка</string>
+    <string name="context_menu_item_intermediate_point">Добави междинна точка</string>
+    <string name="map_widget_intermediate_distance">Междинна точка</string>
+    <string name="ending_point_too_far">Крайната точка е твърде далеч от най-близкия път.</string>
+    <string name="btn_add_tag">Добави маркер</string>
+    <string name="btn_advanced_mode">Разширен режим...</string>
+    <string name="poi_filter_parking">Паркиране</string>
+    <string name="poi_filter_emergency">Спешно</string>
+    <string name="poi_filter_public_transport">Публичен транспорт</string>
+    <string name="poi_filter_entertainment">Забавление</string>
+    <string name="poi_filter_restaurants">Ресторанти</string>
+    <string name="show_warnings_title">Покази аларми…</string>
+	<string name="show_warnings_descr">Покажи ограничение за скорост, пътни камери, легнали полицаи и други предупреждения</string>
+	</resources>
