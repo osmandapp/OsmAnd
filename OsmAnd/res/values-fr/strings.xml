@@ -101,8 +101,8 @@
   <string name="download_files_not_enough_space">Il n\'y a pas assez de place pour télécharger %1$s MB (disponible: %2$s).</string>
   <string name="download_files_question_space">Espace actuellement disponible: {2} MB ! Télécharger {0} fichier(s) ({1} MB) ?</string>
   <string name="tip_select_destination_point">Sélectionner le point de destination</string>
-  <string name="tip_select_destination_point_t"> \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
-\n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange).</string>
+  <string name="tip_select_destination_point_t">" \tVous pouvez sélectionner une destination directement dans la carte (menu contextuel, puis \'Se déplacer vers ce point\'), dans toutes les recherches, ou via un appui long sur un de vos favoris dans la \'Liste des points favoris\'.
+\n\tLa destination est marquée d\'un disque orange sur la carte et OsmAnd affichera la distance (en ligne droite) vers ce point ainsi que sa direction (triangle orange)."</string>
   <string name="tip_recent_changes_0_6_9_t">Changements en 0.6.9 :
 \n\t- Amélioration du rendu des cartes hors ligne
 \n\t- Rendu hors ligne acceléré - voir dans les options expérimentales (ne marche pas sur tous les appareils)
@@ -366,10 +366,10 @@
   <string name="amenity_type_sustenance">Restauration</string>
   <string name="amenity_type_tourism">Tourisme</string>
   <string name="amenity_type_transportation">Transport</string>
-  <string name="indexing_address">Indexation de l\'adresse...</string>
-  <string name="indexing_map">Indexation de la carte...</string>
-  <string name="indexing_poi">Indexation du PI...</string>
-  <string name="indexing_transport">Indexation du transport...</string>
+  <string name="indexing_address">Indexation de l\'adresse…</string>
+  <string name="indexing_map">Indexation de la carte…</string>
+  <string name="indexing_poi">Indexation du PI…</string>
+  <string name="indexing_transport">Indexation du transport…</string>
   <string name="input_output_error">Erreur d\'entrée/sortie</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
@@ -573,9 +573,9 @@
   <string name="clear_all">Supprimer tout</string>
   <string name="history">Historique</string>
   <string name="uploading_data">Envoi des données…</string>
-  <string name="uploading">Envoi</string>
+  <string name="uploading">Envoi…</string>
   <string name="search_nothing_found">Rien n\'a été trouvé</string>
-  <string name="searching">Recherche en cours</string>
+  <string name="searching">Recherche en cours…</string>
   <string name="searching_address">Recherche de l\'adresse…</string>
   <string name="search_osm_nominatim">Recherche de l\'adresse via OSM Nominatim</string>
   <string name="hint_search_online">Numéro de la maison, rue, ville</string>
@@ -594,7 +594,7 @@
   <string name="error_io_error">Une erreur d\'entrée/sortie s\'est produite.</string>
   <string name="downloading_file">Téléchargement du fichier…</string>
   <string name="downloading">Téléchargement…</string>
-  <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles</string>
+  <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles…</string>
   <string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.net.</string>
   <string name="select_index_file_to_download">Si vous ne pouvez trouver votre région, vous pouvez la créer vous-même (voir sur osmand.net).</string>
   <string name="show_poi_on_map">Voir sur la carte</string>
@@ -609,7 +609,7 @@
   <string name="show_gps_status">Afficher le statut GPS</string>
   <string name="opening_hours">Heures d\'ouverture</string>
   <string name="opening_changeset">Ouverture des modifications…</string>
-  <string name="closing_changeset">Fermeture des modifications</string>
+  <string name="closing_changeset">Fermeture des modifications…</string>
   <string name="commiting_node">Envoi des nœuds…</string>
   <string name="loading_poi_obj">Chargement des Points d\'Intérêts…</string>
   <string name="auth_failed">Autorisation refusée</string>
@@ -619,7 +619,7 @@
   <string name="loading_postcodes">Chargement des codes postaux…</string>
   <string name="loading_streets">Chargement des rues…</string>
   <string name="loading_cities">Chargement des villes…</string>
-  <string name="loading">Chargement</string>
+  <string name="loading">Chargement…</string>
   <string name="poi">PI</string>
   <string name="error_occurred_saving_gpx">Erreur lors de l\'enregistrement du fichier GPX</string>
   <string name="error_calculating_route">Erreur de calcul du trajet</string>
@@ -630,7 +630,7 @@
   <string name="invalid_locations">Coordonnées invalides !</string>
   <string name="go_back_to_osmand">Retourner à la carte OsmAnd</string>
   <string name="close">Fermer</string>
-  <string name="loading_data">Chargement des données</string>
+  <string name="loading_data">Chargement des données…</string>
   <string name="reading_indexes">Lecture des index…</string>
   <string name="previous_run_crashed">la précédente exécution l\'application s\'est arrêtée inopinément. Le fichier log se trouve à {0}. Veuillez faire part du problème et inclure le fichier log.</string>
   <string name="saving_gpx_tracks">Enregistre les trajets GPX sur la carte SD…</string>
@@ -789,7 +789,7 @@
   <string name="offline_navigation_not_available">Navigation hors ligne temporairement indisponible.</string>
   <string name="left_side_navigation">Conduite à gauche</string>
   <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche</string>
-  <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élément, pour le désactiver ou le supprimer, faire appui long.\nEspace disponible sur l\'appareil : %1$s</string>
+  <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élément. Pour le désactiver ou le supprimer, faire appui long.\nEspace disponible sur l\'appareil : %1$s</string>
   <string name="unknown_from_location">Point de départ pas encore déterminé</string>
   <string name="context_menu_item_directions">Se déplacer vers ce point</string>
   <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement ?</string>
@@ -839,7 +839,7 @@
   <string name="help">Aide</string>
   <string name="show_details">Afficher les détails</string>
   <string name="accessibility_extensions_descr">Extensions d\'accessibilité pour les anciennes versions Android</string>
-  <string name="accessibility_extensions">"Extensions d\'accessibilité "</string>
+  <string name="accessibility_extensions">Extensions d\'accessibilité</string>
   <string name="accessibility_mode">Mode accessibilité</string>
   <string name="accessibility_mode_descr">Activer les fonctionnalité d\'accessibilité</string>
   <string name="accessibility_on">Oui</string>
@@ -1008,7 +1008,7 @@
 <string name="show_lanes">Afficher les voies</string>
 <string name="avoid_unpaved">Éviter les voies non carrossables</string>
 <string name="avoid_ferries">Éviter les ferries</string>
-<string name="avoid_in_routing_title">Éviter...</string>
+<string name="avoid_in_routing_title">Éviter…</string>
 <string name="avoid_in_routing_descr">Éviter routes à péage, non carrossables, ferries</string>
 <string name="show_warnings_title">Afficher les alarmes</string>
 <string name="show_warnings_descr">Afficher les limitations de vitesses, radars et ralentisseurs</string>
@@ -1032,17 +1032,17 @@
 <string name="int_continuosly">En continu</string>
 <string name="tip_rotation_switching_t_v2">\tVous pouvez basculer la façon dont l\'affichage de la carte peut être tournée en tapant sur l\'icône de la boussole
 \n\tLes choix sont :
-\n\t\'Ne pas tourner (Nord vers le haut)\'- La carte ne changera pas d\'orientation, le Nord sera toujours vers le haut
-\n\t\'Direction du déplacement\'- La carte est continuellement alignée dans la direction du déplacement
-\n\t\'Boussole\'- La carte est continuellement alignée sur la valeur de la boussole</string>
+\n\t\'Ne pas tourner (Nord vers le haut)\' - La carte ne changera pas d\'orientation, le Nord sera toujours vers le haut
+\n\t\'Direction du déplacement\' - La carte est continuellement alignée dans la direction du déplacement
+\n\t\'Boussole\' - La carte est continuellement alignée sur la valeur de la boussole</string>
 <string name="tip_day_night_mode_t_v2">\tLe style de la carte peut, pour certaines cartes vectorielles, être modifié pour le jour(plus clair) et nuit (plus sombre)
 \n\tLes couleurs de nuit sont plus sûres pour la conduite nocturne
 \n\tVous pouvez configurer la politique de bascule jour/nuit dans \'Navigation\'-&gt;\'Mode Jour/Nuit\'
 \n\tLes choix sont:
 \n\t\'Lever/Coucher du soleil\'
-\n\t\'Jour\'- Toujours utiliser le mode jour
-\n\t\'Nuit\'- Toujours utiliser le mode nuit
-\n\t\'Détection de la luminosité\'- L\'affichage est contrôllé par le capteur de luminosité de votre appareil, s\'il existe</string>
+\n\t\'Jour\' - Toujours utiliser le mode jour
+\n\t\'Nuit\' - Toujours utiliser le mode nuit
+\n\t\'Détection de la luminosité\' - L\'affichage est contrôlé par le capteur de luminosité de votre appareil, s\'il existe</string>
 <string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
 <string name="tip_recent_changes_0_8_3_t">"Changements en 0.8.3 :
@@ -1077,25 +1077,7 @@ Limitations de la version gratuite de OsmAnd :
 
 OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net.
 </string>
-<string name="osmand_plus_long_description_1000_chars">
-OsmAnd+ (OSM Automated Navigation Directions)
-
-OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas.
-
-OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
-
-Fonctionnalités principales :
-- Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable)
-- Cartes hors lignes compactes disponibles pour le monde entier
-- Téléchargement ilimités des cartes pour un pays ou une région directement depuis l\'application
-- Points d\'Intérêt (PI) Wikipédia hors ligne, parfait pour le tourisme
-- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des contours, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable
-- Recherche hors ligne d\'adresses et de lieux (PI)
-- Navigation hors ligne pour de courtes distances (expérimentale)
-- Mode voiture, vélo et piéton avec :
-- Option de vue jour/nuit automatique
-- Option de zoom automatique lors des déplacements
-- Orientation automatique de la carte (fixe, boussole, cap)</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors lignes compactes disponibles pour le monde entier - Téléchargement ilimités des cartes pour un pays ou une région directement depuis l\'application - Points d\'Intérêt (PI) Wikipédia hors ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des contours, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors ligne d\'adresses et de lieux (PI) - Navigation hors ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap)"</string>
 <string name="tip_map_switch_t_v2">\tLes sources des cartes et des couches affichées sont modifiables via \'Menu\' -&gt; \'Couches\'.
 \n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées, des tuiles en ligne prédéfinies (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées.
