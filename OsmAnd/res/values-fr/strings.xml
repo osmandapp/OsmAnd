@@ -949,7 +949,7 @@
   <string name="context_menu_item_add_parking_point">Marquer comme emplacement de stationnement</string>
   <string name="context_menu_item_delete_parking_point">Supprimer un emplacement de stationnement</string>
   <string name="starting_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
-  <string name="shared_location">Emplacement partagé</string>
+  <string name="shared_location">Lieu partagé</string>
   <string name="select_animate_speedup">Sélectionner l\'animation de l\'accélération sur l\'itinéraire</string>
   <string name="global_app_allocated_memory_descr">Mémoire allouée %1$s MB (limite Android %2$s MB, Dalvik %3$s MB).</string>
   <string name="global_app_allocated_memory">Mémoire allouée</string>
