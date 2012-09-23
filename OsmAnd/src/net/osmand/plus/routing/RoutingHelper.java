@@ -79,6 +79,7 @@ public class RoutingHelper {
 
 	public RoutingHelper(OsmandApplication context, CommandPlayer player){
 		this.app = context;
+		settings = context.getSettings();
 		voiceRouter = new VoiceRouter(this, player);
 		uiHandler = new Handler();
 	}
