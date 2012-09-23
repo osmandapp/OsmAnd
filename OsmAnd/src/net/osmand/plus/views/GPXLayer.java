@@ -53,7 +53,7 @@ public class GPXLayer extends OsmandMapLayer {
 			return;
 		}
 		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
-		if (view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+		if (false && view.getSettings().FLUORESCENT_OVERLAYS.get()) {
 			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
 		} else {
 			paint.setColor(view.getResources().getColor(R.color.gpx_track));

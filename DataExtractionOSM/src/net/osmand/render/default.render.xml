@@ -12,8 +12,12 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-		<renderingProperty attr="viRendered" name="Trial road colors" description="Experiment with road colors"
+		<!-- Make all colors aligned in the whole application and configurable for normal user (only via custom.render.xml)
+	<renderingProperty attr="defMapnikRoads" name="Previous road colors" description="Default Mapnik road colors"
 		type="boolean" possibleValues=""/>
+	<renderingProperty attr="hmRoadColor" name="Hm road colors" description="Default Mapnik road colors"
+		type="boolean" possibleValues=""/>
+		 -->
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
 		type="string" possibleValues="--,13,12,11"/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
@@ -35,7 +39,27 @@
 		<filter nightMode="true" attrColorValue="#003333"/>
 		<filter attrColorValue="#f1eae4"/>
 	</renderingAttribute>
-
+	
+	<!-- The last will be used by default -->
+	<!-- HM road colors -->
+	<renderingConstant name="secondaryRoadColor" value="#ffd080" valuePale="#fdd6a4"/>
+	<renderingConstant name="motorwayRoadColor" value="#809bff" valuePale="#809bff"/>
+	<renderingConstant name="trunkRoadColor" value="#ed154b" valuePale="#df1346"/> // 
+	<renderingConstant name="primaryRoadColor" value="#ff80a0" valuePale="#eb989a"/>
+	<renderingConstant name="tertiaryRoadColor" value="#ffff80" valuePale="#fefeb3"/>
+	<!-- vi color -->
+	<renderingConstant name="secondaryRoadColor" value="#F7D131"/>
+	<renderingConstant name="motorwayRoadColor" value="#6666CC"/>
+	<renderingConstant name="trunkRoadColor" value="#A02067"/>
+	<renderingConstant name="primaryRoadColor" value="#C04D61"/>
+	<renderingConstant name="tertiaryRoadColor" value="#F0CE30"/>
+	<!-- Default mapnik colors with changed trunk -->
+	<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+	<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+	<renderingConstant name="trunkRoadColor" value="#E62E6B"/>
+	<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
+	<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+	
 	<!--
 		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
 		- some roads already rendered at lower zooms (travel/orienteering)
@@ -1019,22 +1043,10 @@
 		<filter minzoom="1" tag="natural" value="coastline_broken" color="#111111" strokeWidth="1"/>
 		<filter minzoom="11" tag="natural" value="coastline_line" color="#cc999999" strokeWidth="1"/>
 		<group>
-				<filter viRendered="true" tag="highway" value="motorway" maxzoom="13" color="#6666CC"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/ -->
-				<filter hmRendered="true" tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
-			<filter tag="highway" value="motorway" maxzoom="13" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#6666CC"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/ -->
-				<filter hmRendered="true" tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
-			<filter tag="highway" value="motorway_link" maxzoom="13" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="trunk" maxzoom="13" color="#A02067"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#df1346"/ -->
-				<filter hmRendered="true" tag="highway" value="trunk" maxzoom="13" color="#ed154b"/>
-			<filter tag="highway" value="trunk" maxzoom="13" color="#ed154b"/>
-				<filter viRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#A02067"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#df1346"/ -->
-				<filter hmRendered="true" tag="highway" value="trunk_link" maxzoom="13" color="#ed154b"/>
-			<filter tag="highway" value="trunk_link" maxzoom="13" color="#ed154b"/>
+			<filter tag="highway" value="motorway" maxzoom="13" color="$motorwayRoadColor"/>
+			<filter tag="highway" value="motorway_link" maxzoom="13" color="$motorwayRoadColor"/>
+			<filter tag="highway" value="trunk" maxzoom="13" color="$trunkRoadColor"/>
+			<filter tag="highway" value="trunk_link" maxzoom="13" color="$trunkRoadColor"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="5" maxzoom="9" strokeWidth="5"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="6"/>
@@ -1045,14 +1057,8 @@
 		</group>
 
 		<group>
-				<filter viRendered="true" tag="highway" value="primary" maxzoom="13" color="#C04D61"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary" maxzoom="13" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary" maxzoom="13" color="#ff80a0"/>
-			<filter tag="highway" value="primary" maxzoom="13" color="#ff80a0"/>
-				<filter viRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#C04D61"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary_link" maxzoom="13" color="#ff80a0"/>
-			<filter tag="highway" value="primary_link" maxzoom="13" color="#ff80a0"/>
+			<filter tag="highway" value="primary" maxzoom="13" color="$primaryRoadColor"/>
+			<filter tag="highway" value="primary_link" maxzoom="13" color="$primaryRoadColor"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="4"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
@@ -1063,14 +1069,8 @@
 		</group>
 
 		<group>
-				<filter viRendered="true" tag="highway" value="secondary" maxzoom="13" color="#F7D131"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary" maxzoom="13" color="#fdd6a4"/ -->
-				<filter hmRendered="true" tag="highway" value="secondary" maxzoom="13" color="#ffd080"/>
-			<filter tag="highway" value="secondary" maxzoom="13" color="#ffd080"/>
-				<filter viRendered="true" tag="highway" value="secondary_link" maxzoom="13" color="#F7D131"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary_link" maxzoom="13" color="#fdd6a4"/ -->
-				<filter hmRendered="true" tag="highway" value="secondary_link" maxzoom="13" color="#ffd080"/>
-			<filter tag="highway" value="secondary_link" maxzoom="13" color="#ffd080"/>
+			<filter tag="highway" value="secondary" maxzoom="13" color="$secondaryRoadColor"/>
+			<filter tag="highway" value="secondary_link" maxzoom="13" color="$secondaryRoadColor"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter minzoom="9" maxzoom="9" strokeWidth="3"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
@@ -1081,38 +1081,14 @@
 		</group>
 
 		<group>
-				<filter viRendered="true" tag="highway" value="motorway" color="#6666CC"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="motorway" color="#809bff"/ -->
-				<filter hmRendered="true" tag="highway" value="motorway" color="#809bff"/>
-			<filter tag="highway" value="motorway" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="motorway_link" color="#6666CC"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="motorway_link" color="#809bff"/ -->
-				<filter hmRendered="true" tag="highway" value="motorway_link" color="#809bff"/>
-			<filter tag="highway" value="motorway_link" color="#809bff"/>
-				<filter viRendered="true" tag="highway" value="trunk" color="#A02067"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="trunk" color="#df1346"/ -->
-				<filter hmRendered="true" tag="highway" value="trunk" color="#ed154b"/>
-			<filter tag="highway" value="trunk" color="#ed154b"/>
-				<filter viRendered="true" tag="highway" value="trunk_link" color="#A02067"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="trunk_link" color="#df1346"/ -->
-				<filter hmRendered="true" tag="highway" value="trunk_link" color="#ed154b"/>
-			<filter tag="highway" value="trunk_link" color="#ed154b"/>
-				<filter viRendered="true" tag="highway" value="primary" color="#C04D61"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary" color="#ff80a0"/>
-			<filter tag="highway" value="primary" color="#ff80a0"/>
-				<filter viRendered="true" tag="highway" value="primary_link" color="#C04D61"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="primary_link" color="#eb989a"/ -->
-				<filter hmRendered="true" tag="highway" value="primary_link" color="#ff80a0"/>
-			<filter tag="highway" value="primary_link" color="#ff80a0"/>
-				<filter viRendered="true" tag="highway" value="secondary" color="#F7D131"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary" color="#fdd6a4"/ -->
-				<filter hmRendered="true" tag="highway" value="secondary" color="#ffd080"/>
-			<filter tag="highway" value="secondary" color="#ffd080"/>
-				<filter viRendered="true" tag="highway" value="secondary_link" color="#F7D131"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="secondary_link" color="#fdd6a4"/ -->
-				<filter hmRendered="true" tag="highway" value="secondary_link" color="#ffd080"/>
-			<filter tag="highway" value="secondary_link" color="#ffd080"/>
+			<filter tag="highway" value="motorway" color="$motorwayRoadColor"/>
+			<filter tag="highway" value="motorway_link" color="$motorwayRoadColor"/>
+			<filter tag="highway" value="trunk" color="$trunkRoadColor"/>
+			<filter tag="highway" value="trunk_link" color="$trunkRoadColor"/>
+			<filter tag="highway" value="primary" color="$primaryRoadColor"/>
+			<filter tag="highway" value="primary_link" color="$primaryRoadColor"/>
+			<filter tag="highway" value="secondary" color="$secondaryRoadColor"/>
+			<filter tag="highway" value="secondary_link" color="$secondaryRoadColor"/>
 				
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter>
@@ -1136,14 +1112,8 @@
 		</group>
 
 		<group>
-				<filter viRendered="true" tag="highway" value="tertiary" color="#F0CE30"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="highway" value="tertiary" color="#ffff80"/>
-			<filter tag="highway" value="tertiary" color="#ffff80"/>
-				<filter viRendered="true" tag="highway" value="tertiary_link" color="#F0CE30"/>
-				<!-- PALE-SCHEME filter hmRendered="true" tag="highway" value="tertiary_link" color="#fefeb3"/ -->
-				<filter hmRendered="true" tag="highway" value="tertiary_link" color="#ffff80"/>
-			<filter tag="highway" value="tertiary_link" color="#ffff80"/>
+			<filter tag="highway" value="tertiary" color="$tertiaryRoadColor"/>
+			<filter tag="highway" value="tertiary_link" color="$tertiaryRoadColor"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>

@@ -380,6 +380,7 @@ public:
 	const static int SIZE_STATES = 7;
 	UNORDERED(map)<int, RenderingRule*>* tagValueGlobalRules;
 	map<std::string, RenderingRule*> renderingAttributes;
+	map<std::string, std::string> renderingConstants;
 	std::vector<RenderingRule*> childRules;
 public:
 	RenderingRulesStorageProperties PROPS;

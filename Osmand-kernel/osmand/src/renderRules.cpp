@@ -198,8 +198,13 @@ class RenderingRulesHandler {
 		return dependsStorage;
 	}
 
-	static map<string, string>& parseAttributes(const char **atts, map<string, string>& m) {
+	static map<string, string>& parseAttributes(const char **atts, map<string, string>& m,
+			RenderingRulesStorage* st) {
 		while (*atts != NULL) {
+			string vl = string(atts[1]);
+			if(vl.size() > 1 && vl[0] == '$') {
+				vl = st->renderingConstants[vl.substr(1, vl.size() - 1)];
+			}
 			m[string(atts[0])] = string(atts[1]);
 			atts += 2;
 		}
@@ -215,7 +220,7 @@ class RenderingRulesHandler {
 			if (t->st.size() > 0 && t->st.top().isGroup()) {
 				attrsMap.insert(t->st.top().groupAttributes.begin(), t->st.top().groupAttributes.end());
 			}
-			parseAttributes(atts, attrsMap);
+			parseAttributes(atts, attrsMap, t->storage);
 			RenderingRule* renderingRule = new RenderingRule(attrsMap,t->storage);
 			if (t->st.size() > 0 && t->st.top().isGroup()) {
 				t->st.top().children.push_back(renderingRule);
@@ -230,7 +235,7 @@ class RenderingRulesHandler {
 			t->st.push(gr);
 		} else if ("groupFilter" == name) { //$NON-NLS-1$
 			map<string, string> attrsMap;
-			parseAttributes(atts, attrsMap);
+			parseAttributes(atts, attrsMap, t->storage);
 			RenderingRule* renderingRule = new RenderingRule(attrsMap,t->storage);
 			if (t->st.size() > 0 && t->st.top().isGroup()) {
 				GroupRules parent = ((GroupRules) t->st.top());
@@ -246,7 +251,7 @@ class RenderingRulesHandler {
 			if (t->st.size() > 0 && t->st.top().isGroup()) {
 				groupRules.groupAttributes.insert(t->st.top().groupAttributes.begin(), t->st.top().groupAttributes.end());
 			}
-			parseAttributes(atts, groupRules.groupAttributes);
+			parseAttributes(atts, groupRules.groupAttributes, t->storage);
 			t->st.push(groupRules);
 		} else if ("order" == name) { //$NON-NLS-1$
 			t->state = RenderingRulesStorage::ORDER_RULES;
@@ -258,9 +263,13 @@ class RenderingRulesHandler {
 			t->state = RenderingRulesStorage::LINE_RULES;
 		} else if ("polygon" == name) { //$NON-NLS-1$
 			t->state = RenderingRulesStorage::POLYGON_RULES;
+		} else if ("renderingConstant" == name) { //$NON-NLS-1$
+			map<string, string> attrsMap;
+			parseAttributes(atts, attrsMap, t->storage);
+			t->storage->renderingConstants[attrsMap["name"]] = attrsMap["value"];
 		} else if ("renderingAttribute" == name) { //$NON-NLS-1$
 			map<string, string> attrsMap;
-			parseAttributes(atts, attrsMap);
+			parseAttributes(atts, attrsMap, t->storage);
 			string attr = attrsMap["name"];
 			map<string, string> empty;
 			RenderingRule* root = new RenderingRule(empty,t->storage);
@@ -268,7 +277,7 @@ class RenderingRulesHandler {
 			t->st.push(GroupRules(root));
 		} else if ("renderingProperty" == name) {
 			map<string, string> attrsMap;
-			parseAttributes(atts, attrsMap);
+			parseAttributes(atts, attrsMap, t->storage);
 			string attr = attrsMap["attr"];
 			RenderingRuleProperty* prop;
 			string type = attrsMap["type"];
@@ -294,7 +303,7 @@ class RenderingRulesHandler {
 			t->storage->PROPS.registerRule(prop);
 		} else if ("renderingStyle" == name) {
 			map<string, string> attrsMap;
-			parseAttributes(atts, attrsMap);
+			parseAttributes(atts, attrsMap, t->storage);
 			string depends = attrsMap["depends"];
 			if (depends.size() > 0 && t->resolver != NULL) {
 				t->dependsStorage = t->resolver->resolve(depends, t->resolver);

@@ -51,6 +51,7 @@ public class RenderingRulesStorage {
 	protected TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
 	
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
+	protected Map<String, String> renderingConstants= new LinkedHashMap<String, String>();
 	
 	private String renderingName;
 	
@@ -311,6 +312,8 @@ public class RenderingRulesStorage {
 					prop.setPossibleValues(attributes.getValue("possibleValues").split(","));
 				}
 				PROPS.registerRule(prop);
+			} else if("renderingConstant".equals(name)){ //$NON-NLS-1$
+				renderingConstants.put(attributes.getValue("name"), attributes.getValue("value"));
 			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
 				String depends = attributes.getValue("depends");
 				if(depends != null && depends.length()> 0){
@@ -340,7 +343,15 @@ public class RenderingRulesStorage {
 		private Map<String, String> parseAttributes(Attributes attributes, Map<String, String> m) {
 			for (int i = 0; i < attributes.getLength(); i++) {
 				String name = parser.isNamespaceAware() ? attributes.getLocalName(i) : attributes.getQName(i);
-				m.put(name, attributes.getValue(i));
+				String vl = attributes.getValue(i);
+				if(vl != null && vl.startsWith("$")) {
+					String cv = vl.substring(1);
+					if(!renderingConstants.containsKey(cv)){
+						throw new IllegalStateException("Rendering constant '" + cv + "' was not specified.");
+					}
+					vl = renderingConstants.get(cv);
+				}
+				m.put(name, vl);
 			}
 			return m;
 		}
