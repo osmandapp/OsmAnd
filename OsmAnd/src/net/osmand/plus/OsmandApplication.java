@@ -511,8 +511,8 @@ public class OsmandApplication extends Application {
 				ex.printStackTrace(printStream);
 				StringBuilder msg = new StringBuilder();
 				msg.append("Version  " + Version.getFullVersion(OsmandApplication.this)+"\n"). //$NON-NLS-1$ 
-					append("Exception occured in thread " + thread.toString() + " : \n"). //$NON-NLS-1$ //$NON-NLS-2$
 					append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis())).append("\n"). //$NON-NLS-1$//$NON-NLS-2$
+					append("Exception occured in thread " + thread.toString() + " : \n"). //$NON-NLS-1$ //$NON-NLS-2$
 					append(new String(out.toByteArray()));
 
 				if (file.getParentFile().canWrite()) {

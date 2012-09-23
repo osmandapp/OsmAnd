@@ -380,7 +380,12 @@ public class RouteProvider {
 			} else {
 				result = router.searchRoute(ctx, st, en, leftSide);
 			}
-			return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
+			if(result == null || result.isEmpty()) {
+				// something really strange better to see that message on the scren
+				return new RouteCalculationResult("Empty result");
+			} else {
+				return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
+			}
 		} catch (OutOfMemoryError e) {
 			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
 			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
