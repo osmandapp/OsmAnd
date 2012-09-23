@@ -86,7 +86,7 @@ public class OsmandApplication extends Application {
 		
 		long timeToStart = System.currentTimeMillis();
 		osmandSettings = createOsmandSettingsInstance();
-		routingHelper = new RoutingHelper(osmandSettings, this, player);
+		routingHelper = new RoutingHelper(this, player);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
 		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support), getString(R.string.default_buttons_cancel));

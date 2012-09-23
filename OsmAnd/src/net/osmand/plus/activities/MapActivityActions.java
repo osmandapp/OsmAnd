@@ -469,10 +469,6 @@ public class MapActivityActions implements DialogProvider {
 					return;
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
-				// Do not overwrite PREV_APPLICATION_MODE if already navigating
-				if (!routingHelper.isFollowingMode()) {
-					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
-				}
 				routingHelper.setAppMode(mode);
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
@@ -502,24 +498,9 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
-				// change global settings
-				// Do not overwrite PREV_APPLICATION_MODE if already navigating
-				if (!routingHelper.isFollowingMode()) {
-					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
-				}
-				boolean changed = settings.APPLICATION_MODE.set(mode);
-				if (changed) {
-					mapActivity.updateApplicationModeSettings();
-					mapActivity.getMapView().refreshMap(true);
-				}
-				routingHelper.setAppMode(mode);
-				settings.FOLLOW_THE_ROUTE.set(true);
-				settings.FOLLOW_THE_GPX_ROUTE.set(null);
-				routingHelper.setFollowingMode(true);
-				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(), mapActivity.getIntermediatePoints(), 
-						current, null);
 				dialog.dismiss();
-				getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
+				mapActivity.followRoute(mode, mapActivity.getPointToNavigate(), mapActivity.getIntermediatePoints(), 
+						current, null);
 			}
 		};
 
@@ -533,15 +514,12 @@ public class MapActivityActions implements DialogProvider {
 
 		builder.setView(view);
 		builder.setTitle(R.string.get_directions);
+		builder.setPositiveButton(R.string.follow, followCall);
+		builder.setNeutralButton(R.string.only_show, onlyShowCall);
 		if (gpxRouteEnabled) {
-			builder.setPositiveButton(R.string.follow, followCall);
-			builder.setNeutralButton(R.string.gpx_navigation, useGpxNavigation);
-			builder.setNegativeButton(R.string.only_show, onlyShowCall);
+			builder.setNegativeButton(R.string.gpx_navigation, useGpxNavigation);
 		} else {
-			// view.findViewById(R.id.TextView).setVisibility(View.GONE);
-			builder.setPositiveButton(R.string.follow, followCall);
-			builder.setNeutralButton(R.string.only_show, onlyShowCall);
-			builder.setNegativeButton(R.string.default_buttons_cancel, null);
+			builder.setNegativeButton(R.string.no_route, null);
 		}
 		builder.show();
 	}
@@ -553,7 +531,6 @@ public class MapActivityActions implements DialogProvider {
     public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
-    	final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
 			
 			@Override
@@ -597,23 +574,10 @@ public class MapActivityActions implements DialogProvider {
 								mapLayers.getNavigationLayer().setPointToNavigate(point, new ArrayList<LatLon>());
 							}
 						}
-						// change global settings
-						// Do not overwrite PREV_APPLICATION_MODE if already navigating
-						if (!routingHelper.isFollowingMode()) {
-							settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
-						}
-						boolean changed = settings.APPLICATION_MODE.set(appMode);
-						if (changed) {
-							mapActivity.updateApplicationModeSettings();	
-						}
-						mapActivity.getMapView().refreshMap(changed);
 						if(endPoint != null){
-							settings.FOLLOW_THE_ROUTE.set(true);
-							settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
-							routingHelper.setFollowingMode(true);
-							routingHelper.setFinalAndCurrentLocation(endPoint,
+							mapActivity.followRoute(appMode, endPoint,
 									new ArrayList<LatLon>(), startForRouting, gpxRoute);
-							getMyApplication().showDialogInitializingCommandPlayer(mapActivity);
+							settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 						}
 					}
 				});

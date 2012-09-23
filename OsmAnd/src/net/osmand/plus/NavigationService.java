@@ -35,6 +35,7 @@ public class NavigationService extends Service implements LocationListener {
 	}
 	private final static int NOTIFICATION_SERVICE_ID = 1;
 	public final static String OSMAND_STOP_SERVICE_ACTION  = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
+	public final static String NAVIGATION_START_SERVICE_PARAM = "NAVIGATION_START_SERVICE_PARAM"; 
 	private static final int LOST_LOCATION_MSG_ID = 10;
 	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
@@ -55,6 +56,7 @@ public class NavigationService extends Service implements LocationListener {
 	private PendingIntent pendingIntent;
 	private BroadcastReceiver broadcastReceiver;
 	private LiveMonitoringHelper liveMonitoringHelper;
+	private boolean startedForNavigation;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -85,14 +87,20 @@ public class NavigationService extends Service implements LocationListener {
 		return serviceOffProvider;
 	}
 	
+	public boolean startedForNavigation(){
+		return startedForNavigation;
+	}
 	@Override
-	public void onCreate() {
-		super.onCreate();
-		// initializing variables
-		setForeground(true);
+	public int onStartCommand(Intent intent, int flags, int startId) {
 		handler = new Handler();
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
+		
+		startedForNavigation = intent.getBooleanExtra(NAVIGATION_START_SERVICE_PARAM, false);
+		if (startedForNavigation) {
+			serviceOffInterval = 0;
+		} else {
+			serviceOffInterval = settings.SERVICE_OFF_INTERVAL.get();
+		}
 		// use only gps provider
 		serviceOffProvider = LocationManager.GPS_PROVIDER;
 		serviceError = serviceOffInterval / 5;
@@ -122,23 +130,33 @@ public class NavigationService extends Service implements LocationListener {
 		}
 			
 		// registering icon at top level
-		broadcastReceiver = new BroadcastReceiver() {
-			@Override
-			public void onReceive(Context context, Intent intent) {
-				NavigationService.this.stopSelf();
-			}
+		// Leave icon visible even for navigation for proper testing
+//		if (!startedForNavigation) {
+			broadcastReceiver = new BroadcastReceiver() {
+				@Override
+				public void onReceive(Context context, Intent intent) {
+					NavigationService.this.stopSelf();
+				}
 
-		};
-		registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
-		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
-		Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
-				System.currentTimeMillis());
-		notification.flags = Notification.FLAG_NO_CLEAR;
-		notification.setLatestEventInfo(this, Version.getAppName(this),
-				getString(R.string.service_stop_background_service), PendingIntent.getBroadcast(this, 0, notificationIntent, 
-						PendingIntent.FLAG_UPDATE_CURRENT));
-		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
+			};
+			registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
+			Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
+			Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
+					System.currentTimeMillis());
+			notification.flags = Notification.FLAG_NO_CLEAR;
+			notification.setLatestEventInfo(this, Version.getAppName(this), getString(R.string.service_stop_background_service),
+					PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+			NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+			mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
+//		}
+		return START_REDELIVER_INTENT;
+	}
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		// initializing variables
+		setForeground(true);
 	}
 	
 	private boolean isContinuous(){

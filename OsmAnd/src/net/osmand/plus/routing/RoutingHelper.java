@@ -10,6 +10,8 @@ import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
@@ -21,6 +23,7 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.Interruptable;
 import net.osmand.router.RouteSegmentResult;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Handler;
 import android.widget.Toast;
@@ -40,7 +43,7 @@ public class RoutingHelper {
 	
 	private List<IRouteInformationListener> listeners = new ArrayList<IRouteInformationListener>();
 
-	private Context context;
+	private OsmandApplication app;
 	
 	private boolean isFollowingMode = false;
 	
@@ -74,9 +77,8 @@ public class RoutingHelper {
 	}
 
 
-	public RoutingHelper(OsmandSettings settings, Context context, CommandPlayer player){
-		this.settings = settings;
-		this.context = context;
+	public RoutingHelper(OsmandApplication context, CommandPlayer player){
+		this.app = context;
 		voiceRouter = new VoiceRouter(this, player);
 		uiHandler = new Handler();
 	}
@@ -84,11 +86,22 @@ public class RoutingHelper {
 	public boolean isFollowingMode() {
 		return isFollowingMode;
 	}
-
-	public void setFollowingMode(boolean isFollowingMode) {
-		this.isFollowingMode = isFollowingMode;
-	}
 	
+	public void setFollowingMode(boolean follow) {
+		isFollowingMode = follow;
+		Intent serviceIntent = new Intent(app, NavigationService.class);
+		if(follow) {
+			if(app.getNavigationService() == null) {
+				serviceIntent.putExtra(NavigationService.NAVIGATION_START_SERVICE_PARAM, true);
+				app.startService(serviceIntent);
+			}
+		} else {
+			if(app.getNavigationService() != null && app.getNavigationService().startedForNavigation()) {
+				app.stopService(serviceIntent);
+			}
+		}
+	}
+
 	
 	
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
@@ -121,7 +134,7 @@ public class RoutingHelper {
 			settings.FOLLOW_THE_GPX_ROUTE.set(null);
 			// clear last fixed location
 			this.lastProjection = null;
-			this.isFollowingMode = false;
+			setFollowingMode(false);
 		}
 	}
 	
@@ -340,7 +353,7 @@ public class RoutingHelper {
 		
 		// 2. check if intermediate found
 		if(route.getIntermediatePointsToPass()  > 0 && route.getDistanceToNextIntermediate(lastFixedLocation) < posTolerance) {
-			showMessage(context.getString(R.string.arrived_at_intermediate_point));
+			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			voiceRouter.arrivedIntermediatePoint();
 			route.passIntermediatePoint();
 			int toDel = settings.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
@@ -356,7 +369,7 @@ public class RoutingHelper {
 		// 3. check if destination found
 		Location lastPoint = routeNodes.get(routeNodes.size() - 1);
 		if (currentRoute > routeNodes.size() - 3 && currentLocation.distanceTo(lastPoint) < posTolerance * 1.2) {
-			showMessage(context.getString(R.string.arrived_at_destination));
+			showMessage(app.getString(R.string.arrived_at_destination));
 			voiceRouter.arrivedDestinationPoint();
 			clearCurrentRoute(null, null);
 			return true;
@@ -478,7 +491,7 @@ public class RoutingHelper {
 		int dist = getLeftDistance();
 		int hours = getLeftTime() / (60 * 60);
 		int minutes = (getLeftTime() / 60) % 60;
-		return context.getString(R.string.route_general_information, OsmAndFormatter.getFormattedDistance(dist, context),
+		return app.getString(R.string.route_general_information, OsmAndFormatter.getFormattedDistance(dist, app),
 				hours, minutes);
 	}
 	
@@ -588,7 +601,7 @@ public class RoutingHelper {
 		public void run() {
 			boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
 			boolean fastRoute = settings.FAST_ROUTE_MODE.get();
-			RouteCalculationResult res = provider.calculateRouteImpl(start, end, intermediates, mode, service, context, gpxRoute, previousRoute, fastRoute, 
+			RouteCalculationResult res = provider.calculateRouteImpl(start, end, intermediates, mode, service, app, gpxRoute, previousRoute, fastRoute, 
 					leftSide, this);
 			if (interrupted) {
 				currentRunningJob = null;
@@ -606,16 +619,16 @@ public class RoutingHelper {
 			}
 
 			if (res.isCalculated()) {
-				showMessage(context.getString(R.string.new_route_calculated_dist)
-						+ ": " + OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), context)); //$NON-NLS-1$
+				showMessage(app.getString(R.string.new_route_calculated_dist)
+						+ ": " + OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app)); //$NON-NLS-1$
 			} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
-					showMessage(context.getString(R.string.error_calculating_route)
-						+ ":\n" + context.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
+					showMessage(app.getString(R.string.error_calculating_route)
+						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
 			} else {
 				if (res.getErrorMessage() != null) {
-					showMessage(context.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
+					showMessage(app.getString(R.string.error_calculating_route) + ":\n" + res.getErrorMessage(), Toast.LENGTH_LONG); //$NON-NLS-1$
 				} else {
-					showMessage(context.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
+					showMessage(app.getString(R.string.empty_route_calculated), Toast.LENGTH_LONG);
 				}
 			}
 			lastTimeEvaluatedRoute = System.currentTimeMillis();
@@ -647,7 +660,7 @@ public class RoutingHelper {
 		uiHandler.post(new Runnable() {
 			@Override
 			public void run() {
-				AccessibleToast.makeText(context, msg, length).show();
+				AccessibleToast.makeText(app, msg, length).show();
 			}
 		});
 	}
@@ -662,12 +675,13 @@ public class RoutingHelper {
 	}
 	
 	protected Context getContext() {
-		return context;
+		return app;
 	}
 	
 	
 	public GPXFile generateGPXFileWithRoute(){
 		return provider.createOsmandRouterGPX(route);
 	}
+
 
 }

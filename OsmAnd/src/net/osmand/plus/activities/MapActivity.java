@@ -426,9 +426,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 							if (endPoint == null) {
 								notRestoreRoutingMode();
 							} else {
-								routingHelper.setFollowingMode(true);
-								routingHelper.setFinalAndCurrentLocation(endPoint, intermediates, startPoint, gpxRoute);
-								getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
+								followRoute(settings.getApplicationMode(), endPoint, intermediates, startPoint, gpxRoute);
 							}
 						}
 					};
@@ -943,6 +941,26 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
 					settings.getIntermediatePoints(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		}
+	}
+	
+	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
+		// change global settings
+		// Do not overwrite PREV_APPLICATION_MODE if already navigating
+		if (!routingHelper.isFollowingMode()) {
+			settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+		}
+		boolean changed = settings.APPLICATION_MODE.set(appMode);
+		if (changed) {
+			updateApplicationModeSettings();	
+		}
+		getMapView().refreshMap(changed);
+		settings.FOLLOW_THE_ROUTE.set(true);
+		if(gpxRoute == null) {
+			settings.FOLLOW_THE_GPX_ROUTE.set(null);
+		}
+		routingHelper.setFollowingMode(true);
+		routingHelper.setFinalAndCurrentLocation(finalLocation, intermediatePoints, currentLocation, gpxRoute);
+		getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
 	}
 
 	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate){
