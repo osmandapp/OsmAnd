@@ -246,7 +246,11 @@
   <string name="internet_not_available">No está disponible la conexión a Internet que se necesita para la operación</string>
   <string name="install_more">Instalar más…</string>
   <string name="tip_update_index">Actualizar datos descargados</string>
-  <string name="tip_update_index_t">\tEs esencial tener datos de mapa actualizados. OsmAnd proporciona un gestor de descargas que puede comprobar la disponibilidad de actualizaciones de los datos descargados. \n\tPara comprobar las actualizaciones vaya a \'Opciones\' -&gt; \'Datos descargados\' -&gt; \'Descargar…\'. Tras recuperar de Internet la lista de regiones, puede seleccionar la opción \'Menú\' -&gt; \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en su dispositivo. \n\tLa disponibilidad de actualizaciones se indica por los siguientes colores: \n\t\'Verde\' - indica archivos idénticos en el dispositivo y en el servidor \n\t\'Azul\' - indica actualizaciones disponibles en el servidor</string>
+  <string name="tip_update_index_t">\tEs esencial tener datos de mapa actualizados. OsmAnd proporciona un gestor de descargas que puede comprobar la disponibilidad de actualizaciones de los datos descargados.
+\n\tPara comprobar las actualizaciones ve a \'Opciones\' -&gt; \'Datos descargados\' -&gt; \'Descargar…\'. Tras recuperar de Internet la lista de regiones, puedes seleccionar la opción \'Menú\' -&gt; \'Filtrar descargados\' para buscar actualizaciones sólo para datos que estén ya en tu dispositivo.
+\n\tLa disponibilidad de actualizaciones se indica por los siguientes colores:
+\n\t\'Verde\' - indica archivos idénticos en el dispositivo y en el servidor
+\n\t\'Azul\' - indica actualizaciones disponibles en el servidor</string>
   <string name="level_to_switch_vector_raster_descr">Nivel de zoom mínimo para utilizar dibujo de vectores en vez de teselas de mapa</string>
   <string name="level_to_switch_vector_raster">Mín. zoom vectores</string>
   <string name="tip_location_sharing">Compartir localización</string>
@@ -271,7 +275,7 @@
   <string name="tip_app_mode">Perfil de usuario</string>
   <string name="tip_app_mode_t">\tOsmAnd soporta diferentes perfiles de aplicación (configurables) para diferentes usos. \n\tPuedes cambiar los perfiles en \'Menú\' -&gt; \'Opciones\' -&gt; \'Perfil de usuario\', o cuando crees una ruta.</string>
   <string name="tip_navigation">Navegación</string>
-  <string name="tip_navigation_t">\tAntes de empezar una navegación necesita seleccionar un destino. Después, pulse \'Menú\' -&gt; \'Indicaciones\' en el mapa y seleccione el tipo de navegación.</string>
+  <string name="tip_navigation_t">\tAntes de empezar una navegación necesitas seleccionar un destino. Después, pulsa \'Menú\' -&gt; \'Indicaciones\' en el mapa y selecciona el tipo de navegación.</string>
   <string name="tip_search">Buscando</string>
   <string name="tip_search_t">"\tPuedes buscar lugares directamente en el mapa, por dirección, por coordenadas, como PDI, o como favorito predefinido.
 \n\tPulsando \'Buscar\' en el menú principal, abre las actividades de búsqueda. Para los puntos encontrados, se ofrece un menú contextual con dos opciones: \'Fijar como destino\' o \'Mostrar en mapa\'. "</string>
@@ -965,7 +969,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="map_widget_day_night">Mapa día/noche</string>
 <string name="map_widget_vector_attributes">Atributos de dibujado:</string>
 <string name="map_widget_renderer">Estilo de dibujado</string>
-<string name="tip_rotation_switching_t_v2">"﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.\n\tLas opciones son:\n\t- \'No girar (el norte está arriba)\': el mapa no girará. El norte está siempre arriba\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo "</string>
+<string name="tip_rotation_switching_t_v2">"﻿\tPuedes cambiar si el mapa se gira y cómo pulsando repetidamente el icono de la brújula.\n\tLas opciones son:\n\t- \'No girar\': el mapa no girará. El norte está siempre arriba\n\t- \'En la dirección de movimiento\': el mapa está continuamente alineado con tu dirección\n\t- \'A la brújula\' - el mapa se alinea con la lectura de la brújula del dispositivo "</string>
 <string name="tip_map_switch_t_v2">"\tLa fuente del mapa y las capas mostradas se cambian en la vista del mapa a través de \'Menú\'-&gt; \'Definir vista\'.\n\tEn \'Fuente de mapas...\' puedes elegir usar los mapas vectoriales descargados, fuentes predefinidas de teselas (online) (activa el extra \'Mapas Online\' para ello), o mapas creados manualmente utilizando, por ejemplo, OsmAndMapCreator en un PC.\n\tOsmAnd también soporta fuentes personalizadas. "</string>
 <string name="tip_day_night_mode_t_v2">"\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).\n\tLos colores del modo noche son más seguros para la conducción nocturna.\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla...\'-&gt; \'Mapa Día/Noche\'.\n\tLas opciones son:\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)\n\t- \'Día\': utiliza siempre el modo día\n\t- \'Noche\': utiliza siempre el modo noche\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "</string>
 <string name="tip_app_mode_t_v2">"\tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta. "</string>
@@ -1005,4 +1009,8 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="poi_filter_accomodation">Alojamiento</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
+    <string name="map_widget_monitoring_services">Servicios de monitorización</string>
+	<string name="no_route">No hay ruta</string>
+	<string name="delete_target_point">Elimina el punto destino</string>
+	<string name="intermediate_point">Punto de paso %1$s</string>
     </resources>
