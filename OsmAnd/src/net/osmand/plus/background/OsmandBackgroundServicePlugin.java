@@ -9,9 +9,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.views.LockInfoControl.LockInfoControlActions;
-import net.osmand.plus.views.LockInfoControl.ValueHolder;
-import net.osmand.plus.views.LockInfoControl;
+import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
+import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
+import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.content.BroadcastReceiver;
@@ -28,7 +28,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
-public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockInfoControlActions {
+public class OsmandBackgroundServicePlugin extends OsmandPlugin implements MonitoringInfoControlServices {
 	public static final int[] SECONDS = new int[]{0, 30, 60, 90};
 	public static final int[] MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
 	private final static boolean REGISTER_BG_SETTINGS = false;
@@ -68,9 +68,9 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		MapInfoLayer li = activity.getMapLayers().getMapInfoLayer();
-		LockInfoControl lock = li.getLockInfoControl();
-		if(lock != null && !lock.getLockActions().contains(this)) {
-			lock.getLockActions().add(this);
+		MonitoringInfoControl lock = li.getMonitoringInfoControl();
+		if(lock != null && !lock.getMonitorActions().contains(this)) {
+			lock.getMonitorActions().add(this);
 		}
 	}
 	
@@ -147,7 +147,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements LockI
 	}
 
 	@Override
-	public void addLockActions(final QuickAction qa, final LockInfoControl li, final OsmandMapTileView view) {
+	public void addMonitorActions(final QuickAction qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
 		
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = view.getApplication().getNavigationService() == null;

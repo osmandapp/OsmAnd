@@ -42,6 +42,7 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
@@ -87,7 +88,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private MapInfoControls mapInfoControls;
 	private TopTextView topText;
 
-	private LockInfoControl lockInfoControl;
+	private MonitoringInfoControl monitoringServices;
 
 	private String ADDITIONAL_VECTOR_RENDERING_CATEGORY;
 
@@ -138,7 +139,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 
 		mapInfoControls = new MapInfoControls(map.getMyApplication().getSettings());
-		lockInfoControl = new LockInfoControl();
+		monitoringServices = new MonitoringInfoControl();
 	}
 	
 	
@@ -158,8 +159,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return paintSubText;
 	}
 	
-	public LockInfoControl getLockInfoControl() {
-		return lockInfoControl;
+	public MonitoringInfoControl getMonitoringInfoControl() {
+		return monitoringServices;
 	}
 	
 	public MapInfoControls getMapInfoControls() {
@@ -254,11 +255,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
-		ImageView lockView = lockInfoControl.createLockScreenWidget(view, map);
-		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, exceptCar, 15);
+		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.monitoring, R.string.map_widget_monitoring_services,
+				"monitoring_services", MapInfoControls.LEFT_CONTROL, exceptCar, 12);
+		mapInfoControls.registerTopWidget(createLockInfo(map), R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", 
+				MapInfoControls.LEFT_CONTROL, none, 15);
 		backToLocation = createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
-		mapInfoControls.registerTopWidget(createMonitoring(map), R.drawable.monitoring, R.string.map_widget_monitoring_services, "monitorign_services", MapInfoControls.LEFT_CONTROL, all, 12);
+		
 		
 		View globus = createGlobus();
 		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
@@ -728,16 +731,69 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return backToLocation;
 	}
 	
-	private ImageView createMonitoring(final MapActivity map){
-		ImageView monitoring = new ImageView(view.getContext());
-		monitoring.setImageDrawable(map.getResources().getDrawable(R.drawable.monitoring));
-		monitoring.setOnClickListener(new View.OnClickListener() {
+	private ImageView createLockInfo(final MapActivity map) {
+		final ImageView lockView = new ImageView(view.getContext());
+		final Drawable lockEnabled = view.getResources().getDrawable(R.drawable.lock_enabled);
+		final Drawable lockDisabled = view.getResources().getDrawable(R.drawable.lock_disabled);
+		lockView.setBackgroundDrawable(lockDisabled);
+		final FrameLayout transparentLockView = new FrameLayout(view.getContext());
+		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, Gravity.CENTER);
+		transparentLockView.setLayoutParams(fparams);
+		transparentLockView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_UP) {
+					int[] locs = new int[2];
+					lockView.getLocationOnScreen(locs);
+					int x = (int) event.getX() - locs[0];
+					int y = (int) event.getY() - locs[1];
+					transparentLockView.getLocationOnScreen(locs);
+					x += locs[0];
+					y += locs[1];
+					if (lockView.getWidth() >= x && x >= 0 && lockView.getHeight() >= y && y >= 0) {
+						lockView.performClick();
+						return true;
+					}
+					blinkIcon();
+					AccessibleToast.makeText(transparentLockView.getContext(), R.string.screen_is_locked, Toast.LENGTH_LONG).show();
+					return true;
+				}
+				return true;
+			}
+
+			private void blinkIcon() {
+				lockView.setBackgroundDrawable(lockDisabled);
+				view.postDelayed(new Runnable() {
+					@Override
+					public void run() {
+						lockView.setBackgroundDrawable(lockEnabled);
+					}
+				}, 300);
+			}
+
+		});
+		final FrameLayout parent = (FrameLayout) view.getParent();
+		lockView.setOnClickListener(new View.OnClickListener() {
+			protected boolean isScreenLocked;
+
 			@Override
 			public void onClick(View v) {
+				if (!isScreenLocked) {
+					parent.addView(transparentLockView);
+					map.backToLocationImpl();
+				} else {
+					parent.removeView(transparentLockView);
+				}
+				isScreenLocked = !isScreenLocked;
+				if (isScreenLocked) {
+					lockView.setBackgroundDrawable(lockEnabled);
+				} else {
+					lockView.setBackgroundDrawable(lockDisabled);
+				}
 				map.backToLocationImpl();
 			}
 		});
-		return monitoring;
+		return lockView;
 	}
 	
 	

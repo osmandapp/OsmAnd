@@ -17,9 +17,9 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.views.LockInfoControl;
-import net.osmand.plus.views.LockInfoControl.LockInfoControlActions;
-import net.osmand.plus.views.LockInfoControl.ValueHolder;
+import net.osmand.plus.views.MonitoringInfoControl;
+import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
+import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
 import net.osmand.plus.views.MapInfoControl;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -38,7 +38,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
-public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoControlActions {
+public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringInfoControlServices {
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
@@ -86,9 +86,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 		if(monitoringControl == null) {
 			registerLayers(activity);
 		}
-		LockInfoControl lock = activity.getMapLayers().getMapInfoLayer().getLockInfoControl();
-		if(lock != null && !lock.getLockActions().contains(this)) {
-			lock.getLockActions().add(this);
+		MonitoringInfoControl lock = activity.getMapLayers().getMapInfoLayer().getMonitoringInfoControl();
+		if(lock != null && !lock.getMonitorActions().contains(this)) {
+			lock.getMonitorActions().add(this);
 		}
 	}
 
@@ -253,7 +253,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements LockInfoCont
 	}
 
 	@Override
-	public void addLockActions(final QuickAction qa, final LockInfoControl li, final OsmandMapTileView view) {
+	public void addMonitorActions(final QuickAction qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
 		final ActionItem bgServiceAction = new ActionItem();
 		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
 		bgServiceAction.setTitle(view.getResources().getString(off? R.string.monitoring_mode_off : R.string.monitoring_mode_on));
