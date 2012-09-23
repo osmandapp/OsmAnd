@@ -17,12 +17,17 @@
         android:text="@string/layer_poi"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/color_black" android:layout_weight="1"/>
-
+
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="fill_parent">
+
     <CheckBox
         android:id="@+id/check_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:button="@drawable/ic_btn_wocheckbox"
         android:focusable="false"
-        android:button="@drawable/ic_btn_wocheckbox" />
+        android:gravity="center_vertical" />
+    </LinearLayout>
 
 </LinearLayout>

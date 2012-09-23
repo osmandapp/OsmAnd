@@ -258,6 +258,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(lockView, R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", MapInfoControls.LEFT_CONTROL, exceptCar, 15);
 		backToLocation = createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.default_location, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
+		mapInfoControls.registerTopWidget(createMonitoring(map), R.drawable.monitoring, R.string.map_widget_monitoring_services, "monitorign_services", MapInfoControls.LEFT_CONTROL, all, 12);
+		
 		View globus = createGlobus();
 		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
 		
@@ -563,7 +565,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					final boolean selecteable = mi.selecteable();
 					ch.setOnCheckedChangeListener(null);
 					if(!mi.selecteable()) {
-						ch.setVisibility(View.INVISIBLE);
+						ch.setVisibility(View.GONE);
 					} else {
 						boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
 						ch.setChecked(check);
@@ -724,6 +726,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		return backToLocation;
+	}
+	
+	private ImageView createMonitoring(final MapActivity map){
+		ImageView monitoring = new ImageView(view.getContext());
+		monitoring.setImageDrawable(map.getResources().getDrawable(R.drawable.monitoring));
+		monitoring.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				map.backToLocationImpl();
+			}
+		});
+		return monitoring;
 	}
 	
 	

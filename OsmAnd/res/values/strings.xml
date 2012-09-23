@@ -19,6 +19,7 @@
 		\n\t* better UI finish (icons)
 		\n\t* lots of bug fixes
 	</string>
+	<string name="map_widget_monitoring_services">Monitoring services</string>
 	<string name="no_route">No route</string>
 	<string name="delete_target_point">Remove target point</string>
 	<string name="target_point">Target point %1$s</string>
