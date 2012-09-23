@@ -56,8 +56,8 @@
 	<!-- Default mapnik colors with changed trunk -->
 	<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
 	<renderingConstant name="motorwayRoadColor" value="#809bff"/>
-	<renderingConstant name="trunkRoadColor" value="#E62E6B"/>
-	<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
+	<renderingConstant name="trunkRoadColor" value="#FF8095"/>
+	<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
 	<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
 	
 	<!--
