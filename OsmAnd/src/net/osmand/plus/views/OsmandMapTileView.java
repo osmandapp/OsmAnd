@@ -771,7 +771,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 
-		public LatLon getLatLonFromScreenPoint(float x, float y) {
+	public LatLon getLatLonFromScreenPoint(float x, float y) {
 		float dx = x - getCenterPointX();
 		float dy = y - getCenterPointY();
 		float fy = calcDiffTileY(dx, dy);

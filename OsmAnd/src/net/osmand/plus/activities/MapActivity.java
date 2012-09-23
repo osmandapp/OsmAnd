@@ -1124,7 +1124,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 		routingHelper.setAppMode(settings.getApplicationMode());
 		// mapView.setMapPosition(settings.POSITION_ON_MAP.get());
-		mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING ? OsmandSettings.BOTTOM_CONSTANT : 
+		mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
+				|| settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS ? OsmandSettings.BOTTOM_CONSTANT : 
 			 OsmandSettings.CENTER_CONSTANT);
 		registerUnregisterSensor(getLastKnownLocation(), false);
 		mapLayers.getMapInfoLayer().recreateControls();
@@ -1147,7 +1148,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else if(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING){
 			resId = R.string.rotate_map_bearing_opt;
 		}
-		mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING ? OsmandSettings.BOTTOM_CONSTANT : 
+		mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
+				|| settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS ? OsmandSettings.BOTTOM_CONSTANT : 
 			 OsmandSettings.CENTER_CONSTANT);
 		
 		AccessibleToast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();

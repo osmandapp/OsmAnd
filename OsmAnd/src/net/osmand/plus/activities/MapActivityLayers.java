@@ -136,7 +136,7 @@ public class MapActivityLayers {
 		locationLayer = new PointLocationLayer();
 		mapView.addLayer(locationLayer, 6);
 		// 7. point navigation layer
-		navigationLayer = new PointNavigationLayer();
+		navigationLayer = new PointNavigationLayer(activity);
 		mapView.addLayer(navigationLayer, 7);
 		// 8. context menu layer 
 		contextMenuLayer = new ContextMenuLayer(activity);

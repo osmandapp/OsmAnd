@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,7 +25,7 @@ import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-public class PointNavigationLayer extends OsmandMapLayer {
+public class PointNavigationLayer extends OsmandMapLayer implements IContextMenuProvider {
 	protected final static int DIST_TO_SHOW = 80;
 
 	private Paint point;
@@ -39,7 +44,19 @@ public class PointNavigationLayer extends OsmandMapLayer {
 	private Paint textPaint;
 
 	private RoutingHelper routingHelper;
+
+	private final MapActivity map;
 	
+	public PointNavigationLayer(MapActivity map) {
+		this.map = map;
+	}
+	
+	public static class TargetPoint {
+		public LatLon location;
+		public String name;
+		public boolean intermediate;
+		public int index;
+	}
 	
 
 	private void initUI() {
@@ -162,6 +179,86 @@ public class PointNavigationLayer extends OsmandMapLayer {
 	@Override
 	public boolean onSingleTap(PointF point) {
 		return false;
+	}
+	
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, List<Object> o) {
+		for(int i=0; i<=intermediatePoints.size(); i++) {
+			LatLon latLon;
+			boolean target = i == intermediatePoints.size();
+			if(target){
+				latLon = pointToNavigate;
+			} else {
+				latLon =  intermediatePoints.get(i);
+			}
+			if(latLon != null) {
+				int ex = (int) point.x;
+				int ey = (int) point.y;
+				int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
+				int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
+				if (Math.abs(x - ex) <= 12 && Math.abs(y - ey) <= 12) {
+					TargetPoint tp = new TargetPoint();
+					tp.location = latLon;
+					tp.intermediate = !target;
+					if(target) {
+						tp.name = view.getContext().getString(R.string.target_point, "");
+					} else {
+						tp.name = (i + 1) + ". " + view.getContext().getString(R.string.intermediate_point, "");
+					}
+					tp.index = i;
+					o.add(tp);
+				}
+			}
+		}
+		
+		
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if (o instanceof TargetPoint) {
+			return ((TargetPoint) o).location;
+		}
+		return null;
+	}
+
+	@Override
+	public String getObjectDescription(Object o) {
+		if (o instanceof TargetPoint) {
+			return ((TargetPoint) o).name;
+		}
+		return null;
+	}
+
+	@Override
+	public String getObjectName(Object o) {
+		if (o instanceof TargetPoint) {
+			return ((TargetPoint) o).name;
+		}
+		return null;
+	}
+	
+	@Override
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+		if(o instanceof TargetPoint) {
+			final TargetPoint a = (TargetPoint) o;
+			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					if (itemId == R.string.delete_target_point) {
+						if(a.intermediate) {
+							map.removeIntermediatePoint(true, a.index);
+						} else {
+							map.navigateToPoint(null, true, -1);
+						}
+					}
+				}
+			};
+			
+			adapter.registerItem(R.string.delete_target_point, 0, listener, -1);
+			/*a.intermediate?  R.drawable.list_activities_inter_delete : R.drawable.list_activities_target_delete*/
+		}
 	}
 
 }

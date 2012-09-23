@@ -6,9 +6,15 @@ import java.util.List;
 import net.osmand.FavouritePoint;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -151,6 +157,34 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 			return new LatLon(((FavouritePoint)o).getLatitude(), ((FavouritePoint)o).getLongitude());
 		}
 		return null;
+	}
+	
+	@Override
+	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+		if(o instanceof FavouritePoint) {
+			final FavouritePoint a = (FavouritePoint) o;
+			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					if (itemId == R.string.favourites_context_menu_delete) {
+						final Resources resources = view.getContext().getResources();
+						Builder builder = new AlertDialog.Builder(view.getContext());
+						builder.setMessage(resources.getString(R.string.favourites_remove_dialog_msg, a.getName()));
+						builder.setNegativeButton(R.string.default_buttons_no, null);
+						builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								favorites.deleteFavourite(a);
+								view.refreshMap();
+							}
+						});
+						builder.create().show();
+					}
+				}
+			};
+			
+			adapter.registerItem(R.string.favourites_context_menu_delete, R.drawable.list_activities_fav_delete, listener, -1);
+		}
 	}
 	
 

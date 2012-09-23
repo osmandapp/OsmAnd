@@ -12,27 +12,28 @@
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
 	</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
-        \n\t* Intermediate points
+        \n\t* Waypoints
 		\n\t* Improved route guidance
 		\n\t* Avoid motorways option
 		\n\t* Cycleway=track display
 		\n\t* better UI finish (icons)
 		\n\t* lots of bug fixes
 	</string>
-    
+	<string name="delete_target_point">Remove target point</string>
+	<string name="target_point">Target point %1$s</string>
+    <string name="intermediate_point">Waypoint %1$s</string>
     <string name="navigate_to">Set as destination</string>
     <string name="context_menu_item_last_intermediate_point">Set last target point</string>
     <string name="context_menu_item_first_intermediate_point">Set first target point</string>
-    <string name="add_as_last_destination_point">Add as last intermedate point</string>
-    <string name="add_as_first_destination_point">Add as first intermediate point</string>
+    <string name="add_as_last_destination_point">Add as last waypoint</string>
+    <string name="add_as_first_destination_point">Add as first waypoint</string>
     <string name="replace_destination_point">Replace destination point</string>
     <string name="new_destination_point_dialog">You already have destination point set.</string>
-    <string name="target_point">Target point %1$s</string>
     <string name="target_points">Targets</string>
-    <string name="intermediate_point_too_far">Intermediate point %1$s too far from nearest road.</string>
-    <string name="arrived_at_intermediate_point">You have arrived at your intermediate point</string>
-    <string name="context_menu_item_intermediate_point">Add intermediate point</string>
-    <string name="map_widget_intermediate_distance">Intermediate point</string>
+    <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
+    <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
+    <string name="context_menu_item_intermediate_point">Add way point</string>
+    <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="btn_add_tag">Add Tag</string>
     <string name="btn_advanced_mode">Advanced Mode...</string>

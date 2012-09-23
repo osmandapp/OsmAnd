@@ -1,7 +1,11 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -41,8 +45,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	private LatLon latLon;
-	private IContextMenuProvider selectedContextProvider;
-	private List<Object> selectedObjects = new ArrayList<Object>();
+	private Map<Object, IContextMenuProvider> selectedObjects = new LinkedHashMap<Object, IContextMenuProvider>();
 	
 	private TextView textView;
 	private ImageView closeButton;
@@ -162,15 +165,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 
-	public void setSelections(List<Object> selections, IContextMenuProvider contextProvider) {
+	public void setSelections(Map<Object, IContextMenuProvider> selections) {
 		if (selections != null) {
 			selectedObjects = selections;
 		} else {
 			selectedObjects.clear();
 		}
 		if (!selectedObjects.isEmpty()) {
-			selectedContextProvider = contextProvider;
-			latLon = contextProvider.getObjectLocation(selectedObjects.get(0));
+			Entry<Object, IContextMenuProvider> e = selectedObjects.entrySet().iterator().next();
+			latLon = e.getValue().getObjectLocation(e.getKey());
 		}
 	}
 
@@ -188,27 +191,25 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		
-		selectedContextProvider = null;
 		selectedObjects.clear();
+		List<Object> s = new ArrayList<Object>();
+		LatLon latLon = null;
 		for(OsmandMapLayer l : view.getLayers()){
 			if(l instanceof ContextMenuLayer.IContextMenuProvider){
-				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, selectedObjects);
-				if(!selectedObjects.isEmpty()){
-					selectedContextProvider = (IContextMenuProvider) l;
-					break;
+				s.clear();
+				((ContextMenuLayer.IContextMenuProvider) l).collectObjectsFromPoint(point, s);
+				for(Object o : s) {
+					selectedObjects.put(o, ((ContextMenuLayer.IContextMenuProvider) l));
+					if(latLon == null) {
+						latLon = ((ContextMenuLayer.IContextMenuProvider) l).getObjectLocation(o);
+					}
 				}
 			}
 		}
-		
-		LatLon latLon = view.getLatLonFromScreenPoint(point.x, point.y);
-		String description = getSelectedObjectDescription();
-		
-		if (!selectedObjects.isEmpty()) {
-			LatLon l = selectedContextProvider.getObjectLocation(selectedObjects.get(0));
-			if (l != null) {
-				latLon = l;
-			}
+		if(latLon == null) {
+			latLon = view.getLatLonFromScreenPoint(point.x, point.y);
 		}
+		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);
 		view.refreshMap();
 		return true;
@@ -239,27 +240,32 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 	
 	public String getSelectedObjectName(){
-		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
-			StringBuilder name = new StringBuilder(); 
-			if (selectedObjects.size() > 1)
-				name.append("1. ");
-			name.append(selectedContextProvider.getObjectName(selectedObjects.get(0)));
-			for (int i = 1; i < selectedObjects.size(); i++)
-				name.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectName(selectedObjects.get(i)));
-			return name.toString();
-		}
-		return null;
+		return getSelectedObjectInfo(true);
 	}
 	
 	public String getSelectedObjectDescription(){
-		if(!selectedObjects.isEmpty() && selectedContextProvider != null){
+		return getSelectedObjectInfo(false);
+	}
+	
+	private String getSelectedObjectInfo(boolean name){
+		if(!selectedObjects.isEmpty()){
 			StringBuilder description = new StringBuilder(); 
 			if (selectedObjects.size() > 1) {
 				description.append("1. ");
 			}
-			description.append(selectedContextProvider.getObjectDescription(selectedObjects.get(0)));
-			for (int i = 1; i < selectedObjects.size(); i++) {
-				description.append("\n" + (i + 1) + ". ").append(selectedContextProvider.getObjectDescription(selectedObjects.get(i)));
+			Iterator<Entry<Object, IContextMenuProvider>> it = selectedObjects.entrySet().iterator();
+			int i = 0;
+			while(it.hasNext()) {
+				Entry<Object, IContextMenuProvider> e = it.next();
+				if( i > 0) {
+					description.append("\n" + (i + 1) + ". ");
+				}
+				if(name) {
+					description.append(e.getValue().getObjectName(e.getKey()));
+				} else {
+					description.append(e.getValue().getObjectDescription(e.getKey()));
+				}
+				i++;
 			}
 			return description.toString();
 		}
@@ -287,18 +293,22 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	private void showContextMenuForSelectedObjects() {
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(activity);
-		if(selectedObjects.size() > 1){
+		if (selectedObjects.size() > 1) {
 			Builder builder = new AlertDialog.Builder(view.getContext());
 			String[] d = new String[selectedObjects.size()];
-			int i =0;
-			for(Object o  : selectedObjects) {
-				d[i++] = selectedContextProvider.getObjectDescription(o);
+			final List<Object> s = new ArrayList<Object>();
+			int i = 0;
+			Iterator<Entry<Object, IContextMenuProvider>> it = selectedObjects.entrySet().iterator();
+			while(it.hasNext()) {
+				Entry<Object, IContextMenuProvider> e = it.next();
+				d[i++] = e.getValue().getObjectDescription(e.getKey());
+				s.add(e.getKey());
 			}
 			builder.setItems(d, new OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					Object selectedObj = selectedObjects.get(which);
-					for(OsmandMapLayer layer : view.getLayers()) {
+					Object selectedObj = s.get(which);
+					for (OsmandMapLayer layer : view.getLayers()) {
 						layer.populateObjectContextMenu(selectedObj, menuAdapter);
 					}
 					activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
@@ -306,8 +316,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			});
 			builder.show();
 		} else {
-			Object selectedObj = selectedObjects.get(0);
-			for(OsmandMapLayer layer : view.getLayers()) {
+			Object selectedObj = selectedObjects.keySet().iterator().next();
+			for (OsmandMapLayer layer : view.getLayers()) {
 				layer.populateObjectContextMenu(selectedObj, menuAdapter);
 			}
 			activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
@@ -343,15 +353,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	public void setSelectedObject(Object toShow) {
 		selectedObjects.clear();
-		if(toShow == null){
-			selectedContextProvider = null;
-		} else {
+		if(toShow != null){
 			for(OsmandMapLayer l : view.getLayers()){
 				if(l instanceof ContextMenuLayer.IContextMenuProvider){
 					String des = ((ContextMenuLayer.IContextMenuProvider) l).getObjectDescription(toShow);
 					if(des != null) {
-						selectedContextProvider = (IContextMenuProvider) l;
-						selectedObjects.add(toShow);
+						selectedObjects.put(toShow, (IContextMenuProvider) l);
 					}
 				}
 			}

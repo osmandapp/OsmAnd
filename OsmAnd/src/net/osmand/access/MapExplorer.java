@@ -1,7 +1,9 @@
 package net.osmand.access;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.R;
@@ -10,7 +12,6 @@ import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector.OnGestureListener;
@@ -26,8 +27,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     private OsmandMapTileView mapView;
     private OnGestureListener fallback;
-    private List<Object> selectedObjects = null;
-    private IContextMenuProvider contextProvider;
+    private Map<Object, IContextMenuProvider> selectedObjects = null;
     private final DisplayMetrics dm = new DisplayMetrics();
 
 
@@ -42,48 +42,45 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
 
     // Compare two lists by content.
-    private boolean different(List<Object> l1, List<Object> l2) {
-        if ((l1 != null) && !l1.isEmpty()) {
-            if ((l2 != null) && !l2.isEmpty()) {
-                if (l1.size() != l2.size())
-                    return true;
-                for (int i = 0; i < l1.size(); i++)
-                    if (l1.get(i) != l2.get(i))
-                        return true;
-                return false;
-            }
-            return true;
-        }
-        return ((l2 != null) && !l2.isEmpty());
+    private boolean different(Object l1, Object l2) {
+    	if(l1 == null || l2 == null) {
+    		return l1 != l2;
+    	}
+    	return l1.equals(l2);
     }
 
     // Find touched objects if any and emit accessible toast message
     // with it's brief description.
     private void describePointedObjects(MotionEvent event) {
         PointF point = new PointF(event.getX(), event.getY());
-        List<Object> newSelections = new ArrayList<Object>();
-        for (OsmandMapLayer layer : mapView.getLayers())
-            if (layer instanceof IContextMenuProvider) {
-                ((IContextMenuProvider)layer).collectObjectsFromPoint(point, newSelections);
-                if (!newSelections.isEmpty()) {
-                    contextProvider = (IContextMenuProvider)layer;
-                    break;
-                }
-            }
-        if (newSelections.isEmpty()) {
-            collectObjectsFromPoint(point, newSelections);
-            contextProvider = this;
+        List<Object> ns = new ArrayList<Object>();
+        Map<Object, IContextMenuProvider> newSelectedObjects = new LinkedHashMap<Object, ContextMenuLayer.IContextMenuProvider>();
+		for (OsmandMapLayer layer : mapView.getLayers()) {
+			if (layer instanceof IContextMenuProvider) {
+				ns.clear();
+				((IContextMenuProvider) layer).collectObjectsFromPoint(point, ns);
+				for(Object o : ns) {
+					newSelectedObjects.put(o, (IContextMenuProvider) layer);
+				}
+			}
+		}
+        if (newSelectedObjects.isEmpty()) {
+        	ns.clear();
+            collectObjectsFromPoint(point, ns);
+            for(Object o : ns) {
+				newSelectedObjects.put(o, this);
+			}
         }
-        if (different(newSelections, selectedObjects)) {
+        if (different(newSelectedObjects, selectedObjects)) {
             ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
             if (contextMenuLayer != null) {
-                contextMenuLayer.setSelections(newSelections, contextProvider);
-                if (!newSelections.isEmpty())
+                contextMenuLayer.setSelections(newSelectedObjects);
+                if (!ns.isEmpty())
                     mapView.showMessage(mapView.getSettings().USE_SHORT_OBJECT_NAMES.get() ?
                                         contextMenuLayer.getSelectedObjectName() :
                                         contextMenuLayer.getSelectedObjectDescription());
             }
-            selectedObjects = newSelections;
+            selectedObjects = newSelectedObjects;
         }
     }
 
@@ -96,7 +93,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
             return fallback.onDown(e);
         ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
         if (contextMenuLayer != null)
-            contextMenuLayer.setSelections(null, null);
+            contextMenuLayer.setSelections(null);
         selectedObjects = null;
         describePointedObjects(e);
         return false;
