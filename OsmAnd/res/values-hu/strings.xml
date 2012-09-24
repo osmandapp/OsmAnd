@@ -1047,4 +1047,5 @@
 	<string name="no_route">Nincs út</string>
 	<string name="delete_target_point">Célpont törlése</string>
 	<string name="intermediate_point">%1$s. útpont</string>
+    <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
     </resources>
