@@ -109,7 +109,7 @@
 		<!-- Native section -->
 		<if>
 			<condition>
-				<isset property="nativeoff"/>
+				<equals arg1="${nativeoff}" arg2="true"/>
 			</condition>
 			<then>
 				<echo>Not using native, excluding from build</echo>
