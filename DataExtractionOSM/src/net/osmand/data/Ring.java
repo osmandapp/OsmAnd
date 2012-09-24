@@ -1,6 +1,5 @@
 package net.osmand.data;
 
-import gnu.trove.list.array.TLongArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,24 +16,26 @@ import net.osmand.osm.Way;
  * @author sander
  *
  */
-public class Ring {
+public class Ring implements Comparable<Ring> {
 	/**
 	 * This is a list of the ways added by the user
 	 * The order can be changed with methods from this class
 	 */
 	private final ArrayList<Way> ways;
+	
 	/**
-	 * This is the closure of the ways added by the user
-	 * So simple two-node ways are added to close the ring
-	 * This is a cache from what can calculated with the ways
+	 * a concatenation of the ways to form the border
+	 * this is NOT necessarily a CLOSED way
+	 * The id is random, so this may never leave the Ring object
 	 */
-	private ArrayList<Way> closedWays;
+	private Way border;
+	
 	/**
-	 * This is a single way, consisting of all the nodes 
-	 * from ways in the closedWays
-	 * this is a cache from what can be calculated with the closedWays
+	 * area can be asked a lot of times when comparing rings, chace it
 	 */
-	private Way closedBorder;
+	private double area = -1;
+	
+	
 
 	/**
 	 * Construct a Ring with a list of ways
@@ -52,151 +53,332 @@ public class Ring {
 	 * @return the ways added to the Ring
 	 */
 	public List<Way> getWays() {
-		return ways;
+		return new ArrayList<Way>(ways);
 	}
-	/**
-	 * Get the closed ways that make up the Ring
-	 * This method will sort the ways, so it is CPU intensive
-	 * @return the closed ways
-	 */
-	public List<Way> getClosedWays() {
-		// Add ways to close the ring
-		closeWays();
-		return closedWays;
-	}
+	
 	
 	/**
 	 * check if this ring is closed by nature
 	 * @return true if this ring is closed, false otherwise
 	 */
 	public boolean isClosed() {
-		closeWays();
-		for (int i = closedWays.size()-1; i>=0; i--) {
-			if (!ways.contains(closedWays.get(i))){
-				return false;
-			}
-		}
-		return true;
+		mergeWays();
+		return border.getFirstNodeId() == border.getLastNodeId();
 	}
 	
 	/**
 	 * get a single closed way that represents the border
 	 * this method is CPU intensive
-	 * @return a closed way that represents the border
+	 * @return a list of Nodes that represents the border
+	 * if the border can't be created, an empty list will be returned
 	 */
-	public Way getBorder() {
+	public List<Node> getBorder() {
 		mergeWays();
-		return closedBorder;
+		List<Node> l = border.getNodes();
+		if (border.getNodes().size() != 0 && !isClosed()) {
+			l.add(border.getNodes().get(0));
+		}
+		return l;
 	}
 
 	/**
-	 * Merge all ways from the closedways into a single way
-	 * If the original ways are initialized with nodes, the new one will be so too
+	 * Merge all ways from the into a single border way
+	 * If the original ways are initialized with nodes, the border will be so too
+	 * If the original ways aren't initialized with nodes, the border won't be either
+	 * If only some original ways are initialized with nodes, the border will only have the nodes of the initialized ways
 	 */
 	private void mergeWays() {
-		if (closedBorder != null) return;
+		if (border != null) return;
 		
-		closeWays();
 		
-		closedBorder = new Way(0L);
 		
-		Long previousConnection = getMultiLineEndNodes(closedWays)[0];
+		//make a copy of the ways
+		List<Way> ways = new ArrayList<Way>(getWays());
 		
-		for (Way w : closedWays) {
-			boolean firstNode = true;
-			TLongArrayList nodeIds = w.getNodeIds();
-			List<Node> nodes = w.getNodes();
-			
-			if (w.getFirstNodeId() == previousConnection) {
-				
-				for (int i = 0; i< nodeIds.size(); i++) {
-					// don't need to add the first node, that one was added by the previous way
-					if (!firstNode) {
-						if(nodes == null || i>=nodes.size()) {
-							closedBorder.addNode(nodeIds.get(i));
-						} else {
-							closedBorder.addNode(nodes.get(i));
-						}
-						
-					}
-					firstNode = false;
-				}
-				
-				previousConnection = w.getLastNodeId();
-			} else {
-				
-				// add the nodes in reverse order
-				for (int i = nodeIds.size() - 1; i >= 0; i--) {
-					// don't need to add the first node, that one was added by the previous way
-					if (!firstNode) {
-						if(nodes == null || i>=nodes.size()) {
-							closedBorder.addNode(nodeIds.get(i));
-						} else {
-							closedBorder.addNode(nodes.get(i));
-						}
-					}
-					firstNode = false;
-				}
-				
-				previousConnection = w.getFirstNodeId();
-				
+		// do we have to include ways with uninitialized nodes?
+		// Only if all ways have uninitialized nodes
+		boolean unInitializedNodes = true;
+		
+		for (Way w : ways) {
+			if (w.getNodes() != null && w.getNodes().size() != 0) {
+				unInitializedNodes = false;
+				break;
 			}
 		}
 		
-	}
-
-	/**
-	 * Check if there exists a cache, if so, return it
-	 * If there isn't a cache, sort the ways to form connected strings <p />
-	 * 
-	 * If a Ring contains a gap, one way (without initialized nodes and id=0) is added to the list
-	 */
-	private void closeWays(){
-		// If the ways have been closed, return the cache
-		if (closedWays != null) return;
-		if (ways.size() == 0) {
-			closedWays = new ArrayList<Way>();
+		List<Way> borderWays = new ArrayList<Way>();
+		
+		
+		for (Way w : ways) {
+			// if the way has no nodes initialized, and we should initialize them, continue
+			if ((w.getNodes() == null || w.getNodes().size() == 0) &&
+					!unInitializedNodes) continue;
+			
+			Way newWay = null;
+			Way addedTo = null;
+			
+			// merge the Way w with the first borderway suitable;
+			for (Way borderWay : borderWays) {
+				if (w.getFirstNodeId() == borderWay.getFirstNodeId()) {
+					newWay = combineTwoWays(w, borderWay, true, true);
+					addedTo = borderWay;
+					break;
+				} else if (w.getFirstNodeId() == borderWay.getLastNodeId()) {
+					newWay = combineTwoWays(w, borderWay, true, false);
+					addedTo = borderWay;
+					break;
+				} else if (w.getLastNodeId() == borderWay.getLastNodeId()) {
+					newWay = combineTwoWays(w, borderWay, false, false);
+					addedTo = borderWay;
+					break;
+				} else if (w.getLastNodeId() == borderWay.getFirstNodeId()) {
+					newWay = combineTwoWays(w, borderWay, false, true);
+					addedTo = borderWay;
+					break;
+				}
+			}
+			
+			if (newWay == null) {
+				// no suitable borderWay has been found, add this way as one of the boundaries
+				borderWays.add(w);
+			} else {
+				// ways are combined, remove the original borderway
+				borderWays.remove(addedTo);
+				
+				addedTo = null;
+				// search if it can be combined with something else
+				for (Way borderWay : borderWays) {
+					if (newWay.getFirstNodeId() == borderWay.getFirstNodeId()) {
+						newWay = combineTwoWays(newWay, borderWay, true, true);
+						addedTo = borderWay;
+						break;
+					} else if (newWay.getFirstNodeId() == borderWay.getLastNodeId()) {
+						newWay = combineTwoWays(newWay, borderWay, true, false);
+						addedTo = borderWay;
+						break;
+					} else if (newWay.getLastNodeId() == borderWay.getLastNodeId()) {
+						newWay = combineTwoWays(newWay, borderWay, false, false);
+						addedTo = borderWay;
+						break;
+					} else if (newWay.getLastNodeId() == borderWay.getFirstNodeId()) {
+						newWay = combineTwoWays(newWay, borderWay, false, true);
+						addedTo = borderWay;
+						break;
+					}
+				}
+				
+				if (addedTo != null) {
+					// newWay has enlarged a second time
+					borderWays.remove(addedTo);
+				}
+				// newWay is now a concatenation of 2 or 3 ways, needs to be added to the borderWays
+				borderWays.add(newWay);
+				
+			}
+			
+		}
+		
+		if (borderWays.size() != 1) {
+			border = new Way(randId());
 			return;
 		}
-		closedWays = new ArrayList<Way>(ways);
 		
-		long[] endNodes = getMultiLineEndNodes(ways);
-		if (endNodes[0] != endNodes[1]) {
-			if(ways.get(0).getNodes() == null) {
-				Way w = new Way(0L);
-				w.addNode(endNodes[0]);
-				w.addNode(endNodes[1]);
-				closedWays.add(w);
-			} else {
-				Node n1 = null, n2 = null;
-				if (ways.get(0).getFirstNodeId() == endNodes[0]) {
-					n1 = ways.get(0).getNodes().get(0);
-				} else {
-					int index = ways.get(0).getNodes().size() - 1;
-					n1 = ways.get(0).getNodes().get(index);
-				}
+		border = borderWays.get(0);
+		
+		return;
+		
+	}
+	
+	/**
+	 * check if this Ring contains the node
+	 * @param n the Node to check
+	 * @return yes if the node is inside the ring
+	 */
+	public boolean containsNode(Node n) {
+		return  containsPoint(n.getLatitude(), n.getLongitude());
+	}
+	
+	/**
+	 * check if this Ring contains the point
+	 * @param latitude lat of the point
+	 * @param longitude lon of the point
+	 * @return yes if the point is inside the ring
+	 */
+	public boolean containsPoint(double latitude, double longitude){
+		return  countIntersections(latitude, longitude) % 2 == 1;
+	}
+	
+	/**
+	 * count the intersections when going from lat, lon to outside the ring
+	 * @param latitude the lat to start
+	 * @param longitude the lon to start
+	 * @param intersections the number of intersections to start with
+	 * @return the number of intersections
+	 */
+	private int countIntersections(double latitude, double longitude) {
+		int intersections = 0;
+		
+		List<Node> polyNodes = getBorder();
+		if (polyNodes.size() == 0) return 0;
+		for (int i = 0; i < polyNodes.size() - 1; i++) {
+			if (MapAlgorithms.ray_intersect_lon(polyNodes.get(i),
+					polyNodes.get(i + 1), latitude, longitude) != -360d) {
+				intersections++;
+			}
+		}
+		// special handling, also count first and last, might not be closed, but
+		// we want this!
+		if (MapAlgorithms.ray_intersect_lon(polyNodes.get(0),
+				polyNodes.get(polyNodes.size() - 1), latitude, longitude) != -360d) {
+			intersections++;
+		}
+		return intersections;
+	}
+	
+	
+	/**
+	 * Check if this is in Ring r
+	 * @param r the ring to check
+	 * @return true if this Ring is inside Ring r
+	 */
+	public boolean isIn(Ring r) {
+		/*
+		 * bi-directional check is needed because some concave rings can intersect
+		 * and would only fail on one of the checks
+		 */
+		List<Node> points = this.getBorder();
+		
+		// r should contain all nodes of this
+		for(Node n : points) {
+			if (!r.containsNode(n)) {
+				return false;
+			}
+		}
+		
+		points = r.getBorder();
+		
+		// this should not contain a node from r
+		for(Node n : points) {
+			if (this.containsNode(n)) {
+				return false;
+			}
+		}
+		
+		return true;
+		
+	}
+
+	
+	/**
+	 * If this Ring is not complete 
+	 * (some ways are not initialized 
+	 * because they are not included in the OSM file) <p />
+	 * 
+	 * We are trying to close this Ring by using the other Ring.<p />
+	 * 
+	 * The other Ring must be complete, and the part of this Ring 
+	 * inside the other Ring must also be complete.
+	 * @param other the other Ring (which is complete) used to close this one
+	 */
+	public void closeWithOtherRing(Ring other) {
+		List<Node> thisBorder = getBorder();
+		List<Integer> thisSwitchPoints = new ArrayList<Integer>();
+		
+		boolean insideOther = other.containsNode(thisBorder.get(0));
+		
+		// Search the node pairs for which the ring goes inside or out the other
+		for (int i = 0; i<thisBorder.size(); i++) {
+			Node n = thisBorder.get(i);
+			if (other.containsNode(n) != insideOther) {
+				// we are getting out or in the boundary now.
+				// toggle switch
+				insideOther = !insideOther;
 				
-				int lastML = ways.size() - 1;
-				if (ways.get(lastML).getFirstNodeId() == endNodes[0]) {
-					n2 = ways.get(lastML).getNodes().get(0);
-				} else {
-					int index = ways.get(lastML).getNodes().size() - 1;
-					n2 = ways.get(lastML).getNodes().get(index);
-				}
-				
-				Way w = new Way(0L);
-				w.addNode(n1);
-				w.addNode(n2);
-				closedWays.add(w);
-		 	}
+				thisSwitchPoints.add(i);
+			}
+		}
+		
+		List<Integer> otherSwitchPoints = new ArrayList<Integer>();
+		
+		// Search the according node pairs in the other ring
+		for (int i : thisSwitchPoints) {
+			LatLon a = thisBorder.get(i-1).getLatLon();
+			LatLon b = thisBorder.get(i).getLatLon();
+			otherSwitchPoints.add(crossRingBorder(a, b));
 		}
 		
 		
 		
-		return;
-
+		/*
+		 * TODO:
+		 * 
+		 * * Split the other Ring into ways from splitPoint to splitPoint
+		 * 
+		 * * Split this ring into ways from splitPoint to splitPoint
+		 * 
+		 * * Filter out the parts of way from this that are inside the other Ring
+		 * 		Use the insideOther var and the switchPoints list for this.
+		 * 
+		 * * For each two parts of way from this, search a part of way connecting the two. 
+		 * 		If there are two, take the shortest.
+		 */
 	}
+	
+	/**
+	 * Get the segment of the Ring that intersects a segment 
+	 * going from point a to point b
+	 * 
+	 * @param a the begin point of the segment
+ 	 * @param b the end point of the segment
+	 * @return an integer i which is the index so that the segment 
+	 * 		from getBorder().get(i-1) to getBorder().get(i) intersects with 
+	 * 		the segment from parameters a to b. <p />
+	 * 
+	 * 		0 if the segment from a to b doesn't intersect with the Ring. 
+	 */
+	public int crossRingBorder(LatLon a, LatLon b) {
+		List<Node> border = getBorder();
+		for (int i = 1; i<border.size(); i++) {
+			LatLon c = border.get(i-1).getLatLon();
+			LatLon d = border.get(i).getLatLon();
+			if (MapAlgorithms.linesIntersect(
+					a.getLatitude(), a.getLongitude(), 
+					b.getLatitude(), b.getLongitude(), 
+					c.getLatitude(), c.getLongitude(), 
+					d.getLatitude(), d.getLongitude())) {
+				return i;
+			}
+		}
+		return 0;
+		
+	}
+	
+	public double getArea() {
+		if (area == -1) {
+			//cache the area
+			area = MapAlgorithms.getArea(getBorder());
+		}
+		return area;
+	}
+	
+	
 
+
+	@Override
+	/**
+	 * @param r the ring to compare with
+	 * @return -1 if this is smaller than r <br />
+	 * 1 if r is smaller than this <br />
+	 * 0 if they have the same size
+	 */
+	public int compareTo(Ring r) {
+		double thisArea = getArea();
+		double rArea = r.getArea();
+		if (thisArea < rArea) return -1;
+		if (rArea < thisArea) return 1;
+		return 0;
+	}
+	
 	/**
 	 * Join the ways in connected strings for further processing
 	 * @return A list with list of connected ways
@@ -209,7 +391,7 @@ public class Ring {
 			/* 
 			 * Check if the way has at least 2 nodes
 			 * 
-			 * FIXME TO LOG OR NOT TO LOG?
+			 * TO LOG OR NOT TO LOG?
 			 *
 			 *		logging this creates a whole bunch of log lines for all ways
 			 *		part of a multipolygon but not in the map
@@ -327,59 +509,7 @@ public class Ring {
 	}
 	
 	/**
-	 * Get the end nodes of a multiLine
-	 * The ways in the multiLine don't have to be initialized for this.
-	 * 
-	 * @param multiLine the multiLine to get the end nodes of
-	 * @return an array of size two with the end nodes on both sides. <br />
-	 *  * The first node is the end node of the first way in the multiLine. <br />
-	 *  * The second node is the end node of the last way in the multiLine. 
-	 */
-	private long[] getMultiLineEndNodes(ArrayList<Way> multiLine) {
-		
-		// special case, the multiLine contains only a single way, return the end nodes of the way
-		if (multiLine.size() == 1){
-			return new long[] {multiLine.get(0).getFirstNodeId(), multiLine.get(0).getLastNodeId()};
-		}
-		
-		if (multiLine.size() == 2) {
-			// ring of two elements, arbitrary choice of the end nodes
-			if(multiLine.get(0).getFirstNodeId() == multiLine.get(1).getFirstNodeId() && 
-					multiLine.get(0).getLastNodeId() == multiLine.get(1).getLastNodeId()) {
-				return new long[] {multiLine.get(0).getFirstNodeId(), multiLine.get(0).getFirstNodeId()};
-			} else if(multiLine.get(0).getFirstNodeId() == multiLine.get(1).getLastNodeId() && 
-					multiLine.get(0).getLastNodeId() == multiLine.get(1).getFirstNodeId()) {
-				return new long[] {multiLine.get(0).getFirstNodeId(), multiLine.get(0).getFirstNodeId()};
-			}
-		}
-		
-		// For all other multiLine lenghts, or for non-closed multiLines with two elements, proceed
-		
-		long n1 = 0, n2 = 0;
-		
-		if (multiLine.get(0).getFirstNodeId() == multiLine.get(1).getFirstNodeId() ||
-				multiLine.get(0).getFirstNodeId() == multiLine.get(1).getLastNodeId()) {
-			n1 = multiLine.get(0).getLastNodeId();
-		} else if (multiLine.get(0).getLastNodeId() == multiLine.get(1).getFirstNodeId() ||
-				multiLine.get(0).getLastNodeId() == multiLine.get(1).getLastNodeId()) {
-			n1 = multiLine.get(0).getFirstNodeId();
-		}
-		
-		int lastIdx = multiLine.size()-1;
-		
-		if (multiLine.get(lastIdx).getFirstNodeId() == multiLine.get(1).getFirstNodeId() ||
-				multiLine.get(lastIdx).getFirstNodeId() == multiLine.get(1).getLastNodeId()) {
-			n2 = multiLine.get(lastIdx).getLastNodeId();
-		} else if (multiLine.get(lastIdx).getLastNodeId() == multiLine.get(lastIdx - 1).getFirstNodeId() ||
-				multiLine.get(lastIdx).getLastNodeId() == multiLine.get(lastIdx - 1).getLastNodeId()) {
-			n2 = multiLine.get(lastIdx).getFirstNodeId();
-		}
-		
-		return new long[] {n1, n2};
-	}
-	
-	/**
-	 * Combine a list of ways to a list of rings
+	 * Combine a list of ways into a list of rings
 	 * 
 	 * The ways must not have initialized nodes for this
 	 * 
@@ -400,185 +530,103 @@ public class Ring {
 	}
 	
 	/**
-	 * check if this Ring contains the node
-	 * @param n the Node to check
-	 * @return yes if the node is inside the ring
+	 * get a random long number
+	 * @return
 	 */
-	public boolean containsNode(Node n) {
-		return  containsPoint(n.getLatitude(), n.getLongitude());
+	private static long randId() {
+		return Math.round(Math.random()*Long.MIN_VALUE);
 	}
 	
 	/**
-	 * check if this Ring contains the point
-	 * @param latitude lat of the point
-	 * @param longitude lon of the point
-	 * @return yes if the point is inside the ring
+	 * make a new Way with the nodes from two other ways
+	 * @param w1 the first way
+	 * @param w2 the second way
+	 * @param firstNodeW1 set true if the first node of w1 is also in the other way
+	 * @param firstNodeW2 set true if the first node of w2 is also in the other way
 	 */
-	public boolean containsPoint(double latitude, double longitude){
-		return  countIntersections(latitude, longitude) % 2 == 1;
-	}
-	
-	/**
-	 * count the intersections when going from lat, lon to outside the ring
-	 * @param latitude the lat to start
-	 * @param longitude the lon to start
-	 * @param intersections the number of intersections to start with
-	 * @return the number of intersections
-	 */
-	private int countIntersections(double latitude, double longitude) {
-		int intersections = 0;
-		
-		mergeWays();
-		List<Node> polyNodes = closedBorder.getNodes();
-		for (int i = 0; i < polyNodes.size() - 1; i++) {
-			if (MapAlgorithms.ray_intersect_lon(polyNodes.get(i),
-					polyNodes.get(i + 1), latitude, longitude) != -360d) {
-				intersections++;
+	private static Way combineTwoWays(Way w1, Way w2, boolean firstNodeW1, boolean firstNodeW2) {
+		Way newWay = new Way(randId());
+		if(w1.getNodes() != null || w1.getNodes().size() != 0) {
+			if (firstNodeW1 && firstNodeW2) {
+				// add the nodes of w1 in reversed order, without the first node
+				for (int i = w1.getNodes().size() - 1; i>0; i--) {
+					newWay.addNode(w1.getNodes().get(i));
+				}
+				//add the nodes from w2
+				for (Node n : w2.getNodes()) {
+					newWay.addNode(n);
+				}
+			} else if (firstNodeW1 && !firstNodeW2) {
+				// add all nodes from w2
+				for (Node n : w2.getNodes()) {
+					newWay.addNode(n);
+				}
+				// add the nodes from w1, except the first one
+				for (int i = 1; i < w1.getNodes().size(); i++) {
+					newWay.addNode(w1.getNodes().get(i));
+				}
+			} else if (!firstNodeW1 && firstNodeW2) {
+				// add all nodes from w1
+				for (Node n : w1.getNodes()) {
+					newWay.addNode(n);
+				}
+				// add the nodes from w2, except the first one
+				for (int i = 1; i < w2.getNodes().size(); i++) {
+					newWay.addNode(w2.getNodes().get(i));
+				}
+			} else if (!firstNodeW1 && !firstNodeW2) {
+				// add all nodes from w1
+				for (Node n : w1.getNodes()) {
+					newWay.addNode(n);
+				}
+				// add the nodes from w2 in reversed order, except the last one
+				for (int i = w2.getNodes().size() -2 ; i >= 0; i--) {
+					newWay.addNode(w2.getNodes().get(i));
+				}
 			}
-		}
-		// special handling, also count first and last, might not be closed, but
-		// we want this!
-		if (MapAlgorithms.ray_intersect_lon(polyNodes.get(0),
-				polyNodes.get(polyNodes.size() - 1), latitude, longitude) != -360d) {
-			intersections++;
-		}
-		return intersections;
-	}
-	
-	/**
-	 * collect the points of all ways added by the user <br />
-	 * automatically added ways because of closing the Ring won't be added <br />
-	 * Only ways with initialized points can be handled.
-	 * @return a List with nodes
-	 */
-	public List<Node> collectPoints() {
-		
-		ArrayList<Node> collected = new ArrayList<Node>();
-		
-		for (Way w : ways) {
-			collected.addAll(w.getNodes());
-		}
-		
-		return collected;
-		
-	}
-	
-	/**
-	 * Check if this is in Ring r
-	 * @param r the ring to check
-	 * @return true if this Ring is inside Ring r
-	 */
-	public boolean isIn(Ring r) {
-		/*
-		 * bi-directional check is needed because some concave rings can intersect
-		 * and would only fail on one of the checks
-		 */
-		List<Node> points = this.collectPoints();
-		
-		// r should contain all nodes of this
-		for(Node n : points) {
-			if (!r.containsNode(n)) {
-				return false;
-			}
-		}
-		
-		points = r.collectPoints();
-		
-		// this should not contain a node from r
-		for(Node n : points) {
-			if (this.containsNode(n)) {
-				return false;
-			}
-		}
-		
-		return true;
-		
-	}
-
-	
-	/**
-	 * If this Ring is not complete 
-	 * (some ways are not initialized 
-	 * because they are not included in the OSM file) <p />
-	 * 
-	 * We are trying to close this Ring by using the other Ring.<p />
-	 * 
-	 * The other Ring must be complete, and the part of this Ring 
-	 * inside the other Ring must also be complete.
-	 * @param other the other Ring (which is complete) used to close this one
-	 */
-	public void closeWithOtherRing(Ring other) {
-		Way thisBorder = getBorder();
-		List<Integer> thisSwitchPoints = new ArrayList<Integer>();
-		
-		boolean insideOther = other.containsNode(thisBorder.getNodes().get(0));
-		
-		// Search the node pairs for which the ring goes inside or out the other
-		for (int i = 0; i<thisBorder.getNodes().size(); i++) {
-			Node n = thisBorder.getNodes().get(i);
-			if (other.containsNode(n) != insideOther) {
-				// we are getting out or in the boundary now.
-				// toggle switch
-				insideOther = !insideOther;
-				
-				thisSwitchPoints.add(i);
+		} else {
+			if (firstNodeW1 && firstNodeW2) {
+				// add the nodes of w1 in reversed order, without the first node
+				for (int i = w1.getNodeIds().size() - 1; i>0; i--) {
+					newWay.addNode(w1.getNodeIds().get(i));
+				}
+				//add the nodes from w2
+				for (int i = 0; i < w2.getNodeIds().size(); i++) {
+					newWay.addNode(w2.getNodeIds().get(i));
+				}
+			} else if (firstNodeW1 && !firstNodeW2) {
+				// add all nodes from w2
+				for (int i = 0; i < w2.getNodeIds().size(); i++) {
+					newWay.addNode(w2.getNodeIds().get(i));
+				}
+				// add the nodes from w1, except the first one
+				for (int i = 1; i < w1.getNodeIds().size(); i++) {
+					newWay.addNode(w1.getNodeIds().get(i));
+				}
+			} else if (!firstNodeW1 && firstNodeW2) {
+				// add all nodes from w1
+				for (int i = 0; i < w1.getNodeIds().size(); i++) {
+					newWay.addNode(w1.getNodeIds().get(i));
+				}
+				// add the nodes from w2, except the first one
+				for (int i = 1; i < w2.getNodeIds().size(); i++) {
+					newWay.addNode(w2.getNodeIds().get(i));
+				}
+			} else if (!firstNodeW1 && !firstNodeW2) {
+				// add all nodes from w1
+				for (int i = 0; i < w1.getNodeIds().size(); i++) {
+					newWay.addNode(w1.getNodeIds().get(i));
+				}
+				// add the nodes from w2 in reversed order, except the last one
+				for (int i = w2.getNodeIds().size() -2 ; i >= 0; i--) {
+					newWay.addNode(w2.getNodeIds().get(i));
+				}
 			}
 		}
 		
-		List<Integer> otherSwitchPoints = new ArrayList<Integer>();
+		return newWay;
 		
-		// Search the according node pairs in the other ring
-		for (int i : thisSwitchPoints) {
-			LatLon a = thisBorder.getNodes().get(i-1).getLatLon();
-			LatLon b = thisBorder.getNodes().get(i).getLatLon();
-			otherSwitchPoints.add(crossRingBorder(a, b));
-		}
-		
-		
-		
-		/*
-		 * TODO:
-		 * 
-		 * * Split the other Ring into ways from splitPoint to splitPoint
-		 * 
-		 * * Split this ring into ways from splitPoint to splitPoint
-		 * 
-		 * * Filter out the parts of way from this that are inside the other Ring
-		 * 		Use the insideOther var and the switchPoints list for this.
-		 * 
-		 * * For each two parts of way from this, search a part of way connecting the two. 
-		 * 		If there are two, take the shortest.
-		 */
 	}
 	
-	/**
-	 * Get the segment of the Ring that intersects a segment 
-	 * going from point a to point b
-	 * 
-	 * @param a the begin point of the segment
- 	 * @param b the end point of the segment
-	 * @return an integer i which is the index so that the segment 
-	 * 		from getBorder().get(i-1) to getBorder().get(i) intersects with 
-	 * 		the segment from parameters a to b. <p />
-	 * 
-	 * 		0 if the segment from a to b doesn't intersect with the Ring. 
-	 */
-	public int crossRingBorder(LatLon a, LatLon b) {
-		Way border = getBorder();
-		for (int i = 1; i<border.getNodes().size(); i++) {
-			LatLon c = border.getNodes().get(i-1).getLatLon();
-			LatLon d = border.getNodes().get(i).getLatLon();
-			//FIXME find library that can do this not java.awt in Android
-			/*if (Line2D.linesIntersect(
-					a.getLatitude(), a.getLongitude(), 
-					b.getLatitude(), b.getLongitude(), 
-					c.getLatitude(), c.getLongitude(), 
-					d.getLatitude(), d.getLongitude())) {
-				return i;
-			}*/
-		}
-		return 0;
-		
-	}
 
 }

@@ -147,11 +147,6 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 			}
 		}
 
-		// Log if something is wrong
-		if (!original.hasOpenedPolygons()) {
-			logMapDataWarn.warn("Multipolygon has unclosed parts: Multipoligon id=" + e.getId()); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-
 		renderingTypes.encodeEntityWithType(e, mapZooms.getLevel(0).getMaxZoom(), typeUse, addtypeUse, namesUse, tempNameUse);
 
 		//Don't add multipolygons with an unknown type
@@ -168,12 +163,18 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 
 		for (Multipolygon m : multipolygons) {
+			
+			if(m.getOuterNodes().size() == 0) {
+				logMapDataWarn.warn("Multipolygon has an outer ring that can't be formed: "+e.getId());
+				// don't index this
+				continue;
+			}
 
 			// innerWays are new closed ways 
 			List<List<Node>> innerWays = new ArrayList<List<Node>>();
 
 			for (Ring r : m.getInnerRings()) {
-				innerWays.add(r.getBorder().getNodes());
+				innerWays.add(r.getBorder());
 			}
 
 			// don't use the relation ids. Create new ones
