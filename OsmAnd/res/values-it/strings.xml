@@ -431,8 +431,8 @@
   <string name="transport_context_menu">Cercare un trasporto pubblico all\'arrivo</string>
   <string name="point_on_map">Posizione:\n Lat %1$.5f Lon %2$.5f</string>
   <string name="osb_bug_name">Errore</string>
-  <string name="poi_context_menu_modify">Modificare PDI</string>
-  <string name="poi_context_menu_delete">Elimin PDI</string>
+  <string name="poi_context_menu_modify">Modifica PDI</string>
+  <string name="poi_context_menu_delete">Elimina PDI</string>
   <string name="rotate_map_compass_opt">Con bussola</string>
   <string name="rotate_map_bearing_opt">Nella direzione del movimento</string>
   <string name="rotate_map_none_opt">Nessuna rotazione</string>
@@ -467,7 +467,7 @@
   <string name="background_service_wait_int_descr">Scegliere l\'intervallo di tempo per determinare la posizione</string>
   <string name="background_service_wait_int">Intervallo di attesa</string>
   <string name="service_stop_background_service">Spegnere il servizio di navigazione in background</string>
-  <string name="where_am_i">Dove mi trovo?</string>
+  <string name="where_am_i">Dove sono?</string>
   <string name="process_navigation_service">Servizio di navigazione OsmAnd</string>
   <string name="network_provider">Rete</string>
   <string name="gps_provider">GPS</string>
