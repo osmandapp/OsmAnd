@@ -1079,4 +1079,6 @@
     <string name="tip_recent_changes_0_8_4_t">"Изменения в 0.8.4: "</string>
     <string name="intermediate_point">Путевая точка %1$s</string>
     <string name="delete_target_point">Удалить точку назначения</string>
+	<string name="map_widget_monitoring_services">Мониторинг услуг</string>
+	<string name="no_route">Нет маршрута</string>
 	</resources>
