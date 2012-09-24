@@ -256,8 +256,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				}
 			};
 			
-			adapter.registerItem(R.string.delete_target_point, 0, listener, -1);
-			/*a.intermediate?  R.drawable.list_activities_inter_delete : R.drawable.list_activities_target_delete*/
+			adapter.registerItem(R.string.delete_target_point, 
+					a.intermediate?  R.drawable.list_activities_intermediate_delete : R.drawable.list_activities_target_delete, listener, -1);
+			
 		}
 	}
 
