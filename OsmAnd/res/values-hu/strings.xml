@@ -1031,7 +1031,7 @@
     <string name="arrived_at_intermediate_point">Megérkeztél a köztes célponthoz</string>
     <string name="context_menu_item_intermediate_point">Beállítás köztes célpontnak</string>
     <string name="map_widget_intermediate_distance">Köztes célpont</string>
-    <string name="ending_point_too_far">A kezdőpont közelében nem található út.</string>
+    <string name="ending_point_too_far">A célpont közelében nem található út.</string>
     <string name="btn_add_tag">Címke hozzáadása</string>
     <string name="btn_advanced_mode">Haladó mód…</string>
     <string name="poi_filter_parking">Parkoló</string>
