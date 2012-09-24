@@ -1087,4 +1087,5 @@
     <string name="delete_target_point">Удалить точку назначения</string>
 	<string name="map_widget_monitoring_services">Мониторинг услуг</string>
 	<string name="no_route">Нет маршрута</string>
-	</resources>
+	<string name="gps_not_available">Включите GPS в настройках</string>
+    </resources>
