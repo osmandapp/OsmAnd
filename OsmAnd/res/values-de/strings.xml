@@ -1071,7 +1071,7 @@
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
 	<string name="map_widget_map_select">Kartenauswahl</string>
-	<string name="map_widget_back_to_loc">Wo bin ich</string>
+	<string name="map_widget_back_to_loc">Wo bin ich?</string>
 	<string name="map_widget_lock_screen">Bildschimr sperren</string>
 	<string name="map_widget_compass">Kompass</string>
 	<string name="map_widget_top_stack">Statusbalken:</string>
@@ -1088,7 +1088,7 @@
 	<string name="map_widget_next_turn_small">Nächste Abzweigung (klein)</string>
 	<string name="map_widget_next_next_turn">Übernächste Abzweigung</string>
 	<string name="map_widget_mini_route">Mini-Routenkarte</string>
-	<string name="bg_service_screen_lock">Display sperren</string>
+	<string name="bg_service_screen_lock">Bildschirm sperren</string>
 	<string name="bg_service_screen_unlock">Bildschirm entsperren</string>
 	<string name="bg_service_screen_lock_toast">Bildschirm gesperrt</string>
 	<string name="bg_service_interval">Aufwachintervall setzen:</string>
