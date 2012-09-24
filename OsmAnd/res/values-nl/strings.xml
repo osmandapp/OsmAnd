@@ -1026,4 +1026,8 @@
     <string name="new_destination_point_dialog">Je heb al een bestemmingspunt ingesteld.</string>
     <string name="target_point">Richtpunt %1$s</string>
     <string name="target_points">Doel</string>
+    <string name="map_widget_monitoring_services">registratie-services</string>
+	<string name="no_route">Geen route</string>
+	<string name="delete_target_point">Verwijder routepunt</string>
+	<string name="intermediate_point">Routepunt %1$s</string>
     </resources>
