@@ -1114,7 +1114,7 @@ Sąvybės:
     <string name="context_menu_item_last_intermediate_point">Nustatyti paskutinį tarpinį tikslą</string>
     <string name="context_menu_item_first_intermediate_point">Nustatyti pirmą tarpinį tikslą</string>
     <string name="add_as_last_destination_point">Pridėti kaip paskutinį tarpinį tikslą</string>
-    <string name="add_as_first_destination_point">Pridėti pirmą tarpinį tikslą</string>
+    <string name="add_as_first_destination_point">Pridėti kaip pirmą tarpinį tikslą</string>
     <string name="replace_destination_point">Pakeisti kelionės tikslą</string>
     <string name="new_destination_point_dialog">Jūs jau turite nustatę kelionės tikslą.</string>
     <string name="target_point">Tikslas %1$s</string>
