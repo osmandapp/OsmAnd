@@ -1142,4 +1142,8 @@
 <string name="add_as_last_destination_point">Als letzten Wegpunkt einfügen</string>
 <string name="replace_destination_point">Zielpunkt ersetzen</string>
 <string name="new_destination_point_dialog">Sie haben bereits einen Zielpunkt gewählt.</string>
-</resources>
+<string name="delete_target_point">Wegpunkt löschen</string>
+	<string name="map_widget_monitoring_services">Aufzeichnungsdienste</string>
+	<string name="no_route">Keine Route</string>
+	<string name="intermediate_point">Wegpunkt %1$s</string>
+    </resources>
