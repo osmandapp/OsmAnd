@@ -1030,4 +1030,5 @@
 	<string name="no_route">Geen route</string>
 	<string name="delete_target_point">Verwijder routepunt</string>
 	<string name="intermediate_point">Routepunt %1$s</string>
+    <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     </resources>
