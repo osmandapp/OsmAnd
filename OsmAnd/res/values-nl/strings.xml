@@ -1006,7 +1006,7 @@
 <string name="intermediate_point_too_far">routepunt %1$s te ver van dichtstbijzijnde weg.</string>
 <string name="arrived_at_intermediate_point">Je bent aangekomen op je routepunt</string>
 <string name="context_menu_item_intermediate_point">routepunt toevoegen</string>
-<string name="map_widget_intermediate_distance">routepunt</string>
+<string name="map_widget_intermediate_distance">Routepunt</string>
 <string name="ending_point_too_far">Eindpunt te ver van dichtstbijzijnde weg.</string>
 <string name="btn_add_tag">Tag toevoegen</string>
 <string name="btn_advanced_mode">Geavanceerde modus...</string>
@@ -1022,10 +1022,10 @@
     <string name="context_menu_item_first_intermediate_point">Zet als eerste routepunt</string>
     <string name="add_as_last_destination_point">Voeg toe als laatste routepunt</string>
     <string name="add_as_first_destination_point">Voeg toe als eerste routepunt</string>
-    <string name="replace_destination_point">Vervang de punt van bestemming</string>
+    <string name="replace_destination_point">Vervang bestemmingspunt</string>
     <string name="new_destination_point_dialog">Je heb al een bestemmingspunt ingesteld.</string>
-    <string name="target_point">Richtpunt %1$s</string>
-    <string name="target_points">Doel</string>
+    <string name="target_point">Routepunt %1$s</string>
+    <string name="target_points">Routepunten</string>
     <string name="map_widget_monitoring_services">registratie-services</string>
 	<string name="no_route">Geen route</string>
 	<string name="delete_target_point">Verwijder routepunt</string>
