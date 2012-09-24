@@ -18,7 +18,7 @@
   <string name="local_openstreetmap_show">Afficher sur la carte</string>
   <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
   <string name="local_openstreetmap_delete">Supprimer la modification</string>
-  <string name="local_openstreetmap_descr_title">Modification hors ligne de points OSM :</string>
+  <string name="local_openstreetmap_descr_title">Édition asynchrone d\'OSM :</string>
   <string name="local_openstreetmap_settings">Points/Bogues OSM enregistrés en local</string>
   <string name="local_openstreetmap_settings_descr">Afficher et gérer les points/bogues OSM enregistrés dans la base de données locale</string>
   <string name="live_monitoring_descr">Activer l\'envoi de requêtes HTTP à un service web donné</string>
