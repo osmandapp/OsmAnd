@@ -18,7 +18,7 @@
   <string name="local_openstreetmap_show">Afficher sur la carte</string>
   <string name="local_openstreetmap_upload">Envoyer les modifications vers OSM</string>
   <string name="local_openstreetmap_delete">Supprimer la modification</string>
-  <string name="local_openstreetmap_descr_title">Édition asynchrone d\'OSM :</string>
+  <string name="local_openstreetmap_descr_title">Modification hors ligne de points OSM :</string>
   <string name="local_openstreetmap_settings">Points/Bogues OSM enregistrés en local</string>
   <string name="local_openstreetmap_settings_descr">Afficher et gérer les points/bogues OSM enregistrés dans la base de données locale</string>
   <string name="live_monitoring_descr">Activer l\'envoi de requêtes HTTP à un service web donné</string>
@@ -603,7 +603,7 @@
   <string name="update_existing">Changer</string>
   <string name="only_show">Afficher seulement</string>
   <string name="follow">Suivre</string>
-  <string name="recalculate_route_to_your_location">Recalculer le trajet à partir de votre emplacement</string>
+  <string name="recalculate_route_to_your_location">Recalculer le trajet à partir de votre position</string>
   <string name="mark_final_location_first">Veuillez tout d\'abord sélectionner un point de destination</string>
   <string name="get_directions">Navigation</string>
   <string name="show_gps_status">Afficher le statut GPS</string>
@@ -915,7 +915,7 @@
   <string name="rendering_attr_noPolygons_name">Pas de polygones</string>
   <string name="rendering_attr_appMode_name">Mode de rendu</string>
   <string name="rendering_attr_appMode_description">Optimisation de la carte par profil utilisateur</string>
-  <string name="rendering_attr_contourLines_description">Sélectionner le niveau de zoom minimum pour afficher sur la carte si disponible. Un fichier SRTM séparé sera peut-être nécessaire.</string>
+  <string name="rendering_attr_contourLines_description">Afficher à partir du niveau de zoom (fichier SRTM nécessaire):</string>
   <string name="rendering_attr_contourLines_name">Afficher les courbes de niveau</string>
   <string name="rendering_attr_hmRendered_description">Augmenter le niveau de détail affiché</string>
   <string name="rendering_attr_hmRendered_name">Afficher plus de détail</string>
