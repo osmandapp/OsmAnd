@@ -11,8 +11,6 @@ import net.osmand.osm.Way;
 /**
  * A ring is a list of ways that form a simple boundary or an area. <p />
  * 
- * 
- * 
  * @author sander
  *
  */
@@ -91,7 +89,6 @@ public class Ring implements Comparable<Ring> {
 		if (border != null) return;
 		
 		
-		
 		//make a copy of the ways
 		List<Way> ways = new ArrayList<Way>(getWays());
 		
@@ -116,54 +113,25 @@ public class Ring implements Comparable<Ring> {
 			
 			Way newWay = null;
 			Way addedTo = null;
-			
 			// merge the Way w with the first borderway suitable;
 			for (Way borderWay : borderWays) {
-				if (w.getFirstNodeId() == borderWay.getFirstNodeId()) {
-					newWay = combineTwoWays(w, borderWay, true, true);
+				newWay = combineTwoWaysIfHasPoints(w, borderWay);
+				if(newWay != null) {
 					addedTo = borderWay;
-					break;
-				} else if (w.getFirstNodeId() == borderWay.getLastNodeId()) {
-					newWay = combineTwoWays(w, borderWay, true, false);
-					addedTo = borderWay;
-					break;
-				} else if (w.getLastNodeId() == borderWay.getLastNodeId()) {
-					newWay = combineTwoWays(w, borderWay, false, false);
-					addedTo = borderWay;
-					break;
-				} else if (w.getLastNodeId() == borderWay.getFirstNodeId()) {
-					newWay = combineTwoWays(w, borderWay, false, true);
-					addedTo = borderWay;
-					break;
 				}
 			}
-			
 			if (newWay == null) {
 				// no suitable borderWay has been found, add this way as one of the boundaries
 				borderWays.add(w);
 			} else {
 				// ways are combined, remove the original borderway
 				borderWays.remove(addedTo);
-				
 				addedTo = null;
 				// search if it can be combined with something else
 				for (Way borderWay : borderWays) {
-					if (newWay.getFirstNodeId() == borderWay.getFirstNodeId()) {
-						newWay = combineTwoWays(newWay, borderWay, true, true);
+					newWay = combineTwoWaysIfHasPoints(newWay, borderWay);
+					if(newWay != null) {
 						addedTo = borderWay;
-						break;
-					} else if (newWay.getFirstNodeId() == borderWay.getLastNodeId()) {
-						newWay = combineTwoWays(newWay, borderWay, true, false);
-						addedTo = borderWay;
-						break;
-					} else if (newWay.getLastNodeId() == borderWay.getLastNodeId()) {
-						newWay = combineTwoWays(newWay, borderWay, false, false);
-						addedTo = borderWay;
-						break;
-					} else if (newWay.getLastNodeId() == borderWay.getFirstNodeId()) {
-						newWay = combineTwoWays(newWay, borderWay, false, true);
-						addedTo = borderWay;
-						break;
 					}
 				}
 				
@@ -179,7 +147,7 @@ public class Ring implements Comparable<Ring> {
 		}
 		
 		if (borderWays.size() != 1) {
-			border = new Way(randId());
+			border = new Way(nextRandId());
 			return;
 		}
 		
@@ -364,19 +332,12 @@ public class Ring implements Comparable<Ring> {
 	
 
 
-	@Override
 	/**
-	 * @param r the ring to compare with
-	 * @return -1 if this is smaller than r <br />
-	 * 1 if r is smaller than this <br />
-	 * 0 if they have the same size
+	 * Use area size as comparable metric
 	 */
+	@Override
 	public int compareTo(Ring r) {
-		double thisArea = getArea();
-		double rArea = r.getArea();
-		if (thisArea < rArea) return -1;
-		if (rArea < thisArea) return 1;
-		return 0;
+		return Double.compare(getArea(), r.getArea());
 	}
 	
 	/**
@@ -470,8 +431,6 @@ public class Ring implements Comparable<Ring> {
 			// only the case addedTo == 2 remains
 			// two multiLines have to be merged
 
-
-
 			if (firstMultiLine.get(firstMultiLine.size() - 1) == secondMultiLine.get(0)) {
 				// add the second to the first
 				secondMultiLine.remove(0) ;
@@ -529,102 +488,69 @@ public class Ring implements Comparable<Ring> {
 		return result;
 	}
 	
+	
+	private static long initialValue = -1000;
+	private final static long randomInterval = 5000;
 	/**
 	 * get a random long number
 	 * @return
 	 */
-	private static long randId() {
-		return Math.round(Math.random()*Long.MIN_VALUE);
+	private static long nextRandId() {
+		// exclude duplicates in one session (!) and be quazirandom every run
+		long val = initialValue - Math.round(Math.random()*randomInterval);
+		initialValue = val;
+		return val;
 	}
 	
 	/**
 	 * make a new Way with the nodes from two other ways
 	 * @param w1 the first way
 	 * @param w2 the second way
-	 * @param firstNodeW1 set true if the first node of w1 is also in the other way
-	 * @param firstNodeW2 set true if the first node of w2 is also in the other way
+	 * @return null if it is not possible
 	 */
-	private static Way combineTwoWays(Way w1, Way w2, boolean firstNodeW1, boolean firstNodeW2) {
-		Way newWay = new Way(randId());
-		if(w1.getNodes() != null || w1.getNodes().size() != 0) {
-			if (firstNodeW1 && firstNodeW2) {
-				// add the nodes of w1 in reversed order, without the first node
-				for (int i = w1.getNodes().size() - 1; i>0; i--) {
-					newWay.addNode(w1.getNodes().get(i));
-				}
-				//add the nodes from w2
-				for (Node n : w2.getNodes()) {
-					newWay.addNode(n);
-				}
-			} else if (firstNodeW1 && !firstNodeW2) {
-				// add all nodes from w2
-				for (Node n : w2.getNodes()) {
-					newWay.addNode(n);
-				}
-				// add the nodes from w1, except the first one
-				for (int i = 1; i < w1.getNodes().size(); i++) {
-					newWay.addNode(w1.getNodes().get(i));
-				}
-			} else if (!firstNodeW1 && firstNodeW2) {
-				// add all nodes from w1
-				for (Node n : w1.getNodes()) {
-					newWay.addNode(n);
-				}
-				// add the nodes from w2, except the first one
-				for (int i = 1; i < w2.getNodes().size(); i++) {
-					newWay.addNode(w2.getNodes().get(i));
-				}
-			} else if (!firstNodeW1 && !firstNodeW2) {
-				// add all nodes from w1
-				for (Node n : w1.getNodes()) {
-					newWay.addNode(n);
-				}
-				// add the nodes from w2 in reversed order, except the last one
-				for (int i = w2.getNodes().size() -2 ; i >= 0; i--) {
-					newWay.addNode(w2.getNodes().get(i));
-				}
-			}
+	private static Way combineTwoWaysIfHasPoints(Way w1, Way w2) {
+		boolean combine = true;
+		boolean firstReverse = false;
+		boolean secondReverse = false;
+		if(w1.getFirstNodeId() == w2.getFirstNodeId()) {
+			firstReverse = true;
+			secondReverse = false;
+		} else if(w1.getLastNodeId() == w2.getFirstNodeId()) {
+			firstReverse = false;
+			secondReverse = false;
+		} else if(w1.getLastNodeId() == w2.getLastNodeId()) {
+			firstReverse = false;
+			secondReverse = true;
+		} else if(w1.getFirstNodeId() == w2.getLastNodeId()) {
+			firstReverse = true;
+			secondReverse = true;
 		} else {
-			if (firstNodeW1 && firstNodeW2) {
-				// add the nodes of w1 in reversed order, without the first node
-				for (int i = w1.getNodeIds().size() - 1; i>0; i--) {
-					newWay.addNode(w1.getNodeIds().get(i));
-				}
-				//add the nodes from w2
-				for (int i = 0; i < w2.getNodeIds().size(); i++) {
-					newWay.addNode(w2.getNodeIds().get(i));
-				}
-			} else if (firstNodeW1 && !firstNodeW2) {
-				// add all nodes from w2
-				for (int i = 0; i < w2.getNodeIds().size(); i++) {
-					newWay.addNode(w2.getNodeIds().get(i));
-				}
-				// add the nodes from w1, except the first one
-				for (int i = 1; i < w1.getNodeIds().size(); i++) {
-					newWay.addNode(w1.getNodeIds().get(i));
-				}
-			} else if (!firstNodeW1 && firstNodeW2) {
-				// add all nodes from w1
-				for (int i = 0; i < w1.getNodeIds().size(); i++) {
-					newWay.addNode(w1.getNodeIds().get(i));
-				}
-				// add the nodes from w2, except the first one
-				for (int i = 1; i < w2.getNodeIds().size(); i++) {
-					newWay.addNode(w2.getNodeIds().get(i));
-				}
-			} else if (!firstNodeW1 && !firstNodeW2) {
-				// add all nodes from w1
-				for (int i = 0; i < w1.getNodeIds().size(); i++) {
-					newWay.addNode(w1.getNodeIds().get(i));
-				}
-				// add the nodes from w2 in reversed order, except the last one
-				for (int i = w2.getNodeIds().size() -2 ; i >= 0; i--) {
-					newWay.addNode(w2.getNodeIds().get(i));
+			combine = false;
+		}
+		if (combine) {
+			Way newWay = new Way(nextRandId());
+			boolean nodePresent = w1.getNodes() != null || w1.getNodes().size() != 0;
+			int w1size = nodePresent ? w1.getNodes().size() : w1.getNodeIds().size();
+			for (int i = 0; i < w1size; i++) {
+				int ind = firstReverse ? (w1size - 1 - i) : i;
+				if (nodePresent) {
+					newWay.addNode(w1.getNodes().get(ind));
+				} else {
+					newWay.addNode(w1.getNodeIds().get(ind));
 				}
 			}
+			int w2size = nodePresent ? w2.getNodes().size() : w2.getNodeIds().size();
+			for (int i = 1; i < w2size; i++) {
+				int ind = secondReverse ? (w2size - 1 - i) : i;
+				if (nodePresent) {
+					newWay.addNode(w2.getNodes().get(ind));
+				} else {
+					newWay.addNode(w2.getNodeIds().get(ind));
+				}
+			}
+			return newWay;
 		}
-		
-		return newWay;
+		return null;
 		
 	}
 	
