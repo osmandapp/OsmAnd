@@ -881,8 +881,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					}
 					if (now - lastTimeAutoZooming > 4500) {
 						lastTimeAutoZooming = now;
-						mapView.setZoom(mapView.getFloatZoom() + zdelta);
-						// mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
+						float newZoom = Math.round((mapView.getFloatZoom() + zdelta) * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
+						mapView.setZoom(newZoom);
+						 // mapView.getAnimatedDraggingThread().startZooming(mapView.getFloatZoom() + zdelta, false);
 					}
 				}
 			}
