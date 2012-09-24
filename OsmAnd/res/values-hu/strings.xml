@@ -572,9 +572,9 @@
   <string name="clear_all">Mindent töröl</string>
   <string name="history">Előzmény</string>
   <string name="uploading_data">Adat feltöltése…</string>
-  <string name="uploading">Feltöltés</string>
+  <string name="uploading">Feltöltés…</string>
   <string name="search_nothing_found">Semmi sem található</string>
-  <string name="searching">Keresés</string>
+  <string name="searching">Keresés…</string>
   <string name="searching_address">Cím keresés…</string>
   <string name="search_osm_nominatim">Cím keresése OSM Nominatim felhasználásával</string>
   <string name="hint_search_online">Házszám, utca, település</string>
@@ -593,7 +593,7 @@
   <string name="error_io_error">IO hiba történt</string>
   <string name="downloading_file">Fájl letöltése…</string>
   <string name="downloading">Letöltés…</string>
-  <string name="downloading_list_indexes">Elérhető térképadatok listájának letöltése</string>
+  <string name="downloading_list_indexes">Elérhető térképadatok listájának letöltése…</string>
   <string name="list_index_files_was_not_loaded">Nincs letöltve a térképadatok listája az osmand.net-ről.</string>
   <string name="select_index_file_to_download">Nincs találat. Ha nem találod a régiódat, elkészítheted magadnak. (Lásd: http://osmand.net)</string>
   <string name="show_poi_on_map">Mutasd a térképen</string>
@@ -618,7 +618,7 @@
   <string name="loading_postcodes">Irányítószámok betöltése…</string>
   <string name="loading_streets">Utcák betöltése…</string>
   <string name="loading_cities">Települések betöltése…</string>
-  <string name="loading">Betöltés</string>
+  <string name="loading">Betöltés…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Hiba történt a GPX-be való mentéskor</string>
   <string name="error_calculating_route">Útvonaltervezési hiba</string>
@@ -629,7 +629,7 @@
   <string name="invalid_locations">Érvénytelen koordináták!</string>
   <string name="go_back_to_osmand">Vissza az OsmAnd térképhez</string>
   <string name="close">Bezár</string>
-  <string name="loading_data">Adatok betöltése</string>
+  <string name="loading_data">Adatok betöltése…</string>
   <string name="reading_indexes">Térképadatok olvasása…</string>
   <string name="previous_run_crashed">Az OsmAnd legutóbb összeomlott. Naplófájl: {0}. Kérlek jelentsd a hibát és csatolja hozzá a naplófájlt.</string>
   <string name="saving_gpx_tracks">GPX útvonalak mentése SD kártyára…</string>
@@ -922,7 +922,7 @@
   <string name="bg_service_sleep_mode_on">Alvó mód\n kikapcsolása</string>
 <string name="avoid_in_routing_title">Elkerülés…</string>
 <string name="avoid_in_routing_descr">Fizetős utak, kompok, földutak elkerülése</string>
-<string name="show_warnings_title">Riasztások megjelenítése</string>
+<string name="show_warnings_title">Riasztások megjelenítése…</string>
 <string name="show_warnings_descr">Sebességhatárok, traffipaxok és fekvőrendőrök jelzése</string>
 <string name="map_widget_fluorescent">Élénk színek</string>
 <string name="map_widget_show_ruler">Lépték</string>
