@@ -2,6 +2,7 @@ package net.osmand.data;
 
 import static org.junit.Assert.*;
 
+
 import net.osmand.osm.LatLon;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
@@ -64,6 +65,27 @@ public class MultipolygonTest {
 		testee.addOuterWay(poly1_2_of_2);
 		assertEquals(1, testee.countOuterPolygons());
 		assertFalse(testee.hasOpenedPolygons());
+	}
+	
+	@Test
+	public void test_ringArea(){
+		Way w = new Way(0L);
+		
+		w.addNode(new Node(0.0, 0.0, 1));
+		w.addNode(new Node(1.0, 0.0, 2));
+		w.addNode(new Node(1.0, 0.5, 3));
+		w.addNode(new Node(1.5, 0.5, 4));
+		w.addNode(new Node(1.0, 1.0, 5));
+		
+		Multipolygon m = new Multipolygon();
+		m.addOuterWay(w);
+		
+		Ring r = m.getOuterRings().get(0);
+		// calculated with JOSM measurement tool
+		double expected = 7716818755.73;
+		// allow 1% deviation because of rounding errors and alternative projections
+		assertTrue(expected/r.getArea() > 0.99);
+		assertTrue(expected/r.getArea() < 1.01);
 	}
 
 	@Test
@@ -174,7 +196,7 @@ public class MultipolygonTest {
 		testee.addOuterWay(new Way(111));
 		testee.addOuterWay(poly1_1_of_2);
 		assertEquals(1, testee.countOuterPolygons());
-		// FIXME assertTrue(testee.hasOpenedPolygons());
+		assertTrue(testee.hasOpenedPolygons());
 	}
 
 	@Test
