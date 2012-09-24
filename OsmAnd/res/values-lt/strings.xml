@@ -1133,4 +1133,8 @@ Sąvybės:
     <string name="poi_filter_accomodation">Nakvynė</string>
     <string name="poi_filter_restaurants">Restoranai</string>
     <string name="poi_filter_sightseeing">Įžymybės</string>
+    <string name="map_widget_monitoring_services">Stebėjimo paslaugos</string>
+	<string name="no_route">Nėra maršruto</string>
+	<string name="delete_target_point">Pašalinti tikslą</string>
+	<string name="intermediate_point">Tarpinis tikslas %1$s</string>
     </resources>
