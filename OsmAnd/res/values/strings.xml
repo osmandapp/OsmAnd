@@ -14,10 +14,9 @@
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
         \n\t* Waypoints
 		\n\t* Improved route guidance
-		\n\t* Avoid motorways option
-		\n\t* Cycleway=track display
-		\n\t* better UI finish (icons)
-		\n\t* lots of bug fixes
+		\n\t* Added a setting which allows to avoid motorways while building a route
+		\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
+		\n\t* Bug fixes
 	</string>
 	<string name="map_widget_monitoring_services">Monitoring services</string>
 	<string name="no_route">No route</string>
