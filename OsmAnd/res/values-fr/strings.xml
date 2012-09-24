@@ -1109,4 +1109,8 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="poi_filter_sightseeing">Point de vue</string>
     <string name="poi_filter_accomodation">Hébergement</string>
+    <string name="map_widget_monitoring_services">Services de surveillance</string>
+	<string name="no_route">Pas de route</string>
+	<string name="delete_target_point">Enlever le point de destination</string>
+	<string name="intermediate_point">Point intermédiaire %1$s</string>
     </resources>
