@@ -151,7 +151,7 @@
 \n\t- Funzione per salvare il percorso in formato GPX e usarlo offline
 \n\t- Migliorato monitoraggio GPX (filtrati luoghi non precisi e salvati dati per precisione/elevazione/velocità)
 \n\t- Invio di file GPX alla comunità OSM (http://download.osmand.net/gpx/)
-\n\t- Migliorie al rendering dei vettori
+\n\t- Migliorie alla rappresentazione dei vettori
 \n\t- Migliorie al motore TTS (distanza esatta, miglia abilitate)
 \n\t- Correzione di errori vari "</string>
   <string name="save_route_dialog_title">Salva il percorso in formato GPX</string>
@@ -169,7 +169,7 @@
   <string name="favorite_delete_multiple">Stai cancellando %1$d preferito/i e %2$d gruppo/i preferito/i. Sicuro?</string>
   <string name="favorite_home_category">Casa</string>
   <string name="favorite_friends_category">Amici</string>
-  <string name="favorite_places_category">Posti</string>
+  <string name="favorite_places_category">Luoghi</string>
   <string name="favorite_default_category">Altro</string>
   <string name="vector_map_not_needed">Non necessario</string>
   <string name="basemap_missing">la mappa di Base del mondo (che ricopre il mondo per zoom piccoli) è mancante. Puoi scaricare World_basemap_x.obf per ottenerla.</string>
