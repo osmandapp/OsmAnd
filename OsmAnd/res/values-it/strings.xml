@@ -1124,4 +1124,5 @@
 	<string name="no_route">Nessun percorso</string>
 	<string name="delete_target_point">Rimuovi destinazione</string>
 	<string name="intermediate_point">Punto intermedio %1$s</string>
+    <string name="gps_not_available">Si prega di attivare il GPS nelle impostazioni</string>
     </resources>
