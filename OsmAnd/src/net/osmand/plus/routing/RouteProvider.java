@@ -52,7 +52,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.location.Location;
 
@@ -387,10 +386,14 @@ public class RouteProvider {
 				return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
 			}
 		} catch (OutOfMemoryError e) {
-			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
-			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-			activityManager.getMemoryInfo(memoryInfo);
-			return new RouteCalculationResult("Not enough process memory "+ "(" + memoryInfo.availMem / 1048576L + " MB available) ");
+//			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
+//			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//			activityManager.getMemoryInfo(memoryInfo);
+//			int avl = (int) (memoryInfo.availMem / (1 << 20));
+			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
+			String s = " (" + avl + " MB available of " + max  + ") ";
+			return new RouteCalculationResult("Not enough process memory "+ s);
 		}
 	}
 	

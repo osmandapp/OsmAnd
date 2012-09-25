@@ -58,7 +58,7 @@ public class RouteLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			if (false && view.getSettings().FLUORESCENT_OVERLAYS.get()) {
+			if (nightMode != null &&  nightMode.isNightMode()) {
 				paint.setColor(view.getResources().getColor(R.color.nav_track_fluorescent));
 			} else {
 				paint.setColor(view.getResources().getColor(R.color.nav_track));

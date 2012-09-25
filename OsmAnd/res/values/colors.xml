@@ -24,7 +24,7 @@
 	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
 
 	<!-- <color name="nav_track">#960000FF</color>  Old blue colors - not bright enough especially in night mode -->
-	<color name="nav_track">#CCFF6600</color>
+	<color name="nav_track">#960000FF</color>
 	<color name="nav_track_fluorescent">#CCFF6600</color>
 	<color name="nav_arrow">#FADE23</color>
 	<color name="nav_arrow_imminent">#FF2300</color>

@@ -9,7 +9,6 @@ import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,7 +29,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.data.IndexConstants;
 import net.osmand.data.MapAlgorithms;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapUtils;
@@ -48,7 +46,6 @@ import net.osmand.render.RenderingRulesStorage;
 
 import org.apache.commons.logging.Log;
 
-import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -105,7 +102,6 @@ public class MapRenderRepositories {
 	}
 
 	public void initializeNewResource(final IProgress progress, File file, BinaryMapIndexReader reader) {
-		long start = System.currentTimeMillis();
 		if (files.containsKey(file.getAbsolutePath())) {
 			closeConnection(files.get(file.getAbsolutePath()), file.getAbsolutePath());
 		
@@ -117,10 +113,6 @@ public class MapRenderRepositories {
 				log.error("Initializing native db " + file.getAbsolutePath() + " failed!"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			} else {
 				nativeFiles.add(file.getAbsolutePath());
-//				long val = System.currentTimeMillis();
-//				if (log.isDebugEnabled()) {
-//					log.debug("Initializing native db " + file.getAbsolutePath() + " " + (val - start) + "ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-//				}
 			}
 		}
 	}
@@ -630,10 +622,14 @@ public class MapRenderRepositories {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-					activityManager.getMemoryInfo(memoryInfo);
-					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + " (" + memoryInfo.availMem / 1048576L + " MB available) ", Toast.LENGTH_SHORT).show();
+//					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+//					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//					activityManager.getMemoryInfo(memoryInfo);
+//					int avl = (int) (memoryInfo.availMem / (1 << 20));
+					int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+					int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
+					String s = " (" + avl + " MB available of " + max  + ") ";
+					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
 				}
 			});
 		} finally {
