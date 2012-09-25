@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 
+import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.LiveMonitoringHelper;
@@ -26,6 +27,7 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
+import android.util.Log;
 import android.widget.Toast;
 
 public class NavigationService extends Service implements LocationListener {
@@ -122,7 +124,12 @@ public class NavigationService extends Service implements LocationListener {
 		if(isContinuous()){
 			// request location updates
 			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
+			try {
+				locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
+			} catch (IllegalArgumentException e) {
+				Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
+				Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+			}
 		} else {
 			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 			pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);

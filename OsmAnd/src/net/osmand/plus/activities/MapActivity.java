@@ -115,7 +115,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 	// Notification status
 	private NotificationManager mNotificationManager;
-	private int APP_NOTIFICATION_ID;
+	private int APP_NOTIFICATION_ID = 1;
 	// handler to show/hide trackball position and to link map with delay
 	private Handler uiHandler = new Handler();
 	// Current screen orientation
@@ -673,7 +673,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	protected void onStop() {
 		if(routingHelper.isFollowingMode()){
 			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-			mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+			if(mNotificationManager != null) {
+				mNotificationManager.notify(APP_NOTIFICATION_ID, getNotification());
+			}
 		}
 		if(progressDlg != null){
 			progressDlg.dismiss();
@@ -696,7 +698,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(mNotificationManager == null){
 			mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		}
-		mNotificationManager.cancel(APP_NOTIFICATION_ID);
+		if(mNotificationManager != null) {
+			mNotificationManager.cancel(APP_NOTIFICATION_ID);
+		}
 	}
 
 

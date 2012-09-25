@@ -1076,7 +1076,7 @@
     <string name="add_as_first_destination_point">Přidat jako první bod trasy</string>
     <string name="replace_destination_point">Nahradit cílový bod</string>
     <string name="new_destination_point_dialog">Cílový bod je již nastaven.</string>
-    <string name="target_point">Cílový bod %​1$s</string>
+    <string name="target_point">Cílový bod %1$s</string>
     <string name="target_points">Cíle</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd\n\nOsmAnd je open-source navigační program s přístupem k široké paletě celosvětových mapových dat OpenStreetMap (OSM).\nVeškerá mapová data (vektorová nebo rastrová) mohou být uložena na paměťové kartě telefonu pro offline použití. OsmAnd také nabízí offline a online navigaci včetně hlasové navigace krok za krokem.
 \n\nVýčet některých hlavních funkcí:\n- dokáže pracovat kompletně offline (vektorové nebo rastrové mapy lze uložit do volitelného adresáře)\n- kompaktní offline vektorové mapy celého světa dostupné zdarma\n- stahování národních nebo regionálních map přímo z aplikace\n- možnost zobrazení několika vrstev mapy: GPX trasa, body zájmu, oblíbená místa, vrstevnice, zastávky hromadné dopravy, dodatečné mapy s nastavitelnou průhledností\n- offline vyhledávání adres a bodů zájmu\n- offline navigace na krátké vzdálenosti (experimentální)\n- režim auto, kolo a pěší s volitelným:\n    - přepínáním denního a nočního zobrazení\n    - automatickým zvětšováním podle rychlosti pohybu\n    - natáčením mapy podle kompasu nebo směru pohybu\n    - naváděním do jízdních pruhů, zobrazením rychlostních limitů\n    - TTS nebo audio hlasovými pokyny

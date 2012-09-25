@@ -8,17 +8,18 @@ import android.os.PowerManager.WakeLock;
 
 public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 		@Override
-		public void onReceive(Context context, Intent intent) {
-			final WakeLock lock = NavigationService.getLock(context);
-			final NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
-			// do not do nothing
-			if (lock.isHeld() || service == null) {
-				return;
-			}
-			// 
-			lock.acquire();
-			// request location updates
-			final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
+	public void onReceive(Context context, Intent intent) {
+		final WakeLock lock = NavigationService.getLock(context);
+		final NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
+		// do not do nothing
+		if (lock.isHeld() || service == null) {
+			return;
+		}
+		//
+		lock.acquire();
+		// request location updates
+		final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
+		try {
 			locationManager.requestLocationUpdates(service.getServiceOffProvider(), 0, 0, service);
 			if (service.getServiceOffInterval() > service.getServiceError()) {
 				service.getHandler().postDelayed(new Runnable() {
@@ -32,6 +33,9 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 					}
 				}, service.getServiceError());
 			}
+		} catch (RuntimeException e) {
+			e.printStackTrace();
 		}
+	}
 
 	}

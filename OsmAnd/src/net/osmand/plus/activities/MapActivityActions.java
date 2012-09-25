@@ -1041,7 +1041,7 @@ public class MapActivityActions implements DialogProvider {
 		for (int i = 0; i < intermediates.size(); i++) {
 			double meters = MapUtils.getDistance(intermediates.get(i), lat, lon);
 			intermediateNames.add((i+1)+". " + 
-					mapActivity.getString(R.string.target_point, OsmAndFormatter.getFormattedDistance((float) meters, mapActivity)));
+					mapActivity.getString(R.string.target_point, OsmAndFormatter.getFormattedDistance((float) meters, mapActivity))+ "");
 		}
 		final boolean[] checkedIntermediates = new boolean[intermediateNames.size()];
 		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.layers_list_activity_item, R.id.title,

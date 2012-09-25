@@ -544,9 +544,13 @@ public class ResourceManager {
 				log.error(e.getMessage(), e);
 			}
 		}
-		if (file.exists() && file.canRead()) {
+		if (file.exists() && file.canRead() ) {
 			long val = System.currentTimeMillis();
-			for (File f : file.listFiles()) {
+			File[] lf = file.listFiles();
+			if(lf == null) {
+				lf = new File[0];
+			}
+			for (File f : lf) {
 				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 					progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
 					try {
@@ -632,8 +636,11 @@ public class ResourceManager {
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
-			for (File f : file.listFiles()) {
-				indexingPoi(progress, warnings, f);
+			File[] listFiles = file.listFiles();
+			if (listFiles != null) {
+				for (File f : listFiles) {
+					indexingPoi(progress, warnings, f);
+				}
 			}
 		}
 		File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
