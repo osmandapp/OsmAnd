@@ -936,4 +936,28 @@
 	<string name="poi_remove_success">El PDI s\\\'ha eliminat correctament</string>
 	<string name="default_buttons_reset">Reinicia</string>
 	<string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
+	<string name="tip_day_night_mode_t_v2">"\tL\'aspecte dels mapes vectorials pot canviar entre dia i nit(fosc).
+\n\tEls colors de nit son mes segurs per conduir de nit.
+\n\tPots assignar una política per canviar de dia/nit a \'Menú\' -&gt; \'Configurar pantalla...\' -&gt;\'Mapa dia/nit\'.
+\n\tLes opcions son:
+\n\t\'Alba/Ocàs\' - mode automàtic,controlat per la posició del sol(per defecte)
+\n\t\'Dia\' - sempre usa mode de dia
+\n\t\'Nit\' - sempre usa mode de nit\n\t\'Sensor de llum\' - l\'aspecte del mapa es controlat per el sensor de llum del teu dispositiu(només si esta equipat) "</string>	
+	<string name="tip_osm_improve_t">\tOsmAnd usa mapes basats en dades d\'Openstreetmap.org (OSM) i -a mes de veure i navegar- pot ser usat per millorar la qualitat de les dades. Fàcilment pots crear i publicar nous PDIs o errors d\'OSM amb només uns quants clicks!
+\n\tPer a això necessites subministrar la teva informació de registre d\'OSM a \'Preferències\' -&gt; \'Preferències generals\' -&gt; \'Edició d\'OSM\'.
+\n\tPer afegir un nou PDI usa l\'opcio \'Crear PDI\' en el menu contextual del mapa. Entra l\'informacio sobre el nou PDI al dialeg de \'Crear PDI\' i finalment publica-ho.
+\n\tEls errors en els mapes poden ser informats inmediatament via error d\'OSM, i la comunitat d\'OSM llavors podra solucionar l\'error rapidament.
+\n\tPer afegir un error usa l\'opcio \'Obrir error d\'OSM\' en el menu contextual. Llavors entra una descripcio detallada del problema i finalment envia-ho usant el boto d\'Afegir.
+\n\tSiusplau adona\'t que fa falta conexio a Internet per afegir PDI OSM i errors d\'OSM.</string>
+	<string name="tip_recent_changes_0_6_9_t">Canvis a 0.6.9 :
+\n\t- Dibuixat fora línia millorat\n\t- Dibuixat natiu ràpid fora linina - mirar a les característiques experimentals (pot no funcionar en alguns dispositius)\n\t- Canvis massius per veure i sentir
+\n\t- Informació d\'altitud
+\n\t- Noves traduccions (Vietnamita,Polac)
+\n\t- Altres petites característiques</string>
+	<string name="no_route">Sense ruta</string>
+	<string name="voice_stream_voice_call">Àudio de trucada de veu</string>
+	<string name="tip_location_sharing_t">"\tPots compartir l\'ubicació de llocs interessants en el teu viatge amb la família o els amics.
+\n\tPer compartir qualsevol ubicació que desitges:
+\n\tUsa \'Menú contextual de mapa\' -&gt; \'Compartir ubicació\'.
+\n\tLlavors selecciona una via per compartir la teva ubicació.Les opcions son: Correu electrònic,SMS(text),o només copiar l\'ubicació en el porta retalls. "</string>
 	</resources>
