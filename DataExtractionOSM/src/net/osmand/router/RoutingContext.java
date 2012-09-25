@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
@@ -31,7 +32,7 @@ public class RoutingContext {
 	
 	public final RoutingConfiguration config;
 	// 1. Initial variables
-	private int garbageCollectorIteration = 0;
+	
 	private int relaxingIteration = 0;
 	public long firstRoadId = 0;
 	public int firstRoadDirection = 0;
@@ -70,6 +71,8 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	
+	private TileStatistics global = new TileStatistics();
+	
 	public RoutingContext(RoutingConfiguration config) {
 		this.config = config;
 	}
@@ -90,15 +93,8 @@ public class RoutingContext {
 		return cnt;
 	}
 	
-	public boolean runTilesGC() {
-		garbageCollectorIteration++;
-		int loadedTilesCritical = config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY * 3 /2;
-		if (garbageCollectorIteration > config.ITERATIONS_TO_RUN_GC ||
-				getCurrentlyLoadedTiles() > loadedTilesCritical) {
-			garbageCollectorIteration = 0;
-			return true;
-		}
-		return false;
+	public int getCurrentEstimatedSize(){
+		return global.size;
 	}
 	
 	public boolean runRelaxingStrategy(){
@@ -186,12 +182,64 @@ public class RoutingContext {
 		RoutingTile old = tiles.remove(l);
 		RoutingTile n = new RoutingTile(tile.tileX, tile.tileY, config.ZOOM_TO_LOAD_TILES);
 		n.isLoaded = old.isLoaded;
+		
 		n.setUnloaded();
 		tiles.put(l, n);
 		unloadedTiles++;
+		global.size -= tile.tileStatistics.size;
 		distinctUnloadedTiles.add(l);
 	}
 	
+	private static class TileStatistics {
+		public int size = 0;
+		public int allRoutes = 0;
+		public int coordinates = 0;
+		
+		@Override
+		public String toString() {
+			return "All routes " + allRoutes + 
+					" size " + (size / 1024f) + " KB coordinates " + coordinates + " ratio coord " + (((float)size) / coordinates)
+					+ " ratio routes " + (((float)size) / allRoutes);
+		}
+
+		public void addObject(RouteDataObject o) {
+			allRoutes++;
+			coordinates += o.getPointsLength() * 2;
+			// calculate size
+			int sz = 0;
+			sz += 8 + 4; // overhead
+			if (o.names != null) {
+				sz += 12;
+				TIntObjectIterator<String> it = o.names.iterator();
+				while(it.hasNext()) {
+					it.advance();
+					String vl = it.value();
+					sz += 12 + vl.length();
+				}
+				sz += 12 + o.names.size() * 25;
+			}
+			sz += 8; // id
+			// coordinates
+			sz += (8 + 4 + 4 * o.getPointsLength()) * 4;
+			sz += o.types == null ? 4 : (8 + 4 + 4 * o.types.length);
+			sz += o.restrictions == null ? 4 : (8 + 4 + 8 * o.restrictions.length);
+			sz += 4;
+			if (o.pointTypes != null) {
+				sz += 8 + 4 * o.pointTypes.length;
+				for (int i = 0; i < o.pointTypes.length; i++) {
+					sz += 4;
+					if (o.pointTypes[i] != null) {
+						sz += 8 + 8 * o.pointTypes[i].length;
+					}
+				}
+			}
+			// Standard overhead?
+			size += sz * 3;
+			// size += coordinates * 20;
+		}
+	}
+
+
 	
 	public void loadTileData(final RoutingTile tile, final List<RouteDataObject> toFillIn, NativeLibrary nativeLib, 
 			Map<BinaryMapIndexReader, List<RouteSubregion>> map) {
@@ -200,15 +248,15 @@ public class RoutingContext {
 		final int zoomToLoad = 31 - tile.getZoom();
 		final int tileX = tile.getTileX();
 		final int tileY = tile.getTileY();
+		final TileStatistics ts = new TileStatistics();
 		ResultMatcher<RouteDataObject> matcher = new ResultMatcher<RouteDataObject>() {
-			int intersectionObjects = 0, all = 0, allout = 0;
 			@Override
 			public boolean publish(RouteDataObject o) {
 				if(o.getPointsLength() == 0) {
 					return false;
 				}
-				all++;
-				boolean out = false;
+				ts.allRoutes++;
+				
 				int minx, maxx, miny, maxy;
 				minx = maxx = o.getPoint31XTile(0);
 				miny = maxy = o.getPoint31YTile(0);
@@ -217,22 +265,15 @@ public class RoutingContext {
 					maxx = Math.max(o.getPoint31XTile(ti), maxx);
 					miny = Math.min(o.getPoint31YTile(ti), miny);
 					maxy = Math.max(o.getPoint31YTile(ti), maxy);
-					if(!tile.checkContains(o.getPoint31XTile(ti), o.getPoint31YTile(ti))) {
-						out = true;
-					}
 				}
 				minx = minx >> zoomToLoad;
 				maxx = maxx >> zoomToLoad;
 				miny = miny >> zoomToLoad;
 				maxy = maxy >> zoomToLoad;
 				if(minx > tileX || maxx < tileX || miny > tileY || maxy < tileY) {
-					allout++;
 					return false;
 				}
-				if(out) {
-					intersectionObjects++;
-				}
-
+				ts.addObject(o);
 				if (toFillIn != null) {
 					if (getRouter().acceptLine(o)) {
 						toFillIn.add(o);
@@ -244,7 +285,7 @@ public class RoutingContext {
 			
 			@Override
 			public String toString() {
-				return "Tile " + tileX + "/"+ tileY + " boundaries " + intersectionObjects +  " of " + all + " out " + allout;
+				return "Tile " + tileX + "/"+ tileY + " : " + ts;
 			}
 
 			@Override
@@ -290,12 +331,20 @@ public class RoutingContext {
 				}
 			}
 		}
+		
 		loadedTiles++;
 		if (tile.isUnloaded()) {
 			loadedPrevUnloadedTiles++;
 		} else {
+			if(global != null) {
+				global.allRoutes += ts.allRoutes;
+				global.coordinates += ts.coordinates;
+			}
 			distinctLoadedTiles++;
 		}
+		tile.tileStatistics = ts;
+		global.size += ts.size;
+//		System.out.println("Loaded " + tile + " global " + global);
 		tile.setLoaded();
 		if(nativeRouteSearchResults.size() > 0) {
 			tile.nativeLib = nativeLib;
@@ -405,6 +454,7 @@ public class RoutingContext {
 		
 		private TLongObjectMap<RouteSegment> routes = new TLongObjectHashMap<RouteSegment>();
 		private TLongObjectHashMap<RouteDataObject> idObjects = new TLongObjectHashMap<RouteDataObject>();
+		private TileStatistics tileStatistics = new TileStatistics();
 		
 		public RouteSegment getSegment(long id, RoutingContext ctx) {
 			if(nativeResults != null) {
@@ -504,6 +554,11 @@ public class RoutingContext {
 		
 		public boolean checkContains(int x31, int y31) {
 			return tileX == (x31 >> (31 - zoom)) && tileY == (y31 >> (31 - zoom));
+		}
+		
+		@Override
+		public String toString() {
+			return "Tile " + tileX + "/" + tileY + " : " + tileStatistics;
 		}
 		
 	}

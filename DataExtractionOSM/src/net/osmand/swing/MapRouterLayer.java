@@ -305,20 +305,6 @@ public class MapRouterLayer implements MapPanelLayer {
 	}
 	
 	
-	// for vector rendering we should extract from osm
-	// 1. Ways (different kinds) with tag highway= ?,highway=stop ...
-	// 2. Junction = roundabout
-	// 3. barrier, traffic_calming=bump
-	// 4. Save {name, ref} of way to unify it
-	
-	// + for future routing we should extract from osm
-	// 1. oneway 
-	// 2. max_speed
-	// 3. toll
-	// 4. traffic_signals
-	// 5. max_heigtht, max_width, min_speed, ...
-	// 6. incline ?
-
 	public static List<Way> route_YOURS(LatLon start, LatLon end){
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
@@ -626,7 +612,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				String m = DataExtractionSettings.getSettings().getRouteMode();
 				String[] props = m.split("\\,");
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-				RoutingConfiguration config = builder.build(props[0], props);
+				RoutingConfiguration config = builder.build(props[0], RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, props);
 				// config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
 				// config.ZOOM_TO_LOAD_TILES = 14;
 				RoutingContext ctx = new RoutingContext(config);
@@ -638,13 +624,13 @@ public class MapRouterLayer implements MapPanelLayer {
 				if (st == null) {
 					throw new RuntimeException("Starting point for route not found");
 				}
-				System.out.println("ROAD TO START " + st.getRoad().getHighway() + " " + st.getRoad().id);
+				log.info("Start road " + st.getRoad().getHighway() + " " + st.getRoad().id);
 				
 				RouteSegment e = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
 				if (e == null) {
 					throw new RuntimeException("End point to calculate route was not found");
 				}
-				System.out.println("ROAD TO END " + e.getRoad().getHighway() + " " + e.getRoad().id);
+				log.info("End road " + e.getRoad().getHighway() + " " + e.getRoad().id);
 				
 				List<RouteSegment> inters  = new ArrayList<BinaryRoutePlanner.RouteSegment>();
 				if (intermediates != null) {

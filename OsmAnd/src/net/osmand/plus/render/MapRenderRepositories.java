@@ -630,10 +630,14 @@ public class MapRenderRepositories {
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
-					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
-					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-					activityManager.getMemoryInfo(memoryInfo);
-					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + " (" + memoryInfo.availMem / 1048576L + " MB available) ", Toast.LENGTH_SHORT).show();
+//					ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+//					ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//					activityManager.getMemoryInfo(memoryInfo);
+//					int avl = (int) (memoryInfo.availMem / (1 << 20));
+					int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+					int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
+					String s = " (" + avl + " MB available of " + max  + ") ";
+					AccessibleToast.makeText(context, context.getString(R.string.rendering_out_of_memory) + s , Toast.LENGTH_SHORT).show();
 				}
 			});
 		} finally {

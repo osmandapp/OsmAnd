@@ -27,6 +27,7 @@ import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -55,6 +56,7 @@ import org.xml.sax.SAXException;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.location.Location;
+import android.widget.Toast;
 
 public class RouteProvider {
 	private static final org.apache.commons.logging.Log log = LogUtil.getLog(RouteProvider.class);
@@ -350,7 +352,15 @@ public class RouteProvider {
 			specs.add(GeneralRouter.AVOID_UNPAVED);
 		}
 		String[] specialization = specs.toArray(new String[specs.size()]);
-		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null, specialization));
+		float mb = (1 << 20);
+		Runtime rt = Runtime.getRuntime();
+		// make visible
+		int memoryLimit = (int) (0.9 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
+		log.error("Use " + memoryLimit +  "Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		
+		RoutingConfiguration cf = config.build(p.name().toLowerCase(), start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null, 
+				memoryLimit, specialization);
+		RoutingContext ctx = new RoutingContext(cf);
 		ctx.interruptable = interruptable;
 		ctx.previouslyCalculatedRoute = previousRoute;
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
@@ -387,10 +397,14 @@ public class RouteProvider {
 				return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
 			}
 		} catch (OutOfMemoryError e) {
-			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
-			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
-			activityManager.getMemoryInfo(memoryInfo);
-			return new RouteCalculationResult("Not enough process memory "+ "(" + memoryInfo.availMem / 1048576L + " MB available) ");
+//			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
+//			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
+//			activityManager.getMemoryInfo(memoryInfo);
+//			int avl = (int) (memoryInfo.availMem / (1 << 20));
+			int max = (int) (Runtime.getRuntime().maxMemory() / (1 << 20)); 
+			int avl = (int) (Runtime.getRuntime().freeMemory() / (1 << 20));
+			String s = " (" + avl + " MB available of " + max  + ") ";
+			return new RouteCalculationResult("Not enough process memory "+ s);
 		}
 	}
 	

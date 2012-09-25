@@ -42,13 +42,11 @@ public class BinaryRoutePlanner {
 	
 	private static final int ROUTE_POINTS = 11;
 	private static final float TURN_DEGREE_MIN = 45;
+	private static final boolean SHOW_GC_SIZE = false;
 	
 	
 	public BinaryRoutePlanner(NativeLibrary nativeLib, BinaryMapIndexReader... map) {
-		this.nativeLib = nativeLib;
-		if(nativeLib != null) {
-			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 100;
-		}
+		this.nativeLib = null; //nativeLib;
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
@@ -378,9 +376,6 @@ public class BinaryRoutePlanner {
 				graphSegments = graphDirectSegments;
 			}
 
-			if(ctx.runTilesGC()) {
-				unloadUnusedTiles(ctx, ctx.config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
-			}
 			if(ctx.runRelaxingStrategy() ) {
 				relaxNotNeededSegments(ctx, graphDirectSegments, true);
 				relaxNotNeededSegments(ctx, graphReverseSegments, false);
@@ -398,8 +393,9 @@ public class BinaryRoutePlanner {
 		return resultPrepared;
 	}
 	
-	private void unloadUnusedTiles(RoutingContext ctx, int desirableSize) {
+	private void unloadUnusedTiles(RoutingContext ctx) {
 		// now delete all
+		float desirableSize = ctx.config.memoryLimitation * 0.7f;
 		List<RoutingTile> list = new ArrayList<RoutingContext.RoutingTile>();
 		TIntObjectIterator<RoutingTile> it = ctx.tiles.iterator();
 		int loaded = 0;
@@ -428,15 +424,30 @@ public class BinaryRoutePlanner {
 				return v1 < v2 ? -1 : (v1 == v2 ? 0 : 1);
 			}
 		});
-		if (loaded >= 0.9f * desirableSize) {
-			int toUnload = Math.max(loaded / 5, loaded - desirableSize);
-			for (int i = 0; i < loaded; i++) {
-				list.get(i).access = 0;
-				if (i < toUnload) {
-					ctx.unloadTile(list.get(i), true);
-				}
+		while(ctx.getCurrentEstimatedSize() >= desirableSize && list.size() > loaded / 5) {
+			RoutingTile unload = list.remove(0);
+//			System.out.println("Unload " + unload);
+			unload.access = 0;
+			ctx.unloadTile(unload, true);
+		}
+	}
+	
+	private static long runGCUsedMemory()  {
+		Runtime runtime = Runtime.getRuntime();
+		long usedMem1 = runtime.totalMemory() - runtime.freeMemory();
+		long usedMem2 = Long.MAX_VALUE;
+		int cnt = 4;
+		while (cnt-- >= 0) {
+			for (int i = 0; (usedMem1 < usedMem2) && (i < 1000); ++i) {
+				runtime.runFinalization();
+				runtime.gc();
+				Thread.yield();
+
+				usedMem2 = usedMem1;
+				usedMem1 = runtime.totalMemory() - runtime.freeMemory();
 			}
 		}
+		return usedMem1;
 	}
 	
 
@@ -498,19 +509,23 @@ public class BinaryRoutePlanner {
 		System.out.println(logMsg);
 	}
 	
+	private static void printInfo(String logMsg) {
+		log.warn(logMsg);
+	}
+	
 	public void printDebugMemoryInformation(RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		println("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + ", time to load : " + ctx.timeToLoad / 1e6);
-		println("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + ctx.maxLoadedTiles);
-		println("Loaded tiles " + ctx.loadedTiles + " (distinct "+ctx.distinctLoadedTiles+ "), unloaded tiles " + ctx.unloadedTiles + 
+		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + ", time to load : " + ctx.timeToLoad / 1e6);
+		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + ctx.maxLoadedTiles);
+		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct "+ctx.distinctLoadedTiles+ "), unloaded tiles " + ctx.unloadedTiles + 
 				" (distinct " + ctx.distinctUnloadedTiles.size()+") "+ ", loaded more than once same tiles "
 				+ ctx.loadedPrevUnloadedTiles );
-		println("Visited roads, " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
+		printInfo("Visited roads, " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
 		if (graphDirectSegments != null && graphReverseSegments != null) {
-			println("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
+			printInfo("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
 		}
 		if (visitedDirectSegments != null && visitedOppositeSegments != null) {
-			println("Visited segments sizes: " + visitedDirectSegments.size() + "/" + visitedOppositeSegments.size());
+			printInfo("Visited segments sizes: " + visitedDirectSegments.size() + "/" + visitedOppositeSegments.size());
 		}
 
 	}
@@ -520,6 +535,24 @@ public class BinaryRoutePlanner {
 		if (tile.isLoaded()) {
 			tile.access++;
 			return tile;
+		}
+		if(ctx.getCurrentEstimatedSize() > 0.95 *ctx.config.memoryLimitation) {
+			int sz1 = ctx.getCurrentEstimatedSize();
+			long h1 = 0;
+			if(SHOW_GC_SIZE && sz1 > 0.7 * ctx.config.memoryLimitation ) {
+				runGCUsedMemory();
+				h1 = runGCUsedMemory();
+			}
+			int clt = ctx.getCurrentlyLoadedTiles();
+			unloadUnusedTiles(ctx);
+			if (h1 != 0 && ctx.getCurrentlyLoadedTiles() != clt) {
+				int sz2 = ctx.getCurrentEstimatedSize();
+				runGCUsedMemory();
+				long h2 = runGCUsedMemory();
+				float mb = (1 << 20); 
+				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb+ " actual");
+				log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb + " max " + Runtime.getRuntime().maxMemory() / mb);
+			}
 		}
 		ctx.loadTileData(tile, null, nativeLib, map);
 		return tile;
@@ -886,8 +919,8 @@ public class BinaryRoutePlanner {
 
 		// calculate time
 		for (int i = 0; i < result.size(); i++) {
-			if(ctx.runTilesGC()) {
-				unloadUnusedTiles(ctx, ctx.config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
+			if(ctx.getCurrentEstimatedSize() > 0.9 *ctx.config.memoryLimitation) {
+				unloadUnusedTiles(ctx);
 			}
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();

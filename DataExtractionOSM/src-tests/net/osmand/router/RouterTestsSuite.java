@@ -123,7 +123,6 @@ public class RouterTestsSuite {
 		for (int i = 0; i < tests.getLength(); i++) {
 			Element e = (Element) tests.item(i);
 			BinaryRoutePlanner router = new BinaryRoutePlanner(lib, rs);
-			RoutingConfiguration.DEFAULT_DESIRABLE_TILES_IN_MEMORY = 100;
 			testRoute(e, router, config);
 		}
 
@@ -159,7 +158,7 @@ public class RouterTestsSuite {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because 'best_percent' attribute is not specified \n\n" );
 			return;
 		}
-		RoutingContext ctx = new RoutingContext(config.build(vehicle));
+		RoutingContext ctx = new RoutingContext(config.build(vehicle, RoutingConfiguration.DEFAULT_MEMORY_LIMIT));
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because '" + skip + "'\n\n" );

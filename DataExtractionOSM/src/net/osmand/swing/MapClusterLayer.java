@@ -122,8 +122,7 @@ public class MapClusterLayer implements MapPanelLayer {
 		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(),
 				rs.toArray(new BinaryMapIndexReader[rs.size()]));
 		Builder builder = RoutingConfiguration.getDefault();
-		RoutingConfiguration config = builder.build("car");
-		config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
+		RoutingConfiguration config = builder.build("car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3);
 		RoutingContext ctx = new RoutingContext(config);
 		// find closest way
 		RouteSegment st = router.findRouteSegment(lat, lon, ctx);

@@ -129,7 +129,6 @@
 		</avoid>
 	</routingProfile>
 	
-	
 	<routingProfile name="bicycle" baseProfile="bicycle" restrictionsAware="true" minDefaultSpeed="7" maxDefaultSpeed="16" 
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
 		<!-- <attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>  -->
