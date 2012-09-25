@@ -1113,4 +1113,5 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
 	<string name="no_route">Pas de route</string>
 	<string name="delete_target_point">Enlever le point de destination</string>
 	<string name="intermediate_point">Point intermédiaire %1$s</string>
+    <string name="gps_not_available">Veuillez activer le GPS</string>
     </resources>
