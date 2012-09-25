@@ -603,7 +603,7 @@
   <string name="update_existing">Changer</string>
   <string name="only_show">Afficher seulement</string>
   <string name="follow">Suivre</string>
-  <string name="recalculate_route_to_your_location">Recalculer le trajet à partir de votre position</string>
+  <string name="recalculate_route_to_your_location">Choisir le mode de transport:</string>
   <string name="mark_final_location_first">Veuillez tout d\'abord sélectionner un point de destination</string>
   <string name="get_directions">Navigation</string>
   <string name="show_gps_status">Afficher le statut GPS</string>
