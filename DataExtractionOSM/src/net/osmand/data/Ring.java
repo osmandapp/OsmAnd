@@ -111,39 +111,22 @@ public class Ring implements Comparable<Ring> {
 			if ((w.getNodes() == null || w.getNodes().size() == 0) &&
 					!unInitializedNodes) continue;
 			
-			Way newWay = null;
-			Way addedTo = null;
-			// merge the Way w with the first borderway suitable;
-			for (Way borderWay : borderWays) {
-				newWay = combineTwoWaysIfHasPoints(w, borderWay);
-				if(newWay != null) {
-					addedTo = borderWay;
-				}
-			}
-			if (newWay == null) {
-				// no suitable borderWay has been found, add this way as one of the boundaries
-				borderWays.add(w);
-			} else {
-				// ways are combined, remove the original borderway
-				borderWays.remove(addedTo);
-				addedTo = null;
-				// search if it can be combined with something else
+			// merge the Way w with the first borderway suitable, repeat until nothing can be merged
+			Way wayToMerge = w;
+			Way newWay;
+			do {
+				newWay = null;
 				for (Way borderWay : borderWays) {
-					newWay = combineTwoWaysIfHasPoints(newWay, borderWay);
+					newWay = combineTwoWaysIfHasPoints(wayToMerge, borderWay);
 					if(newWay != null) {
-						addedTo = borderWay;
+						wayToMerge = newWay;
+						borderWays.remove(borderWay);
+						break;
 					}
 				}
-				
-				if (addedTo != null) {
-					// newWay has enlarged a second time
-					borderWays.remove(addedTo);
-				}
-				// newWay is now a concatenation of 2 or 3 ways, needs to be added to the borderWays
-				borderWays.add(newWay);
-				
-			}
-			
+			} while (newWay != null);
+			//no suitable borderWay has been found, add this way as one of the boundaries
+			borderWays.add(wayToMerge);
 		}
 		
 		if (borderWays.size() != 1) {
