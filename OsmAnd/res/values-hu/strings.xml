@@ -1014,10 +1014,7 @@
 <string name="tip_recent_changes_0_8_3_t">"A 0.8.3 kiadás változásai:
 \n\t* Köztes célpontok
 \n\t* Továbbfejlesztett útvonalvezetés
-\n\t* Autópályák elkerülése opció
-\n\t* Cycleway=track megjelenítése
-\n\t* Javított felhasználói felület (ikonok)
-\n\t* További hibajavítások "</string>
+\n\t* Útvonaltervezéshez választható az autópályák elkerülése\n\t* Kerékpáros térképnézet bővült egy újabb úttípussal (cycleway=track )\n\t* További hibajavítások "</string>
 <string name="snap_to_road_descr">Úthoz rögzítés navigáció közben</string>
 <string name="snap_to_road">Úthoz rögzítés</string>
 <string name="tip_recent_changes_0_8_4_t">"A 0.8.4 kiadás változásai: "</string>
