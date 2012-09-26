@@ -1013,4 +1013,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="no_route">No hay ruta</string>
 	<string name="delete_target_point">Elimina el punto destino</string>
 	<string name="intermediate_point">Punto de paso %1$s</string>
+    <string name="gps_not_available">Por favor, habilite el GPS en ajustes</string>
     </resources>
