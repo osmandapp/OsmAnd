@@ -563,16 +563,21 @@
 		<!-- Shops -->
 		<group>
 			<filter minzoom="17" tag="shop" value="bakery"/>
+			<filter minzoom="17" tag="shop" value="boutique"/>
 			<filter minzoom="17" tag="shop" value="butcher"/>
 			<filter minzoom="17" tag="shop" value="clothes"/>
+			<filter minzoom="17" tag="shop" value="confectionery"/>
 			<filter minzoom="17" tag="shop" value="fashion"/>
-			<filter minzoom="17" tag="shop" value="boutique"/> 
+			<filter minzoom="17" tag="shop" value="car"/>
+			<filter appMode="car" minzoom="17" tag="shop" value="car_repair"/>
 			<filter minzoom="17" tag="shop" value="convenience"/>
 			<filter minzoom="16" tag="shop" value="department_store"/>
 			<filter minzoom="17" tag="shop" value="doityourself"/>
+			<filter minzoom="17" tag="shop" value="electronics"/>
+			<filter minzoom="17" tag="shop" value="florist"/>
+			<filter minzoom="17" tag="shop" value="furniture"/>
 			<filter minzoom="17" tag="shop" value="hairdresser"/>
 			<filter minzoom="16" tag="shop" value="supermarket"/>
-			<filter minzoom="17" tag="shop" value="confectionery"/> 
 			<filter minzoom="17" tag="shop" value="vending_machine"/>
 			<filter minzoom="17" tag="shop" value="alcohol"/>
 			<filter minzoom="17" tag="shop" value="kiosk"/>
