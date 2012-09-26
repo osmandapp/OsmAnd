@@ -458,7 +458,7 @@
   <string name="update_existing">Zamień</string>
   <string name="only_show">Tylko pokaż</string>
   <string name="follow">Prowadź</string>
-  <string name="recalculate_route_to_your_location">Wybierz rodzaj pojazdu (opcjonalnie) oraz tryb naprowadzania</string>
+  <string name="recalculate_route_to_your_location">Wybierz rodzaj pojazdu (opcjonalnie) oraz tryb naprowadzania:</string>
   <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
   <string name="get_directions">Nawigacja</string>
   <string name="show_gps_status">Pokaż status GPS</string>
@@ -857,11 +857,11 @@
   <string name="osmand_parking_delete_confirm">Chcesz usunąć lokalizację zaparkowanego samochodu?</string>
   <string name="osmand_parking_delete">Usuń znacznik parkowania</string>
   <string name="osmand_parking_choose_type">Wybierz typ parkingu</string>
-  <string name="osmand_parking_lim_text">Time-limited</string>
-  <string name="osmand_parking_no_lim_text">Time-unlimited</string>
+  <string name="osmand_parking_lim_text">Ograniczony czasowo</string>
+  <string name="osmand_parking_no_lim_text">Nieograniczony czasowo</string>
   <string name="osmand_parking_add_event">Dodaj powiadomienie do aplikacji kalendarza</string>
-  <string name="osmand_parking_time_limit">Time-limited parking</string>
-  <string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
+  <string name="osmand_parking_time_limit">Parking ograniczony czasowo</string>
+  <string name="osmand_parking_time_no_limit">Parking nielimitowany czasowo</string>
   <string name="osmand_parking_position_description">Pozycja Twojego zaparkowanego samochodu. %1$s</string>
   <string name="osmand_parking_position_description_add">Odebrać samochód o:</string>
   <string name="osmand_parking_pm">PM</string>
@@ -878,7 +878,7 @@
   <string name="global_app_allocated_memory">Użyta pamięć</string>
   <string name="native_app_allocated_memory_descr">Zużycie pamięci natywnej przez aplikację %1$s MB (dalvik %2$s MB, inna %3$s MB). Proportional memory %4$s MB (limit Androida %5$s MB, dalvika %6$s MB).</string>
   <string name="native_app_allocated_memory">Zużycie pamięci natywnej</string>
-  <string name="select_animate_speedup">Select animate route acceleration</string>
+  <string name="select_animate_speedup">Wybierz przyspieszenie animacji trasy</string>
   <string name="osmand_parking_hours">Godziny</string>
   <string name="osmand_parking_minutes">Minuty</string>
   <string name="osmand_parking_position_description_add_time">Samochód został zaparkowany w:</string>
@@ -1004,7 +1004,7 @@
     <string name="poi_filter_accomodation">Zakwaterowanie</string>
     <string name="poi_filter_restaurants">Restauracje</string>
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (Open Street Maps Android) OsmAnd to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map rastrowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej. OsmAnd+ jest aplikacją płatną - kupując ją wspierasz projekt, fundujesz rozwój nowych funkcji, oraz otrzymujesz najnowsze aktualizacje. Niektóre z podstawowych funkcji to: - pełną funkcjonalność offline (konfigurowalny folder, w którym zapisywane są pobierane mapy wektorowe i rastrowe) - dostępne do pobrania skrócone mapy wektorowe całego świata - brak limitu ilości map pobranych bezpośrednio w aplikacji - funkcje Wikipedii offline (pobieranie z Wikipedii informacji o ciekawych miejscach), idealne przy zwiedzaniu - możliwość nakładania wielu warstw map, np. ścieżek GPX lub tras nawigacji, ciekawych miejsc, Ulubionych, linii konturowych, przystanków komunikacji miejskiej z możliwością określenia przezroczystości poszczególnych warstw - wyszukiwanie adresów i miejsc bez konieczności łączenia się z Internetem - obliczanie krótkich tras bez połączenia z Internetem (eksperymentalnie) - tryby samochodowy, rowerowy i pieszy wraz z automatycznym przełączanie widoków dzień/noc - opcjonalne powiększanie mapy w zależności od prędkości poruszania się - opcjonalne dopasowywanie mapy do kompasu lub kierunku poruszania się - opcjonalne wskazywanie pasa jazdy oraz ograniczeń prędkości - głosy zarejestrowane i generowane automatycznie</string>
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (Open Street Maps Android) OsmAnd to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map rastrowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej. OsmAnd+ jest aplikacją płatną - kupując ją wspierasz projekt, fundujesz rozwój nowych funkcji, oraz otrzymujesz najnowsze aktualizacje. Niektóre z podstawowych funkcji to: - pełną funkcjonalność offline (konfigurowalny folder, w którym zapisywane są pobierane mapy wektorowe i rastrowe) - dostępne do pobrania skrócone mapy wektorowe całego świata - brak limitu ilości map pobranych bezpośrednio w aplikacji - funkcje Wikipedii offline (pobieranie z Wikipedii informacji o ciekawych miejscach), idealne przy zwiedzaniu - możliwość nakładania wielu warstw map, np. ścieżek GPX lub tras nawigacji, ciekawych miejsc, Ulubionych, linii konturowych, przystanków komunikacji miejskiej z możliwością określenia przezroczystości poszczególnych warstw - wyszukiwanie adresów i miejsc bez konieczności łączenia się z Internetem - obliczanie krótkich tras bez połączenia z Internetem (eksperymentalnie) - tryby samochodowy, rowerowy i pieszy wraz z automatycznym przełączanie widoków dzień/noc - opcjonalne powiększanie mapy w zależności od prędkości poruszania się - opcjonalne dopasowywanie mapy do kompasu lub kierunku poruszania się - opcjonalne wskazywanie pasa jazdy oraz ograniczeń prędkości - głosy zarejestrowane i generowane automatycznie "</string>
 	<string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 	<string name="live_monitoring_mode_off">Uruchom\nzapisywanie na bieżąco ścieżki</string>
 	<string name="live_monitoring_mode_on">Zatrzymaj\nzapisywanie na bieżąco ścieżki</string>
@@ -1016,4 +1016,10 @@
 	<string name="monitoring_mode_on">Zatrzymaj\nrejestrację GPX.</string>
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
-	</resources>
+	<string name="local_openstreetmap_items"/>
+	<string name="tip_day_night_mode_t_v2">"\tTryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy).\n\tNocne kolory są bezpieczniejsze podczas jazdy w nocy.\n\tMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran...\'-&gt;\'mapa dzień/noc\'.\n\tMożliwość wyboru:\n\t\'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz) "</string>	
+	<string name="tip_map_switch_t_v2">"\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tWskazując \'Źródło mapy\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Online maps\', lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
+\n "</string>
+	<string name="tip_app_mode_t_v2">"\tOsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.\n\tProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy. "</string>
+	<string name="email">email</string>
+</resources>
