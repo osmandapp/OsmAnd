@@ -515,7 +515,8 @@ public class BinaryRoutePlanner {
 	
 	public void printDebugMemoryInformation(RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + ", time to load : " + ctx.timeToLoad / 1e6);
+		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + ", time to load : " + ctx.timeToLoad / 1e6 + ", time to load headers : " + ctx.timeToLoadHeaders / 1e6);
+		printInfo("Loaded file tiles: " + ctx.routingSubregionLoaded + " distinct " + ctx.routingSubregionsSet.size());
 		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + ctx.maxLoadedTiles);
 		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct "+ctx.distinctLoadedTiles+ "), unloaded tiles " + ctx.unloadedTiles + 
 				" (distinct " + ctx.distinctUnloadedTiles.size()+") "+ ", loaded more than once same tiles "
@@ -530,7 +531,9 @@ public class BinaryRoutePlanner {
 
 	}
 	
+	@SuppressWarnings("unused")
 	public RoutingTile loadRoutes(final RoutingContext ctx, int tile31X, int tile31Y) {
+		
 		final RoutingTile tile = ctx.getRoutingTile(tile31X, tile31Y);
 		if (tile.isLoaded()) {
 			tile.access++;
@@ -552,6 +555,11 @@ public class BinaryRoutePlanner {
 				float mb = (1 << 20); 
 				log.warn("Unload tiles :  estimated " + (sz1 - sz2) / mb + " ?= " + (h1 - h2) / mb+ " actual");
 				log.warn("Used after " + h2 / mb + " of " + Runtime.getRuntime().totalMemory() / mb + " max " + Runtime.getRuntime().maxMemory() / mb);
+			} else {
+				float mb = (1 << 20); 
+				int sz2 = ctx.getCurrentEstimatedSize();
+				log.warn("Unload tiles :  occupied before " +  sz1/ mb + " Mb - now  " + sz2/mb + "MB ");
+				log.warn("Memory free " + Runtime.getRuntime().freeMemory() / mb + " of " + Runtime.getRuntime().totalMemory() / mb + " max " + Runtime.getRuntime().maxMemory() / mb);
 			}
 		}
 		ctx.loadTileData(tile, null, nativeLib, map);

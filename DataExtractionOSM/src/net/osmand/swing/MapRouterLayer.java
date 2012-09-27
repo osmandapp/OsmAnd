@@ -612,7 +612,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				String m = DataExtractionSettings.getSettings().getRouteMode();
 				String[] props = m.split("\\,");
 				BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(), rs);
-				RoutingConfiguration config = builder.build(props[0], RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3, props);
+				RoutingConfiguration config = builder.build(props[0], RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 2, props);
 				// config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
 				// config.ZOOM_TO_LOAD_TILES = 14;
 				RoutingContext ctx = new RoutingContext(config);

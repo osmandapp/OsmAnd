@@ -5,10 +5,11 @@
 	<attribute name="heuristicCoefficient" value="1.0" />
 
 	<!-- 1.1 tile load parameters (should not affect routing) -->
-	<attribute name="zoomToLoadTiles" value="13" />
-	<attribute name="iterationsToRunGC" value="125" />
-	<!--  by default it is 25 -->
-	<attribute name="desirableTilesInMemory" value="" />
+	<!-- by default 13 -->
+	<!-- OPTIMAL -->
+	<attribute name="zoomToLoadTiles" value="16" />
+	<!--  by default it is 15  -->
+	<attribute name="memoryLimitInMB" value="90" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
 	<attribute name="useDynamicRoadPrioritising" value="true" />

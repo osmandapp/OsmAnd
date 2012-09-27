@@ -11,9 +11,11 @@ import gnu.trove.set.hash.TLongHashSet;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
@@ -59,6 +61,7 @@ public class RoutingContext {
 
 	// 5. debug information (package accessor)
 	long timeToLoad = 0;
+	long timeToLoadHeaders = 0;
 	long timeToCalculate = 0;
 	public int loadedTiles = 0;
 	int distinctLoadedTiles = 0;
@@ -70,6 +73,8 @@ public class RoutingContext {
 	public int relaxedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
+	public int routingSubregionLoaded = 0;
+	public Set<RouteSubregion> routingSubregionsSet = new LinkedHashSet<RouteSubregion>();
 	
 	private TileStatistics global = new TileStatistics();
 	
@@ -239,12 +244,9 @@ public class RoutingContext {
 		}
 	}
 
-
 	
 	public void loadTileData(final RoutingTile tile, final List<RouteDataObject> toFillIn, NativeLibrary nativeLib, 
 			Map<BinaryMapIndexReader, List<RouteSubregion>> map) {
-		
-		long now = System.nanoTime();
 		final int zoomToLoad = 31 - tile.getZoom();
 		final int tileX = tile.getTileX();
 		final int tileY = tile.getTileY();
@@ -325,7 +327,19 @@ public class RoutingContext {
 				}
 			} else {
 				try {
-					r.getKey().searchRouteIndex(request, r.getValue());
+					if (r.getValue().size() > 0) {
+						long now = System.nanoTime();
+//						int rg = r.getValue().get(0).routeReg.regionsRead;
+						List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
+						for(RouteSubregion s : subregs) {
+							routingSubregionLoaded ++;
+							routingSubregionsSet.add(s);
+						}
+						timeToLoadHeaders += (System.nanoTime() - now);
+						now = System.nanoTime();
+						r.getKey().loadRouteIndexData(subregs, matcher);
+						timeToLoad += (System.nanoTime() - now);
+					}
 				} catch (IOException e) {
 					throw new RuntimeException("Loading data exception", e);
 				}
@@ -351,7 +365,7 @@ public class RoutingContext {
 			tile.nativeResults = nativeRouteSearchResults;
 			
 		}
-		timeToLoad += (System.nanoTime() - now);
+		
 	}
 
 	
