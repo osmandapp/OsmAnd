@@ -22,10 +22,8 @@
 	<string name="tip_recent_changes_0_8_3_t">"Αλλαγές στην 0.8.3 :
 \n\t* Ενδιάμεσα σημεία
 \n\t* Βελτιωμένη καθοδήγηση δρομολογίου
-\n\t* Επιλογή αποφυγής αυτοκινητόδρομων
-\n\t* Cycleway=track display
-\n\t* better UI finish (icons)
-\n\t* Αρκετές διορθώσεις σφαλμάτων "</string>
+\n\t* Προσθήκη επιλογής που επιτρέπει την αποφυγή αυτοκινητόδρομων κατά την δημιουργία του δρομολογίου
+\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)\n\t* Διορθώσεις σφαλμάτων "</string>
 	<string name="snap_to_road_descr">Κλείδωμα στο δρόμο κατά τη πλοήγηση</string>
 	<string name="snap_to_road">Κλείδωμα στο δρόμο</string>
 	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
@@ -82,10 +80,10 @@
 		-  optional map alignment according to compass or direction of motion
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 	</string>
-	<string name="tip_update_index">Ανανέωση των εκτός σύνδεσης Δεδομένων</string>
+	<string name="tip_update_index">Ανανέωση των offline Δεδομένων</string>
 	<string name="tip_update_index_t">\tΤο να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό. Το OsmAnd παρέχει έναν διαχειριστή λήψεων ο οποίος μπορεί να ελέγξει για διαθέσιμες ενημερώσεις offline δεδομένων.
-\n\tΓια έλεγχο ενημερώσεων πηγαίνετε \'Ρυθμίσεις\' -&gt; \'Offline δεδομένα\' -&gt; \'Λήψη offline δεδομένων\'. Μόλις η λίστα περιοχών ανακτηθεί από το internet, μπορείτε να επιλέξετε \'Menu\' -&gt; \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομέν α που έχετε ήδη στη συσκευή σας.
-\n\tΗ διαθεσιμότητα των ενημερώσεων απεικονίζονται με τα παρακάτω χρώματα:
+\n\tΓια έλεγχο ενημερώσεων πηγαίνετε \'Ρυθμίσεις\' -&gt; \'Offline δεδομένα\' -&gt; \'Λήψη offline δεδομένων\'. Μόλις η λίστα περιοχών ανακτηθεί από το internet, μπορείτε να επιλέξετε \'Menu\' -&gt; \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομένα που έχετε ήδη στη συσκευή σας.
+\n\tΗ διαθεσιμότητα των ενημερώσεων απεικονίζεται με τα παρακάτω χρώματα:
 \n\t\'Πράσινο\' - δείχνει αρχεία δεδομένων όμοια στη συσκευή και στο διακομιστή
 \n\t\'Μπλε\' - δείχνει διαθέσιμες ενημερώσεις στο διακομιστή
 \n\t\'Σκούρο πράσινο/μπλε\' - ομοίως δείχνει δεδομένα απενεργοποιημένα στη συσκευή</string>
@@ -94,10 +92,10 @@
 	<string name="select_navigation_mode">Επιλογή τρόπου μετακίνησης</string>
 	<string name="monitor_preferences">Ιχνηλάτηση</string>
 	<string name="day_night_info_description">Ανατολή : %1$s \nΔύση : %2$s</string>
-	<string name="day_night_info">Πληρ. Ημέρα/Νύχτα</string>
+	<string name="day_night_info">Πληρ. Ημέρας/Νύχτας</string>
 	<string name="map_widget_day_night">Χάρτης ημέρας/νύχτας</string>
 	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης:</string>
-	<string name="map_widget_renderer">Τρόπος απεικόνισης</string>
+	<string name="map_widget_renderer">Στυλ απεικόνισης</string>
 	<string name="live_monitoring_mode_off">Έναρξη\n live ιχνηλάτησης</string>
 	<string name="live_monitoring_mode_on">Παύση\n live ιχνηλάτησης</string>
 	<string name="position_on_map_descr">Επιλέξτε την τοποθεσία του δείκτη θέσης στο χάρτη</string>
@@ -115,11 +113,11 @@
 	<string name="map_widget_transparent">Διάφανο skin</string>
 	<string name="monitoring_mode_off">Εγγραφή GPX</string>
 	<string name="monitoring_mode_on">Σταμάτημα\n εγγρ. GPX.</string>
-	<string name="bg_service_sleep_mode_off">Ενεργοποίηση\n λειτουργίας αδράνειας</string>
-	<string name="bg_service_sleep_mode_on">Απενεργοποίηση\n λειτουργίας αδράνειας</string>
+	<string name="bg_service_sleep_mode_off">Ενεργοποίηση\n κατάστασης νάρκης</string>
+	<string name="bg_service_sleep_mode_on">Απενεργοποίηση\n κατάστασης νάρκης</string>
 	<string name="gps_wakeup_interval">Διάστημα αφύπνισης GPS: %s</string>
 	<string name="int_continuosly">Συνεχόμενο</string>
-	<string name="screen_is_locked">Για ξεκλείδωμα της οθόνης πάτα την εικόνα της κλειδαριάς</string>
+	<string name="screen_is_locked">Για ξεκλείδωμα της οθόνης πατήστε το εικονίδιο της κλειδαριάς</string>
 	<string name="map_widget_top_text">Όνομα οδού</string>
 	<string name="map_widget_config">Ρύθμιση οθόνης</string>
 	<string name="map_widget_map_select">Πηγή χάρτη</string>
@@ -147,11 +145,11 @@
 	<string name="show_cameras">Εμφάνιση καμερών ταχύτητας</string>
 	<string name="show_speed_limits">Εμφάνιση ορίων ταχύτητας</string>
 	<string name="avoid_toll_roads">Αποφυγή διοδίων</string>
-	<string name="continue_follow_previous_route_auto">Η προηγούμενη πλοήγηση δεν είχε τελειώσει. Να συνεχιστεί;? (%1$s δευτ.)</string>
+	<string name="continue_follow_previous_route_auto">Το προηγούμενο δρομολόγιο δεν είχε τελειώσει. Να συνεχιστεί;? (%1$s δευτ.)</string>
 	<string name="route_updated_loc_found">Η διαδρομή θα επαναϋπολογιστεί όταν βρεθεί η τοποθεσία</string>
 	<string name="osmand_parking_hours">Ώρες</string>
 	<string name="osmand_parking_minutes">Λεπτά</string>
-	<string name="osmand_parking_position_description_add_time">ο αυτοκίνητο έχει σταθμεύσει στο:</string>
+	<string name="osmand_parking_position_description_add_time">Το αυτοκίνητο έχει σταθμεύσει στο:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Αλλαγές στην 0.8.1 :
 \n\t* Διαδρομές με καλύτερη ακρίβεια (λίγο πιο αργό)
 \n\t* Έξυπνος και γρήγορος επαναϋπολογισμός διαδρομής
@@ -164,7 +162,7 @@
 	<string name="global_app_allocated_memory">Εκχωρημένη μνήμη</string>
 	<string name="native_app_allocated_memory_descr">Συνολική εγγενής μνήμη δεσμευμένη από την εφαρμογή %1$s MB (Dalvik %2$s MB, άλλα %3$s MB). Αναλογική μνήμη %4$s MB (Όριο Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Συνολική εγγενής μνήμη</string>
-	<string name="update_downlod_list">Ανανέωση καταλόγου</string>
+	<string name="update_downlod_list">Επαναφόρτωση λίστας</string>
 	<string name="starting_point_too_far">Η αφετηρία είναι πολύ μακριά από το κοντινότερο δρόμο.</string>
 	<string name="shared_location">Κοινή τοποθεσία</string>
 	<string name="osmand_parking_event">Πάρε το αυτοκίνητο από το πάρκινγκ</string>
@@ -199,7 +197,7 @@
 	<string name="route_kr">Μείνετε δεξιά και προχωρήστε</string>
 	<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
 	<string name="rendering_attr_noPolygons_name">Όχι πολύγωνα</string>
-	<string name="rendering_attr_appMode_name">Λειτουργία απεικόνισης</string>
+	<string name="rendering_attr_appMode_name">Τρόπος απεικόνισης</string>
 	<string name="rendering_attr_appMode_description">Βελτιστοποίηση του χάρτη για</string>
 	<string name="rendering_attr_contourLines_description">Εμφάνιση από το επίπεδο εστίασης (χρειάζεται αρχείο SRTM):</string>
 	<string name="rendering_attr_contourLines_name">Εμφάνιση ισοϋψών γραμμών</string>
@@ -1091,7 +1089,7 @@
 <string name="arrived_at_intermediate_point">Φτάσατε στο ενδιάμεσο σημείο σας</string>
 <string name="context_menu_item_intermediate_point">Προσθήκη ενδιάμεσου σημείου</string>
 <string name="map_widget_intermediate_distance">Ενδιάμεσο σημείο</string>
-<string name="ending_point_too_far">Η αφετηρία είναι πολύ μακριά από το κοντινότερο δρόμο.</string>
+<string name="ending_point_too_far">Το τελικό σημείο είναι πολύ μακριά από πλησιέστερο δρόμο.</string>
 <string name="tip_recent_changes_0_8_4_t">"Αλλαγές στην 0.8.4: "</string>
     <string name="context_menu_item_first_intermediate_point">Ορίστε το πρώτο σημείο-στόχο</string>
     <string name="add_as_last_destination_point">Προσθήκη ως τελευταίο ενδιάμεσο σημείο</string>
