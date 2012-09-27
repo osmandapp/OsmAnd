@@ -314,7 +314,7 @@ public class RouteProvider {
 			List<RouteSegmentResult> previousRoute,
 			boolean leftSide, Interruptable interruptable) throws IOException {
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
-		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
+		BinaryRoutePlanner router = new BinaryRoutePlanner();
 		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
 		RoutingConfiguration.Builder config ;
 		if (routingXml.exists() && routingXml.canRead()) {
@@ -356,11 +356,11 @@ public class RouteProvider {
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimit = (int) (0.9 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
-		log.error("Use " + memoryLimit +  "Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		log.warn("Use " + memoryLimit +  "Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
 		
 		RoutingConfiguration cf = config.build(p.name().toLowerCase(), start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, specialization);
-		RoutingContext ctx = new RoutingContext(cf);
+		RoutingContext ctx = new RoutingContext(cf, NativeOsmandLibrary.getLoadedLibrary(), files);
 		ctx.interruptable = interruptable;
 		ctx.previouslyCalculatedRoute = previousRoute;
 		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);

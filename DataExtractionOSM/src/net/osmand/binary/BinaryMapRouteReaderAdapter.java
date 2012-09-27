@@ -636,6 +636,21 @@ public class BinaryMapRouteReaderAdapter {
 	}
 
 	
+	public List<RouteDataObject> loadRouteRegionData(RouteSubregion rs) throws IOException {
+		TLongArrayList idMap = new TLongArrayList();
+		TLongObjectHashMap<TLongArrayList> restrictionMap = new TLongObjectHashMap<TLongArrayList>();
+		if (rs.dataObjects == null) {
+			codedIS.seek(rs.filePointer + rs.shiftToData);
+			int limit = codedIS.readRawVarint32();
+			int oldLimit = codedIS.pushLimit(limit);
+			readRouteTreeData(rs, idMap, restrictionMap);
+			codedIS.popLimit(oldLimit);
+		}
+		List<RouteDataObject> res = rs.dataObjects;
+		rs.dataObjects = null;
+		return res;
+	}
+	
 	public void loadRouteRegionData(List<RouteSubregion> toLoad, ResultMatcher<RouteDataObject> matcher) throws IOException {
 		Collections.sort(toLoad, new Comparator<RouteSubregion>() {
 			@Override
@@ -665,9 +680,9 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 
-	public List<RouteSubregion> searchRouteRegionTree(SearchRequest<RouteDataObject> req, List<RouteSubregion> list, List<RouteSubregion> toLoad) 
-			throws IOException {
-		for(RouteSubregion rs : list){
+	public List<RouteSubregion> searchRouteRegionTree(SearchRequest<RouteDataObject> req, List<RouteSubregion> list, 
+			List<RouteSubregion> toLoad) throws IOException {
+		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
 				if (rs.subregions == null) {
 					codedIS.seek(rs.filePointer);

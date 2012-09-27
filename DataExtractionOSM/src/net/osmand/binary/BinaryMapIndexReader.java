@@ -1981,4 +1981,11 @@ public class BinaryMapIndexReader {
 		}
 	}
 	
+	public List<RouteDataObject> loadRouteIndexData(RouteSubregion rs) throws IOException {
+		if(routeAdapter != null){
+			return routeAdapter.loadRouteRegionData(rs);
+		}
+		return Collections.emptyList();
+	}
+	
 }
