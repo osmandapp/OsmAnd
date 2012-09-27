@@ -562,6 +562,7 @@
 
 		<!-- Shops -->
 		<group>
+			<filter minzoom="17" tag="shop" value="alcohol"/>
 			<filter minzoom="17" tag="shop" value="bakery"/>
 			<filter minzoom="17" tag="shop" value="boutique"/>
 			<filter minzoom="17" tag="shop" value="butcher"/>
@@ -571,28 +572,27 @@
 			<filter minzoom="17" tag="shop" value="car"/>
 			<filter appMode="car" minzoom="17" tag="shop" value="car_repair"/>
 			<filter minzoom="17" tag="shop" value="convenience"/>
+			<filter minzoom="17" tag="shop" value="copyshop"/>
 			<filter minzoom="16" tag="shop" value="department_store"/>
 			<filter minzoom="17" tag="shop" value="doityourself"/>
 			<filter minzoom="17" tag="shop" value="electronics"/>
 			<filter minzoom="17" tag="shop" value="florist"/>
 			<filter minzoom="17" tag="shop" value="furniture"/>
+			<filter minzoom="17" tag="shop" value="greengrocer"/>
 			<filter minzoom="17" tag="shop" value="hairdresser"/>
-			<filter minzoom="16" tag="shop" value="supermarket"/>
-			<filter minzoom="17" tag="shop" value="vending_machine"/>
-			<filter minzoom="17" tag="shop" value="alcohol"/>
+			<filter minzoom="17" tag="shop" value="hardware"/>
+			<filter minzoom="17" tag="amenity" value="ice_cream"/>
 			<filter minzoom="17" tag="shop" value="kiosk"/>
+			<filter minzoom="17" tag="shop" value="laundry"/>
+			<filter minzoom="17" tag="shop" value="mobile_phone"/>
+			<filter minzoom="17" tag="shop" value="motorcycle"/>
 			<filter minzoom="17" tag="shop" value="musical_instrument"/>
 			<filter minzoom="17" tag="shop" value="optician"/>
-			<filter minzoom="17" tag="shop" value="video"/>
-			<filter minzoom="17" tag="shop" value="laundry"/> 
-			<filter minzoom="17" tag="shop" value="tobacco"/> 
-			<filter minzoom="17" tag="shop" value="motorcycle"/> 
-			<filter minzoom="17" tag="shop" value="hardware"/> 
-			<filter minzoom="17" tag="shop" value="copyshop"/> 
-			<filter minzoom="17" tag="shop" value="greengrocer"/> 
-			<filter minzoom="17" tag="shop" value="mobile_phone"/> 
-			<filter minzoom="17" tag="amenity" value="ice_cream"/> 
 			<filter minzoom="16" tag="shop" value="outdoor"/>
+			<filter minzoom="16" tag="shop" value="supermarket"/>
+			<filter minzoom="17" tag="shop" value="tobacco"/>
+			<filter minzoom="17" tag="shop" value="vending_machine"/>
+			<filter minzoom="17" tag="shop" value="video"/>
 			<groupFilter textSize="12" textColor="#993399" textHaloRadius="1" textDy="7" textWrapWidth="15"/>
 		</group>
 
@@ -723,13 +723,14 @@
 		<filter minzoom="16" icon="amenity_court" tag="amenity" value="courthouse"/>
 
 		<!-- Shops -->
-			<filter appMode="car" minzoom="16" icon="shop_bakery" tag="shop" value="bakery"/>
+		<filter appMode="car" minzoom="16" icon="shop_bakery" tag="shop" value="bakery"/>
 		<filter minzoom="17" icon="shop_bakery" tag="shop" value="bakery"/>
-			<filter appMode="car" minzoom="16" icon="shop_butcher" tag="shop" value="butcher"/>
+		<filter appMode="car" minzoom="16" icon="shop_butcher" tag="shop" value="butcher"/>
 		<filter minzoom="17" icon="shop_butcher" tag="shop" value="butcher"/>
-			<filter appMode="car" minzoom="15" icon="shop_clothes" tag="shop" value="clothes"/>
+		<filter appMode="car" minzoom="15" icon="shop_clothes" tag="shop" value="clothes"/>
 		<filter minzoom="16" icon="shop_clothes" tag="shop" value="clothes"/>
-			<filter appMode="car" minzoom="15" icon="shop_clothes" tag="shop" value="fashion"/>
+		<filter appMode="car" minzoom="15" icon="shop_clothes" tag="shop" value="fashion"/>
+		<filter minzoom="16" icon="shop_diy" tag="shop" value="doityourself"/>
 		<filter minzoom="16" icon="shop_clothes" tag="shop" value="fashion"/>
 		<filter minzoom="17" icon="shop_clothes" tag="shop" value="boutique"/>
 		<filter minzoom="16" icon="shop_bicycle" tag="shop" value="bicycle"/>
@@ -738,14 +739,14 @@
 		<filter minzoom="16" icon="shop_car_repair" tag="shop" value="car_repair"/>
 		<filter minzoom="16" icon="bicycle_rental" tag="amenity" value="bicycle_rental"/>
 		<filter minzoom="16" icon="car_sharing" tag="amenity" value="car_sharing"/>
-			<filter appMode="car" minzoom="16" icon="atm" tag="amenity" value="atm"/>
+		<filter appMode="car" minzoom="16" icon="atm" tag="amenity" value="atm"/>
 		<filter minzoom="17" icon="atm" tag="amenity" value="atm"/>
 		<filter minzoom="16" icon="bank" tag="amenity" value="bank"/>
-			<filter appMode="car" minzoom="15" icon="shop_convenience" tag="shop" value="convenience"/>
+		<filter appMode="car" minzoom="15" icon="shop_convenience" tag="shop" value="convenience"/>
 		<filter minzoom="16" icon="shop_convenience" tag="shop" value="convenience"/>
 		<filter minzoom="15" icon="department_store" tag="shop" value="department_store"/>
 		<filter minzoom="16" icon="shop_electronics" tag="shop" value="electronics"/>
-			<filter appMode="car" minzoom="15" icon="shop_supermarket" tag="shop" value="general"/>			
+		<filter appMode="car" minzoom="15" icon="shop_supermarket" tag="shop" value="general"/>
 		<filter minzoom="16" icon="shop_supermarket" tag="shop" value="general"/>
 		<filter minzoom="16" icon="shop_outdoor" tag="shop" value="outdoor"/>
 		<filter minzoom="16" icon="shop_outdoor" tag="leisure" value="fishing"/>
