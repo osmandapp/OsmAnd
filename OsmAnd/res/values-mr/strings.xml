@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
   <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
@@ -33,7 +33,7 @@
   <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
   <string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
   <string name="prefs_plugins">प्लगिन मॅनेजर</string>
-  <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 :\n\t- *Plugin functionality*\n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.\n\t- *New offline map data support*\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).\n\t - You need to download completely new offline data (old data will not be supported anymore)\n\t- *Offline Routing*\n\t - Offline routing becomes more robust\n\t *Usability and UI experience*\n\t - Improved in many areas"</string>
+  <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 :\n\t- *Plugin functionality*\n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.\n\t- *New offline map data support*\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).\n\t - You need to download completely new offline data (old data will not be supported anymore)\n\t- *Offline Routing*\n\t - Offline routing becomes more robust\n\t *Usability and UI experience*\n\t - Improved in many areas "</string>
   <string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
@@ -135,7 +135,7 @@
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
-  <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings</string>
+  <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings.</string>
   <string name="show_current_gpx_title">Show current track</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
   <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
@@ -187,7 +187,7 @@
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
   <string name="download_files_question_space">शिल्लक जागा आता {2} एमबी! {0} फाइल डाउनलोड करायच्या का ({1} एमबी)?</string>
   <string name="tip_select_destination_point">इच्छित स्थळ निवडा</string>
-  <string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
+  <string name="tip_select_destination_point_t">"\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'.\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Transparent theme</string>
@@ -229,7 +229,7 @@
   <string name="search_select_point">निवडा</string>
   <string name="search_position_current_location_search">स्थान शोधत आहे…</string>
   <string name="search_position_current_location_found">स्थान (सापडले)</string>
-  <string name="search_position_address">पत्ता...</string>
+  <string name="search_position_address">पत्ता…</string>
   <string name="search_position_favorites">आवडती ठिकाणे…</string>
   <string name="search_position_undefined">Undefined</string>
   <string name="search_position_fixed">Fixed</string>
@@ -333,9 +333,9 @@
   <string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
   <string name="level_to_switch_vector_raster">Min. vector zoom level</string>
   <string name="tip_location_sharing">Location Sharing</string>
-  <string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
+  <string name="tip_location_sharing_t">"\tYou can share the location of interesting places on your trip with family or friends.\n\tTo share any location you want:\n\tUse \'Map context menu\' -&gt; \'Share location\' menu.\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard. "</string>
   <string name="tip_favorites">Favorite Points</string>
-  <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
+  <string name="tip_favorites_t">"\tFrequently used points can be saved as Favorites.\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'.\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Error occurred in offline search</string>
   <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
@@ -350,11 +350,11 @@
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
   <string name="tip_search">Searching</string>
-  <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite. \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
+  <string name="tip_search_t">"\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'. "</string>
   <string name="tip_map_context_menu">Map Context Menu</string>
-  <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
+  <string name="tip_map_context_menu_t">"\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)\n\tThe map context menu contains all actions referring to a point (location). "</string>
   <string name="tip_initial">Tips and Tricks</string>
-  <string name="tip_initial_t">\tOsmAnd is a navigation application with many features. \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
+  <string name="tip_initial_t">"\tOsmAnd is a navigation application with many features.\n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen. "</string>
   <string name="next_button">पुढे</string>
   <string name="previous_button">मागे</string>
   <string name="unit_of_length_descr">Change units of length and speed</string>
@@ -508,7 +508,7 @@
   <string name="layer_osm_bugs">OSM bugs</string>
   <string name="layer_transport">Transport stops</string>
   <string name="layer_poi">POI…</string>
-  <string name="layer_map">नकाशाचा स्त्रोत...</string>
+  <string name="layer_map">नकाशाचा स्त्रोत…</string>
   <string name="menu_layers">Define view</string>
   <string name="context_menu_item_search_poi">पिओआय शोधा</string>
   <string name="context_menu_item_show_route">इथून रस्ता दाखवा</string>
@@ -641,7 +641,7 @@
   <string name="loading_postcodes">Loading postcodes…</string>
   <string name="loading_streets">Loading streets…</string>
   <string name="loading_cities">Loading cities…</string>
-  <string name="loading">लोड करत आहे...</string>
+  <string name="loading">लोड करत आहे…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Error while saving GPX</string>
   <string name="error_calculating_route">Error calculating route</string>
@@ -823,7 +823,7 @@
   <string name="rendering_attr_noPolygons_name">No polygons</string>
   <string name="rendering_attr_appMode_name">Rendering mode</string>
   <string name="rendering_attr_appMode_description">Map optimization for respective User Profile</string>
-  <string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string>
+  <string name="rendering_attr_contourLines_description">Display from zoom level (needs SRTM file):</string>
   <string name="rendering_attr_contourLines_name">Show contour lines</string>
   <string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
   <string name="rendering_attr_hmRendered_name">नकाशा आधिक तपशिलवार दाखवा</string>
@@ -926,7 +926,7 @@
 <string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
 <string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग चालू करा</string>
 <string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग बंद करा</string>
-<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
+<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा…</string>
 <string name="avoid_unpaved">कच्चे रस्ते टाळा</string>
 <string name="avoid_in_routing_title">टाळा…</string>
 <string name="map_widget_show_ruler">पट्टी</string>
