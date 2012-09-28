@@ -33,7 +33,7 @@
 		\n\t* Lock screen button with logging services
 		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
 	</string>
-	<string name="osmand_short_description_80_chars">Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοιχτού κώδικα για χάρτες εντός και εκτός σύνδεσης</string>
+	<string name="osmand_short_description_80_chars">Ο OsmAnd είναι μια εφαρμογή πλοήγησης ανοιχτού κώδικα για χάρτες εντός και εκτός σύνδεσης</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
 
@@ -58,7 +58,7 @@
 
 		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
 	</string>
-	<string name="osmand_plus_short_description_80_chars">Το OsmAnd είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα για χάρτες με ή χωρίς σύνδεση</string>
+	<string name="osmand_plus_short_description_80_chars">Ο OsmAnd είναι μια εφαρμογή πλοήγησης ανοικτού κώδικα για χάρτες με ή χωρίς σύνδεση</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Αυτοματοποιημένες Οδηγίες Πλοήγησης)
 
@@ -81,7 +81,7 @@
 		-  optional lane guidance, speed limit display, recorded and TTS voices
 	</string>
 	<string name="tip_update_index">Ανανέωση των offline Δεδομένων</string>
-	<string name="tip_update_index_t">\tΤο να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό. Το OsmAnd παρέχει έναν διαχειριστή λήψεων ο οποίος μπορεί να ελέγξει για διαθέσιμες ενημερώσεις offline δεδομένων.
+	<string name="tip_update_index_t">\tΤο να έχετε ενημερωμένα δεδομένα χάρτη είναι βασικό. Ο OsmAnd παρέχει έναν διαχειριστή λήψεων ο οποίος μπορεί να ελέγξει για διαθέσιμες ενημερώσεις offline δεδομένων.
 \n\tΓια έλεγχο ενημερώσεων πηγαίνετε \'Ρυθμίσεις\' -&gt; \'Offline δεδομένα\' -&gt; \'Λήψη offline δεδομένων\'. Μόλις η λίστα περιοχών ανακτηθεί από το internet, μπορείτε να επιλέξετε \'Menu\' -&gt; \'Φιλτράρισμα ληφθέντων\' για να εμφανιστούν μόνο οι ενημερώσεις για δεδομένα που έχετε ήδη στη συσκευή σας.
 \n\tΗ διαθεσιμότητα των ενημερώσεων απεικονίζεται με τα παρακάτω χρώματα:
 \n\t\'Πράσινο\' - δείχνει αρχεία δεδομένων όμοια στη συσκευή και στο διακομιστή
@@ -97,7 +97,7 @@
 	<string name="map_widget_vector_attributes">Χαρακτηριστικά απεικόνισης:</string>
 	<string name="map_widget_renderer">Στυλ απεικόνισης</string>
 	<string name="live_monitoring_mode_off">Έναρξη\n live ιχνηλάτησης</string>
-	<string name="live_monitoring_mode_on">Παύση\n live ιχνηλάτησης</string>
+	<string name="live_monitoring_mode_on">Στάση\n live ιχνηλάτησης</string>
 	<string name="position_on_map_descr">Επιλέξτε την τοποθεσία του δείκτη θέσης στο χάρτη</string>
 	<string name="position_on_map">Δείκτης θέσης</string>
 	<string name="layer_map_appearance">Ρύθμιση οθόνης…</string>
@@ -243,7 +243,7 @@
 	<string name="osmand_extra_settings_description">Εμφάνιση ρυθμίσεων για προχωρημένη διαμόρφωση χάρτη (όπως αύξηση λεπτομερειών χάρτη) και ορισμένες device-specifics.</string>
 	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
 	<string name="plugins_screen">Διαχειριστής Προσθέτων</string>
-	<string name="select_plugin_to_activate">﻿Αγγίξτε ένα Πρόσθετο για να το ενεργοποιήσετε ή να το απενεργοποιήσετε. (Επανεκκίνηση του OsmAnd ίσως να απαιτείται.)</string>
+	<string name="select_plugin_to_activate">﻿Αγγίξτε ένα Πρόσθετο για ενεργοποίηση ή απενεργοποίηση. (Ίσως να απαιτείται επανεκκίνηση του OsmAnd.)</string>
 	<string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
 	<string name="prefs_plugins">Διαχειριστής Προσθέτων</string>
 	<string name="tip_recent_changes_0_8_0_t">"Αλλαγές στην 0.8.0 :
@@ -257,7 +257,7 @@
 \n\t *Usability and UI experience*
 \n\t - Improved in many areas "</string>
 	<string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
-	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Οι διανυσματικοί χάρτες πιθανόν εμφανίζονται γρηγορότερα. Ίσως δεν λειτουργούν καλά σε κάποιες συσκευές.</string>
 	<string name="play_commands_of_currently_selected_voice">Αναπαραγωγή εντολών της επιλεγμένης φωνής</string>
 	<string name="debugging_and_development">Ανάπτυξη του OsmAnd</string>
 	<string name="native_rendering">Εγγενής απεικόνιση</string>
@@ -286,7 +286,7 @@
 	<string name="accessibility_mode_descr">﻿Ενεργοποιεί τις δυνατότητες προσβασιμότητας</string>
 	<string name="accessibility_on">Ενεργό</string>
 	<string name="accessibility_off">Ανενεργό</string>
-	<string name="accessibility_default">According to the global system setting</string>
+	<string name="accessibility_default">Σύμφωνα με την καθολική ρύθμιση του συστήματος</string>
 	<string name="backToMenu">﻿Πίσω Στο Μενού</string>
 	<string name="zoomOut">Σμίκρυνση</string>
 	<string name="zoomIn">Μεγέθυνση</string>
@@ -361,11 +361,11 @@
 	<string name="local_openstreetmap_settings_descr">Εμφάνιση και διαχείριση των ΣΕ/Σφαλμάτων OSM σημειωμένων στην τοπική βάση δεδομένων</string>
 	<string name="live_monitoring_descr">Αποστολή ιχνηλάτησης σε μια συγκεκριμένη υπηρεσία web</string>
 	<string name="live_monitoring">Online ιχνηλάτηση σε πραγματικό χρόνο</string>
-	<string name="live_monitoring_interval_descr">Specify live tracking interval</string>
-	<string name="live_monitoring_interval">Live tracking interval</string>
-	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Live tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
+	<string name="live_monitoring_interval_descr">Καθορίστε το διάστημα της ζωντανής ιχνηλάτησης</string>
+	<string name="live_monitoring_interval">Διάστημα ζωντανής ιχνηλάτησης</string>
+	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Διεύθυνση web ζωντανής ιχνηλάτησης</string>
+	<string name="gpx_monitoring_disabled_warn">Παρακαλώ ενεργοποιήστε τις ρυθμίσεις \'Εγγραφή ίχνους σε αρχείο GPX\'.</string>
 	<string name="show_current_gpx_title">Εμφάνιση τρέχοντος ίχνους</string>
 	<string name="tip_recent_changes_0_7_0_t">"Αλλαγές στην 0.7.0 :
 \n\t- Offline wikipedia data with articles
@@ -418,17 +418,17 @@
 	<string name="tip_day_night_mode">Λειτουργία ημέρας/νύχτας</string>
 	<string name="tip_day_night_mode_t_v2">" "</string>	
 	<string name="tip_osm_improve">Βελτίωση Δεδομένων OSM</string>
-	<string name="tip_osm_improve_t">\tΤο OsmAnd χρησιμοποιεί χάρτες βασισμένους στα δεδομένα του Openstreetmap.org (OSM) και -εκτός από προβολή χάρτη και δρομολόγηση- μπορεί να χρησιμοποιηθεί για τη βελτίωση της ποιότητας των δεδομένων OSM. Μπορείτε εύκολα να δημιουργήσετε και να αποστείλετε νέα Σημ. Ενδ. ή αναφορές σφαλμάτων με λίγα μόνο κλικ!
-		\n\tΓια το σκοπό αυτό χρειάζεται να παρέχετε πρώτα τις πληροφορίες σύνδεσης για το OSM στο \'Ρυθμίσεις\'-&gt; \'Γενικές ρυθμίσεις\'-&gt; \'Επεξεργασία OSM\'.
-		\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
-		\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
-		\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
-		\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+	<string name="tip_osm_improve_t">\tΟ OsmAnd χρησιμοποιεί χάρτες βασισμένους στα δεδομένα του Openstreetmap.org (OSM) και -εκτός από προβολή χάρτη και δρομολόγηση- μπορεί να χρησιμοποιηθεί για τη βελτίωση της ποιότητας των δεδομένων OSM. Μπορείτε εύκολα να δημιουργήσετε και να αποστείλετε νέα Σημ. Ενδ. ή αναφορές σφαλμάτων με λίγα μόνο κλικ!
+\n\tΓια το σκοπό αυτό χρειάζεται να παρέχετε πρώτα τις πληροφορίες σύνδεσης για το OSM στο \'Ρυθμίσεις\'-&gt; \'Γενικές ρυθμίσεις\'-&gt; \'Επεξεργασία OSM\'.
+\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
+\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
+\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="download_files_not_enough_space">Δεν υπάρχει αρκετός ελεύθερος χώρος για να κάνετε λήψη %1$s MB (ελεύθερα: %2$s).</string>
 	<string name="download_files_question_space">Ελεύθερος χώρος τώρα {2} MB! Λήψη {0} αρχείο(α) ({1} MB)?</string>
 	<string name="tip_select_destination_point">Επιλέξτε Προορισμό</string>
-	<string name="tip_select_destination_point_t">"\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'.
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle). "</string> 
+	<string name="tip_select_destination_point_t">"\tΜπορείτε να επιλέξετε ένα προορισμό απευθείας στο χάρτη (μενού περιβάλλοντος, και \'Καθορισμός ως προορισμός\'), σε όλες τις λειτουργίες αναζήτησης, ή μέσω παρατεταμένου πατήματος μιας καταχώρησης στην \'Λίστα Αγαπημένων Σημείων\'.
+\n\tΟ προορισμός είναι σημειωμένος ως πορτοκαλί δίσκος πάνω στο χάρτη και ο OsmAnd εμφανίζει την απόσταση και την κατεύθυνση προς αυτόν (πορτοκαλί τρίγωνο). "</string> 
 	<string name="tip_recent_changes_0_6_9_t">"Αλλαγές στην 0.6.9 :
 \n\t- Improved offline map rendering
 \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
@@ -439,14 +439,14 @@
 	<string name="use_transparent_map_theme">Διάφανο θέμα</string>
 	<string name="native_library_not_supported">Η εγγενής βιβλιοθήκη δεν υποστηρίζεται σε αυτήν τη συσκευή.</string>
 	<string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης…</string>
-	<string name="choose_auto_follow_route">Auto-center map view</string>
+	<string name="choose_auto_follow_route">Οπτική χάρτη Αυτοκεντράρισμα</string>
 	<string name="choose_auto_follow_route_descr">Χρόνος μέχρι η προβολή χάρτη συγχρονιστεί με την τρέχουσα θέση</string>
 	<string name="auto_follow_route_never">Ποτέ</string>
-	<string name="auto_follow_route_navigation">Auto-center nav only</string>
-	<string name="auto_follow_route_navigation_descr">Auto-center map view only while navigating.</string>
-	<string name="auto_follow_location_enabled">Auto-center map view in use.</string>
+	<string name="auto_follow_route_navigation">Αυτο-κεντράρισμα μόνο κατά την πλοήγηση</string>
+	<string name="auto_follow_route_navigation_descr">Αυτο-κεντραρισμένη οπτική χάρτη μόνο κατά την πλοήγηση.</string>
+	<string name="auto_follow_location_enabled">Οπτική αυτο-κεντραρίσματος χάρτη σε χρήση.</string>
 	<string name="pref_vector_rendering">Vector renderer specific options</string>
-	<string name="pref_overlay">Overlay / underlay</string>
+	<string name="pref_overlay">Επικάλυψη / υπόστρωμα</string>
 	<string name="pref_raster_map">Ρυθμίσεις προέλευσης χάρτη</string>
 	<string name="pref_vector_map">Ρυθμίσεις διανυσματικού χάρτη</string>
 	<string name="delete_confirmation_msg">Διαγραφή %1$s?</string>
@@ -474,7 +474,7 @@
 	<string name="data_to_search_poi_not_available">Δεν υπάρχουν τοπικά δεδομένα για αναζήτηση ΣΕ.</string>
 	<string name="poi_filter_by_name">Αναζήτηση βάσει ονόματος</string>
 	<string name="old_poi_file_should_be_deleted">Το αρχείο δεδομένων ΣΕ \'%1$s\' είναι περιττό και μπορεί να διαγραφεί.</string>
-	<string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
+	<string name="update_poi_file_not_found">Δεν βρέθηκε τοπικό αρχείο για τη διατήρηση των αλλαγών στα ΣΕ και δεν μπορεί να δημιουργηθεί.</string>
 	<string name="button_upgrade_osmandplus">Αναβάθμιση OsmAnd+</string>
 	<string name="map_version_changed_info">Ο διακομιστής περιέχει αρχεία χαρτών που δεν είναι συμβατά με αυτή την έκδοση της εφαρμογής. Για να τα κατεβάσετε και να τα χρησιμοποιήσετε, αναβαθμίστε την εφαρμογή σε νεότερη έκδοση.</string>
 	<string name="local_index_mi_rename">Μετονομασία</string>
@@ -523,7 +523,7 @@
 	<string name="favourites_edit_dialog_name">Name</string>
 	<string name="favourites_edit_dialog_category">Κατηγορία</string>
 	<string name="vector_map_not_needed">Όχι, ευχαριστώ</string>
-	<string name="basemap_missing">Base world map (covering the whole world at small zooms) is missing. Please consider downloading World_basemap_x.obf for a complete environment.</string>
+	<string name="basemap_missing">Λείπει ο βασικός παγκόσμιος χάρτης (καλύπτει όλο τον κόσμο στις μικρές κλίμακες). Παρακαλώ κατεβάστε το World_basemap_x.obf για ένα πλήρες περιβάλλον.</string>
 	<string name="vector_data_missing">On board (\'offline\') data is missing on SD card. Please consider to download it in order to use maps offline.</string>
 	<string name="local_index_gpx_info_show">\n\nΠατήστε και κρατήστε πατημένο για επιλογές</string>
 	<string name="local_index_gpx_info_speed">\nΜέση ταχύτητα : %1$s
@@ -542,9 +542,9 @@
 	<string name="local_index_mi_delete">Διαγραφή</string>
 	<string name="local_index_mi_reload">Επαναφόρτωση από την sdcard</string>
 	<string name="local_index_download">Λήψη…</string>
-	<string name="local_index_tile_data">Tile data: %1$s
-\nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s
-\nZooms downloaded : %5$s</string>
+	<string name="local_index_tile_data">Δεδομένα πλακιδίων: %1$s
+\nΕλάχιστη κλίμακα : %2$d\nΜέγιστη κλίμακα : %3$d\nΜπορούν να ληφθούν : %4$s
+\nΛηφθέντες κλίμακες : %5$s</string>
 	<string name="local_index_poi_data">Δεδομένα ΣΕ</string>
 	<string name="local_index_address_data">Δεδομένα διευθύνσεων</string>
 	<string name="local_index_transport_data">Δεδομένα μεταφορών</string>
@@ -559,7 +559,7 @@
 	<string name="map_text_size_descr">Επιλέξτε μέγεθος κειμένου για τα ονόματα στο χάρτη</string>
 	<string name="map_text_size">Μέγεθος γραμματοσειράς χάρτη</string>
 	<string name="trace_rendering">Rendering debug info</string>
-	<string name="trace_rendering_descr">Display rendering performance</string>
+	<string name="trace_rendering_descr">Εμφάνιση απόδοσης απεικόνησης</string>
 	<string name="tip_recent_changes">Πρόσφατες αλλαγές</string>
 	<string name="tip_recent_changes_0_6_6_t">"Πρόσφατες αλλαγές στην 0.6.6 :
 \n\t- Text To Speech engine for voice navigation
@@ -578,7 +578,7 @@
 	<string name="tts_missing_language_data">Δεν έχουν εγκατασταθεί δεδομένα για την επιλεγμένη γλώσσα. Θέλετε να μεταβείτε στο Market να τα εγκαταστήσετε;</string>
 	<string name="gpx_option_reverse_route">Αντιστροφή κατεύθυνσης GPX</string>
 	<string name="gpx_option_destination_point">Χρήση τρέχοντος προορισμού</string>
-	<string name="gpx_option_from_start_point">Pass along entire track</string>
+	<string name="gpx_option_from_start_point">Πέρασμα κατά μήκος ολόκληρου του ίχνους</string>
 	<string name="switch_to_vector_map_to_see">Υπάρχουν διαθέσιμοι offline διανυσματικοί χάρτες για αυτή την τοποθεσία.\n\nΓια χρήση ενεργοποιήστε \'Menu\' -&gt; \'Ορισμός εμφάνισης\' -&gt; \'Πηγή χάρτη...\' -&gt; \'Offline διανυσματικοί χάρτες\'.</string>
 	<string name="choose_audio_stream">Έξοδος φωνητικής καθοδήγησης</string>
 	<string name="choose_audio_stream_descr">Επιλέξτε το κανάλι παιξίματος της φωνητικής καθοδήγησης (system-dependent)</string>
@@ -598,23 +598,23 @@
 	<string name="map_overlay">Χάρτης επικάλυψης</string>
 	<string name="map_overlay_descr">Επιλογή χάρτη επικάλυψης</string>
 	<string name="tile_source_already_installed">Ο χάρτης είναι ήδη εγκατεστημένος, οι ρυθμίσεις θα ενημερωθούν</string>
-	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
+	<string name="select_tile_source_to_install">Επιλέξτε χάρτες (πλακίδια) για εγκατάσταση ή ενημέρωση</string>
 	<string name="internet_not_available">Σύνδεση στο Internet που απαιτείται για τη λειτουργία δεν είναι διαθέσιμη</string>
 	<string name="install_more">Εγκατάσταση περισσότερων…</string>
 	<string name="level_to_switch_vector_raster_descr">Ελάχιστη κλίμακα εστίασης για χρήση διανυσματικών χαρτών</string>
 	<string name="level_to_switch_vector_raster">Ελαχ. κλιμ. διανυσματικών</string>
 	<string name="tip_location_sharing">Διαμοιρασμός Τοποθεσίας</string>
-	<string name="tip_location_sharing_t">"\tYou can share the location of interesting places on your trip with family or friends.
-\n\tTo share any location you want:
-\n\tUse \'Map context menu\' -&gt; \'Share location\' menu.
-\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard. "</string>
+	<string name="tip_location_sharing_t">"\tΜπορείτε να μοιραστείτε τοποθεσίες από ενδιαφέροντα μέρη κατά το ταξίδι σας με την οικογένεια ή τους φίλους σας.
+\n\tΓια να μοιραστείτε οποιαδήποτε τοποθεσία θέλετε:
+\n\tΧρήση \'Μενού περιβάλλοντος χάρτη\' -&gt; \'Κοινή χρήση τοποθεσίας\'.
+\n\tΜετά επιλέξτε τον τρόπο διαμοιρασμού της τοποθεσίας σας. Οι επιλογές είναι : E-Mail, SMS(κείμενο), ή απλά αντιγράψτε τις συντεταγμένες της τοποθεσίας στο πρόχειρο. "</string>
 	<string name="tip_favorites">Αγαπημένα Σημεία</string>
-	<string name="tip_favorites_t">"\tFrequently used points can be saved as Favorites.
-\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -&gt; \'Favorites\'.
-\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
-\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -&gt; \'Define view\'. "</string>
+	<string name="tip_favorites_t">"\tΤα σημεία που χρησιμοποιούνται συχνά μπορούν να αποθηκευτούν ως Αγαπημένα.
+\n\tΓια να αποθηκεύσετε ένα σημείο ως Αγαπημένο πηγαίνετε στο μενού περιβάλλοντος χάρτη, επιλέξτε \'Προσθήκη στα αγαπημένα\' δώστε του κάποιο όνομα. Μετά την αποθήκευση ενός Αγαπημένου, είναι προσβάσιμο μέσω του \'Κύρια Οθόνη\' -&gt; \'Αγαπημένα\'.
+\n\tΠαρατεταμένο πάτημα ενός Αγαπημένου στο μενού \'Αγαπημένα\' παρέχει επιλογές να το ορίσετε ως προορισμό, να το Επεξεργαστείτε ή να το διαγράψετε.
+\n\tΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' -&gt; \'Ορισμός εμφάνισης\'. "</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
-	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
+	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'% s\'</string>
 	<string name="search_osm_offline">Αναζήτηση διεύθυνσης χρησιμοποιώντας χάρτες χωρίς σύνδεση</string>
 	<string name="system_locale">Σύστημα</string>
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
@@ -624,8 +624,8 @@
 \n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 \n\tOsmAnd also supports custom sources. "</string>
 	<string name="tip_app_mode">Προφίλ Χρήστη</string>
-	<string name="tip_app_mode_t_v2">"\tOsmAnd supports different (customizable) application profiles for different use cases.
-\n\tYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route. "</string>
+	<string name="tip_app_mode_t_v2">"\tΟ OsmAnd υποστηρίζει διαφορετικά (προσαρμόσιμα) προφίλ εφαρμογής για διαφορετικές περιπτώσεις χρήσης.
+\n\tΜπορείτε να αλλάξετε τα προφίλ μέσω του κουμπιού προφίλ στην κάτω αριστερή γωνία της οθόνης χάρτη (εικονίδιο αυτοκίνητο, ποδήλατο, ή πεζός), ή όταν φτιάχνετε κάποιο δρομολόγιο. "</string>
 	<string name="tip_navigation">Πλοήγηση</string>
 	<string name="tip_navigation_t">Πριν ξεκινήσετε την πλοήγηση θα πρέπει να επιλέξετε έναν προορισμό. Στη συνέχεια πατήστε \'Μενού\' -&gt; \'Οδηγίες\' στο χάρτη και επιλέξτε τον τύπο πλοήγησης.</string>
 	<string name="tip_search">Αναζήτηση</string>
@@ -636,7 +636,7 @@
 \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
 \n\tThe map context menu contains all actions referring to a point (location). "</string>
 	<string name="tip_initial">Συμβουλές και Κόλπα</string>
-	<string name="tip_initial_t">"\tΤο OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
+	<string name="tip_initial_t">"\tΟ OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
 \n\tΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα στην κύρια οθόνη. "</string>
 	<string name="next_button">Επόμενο</string>
 	<string name="previous_button">Προηγούμενο</string>
@@ -699,7 +699,7 @@
 	<string name="specified_dir_doesnt_exist">Δεν μπορώ να βρω τον καθορισμένο κατάλογο.</string>
 	<string name="application_dir">Κατάλογος αποθήκευσης</string>
 	<string name="application_dir_change_warning">Αλλάζοντας τον κατάλογο αποθήκευσης δεν θα μετακινηθούν ούτε θα διαγραφούν τα δεδομένα. Αυτό πρέπει να γίνει ξεχωριστά και εκτός του OsmAnd. Συνέχεια?</string>
-	<string name="osmand_net_previously_installed">Μια προηγούμενη έκδοση OsmAnd είναι εγκατεστημένη. Όλα τα offline δεδομένα θα υποστηρίζονται από τη νέα εφαρμογή. Αλλά τα Αγαπημένα σημεία θα πρέπει να εξαχθούν από την παλιά εφαρμογή και στη συνέχεια να εισαχθούν από τη νέα.</string>
+	<string name="osmand_net_previously_installed">Μια προηγούμενη έκδοση OsmAnd είναι εγκατεστημένη. Όλα τα offline δεδομένα θα υποστηρίζονται από τη νέα εφαρμογή. Αλλά τα Αγαπημένα σημεία θα πρέπει να εξαχθούν από την παλιά εφαρμογή και στη συνέχεια να εισαχθούν στη νέα.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
 	<string name="downloading_build">Downloading build…</string>
 	<string name="install_selected_build">Θέλετε να εγκαταστήσετε το OsmAnd - {0} από {1} {2} MB ?</string>
@@ -890,7 +890,7 @@
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
 	<string name="download_question">Λήψη {0} - {1} ?</string>
-	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ανανεώσετε ({2}) ?</string>
+	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
 	<string name="download_index_success">Επιτυχής λήψη</string>
 	<string name="error_io_error">Προέκυψε σφάλμα Εισ/Εξ</string>
