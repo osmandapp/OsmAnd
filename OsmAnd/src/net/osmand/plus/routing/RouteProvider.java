@@ -396,6 +396,8 @@ public class RouteProvider {
 			} else {
 				return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
 			}
+		} catch (InterruptedException e) {
+			return new RouteCalculationResult("Route calculation was interrupted");
 		} catch (OutOfMemoryError e) {
 //			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();

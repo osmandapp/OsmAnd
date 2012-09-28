@@ -122,7 +122,7 @@ public class BinaryRoutePlanner {
 		return road;
 	}
 	
-	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, List<RouteSegment> intermediate, boolean leftSideNavigation) throws IOException {
+	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, List<RouteSegment> intermediate, boolean leftSideNavigation) throws IOException, InterruptedException {
 		if(intermediate != null && intermediate.size() > 0) {
 			ArrayList<RouteSegment> ps = new ArrayList<RouteSegment>(intermediate);
 			ArrayList<RouteSegmentResult> firstPartRecalculatedRoute = null;
@@ -149,7 +149,8 @@ public class BinaryRoutePlanner {
 					local.previouslyCalculatedRoute = firstPartRecalculatedRoute;
 				}
 				local.visitor = ctx.visitor;
-				List<RouteSegmentResult> res = searchRouteInternal(local, ps.get(i), ps.get(i + 1), leftSideNavigation);
+				List<RouteSegmentResult> res = searchRouteInternalPrepare(local, ps.get(i), ps.get(i + 1), leftSideNavigation);
+
 				results.addAll(res);
 				ctx.distinctLoadedTiles += local.distinctLoadedTiles;
 				ctx.loadedTiles += local.loadedTiles;
@@ -173,21 +174,38 @@ public class BinaryRoutePlanner {
 		return searchRoute(ctx, start, end, leftSideNavigation);
 	}
 	
-	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException {
-		List<RouteSegmentResult> result = searchRouteInternal(ctx, start, end, leftSideNavigation);
+	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
+		List<RouteSegmentResult> result = searchRouteInternalPrepare(ctx, start, end, leftSideNavigation);
 		if(result != null) {
 			printResults(ctx, start, end, result);
 		}
-		ctx.unloadAllData();
+		if (RoutingContext.SHOW_GC_SIZE) {
+			int sz = ctx.global.size;
+			System.out.println("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.tiles.size());
+			ctx.runGCUsedMemory();
+			long h1 = ctx.runGCUsedMemory();
+			ctx.unloadAllData();
+			ctx.runGCUsedMemory();
+			long h2 = ctx.runGCUsedMemory();
+			float mb = (1 << 20);
+			log.warn("Unload context :  estimated " + sz / mb + " ?= " + (h1 - h2) / mb + " actual");
+		}
 		return result;
 	}
 	
+	
+	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
+		// Split into 2 methods to let GC work in between
+		searchRouteInternal(ctx, start, end, leftSideNavigation);
+		// 4. Route is found : collect all segments and prepare result
+		return prepareResult(ctx, start, end, leftSideNavigation);
+	}
 	
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	public List<RouteSegmentResult> searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException {
+	private void searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -323,15 +341,11 @@ public class BinaryRoutePlanner {
 			}
 			// check if interrupted
 			if(ctx.interruptable != null && ctx.interruptable.isCancelled()) {
-				return new ArrayList<RouteSegmentResult>();
+				throw new InterruptedException("Route calculation interrupted");
 			}
 		}
 		println("Result is found");
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
-		
-		// 4. Route is found : collect all segments and prepare result
-		List<RouteSegmentResult> resultPrepared = prepareResult(ctx, start, end, leftSideNavigation);
-		return resultPrepared;
 	}
 	
 	

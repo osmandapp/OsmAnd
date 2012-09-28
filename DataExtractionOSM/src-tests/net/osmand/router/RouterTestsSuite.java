@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -78,7 +77,7 @@ public class RouterTestsSuite {
 		}
 	}
 	
-	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws Exception {
 		Parameters params = Parameters.init(args);
 		if(params.tests.isEmpty() || params.obfDir == null) {
 			println("Run router tests is console utility to test route calculation for osmand.");
@@ -117,7 +116,7 @@ public class RouterTestsSuite {
 	}
 
 
-	public static boolean test(NativeLibrary lib, InputStream resource, BinaryMapIndexReader[] rs, RoutingConfiguration.Builder config) throws SAXException, IOException, ParserConfigurationException {
+	public static boolean test(NativeLibrary lib, InputStream resource, BinaryMapIndexReader[] rs, RoutingConfiguration.Builder config) throws Exception {
 		Document testSuite = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(resource));
 		NodeList tests = testSuite.getElementsByTagName("test");
 
@@ -147,7 +146,7 @@ public class RouterTestsSuite {
 		return false;
 	}
 
-	private static void testRoute(Element testCase, Builder config, NativeLibrary lib, BinaryMapIndexReader[] rs) throws IOException, SAXException {
+	private static void testRoute(Element testCase, Builder config, NativeLibrary lib, BinaryMapIndexReader[] rs) throws IOException, SAXException, InterruptedException {
 		String vehicle = testCase.getAttribute("vehicle");
 		int loadedTiles = (int) parseFloat(testCase, "loadedTiles");
 		int visitedSegments = (int) parseFloat(testCase, "visitedSegments");

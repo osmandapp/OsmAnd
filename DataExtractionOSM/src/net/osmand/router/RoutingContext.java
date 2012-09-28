@@ -52,6 +52,7 @@ public class RoutingContext {
 
 	// 2. Routing memory cache (big objects)
 	TIntObjectHashMap<RoutingTile> tiles = new TIntObjectHashMap<RoutingContext.RoutingTile>();
+//	Map<Integer, RoutingTile> tiles = new LinkedHashMap<Integer, RoutingContext.RoutingTile>();
 	// need to be array list
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
 	
@@ -59,7 +60,6 @@ public class RoutingContext {
 	TLongSet nonRestrictedIds = new TLongHashSet();
 	ArrayList<RouteSegment> segmentsToVisitPrescripted = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
-	TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 
 	
 	// 4. Final results
@@ -84,8 +84,8 @@ public class RoutingContext {
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
 	
-	private TileStatistics global = new TileStatistics();
-	private static final boolean SHOW_GC_SIZE = false;
+	public TileStatistics global = new TileStatistics();
+	public static final boolean SHOW_GC_SIZE = false;
 	
 	
 	
@@ -226,23 +226,17 @@ public class RoutingContext {
 	}
 	
 	public void unloadAllData(RoutingContext except) {
-//		List<RoutingTile> toUnload = new ArrayList<RoutingContext.RoutingTile>();
-//		for(RoutingTile t : local.tiles.valueCollection()){
-//			if(!ctx.tiles.contains(t.getId())) {
-//				toUnload.add(t);
-//			}
-//		}
-//		for(RoutingTile tl : toUnload) {
-//			local.unloadTile(tl, false);
-//		}
-		
 		for (RoutingSubregionTile tl : subregionTiles) {
 			if (tl.isLoaded()) {
 				if(except == null || except.searchSubregionTile(tl.subregion) < 0){
 					tl.unload();
+					unloadedTiles ++;
+					global.size -= tl.tileStatistics.size;
 				}
 			}
 		}
+		subregionTiles.clear();
+		tiles.clear();		
 	}
 	
 	private int searchSubregionTile(RouteSubregion subregion){
@@ -279,6 +273,7 @@ public class RoutingContext {
 	
 	private void loadSubregionTile(final RoutingSubregionTile ts) {
 		boolean wasUnloaded = ts.isUnloaded();
+		int ucount = ts.getUnloadCont();
 		if (nativeLib == null) {
 			long now = System.nanoTime();
 			try {
@@ -323,7 +318,9 @@ public class RoutingContext {
 		}
 		loadedTiles++;
 		if (wasUnloaded) {
-			loadedPrevUnloadedTiles++;
+			if(ucount == 1) {
+				loadedPrevUnloadedTiles++;
+			}
 		} else {
 			if(global != null) {
 				global.allRoutes += ts.tileStatistics.allRoutes;
@@ -348,19 +345,16 @@ public class RoutingContext {
 						long now = System.nanoTime();
 //						int rg = r.getValue().get(0).routeReg.regionsRead;
 						List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
-						for(RouteSubregion sr : subregs) {
-							List<RoutingTile> tiles = getRoutingTiles(sr.left, sr.top, sr.right, sr.bottom);
+						for (RouteSubregion sr : subregs) {
 							int ind = searchSubregionTile(sr);
 							RoutingSubregionTile found;
-							if(ind < 0){
+							if (ind < 0) {
 								found = new RoutingSubregionTile(sr);
-								subregionTiles.add(-(ind+1), found);
+								subregionTiles.add(-(ind + 1), found);
 							} else {
 								found = subregionTiles.get(ind);
 							}
-							for(RoutingTile t : tiles) {
-								t.searchSubregionAndAdd(sr, found);
-							}
+							tile.searchSubregionAndAdd(sr, found);
 						}
 						timeToLoadHeaders += (System.nanoTime() - now);
 					}
@@ -396,10 +390,11 @@ public class RoutingContext {
 			RoutingTile tl = it.next();
 			tl.getAllObjects(toFillIn, this);
 		}
-		timeToLoadHeaders += (System.nanoTime() - now);
+		timeToFindInitialSegments += (System.nanoTime() - now);
 	}
 	
 	private RoutingTile getRoutingTile(int x31, int y31, boolean load){
+//		long now = System.nanoTime();
 		int xloc = x31 >> (31 - config.ZOOM_TO_LOAD_TILES);
 		int yloc = y31 >> (31 - config.ZOOM_TO_LOAD_TILES);
 		int l = (xloc << config.ZOOM_TO_LOAD_TILES) + yloc;
@@ -443,28 +438,10 @@ public class RoutingContext {
 				}
 			}
 		}
+//		timeToLoad += (System.nanoTime() - now);
 		return tile;
 	}
 	
-	private List<RoutingTile> getRoutingTiles(int leftX, int topY, int rightX, int bottomY) {
-		int xl = leftX >> (31 - config.ZOOM_TO_LOAD_TILES);
-		int yt = topY >> (31 - config.ZOOM_TO_LOAD_TILES);
-		int xr = rightX >> (31 - config.ZOOM_TO_LOAD_TILES);
-		int yb = bottomY >> (31 - config.ZOOM_TO_LOAD_TILES);
-		List<RoutingTile> res = new ArrayList<RoutingContext.RoutingTile>();
-		for (int xloc = xl; xloc <= xr; xloc++) {
-			for (int yloc = yt; yloc <= yb; yloc++) {
-				int l = (xloc << config.ZOOM_TO_LOAD_TILES) + yloc;
-				RoutingTile tl = tiles.get(l);
-				if (tl == null) {
-					tl = new RoutingTile(xloc, yloc, config.ZOOM_TO_LOAD_TILES);
-					tiles.put(l, tl);
-				}
-				res.add(tiles.get(l));
-			}
-		}
-		return res;
-	}
 	
 	public boolean checkIfMemoryLimitCritical() {
 		return getCurrentEstimatedSize() > 0.9 * config.memoryLimitation;
@@ -502,6 +479,8 @@ public class RoutingContext {
 			i++;
 //			System.out.println("Unload " + unload);
 			unload.unload();
+			unloadedTiles ++;
+			global.size -= unload.tileStatistics.size;
 			// tile could be cleaned from routing tiles and deleted from whole list
 			// List<RoutingTile> ts = getRoutingTiles(tile.subregion.left, tile.subregion.top, tile.subregion.right, tile.subregion.bottom);
 			
@@ -511,7 +490,7 @@ public class RoutingContext {
 		}
 	}
 	
-	private static long runGCUsedMemory()  {
+	protected static long runGCUsedMemory()  {
 		Runtime runtime = Runtime.getRuntime();
 		long usedMem1 = runtime.totalMemory() - runtime.freeMemory();
 		long usedMem2 = Long.MAX_VALUE;
@@ -559,15 +538,15 @@ public class RoutingContext {
 			this.subregion = subregion;
 		}
 		
-		private void loadAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx) {
+		private void loadAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
 			if(routes != null) {
 				Iterator<RouteSegment> it = routes.valueCollection().iterator();
 				while(it.hasNext()){
 					RouteSegment rs = it.next();
 					while(rs != null){
 						RouteDataObject ro = rs.road;
-						if (!ctx.excludeDuplications.contains(ro.id)) {
-							ctx.excludeDuplications.put(ro.id, ro);
+						if (!excludeDuplications.contains(ro.id)) {
+							excludeDuplications.put(ro.id, ro);
 							toFillIn.add(ro);
 						}
 						rs = rs.next;
@@ -677,7 +656,7 @@ public class RoutingContext {
 		public void load(NativeRouteSearchResult r) {
 			isLoaded = Math.abs(isLoaded) + 1;
 			searchResult = r;
-			// FIXME
+			throw new UnsupportedOperationException("tileStatistics = new TileStatistics()");
 //			tileStatistics = new TileStatistics();
 		}
 	}
@@ -730,28 +709,28 @@ public class RoutingContext {
 		}
 		
 		public void getAllObjects(final List<RouteDataObject> toFillIn, RoutingContext ctx) {
-			ctx.excludeDuplications.clear();
+			TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 			if (routes != null) {
 				for (RouteDataObject ro : routes) {
-					if (!ctx.excludeDuplications.contains(ro.id)) {
-						ctx.excludeDuplications.put(ro.id, ro);
+					if (!excludeDuplications.contains(ro.id)) {
+						excludeDuplications.put(ro.id, ro);
 						toFillIn.add(ro);
 					}
 				}
 			}
 			for (RoutingSubregionTile rs : subregions) {
-				rs.loadAllObjects(toFillIn, ctx);
+				rs.loadAllObjects(toFillIn, ctx, excludeDuplications);
 			}
 		}
 		
 		public RouteSegment getSegment(int x31, int y31, RoutingContext ctx) {
-			ctx.excludeDuplications.clear();
+			TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
 			RouteSegment original = null;
 			if (routes != null) {
 				for (RouteDataObject ro : routes) {
 					for (int i = 0; i < ro.pointsX.length; i++) {
 						if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-							ctx.excludeDuplications.put(ro.id, ro);
+							excludeDuplications.put(ro.id, ro);
 							RouteSegment segment = new RouteSegment(ro, i);
 							segment.next = original;
 							original = segment;
@@ -759,9 +738,9 @@ public class RoutingContext {
 					}
 				}
 			}
-				for (RoutingSubregionTile rs : subregions) {
-					original = rs.loadRouteSegment(x31, y31, ctx, ctx.excludeDuplications, original);
-				}
+			for (RoutingSubregionTile rs : subregions) {
+				original = rs.loadRouteSegment(x31, y31, ctx, excludeDuplications, original);
+			}
 			return original;
 		}
 		
@@ -798,7 +777,7 @@ public class RoutingContext {
 		}
 	}
 	
-	private static class TileStatistics {
+	protected static class TileStatistics {
 		public int size = 0;
 		public int allRoutes = 0;
 		public int coordinates = 0;
@@ -842,7 +821,7 @@ public class RoutingContext {
 				}
 			}
 			// Standard overhead?
-			size += sz * 3;
+			size += sz * 3.5;
 			// size += coordinates * 20;
 		}
 	}
