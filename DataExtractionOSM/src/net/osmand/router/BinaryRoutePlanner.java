@@ -23,6 +23,7 @@ public class BinaryRoutePlanner {
 	
 	public static boolean PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 	private final int REVERSE_WAY_RESTRICTION_ONLY = 1024;
+	private int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 900;
 	
 	protected static final Log log = LogUtil.getLog(BinaryRoutePlanner.class);
 	
@@ -176,6 +177,11 @@ public class BinaryRoutePlanner {
 	
 	@SuppressWarnings("static-access")
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
+		if(ctx.SHOW_GC_SIZE){
+			long h1 = ctx.runGCUsedMemory();
+			float mb = (1 << 20);
+			log.warn("Used before routing " + h1 / mb+ " actual");
+		}
 		List<RouteSegmentResult> result = searchRouteInternalPrepare(ctx, start, end, leftSideNavigation);
 		if(result != null) {
 			printResults(ctx, start, end, result);
@@ -549,8 +555,14 @@ public class BinaryRoutePlanner {
 				}
 				obstacleMinusTime +=  obstacle;
 			}
-			
-			RouteSegment next = ctx.loadRouteSegment(x, y);
+//			int overhead = 0;
+			// could be expensive calculation
+			int overhead = (ctx.visitedSegments - ctx.relaxedSegments ) *
+					STANDARD_ROAD_IN_QUEUE_OVERHEAD;
+			while(overhead > ctx.config.memoryLimitation * 1.5){
+				overhead /= 2;
+			}
+			RouteSegment next = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - overhead);
 			// 3. get intersected ways
 			if (next != null) {
 				// TO-DO U-Turn
@@ -789,8 +801,8 @@ public class BinaryRoutePlanner {
 
 		// calculate time
 		for (int i = 0; i < result.size(); i++) {
-			if(ctx.checkIfMemoryLimitCritical()) {
-				ctx.unloadUnusedTiles();
+			if(ctx.checkIfMemoryLimitCritical(ctx.config.memoryLimitation)) {
+				ctx.unloadUnusedTiles(ctx.config.memoryLimitation);
 			}
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
@@ -1165,7 +1177,7 @@ public class BinaryRoutePlanner {
 				}
 			}
 		}
-		RouteSegment routeSegment = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd));
+		RouteSegment routeSegment = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
 		// try to attach all segments except with current id
 		while (routeSegment != null) {
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {

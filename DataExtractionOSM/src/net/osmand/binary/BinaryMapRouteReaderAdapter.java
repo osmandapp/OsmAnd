@@ -215,6 +215,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 	
+	// Used in C++
 	public static class RouteSubregion {
 		private final static int INT_SIZE = 4;
 		public final RouteRegion routeReg;

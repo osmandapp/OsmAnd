@@ -3,6 +3,7 @@ package net.osmand;
 import java.nio.ByteBuffer;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -42,7 +43,7 @@ public class NativeLibrary {
 
 		public long nativeHandler;
 		public RouteDataObject[] objects;
-		public RouteRegion region;
+		public RouteSubregion region;
 		public NativeRouteSearchResult(long nativeHandler, RouteDataObject[] objects) {
 			this.nativeHandler = nativeHandler;
 			this.objects = objects;
@@ -76,7 +77,7 @@ public class NativeLibrary {
 		if(rs.nativeHandler == 0) {
 			throw new IllegalStateException("Native route handler is 0");
 		}
-		return getRouteDataObjects(rs.region, rs.nativeHandler, x31, y31);
+		return getRouteDataObjects(rs.region.routeReg, rs.nativeHandler, x31, y31);
 	}
 
 	
@@ -94,16 +95,17 @@ public class NativeLibrary {
 	
 	
 	
-	public NativeRouteSearchResult loadRouteRegion(RouteRegion reg, int left, int right, int top, int bottom, boolean loadObjects) {
-		NativeRouteSearchResult lr = loadRoutingData(reg, reg.getName(), reg.getFilePointer(), left, right, top, bottom, loadObjects);
+	public NativeRouteSearchResult loadRouteRegion(RouteSubregion sub, boolean loadObjects) {
+		NativeRouteSearchResult lr = loadRoutingData(sub.routeReg, sub.routeReg.getName(), sub.routeReg.getFilePointer(),
+				sub, loadObjects);
 		if(lr != null && lr.nativeHandler != 0){
-			lr.region = reg;
+			lr.region = sub;
 		}
 		return lr;
 	}
 
 	
-	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int fpointer, int left, int right, int top, int bottom,
+	protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp,RouteSubregion subreg,
 			boolean loadObjects); 
 	
 	protected static native void deleteRouteSearchResult(long searchResultHandle);

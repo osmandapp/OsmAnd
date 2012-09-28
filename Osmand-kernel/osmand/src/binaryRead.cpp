@@ -281,14 +281,20 @@ bool readRouteTree(CodedInputStream* input, RouteSubregion* thisTree, RouteSubre
 			break;
 		}
 		case OsmAndRoutingIndex_RouteDataBox::kBoxesFieldNumber: {
-			RouteSubregion subregion;
-			readInt(input, &subregion.length);
-			subregion.filePointer = input->getTotalBytesRead();
-			int oldLimit = input->PushLimit(subregion.length);
-			readRouteTree(input, &subregion, thisTree, depth - 1, true);
-			input->PopLimit(oldLimit);
-			input->Seek(subregion.filePointer + subregion.length);
-			thisTree->subregions.push_back(subregion);
+			if (readChildren) {
+				RouteSubregion subregion;
+				readInt(input, &subregion.length);
+				subregion.filePointer = input->getTotalBytesRead();
+				int oldLimit = input->PushLimit(subregion.length);
+				readRouteTree(input, &subregion, thisTree, depth - 1, true);
+				input->PopLimit(oldLimit);
+				input->Seek(subregion.filePointer + subregion.length);
+				thisTree->subregions.push_back(subregion);
+			} else {
+				if (!skipUnknownFields(input, tag)) {
+					return false;
+				}
+			}
 			break;
 		}
 		default: {
@@ -1310,11 +1316,10 @@ bool readRouteTreeData(CodedInputStream* input, RouteSubregion* s, std::vector<R
 
 bool sortRouteRegions (const RouteSubregion& i,const RouteSubregion& j) { return (i.mapDataBlock<j.mapDataBlock); }
 
-void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs){
+void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub){
 	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	UNORDERED(set)<long long> ids;
 	int count = 0;
-
 	bool basemapExists = false;
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
@@ -1326,33 +1331,22 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 			if(rs != NULL && (rs->name != routingIndex->name || rs->filePointer != routingIndex->filePointer)){
 				continue;
 			}
-			// check boundaries and init
-			if (routingIndex->decodingRules.size() == 0) {
-				bool contain = false;
-				for (std::vector<RouteSubregion>::iterator subreg = routingIndex->subregions.begin(); subreg != routingIndex->subregions.end();
-						subreg++) {
-					if (subreg->right >= q->left && q->right >= subreg->left && subreg->bottom >= q->top
-							&& q->bottom >= subreg->top) {
-						contain = true;
-					}
-				}
-				if (contain) {
-					routingIndex->subregions.clear();
-					osmand_log_print(LOG_INFO, "Init native index %s", routingIndex->name.c_str());
-					lseek(file->routefd, 0, SEEK_SET);
-					FileInputStream input(file->routefd);
-					input.SetCloseOnDelete(false);
-					CodedInputStream cis(&input);
-					cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 
-					cis.Seek(routingIndex->filePointer);
-					uint32_t old = cis.PushLimit(routingIndex->length);
-					readRoutingIndex(&cis, &(*routingIndex));
-					cis.PopLimit(old);
-				} else {
-					continue;
-				}
+			// init decoding rules
+			if (routingIndex->decodingRules.size() == 0) {
+				routingIndex->subregions.clear();
+				lseek(file->routefd, 0, SEEK_SET);
+				FileInputStream input(file->routefd);
+				input.SetCloseOnDelete(false);
+				CodedInputStream cis(&input);
+				cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
+
+				cis.Seek(routingIndex->filePointer);
+				uint32_t old = cis.PushLimit(routingIndex->length);
+				readRoutingIndex(&cis, &(*routingIndex));
+				cis.PopLimit(old);
 			}
+
 			// could be simplified but it will be concurrency with init block
 			lseek(file->routefd, 0, SEEK_SET);
 			FileInputStream input(file->routefd);
@@ -1360,23 +1354,17 @@ void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, Rout
 			CodedInputStream cis(&input);
 			cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 2);
 
-			std::vector<RouteSubregion> toLoad;
-			searchRouteRegion(&cis, q, &(*routingIndex), routingIndex->subregions, toLoad, file);
-			sort(toLoad.begin(), toLoad.end(), sortRouteRegions);
 
-			std::vector<RouteDataObject*> iteration;
-			int cnt = 0;
-			for (std::vector<RouteSubregion>::iterator subreg = toLoad.begin(); subreg != toLoad.end(); subreg++) {
-				cis.Seek(subreg->filePointer + subreg->mapDataBlock);
-				uint32_t length;
-				cis.ReadVarint32(&length);
-				uint32_t old = cis.PushLimit(length);
-				readRouteTreeData(&cis, &(*subreg), iteration);
-				list.insert(list.end(), iteration.begin(), iteration.end());
-				iteration.clear();
-				cis.PopLimit(old);
-			}
-			std::vector<RouteDataObject*>::iterator rs = list.begin();
+//			cis.Seek(sub->filePointer);
+//			uint32_t old = cis.PushLimit(sub->length);
+//			readRouteTree(&cis, &(*sub), NULL, 0, true);
+//			cis.PopLimit(old);
+			cis.Seek(sub->filePointer + sub->mapDataBlock);
+			uint32_t length;
+			cis.ReadVarint32(&length);
+			uint32_t old = cis.PushLimit(length);
+			readRouteTreeData(&cis, &(*sub), list);
+			cis.PopLimit(old);
 		}
 
 	}

@@ -356,7 +356,7 @@ public class RouteProvider {
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimit = (int) (0.9 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
-		log.warn("Use " + memoryLimit +  "Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
 		
 		RoutingConfiguration cf = config.build(p.name().toLowerCase(), start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, specialization);

@@ -398,6 +398,16 @@ jclass jclass_NativeRouteSearchResult = NULL;
 jmethodID jmethod_NativeRouteSearchResult_init = NULL;
 
 
+jclass jclass_RouteSubregion = NULL;
+jfieldID jfield_RouteSubregion_length = NULL;
+jfieldID jfield_RouteSubregion_filePointer= NULL;
+jfieldID jfield_RouteSubregion_left = NULL;
+jfieldID jfield_RouteSubregion_right = NULL;
+jfieldID jfield_RouteSubregion_top = NULL;
+jfieldID jfield_RouteSubregion_bottom = NULL;
+jfieldID jfield_RouteSubregion_shiftToData = NULL;
+
+
 void loadJniRenderingContext(JNIEnv* env)
 {
 	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
@@ -443,6 +453,17 @@ void loadJniRenderingContext(JNIEnv* env)
     jfield_RouteDataObject_pointTypes = getFid(env,  jclass_RouteDataObject, "pointTypes", "[[I" );
     jfield_RouteDataObject_id = getFid(env,  jclass_RouteDataObject, "id", "J" );
     jmethod_RouteDataObject_init = env->GetMethodID(jclass_RouteDataObject, "<init>", "(Lnet/osmand/binary/BinaryMapRouteReaderAdapter$RouteRegion;[I[Ljava/lang/String;)V");
+
+
+    jclass_RouteSubregion = findClass(env, "net/osmand/binary/BinaryMapRouteReaderAdapter$RouteSubregion");
+    jfield_RouteSubregion_length= getFid(env,  jclass_RouteSubregion, "length", "I" );
+    jfield_RouteSubregion_filePointer= getFid(env,  jclass_RouteSubregion, "filePointer", "I" );
+    jfield_RouteSubregion_left= getFid(env,  jclass_RouteSubregion, "left", "I" );
+    jfield_RouteSubregion_right= getFid(env,  jclass_RouteSubregion, "right", "I" );
+    jfield_RouteSubregion_top= getFid(env,  jclass_RouteSubregion, "top", "I" );
+    jfield_RouteSubregion_bottom= getFid(env,  jclass_RouteSubregion, "bottom", "I" );
+    jfield_RouteSubregion_shiftToData= getFid(env,  jclass_RouteSubregion, "shiftToData", "I" );
+	// public final RouteRegion routeReg;
 
 }
 
@@ -565,17 +586,25 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_getRoute
 	return res;
 }
 
-//protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int fpointer, int left, int right, int top, int bottom,
-//			boolean loadObjects!);
+//protected static native NativeRouteSearchResult loadRoutingData(RouteRegion reg, String regName, int regfp, RouteSubregion subreg,
+//			boolean loadObjects);
 extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_loadRoutingData(JNIEnv* ienv,
-		jobject obj, jobject reg, jstring regName, jint filepointer, jint left, jint right, jint top, jint bottom, jboolean loadObjects) {
+		jobject obj, jobject reg, jstring regName, jint regFilePointer,
+		jobject subreg, jboolean loadObjects) {
 	RoutingIndex ind;
-	ind.filePointer = filepointer;
+	ind.filePointer = regFilePointer;
 	ind.name = getString(ienv, regName);
-
+	RouteSubregion sub;
+	sub.filePointer = ienv->GetIntField(subreg, jfield_RouteSubregion_filePointer);
+	sub.length = ienv->GetIntField(subreg, jfield_RouteSubregion_length);
+	sub.left = ienv->GetIntField(subreg, jfield_RouteSubregion_left);
+	sub.right = ienv->GetIntField(subreg, jfield_RouteSubregion_right);
+	sub.top = ienv->GetIntField(subreg, jfield_RouteSubregion_top);
+	sub.bottom = ienv->GetIntField(subreg, jfield_RouteSubregion_bottom);
+	sub.mapDataBlock= ienv->GetIntField(subreg, jfield_RouteSubregion_shiftToData);
 	std::vector<RouteDataObject*> result;
-	SearchQuery q(left, right, top, bottom);
-	searchRouteRegion(&q, result, &ind);
+	SearchQuery q;
+	searchRouteRegion(&q, result, &ind, &sub);
 
 
 	if (loadObjects) {

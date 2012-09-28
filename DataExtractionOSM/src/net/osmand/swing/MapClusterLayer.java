@@ -264,7 +264,7 @@ public class MapClusterLayer implements MapPanelLayer {
 
 				int x = road.getPoint31XTile(segmentEnd);
 				int y = road.getPoint31YTile(segmentEnd);
-				RouteSegment next = ctx.loadRouteSegment(x, y);
+				RouteSegment next = ctx.loadRouteSegment(x, y, 0);
 				RouteSegment toAdd = segment;
 				if (!onTheMap.contains(toAdd.getRoad().getId())) {
 					onTheMap.add(toAdd.getRoad().getId());
