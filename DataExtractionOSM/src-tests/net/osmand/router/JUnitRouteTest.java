@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 public class JUnitRouteTest  {
 
 	static BinaryMapIndexReader[]  rs;
-	private NativeSwingRendering lib;
+	static NativeSwingRendering lib;
 	@Before
 	public void setupFiles() throws IOException {
 		if(rs != null){

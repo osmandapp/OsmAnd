@@ -305,7 +305,7 @@ public class RoutingContext {
 	private void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory) {
 		boolean wasUnloaded = ts.isUnloaded();
 		int ucount = ts.getUnloadCont();
-		if (nativeLib == null/* || loadObjectsInMemory*/) {
+		if (nativeLib == null) {
 			long now = System.nanoTime();
 			try {
 				BinaryMapIndexReader reader = reverseMap.get(ts.subregion.routeReg);

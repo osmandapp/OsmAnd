@@ -122,7 +122,6 @@ public class RouterTestsSuite {
 
 		for (int i = 0; i < tests.getLength(); i++) {
 			Element e = (Element) tests.item(i);
-			
 			testRoute(e, config, lib, rs);
 		}
 

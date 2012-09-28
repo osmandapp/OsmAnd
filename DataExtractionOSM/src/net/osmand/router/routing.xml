@@ -2,7 +2,7 @@
 <osmand_routing_config defaultProfile="car">
 	<!-- 1. parameters of routing and different tweaks Influence on A* : -->
 	<!-- f(x) + heuristicCoefficient*g(X) -->
-	<attribute name="heuristicCoefficient" value="1.0" />
+	<attribute name="heuristicCoefficient" value="1" />
 
 	<!-- 1.1 tile load parameters (should not affect routing) -->
 	<!-- by default 16 -->
