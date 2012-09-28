@@ -17,8 +17,8 @@
 	<string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει εντοπιστεί διαφορετικά</string>
 	<string name="use_compass_navigation">Χρήση πυξίδας</string>
 	<string name="avoid_motorway">Αποφυγή αυτοκινητόδρομων</string>
-	<string name="auto_zoom_map_descr">Αυτόματη εστίαση χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση)</string>
-	<string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
+	<string name="auto_zoom_map_descr">Αυτόματη κλίμακα χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση)</string>
+	<string name="auto_zoom_map">Αυτόματη κλίμακα χάρτη</string>
 	<string name="tip_recent_changes_0_8_3_t">"Αλλαγές στην 0.8.3 :
 \n\t* Ενδιάμεσα σημεία
 \n\t* Βελτιωμένη καθοδήγηση δρομολογίου
@@ -168,7 +168,7 @@
 	<string name="osmand_parking_event">Πάρε το αυτοκίνητο από το πάρκινγκ</string>
 	<string name="osmand_parking_warning">Προσοχή</string>
 	<string name="osmand_parking_warning_text">Ειδοποίηση να παραλάβετε το αυτοκίνητό σας είχε προηγουμένως προστεθεί στο Ημερολόγιό σας. Θα παραμείνει εκεί μέχρι να το διαγράψετε χειροκίνητα.</string>    
-	<string name="osmand_parking_time_limit_title">Καθορισμός χρονικού ορίου στάθμευσης</string>
+	<string name="osmand_parking_time_limit_title">Ορισμός χρονικού ορίου στάθμευσης</string>
 	<string name="osmand_parking_delete_confirm">Θέλετε να αφαιρέσετε την τοποθεσία του παρκαρισμένου αυτοκινήτου;</string>
 	<string name="osmand_parking_delete">﻿Διαγράψτε ένα δείκτη στάθμευσης</string>
 	<string name="osmand_parking_choose_type">﻿Επιλέξτε τον τύπο της στάθμευσης</string>
@@ -350,7 +350,7 @@
 \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
 \n\t- Other changes "</string>
 	<string name="update_poi_does_not_change_indexes">Οι αλλαγές στα Σημ. Ενδ. μέσω της εφαρμογής δεν επηρεάζουν τα ληφθέντα αρχεία χάρτη, οι αλλαγές αποθηκεύονται σε τοπικό αρχείο αντ \'αυτού.</string>
-	<string name="local_openstreetmap_uploading">Μεταφόρτωση…</string>
+	<string name="local_openstreetmap_uploading">Αποστολή…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} ΣΕ/Σφάλματα απεστάλησαν</string>
 	<string name="local_openstreetmap_uploadall">Αποστολή όλων</string>
 	<string name="local_openstreetmap_show">Εμφάνιση στο χάρτη</string>
@@ -371,7 +371,7 @@
 \n\t- Offline wikipedia data with articles
 \n\t- Updated maps
 \n\t- Other small features "</string>    
-	<string name="free_version_message">Αυτή δωρεάν έκδοση του OsmAnd περιορίζεται σε %1$s λήψεις %2$s και δεν υποστηρίζει άρθρα από την wikipedia εκτός σύνδεσης.</string>
+	<string name="free_version_message">Αυτή η δωρεάν έκδοση του OsmAnd περιορίζεται σε %1$s λήψεις %2$s και δεν υποστηρίζει άρθρα εκτός σύνδεσης από την wikipedia.</string>
 	<string name="free_version_title">Ελεύθερη έκδοση</string>
 	<string name="poi_context_menu_showdescription">Εμφάνιση περιγραφής ΣΕ</string>
 	<string name="index_name_north_america">Βόρεια Αμερική</string>
@@ -396,7 +396,7 @@
 	<string name="settings_preset">Προφίλ Χρήστη</string>
 	<string name="settings_preset_descr">Επιλέξτε ένα προφίλ χρήστη με προσαρμοσμένο χάρτη και ρυθμίσεις πλοήγησης.</string>
 	<string name="routing_settings">Πλοήγηση</string>
-	<string name="routing_settings_descr">Καθορισμός επιλογών πλοήγησης</string>
+	<string name="routing_settings_descr">Καθορίστε τις επιλογές πλοήγησης</string>
 	<string name="global_settings">Καθολικές ρυθμίσεις</string>
 	<string name="index_settings">Δεδομένα Offline (Λήψη)</string>
 	<string name="general_settings">Γενικές Ρυθμίσεις</string>
@@ -427,7 +427,7 @@
 	<string name="download_files_not_enough_space">Δεν υπάρχει αρκετός ελεύθερος χώρος για να κάνετε λήψη %1$s MB (ελεύθερα: %2$s).</string>
 	<string name="download_files_question_space">Ελεύθερος χώρος τώρα {2} MB! Λήψη {0} αρχείο(α) ({1} MB)?</string>
 	<string name="tip_select_destination_point">Επιλέξτε Προορισμό</string>
-	<string name="tip_select_destination_point_t">"\tΜπορείτε να επιλέξετε ένα προορισμό απευθείας στο χάρτη (μενού περιβάλλοντος, και \'Καθορισμός ως προορισμός\'), σε όλες τις λειτουργίες αναζήτησης, ή μέσω παρατεταμένου πατήματος μιας καταχώρησης στην \'Λίστα Αγαπημένων Σημείων\'.
+	<string name="tip_select_destination_point_t">"\tΜπορείτε να επιλέξετε ένα προορισμό απευθείας στο χάρτη (μενού περιβάλλοντος, και \'Ορισμός ως προορισμός\'), σε όλες τις λειτουργίες αναζήτησης, ή μέσω παρατεταμένου πατήματος μιας καταχώρησης στην \'Λίστα Αγαπημένων Σημείων\'.
 \n\tΟ προορισμός είναι σημειωμένος ως πορτοκαλί δίσκος πάνω στο χάρτη και ο OsmAnd εμφανίζει την απόσταση και την κατεύθυνση προς αυτόν (πορτοκαλί τρίγωνο). "</string> 
 	<string name="tip_recent_changes_0_6_9_t">"Αλλαγές στην 0.6.9 :
 \n\t- Improved offline map rendering
@@ -439,8 +439,8 @@
 	<string name="use_transparent_map_theme">Διάφανο θέμα</string>
 	<string name="native_library_not_supported">Η εγγενής βιβλιοθήκη δεν υποστηρίζεται σε αυτήν τη συσκευή.</string>
 	<string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης…</string>
-	<string name="choose_auto_follow_route">Οπτική χάρτη Αυτοκεντράρισμα</string>
-	<string name="choose_auto_follow_route_descr">Χρόνος μέχρι η προβολή χάρτη συγχρονιστεί με την τρέχουσα θέση</string>
+	<string name="choose_auto_follow_route">Αυτοκεντράρισμα όψης χάρτη</string>
+	<string name="choose_auto_follow_route_descr">Χρόνος μέχρι η οπτική του χάρτη συγχρονιστεί με την τρέχουσα θέση</string>
 	<string name="auto_follow_route_never">Ποτέ</string>
 	<string name="auto_follow_route_navigation">Αυτο-κεντράρισμα μόνο κατά την πλοήγηση</string>
 	<string name="auto_follow_route_navigation_descr">Αυτο-κεντραρισμένη οπτική χάρτη μόνο κατά την πλοήγηση.</string>
@@ -488,7 +488,7 @@
 	<string name="search_position_undefined">Ακαθόριστο</string>
 	<string name="search_position_fixed">Fixed</string>
 	<string name="search_position_current_location">Τρέχουσα θέση…</string>
-	<string name="search_position_map_view">Τελευταία προβολή χάρτη</string>
+	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
 	<string name="select_search_position">Αναζήτηση κοντά:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
@@ -534,7 +534,7 @@
 	<string name="local_index_items_backuped">%1$d από %2$d αντικείμενο(α) απενεργοποιήθηκαν επιτυχώς.</string>
 	<string name="local_index_items_deleted">%1$d από %2$d αντικείμενο(α) διαγράφηκαν επιτυχώς.</string>
 	<string name="local_index_items_restored">%1$d από %2$d αντικείμενο(α) ενεργοποιήθηκαν επιτυχώς.</string>
-	<string name="local_index_no_items_to_do">No items to %1$s</string>
+	<string name="local_index_no_items_to_do">Δεν υπάρχουν στοιχεία προς %1$s</string>
 	<string name="local_index_action_do">Πρόκειται να %1$s %2$s αντικείμενο(α). Συνέχεια?</string>
 	<string name="local_index_descr_title">Διαχειριστής offline δεδομένων</string>
 	<string name="local_index_mi_restore">Ενεργοποίηση</string>
@@ -629,12 +629,12 @@
 	<string name="tip_navigation">Πλοήγηση</string>
 	<string name="tip_navigation_t">Πριν ξεκινήσετε την πλοήγηση θα πρέπει να επιλέξετε έναν προορισμό. Στη συνέχεια πατήστε \'Μενού\' -&gt; \'Οδηγίες\' στο χάρτη και επιλέξτε τον τύπο πλοήγησης.</string>
 	<string name="tip_search">Αναζήτηση</string>
-	<string name="tip_search_t">"\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
-\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'. "</string>
+	<string name="tip_search_t">"\tΜπορείτε να αναζητήσετε τόπους κατευθείαν στο χάρτη, ή με διεύθυνση, με τοποθεσία, ως Σημ Ενδ, ή ως προκαθορισμένο αγαπημένο.
+\n\tΠατώντας \'Αναζήτηση\' στην κύρια οθόνη ανοίγει τις δραστηριότητες αναζήτησης. Για όλα χτυπήματα ένα μενού περιβάλλοντος προσφέρει 2 επιλογές: \'Ορισμός ως προορισμός\' ή \'Εμφάνιση στο χάρτη\'. "</string>
 	<string name="tip_map_context_menu">Μενού Περιβάλλοντος Χάρτη</string>
-	<string name="tip_map_context_menu_t">"\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.
-\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
-\n\tThe map context menu contains all actions referring to a point (location). "</string>
+	<string name="tip_map_context_menu_t">"\tΤο μενού περιβάλλοντος είναι διαθέσιμο πατώντας παρατεταμένα πάνω στο χάρτη ή πατώντας το κουμπί του trackball.
+\n\tΑυτό παράγει ένα πλαίσιο με τις συντεταγμένες του σημείου. Για να ανοίξετε μενού περιβάλλοντος χάρτη, αγγίξτε πάνω του. (Ή πατήστε παρατεταμένα για να κρύψετε ξανά το πλαίσιο.)
+\n\tΤο μενού περιβάλλοντος χάρτη περιέχει όλες τις ενέργειες που αφορούν το σημείο (τοποθεσία). "</string>
 	<string name="tip_initial">Συμβουλές και Κόλπα</string>
 	<string name="tip_initial_t">"\tΟ OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
 \n\tΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα στην κύρια οθόνη. "</string>
@@ -654,9 +654,9 @@
 	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
 	<string name="send_location">Αποστολή τοποθεσίας</string>
 	<string name="context_menu_item_share_location">Κοινή χρήση τοποθεσίας</string>
-	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
-	<string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
-	<string name="context_menu_item_add_waypoint">Add GPX waypoint</string>
+	<string name="add_waypoint_dialog_added">Το ενδιάμεσο σημείο \'\'{0}\'\' προστέθηκε επιτυχώς</string>
+	<string name="add_waypoint_dialog_title">Προσθήκη σημείου στο εγγραφόμενο ίχνος GPX</string>
+	<string name="context_menu_item_add_waypoint">Προσθήκη σημείου GPX</string>
 	<string name="amenity_type_administrative">Διοικητικό</string>
 	<string name="amenity_type_barrier">Φράκτης</string>
 	<string name="amenity_type_education">Εκπαίδευση</string>
@@ -706,7 +706,7 @@
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
 	<string name="loading_builds">Loading OsmAnd builds…</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
-	<string name="contribution_activity">Special activity for contribution version</string>
+	<string name="contribution_activity">Ειδική δράση για την έκδοση συνεισφοράς</string>
 	<string name="gps_status_app_not_found">Η εφαρμογή GPS Status δεν έχει εγκατασταθεί. Αναζήτηση στο Market;</string>
 	<string name="voice_is_not_available_msg">Δεν υπάρχει διαθέσιμη φωνητική καθοδήγηση. Μεταβείτε στις ρυθμίσεις, επιλέξτε το προτιμώμενο πακέτο φωνής, και κατεβάστε το.</string>
 	<string name="voice_is_not_available_title">Δεν επιλέχτηκε φωνητική καθοδήγηση</string>
@@ -732,21 +732,21 @@
 	<string name="continuous_rendering_descr">Εμφάνιση συνεχούς απεικόνισης αντί για εικόνα με τη μία</string>
 	<string name="rendering_exception">Προέκυψε σφάλμα κατά την αποτύπωση της επιλεγμένης περιοχής</string>
 	<string name="show_point_options">Επιλογές τοποθεσίας</string>
-	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
-	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
-	<string name="renderers">Vector renderer</string>
-	<string name="renderers_descr">Choose rendering appearance</string>
+	<string name="renderer_load_sucess">Ο απεικονιστής φορτώθηκε με επιτυχία</string>
+	<string name="renderer_load_exception">Παρουσιάστηκε εξαίρεση: ο απεικονιστής δεν ήταν φορτωμένος</string>
+	<string name="renderers">Απεικονιστής διανυσμάτων</string>
+	<string name="renderers_descr">Επιλέξτε εμφάνιση απεικόνισης</string>
 	<string name="poi_context_menu_website">Εμφάνιση ιστοσελίδας ΣΕ</string>
 	<string name="poi_context_menu_call">Εμφάνιση τηλεφώνου ΣΕ</string>
 	<string name="website">Ιστότοπος</string>
 	<string name="phone">τηλέφωνο</string>
-	<string name="download_type_to_filter">type to filter</string>
+	<string name="download_type_to_filter">τύπος προς φιλτράρισμα</string>
 	<string name="use_high_res_maps">Οθόνη υψηλής ανάλυσης</string>
-	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
+	<string name="use_high_res_maps_descr">Όχι παραμόρφωση (και θόλωμα) των πλακιδίων χάρτη σε οθόνες υψηλής πυκνότητας</string>
 	<string name="download_files">Λήψη</string>
 	<string name="context_menu_item_search_transport">Αναζήτηση ΜΜΜ</string>
-	<string name="transport_searching_transport">Transportation results (no target):</string>
-	<string name="transport_searching_route">Transportation results ({0} to target):</string>
+	<string name="transport_searching_transport">Αποτελέσματα μέσου μεταφοράς (χωρίς στόχο):</string>
+	<string name="transport_searching_route">Αποτελέσματα μέσου μεταφοράς ({0} μέχρι το στόχο):</string>
 	<string name="transport_search_none">Κανένα</string>
 	<string name="transport_search_again">Μηδενισμός αναζήτησης ΜΜΜ</string>
 	<string name="map_index">Χάρτης</string>
@@ -757,7 +757,7 @@
 	<string name="layer_gpx_layer">Ίχνος GPX…</string>
 	<string name="error_reading_gpx">Σφάλμα ανάγνωσης δεδομένων GPX</string>
 	<string name="vector_data">Offline διανυσματικοί χάρτες</string>
-	<string name="transport_context_menu">Search transportation at stop</string>
+	<string name="transport_context_menu">Αναζήτηση μέσου μεταφοράς στη στάση</string>
 	<string name="point_on_map">Τοποθεσία:\n Γ. Πλ. %1$.5f\n Γ. Μη. %2$.5f</string>
 	<string name="osb_bug_name">Σφάλμα</string>
 	<string name="poi_context_menu_modify">Τροποποίηση ΣΕ</string>
@@ -769,7 +769,7 @@
 	<string name="rotate_map_to_bearing">Προσανατολισμός χάρτη</string>
 	<string name="show_route">Λεπτομέρειες διαδρομής</string>
 	<string name="fav_imported_sucessfully">Τα αγαπημένα εισήχθησαν με επιτυχία</string>
-	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
+	<string name="fav_file_to_load_not_found">Δεν βρέθηκε GPX αρχείο που περιέχει αγαπημένα στο {0}</string>
 	<string name="fav_saved_sucessfully">Τα αγαπημένα αποθηκεύτηκαν επιτυχώς στο {0}</string>
 	<string name="no_fav_to_save">Δεν υπάρχουν αγαπημένα σημεία προς αποθήκευση</string>
 	<string name="import_fav">Import</string>
@@ -777,11 +777,11 @@
 	<string name="error_occurred_loading_gpx">Σφάλμα κατά τη φόρτωση GPX</string>
 	<string name="send_report">Αποστολή αναφοράς</string>
 	<string name="none_region_found">Δεν υπάρχουν offline δεδομένα περιοχών στην κάρτα SD. Λήψη περιφερειών από το Internet.</string>
-	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
+	<string name="poi_namefinder_query_empty">Εισάγετε ερώτημα αναζήτησης για να βρείτε ΣΕ</string>
 	<string name="any_poi">Οποιοδήποτε</string>
 	<string name="layer_transport_route">Δρομολόγιο ΜΜΜ</string>
-	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
-	<string name="layer_yandex_traffic">Yandex traffic</string>
+	<string name="thanks_yandex_traffic">Ευχαριστούμε τη Yandex για τις πληροφορίες κυκλοφορίας.</string>
+	<string name="layer_yandex_traffic">Κυκλοφορία Yandex</string>
 	<string name="layer_route">Διαδρομή</string>
 	<string name="layer_favorites">Αγαπημένα</string>
 	<string name="layer_osm_bugs">Σφάλματα OSM</string>
@@ -793,22 +793,22 @@
 	<string name="context_menu_item_show_route">Εμφάνιση διαδρομής από εδώ</string>
 	<string name="use_trackball_descr">Χρήση του trackball για μετακίνηση του χάρτη</string>
 	<string name="use_trackball">Χρήση του trackball</string>
-	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
-	<string name="background_service_wait_int">Maximum wait for fix</string>
-	<string name="service_stop_background_service">Switch off background navigation service</string>
+	<string name="background_service_wait_int_descr">Ορίστε το μέγιστο χρόνο αναμονής για κάθε εύρεση θέσης στο παρασκήνιο</string>
+	<string name="background_service_wait_int">Μέγιστη αναμονή για εύρεση</string>
+	<string name="service_stop_background_service">Κλείσιμο υπηρεσίας πλοήγησης παρασκηνίου</string>
 	<string name="where_am_i">Πού είμαι;</string>
 	<string name="process_navigation_service">Υπηρεσία πλοήγησης OsmAnd</string>
 	<string name="network_provider">Δίκτυο</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">δευτερόλεπτα</string>
 	<string name="int_min">λεπτ.</string>
-	<string name="background_service_int_descr">"Set wake-up interval used by background "</string>
+	<string name="background_service_int_descr">"Ορισμός διαστήματος αφύπνισης χρησιμοποιούμενο από το παρασκήνιο "</string>
 	<string name="background_service_int">Διάστημα αφύπνισης</string>
-	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
+	<string name="background_service_provider_descr">Επιλέξτε παροχέα τοποθεσίας κατά την εκτέλεση της λειτουργίας παρασκηνίου</string>
 	<string name="background_service_provider">Πάροχος τοποθεσίας</string>
-	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
+	<string name="background_router_service_descr">Εκτελεί το OsmAnd στο παρασκήνιο για να παρακολουθείτε τη θέση σας, ενώ η οθόνη είναι απενεργοποιημένη</string>
 	<string name="background_router_service">Εκτέλεση στο παρασκήνιο</string>
-	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
+	<string name="off_router_service_no_gps_available">Η υπηρεσία πλοήγησης παρασκηνίου απαιτεί ένα πάροχο τοποθεσίας να είναι ενεργοποιημένος.</string>
 	<string name="hide_poi_filter">Απόκρυψη φίλτρου</string>
 	<string name="show_poi_filter">Εμφάνιση φίλτρου</string>
 	<string name="search_poi_filter">Φίλτρο</string>
@@ -822,7 +822,7 @@
 	<string name="voice_data_unavailable">Τα επιλεγμένα δεδομένα φωνής δεν είναι διαθέσιμα</string>
 	<string name="stop_routing">Σταμάτημα πλοήγ.</string>
 	<string name="sd_unmounted">Η κάρτα SD δεν είναι προσβάσιμη.\nΔεν μπορείς να δείς χάρτες ή να αναζητήσεις διάφορα.</string>
-	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
+	<string name="sd_mounted_ro">Η SD κάρτα είναι μόνο για ανάγνωση.\nΜπορείτε μόνο να δείτε τον προφορτωμένο χάρτη και όχι να κάνετε λήψη από το Διαδίκτυο.</string>
 	<string name="unzipping_file">Αποσυμπίεση αρχείου…</string>
 	<string name="route_tr">Στρίψτε δεξιά και προχωρήστε</string>
 	<string name="route_tshr">Στρίψτε κλειστά δεξιά και προχωρήστε</string>
@@ -864,7 +864,7 @@
 	<string name="update_poi_error_local">Σφάλμα ενημέρωσης τοπικής λίστας Σημ Ενδ</string>
 	<string name="update_poi_error_loading">Σφάλμα φόρτωσης δεδομένων από τον εξυπηρετητή</string>
 	<string name="update_poi_no_offline_poi_index">Δεν υπάρχουν διαθέσιμα δεδομένα ΣΕ για αυτή την περιοχή</string>
-	<string name="update_poi_is_not_available_for_zoom">Updating POIs is not available for small zoom levels</string>
+	<string name="update_poi_is_not_available_for_zoom">Η ενημέρωση των ΣΕ δεν είναι διαθέσιμη για μικρές κλίμακες εστίασης</string>
 	<string name="context_menu_item_update_poi">Ενημέρωση ΣΕ</string>
 	<string name="context_menu_item_update_map_confirm">Ενημέρωση τοπικών δεδομένων μέσω Διαδικτύου?</string>
 	<string name="search_history_city">Πόλη:\n {0}</string>
@@ -888,7 +888,7 @@
 	<string name="route_general_information">Συνολική απόσταση %1$s, χρόνος ταξιδιού %2$d ω %3$d λ.</string>
 	<string name="router_service_descr">Επιλέξτε μια online ή offline υπηρεσία πλοήγησης</string>
 	<string name="router_service">Υπηρεσία πλοήγησης</string>
-	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
+	<string name="sd_dir_not_accessible">Η κατάλογος αποθήκευσης στην SD κάρτα δεν είναι προσβάσιμος</string>
 	<string name="download_question">Λήψη {0} - {1} ?</string>
 	<string name="download_question_exist">Offline δεδομένα για {0} υπάρχουν ήδη ({1}). Θέλετε να τα ενημερώσετε ({2}) ?</string>
 	<string name="address">Διεύθυνση</string>
@@ -970,7 +970,7 @@
 	<string name="choose_street">Επιλέξτε οδό</string>
 	<string name="choose_city">Επιλέξτε πόλη</string>
 	<string name="ChooseCountry">Επιλέξτε χώρα</string>
-	<string name="map_specify_point">Καθορισμός ως προορισμού</string>
+	<string name="map_specify_point">Ορισμός ως προορισμός</string>
 	<string name="show_view_angle">Display viewing direction</string>
 	<string name="stop_navigation">Καθαρισμός προορ.</string>
 	<string name="navigate_to_point">Ορισμός ως προορ.</string>
@@ -1024,7 +1024,7 @@
 	<string name="search_address_building_option">Κτήριο</string>
 	<string name="search_address_street_option">Διασταυρούμενη οδός</string>
 	<string name="search_tabs_location">Τοποθεσία</string>
-	<string name="context_menu_item_navigate_point">Καθορισμός ως προορισμός</string>
+	<string name="context_menu_item_navigate_point">Ορισμός ως προορισμός</string>
 	<string name="context_menu_item_add_favorite">Προσθήκη στα αγαπημένα</string>
 	<string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
 	<string name="context_menu_item_open_bug">Άνοιγμα σφάλματος OSM</string>
@@ -1044,22 +1044,22 @@
 	<string name="favourites_remove_dialog_success">Το αγαπημένο σημείο {0} διαγράφηκε με επιτυχία.</string>
 	<string name="osb_add_dialog_title">Εισαγωγή κειμένου σφάλματος</string>
 	<string name="osb_add_dialog_success">Το σφάλμα δημιουργήθηκε επιτυχώς</string>
-	<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+	<string name="osb_add_dialog_error">Προέκυψε εξαίρεση: το σφάλμα δεν δημιουργήθηκε</string>
 	<string name="osb_comment_menu_item">Προσθήκη σχολίου</string>
 	<string name="osb_comment_dialog_message">Μήνυμα</string>
 	<string name="osb_comment_dialog_author">Όνομα συγγραφέα</string>
 	<string name="osb_comment_dialog_title">Προσθήκη σχολίου στο σφάλμα</string>
 	<string name="osb_comment_dialog_add_button">Προσθήκη σχολίου</string>
 	<string name="osb_comment_dialog_success">Το σχόλιο προστέθηκε με επιτυχία</string>
-	<string name="osb_comment_dialog_error">Exception occured: comment was not added</string>
+	<string name="osb_comment_dialog_error">Προέκυψε εξαίρεση: το σχόλιο δεν προστέθηκε</string>
 	<string name="osb_close_menu_item">Κλείσιμο σφάλματος</string>
-	<string name="osb_close_dialog_title">Closing bug</string>
+	<string name="osb_close_dialog_title">Κλείσιμο σφάλματος</string>
 	<string name="osb_close_dialog_close_button">Κλείσιμο σφάλματος</string>
-	<string name="osb_close_dialog_success">Bug was successfully closed</string>
-	<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
+	<string name="osb_close_dialog_success">Το σφάλμα έκλεισε με επιτυχία</string>
+	<string name="osb_close_dialog_error">Προέκυψε εξαίρεση: το σφάλμα δεν ήταν κλειστό</string>
 	<string name="poi_edit_title">Επεξεργασία ΣΕ</string>
 	<string name="poi_create_title">Δημιουργία ΣΕ</string>
-	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
+	<string name="poi_error_poi_not_found">Ο κόμβος δεν μπορεί να βρεθεί ή η υποδομή δεν είναι απλός κόμβος</string>
 	<string name="poi_remove_confirm_template">Διαγραφή {0} (εισαγωγή σχολίου)?</string>
 	<string name="poi_remove_title">Διαγραφή ΣΕ</string>
 	<string name="default_buttons_delete">Διαγραφή</string>
@@ -1067,14 +1067,14 @@
 	<string name="poi_action_add">προσθήκη</string>
 	<string name="poi_action_change">αλλαγή</string>
 	<string name="poi_action_succeded_template">Η δράση {0} ολοκληρώθηκε με επιτυχία.</string>
-	<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
-	<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
+	<string name="poi_error_unexpected_template">Μη αναμενόμενο σφάλμα κατά την εκτέλεση της δράσης {0}.</string>
+	<string name="poi_error_io_error_template">Σφάλμα I/O κατά την εκτέλεση της δράσης {0}.</string>
 	<string name="poi_error_info_not_loaded">Δεν φορτώθηκαν πληροφορίες σχετικά με τον κόμβο</string>
 	<string name="poi_dialog_name">Όνομα</string>
 	<string name="poi_dialog_opening_hours">Άνοιγμα</string>
 	<string name="poi_dialog_comment">Σχόλιο</string>
 	<string name="poi_dialog_comment_default">POI changing</string>
-	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
+	<string name="poi_dialog_other_tags_message">Όλες οι άλλες ετικέτες διατηρούνται</string>
 	<string name="default_buttons_commit">Commit</string>
 	<string name="default_buttons_reset">Επαναφορά</string>
 	<string name="filter_current_poiButton">Φίλτρο</string>
