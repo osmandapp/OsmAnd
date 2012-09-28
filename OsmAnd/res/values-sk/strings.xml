@@ -1086,5 +1086,5 @@
     <string name="map_widget_monitoring_services">Monitorovacie služby</string>
 	<string name="no_route">Žiadna cesta</string>
 	<string name="delete_target_point">Odstrániť cieľový bod</string>
-	<string name="intermediate_point">Waypoint %1$s</string>
+	<string name="intermediate_point">Prechodný bod %1$s</string>
     </resources>
