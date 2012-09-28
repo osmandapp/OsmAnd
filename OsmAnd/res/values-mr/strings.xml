@@ -935,4 +935,9 @@
 <string name="monitoring_mode_on">जिपीएक्स रेकॉर्ड थांबवा.</string>
 <string name="int_continuosly">सलग</string>
 <string name="email">इमेल</string>
-</resources>
+<string name="poi_filter_parking">पार्किंग</string>
+    <string name="poi_filter_emergency">आपत्कालीन</string>
+    <string name="poi_filter_public_transport">सार्वजनिक परिवहन</string>
+    <string name="poi_filter_entertainment">करमणूक</string>
+    <string name="map_widget_appearance">इतर:</string>
+	</resources>
