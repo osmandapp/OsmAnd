@@ -1082,4 +1082,9 @@
 \nPomocou \"Zdroj mapy...\" môžete vybrať predinštalované offline vektorové mapy alebo preddefinované on-line dlaždicové mapy (potreba aktivovať modul \'Online mapy\'), alebo mapy ručne vytvorené pomocou napr. OsmAndMapCreator na PC.
 \nOsmAnd tiež podporuje vlastné zdroje máp. "</string>
 	<string name="tip_app_mode_t_v2">"OsmAnd podporuje rôzne (nastaviteľné) aplikačné profily pre rôzne prípady použitia.\nProfily môžete zmeniť pomocou tlačidla profilu v ľavom dolnom rohu obrazovky mapy (ikona auto, bicykel, alebo pešia), alebo pri vytváraní navigačnej trasy. "</string>
-	</resources>
+	<string name="gps_not_available">Povoľte v nastaveniach GPS</string>
+    <string name="map_widget_monitoring_services">Monitorovacie služby</string>
+	<string name="no_route">Žiadna cesta</string>
+	<string name="delete_target_point">Odstrániť cieľový bod</string>
+	<string name="intermediate_point">Waypoint %1$s</string>
+    </resources>
