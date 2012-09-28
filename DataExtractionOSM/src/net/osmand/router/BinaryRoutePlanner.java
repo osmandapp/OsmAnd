@@ -174,6 +174,7 @@ public class BinaryRoutePlanner {
 		return searchRoute(ctx, start, end, leftSideNavigation);
 	}
 	
+	@SuppressWarnings("static-access")
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
 		List<RouteSegmentResult> result = searchRouteInternalPrepare(ctx, start, end, leftSideNavigation);
 		if(result != null) {

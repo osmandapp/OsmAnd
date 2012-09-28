@@ -3,10 +3,7 @@ package net.osmand.router;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.TLongSet;
-import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.IOException;
@@ -60,7 +57,6 @@ public class RoutingContext {
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
 	
 	// 3. Warm object caches
-	TLongSet nonRestrictedIds = new TLongHashSet();
 	ArrayList<RouteSegment> segmentsToVisitPrescripted = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 
@@ -408,8 +404,6 @@ public class RoutingContext {
 
 	public void loadTileData(int x31, int y31, int zoomAround, final List<RouteDataObject> toFillIn) {
 		int coordinatesShift = (1 << (31 - zoomAround));
-		// put in map to avoid duplicate map loading
-//		TIntObjectHashMap<RoutingTile> ts = new TIntObjectHashMap<RoutingContext.RoutingTile>();
 		TLongHashSet ts = new TLongHashSet(); 
 		long now = System.nanoTime();
 		ts.add(getRoutingTile(x31 - coordinatesShift, y31 - coordinatesShift, true));
@@ -423,6 +417,7 @@ public class RoutingContext {
 		timeToFindInitialSegments += (System.nanoTime() - now);
 	}
 	
+	@SuppressWarnings("unused")
 	private long getRoutingTile(int x31, int y31, boolean load){
 //		long now = System.nanoTime();
 		long xloc = x31 >> (31 - config.ZOOM_TO_LOAD_TILES);

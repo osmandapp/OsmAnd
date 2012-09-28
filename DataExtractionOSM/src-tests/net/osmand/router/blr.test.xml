@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 <test regions="" description="Belarus" best_percent="5" vehicle="car" 
-    start_lat="53.91102495838691" start_lon="27.579245567321777" target_lat="53.908383230651346" target_lon="27.48626947402954" complete_time="1093.2324" loadedTiles = "10" visitedSegments = "832" complete_distance = "9285.089"  >
+    start_lat="53.91102495838691" start_lon="27.579245567321777" target_lat="53.908383230651346" target_lon="27.48626947402954" complete_time="1093.2324" loadedTiles = "220" visitedSegments = "832" complete_distance = "9285.089"  >
 	<segment id="40885459" start="3" end="2" time = "10.731602" name = "" distance = "89.43001" turn = "Go ahead" start_bearing = "30.2094" end_bearing = "30.2094" description = "Go ahead and go 89.43 meters" />
 	<segment id="40885456" start="1" end="0" time = "0.7542267" name = "" distance = "6.2852225" turn = "Turn left" start_bearing = "-57.804268" end_bearing = "-57.804268" description = "Turn left and go 47.32 meters" />
 	<segment id="40885457" start="1" end="0" time = "1.6372955" name = "" distance = "13.64413" start_bearing = "-57.47511" end_bearing = "-57.47511" description = "" />

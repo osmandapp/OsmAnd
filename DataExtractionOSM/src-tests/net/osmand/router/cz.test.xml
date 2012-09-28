@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 <test regions="" description="Czech" best_percent="10" vehicle="car" 
-	       start_lat="50.07577452522076" start_lon="14.45427417755127" target_lat="49.120547036367746" target_lon="16.335017681121826" complete_time="7241.0713" loadedTiles = "250" visitedSegments = "2598" complete_distance = "204110.28"  >
+	       start_lat="50.07577452522076" start_lon="14.45427417755127" target_lat="49.120547036367746" target_lon="16.335017681121826" complete_time="7241.0713" loadedTiles = "580" visitedSegments = "2598" complete_distance = "204110.28"  >
 	<segment id="148483636" start="1" end="3" time = "7.144318" name = "" distance = "69.45865" turn = "Go ahead" turn_angle = "0.0" start_bearing = "-13.969152" end_bearing = "-15.124007" description = "Go ahead and go 184.99 meters" />
 	<segment id="38611055" start="0" end="3" time = "11.883394" name = "Perunova" distance = "115.533" start_bearing = "-13.348727" end_bearing = "-14.32272" description = "" />
 	<segment id="128493079" start="0" end="10" time = "27.32003" name = "Vinohradská" distance = "341.5004" turn = "Turn right" turn_angle = "99.87288" start_bearing = "85.550156" end_bearing = "84.289406" description = "Turn right and go 341.50 meters" />

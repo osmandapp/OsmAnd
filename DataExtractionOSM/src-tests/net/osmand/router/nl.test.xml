@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 	<test regions="" description="Long route to Maastricht" best_percent="5" vehicle="car"     
-		    start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="6897.156" loadedTiles = "185" visitedSegments = "3542" complete_distance = "208149.2"  >
+    start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="7043.331" loadedTiles = "1785" visitedSegments = "4456" complete_distance = "208488.69"  >
 	<segment id="7366509" start="9" end="11" time = "9.088743" name = "" distance = "75.739525" turn = "Go ahead" turn_angle = "0.0" start_bearing = "115.31378" end_bearing = "115.46335" description = "Go ahead and go 75.74 meters" />
 	<segment id="47633918" start="2" end="1" time = "2.140907" name = "Noorddammerweg" distance = "26.761337" turn = "Turn right" turn_angle = "89.33931" start_bearing = "-155.19734" end_bearing = "-155.19734" description = "Turn right and go 26.76 meters" />
-	<segment id="7367247" start="2" end="0" time = "20.482542" name = "Zetterij" distance = "256.03177" turn = "Turn left" turn_angle = "-90.48619" start_bearing = "114.31647" end_bearing = "106.46359" description = "Turn left and go 774.68 meters" />
+	<segment id="7367247" start="2" end="0" time = "20.482542" name = "Zetterij" distance = "256.03177" turn = "Turn left" turn_angle = "-90.48619" start_bearing = "114.31647" end_bearing = "106.46359" description = "Turn left and go 761.63 meters" />
 	<segment id="7364788" start="4" end="0" time = "23.708342" name = "Zetterij" distance = "296.35428" start_bearing = "108.9465" end_bearing = "115.2737" description = "" />
 	<segment id="7364764" start="1" end="0" time = "1.6481074" name = "Zetterij" distance = "20.601343" start_bearing = "111.709885" end_bearing = "111.709885" description = "" />
 	<segment id="7364763" start="1" end="0" time = "6.9382887" name = "Zetterij" distance = "86.728615" start_bearing = "112.44515" end_bearing = "112.44515" description = "" />
 	<segment id="7364766" start="1" end="0" time = "1.1748635" name = "Zetterij" distance = "14.685793" start_bearing = "119.27525" end_bearing = "119.27525" description = "" />
 	<segment id="7364508" start="0" end="2" time = "6.2802095" name = "Zetterij" distance = "87.225136" start_bearing = "110.00669" end_bearing = "94.62415" description = "" />
-	<segment id="7365071" start="0" end="1" time = "0.9398953" name = "Zetterij" distance = "13.054101" start_bearing = "117.97948" end_bearing = "117.97948" description = "" />
-	<segment id="7364510" start="0" end="1" time = "1.1475279" name = "Bovenkerkerweg (N521) " distance = "15.937888" turn = "Turn left" turn_angle = "-105.37932" start_bearing = "12.60016" end_bearing = "12.60016" description = "Turn left and go 968.58 meters" />
+	<segment id="7365070" start="0" end="1" time = "1.0716465" name = "Bovenkerkerweg (N521) " distance = "14.883979" turn = "Turn right" turn_angle = "94.95008" start_bearing = "-170.42577" end_bearing = "-170.42577" description = "Turn right and go 58.89 meters" />
+	<segment id="7365086" start="0" end="1" time = "3.1682494" name = "Bovenkerkerweg (N521) " distance = "44.003468" start_bearing = "-172.57889" end_bearing = "-172.57889" description = "" />
+	<segment id="7365086" start="1" end="3" time = "30.227621" name = "Bovenkerkerweg (N521) " distance = "72.60584" turn = "Keep right" turn_angle = "1.9589691" start_bearing = "-170.61992" end_bearing = "-173.29016" description = "Keep right and go 110.76 meters" />
+	<segment id="7365099" start="0" end="3" time = "2.747028" name = "Bovenkerkerweg (N521) " distance = "38.15317" start_bearing = "-173.21103" end_bearing = "-177.61406" description = "" />
+	<segment id="7365062" start="6" end="7" time = "0.84723866" name = "Beneluxbaan" distance = "11.767203" turn = "Make uturn" turn_angle = "0.0" start_bearing = "97.0165" end_bearing = "97.0165" description = "Make uturn and go 1105.87 meters" />
+	<segment id="7365101" start="0" end="3" time = "2.8561046" name = "Bovenkerkerweg (N521) " distance = "39.66812" start_bearing = "10.885527" end_bearing = "11.458753" description = "" />
+	<segment id="7365085" start="0" end="1" time = "8.459829" name = "Bovenkerkerweg (N521) " distance = "117.49763" start_bearing = "6.4971123" end_bearing = "6.4971123" description = "" />
+	<segment id="7365069" start="0" end="1" time = "0.57796" name = "Bovenkerkerweg (N521) " distance = "8.027223" start_bearing = "5.3145456" end_bearing = "5.3145456" description = "" />
+	<segment id="7364510" start="0" end="1" time = "1.1475279" name = "Bovenkerkerweg (N521) " distance = "15.937888" start_bearing = "12.60016" end_bearing = "12.60016" description = "" />
 	<segment id="7364786" start="0" end="2" time = "9.050575" name = "Bovenkerkerweg (N521) " distance = "125.70244" start_bearing = "7.8605475" end_bearing = "-2.726311" description = "" />
 	<segment id="7364769" start="0" end="2" time = "16.702217" name = "Bovenkerkerweg (N521) " distance = "278.3703" start_bearing = "10.541818" end_bearing = "8.130102" description = "" />
-	<segment id="7364781" start="0" end="6" time = "54.49686" name = "Handweg" distance = "548.56757" start_bearing = "8.130102" end_bearing = "9.901572" description = "" />
-	<segment id="7364782" start="1" end="0" time = "16.062386" name = "Keizer Karelweg" distance = "14.755359" turn = "Turn right" turn_angle = "89.328316" start_bearing = "99.22989" end_bearing = "99.22989" description = "Turn right and go 917.26 meters" />
+	<segment id="7364781" start="0" end="6" time = "64.496864" name = "Handweg" distance = "548.56757" start_bearing = "8.130102" end_bearing = "9.901572" description = "" />
+	<segment id="7364782" start="1" end="0" time = "26.062386" name = "Keizer Karelweg" distance = "14.755359" turn = "Turn right" turn_angle = "89.328316" start_bearing = "99.22989" end_bearing = "99.22989" description = "Turn right and go 917.26 meters" />
 	<segment id="7364779" start="0" end="5" time = "13.558414" name = "Keizer Karelweg" distance = "188.31131" start_bearing = "96.254036" end_bearing = "66.169136" description = "" />
 	<segment id="7364775" start="1" end="0" time = "4.9813266" name = "Keizer Karelweg" distance = "69.18509" start_bearing = "62.372807" end_bearing = "62.372807" description = "" />
 	<segment id="7364776" start="0" end="1" time = "4.9812937" name = "Keizer Karelweg" distance = "69.18464" start_bearing = "62.334564" end_bearing = "62.334564" description = "" />
@@ -32,10 +39,10 @@
 	<segment id="48147997" start="0" end="2" time = "2.944532" name = "Keizer Karelweg" distance = "40.89628" start_bearing = "57.707115" end_bearing = "51.679886" description = "" />
 	<segment id="7364498" start="0" end="2" time = "3.2543092" name = "Keizer Karelweg" distance = "45.198742" start_bearing = "52.460567" end_bearing = "70.857735" description = "" />
 	<segment id="7364496" start="0" end="1" time = "1.0199182" name = "Keizer Karelweg" distance = "14.165531" start_bearing = "53.746162" end_bearing = "53.746162" description = "" />
-	<segment id="58384522" start="0" end="4" time = "20.041615" name = "Keizer Karelweg" distance = "70.02242" start_bearing = "9.050722" end_bearing = "19.798876" description = "" />
+	<segment id="58384522" start="0" end="4" time = "30.041615" name = "Keizer Karelweg" distance = "70.02242" start_bearing = "9.050722" end_bearing = "19.798876" description = "" />
 	<segment id="7364485" start="0" end="2" time = "5.4958763" name = "Keizer Karelweg" distance = "76.33162" start_bearing = "28.694904" end_bearing = "18.610165" description = "" />
 	<segment id="7364485" start="2" end="3" time = "2.772" name = "Keizer Karelweg" distance = "38.500004" turn = "Keep right" turn_angle = "7.832197" start_bearing = "26.442362" end_bearing = "26.442362" description = "Keep right and go 38.50 meters" />
-	<segment id="49900222" start="0" end="1" time = "16.05053" name = " (5) " distance = "29.181383" turn = "Keep right" turn_angle = "26.471804" start_bearing = "52.914165" end_bearing = "52.914165" description = "Keep right and go 29.18 meters" />
+	<segment id="49900222" start="0" end="1" time = "26.05053" name = " (5) " distance = "29.181383" turn = "Keep right" turn_angle = "26.471804" start_bearing = "52.914165" end_bearing = "52.914165" description = "Keep right and go 29.18 meters" />
 	<segment id="7364501" start="1" end="14" time = "15.055797" name = " (5) " distance = "418.21658" turn = "Turn right" turn_angle = "72.713745" start_bearing = "125.62791" end_bearing = "101.61149" description = "Turn right and go 860.22 meters" />
 	<segment id="7363599" start="0" end="2" time = "15.912092" name = "Burgemeester van Sonweg (A9) " distance = "442.0026" start_bearing = "110.03965" end_bearing = "111.34803" description = "" />
 	<segment id="73841697" start="0" end="1" time = "3.0741942" name = "Burgemeester van Sonweg (A9) " distance = "85.39429" turn = "Keep left" turn_angle = "-1.123169" lanes = "[1, 1, 1, 0]" start_bearing = "110.22486" end_bearing = "110.22486" description = "Keep left[1, 1, 1, 0] and go 5031.67 meters (*)" />
@@ -85,7 +92,7 @@
 	<segment id="80761369" start="0" end="1" time = "1.9537628" name = " (A2) " distance = "54.27119" start_bearing = "-178.45705" end_bearing = "-178.45705" description = "" />
 	<segment id="80761365" start="0" end="6" time = "11.0511" name = " (A2) " distance = "306.975" start_bearing = "-176.12459" end_bearing = "-171.34746" description = "" />
 	<segment id="152126643" start="0" end="2" time = "16.587639" name = " (A2) " distance = "460.76776" start_bearing = "-168.47627" end_bearing = "-165.6754" description = "" />
-	<segment id="93810171" start="0" end="1" time = "8.644352" name = " (A2) " distance = "240.1209" turn = "Keep left" turn_angle = "-1.1266632" lanes = "[1, 1, 0, 0]" start_bearing = "-166.80206" end_bearing = "-166.80206" description = "Keep left[1, 1, 0, 0] and go 4539.38 meters (*)" />
+	<segment id="93810171" start="0" end="1" time = "8.644352" name = " (A2) " distance = "240.1209" turn = "Keep left" turn_angle = "-1.1266632" lanes = "[1, 1, 0, 0]" start_bearing = "-166.80206" end_bearing = "-166.80206" description = "Keep left[1, 1, 0, 0] and go 4539.38 meters" />
 	<segment id="7054468" start="0" end="2" time = "29.638718" name = " (A2) " distance = "823.2977" start_bearing = "-167.47635" end_bearing = "-165.95709" description = "" />
 	<segment id="7054457" start="0" end="1" time = "3.6500416" name = " (A2) " distance = "101.390045" start_bearing = "-166.36688" end_bearing = "-166.36688" description = "" />
 	<segment id="7054352" start="0" end="3" time = "24.02921" name = " (A2) " distance = "667.478" start_bearing = "-165.3489" end_bearing = "-165.1765" description = "" />
@@ -144,18 +151,18 @@
 	<segment id="7083242" start="0" end="8" time = "23.373617" name = " (A2) " distance = "779.12054" start_bearing = "-177.66797" end_bearing = "-177.48619" description = "" />
 	<segment id="7083262" start="0" end="1" time = "1.0658783" name = " (A2) " distance = "35.529278" start_bearing = "-176.44215" end_bearing = "-176.44215" description = "" />
 	<segment id="60928833" start="0" end="1" time = "25.311256" name = " (A2) " distance = "843.7085" start_bearing = "-177.94655" end_bearing = "-177.94655" description = "" />
-	<segment id="7082839" start="0" end="10" time = "58.871197" name = " (A2) " distance = "1962.3732" turn = "Keep left" turn_angle = "0.121292114" lanes = "[1, 1, 1, 0]" start_bearing = "-177.82526" end_bearing = "176.08842" description = "Keep left[1, 1, 1, 0] and go 2067.44 meters (*)" />
+	<segment id="7082839" start="0" end="10" time = "58.871197" name = " (A2) " distance = "1962.3732" turn = "Keep left" turn_angle = "0.121292114" lanes = "[1, 1, 1, 0]" start_bearing = "-177.82526" end_bearing = "176.08842" description = "Keep left[1, 1, 1, 0] and go 4778.54 meters (*)" />
 	<segment id="87195824" start="0" end="1" time = "3.1519196" name = " (A2) " distance = "105.06398" start_bearing = "175.76361" end_bearing = "175.76361" description = "" />
-	<segment id="87195824" start="1" end="9" time = "24.882273" name = " (A2) " distance = "829.40906" turn = "Keep left" turn_angle = "0.11303711" lanes = "[1, 1, 1, 0]" start_bearing = "175.87665" end_bearing = "158.7495" description = "Keep left[1, 1, 1, 0] and go 2711.10 meters (*)" />
+	<segment id="87195824" start="1" end="9" time = "24.882273" name = " (A2) " distance = "829.40906" start_bearing = "175.87665" end_bearing = "158.7495" description = "" />
 	<segment id="87195830" start="0" end="7" time = "19.536932" name = " (A2) " distance = "651.231" start_bearing = "157.98872" end_bearing = "135.32278" description = "" />
 	<segment id="7082846" start="0" end="1" time = "1.332016" name = " (A2) " distance = "44.40053" start_bearing = "132.66948" end_bearing = "132.66948" description = "" />
 	<segment id="7082849" start="0" end="3" time = "12.256795" name = " (A2) " distance = "408.5598" start_bearing = "129.9005" end_bearing = "123.859245" description = "" />
 	<segment id="7082851" start="0" end="1" time = "1.7693062" name = " (A2) " distance = "58.976868" start_bearing = "124.133446" end_bearing = "124.133446" description = "" />
 	<segment id="7081833" start="0" end="9" time = "21.555794" name = " (A2) " distance = "718.5264" start_bearing = "125.44192" end_bearing = "141.00053" description = "" />
-	<segment id="7081833" start="9" end="11" time = "18.920055" name = " (A2) " distance = "630.6685" turn = "Keep left" turn_angle = "1.3838348" lanes = "[1, 1, 1, 0]" start_bearing = "142.38437" end_bearing = "143.98479" description = "Keep left[1, 1, 1, 0] and go 1705.73 meters (*)" />
+	<segment id="7081833" start="9" end="11" time = "18.920055" name = " (A2) " distance = "630.6685" turn = "Keep left" turn_angle = "1.3838348" lanes = "[1, 1, 1, 0]" start_bearing = "142.38437" end_bearing = "143.98479" description = "Keep left[1, 1, 1, 0] and go 4214.98 meters (*)" />
 	<segment id="7081844" start="0" end="1" time = "0.74438155" name = " (A2) " distance = "24.812717" start_bearing = "144.41263" end_bearing = "144.41263" description = "" />
 	<segment id="7081846" start="0" end="2" time = "31.507397" name = " (A2) " distance = "1050.2466" start_bearing = "144.40886" end_bearing = "145.51918" description = "" />
-	<segment id="7081846" start="2" end="3" time = "0.46107167" name = " (A2) " distance = "15.369055" turn = "Keep left" turn_angle = "0.04182434" lanes = "[1, 1, 1, 0]" start_bearing = "145.561" end_bearing = "145.561" description = "Keep left[1, 1, 1, 0] and go 2509.26 meters (*)" />
+	<segment id="7081846" start="2" end="3" time = "0.46107167" name = " (A2) " distance = "15.369055" start_bearing = "145.561" end_bearing = "145.561" description = "" />
 	<segment id="7081825" start="0" end="1" time = "1.5179313" name = " (A2) " distance = "50.59771" start_bearing = "145.9634" end_bearing = "145.9634" description = "" />
 	<segment id="7081704" start="0" end="3" time = "36.545654" name = " (A2) " distance = "1218.1884" start_bearing = "145.98322" end_bearing = "145.91476" description = "" />
 	<segment id="7081701" start="0" end="1" time = "3.0920525" name = " (A2) " distance = "103.068405" start_bearing = "146.47978" end_bearing = "146.47978" description = "" />
@@ -163,7 +170,7 @@
 	<segment id="7081386" start="0" end="1" time = "6.63905" name = " (A2) " distance = "221.30167" start_bearing = "145.88553" end_bearing = "145.88553" description = "" />
 	<segment id="7081384" start="0" end="1" time = "1.1803325" name = " (A2) " distance = "39.344418" start_bearing = "145.42284" end_bearing = "145.42284" description = "" />
 	<segment id="7081015" start="0" end="3" time = "21.335112" name = " (A2) " distance = "711.17035" start_bearing = "145.26582" end_bearing = "140.59818" description = "" />
-	<segment id="54318418" start="0" end="27" time = "123.92231" name = " (A2) " distance = "4130.7437" turn = "Keep left" turn_angle = "-2.0806732" lanes = "[1, 1, 0, 0]" start_bearing = "138.5175" end_bearing = "164.93518" description = "Keep left[1, 1, 0, 0] and go 7595.80 meters (*)" />
+	<segment id="54318418" start="0" end="27" time = "123.92231" name = " (A2) " distance = "4130.7437" turn = "Keep left" turn_angle = "-2.0806732" lanes = "[1, 1, 0, 0]" start_bearing = "138.5175" end_bearing = "164.93518" description = "Keep left[1, 1, 0, 0] and go 7595.80 meters" />
 	<segment id="6950203" start="0" end="1" time = "1.0974485" name = " (A2) " distance = "36.581615" start_bearing = "166.4589" end_bearing = "166.4589" description = "" />
 	<segment id="35286295" start="0" end="4" time = "8.819818" name = " (A2) " distance = "293.9939" start_bearing = "167.24911" end_bearing = "172.56018" description = "" />
 	<segment id="35266566" start="0" end="2" time = "3.0470872" name = " (A2) " distance = "101.56957" start_bearing = "174.98376" end_bearing = "177.47758" description = "" />
@@ -195,10 +202,10 @@
 	<segment id="7173912" start="0" end="8" time = "12.146003" name = " (A2) " distance = "404.86673" start_bearing = "164.6402" end_bearing = "175.66768" description = "" />
 	<segment id="7173915" start="0" end="1" time = "1.8925273" name = " (A2) " distance = "63.084244" start_bearing = "177.30571" end_bearing = "177.30571" description = "" />
 	<segment id="7173917" start="0" end="1" time = "1.7798107" name = " (A2) " distance = "59.32702" start_bearing = "178.19316" end_bearing = "178.19316" description = "" />
-	<segment id="7173917" start="1" end="2" time = "4.5603037" name = " (A2) " distance = "152.01012" turn = "Keep left" turn_angle = "0.6930847" lanes = "[1, 1, 0]" start_bearing = "178.88625" end_bearing = "178.88625" description = "Keep left[1, 1, 0] and go 1775.60 meters (*)" />
+	<segment id="7173917" start="1" end="2" time = "4.5603037" name = " (A2) " distance = "152.01012" turn = "Keep left" turn_angle = "0.6930847" lanes = "[1, 1, 0]" start_bearing = "178.88625" end_bearing = "178.88625" description = "Keep left[1, 1, 0] and go 6521.90 meters (*)" />
 	<segment id="7173905" start="0" end="1" time = "1.4901867" name = " (A2) " distance = "49.67289" start_bearing = "-180.0" end_bearing = "180.0" description = "" />
 	<segment id="7173935" start="0" end="5" time = "47.21756" name = " (A2) " distance = "1573.9186" start_bearing = "178.95203" end_bearing = "176.12459" description = "" />
-	<segment id="7173935" start="5" end="21" time = "142.38881" name = " (A2) " distance = "4746.2935" turn = "Keep left" turn_angle = "-1.4848022" lanes = "[1, 1, 0]" start_bearing = "174.63979" end_bearing = "145.51537" description = "Keep left[1, 1, 0] and go 4746.29 meters (*)" />
+	<segment id="7173935" start="5" end="21" time = "142.38881" name = " (A2) " distance = "4746.2935" start_bearing = "174.63979" end_bearing = "145.51537" description = "" />
 	<segment id="7173935" start="21" end="29" time = "67.018425" name = " (A2) " distance = "2233.9475" turn = "Keep left" turn_angle = "-0.6148071" lanes = "[1, 1, 0]" start_bearing = "144.90056" end_bearing = "141.10718" description = "Keep left[1, 1, 0] and go 2233.95 meters (*)" />
 	<segment id="7173935" start="29" end="32" time = "14.9291725" name = " (A2) " distance = "497.63907" turn = "Keep left" turn_angle = "-1.8707886" lanes = "[1, 1, 0]" start_bearing = "139.23639" end_bearing = "138.31236" description = "Keep left[1, 1, 0] and go 1980.99 meters (*)" />
 	<segment id="7179075" start="0" end="1" time = "1.5465801" name = " (A2) " distance = "51.55267" start_bearing = "138.19594" end_bearing = "138.19594" description = "" />
@@ -250,14 +257,14 @@
 	<segment id="34601788" start="0" end="2" time = "17.838524" name = " (A2;A67) " distance = "594.61743" start_bearing = "92.92696" end_bearing = "92.76961" description = "" />
 	<segment id="129359000" start="0" end="1" time = "0.8941588" name = " (A2;A67) " distance = "29.80529" start_bearing = "92.80981" end_bearing = "92.80981" description = "" />
 	<segment id="129359001" start="0" end="1" time = "0.17860866" name = " (A2;A67) " distance = "5.953622" start_bearing = "91.7357" end_bearing = "91.7357" description = "" />
-	<segment id="41960113" start="0" end="9" time = "12.305996" name = " (A2) " distance = "410.19983" turn = "Keep left" turn_angle = "0.41725922" lanes = "[1, 1, 0, 0]" start_bearing = "92.15296" end_bearing = "107.69364" description = "Keep left[1, 1, 0, 0] and go 6969.30 meters (*)" />
+	<segment id="41960113" start="0" end="9" time = "12.305996" name = " (A2) " distance = "410.19983" turn = "Keep left" turn_angle = "0.41725922" lanes = "[1, 1, 0, 0]" start_bearing = "92.15296" end_bearing = "107.69364" description = "Keep left[1, 1, 0, 0] and go 6969.30 meters" />
 	<segment id="46177355" start="0" end="3" time = "2.9886634" name = " (A2) " distance = "99.62211" start_bearing = "107.61258" end_bearing = "111.48204" description = "" />
 	<segment id="7181608" start="0" end="13" time = "14.447598" name = " (A2) " distance = "481.5866" start_bearing = "112.94894" end_bearing = "141.93434" description = "" />
 	<segment id="129358985" start="0" end="2" time = "2.1925447" name = " (A2) " distance = "73.08482" start_bearing = "146.47247" end_bearing = "146.47247" description = "" />
 	<segment id="129358986" start="0" end="10" time = "15.391882" name = " (A2) " distance = "513.0627" start_bearing = "148.48593" end_bearing = "174.4588" description = "" />
 	<segment id="57124219" start="0" end="1" time = "3.6961312" name = " (A2) " distance = "123.20437" start_bearing = "163.70851" end_bearing = "163.70851" description = "" />
 	<segment id="7138181" start="0" end="11" time = "158.05623" name = " (A2) " distance = "5268.541" start_bearing = "164.86745" end_bearing = "150.9332" description = "" />
-	<segment id="7138582" start="0" end="1" time = "12.939249" name = " (A2) " distance = "431.3083" turn = "Keep left" turn_angle = "1.0292664" lanes = "[1, 1, 0]" start_bearing = "151.96246" end_bearing = "151.96246" description = "Keep left[1, 1, 0] and go 4949.16 meters (*)" />
+	<segment id="7138582" start="0" end="1" time = "12.939249" name = " (A2) " distance = "431.3083" turn = "Keep left" turn_angle = "1.0292664" lanes = "[1, 1, 0]" start_bearing = "151.96246" end_bearing = "151.96246" description = "Keep left[1, 1, 0] and go 6302.33 meters (*)" />
 	<segment id="7138584" start="0" end="1" time = "1.9605826" name = " (A2) " distance = "65.35275" start_bearing = "151.7652" end_bearing = "151.7652" description = "" />
 	<segment id="7138593" start="0" end="8" time = "22.77318" name = " (A2) " distance = "759.106" start_bearing = "149.63991" end_bearing = "122.376434" description = "" />
 	<segment id="7138594" start="0" end="1" time = "1.104279" name = " (A2) " distance = "36.809303" start_bearing = "122.19573" end_bearing = "122.19573" description = "" />
@@ -267,7 +274,7 @@
 	<segment id="7138608" start="0" end="1" time = "0.5713057" name = " (A2) " distance = "19.043524" start_bearing = "121.53479" end_bearing = "121.53479" description = "" />
 	<segment id="7138570" start="0" end="4" time = "30.841974" name = " (A2) " distance = "1028.0658" start_bearing = "122.167595" end_bearing = "120.012825" description = "" />
 	<segment id="7137120" start="0" end="9" time = "60.733063" name = " (A2) " distance = "2024.4354" start_bearing = "119.456055" end_bearing = "142.62645" description = "" />
-	<segment id="7137120" start="9" end="12" time = "19.791756" name = " (A2) " distance = "659.72516" turn = "Keep left" turn_angle = "-0.8337555" lanes = "[1, 1, 0]" start_bearing = "141.7927" end_bearing = "142.10811" description = "Keep left[1, 1, 0] and go 1353.16 meters (*)" />
+	<segment id="7137120" start="9" end="12" time = "19.791756" name = " (A2) " distance = "659.72516" start_bearing = "141.7927" end_bearing = "142.10811" description = "" />
 	<segment id="7137076" start="0" end="1" time = "1.9422636" name = " (A2) " distance = "64.74212" start_bearing = "142.06673" end_bearing = "142.06673" description = "" />
 	<segment id="7137093" start="0" end="2" time = "18.860876" name = " (A2) " distance = "628.6958" start_bearing = "143.43219" end_bearing = "148.48138" description = "" />
 	<segment id="7137085" start="0" end="2" time = "8.986393" name = " (A2) " distance = "299.54642" turn = "Keep left" turn_angle = "-1.9695587" lanes = "[1, 1, 0]" start_bearing = "146.51183" end_bearing = "144.0556" description = "Keep left[1, 1, 0] and go 2280.14 meters (*)" />
@@ -282,17 +289,17 @@
 	<segment id="7134786" start="0" end="4" time = "6.239682" name = " (A2) " distance = "207.9894" start_bearing = "132.66269" end_bearing = "143.909" description = "" />
 	<segment id="7134786" start="4" end="18" time = "46.656086" name = " (A2) " distance = "1555.2029" turn = "Keep left" turn_angle = "3.9660034" lanes = "[1, 1, 0]" start_bearing = "147.875" end_bearing = "129.92787" description = "Keep left[1, 1, 0] and go 1555.20 meters (*)" />
 	<segment id="7133368" start="0" end="45" time = "161.42354" name = " (A2) " distance = "5380.784" turn = "Keep left" turn_angle = "-7.772148" lanes = "[1, 1, 0]" start_bearing = "122.15572" end_bearing = "127.22508" description = "Keep left[1, 1, 0] and go 5380.78 meters (*)" />
-	<segment id="6735354" start="0" end="1" time = "3.023609" name = " (A2) " distance = "100.78696" turn = "Keep left" turn_angle = "7.550812" lanes = "[1, 1, 0]" start_bearing = "134.7759" end_bearing = "134.7759" description = "Keep left[1, 1, 0] and go 3543.38 meters (*)" />
+	<segment id="6735354" start="0" end="1" time = "3.023609" name = " (A2) " distance = "100.78696" turn = "Keep left" turn_angle = "7.550812" lanes = "[1, 1, 0]" start_bearing = "134.7759" end_bearing = "134.7759" description = "Keep left[1, 1, 0] and go 6298.18 meters (*)" />
 	<segment id="57123265" start="0" end="4" time = "11.997399" name = " (A2) " distance = "399.9133" start_bearing = "139.2456" end_bearing = "150.65193" description = "" />
 	<segment id="6735330" start="0" end="1" time = "1.8624623" name = " (A2) " distance = "62.082073" start_bearing = "152.81473" end_bearing = "152.81473" description = "" />
 	<segment id="6735347" start="0" end="3" time = "19.002733" name = " (A2) " distance = "633.4244" start_bearing = "153.98177" end_bearing = "158.04019" description = "" />
 	<segment id="6735335" start="0" end="1" time = "2.4163463" name = " (A2) " distance = "80.54487" start_bearing = "159.67686" end_bearing = "159.67686" description = "" />
 	<segment id="6733875" start="0" end="12" time = "67.998856" name = " (A2) " distance = "2266.6284" start_bearing = "158.63722" end_bearing = "121.59014" description = "" />
-	<segment id="6733875" start="12" end="30" time = "82.64402" name = " (A2) " distance = "2754.8008" turn = "Keep left" turn_angle = "-0.029792786" lanes = "[1, 1, 0]" start_bearing = "121.56035" end_bearing = "146.53694" description = "Keep left[1, 1, 0] and go 2754.80 meters (*)" />
-	<segment id="6733875" start="30" end="31" time = "5.352952" name = " (A2) " distance = "178.43173" turn = "Keep left" turn_angle = "-1.6221619" lanes = "[1, 1, 0]" start_bearing = "144.91478" end_bearing = "144.91478" description = "Keep left[1, 1, 0] and go 2295.99 meters (*)" />
+	<segment id="6733875" start="12" end="30" time = "82.64402" name = " (A2) " distance = "2754.8008" start_bearing = "121.56035" end_bearing = "146.53694" description = "" />
+	<segment id="6733875" start="30" end="31" time = "5.352952" name = " (A2) " distance = "178.43173" turn = "Keep left" turn_angle = "-1.6221619" lanes = "[1, 1, 0]" start_bearing = "144.91478" end_bearing = "144.91478" description = "Keep left[1, 1, 0] and go 7194.36 meters (*)" />
 	<segment id="6733858" start="0" end="1" time = "1.2741007" name = " (A2) " distance = "42.47002" start_bearing = "144.78241" end_bearing = "144.78241" description = "" />
 	<segment id="6761009" start="0" end="8" time = "62.252544" name = " (A2) " distance = "2075.0847" start_bearing = "142.9811" end_bearing = "149.37885" description = "" />
-	<segment id="6761009" start="8" end="19" time = "146.95122" name = " (A2) " distance = "4898.3735" turn = "Keep left" turn_angle = "0.2501831" lanes = "[1, 1, 0]" start_bearing = "149.62903" end_bearing = "157.77496" description = "Keep left[1, 1, 0] and go 4898.37 meters (*)" />
+	<segment id="6761009" start="8" end="19" time = "146.95122" name = " (A2) " distance = "4898.3735" start_bearing = "149.62903" end_bearing = "157.77496" description = "" />
 	<segment id="6761009" start="19" end="27" time = "28.343882" name = " (A2) " distance = "944.796" turn = "Keep left" turn_angle = "1.53656" lanes = "[1, 1, 0]" start_bearing = "159.31152" end_bearing = "138.09918" description = "Keep left[1, 1, 0] and go 4997.55 meters (*)" />
 	<segment id="6760794" start="0" end="11" time = "48.690052" name = " (A2) " distance = "1623.0017" start_bearing = "137.40173" end_bearing = "113.73268" description = "" />
 	<segment id="37874907" start="0" end="1" time = "1.0846229" name = " (A2) " distance = "36.154095" start_bearing = "114.14554" end_bearing = "114.14554" description = "" />
@@ -318,8 +325,8 @@
 	<segment id="6756968" start="0" end="12" time = "51.92214" name = " (A2) " distance = "1730.7379" start_bearing = "-131.39786" end_bearing = "-151.28493" description = "" />
 	<segment id="6756967" start="0" end="1" time = "0.86474246" name = " (A2) " distance = "28.824747" start_bearing = "-151.12456" end_bearing = "-151.12456" description = "" />
 	<segment id="6764626" start="0" end="13" time = "76.00803" name = " (A2) " distance = "2533.601" start_bearing = "-151.3797" end_bearing = "-170.0643" description = "" />
-	<segment id="6764626" start="13" end="22" time = "39.152573" name = " (A2) " distance = "1305.0857" turn = "Keep left" turn_angle = "-3.17984" lanes = "[1, 1, 0]" start_bearing = "-173.24414" end_bearing = "171.15948" description = "Keep left[1, 1, 0] and go 1305.09 meters (*)" />
-	<segment id="6764626" start="22" end="28" time = "34.96675" name = " (A2) " distance = "1165.5583" turn = "Keep left" turn_angle = "0.58154297" lanes = "[1, 1, 0]" start_bearing = "171.74103" end_bearing = "-178.93416" description = "Keep left[1, 1, 0] and go 1944.16 meters (*)" />
+	<segment id="6764626" start="13" end="22" time = "39.152573" name = " (A2) " distance = "1305.0857" turn = "Keep left" turn_angle = "-3.17984" lanes = "[1, 1, 0]" start_bearing = "-173.24414" end_bearing = "171.15948" description = "Keep left[1, 1, 0] and go 3249.24 meters (*)" />
+	<segment id="6764626" start="22" end="28" time = "34.96675" name = " (A2) " distance = "1165.5583" start_bearing = "171.74103" end_bearing = "-178.93416" description = "" />
 	<segment id="6764627" start="0" end="1" time = "1.2607403" name = " (A2) " distance = "42.024677" start_bearing = "-176.93352" end_bearing = "-176.93352" description = "" />
 	<segment id="6764640" start="0" end="2" time = "6.8866363" name = " (A2) " distance = "229.55453" start_bearing = "-177.31622" end_bearing = "-173.53018" description = "" />
 	<segment id="6764637" start="0" end="1" time = "1.7470565" name = " (A2) " distance = "58.235214" start_bearing = "-173.29016" end_bearing = "-173.29016" description = "" />
@@ -334,19 +341,24 @@
 	<segment id="6776798" start="0" end="3" time = "13.407926" name = " (A2) " distance = "446.93085" start_bearing = "-163.23038" end_bearing = "-167.19052" description = "" />
 	<segment id="6776788" start="0" end="1" time = "1.570805" name = " (A2) " distance = "52.36016" start_bearing = "-171.61038" end_bearing = "-171.61038" description = "" />
 	<segment id="6774982" start="0" end="11" time = "31.075895" name = " (A2) " distance = "1035.8632" start_bearing = "-174.4368" end_bearing = "155.75833" description = "" />
-	<segment id="6774982" start="11" end="16" time = "8.318511" name = " (A2) " distance = "277.2837" turn = "Keep left" turn_angle = "1.7171173" lanes = "[1, 1, 0]" start_bearing = "157.47545" end_bearing = "165.72327" description = "Keep left[1, 1, 0] and go 2484.68 meters (*)" />
-	<segment id="6774986" start="0" end="1" time = "1.193324" name = " (A2) " distance = "39.777462" start_bearing = "167.14766" end_bearing = "167.14766" description = "" />
-	<segment id="6774822" start="0" end="7" time = "22.103643" name = " (A2) " distance = "736.7881" start_bearing = "168.73532" end_bearing = "-175.156" description = "" />
-	<segment id="6775285" start="0" end="1" time = "2.0140622" name = " (A2) " distance = "67.1354" start_bearing = "-175.16959" end_bearing = "-175.16959" description = "" />
-	<segment id="6775316" start="0" end="3" time = "31.417942" name = " (A2) " distance = "1047.2646" start_bearing = "-175.58209" end_bearing = "-177.13759" description = "" />
+	<segment id="6774984" start="0" end="3" time = "8.277423" name = " (A2) " distance = "275.9141" turn = "Keep right" turn_angle = "8.29628" lanes = "[0, 0, 1]" start_bearing = "164.05461" end_bearing = "164.55247" description = "Keep right[0, 0, 1] and go 675.00 meters" />
+	<segment id="6774985" start="0" end="1" time = "1.1368768" name = " (A2) " distance = "37.895893" start_bearing = "166.94069" end_bearing = "166.94069" description = "" />
+	<segment id="6774979" start="0" end="1" time = "0.96351945" name = " (A2) " distance = "32.117313" start_bearing = "168.36636" end_bearing = "168.36636" description = "" />
+	<segment id="6774821" start="0" end="5" time = "9.872207" name = " (A2) " distance = "329.07355" start_bearing = "170.36246" end_bearing = "176.13081" description = "" />
+	<segment id="6774821" start="5" end="8" time = "10.706974" name = " (A2) " distance = "356.8991" turn = "Keep left" turn_angle = "5.017029" lanes = "[1, 0]" start_bearing = "-178.85216" end_bearing = "-174.92787" description = "Keep left[1, 0] and go 478.32 meters" />
+	<segment id="6775289" start="0" end="1" time = "0.4754576" name = " (A2) " distance = "15.848586" start_bearing = "-175.12073" end_bearing = "-175.12073" description = "" />
+	<segment id="6775286" start="0" end="1" time = "1.9916139" name = " (A2) " distance = "66.38713" start_bearing = "-174.54448" end_bearing = "-174.54448" description = "" />
+	<segment id="6775315" start="0" end="1" time = "1.175504" name = " (A2) " distance = "39.183464" start_bearing = "-176.40643" end_bearing = "-176.40643" description = "" />
+	<segment id="6775263" start="0" end="1" time = "14.832899" name = " (A2) " distance = "494.42993" turn = "Keep left" turn_angle = "0.9855652" lanes = "[1, 0]" start_bearing = "-175.42087" end_bearing = "-175.42087" description = "Keep left[1, 0] and go 1326.35 meters" />
+	<segment id="6775253" start="0" end="4" time = "15.464679" name = " (A2) " distance = "515.48926" start_bearing = "-175.13548" end_bearing = "179.25352" description = "" />
 	<segment id="6775293" start="0" end="3" time = "8.217698" name = " (A2) " distance = "273.92325" start_bearing = "178.83086" end_bearing = "173.03853" description = "" />
 	<segment id="80503748" start="0" end="1" time = "1.2753391" name = " (A2) " distance = "42.511303" start_bearing = "172.01514" end_bearing = "172.01514" description = "" />
-	<segment id="80503746" start="0" end="5" time = "20.195436" name = " (A2) " distance = "673.1812" turn = "Keep left" turn_angle = "-3.4476776" lanes = "[1, 1, 0]" start_bearing = "168.56746" end_bearing = "174.3032" description = "Keep left[1, 1, 0] and go 1875.95 meters (*)" />
+	<segment id="80503746" start="0" end="5" time = "20.195436" name = " (A2) " distance = "673.1812" turn = "Keep left" turn_angle = "-3.4476776" lanes = "[1, 1, 0]" start_bearing = "168.56746" end_bearing = "174.3032" description = "Keep left[1, 1, 0] and go 2945.10 meters (*)" />
 	<segment id="6775303" start="0" end="1" time = "2.5965672" name = " (A2) " distance = "86.55224" start_bearing = "177.13136" end_bearing = "177.13136" description = "" />
 	<segment id="6773089" start="0" end="5" time = "14.480419" name = " (A2) " distance = "482.68063" start_bearing = "177.7094" end_bearing = "-171.79578" description = "" />
 	<segment id="6773086" start="0" end="1" time = "0.97906727" name = " (A2) " distance = "32.635574" start_bearing = "-170.75389" end_bearing = "-170.75389" description = "" />
 	<segment id="6777666" start="0" end="7" time = "18.026918" name = " (A2) " distance = "600.8972" start_bearing = "-169.69516" end_bearing = "-160.51387" description = "" />
-	<segment id="6777666" start="7" end="8" time = "2.2491179" name = " (A2) " distance = "74.9706" turn = "Keep left" turn_angle = "1.9710846" lanes = "[1, 1, 0]" start_bearing = "-158.54279" end_bearing = "-158.54279" description = "Keep left[1, 1, 0] and go 1069.15 meters (*)" />
+	<segment id="6777666" start="7" end="8" time = "2.2491179" name = " (A2) " distance = "74.9706" start_bearing = "-158.54279" end_bearing = "-158.54279" description = "" />
 	<segment id="163556624" start="0" end="1" time = "0.64583343" name = " (A2) " distance = "21.527779" start_bearing = "-157.61986" end_bearing = "-157.61986" description = "" />
 	<segment id="163556988" start="0" end="5" time = "18.745827" name = " (A2) " distance = "624.86084" start_bearing = "-155.4445" end_bearing = "-149.23146" description = "" />
 	<segment id="6777681" start="0" end="1" time = "1.31523" name = " (A2) " distance = "43.841" start_bearing = "-148.86969" end_bearing = "-148.86969" description = "" />
@@ -371,20 +383,21 @@
 	<segment id="7125104" start="0" end="1" time = "0.87968373" name = " (A2) " distance = "21.992092" start_bearing = "-140.5722" end_bearing = "-140.5722" description = "" />
 	<segment id="132365571" start="0" end="5" time = "26.710241" name = " (A2) " distance = "519.3658" start_bearing = "-141.59787" end_bearing = "-145.58632" description = "" />
 	<segment id="7125108" start="0" end="1" time = "3.795417" name = " (A2) " distance = "52.714127" start_bearing = "-143.29416" end_bearing = "-143.29416" description = "" />
-	<segment id="74176013" start="0" end="5" time = "48.209896" name = "Viaductweg" distance = "252.9152" turn = "Turn right" turn_angle = "82.28676" start_bearing = "-61.007404" end_bearing = "-68.404686" description = "Turn right and go 557.98 meters" />
-	<segment id="7125080" start="0" end="3" time = "22.315641" name = "Viaductweg" distance = "132.08797" start_bearing = "-69.443954" end_bearing = "-67.22757" description = "" />
+	<segment id="74176013" start="0" end="5" time = "68.20989" name = "Viaductweg" distance = "252.9152" turn = "Turn right" turn_angle = "82.28676" start_bearing = "-61.007404" end_bearing = "-68.404686" description = "Turn right and go 724.83 meters" />
+	<segment id="7125080" start="0" end="3" time = "32.31564" name = "Viaductweg" distance = "132.08797" start_bearing = "-69.443954" end_bearing = "-67.22757" description = "" />
 	<segment id="7126430" start="0" end="1" time = "1.6430479" name = "Viaductweg" distance = "29.666143" start_bearing = "-65.46227" end_bearing = "-65.46227" description = "" />
 	<segment id="7126427" start="0" end="6" time = "10.318509" name = "Viaductweg" distance = "143.31262" start_bearing = "-65.64201" end_bearing = "-83.198685" description = "" />
-	<segment id="7126427" start="6" end="13" time = "12.012888" name = "Viaductweg" distance = "166.84567" turn = "Keep left" turn_angle = "-1.0907211" start_bearing = "-84.289406" end_bearing = "-97.0165" description = "Keep left and go 166.85 meters (*)" />
-	<segment id="7126424" start="0" end="1" time = "16.031185" name = "" distance = "12.889814" turn = "Turn left" turn_angle = "-91.472435" start_bearing = "171.51106" end_bearing = "171.51106" description = "Turn left and go 561.36 meters" />
-	<segment id="102699301" start="0" end="5" time = "18.381628" name = "Franciscus Romanusweg" distance = "46.967056" start_bearing = "171.8699" end_bearing = "-159.22775" description = "" />
+	<segment id="7126427" start="6" end="13" time = "12.012888" name = "Viaductweg" distance = "166.84567" start_bearing = "-84.289406" end_bearing = "-97.0165" description = "" />
+	<segment id="7126424" start="0" end="1" time = "26.031185" name = "" distance = "12.889814" turn = "Turn left" turn_angle = "-91.472435" start_bearing = "171.51106" end_bearing = "171.51106" description = "Turn left and go 872.82 meters" />
+	<segment id="102699301" start="0" end="5" time = "28.381628" name = "Franciscus Romanusweg" distance = "46.967056" start_bearing = "171.8699" end_bearing = "-159.22775" description = "" />
 	<segment id="144552858" start="10" end="0" time = "14.33854" name = "Franciscus Romanusweg" distance = "199.1464" start_bearing = "-123.69007" end_bearing = "-95.59934" description = "" />
-	<segment id="32102945" start="7" end="0" time = "22.397062" name = "Franciscus Romanusweg" distance = "102.73698" start_bearing = "-94.76364" end_bearing = "-134.44374" description = "" />
+	<segment id="32102945" start="7" end="0" time = "32.39706" name = "Franciscus Romanusweg" distance = "102.73698" start_bearing = "-94.76364" end_bearing = "-134.44374" description = "" />
 	<segment id="7126419" start="18" end="4" time = "14.372538" name = "Franciscus Romanusweg" distance = "199.61858" start_bearing = "-135.0" end_bearing = "171.8699" description = "" />
-	<segment id="7126419" start="4" end="0" time = "14.157407" name = "Franciscus Romanusweg" distance = "196.63066" turn = "Keep left" turn_angle = "-0.07077026" start_bearing = "171.79913" end_bearing = "171.17232" description = "Keep left and go 196.63 meters (*)" />
-	<segment id="7126340" start="3" end="0" time = "11.169105" name = "Antonius Bieleveltstraat" distance = "108.58852" turn = "Turn left" turn_angle = "-97.285736" start_bearing = "73.88658" end_bearing = "136.25446" description = "Turn left and go 108.59 meters" />
-	<segment id="7126350" start="6" end="0" time = "11.346093" name = "Schildersplein" distance = "110.30924" turn = "Turn right" turn_angle = "90.667496" start_bearing = "-133.07805" end_bearing = "135.0" description = "Turn right and go 157.22 meters" />
-	<segment id="7126313" start="1" end="0" time = "4.8251657" name = "Valentijn Clotsstraat" distance = "46.91133" start_bearing = "132.89091" end_bearing = "132.89091" description = "" />
+	<segment id="7126419" start="4" end="0" time = "14.157407" name = "Franciscus Romanusweg" distance = "196.63066" start_bearing = "171.79913" end_bearing = "171.17232" description = "" />
+	<segment id="7126414" start="1" end="0" time = "1.3585912" name = "Franciscus Romanusweg" distance = "22.643187" start_bearing = "175.156" end_bearing = "175.156" description = "" />
+	<segment id="7126200" start="0" end="4" time = "6.637338" name = "Franciscus Romanusweg" distance = "92.18526" start_bearing = "178.2643" end_bearing = "-169.38034" description = "" />
+	<segment id="7126312" start="0" end="4" time = "11.829202" name = "Karel de Vogelstraat" distance = "115.00613" turn = "Turn left" turn_angle = "-90.10545" start_bearing = "100.514206" end_bearing = "35.387886" description = "Turn left and go 115.01 meters" />
+	<segment id="7126313" start="1" end="0" time = "4.8251657" name = "Valentijn Clotsstraat" distance = "46.91133" turn = "Turn right" turn_angle = "97.50303" start_bearing = "132.89091" end_bearing = "132.89091" description = "Turn right and go 46.91 meters" />
 	<segment id="7126355" start="4" end="0" time = "5.2888374" name = "Gebroeders Hermansstraat" distance = "51.419254" turn = "Turn left" turn_angle = "-81.665085" start_bearing = "51.22583" end_bearing = "136.49434" description = "Turn left and go 51.42 meters" />
 	<segment id="7126356" start="3" end="2" time = "0.0" name = "" distance = "0.0" turn = "Turn right" turn_angle = "81.091034" start_bearing = "-142.41463" end_bearing = "-140.19443" description = "Turn right and go 0.00 meters" />
 </test>

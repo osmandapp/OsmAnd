@@ -8,7 +8,7 @@
 	<!-- by default 16 -->
 	<attribute name="zoomToLoadTiles" value="16" />
 	<!--  by default it is 15  -->
-	<attribute name="memoryLimitInMB" value="50" />
+	<attribute name="memoryLimitInMB" value="30" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
 	<attribute name="useDynamicRoadPrioritising" value="true" />
