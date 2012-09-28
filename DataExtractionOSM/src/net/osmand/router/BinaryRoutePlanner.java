@@ -181,7 +181,7 @@ public class BinaryRoutePlanner {
 		}
 		if (RoutingContext.SHOW_GC_SIZE) {
 			int sz = ctx.global.size;
-			System.out.println("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.tiles.size());
+			log.warn("Subregion size " + ctx.subregionTiles.size() + " " + " tiles " + ctx.indexedSubregions.size());
 			ctx.runGCUsedMemory();
 			long h1 = ctx.runGCUsedMemory();
 			ctx.unloadAllData();

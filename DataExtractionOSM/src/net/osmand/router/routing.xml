@@ -5,8 +5,7 @@
 	<attribute name="heuristicCoefficient" value="1.0" />
 
 	<!-- 1.1 tile load parameters (should not affect routing) -->
-	<!-- by default 13 -->
-	<!-- OPTIMAL -->
+	<!-- by default 16 -->
 	<attribute name="zoomToLoadTiles" value="16" />
 	<!--  by default it is 15  -->
 	<attribute name="memoryLimitInMB" value="50" />

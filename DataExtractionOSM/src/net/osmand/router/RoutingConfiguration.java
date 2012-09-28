@@ -24,7 +24,7 @@ public class RoutingConfiguration {
 	
 
 	// 1.1 tile load parameters (should not affect routing)
-	public int ZOOM_TO_LOAD_TILES = 13; // 12?, 14?
+	public int ZOOM_TO_LOAD_TILES = 16;
 	public int memoryLimitation;
 
 	// 1.2 Dynamic road prioritizing (heuristic)
