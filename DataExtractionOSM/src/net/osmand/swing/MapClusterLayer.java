@@ -119,12 +119,11 @@ public class MapClusterLayer implements MapPanelLayer {
 				rs.add(new BinaryMapIndexReader(raf));
 			}
 		}
-		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeSwingRendering.getDefaultFromSettings(),
-				rs.toArray(new BinaryMapIndexReader[rs.size()]));
+		BinaryRoutePlanner router = new BinaryRoutePlanner();
 		Builder builder = RoutingConfiguration.getDefault();
-		RoutingConfiguration config = builder.build("car");
-		config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
-		RoutingContext ctx = new RoutingContext(config);
+		RoutingConfiguration config = builder.build("car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3);
+		RoutingContext ctx = new RoutingContext(config, NativeSwingRendering.getDefaultFromSettings(),
+				rs.toArray(new BinaryMapIndexReader[rs.size()]));
 		// find closest way
 		RouteSegment st = router.findRouteSegment(lat, lon, ctx);
 		if (st != null) {
@@ -174,7 +173,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			}
 
 		});
-		List<RouteSegment> results = searchCluster(ctx, st, router);
+		List<RouteSegment> results = searchCluster(ctx, st);
 		return results;
 	}
 	
@@ -187,7 +186,7 @@ public class MapClusterLayer implements MapPanelLayer {
 	}
 	
 	
-	private List<RouteSegment> searchCluster(RoutingContext ctx, RouteSegment st, BinaryRoutePlanner router) throws IOException {
+	private List<RouteSegment> searchCluster(RoutingContext ctx, RouteSegment st) throws IOException {
 		Queue<List<RouteSegment>> queue  = new LinkedList<List<RouteSegment>>();
 		List<RouteSegment> result = new ArrayList<BinaryRoutePlanner.RouteSegment>();
 		TLongHashSet visitedIds = new TLongHashSet();
@@ -265,9 +264,7 @@ public class MapClusterLayer implements MapPanelLayer {
 
 				int x = road.getPoint31XTile(segmentEnd);
 				int y = road.getPoint31YTile(segmentEnd);
-				router.loadRoutes(ctx, x, y);
-				long l = (((long) x) << 31) + (long) y;
-				RouteSegment next = ctx.getRoutingTile(x, y).getSegment(l, ctx);
+				RouteSegment next = ctx.loadRouteSegment(x, y, 0);
 				RouteSegment toAdd = segment;
 				if (!onTheMap.contains(toAdd.getRoad().getId())) {
 					onTheMap.add(toAdd.getRoad().getId());

@@ -39,7 +39,6 @@ import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.osmand.router.Interruptable;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -147,29 +146,25 @@ public class RouteProvider {
 	
 	
 
-	public RouteCalculationResult calculateRouteImpl(Location start, LatLon end, List<LatLon> intermediates, ApplicationMode mode, RouteService type, Context ctx,
-			GPXRouteParams gpxRoute, RouteCalculationResult previousToRecalculate, boolean fast, boolean leftSide, Interruptable interruptable){
+	public RouteCalculationResult calculateRouteImpl(RouteCalcuationParams params){
 		long time = System.currentTimeMillis();
-		if (start != null && end != null) {
+		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
-				log.info("Start finding route from " + start + " to " + end +" using " + type.getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
+						params.type.getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
 				RouteCalculationResult res;
-				if(gpxRoute != null && !gpxRoute.points.isEmpty()){
-					res = calculateGpxRoute(start, end, gpxRoute, ctx, leftSide);
-				} else if (type == RouteService.YOURS) {
-					res = findYOURSRoute(start, end, mode, fast, ctx, leftSide);
-				} else if (type == RouteService.ORS) {
-					res = findORSRoute(start, end, mode, fast, ctx, leftSide);
-				} else if (type == RouteService.OSMAND) {
-					List<RouteSegmentResult> originalRoute = null;
-					if(previousToRecalculate != null) {
-						originalRoute = previousToRecalculate.getOriginalRoute();
-					}
-					res = findVectorMapsRoute(start, end, intermediates, mode, (OsmandApplication)ctx.getApplicationContext(), originalRoute, leftSide, interruptable);
+				if(params.gpxRoute != null && !params.gpxRoute.points.isEmpty()){
+					res = calculateGpxRoute(params);
+				} else if (params.type == RouteService.YOURS) {
+					res = findYOURSRoute(params);
+				} else if (params.type == RouteService.ORS) {
+					res = findORSRoute(params);
+				} else if (params.type == RouteService.OSMAND) {
+					res = findVectorMapsRoute(params);
 				} else {
-					res = findCloudMadeRoute(start, end, intermediates, mode, ctx, fast, leftSide);
+					res = findCloudMadeRoute(params);
 				}
 				if(log.isInfoEnabled() ){
 					log.info("Finding route contained " + res.getImmutableLocations().size() + " points for " + (System.currentTimeMillis() - time) + " ms"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -186,27 +181,29 @@ public class RouteProvider {
 		return new RouteCalculationResult(null);
 	}
 
-	private RouteCalculationResult calculateGpxRoute(Location start, LatLon end, GPXRouteParams params, Context ctx, boolean leftSide) {
+
+	private RouteCalculationResult calculateGpxRoute(RouteCalcuationParams pars) {
 		RouteCalculationResult res;
 		// get the closest point to start and to end
 		float minDist = Integer.MAX_VALUE;
 		int startI = 0;
+		GPXRouteParams params = pars.gpxRoute;
 		List<Location> gpxRoute = params.points;
 		int endI = gpxRoute.size(); 
-		if (start != null) {
+		if (pars.start != null) {
 			for (int i = 0; i < gpxRoute.size(); i++) {
-				float d = gpxRoute.get(i).distanceTo(start);
+				float d = gpxRoute.get(i).distanceTo(pars.start);
 				if (d < minDist) {
 					startI = i;
 					minDist = d;
 				}
 			}
 		} else {
-			start = gpxRoute.get(0);
+			pars.start = gpxRoute.get(0);
 		}
 		Location l = new Location("temp"); //$NON-NLS-1$
-		l.setLatitude(end.getLatitude());
-		l.setLongitude(end.getLongitude());
+		l.setLatitude(pars.end.getLatitude());
+		l.setLongitude(pars.end.getLongitude());
 		minDist = Integer.MAX_VALUE;
 		// get in reverse order taking into account ways with cycle
 		for (int i = gpxRoute.size() - 1; i >= startI; i--) {
@@ -219,7 +216,8 @@ public class RouteProvider {
 		}
 		ArrayList<Location> sublist = new ArrayList<Location>(gpxRoute.subList(startI, endI));
 		if(params.directions == null){
-			res = new RouteCalculationResult(sublist, params.directions, start, end, null, null, ctx, leftSide, true);
+			res = new RouteCalculationResult(sublist, params.directions, pars.start, pars.end, null, null, 
+					pars.ctx, pars.leftSide, true);
 		} else {
 			List<RouteDirectionInfo> subdirections = new ArrayList<RouteDirectionInfo>();
 			for (RouteDirectionInfo info : params.directions) {
@@ -234,7 +232,8 @@ public class RouteProvider {
 					subdirections.add(ch);
 				}
 			}
-			res = new RouteCalculationResult(sublist, subdirections, start, end, null, null, ctx, leftSide, true);
+			res = new RouteCalculationResult(sublist, subdirections, pars.start, pars.end, null, null, 
+					pars.ctx, pars.leftSide, true);
 		}
 		return res;
 	}
@@ -249,23 +248,23 @@ public class RouteProvider {
 	
 
 
-	protected RouteCalculationResult findYOURSRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, Context ctx, boolean leftSide) throws MalformedURLException, IOException,
+	protected RouteCalculationResult findYOURSRoute(RouteCalcuationParams params) throws MalformedURLException, IOException,
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
 		uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
-		uri.append("&flat=").append(start.getLatitude()); //$NON-NLS-1$
-		uri.append("&flon=").append(start.getLongitude()); //$NON-NLS-1$
-		uri.append("&tlat=").append(end.getLatitude()); //$NON-NLS-1$
-		uri.append("&tlon=").append(end.getLongitude()); //$NON-NLS-1$
-		if(ApplicationMode.PEDESTRIAN == mode){
+		uri.append("&flat=").append(params.start.getLatitude()); //$NON-NLS-1$
+		uri.append("&flon=").append(params.start.getLongitude()); //$NON-NLS-1$
+		uri.append("&tlat=").append(params.end.getLatitude()); //$NON-NLS-1$
+		uri.append("&tlon=").append(params.end.getLongitude()); //$NON-NLS-1$
+		if(ApplicationMode.PEDESTRIAN == params.mode){
 			uri.append("&v=foot") ; //$NON-NLS-1$
-		} else if(ApplicationMode.BICYCLE == mode){
+		} else if(ApplicationMode.BICYCLE == params.mode){
 			uri.append("&v=bicycle") ; //$NON-NLS-1$
 		} else {
 			uri.append("&v=motorcar"); //$NON-NLS-1$
 		}
-		uri.append("&fast=").append(fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		uri.append("&fast=").append(params.fast ? "1" : "0").append("&layer=mapnik"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
@@ -304,14 +303,14 @@ public class RouteProvider {
 				
 			}
 		}
-		return new RouteCalculationResult(res, null, start, end, null, null, ctx, leftSide, true);
+		return new RouteCalculationResult(res, null, params.start, params.end, null, null,
+				params.ctx, params.leftSide, true);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(Location start, LatLon end, List<LatLon> intermediates, ApplicationMode mode, OsmandApplication app,
-			List<RouteSegmentResult> previousRoute,
-			boolean leftSide, Interruptable interruptable) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(RouteCalcuationParams params) throws IOException {
+		OsmandApplication app = (OsmandApplication) params.ctx.getApplicationContext();
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
-		BinaryRoutePlanner router = new BinaryRoutePlanner(NativeOsmandLibrary.getLoadedLibrary(), files);
+		BinaryRoutePlanner router = new BinaryRoutePlanner();
 		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
 		RoutingConfiguration.Builder config ;
 		if (routingXml.exists() && routingXml.canRead()) {
@@ -325,9 +324,9 @@ public class RouteProvider {
 		}
 		
 		GeneralRouterProfile p ;
-		if (mode == ApplicationMode.BICYCLE) {
+		if (params.mode == ApplicationMode.BICYCLE) {
 			p = GeneralRouterProfile.BICYCLE;
-		} else if (mode == ApplicationMode.PEDESTRIAN) {
+		} else if (params.mode == ApplicationMode.PEDESTRIAN) {
 			p = GeneralRouterProfile.PEDESTRIAN;
 		} else {
 			p = GeneralRouterProfile.CAR;
@@ -349,21 +348,36 @@ public class RouteProvider {
 			specs.add(GeneralRouter.AVOID_UNPAVED);
 		}
 		String[] specialization = specs.toArray(new String[specs.size()]);
-		RoutingContext ctx = new RoutingContext(config.build(p.name().toLowerCase(), start.hasBearing() ?  start.getBearing() / 180d * Math.PI : null, specialization));
-		ctx.interruptable = interruptable;
-		ctx.previouslyCalculatedRoute = previousRoute;
-		RouteSegment st= router.findRouteSegment(start.getLatitude(), start.getLongitude(), ctx);
+		float mb = (1 << 20);
+		Runtime rt = Runtime.getRuntime();
+		// make visible
+		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
+		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
+		
+		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
+				params.start.getBearing() / 180d * Math.PI : null, 
+				memoryLimit, specialization);
+		if(!params.optimal){
+			cf.heuristicCoefficient *= 1.5;
+		}
+		RoutingContext ctx = new RoutingContext(cf, NativeOsmandLibrary.getLoadedLibrary(), files);
+		ctx.interruptable = params.interruptable;
+		if(params.previousToRecalculate != null) {
+			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
+		}
+		RouteSegment st= router.findRouteSegment(params.start.getLatitude(), params.start.getLongitude(), ctx);
 		if (st == null) {
 			return new RouteCalculationResult(app.getString(R.string.starting_point_too_far));
 		}
-		RouteSegment en = router.findRouteSegment(end.getLatitude(), end.getLongitude(), ctx);
+		RouteSegment en = router.findRouteSegment(params.end.getLatitude(), 
+				params.end.getLongitude(), ctx);
 		if (en == null) {
 			return new RouteCalculationResult(app.getString(R.string.ending_point_too_far));
 		}
 		List<RouteSegment> inters  = new ArrayList<BinaryRoutePlanner.RouteSegment>();
-		if (intermediates != null) {
+		if (params.intermediates != null) {
 			int ind = 1;
-			for (LatLon il : intermediates) {
+			for (LatLon il : params.intermediates) {
 				RouteSegment is = router.findRouteSegment(il.getLatitude(), il.getLongitude(), ctx);
 				if (is == null) {
 					return new RouteCalculationResult(app.getString(R.string.intermediate_point_too_far, "'" + ind + "'"));
@@ -375,16 +389,19 @@ public class RouteProvider {
 		try {
 			List<RouteSegmentResult> result; 
 			if(inters.size() > 0){
-				result = router.searchRoute(ctx, st, en, inters, leftSide);
+				result = router.searchRoute(ctx, st, en, inters, params.leftSide);
 			} else {
-				result = router.searchRoute(ctx, st, en, leftSide);
+				result = router.searchRoute(ctx, st, en, params.leftSide);
 			}
 			if(result == null || result.isEmpty()) {
 				// something really strange better to see that message on the scren
 				return new RouteCalculationResult("Empty result");
 			} else {
-				return new RouteCalculationResult(result, start, end, intermediates, app, leftSide);
+				return new RouteCalculationResult(result, params.start, params.end, 
+						params.intermediates, app, params.leftSide);
 			}
+		} catch (InterruptedException e) {
+			return new RouteCalculationResult("Route calculation was interrupted");
 		} catch (OutOfMemoryError e) {
 //			ActivityManager activityManager = (ActivityManager)app.getSystemService(Context.ACTIVITY_SERVICE);
 //			ActivityManager.MemoryInfo memoryInfo = new ActivityManager.MemoryInfo();
@@ -398,19 +415,19 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(Location start, LatLon end, List<LatLon> intermediates, ApplicationMode mode, Context ctx, boolean fast, boolean leftSide)
+	protected RouteCalculationResult findCloudMadeRoute(RouteCalcuationParams params)
 			throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
 		StringBuilder uri = new StringBuilder();
 		// possibly hide that API key because it is privacy of osmand
 		uri.append("http://routes.cloudmade.com/A6421860EBB04234AB5EF2D049F2CD8F/api/0.3/"); //$NON-NLS-1$
-		uri.append(start.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-		uri.append(start.getLongitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
-		if(intermediates != null && intermediates.size() > 0) {
+		uri.append(params.start.getLatitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
+		uri.append(params.start.getLongitude() + "").append(","); //$NON-NLS-1$ //$NON-NLS-2$
+		if(params.intermediates != null && params.intermediates.size() > 0) {
 			uri.append("[");
 			boolean first = true;
-			for(LatLon il : intermediates) {
+			for(LatLon il : params.intermediates) {
 				if(!first){
 					uri.append(",");
 				} else {
@@ -421,18 +438,18 @@ public class RouteProvider {
 			}
 			uri.append("],");
 		}
-		uri.append(end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
-		uri.append(end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
+		uri.append(params.end.getLatitude() + "").append(","); //$NON-NLS-1$//$NON-NLS-2$
+		uri.append(params.end.getLongitude() + "").append("/"); //$NON-NLS-1$ //$NON-NLS-2$
 
 		float speed = 1.5f;
-		if (ApplicationMode.PEDESTRIAN == mode) {
+		if (ApplicationMode.PEDESTRIAN == params.mode) {
 			uri.append("foot.gpx"); //$NON-NLS-1$
-		} else if (ApplicationMode.BICYCLE == mode) {
+		} else if (ApplicationMode.BICYCLE == params.mode) {
 			speed = 5.5f;
 			uri.append("bicycle.gpx"); //$NON-NLS-1$
 		} else {
 			speed = 15.3f;
-			if (fast) {
+			if (params.fast) {
 				uri.append("car.gpx"); //$NON-NLS-1$
 			} else {
 				uri.append("car/shortest.gpx"); //$NON-NLS-1$
@@ -442,10 +459,11 @@ public class RouteProvider {
 		log.info("URL route " + uri);
 		URL url = new URL(uri.toString());
 		URLConnection connection = url.openConnection();
-		GPXFile gpxFile = GPXUtilities.loadGPXFile(ctx, connection.getInputStream(), false);
-		directions = parseCloudmadeRoute(res, gpxFile, false, leftSide, speed);
+		GPXFile gpxFile = GPXUtilities.loadGPXFile(params.ctx, connection.getInputStream(), false);
+		directions = parseCloudmadeRoute(res, gpxFile, false, params.leftSide, speed);
 
-		return new RouteCalculationResult(res, directions, start, end, intermediates, null, ctx, leftSide, true);
+		return new RouteCalculationResult(res, directions, params.start, params.end, params.intermediates, 
+				null, params.ctx, params.leftSide, true);
 	}
 
 	private static List<RouteDirectionInfo> parseCloudmadeRoute(List<Location> res, GPXFile gpxFile, boolean osmandRouter,
@@ -564,15 +582,14 @@ public class RouteProvider {
 		return directions;
 	}
 	
-	protected RouteCalculationResult findORSRoute(Location start, LatLon end, ApplicationMode mode, boolean fast, Context ctx,
-			boolean leftSide) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
+	protected RouteCalculationResult findORSRoute(RouteCalcuationParams params) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
 			SAXException {
 		List<Location> res = new ArrayList<Location>();
 
 		String rpref = "Fastest";
-		if (ApplicationMode.PEDESTRIAN == mode) {
+		if (ApplicationMode.PEDESTRIAN == params.mode) {
 			rpref = "Pedestrian";
-		} else if (ApplicationMode.BICYCLE == mode) {
+		} else if (ApplicationMode.BICYCLE == params.mode) {
 			rpref = "Bicycle";
 			// } else if (ApplicationMode.LOWTRAFFIC == mode) {
 			// rpref = "BicycleSafety";
@@ -582,13 +599,13 @@ public class RouteProvider {
 			// rpref = "BicycleRoute";
 			// } else if (ApplicationMode.MTBIKE == mode) {
 			// rpref = "BicycleMTB";
-		} else if (!fast) {
+		} else if (!params.fast) {
 			rpref = "Shortest";
 		}
 
 		StringBuilder request = new StringBuilder();
-		request.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing?").append("start=").append(start.getLongitude()).append(',')
-				.append(start.getLatitude()).append("&end=").append(end.getLongitude()).append(',').append(end.getLatitude())
+		request.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing?").append("start=").append(params.start.getLongitude()).append(',')
+				.append(params.start.getLatitude()).append("&end=").append(params.end.getLongitude()).append(',').append(params.end.getLatitude())
 				.append("&preference=").append(rpref);
 		// TODO if we would get instructions from the service, we could use this language setting
 		// .append("&language=").append(Locale.getDefault().getLanguage());
@@ -624,7 +641,7 @@ public class RouteProvider {
 
 			}
 		}
-		return new RouteCalculationResult(res, null, start, end, null, null, ctx, leftSide, true);
+		return new RouteCalculationResult(res, null, params.start, params.end, null, null, params.ctx, params.leftSide, true);
 	}
 	
 	public GPXFile createOsmandRouterGPX(RouteCalculationResult srcRoute){

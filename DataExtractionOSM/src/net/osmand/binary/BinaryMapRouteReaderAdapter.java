@@ -13,6 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.LogUtil;
+import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.OsmandOdb.IdTable;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
@@ -154,7 +155,7 @@ public class BinaryMapRouteReaderAdapter {
 	}
 	
 	public static class RouteRegion extends BinaryIndexPart {
-		int regionsRead;
+		public int regionsRead;
 		
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
@@ -214,6 +215,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 	
+	// Used in C++
 	public static class RouteSubregion {
 		private final static int INT_SIZE = 4;
 		public final RouteRegion routeReg;
@@ -249,6 +251,16 @@ public class BinaryMapRouteReaderAdapter {
 				}
 			}
 			return shallow;
+		}
+		
+		public int countSubregions(){
+			int cnt = 1;
+			if (subregions != null) {
+				for (RouteSubregion s : subregions) {
+					cnt += s.countSubregions();
+				}
+			}
+			return cnt;
 		}
 	}
 	
@@ -576,6 +588,11 @@ public class BinaryMapRouteReaderAdapter {
 				break;
 			case RouteDataBox.SHIFTTODATA_FIELD_NUMBER :
 				thisTree.shiftToData = readInt();
+				if(!readChildren) {
+					// usually 0
+					thisTree.subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
+					readChildren = true;
+				}
 				break;
 			case RouteDataBox.BOXES_FIELD_NUMBER :
 				if(readChildren){
@@ -617,12 +634,25 @@ public class BinaryMapRouteReaderAdapter {
 				}
 			}
 		}
-		
+	}
+
+	
+	public List<RouteDataObject> loadRouteRegionData(RouteSubregion rs) throws IOException {
+		TLongArrayList idMap = new TLongArrayList();
+		TLongObjectHashMap<TLongArrayList> restrictionMap = new TLongObjectHashMap<TLongArrayList>();
+		if (rs.dataObjects == null) {
+			codedIS.seek(rs.filePointer + rs.shiftToData);
+			int limit = codedIS.readRawVarint32();
+			int oldLimit = codedIS.pushLimit(limit);
+			readRouteTreeData(rs, idMap, restrictionMap);
+			codedIS.popLimit(oldLimit);
+		}
+		List<RouteDataObject> res = rs.dataObjects;
+		rs.dataObjects = null;
+		return res;
 	}
 	
-	public void searchRouteRegion(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
-		List<RouteSubregion> toLoad = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
-		searchRouteRegion(req, list, toLoad);
+	public void loadRouteRegionData(List<RouteSubregion> toLoad, ResultMatcher<RouteDataObject> matcher) throws IOException {
 		Collections.sort(toLoad, new Comparator<RouteSubregion>() {
 			@Override
 			public int compare(RouteSubregion o1, RouteSubregion o2) {
@@ -643,7 +673,7 @@ public class BinaryMapRouteReaderAdapter {
 			}
 			for (RouteDataObject ro : rs.dataObjects) {
 				if (ro != null) {
-					req.publish(ro);
+					matcher.publish(ro);
 				}
 			}
 			// free objects
@@ -651,8 +681,9 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 
-	private void searchRouteRegion(SearchRequest<RouteDataObject> req, List<RouteSubregion> list, List<RouteSubregion> toLoad) throws IOException {
-		for(RouteSubregion rs : list){
+	public List<RouteSubregion> searchRouteRegionTree(SearchRequest<RouteDataObject> req, List<RouteSubregion> list, 
+			List<RouteSubregion> toLoad) throws IOException {
+		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
 				if (rs.subregions == null) {
 					codedIS.seek(rs.filePointer);
@@ -660,13 +691,14 @@ public class BinaryMapRouteReaderAdapter {
 					readRouteTree(rs, null, req.contains(rs.left, rs.top, rs.right, rs.bottom) ? -1 : 1, false);
 					codedIS.popLimit(old);
 				}
-				searchRouteRegion(req, rs.subregions, toLoad);
+				searchRouteRegionTree(req, rs.subregions, toLoad);
 
 				if (rs.shiftToData != 0) {
 					toLoad.add(rs);
 				}
 			}
 		}
+		return toLoad;
 	}
 	
 }

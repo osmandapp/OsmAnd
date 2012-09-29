@@ -19,12 +19,13 @@ public class RoutingConfiguration {
 	// 1. parameters of routing and different tweaks
 	// Influence on A* : f(x) + heuristicCoefficient*g(X)
 	public double heuristicCoefficient = 1;
+	
+	public static final int DEFAULT_MEMORY_LIMIT = 30;
+	
 
 	// 1.1 tile load parameters (should not affect routing)
-	public int ZOOM_TO_LOAD_TILES = 13; // 12?, 14?
-	public int ITERATIONS_TO_RUN_GC = 100;
-	public static int DEFAULT_DESIRABLE_TILES_IN_MEMORY = 30;  
-	public int NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = DEFAULT_DESIRABLE_TILES_IN_MEMORY;
+	public int ZOOM_TO_LOAD_TILES = 16;
+	public int memoryLimitation;
 
 	// 1.2 Dynamic road prioritizing (heuristic)
 	public boolean useDynamicRoadPrioritising = true;
@@ -53,10 +54,10 @@ public class RoutingConfiguration {
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<String, GeneralRouter>();
 		private Map<String, String> attributes = new LinkedHashMap<String, String>();
 
-		public RoutingConfiguration build(String router, String... specialization) {
-			return build(router, null, specialization);
+		public RoutingConfiguration build(String router, int memoryLimitMB, String... specialization) {
+			return build(router, null, memoryLimitMB, specialization);
 		}
-		public RoutingConfiguration build(String router, Double direction, String... specialization) {
+		public RoutingConfiguration build(String router, Double direction, int memoryLimitMB, String... specialization) {
 			if (!routers.containsKey(router)) {
 				router = defaultRouter;
 			}
@@ -64,10 +65,15 @@ public class RoutingConfiguration {
 			i.initialDirection = direction;
 			i.heuristicCoefficient = parseSilentDouble(getAttribute(router, "heuristicCoefficient"), i.heuristicCoefficient);
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
-			i.ITERATIONS_TO_RUN_GC = parseSilentInt(getAttribute(router, "iterationsToRunGC"), i.ITERATIONS_TO_RUN_GC);
-			i.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = parseSilentInt(getAttribute(router, "desirableTilesInMemory"),
-					i.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY);
-
+			int desirable = parseSilentInt(getAttribute(router, "memoryLimitInMB"), 0);
+			if(desirable != 0) {
+				i.memoryLimitation = desirable * (1 << 20); 
+			} else {
+				if(memoryLimitMB == 0) {
+					memoryLimitMB = DEFAULT_MEMORY_LIMIT;
+				}
+				i.memoryLimitation = memoryLimitMB * (1 << 20);
+			}
 			i.useDynamicRoadPrioritising = parseSilentBoolean(getAttribute(router, "useDynamicRoadPrioritising"), i.useDynamicRoadPrioritising);
 			i.useRelaxingStrategy = parseSilentBoolean(getAttribute(router, "useRelaxingStrategy"), i.useRelaxingStrategy);
 			i.dynamicRoadPriorityDistance = parseSilentInt(getAttribute(router, "dynamicRoadPriorityDistance"), i.dynamicRoadPriorityDistance);

@@ -23,7 +23,7 @@ import org.xml.sax.SAXException;
 public class JUnitRouteTest  {
 
 	static BinaryMapIndexReader[]  rs;
-	private NativeSwingRendering lib;
+	static NativeSwingRendering lib;
 	@Before
 	public void setupFiles() throws IOException {
 		if(rs != null){
@@ -51,27 +51,27 @@ public class JUnitRouteTest  {
 	}
 	
 	@Test
-	public void runCZ() throws SAXException, IOException, ParserConfigurationException {
+	public void runCZ() throws Exception {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("cz.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
 	@Test
-	public void runNL() throws SAXException, IOException, ParserConfigurationException {
+	public void runNL() throws Exception {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 
 	@Test
-	public void runNL2() throws SAXException, IOException, ParserConfigurationException {
+	public void runNL2() throws Exception {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl2.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
 	@Test
-	public void runNLLeid() throws SAXException, IOException, ParserConfigurationException {
+	public void runNLLeid() throws Exception {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("nl_leid.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	
 	@Test
-	public void runBLR() throws SAXException, IOException, ParserConfigurationException {
+	public void runBLR() throws Exception {
 		RouterTestsSuite.test(lib, getClass().getResourceAsStream("blr.test.xml"), rs, RoutingConfiguration.getDefault());
 	}
 	

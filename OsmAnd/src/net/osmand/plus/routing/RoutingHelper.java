@@ -254,8 +254,8 @@ public class RoutingHelper {
 		}
 
 		if (calculateRoute) {
-			recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute,
-					route.isCalculated()? route : null);
+			recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute, route.isCalculated() ? route
+					: null);
 		}
 		double projectDist = mode == ApplicationMode.CAR ? posTolerance : posTolerance / 2;
 		if(returnUpdatedLocation && locationProjection != null && currentLocation.distanceTo(locationProjection) < projectDist) {
@@ -569,26 +569,15 @@ public class RoutingHelper {
 	
 	private class RouteRecalculationThread extends Thread implements Interruptable {
 		
-		private final Location start;
-		private final LatLon end;
-		private final GPXRouteParams gpxRoute;
-		private final RouteCalculationResult previousRoute;
-		private RouteService service;
 		private boolean interrupted = false;
-		private final List<LatLon> intermediates;
+		private final RouteCalcuationParams params;
 
-		public RouteRecalculationThread(String name, 
-				Location start, LatLon end, List<LatLon> intermediates, GPXRouteParams gpxRoute, RouteCalculationResult previousRoute){
+		public RouteRecalculationThread(String name, RouteCalcuationParams params) {
 			super(name);
-			this.start = start;
-			this.end = end;
-			this.intermediates = intermediates;
-			this.gpxRoute = gpxRoute;
-			this.previousRoute = previousRoute;
-			service = settings.ROUTER_SERVICE.getModeValue(mode);
-			
+			this.params = params;
+			params.interruptable = this;
 		}
-		
+
 		public void stopCalculation(){
 			interrupted = true;
 		}
@@ -600,10 +589,8 @@ public class RoutingHelper {
 		
 		@Override
 		public void run() {
-			boolean leftSide = settings.LEFT_SIDE_NAVIGATION.get();
-			boolean fastRoute = settings.FAST_ROUTE_MODE.get();
-			RouteCalculationResult res = provider.calculateRouteImpl(start, end, intermediates, mode, service, app, gpxRoute, previousRoute, fastRoute, 
-					leftSide, this);
+			
+			RouteCalculationResult res = provider.calculateRouteImpl(params);
 			if (interrupted) {
 				currentRunningJob = null;
 				return;
@@ -611,7 +598,7 @@ public class RoutingHelper {
 			
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
-					setNewRoute(res, start);
+					setNewRoute(res, params.start);
 				} else {
 					evalWaitInterval = evalWaitInterval * 3 / 2;
 					evalWaitInterval = Math.min(evalWaitInterval, 120000);
@@ -622,7 +609,7 @@ public class RoutingHelper {
 			if (res.isCalculated()) {
 				showMessage(app.getString(R.string.new_route_calculated_dist)
 						+ ": " + OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app)); //$NON-NLS-1$
-			} else if (service != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
+			} else if (params.type != RouteService.OSMAND && !settings.isInternetConnectionAvailable()) {
 					showMessage(app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route), Toast.LENGTH_LONG); //$NON-NLS-1$
 			} else {
@@ -644,8 +631,20 @@ public class RoutingHelper {
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
+				RouteCalcuationParams params = new RouteCalcuationParams();
+				params.start = start;
+				params.end = end;
+				params.intermediates = intermediates;
+				params.gpxRoute = gpxRoute;
+				params.previousToRecalculate = previousRoute;
+				params.leftSide = settings.LEFT_SIDE_NAVIGATION.get();
+				params.optimal = settings.OPTIMAL_ROUTE_MODE.get();
+				params.fast = settings.FAST_ROUTE_MODE.get();
+				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
+				params.mode = mode;
+				params.ctx = app;
 				synchronized (this) {
-					currentRunningJob = new RouteRecalculationThread("Calculating route", start, end, intermediates, gpxRoute, previousRoute); //$NON-NLS-1$
+					currentRunningJob = new RouteRecalculationThread("Calculating route", params); //$NON-NLS-1$
 					currentRunningJob.start();
 				}
 			}

@@ -235,7 +235,11 @@ struct SearchQuery {
 		ocean = mixed = false;
 	}
 	SearchQuery(int l, int r, int t, int b) :
-				req(req), left(l), right(r), top(t), bottom(b) {
+				left(l), right(r), top(t), bottom(b) {
+	}
+
+	SearchQuery(){
+
 	}
 
 	bool publish(MapDataObject* obj) {
@@ -243,7 +247,7 @@ struct SearchQuery {
 	}
 };
 
-void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs = NULL);
+void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub);
 
 ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound);
 

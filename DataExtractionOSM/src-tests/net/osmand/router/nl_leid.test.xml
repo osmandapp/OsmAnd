@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 <test regions="" description="Amstelveen-Leiden" best_percent="5" vehicle="car" 
-            start_lat="52.291026337270445" start_lon="4.848833084106445" target_lat="52.16400849542039" target_lon="4.478881359100342" complete_time="1810.644" loadedTiles = "45" visitedSegments = "2512" complete_distance = "41994.66"  >
+            start_lat="52.291026337270445" start_lon="4.848833084106445" target_lat="52.16400849542039" target_lon="4.478881359100342" complete_time="1810.644" loadedTiles = "650" visitedSegments = "2512" complete_distance = "41994.66"  >
 	<segment id="48102635" start="9" end="17" time = "26.337616" name = "" distance = "365.80023" turn = "Go ahead" turn_angle = "0.0" start_bearing = "-80.22256" end_bearing = "-79.69515" description = "Go ahead and go 365.80 meters" />
 	<segment id="7364781" start="0" end="6" time = "64.496864" name = "Handweg" distance = "548.56757" turn = "Turn right" turn_angle = "87.82526" start_bearing = "8.130102" end_bearing = "9.901572" description = "Turn right and go 548.57 meters" />
 	<segment id="7364782" start="1" end="0" time = "26.062386" name = "Keizer Karelweg" distance = "14.755359" turn = "Turn right" turn_angle = "89.328316" start_bearing = "99.22989" end_bearing = "99.22989" description = "Turn right and go 917.26 meters" />

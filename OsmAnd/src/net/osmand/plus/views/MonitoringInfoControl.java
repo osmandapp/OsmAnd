@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
@@ -42,7 +43,11 @@ public class MonitoringInfoControl {
 		monitoringServices.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showBgServiceQAction(monitoringServices, view, map);
+				if(MonitoringInfoControl.this.monitoringServices.isEmpty()) {
+					Toast.makeText(view.getContext(), R.string.enable_plugin_monitoring_services, Toast.LENGTH_LONG).show();
+				} else {
+					showBgServiceQAction(monitoringServices, view, map);
+				}
 			}
 		});
 		return monitoringServices;
