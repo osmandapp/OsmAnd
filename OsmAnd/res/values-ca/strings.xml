@@ -66,7 +66,7 @@
 <string name="context_menu_item_add_parking_point">Marca com a posició d\\\'aparcament</string>
 <string name="context_menu_item_delete_parking_point">Suprimeix un marcador d\\\'aparcament</string>
 <string name="gpxup_identifiable">Identificable</string>
-<string name="route_roundabout">Rotonda: preneu la %1$a sortida i continueu</string>
+<string name="route_roundabout">Rotonda: preneu la %1$d sortida i continueu</string>
 <string name="rendering_attr_noPolygons_name">Sense polígons</string>
 <string name="rendering_attr_appMode_name">Mode de renderització</string>
 <string name="rendering_attr_contourLines_name">Mostra les línies de contorn</string>
