@@ -407,13 +407,14 @@ public class MapActivityActions implements DialogProvider {
     }
     
     
-	public void getDirections(final Location from, boolean gpxRouteEnabled) {
+	public void getDirections(final Location fromOrCurrent, final LatLon to, boolean gpxRouteEnabled) {
 
 		final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
+		final CheckBox optimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
@@ -426,11 +427,16 @@ public class MapActivityActions implements DialogProvider {
 			if (buttons[i] != null) {
 				final int ind = i;
 				ToggleButton b = buttons[i];
-				b.setChecked(appMode == ApplicationMode.values()[i]);
+				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
+				b.setChecked(appMode == buttonAppMode);
+				if(b.isChecked()) {
+					optimal.setChecked(settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
+				}
 				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
+							optimal.setChecked(settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
 									if (buttons[j].isChecked() != (ind == j)) {
@@ -461,8 +467,15 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(to != null) {
+					mapActivity.navigateToPoint(to, false, -1);
+				}
 				if (!checkPointToNavigate()) {
 					return;
+				}
+				Location from = fromOrCurrent;
+				if(from == null) {
+					from = mapActivity.getLastKnownLocation();
 				}
 				if (from == null) {
 					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
@@ -470,6 +483,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				routingHelper.setAppMode(mode);
+				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, optimal.isChecked());
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
@@ -481,12 +495,19 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener followCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(to != null) {
+					mapActivity.navigateToPoint(to, false, -1);
+				}
 				if (!checkPointToNavigate()) {
 					return;
 				}
 				boolean msg = true;
-				Location current = from;
-				if (!mapActivity.isPointAccurateForRouting(from)) {
+				Location current = fromOrCurrent;
+				if(current == null) {
+					current = mapActivity.getLastKnownLocation();
+				}
+				
+				if (!mapActivity.isPointAccurateForRouting(current)) {
 					current = null;
 				}
 				Location lastKnownLocation = mapActivity.getLastKnownLocation();
@@ -507,6 +528,9 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener useGpxNavigation = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				if(to != null) {
+					mapActivity.navigateToPoint(to, false, -1);
+				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				navigateUsingGPX(mode);
 			}
@@ -734,16 +758,14 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 				} else if (standardId == R.string.context_menu_item_directions) {
-					Location loc = mapActivity.getLastKnownLocation();
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), false, -1);
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
-					getDirections(loc, true);
+					getDirections(null, new LatLon(latitude, longitude), true);
 				} else if (standardId == R.string.context_menu_item_show_route) {
 					if (checkPointToNavigate()) {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
-						getDirections(loc, true);
+						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, mapActivity.getIntermediatePoints().size());
@@ -957,8 +979,7 @@ public class MapActivityActions implements DialogProvider {
 						if (routingHelper.isRouteCalculated()) {
 							aboutRoute();
 						} else {
-							Location loc = mapActivity.getLastKnownLocation();
-							getDirections(loc, true);
+							getDirections(null, null, true);
 						}
 						return true;
 					}

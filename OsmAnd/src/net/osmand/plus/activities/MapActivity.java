@@ -292,7 +292,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		Object toShow = settings.getAndClearObjectToShow();
 		if(settings.isRouteToPointNavigateAndClear()){
 			// always enable and follow and let calculate it (GPS is not accessible in garage)
-			mapActions.getDirections(getLastKnownLocation(), false);
+			mapActions.getDirections(null, null, false);
 		}
 		if(mapLabelToShow != null && latLonToShow != null){
 			mapLayers.getContextMenuLayer().setSelectedObject(toShow);
