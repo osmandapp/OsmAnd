@@ -7,7 +7,6 @@ import net.osmand.Version;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -105,6 +104,16 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			@Override
 			public void run() {
 				view.getSettings().TRANSPARENT_MAP_THEME.set(!view.getSettings().TRANSPARENT_MAP_THEME.get());
+				mapInfoLayer.recreateControls();
+			}
+		});
+		
+		final MapInfoControlRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_destionation_arrow,
+				"show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
+		showDestinationArrow.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				view.getSettings().SHOW_DESTINATION_ARROW.set(!view.getSettings().SHOW_DESTINATION_ARROW.get());
 				mapInfoLayer.recreateControls();
 			}
 		});
