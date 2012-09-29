@@ -414,7 +414,7 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
-		final CheckBox optimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
+		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
@@ -430,13 +430,13 @@ public class MapActivityActions implements DialogProvider {
 				final ApplicationMode buttonAppMode = ApplicationMode.values()[i];
 				b.setChecked(appMode == buttonAppMode);
 				if(b.isChecked()) {
-					optimal.setChecked(settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
+					nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
 				}
 				b.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 						if (isChecked) {
-							optimal.setChecked(settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
+							nonoptimal.setChecked(!settings.OPTIMAL_ROUTE_MODE.getModeValue(buttonAppMode));
 							for (int j = 0; j < buttons.length; j++) {
 								if (buttons[j] != null) {
 									if (buttons[j].isChecked() != (ind == j)) {
@@ -483,7 +483,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				routingHelper.setAppMode(mode);
-				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, optimal.isChecked());
+				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);

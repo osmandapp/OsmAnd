@@ -611,7 +611,10 @@ public class OsmandSettings {
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();
-	public final OsmandPreference<Boolean> OPTIMAL_ROUTE_MODE = new BooleanPreference("optimal_route_mode", true).makeProfile();
+	public final CommonPreference<Boolean> OPTIMAL_ROUTE_MODE = new BooleanPreference("optimal_route_mode", true).makeProfile();
+	{
+		OPTIMAL_ROUTE_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
+	}
 	
 	public final OsmandPreference<Boolean> SHOW_SPEED_LIMITS = new BooleanPreference("show_speed_limits", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> SHOW_CAMERAS = new BooleanPreference("show_cameras", true).makeGlobal().cache();

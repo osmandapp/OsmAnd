@@ -642,6 +642,7 @@ public class RoutingHelper {
 				params.fast = settings.FAST_ROUTE_MODE.get();
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;
+				params.ctx = app;
 				synchronized (this) {
 					currentRunningJob = new RouteRecalculationThread("Calculating route", params); //$NON-NLS-1$
 					currentRunningJob.start();

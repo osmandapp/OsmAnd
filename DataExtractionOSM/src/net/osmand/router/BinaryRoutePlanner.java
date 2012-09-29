@@ -559,8 +559,8 @@ public class BinaryRoutePlanner {
 			// could be expensive calculation
 			int overhead = (ctx.visitedSegments - ctx.relaxedSegments ) *
 					STANDARD_ROAD_IN_QUEUE_OVERHEAD;
-			while(overhead > ctx.config.memoryLimitation * 1.5){
-				overhead /= 2;
+			if(overhead > ctx.config.memoryLimitation * 0.95){
+				throw new OutOfMemoryError("There is no enough memory " + ctx.config.memoryLimitation/(1<<20) + " Mb");
 			}
 			RouteSegment next = ctx.loadRouteSegment(x, y, ctx.config.memoryLimitation - overhead);
 			// 3. get intersected ways
