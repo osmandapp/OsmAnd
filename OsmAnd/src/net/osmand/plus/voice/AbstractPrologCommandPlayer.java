@@ -28,9 +28,7 @@ import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import alice.tuprolog.Theory;
 import alice.tuprolog.Var;
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.media.AudioManager;
 
 public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 
@@ -203,51 +201,32 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 	protected void requestAudioFocus() {
 		log.debug("requestAudioFocus");
 		if (android.os.Build.VERSION.SDK_INT >= 8) {
-		    mAudioFocusHelper = new AudioFocusHelper(ctx);
+			try {
+				mAudioFocusHelper = (AudioFocusHelper) Class.forName("net.osmand.plus.voice.AudioFocusHelperImpl").newInstance();
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
 		}
-		if (mAudioFocusHelper != null)
-			mAudioFocusHelper.requestFocus();
+		if (mAudioFocusHelper != null) {
+			mAudioFocusHelper.requestFocus(ctx, streamType);
+		}
 	}
 	
 	protected void abandonAudioFocus() {
 		log.debug("abandonAudioFocus");
 		if (mAudioFocusHelper != null) {
-			mAudioFocusHelper.abandonFocus();
+			mAudioFocusHelper.abandonFocus(ctx, streamType);
 			mAudioFocusHelper = null;
 		}
 	}
-
-	/**
-	 * This helper class allows API level 8 calls to be isolated from the rest of the app.
-	 * This class is only be instantiated on OS versions which support it. 
-	 * @author genly
-	 *
-	 */
-	// We Use API level 8 calls here, suppress warnings.
-	@SuppressLint("NewApi")
-    public class AudioFocusHelper implements AudioManager.OnAudioFocusChangeListener {
-		private Context mContext;
-		private AudioManager mAudioManager;
-
-		public AudioFocusHelper(Context context) {
-			mContext = context;
-			mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-		}
+	
+	
+	public interface AudioFocusHelper {
 		
-		public boolean requestFocus() {
-			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED ==
-					mAudioManager.requestAudioFocus(this, streamType, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-		}
-
-		public boolean abandonFocus() {
-			return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
-		}
-	    @Override
-	    public void onAudioFocusChange(int focusChange) {
-	    	// Basically we ignore audio focus changes.  There's not much we can do when we have interrupted audio
-	    	// for our speech, and we in turn get interrupted.  Ignore it until a scenario comes up which gives us
-	    	// reason to change this strategy.
-	    	log.error("MediaCommandPlayerImpl.onAudioFocusChange(): Unexpected audio focus change: "+focusChange);
-	    }
+		public boolean requestFocus(Context context, int streamType);
+		
+		public boolean abandonFocus(Context context, int streamType);
 	}
+
+	
 }
