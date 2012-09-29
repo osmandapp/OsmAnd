@@ -118,7 +118,7 @@ public class PoiFiltersHelper {
 		}
 		if(UDF_CAR_AID.equals(key)){
 			putValues(types, AmenityType.TRANSPORTATION, "fuel", "car_wash", "car_repair","car", "car_sharing");
-			putValues(types, AmenityType.SHOP, "fuel", "car_wash", "car_repair","car");
+			putValues(types, AmenityType.SHOP, "fuel", "car_wash", "car_repair","car", "car_parts");
 		} else if(UDF_SIGHTSEEING.equals(key)){
 			putAll(types, AmenityType.HISTORIC);
 			putAll(types, AmenityType.TOURISM);

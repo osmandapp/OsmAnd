@@ -319,6 +319,7 @@
 		<type tag="shop" value="boutique" minzoom="15" />
 		<type tag="shop" value="butcher" minzoom="15" />
 		<type tag="shop" value="car" minzoom="15" />
+		<type tag="shop" value="car_parts" minzoom="15" />
 		<type tag="shop" value="car_repair" minzoom="15" />
 		<type tag="shop" value="charity" minzoom="15" />
 		<type tag="shop" value="chemist" minzoom="15" />
