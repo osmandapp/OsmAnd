@@ -5,6 +5,8 @@ import java.util.List;
 
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
@@ -27,6 +29,11 @@ public class RouteLayer extends OsmandMapLayer {
 	private Paint paint;
 
 	private Path path;
+
+	// cache
+	private RenderingRulesStorage cachedRrs;
+	private boolean cachedNightMode;
+	private int cachedColor;
 
 	public RouteLayer(RoutingHelper helper){
 		this.helper = helper;
@@ -53,16 +60,29 @@ public class RouteLayer extends OsmandMapLayer {
 	}
 
 	
+	private int getColor(DrawSettings nightMode){
+		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
+		boolean n = nightMode != null && nightMode.isNightMode();
+		if (rrs != cachedRrs || cachedNightMode != n) {
+			cachedRrs = rrs;
+			cachedNightMode = n;
+			cachedColor = view.getResources().getColor(cachedNightMode?R.color.nav_track_fluorescent :  R.color.nav_track);
+			if (cachedRrs != null) {
+				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, cachedNightMode);
+				if (req.searchRenderingAttribute("routeColor")) {
+					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+				}
+			}
+		}
+		return cachedColor;
+	}
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		path.reset();
 		if (helper.getFinalLocation() != null && helper.getRoute().isCalculated()) {
-			if (nightMode != null &&  nightMode.isNightMode()) {
-				paint.setColor(view.getResources().getColor(R.color.nav_track_fluorescent));
-			} else {
-				paint.setColor(view.getResources().getColor(R.color.nav_track));
-			}
+			paint.setColor(getColor(nightMode));
 			int w = view.getWidth();
 			int h = view.getHeight();
 			Location lastProjection = helper.getLastProjection();

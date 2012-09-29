@@ -6,6 +6,8 @@ import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Cap;
@@ -24,6 +26,10 @@ public class GPXLayer extends OsmandMapLayer {
 	private Path path;
 
 	private OsmandSettings settings;
+	
+	private RenderingRulesStorage cachedRrs;
+	private boolean cachedNightMode;
+	private int cachedColor;
 	
 	
 	private void initUI() {
@@ -45,6 +51,24 @@ public class GPXLayer extends OsmandMapLayer {
 	}
 
 	
+	private int getColor(DrawSettings nightMode){
+		RenderingRulesStorage rrs = view.getApplication().getRendererRegistry().getCurrentSelectedRenderer();
+		boolean n = nightMode != null && nightMode.isNightMode();
+		if (rrs != cachedRrs || cachedNightMode != n) {
+			cachedRrs = rrs;
+			cachedNightMode = n;
+			cachedColor = view.getResources().getColor(R.color.gpx_track);
+			if (cachedRrs != null) {
+				RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+				req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, cachedNightMode);
+				if (req.searchRenderingAttribute("gpxColor")) {
+					cachedColor = req.getIntPropertyValue(rrs.PROPS.R_ATTR_COLOR_VALUE);
+				}
+			}
+		}
+		return cachedColor;
+	}
+	
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
@@ -53,11 +77,8 @@ public class GPXLayer extends OsmandMapLayer {
 			return;
 		}
 		List<List<WptPt>> points = gpxFile.processedPointsToDisplay;
-		if (false && view.getSettings().FLUORESCENT_OVERLAYS.get()) {
-			paint.setColor(view.getResources().getColor(R.color.gpx_track_fluorescent));
-		} else {
-			paint.setColor(view.getResources().getColor(R.color.gpx_track));
-		}
+		
+		paint.setColor(getColor(nightMode));
 		
 		for (List<WptPt> l : points) {
 			path.rewind();
