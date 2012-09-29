@@ -989,6 +989,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	public Location getLastKnownLocation(){
+		if(mapLayers.getLocationLayer() == null) {
+			return null;
+		}
 		return mapLayers.getLocationLayer().getLastKnownLocation();
 	}
 	
