@@ -1,13 +1,20 @@
 package net.osmand.translator.utils;
 
 import java.io.PrintStream;
+import java.util.List;
 
 import net.osmand.translator.visitor.MethodVisitor;
 
+import org.eclipse.jdt.core.dom.ASTNode;
 import org.eclipse.jdt.core.dom.Block;
 import org.eclipse.jdt.core.dom.CompilationUnit;
+import org.eclipse.jdt.core.dom.Expression;
+import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.jdt.core.dom.MethodDeclaration;
 import org.eclipse.jdt.core.dom.Type;
+import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+
+import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
 
 public class MethodHandler extends AbstractHandler{
 
@@ -38,6 +45,12 @@ public class MethodHandler extends AbstractHandler{
 
 	
 	private static void applyParameters(MethodDeclaration method, StringBuffer buffer) {
+		List parameters = method.parameters();
+		for (Object p : parameters) {
+			ASTNode node = (ASTNode)p;
+			buffer.append(node.toString() + ", ");
+		}
+		buffer.deleteCharAt(buffer.length()-2);
 	} 
 	
 	private static void fillBody(MethodDeclaration method, StringBuffer buffer) {
@@ -46,8 +59,10 @@ public class MethodHandler extends AbstractHandler{
 		buffer.append(body);
 	}
 	
+	
+	
 	private void parseSimpleForStatement() {
-		
+
 	}
 	
 }
