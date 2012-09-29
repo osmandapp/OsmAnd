@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 <test regions="" description="Route to Antwerpen" best_percent="10" vehicle="car" 
-    start_lat="52.29344776082418" start_lon="4.834756851196289" target_lat="51.21717320613008" target_lon="4.402492046356201" complete_time="5953.306" loadedTiles = "3120" visitedSegments = "11834" complete_distance = "159654.98"  >
+    start_lat="52.29344776082418" start_lon="4.834756851196289" target_lat="51.21717320613008" target_lon="4.402492046356201" complete_time="5953.306" loadedTiles = "4600" visitedSegments = "11834" complete_distance = "159654.98"  >
 	<segment id="7367192" start="1" end="0" time = "1.9570006" name = "" distance = "24.462507" turn = "Go ahead" turn_angle = "0.0" start_bearing = "108.39158" end_bearing = "108.39158" description = "Go ahead and go 24.46 meters" />
 	<segment id="7366497" start="4" end="0" time = "8.245201" name = "Noorddammerweg" distance = "103.06502" turn = "Turn right" turn_angle = "96.414085" start_bearing = "-155.19434" end_bearing = "-129.80557" description = "Turn right and go 127.54 meters" />
 	<segment id="7366502" start="1" end="0" time = "2.9368546" name = "Urbanusparkstraat" distance = "24.473787" start_bearing = "-116.56505" end_bearing = "-116.56505" description = "" />

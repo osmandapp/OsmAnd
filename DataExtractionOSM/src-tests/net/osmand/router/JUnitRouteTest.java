@@ -29,7 +29,8 @@ public class JUnitRouteTest  {
 		if(rs != null){
 			return;
 		}
-		lib = NativeSwingRendering.getDefaultFromSettings();
+		// test without native because it is not present on the server
+//		lib = NativeSwingRendering.getDefaultFromSettings();
 		BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 		String obfdir = System.getenv("OBF_DIR");
 		if(Algoritms.isEmpty(obfdir)){
