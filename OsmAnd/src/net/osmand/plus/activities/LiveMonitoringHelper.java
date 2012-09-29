@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
@@ -81,8 +83,41 @@ public class LiveMonitoringHelper  {
 	}
 
 	public void sendData(LiveMonitoringData data) {
-		String url = MessageFormat.format(settings.LIVE_MONITORING_URL.get(), data.lat+"", data.lon+"", 
-				data.time+"", data.hdop+"", data.alt+"", data.speed+"");
+		String st = settings.LIVE_MONITORING_URL.get();
+		List<String> prm = new ArrayList<String>();
+		int maxLen = 0;
+		for(int i = 0; i < 6; i++) {
+			boolean b = st.contains("{"+i+"}");
+			if(b) {
+				maxLen = i;
+			}
+		}
+		for (int i = 0; i < maxLen + 1; i++) {
+			switch (i) {
+			case 0:
+				prm.add(data.lat + "");
+				break;
+			case 1:
+				prm.add(data.lon + "");
+				break;
+			case 2:
+				prm.add(data.time + "");
+				break;
+			case 3:
+				prm.add(data.hdop + "");
+				break;
+			case 4:
+				prm.add(data.alt + "");
+				break;
+			case 5:
+				prm.add(data.speed + "");
+				break;
+
+			default:
+				break;
+			}
+		}
+		String url = MessageFormat.format(st, prm.toArray());
 		try {
 
 			HttpParams params = new BasicHttpParams();

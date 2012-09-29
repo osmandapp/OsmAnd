@@ -946,6 +946,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
 					settings.getIntermediatePoints(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		}
+		mapView.refreshMap();
 	}
 	
 	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
