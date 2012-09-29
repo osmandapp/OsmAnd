@@ -316,7 +316,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
 				"en", "cs",  "nl", "fr","ka","de",
-				"hu", "it", "jp", "ko", "lv","mr",
+				"hu", "it", "ja", "ko", "lv","mr",
 				"no", "pl", "pt", "ro","ru", "sk", 
 				"es","vi" };
 		entries = new String[] { getString(R.string.system_locale), 

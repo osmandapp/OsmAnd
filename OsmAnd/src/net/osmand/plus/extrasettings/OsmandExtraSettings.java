@@ -69,7 +69,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		textSize.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
-				final Float[] floatValues = new Float[] {0.6f, 0.8f, 1.0f, 1.2f, 1.5f};
+				final Float[] floatValues = new Float[] {0.6f, 0.8f, 1.0f, 1.2f, 1.5f, 1.75f, 2f};
 				String[] entries = new String[floatValues.length];
 				for (int i = 0; i < floatValues.length; i++) {
 					entries[i] = (int) (floatValues[i] * 100) +" %";
