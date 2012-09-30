@@ -13,13 +13,15 @@ turn('left_sl', ['στρίψε λοξά αριστερά ']).
 turn('right', ['στίψε δεξιά ']).
 turn('right_sh', ['στρίψε κλειστά δεξιά ']).
 turn('right_sl', ['στρίψε λοξά δεξιά ']).
+turn('right_keep', ['μείνε δεξιά']).
+turn('left_keep', ['μείνε αριστερά']).
 
 prepare_turn(Turn, Dist) == ['Προετοιμάσου και ', M, ' μετά από ', D] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Μετά από ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
 prepare_make_ut(Dist) == ['Προετοιμάσου να κάνεις αναστροφή μετά από ', D] :- distance(Dist) == D.
-make_ut(Dist) == ['μετά από ', D, ' κάνε αναστροφή '] :- distance(Dist) == D.
+make_ut(Dist) == ['Μετά από ', D, ' κάνε αναστροφή '] :- distance(Dist) == D.
 make_ut == ['Κάνε αναστροφή '].
 make_ut_wp == ['Όταν είναι δυνατόν, κάνε αναστροφή '].
 
@@ -34,13 +36,15 @@ and_arrive_destination == ['και φτάνεις στον προορισμό σ
 
 then == ['και '].
 reached_destination == ['έφτασες στον προορισμό σου '].
+and_arrive_intermediate == ['και έφτασες στο ενδιάμεσο σημείο '].
+reached_intermediate == ['έφτασες στο ενδιάμεσο σημείο'].
 bear_right == ['μείνε δεξιά '].
 bear_left == ['μείνε αριστερά '].
 
 route_new_calc(Dist) == ['Το ταξίδι είναι ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Επαναϋπολογισμός διαδρομής, απόσταση ', D] :- distance(Dist) == D.
 
-location_lost == ['Το σήμα GPS χάθηκε '].
+location_lost == ['Το σήμα g p s χάθηκε '].
 
 
 %% 
@@ -63,12 +67,22 @@ nth(16, 'δέκατη έκτη ').
 nth(17, 'δέκατη έβδομη ').
 
 
+distance(Dist) == D :- measure('km-m'), distance_km(Dist) == D.
+distance(Dist) == D :- distance_mi(Dist) == D.
 %%% distance measure
-distance(Dist) == [ X, ' μέτρα'] :- Dist < 100, D is round(Dist/10)*10, num_atom(D, X).
-distance(Dist) == [ X, ' μέτρα'] :- Dist < 1000, D is round(2*Dist/100)*50, num_atom(D, X).
-distance(Dist) == ['περίπου 1 χιλιόμετρο '] :- Dist < 1500.
-distance(Dist) == ['περίπου ', X, ' χιλιόμετρα '] :- Dist < 10000, D is round(Dist/1000), num_atom(D, X).
-distance(Dist) == [ X, ' χιλιόμετρα '] :- D is round(Dist/1000), num_atom(D, X).
+distance_km(Dist) == [ X, ' μέτρα'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
+distance_km(Dist) == [ X, ' μέτρα'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
+distance_km(Dist) == ['περίπου ένα χιλιόμετρο '] :- Dist < 1500.
+distance_km(Dist) == ['περίπου ', X, ' χιλιόμετρα '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
+distance_km(Dist) == [ X, ' χιλιόμετρα '] :- D is round(Dist/1000.0), num_atom(D, X).
+
+%%% distance measure
+distance_mi(Dist) == [ X, ' πόδια'] :- Dist < 160, D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
+distance_mi(Dist) == [ X, ' δέκατο του μιλίου'] :- Dist < 241, D is round(Dist/161.0), num_atom(D, X).
+distance_mi(Dist) == [ X, ' δέκατα του μιλίου'] :- Dist < 1529, D is round(Dist/161.0), num_atom(D, X).
+distance_mi(Dist) == ['περίπου ένα μίλι '] :- Dist < 2414.
+distance_mi(Dist) == ['περίπου ', X, ' μίλια '] :- Dist < 16093, D is round(Dist/1609.0), num_atom(D, X).
+distance_mi(Dist) == [ X, ' μίλια '] :- D is round(Dist/1609.0), num_atom(D, X).
 
 
 %% resolve command main method
