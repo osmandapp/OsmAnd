@@ -571,7 +571,7 @@
 	<string name="voice_not_use">Να μη χρησιμοποιηθεί</string>
 	<string name="voice_not_specified">Κανένα</string>
 	<string name="installing_new_resources">Αποσυμπίεση νέων δεδομένων…</string>
-	<string name="internet_connection_required_for_online_route">Επιλέχτηκε μια online υπηρεσία πλοήγησης αλλά αλλά δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
+	<string name="internet_connection_required_for_online_route">Επιλέχτηκε μια online υπηρεσία πλοήγησης αλλά δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
 	<string name="tts_language_not_supported_title">Η γλώσσα δεν υποστηρίζεται</string>
 	<string name="tts_language_not_supported">Η επιλεγμένη γλώσσα δεν υποστηρίζεται από την εγκατεστημένη μηχανή TTS (κείμενο σε ομιλία) του Android. Θέλετε να μεταβείτε στο Market για να κοιτάξετε για κάποια άλλη μηχανή TTS? Ειδάλλως θα χρησιμοποιηθεί η προεπιλεγμένη γλώσσα TTS.</string>
 	<string name="tts_missing_language_data_title">Απουσία δεδομένων</string>
@@ -820,7 +820,7 @@
 	<string name="voice_data_not_supported">Μη υποστηριζόμενη έκδοση των δεδομένων φωνής</string>
 	<string name="voice_data_corrupted">Τα καθορισμένα δεδομένα φωνής είναι κατεστραμμένα</string>
 	<string name="voice_data_unavailable">Τα επιλεγμένα δεδομένα φωνής δεν είναι διαθέσιμα</string>
-	<string name="stop_routing">Σταμάτημα πλοήγ.</string>
+	<string name="stop_routing">Διακοπή πλοήγ.</string>
 	<string name="sd_unmounted">Η κάρτα SD δεν είναι προσβάσιμη.\nΔεν μπορείς να δείς χάρτες ή να αναζητήσεις διάφορα.</string>
 	<string name="sd_mounted_ro">Η SD κάρτα είναι μόνο για ανάγνωση.\nΜπορείτε μόνο να δείτε τον προφορτωμένο χάρτη και όχι να κάνετε λήψη από το Διαδίκτυο.</string>
 	<string name="unzipping_file">Αποσυμπίεση αρχείου…</string>
@@ -1106,4 +1106,7 @@
     <string name="no_route">No route</string>
 	<string name="local_openstreetmap_items"/>
 	<string name="local_index_items"/>
-	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string></resources>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string><string name="map_widget_show_destionation_arrow">Εμφάνιση κατεύθυνσης προορισμού</string>
+    <string name="enable_plugin_monitoring_services">"Enable monitoring plugins (tracking, live tracking) to use monitoring services "</string>
+    <string name="non_optimal_route_calculation">Υπολογισμός πιθανόν μη-βέλτιστης διαδρομής σε πολύ μεγάλες αποστάσεις</string>
+    </resources>
