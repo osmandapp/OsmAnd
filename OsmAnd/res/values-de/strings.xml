@@ -536,7 +536,7 @@
 	</string>
 	<string name="next_button">Weiter</string>
 	<string name="previous_button">Zurück</string>
-	<string name="unit_of_length_descr">Verwendete Längen- und Geschwindigkeitseinheiten</string>
+	<string name="unit_of_length_descr">Längen- und Geschwindigkeitseinheiten auswählen</string>
 	<string name="unit_of_length">Längeneinheiten</string>
 	<string name="si_mi_foots">Meilen/Fuß</string>
 	<string name="si_mi_yard">Meilen/Yards</string>
@@ -867,7 +867,7 @@
 	<string name="show_osm_bugs">OSM-Fehler</string>
 	<string name="favourites_activity">Markierte Orte</string>
 	<string name="add_to_favourite">Als Favorit speichern</string>
-	<string name="use_english_names_descr">Englische oder einheimische Bezeichnungen in Karten</string>
+	<string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden</string>
 	<string name="use_english_names">Englische Namen</string>
 	<string name="app_settings">Anwendungseinstellungen</string>
 	<string name="search_address">Adresse suchen</string>
@@ -901,7 +901,7 @@
 	<string name="search_button">Suche</string>
 	<string name="search_activity">Suche</string>
 	<string name="searchpoi_activity">POI wählen</string>
-	<string name="search_POI_level_btn">Finde mehr</string>
+	<string name="search_POI_level_btn">Weitere Ergebnisse</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell. Um Städte/Postleitzahlen zu finden mindestens 3 Zeichen eingeben.</string>
 	<string name="incremental_search_street">Suche Straße inkrementell</string>
 	<string name="incremental_search_building">Suche Hausnr. inkrementell</string>
@@ -1066,7 +1066,7 @@
 	<string name="map_widget_back_to_loc">Wo bin ich</string>
 	<string name="map_widget_lock_screen">Bildschimr sperren</string>
 	<string name="map_widget_compass">Kompass</string>
-	<string name="map_widget_top_stack">Statusbalken:</string>
+	<string name="map_widget_top_stack">Statusleiste:</string>
 	<string name="map_widget_reset">Auf Voreinstellung setzen</string>
 	<string name="map_widget_right_stack">Rechte Seite:</string>
 	<string name="map_widget_left_stack">Linke Seite:</string>
@@ -1138,7 +1138,8 @@
 	<string name="map_widget_monitoring_services">Aufzeichnungsdienste</string>
 	<string name="no_route">Keine Route</string>
 	<string name="intermediate_point">Wegpunkt %1$s</string>
-    <string name="map_widget_show_destionation_arrow">Zeige Zielrichtung</string>
+    <string name="map_widget_show_destionation_arrow">Richtung zum Ziel anzeigen</string>
     <string name="non_optimal_route_calculation">Berechne möglicherweise nicht optimale Routen über lange Distanzen</string>
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
+    <string name="enable_plugin_monitoring_services">Überwachungsplugins (Verfolgung, Live-Verfolgung) aktivieren, um Überwachungsdienste zu verwenden</string>
     </resources>
