@@ -360,7 +360,7 @@
 	<string name="search_position_fixed">Festgelegt</string>
 	<string name="search_position_current_location">Aktuelle Position …</string>
 	<string name="search_position_map_view">Letzte Kartenposition</string>
-	<string name="select_search_position">Suche nahe:</string>
+	<string name="select_search_position">Suchen in der Nähe von:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="tip_recent_changes_0_6_7_t">"Verbesserungen in 0.6.7:
 		\n\t- Offline-Daten Manager (Herunterladen, Löschen, und Aktivieren / Deaktivieren von Offline-Daten direkt in OsmAnd)
@@ -646,8 +646,8 @@
 	<string name="unknown_location">Position noch nicht ermittelt</string>
 	<string name="download_files">Laden</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
-	<string name="transport_searching_transport">Suche ÖPNV (kein Ziel)</string>
-	<string name="transport_searching_route">Suche ÖPNV (Ziel {0})</string>
+	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
+	<string name="transport_searching_route">ÖPNV-Ergebnisse (Ziel {0}):</string>
 	<string name="transport_search_none">kein</string>
 	<string name="transport_search_again">ÖPNV-Suche zurücksetzen</string>
 	<string name="map_index">Karte</string>
@@ -858,7 +858,7 @@
 	<string name="save_track_interval_descr">Intervall zwischen zwei Positionsbestimmungen</string>
 	<string name="save_track_interval">Logging-Intervall</string>
 	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
-	<string name="save_track_to_gpx">Logging aktivieren</string>
+	<string name="save_track_to_gpx">Logging in GPX-Datei aktivieren</string>
 	<string name="navigate_to">Als Ziel wählen</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
@@ -1048,7 +1048,7 @@
 	<string name="global_app_allocated_memory">Belegter Speicher</string>
 	<string name="native_app_allocated_memory_descr">Insgesamt durch App belegter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB). Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
-	<string name="select_animate_speedup">beschleunigte Routen-Animation auswählen</string>
+	<string name="select_animate_speedup">Beschleunigungswert für Routen-Animation wählen</string>
 	<string name="osmand_parking_hours">Stunde(n)</string>
 	<string name="osmand_parking_minutes">Minuten</string>
 	<string name="osmand_parking_position_description_add_time">Das Auto wurde hier geparkt:</string>
@@ -1141,5 +1141,5 @@
     <string name="map_widget_show_destionation_arrow">Richtung zum Ziel anzeigen</string>
     <string name="non_optimal_route_calculation">Berechne möglicherweise nicht optimale Routen über lange Distanzen</string>
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
-    <string name="enable_plugin_monitoring_services">Überwachungsplugins (Verfolgung, Live-Verfolgung) aktivieren, um Überwachungsdienste zu verwenden</string>
+    <string name="enable_plugin_monitoring_services">"Überwachungsplugins (Verfolgung, Live-Verfolgung) aktivieren, um Überwachungsdienste zu verwenden "</string>
     </resources>
