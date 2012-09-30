@@ -1031,7 +1031,7 @@
 \n\t* Vylepšené navádění po trase
 \n\t* Možnost vyhnutí se dálnicím
 \n\t* Zobrazení Cycleway=track
-\n\t* Hezčí vzhled ikon\n\t* Opraveno mnoho chyb "</string>
+\n\t* Oprava chyb "</string>
 <string name="snap_to_road_descr">Zachytí kurzor na nejbližší silnici/cestu během navigace</string>
 <string name="map_widget_vector_attributes">Vlastnosti vykreslovače:</string>
 <string name="tip_rotation_switching_t_v2">"\tKliknutím na ikonu kompasu na mapové obrazovce můžete přepínat mezi způsobem otáčení mapy.
@@ -1087,8 +1087,8 @@
 	<string name="no_route">Žádná cesta</string>
 	<string name="delete_target_point">Smazat cílový bod</string>
 	<string name="intermediate_point">Bod trasy %1$s</string>
-    <string name="map_widget_show_destionation_arrow">Zobrazit směr k cíli</string>
-    <string name="enable_plugin_monitoring_services">Zapněte modul sledování (záznam trasy, přímý přenos), abyste mohli využívat služeb sledování na pozadí</string>
+    <string name="map_widget_show_destionation_arrow">Zobrazit směr do cíle</string>
+    <string name="enable_plugin_monitoring_services">"Zapněte modul sledování (záznam trasy, přímý přenos), abyste mohli využívat služeb sledování na pozadí "</string>
     <string name="non_optimal_route_calculation">Počítat možná ne úplně nejlepší trasu na dlouhé vzdálenosti</string>
     <string name="gps_not_available">Prosím zapněte GPS v nastavení</string>
     </resources>
