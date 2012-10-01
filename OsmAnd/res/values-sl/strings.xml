@@ -336,4 +336,55 @@
 	<string name="osmand_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
 	<string name="tip_update_index">Posodobitev podatkov brez povezave</string>
+	<string name="filterpoi_activity">Ustvari POI filter</string>
+	<string name="recalculate_route_to_your_location">Način prevoza:</string>
+	<string name="select_navigation_mode">Izberi način prevoza</string>
+	<string name="monitor_preferences">Sledenje</string>
+	<string name="day_night_info_description">Vzhod: %1$s\nZahod: %2$s</string>
+	<string name="live_monitoring_mode_off">Začni\nsledenje</string>
+	<string name="live_monitoring_mode_on">Končaj\nsledenje</string>
+	<string name="position_on_map_descr">Izberite mesto položaja na zemljevidu</string>
+	<string name="position_on_map">Oznaka položaja</string>
+	<string name="layer_map_appearance">Nastavitve zaslona…</string>
+	<string name="show_lanes">Prikaži pasove</string>
+	<string name="avoid_in_routing_title">Izogibanje…</string>
+	<string name="avoid_ferries">Izogibanje trajektov</string>
+	<string name="avoid_unpaved">Izogibanje neasfaltiranih cest</string>
+	<string name="avoid_in_routing_descr">Izogibanje cestnin, makadama, trajektov</string>
+	<string name="tip_recent_changes_0_8_2_t">"Spremembe v 0.8.2:
+\n\t* Izboljšano usmerjanje
+\n\t* Dinamičnen zemljevid (widget)
+\n\t* Nastavitve karte prestavljene v karto
+\n\t* Zaklepanje zaslona s storitvijo sledenja lokacije
+\n\t* Popravljeni jeziki arabščina, Kannada skripte in RTL jeziki "</string>
+	<string name="map_widget_fluorescent">Fluorescentne poti</string>
+	<string name="map_widget_show_ruler">Merilo</string>
+	<string name="map_widget_appearance">Razno:</string>
+	<string name="map_widget_view_direction">Smer gledanja</string>
+	<string name="map_widget_transparent">Prosojna koža</string>
+	<string name="use_transparent_map_theme">Prosojna tema</string>
+	<string name="bg_service_sleep_mode_off">Omogoči\nspanlni način</string>
+	<string name="bg_service_sleep_mode_on">Prekini\nspanlni način</string>
+	<string name="gps_wakeup_interval">Interval prebujanja GPSa: %s</string>
+	<string name="int_continuosly">Neprekinjeno</string>
+	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
+	<string name="map_widget_top_text">Ime ceste</string>
+	<string name="map_widget_map_select">Vir karte</string>
+	<string name="map_widget_mini_route">Mini zemljevid poti</string>
+	<string name="select_animate_speedup">Izberite hitrost animacije poti</string>
+    	<string name="osmand_parking_warning">Opozorilo</string>
+	<string name="osmand_parking_pm">PM</string>
+	<string name="osmand_parking_am">AM</string>
+	<string name="gpxup_public">Javno</string>
+	<string name="gpxup_identifiable">Določljivo</string>
+	<string name="gpxup_trackable">Sledljivo</string>
+	<string name="gpxup_private">Zasebno</string>
+	<string name="asap">Čimprej</string>
+	<string name="route_roundabout">Krožišče: uporabite %1$d izvoz</string>
+	<string name="route_kl">Držite se levo</string>
+	<string name="route_kr">Držite se desno</string>
+	<string name="rendering_attr_contourLines_description">Prikaži pod povečavo (potrebuje datoteko SRTM):</string>
+	<string name="rendering_attr_hmRendered_description">Povečaj število podrobnosti karte</string>
+	<string name="rendering_attr_hmRendered_name">Pokaži podrobnejšo karto</string>
+	<string name="navigate_point_format">Oblika:</string>
 	</resources>
