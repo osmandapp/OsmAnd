@@ -1,8 +1,6 @@
 package net.osmand.translator.handlers;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
@@ -52,6 +50,7 @@ public class TranslationHandler {
 		String source = Files.toString(new File(inFile), Charset.defaultCharset());		
 		CompilationUnit unit = parse(inFile, source);		
 	    
+		AST ast = unit.getAST();
 	    try {
 	      unit.recordModifications();
 	      NameTable.initialize(unit);
@@ -87,6 +86,12 @@ public class TranslationHandler {
 	  private static CompilationUnit parse(String filename, String source) {
 		    System.out.println("parsing " + filename);
 		    ASTParser parser = ASTParser.newParser(AST.JLS3);
+		    String[] args = new String[]{filename};
+		    try {
+				Options.load(args);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		    Map<String, String> compilerOptions = Options.getCompilerOptions();
 		    parser.setCompilerOptions(compilerOptions);
 		    parser.setSource(source.toCharArray());
