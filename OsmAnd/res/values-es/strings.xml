@@ -1014,4 +1014,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="delete_target_point">Elimina el punto destino</string>
 	<string name="intermediate_point">Punto de paso %1$s</string>
     <string name="gps_not_available">Por favor, habilite el GPS en ajustes</string>
+    <string name="map_widget_show_destionation_arrow">Mostrar dirección de destino</string>
+    <string name="enable_plugin_monitoring_services">Permite que los extras de monitorización (seguimiento, seguimiento en directo) usen los servicios de monitorización</string>
+    <string name="non_optimal_route_calculation">Calcula una ruta posiblemente no óptima en largas distancias</string>
     </resources>
