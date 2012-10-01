@@ -314,4 +314,26 @@
 	<string name="global_app_settings">Splošne nastavitve aplikacije</string>
 	<string name="preferred_locale">Jezik</string>
 	<string name="preferred_locale_descr">Izberite jezik uporabniškega vmesnika</string>
+	<string name="map_widget_show_destionation_arrow">Prikaži smer cilja</string>
+    <string name="enable_plugin_monitoring_services">"Omogoči vtičnike za nadzor (sledenje, sledenje v živo) za uporabljanje nadzornih storitev "</string>
+    <string name="non_optimal_route_calculation">Izračunaj morda ne-optimalne poti na dolge razdalje</string>
+    <string name="gps_not_available">Prosim da v nastavitvah omogočite GPS</string>
+    <string name="map_widget_monitoring_services">Nadzorne storitve</string>
+	<string name="no_route">Ni poti</string>
+	<string name="delete_target_point">Odstraniti ciljno točko</string>
+	<string name="target_point">Ciljna točka %1$s</string>
+    <string name="intermediate_point">Točka %1$s</string>
+    <string name="target_points">Cilji</string>
+    <string name="poi_filter_emergency">V sili</string>
+    <string name="poi_filter_car_aid">Avtomobilska pomoč</string>
+	<string name="poi_filter_food_shop">Trgovina s hrano</string>
+	<string name="poi_filter_for_tourists">Za turiste</string>
+	<string name="poi_filter_fuel">Gorivo</string>
+	<string name="auto_zoom_map_descr">Samodejna povečava zemljevida glede na hitrost (medtem ko se zemljevid premika v trenutni položaj)</string>
+	<string name="auto_zoom_map">Samodejna povečava zemljevida</string>
+	<string name="snap_to_road_descr">Med navigacijo pripni položaj na ceste</string>
+	<string name="snap_to_road">Pripni na cesto</string>
+	<string name="osmand_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
+	<string name="osmand_plus_short_description_80_chars">OsmAnd je odprtokodna navigacijska aplikacija z offline in online zemljevidi</string>
+	<string name="tip_update_index">Posodobitev podatkov brez povezave</string>
 	</resources>
