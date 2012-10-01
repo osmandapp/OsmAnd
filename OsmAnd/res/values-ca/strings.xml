@@ -960,4 +960,6 @@
 \n\tPer compartir qualsevol ubicació que desitges:
 \n\tUsa \'Menú contextual de mapa\' -&gt; \'Compartir ubicació\'.
 \n\tLlavors selecciona una via per compartir la teva ubicació.Les opcions son: Correu electrònic,SMS(text),o només copiar l\'ubicació en el porta retalls. "</string>
-	</resources>
+	<string name="enable_plugin_monitoring_services">"Habilitar connectors de monitorització(enregistrament,enregistrament en viu) per usar serveis de monitorització "</string>
+    <string name="gps_not_available">Si us plau habilita el GPS a les preferències</string>
+    </resources>
