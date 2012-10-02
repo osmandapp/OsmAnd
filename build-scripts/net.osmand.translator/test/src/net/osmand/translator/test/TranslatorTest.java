@@ -8,29 +8,23 @@ import java.io.InputStreamReader;
 
 import net.osmand.translator.handlers.TranslationHandler;
 
+import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.junit.Test;
 
+import com.google.devtools.j2objc.CppGenerationTest;
 import com.google.devtools.j2objc.GenerationTest;
+import com.google.devtools.j2objc.J2ObjC.Language;
+import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
+import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
 
-public class TranslatorTest extends GenerationTest {
+public class TranslatorTest extends CppGenerationTest {
 	
-	private String getResourceAstring(String resName) throws IOException {
-		BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("test/resources/"+resName)));
-		StringBuilder b = new StringBuilder();
-		String rs;
-		while((rs = r.readLine()) != null ) {
-			b.append(rs).append('\n');
-		}
-		return b.toString();
-	}
 	
 	public void testSimple() throws IOException{
-		String source = "class Test {" +
-		    	"boolean b1; boolean b2;" +
-		        "Test() { this(true); b2 = true; }" +
-		        "Test(boolean b) { b1 = b; }}";
-	 String translation = translateSourceFile(getResourceAstring("MapUtils_1.java"), "MapUtils_1", "MapUtils_1.m");
-		System.out.println(translation);		
+		cppTranslateSourceFile(getResourceAstring("MapUtils_1.java"), "MapUtils_1");
+		printHeaderAndSource("MapUtils_1");
 	}
+
+	
 
 }
