@@ -984,4 +984,15 @@
 	<string name="map_widget_vector_attributes">Renderēšanas attribūti:</string>
 	<string name="map_widget_renderer">Renderēšnanas stils</string>
 	<string name="int_continuosly">Nepārtraukti</string>
+	<string name="map_widget_show_destionation_arrow">Rādīt mērķa virzienu</string>
+    <string name="enable_plugin_monitoring_services">"Iespējot monitorēšanas spraudņus monitorēšanas servisu lietošanai (sekošana, tiešsaistes sekošana) "</string>
+    <string name="non_optimal_route_calculation">Aprēķināt iespējami neoptimālu maršrutu tāliem attālumiem</string>
+    <string name="gps_not_available">Lūdzu iespējot GPS uzstādījumos</string>
+    <string name="map_widget_monitoring_services">Monitorēšanas servisi</string>
+	<string name="no_route">Nav ceļa</string>
+	<string name="delete_target_point">Noņemt mērķa punktu</string>
+	<string name="intermediate_point">Galamērķis %1$s</string>
+    <string name="tip_rotation_switching_t_v2">"\tJūs variet pārslēgt kartes attēlojuma rotēšanu klikšķinot uz ekrāna kompasa ikonas.\n\tJūs variet izvēlēties:\n\t\'Negrozīt karti (ziemeļi augšā)\' - Karte netiks grozīta. Ziemeļi vienmēr būs augšā\n\t\'Kustības virzienā\' - Karte tiks pagriezta jūsu kustības virzienā\n\t\'Atbilstoši kompasam\' - Karte tiks pagriezta atbilstoši kompasa rādījumam "</string>
+	<string name="tip_day_night_mode_t_v2">"\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišākām) un nakts (tumšākām).\n\tNakts krāsas ir drošākas braukšanai naktī.\n\tJūs variet uzstādīt nakts/dienas pārslēgšanas režīmu ar \'Izvēlne\'-&gt;\'Konfigurēt ekrānu...\'-&gt;\'Dienas/nakts karte\'.\n\tJūs variet izvēlēties:\n\t\'Saulriets/Ausma\' - automātiskais režīms atbilstoši saules pozīcijai (noklusēti)\n\t\'Diena\' - vienmēr pielietot dienas režīmu\n\t\'Nakts\' - vienmēr pielietot nakts režīmu\n\t\'Gaismas sensors\' - kartes izskats tiks mainīts atbilstoši jūsu iekārtas gaismas sensoram (tikai ja tāds eksistē) "</string>	
+	<string name="tip_map_switch_t_v2">"\tKartes avots un slāņi tiek attēloti kartes skatā ar \'Menu\' -&gt; \'Definēt skatu\'.\n\tZem \'Kartes avots...\' jūs variet izvēlēties lejuplādētas bezsaistes vektoru kartes, predefinētas tiešsaistes karšu bilžu avotus (aktivizējas ar \'Bezsaistes kartes\' spraudni), vai kartes kuras ir izveidotas ar OsmAndMapCreator uz jūsu datora.\n\tOsmAnd atbalsta arī citus karšu avotus. "</string>
 	</resources>
