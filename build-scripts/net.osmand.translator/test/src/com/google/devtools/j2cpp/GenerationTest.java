@@ -67,7 +67,8 @@ public abstract class GenerationTest extends TestCase {
 
   @Override
   protected void tearDown() throws Exception {
-    deleteTempDir(tempDir);
+	  System.out.println(tempDir.getAbsolutePath());
+//    deleteTempDir(tempDir);
 //    J2ObjC.reset();
   }
 

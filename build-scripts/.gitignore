@@ -9,4 +9,4 @@ local.properties
 *.stillfailing
 *.failed
 *.log
-j2objc
+j2objc/

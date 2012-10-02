@@ -12,9 +12,21 @@ public class TranslatorTest extends CppGenerationTest {
 //		printHeaderAndSource("MapUtils_1");
 //	}
 	
+	public void addDependency(String pack, String fileName) throws IOException {
+		String s = getResourceAstring(pack+"/"+fileName);
+		 s = s.replace("package "+pack.replace('_', '.')+";","");
+		addSourceFile(s, fileName);
+	}
+	
 	public void testMapUtils() throws IOException{
-		cppTranslateSourceFile(getResourceAstring("MapUtils_2.java"), "MapUtils_2");
-		printHeaderAndSource("MapUtils_2");
+		addDependency("net_osmand_osm", "Way.java");
+		addDependency("net_osmand_osm", "LatLon.java");
+		addDependency("net_osmand_osm", "Way.java");
+		addDependency("net_osmand_osm", "Node.java");
+		addDependency("net_osmand_osm", "Entity.java");
+		addDependency("net_osmand_osm", "Relation.java");
+		cppTranslateSourceFile(getResourceAstring("MapUtils_2.java"), "MapUtils");
+		printHeaderAndSource("MapUtils");
 	}
 
 	

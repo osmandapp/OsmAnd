@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import com.google.common.io.Files;
@@ -26,6 +27,17 @@ public abstract class CppGenerationTest extends GenerationTest {
 		System.out.println("-------------------SOURCE-------------------");
 		System.out.println(getTranslatedFile(type+".m"));
 	}
+	
+	  protected void assertNoCompilationErrors(CompilationUnit unit) {
+	    for (IProblem problem : unit.getProblems()) {
+	    	if(problem.isError()){
+	    	System.err.println(problem.getMessage());
+	    	}
+	    }
+	    	for (IProblem problem : unit.getProblems()) {
+	      assertFalse(problem.getMessage(), problem.isError());
+	    }
+	  }
 	
 	protected void cppTranslateSourceFile(String source, String typeName) throws IOException {
 		CompilationUnit unit = translateType(typeName, source);

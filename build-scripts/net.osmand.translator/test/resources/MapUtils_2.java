@@ -1,6 +1,3 @@
-package net.osmand.osm;
-
-
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +16,7 @@ import java.util.List;
  *   
  *
  */
-public class MapUtils_2 {
+public class MapUtils {
 	
 	private static final String BASE_SHORT_OSM_URL = "http://osm.org/go/";
 	
