@@ -78,10 +78,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
-		if(parkingLayer == null) {
-			parkingLayer = new ParkingPositionLayer(activity);
-			activity.getMapView() .addLayer(parkingLayer, 5);
+		// remove old if existing after turn
+		if(parkingLayer != null) {
+			activity.getMapView().removeLayer(parkingLayer);
 		}
+		parkingLayer = new ParkingPositionLayer(activity);
+		activity.getMapView().addLayer(parkingLayer, 4.5f);
 		registerWidget(activity);
 	}
 
