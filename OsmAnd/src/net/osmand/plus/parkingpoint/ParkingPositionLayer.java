@@ -75,16 +75,15 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setFilterBitmap(true);
 		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
 		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_limit);
-		
+		parkingPoint = settings.getParkingPosition();
+		timeLimit = settings.getParkingType();
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-//		settings.clearParkingPosition();
-		parkingPoint = settings.getParkingPosition();
 		if (parkingPoint == null)
 			return;
-		timeLimit = settings.getParkingType();
+		
 		Bitmap parkingIcon;
 		if (!timeLimit) {
 			parkingIcon = parkingNoLimitIcon;
@@ -183,9 +182,10 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		return view.getContext().getString(R.string.osmand_parking_position_name);
 	}
 	
-	public void setParkingPointOnLayer(LatLon point) {
+	public void setParkingPointOnLayer(LatLon point, boolean timeLimit) {
+		this.timeLimit = timeLimit;
 		this.parkingPoint = point;
-		if (view != null && view.getLayers().contains(ParkingPositionLayer.this)) {
+		if (view != null) {
 			view.refreshMap();
 		}
 	}

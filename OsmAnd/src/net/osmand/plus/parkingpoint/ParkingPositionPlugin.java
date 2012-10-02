@@ -328,8 +328,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		settings.setParkingPosition(latitude, longitude);
 		settings.setParkingType(isLimited);
 		settings.setParkingStartTime(Calendar.getInstance().getTimeInMillis());
-		if (mapActivity.getMapView().getLayers().contains(parkingLayer)) {
-			parkingLayer.setParkingPointOnLayer(settings.getParkingPosition());
+		if (parkingLayer != null) {
+			parkingLayer.setParkingPointOnLayer(new LatLon(latitude, longitude), isLimited);
 		}
 	}
 	
