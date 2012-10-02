@@ -1,12 +1,12 @@
 package com.google.devtools.j2cpp;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
+import com.google.common.io.Files;
 import com.google.devtools.j2objc.J2ObjC.Language;
 import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
 import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
@@ -14,13 +14,7 @@ import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
 public abstract class CppGenerationTest extends GenerationTest {
 	
 	protected String getResourceAstring(String resName) throws IOException {
-		BufferedReader r = new BufferedReader(new InputStreamReader(new FileInputStream("test/resources/" + resName)));
-		StringBuilder b = new StringBuilder();
-		String rs;
-		while ((rs = r.readLine()) != null) {
-			b.append(rs).append('\n');
-		}
-		return b.toString();
+		return  Files.toString(new File("test/resources/" + resName), Charset.defaultCharset());
 	}
 	
 	protected void printHeaderAndSource(String type) throws IOException {
