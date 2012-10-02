@@ -1110,7 +1110,8 @@
 <string name="poi_filter_accomodation">Alloggio</string>
 <string name="poi_filter_restaurants">Ristoranti</string>
 <string name="poi_filter_sightseeing">Attrazione turistica</string>
-<string name="tip_recent_changes_0_8_4_t">"Cambiamenti nella 0.8.4: aggironamento "</string>
+<string name="tip_recent_changes_0_8_4_t">"Cambiamenti nella 0.8.4:
+\n\t* aggiornamento "</string>
     <string name="context_menu_item_last_intermediate_point">Imposta il punto dell\'ultima destinazione</string>
     <string name="context_menu_item_first_intermediate_point">Imposta il primo punto da raggiungere</string>
     <string name="add_as_last_destination_point">Aggiungi come ultimo punto intermedio</string>
