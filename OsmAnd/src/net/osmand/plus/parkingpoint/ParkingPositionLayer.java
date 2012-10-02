@@ -189,6 +189,10 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 			view.refreshMap();
 		}
 	}
+	
+	public void removeParkingPoint(){
+		this.parkingPoint = null;
+	}
 
 	/**
 	 * @param latitude
