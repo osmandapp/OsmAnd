@@ -1018,7 +1018,7 @@
 	</string>
 	<string name="update_downlod_list">Liste neu laden</string>
 	<string name="starting_point_too_far">Startpunkt zu weit von nächster Straße entfernt.</string>
-	<string name="shared_location">Shared location</string>
+	<string name="shared_location">Gemeinsamer Standort</string>
 	<string name="osmand_parking_event">Fahrzeug vom Parkplatz abholen</string>
 	<string name="osmand_parking_warning">Warnung</string>
 	<string name="osmand_parking_warning_text">Hinweis zum Abholen des Fahrzeugs wurde vormals zum Kalender hinzugefügt. Hinweis besteht solange, bis dieser manuell gelöscht wird.</string>
