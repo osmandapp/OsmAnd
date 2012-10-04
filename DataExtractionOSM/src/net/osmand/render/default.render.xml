@@ -12,18 +12,20 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-		<!-- Make all colors aligned in the whole application and configurable for normal user (only via custom.render.xml)
-	<renderingProperty attr="defMapnikRoads" name="Previous road colors" description="Default Mapnik road colors"
-		type="boolean" possibleValues=""/>
-	<renderingProperty attr="hmRoadColor" name="Hm road colors" description="Default Mapnik road colors"
-		type="boolean" possibleValues=""/>
-		 -->
+	<renderingProperty attr="roadColors" name="Road color scheme" description="Select road color scheme for specific purpose"
+		type="string" possibleValues="Modified Mapnik,Road atlas style,High contrast roads,Experimental"/>
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
 		type="string" possibleValues="--,13,12,11"/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
+
+	<renderingAttribute name="defaultColor">
+		<filter noPolygons="true" attrColorValue="#00ffffff"/>
+		<filter nightMode="true" attrColorValue="#003333"/>
+		<filter attrColorValue="#f1eae4"/>
+	</renderingAttribute>
 
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
 	<renderingAttribute name="shadowRendering">
@@ -33,48 +35,54 @@
 		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646"/>
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
-	
+
+	<!-- Bug in filter - the last will be used by default -->
+	<!-- group roadColors="Modified Mapnik" -->
+	<group>
+		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#FF8095"/>
+		<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
+		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+	</group>
+	<!-- group roadColors="Road atlas style">
+		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#ed154b"/>
+		<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
+		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+	</group -->
+	<!-- group roadColors="High contrast roads">
+		<renderingConstant name="motorwayRoadColor" value="#3838B0"/>
+		<renderingConstant name="trunkRoadColor" value="#A01060"/>
+		<renderingConstant name="primaryRoadColor" value="#C00828"/>
+		<renderingConstant name="secondaryRoadColor" value="#FF8000"/>
+		<renderingConstant name="tertiaryRoadColor" value="#F0C810"/>
+	</group -->
+	<!-- group roadColors="Experimental">
+		<renderingConstant name="motorwayRoadColor" value="#6666CC"/>
+		<renderingConstant name="trunkRoadColor" value="#A02067"/>
+		<renderingConstant name="primaryRoadColor" value="#C04D61"/>
+		<renderingConstant name="secondaryRoadColor" value="#F7D131"/>
+		<renderingConstant name="tertiaryRoadColor" value="#F0CE30"/>
+	</group -->
+
 	<renderingAttribute name="routeColor">
-		<filter nightMode="false" attrColorValue="#960000FF" />
+		<filter roadColors="Road atlas style" attrColorValue="#CCFF6600"/>
+		<filter nightMode="false" attrColorValue="#960000FF"/>
 		<filter attrColorValue="#CCFF6600"/>
 	</renderingAttribute>
-	
+
 	<renderingAttribute name="gpxColor">
-		 <filter nightMode="false" attrColorValue="#B400FFFF" />
+		<!-- filter roadColors="Road atlas style" attrColorValue="#B400FFFF"/ -->
+		<filter nightMode="false" attrColorValue="#B400FFFF"/>
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
-	<renderingAttribute name="defaultColor">
-		<filter noPolygons="true" attrColorValue="#00ffffff"/>
-		<filter nightMode="true" attrColorValue="#003333"/>
-		<filter attrColorValue="#f1eae4"/>
-	</renderingAttribute>
-	
-	<!-- The last will be used by default -->
-	<!-- HM road colors -->
-	<renderingConstant name="secondaryRoadColor" value="#ffd080" valuePale="#fdd6a4"/>
-	<renderingConstant name="motorwayRoadColor" value="#809bff" valuePale="#809bff"/>
-	<renderingConstant name="trunkRoadColor" value="#ed154b" valuePale="#df1346"/> // 
-	<renderingConstant name="primaryRoadColor" value="#ff80a0" valuePale="#eb989a"/>
-	<renderingConstant name="tertiaryRoadColor" value="#ffff80" valuePale="#fefeb3"/>
-	<!-- vi color -->
-	<renderingConstant name="secondaryRoadColor" value="#F7D131"/>
-	<renderingConstant name="motorwayRoadColor" value="#6666CC"/>
-	<renderingConstant name="trunkRoadColor" value="#A02067"/>
-	<renderingConstant name="primaryRoadColor" value="#C04D61"/>
-	<renderingConstant name="tertiaryRoadColor" value="#F0CE30"/>
-	<!-- Default mapnik colors with changed trunk -->
-	<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
-	<renderingConstant name="motorwayRoadColor" value="#809bff"/>
-	<renderingConstant name="trunkRoadColor" value="#FF8095"/>
-	<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
-	<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
-	
 	<!--
 		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
 		- some roads already rendered at lower zooms (travel/orienteering)
-		- motorways shown blue and trunk roads red to assimilate primaries, aligned with conventional road atlas
-		  (road color scheme intensified and unfied to Saturation=50, Brightness=100 on 2012-08-10. Old values commented with PALE-SCHEME)
+		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue)
 		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
 		Typical zoom level use (zX) and alignment of features displayed:
 		 - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
