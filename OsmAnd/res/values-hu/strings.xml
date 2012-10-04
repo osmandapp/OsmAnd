@@ -1045,4 +1045,7 @@
 	<string name="delete_target_point">Célpont törlése</string>
 	<string name="intermediate_point">%1$s. útpont</string>
     <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
+    <string name="map_widget_show_destionation_arrow">Célpont irányának megjelenítése</string>
+    <string name="enable_plugin_monitoring_services">"A monitorozási szolgáltatások használatához engedélyezd az Útvonalrögzítés és Alvó állapotú használat bővítményeket "</string>
+    <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
     </resources>
