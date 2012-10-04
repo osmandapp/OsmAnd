@@ -995,8 +995,8 @@
   <string name="bg_service_interval">Interval sledování polohy:</string>
   <string name="screen_is_locked">Klikněte na ikonu zámku pro odemčení obrazovky</string>
   <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
-  <string name="bg_service_sleep_mode_off">Zapnout službu na pozadí</string>
-  <string name="bg_service_sleep_mode_on">Vypnout službu na pozadí</string>
+  <string name="bg_service_sleep_mode_off">Zapnout\nslužbu na pozadí</string>
+  <string name="bg_service_sleep_mode_on">Vypnout\nslužbu na pozadí</string>
 <string name="show_lanes">Zobrazovat jízdní pruhy</string>
 <string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
 <string name="avoid_ferries">Vyhnout se trajektům</string>
@@ -1007,8 +1007,8 @@
 <string name="map_widget_show_ruler">Měřítko</string>
 <string name="map_widget_appearance">Ostatní:</string>
 <string name="map_widget_transparent">Průhledné ovládání</string>
-<string name="monitoring_mode_off">Záznam trasy do GPX</string>
-<string name="monitoring_mode_on">Zastavit\n záznam trasy</string>
+<string name="monitoring_mode_off">Záznam\ntrasy do GPX</string>
+<string name="monitoring_mode_on">Zastavit\nzáznam trasy</string>
 <string name="email">E-mail</string>
 <string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
 <string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
