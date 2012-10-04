@@ -8,9 +8,9 @@ import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import com.google.common.io.Files;
+import com.google.devtools.j2cpp.gen.CppHeaderGenerator;
 import com.google.devtools.j2objc.J2ObjC.Language;
-import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
-import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
+//import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
 
 public abstract class CppGenerationTest extends GenerationTest {
 	
@@ -22,10 +22,11 @@ public abstract class CppGenerationTest extends GenerationTest {
 		System.out.println("-----------------------------HEADER-----------------");
 		System.out.println(getTranslatedFile(type+".h"));
 		System.out.println();
-		System.out.println();
-		System.out.println("------------------------------------------------");
-		System.out.println("-------------------SOURCE-------------------");
-		System.out.println(getTranslatedFile(type+".m"));
+//		TODO commented for testing a header only 
+//		System.out.println();
+//		System.out.println("------------------------------------------------");
+//		System.out.println("-------------------SOURCE-------------------");
+//		System.out.println(getTranslatedFile(type+".m"));
 	}
 	
 	  protected void assertNoCompilationErrors(CompilationUnit unit) {
@@ -43,7 +44,7 @@ public abstract class CppGenerationTest extends GenerationTest {
 		CompilationUnit unit = translateType(typeName, source);
 		assertNoCompilationErrors(unit);
 		String sourceName = typeName + ".java";
-		ObjectiveCHeaderGenerator.generate(sourceName, source, unit);
-		ObjectiveCImplementationGenerator.generate(sourceName, Language.OBJECTIVE_C, unit, source);
+		CppHeaderGenerator.generate(sourceName, source, unit);
+//		ObjectiveCImplementationGenerator.generate(sourceName, Language.OBJECTIVE_C, unit, source);
 	}
 }
