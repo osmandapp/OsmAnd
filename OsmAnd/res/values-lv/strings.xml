@@ -4,7 +4,7 @@
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
   <string name="prefs_plugins">Spraudņi</string>
   <string name="tip_recent_changes_0_8_0_t">"Izmaiņas 0.8.0 : \n\t- *Spraudņu funkcionalitāte*\n\t- Funkcionalitāte ir sadalīta grupās un var tikt iespējota/atspējota ar Spraudņu menedžeri. Jūs variet iespējot (tiešsaistes vai kešotu) bilžu karti, sekošanas uzstādījumus, un daudz citas iespējas kuras bija pieejamas iepriekš. \n\t- *Jauns bezsaistes kartes atbalsts*\n\t- Kartes renderēšana ir ātrāka un precīzāka (pamatā izlabotas krasta līnijas un laukuma applūšanas problēmas). \n\t- Jums jāveic pilnīgi jaunu kartes datu lejuplāde (vecie dati vairs netiek atbalstīti)\n\t- *Bezsaistes maršrutēšana*\n\t- Bezsaistes maršrutēšana ir daudz stabilāka\n\t- *Lietojamība un UI*\n\t- Veikti uzlabojumi vairākos logos\n\t- Daudz kļūdu labojumu "</string>
-  <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM kvalitātes uzlabošanai. Tas ļauj savākt/modificēt OSM POI objektus, atvērt/komentēt OSM kļūdas un nosūtīt ierakstīto GPX (nepieciešama OSM ģistrācija).</string>
+  <string name="osm_editing_plugin_description">Rādīt uzstādījumus OSM kvalitātes uzlabošanai. Tas ļauj savākt/modificēt OSM POI objektus, atvērt/komentēt OSM kļūdas un nosūtīt ierakstīto GPX (nepieciešama OSM reģistrācija).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektoru kartes tiek attēlotas ātrāk. Tas var nestrādāt uz dažām iekārtām.</string>
   <string name="simulate_route_progression_manually">Simulēt maršruta progresiju manuāli</string>
   <string name="play_commands_of_currently_selected_voice">Atskaņot komandas izvēlētai balsij</string>
@@ -149,7 +149,7 @@
   <string name="osmand_service">Saglabāšanas režīma funkcionalitāte</string>
   <string name="osmand_service_descr">Tiek izmantots, lai OsmAnd strādātu kad ekrāns ir izslēgts</string>
   <string name="tip_rotation_switching">Kartes rotēšana</string>
-  <string name="tip_rotation_switching_t">\tJūs variet izvēlēties vai un kā notiks kartes rotācija \'Uzstādījumi\' -&gt; \'Kartes izskats\' -&gt; \'Kartes rotēšana\'. \n\tIzvēle ir: \n\t\'Nerotēt\' - Karte nemainīs orientāciju. Ziemeļi vienmēr būs augšā \n\t\'Kustības virzienā\' - Karte vienmēr pagriezīsies jūsu kustības virzienā \n\t\'Pēc kompasa\' - Karte vienmēr pagriezīsies pēc iekārtas kompasa datiem \n\tPadoms: Lai ātri pārslēgtu starp rotāciju ar kompasu un jūsu izstādījumos norādīto, jūs variet uzspiest uz kompasa kartes skatā.</string>
+  <string name="tip_rotation_switching_t">\tJūs variet izvēlēties vai un kā notiks kartes rotācija \'Uzstādījumi\' -&gt; \'Kartes izskats\' -&gt; \'Kartes rotēšana\'. \n\tIzvēle ir: \n\t\'Nerotēt\' - Karte nemainīs orientāciju. Ziemeļi vienmēr būs augšā \n\t\'Kustības virzienā\' - Karte vienmēr pagriezīsies jūsu kustības virzienā \n\t\'Pēc kompasa\' - Karte vienmēr pagriezīsies pēc iekārtas kompasa datiem \n\tPadoms: Lai ātri pārslēgtu starp rotāciju ar kompasu un jūsu izstādījumos norādīto, jūs varat uzspiest uz kompasa kartes skatā.</string>
   <string name="binary_map_download_success">Lejuplāde ir veiksmīga.\n\t\n\tLai aktivizētu \'Uzstādījumi\' -&gt; \'Kartes konfigurācija\' -&gt; \'Bezsaistes vektoru kartes\'.</string>
   <string name="tip_day_night_mode">Dienas/Nakts režīms</string>
   <string name="tip_day_night_mode_t">\tDažām vektoru kartēm izskats var tikt mainīts starp dienas (gaišāku) un nakts (tumšāku). \n\tNakts krāsas ir drošākas braukšanai. \n\tJūs variet izvēlēties noteikumus dienas/nakts pārslēgšana ar \'Uzstādījumi\' -&gt; \'Kartes izskats\' -&gt;\'Dienas/nakts režīms\'. \n\tJūs variet izvēlēties: \n\t\'Ausma/Saulriets\' - automātiskais režīms, kas ir atkarīgs no saules (noklusētais) \n\t\'Diena\' - vienmēr lietot dienas režīmu \n\t\'Night\' - vienmēr lietot nakts režīmu \n\t\'Gaismas sensors\' - kartes izskats tiek kontrolēts izmantojot jūsu iekārtas gaismas sensoru (ja tāds jūsu iekārtai ir)</string>
@@ -802,7 +802,7 @@
   <string name="offline_navigation_not_available">OsmAnd bezsaistes navigācija pagaidām nav pieejama.</string>
   <string name="left_side_navigation">Kreisās rokas kustība</string>
   <string name="left_side_navigation_descr">Ieslēdziet ja jūs atrodaties valstīs ar kreisās puses kustību</string>
-  <string name="download_link_and_local_description">Lejuplādēt vai atjaunināt bezsaistes datus.\nLai redzētu detaļas uzklikšķiniet uz ieraksta, lai deaktivizētu vai dzēstu bezsaistes datus uzspiežat un turiet piespiestu. Datu apjoms (%1$s brīvs):</string>
+  <string name="download_link_and_local_description">Lejuplādēt vai atjaunināt bezsaistes datus.\nLai redzētu detaļas uzklikšķiniet uz ieraksta, lai deaktivizētu vai dzēstu bezsaistes datus uzspiediet un turiet piespiestu. Datu apjoms (%1$s brīvs):</string>
   <string name="unknown_from_location">Starta vieta vēl nav noteikta</string>
   <string name="context_menu_item_directions">Navigācija</string>
   <string name="confirm_interrupt_download">Tiešām vēlaties pārtraukt faila lejuplādi?</string>
@@ -815,8 +815,8 @@
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
   <string name="map_settings">- Kartes uzstādījumi</string>
   <string name="map_settings_descr">Konfigurēt kartes attēlošanu</string>
-  <string name="osmand_rastermaps_plugin_description">Rādīt uzstādījumus lai konfigurētu dažādu tiešsaistes kešotas kartes kā papildus virs / apakš slāņus. Kartes arī var sagatavot bezsaistē un nokopēt uz Osman mapi.</string>
-  <string name="osmand_background_plugin_description">Rādīt uzstādījumus lai iespējotu sekošanu vai navigāciju strāvas sglabāšanas (izslēgts ekrāns) režīmā, periodiski atmodinot GPS iekārtu.</string>
+  <string name="osmand_rastermaps_plugin_description">Rādīt uzstādījumus lai konfigurētu dažādu tiešsaistes kešotas kartes kā papildus virs / apakš slāņus. Kartes arī var sagatavot bezsaistē un iekopēt Osmand mapē.</string>
+  <string name="osmand_background_plugin_description">Rādīt uzstādījumus lai iespējotu sekošanu vai navigāciju strāvas taupīšanas (izslēgts ekrāns) režīmā, periodiski atmodinot GPS iekārtu.</string>
   <string name="osmand_accessibility_description">Rādīt uzstādījumus īpašām pieejamības iespējām.</string>
   <string name="extra_settings">Paplašinātie uzstādījumi</string>
   <string name="osmand_monitoring_description">Rādīt uzstādījumus lai ierakstītu jūsu braucienu GPX failā vai arī veiktu tiešasaistes sekošanu izmantojot web servisu.</string>
