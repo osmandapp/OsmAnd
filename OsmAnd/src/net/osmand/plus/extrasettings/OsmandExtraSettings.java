@@ -108,7 +108,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 		
-		final MapInfoControlRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(0, R.string.map_widget_show_destionation_arrow,
+		final MapInfoControlRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destionation_arrow,
 				"show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
 		showDestinationArrow.setStateChangeListener(new Runnable() {
 			@Override
