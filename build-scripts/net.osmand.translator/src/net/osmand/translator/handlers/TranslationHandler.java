@@ -26,6 +26,7 @@ import org.eclipse.jface.text.Document;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.google.devtools.j2cpp.util.NameTable;
 import com.google.devtools.j2objc.J2ObjC;
 import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
@@ -33,7 +34,6 @@ import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
 import com.google.devtools.j2objc.sym.Symbols;
 import com.google.devtools.j2objc.types.Types;
 import com.google.devtools.j2objc.util.ASTNodeException;
-import com.google.devtools.j2objc.util.NameTable;
 
 
 public class TranslationHandler {

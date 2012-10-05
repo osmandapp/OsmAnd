@@ -40,6 +40,7 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
+import com.google.devtools.j2cpp.util.NameTable;
 import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.Plugin;
 import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
@@ -58,7 +59,6 @@ import com.google.devtools.j2objc.translate.Rewriter;
 import com.google.devtools.j2objc.types.Types;
 import com.google.devtools.j2objc.util.ASTNodeException;
 import com.google.devtools.j2objc.util.DeadCodeMap;
-import com.google.devtools.j2objc.util.NameTable;
 import com.google.devtools.j2objc.util.ProGuardUsageParser;
 
 /**

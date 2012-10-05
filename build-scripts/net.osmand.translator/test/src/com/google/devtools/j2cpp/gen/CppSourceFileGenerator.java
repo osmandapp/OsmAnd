@@ -19,11 +19,11 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import com.google.common.collect.Lists;
+import com.google.devtools.j2cpp.util.NameTable;
 import com.google.devtools.j2objc.gen.SourceFileGenerator;
 import com.google.devtools.j2objc.types.IOSMethod;
 import com.google.devtools.j2objc.types.IOSParameter;
 import com.google.devtools.j2objc.types.Types;
-import com.google.devtools.j2objc.util.NameTable;
 
 public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 
