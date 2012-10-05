@@ -9,7 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="rendering_attr_roadColors_description">Select road color scheme for specific purpose</string>
+	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destionation_arrow">Show destination direction</string>
     <string name="enable_plugin_monitoring_services">Enable monitoring plugins (tracking, live tracking) to use monitoring services </string>
