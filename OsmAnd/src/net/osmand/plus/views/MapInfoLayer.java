@@ -287,7 +287,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				final String[] items = rendererNames.toArray(new String[rendererNames.size()]);
 				int i = -1;
 				for(int j = 0; j< items.length; j++) {
-					if(items[j].equals(app.getRendererRegistry().getCurrentSelectedRenderer().getName())) {
+					//if(items[j].equals(app.getRendererRegistry().getCurrentSelectedRenderer().getName())) {
+					if(items[j].equals(app.getRendererRegistry().getCurrentSelectedRenderer())) {
 						 i = j;
 						 break;
 					}
