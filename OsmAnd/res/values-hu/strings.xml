@@ -1048,4 +1048,6 @@
     <string name="map_widget_show_destionation_arrow">Célpont irányának megjelenítése</string>
     <string name="enable_plugin_monitoring_services">"A monitorozási szolgáltatások használatához engedélyezd az Útvonalrögzítés és Alvó állapotú használat bővítményeket "</string>
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
+    <string name="rendering_attr_roadColors_description">Válassz egy útszínsémát:</string>
+	<string name="rendering_attr_roadColors_name">Útszínséma</string>
     </resources>
