@@ -36,6 +36,18 @@
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
 
+	<renderingAttribute name="routeColor">
+		<filter roadColors="Road atlas style" attrColorValue="#CCFF6600"/>
+		<filter nightMode="false" attrColorValue="#960000FF"/>
+		<filter attrColorValue="#CCFF6600"/>
+	</renderingAttribute>
+
+	<renderingAttribute name="gpxColor">
+		<!-- filter roadColors="Road atlas style" attrColorValue="#B400FFFF"/ -->
+		<filter nightMode="false" attrColorValue="#B400FFFF"/>
+		<filter attrColorValue="#B400FFFF"/>
+	</renderingAttribute>
+
 	<!-- Bug in filter - the last will be used by default -->
 	<!-- group roadColors="Modified Mapnik" -->
 	<group>
@@ -66,18 +78,6 @@
 		<renderingConstant name="secondaryRoadColor" value="#F7D131"/>
 		<renderingConstant name="tertiaryRoadColor" value="#F0CE30"/>
 	</group -->
-
-	<renderingAttribute name="routeColor">
-		<filter roadColors="Road atlas style" attrColorValue="#CCFF6600"/>
-		<filter nightMode="false" attrColorValue="#960000FF"/>
-		<filter attrColorValue="#CCFF6600"/>
-	</renderingAttribute>
-
-	<renderingAttribute name="gpxColor">
-		<!-- filter roadColors="Road atlas style" attrColorValue="#B400FFFF"/ -->
-		<filter nightMode="false" attrColorValue="#B400FFFF"/>
-		<filter attrColorValue="#B400FFFF"/>
-	</renderingAttribute>
 
 	<!--
 		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
