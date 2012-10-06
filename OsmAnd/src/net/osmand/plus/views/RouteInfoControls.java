@@ -599,6 +599,7 @@ public class RouteInfoControls {
 					AlarmInfo alarm = routingHelper.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
 					if(alarm != null) {
 						int locimgId = 0;
+						String text = null;
 						if(alarm.getType() == AlarmInfo.SPEED_LIMIT) {
 							text = alarm.getIntValue() +"";
 						} else if(alarm.getType() == AlarmInfo.SPEED_CAMERA) {
@@ -631,6 +632,11 @@ public class RouteInfoControls {
 								} else {
 									img = BitmapFactory.decodeResource(getResources(), locimgId);
 								}
+								invalidate();
+							}
+							if(text != null && !text.equals(this.text)) {
+								this.text = text;
+								invalidate();
 							}
 						}
 					}
