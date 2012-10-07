@@ -8,12 +8,18 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.MemoryCacheImageInputStream;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
+import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 
 import resources._R;
 
@@ -33,13 +39,34 @@ public class NativeSwingRendering extends NativeLibrary {
 	private HashMap<String, String> renderingProps;
 	private static NativeSwingRendering defaultLoadedLibrary; 
 	
+	private void loadRenderingAttributes(InputStream is, final Map<String, String> renderingConstants) throws SAXException, IOException{
+		try {
+			final SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
+			saxParser.parse(is, new DefaultHandler() {
+				@Override
+				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+					String tagName = saxParser.isNamespaceAware() ? localName : qName;
+					if ("renderingConstant".equals(tagName)) { //$NON-NLS-1$
+						if (!renderingConstants.containsKey(attributes.getValue("name"))) {
+							renderingConstants.put(attributes.getValue("name"), attributes.getValue("value"));
+						}
+					}
+				}
+			});
+		} catch (ParserConfigurationException e1) {
+			throw new IllegalStateException(e1);
+		} finally {
+			is.close();
+		}
+	}
+	
 	public void loadRuleStorage(String path, String renderingProperties) throws SAXException, IOException{
-		final LinkedHashMap<String, String> renderingAttributes = new LinkedHashMap<String, String>();
-		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingAttributes);
+		final LinkedHashMap<String, String> renderingConstants = new LinkedHashMap<String, String>();
+		
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
-				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingAttributes);
+				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingConstants);
 				try {
 					depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name+".render.xml"),
 							ref);
@@ -50,8 +77,13 @@ public class NativeSwingRendering extends NativeLibrary {
 			}
 		};
 		if(path == null || path.equals("default.render.xml")) {
+			loadRenderingAttributes(RenderingRulesStorage.class.getResourceAsStream("default.render.xml"), 
+					renderingConstants);
+			storage = new RenderingRulesStorage("default", renderingConstants);
 			storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("default.render.xml"), resolver);
 		} else {
+			loadRenderingAttributes(new FileInputStream(path),renderingConstants);
+			storage = new RenderingRulesStorage("default", renderingConstants);
 			storage.parseRulesFromXmlInputStream(new FileInputStream(path), resolver);
 		}
 		renderingProps = new HashMap<String, String>();
@@ -63,8 +95,6 @@ public class NativeSwingRendering extends NativeLibrary {
 			}
 		}
 		initRenderingRulesStorage(storage);
-		this.storage = storage;
-		
 	}
 	
 	public NativeSwingRendering(){
