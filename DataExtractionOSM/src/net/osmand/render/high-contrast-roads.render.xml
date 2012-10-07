@@ -1,4 +1,4 @@
-<renderingStyle name="High constrast roads" depends="default" defaultColor="#f1eae4" version="1">
+<renderingStyle name="High contrast roads" depends="default" defaultColor="#f1eae4" version="1">
 
 	<!--
 		Depends on All-Purpose Renderer (by Hardy Mueller), based on production version 2012-01-04
