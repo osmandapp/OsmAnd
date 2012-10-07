@@ -162,13 +162,13 @@ public class OpeningHoursParser {
 	public static class BasicDayOpeningHourRule  implements OpeningHoursRule {
 		/**
 		 * represents the list on which days it is open.
-		 * Day number 0 is ???? TODO
+		 * Day number 0 is MONDAY
 		 */
 		private boolean[] days = new boolean[7];
 		/**
 		 * lists of equal size representing the start and end times
 		 */
-		private int[] startTimes, endTimes;
+		private int[] startTimes = new int[0], endTimes = new int[0];
 		
 		/**
 		 * return an array representing the days of the rule
@@ -178,7 +178,6 @@ public class OpeningHoursParser {
 			return days;
 		}
 		
-		@Deprecated
 		/**
 		 * set a single start time, erase all previously added start times
 		 * @param s startTime to set
@@ -190,7 +189,6 @@ public class OpeningHoursParser {
 			}
 		}
 		
-		@Deprecated
 		/**
 		 * set a single end time, erase all previously added end times
 		 * @param e endTime to set
@@ -202,38 +200,35 @@ public class OpeningHoursParser {
 			}
 		}
 		
-		@Deprecated
 		/**
 		 * get a single start time
 		 * @return a single start time
 		 */
 		public int getStartTime() {
-			try {
-				return startTimes[0];
-			} catch (Exception e){
+			if(startTimes.length == 0) {
 				return 0;
 			}
+			return startTimes[0];
 		}
 		
-		@Deprecated
 		/**
 		 * get a single end time
 		 * @return a single end time
 		 */
 		public int getEndTime() {
-			try {
-				return endTimes[0];
-			} catch (Exception e){
+			if(endTimes.length == 0) {
 				return 0;
 			}
+			return endTimes[0];
 		}
 		
-		@Override 
+		 
 		/**
 		 * Check if the weekday of time "cal" is part of this rule
 		 * @param cal the time to check
 		 * @return true if this day is part of the rule
 		 */
+		@Override
 		public boolean containsDay(Calendar cal){
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int d = (i + 5) % 7;
@@ -244,12 +239,13 @@ public class OpeningHoursParser {
 			
 		}
 		
-		@Override 
+		 
 		/**
 		 * Check if the previous weekday of time "cal" is part of this rule
 		 * @param cal the time to check
 		 * @return true if the previous day is part of the rule
 		 */
+		@Override
 		public boolean containsPreviousDay(Calendar cal){
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int p = (i + 4) % 7;
@@ -260,7 +256,6 @@ public class OpeningHoursParser {
 			
 		}
 		
-		@Override
 		/**
 		 * Check if this rule says the feature is open at time "cal"
 		 * @param cal the time to check
@@ -268,10 +263,8 @@ public class OpeningHoursParser {
 		 * @return true if this rule contains the previous day and an endTime>startTime such that the time to check falls before the endtime
 		 * @return false in all other cases, also if only day is wrong
 		 */
+		@Override
 		public boolean isOpenedForTime(Calendar cal, boolean checkPrevious) {
-			if (startTimes == null) {
-				return false;
-			}
 			int i = cal.get(Calendar.DAY_OF_WEEK);
 			int d = (i + 5) % 7;
 			int p = d - 1;
@@ -279,7 +272,7 @@ public class OpeningHoursParser {
 				p += 7;
 			}
 			int time = cal.get(Calendar.HOUR_OF_DAY) * 60 + cal.get(Calendar.MINUTE);
-			for (i = 0; i<startTimes.length; i++){
+			for (i = 0; i < startTimes.length; i++) {
 				int startTime = this.startTimes[i];
 				int endTime = this.endTimes[i];
 				// one day working 10 - 20 (not 20 - 04)
@@ -362,23 +355,18 @@ public class OpeningHoursParser {
 		 * @param endTime endTime to add
 		 */
 		public void addTimeRange(int startTime, int endTime) {
-			if (startTimes == null){
-				startTimes = new int[] {startTime};
-				endTimes = new int[] {endTime};
-			} else {
-				int l = startTimes.length;
-				int[] newStartTimes = new int[l+1];
-				int[] newEndTimes = new int[l+1];
-				for (int i=0; i<l; i++){
-					newStartTimes[i] = startTimes[i];
-					newEndTimes[i] = endTimes[i];
-				}
-				newStartTimes[l] = startTime;
-				newEndTimes[l] = endTime;
-				
-				startTimes = newStartTimes;
-				endTimes = newEndTimes;
+			int l = startTimes.length;
+			int[] newStartTimes = new int[l + 1];
+			int[] newEndTimes = new int[l + 1];
+			for (int i = 0; i < l; i++) {
+				newStartTimes[i] = startTimes[i];
+				newEndTimes[i] = endTimes[i];
 			}
+			newStartTimes[l] = startTime;
+			newEndTimes[l] = endTime;
+
+			startTimes = newStartTimes;
+			endTimes = newEndTimes;
 		}
 		
 	}
