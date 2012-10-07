@@ -97,6 +97,10 @@ public abstract class OsmandPlugin {
 	
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {};
 	
+	/**
+	 * Register layers calls when activity is created and before @mapActivityCreate
+	 * @param activity
+	 */
 	public abstract void registerLayers(MapActivity activity);
 
 	public void mapActivityCreate(MapActivity activity) { }
