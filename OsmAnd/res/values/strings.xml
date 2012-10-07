@@ -40,7 +40,7 @@
     <string name="target_points">Targets</string>
     <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
-    <string name="context_menu_item_intermediate_point">Add way point</string>
+    <string name="context_menu_item_intermediate_point">Add as waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="btn_add_tag">Add Tag</string>
@@ -588,7 +588,7 @@
 	<string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
 	<string name="local_index_gpx_info_speed">\nAverage speed : %1$s \nMaximum speed : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWay points : %3$d\nTotal distance : %4$s\nStart time : %5$tF,  %5$tR\nEnd time : %6$tF,  %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks : %1$d\nTotal points : %2$d\nWaypoints : %3$d\nTotal distance : %4$s\nStart time : %5$tF,  %5$tR\nEnd time : %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%1$d of %2$d item(s) successfully deactivated.</string>
 	<string name="local_index_items_deleted">%1$d of %2$d item(s) successfully deleted.</string>
