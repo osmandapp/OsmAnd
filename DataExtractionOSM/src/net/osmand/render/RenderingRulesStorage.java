@@ -62,13 +62,9 @@ public class RenderingRulesStorage {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException;
 	}
 	
-	public RenderingRulesStorage(String name){
-		// register empty string as 0
+	public RenderingRulesStorage(String name, Map<String, String> renderingConstants){
 		getDictionaryValue("");
 		this.renderingName = name;
-	}
-	
-	public RenderingRulesStorage(String name, Map<String, String> renderingConstants){
 		if(renderingConstants != null) {
 			this.renderingConstants.putAll(renderingConstants);
 		}
@@ -436,11 +432,11 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws SAXException, IOException {
-		RenderingRulesStorage storage = new RenderingRulesStorage("test");
+		RenderingRulesStorage storage = new RenderingRulesStorage("test", null);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
-				RenderingRulesStorage depends = new RenderingRulesStorage("test");
+				RenderingRulesStorage depends = new RenderingRulesStorage("test", null);
 				try {
 					depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name+".render.xml"),
 							ref);

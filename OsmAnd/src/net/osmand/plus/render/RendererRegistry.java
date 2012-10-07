@@ -60,7 +60,9 @@ public class RendererRegistry {
 			return null;
 		}
 		try {
-			return loadRenderer(name, new LinkedHashMap<String, RenderingRulesStorage>(), new LinkedHashMap<String, String>());
+			RenderingRulesStorage r = loadRenderer(name, new LinkedHashMap<String, RenderingRulesStorage>(), new LinkedHashMap<String, String>());
+			renderers.put(name, r);
+			return r;
 		} catch (IOException e) {
 			log.error("Error loading renderer", e); //$NON-NLS-1$
 		} catch (SAXException e) {
@@ -124,7 +126,6 @@ public class RendererRegistry {
 		} finally {
 			is.close();
 		}
-		renderers.put(name, main);
 		return main;
 	}
 

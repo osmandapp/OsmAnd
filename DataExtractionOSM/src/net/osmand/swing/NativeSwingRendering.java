@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -33,11 +34,12 @@ public class NativeSwingRendering extends NativeLibrary {
 	private static NativeSwingRendering defaultLoadedLibrary; 
 	
 	public void loadRuleStorage(String path, String renderingProperties) throws SAXException, IOException{
-		RenderingRulesStorage storage = new RenderingRulesStorage("default");
+		final LinkedHashMap<String, String> renderingAttributes = new LinkedHashMap<String, String>();
+		RenderingRulesStorage storage = new RenderingRulesStorage("default", renderingAttributes);
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
-				RenderingRulesStorage depends = new RenderingRulesStorage(name);
+				RenderingRulesStorage depends = new RenderingRulesStorage(name, renderingAttributes);
 				try {
 					depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name+".render.xml"),
 							ref);
