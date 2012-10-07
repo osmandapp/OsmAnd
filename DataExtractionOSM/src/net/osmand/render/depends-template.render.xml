@@ -3,8 +3,15 @@
 
 
 	<!-- Example: modify route and gpx overlay colors -->
-		<renderingAttribute name="routeColor" attrColorValue="#CCFF6600"/>
-		<renderingAttribute name="gpxColor" attrColorValue="#B400FFFF"/>
+	<renderingAttribute name="routeColor">
+		<filter nightMode="false" attrColorValue="#CCFF6600"/>
+		<filter attrColorValue="#CCFF6600"/>
+	</renderingAttribute>
+
+	<renderingAttribute name="gpxColor">
+		<filter nightMode="false" attrColorValue="#B400FFFF"/>
+		<filter attrColorValue="#B400FFFF"/>
+	</renderingAttribute>
 
 
 	<order>
