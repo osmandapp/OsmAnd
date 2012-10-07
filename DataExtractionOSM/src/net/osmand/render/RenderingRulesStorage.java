@@ -68,7 +68,11 @@ public class RenderingRulesStorage {
 		this.renderingName = name;
 	}
 	
-	
+	public RenderingRulesStorage(String name, Map<String, String> renderingConstants){
+		if(renderingConstants != null) {
+			this.renderingConstants.putAll(renderingConstants);
+		}
+	}
 	
 	public int getDictionaryValue(String val) {
 		if(dictionaryMap.containsKey(val)){
@@ -320,7 +324,9 @@ public class RenderingRulesStorage {
 				}
 				PROPS.registerRule(prop);
 			} else if("renderingConstant".equals(name)){ //$NON-NLS-1$
-				renderingConstants.put(attributes.getValue("name"), attributes.getValue("value"));
+				if(!renderingConstants.containsKey(attributes.getValue("name"))){
+					renderingConstants.put(attributes.getValue("name"), attributes.getValue("value"));
+				}
 			} else if("renderingStyle".equals(name)){ //$NON-NLS-1$
 				String depends = attributes.getValue("depends");
 				if(depends != null && depends.length()> 0){
