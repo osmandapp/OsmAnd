@@ -27,17 +27,17 @@
 	</string>
 	<string name="map_widget_monitoring_services">Monitoring services</string>
 	<string name="no_route">No route</string>
-	<string name="delete_target_point">Remove target point</string>
-	<string name="target_point">Target point %1$s</string>
+	<string name="delete_target_point">Remove waypoint</string>
+	<string name="target_point">Waypoint %1$s</string>
     <string name="intermediate_point">Waypoint %1$s</string>
     <string name="navigate_to">Set as destination</string>
-    <string name="context_menu_item_last_intermediate_point">Set last target point</string>
-    <string name="context_menu_item_first_intermediate_point">Set first target point</string>
+    <string name="context_menu_item_last_intermediate_point">Add as last waypoint</string>
+    <string name="context_menu_item_first_intermediate_point">Add as first waypoint</string>
     <string name="add_as_last_destination_point">Add as last waypoint</string>
     <string name="add_as_first_destination_point">Add as first waypoint</string>
     <string name="replace_destination_point">Replace destination point</string>
     <string name="new_destination_point_dialog">You already have destination point set.</string>
-    <string name="target_points">Targets</string>
+    <string name="target_points">Waypoints</string>
     <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
     <string name="context_menu_item_intermediate_point">Add as waypoint</string>
@@ -170,7 +170,7 @@
 	<string name="map_widget_parking">Parking</string>
 	<string name="map_widget_monitoring">Tracking</string>
 	<string name="map_widget_speed">Speed</string>
-	<string name="map_widget_distance">Target</string>
+	<string name="map_widget_distance">Destination</string>
 	<string name="map_widget_altitude">Altitude</string>
 	<string name="map_widget_time">Time to go</string>
 	<string name="map_widget_next_turn">Next turn</string>
