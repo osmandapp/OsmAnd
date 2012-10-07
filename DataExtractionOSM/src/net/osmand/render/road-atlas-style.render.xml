@@ -2,7 +2,7 @@
 
 	<!--
 		Part of former All-Purpose Renderer (by Hardy Mueller), based on production version 2012-01-04
-		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue)
+		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue). For best visibility: routeColor="#960000FF, gpxColor="#B400FFFF".
 	--> 
 
 	<!-- roadColors="Road atlas style" -->
