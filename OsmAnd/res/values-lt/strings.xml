@@ -1127,4 +1127,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="enable_plugin_monitoring_services">"Jei norite naudoti sekimo paslaugas (sekimo ir sekimo gyvai) įjunkite sekimo įskiepius "</string>
     <string name="non_optimal_route_calculation">Apskaičiuoti (tikėtinai) neoptimalų ilgo nuotolio maršrutą</string>
     <string name="gps_not_available">Įjunkite GPS telefono nustatymuose</string>
+    <string name="rendering_attr_roadColors_description">Pasirinkti kelių spalvinimo schemą:</string>
+	<string name="rendering_attr_roadColors_name">Kelių spalvinimo schema</string>
     </resources>
