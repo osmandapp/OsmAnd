@@ -982,7 +982,8 @@ public class BinaryRoutePlanner {
 				|| highway.endsWith("path")) {
 			return MAX_SPEAK_PRIORITY;
 		}
-		if (highway.endsWith("_link")  || highway.endsWith("unclassified") || highway.endsWith("road") )  {
+		if (highway.endsWith("_link")  || highway.endsWith("unclassified") || highway.endsWith("road") 
+				|| highway.endsWith("living_street") || highway.endsWith("residential") )  {
 			return 1;
 		}
 		return 0;
