@@ -54,6 +54,7 @@ public class RenderingRulesStorage {
 	protected Map<String, String> renderingConstants= new LinkedHashMap<String, String>();
 	
 	private String renderingName;
+	private String internalRenderingName;
 	
 	
 	public static interface RenderingRulesStorageResolver {
@@ -61,9 +62,10 @@ public class RenderingRulesStorage {
 		RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException;
 	}
 	
-	public RenderingRulesStorage(){
+	public RenderingRulesStorage(String name){
 		// register empty string as 0
 		getDictionaryValue("");
+		this.renderingName = name;
 	}
 	
 	
@@ -86,6 +88,10 @@ public class RenderingRulesStorage {
 	
 	public String getName() {
 		return renderingName;
+	}
+	
+	public String getInternalRenderingName() {
+		return internalRenderingName;
 	}
 	
 	
@@ -220,6 +226,7 @@ public class RenderingRulesStorage {
 		private RenderingRulesStorage dependsStorage;
 		
 		
+		
 		public RenderingRulesHandler(SAXParser parser, RenderingRulesStorageResolver resolver){
 			this.parser = parser;
 			this.resolver = resolver;
@@ -326,7 +333,7 @@ public class RenderingRulesStorage {
 					PROPS = new RenderingRuleStorageProperties(dependsStorage.PROPS);
 					
 				}
-				renderingName = attributes.getValue("name");
+				internalRenderingName = attributes.getValue("name");
 				
 			} else if("renderer".equals(name)){ //$NON-NLS-1$
 				throw new SAXException("Rendering style is deprecated and no longer supported.");
@@ -423,11 +430,11 @@ public class RenderingRulesStorage {
 	
 	
 	public static void main(String[] args) throws SAXException, IOException {
-		RenderingRulesStorage storage = new RenderingRulesStorage();
+		RenderingRulesStorage storage = new RenderingRulesStorage("test");
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
-				RenderingRulesStorage depends = new RenderingRulesStorage();
+				RenderingRulesStorage depends = new RenderingRulesStorage("test");
 				try {
 					depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name+".render.xml"),
 							ref);

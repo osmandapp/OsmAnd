@@ -80,7 +80,7 @@ public class RendererRegistry {
 		} else {
 			throw new IllegalArgumentException("Not found " + name); //$NON-NLS-1$
 		}
-		RenderingRulesStorage main = new RenderingRulesStorage();
+		RenderingRulesStorage main = new RenderingRulesStorage(name);
 		loadedRenderers.add(name);
 		main.parseRulesFromXmlInputStream(is, new RenderingRulesStorageResolver() {
 			

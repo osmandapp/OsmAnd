@@ -33,12 +33,11 @@ public class NativeSwingRendering extends NativeLibrary {
 	private static NativeSwingRendering defaultLoadedLibrary; 
 	
 	public void loadRuleStorage(String path, String renderingProperties) throws SAXException, IOException{
-		RenderingRulesStorage storage2 = new RenderingRulesStorage();
-		RenderingRulesStorage storage = new RenderingRulesStorage();
+		RenderingRulesStorage storage = new RenderingRulesStorage("default");
 		final RenderingRulesStorageResolver resolver = new RenderingRulesStorageResolver() {
 			@Override
 			public RenderingRulesStorage resolve(String name, RenderingRulesStorageResolver ref) throws SAXException {
-				RenderingRulesStorage depends = new RenderingRulesStorage();
+				RenderingRulesStorage depends = new RenderingRulesStorage(name);
 				try {
 					depends.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream(name+".render.xml"),
 							ref);
