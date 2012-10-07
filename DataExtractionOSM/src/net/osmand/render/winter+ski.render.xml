@@ -1,4 +1,4 @@
-<renderingStyle name="winter" depends="default" defaultColor="#F5FFFF" version="1">
+<renderingStyle name="winter+ski" depends="default" defaultColor="#F5FFFF" version="1">
 
 	<!--
 		Depends on All-Purpose Renderer (by Hardy Mueller), v023
@@ -18,10 +18,8 @@
 	</renderingAttribute>
 
 
-	<!-- input exact layer, orderType check tag, value -->
-	<!-- point = 1, line = 2, polygon = 3 -->
 	<order>
-		<!-- Winter: Layers -->
+		<!-- Winter layers -->
 		<group objectType="2">
 			<filter tag="oa_nordic" value="" order="57" shadowLevel="1"/>
 			<filter tag="oa_downhill" value="" order="57" shadowLevel="1"/>
@@ -31,9 +29,8 @@
 	</order>
 
 
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
 	<text>
-		<!--Winter-->
+		<!--Winter text-->
 		<group>
 			<filter tag="oa_nordic" value="" textOrder="8"/>
 			<filter tag="oa_downhill" value="" textOrder="8"/>
@@ -50,12 +47,10 @@
 	</text>
 
 
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<point>
 	</point>
 
 
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
 	<polygon>
 		<!--Winter landscape-->
 			<filter minzoom="10" color="#F5FFFF" tag="natural" value="land"/>

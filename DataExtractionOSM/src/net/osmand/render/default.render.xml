@@ -12,8 +12,8 @@
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
 	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="roadColors" name="Road color scheme" description="Select road color scheme for specific purpose"
-		type="string" possibleValues="Modified Mapnik,Road atlas style,High contrast roads,Experimental"/>
+	<!-- renderingProperty attr="roadColors" name="Road color scheme" description="Select road color scheme for specific purpose"
+		type="string" possibleValues="Modified Mapnik,Road atlas style,High contrast roads,Experimental"/ -->
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
 		type="string" possibleValues="--,13,12,11"/>
 	<renderingProperty attr="appMode" name="Rendering mode" description="Map optimization for respective User Profile"
@@ -37,7 +37,7 @@
 	</renderingAttribute>
 
 	<renderingAttribute name="routeColor">
-		<filter roadColors="Road atlas style" attrColorValue="#CCFF6600"/>
+		<!-- filter roadColors="Road atlas style" attrColorValue="#CCFF6600"/ -->
 		<filter nightMode="false" attrColorValue="#960000FF"/>
 		<filter attrColorValue="#CCFF6600"/>
 	</renderingAttribute>
@@ -48,36 +48,37 @@
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
-	<!-- Bug in filter - the last will be used by default -->
-	<!-- group roadColors="Modified Mapnik" -->
-	<group>
+	<!-- filter does not work for renderingConstant - the last one will be used, but better use separate depends Rendering style -->
+	<!-- roadColors="Modified Mapnik" -->
 		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
 		<renderingConstant name="trunkRoadColor" value="#FF8095"/>
 		<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
 		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
 		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
-	</group>
-	<!-- group roadColors="Road atlas style">
+	<!-- roadColors="Road atlas style" -->
+		<!--
 		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
 		<renderingConstant name="trunkRoadColor" value="#ed154b"/>
 		<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
 		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
 		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
-	</group -->
-	<!-- group roadColors="High contrast roads">
+		-->
+	<!-- roadColors="High contrast roads" -->
+		<!--
 		<renderingConstant name="motorwayRoadColor" value="#3838B0"/>
 		<renderingConstant name="trunkRoadColor" value="#A01060"/>
 		<renderingConstant name="primaryRoadColor" value="#C00828"/>
 		<renderingConstant name="secondaryRoadColor" value="#FF8000"/>
 		<renderingConstant name="tertiaryRoadColor" value="#F0C810"/>
-	</group -->
-	<!-- group roadColors="Experimental">
+		-->
+	<!-- roadColors="Experimental" -->
+		<!--
 		<renderingConstant name="motorwayRoadColor" value="#6666CC"/>
 		<renderingConstant name="trunkRoadColor" value="#A02067"/>
 		<renderingConstant name="primaryRoadColor" value="#C04D61"/>
 		<renderingConstant name="secondaryRoadColor" value="#F7D131"/>
 		<renderingConstant name="tertiaryRoadColor" value="#F0CE30"/>
-	</group -->
+		-->
 
 	<!--
 		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:

@@ -1,0 +1,39 @@
+<renderingStyle name="road-atlas-style" depends="default" defaultColor="#f1eae4" version="1">
+
+	<!--
+		Part of former All-Purpose Renderer (by Hardy Mueller), based on production version 2012-01-04
+		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue)
+	--> 
+
+	<!-- roadColors="Road atlas style" -->
+		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#ed154b"/>
+		<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
+		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+
+	<renderingAttribute name="routeColor" attrColorValue="#CCFF6600"/>
+
+	<renderingAttribute name="gpxColor" attrColorValue="#B400FFFF"/>
+
+
+	<order>
+	</order>
+
+
+	<text>
+	</text>
+
+
+	<point>
+	</point>
+
+
+	<polygon>
+	</polygon>
+
+
+	<line>
+	</line>
+
+</renderingStyle>
