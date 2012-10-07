@@ -612,7 +612,7 @@
 	<string name="mile">μλ</string>
 	<string name="send_location_way_choose_title">Κοινή χρήση τοποθεσίας χρησιμοποιώντας</string>
 	<string name="send_location_sms_pattern">Τοποθεσία: %1$s\n%2$s</string>
-	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
+	<string name="send_location_email_pattern">Για να δείτε την τοποθεσία ακολουθήστε τον σύνδεσμο %1$s με τον περιηγητή ιστού ή μόνο μέσω android τον σύνδεσμο %2$s</string>
 	<string name="send_location">Αποστολή τοποθεσίας</string>
 	<string name="context_menu_item_share_location">Κοινή χρήση τοποθεσίας</string>
 	<string name="add_waypoint_dialog_added">Το ενδιάμεσο σημείο \'\'{0}\'\' προστέθηκε επιτυχώς</string>
@@ -772,7 +772,7 @@
 	<string name="off_router_service_no_gps_available">Η υπηρεσία πλοήγησης παρασκηνίου απαιτεί ένα πάροχο τοποθεσίας να είναι ενεργοποιημένος.</string>
 	<string name="hide_poi_filter">Απόκρυψη φίλτρου</string>
 	<string name="show_poi_filter">Εμφάνιση φίλτρου</string>
-	<string name="search_poi_filter">Φίλτρο</string>
+	<string name="search_poi_filter">Φιλτράρισμα</string>
 	<string name="menu_mute_off">Ήχος ανοικτός</string>
 	<string name="menu_mute_on">Ήχος κλειστός</string>
 	<string name="voice_provider_descr">Επιλέξτε φωνητική καθοδήγηση για την πλοήγηση</string>
@@ -1038,7 +1038,7 @@
 	<string name="poi_dialog_other_tags_message">Όλες οι άλλες ετικέτες διατηρούνται</string>
 	<string name="default_buttons_commit">Commit</string>
 	<string name="default_buttons_reset">Επαναφορά</string>
-	<string name="filter_current_poiButton">Φίλτρο</string>
+	<string name="filter_current_poiButton">Φιλτράρισμα</string>
 	<string name="edit_filter_delete_menu_item">Διαγραφή</string>
 	<string name="edit_filter_save_as_menu_item">Αποθήκευση Ως</string>
 	<string name="edit_filter_delete_dialog_title">Διαγραφή του επιλεγμένου φίλτρου?</string>
