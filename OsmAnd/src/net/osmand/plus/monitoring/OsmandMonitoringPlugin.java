@@ -67,7 +67,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.map_widget_monitoring);
+		return app.getString(R.string.map_widget_monitoring_services);
 	}
 
 	@Override

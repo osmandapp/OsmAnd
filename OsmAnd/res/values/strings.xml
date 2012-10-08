@@ -25,7 +25,7 @@
 	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
 	\n\t* Bug fixes
 	</string>
-	<string name="map_widget_monitoring_services">Tracking services</string>
+	<string name="map_widget_monitoring_services">Logging services</string>
 	<string name="no_route">No route</string>
 	<string name="delete_target_point">Remove waypoint</string>
 	<string name="target_point">Waypoint %1$s</string>
