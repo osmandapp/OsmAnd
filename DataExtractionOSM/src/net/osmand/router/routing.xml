@@ -3,7 +3,7 @@
 	<!-- 1. parameters of routing and different tweaks Influence on A* : -->
 	<!-- f(x) + heuristicCoefficient*g(X) -->
 	<!-- TEMPORARY needs to be reverted to 1 -->
-	<attribute name="heuristicCoefficient" value="1" />
+	<attribute name="heuristicCoefficient" value="" />
 
 	<!-- 1.1 tile load parameters (should not affect routing) -->
 	<!-- by default 16 -->
