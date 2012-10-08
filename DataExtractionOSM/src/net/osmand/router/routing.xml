@@ -3,24 +3,24 @@
 	<!-- 1. parameters of routing and different tweaks Influence on A* : -->
 	<!-- f(x) + heuristicCoefficient*g(X) -->
 	<!-- TEMPORARY needs to be reverted to 1 -->
-	<attribute name="heuristicCoefficient" value="" />
+	<attribute name="heuristicCoefficient" value="1" />
 
 	<!-- 1.1 tile load parameters (should not affect routing) -->
 	<!-- by default 16 -->
 	<attribute name="zoomToLoadTiles" value="16" />
 	<!--  by default it is 30. Value specified here overwrites all others
 			 (don't specify here ! it is device dependent)  -->
-	<attribute name="memoryLimitInMB" value="" />
+	<attribute name="memoryLimitInMB" value="300" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
-	<attribute name="useDynamicRoadPrioritising" value="true" />
+	<attribute name="useDynamicRoadPrioritising" value="false" />
 	<!--  for first N meters speed multiplied by priority, 0 special number - all rest distance -->
 	<attribute name="dynamicRoadPriorityDistance" value="30000" />
 
 	<!-- 1.3 Relaxing strategy -->
 	<!-- If the furthest routing branch passed distance 3 times more than small branches, small will be relaxed-->
 	<!-- Coefficient is configurable -->
-	<attribute name="useRelaxingStrategy" value="true" />
+	<attribute name="useRelaxingStrategy" value="false" />
 	<attribute name="iterationsToRelaxRoutes" value="100" />
 	<attribute name="relaxNodesIfStartDistSmallCoeff" value="5"/>
 
@@ -117,8 +117,8 @@
 		
 		<avoid tag="tracktype" value="grade5" decreasedPriority="0.6"/>
 		
-		<avoid tag="access" value="private" decreasedPriority="0.1"/>
-		<avoid tag="motor_vehicle" value="private" decreasedPriority="0.1"/>
+		<avoid tag="access" value="private" decreasedPriority="0.3"/>
+		<avoid tag="motor_vehicle" value="private" decreasedPriority="0.3"/>
 		
 		<avoid tag="access" value="no"/>
 		<avoid tag="motorcycle" value="no"/>

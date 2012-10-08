@@ -213,17 +213,21 @@ public class RoutingContext {
 				config.heuristicCoefficient);
 	}
 	
-	public void registerRouteDataObject(int x31, int y31, RouteDataObject o ) {
+	public void registerRouteDataObject(RouteDataObject o ) {
 		if(!getRouter().acceptLine(o)){
 			return;
 		}
-		long tileId = getRoutingTile(x31, y31, 0, OPTION_NO_LOAD);
-		List<RouteDataObject> routes = tileRoutes.get(tileId);
-		if(routes == null){
-			routes = new ArrayList<RouteDataObject>();
-			tileRoutes.put(tileId, routes);
+		for(int k = 0; k<o.getPointsLength(); k++) {
+			int x31 = o.getPoint31XTile(k);
+			int y31 = o.getPoint31YTile(k);
+			long tileId = getRoutingTile(x31, y31, 0, OPTION_NO_LOAD);
+			List<RouteDataObject> routes = tileRoutes.get(tileId);
+			if(routes == null){
+				routes = new ArrayList<RouteDataObject>();
+				tileRoutes.put(tileId, routes);
+			}
+			routes.add(o);
 		}
-		routes.add(o);
 	}
 	
 	public void unloadAllData() {
