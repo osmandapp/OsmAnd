@@ -20,14 +20,14 @@ package com.google.devtools.j2cpp;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+
 import com.google.devtools.j2objc.J2ObjC;
-import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.J2ObjC.Language;
+import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
 import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
 import com.google.devtools.j2objc.gen.SourceBuilder;
 import com.google.devtools.j2objc.gen.StatementGenerator;
-
 import junit.framework.TestCase;
 
 import org.eclipse.jdt.core.compiler.IProblem;

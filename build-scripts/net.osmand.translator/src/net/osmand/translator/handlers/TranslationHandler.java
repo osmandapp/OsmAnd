@@ -26,7 +26,7 @@ import org.eclipse.jface.text.Document;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.google.devtools.j2cpp.util.NameTable;
+import com.google.devtools.j2objc.util.NameTable;
 import com.google.devtools.j2objc.J2ObjC;
 import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;

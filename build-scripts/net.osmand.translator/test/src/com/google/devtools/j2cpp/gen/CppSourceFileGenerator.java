@@ -19,7 +19,8 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import com.google.common.collect.Lists;
-import com.google.devtools.j2cpp.util.NameTable;
+import com.google.devtools.j2cpp.util.NameTableCpp;
+import com.google.devtools.j2objc.util.NameTable;
 import com.google.devtools.j2objc.gen.SourceFileGenerator;
 import com.google.devtools.j2objc.types.IOSMethod;
 import com.google.devtools.j2objc.types.IOSParameter;
@@ -124,7 +125,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	      baseDeclaration = "- (NSUInteger)hash";
 	    } else {
 	      baseDeclaration = String.format("%s (%s)%s", isStatic ? "static" : "",
-	          NameTable.javaRefToCpp(method.getReturnType2()), mappedMethod.getName());
+	          NameTableCpp.javaRefToObjC(method.getReturnType2()), mappedMethod.getName());
 	    }
 
 	    sb.append(baseDeclaration);
@@ -163,7 +164,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	    boolean isStatic = Modifier.isStatic(m.getModifiers());
 	    IMethodBinding binding = Types.getMethodBinding(m);
 	    String  methodName = NameTable.getName(binding);
-	    String baseDeclaration = String.format("\t %s %s %s", isStatic ? "static " : "", NameTable.javaRefToCpp(m.getReturnType2()), methodName);
+	    String baseDeclaration = String.format("\t %s %s %s", isStatic ? "static " : "", NameTableCpp.javaRefToObjC(m.getReturnType2()), methodName);
 	    sb.append(baseDeclaration);
 	    @SuppressWarnings("unchecked")
 	    List<SingleVariableDeclaration> params = m.parameters(); // safe by definition
@@ -204,7 +205,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	        boolean isTypeVariable = typeBinding.isTypeVariable();
 	        String type = isTypeVariable ? 
 	        		NameTable.getParameterTypeName(NameTable.ID_TYPE, typeBinding) : 
-	        		NameTable.getParameterTypeName(NameTable.javaTypeToCpp(param.getType(), true), typeBinding);
+	        		NameTable.getParameterTypeName(NameTable.javaTypeToObjC(param.getType(), true), typeBinding);
 	        sb.append(" ").append(type).append(" ").append(fieldName);
 	        if (i<nParams-1) {
 	        	sb.append(",");
@@ -238,11 +239,6 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	      name += "Arg";
 	    }
 	    return name;
-	  }
-
-	  private String parameterKeyword(Type type, ITypeBinding typeBinding) {
-	    String typeName = NameTable.javaTypeToCpp(type, true);
-	    return parameterKeyword(typeName, typeBinding);
 	  }
 
 	  /**
@@ -279,38 +275,6 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	      }
 	    }
 	    return false;
-	  }
-
-	  /**
-	   * Returns a function declaration string from a specified class and method.
-	   */
-	  protected String makeFunctionDeclaration(AbstractTypeDeclaration cls,
-	      MethodDeclaration method) {
-	    StringBuffer sb = new StringBuffer();
-	    Type returnType = method.getReturnType2();
-	    ITypeBinding binding = Types.getTypeBinding(returnType);
-	    if (binding.isEnum()) {
-	      sb.append(NameTable.javaTypeToCpp(returnType, true));
-	    } else {
-	      sb.append(NameTable.javaRefToCpp(returnType));
-	    }
-	    sb.append(' ');
-	    sb.append(NameTable.makeFunctionName(cls, method));
-	    sb.append('(');
-	    for (Iterator<?> iterator = method.parameters().iterator(); iterator.hasNext(); ) {
-	      Object o = iterator.next();
-	      if (o instanceof SingleVariableDeclaration) {
-	        SingleVariableDeclaration param = (SingleVariableDeclaration) o;
-	        String fieldType = NameTable.javaRefToCpp(param.getType());
-	        String fieldName = param.getName().getIdentifier();
-	        sb.append(String.format("%s %s", fieldType, fieldName));
-	        if (iterator.hasNext()) {
-	          sb.append(", ");
-	        }
-	      }
-	    }
-	    sb.append(')');
-	    return sb.toString();
 	  }
 
 	  /**

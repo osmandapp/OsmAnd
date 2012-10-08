@@ -31,7 +31,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.devtools.j2cpp.util.NameTable;
+import com.google.devtools.j2objc.util.NameTable;
 import com.google.devtools.j2objc.J2ObjC;
 import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.types.HeaderImportCollector;
@@ -411,7 +411,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 
 	  private void printInstanceVariables(FieldDeclaration[] fields) {
 	    indent();
-	    String lastAccess = "@protected";
+	    String lastAccess = "protected";
 	    for (FieldDeclaration field : fields) {
 	      if ((field.getModifiers() & Modifier.STATIC) == 0) {
 	        @SuppressWarnings("unchecked")
@@ -433,14 +433,14 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	          print("__weak ");
 	        }
 	        ITypeBinding varType = Types.getTypeBinding(vars.get(0));
-	        String objcType = NameTable.javaRefToObjC(varType);
-	        boolean needsAsterisk = !varType.isPrimitive() && !objcType.matches("id|id<.*>|Class");
-	        if (needsAsterisk && objcType.endsWith(" *")) {
+	        String cppType = NameTable.javaRefToObjC(varType);
+	        boolean needsAsterisk = !varType.isPrimitive() && !cppType.matches("id|id<.*>|Class");
+	        if (needsAsterisk && cppType.endsWith(" *")) {
 	          // Strip pointer from type, as it will be added when appending fragment.
 	          // This is necessary to create "Foo *one, *two;" declarations.
-	          objcType = objcType.substring(0, objcType.length() - 2);
+	          cppType = cppType.substring(0, cppType.length() - 2);
 	        }
-	        print(objcType);
+	        print(cppType);
 	        print(' ');
 	        for (Iterator<?> it = field.fragments().iterator(); it.hasNext(); ) {
 	          VariableDeclarationFragment f = (VariableDeclarationFragment) it.next();
@@ -457,45 +457,6 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	      }
 	    }
 	    unindent();
-	  }
-
-	  private void printProperties(FieldDeclaration[] fields) {
-	    int nPrinted = 0;
-	    for (FieldDeclaration field : fields) {
-	      if ((field.getModifiers() & Modifier.STATIC) == 0) {
-	        ITypeBinding type = Types.getTypeBinding(field.getType());
-	        @SuppressWarnings("unchecked")
-	        List<VariableDeclarationFragment> vars = field.fragments(); // safe by definition
-	        for (VariableDeclarationFragment var : vars) {
-	          if (var.getName().getIdentifier().startsWith("this$") && superDefinesVariable(var)) {
-	            // Don't print, as it shadows an inner field in a super class.
-	            continue;
-	          }
-	          print("@property (nonatomic, ");
-	          IVariableBinding varBinding = Types.getVariableBinding(var);
-	          if (type.isPrimitive()) {
-	            print("assign");
-	          } else if (Types.isWeakReference(varBinding) ||
-	              (varBinding.getName().startsWith("this$") &&
-	                  Types.hasWeakAnnotation(varBinding.getDeclaringClass()))) {
-	            print(Options.useARC() ? "weak" : "assign");
-	          } else if (type.isEqualTo(Types.getNSString())) {
-	            print("copy");
-	          } else {
-	            print(Options.useARC() ? "strong" : "retain");
-	          }
-	          String typeString = NameTable.javaRefToObjC(type);
-	          if (!typeString.endsWith("*")) {
-	            typeString += " ";
-	          }
-	          println(String.format(") %s%s;", typeString, NameTable.getName(var.getName())));
-	          nPrinted++;
-	        }
-	      }
-	    }
-	    if (nPrinted > 0) {
-	      newline();
-	    }
 	  }
 
 	  private void printConstantDefines(AbstractTypeDeclaration node) {
@@ -583,17 +544,17 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	    if (Options.inlineFieldAccess()) {
 	      // Need direct access to fields possibly from inner classes that are
 	      // promoted to top level classes, so must make all fields public.
-	      return "@public";
+	      return "public";
 	    }
 
 	    if ((modifiers & Modifier.PUBLIC) > 0) {
-	      return "@public";
+	      return "public";
 	    }
 	    if ((modifiers & Modifier.PROTECTED) > 0) {
-	      return "@protected";
+	      return "protected";
 	    }
 	    if ((modifiers & Modifier.PRIVATE) > 0) {
-	      return "@private";
+	      return "private";
 	    }
 	    return "@package";
 	  }

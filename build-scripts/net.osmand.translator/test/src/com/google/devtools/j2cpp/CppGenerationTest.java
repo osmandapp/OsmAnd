@@ -9,7 +9,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import com.google.common.io.Files;
 import com.google.devtools.j2cpp.gen.CppHeaderGenerator;
-import com.google.devtools.j2objc.J2ObjC.Language;
+//import com.google.devtools.j2objc.J2ObjC.Language;
 //import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
 
 public abstract class CppGenerationTest extends GenerationTest {
