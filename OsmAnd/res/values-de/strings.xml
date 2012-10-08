@@ -78,7 +78,7 @@
 	<string name="rendering_attr_hmRendered_description">Erhöht den dargestellten Detailgrad der Karte</string>
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
 	<string name="map_online_plugin_is_not_installed">Aktivieren Sie das Online-Karten-Plugin, um andere Kartenquellen nutzen zu können.</string>
-	<string name="map_online_data">Online-Karten (Kacheln)</string>
+	<string name="map_online_data">Online- und Kachel-Karten</string>
 	<string name="map_online_data_descr">Online-Karten verwenden (lädt Kacheln aus dem Internet und speichert diese auf der SD-Karte)</string>
 	<string name="online_map_settings">Online-Karten</string>
 	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen</string>
@@ -425,7 +425,7 @@
 	<string name="local_indexes_cat_tts">Sprachansagen (TTS)</string>
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
 	<string name="local_indexes_cat_gpx">GPX-Daten</string>
-	<string name="local_indexes_cat_tile">Online-Karten (Kacheln)</string>
+	<string name="local_indexes_cat_tile">Online- und Kachel-Karten</string>
 	<string name="local_indexes_cat_map">Offline-Karten (Vektor)</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
 	<string name="ttsvoice">TTS Sprachansage</string>

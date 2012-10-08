@@ -263,17 +263,17 @@
 	<string name="context_menu_item_directions">Directions to here</string>
 	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' ->  \'Offline Data\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' ->  \'Offline data\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
-	<string name="local_indexes_cat_tile">Online maps (tiles)</string>
+	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
 	<string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
 	<string name="index_settings_descr">Download, view details, and manage offline maps</string>
 	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
-	<string name="map_online_data">Online maps (tiles)</string>
+	<string name="map_online_data">Online and tile maps</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
-	<string name="online_map_settings">Online Maps</string>
+	<string name="online_map_settings">Online maps</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
 	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
@@ -403,7 +403,7 @@
 	<string name="local_openstreetmap_show">Show on map</string>
 	<string name="local_openstreetmap_upload">Upload modification to OSM</string>
 	<string name="local_openstreetmap_delete">Delete modification</string>
-	<string name="local_openstreetmap_descr_title">Asynchronous OSM Editing:</string>
+	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
 	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
 	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
@@ -446,15 +446,15 @@
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Specify navigation options</string>
 	<string name="global_settings">Global Settings</string>
-	<string name="index_settings">Offline Data (Download)</string>
-	<string name="general_settings">General Settings</string>
+	<string name="index_settings">Offline data (Download)</string>
+	<string name="general_settings">General settings</string>
 	<string name="general_settings_descr">Configure global settings</string>
 	<string name="global_app_settings">Global app settings</string>
 	<string name="user_name">Your OSM user name</string>
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
 	<string name="user_password">Your OSM password</string>
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
-	<string name="osmand_service">Sleep Mode Functionality</string>
+	<string name="osmand_service">Sleep mode functionality</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
@@ -476,7 +476,7 @@
 	</string>	
 	<string name="tip_osm_improve">Improving OSM Data</string>
 	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
-		\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM Editing\'.
+		\n\tFor this you need to first provide your OSM login information in \'Settings\' -> \'General settings\' -> \'OSM editing\'.
 		\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
 		\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
 		\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
@@ -683,7 +683,7 @@
 	<string name="preferred_locale">Display language</string>
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
-		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
+		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online and tile maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\tOsmAnd also supports custom sources.
 	</string>
 	<string name="tip_app_mode">User Profile</string>
@@ -1012,7 +1012,7 @@
 	<string name="data_settings_descr">Specify language, download/reload data</string>
 	<string name="data_settings">Data</string>
 	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
-	<string name="osm_settings">OSM Editing</string>
+	<string name="osm_settings">OSM editing</string>
 	<string name="additional_settings">Additional settings</string>
 	<string name="settings">Settings</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
