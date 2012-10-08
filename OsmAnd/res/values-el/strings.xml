@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους...</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -20,8 +20,7 @@
 	<string name="auto_zoom_map_descr">Αυτόματη εστίαση χάρτη ανάλογα με την ταχύτητά σας (ενώ ο χάρτης συγχρονίζεται με την τρέχουσα θέση)</string>
 	<string name="auto_zoom_map">Αυτόματη εστίαση χάρτη</string>
 	<string name="tip_recent_changes_0_8_3_t">"Αλλαγές στην 0.8.3 :
-\n\t* Ενδιάμεσα σημεία
-\n\t* Βελτιωμένη καθοδήγηση δρομολογίου
+\n\t* Σημεία διαδρομής\n\t* Βελτιωμένη καθοδήγηση δρομολογίου
 \n\t* Προσθήκη επιλογής που επιτρέπει την αποφυγή αυτοκινητόδρομων κατά την δημιουργία του δρομολογίου
 \n\t* Προσθήκη ενός ακόμα τύπου δρόμων για ποδήλατα στο χάρτη (Cycleway=track)\n\t* Διορθώσεις σφαλμάτων "</string>
 	<string name="snap_to_road_descr">Κλείδωμα στο δρόμο κατά τη πλοήγηση</string>
@@ -85,9 +84,9 @@
 	<string name="map_widget_right_stack">Δεξιός πίνακας:</string>
 	<string name="map_widget_left_stack">Αριστερός πίνακας:</string>
 	<string name="map_widget_parking">Στάθμευση</string>
-	<string name="map_widget_monitoring">Ιχνηλάτηση</string>
+	<string name="map_widget_monitoring">Εγγραφή GPX</string>
 	<string name="map_widget_speed">Ταχύτητα</string>
-	<string name="map_widget_distance">Στόχος</string>
+	<string name="map_widget_distance">Προορισμός</string>
 	<string name="map_widget_altitude">Υψόμετρο</string>
 	<string name="map_widget_time">Υπολειπόμενος χρόνος</string>
 	<string name="map_widget_next_turn">Επόμενη στροφή</string>
@@ -180,14 +179,14 @@
 	<string name="first_time_msg">Ευχαριστούμε που χρησιμοποιείτε το OsmAnd. Για πολλά χαρακτηριστικά αυτής της εφαρμογής χρειάζεστε μερικά τοπικά offline δεδομένα τα οποία μπορείτε να κατεβάσετε μέσω του \'Ρυθμίσεις\' -&gt; \'Offline δεδομένα\'. Μετά από αυτό θα μπορείτε να δείτε χάρτες, να εντοπίσετε διευθύνσεις, να ψάξετε Σημ. Ενδ. και να βρείτε δημόσιες μεταφορές.</string>    
 	<string name="basemap_was_selected_to_download">Ο βασικός χάρτης είναι απαραίτητος για τη σωστή λειτουργία της εφαρμογής και επιλέχθηκε προς λήψη.</string>
 	<string name="select_index_file_to_download">Δεν βρέθηκε τίποτα. Εάν δεν μπορείτε να βρείτε την περιοχή σας, μπορείτε να τη φτιάξετε μόνοι σας (βλέπε http://osmand.net).</string>
-	<string name="local_indexes_cat_tile">Online χάρτες (πλακίδια)</string>
+	<string name="local_indexes_cat_tile">Online και πλακίδια χάρτες</string>
 	<string name="local_indexes_cat_map">Offline χάρτες (διανυσματικοί)</string>
 	<string name="gpx_index_settings_descr">" (περιλαμβάνει αναλυτή GPX)"</string>
 	<string name="index_settings_descr">Κάντε λήψη, δείτε λεπτομέρειες, και διαχειριστείτε τους offline χάρτες</string>
 	<string name="map_online_plugin_is_not_installed">Ενεργοποιήστε το πρόσθετο για τους online χάρτες για να επιλέξετε διαφορετικές πηγές χάρτη</string>
-	<string name="map_online_data">Online χάρτες (πλακίδια)</string>
+	<string name="map_online_data">Online και χάρτες πλακίδια</string>
 	<string name="map_online_data_descr">Χρήση online χαρτών (λήψη και φύλαξη πλακιδίων στην κάρτα SD)</string>
-	<string name="online_map_settings">Online Χάρτες</string>
+	<string name="online_map_settings">Online χάρτες</string>
 	<string name="online_map_settings_descr">Ρυθμίστε τις πηγές των online ή προσωρινά αποθηκευμένων πλακιδίων χάρτη</string>
 	<string name="map_settings">Ρυθμίσεις Χάρτη</string>
 	<string name="map_settings_descr">Διαμορφώστε την εμφάνιση του χάρτη</string>
@@ -311,7 +310,7 @@
 	<string name="local_openstreetmap_show">Εμφάνιση στο χάρτη</string>
 	<string name="local_openstreetmap_upload">Αποστολή τροποποίησης στο OSM</string>
 	<string name="local_openstreetmap_delete">Διαγραφή τροποποίησης</string>
-	<string name="local_openstreetmap_descr_title">Ασύγχρονη Επεξεργασία OSM:</string>
+	<string name="local_openstreetmap_descr_title">Ασύγχρονη επεξεργασία OSM:</string>
 	<string name="local_openstreetmap_settings">Τοπικά αποθηκευμένα ΣΕ/Σφάλματα OSM</string>
 	<string name="local_openstreetmap_settings_descr">Εμφάνιση και διαχείριση των ΣΕ/Σφαλμάτων OSM σημειωμένων στην τοπική βάση δεδομένων</string>
 	<string name="live_monitoring_descr">Αποστολή ιχνηλάτησης σε μια συγκεκριμένη υπηρεσία web</string>
@@ -353,15 +352,15 @@
 	<string name="routing_settings">Πλοήγηση</string>
 	<string name="routing_settings_descr">Καθορίστε τις επιλογές πλοήγησης</string>
 	<string name="global_settings">Καθολικές ρυθμίσεις</string>
-	<string name="index_settings">Offline Δεδομένα (Λήψη)</string>
-	<string name="general_settings">Γενικές Ρυθμίσεις</string>
+	<string name="index_settings">Offline δεδομένα (Λήψη)</string>
+	<string name="general_settings">Γενικές ρυθμίσεις</string>
 	<string name="general_settings_descr">Διαμόρφωση καθολικών ρυθμίσεων</string>
 	<string name="global_app_settings">Καθολικές ρυθμίσεις εφαρμογής</string>
 	<string name="user_name">Όνομα χρήστη OSM</string>
 	<string name="user_name_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
 	<string name="user_password">Κωδικός OSM</string>
 	<string name="user_password_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
-	<string name="osmand_service">Δυνατότητα Λειτουργίας Νάρκης</string>
+	<string name="osmand_service">Δυνατότητα λειτουργίας νάρκης</string>
 	<string name="osmand_service_descr">Χρησιμοποιήστε το για να εκτελείται ο OsmAnd ενώ η οθόνη είναι απενεργοποιημένη</string>
 	<string name="tip_rotation_switching">Προσανατολισμός Χάρτη</string>
 	<string name="tip_rotation_switching_t_v2">"\tΜπορείτε να αλλάξετε το πότε και το πως ο χάρτης θα περιστρέφετε με επαναλαμβανόμενα κλικ στο εικονίδιο της πυξίδας στην οθόνη χάρτη.
@@ -615,8 +614,8 @@
 	<string name="send_location_email_pattern">Για να δείτε την τοποθεσία ακολουθήστε τον σύνδεσμο %1$s με τον περιηγητή ιστού ή μόνο μέσω android τον σύνδεσμο %2$s</string>
 	<string name="send_location">Αποστολή τοποθεσίας</string>
 	<string name="context_menu_item_share_location">Κοινή χρήση τοποθεσίας</string>
-	<string name="add_waypoint_dialog_added">Το ενδιάμεσο σημείο \'\'{0}\'\' προστέθηκε επιτυχώς</string>
-	<string name="add_waypoint_dialog_title">Προσθήκη σημείου στο εγγραφόμενο ίχνος GPX</string>
+	<string name="add_waypoint_dialog_added">Το σημείο διαδρομής \'\'{0}\'\' προστέθηκε επιτυχώς</string>
+	<string name="add_waypoint_dialog_title">Προσθήκη σημείου διαδρομής στο εγγραφόμενο ίχνος GPX</string>
 	<string name="context_menu_item_add_waypoint">Προσθήκη σημείου GPX</string>
 	<string name="amenity_type_administrative">Διοικητικό</string>
 	<string name="amenity_type_barrier">Φράκτης</string>
@@ -1046,30 +1045,30 @@
 	<string name="edit_filter_create_message">Το φίλτρο {0} έχει δημιουργηθεί</string>
 	<string name="default_buttons_selectall">Επιλογή Όλων</string>
 	<string name="email">email</string>
-<string name="intermediate_point_too_far">Το ενδιάμεσο σημείο %1$s είναι πολύ μακριά από το κοντινότερο δρόμο.</string>
-<string name="arrived_at_intermediate_point">Φτάσατε στο ενδιάμεσο σημείο σας</string>
-<string name="context_menu_item_intermediate_point">Προσθήκη ενδιάμεσου σημείου</string>
-<string name="map_widget_intermediate_distance">Ενδιάμεσο σημείο</string>
+<string name="intermediate_point_too_far">Το σημείο διαδρομής %1$s είναι πολύ μακριά από το κοντινότερο δρόμο.</string>
+<string name="arrived_at_intermediate_point">Φτάσατε στο σημείο διαδρομής σας</string>
+<string name="context_menu_item_intermediate_point">Προσθήκη ως σημείο διαδρομής</string>
+<string name="map_widget_intermediate_distance">Σημείο διαδρομής</string>
 <string name="ending_point_too_far">Το τελικό σημείο είναι πολύ μακριά από πλησιέστερο δρόμο.</string>
 <string name="tip_recent_changes_0_8_4_t">"Αλλαγές στην 0.8.4: Ενημερώθηκε "</string>
-    <string name="context_menu_item_first_intermediate_point">Ορίστε το πρώτο σημείο στόχο</string>
-    <string name="add_as_last_destination_point">Προσθήκη ως τελευταίο ενδιάμεσο σημείο</string>
-    <string name="add_as_first_destination_point">Προσθήκη ως πρώτο ενδιάμεσο σημείο</string>
+    <string name="context_menu_item_first_intermediate_point">Προσθήκη ως πρώτο σημείο διαδρομής</string>
+    <string name="add_as_last_destination_point">Προσθήκη ως τελευταίο σημείο διαδρομής</string>
+    <string name="add_as_first_destination_point">Προσθήκη ως πρώτο σημείο διαδρομής</string>
     <string name="replace_destination_point">Αντικαταστήστε το σημείο προορισμού</string>
     <string name="new_destination_point_dialog">Έχετε ήδη ορισμένο σημείο προορισμού.</string>
-    <string name="target_point">Σημείο στόχος %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">Ορίστε το τελευταίο σημείο στόχο</string>
-    <string name="target_points">Στόχοι</string>
-    <string name="map_widget_monitoring_services">Υπηρεσίες παρακολούθησης</string>
-	<string name="delete_target_point">Αφαιρέστε το σημείο στόχο</string>
-	<string name="intermediate_point">Ενδιάμεσο σημείο %1$s</string>
+    <string name="target_point">Σημείο διαδρομής %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Προσθήκη ως τελευταίο σημείο διαδρομής</string>
+    <string name="target_points">Σημεία διαδρομής</string>
+    <string name="map_widget_monitoring_services">Υπηρεσίες καταγραφής</string>
+	<string name="delete_target_point">Αφαιρέστε το σημείο διαδρομής</string>
+	<string name="intermediate_point">Σημείο διαδρομής %1$s</string>
     <string name="gps_not_available">Παρακαλώ ενεργοποιήστε το GPS στις ρυθμίσεις</string>
     <string name="no_route">Χωρίς διαδρομή</string>
 	<string name="local_openstreetmap_items"/>
 	<string name="local_index_items"/>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="map_widget_show_destination_arrow">Εμφάνιση κατεύθυνσης προορισμού</string>
-    <string name="enable_plugin_monitoring_services">"Ενεργοποιήστε τα πρόσθετα παρακολούθησης (ιχνηλάτηση, ζωντανή ιχνηλάτηση) για να χρησιμοποιήσετε τις υπηρεσίες παρακολούθησης "</string>
+    <string name="enable_plugin_monitoring_services">Ενεργοποιήστε το πρόσθετο ιχνηλάτησης για να χρησιμοποιήσετε τις υπηρεσίες καταγραφής θέσης (καταγραφή, ζωντανή ιχνηλάτηση)</string>
     <string name="non_optimal_route_calculation">Υπολογισμός πιθανόν μη-βέλτιστης διαδρομής σε πολύ μεγάλες αποστάσεις</string>
     <string name="rendering_attr_roadColors_description">Επιλέξτε ένα χρωματικό συνδυασμό οδών:</string>
 	<string name="rendering_attr_roadColors_name">Χρωματικός συνδυασμός οδών</string>
