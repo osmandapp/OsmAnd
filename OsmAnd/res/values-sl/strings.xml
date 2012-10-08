@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Iskanje</string>
 	<string name="search_activity">Išči</string>
@@ -314,7 +314,7 @@
 	<string name="global_app_settings">Splošne nastavitve aplikacije</string>
 	<string name="preferred_locale">Jezik</string>
 	<string name="preferred_locale_descr">Izberite jezik uporabniškega vmesnika</string>
-	<string name="map_widget_show_destionation_arrow">Prikaži smer cilja</string>
+	<string name="map_widget_show_destination_arrow">Prikaži smer cilja</string>
     <string name="enable_plugin_monitoring_services">"Omogoči vtičnike za nadzor (sledenje, sledenje v živo) za uporabljanje nadzornih storitev "</string>
     <string name="non_optimal_route_calculation">Izračunaj morda ne-optimalne poti na dolge razdalje</string>
     <string name="gps_not_available">Prosim da v nastavitvah omogočite GPS</string>

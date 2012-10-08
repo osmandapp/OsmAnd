@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
@@ -1045,7 +1045,7 @@
 	<string name="delete_target_point">Célpont törlése</string>
 	<string name="intermediate_point">%1$s. útpont</string>
     <string name="gps_not_available">Kérlek engedélyezd a GPS-t a beállításokban</string>
-    <string name="map_widget_show_destionation_arrow">Célpont irányának megjelenítése</string>
+    <string name="map_widget_show_destination_arrow">Célpont irányának megjelenítése</string>
     <string name="enable_plugin_monitoring_services">"A monitorozási szolgáltatások használatához engedélyezd az Útvonalrögzítés és Alvó állapotú használat bővítményeket "</string>
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
     <string name="rendering_attr_roadColors_description">Válassz egy útszínsémát:</string>

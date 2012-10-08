@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">Changements en 0.7.1 :
@@ -1114,7 +1114,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
 	<string name="delete_target_point">Enlever le point de destination</string>
 	<string name="intermediate_point">Point intermédiaire %1$s</string>
     <string name="gps_not_available">Veuillez activer le GPS</string>
-    <string name="map_widget_show_destionation_arrow">Flécher la destination</string>
+    <string name="map_widget_show_destination_arrow">Flécher la destination</string>
     <string name="enable_plugin_monitoring_services">"Activer les greffons de suivi (tracking, live tracking) pour utiliser les services de surveillance "</string>
     <string name="non_optimal_route_calculation">Calculer une route éventuellement non optimale pour les longs trajets</string>
     <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>

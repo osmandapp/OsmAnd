@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="enable_plugin_monitoring_services">"Na použitie monitorovacích služieb zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo) "</string>
   <string name="non_optimal_route_calculation">Vypočítať pravdepodobne neoptimálnu cestu s dlhšou vzdialenosťou</string>
@@ -1089,7 +1089,7 @@
 	<string name="no_route">Žiadna cesta</string>
 	<string name="delete_target_point">Odstrániť cieľový bod</string>
 	<string name="intermediate_point">Prechodný bod %1$s</string>
-    <string name="map_widget_show_destionation_arrow">Zobraziť smer k cieľu</string>
+    <string name="map_widget_show_destination_arrow">Zobraziť smer k cieľu</string>
     <string name="rendering_attr_roadColors_description">Vyberte farebnú schému pre cesty:</string>
 	<string name="rendering_attr_roadColors_name">Farebná schéma ciest</string>
     </resources>

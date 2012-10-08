@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1123,7 +1123,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="no_route">Nėra maršruto</string>
 	<string name="delete_target_point">Pašalinti tikslą</string>
 	<string name="intermediate_point">Tarpinis tikslas %1$s</string>
-    <string name="map_widget_show_destionation_arrow">Rodyti kryptį į kelionės tikslą</string>
+    <string name="map_widget_show_destination_arrow">Rodyti kryptį į kelionės tikslą</string>
     <string name="enable_plugin_monitoring_services">"Jei norite naudoti sekimo paslaugas (sekimo ir sekimo gyvai) įjunkite sekimo įskiepius "</string>
     <string name="non_optimal_route_calculation">Apskaičiuoti (tikėtinai) neoptimalų ilgo nuotolio maršrutą</string>
     <string name="gps_not_available">Įjunkite GPS telefono nustatymuose</string>

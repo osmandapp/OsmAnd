@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start Live tracking</string>
   <string name="live_monitoring_mode_on">Stop Live tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -1031,7 +1031,7 @@
 	<string name="delete_target_point">Verwijder routepunt</string>
 	<string name="intermediate_point">Routepunt %1$s</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
-    <string name="map_widget_show_destionation_arrow">Toon richting van de bestemming</string>
+    <string name="map_widget_show_destination_arrow">Toon richting van de bestemming</string>
     <string name="enable_plugin_monitoring_services">"Activeer eerst de plugin track registratie voor deze optie "</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Selecteer kleurschema voor wegen:</string>

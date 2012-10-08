@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -1087,7 +1087,7 @@
 	<string name="no_route">Žádná cesta</string>
 	<string name="delete_target_point">Smazat cílový bod</string>
 	<string name="intermediate_point">Bod trasy %1$s</string>
-    <string name="map_widget_show_destionation_arrow">Zobrazit směr do cíle</string>
+    <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
     <string name="enable_plugin_monitoring_services">"Zapněte modul sledování (záznam trasy, přímý přenos), abyste mohli využívat služeb sledování na pozadí "</string>
     <string name="non_optimal_route_calculation">Počítat možná ne úplně nejlepší trasu na dlouhé vzdálenosti</string>
     <string name="gps_not_available">Prosím zapněte GPS v nastavení</string>

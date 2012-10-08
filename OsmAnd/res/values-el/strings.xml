@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους...</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1067,7 +1067,8 @@
     <string name="no_route">Χωρίς διαδρομή</string>
 	<string name="local_openstreetmap_items"/>
 	<string name="local_index_items"/>
-	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string><string name="map_widget_show_destionation_arrow">Εμφάνιση κατεύθυνσης προορισμού</string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
+	<string name="map_widget_show_destination_arrow">Εμφάνιση κατεύθυνσης προορισμού</string>
     <string name="enable_plugin_monitoring_services">"Ενεργοποιήστε τα πρόσθετα παρακολούθησης (ιχνηλάτηση, ζωντανή ιχνηλάτηση) για να χρησιμοποιήσετε τις υπηρεσίες παρακολούθησης "</string>
     <string name="non_optimal_route_calculation">Υπολογισμός πιθανόν μη-βέλτιστης διαδρομής σε πολύ μεγάλες αποστάσεις</string>
     <string name="rendering_attr_roadColors_description">Επιλέξτε ένα χρωματικό συνδυασμό οδών:</string>
