@@ -258,7 +258,7 @@
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
-	<string name="index_settings">Offline-Daten</string>
+	<string name="index_settings">Offline-Daten (laden)</string>
 	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
