@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla…</string>
@@ -1015,7 +1015,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="intermediate_point">Punto de paso %1$s</string>
     <string name="gps_not_available">Por favor, habilite el GPS en ajustes</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
-    <string name="enable_plugin_monitoring_services">"Permite que los extras de monitorización (seguimiento, seguimiento en directo) usen los servicios de monitorización "</string>
+    <string name="enable_plugin_monitoring_services">Permite que los extras de monitorización (seguimiento, seguimiento en directo) usen los servicios de monitorización</string>
     <string name="non_optimal_route_calculation">Calcula una ruta posiblemente no óptima en largas distancias</string>
     <string name="rendering_attr_roadColors_description">Selecciona un esquema de color de carreteras:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
