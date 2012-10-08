@@ -319,9 +319,9 @@ public class BinaryRoutePlanner {
 			int memOverhead = (visitedDirectSegments.size() + visitedOppositeSegments.size()) * STANDARD_ROAD_VISITED_OVERHEAD + 
 					(graphDirectSegments.size() +
 					graphReverseSegments.size()) * STANDARD_ROAD_IN_QUEUE_OVERHEAD;
-			String pr = " pend="+segment.parentSegmentEnd +" " +( segment.parentRoute == null ? "" : (" parent=" + segment.parentRoute.road));
-			System.out.println("Seg " + segment.road + " ind=" + segment.segmentStart + 
-					" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);
+//			String pr = " pend="+segment.parentSegmentEnd +" " +( segment.parentRoute == null ? "" : (" parent=" + segment.parentRoute.road));
+//			System.out.println("Seg " + segment.road + " ind=" + segment.segmentStart + 
+//					" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);
 			if(segment instanceof FinalRouteSegment) {
 				if(RoutingContext.SHOW_GC_SIZE){
 					log.warn("Estimated overhead " + (memOverhead / (1<<20))+ " mb");
@@ -746,9 +746,10 @@ public class BinaryRoutePlanner {
 					visitedSegments.containsKey(calculateRoutePointId(next.road, next.segmentStart, true));
 			boolean nextMinusNotAllowed = (next.segmentStart == 0) ||
 					visitedSegments.containsKey(calculateRoutePointId(next.road, next.segmentStart - 1, false));
+			boolean skipSameDirection = next.road.id == segment.road.id && next.segmentStart == segmentEnd; 
 			// road.id could be equal on roundabout, but we should accept them
 			boolean alreadyVisited = nextPlusNotAllowed && nextMinusNotAllowed;
-			if (!alreadyVisited) {
+			if (!alreadyVisited && !skipSameDirection) {
 				double distanceToEnd = h(ctx, distToFinalPoint, next);
 				// assigned to wrong direction
 				if(next.directionAssigned == -direction){
@@ -773,7 +774,7 @@ public class BinaryRoutePlanner {
 				if (ctx.visitor != null) {
 					ctx.visitor.visitSegment(next, false);
 				}
-			} else {
+			} else if(!skipSameDirection){
 				// the segment was already visited! We need to follow better route if it exists
 				// that is very strange situation and almost exception (it can happen when we underestimate distnceToEnd)
 				if (next.directionAssigned == direction && 

@@ -226,7 +226,9 @@ public class RoutingContext {
 				routes = new ArrayList<RouteDataObject>();
 				tileRoutes.put(tileId, routes);
 			}
-			routes.add(o);
+			if(!routes.contains(o)){
+				routes.add(o);
+			}
 		}
 	}
 	
