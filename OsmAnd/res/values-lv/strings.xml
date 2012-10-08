@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
@@ -984,7 +984,7 @@
 	<string name="map_widget_vector_attributes">Renderēšanas attribūti:</string>
 	<string name="map_widget_renderer">Renderēšnanas stils</string>
 	<string name="int_continuosly">Nepārtraukti</string>
-	<string name="map_widget_show_destionation_arrow">Rādīt mērķa virzienu</string>
+	<string name="map_widget_show_destination_arrow">Rādīt mērķa virzienu</string>
     <string name="enable_plugin_monitoring_services">"Iespējot monitorēšanas spraudņus monitorēšanas servisu lietošanai (sekošana, tiešsaistes sekošana) "</string>
     <string name="non_optimal_route_calculation">Aprēķināt iespējami neoptimālu maršrutu tāliem attālumiem</string>
     <string name="gps_not_available">Lūdzu iespējot GPS uzstādījumos</string>
