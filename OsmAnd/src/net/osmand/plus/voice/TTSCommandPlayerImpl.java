@@ -189,6 +189,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			mTts.shutdown();
 			mTtsContext = null;
 			mTts = null;
+			ttsRequests = 0;
 		}
 	}
 	
