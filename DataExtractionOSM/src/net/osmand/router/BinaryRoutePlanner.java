@@ -1082,6 +1082,9 @@ public class BinaryRoutePlanner {
 		boolean kr = false;
 		List<RouteSegmentResult> attachedRoutes = rr.getAttachedRoutes(rr.getStartPointIndex());
 		int ls = prev.getObject().getLanes();
+		if(ls >= 0 && prev.getObject().getOneway() == 0) {
+			ls = (ls + 1) / 2;
+		}
 		int left = 0;
 		int right = 0;
 		boolean speak = false;
@@ -1095,6 +1098,9 @@ public class BinaryRoutePlanner {
 					if ((ex < TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex >= 0) {
 						kl = true;
 						int lns = rs.getObject().getLanes();
+						if(rs.getObject().getOneway() == 0) {
+							lns = (lns + 1) / 2;
+						}
 						if (lns > 0) {
 							right += lns;
 						}
@@ -1102,6 +1108,9 @@ public class BinaryRoutePlanner {
 					} else if ((ex > -TURN_DEGREE_MIN || mpi < TURN_DEGREE_MIN) && ex <= 0) {
 						kr = true;
 						int lns = rs.getObject().getLanes();
+						if(rs.getObject().getOneway() == 0) {
+							lns = (lns + 1) / 2;
+						}
 						if (lns > 0) {
 							left += lns;
 						}
@@ -1116,6 +1125,9 @@ public class BinaryRoutePlanner {
 			right = 1;
 		}
 		int current = rr.getObject().getLanes();
+		if(rr.getObject().getOneway() == 0) {
+			current = (current + 1) / 2;
+		}
 		if (current <= 0) {
 			current = 1;
 		}

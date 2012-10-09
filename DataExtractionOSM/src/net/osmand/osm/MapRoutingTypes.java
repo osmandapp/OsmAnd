@@ -47,6 +47,8 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("hgv");
 		TAGS_TO_SAVE.add("horse");
 		TAGS_TO_SAVE.add("lanes");
+		TAGS_TO_SAVE.add("lanes:forward");
+		TAGS_TO_SAVE.add("lanes:backward");
 		TAGS_TO_SAVE.add("maxspeed");
 		TAGS_TO_SAVE.add("maxweight");
 		TAGS_TO_SAVE.add("minspeed");
