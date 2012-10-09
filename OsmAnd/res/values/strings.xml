@@ -57,7 +57,7 @@
 	<string name="poi_filter_for_tourists">For tourists</string>
 	<string name="poi_filter_fuel">Fuel</string>
 	<string name="show_warnings_title">Show alarms&#8230;</string>
-	<string name="show_warnings_descr">Configure speed camera warnings, other traffic warnings (speed limits, forced stops, speed bumps), and lane information</string>
+	<string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
 	<string name="use_compass_navigation">Use compass</string>
 	<string name="avoid_motorway">Avoid motorways</string>
