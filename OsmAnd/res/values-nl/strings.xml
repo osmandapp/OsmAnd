@@ -1033,4 +1033,5 @@
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Selecteer kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
-    </resources>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Market?</string>
+	</resources>
