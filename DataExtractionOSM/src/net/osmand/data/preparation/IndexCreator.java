@@ -755,9 +755,8 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 
-//		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
-		String file = "/home/victor/projects/OsmAnd/temp/belarus.osm.pbf";
-//		String file = "/home/victor/projects/OsmAnd/temp/picardie.osm.pbf";
+		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
+//		String file = "/home/victor/projects/OsmAnd/temp/belgium.osm.pbf";
 		int st = file.lastIndexOf('/');
 		int e = file.indexOf('.', st);
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/"+file.substring(st, e) + ".tmp.odb"));
