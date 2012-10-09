@@ -3,7 +3,7 @@ option java_package = "net.osmand.binary";
 //protoc --java_out=DataExtractionOSM/src DataExtractionOSM/src/osmand_odb.proto
 
 // C++ # cd OsmAnd
-// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=jni/osmand/proto ../DataExtractionOSM/src/osmand_odb.proto
+// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=../Osmand-kernel/osmand/src/proto/ ../DataExtractionOSM/src/osmand_odb.proto
 
 //
 //  STORAGE LAYER: Storing primitives.
@@ -507,6 +507,9 @@ message OsmAndRoutingIndex {
 
 	// encoded as fixed32 length delimited
 	repeated RouteDataBox rootBoxes = 3;
+
+	// encoded as fixed32 length delimited
+	repeated RouteDataBox basemapBoxes = 4;
 
 	repeated RouteDataBlock blocks = 5;
 	message RouteDataBox {

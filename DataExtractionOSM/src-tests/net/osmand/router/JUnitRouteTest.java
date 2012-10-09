@@ -24,6 +24,8 @@ public class JUnitRouteTest  {
 
 	static BinaryMapIndexReader[]  rs;
 	static NativeSwingRendering lib;
+	
+	
 	@Before
 	public void setupFiles() throws IOException {
 		if(rs != null){

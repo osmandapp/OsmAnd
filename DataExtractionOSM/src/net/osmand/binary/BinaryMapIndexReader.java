@@ -1959,9 +1959,6 @@ public class BinaryMapIndexReader {
 		}));
 	}
 	
-	public void initRouteRegionsIfNeeded(SearchRequest<RouteDataObject> req) throws IOException {
-		routeAdapter.initRouteTypesIfNeeded(req);
-	}
 	
 	public List<RouteSubregion> searchRouteIndexTree(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
 		req.numberOfVisitedObjects = 0;
@@ -1969,7 +1966,7 @@ public class BinaryMapIndexReader {
 		req.numberOfAcceptedSubtrees = 0;
 		req.numberOfReadSubtrees = 0;
 		if(routeAdapter != null){
-			initRouteRegionsIfNeeded(req);
+			routeAdapter.initRouteTypesIfNeeded(req, list);
 			return routeAdapter.searchRouteRegionTree(req, list, new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>());
 		}
 		return Collections.emptyList();

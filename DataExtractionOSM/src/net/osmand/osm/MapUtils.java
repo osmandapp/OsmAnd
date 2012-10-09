@@ -471,6 +471,29 @@ public class MapUtils {
 		
 	}	
 
+	
+	public static double squareDist31TileMetric(int x1, int y1, int x2, int y2) {
+		// translate into meters 
+		double dy = convert31YToMeters(y1, y2);
+		double dx = convert31XToMeters(x1, x2);
+		return dx * dx + dy * dy;
+	}
+	public static double convert31YToMeters(float y1, float y2) {
+		// translate into meters 
+		return (y1 - y2) * 0.01863d;
+	}
+	
+	public static double convert31XToMeters(float x1, float x2) {
+		// translate into meters 
+		return (x1 - x2) * 0.011d;
+	}
+   
+	
+	public static double calculateProjection31TileMetric(int xA, int yA, int xB, int yB, int xC, int yC) {
+		// Scalar multiplication between (AB, AC)
+		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31YToMeters(yB, yA) * convert31YToMeters(yC, yA);
+		return multiple;
+	}
 }
 
 

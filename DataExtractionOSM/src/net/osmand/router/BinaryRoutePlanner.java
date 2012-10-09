@@ -34,8 +34,8 @@ public class BinaryRoutePlanner {
 	
 	private static double squareRootDist(int x1, int y1, int x2, int y2) {
 		// translate into meters 
-		double dy = convert31YToMeters(y1, y2);
-		double dx = convert31XToMeters(x1, x2);
+		double dy = MapUtils.convert31YToMeters(y1, y2);
+		double dx = MapUtils.convert31XToMeters(x1, x2);
 		return Math.sqrt(dx * dx + dy * dy);
 //		return measuredDist(x1, y1, x2, y2);
 	}
@@ -43,30 +43,6 @@ public class BinaryRoutePlanner {
 	private static double measuredDist(int x1, int y1, int x2, int y2) {
 		return MapUtils.getDistance(MapUtils.get31LatitudeY(y1), MapUtils.get31LongitudeX(x1), 
 				MapUtils.get31LatitudeY(y2), MapUtils.get31LongitudeX(x2));
-	}
-	
-	private static double squareDist(int x1, int y1, int x2, int y2) {
-		// translate into meters 
-		double dy = convert31YToMeters(y1, y2);
-		double dx = convert31XToMeters(x1, x2);
-		return dx * dx + dy * dy;
-	}
-	
-	private static double convert31YToMeters(int y1, int y2) {
-		// translate into meters 
-		return (y1 - y2) * 0.01863d;
-	}
-	
-	private static double convert31XToMeters(int x1, int x2) {
-		// translate into meters 
-		return (x1 - x2) * 0.011d;
-	}
-   
-	
-	private static double calculateProjection(int xA, int yA, int xB, int yB, int xC, int yC) {
-		// Scalar multiplication between (AB, AC)
-		double multiple = convert31XToMeters(xB, xA) * convert31XToMeters(xC, xA) + convert31YToMeters(yB, yA) * convert31YToMeters(yC, yA);
-		return multiple;
 	}
 	
 	
@@ -93,7 +69,7 @@ public class BinaryRoutePlanner {
 							r.getPoint31YTile(j - 1));
 					int prx = r.getPoint31XTile(j);
 					int pry = r.getPoint31YTile(j);
-					double projection = calculateProjection(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j),
+					double projection = MapUtils. calculateProjection31TileMetric(r.getPoint31XTile(j - 1), r.getPoint31YTile(j - 1), r.getPoint31XTile(j),
 							r.getPoint31YTile(j), px, py);
 					if (projection < 0) {
 						prx = r.getPoint31XTile(j - 1);
@@ -107,7 +83,7 @@ public class BinaryRoutePlanner {
 						pry = (int) (r.getPoint31YTile(j - 1) + (r.getPoint31YTile(j) - r.getPoint31YTile(j - 1))
 								* (projection / (mDist * mDist)));
 					}
-					double currentsDist = squareDist(prx, pry, px, py);
+					double currentsDist = MapUtils. squareDist31TileMetric(prx, pry, px, py);
 					if (road == null || currentsDist < sdist) {
 						RouteDataObject ro = new RouteDataObject(r);
 						road = new RouteSegment(ro, j);
@@ -992,6 +968,10 @@ public class BinaryRoutePlanner {
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
+//				float ms = res.getObject().getMaximumSpeed();
+//				if(ms > 0) {
+//					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ");
+//				}
 				additional.append("distance = \"").append(res.getDistance()).append("\" ");
 				if (res.getTurnType() != null) {
 					additional.append("turn = \"").append(res.getTurnType()).append("\" ");

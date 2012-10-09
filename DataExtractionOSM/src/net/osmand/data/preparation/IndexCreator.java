@@ -597,10 +597,17 @@ public class IndexCreator {
 				});
 
 				// 3.4 combine all low level ways and simplify them
-				if (indexMap) {
+				if (indexMap || indexRouting) {
 					progress.setGeneralProgress("[90 / 100]");
-					progress.startTask(Messages.getString("IndexCreator.INDEX_LO_LEVEL_WAYS"), indexMapCreator.getLowLevelWays());
-					indexMapCreator.processingLowLevelWays(progress);
+					if(indexMap) {
+						progress.startTask(Messages.getString("IndexCreator.INDEX_LO_LEVEL_WAYS"), indexMapCreator.getLowLevelWays());
+						indexMapCreator.processingLowLevelWays(progress);
+					}
+					if(indexRouting) {
+						progress.startTask(Messages.getString("IndexCreator.INDEX_LO_LEVEL_WAYS"), -1);
+						indexRouteCreator.processingLowLevelWays(progress);
+					}
+					
 				}
 
 				// 3.5 update all postal codes from relations
@@ -734,24 +741,29 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
-		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
-		creator.setIndexTransport(true);
+//		creator.setIndexMap(true);
+//		creator.setIndexAddress(true);
+//		creator.setIndexPOI(true);
+//		creator.setInde	xTransport(true);
 		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;
 //		creator.recreateOnlyBinaryFile = true;
-//		creator.deleteOsmDB = false;
+		creator.deleteOsmDB = false;
 				
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/RU-SPE.osm.bz2"),
+
+//		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
+		String file = "/home/victor/projects/OsmAnd/temp/belarus.osm.pbf";
+//		String file = "/home/victor/projects/OsmAnd/temp/picardie.osm.pbf";
+		int st = file.lastIndexOf('/');
+		int e = file.indexOf('.', st);
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/"+file.substring(st, e) + ".tmp.odb"));
+		creator.generateIndexes(new File(file),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
+		
 		
 		
 		// BASEMAP generation

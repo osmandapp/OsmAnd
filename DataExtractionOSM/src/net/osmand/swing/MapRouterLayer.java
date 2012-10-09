@@ -171,23 +171,22 @@ public class MapRouterLayer implements MapPanelLayer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Thread() {
-					@Override
-					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute, intermediates, null);
-						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>();
-							points.setZoom(11);
-							for (Way w : ways) {
-								LatLon n = w.getLatLon();
-								points.registerObject(n.getLatitude(), n.getLongitude(), w);
-							}
-							map.setPoints(points);
-						}
-					}
-				}.start();
+				previousRoute = null;
+				calcRoute(false);
 			}
 		};
+		menu.add(selfRoute);
+		
+		Action selfBaseRoute = new AbstractAction("Calculate OsmAnd base route") {
+			private static final long serialVersionUID = 8049785829806139142L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				previousRoute = null;
+				calcRoute(true);
+			}
+		};
+		menu.add(selfBaseRoute);
 		
 		Action recalculate = new AbstractAction("Recalculate OsmAnd route") {
 			private static final long serialVersionUID = 507156107455281238L;
@@ -200,25 +199,11 @@ public class MapRouterLayer implements MapPanelLayer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Thread() {
-					@Override
-					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute, intermediates,  previousRoute);
-						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>();
-							points.setZoom(11);
-							for (Way w : ways) {
-								LatLon n = w.getLatLon();
-								points.registerObject(n.getLatitude(), n.getLongitude(), w);
-							}
-							map.setPoints(points);
-						}
-					}
-				}.start();
+				calcRoute(false);
 			}
 		};
 		
-		menu.add(selfRoute);
+		
 		menu.add(recalculate);
 		Action route_YOURS = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
@@ -303,6 +288,24 @@ public class MapRouterLayer implements MapPanelLayer {
 
 	}
 	
+	
+	private void calcRoute(final boolean useBasemap) {
+		new Thread() {
+			@Override
+			public void run() {
+				List<Way> ways = selfRoute(startRoute, endRoute, intermediates, previousRoute, useBasemap);
+				if (ways != null) {
+					DataTileManager<Way> points = new DataTileManager<Way>();
+					points.setZoom(11);
+					for (Way w : ways) {
+						LatLon n = w.getLatLon();
+						points.registerObject(n.getLatitude(), n.getLongitude(), w);
+					}
+					map.setPoints(points);
+				}
+			}
+		}.start();
+	}
 	
 	public static List<Way> route_YOURS(LatLon start, LatLon end){
 		List<Way> res = new ArrayList<Way>();
@@ -563,7 +566,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		return res;
 	}
 	
-	public List<Way> selfRoute(LatLon start, LatLon end, List<LatLon> intermediates, List<RouteSegmentResult> previousRoute) {
+	public List<Way> selfRoute(LatLon start, LatLon end, List<LatLon> intermediates, List<RouteSegmentResult> previousRoute, boolean useBasemap) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
 		List<File> files = new ArrayList<File>();
@@ -615,6 +618,7 @@ public class MapRouterLayer implements MapPanelLayer {
 				// config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
 				// config.ZOOM_TO_LOAD_TILES = 14;
 				RoutingContext ctx = new RoutingContext(config, NativeSwingRendering.getDefaultFromSettings(), rs);
+				ctx.USE_BASEMAP = useBasemap;
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");
 				

@@ -145,6 +145,7 @@ void initProperties(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage)
 
 }
 
+
 void initRules(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage) {
 	for (int i = 1; i < RenderingRulesStorage::SIZE_STATES; i++) {
 		jobjectArray rules = (jobjectArray) env->CallObjectMethod(javaStorage, RenderingRulesStorage_getRules, i);

@@ -962,6 +962,13 @@ class RoutingSubregion : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::int64 offset() const;
   inline void set_offset(::google::protobuf::int64 value);
   
+  // required bool basemap = 3;
+  inline bool has_basemap() const;
+  inline void clear_basemap();
+  static const int kBasemapFieldNumber = 3;
+  inline bool basemap() const;
+  inline void set_basemap(bool value);
+  
   // required int32 left = 4;
   inline bool has_left() const;
   inline void clear_left();
@@ -1003,6 +1010,7 @@ class RoutingSubregion : public ::google::protobuf::MessageLite {
   
   ::google::protobuf::int64 size_;
   ::google::protobuf::int64 offset_;
+  bool basemap_;
   ::google::protobuf::int32 left_;
   ::google::protobuf::int32 right_;
   ::google::protobuf::int32 top_;
@@ -1012,7 +1020,7 @@ class RoutingSubregion : public ::google::protobuf::MessageLite {
   friend void protobuf_AssignDesc_osmand_5findex_2eproto();
   friend void protobuf_ShutdownFile_osmand_5findex_2eproto();
   
-  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
   
   // WHY DOES & HAVE LOWER PRECEDENCE THAN != !?
   inline bool _has_bit(int index) const {
@@ -2208,83 +2216,99 @@ inline void RoutingSubregion::set_offset(::google::protobuf::int64 value) {
   offset_ = value;
 }
 
+// required bool basemap = 3;
+inline bool RoutingSubregion::has_basemap() const {
+  return _has_bit(2);
+}
+inline void RoutingSubregion::clear_basemap() {
+  basemap_ = false;
+  _clear_bit(2);
+}
+inline bool RoutingSubregion::basemap() const {
+  return basemap_;
+}
+inline void RoutingSubregion::set_basemap(bool value) {
+  _set_bit(2);
+  basemap_ = value;
+}
+
 // required int32 left = 4;
 inline bool RoutingSubregion::has_left() const {
-  return _has_bit(2);
+  return _has_bit(3);
 }
 inline void RoutingSubregion::clear_left() {
   left_ = 0;
-  _clear_bit(2);
+  _clear_bit(3);
 }
 inline ::google::protobuf::int32 RoutingSubregion::left() const {
   return left_;
 }
 inline void RoutingSubregion::set_left(::google::protobuf::int32 value) {
-  _set_bit(2);
+  _set_bit(3);
   left_ = value;
 }
 
 // required int32 right = 5;
 inline bool RoutingSubregion::has_right() const {
-  return _has_bit(3);
+  return _has_bit(4);
 }
 inline void RoutingSubregion::clear_right() {
   right_ = 0;
-  _clear_bit(3);
+  _clear_bit(4);
 }
 inline ::google::protobuf::int32 RoutingSubregion::right() const {
   return right_;
 }
 inline void RoutingSubregion::set_right(::google::protobuf::int32 value) {
-  _set_bit(3);
+  _set_bit(4);
   right_ = value;
 }
 
 // required int32 top = 6;
 inline bool RoutingSubregion::has_top() const {
-  return _has_bit(4);
+  return _has_bit(5);
 }
 inline void RoutingSubregion::clear_top() {
   top_ = 0;
-  _clear_bit(4);
+  _clear_bit(5);
 }
 inline ::google::protobuf::int32 RoutingSubregion::top() const {
   return top_;
 }
 inline void RoutingSubregion::set_top(::google::protobuf::int32 value) {
-  _set_bit(4);
+  _set_bit(5);
   top_ = value;
 }
 
 // required int32 bottom = 7;
 inline bool RoutingSubregion::has_bottom() const {
-  return _has_bit(5);
+  return _has_bit(6);
 }
 inline void RoutingSubregion::clear_bottom() {
   bottom_ = 0;
-  _clear_bit(5);
+  _clear_bit(6);
 }
 inline ::google::protobuf::int32 RoutingSubregion::bottom() const {
   return bottom_;
 }
 inline void RoutingSubregion::set_bottom(::google::protobuf::int32 value) {
-  _set_bit(5);
+  _set_bit(6);
   bottom_ = value;
 }
 
 // required uint32 shifToData = 8;
 inline bool RoutingSubregion::has_shiftodata() const {
-  return _has_bit(6);
+  return _has_bit(7);
 }
 inline void RoutingSubregion::clear_shiftodata() {
   shiftodata_ = 0u;
-  _clear_bit(6);
+  _clear_bit(7);
 }
 inline ::google::protobuf::uint32 RoutingSubregion::shiftodata() const {
   return shiftodata_;
 }
 inline void RoutingSubregion::set_shiftodata(::google::protobuf::uint32 value) {
-  _set_bit(6);
+  _set_bit(7);
   shiftodata_ = value;
 }
 

@@ -1,8 +1,13 @@
 package net.osmand.data.preparation;
 
+import gnu.trove.TIntCollection;
+import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TIntHashSet;
+import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -13,21 +18,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import net.osmand.Algoritms;
+import net.osmand.IProgress;
 import net.osmand.binary.OsmandOdb.IdTable;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RestrictionData.Builder;
 import net.osmand.binary.OsmandOdb.RouteData;
+import net.osmand.data.MapAlgorithms;
 import net.osmand.data.preparation.BinaryMapIndexWriter.RoutePointToWrite;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
+import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapRoutingTypes;
 import net.osmand.osm.MapRoutingTypes.MapRouteType;
@@ -53,9 +69,12 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	private Connection mapConnection;
 	private final Log logMapDataWarn;
 	private final static boolean WRITE_POINT_ID = false;
-	private final static boolean WRITE_TEXT_TAGS = true;
+	private final static int CLUSTER_ZOOM = 15;
 	private RTree routeTree = null;
+	private RTree baserouteTree = null;
 	private MapRoutingTypes routeTypes;
+	
+	private final static float DOUGLAS_PEUKER_DISTANCE = 15;
 	
 	
 	private TLongObjectHashMap<TLongArrayList> highwayRestrictions = new TLongObjectHashMap<TLongArrayList>();
@@ -63,9 +82,12 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	// local purpose to speed up processing cache allocation
 	TIntArrayList outTypes = new TIntArrayList();
 	TLongObjectHashMap<TIntArrayList> pointTypes = new TLongObjectHashMap<TIntArrayList>();
-	Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>(); 
+	Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>();
+	
+	TLongObjectHashMap<GeneralizedCluster> generalClusters = new TLongObjectHashMap<GeneralizedCluster>();
 
 	private PreparedStatement mapRouteInsertStat;
+	private PreparedStatement basemapRouteInsertStat;
 
 
 	public IndexRouteCreator(Log logMapDataWarn) {
@@ -73,6 +95,159 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		this.routeTypes = new MapRoutingTypes();
 	}
 
+	/*private*/ static class GeneralizedCluster {
+		public final int x;
+		public final int y;
+		public final int zoom;
+		
+		public GeneralizedCluster(int x, int y, int z){
+			this.x = x;
+			this.y = y;
+			this.zoom = z;
+		}
+		
+		public final Set<GeneralizedWay> ways = new HashSet<IndexRouteCreator.GeneralizedWay>();
+		// either LinkedList<GeneralizedWay> or GeneralizedWay
+		public final TLongObjectHashMap<Object> map = new TLongObjectHashMap<Object>();
+		
+		public void replaceWayFromLocation(GeneralizedWay delete, int ind, GeneralizedWay toReplace){
+			ways.remove(delete);
+			long loc = delete.getLocation(ind);
+			Object o = map.get(loc);
+			if(o instanceof GeneralizedWay){
+				if(delete == o) {
+					map.put(loc, toReplace);
+				} else if(toReplace !=  o){
+					addWay(toReplace, loc);
+				}
+			} else if(o instanceof LinkedList){
+				((LinkedList) o).remove(delete);
+				if(!((LinkedList) o).contains(toReplace)){
+					((LinkedList) o).add(toReplace);
+				}
+			} else {
+				map.put(loc, toReplace);
+			}
+		}
+		
+		public void removeWayFromLocation(GeneralizedWay delete, int ind){
+			removeWayFromLocation(delete, ind, false);
+		}
+		public void removeWayFromLocation(GeneralizedWay delete, int ind, boolean deleteAll) {
+			long loc = delete.getLocation(ind);
+			boolean ex = false;
+			if (!deleteAll) {
+				for (int t = 0; t < delete.size(); t++) {
+					if (t != ind && map.containsKey(delete.getLocation(t))) {
+						ex = true;
+						break;
+					}
+				}
+			}
+			if (!ex || deleteAll) {
+				ways.remove(delete);
+			}
+
+			Object o = map.get(loc);
+			if (o instanceof GeneralizedWay) {
+				if (delete == o) {
+					map.remove(loc);
+				}
+			} else if (o instanceof LinkedList) {
+				((LinkedList) o).remove(delete);
+				if (((LinkedList) o).size() == 1) {
+					map.put(loc, ((LinkedList) o).iterator().next());
+				} else if (((LinkedList) o).size() == 0) {
+					map.remove(loc);
+				}
+			}
+		}
+		
+		public void addWayFromLocation(GeneralizedWay w, int i) {
+			ways.add(w);
+			long loc = w.getLocation(i);
+			addWay(w, loc);
+		}
+
+		private void addWay(GeneralizedWay w, long loc) {
+			
+			if (map.containsKey(loc)) {
+				Object o = map.get(loc);
+				if (o instanceof LinkedList) {
+					if(!((LinkedList<GeneralizedWay>) o).contains(w)){
+						((LinkedList<GeneralizedWay>) o).add(w);
+					}
+				} else if(o != w){
+					LinkedList<GeneralizedWay> list = new LinkedList<GeneralizedWay>();
+					list.add((GeneralizedWay) o);
+					list.add(w);
+					map.put(loc, list);
+				}
+			} else {
+				map.put(loc, w);
+			}
+		}
+	}
+	private static class GeneralizedWay {
+		private long id;
+		private int mainType;
+		private TIntHashSet addtypes = new TIntHashSet();
+		private TIntArrayList px = new TIntArrayList();
+		private TIntArrayList py = new TIntArrayList();
+		
+		// TLongObjectHashMap<TIntArrayList> pointTypes = new TLongObjectHashMap<TIntArrayList>();
+		private Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>();
+		public GeneralizedWay(long id) {
+			this.id = id;
+		}
+		
+		public double getDistance() {
+			double dx = 0;
+			for (int i = 1; i < px.size(); i++) {
+				dx += MapUtils.getDistance(MapUtils.get31LatitudeY(py.get(i - 1)), MapUtils.get31LongitudeX(px.get(i - 1)),
+						MapUtils.get31LatitudeY(py.get(i)), MapUtils.get31LongitudeX(px.get(i)));
+			}
+			return dx;
+		}
+		
+		public long getLocation(int ind) {
+			return getBaseId(px.get(ind), py.get(ind));
+		}
+		
+		public int size(){
+			return px.size();
+		}
+		
+		// Gives route direction of EAST degrees from NORTH ]-PI, PI]
+		public double directionRoute(int startPoint, boolean plus) {
+			float dist = 5;
+			int x = this.px.get(startPoint);
+			int y = this.py.get(startPoint);
+			int nx = startPoint;
+			int px = x;
+			int py = y;
+			double total = 0;
+			do {
+				if (plus) {
+					nx++;
+					if (nx >= size()) {
+						break;
+					}
+				} else {
+					nx--;
+					if (nx < 0) {
+						break;
+					}
+				}
+				px = this.px.get(nx);
+				py = this.py.get(nx);
+				// translate into meters
+				total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
+			} while (total < dist);
+			return -Math.atan2( x - px, y - py );
+		}
+	}
+	
 	public void indexRelations(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		indexHighwayRestrictions(e, ctx);
 	}
@@ -86,76 +261,135 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				// Load point with  tags!
 				ctx.loadEntityWay(e);
 				routeTypes.encodePointTypes(e, pointTypes);
-				boolean init = false;
-				int minX = Integer.MAX_VALUE;
-				int maxX = 0;
-				int minY = Integer.MAX_VALUE;
-				int maxY = 0;
-
-				ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
-				ByteArrayOutputStream bpointIds = new ByteArrayOutputStream();
-				ByteArrayOutputStream bpointTypes = new ByteArrayOutputStream();
-				ByteArrayOutputStream btypes = new ByteArrayOutputStream();
-
-				try {
-					for (int j = 0; j < outTypes.size(); j++) {
-						Algoritms.writeSmallInt(btypes, outTypes.get(j));
-					}
-
-					for (Node n : e.getNodes()) {
-						if (n != null) {
-							// write id
-							Algoritms.writeLongInt(bpointIds, n.getId());
-							// write point type
-							TIntArrayList types = pointTypes.get(n.getId());
-							if (types != null) {
-								for (int j = 0; j < types.size(); j++) {
-									Algoritms.writeSmallInt(bpointTypes, types.get(j));
-								}
-							}
-							Algoritms.writeSmallInt(bpointTypes, 0);
-							// write coordinates
-							int y = MapUtils.get31TileNumberY(n.getLatitude());
-							int x = MapUtils.get31TileNumberX(n.getLongitude());
-							minX = Math.min(minX, x);
-							maxX = Math.max(maxX, x);
-							minY = Math.min(minY, y);
-							maxY = Math.max(maxY, y);
-							init = true;
-							Algoritms.writeInt(bcoordinates, x);
-							Algoritms.writeInt(bcoordinates, y);
-						}
-					}
-
-				} catch (IOException est) {
-					throw new IllegalStateException(est);
-				}
-				if (init) {
-					// conn.prepareStatement("insert into route_objects(id, types, pointTypes, pointIds, pointCoordinates, name) values(?, ?, ?, ?, ?, ?, ?)");
-					mapRouteInsertStat.setLong(1, e.getId());
-					mapRouteInsertStat.setBytes(2, btypes.toByteArray());
-					mapRouteInsertStat.setBytes(3, bpointTypes.toByteArray());
-					mapRouteInsertStat.setBytes(4, bpointIds.toByteArray());
-					mapRouteInsertStat.setBytes(5, bcoordinates.toByteArray());
-					if(WRITE_TEXT_TAGS) {
-						mapRouteInsertStat.setString(6, encodeNames(names));
-					} else {
-						mapRouteInsertStat.setString(6, "");
-					}
-
-					addBatch(mapRouteInsertStat, false);
-					try {
-						routeTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), e.getId()));
-					} catch (RTreeInsertException e1) {
-						throw new IllegalArgumentException(e1);
-					} catch (IllegalValueException e1) {
-						throw new IllegalArgumentException(e1);
-					}
-				}
-
+				addWayToIndex(e.getId(), e.getNodes(), mapRouteInsertStat, routeTree);
+				generalizeWay(e);
 			}
 		}
 		
+	}
+
+	private void addWayToIndex(long id, List<Node> nodes, PreparedStatement insertStat, RTree rTree) throws SQLException {
+		boolean init = false;
+		int minX = Integer.MAX_VALUE;
+		int maxX = 0;
+		int minY = Integer.MAX_VALUE;
+		int maxY = 0;
+		
+
+		ByteArrayOutputStream bcoordinates = new ByteArrayOutputStream();
+		ByteArrayOutputStream bpointIds = new ByteArrayOutputStream();
+		ByteArrayOutputStream bpointTypes = new ByteArrayOutputStream();
+		ByteArrayOutputStream btypes = new ByteArrayOutputStream();
+
+		try {
+			for (int j = 0; j < outTypes.size(); j++) {
+				Algoritms.writeSmallInt(btypes, outTypes.get(j));
+			}
+
+			for (Node n : nodes) {
+				if (n != null) {
+					// write id
+					Algoritms.writeLongInt(bpointIds, n.getId());
+					// write point type
+					TIntArrayList types = pointTypes.get(n.getId());
+					if (types != null) {
+						for (int j = 0; j < types.size(); j++) {
+							Algoritms.writeSmallInt(bpointTypes, types.get(j));
+						}
+					}
+					Algoritms.writeSmallInt(bpointTypes, 0);
+					// write coordinates
+					int y = MapUtils.get31TileNumberY(n.getLatitude());
+					int x = MapUtils.get31TileNumberX(n.getLongitude());
+					minX = Math.min(minX, x);
+					maxX = Math.max(maxX, x);
+					minY = Math.min(minY, y);
+					maxY = Math.max(maxY, y);
+					init = true;
+					Algoritms.writeInt(bcoordinates, x);
+					Algoritms.writeInt(bcoordinates, y);
+				}
+			}
+
+		} catch (IOException est) {
+			throw new IllegalStateException(est);
+		}
+		if (init) {
+			// conn.prepareStatement("insert into route_objects(id, types, pointTypes, pointIds, pointCoordinates, name) values(?, ?, ?, ?, ?, ?, ?)");
+			insertStat.setLong(1, id);
+			insertStat.setBytes(2, btypes.toByteArray());
+			insertStat.setBytes(3, bpointTypes.toByteArray());
+			insertStat.setBytes(4, bpointIds.toByteArray());
+			insertStat.setBytes(5, bcoordinates.toByteArray());
+			insertStat.setString(6, encodeNames(names));
+
+			addBatch(insertStat, false);
+			try {
+				rTree.insert(new LeafElement(new Rect(minX, minY, maxX, maxY), id));
+			} catch (RTreeInsertException e1) {
+				throw new IllegalArgumentException(e1);
+			} catch (IllegalValueException e1) {
+				throw new IllegalArgumentException(e1);
+			}
+		}
+	}
+	
+	private static long getBaseId(int x31, int y31) {
+		long x = x31;
+		long y = y31;
+		return (x << 31) + y;
+	}
+	
+	private GeneralizedCluster getCluster(GeneralizedWay gw, int ind, GeneralizedCluster helper) {
+		int x31 = gw.px.get(ind);
+		int y31 = gw.py.get(ind);
+		int xc = x31 >> (31 - CLUSTER_ZOOM);
+		int yc = y31 >> (31 - CLUSTER_ZOOM);
+		if(helper != null && helper.x == xc  &&
+				helper.y == yc) {
+			return helper;
+		}
+		long l = (((long)xc) << (CLUSTER_ZOOM+1)) + yc;
+		if(!generalClusters.containsKey(l)) {
+			generalClusters.put(l, new GeneralizedCluster(xc, yc, CLUSTER_ZOOM));
+		}
+		return generalClusters.get(l);
+	}
+	
+	
+	public void generalizeWay(Way e) throws SQLException {
+		if (!routeTypes.encodeBaseEntity(e, outTypes, names) || e.getNodes().size() < 2) {
+			return;
+		}
+		List<Node> ns = e.getNodes();
+		
+		GeneralizedWay w = new GeneralizedWay(e.getId());
+		TIntArrayList px = w.px;
+		TIntArrayList py = w.py;
+		GeneralizedCluster cluster = null;
+		for (Node n : ns) {
+			if (n != null) {
+				int x31 = MapUtils.get31TileNumberX(n.getLongitude());
+				int y31 = MapUtils.get31TileNumberY(n.getLatitude());
+				px.add(x31);
+				py.add(y31);
+			}
+		}
+		if(w.size() < 2) {
+			return;
+		}
+		for (int i = 0; i < w.size(); i++) {
+			GeneralizedCluster ncluster = getCluster(w, i, cluster);
+			if (ncluster != cluster) {
+				cluster = ncluster;
+			}
+			ncluster.addWayFromLocation(w, i);
+		}
+		int mt = getMainType(outTypes); // routeTypes.getTypeByInternalId(mt)
+		outTypes.remove(mt);
+		w.mainType = mt;
+		w.addtypes.addAll(outTypes);
+		w.names.putAll(names);
 	}
 
 	private static final char SPECIAL_CHAR = ((char) 0x60000);
@@ -204,39 +438,54 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		return r;
 	}
 
+	private static final String TABLE_ROUTE = "route_objects";
+	private static final String TABLE_BASEROUTE = "baseroute_objects";
+	private static final String CREATETABLE = "(id bigint primary key, "
+			+ "types binary, pointTypes binary, pointIds binary, pointCoordinates binary, name varchar(4096))";
+	private static final String CREATE_IND = "_ind on route_objects (id)";
+	private static final String SELECT_STAT = "SELECT types, pointTypes, pointIds, pointCoordinates, name FROM " +TABLE_ROUTE+" WHERE id = ?";
+	private static final String SELECT_BASE_STAT = "SELECT types, pointTypes, pointIds, pointCoordinates, name FROM "+TABLE_BASEROUTE+" WHERE id = ?";
+	private static final String INSERT_STAT = "(id, types, pointTypes, pointIds, pointCoordinates, name) values(?, ?, ?, ?, ?, ?)";
+
 	public void createDatabaseStructure(Connection mapConnection, DBDialect dialect, String rtreeMapIndexNonPackFileName)
 			throws SQLException, IOException {
 		this.mapConnection = mapConnection;
 		Statement stat = mapConnection.createStatement();
-		stat.executeUpdate(CREATETABLE);
-		stat.executeUpdate(CREATE_IND);
+		stat.executeUpdate("create table " +TABLE_ROUTE + CREATETABLE);
+		stat.executeUpdate("create table " +TABLE_BASEROUTE + CREATETABLE);
+		stat.executeUpdate("create index " +TABLE_ROUTE + CREATE_IND);
+		stat.executeUpdate("create index " +TABLE_BASEROUTE + CREATE_IND);
 		stat.close();
-		mapRouteInsertStat = createStatementRouteObjInsert(mapConnection);
+		mapRouteInsertStat = createStatementRouteObjInsert(mapConnection, false);
+		basemapRouteInsertStat = createStatementRouteObjInsert(mapConnection, true);
 		try {
 			routeTree = new RTree(rtreeMapIndexNonPackFileName);
+			baserouteTree = new RTree(rtreeMapIndexNonPackFileName+"b");
 		} catch (RTreeException e) {
 			throw new IOException(e);
 		}
 		pStatements.put(mapRouteInsertStat, 0);
+		pStatements.put(basemapRouteInsertStat, 0);
 	}
 	
-	private static final String CREATETABLE = "create table route_objects (id bigint primary key, "
-			+ "types binary, pointTypes binary, pointIds binary, pointCoordinates binary, name varchar(4096))";
-	private static final String CREATE_IND = "create index route_objects_ind on route_objects (id)";
-	private static final String SELECT_STAT = "SELECT types, pointTypes, pointIds, pointCoordinates, name FROM route_objects WHERE id = ?";
-	private static final String INSERT_STAT = "insert into route_objects(id, types, pointTypes, pointIds, pointCoordinates, name) values(?, ?, ?, ?, ?, ?)";
+	
 
-
-	private PreparedStatement createStatementRouteObjInsert(Connection conn) throws SQLException {
-		return conn.prepareStatement(INSERT_STAT);
+	private PreparedStatement createStatementRouteObjInsert(Connection conn, boolean basemap) throws SQLException {
+		return conn.prepareStatement("insert into " + ( basemap ? TABLE_BASEROUTE : TABLE_ROUTE) + INSERT_STAT);
 	}
 
 	public void commitAndCloseFiles(String rTreeMapIndexNonPackFileName, String rTreeMapIndexPackFileName, boolean deleteDatabaseIndexes)
 			throws IOException, SQLException {
-
 		// delete map rtree files
-		if (routeTree != null) {
-			RandomAccessFile file = routeTree.getFileHdr().getFile();
+		deleteRouteTreeFiles(rTreeMapIndexNonPackFileName, rTreeMapIndexPackFileName, deleteDatabaseIndexes, routeTree);
+		deleteRouteTreeFiles(rTreeMapIndexNonPackFileName+"b", rTreeMapIndexPackFileName+"b", deleteDatabaseIndexes, baserouteTree);
+		closeAllPreparedStatements();
+	}
+
+	private void deleteRouteTreeFiles(String rTreeMapIndexNonPackFileName, String rTreeMapIndexPackFileName, boolean deleteDatabaseIndexes,
+			RTree rte) throws IOException {
+		if (rte != null) {
+			RandomAccessFile file = rte.getFileHdr().getFile();
 			file.close();
 			if (rTreeMapIndexNonPackFileName != null) {
 				File f = new File(rTreeMapIndexNonPackFileName);
@@ -251,7 +500,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				}
 			}
 		}
-		closeAllPreparedStatements();
 	}
 
 
@@ -296,36 +544,31 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 
 	public void createRTreeFiles(String rTreeRouteIndexPackFileName) throws RTreeException {
 		routeTree = new RTree(rTreeRouteIndexPackFileName);
+		baserouteTree = new RTree(rTreeRouteIndexPackFileName+"b");
 	}
 
 	public void packRtreeFiles(String rTreeRouteIndexNonPackFileName, String rTreeRouteIndexPackFileName) throws IOException {
 		routeTree = packRtreeFile(routeTree, rTreeRouteIndexNonPackFileName, rTreeRouteIndexPackFileName);
-		
+		baserouteTree = packRtreeFile(baserouteTree, rTreeRouteIndexNonPackFileName+"b", rTreeRouteIndexPackFileName+"b");
 	}
 	
 	public void writeBinaryRouteIndex(BinaryMapIndexWriter writer, String regionName) throws IOException, SQLException {
 		closePreparedStatements(mapRouteInsertStat);
+		closePreparedStatements(basemapRouteInsertStat);
 		mapConnection.commit();
+		
 		try {
 			writer.startWriteRouteIndex(regionName);
 			// write map encoding rules
 
 			writer.writeRouteEncodingRules(routeTypes.getEncodingRuleTypes());
-
-			PreparedStatement selectData = mapConnection.prepareStatement(SELECT_STAT);
-			// write map levels and map index
-			TLongObjectHashMap<BinaryFileReference> treeHeader = new TLongObjectHashMap<BinaryFileReference>();
-			long rootIndex = routeTree.getFileHdr().getRootIndex();
-			rtree.Node root = routeTree.getReadNode(rootIndex);
-			Rect rootBounds = calcBounds(root);
-			if (rootBounds != null) {
-				writeBinaryRouteTree(root, rootBounds, routeTree, writer, treeHeader);
-				writeBinaryMapBlock(root, rootBounds, routeTree, writer, selectData, treeHeader, new LinkedHashMap<String, Integer>(),
-						new LinkedHashMap<MapRouteType, String>());
-			}
-
-			selectData.close();
-
+			TLongObjectHashMap<BinaryFileReference> route = writeBinaryRouteIndexHeader(writer, 
+					routeTree, false);
+			TLongObjectHashMap<BinaryFileReference> base = writeBinaryRouteIndexHeader(writer,  
+					baserouteTree, true);
+			writeBinaryRouteIndexBlocks(writer, routeTree, false, route);
+			writeBinaryRouteIndexBlocks(writer, baserouteTree, true, base);
+			
 			writer.endWriteRouteIndex();
 			writer.flush();
 		} catch (RTreeException e) {
@@ -333,6 +576,545 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 	
+	private Node convertBaseToNode(long s) {
+		long x = s >> 31;
+		long y = s - (x << 31);
+		return new Node(MapUtils.get31LatitudeY((int) y), 
+				MapUtils.get31LongitudeX((int) x), -1);
+	}
+	
+	private String baseOrderValues[] = new String[] { "trunk", "motorway", "ferry", "primary", "secondary", "tertiary", "residential",
+			"road", "cycleway", "living_street" };
+	
+	private int getBaseOrderForType(int intType) {
+		if (intType == -1) {
+			return Integer.MAX_VALUE;
+		}
+		MapRouteType rt = routeTypes.getTypeByInternalId(intType);
+		int i = 0;
+		for (; i < baseOrderValues.length; i++) {
+			if (rt.getValue().startsWith(baseOrderValues[i])) {
+				return i;
+			}
+		}
+		return i;
+	}
+	
+	private int getMainType(TIntCollection types){
+		if(types.isEmpty()){
+			return -1;
+		}
+		TIntIterator tit = types./*keySet().*/iterator();
+		int main = tit.next();
+		while(tit.hasNext()){
+			int rt = tit.next();
+			if(getBaseOrderForType(rt) < getBaseOrderForType(main)) {
+				main = rt;
+			}
+		}
+		return main;
+	}
+	
+	public void getAdjacentRoads(GeneralizedCluster gcluster, GeneralizedWay gw, int i, Collection<GeneralizedWay> collection){
+		gcluster = getCluster(gw, i, gcluster);
+		Object o = gcluster.map.get(gw.getLocation(i));
+		if (o instanceof LinkedList) {
+			Iterator it = ((LinkedList) o).iterator();
+			while (it.hasNext()) {
+				GeneralizedWay next = (GeneralizedWay) it.next();
+				if (next.id != gw.id) {
+					collection.add(next);
+				}
+			}
+		}
+	}
+	
+	public int countAdjacentRoads(GeneralizedCluster gcluster, GeneralizedWay gw, int i){
+		gcluster = getCluster(gw, i, gcluster);
+		Object o = gcluster.map.get(gw.getLocation(i));
+		if (o instanceof LinkedList) {
+			Iterator it = ((LinkedList) o).iterator();
+			int cnt = 0;
+			while (it.hasNext()) {
+				GeneralizedWay next = (GeneralizedWay) it.next();
+				if (next.id != gw.id ) {
+					cnt++;
+				}
+			}
+			return cnt;
+		} else if(o instanceof GeneralizedWay) {
+			if(gw.id != ((GeneralizedWay)o).id){
+				return 1;
+			}
+		}
+		return 0;
+	}
+	
+	
+	
+	public void processingLowLevelWays(IProgress progress) {
+		pointTypes.clear();
+		Collection<GeneralizedCluster> clusters = 
+				new ArrayList<IndexRouteCreator.GeneralizedCluster>(generalClusters.valueCollection());
+		// 1. roundabouts 
+		//BUGGY
+		 processRoundabouts(clusters);
+		
+		// 2. way combination based 
+		for(GeneralizedCluster cluster : clusters) {
+			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
+			for(GeneralizedWay gw : copy) {
+				// already deleted
+				if(!cluster.ways.contains(gw)){
+					continue;
+				}
+				attachWays(gw, true);
+				attachWays(gw, false);
+			}
+		}
+		
+		
+		// 3. Douglas peuker simplifications
+		douglasPeukerSimplificationStep(clusters);
+		
+		// 4. remove line duplication
+		removeSmall2RoadsConnectors(clusters);		
+
+		
+		// 5. write to db
+		TLongHashSet ids = new TLongHashSet();
+		for (GeneralizedCluster cluster : clusters) {
+			for (GeneralizedWay gw : cluster.ways) {
+				if(ids.contains(gw.id)) {
+					continue;
+				}
+				ids.add(gw.id);
+				names.clear();
+				Iterator<Entry<MapRouteType, String>> its = gw.names.entrySet().iterator();
+				while (its.hasNext()) {
+					Entry<MapRouteType, String> e = its.next();
+					if (e.getValue() != null) {
+						names.put(e.getKey(), e.getValue());
+					}
+				}
+				ArrayList<Node> nodes = new ArrayList<Node>();
+				if(gw.size() == 0) {
+					System.err.println(gw.id + " empty ? ");
+					continue;
+				}
+				Node prev = convertBaseToNode(gw.getLocation(0));
+				nodes.add(prev);
+				for (int i = 0; i < gw.size(); i++) {
+					Node c = convertBaseToNode(gw.getLocation(i));
+					prev = c;
+					nodes.add(c);
+				}
+				outTypes.clear();
+				outTypes.add(gw.mainType);
+				outTypes.addAll(gw.addtypes);
+				try {
+					addWayToIndex(gw.id, nodes, basemapRouteInsertStat, baserouteTree);
+				} catch (SQLException e) {
+					throw new IllegalStateException(e);
+				}
+			}
+		}
+	}
+
+
+	
+	
+	private static double scalarMultiplication(double xA, double yA, double xB, double yB, double xC, double yC) {
+		// Scalar multiplication between (AB, AC)
+		double multiple = (xB - xA) * (xC - xA) + (yB- yA) * (yC -yA);
+		return multiple;
+	}
+	
+	public static LatLon getProjection(float y31, float x31, float fromy31, float fromx31, float toy31, float tox31) {
+		// not very accurate computation on sphere but for distances < 1000m it is ok
+		float mDist = (fromy31 - toy31) * (fromy31 - toy31) + (fromx31 - tox31) * (fromx31 - tox31);
+		float projection = (float) scalarMultiplication(fromy31, fromx31, toy31, tox31, y31, x31);
+		float prlat;
+		float prlon;
+		if (projection < 0) {
+			prlat = fromy31;
+			prlon = fromx31;
+		} else if (projection >= mDist) {
+			prlat = toy31;
+			prlon = tox31;
+		} else {
+			prlat = fromy31 + (toy31 - fromy31) * (projection / mDist);
+			prlon = fromx31 + (tox31 - fromx31) * (projection / mDist);
+		}
+		return new LatLon(prlat, prlon);
+	}
+	
+	private void simplifyDouglasPeucker(GeneralizedWay gw, float epsilon, Collection<Integer> ints, int start, int end){
+		double dmax = -1;
+		int index = -1;
+		for (int i = start + 1; i <= end - 1; i++) {
+			double d = orthogonalDistance(gw, start, end, gw.px.get(i),  gw.py.get(i), false);
+			if (d > dmax) {
+				dmax = d;
+				index = i;
+			}
+		}
+		if(dmax >= epsilon){
+			simplifyDouglasPeucker(gw, epsilon, ints, start, index);
+			simplifyDouglasPeucker(gw, epsilon, ints, index, end);
+		} else {
+			ints.add(end);
+		}
+	}
+	
+	private double orthogonalDistance(GeneralizedWay gn, int st, int end, int px, int py, boolean returnNanIfNoProjection){
+		float fromy31 = gn.py.get(st);
+		float fromx31 = gn.px.get(st);
+		float toy31 = gn.py.get(end);
+		float tox31 = gn.px.get(end);
+		float mDist = (fromy31 - toy31) * (fromy31 - toy31) + (fromx31 - tox31) * (fromx31 - tox31);
+		float projection = (float) scalarMultiplication(fromy31, fromx31, toy31, tox31, py, px);
+		if (returnNanIfNoProjection && (projection < 0 || projection > mDist)) {
+			return Double.NaN;
+		}
+//		float projy31 = fromy31 + (toy31 - fromy31) * (projection / mDist);
+//		float projx31 = fromx31 + (tox31 - fromx31) * (projection / mDist);
+		double A = MapUtils.convert31XToMeters(px, fromx31);
+		double B = MapUtils.convert31YToMeters(py, fromy31);
+		double C = MapUtils.convert31XToMeters(tox31, fromx31);
+		double D = MapUtils.convert31YToMeters(toy31, fromy31);
+		return Math.abs(A * D - C * B) / Math.sqrt(C * C + D * D);
+		
+	}
+	
+	private void douglasPeukerSimplificationStep(Collection<GeneralizedCluster> clusters){
+		for(GeneralizedCluster cluster : clusters) {
+			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
+			for(GeneralizedWay gw : copy) {
+				Set<Integer> res = new HashSet<Integer>();
+				simplifyDouglasPeucker(gw, DOUGLAS_PEUKER_DISTANCE, res, 0, gw.size() - 1);
+				
+				int ind = 1;
+				int len = gw.size() - 1;
+				for(int j = 1; j < len; j++) {
+					if(!res.contains(j) && countAdjacentRoads(cluster, gw, ind) == 0) {
+						GeneralizedCluster gcluster = getCluster(gw, ind, cluster);
+						gcluster.removeWayFromLocation(gw, ind);
+						gw.px.removeAt(ind);
+						gw.py.removeAt(ind);
+					} else {
+						ind++;
+					}
+				}
+			}
+		}
+	}
+	
+	private int checkDistanceToLine(GeneralizedWay line, int start, boolean directionPlus,
+ int px, int py, double distThreshold) {
+		int j = start;
+		int next = directionPlus ? j + 1 : j - 1;
+		while (next >= 0 && next < line.size()) {
+			double od = orthogonalDistance(line, j, next, px, py, false);
+			if (od < distThreshold) {
+				return j;
+			}
+			j = next;
+			next = directionPlus ? j + 1 : j - 1;
+		}
+		return -1;
+	}
+	
+	private void removeLineDuplication(Collection<GeneralizedCluster> clusters) {
+		for(GeneralizedCluster cluster : clusters) {
+			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
+			for(GeneralizedWay gw : copy) {
+				// already deleted
+				if(!cluster.ways.contains(gw)){
+					continue;
+				}
+				if(gw.size() > 2) {
+					float p = DOUGLAS_PEUKER_DISTANCE / 3;
+					for (GeneralizedWay gn : copy) {
+						int kmin = checkDistanceToLine(gn, 0, true, gw.px.get(0), 
+								gw.py.get(0), p);
+						int knext = kmin;
+						boolean dir = true;
+						if(kmin >= 0) {
+							knext = checkDistanceToLine(gn, kmin, dir, gw.px.get(1), 
+								gw.py.get(1), p);
+							if(knext < 0) {
+								dir = false;
+								knext = checkDistanceToLine(gn, kmin, dir, gw.px.get(1), 
+										gw.py.get(1), p);
+							}
+						}
+						if(knext > 0){
+							int prevk = kmin;
+							while (gw.size() > 1) {
+								prevk = checkDistanceToLine(gn, prevk, dir, gw.px.get(1), 
+										gw.py.get(1), p);
+								if(prevk < 0){
+									break;
+								}
+								removePointFromWayAndReplace(cluster, gw, 1, gn.px.get(prevk), gn.py.get(prevk));
+							}
+							removePointFromWayAndReplace(cluster, gw, 0, gn.px.get(kmin), gn.py.get(kmin));
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	private void removePointFromWayAndReplace(GeneralizedCluster cluster, GeneralizedWay gw, int i, int x31, int y31) {
+		GeneralizedCluster gcluster = getCluster(gw, i, cluster);
+		Object o = gcluster.map.get(gw.getLocation(i));
+		if (o instanceof LinkedList) {
+			Iterator it = ((LinkedList) o).iterator();
+			while (it.hasNext()) {
+				GeneralizedWay next = (GeneralizedWay) it.next();
+				replacePointWithAnotherPoint(gcluster, gw, x31, y31, i, next);
+			}
+		} else if (o instanceof GeneralizedWay) {
+			replacePointWithAnotherPoint(gcluster, gw, x31, y31, i, (GeneralizedWay) o);
+		}
+		gcluster.removeWayFromLocation(gw, i);
+		gw.px.removeAt(i);
+		gw.py.removeAt(i);
+	}
+
+
+	private void processRoundabouts(Collection<GeneralizedCluster> clusters) {
+		for(GeneralizedCluster cluster : clusters) {
+			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
+			for (GeneralizedWay gw : copy) {
+				// roundabout
+				GeneralizedCluster gcluster = cluster;
+				if (gw.getLocation(gw.size() - 1) == gw.getLocation(0) && cluster.ways.contains(gw)) {
+					removeWayAndSubstituteWithPoint(gw, gcluster);
+				}
+			}
+		}
+	}
+
+
+	
+	private void removeSmall2RoadsConnectors(Collection<GeneralizedCluster> clusters) {
+		for(GeneralizedCluster cluster : clusters) {
+			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
+			for (GeneralizedWay gw : copy) {
+				// roundabout
+				if (gw.getDistance() < 500) {
+					LinkedHashSet<GeneralizedWay> ll = new LinkedHashSet<GeneralizedWay>();
+					for (int i = 0; i < gw.size(); i++) {
+						getAdjacentRoads(cluster, gw, i, ll);
+					}
+					if(ll.size() <= 1) {
+						removeGeneratedWay(gw, cluster);
+					} else if(ll.size() >= 2){
+						boolean intersect = true;
+						while(ll.size() > 1 && intersect) {
+							Iterator<GeneralizedWay> it = ll.iterator();
+							GeneralizedWay first = it.next();
+							it.remove();
+							
+							intersect = false;
+							LinkedHashSet<GeneralizedWay> ls = new LinkedHashSet<GeneralizedWay>();
+							for(int j = 0; j< first.size(); j++) {
+								getAdjacentRoads(cluster, first, j, ls);
+								if(ls.containsAll(ll)) {
+									intersect = true;
+									break;
+								}
+							}
+						}
+						if(intersect) {
+							removeGeneratedWay(gw, cluster);
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	private void removeGeneratedWay(GeneralizedWay gw, GeneralizedCluster gcluster) {
+		for (int i = 0; i < gw.size(); i++) {
+			gcluster = getCluster(gw, i, gcluster);
+			gcluster.removeWayFromLocation(gw, i, true);
+		}
+	}
+
+	
+	private void removeWayAndSubstituteWithPoint(GeneralizedWay gw, GeneralizedCluster gcluster) {
+		// calculate center location
+		long pxc = 0;
+		long pyc = 0;
+		for (int i = 0; i < gw.size(); i++) {
+			pxc += gw.px.get(i);
+			pyc += gw.py.get(i);
+		}
+		pxc /= gw.size();
+		pyc /= gw.size();
+
+		// attach additional point to other roads
+		for (int i = 0; i < gw.size(); i++) {
+			gcluster = getCluster(gw, i, gcluster);
+			Object o = gcluster.map.get(gw.getLocation(i));
+			// something attachedpxc
+			if (o instanceof LinkedList) {
+				Iterator it = ((LinkedList)o).iterator();
+				while(it.hasNext()) {
+					GeneralizedWay next = (GeneralizedWay) it.next();
+					replacePointWithAnotherPoint(gcluster, gw, (int) pxc, (int) pyc, i, next);
+				}
+			} else if (o instanceof GeneralizedWay) {
+				replacePointWithAnotherPoint(gcluster, gw, (int) pxc, (int) pyc, i, (GeneralizedWay) o);
+			}
+		}
+		// remove roundabout
+		removeGeneratedWay(gw, gcluster);
+	}
+
+	private void replacePointWithAnotherPoint(GeneralizedCluster gcluster, GeneralizedWay gw, int pxc, int pyc, int i, GeneralizedWay next) {
+		if (next.id != gw.id) {
+			for (int j = 0; j < next.size(); j++) {
+				if (next.getLocation(j) == gw.getLocation(i)) {
+					if (j == next.size() - 1) {
+						next.px.add(pxc);
+						next.py.add(pyc);
+						gcluster = getCluster(next, next.size() - 1, gcluster);
+						gcluster.addWayFromLocation(next, next.size() - 1);
+					} else {
+						next.px.insert(j, pxc);
+						next.py.insert(j, pyc);
+						gcluster = getCluster(next, j, gcluster);
+						gcluster.addWayFromLocation(next, j);
+					}
+					break;
+				}
+			}
+		}
+	}
+	
+	private boolean compareRefs(GeneralizedWay gw, GeneralizedWay gn){
+		String rf = gw.names.get(routeTypes.getRefRuleType());
+		String rf2 = gn.names.get(routeTypes.getRefRuleType());
+		if(rf != null && rf2 != null && !rf.equals(rf2)){
+			return false;
+		}
+		return true;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private GeneralizedWay selectBestWay(GeneralizedCluster cluster, GeneralizedWay gw, int ind) {
+		long loc = gw.getLocation(ind);
+		Object o = cluster.map.get(loc);
+		GeneralizedWay res = null;
+		if (o instanceof GeneralizedWay) {
+			if (o != gw) {
+				GeneralizedWay m = (GeneralizedWay) o;
+				if (m.id != gw.id && m.mainType == gw.mainType && compareRefs(gw, m)) {
+					return m;
+				}
+				
+			}
+		} else if (o instanceof LinkedList) {
+			LinkedList<GeneralizedWay> l = (LinkedList<GeneralizedWay>) o;
+			double bestDiff = Math.PI / 2;
+			for (GeneralizedWay m : l) {
+				if (m.id != gw.id && m.mainType == gw.mainType && compareRefs(gw, m)) {
+					double init = gw.directionRoute(ind, ind == 0);
+					double dir;
+					if (m.getLocation(0) == loc) {
+						dir = m.directionRoute(0, true);
+					} else if (m.getLocation(m.size() - 1) == loc) {
+						dir = m.directionRoute(m.size() - 1, false);
+					} else {
+						return null;
+					}
+					double angleDiff = Math.abs(MapUtils.alignAngleDifference(Math.PI + dir - init));
+					if (angleDiff < bestDiff) {
+						bestDiff = angleDiff;
+						res = m;
+					}
+				}
+			}
+		}
+		return res;
+	}
+
+	
+	private void attachWays(GeneralizedWay gw, boolean first) {
+		GeneralizedCluster cluster = null;
+		while(true) {
+			int ind = first? 0 : gw.size() - 1;
+			cluster = getCluster(gw, ind, cluster);
+			GeneralizedWay prev = selectBestWay(cluster, gw, ind);
+			if(prev == null) {
+				break;
+			}
+			for (int i = 0; i < prev.size(); i++) {
+				cluster = getCluster(prev, i, cluster);
+				cluster.replaceWayFromLocation(prev, i, gw);
+			}
+			gw.addtypes.addAll(prev.addtypes);
+			gw.names.putAll(prev.names);
+			TIntArrayList ax = first? prev.px : gw.px;
+			TIntArrayList ay = first? prev.py : gw.py;
+			TIntArrayList bx = !first? prev.px : gw.px;
+			TIntArrayList by = !first? prev.py : gw.py;
+			if(first) {
+				if(gw.getLocation(0) == prev.getLocation(0)) {
+					ax.reverse();
+					ay.reverse();
+				}
+			} else {
+				if(gw.getLocation(ind) == prev.getLocation(prev.size() - 1)) {
+					bx.reverse();
+					by.reverse();
+				}
+			}
+			bx.removeAt(0);
+			by.removeAt(0);
+			ax.addAll(bx);
+			ay.addAll(by);
+			gw.px = ax;
+			gw.py = ay;
+		}
+	}
+
+
+	private void writeBinaryRouteIndexBlocks(BinaryMapIndexWriter writer, RTree rte, boolean basemap,
+			TLongObjectHashMap<BinaryFileReference> treeHeader) throws IOException, SQLException, RTreeException {
+
+		// write map levels and map index
+		long rootIndex = rte.getFileHdr().getRootIndex();
+		rtree.Node root = rte.getReadNode(rootIndex);
+		Rect rootBounds = calcBounds(root);
+		if (rootBounds != null) {
+				PreparedStatement selectData = mapConnection.prepareStatement(basemap ? SELECT_BASE_STAT : SELECT_STAT);
+				writeBinaryMapBlock(root, rootBounds, rte, writer, selectData, treeHeader, new LinkedHashMap<String, Integer>(),
+						new LinkedHashMap<MapRouteType, String>());
+				selectData.close();
+		}
+	}
+	
+	private TLongObjectHashMap<BinaryFileReference> writeBinaryRouteIndexHeader(BinaryMapIndexWriter writer,  
+			RTree rte, boolean basemap) throws IOException, SQLException, RTreeException {
+		// write map levels and map index
+		TLongObjectHashMap<BinaryFileReference> treeHeader = new TLongObjectHashMap<BinaryFileReference>();
+		long rootIndex = rte.getFileHdr().getRootIndex();
+		rtree.Node root = rte.getReadNode(rootIndex);
+		Rect rootBounds = calcBounds(root);
+		if (rootBounds != null) {
+			writeBinaryRouteTree(root, rootBounds, rte, writer, treeHeader, basemap);
+		}
+		return treeHeader;
+	}	
 	
 	private int registerId(TLongArrayList ids, long id) {
 		for (int i = 0; i < ids.size(); i++) {
@@ -344,7 +1126,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		return ids.size() - 1;
 	}
 	
-	public void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
+	private void writeBinaryMapBlock(rtree.Node parent, Rect parentBounds, RTree r, BinaryMapIndexWriter writer, PreparedStatement selectData,
 			TLongObjectHashMap<BinaryFileReference> bounds, Map<String, Integer> tempStringTable, Map<MapRouteType, String> tempNames)
 					throws IOException, RTreeException, SQLException {
 		Element[] e = parent.getAllElements();
@@ -445,7 +1227,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 
-	public void writeBinaryRouteTree(rtree.Node parent, Rect re, RTree r, BinaryMapIndexWriter writer, TLongObjectHashMap<BinaryFileReference> bounds)
+	private void writeBinaryRouteTree(rtree.Node parent, Rect re, RTree r, BinaryMapIndexWriter writer,
+			TLongObjectHashMap<BinaryFileReference> bounds, boolean basemap)
 			throws IOException, RTreeException {
 		Element[] e = parent.getAllElements();
 		boolean containsLeaf = false;
@@ -454,16 +1237,20 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				containsLeaf = true;
 			}
 		}
-		BinaryFileReference ref = writer.startRouteTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf);
+		BinaryFileReference ref = writer.startRouteTreeElement(re.getMinX(), re.getMaxX(), re.getMinY(), re.getMaxY(), containsLeaf,
+				basemap);
 		if (ref != null) {
 			bounds.put(parent.getNodeIndex(), ref);
 		}
 		for (int i = 0; i < parent.getTotalElements(); i++) {
 			if (e[i].getElementType() != rtree.Node.LEAF_NODE) {
 				rtree.Node chNode = r.getReadNode(((NonLeafElement) e[i]).getPtr());
-				writeBinaryRouteTree(chNode, e[i].getRect(), r, writer, bounds);
+				writeBinaryRouteTree(chNode, e[i].getRect(), r, writer, bounds, basemap);
 			}
 		}
 		writer.endRouteTreeElement();
-	} 
+	}
+	
+	
+
 }

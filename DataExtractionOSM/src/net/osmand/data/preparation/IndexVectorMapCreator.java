@@ -382,7 +382,7 @@ public class IndexVectorMapCreator extends AbstractIndexPartCreator {
 
 	}
 
-	private static boolean checkForSmallAreas(List<Node> nodes, int zoom, int minz, int maxz) {
+	public static boolean checkForSmallAreas(List<Node> nodes, int zoom, int minz, int maxz) {
 		int minX = Integer.MAX_VALUE;
 		int maxX = Integer.MIN_VALUE;
 		int minY = Integer.MAX_VALUE;

@@ -502,6 +502,7 @@ void RenderingRuleSearchRequest::setStringFilter(RenderingRuleProperty* p, std::
 		values[p->id] = storage->getDictionaryValue(filter);
 	}
 }
+
 void RenderingRuleSearchRequest::setIntFilter(RenderingRuleProperty* p, int filter) {
 	if (p != NULL) {
 		// assert p->input;

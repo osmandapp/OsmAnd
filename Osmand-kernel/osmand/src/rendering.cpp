@@ -28,13 +28,14 @@
 #include "rendering.h"
 
 
-
 struct MapDataObjectPrimitive {
 	MapDataObject* obj;
 	int typeInd;
 	float order;
 	int objectType;
 };
+
+
 
 const int MAX_V = 32;
 void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
@@ -234,7 +235,6 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 				rc->textToDraw.push_back(info);
 			}
 		}
-
 		it++;
 	}
 

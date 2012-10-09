@@ -34,6 +34,8 @@ import org.apache.commons.logging.Log;
 public class RoutingContext {
 
 	public static final boolean SHOW_GC_SIZE = false;
+	public boolean USE_BASEMAP = false; 
+	
 	private final static Log log = LogUtil.getLog(RoutingContext.class);
 	public static final int OPTION_NO_LOAD = 0;
 	public static final int OPTION_SMART_LOAD = 1;
@@ -119,7 +121,9 @@ public class RoutingContext {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
 			for (RouteRegion r : rr) {
-				for (RouteSubregion rs : r.getSubregions()) {
+				List<RouteSubregion> subregs = USE_BASEMAP ? r.getBaseSubregions() :
+					r.getSubregions();
+				for (RouteSubregion rs : subregs) {
 					subregions.add(new RouteSubregion(rs));
 				}
 				this.reverseMap.put(r, mr);
@@ -127,7 +131,6 @@ public class RoutingContext {
 			this.map.put(mr, subregions);
 		}
 		this.config = config;
-//		this.nativeLib = null;
 		this.nativeLib = nativeLibrary;
 	}
 	
@@ -618,7 +621,9 @@ public class RoutingContext {
 				return original;
 			}
 			// Native use case
+			long nanoTime = System.nanoTime();
 			RouteDataObject[] res = ctx.nativeLib.getDataObjects(searchResult, x31, y31);
+			ctx.timeToLoad += (System.nanoTime() - nanoTime);
 			if (res != null) {
 				for (RouteDataObject ro : res) {
 					RouteDataObject toCmp = excludeDuplications.get(ro.id);

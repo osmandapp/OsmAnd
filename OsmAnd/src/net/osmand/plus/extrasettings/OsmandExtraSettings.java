@@ -118,19 +118,6 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 
-		// FIXME delete strings from this code
-//		final MapInfoControlRegInfo fluorescent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_fluorescent_routes, R.string.map_widget_fluorescent,
-//				"fluorescent", view.getSettings().FLUORESCENT_OVERLAYS);
-//		fluorescent.setStateChangeListener(new Runnable() {
-//			@Override
-//			public void run() {
-//				view.getSettings().FLUORESCENT_OVERLAYS.set(!view.getSettings().FLUORESCENT_OVERLAYS.get());
-//				view.refreshMap();
-//			}
-//		});
-		
-
-//		final CommonPreference<Integer> posPref = view.getSettings().POSITION_ON_MAP;
 //		final MapInfoControlRegInfo posMap = mapInfoControls.registerAppearanceWidget(R.drawable.widget_position_marker, R.string.position_on_map, 
 //				"position_on_map", textSizePref);
 //		posMap.setStateChangeListener(new Runnable() {

@@ -158,6 +158,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int regionsRead;
 		
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
+		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
 		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
@@ -180,6 +181,10 @@ public class BinaryMapRouteReaderAdapter {
 		
 		public List<RouteSubregion> getSubregions(){
 			return subregions;
+		}
+		
+		public List<RouteSubregion> getBaseSubregions(){
+			return basesubregions;
 		}
 
 		public double getLeftLongitude() {
@@ -299,19 +304,28 @@ public class BinaryMapRouteReaderAdapter {
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
 			}  break;
-			case OsmandOdb.OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER : {
+			case OsmandOdb.OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER :
+			case OsmandOdb.OsmAndRoutingIndex.BASEMAPBOXES_FIELD_NUMBER :{
 				RouteSubregion subregion = new RouteSubregion(region);
 				subregion.length = readInt();
 				subregion.filePointer = codedIS.getTotalBytesRead();
 				int oldLimit = codedIS.pushLimit(subregion.length);
 				readRouteTree(subregion, null, 0, true);
-				region.getSubregions().add(subregion);
+				if(tag == OsmandOdb.OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER) {
+					region.subregions.add(subregion);
+				} else {
+					region.basesubregions.add(subregion);
+				}
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
 				codedIS.popLimit(oldLimit);
-				
+				break;
+			}
+			case OsmandOdb.OsmAndRoutingIndex.BLOCKS_FIELD_NUMBER : {
 				// Finish reading file!
 				codedIS.skipRawBytes(codedIS.getBytesUntilLimit());
-			}	break;
+				break;
+			}	
+				
 			
 			default:
 				skipUnknownField(t);
@@ -616,20 +630,13 @@ public class BinaryMapRouteReaderAdapter {
 		}
 	}
 	
-	public void initRouteTypesIfNeeded(SearchRequest<RouteDataObject> req) throws IOException{
-		for(RouteRegion r:  map.getRoutingIndexes() ) {
-			if (r.routeEncodingRules.isEmpty()) {
-				boolean intersect = false;
-				for (RouteSubregion rs : r.subregions) {
-					if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
-						intersect = true;
-						break;
-					}
-				}
-				if(intersect) {
-					codedIS.seek(r.filePointer);
-					int oldLimit = codedIS.pushLimit(r.length);
-					readRouteIndex(r);
+	public void initRouteTypesIfNeeded(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
+		for (RouteSubregion rs : list) {
+			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
+				if (rs.routeReg.routeEncodingRules.isEmpty()) {
+					codedIS.seek(rs.routeReg.filePointer);
+					int oldLimit = codedIS.pushLimit(rs.routeReg.length);
+					readRouteIndex(rs.routeReg);
 					codedIS.popLimit(oldLimit);
 				}
 			}

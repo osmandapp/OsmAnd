@@ -11,6 +11,7 @@ LOCAL_MODULE := expat_static_neon
 LOCAL_ARM_NEON := true
 endif
 
+
 ifneq ($(OSMAND_USE_PREBUILT),true)
 
 include $(BUILD_STATIC_LIBRARY)
