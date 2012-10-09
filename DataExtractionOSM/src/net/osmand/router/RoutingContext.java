@@ -33,7 +33,7 @@ import org.apache.commons.logging.Log;
 
 public class RoutingContext {
 
-	public static final boolean SHOW_GC_SIZE = true;
+	public static final boolean SHOW_GC_SIZE = false;
 	private final static Log log = LogUtil.getLog(RoutingContext.class);
 	public static final int OPTION_NO_LOAD = 0;
 	public static final int OPTION_SMART_LOAD = 1;
