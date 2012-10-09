@@ -29,6 +29,7 @@ public class MapRoutingTypes {
 		TAGS_TO_ACCEPT.add("route");
 		
 		BASE_TAGS_TEXT.add("int_ref");
+		BASE_TAGS_TEXT.add("name");
 		BASE_TAGS_TEXT.add("ref");
 		
 		BASE_TAGS_TO_SAVE.add("toll");

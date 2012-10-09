@@ -4,7 +4,6 @@ import gnu.trove.TIntCollection;
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
@@ -1009,6 +1008,17 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		return true;
 	}
 	
+	private void mergeName(MapRouteType rt, GeneralizedWay from, GeneralizedWay to){
+		String rf = from.names.get(rt);
+		String rf2 = to.names.get(rt);
+		if(rf != null && rf2 != null && !rf.equals(rf2)){
+			to.names.remove(rt);
+		} else if(rf != null) {
+			to.names.put(rt, from.names.get(rt));			
+		}
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	private GeneralizedWay selectBestWay(GeneralizedCluster cluster, GeneralizedWay gw, int ind) {
 		long loc = gw.getLocation(ind);
@@ -1062,7 +1072,15 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				cluster.replaceWayFromLocation(prev, i, gw);
 			}
 			gw.addtypes.addAll(prev.addtypes);
-			gw.names.putAll(prev.names);
+			for(MapRouteType rt : new ArrayList<MapRouteType>(gw.names.keySet())) {
+				mergeName(rt, prev, gw);	
+			}
+			for(MapRouteType rt : new ArrayList<MapRouteType>(prev.names.keySet())) {
+				if(!gw.names.containsKey(rt)){
+					mergeName(rt, prev, gw);
+				}
+			}
+			
 			TIntArrayList ax = first? prev.px : gw.px;
 			TIntArrayList ay = first? prev.py : gw.py;
 			TIntArrayList bx = !first? prev.px : gw.px;
