@@ -911,7 +911,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 			}
-			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode() && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
+			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
 				backToLocationWithDelay(1);
 			}
 		}
@@ -1381,7 +1381,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		Message msg = Message.obtain(uiHandler, new Runnable() {
 			@Override
 			public void run() {
-				if (settings.MAP_ACTIVITY_ENABLED.get()) {
+				if (settings.MAP_ACTIVITY_ENABLED.get() && !isMapLinkedToLocation()) {
 					AccessibleToast.makeText(MapActivity.this, R.string.auto_follow_location_enabled, Toast.LENGTH_SHORT).show();
 					backToLocationImpl();
 				}
