@@ -33,7 +33,7 @@ import org.apache.commons.logging.Log;
 
 public class RoutingContext {
 
-	public static final boolean SHOW_GC_SIZE = false;
+	public static final boolean SHOW_GC_SIZE = true;
 	private final static Log log = LogUtil.getLog(RoutingContext.class);
 	public static final int OPTION_NO_LOAD = 0;
 	public static final int OPTION_SMART_LOAD = 1;
@@ -73,6 +73,8 @@ public class RoutingContext {
 
 	// 5. debug information (package accessor)
 	public TileStatistics global = new TileStatistics();
+	// updated by route planner in bytes
+	public int memoryOverhead = 0;
 	long timeToLoad = 0;
 	long timeToLoadHeaders = 0;
 	long timeToFindInitialSegments = 0;
@@ -707,6 +709,39 @@ public class RoutingContext {
 		}
 	}
 	
+	static int getEstimatedSize(RouteDataObject o) {
+		// calculate size
+		int sz = 0;
+		sz += 8 + 4; // overhead
+		if (o.names != null) {
+			sz += 12;
+			TIntObjectIterator<String> it = o.names.iterator();
+			while(it.hasNext()) {
+				it.advance();
+				String vl = it.value();
+				sz += 12 + vl.length();
+			}
+			sz += 12 + o.names.size() * 25;
+		}
+		sz += 8; // id
+		// coordinates
+		sz += (8 + 4 + 4 * o.getPointsLength()) * 4;
+		sz += o.types == null ? 4 : (8 + 4 + 4 * o.types.length);
+		sz += o.restrictions == null ? 4 : (8 + 4 + 8 * o.restrictions.length);
+		sz += 4;
+		if (o.pointTypes != null) {
+			sz += 8 + 4 * o.pointTypes.length;
+			for (int i = 0; i < o.pointTypes.length; i++) {
+				sz += 4;
+				if (o.pointTypes[i] != null) {
+					sz += 8 + 8 * o.pointTypes[i].length;
+				}
+			}
+		}
+		// Standard overhead?
+		return  (int) (sz * 3.5);
+	}
+	
 	protected static class TileStatistics {
 		public int size = 0;
 		public int allRoutes = 0;
@@ -722,38 +757,10 @@ public class RoutingContext {
 		public void addObject(RouteDataObject o) {
 			allRoutes++;
 			coordinates += o.getPointsLength() * 2;
-			// calculate size
-			int sz = 0;
-			sz += 8 + 4; // overhead
-			if (o.names != null) {
-				sz += 12;
-				TIntObjectIterator<String> it = o.names.iterator();
-				while(it.hasNext()) {
-					it.advance();
-					String vl = it.value();
-					sz += 12 + vl.length();
-				}
-				sz += 12 + o.names.size() * 25;
-			}
-			sz += 8; // id
-			// coordinates
-			sz += (8 + 4 + 4 * o.getPointsLength()) * 4;
-			sz += o.types == null ? 4 : (8 + 4 + 4 * o.types.length);
-			sz += o.restrictions == null ? 4 : (8 + 4 + 8 * o.restrictions.length);
-			sz += 4;
-			if (o.pointTypes != null) {
-				sz += 8 + 4 * o.pointTypes.length;
-				for (int i = 0; i < o.pointTypes.length; i++) {
-					sz += 4;
-					if (o.pointTypes[i] != null) {
-						sz += 8 + 8 * o.pointTypes[i].length;
-					}
-				}
-			}
-			// Standard overhead?
-			size += sz * 3.5;
-			// size += coordinates * 20;
+			size += getEstimatedSize(o);
 		}
+
+		
 	}
 
 }

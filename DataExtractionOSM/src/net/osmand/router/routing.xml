@@ -43,7 +43,7 @@
 
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="130.0" 
-			leftTurn="20" rightTurn="15" roundaboutTurn="20" followSpeedLimitations="true" onewayAware="true">
+			leftTurn="0" rightTurn="0" roundaboutTurn="0" followSpeedLimitations="true" onewayAware="true">
 	    <!--		
 		<attribute name="useDynamicRoadPrioritising" value="true" />
 	    <attribute name="dynamicRoadPriorityDistance" value="0" /> 
