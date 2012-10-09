@@ -31,6 +31,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import com.google.devtools.j2cpp.util.NameTableCpp;
 import com.google.devtools.j2objc.util.NameTable;
 import com.google.devtools.j2objc.J2ObjC;
 import com.google.devtools.j2objc.Options;
@@ -79,7 +80,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 
 	  @Override
 	  public void generate(TypeDeclaration node) {
-	    String typeName = NameTable.getFullName(node);
+	    String typeName = NameTableCpp.getFullName(node);
 	    String superName = NameTable.getSuperClassName(node);
 
 	    //DONE if extends superclass other than Object
@@ -270,7 +271,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	  }
 
 	  protected String createForwardDeclaration(String typeName, boolean isInterface) {
-	    return String.format("@%s %s;", isInterface ? "protocol" : "class", typeName);
+	    return String.format("@%s %s;", isInterface ? "TODO: change to abstract class \ninterface" : "class", typeName);
 	  }
 
 	  protected String createImport(ImportCollector.Import imp) {

@@ -49,7 +49,7 @@ public class NameTableCpp {
 	    }
 	    if (javaName.equals("byte")) {
 //	    TODO change to appropriate type 
-	      return "signed short";
+	      return "wchar_t";
 	    }
 	    if (javaName.equals("char")) {
 	      return "wchar_t";
@@ -58,7 +58,7 @@ public class NameTableCpp {
 	      return "signed short";
 	    }
 	    if (javaName.equals("long")) {
-	      return "signed long";
+	      return "long long";
 	    }
 	    if (javaName.equals("float")) {
 	        return "float";
