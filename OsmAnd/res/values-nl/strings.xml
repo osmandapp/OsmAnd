@@ -994,13 +994,10 @@
 <string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Android)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. Belangrijke eigenschappen: - offline data, configureerbare opslagmap - compacte vectorkaarten voor de hele wereld - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen met instelbare transpantie - offline navigatie voor korte afstanden (experimenteel) Beperkingen van OsmAnd Free: - het aantal kaarten dat je kan downloaden - geen toegang tot Wikipedia offline interessepunten OsmAnd wordt nog actief ontwikkeld en rekent op ondersteuning via donaties voor de verdere ontwikkeling "</string>
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. OsmAnd+ is a donatie app. Door het te kopen ondersteun je het project en ontvang je de laatste updates.↵ ↵ Belangrijke eigenschappen: - nieuwe offline Wikipedia feature (download Wikideia interessepunten)↵ - offline data, configureerbare opslagmap - compacte vectorkaarten voor de hele wereld - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen met instelbare transpantie - offline navigatie voor korte afstanden (experimenteel) "</string>
 <string name="avoid_motorway">Vermijd snelwegen</string>
-<string name="tip_recent_changes_0_8_3_t">Wijzigingen 0.8.3 :
-		\n\t* Verbeterde routebegeleiding
-		\n\t* Vermijd snelwegen optie
-		\n\t* Weergave van fietspaden (tracks)
-		\n\t* Verbeterde interface (iconen)
-		\n\t* Enige bugs opgelost
-	</string>
+<string name="tip_recent_changes_0_8_3_t">"Wijzigingen 0.8.3 :
+\n\t* Routepunten\n\t* Verbeterde routebegeleiding
+\n\t* Optie om snelwegen te vermijden\n\t* Weergave van fietspaden (tracks)
+\n\t* Enige bugs opgelost "</string>
 <string name="snap_to_road_descr">Houd positie op de weg tijdens navigatie</string>
 <string name="snap_to_road">Houd op weg</string>
 <string name="intermediate_point_too_far">routepunt %1$s te ver van dichtstbijzijnde weg.</string>
