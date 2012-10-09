@@ -57,7 +57,7 @@
 	<string name="poi_filter_for_tourists">For tourists</string>
 	<string name="poi_filter_fuel">Fuel</string>
 	<string name="show_warnings_title">Show alarms&#8230;</string>
-	<string name="show_warnings_descr">Show speed limits, speed cameras, speed bumps, and other warnings</string>
+	<string name="show_warnings_descr">Configure speed camera warnings, other traffic warnings (speed limits, forced stops, speed bumps), and lane information</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
 	<string name="use_compass_navigation">Use compass</string>
 	<string name="avoid_motorway">Avoid motorways</string>
@@ -182,7 +182,7 @@
 	<string name="bg_service_screen_lock_toast">The screen is locked</string>
 	<string name="bg_service_interval">Set wake-up interval:</string>
 	<string name="show_cameras">Show speed cameras</string>
-	<string name="show_speed_limits">Show speed limits</string>
+	<string name="show_speed_limits">Show traffic warnings</string>
 	<string name="avoid_toll_roads">Avoid toll roads</string>
 	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
 	<string name="route_updated_loc_found">Route will be recalculated when location will be found</string>

@@ -3,7 +3,7 @@
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen…</string>
-	<string name="show_warnings_descr">Warnungen für Tempolimits, stationäre Radarkontrollen, Rüttelschwellen u.Ä.</string>
+	<string name="show_warnings_descr">Warnungen für stationäre Radarkontrollen, andere Verkehrswarnungen (Geschwindigkeitsbegrenzungen, Stopzeichen, Rüttelschwellen) und Fahrspuranzeige</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
@@ -1061,7 +1061,7 @@
 	<string name="show_speed_limits_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
 	<string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string>
 	<string name="show_cameras">Radarfallen anzeigen</string>
-	<string name="show_speed_limits">Tempolimit anzeigen</string>
+	<string name="show_speed_limits">Andere Verkehrswarnungen</string>
 	<string name="avoid_toll_roads">Vermeide Mautstraßen</string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>
