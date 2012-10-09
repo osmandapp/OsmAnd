@@ -481,6 +481,13 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
 					return;
 				}
+
+				// PREV_APPLICATION_MODE also needs to be set here to overwrite possibly outdated value from prior follow-navigation in different profile
+				// Do not overwrite PREV_APPLICATION_MODE if already navigating
+				if (!routingHelper.isFollowingMode()) {
+					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
+				}
+
 				ApplicationMode mode = getAppMode(buttons, settings);
 				routingHelper.setAppMode(mode);
 				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
