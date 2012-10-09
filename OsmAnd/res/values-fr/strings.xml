@@ -1119,4 +1119,5 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="non_optimal_route_calculation">Calculer une route éventuellement non optimale pour les longs trajets</string>
     <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
-    </resources>
+    <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Google Play ?</string>
+	</resources>
