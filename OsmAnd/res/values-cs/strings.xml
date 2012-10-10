@@ -1069,7 +1069,7 @@
 \n\t\'Den\' - vždy používá denní režim
 \n\t\'Noc\' - vždy používá noční režim
 \n\t\'Senzor osvětlení\' - vzhled mapy je ovládán senzorem okolního světla na vašem zařízení (pouze pokud je přítomen) "</string>
-<string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4: Aktualizováno "</string>
+<string name="tip_recent_changes_0_8_4_t">"Změny ve verzi 0.8.4 :\n\t* Oprava některých chyb "</string>
     <string name="context_menu_item_last_intermediate_point">Nastavit poslední cílový bod</string>
     <string name="context_menu_item_first_intermediate_point">Nastavit první bod trasy</string>
     <string name="add_as_last_destination_point">Přidat jako poslední bod trasy</string>
