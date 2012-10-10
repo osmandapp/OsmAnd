@@ -13,7 +13,7 @@
 	<string name="poi_filter_for_tourists">Τουριστικά</string>
 	<string name="poi_filter_fuel">Καύσιμα</string>
 	<string name="show_warnings_title">Εμφάνιση Προειδοποιήσεων…</string>
-	<string name="show_warnings_descr">Εμφάνιση ορίων ταχύτητας, καμερών ταχύτητας, speed bumps, και άλλων προειδοποιήσεων</string>
+	<string name="show_warnings_descr">Ρύθμιση προειδοποιήσεων κυκλοφορίας (όρια ταχύτητας, αναγκαστικές στάσεις, μειωτές ταχύτητας) προειδοποιήσεις καμερών ταχύτητας, και πληροφορίες λωρίδων</string>
 	<string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει εντοπιστεί διαφορετικά</string>
 	<string name="use_compass_navigation">Χρήση πυξίδας</string>
 	<string name="avoid_motorway">Αποφυγή αυτοκινητόδρομων</string>
@@ -98,7 +98,7 @@
 	<string name="bg_service_screen_lock_toast">Η οθόνη είναι κλειδωμένη</string>
 	<string name="bg_service_interval">Ορισμός διαστήματος αφύπνισης:</string>
 	<string name="show_cameras">Εμφάνιση καμερών ταχύτητας</string>
-	<string name="show_speed_limits">Εμφάνιση ορίων ταχύτητας</string>
+	<string name="show_speed_limits">Εμφάνιση προειδοποιήσεων κυκλοφορίας</string>
 	<string name="avoid_toll_roads">Αποφυγή διοδίων</string>
 	<string name="continue_follow_previous_route_auto">Το προηγούμενο δρομολόγιο δεν είχε τελειώσει. Να συνεχιστεί;? (%1$s δευτ.)</string>
 	<string name="route_updated_loc_found">Η διαδρομή θα επαναϋπολογιστεί όταν βρεθεί η τοποθεσία</string>
