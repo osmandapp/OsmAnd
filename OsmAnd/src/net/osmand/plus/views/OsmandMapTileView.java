@@ -285,7 +285,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		if (mainLayer != null && zoom <= mainLayer.getMaximumShownMapZoom() + 0.01 && zoom >= mainLayer.getMinimumShownMapZoom() - 0.01) {
 			animatedDraggingThread.stopAnimating();
 			// avoid round error
-			this.zoom = zoom + 0.001f;
+			if(zoom < Math.round(zoom)){
+				this.zoom = zoom + 0.001f;	
+			} else {
+				this.zoom = zoom;
+			}
+			
 			refreshMap();
 		}
 	}
@@ -343,7 +348,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	public boolean isZooming(){
 		// zooming scale
 		float diff = (zoom - getZoom()) * ZOOM_DELTA;
-		if(Math.abs(diff - Math.round(diff)) < 0.0001) {
+		if(Math.abs(diff - Math.round(diff)) < 0.02) {
 			return false;
 		}
 		return true;
