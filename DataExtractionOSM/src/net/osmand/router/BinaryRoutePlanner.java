@@ -581,10 +581,14 @@ public class BinaryRoutePlanner {
 				// Using A* routing algorithm
 				// g(x) - calculate distance to that point and calculate time
 				
-				float  priority = (float) ctx.getRouter().defineSpeedPriority(road);
-				float speed = (float) (ctx.getRouter().defineSpeed(road) * priority);
+				float  priority = ctx.getRouter().defineSpeedPriority(road);
+				float speed = (ctx.getRouter().defineSpeed(road) * priority);
 				if (speed == 0) {
-					speed = (float) (ctx.getRouter().getMinDefaultSpeed() * priority);
+					speed = (ctx.getRouter().getMinDefaultSpeed() * priority);
+				}
+				// speed can not exceed max default speed according to A*
+				if(speed > ctx.getRouter().getMaxDefaultSpeed()) {
+					speed = ctx.getRouter().getMaxDefaultSpeed();
 				}
 				float distOnRoadToPass = positive? posSegmentDist : negSegmentDist;
 				float distStartObstacles = segment.distanceFromStart + ( positive ? obstaclePlusTime : obstacleMinusTime) +

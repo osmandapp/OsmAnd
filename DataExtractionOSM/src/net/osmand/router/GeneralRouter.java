@@ -17,12 +17,12 @@ public class GeneralRouter extends VehicleRouter {
 	public static final String AVOID_MOTORWAY = "avoid_motorway";
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	
-	Map<String, Double> highwaySpeed ;
-	Map<String, Double> highwayPriorities ;
-	Map<String, Double> highwayFuturePriorities ;
-	Map<String, Double> avoid ;
-	Map<String, Double> obstacles;
-	Map<String, Double> routingObstacles;
+	Map<String, Float> highwaySpeed ;
+	Map<String, Float> highwayPriorities ;
+	Map<String, Float> highwayFuturePriorities ;
+	Map<String, Float> avoid ;
+	Map<String, Float> obstacles;
+	Map<String, Float> routingObstacles;
 	Map<String, String> attributes;
 	
 	
@@ -30,13 +30,13 @@ public class GeneralRouter extends VehicleRouter {
 
 	// cached values
 	private Boolean restrictionsAware;
-	private Double leftTurn;
-	private Double roundaboutTurn;
-	private Double rightTurn;
+	private Float leftTurn;
+	private Float roundaboutTurn;
+	private Float rightTurn;
 	private Boolean onewayAware;
 	private Boolean followSpeedLimitations;
-	private Double minDefaultSpeed;
-	private Double maxDefaultSpeed;
+	private Float minDefaultSpeed;
+	private Float maxDefaultSpeed;
 
 	public enum GeneralRouterProfile {
 		CAR,
@@ -47,21 +47,21 @@ public class GeneralRouter extends VehicleRouter {
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
 		this.attributes = new LinkedHashMap<String, String>(attributes);
 		this.profile = profile;
-		highwaySpeed = new LinkedHashMap<String, Double>();
-		highwayPriorities = new LinkedHashMap<String, Double>();
-		highwayFuturePriorities = new LinkedHashMap<String, Double>();
-		avoid = new LinkedHashMap<String, Double>();
-		obstacles = new LinkedHashMap<String, Double>();
-		routingObstacles = new LinkedHashMap<String, Double>();
+		highwaySpeed = new LinkedHashMap<String, Float>();
+		highwayPriorities = new LinkedHashMap<String, Float>();
+		highwayFuturePriorities = new LinkedHashMap<String, Float>();
+		avoid = new LinkedHashMap<String, Float>();
+		obstacles = new LinkedHashMap<String, Float>();
+		routingObstacles = new LinkedHashMap<String, Float>();
 	}
 
 	public GeneralRouter(GeneralRouter pr) {
-		this.highwaySpeed = new LinkedHashMap<String, Double>(pr.highwaySpeed);
-		this.highwayPriorities = new LinkedHashMap<String, Double>(pr.highwayPriorities);
-		this.highwayFuturePriorities = new LinkedHashMap<String, Double>(pr.highwayFuturePriorities);
-		this.avoid = new LinkedHashMap<String, Double>(pr.avoid);
-		this.obstacles = new LinkedHashMap<String, Double>(pr.obstacles);
-		this.routingObstacles = new LinkedHashMap<String, Double>(pr.routingObstacles);
+		this.highwaySpeed = new LinkedHashMap<String, Float>(pr.highwaySpeed);
+		this.highwayPriorities = new LinkedHashMap<String, Float>(pr.highwayPriorities);
+		this.highwayFuturePriorities = new LinkedHashMap<String, Float>(pr.highwayFuturePriorities);
+		this.avoid = new LinkedHashMap<String, Float>(pr.avoid);
+		this.obstacles = new LinkedHashMap<String, Float>(pr.obstacles);
+		this.routingObstacles = new LinkedHashMap<String, Float>(pr.routingObstacles);
 		this.attributes = new LinkedHashMap<String, String>(pr.attributes);
 		this.profile = pr.profile;
 	}
@@ -72,9 +72,9 @@ public class GeneralRouter extends VehicleRouter {
 			boolean accepted = false;
 			for (int i = 0; i < way.types.length; i++) {
 				RouteTypeRule r = way.region.quickGetEncodingRule(way.types[i]);
-				Double sp = highwaySpeed.get(r.getTag()+"$"+r.getValue());
+				Float sp = highwaySpeed.get(r.getTag()+"$"+r.getValue());
 				if(sp != null){
-					if(sp.doubleValue() > 0) {
+					if(sp.floatValue() > 0) {
 						accepted = true;
 					}
 					break;
@@ -105,7 +105,7 @@ public class GeneralRouter extends VehicleRouter {
 	}
 	
 	@Override
-	public double defineObstacle(RouteDataObject road, int point) {
+	public float defineObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes == null) {
 			return 0;
@@ -114,7 +114,7 @@ public class GeneralRouter extends VehicleRouter {
 		int sz = pointTypes.length;
 		for(int i=0; i<sz; i++) {
 			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
-			Double v = obstacles.get(r.getTag() + "$" + r.getValue());
+			Float v = obstacles.get(r.getTag() + "$" + r.getValue());
 			if(v != null ){
 				return v;
 			}
@@ -127,7 +127,7 @@ public class GeneralRouter extends VehicleRouter {
 	}
 	
 	@Override
-	public double defineRoutingObstacle(RouteDataObject road, int point) {
+	public float defineRoutingObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes == null) {
 			return 0;
@@ -136,7 +136,7 @@ public class GeneralRouter extends VehicleRouter {
 		int sz = pointTypes.length;
 		for(int i=0; i<sz; i++) {
 			RouteTypeRule r = reg.quickGetEncodingRule(pointTypes[i]);
-			Double v = routingObstacles.get(r.getTag() + "$" + r.getValue());
+			Float v = routingObstacles.get(r.getTag() + "$" + r.getValue());
 			if(v != null ){
 				return v;
 			}
@@ -164,8 +164,8 @@ public class GeneralRouter extends VehicleRouter {
 	}
 
 	@Override
-	public double getFutureRoadPriority(RouteDataObject road) {
-		double priority = 1;
+	public float getFutureRoadPriority(RouteDataObject road) {
+		float priority = 1;
 		for (int i = 0; i < road.types.length; i++) {
 			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
 			if(highwayFuturePriorities.containsKey(r.getTag()+"$"+r.getValue())){
@@ -190,15 +190,15 @@ public class GeneralRouter extends VehicleRouter {
 		return Boolean.parseBoolean(t);
 	}
 
-	private static double parseSilentDouble(String t, double v) {
+	private static float parseSilentFloat(String t, float v) {
 		if (t == null || t.length() == 0) {
 			return v;
 		}
-		return Double.parseDouble(t);
+		return Float.parseFloat(t);
 	}
 
 	@Override
-	public double defineSpeed(RouteDataObject road) {
+	public float defineSpeed(RouteDataObject road) {
 		if (isFollowSpeedLimitations()) {
 			float m = road.getMaximumSpeed();
 			if(m > 0) {
@@ -206,7 +206,7 @@ public class GeneralRouter extends VehicleRouter {
 			}
 		}
 		
-		Double value = null;
+		Float value = null;
 		for (int i = 0; i < road.types.length; i++) {
 			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
 			if(highwaySpeed.containsKey(r.getTag()+"$"+r.getValue())){
@@ -217,12 +217,12 @@ public class GeneralRouter extends VehicleRouter {
 		if (value == null) {
 			return getMinDefaultSpeed();
 		}
-		return value / 3.6d;
+		return value / 3.6f;
 	}
 
 	@Override
-	public double defineSpeedPriority(RouteDataObject road) {
-		double priority = 1;
+	public float defineSpeedPriority(RouteDataObject road) {
+		float priority = 1;
 		for (int i = 0; i < road.types.length; i++) {
 			RouteTypeRule r = road.region.quickGetEncodingRule(road.types[i]);
 			if(highwayPriorities.containsKey(r.getTag()+"$"+r.getValue())){
@@ -233,38 +233,38 @@ public class GeneralRouter extends VehicleRouter {
 	}
 
 	@Override
-	public double getMinDefaultSpeed() {
+	public float getMinDefaultSpeed() {
 		if(minDefaultSpeed == null ){
-			minDefaultSpeed = parseSilentDouble(attributes.get("minDefaultSpeed"), 10);
+			minDefaultSpeed = parseSilentFloat(attributes.get("minDefaultSpeed"), 10);
 		}
-		return minDefaultSpeed / 3.6d;
+		return minDefaultSpeed / 3.6f;
 	}
 
 	@Override
-	public double getMaxDefaultSpeed() {
+	public float getMaxDefaultSpeed() {
 		if(maxDefaultSpeed == null ){
-			maxDefaultSpeed = parseSilentDouble(attributes.get("maxDefaultSpeed"), 10);
+			maxDefaultSpeed = parseSilentFloat(attributes.get("maxDefaultSpeed"), 10);
 		}
-		return maxDefaultSpeed / 3.6d;
+		return maxDefaultSpeed / 3.6f;
 	}
 
 	
 	public double getLeftTurn() {
 		if(leftTurn == null) {
-			leftTurn = parseSilentDouble(attributes.get("leftTurn"), 0);
+			leftTurn = parseSilentFloat(attributes.get("leftTurn"), 0);
 		}
 		return leftTurn;
 	}
 	
 	public double getRightTurn() {
 		if(rightTurn == null) {
-			rightTurn = parseSilentDouble(attributes.get("rightTurn"), 0);
+			rightTurn = parseSilentFloat(attributes.get("rightTurn"), 0);
 		}
 		return rightTurn;
 	}
 	public double getRoundaboutTurn() {
 		if(roundaboutTurn == null) {
-			roundaboutTurn = parseSilentDouble(attributes.get("roundaboutTurn"), 0);
+			roundaboutTurn = parseSilentFloat(attributes.get("roundaboutTurn"), 0);
 		}
 		return roundaboutTurn;
 	}
@@ -300,7 +300,7 @@ public class GeneralRouter extends VehicleRouter {
 		return 0;
 	}
 	
-	private void specialize(String specializationTag, Map<String, Double> m){
+	private void specialize(String specializationTag, Map<String, Float> m){
 		ArrayList<String> ks = new ArrayList<String>(m.keySet());
 		for(String s : ks){
 			if(s.startsWith(specializationTag +":")) {
