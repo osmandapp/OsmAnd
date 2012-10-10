@@ -2,7 +2,9 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
@@ -31,6 +33,7 @@ import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
 import android.app.AlertDialog;
@@ -229,6 +232,26 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
 	}
+
+	
+	public Object getLastNonConfigurationInstanceByKey(String key) {
+		Object k = super.getLastNonConfigurationInstance();
+		if(k instanceof Map) {
+			return ((Map) k).get(key);
+		}
+		return null;
+	}
+	
+	@Override
+	public Object onRetainNonConfigurationInstance() {
+		LinkedHashMap<String, Object> l = new LinkedHashMap<String, Object>();
+		for(OsmandMapLayer ml :  mapView.getLayers() ) {
+			ml.onRetainNonConfigurationInstance(l);
+		}
+		return l;
+	}
+	
+	
 
 	@Override
 	protected void onResume() {

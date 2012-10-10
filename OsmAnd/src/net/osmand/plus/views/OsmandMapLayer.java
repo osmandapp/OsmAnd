@@ -1,5 +1,8 @@
 package net.osmand.plus.views;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import net.osmand.plus.ContextMenuAdapter;
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -14,6 +17,8 @@ public abstract class OsmandMapLayer {
 	public abstract void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings settings);
 	
 	public abstract void destroyLayer();
+	
+	public void onRetainNonConfigurationInstance(Map<String, Object> map) {}
 	
 	public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {}
 	
