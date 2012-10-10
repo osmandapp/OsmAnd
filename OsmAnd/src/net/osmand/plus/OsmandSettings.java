@@ -630,7 +630,7 @@ public class OsmandSettings {
 	{
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 5000);
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10000);
-		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20000);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 30000);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
