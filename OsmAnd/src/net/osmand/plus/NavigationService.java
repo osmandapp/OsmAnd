@@ -35,7 +35,8 @@ public class NavigationService extends Service implements LocationListener {
 	public static class NavigationServiceBinder extends Binder {
 		
 	}
-	private final static int NOTIFICATION_SERVICE_ID = 1;
+	// global id don't conflict with others
+	private final static int NOTIFICATION_SERVICE_ID = 5;
 	public final static String OSMAND_STOP_SERVICE_ACTION  = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
 	public final static String NAVIGATION_START_SERVICE_PARAM = "NAVIGATION_START_SERVICE_PARAM"; 
 	private static final int LOST_LOCATION_MSG_ID = 10;
