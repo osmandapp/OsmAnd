@@ -44,6 +44,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		
 	}
 	private final String KEY_LAT_LAN = "context_menu_lat_lon";
+	private final String KEY_DESCRIPTION = "context_menu_description";
 	private final String KEY_SELECTED_OBJECTS = "context_menu_selected_objects";
 	private LatLon latLon;
 	private Map<Object, IContextMenuProvider> selectedObjects = new LinkedHashMap<Object, IContextMenuProvider>();
@@ -63,10 +64,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	
 	public ContextMenuLayer(MapActivity activity){
 		this.activity = activity;
-		latLon = (LatLon) activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN);
-		if(activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_OBJECTS) != null) {
-			selectedObjects = (Map<Object, IContextMenuProvider>) activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_OBJECTS);
-		}
 	}
 	
 	@Override
@@ -111,6 +108,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		closeButton.setLayoutParams(lp);
 		closeButton.setImageDrawable(view.getResources().getDrawable(R.drawable.headliner_close));
 		closeButton.setClickable(true);
+		
+		if(activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN) != null && activity.getLastNonConfigurationInstanceByKey(KEY_DESCRIPTION) != null) {
+			setLocation((LatLon)activity.getLastNonConfigurationInstanceByKey(KEY_LAT_LAN), (String) activity.getLastNonConfigurationInstanceByKey(KEY_DESCRIPTION));
+			if(activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_OBJECTS) != null) {
+				selectedObjects = (Map<Object, IContextMenuProvider>) activity.getLastNonConfigurationInstanceByKey(KEY_SELECTED_OBJECTS);
+			}
+		}
 	}
 
 	@Override
@@ -374,6 +378,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public void onRetainNonConfigurationInstance(Map<String, Object> map) {
 		map.put(KEY_LAT_LAN, latLon);
 		map.put(KEY_SELECTED_OBJECTS, selectedObjects);
+		map.put(KEY_SELECTED_OBJECTS, textView.getText().toString());
 	}
 
 }
