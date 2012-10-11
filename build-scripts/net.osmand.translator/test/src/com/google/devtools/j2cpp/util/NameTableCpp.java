@@ -38,12 +38,12 @@ public class NameTableCpp {
   /**
    * Return the Objective-C equivalent name for a Java primitive type.
    */
-  public static String primitiveTypeToObjC(PrimitiveType type) {
+  public static String primitiveTypeToCpp(PrimitiveType type) {
     PrimitiveType.Code code = type.getPrimitiveTypeCode();
-    return primitiveTypeToObjC(code.toString());
+    return primitiveTypeToCpp(code.toString());
   }
 
-  private static String primitiveTypeToObjC(String javaName) {
+  private static String primitiveTypeToCpp(String javaName) {
 	  if (javaName.equals("boolean")) {
 	      return "bool"; // defined in NSObject.h
 	    }
@@ -70,12 +70,32 @@ public class NameTableCpp {
 	    return javaName;
   }
 
+  public static String basicTypeToCpp(String javaName) {
+//	  TODO populate
+		if (javaName.equals("String")) {
+			return "string";
+		}
+		if (javaName.equals("NSString *")) {
+			return "string";
+		}
+		if (javaName.equals("JavaUtilList")) {
+			return "vector";
+		}
+		if (javaName.equals("LongInt")) {
+			return "long long";
+		}
+		if (javaName.equals("IOSCharArray *")) {
+			return "wchar_t []";
+		}
+		return javaName;
+  }
+  
   /**
-   * Convert a Java type into an equivalent Objective-C type.
+   * Convert a Java type into an equivalent C++ type.
    */
-  public static String javaTypeToObjC(Type type, boolean includeInterfaces) {
+  public static String javaTypeToCpp(Type type, boolean includeInterfaces) {
     if (type instanceof PrimitiveType) {
-      return primitiveTypeToObjC((PrimitiveType) type);
+      return primitiveTypeToCpp((PrimitiveType) type);
     }
     if (type instanceof ParameterizedType) {
       type = ((ParameterizedType) type).getType();  // erase parameterized type
@@ -88,10 +108,10 @@ public class NameTableCpp {
       }
     }
     ITypeBinding binding = Types.getTypeBinding(type);
-    return javaTypeToObjC(binding, includeInterfaces);
+    return javaTypeToCpp(binding, includeInterfaces);
   }
 
-  public static String javaTypeToObjC(ITypeBinding binding, boolean includeInterfaces) {
+  public static String javaTypeToCpp(ITypeBinding binding, boolean includeInterfaces) {
     if (binding.isInterface() && !includeInterfaces || binding == Types.resolveIOSType("id") ||
         binding == Types.resolveIOSType("NSObject")) {
       return NameTable.ID_TYPE;
@@ -106,15 +126,15 @@ public class NameTableCpp {
     return NameTable.getFullName(binding);
   }
 
-  public static String javaRefToObjC(Type type) {
-	    return javaRefToObjC(Types.getTypeBinding(type));
+  public static String javaRefToCpp(Type type) {
+	    return javaRefToCpp(Types.getTypeBinding(type));
 	  }
 
-	  public static String javaRefToObjC(ITypeBinding type) {
+	  public static String javaRefToCpp(ITypeBinding type) {
 	    if (type.isPrimitive()) {
-	      return primitiveTypeToObjC(type.getName());
+	      return primitiveTypeToCpp(type.getName());
 	    }
-	    String typeName = javaTypeToObjC(type, false);
+	    String typeName = javaTypeToCpp(type, false);
 	    if (typeName.equals(NameTable.ID_TYPE) || Types.isJavaVoidType(type)) {
 	      if (type.isInterface()) {
 	        return String.format("%s<%s>", NameTable.ID_TYPE, NameTable.getFullName(type));
@@ -136,7 +156,7 @@ public class NameTableCpp {
 
 	  public static String getFullName(ITypeBinding binding) {
 	    if (binding.isPrimitive()) {
-	      return primitiveTypeToObjC(binding.getName());
+	      return primitiveTypeToCpp(binding.getName());
 	    }
 	    binding = Types.mapType(binding.getErasure());  // Make sure type variables aren't included.
 	    String suffix = binding.isEnum() ? "Enum" : "";

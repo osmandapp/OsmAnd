@@ -83,14 +83,12 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	    String typeName = NameTableCpp.getFullName(node);
 	    String superName = NameTable.getSuperClassName(node);
 
-	    //DONE if extends superclass other than Object
-	    //TODO if implements interfaces
-	    if ((superName != null) && (!superName.equals("NSObject"))) {
-	    	printf(": public %s", superName);
-	    }
-	    
 	    printConstantDefines(node);
+	    //TODO if implements interfaces
 	    printf("class %s", typeName);
+	    if ((superName != null) && (!superName.equals("NSObject"))) {
+	    	printf(" : %s", superName);
+	    }
 	    println(" {");
 	    printInstanceVariables(node.getFields());
 	    
@@ -271,7 +269,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	  }
 
 	  protected String createForwardDeclaration(String typeName, boolean isInterface) {
-	    return String.format("@%s %s;", isInterface ? "TODO: change to abstract class \ninterface" : "class", typeName);
+	    return String.format("%s %s;", isInterface ? "TODO: change to abstract class \ninterface" : "class", NameTableCpp.basicTypeToCpp(typeName));
 	  }
 
 	  protected String createImport(ImportCollector.Import imp) {

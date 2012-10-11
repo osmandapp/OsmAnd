@@ -124,7 +124,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	      baseDeclaration = "- (NSUInteger)hash";
 	    } else {
 	      baseDeclaration = String.format("%s (%s)%s", isStatic ? "static" : "",
-	          NameTableCpp.javaRefToObjC(method.getReturnType2()), mappedMethod.getName());
+	          NameTableCpp.javaRefToCpp(method.getReturnType2()), mappedMethod.getName());
 	    }
 
 	    sb.append(baseDeclaration);
@@ -163,7 +163,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	    boolean isStatic = Modifier.isStatic(m.getModifiers());
 	    IMethodBinding binding = Types.getMethodBinding(m);
 	    String  methodName = NameTable.getName(binding);
-	    String baseDeclaration = String.format("\t %s %s %s", isStatic ? "static " : "", NameTableCpp.javaRefToObjC(m.getReturnType2()), methodName);
+	    String baseDeclaration = String.format(" %s %s %s", isStatic ? "static " : "", NameTableCpp.basicTypeToCpp(NameTableCpp.javaRefToCpp(m.getReturnType2())), methodName);
 	    sb.append(baseDeclaration);
 	    @SuppressWarnings("unchecked")
 	    List<SingleVariableDeclaration> params = m.parameters(); // safe by definition
@@ -205,12 +205,12 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	        String type = isTypeVariable ? 
 	        		NameTable.getParameterTypeName(NameTable.ID_TYPE, typeBinding) : 
 	        		NameTable.getParameterTypeName(NameTable.javaTypeToObjC(param.getType(), true), typeBinding);
-	        sb.append(" ").append(type).append(" ").append(fieldName);
+	        sb.append(" ").append(NameTableCpp.basicTypeToCpp(type)).append(typeBinding.isPrimitive() ? "" : "*").append(" ").append(fieldName);
 	        if (i<nParams-1) {
 	        	sb.append(",");
 	        } else {
 	        	sb.append(" )");
-	        } 
+	        }
 	      }
 	    }
 //	    TODO

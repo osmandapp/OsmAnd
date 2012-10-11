@@ -44,8 +44,7 @@ import com.google.common.collect.Sets;
 import com.google.devtools.j2objc.J2ObjC;
 import com.google.devtools.j2objc.Options;
 import com.google.devtools.j2objc.gen.HiddenFieldDetector;
-import com.google.devtools.j2objc.gen.ObjectiveCSourceFileGenerator;
-import com.google.devtools.j2objc.gen.StatementGenerator;
+import com.google.devtools.j2cpp.gen.CppStatementGenerator;
 import com.google.devtools.j2objc.types.IOSMethod;
 import com.google.devtools.j2objc.types.ImplementationImportCollector;
 import com.google.devtools.j2objc.types.ImportCollector;
@@ -53,12 +52,13 @@ import com.google.devtools.j2objc.types.Types;
 import com.google.devtools.j2objc.util.ErrorReportingASTVisitor;
 import com.google.devtools.j2objc.util.NameTable;
 
+import com.google.devtools.j2cpp.gen.CppSourceFileGenerator;
 /**
  * Generates C++ implementation (.m) files from compilation units.
  *
  * @author Tom Ball
  */
-public class CppImplementationGenerator extends ObjectiveCSourceFileGenerator {
+public class CppImplementationGenerator extends CppSourceFileGenerator {
   private Set<IVariableBinding> fieldHiders;
   private final String suffix;
 
@@ -307,8 +307,7 @@ public class CppImplementationGenerator extends ObjectiveCSourceFileGenerator {
       @SuppressWarnings("unchecked")
       List<Expression> args = constant.arguments(); // safe by definition
       String name = NameTable.getName(constant.getName());
-      String constantTypeName =
-          NameTable.getFullName(Types.getMethodBinding(constant).getDeclaringClass());
+      String constantTypeName = NameTable.getFullName(Types.getMethodBinding(constant).getDeclaringClass());
       printf("    %s_%s = [[%s alloc] init", typeName, name, constantTypeName);
       boolean isSimpleEnum = constantTypeName.equals(typeName);
 
@@ -316,7 +315,7 @@ public class CppImplementationGenerator extends ObjectiveCSourceFileGenerator {
       if (args.isEmpty() && isSimpleEnum) {
         printf("WithNSString:@\"%s_%s\" withInt:%d];\n", typeName.replace("Enum", ""), name, i);
       } else {
-        String argString = StatementGenerator.generateArguments(Types.getMethodBinding(constant),
+        String argString = CppStatementGenerator.generateArguments(Types.getMethodBinding(constant),
             args, fieldHiders, getBuilder().getCurrentLine());
         print(argString);
         if (args.isEmpty()) {
@@ -337,7 +336,7 @@ public class CppImplementationGenerator extends ObjectiveCSourceFileGenerator {
       @SuppressWarnings("unchecked")
       List<Statement> stmts = initializeMethod.getBody().statements(); // safe by definition
       for (Statement s : stmts) {
-        printf("    %s", StatementGenerator.generate(s, fieldHiders, false,
+        printf("    %s", CppStatementGenerator.generate(s, fieldHiders, false,
             getBuilder().getCurrentLine()));
       }
     }
@@ -499,17 +498,17 @@ public class CppImplementationGenerator extends ObjectiveCSourceFileGenerator {
   }
 
   private String generateStatement(Statement stmt, boolean asFunction, boolean inConstructor) {
-    return StatementGenerator.generate(stmt, fieldHiders, asFunction,
+    return CppStatementGenerator.generate(stmt, fieldHiders, asFunction,
         getBuilder().getCurrentLine());
   }
 
   private String generateStatement(Statement stmt, boolean asFunction) {
-    return StatementGenerator.generate(stmt, fieldHiders, asFunction,
+    return CppStatementGenerator.generate(stmt, fieldHiders, asFunction,
         getBuilder().getCurrentLine());
   }
 
   private String generateExpression(Expression expr) {
-    return StatementGenerator.generate(expr, fieldHiders, false, getBuilder().getCurrentLine());
+    return CppStatementGenerator.generate(expr, fieldHiders, false, getBuilder().getCurrentLine());
   }
 
   private void printMainMethod(MethodDeclaration m, String typeName,
@@ -591,7 +590,7 @@ public class CppImplementationGenerator extends ObjectiveCSourceFileGenerator {
     if (!imports.isEmpty()) {
       Set<String> importStmts = Sets.newTreeSet();
       for (ImportCollector.Import imp : imports) {
-        importStmts.add(String.format("#include \"%s.h\"", imp.getImportFileName()));
+        importStmts.add(String.format("#include <%s.h>", imp.getImportFileName()));
       }
       for (String stmt : importStmts) {
         println(stmt);
