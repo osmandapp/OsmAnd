@@ -703,7 +703,7 @@
 	</string>
 	<string name="tip_initial">Tips and Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
-		\n\tAs an basic introduction, some usage tips and tricks are linked on the main screen.
+		\n\tAs a basic introduction, some usage tips and tricks are linked on the main screen (see \'?\' icon).
 	</string>
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>

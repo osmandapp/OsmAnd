@@ -535,7 +535,7 @@
 	</string>
 	<string name="tip_initial">Tipps und Tricks</string>
 	<string name="tip_initial_t">\tOsmAnd ist eine Navigationsanwendung mit vielen Fähigkeiten.
-		\n\tEine Einführung geben die über das Hauptmenü zugänglichen Tipps und Tricks.
+		\n\tEine Einführung geben die über das Hauptmenü (unter \'?\') zugänglichen Tipps und Tricks.
 	</string>
 	<string name="next_button">Weiter</string>
 	<string name="previous_button">Zurück</string>
