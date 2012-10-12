@@ -184,9 +184,9 @@
   <string name="si_mi_yard">Mile/jardy</string>
   <string name="si_km_m">Kilometry/metry</string>
   <string name="yard">yd</string>
-  <string name="foot">ft</string>
-  <string name="mile_per_hour">mph</string>
-  <string name="mile">mi</string>
+  <string name="foot">stopa</string>
+  <string name="mile_per_hour">mil/godzinę</string>
+  <string name="mile">mila</string>
   <string name="send_location_way_choose_title">Udostępnij pozycję GPS używając</string>
   <string name="send_location_sms_pattern">Pozycja: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Aby zobaczyć lokację użyj linku w przeglądarce %1$s lub linku do intentu androidowego %2$s</string>
@@ -231,10 +231,10 @@
   <string name="poi_filter_food_shop">Sklep spożywczy</string>
   <string name="poi_filter_for_tourists">Dla turystów</string>
   <string name="poi_filter_fuel">Tankowanie</string>
-  <string name="poi_filter_namefinder">Online NameFinder</string>
+  <string name="poi_filter_namefinder">Wyszukiwarka nazw online</string>
   <string name="reading_cached_tiles">Wczytywanie zachowanych kafelków…</string>
   <string name="version_index_is_big_for_memory">Index\'\'{0}\'\' nie zmieścił się w pamięci</string>
-  <string name="version_index_is_not_supported">Wersja indeksu \'\'{0}\'\' jest niewspierana.</string>
+  <string name="version_index_is_not_supported">Wersja indeksu \'\'{0}\'\' nie jest wspierana</string>
   <string name="use_osmand_routing_service">Routing OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Użycie routingu offline dla długich tras działa tylko dla tras &gt; 20 km (funkcjonalność eksperymentalna)</string>
   <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest tymczasowo przełączana do CloudMade (online).</string>
@@ -242,12 +242,12 @@
   <string name="application_dir">Katalog danych</string>
   <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza OsmAnd. Kontynuować mimo to?</string>
   <string name="osmand_net_previously_installed">Poprzednia wersja OsmAnd jest zainstalowana. Wszystkie dane offline są obsługiwane przez nową wersję aplikacji ale punkty ulubione powinny być wyeksportowane w starej wersji aplikacji i zaimportowane w nowej.</string>
-  <string name="build_installed">Build {0} successfully installed ({1}).</string>
-  <string name="downloading_build">Downloading build…</string>
+  <string name="build_installed">Kompilacja {0} zainstalowana pomyślnie ({1}).</string>
+  <string name="downloading_build">Pobieram kompilację programu…</string>
   <string name="install_selected_build">Kontynuować instalację OsmAnd - {0} z {1} {2} MB ?</string>
-  <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-  <string name="loading_builds">Loading OsmAnd builds…</string>
-  <string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
+  <string name="loading_builds_failed">Pobieram listę kompilacji OsmAnd zakończonych niewłaściwie</string>
+  <string name="loading_builds">Ładuję buildy OsmAnd…</string>
+  <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
   <string name="contribution_activity">Special activity for contribution version</string>
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS Status. Wyszukać ją w Google Play?</string>
   <string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do ustawień, wybierz ulubiony zestaw i zainstaluj go.</string>
@@ -330,8 +330,8 @@
   <string name="poi_namefinder_query_empty">Wprowadź zapytanie by znaleźć POI</string>
   <string name="any_poi">Jakiekolwiek</string>
   <string name="layer_transport_route">Transport route</string>
-  <string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
-  <string name="layer_yandex_traffic">Yandex traffic</string>
+  <string name="thanks_yandex_traffic">Podziękowania dla Yandex za informację o korkach.</string>
+  <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
   <string name="layer_route">Trasa</string>
   <string name="layer_favorites">Ulubione</string>
   <string name="layer_osm_bugs">Błędy OSM</string>
@@ -405,7 +405,7 @@
   <string name="transport_finish_search">Zakończ wyszukiwanie</string>
   <string name="transport_stop_to_go_out">Wybierz przystanek początkowy</string>
   <string name="transport_to_go_after">poprzedni dystans</string>
-  <string name="transport_to_go_before">subsequent distance</string>
+  <string name="transport_to_go_before">kolejna odległość</string>
   <string name="transport_stops_to_pass">przystanków do przejechania</string>
   <string name="transport_route_distance">Długość trasy</string>
   <string name="transport">Transport</string>
@@ -541,7 +541,7 @@
   <string name="show_view_angle_descr">Dostosuj kierunek wyświetlania mapy do wskazań kompasu</string>
   <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
   <string name="stop_navigation">Wyczyść punkt.</string>
-  <string name="navigate_to_point">Mark point</string>
+  <string name="navigate_to_point">Ustaw jako cel.</string>
   <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
   <string name="map_view_3d">Widok 3D mapy</string>
   <string name="show_poi_over_map_description">Pokaż POI na mapie (używa ostatnio wybranego filtru)</string>
@@ -697,7 +697,7 @@
   <string name="gpx_description_txt">Opis</string>
   <string name="validate_gpx_upload_name_pwd">Proszę podać nazwę użytkownika OSM oraz hasło aby wysłać pliki GPX.</string>
   <string name="default_buttons_support">Wsparcie</string>
-  <string name="support_new_features">"Wesprzyj prace nad nowymi funkcjami."</string>
+  <string name="support_new_features">Wesprzyj prace nad nowymi funkcjami</string>
   <string name="show_ruler_level_descr">Wyświetl linijkę na mapie</string>
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
@@ -718,44 +718,44 @@
   <string name="north">północ</string>
   <string name="north_north_east">północ-północ-wschód</string>
   <string name="north_east">północny wschód</string>
-  <string name="east_north_east">east-north-east</string>
+  <string name="east_north_east">wschód-północ-wschód</string>
   <string name="east">wschód</string>
   <string name="east_south_east">wschód-południe-wschód</string>
   <string name="south_east">południowy wschód</string>
-  <string name="south_south_east">south-south-east</string>
+  <string name="south_south_east">południowo-południowy-wschód</string>
   <string name="south">południe</string>
-  <string name="south_south_west">south-south-west</string>
+  <string name="south_south_west">południowo-południowy-zachód</string>
   <string name="south_west">południowy zachód</string>
-  <string name="west_south_west">west-south-west</string>
-  <string name="west">zachów</string>
-  <string name="west_north_west">west-north-west</string>
+  <string name="west_south_west">zachodnio-południowy-zachód</string>
+  <string name="west">zachód</string>
+  <string name="west_north_west">zachodnio-północny-zachód</string>
   <string name="north_west">północny zachód</string>
-  <string name="north_north_west">north-north-west</string>
-  <string name="front">Front</string>
-  <string name="front_right">Front right</string>
-  <string name="right">Right</string>
-  <string name="back_right">Back right</string>
-  <string name="back">Back</string>
-  <string name="back_left">Back left</string>
-  <string name="left">Left</string>
-  <string name="front_left">Front left</string>
-  <string name="oclock">o\'clock</string>
-  <string name="towards">towards</string>
+  <string name="north_north_west">północno-północny-zachód</string>
+  <string name="front">Przód</string>
+  <string name="front_right">Prawy przód</string>
+  <string name="right">Prawy</string>
+  <string name="back_right">Tylny przód</string>
+  <string name="back">Tył</string>
+  <string name="back_left">Lewy tył</string>
+  <string name="left">Lewy</string>
+  <string name="front_left">Lewy przód</string>
+  <string name="oclock">punkt</string>
+  <string name="towards">wobec</string>
   <string name="accuracy">Dokładność</string>
   <string name="altitude">Wysokość</string>
   <string name="no_info">Brak informacji</string>
-  <string name="direction_style_sidewise">Sidewise (8 sectors)</string>
-  <string name="direction_style_clockwise">Clockwise (12 sectors)</string>
-  <string name="settings_direction_style">Direction style</string>
-  <string name="settings_direction_style_descr">Choose style to express relative directions while moving</string>
-  <string name="auto_announce_on">Start autoannouncing</string>
-  <string name="auto_announce_off">Stop autoannouncing</string>
+  <string name="direction_style_sidewise">Przeciwnie do ruchu wskazówek zegara (8 sektorów)</string>
+  <string name="direction_style_clockwise">Zgodnie z ruchem zegara (12 sektorów)</string>
+  <string name="settings_direction_style">Styl celu</string>
+  <string name="settings_direction_style_descr">Wybierz styl określania kierunków względnych podczas ruchu</string>
+  <string name="auto_announce_on">Włącz ogłaszanie</string>
+  <string name="auto_announce_off">Wyłącz ogłaszanie</string>
   <string name="scroll_map_by_gestures_descr">Przesuwaj mapę za pomocą gestów na ekranie dotykowym</string>
   <string name="scroll_map_by_gestures">Naturalne przesuwanie mapy</string>
   <string name="i_am_here">Jestem tutaj</string>
   <string name="zoom_by_trackball_descr">Zmieniaj poziom przybliżenia mapy za pomocą trackballa</string>
   <string name="zoom_by_trackball">Użyj trackballa do kontroli przybliżenia</string>
-  <string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
+  <string name="use_short_object_names_descr">Używaj krótkich nazw obiektów w trybie eksploracji dotykowej</string>
   <string name="use_short_object_names">Użyj krótkich nazw obiektów</string>
   <string name="accessibility_preferences_descr">Ustawienia ułatwienia dostępu</string>
   <string name="accessibility_preferences">Ułatwienia dostępu</string>
@@ -781,7 +781,7 @@
   <string name="live_monitoring_interval">Interwał pomiędzy wysyłaniem danych</string>
   <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=lat, {1}=lon, {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość</string>
   <string name="live_monitoring_url">Adres sieciowy śledzenia na bierząco</string>
-  <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'</string>
+  <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'.</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 :
 \n\t- Dane wikipedii z artykułami w trybie offline\n\t- Uaktualnione mapy\n\t- Inne niewielkie funkcjonalności "</string>
@@ -819,7 +819,7 @@
   <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="local_index_routing_data">Dane trasowania</string>
-  <string name="navigate_point_format">Format :</string>
+  <string name="navigate_point_format">Format:</string>
   <string name="poi_search_desc">Wyszukaj POI</string>
   <string name="address_search_desc">Wyszukiwanie adresu</string>
   <string name="navpoint_search_desc">Nawiguj do punktu</string>
@@ -830,7 +830,7 @@
   <string name="rendering_attr_noPolygons_name">Bez wielokątów</string>
   <string name="rendering_attr_appMode_name">Tryb renderowania</string>
   <string name="rendering_attr_appMode_description">Optymalizacja map dla wybranego profilu użytkownika</string>
-  <string name="rendering_attr_contourLines_description">Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (jeśli są dostępne). Może być wymagany dodatkowy plik STRM.</string>
+  <string name="rendering_attr_contourLines_description">Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (może być wymagany plik STRM):</string>
   <string name="rendering_attr_contourLines_name">Pokaż kontury</string>
   <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
   <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
@@ -847,8 +847,8 @@
 \n\t* Poprawione wskazówki głosowe na autostradzie
 \n\t* Wtyczka parkingowa (\"Gdzie zaparkowałem samochód?\")\n\t* Włączenie/wyłączenie widgeta logowania "</string>
   <string name="gpxup_public">Publiczny</string>
-  <string name="gpxup_identifiable">Identifiable</string>
-  <string name="gpxup_trackable">Trackable</string>
+  <string name="gpxup_identifiable">Identyfikowalny</string>
+  <string name="gpxup_trackable">Z opcją śledzenia</string>
   <string name="gpxup_private">Prywatny</string>
   <string name="osmand_parking_event">Odbierz samochód z parkingu</string>
   <string name="osmand_parking_warning">Ostrzeżenie</string>
@@ -877,7 +877,7 @@
   <string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string>
   <string name="global_app_allocated_memory">Użyta pamięć</string>
   <string name="native_app_allocated_memory_descr">Zużycie pamięci natywnej przez aplikację %1$s MB (dalvik %2$s MB, inna %3$s MB). Proportional memory %4$s MB (limit Androida %5$s MB, dalvika %6$s MB).</string>
-  <string name="native_app_allocated_memory">Zużycie pamięci natywnej</string>
+  <string name="native_app_allocated_memory">Użycie pamięci głównej</string>
   <string name="select_animate_speedup">Wybierz przyspieszenie animacji trasy</string>
   <string name="osmand_parking_hours">Godziny</string>
   <string name="osmand_parking_minutes">Minuty</string>
@@ -976,7 +976,7 @@
 <string name="map_widget_day_night">Mapa dzień/noc</string>
 <string name="map_widget_vector_attributes">Atrybuty renderowania:</string>
 <string name="show_lanes">Pokazuj alejki</string>
-<string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4 : "</string>
+<string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4:\n* Kilka drobnych poprawek "</string>
     <string name="gps_not_available">Proszę włączyć odbiornik GPS</string>
     <string name="map_widget_monitoring_services">Usługi monitorowania</string>
 	<string name="no_route">Brak trasy</string>
@@ -1022,4 +1022,10 @@
 \n "</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd wspiera różne (konfigurowalne) profile aplikacji do różnych przypadków użycia.\n\tProfile można zmienić wybierając przycisk w lewym dolnym rogu ekranu (ikonka samochodu, roweru lub pieszego), lub podczas wybierania trasy. "</string>
 	<string name="email">email</string>
-</resources>
+<string name="rendering_attr_roadColors_name">Zestaw kolorów dróg</string>
+    <string name="map_widget_show_destination_arrow">Pokaż kierunek do celu</string>
+    <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
+	<string name="non_optimal_route_calculation">Oblicz (być może nieoptymalną) trasę na długich dystansach</string>
+    <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług logowania (logowanie, śledzenie na bieżąco)</string>
+    <string name="local_index_items"/>
+	</resources>
