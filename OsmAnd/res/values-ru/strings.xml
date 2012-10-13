@@ -1085,7 +1085,7 @@
     <string name="new_destination_point_dialog">Вы уже установили пункт назначения.</string>
     <string name="target_point">Пункт назначения %1$s</string>
     <string name="target_points">Цели</string>
-    <string name="tip_recent_changes_0_8_4_t">"Изменения в 0.8.4:\n\t* Обновлено "</string>
+    <string name="tip_recent_changes_0_8_4_t">"Изменения в 0.8.4:\n\t* Исправление ошибок "</string>
     <string name="intermediate_point">Путевая точка %1$s</string>
     <string name="delete_target_point">Удалить точку назначения</string>
 	<string name="map_widget_monitoring_services">Службы мониторинга</string>
