@@ -18,7 +18,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class RoutingConfiguration {
 	// 1. parameters of routing and different tweaks
 	// Influence on A* : f(x) + heuristicCoefficient*g(X)
-	public double heuristicCoefficient = 1;
+	public float heuristicCoefficient = 1;
 	
 	public static final int DEFAULT_MEMORY_LIMIT = 30;
 	
@@ -34,7 +34,7 @@ public class RoutingConfiguration {
 	// 1.3 Relaxing strategy
 	public boolean useRelaxingStrategy = true;
 	public int ITERATIONS_TO_RELAX_NODES = 100;
-	public double RELAX_NODES_IF_START_DIST_COEF = 3;
+	public float RELAX_NODES_IF_START_DIST_COEF = 3;
 
 	// 1.4 Build A* graph in backward/forward direction (can affect results)
 	// 0 - 2 ways, 1 - direct way, -1 - reverse way
@@ -63,7 +63,7 @@ public class RoutingConfiguration {
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
 			i.initialDirection = direction;
-			i.heuristicCoefficient = parseSilentDouble(getAttribute(router, "heuristicCoefficient"), i.heuristicCoefficient);
+			i.heuristicCoefficient = parseSilentFloat(getAttribute(router, "heuristicCoefficient"), i.heuristicCoefficient);
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
@@ -78,7 +78,7 @@ public class RoutingConfiguration {
 			i.useRelaxingStrategy = parseSilentBoolean(getAttribute(router, "useRelaxingStrategy"), i.useRelaxingStrategy);
 			i.dynamicRoadPriorityDistance = parseSilentInt(getAttribute(router, "dynamicRoadPriorityDistance"), i.dynamicRoadPriorityDistance);
 			i.ITERATIONS_TO_RELAX_NODES = parseSilentInt(getAttribute(router, "iterationsToRelaxRoutes"), i.ITERATIONS_TO_RELAX_NODES);
-			i.RELAX_NODES_IF_START_DIST_COEF = parseSilentDouble(getAttribute(router, "relaxNodesIfStartDistSmallCoeff"), i.RELAX_NODES_IF_START_DIST_COEF);
+			i.RELAX_NODES_IF_START_DIST_COEF = parseSilentFloat(getAttribute(router, "relaxNodesIfStartDistSmallCoeff"), i.RELAX_NODES_IF_START_DIST_COEF);
 			i.planRoadDirection = parseSilentInt(getAttribute(router, "planRoadDirection"), i.planRoadDirection);
 
 			if (!routers.containsKey(router)) {
@@ -117,11 +117,11 @@ public class RoutingConfiguration {
 		return Boolean.parseBoolean(t);
 	}
 
-	private static double parseSilentDouble(String t, double v) {
+	private static float parseSilentFloat(String t, float v) {
 		if (t == null || t.length() == 0) {
 			return v;
 		}
-		return Double.parseDouble(t);
+		return Float.parseFloat(t);
 	}
 
 	
@@ -173,22 +173,22 @@ public class RoutingConfiguration {
 						if (previousKey != null) {
 							String k = in + ":" + previousKey;
 							if (attributes.getValue("penalty") != null) {
-								double penalty = parseSilentDouble(attributes.getValue("penalty"), 0);
+								float penalty = parseSilentFloat(attributes.getValue("penalty"), 0);
 								currentRouter.obstacles.put(k, penalty);
-								double routingPenalty = parseSilentDouble(attributes.getValue("routingPenalty"), penalty );
+								float routingPenalty = parseSilentFloat(attributes.getValue("routingPenalty"), penalty );
 								currentRouter.routingObstacles.put(k, routingPenalty);
 							}
 							if (attributes.getValue("priority") != null) {
-								currentRouter.highwayPriorities.put(k, parseSilentDouble(attributes.getValue("priority"), 0));
+								currentRouter.highwayPriorities.put(k, parseSilentFloat(attributes.getValue("priority"), 0));
 							}
 							if (attributes.getValue("dynamicPriority") != null) {
-								currentRouter.highwayFuturePriorities.put(k, parseSilentDouble(attributes.getValue("dynamicPriority"), 0));
+								currentRouter.highwayFuturePriorities.put(k, parseSilentFloat(attributes.getValue("dynamicPriority"), 0));
 							}
 							if (attributes.getValue("speed") != null) {
-								currentRouter.highwaySpeed.put(k, parseSilentDouble(attributes.getValue("speed"), 0));
+								currentRouter.highwaySpeed.put(k, parseSilentFloat(attributes.getValue("speed"), 0));
 							}
 							if ("avoid".equals(previousTag)) {
-								double priority = parseSilentDouble(attributes.getValue("decreasedPriority"), 0);
+								float priority = parseSilentFloat(attributes.getValue("decreasedPriority"), 0);
 								if (priority == 0) {
 									currentRouter.avoid.put(k, priority);
 								} else {
@@ -200,23 +200,23 @@ public class RoutingConfiguration {
 					} else if("road".equals(name)) {
 						previousTag = name;
 						previousKey = attributes.getValue("tag") +"$" + attributes.getValue("value");
-						currentRouter.highwayPriorities.put(previousKey, parseSilentDouble(attributes.getValue("priority"), 
+						currentRouter.highwayPriorities.put(previousKey, parseSilentFloat(attributes.getValue("priority"), 
 								1));
-						currentRouter.highwayFuturePriorities.put(previousKey, parseSilentDouble(attributes.getValue("dynamicPriority"), 
+						currentRouter.highwayFuturePriorities.put(previousKey, parseSilentFloat(attributes.getValue("dynamicPriority"), 
 								1));
-						currentRouter.highwaySpeed.put(previousKey, parseSilentDouble(attributes.getValue("speed"), 
+						currentRouter.highwaySpeed.put(previousKey, parseSilentFloat(attributes.getValue("speed"), 
 								10));
 					} else if("obstacle".equals(name)) {
 						previousTag = name;
 						previousKey = attributes.getValue("tag") + "$" + attributes.getValue("value");
-						double penalty = parseSilentDouble(attributes.getValue("penalty"), 0);
+						float penalty = parseSilentFloat(attributes.getValue("penalty"), 0);
 						currentRouter.obstacles.put(previousKey, penalty);
-						double routingPenalty = parseSilentDouble(attributes.getValue("routingPenalty"), penalty );
+						float routingPenalty = parseSilentFloat(attributes.getValue("routingPenalty"), penalty );
 						currentRouter.routingObstacles.put(previousKey, routingPenalty);
 					} else if("avoid".equals(name)) {
 						previousTag = name;
 						previousKey = attributes.getValue("tag") + "$" + attributes.getValue("value");
-						double priority = parseSilentDouble(attributes.getValue("decreasedPriority"), 
+						float priority = parseSilentFloat(attributes.getValue("decreasedPriority"), 
 								0);
 						if(priority == 0) {
 							currentRouter.avoid.put(previousKey, priority);

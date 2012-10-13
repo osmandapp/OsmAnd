@@ -10,7 +10,7 @@
 	<attribute name="zoomToLoadTiles" value="16" />
 	<!--  by default it is 30. Value specified here overwrites all others
 			 (don't specify here ! it is device dependent)  -->
-	<attribute name="memoryLimitInMB" value="" />
+	<attribute name="memoryLimitInMB" value="450" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
 	<attribute name="useDynamicRoadPrioritising" value="false" />

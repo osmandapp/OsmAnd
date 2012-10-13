@@ -138,8 +138,9 @@ public class MapClusterLayer implements MapPanelLayer {
 		
 		ctx.setVisitor(new RouteSegmentVisitor() {
 			private List<RouteSegment> cache = new ArrayList<RouteSegment>();
+			
 			@Override
-			public void visitSegment(RouteSegment s, boolean poll) {
+			public void visitSegment(RouteSegment s, int endSegment, boolean poll) {
 				if(!ANIMATE_CLUSTERING){
 					return;
 				}
@@ -269,7 +270,7 @@ public class MapClusterLayer implements MapPanelLayer {
 				if (!onTheMap.contains(toAdd.getRoad().getId())) {
 					onTheMap.add(toAdd.getRoad().getId());
 					// Visualization of steps !
-					ctx.getVisitor().visitSegment(toAdd, true);
+					ctx.getVisitor().visitSegment(toAdd, -1, true);
 				}
 				List<RouteSegment> nextSegments = new ArrayList<BinaryRoutePlanner.RouteSegment>();
 				boolean out = false;

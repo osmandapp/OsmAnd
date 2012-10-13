@@ -34,7 +34,7 @@ import org.apache.commons.logging.Log;
 public class RoutingContext {
 
 	public static final boolean SHOW_GC_SIZE = false;
-	public boolean USE_BASEMAP = false; 
+	 
 	
 	private final static Log log = LogUtil.getLog(RoutingContext.class);
 	public static final int OPTION_NO_LOAD = 0;
@@ -42,6 +42,7 @@ public class RoutingContext {
 	public static final int OPTION_IN_MEMORY_LOAD = 2;
 	// Final context variables
 	public final RoutingConfiguration config;
+	private final boolean useBaseMap;
 	public final NativeLibrary nativeLib;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
@@ -96,6 +97,7 @@ public class RoutingContext {
 	public RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
+		this.useBaseMap = cp.useBaseMap;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
 		// copy local data and clear caches
@@ -117,11 +119,16 @@ public class RoutingContext {
 	}
 	
 	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
+		this(config, nativeLibrary, map, false);
+	}
+	
+	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, boolean useBasemap) {
+		this.useBaseMap = useBasemap;
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
 			for (RouteRegion r : rr) {
-				List<RouteSubregion> subregs = USE_BASEMAP ? r.getBaseSubregions() :
+				List<RouteSubregion> subregs = useBaseMap ? r.getBaseSubregions() :
 					r.getSubregions();
 				for (RouteSubregion rs : subregs) {
 					subregions.add(new RouteSubregion(rs));
@@ -193,7 +200,7 @@ public class RoutingContext {
 		config.router = router;
 	}
 	
-	public void setHeuristicCoefficient(double heuristicCoefficient) {
+	public void setHeuristicCoefficient(float heuristicCoefficient) {
 		config.heuristicCoefficient = heuristicCoefficient;
 	}
 
