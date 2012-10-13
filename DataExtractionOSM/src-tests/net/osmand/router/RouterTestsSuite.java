@@ -28,6 +28,10 @@ import org.xml.sax.SAXException;
 
 public class RouterTestsSuite {
 	
+	public static int MEMORY_TEST_LIMIT = 800;
+	public static boolean TEST_WO_HEURISTIC = true; 
+	public static boolean TEST_BOTH_DIRECTION = true;
+	
 	private static class Parameters {
 		public File obfDir;
 		public List<File> tests = new ArrayList<File>();
@@ -135,11 +139,18 @@ public class RouterTestsSuite {
 		return Float.parseFloat(e.getAttribute(attr));
 	}
 	private static boolean isInOrLess(float expected, float value, float percent){
-		if(Math.abs(value/expected - 1) < percent / 100){
+		if(equalPercent(expected, value, percent)){
 			return true;
 		}
 		if(value < expected) {
 			System.err.println("Test could be adjusted value "  + value + " is much less then expected " + expected);
+			return true;
+		}
+		return false;
+	}
+	
+	private static boolean equalPercent(float expected, float value, float percent){
+		if(Math.abs(value/expected - 1) < percent / 100){
 			return true;
 		}
 		return false;
@@ -150,6 +161,7 @@ public class RouterTestsSuite {
 		int loadedTiles = (int) parseFloat(testCase, "loadedTiles");
 		int visitedSegments = (int) parseFloat(testCase, "visitedSegments");
 		int complete_time = (int) parseFloat(testCase, "complete_time");
+		int routing_time = (int) parseFloat(testCase, "routing_time");
 		int complete_distance = (int) parseFloat(testCase, "complete_distance");
 		float percent = parseFloat(testCase, "best_percent");
 		String testDescription = testCase.getAttribute("description");
@@ -157,8 +169,9 @@ public class RouterTestsSuite {
 			System.err.println("\n\n!! Skipped test case '" + testDescription + "' because 'best_percent' attribute is not specified \n\n" );
 			return;
 		}
+		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
 		BinaryRoutePlanner router = new BinaryRoutePlanner();
-		RoutingContext ctx = new RoutingContext(config.build(vehicle, RoutingConfiguration.DEFAULT_MEMORY_LIMIT), 
+		RoutingContext ctx = new RoutingContext(rconfig, 
 				lib, rs);
 		String skip = testCase.getAttribute("skip_comment");
 		if (skip != null && skip.length() > 0) {
@@ -180,6 +193,7 @@ public class RouterTestsSuite {
 			throw new IllegalArgumentException("End segment is not found for test : " + testDescription);
 		}
 		List<RouteSegmentResult> route = router.searchRoute(ctx, startSegment, endSegment, false);
+		final float calcRoutingTime = ctx.routingTime;
 		float completeTime = 0;
 		float completeDistance = 0;
 		for (int i = 0; i < route.size(); i++) {
@@ -192,20 +206,47 @@ public class RouterTestsSuite {
 		if(complete_distance > 0 && !isInOrLess(complete_distance, completeDistance, percent)) {
 			throw new IllegalArgumentException(String.format("Complete distance (expected) %s != %s (original) : %s", complete_distance, completeDistance, testDescription));
 		}
-		if(visitedSegments > 0 && !isInOrLess(visitedSegments, ctx.visitedSegments, percent)) {
-			throw new IllegalArgumentException(String.format("Visited segments (expected) %s != %s (original) : %s", visitedSegments, ctx.visitedSegments, testDescription));
+		if(routing_time > 0 && !isInOrLess(routing_time, calcRoutingTime, percent)) {
+			throw new IllegalArgumentException(String.format("Complete routing time (expected) %s != %s (original) : %s", routing_time, calcRoutingTime, testDescription));
 		}
-		if(loadedTiles > 0 && !isInOrLess(loadedTiles, ctx.loadedTiles, percent)) {
-			throw new IllegalArgumentException(String.format("Loaded tiles (expected) %s != %s (original) : %s", loadedTiles, ctx.loadedTiles, testDescription));
+
+		if (visitedSegments > 0 && !isInOrLess(visitedSegments, ctx.visitedSegments, percent)) {
+			throw new IllegalArgumentException(String.format("Visited segments (expected) %s != %s (original) : %s", visitedSegments,
+					ctx.visitedSegments, testDescription));
+		}
+		if (loadedTiles > 0 && !isInOrLess(loadedTiles, ctx.loadedTiles, percent)) {
+			throw new IllegalArgumentException(String.format("Loaded tiles (expected) %s != %s (original) : %s", loadedTiles,
+					ctx.loadedTiles, testDescription));
 		}
 		
+		if(TEST_BOTH_DIRECTION){
+			rconfig.planRoadDirection = -1;
+			runTestSpecialTest(lib, rs, rconfig, router, startSegment, endSegment, calcRoutingTime, "Calculated routing time in both direction %s != %s time in -1 direction");
+			
+			rconfig.planRoadDirection = 1;
+			runTestSpecialTest(lib, rs, rconfig, router, startSegment, endSegment, calcRoutingTime, "Calculated routing time in both direction %s != %s time in 1 direction");
+			
+		}
 		
-//		NodeList segments = compareBySegment(testCase, testDescription, route);
-//		if(segments.getLength() < route.size()){
-//			throw new IllegalArgumentException("Expected route is shorter than calculated for test : " + testDescription);
-//		} else if(segments.getLength() > route.size()){
-//			throw new IllegalArgumentException("Expected route is more lengthy than calculated for test : " + testDescription);
-//		}
+		if(TEST_WO_HEURISTIC) {
+			rconfig.planRoadDirection = 0;
+			rconfig.heuristicCoefficient = 0.5f;
+			runTestSpecialTest(lib, rs, rconfig, router, startSegment, endSegment, calcRoutingTime, 
+				"Calculated routing time with heuristic 1 %s != %s with heuristic 0.5");
+		}
+		
+	}
+
+
+	private static void runTestSpecialTest(NativeLibrary lib, BinaryMapIndexReader[] rs, RoutingConfiguration rconfig, BinaryRoutePlanner router,
+			RouteSegment startSegment, RouteSegment endSegment, final float calcRoutingTime, String msg) throws IOException, InterruptedException {
+		RoutingContext ctx;
+		RouteSegment frs;
+		ctx = new RoutingContext(rconfig, lib, rs);
+		frs = router.searchRouteInternal(ctx, startSegment, endSegment, false);
+		if(frs == null || !equalPercent(calcRoutingTime, frs.distanceFromStart, 0.5f)){
+			throw new IllegalArgumentException(String.format(msg, calcRoutingTime+"",frs == null?"0":frs.distanceFromStart+""));
+		}
 	}
 
 

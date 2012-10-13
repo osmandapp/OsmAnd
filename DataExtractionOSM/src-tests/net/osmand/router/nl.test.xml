@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
 	<test regions="" description="Long route to Maastricht" best_percent="5" vehicle="car"     
-    start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="7043.331" loadedTiles = "1785" visitedSegments = "4456" complete_distance = "208488.69"  >
+    start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="7043.331" complete_distance = "208488.69" routing_time = "8800"  >
 	<segment id="7366509" start="9" end="11" time = "9.088743" name = "" distance = "75.739525" turn = "Go ahead" turn_angle = "0.0" start_bearing = "115.31378" end_bearing = "115.46335" description = "Go ahead and go 75.74 meters" />
 	<segment id="47633918" start="2" end="1" time = "2.140907" name = "Noorddammerweg" distance = "26.761337" turn = "Turn right" turn_angle = "89.33931" start_bearing = "-155.19734" end_bearing = "-155.19734" description = "Turn right and go 26.76 meters" />
 	<segment id="7367247" start="2" end="0" time = "20.482542" name = "Zetterij" distance = "256.03177" turn = "Turn left" turn_angle = "-90.48619" start_bearing = "114.31647" end_bearing = "106.46359" description = "Turn left and go 761.63 meters" />

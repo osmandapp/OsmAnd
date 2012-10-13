@@ -198,7 +198,8 @@ public class BinaryRoutePlanner {
 	 * return list of segments
 	 * @return 
 	 */
-	private FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
+	@SuppressWarnings("unused")
+	FinalRouteSegment searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -300,8 +301,7 @@ public class BinaryRoutePlanner {
 					graphReverseSegments.size()) * STANDARD_ROAD_IN_QUEUE_OVERHEAD;
 			
 			if(TRACE_ROUTING){
-				System.out.print(">");
-				printRoad(segment);
+				printRoad(">", segment);
 			}
 			if(segment instanceof FinalRouteSegment) {
 				if(RoutingContext.SHOW_GC_SIZE){
@@ -373,14 +373,14 @@ public class BinaryRoutePlanner {
 	
 	
 
-	private void printRoad(RouteSegment segment) {
+	private void printRoad(String prefix, RouteSegment segment) {
 		String pr;
 		if(segment.parentRoute != null){
 			pr = " pend="+segment.parentSegmentEnd +" parent=" + segment.parentRoute.road;
 		} else {
 			pr = "";
 		}
-		System.out.println("" + segment.road + " ind=" + segment.getSegmentStart() + 
+		println(prefix  +"" + segment.road + " ind=" + segment.getSegmentStart() + 
 				" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);
 	}
 
@@ -725,7 +725,7 @@ public class BinaryRoutePlanner {
 		if (thereAreRestrictions) {
 			nextIterator = ctx.segmentsToVisitPrescripted.iterator();
 			if(TRACE_ROUTING){
-				System.out.println("  >> There are restrictions");
+				println("  >> There are restrictions");
 			}
 		}
 		// Calculate possible ways to put into priority queue
@@ -764,8 +764,7 @@ public class BinaryRoutePlanner {
 						next.setAllowedDirection((byte) (segment.getSegmentStart() < next.getSegmentStart() ? 1 : - 1));
 					}
 					if(TRACE_ROUTING) {
-						System.out.print("  >>");
-						printRoad(next);
+						printRoad("  >>", next);
 					}
 					// put additional information to recover whole route after
 					next.setParentRoute(segment);
@@ -814,6 +813,7 @@ public class BinaryRoutePlanner {
 		List<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>();
 		
 		if (finalSegment != null) {
+			ctx.routingTime = finalSegment.distanceFromStart;
 			println("Routing calculated time distance " + finalSegment.distanceFromStart);
 			// Get results from opposite direction roads
 			RouteSegment segment = finalSegment.reverseWaySearch ? finalSegment : finalSegment.opposite.getParentRoute();
@@ -950,9 +950,11 @@ public class BinaryRoutePlanner {
 		add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
 		add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");
 		add.append("complete_distance = \"").append(completeDistance).append("\" ");
-		println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{5}\" \n"
-				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" complete_time=\"{4}\" {6} >", startLat
-				+ "", startLon + "", endLat + "", endLon + "", completeTime + "", ctx.config.routerName, add.toString()));
+		add.append("complete_time = \"").append(completeTime).append("\" ");
+		add.append("routing_time = \"").append(ctx.routingTime).append("\" ");
+		println(MessageFormat.format("<test regions=\"\" description=\"\" best_percent=\"\" vehicle=\"{4}\" \n"
+				+ "    start_lat=\"{0}\" start_lon=\"{1}\" target_lat=\"{2}\" target_lon=\"{3}\" {5} >", startLat
+				+ "", startLon + "", endLat + "", endLon + "", ctx.config.routerName, add.toString()));
 		if (PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST) {
 			for (RouteSegmentResult res : result) {
 				String name = res.getObject().getName();

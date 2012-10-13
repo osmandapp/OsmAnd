@@ -3,14 +3,14 @@
 	<!-- 1. parameters of routing and different tweaks Influence on A* : -->
 	<!-- f(x) + heuristicCoefficient*g(X) -->
 	<!-- TEMPORARY needs to be reverted to 1 -->
-	<attribute name="heuristicCoefficient" value="" />
+	<attribute name="heuristicCoefficient" value="1" />
 
 	<!-- 1.1 tile load parameters (should not affect routing) -->
 	<!-- by default 16 -->
 	<attribute name="zoomToLoadTiles" value="16" />
 	<!--  by default it is 30. Value specified here overwrites all others
 			 (don't specify here ! it is device dependent)  -->
-	<attribute name="memoryLimitInMB" value="450" />
+	<attribute name="memoryLimitInMB" value="" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
 	<attribute name="useDynamicRoadPrioritising" value="false" />

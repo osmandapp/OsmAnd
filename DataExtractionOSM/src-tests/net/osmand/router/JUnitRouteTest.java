@@ -6,7 +6,6 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -17,7 +16,6 @@ import net.osmand.swing.NativeSwingRendering;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 
 public class JUnitRouteTest  {

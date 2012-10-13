@@ -67,26 +67,23 @@ public class RoutingContext {
 	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 
 	
-	// 4. Final results
-	RouteSegment finalDirectRoute = null;
-	int finalDirectEndSegment = 0;
-	RouteSegment finalReverseRoute = null;
-	int finalReverseEndSegment = 0;
-
-
 	// 5. debug information (package accessor)
 	public TileStatistics global = new TileStatistics();
 	// updated by route planner in bytes
 	public int memoryOverhead = 0;
+	
+	
 	long timeToLoad = 0;
 	long timeToLoadHeaders = 0;
 	long timeToFindInitialSegments = 0;
 	long timeToCalculate = 0;
-	public int loadedTiles = 0;
+	
 	int distinctLoadedTiles = 0;
 	int maxLoadedTiles = 0;
 	int loadedPrevUnloadedTiles = 0;
 	int unloadedTiles = 0;
+	public float routingTime = 0;
+	public int loadedTiles = 0;
 	public int visitedSegments = 0;
 	public int relaxedSegments = 0;
 	// callback of processing segments
