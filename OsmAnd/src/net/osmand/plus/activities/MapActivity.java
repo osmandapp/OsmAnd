@@ -1399,7 +1399,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if(autoFollow > 0 && routingHelper.isFollowingMode()){
 				backToLocationWithDelay(autoFollow);
 			} else if (linkMapToLocation) {
-				backToLocationWithDelay(1);
+				backToLocationImpl();
 			}
 		}
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
