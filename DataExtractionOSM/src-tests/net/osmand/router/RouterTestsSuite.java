@@ -41,12 +41,12 @@ public class RouterTestsSuite {
 			Parameters p = new Parameters();
 			String routingXmlFile = null;
 			String obfDirectory = null;
-			BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
+			RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = false;
 			for (String a : args) {
 				if (a.startsWith("-routingXmlPath=")) {
 					routingXmlFile = a.substring("-routingXmlPath=".length());
 				} else if (a.startsWith("-verbose")) {
-					BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+					RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 				} else if (a.startsWith("-obfDir=")) {
 					obfDirectory = a.substring("-obfDir=".length());
 				} else if (a.startsWith("-testDir=")) {

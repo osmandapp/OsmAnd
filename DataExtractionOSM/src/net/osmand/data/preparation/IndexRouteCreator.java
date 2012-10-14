@@ -614,6 +614,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		return main;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public void getAdjacentRoads(GeneralizedCluster gcluster, GeneralizedWay gw, int i, Collection<GeneralizedWay> collection){
 		gcluster = getCluster(gw, i, gcluster);
 		Object o = gcluster.map.get(gw.getLocation(i));
@@ -628,10 +629,12 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public int countAdjacentRoads(GeneralizedCluster gcluster, GeneralizedWay gw, int i){
 		gcluster = getCluster(gw, i, gcluster);
 		Object o = gcluster.map.get(gw.getLocation(i));
 		if (o instanceof LinkedList) {
+			
 			Iterator it = ((LinkedList) o).iterator();
 			int cnt = 0;
 			while (it.hasNext()) {
@@ -701,12 +704,14 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					System.err.println(gw.id + " empty ? ");
 					continue;
 				}
-				Node prev = convertBaseToNode(gw.getLocation(0));
-				nodes.add(prev);
+				long prev = 0;
 				for (int i = 0; i < gw.size(); i++) {
-					Node c = convertBaseToNode(gw.getLocation(i));
-					prev = c;
-					nodes.add(c);
+					long loc = gw.getLocation(i);
+					if(loc != prev) {
+						Node c = convertBaseToNode(loc);
+						prev = loc;
+						nodes.add(c);
+					}
 				}
 				outTypes.clear();
 				outTypes.add(gw.mainType);
@@ -809,8 +814,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 	
-	private int checkDistanceToLine(GeneralizedWay line, int start, boolean directionPlus,
- int px, int py, double distThreshold) {
+	public int checkDistanceToLine(GeneralizedWay line, int start, boolean directionPlus, int px, int py, double distThreshold) {
 		int j = start;
 		int next = directionPlus ? j + 1 : j - 1;
 		while (next >= 0 && next < line.size()) {
@@ -824,68 +828,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		return -1;
 	}
 	
-	private void removeLineDuplication(Collection<GeneralizedCluster> clusters) {
-		for(GeneralizedCluster cluster : clusters) {
-			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
-			for(GeneralizedWay gw : copy) {
-				// already deleted
-				if(!cluster.ways.contains(gw)){
-					continue;
-				}
-				if(gw.size() > 2) {
-					float p = DOUGLAS_PEUKER_DISTANCE / 3;
-					for (GeneralizedWay gn : copy) {
-						int kmin = checkDistanceToLine(gn, 0, true, gw.px.get(0), 
-								gw.py.get(0), p);
-						int knext = kmin;
-						boolean dir = true;
-						if(kmin >= 0) {
-							knext = checkDistanceToLine(gn, kmin, dir, gw.px.get(1), 
-								gw.py.get(1), p);
-							if(knext < 0) {
-								dir = false;
-								knext = checkDistanceToLine(gn, kmin, dir, gw.px.get(1), 
-										gw.py.get(1), p);
-							}
-						}
-						if(knext > 0){
-							int prevk = kmin;
-							while (gw.size() > 1) {
-								prevk = checkDistanceToLine(gn, prevk, dir, gw.px.get(1), 
-										gw.py.get(1), p);
-								if(prevk < 0){
-									break;
-								}
-								removePointFromWayAndReplace(cluster, gw, 1, gn.px.get(prevk), gn.py.get(prevk));
-							}
-							removePointFromWayAndReplace(cluster, gw, 0, gn.px.get(kmin), gn.py.get(kmin));
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-
-
-	private void removePointFromWayAndReplace(GeneralizedCluster cluster, GeneralizedWay gw, int i, int x31, int y31) {
-		GeneralizedCluster gcluster = getCluster(gw, i, cluster);
-		Object o = gcluster.map.get(gw.getLocation(i));
-		if (o instanceof LinkedList) {
-			Iterator it = ((LinkedList) o).iterator();
-			while (it.hasNext()) {
-				GeneralizedWay next = (GeneralizedWay) it.next();
-				replacePointWithAnotherPoint(gcluster, gw, x31, y31, i, next);
-			}
-		} else if (o instanceof GeneralizedWay) {
-			replacePointWithAnotherPoint(gcluster, gw, x31, y31, i, (GeneralizedWay) o);
-		}
-		gcluster.removeWayFromLocation(gw, i);
-		gw.px.removeAt(i);
-		gw.py.removeAt(i);
-	}
-
-
 	private void processRoundabouts(Collection<GeneralizedCluster> clusters) {
 		for(GeneralizedCluster cluster : clusters) {
 			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
@@ -898,7 +840,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			}
 		}
 	}
-
 
 	
 	private void removeSmall2RoadsConnectors(Collection<GeneralizedCluster> clusters) {
@@ -948,6 +889,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	}
 
 	
+	@SuppressWarnings("rawtypes")
 	private void removeWayAndSubstituteWithPoint(GeneralizedWay gw, GeneralizedCluster gcluster) {
 		// calculate center location
 		long pxc = 0;

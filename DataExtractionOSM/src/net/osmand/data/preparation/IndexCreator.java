@@ -744,7 +744,7 @@ public class IndexCreator {
 //		creator.setIndexMap(true);
 //		creator.setIndexAddress(true);
 //		creator.setIndexPOI(true);
-//		creator.setInde	xTransport(true);
+//		creator.setIndexTransport(true);
 		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;
@@ -755,8 +755,9 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 
-		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
+//		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
 //		String file = "/home/victor/projects/OsmAnd/temp/belgium.osm.pbf";
+		String file = "/home/victor/projects/OsmAnd/temp/poland.osm.pbf";
 		int st = file.lastIndexOf('/');
 		int e = file.indexOf('.', st);
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/"+file.substring(st, e) + ".tmp.odb"));

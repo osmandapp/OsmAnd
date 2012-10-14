@@ -159,8 +159,6 @@ public class RouteResultPreparation {
 			} else if (toAdd.getEndPointIndex() == previous.getStartPointIndex() && reverse) {
 				previous.setStartPointIndex(toAdd.getStartPointIndex());
 				return true;
-			} else {
-				throw new IllegalStateException("Roads could not be combined");
 			}
 		}
 		return false;
