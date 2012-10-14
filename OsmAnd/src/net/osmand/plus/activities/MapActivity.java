@@ -1282,6 +1282,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public void locationChanged(double newLatitude, double newLongitude, Object source) {
 		// when user start dragging 
+		linkMapToLocation = false;
 		if(mapLayers.getLocationLayer().getLastKnownLocation() != null){
 			setMapLinkedToLocation(false);
 			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
@@ -1383,6 +1384,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	public static void launchMapActivityMoveToTop(Context activity){
+		linkMapToLocation = false;
 		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		activity.startActivity(newIntent);
