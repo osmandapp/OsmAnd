@@ -130,6 +130,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 	private RouteAnimation routeAnimation = new RouteAnimation();
 
+	// this remembers the isMapLinkedToLocation state after map loses focus
+	private boolean linkMapToLocation = false;
+
 	private boolean isMapLinkedToLocation = false;
 	private ProgressDialog startProgressDialog;
 	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
@@ -285,7 +288,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 		// by default turn off causing unexpected movements due to network establishing
 		// best to show previous location
-		setMapLinkedToLocation(false);
+		//setMapLinkedToLocation(false);
+		// remember if map should come back to isMapLinkedToLocation=true
+		setMapLinkedToLocation(linkMapToLocation);
 
 		// if destination point was changed try to recalculate route 
 		if (routingHelper.isFollowingMode() && (
@@ -934,7 +939,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 			}
-			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
+			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode() && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
 				backToLocationWithDelay(1);
 			}
 		}
@@ -1388,15 +1393,17 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return isMapLinkedToLocation;
 	}
 	
-	
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
 			if(autoFollow > 0 && routingHelper.isFollowingMode()){
 				backToLocationWithDelay(autoFollow);
+			} else if (linkMapToLocation) {
+				backToLocationWithDelay(1);
 			}
 		}
 		this.isMapLinkedToLocation = isMapLinkedToLocation;
+		linkMapToLocation = isMapLinkedToLocation;
 	}
 
 	private void backToLocationWithDelay(int delay) {
