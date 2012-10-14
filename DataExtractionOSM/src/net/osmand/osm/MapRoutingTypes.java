@@ -11,8 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.osmand.osm.MapRoutingTypes.MapRouteType;
-
 
 public class MapRoutingTypes {
 
@@ -185,10 +183,6 @@ public class MapRoutingTypes {
 			String value = converBooleanValue(es.getValue());
 			if(BASE_TAGS_TEXT.contains(tag)) {
 				names.put(registerRule(tag, null), value);
-			}
-			// do not use links in base map
-			if(value.endsWith("_link")){
-				value = value.substring(0, value.length() - 5);
 			}
 			if(contains(TAGS_TO_ACCEPT, tag, value) ||
 					contains(BASE_TAGS_TO_SAVE, tag, value)) {

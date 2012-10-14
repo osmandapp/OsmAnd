@@ -199,10 +199,11 @@ public class RouteResultPreparation {
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
-//				float ms = res.getObject().getMaximumSpeed();
-//				if(ms > 0) {
-//					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ");
-//				}
+//				float ms = res.getSegmentSpeed();
+				float ms = res.getObject().getMaximumSpeed();
+				if(ms > 0) {
+					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ").append(res.getObject().getHighway()).append(" ");
+				}
 				additional.append("distance = \"").append(res.getDistance()).append("\" ");
 				if (res.getTurnType() != null) {
 					additional.append("turn = \"").append(res.getTurnType()).append("\" ");

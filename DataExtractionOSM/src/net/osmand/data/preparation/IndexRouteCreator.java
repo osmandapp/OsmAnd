@@ -37,7 +37,6 @@ import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RestrictionData.Builder;
 import net.osmand.binary.OsmandOdb.RouteData;
-import net.osmand.data.MapAlgorithms;
 import net.osmand.data.preparation.BinaryMapIndexWriter.RoutePointToWrite;
 import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
@@ -109,6 +108,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		// either LinkedList<GeneralizedWay> or GeneralizedWay
 		public final TLongObjectHashMap<Object> map = new TLongObjectHashMap<Object>();
 		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public void replaceWayFromLocation(GeneralizedWay delete, int ind, GeneralizedWay toReplace){
 			ways.remove(delete);
 			long loc = delete.getLocation(ind);
@@ -132,6 +132,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		public void removeWayFromLocation(GeneralizedWay delete, int ind){
 			removeWayFromLocation(delete, ind, false);
 		}
+		@SuppressWarnings("rawtypes")
 		public void removeWayFromLocation(GeneralizedWay delete, int ind, boolean deleteAll) {
 			long loc = delete.getLocation(ind);
 			boolean ex = false;
@@ -168,6 +169,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			addWay(w, loc);
 		}
 
+		@SuppressWarnings("unchecked")
 		private void addWay(GeneralizedWay w, long loc) {
 			
 			if (map.containsKey(loc)) {
@@ -659,7 +661,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		Collection<GeneralizedCluster> clusters = 
 				new ArrayList<IndexRouteCreator.GeneralizedCluster>(generalClusters.valueCollection());
 		// 1. roundabouts 
-		//BUGGY
 		 processRoundabouts(clusters);
 		
 		// 2. way combination based 
@@ -958,7 +959,17 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		} else if(rf != null) {
 			to.names.put(rt, from.names.get(rt));			
 		}
-		
+	}
+	
+	private void mergeAddTypes(GeneralizedWay from, GeneralizedWay to){
+		TIntIterator it = to.addtypes.iterator();
+		while(it.hasNext()) {
+			int n = it.next();
+			// maxspeed could be merged better
+			if(!from.addtypes.contains(n)) {
+				it.remove();
+			}
+		}
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -1013,7 +1024,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				cluster = getCluster(prev, i, cluster);
 				cluster.replaceWayFromLocation(prev, i, gw);
 			}
-			gw.addtypes.addAll(prev.addtypes);
+			mergeAddTypes(prev, gw);
 			for(MapRouteType rt : new ArrayList<MapRouteType>(gw.names.keySet())) {
 				mergeName(rt, prev, gw);	
 			}

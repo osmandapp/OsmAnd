@@ -59,11 +59,17 @@
 
 	<!-- filter does not work for renderingConstant - the last one will be used, but better use separate depends Rendering style -->
 	<!-- roadColors="Modified Mapnik" -->
-		<renderingConstant name="motorwayRoadColor" value="#55809bff"/>
+		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#FF8095"/>
+		<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
+		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+		<!-- transparent to see conjunctions -->
+		<!-- <renderingConstant name="motorwayRoadColor" value="#55809bff"/>
 		<renderingConstant name="trunkRoadColor" value="#55FF8095"/>
 		<renderingConstant name="primaryRoadColor" value="#55FFAA80"/>
 		<renderingConstant name="secondaryRoadColor" value="#55ffd080"/>
-		<renderingConstant name="tertiaryRoadColor" value="#55ffff80"/>
+		<renderingConstant name="tertiaryRoadColor" value="#55ffff80"/> -->
 	<!-- roadColors="Road atlas style" -->
 		<!--
 		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
