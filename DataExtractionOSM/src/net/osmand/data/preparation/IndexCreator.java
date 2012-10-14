@@ -757,7 +757,7 @@ public class IndexCreator {
 
 //		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
 //		String file = "/home/victor/projects/OsmAnd/temp/belgium.osm.pbf";
-		String file = "/home/victor/projects/OsmAnd/temp/poland.osm.pbf";
+		String file = "/home/victor/projects/OsmAnd/temp/warsaw-map.osm.pbf";
 		int st = file.lastIndexOf('/');
 		int e = file.indexOf('.', st);
 		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/"+file.substring(st, e) + ".tmp.odb"));

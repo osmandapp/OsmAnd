@@ -681,7 +681,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		douglasPeukerSimplificationStep(clusters);
 		
 		// 4. remove line duplication
-		removeSmall2RoadsConnectors(clusters);		
+		// very buggy poland (deletes part of motorway)
+//		removeSmall2RoadsConnectors(clusters);		
 
 		
 		// 5. write to db
