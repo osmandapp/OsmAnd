@@ -123,6 +123,8 @@ public class MainMenuActivity extends Activity {
 		leftview.startAnimation(getAnimation(-1, 0));
 		leftview = (View) window.findViewById(R.id.MusicButton);
 		leftview.startAnimation(getAnimation(-1, 0));
+                leftview = (View) window.findViewById(R.id.DiagnosticsButton);
+                leftview.startAnimation(getAnimation(-1, 0));
 		
 		View rightview = (View) window.findViewById(R.id.SettingsButton);
 		rightview.startAnimation(getAnimation(1, 0));
@@ -218,6 +220,15 @@ public class MainMenuActivity extends Activity {
                                 final Intent musicIntent = new Intent(activity, OsmandIntents.getMusicActivity());
                                 musicIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                                 activity.startActivity(musicIntent);
+                        }
+                });
+                View diagnosticsButton = window.findViewById(R.id.DiagnosticsButton);
+                diagnosticsButton.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                final Intent diagnosticsIntent = new Intent(activity, OsmandIntents.getDiagnosticsActivity());
+                                diagnosticsIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                                activity.startActivity(diagnosticsIntent);
                         }
                 });
 

@@ -40,4 +40,8 @@ public class OsmandIntents {
         public static Class<MusicActivity> getMusicActivity() {
             return MusicActivity.class;
         }
+
+        public static Class<DiagnosticsActivity> getDiagnosticsActivity() {
+            return DiagnosticsActivity.class;
+        }
 }

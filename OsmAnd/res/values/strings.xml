@@ -1119,6 +1119,7 @@
 	<string name="music_button">Music</string>
 	<string name="phone_button">Phone</string>
 	<string name="car_button">Car</string>
+	<string name="diagnostics_button">My Driving</string>
 	<string name="enter_destination">Enter destination</string>
 	<string name="directions">Directions</string>
 	<string name="go">Go</string>
@@ -1129,4 +1130,18 @@
 	<string name="follow_mode_bearing">Bearing</string>
 	<string name="follow_mode_free_scroll">Free Scroll</string>
 	<string name="enter_address">Enter address</string>
+	<string name="overall_driving_stats">Driving Quality</string>
+	<string name="fuel_economy">Fuel Economy</string>
+	<string name="current_driving_stats">Current Readings</string>
+	<string name="speed">Speed</string>
+	<string name="fuel_level">Fuel Level</string>
+	<string name="coolant_level">Coolant Level</string>
+	<string name="tire_pressure">Tire Pressure</string>
+	<string name="driving_score">Driving Score</string>
+	<string name="braking_score">Braking</string>
+	<string name="acceleration_score">Acceleration</string>
+	<string name="speed_score">Speed</string>
+	<string name="tick_content_desc">Image indicates good or bad status</string>
+	<string name="curr_mileage">Curr mileage</string>
+	<string name="avg_mileage">Avg mileage</string>
 </resources>

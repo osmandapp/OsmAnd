@@ -564,6 +564,15 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
                                 dlg.dismiss();
                         }
                 });
+                View diagnosticsButton = dlg.findViewById(R.id.DiagnosticsButton);
+                diagnosticsButton.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                final Intent diagnosticsIntent = new Intent(MapActivity.this, OsmandIntents.getDiagnosticsActivity());
+                                MapActivity.this.startActivity(diagnosticsIntent);
+                                dlg.dismiss();
+                        }
+                });
 
 		View closeButton = dlg.findViewById(R.id.CloseButton);
 		closeButton.setOnClickListener(new OnClickListener() {

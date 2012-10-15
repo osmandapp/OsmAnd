@@ -26,7 +26,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 			</LinearLayout>
 		</LinearLayout>
 		<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
-	 		<TableRow android:layout_height = "wrap_content" android:layout_marginTop="15dp">
+			<TableRow android:layout_height = "wrap_content" android:layout_marginTop="5dp">
 	 			<LinearLayout android:id="@+id/MapButton" android:background="@drawable/bg_left" 
 	 			android:focusable="true" android:clickable="true"
 	 			android:layout_weight="1" android:layout_height="165dp">
@@ -57,7 +57,7 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:textSize="24sp"/>
 				</LinearLayout>
 			</TableRow>
-			<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "15dp">
+			<TableRow android:layout_height = "wrap_content" android:layout_marginTop = "0dp">
 				<LinearLayout android:id="@+id/MusicButton" android:background="@drawable/bg_left"
 				android:focusable="true" android:clickable="true" 
 				android:layout_weight="1" android:layout_height="165dp">
@@ -88,6 +88,22 @@ android:layout_width="fill_parent" android:layout_height="fill_parent" android:b
 					android:textSize="24sp"/>
 				 </LinearLayout> 		
 			</TableRow>	
+			<TableRow android:layout_height = "wrap_content" android:layout_marginTop ="0dp">
+				<LinearLayout android:id="@+id/DiagnosticsButton" android:background="@drawable/bg_left"
+				android:focusable="true" android:clickable="true"
+				android:layout_weight="1" android:layout_height="165dp">
+					<TextView android:layout_height="wrap_content" android:layout_width="wrap_content"
+					android:layout_marginLeft="15dp" android:layout_gravity="center_vertical|left"
+					android:text="@string/diagnostics_button" android:textColor="#000000" android:typeface="serif"
+					android:layout_weight="1" android:textSize="24sp"/>
+					<ImageView
+					android:src="@drawable/button_icon_diagnostics"
+					android:layout_gravity="center|right"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"/>
+				</LinearLayout>
+				<LinearLayout android:layout_weight="5" android:layout_height="fill_parent"/>
+			</TableRow>
 		</TableLayout>
 	</LinearLayout>
 </net.osmand.access.AccessibleLayout>

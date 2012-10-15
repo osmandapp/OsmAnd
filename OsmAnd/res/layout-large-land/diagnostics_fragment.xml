@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/diagnosticsLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/drivingScoreLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="fill_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/box_free"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/diagnosticsToMenuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/backToMenu"
+            android:src="@drawable/map_back_to_menu" />
+
+        <TextView
+            android:id="@+id/drivingScoreLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/diagnosticsToMenuButton"
+            android:text="@string/driving_score"
+            android:textAppearance="@style/CustomTitleTheme"
+            android:textColor="@color/color_black"
+            android:textSize="36dp" />
+
+        <RatingBar
+            android:id="@+id/drivingScoreRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="32dp"
+            android:numStars="3" />
+
+        <TextView
+            android:id="@+id/drivingScoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/color_black"
+            android:textSize="32dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/currentStatsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:background="@drawable/box_free" >
+
+        <TextView
+            android:id="@+id/currentStatsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="5dp"
+            android:text="@string/current_driving_stats"
+            android:textColor="@color/color_black"
+            android:textSize="32dp" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/currentStatsLabel"
+            android:layout_below="@id/currentStatsLabel"
+            android:layout_marginLeft="24dp" >
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/speedLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/speed"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/speedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/tirePressureLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="80dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/tire_pressure"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
+                <ProgressBar
+                    android:id="@+id/tirePressureProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:minWidth="150dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:progressDrawable="@drawable/progress" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/fuelLevelLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="@string/fuel_level"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
+                <ProgressBar
+                    android:id="@+id/fuelLevelProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:minWidth="150dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:progressDrawable="@drawable/progress" />
+
+                <TextView
+                    android:id="@+id/coolantLevelLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="80dp"
+                    android:paddingTop="10dp"
+                    android:text="@string/coolant_level"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
+                <ProgressBar
+                    android:id="@+id/coolantLevelProgressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:minWidth="150dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:progressDrawable="@drawable/progress" />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/drivingStatsLayout"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/box_free"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/TextView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/overall_driving_stats"
+                android:textColor="@color/color_black"
+                android:textSize="32dp" >
+            </TextView>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/TextView1"
+                android:layout_below="@id/TextView1"
+                android:layout_marginLeft="24dp" >
+
+                <TableRow
+                    android:id="@+id/drivingStatsTableRow1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/brakingScoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="@string/braking_score"
+                        android:textColor="@color/color_black"
+                        android:textSize="24dp" />
+
+                    <ProgressBar
+                        android:id="@+id/brakingScoreProgressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:minWidth="150dp"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:progressDrawable="@drawable/progress" />
+
+                    <ImageButton
+                        android:id="@+id/brakingTickButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_transparent"
+                        android:contentDescription="@string/tick_content_desc"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/check_icon" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/drivingStatsTableRow2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/accelerationScoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="@string/acceleration_score"
+                        android:textColor="@color/color_black"
+                        android:textSize="24dp" />
+
+                    <ProgressBar
+                        android:id="@+id/accelerationScoreProgressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:minWidth="150dp"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:progressDrawable="@drawable/progress" />
+
+                    <ImageButton
+                        android:id="@+id/accelerationTickButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_transparent"
+                        android:contentDescription="@string/tick_content_desc"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/check_icon" />
+                </TableRow>
+
+                <TableRow
+                    android:id="@+id/speedScoreLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/speedScoreLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="@string/speed_score"
+                        android:textColor="@color/color_black"
+                        android:textSize="24dp" />
+
+                    <ProgressBar
+                        android:id="@+id/speedScoreProgressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:max="100"
+                        android:minWidth="150dp"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:progressDrawable="@drawable/progress" />
+
+                    <ImageButton
+                        android:id="@+id/speedTickButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/color_transparent"
+                        android:contentDescription="@string/tick_content_desc"
+                        android:paddingLeft="25dp"
+                        android:paddingTop="10dp"
+                        android:src="@drawable/check_icon" />
+                </TableRow>
+            </TableLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fuelEconomyLayout"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/box_free"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/fuelEconomyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/fuel_economy"
+                android:textColor="@color/color_black"
+                android:textSize="32dp" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fuelEconomyLabel"
+                android:orientation="vertical" >
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TableRow
+                        android:id="@+id/TableRow02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/currMileageLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:paddingTop="10dp"
+                            android:text="@string/curr_mileage"
+                            android:textColor="@color/color_black"
+                            android:textSize="24dp" />
+
+                        <TextView
+                            android:id="@+id/currMileageText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="200dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/color_black"
+                            android:textSize="24dp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:id="@+id/TableRow01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/avgMileageLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dp"
+                            android:paddingTop="10dp"
+                            android:text="@string/avg_mileage"
+                            android:textColor="@color/color_black"
+                            android:textSize="24dp" />
+
+                        <TextView
+                            android:id="@+id/avgMileageText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minWidth="200dp"
+                            android:paddingTop="10dp"
+                            android:textColor="@color/color_black"
+                            android:textSize="24dp" />
+                    </TableRow>
+                </TableLayout>
+
+                <GridView
+                    android:id="@+id/gridView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="24dp"
+                    android:numColumns="3" >
+
+                </GridView>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
