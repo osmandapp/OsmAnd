@@ -167,6 +167,7 @@ public class MapRoutingTypes {
 				if(value.startsWith("trunk") || value.startsWith("motorway")
 						|| value.startsWith("primary") || value.startsWith("secondary")
 						|| value.startsWith("tertiary")
+						|| value.startsWith("ferry")
 						) {
 					init = true;
 					break;

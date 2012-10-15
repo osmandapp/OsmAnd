@@ -130,6 +130,7 @@ public class BinaryRoutePlanner {
 				ctx.timeToLoad += local.timeToLoad;
 				ctx.timeToLoadHeaders += local.timeToLoadHeaders;
 				ctx.relaxedSegments += local.relaxedSegments;
+				ctx.routingTime += local.routingTime;
 				
 				local.unloadAllData(ctx);
 				if(restPartRecalculatedRoute != null) {
@@ -385,16 +386,16 @@ public class BinaryRoutePlanner {
 			RouteSegment s = iterator.next();
 //			statStart.addNumber((float) s.distanceFromStart);
 //			statEnd.addNumber((float) s.distanceToEnd);
-			if (s.distanceToEnd < mine) {
-				mine = s.distanceToEnd;
+			if (s.distanceFromStart > mine) {
+				mine = s.distanceFromStart;
 			}
 		}
-		double d = mine + 5000; // ctx.config.RELAX_NODES_IF_START_DIST_COEF;
+		double d = mine - 50000; // ctx.config.RELAX_NODES_IF_START_DIST_COEF;
 		if (d > 0) {
 			iterator = graphSegments.iterator();
 			while (iterator.hasNext()) {
 				RouteSegment s = iterator.next();
-				if (s.distanceToEnd > d) {
+				if (s.distanceFromStart < d) {
 					ctx.relaxedSegments++;
 					iterator.remove();
 				}

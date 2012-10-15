@@ -54,6 +54,7 @@ public class RoutingContext {
 	
 	public Interruptable interruptable;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
+	public BaseRouteResult baseRouteResult;
 
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();

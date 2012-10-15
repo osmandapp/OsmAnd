@@ -79,7 +79,9 @@ public class NativeLibrary {
 	
 	public RouteDataObject[] getDataObjects(NativeRouteSearchResult rs, int x31, int y31) {
 		if(rs.nativeHandler == 0) {
-			throw new IllegalStateException("Native route handler is 0");
+			// do not throw exception because it is expected situation
+			return new RouteDataObject[0];
+//			throw new IllegalStateException("Native route handler is 0");
 		}
 		return getRouteDataObjects(rs.region.routeReg, rs.nativeHandler, x31, y31);
 	}
