@@ -147,7 +147,8 @@
 			<groupFilter>
 				<filter point="false" cycle="true" objectType="3" order="30"/>
 				<filter point="false" area="true" objectType="3" order="30"/>
-				<filter objectType="2" order="58"/>
+				<filter point="false" objectType="2" order="58"/>
+				<filter point="true" objectType="1" order="128"/>
 			</groupFilter>
 		</group>
 		
