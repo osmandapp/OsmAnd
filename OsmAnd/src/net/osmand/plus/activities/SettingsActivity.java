@@ -306,7 +306,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		
 		
-		MetricsConstants[] mvls  = new MetricsConstants[] {MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.MILES_AND_FOOTS}; //MetricsConstants.values();
+		MetricsConstants[] mvls  = new MetricsConstants[] {MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.MILES_AND_FOOTS, MetricsConstants.MILES_AND_YARDS}; //MetricsConstants.values();
 		entries = new String[mvls.length];
 		for(int i=0; i<entries.length; i++){
 			entries[i] = mvls[i].toHumanString(this);
