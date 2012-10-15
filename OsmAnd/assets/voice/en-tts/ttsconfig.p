@@ -68,21 +68,30 @@ nth(17, 'seventeenth ').
 
 
 distance(Dist) == D :- measure('km-m'), distance_km(Dist) == D.
-distance(Dist) == D :- distance_mi(Dist) == D.
-%%% distance measure
-distance_km(Dist) == [ X, ' meters'] :- Dist < 100, D is round(Dist/10.0)*10, num_atom(D, X).
-distance_km(Dist) == [ X, ' meters'] :- Dist < 1000, D is round(2*Dist/100.0)*50, num_atom(D, X).
-distance_km(Dist) == ['about 1 kilometer '] :- Dist < 1500.
-distance_km(Dist) == ['about ', X, ' kilometers '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
-distance_km(Dist) == [ X, ' kilometers '] :- D is round(Dist/1000.0), num_atom(D, X).
+distance(Dist) == D :- measure('mi-f'), distance_mi_f(Dist) == D.
+distance(Dist) == D :- measure('mi-y'), distance_mi_y(Dist) == D.
 
-%%% distance measure
-distance_mi(Dist) == [ X, ' feet'] :- Dist < 160, D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
-distance_mi(Dist) == [ X, ' tenth of a mile'] :- Dist < 241, D is round(Dist/161.0), num_atom(D, X).
-distance_mi(Dist) == [ X, ' tenths of a mile'] :- Dist < 1529, D is round(Dist/161.0), num_atom(D, X).
-distance_mi(Dist) == ['about 1 mile '] :- Dist < 2414.
-distance_mi(Dist) == ['about ', X, ' miles '] :- Dist < 16093, D is round(Dist/1609.0), num_atom(D, X).
-distance_mi(Dist) == [ X, ' miles '] :- D is round(Dist/1609.0), num_atom(D, X).
+%%% distance measure km/m
+distance_km(Dist) == [ X, ' meters']               :- Dist < 100,   D is round(Dist/10.0)*10,           num_atom(D, X).
+distance_km(Dist) == [ X, ' meters']               :- Dist < 1000,  D is round(2*Dist/100.0)*50,        num_atom(D, X).
+distance_km(Dist) == ['about 1 kilometer ']        :- Dist < 1500.
+distance_km(Dist) == ['about ', X, ' kilometers '] :- Dist < 10000, D is round(Dist/1000.0),            num_atom(D, X).
+distance_km(Dist) == [ X, ' kilometers ']          :-               D is round(Dist/1000.0),            num_atom(D, X).
+
+%%% distance measure mi/f
+distance_mi_f(Dist) == [ X, ' feet']               :- Dist < 160,   D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
+distance_mi_f(Dist) == [ X, ' tenth of a mile']    :- Dist < 241,   D is round(Dist/161.0),             num_atom(D, X).
+distance_mi_f(Dist) == [ X, ' tenths of a mile']   :- Dist < 1529,  D is round(Dist/161.0),             num_atom(D, X).
+distance_mi_f(Dist) == ['about 1 mile ']           :- Dist < 2414.
+distance_mi_f(Dist) == ['about ', X, ' miles ']    :- Dist < 16093, D is round(Dist/1609.0),            num_atom(D, X).
+distance_mi_f(Dist) == [ X, ' miles ']             :-               D is round(Dist/1609.0),            num_atom(D, X).
+
+%%% distance measure mi/y
+distance_mi_y(Dist) == [ X, ' yards']              :- Dist < 241,   D is round(Dist/10.0/0.9144)*10,    num_atom(D, X).
+distance_mi_y(Dist) == [ X, ' yards']              :- Dist < 1300,  D is round(2*Dist/100.0/0.9144)*50, num_atom(D, X).
+distance_mi_y(Dist) == ['about 1 mile ']           :- Dist < 2414.
+distance_mi_y(Dist) == ['about ', X, ' miles ']    :- Dist < 16093, D is round(Dist/1609.0),            num_atom(D, X).
+distance_mi_y(Dist) == [ X, ' miles ']             :-               D is round(Dist/1609.0),            num_atom(D, X).
 
 
 %% resolve command main method
