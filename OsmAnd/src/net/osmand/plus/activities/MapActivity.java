@@ -129,8 +129,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private OsmandSettings settings;
 
 	private RouteAnimation routeAnimation = new RouteAnimation();
-
-	private boolean isMapLinkedToLocation = false;
+	// by default turn off causing unexpected movements due to network establishing
+	private static boolean isMapLinkedToLocation = false;
+	
 	private ProgressDialog startProgressDialog;
 	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
 	
@@ -234,6 +235,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	
+	@SuppressWarnings("rawtypes")
 	public Object getLastNonConfigurationInstanceByKey(String key) {
 		Object k = super.getLastNonConfigurationInstance();
 		if(k instanceof Map) {
@@ -283,9 +285,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
 
 		mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
-		// by default turn off causing unexpected movements due to network establishing
-		// best to show previous location
-		setMapLinkedToLocation(false);
 
 		// if destination point was changed try to recalculate route 
 		if (routingHelper.isFollowingMode() && (
@@ -325,6 +324,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			mapView.getAnimatedDraggingThread().startMoving(latLonToShow.getLatitude(), latLonToShow.getLongitude(), 
 					settings.getMapZoomToShow(), true);
 			
+		}
+		if(latLonToShow != null) {
+			// remember if map should come back to isMapLinkedToLocation=true
+			setMapLinkedToLocation(false);
+		} else {
+			setMapLinkedToLocation(isMapLinkedToLocation);
 		}
 
 		View progress = mapLayers.getMapInfoLayer().getProgressBar();
@@ -934,7 +939,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (!mapLayers.getMapInfoLayer().getBackToLocation().isEnabled()) {
 				mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(true);
 			}
-			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
+			if (settings.AUTO_FOLLOW_ROUTE.get() > 0 && routingHelper.isFollowingMode() && !uiHandler.hasMessages(AUTO_FOLLOW_MSG_ID)) {
 				backToLocationWithDelay(1);
 			}
 		}
@@ -1378,6 +1383,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	public static void launchMapActivityMoveToTop(Context activity){
+		// linkMapToLocation memory needs to be reset if coming back from search or similar action
 		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		activity.startActivity(newIntent);
@@ -1388,7 +1394,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return isMapLinkedToLocation;
 	}
 	
-	
 	public void setMapLinkedToLocation(boolean isMapLinkedToLocation) {
 		if(!isMapLinkedToLocation){
 			int autoFollow = settings.AUTO_FOLLOW_ROUTE.get();
@@ -1396,7 +1401,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				backToLocationWithDelay(autoFollow);
 			}
 		}
-		this.isMapLinkedToLocation = isMapLinkedToLocation;
+		MapActivity.isMapLinkedToLocation = isMapLinkedToLocation;
 	}
 
 	private void backToLocationWithDelay(int delay) {
