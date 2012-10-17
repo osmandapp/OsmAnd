@@ -1130,6 +1130,7 @@
 <string name="intermediate_point_too_far">Wegpunkt %1$s zu weit von der nächsten Straße entfernt.</string>
 <string name="tip_recent_changes_0_8_4_t">Änderungen in 0.8.4 : 
 	\n\t* Einige Fehlerbehebungen
+	\n\t* Karte behält nach Unterbrechungen Positionsbindung
 </string>
 <string name="context_menu_item_last_intermediate_point">Als letzten Wegpunkt setzen</string>
 <string name="context_menu_item_first_intermediate_point">Als ersten Wegpunkt setzen</string>

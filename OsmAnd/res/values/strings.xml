@@ -16,6 +16,7 @@
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
 	\n\t* Some bug fixes
+	\n\t* Map does not lose position lock after interruptions
     </string>
 	<string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :

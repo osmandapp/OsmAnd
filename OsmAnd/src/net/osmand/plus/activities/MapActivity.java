@@ -1383,7 +1383,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	public static void launchMapActivityMoveToTop(Context activity){
-		// linkMapToLocation memory needs to be reset if coming back from search or similar action
 		Intent newIntent = new Intent(activity, OsmandIntents.getMapActivity());
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 		activity.startActivity(newIntent);
