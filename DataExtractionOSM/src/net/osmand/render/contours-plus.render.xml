@@ -1,0 +1,49 @@
+<renderingStyle name="contours+" depends="default" defaultColor="#F5FFFF" version="1">
+
+	<!--
+		Depends on All-Purpose Renderer (by Hardy Mueller), v023
+	--> 
+
+	<!-- input exact layer, orderType check tag, value -->
+	<!-- point = 1, line = 2, polygon = 3 -->
+	<order>
+		<!-- Winter: Layers -->
+	</order>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
+	<text>
+	</text>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<point>
+	</point>
+	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+	<polygon>
+	</polygon>
+
+	<line>
+		<!-- Natural -->
+		<filter contourLines="11" tag="contour" value="elevation" color="#2Aff7c00" >
+			<groupFilter>
+				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=20m" minzoom="11" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=50m" minzoom="16" color="#2AD46903" strokeWidth="1.5"/>
+				<filter additional="contourtype=100m" minzoom="11" color="#2AD46903" strokeWidth="2"/>
+			</groupFilter>
+		</filter>
+		<filter contourLines="12" tag="contour" value="elevation" color="#2Aff7c00">
+			<groupFilter>
+				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=20m" minzoom="12" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=50m" minzoom="16" color="#2AD46903" strokeWidth="1.5"/>
+				<filter additional="contourtype=100m" minzoom="12" color="#2AD46903" strokeWidth="2"/>
+			</groupFilter>
+		</filter>
+		<filter contourLines="13" tag="contour" value="elevation" color="#2Aff7c00">
+			<groupFilter>
+				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=20m" minzoom="13" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=50m" minzoom="16" color="#2AD46903" strokeWidth="1.5"/>
+				<filter additional="contourtype=100m" minzoom="13" color="#2AD46903" strokeWidth="2"/>
+			</groupFilter>
+		</filter>
+	</line>
+</renderingStyle>
