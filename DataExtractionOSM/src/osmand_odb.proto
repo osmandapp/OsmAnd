@@ -506,6 +506,13 @@ message OsmAndRoutingIndex {
 	}
 
 	// encoded as fixed32 length delimited
+	optional RouteClusterBox clusterBox = 7;
+
+	// encoded as fixed32 length delimited
+	optional RouteClusterBox baseClusterBox = 8;
+
+
+	// encoded as fixed32 length delimited
 	repeated RouteDataBox rootBoxes = 3;
 
 	// encoded as fixed32 length delimited
@@ -537,4 +544,27 @@ message OsmAndRoutingIndex {
 
 	}
 
+	message RouteClusterBox {
+		optional int32 zoom = 1 ;
+		optional int32 tileX = 2 ;
+		optional int32 tileY = 3 ;
+
+		repeated RouteClusterBox children = 5;
+
+		repeated RouteClusterPoint parentCommonPoints = 7;
+		repeated RouteClusterPoint neighboorPoints = 8;
+	}
+
+	message RouteClusterPoint {
+		// related to previous point or to the parent if it is first point
+		optional int32 dx = 1;
+		optional int32 dy = 2;
+		optional bool directionInCluster = 3;
+		optional bytes types = 4;
+		optional sint64 roadId = 7;
+
+	}
+
 }
+
+

@@ -10,8 +10,10 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
 
 import javax.swing.AbstractAction;
@@ -71,12 +73,11 @@ public class MapClusterLayer implements MapPanelLayer {
 	
 	private class ClusteringContext {
 		// final
-		boolean ANIMATE_CLUSTERING = true;
+		boolean ANIMATE_CLUSTERING = false;
 		boolean BASEMAP_CLUSTERING = true;
 
-		int ZOOM_LIMIT = BASEMAP_CLUSTERING ? 15 : 13;
-		int TILE_BOUNDARIES = BASEMAP_CLUSTERING? 1 : 10;
-		int LOCAL_TILE_BOUNDARIES = BASEMAP_CLUSTERING? 4 : 2;
+		int ZOOM_LIMIT = BASEMAP_CLUSTERING ? 11 : 15;
+		int LOCAL_TILE_BOUNDARIES = BASEMAP_CLUSTERING? 4 : 4;
 		int zm = 31 - ZOOM_LIMIT;
 		
 		
@@ -105,10 +106,17 @@ public class MapClusterLayer implements MapPanelLayer {
 					List<RouteSegment> ways = clustering(clusterCtx, latitude, longitude, points);
 					for (RouteSegment s : ways) {
 						Way w = new Way(-1);
-						for (int i = 0; i < s.getRoad().getPointsLength(); i++) {
-							double lat = MapUtils.get31LatitudeY(s.getRoad().getPoint31YTile(i));
-							double lon = MapUtils.get31LongitudeX(s.getRoad().getPoint31XTile(i));
-							w.addNode(new Node(lat, lon, -1));
+						int st = s.getSegmentStart();
+						int end = s.getParentSegmentEnd();
+						if(st > end){
+							int t = st;
+							st = end;
+							end = t;
+						}
+						for (int i = st; i <= end; i++) {
+							net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(s.getRoad()
+									.getPoint31YTile(i)), MapUtils.get31LongitudeX(s.getRoad().getPoint31XTile(i)), -1);
+							w.addNode(n);
 						}
 						LatLon n = w.getLatLon();
 						points.registerObject(n.getLatitude(), n.getLongitude(), w);
@@ -162,16 +170,10 @@ public class MapClusterLayer implements MapPanelLayer {
 				}
 				for (RouteSegment segment : cache) {
 					Way way = new Way(-1);
-					boolean d = segment.getSegmentStart() <segment.getParentSegmentEnd() ;
-					for (int i = segment.getSegmentStart(); i != segment.getParentSegmentEnd(); ) {
+					for (int i = 0; i < segment.getRoad().getPointsLength(); i++) {
 						net.osmand.osm.Node n = new net.osmand.osm.Node(MapUtils.get31LatitudeY(segment.getRoad()
 								.getPoint31YTile(i)), MapUtils.get31LongitudeX(segment.getRoad().getPoint31XTile(i)), -1);
 						way.addNode(n);
-						if(d) {
-							i++;
-						} else {
-							i--;
-						}
 					}
 					way.putTag("color", "white");
 					LatLon n = way.getLatLon();
@@ -207,14 +209,28 @@ public class MapClusterLayer implements MapPanelLayer {
 	
 	
 	private List<RouteSegment> searchCluster(ClusteringContext cCtx, RoutingContext ctx, RouteSegment st) throws IOException {
-		Queue<RouteSegment> queue  = new LinkedList<RouteSegment>();
+		
 		List<RouteSegment> result = new ArrayList<BinaryRoutePlanner.RouteSegment>();
 		TLongHashSet visitedIds = new TLongHashSet();
-		queue.add(st);
-		RouteDataObject startRoad = st.getRoad();
 		
+		RouteDataObject startRoad = st.getRoad();
+		final int stx = startRoad.getPoint31XTile(st.getSegmentStart());
+		final int sty = startRoad.getPoint31YTile(st.getSegmentStart());
 		int tileX = startRoad.getPoint31XTile(st.getSegmentStart()) >> cCtx.zm;
 		int tileY = startRoad.getPoint31YTile(st.getSegmentStart()) >> cCtx.zm;
+						
+		Queue<RouteSegment> queue  = new PriorityQueue<RouteSegment>(50, new Comparator<RouteSegment>() {
+
+			@Override
+			public int compare(RouteSegment o1, RouteSegment o2) {
+				double d1 = MapUtils.squareDist31TileMetric(stx, sty, o1.getRoad().getPoint31XTile(o1.getSegmentStart()),
+						o1.getRoad().getPoint31YTile(o1.getSegmentStart()));
+				double d2 = MapUtils.squareDist31TileMetric(stx, sty, o2.getRoad().getPoint31XTile(o2.getSegmentStart()),
+						o2.getRoad().getPoint31YTile(o2.getSegmentStart()));
+				return Double.compare(d1, d2);
+			}
+		});
+		queue.add(st);
 		
 		while (!queue.isEmpty()) {
 			RouteSegment segment = queue.poll();
@@ -230,7 +246,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			}
 			cCtx.roadProcessed++;
 			if (cCtx.roadProcessed > 50) {
-				float ratio = (float) (queue.size() + cCtx.outOfTile + cCtx.outOfDistance) / cCtx.roadProcessed;
+				float ratio = (float) (queue.size() + cCtx.outOfTile + cCtx.outOfDistance) / cCtx.segmentsProcessed;
 				if (ratio < cCtx.minRatio) {
 					cCtx.minRatio = ratio;
 					cCtx.roadMinProcessed = cCtx.roadProcessed;
@@ -239,11 +255,10 @@ public class MapClusterLayer implements MapPanelLayer {
 			processSegment(cCtx, ctx, segment, queue, result, tileX, tileY, true);
 			processSegment(cCtx, ctx, segment, queue, result, tileX, tileY, false);
 		}
-		log.info("Current ratio " + ((float) (queue.size() + cCtx.outOfTile + cCtx.outOfDistance) / cCtx.roadProcessed) + " min ratio " + cCtx.minRatio
+		System.out.println("Current ratio " + ((float) (queue.size() + cCtx.outOfTile + cCtx.outOfDistance) / cCtx.segmentsProcessed) + " min ratio " + cCtx.minRatio
 				+ " min segments procesed " + cCtx.roadMinProcessed );
-		String res = "Processed " + cCtx.roadProcessed + " / " + cCtx.segmentsProcessed+ " and borders are " + cCtx.outOfTile + " out because of distance " + cCtx.outOfDistance;
+		String res = "Processed " + cCtx.roadProcessed + " / " + cCtx.segmentsProcessed+ " and borders are " + (cCtx.outOfTile + cCtx.outOfDistance) + " out because of distance " + cCtx.outOfDistance;
 		log.info(res);
-		System.out.println(res);
 		
 		return result;
 	}
@@ -277,13 +292,7 @@ public class MapClusterLayer implements MapPanelLayer {
 					addSegmentResult(result, segment, prev, segmentEnd);
 					return;
 				} 
-				if (isMajorHighway(cCtx, segment.getRoad().getHighway()) && (Math.abs(tX - tileX) > cCtx.TILE_BOUNDARIES || Math.abs(tY - tileY) < 
-						cCtx.TILE_BOUNDARIES)) {
-					cCtx.outOfDistance++;
-//					System.out.println("Res Major " + segment.getRoad());
-					addSegmentResult(result, segment, prev, segmentEnd);
-					return;
-				} else if(Math.abs(tX - tileX) > cCtx.LOCAL_TILE_BOUNDARIES || Math.abs(tY - tileY) > 
+				if(Math.abs(tX - tileX) > cCtx.LOCAL_TILE_BOUNDARIES || Math.abs(tY - tileY) > 
 						cCtx.LOCAL_TILE_BOUNDARIES) {
 //					System.out.println("Res " + segment.getRoad());
 					cCtx.outOfDistance++;
@@ -303,20 +312,6 @@ public class MapClusterLayer implements MapPanelLayer {
 		}
 	
 	public boolean notClusterAtAll(ClusteringContext clusterCtx, RouteDataObject obj) {
-		if(clusterCtx.BASEMAP_CLUSTERING) {
-			return false;
-		}
-		String highway = obj.getHighway();
-		if(highway != null) {
-			return highway.equals("trunk") ||  highway.equals("motorway") 
-				   || highway.equals("primary")
-				   || highway.equals("track");
-			
-		}
-		String rte = obj.getRoute();
-		if(rte != null) {
-			return rte.equals("ferry");
-		}
 		return false;
 	}
 	
