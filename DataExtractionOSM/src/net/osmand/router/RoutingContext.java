@@ -284,7 +284,7 @@ public class RoutingContext {
 				for (RouteDataObject ro : routes) {
 					for (int i = 0; i < ro.pointsX.length; i++) {
 						if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-							excludeDuplications.put(ro.id, ro);
+							excludeDuplications.put(calcRouteId(ro, i), ro);
 							RouteSegment segment = new RouteSegment(ro, i);
 							segment.next = original;
 							original = segment;
@@ -544,6 +544,10 @@ public class RoutingContext {
 		return usedMem1;
 	}
 	
+	
+	private static long calcRouteId(RouteDataObject o, int ind) {
+		return (o.getId() << 10) + ind;
+	}
 
 
 	public static class RoutingSubregionTile {
@@ -598,9 +602,9 @@ public class RoutingContext {
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
-					RouteDataObject toCmp = excludeDuplications.get(ro.id);
+					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
 					if (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) {
-						excludeDuplications.put(ro.id, ro);
+						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
 						s.next = original;
 						original = s;
@@ -613,18 +617,21 @@ public class RoutingContext {
 			RouteDataObject[] res = ctx.nativeLib.getDataObjects(searchResult, x31, y31);
 			if (res != null) {
 				for (RouteDataObject ro : res) {
-					RouteDataObject toCmp = excludeDuplications.get(ro.id);
-					boolean accept = ro != null && (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength());
-					if (ctx != null && accept) {
+					
+					boolean accept = ro != null;
+					if (ctx != null) {
 						accept = ctx.getRouter().acceptLine(ro);
 					}
 					if (accept) {
-						excludeDuplications.put(ro.id, ro);
 						for (int i = 0; i < ro.pointsX.length; i++) {
 							if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-								RouteSegment segment = new RouteSegment(ro, i);
-								segment.next = original;
-								original = segment;
+								RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, i));
+								if (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) {
+									RouteSegment segment = new RouteSegment(ro, i);
+									segment.next = original;
+									original = segment;
+									excludeDuplications.put(calcRouteId(ro, i), ro);
+								}
 							}
 						}
 					}
