@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Iskanje</string>
 	<string name="search_activity">Išči</string>
@@ -315,7 +315,7 @@
 	<string name="preferred_locale">Jezik</string>
 	<string name="preferred_locale_descr">Izberite jezik uporabniškega vmesnika</string>
 	<string name="map_widget_show_destination_arrow">Prikaži smer cilja</string>
-    <string name="enable_plugin_monitoring_services">"Omogoči vtičnike za nadzor (sledenje, sledenje v živo) za uporabljanje nadzornih storitev "</string>
+    <string name="enable_plugin_monitoring_services">Omogoči vtičnike za nadzor (sledenje, sledenje v živo) za uporabljanje nadzornih storitev</string>
     <string name="non_optimal_route_calculation">Izračunaj morda ne-optimalne poti na dolge razdalje</string>
     <string name="gps_not_available">Prosim da v nastavitvah omogočite GPS</string>
     <string name="map_widget_monitoring_services">Nadzorne storitve</string>
@@ -414,4 +414,10 @@
 	<string name="context_menu_item_add_parking_point">Označi kot parkirni položaj</string>
 	<string name="context_menu_item_delete_parking_point">Brisanje oznake parkiranja</string>
 	<string name="local_index_routing_data">Podatki usmerjanja</string>
+	<string name="search_position_favorites">Priljubljene…</string>
+	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih kart</string>
+	<string name="level_to_switch_vector_raster">Min. povečava za vektorske karte</string>
+	<string name="tip_location_sharing">Deljenje lokacija</string>
+	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: E-pošta, SMS(besedilo), ali pa samo kopiranje koordinate lokacij za odlagališče. "</string>
+	<string name="tip_favorites">Priljubljene točke</string>
 	</resources>
