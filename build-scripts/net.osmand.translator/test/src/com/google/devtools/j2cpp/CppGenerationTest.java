@@ -8,6 +8,7 @@ import org.eclipse.jdt.core.compiler.IProblem;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 
 import com.google.common.io.Files;
+
 import com.google.devtools.j2cpp.gen.CppHeaderGenerator;
 import com.google.devtools.j2cpp.gen.CppImplementationGenerator;
 

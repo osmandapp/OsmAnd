@@ -41,16 +41,18 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import com.google.devtools.j2objc.J2ObjC;
-import com.google.devtools.j2objc.Options;
-import com.google.devtools.j2objc.gen.HiddenFieldDetector;
+
+import com.google.devtools.j2cpp.J2ObjC;
+import com.google.devtools.j2cpp.Options;
 import com.google.devtools.j2cpp.gen.CppStatementGenerator;
-import com.google.devtools.j2objc.types.IOSMethod;
-import com.google.devtools.j2objc.types.ImplementationImportCollector;
-import com.google.devtools.j2objc.types.ImportCollector;
-import com.google.devtools.j2objc.types.Types;
+import com.google.devtools.j2cpp.gen.HiddenFieldDetector;
+import com.google.devtools.j2cpp.types.Types;
+import com.google.devtools.j2cpp.types.ImplementationImportCollector;
+import com.google.devtools.j2cpp.types.ImportCollector;
+import com.google.devtools.j2cpp.types.IOSMethod;
+import com.google.devtools.j2cpp.util.NameTable;
+
 import com.google.devtools.j2objc.util.ErrorReportingASTVisitor;
-import com.google.devtools.j2objc.util.NameTable;
 
 import com.google.devtools.j2cpp.gen.CppSourceFileGenerator;
 /**
@@ -485,7 +487,7 @@ public class CppImplementationGenerator extends CppSourceFileGenerator {
   @Override
   protected void printStaticConstructorDeclaration(MethodDeclaration m) {
     String className =
-        NameTable.javaTypeToObjC(Types.getMethodBinding(m).getDeclaringClass(), false);
+        NameTable.javaTypeToCpp(Types.getMethodBinding(m).getDeclaringClass(), false);
     StringBuffer sb = new StringBuffer();
     sb.append("{\nif (self == [" + className + " class]) {\n");
     @SuppressWarnings("unchecked")
@@ -613,7 +615,7 @@ public class CppImplementationGenerator extends CppSourceFileGenerator {
             if (initializer != null) {
               printConstant(name, initializer);
             } else {
-              printf("static %s %s;\n", NameTable.javaRefToObjC(f.getType()), name);
+              printf("static %s %s;\n", NameTable.javaRefToCpp(f.getType()), name);
             }
             hadStaticVar = true;
           }
@@ -639,7 +641,7 @@ public class CppImplementationGenerator extends CppSourceFileGenerator {
 
           String name = NameTable.getName(var.getName());
           ITypeBinding type = Types.getTypeBinding(field.getType());
-          String typeString = NameTable.javaRefToObjC(type);
+          String typeString = NameTable.javaRefToCpp(type);
           if (!typeString.endsWith("*")) {
             typeString += " ";
           }
@@ -660,7 +662,7 @@ public class CppImplementationGenerator extends CppSourceFileGenerator {
             }
           }
 
-          String objCFieldName = NameTable.javaFieldToObjC(name);
+          String objCFieldName = NameTable.javaFieldToCpp(name);
 
           // Getter
           if (!noGetter) {

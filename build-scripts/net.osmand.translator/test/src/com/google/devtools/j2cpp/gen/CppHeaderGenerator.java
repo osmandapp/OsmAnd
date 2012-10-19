@@ -31,14 +31,15 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.devtools.j2cpp.util.NameTableCpp;
-import com.google.devtools.j2objc.util.NameTable;
-import com.google.devtools.j2objc.J2ObjC;
-import com.google.devtools.j2objc.Options;
-import com.google.devtools.j2objc.types.HeaderImportCollector;
-import com.google.devtools.j2objc.types.IOSMethod;
-import com.google.devtools.j2objc.types.ImportCollector;
-import com.google.devtools.j2objc.types.Types;
+
+import com.google.devtools.j2cpp.J2ObjC;
+import com.google.devtools.j2cpp.Options;
+import com.google.devtools.j2cpp.util.NameTable;
+import com.google.devtools.j2cpp.types.Types;
+import com.google.devtools.j2cpp.types.IOSMethod;
+import com.google.devtools.j2cpp.types.HeaderImportCollector;
+import com.google.devtools.j2cpp.types.ImportCollector;
+
 import com.google.devtools.j2objc.util.ErrorReportingASTVisitor;
 import com.google.devtools.j2objc.util.UnicodeUtils;
 
@@ -80,7 +81,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 
 	  @Override
 	  public void generate(TypeDeclaration node) {
-	    String typeName = NameTableCpp.getFullName(node);
+	    String typeName = NameTable.getFullName(node);
 	    String superName = NameTable.getSuperClassName(node);
 
 	    printConstantDefines(node);
@@ -269,7 +270,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	  }
 
 	  protected String createForwardDeclaration(String typeName, boolean isInterface) {
-	    return String.format("%s %s;", isInterface ? "TODO: change to abstract class \ninterface" : "class", NameTableCpp.basicTypeToCpp(typeName));
+	    return String.format("%s %s;", isInterface ? "TODO: change to abstract class \ninterface" : "class", typeName);
 	  }
 
 	  protected String createImport(ImportCollector.Import imp) {
@@ -432,7 +433,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	          print("__weak ");
 	        }
 	        ITypeBinding varType = Types.getTypeBinding(vars.get(0));
-	        String cppType = NameTable.javaRefToObjC(varType);
+	        String cppType = NameTable.javaRefToCpp(varType);
 	        boolean needsAsterisk = !varType.isPrimitive() && !cppType.matches("id|id<.*>|Class");
 	        if (needsAsterisk && cppType.endsWith(" *")) {
 	          // Strip pointer from type, as it will be added when appending fragment.
@@ -447,7 +448,7 @@ public class CppHeaderGenerator extends CppSourceFileGenerator{
 	            print('*');
 	          }
 	          String name = NameTable.getName(f.getName());
-	          print(NameTable.javaFieldToObjC(name));
+	          print(NameTable.javaFieldToCpp(name));
 	          if (it.hasNext()) {
 	            print(", ");
 	          }

@@ -41,12 +41,10 @@ import org.eclipse.jdt.core.dom.Statement;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
+import com.google.devtools.j2cpp.gen.CppImplementationGenerator;
 import com.google.devtools.j2cpp.gen.CppStatementGenerator;
-import com.google.devtools.j2objc.J2ObjC;
-import com.google.devtools.j2objc.J2ObjC.Language;
-import com.google.devtools.j2objc.Options;
-import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
-import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
+import com.google.devtools.j2cpp.gen.CppHeaderGenerator;
+
 import com.google.devtools.j2objc.gen.SourceBuilder;
 
 /**
@@ -284,8 +282,8 @@ public abstract class GenerationTest extends TestCase {
     CompilationUnit unit = translateType(typeName, source);
     assertNoCompilationErrors(unit);
     String sourceName = typeName + ".java";
-    ObjectiveCHeaderGenerator.generate(sourceName, source, unit);
-    ObjectiveCImplementationGenerator.generate(sourceName, Language.OBJECTIVE_C, unit, source);
+    CppHeaderGenerator.generate(sourceName, source, unit);
+    CppImplementationGenerator.generate(sourceName, unit, source);
     return getTranslatedFile(fileName);
   }
 

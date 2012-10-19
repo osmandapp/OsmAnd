@@ -18,12 +18,12 @@ import org.eclipse.jdt.core.dom.TypeDeclaration;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 import com.google.common.collect.Lists;
-import com.google.devtools.j2cpp.util.NameTableCpp;
-import com.google.devtools.j2objc.gen.SourceFileGenerator;
-import com.google.devtools.j2objc.types.IOSMethod;
-import com.google.devtools.j2objc.types.IOSParameter;
-import com.google.devtools.j2objc.types.Types;
-import com.google.devtools.j2objc.util.NameTable;
+
+import com.google.devtools.j2cpp.util.NameTable;
+import com.google.devtools.j2cpp.types.Types;
+import com.google.devtools.j2cpp.types.IOSMethod;
+import com.google.devtools.j2cpp.types.IOSParameter;
+import com.google.devtools.j2cpp.gen.SourceFileGenerator;
 
 public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 
@@ -124,7 +124,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	      baseDeclaration = "- (NSUInteger)hash";
 	    } else {
 	      baseDeclaration = String.format("%s (%s)%s", isStatic ? "static" : "",
-	          NameTableCpp.javaRefToCpp(method.getReturnType2()), mappedMethod.getName());
+	          NameTable.javaRefToCpp(method.getReturnType2()), mappedMethod.getName());
 	    }
 
 	    sb.append(baseDeclaration);
@@ -163,7 +163,7 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	    boolean isStatic = Modifier.isStatic(m.getModifiers());
 	    IMethodBinding binding = Types.getMethodBinding(m);
 	    String  methodName = NameTable.getName(binding);
-	    String baseDeclaration = String.format(" %s %s %s", isStatic ? "static " : "", NameTableCpp.basicTypeToCpp(NameTableCpp.javaRefToCpp(m.getReturnType2())), methodName);
+	    String baseDeclaration = String.format(" %s %s %s", isStatic ? "static " : "", NameTable.javaRefToCpp(m.getReturnType2()), methodName);
 	    sb.append(baseDeclaration);
 	    @SuppressWarnings("unchecked")
 	    List<SingleVariableDeclaration> params = m.parameters(); // safe by definition
@@ -204,8 +204,8 @@ public abstract class CppSourceFileGenerator extends SourceFileGenerator {
 	        boolean isTypeVariable = typeBinding.isTypeVariable();
 	        String type = isTypeVariable ? 
 	        		NameTable.getParameterTypeName(NameTable.ID_TYPE, typeBinding) : 
-	        		NameTable.getParameterTypeName(NameTable.javaTypeToObjC(param.getType(), true), typeBinding);
-	        sb.append(" ").append(NameTableCpp.basicTypeToCpp(type)).append(typeBinding.isPrimitive() ? "" : "*").append(" ").append(fieldName);
+	        		NameTable.getParameterTypeName(NameTable.javaTypeToCpp(param.getType(), true), typeBinding);
+	        sb.append(" ").append(type).append(typeBinding.isPrimitive() ? "" : "*").append(" ").append(fieldName);
 	        if (i<nParams-1) {
 	        	sb.append(",");
 	        } else {

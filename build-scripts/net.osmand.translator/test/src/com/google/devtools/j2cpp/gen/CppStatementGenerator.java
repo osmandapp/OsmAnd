@@ -18,19 +18,20 @@ package com.google.devtools.j2cpp.gen;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Lists;
-import com.google.devtools.j2cpp.util.NameTableCpp;
-import com.google.devtools.j2objc.J2ObjC;
-import com.google.devtools.j2objc.Options;
+
+import com.google.devtools.j2cpp.types.GeneratedMethodBinding;
+import com.google.devtools.j2cpp.types.Types;
+import com.google.devtools.j2cpp.J2ObjC;
+import com.google.devtools.j2cpp.Options;
+import com.google.devtools.j2cpp.util.NameTable;
+import com.google.devtools.j2cpp.types.IOSArrayTypeBinding;
+import com.google.devtools.j2cpp.types.IOSMethod;
+import com.google.devtools.j2cpp.types.IOSMethodBinding;
+import com.google.devtools.j2cpp.types.IOSTypeBinding;
+
 import com.google.devtools.j2objc.gen.SourceBuilder;
-import com.google.devtools.j2objc.types.GeneratedMethodBinding;
-import com.google.devtools.j2objc.types.IOSArrayTypeBinding;
-import com.google.devtools.j2objc.types.IOSMethod;
-import com.google.devtools.j2objc.types.IOSMethodBinding;
-import com.google.devtools.j2objc.types.IOSTypeBinding;
-import com.google.devtools.j2objc.types.Types;
 import com.google.devtools.j2objc.util.ASTNodeException;
 import com.google.devtools.j2objc.util.ErrorReportingASTVisitor;
-import com.google.devtools.j2objc.util.NameTable;
 import com.google.devtools.j2objc.util.UnicodeUtils;
 
 import org.eclipse.jdt.core.dom.AST;
@@ -170,7 +171,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
     if (binding.isPrimitive()) {
       return Types.getPrimitiveTypeName(binding);
     }
-    return Types.mapSimpleTypeName(NameTableCpp.javaTypeToCpp(binding, true));
+    return Types.mapSimpleTypeName(NameTable.javaTypeToCpp(binding, true));
   }
 
   private void printArguments(IMethodBinding method, List<Expression> args) {
@@ -182,7 +183,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
         Expression arg = args.get(i);
         printArgument(method, arg, i);
         if (i + 1 < nArgs) {
-          buffer.append(' ');
+          buffer.append(", ");
         }
       }
     }
@@ -241,7 +242,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
     ITypeBinding binding = Types.getTypeBinding(arrayInit);
     assert binding.isArray();
     ITypeBinding componentType = binding.getComponentType();
-    String componentTypeName = NameTableCpp.javaRefToCpp(componentType);
+    String componentTypeName = NameTable.javaRefToCpp(componentType);
     buffer.append(String.format("(%s[])",
         componentType.isPrimitive() ? componentTypeName : "id"));
     arrayInit.accept(this);
@@ -630,7 +631,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
         }
         buffer.append(" set");
         buffer.append(NameTable.capitalize(var.getName()));
-        String typeName = NameTableCpp.javaTypeToCpp(var.getType(), false);
+        String typeName = NameTable.javaTypeToCpp(var.getType(), false);
         String param = CppSourceFileGenerator.parameterKeyword(typeName, var.getType());
         buffer.append(NameTable.capitalize(param));
         buffer.append(':');
@@ -755,7 +756,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
           lhs instanceof SimpleName && isProperty((SimpleName) lhs) &&
           !isNewAssignment(lhs.getParent()) && !Types.hasWeakAnnotation(var.getDeclaringClass())) {
         String name = NameTable.getName((SimpleName) lhs);
-        String nativeName = NameTable.javaFieldToObjC(name);
+        String nativeName = NameTable.javaFieldToCpp(name);
         buffer.append(String.format("([%s autorelease], ", nativeName));
         needClosingParen = true;
       }
@@ -856,7 +857,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
   @Override
   public boolean visit(CastExpression node) {
     buffer.append("(");
-    buffer.append(NameTableCpp.javaRefToCpp(node.getType()));
+    buffer.append(NameTable.javaRefToCpp(node.getType()));
     buffer.append(") ");
     node.getExpression().accept(this);
     return false;
@@ -1009,7 +1010,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
       if (emitAutoreleasePool) {
         buffer.append("NSAutoreleasePool *pool__ = [[NSAutoreleasePool alloc] init];\n");
       }
-      buffer.append(NameTableCpp.javaRefToCpp(var.getType()));
+      buffer.append(NameTable.javaRefToCpp(var.getType()));
       buffer.append(' ');
       buffer.append(varName);
       buffer.append(" = [");
@@ -1034,7 +1035,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
       buffer.append("}\n}\n");
     } else {
       // var must be an instance of an Iterable class.
-      String objcType = NameTableCpp.javaRefToCpp(var.getType());
+      String objcType = NameTable.javaRefToCpp(var.getType());
       buffer.append("{\nid<JavaLangIterable> array__ = (id<JavaLangIterable>) ");
       buffer.append(arrayExpr);
       buffer.append(";\n");
@@ -1088,7 +1089,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
       // Since arrays are untyped in Obj-C, add a cast of its element type.
       ArrayAccess access = (ArrayAccess) expr;
       ITypeBinding elementType = Types.getTypeBinding(access.getArray()).getElementType();
-      buffer.append(String.format("((%s) ", NameTableCpp.javaRefToCpp(elementType)));
+      buffer.append(String.format("((%s) ", NameTable.javaRefToCpp(elementType)));
       expr.accept(this);
       buffer.append(')');
     } else {
@@ -1348,7 +1349,10 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
     // Object receiving the message, or null if it's a method in this class.
     Expression receiver = node.getExpression();
     ITypeBinding receiverType = receiver != null ? Types.getTypeBinding(receiver) : null;
-
+    buffer.append(' ');
+    if ((receiverType != null) && (receiver instanceof SimpleName)) {
+    	buffer.append(((SimpleName)receiver).getIdentifier()).append('.');
+    } 
     if (Types.isFunction(binding)) {
       buffer.append(methodName);
       buffer.append("(");
@@ -1392,7 +1396,6 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
         }
       }
       ITypeBinding typeBinding = binding.getDeclaringClass();
-//      buffer.append('[');
 
       if (receiver != null) {
         boolean castPrinted = false;
@@ -1434,41 +1437,20 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
 //          buffer.append("self");
 //        }
       }
-      buffer.append(' ');
       if (binding instanceof IOSMethodBinding) {
         buffer.append(binding.getName());
       } else {
         buffer.append(methodName);
       }
+      buffer.append("(");
       printArguments(binding, node.arguments());
-//      buffer.append(']');
+      buffer.append(")");
       if (castReturnValue) {
         buffer.append(')');
       }
     }
     invocations.pop();
     return false;
-  }
-
-  private void printInterfaceGetClass(MethodInvocation node, Expression receiver) {
-    buffer.append("[(id<JavaObject>) ");
-    printNilCheck(receiver, true);
-    buffer.append(" getClass]");
-  }
-
-  /**
-   * Class.isAssignableFrom() can test protocols as well as classes, so which
-   * case needs to be detected and generated separately.
-   */
-  private void printIsAssignableFromExpression(MethodInvocation node) {
-    assert !node.arguments().isEmpty();
-    Expression firstExpression = node.getExpression();
-    Expression secondExpression = (Expression) node.arguments().get(0);
-    buffer.append('[');
-    firstExpression.accept(this);
-    buffer.append(" isAssignableFrom:");
-    secondExpression.accept(this);
-    buffer.append(']');
   }
 
   private boolean printCast(ITypeBinding type) {
@@ -1488,14 +1470,14 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
     }
     buffer.append("((");
     if (type.isInterface()) {
-      buffer.append("id<");
+//      buffer.append("id<");
       buffer.append(NameTable.getFullName(type));
-      buffer.append('>');
+//      buffer.append('>');
     } else {
       if (type.getName().equals("NSObject")) {
-        buffer.append("NSObject *");
+//        buffer.append("NSObject *");
       } else {
-        buffer.append(NameTableCpp.javaRefToCpp(type));
+        buffer.append(NameTable.javaRefToCpp(type));
       }
     }
     buffer.append(") ");
@@ -1615,7 +1597,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
 
   @Override
   public boolean visit(PrimitiveType node) {
-    buffer.append(NameTable.primitiveTypeToObjC(node));
+    buffer.append(NameTable.primitiveTypeToCpp(node));
     return false;
   }
 
@@ -1671,7 +1653,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
     if (isPublic) {
       buffer.append('[');
       ITypeBinding declaringClass = var.getDeclaringClass();
-      String receiver = NameTableCpp.javaTypeToCpp(declaringClass, true);
+      String receiver = NameTable.javaTypeToCpp(declaringClass, true);
       buffer.append(receiver);
       buffer.append(' ');
     }
@@ -1682,7 +1664,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
         name = NameTable.getStaticAccessorName(var.getName());
       }
     } else if (var.isEnumConstant()) {
-      buffer.append(NameTableCpp.javaTypeToCpp(var.getDeclaringClass(), false));
+      buffer.append(NameTable.javaTypeToCpp(var.getDeclaringClass(), false));
       buffer.append("_");
     } else if (!name.endsWith("_")) {
       name = NameTable.getStaticVarQualifiedName(owningType, name);
@@ -1776,7 +1758,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
       }
       if (needsCast) {
         buffer.append('(');
-        buffer.append(NameTableCpp.javaRefToCpp(expressionType));
+        buffer.append(NameTable.javaRefToCpp(expressionType));
         buffer.append(") ");
       }
       expr.accept(this);
@@ -1800,7 +1782,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
       } else {
         String name = NameTable.getName(node);
         if (Options.inlineFieldAccess() && isProperty(node)) {
-          buffer.append(NameTable.javaFieldToObjC(name));
+          buffer.append(NameTable.javaFieldToCpp(name));
         } else {
           if (isProperty(node)) {
             buffer.append("self.");
@@ -1817,7 +1799,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
       if (binding instanceof IOSTypeBinding) {
         buffer.append(binding.getName());
       } else {
-        buffer.append(NameTableCpp.javaTypeToCpp(((ITypeBinding) binding), false));
+        buffer.append(NameTable.javaTypeToCpp(((ITypeBinding) binding), false));
       }
     } else {
       buffer.append(node.getIdentifier());
@@ -1852,7 +1834,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
 
   @Override
   public boolean visit(SingleVariableDeclaration node) {
-    buffer.append(NameTableCpp.javaRefToCpp(node.getType()));
+    buffer.append(NameTable.javaRefToCpp(node.getType()));
     if (node.isVarargs()) {
       buffer.append("...");
     }
@@ -2089,7 +2071,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
 
   @Override
   public boolean visit(VariableDeclarationExpression node) {
-    buffer.append(NameTableCpp.javaRefToCpp(node.getType()));
+    buffer.append(NameTable.javaRefToCpp(node.getType()));
     buffer.append(" ");
     for (Iterator<?> it = node.fragments().iterator(); it.hasNext(); ) {
       VariableDeclarationFragment f = (VariableDeclarationFragment) it.next();
@@ -2117,7 +2099,7 @@ public class CppStatementGenerator extends ErrorReportingASTVisitor {
     List<VariableDeclarationFragment> vars = node.fragments(); // safe by definition
     assert !vars.isEmpty();
     ITypeBinding binding = Types.getTypeBinding(vars.get(0));
-    String objcType = NameTableCpp.javaRefToCpp(binding);
+    String objcType = NameTable.javaRefToCpp(binding);
     boolean needsAsterisk = !binding.isPrimitive() &&
         !(objcType.equals(NameTable.ID_TYPE) || objcType.matches("id<.*>"));
     if (needsAsterisk && objcType.endsWith(" *")) {

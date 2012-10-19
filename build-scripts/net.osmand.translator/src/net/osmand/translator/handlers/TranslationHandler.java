@@ -26,11 +26,11 @@ import org.eclipse.jface.text.Document;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.google.devtools.j2objc.util.NameTable;
-import com.google.devtools.j2objc.J2ObjC;
-import com.google.devtools.j2objc.Options;
-import com.google.devtools.j2objc.gen.ObjectiveCHeaderGenerator;
-import com.google.devtools.j2objc.gen.ObjectiveCImplementationGenerator;
+import com.google.devtools.j2cpp.J2ObjC;
+import com.google.devtools.j2cpp.Options;
+import com.google.devtools.j2cpp.gen.CppHeaderGenerator;
+import com.google.devtools.j2cpp.gen.CppImplementationGenerator;
+import com.google.devtools.j2cpp.util.NameTable;
 import com.google.devtools.j2objc.sym.Symbols;
 import com.google.devtools.j2objc.types.Types;
 import com.google.devtools.j2objc.util.ASTNodeException;
@@ -71,8 +71,8 @@ public class TranslationHandler {
 	        }
 
 	       System.out.println("writing output file(s) to " + Options.getOutputDirectory().getAbsolutePath());
-	       ObjectiveCHeaderGenerator.generate(inFile, source, unit);
-	       ObjectiveCImplementationGenerator.generate(inFile, Options.getLanguage(), unit, source);
+	       CppHeaderGenerator.generate(inFile, source, unit);
+//	       CppImplementationGenerator.generate(inFile, Options.getLanguage(), unit, source);
 	      }
 	    } catch (ASTNodeException e) {
 	      e.printStackTrace();
