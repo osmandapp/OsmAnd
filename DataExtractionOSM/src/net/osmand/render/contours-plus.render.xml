@@ -1,26 +1,30 @@
-<renderingStyle name="contours+" depends="default" defaultColor="#F5FFFF" version="1">
+<renderingStyle name="contours+" depends="default" defaultColor="#f1eae4" version="1">
 
 	<!--
 		Depends on All-Purpose Renderer (by Hardy Mueller), v023
 	--> 
 
-	<!-- input exact layer, orderType check tag, value -->
-	<!-- point = 1, line = 2, polygon = 3 -->
+
 	<order>
-		<!-- Winter: Layers -->
 	</order>
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom], textLength, ref, textOrder (default=100) -->
+
+
 	<text>
 	</text>
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+
+
 	<point>
 	</point>
-	<!-- PRIORITY Input to filter : tag, value, zoom [minzoom, maxzoom] -->
+
+
 	<polygon>
 	</polygon>
 
+
 	<line>
-		<!-- Natural -->
+		<!-- Natural: Advanced contour line rendering for 10m, 20m, 50m, 100m resolutions -->
+		<!-- OPEN1: Try standard USGS pattern only emphasizing 100's, or also 50's ? -->
+		<!-- OPEN2: Final color selection: All lines in same orange/brown -->
 		<filter contourLines="11" tag="contour" value="elevation" color="#2Aff7c00" >
 			<groupFilter>
 				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
