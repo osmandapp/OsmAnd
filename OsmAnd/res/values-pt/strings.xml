@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -252,7 +252,7 @@
   <string name="update_existing">Modificar</string>
   <string name="only_show">Mostrar apenas</string>
   <string name="follow">Siga</string>
-  <string name="recalculate_route_to_your_location">Recalculando a rota a partir da sua posição:</string>
+  <string name="recalculate_route_to_your_location">Modo de transporte:</string>
   <string name="mark_final_location_first">Por favor, primeiro selecione um destino</string>
   <string name="get_directions">Navegação</string>
   <string name="gps_status_app_not_found">A aplicação de gestão de GPS não está instalada. Procurar no Market?</string>
@@ -756,7 +756,7 @@
   <string name="select_tile_source_to_install">Selecione os mapas a serem instalados ou atualizados</string>
   <string name="internet_not_available">Internet connection required for operation is not available</string>
   <string name="install_more">Instalar mais...</string>
-  <string name="tip_update_index">Update of Offline Data</string>
+  <string name="tip_update_index">Atualização de dados offline</string>
   <string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
   <string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
   <string name="level_to_switch_vector_raster">Min. vector zoom level</string>
@@ -875,7 +875,7 @@
   <string name="osmand_parking_minutes">Minutes</string>
   <string name="osmand_parking_position_description_add_time">The car was parked at:</string>
   <string name="use_compass_navigation_descr">Use compass in navigation when diretion is not detected</string>
-  <string name="use_compass_navigation">Use compass</string>
+  <string name="use_compass_navigation">Usar bússola</string>
   <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
   <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
   <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
@@ -885,10 +885,10 @@
   <string name="show_speed_limits">Show speed limits</string>
   <string name="avoid_toll_roads">Avoid toll roads</string>
   <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
-  <string name="map_widget_top_text">Street name</string>
+  <string name="map_widget_top_text">Rua</string>
   <string name="map_widget_config">Configuration</string>
   <string name="map_widget_map_select">Map selection</string>
-  <string name="map_widget_back_to_loc">Where am I</string>
+  <string name="map_widget_back_to_loc">Onde estou</string>
   <string name="map_widget_lock_screen">Lock screen</string>
   <string name="map_widget_compass">Compass</string>
   <string name="map_widget_top_stack">Status bar:</string>
@@ -912,20 +912,15 @@
   <string name="bg_service_screen_unlock">Unlock screen</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
-<string name="show_warnings_title">Mostrar os alarmes...</string>
+<string name="show_warnings_title">Mostrar alarmes…</string>
 <string name="show_warnings_descr">Mostrar os limites de velocidade, câmeras de velocidade, redutores de velocidade, e outros avisos</string>
 <string name="avoid_motorway">Sem auto-estradas</string>
-<string name="tip_recent_changes_0_8_3_t">Alterações na 0.8.3:
-\n\t* orientação de rota Melhorada
-\n\t* Evitar auto-estradas opção
-\n\t* Ciclovia = faixa de exibição
-\n\t* melhor acabamento UI (ícones)
-\n\t* Algumas correções de bugs</string>
+<string name="tip_recent_changes_0_8_3_t">Alterações na 0.8.3:\n\t* Waypoints\n\t* Melhoria na orientação de rota\n\t* Adicionada opção que permite evitar auto-estradas ao construir a rota\n\t* Adicionado mais um tipo de via para bicicletas no mapa (Cycleway=track)\n\t* Correções de erros</string>
 <string name="snap_to_road_descr">Encaixe posição de estradas durante a navegação</string>
 <string name="snap_to_road">Ajustar à estrada</string>
 <string name="osmand_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
-<string name="filterpoi_activity">Criar POI filtro</string>
+<string name="filterpoi_activity">Criar filtro de POI</string>
 <string name="select_navigation_mode">Selecione o modo de transporte</string>
 <string name="day_night_info_description">Nascer do sol: %1$s \nPôr do sol: %2$s</string>
 <string name="day_night_info">Dia/noite Informações</string>
@@ -934,11 +929,11 @@
 <string name="map_widget_renderer">Estilo de renderização</string>
 <string name="live_monitoring_mode_off">Iniciar\n viver rastreamento</string>
 <string name="live_monitoring_mode_on">Parar\n viver rastreamento</string>
-<string name="layer_map_appearance">Configurar tela...</string>
+<string name="layer_map_appearance">Configurar tela…</string>
 <string name="show_lanes">Mostrar pistas</string>
 <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
 <string name="avoid_ferries">Evite ferries</string>
-<string name="avoid_in_routing_title">Evitar...</string>
+<string name="avoid_in_routing_title">Evitar…</string>
 <string name="avoid_in_routing_descr">Evitar estradas com portagem, não pavimentadas, balsas</string>
 <string name="map_widget_fluorescent">Rotas fluorescentes</string>
 <string name="map_widget_show_ruler">Governante</string>
@@ -973,4 +968,39 @@ Limitações desta versão gratuita de OsmAnd:
 - Sem acesso a Wikipedia off-line POIs
 
 OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depende ainda contribuições financeiras para financiar o desenvolvimento e testdriving novas funcionalidades. Por favor, considere a compra de OsmAnd, ou financiar novas funcionalidades específicas ou fazer uma doação geral sobre osmand.net.</string>
-</resources>
+<string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
+	<string name="rendering_attr_roadColors_name">Esquema de cores</string>
+    <string name="map_widget_show_destination_arrow">Exibir a direção do destino</string>
+    <string name="enable_plugin_monitoring_services">Habilitar plugin de rastreamento para utilizar serviços de registro de posição (log, acompanhamento ao vivo)</string>
+    <string name="non_optimal_route_calculation">Calcular rota possivelmente não-ideal em longas distâncias</string>
+    <string name="gps_not_available">Ative o GPS nas configurações</string>
+    <string name="map_widget_monitoring_services">Serviços de registro</string>
+	<string name="no_route">Sem rota</string>
+	<string name="delete_target_point">Remover o waypoint</string>
+	<string name="target_point">Waypoint %1$s</string>
+    <string name="intermediate_point">Waypoint %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Adicionar como último waypoint</string>
+    <string name="context_menu_item_first_intermediate_point">Adicionar como primeiro waypoint</string>
+    <string name="add_as_last_destination_point">Adicionar como último ponto de passagem</string>
+    <string name="add_as_first_destination_point">Adicionar como primeiro ponto de passagem</string>
+    <string name="replace_destination_point">Substituir o ponto de destino</string>
+    <string name="new_destination_point_dialog">Já existe um ponto de destino definido.</string>
+    <string name="target_points">Pontos de passagens</string>
+    <string name="intermediate_point_too_far">Waypoint %1$s distante da estrada mais próxima.</string>
+    <string name="btn_advanced_mode">Modo avançado...</string>
+    <string name="poi_filter_parking">Estacionamento</string>
+    <string name="poi_filter_emergency">Emergência</string>
+    <string name="poi_filter_public_transport">Transporte público</string>
+    <string name="poi_filter_entertainment">Entretenimento</string>
+    <string name="poi_filter_accomodation">Alojamento</string>
+    <string name="poi_filter_restaurants">Restaurantes</string>
+    <string name="poi_filter_sightseeing">Turismo</string>
+    <string name="tip_recent_changes_0_8_4_t">"Mudanças no 0.8.4:\n\t* Algumas correções de bugs\n\t* Mapa não perde a posição de bloqueio após interrupções "</string>
+	<string name="context_menu_item_intermediate_point">Adicionar como ponto de passagem</string>
+    <string name="arrived_at_intermediate_point">Você chegou ao seu ponto de passagem</string>
+    <string name="map_widget_intermediate_distance">Ponto de passagem</string>
+    <string name="ending_point_too_far">Destino muito longe da estrada mais próxima.</string>
+    <string name="btn_add_tag">Adicionar tag</string>
+    <string name="local_openstreetmap_items"/>
+	<string name="local_index_items"/>
+	</resources>
