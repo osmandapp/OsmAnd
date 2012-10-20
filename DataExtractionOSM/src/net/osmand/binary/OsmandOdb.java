@@ -20963,6 +20963,1939 @@ public final class OsmandOdb {
       // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteDataBlock)
     }
     
+    public static final class RouteBorderBox extends
+        com.google.protobuf.GeneratedMessage {
+      // Use RouteBorderBox.newBuilder() to construct.
+      private RouteBorderBox() {
+        initFields();
+      }
+      private RouteBorderBox(boolean noInit) {}
+      
+      private static final RouteBorderBox defaultInstance;
+      public static RouteBorderBox getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      @Override
+	public RouteBorderBox getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderBox_descriptor;
+      }
+      
+      @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderBox_fieldAccessorTable;
+      }
+      
+      // required .OsmAndTileBox boundaries = 1;
+      public static final int BOUNDARIES_FIELD_NUMBER = 1;
+      private boolean hasBoundaries;
+      private net.osmand.binary.OsmandOdb.OsmAndTileBox boundaries_;
+      public boolean hasBoundaries() { return hasBoundaries; }
+      public net.osmand.binary.OsmandOdb.OsmAndTileBox getBoundaries() { return boundaries_; }
+      
+      // optional uint32 tileZoomToSplit = 2;
+      public static final int TILEZOOMTOSPLIT_FIELD_NUMBER = 2;
+      private boolean hasTileZoomToSplit;
+      private int tileZoomToSplit_ = 0;
+      public boolean hasTileZoomToSplit() { return hasTileZoomToSplit; }
+      public int getTileZoomToSplit() { return tileZoomToSplit_; }
+      
+      // repeated .OsmAndRoutingIndex.RouteBorderLine borderLines = 6;
+      public static final int BORDERLINES_FIELD_NUMBER = 6;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine> borderLines_ =
+        java.util.Collections.emptyList();
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine> getBorderLinesList() {
+        return borderLines_;
+      }
+      public int getBorderLinesCount() { return borderLines_.size(); }
+      public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine getBorderLines(int index) {
+        return borderLines_.get(index);
+      }
+      
+      // repeated .OsmAndRoutingIndex.RouteBorderPointsBlock blocks = 7;
+      public static final int BLOCKS_FIELD_NUMBER = 7;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock> blocks_ =
+        java.util.Collections.emptyList();
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock> getBlocksList() {
+        return blocks_;
+      }
+      public int getBlocksCount() { return blocks_.size(); }
+      public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock getBlocks(int index) {
+        return blocks_.get(index);
+      }
+      
+      private void initFields() {
+        boundaries_ = net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
+      }
+      @Override
+	public final boolean isInitialized() {
+        if (!hasBoundaries) return false;
+        if (!getBoundaries().isInitialized()) return false;
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine element : getBorderLinesList()) {
+          if (!element.isInitialized()) return false;
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock element : getBlocksList()) {
+          if (!element.isInitialized()) return false;
+        }
+        return true;
+      }
+      
+      @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (hasBoundaries()) {
+          output.writeMessage(1, getBoundaries());
+        }
+        if (hasTileZoomToSplit()) {
+          output.writeUInt32(2, getTileZoomToSplit());
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine element : getBorderLinesList()) {
+          output.writeMessage(6, element);
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock element : getBlocksList()) {
+          output.writeMessage(7, element);
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      @Override
+	public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasBoundaries()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(1, getBoundaries());
+        }
+        if (hasTileZoomToSplit()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeUInt32Size(2, getTileZoomToSplit());
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine element : getBorderLinesList()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(6, element);
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock element : getBlocksList()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(7, element);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      @Override
+	public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      @Override
+	public Builder toBuilder() { return newBuilder(this); }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox result;
+        
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.newBuilder()
+        private Builder() {}
+        
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox();
+          return builder;
+        }
+        
+        @Override
+		protected net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox internalGetResult() {
+          return result;
+        }
+        
+        @Override
+		public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
+          result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox();
+          return this;
+        }
+        
+        @Override
+		public Builder clone() {
+          return create().mergeFrom(result);
+        }
+        
+        @Override
+		public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDescriptor();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance();
+        }
+        
+        @Override
+		public boolean isInitialized() {
+          return result.isInitialized();
+        }
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox build() {
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return buildPartial();
+        }
+        
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
+          if (result.borderLines_ != java.util.Collections.EMPTY_LIST) {
+            result.borderLines_ =
+              java.util.Collections.unmodifiableList(result.borderLines_);
+          }
+          if (result.blocks_ != java.util.Collections.EMPTY_LIST) {
+            result.blocks_ =
+              java.util.Collections.unmodifiableList(result.blocks_);
+          }
+          net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        @Override
+		public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance()) return this;
+          if (other.hasBoundaries()) {
+            mergeBoundaries(other.getBoundaries());
+          }
+          if (other.hasTileZoomToSplit()) {
+            setTileZoomToSplit(other.getTileZoomToSplit());
+          }
+          if (!other.borderLines_.isEmpty()) {
+            if (result.borderLines_.isEmpty()) {
+              result.borderLines_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine>();
+            }
+            result.borderLines_.addAll(other.borderLines_);
+          }
+          if (!other.blocks_.isEmpty()) {
+            if (result.blocks_.isEmpty()) {
+              result.blocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock>();
+            }
+            result.blocks_.addAll(other.blocks_);
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        @Override
+		public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                net.osmand.binary.OsmandOdb.OsmAndTileBox.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndTileBox.newBuilder();
+                if (hasBoundaries()) {
+                  subBuilder.mergeFrom(getBoundaries());
+                }
+                input.readMessage(subBuilder, extensionRegistry);
+                setBoundaries(subBuilder.buildPartial());
+                break;
+              }
+              case 16: {
+                setTileZoomToSplit(input.readUInt32());
+                break;
+              }
+              case 50: {
+                net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.newBuilder();
+                input.readMessage(subBuilder, extensionRegistry);
+                addBorderLines(subBuilder.buildPartial());
+                break;
+              }
+              case 58: {
+                net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.newBuilder();
+                input.readMessage(subBuilder, extensionRegistry);
+                addBlocks(subBuilder.buildPartial());
+                break;
+              }
+            }
+          }
+        }
+        
+        
+        // required .OsmAndTileBox boundaries = 1;
+        public boolean hasBoundaries() {
+          return result.hasBoundaries();
+        }
+        public net.osmand.binary.OsmandOdb.OsmAndTileBox getBoundaries() {
+          return result.getBoundaries();
+        }
+        public Builder setBoundaries(net.osmand.binary.OsmandOdb.OsmAndTileBox value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.hasBoundaries = true;
+          result.boundaries_ = value;
+          return this;
+        }
+        public Builder setBoundaries(net.osmand.binary.OsmandOdb.OsmAndTileBox.Builder builderForValue) {
+          result.hasBoundaries = true;
+          result.boundaries_ = builderForValue.build();
+          return this;
+        }
+        public Builder mergeBoundaries(net.osmand.binary.OsmandOdb.OsmAndTileBox value) {
+          if (result.hasBoundaries() &&
+              result.boundaries_ != net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance()) {
+            result.boundaries_ =
+              net.osmand.binary.OsmandOdb.OsmAndTileBox.newBuilder(result.boundaries_).mergeFrom(value).buildPartial();
+          } else {
+            result.boundaries_ = value;
+          }
+          result.hasBoundaries = true;
+          return this;
+        }
+        public Builder clearBoundaries() {
+          result.hasBoundaries = false;
+          result.boundaries_ = net.osmand.binary.OsmandOdb.OsmAndTileBox.getDefaultInstance();
+          return this;
+        }
+        
+        // optional uint32 tileZoomToSplit = 2;
+        public boolean hasTileZoomToSplit() {
+          return result.hasTileZoomToSplit();
+        }
+        public int getTileZoomToSplit() {
+          return result.getTileZoomToSplit();
+        }
+        public Builder setTileZoomToSplit(int value) {
+          result.hasTileZoomToSplit = true;
+          result.tileZoomToSplit_ = value;
+          return this;
+        }
+        public Builder clearTileZoomToSplit() {
+          result.hasTileZoomToSplit = false;
+          result.tileZoomToSplit_ = 0;
+          return this;
+        }
+        
+        // repeated .OsmAndRoutingIndex.RouteBorderLine borderLines = 6;
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine> getBorderLinesList() {
+          return java.util.Collections.unmodifiableList(result.borderLines_);
+        }
+        public int getBorderLinesCount() {
+          return result.getBorderLinesCount();
+        }
+        public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine getBorderLines(int index) {
+          return result.getBorderLines(index);
+        }
+        public Builder setBorderLines(int index, net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.borderLines_.set(index, value);
+          return this;
+        }
+        public Builder setBorderLines(int index, net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.Builder builderForValue) {
+          result.borderLines_.set(index, builderForValue.build());
+          return this;
+        }
+        public Builder addBorderLines(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          if (result.borderLines_.isEmpty()) {
+            result.borderLines_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine>();
+          }
+          result.borderLines_.add(value);
+          return this;
+        }
+        public Builder addBorderLines(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.Builder builderForValue) {
+          if (result.borderLines_.isEmpty()) {
+            result.borderLines_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine>();
+          }
+          result.borderLines_.add(builderForValue.build());
+          return this;
+        }
+        public Builder addAllBorderLines(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine> values) {
+          if (result.borderLines_.isEmpty()) {
+            result.borderLines_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine>();
+          }
+          super.addAll(values, result.borderLines_);
+          return this;
+        }
+        public Builder clearBorderLines() {
+          result.borderLines_ = java.util.Collections.emptyList();
+          return this;
+        }
+        
+        // repeated .OsmAndRoutingIndex.RouteBorderPointsBlock blocks = 7;
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock> getBlocksList() {
+          return java.util.Collections.unmodifiableList(result.blocks_);
+        }
+        public int getBlocksCount() {
+          return result.getBlocksCount();
+        }
+        public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock getBlocks(int index) {
+          return result.getBlocks(index);
+        }
+        public Builder setBlocks(int index, net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.blocks_.set(index, value);
+          return this;
+        }
+        public Builder setBlocks(int index, net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.Builder builderForValue) {
+          result.blocks_.set(index, builderForValue.build());
+          return this;
+        }
+        public Builder addBlocks(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          if (result.blocks_.isEmpty()) {
+            result.blocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock>();
+          }
+          result.blocks_.add(value);
+          return this;
+        }
+        public Builder addBlocks(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.Builder builderForValue) {
+          if (result.blocks_.isEmpty()) {
+            result.blocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock>();
+          }
+          result.blocks_.add(builderForValue.build());
+          return this;
+        }
+        public Builder addAllBlocks(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock> values) {
+          if (result.blocks_.isEmpty()) {
+            result.blocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock>();
+          }
+          super.addAll(values, result.blocks_);
+          return this;
+        }
+        public Builder clearBlocks() {
+          result.blocks_ = java.util.Collections.emptyList();
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:OsmAndRoutingIndex.RouteBorderBox)
+      }
+      
+      static {
+        defaultInstance = new RouteBorderBox(true);
+        net.osmand.binary.OsmandOdb.internalForceInit();
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteBorderBox)
+    }
+    
+    public static final class RouteBorderLine extends
+        com.google.protobuf.GeneratedMessage {
+      // Use RouteBorderLine.newBuilder() to construct.
+      private RouteBorderLine() {
+        initFields();
+      }
+      private RouteBorderLine(boolean noInit) {}
+      
+      private static final RouteBorderLine defaultInstance;
+      public static RouteBorderLine getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      @Override
+	public RouteBorderLine getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderLine_descriptor;
+      }
+      
+      @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderLine_fieldAccessorTable;
+      }
+      
+      // required int32 x = 1;
+      public static final int X_FIELD_NUMBER = 1;
+      private boolean hasX;
+      private int x_ = 0;
+      public boolean hasX() { return hasX; }
+      public int getX() { return x_; }
+      
+      // required int32 y = 2;
+      public static final int Y_FIELD_NUMBER = 2;
+      private boolean hasY;
+      private int y_ = 0;
+      public boolean hasY() { return hasY; }
+      public int getY() { return y_; }
+      
+      // optional int32 tox = 3;
+      public static final int TOX_FIELD_NUMBER = 3;
+      private boolean hasTox;
+      private int tox_ = 0;
+      public boolean hasTox() { return hasTox; }
+      public int getTox() { return tox_; }
+      
+      // optional int32 toy = 4;
+      public static final int TOY_FIELD_NUMBER = 4;
+      private boolean hasToy;
+      private int toy_ = 0;
+      public boolean hasToy() { return hasToy; }
+      public int getToy() { return toy_; }
+      
+      // required fixed32 shiftToPointsBlock = 7;
+      public static final int SHIFTTOPOINTSBLOCK_FIELD_NUMBER = 7;
+      private boolean hasShiftToPointsBlock;
+      private int shiftToPointsBlock_ = 0;
+      public boolean hasShiftToPointsBlock() { return hasShiftToPointsBlock; }
+      public int getShiftToPointsBlock() { return shiftToPointsBlock_; }
+      
+      private void initFields() {
+      }
+      @Override
+	public final boolean isInitialized() {
+        if (!hasX) return false;
+        if (!hasY) return false;
+        if (!hasShiftToPointsBlock) return false;
+        return true;
+      }
+      
+      @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (hasX()) {
+          output.writeInt32(1, getX());
+        }
+        if (hasY()) {
+          output.writeInt32(2, getY());
+        }
+        if (hasTox()) {
+          output.writeInt32(3, getTox());
+        }
+        if (hasToy()) {
+          output.writeInt32(4, getToy());
+        }
+        if (hasShiftToPointsBlock()) {
+          output.writeFixed32(7, getShiftToPointsBlock());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      @Override
+	public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasX()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, getX());
+        }
+        if (hasY()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, getY());
+        }
+        if (hasTox()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, getTox());
+        }
+        if (hasToy()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(4, getToy());
+        }
+        if (hasShiftToPointsBlock()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeFixed32Size(7, getShiftToPointsBlock());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      @Override
+	public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      @Override
+	public Builder toBuilder() { return newBuilder(this); }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine result;
+        
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.newBuilder()
+        private Builder() {}
+        
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine();
+          return builder;
+        }
+        
+        @Override
+		protected net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine internalGetResult() {
+          return result;
+        }
+        
+        @Override
+		public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
+          result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine();
+          return this;
+        }
+        
+        @Override
+		public Builder clone() {
+          return create().mergeFrom(result);
+        }
+        
+        @Override
+		public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.getDescriptor();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.getDefaultInstance();
+        }
+        
+        @Override
+		public boolean isInitialized() {
+          return result.isInitialized();
+        }
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine build() {
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return buildPartial();
+        }
+        
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
+          net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        @Override
+		public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.getDefaultInstance()) return this;
+          if (other.hasX()) {
+            setX(other.getX());
+          }
+          if (other.hasY()) {
+            setY(other.getY());
+          }
+          if (other.hasTox()) {
+            setTox(other.getTox());
+          }
+          if (other.hasToy()) {
+            setToy(other.getToy());
+          }
+          if (other.hasShiftToPointsBlock()) {
+            setShiftToPointsBlock(other.getShiftToPointsBlock());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        @Override
+		public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 8: {
+                setX(input.readInt32());
+                break;
+              }
+              case 16: {
+                setY(input.readInt32());
+                break;
+              }
+              case 24: {
+                setTox(input.readInt32());
+                break;
+              }
+              case 32: {
+                setToy(input.readInt32());
+                break;
+              }
+              case 61: {
+                setShiftToPointsBlock(input.readFixed32());
+                break;
+              }
+            }
+          }
+        }
+        
+        
+        // required int32 x = 1;
+        public boolean hasX() {
+          return result.hasX();
+        }
+        public int getX() {
+          return result.getX();
+        }
+        public Builder setX(int value) {
+          result.hasX = true;
+          result.x_ = value;
+          return this;
+        }
+        public Builder clearX() {
+          result.hasX = false;
+          result.x_ = 0;
+          return this;
+        }
+        
+        // required int32 y = 2;
+        public boolean hasY() {
+          return result.hasY();
+        }
+        public int getY() {
+          return result.getY();
+        }
+        public Builder setY(int value) {
+          result.hasY = true;
+          result.y_ = value;
+          return this;
+        }
+        public Builder clearY() {
+          result.hasY = false;
+          result.y_ = 0;
+          return this;
+        }
+        
+        // optional int32 tox = 3;
+        public boolean hasTox() {
+          return result.hasTox();
+        }
+        public int getTox() {
+          return result.getTox();
+        }
+        public Builder setTox(int value) {
+          result.hasTox = true;
+          result.tox_ = value;
+          return this;
+        }
+        public Builder clearTox() {
+          result.hasTox = false;
+          result.tox_ = 0;
+          return this;
+        }
+        
+        // optional int32 toy = 4;
+        public boolean hasToy() {
+          return result.hasToy();
+        }
+        public int getToy() {
+          return result.getToy();
+        }
+        public Builder setToy(int value) {
+          result.hasToy = true;
+          result.toy_ = value;
+          return this;
+        }
+        public Builder clearToy() {
+          result.hasToy = false;
+          result.toy_ = 0;
+          return this;
+        }
+        
+        // required fixed32 shiftToPointsBlock = 7;
+        public boolean hasShiftToPointsBlock() {
+          return result.hasShiftToPointsBlock();
+        }
+        public int getShiftToPointsBlock() {
+          return result.getShiftToPointsBlock();
+        }
+        public Builder setShiftToPointsBlock(int value) {
+          result.hasShiftToPointsBlock = true;
+          result.shiftToPointsBlock_ = value;
+          return this;
+        }
+        public Builder clearShiftToPointsBlock() {
+          result.hasShiftToPointsBlock = false;
+          result.shiftToPointsBlock_ = 0;
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:OsmAndRoutingIndex.RouteBorderLine)
+      }
+      
+      static {
+        defaultInstance = new RouteBorderLine(true);
+        net.osmand.binary.OsmandOdb.internalForceInit();
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteBorderLine)
+    }
+    
+    public static final class RouteBorderPointsBlock extends
+        com.google.protobuf.GeneratedMessage {
+      // Use RouteBorderPointsBlock.newBuilder() to construct.
+      private RouteBorderPointsBlock() {
+        initFields();
+      }
+      private RouteBorderPointsBlock(boolean noInit) {}
+      
+      private static final RouteBorderPointsBlock defaultInstance;
+      public static RouteBorderPointsBlock getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      @Override
+	public RouteBorderPointsBlock getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_descriptor;
+      }
+      
+      @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_fieldAccessorTable;
+      }
+      
+      // required int32 x = 1;
+      public static final int X_FIELD_NUMBER = 1;
+      private boolean hasX;
+      private int x_ = 0;
+      public boolean hasX() { return hasX; }
+      public int getX() { return x_; }
+      
+      // required int32 y = 2;
+      public static final int Y_FIELD_NUMBER = 2;
+      private boolean hasY;
+      private int y_ = 0;
+      public boolean hasY() { return hasY; }
+      public int getY() { return y_; }
+      
+      // required int64 baseId = 3;
+      public static final int BASEID_FIELD_NUMBER = 3;
+      private boolean hasBaseId;
+      private long baseId_ = 0L;
+      public boolean hasBaseId() { return hasBaseId; }
+      public long getBaseId() { return baseId_; }
+      
+      // repeated .OsmAndRoutingIndex.RouteBorderPoint points = 5;
+      public static final int POINTS_FIELD_NUMBER = 5;
+      private java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint> points_ =
+        java.util.Collections.emptyList();
+      public java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint> getPointsList() {
+        return points_;
+      }
+      public int getPointsCount() { return points_.size(); }
+      public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint getPoints(int index) {
+        return points_.get(index);
+      }
+      
+      private void initFields() {
+      }
+      @Override
+	public final boolean isInitialized() {
+        if (!hasX) return false;
+        if (!hasY) return false;
+        if (!hasBaseId) return false;
+        return true;
+      }
+      
+      @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (hasX()) {
+          output.writeInt32(1, getX());
+        }
+        if (hasY()) {
+          output.writeInt32(2, getY());
+        }
+        if (hasBaseId()) {
+          output.writeInt64(3, getBaseId());
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint element : getPointsList()) {
+          output.writeMessage(5, element);
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      @Override
+	public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasX()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, getX());
+        }
+        if (hasY()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, getY());
+        }
+        if (hasBaseId()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(3, getBaseId());
+        }
+        for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint element : getPointsList()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(5, element);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      @Override
+	public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      @Override
+	public Builder toBuilder() { return newBuilder(this); }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock result;
+        
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.newBuilder()
+        private Builder() {}
+        
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock();
+          return builder;
+        }
+        
+        @Override
+		protected net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock internalGetResult() {
+          return result;
+        }
+        
+        @Override
+		public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
+          result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock();
+          return this;
+        }
+        
+        @Override
+		public Builder clone() {
+          return create().mergeFrom(result);
+        }
+        
+        @Override
+		public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.getDescriptor();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.getDefaultInstance();
+        }
+        
+        @Override
+		public boolean isInitialized() {
+          return result.isInitialized();
+        }
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock build() {
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return buildPartial();
+        }
+        
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
+          if (result.points_ != java.util.Collections.EMPTY_LIST) {
+            result.points_ =
+              java.util.Collections.unmodifiableList(result.points_);
+          }
+          net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        @Override
+		public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.getDefaultInstance()) return this;
+          if (other.hasX()) {
+            setX(other.getX());
+          }
+          if (other.hasY()) {
+            setY(other.getY());
+          }
+          if (other.hasBaseId()) {
+            setBaseId(other.getBaseId());
+          }
+          if (!other.points_.isEmpty()) {
+            if (result.points_.isEmpty()) {
+              result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint>();
+            }
+            result.points_.addAll(other.points_);
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        @Override
+		public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 8: {
+                setX(input.readInt32());
+                break;
+              }
+              case 16: {
+                setY(input.readInt32());
+                break;
+              }
+              case 24: {
+                setBaseId(input.readInt64());
+                break;
+              }
+              case 42: {
+                net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.newBuilder();
+                input.readMessage(subBuilder, extensionRegistry);
+                addPoints(subBuilder.buildPartial());
+                break;
+              }
+            }
+          }
+        }
+        
+        
+        // required int32 x = 1;
+        public boolean hasX() {
+          return result.hasX();
+        }
+        public int getX() {
+          return result.getX();
+        }
+        public Builder setX(int value) {
+          result.hasX = true;
+          result.x_ = value;
+          return this;
+        }
+        public Builder clearX() {
+          result.hasX = false;
+          result.x_ = 0;
+          return this;
+        }
+        
+        // required int32 y = 2;
+        public boolean hasY() {
+          return result.hasY();
+        }
+        public int getY() {
+          return result.getY();
+        }
+        public Builder setY(int value) {
+          result.hasY = true;
+          result.y_ = value;
+          return this;
+        }
+        public Builder clearY() {
+          result.hasY = false;
+          result.y_ = 0;
+          return this;
+        }
+        
+        // required int64 baseId = 3;
+        public boolean hasBaseId() {
+          return result.hasBaseId();
+        }
+        public long getBaseId() {
+          return result.getBaseId();
+        }
+        public Builder setBaseId(long value) {
+          result.hasBaseId = true;
+          result.baseId_ = value;
+          return this;
+        }
+        public Builder clearBaseId() {
+          result.hasBaseId = false;
+          result.baseId_ = 0L;
+          return this;
+        }
+        
+        // repeated .OsmAndRoutingIndex.RouteBorderPoint points = 5;
+        public java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint> getPointsList() {
+          return java.util.Collections.unmodifiableList(result.points_);
+        }
+        public int getPointsCount() {
+          return result.getPointsCount();
+        }
+        public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint getPoints(int index) {
+          return result.getPoints(index);
+        }
+        public Builder setPoints(int index, net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          result.points_.set(index, value);
+          return this;
+        }
+        public Builder setPoints(int index, net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.Builder builderForValue) {
+          result.points_.set(index, builderForValue.build());
+          return this;
+        }
+        public Builder addPoints(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          if (result.points_.isEmpty()) {
+            result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint>();
+          }
+          result.points_.add(value);
+          return this;
+        }
+        public Builder addPoints(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.Builder builderForValue) {
+          if (result.points_.isEmpty()) {
+            result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint>();
+          }
+          result.points_.add(builderForValue.build());
+          return this;
+        }
+        public Builder addAllPoints(
+            java.lang.Iterable<? extends net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint> values) {
+          if (result.points_.isEmpty()) {
+            result.points_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint>();
+          }
+          super.addAll(values, result.points_);
+          return this;
+        }
+        public Builder clearPoints() {
+          result.points_ = java.util.Collections.emptyList();
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:OsmAndRoutingIndex.RouteBorderPointsBlock)
+      }
+      
+      static {
+        defaultInstance = new RouteBorderPointsBlock(true);
+        net.osmand.binary.OsmandOdb.internalForceInit();
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteBorderPointsBlock)
+    }
+    
+    public static final class RouteBorderPoint extends
+        com.google.protobuf.GeneratedMessage {
+      // Use RouteBorderPoint.newBuilder() to construct.
+      private RouteBorderPoint() {
+        initFields();
+      }
+      private RouteBorderPoint(boolean noInit) {}
+      
+      private static final RouteBorderPoint defaultInstance;
+      public static RouteBorderPoint getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      @Override
+	public RouteBorderPoint getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderPoint_descriptor;
+      }
+      
+      @Override
+	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return net.osmand.binary.OsmandOdb.internal_static_OsmAndRoutingIndex_RouteBorderPoint_fieldAccessorTable;
+      }
+      
+      // optional int32 dx = 1;
+      public static final int DX_FIELD_NUMBER = 1;
+      private boolean hasDx;
+      private int dx_ = 0;
+      public boolean hasDx() { return hasDx; }
+      public int getDx() { return dx_; }
+      
+      // optional int32 dy = 2;
+      public static final int DY_FIELD_NUMBER = 2;
+      private boolean hasDy;
+      private int dy_ = 0;
+      public boolean hasDy() { return hasDy; }
+      public int getDy() { return dy_; }
+      
+      // optional int32 direction = 3;
+      public static final int DIRECTION_FIELD_NUMBER = 3;
+      private boolean hasDirection;
+      private int direction_ = 0;
+      public boolean hasDirection() { return hasDirection; }
+      public int getDirection() { return direction_; }
+      
+      // optional bytes types = 4;
+      public static final int TYPES_FIELD_NUMBER = 4;
+      private boolean hasTypes;
+      private com.google.protobuf.ByteString types_ = com.google.protobuf.ByteString.EMPTY;
+      public boolean hasTypes() { return hasTypes; }
+      public com.google.protobuf.ByteString getTypes() { return types_; }
+      
+      // optional sint64 roadId = 7;
+      public static final int ROADID_FIELD_NUMBER = 7;
+      private boolean hasRoadId;
+      private long roadId_ = 0L;
+      public boolean hasRoadId() { return hasRoadId; }
+      public long getRoadId() { return roadId_; }
+      
+      private void initFields() {
+      }
+      @Override
+	public final boolean isInitialized() {
+        return true;
+      }
+      
+      @Override
+	public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (hasDx()) {
+          output.writeInt32(1, getDx());
+        }
+        if (hasDy()) {
+          output.writeInt32(2, getDy());
+        }
+        if (hasDirection()) {
+          output.writeInt32(3, getDirection());
+        }
+        if (hasTypes()) {
+          output.writeBytes(4, getTypes());
+        }
+        if (hasRoadId()) {
+          output.writeSInt64(7, getRoadId());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      @Override
+	public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (hasDx()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(1, getDx());
+        }
+        if (hasDy()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(2, getDy());
+        }
+        if (hasDirection()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt32Size(3, getDirection());
+        }
+        if (hasTypes()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(4, getTypes());
+        }
+        if (hasRoadId()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeSInt64Size(7, getRoadId());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      @Override
+	public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      @Override
+	public Builder toBuilder() { return newBuilder(this); }
+      
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint result;
+        
+        // Construct using net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.newBuilder()
+        private Builder() {}
+        
+        private static Builder create() {
+          Builder builder = new Builder();
+          builder.result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint();
+          return builder;
+        }
+        
+        @Override
+		protected net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint internalGetResult() {
+          return result;
+        }
+        
+        @Override
+		public Builder clear() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "Cannot call clear() after build().");
+          }
+          result = new net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint();
+          return this;
+        }
+        
+        @Override
+		public Builder clone() {
+          return create().mergeFrom(result);
+        }
+        
+        @Override
+		public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.getDescriptor();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint getDefaultInstanceForType() {
+          return net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.getDefaultInstance();
+        }
+        
+        @Override
+		public boolean isInitialized() {
+          return result.isInitialized();
+        }
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint build() {
+          if (result != null && !isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return buildPartial();
+        }
+        
+        private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          if (!isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return buildPartial();
+        }
+        
+        @Override
+		public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint buildPartial() {
+          if (result == null) {
+            throw new IllegalStateException(
+              "build() has already been called on this Builder.");
+          }
+          net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint returnMe = result;
+          result = null;
+          return returnMe;
+        }
+        
+        @Override
+		public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint) {
+            return mergeFrom((net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint other) {
+          if (other == net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.getDefaultInstance()) return this;
+          if (other.hasDx()) {
+            setDx(other.getDx());
+          }
+          if (other.hasDy()) {
+            setDy(other.getDy());
+          }
+          if (other.hasDirection()) {
+            setDirection(other.getDirection());
+          }
+          if (other.hasTypes()) {
+            setTypes(other.getTypes());
+          }
+          if (other.hasRoadId()) {
+            setRoadId(other.getRoadId());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        @Override
+		public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  return this;
+                }
+                break;
+              }
+              case 8: {
+                setDx(input.readInt32());
+                break;
+              }
+              case 16: {
+                setDy(input.readInt32());
+                break;
+              }
+              case 24: {
+                setDirection(input.readInt32());
+                break;
+              }
+              case 34: {
+                setTypes(input.readBytes());
+                break;
+              }
+              case 56: {
+                setRoadId(input.readSInt64());
+                break;
+              }
+            }
+          }
+        }
+        
+        
+        // optional int32 dx = 1;
+        public boolean hasDx() {
+          return result.hasDx();
+        }
+        public int getDx() {
+          return result.getDx();
+        }
+        public Builder setDx(int value) {
+          result.hasDx = true;
+          result.dx_ = value;
+          return this;
+        }
+        public Builder clearDx() {
+          result.hasDx = false;
+          result.dx_ = 0;
+          return this;
+        }
+        
+        // optional int32 dy = 2;
+        public boolean hasDy() {
+          return result.hasDy();
+        }
+        public int getDy() {
+          return result.getDy();
+        }
+        public Builder setDy(int value) {
+          result.hasDy = true;
+          result.dy_ = value;
+          return this;
+        }
+        public Builder clearDy() {
+          result.hasDy = false;
+          result.dy_ = 0;
+          return this;
+        }
+        
+        // optional int32 direction = 3;
+        public boolean hasDirection() {
+          return result.hasDirection();
+        }
+        public int getDirection() {
+          return result.getDirection();
+        }
+        public Builder setDirection(int value) {
+          result.hasDirection = true;
+          result.direction_ = value;
+          return this;
+        }
+        public Builder clearDirection() {
+          result.hasDirection = false;
+          result.direction_ = 0;
+          return this;
+        }
+        
+        // optional bytes types = 4;
+        public boolean hasTypes() {
+          return result.hasTypes();
+        }
+        public com.google.protobuf.ByteString getTypes() {
+          return result.getTypes();
+        }
+        public Builder setTypes(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  result.hasTypes = true;
+          result.types_ = value;
+          return this;
+        }
+        public Builder clearTypes() {
+          result.hasTypes = false;
+          result.types_ = getDefaultInstance().getTypes();
+          return this;
+        }
+        
+        // optional sint64 roadId = 7;
+        public boolean hasRoadId() {
+          return result.hasRoadId();
+        }
+        public long getRoadId() {
+          return result.getRoadId();
+        }
+        public Builder setRoadId(long value) {
+          result.hasRoadId = true;
+          result.roadId_ = value;
+          return this;
+        }
+        public Builder clearRoadId() {
+          result.hasRoadId = false;
+          result.roadId_ = 0L;
+          return this;
+        }
+        
+        // @@protoc_insertion_point(builder_scope:OsmAndRoutingIndex.RouteBorderPoint)
+      }
+      
+      static {
+        defaultInstance = new RouteBorderPoint(true);
+        net.osmand.binary.OsmandOdb.internalForceInit();
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:OsmAndRoutingIndex.RouteBorderPoint)
+    }
+    
     // required string name = 1;
     public static final int NAME_FIELD_NUMBER = 1;
     private boolean hasName;
@@ -21006,6 +22939,20 @@ public final class OsmandOdb {
       return basemapBoxes_.get(index);
     }
     
+    // optional .OsmAndRoutingIndex.RouteBorderBox borderBox = 7;
+    public static final int BORDERBOX_FIELD_NUMBER = 7;
+    private boolean hasBorderBox;
+    private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox borderBox_;
+    public boolean hasBorderBox() { return hasBorderBox; }
+    public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox getBorderBox() { return borderBox_; }
+    
+    // optional .OsmAndRoutingIndex.RouteBorderBox baseBorderBox = 8;
+    public static final int BASEBORDERBOX_FIELD_NUMBER = 8;
+    private boolean hasBaseBorderBox;
+    private net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox baseBorderBox_;
+    public boolean hasBaseBorderBox() { return hasBaseBorderBox; }
+    public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox getBaseBorderBox() { return baseBorderBox_; }
+    
     // repeated .OsmAndRoutingIndex.RouteDataBlock blocks = 5;
     public static final int BLOCKS_FIELD_NUMBER = 5;
     private java.util.List<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock> blocks_ =
@@ -21019,6 +22966,8 @@ public final class OsmandOdb {
     }
     
     private void initFields() {
+      borderBox_ = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance();
+      baseBorderBox_ = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance();
     }
     @Override
 	public final boolean isInitialized() {
@@ -21031,6 +22980,12 @@ public final class OsmandOdb {
       }
       for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox element : getBasemapBoxesList()) {
         if (!element.isInitialized()) return false;
+      }
+      if (hasBorderBox()) {
+        if (!getBorderBox().isInitialized()) return false;
+      }
+      if (hasBaseBorderBox()) {
+        if (!getBaseBorderBox().isInitialized()) return false;
       }
       for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock element : getBlocksList()) {
         if (!element.isInitialized()) return false;
@@ -21056,6 +23011,12 @@ public final class OsmandOdb {
       }
       for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock element : getBlocksList()) {
         output.writeMessage(5, element);
+      }
+      if (hasBorderBox()) {
+        output.writeMessage(7, getBorderBox());
+      }
+      if (hasBaseBorderBox()) {
+        output.writeMessage(8, getBaseBorderBox());
       }
       getUnknownFields().writeTo(output);
     }
@@ -21086,6 +23047,14 @@ public final class OsmandOdb {
       for (net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock element : getBlocksList()) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, element);
+      }
+      if (hasBorderBox()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, getBorderBox());
+      }
+      if (hasBaseBorderBox()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(8, getBaseBorderBox());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -21293,6 +23262,12 @@ public final class OsmandOdb {
           }
           result.basemapBoxes_.addAll(other.basemapBoxes_);
         }
+        if (other.hasBorderBox()) {
+          mergeBorderBox(other.getBorderBox());
+        }
+        if (other.hasBaseBorderBox()) {
+          mergeBaseBorderBox(other.getBaseBorderBox());
+        }
         if (!other.blocks_.isEmpty()) {
           if (result.blocks_.isEmpty()) {
             result.blocks_ = new java.util.ArrayList<net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock>();
@@ -21351,6 +23326,24 @@ public final class OsmandOdb {
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock.newBuilder();
               input.readMessage(subBuilder, extensionRegistry);
               addBlocks(subBuilder.buildPartial());
+              break;
+            }
+            case 58: {
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.newBuilder();
+              if (hasBorderBox()) {
+                subBuilder.mergeFrom(getBorderBox());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setBorderBox(subBuilder.buildPartial());
+              break;
+            }
+            case 66: {
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.Builder subBuilder = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.newBuilder();
+              if (hasBaseBorderBox()) {
+                subBuilder.mergeFrom(getBaseBorderBox());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setBaseBorderBox(subBuilder.buildPartial());
               break;
             }
           }
@@ -21529,6 +23522,80 @@ public final class OsmandOdb {
       }
       public Builder clearBasemapBoxes() {
         result.basemapBoxes_ = java.util.Collections.emptyList();
+        return this;
+      }
+      
+      // optional .OsmAndRoutingIndex.RouteBorderBox borderBox = 7;
+      public boolean hasBorderBox() {
+        return result.hasBorderBox();
+      }
+      public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox getBorderBox() {
+        return result.getBorderBox();
+      }
+      public Builder setBorderBox(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasBorderBox = true;
+        result.borderBox_ = value;
+        return this;
+      }
+      public Builder setBorderBox(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.Builder builderForValue) {
+        result.hasBorderBox = true;
+        result.borderBox_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeBorderBox(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox value) {
+        if (result.hasBorderBox() &&
+            result.borderBox_ != net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance()) {
+          result.borderBox_ =
+            net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.newBuilder(result.borderBox_).mergeFrom(value).buildPartial();
+        } else {
+          result.borderBox_ = value;
+        }
+        result.hasBorderBox = true;
+        return this;
+      }
+      public Builder clearBorderBox() {
+        result.hasBorderBox = false;
+        result.borderBox_ = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance();
+        return this;
+      }
+      
+      // optional .OsmAndRoutingIndex.RouteBorderBox baseBorderBox = 8;
+      public boolean hasBaseBorderBox() {
+        return result.hasBaseBorderBox();
+      }
+      public net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox getBaseBorderBox() {
+        return result.getBaseBorderBox();
+      }
+      public Builder setBaseBorderBox(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        result.hasBaseBorderBox = true;
+        result.baseBorderBox_ = value;
+        return this;
+      }
+      public Builder setBaseBorderBox(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.Builder builderForValue) {
+        result.hasBaseBorderBox = true;
+        result.baseBorderBox_ = builderForValue.build();
+        return this;
+      }
+      public Builder mergeBaseBorderBox(net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox value) {
+        if (result.hasBaseBorderBox() &&
+            result.baseBorderBox_ != net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance()) {
+          result.baseBorderBox_ =
+            net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.newBuilder(result.baseBorderBox_).mergeFrom(value).buildPartial();
+        } else {
+          result.baseBorderBox_ = value;
+        }
+        result.hasBaseBorderBox = true;
+        return this;
+      }
+      public Builder clearBaseBorderBox() {
+        result.hasBaseBorderBox = false;
+        result.baseBorderBox_ = net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.getDefaultInstance();
         return this;
       }
       
@@ -21805,6 +23872,26 @@ public final class OsmandOdb {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_OsmAndRoutingIndex_RouteDataBlock_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAndRoutingIndex_RouteBorderBox_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAndRoutingIndex_RouteBorderBox_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAndRoutingIndex_RouteBorderLine_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAndRoutingIndex_RouteBorderLine_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_OsmAndRoutingIndex_RouteBorderPoint_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_OsmAndRoutingIndex_RouteBorderPoint_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -21929,23 +24016,38 @@ public final class OsmandOdb {
       "\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004" +
       " \001(\005\"d\n\tRouteData\022\016\n\006points\030\001 \002(\014\022\022\n\npoi" +
       "ntTypes\030\004 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030" +
-      "\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\341\004\n\022OsmAndRou" +
+      "\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\314\t\n\022OsmAndRou" +
       "tingIndex\022\014\n\004name\030\001 \002(\t\0224\n\005rules\030\002 \003(\0132%" +
       ".OsmAndRoutingIndex.RouteEncodingRule\0223\n" +
       "\trootBoxes\030\003 \003(\0132 .OsmAndRoutingIndex.Ro" +
       "uteDataBox\0226\n\014basemapBoxes\030\004 \003(\0132 .OsmAn",
-      "dRoutingIndex.RouteDataBox\0222\n\006blocks\030\005 \003" +
-      "(\0132\".OsmAndRoutingIndex.RouteDataBlock\032;" +
-      "\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005valu" +
-      "e\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\216\001\n\014RouteDataBox\022\014\n\004" +
-      "left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016" +
-      "\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022/\n\005b" +
-      "oxes\030\007 \003(\0132 .OsmAndRoutingIndex.RouteDat" +
-      "aBox\032\227\001\n\016RouteDataBlock\022\031\n\007idTable\030\005 \001(\013" +
-      "2\010.IdTable\022!\n\013stringTable\030\010 \001(\0132\014.String" +
-      "Table\022\037\n\013dataObjects\030\006 \003(\0132\n.RouteData\022&",
-      "\n\014restrictions\030\007 \003(\0132\020.RestrictionDataB\023" +
-      "\n\021net.osmand.binary"
+      "dRoutingIndex.RouteDataBox\0225\n\tborderBox\030" +
+      "\007 \001(\0132\".OsmAndRoutingIndex.RouteBorderBo" +
+      "x\0229\n\rbaseBorderBox\030\010 \001(\0132\".OsmAndRouting" +
+      "Index.RouteBorderBox\0222\n\006blocks\030\005 \003(\0132\".O" +
+      "smAndRoutingIndex.RouteDataBlock\032;\n\021Rout" +
+      "eEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005value\030\005 \002(" +
+      "\t\022\n\n\002id\030\007 \001(\r\032\216\001\n\014RouteDataBox\022\014\n\004left\030\001" +
+      " \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\022\016\n\006bott" +
+      "om\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022/\n\005boxes\030\007" +
+      " \003(\0132 .OsmAndRoutingIndex.RouteDataBox\032\227",
+      "\001\n\016RouteDataBlock\022\031\n\007idTable\030\005 \001(\0132\010.IdT" +
+      "able\022!\n\013stringTable\030\010 \001(\0132\014.StringTable\022" +
+      "\037\n\013dataObjects\030\006 \003(\0132\n.RouteData\022&\n\014rest" +
+      "rictions\030\007 \003(\0132\020.RestrictionData\032\303\001\n\016Rou" +
+      "teBorderBox\022\"\n\nboundaries\030\001 \002(\0132\016.OsmAnd" +
+      "TileBox\022\027\n\017tileZoomToSplit\030\002 \001(\r\0228\n\013bord" +
+      "erLines\030\006 \003(\0132#.OsmAndRoutingIndex.Route" +
+      "BorderLine\022:\n\006blocks\030\007 \003(\0132*.OsmAndRouti" +
+      "ngIndex.RouteBorderPointsBlock\032]\n\017RouteB" +
+      "orderLine\022\t\n\001x\030\001 \002(\005\022\t\n\001y\030\002 \002(\005\022\013\n\003tox\030\003",
+      " \001(\005\022\013\n\003toy\030\004 \001(\005\022\032\n\022shiftToPointsBlock\030" +
+      "\007 \002(\007\032t\n\026RouteBorderPointsBlock\022\t\n\001x\030\001 \002" +
+      "(\005\022\t\n\001y\030\002 \002(\005\022\016\n\006baseId\030\003 \002(\003\0224\n\006points\030" +
+      "\005 \003(\0132$.OsmAndRoutingIndex.RouteBorderPo" +
+      "int\032\\\n\020RouteBorderPoint\022\n\n\002dx\030\001 \001(\005\022\n\n\002d" +
+      "y\030\002 \001(\005\022\021\n\tdirection\030\003 \001(\005\022\r\n\005types\030\004 \001(" +
+      "\014\022\016\n\006roadId\030\007 \001(\022B\023\n\021net.osmand.binary"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -22262,7 +24364,7 @@ public final class OsmandOdb {
           internal_static_OsmAndRoutingIndex_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAndRoutingIndex_descriptor,
-              new java.lang.String[] { "Name", "Rules", "RootBoxes", "BasemapBoxes", "Blocks", },
+              new java.lang.String[] { "Name", "Rules", "RootBoxes", "BasemapBoxes", "BorderBox", "BaseBorderBox", "Blocks", },
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.class,
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.Builder.class);
           internal_static_OsmAndRoutingIndex_RouteEncodingRule_descriptor =
@@ -22289,6 +24391,38 @@ public final class OsmandOdb {
               new java.lang.String[] { "IdTable", "StringTable", "DataObjects", "Restrictions", },
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock.class,
               net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock.Builder.class);
+          internal_static_OsmAndRoutingIndex_RouteBorderBox_descriptor =
+            internal_static_OsmAndRoutingIndex_descriptor.getNestedTypes().get(3);
+          internal_static_OsmAndRoutingIndex_RouteBorderBox_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAndRoutingIndex_RouteBorderBox_descriptor,
+              new java.lang.String[] { "Boundaries", "TileZoomToSplit", "BorderLines", "Blocks", },
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.class,
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox.Builder.class);
+          internal_static_OsmAndRoutingIndex_RouteBorderLine_descriptor =
+            internal_static_OsmAndRoutingIndex_descriptor.getNestedTypes().get(4);
+          internal_static_OsmAndRoutingIndex_RouteBorderLine_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAndRoutingIndex_RouteBorderLine_descriptor,
+              new java.lang.String[] { "X", "Y", "Tox", "Toy", "ShiftToPointsBlock", },
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.class,
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine.Builder.class);
+          internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_descriptor =
+            internal_static_OsmAndRoutingIndex_descriptor.getNestedTypes().get(5);
+          internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAndRoutingIndex_RouteBorderPointsBlock_descriptor,
+              new java.lang.String[] { "X", "Y", "BaseId", "Points", },
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.class,
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock.Builder.class);
+          internal_static_OsmAndRoutingIndex_RouteBorderPoint_descriptor =
+            internal_static_OsmAndRoutingIndex_descriptor.getNestedTypes().get(6);
+          internal_static_OsmAndRoutingIndex_RouteBorderPoint_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_OsmAndRoutingIndex_RouteBorderPoint_descriptor,
+              new java.lang.String[] { "Dx", "Dy", "Direction", "Types", "RoadId", },
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.class,
+              net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint.Builder.class);
           return null;
         }
       };
