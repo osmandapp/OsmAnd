@@ -92,4 +92,5 @@
 	<string name="route_kr">Pysy oikealla ja jatka suoraan</string>
 	<string name="default_buttons_no">Ei</string>
 	<string name="default_buttons_yes">Kyllä</string>
-	</resources>
+	<string name="email">sähköposti</string>
+</resources>
