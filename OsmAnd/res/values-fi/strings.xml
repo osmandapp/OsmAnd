@@ -90,4 +90,6 @@
 	<string name="gpxup_private">Yksityinen</string>
 	<string name="route_kl">Pysy vasemmalla ja aja suoraan</string>
 	<string name="route_kr">Pysy oikealla ja jatka suoraan</string>
+	<string name="default_buttons_no">Ei</string>
+	<string name="default_buttons_yes">Kyllä</string>
 	</resources>
