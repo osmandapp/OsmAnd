@@ -747,10 +747,14 @@ public class IndexCreator {
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
-		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/nodes.tmp.odb"));
-		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/temp/map.osm"),
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/luxembourg.osm.pbf"),
-//		creator.generateIndexes(new File("/home/victor/projects/OsmAnd/data/osm-maps/RU-SPE.osm.bz2"),
+
+		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
+//		String file = "/home/victor/projects/OsmAnd/temp/belgium.osm.pbf";
+//		String file = "/home/victor/projects/OsmAnd/temp/warsaw-map.osm.pbf";
+		int st = file.lastIndexOf('/');
+		int e = file.indexOf('.', st);
+		creator.setNodesDBFile(new File("/home/victor/projects/OsmAnd/data/osm-gen/"+file.substring(st, e) + ".tmp.odb"));
+		creator.generateIndexes(new File(file),
 				new ConsoleProgressImplementation(1), null, zooms, rt, log);
 		
 		
