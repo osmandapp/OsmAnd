@@ -39,8 +39,8 @@ outfile=$outdir$fileroot.osm
 # ---------------------------------------------
 # process
 # ---------------------------------------------
-if [ ! -f $outfile.bz2 ]
-then
+#if [ ! -f $outfile.bz2 ]
+#then
 	echo "----------------------------------------------"
 	echo "Processing"$fileroot
 	echo "----------------------------------------------"
@@ -56,6 +56,6 @@ then
 	echo "Compressing to osm.bz2 …"
 	bzip2 -f $outfile
 	if [ $? -ne 0 ]; then echo $(date)' Error compressing OSM file' & exit 6;fi
-else
-echo "Skipping, already existing file"
-fi
+#else
+#echo "Skipping, already existing file"
+#fi
