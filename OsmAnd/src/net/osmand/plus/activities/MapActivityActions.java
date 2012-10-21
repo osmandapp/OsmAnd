@@ -526,6 +526,7 @@ public class MapActivityActions implements DialogProvider {
 					AccessibleToast.makeText(mapActivity, R.string.route_updated_loc_found, Toast.LENGTH_LONG).show();
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
+				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
 				dialog.dismiss();
 				mapActivity.followRoute(mode, mapActivity.getPointToNavigate(), mapActivity.getIntermediatePoints(), 
 						current, null);
