@@ -66,6 +66,7 @@ public class MapRoutingTypes {
 		TAGS_TO_SAVE.add("motorcar");
 		TAGS_TO_SAVE.add("motorcycle");
 		TAGS_TO_SAVE.add("motor_vehicle");
+		TAGS_TO_SAVE.add("vehicle");
 		TAGS_TO_SAVE.add("oneway");
 		TAGS_TO_SAVE.add("roundabout");
 		TAGS_TO_SAVE.add("route");
