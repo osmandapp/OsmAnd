@@ -1019,7 +1019,7 @@ public class BinaryRoutePlanner {
 					t = TurnType.valueOf(TurnType.TSLL, leftSide);
 				} else if (mpi < 120) {
 					t = TurnType.valueOf(TurnType.TL, leftSide);
-				} else if (mpi < 135) {
+				} else if (mpi < 135 || leftSide) {
 					t = TurnType.valueOf(TurnType.TSHL, leftSide);
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
@@ -1029,7 +1029,7 @@ public class BinaryRoutePlanner {
 					t = TurnType.valueOf(TurnType.TSLR, leftSide);
 				} else if (mpi > -120) {
 					t = TurnType.valueOf(TurnType.TR, leftSide);
-				} else if (mpi > -135) {
+				} else if (mpi > -135 || !leftSide) {
 					t = TurnType.valueOf(TurnType.TSHR, leftSide);
 				} else {
 					t = TurnType.valueOf(TurnType.TU, leftSide);
