@@ -56,7 +56,7 @@
   <string name="rendering_attr_noPolygons_name">Geen veelhoeke</string>
   <string name="rendering_attr_appMode_name">Weergewing wyse</string>
   <string name="rendering_attr_appMode_description">Kaart optimalisering vir onderskeie Gebruikersprofiele</string>
-  <string name="rendering_attr_contourLines_description">Kies minimum vergrotingsvlak om in die kaart te vertoon indien beskikbaar. Aparte SRTM-dokument mag dalk benodig word.</string>
+  <string name="rendering_attr_contourLines_description">Vertoon minimum vergrotingsvlak. (Aparte SRTM-dokument benodig):</string>
   <string name="rendering_attr_contourLines_name">Wys kontoerlyne</string>
   <string name="rendering_attr_hmRendered_description">Vermeerder die detail wat in die kaart vertoon word</string>
   <string name="rendering_attr_hmRendered_name">Wys meer kaart detail</string>
@@ -204,7 +204,7 @@
   <string name="live_monitoring_interval">Lewendige natrekking interval</string>
   <string name="live_monitoring_url_descr">Spesifiseer die web adres met parameteroordrag sinsbou: lat = {0}, lon = {1}, tyd stempel = {2}, hdop = {3}, hoogte = {4}, spoed = {5}</string>
   <string name="live_monitoring_url">Lewendige natrekking webadres</string>
-  <string name="gpx_monitoring_disabled_warn">Skakel asseblief \'Meld spoor na GPX\' aan in natrekking instellings</string>
+  <string name="gpx_monitoring_disabled_warn">Skakel asseblief \'Meld spoor na GPX\' aan in natrekking instellings.</string>
   <string name="show_current_gpx_title">Wys huidige spoor</string>
   <string name="tip_recent_changes_0_7_0_t">"Veranderinge in 0.7.0:\n t-die aflyn wikipedia data met artikels\n t-Opgedateerde kaarte\n t-ander klein funksies "</string>
   <string name="free_version_message">Hierdie gratis OsmAnd weergawe is beperk tot %1$s aflaailêers %2$s en ondersteun nie aflyn Wikipedia artikels nie.</string>
@@ -304,7 +304,7 @@
   <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>
   <string name="search_position_current_location_found">Ligging (gevind)</string>
   <string name="search_position_address">Adres…</string>
-  <string name="search_position_favorites">Gunstelinge...</string>
+  <string name="search_position_favorites">Gunstelinge…</string>
   <string name="search_position_undefined">ongedefinieerd</string>
   <string name="search_position_fixed">Vasgestel</string>
   <string name="search_position_current_location">Huidige posisie…</string>
@@ -336,7 +336,7 @@
   <string name="vector_data_missing">Aan boord (\'aflyn\') data ontbreek op SD-kaart. Oorweeg dit asseblief om dit af te laai om die kaarte aflyn te gebruik.</string>
   <string name="local_index_gpx_info_show">\n\nDruk en hou vir keuses</string>
   <string name="local_index_gpx_info_speed">\nGemiddelde spoed: %1$s\nMaksimum spoed: %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nGemiddelde hoogte: %1$.0f m\nMinimum hoogte: %2$.0f m\nMaksimum hoogte: %3$.0f m\nOpdraandes: %4$.0f m\nAfdraandes: %5$.0f m\n</string>
+  <string name="local_index_gpx_info_elevation">\nGemiddelde hoogte: %1$.0f m\nMinimum hoogte: %2$.0f m\nMaksimum hoogte: %3$.0f m\nOpdraandes: %4$.0f m\nAfdraandes: %5$.0f m</string>
   <string name="local_index_gpx_info">Subspore : %1$d\nTotale punte : %2$d\nTussenpunte : %3$d\nTotale afstand : %4$s\nBegin tyd : %5$tF, %5$tR\nEnd tyd : %6$tF, %6$tR</string>
   <string name="local_index_installed">Uitgawe</string>
   <string name="local_index_items_backuped">%1$d van %2$d item(s) suksesvol afgeskakel.</string>
@@ -382,7 +382,7 @@
   <string name="gpx_option_from_start_point">Ry oor die hele spoor</string>
   <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Definieer voorkoms\' -&gt; \'Kaartbron ...\' -&gt; \'Aflyn vektor kaarte\'.</string>
   <string name="choose_audio_stream">Stem begeleiding uitset</string>
-  <string name="choose_audio_stream_descr">"Kies kanaal om stem begeleiding oor te speel (stelsel afhanklik) "</string>
+  <string name="choose_audio_stream_descr">Kies kanaal om stem begeleiding oor te speel (stelsel afhanklik)</string>
   <string name="voice_stream_voice_call">Stem oproep klank</string>
   <string name="voice_stream_notification">Kennisgewing klank</string>
   <string name="voice_stream_music">Media/musiek klank</string>
@@ -428,7 +428,7 @@
   <string name="tip_map_context_menu">Kaartinhoud kieslys</string>
   <string name="tip_map_context_menu_t">\tDie kaart inhoud kieslys is beskikbaar deur te druk en te hou op die kaart of deur die trekbal-knoppie te druk.\n\tDit lewer \'n boks met punt koördinate. Om die kaart inhoud kieslys venster oop te maak, tik op dit. (Of druk en hou die boks om dit weer te versteek.)\n\tDie kaart inhoud kieslys bevat alle aksies met verwysing na \'n punt (ligging).</string>
   <string name="tip_initial">Wenke en wyses</string>
-  <string name="tip_initial_t">\tOsmAnd is \'n navigasietoepassing met baie funksies. \n\tAs \'n basiese inleiding, is sommige gebruikswenke en wyses beskikbaar in skakels vanaf die hoof kieslys skerm.</string>
+  <string name="tip_initial_t">\tOsmAnd is \'n navigasietoepassing met baie funksies.\n\tAs \'n basiese inleiding, is sommige gebruikswenke en wyses beskikbaar in skakels vanaf die hoof kieslys skerm.</string>
   <string name="next_button">Volgende</string>
   <string name="previous_button">Vorige</string>
   <string name="unit_of_length_descr">Verander eenhede van lengte en spoed</string>
@@ -588,7 +588,7 @@
   <string name="context_menu_item_show_route">Wys roete van hier af</string>
   <string name="use_trackball_descr">Gebruik die trekbal om die kaart te skuif</string>
   <string name="use_trackball">Gebruik die trekbal</string>
-  <string name="background_service_wait_int_descr">"Stel maksimum wag tyd vir elke ligging vasstelling in die agtergrond "</string>
+  <string name="background_service_wait_int_descr">Stel maksimum wag tyd vir elke ligging vasstelling in die agtergrond</string>
   <string name="background_service_wait_int">Maksimum wagtyd vir vasstelling</string>
   <string name="service_stop_background_service">Skakel agtergrond navigasie diens af</string>
   <string name="where_am_i">Waar is ek?</string>
@@ -776,7 +776,7 @@
   <string name="stop_navigation">Maak bestemming skoon.</string>
   <string name="navigate_to_point">Stel as bestemming</string>
   <string name="map_view_3d_descr">Skakel 3D kaart aan</string>
-  <string name="map_view_3d">"Kaart 3D "</string>
+  <string name="map_view_3d">Kaart 3D</string>
   <string name="show_poi_over_map_description">Wys interessante plekke bo-oor die kaart (gebruik die vorige gekose filter)</string>
   <string name="show_poi_over_map">Wys POI</string>
   <string name="map_tile_source_descr">Kies die bron vir aanlyn of gekaste kaart teëls</string>
@@ -923,4 +923,29 @@
 <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
 <string name="bg_service_screen_lock_toast">Die skerm is gesluit</string>
 <string name="bg_service_interval">Stel die wakker-tussenpose:</string>
-</resources>
+<string name="rendering_attr_roadColors_description">Kies `n pad kleurskema:</string>
+	<string name="rendering_attr_roadColors_name">Pad kleurskema</string>
+    <string name="map_widget_show_destination_arrow">Wys rigting na bestemming</string>
+    <string name="show_warnings_title">Toon alarms…</string>
+	<string name="osmand_short_description_80_chars">OsmAnd is `n oopbron navigasie toepassing vir aflyn en aanlyn kaarte</string>
+	<string name="filterpoi_activity">Skep PVB filter</string>
+	<string name="select_navigation_mode">Kies vervoertipe</string>
+	<string name="day_night_info">Dag/nag inligting</string>
+	<string name="map_widget_day_night">Dag/nag kaart</string>
+	<string name="map_widget_vector_attributes">Kaart voorstelling eienskappe:</string>
+	<string name="map_widget_renderer">Kaartvoorstelling-styl</string>
+	<string name="layer_map_appearance">Verstel skerm…</string>
+	<string name="show_lanes">Toon lane</string>
+	<string name="avoid_unpaved">Vermy ongeteerde paaie</string>
+	<string name="avoid_ferries">Vermy veerbote</string>
+	<string name="avoid_in_routing_title">Vermy…</string>
+	<string name="avoid_in_routing_descr">Vermy tolpaaie, grondpaaie, veerbote</string>
+	<string name="map_widget_fluorescent">Helder roetes</string>
+	<string name="map_widget_show_ruler">Liniaal</string>
+	<string name="map_widget_appearance">Verskeie:</string>
+	<string name="map_widget_view_direction">Kykrigting</string>
+	<string name="map_widget_transparent">Deursigtige vel</string>
+	<string name="monitoring_mode_off">Maak `n GPX opname</string>
+	<string name="gps_wakeup_interval">GPS opwek tussenpose: %s</string>
+	<string name="int_continuosly">Aaneenlopende</string>
+	</resources>
