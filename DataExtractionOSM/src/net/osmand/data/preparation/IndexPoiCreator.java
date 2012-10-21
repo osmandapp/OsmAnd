@@ -290,11 +290,11 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 		int left31 = minX;
 		int bottom31 = maxY;
 		int top31 = minY;
-		long startFpPoiIndex = writer.startWritePOIIndex(regionName, left31, right31, bottom31, top31);
+		long startFpPoiIndex = writer.startWritePoiIndex(regionName, left31, right31, bottom31, top31);
 
 		// 2. write categories table
 		Map<String, Map<String, Integer>> categories = rootZoomsTree.node.categories;
-		Map<String, Integer> catIndexes = writer.writePOICategoriesTable(categories);
+		Map<String, Integer> catIndexes = writer.writePoiCategoriesTable(categories);
 		
 		// 2.5 write names table
 		Map<PoiTileBox, List<BinaryFileReference>> fpToWriteSeeks = writer.writePoiNameIndex(namesIndex, startFpPoiIndex);
@@ -380,7 +380,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 
 		prepareStatement.close();
 
-		writer.endWritePOIIndex();
+		writer.endWritePoiIndex();
 
 	}
 	
@@ -439,7 +439,7 @@ public class IndexPoiCreator extends AbstractIndexPartCreator {
 					buildTypeIds(cat, subcat, categories, catIndexes, types);
 				}
 			}
-			writer.writePOICategories(types);
+			writer.writePoiCategories(types);
 		}
 		
 		if (!end) {

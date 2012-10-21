@@ -316,7 +316,7 @@ public class BinaryMapIndexWriter {
 		}
 	}
 	
-	public void startRouteBorderBox(int leftX, int rightX, int topY, int bottomY, 	int zoomToSplit, boolean basemap) throws IOException {
+	public void startWriteRouteBorderBox(int leftX, int rightX, int topY, int bottomY, 	int zoomToSplit, boolean basemap) throws IOException {
 		pushState(ROUTE_BORDER_BOX, ROUTE_INDEX_INIT);
 		if(basemap) {
 			codedOutStream.writeTag(OsmAndRoutingIndex.BASEBORDERBOX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
@@ -366,7 +366,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessageNoTag(builder.build());
 	}
 	
-	public void endRouteBorderBox() throws IOException {
+	public void endWriteRouteBorderBox() throws IOException {
 		stackBounds.pop();
 		popState(ROUTE_BORDER_BOX);
 		writeInt32Size();
@@ -1165,7 +1165,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER, st.build());
 	}
 
-	public long startWritePOIIndex(String name, int left31, int right31, int bottom31, int top31) throws IOException {
+	public long startWritePoiIndex(String name, int left31, int right31, int bottom31, int top31) throws IOException {
 		pushState(POI_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		stackBounds.push(new Bounds(0, 0, 0, 0)); // for poi index tree
@@ -1183,14 +1183,14 @@ public class BinaryMapIndexWriter {
 		return startPointer;
 	}
 
-	public void endWritePOIIndex() throws IOException {
+	public void endWritePoiIndex() throws IOException {
 		popState(POI_INDEX_INIT);
 		int len = writeInt32Size();
 		stackBounds.pop();
 		log.info("POI INDEX SIZE : " + len);
 	}
 
-	public Map<String, Integer> writePOICategoriesTable(Map<String, Map<String, Integer>> categories) throws IOException {
+	public Map<String, Integer> writePoiCategoriesTable(Map<String, Map<String, Integer>> categories) throws IOException {
 		checkPeekState(POI_INDEX_INIT);
 		Map<String, Integer> catIndexes = new LinkedHashMap<String, Integer>();
 		int i = 0;
@@ -1213,7 +1213,7 @@ public class BinaryMapIndexWriter {
 		return catIndexes;
 	}
 
-	public void writePOICategories(TIntArrayList categories) throws IOException {
+	public void writePoiCategories(TIntArrayList categories) throws IOException {
 		checkPeekState(POI_BOX);
 		OsmandOdb.OsmAndPoiCategories.Builder builder = OsmandOdb.OsmAndPoiCategories.newBuilder();
 		int prev = -1;

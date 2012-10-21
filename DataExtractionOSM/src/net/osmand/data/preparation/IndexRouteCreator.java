@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -82,8 +81,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	TLongObjectHashMap<TIntArrayList> pointTypes = new TLongObjectHashMap<TIntArrayList>();
 	Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>();
 	
+	
 	TLongObjectHashMap<GeneralizedCluster> generalClusters = new TLongObjectHashMap<GeneralizedCluster>();
-
 	private PreparedStatement mapRouteInsertStat;
 	private PreparedStatement basemapRouteInsertStat;
 
@@ -92,163 +91,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		this.logMapDataWarn = logMapDataWarn;
 		this.routeTypes = new MapRoutingTypes();
 	}
-
-	/*private*/ static class GeneralizedCluster {
-		public final int x;
-		public final int y;
-		public final int zoom;
-		
-		public GeneralizedCluster(int x, int y, int z){
-			this.x = x;
-			this.y = y;
-			this.zoom = z;
-		}
-		
-		public final Set<GeneralizedWay> ways = new HashSet<IndexRouteCreator.GeneralizedWay>();
-		// either LinkedList<GeneralizedWay> or GeneralizedWay
-		public final TLongObjectHashMap<Object> map = new TLongObjectHashMap<Object>();
-		
-		@SuppressWarnings({ "rawtypes", "unchecked" })
-		public void replaceWayFromLocation(GeneralizedWay delete, int ind, GeneralizedWay toReplace){
-			ways.remove(delete);
-			long loc = delete.getLocation(ind);
-			Object o = map.get(loc);
-			if(o instanceof GeneralizedWay){
-				if(delete == o) {
-					map.put(loc, toReplace);
-				} else if(toReplace !=  o){
-					addWay(toReplace, loc);
-				}
-			} else if(o instanceof LinkedList){
-				((LinkedList) o).remove(delete);
-				if(!((LinkedList) o).contains(toReplace)){
-					((LinkedList) o).add(toReplace);
-				}
-			} else {
-				map.put(loc, toReplace);
-			}
-		}
-		
-		public void removeWayFromLocation(GeneralizedWay delete, int ind){
-			removeWayFromLocation(delete, ind, false);
-		}
-		@SuppressWarnings("rawtypes")
-		public void removeWayFromLocation(GeneralizedWay delete, int ind, boolean deleteAll) {
-			long loc = delete.getLocation(ind);
-			boolean ex = false;
-			if (!deleteAll) {
-				for (int t = 0; t < delete.size(); t++) {
-					if (t != ind && map.containsKey(delete.getLocation(t))) {
-						ex = true;
-						break;
-					}
-				}
-			}
-			if (!ex || deleteAll) {
-				ways.remove(delete);
-			}
-
-			Object o = map.get(loc);
-			if (o instanceof GeneralizedWay) {
-				if (delete == o) {
-					map.remove(loc);
-				}
-			} else if (o instanceof LinkedList) {
-				((LinkedList) o).remove(delete);
-				if (((LinkedList) o).size() == 1) {
-					map.put(loc, ((LinkedList) o).iterator().next());
-				} else if (((LinkedList) o).size() == 0) {
-					map.remove(loc);
-				}
-			}
-		}
-		
-		public void addWayFromLocation(GeneralizedWay w, int i) {
-			ways.add(w);
-			long loc = w.getLocation(i);
-			addWay(w, loc);
-		}
-
-		@SuppressWarnings("unchecked")
-		private void addWay(GeneralizedWay w, long loc) {
-			
-			if (map.containsKey(loc)) {
-				Object o = map.get(loc);
-				if (o instanceof LinkedList) {
-					if(!((LinkedList<GeneralizedWay>) o).contains(w)){
-						((LinkedList<GeneralizedWay>) o).add(w);
-					}
-				} else if(o != w){
-					LinkedList<GeneralizedWay> list = new LinkedList<GeneralizedWay>();
-					list.add((GeneralizedWay) o);
-					list.add(w);
-					map.put(loc, list);
-				}
-			} else {
-				map.put(loc, w);
-			}
-		}
-	}
-	private static class GeneralizedWay {
-		private long id;
-		private int mainType;
-		private TIntHashSet addtypes = new TIntHashSet();
-		private TIntArrayList px = new TIntArrayList();
-		private TIntArrayList py = new TIntArrayList();
-		
-		// TLongObjectHashMap<TIntArrayList> pointTypes = new TLongObjectHashMap<TIntArrayList>();
-		private Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>();
-		public GeneralizedWay(long id) {
-			this.id = id;
-		}
-		
-		public double getDistance() {
-			double dx = 0;
-			for (int i = 1; i < px.size(); i++) {
-				dx += MapUtils.getDistance(MapUtils.get31LatitudeY(py.get(i - 1)), MapUtils.get31LongitudeX(px.get(i - 1)),
-						MapUtils.get31LatitudeY(py.get(i)), MapUtils.get31LongitudeX(px.get(i)));
-			}
-			return dx;
-		}
-		
-		public long getLocation(int ind) {
-			return getBaseId(px.get(ind), py.get(ind));
-		}
-		
-		public int size(){
-			return px.size();
-		}
-		
-		// Gives route direction of EAST degrees from NORTH ]-PI, PI]
-		public double directionRoute(int startPoint, boolean plus) {
-			float dist = 5;
-			int x = this.px.get(startPoint);
-			int y = this.py.get(startPoint);
-			int nx = startPoint;
-			int px = x;
-			int py = y;
-			double total = 0;
-			do {
-				if (plus) {
-					nx++;
-					if (nx >= size()) {
-						break;
-					}
-				} else {
-					nx--;
-					if (nx < 0) {
-						break;
-					}
-				}
-				px = this.px.get(nx);
-				py = this.py.get(nx);
-				// translate into meters
-				total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
-			} while (total < dist);
-			return -Math.atan2( x - px, y - py );
-		}
-	}
-	
 	public void indexRelations(Entity e, OsmDbAccessorContext ctx) throws SQLException {
 		indexHighwayRestrictions(e, ctx);
 	}
@@ -262,8 +104,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				// Load point with  tags!
 				ctx.loadEntityWay(e);
 				routeTypes.encodePointTypes(e, pointTypes);
-				addWayToIndex(e.getId(), e.getNodes(), mapRouteInsertStat, routeTree);
-				generalizeWay(e);
+//				addWayToIndex(e.getId(), e.getNodes(), mapRouteInsertStat, routeTree);
+//				generalizeWay(e);
 			}
 		}
 		
@@ -567,6 +409,9 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					routeTree, false);
 			TLongObjectHashMap<BinaryFileReference> base = writeBinaryRouteIndexHeader(writer,  
 					baserouteTree, true);
+			writeBorderBox(false);
+			writeBorderBox(true);
+			
 			writeBinaryRouteIndexBlocks(writer, routeTree, false, route);
 			writeBinaryRouteIndexBlocks(writer, baserouteTree, true, base);
 			
@@ -577,6 +422,10 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 	
+	private void writeBorderBox(boolean basemap) {
+		// TODO Auto-generated method stub
+		
+	}
 	private Node convertBaseToNode(long s) {
 		long x = s >> 31;
 		long y = s - (x << 31);
@@ -680,10 +529,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		// 3. Douglas peuker simplifications
 		douglasPeukerSimplificationStep(clusters);
 		
-		// 4. remove line duplication
-		// very buggy poland (deletes part of motorway)
-//		removeSmall2RoadsConnectors(clusters);		
-
 		
 		// 5. write to db
 		TLongHashSet ids = new TLongHashSet();
@@ -842,47 +687,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			}
 		}
 	}
-
 	
-	private void removeSmall2RoadsConnectors(Collection<GeneralizedCluster> clusters) {
-		for(GeneralizedCluster cluster : clusters) {
-			ArrayList<GeneralizedWay> copy = new ArrayList<GeneralizedWay>(cluster.ways);
-			for (GeneralizedWay gw : copy) {
-				// roundabout
-				if (gw.getDistance() < 500) {
-					LinkedHashSet<GeneralizedWay> ll = new LinkedHashSet<GeneralizedWay>();
-					for (int i = 0; i < gw.size(); i++) {
-						getAdjacentRoads(cluster, gw, i, ll);
-					}
-					if(ll.size() <= 1) {
-						removeGeneratedWay(gw, cluster);
-					} else if(ll.size() >= 2){
-						boolean intersect = true;
-						while(ll.size() > 1 && intersect) {
-							Iterator<GeneralizedWay> it = ll.iterator();
-							GeneralizedWay first = it.next();
-							it.remove();
-							
-							intersect = false;
-							LinkedHashSet<GeneralizedWay> ls = new LinkedHashSet<GeneralizedWay>();
-							for(int j = 0; j< first.size(); j++) {
-								getAdjacentRoads(cluster, first, j, ls);
-								if(ls.containsAll(ll)) {
-									intersect = true;
-									break;
-								}
-							}
-						}
-						if(intersect) {
-							removeGeneratedWay(gw, cluster);
-						}
-					}
-				}
-			}
-		}
-	}
-
-
 	private void removeGeneratedWay(GeneralizedWay gw, GeneralizedCluster gcluster) {
 		for (int i = 0; i < gw.size(); i++) {
 			gcluster = getCluster(gw, i, gcluster);
@@ -1225,4 +1030,162 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	
 	
 
+	
+	
+
+	/*private*/ static class GeneralizedCluster {
+		public final int x;
+		public final int y;
+		public final int zoom;
+		
+		public GeneralizedCluster(int x, int y, int z){
+			this.x = x;
+			this.y = y;
+			this.zoom = z;
+		}
+		
+		public final Set<GeneralizedWay> ways = new HashSet<IndexRouteCreator.GeneralizedWay>();
+		// either LinkedList<GeneralizedWay> or GeneralizedWay
+		public final TLongObjectHashMap<Object> map = new TLongObjectHashMap<Object>();
+		
+		@SuppressWarnings({ "rawtypes", "unchecked" })
+		public void replaceWayFromLocation(GeneralizedWay delete, int ind, GeneralizedWay toReplace){
+			ways.remove(delete);
+			long loc = delete.getLocation(ind);
+			Object o = map.get(loc);
+			if(o instanceof GeneralizedWay){
+				if(delete == o) {
+					map.put(loc, toReplace);
+				} else if(toReplace !=  o){
+					addWay(toReplace, loc);
+				}
+			} else if(o instanceof LinkedList){
+				((LinkedList) o).remove(delete);
+				if(!((LinkedList) o).contains(toReplace)){
+					((LinkedList) o).add(toReplace);
+				}
+			} else {
+				map.put(loc, toReplace);
+			}
+		}
+		
+		public void removeWayFromLocation(GeneralizedWay delete, int ind){
+			removeWayFromLocation(delete, ind, false);
+		}
+		@SuppressWarnings("rawtypes")
+		public void removeWayFromLocation(GeneralizedWay delete, int ind, boolean deleteAll) {
+			long loc = delete.getLocation(ind);
+			boolean ex = false;
+			if (!deleteAll) {
+				for (int t = 0; t < delete.size(); t++) {
+					if (t != ind && map.containsKey(delete.getLocation(t))) {
+						ex = true;
+						break;
+					}
+				}
+			}
+			if (!ex || deleteAll) {
+				ways.remove(delete);
+			}
+
+			Object o = map.get(loc);
+			if (o instanceof GeneralizedWay) {
+				if (delete == o) {
+					map.remove(loc);
+				}
+			} else if (o instanceof LinkedList) {
+				((LinkedList) o).remove(delete);
+				if (((LinkedList) o).size() == 1) {
+					map.put(loc, ((LinkedList) o).iterator().next());
+				} else if (((LinkedList) o).size() == 0) {
+					map.remove(loc);
+				}
+			}
+		}
+		
+		public void addWayFromLocation(GeneralizedWay w, int i) {
+			ways.add(w);
+			long loc = w.getLocation(i);
+			addWay(w, loc);
+		}
+
+		@SuppressWarnings("unchecked")
+		private void addWay(GeneralizedWay w, long loc) {
+			
+			if (map.containsKey(loc)) {
+				Object o = map.get(loc);
+				if (o instanceof LinkedList) {
+					if(!((LinkedList<GeneralizedWay>) o).contains(w)){
+						((LinkedList<GeneralizedWay>) o).add(w);
+					}
+				} else if(o != w){
+					LinkedList<GeneralizedWay> list = new LinkedList<GeneralizedWay>();
+					list.add((GeneralizedWay) o);
+					list.add(w);
+					map.put(loc, list);
+				}
+			} else {
+				map.put(loc, w);
+			}
+		}
+	}
+	/*private*/ static class GeneralizedWay {
+		private long id;
+		private int mainType;
+		private TIntHashSet addtypes = new TIntHashSet();
+		private TIntArrayList px = new TIntArrayList();
+		private TIntArrayList py = new TIntArrayList();
+		
+		// TLongObjectHashMap<TIntArrayList> pointTypes = new TLongObjectHashMap<TIntArrayList>();
+		private Map<MapRoutingTypes.MapRouteType, String> names = new HashMap<MapRoutingTypes.MapRouteType, String>();
+		public GeneralizedWay(long id) {
+			this.id = id;
+		}
+		
+		public double getDistance() {
+			double dx = 0;
+			for (int i = 1; i < px.size(); i++) {
+				dx += MapUtils.getDistance(MapUtils.get31LatitudeY(py.get(i - 1)), MapUtils.get31LongitudeX(px.get(i - 1)),
+						MapUtils.get31LatitudeY(py.get(i)), MapUtils.get31LongitudeX(px.get(i)));
+			}
+			return dx;
+		}
+		
+		public long getLocation(int ind) {
+			return getBaseId(px.get(ind), py.get(ind));
+		}
+		
+		public int size(){
+			return px.size();
+		}
+		
+		// Gives route direction of EAST degrees from NORTH ]-PI, PI]
+		public double directionRoute(int startPoint, boolean plus) {
+			float dist = 5;
+			int x = this.px.get(startPoint);
+			int y = this.py.get(startPoint);
+			int nx = startPoint;
+			int px = x;
+			int py = y;
+			double total = 0;
+			do {
+				if (plus) {
+					nx++;
+					if (nx >= size()) {
+						break;
+					}
+				} else {
+					nx--;
+					if (nx < 0) {
+						break;
+					}
+				}
+				px = this.px.get(nx);
+				py = this.py.get(nx);
+				// translate into meters
+				total += Math.abs(px - x) * 0.011d + Math.abs(py - y) * 0.01863d;
+			} while (total < dist);
+			return -Math.atan2( x - px, y - py );
+		}
+	}
 }
