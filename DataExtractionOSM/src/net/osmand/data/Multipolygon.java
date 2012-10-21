@@ -35,6 +35,12 @@ public class Multipolygon {
 	 */
 	private List<Way> outerWays, innerWays;
 	
+	// Cache for fast contains calculation
+	private float maxLat = -90;
+	private float minLat = 90;
+	private float maxLon = -180;
+	private float minLon = 180;
+	
 	/**
 	 * an optional id of the multipolygon
 	 */
@@ -105,6 +111,13 @@ public class Multipolygon {
 	 * @return true if this multipolygon is correct and contains the point
 	 */
 	public boolean containsPoint(double latitude, double longitude) {
+		// fast check
+		updateCacheOfRings();
+		if(maxLat + 1 < latitude || minLat - 1 > latitude || 
+				maxLon + 1 < longitude || minLon - 1 > longitude) {
+			return false;
+		}
+		
 		Ring containedInOuter = null;
 		// use a sortedset to get the smallest outer containing the point
 		SortedSet<Ring> outers = new TreeSet<Ring> (getOuterRings());
@@ -140,7 +153,7 @@ public class Multipolygon {
 	 * @return the inner rings
 	 */
 	public List<Ring> getInnerRings() {
-		groupInRings();
+		updateCacheOfRings();
 		return innerRings;
 	}
 	
@@ -149,7 +162,7 @@ public class Multipolygon {
 	 * @return outer rings
 	 */
 	public List<Ring> getOuterRings() {
-		groupInRings();
+		updateCacheOfRings();
 		return outerRings;
 	}
 
@@ -180,7 +193,7 @@ public class Multipolygon {
 	 * @return
 	 */
 	public int countOuterPolygons() {
-		groupInRings();
+		updateCacheOfRings();
 		return zeroSizeIfNull(getOuterRings());
 	}
 	
@@ -287,9 +300,17 @@ public class Multipolygon {
 	 * Create the cache <br />
 	 * The cache has to be null before it will be created
 	 */
-	private void groupInRings() {
+	private void updateCacheOfRings() {
 		if (outerRings == null) {
 			outerRings = Ring.combineToRings(getOuterWays());
+			for(Ring r : outerRings) {
+				for(Node n : r.getBorder()){
+					maxLat = (float) Math.max(maxLat, n.getLatitude());
+					minLat = (float) Math.min(minLat, n.getLatitude());
+					maxLon = (float) Math.max(maxLon, n.getLongitude());
+					minLon = (float) Math.min(minLon, n.getLongitude());
+				}
+			}
 		}
 		if (innerRings == null) {
 			innerRings = Ring.combineToRings(getInnerWays());
