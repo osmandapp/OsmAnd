@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Tilelist-viewer</title>
+    <style type="text/css">
+      html, body {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          font-family:sans-serif;
+      }
+	#basicMap {
+          width: 100%;
+          height: 95%;
+          margin: 0;
+          font-family:sans-serif;
+          font-size: 0.7em;
+      }
+    </style>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="tilelist-viewer.js"></script>
+    <script type="text/javascript">
+	function get_xml(file){
+		var oRequest = new XMLHttpRequest();
+		oRequest.open("GET",file,false);
+		oRequest.setRequestHeader("User-Agent",navigator.userAgent);
+		oRequest.send()
+		return oRequest.responseXML;
+	}
+	  
+	var xmlDoc = get_xml('tiles-tree.xml');
+	var selectcont;
+	var selectcount;
+	var selectcregi;
+	var vectorLayer;
+	var feature;
+	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+	
+	function setContinents(){
+		
+		var el = document.createElement("option");
+	    el.textContent = '';
+	    el.value = '';
+	    selectcont.appendChild(el);
+		var conts=xmlDoc.getElementsByTagName("continent")
+		for(var i = 0; i < conts.length; i++) {
+		    opt = conts[i].getAttribute("name");
+		    el = document.createElement("option");
+		    el.textContent = opt;
+		    el.value = opt;
+		    selectcont.appendChild(el);
+		}
+	}
+	function setCountries(cont){
+		selectcount.options.length = 0;
+		selectregi.options.length = 0;
+		
+		var el = document.createElement("option");
+	    el.textContent = '';
+	    el.value = '';
+	    selectcount.appendChild(el);
+		
+		var conts=xmlDoc.getElementsByTagName("continent");
+		for(var i = 0; i < conts.length; i++) {
+		    if (conts[i].getAttribute("name") == cont){
+				counts=conts[i].getElementsByTagName("country");
+				for(var j = 0; j < counts.length; j++) {
+				    opt = counts[j].getAttribute("name");
+				    el = document.createElement("option");
+				    el.textContent = opt;
+				    el.value = opt;
+				    selectcount.appendChild(el);
+				}
+			}
+		}
+	}
+	function setRegions(count){
+		selectregi.options.length = 0;
+		
+		var el = document.createElement("option");
+	    el.textContent = '';
+	    el.value = '';
+	    selectregi.appendChild(el);	
+	    
+		var counts=xmlDoc.getElementsByTagName("country");
+		for(var j = 0; j < counts.length; j++) {
+			if (counts[j].getAttribute("name") == count){
+				regis=counts[j].getElementsByTagName("region");
+				for(var k = 0; k < regis.length; k++) {
+				    var opt = regis[k].getAttribute("name");
+				    var el = document.createElement("option");
+				    el.textContent = opt;
+				    el.value = opt;
+				    selectregi.appendChild(el);
+				}
+			}
+		}
+	}
+	function show(){
+		continent=selectcont.value;
+		country=selectcount.value;
+		region=selectregi.value;
+		if (continent != '' &&  country!= '' && region != '') {
+			list=getTilelist(continent,country,region);
+		}
+		else if (continent != '' &&  country!= '' && region == '') {
+			list=getTilelist(continent,country, '');
+		}
+		// document.getElementById('testing').innerHTML =list;
+		// remove features
+		var x;
+		var y;
+		var lonlat;
+		for(var i = 0; i < list.length; i++) {
+			x = parseFloat(list[i].split(' ')[0]);
+			y = parseFloat(list[i].split(' ')[1]);
+			
+			if (i==0) {var center = new OpenLayers.LonLat(x,y).transform( fromProjection, toProjection);}
+			
+			geom = new OpenLayers.Geometry.LinearRing();
+			
+			geom.addComponent(new OpenLayers.Geometry.Point(x,y))
+			geom.addComponent(new OpenLayers.Geometry.Point(x,y+1))
+			geom.addComponent(new OpenLayers.Geometry.Point(x+1,y+1))
+			geom.addComponent(new OpenLayers.Geometry.Point(x+1,y))
+			geom.addComponent(new OpenLayers.Geometry.Point(x,y))
+			feature = new OpenLayers.Feature.Vector(geom.transform(fromProjection,toProjection));
+			vectorLayer.addFeatures([feature]);
+		}
+		map.setCenter(center, map.getZoom() );
+		//~ vectors.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat))]);
+		
+	}
+	function getTilelist(continent,country,region){
+		var tilelist='';
+		var conts=xmlDoc.getElementsByTagName("continent");
+		for(var i = 0; i < conts.length; i++) {
+			if (conts[i].getAttribute("name") == continent){
+				var counts=conts[i].getElementsByTagName("country");
+				for(var j = 0; j < counts.length; j++) {
+					if (counts[j].getAttribute("name") == country){
+						if (region == '') {
+							tilelist=counts[j].getElementsByTagName("tiles")[0].childNodes[0].nodeValue.split(';');
+						}
+						else {
+							regis=counts[j].getElementsByTagName("region");
+							for(var k = 0; k < regis.length; k++) {
+								if (regis[k].getAttribute("name") == region){
+									tilelist=regis[k].getElementsByTagName("tiles")[0].childNodes[0].nodeValue.split(';');
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return tilelist
+	}
+	
+	function init() {
+	
+	selectcont = document.getElementById("continents");
+	selectcount = document.getElementById("countries");
+	selectregi = document.getElementById("regions");
+	setContinents();
+	map_init();
+	}
+	
+	function map_init() {
+	var options = {
+	  controls: [
+		new OpenLayers.Control.Navigation(),
+		new OpenLayers.Control.PanZoomBar(),
+		new OpenLayers.Control.Attribution(),
+		new OpenLayers.Control.Graticule({
+				labelled: true,
+				labelformat: 'd',
+				targetSize: 200
+			})
+	  ]
+	};
+	map = new OpenLayers.Map("basicMap", options);
+	var mapnik         = new OpenLayers.Layer.OSM();
+	var position       = new OpenLayers.LonLat(5,46).transform( fromProjection, toProjection);
+	var zoom           = 3; 
+	
+	map.addLayer(mapnik);
+	
+	vectorLayer = new OpenLayers.Layer.Vector(  "vectors");
+	map.addLayers([vectorLayer])
+	
+	map.setCenter(position, zoom );
+	}
+    </script>
+  </head>
+  <body onload="init();">
+	<div id="menu">
+	  <form>
+	  <select id="continents" onchange="setCountries(this.value);"></select>
+	  <select id="countries" onchange="setRegions(this.value);"></select>
+	  <select id="regions"></select>
+	  <input type="button" value="Show" onclick="show();">
+	  </form>
+	</div>
+	<div id="basicMap"></div>
+  </body>
+</html>
