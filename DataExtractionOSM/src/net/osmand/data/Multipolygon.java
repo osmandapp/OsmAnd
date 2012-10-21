@@ -303,6 +303,10 @@ public class Multipolygon {
 	private void updateCacheOfRings() {
 		if (outerRings == null) {
 			outerRings = Ring.combineToRings(getOuterWays());
+			maxLat = -90;
+			minLat = 90;
+			maxLon = -180;
+			minLon = 180;
 			for(Ring r : outerRings) {
 				for(Node n : r.getBorder()){
 					maxLat = (float) Math.max(maxLat, n.getLatitude());
