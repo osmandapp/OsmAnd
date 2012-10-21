@@ -699,7 +699,7 @@ public class IndexCreator {
 						deleteDatabaseIndexes);
 				indexMapCreator.commitAndCloseFiles(getRTreeMapIndexNonPackFileName(), getRTreeMapIndexPackFileName(),
 						deleteDatabaseIndexes);
-				indexRouteCreator.commitAndCloseFiles(getRTreeRouteIndexPackFileName(), getRTreeRouteIndexPackFileName(),
+				indexRouteCreator.commitAndCloseFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName(),
 						deleteDatabaseIndexes);
 
 				if (mapConnection != null) {
@@ -741,10 +741,10 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-//		creator.setIndexMap(true);
-//		creator.setIndexAddress(true);
-//		creator.setIndexPOI(true);
-//		creator.setIndexTransport(true);
+		creator.setIndexMap(true);
+		creator.setIndexAddress(true);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
 		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;

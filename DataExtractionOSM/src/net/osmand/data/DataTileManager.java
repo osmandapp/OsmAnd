@@ -38,7 +38,7 @@ public class DataTileManager<T> {
 	@SuppressWarnings("rawtypes")
 	public int getObjectsCount(){
 		int x = 0;
-		for(List s : objects.values()){
+		for(List s : objects.valueCollection()){
 			x += s.size();
 		}
 		return x;
@@ -53,7 +53,7 @@ public class DataTileManager<T> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<T> getAllObjects(){
 		List<T> l = new ArrayList<T>();
-		for(List s : objects.values()){
+		for(List s : objects.valueCollection()){
 			l.addAll(s);
 		}
 		return l;
