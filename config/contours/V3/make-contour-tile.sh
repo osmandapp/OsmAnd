@@ -39,7 +39,7 @@ outfile=$outdir$fileroot.osm
 # ---------------------------------------------
 # process
 # ---------------------------------------------
-if [ ! -f $outfile ]
+if [ ! -f $outfile.bz2 ]
 then
 	echo "----------------------------------------------"
 	echo "Processing"$fileroot
