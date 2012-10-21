@@ -20,7 +20,8 @@ public enum DBDialect {
 	DERBY,
 	H2,
 	NOSQL,
-	SQLITE;
+	SQLITE,
+	SQLITE_IN_MEMORY;
 	
 	public void deleteTableIfExists(String table, Statement stat) throws SQLException {
 		if(this == DERBY){
@@ -87,14 +88,15 @@ public enum DBDialect {
 				throw new SQLException(status.ToString());
 			}
 			return dbAccessor;
-		} else if (DBDialect.SQLITE == this) {
+		} else if (DBDialect.SQLITE == this || DBDialect.SQLITE_IN_MEMORY == this) {
 			try {
 				Class.forName("org.sqlite.JDBC");
 			} catch (ClassNotFoundException e) {
 				log.error("Illegal configuration", e);
 				throw new IllegalStateException(e);
 			}
-			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + fileName);
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:" + (DBDialect.SQLITE_IN_MEMORY == this? ":memory:": 
+					fileName));
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("PRAGMA synchronous = 0");
 			//no journaling, saves some I/O access, but database can go corrupt

@@ -1,13 +1,12 @@
 package net.osmand.data;
 
+import gnu.trove.map.hash.TLongObjectHashMap;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.osm.MapUtils;
-
 
 /**
  * 
@@ -15,12 +14,9 @@ import net.osmand.osm.MapUtils;
  */
 public class DataTileManager<T> {
 	
-	private int zoom = 15;
+	private final int zoom;
 	
-	/**
-	 * map for objects stores as 'xTile_yTile' -> List<T>
-	 */
-	private Map<String, List<T>> objects = new HashMap<String, List<T>>();
+	private TLongObjectHashMap<List<T>> objects = new TLongObjectHashMap<List<T>>();
 	
 	public DataTileManager(){
 		zoom = 15;
@@ -33,30 +29,18 @@ public class DataTileManager<T> {
 	public int getZoom() {
 		return zoom;
 	}
-	
-	public void setZoom(int zoom) {
-		// it is required to reindex all stored objects
-		if(!isEmpty()){
-			throw new UnsupportedOperationException();
-		}
-		this.zoom = zoom;
-	}
+
 	
 	public boolean isEmpty(){
-		for(String s : objects.keySet()){
-			if(!objects.get(s).isEmpty()){
-				return false;
-			}
-		}
-		return true;
+		return getObjectsCount() == 0;
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public int getObjectsCount(){
 		int x = 0;
-		for(String s : objects.keySet()){
-			x += objects.get(s).size();
+		for(List s : objects.valueCollection()){
+			x += s.size();
 		}
-		
 		return x;
 	}
 	
@@ -66,10 +50,11 @@ public class DataTileManager<T> {
 		} 
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public List<T> getAllObjects(){
 		List<T> l = new ArrayList<T>();
-		for(String s : objects.keySet()){
-			l.addAll(objects.get(s));
+		for(List s : objects.valueCollection()){
+			l.addAll(s);
 		}
 		return l;
 	}
@@ -146,27 +131,29 @@ public class DataTileManager<T> {
 		return result;
 	}
 	
-	private String evTile(int tileX, int tileY){
-		return tileX +"_"+tileY; //$NON-NLS-1$
+	private long evTile(int tileX, int tileY){
+		long tx = tileX;
+		long ty = tileY;
+		return ((tx) << zoom) + ty; 
 	}
 	
 	
-	public String evaluateTile(double latitude, double longitude){
+	public long evaluateTile(double latitude, double longitude){
 		int tileX = (int) MapUtils.getTileNumberX(zoom, longitude);
 		int tileY = (int) MapUtils.getTileNumberY(zoom, latitude);
 		return evTile(tileX, tileY);
 	}
 	
 	public void unregisterObject(double latitude, double longitude, T object){
-		String tile = evaluateTile(latitude, longitude);
+		long tile = evaluateTile(latitude, longitude);
 		if(objects.containsKey(tile)){
 			objects.get(tile).remove(object);
 		}
 		
 	}
 	
-	public String registerObject(double latitude, double longitude, T object){
-		String tile = evaluateTile(latitude, longitude);
+	public long registerObject(double latitude, double longitude, T object){
+		long tile = evaluateTile(latitude, longitude);
 		if(!objects.containsKey(tile)){
 			objects.put(tile, new ArrayList<T>());
 		}

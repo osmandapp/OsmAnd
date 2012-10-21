@@ -224,8 +224,7 @@ public class MinskTransReader {
 		OsmBaseStorage storage = new OsmBaseStorage();
 		
 		final Map<String, Relation> definedRoutes = new HashMap<String, Relation>();
-		final DataTileManager<Node> busStops = new DataTileManager<Node>();
-		busStops.setZoom(17);
+		final DataTileManager<Node> busStops = new DataTileManager<Node>(17);
 		storage.getFilters().add(new IOsmStorageFilter(){
 
 			@Override

@@ -87,8 +87,7 @@ public class MapClusterLayer implements MapPanelLayer {
 				try {
 					List<RouteSegment> ways = clustering(latitude, longitude);
 					if (!ANIMATE_CLUSTERING) {
-						DataTileManager<Way> points = new DataTileManager<Way>();
-						points.setZoom(11);
+						DataTileManager<Way> points = new DataTileManager<Way>(11);
 						for (RouteSegment s : ways) {
 							Way w = new Way(-1);
 							for (int i = 0; i < s.getRoad().getPointsLength(); i++) {
@@ -132,8 +131,7 @@ public class MapClusterLayer implements MapPanelLayer {
 			log.info("ROAD TO START " + highway + " " + //road.getName() + " " 
 					+ road.id);
 		}
-		final DataTileManager<Way> points = new DataTileManager<Way>();
-		points.setZoom(11);
+		final DataTileManager<Way> points = new DataTileManager<Way>(11);
 		map.setPoints(points);
 		
 		ctx.setVisitor(new RouteSegmentVisitor() {

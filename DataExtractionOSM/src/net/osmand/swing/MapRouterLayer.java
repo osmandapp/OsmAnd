@@ -176,8 +176,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					public void run() {
 						List<Way> ways = selfRoute(startRoute, endRoute, intermediates, null);
 						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>();
-							points.setZoom(11);
+							DataTileManager<Way> points = new DataTileManager<Way>(11);
 							for (Way w : ways) {
 								LatLon n = w.getLatLon();
 								points.registerObject(n.getLatitude(), n.getLongitude(), w);
@@ -205,8 +204,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					public void run() {
 						List<Way> ways = selfRoute(startRoute, endRoute, intermediates,  previousRoute);
 						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>();
-							points.setZoom(11);
+							DataTileManager<Way> points = new DataTileManager<Way>(11);
 							for (Way w : ways) {
 								LatLon n = w.getLatLon();
 								points.registerObject(n.getLatitude(), n.getLongitude(), w);
@@ -229,8 +227,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					@Override
 					public void run() {
 						List<Way> ways = route_YOURS(startRoute, endRoute);
-						DataTileManager<Way> points = new DataTileManager<Way>();
-						points.setZoom(11);
+						DataTileManager<Way> points = new DataTileManager<Way>(11);
 						for(Way w : ways){
 							LatLon n = w.getLatLon();
 							points.registerObject(n.getLatitude(), n.getLongitude(), w);
@@ -250,8 +247,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					@Override
 					public void run() {
 						List<Way> ways = route_CloudMate(startRoute, endRoute);
-						DataTileManager<Way> points = new DataTileManager<Way>();
-						points.setZoom(11);
+						DataTileManager<Way> points = new DataTileManager<Way>(11);
 						for (Way w : ways) {
 							LatLon n = w.getLatLon();
 							points.registerObject(n.getLatitude(), n.getLongitude(), w);
@@ -644,8 +640,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					}
 				}
 				
-				final DataTileManager<Entity> points = new DataTileManager<Entity>();
-				points.setZoom(11);
+				final DataTileManager<Entity> points = new DataTileManager<Entity>(11);
 				map.setPoints(points);
 				ctx.setVisitor(new RouteSegmentVisitor() {
 					

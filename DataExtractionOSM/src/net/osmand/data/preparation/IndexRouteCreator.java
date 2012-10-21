@@ -238,17 +238,17 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		if (routeTree != null) {
 			RandomAccessFile file = routeTree.getFileHdr().getFile();
 			file.close();
-			if (rTreeMapIndexNonPackFileName != null) {
-				File f = new File(rTreeMapIndexNonPackFileName);
-				if (f.exists() && deleteDatabaseIndexes) {
-					f.delete();
-				}
+		}
+		if (rTreeMapIndexNonPackFileName != null) {
+			File f = new File(rTreeMapIndexNonPackFileName);
+			if (f.exists() && deleteDatabaseIndexes) {
+				f.delete();
 			}
-			if (rTreeMapIndexPackFileName != null) {
-				File f = new File(rTreeMapIndexPackFileName);
-				if (f.exists() && deleteDatabaseIndexes) {
-					f.delete();
-				}
+		}
+		if (rTreeMapIndexPackFileName != null) {
+			File f = new File(rTreeMapIndexPackFileName);
+			if (f.exists() && deleteDatabaseIndexes) {
+				f.delete();
 			}
 		}
 		closeAllPreparedStatements();

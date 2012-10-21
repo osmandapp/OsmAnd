@@ -692,7 +692,7 @@ public class IndexCreator {
 						deleteDatabaseIndexes);
 				indexMapCreator.commitAndCloseFiles(getRTreeMapIndexNonPackFileName(), getRTreeMapIndexPackFileName(),
 						deleteDatabaseIndexes);
-				indexRouteCreator.commitAndCloseFiles(getRTreeRouteIndexPackFileName(), getRTreeRouteIndexPackFileName(),
+				indexRouteCreator.commitAndCloseFiles(getRTreeRouteIndexNonPackFileName(), getRTreeRouteIndexPackFileName(),
 						deleteDatabaseIndexes);
 
 				if (mapConnection != null) {
