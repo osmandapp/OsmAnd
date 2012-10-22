@@ -2,8 +2,10 @@ package net.osmand.data.preparation;
 
 import gnu.trove.TIntCollection;
 import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TByteArrayList;
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
 import gnu.trove.set.hash.TLongHashSet;
@@ -18,7 +20,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -32,6 +37,7 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.binary.OsmandOdb.IdTable;
+import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RestrictionData.Builder;
@@ -61,6 +67,8 @@ import rtree.RTreeException;
 import rtree.RTreeInsertException;
 import rtree.Rect;
 
+import com.google.protobuf.ByteString;
+
 public class IndexRouteCreator extends AbstractIndexPartCreator {
 	
 	private Connection mapConnection;
@@ -83,6 +91,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	
 	
 	TLongObjectHashMap<GeneralizedCluster> generalClusters = new TLongObjectHashMap<GeneralizedCluster>();
+	private RouteBorderLines routeBorders = new RouteBorderLines(14, false);
+	private RouteBorderLines baseRouteBorders = new RouteBorderLines(12, true);
 	private PreparedStatement mapRouteInsertStat;
 	private PreparedStatement basemapRouteInsertStat;
 
@@ -104,8 +114,14 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				// Load point with  tags!
 				ctx.loadEntityWay(e);
 				routeTypes.encodePointTypes(e, pointTypes);
-//				addWayToIndex(e.getId(), e.getNodes(), mapRouteInsertStat, routeTree);
-//				generalizeWay(e);
+				routeBorders.addWay(e, outTypes);
+				addWayToIndex(e.getId(), e.getNodes(), mapRouteInsertStat, routeTree);
+			}
+			encoded = routeTypes.encodeBaseEntity(e, outTypes, names) && e.getNodes().size() >= 2;
+			if (encoded ) {
+				baseRouteBorders.addWay(e, outTypes);
+				generalizeWay(e);
+
 			}
 		}
 		
@@ -201,9 +217,6 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 	
 	
 	public void generalizeWay(Way e) throws SQLException {
-		if (!routeTypes.encodeBaseEntity(e, outTypes, names) || e.getNodes().size() < 2) {
-			return;
-		}
 		List<Node> ns = e.getNodes();
 		
 		GeneralizedWay w = new GeneralizedWay(e.getId());
@@ -409,8 +422,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					routeTree, false);
 			TLongObjectHashMap<BinaryFileReference> base = writeBinaryRouteIndexHeader(writer,  
 					baserouteTree, true);
-			writeBorderBox(false);
-			writeBorderBox(true);
+			writeBorderBox(writer, routeBorders);
+			writeBorderBox(writer, baseRouteBorders);
 			
 			writeBinaryRouteIndexBlocks(writer, routeTree, false, route);
 			writeBinaryRouteIndexBlocks(writer, baserouteTree, true, base);
@@ -422,8 +435,88 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		}
 	}
 	
-	private void writeBorderBox(boolean basemap) {
-		// TODO Auto-generated method stub
+	private void sortBorderPoints(List<RouteBorderPointCreator> pnts, final boolean x){
+		Collections.sort(pnts, new Comparator<RouteBorderPointCreator>() {
+			@Override
+			public int compare(RouteBorderPointCreator o1, RouteBorderPointCreator o2) {
+				int t1 = x ? o1.x : o1.y;
+				int t2 = x ? o2.x : o2.y;
+				if(t1 == t2) {
+					return 0;
+				}
+				return t1 < t2 ? -1 : 1;
+			}
+		});
+	}
+	
+	private void writeBorderBox(BinaryMapIndexWriter writer, RouteBorderLines routeBorders) throws IOException {
+		writer.startWriteRouteBorderBox(routeBorders.leftX, routeBorders.rightX, routeBorders.topY, routeBorders.bottomY,
+				routeBorders.zoomToSplit, routeBorders.basemap);
+		Map<BinaryFileReference, List<RouteBorderPointCreator>> refs  = new LinkedHashMap<BinaryFileReference, List<RouteBorderPointCreator>>();
+		
+		int[] keys = routeBorders.bx.keys();
+		int pntsCount = 0;
+		Arrays.sort(keys);
+		for(int j=0; j<keys.length; j++) {
+			int key = keys[j];
+			List<RouteBorderPointCreator> pnts = routeBorders.bx.get(key);
+			sortBorderPoints(pnts, true);
+			BinaryFileReference ref = writer.writeRouteBorderLine(key, pnts.get(0).y, -1, pnts.get(pnts.size() - 1).y);
+//			System.out.println("Line x ->  " +  (key >> (31 - routeBorders.zoomToSplit)) + "  points " + pnts.size());
+			pntsCount += pnts.size();
+			refs.put(ref, pnts);
+		}
+		keys = routeBorders.by.keys();
+		
+		Arrays.sort(keys);
+		for(int j=0; j<keys.length; j++) {
+			int key = keys[j];
+			List<RouteBorderPointCreator> pnts = routeBorders.by.get(key);
+			sortBorderPoints(pnts, false);
+			BinaryFileReference ref = writer.writeRouteBorderLine(pnts.get(0).x, key, pnts.get(pnts.size() - 1).x, -1);
+//			System.out.println("Line y ->  " +  (key >> (31 - routeBorders.zoomToSplit)) + "  points " + pnts.size());
+			refs.put(ref, pnts);
+			pntsCount += pnts.size();
+		}
+		if(logMapDataWarn != null) {
+			logMapDataWarn.info("Total border lines " + (routeBorders.by.size() + routeBorders.bx.size()) + " total points " + pntsCount);
+		}
+		writeRoutePointBlocks(writer, refs);
+		writer.endWriteRouteBorderBox();
+	}
+	
+	private void writeRoutePointBlocks(BinaryMapIndexWriter writer, Map<BinaryFileReference, List<RouteBorderPointCreator>> refs) throws IOException {
+		Iterator<Entry<BinaryFileReference, List<RouteBorderPointCreator>>> it = refs.entrySet().iterator();
+		while(it.hasNext()) {
+			Entry<BinaryFileReference, List<RouteBorderPointCreator>> entry = it.next();
+			BinaryFileReference ref = entry.getKey();
+			List<RouteBorderPointCreator> list = entry.getValue();
+			long baseId = list.get(0).id; 
+			int x = list.get(0).x;
+			int y = list.get(0).y;
+			List<RouteBorderPoint> points  = new ArrayList<RouteBorderPoint>();
+			int px = x;
+			int py = y;
+			long pid = baseId;
+			for(RouteBorderPointCreator pnt : list) {
+				RouteBorderPoint.Builder bld = RouteBorderPoint.newBuilder();
+				bld.setDx(pnt.x - px);
+				bld.setDy(pnt.y - py);
+				bld.setDirection(pnt.direction ? 1 : 0);
+				bld.setRoadId(pnt.id - pid);
+				TByteArrayList bs = new TByteArrayList();
+				for(int k = 0; k < pnt.types.length ; k++) {
+					writer.writeRawVarint32(bs, routeTypes.getTypeByInternalId(pnt.types[k]).getTargetId());
+				}
+				bld.setTypes(ByteString.copyFrom(bs.toArray()));
+				points.add(bld.build());
+				px = pnt.x;
+				py = pnt.y;
+				pid = pnt.id;
+			}
+			writer.writeRouteBorderPointBlock(x, y, list.get(0).id, points, ref);
+		}
+		
 		
 	}
 	private Node convertBaseToNode(long s) {
@@ -1028,9 +1121,89 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		writer.endRouteTreeElement();
 	}
 	
+	static class RouteBorderPointCreator {
+		int x;
+		int y;
+		boolean direction;
+		long id;
+		int[] types;
+	}
 	
-
-	
+	static class RouteBorderLines {
+		public int leftX = -1;
+		public int rightX = -1;
+		public int topY = -1;
+		public int bottomY = -1;
+		public final int zoomToSplit;
+		public final boolean basemap;
+		public final TIntObjectHashMap<List<RouteBorderPointCreator>> bx = new TIntObjectHashMap<List<RouteBorderPointCreator>>();
+		public final TIntObjectHashMap<List<RouteBorderPointCreator>> by = new TIntObjectHashMap<List<RouteBorderPointCreator>>();
+		
+		public RouteBorderLines(int zoomToSplit, boolean basemap) {
+			this.zoomToSplit = zoomToSplit;
+			this.basemap = basemap;
+		}
+		
+		private void addBorderPoint( TIntObjectHashMap<List<RouteBorderPointCreator>> b, int key,
+				boolean direction, int x, int y, long id, TIntArrayList outTypes) {
+			List<RouteBorderPointCreator> list = b.get(key);
+			if(list == null) {
+				list = new ArrayList<IndexRouteCreator.RouteBorderPointCreator>();
+				b.put(key, list);
+			}
+			RouteBorderPointCreator pnt = new RouteBorderPointCreator();
+			pnt.id = id;
+			pnt.x = pnt.x;
+			pnt.y = pnt.y;
+			pnt.direction = direction;
+			pnt.types = outTypes.toArray();
+			list.add(pnt);
+		}
+		
+		
+		public void addWay(Way e, TIntArrayList outTypes) {
+			if(leftX == -1) {
+				Node n = e.getNodes().get(0);
+				leftX = rightX = MapUtils.get31TileNumberX(n.getLongitude());
+				topY = bottomY = MapUtils.get31TileNumberY(n.getLatitude());
+			}
+			int pzx = -1;
+			int pzy = -1;
+			int px = -1;
+			int py = -1;
+			for(int i = 0; i<e.getNodes().size(); i++) {
+				Node n = e.getNodes().get(i);
+				if(n != null) {
+					int x = MapUtils.get31TileNumberX(n.getLongitude());
+					int y = MapUtils.get31TileNumberY(n.getLatitude());
+					leftX = Math.min(leftX, x);
+					rightX = Math.max(rightX, x);
+					bottomY = Math.max(bottomY, y);
+					topY = Math.min(topY, y);
+					int zx = x >> (31 - zoomToSplit);
+					int zy = y >> (31 - zoomToSplit);
+					if(i > 0) {
+						if(zx != pzx) {
+							int cx = Math.max(pzx, zx) << (31 - zoomToSplit);
+							int cy = (int) (py + ((float)y - py) * ((float) cx - px) / ((float) x - px));
+							addBorderPoint(bx, cx, zx < pzx, cx, cy, e.getId(), outTypes);
+						}
+						if(zy != pzy) {
+							int cy = Math.max(pzy, zy) << (31 - zoomToSplit);
+							int cx = (int) (px + ((float)x - py) * ((float) cy - py) / ((float) y - py));
+							addBorderPoint(by, cy, zy < pzy, cx, cy, e.getId(), outTypes);
+						}
+					}
+		
+					pzx = zx;
+					pzy = zy;
+					px = x;
+					py = y;
+				}
+			}
+		}
+		
+	}
 	
 
 	/*private*/ static class GeneralizedCluster {

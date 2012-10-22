@@ -577,6 +577,7 @@ message OsmAndRoutingIndex {
 		// direction from left or top
 		optional int32 direction = 3;
 		optional bytes types = 4;
+		// delta from previous point
 		optional sint64 roadId = 7;
 
 	}

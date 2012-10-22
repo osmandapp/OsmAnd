@@ -741,10 +741,10 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-		creator.setIndexMap(true);
-		creator.setIndexAddress(true);
-		creator.setIndexPOI(true);
-		creator.setIndexTransport(true);
+//		creator.setIndexMap(true);
+//		creator.setIndexAddress(true);
+//		creator.setIndexPOI(true);
+//		creator.setIndexTransport(true);
 		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;
@@ -755,8 +755,8 @@ public class IndexCreator {
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();
 		MapZooms zooms = MapZooms.getDefault(); // MapZooms.parseZooms("15-");
 
-		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
-//		String file = "/home/victor/projects/OsmAnd/temp/belgium.osm.pbf";
+//		String file = "/home/victor/projects/OsmAnd/temp/map.osm";
+		String file = "/home/victor/projects/OsmAnd/temp/luxembourg.osm.pbf";
 //		String file = "/home/victor/projects/OsmAnd/temp/warsaw-map.osm.pbf";
 		int st = file.lastIndexOf('/');
 		int e = file.indexOf('.', st);
