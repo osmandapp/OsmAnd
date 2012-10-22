@@ -2,7 +2,12 @@ package net.osmand.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -29,6 +34,7 @@ public class Multipolygon {
 	 * cache with the ways grouped per Ring
 	 */
 	private List<Ring> innerRings, outerRings;
+	private Map<Ring, Set<Ring>> cacheContainedInnerInOuter = new LinkedHashMap<Ring, Set<Ring>>();
 
 	/**
 	 * ways added by the user
@@ -113,15 +119,14 @@ public class Multipolygon {
 	public boolean containsPoint(double latitude, double longitude) {
 		// fast check
 		updateCacheOfRings();
-		if(maxLat + 1 < latitude || minLat - 1 > latitude || 
-				maxLon + 1 < longitude || minLon - 1 > longitude) {
+		if(maxLat + 0.3 < latitude || minLat - 0.3 > latitude || 
+				maxLon + 0.3 < longitude || minLon - 0.3 > longitude) {
 			return false;
 		}
 		
 		Ring containedInOuter = null;
 		// use a sortedset to get the smallest outer containing the point
-		SortedSet<Ring> outers = new TreeSet<Ring> (getOuterRings());
-		for (Ring outer : outers) {
+		for (Ring outer : outerRings) {
 			if (outer.containsPoint(latitude, longitude)) {
 				containedInOuter = outer;
 				break;
@@ -133,9 +138,8 @@ public class Multipolygon {
 		}
 		
 		//use a sortedSet to get the smallest inner Ring
-		SortedSet<Ring> inners = new TreeSet<Ring> (getInnerRings());
 		Ring containedInInner = null;
-		for (Ring inner : inners) {
+		for (Ring inner : innerRings) {
 			if (inner.containsPoint(latitude, longitude)) {
 				containedInInner = inner;
 				break;
@@ -143,9 +147,17 @@ public class Multipolygon {
 		}
 
 		if (containedInInner == null) return true;
+		if (outerRings.size() == 1) {
+			// return immediately false 
+			return false;
+		}
 		
 		// if it is both, in an inner and in an outer, check if the inner is indeed the smallest one
-		return !containedInInner.isIn(containedInOuter);
+		Set<Ring> s = cacheContainedInnerInOuter.get(containedInInner);
+		if(s == null) {
+			throw new IllegalStateException();
+		}
+		return !s.contains(containedInOuter);
 	}
 
 	/**
@@ -315,9 +327,23 @@ public class Multipolygon {
 					minLon = (float) Math.min(minLon, n.getLongitude());
 				}
 			}
+			// keep sorted
+			Collections.sort(outerRings);
 		}
 		if (innerRings == null) {
 			innerRings = Ring.combineToRings(getInnerWays());
+			for(Ring inner : innerRings) {
+				HashSet<Ring> outContainingRings = new HashSet<Ring>();
+				for(Ring out : outerRings) {
+					if(inner.isIn(out)) {
+						outContainingRings.add(out);
+					}
+				}
+				cacheContainedInnerInOuter.put(inner, outContainingRings);
+				
+			}
+			// keep sorted
+			Collections.sort(innerRings);
 		}
 	}
 	
