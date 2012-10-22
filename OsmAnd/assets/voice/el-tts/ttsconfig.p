@@ -7,44 +7,44 @@ preamble - [].
 
 
 %% TURNS 
-turn('left', ['στρίψε αριστερά ']).
-turn('left_sh', ['στρίψε κλειστά αριστερά ']).
-turn('left_sl', ['στρίψε λοξά αριστερά ']).
-turn('right', ['στίψε δεξιά ']).
-turn('right_sh', ['στρίψε κλειστά δεξιά ']).
-turn('right_sl', ['στρίψε λοξά δεξιά ']).
-turn('right_keep', ['μείνε δεξιά']).
-turn('left_keep', ['μείνε αριστερά']).
+turn('left', ['στρίψτε ', 'αριστερά ']).
+turn('left_sh', ['στρίψτε κλειστά αριστερά ']).
+turn('left_sl', ['στρίψτε λοξά αριστερά ']).
+turn('right', ['στρίψτε δεξιά ']).
+turn('right_sh', ['στρίψτε κλειστά δεξιά ']).
+turn('right_sl', ['στρίψτε λοξά δεξιά ']).
+turn('right_keep', ['μείνετε δεξιά']).
+turn('left_keep', ['μείνετε αριστερά']).
 
-prepare_turn(Turn, Dist) == ['Προετοιμάσου και ', M, ' μετά από ', D] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Προετοιμαστείτε και ', M, ' μετά από ', D] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Μετά από ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Προετοιμάσου να κάνεις αναστροφή μετά από ', D] :- distance(Dist) == D.
-make_ut(Dist) == ['Μετά από ', D, ' κάνε αναστροφή '] :- distance(Dist) == D.
-make_ut == ['Κάνε αναστροφή '].
-make_ut_wp == ['Όταν είναι δυνατόν, κάνε αναστροφή '].
+prepare_make_ut(Dist) == ['Προετοιμαστείτε να κάνετε αναστροφή μετά από ', D] :- distance(Dist) == D.
+make_ut(Dist) == ['Μετά από ', D, ' κάντε αναστροφή '] :- distance(Dist) == D.
+make_ut == ['Κάντε αναστροφή '].
+make_ut_wp == ['Όταν είναι δυνατόν, κάντε αναστροφή '].
 
-prepare_roundabout(Dist) == ['Προετοιμάσου να μπείς σε κυκλικό κόμβο μετά από ', D] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['Μετά από ', D, ' μπές στον κυκλικό κόμβο, και βγές στην ', E, 'έξοδο'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['βγες στην ', E, 'έξοδο'] :- nth(Exit, E).
+prepare_roundabout(Dist) == ['Προετοιμαστείτε να μπείτε σε κυκλικό κόμβο μετά από ', D] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['Μετά από ', D, ' μπείτε στον κυκλικό κόμβο, και βγείτε στην ', E, 'έξοδο'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == ['βγείτε στην ', E, 'έξοδο'] :- nth(Exit, E).
 
-go_ahead == ['Προχώρα ευθεία '].
-go_ahead(Dist) == ['Ακολούθησε τον δρόμο για ', D]:- distance(Dist) == D.
+go_ahead == ['Προχωρείστε ευθεία '].
+go_ahead(Dist) == ['Ακολουθήστε τον δρόμο για ', D]:- distance(Dist) == D.
 
-and_arrive_destination == ['και φτάνεις στον προορισμό σου '].
+and_arrive_destination == ['και φτάσατε στον προορισμό σας '].
 
 then == ['και '].
-reached_destination == ['έφτασες στον προορισμό σου '].
-and_arrive_intermediate == ['και έφτασες στο ενδιάμεσο σημείο '].
-reached_intermediate == ['έφτασες στο ενδιάμεσο σημείο'].
-bear_right == ['μείνε δεξιά '].
-bear_left == ['μείνε αριστερά '].
+reached_destination == ['φτάσατε στον προορισμό σας '].
+and_arrive_intermediate == ['και φτάσατε στο ενδιάμεσο σημείο '].
+reached_intermediate == ['φτάσατε στο ενδιάμεσο σημείο'].
+bear_right == ['μείνετε δεξιά '].
+bear_left == ['μείνετε αριστερά '].
 
 route_new_calc(Dist) == ['Το ταξίδι είναι ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Επαναϋπολογισμός διαδρομής, απόσταση ', D] :- distance(Dist) == D.
 
-location_lost == ['Το σήμα g p s χάθηκε '].
+location_lost == ['Το σήμα gps χάθηκε '].
 
 
 %% 
