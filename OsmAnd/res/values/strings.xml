@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>

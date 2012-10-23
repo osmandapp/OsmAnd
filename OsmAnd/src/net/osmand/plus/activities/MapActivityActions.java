@@ -89,7 +89,9 @@ public class MapActivityActions implements DialogProvider {
 	
 	private static final String GPS_STATUS_COMPONENT = "com.eclipsim.gpsstatus2"; //$NON-NLS-1$
 	private static final String GPS_STATUS_ACTIVITY = "com.eclipsim.gpsstatus2.GPSStatus"; //$NON-NLS-1$
-	
+	private static final String ZXING_BARCODE_SCANNER_COMPONENT = "com.google.zxing.client.android"; //$NON-NLS-1$
+	private static final String ZXING_BARCODE_SCANNER_ACTIVITY = "com.google.zxing.client.android.ENCODE"; //$NON-NLS-1$
+
 	private static final String KEY_LONGITUDE = "longitude";
 	private static final String KEY_LATITUDE = "latitude";
 	private static final String KEY_NAME = "name";
@@ -353,7 +355,7 @@ public class MapActivityActions implements DialogProvider {
 		AlertDialog.Builder builder = new Builder(mapActivity);
 		builder.setTitle(R.string.send_location_way_choose_title);
 		builder.setItems(new String[]{
-				"Email", "SMS", "Clipboard", "geo:"
+				"Email", "SMS", "Clipboard", "geo:", "QR-Code"
 		}, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -386,6 +388,43 @@ public class MapActivityActions implements DialogProvider {
 						Uri location = Uri.parse(simpleGeo);
 						Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
 						mapActivity.startActivity(mapIntent);
+					} else if(which == 4){
+							Bundle bundle = new Bundle();
+							bundle.putFloat("LAT", (float) latitude);
+							bundle.putFloat("LONG", (float)longitude);
+
+							Intent intent = new Intent();
+							intent.addCategory(Intent.CATEGORY_DEFAULT);
+							intent.setAction(ZXING_BARCODE_SCANNER_ACTIVITY);
+							ResolveInfo resolved = mapActivity.getPackageManager().resolveActivity(intent,
+									PackageManager.MATCH_DEFAULT_ONLY);
+
+							if (resolved != null) {
+								intent.putExtra("ENCODE_TYPE", "LOCATION_TYPE");
+								intent.putExtra("ENCODE_DATA", bundle);
+								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+								mapActivity.startActivity(intent);
+							} else {
+								if (Version.isGooglePlayEnabled(mapActivity)) {
+									AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
+									builder.setMessage(getString(R.string.zxing_barcode_scanner_not_found));
+									builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog, int which) {
+											Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + ZXING_BARCODE_SCANNER_COMPONENT));
+											try {
+												mapActivity.startActivity(intent);
+											} catch (ActivityNotFoundException e) {
+											}
+										}
+									});
+									builder.setNegativeButton(getString(R.string.default_buttons_no), null);
+									builder.show();
+								} else {
+									Toast.makeText(mapActivity, R.string.zxing_barcode_scanner_not_found, Toast.LENGTH_LONG).show();
+								}
+							}
 					}
 				}
 				
