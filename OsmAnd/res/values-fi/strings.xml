@@ -542,4 +542,6 @@
 	<string name="show_point_options">Sijainnin valinnat</string>
 	<string name="poi_filter_custom_filter">Omat valinnat</string>
 	<string name="poi_filter_closest_poi">Lähin POI</string>
+	<string name="live_monitoring_mode_off">Aloita\nlive seuranta</string>
+	<string name="live_monitoring_mode_on">Pysäytä\nlive seuranta</string>
 	</resources>
