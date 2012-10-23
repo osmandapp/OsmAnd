@@ -1,8 +1,9 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Tilelist-viewer</title>
-    <style type="text/css">
+	<title>Tilelist-viewer</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<style type="text/css">
 html, body {
 	width: 100%;
 	height: 100%;
@@ -39,124 +40,201 @@ html, body {
 #form {
 	background-color:#eee;
 }
-    </style>
-    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
-    <script src="tilelist-viewer.js"></script>
-    <script type="text/javascript">
-	function get_xml(file){
-		var oRequest = new XMLHttpRequest();
-		oRequest.open("GET",file,false);
-		oRequest.setRequestHeader("User-Agent",navigator.userAgent);
-		oRequest.send()
-		return oRequest.responseXML;
+	</style>
+	<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+	<script type="text/javascript">
+	function importXML(xmlfile){
+		var xmlloaded = false;
+		try
+		{
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET", xmlfile, false);
+		}
+		catch (Exception)
+		{
+			var ie = (typeof window.ActiveXObject != 'undefined');
+			if (ie)
+			{
+				xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async = false;
+				while(xmlDoc.readyState != 4) {};
+				xmlDoc.load(xmlfile);
+				xmlloaded = true;
+			}
+			else
+			{
+				xmlDoc = document.implementation.createDocument("", "", null);
+				xmlDoc.onload = readXML;
+				xmlDoc.load(xmlfile);
+				xmlloaded = true;
+			}
+		}
+		if (!xmlloaded)
+		{
+			xmlhttp.setRequestHeader('Content-Type', 'text/xml')
+			xmlhttp.setRequestHeader("User-Agent",navigator.userAgent);
+			xmlhttp.send("");
+			xmlDoc = xmlhttp.responseXML;
+			xmlloaded = true;
+		}
+		return xmlDoc
 	}
-	  
-	var xmlDoc = get_xml('tiles-tree.xml');
+	var xmlDoc = importXML('tiles-tree.xml');
 	var selectcont;
 	var selectcount;
 	var selectcregi;
 	var vectorLayer;
 	var feature;
+	var tileList;
+	tileList=[]
 	var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
 	var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
 	
 	function setContinents(){
-		
+		// Fill drop-down with continents names
 		var el = document.createElement("option");
-	    el.textContent = '';
-	    el.value = '';
-	    selectcont.appendChild(el);
+		el.textContent = '';
+		el.value = '';
+		selectcont.appendChild(el);
 		var conts=xmlDoc.getElementsByTagName("continent")
 		for(var i = 0; i < conts.length; i++) {
-		    opt = conts[i].getAttribute("name");
-		    el = document.createElement("option");
-		    el.textContent = opt;
-		    el.value = opt;
-		    selectcont.appendChild(el);
+			opt = conts[i].getAttribute("name");
+			el = document.createElement("option");
+			el.textContent = opt;
+			el.value = opt;
+			selectcont.appendChild(el);
 		}
 	}
 	function setCountries(cont){
+		// Fill drop-down with countries names
 		selectcount.options.length = 0;
 		selectregi.options.length = 0;
 		
 		var el = document.createElement("option");
-	    el.textContent = '';
-	    el.value = '';
-	    selectcount.appendChild(el);
+		el.textContent = '';
+		el.value = '';
+		selectcount.appendChild(el);
 		
 		var conts=xmlDoc.getElementsByTagName("continent");
 		for(var i = 0; i < conts.length; i++) {
-		    if (conts[i].getAttribute("name") == cont){
+			if (conts[i].getAttribute("name") == cont){
 				counts=conts[i].getElementsByTagName("country");
 				for(var j = 0; j < counts.length; j++) {
-				    opt = counts[j].getAttribute("name");
-				    el = document.createElement("option");
-				    el.textContent = opt;
-				    el.value = opt;
-				    selectcount.appendChild(el);
+					opt = counts[j].getAttribute("name");
+					el = document.createElement("option");
+					el.textContent = opt;
+					el.value = opt;
+					selectcount.appendChild(el);
 				}
 			}
 		}
 	}
 	function setRegions(count){
+		// Fill drop-down with regions names
 		selectregi.options.length = 0;
 		
 		var el = document.createElement("option");
-	    el.textContent = '';
-	    el.value = '';
-	    selectregi.appendChild(el);	
-	    
+		el.textContent = '';
+		el.value = '';
+		selectregi.appendChild(el);	
+		
 		var counts=xmlDoc.getElementsByTagName("country");
 		for(var j = 0; j < counts.length; j++) {
 			if (counts[j].getAttribute("name") == count){
 				regis=counts[j].getElementsByTagName("region");
 				for(var k = 0; k < regis.length; k++) {
-				    var opt = regis[k].getAttribute("name");
-				    var el = document.createElement("option");
-				    el.textContent = opt;
-				    el.value = opt;
-				    selectregi.appendChild(el);
+					var opt = regis[k].getAttribute("name");
+					var el = document.createElement("option");
+					el.textContent = opt;
+					el.value = opt;
+					selectregi.appendChild(el);
 				}
 			}
 		}
 	}
 	function show(){
+		// show tiles from selected region
 		continent=selectcont.value;
 		country=selectcount.value;
 		region=selectregi.value;
 		if (continent != '' &&  country!= '' && region != '') {
-			list=getTilelist(continent,country,region);
+			getTilelist(continent,country,region);
 		}
 		else if (continent != '' &&  country!= '' && region == '') {
-			list=getTilelist(continent,country, '');
+			getTilelist(continent,country, '');
 		}
-		document.getElementById('tiles').innerHTML =list;
-		// remove features
+		document.getElementById('tiles').innerHTML =tileList.join(';');
 		var x;
 		var y;
 		var lonlat;
-		for(var i = 0; i < list.length; i++) {
-			x = parseFloat(list[i].split(' ')[0]);
-			y = parseFloat(list[i].split(' ')[1]);
-			
+		
+		vectorLayer.removeAllFeatures(); // duplicate are handled in the list, but not for features
+		
+		for(var i = 0; i < tileList.length; i++) {
+			x = parseFloat(tileList[i].split(' ')[0]);
+			y = parseFloat(tileList[i].split(' ')[1]);
+			drawSquare(x,y)
 			if (i==0) {var center = new OpenLayers.LonLat(x,y).transform( fromProjection, toProjection);}
-			
-			geom = new OpenLayers.Geometry.LinearRing();
-			
-			geom.addComponent(new OpenLayers.Geometry.Point(x,y))
-			geom.addComponent(new OpenLayers.Geometry.Point(x,y+1))
-			geom.addComponent(new OpenLayers.Geometry.Point(x+1,y+1))
-			geom.addComponent(new OpenLayers.Geometry.Point(x+1,y))
-			geom.addComponent(new OpenLayers.Geometry.Point(x,y))
-			feature = new OpenLayers.Feature.Vector(geom.transform(fromProjection,toProjection));
-			vectorLayer.addFeatures([feature]);
 		}
 		map.setCenter(center, map.getZoom() );
-		//~ vectors.addFeatures([new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonLat))]);
-		
+				
 	}
+	function clearList() {
+		vectorLayer.removeAllFeatures();
+		document.getElementById('tiles').innerHTML ='';
+		tileList.length=0;
+	}
+	function addTile(x,y) {
+		drawSquare(x,y);
+		tileList.push(x+' '+y)
+		tileList.sort(function(a,b){return a.split(' ')[0]-b.split(' ')[0]})
+		document.getElementById('tiles').innerHTML =tileList.join(';');
+	}
+	function removeTile(x,y,i) {
+		vectorLayer.removeFeatures([vectorLayer.features[i]]);
+		n=tileList.indexOf(x+' '+y)
+		tileList.splice(n,1)
+		tileList.sort(function(a,b){return a.split(' ')[0]-b.split(' ')[0]})
+		document.getElementById('tiles').innerHTML =tileList.join(';');
+	}
+	function edit(x,y) {
+		IS_IN=0;
+		var point = new OpenLayers.Geometry.Point(x,y);
+		point.transform(fromProjection,toProjection)
+		for (var i = 0; i < vectorLayer.features.length; i++) {
+			var geom=vectorLayer.features[i].geometry;
+			
+			if ( geom.containsPoint(point) ) {
+				IS_IN=1;
+				break;
+			}
+		}
+		if (IS_IN) {
+			removeTile(Math.floor(x),Math.floor(y),i);
+		}
+		else {
+			addTile(Math.floor(x),Math.floor(y));
+		}
+	}
+	function drawSquare(x,y) {
+		geom = new OpenLayers.Geometry.LinearRing();
+		
+		geom.addComponent(new OpenLayers.Geometry.Point(x,y))
+		geom.addComponent(new OpenLayers.Geometry.Point(x,y+1))
+		geom.addComponent(new OpenLayers.Geometry.Point(x+1,y+1))
+		geom.addComponent(new OpenLayers.Geometry.Point(x+1,y))
+		geom.addComponent(new OpenLayers.Geometry.Point(x,y))
+		feature = new OpenLayers.Feature.Vector(geom.transform(fromProjection,toProjection));
+		vectorLayer.addFeatures([feature]);
+	}
+	function handleMapClick(e) {
+		var lonlat = map.getLonLatFromViewPortPx(e.xy);
+		lonlat.transform( toProjection, fromProjection);
+		edit(lonlat.lon,lonlat.lat)
+	} 
+
 	function getTilelist(continent,country,region){
-		var tilelist='';
+		// get tile list from XML, and concat with current tilelist.
 		var conts=xmlDoc.getElementsByTagName("continent");
 		for(var i = 0; i < conts.length; i++) {
 			if (conts[i].getAttribute("name") == continent){
@@ -164,13 +242,15 @@ html, body {
 				for(var j = 0; j < counts.length; j++) {
 					if (counts[j].getAttribute("name") == country){
 						if (region == '') {
-							tilelist=counts[j].getElementsByTagName("tiles")[0].childNodes[0].nodeValue.split(';');
+							var t= counts[j].getElementsByTagName("tiles")[0];
+							t.normalize(); //normalize because long texts can be split in adjacent nodes.
+							tileList=tileList.concat(t.childNodes[0].nodeValue.split(';'));
 						}
 						else {
 							regis=counts[j].getElementsByTagName("region");
 							for(var k = 0; k < regis.length; k++) {
 								if (regis[k].getAttribute("name") == region){
-									tilelist=regis[k].getElementsByTagName("tiles")[0].childNodes[0].nodeValue.split(';');
+									tileList=tileList.concat(regis[k].getElementsByTagName("tiles")[0].childNodes[0].nodeValue.split(';'));
 								}
 							}
 						}
@@ -178,7 +258,13 @@ html, body {
 				}
 			}
 		}
-		return tilelist
+		// remove duplicates
+		tileList = tileList.filter(function(elem, pos) {
+			return tileList.indexOf(elem) == pos;
+		})
+		// sort
+		tileList.sort(function(a,b){return a.split(' ')[0]-b.split(' ')[0]})
+
 	}
 	
 	function init() {
@@ -191,31 +277,33 @@ html, body {
 	}
 	
 	function map_init() {
-	var options = {
-	  controls: [
-		new OpenLayers.Control.Navigation(),
-		new OpenLayers.Control.PanZoomBar(),
-		new OpenLayers.Control.Attribution(),
-		new OpenLayers.Control.Graticule({
-				labelled: true,
-				labelformat: 'd',
-				targetSize: 200
-			})
-	  ]
-	};
-	map = new OpenLayers.Map("basicMap", options);
-	var mapnik         = new OpenLayers.Layer.OSM();
-	var position       = new OpenLayers.LonLat(5,46).transform( fromProjection, toProjection);
-	var zoom           = 3; 
-	
-	map.addLayer(mapnik);
-	
-	vectorLayer = new OpenLayers.Layer.Vector(  "vectors");
-	map.addLayers([vectorLayer])
-	
-	map.setCenter(position, zoom );
+		var options = {
+		  controls: [
+			new OpenLayers.Control.Navigation(),
+			new OpenLayers.Control.PanZoomBar(),
+			new OpenLayers.Control.Attribution(),
+			new OpenLayers.Control.Graticule({
+					labelled: true,
+					labelformat: 'd',
+					targetSize: 200
+				})
+		  ]
+		};
+		map = new OpenLayers.Map("basicMap", options);
+		var mapnik         = new OpenLayers.Layer.OSM();
+		var position       = new OpenLayers.LonLat(5,46).transform( fromProjection, toProjection);
+		var zoom           = 3; 
+		
+		map.addLayer(mapnik);
+		
+		vectorLayer = new OpenLayers.Layer.Vector(  "vectors");
+		map.addLayers([vectorLayer])
+		
+		map.events.register('click', map, handleMapClick);
+		
+		map.setCenter(position, zoom );
 	}
-    </script>
+	</script>
   </head>
 <body onload="init();">
 	<div id="container">
@@ -228,12 +316,11 @@ html, body {
 		<select id="continents" onchange="setCountries(this.value);"></select></br>
 		<select id="countries" onchange="setRegions(this.value);"></select></br>
 		<select id="regions"></select></br>
-		<input type="button" value="Show" onclick="show();"></br>
+		<input type="button" value="Show" onclick="show();">
+		<input type="button" value="Clear" onclick="clearList();">
 		</form>
 		<hr>
-<!--
 		Right-click on tile to add to or remove from the tile list:
--->
 		<hr>
 		</div>
 		<div id="tiles"></div>
