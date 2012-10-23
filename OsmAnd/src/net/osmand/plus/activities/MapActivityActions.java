@@ -353,7 +353,7 @@ public class MapActivityActions implements DialogProvider {
 		AlertDialog.Builder builder = new Builder(mapActivity);
 		builder.setTitle(R.string.send_location_way_choose_title);
 		builder.setItems(new String[]{
-				"Email", "SMS", "Clipboard"
+				"Email", "SMS", "Clipboard", "geo:"
 		}, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -362,7 +362,6 @@ public class MapActivityActions implements DialogProvider {
 				final int zoom = args.getInt(KEY_ZOOM);
 
 				final String shortOsmUrl = MapUtils.buildShortOsmUrl(latitude, longitude, zoom);
-				// final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
 				final String appLink = "http://download.osmand.net/go?lat="+((float) latitude)+"&lon="+((float)longitude) +"&z="+zoom;
 				if(which == 0){
 					String email = mapActivity.getString(R.string.send_location_email_pattern, shortOsmUrl, appLink);
@@ -382,6 +381,11 @@ public class MapActivityActions implements DialogProvider {
 					} else if (which == 2){
 						ClipboardManager clipboard = (ClipboardManager) mapActivity.getSystemService(Activity.CLIPBOARD_SERVICE);
 						clipboard.setText(sms);
+					} else if(which == 3){
+						final String simpleGeo = "geo:"+((float) latitude)+","+((float)longitude) +"?z="+zoom;
+						Uri location = Uri.parse(simpleGeo);
+						Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
+						mapActivity.startActivity(mapIntent);
 					}
 				}
 				
