@@ -1,5 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="install_barcode_scanner">Установить сканер штрих-кодов?</string>
+	<string name="function_requires_barcode_scanner">Для работы этой функции требуется сканер штрих-кодов. Хотите установить его?</string>
     <string name="non_optimal_route_calculation">Рассчитать неоптимальный (возможно) маршрут на длинные дистанции</string>
     <string name="download_link_and_local_description">Загрузите или обновите локальные данные.
 \nЧтобы получить дополнительную информацию о карте, выделите её в списке. Удерживайте карту, если вы хотите удалить или деактивировать.
