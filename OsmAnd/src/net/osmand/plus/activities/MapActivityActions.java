@@ -353,7 +353,7 @@ public class MapActivityActions implements DialogProvider {
 		AlertDialog.Builder builder = new Builder(mapActivity);
 		builder.setTitle(R.string.send_location_way_choose_title);
 		builder.setItems(new String[]{
-				"Email", "SMS", "Clipboard", "geo:"
+				"Email", "SMS", "Clipboard", "geo:", "QR-Code"
 		}, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -386,6 +386,43 @@ public class MapActivityActions implements DialogProvider {
 						Uri location = Uri.parse(simpleGeo);
 						Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
 						mapActivity.startActivity(mapIntent);
+					} else if(which == 4){
+						try{
+							Bundle bundle = new Bundle();
+							bundle.putFloat("LAT", (float) latitude);
+							bundle.putFloat("LONG", (float)longitude);
+
+							Intent intent = new Intent();
+							intent.addCategory(Intent.CATEGORY_DEFAULT);
+							intent.setAction("com.google.zxing.client.android.ENCODE");
+							intent.putExtra("ENCODE_TYPE", "LOCATION_TYPE");
+							intent.putExtra("ENCODE_DATA", bundle);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+							intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+							mapActivity.startActivity(intent);
+						} catch (ActivityNotFoundException e){
+							AlertDialog.Builder downloadDialog = new AlertDialog.Builder(mapActivity);
+							downloadDialog.setTitle(R.string.install_barcode_scanner);
+							downloadDialog.setMessage(R.string.function_requires_barcode_scanner);
+							downloadDialog.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+							      @Override
+							      public void onClick(DialogInterface dialogInterface, int i) {}
+							    });
+							downloadDialog.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+							  @Override
+							  public void onClick(DialogInterface dialogInterface, int i) {
+							    Uri uri = Uri.parse("market://details?id=com.google.zxing.client.android");
+							    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+							    try {
+							      mapActivity.startActivity(intent);
+							    } catch (ActivityNotFoundException anfe) {
+							      // Hmm, market is not installed
+								  //Log.w(TAG, "Android Market is not installed; cannot install Barcode Scanner");
+							    }
+							  }
+							});
+							downloadDialog.show();
+						}
 					}
 				}
 				
