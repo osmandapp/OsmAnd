@@ -427,4 +427,21 @@
 	<string name="favourites_remove_dialog_msg">Poista suosikki \'%s\'?</string>
 	<string name="osb_comment_menu_item">Lisää kommentti</string>
 	<string name="osb_comment_dialog_message">Viesti (englanniksi)</string>
+	<string name="osb_comment_dialog_add_button">Lisää kommentti</string>
+	<string name="osb_comment_dialog_success">Kommentti lisätty onnistuneesti</string>
+	<string name="osb_comment_dialog_error">Tapahtui virhe: kommenttia ei lisätty</string>
+	<string name="poi_edit_title">Muokkaa KP:ta</string>
+	<string name="poi_create_title">Luo KP</string>
+	<string name="poi_remove_title">Poista KP</string>
+	<string name="default_buttons_delete">Poista</string>
+	<string name="poi_remove_success">KP poistettiin onnistuneesti</string>
+	<string name="poi_action_add">lisää</string>
+	<string name="poi_action_change">muuta</string>
+	<string name="poi_action_succeded_template">Toiminto {0} suoritettiin onnistuneesti</string>
+	<string name="poi_error_unexpected_template">Tapahtui odottamaton virhe suoritettaessa toimintoa {0}.</string>
+	<string name="poi_dialog_name">Nimi</string>
+	<string name="poi_dialog_opening_hours">Avoinna</string>
+	<string name="edit_filter_delete_menu_item">Poista</string>
+	<string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>
+	<string name="default_buttons_selectall">Valitse kaikki</string>
 	</resources>
