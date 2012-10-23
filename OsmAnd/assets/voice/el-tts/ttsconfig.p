@@ -16,7 +16,7 @@ turn('right_sl', ['στρίψτε λοξά δεξιά ']).
 turn('right_keep', ['μείνετε δεξιά']).
 turn('left_keep', ['μείνετε αριστερά']).
 
-prepare_turn(Turn, Dist) == ['Προετοιμαστείτε και ', M, ' μετά από ', D] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Προετοιμαστείτε να ', M, ' μετά από ', D] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['Μετά από ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
