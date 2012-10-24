@@ -184,6 +184,10 @@ public class RouteDataObject {
 	}
 
 	public String getHighway() {
+		return getHighway(types, region);
+	}
+	
+	public static String getHighway(int[] types, RouteRegion region) {
 		String highway = null;
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {

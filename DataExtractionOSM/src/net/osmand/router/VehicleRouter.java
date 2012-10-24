@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 
@@ -12,6 +13,8 @@ public abstract class VehicleRouter {
 	 * @return
 	 */
 	public abstract boolean acceptLine(RouteDataObject way);
+	
+	public abstract boolean acceptLine(int[] types, RouteRegion region);
 	
 	public abstract boolean restrictionsAware();
 

@@ -460,9 +460,10 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		for(int j=0; j<keys.length; j++) {
 			int key = keys[j];
 			List<RouteBorderPointCreator> pnts = routeBorders.bx.get(key);
-			sortBorderPoints(pnts, true);
+			sortBorderPoints(pnts, false);
 			BinaryFileReference ref = writer.writeRouteBorderLine(key, pnts.get(0).y, -1, pnts.get(pnts.size() - 1).y);
-//			System.out.println("Line x ->  " +  (key >> (31 - routeBorders.zoomToSplit)) + "  points " + pnts.size());
+//			System.out.println("Line x ->  " +  (key >> (31 - routeBorders.zoomToSplit)) + "  points " + pnts.size() +" "
+//					+  pnts.get(0).y + " -> " + pnts.get(pnts.size() - 1).y);
 			pntsCount += pnts.size();
 			refs.put(ref, pnts);
 		}
@@ -472,9 +473,10 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 		for(int j=0; j<keys.length; j++) {
 			int key = keys[j];
 			List<RouteBorderPointCreator> pnts = routeBorders.by.get(key);
-			sortBorderPoints(pnts, false);
+			sortBorderPoints(pnts, true);
 			BinaryFileReference ref = writer.writeRouteBorderLine(pnts.get(0).x, key, pnts.get(pnts.size() - 1).x, -1);
-//			System.out.println("Line y ->  " +  (key >> (31 - routeBorders.zoomToSplit)) + "  points " + pnts.size());
+//			System.out.println("Line y ->  " +  (key >> (31 - routeBorders.zoomToSplit)) + "  points " + pnts.size() + " "
+//					+  pnts.get(0).x+ " -> " + pnts.get(pnts.size() - 1).x);
 			refs.put(ref, pnts);
 			pntsCount += pnts.size();
 		}
@@ -508,7 +510,10 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 				for(int k = 0; k < pnt.types.length ; k++) {
 					writer.writeRawVarint32(bs, routeTypes.getTypeByInternalId(pnt.types[k]).getTargetId());
 				}
-				bld.setTypes(ByteString.copyFrom(bs.toArray()));
+				TByteArrayList res = new TByteArrayList();
+				writer.writeRawVarint32(res, bs.size());
+				res.addAll(bs);
+				bld.setTypes(ByteString.copyFrom(res.toArray()));
 				points.add(bld.build());
 				px = pnt.x;
 				py = pnt.y;
@@ -1153,8 +1158,8 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 			}
 			RouteBorderPointCreator pnt = new RouteBorderPointCreator();
 			pnt.id = id;
-			pnt.x = pnt.x;
-			pnt.y = pnt.y;
+			pnt.x = x;
+			pnt.y = y;
 			pnt.direction = direction;
 			pnt.types = outTypes.toArray();
 			list.add(pnt);
@@ -1190,7 +1195,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 						}
 						if(zy != pzy) {
 							int cy = Math.max(pzy, zy) << (31 - zoomToSplit);
-							int cx = (int) (px + ((float)x - py) * ((float) cy - py) / ((float) y - py));
+							int cx = (int) (px + ((float)x - px) * ((float) cy - py) / ((float) y - py));
 							addBorderPoint(by, cy, zy < pzy, cx, cy, e.getId(), outTypes);
 						}
 					}

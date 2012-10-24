@@ -338,17 +338,18 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeTag(RouteBorderBox.BORDERLINES_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
 		long startMessage = getFilePointer();
 		RouteBorderLine.Builder builder = RouteBorderLine.newBuilder();
-		Bounds p = stackBounds.peek();
-		builder.setX(fromX - p.leftX);
-		builder.setY(fromY - p.topY);
+//		Bounds p = stackBounds.peek();
+		builder.setX(fromX /*- p.leftX*/);
+		builder.setY(fromY /*- p.topY*/);
 		if (toX != -1) {
-			builder.setTox(toX - p.leftX);
+			builder.setTox(toX /*- p.leftX*/);
 		}
 		if (toY != -1) {
-			builder.setToy(toY - p.topY);
+			builder.setToy(toY /*- p.topY*/);
 		}
 		builder.setShiftToPointsBlock(0);
 		codedOutStream.writeMessageNoTag(builder.build());
+		codedOutStream.flush();
 		return BinaryFileReference.createShiftReference(getFilePointer() - 4, startMessage);
 	}
 	

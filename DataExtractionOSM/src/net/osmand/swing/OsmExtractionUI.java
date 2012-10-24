@@ -81,6 +81,7 @@ public class OsmExtractionUI implements IMapLocationListener {
 	
 	public static void main(String[] args) {
 		// first of all config log
+		//System.out.println(System.getProperty("sun.arch.data.model"));
 		configLogFile();
 		
 		final UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();

@@ -68,10 +68,17 @@ public class GeneralRouter extends VehicleRouter {
 
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
-		if(!highwaySpeed.containsKey(way.getHighway())) {
+		int[] types = way.getTypes();
+		RouteRegion reg = way.region;
+		return acceptLine(types, reg);
+	}
+	
+	@Override
+	public boolean acceptLine(int[] types, RouteRegion reg) {
+		if(!highwaySpeed.containsKey(RouteDataObject.getHighway(types, reg))) {
 			boolean accepted = false;
-			for (int i = 0; i < way.types.length; i++) {
-				RouteTypeRule r = way.region.quickGetEncodingRule(way.types[i]);
+			for (int i = 0; i < types.length; i++) {
+				RouteTypeRule r = reg.quickGetEncodingRule(types[i]);
 				Float sp = highwaySpeed.get(r.getTag()+"$"+r.getValue());
 				if(sp != null){
 					if(sp.floatValue() > 0) {
@@ -84,10 +91,10 @@ public class GeneralRouter extends VehicleRouter {
 				return false;
 			}
 		}
-		int[] s = way.getTypes();
 		
-		for(int i=0; i<s.length; i++) {
-			RouteTypeRule r = way.region.quickGetEncodingRule(s[i]);
+		
+		for(int i=0; i<types.length; i++) {
+			RouteTypeRule r = reg.quickGetEncodingRule(types[i]);
 			String k = r.getTag() + "$" + r.getValue();
 			if(avoid.containsKey(k)) {
 				return false;

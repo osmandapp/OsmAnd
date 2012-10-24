@@ -1269,6 +1269,15 @@ public class BinaryMapIndexReader {
 		return request;
 	}
 	
+	public static SearchRequest<RouteDataBorderLinePoint> buildSearchRouteBorderRequest(int sleft, int sright, int stop, int sbottom){
+		SearchRequest<RouteDataBorderLinePoint> request = new SearchRequest<RouteDataBorderLinePoint>();
+		request.left = sleft;
+		request.right = sright;
+		request.top = stop;
+		request.bottom = sbottom;
+		return request;
+	}
+	
 	
 	public static SearchRequest<Amenity> buildSearchPoiRequest(int x, int y, String nameFilter, int sleft, int sright, int stop, int sbottom, ResultMatcher<Amenity> resultMatcher){
 		SearchRequest<Amenity> request = new SearchRequest<Amenity>();
@@ -1976,6 +1985,13 @@ public class BinaryMapIndexReader {
 		if(routeAdapter != null){
 			routeAdapter.loadRouteRegionData(toLoad, matcher);
 		}
+	}
+	
+	public List<RouteDataBorderLinePoint> searchBorderPoints(SearchRequest<RouteDataBorderLinePoint> req, RouteRegion r) throws IOException {
+		if(routeAdapter != null){
+			routeAdapter.searchBorderPoints(req, r);
+		}
+		return Collections.emptyList();
 	}
 	
 	public List<RouteDataObject> loadRouteIndexData(RouteSubregion rs) throws IOException {
