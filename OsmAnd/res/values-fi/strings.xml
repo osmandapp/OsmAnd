@@ -445,8 +445,8 @@
 	<string name="edit_filter_save_as_menu_item">Tallenna nimellä</string>
 	<string name="default_buttons_selectall">Valitse kaikki</string>
 	<string name="rendering_attr_roadColors_description"/>
-	<string name="tip_recent_changes_0_8_4_t">Muutokset versiossa 0.4.8:\n\t *Joitain bugeja korjattu\n\t *Kartta ei menetä paikkaansa keskeytyksien välillä</string>
-	<string name="gps_not_available">gps_ei_käytössä</string>
+	<string name="tip_recent_changes_0_8_4_t">Muutokset versiossa 0.8.4:\n\t *Joitain bugeja korjattu\n\t *Kartta ei menetä paikkaansa keskeytyksien välillä</string>
+	<string name="gps_not_available">Salli GPS:n käyttö asetuksista</string>
     <string name="tip_recent_changes_0_8_3_t"/>
 	<string name="poi_filter_car_aid">Autotuki</string>
 	<string name="layer_map_appearance">Muokkaa näyttöä...</string>
@@ -544,4 +544,17 @@
 	<string name="poi_filter_closest_poi">Lähin POI</string>
 	<string name="live_monitoring_mode_off">Aloita\nlive seuranta</string>
 	<string name="live_monitoring_mode_on">Pysäytä\nlive seuranta</string>
+	<string name="filter_current_poiButton">Suodatin</string>
+	<string name="edit_filter_delete_dialog_title">Poista valittu suodatin?</string>
+	<string name="edit_filter_delete_message">Poistettu suodatin {0}</string>
+	<string name="edit_filter_create_message">Luotu suodatin {0}</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Vektorikartat näkyvät mahdollisesti nopeammin. Ei välttämättä toimi kaikilla laitteilla.</string>
+	<string name="debugging_and_development">OsmAnd kehitys</string>
+	<string name="native_rendering">Natiivi renderöinti</string>
+	<string name="send_files_to_osm">Lähetä GPX-tiedostot OSM:iin</string>
+	<string name="gpx_visibility_txt">Näkyvyys</string>
+	<string name="accessibility_extensions_descr">Esteettömyys laajennokset vanhoille Android versioille</string>
+	<string name="accessibility_extensions">Esteettömyys laajennokset</string>
+	<string name="accessibility_mode">Esteettömyys moodi</string>
+	<string name="accessibility_default">Globaalien systeemiasetusten mukaan</string>
 	</resources>
