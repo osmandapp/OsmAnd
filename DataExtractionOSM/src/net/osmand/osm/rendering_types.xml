@@ -496,13 +496,13 @@
 		<type tag="natural" value="wood" minzoom="8" />
 		<type tag="landuse" value="wood" minzoom="8" 
 				target_tag="natural" target_value="wood" poi_category="natural" />
-		<type tag="contour" value="elevation" minzoom="8" />
+		<type tag="contour" value="elevation" minzoom="11" />
 	</category>
 	<category name="contourtype">
-		<type tag="contourtype" value="10m" minzoom="8" additional="true"/>
-		<type tag="contourtype" value="20m" minzoom="8" additional="true"/>
-		<type tag="contourtype" value="50m" minzoom="8" additional="true"/>
-		<type tag="contourtype" value="100m" minzoom="8" additional="true"/>
+		<type tag="contourtype" value="10m" minzoom="11" additional="true"/>
+		<type tag="contourtype" value="20m" minzoom="11" additional="true"/>
+		<type tag="contourtype" value="50m" minzoom="11" additional="true"/>
+		<type tag="contourtype" value="100m" minzoom="11" additional="true"/>
 	</category>
 	<category name="geocache" poi_tag="geocache" poi_category="geocache">
 		<type tag="geocache" value="found" minzoom="15" />
