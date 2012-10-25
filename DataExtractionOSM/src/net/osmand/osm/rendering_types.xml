@@ -499,10 +499,10 @@
 		<type tag="contour" value="elevation" minzoom="8" />
 	</category>
 	<category name="contourtype">
-		<type tag="contourtype" value="10m" minzoom="12" additional="true"/>
-		<type tag="contourtype" value="20m" minzoom="12" additional="true"/>
-		<type tag="contourtype" value="50m" minzoom="12" additional="true"/>
-		<type tag="contourtype" value="100m" minzoom="12" additional="true"/>
+		<type tag="contourtype" value="10m" minzoom="8" additional="true"/>
+		<type tag="contourtype" value="20m" minzoom="8" additional="true"/>
+		<type tag="contourtype" value="50m" minzoom="8" additional="true"/>
+		<type tag="contourtype" value="100m" minzoom="8" additional="true"/>
 	</category>
 	<category name="geocache" poi_tag="geocache" poi_category="geocache">
 		<type tag="geocache" value="found" minzoom="15" />
