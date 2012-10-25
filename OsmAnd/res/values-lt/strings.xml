@@ -1130,4 +1130,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="rendering_attr_roadColors_description">Pasirinkti kelių spalvinimo schemą:</string>
 	<string name="rendering_attr_roadColors_name">Kelių spalvinimo schema</string>
     <string name="zxing_barcode_scanner_not_found">Barkodų nuskaitymo programa ZXing neįdiegta. Ieškoti parduotuvėje?</string>
+	<string name="close_changeset">Uždaryti pakeitimus</string>
 	</resources>
