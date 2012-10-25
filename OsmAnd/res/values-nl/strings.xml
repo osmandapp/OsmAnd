@@ -1034,4 +1034,5 @@
     <string name="rendering_attr_roadColors_description">Selecteer kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Market?</string>
+	<string name="close_changeset">Sluit changeset</string>
 	</resources>
