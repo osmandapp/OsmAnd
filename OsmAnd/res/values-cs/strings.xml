@@ -1095,4 +1095,5 @@
     <string name="rendering_attr_roadColors_description">Vyberte barevné schéma:</string>
 	<string name="rendering_attr_roadColors_name">Barevné schéma</string>
     <string name="zxing_barcode_scanner_not_found">Aplikace pro čtení čárových kódů ZXing není nainstalována. Chcete ji vyhledat v Google Play?</string>
+	<string name="close_changeset">Zavřít změny</string>
 	</resources>
