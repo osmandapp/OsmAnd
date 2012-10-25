@@ -4,13 +4,15 @@ import os, sys
 from lxml import etree
 from optparse import OptionParser
 
-def listsplit(tosplit, n=50):
+def listsplit(tosplit, n):
 	splited=[]
 	i=0
-	while i < (len(tosplit)-49):
-		splited.append(tosplit[i:i+49])
-		i+=50
-	splited.append(tosplit[i:])
+	while i < (len(tosplit)-n):
+		splited.append(tosplit[i:i+n])
+		i+=n
+	last=tosplit[i:]
+	last.append(tosplit[0])# first == last to close
+	splited.append(last)
 	return splited
 
 
@@ -71,6 +73,8 @@ if len(sf.shapes()) != 0:
 		    index +=1
 		    for i in range(firstindex,lastindex):
 		        way.append(etree.Element("nd", ref=str(i)))
+		        
+		    #way.append(etree.Element("nd", ref=str(firstindex)))
 		    
 		    # tags:
 		    way.append(etree.Element("tag",k="elevation", v=str(height)))
