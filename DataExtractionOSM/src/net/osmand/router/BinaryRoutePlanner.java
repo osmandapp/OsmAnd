@@ -437,7 +437,7 @@ public class BinaryRoutePlanner {
 	protected static float h(RoutingContext ctx, int begX, int begY, int endX, int endY, 
 			RouteSegment next) {
 		double distToFinalPoint = squareRootDist(begX, begY,  endX, endY);
-		if (RoutingContext.USE_BORDER_LINES) {
+		if (RoutingContext.USE_BORDER_LINES && true) {
 			int begBorder = ctx.searchBorderLineIndex(begY);
 			int endBorder = ctx.searchBorderLineIndex(endY);
 			if (begBorder != endBorder) {
@@ -449,33 +449,41 @@ public class BinaryRoutePlanner {
 				boolean endEqTarget = endX == ctx.targetX && endY == ctx.targetY;
 				if(endEqStart || endEqTarget) {
 					// we start from intermediate point and end in target or start
-					List<RouteDataBorderLinePoint> pnts = ctx.borderLines[plus ? begBorder : begBorder - 1].borderPoints;
-					for (RouteDataBorderLinePoint p : pnts) {
-						double f = (endEqTarget? p.distanceToEndPoint : p.distanceToStartPoint) + squareRootDist(p.x, p.y, begX, begY);
-						if (res > f || res <= 0) {
-							res = f;
+					if (begX > ctx.leftBorderBoundary && begX < ctx.rightBorderBoundary) {
+						List<RouteDataBorderLinePoint> pnts = ctx.borderLines[plus ? begBorder : begBorder - 1].borderPoints;
+						for (RouteDataBorderLinePoint p : pnts) {
+							double f = (endEqTarget ? p.distanceToEndPoint : p.distanceToStartPoint) + squareRootDist(p.x, p.y, begX, begY);
+							if (res > f || res <= 0) {
+								res = f;
+							}
 						}
 					}
 				} else if(beginEqStart || beginEqTarget) {
-					List<RouteDataBorderLinePoint> pnts = ctx.borderLines[plus ? endBorder -1 : endBorder].borderPoints;
-					for (RouteDataBorderLinePoint p : pnts) {
-						double f = (beginEqTarget? p.distanceToEndPoint : p.distanceToStartPoint) + squareRootDist(p.x, p.y, endX, endY);
-						if (res > f || res <= 0) {
-							res = f;
+					if (endX > ctx.leftBorderBoundary && endX < ctx.rightBorderBoundary) {
+						List<RouteDataBorderLinePoint> pnts = ctx.borderLines[plus ? endBorder - 1 : endBorder].borderPoints;
+						for (RouteDataBorderLinePoint p : pnts) {
+							double f = (beginEqTarget ? p.distanceToEndPoint : p.distanceToStartPoint)
+									+ squareRootDist(p.x, p.y, endX, endY);
+							if (res > f || res <= 0) {
+								res = f;
+							}
 						}
 					}
 				} else { 
 					throw new IllegalStateException();
 				}
 				if(res > 0) {
-					if(res > distToFinalPoint) {
-//						System.out.println("& " + res + " > " + distToFinalPoint);
+					if(res < distToFinalPoint - 0.01) {
+						throw new IllegalStateException("Estimated distance " + res + " > " + distToFinalPoint);
 					}
+//					if(endEqStart && res - distToFinalPoint > 13000) {
+//						System.out.println(" Res="+res + " dist=" +distToFinalPoint);
+//					}
 					distToFinalPoint = res;
+					
 				} else {
-					System.out.println("&" + distToFinalPoint);
-					// FIXME need to put penalty
-					distToFinalPoint = distToFinalPoint * 5;
+					// FIXME put penalty
+//					distToFinalPoint = distToFinalPoint;
 				}
 			}
 		}
@@ -519,6 +527,10 @@ public class BinaryRoutePlanner {
 		}
 		if (visitedDirectSegments != null && visitedOppositeSegments != null) {
 			printInfo("Visited interval sizes: " + visitedDirectSegments.size() + "/" + visitedOppositeSegments.size());
+		}
+		
+		for(int k=0; k<ctx.borderLines.length; k++) {
+			System.out.println("Line " + (ctx.borderLineCoordinates[k] >> 17) + " points " + ctx.borderLines[k].borderPoints.size());
 		}
 
 	}
@@ -564,15 +576,21 @@ public class BinaryRoutePlanner {
 				int st = ctx.searchBorderLineIndex(y);
 				int tt = ctx.searchBorderLineIndex(prevy);
 				if(st != tt){
-//					System.out.println(" " + st + " != " + tt + " " + road.id);
+//					System.out.print(" " + st + " != " + tt + " " + road.id + " ? ");
 					for(int i = Math.min(st, tt); i < Math.max(st, tt) & i < ctx.borderLines.length ; i++) {
 						Iterator<RouteDataBorderLinePoint> pnts = ctx.borderLines[i].borderPoints.iterator();
+						boolean changed = false;
 						while(pnts.hasNext()) {
 							RouteDataBorderLinePoint o = pnts.next();
 							if(o.id == road.id) {
 //								System.out.println("Point removed !");
 								pnts.remove();
+								changed = true;
 							}
+						}
+						if(changed){
+							ctx.updateDistanceForBorderPoints(ctx.startX, ctx.startY, true);
+							ctx.updateDistanceForBorderPoints(ctx.targetX, ctx.targetY, false);
 						}
 					}
 				}

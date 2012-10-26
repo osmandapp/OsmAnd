@@ -72,6 +72,8 @@ public class RoutingContext {
 	
 	RouteDataBorderLine[] borderLines = new RouteDataBorderLine[0];
 	int[] borderLineCoordinates = new int[0];
+	int leftBorderBoundary;
+	int rightBorderBoundary;
 	
 	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
@@ -102,7 +104,8 @@ public class RoutingContext {
 	public int relaxedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
-	
+
+
 	
 	
 	public RoutingContext(RoutingContext cp) {
@@ -310,6 +313,8 @@ public class RoutingContext {
 		// one tile of 12th zoom around (?)
 		int zoomAround = 10;
 		int distAround = 1 << (31 - zoomAround);
+		leftBorderBoundary = sleft - distAround;
+		rightBorderBoundary = sright + distAround;
 		SearchRequest<RouteDataBorderLinePoint> req = BinaryMapIndexReader.buildSearchRouteBorderRequest(sleft, sright, stop, sbottom);
 		while(it.hasNext()) {
 			Entry<RouteRegion, BinaryMapIndexReader> entry = it.next();
@@ -317,9 +322,20 @@ public class RoutingContext {
 		}
 		TIntObjectHashMap<RouteDataBorderLine> lines = new TIntObjectHashMap<RoutingContext.RouteDataBorderLine>();
 		for(RouteDataBorderLinePoint p : req.getSearchResults()) {
-			if(config.router.acceptLine(p.types, p.region) && p.x > sleft - distAround && p.x < sright + distAround) {
+			if(config.router.acceptLine(p.types, p.region) && p.x > leftBorderBoundary && p.x < rightBorderBoundary) {
 				if(!lines.containsKey(p.y)) {
-					lines.put(p.y, new RouteDataBorderLine(p.y));
+					RouteDataBorderLine line = new RouteDataBorderLine(p.y);
+					lines.put(p.y, line);
+					RouteDataBorderLinePoint lft = new RouteDataBorderLinePoint(p.region);
+					lft.y = p.y;
+					lft.id = Long.MIN_VALUE;
+					lft.x = leftBorderBoundary;
+					line.borderPoints.add(lft);
+					RouteDataBorderLinePoint rht = new RouteDataBorderLinePoint(p.region);
+					rht.y = p.y;
+					rht.id = Long.MIN_VALUE;
+					rht.x = rightBorderBoundary;
+					line.borderPoints.add(rht);
 				}
 				lines.get(p.y).borderPoints.add(p);
 			}
@@ -343,7 +359,7 @@ public class RoutingContext {
 		
 	}
 
-	private void updateDistanceForBorderPoints(int sX, int sy, boolean distanceToStart) {
+	protected void updateDistanceForBorderPoints(int sX, int sy, boolean distanceToStart) {
 		boolean plus = borderLines.length > 0 && sy < borderLines[0].borderLine;
 		if(borderLines.length > 0 && !plus && sy< borderLines[borderLines.length - 1].borderLine){
 			throw new IllegalStateException();
@@ -352,7 +368,7 @@ public class RoutingContext {
 		for(int i=0; i<borderLines.length; i++) {
 			int ind = plus ? i : borderLines.length - i - 1;
 			for(RouteDataBorderLinePoint ps : borderLines[ind].borderPoints){
-				float res = (float) Math.sqrt(MapUtils.squareDist31TileMetric(sX, sy, ps.x, ps.y)); 
+				float res = (float) Math.sqrt(MapUtils.squareDist31TileMetric(sX, sy, ps.x, ps.y)) ; 
 				if(i > 0){
 					int prevInd = plus ? i - 1 : borderLines.length - i;
 					double minDist = 0;
@@ -364,6 +380,7 @@ public class RoutingContext {
 						}
 					}
 					if (minDist > 0) {
+//						System.out.println("Border line " + i + " exp="+res + " min="+ minDist);
 						res = (float) minDist;
 					}
 				}
