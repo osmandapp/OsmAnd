@@ -985,11 +985,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				String sfName = convertServerFileNameToLocal(e.getFileName());
 				if(!indexFileNames.containsKey(sfName)){
 					item.setTextColor(getResources().getColor(R.color.index_unknown));
+					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				} else {
 					if(e.getDate() != null){
 						if(e.getDate().equals(indexActivatedFileNames.get(sfName))){
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " + indexActivatedFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.act_index_uptodate)); //GREEN
+							item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " + indexFileNames.get(sfName));
 							//item.setTextColor(getResources().getColor(R.color.deact_index_uptodate)); //DARK_GREEN
@@ -999,6 +1001,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						} else if (indexActivatedFileNames.containsKey(sfName)) {
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " +  indexActivatedFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.act_index_updateable)); //LIGHT_BLUE
+							item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 						} else {
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " +  indexFileNames.get(sfName));
 							//item.setTextColor(getResources().getColor(R.color.deact_index_updateable)); //DARK_BLUE
@@ -1008,6 +1011,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						}
 					} else {
 						item.setTextColor(getResources().getColor(R.color.act_index_uptodate));
+						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					}
 				}
 			}
