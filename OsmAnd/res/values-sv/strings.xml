@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen trycker låsikon</string>
+<string name="ChooseCountry">Välj land</string>
+<string name="choose_city">Välj stad</string>
+<string name="choose_building">Välj byggnad</string>
+<string name="choose_street">Välj gata</string>
 <string name="map_widget_top_text">Gatunamn</string>
 <string name="map_widget_back_to_loc">Var är jag</string>
 <string name="map_widget_lock_screen">Lås skärmen</string>
