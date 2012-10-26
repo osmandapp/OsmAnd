@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen trycker låsikon</string>
+<string name="ChooseCountry">Välj land</string>
+<string name="choose_city">Välj stad</string>
+<string name="choose_building">Välj byggnad</string>
+<string name="choose_street">Välj gata</string>
 <string name="map_widget_top_text">Gatunamn</string>
 <string name="map_widget_back_to_loc">Var är jag</string>
 <string name="map_widget_lock_screen">Lås skärmen</string>
@@ -137,7 +141,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="navpoint_search_desc">Koordinater</string>
 <string name="transport_search_desc">Transport sökning</string>
 <string name="offline_navigation_not_available">OsmAnd offline navigering är inte tillgängliga.</string>
-<string name="left_side_navigation">Vänster körning</string>
+<string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
 <string name="download_link_and_local_description">Klicka här för att ladda ner eller uppdatera offline data. \nKlicka befintliga objekt för att se fler detaljer, tryck och håll för att stänga eller ta bort. Aktuella data på enheten (%1$s gratis):</string>
 <string name="unknown_from_location">Utgångspunkt är ännu inte bestämd</string>
@@ -386,11 +390,11 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="global_settings">Globala inställningar</string>
 <string name="general_settings">Allmänna inställningar</string>
 <string name="general_settings_descr">Konfigurera globala inställningar</string>
-<string name="global_app_settings">Globala app inställningar</string>
-<string name="user_name">Din OSM användarnamn</string>
-<string name="user_name_descr">Behövs för openstreetmap.org inlagor</string>
-<string name="user_password">Din OSM lösenord</string>
-<string name="user_password_descr">Behövs för openstreetmap.org inlagor</string>
+<string name="global_app_settings">Globala appinställningar</string>
+<string name="user_name">Ditt OSM-användarnamn</string>
+<string name="user_name_descr">Behövs för ändringar i openstreetmap.org</string>
+<string name="user_password">Ditt OSM-lösenord</string>
+<string name="user_password_descr">Behövs för ändringar i openstreetmap.org</string>
 <string name="osmand_service">Viloläge Funktionalitet</string>
 <string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
 <string name="tip_rotation_switching">Kartorientering</string>
@@ -401,9 +405,9 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 \n\t\'Till kompass\' - Karta kommer kontinuerligt anpassas till enhetens kompass läsning</string>
 <string name="binary_map_download_success">Ladda framgångsrika.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera Visa\' -&gt; \'Karta källa...\' -&gt; \'Offline vektorkartor\'.</string>
 <string name="tip_day_night_mode">Dag/nattläge</string>
-<string name="tip_osm_improve">Förbättra OSM data</string>
-<string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (tillgängliga: %2$s).</string>
-<string name="download_files_question_space">Tillgängliga utrymme nu {2} MB! Ladda {0} fil(er) ({1} MB)?</string>
+<string name="tip_osm_improve">Förbättra OSM-data</string>
+<string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (tillgängligt: %2$s).</string>
+<string name="download_files_question_space">Tillgängligt utrymme nu {2} MB! Ladda {0} fil(er) ({1} MB)?</string>
 <string name="tip_select_destination_point">Välj destination</string>
 <string name="tip_select_destination_point_t">\tDu kan välja en destination direkt i kartan (snabbmenyn, sedan \'Ange som destination\'), i alla sökord aktiviteter, eller via lång knapptryckning en post i \'lista över favoritprogram poäng\'.
 \n\tDen Resmålet markeras som en orange skiva på kartan och OsmAnd visas avståndet till den och riktning till den (orange triangel).</string>
@@ -438,14 +442,14 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="animate_route">Starta animering</string>
 <string name="file_can_not_be_renamed">Fil kan inte döpas om.</string>
 <string name="file_with_name_already_exists">Fil med det namnet finns redan.</string>
-<string name="gpx_navigation">GPX väg</string>
+<string name="gpx_navigation">GPX-väg</string>
 <string name="poi_query_by_name_matches_categories">Flera POI-kategorier som matchar frågan :</string>
 <string name="data_to_search_poi_not_available">Lokala data för att söka POI inte är närvarande.</string>
 <string name="poi_filter_by_name">Sök på namn</string>
 <string name="old_poi_file_should_be_deleted">POI datafil \'%1$s\' är överflödig och kan tas bort.</string>
 <string name="update_poi_file_not_found">Lokal fil att upprätthålla POI förändringar inte hittas och kunde inte skapas.</string>
 <string name="button_upgrade_osmandplus">Uppgradera OsmAnd+</string>
-<string name="map_version_changed_info">Server innehåller kartfiler inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till nyare version.</string>
+<string name="map_version_changed_info">Servern innehåller kartfiler som inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till nyare version.</string>
 <string name="local_index_mi_rename">Byt namn</string>
 <string name="show_gpx_route">Visa på karta</string>
 <string name="search_select_point">Välj</string>
@@ -743,7 +747,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="layer_osm_bugs">OSM buggar</string>
 	<string name="layer_transport">Transport stoppar</string>
 	<string name="layer_poi">IP...</string>
-	<string name="layer_map">Karta källa...</string>
+	<string name="layer_map">Kartkälla...</string>
 	<string name="menu_layers">Definiera visa</string>
 	<string name="context_menu_item_search_poi">Sök IP</string>
 	<string name="context_menu_item_show_route">Visa rutt härifrån</string>
