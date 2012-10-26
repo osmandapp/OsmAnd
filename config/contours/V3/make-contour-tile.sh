@@ -15,8 +15,8 @@ if [ $# -lt 2 ]; then
   echo "Usage: "$(basename $0) "[input-file] [output-directory/]"
   exit 2
 fi
-if [ $# -eq  3]; then
-  tmpfile="tmp"$3
+if [ $# -eq  3 ]; then
+  tmpfile=$("tmp"$3)
 else
   tmpfile="tmp"
 fi
