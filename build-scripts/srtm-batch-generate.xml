@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <batch_process>
 	<process_attributes mapZooms="11-12;13-" renderingTypesFile="" zoomWaySmoothness="2" 
-		osmDbDialect="sqlite" mapDbDialect="sqlite"/>
+		osmDbDialect="SQLITE_IN_MEMORY" mapDbDialect="SQLITE_IN_MEMORY"/>
 	
 	<!-- There are 3 subprocess : 	
 		 1. Download fresh osm files from servers to 'directory_for_osm_files' (override existings).
