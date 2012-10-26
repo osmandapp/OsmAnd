@@ -10,7 +10,7 @@ TMP_DIR="/var/tmp/"
 # check arguments and build absolute filenames
 # ---------------------------------------------
 
-if [ $# -ne 2 ]; then
+if [ $# -lt 2 ]; then
   echo "Error: 2 arguments needed"
   echo "Usage: "$(basename $0) "[input-file] [output-directory/]"
   exit 2
