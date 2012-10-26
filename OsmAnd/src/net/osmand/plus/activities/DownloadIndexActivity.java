@@ -991,13 +991,19 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 							item.setTextColor(getResources().getColor(R.color.act_index_uptodate)); //GREEN
 						} else if (e.getDate().equals(indexFileNames.get(sfName))) {
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " + indexFileNames.get(sfName));
-							item.setTextColor(getResources().getColor(R.color.deact_index_uptodate)); //DARK_GREEN
+							//item.setTextColor(getResources().getColor(R.color.deact_index_uptodate)); //DARK_GREEN
+							// Try fix Issue 1482: Use italic instead of dark colors for deactivated maps
+							item.setTextColor(getResources().getColor(R.color.act_index_uptodate));
+							item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 						} else if (indexActivatedFileNames.containsKey(sfName)) {
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " +  indexActivatedFileNames.get(sfName));
 							item.setTextColor(getResources().getColor(R.color.act_index_updateable)); //LIGHT_BLUE
 						} else {
 							item.setText(item.getText() + "\n" + getResources().getString(R.string.local_index_installed) + " : " +  indexFileNames.get(sfName));
-							item.setTextColor(getResources().getColor(R.color.deact_index_updateable)); //DARK_BLUE
+							//item.setTextColor(getResources().getColor(R.color.deact_index_updateable)); //DARK_BLUE
+							// Try fix Issue 1482: Use italic instead of dark colors for deactivated maps
+							item.setTextColor(getResources().getColor(R.color.act_index_updateable));
+							item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 						}
 					} else {
 						item.setTextColor(getResources().getColor(R.color.act_index_uptodate));
