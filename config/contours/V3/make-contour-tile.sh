@@ -16,7 +16,7 @@ if [ $# -lt 2 ]; then
   exit 2
 fi
 if [ $# -eq  3 ]; then
-  tmpfile=$("tmp"$3)
+  tmpfile="tmp"$3
 else
   tmpfile="tmp"
 fi
