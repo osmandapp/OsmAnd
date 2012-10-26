@@ -51,11 +51,11 @@
 <string name="map_widget_map_select">Karta källa</string>
 <string name="map_widget_reset">Återställ till standard</string>
 <string name="map_widget_time">Dags att gå</string>
-<string name="osmand_short_description_80_chars">OsmAnd är ett open source navigering ansökan för offline och online-kartor</string>
+<string name="osmand_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline och online-kartor</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd är ett open source navigering ansökan för offline och online-kartor</string>
-<string name="edit_filter_delete_menu_item">Ta bort</string>
+<string name="edit_filter_delete_menu_item">Radera</string>
 <string name="edit_filter_save_as_menu_item">Spara Som</string>
-<string name="edit_filter_delete_dialog_title">Radera vald filter?</string>
+<string name="edit_filter_delete_dialog_title">Radera valt filter?</string>
 <string name="default_buttons_selectall">Markera Allt</string>
 <string name="email">e-post</string>
 <string name="poi_dialog_opening_hours">öppet</string>
