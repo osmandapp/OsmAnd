@@ -15,6 +15,11 @@ if [ $# -ne 2 ]; then
   echo "Usage: "$(basename $0) "[input-file] [output-directory/]"
   exit 2
 fi
+if [ $# -eq  3]; then
+  tmpfile="tmp"$3
+else
+  tmpfile="tmp"
+fi
 if [ ! -f $1 ]; then
   echo "input file not found"
   exit 3
@@ -45,12 +50,12 @@ outfile=$outdir$fileroot.osm
 	echo "Processing"$fileroot
 	echo "----------------------------------------------"
 	echo "Extracting shapefile …"
-	if [ -f ${TMP_DIR}tmp.shp ]; then rm ${TMP_DIR}tmp.shp ${TMP_DIR}tmp.dbf ${TMP_DIR}tmp.prj ${TMP_DIR}tmp.shx; fi
-	gdal_contour -i 10 -snodata -32768 -a height $infile ${TMP_DIR}tmp.shp
+	if [ -f ${TMP_DIR}${tmpfile}.shp ]; then rm ${TMP_DIR}${tmpfile}.shp ${TMP_DIR}${tmpfile}.dbf ${TMP_DIR}${tmpfile}.prj ${TMP_DIR}${tmpfile}.shx; fi
+	gdal_contour -i 10 -snodata -32768 -a height $infile ${TMP_DIR}${tmpfile}.shp
 	if [ $? -ne 0 ]; then echo $(date)' Error creating shapefile' & exit 4;fi
 	
 	echo "Building osm file …"
-	${working_dir}/srtmshp2osm.py -q -f $TMP_DIR/tmp.shp -o $outfile
+	${working_dir}/srtmshp2osm.py -q -f $TMP_DIR/${tmpfile}.shp -o $outfile
 	if [ $? -ne 0 ]; then echo $(date)' Error creating OSM file' & exit 5;fi
 	
 	echo "Compressing to osm.bz2 …"
