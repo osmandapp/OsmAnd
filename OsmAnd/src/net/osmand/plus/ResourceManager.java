@@ -695,12 +695,6 @@ public class ResourceManager {
 		}
 	}
 	
-	public void updateIndexLastDateModified(File f){
-		if(f != null && f.exists()){
-			indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
-		}
-	}
-	
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<Amenity> searchAmenities(PoiFilter filter,
