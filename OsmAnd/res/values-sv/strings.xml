@@ -218,8 +218,8 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="rendering_attr_appMode_name">Renderingsläge</string>
 <string name="rendering_attr_contourLines_description">Display från zoomnivå (kräver SRTM fil):</string>
 <string name="rendering_attr_contourLines_name">Visa konturlinjer</string>
-<string name="rendering_attr_hmRendered_description">Öka mängden karta detaljer visas</string>
-<string name="rendering_attr_hmRendered_name">Visa mer karta detaljer</string>
+<string name="rendering_attr_hmRendered_description">Öka mängden kartdetaljer visas</string>
+<string name="rendering_attr_hmRendered_name">Visa mer kartdetaljer</string>
 <string name="local_index_routing_data">Dirigeringsdata</string>
 <string name="navigate_point_format">Format:</string>
 <string name="poi_search_desc">POI (Point of Interest) sökning</string>
