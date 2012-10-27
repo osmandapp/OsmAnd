@@ -1,4 +1,3 @@
-
 aerodrome,Aeropuerto
 arts_centre,Centro de arte
 atm,Cajero automático
@@ -6,8 +5,9 @@ auditorium,Auditorio
 bank,Banco
 bar,Bar
 bench,Banco
-bicycle_parking,Aparcamiento de bibicletas
+bicycle_parking,Aparcamiento de bicicletas
 bicycle_rental,Alquiler de bicicletas
+biergarten,Cervecería
 brothel,Burdel
 bureau_de_change,Casa de cambio
 bus_station,Estación de autobuses
@@ -126,6 +126,7 @@ tower,Torre
 train_station,Estación de tren
 university,Edificio universitario
 &quot;yes&quot;,Edificio
+bollard, Bolardo
 bridleway,Camino prioritario para peatones y caballos
 bus_guideway,Canal guiado de autobuses
 bus_stop,Parada de autobuses
@@ -169,16 +170,20 @@ battlefield,Campo de batalla
 boundary_stone,Mojón
 building,Edificio histórico
 castle,Castillo
+city_wall,Muralla
 church,Iglesia
+fence,Valla
+hedge,Seto
 house,Casa
 icon,Icono
 manor,Casa señorial
-memorial,Memorial
+memorial,Monumento conmemorativo
 mine,Mina
 monument,Monumento
 museum,Museo
 ruins,Ruinas
 tower,Torre
+wall,Pared
 wayside_cross,Cruz de término
 wayside_shrine,Sepulcro
 wreck,Pecio
@@ -290,10 +295,10 @@ region,Región
 sea,Mar
 state,Estado o provincia
 subdivision,Subdivisión
-suburb,Suburbio
-town,Pueblo
+suburb,Barrio
+town,Ciudad
 unincorporated_area,Área no incorporada
-village,Villa
+village,Pueblo
 abandoned,Vía de tren abandonada
 construction,Vía ferroviaria en construcción
 disused,Vía ferroviaria en desuso
@@ -334,11 +339,12 @@ charity,Tienda benéfica
 chemist,Droguería
 clothes,Tienda de ropa
 computer,Tienda de informática
-confectionery,Dulcería
-convenience,pequeño supermercado
+confectionery,Confitería
+convenience,Pequeño supermercado
 copyshop,Copistería
 cosmetics,Tienda de cosmética
 department_store,Grandes almacenes
+deli,Delicatessen
 discount,Tienda de descuento
 doityourself,Tienda de bricolaje
 drugstore,Parafarmacia
@@ -364,6 +370,7 @@ hifi,Hi-Fi
 insurance,Aseguradora
 jewelry,Joyería
 kiosk,Kiosko
+kitchen,Venta de cocinas
 laundry,Lavandería
 mall,Centro comercial
 market,Mercado
@@ -384,6 +391,7 @@ stationery,Papelería
 supermarket,Supermercado
 toys,Juguetería
 travel_agency,Agencia de viajes
+variety_store,Bazar
 video,Videotienda
 wine,Licorería
 alpine_hut,Cabaña alpina
