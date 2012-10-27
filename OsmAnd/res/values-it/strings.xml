@@ -1127,7 +1127,7 @@
     <string name="gps_not_available">Si prega di attivare il GPS nelle impostazioni</string>
     <string name="map_widget_show_destination_arrow">Mostra la direzione della destinazione</string>
     <string name="non_optimal_route_calculation">Calcola un percorso non necessariamente ottimale su lunghe distanze</string>
-    <string name="enable_plugin_monitoring_services">"Abilita il plugin di monitoraggio (tracking, tracking in tempo reale) per utilizzare i servizi di monitoraggio "</string>
+    <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio (tracking, tracking in tempo reale) per utilizzare i servizi di monitoraggio</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colori per le strade</string>
     <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla sul Market?</string>
