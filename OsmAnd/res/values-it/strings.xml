@@ -1131,4 +1131,5 @@
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colori per le strade</string>
     <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla sul Market?</string>
+	<string name="close_changeset">Chiudi changeset</string>
 	</resources>
