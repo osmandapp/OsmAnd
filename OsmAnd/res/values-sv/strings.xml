@@ -744,7 +744,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rutt</string>
 	<string name="layer_favorites">Favoriter</string>
-	<string name="layer_osm_bugs">OSM buggar</string>
+	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Transport stoppar</string>
 	<string name="layer_poi">IP...</string>
 	<string name="layer_map">Kartkälla...</string>
@@ -768,7 +768,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="background_router_service_descr">Körs OsmAnd i bakgrunden för att spåra din position medan skärmen är avstängd</string>
 	<string name="background_router_service">Kör i bakgrunden</string>
 	<string name="off_router_service_no_gps_available">Bakgrunden navigeringstjänst kräver en plats leverantör för att vara påslagen.</string>
-	<string name="hide_poi_filter">Göm filtret</string>
+	<string name="hide_poi_filter">Dölj filtret</string>
 	<string name="show_poi_filter">Visa filter</string>
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Ljud är på</string>
@@ -787,7 +787,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
 	<string name="voice_data_corrupted">Specificerade röstdata är skadad</string>
 	<string name="voice_data_unavailable">Valda röstdata inte finns</string>
-	<string name="stop_routing">Stoppa navigtn.</string>
+	<string name="stop_routing">Stoppa navigation.</string>
 	<string name="sd_unmounted">SD-kort är inte tillgänglig.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
 	<string name="unzipping_file">Packa file...</string>
