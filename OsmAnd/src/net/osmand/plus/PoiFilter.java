@@ -136,10 +136,10 @@ public class PoiFilter {
 		double baseDistX = MapUtils.getDistance(lat, lon, lat, lon - 1);
 		double distance = distanceToSearchValues[distanceInd] * 1000;
 		
-		double topLatitude = lat + (distance/ baseDistY );
-		double bottomLatitude = lat - (distance/ baseDistY );
-		double leftLongitude = lon - (distance / baseDistX);
-		double rightLongitude = lon + (distance/ baseDistX);
+		double topLatitude = Math.min(lat + (distance/ baseDistY ), 84.);
+		double bottomLatitude = Math.max(lat - (distance/ baseDistY ), -84.);
+		double leftLongitude = Math.max(lon - (distance / baseDistX), -180);
+		double rightLongitude = Math.min(lon + (distance/ baseDistX), 180);
 		
 		return searchAmenities(lat, lon, topLatitude, bottomLatitude, leftLongitude, rightLongitude, matcher);
 	}

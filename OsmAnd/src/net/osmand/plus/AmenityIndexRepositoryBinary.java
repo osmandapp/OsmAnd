@@ -11,6 +11,7 @@ import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
@@ -77,8 +78,13 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 		try {
 			amenities = index.searchPoiByName(req);
 			if (log.isDebugEnabled()) {
-				log.debug(String.format("Search for %s done in %s ms found %s.",  //$NON-NLS-1$
-						query, System.currentTimeMillis() - now, amenities.size())); //$NON-NLS-1$
+				String nm = "";
+				List<MapIndex> mi = index.getMapIndexes();
+				if(mi.size() > 0) {
+					nm = mi.get(0).getName();
+				}
+				log.debug(String.format("Search for %s done in %s ms found %s (%s).",  //$NON-NLS-1$
+						query, System.currentTimeMillis() - now, amenities.size(), nm)); //$NON-NLS-1$
 			}
 		} catch (IOException e) {
 			log.error("Error searching amenities", e); //$NON-NLS-1$
