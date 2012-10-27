@@ -571,8 +571,12 @@ public class ResourceManager {
 						} else {
 							if(index.isBasemap()) {
 								basemapFileNames.add(f.getName());
+							} 
+							long dateCreated = index.getDateCreated();
+							if(dateCreated == 0) {
+								dateCreated = f.lastModified();
 							}
-							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$
+							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(dateCreated))); //$NON-NLS-1$
 							for(String rName : index.getRegionNames()) {
 								// skip duplicate names (don't make collision between getName() and name in the map)
 								// it can be dangerous to use one file to different indexes if it is multithreaded
