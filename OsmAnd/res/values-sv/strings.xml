@@ -17,14 +17,14 @@
 <string name="map_widget_distance">Målet</string>
 <string name="map_widget_altitude">Höjd</string>
 <string name="map_widget_next_turn">Nästa kurva</string>
-<string name="show_warnings_title">Visa larm...</string>
+<string name="show_warnings_title">Visa larm…</string>
 <string name="show_warnings_descr">Visa hastighetsbegränsningar, hastighetskameror, vägbulor och andra varningar</string>
 <string name="use_compass_navigation_descr">Använd kompassen när ingen rubrik upptäcks annars</string>
 <string name="use_compass_navigation">Använd kompassen</string>
 <string name="avoid_motorway">Undvik motorvägar</string>
 <string name="auto_zoom_map_descr">Autozoom kartlägga beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk zoom karta</string>
-<string name="tip_recent_changes_0_8_3_t">Förändringar i 0.8.3:\n* Förbättrad vägvisning\n* Undvik motorvägar alternativet\n* Cykelväg=spår display\n* bättre UI finish (ikoner)\n* Vissa buggfixar</string>
+<string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Förbättrad vägvisning\n\t* Undvik motorvägar alternativet\n\t* Cykelväg=spår display\n\t* bättre UI finish (ikoner)\n\t* Vissa buggfixar "</string>
 <string name="snap_to_road_descr">Snap ställning till vägar under navigering</string>
 <string name="snap_to_road">Fäst mot väg</string>
 <string name="tip_update_index">Uppdatering av offlinedata</string>
@@ -38,11 +38,11 @@
 <string name="map_widget_vector_attributes">Rendering attribut:</string>
 <string name="position_on_map_descr">Välj placering positionsmarkör på kartan</string>
 <string name="position_on_map">Positionsmarkör</string>
-<string name="layer_map_appearance">Konfigurera skärm...</string>
+<string name="layer_map_appearance">Konfigurera skärm…</string>
 <string name="show_lanes">Visa körfält</string>
 <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
 <string name="avoid_ferries">Undvik färjor</string>
-<string name="avoid_in_routing_title">Undvik...</string>
+<string name="avoid_in_routing_title">Undvik…</string>
 <string name="avoid_in_routing_descr">Undvika betalvägar, oasfalterade, färjor</string>
 <string name="map_widget_show_ruler">Linjal</string>
 <string name="map_widget_appearance">Övrigt:</string>
@@ -58,9 +58,9 @@
 <string name="osmand_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline och online-kartor</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd är ett open source navigering ansökan för offline och online-kartor</string>
 <string name="edit_filter_delete_menu_item">Radera</string>
-<string name="edit_filter_save_as_menu_item">Spara Som</string>
+<string name="edit_filter_save_as_menu_item">Spara som</string>
 <string name="edit_filter_delete_dialog_title">Radera valt filter?</string>
-<string name="default_buttons_selectall">Markera Allt</string>
+<string name="default_buttons_selectall">Markera allt</string>
 <string name="email">e-post</string>
 <string name="poi_dialog_opening_hours">öppet</string>
 <string name="poi_dialog_comment">Kommentar</string>
@@ -109,7 +109,7 @@
 <string name="osmand_parking_hours">Timmar</string>
 <string name="osmand_parking_minutes">Minuter</string>
 <string name="osmand_parking_position_description_add_time">Bilen stod parkerad på:</string>
-<string name="tip_recent_changes_0_8_1_t">Välj animera rutt acceleration</string>
+<string name="tip_recent_changes_0_8_1_t"/>
 <string name="select_animate_speedup">Välj animera rutt acceleration</string>
 <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android gräns %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Allokerat minne</string>
@@ -240,13 +240,8 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad karta konfiguration (som ökar karta detaljer) och vissa enhetsspecifika detaljerna.</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
 <string name="plugins_screen">Plugin Manager</string>
-<string name="edit_filter_create_message">Filter {0} wedi cael ei chreu</string>
-<string name="tip_recent_changes_0_8_2_t">Förändringar i 0.8.2:↵
-\n\t* Förbättrad Routing↵
-\n\t* Dynamisk karta widgets↵
-\n\t* Kartinställningar flyttade till kartskärmen↵
-\n\t* Lås skärm knapp med logga tjänster↵
-\n\t* Fast arabiska, Kannada skript och RTL språk↵</string>
+<string name="edit_filter_create_message"/>
+<string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Dynamisk karta widgets\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fast arabiska, Kannada skript och RTL språk "</string>
 <string name="live_monitoring_mode_on">Stopp\n lever spårning</string>
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
 <string name="bg_service_sleep_mode_off">Aktivera\n viloläge</string>
@@ -257,50 +252,23 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="select_plugin_to_activate">Tryck på en Plugin för att aktivera eller avaktivera den. (Omstart OsmAnd kan krävas.)</string>
 <string name="prefs_plugins_descr">Plugins aktivera inställningar expertläge och ger extra funktionalitet som kakel kartor, spårning, viloläge drift, inställningar tillgänglighet och andra.</string>
 <string name="prefs_plugins">Plugin Manager</string>
-<string name="tip_recent_changes_0_8_0_t">Förändringar i 0.8.0:↵
+<string name="tip_recent_changes_0_8_0_t">"Förändringar i 0.8.0 : ↵
 \n\t- *Plugin funktionalitet*↵
-\n\t -Flesta funktionalitet grupperade efter funktioner och kan aktiveras/avaktiveras i plugin manager↵
-Du kan aktivera (online eller cachad) källor kakel karta, spårning inställningar och många andra nya och tidigare befintliga funktioner. ↵
+\n\t- Flesta funktionalitet grupperade efter funktioner och kan aktiveras/avaktiveras i plugin manager↵ Du kan aktivera (online eller cachad) källor kakel karta, spårning inställningar och många andra nya och tidigare befintliga funktioner. ↵
 \n\t- *Ny offline kartdata stöd*↵
 \n\t - Karta rendering blir snabbare och mer exakt (kust och översvämmade problem område huvudsakligen är fasta).↵
 \n\t - Du måste ladda ner helt nya offline data (gamla data stöds inte längre)↵
 \n\t- *Offline Routing*↵
 \n\t - Offline routing blir mer robust↵
 \n\t *Användbarhet och UI erfarenhet*↵
-\n\t - Förbättrats på många områden↵</string>
+\n\t - Förbättrats på många områden "</string>
 <string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM återkoppling som samlar/modifiera OSM POI-objekt, öppna/kommentera OSM buggar, och bidra inspelade GPX-filer (kräver OSM referenser).</string>
 <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor visas sannolikt snabbare. Får inte fungerar bra på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela kommandon valda röst</string>
 <string name="test_voice_prompts">Test röstmeddelanden</string>
 <string name="switch_to_raster_map_to_see">Inget offline vektor map närvarande för den här platsen. Du kan ladda ner en i Inställningar (Offline data) eller byta till online kartor.</string>
-<string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:↵
-\n\t- Native rendering för alla enheter↵
-\n\t- Offline POI redigering↵
-\n\t- Tillgänglighet↵
-\n\t- Massor av buggfixar↵</string>
-<string name="osmand_long_description_1000_chars">
-OsmAnd (OSM automatiserade Navigation Vägbeskrivning)
-
-OsmAnd är ett open source navigering ansökan med tillgång till ett brett utbud av globala OpenStreetMap (OSM) data. Alla kartdata (vektor-eller kakel kartor) kan lagras i telefonens minne kort för offline användning. OsmAnd erbjuder även offline och online routing-funktionalitet, inklusive turn-by-turn röstguidning.
-
-Några av de viktigaste funktionerna:
-- Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp)
-- Kompakta offline vektorkartor för hela världen finns
-- Nedladdning av land eller region kartor direkt från appen
-- Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens
-- Offline söka efter adresser och platser (POIs)
-- Offline dirigering för korta sträckor (experimentell)
-- Bil, cykel och fotgängare lägen med:
-- Tillval automatisk dag/nattvisning växling
-- Tillval hastighetsberoende karta zoomning
-- Valfri karta inställningen enligt kompass eller rörelseriktningen 
-- Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster
-
-Begränsningar av denna gratis version av OsmAnd:
-- Antal karta nedladdningar begränsad
-- Ingen tillgång till Wikipedia offline POIs
-
-OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväga att köpa OsmAnd + eller finansiera specifika nya funktioner eller göra en allmän donation på osmand.net.</string>
+<string name="tip_recent_changes_0_7_2_t">"Förändringar i 0.7.2:\n\t- Native rendering för alla enheter\n\t- Offline POI redigering\n\t- Tillgänglighet↵\n\t- Massor av buggfixar "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM automatiserade Navigation Vägbeskrivning) OsmAnd är ett open source navigering ansökan med tillgång till ett brett utbud av globala OpenStreetMap (OSM) data. Alla kartdata (vektor-eller kakel kartor) kan lagras i telefonens minne kort för offline användning. OsmAnd erbjuder även offline och online routing-funktionalitet, inklusive turn-by-turn röstguidning. Några av de viktigaste funktionerna: - Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp) - Kompakta offline vektorkartor för hela världen finns - Nedladdning av land eller region kartor direkt från appen - Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens - Offline söka efter adresser och platser (POIs) - Offline dirigering för korta sträckor (experimentell) - Bil, cykel och fotgängare lägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratis version av OsmAnd: - Antal karta nedladdningar begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväga att köpa OsmAnd + eller finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Native rendering</string>
 <string name="default_buttons_support">Stöd</string>
 <string name="support_new_features">Stödja nya funktioner</string>
@@ -330,17 +298,17 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="use_fluorescent_overlays_descr">Använd fluorescerande färger för att visa spår och rutter</string>
 <string name="offline_edition">Offline-redigering</string>
 <string name="offline_edition_descr">Använd alltid offline-redigering</string>
-<string name="tip_recent_changes_0_7_1_t">Förändringar i 0.7.1:
-\n\t- Offline POI redigering 
-\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo artiklar) 
-\n\t- Visa för närvarande in spår på kartan 
-\n\t- Riktning upptäckt: \'Gör U-sväng\' anges och meddelas när rubrik i motsatt riktning eller efter saknade en sväng 
-\n\t- New röstmeddelande \'Route räknas\' 
-\n\t- Optisk indikering av en förestående sväng inom 100m från diretion pil ändrar färg 
-\n\t- Aktualitet även om deaktiverade indexfiler nu visas på Download skärm i mörkgrönt och mörkblått 
-\n\t- Övriga förändringar</string>
+<string name="tip_recent_changes_0_7_1_t">"Förändringar i 0.7.1:
+\n\t- Offline POI redigering
+\n\t- Live Tracking alternativ - skicka koordinater till webbtjänst regelbundet (läs om hur du konfigurerar din egen webbtjänst HowTo artiklar)
+\n\t- Visa för närvarande in spår på kartan
+\n\t- Riktning upptäckt: \'Gör U-sväng\' anges och meddelas när rubrik i motsatt riktning eller efter saknade en sväng
+\n\t- New röstmeddelande \'Route räknas\'
+\n\t- Optisk indikering av en förestående sväng inom 100m från diretion pil ändrar färg
+\n\t- Aktualitet även om deaktiverade indexfiler nu visas på Download skärm i mörkgrönt och mörkblått
+\n\t- Övriga förändringar "</string>
 <string name="update_poi_does_not_change_indexes">POI förändringar inom programmet inte påverkar nedladdade kartfiler, förändringar sparas lokalt fil istället.</string>
-<string name="local_openstreetmap_uploading">Uppladdning...</string>
+<string name="local_openstreetmap_uploading">Laddar upp…</string>
 <string name="local_openstreetmap_were_uploaded">{0} POI/Buggar upp</string>
 <string name="local_openstreetmap_uploadall">Ladda upp alla</string>
 <string name="local_openstreetmap_show">Visa på karta</string>
@@ -357,10 +325,10 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="live_monitoring_url">Live spårning webbadress</string>
 <string name="gpx_monitoring_disabled_warn">Vänligen aktivera \'Log spår till GPX fil\' inställningar.</string>
 <string name="show_current_gpx_title">Visa aktuella spåret</string>
-<string name="tip_recent_changes_0_7_0_t">Förändringar i 0.7.0:
-\n\t- Offline wikipedia uppgifter med artiklar
+<string name="tip_recent_changes_0_7_0_t">"Förändringar i 0.7.0:
+\n\t- Offline Wikipedia uppgifter med artiklar
 \n\t- Uppdaterade kartor
-\n\t- Andra små funktioner</string>
+\n\t- Andra små funktioner "</string>
 <string name="free_version_message">Detta fria OsmAnd versionen är begränsad till %1$s nedladdningar %2$s och stöder inte offline Wikipedia-artiklar.</string>
 <string name="free_version_title">Gratis version</string>
 <string name="poi_context_menu_showdescription">Visa POI beskrivning</string>
@@ -398,29 +366,28 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="osmand_service">Viloläge Funktionalitet</string>
 <string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
 <string name="tip_rotation_switching">Kartorientering</string>
-<string name="tip_rotation_switching_t_v2">\tDu kan växla om och hur kartbilden roteras genom att upprepade gånger klicka på kartbilden\'s kompass ikonen.
+<string name="tip_rotation_switching_t_v2">"\tDu kan växla om och hur kartbilden roteras genom att upprepade gånger klicka på kartbilden\'s kompass ikonen.
 \n\tAlternativen är:
-\n\t\Vrid inte (norr är uppåt)\'- Karta inte kommer att roteras. Norr kommer alltid upp
+\n\trid inte (norr är uppåt)\'- Karta inte kommer att roteras. Norr kommer alltid upp
 \n\t\'Till rörelseriktning\' - Karta kommer kontinuerligt anpassas till din kurs
-\n\t\'Till kompass\' - Karta kommer kontinuerligt anpassas till enhetens kompass läsning</string>
+\n\t\'Till kompass\' - Karta kommer kontinuerligt anpassas till enhetens kompass läsning "</string>
 <string name="binary_map_download_success">Ladda framgångsrika.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera Visa\' -&gt; \'Karta källa...\' -&gt; \'Offline vektorkartor\'.</string>
 <string name="tip_day_night_mode">Dag/nattläge</string>
 <string name="tip_osm_improve">Förbättra OSM-data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (tillgängligt: %2$s).</string>
 <string name="download_files_question_space">Tillgängligt utrymme nu {2} MB! Ladda {0} fil(er) ({1} MB)?</string>
 <string name="tip_select_destination_point">Välj destination</string>
-<string name="tip_select_destination_point_t">\tDu kan välja en destination direkt i kartan (snabbmenyn, sedan \'Ange som destination\'), i alla sökord aktiviteter, eller via lång knapptryckning en post i \'lista över favoritprogram poäng\'.
-\n\tDen Resmålet markeras som en orange skiva på kartan och OsmAnd visas avståndet till den och riktning till den (orange triangel).</string>
-<string name="tip_recent_changes_0_6_9_t">Förändringar i 0.6.9:
+<string name="tip_select_destination_point_t">"\tDu kan välja en destination direkt i kartan (snabbmenyn, sedan \'Ange som destination\'), i alla sökord aktiviteter, eller via lång knapptryckning en post i \'lista över favoritprogram poäng\'.\n\tDen Resmålet markeras som en orange skiva på kartan och OsmAnd visas avståndet till den och riktning till den (orange triangel). "</string>
+<string name="tip_recent_changes_0_6_9_t">"Förändringar i 0.6.9:
 \n\t- Förbättrad offline karta rendering
 \n\t- Fast Native offline rendering - titta i experimentella funktioner (kanske inte fungerar på vissa enheter)
 \n\t- Massiv utseende och förändringar känsla
 \n\t- Altitude info
-\n\t- Nya översättningar (Vienamese, polska)
-\n\t- Andra små funktioner</string>
+\n\t- Nya översättningar (vietnamesiska, polska)
+\n\t- Andra små funktioner "</string>
 <string name="use_transparent_map_theme">Genomskinlig tema</string>
 <string name="native_library_not_supported">Native bibliotek stöds inte på den här enheten.</string>
-<string name="init_native_library">Initierar infödda bibliotek...</string>
+<string name="init_native_library">Initierar infödda bibliotek…</string>
 <string name="choose_auto_follow_route">Auto-Center kartvy</string>
 <string name="choose_auto_follow_route_descr">Tid till kartvyn synkroniseras med aktuell position</string>
 <string name="auto_follow_route_never">Aldrig</string>
@@ -434,7 +401,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="delete_confirmation_msg">Ta bort %1$s?</string>
 <string name="city_type_suburb">Förort</string>
 <string name="city_type_hamlet">Hamlet</string>
-<string name="city_type_village">Village</string>
+<string name="city_type_village">By</string>
 <string name="city_type_town">Stad</string>
 <string name="city_type_city">Stad</string>
 <string name="layer_poi_label">POI etiketter</string>
@@ -453,19 +420,19 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="local_index_mi_rename">Byt namn</string>
 <string name="show_gpx_route">Visa på karta</string>
 <string name="search_select_point">Välj</string>
-<string name="search_position_current_location_search">Söker läge...</string>
+<string name="search_position_current_location_search">Söker position…</string>
 <string name="search_position_current_location_found">Position(Hittade)</string>
-<string name="search_position_address">Adress...</string>
-<string name="search_position_favorites">Favoriter...</string>
+<string name="search_position_address">Adress…</string>
+<string name="search_position_favorites">Favoriter…</string>
 <string name="search_position_undefined">Odefinierad</string>
 <string name="search_position_fixed">Fast</string>
-<string name="search_position_current_location">Aktuell position...</string>
+<string name="search_position_current_location">Nuvarande position…</string>
 <string name="search_position_map_view">Load kartvy</string>
 <string name="select_search_position">Sök i närheten :</string>
 <string name="context_menu_item_search">Sök nära här</string>
 <string name="save_route_dialog_title">Spara rutt som GPX spår</string>
 <string name="route_successfully_saved_at">Rutt sparats som \"%1$s\'.</string>
-<string name="filename_input">Filnamn :</string>
+<string name="filename_input">"Filnamn: "</string>
 <string name="file_with_name_already_exist">Fil med samma namn finns redan.</string>
 <string name="default_buttons_save">Spara</string>
 <string name="menu_save_directions">Spara vägbeskrivningar</string>
@@ -497,7 +464,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="local_index_mi_backup">Inaktivera</string>
 <string name="local_index_mi_delete">Ta bort</string>
 <string name="local_index_mi_reload">Ladda från SDCard</string>
-<string name="local_index_download">Ladda ner...</string>
+<string name="local_index_download">Ladda ner…</string>
 <string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable :%4$s \nZooms ladda ned : %5$s</string>
 <string name="local_index_poi_data">POI-uppgifter</string>
 <string name="local_index_address_data">Adressuppgifter</string>
@@ -517,7 +484,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="tip_recent_changes">Senaste ändringarna</string>
 <string name="voice_not_use">Använd inte</string>
 <string name="voice_not_specified">Inga</string>
-<string name="installing_new_resources">Uppackning nya uppgifter...</string>
+<string name="installing_new_resources">Packar upp ny data…</string>
 <string name="internet_connection_required_for_online_route">En online navigeringstjänst är vald men ingen internet-anslutning är tillgänglig.</string>
 <string name="tts_language_not_supported_title">Språk stöds inte</string>
 <string name="tts_language_not_supported">Det valda språket stöds inte av den installerade Android TTS (text-till-tal) motor. Vill du gå till marknaden för att leta efter en annan TTS motor? Annars förinställda TTS språket kommer att användas.</string>
@@ -537,17 +504,17 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="overlay_transparency">Overlay öppenhet</string>
 <string name="map_transparency_descr">Ändra öppenhet grundkarta</string>
 <string name="map_transparency">Grundkarta öppenhet</string>
-<string name="layer_underlay">Underlag karta...</string>
+<string name="layer_underlay">Underlag karta…</string>
 <string name="map_underlay">Underlag karta</string>
 <string name="map_underlay_descr">Välj underlag karta</string>
-<string name="layer_overlay">Overlay karta...</string>
+<string name="layer_overlay">Overlay karta…</string>
 <string name="default_none">Inga</string>
 <string name="map_overlay">Overlay karta</string>
 <string name="map_overlay_descr">Välj överlägg karta</string>
 <string name="tile_source_already_installed">Karta redan är installerad, kommer inställningarna att uppdateras</string>
 <string name="select_tile_source_to_install">Välj (kakel) kartor att installera eller uppdatera</string>
 <string name="internet_not_available">Internet-anslutning krävs för drift är inte tillgänglig</string>
-<string name="install_more">Installera mer...</string>
+<string name="install_more">Installera mer…</string>
 <string name="level_to_switch_vector_raster_descr">Minimal zoomnivå att använda vektorkartor</string>
 <string name="level_to_switch_vector_raster">Min. vektor zoomnivå</string>
 <string name="tip_location_sharing">Plats Dela</string>
@@ -560,12 +527,11 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="preferred_locale">Visa språk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
-<string name="tip_app_mode_t_v2">\tOsmAnd stöder olika (anpassningsbar) ansökan profiler för olika användningsfall.
-\n\tDu kan ändra sökprofiler via profil knappen i det nedre vänstra hörnet på kartbilden (ikon bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
+<string name="tip_app_mode_t_v2">"\tOsmAnd stöder olika (anpassningsbar) ansökan profiler för olika användningsfall.\n\tDu kan ändra sökprofiler via profil knappen i det nedre vänstra hörnet på kartbilden (ikon bil, cykel eller fotgängare), eller när du skapar en rutt. "</string>
 <string name="tip_navigation">Navigering</string>
 <string name="tip_navigation_t">\För starta en navigering måste du välja en destination. Efteråt tryck \'Meny\' -&gt; \'Vägbeskrivning\' på kartan och välj navigation typ.</string>
 <string name="tip_search">Söka</string>
-<string name="tip_search_t">\tYou kan söka efter platser direkt på kartan, eller adressen efter plats, som POI eller fördefinierade favorite.\n\tPressing \'Search\' på huvudskärmen öppnar Sök verksamhet. För alla träffar en snabbmeny erbjuder två alternativ: \'Set som destination\' eller \'Show på map\'.</string>
+<string name="tip_search_t">"\tYou kan söka efter platser direkt på kartan, eller adressen efter plats, som POI eller fördefinierade favorite.\n\tPressing \'Search\' på huvudskärmen öppnar Sök verksamhet. För alla träffar en snabbmeny erbjuder två alternativ: \'Set som destination\' eller \'Show på map\'. "</string>
 <string name="tip_map_context_menu">Folder Context Menu</string>
 <string name="tip_initial">Tips och tricks</string>
 <string name="next_button">Nästa</string>
@@ -605,10 +571,10 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="amenity_type_sustenance">Näring</string>
 <string name="amenity_type_tourism">Turism</string>
 <string name="amenity_type_transportation">Transport</string>
-<string name="indexing_address">Indexering adress...</string>
-<string name="indexing_map">Indexering karta...</string>
-<string name="indexing_poi">Indexering POI...</string>
-<string name="indexing_transport">Indexering transport...</string>
+<string name="indexing_address">Indexerar adress…</string>
+<string name="indexing_map">Indexerar karta…</string>
+<string name="indexing_poi">Indexerar POI…</string>
+<string name="indexing_transport">Indexerar transport…</string>
 <string name="input_output_error">I/O fel inträffade</string>
 <string name="km">km</string>
 <string name="km_h">km/t</string>
@@ -621,13 +587,13 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="poi_filter_for_tourists">För turister</string>
 <string name="poi_filter_fuel">Bränsle</string>
 <string name="poi_filter_namefinder">Online namn hitta</string>
-<string name="reading_cached_tiles">Läsa cachade plattor...</string>
+<string name="reading_cached_tiles">Läser cachade rutor…</string>
 <string name="version_index_is_big_for_memory">Index \'\'{0}\'\' inte passade in i minnet</string>
 <string name="version_index_is_not_supported">Den version av indexet \'\'{0}\'\' stöds inte</string>
 <string name="use_osmand_routing_service">OsmAnd navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
-<string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4 :</string>
+<string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4 :\n\t*Några buggfixar\n\t*Kartan tappar inte bort positionslås efter avbrott</string>
     <string name="navigate_to">Ange som destination</string>
     <string name="context_menu_item_last_intermediate_point">Ställ sista målpunkt</string>
     <string name="context_menu_item_first_intermediate_point">Först ställa målpunkt</string>
@@ -650,16 +616,16 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Karta klassificering med bilder</string><string name="tip_map_context_menu_t">Kartan snabbmenyn finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulan knappen.\nDetta ger en låda med koordinaterna. Öppna kartan dialogrutan snabbmenyn trycker på den. (Eller tryck och håll på den för att dölja lådan igen.)\nKartan Menyn innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
-	<string name="tip_initial_t">OsmAnd är en navigering program med många funktioner.\nSom en introduktion, en del användning tips och tricks länkade på huvudskärmen.</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> Karta klassificering med bilder</string><string name="tip_map_context_menu_t">"\tKartan snabbmenyn finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulan knappen.\n\tDetta ger en låda med koordinaterna. Öppna kartan dialogrutan snabbmenyn trycker på den. (Eller tryck och håll på den för att dölja lådan igen.)\n\tKartan Menyn innehåller alla åtgärder som hänför sig till en punkt (plats). "</string>
+	<string name="tip_initial_t">"\tOsmAnd är en navigering program med många funktioner.\n\tSom en introduktion, en del användning tips och tricks länkade på huvudskärmen. "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	<string name="application_dir_change_warning">Ändra lagring katalogen kommer inte att flytta eller ta bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd version är installerad. Alla offline data kommer att stödjas av den nya ansökan. Men Favorit punkter bör exporteras i gamla ansökan och senare importeras av den nya.</string>
 	<string name="build_installed">Bygga {0} installerats ({1}).</string>
-	<string name="downloading_build">Hämtar bygga...</string>
+	<string name="downloading_build">Laddar ner bygge…</string>
 	<string name="install_selected_build">Vill du installera OsmAnd - {0} från {1} {2} MB?</string>
 	<string name="loading_builds_failed">Hämtar en lista över OsmAnd byggen misslyckades</string>
-	<string name="loading_builds">Laddar OsmAnd bygger...</string>
+	<string name="loading_builds">Laddar OsmAnd-byggen…</string>
 	<string name="select_build_to_install">Välj ett av OsmAnd bygger installera</string>
 	<string name="contribution_activity">Särskild verksamhet för bidrag version</string>
 	<string name="gps_status_app_not_found">GPS-status installerat inte. Sök i marknaden?</string>
@@ -683,7 +649,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="context_menu_item_download_map">Hämta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Offline uppgifter (hämta)</string>
-	<string name="tip_day_night_mode_t_v2">Kartan utseende kan för vissa vektorkartor ändras mellan dagen (ljusare) och natt (mörkare).\nNattfärger är säkrare för mörkerkörning.\nDu kan ange en policy för dag / natt omkoppling i \"Meny\" -&gt; \"Konfigurera skärm ...\" -&gt; \"Dag / natt kartan\".\nAlternativen är:\n\'Soluppgång / Solnedgång \"- automatläge, som kontrolleras av solens position (standard)\n\"Dag\" - alltid använda dagläge\n\"natt\" - använd alltid nattläge\n\"Ljussensor\" - är kartan utseende styrs av ljussensor på enheten (endast om sådan finns)</string>	
+	<string name="tip_day_night_mode_t_v2">"Kartan utseende kan för vissa vektorkartor ändras mellan dagen (ljusare) och natt (mörkare).\nNattfärger är säkrare för mörkerkörning.\nDu kan ange en policy för dag / natt omkoppling i \"Meny\" -&gt; \"Konfigurera skärm ...\" -&gt; \"Dag / natt kartan\".\nAlternativen är:\n\'Soluppgång / Solnedgång \"- automatläge, som kontrolleras av solens position (standard)\n\"Dag\" - alltid använda dagläge\n\"natt\" - använd alltid nattläge\n\"Ljussensor\" - är kartan utseende styrs av ljussensor på enheten (endast om sådan finns) "</string>	
 	<string name="select_max_zoom_preload_area">Välj maximal zoom till preload</string>
 	<string name="maps_could_not_be_downloaded">Denna karta kan inte hämtas</string>
 	<string name="continuous_rendering">Kontinuerlig återgivning</string>
@@ -715,7 +681,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="no_vector_map_loaded">Vektorkartor inte laddat</string>
 	<string name="map_route_by_gpx">Navigera med GPX</string>
 	<string name="gpx_files_not_found">GPX-filer som inte finns i /spår katalogen</string>
-	<string name="layer_gpx_layer">GPX spår...</string>
+	<string name="layer_gpx_layer">GPX spår…</string>
 	<string name="error_reading_gpx">Fel vid läsning GPX uppgifter</string>
 	<string name="vector_data">Offline vektorkartor</string>
 	<string name="transport_context_menu">Sök transporter vid stopp</string>
@@ -746,8 +712,8 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="layer_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
 	<string name="layer_transport">Transport stoppar</string>
-	<string name="layer_poi">IP...</string>
-	<string name="layer_map">Kartkälla...</string>
+	<string name="layer_poi">POI…</string>
+	<string name="layer_map">Kartkälla…</string>
 	<string name="menu_layers">Definiera visa</string>
 	<string name="context_menu_item_search_poi">Sök IP</string>
 	<string name="context_menu_item_show_route">Visa rutt härifrån</string>
@@ -759,7 +725,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="where_am_i">Var är jag?</string>
 	<string name="process_navigation_service">OsmAnd navigeringstjänst</string>
 	<string name="network_provider">Nätverk</string>
-	<string name="gps_provider"/>
+	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekunder</string>
 	<string name="background_service_int_descr">"Inställda väckningstiden intervall som används av bakgrunden "</string>
 	<string name="background_service_int">Väckning intervall</string>
@@ -783,14 +749,14 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 \n→ Lång trycka på en favorit i \'Favoriter\' menyn innehåller alternativ för att ställa in den som desination, redigera eller ta bort.
 \n→ Om du vill visa alla favorit punkter direkt på kartan, på kartskärmen möjliggör lager \'Favoriter\' under \'Meny\' -&gt; \'Definiera utsikt\'. "</string>
 	<string name="voice_provider">Röstvägledning</string>
-	<string name="voice_data_initializing">Initierar röstdata...</string>
+	<string name="voice_data_initializing">Initierar röstdata…</string>
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
 	<string name="voice_data_corrupted">Specificerade röstdata är skadad</string>
 	<string name="voice_data_unavailable">Valda röstdata inte finns</string>
 	<string name="stop_routing">Stoppa navigation.</string>
 	<string name="sd_unmounted">SD-kort är inte tillgänglig.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
-	<string name="unzipping_file">Packa file...</string>
+	<string name="unzipping_file">Packar upp fil…</string>
 	<string name="route_tr">Sväng höger och gå</string>
 	<string name="route_tshr">Sväng skarpt höger och gå</string>
 	<string name="route_tslr">Sväng lite åt höger och gå</string>
@@ -800,7 +766,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="route_tu">Gör U-sväng och gå</string>
 	<string name="first_time_continue">Senare</string>
 	<string name="first_time_download">Ladda regioner</string>
-	<string name="search_poi_location">Söker efter signal...</string>
+	<string name="search_poi_location">Söker efter signal…</string>
 	<string name="search_near_map">Sök i närheten av förra plats på kartan</string>
 	<string name="search_nearby">Sök i närheten</string>
 	<string name="map_orientation_default">Samma som enhet</string>
@@ -839,11 +805,11 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Rensa alla</string>
 	<string name="history">Historik</string>
-	<string name="uploading_data">överföra data...</string>
-	<string name="uploading">Uppladdning...</string>
+	<string name="uploading_data">Lddar upp data…</string>
+	<string name="uploading">Laddar upp…</string>
 	<string name="search_nothing_found">Ingenting hittades</string>
-	<string name="searching">Söka...</string>
-	<string name="searching_address">Söka adress...</string>
+	<string name="searching">Söker…</string>
+	<string name="searching_address">Söker adress…</string>
 	<string name="hint_search_online">Husnummer, gata, stad</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="max_level_download_tile_descr">Välj maximal zoomnivå för att ladda ner för online kartrutor</string>
@@ -856,10 +822,34 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 	<string name="address">Adress</string>
 	<string name="download_index_success">Ladda framgångsrika</string>
 	<string name="error_io_error">I/O-fel inträffade</string>
-	<string name="downloading_file">Hämtar lager...</string>
-	<string name="downloading">Nedladdning...</string>
-	<string name="downloading_list_indexes">Nedladdning lista över tillgängliga regioner...</string>
+	<string name="downloading_file">Laddar ner fil…</string>
+	<string name="downloading">Laddar ner…</string>
+	<string name="downloading_list_indexes">Laddar ner lista över tillgängliga regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listan över regioner inte hämtas från osmand.net.</string>
 	<string name="show_poi_on_map">Visa på karta</string>
 	<string name="fav_points_edited">Favorit punkt var redigerats</string>
+	<string name="edit_filter_delete_message">Filter {0} har raderats</string>
+	<string name="poi_dialog_name">Namn</string>
+	<string name="osb_bug_name">Bugg</string>
+	<string name="foot">ft</string>
+	<string name="mile_per_hour">mph</string>
+	<string name="mile">mi</string>
+	<string name="int_min">min.</string>
+	<string name="search_history_int_streets">Korsning: {0} x {1} i {2}</string>
+	<string name="search_online_address">Internet</string>
+	<string name="update_existing">Ersätt</string>
+	<string name="follow">Följ</string>
+	<string name="mark_final_location_first">Välj destination först</string>
+	<string name="show_gps_status">Visa GPS-status</string>
+	<string name="opening_hours">Öppettider</string>
+	<string name="loading_poi_obj">Laddar POI…</string>
+	<string name="loading_streets_buildings">Laddar gator/byggnader…</string>
+	<string name="loading_postcodes">Laddar postnummer…</string>
+	<string name="loading_streets">Laddat vägar…</string>
+	<string name="loading_cities">Laddar städer…</string>
+	<string name="poi">POI</string>
+	<string name="arrived_at_destination">Du har ankommit till din destination</string>
+	<string name="close">Stäng</string>
+	<string name="loading_data">Laddar data…</string>
+	<string name="reading_indexes">Läser lokal data…</string>
 	</resources>
