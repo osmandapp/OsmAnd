@@ -1333,9 +1333,30 @@
 
 		<filter tag="highway" value="proposed" minzoom="12" color="#ff6600" strokeWidth="8" color_2="#9f9f9f" strokeWidth_2="6" pathEffect_2="9_3"/>
 
-		<filter contourLines="11" tag="contour" value="elevation" minzoom="11" color="#2Aff7c00" strokeWidth="1"/>
-		<filter contourLines="12" tag="contour" value="elevation" minzoom="12" color="#2Aff7c00" strokeWidth="1"/>
-		<filter contourLines="13" tag="contour" value="elevation" minzoom="13" color="#2Aff7c00" strokeWidth="1"/>
+		<filter contourLines="11" tag="contour" value="elevation" minzoom="11" color="#2Aff7c00" strokeWidth="1">
+			<groupFilter>
+				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=20m" minzoom="11" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=50m" minzoom="16" color="#2AEA7300" strokeWidth="1.5"/>
+				<filter additional="contourtype=100m" minzoom="11" color="#2AEA7300" strokeWidth="2"/>
+			</groupFilter>
+		</filter>
+		<filter contourLines="12" tag="contour" value="elevation" minzoom="12" color="#2Aff7c00" strokeWidth="1">
+			<groupFilter>
+				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=20m" minzoom="12" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=50m" minzoom="16" color="#2AEA7300" strokeWidth="1.5"/>
+				<filter additional="contourtype=100m" minzoom="12" color="#2AEA7300" strokeWidth="2"/>
+			</groupFilter>
+		</filter>
+		<filter contourLines="13" tag="contour" value="elevation" minzoom="13" color="#2Aff7c00" strokeWidth="1">
+			<groupFilter>
+				<filter additional="contourtype=10m" minzoom="16" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=20m" minzoom="13" color="#2Aff7c00" strokeWidth="1"/>
+				<filter additional="contourtype=50m" minzoom="16" color="#2AEA7300" strokeWidth="1.5"/>
+				<filter additional="contourtype=100m" minzoom="13" color="#2AEA7300" strokeWidth="2"/>
+			</groupFilter>
+		</filter>
 		<filter tag="route" value="ferry" minzoom="8" color="#7777FF" strokeWidth="2" pathEffect="6_3"/>
 
 		<!-- Barriers -->
