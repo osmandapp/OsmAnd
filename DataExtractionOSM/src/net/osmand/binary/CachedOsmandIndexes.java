@@ -53,7 +53,8 @@ public class CachedOsmandIndexes {
 		}
 		
 		FileIndex.Builder fileIndex = OsmandIndex.FileIndex.newBuilder();
-		fileIndex.setDateModified(f.lastModified());
+		long d = reader.getDateCreated();
+		fileIndex.setDateModified(d== 0?f.lastModified() : d);
 		fileIndex.setSize(f.length());
 		fileIndex.setVersion(reader.getVersion());
 		fileIndex.setFileName(f.getName());
@@ -187,7 +188,7 @@ public class CachedOsmandIndexes {
 	private BinaryMapIndexReader initFileIndex(FileIndex found, RandomAccessFile mf) throws IOException {
 		BinaryMapIndexReader reader = new BinaryMapIndexReader(mf, false);
 		reader.version = found.getVersion();
-		reader.dateCreated =found.getDateModified();
+		reader.dateCreated = found.getDateModified();
 		
 		for(MapPart index : found.getMapIndexList()) {
 			MapIndex mi = new MapIndex();

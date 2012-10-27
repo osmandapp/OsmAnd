@@ -58,14 +58,17 @@ public class LocalIndexHelper {
 	}
 	
 	public String getInstalledDate(File f){
-		return app.getString(R.string.local_index_installed) + " : " + dateformat.format(new Object[]{new Date(f.lastModified())});
+		return getInstalledDate(f.lastModified());
+	}
+	
+	public String getInstalledDate(long t){
+		return app.getString(R.string.local_index_installed) + " : " + dateformat.format(new Object[]{new Date(t)});
 	}
 	
 	public void updateDescription(LocalIndexInfo info){
 		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
 			updateObfFileInformation(info, f);
-			info.setDescription(info.getDescription() + getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.POI_DATA){
 			checkPoiFileVersion(info, f);
 			info.setDescription(getInstalledDate(f));
@@ -397,6 +400,7 @@ public class LocalIndexHelper {
 						append(mi.getName()).append("\n");
 				}
 			}
+			builder.append(getInstalledDate(reader.getDateCreated()));
 			info.setDescription(builder.toString());
 			reader.close();
 		} catch (IOException e) {
