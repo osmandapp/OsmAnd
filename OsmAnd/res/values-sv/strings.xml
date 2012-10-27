@@ -499,7 +499,7 @@ OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på
 <string name="local_index_mi_reload">Ladda från SDCard</string>
 <string name="local_index_download">Ladda ner...</string>
 <string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable :%4$s \nZooms ladda ned : %5$s</string>
-<string name="local_index_poi_data">POI uppgifter</string>
+<string name="local_index_poi_data">POI-uppgifter</string>
 <string name="local_index_address_data">Adressuppgifter</string>
 <string name="local_index_transport_data">Transport uppgifter</string>
 <string name="local_index_map_data">Kartdata</string>
