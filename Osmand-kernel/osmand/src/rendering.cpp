@@ -27,7 +27,7 @@
 #include "mapObjects.h"
 #include "rendering.h"
 
-
+const int MAX_V = 75;
 
 struct MapDataObjectPrimitive {
 	MapDataObject* obj;
@@ -36,7 +36,7 @@ struct MapDataObjectPrimitive {
 	int objectType;
 };
 
-const int MAX_V = 32;
+
 void calcPoint(std::pair<int, int>  c, RenderingContext* rc)
 {
     rc->pointCount++;
@@ -714,8 +714,10 @@ void sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 						MapDataObjectPrimitive pointObj = mapObj;
 						pointObj.objectType = 1;
 						mapObj.order = polygonArea(mobj, mult);
-						polygonsArray.push_back(mapObj);
-						pointsArray.push_back(pointObj);
+						if(mapObj.order > MAX_V) { 
+							polygonsArray.push_back(mapObj);
+							pointsArray.push_back(pointObj);
+						}
 					} else if(objectType == 1) {
 						pointsArray.push_back(mapObj);
 					} else {
