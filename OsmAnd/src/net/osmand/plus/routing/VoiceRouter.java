@@ -241,7 +241,7 @@ public class VoiceRouter {
 			}
 		}
 
-		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), false);
+		NextDirectionInfo nextNextInfo = router.getNextRouteDirectionInfoAfter(nextInfo, new NextDirectionInfo(), true);
 		if (statusNotPassed(STATUS_TURN) && isDistanceLess(speed, dist, TURN_DISTANCE, TURN_DEFAULT_SPEED)) {
 			if (next.distance < TURN_IN_DISTANCE_END && nextNextInfo != null) {
 				playMakeTurn(next, nextNextInfo.directionInfo);
