@@ -1,0 +1,69 @@
+<renderingStyle name="touring-atlas-view-and-details" depends="default" defaultColor="#f1eae4" version="1">
+
+	<!--
+		by Hardy Mueller, 2012-10-28 (Advanced version the previous All-Purpose Renderer)
+		- some road and track types already rendered at lower zooms (for travel and orienteering)
+		- road colors allow unambiguous distinction between all highway/road/track types
+		- road colors aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue).
+		- road visibility increased for better outdoor, driving, and navigation use (shadows, casing)
+		- route visibility increased, routeColor="#960000FF, gpxColor="#B400FFFF"
+		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map at smallest possible zoom.
+
+		Typical zoom level use (zX) and alignment of features displayed:
+		 - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
+		 - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
+		 - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
+		 - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways. Include all area landuse.
+		 - z14 = "Local Driving, also Hiking Map"
+		 - z15 = "City Driving": Display all details of interest for this.
+		 - z16 = "Walking, City tour": Outline and tag buildings
+		 - z17 = Building details, street corner details.
+	--> 
+
+	<renderingAttribute name="shadowRendering">
+	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
+		<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view -->
+		<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/>
+		<filter minzoom="14" attrIntValue="3" shadowColor="#464646"/>
+		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646"/>
+		<filter attrIntValue="0"/>
+	</renderingAttribute>
+
+	<!-- roadColors="Road atlas style" -->
+		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#ed154b"/>
+		<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
+		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+
+	<renderingAttribute name="routeColor">
+		<filter nightMode="false" attrColorValue="#CCFF6600"/>
+		<filter attrColorValue="#CCFF6600"/>
+	</renderingAttribute>
+
+	<renderingAttribute name="gpxColor">
+		<filter nightMode="false" attrColorValue="#B400FFFF"/>
+		<filter attrColorValue="#B400FFFF"/>
+	</renderingAttribute>
+
+
+	<order>
+	</order>
+
+
+	<text>
+	</text>
+
+
+	<point>
+	</point>
+
+
+	<polygon>
+	</polygon>
+
+
+	<line>
+	</line>
+
+</renderingStyle>
