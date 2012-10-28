@@ -962,4 +962,8 @@
 \n\tLlavors selecciona una via per compartir la teva ubicació.Les opcions son: Correu electrònic,SMS(text),o només copiar l\'ubicació en el porta retalls. "</string>
 	<string name="enable_plugin_monitoring_services">"Habilita els connectors de monitorització (enregistrament, enregistrament en viu) per poder utilitzar els serveis de monitorització "</string>
     <string name="gps_not_available">Si us plau habilita el GPS a les preferències</string>
+    <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no esta instal·lada. Buscar en el Market?</string>
+	<string name="rendering_attr_roadColors_name">Esquema de color per a carreteres</string>
+    <string name="map_widget_show_destination_arrow">Mostra la direcció del desti</string>
+    <string name="non_optimal_route_calculation">Calcula possibles rutes no optimes per a llargues distancies</string>
     </resources>
