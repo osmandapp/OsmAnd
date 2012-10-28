@@ -1050,7 +1050,7 @@
 <string name="context_menu_item_intermediate_point">Προσθήκη ως σημείο διαδρομής</string>
 <string name="map_widget_intermediate_distance">Σημείο διαδρομής</string>
 <string name="ending_point_too_far">Το τελικό σημείο είναι πολύ μακριά από πλησιέστερο δρόμο.</string>
-<string name="tip_recent_changes_0_8_4_t">Αλλαγές στην 0.8.4:…\n\t*Διορθώσεις σφαλμάτων…\n\t*Ο χάρτης δεν χάνει τη θέση του μετά από διακοπές…</string>
+<string name="tip_recent_changes_0_8_4_t">Αλλαγές στην 0.8.4:…\n\t*Διορθώσεις σφαλμάτων…\n\t*Ο χάρτης δεν χάνει τη θέση του μετά από διακοπές…\n\t*Ενεργοποίηση υπηρεσίας παρασκηνίου κατά την πλοήγηση…</string>
     <string name="context_menu_item_first_intermediate_point">Προσθήκη ως πρώτο σημείο διαδρομής</string>
     <string name="add_as_last_destination_point">Προσθήκη ως τελευταίο σημείο διαδρομής</string>
     <string name="add_as_first_destination_point">Προσθήκη ως πρώτο σημείο διαδρομής</string>
