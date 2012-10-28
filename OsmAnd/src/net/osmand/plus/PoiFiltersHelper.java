@@ -157,11 +157,12 @@ public class PoiFiltersHelper {
 					"bus_stop", "platform", "ferry_terminal", "taxi", "bicycle_rental", "bus_station", "car_rental", "car_sharing",
 					// aero
 					"airport", "aerodrome", "terminal", "gate",
-					// aerial ways
-					"aerialway_cable_car", "aerialway_gondola", "aerialway_chair_lift", "aerialway_mixed_lift", "aerialway_drag_lift",
-					"aerialway_goods", "aerialway_station",
-					// ways
-					"rail", "tram", "light_rail", "subway", "railway_narrow_gauge", "railway_monorail", "railway_funicular");
+					// aerial ways ( hide ways)
+					// "aerialway_cable_car", "aerialway_gondola", "aerialway_chair_lift", "aerialway_mixed_lift", "aerialway_drag_lift", "aerialway_goods", 
+					"aerialway_station"
+					// ways (hide ways)
+					// "rail", "tram", "light_rail", "subway", "railway_narrow_gauge", "railway_monorail", "railway_funicular"
+					);
 		} else if (UDF_RESTAURANTS.equals(key)) {
 			putValues(types, AmenityType.SUSTENANCE, "restaurant",
 					"cafe", "food_court", "fast_food", "pub", "bar", "biergarten");
