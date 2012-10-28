@@ -37,6 +37,8 @@ and_arrive_destination == ['dann haben Sie Ihr Ziel erreicht '].
 
 then == ['dann '].
 reached_destination == ['Ziel erreicht '].
+and_arrive_intermediate == ['Zwischenziel erreicht '].
+reached_intermediate == ['Zwischenziel erreicht'].
 bear_right == ['rechts halten '].
 bear_left == ['links halten '].
 
