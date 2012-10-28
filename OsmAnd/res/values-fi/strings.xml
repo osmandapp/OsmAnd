@@ -566,4 +566,26 @@
 	<string name="rendering_attr_roadColors_name">Tien väriteema</string>
     <string name="map_widget_show_destination_arrow">Näytä kohteen suunta</string>
     <string name="non_optimal_route_calculation">Laske mahdollisesti epäoptimaalinen reitti pitkille matkoille</string>
-    </resources>
+    <string name="offline_edition_descr">Käytä aina offline editointia</string>
+	<string name="free_version_message">Tämä ilmainen OsmAnd versio on rajoitettu %1$s lataukseen %2$s ja ei tue offline wikipedia artikkeleita.</string>
+	<string name="index_name_voice">Äänipaketit (nauhoitettu)</string>
+	<string name="index_name_tts_voice">Äänipaketit (Teksti Puheeksi)</string>
+	<string name="settings_preset_descr">Valitse käyttäjäprofiili yksilöllisillä kartta- ja navigaatioasetuksilla.</string>
+	<string name="tip_day_night_mode">Päivä/Yö moodi</string>
+	<string name="use_transparent_map_theme">Läpinäkvä teema</string>
+	<string name="choose_auto_follow_route">Keskitä karttanäkymä automaattisesti</string>
+	<string name="auto_follow_route_navigation_descr">Keskitä karttanäkymä automaattisesti vain navigoidessa.</string>
+	<string name="pref_vector_map">Vektorikarttojen asetukset</string>
+	<string name="file_with_name_already_exists">Tiedosto tällä nimellä on jo olemassa.</string>
+	<string name="gpx_navigation">GPX reitti</string>
+	<string name="button_upgrade_osmandplus">Päivitä OsmAnd+ ohjelmaan</string>
+	<string name="context_menu_item_search">Etsi läheltä tätä paikkaa</string>
+	<string name="route_successfully_saved_at">Reitti tallennettiin onnistuneesti nimellä \'%1$s\'.</string>
+	<string name="filename_input">"Tiedostonimi : "</string>
+	<string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
+	<string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
+	<string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
+	<string name="local_index_gpx_info_elevation">\nKeskimääräinen korkeus : %1$.0f m\nMinimikorkeus : %2$.0f m\nMaksimikorkeus : %3$.0f m\nNousuja : %4$.0f m\nLaskuja : %5$.0f m</string>
+	<string name="local_index_gpx_info">Alireittejä : %1$d\nPisteitä yhteensä : %2$d\nVälietappeja : %3$d\nKokonaismatka : %4$s\nAloitusaika : %5$tF, %5$tR\nLopetusaika : %6$tF, %6$tR</string>
+	<string name="local_index_installed">Versio</string>
+	</resources>
