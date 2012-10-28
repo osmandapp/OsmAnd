@@ -1148,5 +1148,5 @@
     <string name="non_optimal_route_calculation">Berechne möglicherweise nicht optimale Routen über lange Distanzen</string>
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
     <string name="enable_plugin_monitoring_services">"Positions-Logging-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Live-Tracking) zu verwenden"</string>
-    <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Google Play gesucht werden?</string>
+    <string name="zxing_barcode_scanner_not_found"></string>
 	</resources>
