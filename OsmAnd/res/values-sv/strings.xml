@@ -593,7 +593,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="use_osmand_routing_service">OsmAnd navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
-<string name="tip_recent_changes_0_8_4_t">Förändringar i 0.8.4 :\n\t*Några buggfixar\n\t*Kartan tappar inte bort positionslås efter avbrott</string>
+<string name="tip_recent_changes_0_8_4_t">"Förändringar i 0.8.4 :\n\t*Några buggfixar\n\t*Kartan tappar inte bort positionslås efter avbrott "</string>
     <string name="navigate_to">Ange som destination</string>
     <string name="context_menu_item_last_intermediate_point">Ställ sista målpunkt</string>
     <string name="context_menu_item_first_intermediate_point">Först ställa målpunkt</string>
@@ -852,4 +852,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="close">Stäng</string>
 	<string name="loading_data">Laddar data…</string>
 	<string name="reading_indexes">Läser lokal data…</string>
-	</resources>
+	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Sök i Market?</string>
+	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
+	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
+    </resources>
