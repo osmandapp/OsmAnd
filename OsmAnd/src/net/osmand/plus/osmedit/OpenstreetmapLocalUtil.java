@@ -43,7 +43,7 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 	}
 	
 	@Override
-	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment){
+	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet){
 		Node newNode = n;
 		if (n.getId() == -1) {
 			newNode = new Node(n, --nextid); // generate local id for the created node
@@ -117,6 +117,10 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 			return entity;
 		}
 		return null;
+	}
+
+	@Override
+	public void closeChangeSet() {
 	}
 	
 }

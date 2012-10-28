@@ -44,7 +44,9 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -63,6 +65,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private EditText commentText;
 	private EditText websiteText;
 	private EditText phoneText;
+	private CheckBox closeChange;
 
 //	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
 
@@ -79,6 +82,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 	private Bundle dialogBundle = new Bundle();
 	private OsmandSettings settings;
+	
 
 	public EditingPOIActivity(MapActivity uiContext){
 		this.ctx = uiContext;
@@ -139,16 +143,23 @@ public class EditingPOIActivity implements DialogProvider {
 	private Dialog createDeleteDialog(final Bundle args) {
 		Builder builder = new AlertDialog.Builder(ctx);
 		builder.setTitle(R.string.poi_remove_title);
+		LinearLayout ll = new LinearLayout(ctx);
+		ll.setPadding(4, 2, 4, 0);
+		ll.setOrientation(LinearLayout.VERTICAL);
 		final EditText comment = new EditText(ctx);
 		comment.setText(R.string.poi_remove_title);
-		builder.setView(comment);
+		ll.addView(comment);
+		final CheckBox closeChangeset = new CheckBox(ctx);
+		closeChangeset.setText(R.string.close_changeset);
+		ll.addView(closeChangeset);
+		builder.setView(ll);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener(){
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 				String c = comment.getText().toString();
-				commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c, new Runnable(){
+				commitNode(OsmPoint.Action.DELETE, n, openstreetmapUtil.getEntityInfo(), c, closeChangeset.isSelected(),  new Runnable(){
 					@Override
 					public void run() {
 						AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_remove_success), Toast.LENGTH_LONG).show();
@@ -164,6 +175,9 @@ public class EditingPOIActivity implements DialogProvider {
 
 	private void preparePOIDialog(Dialog dlg, Bundle args, int title) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+		if(a == null){
+			a = new Amenity(); 
+		}
 		dlg.setTitle(title);
 		EditText nameText = ((EditText)dlg.findViewById(R.id.Name));
 		nameText.setText(a.getName());
@@ -285,7 +299,7 @@ public class EditingPOIActivity implements DialogProvider {
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
 		phoneText = ((EditText)dlg.findViewById(R.id.Phone));
 		websiteText = ((EditText)dlg.findViewById(R.id.Website));
-		
+		closeChange = ((CheckBox) dlg.findViewById(R.id.CloseChangeset));
 		
 		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
 		linkToOsmDoc.setOnClickListener(new View.OnClickListener() {
@@ -441,7 +455,8 @@ public class EditingPOIActivity implements DialogProvider {
 				if (phone.length() > 0 ){
 					n.putTag(OSMTagKey.PHONE.getValue(),phone);
 				}
-				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), new Runnable() {
+				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), closeChange.isSelected(), 
+						new Runnable() {
 					@Override
 					public void run() {
 						AccessibleToast.makeText(ctx, MessageFormat.format(ctx.getResources().getString(R.string.poi_action_succeded_template), msg),
@@ -525,7 +540,9 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 	
 	
-	public void commitNode(final OsmPoint.Action action, final Node n, final EntityInfo info, final String comment, final Runnable successAction) {
+	public void commitNode(final OsmPoint.Action action, final Node n, final EntityInfo info, final String comment,
+			final boolean closeChangeSet,
+			final Runnable successAction) {
 		if (info == null && OsmPoint.Action.CREATE != action) {
 			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_info_not_loaded), Toast.LENGTH_LONG).show();
 			return;
@@ -540,7 +557,7 @@ public class EditingPOIActivity implements DialogProvider {
 			@Override
 			protected Node doInBackground(Void... params) {
 				Node node = null;
-				if ((node = openstreetmapUtil.commitNodeImpl(action, n, info, comment)) != null) {
+				if ((node = openstreetmapUtil.commitNodeImpl(action, n, info, comment, closeChangeSet)) != null) {
 					openstreetmapUtil.updateNodeInIndexes(ctx, action, node, n);
 				}
 				return node;

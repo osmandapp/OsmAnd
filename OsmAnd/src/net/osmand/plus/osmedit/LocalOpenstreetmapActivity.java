@@ -209,7 +209,7 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 						entityInfo = remotepoi.loadNode(p.getEntity());
 					}
 					Node n;
-					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment())) != null) {
+					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment(), false)) != null) {
 						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
 						dbpoi.deletePOI(p);
 						publishProgress(p);

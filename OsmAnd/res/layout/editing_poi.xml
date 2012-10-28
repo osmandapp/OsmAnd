@@ -74,13 +74,18 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:hint="http://osmand.net" />
-
 </TableRow>
 
 <TableRow>
 <TextView android:text="@string/poi_dialog_comment" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 <EditText android:text="@string/poi_dialog_comment_default" android:id="@+id/Comment" android:layout_marginLeft="5dp" android:layout_width ="100dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"></EditText>
 </TableRow>
+
+<TableRow >
+    <CheckBox android:layout_width="wrap_content" android:layout_marginLeft="5dp" android:layout_span="2"
+        android:layout_marginRight="5dp" android:text="@string/close_changeset" android:id="@+id/CloseChangeset"/>
+</TableRow>
+
 
 </TableLayout>
 

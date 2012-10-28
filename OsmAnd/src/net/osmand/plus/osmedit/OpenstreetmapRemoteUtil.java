@@ -277,11 +277,6 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 		return id;
 	}
 	
-	public void closeChangeSet(long id){
-		String response = sendRequest(SITE_API+"api/0.6/changeset/"+id+"/close", "PUT", "", ctx.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-		log.info("Response : " + response); //$NON-NLS-1$
-	}
-	
 	private void writeNode(Node n, EntityInfo i, XmlSerializer ser, long changeSetId, String user) throws IllegalArgumentException, IllegalStateException, IOException{
 		ser.startTag(null, "node"); //$NON-NLS-1$
 		ser.attribute(null, "id", n.getId()+""); //$NON-NLS-1$ //$NON-NLS-2$
@@ -323,7 +318,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	}
 
 	@Override
-	public Node commitNodeImpl(OsmPoint.Action action, final Node n, EntityInfo info, String comment){
+	public Node commitNodeImpl(OsmPoint.Action action, final Node n, EntityInfo info, String comment, boolean closeChangeSet){
 		if (isNewChangesetRequired()){
 			changeSetId = openChangeSet(comment);
 			changeSetTimeStamp = System.currentTimeMillis();
@@ -373,9 +368,20 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 			}
 			return null;
 		} finally {
-			// reuse changeset, do not close
-			//closeChangeSet(changeSetId);
+			if(closeChangeSet) {
+				closeChangeSet();
+			}
 		}
+	}
+	
+	@Override
+	public void closeChangeSet() {
+		if (changeSetId != NO_CHANGESET_ID) {
+			String response = sendRequest(SITE_API+"api/0.6/changeset/"+changeSetId+"/close", "PUT", "", ctx.getString(R.string.closing_changeset), true); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+			log.info("Response : " + response); //$NON-NLS-1$
+			changeSetId = NO_CHANGESET_ID;
+		}
+
 	}
 	
 	public EntityInfo loadNode(Node n) {
