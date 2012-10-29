@@ -13,14 +13,14 @@
 	<attribute name="memoryLimitInMB" value="" />
 
 	<!-- 1.2 Dynamic road prioritizing (heuristic) -->
-	<attribute name="useDynamicRoadPrioritising" value="true" />
+	<attribute name="useDynamicRoadPrioritising" value="false" />
 	<!--  for first N meters speed multiplied by priority, 0 special number - all rest distance -->
 	<attribute name="dynamicRoadPriorityDistance" value="30000" />
 
 	<!-- 1.3 Relaxing strategy -->
 	<!-- If the furthest routing branch passed distance 3 times more than small branches, small will be relaxed-->
 	<!-- Coefficient is configurable -->
-	<attribute name="useRelaxingStrategy" value="true" />
+	<attribute name="useRelaxingStrategy" value="false" />
 	<attribute name="iterationsToRelaxRoutes" value="100" />
 	<attribute name="relaxNodesIfStartDistSmallCoeff" value="5"/>
 

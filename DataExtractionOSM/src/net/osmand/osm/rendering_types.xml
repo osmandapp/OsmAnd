@@ -606,6 +606,15 @@
 	</category>
 
 
+	<category name="internet_access" poi_tag="internet_access"  poi_prefix="internet_access_" poi_category="other">
+		<type tag="internet_access" value="wifi" minzoom="15" />
+		<type tag="internet_access" value="wlan" minzoom="15" />
+		<type tag="internet_access" value="terminal" minzoom="15" />
+		<type tag="internet_access" value="wired" minzoom="15" />
+		<type tag="internet_access" value="public" minzoom="15" />
+		<type tag="internet_access" value="service" minzoom="15" />
+	</category>
+
 
 	<!-- administrative place-->
 	<category name="administrative" poi_tag="place" poi_category="administrative" >
@@ -697,9 +706,6 @@
 	</category>
 	
 	<category name="osmwiki" poi_tag="osmwiki" poi_category="osmwiki"/>
-	
-	<category name="tiles">
-	</category>
 	
 	<category name="tiles">
 	</category>
