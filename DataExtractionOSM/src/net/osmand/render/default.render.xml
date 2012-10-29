@@ -174,57 +174,45 @@
 			<filter tag="boundary" value="" order="62"/>
 				 
 			<!-- Highways: 35-57, bridges 66+/-1 -->
-			 <filter layer="1" tag="highway" value="motorway" order="66" shadowLevel="1"/>
-			<filter tag="highway" value="motorway" order="57" shadowLevel="1"/>
-			 <filter layer="1" tag="highway" value="trunk" order="66" shadowLevel="1"/>
-			<filter tag="highway" value="trunk" order="56" shadowLevel="1"/>
-			 <filter layer="1" tag="highway" value="primary" order="66" shadowLevel="1"/>
-			<filter tag="highway" value="primary" order="55" shadowLevel="1"/>
-			 <filter layer="1" tag="highway" value="secondary" order="66" shadowLevel="1"/>
-			<filter tag="highway" value="secondary" order="54" shadowLevel="1"/>
-			 <filter layer="1" tag="highway" value="tertiary" order="66" shadowLevel="1"/>
-			<filter tag="highway" value="tertiary" order="53" shadowLevel="1"/>
+			 <filter layer="1" tag="highway" value="motorway" order="66"/>
+			<filter tag="highway" value="motorway" order="57"/>
+			 <filter layer="1" tag="highway" value="trunk" order="66"/>
+			<filter tag="highway" value="trunk" order="56"/>
+			 <filter layer="1" tag="highway" value="primary" order="66"/>
+			<filter tag="highway" value="primary" order="55"/>
+			 <filter layer="1" tag="highway" value="secondary" order="66"/>
+			<filter tag="highway" value="secondary" order="54"/>
+			 <filter layer="1" tag="highway" value="tertiary" order="66"/>
+			<filter tag="highway" value="tertiary" order="53"/>
 
-			<group>
-				 <filter layer="1" tag="highway" value="road" order="66"/>
-				<filter tag="highway" value="road" order="52"/>
-				 <filter layer="1" tag="highway" value="unclassified" order="66"/>
-				<filter tag="highway" value="unclassified" order="52"/>
-				<filter layer="1" tag="highway" value="residential" order="66" area="false"/>
-				<filter tag="highway" value="residential" order="51" area="false"/> 
-				 <filter layer="1" tag="highway" value="service" order="66"/>
-				<filter tag="highway" value="service" order="51"/>
-				 <filter layer="1" tag="highway" value="living_street" order="66"/>
-				<filter tag="highway" value="living_street" order="50"/>
-				 <filter layer="1" tag="highway" value="pedestrian" order="66"/>
-				<filter appMode="pedestrian" tag="highway" value="pedestrian" order="58"/>
-				<filter tag="highway" value="pedestrian" order="50"/>
-				<groupFilter>
-					 <filter minzoom="14" shadowLevel="1"/>
-					 <filter hmRendered="true" shadowLevel="1"/>
-				</groupFilter>
-			</group>
+			 <filter layer="1" tag="highway" value="road" order="66"/>
+			<filter tag="highway" value="road" order="52"/>
+			 <filter layer="1" tag="highway" value="unclassified" order="66"/>
+			<filter tag="highway" value="unclassified" order="52"/>
+			<filter layer="1" tag="highway" value="residential" order="66" area="false"/>
+			<filter tag="highway" value="residential" order="51" area="false"/> 
+			 <filter layer="1" tag="highway" value="service" order="66"/>
+			<filter tag="highway" value="service" order="51"/>
+			 <filter layer="1" tag="highway" value="living_street" order="66"/>
+			<filter tag="highway" value="living_street" order="50"/>
+			 <filter layer="1" tag="highway" value="pedestrian" order="66"/>
+			<filter appMode="pedestrian" tag="highway" value="pedestrian" order="58"/>
+			<filter tag="highway" value="pedestrian" order="50"/>
 
-			<group>
-				 <filter layer="1" tag="highway" value="construction" order="65"/>
-				<filter tag="highway" value="construction" order="46"/>
-				 <filter layer="1" tag="highway" value="proposed" order="65"/>
-				<filter tag="highway" value="proposed" order="45"/>
-				 <filter layer="1" tag="highway" value="motorway_link" order="65"/>
-				<filter tag="highway" value="motorway_link" order="44"/>
-				 <filter layer="1" tag="highway" value="trunk_link" order="65"/>
-				<filter tag="highway" value="trunk_link" order="43"/>
-				 <filter layer="1" tag="highway" value="primary_link" order="65"/>
-				<filter tag="highway" value="primary_link" order="42"/>
-				 <filter layer="1" tag="highway" value="secondary_link" order="65"/>
-				<filter tag="highway" value="secondary_link" order="41"/>
-				 <filter layer="1" tag="highway" value="tertiary_link" order="65"/>
-				<filter tag="highway" value="tertiary_link" order="40"/>
-				<groupFilter>
-					 <filter minzoom="14" shadowLevel="1"/>
-					 <filter hmRendered="true" shadowLevel="1"/>
-				</groupFilter>
-			</group>
+			 <filter layer="1" tag="highway" value="construction" order="65"/>
+			<filter tag="highway" value="construction" order="46"/>
+			 <filter layer="1" tag="highway" value="proposed" order="65"/>
+			<filter tag="highway" value="proposed" order="45"/>
+			 <filter layer="1" tag="highway" value="motorway_link" order="65"/>
+			<filter tag="highway" value="motorway_link" order="44"/>
+			 <filter layer="1" tag="highway" value="trunk_link" order="65"/>
+			<filter tag="highway" value="trunk_link" order="43"/>
+			 <filter layer="1" tag="highway" value="primary_link" order="65"/>
+			<filter tag="highway" value="primary_link" order="42"/>
+			 <filter layer="1" tag="highway" value="secondary_link" order="65"/>
+			<filter tag="highway" value="secondary_link" order="41"/>
+			 <filter layer="1" tag="highway" value="tertiary_link" order="65"/>
+			<filter tag="highway" value="tertiary_link" order="40"/>
 
 			 <filter layer="1" tag="highway" value="cycleway" order="67"/>
 			<filter appMode="pedestrian" tag="highway" value="cycleway" order="59"/>
@@ -1357,6 +1345,7 @@
 				<filter additional="contourtype=100m" minzoom="13" color="#2AEA7300" strokeWidth="2"/>
 			</groupFilter>
 		</filter>
+
 		<filter tag="route" value="ferry" minzoom="8" color="#7777FF" strokeWidth="2" pathEffect="6_3"/>
 
 		<!-- Barriers -->
