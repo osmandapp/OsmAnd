@@ -638,8 +638,8 @@ public class RoutingHelper {
 				params.gpxRoute = gpxRoute;
 				params.previousToRecalculate = previousRoute;
 				params.leftSide = settings.LEFT_SIDE_NAVIGATION.get();
-				params.optimal = settings.OPTIMAL_ROUTE_MODE.get();
-				params.fast = settings.FAST_ROUTE_MODE.get();
+				params.optimal = settings.OPTIMAL_ROUTE_MODE.getModeValue(mode);
+				params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;
 				params.ctx = app;
