@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="screen_is_locked">För att låsa upp skärmen trycker låsikon</string>
+<resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
 <string name="choose_building">Välj byggnad</string>
@@ -14,17 +14,17 @@
 <string name="map_widget_parking">Parkering</string>
 <string name="map_widget_monitoring">Spårning</string>
 <string name="map_widget_speed">Hastighet</string>
-<string name="map_widget_distance">Målet</string>
+<string name="map_widget_distance">Destination</string>
 <string name="map_widget_altitude">Höjd</string>
-<string name="map_widget_next_turn">Nästa kurva</string>
+<string name="map_widget_next_turn">Nästa sväng</string>
 <string name="show_warnings_title">Visa larm…</string>
-<string name="show_warnings_descr">Visa hastighetsbegränsningar, hastighetskameror, vägbulor och andra varningar</string>
-<string name="use_compass_navigation_descr">Använd kompassen när ingen rubrik upptäcks annars</string>
-<string name="use_compass_navigation">Använd kompassen</string>
+<string name="show_warnings_descr">Konfigurerar trafikvarningar (hastighetsgränser, stopp, vägbulor), varning för hastighetskameror och filinformation</string>
+<string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks</string>
+<string name="use_compass_navigation">Använd kompass</string>
 <string name="avoid_motorway">Undvik motorvägar</string>
-<string name="auto_zoom_map_descr">Autozoom kartlägga beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
+<string name="auto_zoom_map_descr">Autozoom karta enligt din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk zoom karta</string>
-<string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Förbättrad vägvisning\n\t* Undvik motorvägar alternativet\n\t* Cykelväg=spår display\n\t* bättre UI finish (ikoner)\n\t* Vissa buggfixar "</string>
+<string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Waypoints\n\t* Förbättrad vägvisning\n\t* Inställning för att undvika motorvägar när man bygger en rutt\n\t* Lagt till ytterligare en typ av väg för cyklar till kartan (Cycleway=track)\n\t* Buggfixar "</string>
 <string name="snap_to_road_descr">Snap ställning till vägar under navigering</string>
 <string name="snap_to_road">Fäst mot väg</string>
 <string name="tip_update_index">Uppdatering av offlinedata</string>
@@ -33,9 +33,9 @@
 <string name="select_navigation_mode">Välj transportsätt</string>
 <string name="monitor_preferences">Spårning</string>
 <string name="day_night_info_description">Soluppgång : %1$s \nSolnedgång: %2$s</string>
-<string name="day_night_info">Dag/natt information</string>
-<string name="map_widget_day_night">Dag/natt kartan</string>
-<string name="map_widget_vector_attributes">Rendering attribut:</string>
+<string name="day_night_info">Dag/natt-information</string>
+<string name="map_widget_day_night">Dag/natt-karta</string>
+<string name="map_widget_vector_attributes">Återgivningsattribut:</string>
 <string name="position_on_map_descr">Välj placering positionsmarkör på kartan</string>
 <string name="position_on_map">Positionsmarkör</string>
 <string name="layer_map_appearance">Konfigurera skärm…</string>
@@ -48,15 +48,15 @@
 <string name="map_widget_appearance">Övrigt:</string>
 <string name="map_widget_view_direction">Tittar riktning</string>
 <string name="map_widget_transparent">Genomskinlig hud</string>
-<string name="monitoring_mode_off">Rekord GPX</string>
+<string name="monitoring_mode_off">Spela in GPX</string>
 <string name="monitoring_mode_on">Stopp\n GPX rek.</string>
 <string name="gps_wakeup_interval">GPS väckning intervall: %s</string>
 <string name="int_continuosly">Kontinuerlig</string>
-<string name="map_widget_map_select">Karta källa</string>
+<string name="map_widget_map_select">Kartkälla</string>
 <string name="map_widget_reset">Återställ till standard</string>
 <string name="map_widget_time">Dags att gå</string>
 <string name="osmand_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline och online-kartor</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd är ett open source navigering ansökan för offline och online-kartor</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline och online-kartor</string>
 <string name="edit_filter_delete_menu_item">Radera</string>
 <string name="edit_filter_save_as_menu_item">Spara som</string>
 <string name="edit_filter_delete_dialog_title">Radera valt filter?</string>
@@ -100,32 +100,32 @@
 <string name="bg_service_screen_lock">Lås skärmen</string>
 <string name="bg_service_screen_unlock">Låsa upp skärm</string>
 <string name="bg_service_screen_lock_toast">Skärmen är låst</string>
-<string name="bg_service_interval">Inställda väckningstiden intervall:</string>
+<string name="bg_service_interval">Ställ in väckningsintervall:</string>
 <string name="show_cameras">Visa fartkameror</string>
 <string name="show_speed_limits">Visa hastighetsgränser</string>
 <string name="avoid_toll_roads">Undvik vägtullar</string>
-<string name="continue_follow_previous_route_auto">Tidigare navigering var oavslutade. Fortsätt att följa den? (%1$s sekunder)</string>
-<string name="route_updated_loc_found">Resvägen beräknas då plats kommer att finnas</string>
+<string name="continue_follow_previous_route_auto">Tidigare navigering avbröts. Fortsätt att följa den? (%1$s sekunder)</string>
+<string name="route_updated_loc_found">Resväg kommer att beräknas när placering hittas</string>
 <string name="osmand_parking_hours">Timmar</string>
 <string name="osmand_parking_minutes">Minuter</string>
-<string name="osmand_parking_position_description_add_time">Bilen stod parkerad på:</string>
-<string name="tip_recent_changes_0_8_1_t"/>
+<string name="osmand_parking_position_description_add_time">Bilen parkerades:</string>
+<string name="tip_recent_changes_0_8_1_t">"Ändringar i 0.8.1 :\n\t* Mer exakt ruttkalkylering (lite långsammare)\n\t* Smart och snabb rekalkylering av rutt\n\t* Navigera med körfält\n\t* Information om hastighetsgränser, fartkameror och vägbulor\n\t* Förbättrat röstnavigering på motorvägar\n\t* Parkeringgplugin (\'Var parkerade jag min bil?\')\n\t* Aktivera/avaktivera logg-widget "</string>
 <string name="select_animate_speedup">Välj animera rutt acceleration</string>
 <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android gräns %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Allokerat minne</string>
 <string name="native_app_allocated_memory_descr">Totalt infödda minne tilldelas av App %1$s MB (Dalvik %2$s MB, andra %3$s MB).↵
 Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="native_app_allocated_memory">Totalt infödda minne</string>
-<string name="update_downlod_list">Ladda lista</string>
+<string name="update_downlod_list">Ladda om lista</string>
 <string name="starting_point_too_far">Utgångspunkt för långt från närmaste väg.</string>
 <string name="shared_location">Delad plats</string>
-<string name="osmand_parking_event">Plocka upp bilen från parkering</string>
+<string name="osmand_parking_event">Hämta bilen från parkering</string>
 <string name="osmand_parking_warning">Varning</string>
-<string name="osmand_parking_warning_text">Anmälan att plocka upp din bil tidigare lagts till i din kalender. Det kommer att förbli där tills du tar bort det manuellt.</string>
+<string name="osmand_parking_warning_text">Notifiering om att hämta din bil har tidigare lagts till i din kalender. Den kommer att förbli där tills du tar bort den manuellt.</string>
 <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkering</string>
 <string name="osmand_parking_delete_confirm">Vill du ta bort platsen för parkerad bil?</string>
-<string name="osmand_parking_delete">Ta bort en parkeringsplats markör</string>
-<string name="osmand_parking_choose_type">Välj den typ av parkering</string>
+<string name="osmand_parking_delete">Ta bort en parkeringsmarkör</string>
+<string name="osmand_parking_choose_type">Välj typ av parkering</string>
 <string name="osmand_parking_lim_text">Tidsbegränsad</string>
 <string name="osmand_parking_no_lim_text">Tidsobegränsad</string>
 <string name="osmand_parking_add_event">Lägg till ett meddelande till kalenderprogrammet</string>
@@ -201,8 +201,8 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="front_left">Främre vänster</string>
 <string name="towards">mot</string>
 <string name="altitude">Höjd</string>
-<string name="map_widget_renderer">Rendering stil</string>
-<string name="live_monitoring_mode_off">Start\n lever spårning</string>
+<string name="map_widget_renderer">Återgivningsstil</string>
+<string name="live_monitoring_mode_off">Start\n live-spårning</string>
 <string name="osmand_parking_position_description_add">Att plocka upp bilen på:</string>
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
@@ -241,8 +241,8 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
 <string name="plugins_screen">Plugin Manager</string>
 <string name="edit_filter_create_message"/>
-<string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Dynamisk karta widgets\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fast arabiska, Kannada skript och RTL språk "</string>
-<string name="live_monitoring_mode_on">Stopp\n lever spårning</string>
+<string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
+<string name="live_monitoring_mode_on">Stopp\n live-spårning</string>
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
 <string name="bg_service_sleep_mode_off">Aktivera\n viloläge</string>
 <string name="bg_service_sleep_mode_on">Stopp\n viloläge</string>
@@ -580,10 +580,10 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="km_h">km/t</string>
 <string name="m">m</string>
 <string name="old_map_index_is_not_supported">Föråldrad karta dataformat \'\'{0}\'\' stöds inte</string>
-<string name="poi_filter_car_aid">Bil bistånd</string>
+<string name="poi_filter_car_aid">Bilhjälp</string>
 <string name="poi_filter_closest_poi">Närmaste POI</string>
 <string name="poi_filter_custom_filter">Anpassat filter</string>
-<string name="poi_filter_food_shop">Mat handla</string>
+<string name="poi_filter_food_shop">Mataffär</string>
 <string name="poi_filter_for_tourists">För turister</string>
 <string name="poi_filter_fuel">Bränsle</string>
 <string name="poi_filter_namefinder">Online namn hitta</string>
@@ -600,7 +600,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="add_as_last_destination_point">Lägg senast intermedate punkten</string>
     <string name="add_as_first_destination_point">Lägg till som första mellanliggande punkt</string>
     <string name="replace_destination_point">Byt destination</string>
-    <string name="new_destination_point_dialog">Du har redan inställd destination.</string>
+    <string name="new_destination_point_dialog">Du har redan en inställd destination.</string>
     <string name="target_point">Målpunkt %1$s</string>
     <string name="target_points">Mål</string>
     <string name="intermediate_point_too_far">Mellanpunkt %1$s för långt från närmaste väg.</string>
@@ -608,10 +608,10 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="context_menu_item_intermediate_point">Lägg mellanliggande punkt</string>
     <string name="map_widget_intermediate_distance">Mellanliggande punkt</string>
     <string name="ending_point_too_far">Utgångspunkt för långt från närmaste väg.</string>
-    <string name="btn_add_tag">Ny tagg</string>
+    <string name="btn_add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge...</string>
     <string name="poi_filter_parking">Parkering</string>
-    <string name="poi_filter_emergency">Emergency</string>
+    <string name="poi_filter_emergency">Akut</string>
     <string name="poi_filter_public_transport">Kollektivtrafik</string>
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
@@ -855,4 +855,6 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Sök i Market?</string>
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
-    </resources>
+    <string name="no_route">Ingen rutt</string>
+	<string name="tip_update_index_t">\tAtt ha uppdaterad kartdata är viktigt. OsmAnd tillhandahåller en nerladdningshanterare som kan söka efter tillgänglig offlinedata.\n\tFör att söka efter uppdateringar, gå till \'Inställningar\' -&gt; \'Offline data\' -&gt; \'Ladda ner offline data\'. Efter att regionslistan hämtats från internet, vällj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.\n\tFärgerna visar tillgängligheten för uppdateringarna:\n\t\'Grön\' - indikerar att datan är identisk på enheten och servern\n\t\'Blå\' - indikerar att uppdateringar finns på servern\n\t\'Mörkblå/grön\' - data deaktiverad på enheten</string>
+	</resources>
