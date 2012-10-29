@@ -1086,7 +1086,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
 \n\tVous pouvez changer les profils via the bouton de profil dans l\'angle inférieur gauche de la carte (icône voiture, vélo, ou piéton), ou lors de la création d\'un itinéaire.
 </string>
 <string name="avoid_motorway">Éviter les autoroutes</string>
-<string name="tip_recent_changes_0_8_4_t">Changements en 0.8.4 :\n\t* Quelques corrections de bugs\n\t* La carte ne perd plus la position après des interruptions</string>
+<string name="tip_recent_changes_0_8_4_t">Changements en 0.8.4 :\n\t* Quelques corrections de bugs\n\t* La carte ne perd plus la position après des interruptions\n\t* Activer le service d\'arrière-plan pendant la navigation</string>
     <string name="context_menu_item_last_intermediate_point">Définir dernier point cible</string>
     <string name="context_menu_item_first_intermediate_point">Définir premier point cible</string>
     <string name="add_as_last_destination_point">Ajoute en tant que dernier point intermédiaire</string>
