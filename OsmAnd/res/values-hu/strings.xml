@@ -1050,4 +1050,6 @@
     <string name="non_optimal_route_calculation">Esetleg nem optimális útvonal számítása nagyobb távolságokra</string>
     <string name="rendering_attr_roadColors_description">Válassz egy útszínsémát:</string>
 	<string name="rendering_attr_roadColors_name">Útszínséma</string>
-    </resources>
+    <string name="close_changeset">Módosításcsomag lezárása</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Google Play-ben?</string>
+	</resources>
