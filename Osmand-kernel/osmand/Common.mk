@@ -22,6 +22,7 @@ LOCAL_SRC_FILES := \
 	src/renderRules.cpp \
 	src/rendering.cpp \
 	src/binaryRead.cpp \
+	src/binaryRoutePlanner.cpp \
 	src/proto/osmand_index.pb.cpp
 	
 ifdef OSMAND_PROFILE_NATIVE_OPERATIONS

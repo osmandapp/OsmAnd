@@ -50,6 +50,16 @@
 #endif
 #define UNORDERED(cls) UNORDERED_NAMESPACE::UNORDERED_##cls
 
+#if defined(ANDROID)
+#	include "shared_ptr.h"
+#   define SHARED_PTR my_shared_ptr
+#elif defined(WINDOWS)
+#else
+#   include <tr1/memory>
+#   define SHARED_PTR std::tr1::shared_ptr
+#endif
+
+
 // Better don't do this
 using namespace std;
 
@@ -303,7 +313,7 @@ double get31LongitudeX(int tileX);
 double get31LatitudeY(int tileY);
 double getTileNumberX(float zoom, double longitude);
 double getTileNumberY(float zoom, double latitude);
-
+double getDistance(double lat1, double lon1, double lat2, double lon2);
 double getPowZoom(float zoom);
 
 #endif /*_OSMAND_COMMON_H*/
