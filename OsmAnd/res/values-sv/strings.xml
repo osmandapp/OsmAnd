@@ -732,14 +732,14 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="background_service_int">Väckning intervall</string>
 	<string name="background_service_provider_descr">Välj plats leverantör när du kör i bakgrunden</string>
 	<string name="background_service_provider">Plats leverantör</string>
-	<string name="background_router_service_descr">Körs OsmAnd i bakgrunden för att spåra din position medan skärmen är avstängd</string>
+	<string name="background_router_service_descr">Kör OsmAnd i bakgrunden för att spåra din position medan skärmen är avstängd</string>
 	<string name="background_router_service">Kör i bakgrunden</string>
 	<string name="off_router_service_no_gps_available">Bakgrunden navigeringstjänst kräver en plats leverantör för att vara påslagen.</string>
-	<string name="hide_poi_filter">Dölj filtret</string>
+	<string name="hide_poi_filter">Dölj filter</string>
 	<string name="show_poi_filter">Visa filter</string>
 	<string name="search_poi_filter">Filter</string>
 	<string name="menu_mute_off">Ljud är på</string>
-	<string name="menu_mute_on">Ljudet är avstängt</string>
+	<string name="menu_mute_on">Ljud är av</string>
 	<string name="voice_provider_descr">Välj röstvägledning för navigering</string>
 	<string name="tip_location_sharing_t">"→ Du kan dela placeringen av intressanta platser på resan med familj eller vänner.
 \n→ Om du vill dela en plats du vill:
