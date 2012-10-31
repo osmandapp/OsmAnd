@@ -38,7 +38,7 @@ struct MapTreeBounds {
 		ocean = -1;
 	}
 };
-
+struct RoutingIndex;
 struct RouteSubregion {
 	uint32_t length;
 	uint32_t filePointer;
@@ -48,8 +48,9 @@ struct RouteSubregion {
 	uint32_t top;
 	uint32_t bottom;
 	std::vector<RouteSubregion> subregions;
+	RoutingIndex* routingIndex;
 
-	RouteSubregion() : length(0), filePointer(0), mapDataBlock(0){
+	RouteSubregion(RoutingIndex* ind) : length(0), filePointer(0), mapDataBlock(0), routingIndex(ind){
 	}
 };
 
@@ -252,7 +253,9 @@ struct SearchQuery {
 	}
 };
 
-void searchRouteDataForSubRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub);
+void searchRouteSubregions(SearchQuery* q, std::vector<RouteSubregion>& tempResult);
+
+void searchRouteDataForSubRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RouteSubregion* sub);
 
 ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, int renderRouteDataFile, std::string msgNothingFound);
 

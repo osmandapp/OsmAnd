@@ -7,6 +7,7 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteSegmentResult;
 
 public class NativeLibrary {
 	
@@ -81,7 +82,6 @@ public class NativeLibrary {
 		if(rs.nativeHandler == 0) {
 			// do not throw exception because it is expected situation
 			return new RouteDataObject[0];
-//			throw new IllegalStateException("Native route handler is 0");
 		}
 		return getRouteDataObjects(rs.region.routeReg, rs.nativeHandler, x31, y31);
 	}
@@ -97,6 +97,10 @@ public class NativeLibrary {
 	
 	public boolean closeMapFile(String filePath) {
 		return closeBinaryMapFile(filePath);
+	}
+	
+	public RouteSegmentResult[] testRoutingInternal(int sx31, int sy31, int ex31, int ey31) {
+		return testRouting(sx31, sy31, ex31, ey31);
 	}
 	
 	
@@ -117,6 +121,8 @@ public class NativeLibrary {
 	protected static native void deleteRouteSearchResult(long searchResultHandle);
 	
 	protected static native RouteDataObject[] getRouteDataObjects(RouteRegion reg, long rs, int x31, int y31);
+	
+	protected static native RouteSegmentResult[] testRouting(int sx31, int sy31, int ex31, int ey31);
 	
 	protected static native void deleteSearchResult(long searchResultHandle);
 

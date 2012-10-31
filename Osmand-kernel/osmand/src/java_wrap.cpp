@@ -11,6 +11,7 @@
 #include "java_wrap.h"
 #include "binaryRead.h"
 #include "rendering.h"
+#include "binaryRoutePlanner.h"
 
 
 JavaVM* globalJVM = NULL;
@@ -410,8 +411,17 @@ jfieldID jfield_RouteSubregion_bottom = NULL;
 jfieldID jfield_RouteSubregion_shiftToData = NULL;
 
 
+jclass jclass_RouteSegmentResult = NULL;
+jmethodID jmethod_RouteSegmentResult_ctor = NULL;
+
+
+
 void loadJniRenderingContext(JNIEnv* env)
 {
+	jclass_RouteSegmentResult = findClass(env, "net/osmand/router/RouteSegmentResult");
+	jmethod_RouteSegmentResult_ctor = env->GetMethodID(jclass_RouteSegmentResult,
+			"<init>", "(Lnet/osmand/binary/RouteDataObject;II)V");
+
 	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
 	jfield_RenderingContext_interrupted = getFid(env, jclass_RenderingContext, "interrupted", "Z");
 	jfield_RenderingContext_leftX = getFid(env,  jclass_RenderingContext, "leftX", "F" );
@@ -570,7 +580,31 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteRouteSearc
 	}
 	delete t;
 }
+extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_testRouting(JNIEnv* ienv,
+		jobject obj, jint sx31,
+		jint sy31, jint ex31, jint ey31) {
+	RoutingContext c;
+	c.startX = sx31;
+	c.startY = sy31;
+	c.endX = ex31;
+	c.endY = ey31;
+	vector<RouteSegmentResult> r = searchRouteInternal(&c, false);
+	jobjectArray res = ienv->NewObjectArray(r.size(), jclass_RouteSegmentResult, NULL);
+	for (int i = 0; i < r.size(); i++) {
+		jobject robj = convertRouteDataObjectToJava(ienv, r[i].object.get(), NULL);
+		jobject resobj = ienv->NewObject(jclass_RouteSegmentResult, jmethod_RouteSegmentResult_ctor, robj,
+				r[i].startPointIndex, r[i].endPointIndex);
+		ienv->SetObjectArrayElement(res, i, resobj);
+		ienv->DeleteLocalRef(robj);
+		ienv->DeleteLocalRef(resobj);
 
+	}
+	if (r.size() == 0) {
+		osmand_log_print(LOG_INFO, "No route found");
+	}
+	fflush(stdout);
+	return res;
+}
 
 //	protected static native RouteDataObject[] getRouteDataObjects(NativeRouteSearchResult rs, int x31, int y31!);
 extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_getRouteDataObjects(JNIEnv* ienv,
@@ -596,7 +630,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_loadRoutingDa
 	RoutingIndex ind;
 	ind.filePointer = regFilePointer;
 	ind.name = getString(ienv, regName);
-	RouteSubregion sub;
+	RouteSubregion sub(&ind);
 	sub.filePointer = ienv->GetIntField(subreg, jfield_RouteSubregion_filePointer);
 	sub.length = ienv->GetIntField(subreg, jfield_RouteSubregion_length);
 	sub.left = ienv->GetIntField(subreg, jfield_RouteSubregion_left);
@@ -606,7 +640,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_loadRoutingDa
 	sub.mapDataBlock= ienv->GetIntField(subreg, jfield_RouteSubregion_shiftToData);
 	std::vector<RouteDataObject*> result;
 	SearchQuery q;
-	searchRouteDataForSubRegion(&q, result, &ind, &sub);
+	searchRouteDataForSubRegion(&q, result, &sub);
 
 
 	if (loadObjects) {

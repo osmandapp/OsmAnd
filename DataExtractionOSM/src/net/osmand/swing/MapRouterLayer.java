@@ -631,6 +631,8 @@ public class MapRouterLayer implements MapPanelLayer {
 				if (e == null) {
 					throw new RuntimeException("End point to calculate route was not found");
 				}
+				
+				
 				log.info("End road " + e.getRoad().getHighway() + " " + e.getRoad().id);
 				
 				List<RouteSegment> inters  = new ArrayList<BinaryRoutePlanner.RouteSegment>();
@@ -714,8 +716,14 @@ public class MapRouterLayer implements MapPanelLayer {
 
 				});
 				
-				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, inters, false);
-				this.previousRoute = searchRoute;
+				int ex31 = e.getRoad().getPoint31XTile(e.getSegmentStart());
+				int ey31 = e.getRoad().getPoint31YTile(e.getSegmentStart());
+				int sx31 = st.getRoad().getPoint31XTile(st.getSegmentStart());
+				int sy31 = st.getRoad().getPoint31YTile(st.getSegmentStart());
+				// FIXME
+				RouteSegmentResult[] searchRoute = ctx.nativeLib.testRoutingInternal(sx31, sy31, ex31, ey31);
+				/*List<RouteSegmentResult> searchRoute = */router.searchRoute(ctx, st, e, inters, false);
+//				this.previousRoute = searchRoute;
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);
 					nextTurn.setText("FINISH");
@@ -734,13 +742,14 @@ public class MapRouterLayer implements MapPanelLayer {
 //					String name = String.format("beg %.2f end %.2f ", s.getBearingBegin(), s.getBearingEnd());
 					way.putTag(OSMTagKey.NAME.getValue(),name);
 					boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
+					System.out.println("Segment " + s.getObject().id + " "+s.getStartPointIndex() + " -> " + s.getEndPointIndex());
 					int i = s.getStartPointIndex();
 					while (true) {
 						LatLon l = s.getPoint(i);
 						net.osmand.osm.Node n = new net.osmand.osm.Node(l.getLatitude(), l.getLongitude(), -1);
 						if (prevWayNode != null) {
 							if (MapUtils.getDistance(prevWayNode, n) > 0) {
-								System.out.println("Warning not connected road " + " " + s.getObject().getHighway() + " dist "
+								System.out.println("Warning not connected road " + " " + s.getObject().id + " dist "
 										+ MapUtils.getDistance(prevWayNode, n));
 							}
 							prevWayNode = null;
@@ -760,9 +769,7 @@ public class MapRouterLayer implements MapPanelLayer {
 					}
 					res.add(way);
 				}
-			} catch (IOException e) {
-				ExceptionHandler.handle(e);
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 				ExceptionHandler.handle(e);
 			} finally {
 				playPauseButton.setVisible(false);

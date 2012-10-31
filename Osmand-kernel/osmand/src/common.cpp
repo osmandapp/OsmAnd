@@ -79,7 +79,7 @@ void ElapsedTimer::start()
 #elif defined(__APPLE__)
 		startInit = mach_absolute_time();
 #else
-		clock_gettime(CLOCK_MONOTONIC, &startInit);
+		clock_gettime(CLOCK_REALTIME, &startInit);
 #endif
 	}
 	run = true;
@@ -91,7 +91,7 @@ void ElapsedTimer::pause()
 		return;
 #if defined(_WIN32)
 	endInit = timeGetTime();
-	elapsedTime += (endInit - startInit) * 1e6;
+	elapsedTime += (endInit - startInit) * 1000;
 #elif defined(__APPLE__)
 	endInit = mach_absolute_time();
 	uint64_t duration = endInit - startInit;
@@ -99,11 +99,11 @@ void ElapsedTimer::pause()
 	duration /= machTimeInfo.denom;
 	elapsedTime += duration;
 #else
-	clock_gettime(CLOCK_MONOTONIC, &endInit);
+	clock_gettime(CLOCK_REALTIME, &endInit);
 	int sec = endInit.tv_sec - startInit.tv_sec;
 	if (sec > 0)
-		elapsedTime += 1e9 * sec;
-	elapsedTime += endInit.tv_nsec - startInit.tv_nsec;
+		elapsedTime += 1000000 * sec;
+	elapsedTime += (endInit.tv_nsec - startInit.tv_nsec) / 1000;
 #endif
 	run = false;
 }
@@ -111,7 +111,7 @@ void ElapsedTimer::pause()
 int ElapsedTimer::getElapsedTime()
 {
 	pause();
-	return elapsedTime / 1e6;
+	return elapsedTime / 1000;
 }
 
 SkBitmap* RenderingContext::getCachedBitmap(const std::string& bitmapResource) {

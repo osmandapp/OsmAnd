@@ -517,13 +517,20 @@ public class RoutingContext {
 	}
 
 	public void loadTileData(int x31, int y31, int zoomAround, final List<RouteDataObject> toFillIn) {
-		int coordinatesShift = (1 << (31 - zoomAround));
+		int t = zoomAround - config.ZOOM_TO_LOAD_TILES;
+		if(t <= 0) {
+			t = 1;
+		} else {
+			t = 1 << t;
+		}
+		int coordinatesShift = (1 << (31 - config.ZOOM_TO_LOAD_TILES));
 		TLongHashSet ts = new TLongHashSet(); 
 		long now = System.nanoTime();
-		ts.add(getRoutingTile(x31 - coordinatesShift, y31 - coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));
-		ts.add(getRoutingTile(x31 + coordinatesShift, y31 - coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));
-		ts.add(getRoutingTile(x31 - coordinatesShift, y31 + coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));
-		ts.add(getRoutingTile(x31 + coordinatesShift, y31 + coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));
+		for(int i = -t; i <= t; i++) {
+			for(int j = -t; j <= t; j++) {
+				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));		
+			}
+		}
 		TLongIterator it = ts.iterator();
 		while(it.hasNext()){
 			getAllObjects(it.next(), toFillIn);
