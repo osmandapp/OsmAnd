@@ -687,8 +687,8 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="vector_data">Offline vektorkartor</string>
 	<string name="transport_context_menu">Sök transporter vid stopp</string>
 	<string name="point_on_map">Plats:\n Lat %1$.5f\n Lon %2$.5f</string>
-	<string name="poi_context_menu_modify">ändra IP</string>
-	<string name="poi_context_menu_delete">Ta bort IP</string>
+	<string name="poi_context_menu_modify">Ändra POI</string>
+	<string name="poi_context_menu_delete">Radera POI</string>
 	<string name="rotate_map_compass_opt">Till kompass</string>
 	<string name="rotate_map_bearing_opt">Till rörelseriktning</string>
 	<string name="rotate_map_none_opt">Vrid inte (norr är uppåt)</string>
