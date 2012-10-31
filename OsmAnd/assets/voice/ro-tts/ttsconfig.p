@@ -92,7 +92,7 @@ distance_mi_y(Dist) == [ X, ' iarzi']              :- Dist < 1300,  D is round(2
 distance_mi_y(Dist) == ['circa o milă ']           :- Dist < 2414.
 distance_mi_y(Dist) == ['circa ', X, ' mile ']    :- Dist < 16093, D is round(Dist/1609.0),            num_atom(D, X).
 distance_mi_y(Dist) == [ X, ' mile ']             :-               D is round(Dist/1609.0),            num_atom(D, X).
-
+ 
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
