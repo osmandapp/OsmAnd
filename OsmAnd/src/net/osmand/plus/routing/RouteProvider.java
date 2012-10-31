@@ -39,6 +39,7 @@ import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
+import net.osmand.router.BinaryRoutePlannerOld;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -310,7 +311,7 @@ public class RouteProvider {
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalcuationParams params) throws IOException {
 		OsmandApplication app = (OsmandApplication) params.ctx.getApplicationContext();
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
-		BinaryRoutePlanner router = new BinaryRoutePlanner();
+		BinaryRoutePlannerOld router = new BinaryRoutePlannerOld();
 		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
 		RoutingConfiguration.Builder config ;
 		if (routingXml.exists() && routingXml.canRead()) {

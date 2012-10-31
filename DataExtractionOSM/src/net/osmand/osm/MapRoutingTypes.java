@@ -17,12 +17,21 @@ public class MapRoutingTypes {
 	private static Set<String> TAGS_TO_SAVE = new HashSet<String>();
 	private static Set<String> TAGS_TO_ACCEPT = new HashSet<String>();
 	private static Set<String> TAGS_TEXT = new HashSet<String>();
+	private static Set<String> BASE_TAGS_TEXT = new HashSet<String>();
+	private static Set<String> BASE_TAGS_TO_SAVE = new HashSet<String>();
 	private static char TAG_DELIMETER = '/'; //$NON-NLS-1$
 	static {
 		TAGS_TO_ACCEPT.add("highway");
 		TAGS_TO_ACCEPT.add("junction");
 		TAGS_TO_ACCEPT.add("cycleway");
 		TAGS_TO_ACCEPT.add("route");
+		
+		BASE_TAGS_TEXT.add("int_ref");
+		BASE_TAGS_TEXT.add("name");
+		BASE_TAGS_TEXT.add("ref");
+		
+		BASE_TAGS_TO_SAVE.add("toll");
+		BASE_TAGS_TO_SAVE.add("maxspeed");
 		
 		// TEXT tags
 		TAGS_TEXT.add("int_ref");
@@ -76,7 +85,9 @@ public class MapRoutingTypes {
 	}
 	
 	private Map<String, MapRouteType> types = new LinkedHashMap<String, MapRoutingTypes.MapRouteType>();
-	private List<MapRouteType> listTypes = new ArrayList<MapRoutingTypes.MapRouteType>(); 
+	private List<MapRouteType> listTypes = new ArrayList<MapRoutingTypes.MapRouteType>();
+	private MapRouteType refRuleType;
+	private MapRouteType nameRuleType; 
 	
 	public static String constructRuleKey(String tag, String val) {
 		if(val == null || val.length() == 0){
@@ -99,6 +110,15 @@ public class MapRoutingTypes {
 			return tagValue.substring(i + 1);
 		}
 		return null;
+	}
+	
+	public MapRouteType getRefRuleType() {
+		return refRuleType;
+	}
+	
+	
+	public MapRouteType getNameRuleType() {
+		return nameRuleType;
 	}
 	
 	private boolean contains(Set<String> s, String tag, String value) {
@@ -133,6 +153,42 @@ public class MapRoutingTypes {
 			}
 			if(TAGS_TEXT.contains(tag)) {
 				names.put(registerRule(tag, null), value);
+			}
+		}
+		return true;
+	}
+	
+	public boolean encodeBaseEntity(Way et, TIntArrayList outTypes, Map<MapRouteType, String> names){
+		Way e = (Way) et;
+		boolean init = false;
+		for(Entry<String, String> es : e.getTags().entrySet()) {
+			String tag = es.getKey();
+			String value = es.getValue();
+			if (contains(TAGS_TO_ACCEPT, tag, value)) {
+				if(value.startsWith("trunk") || value.startsWith("motorway")
+						|| value.startsWith("primary") || value.startsWith("secondary")
+						|| value.startsWith("tertiary")
+						|| value.startsWith("ferry")
+						) {
+					init = true;
+					break;
+				}
+			}
+		}
+		if(!init) {
+			return false;
+		}
+		outTypes.clear();
+		names.clear();
+		for(Entry<String, String> es : e.getTags().entrySet()) {
+			String tag = es.getKey();
+			String value = converBooleanValue(es.getValue());
+			if(BASE_TAGS_TEXT.contains(tag)) {
+				names.put(registerRule(tag, null), value);
+			}
+			if(contains(TAGS_TO_ACCEPT, tag, value) ||
+					contains(BASE_TAGS_TO_SAVE, tag, value)) {
+				outTypes.add(registerRule(tag, value).id);
 			}
 		}
 		return true;
@@ -179,6 +235,12 @@ public class MapRoutingTypes {
 			rt.value = val;
 			types.put(id, rt);
 			listTypes.add(rt);
+			if(tag.equals("ref")){
+				refRuleType = rt;
+			}
+			if(tag.equals("name")){
+				nameRuleType = rt;
+			}
 		}
 		MapRouteType type = types.get(id);
 		type.freq ++;
@@ -216,6 +278,14 @@ public class MapRoutingTypes {
 			this.targetId = targetId;
 		}
 		
+		@Override
+		public String toString() {
+			if (value == null) {
+				return "'" + tag + "'";
+			}
+			return tag + "='" + value + "'";
+		}
+
 	}
 
 	public List<MapRouteType> getEncodingRuleTypes() {

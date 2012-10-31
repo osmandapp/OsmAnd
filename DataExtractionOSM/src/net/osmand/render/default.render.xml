@@ -20,11 +20,20 @@
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
+	<renderingProperty attr="showRoadMaps" name="Show road maps" description="Select how to show maps that have only road information."
+		type="string" possibleValues="yes,only_roads,no"/>
 
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff"/>
 		<filter nightMode="true" attrColorValue="#003333"/>
 		<filter attrColorValue="#f1eae4"/>
+	</renderingAttribute>
+	
+	<renderingAttribute name="showRoadMapsAttribute">
+		<filter showRoadMaps="only_roads" attrIntValue="1"/>
+		<filter showRoadMaps="yes" attrIntValue="0"/>
+		<filter showRoadMaps="no" attrIntValue="-1"/>
+		<filter attrIntValue="0"/>
 	</renderingAttribute>
 
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->	
@@ -55,6 +64,12 @@
 		<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
 		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
 		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+		<!-- transparent to see conjunctions -->
+		<!-- <renderingConstant name="motorwayRoadColor" value="#55809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#55FF8095"/>
+		<renderingConstant name="primaryRoadColor" value="#55FFAA80"/>
+		<renderingConstant name="secondaryRoadColor" value="#55ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#55ffff80"/> -->
 	<!-- roadColors="Road atlas style" -->
 		<!--
 		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
@@ -79,6 +94,7 @@
 		<renderingConstant name="secondaryRoadColor" value="#F7D131"/>
 		<renderingConstant name="tertiaryRoadColor" value="#F0CE30"/>
 		-->
+
 
 	<!--
 		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:

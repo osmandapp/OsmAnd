@@ -141,21 +141,29 @@ public class CachedOsmandIndexes {
 				routing.setName(index.getName());
 			}
 			for(RouteSubregion sub : index.getSubregions()) {
-				OsmandIndex.RoutingSubregion.Builder rpart = OsmandIndex.RoutingSubregion.newBuilder();
-				rpart.setSize(sub.length);
-				rpart.setOffset(sub.filePointer);
-				rpart.setLeft(sub.left);
-				rpart.setRight(sub.right);
-				rpart.setTop(sub.top);
-				rpart.setBottom(sub.bottom);
-				rpart.setShifToData(sub.shiftToData);
-				routing.addSubregions(rpart);
+				addRouteSubregion(routing, sub, false);
+			}
+			for(RouteSubregion sub : index.getBaseSubregions()) {
+				addRouteSubregion(routing, sub, true);
 			}
 			fileIndex.addRoutingIndex(routing);
 		}
 		
 		storedIndexBuilder.addFileIndex(fileIndex);
 		
+	}
+
+	private void addRouteSubregion(RoutingPart.Builder routing, RouteSubregion sub, boolean base) {
+		OsmandIndex.RoutingSubregion.Builder rpart = OsmandIndex.RoutingSubregion.newBuilder();
+		rpart.setSize(sub.length);
+		rpart.setOffset(sub.filePointer);
+		rpart.setLeft(sub.left);
+		rpart.setRight(sub.right);
+		rpart.setTop(sub.top);
+		rpart.setBasemap(base);
+		rpart.setBottom(sub.bottom);
+		rpart.setShifToData(sub.shiftToData);
+		routing.addSubregions(rpart);
 	}
 	
 	public BinaryMapIndexReader getReader(File f) throws IOException {
@@ -277,7 +285,11 @@ public class CachedOsmandIndexes {
 				sub.top = mr.getTop();
 				sub.bottom = mr.getBottom();
 				sub.shiftToData = mr.getShifToData();
-				mi.subregions.add(sub);
+				if(mr.getBasemap()) {
+					mi.basesubregions.add(sub);
+				} else {
+					mi.subregions.add(sub);
+				}
 			}
 			reader.routingIndexes.add(mi);
 			reader.indexes.add(mi);

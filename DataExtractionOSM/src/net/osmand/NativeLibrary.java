@@ -69,13 +69,19 @@ public class NativeLibrary {
 	 */
 	public NativeSearchResult searchObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom,
 			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound) {
-		return new NativeSearchResult(searchNativeObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, skipDuplicates,
+		int renderRouteDataFile = 0;
+		if(request.searchRenderingAttribute("showRoadMapsAttribute")){
+			renderRouteDataFile = request.getIntPropertyValue(request.ALL.R_ATTR_INT_VALUE);
+		}
+		return new NativeSearchResult(searchNativeObjectsForRendering(sleft, sright, stop, sbottom, zoom, request, skipDuplicates, renderRouteDataFile,
 				objectWithInterruptedField, msgIfNothingFound));
 	}
 	
 	public RouteDataObject[] getDataObjects(NativeRouteSearchResult rs, int x31, int y31) {
 		if(rs.nativeHandler == 0) {
-			throw new IllegalStateException("Native route handler is 0");
+			// do not throw exception because it is expected situation
+			return new RouteDataObject[0];
+//			throw new IllegalStateException("Native route handler is 0");
 		}
 		return getRouteDataObjects(rs.region.routeReg, rs.nativeHandler, x31, y31);
 	}
@@ -127,6 +133,6 @@ public class NativeLibrary {
 			boolean isTransparent, RenderingRuleSearchRequest render, boolean encodePng);
 	
 	protected static native long searchNativeObjectsForRendering(int sleft, int sright, int stop, int sbottom, int zoom, 
-			RenderingRuleSearchRequest request, boolean skipDuplicates, Object objectWithInterruptedField, String msgIfNothingFound);
+			RenderingRuleSearchRequest request, boolean skipDuplicates, int renderRouteDataFile, Object objectWithInterruptedField, String msgIfNothingFound);
 
 }

@@ -47,6 +47,8 @@
 #	define UNORDERED_NAMESPACE std
 #	define UNORDERED_map unordered_map
 #	define UNORDERED_set unordered_set
+//#	define UNORDERED_map map
+//#	define UNORDERED_set set
 #endif
 #define UNORDERED(cls) UNORDERED_NAMESPACE::UNORDERED_##cls
 

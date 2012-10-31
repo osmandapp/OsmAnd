@@ -3,11 +3,13 @@ package net.osmand.router;
 import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TLongHashSet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -24,7 +26,10 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteSubregion;
+import net.osmand.binary.RouteDataBorderLinePoint;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.osm.MapUtils;
+import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 
@@ -34,12 +39,16 @@ import org.apache.commons.logging.Log;
 public class RoutingContext {
 
 	public static final boolean SHOW_GC_SIZE = false;
+	 
+	
 	private final static Log log = LogUtil.getLog(RoutingContext.class);
 	public static final int OPTION_NO_LOAD = 0;
 	public static final int OPTION_SMART_LOAD = 1;
 	public static final int OPTION_IN_MEMORY_LOAD = 2;
+	public static boolean USE_BORDER_LINES = false;
 	// Final context variables
 	public final RoutingConfiguration config;
+	private final boolean useBaseMap;
 	public final NativeLibrary nativeLib;
 	public final Map<BinaryMapIndexReader, List<RouteSubregion>> map = new LinkedHashMap<BinaryMapIndexReader, List<RouteSubregion>>();
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
@@ -49,14 +58,25 @@ public class RoutingContext {
 	public long firstRoadId = 0;
 	public int firstRoadDirection = 0;
 	
+	public int startX;
+	public int startY;
+	public int targetX;
+	public int targetY;
+	
 	public Interruptable interruptable;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
+	public BaseRouteResult baseRouteResult;
 
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
 	TLongObjectHashMap<List<RouteDataObject>> tileRoutes = new TLongObjectHashMap<List<RouteDataObject>>();
 	
-	// need to be array list and keep sorted Another option to use hashmap but it is more memory expensive
+	RouteDataBorderLine[] borderLines = new RouteDataBorderLine[0];
+	int[] borderLineCoordinates = new int[0];
+	int leftBorderBoundary;
+	int rightBorderBoundary;
+	
+	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
 	
 	// 3. Warm object caches
@@ -64,34 +84,39 @@ public class RoutingContext {
 	ArrayList<RouteSegment> segmentsToVisitNotForbidden = new ArrayList<BinaryRoutePlanner.RouteSegment>(5);
 
 	
-	// 4. Final results
-	RouteSegment finalDirectRoute = null;
-	int finalDirectEndSegment = 0;
-	RouteSegment finalReverseRoute = null;
-	int finalReverseEndSegment = 0;
-
-
 	// 5. debug information (package accessor)
 	public TileStatistics global = new TileStatistics();
+	// updated by route planner in bytes
+	public int memoryOverhead = 0;
+	
+	
 	long timeToLoad = 0;
 	long timeToLoadHeaders = 0;
 	long timeToFindInitialSegments = 0;
 	long timeToCalculate = 0;
-	public int loadedTiles = 0;
+	
 	int distinctLoadedTiles = 0;
 	int maxLoadedTiles = 0;
 	int loadedPrevUnloadedTiles = 0;
 	int unloadedTiles = 0;
+	public float routingTime = 0;
+	public int loadedTiles = 0;
 	public int visitedSegments = 0;
 	public int relaxedSegments = 0;
 	// callback of processing segments
 	RouteSegmentVisitor visitor = null;
-	
+
+
+	// old planner
+	public FinalRouteSegment finalRouteSegment;
+
+
 	
 	
 	public RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
+		this.useBaseMap = cp.useBaseMap;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
 		// copy local data and clear caches
@@ -113,11 +138,18 @@ public class RoutingContext {
 	}
 	
 	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map) {
+		this(config, nativeLibrary, map, false);
+	}
+	
+	public RoutingContext(RoutingConfiguration config, NativeLibrary nativeLibrary, BinaryMapIndexReader[] map, boolean useBasemap) {
+		this.useBaseMap = useBasemap;
 		for (BinaryMapIndexReader mr : map) {
 			List<RouteRegion> rr = mr.getRoutingIndexes();
 			List<RouteSubregion> subregions = new ArrayList<BinaryMapRouteReaderAdapter.RouteSubregion>();
 			for (RouteRegion r : rr) {
-				for (RouteSubregion rs : r.getSubregions()) {
+				List<RouteSubregion> subregs = useBaseMap ? r.getBaseSubregions() :
+					r.getSubregions();
+				for (RouteSubregion rs : subregs) {
 					subregions.add(new RouteSubregion(rs));
 				}
 				this.reverseMap.put(r, mr);
@@ -125,7 +157,6 @@ public class RoutingContext {
 			this.map.put(mr, subregions);
 		}
 		this.config = config;
-//		this.nativeLib = null;
 		this.nativeLib = nativeLibrary;
 	}
 	
@@ -188,7 +219,7 @@ public class RoutingContext {
 		config.router = router;
 	}
 	
-	public void setHeuristicCoefficient(double heuristicCoefficient) {
+	public void setHeuristicCoefficient(float heuristicCoefficient) {
 		config.heuristicCoefficient = heuristicCoefficient;
 	}
 
@@ -213,17 +244,23 @@ public class RoutingContext {
 				config.heuristicCoefficient);
 	}
 	
-	public void registerRouteDataObject(int x31, int y31, RouteDataObject o ) {
+	public void registerRouteDataObject(RouteDataObject o ) {
 		if(!getRouter().acceptLine(o)){
 			return;
 		}
-		long tileId = getRoutingTile(x31, y31, 0, OPTION_NO_LOAD);
-		List<RouteDataObject> routes = tileRoutes.get(tileId);
-		if(routes == null){
-			routes = new ArrayList<RouteDataObject>();
-			tileRoutes.put(tileId, routes);
+		for(int k = 0; k<o.getPointsLength(); k++) {
+			int x31 = o.getPoint31XTile(k);
+			int y31 = o.getPoint31YTile(k);
+			long tileId = getRoutingTile(x31, y31, 0, OPTION_NO_LOAD);
+			List<RouteDataObject> routes = tileRoutes.get(tileId);
+			if(routes == null){
+				routes = new ArrayList<RouteDataObject>();
+				tileRoutes.put(tileId, routes);
+			}
+			if(!routes.contains(o)){
+				routes.add(o);
+			}
 		}
-		routes.add(o);
 	}
 	
 	public void unloadAllData() {
@@ -272,7 +309,104 @@ public class RoutingContext {
 		return ind;
 	}
 	
-	
+	public void loadBorderPoints() throws IOException {
+		Iterator<Entry<RouteRegion, BinaryMapIndexReader>> it = reverseMap.entrySet().iterator();
+		int sleft = Math.min(startX, targetX);
+		int sright= Math.max(startX, targetX);
+		int stop = Math.min(startY, targetY);
+		int sbottom= Math.max(startY, targetY);
+		// one tile of 12th zoom around (?)
+		int zoomAround = 10;
+		int distAround = 1 << (31 - zoomAround);
+		leftBorderBoundary = sleft - distAround;
+		rightBorderBoundary = sright + distAround;
+		SearchRequest<RouteDataBorderLinePoint> req = BinaryMapIndexReader.buildSearchRouteBorderRequest(sleft, sright, stop, sbottom);
+		while(it.hasNext()) {
+			Entry<RouteRegion, BinaryMapIndexReader> entry = it.next();
+			entry.getValue().searchBorderPoints(req, entry.getKey());
+		}
+		TIntObjectHashMap<RouteDataBorderLine> lines = new TIntObjectHashMap<RoutingContext.RouteDataBorderLine>();
+		for(RouteDataBorderLinePoint p : req.getSearchResults()) {
+			if(config.router.acceptLine(p.types, p.region) && p.x > leftBorderBoundary && p.x < rightBorderBoundary) {
+				if(!lines.containsKey(p.y)) {
+					RouteDataBorderLine line = new RouteDataBorderLine(p.y);
+					lines.put(p.y, line);
+					RouteDataBorderLinePoint lft = new RouteDataBorderLinePoint(p.region);
+					lft.y = p.y;
+					lft.id = Long.MIN_VALUE;
+					lft.x = leftBorderBoundary;
+					line.borderPoints.add(lft);
+					RouteDataBorderLinePoint rht = new RouteDataBorderLinePoint(p.region);
+					rht.y = p.y;
+					rht.id = Long.MIN_VALUE;
+					rht.x = rightBorderBoundary;
+					line.borderPoints.add(rht);
+				}
+				lines.get(p.y).borderPoints.add(p);
+			}
+		}
+		borderLines =  lines.values(new RouteDataBorderLine[lines.size()]);
+		Arrays.sort(borderLines);
+		borderLineCoordinates = new int[borderLines.length];
+		for(int i=0; i<borderLineCoordinates.length; i++) {
+			borderLineCoordinates[i] = borderLines[i].borderLine;
+			// FIXME
+			// not less then 14th zoom
+			if(i > 0 && borderLineCoordinates[i - 1] >> 17 == borderLineCoordinates[i] >> 17) {
+				throw new IllegalStateException();
+			}
+			System.out.println("Line " + (borderLineCoordinates[i] >> 17) +
+					" points " + borderLines[i].borderPoints.size() /* + " " +borderLines[i].borderPoints*/);
+		}
+		
+		updateDistanceForBorderPoints(startX, startY, true);
+		updateDistanceForBorderPoints(targetX, targetY, false);
+		
+	}
+
+	protected void updateDistanceForBorderPoints(int sX, int sy, boolean distanceToStart) {
+		boolean plus = borderLines.length > 0 && sy < borderLines[0].borderLine;
+		if(borderLines.length > 0 && !plus && sy< borderLines[borderLines.length - 1].borderLine){
+			throw new IllegalStateException();
+		}
+		// calculate min distance to start
+		for(int i=0; i<borderLines.length; i++) {
+			int ind = plus ? i : borderLines.length - i - 1;
+			for(RouteDataBorderLinePoint ps : borderLines[ind].borderPoints){
+				float res = (float) Math.sqrt(MapUtils.squareDist31TileMetric(sX, sy, ps.x, ps.y)) ; 
+				if(i > 0){
+					int prevInd = plus ? i - 1 : borderLines.length - i;
+					double minDist = 0;
+					for(RouteDataBorderLinePoint prevs : borderLines[prevInd].borderPoints){
+						double d = Math.sqrt(MapUtils.squareDist31TileMetric(prevs.x, prevs.y, ps.x, ps.y)) + 
+								(distanceToStart? prevs.distanceToStartPoint :  prevs.distanceToEndPoint);
+						if(minDist == 0 || d < minDist) {
+							minDist = d;
+						}
+					}
+					if (minDist > 0) {
+//						System.out.println("Border line " + i + " exp="+res + " min="+ minDist);
+						res = (float) minDist;
+					}
+				}
+				if(distanceToStart){
+					ps.distanceToStartPoint = res;
+				} else {
+					ps.distanceToEndPoint = res;
+				}
+			}
+			
+		}
+	}
+
+	// returns from 0 to borderLineCoordinates.length inclusive
+	public int searchBorderLineIndex(int y) {
+		int k = Arrays.binarySearch(borderLineCoordinates, y);
+		if( k < 0) {
+			k = -(k + 1);
+		}
+		return k;
+	}
 	
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
@@ -353,35 +487,31 @@ public class RoutingContext {
 				(tileX + 1) << zoomToLoad, tileY << zoomToLoad, (tileY + 1) << zoomToLoad, null);
 		List<RoutingSubregionTile> collection = null;
 		for (Entry<BinaryMapIndexReader, List<RouteSubregion>> r : map.entrySet()) {
-			// load headers same as we do in non-native
-//			if(nativeLib == null) {
-				try {
-					if (r.getValue().size() > 0) {
-						long now = System.nanoTime();
-//						int rg = r.getValue().get(0).routeReg.regionsRead;
-						List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
-						for (RouteSubregion sr : subregs) {
-							int ind = searchSubregionTile(sr);
-							RoutingSubregionTile found;
-							if (ind < 0) {
-								found = new RoutingSubregionTile(sr);
-								subregionTiles.add(-(ind + 1), found);
-							} else {
-								found = subregionTiles.get(ind);
-							}
-							if(collection == null) {
-								collection = new ArrayList<RoutingContext.RoutingSubregionTile>(4);
-							}
-							collection.add(found);
+			// NOTE: load headers same as we do in non-native (it is not native optimized)
+			try {
+				if (r.getValue().size() > 0) {
+					long now = System.nanoTime();
+					// int rg = r.getValue().get(0).routeReg.regionsRead;
+					List<RouteSubregion> subregs = r.getKey().searchRouteIndexTree(request, r.getValue());
+					for (RouteSubregion sr : subregs) {
+						int ind = searchSubregionTile(sr);
+						RoutingSubregionTile found;
+						if (ind < 0) {
+							found = new RoutingSubregionTile(sr);
+							subregionTiles.add(-(ind + 1), found);
+						} else {
+							found = subregionTiles.get(ind);
 						}
-						timeToLoadHeaders += (System.nanoTime() - now);
+						if (collection == null) {
+							collection = new ArrayList<RoutingContext.RoutingSubregionTile>(4);
+						}
+						collection.add(found);
 					}
-				} catch (IOException e) {
-					throw new RuntimeException("Loading data exception", e);
+					timeToLoadHeaders += (System.nanoTime() - now);
 				}
-//			} else {
-//				throw new UnsupportedOperationException();
-//			}
+			} catch (IOException e) {
+				throw new RuntimeException("Loading data exception", e);
+			}
 		}
 		return collection;
 	}
@@ -614,7 +744,9 @@ public class RoutingContext {
 				return original;
 			}
 			// Native use case
+			long nanoTime = System.nanoTime();
 			RouteDataObject[] res = ctx.nativeLib.getDataObjects(searchResult, x31, y31);
+			ctx.timeToLoad += (System.nanoTime() - nanoTime);
 			if (res != null) {
 				for (RouteDataObject ro : res) {
 					
@@ -708,6 +840,39 @@ public class RoutingContext {
 		}
 	}
 	
+	static int getEstimatedSize(RouteDataObject o) {
+		// calculate size
+		int sz = 0;
+		sz += 8 + 4; // overhead
+		if (o.names != null) {
+			sz += 12;
+			TIntObjectIterator<String> it = o.names.iterator();
+			while(it.hasNext()) {
+				it.advance();
+				String vl = it.value();
+				sz += 12 + vl.length();
+			}
+			sz += 12 + o.names.size() * 25;
+		}
+		sz += 8; // id
+		// coordinates
+		sz += (8 + 4 + 4 * o.getPointsLength()) * 4;
+		sz += o.types == null ? 4 : (8 + 4 + 4 * o.types.length);
+		sz += o.restrictions == null ? 4 : (8 + 4 + 8 * o.restrictions.length);
+		sz += 4;
+		if (o.pointTypes != null) {
+			sz += 8 + 4 * o.pointTypes.length;
+			for (int i = 0; i < o.pointTypes.length; i++) {
+				sz += 4;
+				if (o.pointTypes[i] != null) {
+					sz += 8 + 8 * o.pointTypes[i].length;
+				}
+			}
+		}
+		// Standard overhead?
+		return  (int) (sz * 3.5);
+	}
+	
 	protected static class TileStatistics {
 		public int size = 0;
 		public int allRoutes = 0;
@@ -723,38 +888,29 @@ public class RoutingContext {
 		public void addObject(RouteDataObject o) {
 			allRoutes++;
 			coordinates += o.getPointsLength() * 2;
-			// calculate size
-			int sz = 0;
-			sz += 8 + 4; // overhead
-			if (o.names != null) {
-				sz += 12;
-				TIntObjectIterator<String> it = o.names.iterator();
-				while(it.hasNext()) {
-					it.advance();
-					String vl = it.value();
-					sz += 12 + vl.length();
-				}
-				sz += 12 + o.names.size() * 25;
+			size += getEstimatedSize(o);
+		}
+
+		
+	}
+	
+	protected static class RouteDataBorderLine implements Comparable<RouteDataBorderLine>{
+		final List<RouteDataBorderLinePoint> borderPoints = new ArrayList<RouteDataBorderLinePoint>();
+		final int borderLine;
+		
+		public RouteDataBorderLine(int borderLine) {
+			this.borderLine = borderLine;
+		}
+
+
+		@Override
+		public int compareTo(RouteDataBorderLine o) {
+			if(o.borderLine == borderLine) {
+				return 0;
 			}
-			sz += 8; // id
-			// coordinates
-			sz += (8 + 4 + 4 * o.getPointsLength()) * 4;
-			sz += o.types == null ? 4 : (8 + 4 + 4 * o.types.length);
-			sz += o.restrictions == null ? 4 : (8 + 4 + 8 * o.restrictions.length);
-			sz += 4;
-			if (o.pointTypes != null) {
-				sz += 8 + 4 * o.pointTypes.length;
-				for (int i = 0; i < o.pointTypes.length; i++) {
-					sz += 4;
-					if (o.pointTypes[i] != null) {
-						sz += 8 + 8 * o.pointTypes[i].length;
-					}
-				}
-			}
-			// Standard overhead?
-			size += sz * 3.5;
-			// size += coordinates * 20;
+			return borderLine < o.borderLine? -1 : 1;
 		}
 	}
+
 
 }

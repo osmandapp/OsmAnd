@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <router_tests>
-<test regions="" description="Long route to Maastricht" best_percent="5" vehicle="car" 
-    start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="7059.4673" loadedTiles = "2054" visitedSegments = "4691" complete_distance = "209376.52"  >
-	<segment id="176821894" start="2" end="4" time = "1.335539" name = "" distance = "11.129491" turn = "Go ahead" turn_angle = "0.0" start_bearing = "-64.75403" end_bearing = "-64.88516" description = "Go ahead and go 231.52 meters" />
-	<segment id="7366509" start="8" end="0" time = "26.446692" name = "Vierlingsbeeklaan" distance = "220.38908" start_bearing = "-66.33831" end_bearing = "-30.29934" description = "" />
-	<segment id="47633915" start="2" end="0" time = "4.417128" name = "Legmeerdijk" distance = "55.214104" turn = "Turn left" turn_angle = "-88.32711" start_bearing = "-118.62645" end_bearing = "-117.89727" description = "Turn left and go 405.37 meters" />
-	<segment id="46846777" start="6" end="0" time = "11.937655" name = "Legmeerdijk" distance = "149.22069" start_bearing = "-122.00539" end_bearing = "-120.96375" description = "" />
-	<segment id="7367235" start="0" end="1" time = "4.025795" name = "Legmeerdijk" distance = "50.322433" start_bearing = "-118.874115" end_bearing = "-118.874115" description = "" />
-	<segment id="138102016" start="0" end="8" time = "10.9339075" name = "Legmeerdijk" distance = "136.67384" start_bearing = "-151.1645" end_bearing = "-132.74542" description = "" />
-	<segment id="47633917" start="0" end="1" time = "0.7721252" name = "Legmeerdijk" distance = "13.94115" start_bearing = "-131.93352" end_bearing = "-131.93352" description = "" />
-	<segment id="7367222" start="0" end="1" time = "0.72316355" name = "Beneluxbaan" distance = "16.0703" turn = "Turn left" turn_angle = "-88.455826" start_bearing = "139.61066" end_bearing = "139.61066" description = "Turn left and go 1206.34 meters" />
-	<segment id="47633916" start="0" end="2" time = "2.7541986" name = "Beneluxbaan" distance = "38.252758" start_bearing = "136.89651" end_bearing = "127.828285" description = "" />
-	<segment id="7367220" start="0" end="3" time = "11.026784" name = "Beneluxbaan" distance = "153.14978" start_bearing = "128.73651" end_bearing = "114.601395" description = "" />
-	<segment id="46102472" start="0" end="3" time = "24.593622" name = "Beneluxbaan" distance = "341.5781" start_bearing = "116.18122" end_bearing = "112.99147" description = "" />
-	<segment id="46102471" start="0" end="5" time = "18.571714" name = "Beneluxbaan" distance = "257.9405" start_bearing = "114.35085" end_bearing = "97.36677" description = "" />
-	<segment id="7367161" start="0" end="1" time = "0.8173969" name = "Beneluxbaan" distance = "14.758555" start_bearing = "99.57423" end_bearing = "99.57423" description = "" />
-	<segment id="7367229" start="0" end="2" time = "0.9840438" name = "Beneluxbaan" distance = "17.767458" start_bearing = "100.04202" end_bearing = "100.49148" description = "" />
-	<segment id="7367228" start="0" end="1" time = "0.9037677" name = "Beneluxbaan" distance = "16.318027" start_bearing = "98.59591" end_bearing = "98.59591" description = "" />
-	<segment id="7365062" start="0" end="3" time = "25.236364" name = "Beneluxbaan" distance = "350.50507" start_bearing = "100.67635" end_bearing = "94.17711" description = "" />
-	<segment id="98511736" start="0" end="4" time = "6.976477" name = "Beneluxbaan" distance = "96.895515" turn = "Keep left" turn_angle = "-2.9582367" start_bearing = "91.21887" end_bearing = "60.488503" description = "Keep left and go 1218.78 meters" />
-	<segment id="98511727" start="0" end="2" time = "1.9999348" name = "Bovenkerkerweg" distance = "27.776873" start_bearing = "54.904182" end_bearing = "36.75929" description = "" />
+	<test regions="" description="Long route to Maastricht" best_percent="5" vehicle="car"     
+    start_lat="52.290868841722975" start_lon="4.831130504608154" target_lat="50.85492897352447" target_lon="5.701689720153809" complete_time="7043.331" complete_distance = "208488.69" routing_time = "8800"  >
+	<segment id="7366509" start="9" end="11" time = "9.088743" name = "" distance = "75.739525" turn = "Go ahead" turn_angle = "0.0" start_bearing = "115.31378" end_bearing = "115.46335" description = "Go ahead and go 75.74 meters" />
+	<segment id="47633918" start="2" end="1" time = "2.140907" name = "Noorddammerweg" distance = "26.761337" turn = "Turn right" turn_angle = "89.33931" start_bearing = "-155.19734" end_bearing = "-155.19734" description = "Turn right and go 26.76 meters" />
+	<segment id="7367247" start="2" end="0" time = "20.482542" name = "Zetterij" distance = "256.03177" turn = "Turn left" turn_angle = "-90.48619" start_bearing = "114.31647" end_bearing = "106.46359" description = "Turn left and go 761.63 meters" />
+	<segment id="7364788" start="4" end="0" time = "23.708342" name = "Zetterij" distance = "296.35428" start_bearing = "108.9465" end_bearing = "115.2737" description = "" />
+	<segment id="7364764" start="1" end="0" time = "1.6481074" name = "Zetterij" distance = "20.601343" start_bearing = "111.709885" end_bearing = "111.709885" description = "" />
+	<segment id="7364763" start="1" end="0" time = "6.9382887" name = "Zetterij" distance = "86.728615" start_bearing = "112.44515" end_bearing = "112.44515" description = "" />
+	<segment id="7364766" start="1" end="0" time = "1.1748635" name = "Zetterij" distance = "14.685793" start_bearing = "119.27525" end_bearing = "119.27525" description = "" />
+	<segment id="7364508" start="0" end="2" time = "6.2802095" name = "Zetterij" distance = "87.225136" start_bearing = "110.00669" end_bearing = "94.62415" description = "" />
+	<segment id="7365070" start="0" end="1" time = "1.0716465" name = "Bovenkerkerweg (N521) " distance = "14.883979" turn = "Turn right" turn_angle = "94.95008" start_bearing = "-170.42577" end_bearing = "-170.42577" description = "Turn right and go 58.89 meters" />
+	<segment id="7365086" start="0" end="1" time = "3.1682494" name = "Bovenkerkerweg (N521) " distance = "44.003468" start_bearing = "-172.57889" end_bearing = "-172.57889" description = "" />
+	<segment id="7365086" start="1" end="3" time = "30.227621" name = "Bovenkerkerweg (N521) " distance = "72.60584" turn = "Keep right" turn_angle = "1.9589691" start_bearing = "-170.61992" end_bearing = "-173.29016" description = "Keep right and go 110.76 meters" />
+	<segment id="7365099" start="0" end="3" time = "2.747028" name = "Bovenkerkerweg (N521) " distance = "38.15317" start_bearing = "-173.21103" end_bearing = "-177.61406" description = "" />
+	<segment id="7365062" start="6" end="7" time = "0.84723866" name = "Beneluxbaan" distance = "11.767203" turn = "Make uturn" turn_angle = "0.0" start_bearing = "97.0165" end_bearing = "97.0165" description = "Make uturn and go 1105.87 meters" />
+	<segment id="7365101" start="0" end="3" time = "2.8561046" name = "Bovenkerkerweg (N521) " distance = "39.66812" start_bearing = "10.885527" end_bearing = "11.458753" description = "" />
 	<segment id="7365085" start="0" end="1" time = "8.459829" name = "Bovenkerkerweg (N521) " distance = "117.49763" start_bearing = "6.4971123" end_bearing = "6.4971123" description = "" />
 	<segment id="7365069" start="0" end="1" time = "0.57796" name = "Bovenkerkerweg (N521) " distance = "8.027223" start_bearing = "5.3145456" end_bearing = "5.3145456" description = "" />
 	<segment id="7364510" start="0" end="1" time = "1.1475279" name = "Bovenkerkerweg (N521) " distance = "15.937888" start_bearing = "12.60016" end_bearing = "12.60016" description = "" />

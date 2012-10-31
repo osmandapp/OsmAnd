@@ -12,6 +12,7 @@
 #include "binaryRead.h"
 #include "rendering.h"
 
+
 JavaVM* globalJVM = NULL;
 void loadJniRenderingContext(JNIEnv* env);
 void loadJniRenderingRules(JNIEnv* env);
@@ -106,7 +107,8 @@ RenderingRuleSearchRequest* initSearchRequest(JNIEnv* env, jobject renderingRule
 
 extern "C" JNIEXPORT jlong JNICALL Java_net_osmand_NativeLibrary_searchNativeObjectsForRendering(JNIEnv* ienv,
 		jobject obj, jint sleft, jint sright, jint stop, jint sbottom, jint zoom,
-		jobject renderingRuleSearchRequest, bool skipDuplicates, jobject objInterrupted, jstring msgNothingFound) {
+		jobject renderingRuleSearchRequest, bool skipDuplicates, int renderRouteDataFile,
+		jobject objInterrupted, jstring msgNothingFound) {
 	RenderingRuleSearchRequest* req = initSearchRequest(ienv, renderingRuleSearchRequest);
 	jfieldID interruptedField = 0;
 	if(objInterrupted != NULL) {
@@ -120,7 +122,7 @@ extern "C" JNIEXPORT jlong JNICALL Java_net_osmand_NativeLibrary_searchNativeObj
 	q.zoom = zoom;
 
 
-	ResultPublisher* res = searchObjectsForRendering(&q, skipDuplicates, getString(ienv, msgNothingFound));
+	ResultPublisher* res = searchObjectsForRendering(&q, skipDuplicates, renderRouteDataFile, getString(ienv, msgNothingFound));
 	delete req;
 	return (jlong) j;
 }
@@ -604,7 +606,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_loadRoutingDa
 	sub.mapDataBlock= ienv->GetIntField(subreg, jfield_RouteSubregion_shiftToData);
 	std::vector<RouteDataObject*> result;
 	SearchQuery q;
-	searchRouteRegion(&q, result, &ind, &sub);
+	searchRouteDataForSubRegion(&q, result, &ind, &sub);
 
 
 	if (loadObjects) {

@@ -234,7 +234,6 @@ void renderText(MapDataObject* obj, RenderingRuleSearchRequest* req, RenderingCo
 				rc->textToDraw.push_back(info);
 			}
 		}
-
 		it++;
 	}
 

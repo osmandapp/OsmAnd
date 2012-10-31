@@ -31,6 +31,9 @@ import net.osmand.binary.OsmandOdb.CityIndex;
 import net.osmand.binary.OsmandOdb.MapData;
 import net.osmand.binary.OsmandOdb.MapDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndAddressIndex;
+import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderBox;
+import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPoint;
+import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderPointsBlock;
 import net.osmand.binary.OsmandOdb.RouteData;
 import net.osmand.binary.OsmandOdb.OsmAndAddressIndex.CitiesIndex;
 import net.osmand.binary.OsmandOdb.OsmAndAddressNameIndexData.AddressNameIndexData;
@@ -43,6 +46,7 @@ import net.osmand.binary.OsmandOdb.OsmAndPoiBoxDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndex;
 import net.osmand.binary.OsmandOdb.OsmAndPoiNameIndexDataAtom;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex;
+import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteBorderLine;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
@@ -122,6 +126,7 @@ public class BinaryMapIndexWriter {
 	
 	private final static int ROUTE_INDEX_INIT = 15;
 	private final static int ROUTE_TREE = 16;
+	private final static int ROUTE_BORDER_BOX = 17;
 
 	public BinaryMapIndexWriter(final RandomAccessFile raf) throws IOException {
 		this.raf = raf;
@@ -202,6 +207,7 @@ public class BinaryMapIndexWriter {
 			codedOutStream.writeString(OsmandOdb.OsmAndRoutingIndex.NAME_FIELD_NUMBER, name);
 		}
 	}
+	
 	
 	public void endWriteRouteIndex() throws IOException {
 		popState(ROUTE_INDEX_INIT);
@@ -310,10 +316,72 @@ public class BinaryMapIndexWriter {
 		}
 	}
 	
-	public BinaryFileReference startRouteTreeElement(int leftX, int rightX, int topY, int bottomY, boolean containsObjects) throws IOException {
+	public void startWriteRouteBorderBox(int leftX, int rightX, int topY, int bottomY, 	int zoomToSplit, boolean basemap) throws IOException {
+		pushState(ROUTE_BORDER_BOX, ROUTE_INDEX_INIT);
+		if(basemap) {
+			codedOutStream.writeTag(OsmAndRoutingIndex.BASEBORDERBOX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		} else {
+			codedOutStream.writeTag(OsmAndRoutingIndex.BORDERBOX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+		}
+		preserveInt32Size();
+		OsmandOdb.OsmAndTileBox.Builder builder = OsmandOdb.OsmAndTileBox.newBuilder();
+		builder.setLeft(leftX);
+		builder.setRight(rightX);
+		builder.setTop(topY);
+		builder.setBottom(bottomY);
+		codedOutStream.writeMessage(RouteBorderBox.BOUNDARIES_FIELD_NUMBER, builder.build());
+		codedOutStream.writeInt32(RouteBorderBox.TILEZOOMTOSPLIT_FIELD_NUMBER, zoomToSplit);
+		stackBounds.push(new Bounds(leftX, rightX, topY, bottomY));
+	}
+	
+	public BinaryFileReference writeRouteBorderLine(int fromX, int fromY, int toX, int toY) throws IOException {
+		codedOutStream.writeTag(RouteBorderBox.BORDERLINES_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+		long startMessage = getFilePointer();
+		RouteBorderLine.Builder builder = RouteBorderLine.newBuilder();
+//		Bounds p = stackBounds.peek();
+		builder.setX(fromX /*- p.leftX*/);
+		builder.setY(fromY /*- p.topY*/);
+		if (toX != -1) {
+			builder.setTox(toX /*- p.leftX*/);
+		}
+		if (toY != -1) {
+			builder.setToy(toY /*- p.topY*/);
+		}
+		builder.setShiftToPointsBlock(0);
+		codedOutStream.writeMessageNoTag(builder.build());
+		codedOutStream.flush();
+		return BinaryFileReference.createShiftReference(getFilePointer() - 4, startMessage);
+	}
+	
+	public void writeRouteBorderPointBlock(int x, int y, long baseId,  List<RouteBorderPoint> points, BinaryFileReference ref) throws IOException {
+		codedOutStream.writeTag(RouteBorderBox.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
+		codedOutStream.flush();
+		ref.writeReference(raf, getFilePointer());
+		RouteBorderPointsBlock.Builder builder = RouteBorderPointsBlock.newBuilder();
+		builder.setX(x);
+		builder.setY(y);
+		builder.setBaseId(baseId);
+		for(RouteBorderPoint p : points) {
+			builder.addPoints(p);
+		}
+		codedOutStream.writeMessageNoTag(builder.build());
+	}
+	
+	public void endWriteRouteBorderBox() throws IOException {
+		stackBounds.pop();
+		popState(ROUTE_BORDER_BOX);
+		writeInt32Size();
+	}
+	
+	public BinaryFileReference startRouteTreeElement(int leftX, int rightX, int topY, int bottomY, boolean containsObjects,
+			boolean basemap) throws IOException {
 		checkPeekState(ROUTE_TREE, ROUTE_INDEX_INIT);
 		if (state.peek() == ROUTE_INDEX_INIT) {
-			codedOutStream.writeTag(OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			if(basemap) {
+				codedOutStream.writeTag(OsmAndRoutingIndex.BASEMAPBOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			} else {
+				codedOutStream.writeTag(OsmAndRoutingIndex.ROOTBOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
+			}
 		} else {
 			codedOutStream.writeTag(RouteDataBox.BOXES_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		}
@@ -413,9 +481,7 @@ public class BinaryMapIndexWriter {
 
 	public void writeRouteDataBlock(RouteDataBlock.Builder builder, Map<String, Integer> stringTable, BinaryFileReference ref)
 			throws IOException {
-		
 		checkPeekState(ROUTE_INDEX_INIT);
-		
 		if (stringTable != null && stringTable.size() > 0) {
 			StringTable.Builder bs = OsmandOdb.StringTable.newBuilder();
 			for (String s : stringTable.keySet()) {
@@ -427,15 +493,15 @@ public class BinaryMapIndexWriter {
 			ROUTE_STRING_DATA_SIZE += CodedOutputStream.computeTagSize(OsmandOdb.MapDataBlock.STRINGTABLE_FIELD_NUMBER)
 					+ CodedOutputStream.computeRawVarint32Size(size) + size;
 		}
-		
 		codedOutStream.writeTag(OsmAndMapIndex.MapRootLevel.BLOCKS_FIELD_NUMBER, FieldType.MESSAGE.getWireType());
-		
 		codedOutStream.flush();
 		ref.writeReference(raf, getFilePointer());
 		RouteDataBlock block = builder.build();
 		ROUTE_DATA_SIZE += block.getSerializedSize();
 		codedOutStream.writeMessageNoTag(block);
 	}
+	
+	
 
 	/**
 	 * Encode and write a varint. {@code value} is treated as unsigned, so it won't be sign-extended if negative.
@@ -1100,7 +1166,7 @@ public class BinaryMapIndexWriter {
 		codedOutStream.writeMessage(OsmAndTransportIndex.STRINGTABLE_FIELD_NUMBER, st.build());
 	}
 
-	public long startWritePOIIndex(String name, int left31, int right31, int bottom31, int top31) throws IOException {
+	public long startWritePoiIndex(String name, int left31, int right31, int bottom31, int top31) throws IOException {
 		pushState(POI_INDEX_INIT, OSMAND_STRUCTURE_INIT);
 		codedOutStream.writeTag(OsmandOdb.OsmAndStructure.POIINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 		stackBounds.push(new Bounds(0, 0, 0, 0)); // for poi index tree
@@ -1118,14 +1184,14 @@ public class BinaryMapIndexWriter {
 		return startPointer;
 	}
 
-	public void endWritePOIIndex() throws IOException {
+	public void endWritePoiIndex() throws IOException {
 		popState(POI_INDEX_INIT);
 		int len = writeInt32Size();
 		stackBounds.pop();
 		log.info("POI INDEX SIZE : " + len);
 	}
 
-	public Map<String, Integer> writePOICategoriesTable(Map<String, Map<String, Integer>> categories) throws IOException {
+	public Map<String, Integer> writePoiCategoriesTable(Map<String, Map<String, Integer>> categories) throws IOException {
 		checkPeekState(POI_INDEX_INIT);
 		Map<String, Integer> catIndexes = new LinkedHashMap<String, Integer>();
 		int i = 0;
@@ -1148,7 +1214,7 @@ public class BinaryMapIndexWriter {
 		return catIndexes;
 	}
 
-	public void writePOICategories(TIntArrayList categories) throws IOException {
+	public void writePoiCategories(TIntArrayList categories) throws IOException {
 		checkPeekState(POI_BOX);
 		OsmandOdb.OsmAndPoiCategories.Builder builder = OsmandOdb.OsmAndPoiCategories.newBuilder();
 		int prev = -1;

@@ -6,24 +6,23 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
 
 import net.osmand.Algoritms;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.swing.DataExtractionSettings;
 import net.osmand.swing.NativeSwingRendering;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 
 public class JUnitRouteTest  {
 
 	static BinaryMapIndexReader[]  rs;
 	static NativeSwingRendering lib;
+	
+	
 	@Before
 	public void setupFiles() throws IOException {
 		if(rs != null){
@@ -31,7 +30,7 @@ public class JUnitRouteTest  {
 		}
 		// test without native because it is not present on the server
 //		lib = NativeSwingRendering.getDefaultFromSettings();
-		BinaryRoutePlanner.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
+		RouteResultPreparation.PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 		String obfdir = System.getenv("OBF_DIR");
 		if(Algoritms.isEmpty(obfdir)){
 			obfdir = DataExtractionSettings.getSettings().getBinaryFilesDir();

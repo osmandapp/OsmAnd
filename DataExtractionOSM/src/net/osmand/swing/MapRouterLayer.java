@@ -40,6 +40,7 @@ import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
+import net.osmand.router.BinaryRoutePlannerOld;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingConfiguration.Builder;
@@ -171,22 +172,22 @@ public class MapRouterLayer implements MapPanelLayer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Thread() {
-					@Override
-					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute, intermediates, null);
-						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>(11);
-							for (Way w : ways) {
-								LatLon n = w.getLatLon();
-								points.registerObject(n.getLatitude(), n.getLongitude(), w);
-							}
-							map.setPoints(points);
-						}
-					}
-				}.start();
+				previousRoute = null;
+				calcRoute(false);
 			}
 		};
+		menu.add(selfRoute);
+		
+		Action selfBaseRoute = new AbstractAction("Calculate OsmAnd base route") {
+			private static final long serialVersionUID = 8049785829806139142L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				previousRoute = null;
+				calcRoute(true);
+			}
+		};
+		menu.add(selfBaseRoute);
 		
 		Action recalculate = new AbstractAction("Recalculate OsmAnd route") {
 			private static final long serialVersionUID = 507156107455281238L;
@@ -199,24 +200,11 @@ public class MapRouterLayer implements MapPanelLayer {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Thread() {
-					@Override
-					public void run() {
-						List<Way> ways = selfRoute(startRoute, endRoute, intermediates,  previousRoute);
-						if (ways != null) {
-							DataTileManager<Way> points = new DataTileManager<Way>(11);
-							for (Way w : ways) {
-								LatLon n = w.getLatLon();
-								points.registerObject(n.getLatitude(), n.getLongitude(), w);
-							}
-							map.setPoints(points);
-						}
-					}
-				}.start();
+				calcRoute(false);
 			}
 		};
 		
-		menu.add(selfRoute);
+		
 		menu.add(recalculate);
 		Action route_YOURS = new AbstractAction("Calculate YOURS route") {
 			private static final long serialVersionUID = 507156107455281238L;
@@ -299,6 +287,23 @@ public class MapRouterLayer implements MapPanelLayer {
 
 	}
 	
+	
+	private void calcRoute(final boolean useBasemap) {
+		new Thread() {
+			@Override
+			public void run() {
+				List<Way> ways = selfRoute(startRoute, endRoute, intermediates, previousRoute, useBasemap);
+				if (ways != null) {
+					DataTileManager<Way> points = new DataTileManager<Way>(11);
+					for (Way w : ways) {
+						LatLon n = w.getLatLon();
+						points.registerObject(n.getLatitude(), n.getLongitude(), w);
+					}
+					map.setPoints(points);
+				}
+			}
+		}.start();
+	}
 	
 	public static List<Way> route_YOURS(LatLon start, LatLon end){
 		List<Way> res = new ArrayList<Way>();
@@ -559,7 +564,7 @@ public class MapRouterLayer implements MapPanelLayer {
 		return res;
 	}
 	
-	public List<Way> selfRoute(LatLon start, LatLon end, List<LatLon> intermediates, List<RouteSegmentResult> previousRoute) {
+	public List<Way> selfRoute(LatLon start, LatLon end, List<LatLon> intermediates, List<RouteSegmentResult> previousRoute, boolean useBasemap) {
 		List<Way> res = new ArrayList<Way>();
 		long time = System.currentTimeMillis();
 		List<File> files = new ArrayList<File>();
@@ -606,11 +611,12 @@ public class MapRouterLayer implements MapPanelLayer {
 				}
 				String m = DataExtractionSettings.getSettings().getRouteMode();
 				String[] props = m.split("\\,");
-				BinaryRoutePlanner router = new BinaryRoutePlanner();
-				RoutingConfiguration config = builder.build(props[0], RoutingConfiguration.DEFAULT_MEMORY_LIMIT / 2, props);
+				BinaryRoutePlannerOld router = new BinaryRoutePlannerOld();
+//				BinaryRoutePlanner router = new BinaryRoutePlanner();
+				RoutingConfiguration config = builder.build(props[0], RoutingConfiguration.DEFAULT_MEMORY_LIMIT, props);
 				// config.NUMBER_OF_DESIRABLE_TILES_IN_MEMORY = 300;
 				// config.ZOOM_TO_LOAD_TILES = 14;
-				RoutingContext ctx = new RoutingContext(config, NativeSwingRendering.getDefaultFromSettings(), rs);
+				RoutingContext ctx = new RoutingContext(config, NativeSwingRendering.getDefaultFromSettings(), rs, useBasemap);
 				ctx.previouslyCalculatedRoute = previousRoute;
 				log.info("Use " + config.routerName + "mode for routing");
 				
@@ -646,9 +652,10 @@ public class MapRouterLayer implements MapPanelLayer {
 					
 					private List<RouteSegment> cache = new ArrayList<RouteSegment>();
 					private List<RouteSegment> pollCache = new ArrayList<RouteSegment>();
+					private List<Integer> cacheInt = new ArrayList<Integer>();
 					
 					@Override
-					public void visitSegment(RouteSegment s, boolean poll) {
+					public void visitSegment(RouteSegment s, int  endSegment, boolean poll) {
 						if(stop) {
 							throw new RuntimeException("Interrupted");
 						}
@@ -661,32 +668,44 @@ public class MapRouterLayer implements MapPanelLayer {
 						}
 
 						cache.add(s);
+						cacheInt.add(endSegment);
 						if (cache.size() < steps) {
 							return;
 						}
 						if(pause) {
-							registerObjects(points, poll, pollCache);
+							registerObjects(points, poll, pollCache, null);
 							pollCache.clear();
 						}
-						registerObjects(points, !poll, cache);
+						registerObjects(points, !poll, cache, cacheInt);
 						cache.clear();
+						cacheInt.clear();
 						redraw();
 						if (pause) {
 							waitNextPress();
 						}
 					}
 
-					private void registerObjects(final DataTileManager<Entity> points, boolean white, 
-							List<RouteSegment> registerCache) {
-						for (RouteSegment segment : registerCache) {
+					private void registerObjects(final DataTileManager<Entity> points, boolean white, List<RouteSegment> registerCache,
+							List<Integer> cacheInt) {
+						for (int l = 0; l < registerCache.size(); l++) {
+							RouteSegment segment = registerCache.get(l);
 							Way way = new Way(-1);
 							way.putTag(OSMTagKey.NAME.getValue(), segment.getTestName());
-							if(white) {
+							if (white) {
 								way.putTag("color", "white");
 							}
-							for (int i = 0; i < segment.getRoad().getPointsLength(); i++) {
-								net.osmand.osm.Node n = createNode(segment, i);
-								way.addNode(n);
+							int from = cacheInt != null ? segment.getSegmentStart() : segment.getSegmentStart() - 2;
+							int to = cacheInt != null ? cacheInt.get(l) : segment.getSegmentStart() + 2;
+							if(from > to) {
+								int x = from;
+								from = to;
+								to = x;
+							}
+							for (int i = from; i <= to; i++) {
+								if (i >= 0 && i < segment.getRoad().getPointsLength()) {
+									net.osmand.osm.Node n = createNode(segment, i);
+									way.addNode(n);
+								}
 							}
 							LatLon n = way.getLatLon();
 							points.registerObject(n.getLatitude(), n.getLongitude(), way);

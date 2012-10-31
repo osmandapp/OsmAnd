@@ -78,8 +78,10 @@ struct BinaryPartIndex {
 };
 
 struct RoutingIndex : BinaryPartIndex {
-	UNORDERED(map)< int, tag_value > decodingRules;
+//	UNORDERED(map)< uint32_t, tag_value > decodingRules;
+	vector< tag_value > decodingRules;
 	std::vector<RouteSubregion> subregions;
+	std::vector<RouteSubregion> basesubregions;
 	RoutingIndex() : BinaryPartIndex(ROUTING_INDEX) {
 	}
 
@@ -87,6 +89,9 @@ struct RoutingIndex : BinaryPartIndex {
 		tag_value pair = tag_value(tag, val);
 		// DEFINE hash
 		//encodingRules[pair] = id;
+		while(decodingRules.size() < id + 1){
+			decodingRules.push_back(pair);
+		}
 		decodingRules[id] = pair;
 	}
 };
@@ -175,7 +180,7 @@ struct BinaryMapFile {
 	uint32_t version;
 	uint64_t dateCreated;
 	std::vector<MapIndex> mapIndexes;
-	std::vector<RoutingIndex> routingIndexes;
+	std::vector<RoutingIndex*> routingIndexes;
 	std::vector<BinaryPartIndex*> indexes;
 	int fd;
 	int routefd;
@@ -247,9 +252,9 @@ struct SearchQuery {
 	}
 };
 
-void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub);
+void searchRouteDataForSubRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub);
 
-ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, std::string msgNothingFound);
+ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, int renderRouteDataFile, std::string msgNothingFound);
 
 BinaryMapFile* initBinaryMapFile(std::string inputName);
 

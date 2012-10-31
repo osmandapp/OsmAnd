@@ -3,7 +3,7 @@ option java_package = "net.osmand.binary";
 //protoc --java_out=DataExtractionOSM/src DataExtractionOSM/src/osmand_odb.proto
 
 // C++ # cd OsmAnd
-// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=jni/osmand/proto ../DataExtractionOSM/src/osmand_odb.proto
+// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=../Osmand-kernel/osmand/src/proto/ ../DataExtractionOSM/src/osmand_odb.proto
 
 //
 //  STORAGE LAYER: Storing primitives.
@@ -508,6 +508,15 @@ message OsmAndRoutingIndex {
 	// encoded as fixed32 length delimited
 	repeated RouteDataBox rootBoxes = 3;
 
+	// encoded as fixed32 length delimited
+	repeated RouteDataBox basemapBoxes = 4;
+
+	// encoded as fixed32 length delimited
+	optional RouteBorderBox borderBox = 7;
+
+	// encoded as fixed32 length delimited
+	optional RouteBorderBox baseBorderBox = 8;
+
 	repeated RouteDataBlock blocks = 5;
 	message RouteDataBox {
 		// for root box is absolute coordinates
@@ -534,4 +543,45 @@ message OsmAndRoutingIndex {
 
 	}
 
+	message RouteBorderBox {
+		required OsmAndTileBox boundaries = 1;
+		optional uint32 tileZoomToSplit = 2;
+
+		repeated RouteBorderLine borderLines = 6;
+
+		repeated RouteBorderPointsBlock blocks = 7;
+	}
+
+	message RouteBorderLine {
+		// relative to left to boundary top/left
+		required int32 x = 1;
+		required int32 y = 2;
+		optional int32 tox = 3;
+		optional int32 toy = 4;
+		required fixed32 shiftToPointsBlock = 7 ;
+	}
+
+	message RouteBorderPointsBlock {
+		required int32 x = 1;
+		required int32 y = 2;
+		required int64 baseId = 3;
+
+		repeated RouteBorderPoint points = 5;
+
+	}
+
+	message RouteBorderPoint {
+		// related to previous point or to the parent if it is first point
+		optional int32 dx = 1;
+		optional int32 dy = 2;
+		// direction from left or top
+		optional int32 direction = 3;
+		optional bytes types = 4;
+		// delta from previous point
+		optional sint64 roadId = 7;
+
+	}
+
 }
+
+

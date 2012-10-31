@@ -6,10 +6,10 @@ package net.osmand.binary;
 public final class OsmandIndex {
   private OsmandIndex() {}
   public static void registerAllExtensions(
-      com.google.protobuf.ExtensionRegistry registry) {
+      com.google.protobuf.ExtensionRegistryLite registry) {
   }
   public static final class OsmAndStoredIndex extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use OsmAndStoredIndex.newBuilder() to construct.
     private OsmAndStoredIndex() {
       initFields();
@@ -24,17 +24,6 @@ public final class OsmandIndex {
     @Override
 	public OsmAndStoredIndex getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_OsmAndStoredIndex_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_OsmAndStoredIndex_fieldAccessorTable;
     }
     
     // required uint32 version = 1;
@@ -88,7 +77,6 @@ public final class OsmandIndex {
       if (hasDateCreated()) {
         output.writeInt64(18, getDateCreated());
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -110,7 +98,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(18, getDateCreated());
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -192,7 +179,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.OsmAndStoredIndex, Builder> {
       private net.osmand.binary.OsmandIndex.OsmAndStoredIndex result;
       
       // Construct using net.osmand.binary.OsmandIndex.OsmAndStoredIndex.newBuilder()
@@ -222,12 +210,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.OsmAndStoredIndex.getDescriptor();
       }
       
       @Override
@@ -272,16 +254,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.OsmAndStoredIndex) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.OsmAndStoredIndex)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.OsmAndStoredIndex other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.OsmAndStoredIndex other) {
         if (other == net.osmand.binary.OsmandIndex.OsmAndStoredIndex.getDefaultInstance()) return this;
         if (other.hasVersion()) {
           setVersion(other.getVersion());
@@ -295,7 +268,6 @@ public final class OsmandIndex {
           }
           result.fileIndex_.addAll(other.fileIndex_);
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -304,19 +276,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -440,7 +406,7 @@ public final class OsmandIndex {
   }
   
   public static final class FileIndex extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use FileIndex.newBuilder() to construct.
     private FileIndex() {
       initFields();
@@ -455,17 +421,6 @@ public final class OsmandIndex {
     @Override
 	public FileIndex getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_FileIndex_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_FileIndex_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -613,7 +568,6 @@ public final class OsmandIndex {
       for (net.osmand.binary.OsmandIndex.RoutingPart element : getRoutingIndexList()) {
         output.writeMessage(12, element);
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -659,7 +613,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(12, element);
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -741,7 +694,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.FileIndex, Builder> {
       private net.osmand.binary.OsmandIndex.FileIndex result;
       
       // Construct using net.osmand.binary.OsmandIndex.FileIndex.newBuilder()
@@ -771,12 +725,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.FileIndex.getDescriptor();
       }
       
       @Override
@@ -837,16 +785,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.FileIndex) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.FileIndex)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.FileIndex other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.FileIndex other) {
         if (other == net.osmand.binary.OsmandIndex.FileIndex.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -890,7 +829,6 @@ public final class OsmandIndex {
           }
           result.routingIndex_.addAll(other.routingIndex_);
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -899,19 +837,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -1310,7 +1242,7 @@ public final class OsmandIndex {
   }
   
   public static final class AddressPart extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use AddressPart.newBuilder() to construct.
     private AddressPart() {
       initFields();
@@ -1325,17 +1257,6 @@ public final class OsmandIndex {
     @Override
 	public AddressPart getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_AddressPart_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_AddressPart_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -1419,7 +1340,6 @@ public final class OsmandIndex {
       for (net.osmand.binary.OsmandIndex.CityBlock element : getCitiesList()) {
         output.writeMessage(8, element);
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -1453,7 +1373,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(8, element);
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -1535,7 +1454,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.AddressPart, Builder> {
       private net.osmand.binary.OsmandIndex.AddressPart result;
       
       // Construct using net.osmand.binary.OsmandIndex.AddressPart.newBuilder()
@@ -1565,12 +1485,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.AddressPart.getDescriptor();
       }
       
       @Override
@@ -1615,16 +1529,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.AddressPart) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.AddressPart)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.AddressPart other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.AddressPart other) {
         if (other == net.osmand.binary.OsmandIndex.AddressPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -1647,7 +1552,6 @@ public final class OsmandIndex {
           }
           result.cities_.addAll(other.cities_);
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -1656,19 +1560,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -1864,7 +1762,7 @@ public final class OsmandIndex {
   }
   
   public static final class CityBlock extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use CityBlock.newBuilder() to construct.
     private CityBlock() {
       initFields();
@@ -1879,17 +1777,6 @@ public final class OsmandIndex {
     @Override
 	public CityBlock getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_CityBlock_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_CityBlock_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -1936,7 +1823,6 @@ public final class OsmandIndex {
       if (hasType()) {
         output.writeInt32(3, getType());
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -1958,7 +1844,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, getType());
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -2040,7 +1925,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.CityBlock, Builder> {
       private net.osmand.binary.OsmandIndex.CityBlock result;
       
       // Construct using net.osmand.binary.OsmandIndex.CityBlock.newBuilder()
@@ -2070,12 +1956,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.CityBlock.getDescriptor();
       }
       
       @Override
@@ -2116,16 +1996,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.CityBlock) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.CityBlock)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.CityBlock other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.CityBlock other) {
         if (other == net.osmand.binary.OsmandIndex.CityBlock.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -2136,7 +2007,6 @@ public final class OsmandIndex {
         if (other.hasType()) {
           setType(other.getType());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -2145,19 +2015,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -2246,7 +2110,7 @@ public final class OsmandIndex {
   }
   
   public static final class PoiPart extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use PoiPart.newBuilder() to construct.
     private PoiPart() {
       initFields();
@@ -2261,17 +2125,6 @@ public final class OsmandIndex {
     @Override
 	public PoiPart getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_PoiPart_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_PoiPart_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -2361,7 +2214,6 @@ public final class OsmandIndex {
       if (hasBottom()) {
         output.writeInt32(7, getBottom());
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -2399,7 +2251,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(7, getBottom());
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -2481,7 +2332,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.PoiPart, Builder> {
       private net.osmand.binary.OsmandIndex.PoiPart result;
       
       // Construct using net.osmand.binary.OsmandIndex.PoiPart.newBuilder()
@@ -2511,12 +2363,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.PoiPart.getDescriptor();
       }
       
       @Override
@@ -2557,16 +2403,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.PoiPart) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.PoiPart)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.PoiPart other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.PoiPart other) {
         if (other == net.osmand.binary.OsmandIndex.PoiPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -2589,7 +2426,6 @@ public final class OsmandIndex {
         if (other.hasBottom()) {
           setBottom(other.getBottom());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -2598,19 +2434,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -2790,7 +2620,7 @@ public final class OsmandIndex {
   }
   
   public static final class MapLevel extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use MapLevel.newBuilder() to construct.
     private MapLevel() {
       initFields();
@@ -2805,17 +2635,6 @@ public final class OsmandIndex {
     @Override
 	public MapLevel getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_MapLevel_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_MapLevel_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -2915,7 +2734,6 @@ public final class OsmandIndex {
       if (hasMaxzoom()) {
         output.writeInt32(9, getMaxzoom());
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -2957,7 +2775,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(9, getMaxzoom());
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -3039,7 +2856,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.MapLevel, Builder> {
       private net.osmand.binary.OsmandIndex.MapLevel result;
       
       // Construct using net.osmand.binary.OsmandIndex.MapLevel.newBuilder()
@@ -3069,12 +2887,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.MapLevel.getDescriptor();
       }
       
       @Override
@@ -3115,16 +2927,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.MapLevel) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.MapLevel)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.MapLevel other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.MapLevel other) {
         if (other == net.osmand.binary.OsmandIndex.MapLevel.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -3150,7 +2953,6 @@ public final class OsmandIndex {
         if (other.hasMaxzoom()) {
           setMaxzoom(other.getMaxzoom());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -3159,19 +2961,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -3370,7 +3166,7 @@ public final class OsmandIndex {
   }
   
   public static final class MapPart extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use MapPart.newBuilder() to construct.
     private MapPart() {
       initFields();
@@ -3385,17 +3181,6 @@ public final class OsmandIndex {
     @Override
 	public MapPart getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_MapPart_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_MapPart_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -3459,7 +3244,6 @@ public final class OsmandIndex {
       for (net.osmand.binary.OsmandIndex.MapLevel element : getLevelsList()) {
         output.writeMessage(5, element);
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -3485,7 +3269,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, element);
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -3567,7 +3350,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.MapPart, Builder> {
       private net.osmand.binary.OsmandIndex.MapPart result;
       
       // Construct using net.osmand.binary.OsmandIndex.MapPart.newBuilder()
@@ -3597,12 +3381,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.MapPart.getDescriptor();
       }
       
       @Override
@@ -3647,16 +3425,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.MapPart) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.MapPart)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.MapPart other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.MapPart other) {
         if (other == net.osmand.binary.OsmandIndex.MapPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -3673,7 +3442,6 @@ public final class OsmandIndex {
           }
           result.levels_.addAll(other.levels_);
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -3682,19 +3450,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -3843,7 +3605,7 @@ public final class OsmandIndex {
   }
   
   public static final class RoutingSubregion extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use RoutingSubregion.newBuilder() to construct.
     private RoutingSubregion() {
       initFields();
@@ -3860,17 +3622,6 @@ public final class OsmandIndex {
       return defaultInstance;
     }
     
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_RoutingSubregion_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_RoutingSubregion_fieldAccessorTable;
-    }
-    
     // required int64 size = 1;
     public static final int SIZE_FIELD_NUMBER = 1;
     private boolean hasSize;
@@ -3884,6 +3635,13 @@ public final class OsmandIndex {
     private long offset_ = 0L;
     public boolean hasOffset() { return hasOffset; }
     public long getOffset() { return offset_; }
+    
+    // required bool basemap = 3;
+    public static final int BASEMAP_FIELD_NUMBER = 3;
+    private boolean hasBasemap;
+    private boolean basemap_ = false;
+    public boolean hasBasemap() { return hasBasemap; }
+    public boolean getBasemap() { return basemap_; }
     
     // required int32 left = 4;
     public static final int LEFT_FIELD_NUMBER = 4;
@@ -3926,6 +3684,7 @@ public final class OsmandIndex {
 	public final boolean isInitialized() {
       if (!hasSize) return false;
       if (!hasOffset) return false;
+      if (!hasBasemap) return false;
       if (!hasLeft) return false;
       if (!hasRight) return false;
       if (!hasTop) return false;
@@ -3944,6 +3703,9 @@ public final class OsmandIndex {
       if (hasOffset()) {
         output.writeInt64(2, getOffset());
       }
+      if (hasBasemap()) {
+        output.writeBool(3, getBasemap());
+      }
       if (hasLeft()) {
         output.writeInt32(4, getLeft());
       }
@@ -3959,7 +3721,6 @@ public final class OsmandIndex {
       if (hasShifToData()) {
         output.writeUInt32(8, getShifToData());
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -3976,6 +3737,10 @@ public final class OsmandIndex {
       if (hasOffset()) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, getOffset());
+      }
+      if (hasBasemap()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, getBasemap());
       }
       if (hasLeft()) {
         size += com.google.protobuf.CodedOutputStream
@@ -3997,7 +3762,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(8, getShifToData());
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -4079,7 +3843,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.RoutingSubregion, Builder> {
       private net.osmand.binary.OsmandIndex.RoutingSubregion result;
       
       // Construct using net.osmand.binary.OsmandIndex.RoutingSubregion.newBuilder()
@@ -4109,12 +3874,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.RoutingSubregion.getDescriptor();
       }
       
       @Override
@@ -4155,22 +3914,16 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.RoutingSubregion) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.RoutingSubregion)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.RoutingSubregion other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.RoutingSubregion other) {
         if (other == net.osmand.binary.OsmandIndex.RoutingSubregion.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
         }
         if (other.hasOffset()) {
           setOffset(other.getOffset());
+        }
+        if (other.hasBasemap()) {
+          setBasemap(other.getBasemap());
         }
         if (other.hasLeft()) {
           setLeft(other.getLeft());
@@ -4187,7 +3940,6 @@ public final class OsmandIndex {
         if (other.hasShifToData()) {
           setShifToData(other.getShifToData());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -4196,19 +3948,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -4219,6 +3965,10 @@ public final class OsmandIndex {
             }
             case 16: {
               setOffset(input.readInt64());
+              break;
+            }
+            case 24: {
+              setBasemap(input.readBool());
               break;
             }
             case 32: {
@@ -4279,6 +4029,24 @@ public final class OsmandIndex {
       public Builder clearOffset() {
         result.hasOffset = false;
         result.offset_ = 0L;
+        return this;
+      }
+      
+      // required bool basemap = 3;
+      public boolean hasBasemap() {
+        return result.hasBasemap();
+      }
+      public boolean getBasemap() {
+        return result.getBasemap();
+      }
+      public Builder setBasemap(boolean value) {
+        result.hasBasemap = true;
+        result.basemap_ = value;
+        return this;
+      }
+      public Builder clearBasemap() {
+        result.hasBasemap = false;
+        result.basemap_ = false;
         return this;
       }
       
@@ -4385,7 +4153,7 @@ public final class OsmandIndex {
   }
   
   public static final class RoutingPart extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use RoutingPart.newBuilder() to construct.
     private RoutingPart() {
       initFields();
@@ -4400,17 +4168,6 @@ public final class OsmandIndex {
     @Override
 	public RoutingPart getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_RoutingPart_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_RoutingPart_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -4474,7 +4231,6 @@ public final class OsmandIndex {
       for (net.osmand.binary.OsmandIndex.RoutingSubregion element : getSubregionsList()) {
         output.writeMessage(5, element);
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -4500,7 +4256,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, element);
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -4582,7 +4337,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.RoutingPart, Builder> {
       private net.osmand.binary.OsmandIndex.RoutingPart result;
       
       // Construct using net.osmand.binary.OsmandIndex.RoutingPart.newBuilder()
@@ -4612,12 +4368,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.RoutingPart.getDescriptor();
       }
       
       @Override
@@ -4662,16 +4412,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.RoutingPart) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.RoutingPart)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.RoutingPart other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.RoutingPart other) {
         if (other == net.osmand.binary.OsmandIndex.RoutingPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -4688,7 +4429,6 @@ public final class OsmandIndex {
           }
           result.subregions_.addAll(other.subregions_);
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -4697,19 +4437,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -4858,7 +4592,7 @@ public final class OsmandIndex {
   }
   
   public static final class TransportPart extends
-      com.google.protobuf.GeneratedMessage {
+      com.google.protobuf.GeneratedMessageLite {
     // Use TransportPart.newBuilder() to construct.
     private TransportPart() {
       initFields();
@@ -4873,17 +4607,6 @@ public final class OsmandIndex {
     @Override
 	public TransportPart getDefaultInstanceForType() {
       return defaultInstance;
-    }
-    
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return net.osmand.binary.OsmandIndex.internal_static_TransportPart_descriptor;
-    }
-    
-    @Override
-	protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return net.osmand.binary.OsmandIndex.internal_static_TransportPart_fieldAccessorTable;
     }
     
     // required int64 size = 1;
@@ -5009,7 +4732,6 @@ public final class OsmandIndex {
       if (hasStopsTableLength()) {
         output.writeUInt32(11, getStopsTableLength());
       }
-      getUnknownFields().writeTo(output);
     }
     
     private int memoizedSerializedSize = -1;
@@ -5063,7 +4785,6 @@ public final class OsmandIndex {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(11, getStopsTableLength());
       }
-      size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
@@ -5145,7 +4866,8 @@ public final class OsmandIndex {
 	public Builder toBuilder() { return newBuilder(this); }
     
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder> {
+        com.google.protobuf.GeneratedMessageLite.Builder<
+          net.osmand.binary.OsmandIndex.TransportPart, Builder> {
       private net.osmand.binary.OsmandIndex.TransportPart result;
       
       // Construct using net.osmand.binary.OsmandIndex.TransportPart.newBuilder()
@@ -5175,12 +4897,6 @@ public final class OsmandIndex {
       @Override
 	public Builder clone() {
         return create().mergeFrom(result);
-      }
-      
-      @Override
-	public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return net.osmand.binary.OsmandIndex.TransportPart.getDescriptor();
       }
       
       @Override
@@ -5221,16 +4937,7 @@ public final class OsmandIndex {
       }
       
       @Override
-	public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof net.osmand.binary.OsmandIndex.TransportPart) {
-          return mergeFrom((net.osmand.binary.OsmandIndex.TransportPart)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-      
-      public Builder mergeFrom(net.osmand.binary.OsmandIndex.TransportPart other) {
+	public Builder mergeFrom(net.osmand.binary.OsmandIndex.TransportPart other) {
         if (other == net.osmand.binary.OsmandIndex.TransportPart.getDefaultInstance()) return this;
         if (other.hasSize()) {
           setSize(other.getSize());
@@ -5265,7 +4972,6 @@ public final class OsmandIndex {
         if (other.hasStopsTableLength()) {
           setStopsTableLength(other.getStopsTableLength());
         }
-        this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
       
@@ -5274,19 +4980,13 @@ public final class OsmandIndex {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
         while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              this.setUnknownFields(unknownFields.build());
               return this;
             default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
+              if (!parseUnknownField(input, extensionRegistry, tag)) {
                 return this;
               }
               break;
@@ -5553,194 +5253,8 @@ public final class OsmandIndex {
     // @@protoc_insertion_point(class_scope:TransportPart)
   }
   
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_OsmAndStoredIndex_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_OsmAndStoredIndex_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_FileIndex_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_FileIndex_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_AddressPart_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_AddressPart_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_CityBlock_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_CityBlock_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_PoiPart_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_PoiPart_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_MapLevel_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_MapLevel_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_MapPart_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_MapPart_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_RoutingSubregion_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_RoutingSubregion_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_RoutingPart_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_RoutingPart_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_TransportPart_descriptor;
-  private static
-    com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_TransportPart_fieldAccessorTable;
   
-  public static com.google.protobuf.Descriptors.FileDescriptor
-      getDescriptor() {
-    return descriptor;
-  }
-  private static com.google.protobuf.Descriptors.FileDescriptor
-      descriptor;
   static {
-    java.lang.String[] descriptorData = {
-      "\n(DataExtractionOSM/src/osmand_index.pro" +
-      "to\"X\n\021OsmAndStoredIndex\022\017\n\007version\030\001 \002(\r" +
-      "\022\023\n\013dateCreated\030\022 \002(\003\022\035\n\tfileIndex\030\007 \003(\013" +
-      "2\n.FileIndex\"\372\001\n\tFileIndex\022\014\n\004size\030\001 \002(\003" +
-      "\022\024\n\014dateModified\030\002 \002(\003\022\020\n\010fileName\030\003 \002(\t" +
-      "\022\017\n\007version\030\004 \002(\005\022\"\n\014addressIndex\030\010 \003(\0132" +
-      "\014.AddressPart\022&\n\016transportIndex\030\t \003(\0132\016." +
-      "TransportPart\022\032\n\010poiIndex\030\n \003(\0132\010.PoiPar" +
-      "t\022\032\n\010mapIndex\030\013 \003(\0132\010.MapPart\022\"\n\014routing" +
-      "Index\030\014 \003(\0132\014.RoutingPart\"~\n\013AddressPart",
-      "\022\014\n\004size\030\001 \002(\003\022\016\n\006offset\030\002 \002(\003\022\014\n\004name\030\003" +
-      " \001(\t\022\016\n\006nameEn\030\004 \001(\t\022\027\n\017indexNameOffset\030" +
-      "\005 \001(\005\022\032\n\006cities\030\010 \003(\0132\n.CityBlock\"7\n\tCit" +
-      "yBlock\022\014\n\004size\030\001 \002(\003\022\016\n\006offset\030\002 \002(\003\022\014\n\004" +
-      "type\030\003 \002(\005\"o\n\007PoiPart\022\014\n\004size\030\001 \002(\003\022\016\n\006o" +
-      "ffset\030\002 \002(\003\022\014\n\004name\030\003 \001(\t\022\014\n\004left\030\004 \002(\005\022" +
-      "\r\n\005right\030\005 \002(\005\022\013\n\003top\030\006 \002(\005\022\016\n\006bottom\030\007 " +
-      "\002(\005\"\204\001\n\010MapLevel\022\014\n\004size\030\001 \002(\003\022\016\n\006offset" +
-      "\030\002 \002(\003\022\014\n\004left\030\004 \002(\005\022\r\n\005right\030\005 \002(\005\022\013\n\003t" +
-      "op\030\006 \002(\005\022\016\n\006bottom\030\007 \002(\005\022\017\n\007minzoom\030\010 \001(",
-      "\005\022\017\n\007maxzoom\030\t \001(\005\"P\n\007MapPart\022\014\n\004size\030\001 " +
-      "\002(\003\022\016\n\006offset\030\002 \002(\003\022\014\n\004name\030\003 \001(\t\022\031\n\006lev" +
-      "els\030\005 \003(\0132\t.MapLevel\"~\n\020RoutingSubregion" +
-      "\022\014\n\004size\030\001 \002(\003\022\016\n\006offset\030\002 \002(\003\022\014\n\004left\030\004" +
-      " \002(\005\022\r\n\005right\030\005 \002(\005\022\013\n\003top\030\006 \002(\005\022\016\n\006bott" +
-      "om\030\007 \002(\005\022\022\n\nshifToData\030\010 \002(\r\"`\n\013RoutingP" +
-      "art\022\014\n\004size\030\001 \002(\003\022\016\n\006offset\030\002 \002(\003\022\014\n\004nam" +
-      "e\030\003 \001(\t\022%\n\nsubregions\030\005 \003(\0132\021.RoutingSub" +
-      "region\"\337\001\n\rTransportPart\022\014\n\004size\030\001 \002(\003\022\016" +
-      "\n\006offset\030\002 \002(\003\022\014\n\004name\030\003 \001(\t\022\014\n\004left\030\004 \001",
-      "(\005\022\r\n\005right\030\005 \001(\005\022\013\n\003top\030\006 \001(\005\022\016\n\006bottom" +
-      "\030\007 \001(\005\022\031\n\021stringTableOffset\030\010 \001(\r\022\031\n\021str" +
-      "ingTableLength\030\t \001(\r\022\030\n\020stopsTableOffset" +
-      "\030\n \001(\r\022\030\n\020stopsTableLength\030\013 \001(\rB\023\n\021net." +
-      "osmand.binary"
-    };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        @Override
-		public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_OsmAndStoredIndex_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_OsmAndStoredIndex_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_OsmAndStoredIndex_descriptor,
-              new java.lang.String[] { "Version", "DateCreated", "FileIndex", },
-              net.osmand.binary.OsmandIndex.OsmAndStoredIndex.class,
-              net.osmand.binary.OsmandIndex.OsmAndStoredIndex.Builder.class);
-          internal_static_FileIndex_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_FileIndex_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_FileIndex_descriptor,
-              new java.lang.String[] { "Size", "DateModified", "FileName", "Version", "AddressIndex", "TransportIndex", "PoiIndex", "MapIndex", "RoutingIndex", },
-              net.osmand.binary.OsmandIndex.FileIndex.class,
-              net.osmand.binary.OsmandIndex.FileIndex.Builder.class);
-          internal_static_AddressPart_descriptor =
-            getDescriptor().getMessageTypes().get(2);
-          internal_static_AddressPart_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_AddressPart_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Name", "NameEn", "IndexNameOffset", "Cities", },
-              net.osmand.binary.OsmandIndex.AddressPart.class,
-              net.osmand.binary.OsmandIndex.AddressPart.Builder.class);
-          internal_static_CityBlock_descriptor =
-            getDescriptor().getMessageTypes().get(3);
-          internal_static_CityBlock_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_CityBlock_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Type", },
-              net.osmand.binary.OsmandIndex.CityBlock.class,
-              net.osmand.binary.OsmandIndex.CityBlock.Builder.class);
-          internal_static_PoiPart_descriptor =
-            getDescriptor().getMessageTypes().get(4);
-          internal_static_PoiPart_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_PoiPart_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Name", "Left", "Right", "Top", "Bottom", },
-              net.osmand.binary.OsmandIndex.PoiPart.class,
-              net.osmand.binary.OsmandIndex.PoiPart.Builder.class);
-          internal_static_MapLevel_descriptor =
-            getDescriptor().getMessageTypes().get(5);
-          internal_static_MapLevel_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_MapLevel_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Left", "Right", "Top", "Bottom", "Minzoom", "Maxzoom", },
-              net.osmand.binary.OsmandIndex.MapLevel.class,
-              net.osmand.binary.OsmandIndex.MapLevel.Builder.class);
-          internal_static_MapPart_descriptor =
-            getDescriptor().getMessageTypes().get(6);
-          internal_static_MapPart_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_MapPart_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Name", "Levels", },
-              net.osmand.binary.OsmandIndex.MapPart.class,
-              net.osmand.binary.OsmandIndex.MapPart.Builder.class);
-          internal_static_RoutingSubregion_descriptor =
-            getDescriptor().getMessageTypes().get(7);
-          internal_static_RoutingSubregion_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_RoutingSubregion_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Left", "Right", "Top", "Bottom", "ShifToData", },
-              net.osmand.binary.OsmandIndex.RoutingSubregion.class,
-              net.osmand.binary.OsmandIndex.RoutingSubregion.Builder.class);
-          internal_static_RoutingPart_descriptor =
-            getDescriptor().getMessageTypes().get(8);
-          internal_static_RoutingPart_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_RoutingPart_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Name", "Subregions", },
-              net.osmand.binary.OsmandIndex.RoutingPart.class,
-              net.osmand.binary.OsmandIndex.RoutingPart.Builder.class);
-          internal_static_TransportPart_descriptor =
-            getDescriptor().getMessageTypes().get(9);
-          internal_static_TransportPart_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_TransportPart_descriptor,
-              new java.lang.String[] { "Size", "Offset", "Name", "Left", "Right", "Top", "Bottom", "StringTableOffset", "StringTableLength", "StopsTableOffset", "StopsTableLength", },
-              net.osmand.binary.OsmandIndex.TransportPart.class,
-              net.osmand.binary.OsmandIndex.TransportPart.Builder.class);
-          return null;
-        }
-      };
-    com.google.protobuf.Descriptors.FileDescriptor
-      .internalBuildGeneratedFileFrom(descriptorData,
-        new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
   }
   
   public static void internalForceInit() {}

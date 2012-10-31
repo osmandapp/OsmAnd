@@ -114,6 +114,13 @@ private:
     }
 };
 
+inline float sqr(float a){
+	return a*a;
+}
+
+inline float absFloat(float a){
+	return a > 0 ? a : -a;
+}
 
 
 void fillTextProperties(TextDrawInfo* info, RenderingRuleSearchRequest* render, float cx, float cy) {
@@ -217,19 +224,7 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 	int len = p->path->countPoints();
 	SkPoint points[len];
 	p->path->getPoints(points, len);
-	if (!p->drawOnPath) {
-		// simply calculate rotation of path used for shields
-		float px = 0;
-		float py = 0;
-		for (int i = 1; i < len; i++) {
-			px += points[i].fX - points[i - 1].fX;
-			py += points[i].fY - points[i - 1].fY;
-		}
-		if (px != 0 || py != 0) {
-			p->pathRotate = atan2(py, px);
-		}
-		return true;
-	}
+
 
 	bool inverse = false;
 	float roadLength = 0;
@@ -293,66 +288,98 @@ bool calculatePathToRotate(RenderingContext* rc, TextDrawInfo* p) {
 			} while(ch);
 		}
 	}
-	// shrink path to display more text
-	if (startInd > 0 || endInd < len) {
-		// find subpath
-		SkPath* path = new SkPath;
-		for (int i = startInd; i < endInd; i++) {
-			if (i == startInd) {
-				path->moveTo(points[i].fX, points[i].fY);
-			} else {
-				path->lineTo(points[i].fX, points[i].fY);
+
+	if (!p->drawOnPath) {
+		int middle = startInd + 1 + (endInd - startInd - 1) / 2;
+
+		float px = 0;
+		float py = 0;
+		for (i = startInd; i < endInd; i++) {
+			px += points[i].fX ;
+			py += points[i].fY;
+		}
+		px /= (endInd - startInd);
+		py /= (endInd - startInd);
+		float cx = 0;
+		float cy = 0;
+		float cd = -1;
+		for (i = startInd + 1; i < endInd; i++) {
+			float fd = sqr(px - points[i].fX) + sqr(py - points[i].fY);
+			if (cd < 0 || fd < cd) {
+				cx = points[i].fX;
+				cy = points[i].fY;
+				cd = fd;
 			}
 		}
-		if (p->path != NULL) {
-			delete p->path;
-		}
-		p->path = path;
-	}
-	// calculate vector of the road (px, py) to proper rotate it
-	float px = 0;
-	float py = 0;
-	for (i = startInd + 1; i < endInd; i++) {
-		px += points[i].fX - points[i - 1].fX;
-		py += points[i].fY - points[i - 1].fY;
-	}
-	float scale = 0.5f;
-	float plen = sqrt(px * px + py * py);
-	// vector ox,oy orthogonal to px,py to measure height
-	float ox = -py;
-	float oy = px;
-	if(plen > 0) {
-		float rot = atan2(py, px);
-		if (rot < 0) rot += M_PI * 2;
-		if (rot > M_PI_2 && rot < 3 * M_PI_2) {
-			rot += M_PI;
-			inverse = true;
-			ox = -ox;
-			oy = -oy;
-		}
-		p->pathRotate = rot;
-		ox *= (p->bounds.height() / plen) / 2;
-		oy *= (p->bounds.height() / plen) / 2;
-	}
+		p->centerX = cx;
+		p->centerY = cy;
+		p->pathRotate = atan2(py, px);
+		p->vOffset += p->textSize / 2 - 1;
+		p->hOffset = 0;
+	} else {
+		// shrink path to display more text
 
-	p->centerX = points[startInd].fX + scale * px + ox;
-	p->centerY = points[startInd].fY + scale * py + oy;
-	p->vOffset += p->textSize / 2 - 1;
-	p->hOffset = 0;
-
-	if (inverse) {
-		SkPath* path = new SkPath;
-		for (int i = endInd - 1; i >= startInd; i--) {
-			if (i == (int)(endInd - 1)) {
-				path->moveTo(points[i].fX, points[i].fY);
-			} else {
-				path->lineTo(points[i].fX, points[i].fY);
+		if (startInd > 0 || endInd < len) {
+			// find subpath
+			SkPath* path = new SkPath;
+			for (int i = startInd; i < endInd; i++) {
+				if (i == startInd) {
+					path->moveTo(points[i].fX, points[i].fY);
+				} else {
+					path->lineTo(points[i].fX, points[i].fY);
+				}
 			}
+			if (p->path != NULL) {
+				delete p->path;
+			}
+			p->path = path;
 		}
-		if (p->path != NULL) {
-			delete p->path;
+		// calculate vector of the road (px, py) to proper rotate it
+		float px = 0;
+		float py = 0;
+		for (i = startInd + 1; i < endInd; i++) {
+			px += points[i].fX - points[i - 1].fX;
+			py += points[i].fY - points[i - 1].fY;
 		}
-		p->path = path;
+		float scale = 0.5f;
+		float plen = sqrt(px * px + py * py);
+		// vector ox,oy orthogonal to px,py to measure height
+		float ox = -py;
+		float oy = px;
+		if (plen > 0 ) {
+			float rot = atan2(py, px);
+			if (rot < 0)
+				rot += M_PI * 2;
+			if (rot > M_PI_2 && rot < 3 * M_PI_2) {
+				rot += M_PI;
+				inverse = true;
+				ox = -ox;
+				oy = -oy;
+			}
+			p->pathRotate = rot;
+			ox *= (p->bounds.height() / plen) / 2;
+			oy *= (p->bounds.height() / plen) / 2;
+		}
+
+		p->centerX = points[startInd].fX + scale * px + ox;
+		p->centerY = points[startInd].fY + scale * py + oy;
+		p->vOffset += p->textSize / 2 - 1;
+		p->hOffset = 0;
+
+		if (inverse) {
+			SkPath* path = new SkPath;
+			for (int i = endInd - 1; i >= startInd; i--) {
+				if (i == (int) (endInd - 1)) {
+					path->moveTo(points[i].fX, points[i].fY);
+				} else {
+					path->lineTo(points[i].fX, points[i].fY);
+				}
+			}
+			if (p->path != NULL) {
+				delete p->path;
+			}
+			p->path = path;
+		}
 	}
 	return true;
 }
@@ -372,13 +399,6 @@ void drawTestBox(SkCanvas* cv, SkRect* r, float rot, SkPaint* paintIcon, std::st
 	cv->restore();
 }
 
-inline float sqr(float a){
-	return a*a;
-}
-
-inline float absFloat(float a){
-	return a > 0 ? a : -a;
-}
 
 bool intersects(SkRect tRect, float tRot, TextDrawInfo* s)
 {
@@ -496,8 +516,7 @@ void drawTextOverCanvas(RenderingContext* rc, SkCanvas* cv) {
 
 	// 1. Sort text using text order
 	std::sort(rc->textToDraw.begin(), rc->textToDraw.end(), textOrder);
-	uint32_t size = rc->textToDraw.size();
-	for (uint32_t i = 0; i < size; i++) {
+	for (uint32_t i = 0; i < rc->textToDraw.size(); i++) {
 		TextDrawInfo* text = rc->textToDraw.at(i);
 		if (text->text.length() > 0) {
 			// sest text size before finding intersection (it is used there)
