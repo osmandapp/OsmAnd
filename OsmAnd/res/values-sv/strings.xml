@@ -766,7 +766,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="route_tsll">Sväng något vänster och gå</string>
 	<string name="route_tu">Gör U-sväng och gå</string>
 	<string name="first_time_continue">Senare</string>
-	<string name="first_time_download">Ladda regioner</string>
+	<string name="first_time_download">Ladda ner regioner</string>
 	<string name="search_poi_location">Söker efter signal…</string>
 	<string name="search_near_map">Sök i närheten av förra plats på kartan</string>
 	<string name="search_nearby">Sök i närheten</string>
@@ -774,12 +774,12 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="map_orientation_portrait">Porträtt</string>
 	<string name="map_orientation_landscape">Landskap</string>
 	<string name="map_screen_orientation">Skärmorientering</string>
-	<string name="map_screen_orientation_descr">Porträtt, landskap, eller enhet</string>
+	<string name="map_screen_orientation_descr">Porträtt, landskap eller enhet</string>
 	<string name="opening_hours_not_supported">Öppettider format stöds inte för redigering</string>
 	<string name="add_new_rule">Lägg till ny regel</string>
 	<string name="transport_Routes">Rutter</string>
 	<string name="transport_Stop">Stopp</string>
-	<string name="transport_stops">Stoppar</string>
+	<string name="transport_stops">Stopp</string>
 	<string name="transport_search_after">Efterföljande väg</string>	
 	<string name="transport_search_before">Innan vägen</string>
 	<string name="transport_finish_search">Avsluta sökning</string>
@@ -798,7 +798,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="update_poi_error_loading">Fel vid laddning av data från servern</string>
 	<string name="update_poi_no_offline_poi_index">Inga offline IP-data som finns tillgängliga för detta område</string>
 	<string name="update_poi_is_not_available_for_zoom">Uppdatering IP är inte tillgängligt för små zoomnivåer</string>
-	<string name="context_menu_item_update_poi">Uppdatera IP</string>
+	<string name="context_menu_item_update_poi">Uppdatera POI</string>
 	<string name="context_menu_item_update_map_confirm">Uppdatera lokala data via Internet?</string>
 	<string name="search_history_city">Stad:\n {0}</string>
 	<string name="search_history_street">Gata:\n {0},{1}</string>
