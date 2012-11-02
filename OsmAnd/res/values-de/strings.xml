@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
@@ -1131,6 +1131,7 @@
 <string name="tip_recent_changes_0_8_4_t">Änderungen in 0.8.4 : 
 	\n\t* Einige Fehlerbehebungen
 	\n\t* Karte behält nach Unterbrechungen Positionsbindung
+	\n\t* Hintergrunddienst wird bei Navigation aktiviert
 </string>
 <string name="context_menu_item_last_intermediate_point">Als letzten Wegpunkt setzen</string>
 <string name="context_menu_item_first_intermediate_point">Als ersten Wegpunkt setzen</string>
@@ -1149,4 +1150,5 @@
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
     <string name="enable_plugin_monitoring_services">"Positions-Logging-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Live-Tracking) zu verwenden"</string>
     <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Google Play gesucht werden?</string>
-	</resources>
+	<string name="close_changeset">Changeset schließen</string>
+</resources>
