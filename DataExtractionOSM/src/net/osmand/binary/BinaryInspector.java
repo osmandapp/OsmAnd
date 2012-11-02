@@ -407,9 +407,9 @@ public class BinaryInspector {
 					BinaryMapAddressReaderAdapter.VILLAGES_TYPE};
 			for (int j = 0; j < cityType.length; j++) {
 				int type = cityType[j];
-				for (City c : index.getCities(region, null, type)) {
-					println("\t\t" + c + " " + c.getId() + " (" + c.getStreets().size() + ")");
+				for (City c : index.getCities(region, null, type)) {				
 					index.preloadStreets(c, null);
+					println("\t\t" + c + " " + c.getId() + " (" + c.getStreets().size() + ")");
 					for (Street t : c.getStreets()) {
 						if (verbose.contains(t)) {
 							index.preloadBuildings(t, null);
