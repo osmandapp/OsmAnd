@@ -1,3 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+<string name="bidforfix_loading">S\'està carregant</string>
+    <string name="bidforfix_supporters">%1$d mecenes</string>
+	<string name="bidforfix_funded">finançat: %d%%</string>    
 </resources>
