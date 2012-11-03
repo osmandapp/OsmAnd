@@ -683,7 +683,7 @@
 <string name="data_settings_descr">Especifica llengua,baixa/recarrega dades</string>
 <string name="use_online_routing">Usa navegació en linía</string>
 <string name="save_current_track_descr">Guarda el seguiment actual a la SD ara</string>
-<string name="navigate_to">Marcar com a desti</string>
+<string name="navigate_to">Defineix com a destinació</string>
 <string name="add_to_favourite">Afegeix a Preferits</string>
 <string name="ChooseCountry">Escull pais</string>
 <string name="navigate_to_point">Marcar com a dest.</string>
@@ -967,4 +967,5 @@
     <string name="map_widget_show_destination_arrow">Mostra la direcció del desti</string>
     <string name="non_optimal_route_calculation">Calcula possibles rutes no optimes per a llargues distancies</string>
     <string name="rendering_attr_roadColors_description">Seleccioneu un esquema de color per a les carreteres:</string>
+	<string name="map_widget_monitoring_services">Serveis de registre</string>
 	</resources>
