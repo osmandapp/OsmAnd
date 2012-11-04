@@ -186,7 +186,7 @@
   <string name="use_fluorescent_overlays_descr">Gebruik helder kleure om paaie en roetes te vertoon</string>
   <string name="offline_edition">Aflyn redigering</string>
   <string name="offline_edition_descr">Gebruik altyd aflyn redigering</string>
-  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige natrekking opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nieu-stem aankondiging \"Roete herbereken \'\n t-Optiese aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "</string>
+  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige natrekking opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nuwe-stem aankondiging \"Roete herbereken \'\n t-Sigbare aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "</string>
   <string name="update_poi_does_not_change_indexes">Interessante plek veranderinge binne die toepassing raak nie afgelaaide kaart lêers nie, veranderinge word eerder in `n plaaslike lêer gestoor.</string>
   <string name="local_openstreetmap_uploading">Besig om op te laai…</string>
   <string name="local_openstreetmap_were_uploaded">{0} interessante plek / Foute is opgelaai</string>
@@ -704,8 +704,8 @@
   <string name="get_directions">Aanwysings</string>
   <string name="show_gps_status">Wys GPS status</string>
   <string name="opening_hours">Openingsure</string>
-  <string name="opening_changeset">Besig om wysiging-stel te open…</string>
-  <string name="closing_changeset">Besig om wysiging-stel te sluit…</string>
+  <string name="opening_changeset">Besig om verandering-sessie oop te maak…</string>
+  <string name="closing_changeset">Besig om verandering-sessie af te sluit…</string>
   <string name="commiting_node">Besig om node by te voeg…</string>
   <string name="loading_poi_obj">Besig om POI te laai…</string>
   <string name="auth_failed">Magtiging het misluk</string>
@@ -741,7 +741,7 @@
   <string name="data_settings_descr">Spesifiseer taal, aflaai/herlaai inligting</string>
   <string name="data_settings">Inligting</string>
   <string name="map_preferences_descr">Spesifiseer kaart-stellings: kaartbron, rotasie, merker posisie, skerm oriëntasie</string>
-  <string name="osm_settings">OSM wysiging</string>
+  <string name="osm_settings">OSM veranderings</string>
   <string name="auto_zoom_map_descr">Outo vergroot kaart volgens jou spoed</string>
   <string name="auto_zoom_map">Vergroot kaart outomaties</string>
   <string name="additional_settings">Bykomende stellings</string>
@@ -1003,5 +1003,5 @@
 	<string name="tip_app_mode_t_v2">"\tOsmAnd ondersteun verskillende (verstelbare) toepassingsprofiele vir verskillende gebruiksgevalle.
 \n\tJy kan profiele verander deur die profiel knoppie in linker onder hoek van die kaart skerm (simbool kar, fiets, of voetganger), of tydens die bou van `n roete. "</string>
 	<string name="email">e-pos</string>
-<string name="close_changeset">Sluit vernadering-sessie af</string>
+<string name="close_changeset">Sluit verandering-sessie af</string>
 	</resources>
