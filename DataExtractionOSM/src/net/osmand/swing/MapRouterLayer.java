@@ -720,9 +720,9 @@ public class MapRouterLayer implements MapPanelLayer {
 				int ey31 = e.getRoad().getPoint31YTile(e.getSegmentStart());
 				int sx31 = st.getRoad().getPoint31XTile(st.getSegmentStart());
 				int sy31 = st.getRoad().getPoint31YTile(st.getSegmentStart());
-				// FIXME
+//				 FIXME
 				RouteSegmentResult[] searchRoute = ctx.nativeLib.runNativeRouting(sx31, sy31, ex31, ey31, ctx.config);
-				/*List<RouteSegmentResult> searchRoute = */router.searchRoute(ctx, st, e, inters, false);
+//				/*List<RouteSegmentResult> searchRoute = */router.searchRoute(ctx, st, e, inters, false);
 //				this.previousRoute = searchRoute;
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);

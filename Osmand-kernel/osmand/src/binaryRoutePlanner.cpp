@@ -31,17 +31,7 @@ inline int roadPriorityComparator(float o1DistanceFromStart, float o1DistanceToE
 }
 
 
-static double convert31YToMeters(int y1, int y2) {
-	// translate into meters
-	return (y1 - y2) * 0.01863f;
-}
-
-static double convert31XToMeters(int x1, int x2) {
-	// translate into meters
-	return (x1 - x2) * 0.011f;
-}
-
-	// translate into meters
+// translate into meters
 static double squareRootDist(int x1, int y1, int x2, int y2) {
 	double dy = convert31YToMeters(y1, y2);
 	double dx = convert31XToMeters(x1, x2);
@@ -497,9 +487,53 @@ bool processIntersections(RoutingContext* ctx, SEGMENTS_QUEUE& graphSegments,
 	return false;
 }
 
-// FIXME replace with adequate method
+
 SHARED_PTR<RouteSegment> findRouteSegment(int px, int py, RoutingContext* ctx) {
-	return ctx->loadSegmentAround(px, py);
+	vector<SHARED_PTR<RouteDataObject> > dataObjects;
+	ctx->loadTileData(px, py, 16, dataObjects);
+	if (dataObjects.size() == 0) {
+		ctx->loadTileData(px, py, 14, dataObjects);
+	}
+	SHARED_PTR<RouteSegment> road;
+	double sdist = 0;
+	vector<SHARED_PTR<RouteDataObject> >::iterator it = dataObjects.begin();
+	for (; it!= dataObjects.end(); it++) {
+		SHARED_PTR<RouteDataObject> r = *it;
+		if (r->pointsX.size() > 1) {
+			for (int j = 1; j < r->pointsX.size() ; j++) {
+				double mDist = squareRootDist(r->pointsX[j -1 ], r->pointsY[j-1], r->pointsX[j], r->pointsY[j]);
+				int prx = r->pointsX[j];
+				int pry = r->pointsY[j];
+				double projection = calculateProjection31TileMetric(r->pointsX[j -1 ], r->pointsY[j-1], r->pointsX[j], r->pointsY[j],
+						px, py);
+				if (projection < 0) {
+					prx = r->pointsX[j - 1];
+					pry = r->pointsY[j - 1];
+				} else if (projection >= mDist * mDist) {
+					prx = r->pointsX[j ];
+					pry = r->pointsY[j ];
+				} else {
+					double c = projection / (mDist * mDist);
+					prx = (int) ((double)r->pointsX[j - 1] + ((double)r->pointsX[j] -  r->pointsX[j - 1]) * c);
+					pry = (int) ((double)r->pointsY[j - 1] + ((double)r->pointsY[j] -  r->pointsY[j - 1]) * c);
+				}
+				double currentsDist = squareDist31TileMetric(prx, pry, px, py);
+				if (road.get() == NULL || currentsDist < sdist) {
+					// make copy before
+					// r->pointsX.insert(j, prx);
+					// r->pointsY.insert(j, pry);
+					road = SHARED_PTR<RouteSegment>(new RouteSegment(r, j));
+					sdist = currentsDist;
+				}
+			}
+		}
+	}
+	// TODO FIX
+//	if (road.get() != null) {
+//		// re-register the best road because one more point was inserted
+//		ctx->registerRouteDataObject(road.getRoad());
+//	}
+	return road;
 }
 
  bool combineTwoSegmentResult(RouteSegmentResult& toAdd, RouteSegmentResult& previous,

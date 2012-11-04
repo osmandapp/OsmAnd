@@ -265,7 +265,7 @@ struct RoutingConfiguration {
 		return 0;
 	}
 
-// TODO
+// TODO FIX
 	float calculateTurnTime(SHARED_PTR<RouteSegment> segment, int index, SHARED_PTR<RouteSegment> next, int nextIndex) {
 		return 0;
 	}
@@ -417,8 +417,43 @@ struct RoutingContext {
 		timeToLoad.pause();
 	}
 
+	void loadTileData(int x31, int y31, int zoomAround, vector<SHARED_PTR<RouteDataObject> >& dataObjects ){
+		int t = zoomAround - config.zoomToLoad;
+		if(t <= 0) {
+			t = 1;
+		} else {
+			t = 1 << t;
+		}
+		int coordinatesShift = (1 << (31 - config.zoomToLoad));
+		UNORDERED(set)<int64_t> ids;
+		int z  = config.zoomToLoad;
+		for(int i = -t; i <= t; i++) {
+			for(int j = -t; j <= t; j++) {
+				uint32_t xloc = (x31 + i*coordinatesShift) >> (31 - z);
+				uint32_t yloc = (y31+j*coordinatesShift) >> (31 - z);
+				int64_t tileId = (xloc << z) + yloc;
+				loadHeaders(xloc, yloc);
+				vector<SHARED_PTR<RoutingSubregionTile> > subregions = indexedSubregions[tileId];
+				for(int j = 0; j<subregions.size(); j++) {
+					if(subregions[j]->isLoaded()) {
+						UNORDERED(map)<int64_t, SHARED_PTR<RouteSegment> >::iterator s = subregions[j]->routes.begin();
+						while(s != subregions[j]->routes.end()) {
+							SHARED_PTR<RouteSegment> seg = s->second;
+							if(seg.get() != NULL) {
+								if(ids.find(seg->road->id) == ids.end()) {
+									dataObjects.push_back(seg->road);
+									ids.insert(seg->road->id);
+								}
+								seg = seg->next;
+							}
+							s++;
+						}
+					}
+				}
+			}
+		}
+	}
 
-	// FIXME replace with adequate method
 	SHARED_PTR<RouteSegment> loadSegmentAround(int x31, int y31) {
 		timeToLoad.start();
 		SHARED_PTR<RouteSegment> r;

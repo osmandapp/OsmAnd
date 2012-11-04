@@ -318,4 +318,10 @@ double getTileNumberY(float zoom, double latitude);
 double getDistance(double lat1, double lon1, double lat2, double lon2);
 double getPowZoom(float zoom);
 
+double calculateProjection31TileMetric(int xA, int yA, int xB, int yB, int xC, int yC);
+double squareDist31TileMetric(int x1, int y1, int x2, int y2) ;
+double convert31YToMeters(int y1, int y2);
+double convert31XToMeters(int y1, int y2);
+
+
 #endif /*_OSMAND_COMMON_H*/
