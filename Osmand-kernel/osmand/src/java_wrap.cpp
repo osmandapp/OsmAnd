@@ -580,15 +580,33 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteRouteSearc
 	}
 	delete t;
 }
-extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_testRouting(JNIEnv* ienv,
-		jobject obj, jint sx31,
-		jint sy31, jint ex31, jint ey31) {
-	RoutingContext c;
-	c.startX = sx31;
-	c.startY = sy31;
-	c.endX = ex31;
-	c.endY = ey31;
+//p RouteSegmentResult[] nativeRouting(int[] coordinates, int[] state, String[] keyConfig, String[] valueConfig);
+extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRouting(JNIEnv* ienv,
+		jobject obj, jintArray  coordinates,
+		jintArray stateConfig, jobjectArray keyConfig, jobjectArray valueConfig) {
+
+	vector<ROUTE_TRIPLE> cfg;
+	int* data = ienv->GetIntArrayElements(stateConfig, NULL);
+	for(int k = 0; k < ienv->GetArrayLength(stateConfig); k++) {
+		ROUTE_TRIPLE t = ROUTE_TRIPLE (data[k], std::pair<string, string>(
+				getString(ienv, (jstring) ienv->GetObjectArrayElement(keyConfig, k)),
+				getString(ienv, (jstring) ienv->GetObjectArrayElement(valueConfig, k)))
+		);
+		cfg.push_back(t);
+	}
+	ienv->ReleaseIntArrayElements(stateConfig, data, 0);
+
+	RoutingConfiguration config(cfg);
+	RoutingContext c(config);
+	data = ienv->GetIntArrayElements(coordinates, NULL);
+	c.startX = data[0];
+	c.startY = data[1];
+	c.endX = data[2];
+	c.endY = data[3];
+	ienv->ReleaseIntArrayElements(coordinates, data, 0);
+
 	vector<RouteSegmentResult> r = searchRouteInternal(&c, false);
+	// convert results
 	jobjectArray res = ienv->NewObjectArray(r.size(), jclass_RouteSegmentResult, NULL);
 	for (int i = 0; i < r.size(); i++) {
 		jobject robj = convertRouteDataObjectToJava(ienv, r[i].object.get(), NULL);

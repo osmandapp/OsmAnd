@@ -160,11 +160,9 @@ void printFileInformation(const char* fileName, VerboseInfo* verbose) {
 						i, j++, rt->minZoom, rt->maxZoom, rt->length, ch);
 			}
 			if ((verbose != NULL && verbose->vmap)) {
-				// FIXME
 				//printMapDetailInfo(verbose, index);
 			}
 		} else if (it->type == TRANSPORT_INDEX) {
-			// FIXME
 //			TransportIndex ti = ((TransportIndex) p);
 //			int sh = (31 - BinaryMapIndexReader.TRANSPORT_STOP_ZOOM);
 //			println(

@@ -16,36 +16,29 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class RoutingConfiguration {
+	
+	public static final int DEFAULT_MEMORY_LIMIT = 30;
+	public Map<String, String> attributes = new LinkedHashMap<String, String>();
+
 	// 1. parameters of routing and different tweaks
 	// Influence on A* : f(x) + heuristicCoefficient*g(X)
 	public float heuristicCoefficient = 1;
 	
-	public static final int DEFAULT_MEMORY_LIMIT = 30;
-	
-
 	// 1.1 tile load parameters (should not affect routing)
 	public int ZOOM_TO_LOAD_TILES = 16;
 	public int memoryLimitation;
 
-	// 1.2 Dynamic road prioritizing (heuristic)
-	public boolean useDynamicRoadPrioritising = true;
-	public int dynamicRoadPriorityDistance = 0;
-
-	// 1.3 Relaxing strategy
-	public boolean useRelaxingStrategy = true;
-	public int ITERATIONS_TO_RELAX_NODES = 100;
-	public float RELAX_NODES_IF_START_DIST_COEF = 3;
-
-	// 1.4 Build A* graph in backward/forward direction (can affect results)
+	// 1.2 Build A* graph in backward/forward direction (can affect results)
 	// 0 - 2 ways, 1 - direct way, -1 - reverse way
 	public int planRoadDirection = 0;
 
-	// 1.5 Router specific coefficients and restrictions
+	// 1.3 Router specific coefficients and restrictions
 	public VehicleRouter router = new GeneralRouter(GeneralRouterProfile.CAR, new LinkedHashMap<String, String>());
 	public String routerName = "";
 	
-	// 1.6 Used to calculate route in movement
+	// 1.4 Used to calculate route in movement
 	public Double initialDirection;
+	
 
 
 	public static class Builder {
@@ -62,10 +55,21 @@ public class RoutingConfiguration {
 				router = defaultRouter;
 			}
 			RoutingConfiguration i = new RoutingConfiguration();
+			if (routers.containsKey(router)) {
+				i.router = routers.get(router);
+				if (specialization != null) {
+					for (String s : specialization) {
+						i.router = i.router.specialization(s);
+					}
+				}
+				i.routerName = router;
+			}
+			attributes.put("routerName", router);
+			i.attributes.putAll(attributes);
 			i.initialDirection = direction;
-			i.heuristicCoefficient = parseSilentFloat(getAttribute(router, "heuristicCoefficient"), i.heuristicCoefficient);
-			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
-			int desirable = parseSilentInt(getAttribute(router, "memoryLimitInMB"), 0);
+			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
+			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
+			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
 				i.memoryLimitation = desirable * (1 << 20); 
 			} else {
@@ -74,29 +78,15 @@ public class RoutingConfiguration {
 				}
 				i.memoryLimitation = memoryLimitMB * (1 << 20);
 			}
-			i.useDynamicRoadPrioritising = parseSilentBoolean(getAttribute(router, "useDynamicRoadPrioritising"), i.useDynamicRoadPrioritising);
-			i.useRelaxingStrategy = parseSilentBoolean(getAttribute(router, "useRelaxingStrategy"), i.useRelaxingStrategy);
-			i.dynamicRoadPriorityDistance = parseSilentInt(getAttribute(router, "dynamicRoadPriorityDistance"), i.dynamicRoadPriorityDistance);
-			i.ITERATIONS_TO_RELAX_NODES = parseSilentInt(getAttribute(router, "iterationsToRelaxRoutes"), i.ITERATIONS_TO_RELAX_NODES);
-			i.RELAX_NODES_IF_START_DIST_COEF = parseSilentFloat(getAttribute(router, "relaxNodesIfStartDistSmallCoeff"), i.RELAX_NODES_IF_START_DIST_COEF);
 			i.planRoadDirection = parseSilentInt(getAttribute(router, "planRoadDirection"), i.planRoadDirection);
 
-			if (!routers.containsKey(router)) {
-				return i;
-			}
-			i.router = routers.get(router);
-			if(specialization != null) {
-				for(String s : specialization) {
-					i.router = i.router.specialization(s);
-				}
-			}
-			i.routerName = router;
+			
 			return i;
 		}
 		
-		private String getAttribute(String router, String propertyName) {
-			if (attributes.containsKey(router + "$" + propertyName)) {
-				return attributes.get(router + "$" + propertyName);
+		private String getAttribute(VehicleRouter router, String propertyName) {
+			if (router.containsAttribute(propertyName)) {
+				return router.getAttribute(propertyName);
 			}
 			return attributes.get(propertyName);
 		}
@@ -151,15 +141,15 @@ public class RoutingConfiguration {
 				@Override
 				public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 					String name = parser.isNamespaceAware() ? localName : qName;
+					previousTag = name;
 					if("osmand_routing_config".equals(name)) {
 						config.defaultRouter = attributes.getValue("defaultProfile");
 					} else if("attribute".equals(name)) {
-						previousKey = attributes.getValue("name");
-						previousTag = name;
-						if (currentSelectedRouter != null) {
-							previousKey = currentSelectedRouter + "$" + previousKey;
+						if(currentRouter != null) {
+							currentRouter.addAttribute(attributes.getValue("name"), attributes.getValue("value"));
+						} else {
+							config.attributes.put(attributes.getValue("name"), attributes.getValue("value"));
 						}
-						config.attributes.put(previousKey, attributes.getValue("value"));
 					} else if("routingProfile".equals(name)) {
 						currentSelectedRouter = attributes.getValue("name");
 						Map<String, String> attrs = new LinkedHashMap<String, String>();
@@ -181,11 +171,11 @@ public class RoutingConfiguration {
 							if (attributes.getValue("priority") != null) {
 								currentRouter.highwayPriorities.put(k, parseSilentFloat(attributes.getValue("priority"), 0));
 							}
-							if (attributes.getValue("dynamicPriority") != null) {
-								currentRouter.highwayFuturePriorities.put(k, parseSilentFloat(attributes.getValue("dynamicPriority"), 0));
-							}
 							if (attributes.getValue("speed") != null) {
 								currentRouter.highwaySpeed.put(k, parseSilentFloat(attributes.getValue("speed"), 0));
+							}
+							if ("attribute".equals(previousTag)) {
+								currentRouter.attributes.put(k, attributes.getValue("value"));
 							}
 							if ("avoid".equals(previousTag)) {
 								float priority = parseSilentFloat(attributes.getValue("decreasedPriority"), 0);
@@ -198,23 +188,18 @@ public class RoutingConfiguration {
 						}
 
 					} else if("road".equals(name)) {
-						previousTag = name;
 						previousKey = attributes.getValue("tag") +"$" + attributes.getValue("value");
 						currentRouter.highwayPriorities.put(previousKey, parseSilentFloat(attributes.getValue("priority"), 
-								1));
-						currentRouter.highwayFuturePriorities.put(previousKey, parseSilentFloat(attributes.getValue("dynamicPriority"), 
 								1));
 						currentRouter.highwaySpeed.put(previousKey, parseSilentFloat(attributes.getValue("speed"), 
 								10));
 					} else if("obstacle".equals(name)) {
-						previousTag = name;
 						previousKey = attributes.getValue("tag") + "$" + attributes.getValue("value");
 						float penalty = parseSilentFloat(attributes.getValue("penalty"), 0);
 						currentRouter.obstacles.put(previousKey, penalty);
 						float routingPenalty = parseSilentFloat(attributes.getValue("routingPenalty"), penalty );
 						currentRouter.routingObstacles.put(previousKey, routingPenalty);
 					} else if("avoid".equals(name)) {
-						previousTag = name;
 						previousKey = attributes.getValue("tag") + "$" + attributes.getValue("value");
 						float priority = parseSilentFloat(attributes.getValue("decreasedPriority"), 
 								0);

@@ -58,13 +58,13 @@ static double squareDist(int x1, int y1, int x2, int y2) {
 }
 
 static double h(RoutingContext* ctx, float distanceToFinalPoint, SHARED_PTR<RouteSegment> next) {
-	return distanceToFinalPoint / ctx->getMaxDefaultSpeed();
+	return distanceToFinalPoint / ctx->config.getMaxDefaultSpeed();
 
 }
 static double h(RoutingContext* ctx, int targetEndX, int targetEndY,
 		int startX, int startY) {
 	double distance = squareRootDist(startX, startY, targetEndX, targetEndY);
-	return distance / ctx->getMaxDefaultSpeed();
+	return distance / ctx->config.getMaxDefaultSpeed();
 }
 
 
@@ -220,7 +220,7 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 	// avoid empty segments to connect but mark the point as visited
 	visitedSegments[nt] = SHARED_PTR<RouteSegment>();
 
-	int oneway = ctx->isOneWay(road);
+	int oneway = ctx->config.isOneWay(road);
 	bool minusAllowed;
 	bool plusAllowed;
 	if(ctx->firstRoadId == nt) {
@@ -238,11 +238,11 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 	int d = plusAllowed ? 1 : -1;
 	if(segment->parentRoute.get() != NULL) {
 		if(plusAllowed && middle < segment->road->pointsX.size() - 1) {
-			obstaclePlusTime = ctx->calculateTurnTime(segment, segment->road->pointsX.size() - 1,
+			obstaclePlusTime = ctx->config.calculateTurnTime(segment, segment->road->pointsX.size() - 1,
 					segment->parentRoute, segment->parentSegmentEnd);
 		}
 		if(minusAllowed && middle > 0) {
-			obstacleMinusTime = ctx->calculateTurnTime(segment, 0,
+			obstacleMinusTime = ctx->config.calculateTurnTime(segment, 0,
 					segment->parentRoute, segment->parentSegmentEnd);
 		}
 	}
@@ -291,14 +291,14 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 
 		// 2.1 calculate possible obstacle plus time
 		if(positive) {
-			double obstacle = ctx->defineRoutingObstacle(road, segmentEnd);
+			double obstacle = ctx->config.defineRoutingObstacle(road, segmentEnd);
 			if (obstacle < 0) {
 				plusAllowed = false;
 				continue;
 			}
 			obstaclePlusTime += obstacle;
 		} else {
-			double obstacle = ctx->defineRoutingObstacle(road, segmentEnd);
+			double obstacle = ctx->config.defineRoutingObstacle(road, segmentEnd);
 			if (obstacle < 0) {
 				minusAllowed = false;
 				continue;
@@ -324,10 +324,10 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 			// Using A* routing algorithm
 			// g(x) - calculate distance to that point and calculate time
 
-			double priority = ctx->defineSpeedPriority(road);
-			double speed = ctx->defineSpeed(road) * priority;
+			double priority = ctx->config.defineSpeedPriority(road);
+			double speed = ctx->config.defineSpeed(road) * priority;
 			if (speed == 0) {
-				speed = ctx->getMinDefaultSpeed() * priority;
+				speed = ctx->config.getMinDefaultSpeed() * priority;
 			}
 			double distOnRoadToPass = positive? posSegmentDist : negSegmentDist;
 			double distStartObstacles = segment->distanceFromStart + ( positive ? obstaclePlusTime : obstacleMinusTime) + distOnRoadToPass / speed;
@@ -353,7 +353,7 @@ bool proccessRestrictions(RoutingContext* ctx, SHARED_PTR<RouteDataObject> road,
 	if (!reverseWay && road->restrictions.size() == 0) {
 		return false;
 	}
-	if(!ctx->restrictionsAware()) {
+	if(!ctx->config.restrictionsAware()) {
 		return false;
 	}
 	while (next.get() != NULL) {
@@ -497,7 +497,7 @@ bool processIntersections(RoutingContext* ctx, SEGMENTS_QUEUE& graphSegments,
 	return false;
 }
 
-// FIXME
+// FIXME replace with adequate method
 SHARED_PTR<RouteSegment> findRouteSegment(int px, int py, RoutingContext* ctx) {
 	return ctx->loadSegmentAround(px, py);
 }

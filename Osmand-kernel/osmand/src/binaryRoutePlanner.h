@@ -3,6 +3,9 @@
 #include "common.h"
 #include "binaryRead.h"
 
+typedef UNORDERED(map)<string, float> MAP_STR_FLOAT;
+typedef UNORDERED(map)<string, string> MAP_STR_STR;
+
 static double measuredDist(int x1, int y1, int x2, int y2) {
 	return getDistance(get31LatitudeY(y1), get31LongitudeX(x1), get31LatitudeY(y2),
 			get31LongitudeX(x2));
@@ -54,7 +57,6 @@ struct FinalRouteSegment {
 
 
 
-const static int ZOOM_TO_LOAD_TILES = 16;
 struct RoutingSubregionTile {
 	RouteSubregion subregion;
 	// make it without get/set for fast access
@@ -99,9 +101,245 @@ static int64_t calcRouteId(SHARED_PTR<RouteDataObject> o, int ind) {
 	return (o->id << 10) + ind;
 }
 
+typedef std::pair<int, std::pair<string, string> > ROUTE_TRIPLE;
+struct RoutingConfiguration {
+	// 0 index in triple
+	MAP_STR_FLOAT highwaySpeed ;
+	// 1 index in triple
+	MAP_STR_FLOAT highwayPriorities ;
+	// 2 index in triple
+	MAP_STR_FLOAT avoid ;
+	// 3 index in triple
+	MAP_STR_FLOAT obstacles;
+	// 4 index in triple
+	MAP_STR_FLOAT routingObstacles;
+	// 5 index in triple
+	MAP_STR_STR attributes;
+
+	int zoomToLoad;
+	float heurCoefficient;
+	float maxDefaultSpeed;
+	float minDefaultSpeed;
+	bool restrictions;
+	bool onewayAware;
+	bool followLimitations;
+	int memoryLimitation;
+	int planRoadDirection;
+	string routerName;
+	float initialDirection;
+	string routerProfile;
+	float roundaboutTurn;
+	float leftTurn;
+	float rightTurn;
+
+	float parseFloat(string key, float def) {
+		if(attributes.find(key) != attributes.end() && attributes[key] != "") {
+			return atof(attributes[key].c_str());
+		}
+		return def;
+	}
+	bool parseBool(string key, bool def) {
+		if (attributes.find(key) != attributes.end() && attributes[key] != "") {
+			return attributes[key] == "true";
+		}
+		return def;
+	}
+
+	string parseString(string key, string def) {
+		if (attributes.find(key) != attributes.end() && attributes[key] != "") {
+			return attributes[key];
+		}
+		return def;
+	}
+	void defaultParams() {
+		planRoadDirection = (int) parseFloat("planRoadDirection", 0);
+		restrictions = parseBool("restrictionsAware", true);
+		followLimitations = parseBool("followSpeedLimitations", true);
+		onewayAware = parseBool("onewayAware", true);
+		roundaboutTurn = parseFloat("roundaboutTurn", 0);
+		leftTurn = parseFloat("leftTurn", 0);
+		rightTurn = parseFloat("rightTurn", 0);
+		minDefaultSpeed = parseFloat("minDefaultSpeed", 45) / 3.6;
+		maxDefaultSpeed = parseFloat("maxDefaultSpeed", 130) / 3.6;
+		heurCoefficient = parseFloat("heuristicCoefficient", 1);
+		memoryLimitation = (int)parseFloat("memoryLimitInMB", memoryLimitation);
+		zoomToLoad = (int)parseFloat("zoomToLoadTiles", 16);
+		routerName = parseString("name", "default");
+		routerProfile = parseString("baseProfile", "car");
+	}
+
+	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, int memLimit = 30, float initDirection = 0) :
+			memoryLimitation(memLimit), initialDirection(initDirection) {
+		for(int j = 0; j<config.size(); j++) {
+			ROUTE_TRIPLE r = config[j];
+			if(r.first == 0) {
+				highwaySpeed[r.second.first] = atof(r.second.second.c_str());
+			} else if(r.first == 1) {
+				highwayPriorities[r.second.first] = atof(r.second.second.c_str());
+			} else if(r.first == 2) {
+				avoid[r.second.first] = atof(r.second.second.c_str());
+			} else if(r.first == 3) {
+				obstacles[r.second.first] = atof(r.second.second.c_str());
+			} else if(r.first == 4) {
+				routingObstacles[r.second.first] = atof(r.second.second.c_str());
+			} else if(r.first == 5) {
+				string v = r.second.second;
+				attributes[r.second.first] = v;
+			}
+		}
+		defaultParams();
+	}
+
+	bool acceptLine(SHARED_PTR<RouteDataObject> r) {
+		std::vector<uint32_t>::iterator t = r->types.begin();
+		bool accepted = false;
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(type.first=="highway" && highwaySpeed[type.second] > 0) {
+				accepted = true;
+				break;
+			} else if(highwaySpeed[type.first + '$' + type.second] > 0) {
+				accepted = true;
+				break;
+			}
+		}
+		if(!accepted) {
+			return false;
+		}
+		t = r->types.begin();
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(avoid.find(type.first + '$' + type.second) != avoid.end()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	string getHighway(SHARED_PTR<RouteDataObject> r) {
+		std::vector<uint32_t>::iterator t = r->types.begin();
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(type.first=="highway") {
+				return type.second;
+			}
+		}
+		return "";
+	}
+
+	float defineSpeedPriority(SHARED_PTR<RouteDataObject> r) {
+		float priority = 1;
+		std::vector<uint32_t>::iterator t = r->types.begin();
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(highwayPriorities.find(type.first+"$"+type.second) != highwaySpeed.end()) {
+				priority *= highwayPriorities[type.first+"$"+type.second];
+			}
+		}
+		return priority;
+	}
+
+	float getMinDefaultSpeed() {
+		return minDefaultSpeed;
+	}
+	float getMaxDefaultSpeed() {
+		return maxDefaultSpeed;
+	}
+
+	int isOneWay(SHARED_PTR<RouteDataObject> r) {
+		if(!onewayAware){
+			return 0;
+		}
+		std::vector<uint32_t>::iterator t = r->types.begin();
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(type.first == "oneway") {
+				string v = type.second;
+				if("-1" ==v || "reverse" == v) {
+					return -1;
+				} else if("1" == v || "yes" == v) {
+					return 1;
+				}
+			}
+		}
+		return 0;
+	}
+
+// TODO
+	float calculateTurnTime(SHARED_PTR<RouteSegment> segment, int index, SHARED_PTR<RouteSegment> next, int nextIndex) {
+		return 0;
+	}
+
+	float defineRoutingObstacle(SHARED_PTR<RouteDataObject> road, int segmentEnd) {
+		if(road->pointTypes.size() <= segmentEnd) {
+			return 0;
+		}
+		std::vector<uint32_t> pointTypes = road->pointTypes[segmentEnd];
+		std::vector<uint32_t>::iterator t = pointTypes.begin();
+		for(; t != pointTypes.end(); t++) {
+			tag_value type = road->region->decodingRules[*t];
+			if(routingObstacles.find(type.first + "$" + type.second) != routingObstacles.end()) {
+				return routingObstacles[type.first + "$" + type.second];
+			}
+		}
+		t = pointTypes.begin();
+		for(; t != pointTypes.end(); t++) {
+			tag_value type = road->region->decodingRules[*t];
+			if(routingObstacles.find(type.first + "$" ) != routingObstacles.end()) {
+				return routingObstacles[type.first + "$" ];
+			}
+		}
+		return 0;
+	}
+
+	bool restrictionsAware() {
+		return restrictions;
+	}
+
+	float maxSpeed(SHARED_PTR<RouteDataObject> r) {
+		std::vector<uint32_t>::iterator t = r->types.begin();
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(type.first=="maxspeed") {
+				std::string v = type.second;
+				int i = 0;
+				while(i < v.length() && v[i] >= '0' && v[i] <= '9') {
+					i++;
+				}
+				if(i > 0) {
+					float f = atoi(v.substr(0, i).c_str());
+					f = f / 3.6;
+					if(v.find("mph") != std::string::npos ) {
+						f *= 1.6;
+					}
+					return f;
+				}
+				return 0;
+			}
+		}
+		return 0;
+	}
+
+	float defineSpeed(SHARED_PTR<RouteDataObject> r) {
+		if (followLimitations) {
+			float m = maxSpeed(r);
+			if(m > 0) {
+				return m;
+			}
+		}
+		std::vector<uint32_t>::iterator t = r->types.begin();
+		for(; t != r->types.end(); t++) {
+			tag_value type = r->region->decodingRules[*t];
+			if(highwaySpeed.find(type.first+"$"+type.second) != highwaySpeed.end()) {
+				return highwaySpeed[type.first+"$"+type.second] / 3.6;
+			}
+		}
+		return getMinDefaultSpeed();
+	}
+
+};
 
 
-// FIXME configuration methods
 struct RoutingContext {
 	int visitedSegments;
 	int loadedTiles;
@@ -109,6 +347,7 @@ struct RoutingContext {
 	ElapsedTimer timeToCalculate;
 	int firstRoadDirection;
 	int64_t firstRoadId;
+	RoutingConfiguration config;
 
 	int startX;
 	int startY;
@@ -122,25 +361,12 @@ struct RoutingContext {
 	UNORDERED(map)<int64_t, SHARED_PTR<RoutingSubregionTile> > subregionTiles;
 	UNORDERED(map)<int64_t, std::vector<SHARED_PTR<RoutingSubregionTile> > > indexedSubregions;
 
-	RoutingContext() : finalRouteSegment(), firstRoadDirection(0), loadedTiles(0), visitedSegments(0){
-	}
-	bool acceptLine(SHARED_PTR<RouteDataObject> r) {
-		string v = getHighway(r);
-		if(v != "" && v != "cycleway" && v != "footway" && v != "steps"){
-			return true;
-		}
-		return false;
+	RoutingContext(RoutingConfiguration& config) : finalRouteSegment(), firstRoadDirection(0), loadedTiles(0), visitedSegments(0),
+			config(config){
 	}
 
-	string getHighway(SHARED_PTR<RouteDataObject> r) {
-		std::vector<uint32_t>::iterator t = r->types.begin();
-		for(; t != r->types.end(); t++) {
-			tag_value type = r->region->decodingRules[*t];
-			if(type.first=="highway") {
-				return type.second;
-			}
-		}
-		return "";
+	bool acceptLine(SHARED_PTR<RouteDataObject> r) {
+		return config.acceptLine(r);
 	}
 
 	void loadHeaderObjects(int64_t tileId) {
@@ -167,7 +393,7 @@ struct RoutingContext {
 
 	void loadHeaders(uint32_t xloc, uint32_t yloc) {
 		timeToLoad.start();
-		int z  = ZOOM_TO_LOAD_TILES;
+		int z  = config.zoomToLoad;
 		int tz = 31 - z;
 		int64_t tileId = (xloc << z) + yloc;
 		if (indexedSubregions.find(tileId) == indexedSubregions.end()) {
@@ -192,12 +418,12 @@ struct RoutingContext {
 	}
 
 
-	// FIXME
+	// FIXME replace with adequate method
 	SHARED_PTR<RouteSegment> loadSegmentAround(int x31, int y31) {
 		timeToLoad.start();
 		SHARED_PTR<RouteSegment> r;
 		float dist = -1;
-		int z  = ZOOM_TO_LOAD_TILES;
+		int z  = config.zoomToLoad;
 		uint32_t xloc = x31 >> (31 - z);
 		uint32_t yloc = y31 >> (31 - z);
 		uint64_t l = (((uint64_t) x31) << 31) + (uint64_t) y31;
@@ -227,7 +453,7 @@ struct RoutingContext {
 
 	// void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub)
 	SHARED_PTR<RouteSegment> loadRouteSegment(int x31, int y31) {
-		int z  = ZOOM_TO_LOAD_TILES;
+		int z  = config.zoomToLoad;
 		int64_t xloc = x31 >> (31 - z);
 		int64_t yloc = y31 >> (31 - z);
 		uint64_t l = (((uint64_t) x31) << 31) + (uint64_t) y31;
@@ -262,157 +488,16 @@ struct RoutingContext {
 		return false;
 	}
 	float getHeuristicCoefficient(){
-		return 1;
+		return config.heurCoefficient;
 	}
 
 	bool planRouteIn2Directions() {
 		return getPlanRoadDirection() == 0;
 	}
 	int getPlanRoadDirection() {
-		return 1;
+		return config.planRoadDirection;
 	}
 
-	float defineSpeedPriority(SHARED_PTR<RouteDataObject> r) {
-		string v = getHighway(r);
-		if(v == "") {
-			return 1;
-		} else if(v == "motorway") {
-			return 1.2;
-		} else if(v == "motorway_link") {
-			return 1.2;
-		} else if(v == "trunk") {
-			return 1.2;
-		} else if(v == "trunk_link") {
-			return 1.2;
-		} else if(v == "primary") {
-			return 1.1;
-		} else if(v == "primary_link") {
-			return 1.1;
-		} else if(v == "secondary") {
-			return 1.05;
-		} else if(v == "secondary_link") {
-			return 1.05;
-		} else if(v == "tertiary") {
-			return 1;
-		} else if(v == "tertiary_link") {
-			return 1;
-		} else if(v == "unclassified") {
-			return 0.7;
-		} else if(v == "road") {
-			return 0.7;
-		} else if(v == "service") {
-			return 0.5;
-		} else if(v == "track") {
-			return 0.3;
-		} else if(v == "residential") {
-			return 0.5;
-		} else if(v == "living_street") {
-			return 0.5;
-		}
-		return 1;
-	}
-
-	float maxSpeed(SHARED_PTR<RouteDataObject> r) {
-		std::vector<uint32_t>::iterator t = r->types.begin();
-		for(; t != r->types.end(); t++) {
-			tag_value type = r->region->decodingRules[*t];
-			if(type.first=="maxspeed") {
-				std::string v = type.second;
-				int i = 0;
-				while(i < v.length() && v[i] >= '0' && v[i] <= '9') {
-					i++;
-				}
-				if(i > 0) {
-					float f = atoi(v.substr(0, i).c_str());
-					f /= 3.6; // km/h -> m/s
-					if(v.find("mph") != std::string::npos ) {
-						f *= 1.6;
-					}
-					return f;
-				}
-				return 0;
-			}
-		}
-		return 0;
-	}
-
-	float defineSpeed(SHARED_PTR<RouteDataObject> r) {
-		float speed = maxSpeed(r);
-		if(speed > 0) {
-			return speed;
-		}
-		string v = getHighway(r);
-		if(v == "") {
-		} else if(v == "motorway") {
-			speed = 110;
-		} else if(v == "motorway_link") {
-			speed = 80;
-		} else if(v == "trunk") {
-			speed = 100;
-		} else if(v == "trunk_link") {
-			speed = 75;
-		} else if(v == "primary") {
-			speed = 65;
-		} else if(v == "primary_link") {
-			speed = 50;
-		} else if(v == "secondary") {
-			speed = 60;
-		} else if(v == "secondary_link") {
-			speed = 50;
-		} else if(v == "tertiary") {
-			speed = 45;
-		} else if(v == "tertiary_link") {
-			speed = 40;
-		} else if(v == "unclassified") {
-			speed = 35;
-		} else if(v == "road") {
-			speed = 35;
-		} else if(v == "service") {
-			speed = 30;
-		} else if(v == "track") {
-			speed = 15;
-		} else if(v == "residential") {
-			speed = 35;
-		} else if(v == "living_street") {
-			speed = 25;
-		}
-		return speed / 3.;
-	}
-
-
-	float getMinDefaultSpeed(){
-		return 40 / 3.6;
-	}
-	float getMaxDefaultSpeed(){
-		return 130 / 3.6;
-	}
-
-	int isOneWay(SHARED_PTR<RouteDataObject> r) {
-		std::vector<uint32_t>::iterator t = r->types.begin();
-		for(; t != r->types.end(); t++){
-			tag_value type =  r->region->decodingRules[*t];
-			if(type.first == "oneway") {
-				string v = type.second;
-				if("-1" ==v  || "reverse" == v) {
-					return -1;
-				} else if("1" == v || "yes" == v) {
-					return 1;
-				}
-			}
-		}
-		return 0;
-	}
-
-	float calculateTurnTime(SHARED_PTR<RouteSegment> segment, int index, SHARED_PTR<RouteSegment> next, int nextIndex){
-		return 0;
-	}
-	float defineRoutingObstacle(SHARED_PTR<RouteDataObject> road, int segmentEnd) {
-		return 0;
-	}
-
-	bool restrictionsAware(){
-		return true;
-	}
 };
 
 

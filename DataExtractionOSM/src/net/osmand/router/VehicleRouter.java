@@ -27,11 +27,11 @@ public abstract class VehicleRouter {
 		return road.getHighway();
 	}
 	
+	public abstract boolean containsAttribute(String attribute);
 	
-	/**
-	 * Used for algorithm to multiply h(x) part A* based on current road
-	 */
-	public abstract float getFutureRoadPriority(RouteDataObject road);
+	public abstract String getAttribute(String attribute);
+	
+	
 
 	/**
 	 * return delay in seconds
