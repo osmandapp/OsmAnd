@@ -173,7 +173,9 @@
 			<filter tag="aerialway" value="" order="68"/>
 			<filter tag="power" value="line" order="68"/>
 			<filter tag="power" value="minor_line" order="68"/>
+
 			<filter layer="1" tag="railway" value="" order="66"/>
+			<filter appMode="car" tag="railway" value="" order="36"/>
 			<filter tag="railway" value="" order="58"/>
 			<filter tag="public_transport" value="" order="58"/>
 			
