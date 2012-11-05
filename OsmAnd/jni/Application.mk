@@ -18,5 +18,6 @@ endif
 
 ifndef OSMAND_DEBUG_NATIVE
 # Force release compilation in release optimizations, even if application is debuggable by manifest
-APP_OPTIM := release
+#APP_OPTIM := release
+APP_OPTIM := debug
 endif

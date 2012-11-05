@@ -2,6 +2,7 @@
 #define _OSMAND_BINARY_ROUTE_PLANNER_H
 #include "common.h"
 #include "binaryRead.h"
+#include <algorithm>
 
 typedef UNORDERED(map)<string, float> MAP_STR_FLOAT;
 typedef UNORDERED(map)<string, string> MAP_STR_STR;
@@ -76,7 +77,17 @@ struct RoutingSubregionTile {
 	}
 
 	void setLoaded(){
-		loaded++;
+		loaded = abs(loaded) + 1;
+	}
+
+	void unload(){
+		routes.clear();
+		size = 0;
+		loaded = - abs(loaded);
+	}
+
+	int getUnloadCount() {
+		return abs(loaded);
 	}
 
 	int getSize(){
@@ -170,14 +181,15 @@ struct RoutingConfiguration {
 		minDefaultSpeed = parseFloat("minDefaultSpeed", 45) / 3.6;
 		maxDefaultSpeed = parseFloat("maxDefaultSpeed", 130) / 3.6;
 		heurCoefficient = parseFloat("heuristicCoefficient", 1);
-		memoryLimitation = (int)parseFloat("memoryLimitInMB", memoryLimitation);
+		// don't use file limitations?
+		memoryLimitation = (int)parseFloat("nativeMemoryLimitInMB", memoryLimitation);
 		zoomToLoad = (int)parseFloat("zoomToLoadTiles", 16);
 		routerName = parseString("name", "default");
 		routerProfile = parseString("baseProfile", "car");
 		distanceRecalculate = parseFloat("recalculateDistanceHelp", 10000) ;
 	}
 
-	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, float initDirection = -360, int memLimit = 30) :
+	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, float initDirection = -360, int memLimit = 100) :
 			memoryLimitation(memLimit), initialDirection(initDirection) {
 		for(int j = 0; j<config.size(); j++) {
 			ROUTE_TRIPLE r = config[j];
@@ -348,6 +360,8 @@ struct RoutingConfiguration {
 
 };
 
+bool compareRoutingSubregionTile(SHARED_PTR<RoutingSubregionTile> o1, SHARED_PTR<RoutingSubregionTile> o2);
+
 
 struct RoutingContext {
 	typedef UNORDERED(map)<int64_t, SHARED_PTR<RoutingSubregionTile> > MAP_SUBREGION_TILES;
@@ -359,6 +373,8 @@ struct RoutingContext {
 	int firstRoadDirection;
 	int64_t firstRoadId;
 	RoutingConfiguration config;
+
+	int gcCollectIterations;
 
 	int startX;
 	int startY;
@@ -390,8 +406,52 @@ struct RoutingContext {
 		return sz;
 	}
 
+	void unloadUnusedTiles(int memoryLimit) {
+		int sz = getSize();
+		float critical = 0.9f * memoryLimit * 1024 * 1024;
+		if(sz < critical) {
+			return;
+		}
+		float occupiedBefore = sz / (1024. * 1024.);
+		float desirableSize = memoryLimit * 0.7f * 1024 * 1024;
+		vector<SHARED_PTR<RoutingSubregionTile> > list;
+		MAP_SUBREGION_TILES::iterator it = subregionTiles.begin();
+		int loaded = 0;
+		int unloadedTiles = 0;
+		for(;it != subregionTiles.end(); it++) {
+			if(it->second->isLoaded()) {
+				list.push_back(it->second);
+				loaded++;
+			}
+		}
+		sort(list.begin(), list.end(), compareRoutingSubregionTile);
+		int i =0;
+		while(sz >= desirableSize && i < list.size()) {
+			SHARED_PTR<RoutingSubregionTile> unload = list[i];
+			i++;
+			sz -= unload->getSize();
+			unload->unload();
+			unloadedTiles ++;
+		}
+		for(i = 0; i<list.size(); i++) {
+			list[i]->access /= 3;
+		}
+		osmand_log_print(LOG_DEBUG, "Run GC (before %f Mb after %f Mb) unload %d of %d tiles",
+				occupiedBefore, getSize() / (1024.0*1024.0),
+				unloadedTiles, loaded);
+	}
+
 	void loadHeaderObjects(int64_t tileId) {
 		vector<SHARED_PTR<RoutingSubregionTile> > subregions = indexedSubregions[tileId];
+		bool gc = false;
+		for(int j = 0; j<subregions.size() && !gc; j++) {
+			if(!subregions[j]->isLoaded()) {
+				gc = true;
+			}
+		}
+		if(gc) {
+			unloadUnusedTiles(config.memoryLimitation);
+		}
 		for(int j = 0; j<subregions.size(); j++) {
 			if(!subregions[j]->isLoaded()) {
 				loadedTiles++;

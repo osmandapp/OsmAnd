@@ -1,6 +1,5 @@
 #include "common.h"
 #include <queue>
-#include <algorithm>
 #include "binaryRead.h"
 #include "binaryRoutePlanner.h"
 #include <functional>
@@ -670,4 +669,8 @@ vector<RouteSegmentResult> searchRouteInternal(RoutingContext* ctx, bool leftSid
 	return res;
 }
 
-
+bool compareRoutingSubregionTile(SHARED_PTR<RoutingSubregionTile> o1, SHARED_PTR<RoutingSubregionTile> o2){
+	int v1 = (o1->access + 1) * pow((float)10, o1->getUnloadCount() -1);
+	int v2 = (o2->access + 1) * pow((float)10, o2->getUnloadCount() -1);
+	return v1 < v2 ;
+}

@@ -360,6 +360,8 @@ public class RouteProvider {
 				memoryLimit, specialization);
 		if(!params.optimal){
 			cf.heuristicCoefficient *= 1.5;
+			// native use
+			cf.attributes.put("heuristicCoefficient", cf.heuristicCoefficient+"");
 		}
 		RoutingContext ctx = new RoutingContext(cf, NativeOsmandLibrary.getLoadedLibrary(), files);
 		ctx.interruptable = params.interruptable;
