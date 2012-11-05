@@ -5,12 +5,15 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 
 import net.osmand.LogUtil;
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
@@ -73,9 +76,9 @@ public class BinaryRoutePlannerOld {
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
-		ctx.loadTileData(px, py, 16, dataObjects);
+		ctx.loadTileData(px, py, 17, dataObjects);
 		if (dataObjects.isEmpty()) {
-			ctx.loadTileData(px, py, 14, dataObjects);
+			ctx.loadTileData(px, py, 15, dataObjects);
 		}
 		RouteSegment road = null;
 		double sdist = 0;
@@ -201,17 +204,31 @@ public class BinaryRoutePlannerOld {
 	
 	
 	private List<RouteSegmentResult> searchRouteInternalPrepare(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
-		// Split into 2 methods to let GC work in between
-		searchRouteInternal(ctx, start, end, leftSideNavigation);
-		// 4. Route is found : collect all segments and prepare result
-		return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment, leftSideNavigation);
+		if (ctx.nativeLib != null) {
+			int ex31 = end.getRoad().getPoint31XTile(end.getSegmentStart());
+			int ey31 = end.getRoad().getPoint31YTile(end.getSegmentStart());
+			int sx31 = start.getRoad().getPoint31XTile(start.getSegmentStart());
+			int sy31 = start.getRoad().getPoint31YTile(start.getSegmentStart());
+			RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
+			RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(sx31, sy31, ex31, ey31, ctx.config, regions);
+			ArrayList<RouteSegmentResult> result = new ArrayList<RouteSegmentResult>(Arrays.asList(res));
+			
+			return new RouteResultPreparation().prepareResult(ctx, leftSideNavigation, result);
+		} else {
+			// Split into 2 methods to let GC work in between
+			searchRouteInternal(ctx, start, end);
+			// 4. Route is found : collect all segments and prepare result
+			return new RouteResultPreparation().prepareResult(ctx, ctx.finalRouteSegment, leftSideNavigation);
+		}
+
+		
 	}
 	
 	/**
 	 * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
 	 * return list of segments
 	 */
-	private void searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end, boolean leftSideNavigation) throws IOException, InterruptedException {
+	private void searchRouteInternal(final RoutingContext ctx, RouteSegment start, RouteSegment end) throws IOException, InterruptedException {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
@@ -250,12 +267,12 @@ public class BinaryRoutePlannerOld {
 		TLongObjectHashMap<RouteSegment> visitedDirectSegments = new TLongObjectHashMap<RouteSegment>();
 		TLongObjectHashMap<RouteSegment> visitedOppositeSegments = new TLongObjectHashMap<RouteSegment>();
 		
-		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0;
+				boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
+				&& ctx.config.recalculateDistance != 0;
 		if (runRecalculation) {
 			RouteSegment previous = null;
 			List<RouteSegmentResult> rlist = new ArrayList<RouteSegmentResult>();
-			// always recalculate first 7 km
-			int distanceThreshold = 7000;
+			float distanceThreshold = ctx.config.recalculateDistance;
 			float threshold = 0;
 			for(RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
 				threshold += rr.getDistance();
@@ -340,11 +357,6 @@ public class BinaryRoutePlannerOld {
 			} else {
 				graphSegments = graphDirectSegments;
 			}
-
-			if(ctx.runRelaxingStrategy() ) {
-				relaxNotNeededSegments(ctx, graphDirectSegments, true);
-				relaxNotNeededSegments(ctx, graphReverseSegments, false);
-			}
 			// check if interrupted
 			if(ctx.interruptable != null && ctx.interruptable.isCancelled()) {
 				throw new InterruptedException("Route calculation interrupted");
@@ -356,35 +368,6 @@ public class BinaryRoutePlannerOld {
 	
 	
 
-	private void relaxNotNeededSegments(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments, boolean inverse) {
-		RouteSegment next = graphSegments.peek();
-		double mine = next.distanceToEnd;
-//		int before = graphSegments.size();
-//		SegmentStat statStart = new SegmentStat("Distance from start (" + inverse + ") ");
-//		SegmentStat statEnd = new SegmentStat("Distance to end (" + inverse + ") ");
-		Iterator<RouteSegment> iterator = graphSegments.iterator();
-		while (iterator.hasNext()) {
-			RouteSegment s = iterator.next();
-//			statStart.addNumber((float) s.distanceFromStart);
-//			statEnd.addNumber((float) s.distanceToEnd);
-			if (s.distanceToEnd < mine) {
-				mine = s.distanceToEnd;
-			}
-		}
-		double d = mine * ctx.config.RELAX_NODES_IF_START_DIST_COEF;
-		iterator = graphSegments.iterator();
-		while (iterator.hasNext()) {
-			RouteSegment s = iterator.next();
-			if (s.distanceToEnd > d) {
-				ctx.relaxedSegments++;
-				iterator.remove();
-			}
-		}
-//		int after = graphSegments.size();
-//		println(statStart.toString());
-//		println(statEnd.toString());
-//		println("Relaxing : before " + before + " after " + after + " minend " + ((float) mine));
-	}
 
 	private double h(final RoutingContext ctx, int targetEndX, int targetEndY,
 			int startX, int startY) {
@@ -394,16 +377,6 @@ public class BinaryRoutePlannerOld {
 	
 	protected static double h(RoutingContext ctx, double distToFinalPoint, RouteSegment next) {
 		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
-		if(ctx.isUseDynamicRoadPrioritising() && next != null){
-			double priority = ctx.getRouter().getFutureRoadPriority(next.road);
-			result /= priority;
-			int dist = ctx.getDynamicRoadPriorityDistance();
-			// only first N km-s count by dynamic priority
-			if(distToFinalPoint > dist && dist != 0){
-				result = (distToFinalPoint - dist) / ctx.getRouter().getMaxDefaultSpeed() + 
-						dist / (ctx.getRouter().getMaxDefaultSpeed() * priority);
-			}
-		}
 		return result; 
 	}
 	

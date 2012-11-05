@@ -422,6 +422,7 @@ public class IndexRouteCreator extends AbstractIndexPartCreator {
 					routeTree, false);
 			TLongObjectHashMap<BinaryFileReference> base = writeBinaryRouteIndexHeader(writer,  
 					baserouteTree, true);
+			// FIXME borders should not be committed in master branch
 //			writeBorderBox(writer, routeBorders);
 //			writeBorderBox(writer, baseRouteBorders);
 			

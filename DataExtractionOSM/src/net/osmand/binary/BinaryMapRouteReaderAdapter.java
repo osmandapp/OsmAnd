@@ -845,7 +845,7 @@ public class BinaryMapRouteReaderAdapter {
 				RouteBorderLine ln = readBorderLine();
 				if(ln.hasTox() && req.intersects(ln.getX(), ln.getY(), ln.getTox(), ln.getY())) {
 					blocksToRead.add(ln.getShiftToPointsBlock() + fp);
-					// FIXME
+					// FIXME borders approach
 //				} else if(ln.hasToy() && req.intersects(ln.getX(), ln.getY(), ln.getX(), ln.getToy())) {
 //					blocksToRead.add(ln.getShiftToPointsBlock() + fp);
 				} 

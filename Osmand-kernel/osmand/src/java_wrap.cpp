@@ -410,17 +410,25 @@ jfieldID jfield_RouteSubregion_top = NULL;
 jfieldID jfield_RouteSubregion_bottom = NULL;
 jfieldID jfield_RouteSubregion_shiftToData = NULL;
 
+jclass jclass_RouteRegion = NULL;
+jfieldID jfield_RouteRegion_length = NULL;
+jfieldID jfield_RouteRegion_filePointer= NULL;
 
 jclass jclass_RouteSegmentResult = NULL;
+jclass jclass_RouteSegmentResultAr = NULL;
 jmethodID jmethod_RouteSegmentResult_ctor = NULL;
+jfieldID jfield_RouteSegmentResult_preAttachedRoutes = NULL;
 
 
 
 void loadJniRenderingContext(JNIEnv* env)
 {
 	jclass_RouteSegmentResult = findClass(env, "net/osmand/router/RouteSegmentResult");
+	jclass_RouteSegmentResultAr = findClass(env, "[Lnet/osmand/router/RouteSegmentResult;");
 	jmethod_RouteSegmentResult_ctor = env->GetMethodID(jclass_RouteSegmentResult,
 			"<init>", "(Lnet/osmand/binary/RouteDataObject;II)V");
+	jfield_RouteSegmentResult_preAttachedRoutes = getFid(env, jclass_RouteSegmentResult, "preAttachedRoutes",
+			"[[Lnet/osmand/router/RouteSegmentResult;");
 
 	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
 	jfield_RenderingContext_interrupted = getFid(env, jclass_RenderingContext, "interrupted", "Z");
@@ -466,6 +474,10 @@ void loadJniRenderingContext(JNIEnv* env)
     jfield_RouteDataObject_id = getFid(env,  jclass_RouteDataObject, "id", "J" );
     jmethod_RouteDataObject_init = env->GetMethodID(jclass_RouteDataObject, "<init>", "(Lnet/osmand/binary/BinaryMapRouteReaderAdapter$RouteRegion;[I[Ljava/lang/String;)V");
 
+
+    jclass_RouteRegion = findClass(env, "net/osmand/binary/BinaryMapRouteReaderAdapter$RouteRegion");
+    jfield_RouteRegion_length= getFid(env,  jclass_RouteRegion, "length", "I" );
+    jfield_RouteRegion_filePointer= getFid(env,  jclass_RouteRegion, "filePointer", "I" );
 
     jclass_RouteSubregion = findClass(env, "net/osmand/binary/BinaryMapRouteReaderAdapter$RouteSubregion");
     jfield_RouteSubregion_length= getFid(env,  jclass_RouteSubregion, "length", "I" );
@@ -563,6 +575,38 @@ jobject convertRouteDataObjectToJava(JNIEnv* ienv, RouteDataObject* route, jobje
 	return robj;
 }
 
+jobject convertRouteSegmentResultToJava(JNIEnv* ienv, RouteSegmentResult& r, UNORDERED(map)<int64_t, int>& indexes,
+		jobjectArray regions) {
+	RouteDataObject* rdo = r.object.get();
+	jobject reg = NULL;
+	int64_t fp = rdo->region->filePointer;
+	int64_t ln = rdo->region->length;
+	if(indexes.find((fp <<31) + ln) != indexes.end()) {
+		reg = ienv->GetObjectArrayElement(regions, indexes[(fp <<31) + ln]);
+	}
+	jobjectArray ar = ienv->NewObjectArray(r.attachedRoutes.size(), jclass_RouteSegmentResultAr, NULL);
+	for(jsize k = 0; k < r.attachedRoutes.size(); k++) {
+		jobjectArray art = ienv->NewObjectArray(r.attachedRoutes[k].size(), jclass_RouteSegmentResult, NULL);
+		for(jsize kj = 0; kj < r.attachedRoutes[k].size(); kj++) {
+			jobject jo = convertRouteSegmentResultToJava(ienv, r.attachedRoutes[k][kj], indexes, regions);
+			ienv->SetObjectArrayElement(art, kj, jo);
+			ienv->DeleteLocalRef(jo);
+		}
+		ienv->SetObjectArrayElement(ar, k, art);
+		ienv->DeleteLocalRef(art);
+	}
+	jobject robj = convertRouteDataObjectToJava(ienv, rdo, reg);
+	jobject resobj = ienv->NewObject(jclass_RouteSegmentResult, jmethod_RouteSegmentResult_ctor, robj,
+			r.startPointIndex, r.endPointIndex);
+	ienv->SetObjectField(resobj, jfield_RouteSegmentResult_preAttachedRoutes, ar);
+	if(reg != NULL) {
+		ienv->DeleteLocalRef(reg);
+	}
+	ienv->DeleteLocalRef(robj);
+	ienv->DeleteLocalRef(ar);
+	return resobj;
+}
+
 class NativeRoutingTile {
 public:
 	std::vector<RouteDataObject*> result;
@@ -583,20 +627,25 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteRouteSearc
 //p RouteSegmentResult[] nativeRouting(int[] coordinates, int[] state, String[] keyConfig, String[] valueConfig);
 extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRouting(JNIEnv* ienv,
 		jobject obj, jintArray  coordinates,
-		jintArray stateConfig, jobjectArray keyConfig, jobjectArray valueConfig) {
+		jintArray stateConfig, jobjectArray keyConfig, jobjectArray valueConfig, jfloat initDirection,
+		jobjectArray regions) {
 
 	vector<ROUTE_TRIPLE> cfg;
 	int* data = ienv->GetIntArrayElements(stateConfig, NULL);
 	for(int k = 0; k < ienv->GetArrayLength(stateConfig); k++) {
+		jstring kl = (jstring)ienv->GetObjectArrayElement(keyConfig, k);
+		jstring vl = (jstring)ienv->GetObjectArrayElement(valueConfig, k);
 		ROUTE_TRIPLE t = ROUTE_TRIPLE (data[k], std::pair<string, string>(
-				getString(ienv, (jstring) ienv->GetObjectArrayElement(keyConfig, k)),
-				getString(ienv, (jstring) ienv->GetObjectArrayElement(valueConfig, k)))
+				getString(ienv, kl),
+				getString(ienv, vl))
 		);
+		ienv->DeleteLocalRef(kl);
+		ienv->DeleteLocalRef(vl);
 		cfg.push_back(t);
 	}
 	ienv->ReleaseIntArrayElements(stateConfig, data, 0);
 
-	RoutingConfiguration config(cfg);
+	RoutingConfiguration config(cfg, initDirection);
 	RoutingContext c(config);
 	data = ienv->GetIntArrayElements(coordinates, NULL);
 	c.startX = data[0];
@@ -606,16 +655,21 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRo
 	ienv->ReleaseIntArrayElements(coordinates, data, 0);
 
 	vector<RouteSegmentResult> r = searchRouteInternal(&c, false);
+	UNORDERED(map)<int64_t, int> indexes;
+	for (int t = 0; t< ienv->GetArrayLength(regions); t++) {
+		jobject oreg = ienv->GetObjectArrayElement(regions, t);
+		int64_t fp = ienv->GetIntField(oreg, jfield_RouteRegion_filePointer);
+		int64_t ln = ienv->GetIntField(oreg, jfield_RouteRegion_length);
+		ienv->DeleteLocalRef(oreg);
+		indexes[(fp <<31) + ln] = t;
+	}
+
 	// convert results
 	jobjectArray res = ienv->NewObjectArray(r.size(), jclass_RouteSegmentResult, NULL);
 	for (int i = 0; i < r.size(); i++) {
-		jobject robj = convertRouteDataObjectToJava(ienv, r[i].object.get(), NULL);
-		jobject resobj = ienv->NewObject(jclass_RouteSegmentResult, jmethod_RouteSegmentResult_ctor, robj,
-				r[i].startPointIndex, r[i].endPointIndex);
+		jobject resobj = convertRouteSegmentResultToJava(ienv, r[i], indexes, regions);
 		ienv->SetObjectArrayElement(res, i, resobj);
-		ienv->DeleteLocalRef(robj);
 		ienv->DeleteLocalRef(resobj);
-
 	}
 	if (r.size() == 0) {
 		osmand_log_print(LOG_INFO, "No route found");

@@ -54,7 +54,6 @@ public class RoutingContext {
 	public final Map<RouteRegion, BinaryMapIndexReader> reverseMap = new LinkedHashMap<RouteRegion, BinaryMapIndexReader>();
 	
 	// 1. Initial variables
-	private int relaxingIteration = 0;
 	public long firstRoadId = 0;
 	public int firstRoadDirection = 0;
 	
@@ -179,40 +178,9 @@ public class RoutingContext {
 		return global.size;
 	}
 	
-	public boolean runRelaxingStrategy(){
-		if(!isUseRelaxingStrategy()){
-			return false;
-		}
-		relaxingIteration++;
-		if(relaxingIteration > config.ITERATIONS_TO_RELAX_NODES){
-			relaxingIteration = 0;
-			return true;
-		}
-		return false;
-	}
 	
 	public void setVisitor(RouteSegmentVisitor visitor) {
 		this.visitor = visitor;
-	}
-
-	public boolean isUseDynamicRoadPrioritising() {
-		return config.useDynamicRoadPrioritising;
-	}
-	
-	public int getDynamicRoadPriorityDistance() {
-		return config.dynamicRoadPriorityDistance;
-	}
-
-	public boolean isUseRelaxingStrategy() {
-		return config.useRelaxingStrategy;
-	}
-	
-	public void setUseRelaxingStrategy(boolean useRelaxingStrategy) {
-		config.useRelaxingStrategy = useRelaxingStrategy;
-	}
-	
-	public void setUseDynamicRoadPrioritising(boolean useDynamicRoadPrioritising) {
-		config.useDynamicRoadPrioritising = useDynamicRoadPrioritising;
 	}
 
 	public void setRouter(VehicleRouter router) {
@@ -350,7 +318,7 @@ public class RoutingContext {
 		borderLineCoordinates = new int[borderLines.length];
 		for(int i=0; i<borderLineCoordinates.length; i++) {
 			borderLineCoordinates[i] = borderLines[i].borderLine;
-			// FIXME
+			// FIXME borders approach
 			// not less then 14th zoom
 			if(i > 0 && borderLineCoordinates[i - 1] >> 17 == borderLineCoordinates[i] >> 17) {
 				throw new IllegalStateException();
@@ -517,13 +485,15 @@ public class RoutingContext {
 	}
 
 	public void loadTileData(int x31, int y31, int zoomAround, final List<RouteDataObject> toFillIn) {
-		int t = zoomAround - config.ZOOM_TO_LOAD_TILES;
+		int t =  config.ZOOM_TO_LOAD_TILES - zoomAround;
+		int coordinatesShift = (1 << (31 - config.ZOOM_TO_LOAD_TILES));
 		if(t <= 0) {
 			t = 1;
+			coordinatesShift = (1 << (31 - zoomAround));
 		} else {
 			t = 1 << t;
 		}
-		int coordinatesShift = (1 << (31 - config.ZOOM_TO_LOAD_TILES));
+		
 		TLongHashSet ts = new TLongHashSet(); 
 		long now = System.nanoTime();
 		for(int i = -t; i <= t; i++) {

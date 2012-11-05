@@ -322,6 +322,7 @@ double calculateProjection31TileMetric(int xA, int yA, int xB, int yB, int xC, i
 double squareDist31TileMetric(int x1, int y1, int x2, int y2) ;
 double convert31YToMeters(int y1, int y2);
 double convert31XToMeters(int y1, int y2);
+double alignAngleDifference(double diff);
 
 
 #endif /*_OSMAND_COMMON_H*/

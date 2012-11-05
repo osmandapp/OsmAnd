@@ -11,7 +11,7 @@ public class RouteDataObject {
 	
 	public final RouteRegion region;
 	// all these arrays supposed to be immutable!
-	// These feilds accessible from C++
+	// These fields accessible from C++
 	public int[] types;
 	public int[] pointsX;
 	public int[] pointsY;
@@ -213,6 +213,7 @@ public class RouteDataObject {
 	}
 	
 	public double directionRoute(int startPoint, boolean plus) {
+		// same goes to C++
 		// Victor : the problem to put more than 5 meters that BinaryRoutePlanner will treat
 		// 2 consequent Turn Right as UT and here 2 points will have same turn angle
 		// So it should be fix in both places

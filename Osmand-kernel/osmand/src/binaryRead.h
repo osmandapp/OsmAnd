@@ -10,8 +10,6 @@
 #include <map>
 #include <string>
 #include <stdint.h>
-
-
 #include "mapObjects.h"
 #include "multipolygons.h"
 #include "common.h"
@@ -108,6 +106,61 @@ struct RouteDataObject {
 
 	UNORDERED(map)<int, std::string > names;
 	vector<pair<uint32_t, uint32_t> > namesIds;
+
+	string getName() {
+		if(names.size() > 0) {
+			return names.begin()->second;
+		}
+		return "";
+	}
+
+	int getSize() {
+		int s = sizeof(this);
+		s += pointsX.capacity()*sizeof(uint32_t);
+		s += pointsY.capacity()*sizeof(uint32_t);
+		s += types.capacity()*sizeof(uint32_t);
+		s += restrictions.capacity()*sizeof(uint64_t);
+		std::vector<std::vector<uint32_t> >::iterator t = pointTypes.begin();
+		for(;t!=pointTypes.end(); t++) {
+			s+= (*t).capacity() * sizeof(uint32_t);
+		}
+		s += namesIds.capacity()*sizeof(pair<uint32_t, uint32_t>);
+		s += names.size()*sizeof(pair<int, string>)*10;
+		return s;
+	}
+
+	double directionRoute(int startPoint, bool plus){
+		// look at comment JAVA
+		return directionRoute(startPoint, plus, 5);
+	}
+
+	// Gives route direction of EAST degrees from NORTH ]-PI, PI]
+	double directionRoute(int startPoint, bool plus, float dist) {
+		int x = pointsX[startPoint];
+		int y = pointsY[startPoint];
+		int nx = startPoint;
+		int px = x;
+		int py = y;
+		double total = 0;
+		do {
+			if (plus) {
+				nx++;
+				if (nx >= pointsX.size()) {
+					break;
+				}
+			} else {
+				nx--;
+				if (nx < 0) {
+					break;
+				}
+			}
+			px = pointsX[nx];
+			py = pointsY[nx];
+			// translate into meters
+			total += abs(px - x) * 0.011 + abs(py - y) * 0.01863;
+		} while (total < dist);
+		return -atan2( (float)x - px, (float) y - py ) + M_PI/2;
+	}
 };
 
 

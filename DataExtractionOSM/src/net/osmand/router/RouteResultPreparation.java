@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.binary.RouteDataObject;
@@ -20,9 +21,12 @@ public class RouteResultPreparation {
 	 */
 	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment,boolean leftside) {
 		List<RouteSegmentResult> result  = convertFinalSegmentToResults(ctx, finalSegment);
+		prepareResult(ctx, leftside, result);
+		return result;
+	}
 
+	List<RouteSegmentResult> prepareResult(RoutingContext ctx, boolean leftside, List<RouteSegmentResult> result) {
 		validateAllPointsConnected(result);
-		
 		// calculate time
 		calculateTimeSpeedAndAttachRoadSegments(ctx, result);
 		
@@ -47,12 +51,12 @@ public class RouteResultPreparation {
 			double distance = 0;
 			for (int j = rr.getStartPointIndex(); j != rr.getEndPointIndex(); j = next) {
 				next = plus ? j + 1 : j - 1;
-				if(j == rr.getStartPointIndex()) {
-					attachRoadSegments(ctx, result, i, j, plus);
-				}
-				if(next != rr.getEndPointIndex()) {
-					attachRoadSegments(ctx, result, i, next, plus);
-				}
+					if (j == rr.getStartPointIndex()) {
+						attachRoadSegments(ctx, result, i, j, plus);
+					}
+					if (next != rr.getEndPointIndex()) {
+						attachRoadSegments(ctx, result, i, next, plus);
+					}
 				
 				double d = measuredDist(road.getPoint31XTile(j), road.getPoint31YTile(j), road.getPoint31XTile(next),
 						road.getPoint31YTile(next));
@@ -81,6 +85,7 @@ public class RouteResultPreparation {
 					if (isSplit) {
 						int endPointIndex = rr.getEndPointIndex();
 						RouteSegmentResult split = new RouteSegmentResult(rr.getObject(), next, endPointIndex);
+						split.copyPreattachedRoutes(rr, Math.abs(next - rr.getStartPointIndex()));
 						rr.setSegmentTime((float) distOnRoadToPass);
 						rr.setSegmentSpeed((float) speed);
 						rr.setDistance((float) distance);
@@ -496,12 +501,35 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		RouteSegment routeSegment = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
+		Iterator<RouteSegment> it;
+		if(rr.getPreAttachedRoutes(pointInd) != null) {
+			final RouteSegmentResult[] list = rr.getPreAttachedRoutes(pointInd);
+			it = new Iterator<BinaryRoutePlanner.RouteSegment>() {
+				int i = 0;
+				@Override
+				public boolean hasNext() {
+					return i < list.length;
+				}
+
+				@Override
+				public RouteSegment next() {
+					RouteSegmentResult r = list[i++];
+					return new RouteSegment(r.getObject(), r.getStartPointIndex());
+				}
+
+				@Override
+				public void remove() {
+				}
+			};	
+		} else {
+			RouteSegment rt = ctx.loadRouteSegment(road.getPoint31XTile(pointInd), road.getPoint31YTile(pointInd), ctx.config.memoryLimitation);
+			it = rt.getIterator();
+		}
 		// try to attach all segments except with current id
-		while (routeSegment != null) {
+		while (it.hasNext()) {
+			RouteSegment routeSegment = it.next();
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {
 				RouteDataObject addRoad = routeSegment.road;
-				
 				// TODO restrictions can be considered as well
 				int oneWay = ctx.getRouter().isOneWay(addRoad);
 				if (oneWay >= 0 && routeSegment.getSegmentStart() < addRoad.getPointsLength() - 1) {
@@ -519,7 +547,6 @@ public class RouteResultPreparation {
 					}
 				}
 			}
-			routeSegment = routeSegment.next;
 		}
 	}
 	

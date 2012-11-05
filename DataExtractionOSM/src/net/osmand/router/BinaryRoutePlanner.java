@@ -43,9 +43,9 @@ public class BinaryRoutePlanner {
 		int px = MapUtils.get31TileNumberX(lon);
 		int py = MapUtils.get31TileNumberY(lat);
 		ArrayList<RouteDataObject> dataObjects = new ArrayList<RouteDataObject>();
-		ctx.loadTileData(px, py, 16, dataObjects);
+		ctx.loadTileData(px, py, 17, dataObjects);
 		if (dataObjects.isEmpty()) {
-			ctx.loadTileData(px, py, 14, dataObjects);
+			ctx.loadTileData(px, py, 15, dataObjects);
 		}
 		RouteSegment road = null;
 		double sdist = 0;
@@ -334,10 +334,6 @@ public class BinaryRoutePlanner {
 				graphSegments = graphDirectSegments;
 			}
 
-			if(ctx.runRelaxingStrategy() ) {
-				relaxNotNeededSegments(ctx, graphDirectSegments, true);
-				relaxNotNeededSegments(ctx, graphReverseSegments, false);
-			}
 			// check if interrupted
 			if(ctx.interruptable != null && ctx.interruptable.isCancelled()) {
 				throw new InterruptedException("Route calculation interrupted");
@@ -349,12 +345,12 @@ public class BinaryRoutePlanner {
 
 
 	private RouteSegment smartRecalculationEnabled(final RoutingContext ctx, TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0;
+		boolean runRecalculation = ctx.previouslyCalculatedRoute != null && ctx.previouslyCalculatedRoute.size() > 0
+				&& ctx.config.recalculateDistance != 0;
 		if (runRecalculation) {
 			RouteSegment previous = null;
 			List<RouteSegmentResult> rlist = new ArrayList<RouteSegmentResult>();
-			// always recalculate first 7 km
-			int distanceThreshold = 7000;
+			float distanceThreshold = ctx.config.recalculateDistance;
 			float threshold = 0;
 			for(RouteSegmentResult rr : ctx.previouslyCalculatedRoute) {
 				threshold += rr.getDistance();
@@ -489,16 +485,6 @@ public class BinaryRoutePlanner {
 		}
 		
 		double result = distToFinalPoint / ctx.getRouter().getMaxDefaultSpeed();
-		if(ctx.isUseDynamicRoadPrioritising() && next != null){
-			double priority = ctx.getRouter().getFutureRoadPriority(next.road);
-			result /= priority;
-			int dist = ctx.getDynamicRoadPriorityDistance();
-			// only first N km-s count by dynamic priority
-			if(distToFinalPoint > dist && dist != 0){
-				result = (distToFinalPoint - dist) / ctx.getRouter().getMaxDefaultSpeed() + 
-						dist / (ctx.getRouter().getMaxDefaultSpeed() * priority);
-			}
-		}
 		return (float) result; 
 	}
 	
@@ -984,6 +970,30 @@ public class BinaryRoutePlanner {
 			return String.format("s%.2f e%.2f", ((float)distanceFromStart), ((float)distanceToEnd));
 		}
 		
+		
+		public Iterator<RouteSegment> getIterator() {
+			return new Iterator<BinaryRoutePlanner.RouteSegment>() {
+				RouteSegment next = RouteSegment.this;
+				@Override
+				public void remove() {
+					throw new UnsupportedOperationException();
+				}
+				
+				@Override
+				public RouteSegment next() {
+					RouteSegment c = next;
+					if(next != null) {
+						next = next.next;
+					}
+					return c;
+				}
+				
+				@Override
+				public boolean hasNext() {
+					return next != null;
+				}
+			};
+		}
 	}
 	
 	static class FinalRouteSegment extends RouteSegment {

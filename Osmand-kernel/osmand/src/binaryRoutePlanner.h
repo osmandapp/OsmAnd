@@ -42,6 +42,7 @@ struct RouteSegmentResult {
 	SHARED_PTR<RouteDataObject> object;
 	int startPointIndex;
 	int endPointIndex;
+	vector<vector<RouteSegmentResult> > attachedRoutes;
 	RouteSegmentResult(SHARED_PTR<RouteDataObject> object, int startPointIndex, int endPointIndex) :
 		object(object), startPointIndex(startPointIndex), endPointIndex (endPointIndex) {
 
@@ -62,10 +63,11 @@ struct RoutingSubregionTile {
 	// make it without get/set for fast access
 	int access;
 	int loaded;
+	int size ;
 	UNORDERED(map)<int64_t, SHARED_PTR<RouteSegment> > routes;
 
 	RoutingSubregionTile(RouteSubregion& sub) : access(0), loaded(0), subregion(sub) {
-
+		size = sizeof(RoutingSubregionTile);
 	}
 	~RoutingSubregionTile(){
 	}
@@ -77,7 +79,12 @@ struct RoutingSubregionTile {
 		loaded++;
 	}
 
+	int getSize(){
+		return size + routes.size() * sizeof(std::pair<int64_t, SHARED_PTR<RouteSegment> >);
+	}
+
 	void add(SHARED_PTR<RouteDataObject> o) {
+		size += o->getSize() + sizeof(RouteSegment)* o->pointsX.size();
 		for (int i = 0; i < o->pointsX.size(); i++) {
 			uint64_t x31 = o->pointsX[i];
 			uint64_t y31 = o->pointsY[i];
@@ -98,7 +105,7 @@ struct RoutingSubregionTile {
 	}
 };
 static int64_t calcRouteId(SHARED_PTR<RouteDataObject> o, int ind) {
-	return (o->id << 10) + ind;
+	return ((int64_t) o->id << 10) + ind;
 }
 
 typedef std::pair<int, std::pair<string, string> > ROUTE_TRIPLE;
@@ -127,6 +134,7 @@ struct RoutingConfiguration {
 	int planRoadDirection;
 	string routerName;
 	float initialDirection;
+	float distanceRecalculate;
 	string routerProfile;
 	float roundaboutTurn;
 	float leftTurn;
@@ -166,9 +174,10 @@ struct RoutingConfiguration {
 		zoomToLoad = (int)parseFloat("zoomToLoadTiles", 16);
 		routerName = parseString("name", "default");
 		routerProfile = parseString("baseProfile", "car");
+		distanceRecalculate = parseFloat("recalculateDistanceHelp", 10000) ;
 	}
 
-	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, int memLimit = 30, float initDirection = 0) :
+	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, float initDirection = -360, int memLimit = 30) :
 			memoryLimitation(memLimit), initialDirection(initDirection) {
 		for(int j = 0; j<config.size(); j++) {
 			ROUTE_TRIPLE r = config[j];
@@ -341,6 +350,8 @@ struct RoutingConfiguration {
 
 
 struct RoutingContext {
+	typedef UNORDERED(map)<int64_t, SHARED_PTR<RoutingSubregionTile> > MAP_SUBREGION_TILES;
+
 	int visitedSegments;
 	int loadedTiles;
 	ElapsedTimer timeToLoad;
@@ -358,7 +369,7 @@ struct RoutingContext {
 	vector<SHARED_PTR<RouteSegment> > segmentsToVisitPrescripted;
 
 	SHARED_PTR<FinalRouteSegment> finalRouteSegment;
-	UNORDERED(map)<int64_t, SHARED_PTR<RoutingSubregionTile> > subregionTiles;
+	MAP_SUBREGION_TILES subregionTiles;
 	UNORDERED(map)<int64_t, std::vector<SHARED_PTR<RoutingSubregionTile> > > indexedSubregions;
 
 	RoutingContext(RoutingConfiguration& config) : finalRouteSegment(), firstRoadDirection(0), loadedTiles(0), visitedSegments(0),
@@ -367,6 +378,16 @@ struct RoutingContext {
 
 	bool acceptLine(SHARED_PTR<RouteDataObject> r) {
 		return config.acceptLine(r);
+	}
+
+	int getSize() {
+		// multiply 2 for to maps
+		int sz = subregionTiles.size() * sizeof(pair< int64_t, SHARED_PTR<RoutingSubregionTile> >)  * 2;
+		MAP_SUBREGION_TILES::iterator it = subregionTiles.begin();
+		for(;it != subregionTiles.end(); it++) {
+			sz += it->second->getSize();
+		}
+		return sz;
 	}
 
 	void loadHeaderObjects(int64_t tileId) {
@@ -404,27 +425,27 @@ struct RoutingContext {
 			std::vector<SHARED_PTR<RoutingSubregionTile> > collection;
 			for(int i=0; i<tempResult.size(); i++) {
 				RouteSubregion& rs = tempResult[i];
-				int64_t key = ((int64_t)rs.left << 31)+ rs.length;
+				int64_t key = ((int64_t)rs.left << 31)+ rs.filePointer;
 				if(subregionTiles.find(key) == subregionTiles.end()) {
 					subregionTiles[key] = SHARED_PTR<RoutingSubregionTile>(new RoutingSubregionTile(rs));
 				}
 				collection.push_back(subregionTiles[key]);
 			}
-			//osmand_log_print(LOG_INFO, "Native load %d %d (%d)", xloc, yloc, tempResult.size());
 			indexedSubregions[tileId] = collection;
 		}
 		loadHeaderObjects(tileId);
 		timeToLoad.pause();
 	}
 
-	void loadTileData(int x31, int y31, int zoomAround, vector<SHARED_PTR<RouteDataObject> >& dataObjects ){
-		int t = zoomAround - config.zoomToLoad;
+	void loadTileData(int x31, int y31, int zoomAround, vector<SHARED_PTR<RouteDataObject> >& dataObjects ) {
+		int t = config.zoomToLoad - zoomAround;
+		int coordinatesShift = (1 << (31 - config.zoomToLoad));
 		if(t <= 0) {
 			t = 1;
+			coordinatesShift = (1 << (31 - zoomAround));
 		} else {
 			t = 1 << t;
 		}
-		int coordinatesShift = (1 << (31 - config.zoomToLoad));
 		UNORDERED(set)<int64_t> ids;
 		int z  = config.zoomToLoad;
 		for(int i = -t; i <= t; i++) {

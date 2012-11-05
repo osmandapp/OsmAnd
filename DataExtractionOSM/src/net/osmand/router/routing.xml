@@ -12,23 +12,24 @@
 			 (don't specify here ! it is device dependent)  -->
 	<attribute name="memoryLimitInMB" value="155" />
 
-	<!-- 1.4 Build A* graph in backward/forward direction (can affect results) -->
+	<!-- 1.2 Build A* graph in backward/forward direction (can affect results) -->
 	<!-- 0 - 2 ways, 1 - direct way, -1 - reverse way -->
 	<attribute name="planRoadDirection" value="0" />
+	
+	<!-- 1.3 When there is a query to recalculate route, -->
+	<!-- recalculate smart using old route withot N-meters (0 recalculate fresh, default 10km)  -->
+	<attribute name="recalculateDistanceHelp" value="10000" />
 
 	<!-- HELP INFORMATION ABOUT FILE -->
 	<!-- 1) Highway defines acceptable route for routingProfile, speed in km/h (if it is not specified on level road) -->
 	<!-- 	priority is multiplicator for already passed road (consider it is an accelerator of the road) -->
-	<!-- 	dynamicPriority is multiplicator for future roads used by heuristic useDynamicRoadPrioritising -->
 	<!-- 		<road tag="highway" value="living_street" speed="25" priority="0.5" dynamicPriority="0.5"/>  -->
-	<!-- 		<road tag="route" value="ferry" speed="15" priority="1.0" dynamicPriority="0.7"/> -->
+	<!-- 		<road tag="route" value="ferry" speed="15" priority="1.0" /> -->
 	<!-- 2) Obstacle defines a point of the road and how it could be passed by vehicle -->
 	<!-- 		penalty is measured in time and -1 means it could not be passed! -->
 	<!-- 		<obstacle tag="highway" value="traffic_signals" penalty="35"/>  -->
 	<!-- 3) Avoid describes what road should be completely avoided or passed with multiplied (decreased) priority  -->
 	<!-- 			<avoid tag="access" value="no" decreasedPriority="0.9"/> -->
-	
-
 	<!-- obstacle tag="highway" value="traffic_signals" penalty="35", penalty measured in seconds -->
 	<routingProfile name="car" baseProfile="car" restrictionsAware="true" minDefaultSpeed="45.0" maxDefaultSpeed="130.0" 
 			leftTurn="0" rightTurn="0" roundaboutTurn="0" followSpeedLimitations="true" onewayAware="true">
@@ -36,55 +37,55 @@
 		<attribute name="heuristicCoefficient" value="1.5" />
 		-->
 		
-		<road tag="highway" value="motorway" speed="110" priority="1.2" dynamicPriority="1">
+		<road tag="highway" value="motorway" speed="110" priority="1.2">
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
-		<road tag="highway" value="motorway_link" speed="80" priority="1.2" dynamicPriority="1">
+		<road tag="highway" value="motorway_link" speed="80" priority="1.2" >
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
 		
-		<road tag="highway" value="trunk" speed="100" priority="1.2" dynamicPriority="0.9"/>
-		<road tag="highway" value="trunk_link" speed="75" priority="1.2" dynamicPriority="0.9"/>
+		<road tag="highway" value="trunk" speed="100" priority="1.2" />
+		<road tag="highway" value="trunk_link" speed="75" priority="1.2" />
 		
 		<!-- generally linking larger towns. -->
-		<road tag="highway" value="primary" speed="65" priority="1.1" dynamicPriority="0.7"/>
-		<road tag="highway" value="primary_link" speed="50" priority="1.1" dynamicPriority="0.7"/>
+		<road tag="highway" value="primary" speed="65" priority="1.05" />
+		<road tag="highway" value="primary_link" speed="50" priority="1.05" />
 		
 		<!-- generally linking smaller towns and villages -->
-		<road tag="highway" value="secondary" speed="60" priority="1.05" dynamicPriority="0.6"/>
-		<road tag="highway" value="secondary_link" speed="50" priority="1.05" dynamicPriority="0.6"/>
+		<road tag="highway" value="secondary" speed="60" priority="1" />
+		<road tag="highway" value="secondary_link" speed="50" priority="1" />
 		<!-- important urban roads -->
-		<road tag="highway" value="tertiary" speed="45" priority="1" dynamicPriority="0.5"/>
-		<road tag="highway" value="tertiary_link" speed="40" priority="1" dynamicPriority="0.5"/>
+		<road tag="highway" value="tertiary" speed="45" priority="0.95" />
+		<road tag="highway" value="tertiary_link" speed="40" priority="0.95" />
 		<!-- lowest form of grid network, usually 90% of urban roads -->
-		<road tag="highway" value="unclassified" speed="35" priority="0.7" dynamicPriority="0.3">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
+		<road tag="highway" value="unclassified" speed="35" priority="0.7" >
+			<specialization input="short_way" priority="1"  speed="45"/>
 		</road>
 		<!-- road = no type, no review and may be not accurate -->
-		<road tag="highway" value="road" speed="35" priority="0.7" dynamicPriority="0.3">
+		<road tag="highway" value="road" speed="35" priority="0.7" >
 			<specialization input="short_way" priority="1" speed="45"/>
 		</road>
 		<!-- primarily for access to properties, small roads with 1/2 intersections -->
-		<road tag="highway" value="residential" speed="35" priority="0.7" dynamicPriority="0.3">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
+		<road tag="highway" value="residential" speed="35" priority="0.7" >
+			<specialization input="short_way" priority="1"  speed="45"/>
 		</road>
 		<!-- parking + private roads -->
-		<road tag="highway" value="service" speed="30" priority="0.5" dynamicPriority="0.3">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="45"/>
+		<road tag="highway" value="service" speed="30" priority="0.5" >
+			<specialization input="short_way" priority="1"  speed="45"/>
 		</road>
 		<!-- very bad roads -->
-		<road tag="highway" value="track" speed="15" priority="0.3" dynamicPriority="0.2">
-			<specialization input="short_way" priority="0.7" speed="45" dynamicPriority="0.7" />
+		<road tag="highway" value="track" speed="15" priority="0.3" >
+			<specialization input="short_way" priority="0.7" speed="45"  />
 			<specialization input="avoid_unpaved" priority="0.1"/>
 		</road>
 		
 		<!-- too small for cars usually -->
-		<road tag="highway" value="living_street" speed="25" priority="0.5" dynamicPriority="0.3">
-			<specialization input="short_way" priority="1" dynamicPriority="1" speed="35"/>
+		<road tag="highway" value="living_street" speed="25" priority="0.5" >
+			<specialization input="short_way" priority="1"  speed="35"/>
 		</road>
 		<!-- car are able to enter in highway=pedestrian with restrictions -->
 		<!-- Time actually is uknown. Currently unsupported -->
-		<road tag="route" value="ferry" speed="15" priority="1.0" dynamicPriority="0.9">
+		<road tag="route" value="ferry" speed="15" priority="1.0" >
 			<specialization input="avoid_ferries" speed="0"/> 
 		</road>
 		
@@ -121,36 +122,36 @@
 			leftTurn="0" rightTurn="0" followSpeedLimitations="false" onewayAware="true">
 		<!-- <attribute name="relaxNodesIfStartDistSmallCoeff" value="2.5"/>  -->
 		
-		<road tag="highway" value="motorway" speed="16" priority="0.4" dynamicPriority="0.9">
+		<road tag="highway" value="motorway" speed="16" priority="0.4" >
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
-		<road tag="highway" value="motorway_link" speed="16" priority="0.4" dynamicPriority="0.9">
+		<road tag="highway" value="motorway_link" speed="16" priority="0.4" >
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
 		
-		<road tag="highway" value="trunk" speed="16" priority="0.6" dynamicPriority="0.9"/>
-		<road tag="highway" value="trunk_link" speed="16" priority="0.7" dynamicPriority="0.9"/>
-		<road tag="highway" value="primary" speed="16" priority="0.8" dynamicPriority="0.9"/>
-		<road tag="highway" value="primary_link" speed="16" priority="0.8" dynamicPriority="0.9"/>
-		<road tag="highway" value="secondary" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="secondary_link" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="tertiary" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="tertiary_link" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="road" speed="16" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="residential" speed="16" priority="1.1" dynamicPriority="1"/>
-		<road tag="highway" value="cycleway" speed="16" priority="1.5" dynamicPriority="1.3"/>
+		<road tag="highway" value="trunk" speed="16" priority="0.6" />
+		<road tag="highway" value="trunk_link" speed="16" priority="0.7" />
+		<road tag="highway" value="primary" speed="16" priority="0.8" />
+		<road tag="highway" value="primary_link" speed="16" priority="0.8" />
+		<road tag="highway" value="secondary" speed="16" priority="1" />
+		<road tag="highway" value="secondary_link" speed="16" priority="1" />
+		<road tag="highway" value="tertiary" speed="16" priority="1" />
+		<road tag="highway" value="tertiary_link" speed="16" priority="1" />
+		<road tag="highway" value="road" speed="16" priority="1" />
+		<road tag="highway" value="residential" speed="16" priority="1.1" />
+		<road tag="highway" value="cycleway" speed="16" priority="1.5" />
 		
-		<road tag="highway" value="unclassified" speed="13" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="service" speed="13" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="track" speed="12" priority="1.5" dynamicPriority="1.5"/>
-		<road tag="highway" value="path" speed="12" priority="1.5" dynamicPriority="1.5"/>
-		<road tag="highway" value="living_street" speed="15" priority="1.1" dynamicPriority="1"/>
-		<road tag="highway" value="pedestrian" speed="10" priority="0.9" dynamicPriority="1"/>
-		<road tag="highway" value="footway" speed="8" priority="0.9" dynamicPriority="1"/>
-		<road tag="highway" value="byway" speed="8" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="services" speed="13" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="bridleway" speed="8" priority="0.8" dynamicPriority="1"/>
-		<road tag="highway" value="steps" speed="3" priority="0.5" dynamicPriority="0.9"/>
+		<road tag="highway" value="unclassified" speed="13" priority="1" />
+		<road tag="highway" value="service" speed="13" priority="1" />
+		<road tag="highway" value="track" speed="12" priority="1.5" />
+		<road tag="highway" value="path" speed="12" priority="1.5" />
+		<road tag="highway" value="living_street" speed="15" priority="1.1" />
+		<road tag="highway" value="pedestrian" speed="10" priority="0.9" />
+		<road tag="highway" value="footway" speed="8" priority="0.9" />
+		<road tag="highway" value="byway" speed="8" priority="1" />
+		<road tag="highway" value="services" speed="13" priority="1" />
+		<road tag="highway" value="bridleway" speed="8" priority="0.8" />
+		<road tag="highway" value="steps" speed="3" priority="0.5" />
 
 		<obstacle tag="highway" value="traffic_signals" penalty="25" routingPenalty="10"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>
@@ -171,36 +172,36 @@
 
 		<attribute name="heuristicCoefficient" value="1.2" />
 
-		<road tag="highway" value="motorway" speed="5" priority="0.7" dynamicPriority="0.7">
+		<road tag="highway" value="motorway" speed="5" priority="0.7" >
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
-		<road tag="highway" value="motorway_link" speed="5" priority="0.7" dynamicPriority="0.7">
+		<road tag="highway" value="motorway_link" speed="5" priority="0.7" >
 			<specialization input="avoid_motorway" speed="0"/>
 		</road>
 		
-		<road tag="highway" value="trunk" speed="5" priority="0.7" dynamicPriority="0.7"/>
-		<road tag="highway" value="trunk_link" speed="5" priority="0.7" dynamicPriority="0.7"/>
-		<road tag="highway" value="primary" speed="5" priority="0.9" dynamicPriority="0.9"/>
-		<road tag="highway" value="primary_link" speed="5" priority="0.9" dynamicPriority="0.9"/>
-		<road tag="highway" value="secondary" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="secondary_link" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="tertiary" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="tertiary_link" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="road" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="residential" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="cycleway" speed="5" priority="1" dynamicPriority="1.1"/>
+		<road tag="highway" value="trunk" speed="5" priority="0.7" />
+		<road tag="highway" value="trunk_link" speed="5" priority="0.7" />
+		<road tag="highway" value="primary" speed="5" priority="0.9" />
+		<road tag="highway" value="primary_link" speed="5" priority="0.9" />
+		<road tag="highway" value="secondary" speed="5" priority="1" />
+		<road tag="highway" value="secondary_link" speed="5" priority="1" />
+		<road tag="highway" value="tertiary" speed="5" priority="1" />
+		<road tag="highway" value="tertiary_link" speed="5" priority="1" />
+		<road tag="highway" value="road" speed="5" priority="1" />
+		<road tag="highway" value="residential" speed="5" priority="1" />
+		<road tag="highway" value="cycleway" speed="5" priority="1" />
 		
-		<road tag="highway" value="unclassified" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="service" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="track" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="path" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="living_street" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="pedestrian" speed="5" priority="1.2" dynamicPriority="1.1"/>
-		<road tag="highway" value="footway" speed="5" priority="1.2" dynamicPriority="1.1"/>
-		<road tag="highway" value="byway" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="services" speed="5" priority="1" dynamicPriority="1"/>
-		<road tag="highway" value="bridleway" speed="5" priority="0.8" dynamicPriority="0.8"/>
-		<road tag="highway" value="steps" speed="4" priority="1.2" dynamicPriority="1"/>
+		<road tag="highway" value="unclassified" speed="5" priority="1" />
+		<road tag="highway" value="service" speed="5" priority="1" />
+		<road tag="highway" value="track" speed="5" priority="1" />
+		<road tag="highway" value="path" speed="5" priority="1" />
+		<road tag="highway" value="living_street" speed="5" priority="1" />
+		<road tag="highway" value="pedestrian" speed="5" priority="1.2" />
+		<road tag="highway" value="footway" speed="5" priority="1.2" />
+		<road tag="highway" value="byway" speed="5" priority="1" />
+		<road tag="highway" value="services" speed="5" priority="1" />
+		<road tag="highway" value="bridleway" speed="5" priority="0.8" />
+		<road tag="highway" value="steps" speed="4" priority="1.2" />
 
 		<obstacle tag="highway" value="traffic_signals" penalty="30"/>
 		<obstacle tag="railway" value="crossing" penalty="15"/>

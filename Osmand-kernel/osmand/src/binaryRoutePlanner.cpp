@@ -7,7 +7,6 @@
 
 static bool PRINT_TO_CONSOLE_ROUTE_INFORMATION_TO_TEST = true;
 static const int REVERSE_WAY_RESTRICTION_ONLY = 1024;
-static const int STANDARD_ROAD_IN_QUEUE_OVERHEAD = 900;
 
 static const int ROUTE_POINTS = 11;
 static const float TURN_DEGREE_MIN = 45;
@@ -18,6 +17,7 @@ static const short RESTRICTION_NO_STRAIGHT_ON = 4;
 static const short RESTRICTION_ONLY_RIGHT_TURN = 5;
 static const short RESTRICTION_ONLY_LEFT_TURN = 6;
 static const short RESTRICTION_ONLY_STRAIGHT_ON = 7;
+static const bool TRACE_ROUTING = false;
 
 inline int roadPriorityComparator(float o1DistanceFromStart, float o1DistanceToEnd,
 		float o2DistanceFromStart, float o2DistanceToEnd, float heuristicCoefficient) {
@@ -66,8 +66,9 @@ struct SegmentsComparator : public std::binary_function<SHARED_PTR<RouteSegment>
 	}
 	bool operator()(const SHARED_PTR<RouteSegment> lhs, const SHARED_PTR<RouteSegment> rhs) const
     {
-    	return roadPriorityComparator(lhs.get()->distanceFromStart, lhs.get()->distanceToEnd, rhs.get()->distanceFromStart,
-    			rhs.get()->distanceToEnd, ctx->getHeuristicCoefficient()) > 0;
+		int cmp = roadPriorityComparator(lhs.get()->distanceFromStart, lhs.get()->distanceToEnd, rhs.get()->distanceFromStart,
+		    			rhs.get()->distanceToEnd, ctx->getHeuristicCoefficient());
+    	return cmp > 0;
     }
 };
 struct NonHeuristicSegmentsComparator : public std::binary_function<SHARED_PTR<RouteSegment>, SHARED_PTR<RouteSegment>, bool>
@@ -89,26 +90,36 @@ bool processIntersections(RoutingContext* ctx, SEGMENTS_QUEUE& graphSegments,
 		SHARED_PTR<RouteSegment> segment, int segmentEnd, SHARED_PTR<RouteSegment> inputNext,
 		bool reverseWay);
 
+
+int calculateSizeOfSearchMaps(SEGMENTS_QUEUE graphDirectSegments,
+		SEGMENTS_QUEUE graphReverseSegments, VISITED_MAP visitedDirectSegments,
+		VISITED_MAP visitedOppositeSegments){
+	int sz = visitedDirectSegments.size()*sizeof(pair<int64_t, SHARED_PTR<RouteSegment> > );
+	sz += visitedOppositeSegments.size()*sizeof(pair<int64_t, SHARED_PTR<RouteSegment> >);
+	sz += graphDirectSegments.size()*sizeof(SHARED_PTR<RouteSegment>);
+	sz += graphReverseSegments.size()*sizeof(SHARED_PTR<RouteSegment>);
+	return sz;
+}
 /**
  * Calculate route between start.segmentEnd and end.segmentStart (using A* algorithm)
  * return list of segments
  */
 void searchRouteInternal(RoutingContext* ctx, SHARED_PTR<RouteSegment> start, SHARED_PTR<RouteSegment> end, bool leftSideNavigation) {
+	// FIXME intermediate points
 	// measure time
 	ctx->visitedSegments = 0;
 	ctx->timeToCalculate.start();
-	// FIXME initial direction
-//	if(ctx.config.initialDirection != null) {
-//		ctx.firstRoadId = (start->road->id << ROUTE_POINTS) + start.getSegmentStart();
-//		double plusDir = start->road->directionRoute(start.segmentStart, true);
-//		double diff = plusDir - ctx.config.initialDirection;
-//		if(Math.abs(MapUtils.alignAngleDifference(diff)) <= Math.PI / 3) {
-//			ctx.firstRoadDirection = 1;
-//		} else if(Math.abs(MapUtils.alignAngleDifference(diff - Math.PI)) <= Math.PI / 3) {
-//			ctx.firstRoadDirection = -1;
-//		}
-//
-//	}
+	if(ctx->config.initialDirection != -360) {
+		ctx->firstRoadId = (start->road->id << ROUTE_POINTS) + start->getSegmentStart();
+		double plusDir = start->road->directionRoute(start->getSegmentStart(), true);
+		double diff = plusDir - ctx->config.initialDirection;
+		if(abs(alignAngleDifference(diff)) <= M_PI / 3) {
+			ctx->firstRoadDirection = 1;
+		} else if(abs(alignAngleDifference(diff - M_PI )) <= M_PI / 3) {
+			ctx->firstRoadDirection = -1;
+		}
+
+	}
 
 	SegmentsComparator sgmCmp(ctx);
 	SEGMENTS_QUEUE graphDirectSegments(sgmCmp);
@@ -189,7 +200,14 @@ void searchRouteInternal(RoutingContext* ctx, SHARED_PTR<RouteSegment> start, SH
 	osmand_log_print(LOG_WARN, "[Native] Result visited (visited roads %d, visited segments %d / %d , queue sizes %d / %d ) ",
 			ctx-> visitedSegments, visitedDirectSegments.size(), visitedOppositeSegments.size(),
 			graphDirectSegments.size(),graphReverseSegments.size());
+	osmand_log_print(LOG_WARN, "[Native] Result timing (time to load %d, time to calc %d, loaded tiles %d) ", ctx->timeToLoad.getElapsedTime()
+				, ctx->timeToCalculate.getElapsedTime(), ctx->loadedTiles);
+	int sz = calculateSizeOfSearchMaps(graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
+	osmand_log_print(LOG_WARN, "[Native] Memory occupied (Routing context %d Kb, search %d Kb)", ctx->getSize()/ 1024, sz/1024);
 }
+
+
+
 bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 		SEGMENTS_QUEUE& graphSegments, VISITED_MAP& visitedSegments, int targetEndX, int targetEndY,
 		SHARED_PTR<RouteSegment> segment, VISITED_MAP& oppositeSegments) {
@@ -206,6 +224,10 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 	if(visitedSegments.find(nt) != visitedSegments.end()) {
 		return false;
 	}
+	if(TRACE_ROUTING) {
+		osmand_log_print(LOG_DEBUG, "Process segment id=%lld name=%s dist=%f", road->id, road->getName().c_str(), segment->distanceFromStart);
+	}
+
 	ctx->visitedSegments++;
 	// avoid empty segments to connect but mark the point as visited
 	visitedSegments[nt] = SHARED_PTR<RouteSegment>();
@@ -303,7 +325,6 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 //			throw new OutOfMemoryError("There is no enough memory " + ctx.config.memoryLimitation/(1<<20) + " Mb");
 //		}
 		SHARED_PTR<RouteSegment> next = ctx->loadRouteSegment(x, y);
-
 		// 3. get intersected ways
 		if (next.get() != NULL) {
 			if((next.get() == segment.get() || next->road->id == road->id) && next->next.get() == NULL) {
@@ -447,6 +468,7 @@ bool processIntersections(RoutingContext* ctx, SEGMENTS_QUEUE& graphSegments,
 				return true;
 			}
 		}
+
 		// road.id could be equal on roundabout, but we should accept them
 		bool alreadyVisited = visitedSegments.find(nts) != visitedSegments.end();
 		if (!alreadyVisited) {
@@ -463,6 +485,9 @@ bool processIntersections(RoutingContext* ctx, SEGMENTS_QUEUE& graphSegments,
 				// put additional information to recover whole route after
 				next->parentRoute = segment;
 				next->parentSegmentEnd = segmentEnd;
+				if(TRACE_ROUTING) {
+					osmand_log_print(LOG_DEBUG, ">> next  segment id=%lld name=%s dist=%f", next->road->id, next->road->getName().c_str(), next->distanceFromStart);
+				}
 				graphSegments.push(next);
 			}
 		} else {
@@ -490,9 +515,9 @@ bool processIntersections(RoutingContext* ctx, SEGMENTS_QUEUE& graphSegments,
 
 SHARED_PTR<RouteSegment> findRouteSegment(int px, int py, RoutingContext* ctx) {
 	vector<SHARED_PTR<RouteDataObject> > dataObjects;
-	ctx->loadTileData(px, py, 16, dataObjects);
+	ctx->loadTileData(px, py, 17, dataObjects);
 	if (dataObjects.size() == 0) {
-		ctx->loadTileData(px, py, 14, dataObjects);
+		ctx->loadTileData(px, py, 15, dataObjects);
 	}
 	SHARED_PTR<RouteSegment> road;
 	double sdist = 0;
@@ -566,6 +591,26 @@ void addRouteSegmentToResult(vector<RouteSegmentResult>& result, RouteSegmentRes
 	}
 }
 
+void attachConnectedRoads(RoutingContext* ctx, vector<RouteSegmentResult>& res ) {
+	vector<RouteSegmentResult>::iterator it = res.begin();
+	for(; it != res.end(); it++){
+		bool plus = it->startPointIndex < it->endPointIndex;
+		int j = it->startPointIndex;
+		do {
+			SHARED_PTR<RouteSegment> s = ctx->loadRouteSegment(it->object->pointsX[j], it->object->pointsY[j]);
+			vector<RouteSegmentResult> r;
+			while(s.get() != NULL) {
+				RouteSegmentResult res(s->road, s->getSegmentStart(), s->getSegmentStart());
+				r.push_back(res);
+				s = s->next;
+			}
+			it->attachedRoutes.push_back(r);
+			j = plus ? j + 1 : j - 1;
+		} while(j != it->endPointIndex);
+	}
+
+}
+
 vector<RouteSegmentResult> convertFinalSegmentToResults(RoutingContext* ctx) {
 	vector<RouteSegmentResult> result;
 	if (ctx->finalRouteSegment.get() != NULL) {
@@ -620,9 +665,9 @@ vector<RouteSegmentResult> searchRouteInternal(RoutingContext* ctx, bool leftSid
 		osmand_log_print(LOG_WARN, "End point was found %lld [Native]", end->road->id);
 	}
 	searchRouteInternal(ctx, start, end, leftSideNavigation);
-	osmand_log_print(LOG_WARN, "[Native] Result timing (time to load %d, time to calc %d, loaded tiles %d) ", ctx->timeToLoad.getElapsedTime()
-			, ctx->timeToCalculate.getElapsedTime(), ctx->loadedTiles);
-	return convertFinalSegmentToResults(ctx);
+	vector<RouteSegmentResult> res = convertFinalSegmentToResults(ctx);
+	attachConnectedRoads(ctx, res);
+	return res;
 }
 
 

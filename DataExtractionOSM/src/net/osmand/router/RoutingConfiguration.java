@@ -39,6 +39,9 @@ public class RoutingConfiguration {
 	// 1.4 Used to calculate route in movement
 	public Double initialDirection;
 	
+	// 1.5 Recalculate distance help
+	public float recalculateDistance = 10000f;
+	
 
 
 	public static class Builder {
@@ -67,6 +70,7 @@ public class RoutingConfiguration {
 			attributes.put("routerName", router);
 			i.attributes.putAll(attributes);
 			i.initialDirection = direction;
+			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
@@ -78,7 +82,7 @@ public class RoutingConfiguration {
 				}
 				i.memoryLimitation = memoryLimitMB * (1 << 20);
 			}
-			i.planRoadDirection = parseSilentInt(getAttribute(router, "planRoadDirection"), i.planRoadDirection);
+			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 
 			
 			return i;

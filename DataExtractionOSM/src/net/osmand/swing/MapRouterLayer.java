@@ -716,14 +716,11 @@ public class MapRouterLayer implements MapPanelLayer {
 
 				});
 				
-				int ex31 = e.getRoad().getPoint31XTile(e.getSegmentStart());
-				int ey31 = e.getRoad().getPoint31YTile(e.getSegmentStart());
-				int sx31 = st.getRoad().getPoint31XTile(st.getSegmentStart());
-				int sy31 = st.getRoad().getPoint31YTile(st.getSegmentStart());
-//				 FIXME
-				RouteSegmentResult[] searchRoute = ctx.nativeLib.runNativeRouting(sx31, sy31, ex31, ey31, ctx.config);
-//				/*List<RouteSegmentResult> searchRoute = */router.searchRoute(ctx, st, e, inters, false);
-//				this.previousRoute = searchRoute;
+				
+				// Choose native or not native
+				long nt = System.nanoTime();
+				List<RouteSegmentResult> searchRoute = router.searchRoute(ctx, st, e, inters, false);
+				System.out.println("External native time " + (System.nanoTime() - nt) / 1e9f);
 				if (animateRoutingCalculation) {
 					playPauseButton.setVisible(false);
 					nextTurn.setText("FINISH");
@@ -742,7 +739,6 @@ public class MapRouterLayer implements MapPanelLayer {
 //					String name = String.format("beg %.2f end %.2f ", s.getBearingBegin(), s.getBearingEnd());
 					way.putTag(OSMTagKey.NAME.getValue(),name);
 					boolean plus = s.getStartPointIndex() < s.getEndPointIndex();
-					System.out.println("Segment " + s.getObject().id + " "+s.getStartPointIndex() + " -> " + s.getEndPointIndex());
 					int i = s.getStartPointIndex();
 					while (true) {
 						LatLon l = s.getPoint(i);
