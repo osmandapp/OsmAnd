@@ -16,32 +16,32 @@ turn('right_sl', ['virați ușor la dreapta ']).
 turn('right_keep', ['încadrați-vă pe partea dreaptă']).
 turn('left_keep', ['încadrați-vă pe partea stângă']).
 
-prepare_turn(Turn, Dist) == ['Pregăți-vă să ', M, ' după ', D] :- distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['After ', D, M] :- distance(Dist) == D, turn(Turn, M).
+prepare_turn(Turn, Dist) == ['Pregătiți-vă să ', M, ' peste ', D] :- distance(Dist) == D, turn(Turn, M).
+turn(Turn, Dist) == ['peste ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
-prepare_make_ut(Dist) == ['Pregăți-vă să întoarceți după ', D] :- distance(Dist) == D.
-make_ut(Dist) == ['Peste ', D, ' întoarceți-vă '] :- distance(Dist) == D.
-make_ut == ['Întoarceți-vă '].
-make_ut_wp == ['Întoarceți-vă când aveți posibilitatea '].
+prepare_make_ut(Dist) == ['Pregătiți-vă să întoarceți peste ', D] :- distance(Dist) == D.
+make_ut(Dist) == ['Întoarceți peste ', D] :- distance(Dist) == D.
+make_ut == ['Întoarceți '].
+make_ut_wp == ['Întoarceți când aveți posibilitatea '].
 
-prepare_roundabout(Dist) == ['Pregăți-vă să intrați în sensul giratoriu după ', D] :- distance(Dist) == D.
+prepare_roundabout(Dist) == ['Pregătiți-vă să intrați în sensul giratoriu peste ', D] :- distance(Dist) == D.
 roundabout(Dist, _Angle, Exit) == ['Peste ', D, ' intrați în sensul giratoriu și luați-o pe ', E, 'ieșire'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Luați-o pe ', E, 'ieșire'] :- nth(Exit, E).
 
 go_ahead == ['Mergeți înainte '].
-go_ahead(Dist) == ['Urmăriți drumul principal pentru ', D]:- distance(Dist) == D.
+go_ahead(Dist) == ['Urmăriți drumul principal ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['și ajungeți la destinație '].
 
-then == ['apoi '].
+then == [' apoi '].
 reached_destination == ['Ați ajuns la destinație '].
 and_arrive_intermediate == ['și ajungeți la punctul intermediar '].
 reached_intermediate == ['Ați ajuns la punctul intermediar '].
-bear_right == ['încadrați-vă pe partea dreaptă '].
-bear_left == ['încadrați-vă pe partea stângă '].
+bear_right == [' rămâneți pe partea dreaptă '].
+bear_left == [' rămâneți pe partea stângă '].
 
-route_new_calc(Dist) == ['Lungimea traseului ', D] :- distance(Dist) == D.
+route_new_calc(Dist) == ['Lungimea traseului este de ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Traseu recalculat, distanța ', D] :- distance(Dist) == D.
 
 location_lost == ['semnal gipies pierdut '].
@@ -72,19 +72,19 @@ distance(Dist) == D :- measure('mi-f'), distance_mi_f(Dist) == D.
 distance(Dist) == D :- measure('mi-y'), distance_mi_y(Dist) == D.
 
 %%% distance measure km/m
-distance_km(Dist) == [ X, ' metri']               :- Dist < 100,   D is round(Dist/10.0)*10,           num_atom(D, X).
-distance_km(Dist) == [ X, ' metri']               :- Dist < 1000,  D is round(2*Dist/100.0)*50,        num_atom(D, X).
+distance_km(Dist) == [ X, ' de metri']               :- Dist < 100,   D is round(Dist/10.0)*10,           num_atom(D, X).
+distance_km(Dist) == [ X, ' de metri']               :- Dist < 1000,  D is round(2*Dist/100.0)*50,        num_atom(D, X).
 distance_km(Dist) == ['circa un kilometru ']        :- Dist < 1500.
 distance_km(Dist) == ['circa ', X, ' kilometri '] :- Dist < 10000, D is round(Dist/1000.0),            num_atom(D, X).
 distance_km(Dist) == [ X, ' kilometri ']          :-               D is round(Dist/1000.0),            num_atom(D, X).
 
 %%% distance measure mi/f
-distance_mi_f(Dist) == [ X, ' picioare']               :- Dist < 160,   D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
+distance_mi_f(Dist) == [ X, ' de picioare']               :- Dist < 160,   D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
 distance_mi_f(Dist) == [ X, ' zecime de milă']    :- Dist < 241,   D is round(Dist/161.0),             num_atom(D, X).
 distance_mi_f(Dist) == [ X, ' zecimi de milă']   :- Dist < 1529,  D is round(Dist/161.0),             num_atom(D, X).
 distance_mi_f(Dist) == ['circa o milă ']           :- Dist < 2414.
-distance_mi_f(Dist) == ['circa ', X, ' mile ']    :- Dist < 16093, D is round(Dist/1609.0),            num_atom(D, X).
-distance_mi_f(Dist) == [ X, ' mile ']             :-               D is round(Dist/1609.0),            num_atom(D, X).
+distance_mi_f(Dist) == ['circa ', X, ' de mile ']    :- Dist < 16093, D is round(Dist/1609.0),            num_atom(D, X).
+distance_mi_f(Dist) == [ X, ' de mile ']             :-               D is round(Dist/1609.0),            num_atom(D, X).
 
 %%% distance measure mi/y
 distance_mi_y(Dist) == [ X, ' iarzi']              :- Dist < 241,   D is round(Dist/10.0/0.9144)*10,    num_atom(D, X).
