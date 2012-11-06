@@ -1105,8 +1105,8 @@
 			<filter tag="highway" value="secondary" maxzoom="13" color="$secondaryRoadColor"/>
 			<filter tag="highway" value="secondary_link" maxzoom="13" color="$secondaryRoadColor"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
-				<!--  too much in europe ? -->
-				<!-- <filter minzoom="9" maxzoom="9" strokeWidth="3"/>  -->
+				<!-- Too much in Europe? Use only with hmRendered for now -->
+				<filter hmRendered="true" minzoom="9" maxzoom="9" strokeWidth="3"/>
 				<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="5"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="6"/>
@@ -1148,8 +1148,8 @@
 			<filter tag="highway" value="tertiary" color="$tertiaryRoadColor"/>
 			<filter tag="highway" value="tertiary_link" color="$tertiaryRoadColor"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
-				<!-- too much in europe ? -->
-				<!-- <filter minzoom="10" maxzoom="10" strokeWidth="3"/>  -->
+				<!-- Too much in Europe? Use only with hmRendered for now -->
+				<filter hmRendered="true" minzoom="10" maxzoom="10" strokeWidth="3"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
 				<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
