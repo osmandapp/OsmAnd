@@ -1,0 +1,405 @@
+
+aerodrome,Aeroport
+arts_centre,Centru de arte
+atm,ATM
+auditorium,Auditorium
+bank,Bancă
+bar,Bar
+pub,Pub
+bench,Bancă
+bicycle_parking,Parcare de biciclete
+bicycle_rental,Închirieri biciclete
+brothel,Bordel
+bureau_de_change,Schimb Valutar
+bus_station,Stație autobuz
+cafe,Cafenea
+car_rental,Rent a Car
+car_sharing,Partajare auto
+car_wash,Spălătorie auto
+casino,Cazino
+cinema,Cinema
+clinic,Clinică
+club,Club
+college,Colegiu
+community_centre,Centru de recreere
+courthouse,Judecătorie
+crematorium,Crematoriu
+dentist,Dentist
+doctors,Doctor
+dormitory,Dormitor comun
+drinking_water,Apă potabilă
+driving_school,Școală de șoferi
+embassy,Ambasadă
+emergency_phone,Telefon Urgențe
+fast_food,Fast Food
+restaurant,Restaurant
+ferry_terminal,Terminal Ferry
+fire_hydrant,Hidrant
+fire_station,Pompieri
+fountain,Fântână
+fuel,Stație de carburanți
+grave_yard,Cimitir
+gym,Sală de fitness
+hall,Sală
+health_centre,Centru de sănătate
+health_centre,Centru balnear
+hospital,Spital
+hotel,Hotel
+hunting_stand,Pavilion de vânătoare
+ice_cream,Înghețată
+kindergarten,Grădiniță
+library,Bibliotecă
+market,Piață
+marketplace,Piață
+mountain_rescue,Salvamont
+nightclub,Club de noapte
+nursery,Creșă
+nursing_home,Casă de sănătate
+office,Office
+park,Parc
+parking,Parcare
+pharmacy,Farmacie
+place_of_worship,Biserică
+police,Poliție
+post_box,Cutie poștală
+post_office,Oficiu poștal
+preschool,Grădiniță
+prison,Închisoare
+bar,Bar
+pub,Pub
+public_building,Clădre publică
+public_market,Piață publică
+reception_area,Cameră de așteptare
+recycling,Punct de colectare deșeuri
+restaurant,Restaurant
+retirement_home,Azil de bătrâni
+sauna,Saună
+school,Școală
+shelter,Adăpost
+shop,Magazin
+shopping,Shopping
+social_club,Club
+studio,Studio
+supermarket,Supermarket
+taxi,Taxi
+telephone,Telefon public
+theatre,Teatru
+toilets,Toaletă publică
+townhall,Primărie
+university,Universitate
+vending_machine,Automat de vânzare
+veterinary,Veterinar
+village_hall,Primărie
+waste_basket,Coș de gunoi
+wifi,WiFi
+youth_centre,Palat al copiilor
+apartments,Bloc de apartamente
+block,Clădire
+bunker,Buncăr
+chapel,Capelă
+church,Biserică
+city_hall,Primărie
+commercial,Clădire comercială
+dormitory,Dormitor comun
+entrance,Intrare în clădire
+faculty,Facultate
+farm,Fermă
+flats,Apartamente
+garage,Garaj
+hall,Sală
+hospital,Spital
+house,Casă
+industrial, Clădire industrială
+office,Clădire de birouri
+public,Clădire publică
+residential,Zonă rezidențială
+retail,Clădire de magazine
+stadium,Stadion
+store,Magazin
+terrace,Terasă
+tower,Turn
+train_station,Gară
+yes,Clădire
+bridleway,Potecă
+bus_guideway,Linie autobuz ghidat
+bus_stop,Stație autobuz
+byway,Drum secundar
+construction,În construcție
+cycleway,Pistă de biciclete
+distance_marker,Bornă kilometrică
+emergency_access_point,Cameră de gardă urgențe
+footway,Cărare
+ford,Ford
+gate,Poartă
+living_street,Stradă rezidențială
+minor,Drum secundar
+motorway,Autostradă
+motorway_junction, Joncțiune autostradă
+motorway_link,Conexiune autostradă
+path,Cărare
+pedestrian,Drum pietonal
+platform,Platformă
+primary,Drum principal
+primary_link,Drum principal
+raceway,Pistă de curse
+rest_area,Punct de odihnă
+rest_area,Rest Stop
+road,Drum
+secondary,Drum secundar
+secondary_link,Drum secundar
+service,Drum de serviciu
+services,Arie servicii
+services,Servicii autostradă
+steps,Trepte
+stile,Trepte
+tertiary,Drum terțiar
+track,Șine
+trail,Potecă
+trunk,Drum express
+trunk_link,Drum express
+unclassified,Drum neclasificat
+unsurfaced,Drum nepavat
+archaeological_site,Sit arheologic
+battlefield,Câmp de bătălie
+boundary_stone,Piatră de hotar
+building,Clădire
+castle,Castel
+house,Casă
+icon,Icoană
+manor,Manor
+memorial,Monument
+mine,Mină
+monument,Monument
+museum,Muzeu
+ruins,Ruine
+wayside_cross,Cruce
+wayside_shrine,Loc de închinăciune
+wreck,Epavă
+allotments,Loturi
+basin,Bazin
+brownfield,Zonă abandonată
+cemetery,Cimitir
+commercial,Zonă comercială
+conservation,zonă în conservare
+farmland,Fermă
+farmyard,Fermă
+forest,Pădure
+grass,Iarbă
+greenfield,Teren arabil
+industrial,Zonă industrială
+landfill,Groapă de gunoi
+meadow,Luncă
+military,Zonă militară
+mountain,Munte
+nature_reserve,Parc natural
+piste,Pârtie de ski
+plaza,Plaza
+quarry,Carieră
+railway,Cale ferată
+recreation_ground,Zonă de recreere
+reservoir,Rezervor
+village_green,Parc
+vineyard,Vie
+wetland,Zonă inundabilă
+beach_resort,Stațiune litorală
+common,Cooperativă
+fishing,Zonă de pescuit
+garden,Grădină
+golf_course,Teren de golf
+hackerspace,Hackerspace
+ice_rink,Patinoar
+marina,Port
+miniature_golf,Minigolf
+pitch,Teren de sport
+playground,Teren de joacă
+recreation_ground,Loc de recreere
+slipway,Cală
+sports_centre,Centru sportiv
+swimming_pool,Piscină
+track,Pistă de alergări
+water_park,Parc acvatic
+bay,Golf
+beach,Plajă
+cape,Cap
+cave_entrance,Intrare în peșteră
+channel,Canal
+cliff,Stâncă
+coastline,Linie de coastă
+crater,Crater
+feature,Amenajare
+fell,Movilă
+fjord,Fiord
+geyser,Gheizer
+glacier,Ghețar
+heath,Teren viran
+hill,Deal
+island,Insulă
+land,Teren
+marsh,Marsh
+moor,Mlaștină
+mud,Noroi
+peak,Vârf
+point,Punct
+reef,Stâncă
+ridge,Creastă
+river,Râu
+rock,Piatră
+scree,Grohotiș
+scrub,Tufiș
+shoal,Banc de nisip
+spring,Izvor
+strait,Strâmtoare
+tree,Copac
+valley,Vale
+volcano,Vulcan
+water,Apă
+wetlands,Zone inundabile
+wood,Pădure
+city,Oraș
+country,Țară
+county,Județ
+hamlet,Cătun
+house,Casă
+houses,case
+islet,Istm
+locality,Localitate
+municipality,Municipiu
+postcode,Cod poștal
+region,Regiune
+sea,Mare
+state,Stat
+subdivision,Subdiviziune
+suburb,Suburbie
+town,Oraș
+unincorporated_area,Zonă liberă
+village,Sat
+abandoned,Abandonată
+disused,Scos din uz
+disused_station,Gară abandonată
+funicular,Funicular
+halt,Haltă
+historic_station,Gară istorică
+junction,Nod de cale ferată
+level_crossing,Trecere la nivel
+light_rail,Tren ușor
+monorail,Monorail
+narrow_gauge,Tren cu cale ingustă
+preserved,Cale ferată în conservare
+spur,Cale ferată secundară
+station,Stație
+subway,Metrou
+subway_entrance, Intrare metrou
+switch,Macaz
+tram,Tramvai
+tram_stop,Stație de tramvai
+yard,Depou
+alcohol,Distilerie
+apparel,Magazin îmbrăcăminte
+art,Magazin obiecte de artă
+bakery,Brutărie
+beauty,Beauty Shop
+beverages,Magazin de băuturi
+bicycle,Magazin de biciclete
+books,Librărie
+butcher,Măcelărie
+car,Magazin auto
+car_dealer,Reprezentanță auto
+car_parts,Piese auto
+carpet,Magazin de covoare
+car_repair,Service auto
+charity,Magazin caritate
+chemist,Chimicale
+clothes,Îmbrăcăminte
+computer,Computer Shop
+confectionery,Cofetărie
+convenience,Băcănie
+copyshop,Copy shop
+cosmetics,Cosmetice
+department_store,Magazin universal
+discount,Magazin discount
+doityourself,Do-It-Yourself
+drugstore,Farmacie
+dry_cleaning,Curățătorie
+electronics,Magazin Electronice
+estate_agent,Agent imobiliar
+fashion,Magazin de modă
+fish,Pescărie
+florist,Florărie
+food,Magazin alimentar
+funeral_directors,Pompe funebre
+furniture,Mobilă
+gallery,Galerie
+garden_centre,Produse pentru grădină
+general,Magazin universal
+gift,Cadouri
+greengrocer,Legume
+grocery,Băcănie
+hairdresser,Coafor
+hardware,Magazin fierărie
+hifi,Hi-Fi
+insurance,Asigurări
+jewelry,Bijuterii
+kiosk,Chioșc
+laundry,Spălătorie
+mall,Mall
+market,Piață
+mobile_phone,Magazin de telefoane mobile
+motorcycle,Magazin moto
+music,Magazin de obiecte muzicale
+newsagent,Agenție de știri
+optician,Optician
+organic,Magazin produse bio
+outdoor,Magazin produse outdoor
+pet,Pet shop
+photo,Servicii Foto
+salon,Salon
+shoes,Încălțăminte
+shopping_centre,Shopping Center
+sports,Articole sportive
+stationery,Papetărie
+supermarket,Supermarket
+toys,Jucării
+travel_agency,Agenție de turism
+video,Video shop
+wine,Vinărie
+alpine_hut,Refugiu alpin
+artwork,Opere de artă
+attraction,Atracție turistică
+bed_and_breakfast,Bed and Breakfast
+cabin,Cabină
+camp_site,Camping
+caravan_site,Camping pentru rulote
+chalet,Castel
+guest_house,Casă de oaspeți
+hostel,Hostel
+hotel,Hotel
+information,Informații
+lean_to,Adăpost
+motel,Motel
+museum,Muzeu
+picnic_site,Zonă de picnic
+theme_park,Parc tematic
+valley,Vale
+viewpoint,Punct de observare
+zoo,Grădină zoologică
+boatyard,Șantier naval
+canal,Canal
+connector,Canal nautic
+dam,Baraj
+derelict_canal,Canal abandonat
+ditch,Groapă
+dock,Doc
+drain,Scurgere
+lock,Ecluză
+lock_gate,Poartă de ecluză
+mineral_spring,Izvor de apă minerală
+mooring,Ancoraj
+rapids,Repeziș
+river,Râu
+riverbank,Mal
+stream,Pârâu
+wadi,Ued
+waterfall,Cascadă
+water_point,Punct de alimnetare cu apă
+weir,Stăvilar
+windmill,Moară de vânt
