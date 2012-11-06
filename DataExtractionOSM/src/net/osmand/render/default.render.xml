@@ -290,7 +290,9 @@
 			<filter tag="highway" value="footway" order="32"/>
 			<filter tag="highway" value="" order="32"/>
 
-			<filter tag="aeroway" value="" order="32"/>
+			<filter tag="aeroway" value="terminal" order="33"/>
+			<filter tag="aeroway" value="apron" order="32"/>
+			<filter tag="aeroway" value="" order="31"/>
 
 			<filter tag="power" value="" order="7"/>
 			<filter tag="amenity" value="" order="7"/>
@@ -500,13 +502,14 @@
 			<filter minzoom="14" maxzoom="14" textSize="12" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="platform"/>
 			<filter minzoom="15" textSize="13" textColor="#6666ff" textHaloRadius="1" textBold="true" textDy="7" tag="railway" value="platform"/>
 
+		<filter minzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="aerialway" value="station"/>
+
 		<!-- Aeroway -->
 		<filter minzoom="11" textSize="12" textColor="#6692da" textHaloRadius="1" textDy="7" tag="aeroway" value="aerodrome"/>
 		<filter minzoom="14" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="runway" nameTag="ref"/>
 		<filter minzoom="15" textSize="12" textColor="#333333" textOnPath="true" textMinDistance="50" tag="aeroway" value="taxiway" nameTag="ref"/>
 		<filter minzoom="10" textSize="12" textColor="#6692da" textHaloRadius="1" textBold="true" textDy="7" tag="aeroway" value="airport"/>
 		<filter minzoom="17" textSize="12" textColor="#aa66cc" textWrapWidth="10" tag="aeroway" value="gate" nameTag="ref"/>
-		<filter minzoom="14" textSize="12" textColor="#6666ff" textDy="7" tag="aerialway" value="station"/>
 		
 		<!-- landuse -->
 		<group>
@@ -857,12 +860,13 @@
 			<filter minzoom="16" icon="level_crossing2" tag="railway" value="level_crossing"/>
 		<filter minzoom="16" icon="subway_entrance" tag="railway" value="subway_entrance"/>
 
-		<!-- Aero -->
+		<filter minzoom="13" maxzoom="14" icon="halt" tag="aerialway" value="station"/>
+			<filter minzoom="15" icon="station_small" tag="aerialway" value="station"/>
+
+		<!-- Aeroway -->
 		<filter minzoom="15" icon="helipad" tag="aeroway" value="helipad"/>
 		<filter minzoom="10" icon="aerodrome" tag="aeroway" value="aerodrome"/>
 		<filter minzoom="9" icon="airport" tag="aeroway" value="airport"/>
-		<filter minzoom="13" maxzoom="14" icon="halt" tag="aerialway" value="station"/>
-			<filter minzoom="15" icon="station_small" tag="aerialway" value="station"/>
 	</point>
 
 
@@ -917,7 +921,7 @@
 		</group>
 
 
-		<!-- Aeroways -->
+		<!-- Aeroway -->
 		<group>
 			<filter minzoom="12" tag="aeroway" value="aerodrome"/>
 			<filter minzoom="12" tag="aeroway" value="airport"/>
@@ -1497,7 +1501,13 @@
 			</groupFilter>
 		</group>
 
-		<!-- Aeroways -->
+		<filter tag="aerialway" value="cable_car" minzoom="12" color="#bababa" strokeWidth="2"/>
+		<filter tag="aerialway" value="gondola" minzoom="12" color="#bababa" strokeWidth="2"/>
+		<filter tag="aerialway" value="chair_lift" minzoom="12" color="#bababa" strokeWidth="2"/>
+		<filter tag="aerialway" value="mixed_lift" minzoom="12" color="#bababa" strokeWidth="2"/>
+		<filter tag="aerialway" value="drag_lift" minzoom="12" color="#bababa" strokeWidth="2"/>
+
+		<!-- Aeroway -->
 		<filter tag="aeroway" value="runway" color="#bbbbcc">
 			<filter layer="1" minzoom="13" maxzoom="13" color="#000000" strokeWidth="9" color_2="#bbbbcc" strokeWidth_2="7" cap_2="SQUARE"/>
 			<filter layer="1" minzoom="14" maxzoom="14" color="#000000" strokeWidth="14" color_2="#bbbbcc" strokeWidth_2="12" cap_2="SQUARE"/>
@@ -1517,12 +1527,6 @@
 			<filter minzoom="14" maxzoom="14" strokeWidth="4"/>
 			<filter minzoom="15" color="#bbbbcc" strokeWidth="6"/>
 		</filter>
-
-		<filter tag="aerialway" value="cable_car" minzoom="12" color="#bababa" strokeWidth="2"/>
-		<filter tag="aerialway" value="gondola" minzoom="12" color="#bababa" strokeWidth="2"/>
-		<filter tag="aerialway" value="chair_lift" minzoom="12" color="#bababa" strokeWidth="2"/>
-		<filter tag="aerialway" value="mixed_lift" minzoom="12" color="#bababa" strokeWidth="2"/>
-		<filter tag="aerialway" value="drag_lift" minzoom="12" color="#bababa" strokeWidth="2"/>
 
 		<!-- Man made -->
 		<filter tag="power" value="line" minzoom="14" maxzoom="14" color="#bababa" strokeWidth="1"/>
