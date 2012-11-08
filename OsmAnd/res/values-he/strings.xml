@@ -2,4 +2,93 @@
 <resources>
 	<string name="default_buttons_no">לא</string>
 	<string name="default_buttons_yes">כן</string>
+	<string name="close_changeset">סגירת ערכת השינויים</string>
+	<string name="zxing_barcode_scanner_not_found">יישום סריקת הברקודים ZXing אינו מותקן. לחפש בחנות?</string>
+	<string name="rendering_attr_roadColors_description">בחירת ערכת צבעי דרך:</string>
+	<string name="rendering_attr_roadColors_name">ערכת צבעי דרך</string>
+    <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
+    <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף המעקב כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום)</string>
+    <string name="non_optimal_route_calculation">יש לחשב נתיב בלתי יעיל למרחקים ארוכים</string>
+    <string name="tip_recent_changes_0_8_4_t">"שינויים ב־0.8.4 :
+\n\t* כמה תיקוני תקלות
+\n\t* המפה אינה מאבדת את נעילת המיקום שלה לאחר הפרעות
+\n\t* ניתן להפעיל יישומי רקע בעת הניווט  "</string>
+	<string name="gps_not_available">נא להפעיל את רכיב האיכון (GPS) בהגדרות</string>
+    <string name="tip_recent_changes_0_8_3_t">"שינויים ב־0.8.3 :
+\n\t* נקודות ציון
+\n\t* הנחיות ניתוב משופרות
+\n\t* נוספה ההגדרה שמאפשר להתעלם מדרכים לכלים ממונעים בעת הרכבת נתיב
+\n\t* נוספו סוג אחד או יותר של דרכים לאופניים במפה (Cycleway=track)
+\n\t* תיקוני תקלות "</string>
+	<string name="map_widget_monitoring_services">שירותי רישום</string>
+	<string name="no_route">אין נתיב</string>
+	<string name="delete_target_point">הסרת נקודת ציון</string>
+	<string name="target_point">נקודת הציון %1$s</string>
+    <string name="intermediate_point">נקודת הציון %1$s</string>
+    <string name="navigate_to">הגדרה כיעד</string>
+    <string name="context_menu_item_last_intermediate_point">הוספת כנקודת הציון הסופית</string>
+    <string name="context_menu_item_first_intermediate_point">הוספה כנקודת הציון ההתחלתית</string>
+    <string name="add_as_last_destination_point">הוספה כנקודת הציון הסופית</string>
+    <string name="add_as_first_destination_point">הוספה כנקודת הציון ההתחלתית</string>
+    <string name="replace_destination_point">החלפת נקודת היעד</string>
+    <string name="new_destination_point_dialog">כבר הגדרת נקודת יעד.</string>
+    <string name="target_points">נקודות יעד</string>
+    <string name="intermediate_point_too_far">נקודת היעד %1$s רחוקה מדי מהדרך הקרובה אליה.</string>
+    <string name="arrived_at_intermediate_point">הגעת לנקודת הציון שלך</string>
+    <string name="context_menu_item_intermediate_point">הוספה כנקודת ציון</string>
+    <string name="map_widget_intermediate_distance">נקודת ציון</string>
+    <string name="ending_point_too_far">נקודת הסיום רחוקה מדי מהדרך הקרובה אליה.</string>
+    <string name="btn_add_tag">הוספת תגית</string>
+    <string name="btn_advanced_mode">מצב מתקדם...</string>
+    <string name="poi_filter_parking">חנייה</string>
+    <string name="poi_filter_emergency">חירום</string>
+    <string name="poi_filter_public_transport">תחבורה ציבורית</string>
+    <string name="poi_filter_entertainment">בידור</string>
+    <string name="poi_filter_accomodation">הארחה</string>
+    <string name="poi_filter_restaurants">מסעדות</string>
+    <string name="poi_filter_sightseeing">נקודות תצפית</string>
+    <string name="poi_filter_car_aid">עזרה לרכב</string>
+	<string name="poi_filter_food_shop">חנות מזון</string>
+	<string name="poi_filter_for_tourists">לתיירים</string>
+	<string name="poi_filter_fuel">דלק</string>
+	<string name="show_warnings_title">הצגת התראות…</string>
+	<string name="show_warnings_descr">הגדרת אזהרות תנועה (הגבלות מהירות, עצירות מחייבות, פסי האטה), אזהרת מצלמות מהירות ופרטי נתיב</string>
+	<string name="use_compass_navigation_descr">יש להשתמש במצפן כאשר לא מזוהה עצם מנחה</string>
+	<string name="use_compass_navigation">להשתמש במצפן</string>
+	<string name="avoid_motorway">להמנע מדרכים לממונעים</string>
+	<string name="auto_zoom_map_descr">יש לשנות את התקריב למפה אוטומטית בהתאם למהירות (בעוד שהמפה מסתנכרנת עם המיקום הנוכחי)</string>
+	<string name="auto_zoom_map">שינוי תקריב אוטומטי במפה</string>
+	<string name="snap_to_road_descr">יש להצמיד את המיקום לדרכים במהלך הניווט</string>
+	<string name="snap_to_road">הצמדה לדרך</string>
+	<string name="tip_recent_changes_0_8_2_t">"שינויים ב־0.8.2 :
+\n\t* ניווט משופר
+\n\t* וידג׳טים משופרים למפה
+\n\t* הגדרות המפה עברו למסך המפה
+\n\t* לחצן נעילה עם שירותי רישום
+\n\t* תוקן הטיפול בכתב בשפות ערבית וקאנדה ושפות הכתובות מימין לשמאל "</string>
+	<string name="osmand_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
+	<string name="osmand_plus_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
+	<string name="tip_update_index">עדכון של נתונים בלתי מקוונים</string>
+	<string name="filterpoi_activity">יצירת מסנן נ״ע</string>
+	<string name="recalculate_route_to_your_location">מצב תעבורה:</string>
+	<string name="select_navigation_mode">בחירת מצב תעבורה</string>
+	<string name="monitor_preferences">מעקב</string>
+	<string name="day_night_info_description">זריחה : %1$s
+\nשקיעה : %2$s</string>
+	<string name="day_night_info">פרטי יום/לילה</string>
+	<string name="map_widget_day_night">מפת יום/לילה</string>
+	<string name="map_widget_vector_attributes">מאפייני עיבוד תמונה:</string>
+	<string name="map_widget_renderer">סגנון עיבוד התמונה</string>
+	<string name="live_monitoring_mode_off">התחלה\n במעקב החי</string>
+	<string name="live_monitoring_mode_on">הפסקת\n המעקב החי</string>
+	<string name="position_on_map_descr">יש לבחור את מיקום סמן המיקום במפה</string>
+	<string name="position_on_map">סמן מיקום</string>
+	<string name="layer_map_appearance">הגדרת המסך…</string>
+	<string name="show_lanes">הצגת נתיבים</string>
+	<string name="avoid_unpaved">המנעות מדרכים שאינן סלולות</string>
+	<string name="avoid_ferries">המנעות ממעבורות</string>
+	<string name="avoid_in_routing_title">המנעות…</string>
+	<string name="avoid_in_routing_descr">המנעות מכבישי אגרה, בלתי סלולים, מעבורות</string>
+	<string name="map_widget_show_ruler">סרגל</string>
+	<string name="map_widget_appearance">שונות:</string>
 	</resources>
