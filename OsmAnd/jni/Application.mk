@@ -7,7 +7,7 @@ APP_ABI := x86
 else
 ifdef OSMAND_ARM_ONLY
 APP_ABI := armeabi armeabi-v7a
-endif
+else
 ifdef OSMAND_ARMv5_ONLY
 APP_ABI := armeabi
 endif
@@ -16,8 +16,9 @@ APP_ABI := armeabi-v7a
 endif
 endif
 
+endif
+
 ifndef OSMAND_DEBUG_NATIVE
 # Force release compilation in release optimizations, even if application is debuggable by manifest
-#APP_OPTIM := release
-APP_OPTIM := debug
+APP_OPTIM := release
 endif

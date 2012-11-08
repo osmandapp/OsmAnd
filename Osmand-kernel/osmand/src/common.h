@@ -53,10 +53,14 @@
 #define UNORDERED(cls) UNORDERED_NAMESPACE::UNORDERED_##cls
 
 #if defined(ANDROID)
-#	include "shared_ptr.h"
-#   define SHARED_PTR my_shared_ptr
+#include "shared_ptr.h"
+#define SHARED_PTR my_shared_ptr
+//#   include <tr1/shared_ptr.h>
+//#   define SHARED_PTR std::tr1::shared_ptr
 #elif defined(WINDOWS)
 #else
+//#	include "shared_ptr.h"
+//#   define SHARED_PTR my_shared_ptr
 #   include <tr1/memory>
 #   define SHARED_PTR std::tr1::shared_ptr
 #endif

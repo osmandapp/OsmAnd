@@ -53,7 +53,7 @@ public class RouteSegmentResult {
 	
 	public RouteSegmentResult[] getPreAttachedRoutes(int routeInd) {
 		int st = Math.abs(routeInd - startPointIndex);
-		if(st < preAttachedRoutes.length) {
+		if(preAttachedRoutes != null && st < preAttachedRoutes.length) {
 			return preAttachedRoutes[st];
 		}
 		return null;

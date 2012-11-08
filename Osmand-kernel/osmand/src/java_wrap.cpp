@@ -629,7 +629,6 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRo
 		jobject obj, jintArray  coordinates,
 		jintArray stateConfig, jobjectArray keyConfig, jobjectArray valueConfig, jfloat initDirection,
 		jobjectArray regions) {
-
 	vector<ROUTE_TRIPLE> cfg;
 	int* data = ienv->GetIntArrayElements(stateConfig, NULL);
 	for(int k = 0; k < ienv->GetArrayLength(stateConfig); k++) {
@@ -653,7 +652,6 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRo
 	c.endX = data[2];
 	c.endY = data[3];
 	ienv->ReleaseIntArrayElements(coordinates, data, 0);
-
 	vector<RouteSegmentResult> r = searchRouteInternal(&c, false);
 	UNORDERED(map)<int64_t, int> indexes;
 	for (int t = 0; t< ienv->GetArrayLength(regions); t++) {

@@ -189,7 +189,7 @@ struct RoutingConfiguration {
 		distanceRecalculate = parseFloat("recalculateDistanceHelp", 10000) ;
 	}
 
-	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, float initDirection = -360, int memLimit = 100) :
+	RoutingConfiguration(vector<ROUTE_TRIPLE>& config, float initDirection = -360, int memLimit = 48) :
 			memoryLimitation(memLimit), initialDirection(initDirection) {
 		for(int j = 0; j<config.size(); j++) {
 			ROUTE_TRIPLE r = config[j];
@@ -442,7 +442,7 @@ struct RoutingContext {
 	}
 
 	void loadHeaderObjects(int64_t tileId) {
-		vector<SHARED_PTR<RoutingSubregionTile> > subregions = indexedSubregions[tileId];
+		vector<SHARED_PTR<RoutingSubregionTile> >& subregions = indexedSubregions[tileId];
 		bool gc = false;
 		for(int j = 0; j<subregions.size() && !gc; j++) {
 			if(!subregions[j]->isLoaded()) {
@@ -514,7 +514,7 @@ struct RoutingContext {
 				uint32_t yloc = (y31+j*coordinatesShift) >> (31 - z);
 				int64_t tileId = (xloc << z) + yloc;
 				loadHeaders(xloc, yloc);
-				vector<SHARED_PTR<RoutingSubregionTile> > subregions = indexedSubregions[tileId];
+				vector<SHARED_PTR<RoutingSubregionTile> >& subregions = indexedSubregions[tileId];
 				for(int j = 0; j<subregions.size(); j++) {
 					if(subregions[j]->isLoaded()) {
 						UNORDERED(map)<int64_t, SHARED_PTR<RouteSegment> >::iterator s = subregions[j]->routes.begin();
@@ -545,7 +545,7 @@ struct RoutingContext {
 		uint64_t l = (((uint64_t) x31) << 31) + (uint64_t) y31;
 		int64_t tileId = (xloc << z) + yloc;
 		loadHeaders(xloc, yloc);
-		vector<SHARED_PTR<RoutingSubregionTile> > subregions = indexedSubregions[tileId];
+		vector<SHARED_PTR<RoutingSubregionTile> >& subregions = indexedSubregions[tileId];
 		for(int j = 0; j<subregions.size(); j++) {
 			if(subregions[j]->isLoaded()) {
 				UNORDERED(map)<int64_t, SHARED_PTR<RouteSegment> >::iterator s = subregions[j]->routes.begin();
@@ -575,7 +575,7 @@ struct RoutingContext {
 		uint64_t l = (((uint64_t) x31) << 31) + (uint64_t) y31;
 		int64_t tileId = (xloc << z) + yloc;
 		loadHeaders(xloc, yloc);
-		vector<SHARED_PTR<RoutingSubregionTile> > subregions = indexedSubregions[tileId];
+		vector<SHARED_PTR<RoutingSubregionTile> >& subregions = indexedSubregions[tileId];
 		UNORDERED(map)<int64_t, SHARED_PTR<RouteDataObject> > excludeDuplications;
 		SHARED_PTR<RouteSegment> original;
 		for(int j = 0; j<subregions.size(); j++) {

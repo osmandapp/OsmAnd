@@ -317,12 +317,6 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch,
 			obstacleMinusTime += obstacle;
 		}
 		// could be expensive calculation
-		// FIXME memory check
-//		int overhead = (ctx.visitedSegments - ctx.relaxedSegments ) *
-//		STANDARD_ROAD_IN_QUEUE_OVERHEAD;
-//		if(overhead > ctx.config.memoryLimitation * 0.95) {
-//			throw new OutOfMemoryError("There is no enough memory " + ctx.config.memoryLimitation/(1<<20) + " Mb");
-//		}
 		SHARED_PTR<RouteSegment> next = ctx->loadRouteSegment(x, y);
 		// 3. get intersected ways
 		if (next.get() != NULL) {
