@@ -1,3 +1,57 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-</resources>
+<string name="close_changeset">Değişiklik listesini kapat</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
+	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
+	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
+    <string name="map_widget_show_destination_arrow">Hedef noktasına onal talimatları göster</string>
+    <string name="enable_plugin_monitoring_services">Konum log servislerin kullanmak için yol takip eklentisini aktifleştir (log, canlı yol takip)</string>
+    <string name="non_optimal_route_calculation">Uzak hedefler için tahmini rotayı hesapla</string>
+    <string name="tip_recent_changes_0_8_4_t">"0.8.4 Değişiklikler:
+\n\t* Bazı hata düzeltmeleri
+\n\t* Müdahale sonrası harita üzerinde mevcut konum kaybedilmiyor\n\t* Navigasyon süresinde arka plan servisi aktif edildi "</string>
+	<string name="gps_not_available">Lütfen GPS i ayarlardan açık konuma getirin</string>
+    <string name="map_widget_monitoring_services">Log servisi</string>
+	<string name="no_route">Rota yok</string>
+	<string name="delete_target_point">Ara noktayı kaldır</string>
+	<string name="target_point">Ara nokta %1$s</string>
+    <string name="intermediate_point">Ara nokta %1$s</string>
+    <string name="navigate_to">Hedef olarak ayarla</string>
+    <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
+    <string name="context_menu_item_first_intermediate_point">İlk ara nokta olarak ekle</string>
+    <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
+    <string name="add_as_first_destination_point">İlk ara nokta olarak ekle</string>
+    <string name="replace_destination_point">Hedef noktasını değiştir</string>
+    <string name="new_destination_point_dialog">Hedef konumları zaten bulunmaktadır.</string>
+    <string name="target_points">Ara noktalar</string>
+    <string name="intermediate_point_too_far">%1$s ara noktası en yakın yola çok fazla uzakta.</string>
+    <string name="arrived_at_intermediate_point">Ara noktaya vardınız</string>
+    <string name="context_menu_item_intermediate_point">Ara nokta olarak ekle</string>
+    <string name="map_widget_intermediate_distance">Ara nokta</string>
+    <string name="ending_point_too_far">Bitiş noktası en yakın yola çok fazla uzaklıkta.</string>
+    <string name="btn_add_tag">Etiket Ekle</string>
+    <string name="btn_advanced_mode">Gelişmiş Mod...</string>
+    <string name="poi_filter_parking">Park Etme</string>
+    <string name="poi_filter_emergency">Acil Durum</string>
+    <string name="poi_filter_public_transport">Toplu Taşıma</string>
+    <string name="poi_filter_entertainment">Eğlence</string>
+    <string name="poi_filter_accomodation">Konaklama</string>
+    <string name="poi_filter_restaurants">Restorantlar</string>
+    <string name="poi_filter_sightseeing">Gezinti</string>
+    <string name="poi_filter_car_aid">Araç Yardım</string>
+	<string name="poi_filter_food_shop">Yiyecek Market</string>
+	<string name="poi_filter_for_tourists">Turistler için</string>
+	<string name="poi_filter_fuel">Yakıt</string>
+	<string name="show_warnings_title">Alarmları göster…</string>
+	<string name="use_compass_navigation">Pusulayı kullan</string>
+	<string name="avoid_motorway">Otoyollardan geçme</string>
+	<string name="auto_zoom_map_descr">Hızınıza göre haritayı yakınlaştırma (haritadaki konumunuz güncellenirken)</string>
+	<string name="auto_zoom_map">Otomatik harita yakınlaştırma</string>
+	<string name="tip_update_index">Çevrimdışı Verinin Güncellenmesi</string>
+	<string name="filterpoi_activity">POI filtresi yarat</string>
+	<string name="recalculate_route_to_your_location">Ulaşım modu:</string>
+	<string name="select_navigation_mode">Ulaşım modunu seç</string>
+	<string name="monitor_preferences">Takip etme</string>
+	<string name="day_night_info">Gündüz/gece bilgisi</string>
+	<string name="map_widget_day_night">Gündüz/gece haritası</string>
+	</resources>
