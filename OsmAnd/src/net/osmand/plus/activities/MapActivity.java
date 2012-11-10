@@ -245,7 +245,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
 				Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 		DisplayMetrics dm = getResources().getDisplayMetrics();
-		params.topMargin = (int) (100 * dm.density);
+		params.topMargin = (int) (60 * dm.density);
 		ProgressBar pb = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
 		pb.setIndeterminate(false);
 		pb.setMax(100);
