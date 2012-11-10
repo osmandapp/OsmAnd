@@ -46,9 +46,11 @@ public class RouteSegmentResult {
 	}
 	
 	public void copyPreattachedRoutes(RouteSegmentResult toCopy, int shift) {
-		int l = toCopy.preAttachedRoutes.length - shift;
-		preAttachedRoutes = new RouteSegmentResult[l][];
-		System.arraycopy(toCopy.preAttachedRoutes, shift, preAttachedRoutes, 0, l);
+		if(toCopy.preAttachedRoutes != null) {
+			int l = toCopy.preAttachedRoutes.length - shift;
+			preAttachedRoutes = new RouteSegmentResult[l][];
+			System.arraycopy(toCopy.preAttachedRoutes, shift, preAttachedRoutes, 0, l);
+		}
 	}
 	
 	public RouteSegmentResult[] getPreAttachedRoutes(int routeInd) {
