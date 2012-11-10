@@ -2001,4 +2001,10 @@ public class BinaryMapIndexReader {
 		return Collections.emptyList();
 	}
 	
+	public void initRouteRegion(RouteRegion routeReg) throws IOException {
+		if(routeAdapter != null){
+			routeAdapter.initRouteRegion(routeReg);
+		}
+	}
+	
 }

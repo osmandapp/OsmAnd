@@ -1,5 +1,6 @@
 package net.osmand.router;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -20,13 +22,13 @@ public class RouteResultPreparation {
 	/**
 	 * Helper method to prepare final result 
 	 */
-	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment,boolean leftside) {
+	List<RouteSegmentResult> prepareResult(RoutingContext ctx, FinalRouteSegment finalSegment,boolean leftside) throws IOException {
 		List<RouteSegmentResult> result  = convertFinalSegmentToResults(ctx, finalSegment);
 		prepareResult(ctx, leftside, result);
 		return result;
 	}
 
-	List<RouteSegmentResult> prepareResult(RoutingContext ctx, boolean leftside, List<RouteSegmentResult> result) {
+	List<RouteSegmentResult> prepareResult(RoutingContext ctx, boolean leftside, List<RouteSegmentResult> result) throws IOException {
 		validateAllPointsConnected(result);
 		// calculate time
 		calculateTimeSpeedAndAttachRoadSegments(ctx, result);
@@ -35,13 +37,17 @@ public class RouteResultPreparation {
 		return result;
 	}
 
-	private void calculateTimeSpeedAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result) {
+	private void calculateTimeSpeedAndAttachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result) throws IOException {
 		for (int i = 0; i < result.size(); i++) {
 			if(ctx.checkIfMemoryLimitCritical(ctx.config.memoryLimitation)) {
 				ctx.unloadUnusedTiles(ctx.config.memoryLimitation);
 			}
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
+			BinaryMapIndexReader reader = ctx.reverseMap.get(road.region);
+			if(reader != null) {
+				reader.initRouteRegion(road.region);
+			}
 			double distOnRoadToPass = 0;
 			double speed = ctx.getRouter().defineSpeed(road);
 			if (speed == 0) {

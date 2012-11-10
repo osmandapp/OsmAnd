@@ -26,6 +26,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class RoutingHelper {
@@ -69,6 +71,9 @@ public class RoutingHelper {
 	private Handler uiHandler;
 	private boolean makeUturnWhenPossible = false;
 	private long makeUTwpDetected = 0;
+
+	private ProgressBar progress;
+	private Handler progressHandler;
 
 
 
@@ -570,9 +575,9 @@ public class RoutingHelper {
 	private class RouteRecalculationThread extends Thread {
 		
 		private boolean interrupted = false;
-		private final RouteCalcuationParams params;
+		private final RouteCalculationParams params;
 
-		public RouteRecalculationThread(String name, RouteCalcuationParams params) {
+		public RouteRecalculationThread(String name, RouteCalculationParams params) {
 			super(name);
 			this.params = params;
 			if(params.calculationProgress == null) {
@@ -629,7 +634,7 @@ public class RoutingHelper {
 		if(currentRunningJob == null){
 			// do not evaluate very often
 			if (System.currentTimeMillis() - lastTimeEvaluatedRoute > evalWaitInterval) {
-				RouteCalcuationParams params = new RouteCalcuationParams();
+				RouteCalculationParams params = new RouteCalculationParams();
 				params.start = start;
 				params.end = end;
 				params.intermediates = intermediates;
@@ -641,6 +646,10 @@ public class RoutingHelper {
 				params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 				params.mode = mode;
 				params.ctx = app;
+				if(previousRoute == null && params.type == RouteService.OSMAND) {
+					params.calculationProgress = new RouteCalculationProgress();
+					updateProgress(params.calculationProgress);
+				}
 				synchronized (this) {
 					currentRunningJob = new RouteRecalculationThread("Calculating route", params); //$NON-NLS-1$
 					currentRunningJob.start();
@@ -650,6 +659,29 @@ public class RoutingHelper {
 	}
 	
 	
+	private void updateProgress(final RouteCalculationProgress calculationProgress) {
+		if(progress != null) {
+			progressHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					if (isRouteBeingCalculated()) {
+						progress.setVisibility(View.VISIBLE);
+						float p = calculationProgress.distanceFromBegin + calculationProgress.distanceFromEnd;
+						float all = calculationProgress.totalEstimatedDistance * 1.5f;
+						if (all > 0) {
+							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
+							progress.setProgress(t);
+							updateProgress(calculationProgress);
+						}
+					} else {
+						progress.setVisibility(View.GONE);
+					}
+				}
+			}, 300);
+		}
+	}
+
+
 	public boolean isRouteBeingCalculated(){
 		return currentRunningJob != null;
 	}
@@ -679,6 +711,14 @@ public class RoutingHelper {
 	
 	public GPXFile generateGPXFileWithRoute(){
 		return provider.createOsmandRouterGPX(route);
+	}
+
+
+
+	public void setProgressBar(ProgressBar pb, Handler handler) {
+		progress = pb;
+		progressHandler = handler;
+		
 	}
 
 

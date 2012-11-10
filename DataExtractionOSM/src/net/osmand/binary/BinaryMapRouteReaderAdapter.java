@@ -31,6 +31,7 @@ import net.osmand.osm.MapUtils;
 import org.apache.commons.logging.Log;
 
 import com.google.protobuf.CodedInputStreamRAF;
+import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.WireFormat;
 
 public class BinaryMapRouteReaderAdapter {
@@ -177,7 +178,7 @@ public class BinaryMapRouteReaderAdapter {
 			return routeEncodingRules.get(id);
 		}
 
-		public void initRouteEncodingRule(int id, String tags, String val) {
+		private void initRouteEncodingRule(int id, String tags, String val) {
 			while(routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
@@ -657,13 +658,17 @@ public class BinaryMapRouteReaderAdapter {
 	public void initRouteTypesIfNeeded(SearchRequest<RouteDataObject> req, List<RouteSubregion> list) throws IOException {
 		for (RouteSubregion rs : list) {
 			if (req.intersects(rs.left, rs.top, rs.right, rs.bottom)) {
-				if (rs.routeReg.routeEncodingRules.isEmpty()) {
-					codedIS.seek(rs.routeReg.filePointer);
-					int oldLimit = codedIS.pushLimit(rs.routeReg.length);
-					readRouteIndex(rs.routeReg);
-					codedIS.popLimit(oldLimit);
-				}
+				initRouteRegion(rs.routeReg);
 			}
+		}
+	}
+
+	public void initRouteRegion(RouteRegion routeReg) throws IOException, InvalidProtocolBufferException {
+		if (routeReg.routeEncodingRules.isEmpty()) {
+			codedIS.seek(routeReg.filePointer);
+			int oldLimit = codedIS.pushLimit(routeReg.length);
+			readRouteIndex(routeReg);
+			codedIS.popLimit(oldLimit);
 		}
 	}
 

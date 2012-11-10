@@ -10,7 +10,7 @@ import net.osmand.router.RouteCalculationProgress;
 import android.content.Context;
 import android.location.Location;
 
-public class RouteCalcuationParams {
+public class RouteCalculationParams {
 
 	public Location start;
 	public LatLon end;

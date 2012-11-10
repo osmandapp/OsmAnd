@@ -145,7 +145,7 @@ public class RouteProvider {
 	
 	
 
-	public RouteCalculationResult calculateRouteImpl(RouteCalcuationParams params){
+	public RouteCalculationResult calculateRouteImpl(RouteCalculationParams params){
 		long time = System.currentTimeMillis();
 		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
@@ -181,7 +181,7 @@ public class RouteProvider {
 	}
 
 
-	private RouteCalculationResult calculateGpxRoute(RouteCalcuationParams pars) {
+	private RouteCalculationResult calculateGpxRoute(RouteCalculationParams pars) {
 		RouteCalculationResult res;
 		// get the closest point to start and to end
 		float minDist = Integer.MAX_VALUE;
@@ -247,7 +247,7 @@ public class RouteProvider {
 	
 
 
-	protected RouteCalculationResult findYOURSRoute(RouteCalcuationParams params) throws MalformedURLException, IOException,
+	protected RouteCalculationResult findYOURSRoute(RouteCalculationParams params) throws MalformedURLException, IOException,
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
@@ -306,7 +306,7 @@ public class RouteProvider {
 				params.ctx, params.leftSide, true);
 	}
 	
-	protected RouteCalculationResult findVectorMapsRoute(RouteCalcuationParams params) throws IOException {
+	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params) throws IOException {
 		OsmandApplication app = (OsmandApplication) params.ctx.getApplicationContext();
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(true);
@@ -411,7 +411,7 @@ public class RouteProvider {
 	}
 	
 	
-	protected RouteCalculationResult findCloudMadeRoute(RouteCalcuationParams params)
+	protected RouteCalculationResult findCloudMadeRoute(RouteCalculationParams params)
 			throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		List<RouteDirectionInfo> directions = null;
@@ -578,7 +578,7 @@ public class RouteProvider {
 		return directions;
 	}
 	
-	protected RouteCalculationResult findORSRoute(RouteCalcuationParams params) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
+	protected RouteCalculationResult findORSRoute(RouteCalculationParams params) throws MalformedURLException, IOException, ParserConfigurationException, FactoryConfigurationError,
 			SAXException {
 		List<Location> res = new ArrayList<Location>();
 

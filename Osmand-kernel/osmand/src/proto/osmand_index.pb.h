@@ -962,7 +962,7 @@ class RoutingSubregion : public ::google::protobuf::MessageLite {
   inline ::google::protobuf::int64 offset() const;
   inline void set_offset(::google::protobuf::int64 value);
   
-  // required bool basemap = 3;
+  // optional bool basemap = 3;
   inline bool has_basemap() const;
   inline void clear_basemap();
   static const int kBasemapFieldNumber = 3;
@@ -2216,7 +2216,7 @@ inline void RoutingSubregion::set_offset(::google::protobuf::int64 value) {
   offset_ = value;
 }
 
-// required bool basemap = 3;
+// optional bool basemap = 3;
 inline bool RoutingSubregion::has_basemap() const {
   return _has_bit(2);
 }

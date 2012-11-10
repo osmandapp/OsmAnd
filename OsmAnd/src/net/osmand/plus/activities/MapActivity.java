@@ -66,17 +66,22 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -199,6 +204,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		savingTrackHelper = getMyApplication().getSavingTrackHelper();
 		liveMonitoringHelper = getMyApplication().getLiveMonitoringHelper();
 		routingHelper = getMyApplication().getRoutingHelper();
+		createProgressBarForRouting();
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if(settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated()){
@@ -232,6 +238,22 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
+	}
+
+	private void createProgressBarForRouting() {
+		FrameLayout parent = (FrameLayout) mapView.getParent();
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT,
+				Gravity.CENTER_HORIZONTAL | Gravity.TOP);
+		DisplayMetrics dm = getResources().getDisplayMetrics();
+		params.topMargin = (int) (100 * dm.density);
+		ProgressBar pb = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+		pb.setIndeterminate(false);
+		pb.setMax(100);
+		pb.setLayoutParams(params);
+		pb.setVisibility(View.GONE);
+		
+		parent.addView(pb);
+		routingHelper.setProgressBar(pb, new Handler());
 	}
 
 	

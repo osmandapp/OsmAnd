@@ -2373,6 +2373,7 @@ void MapPart::Swap(MapPart* other) {
 #ifndef _MSC_VER
 const int RoutingSubregion::kSizeFieldNumber;
 const int RoutingSubregion::kOffsetFieldNumber;
+const int RoutingSubregion::kBasemapFieldNumber;
 const int RoutingSubregion::kLeftFieldNumber;
 const int RoutingSubregion::kRightFieldNumber;
 const int RoutingSubregion::kTopFieldNumber;
@@ -2398,6 +2399,7 @@ void RoutingSubregion::SharedCtor() {
   _cached_size_ = 0;
   size_ = GOOGLE_LONGLONG(0);
   offset_ = GOOGLE_LONGLONG(0);
+  basemap_ = false;
   left_ = 0;
   right_ = 0;
   top_ = 0;
@@ -2434,6 +2436,7 @@ void RoutingSubregion::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     size_ = GOOGLE_LONGLONG(0);
     offset_ = GOOGLE_LONGLONG(0);
+    basemap_ = false;
     left_ = 0;
     right_ = 0;
     top_ = 0;
@@ -2476,6 +2479,22 @@ bool RoutingSubregion::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(24)) goto parse_basemap;
+        break;
+      }
+      
+      // optional bool basemap = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_basemap:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &basemap_)));
+          _set_bit(2);
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectTag(32)) goto parse_left;
         break;
       }
@@ -2488,7 +2507,7 @@ bool RoutingSubregion::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &left_)));
-          _set_bit(2);
+          _set_bit(3);
         } else {
           goto handle_uninterpreted;
         }
@@ -2504,7 +2523,7 @@ bool RoutingSubregion::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &right_)));
-          _set_bit(3);
+          _set_bit(4);
         } else {
           goto handle_uninterpreted;
         }
@@ -2520,7 +2539,7 @@ bool RoutingSubregion::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &top_)));
-          _set_bit(4);
+          _set_bit(5);
         } else {
           goto handle_uninterpreted;
         }
@@ -2536,7 +2555,7 @@ bool RoutingSubregion::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &bottom_)));
-          _set_bit(5);
+          _set_bit(6);
         } else {
           goto handle_uninterpreted;
         }
@@ -2552,7 +2571,7 @@ bool RoutingSubregion::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &shiftodata_)));
-          _set_bit(6);
+          _set_bit(7);
         } else {
           goto handle_uninterpreted;
         }
@@ -2587,28 +2606,33 @@ void RoutingSubregion::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->offset(), output);
   }
   
-  // required int32 left = 4;
+  // optional bool basemap = 3;
   if (_has_bit(2)) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->basemap(), output);
+  }
+  
+  // required int32 left = 4;
+  if (_has_bit(3)) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->left(), output);
   }
   
   // required int32 right = 5;
-  if (_has_bit(3)) {
+  if (_has_bit(4)) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->right(), output);
   }
   
   // required int32 top = 6;
-  if (_has_bit(4)) {
+  if (_has_bit(5)) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->top(), output);
   }
   
   // required int32 bottom = 7;
-  if (_has_bit(5)) {
+  if (_has_bit(6)) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->bottom(), output);
   }
   
   // required uint32 shifToData = 8;
-  if (_has_bit(6)) {
+  if (_has_bit(7)) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(8, this->shiftodata(), output);
   }
   
@@ -2630,6 +2654,11 @@ int RoutingSubregion::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int64Size(
           this->offset());
+    }
+    
+    // optional bool basemap = 3;
+    if (has_basemap()) {
+      total_size += 1 + 1;
     }
     
     // required int32 left = 4;
@@ -2689,18 +2718,21 @@ void RoutingSubregion::MergeFrom(const RoutingSubregion& from) {
       set_offset(from.offset());
     }
     if (from._has_bit(2)) {
-      set_left(from.left());
+      set_basemap(from.basemap());
     }
     if (from._has_bit(3)) {
-      set_right(from.right());
+      set_left(from.left());
     }
     if (from._has_bit(4)) {
-      set_top(from.top());
+      set_right(from.right());
     }
     if (from._has_bit(5)) {
-      set_bottom(from.bottom());
+      set_top(from.top());
     }
     if (from._has_bit(6)) {
+      set_bottom(from.bottom());
+    }
+    if (from._has_bit(7)) {
       set_shiftodata(from.shiftodata());
     }
   }
@@ -2713,7 +2745,7 @@ void RoutingSubregion::CopyFrom(const RoutingSubregion& from) {
 }
 
 bool RoutingSubregion::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000007f) != 0x0000007f) return false;
+  if ((_has_bits_[0] & 0x000000fb) != 0x000000fb) return false;
   
   return true;
 }
@@ -2722,6 +2754,7 @@ void RoutingSubregion::Swap(RoutingSubregion* other) {
   if (other != this) {
     std::swap(size_, other->size_);
     std::swap(offset_, other->offset_);
+    std::swap(basemap_, other->basemap_);
     std::swap(left_, other->left_);
     std::swap(right_, other->right_);
     std::swap(top_, other->top_);

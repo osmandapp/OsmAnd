@@ -75,7 +75,7 @@ message MapPart {
 message RoutingSubregion  {
 	required int64 size = 1;
 	required int64 offset = 2;
-	required bool basemap= 3;
+	optional bool basemap= 3;
 
 	required int32 left = 4;
 	required int32 right = 5;

@@ -1007,7 +1007,6 @@ void searchRouteSubregions(SearchQuery* q, std::vector<RouteSubregion>& tempResu
 void readRouteMapObjects(SearchQuery* q, BinaryMapFile* file, vector<RouteSubregion>& found,
 		RoutingIndex* routeIndex, std::vector<MapDataObject*>& tempResult, bool skipDuplicates,
 		IDS_SET& ids) {
-	osmand_log_print(LOG_INFO, "Search map %s %d", routeIndex->name.c_str(), found.size());
 	sort(found.begin(), found.end(), sortRouteRegions);
 	lseek(file->fd, 0, SEEK_SET);
 	FileInputStream input(file->fd);
@@ -1045,7 +1044,6 @@ void readRouteDataAsMapObjects(SearchQuery* q, BinaryMapFile* file, std::vector<
 				contains = true;
 			}
 		}
-		osmand_log_print(LOG_INFO, "Search map %s %d", (*routeIndex)->name.c_str(), subs.size());
 		if (contains) {
 			vector<RouteSubregion> found;
 			lseek(file->fd, 0, SEEK_SET);

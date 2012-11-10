@@ -3636,7 +3636,7 @@ public final class OsmandIndex {
     public boolean hasOffset() { return hasOffset; }
     public long getOffset() { return offset_; }
     
-    // required bool basemap = 3;
+    // optional bool basemap = 3;
     public static final int BASEMAP_FIELD_NUMBER = 3;
     private boolean hasBasemap;
     private boolean basemap_ = false;
@@ -3684,7 +3684,6 @@ public final class OsmandIndex {
 	public final boolean isInitialized() {
       if (!hasSize) return false;
       if (!hasOffset) return false;
-      if (!hasBasemap) return false;
       if (!hasLeft) return false;
       if (!hasRight) return false;
       if (!hasTop) return false;
@@ -4032,7 +4031,7 @@ public final class OsmandIndex {
         return this;
       }
       
-      // required bool basemap = 3;
+      // optional bool basemap = 3;
       public boolean hasBasemap() {
         return result.hasBasemap();
       }

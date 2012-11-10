@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.LogUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
+
+import org.apache.commons.logging.Log;
 
 public class RoutePlannerFrontEnd {
 	
@@ -181,7 +181,7 @@ public class RoutePlannerFrontEnd {
 		
 	}
 
-	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, boolean leftSideNavigation) {
+	private List<RouteSegmentResult> runNativeRouting(final RoutingContext ctx, boolean leftSideNavigation) throws IOException {
 		refreshProgressDistance(ctx);
 		RouteRegion[] regions = ctx.reverseMap.keySet().toArray(new BinaryMapRouteReaderAdapter.RouteRegion[ctx.reverseMap.size()]);
 		RouteSegmentResult[] res = ctx.nativeLib.runNativeRouting(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY,
