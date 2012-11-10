@@ -845,7 +845,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 							location.getSpeed(), location.getAccuracy(), locationTime, settings);
 				}
 				// live monitoring is aware of accuracy (it would be good to create an option)
-				if (settings.LIVE_MONITORING.get()) {
+				if (liveMonitoringHelper.isLiveMonitoringEnabled()) {
 					liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 							location.getSpeed(), location.getAccuracy(), location.getTime(), settings);
 				}
