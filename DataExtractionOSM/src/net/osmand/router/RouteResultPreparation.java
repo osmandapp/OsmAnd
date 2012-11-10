@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.binary.RouteDataObject;
+import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
@@ -184,7 +185,7 @@ public class RouteResultPreparation {
 		return false;
 	}
 	
-	void printResults(RoutingContext ctx, RouteSegment start, RouteSegment end, List<RouteSegmentResult> result) {
+	void printResults(RoutingContext ctx, LatLon start, LatLon end, List<RouteSegmentResult> result) {
 		float completeTime = 0;
 		float completeDistance = 0;
 		for(RouteSegmentResult r : result) {
@@ -193,10 +194,10 @@ public class RouteResultPreparation {
 		}
 
 		println("ROUTE : ");
-		double startLat = MapUtils.get31LatitudeY(start.road.getPoint31YTile(start.getSegmentStart()));
-		double startLon = MapUtils.get31LongitudeX(start.road.getPoint31XTile(start.getSegmentStart()));
-		double endLat = MapUtils.get31LatitudeY(end.road.getPoint31YTile(end.getSegmentStart()));
-		double endLon = MapUtils.get31LongitudeX(end.road.getPoint31XTile(end.getSegmentStart()));
+		double startLat = start.getLatitude();
+		double startLon = start.getLongitude();
+		double endLat = end.getLatitude();
+		double endLon = end.getLongitude();
 		StringBuilder add = new StringBuilder();
 		add.append("loadedTiles = \"").append(ctx.loadedTiles).append("\" ");
 		add.append("visitedSegments = \"").append(ctx.visitedSegments).append("\" ");

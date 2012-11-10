@@ -20,7 +20,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
-import net.osmand.router.Interruptable;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import android.content.Context;
 import android.content.Intent;
@@ -567,7 +567,7 @@ public class RoutingHelper {
 	
 	
 	
-	private class RouteRecalculationThread extends Thread implements Interruptable {
+	private class RouteRecalculationThread extends Thread {
 		
 		private boolean interrupted = false;
 		private final RouteCalcuationParams params;
@@ -575,23 +575,21 @@ public class RoutingHelper {
 		public RouteRecalculationThread(String name, RouteCalcuationParams params) {
 			super(name);
 			this.params = params;
-			params.interruptable = this;
+			if(params.calculationProgress == null) {
+				params.calculationProgress = new RouteCalculationProgress();
+			}
 		}
 
 		public void stopCalculation(){
-			interrupted = true;
+			params.calculationProgress.isCancelled = true;
 		}
 		
-		@Override
-		public boolean isCancelled() {
-			return interrupted;
-		}
 		
 		@Override
 		public void run() {
 			
 			RouteCalculationResult res = provider.calculateRouteImpl(params);
-			if (interrupted) {
+			if (params.calculationProgress.isCancelled) {
 				currentRunningJob = null;
 				return;
 			}

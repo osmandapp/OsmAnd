@@ -6,7 +6,7 @@ import net.osmand.osm.LatLon;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.router.Interruptable;
+import net.osmand.router.RouteCalculationProgress;
 import android.content.Context;
 import android.location.Location;
 
@@ -24,5 +24,5 @@ public class RouteCalcuationParams {
 	public boolean fast;
 	public boolean optimal;
 	public boolean leftSide;
-	public Interruptable interruptable;
+	public RouteCalculationProgress calculationProgress;
 }

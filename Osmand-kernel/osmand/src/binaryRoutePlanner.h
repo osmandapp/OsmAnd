@@ -362,6 +362,38 @@ struct RoutingConfiguration {
 
 bool compareRoutingSubregionTile(SHARED_PTR<RoutingSubregionTile> o1, SHARED_PTR<RoutingSubregionTile> o2);
 
+class RouteCalculationProgress {
+protected:
+	int segmentNotFound ;
+	float distanceFromBegin;
+	int directSegmentQueueSize;
+	float distanceFromEnd;
+	int reverseSegmentQueueSize;
+
+	bool cancelled;
+public:
+	RouteCalculationProgress() : segmentNotFound(-1), distanceFromBegin(0),
+		distanceFromEnd(0), directSegmentQueueSize(0), reverseSegmentQueueSize(0), cancelled(false){
+	}
+
+	virtual bool isCancelled(){
+		return cancelled;
+	}
+
+	virtual void setSegmentNotFound(int s){
+		segmentNotFound = s;
+	}
+
+	virtual void updateStatus(float distanceFromBegin,	int directSegmentQueueSize,	float distanceFromEnd,
+			int reverseSegmentQueueSize) {
+		this->distanceFromBegin = max(distanceFromBegin, this->distanceFromBegin );
+		this->distanceFromEnd = max(distanceFromEnd,this->distanceFromEnd);
+		this->directSegmentQueueSize = directSegmentQueueSize;
+		this->reverseSegmentQueueSize = reverseSegmentQueueSize;
+	}
+
+};
+
 
 struct RoutingContext {
 	typedef UNORDERED(map)<int64_t, SHARED_PTR<RoutingSubregionTile> > MAP_SUBREGION_TILES;
@@ -373,6 +405,7 @@ struct RoutingContext {
 	int firstRoadDirection;
 	int64_t firstRoadId;
 	RoutingConfiguration config;
+	SHARED_PTR<RouteCalculationProgress> progress;
 
 	int gcCollectIterations;
 
@@ -436,7 +469,7 @@ struct RoutingContext {
 		for(i = 0; i<list.size(); i++) {
 			list[i]->access /= 3;
 		}
-		osmand_log_print(LOG_DEBUG, "Run GC (before %f Mb after %f Mb) unload %d of %d tiles",
+		osmand_log_print(LOG_INFO, "Run GC (before %f Mb after %f Mb) unload %d of %d tiles",
 				occupiedBefore, getSize() / (1024.0*1024.0),
 				unloadedTiles, loaded);
 	}
@@ -533,38 +566,6 @@ struct RoutingContext {
 				}
 			}
 		}
-	}
-
-	SHARED_PTR<RouteSegment> loadSegmentAround(int x31, int y31) {
-		timeToLoad.start();
-		SHARED_PTR<RouteSegment> r;
-		float dist = -1;
-		int z  = config.zoomToLoad;
-		uint32_t xloc = x31 >> (31 - z);
-		uint32_t yloc = y31 >> (31 - z);
-		uint64_t l = (((uint64_t) x31) << 31) + (uint64_t) y31;
-		int64_t tileId = (xloc << z) + yloc;
-		loadHeaders(xloc, yloc);
-		vector<SHARED_PTR<RoutingSubregionTile> >& subregions = indexedSubregions[tileId];
-		for(int j = 0; j<subregions.size(); j++) {
-			if(subregions[j]->isLoaded()) {
-				UNORDERED(map)<int64_t, SHARED_PTR<RouteSegment> >::iterator s = subregions[j]->routes.begin();
-				while(s != subregions[j]->routes.end()) {
-					SHARED_PTR<RouteSegment> seg = s->second;
-					if(seg.get() != NULL) {
-						double d = measuredDist(x31, y31, seg->road->pointsX[seg->getSegmentStart()],
-								seg->road->pointsY[seg->getSegmentStart()]);
-						if(dist == -1 || d < dist) {
-							r = seg;
-							dist = d;
-						}
-					}
-					s++;
-				}
-			}
-		}
-		timeToLoad.pause();
-		return r;
 	}
 
 	// void searchRouteRegion(SearchQuery* q, std::vector<RouteDataObject*>& list, RoutingIndex* rs, RouteSubregion* sub)

@@ -365,6 +365,14 @@ jclass jclass_JUnidecode;
 jclass jclass_Reshaper;
 jmethodID jmethod_JUnidecode_unidecode;
 jmethodID jmethod_Reshaper_reshape;
+jclass jclass_RouteCalculationProgress = NULL;
+jfieldID jfield_RouteCalculationProgress_segmentNotFound = NULL;
+jfieldID jfield_RouteCalculationProgress_distanceFromBegin = NULL;
+jfieldID jfield_RouteCalculationProgress_directSegmentQueueSize = NULL;
+jfieldID jfield_RouteCalculationProgress_distanceFromEnd = NULL;
+jfieldID jfield_RouteCalculationProgress_reverseSegmentQueueSize = NULL;
+jfieldID jfield_RouteCalculationProgress_isCancelled = NULL;
+
 jclass jclass_RenderingContext = NULL;
 jfieldID jfield_RenderingContext_interrupted = NULL;
 jfieldID jfield_RenderingContext_leftX = NULL;
@@ -429,6 +437,14 @@ void loadJniRenderingContext(JNIEnv* env)
 			"<init>", "(Lnet/osmand/binary/RouteDataObject;II)V");
 	jfield_RouteSegmentResult_preAttachedRoutes = getFid(env, jclass_RouteSegmentResult, "preAttachedRoutes",
 			"[[Lnet/osmand/router/RouteSegmentResult;");
+
+	jclass_RouteCalculationProgress = findClass(env, "net/osmand/router/RouteCalculationProgress");
+	jfield_RouteCalculationProgress_isCancelled  = getFid(env, jclass_RouteCalculationProgress, "isCancelled", "Z");
+	jfield_RouteCalculationProgress_segmentNotFound  = getFid(env, jclass_RouteCalculationProgress, "segmentNotFound", "I");
+	jfield_RouteCalculationProgress_distanceFromBegin  = getFid(env, jclass_RouteCalculationProgress, "distanceFromBegin", "F");
+	jfield_RouteCalculationProgress_distanceFromEnd  = getFid(env, jclass_RouteCalculationProgress, "distanceFromEnd", "F");
+	jfield_RouteCalculationProgress_directSegmentQueueSize  = getFid(env, jclass_RouteCalculationProgress, "directSegmentQueueSize", "I");
+	jfield_RouteCalculationProgress_reverseSegmentQueueSize  = getFid(env, jclass_RouteCalculationProgress, "reverseSegmentQueueSize", "I");
 
 	jclass_RenderingContext = findClass(env, "net/osmand/RenderingContext");
 	jfield_RenderingContext_interrupted = getFid(env, jclass_RenderingContext, "interrupted", "Z");
@@ -624,11 +640,37 @@ extern "C" JNIEXPORT void JNICALL Java_net_osmand_NativeLibrary_deleteRouteSearc
 	}
 	delete t;
 }
+
+class RouteCalculationProgressWrapper: public RouteCalculationProgress {
+	jobject j;
+	JNIEnv* ienv;
+public:
+	RouteCalculationProgressWrapper(JNIEnv* ienv, jobject j) : RouteCalculationProgress(),
+			ienv(ienv), j(j)  {
+	}
+	virtual bool isCancelled() {
+		return ienv->GetBooleanField(j, jfield_RouteCalculationProgress_isCancelled);
+	}
+	virtual void setSegmentNotFound(int s) {
+		ienv->SetIntField(j, jfield_RouteCalculationProgress_segmentNotFound, s);
+	}
+	virtual void updateStatus(float distanceFromBegin, int directSegmentQueueSize, float distanceFromEnd,
+			int reverseSegmentQueueSize) {
+		RouteCalculationProgress::updateStatus(distanceFromBegin, directSegmentQueueSize,
+				distanceFromEnd, reverseSegmentQueueSize);
+		ienv->SetFloatField(j, jfield_RouteCalculationProgress_distanceFromBegin, this->distanceFromBegin);
+		ienv->SetFloatField(j, jfield_RouteCalculationProgress_distanceFromEnd, this->distanceFromEnd);
+		ienv->SetIntField(j, jfield_RouteCalculationProgress_directSegmentQueueSize, this->directSegmentQueueSize);
+		ienv->SetIntField(j, jfield_RouteCalculationProgress_reverseSegmentQueueSize, this->reverseSegmentQueueSize);
+
+	}
+};
+
 //p RouteSegmentResult[] nativeRouting(int[] coordinates, int[] state, String[] keyConfig, String[] valueConfig);
 extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRouting(JNIEnv* ienv,
 		jobject obj, jintArray  coordinates,
 		jintArray stateConfig, jobjectArray keyConfig, jobjectArray valueConfig, jfloat initDirection,
-		jobjectArray regions) {
+		jobjectArray regions, jobject progress) {
 	vector<ROUTE_TRIPLE> cfg;
 	int* data = ienv->GetIntArrayElements(stateConfig, NULL);
 	for(int k = 0; k < ienv->GetArrayLength(stateConfig); k++) {
@@ -646,6 +688,7 @@ extern "C" JNIEXPORT jobjectArray JNICALL Java_net_osmand_NativeLibrary_nativeRo
 
 	RoutingConfiguration config(cfg, initDirection);
 	RoutingContext c(config);
+	c.progress = SHARED_PTR<RouteCalculationProgress>(new RouteCalculationProgressWrapper(ienv, progress));
 	data = ienv->GetIntArrayElements(coordinates, NULL);
 	c.startX = data[0];
 	c.startY = data[1];

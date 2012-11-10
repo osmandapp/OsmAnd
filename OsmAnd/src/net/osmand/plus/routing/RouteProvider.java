@@ -35,11 +35,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.router.BinaryRoutePlanner;
-import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
-import net.osmand.router.BinaryRoutePlannerOld;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.RoutingContext;
@@ -311,7 +309,7 @@ public class RouteProvider {
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalcuationParams params) throws IOException {
 		OsmandApplication app = (OsmandApplication) params.ctx.getApplicationContext();
 		BinaryMapIndexReader[] files = app.getResourceManager().getRoutingMapFiles();
-		BinaryRoutePlannerOld router = new BinaryRoutePlannerOld();
+		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(true);
 		File routingXml = app.getSettings().extendOsmandPath(ResourceManager.ROUTING_XML);
 		RoutingConfiguration.Builder config ;
 		if (routingXml.exists() && routingXml.canRead()) {
@@ -364,39 +362,34 @@ public class RouteProvider {
 			cf.attributes.put("heuristicCoefficient", cf.heuristicCoefficient+"");
 		}
 		RoutingContext ctx = new RoutingContext(cf, NativeOsmandLibrary.getLoadedLibrary(), files);
-		ctx.interruptable = params.interruptable;
+		ctx.calculationProgress = params.calculationProgress;
 		if(params.previousToRecalculate != null) {
 			ctx.previouslyCalculatedRoute = params.previousToRecalculate.getOriginalRoute();
 		}
-		RouteSegment st= router.findRouteSegment(params.start.getLatitude(), params.start.getLongitude(), ctx);
-		if (st == null) {
-			return new RouteCalculationResult(app.getString(R.string.starting_point_too_far));
-		}
-		RouteSegment en = router.findRouteSegment(params.end.getLatitude(), 
-				params.end.getLongitude(), ctx);
-		if (en == null) {
-			return new RouteCalculationResult(app.getString(R.string.ending_point_too_far));
-		}
-		List<RouteSegment> inters  = new ArrayList<BinaryRoutePlanner.RouteSegment>();
+		LatLon st = new LatLon(params.start.getLatitude(), params.start.getLongitude());
+		LatLon en = new LatLon(params.end.getLatitude(), params.end.getLongitude());
+		List<LatLon> inters  = new ArrayList<LatLon>();
 		if (params.intermediates != null) {
-			int ind = 1;
-			for (LatLon il : params.intermediates) {
-				RouteSegment is = router.findRouteSegment(il.getLatitude(), il.getLongitude(), ctx);
-				if (is == null) {
-					return new RouteCalculationResult(app.getString(R.string.intermediate_point_too_far, "'" + ind + "'"));
-				}
-				inters.add(is);
-				ind++;
-			}
+			inters  = new ArrayList<LatLon>(params.intermediates);
 		}
 		try {
-			List<RouteSegmentResult> result; 
-			if(inters.size() > 0){
-				result = router.searchRoute(ctx, st, en, inters, params.leftSide);
-			} else {
-				result = router.searchRoute(ctx, st, en, params.leftSide);
-			}
+			List<RouteSegmentResult> result = router.searchRoute(ctx, st, en, inters, params.leftSide);
 			if(result == null || result.isEmpty()) {
+				if(ctx.calculationProgress.segmentNotFound == 0) {
+					return new RouteCalculationResult(app.getString(R.string.starting_point_too_far));
+				} else if(ctx.calculationProgress.segmentNotFound == inters.size() + 1) {
+					return new RouteCalculationResult(app.getString(R.string.ending_point_too_far));
+				} else if(ctx.calculationProgress.segmentNotFound > 0) {
+					return new RouteCalculationResult(app.getString(R.string.intermediate_point_too_far, "'" + ctx.calculationProgress.segmentNotFound + "'"));
+				}
+				if(ctx.calculationProgress.directSegmentQueueSize == 0) {
+					return new RouteCalculationResult("Route can not be found from start point (" +ctx.calculationProgress.distanceFromBegin/1000f+" km)");
+				} else if(ctx.calculationProgress.reverseSegmentQueueSize == 0) {
+					return new RouteCalculationResult("Route can not be found from end point (" +ctx.calculationProgress.distanceFromEnd/1000f+" km)");
+				}
+				if(ctx.calculationProgress.isCancelled) {
+					return new RouteCalculationResult("Route calculation was interrupted");
+				}
 				// something really strange better to see that message on the scren
 				return new RouteCalculationResult("Empty result");
 			} else {

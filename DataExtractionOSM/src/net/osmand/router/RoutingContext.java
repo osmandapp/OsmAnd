@@ -62,7 +62,7 @@ public class RoutingContext {
 	public int targetX;
 	public int targetY;
 	
-	public Interruptable interruptable;
+	public RouteCalculationProgress calculationProgress;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public BaseRouteResult baseRouteResult;
 

@@ -12,7 +12,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import net.osmand.NativeLibrary;
 import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingConfiguration;
@@ -170,7 +170,7 @@ public class RouterTestsSuite {
 			return;
 		}
 		RoutingConfiguration rconfig = config.build(vehicle, MEMORY_TEST_LIMIT);
-		BinaryRoutePlanner router = new BinaryRoutePlanner();
+		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(false);
 		RoutingContext ctx = new RoutingContext(rconfig, 
 				lib, rs);
 		String skip = testCase.getAttribute("skip_comment");
@@ -238,12 +238,12 @@ public class RouterTestsSuite {
 	}
 
 
-	private static void runTestSpecialTest(NativeLibrary lib, BinaryMapIndexReader[] rs, RoutingConfiguration rconfig, BinaryRoutePlanner router,
+	private static void runTestSpecialTest(NativeLibrary lib, BinaryMapIndexReader[] rs, RoutingConfiguration rconfig, RoutePlannerFrontEnd router,
 			RouteSegment startSegment, RouteSegment endSegment, final float calcRoutingTime, String msg) throws IOException, InterruptedException {
 		RoutingContext ctx;
-		RouteSegment frs;
 		ctx = new RoutingContext(rconfig, lib, rs);
-		frs = router.searchRouteInternal(ctx, startSegment, endSegment, false);
+		router.searchRoute(ctx, startSegment, endSegment, false);
+		FinalRouteSegment frs = ctx.finalRouteSegment;
 		if(frs == null || !equalPercent(calcRoutingTime, frs.distanceFromStart, 0.5f)){
 			throw new IllegalArgumentException(String.format(msg, calcRoutingTime+"",frs == null?"0":frs.distanceFromStart+""));
 		}

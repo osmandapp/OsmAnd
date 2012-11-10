@@ -28,6 +28,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.Way;
 import net.osmand.router.BinaryRoutePlanner;
+import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutingConfiguration;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
@@ -141,7 +142,7 @@ public class MapClusterLayer implements MapPanelLayer {
 				rs.add(new BinaryMapIndexReader(raf));
 			}
 		}
-		BinaryRoutePlanner router = new BinaryRoutePlanner();
+		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(true);
 		Builder builder = RoutingConfiguration.getDefault();
 		RoutingConfiguration config = builder.build("car", RoutingConfiguration.DEFAULT_MEMORY_LIMIT * 3);
 		RoutingContext ctx = new RoutingContext(config, NativeSwingRendering.getDefaultFromSettings(),

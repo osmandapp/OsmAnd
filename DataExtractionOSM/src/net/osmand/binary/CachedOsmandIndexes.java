@@ -37,7 +37,7 @@ public class CachedOsmandIndexes {
 	private Log log = LogUtil.getLog(CachedOsmandIndexes.class);
 	private boolean hasChanged = true;
 	
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 
 	public void addToCache(BinaryMapIndexReader reader, File f) {
 		hasChanged = true;
