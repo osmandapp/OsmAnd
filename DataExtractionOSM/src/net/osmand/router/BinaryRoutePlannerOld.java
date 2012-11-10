@@ -190,13 +190,15 @@ public class BinaryRoutePlannerOld {
 		if(ctx.calculationProgress != null) {
 			ctx.calculationProgress.reverseSegmentQueueSize = graphReverseSegments.size();
 			ctx.calculationProgress.directSegmentQueueSize = graphDirectSegments.size();
-			if(graphDirectSegments.size() > 0) {
+			RouteSegment dirPeek = graphDirectSegments.peek();
+			if(dirPeek != null) {
 				ctx.calculationProgress.distanceFromBegin =
-						Math.max(graphDirectSegments.peek().distanceFromStart, ctx.calculationProgress.distanceFromBegin);
+						Math.max(dirPeek.distanceFromStart, ctx.calculationProgress.distanceFromBegin);
 			}
-			if(graphDirectSegments.size() > 0) {
+			RouteSegment revPeek = graphReverseSegments.peek();
+			if(revPeek != null) {
 				ctx.calculationProgress.distanceFromEnd = 
-						Math.max(graphReverseSegments.peek().distanceFromStart, ctx.calculationProgress.distanceFromBegin);
+						Math.max(revPeek.distanceFromStart, ctx.calculationProgress.distanceFromEnd);
 			}
 		}
 	}
