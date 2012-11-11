@@ -64,6 +64,7 @@ public class RouteAnimation {
 			});
 			builder.show();
 		} else {
+			stop();
 			ma.startLocationRequests();
 		}
 	}
@@ -137,12 +138,6 @@ public class RouteAnimation {
 		routeAnimation = null;
 	}
 
-	public void close() {
-		if (isRouteAnimating()) {
-			stop();
-		}
-	}
-	
 	public static Location middleLocation(Location start, Location end,
 			float meters) {
 		double lat1 = toRad(start.getLatitude());

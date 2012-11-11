@@ -29,7 +29,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -133,7 +132,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	// App settings
 	private OsmandSettings settings;
 
-	private RouteAnimation routeAnimation = new RouteAnimation();
 	// by default turn off causing unexpected movements due to network establishing
 	private static boolean isMapLinkedToLocation = false;
 	
@@ -739,7 +737,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		super.onDestroy();
 		OsmandPlugin.onMapActivityDestroy(this);
 		savingTrackHelper.close();
-		routeAnimation.close();
 		cancelNotification();
 		getMyApplication().getResourceManager().getMapTileDownloader().removeDownloaderCallback(mapView);
 	}

@@ -9,6 +9,17 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="tip_recent_changes_1_0_0_t">Changes in 1.0 :
+	\n\t* Improved routing faster and more precise (up to 250 km)
+	\n\t* Map of the roads
+	\n\t* Map does not lose position lock after interruptions
+	\n\t* Enable background service during navigation
+    </string>
+    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
+	\n\t* Some bug fixes
+	\n\t* Map does not lose position lock after interruptions
+	\n\t* Enable background service during navigation
+    </string>
     <string name="close_changeset">Close changeset</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
@@ -16,11 +27,6 @@
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
     <string name="enable_plugin_monitoring_services">Enable tracking plugin to use position logging services (logging, live tracking)</string>
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
-    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
-	\n\t* Some bug fixes
-	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable background service during navigation
-    </string>
 	<string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
 	\n\t* Waypoints

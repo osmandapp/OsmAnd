@@ -14,9 +14,11 @@ import net.osmand.swing.DataExtractionSettings;
 import net.osmand.swing.NativeSwingRendering;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
+@Ignore
 public class JUnitRouteTest  {
 
 	static BinaryMapIndexReader[]  rs;
