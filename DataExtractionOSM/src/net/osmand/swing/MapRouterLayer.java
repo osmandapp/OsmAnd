@@ -526,35 +526,6 @@ public class MapRouterLayer implements MapPanelLayer {
 				if (!w.getNodes().isEmpty()) {
 					res.add(w);
 				}
-
-				/*DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-				DocumentBuilder dom = factory.newDocumentBuilder();
-				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
-				NodeList list = doc.getElementsByTagName("coordinates");
-				for(int i=0; i<list.getLength(); i++){
-					Node item = list.item(i);
-					String str = item.getTextContent();
-					int st = 0;
-					int next = 0;
-					Way w = new Way(-1);
-					while((next = str.indexOf('\n', st)) != -1){
-						String coordinate = str.substring(st, next + 1);
-						int s = coordinate.indexOf(',');
-						if (s != -1) {
-							try {
-								double lon = Double.parseDouble(coordinate.substring(0, s));
-								double lat = Double.parseDouble(coordinate.substring(s + 1));
-								w.addNode(new net.osmand.osm.Node(lat, lon, -1));
-							} catch (NumberFormatException e) {
-							}
-						}
-						st = next + 1;
-					}
-					if(!w.getNodes().isEmpty()){
-						res.add(w);
-					}
-					
-				}*/
 			} catch (IOException e) {
 				ExceptionHandler.handle(e);
 			} catch (JSONException e) {

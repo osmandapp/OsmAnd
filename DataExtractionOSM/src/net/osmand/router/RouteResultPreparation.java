@@ -286,7 +286,7 @@ public class RouteResultPreparation {
 					}
 					result.get(prevSegment).setDescription(turn + String.format(" and go %.2f meters", dist));
 					if(result.get(prevSegment).getTurnType().isSkipToSpeak()) {
-						result.get(prevSegment).setDescription(result.get(prevSegment).getDescription() +" (*)");
+						result.get(prevSegment).setDescription("-*"+result.get(prevSegment).getDescription());
 					}
 				}
 				prevSegment = i;
