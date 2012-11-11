@@ -381,6 +381,10 @@ public class OsmandApplication extends Application {
 			manager.close();
 		}
 		applicationInitializing = false;
+		if(getNavigationService() != null) {
+			final Intent serviceIntent = new Intent(this, NavigationService.class);
+			stopService(serviceIntent);
+		}
 		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
 		System.runFinalizersOnExit(true);
 		System.exit(0);
