@@ -988,8 +988,8 @@ void searchRouteSubregions(SearchQuery* q, std::vector<RouteSubregion>& tempResu
 				}
 			}
 			if (contains) {
-				lseek(file->fd, 0, SEEK_SET);
-				FileInputStream input(file->fd);
+				lseek(file->routefd, 0, SEEK_SET);
+				FileInputStream input(file->routefd);
 				input.SetCloseOnDelete(false);
 				CodedInputStream cis(&input);
 				cis.SetTotalBytesLimit(INT_MAX, INT_MAX >> 1);
@@ -997,7 +997,7 @@ void searchRouteSubregions(SearchQuery* q, std::vector<RouteSubregion>& tempResu
 				uint32_t old = cis.PushLimit((*routeIndex)->length);
 				searchRouteRegion(&cis, q, *routeIndex, subs, tempResult);
 				cis.PopLimit(old);
-				checkAndInitRouteRegionRules(file->fd, (*routeIndex));
+				checkAndInitRouteRegionRules(file->routefd, (*routeIndex));
 			}
 		}
 
