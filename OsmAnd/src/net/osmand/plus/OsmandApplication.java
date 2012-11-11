@@ -359,11 +359,32 @@ public class OsmandApplication extends Application {
 	}
 	
 
-	public synchronized void closeApplication() {
+	public synchronized void closeApplication(final Activity activity) {
+		if (getNavigationService() != null) {
+			Builder bld = new AlertDialog.Builder(activity);
+			bld.setMessage(R.string.background_service_is_enabled_question);
+			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					closeApplicationAnyway(activity);
+				}
+			});
+			bld.setNegativeButton(R.string.default_buttons_no, null);
+			bld.show();
+		} else {
+			closeApplicationAnyway(activity);
+		}
+	}
+
+	private void closeApplicationAnyway(final Activity activity) {
 		if (applicationInitializing) {
 			manager.close();
 		}
 		applicationInitializing = false;
+		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
+		System.runFinalizersOnExit(true);
+		System.exit(0);
+		activity.finish();
 	}
 
 	public synchronized void startApplication() {

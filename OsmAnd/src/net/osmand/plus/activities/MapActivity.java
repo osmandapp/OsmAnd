@@ -578,8 +578,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			@Override
 			public void onClick(View v) {
 				dlg.dismiss();
-
-				getMyApplication().closeApplication();
 				// 1. Work for almost all cases when user open apps from main menu
 				Intent newIntent = new Intent(MapActivity.this, OsmandIntents.getMainMenuActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

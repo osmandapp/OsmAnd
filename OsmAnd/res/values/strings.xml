@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="background_service_is_enabled_question">Background service is still running. Do you want to cancel it?</string>
     <string name="tip_recent_changes_1_0_0_t">Changes in 1.0 :
 	\n\t* Improved routing faster and more precise (up to 250 km)
 	\n\t* Map of the roads
