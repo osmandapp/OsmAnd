@@ -513,6 +513,8 @@ SHARED_PTR<RouteSegment> findRouteSegment(int px, int py, RoutingContext* ctx) {
 	}
 	SHARED_PTR<RouteSegment> road;
 	double sdist = 0;
+	int foundx = 0;
+	int foundy = 0;
 	vector<SHARED_PTR<RouteDataObject> >::iterator it = dataObjects.begin();
 	for (; it!= dataObjects.end(); it++) {
 		SHARED_PTR<RouteDataObject> r = *it;
@@ -536,20 +538,24 @@ SHARED_PTR<RouteSegment> findRouteSegment(int px, int py, RoutingContext* ctx) {
 				}
 				double currentsDist = squareDist31TileMetric(prx, pry, px, py);
 				if (road.get() == NULL || currentsDist < sdist) {
-					// make copy before
-					// r->pointsX.insert(j, prx);
-					// r->pointsY.insert(j, pry);
 					road = SHARED_PTR<RouteSegment>(new RouteSegment(r, j));
+					foundx = prx;
+					foundy = pry;
 					sdist = currentsDist;
 				}
 			}
 		}
 	}
-	// TODO FIX
-//	if (road.get() != null) {
-//		// re-register the best road because one more point was inserted
-//		ctx->registerRouteDataObject(road.getRoad());
-//	}
+	if (road.get() != NULL) {
+		// make copy before
+		SHARED_PTR<RouteDataObject> r = road->road;
+		int index = road->getSegmentStart();
+		r->pointsX.insert(r->pointsX.begin() + index, foundx);
+		r->pointsY.insert(r->pointsY.begin() + index, foundy);
+		if(r->pointTypes.size() > index) {
+			r->pointTypes.insert(r->pointTypes.begin() + index, std::vector<uint32_t>());
+		}
+	}
 	return road;
 }
 

@@ -94,12 +94,20 @@ public class RouteCalculationResult {
 			int[] interLocations = new int[intermediates.size()];
 			int currentIntermediate = 0;
 			int currentLocation = 0;
-			while(currentIntermediate < intermediates.size() && currentLocation < this.locations.size()){
-				if(MapUtils.getDistance(intermediates.get(currentIntermediate), 
-						this.locations.get(currentLocation).getLatitude(), this.locations.get(currentLocation).getLongitude()) <
-						15) {
+			double distanceThreshold = 25;
+			double prevDistance = distanceThreshold * 4;
+			while((currentIntermediate < intermediates.size() || prevDistance > distanceThreshold)
+				&& currentLocation < this.locations.size()){
+				if(currentIntermediate < intermediates.size() && 
+						getDistanceToLocation(intermediates.get(currentIntermediate), currentLocation) < 50) {
+					prevDistance = getDistanceToLocation(intermediates.get(currentIntermediate), currentLocation);
 					interLocations[currentIntermediate] = currentLocation;
 					currentIntermediate++;
+				} else if(currentIntermediate > 0 && prevDistance > distanceThreshold && 
+						getDistanceToLocation(intermediates.get(currentIntermediate - 1), 
+						currentLocation) < prevDistance) {
+					prevDistance = getDistanceToLocation(intermediates.get(currentIntermediate - 1), currentLocation);
+					interLocations[currentIntermediate - 1] = currentLocation;
 				}
 				currentLocation ++;
 			}
@@ -110,8 +118,7 @@ public class RouteCalculationResult {
 				if (locationIndex >= interLocations[currentIntermediate]) {
 					// split directions
 					if (locationIndex > interLocations[currentIntermediate]
-							&& MapUtils.getDistance(intermediates.get(currentIntermediate),
-									this.locations.get(locationIndex).getLatitude(), this.locations.get(locationIndex).getLongitude()) > 50) {
+							&& getDistanceToLocation(intermediates.get(currentIntermediate), locationIndex) > 50) {
 						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
 						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.valueOf(TurnType.C,
 								false));
@@ -127,6 +134,11 @@ public class RouteCalculationResult {
 				currentDirection ++;
 			}
 		}
+	}
+
+	private double getDistanceToLocation(LatLon p, int currentLocation) {
+		return MapUtils.getDistance(p, 
+				this.locations.get(currentLocation).getLatitude(), this.locations.get(currentLocation).getLongitude());
 	}
 
 	private void attachAlarmInfo(List<AlarmInfo> alarms, RouteSegmentResult res, int intId, int locInd) {
