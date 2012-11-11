@@ -265,39 +265,6 @@ public class BinaryRoutePlanner {
 				" ds=" + ((float)segment.distanceFromStart) + " es="+((float)segment.distanceToEnd) + pr);
 	}
 
-	private void relaxNotNeededSegments(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments, boolean inverse) {
-		// relax strategy is incorrect if we already found a route but it is very long due to some obstacles
-		RouteSegment next = graphSegments.peek();
-		double mine = next.distanceFromStart;
-//		int before = graphSegments.size();
-//		SegmentStat statStart = new SegmentStat("Distance from start (" + inverse + ") ");
-//		SegmentStat statEnd = new SegmentStat("Distance to end (" + inverse + ") ");
-		Iterator<RouteSegment> iterator = graphSegments.iterator();
-		while (iterator.hasNext()) {
-			RouteSegment s = iterator.next();
-//			statStart.addNumber((float) s.distanceFromStart);
-//			statEnd.addNumber((float) s.distanceToEnd);
-			if (s.distanceFromStart > mine) {
-				mine = s.distanceFromStart;
-			}
-		}
-		double d = mine - 50000; // ctx.config.RELAX_NODES_IF_START_DIST_COEF;
-		if (d > 0) {
-			iterator = graphSegments.iterator();
-			while (iterator.hasNext()) {
-				RouteSegment s = iterator.next();
-				if (s.distanceFromStart < d) {
-					ctx.relaxedSegments++;
-					iterator.remove();
-				}
-			}
-		}
-//		int after = graphSegments.size();
-//		println(statStart.toString());
-//		println(statEnd.toString());
-//		println("Relaxing : before " + before + " after " + after + " minend " + ((float) mine));
-	}
-
 	private float estimatedDistance(final RoutingContext ctx, int targetEndX, int targetEndY,
 			int startX, int startY) {
 		double distance = squareRootDist(startX, startY, targetEndX, targetEndY);
@@ -409,6 +376,13 @@ public class BinaryRoutePlanner {
 			obstaclesTime = (float) ctx.getRouter().calculateTurnTime(segment, direction? segment.getRoad().getPointsLength() - 1 : 0,  
 					segment.getParentRoute(), segment.getParentSegmentEnd());
 		}
+		if(ctx.firstRoadId == calculateRoutePointId(road, segment.getSegmentStart(), true) ) {
+			if(direction && ctx.firstRoadDirection < 0) {
+				obstaclesTime += 500;
+			} else if(!direction && ctx.firstRoadDirection > 0) {
+				obstaclesTime += 500;
+			}
+		}
 		float segmentDist = 0;
 		// +/- diff from middle point
 		int segmentEnd = segment.getSegmentStart();
@@ -509,13 +483,7 @@ public class BinaryRoutePlanner {
 		final int middle = segment.getSegmentStart();
 		int oneway = ctx.getRouter().isOneWay(road);
 		// use positive direction as agreed
-		if(ctx.firstRoadId == calculateRoutePointId(road, middle, true) ) {
-			if(direction){
-				directionAllowed = ctx.firstRoadDirection >= 0;
-			} else {
-				directionAllowed = ctx.firstRoadDirection <= 0;
-			}
-		} else if (!reverseWaySearch) {
+		if (!reverseWaySearch) {
 			if(direction){
 				directionAllowed = oneway >= 0;
 			} else {

@@ -234,8 +234,11 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch, SEGMENTS_QU
 	bool minusAllowed;
 	bool plusAllowed;
 	if(ctx->firstRoadId == nt) {
-		minusAllowed = ctx->firstRoadDirection <= 0;
-		plusAllowed = ctx->firstRoadDirection >= 0;
+		if(ctx->firstRoadDirection < 0) {
+			obstaclePlusTime += 500;
+		} else if(ctx->firstRoadDirection > 0) {
+			obstacleMinusTime += 500;
+		}
 	} else if (!reverseWaySearch) {
 		minusAllowed = oneway <= 0;
 		plusAllowed = oneway >= 0;

@@ -279,9 +279,13 @@ public class BinaryRoutePlannerOld {
 		boolean minusAllowed;
 		boolean plusAllowed; 
 		if(ctx.firstRoadId == nt) {
-			minusAllowed = ctx.firstRoadDirection <= 0;
-			plusAllowed = ctx.firstRoadDirection >= 0;
-		} else if (!reverseWaySearch) {
+			if(ctx.firstRoadDirection < 0) {
+				obstaclePlusTime += 500;
+			} else if(ctx.firstRoadDirection > 0) {
+				obstacleMinusTime += 500;
+			}
+		} 
+		if (!reverseWaySearch) {
 			minusAllowed = oneway <= 0;
 			plusAllowed = oneway >= 0;
 		} else {

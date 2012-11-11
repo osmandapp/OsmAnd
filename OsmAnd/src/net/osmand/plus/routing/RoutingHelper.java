@@ -671,8 +671,8 @@ public class RoutingHelper {
 						if (all > 0) {
 							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
 							progress.setProgress(t);
-							updateProgress(calculationProgress);
 						}
+						updateProgress(calculationProgress);
 					} else {
 						progress.setVisibility(View.GONE);
 					}
