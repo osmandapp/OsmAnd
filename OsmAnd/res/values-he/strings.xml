@@ -218,4 +218,141 @@
 	<string name="gpx_index_settings_descr">" (לרבות מנתח GPX)"</string>
 	<string name="index_settings_descr">הורדה, צפייה בפרטים וניהול של מפות בלתי מקוונות</string>
 	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף המפות המקוונות כדי לבחור במקורות שונים למפה</string>
+	<string name="map_online_data">מפות מקוונות ואריחים</string>
+	<string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון המפות בכרטיס ה־SD)</string>
+	<string name="online_map_settings">מפות מקוונות</string>
+	<string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים</string>
+	<string name="map_settings">הגדרות המפה</string>
+	<string name="map_settings_descr">הגדרת תצוגת המפה</string>
+	<string name="osmand_rastermaps_plugin_description">הצגת תצורה להגדרת מגוון של אריחים מפה מקוונים או שמורים כמפת בסיס או כשכבת על / תחת. ניתן להכין מפות אלה באופן בלתי מקוון ואז להעתיק אותן לתיקייה של OsmAnd.</string>
+	<string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב שינה (מסך כבוי) על ידי השכמת רכיב האיכון מדי פעם בפעם.</string>
+	<string name="osmand_accessibility_description">הצגת הגדרות לתכונות נגישות מיוחדות.</string>
+	<string name="extra_settings">הגדרות מתקדמות</string>
+	<string name="osmand_monitoring_description">הצגת הגדרות להקלת הקלטת המסלולים שלך ל־GPX או לעקוב באופן חי באמצעות שירות מקוון.</string>
+	<string name="osmand_extra_settings_description">הצגת הגדרות לתצורת מפה מתקדמת (כמו הגדלת פרטי המפה) וכמה הגדרות שמיועדות להתקן זה.</string>
+	<string name="osmand_development_plugin_description">הצגת הגדרות לתכונות פיתוח או ניפוי שגיאות כגון ניווט מונפש או הצגת ביצועי עיבוד התמונה.</string>
+	<string name="plugins_screen">מנהל התוספים</string>
+	<string name="select_plugin_to_activate">יש לגעת בתוסף כדי להפעיל או לנטרל אותו. (נדרש אתחול של OsmAnd.)</string>
+	<string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות כמו מפות אריחים, מעקב, מצב שינה, הגדרות נגישות ועוד.</string>
+	<string name="prefs_plugins">מנהל התוספים</string>
+	<string name="tip_recent_changes_0_8_0_t">"שינויים ב־0.8.0 :
+\n\t- *תכונת התוספים*
+\n\t - רוב התכונות מקובצות לפי תכונות וניתן להפעיל/לנטרל אותן במנהל התוספים. ניתן להפעיל מקורות אריחי מפות (מקוונים או שמורים), הגדרות מעקב ועוד תכונות קיימות חדשות רבות.\n\t- *תמיכה חדשה בנתוני מפות בלתי מקוונים*
+\n\t - עיבוד המפה לתמונה היא מהירה יותר ומדויקת יותר (קו החוף ובעיית האזורים המוצפים נפתרה).\n\t - עליך להוריד נתונים בלתי מקוונים חדשים לחלוטין (לא תהיה עוד תמיכה בנתונים הישנים)
+\n\t- *ניווט בלתי מקוון*
+\n\t - הניווט הבלתי מקוון הופך ליציב יותר
+\n\t *חוויית משתמש ושימושיות*
+\n\t - שופרו באופנים רבים "</string>
+	<string name="osm_editing_plugin_description">הצגת ההגדרות שנדרשות לטובת משוב ל־OSM כמו איסוף / שינוי פריטי נ״ע של OSM, פתיחה / תגובה על תקלות ב־OSM ותרומה של קובצי GPX מוקלטים (נדרשים פרטי גישה ל־OSM).</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">יתכן שמפות וקטוריות יוצגו מהר יותר. עם זאת לא בטוח שיעבדו כראוי על חלק מההתקנים.</string>
+	<string name="play_commands_of_currently_selected_voice">השמעת הפקודות של הקול שנבחר</string>
+	<string name="debugging_and_development">פיתוח OsmAnd</string>
+	<string name="native_rendering">עיבוד תמונה טבעי</string>
+	<string name="test_voice_prompts">בדיקת ההכרזות הקוליות</string>    
+	<string name="switch_to_raster_map_to_see">אין מפה וקטורית בלתי מקוונת לאזור זה. ניתן להוריד אחת בהגדרות (נתונים בלתי מקוונים) או לעבור למפות מקוונות.</string>
+	<string name="tip_recent_changes_0_7_2_t">"שינויים ב־0.7.2 :
+\n\t- עיבוד תמונה טבעי לכל ההתקנים
+\n\t- עריכת נ״ע באופן בלתי מקוון
+\n\t- נגישות
+\n\t- תיקוני תקלות רבים "</string>
+	<string name="send_files_to_osm">האם לשלוח את קובצי ה־GPX ל־OSM?</string>
+	<string name="gpx_visibility_txt">הופעה</string>
+	<string name="gpx_tags_txt">תגיות</string>
+	<string name="gpx_description_txt">תיאור</string>
+	<string name="validate_gpx_upload_name_pwd">נא לציין את שם המשתמש והססמה שלך ב־OSM כדי להעלות קובצי GPS.</string>
+    	<string name="default_buttons_support">תמיכה</string>
+	<string name="support_new_features">תמיכה בתכונות חדשות</string>
+	<string name="show_ruler_level">הצגת סרגל</string>	
+	<string name="info_button">פרטים</string>
+	<string name="back_to_location">חזרה למיקום</string>
+	<string name="help">עזרה</string>
+	<string name="show_details">הצגת פרטים</string>
+	<string name="accessibility_extensions_descr">הרחבות נגישות לגרסאות ישנות של אנדרויד</string>
+	<string name="accessibility_extensions">הרחבות נגישות</string>
+	<string name="accessibility_mode">מצב נגישות</string>
+	<string name="accessibility_mode_descr">הפעלת תכונות הנגישות</string>
+	<string name="accessibility_on">פעיל</string>
+	<string name="accessibility_off">כבוי</string>
+	<string name="accessibility_default">בהתאם להגדרות המערכת הכלליות</string>
+	<string name="backToMenu">חזרה לתפריט</string>
+	<string name="zoomOut">התרחקות</string>
+	<string name="zoomIn">התקרבות</string>
+	<string name="zoomIs">התקריב הוא</string>
+	<string name="north">צפון</string>
+	<string name="north_north_east">צפון-צפון-מזרח</string>
+	<string name="north_east">צפון-מזרח</string>
+	<string name="east_north_east">מזרח-צפון-מזרח</string>
+	<string name="east">מזרח</string>
+	<string name="east_south_east">מזרח-דרום-מזרח</string>
+	<string name="south_east">דרום-מזרח</string>
+	<string name="south_south_east">דרום-דרום-מזרח</string>
+	<string name="south">דרום</string>
+	<string name="south_south_west">דרום-דרום-מערב</string>
+	<string name="south_west">דרום-מערב</string>
+	<string name="west_south_west">מערב-דרום-מערב</string>
+	<string name="west">מערב</string>
+	<string name="west_north_west">מערב-דרום-מערב</string>
+	<string name="north_west">צפון-מערב</string>
+	<string name="north_north_west">צפון-צפון-מערב</string>
+	<string name="towards">לעבר</string>
+	<string name="accuracy">דיוק</string>
+	<string name="altitude">גובה</string>
+	<string name="front">מלפנים</string>
+	<string name="front_right">מלפנים מימין</string>
+	<string name="right">מימין</string>
+	<string name="back_right">מאחור מימין</string>
+	<string name="back">מאחור</string>
+	<string name="back_left">מאחור משמאל</string>
+	<string name="left">לשמאל</string>
+	<string name="front_left">מלפנים משמאל</string>
+	<string name="oclock">בדיוק</string>
+	<string name="no_info">אין מידע</string>
+	<string name="direction_style_sidewise">לצדדים (8 חלקים)</string>
+	<string name="direction_style_clockwise">לפי השעון (12 חלקים)</string>
+	<string name="settings_direction_style">סגנון ההכוונה</string>
+	<string name="settings_direction_style_descr">נא לבחור את הסגנון להבעת יחס ההכוונה בעת התזוזה</string>
+	<string name="auto_announce_on">התחלת הכרזה אוטומטית</string>
+	<string name="auto_announce_off">הפסקת ההכרזה האוטומטית</string>
+	<string name="scroll_map_by_gestures_descr">ניתן לגלול את המפה על ידי נגיעה במסך</string>
+	<string name="scroll_map_by_gestures">גלילת מפה טבעית</string>
+	<string name="i_am_here">הנני כאן</string>
+	<string name="zoom_by_trackball_descr">החלפת התקריב למפה על ידי תזוזות אופקיות של כדור המעקב</string>
+	<string name="zoom_by_trackball">שימוש בכדור המעקב לצורך שליטה בתקריב</string>
+	<string name="use_short_object_names_descr">שימוש בשמות קצרים לפריטים במצב חקירה במגע</string>
+	<string name="use_short_object_names">שימוש בשמות של פריטים</string>
+	<string name="accessibility_preferences_descr">העדפות הקשורות בנגישות</string>
+	<string name="accessibility_preferences">נגישות</string>
+	<string name="rendering_out_of_memory">אין די זיכרון לתהליך כדי להציג את האיזור הנבחר</string>
+	<string name="use_fluorescent_overlays">שכבות מוארות</string>
+	<string name="use_fluorescent_overlays_descr">ניתן להשתמש בצבעים מוארים כדי להציג דרכים ומסלולים</string>
+	<string name="offline_edition">עריכה בלתי מקוונת</string>
+	<string name="offline_edition_descr">תמיד להשתמש בעריכה בלתי מקוונת</string>
+	<string name="tip_recent_changes_0_7_1_t">"שינויים ב־0.7.1 :
+\n\t- עריכה בלתי מקוונת של נ״ע
+\n\t- אפשרות מעקב חי - שליחת הקואורדינטות לשירות מקוון באופן תדיר (ניתן לקרוא כיצד להגדיר שירותי אינטרנט משלך בכתבות ההדרכה - HowTo Articles)
+\n\t- הצגת המסלול שמוקלט כעת על המפה
+\n\t- זיהוי הכוונה: \'לפרסס\' מצוין על המסך ומוכרז בקול בעת נסיעה בכיוון הנגדיר לאחר פספוס פנייה
+\n\t- התרעה קולית חדשה \'המסלול מחושב מחדש\'
+\n\t- חיווי חזותי לפנייה קרבה בטווח של עד 100 מ׳ בעזרת חץ כיוון מחליף צבעים
+\n\t- גם קובצי אינדקס שנוטרלו מופיעים כעת במסך ההורדות בירוק כהה ובכחול כהה
+\n\t- שינויים אחרים "</string>
+	<string name="update_poi_does_not_change_indexes">שינויי הנ״ע בתוך היישום אינם משפיעים על קובצי המפה שהתקבלו, השינויים נשמרים לקבצים מקומיים במקום זאת.</string>
+	<string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
+	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/תקלות נשלחו</string>
+	<string name="local_openstreetmap_uploadall">לשלוח הכול</string>
+	<string name="local_openstreetmap_items"/>
+	<string name="local_openstreetmap_show">הצגה במפה</string>
+	<string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
+	<string name="local_openstreetmap_delete">מחיקת השינוי</string>
+	<string name="local_openstreetmap_descr_title">עריכה בלתי מתואמת של OSM:</string>
+	<string name="local_openstreetmap_settings">נ״ע/תקלות של OSM שנשמרו מקומית</string>
+	<string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/תקלות שנרשמו במסד הנתונים המקומי</string>
+	<string name="live_monitoring_descr">שליחת מעקב לשירות מקוון מוגדר</string>
+	<string name="live_monitoring">מעקב חי מקוון</string>
+	<string name="live_monitoring_interval_descr">נא לציין הפסקות בין דיווחי מעקב חי</string>
+	<string name="live_monitoring_interval">הפסקות בין דיווחי מעקב חי</string>
+	<string name="live_monitoring_url_descr">נא לציין את כתובת השרת עם תחביר הפרמטרים הבא: רוחב={0}, אורך={1}, חותמת_זמן={2}, hdop‏={3}, גובה={4}, מהירות={5}</string>
+	<string name="live_monitoring_url">כתובת שרת המעקב החי</string>
+	<string name="gpx_monitoring_disabled_warn">נא להפעיל את \'מעקב אחר המסלול לקובץ GPX\' בהגדרות.</string>
+	<string name="show_current_gpx_title">הצגת המסלול הנוכחי</string>
 	</resources>
