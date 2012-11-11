@@ -195,7 +195,7 @@
   <string name="local_index_address_data">Datos de direcciones</string>
   <string name="local_index_transport_data">Datos de transporte</string>
   <string name="local_index_map_data">Datos de mapa</string>
-  <string name="local_index_items">""</string>
+  <string name="local_index_items"></string>
   <string name="local_indexes_cat_backup">Desactivado</string>
   <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
   <string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
@@ -1021,4 +1021,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteras</string>
     <string name="zxing_barcode_scanner_not_found">La aplicación ZXing Barcode Scanner no está instalada. ¿Buscarla en el Market?</string>
 	<string name="close_changeset">Cerrar conjunto de cambios</string>
-	</resources>
+	<string name="background_service_is_enabled_question">El servicio de fondo aún está funcionando. ¿Quieres cancelarlo?</string>
+    <string name="tip_recent_changes_1_0_0_t">Cambios en 1.0:\n\t* Mejorado el enrutamiento: más rápido y más preciso (hasta 250 km)\n\t* Mapa de las carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Permite activar el servicio de fondo durante la navegación</string>
+    </resources>
