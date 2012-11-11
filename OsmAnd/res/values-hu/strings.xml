@@ -1026,7 +1026,7 @@
     <string name="replace_destination_point">Célpont lecserélése</string>
     <string name="new_destination_point_dialog">Már be van állítva egy célpontod.</string>
     <string name="target_point">Célpont %1$s</string>
-    <string name="target_points">Célok</string>
+    <string name="target_points">Célpontok</string>
     <string name="intermediate_point_too_far">%1$s. köztes célpont közelében nincsen út.</string>
     <string name="arrived_at_intermediate_point">Megérkeztél a köztes célponthoz</string>
     <string name="context_menu_item_intermediate_point">Beállítás köztes célpontnak</string>
@@ -1056,7 +1056,7 @@
     <string name="close_changeset">Módosításcsomag lezárása</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Google Play-ben?</string>
 	<string name="background_service_is_enabled_question">A háttérszolgáltatás még fut. Szeretnéd kikapcsolni?</string>
-    <string name="tip_recent_changes_1_0_0_t">"A 0.8.4 kiadás változásai:
+    <string name="tip_recent_changes_1_0_0_t">"Az 1.0 kiadás változásai:
 \n\t* Gyorsabb és pontosabb útvonaltervezés (akár 250 km)
 \n\t* Úttérkép\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
 \n\t* A háttérszolgáltatás bekapcsol navigáció közben "</string>
