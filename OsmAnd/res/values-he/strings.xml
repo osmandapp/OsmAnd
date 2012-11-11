@@ -8,7 +8,7 @@
 	<string name="rendering_attr_roadColors_name">ערכת צבעי דרך</string>
     <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
     <string name="enable_plugin_monitoring_services">יש להפעיל את תוסף המעקב כדי להשתמש בשירותי רישום מיקום (מעקב חי, רישום)</string>
-    <string name="non_optimal_route_calculation">יש לחשב נתיב בלתי יעיל למרחקים ארוכים</string>
+    <string name="non_optimal_route_calculation">יש לחשב מסלול בלתי יעיל למרחקים ארוכים</string>
     <string name="tip_recent_changes_0_8_4_t">"שינויים ב־0.8.4 :
 \n\t* כמה תיקוני תקלות
 \n\t* המפה אינה מאבדת את נעילת המיקום שלה לאחר הפרעות
@@ -16,12 +16,12 @@
 	<string name="gps_not_available">נא להפעיל את רכיב האיכון (GPS) בהגדרות</string>
     <string name="tip_recent_changes_0_8_3_t">"שינויים ב־0.8.3 :
 \n\t* נקודות ציון
-\n\t* הנחיות ניתוב משופרות
-\n\t* נוספה ההגדרה שמאפשר להתעלם מדרכים לכלים ממונעים בעת הרכבת נתיב
+\n\t* הנחיות טוויית מסלול משופרות
+\n\t* נוספה ההגדרה שמאפשר להתעלם מדרכים לכלים ממונעים בעת טוויית מסלול
 \n\t* נוספו סוג אחד או יותר של דרכים לאופניים במפה (Cycleway=track)
 \n\t* תיקוני תקלות "</string>
 	<string name="map_widget_monitoring_services">שירותי רישום</string>
-	<string name="no_route">אין נתיב</string>
+	<string name="no_route">אין מסלול</string>
 	<string name="delete_target_point">הסרת נקודת ציון</string>
 	<string name="target_point">נקודת הציון %1$s</string>
     <string name="intermediate_point">נקודת הציון %1$s</string>
@@ -91,4 +91,131 @@
 	<string name="avoid_in_routing_descr">המנעות מכבישי אגרה, בלתי סלולים, מעבורות</string>
 	<string name="map_widget_show_ruler">סרגל</string>
 	<string name="map_widget_appearance">שונות:</string>
+	<string name="map_widget_view_direction">כיוון הצפייה</string>
+	<string name="map_widget_transparent">מעטפת שקופה</string>
+	<string name="monitoring_mode_off">הקלטת GPX</string>
+	<string name="monitoring_mode_on">הפסקת\n הקלטת ה־GPX.</string>
+	<string name="bg_service_sleep_mode_off">הפעלת\n מצב שינה</string>
+	<string name="bg_service_sleep_mode_on">הפסקת\n מצב שינה</string>
+	<string name="gps_wakeup_interval">הפרשי התעוררות של רכיב האיכון: %s</string>
+	<string name="int_continuosly">רציף</string>
+	<string name="screen_is_locked">כדי לשחרר את המסכים יש ללחוץ על סמל הנעילה</string>
+	<string name="map_widget_top_text">שם הרחוב</string>
+	<string name="map_widget_config">מסך ההגדרות</string>
+	<string name="map_widget_map_select">מקור המפה</string>
+	<string name="map_widget_back_to_loc">איפה אני</string>
+	<string name="map_widget_lock_screen">נעילת המסך</string>
+	<string name="map_widget_compass">מצפן</string>
+	<string name="map_widget_top_stack">שורת מצב:</string>
+	<string name="map_widget_reset">איפוס לבררת המחדל</string>
+	<string name="map_widget_right_stack">לוח ימני:</string>
+	<string name="map_widget_left_stack">לוח שמאלי:</string>
+	<string name="map_widget_parking">חנייה</string>
+	<string name="map_widget_monitoring">הקלטת GPX</string>
+	<string name="map_widget_speed">מהירות</string>
+	<string name="map_widget_distance">יעד</string>
+	<string name="map_widget_altitude">גובה</string>
+	<string name="map_widget_next_turn">הפנייה הבאה</string>
+	<string name="map_widget_next_turn_small">הפנייה הבאה (קטנה)</string>
+	<string name="map_widget_next_next_turn">הפנייה השנייה הבאה</string>
+	<string name="poi_search_desc">חיפוש נ״ע (נקודות עניין)</string>
+	<string name="address_search_desc">חיפוש כתובת</string>
+	<string name="navpoint_search_desc">קואורדינטות</string>
+	<string name="transport_search_desc">חיפוש תח״צ</string>
+	<string name="favourites_search_desc">חיפוש במועדפים</string>
+	<string name="history_search_desc">חיפוש בהיסטוריה</string>
+	<string name="offline_navigation_not_available">ניווט בלתי מקוון ב־OsmAnd אינו זמין נכון לעכשיו.</string>
+	<string name="left_side_navigation">נהיגה בצד שמאל</string>
+	<string name="left_side_navigation_descr">יש לבחור עבור מדינות בהן נוהגים משמאל (לא תקף לישראל)</string>
+	<string name="download_link_and_local_description">יש ללחוץ כאן כדי להוריד או לעדכן את הנתונים הבלתי מקוונים.\nניתן ללחוץ על כל פריט ברשימה כדי לצפות בפרטים נוספים, יש ללחוץ ולהחזיק כדי לנטרל או למחוק. הנתונים הנוכחיים על ההתקן (%1$s פנויים):</string>
+	<string name="unknown_from_location">נקודת ההתחלה לא נקבעה עדיין</string>
+	<string name="unknown_location">המיקום עדיין לא ידוע</string>
+	<string name="context_menu_item_directions">הנחיות כיוון לכאן</string>
+	<string name="modify_transparency">שינוי השקיפות (0 - שקוף, 255 - אטום)</string>
+	<string name="confirm_interrupt_download">האם להפריע להורדת הקובץ?</string>
+	<string name="tip_update_index_t">"\tחיוני ביותר להתעדכן בנתוני המפה. התכנית OsmAnd מספקת מנהל הורדה שיכול לבדוק האם קיימים עדכוני נתונים בלתי מקוונים.
+\n\tכדי לבדוק אם יש עדכונים יש לגשת אל  \'הגדרות\' -&gt; \'נתונים בלתי מקוונים\' -&gt; \'הורדת נתונים בלתי מקוונים\'. לאחר שרשימת האזורים מתקבלת מהאינטרנט, ניתן לבחור באפשרות \'תפריט\' -&gt; \'סינון ההורדות\' כדי לציין עדכונים רק עבור הנתונים שבהתקן שלך.
+\n\tזמינות העדכונים מצוינת בצבעים הבאים:
+\n\t\'ירוק\' - מציין שקובצי הנתונים זהים בהתקן ובשרת
+\n\t\'כחול\' - מציין שיש עדכונים בשרת
+\n\t\'כחול/ירוק כהה\' - זהים, מציינים שהנתונים נוטרלו בהתקן"</string>
+	<string name="map_widget_fluorescent">הארת מסלולים</string>
+	<string name="map_widget_time">משך הנסיעה</string>
+	<string name="map_widget_mini_route">מפת מסלול ממוזערת</string>
+	<string name="bg_service_screen_lock">נעילת המסך</string>
+	<string name="bg_service_screen_unlock">שחרור המסך</string>
+	<string name="bg_service_screen_lock_toast">המסך נעול</string>
+	<string name="bg_service_interval">הגדרת משך התעוררות:</string>
+	<string name="show_cameras">הצגת מכמונות מהירות</string>
+	<string name="show_speed_limits">הצגת אזהרות תנועה</string>
+	<string name="avoid_toll_roads">המנעות מכבישי אגרה</string>
+	<string name="continue_follow_previous_route_auto">הניווט הקודם לא הושלם. האם להמשיך לעקוב אחריו? (%1$s שניות)</string>
+	<string name="route_updated_loc_found">המסלול יחושב מחדש כאשר המיקום יימצא</string>
+	<string name="osmand_parking_hours">שעות</string>
+	<string name="osmand_parking_minutes">דקות</string>
+	<string name="osmand_parking_position_description_add_time">הרכב חונה במיקום:</string>
+	<string name="tip_recent_changes_0_8_1_t">"שינויים ב־0.8.1 :
+\n\t* מסלולים מדויקים יותר (פעולה מעט אטית יותר)
+\n\t* חישוב מחדש של נתיב באופן חכם ומהיר 
+\n\t* הנחיות לפי נתיבים
+\n\t* פרטים על מגבלות מהירות, מכמונות מהירות ופסי האטה
+\n\t* הנחיה קולית משופרת בכבישים מהירים
+\n\t* תוסף חנייה (\'איפה חניתי את האוטו שלי?\')
+\n\t* הפעלה/נטרול של וידג׳ט רישום "</string>
+	<string name="select_animate_speedup">בחירה בהנפשת האצה במסלול</string>
+    	<string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של אנדרויד: %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
+	<string name="global_app_allocated_memory">הזיכרון המוקצה</string>
+	<string name="native_app_allocated_memory_descr">סך כל הזיכרון הטבעי שמוקצה על ידי היישום: %1$s מ״ב (Dalvik‏: %2$s מ״ב, אחרים: %3$s מ״ב). זיכרון יחסי: %4$s מ״ב (המגבלה של אנדרויד: %5$s מ״ב, Dalvik‏: %6$s מ״ב).</string>
+	<string name="native_app_allocated_memory">סך כל הזיכרון הטבעי</string>
+	<string name="update_downlod_list">טעינת הרשימה מחדש</string>
+	<string name="starting_point_too_far">נקודת ההתחלה רחוקה מדי מהדרך הקרובה אליה ביותר.</string>
+	<string name="shared_location">מיקום משותף</string>
+	<string name="osmand_parking_event">איסוף הרכב מהחנייה</string>
+	<string name="osmand_parking_warning">אזהרה</string>
+	<string name="osmand_parking_warning_text">התרעה לאיסוף הרכב שלך נוספה בעבר ליומן שלך. ההתרעה תישאר שם עד למחיקתה ידנית.</string>    
+	<string name="osmand_parking_time_limit_title">הגדרת מגבלת הזמן לחנייה</string>
+	<string name="osmand_parking_delete_confirm">האם ברצונך להסיר את מיקום הרכב החונה?</string>
+	<string name="osmand_parking_delete">מחיקת סמן חנייה</string>
+	<string name="osmand_parking_choose_type">נא לבחור את סוג החנייה</string>
+	<string name="osmand_parking_lim_text">מוגבלת בזמן</string>
+	<string name="osmand_parking_no_lim_text">בלתי מוגבלת בזמן</string>
+	<string name="osmand_parking_add_event">הוספת התרעה ליישום היומן</string>
+	<string name="osmand_parking_time_limit">חנייה מוגבלת בזמן</string>
+	<string name="osmand_parking_time_no_limit">חנייה בלתי מוגבלת בזמן</string>
+	<string name="osmand_parking_position_description">מיקום הרכב שחנית. %1$s</string>
+	<string name="osmand_parking_position_description_add">לאסוף את הרכב מ־:</string>
+	<string name="osmand_parking_pm">PM</string>
+	<string name="osmand_parking_am">AM</string>
+	<string name="osmand_parking_position_name">נקודת החנייה</string>
+	<string name="osmand_parking_plugin_description">תוסף זה מאפשר לך לאחסן את מיקום הרכב שחנית.</string>
+	<string name="osmand_parking_plugin_name">תוסף מיקום החנייה</string>
+	<string name="context_menu_item_add_parking_point">סימון כמיקום החנייה</string>
+	<string name="context_menu_item_delete_parking_point">מחיקת סימון חנייה</string>
+	<string name="gpxup_public">ציבורי</string>
+	<string name="gpxup_identifiable">ניתן לזיהוי</string>
+	<string name="gpxup_trackable">ניתן למעקב</string>
+	<string name="gpxup_private">פרטי</string>
+	<string name="asap">דחוף</string>
+	<string name="save_route_as_gpx">שמירת המסלול כקובץ GPX</string>
+	<string name="route_roundabout">כיכר : לצאת ביציאה ה%1$d ולהמשיך</string>
+	<string name="route_kl">להיצמד לשמאל ולהמשיך</string>
+	<string name="route_kr">להיצמד לימין ולהמשיך</string>
+	<string name="rendering_attr_noPolygons_description">הפיכת כל תכונות הקרקע במפה לשקופות</string>
+	<string name="rendering_attr_noPolygons_name">ללא מצולעים</string>
+	<string name="rendering_attr_appMode_name">מצב עיבוד תמונה</string>
+	<string name="rendering_attr_appMode_description">מיטוב המפה לטובת</string>
+	<string name="rendering_attr_contourLines_description">הצגה החל מרמת תקריב (נדרש קובץ SRTM):</string>
+	<string name="rendering_attr_contourLines_name">הצגת קווי מתאר</string>
+	<string name="rendering_attr_hmRendered_description">הגברת כמות פרטי המפה המופיעים</string>
+	<string name="rendering_attr_hmRendered_name">הצגת יותר פרטים במפה</string>
+	<string name="local_index_routing_data">נתוני המסלול</string>
+	<string name="navigate_point_format">עיצוב :</string>
+	<string name="first_time_msg">תודה לך על השימוש ב־OsmAnd. עבור תכונות רבות של יישום זה יש צורך בנתונים אזוריים בלתי מקוונים אותם ניתן להוריד דרך \'הגדרות\' -&gt; \'נתונים בלתי מקוונים\'. לאחר מכן יתאפשר לך לצפות במקום, לאתר כתובות, לחפש נקודות עניין ולמצוא תחבורה ציבורית.</string>    
+	<string name="basemap_was_selected_to_download">נדרשת מפת בסיס לצורך התפקוד התקין של התכנה ונבחרה אחת כזאת להורדה.</string>
+	<string name="select_index_file_to_download">לא נמצא כלום. אם האזור שלך לא נמצא, ניתן ליצור אותו בעצמך (לפרטים http://osmand.net).</string>
+	<string name="local_indexes_cat_tile">מפות מקוונות ואריחים</string>
+	<string name="local_indexes_cat_map">מפות בלתי מקוונות (וקטור)</string>
+	<string name="gpx_index_settings_descr">" (לרבות מנתח GPX)"</string>
+	<string name="index_settings_descr">הורדה, צפייה בפרטים וניהול של מפות בלתי מקוונות</string>
+	<string name="map_online_plugin_is_not_installed">ניתן להפעיל את תוסף המפות המקוונות כדי לבחור במקורות שונים למפה</string>
 	</resources>
