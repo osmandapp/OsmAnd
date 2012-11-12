@@ -1058,7 +1058,7 @@
 	<string name="background_service_is_enabled_question">A háttérszolgáltatás még fut. Szeretnéd kikapcsolni?</string>
     <string name="tip_recent_changes_1_0_0_t">"Az 1.0 kiadás változásai:
 \n\t* Gyorsabb és pontosabb útvonaltervezés (akár 250 km)
-\n\t* Úttérkép\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
+\n\t* Letölthető úttérképek\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
 \n\t* A háttérszolgáltatás bekapcsol navigáció közben "</string>
     <string name="safe_mode_description">Alkalmazás futtatása biztonságos módban (Android kódot használva natív kód helyett).</string>
     <string name="safe_mode">Biztonságos mód</string>
