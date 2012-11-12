@@ -1035,4 +1035,12 @@
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Market?</string>
 	<string name="close_changeset">Sluit changeset</string>
-	</resources>
+	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt Android code in plaats van eigen code).</string>
+    <string name="safe_mode">Veilige modus</string>
+    <string name="native_library_not_running">Het programma werkt in veilige modus (uitzetten via Instellingen).</string>
+    <string name="background_service_is_enabled_question">Achtergrond service staat nog aan. Wil je dat uitzetten?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Wijzigingen in 1.0 :
+\n\t* Verbeterde routeberekening, sneller en nauwkeuriger (tot 250 km)
+\n\t* Wegenkaart (toont alleen wegen)\n\t* Kaart houdt de positie vast na onderbrekingen
+\n\t* Zet achtergrond service aan tijdens navigatie "</string>
+    </resources>
