@@ -91,4 +91,19 @@
 	<string name="osmand_parking_pm">ÖS</string>
 	<string name="osmand_parking_am">ÖÖ</string>
 	<string name="osmand_parking_position_name">Park noktası</string>
+	<string name="safe_mode_description">Uygulamayı güvenli modda çalıştır (sisteme özgü yerine Android kodu kullanılarak).</string>
+    <string name="safe_mode">Güvenli mod</string>
+    <string name="native_library_not_running">Uygulama güvenli modda çalışıyor (Ayarlar menüsünden kapatabilirsiniz).</string>
+    <string name="background_service_is_enabled_question">Arka plan servisi hala çalışıyor. İptal etmek ister misiniz?</string>
+    <string name="tip_recent_changes_1_0_0_t">"1.0 Değişiklikleri:
+\n\t* Daha hızlı ve kesin rota belirleme (250 km ye kadar)
+\n\t* Yol haritaları
+\n\t* Müdahale sonra harita mevcut konumu kaybetmiyor
+\n\t* Navigasyon süresinde arka plan servisi aktif "</string>
+    <string name="tip_recent_changes_0_8_3_t">"0.8.3 Değişiklikleri:
+\n\t* Yol ara noktaları
+\n\t* Geliştirilmiş rota rehberi
+\n\t* Rota hazırlarken otobanlardan kaşınma seçeneği ayarlara eklendi
+\n\t* Bisikletler için bir yol tipi daha eklendi (bisikletyolu)
+\n\t* Hata düzeltmeleri "</string>
 	</resources>
