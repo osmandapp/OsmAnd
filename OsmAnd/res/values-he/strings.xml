@@ -355,4 +355,96 @@
 	<string name="live_monitoring_url">כתובת שרת המעקב החי</string>
 	<string name="gpx_monitoring_disabled_warn">נא להפעיל את \'מעקב אחר המסלול לקובץ GPX\' בהגדרות.</string>
 	<string name="show_current_gpx_title">הצגת המסלול הנוכחי</string>
+	<string name="tip_recent_changes_0_7_0_t">"שינויים ב־0.7.0 :
+\n\t- נתונים בלתי מקוונים מוויקיפדיה לרבות ערכים
+\n\t- מפות מעודכנות
+\n\t- תכונות קטנות נוספות "</string>    
+	<string name="free_version_message">גרסה חינמית זו של OsmAnd מוגבלת לכדי %1$s הורדות %2$s ואינה תומכת בכתבות בלתי מקוונות של ויקיפדיה.</string>
+	<string name="free_version_title">גרסה בחינם</string>
+	<string name="poi_context_menu_showdescription">הצגת תיאור של נ״ע</string>
+	<string name="index_name_north_america">צפון אמריקה</string>
+	<string name="index_name_us">צפון אמריקה - ארצות הברית</string>
+	<string name="index_name_central_america">מרכז אמריקה</string>
+	<string name="index_name_south_america">דרום אמריקה</string>
+	<string name="index_name_europe">אירופה</string>
+	<string name="index_name_france">אירופה - צרפת</string>
+	<string name="index_name_germany">אירופה - גרמניה</string>
+	<string name="index_name_russia">אירופה/אסיה - רוסיה</string>
+	<string name="index_name_africa">אפריקה</string>
+	<string name="index_name_asia">אסיה</string>
+	<string name="index_name_oceania">אוקיאניה</string>
+	<string name="index_name_other">כלל עולמי ומפות נושאים</string>
+	<string name="index_name_wiki">כלל עולמי עם ויקיפדיה</string>
+	<string name="index_name_voice">חבילות קריינות (מוקלטות)</string>
+	<string name="index_name_tts_voice">חבילות קריינות (טקסט לדיבור)</string>
+	<string name="amenity_type_wikiosm">וקיפדיה (בלתי מקוונת)</string>
+	<string name="amenity_type_user_defined">בהגדרת המשתמש</string>
+	<string name="fav_export_confirmation">קיים קובץ עם מועדפים שיוצאו בעבר. האם ברצונך להחליפו?</string>
+	<string name="profile_settings">הגדרות יעודיות לפרופיל</string>
+	<string name="settings_preset">פרופיל משתמש</string>
+	<string name="settings_preset_descr">נא לבחור בפרופיל משתמש עם מפה וניווט מותאמים אישית.</string>
+	<string name="routing_settings">ניווט</string>
+	<string name="routing_settings_descr">נא לציין אפשרויות ניווט</string>
+	<string name="global_settings">הגדרות כלליות</string>
+	<string name="index_settings">נתונים בלתי מקוונים (הורדה)</string>
+	<string name="general_settings">הגדרות כלליות</string>
+	<string name="general_settings_descr">הגדרת תצורה כללית</string>
+	<string name="global_app_settings">הגדרות יישומים כלליות</string>
+	<string name="user_name">שם המשתמש שלך ב־OSM</string>
+	<string name="user_name_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
+	<string name="user_password_descr">נדרש לטובת שליחת נתונים אל openstreetmap.org</string>
+	<string name="user_password">הססמה שלך ב־OSM</string>
+	<string name="osmand_service">תכונת מצב השינה</string>
+	<string name="osmand_service_descr">יש להשתמש כדי להריץ את OsmAnd כאשר המסך כבוי</string>
+	<string name="tip_rotation_switching">יישור המפה</string>
+	<string name="tip_rotation_switching_t_v2">"\tניתן לשנות את האופן בו המפה מוצגת ומסתובבת על ידי לחיצה חוזרת על סמל המצפן שעל המפה.
+\n\tהאפשרויות הן:
+\n\t\'לא לסובב (הצפון למעלה)\' - המפה לא תסתובב. הצפון תמיד יהיה למעלה
+\n\t\'לפי התנועה\' - המפה תתיישר תמיד עם כיוון התנועה שלך
+\n\t\'לפי המצפן\' - המפה תתיישר באופן סדיר עם קריאת המצפן של ההתקן "</string>
+	<string name="binary_map_download_success">ההורדה הושלמה.\n\t\n\tכדי להשתמש יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה...\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
+	<string name="tip_day_night_mode">מצב יום/לילה</string>
+	<string name="tip_day_night_mode_t_v2">"\tניתן לשנות את אופן הצגת המפה בין תצוגת יום (בהיר יותר) ותצוגת לילה (כהה יותר).
+\n\tהצבעים הכהים יותר בטוחים למטרות נסיעת לילה.
+\n\tניתן להגדיר מדיניות עבור מעבר בין יום ולילה תחת \'תפריט\' -&gt; \'הגדרת המסך...\' -&gt;\'מפת יום/לילה\'.
+\n\tהאפשרויות הן:
+\n\t\'זריחה/שקיעה\' - מצב אוטומטי, נשלט על ידי מיקום השמש (בררת מחדל)
+\n\t\'יום\' - תמיד להשתמש במצב יום
+\n\t\'לילה\' - תמיד להשתמש במצב לילה
+\n\t\'חיישן אור\' - אופן הצגת המפה נשלט על ידי חיישן האור של ההתקן שלך (אם צויד בכזה) "</string>	
+	<string name="tip_osm_improve">שיפור הנתונים של OSM</string>
+	<string name="download_files_not_enough_space">אין די מקום כדי להוריד %1$s מ״ב (פנויים: %2$s).</string>
+	<string name="download_files_question_space">כעת ישנם {2} מ״ב פנויים! האם להוריד {0} קבצים (או קובץ) ({1} מ״ב)?</string>
+	<string name="tip_select_destination_point">נא לבחור יעד</string>
+	<string name="tip_select_destination_point_t">"\tניתן לבחור את היעד ישירות על המפה (תפריט הקשר ואז \'הגדרה כיעד\'), בכל פעילויות החיפוש, או על ידי לחיצה ארוכה על רשומה ב„רשימת הנקודות המועדפות“ שלך.
+\n\tהיעד מסומן כדיסק כתום על המפה וב־OsmAnd מוצגים המרחק ליעד והכיוון אליו (משולש כתום). "</string> 
+	<string name="tip_recent_changes_0_6_9_t">"שינויים ב־0.6.9 :
+\n\t- עיבוד תמונה משופר למפות בלתי מקוונות
+\n\t- עיבוד תמונה בלתי מקוונת טבעי מהיר - כדי להציץ בתכונות הניסיוניות (יתכן שלא יעבוד על חלק מההתקנים)
+\n\t- שינויים מהותיים במראה ובתחושה
+\n\t- פרטי גובה
+\n\t- תרגומים חדשים (וייטנאמית, פולנית)
+\n\t- תכונות קטנות נוספות "</string>
+	<string name="use_transparent_map_theme">ערכת עיצוב שקופה</string>
+	<string name="native_library_not_supported">אין תמיכה בספרייה טבעית בהתקן זה.</string>
+	<string name="init_native_library">הספרייה הטבעית מופעלת…</string>
+	<string name="choose_auto_follow_route">מרכוז אוטומטי של תצוגת המפה</string>
+	<string name="choose_auto_follow_route_descr">הזמן עד שתצוגת המפה מסתנכרנת עם המיקום הנוכחי</string>
+	<string name="auto_follow_route_never">לעולם לא</string>
+	<string name="auto_follow_route_navigation">מרכוז אוטומטי בעת ניווט בלבד</string>
+	<string name="auto_follow_route_navigation_descr">מרכוז אוטומטי של תצוגת המפה בעת ניווט בלבד.</string>
+	<string name="auto_follow_location_enabled">מרכוז אוטומטי של תצוגת המפה בעת שימוש.</string>
+	<string name="pref_vector_rendering">אפשרויות יעודיות למעבד הווקטורים</string>
+	<string name="pref_overlay">שכבת על / תחת</string>
+	<string name="pref_raster_map">הגדרות מקור המפה</string>
+	<string name="pref_vector_map">הגדרות מפת הווקטורים</string>
+	<string name="delete_confirmation_msg">האם למחוק את %1$s?</string>
+	<string name="city_type_suburb">פרבר</string>
+	<string name="city_type_hamlet">כפר קטן</string>
+	<string name="city_type_village">כפר</string>
+	<string name="city_type_town">עיר קטנה</string>
+	<string name="city_type_city">עיר</string>
+	<string name="layer_poi_label">תוויות נ״ע</string>
+	<string name="animate_route_off">הפסקת ההנפשה</string>
+	<string name="animate_route">התחלת ההנפשה</string>
 	</resources>
