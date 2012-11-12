@@ -1060,4 +1060,5 @@
 \n\t* Gyorsabb és pontosabb útvonaltervezés (akár 250 km)
 \n\t* Úttérkép\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
 \n\t* A háttérszolgáltatás bekapcsol navigáció közben "</string>
+    <string name="safe_mode_description">Alkalmazás futtatása biztonságos módban (Android kódot használva natív kód helyett).</string>
     </resources>
