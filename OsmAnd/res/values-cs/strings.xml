@@ -1101,4 +1101,6 @@
 \n\t* Rychlejší a přesnější výpočet trasy (až 250 km)
 \n\t* Mapa silnic\n\t* Pozice na mapě se po přerušení neztratí\n\t* Služba na pozadí během navigace "</string>
     <string name="native_library_not_running">Aplikace běží v bezpečném režimu (vypněte ho v nastavení).</string>
+    <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (kód pro Android namísto nativního).</string>
+    <string name="safe_mode">Bezpečný režim</string>
     </resources>
