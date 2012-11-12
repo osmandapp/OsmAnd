@@ -9,10 +9,10 @@
     <string name="poi_filter_restaurants">Εστιατόρια</string>
     <string name="poi_filter_sightseeing">Αξιοθέατα</string>
     <string name="poi_filter_car_aid">Εξυπηρέτηση αυτοκινήτων</string>
-	<string name="poi_filter_food_shop">Κατάστημα Τροφίμων</string>
+	<string name="poi_filter_food_shop">Κατάστημα τροφίμων</string>
 	<string name="poi_filter_for_tourists">Τουριστικά</string>
 	<string name="poi_filter_fuel">Καύσιμα</string>
-	<string name="show_warnings_title">Εμφάνιση Προειδοποιήσεων…</string>
+	<string name="show_warnings_title">Εμφάνιση προειδοποιήσεων…</string>
 	<string name="show_warnings_descr">Ρύθμιση προειδοποιήσεων κυκλοφορίας (όρια ταχύτητας, αναγκαστικές στάσεις, μειωτές ταχύτητας) προειδοποιήσεις καμερών ταχύτητας, και πληροφορίες λωρίδων</string>
 	<string name="use_compass_navigation_descr">Χρήση της πυξίδας όταν η κατεύθυνση δεν έχει εντοπιστεί διαφορετικά</string>
 	<string name="use_compass_navigation">Χρήση πυξίδας</string>
@@ -25,7 +25,7 @@
 \n\t* Προσθήκη ενός ακόμα τύπου δρόμων για ποδήλατα στο χάρτη (Cycleway=track)\n\t* Διορθώσεις σφαλμάτων "</string>
 	<string name="snap_to_road_descr">Κλείδωμα στο δρόμο κατά τη πλοήγηση</string>
 	<string name="snap_to_road">Κλείδωμα στο δρόμο</string>
-	<string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 :
+	<string name="tip_recent_changes_0_8_2_t">"Αλλαγές στην 0.8.2 :
 \n\t* Βελτιωμένη Δρομολόγηση
 \n\t* Δυναμικά γραφικά στοιχεία χάρτη
 \n\t* Οι ρυθμίσεις χάρτη μετακινήθηκαν στην οθόνη του χάρτη
@@ -104,7 +104,7 @@
 	<string name="route_updated_loc_found">Η διαδρομή θα επαναϋπολογιστεί όταν βρεθεί η τοποθεσία</string>
 	<string name="osmand_parking_hours">Ώρες</string>
 	<string name="osmand_parking_minutes">Λεπτά</string>
-	<string name="osmand_parking_position_description_add_time">Το αυτοκίνητο έχει σταθμεύσει στο:</string>
+	<string name="osmand_parking_position_description_add_time">Το αυτοκίνητο στάθμευσε στις:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Αλλαγές στην 0.8.1 :
 \n\t* Διαδρομές με καλύτερη ακρίβεια (λίγο πιο αργό)
 \n\t* Έξυπνος και γρήγορος επαναϋπολογισμός διαδρομής
@@ -128,7 +128,7 @@
 	<string name="osmand_parking_delete">﻿Διαγράψτε ένα δείκτη στάθμευσης</string>
 	<string name="osmand_parking_choose_type">﻿Επιλέξτε τον τύπο της στάθμευσης</string>
 	<string name="osmand_parking_lim_text">﻿Ορισμένου χρόνου</string>
-	<string name="osmand_parking_no_lim_text">Απεριόριστου χρόνου</string>
+	<string name="osmand_parking_no_lim_text">Απεριορίστου χρόνου</string>
 	<string name="osmand_parking_add_event">Προσθέστε μια ειδοποίηση στην εφαρμογή Ημερολόγιο</string>
 	<string name="osmand_parking_time_limit">Στάθμευση περιορισμένου χρόνου</string>
 	<string name="osmand_parking_time_no_limit">Στάθμευση απεριορίστου χρόνου</string>
@@ -164,14 +164,14 @@
 	<string name="address_search_desc">Αναζήτηση ﻿διεύθυνσης</string>
 	<string name="navpoint_search_desc">Συντεταγμένες</string>
 	<string name="transport_search_desc">Αναζήτηση ΜΜΜ</string>
-	<string name="favourites_search_desc">﻿Αναζήτηση Αγαπημένων</string>
+	<string name="favourites_search_desc">﻿Αναζήτηση αγαπημένων</string>
 	<string name="history_search_desc">﻿Ιστορικό αναζήτησης</string>
 	<string name="offline_navigation_not_available">Η εκτός σύνδεσης πλοήγηση του OsmAnd δεν είναι διαθέσιμη προσωρινά.</string>
 	<string name="left_side_navigation">Οδήγηση ﻿αριστερά</string>
 	<string name="left_side_navigation_descr">﻿Επιλέξτε για χώρες με κυκλοφορία αριστερά</string>
 	<string name="download_link_and_local_description">﻿Κάντε κλικ εδώ, για να κάνετε λήψη ή να ενημερώσετε offline δεδομένα.
 \nΚλικ κάποιο υπάρχον στοιχείο για να δείτε περισσότερες λεπτομέρειες, πατήστε και κρατήστε πατημένο για να το απενεργοποιήσετε ή να το διαγράψετε. Τρέχοντα δεδομένα στη συσκευή (%1$s ελεύθερα):</string>
-	<string name="unknown_from_location">﻿Το σημείο εκκίνησης δεν έχει ακόμη καθορισθεί</string>
+	<string name="unknown_from_location">﻿Το σημείο εκκίνησης δεν έχει ακόμη καθοριστεί</string>
 	<string name="unknown_location">Η Θέση σας δεν είναι ακόμα γνωστή</string>
 	<string name="context_menu_item_directions">﻿Οδηγίες για εδώ</string>
 	<string name="modify_transparency">﻿Τροποποίηση διαφάνειας (0 - διάφανο, 255 - αδιαφανές)</string>
@@ -386,7 +386,7 @@
 \n\tΓια να προσθέσετε ένα σφάλμα OSM χρησιμοποιήστε την επιλογή \'Άνοιγμα σφάλματοςOSM\' στο μενού περιβάλλοντος χάρτη. Μετά εισάγετε την λεπτομερή περιγραφή του προβλήματος και τελικά καταχωρίστε το χρησιμοποιώντας το κουμπί \'Προσθήκη\'.
 \n\tΠαρακαλώ σημειώστε ότι χρειάζεται σύνδεση στο Διαδίκτυο για συνεισφορές ΣΕ και σφαλμάτων OSM.</string>
 	<string name="download_files_not_enough_space">Δεν υπάρχει αρκετός ελεύθερος χώρος για να κάνετε λήψη %1$s MB (ελεύθερα: %2$s).</string>
-	<string name="download_files_question_space">Ελεύθερος χώρος τώρα {2} MB! Λήψη {0} αρχείο(α) ({1} MB)?</string>
+	<string name="download_files_question_space">Ελεύθερος χώρος τώρα {2} MB! Λήψη {0} αρχείο(ων) ({1} MB)?</string>
 	<string name="tip_select_destination_point">Επιλέξτε Προορισμό</string>
 	<string name="tip_select_destination_point_t">"\tΜπορείτε να επιλέξετε ένα προορισμό απευθείας στο χάρτη (μενού περιβάλλοντος, και \'Ορισμός ως προορισμός\'), σε όλες τις λειτουργίες αναζήτησης, ή μέσω παρατεταμένου πατήματος μιας καταχώρησης στην \'Λίστα Αγαπημένων Σημείων\'.
 \n\tΟ προορισμός είναι σημειωμένος ως πορτοκαλί δίσκος πάνω στο χάρτη και ο OsmAnd εμφανίζει την απόσταση και την κατεύθυνση προς αυτόν (πορτοκαλί τρίγωνο). "</string> 
@@ -465,7 +465,7 @@
 \n\t- Bug fixes "</string>
 	<string name="save_route_dialog_title">Αποθήκευση διαδρομής ως ίχνος GPX</string>
 	<string name="route_successfully_saved_at">Η διαδρομή αποθηκεύτηκε με επιτυχία ως \'%1$s\'.</string>
-	<string name="filename_input">"Όνομα αρχείου: "</string>
+	<string name="filename_input">"Όνομα αρχείου : "</string>
 	<string name="file_with_name_already_exist">Υπάρχει ήδη αρχείο με το ίδιο όνομα.</string>
 	<string name="default_buttons_save">Αποθήκευση</string>
 	<string name="menu_save_directions">Αποθήκευση οδηγιών</string>
@@ -1074,4 +1074,13 @@
 	<string name="rendering_attr_roadColors_name">Χρωματικός συνδυασμός οδών</string>
     <string name="zxing_barcode_scanner_not_found">Η εφαρμογή ZXing Barcode Scanner δεν είναι εγκατεστημένη. Αναζήτηση στο Market?</string>
 	<string name="close_changeset">Κλείσιμο ομάδας αλλαγών</string>
-	</resources>
+	<string name="safe_mode_description">Εκτέλεση της εφαρμογής σε ασφαλή λειτουργία (χρησιμοποιώντας κώδικα Android αντί του εγγενούς).</string>
+    <string name="safe_mode">Ασφαλής λειτουργία</string>
+    <string name="native_library_not_running">Η εφαρμογή εκτελείται σε ασφαλή λειτουργία (απενεργοποίηση από τις Ρυθμίσεις).</string>
+    <string name="background_service_is_enabled_question">Η υπηρεσία παρασκηνίου εκτελείται ακόμη. Θέλετε να την ακυρώσετε;</string>
+    <string name="tip_recent_changes_1_0_0_t">"Αλλαγές στην 1.0 :
+\n\t* Βελτιωμένη δρομολόγηση γρηγορότερη και με καλύτερη ακρίβεια (μέχρι 250 χλμ)
+\n\t* Map of the roads
+\n\t* Ο χάρτης δεν χάνει το κλείδωμα θέσης μετά από διακοπές
+\n\t* Ενεργοποίηση της υπηρεσίας παρασκηνίου κατά την πλοήγηση "</string>
+    </resources>
