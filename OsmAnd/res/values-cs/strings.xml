@@ -1096,4 +1096,8 @@
 	<string name="rendering_attr_roadColors_name">Barevné schéma</string>
     <string name="zxing_barcode_scanner_not_found">Aplikace pro čtení čárových kódů ZXing není nainstalována. Chcete ji vyhledat v Google Play?</string>
 	<string name="close_changeset">Zavřít změny</string>
-	</resources>
+	<string name="background_service_is_enabled_question">Služba na pozadí stále běží. Chcete ji zastavit?</string>
+    <string name="tip_recent_changes_1_0_0_t">Změny ve verzi 1.0 :
+\n\t* Rychlejší a přesnější výpočet trasy (až 250 km)
+\n\t* Mapa silnic\n\t* Pozice na mapě se po přerušení neztratí\n\t* Služba na pozadí během navigace</string>
+    </resources>
