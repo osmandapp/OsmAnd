@@ -281,6 +281,10 @@ struct RoutingConfiguration {
 				} else if("1" == v || "yes" == v) {
 					return 1;
 				}
+			} else if(type.first == "roundabout") {
+				return 1;
+			} else if(type.first == "junction" && type.second == "roundabout") {
+				return 1;
 			}
 		}
 		return 0;
