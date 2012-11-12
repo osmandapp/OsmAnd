@@ -274,7 +274,7 @@
 	<string name="modify_transparency">Grad de transparență (0 - transparent, 255 - opac)</string>
 	<string name="confirm_interrupt_download">Doriți să întrerupeți descărcarea fișirului?</string>
 	<string name="first_time_msg">Mulțumim pentru că folosiți OsmAnd. Pentru a beneficia de toate funcționalitățile acestei aplicații aveți nevoie de un set de date regionale pe care le puteți descărca via \'Setări\' ->  \'Date offline\'. După aceea veți putea să vizualizați harți, să găsiți adrese, să localizați puncte de interes (POI) să căutați date despre transportul public.</string>    
-	<string name="basemap_was_selected_to_download">Harta de bază (basemap) este necesară pentru corecta funcționare a aplicației și a fost automat selectată pentru descărcare.</stringt
+	<string name="basemap_was_selected_to_download">Harta de bază (basemap) este necesară pentru corecta funcționare a aplicației și a fost automat selectată pentru descărcare.</string>
 	<string name="select_index_file_to_download">Nu s-a găsit nimic. Dacă nu puteți localiza harta regiunii care vă interesează, o puteți crea dvs. (vedeți http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Hărți raster și online</string>
 	<string name="local_indexes_cat_map">Hărți offline (vectoriale)</string>
