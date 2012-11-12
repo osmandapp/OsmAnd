@@ -429,19 +429,20 @@ public class OsmandApplication extends Application {
 		try {
 			if (!Version.isBlackberry(this)) {
 				if (osmandSettings.NATIVE_RENDERING_FAILED.get()) {
-					osmandSettings.NATIVE_RENDERING.set(false);
+					osmandSettings.SAFE_MODE.set(true);
 					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 					warnings.add(getString(R.string.native_library_not_supported));
-				} else if (osmandSettings.NATIVE_RENDERING.get()) {
+				} else if (!osmandSettings.SAFE_MODE.get()) {
 					osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 					startDialog.startTask(getString(R.string.init_native_library), -1);
 					RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
 					boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
 					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 					if (!initialized) {
-						LOG.info("Native library could not loaded!");
-						osmandSettings.NATIVE_RENDERING.set(false);
+						LOG.info("Native library could not be loaded!");
 					}
+				} else {
+					warnings.add(getString(R.string.native_library_not_running));
 				}
 			}
 			warnings.addAll(manager.reloadIndexes(startDialog));

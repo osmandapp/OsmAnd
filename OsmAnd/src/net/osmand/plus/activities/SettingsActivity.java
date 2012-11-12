@@ -268,11 +268,12 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("global_app_settings");
 		if (!Version.isBlackberry(this)) {
-			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(osmandSettings.NATIVE_RENDERING, R.string.native_rendering,
-					R.string.vector_maps_may_display_faster_on_some_devices);
+			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(osmandSettings.SAFE_MODE, R.string.safe_mode,
+					R.string.safe_mode_description);
 			// disable the checkbox if the library cannot be used
 			if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || osmandSettings.NATIVE_RENDERING_FAILED.get()) {
 				nativeCheckbox.setEnabled(false);
+				nativeCheckbox.setChecked(true);
 			}
 			cat.addPreference(nativeCheckbox);
 
@@ -480,7 +481,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		OsmandPreference<String> editPref = editTextPreferences.get(preference.getKey());
 		if (boolPref != null) {
 			boolPref.set((Boolean) newValue);
-			if (boolPref.getId().equals(osmandSettings.NATIVE_RENDERING.getId())) {
+			if (boolPref.getId().equals(osmandSettings.SAFE_MODE.getId())) {
 				if (((Boolean) newValue).booleanValue()) {
 					loadNativeLibrary();
 				}

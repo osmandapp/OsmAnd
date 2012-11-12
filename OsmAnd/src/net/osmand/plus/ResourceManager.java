@@ -535,8 +535,7 @@ public class ResourceManager {
 		if(indCache.exists()) {
 			try {
 				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
-				NativeOsmandLibrary nativeLib = context.getSettings().NATIVE_RENDERING.get() ? NativeOsmandLibrary.getLoadedLibrary()
-						: null;
+				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
 				if(nativeLib != null) {
 					nativeLib.initCacheMapFile(indCache.getAbsolutePath());
 				}

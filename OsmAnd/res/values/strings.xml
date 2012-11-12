@@ -9,6 +9,9 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="safe_mode_description">Run the application in the safe mode (using Android code instead of native).</string>
+    <string name="safe_mode">Safe mode</string>
+    <string name="native_library_not_running">The application is running in the safe mode (disable it in the Settings).</string>
     <string name="background_service_is_enabled_question">Background service is still running. Do you want to cancel it?</string>
     <string name="tip_recent_changes_1_0_0_t">Changes in 1.0 :
 	\n\t* Improved routing faster and more precise (up to 250 km)
