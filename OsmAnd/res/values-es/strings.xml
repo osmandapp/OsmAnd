@@ -195,7 +195,7 @@
   <string name="local_index_address_data">Datos de direcciones</string>
   <string name="local_index_transport_data">Datos de transporte</string>
   <string name="local_index_map_data">Datos de mapa</string>
-  <string name="local_index_items"/>
+  <string name="local_index_items"></string>
   <string name="local_indexes_cat_backup">Desactivado</string>
   <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
   <string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
@@ -1025,4 +1025,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambios en 1.0:\n\t* Mejorado el enrutamiento: más rápido y más preciso (hasta 250 km)\n\t* Mapa de las carreteras\n\t* El mapa no pierde el bloqueo de posición después de interrupciones\n\t* Permite activar el servicio de fondo durante la navegación "</string>
     <string name="safe_mode_description">Ejecutar la aplicación en modo seguro (Usando código de Android en vez del nativo).</string>
     <string name="safe_mode">Modo seguro</string>
+    <string name="native_library_not_running">La aplicación se está ejecutando en modo seguro (desactívalo en Opciones).</string>
     </resources>
