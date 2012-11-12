@@ -596,10 +596,11 @@ void attachConnectedRoads(RoutingContext* ctx, vector<RouteSegmentResult>& res) 
 		do {
 			SHARED_PTR<RouteSegment> s = ctx->loadRouteSegment(it->object->pointsX[j], it->object->pointsY[j]);
 			vector<RouteSegmentResult> r;
-			while(s.get() != NULL) {
-				RouteSegmentResult res(s->road, s->getSegmentStart(), s->getSegmentStart());
+			RouteSegment* rs = s.get();
+			while(rs != NULL) {
+				RouteSegmentResult res(rs->road, rs->getSegmentStart(), rs->getSegmentStart());
 				r.push_back(res);
-				s = s->next;
+				rs = rs->next.get();
 			}
 			it->attachedRoutes.push_back(r);
 			j = plus ? j + 1 : j - 1;
