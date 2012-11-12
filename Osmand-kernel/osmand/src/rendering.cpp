@@ -594,21 +594,27 @@ void drawPoint(MapDataObject* mObj,	RenderingRuleSearchRequest* req, SkCanvas* c
 void drawObject(RenderingContext* rc,  SkCanvas* cv, RenderingRuleSearchRequest* req,
 	SkPaint* paint, vector<MapDataObjectPrimitive>& array, int objOrder) {
 
-	double limit = 100;
+	double polygonLimit = 100;
+	int roadsLimit = 500;
+	float orderToSwitch = 0;
 	for (int i = 0; i < array.size(); i++) {
 		rc->allObjects++;
 		MapDataObject* mObj = array[i].obj;
 		tag_value pair = mObj->types.at(array[i].typeInd);
 		if (objOrder == 0) {
-			if (array[i].order < limit) {
+			if (array[i].order < polygonLimit) {
 				return;
 			}
 			// polygon
 			drawPolygon(mObj, req, cv, paint, rc, pair);
-		} else if (objOrder == 1) {
-			drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), true);
-		} else if (objOrder == 2) {
-			drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), false);
+		} else if (objOrder == 1 || objOrder == 2) {
+			if(--roadsLimit == 0) {
+				orderToSwitch = array[i].order;
+			} else if(roadsLimit < 0 && orderToSwitch != array[i].order){
+				// break here
+				return;
+			}
+			drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), objOrder == 1);
 		} else if (objOrder == 3) {
 			drawPoint(mObj, req, cv, paint, rc, pair, array[i].typeInd == 0);
 		}

@@ -236,7 +236,7 @@ public class IndexCreator {
 		long st = System.currentTimeMillis();
 		if (readFile.getName().endsWith(".bz2")) { //$NON-NLS-1$
 			if (stream.read() != 'B' || stream.read() != 'Z') {
-				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream."); //$NON-NLS-1$
+//				throw new RuntimeException("The source stream must start with the characters BZ if it is to be read as a BZip2 stream."); //$NON-NLS-1$
 			} else {
 				stream = new CBZip2InputStream(stream);
 			}
@@ -741,15 +741,15 @@ public class IndexCreator {
 	public static void main(String[] args) throws IOException, SAXException, SQLException, InterruptedException {
 		long time = System.currentTimeMillis();
 		IndexCreator creator = new IndexCreator(new File("/home/victor/projects/OsmAnd/data/osm-gen/")); //$NON-NLS-1$
-//		creator.setIndexMap(true);
-//		creator.setIndexAddress(true);
-//		creator.setIndexPOI(true);
-//		creator.setIndexTransport(true);
+		creator.setIndexMap(true);
+		creator.setIndexAddress(true);
+		creator.setIndexPOI(true);
+		creator.setIndexTransport(true);
 		creator.setIndexRouting(true);
 
 //		creator.deleteDatabaseIndexes = false;
 //		creator.recreateOnlyBinaryFile = true;
-		creator.deleteOsmDB = false;
+//		creator.deleteOsmDB = false;
 				
 		creator.setZoomWaySmothness(2);
 		MapRenderingTypes rt = MapRenderingTypes.getDefault();

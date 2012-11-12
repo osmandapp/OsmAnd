@@ -917,7 +917,6 @@ void convertRouteDataObjecToMapObjects(SearchQuery* q, std::vector<RouteDataObje
 			}
 			ids.insert(r->id);
 		}
-		// convert route data object to map data object
 		MapDataObject* obj = new MapDataObject;
 		bool add = true;
 		std::vector<uint32_t>::iterator typeIt = r->types.begin();
@@ -928,10 +927,6 @@ void convertRouteDataObjecToMapObjects(SearchQuery* q, std::vector<RouteDataObje
 				if (t.first == "highway" || t.first == "route" || t.first == "railway" || t.first == "aeroway"
 						|| t.first == "aerialway") {
 					obj->types.push_back(t);
-//					if (q->zoom < 15 && t.second != "motorway" && t.second != "primary" && t.second != "secondary"
-//							&& t.second != "tertiary" && t.second != "ferry" && t.second != "trunk") {
-//						add = false;
-//					}
 				} else {
 					obj->additionalTypes.push_back(t);
 				}
@@ -1109,24 +1104,18 @@ void readMapObjects(SearchQuery* q, BinaryMapFile* file) {
 			}
 		}
 	}
-
 }
 
-ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, int renderRouteDataFile, std::string msgNothingFound) {
-	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
-	IDS_SET ids;
-	if(skipDuplicates){
+void readMapObjectsForRendering(SearchQuery* q, std::vector<MapDataObject*> & basemapResult, std::vector<MapDataObject*>& tempResult,
+		std::vector<MapDataObject*>& coastLines,std::vector<MapDataObject*>& basemapCoastLines,
+		int& count, bool& basemapExists, int& renderRouteDataFile, bool skipDuplicates) {
+	if (skipDuplicates) {
 		// override it for now
 		// TODO skip duplicates doesn't work correctly with basemap ?
 		skipDuplicates = false;
 	}
-	int count = 0;
-	std::vector<MapDataObject*> basemapResult;
-	std::vector<MapDataObject*> tempResult;
-	std::vector<MapDataObject*> coastLines;
-	std::vector<MapDataObject*> basemapCoastLines;
-
-	bool basemapExists = false;
+	IDS_SET ids;
+	map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 	for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 		BinaryMapFile* file = i->second;
 		if (q->req != NULL) {
@@ -1134,13 +1123,14 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 		}
 		q->publisher->result.clear();
 		basemapExists |= file->isBasemap();
-		readMapObjects(q, file);
-
-		if (!q->publisher->isCancelled()) {
+		if(renderRouteDataFile == 1 && !file->isBasemap()) {
+			continue;
+		} else if (!q->publisher->isCancelled()) {
+			readMapObjects(q, file);
 			std::vector<MapDataObject*>::iterator r = q->publisher->result.begin();
-			tempResult.reserve((size_t)(q->publisher->result.size() + tempResult.size()));
+			tempResult.reserve((size_t) (q->publisher->result.size() + tempResult.size()));
 			for (; r != q->publisher->result.end(); r++) {
-				if (skipDuplicates && (*r)->id > 0 ) {
+				if (skipDuplicates && (*r)->id > 0) {
 					if (ids.find((*r)->id) != ids.end()) {
 						continue;
 					}
@@ -1159,20 +1149,29 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 					if (i->second->isBasemap()) {
 						basemapResult.push_back(*r);
 					} else {
-						if(renderRouteDataFile != 1){
-							tempResult.push_back(*r);
-							renderRouteDataFile = -1;
-						} else {
-							delete *r;
-						}
+						tempResult.push_back(*r);
+						renderRouteDataFile = -1;
 					}
 				}
 			}
 		}
 	}
+}
+
+ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, int renderRouteDataFile, std::string msgNothingFound) {
+	int count = 0;
+	std::vector<MapDataObject*> basemapResult;
+	std::vector<MapDataObject*> tempResult;
+	std::vector<MapDataObject*> coastLines;
+	std::vector<MapDataObject*> basemapCoastLines;
+
+	bool basemapExists = false;
+	readMapObjectsForRendering(q, basemapResult, tempResult, coastLines, basemapCoastLines, count,
+			basemapExists, renderRouteDataFile, skipDuplicates);
 
 	if (renderRouteDataFile >= 0) {
-		i = openFiles.begin();
+		IDS_SET ids;
+		map<std::string, BinaryMapFile*>::iterator i = openFiles.begin();
 		for (; i != openFiles.end() && !q->publisher->isCancelled(); i++) {
 			BinaryMapFile* file = i->second;
 			if (q->req != NULL) {
