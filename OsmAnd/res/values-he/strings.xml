@@ -447,4 +447,106 @@
 	<string name="layer_poi_label">תוויות נ״ע</string>
 	<string name="animate_route_off">הפסקת ההנפשה</string>
 	<string name="animate_route">התחלת ההנפשה</string>
+	<string name="tip_recent_changes_0_6_8_t">"שינויים ב־0.6.8 :
+\n\t- החיפוש תוכנן מחדש (נקודות עניין, כתובות)! הפיכת חיפוש הכתובות למהיר יותר ותגובתי יותר. יצירת מנשק חיפוש אחד עם אפשרויות שונות ומגוונות.
+\n\t- הטמעת חיפוש נקודות עניין לפני שם באזורים גדולים (מדינות)
+\n\t- תיקון בהבהוב מסך המפה במחשבי לוח (תקלה 641)
+\n\t- אפשרות מרכוז תצוגת המפה (תקלה 356)
+\n\t- ניווט GPX עבר ל\'הכוונה\' ו\'שמירת ההכוונה\' עברה ל\'על אודות המסלול\'
+\n\t- נתוני נ״ע עברו לקובץ ‎.obf (כל האינדקסים של ההורדות לאחר 01/10/11)
+\n\t- הכרזות קוליות תוקנו (תיקון מיקום האיכון, השמטת הפקודה הראשונה)
+\n\t- שיפורים קטנים "</string>
+	<string name="file_can_not_be_renamed">לא ניתן לשנות את שם הקובץ.</string>
+	<string name="file_with_name_already_exists">כבר קיים קובץ בשם הזה.</string>
+	<string name="gpx_navigation">מסלול GPX</string>
+	<string name="poi_query_by_name_matches_categories">נמצאו מספר קטגוריות נ״ע התואמות לשאילתה :</string>
+	<string name="data_to_search_poi_not_available">נתונים מקומיים לחיפוש נ״ע לא קיים.</string>
+	<string name="poi_filter_by_name">חיפוש לפי שם</string>
+	<string name="old_poi_file_should_be_deleted">קובץ נתוני הנ״ע \'%1$s\' אינו נחוץ עוד וניתן למחוק אותו.</string>
+	<string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
+	<string name="button_upgrade_osmandplus">שדרוג OsmAnd+‎</string>
+	<string name="map_version_changed_info">השרת מכיל קובצי מפה שאינם תואמים לגרסה הנוכחית של היישום שלך. כדי להוריד ולהשתמש בהם עליך לשדרג את היישום לגרסה עדכנית יותר.</string>
+	<string name="local_index_mi_rename">שינוי שם</string>
+	<string name="show_gpx_route">הצגה על המפה</string>
+	<string name="poi_filter_nominatim">חיפוש שם מקוון (Nominatim)</string>
+	<string name="search_select_point">בחירה</string>
+	<string name="search_position_current_location_search">מתבצע חיפוש אחר מיקום…</string>
+	<string name="search_position_current_location_found">מיקום (נמצא)</string>
+	<string name="search_position_address">כתובת…</string>
+	<string name="search_position_favorites">מועדפים…</string>
+	<string name="search_position_undefined">בלתי מוגדר</string>
+	<string name="search_position_fixed">קבוע</string>
+	<string name="search_position_current_location">המיקום הנוכחי…</string>
+	<string name="search_position_map_view">תצוגת המפה אחרונה</string>
+	<string name="select_search_position">חיפוש ליד :</string>
+	<string name="context_menu_item_search">חיפוש באזור הזה</string>
+	<string name="tip_recent_changes_0_6_7_t">"שינויים אחרונים ב־0.6.7 :
+\n\t- מנהל נתונים בלתי מקוונים (הורדה, מחיקה, הפעלה / נטרול של הנתונים הבלתי מקוונים ישירות ב־OsmAnd)
+\n\t- נקודות וקבוצות מועדפים (סידור בקטגוריות, מחיקה, ניהול של המועדפים)
+\n\t- סייר GPX ביישום (צפייה בפרטי המסלול, מרחק, מהירות ממוצעת, עילוי וכו׳)
+\n\t- ניווט GPX (אפשרויות נוספות, המשך בניווט לאחר קריסה, תמיכה בכיכרות)
+\n\t- פונקציה לשמירת מסלול כדרך GPX לצורך שימוש בלתי מקוון\n\t- שיפור מעקב GPX (סינון מיקומים בלתי מדויקים ושמירת דיוק/עילוי/מהירות)
+\n\t- שליחת GPX לקהילת OSM ‏(http://download.osmand.net/gpx/‎)
+\n\t- שיפור עיבוד וקטורי
+\n\t- שיפור המנגנון שממיר טקסט לדיבור (הכרזת המרחק במדויק, הוספת מַיילים)
+\n\t- תיקוני תקלות "</string>
+	<string name="save_route_dialog_title">שמירת מסלול כדרך GPX</string>
+	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
+	<string name="filename_input">"שם הקובץ : "</string>
+	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
+	<string name="default_buttons_save">שמירה</string>
+	<string name="menu_save_directions">שמירת ההכוונה</string>
+	<string name="local_index_upload_gpx_description">שליחת קובצי GPX לקהילת OSM. אלו ישמשו לשיפור המפות.</string>
+	<string name="local_index_items_uploaded">%1$d מתוך %2$d פריטים נשלחו בהצלחה.</string>
+	<string name="local_index_mi_upload_gpx">שליחה ל־OSM</string>
+	<string name="show_more_map_detail">הצגת יותר פרטים במפה</string>
+	<string name="show_more_map_detail_descr">הצגת חלק מהפרטים במפה בווקטורים (דרכים וכו׳) ברמות תקריב נמוכות</string>
+	<string name="favourites_delete_multiple_succesful">הנקודה או הנקודות המועדפות נמחקו בהצלחה.</string>
+	<string name="favorite_delete_multiple">פעולה זו תמחק %1$d מועדפים ו־%2$d קבוצות. האם להמשיך?</string>
+	<string name="favorite_home_category">בית</string>
+	<string name="favorite_friends_category">חברים</string>
+	<string name="favorite_places_category">מקומות</string>
+	<string name="favorite_default_category">אחרים</string>
+	<string name="favourites_edit_dialog_name">שם</string>
+	<string name="favourites_edit_dialog_category">קטגוריה</string>
+	<string name="vector_map_not_needed">לא, תודה</string>
+	<string name="basemap_missing">מפת העולם הבסיסית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה. כדאי לשקול להוריד את World_basemap_x.obf לקבלת סביבה שלמה.</string>
+	<string name="vector_data_missing">נתונים מקומיים („בלתי מקוונים“) חסרים בכרטיס ה־SD. נא לשקול להוריד אותם כדי להשתמש במפות באופן בלתי מקוון.</string>
+	<string name="local_index_gpx_info_show">\n\nיש ללחוץ ולהחזיק כדי להגיע לאפשרויות</string>
+	<string name="local_index_gpx_info_speed">\nמהירות ממוצעת : %1$s
+\nמהירות מרבית : %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nגובה ממוצע : %1$.0f מ׳\nגובה מזערי : %2$.0f מ׳\nגובה מרבי : %3$.0f מ׳\nעליות : %4$.0f מ׳\nירידות : %5$.0f מ׳</string>
+	<string name="local_index_gpx_info">תת־מסלולים : %1$d\nסך כל הנקודות : %2$d\nנקודות ציון : %3$d\nמרחק כולל : %4$s\nמועד ההתחלה : %5$tF, %5$tR\nמועד הסיום : %6$tF, %6$tR</string>
+	<string name="local_index_installed">מהדורה</string>
+	<string name="local_index_items_backuped">%1$d מתוך %2$d פריטים נוטרלו בהצלחה.</string>
+	<string name="local_index_items_deleted">%1$d מתוך %2$d פריטים נמחקו בהצלחה.</string>
+	<string name="local_index_items_restored">%1$d מתוך %2$d פריטים הופעלו בהצלחה.</string>
+	<string name="local_index_no_items_to_do">אין פריטים ל%1$s</string>
+	<string name="local_index_action_do">פעולה זו תגרום ל%1$s של %2$s פריטים. להמשיך?</string>
+	<string name="local_index_descr_title">מנהל נתונים בלתי מקוונים</string>
+	<string name="local_index_mi_restore">הפעלה</string>
+	<string name="local_index_mi_backup">נטרול</string>
+	<string name="local_index_mi_delete">מחיקה</string>
+	<string name="local_index_mi_reload">טעינה מחדש מכרטיס ה־SD</string>
+	<string name="local_index_download">הורדה…</string>
+	<string name="local_index_tile_data">נתוני האריח: %1$s
+\nתקריב מזערי : %2$d\nתקריב מרבי : %3$d\nניתנות להורדה : %4$s
+\nרמות תקריב שהתקבלו : %5$s</string>
+	<string name="local_index_poi_data">נתוני נ״ע</string>
+	<string name="local_index_address_data">נתוני כתובת</string>
+	<string name="local_index_transport_data">נתוני תעבורה</string>
+	<string name="local_index_map_data">נתוני מפה</string>
+	<string name="local_index_items"/>
+	<string name="local_indexes_cat_backup">מנוטרל</string>
+	<string name="local_indexes_cat_tts">נתוני קול (טקסט לדיבור)</string>
+	<string name="local_indexes_cat_voice">נתוני קול (מוקלטים)</string>
+	<string name="local_indexes_cat_gpx">נתוני GPX</string>
+	<string name="local_indexes_cat_poi">נתוני נ״ע</string>
+	<string name="ttsvoice">קול טקסט לדיבור</string>
+	<string name="search_offline_clear_search">חיפוש חדש</string>
+	<string name="map_text_size_descr">יש לבחור בגודל הטקסט של השמות במפה</string>
+	<string name="map_text_size">גודל הגופן במפות</string>
+	<string name="trace_rendering">נתוני ניפוי שגיאות של עיבוד</string>
+	<string name="trace_rendering_descr">הצגת ביצועי עיבוד תמונה</string>
+	<string name="tip_recent_changes">שינויים אחרונים</string>
 	</resources>
