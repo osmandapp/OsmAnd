@@ -1131,4 +1131,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_roadColors_name">Kelių spalvinimo schema</string>
     <string name="zxing_barcode_scanner_not_found">Barkodų nuskaitymo programa ZXing neįdiegta. Ieškoti parduotuvėje?</string>
 	<string name="close_changeset">Uždaryti pakeitimus</string>
-	</resources>
+	<string name="safe_mode_description">Vykdyti programą saugiu režimu (naudoti Android kodą vietoje aparatinio).</string>
+    <string name="safe_mode">Saugus režimas</string>
+    <string name="native_library_not_running">Programa veikia saugiu eržimu (išjunkite jį Nustatymuose).</string>
+    <string name="background_service_is_enabled_question">Foninis režimas vis dar veikia. Ar norite jį nutraukti?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Pakeitimai 1.0 versijoje :\n\t* Patobulintas maršruto skaičiavimas dabar greitesnis ir tikslesnis (iki 250 km)\n\t* Kelių žemėlapis\n\t* Žemėlapis nepraranda pozicijos įvykus trikdžiams\n\t* Foninio režimo įjungimas navigacijos metu "</string>
+    </resources>
