@@ -323,7 +323,7 @@ bool readRouteTree(CodedInputStream* input, RouteSubregion* thisTree, RouteSubre
 	return true;
 }
 
-bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
+bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex, bool readOnlyRules) {
 	uint32_t defaultId = 1;
 	uint32_t tag;
 	while ((tag = input->ReadTag()) != 0) {
@@ -342,6 +342,10 @@ bool readRoutingIndex(CodedInputStream* input, RoutingIndex* routingIndex) {
 		}
 		case OsmAndRoutingIndex::kRootBoxesFieldNumber:
 		case OsmAndRoutingIndex::kBasemapBoxesFieldNumber:{
+			if(readOnlyRules){
+				input->Seek(routingIndex->filePointer + routingIndex->length);
+				break;
+			}
 			bool basemap = WireFormatLite::GetTagFieldNumber(tag) == OsmAndRoutingIndex::kBasemapBoxesFieldNumber;
 			RouteSubregion subregion(routingIndex);
 			readInt(input, &subregion.length);
@@ -462,7 +466,7 @@ bool initMapStructure(CodedInputStream* input, BinaryMapFile* file) {
 			readInt(input, &routingIndex->length);
 			routingIndex->filePointer = input->getTotalBytesRead();
 			int oldLimit = input->PushLimit(routingIndex->length);
-			readRoutingIndex(input, routingIndex);
+			readRoutingIndex(input, routingIndex, false);
 			input->PopLimit(oldLimit);
 			input->Seek(routingIndex->filePointer + routingIndex->length);
 			file->routingIndexes.push_back(routingIndex);
@@ -954,7 +958,6 @@ void convertRouteDataObjecToMapObjects(SearchQuery* q, std::vector<RouteDataObje
 void checkAndInitRouteRegionRules(int fileInd, RoutingIndex* routingIndex){
 	// init decoding rules
 	if (routingIndex->decodingRules.size() == 0) {
-		routingIndex->subregions.clear();
 		lseek(fileInd, 0, SEEK_SET);
 		FileInputStream input(fileInd);
 		input.SetCloseOnDelete(false);
@@ -963,7 +966,7 @@ void checkAndInitRouteRegionRules(int fileInd, RoutingIndex* routingIndex){
 
 		cis.Seek(routingIndex->filePointer);
 		uint32_t old = cis.PushLimit(routingIndex->length);
-		readRoutingIndex(&cis, routingIndex);
+		readRoutingIndex(&cis, routingIndex, true);
 		cis.PopLimit(old);
 	}
 }
