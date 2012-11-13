@@ -3,20 +3,19 @@
 function attachRoadIndexItem($out, $indexName) {
 	$filename = 'road-indexes/'.$indexName;
 	if (file_exists($filename)) {
-		if ($zip->open($filename,ZIPARCHIVE::CHECKCONS)!==TRUE) {
-				// echo exit("cannot open <$filename>\n");
-				// print($filename . " cannot open as zip\n");
-				continue;
+		$zip = new ZipArchive();
+		if ($zip->open($filename,ZIPARCHIVE::CHECKCONS)==TRUE) {
+			$description = $zip->getCommentIndex(0);
+			$stat = $zip->statIndex( 0 );
+			$date= date('d.m.Y',$stat['mtime']);
+			$size=  number_format((filesize($filename) / (1024.0*1024.0)), 1, '.', '');
+			$out -> setAttribute("road_file", "yes");
+			$out -> setAttribute("road_date", $date);
+			$out -> setAttribute("road_description", $description);
+			$out -> setAttribute("road_size", $size);
+			$zip->close();
 		}
-		$description = $zip->getCommentIndex(0);
-		$stat = $zip->statIndex( 0 );
-		$date= date('d.m.Y',$stat['mtime']);
-		$size=  number_format((filesize($filename) / (1024.0*1024.0)), 1, '.', '');
-		$zip->close();
-		$out -> setAttribute("road_file", "yes");
-		$out -> setAttribute("road_date", $date);
-		$out -> setAttribute("road_description", $description);
-		$out -> setAttribute("road_size", $size);
+		
 	}
 }
 
@@ -34,7 +33,7 @@ function updateGoogleCodeIndexes($update=false) {
 	}
 	if($local_file) {
 	        echo '<h1>File update : </h1> <br>';
-        }
+    }
 
 	$dom = new DomDocument();
 
@@ -168,15 +167,14 @@ function updateGoogleCodeIndexes($update=false) {
 					$out = $output->createElement( "region" );
 					$outputIndexes->appendChild($out);
 				}
-				attachRoadIndexItem($out, $indexName);
+				
 				
 				$out -> setAttribute("date", $date);
 				$out -> setAttribute("local", "true");
 				$out -> setAttribute("size", $size);
 				$out -> setAttribute("name", $indexName);
-				
-		
 				$out -> setAttribute("description", $description);
+				attachRoadIndexItem($out, $indexName);
 				//$mapNodes[$indexName] = $out;
 			}
 			closedir($dh);
