@@ -108,7 +108,7 @@
 
 		OsmAnd este o aplicație în dezvoltare iar progresul său se bazează pe contribuții financiare pentru implementarea de noi funcționalități. Vă rugăm să aveți în vedere achiziționarea aplicației OsmAnd+, finanțarea unor anume funcționalități sau să faceți o donație la osmand.net.
 	</string>
-	<string name="osmand_plus_short_description_80_chars">OsmAnd is an open source navigation application for offline and online maps</string>
+	<string name="osmand_plus_short_description_80_chars">OsmAnd+ este o aplicație open source pentru navigare cu hărți offline și online</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
@@ -145,8 +145,8 @@
 	<string name="map_widget_day_night">Hartă zi/noapte</string>
 	<string name="map_widget_vector_attributes">Atribute randare:</string>
 	<string name="map_widget_renderer">Stil randare</string>
-	<string name="live_monitoring_mode_off">Start\n live tracking</string>
-	<string name="live_monitoring_mode_on">Stop\n live tracking</string>
+	<string name="live_monitoring_mode_off">Pornește\nlive tracking</string>
+	<string name="live_monitoring_mode_on">Oprește\nlive tracking</string>
 	<string name="position_on_map_descr">Alege locatia markerului de pozitie pe hartă</string>
 	<string name="position_on_map">Marker de poziție</string>
 	<string name="layer_map_appearance">Configurare ecran…</string>
@@ -408,7 +408,7 @@
 	<string name="local_openstreetmap_uploading">Se încarcă…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bug-uri au fost încărcate</string>
 	<string name="local_openstreetmap_uploadall">Încarcă tot</string>
-	<string name="local_openstreetmap_items"/>
+	<string name="local_openstreetmap_items">.</string>
 	<string name="local_openstreetmap_show">Arată pe hartă</string>
 	<string name="local_openstreetmap_upload">Încarcă modificarea la OSM</string>
 	<string name="local_openstreetmap_delete">Șterge modificarea</string>
@@ -615,7 +615,7 @@
 	<string name="local_index_address_data">Date despre Adrese</string>
 	<string name="local_index_transport_data">Date despre transport</string>
 	<string name="local_index_map_data">Date despre hartă</string>
-	<string name="local_index_items"/>
+	<string name="local_index_items">.</string>
 	<string name="local_indexes_cat_backup">Dezactivat</string>
 	<string name="local_indexes_cat_tts">Voci TTS</string>
 	<string name="local_indexes_cat_voice">Voci înregistrate</string>
@@ -658,7 +658,7 @@
 	<string name="overlay_transparency">Transparență strat</string>
 	<string name="map_transparency_descr">Modificare transparență a harții de bază</string>
 	<string name="map_transparency">Transparență hartă de bază</string>
-	<string name="layer_underlay">Strat inferior#8230;</string>
+	<string name="layer_underlay">Strat inferior…</string>
 	<string name="map_underlay">Harta de dedesubt</string>
 	<string name="map_underlay_descr">Alegerea hărții pentru stratul inferior</string>
 	<string name="layer_overlay">Strat superior…</string>
@@ -749,7 +749,7 @@
 	<string name="amenity_type_natural">Natural</string>
 	<string name="amenity_type_office">Office</string>
 	<string name="amenity_type_other">Altele</string>
-	<string name="amenity_type_shop">Shop</string>
+	<string name="amenity_type_shop">Magazine</string>
 	<string name="amenity_type_sport">Sport</string>
 	<string name="amenity_type_sustenance">Mijoace de existență</string>
 	<string name="amenity_type_tourism">Turism</string>
@@ -799,7 +799,7 @@
 	<string name="select_all">Selectează tot</string>
 	<string name="reload">Reîmprospătează</string>
 	<string name="fast_route_mode">cea mai rapidă rută</string>
-	<string name="fast_route_mode_descr">Activați pentru a calcula routa cea mai rapidă sau dezactivați pentru ruta cea mai scurtă</string>
+	<string name="fast_route_mode_descr">"Activați pentru a calcula routa cea mai rapidă sau dezactivați pentru ruta cea mai scurtă "</string>
 	<string name="tiles_to_download_estimated_size">La nivelul de zoom {0} se descarcă {1} porțiuni ({2} MB)</string>
 	<string name="context_menu_item_download_map">Descarcă harta</string>
 	<string name="select_max_zoom_preload_area">Selectați nivelul de zoom maxim pentru preîncărcare</string>
@@ -1160,4 +1160,7 @@
 	<string name="edit_filter_create_message">Filtrul {0} a fost creat</string>
 	<string name="default_buttons_selectall">Selectează Tot</string>
 	<string name="email">email</string>
-</resources>
+<string name="safe_mode_description">Safe mode (cod Android în loc de cod nativ).</string>
+    <string name="safe_mode">Safe mode</string>
+    <string name="native_library_not_running">Aplicația rulează în safe mode (se poate dezactiva de la Setări).</string>
+    </resources>
