@@ -31,9 +31,11 @@
    if($res && $res->length > 0) {
 		foreach($res as $node) {
 		  if (file_exists('indexes/'.$node->getAttribute('name'))) {
-		      echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
-         		   "</td><td>Roads ".$node->getAttribute('road_file')."</td><td>".$node->getAttribute('size')."</td><td>".
-				$node->getAttribute('description')."</td></tr>";
+		      echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date')
+         		   ."</td><td>".$node->getAttribute('size')."</td><td>"
+               .$node->getAttribute('description')."</td></tr>"
+               ."</td><td>Road ".$node->getAttribute('road_date')."</td><td>Road ".$node->getAttribute('road_size')
+               ;
 				
 	      }
         }
@@ -48,9 +50,11 @@
 
    	foreach($res as $node) {
    		if (!file_exists('indexes/'.$node->getAttribute('name')) || !$node->getAttribute('local')) {
-   			echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date').
-		   "</td><td>Roads ".$node->getAttribute('road_file')."</td><td>".$node->getAttribute('size')."</td><td>".
-   			$node->getAttribute('description')."</td></tr>";
+   			echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date')
+               ."</td><td>".$node->getAttribute('size')."</td><td>"
+               .$node->getAttribute('description')."</td></tr>"
+               ."</td><td>Road ".$node->getAttribute('road_date')."</td><td>Road ".$node->getAttribute('road_size')
+               ;
    		}
    	}
    }
