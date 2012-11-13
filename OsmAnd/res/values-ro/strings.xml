@@ -55,7 +55,7 @@
     <string name="map_widget_intermediate_distance">Punct intermediar</string>
     <string name="ending_point_too_far">Punctul terminus este prea departe de vreun drum.</string>
     <string name="btn_add_tag">Adaugă etichetă</string>
-    <string name="btn_advanced_mode">Mod avansat…</string>
+    <string name="btn_advanced_mode">Mod avansat...</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Servicii de Urgență</string>
     <string name="poi_filter_public_transport">Transport Public</string>
@@ -745,7 +745,7 @@
 	<string name="amenity_type_landuse">Exploatare</string>
 	<string name="amenity_type_leisure">Timp liber</string>
 	<string name="amenity_type_manmade">Construit de om</string>
-	<string name="amenity_type_military">Militar</string>
+	<string name="amenity_type_military">Obiective militare</string>
 	<string name="amenity_type_natural">Natural</string>
 	<string name="amenity_type_office">Office</string>
 	<string name="amenity_type_other">Altele</string>
