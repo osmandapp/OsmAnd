@@ -129,15 +129,18 @@ function updateGoogleCodeIndexes($update=false) {
 				$size=  number_format((filesize($filename) / (1024.0*1024.0)), 1, '.', '');
 				$zip->close();
                 if($local_file) {
-				echo 'Local : '.$indexName.' '.$date.' '.$size.'<br>';
-                     }
+					echo 'Local : '.$indexName.' '.$date.' '.$size.'<br>';
+                }
 				if (isset($mapNodes[$indexName])) {
 					$exdate = DateTime::createFromFormat('d.m.Y', $mapNodes[$indexName]->getAttribute("date"));
                     $localdate = DateTime::createFromFormat('d.m.Y', $date);
+                    $out = $mapNodes[$indexName];
+                    if (file_exists('road-indexes/'.$indexName)) {
+						$out -> setAttribute("road_file", "yes");
+					}
                     if($localdate->getTimestamp() <= $exdate->getTimestamp()) {
 						continue;
-					}
-					$out = $mapNodes[$indexName];
+					}					
 					if($out -> getAttribute("parts")) {
 						$outputIndexes->removeChild($out);
 						$out = $output->createElement( "region" );
@@ -147,14 +150,14 @@ function updateGoogleCodeIndexes($update=false) {
 					$out = $output->createElement( "region" );
 					$outputIndexes->appendChild($out);
 				}
-				
+				if (file_exists('road-indexes/'.$indexName)) {
+					$out -> setAttribute("road_file", "yes");
+				}
 				$out -> setAttribute("date", $date);
 				$out -> setAttribute("local", "true");
 				$out -> setAttribute("size", $size);
 				$out -> setAttribute("name", $indexName);
-				if (file_exists('road-indexes/'.$filename)) {
-					$out -> setAttribute("road_file", "yes");
-				}
+				
 		
 				$out -> setAttribute("description", $description);
 				//$mapNodes[$indexName] = $out;
