@@ -1,6 +1,6 @@
 <?php
 
-function attachRoadIndexItem($node, $indexName) {
+function attachRoadIndexItem($out, $indexName) {
 	$filename = 'road-indexes/'.$indexName;
 	if (file_exists($filename)) {
 		if ($zip->open($filename,ZIPARCHIVE::CHECKCONS)!==TRUE) {
@@ -15,6 +15,7 @@ function attachRoadIndexItem($node, $indexName) {
 		$zip->close();
 		$out -> setAttribute("road_file", "yes");
 		$out -> setAttribute("road_date", $date);
+		$out -> setAttribute("road_description", $description);
 		$out -> setAttribute("road_size", $size);
 	}
 }
