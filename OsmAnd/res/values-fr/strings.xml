@@ -1122,7 +1122,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Google Play ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
 	<string name="background_service_is_enabled_question">Le service tourne toujours en tâche de fond. Voulez-vous l\'arrêter ?</string>
-    <string name="tip_recent_changes_1_0_0_t">Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perds plus la position courante après les interruptions\n\t* Active le service d\'arrière plan pendant la navigation</string>
+    <string name="tip_recent_changes_1_0_0_t">Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière plan pendant la navigation</string>
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
