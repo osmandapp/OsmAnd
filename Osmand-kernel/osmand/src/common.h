@@ -198,6 +198,9 @@ public :
 	// not expect any shadow
 	int shadowLevelMin;
 	int shadowLevelMax;
+	int polygonMinSizeToDisplay;
+	int roadDensityZoomTile;
+	int roadsDensityLimitPerTile;
 
 public:
 	RenderingContext() : shadowLevelMax(0), shadowLevelMin(256), density(true), useEnglishNames(false), pointCount(0),
@@ -205,6 +208,9 @@ public:
 		setRotate(0);
 		setZoom(15);
 		setDefaultColor(0xfff1eee8);
+		roadsDensityLimitPerTile = 0;
+		roadDensityZoomTile = 0;
+		polygonMinSizeToDisplay = 0;
 	}
 	virtual ~RenderingContext();
 

@@ -410,6 +410,13 @@ public class RenderingRulesStorage {
 		return renderingAttributes.get(attribute);
 	}
 	
+	public String[] getRenderingAttributeNames() {
+		return renderingAttributes.keySet().toArray(new String[renderingAttributes.size()]);
+	}
+	public RenderingRule[] getRenderingAttributeValues() {
+		return renderingAttributes.values().toArray(new RenderingRule[renderingAttributes.size()]);
+	}
+	
 	public RenderingRule[] getRules(int state){
 		if(state >= tagValueGlobalRules.length ||  tagValueGlobalRules[state] == null) {
 			return new RenderingRule[0];

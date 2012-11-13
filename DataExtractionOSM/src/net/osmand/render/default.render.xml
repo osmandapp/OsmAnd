@@ -41,7 +41,7 @@
 		<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view, bridges would not stand out -->
 		<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/>
 		<filter minzoom="14" attrIntValue="3" shadowColor="#464646"/>
-		<filter minzoom="9" maxzoom="13" attrIntValue="3" shadowColor="#464646"/>
+		<filter minzoom="9" maxzoom="13" attrIntValue="3" shadowColor="#969696"/>
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
 
@@ -57,13 +57,25 @@
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
+	<renderingAttribute name="polygonMinSizeToDisplay">
+		<filter attrIntValue="100"/>
+	</renderingAttribute>
+	
+	<renderingAttribute name="roadDensityZoomTile">
+		<filter attrIntValue="3"/>
+	</renderingAttribute>
+	
+	<renderingAttribute name="roadsDensityLimitPerTile">
+		<filter attrIntValue="12"/>
+	</renderingAttribute>
+	
 	<!-- filter does not work for renderingConstant - the last one will be used, but better use separate depends Rendering style -->
 	<!-- roadColors="Modified Mapnik" -->
-		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
-		<renderingConstant name="trunkRoadColor" value="#FF8095"/>
-		<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
-		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
-		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
+	<renderingConstant name="motorwayRoadColor" value="#809bff"/>
+	<renderingConstant name="trunkRoadColor" value="#FF8095"/>
+	<renderingConstant name="primaryRoadColor" value="#FFAA80"/>
+	<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+	<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
 		<!-- transparent to see conjunctions -->
 		<!-- <renderingConstant name="motorwayRoadColor" value="#55809bff"/>
 		<renderingConstant name="trunkRoadColor" value="#55FF8095"/>

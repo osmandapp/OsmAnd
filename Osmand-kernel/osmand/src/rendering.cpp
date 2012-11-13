@@ -595,25 +595,18 @@ void drawObject(RenderingContext* rc,  SkCanvas* cv, RenderingRuleSearchRequest*
 	SkPaint* paint, vector<MapDataObjectPrimitive>& array, int objOrder) {
 
 	double polygonLimit = 100;
-	// int roadsLimit = 500;
-//	float orderToSwitch = 0;
+	float orderToSwitch = 0;
 	for (int i = 0; i < array.size(); i++) {
 		rc->allObjects++;
 		MapDataObject* mObj = array[i].obj;
 		tag_value pair = mObj->types.at(array[i].typeInd);
 		if (objOrder == 0) {
-			if (array[i].order < polygonLimit) {
+			if (array[i].order < rc->polygonMinSizeToDisplay) {
 				return;
 			}
 			// polygon
 			drawPolygon(mObj, req, cv, paint, rc, pair);
 		} else if (objOrder == 1 || objOrder == 2) {
-//			if(--roadsLimit == 0) {
-//				orderToSwitch = array[i].order;
-//			} else if(roadsLimit < 0 && orderToSwitch != array[i].order){
-//				// break here
-//				return;
-//			}
 			drawPolyline(mObj, req, cv, paint, rc, pair, mObj->getSimpleLayer(), objOrder == 1);
 		} else if (objOrder == 3) {
 			drawPoint(mObj, req, cv, paint, rc, pair, array[i].typeInd == 0);
@@ -677,9 +670,54 @@ double polygonArea(MapDataObject* obj, float mult) {
 	return std::abs(area) * mult * mult * .5;
 }
 
-
+void filterLinesByDensity(RenderingContext* rc, std::vector<MapDataObjectPrimitive>&  linesResArray,
+		std::vector<MapDataObjectPrimitive>& linesArray) {
+	int roadsLimit = rc->roadsDensityLimitPerTile;
+	int densityZ = rc->roadDensityZoomTile;
+	if(densityZ == 0 || roadsLimit == 0) {
+		linesResArray = linesArray;
+		return;
+	}
+	linesResArray.reserve(linesArray.size());
+	UNORDERED(map)<int64_t, pair<int, int> > densityMap;
+	for (int i = linesArray.size() - 1; i >= 0; i--) {
+		bool accept = true;
+		int o = linesArray[i].order;
+		MapDataObject* line = linesArray[i].obj;
+		tag_value& ts = line->types[linesArray[i].typeInd];
+		if (ts.first == "highway") {
+			accept = false;
+			int64_t prev = 0;
+			for (int k = 0; k < line->points.size(); k++) {
+				int dz = rc->getZoom() + densityZ;
+				int64_t x = (line->points[k].first) >> (31 - dz);
+				int64_t y = (line->points[k].second) >> (31 - dz);
+				int64_t tl = (x << dz) + y;
+				if (prev != tl) {
+					prev = tl;
+					pair<int, int>& p = densityMap[tl];
+					if (p.first < roadsLimit/* && p.second > o */) {
+						accept = true;
+						p.first++;
+						p.second = o;
+						densityMap[tl] = p;
+					}
+				}
+			}
+		}
+		if(accept) {
+			linesResArray.push_back(linesArray[i]);
+		}
+	}
+	reverse(linesResArray.begin(), linesResArray.end());
+}
 bool sortByOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimitive& j) {
-	if( i.order == j.order) return i.typeInd < j.typeInd;
+	if( i.order == j.order) {
+		if(i.typeInd == j.typeInd) {
+			return i.obj->points.size() < j.obj->points.size() ;
+		}
+		return i.typeInd < j.typeInd;
+	}
 	return (i.order<j.order); }
 bool sortPolygonsOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimitive& j) {
 	if( i.order == j.order) return i.typeInd < j.typeInd;
@@ -688,8 +726,9 @@ bool sortPolygonsOrder(const MapDataObjectPrimitive& i,const MapDataObjectPrimit
 void sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 	RenderingRuleSearchRequest* req, RenderingContext* rc,
 		std::vector<MapDataObjectPrimitive>&  polygonsArray, std::vector<MapDataObjectPrimitive>&  pointsArray,
-		std::vector<MapDataObjectPrimitive>&  linesArray) {
+		std::vector<MapDataObjectPrimitive>&  linesResArray) {
 	if (req != NULL) {
+		std::vector<MapDataObjectPrimitive>  linesArray;
 		req->clearState();
 		const int size = mapDataObjects.size();
 		float mult = 1. / getPowZoom(max(31 - (rc->getZoom() + 8), 0));
@@ -740,6 +779,7 @@ void sortObjectsByProperOrder(std::vector <MapDataObject* > mapDataObjects,
 		sort(polygonsArray.begin(), polygonsArray.end(), sortPolygonsOrder);
 		sort(pointsArray.begin(), pointsArray.end(), sortByOrder);
 		sort(linesArray.begin(), linesArray.end(), sortByOrder);
+		filterLinesByDensity(rc, linesResArray, linesArray);
 	}
 }
 

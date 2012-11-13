@@ -30,6 +30,8 @@ jclass RenderingRulesStorageClass;
 jfieldID RenderingRulesStorageClass_dictionary;
 jfieldID RenderingRulesStorage_PROPS;
 jmethodID RenderingRulesStorage_getRules;
+jmethodID RenderingRulesStorage_getRenderingAttributeNames;
+jmethodID RenderingRulesStorage_getRenderingAttributeValues;
 
 jclass RenderingRuleSearchRequestClass;
 jfieldID RenderingRuleSearchRequest_storage;
@@ -111,18 +113,31 @@ void initDictionary(JNIEnv* env, RenderingRulesStorage* storage, jobject javaSto
 	uint32_t i = 0;
 	for (; i < sz; i++) {
 		jstring st = (jstring) env->CallObjectMethod(listDictionary, List_get, i);
-//			if(st != NULL)
-//			{
 		const char* utf = env->GetStringUTFChars(st, NULL);
 		std::string d = std::string(utf);
 
 		env->ReleaseStringUTFChars(st, utf);
 		env->DeleteLocalRef(st);
-		// assert = i
 		storage->registerString(d);
-//			}
 	}
 	env->DeleteLocalRef(listDictionary);
+}
+
+void initAttributes(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage) {
+	jobjectArray attributeNames = (jobjectArray) env->CallObjectMethod(javaStorage, RenderingRulesStorage_getRenderingAttributeNames);
+	jobjectArray attributeValues = (jobjectArray) env->CallObjectMethod(javaStorage, RenderingRulesStorage_getRenderingAttributeValues);
+	uint32_t sz  = env->GetArrayLength(attributeNames);
+	for (uint32_t i = 0; i < sz; i++) {
+		jstring nm = (jstring) env->GetObjectArrayElement(attributeNames, i);
+		jobject vl = env->GetObjectArrayElement(attributeValues, i);
+		RenderingRule* rule = createRenderingRule(env, vl, st);
+		st->renderingAttributes[getString(env, nm)] = rule;
+		env->DeleteLocalRef(nm);
+		env->DeleteLocalRef(vl);
+	}
+	env->DeleteLocalRef(attributeNames);
+	env->DeleteLocalRef(attributeValues);
+
 }
 
 void initProperties(JNIEnv* env, RenderingRulesStorage* st, jobject javaStorage) {
@@ -165,6 +180,7 @@ RenderingRulesStorage* createRenderingRulesStorage(JNIEnv* env, jobject storage)
 	initDictionary(env, res, storage);
 	initProperties(env, res, storage);
 	initRules(env, res, storage);
+	initAttributes(env, res, storage);
 	return res;
 }
 
@@ -261,6 +277,10 @@ void loadJniRenderingRules(JNIEnv* env) {
 			"Lnet/osmand/render/RenderingRuleStorageProperties;");
 	RenderingRulesStorage_getRules = env->GetMethodID(RenderingRulesStorageClass, "getRules",
 			"(I)[Lnet/osmand/render/RenderingRule;");
+	RenderingRulesStorage_getRenderingAttributeNames = env->GetMethodID(RenderingRulesStorageClass, "getRenderingAttributeNames",
+			"()[Ljava/lang/String;");
+	RenderingRulesStorage_getRenderingAttributeValues = env->GetMethodID(RenderingRulesStorageClass, "getRenderingAttributeValues",
+				"()[Lnet/osmand/render/RenderingRule;");
 
 	ListClass = findClass(env, "java/util/List");
 	List_size = env->GetMethodID(ListClass, "size", "()I");

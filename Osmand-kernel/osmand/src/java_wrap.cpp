@@ -131,6 +131,34 @@ extern "C" JNIEXPORT jlong JNICALL Java_net_osmand_NativeLibrary_searchNativeObj
 
 //////////////////////////////////////////
 ///////////// JNI RENDERING //////////////
+void fillRenderingAttributes(JNIRenderingContext& rc, RenderingRuleSearchRequest* req) {
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("defaultColor")) {
+		rc.setDefaultColor(req->getIntPropertyValue(req->props()->R_ATTR_COLOR_VALUE));
+	}
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("shadowRendering")) {
+		rc.setShadowRenderingMode(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
+		rc.setShadowRenderingColor(req->getIntPropertyValue(req->props()->R_SHADOW_COLOR));
+	}
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("polygonMinSizeToDisplay")) {
+		rc.polygonMinSizeToDisplay = req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE);
+	}
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("roadDensityZoomTile")) {
+		rc.roadDensityZoomTile = req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE);
+	}
+	req->clearState();
+	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
+	if (req->searchRenderingAttribute("roadsDensityLimitPerTile")) {
+		rc.roadsDensityLimitPerTile = req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE);
+	}
+}
 
 #ifdef ANDROID_BUILD
 #include <android/bitmap.h>
@@ -204,21 +232,10 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 	JNIRenderingContext rc;
 	pullFromJavaRenderingContext(ienv, renderingContext, &rc);
 	ResultPublisher* result = ((ResultPublisher*) searchResult);
-	//    std::vector <BaseMapDataObject* > mapDataObjects = marshalObjects(binaryMapDataObjects);
-	req->clearState();
-	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
-	if (req->searchRenderingAttribute("defaultColor")) {
-		rc.setDefaultColor(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
-	}
-	req->clearState();
-	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
-	if (req->searchRenderingAttribute("shadowRendering")) {
-		rc.setShadowRenderingMode(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
-		rc.setShadowRenderingColor(req->getIntPropertyValue(req->props()->R_SHADOW_COLOR));
-	}
-
+	fillRenderingAttributes(rc, req);
 	osmand_log_print(LOG_INFO, "Rendering image");
 	initObjects.pause();
+
 
 	// Main part do rendering
 	rc.nativeOperations.start();
@@ -259,6 +276,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_plus_render_NativeOsmandLib
 }
 #endif
 
+
 void* bitmapData = NULL;
 size_t bitmapDataSize = 0;
 extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRenderingIndirect( JNIEnv* ienv,
@@ -298,17 +316,7 @@ extern "C" JNIEXPORT jobject JNICALL Java_net_osmand_NativeLibrary_generateRende
 
 	initObjects.pause();
 	// Main part do rendering
-	req->clearState();
-	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
-	if (req->searchRenderingAttribute("defaultColor")) {
-		rc.setDefaultColor(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
-	}
-	req->clearState();
-	req->setIntFilter(req->props()->R_MINZOOM, rc.getZoom());
-	if (req->searchRenderingAttribute("shadowRendering")) {
-		rc.setShadowRenderingMode(req->getIntPropertyValue(req->props()->R_ATTR_INT_VALUE));
-		rc.setShadowRenderingColor(req->getIntPropertyValue(req->props()->R_SHADOW_COLOR));
-	}
+	fillRenderingAttributes(rc, req);
 
 
 	SkCanvas* canvas = new SkCanvas(*bitmap);
@@ -517,9 +525,6 @@ void pullFromJavaRenderingContext(JNIEnv* env, jobject jrc, JNIRenderingContext*
 	rc->setTileDivisor(env->GetFloatField( jrc, jfield_RenderingContext_tileDivisor ));
 	rc->setRotate(env->GetFloatField( jrc, jfield_RenderingContext_rotate ));
 	rc->setDensityScale(env->GetFloatField( jrc, jfield_RenderingContext_density ));
-	rc->setShadowRenderingMode(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingMode ));
-	rc->setShadowRenderingColor(env->GetIntField( jrc, jfield_RenderingContext_shadowRenderingColor ));
-	rc->setDefaultColor(env->GetIntField( jrc, jfield_RenderingContext_defaultColor ));
 	rc->setUseEnglishNames(env->GetBooleanField( jrc, jfield_RenderingContext_useEnglishNames ));
 	rc->javaRenderingContext = jrc;
 }
