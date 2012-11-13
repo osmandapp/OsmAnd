@@ -3,6 +3,6 @@
 <string name="default_buttons_yes">Da</string>
     <string name="default_buttons_no">Ne</string>
     <string name="osmand_app_not_found">Osmand ni nameščen</string>
-    <string name="app_name">OsmAnd Parking</string>
+    <string name="app_name">OsmAnd parkirni vtičnik</string>
     <string name="parking_plugin_installed">OsmAnd Parking Vtičnik je nameščen in omogočen v nastavitvah OsmAnd.</string>
 </resources>
