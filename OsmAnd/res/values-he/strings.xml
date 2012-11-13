@@ -549,4 +549,57 @@
 	<string name="trace_rendering">נתוני ניפוי שגיאות של עיבוד</string>
 	<string name="trace_rendering_descr">הצגת ביצועי עיבוד תמונה</string>
 	<string name="tip_recent_changes">שינויים אחרונים</string>
+	<string name="voice_not_use">לא להשתמש</string>
+	<string name="voice_not_specified">לא צוין</string>
+	<string name="installing_new_resources">הנתונים החדשים נפרסים…</string>
+	<string name="internet_connection_required_for_online_route">נבחר שירות ניווט מקוון אך אין חיבור זמין לאינטרנט.</string>
+	<string name="tts_language_not_supported_title">השפה אינה נתמכת</string>
+	<string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון הממיר טקסט לדיבור. האם ברצונך לגשת לחנות כדי לחפש אחר מנגנון המרה אחר? בכל מצב אחר ייעשה שימוש בשפות הקיימות.</string>
+	<string name="tts_missing_language_data_title">חסרים נתונים</string>
+	<string name="tts_missing_language_data">לא מותקנים נתונים עבור השפה הנבחרת. האם ברצונך לגשת לחנות כדי להתקין?</string>
+	<string name="gpx_option_reverse_route">היפוך כיוון ה־GPX</string>
+	<string name="gpx_option_destination_point">שימוש ביעד הנוכחי</string>
+	<string name="gpx_option_from_start_point">לעבור לאורך דרך שלמה</string>
+	<string name="switch_to_vector_map_to_see">קיימת מפה וקטורית עבור מיקום זה.
+\n\t\n\tכדי להשתמש בה יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה…\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
+	<string name="choose_audio_stream">פלט ההנחיה הקולית</string>
+	<string name="choose_audio_stream_descr">נא לבחור בערוץ להשמעת ההנחיה הקולית (תלוי מערכת)</string>
+	<string name="voice_stream_voice_call">שמע לשיחה קולית</string>
+	<string name="voice_stream_notification">שמע להתרעה</string>
+	<string name="voice_stream_music">שמע למוזיקה/מדיה</string>
+	<string name="warning_tile_layer_not_downloadable">היישום לא יכול להוריד את שכבת המפה %1$s, נא לנסות להתקין אותה מחדש.</string>
+	<string name="overlay_transparency_descr">שינוי שקיפות שכבת העל</string>
+	<string name="overlay_transparency">שקיפות שכבת העל</string>
+	<string name="map_transparency_descr">שינוי שקיפות מפת הבסיס</string>
+	<string name="map_transparency">שקיפות מפת הבסיס</string>
+	<string name="layer_underlay">מפה תחתונה…</string>
+	<string name="map_underlay">מפה תחתונה</string>
+	<string name="map_underlay_descr">נא לבחור במפה תחתונה</string>
+	<string name="layer_overlay">מפה עליונה…</string>
+	<string name="default_none">ללא</string>
+	<string name="map_overlay">מפה עליונה</string>
+	<string name="map_overlay_descr">נא לבחור במפה עליונה</string>
+	<string name="tile_source_already_installed">המפה כבר מותקנת, ההגדרות יעודכנו</string>
+	<string name="select_tile_source_to_install">יש לבחור ב(אריחי) מפה להתקנה או עדכון</string>
+	<string name="internet_not_available">החיבור הנדרש לאינטרנט לצורך ביצוע הפעולה אינו זמין</string>
+	<string name="install_more">התקנת עוד…</string>
+	<string name="level_to_switch_vector_raster_descr">רמת התקריב המזערית לשימוש במפות וקטוריות</string>
+	<string name="level_to_switch_vector_raster">תקריב מזערי לווקטורים</string>
+	<string name="tip_location_sharing">שיתוף מיקום</string>
+	<string name="tip_location_sharing_t">"\tניתן לשתף את מיקומם של מקומות מעניינים במהלך הטיול שלך עם משפחה או חברים.
+\n\tכדי לשתף כל מיקום שהוא:
+\n\tיש להשתמש ב\'תפריט ההקשר של המפה\' -&gt; תפריט \'שיתוף המיקום\'.
+\n\tואז לבחור את אופן שיתוף המיקום שלך. האפשרויות הן: דוא״ל, SMS(טקסט) או פשוט העתקת קואורדינטות המיקום ללוח הגזירים. "</string>
+	<string name="tip_favorites">נקודות מועדפות</string>
+	<string name="tip_favorites_t">"\tניתן לשמור במועדפים נקודות שבהן נעשה שימוש לאחרונה.
+\n\tכדי לשמור נקודה כמועדפת יש לגשת לתפריט ההקשר של המפה, לבחור באפשרות \'הוספה למועדפים\' ואז לתת לה שם. לאחר שמירה כמועדפת, ניתן לגשת אליה דרך \'מסך ראשי\' -&gt; \'מועדפים\'.
+\n\tלחיצה ארוכה על מועדפת בתפריט \'מועדפים\' מספקת אפשרויות להגדיר אותה כיעד, לערוך או למחוק אותה.
+\n\tכדי להציג את כל הנקודות המועדפות ישירות על המפה, יש ללחוץ על מסך המפה ולהפעיל את השכבה \'מועדפים\' תחת \'תפריט\' -&gt; \'הגדרת תצוגה\'. "</string>
+	<string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות</string><string name="error_doing_search">אירעה שגיאה בחיפוש הבלתי מקוון</string>
+	<string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי \'%s\'</string>
+	<string name="search_osm_offline">חיפוש כתובת באמצעות המפה הבלתי מקוונת</string>
+	<string name="system_locale">מערכת</string>
+	<string name="preferred_locale_descr">נא לבחור את שפת התצוגה</string>
+	<string name="preferred_locale">שפת התצוגה</string>
+	<string name="tip_map_switch">מקור המפה</string>
 	</resources>
