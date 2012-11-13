@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-<string name="search_button">Iskanje</string>
+<string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
 	<string name="settings_Button">Nastavitve</string>
 	<string name="favorites_Button">Priljubljene</string>
-	<string name="map_Button">Karta</string>
+	<string name="map_Button">Zemljevid</string>
 	<string name="choose_available_region">Izberi regijo iz seznama</string>
-	<string name="incremental_search_city">Sprotno iskanje. Če želite najti mesta/poštnie številke, vnesite prve 3 ali več znakov.</string>
+	<string name="incremental_search_city">Sprotno iskanje. Vnesite vsaj prve 3 znake imena mesta ali poštne številke.</string>
 	<string name="searchpoi_activity">Izberi POI</string>
 	<string name="search_POI_level_btn">Več zadetkov</string>
 	<string name="incremental_search_street">Sprotno iskanje ulice</string>
@@ -75,12 +75,12 @@
 	<string name="filter_current_poiButton">Filter</string>
 	<string name="edit_filter_delete_menu_item">Briši</string>
 	<string name="edit_filter_save_as_menu_item">Shrani kot</string>
-	<string name="edit_filter_delete_dialog_title">Ali želiš izbrisati izbran filter?</string>
+	<string name="edit_filter_delete_dialog_title">Ali želite izbrisati izbrani filter?</string>
 	<string name="edit_filter_delete_message">Filter {0} je bil izbrisan</string>
-	<string name="edit_filter_create_message">Filter {0} je bil narejen</string>
+	<string name="edit_filter_create_message">Filter {0} je bil ustvarjen</string>
 	<string name="default_buttons_selectall">Izberi vse</string>
 	<string name="email">E-pošta</string>
-<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4 : "</string>
+<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:\n\t* Odpravljene nekatere napake\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju "</string>
     <string name="tip_recent_changes_0_8_3_t">"Spremembe v 0.8.3 :
 \n\t* Vmesne točke
 \n\t* Izboljšano vodenje po poti
@@ -116,7 +116,7 @@
 	<string name="avoid_motorway">Izogibanje avtocest</string>
 	<string name="exit_Button">Izhod</string>
 	<string name="settings_activity">Nastavitve</string>
-	<string name="map_preferences">Karta</string>
+	<string name="map_preferences">Zemljevid</string>
 	<string name="show_gps_coordinates_text">Prikaži GPS koordinate na karti</string>
 	<string name="show_location">Prikaži pozicijo</string>
 	<string name="use_internet_to_download_tile">Uporabi internet za prenos manjkajočih delov karte</string>
@@ -138,7 +138,7 @@
 	<string name="app_settings">Nastavitve programa</string>
 	<string name="search_address">Iskanje naslova</string>
 	<string name="poi_search_desc">Iskanje POI (Zanimivosti)</string>
-	<string name="address_search_desc">Iskanje naslovov</string>
+	<string name="address_search_desc">Iskanje naslova</string>
 	<string name="navpoint_search_desc">Koordinate</string>
 	<string name="transport_search_desc">Iskanje javnih prevozov</string>
 	<string name="favourites_search_desc">Iskanje priljubljenih</string>
@@ -235,7 +235,7 @@
 	<string name="settings_direction_style_descr">Izberi stil za izražanje smeri med premikanjem</string>
 	<string name="i_am_here">Tukaj sem</string>
 	<string name="monitoring_mode_off">Snemaj sled</string>
-	<string name="monitoring_mode_on">Prekini\nsnemanje sledi</string>
+	<string name="monitoring_mode_on">Zaustavi\n snemanje sledi</string>
 	<string name="save_route_as_gpx">Shrani pot kot datoteko GPX</string>
 	<string name="gpx_index_settings_descr">(Vključuje GPX sčeedi)</string>
 	<string name="osmand_monitoring_description">Pokaži nastavitve, ki določajo snemanje sledi v GPX datoteke oz. sledenje v živo s pomočjo spletne storitve.</string>
@@ -342,7 +342,7 @@
 	<string name="monitor_preferences">Sledenje</string>
 	<string name="day_night_info_description">Vzhod: %1$s\nZahod: %2$s</string>
 	<string name="live_monitoring_mode_off">Začni\nsledenje</string>
-	<string name="live_monitoring_mode_on">Končaj\nsledenje</string>
+	<string name="live_monitoring_mode_on">Zaustavi\n sledenje v živo</string>
 	<string name="position_on_map_descr">Izberite mesto položaja na zemljevidu</string>
 	<string name="position_on_map">Oznaka položaja</string>
 	<string name="layer_map_appearance">Nastavitve zaslona…</string>
@@ -363,8 +363,8 @@
 	<string name="map_widget_view_direction">Smer gledanja</string>
 	<string name="map_widget_transparent">Prosojna koža</string>
 	<string name="use_transparent_map_theme">Prosojna tema</string>
-	<string name="bg_service_sleep_mode_off">Omogoči\nspanlni način</string>
-	<string name="bg_service_sleep_mode_on">Prekini\nspanlni način</string>
+	<string name="bg_service_sleep_mode_off">Omogoči\n spalni način</string>
+	<string name="bg_service_sleep_mode_on">Prekini\n spalni način</string>
 	<string name="gps_wakeup_interval">Interval prebujanja GPSa: %s</string>
 	<string name="int_continuosly">Neprekinjeno</string>
 	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
@@ -395,12 +395,12 @@
 	<string name="native_app_allocated_memory">Skupni izvirni pomnilnik</string>
 	<string name="update_downlod_list">Osveži seznam</string>
 	<string name="shared_location">Lokacija v skupni rabi</string>
-	<string name="osmand_parking_event">Vzemite avto iz parkirišča</string>
+	<string name="osmand_parking_event">Odpeljite avto s parkirišča</string>
 	<string name="osmand_parking_warning_text">Obvestilo, da vzemite avto je bilo že prej dodano v koledar. Ostalo bo tam dokler ga boste ročno izbrisali.</string>    
 	<string name="osmand_parking_time_limit_title">Nastavi časovno omejitev parkiranja</string>
 	<string name="osmand_parking_delete_confirm">Ali želite odstraniti mesto kjer je parkiran avtomobil?</string>
 	<string name="osmand_parking_delete">Brisanje označevalnika parkiranja</string>
-	<string name="osmand_parking_choose_type">Izbira vrste parkiranje</string>
+	<string name="osmand_parking_choose_type">Izbira vrste parkiranja</string>
 	<string name="osmand_parking_lim_text">Časovno omejeno</string>
 	<string name="osmand_parking_no_lim_text">Časovno neomejeno</string>
 	<string name="osmand_parking_add_event">Dodaj obvestilo v Koledar</string>
@@ -420,4 +420,35 @@
 	<string name="tip_location_sharing">Deljenje lokacija</string>
 	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: E-pošta, SMS(besedilo), ali pa samo kopiranje koordinate lokacij za odlagališče. "</string>
 	<string name="tip_favorites">Priljubljene točke</string>
+	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0:\n\t* Izboljšano, hitrejše in bolj natančno usmerjanje (do 250 km)\n\t* Zemljevid cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju "</string>
+    <string name="close_changeset">Zapri paket sprememb</string>
+	<string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner ni nameščena. Naj jo poiščem v Market-u?</string>
+	<string name="rendering_attr_roadColors_description">Izberite barvno shemo cest:</string>
+	<string name="rendering_attr_roadColors_name">Barvna shema cest</string>
+    <string name="map_settings">Nastavitve zemljevida</string>
+	<string name="map_settings_descr">Nastavi prikaz zemljevida</string>
+	<string name="extra_settings">Napredne nastavitve</string>
+	<string name="plugins_screen">Upravljalnik vtičnikov</string>
+	<string name="prefs_plugins">Upravljalnik vtičnikov</string>
+	<string name="gpx_visibility_txt">Vidnost</string>
+	<string name="animate_route_off">Prekini animacijo</string>
+	<string name="animate_route">Začni animacijo</string>
+	<string name="poi_filter_by_name">Iskanje po imenu</string>
+	<string name="select_search_position">Iskanje blizu:</string>
+	<string name="context_menu_item_search">Išči v bližini</string>
+	<string name="local_index_gpx_info_show">\n\nDolg pritisk za možnosti</string>
+	<string name="search_offline_clear_search">Novo iskanje</string>
+	<string name="poi_filter_custom_filter">Filter po meri</string>
+	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Naj jo poiščem v Market-u?</string>
+	<string name="show_point_options">Možnosti lokacije</string>
+	<string name="menu_layers">Nastavitve prikaza</string>
+	<string name="where_am_i">Kje sem?</string>
+	<string name="hide_poi_filter">Skrij filter</string>
+	<string name="show_poi_filter">Prikaži filter</string>
+	<string name="search_nearby">Išči v bližini</string>
+	<string name="transport_finish_search">Končaj iskanje</string>
+	<string name="show_gps_status">Prikaži stanje sprejemnika GPS</string>
+	<string name="opening_changeset">Odpiranje paketa sprememb…</string>
+	<string name="closing_changeset">Zapiranje paketa sprememb…</string>
+	<string name="show_poi_over_map_description">Prikaži POI na zemljevidu (nazadnje izbran filter)</string>
 	</resources>
