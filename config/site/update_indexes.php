@@ -151,7 +151,6 @@ function updateGoogleCodeIndexes($update=false) {
 				$out -> setAttribute("date", $date);
 				$out -> setAttribute("local", "true");
 				$out -> setAttribute("size", $size);
-				$out -> setAttribute("roads", $size);
 				$out -> setAttribute("name", $indexName);
 				if (file_exists('road-indexes/'.$filename)) {
 					$out -> setAttribute("road_file", "yes");
