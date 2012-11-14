@@ -816,4 +816,15 @@
 	<string name="int_min">דקות</string>
 	<string name="background_service_int_descr">"הגדרת הפסקות שינה המשמעות ברקע "</string>
 	<string name="background_service_int">הפרשי התעוררות</string>
+	<string name="update_poi_error_local">אירעה שגיאה בעת עדכון רשימת הנ״ע המקומית</string>
+	<string name="update_poi_error_loading">אירעה שגיאה בעת טעינת הנתונים מהשרת</string>
+	<string name="update_poi_no_offline_poi_index">לא נמצאו נתוני נ״ע בלתי מקוונים עבור אזור זה</string>
+	<string name="update_poi_is_not_available_for_zoom">עדכון נ״ע אינו זמין עבור רמות תקריב קטנות</string>
+	<string name="context_menu_item_update_poi">עדכון נ״ע</string>
+	<string name="context_menu_item_update_map_confirm">האם לעדכן את הנתונים המקומיים שלך מהאינטרנט?</string>
+	<string name="search_history_city">עיר:\n {0}</string>
+	<string name="background_service_provider_descr">נא לבחור את ספק המיקום בעת הפעלה במצב רקע</string>
+	<string name="background_service_provider">ספק מיקום</string>
+	<string name="background_router_service_descr">הפעלת OsmAnd ברקע כדי לעקוב אחר המיקום שלך כשהמסך כבוי</string>
+	<string name="background_router_service">הפעלה ברקע</string>
 	</resources>
