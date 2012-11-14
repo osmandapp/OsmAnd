@@ -415,8 +415,8 @@
 	<string name="context_menu_item_delete_parking_point">Brisanje oznake parkiranja</string>
 	<string name="local_index_routing_data">Podatki usmerjanja</string>
 	<string name="search_position_favorites">Priljubljene…</string>
-	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih kart</string>
-	<string name="level_to_switch_vector_raster">Min. povečava za vektorske karte</string>
+	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih zemljevidov</string>
+	<string name="level_to_switch_vector_raster">Min. povečava za vektorske zemljevide</string>
 	<string name="tip_location_sharing">Deljenje lokacija</string>
 	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: E-pošta, SMS(besedilo), ali pa samo kopiranje koordinate lokacij za odlagališče. "</string>
 	<string name="tip_favorites">Priljubljene točke</string>
@@ -457,4 +457,6 @@
 	<string name="osmand_extra_settings_description">Prikaz nastavitev za napredne nastavitve izrisa (količina podrobnosti na zemljevidu) in nekatere posebnosti naprav.</string>
 	<string name="osmand_accessibility_description">Prikaz nastavitve za posebne funkcije dostopnosti.</string>
 	<string name="osmand_background_plugin_description">Pokaži nastavitve za sledenje in navigacijo v spalnem načinu (ugasnjen ekran in občasna uporaba GPSa).</string>
+	<string name="close">Zapri</string>
+	<string name="opening_hours">Delovni čas</string>
 	</resources>
