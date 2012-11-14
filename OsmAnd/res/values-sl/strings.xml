@@ -451,4 +451,10 @@
 	<string name="opening_changeset">Odpiranje paketa sprememb…</string>
 	<string name="closing_changeset">Zapiranje paketa sprememb…</string>
 	<string name="show_poi_over_map_description">Prikaži POI na zemljevidu (nazadnje izbran filter)</string>
+	<string name="select_plugin_to_activate">Dotaknite se vtičnika za vklop oz. izklop. (Mogoče bo potreben ponovni zagon OsmAnd.)</string>
+	<string name="prefs_plugins_descr">Vtičniki omogočajo napredne nastavitve in omogočijo dodatne funkcionalnosti, kot so online zemljevidi, logiranje in sledenje, način mirovanja, urejanje in druge.</string>
+	<string name="osmand_development_plugin_description">Prikaži nastavitve za razvoj in razhroščevanje, kot so animirana navigacija ali prikaz hitrosti izrisa.</string>
+	<string name="osmand_extra_settings_description">Prikaz nastavitev za napredne nastavitve izrisa (količina podrobnosti na zemljevidu) in nekatere posebnosti naprav.</string>
+	<string name="osmand_accessibility_description">Prikaz nastavitve za posebne funkcije dostopnosti.</string>
+	<string name="osmand_background_plugin_description">Pokaži nastavitve za sledenje in navigacijo v spalnem načinu (ugasnjen ekran in občasna uporaba GPSa).</string>
 	</resources>
