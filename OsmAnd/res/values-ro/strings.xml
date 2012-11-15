@@ -41,7 +41,7 @@
 	<string name="delete_target_point">Îndepărtează punctul intermediar</string>
 	<string name="target_point">Punctul intermediar %1$s</string>
     <string name="intermediate_point">Punct intermedar %1$s</string>
-    <string name="navigate_to">Setează ca destinație</string>
+    <string name="navigate_to">Alege ca destinație</string>
     <string name="context_menu_item_last_intermediate_point">Adaugă ca ultim punct intermediar</string>
     <string name="context_menu_item_first_intermediate_point">Adaugă ca prim punct intermediar</string>
     <string name="add_as_last_destination_point">Adaugă ca ultimă destinație</string>
@@ -199,15 +199,14 @@
 	<string name="osmand_parking_hours">Ore</string>
 	<string name="osmand_parking_minutes">Minute</string>
 	<string name="osmand_parking_position_description_add_time">Mașina a fost parcată la:</string>
-	<string name="tip_recent_changes_0_8_1_t">Modificări în versiunea 0.8.1 :
-		\n\t* Rute mai exacte (durează puțin mai mult)
-		\n\t* Recalculare inteligentă și rapidă
-		\n\t* Direcții pe benzile de circulație
-		\n\t* Informații despre limite de viteză, camere radar și limitatoare de viteză 
-		\n\t* Ghidare vocală îmbunătățită pe autostrăzi
-		\n\t* Plugin pentru parking plugin (\'Unde este parcată mașina mea?\')
-		\n\t* Activare/Dezactivare iconiță logging
-	</string>
+	<string name="tip_recent_changes_0_8_1_t">"Modificări în versiunea 0.8.1 :
+\n\t* Rute mai exacte (durează puțin mai mult)
+\n\t* Recalculare inteligentă și rapidă
+\n\t* Direcții pe benzile de circulație
+\n\t* Informații despre limite de viteză, camere radar și limitatoare de viteză
+\n\t* Ghidare vocală îmbunătățită pe autostrăzi
+\n\t* Plugin pentru parking (\'Unde este parcată mașina mea?\')
+\n\t* Activare/Dezactivare iconiță logging "</string>
 	<string name="select_animate_speedup">Selecție accelerare simulare rută</string>
     	<string name="global_app_allocated_memory_descr">Memorie alocată %1$s MB (limita Android %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Memorie alocată</string>
@@ -217,7 +216,7 @@
 	<string name="update_downlod_list">Reîncarcă lista</string>
 	<string name="starting_point_too_far">Punctul de pornire este prea departe de vreun drum.</string>
 	<string name="shared_location">Poziție comună</string>
-	<string name="osmand_parking_event">Luați mașina din parking</string>
+	<string name="osmand_parking_event">Luați mașina din parcare</string>
 	<string name="osmand_parking_warning">Atenție</string>
 	<string name="osmand_parking_warning_text">Notificarea de a lua mașina a fost deja adaugată în calendar. Va rămâne acolo pâne ce va fi ștearsă manual.</string>    
 	<string name="osmand_parking_time_limit_title">Setați timpul limită a parcării</string>
@@ -227,8 +226,8 @@
 	<string name="osmand_parking_lim_text">Cu timp limitat</string>
 	<string name="osmand_parking_no_lim_text">Cu timp nelimitat</string>
 	<string name="osmand_parking_add_event">Adaugă o notificare in Calendar</string>
-	<string name="osmand_parking_time_limit">Parking cu timp limitat</string>
-	<string name="osmand_parking_time_no_limit">Parking cu timp nelimitat</string>
+	<string name="osmand_parking_time_limit">Parcare cu timp limitat</string>
+	<string name="osmand_parking_time_no_limit">Parcare cu timp nelimitat</string>
 	<string name="osmand_parking_position_description">Poziția mașinii dvs. parcate. %1$s</string>
 	<string name="osmand_parking_position_description_add">De ridicat mașina la:</string>
 	<string name="osmand_parking_pm">PM</string>
@@ -428,9 +427,9 @@
 		\n\t- Hărți actualizate
 		\n\t- Alte fucționalități de importanță mai mică
 	</string>    
-	<string name="free_version_message">Această versiune gratuită de OsmAnd este limitată la %1$s descărcări %2$s și nu suportă articolele Wikipedia în mode offline.</string>
+	<string name="free_version_message">Această versiune gratuită de OsmAnd este limitată la %1$s descărcări %2$s și nu suportă articolele Wikipedia în mod offline.</string>
 	<string name="free_version_title">Versiune gratuită</string>
-	<string name="poi_context_menu_showdescription">Arată descrirea POI</string>
+	<string name="poi_context_menu_showdescription">Descriere POI</string>
 	<string name="index_name_north_america">America de Nord</string>
 	<string name="index_name_us">America de Nord - Statele Unite</string>
 	<string name="index_name_central_america">America Centrală</string>
@@ -447,7 +446,7 @@
 	<string name="index_name_voice">Voci înregistrate</string>
 	<string name="index_name_tts_voice">Voci TTS</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
-	<string name="amenity_type_user_defined">Hărți utilizator</string>
+	<string name="amenity_type_user_defined">Obiective utilizator</string>
 	<string name="fav_export_confirmation">Există un fișier cu puncte favorite exportate anterior. Doriți să-l înlocuiți?</string>
 	<string name="profile_settings">Setări ale profilelor</string>
 	<string name="settings_preset">Profil utilizator</string>
@@ -455,7 +454,7 @@
 	<string name="routing_settings">Navigare</string>
 	<string name="routing_settings_descr">Opțiuni de navigare</string>
 	<string name="global_settings">Setări globale</string>
-	<string name="index_settings">Date offline(Download)</string>
+	<string name="index_settings">Date offline (Download)</string>
 	<string name="general_settings">Setări generale</string>
 	<string name="general_settings_descr">Configurarea setărilor globale</string>
 	<string name="global_app_settings">Setări globale aplicație</string>
@@ -540,7 +539,7 @@
 	<string name="file_with_name_already_exists">Există un fișier cu același nume.</string>
 	<string name="gpx_navigation">Rută GPX</string>
 	<string name="poi_query_by_name_matches_categories">Au foste găsite câteva categorii de POI care satisfac condițiile:</string>
-	<string name="data_to_search_poi_not_available">Nu exista date offline salvate pentru efectuarea căutării.</string>
+	<string name="data_to_search_poi_not_available">Nu există date offline salvate pentru efectuarea căutării.</string>
 	<string name="poi_filter_by_name">Cautare după nume</string>
 	<string name="old_poi_file_should_be_deleted">Fișierul de date POI \'%1$s\' este redundant și poate fi șters.</string>
 	<string name="update_poi_file_not_found">Fișierul local pentru salvarea modificărilor POI nu există și nu a putut fi creat.</string>
@@ -548,8 +547,8 @@
 	<string name="map_version_changed_info">Serverul conține hărți ce nu sunt compatibile cu versiunea curentă a OsmAnd. Pentru a le descărca și folosi, vă rugăm să actualizați aplicația la o versiune mai nouă.</string>
 	<string name="local_index_mi_rename">Redenumire</string>
 	<string name="show_gpx_route">Afișare pe hartă</string>
-	<string name="poi_filter_nominatim">Nominatim online</string>
-	<string name="search_select_point">Selecție</string>
+	<string name="poi_filter_nominatim">Căutare online după nume</string>
+	<string name="search_select_point">OK</string>
 	<string name="search_position_current_location_search">Se caută poziția…</string>
 	<string name="search_position_current_location_found">Poziție curentă (găsită)</string>
 	<string name="search_position_address">Adresă…</string>
@@ -558,7 +557,7 @@
 	<string name="search_position_fixed">Fixă</string>
 	<string name="search_position_current_location">Poziția curentă…</string>
 	<string name="search_position_map_view">Ultima afișare a harții</string>
-	<string name="select_search_position">Căutare pe lângă:</string>
+	<string name="select_search_position">Caută pe lângă:</string>
 	<string name="context_menu_item_search">Căutare în împrejurimi</string>
 	<string name="tip_recent_changes_0_6_7_t">Modificări în versiuneaversiunea0.6.7 :
 		\n\t- Manager de date offline
@@ -604,7 +603,7 @@
 	<string name="local_index_items_restored">%1$d din %2$d element(e) activate cu succes.</string>
 	<string name="local_index_no_items_to_do">Niciun element de %1$s</string>
 	<string name="local_index_action_do">Sunteți pe cale de a %1$s %2$s element(e). Continuați?</string>
-	<string name="local_index_descr_title">AMnager de date offline</string>
+	<string name="local_index_descr_title">Manager de date offline</string>
 	<string name="local_index_mi_restore">Activați</string>
 	<string name="local_index_mi_backup">Dezactivați</string>
 	<string name="local_index_mi_delete">Stergeți</string>
@@ -741,18 +740,18 @@
 	<string name="amenity_type_finance">Financiare</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="amenity_type_healthcare">Sănătate</string>
-	<string name="amenity_type_historic">Istoric</string>
+	<string name="amenity_type_historic">Obiective istorice</string>
 	<string name="amenity_type_landuse">Parcuri și spații verzi</string>
-	<string name="amenity_type_leisure">Timp liber</string>
+	<string name="amenity_type_leisure">Locuri de relaxare</string>
 	<string name="amenity_type_manmade">Construcții tehnice</string>
 	<string name="amenity_type_military">Obiective militare</string>
-	<string name="amenity_type_natural">Natural</string>
+	<string name="amenity_type_natural">Natură</string>
 	<string name="amenity_type_office">Office</string>
 	<string name="amenity_type_other">Altele</string>
 	<string name="amenity_type_shop">Magazine</string>
 	<string name="amenity_type_sport">Sport</string>
-	<string name="amenity_type_sustenance">Mijoace de existență</string>
-	<string name="amenity_type_tourism">Turism</string>
+	<string name="amenity_type_sustenance">Mâncare și băutură</string>
+	<string name="amenity_type_tourism">Atracții turistice</string>
 	<string name="amenity_type_transportation">Transport public</string>
 	<string name="indexing_address">Indexare adrese…</string>
 	<string name="indexing_map">Indexare harți…</string>
@@ -946,7 +945,7 @@
 	<string name="search_history_city">Oraș:\n {0}</string>
 	<string name="search_history_street">Stradă:\n {0}, {1}</string>
 	<string name="search_history_int_streets">Intersecție: {0} x {1} in {2}</string>
-	<string name="search_history_building">Clădire: {0}, {1}, {2}</string>
+	<string name="search_history_building">Număr: {0}, {1}, {2}</string>
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Șterge tot</string>
 	<string name="history">Istoric</string>
@@ -1056,12 +1055,12 @@
 	<string name="map_tile_source_descr">Alegeți sursa online a harții raster</string>
 	<string name="map_tile_source">Sursă hartă raster</string>
 	<string name="map_source">Sursă hartă</string>
-	<string name="use_internet">Folosește internetul</string>
+	<string name="use_internet">Acces hartă online</string>
 	<string name="show_location">Arată poziția</string>
 	<string name="map_preferences">Preferințe hartă</string>
 	<string name="settings_activity">Setări</string>
 	<string name="show_gps_coordinates_text">Arată coordonatele GPS pe hartă</string>
-	<string name="use_internet_to_download_tile">Folosește internetul pentru a descărca porțiunile lipsă ale hărții raster</string>
+	<string name="use_internet_to_download_tile">Folosește accesul la internet pentru a descărca porțiunile lipsă ale hărții raster</string>
 	<string name="app_description">Aplicație pentru navigare</string>
 	<string name="exit_Button">Ieșire</string>
 	<string name="map_Button">Hartă</string>
@@ -1070,10 +1069,10 @@
 	<string name="search_button">Caută</string>
 	<string name="search_activity">Căutare</string>
 	<string name="searchpoi_activity">Alege POI</string>
-	<string name="search_POI_level_btn">Găsește msi multe</string>
+	<string name="search_POI_level_btn">Găsește mai multe</string>
 	<string name="incremental_search_city">Caută incremental un oraș. Pentru a găsi orașe/coduri poștale, introduceți primele 3 sau mai multe caractere.</string>
 	<string name="incremental_search_street">Caută incremental o stradă</string>
-	<string name="incremental_search_building">Caută incremental o clădire</string>
+	<string name="incremental_search_building">Caută incremental un număr</string>
 	<string name="choose_available_region">Alege o regiune din listă</string>
 	<string name="choose_intersected_street">Alege o intersecție</string>
 	<string name="Closest_Amenities">Cele mai apropiate puncte</string>
@@ -1083,7 +1082,7 @@
 	<string name="app_mode_pedestrian">Pieton</string>
 	<string name="position_on_map_center">Centru</string>
 	<string name="position_on_map_bottom">Jos</string>
-	<string name="navigate_point_top_text">Introduceți latitudinea &amp; longitudinea în formatul selectat (D - grade, M - minute, S - secunde)</string>
+	<string name="navigate_point_top_text">Introduceți latitudinea și longitudinea în formatul selectat (D - grade, M - minute, S - secunde)</string>
 	<string name="navigate_point_latitude">Latitudine</string>
 	<string name="navigate_point_longitude">Longitudine</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
@@ -1095,8 +1094,8 @@
 	<string name="search_address_region">Regiune</string>
 	<string name="search_address_city">Oraș</string>
 	<string name="search_address_street">Stradă</string>
-	<string name="search_address_building">Clădire</string>
-	<string name="search_address_building_option">Clădire</string>
+	<string name="search_address_building">Număr</string>
+	<string name="search_address_building_option">Număr</string>
 	<string name="search_address_street_option">Intersecție</string>
 	<string name="search_tabs_location">Poziție</string>
 	<string name="context_menu_item_navigate_point">Setează ca destinație</string>
@@ -1112,7 +1111,7 @@
 	<string name="add_favorite_dialog_top_text">Introduceți numele punctului favorit</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Punctul favorite  \'\'{0}\'\' a fost adăugat cu succes.</string>
-	<string name="favourites_context_menu_navigate">Setează ca destinație</string>
+	<string name="favourites_context_menu_navigate">Destinație</string>
 	<string name="favourites_context_menu_edit">Editează punctul favorit</string>
 	<string name="favourites_context_menu_delete">Șterge punctul favorit</string>
 	<string name="favourites_remove_dialog_msg">Îndepărteză punctul favorit \'%s\'?</string>
