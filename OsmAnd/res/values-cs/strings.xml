@@ -1104,4 +1104,9 @@
     <string name="native_library_not_running">Aplikace běží v bezpečném režimu (vypněte ho v nastavení).</string>
     <string name="safe_mode_description">Spustit aplikaci v bezpečném režimu (kód pro Android namísto nativního).</string>
     <string name="safe_mode">Bezpečný režim</string>
+    <string name="download_roads_only_item">"Silnice "</string>
+    <string name="download_regular_maps">Normální mapy</string>
+    <string name="download_roads_only_maps">Pouze mapy silnic</string>
+    <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat jen mapy silnic:</string>
+	<string name="rendering_attr_showRoadMaps_name">Mapy silnic</string>
     </resources>
