@@ -434,7 +434,7 @@
 	<string name="animate_route_off">Prekini animacijo</string>
 	<string name="animate_route">Začni animacijo</string>
 	<string name="poi_filter_by_name">Iskanje po imenu</string>
-	<string name="select_search_position">Iskanje blizu:</string>
+	<string name="select_search_position">Iskanje okoli:</string>
 	<string name="context_menu_item_search">Išči v bližini</string>
 	<string name="local_index_gpx_info_show">\n\nDolg pritisk za možnosti</string>
 	<string name="search_offline_clear_search">Novo iskanje</string>
@@ -508,4 +508,21 @@
 	<string name="auto_follow_route_never">Nikoli</string>
 	<string name="fast_route_mode">Najhitrejša pot</string>
 	<string name="fast_route_mode_descr">Vključi za najhitrejšo oz. izključi za najkrajšo pot</string>
+	<string name="search_position_undefined">Nedoločeno</string>
+	<string name="search_position_fixed">Določeno</string>
+	<string name="search_position_current_location">Trenutni položaj…</string>
+	<string name="search_position_map_view">Zadnji pogled zemljevida</string>
+	<string name="search_position_address">Naslov…</string>
+	<string name="city_type_city">Mesto</string>
+	<string name="city_type_hamlet">Zaselek</string>
+	<string name="city_type_village">Vas</string>
+	<string name="city_type_town">Kraj</string>
+	<string name="favorite_friends_category">Prijatelji</string>
+	<string name="favourites_edit_dialog_name">Ime</string>
+	<string name="favourites_edit_dialog_category">Skupina</string>
+	<string name="favorite_default_category">Ostalo</string>
+	<string name="favorite_home_category">Doma</string>
+	<string name="favorite_places_category">Kraji</string>
+	<string name="favorite_delete_multiple">Izbrisali boste %1$d lokacijo in %2$d skupino. Ali ste prepričani?</string>
+	<string name="favourites_delete_multiple_succesful">Priljubljene lokacije so uspešno izbrisane.</string>
 	</resources>
