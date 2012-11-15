@@ -21,7 +21,7 @@
 	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="showRoadMaps" name="Show road maps" description="Select how to show maps that have only road information."
-		type="string" possibleValues="Always - never show normal maps,Where no other map available,Never"/>
+		type="string" possibleValues="Always - never show regular maps,Where no regular map available,Never"/>
 
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff"/>
