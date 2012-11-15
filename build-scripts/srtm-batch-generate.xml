@@ -12,8 +12,8 @@
 		 or you can upload any file you have to googlecode (just put into 'directory_for_index_files')
 	 -->
 	 <!-- zoomWaySmoothness - 1-4, typical mapZooms - 8-10;11-12;13-14;15-   -->
-	<process directory_for_osm_files="/var/lib/jenkins/data/contours-osm-bz2" directory_for_index_files="/var/lib/jenkins/indexes" directory_for_generation=".work"
-		skipExistingIndexesAt="/var/lib/jenkins/indexes/uploaded"	indexPOI="false" indexMap="true" indexRouting="false"	indexTransport="false" indexAddress="false">
+	<process directory_for_osm_files="/var/lib/jenkins/data/contours-osm-bz2" directory_for_index_files="/var/lib/jenkins/indexes/srtm-uploaded" directory_for_generation=".work"
+		skipExistingIndexesAt="/var/lib/jenkins/indexes/srtm-uploaded"	indexPOI="false" indexMap="true" indexRouting="false"	indexTransport="false" indexAddress="false">
 		<!-- Add wget="C:/Program Files/GNUWin32/bin/wget.exe" to process, to use wget for download.
 			 On linux systems if wget is in your path it can be wget="wget" or you can make own script with wget command:
 			 wget="/path/to/script/wget.sh"
