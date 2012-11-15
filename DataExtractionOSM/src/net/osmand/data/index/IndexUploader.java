@@ -108,6 +108,7 @@ public class IndexUploader {
 	private UploadCredentials uploadCredentials = new DummyCredentials();
 	private FileFilter fileFilter = new FileFilter();
 	private FileFilter deleteFileFilter = null;
+	private boolean roadProcess;
 
 	public IndexUploader(String path, String targetPath) throws IndexUploadException {
 		directory = new File(path);
@@ -146,37 +147,39 @@ public class IndexUploader {
 	
 	private int parseFilter(String[] args, int start) throws IndexUploadException {
 		FileFilter fileFilter = null;
-		if (args[start].startsWith("--ff=")) {
-			try {
-				if(fileFilter == null) {
+		int p;
+		do {
+			p = start;
+			if (args[start].startsWith("--ff=")) {
+				try {
+					if (fileFilter == null) {
+						fileFilter = new FileFilter();
+					}
+					fileFilter.parseFile(args[start].substring("--ff=".length()));
+				} catch (IOException e) {
+					throw new IndexUploadException(e.getMessage());
+				}
+				start++;
+			} else if (args[start].startsWith("--fp=")) {
+				if (fileFilter == null) {
 					fileFilter = new FileFilter();
 				}
-				fileFilter.parseFile(args[start].substring("--ff=".length()));
-			} catch (IOException e) {
-				throw new IndexUploadException(e.getMessage());
+				fileFilter.parseCSV(args[start].substring("--fp=".length()));
+				start++;
+			} else if (args[start].startsWith("--ep=")) {
+				if (fileFilter == null) {
+					throw new NullPointerException();
+				}
+				fileFilter.parseExcludeCSV(args[start].substring("--ep=".length()));
+				start++;
+			} else if (args[start].startsWith("--dp=")) {
+				deleteFileFilter = new FileFilter();
+				deleteFileFilter.parseCSV(args[start].substring("--dp=".length()));
+				start++;
+			} else if (args[start].startsWith("--roads")) {
+				roadProcess = true;
 			}
-			start++;
-		}
-		if (args[start].startsWith("--fp=")) {
-			if(fileFilter == null) {
-				fileFilter = new FileFilter();
-			}
-			fileFilter.parseCSV(args[start].substring("--fp=".length()));
-			start++;
-		}
-		if (args[start].startsWith("--ep=")) {
-			if(fileFilter == null) {
-				throw new NullPointerException();
-			}
-			fileFilter.parseExcludeCSV(args[start].substring("--ep=".length()));
-			start++;
-		}
-		
-		if (args[start].startsWith("--dp=")) {
-			deleteFileFilter = new FileFilter();
-			deleteFileFilter.parseCSV(args[start].substring("--dp=".length()));
-			start++;
-		}
+		} while(p != start);
 		if(fileFilter != null) {
 			this.fileFilter = fileFilter;
 		}
@@ -295,17 +298,19 @@ public class IndexUploader {
 					File unzipped = unzip(f);
 					File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
 					try {
-						String description = getDescription(unzipped);
-
-						List<File> files = new ArrayList<File>();
-						files.add(unzipped);
-						if (logFile.exists()) {
-							files.add(logFile);
+						String description = checkfileAndGetDescription(unzipped);
+						if(description == null) {
+							log.info("Skip file " + f.getName());
+						} else {
+							List<File> files = new ArrayList<File>();
+							files.add(unzipped);
+							if (logFile.exists()) {
+								files.add(logFile);
+							}
+							File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
+							zip(files, zFile, description, timestampCreated);
+							uploadIndex(f, zFile, description, uploadCredentials);
 						}
-						File zFile = new File(f.getParentFile(), unzipped.getName() + ".zip");
-						zip(files, zFile, description, timestampCreated);
-
-						uploadIndex(f, zFile, description, uploadCredentials);
 					} finally {
 						if (!f.getName().equals(unzipped.getName()) || 
 							(targetDirectory != null && !targetDirectory.equals(directory))) {
@@ -368,9 +373,8 @@ public class IndexUploader {
 		return zFile;
 	}
 
-	private String getDescription(File f) throws OneFileException {
+	private String checkfileAndGetDescription(File f) throws OneFileException {
 		String fileName = f.getName();
-		String summary = null;
 		if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			RandomAccessFile raf = null;
 			try {
@@ -379,25 +383,13 @@ public class IndexUploader {
 				if(reader.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
 					throw new OneFileException("Uploader version is not compatible " + reader.getVersion() + " to current " + IndexConstants.BINARY_MAP_VERSION);
 				}
-				summary = " index for ";
-				boolean fir = true;
-				if (reader.containsAddressData()) {
-					summary = "Address" + (fir ? "" : ", ") + summary;
-					fir = false;
+				boolean roadFile = reader.containsRouteData() && !reader.containsMapData();
+				if(roadFile != this.roadProcess) {
+					return null;
 				}
-				if (reader.hasTransportData()) {
-					summary = "Transport" + (fir ? "" : ", ") + summary;
-					fir = false;
-				}
-				if (reader.containsPoiData()) {
-					summary = "POI" + (fir ? "" : ", ") + summary;
-					fir = false;
-				}
-				if (reader.containsMapData()) {
-					summary = "Map" + (fir ? "" : ", ") + summary;
-					fir = false;
-				}
+				String summary = getDescription(reader, fileName);
 				reader.close();
+				return summary;
 			} catch (IOException e) {
 				if (raf != null) {
 					try {
@@ -410,7 +402,32 @@ public class IndexUploader {
 		} else {
 			throw new OneFileException("Not supported file format " + fileName);
 		}
+	}
 
+	private String getDescription(BinaryMapIndexReader reader, String fileName) {
+		String summary;
+		summary = " index for ";
+		boolean fir = true;
+		if (reader.containsAddressData()) {
+			summary = "Address" + (fir ? "" : ", ") + summary;
+			fir = false;
+		}
+		if (reader.hasTransportData()) {
+			summary = "Transport" + (fir ? "" : ", ") + summary;
+			fir = false;
+		}
+		if (reader.containsPoiData()) {
+			summary = "POI" + (fir ? "" : ", ") + summary;
+			fir = false;
+		}
+		if (reader.containsRouteData()) {
+			summary = "Roads" + (fir ? "" : ", ") + summary;
+			fir = false;
+		}
+		if (reader.containsMapData()) {
+			summary = "Map" + (fir ? "" : ", ") + summary;
+			fir = false;
+		}
 		int last = fileName.lastIndexOf('_', fileName.indexOf('.'));
 		if (last == -1) {
 			last = fileName.indexOf('.');
@@ -418,7 +435,6 @@ public class IndexUploader {
 		String regionName = fileName.substring(0, last);
 		summary += regionName;
 		summary = summary.replace('_', ' ');
-
 		return summary;
 	}
 
