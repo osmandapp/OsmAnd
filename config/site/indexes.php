@@ -33,13 +33,29 @@
 		  if (file_exists('indexes/'.$node->getAttribute('name'))) {
 		      echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date')
          		   ."</td><td>".$node->getAttribute('size')
-               ."</td><td>Road ".$node->getAttribute('road_date')."</td><td>Road ".$node->getAttribute('road_size')
                ."</td><td>".$node->getAttribute('description')
                ;
 				
 	      }
         }
     }			
+?>
+</table>
+<h1><?php echo "Table of road indexes hosted on osmand.net"; ?></h1>
+<table border="1">
+<?php
+   $res = $xpath->query('//road_region[@local]');
+   if($res && $res->length > 0) {
+    foreach($res as $node) {
+      if (file_exists('road-indexes/'.$node->getAttribute('name'))) {
+          echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date')
+               ."</td><td>".$node->getAttribute('size')
+               ."</td><td>".$node->getAttribute('description')
+               ;
+        
+        }
+        }
+    }     
 ?>
 </table>
 <h1><?php echo "Table of  indexes on googlecode"; ?></h1>
@@ -51,9 +67,7 @@
    	foreach($res as $node) {
    		if (!file_exists('indexes/'.$node->getAttribute('name')) || !$node->getAttribute('local')) {
    			echo "<tr><td>".$node->getAttribute('name')."</td><td>".$node->getAttribute('date')
-               ."</td><td>".$node->getAttribute('size')
-               ."</td><td>Road ".$node->getAttribute('road_date')."</td><td>Road ".$node->getAttribute('road_size')
-               ."</td><td>".$node->getAttribute('description')
+               ."</td><td>".$node->getAttribute('size')."</td><td>".$node->getAttribute('description')
                ;
    		}
    	}

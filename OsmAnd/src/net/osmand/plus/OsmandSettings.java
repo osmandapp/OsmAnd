@@ -1378,7 +1378,7 @@ public class OsmandSettings {
 			new BooleanPreference("show_ruler", true).makeProfile().cache();
 	
 
-	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads", 0).makeGlobal();
+	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v1", 0).makeGlobal();
 	
 	public boolean checkFreeDownloadsNumberZero(){
 		if(!globalPreferences.contains(NUMBER_OF_FREE_DOWNLOADS.getId())){

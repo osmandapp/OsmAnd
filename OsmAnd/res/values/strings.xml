@@ -11,6 +11,11 @@
     -->
 	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
 	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
+    <string name="download_roads_only_item">Roads </string>
+    <string name="download_regular_maps">Regular maps</string>
+    <string name="download_roads_only_maps">Roads only maps</string>
+	<string name="rendering_attr_showRoadMaps_description">Select how to display roads-only maps:</string>
+	<string name="rendering_attr_showRoadMaps_name">Show roads-only maps</string>
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>

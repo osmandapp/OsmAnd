@@ -17,7 +17,7 @@ public abstract class OsmandExpandableListActivity extends
 		view.setDivider(getResources().getDrawable(R.drawable.tab_text_separator));
 	}
 
-	protected OsmandApplication getMyApplication() {
+	public OsmandApplication getMyApplication() {
 		return (OsmandApplication)getApplication();
 	}
 }

@@ -1,7 +1,8 @@
-package net.osmand.plus.activities;
+package net.osmand.plus.download;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,7 +47,6 @@ public class DownloadFileHelper {
 	protected void downloadFile(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
 			IProgress progress, boolean forceWifi) throws IOException, InterruptedException {
 		InputStream is = null;
-		
 		byte[] buffer = new byte[BUFFER_SIZE];
 		int read = 0;
 		int length = 0;
@@ -128,21 +128,26 @@ public class DownloadFileHelper {
 		return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
 	}
 	
-	protected boolean downloadFile(final String fileName, final File fileToDownload, final File fileToUnZip, final boolean unzipToDir,
-			IProgress progress, Long dateModified, int parts, List<File> toReIndex, String indexOfAllFiles, 
-			DownloadFileShowWarning showWarningCallback, boolean forceWifi ) throws InterruptedException {
+	public boolean downloadFile(final String fileName, DownloadEntry de, IProgress progress, 
+			List<File> toReIndex, String indexOfAllFiles, 
+			DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		FileOutputStream out = null;
 		try {
 
-			out = new FileOutputStream(fileToDownload);
+			out = new FileOutputStream(de.fileToSave);
 			try {
-				if(parts == 1){
-					URL url = new URL("http://download.osmand.net/download?event=2&file="+fileName + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
+				String urlPrefix = "http://download.osmand.net/download?event=2&file="; 
+				String urlSuffix = "&" + Version.getVersionAsURLParam(ctx);
+				if(de.isRoadMap) {
+					urlSuffix += "&road=yes";
+				}
+				if (de.parts == 1) {
+					URL url = new URL(urlPrefix + fileName + urlSuffix); //$NON-NLS-1$
 					downloadFile(fileName, out, url, null, indexOfAllFiles, progress, forceWifi);
 				} else {
-					for(int i=1; i<=parts; i++){
-						URL url = new URL("http://download.osmand.net/download?event=2&file="+fileName+"-"+i + "&" + Version.getVersionAsURLParam(ctx));  //$NON-NLS-1$
-						downloadFile(fileName, out, url, " ["+i+"/"+parts+"]", indexOfAllFiles, progress, forceWifi);
+					for (int i = 1; i <= de.parts; i++) {
+						URL url = new URL(urlPrefix + fileName + "-" + i  + urlSuffix); //$NON-NLS-1$
+						downloadFile(fileName, out, url, " [" + i + "/" + de.parts + "]", indexOfAllFiles, progress, forceWifi);
 					}
 				}
 			} finally {
@@ -150,79 +155,84 @@ public class DownloadFileHelper {
 				out = null;
 			}
 
-			if (fileToDownload.getName().endsWith(".zip")) { //$NON-NLS-1$
-				if (unzipToDir) {
-					fileToUnZip.mkdirs();
-				}
-				CountingInputStream fin = new CountingInputStream(new FileInputStream(fileToDownload));
-				ZipInputStream zipIn = new ZipInputStream(fin);
-				ZipEntry entry = null;
-				boolean first = true;
-				int len = (int) fileToDownload.length();
-				progress.startTask(ctx.getString(R.string.unzipping_file), len / 1024);
-				while ((entry = zipIn.getNextEntry()) != null) {
-					if(entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)){
-						continue;
-					}
-					File fs;
-					if (!unzipToDir) {
-						if (first) {
-							fs = fileToUnZip;
-							first = false;
-						} else {
-							String name = entry.getName();
-							// small simplification
-							int ind = name.lastIndexOf('_');
-							if (ind > 0) {
-								// cut version
-								int i = name.indexOf('.', ind);
-								if (i > 0) {
-									name = name.substring(0, ind) + name.substring(i, name.length());
-								}
-							}
-							fs = new File(fileToUnZip.getParent(), name);
-						}
-					} else {
-						fs = new File(fileToUnZip, entry.getName());
-					}
-					out = new FileOutputStream(fs);
-					int read;
-					byte[] buffer = new byte[BUFFER_SIZE];
-					int remaining = len;
-					while ((read = zipIn.read(buffer)) != -1) {
-						out.write(buffer, 0, read);
-						remaining -= fin.lastReadCount();
-						progress.remaining(remaining / 1024);
-					}
-					out.close();
-					
-					if(dateModified != null){
-						fs.setLastModified(dateModified);
-					}
-					toReIndex.add(fs);
-				}
-				zipIn.close();
-				fileToDownload.delete(); // zip is no needed more
-			}
+			unzipFile(de, progress, toReIndex);
 
 			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
 			showWarningCallback.showWarning(ctx.getString(R.string.error_io_error));
-			if(out != null){
+			if (out != null) {
 				try {
 					out.close();
 				} catch (IOException e1) {
 				}
 			}
 			// Possibly file is corrupted
-			fileToDownload.delete();
+			de.fileToSave.delete();
 			return false;
 		} catch (InterruptedException e) {
 			// Possibly file is corrupted
-			fileToDownload.delete();
+			de.fileToSave.delete();
 			throw e;
+		}
+	}
+
+	private void unzipFile(DownloadEntry de, IProgress progress, List<File> toReIndex)
+			throws FileNotFoundException, IOException {
+		if (de.fileToSave.getName().endsWith(".zip")) { //$NON-NLS-1$
+			if (de.unzip) {
+				de.fileToUnzip.mkdirs();
+			}
+			CountingInputStream fin = new CountingInputStream(new FileInputStream(de.fileToSave));
+			ZipInputStream zipIn = new ZipInputStream(fin);
+			ZipEntry entry = null;
+			boolean first = true;
+			int len = (int) de.fileToSave.length();
+			progress.startTask(ctx.getString(R.string.unzipping_file), len / 1024);
+			while ((entry = zipIn.getNextEntry()) != null) {
+				if (entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)) {
+					continue;
+				}
+				File fs;
+				if (!de.unzip) {
+					if (first) {
+						fs = de.fileToUnzip;
+						first = false;
+					} else {
+						String name = entry.getName();
+						// small simplification
+						int ind = name.lastIndexOf('_');
+						if (ind > 0) {
+							// cut version
+							int i = name.indexOf('.', ind);
+							if (i > 0) {
+								name = name.substring(0, ind) + name.substring(i, name.length());
+							}
+						}
+						fs = new File(de.fileToUnzip.getParent(), name);
+					}
+				} else {
+					fs = new File(de.fileToUnzip, entry.getName());
+				}
+				FileOutputStream out = new FileOutputStream(fs);
+				int read;
+				byte[] buffer = new byte[BUFFER_SIZE];
+				int remaining = len;
+				while ((read = zipIn.read(buffer)) != -1) {
+					out.write(buffer, 0, read);
+					remaining -= fin.lastReadCount();
+					progress.remaining(remaining / 1024);
+				}
+				out.close();
+
+				if (de.dateModified != null) {
+					fs.setLastModified(de.dateModified);
+				}
+				toReIndex.add(fs);
+			}
+			zipIn.close();
+			de.fileToSave.delete(); // zip is no needed more
 		}
 	}
 	

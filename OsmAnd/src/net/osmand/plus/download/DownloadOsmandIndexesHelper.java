@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.download;
 
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
@@ -16,7 +16,11 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
-import net.osmand.plus.activities.DownloadIndexActivity.DownloadEntry;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
+import net.osmand.plus.activities.DownloadIndexActivity.DownloadActivityType;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -72,10 +76,10 @@ public class DownloadOsmandIndexesHelper {
 					File destFile = new File(voicePath, voice + File.separatorChar + "_ttsconfig.p");
 					String key = voice + ext;
 					String assetName = "voice" + File.separatorChar + voice + File.separatorChar + "ttsconfig.p";
-					result.add(key, new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
+					result.add(new AssetIndexItem(key, "voice", date, dateModified, "0.1", "", assetName, destFile.getPath()));
 				} else {
 					String key = voice + extvoice;
-					IndexItem item = result.getIndexFiles().get(key);
+					IndexItem item = result.getIndexFilesByName(key);
 					if (item != null) {
 						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
 						SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
@@ -93,9 +97,20 @@ public class DownloadOsmandIndexesHelper {
 					}
 				}
 			}
+			result.sort();
 		} catch (IOException e) {
 			log.error("Error while loading tts files from assets", e); //$NON-NLS-1$
 		}
+	}
+	
+	private static DownloadActivityType getIndexType(String tagName){
+		if("region".equals(tagName) ||
+							"multiregion".equals(tagName)) {
+			return DownloadActivityType.NORMAL_FILE;
+		} else if("road_region".equals(tagName) ) {
+			return DownloadActivityType.ROADS_FILE;
+		}
+		return null;
 	}
 
 	private static IndexFileList downloadIndexesListFromInternet(String versionAsUrl){
@@ -109,19 +124,24 @@ public class DownloadOsmandIndexesHelper {
 				parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$
 				int next;
 				while((next = parser.next()) != XmlPullParser.END_DOCUMENT) {
-					if(next == XmlPullParser.START_TAG && ("region".equals(parser.getName()) ||
-							"multiregion".equals(parser.getName()))) { //$NON-NLS-1$
-						String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
-						String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
-						String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
-						String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
-						String parts = parser.getAttributeValue(null, "parts"); //$NON-NLS-1$
-						result.add(name, new IndexItem(name, description, date, size, parts));
-					} else if (next == XmlPullParser.START_TAG && ("osmand_regions".equals(parser.getName()))) {
-						String mapversion = parser.getAttributeValue(null, "mapversion");
-						result.setMapVersion(mapversion);
-					} 
+					if (next == XmlPullParser.START_TAG) {
+						DownloadActivityType tp = getIndexType(parser.getName());
+						if (tp != null) {
+							String name = parser.getAttributeValue(null, "name"); //$NON-NLS-1$
+							String size = parser.getAttributeValue(null, "size"); //$NON-NLS-1$
+							String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
+							String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
+							String parts = parser.getAttributeValue(null, "parts"); //$NON-NLS-1$
+							IndexItem it = new IndexItem(name, description, date, size, parts);
+							it.setType(tp);
+							result.add(it);
+						} else if ("osmand_regions".equals(parser.getName())) {
+							String mapversion = parser.getAttributeValue(null, "mapversion");
+							result.setMapVersion(mapversion);
+						}
+					}
 				}
+				result.sort();
 			} catch (IOException e) {
 				log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
 				return null;
@@ -161,7 +181,7 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		@Override
-		public DownloadEntry createDownloadEntry(Context ctx) {
+		public DownloadEntry createDownloadEntry(Context ctx, DownloadActivityType type) {
 			return new DownloadEntry(assetName, destFile, dateModified);
 		}
 	}
@@ -173,6 +193,7 @@ public class DownloadOsmandIndexesHelper {
 		private String fileName;
 		private String size;
 		private IndexItem attachedItem;
+		private DownloadActivityType type;
 		
 		public IndexItem(String fileName, String description, String date, String size, String parts) {
 			this.fileName = fileName;
@@ -180,42 +201,29 @@ public class DownloadOsmandIndexesHelper {
 			this.date = date;
 			this.size = size;
 			this.parts = parts;
+			this.type = DownloadActivityType.NORMAL_FILE;
 		}
+		
+		public DownloadActivityType getType() {
+			return type;
+		}
+		
+		public void setType(DownloadActivityType type) {
+			this.type = type;
+		}
+		
 		
 		public IndexItem getAttachedItem() {
 			return attachedItem;
 		}
 		
-		public String getVisibleDescription(Context ctx){
+		public String getVisibleDescription(Context ctx, DownloadActivityType type){
 			String s = ""; //$NON-NLS-1$
+			if(type == DownloadActivityType.ROADS_FILE){
+				return ctx.getString(R.string.download_roads_only_item);
+			}
 			if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)
 					|| fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-				// Takes too much space 
-//				String lowerCase = description.toLowerCase();
-//				if (lowerCase.contains("map")) { //$NON-NLS-1$
-//					if (s.length() > 0) {
-//						s += ", "; //$NON-NLS-1$
-//					}
-//					s += ctx.getString(R.string.map_index);
-//				}
-//				if (lowerCase.contains("poi")) { //$NON-NLS-1$
-//					if (s.length() > 0) {
-//						s += ", "; //$NON-NLS-1$
-//					}
-//					s += ctx.getString(R.string.poi);
-//				}
-//				if (lowerCase.contains("transport")) { //$NON-NLS-1$
-//					if (s.length() > 0) {
-//						s += ", "; //$NON-NLS-1$
-//					}
-//					s += ctx.getString(R.string.transport);
-//				}
-//				if (lowerCase.contains("address")) { //$NON-NLS-1$
-//					if (s.length() > 0 ) {
-//						s += ", "; //$NON-NLS-1$
-//					}
-//					s += ctx.getString(R.string.address);
-//				}
 			} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 				s = ctx.getString(R.string.voice);
 			} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
@@ -264,7 +272,7 @@ public class DownloadOsmandIndexesHelper {
 			return parts;
 		}
 		
-		public DownloadEntry createDownloadEntry(Context ctx) {
+		public DownloadEntry createDownloadEntry(Context ctx, DownloadActivityType type) {
 			IndexItem item = this;
 			String fileName = item.getFileName();
 			File parent = null;
@@ -293,6 +301,10 @@ public class DownloadOsmandIndexesHelper {
 				toCheckPostfix = ""; //$NON-NLS-1$
 				unzipDir = true;
 			}
+			if(type == DownloadActivityType.ROADS_FILE) {
+				toSavePostfix = "-roads" + toSavePostfix;
+				toCheckPostfix = "-roads" + toCheckPostfix;
+			}
 			if(parent != null) {
 				parent.mkdirs();
 				// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery and Music apps
@@ -312,6 +324,7 @@ public class DownloadOsmandIndexesHelper {
 			} else {
 				entry = new DownloadEntry();
 				int ls = fileName.lastIndexOf('_');
+				entry.isRoadMap = type == DownloadActivityType.ROADS_FILE;
 				entry.baseName = fileName.substring(0, ls);
 				entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
 				entry.unzip = unzipDir;
@@ -338,9 +351,24 @@ public class DownloadOsmandIndexesHelper {
 				}
 			}
 			if(attachedItem != null) {
-				entry.attachedEntry = attachedItem.createDownloadEntry(ctx);
+				entry.attachedEntry = attachedItem.createDownloadEntry(ctx, type);
 			}
 			return entry;
+		}
+		
+		public String convertServerFileNameToLocal(){
+			String e = getFileName();
+			int l = e.lastIndexOf('_');
+			String s;
+			if(e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)){
+				s = IndexConstants.BINARY_MAP_INDEX_EXT;
+			} else {
+				s = ""; //$NON-NLS-1$
+			}
+			if(getType() == DownloadActivityType.ROADS_FILE ) {
+				s = "-roads"+s;
+			}
+			return e.substring(0, l) + s;
 		}
 	}
 	

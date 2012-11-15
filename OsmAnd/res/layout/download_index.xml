@@ -6,7 +6,6 @@
     android:orientation="vertical" >
 
     <!-- TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_index_file_to_download"></TextView -->
-
     <EditText
         android:id="@+id/search_box"
         android:layout_width="fill_parent"
