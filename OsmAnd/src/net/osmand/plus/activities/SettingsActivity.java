@@ -316,15 +316,19 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
-				"en", "cs", "nl", "fr", "ka", "de",
-				"el", "hu", "it", "ja", "ko", "lv",
-				"mr", "no", "pl", "pt", "ro", "ru",
-				"sk", "sl", "es","vi" };
+				"en", "af", "hy", "eu", "bs", "bg",
+				"ca", "cs", "nl", "fi", "fr", "ka",
+				"de", "el", "he", "hi", "hu", "id",
+				"it", "ja", "ko", "lv", "lt", "mr",
+				"no", "pl", "pt", "ro", "ru", "sk",
+				"sl", "es", "sv", "uk", "vi" };
 		entries = new String[] { getString(R.string.system_locale), 
-				"English", "Czech",  "Dutch","French","Georgian","German", 
-				"Greek", "Hungarian", "Italian", "Japanese", "Korean", "Latvian",
-				"Marathi", "Norwegian", "Polish", "Portuguese", "Romanian", "Russian",
-				"Slovak", "Slovenian", "Spanish", "Vietnamese" };
+				"English", "Afrikaans", "Armenian", "Basque", "Bosnian", "Bulgarian",
+				"Catalan", "Czech", "Dutch", "Finnish", "French", "Georgian",
+				"German", "Greek", "Hebrew", "Hindi" "Hungarian", "Indonesian",
+				"Italian", "Japanese", "Korean", "Latvian", "Lithuanian", "Marathi",
+				"Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak",
+				"Slovenian", "Spanish", "Swedish", "Ukrainian", "Vietnamese" };
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 
 		
