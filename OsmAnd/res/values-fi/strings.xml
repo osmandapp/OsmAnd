@@ -588,4 +588,7 @@
 	<string name="local_index_gpx_info_elevation">\nKeskimääräinen korkeus : %1$.0f m\nMinimikorkeus : %2$.0f m\nMaksimikorkeus : %3$.0f m\nNousuja : %4$.0f m\nLaskuja : %5$.0f m</string>
 	<string name="local_index_gpx_info">Alireittejä : %1$d\nPisteitä yhteensä : %2$d\nVälietappeja : %3$d\nKokonaismatka : %4$s\nAloitusaika : %5$tF, %5$tR\nLopetusaika : %6$tF, %6$tR</string>
 	<string name="local_index_installed">Versio</string>
+	<string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
+	<string name="osb_close_dialog_error">Tapahtui virhe: bugia ei suljettu</string>
+	<string name="osb_comment_dialog_author">Tekijän nimi</string>
 	</resources>
