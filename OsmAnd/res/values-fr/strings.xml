@@ -1126,4 +1126,9 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
+    <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher les cartes uniquement routières</string>
+	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
+    <string name="download_roads_only_item">Routes uniquement</string>
+    <string name="download_regular_maps">Cartes standards</string>
+    <string name="download_roads_only_maps">"Cartes routières uniquement "</string>
     </resources>
