@@ -145,7 +145,7 @@
 	<string name="history_search_desc">Zgodovina iskanja</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigacija trenutno ni na voljo.</string>
 	<string name="left_side_navigation">Vožnja po levi strani</string>
-	<string name="left_side_navigation_descr">Izberite za države, kjer se vozijo po levi strani ceste</string>
+	<string name="left_side_navigation_descr">Izberite za države, kjer se vozi po levi strani ceste</string>
 	<string name="unknown_from_location">Izhodišče ni še določeno</string>
 	<string name="unknown_location">Lokacija še ni znana</string>
 	<string name="context_menu_item_directions">Usmerjanje do tu</string>
@@ -243,7 +243,7 @@
 	<string name="validate_gpx_upload_name_pwd">Določite OSM uporabniško ime in geslo za nalaganje GPX datotek.</string>
     	<string name="tip_recent_changes">Zadnje spremembe</string>
 	<string name="unit_of_length_descr">Spremeni enote dolžine in hitrosti</string>
-	<string name="unit_of_length">Merska enota</string>
+	<string name="unit_of_length">Merske enote</string>
 	<string name="si_mi_foots">Milje/čevlji</string>
 	<string name="si_mi_yard">Milje/jardi</string>
 	<string name="si_km_m">Kilometri/metri</string>
@@ -346,7 +346,7 @@
 	<string name="position_on_map_descr">Izberite mesto položaja na zemljevidu</string>
 	<string name="position_on_map">Oznaka položaja</string>
 	<string name="layer_map_appearance">Nastavitve zaslona…</string>
-	<string name="show_lanes">Prikaži pasove</string>
+	<string name="show_lanes">Prikaži vozne pasove</string>
 	<string name="avoid_in_routing_title">Izogibanje…</string>
 	<string name="avoid_ferries">Izogibanje trajektov</string>
 	<string name="avoid_unpaved">Izogibanje neasfaltiranih cest</string>
@@ -485,4 +485,27 @@
 	<string name="process_navigation_service">Navigacijska storitev OsmAnd</string>
 	<string name="hello">Navigacijska aplikacija OsmAnd</string>
 	<string name="router_service">Navigacijska storitev</string>
+	<string name="menu_mute_off">Zvok je vključen</string>
+	<string name="menu_mute_on">Zvok je izključen</string>
+	<string name="tts_language_not_supported_title">Jezik ni podprt</string>
+	<string name="tts_language_not_supported">Izbrani jezik ni podprt z vgrajenim Android TTS engine (text-to-speech)-(besedilo v govor). Ali želite na trgu poiskati drug sintetizator govora? Sicer bo uporabljen sistemski TTS jezik.</string>
+	<string name="tts_missing_language_data">Ni nameščenih podatkov za izbrani jezik. Ali jih želite namestiti iz tržnice?</string>
+	<string name="system_locale">Sistemski</string>
+	<string name="support_new_features">Podpri nanaljnji razvoj</string>
+	<string name="map_screen_orientation">Usmerjenost zaslona</string>
+	<string name="map_screen_orientation_descr">Pokončno, ležeče ali sistemsko</string>
+	<string name="map_orientation_default">Glede na nastavitve naprave</string>
+	<string name="map_orientation_portrait">Pokončno</string>
+	<string name="map_orientation_landscape">Ležeče</string>
+	<string name="safe_mode">Varen način</string>
+    <string name="safe_mode_description">Zaženite aplikacijo v varnem načinu (uporablja počasnejšo Android kodo).</string>
+    <string name="native_library_not_running">Aplikacija teče v varnem načinu (onemogočite v nastavitvah).</string>
+    <string name="application_dir">Mapa za shranjevanje</string>
+	<string name="specified_dir_doesnt_exist">Ne najdem določene mape.</string>
+	<string name="application_dir_change_warning">Zamenjava mape ta shranjevanje ne bo premaknila niti brisala podatke. To je treba opraviti ročno izven programa OsmAnd. Ali zamenjam mapo?</string>
+	<string name="choose_auto_follow_route">Avtomatsko centriranje zemljevida</string>
+	<string name="choose_auto_follow_route_descr">Čas za avtomatsko centriranje zemljevida s trenutnim položajem</string>
+	<string name="auto_follow_route_never">Nikoli</string>
+	<string name="fast_route_mode">Najhitrejša pot</string>
+	<string name="fast_route_mode_descr">Vključi za najhitrejšo oz. izključi za najkrajšo pot</string>
 	</resources>
