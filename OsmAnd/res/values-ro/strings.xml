@@ -687,7 +687,7 @@
 	<string name="error_doing_search">Eroare la căutarea în mod offline</string>
 	<string name="search_offline_geo_error">Nu s-a putut analiza informația geo \'%s\'</string>
 	<string name="search_osm_offline">Căutare adrese folosind hărți offline</string>
-	<string name="system_locale">Regionale</string>
+	<string name="system_locale">Conform dispozitiv</string>
 	<string name="preferred_locale_descr">Selectare limbă de afișare</string>
 	<string name="preferred_locale">Limba de afișare</string>
 	<string name="tip_map_switch">Surse pentru hartă</string>
@@ -1167,5 +1167,5 @@
 	<string name="rendering_attr_showRoadMaps_name">Hărți doar pentru drumuri</string>
     <string name="download_roads_only_item">"Drumuri "</string>
     <string name="download_regular_maps">Hărți complete</string>
-    <string name="download_roads_only_maps">Hărți exclusiv drumuri</string>
+    <string name="download_roads_only_maps">Hărți exclusiv cu drumuri</string>
     </resources>
