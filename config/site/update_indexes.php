@@ -1,5 +1,8 @@
 <?php
-
+$local_file = false;
+if( basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 	{
+     $local_file = true;
+}
 
 function loadIndexesFromDir($output, $outputIndexes, $dir, $elementName, $mapNodes){
 	if (is_dir($dir)) {
@@ -56,10 +59,9 @@ function loadIndexesFromDir($output, $outputIndexes, $dir, $elementName, $mapNod
 }
 
 function updateGoogleCodeIndexes($update=false) {
-        $local_file = false;
-        if( basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 	{
-	     $update = true;
-	     $local_file = true;
+        
+	if( $local_file) 	{
+    	$update = true;
 	}
 
 	$localFileName='indexes.xml';
@@ -68,7 +70,7 @@ function updateGoogleCodeIndexes($update=false) {
 		return;
 	}
 	if($local_file) {
-	        echo '<h1>File update : </h1> <br>';
+		echo '<h1>File update : </h1> <br>';
     }
 
 	$dom = new DomDocument();
