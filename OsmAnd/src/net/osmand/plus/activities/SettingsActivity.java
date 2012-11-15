@@ -325,7 +325,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries = new String[] { getString(R.string.system_locale), 
 				"English", "Afrikaans", "Armenian", "Basque", "Bosnian", "Bulgarian",
 				"Catalan", "Czech", "Dutch", "Finnish", "French", "Georgian",
-				"German", "Greek", "Hebrew", "Hindi" "Hungarian", "Indonesian",
+				"German", "Greek", "Hebrew", "Hindi", "Hungarian", "Indonesian",
 				"Italian", "Japanese", "Korean", "Latvian", "Lithuanian", "Marathi",
 				"Norwegian", "Polish", "Portuguese", "Romanian", "Russian", "Slovak",
 				"Slovenian", "Spanish", "Swedish", "Ukrainian", "Vietnamese" };
