@@ -296,11 +296,13 @@ public class IndexUploader {
 					}
 					log.info("Process file " + f.getName());
 					File unzipped = unzip(f);
+					boolean skip = false;
 					File logFile = new File(f.getParentFile(), unzipped.getName() + IndexBatchCreator.GEN_LOG_EXT);
 					try {
 						String description = checkfileAndGetDescription(unzipped);
 						if(description == null) {
 							log.info("Skip file " + f.getName());
+							skip = true;
 						} else {
 							List<File> files = new ArrayList<File>();
 							files.add(unzipped);
@@ -312,12 +314,13 @@ public class IndexUploader {
 							uploadIndex(f, zFile, description, uploadCredentials);
 						}
 					} finally {
-						if (!f.getName().equals(unzipped.getName()) || 
-							(targetDirectory != null && !targetDirectory.equals(directory))) {
-							unzipped.delete(); // delete the unzipped file
-						}
-						if (logFile.exists()) {
-							logFile.delete();
+						if (!skip) {
+							if (!f.getName().equals(unzipped.getName()) || (targetDirectory != null && !targetDirectory.equals(directory))) {
+								unzipped.delete(); // delete the unzipped file
+							}
+							if (logFile.exists()) {
+								logFile.delete();
+							}
 						}
 					}
 				} catch (OneFileException e) {
