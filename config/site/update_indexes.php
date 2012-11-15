@@ -1,10 +1,6 @@
 <?php
-$local_file = false;
-if( basename($_SERVER['PHP_SELF']) == basename(__FILE__)) 	{
-     $local_file = true;
-}
-
-function loadIndexesFromDir($output, $outputIndexes, $dir, $elementName, $mapNodes){
+function loadIndexesFromDir($out, $outputIndexes, $dir, $elementName, $mapNodes){
+	$local_file = basename($_SERVER['PHP_SELF']) == basename(__FILE__);
 	if (is_dir($dir)) {
 		if ($dh = opendir($dir)) {
 			$zip = new ZipArchive();
@@ -59,7 +55,7 @@ function loadIndexesFromDir($output, $outputIndexes, $dir, $elementName, $mapNod
 }
 
 function updateGoogleCodeIndexes($update=false) {
-        
+    $local_file = basename($_SERVER['PHP_SELF']) == basename(__FILE__);
 	if( $local_file) 	{
     	$update = true;
 	}
