@@ -18,7 +18,7 @@
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
     <string name="background_service_is_enabled_question">Background service is still running. Do you want to cancel it?</string>
-    <string name="tip_recent_changes_1_0_0_t">Changes in 1.0 :
+    <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0 :
 	\n\t* Improved routing: faster, more precise, up to 250 km
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
