@@ -56,7 +56,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	private int BASE_TEXT_SIZE = 170;
 	private int SHADOW_OF_LEG = 5;
-	private int CLOSE_BTN = 3;
+	private int CLOSE_BTN = 6;
 	
 	private final MapActivity activity;
 	private Drawable boxLeg;
@@ -110,6 +110,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		textView.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		textPadding = new Rect();
 		textView.getBackground().getPadding(textPadding);
+//		textView.setPadding(0, 0, CLOSE_BTN + 3, 0);
 		
 		closeButton = new ImageView(view.getContext());
 		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
@@ -139,7 +140,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				int c = textView.getLineCount();
 				
 				textView.draw(canvas);
-				canvas.translate(textView.getWidth() - closeButton.getWidth() - CLOSE_BTN, CLOSE_BTN);
+				canvas.translate(textView.getWidth() - closeButton.getWidth(), CLOSE_BTN / 2);
 				closeButton.draw(canvas);
 				if (c == 0) {
 					// special case relayout after on draw method
