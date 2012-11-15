@@ -643,8 +643,8 @@
 	<string name="indexing_poi">Ευρετηρίαση Σημ. Ενδ…</string>
 	<string name="indexing_transport">Ευρετηρίαση μεταφορών…</string>
 	<string name="input_output_error">Σφάλμα Εισ/Εξ</string>
-	<string name="km">χιλ</string>
-	<string name="km_h">χιλ/ω</string>
+	<string name="km">χλμ</string>
+	<string name="km_h">χλμ/ω</string>
 	<string name="m">μ</string>
 	<string name="old_map_index_is_not_supported">Παρωχημένη μορφή δεδομένων χάρτη \'\'{0}\'\' δεν υποστηρίζεται</string>
 	<string name="poi_filter_closest_poi">Πλησιέστερο ΣΕ</string>
