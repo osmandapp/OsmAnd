@@ -1033,7 +1033,7 @@
     <string name="map_widget_intermediate_distance">Köztes célpont</string>
     <string name="ending_point_too_far">A célpont közelében nem található út.</string>
     <string name="btn_add_tag">Címke hozzáadása</string>
-    <string name="btn_advanced_mode">Haladó mód...</string>
+    <string name="btn_advanced_mode">Haladó mód…</string>
     <string name="poi_filter_parking">Parkoló</string>
     <string name="poi_filter_emergency">Vészhelyzet</string>
     <string name="poi_filter_public_transport">Tömegközlekedés</string>
@@ -1056,13 +1056,13 @@
     <string name="close_changeset">Módosításcsomag lezárása</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner nincs feltelepítve. Megkeresed a Google Play-ben?</string>
 	<string name="background_service_is_enabled_question">A háttérszolgáltatás még fut. Szeretnéd kikapcsolni?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Az 1.0 kiadás változásai:
-\n\t* Gyorsabb és pontosabb útvonaltervezés, akár 250 km-re
-\n\t* Úttérképek bevezetése\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
+    <string name="tip_recent_changes_1_0_0_t">"Az 1.0.0 kiadás változásai:
+\n\t* Pontosabb és sokkal gyorsabb útvonaltervezés, akár 250 km-re
+\n\t* Csak-út térképek bevezetése\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
 \n\t* A háttérszolgáltatás bekapcsol navigáció közben "</string>
-    <string name="safe_mode_description">Alkalmazás futtatása biztonságos módban (a lassabb Android kódot használva natív kód helyett).</string>
-    <string name="safe_mode">Biztonságos mód</string>
-    <string name="native_library_not_running">Az alkalmazás biztonságos módban fut (letilthatod a Beállításokban).</string>
+    <string name="safe_mode_description">Alkalmazás futtatása biztonsági módban (a lassabb Android kódot használva natív kód helyett).</string>
+    <string name="safe_mode">Biztonsági mód</string>
+    <string name="native_library_not_running">Az alkalmazás biztonsági módban fut (letilthatod a Beállításokban).</string>
     <string name="rendering_attr_showRoadMaps_description">Válaszd ki, mikor jelenjenek meg a csak-út térképek:</string>
 	<string name="rendering_attr_showRoadMaps_name">Csak-út térképek</string>
     <string name="download_roads_only_item">"Utak "</string>
