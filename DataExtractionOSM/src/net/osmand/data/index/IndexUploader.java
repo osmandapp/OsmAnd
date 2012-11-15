@@ -178,6 +178,7 @@ public class IndexUploader {
 				start++;
 			} else if (args[start].startsWith("--roads")) {
 				roadProcess = true;
+				start++;
 			}
 		} while(p != start);
 		if(fileFilter != null) {
