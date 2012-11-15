@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.FileHandler;
-import java.util.logging.LogManager;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.SimpleFormatter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,11 +46,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
 import rtree.RTree;
 
 
 public class IndexBatchCreator {
 	
+	private static final int INMEM_LIMIT = 600;
+
 	protected static final Log log = LogUtil.getLog(IndexBatchCreator.class);
 	
 	public static final String GEN_LOG_EXT = ".gen.log";
@@ -443,7 +446,7 @@ public class IndexBatchCreator {
 				rName = Algoritms.capitalizeFirstLetterAndLowercase(rName);
 			}
 			DBDialect osmDb = this.osmDbDialect;
-			if(f.length() / 1024 / 1024 > 300 && osmDb == DBDialect.SQLITE_IN_MEMORY) {
+			if(f.length() / 1024 / 1024 > INMEM_LIMIT && osmDb == DBDialect.SQLITE_IN_MEMORY) {
 				log.warn("Switching SQLITE in memory dialect to SQLITE");
 				osmDb = DBDialect.SQLITE;
 			}
