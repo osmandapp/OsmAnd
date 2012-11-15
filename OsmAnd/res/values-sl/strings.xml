@@ -102,7 +102,7 @@
     <string name="map_widget_intermediate_distance">Vmesna točka</string>
     <string name="ending_point_too_far">Cilj je predaleč od najbližje ceste.</string>
     <string name="btn_add_tag">Dodaj oznako</string>
-    <string name="btn_advanced_mode">Napreden način...</string>
+    <string name="btn_advanced_mode">Napreden način…</string>
     <string name="poi_filter_parking">Parkirišče</string>
     <string name="poi_filter_public_transport">Javni prevoz</string>
     <string name="poi_filter_accomodation">Nastanitev</string>
@@ -276,7 +276,7 @@
 	<string name="km_h">km/h</string>
 	<string name="m">m</string>
 	<string name="poi_filter_closest_poi">Najbližja POI</string>
-	<string name="point_on_map">Lokacija:\nŠir %1$.5f\nDol %1$.5f</string>
+	<string name="point_on_map">Lokacija:\nŠir %1$.5f\nDol %2$.5f</string>
 	<string name="poi_context_menu_modify">Popravi POI</string>
 	<string name="poi_context_menu_delete">Izbriši POI</string>
 	<string name="import_fav">Uvozi</string>
