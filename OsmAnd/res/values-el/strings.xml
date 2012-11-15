@@ -1068,19 +1068,23 @@
 	<string name="local_index_items"/>
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="map_widget_show_destination_arrow">Εμφάνιση κατεύθυνσης προορισμού</string>
-    <string name="enable_plugin_monitoring_services">Ενεργοποιήστε το πρόσθετο ιχνηλάτησης για να χρησιμοποιήσετε τις υπηρεσίες καταγραφής θέσης (καταγραφή, ζωντανή ιχνηλάτηση)</string>
+    <string name="enable_plugin_monitoring_services">Ενεργοποιήστε το πρόσθετο ιχνηλάτησης για να χρησιμοποιήσετε τις υπηρεσίες καταγραφής θέσης (καταγραφή, ιχνηλάτηση σε πραγματικό χρόνο)</string>
     <string name="non_optimal_route_calculation">Υπολογισμός πιθανόν μη-βέλτιστης διαδρομής σε πολύ μεγάλες αποστάσεις</string>
     <string name="rendering_attr_roadColors_description">Επιλέξτε ένα χρωματικό συνδυασμό οδών:</string>
 	<string name="rendering_attr_roadColors_name">Χρωματικός συνδυασμός οδών</string>
     <string name="zxing_barcode_scanner_not_found">Η εφαρμογή ZXing Barcode Scanner δεν είναι εγκατεστημένη. Αναζήτηση στο Market?</string>
 	<string name="close_changeset">Κλείσιμο ομάδας αλλαγών</string>
-	<string name="safe_mode_description">Εκτέλεση της εφαρμογής σε ασφαλή λειτουργία (χρησιμοποιώντας κώδικα Android αντί του εγγενούς).</string>
+	<string name="safe_mode_description">Εκτέλεση της εφαρμογής σε ασφαλή λειτουργία (χρησιμοποιώντας πιο αργό Android αντί του εγγενούς κώδικα).</string>
     <string name="safe_mode">Ασφαλής λειτουργία</string>
     <string name="native_library_not_running">Η εφαρμογή εκτελείται σε ασφαλή λειτουργία (απενεργοποίηση από τις Ρυθμίσεις).</string>
     <string name="background_service_is_enabled_question">Η υπηρεσία παρασκηνίου εκτελείται ακόμη. Θέλετε να την ακυρώσετε;</string>
     <string name="tip_recent_changes_1_0_0_t">"Αλλαγές στην 1.0 :
 \n\t* Βελτιωμένη δρομολόγηση: γρηγορότερη, με καλύτερη ακρίβεια, μέχρι 250 χλμ
-\n\t* Παρουσίαση χαρτών δρόμοι-μόνο
-\n\t* Ο χάρτης δεν χάνει το κλείδωμα θέσης μετά από διακοπές
+\n\t* Εισαγωγή οδικών-μόνο χαρτών\n\t* Ο χάρτης δεν χάνει το κλείδωμα θέσης μετά από διακοπές
 \n\t* Ενεργοποίηση της υπηρεσίας παρασκηνίου κατά την πλοήγηση "</string>
+    <string name="rendering_attr_showRoadMaps_description">Επιλέξτε πότε θα εμφανίζονται οδικοί-μόνο χάρτες:</string>
+	<string name="rendering_attr_showRoadMaps_name">Οδικοί-μόνο χάρτες</string>
+    <string name="download_roads_only_item">"Δρόμοι "</string>
+    <string name="download_regular_maps">Κανονικοί χάρτες</string>
+    <string name="download_roads_only_maps">Οδικοί-μόνο χάρτες</string>
     </resources>
