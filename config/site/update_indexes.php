@@ -1,5 +1,5 @@
 <?php
-function loadIndexesFromDir($out, $outputIndexes, $dir, $elementName, $mapNodes){
+function loadIndexesFromDir($output, $outputIndexes, $dir, $elementName, $mapNodes){
 	$local_file = basename($_SERVER['PHP_SELF']) == basename(__FILE__);
 	if (is_dir($dir)) {
 		if ($dh = opendir($dir)) {
@@ -28,12 +28,13 @@ function loadIndexesFromDir($out, $outputIndexes, $dir, $elementName, $mapNodes)
                                         
                     if($localdate->getTimestamp() <= $exdate->getTimestamp()) {
 						continue;
-					}					
-					if($out -> getAttribute("parts")) {
+					}	
+					$out = $mapNodes[$indexName];				
+					//if($out -> getAttribute("parts")) {
 						$outputIndexes->removeChild($out);
 						$out = $output->createElement( $elementName);
 						$outputIndexes->appendChild($out);
-					}
+					//}
 				} else {
 					$out = $output->createElement( $elementName);
 					$outputIndexes->appendChild($out);
