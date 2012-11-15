@@ -21,7 +21,7 @@
 	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="showRoadMaps" name="Show road maps" description="Select how to show maps that have only road information."
-		type="string" possibleValues="yes,only_roads,no"/>
+		type="string" possibleValues="Always - never show normal maps,If no other maps available,Never"/>
 
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff"/>
@@ -30,9 +30,9 @@
 	</renderingAttribute>
 	
 	<renderingAttribute name="showRoadMapsAttribute">
-		<filter showRoadMaps="only_roads" attrIntValue="1"/>
-		<filter showRoadMaps="yes" attrIntValue="0"/>
-		<filter showRoadMaps="no" attrIntValue="-1"/>
+		<filter showRoadMaps="Always - never show normal maps" attrIntValue="1"/>
+		<filter showRoadMaps="If no other maps available" attrIntValue="0"/>
+		<filter showRoadMaps="Never" attrIntValue="-1"/>
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
 
@@ -57,14 +57,17 @@
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
+	<!-- Minimum polygon size in pixels -->
 	<renderingAttribute name="polygonMinSizeToDisplay">
 		<filter attrIntValue="100"/>
 	</renderingAttribute>
 	
+	<!-- 8 (=1 pixel tile) down to 0 (=large tile) -->
 	<renderingAttribute name="roadDensityZoomTile">
 		<filter attrIntValue="3"/>
 	</renderingAttribute>
 	
+	<!-- Number of roads to display per tile -->
 	<renderingAttribute name="roadsDensityLimitPerTile">
 		<filter attrIntValue="12"/>
 	</renderingAttribute>

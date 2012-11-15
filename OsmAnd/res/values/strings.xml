@@ -9,8 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="rendering_attr_showRoadMaps_description">Select how to display roads-only maps:</string>
-	<string name="rendering_attr_showRoadMaps_name">Show roads-only maps</string>
+	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
+	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
