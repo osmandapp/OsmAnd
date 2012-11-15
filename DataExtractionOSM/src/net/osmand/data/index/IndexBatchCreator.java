@@ -85,6 +85,9 @@ public class IndexBatchCreator {
 	boolean indexRouting = false;
 	
 	private String wget;
+
+	private DBDialect osmDbDialect;
+	private DBDialect mapDBDialect;
 	
 	public static void main(String[] args) {
 		IndexBatchCreator creator = new IndexBatchCreator();
@@ -241,7 +244,7 @@ public class IndexBatchCreator {
 		String osmDbDialect = process.getAttribute("osmDbDialect");
 		if(osmDbDialect != null && osmDbDialect.length() > 0){
 			try {
-				IndexCreator.dialect = DBDialect.valueOf(osmDbDialect.toUpperCase());
+				this.osmDbDialect = DBDialect.valueOf(osmDbDialect.toUpperCase());
 			} catch (RuntimeException e) {
 			}
 		}
@@ -249,7 +252,7 @@ public class IndexBatchCreator {
 		String mapDbDialect = process.getAttribute("mapDbDialect");
 		if (mapDbDialect != null && mapDbDialect.length() > 0) {
 			try {
-				IndexCreator.mapDBDialect = DBDialect.valueOf(mapDbDialect.toUpperCase());
+				this.mapDBDialect = DBDialect.valueOf(mapDbDialect.toUpperCase());
 			} catch (RuntimeException e) {
 			}
 		}
@@ -439,8 +442,12 @@ public class IndexBatchCreator {
 			} else {
 				rName = Algoritms.capitalizeFirstLetterAndLowercase(rName);
 			}
-			
+			DBDialect osmDb = this.osmDbDialect;
+			if(f.length() / 1024 / 1024 > 300 && osmDb == DBDialect.SQLITE_IN_MEMORY) {
+				osmDb = DBDialect.SQLITE;
+			}
 			IndexCreator indexCreator = new IndexCreator(workDir);
+			indexCreator.setDialects(osmDb, this.mapDBDialect);
 			indexCreator.setIndexAddress(indexAddress);
 			indexCreator.setIndexPOI(indexPOI);
 			indexCreator.setIndexTransport(indexTransport);
