@@ -144,7 +144,7 @@
                 <replaceregexp file="AndroidManifest.xml" match='"@drawable/icon"' replace='"@drawable/icon_free"' byline="true" />
                 <replaceregexp file="AndroidManifest.xml" match='package="net.osmand.plus"' replace='package="net.osmand"' byline="true" />
                 <replaceregexp file="AndroidManifest.xml" match='android:process="net.osmand.plus"' replace='android:process="net.osmand"' byline="true" />
-                <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;OsmAnd&lt;' byline="true" />
+                <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand&lt;' byline="true" />
             	<replaceregexp file="res/layout/search_address.xml" match='net.osmand.plus' replace='net.osmand' byline="true" />
             	<replaceregexp file="res/layout/navigate_point.xml" match='net.osmand.plus' replace='net.osmand' byline="true" />
             </then>
@@ -159,7 +159,7 @@
                 <isset property="net.osmand.plus" />
             </condition>
             <then>
-                <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;OsmAnd+&lt;' byline="true" />
+                <replaceregexp file="res/values/no_translate.xml" match='"app_name"&gt;(.*)&lt;' replace='"app_name"&gt;Osmand+&lt;' byline="true" />
             </then>
         </if>
         <if>
