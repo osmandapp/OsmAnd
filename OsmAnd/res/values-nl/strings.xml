@@ -1043,4 +1043,9 @@
 \n\t* Verbeterde routeberekening, sneller en nauwkeuriger (tot 250 km)
 \n\t* Wegenkaart (toont alleen wegen)\n\t* Kaart houdt de positie vast na onderbrekingen
 \n\t* Zet achtergrond service aan tijdens navigatie "</string>
+    <string name="rendering_attr_showRoadMaps_description">Selecteer wanneer alleen-wegen kaarten moeten worden weergegeven:</string>
+	<string name="rendering_attr_showRoadMaps_name">Alleen-wegen kaarten</string>
+    <string name="download_roads_only_item">"Wegen "</string>
+    <string name="download_regular_maps">Normale kaarten</string>
+    <string name="download_roads_only_maps">Alleen-wegen kaarten</string>
     </resources>
