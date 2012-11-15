@@ -340,7 +340,7 @@
 	<string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} נ״ע/תקלות נשלחו</string>
 	<string name="local_openstreetmap_uploadall">לשלוח הכול</string>
-	<string name="local_openstreetmap_items"/>
+	<string name="local_openstreetmap_items">" "</string>
 	<string name="local_openstreetmap_show">הצגה במפה</string>
 	<string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
 	<string name="local_openstreetmap_delete">מחיקת השינוי</string>
@@ -536,7 +536,7 @@
 	<string name="local_index_address_data">נתוני כתובת</string>
 	<string name="local_index_transport_data">נתוני תעבורה</string>
 	<string name="local_index_map_data">נתוני מפה</string>
-	<string name="local_index_items"/>
+	<string name="local_index_items">" "</string>
 	<string name="local_indexes_cat_backup">מנוטרל</string>
 	<string name="local_indexes_cat_tts">נתוני קול (טקסט לדיבור)</string>
 	<string name="local_indexes_cat_voice">נתוני קול (מוקלטים)</string>
