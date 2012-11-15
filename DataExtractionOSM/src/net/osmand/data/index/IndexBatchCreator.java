@@ -444,6 +444,7 @@ public class IndexBatchCreator {
 			}
 			DBDialect osmDb = this.osmDbDialect;
 			if(f.length() / 1024 / 1024 > 300 && osmDb == DBDialect.SQLITE_IN_MEMORY) {
+				log.warn("Switching SQLITE in memory dialect to SQLITE");
 				osmDb = DBDialect.SQLITE;
 			}
 			IndexCreator indexCreator = new IndexCreator(workDir);

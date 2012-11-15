@@ -340,7 +340,7 @@
 			<region name="iran" esize="1"/>
 			<region name="iraq" esize="1"/>
 			<region name="israel_and_palestine" esize="1"/>
-		<!-- comment for a while does not fit native memory	<region name="japan" esize="1"/> -->
+		    <region name="japan" esize="1"/>
 			<region name="kazakhstan" esize="1"/>
 			<region name="kyrgyzstan" esize="1"/>
 			<region name="malaysia_singapore_brunei" esize=""/>
