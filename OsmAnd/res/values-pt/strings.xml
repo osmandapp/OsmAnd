@@ -1003,4 +1003,14 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="btn_add_tag">Adicionar tag</string>
     <string name="local_openstreetmap_items"/>
 	<string name="local_index_items"/>
+	<string name="rendering_attr_showRoadMaps_description">Selecione quando exibir mapas somente de estradas:</string>
+	<string name="rendering_attr_showRoadMaps_name">Mapas de estradas</string>
+    <string name="download_roads_only_item">"Estradas "</string>
+    <string name="download_regular_maps">Mapas normais</string>
+    <string name="download_roads_only_maps">Mapas de estradas</string>
+    <string name="safe_mode_description">Executar a aplicação em modo seguro (menos eficiente).</string>
+    <string name="safe_mode">Modo seguro</string>
+    <string name="native_library_not_running">O aplicativo está sendo executado em modo seguro (desabilite em Configurações).</string>
+    <string name="background_service_is_enabled_question">Serviço em segundo plano ainda em execução. Deseja cancelá-lo?</string>
+    <string name="close_changeset">Fechar conjunto de alterações</string>
 	</resources>
