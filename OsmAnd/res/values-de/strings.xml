@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="safe_mode_description">Applikation läuft im abgesicherten Modus (verwendet langsameren Android statt nativem Code).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
@@ -287,8 +287,8 @@
 		\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
 	</string>
 	<string name="binary_map_download_success">Download erfolgreich.
-		\n\t
-		\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle...\' → \'Offline-Vektor-Karten\'</string>
+\n\t
+\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
 		\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
@@ -1125,7 +1125,7 @@
 	<string name="filterpoi_activity">POI-Filter erstellen</string>
 	<string name="email">email</string>
 <string name="btn_add_tag">Eintrag hinzufügen</string>
-<string name="btn_advanced_mode">Ergänzende Angaben...</string>
+<string name="btn_advanced_mode">Ergänzende Angaben…</string>
 <string name="poi_filter_parking">Parkplatz</string>
 <string name="poi_filter_emergency">Notfall</string>
 <string name="poi_filter_public_transport">ÖPNV</string>
