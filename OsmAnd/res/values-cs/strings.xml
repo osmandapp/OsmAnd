@@ -1052,7 +1052,7 @@
 <string name="map_widget_intermediate_distance">Bod trasy</string>
 <string name="ending_point_too_far">Cíl je příliš daleko od nejbližší cesty.</string>
 <string name="btn_add_tag">Přidat označení</string>
-<string name="btn_advanced_mode">Pokročilé...</string>
+<string name="btn_advanced_mode">Pokročilé…</string>
 <string name="tip_app_mode_t_v2">\tOsmAnd podporuje několik konfigurovatelných profilů pro různé způsoby dopravy.
 \t\nProfil můžete změnit tlačítkem v levém dolním rohu mapové obrazovky (ikona auta, kola nebo chodce) nebo při zadávání navigace.
 </string>
