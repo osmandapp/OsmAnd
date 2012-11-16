@@ -1,0 +1,441 @@
+
+aerodrome,Letališèe
+arts_centre,Arts Centre
+arts_centre,Arts Center
+atm,bankomat
+auditorium,Avditorij
+bank,Banka
+bar,Bar
+pub,Pivnica
+bench,klopca
+bicycle_parking,Parkirišèe koles
+bicycle_rental,Najem koles
+brothel,Brothel
+bureau_de_change,Menjalnica
+bus_station,Avtobusna postaja
+cafe,Kavarna
+car_rental,Najem avtomobilov
+car_sharing,Car Sharing
+car_wash,Avtopralnica
+casino,Casino
+cinema,Kino
+clinic,Klinika
+club,Club
+college,College
+community_centre,Community Centre
+community_centre,Community Center
+courthouse,Courthouse
+crematorium,Krematorij
+dentist,Zobozdravnik
+doctors,Zdravnik
+dormitory,Dormitory
+drinking_water,Pitna voda
+driving_school,Avtošola
+embassy,Ambasada
+emergency_phone,Emergency Phone
+fast_food,Hitra prehrana
+restaurant,Restavracija
+ferry_terminal,Trajektni terminal
+fire_hydrant,Požarni hidrant
+fire_station,Gasilski dom
+fountain,Fontana
+fuel,Bencinska èrpalka
+fuel,Gorivo
+grave_yard,Pokopališèe
+gym,Telovadnica
+hall,Dvorana
+health_centre,Zdravstveni dom
+hospital,Bolnica
+hospital,Bolnišnica
+hotel,Hotel
+hunting_stand,Lovska preža
+ice_cream,Sladoled
+kindergarten,Vrtec
+library,Knjižnica
+market,Market
+marketplace,Marketplace
+mountain_rescue,Mountain Rescue
+nightclub,Night Club
+nightclub,Night Clubs
+nursery,Nursery
+nursery,Nurserys
+nursery,Nurseries
+nursing_home,Nursing Home
+nursing_home,Nursing Homes
+office,Pisarna
+park,Park
+parking,Parkirišèe
+pharmacy,Lekarna
+place_of_worship,Cerkev
+police,Policija
+post_box,Poštni nabiralnik
+post_office,Pošta
+preschool,Pre-School
+prison,Zapor
+public_building,Public Building
+public_market,Public Market
+reception_area,Reception Area
+recycling,Recycling Point
+restaurant,Restaurant
+retirement_home,Retirement Home
+sauna,Savna
+school,Šola
+shelter,Shelter
+shop,Trgovina
+shopping,Shopping
+social_club,Social Club
+studio,Studio
+supermarket,Supermarket
+taxi,Taxi
+telephone,Telefon
+theatre,Gledališèe
+toilets,Stranišèe
+townhall,Mestna hiša
+university,Univerza
+vending_machine,Prodajni avtomat
+veterinary,Veterinarska klinika
+village_hall,Village Hall
+waste_basket,Smeti
+waste_basket,Koš za smeti
+waste_basket,Smetnjak
+wifi,WiFi dostop
+wifi,WiFi
+youth_centre,Mladinski center
+apartments,Stanovanjski blok
+block,Blok
+bunker,Bunker
+chapel,Kapelica
+church,Cerkev
+city_hall,Mestna hiša
+commercial,Commercial Building
+dormitory,Dormitory
+entrance,vhod v stavbo
+entrance,vhod
+faculty,Fakulteta
+farm,Kmetija
+flats,Stanovanja
+garage,Garage
+house,Hiša
+industrial,Proizvodni objekt
+office,Office Building
+public,Javni objekt
+residential,Stanovanjski objekt
+retail,Trgovski objekt
+school,Šolski objekt
+stadium,Stadion
+store,Trgovina
+terrace,Terrace
+tower,Stolp
+train_station,Postaja
+train_station,Železniška postaja
+university,Univerza
+yes,Stavba
+bridleway,Bridleway
+bus_guideway,Guided Bus Lane
+bus_stop,Avtobusno postajališèe
+byway,Byway
+construction,Cesta v delu
+cycleway,Kolesarska steza
+distance_marker,Distance Marker
+emergency_access_point,Emergency Access Point
+footway,Pešpot
+ford,Ford
+gate,Vrata
+living_street,Living Street
+minor,Minor Road
+motorway,Avtocesta
+motorway_junction,Avtocestno križišèe
+motorway_link,Avtocestni prikljuèek
+path,Pot
+pedestrian,Ploènik
+platform,Platforma
+primary,Glavna cesta
+primary_link,Prikljuèek na glavno cesto
+raceway,Dirkališèe
+residential,Stanovanjska cesta
+rest_area,Poèivališèe
+road,Cesta
+secondary,Regionalna cesta
+secondary_link,Regionalna cesta
+service,Servisna cesta
+services,Avtocestno postajališèe
+steps,Stopnice
+stile,Prehod preko ograje
+tertiary,Lokalna cesta
+track,Kolovoz
+trail,Sled
+trunk,Hitra cesta
+trunk_link,Hitra cesta
+unclassified,Neopredeljena cesta
+unsurfaced,Makadamska pot
+archaeological_site,Arheološko najdbišèe
+battlefield,Bojišèe
+boundary_stone,Mejni kamen
+building,Zgradba
+castle,Grad
+church,Cerkev
+house,Hiša
+icon,Ikona
+manor,Grašèina
+memorial,Spomenik
+mine,Rudnik
+monument,Spomenik
+museum,Muzej
+ruins,Ruševine
+tower,Stolp
+wayside_cross,Križ
+wayside_shrine,Kapelica
+wreck,Razbitina
+allotments,Vrtièki
+basin,Èistilni bazen
+brownfield,Gradbišèe
+cemetery,Pokopališèe
+commercial,Poslovna cona
+conservation,Zašèiteno podroèje
+construction,Gradbišèe
+farm,Kmetija
+farmland,Kmetijsko zemljišèe
+farmyard,Farmyard
+forest,Forest
+grass,Grass
+greenfield,Greenfield Land
+industrial,Industrial Area
+landfill,Landfill
+meadow,Meadow
+military,Military Area
+mine,Mine
+mountain,Mountain
+nature_reserve,Nature Reserve
+nature_reserve,Nature Reserves
+park,Park
+piste,Piste
+plaza,Plaza
+quarry,Quarry
+railway,Railway
+recreation_ground,Recreation Ground
+reservoir,Reservoir
+residential,Residential Area
+retail,Retail
+village_green,Village Green
+vineyard,Vineyard
+wetland,Wetland
+wood,Wood
+beach_resort,Beach Resort
+common,Common Land
+fishing,Fishing Area
+garden,Garden
+golf_course,Golf Course
+hackerspace,Hackerspace
+ice_rink,Ice Rink
+marina,Marina
+miniature_golf,Miniature Golf
+nature_reserve,Nature Reserve
+nature_reserve,Nature Reserves
+park,Park
+pitch,Sports Pitch
+playground,Playground
+recreation_ground,Recreation Ground
+slipway,Slipway
+sports_centre,Sports Centre
+sports_centre,Sports Centre
+stadium,Stadium
+swimming_pool,Swimming Pool
+track,Running Track
+water_park,Water Park
+bay,Bay
+beach,Beach
+cape,Cape
+cave_entrance,Cave Entrance
+channel,Channel
+cliff,Cliff
+coastline,Coastline
+crater,Crater
+feature,Feature
+fell,Fell
+fjord,Fjord
+geyser,Geyser
+glacier,Glacier
+heath,Heath
+hill,Hill
+island,Island
+land,Land
+marsh,Marsh
+moor,Moor
+mud,Mud
+peak,Peak
+point,Point
+reef,Reef
+ridge,Ridge
+river,River
+rock,Rock
+scree,Scree
+scrub,Scrub
+shoal,Shoal
+spring,Spring
+strait,Strait
+tree,Tree
+valley,Valley
+volcano,Volcano
+water,Water
+wetland,Wetland
+wetlands,Wetlands
+wood,Wood
+city,City
+country,Country
+county,County
+farm,Farm
+hamlet,Hamlet
+house,House
+houses,Houses
+island,Island
+islet,Islet
+locality,Locality
+moor,Moor
+municipality,Municipality
+postcode,Postcode
+region,Region
+sea,Sea
+state,State
+subdivision,Subdivision
+suburb,Suburb
+town,Town
+unincorporated_area,Unincorporated Area
+village,Village
+abandoned,Abandoned Railway
+construction,Railway under Construction
+disused,Disused Railway
+disused_station,Disused Railway Station
+funicular,Funicular Railway
+halt,Train Stop
+historic_station,Historic Railway Station
+junction,Railway Junction
+level_crossing,Level Crossing
+light_rail,Light Rail
+monorail,Monorail
+narrow_gauge,Narrow Gauge Railway
+narrow_gauge,Narrow Gauge Railways
+platform,Railway Platform
+preserved,Preserved Railway
+spur,Railway Spur
+station,Railway Station
+station,Station
+subway,Subway Station
+subway_entrance,Subway Entrance
+switch,Railway Points
+tram,Tramway
+tram_stop,Tram Stop
+yard,Railway Yard
+alcohol,Off License
+apparel,Apparel Shop
+art,Art Shop
+bakery,Bakery
+beauty,Beauty Shop
+beverages,Beverages Shop
+bicycle,Bicycle Shop
+books,Book Shop
+butcher,Butcher
+car,Car Shop
+car_dealer,Car Dealer
+car_parts,Car Parts
+carpet,Carpet Shop
+car_repair,Car Repair
+charity,Charity Shop
+chemist,Chemist
+clothes,Clothes Shop
+computer,Computer Shop
+confectionery,Confectionery Shop
+convenience,Convenience Store
+copyshop,Copy Shop
+cosmetics,Cosmetics Shop
+department_store,Department Store
+discount,Discount Items Shop
+doityourself,Do-It-Yourself
+drugstore,Drugstore
+dry_cleaning,Dry Cleaning
+electronics,Electronics Shop
+estate_agent,Estate Agent
+farm,Farm Shop
+fashion,Fashion Shop
+fish,Fish Shop
+florist,Florist
+food,Food Shop
+funeral_directors,Funeral Director
+furniture,Furniture
+gallery,Gallery
+garden_centre,Garden Centre
+garden_centre,Garden Center
+general,General Store
+gift,Gift Shop
+greengrocer,Greengrocer
+grocery,Grocery Shop
+hairdresser,Hairdresser
+hardware,Hardware Store
+hifi,Hi-Fi
+insurance,Insurance
+jewelry,Jewelry Shop
+kiosk,Kiosk Shop
+laundry,Laundry
+mall,Mall
+market,Market
+mobile_phone,Mobile Phone Shop
+motorcycle,Motorcycle Shop
+music,Music Shop
+newsagent,Newsagent
+newsagent,Newsagents
+optician,Optician
+organic,Organic Food Shop
+outdoor,Outdoor Shop
+pet,Pet Shop
+photo,Photo Shop
+salon,Salon
+shoes,Shoe Shop
+shopping_centre,Shopping Centre
+shopping_centre,Shopping Center
+sports,Sports Shop
+stationery,Stationery Shop
+supermarket,Supermarket
+toys,Toy Shop
+travel_agency,Travel Agency
+video,Video Shop
+wine,Off License
+alpine_hut,Alpine Hut
+artwork,Artwork
+attraction,Attraction
+bed_and_breakfast,Bed and Breakfast
+cabin,Cabin
+camp_site,Camp Site
+caravan_site,Caravan Site
+chalet,Chalet
+guest_house,Guest House
+hostel,Hostel
+hotel,Hotel
+information,Information
+lean_to,Lean To
+motel,Motel
+museum,Museum
+picnic_site,Picnic Site
+theme_park,Theme Park
+valley,Valley
+viewpoint,Viewpoint
+zoo,Zoo
+boatyard,Boatyard
+canal,Canal
+connector,Waterway Connector
+dam,Dam
+derelict_canal,Derelict Canal
+ditch,Ditch
+dock,Dock
+drain,Drain
+lock,Lock
+lock_gate,Lock Gate
+mineral_spring,Mineral Spring
+mooring,Mooring
+rapids,Rapids
+river,River
+riverbank,Riverbank
+stream,Stream
+wadi,Wadi
+waterfall,Waterfall
+water_point,Water Point
+weir,Weir
+windmill,Windmill

@@ -271,7 +271,7 @@ municipality,Občina
 postcode,Poštna številka
 region,Regija
 sea,Morje
-state,"Država (ZDA):"
+state,Država
 subdivision,Pododdelek
 suburb,Predmestje
 town,Mesto
