@@ -794,7 +794,7 @@
 <string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció «%s»</string>
 <string name="amenity_type_geocache">Geoenmegatzament</string>
 <string name="use_osmand_routing_service_descr">L\'us de la navagacio fora de línia d\'OsmAnd s\'aplica nomes a rutes &gt; 20km (experimental)</string>
-<string name="btn_advanced_mode">Mode avançat...</string>
+<string name="btn_advanced_mode">Mode avançat…</string>
 <string name="poi_filter_parking">Aparcament</string>
 <string name="poi_filter_public_transport">Transport públic</string>
 <string name="poi_filter_emergency">Emergències</string>
@@ -960,7 +960,7 @@
 \n\tPer compartir qualsevol ubicació que desitges:
 \n\tUsa «Menú contextual de mapa» -&gt; «Comparteix ubicació».
 \n\tLlavors selecciona una via per compartir la teva ubicació.Les opcions son: Correu electrònic,SMS(text),o només copiar l\'ubicació en el porta retalls. "</string>
-	<string name="enable_plugin_monitoring_services">"Habilita els connectors de monitorització (enregistrament, enregistrament en viu) per poder utilitzar els serveis de monitorització "</string>
+	<string name="enable_plugin_monitoring_services">Habilita els connectors de monitorització (enregistrament, enregistrament en viu) per poder utilitzar els serveis de monitorització</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
     <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar al Market?</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color per a carreteres</string>
