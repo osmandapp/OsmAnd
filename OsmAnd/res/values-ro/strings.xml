@@ -554,7 +554,7 @@
 	<string name="search_position_address">Adresă…</string>
 	<string name="search_position_favorites">Favorite…</string>
 	<string name="search_position_undefined">Necunoscută</string>
-	<string name="search_position_fixed">Fixă</string>
+	<string name="search_position_fixed">Coord</string>
 	<string name="search_position_current_location">Poziția curentă…</string>
 	<string name="search_position_map_view">Ultima afișare a harții</string>
 	<string name="select_search_position">Caută pe lângă:</string>
@@ -990,7 +990,7 @@
 	<string name="auth_failed">Autorizarea a eșuat</string>
 	<string name="failed_op">eșuat</string>
 	<string name="converting_names">Conversie nume din nativ în engleză…</string>
-	<string name="loading_streets_buildings">Se încarcă străzi/clădiri…</string>
+	<string name="loading_streets_buildings">Se încarcă străzi/numere…</string>
 	<string name="loading_postcodes">Se încarcă coduri poștale…</string>
 	<string name="loading_streets">Se încarcă străzi…</string>
 	<string name="loading_cities">Se încarcă orașe…</string>
@@ -1040,7 +1040,7 @@
 	<string name="use_english_names">Folosește denumiri pe hartă în engleză</string>
 	<string name="app_settings">Setări aplicație</string>
 	<string name="search_address">Cautare adresă</string>
-	<string name="choose_building">Alegeți clădirea</string>
+	<string name="choose_building">Alegeți numărul</string>
 	<string name="choose_street">Alegeți strada</string>
 	<string name="choose_city">Alegeți orașul</string>
 	<string name="ChooseCountry">Alegeți țara</string>
