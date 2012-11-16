@@ -996,7 +996,7 @@
     <string name="map_widget_intermediate_distance">Punkt drogi</string>
     <string name="ending_point_too_far">Punkt końcowy jest zbyt daleko od najbliższej ulicy.</string>
     <string name="btn_add_tag">Dodaj znacznik</string>
-    <string name="btn_advanced_mode">Tryb zaawansowany...</string>
+    <string name="btn_advanced_mode">Tryb zaawansowany…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Niebezpieczeństwo</string>
     <string name="poi_filter_public_transport">Transport publiczny</string>
