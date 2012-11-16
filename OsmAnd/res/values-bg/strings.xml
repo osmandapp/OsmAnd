@@ -936,7 +936,7 @@
     <string name="map_widget_intermediate_distance">Междинна точка</string>
     <string name="ending_point_too_far">Крайната точка е твърде далеч от най-близкия път.</string>
     <string name="btn_add_tag">Добави маркер</string>
-    <string name="btn_advanced_mode">Разширен режим...</string>
+    <string name="btn_advanced_mode">Разширен режим…</string>
     <string name="poi_filter_parking">Паркиране</string>
     <string name="poi_filter_emergency">Спешно</string>
     <string name="poi_filter_public_transport">Публичен транспорт</string>
