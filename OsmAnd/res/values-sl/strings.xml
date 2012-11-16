@@ -45,14 +45,14 @@
 	<string name="context_menu_item_open_bug">Odpri OSM napako</string>
 	<string name="context_menu_item_update_map">Osveži karto</string>
 	<string name="search_tabs_location">Lokacija</string>
-	<string name="add_favorite_dialog_default_favourite_name">Priljubljene</string>
-	<string name="add_favorite_dialog_top_text">Vnesite priljubljeno ime</string>
+	<string name="add_favorite_dialog_default_favourite_name">Priljubljena lokacija</string>
+	<string name="add_favorite_dialog_top_text">Vnesite ime priljubljene lokacije</string>
 	<string name="favourites_context_menu_navigate">Nastavi cilj</string>
 	<string name="favourites_context_menu_edit">Uredi priljubljeno lokacijo</string>
 	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
 	<string name="add_favorite_dialog_favourite_added_template">Priljubljena lokacija \'\'{0}\'\' je bila dodana.</string>
 	<string name="favourites_remove_dialog_msg">Odstrani priljubljeno lokacijo \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Priljubljene lokacija {0} je bila izbrisana.</string>
+	<string name="favourites_remove_dialog_success">Priljubljena lokacija {0} je bila izbrisana.</string>
 	<string name="poi_edit_title">Uredi POI</string>
 	<string name="poi_create_title">Ustvari POI</string>
 	<string name="poi_error_poi_not_found">Točke ni mogoče najti ali pa usluga ni samostojna točka</string>
@@ -419,7 +419,7 @@
 	<string name="level_to_switch_vector_raster">Min. povečava za vektorske zemljevide</string>
 	<string name="tip_location_sharing">Deljenje lokacije</string>
 	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: E-pošta, SMS(besedilo), ali pa samo kopiranje koordinate lokacij za odlagališče. "</string>
-	<string name="tip_favorites">Priljubljene točke</string>
+	<string name="tip_favorites">Priljubljene lokacije</string>
 	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0:\n\t* Izboljšano, hitrejše in bolj natančno usmerjanje (do 250 km)\n\t* Zemljevid cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju "</string>
     <string name="close_changeset">Zapri paket sprememb</string>
 	<string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner ni nameščena. Naj jo poiščem v Market-u?</string>
@@ -527,4 +527,7 @@
 	<string name="favourites_delete_multiple_succesful">Priljubljene lokacije so uspešno izbrisane.</string>
 	<string name="show_poi_on_map">Prikaži na zemljevidu</string>
 	<string name="search_select_point">Izberi</string>
+	<string name="favorite">Priljubljena</string>
+	<string name="fav_points_edited">Priljubljena lokacija je bila urejena</string>
+	<string name="fav_points_not_exist">Ni priljubljenih lokacij</string>
 	</resources>
