@@ -972,7 +972,7 @@
     <string name="map_widget_intermediate_distance">Wegpunt</string>
     <string name="ending_point_too_far">Eindpunt te ver van naaste pad.</string>
     <string name="btn_add_tag">Voeg naamplaatjie by</string>
-    <string name="btn_advanced_mode">Gevorderde gebruikswyse...</string>
+    <string name="btn_advanced_mode">Gevorderde gebruikswyse…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Noodgeval</string>
     <string name="poi_filter_public_transport">Publieke vervoer</string>
