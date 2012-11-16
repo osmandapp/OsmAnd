@@ -1006,7 +1006,7 @@
 <string name="map_widget_intermediate_distance">Routepunt</string>
 <string name="ending_point_too_far">Eindpunt te ver van dichtstbijzijnde weg.</string>
 <string name="btn_add_tag">Tag toevoegen</string>
-<string name="btn_advanced_mode">Geavanceerde modus...</string>
+<string name="btn_advanced_mode">Geavanceerde modus…</string>
 <string name="poi_filter_parking">Parkeren</string>
 <string name="poi_filter_emergency">Hulpdiensten</string>
 <string name="poi_filter_public_transport">Openbaar vervoer</string>
