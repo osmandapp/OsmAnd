@@ -95,14 +95,14 @@
   <string name="map_settings_descr">Konfigurácia mapového zobrazenia</string>
   <string name="osmand_rastermaps_plugin_description">Zobrazenie nastavení pre nakonfigurovanie rozličných online alebo ukladaných máp ako základnú mapu alebo ako prekrývaciu / podkladovú mapu. Tieto mapy môžu byť tiež pripravené offline a skopírované do zložky OsmAnd.</string>
   <string name="osmand_background_plugin_description">Zobrazenie nastavení na povolenie stopovania a navigácie v režime spánku (vypnutá obrazovka) pravidelným prebúdzaním GPS zariadenia.</string>
-  <string name="osmand_accessibility_description">Zobrazenie nastavení pre špeciálne funkcie prístupnosti.</string>
+  <string name="osmand_accessibility_description">Zobrazenie nastavení pre špeciálne funkcie uľahčenia prístupu.</string>
   <string name="extra_settings">Pokročilé nastavenia</string>
   <string name="osmand_monitoring_description">Tento modul Vám umožní zaznamenávať Vaše cesty, ukladať GPX súbory a vykonávať živé sledovanie založené na webovej službe.</string>
   <string name="osmand_extra_settings_description">Zobrazenie nastavení pre pokročilú konfiguráciu mapy (ako zvýšenie detailov mapy) a niektoré špecifiká zariadenia.</string>
   <string name="osmand_development_plugin_description">Zobrazenie nastavení pre funkcie vývoja a ladenia ako animovanie navigácie alebo zobrazenie výkonu vykreslovania.</string>
   <string name="plugins_screen">Správca zásuvných modulov</string>
   <string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. (Pre aplikovanie zmien môže byť vyžadovaný reštart.)</string>
-  <string name="prefs_plugins_descr">Zás. moduly povoľujú expertný režim nastavení a poskytujú extra funkcie ako dlaždicové mapy, stopovanie, operácie v režime spánku, nastavenia prístupnosti a iné.</string>
+  <string name="prefs_plugins_descr">Zás. moduly povoľujú expertný režim nastavení a poskytujú extra funkcie ako dlaždicové mapy, stopovanie, operácie v režime spánku, nastavenia uľahčenia prístupu a iné.</string>
   <string name="prefs_plugins">Správca zásuvných modulov</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmeny vo verzii 0.8.0 :
 \n\t- *Funkcia zásuvných modulov*\n\t - Väčšina funkčnosti je zoskupená podľa funkcií, ktoré môžu byť zapnuté/vypnuté v Správcovi zásuvných modulov. Môžete povoliť (online alebo uložené) zdroje mapových dlaždíc, nastavenia stopovania a mnoho iných nových a predošle existujúcich funkcií.\n\t- *Podpora nových offline mapových dát*\n\t - Vykresľovanie bolo zrýchlené a oveľa presnejšie (problémy s pobrežiami a zaplavenými plochami boli opravené)\n\t - Musíte stiahnuť kompletne nové offline údaje (staré údaje už nebudú viac podporované)\n\t - *Offline navigácia*\n\t - Offline navigácia bola výrazne vylepšená\n\t *Použiteľnosť a skúsenosti s grafickým rozhraním*\n\t - Vylepšené v mnohých smeroch\n\t- Vylepšená použiteľnosť a zjednodušenie profilového konceptu\n\t- Mnoho opravených chýb "</string>
@@ -116,7 +116,7 @@
   <string name="tip_recent_changes_0_7_2_t">"Zmeny vo verzii 0.7.2 :
 \n\t- Natívne vykresľovanie pre všetky zariadenia
 \n\t- Offline upravovanie POI bodov
-\n\t- Prístupnosť
+\n\t- Uľahčenie prístupu
 \n\t- Veľa opravených chýb "</string>
   <string name="send_files_to_osm">Odoslať GPX súbory do OSM?</string>
   <string name="gpx_visibility_txt">Viditeľnosť</string>
@@ -131,10 +131,10 @@
   <string name="back_to_location">Späť na umiestnenie</string>
   <string name="help">Pomocník</string>
   <string name="show_details">Zobraziť podrobnosti</string>
-  <string name="accessibility_extensions_descr">Rozšírenia prístupnosti pre staršie verzie Androidu</string>
-  <string name="accessibility_extensions">Rozšírenia prístupnosti</string>
-  <string name="accessibility_mode">Režim prístupnosti</string>
-  <string name="accessibility_mode_descr">Zapnutie funkcií prístupnosti</string>
+  <string name="accessibility_extensions_descr">Rozšírenia uľahčenia prístupu pre staršie verzie Androidu</string>
+  <string name="accessibility_extensions">Rozšírenia uľahčenia prístupu</string>
+  <string name="accessibility_mode">Režim uľahčenia prístupu</string>
+  <string name="accessibility_mode_descr">Zapnutie funkcií uľahčenia prístupu</string>
   <string name="accessibility_on">Zapnutý</string>
   <string name="accessibility_off">Vypnutý</string>
   <string name="accessibility_default">Podľa globálnych nastavení systému</string>
@@ -184,8 +184,8 @@
   <string name="zoom_by_trackball">Použiť trackball na približovanie</string>
   <string name="use_short_object_names_descr">Použiť skrátené názvy objektov v režime prezerania dotykom</string>
   <string name="use_short_object_names">Použiť názvy objektov</string>
-  <string name="accessibility_preferences_descr">Predvoľby týkajúce sa prístupnosti</string>
-  <string name="accessibility_preferences">Prístupnosť</string>
+  <string name="accessibility_preferences_descr">Predvoľby týkajúce sa uľahčenia prístupu</string>
+  <string name="accessibility_preferences">Uľahčenie prístupu</string>
   <string name="rendering_out_of_memory">Nedostatok procesnej pamäte na zobrazenie zvolenej oblasti</string>
   <string name="use_fluorescent_overlays">Žiarivejšie prekrytia</string>
   <string name="use_fluorescent_overlays_descr">Použije žiarivejšie farby pre zobrazenie stôp a ciest</string>
