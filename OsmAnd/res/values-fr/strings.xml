@@ -1101,7 +1101,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="map_widget_intermediate_distance">Point intermédiaire</string>
     <string name="ending_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
     <string name="btn_add_tag">Ajouter une étiquette</string>
-    <string name="btn_advanced_mode">Mode avancé...</string>
+    <string name="btn_advanced_mode">Mode avancé…</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Urgences</string>
     <string name="poi_filter_public_transport">Transports publics</string>
