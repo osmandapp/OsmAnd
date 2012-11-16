@@ -962,7 +962,7 @@
     <string name="map_widget_intermediate_distance">Starppunkts</string>
     <string name="ending_point_too_far">Maršruta sākums ir pārāk tālu no tuvākā ceļa.</string>
     <string name="btn_add_tag">Pievienot Marķējumu (Tag)</string>
-    <string name="btn_advanced_mode">Paplašinātais režīms...</string>
+    <string name="btn_advanced_mode">Paplašinātais režīms…</string>
     <string name="poi_filter_parking">Parkošanās</string>
     <string name="poi_filter_emergency">Ātrā palīdzība</string>
     <string name="poi_filter_public_transport">Sabiedriskais transports</string>
