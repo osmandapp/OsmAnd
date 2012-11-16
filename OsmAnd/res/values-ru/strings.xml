@@ -1070,7 +1070,7 @@
 <string name="map_widget_intermediate_distance">Промежуточная точка</string>
 <string name="ending_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
 <string name="btn_add_tag">Добавить метку</string>
-<string name="btn_advanced_mode">Расширенный режим...</string>
+<string name="btn_advanced_mode">Расширенный режим…</string>
 <string name="poi_filter_parking">Парковки</string>
 <string name="poi_filter_emergency">Чрезвычайные обстоятельства</string>
 <string name="poi_filter_public_transport">Общественный транспорт</string>
