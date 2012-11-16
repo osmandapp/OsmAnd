@@ -526,4 +526,5 @@
 	<string name="favorite_delete_multiple">Izbrisali boste %1$d lokacijo in %2$d skupino. Ali ste prepričani?</string>
 	<string name="favourites_delete_multiple_succesful">Priljubljene lokacije so uspešno izbrisane.</string>
 	<string name="show_poi_on_map">Prikaži na zemljevidu</string>
+	<string name="search_select_point">Izberi</string>
 	</resources>
