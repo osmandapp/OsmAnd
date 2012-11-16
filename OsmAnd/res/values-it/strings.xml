@@ -1041,7 +1041,7 @@
 \n\t\'Con la bussola\' - La mappa sarà sempre allineata alla lettura della bussola del dispositivo "</string>
 <string name="tip_day_night_mode_t_v2">"\tL\'aspetto della mappa può, per alcune mappe vettoriali, essere cambiato fra diurno (luminoso) e notturno (scuro).
 \n\tI colori notturni sono più sicuri per la guida notturna.
-\n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo...\' -&gt;\'Giorno/notte mappa\'.
+\n\tTu puoi impostare una regola per il cambio giorno/notte in \'Menu\' -&gt; \'Configurazione schermo…\' -&gt;\'Giorno/notte mappa\'.
 \n\tLe scelte sono:
 \n\t\'Alba/Tramonto\' - automaticamente, in base alla posizione del sole (preimpostato)
 \n\t\'Day\' - usa sempre il modo diurno
@@ -1102,7 +1102,7 @@
 <string name="map_widget_intermediate_distance">Punto intermedio</string>
 <string name="ending_point_too_far">Punto finale troppo distante dalla strada più vicina.</string>
 <string name="btn_add_tag">Aggiungi etichetta</string>
-<string name="btn_advanced_mode">Modalità avanzata...</string>
+<string name="btn_advanced_mode">Modalità avanzata…</string>
 <string name="poi_filter_parking">Parcheggio</string>
 <string name="poi_filter_emergency">Emergenza</string>
 <string name="poi_filter_public_transport">Trasporto pubblico</string>
