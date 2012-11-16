@@ -38,7 +38,7 @@
   <string name="poi_filter_for_tourists">Pre turistov</string>
   <string name="poi_filter_fuel">Palivo</string>
   <string name="btn_add_tag">Pridať značku</string>
-  <string name="btn_advanced_mode">Pokročilý režim...</string>
+  <string name="btn_advanced_mode">Pokročilý režim…</string>
   <string name="snap_to_road_descr">Prichytenie pozície k cestám počas navigácie</string>
   <string name="snap_to_road">Prichytiť k ceste</string>
   <string name="avoid_motorway">Diaľniciam</string>
@@ -1097,7 +1097,7 @@
 	<string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
     <string name="background_service_is_enabled_question">Služba na pozadí je stále spustená. Chcete ju zrušiť?</string>
-    <string name="tip_recent_changes_1_0_0_t">Zmeny vo verzii 1.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie</string>
+    <string name="tip_recent_changes_1_0_0_t">"Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie "</string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v nastaveniach).</string>
     <string name="download_roads_only_maps">Iba mapy ciest</string>
     <string name="download_roads_only_item">Cesty</string>
