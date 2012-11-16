@@ -21,7 +21,7 @@
 	<renderingProperty attr="noPolygons" name="No polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="showRoadMaps" name="Show road maps" description="Select how to show maps that have only road information."
-		type="string" possibleValues="Always - never show regular maps,Where no regular map available,Never"/>
+		type="string" possibleValues="Always - never show regular maps,Where no regular map is available,Never"/>
 
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff"/>
@@ -30,8 +30,8 @@
 	</renderingAttribute>
 	
 	<renderingAttribute name="showRoadMapsAttribute">
-		<filter showRoadMaps="Always - never show normal maps" attrIntValue="1"/>
-		<filter showRoadMaps="Where no other map available" attrIntValue="0"/>
+		<filter showRoadMaps="Always - never show regular maps" attrIntValue="1"/>
+		<filter showRoadMaps="Where no regular map is available" attrIntValue="0"/>
 		<filter showRoadMaps="Never" attrIntValue="-1"/>
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
