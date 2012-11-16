@@ -39,7 +39,7 @@
     <string name="map_widget_intermediate_distance">נקודת ציון</string>
     <string name="ending_point_too_far">נקודת הסיום רחוקה מדי מהדרך הקרובה אליה.</string>
     <string name="btn_add_tag">הוספת תגית</string>
-    <string name="btn_advanced_mode">מצב מתקדם...</string>
+    <string name="btn_advanced_mode">מצב מתקדם…</string>
     <string name="poi_filter_parking">חנייה</string>
     <string name="poi_filter_emergency">חירום</string>
     <string name="poi_filter_public_transport">תחבורה ציבורית</string>
@@ -402,7 +402,7 @@
 \n\t\'לא לסובב (הצפון למעלה)\' - המפה לא תסתובב. הצפון תמיד יהיה למעלה
 \n\t\'לפי התנועה\' - המפה תתיישר תמיד עם כיוון התנועה שלך
 \n\t\'לפי המצפן\' - המפה תתיישר באופן סדיר עם קריאת המצפן של ההתקן "</string>
-	<string name="binary_map_download_success">ההורדה הושלמה.\n\t\n\tכדי להשתמש יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה...\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
+	<string name="binary_map_download_success">ההורדה הושלמה.\n\t\n\tכדי להשתמש יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה…\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
 	<string name="tip_day_night_mode">מצב יום/לילה</string>
 	<string name="tip_day_night_mode_t_v2">"\tניתן לשנות את אופן הצגת המפה בין תצוגת יום (בהיר יותר) ותצוגת לילה (כהה יותר).
 \n\tהצבעים הכהים יותר בטוחים למטרות נסיעת לילה.
