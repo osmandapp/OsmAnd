@@ -18,7 +18,7 @@
     <string name="map_widget_intermediate_distance">Välietappi</string>
     <string name="ending_point_too_far">Päätepiste on liian kaukana lähimmästä tiestä.</string>
     <string name="btn_add_tag">Lisää avainsana</string>
-    <string name="btn_advanced_mode">Edistynyt näkymä...</string>
+    <string name="btn_advanced_mode">Edistynyt näkymä…</string>
     <string name="poi_filter_parking">Pysäköinti</string>
     <string name="poi_filter_emergency">Hätätapaus</string>
     <string name="poi_filter_public_transport">Julkinen liikenne</string>
