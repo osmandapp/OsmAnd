@@ -1167,4 +1167,5 @@
     <string name="download_roads_only_item">"Drumuri "</string>
     <string name="download_regular_maps">Hărți complete</string>
     <string name="download_roads_only_maps">Hărți exclusiv cu drumuri</string>
-    </resources>
+    <string name="incomplete_locale">incomplet</string>
+	</resources>
