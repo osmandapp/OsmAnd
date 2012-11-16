@@ -987,7 +987,7 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="new_destination_point_dialog">Já existe um ponto de destino definido.</string>
     <string name="target_points">Pontos de passagens</string>
     <string name="intermediate_point_too_far">Waypoint %1$s distante da estrada mais próxima.</string>
-    <string name="btn_advanced_mode">Modo avançado...</string>
+    <string name="btn_advanced_mode">Modo avançado…</string>
     <string name="poi_filter_parking">Estacionamento</string>
     <string name="poi_filter_emergency">Emergência</string>
     <string name="poi_filter_public_transport">Transporte público</string>
