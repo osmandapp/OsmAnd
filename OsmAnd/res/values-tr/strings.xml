@@ -30,7 +30,7 @@
     <string name="map_widget_intermediate_distance">Ara nokta</string>
     <string name="ending_point_too_far">Bitiş noktası en yakın yola çok fazla uzaklıkta.</string>
     <string name="btn_add_tag">Etiket Ekle</string>
-    <string name="btn_advanced_mode">Gelişmiş Mod...</string>
+    <string name="btn_advanced_mode">Gelişmiş Mod…</string>
     <string name="poi_filter_parking">Park Etme</string>
     <string name="poi_filter_emergency">Acil Durum</string>
     <string name="poi_filter_public_transport">Toplu Taşıma</string>
