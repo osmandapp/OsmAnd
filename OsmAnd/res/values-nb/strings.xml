@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -22,7 +22,7 @@
     <string name="map_widget_intermediate_distance">Rutepunkt</string>
     <string name="ending_point_too_far">Sluttpunkt for langt fra nærmeste vei.</string>
     <string name="btn_add_tag">Legg til merke</string>
-    <string name="btn_advanced_mode">Avansert modus...</string>
+    <string name="btn_advanced_mode">Avansert modus…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Nødsituasjon</string>
     <string name="poi_filter_public_transport">Offentlig transport</string>
@@ -34,7 +34,7 @@
 	<string name="poi_filter_food_shop">Matbutikk</string>
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Drivstoff</string>
-	<string name="show_warnings_title">Vis alarmer&#8230;</string>
+	<string name="show_warnings_title">Vis alarmer…</string>
 	<string name="show_warnings_descr">Vis fartsgrenser, fotobokser, fartsdumper og andre advarsler</string>
 	<string name="use_compass_navigation_descr">Bruk kompass hvis det ikke er mulig med annen retningsfastsettelse</string>
 	<string name="use_compass_navigation">Bruk kompass</string>
@@ -52,11 +52,11 @@
 	<string name="map_widget_day_night">Dag/natt-kart</string>
 	<string name="map_widget_vector_attributes">Opptegningsattributter:</string>
 	<string name="map_widget_renderer">Opptegningsstil</string>
-	<string name="layer_map_appearance">Still inn skjerm&#8230;</string>
+	<string name="layer_map_appearance">Still inn skjerm…</string>
 	<string name="show_lanes">Vis kjørefelt</string>
 	<string name="avoid_unpaved">Unngå uasfalterte veier</string>
 	<string name="avoid_ferries">Unngå ferger</string>
-	<string name="avoid_in_routing_title">Unngå&#8230;</string>
+	<string name="avoid_in_routing_title">Unngå…</string>
 	<string name="avoid_in_routing_descr">Unngå bomveier, uasfalterte, ferger</string>
 	<string name="map_widget_fluorescent">Fluorescerende ruter</string>
 	<string name="map_widget_show_ruler">Målestokk</string>
@@ -229,11 +229,11 @@
 		\n\t\'I bevegelsesretning\' - Kartorienteringen justeres kontinuerlig til bevegelsesretningen
 		\n\t\'Ifølge kompass\' - Kartrotasjon tilpasses kontinuerlig til kompassavlesningen for enheten
 	</string>
-	<string name="binary_map_download_success">Nedlasting vellykket.\n\t\n\tFor å bruke aktiver \'Meny\' -> \'Vis\' -> \'Kartkilde...\' -> \'Offline vektorkart\'.</string>
+	<string name="binary_map_download_success">Nedlasting vellykket.\n\t\n\tFor å bruke aktiver \'Meny\' -&gt; \'Vis\' -&gt; \'Kartkilde...\' -&gt; \'Offline vektorkart\'.</string>
 	<string name="tip_day_night_mode">Dag/natt-modus</string>
 	<string name="tip_day_night_mode_t_v2">\tKartutseende kan for noen vektorkart endres mellom dag (lysere) og natt (mørkere).
 		\n\tNattfarger er tryggere for mørkekjøring.
-		\n\tDag/natt-veksling kan velges i \'Meny\' -> \'Still inn skjerm...\' ->\'Dag/natt-kart\'.
+		\n\tDag/natt-veksling kan velges i \'Meny\' -&gt; \'Still inn skjerm...\' -&gt;\'Dag/natt-kart\'.
 		\n\tValgene er:
 		\n\t\'Soloppgang/-nedgang\' - automatisk modus, kontrollert av solens posisjon (standard)
 		\n\t\'Dag\' - bruk alltid dagmodus
@@ -271,13 +271,13 @@
 	<string name="local_index_mi_rename">Endre navn</string>
 	<string name="show_gpx_route">Vis på kart</string>
 	<string name="search_select_point">Velg</string>
-	<string name="search_position_current_location_search">Søker posisjon&#8230;</string>
+	<string name="search_position_current_location_search">Søker posisjon…</string>
 	<string name="search_position_current_location_found">Posisjon (funnet)</string>
-	<string name="search_position_address">Adresse&#8230;</string>
-	<string name="search_position_favorites">Favoritter&#8230;</string>
+	<string name="search_position_address">Adresse…</string>
+	<string name="search_position_favorites">Favoritter…</string>
 	<string name="search_position_undefined">Udefinert</string>
 	<string name="search_position_fixed">Fast</string>
-	<string name="search_position_current_location">Gjeldende posisjon&#8230;</string>
+	<string name="search_position_current_location">Gjeldende posisjon…</string>
 	<string name="search_position_map_view">Siste kartvisning</string>
 	<string name="select_search_position">Søk nær:</string>
 	<string name="context_menu_item_search">Søk nær her</string>
@@ -304,7 +304,7 @@
 	<string name="local_index_mi_backup">Deaktiver</string>
 	<string name="local_index_mi_delete">Slett</string>
 	<string name="local_index_mi_reload">Last på nytt fra sd-kort</string>
-	<string name="local_index_download">Last ned&#8230;</string>
+	<string name="local_index_download">Last ned…</string>
 	<string name="local_index_tile_data">Flisdata: %1$s \nMinimum zoom: %2$d\nMaksimum zoom: %3$d\nNedlastbar: %4$s \nZoom nedlastet: %5$s</string>
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_index_address_data">Adressedata</string>
@@ -325,21 +325,21 @@
 	<string name="tts_language_not_supported_title">Språk ikke støttet</string>
 	<string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS(tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
-	<string name="switch_to_vector_map_to_see">Offline-vektorkart til stede for dette stedet. \n\t\n\tFor å bruke aktiver \'Meny\' -> \'Vis\' -> \'Kartkilde&#8230;\' -> \'Offline-vektorkart\'.</string>
-	<string name="install_more">Installer flere&#8230;</string>
+	<string name="switch_to_vector_map_to_see">Offline-vektorkart til stede for dette stedet. \n\t\n\tFor å bruke aktiver \'Meny\' -&gt; \'Vis\' -&gt; \'Kartkilde…\' -&gt; \'Offline-vektorkart\'.</string>
+	<string name="install_more">Installer flere…</string>
 	<string name="tip_favorites">Favorittpunkter</string>
 	<string name="tip_favorites_t">\tOfte brukte punkter kan lagres som favoritter.
-		\n\tFor å lagre et punkt som favoritt gå til kartets lokalmeny, velg alternativet \'Legg til i favoritter\' og skriv deretter inn et navn for den. Etter å ha lagret en favoritt er den tilgjengelig via \'Hovedskjerm\' -> \'Favoritter\'.
+		\n\tFor å lagre et punkt som favoritt gå til kartets lokalmeny, velg alternativet \'Legg til i favoritter\' og skriv deretter inn et navn for den. Etter å ha lagret en favoritt er den tilgjengelig via \'Hovedskjerm\' -&gt; \'Favoritter\'.
 		\n\tLang-trykking på en favoritt i \'Favoritter\'-menyen gir muligheter for å sette den som reisemål, redigere eller slette den.
-		\n\tFor å vise alle favorittpunkter direkte på kartet, aktiver på kartskjermen laget \'Favoritter\' under \'Meny\' -> \'Vis\'.
+		\n\tFor å vise alle favorittpunkter direkte på kartet, aktiver på kartskjermen laget \'Favoritter\' under \'Meny\' -&gt; \'Vis\'.
 	</string>
 	<string name="search_osm_offline">Søk adresse ved bruk av offline-kart</string>
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Velg skjermspråk</string>
 	<string name="preferred_locale">Språk</string>
 	<string name="tip_map_switch">Kartkilde</string>
-	<string name="tip_map_switch_t_v2">\tKartkilden og lag som vises endres via \'Meny\' -> \'Vis\' i kartvisning.
-		\n\tUnder \'Kartkilde&#8230;\' kan du velge å bruke de forhåndslastede offline vektorkartene, forhåndsdefinerte (nettbaserte) fliskilder (aktiver programtillegget for \'Nettbaserte kart\' for dette), eller kart manuelt opprettet ved bruk av f.eks. OsmAndMapCreator på en PC.
+	<string name="tip_map_switch_t_v2">\tKartkilden og lag som vises endres via \'Meny\' -&gt; \'Vis\' i kartvisning.
+		\n\tUnder \'Kartkilde…\' kan du velge å bruke de forhåndslastede offline vektorkartene, forhåndsdefinerte (nettbaserte) fliskilder (aktiver programtillegget for \'Nettbaserte kart\' for dette), eller kart manuelt opprettet ved bruk av f.eks. OsmAndMapCreator på en PC.
 		\n\tOsmAnd støtter også egendefinerte kilder.
 	</string>
 	<string name="tip_app_mode">Brukerprofil</string>
@@ -347,7 +347,7 @@
 		\n\tDu kan endre profiler via profilknappen i nedre venstre hjørne av kartskjermen (ikon for bil, sykkel eller fotgjenger), eller når du oppretter en rute.
 	</string>
 	<string name="tip_navigation">Navigering</string>
-	<string name="tip_navigation_t">\tFør du starter en navigering må du velge et reisemål. Etterpå trykk \'Meny\' -> \'Anvisninger\' på kartet og velg navigeringstypen.</string>
+	<string name="tip_navigation_t">\tFør du starter en navigering må du velge et reisemål. Etterpå trykk \'Meny\' -&gt; \'Anvisninger\' på kartet og velg navigeringstypen.</string>
 	<string name="tip_search">Søk</string>
 	<string name="tip_search_t">\tDu kan søke etter steder direkte på kartet, eller etter adresse, etter plassering, interessepunkt eller som forhåndsdefinert favoritt.
 		\n\tÅ trykke \'Søk\' på hovedskjermen åpner søkeaktivitetene. For alle treff tilbyr en lokalmeny 2 valg: \'Sett som reisemål\' eller \'Vis på kart\'.
@@ -388,10 +388,10 @@
 	<string name="amenity_type_sustenance">Spisesteder</string>
 	<string name="amenity_type_tourism">Turisme</string>
 	<string name="amenity_type_transportation">Transport</string>
-	<string name="indexing_address">Indekserer adresse&#8230;</string>
-	<string name="indexing_map">Indekserer kart&#8230;</string>
-	<string name="indexing_poi">Indekserer interessepunkt&#8230;</string>
-	<string name="indexing_transport">Indekserer transport&#8230;</string>
+	<string name="indexing_address">Indekserer adresse…</string>
+	<string name="indexing_map">Indekserer kart…</string>
+	<string name="indexing_poi">Indekserer interessepunkt…</string>
+	<string name="indexing_transport">Indekserer transport…</string>
 	<string name="input_output_error">I/O feil oppstod</string>
 	<string name="km">km</string>
 	<string name="km_h">km/t</string>
@@ -453,8 +453,8 @@
 	<string name="layer_route">Rute</string>
 	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_transport">Stoppesteder</string>
-	<string name="layer_poi">Interessepunkt&#8230;</string>
-	<string name="layer_map">Kartkilde&#8230;</string>
+	<string name="layer_poi">Interessepunkt…</string>
+	<string name="layer_map">Kartkilde…</string>
 	<string name="menu_layers">Vis</string>
 	<string name="context_menu_item_search_poi">Søk interessepunkt</string>
 	<string name="context_menu_item_show_route">Vis rute herfra</string>
@@ -493,11 +493,11 @@
 	<string name="favorite">Favoritt</string>
 	<string name="clear_all">Fjern alle</string>
 	<string name="history">Historikk</string>
-	<string name="uploading_data">Laster opp data&#8230;</string>
-	<string name="uploading">Laster opp&#8230;</string>
+	<string name="uploading_data">Laster opp data…</string>
+	<string name="uploading">Laster opp…</string>
 	<string name="search_nothing_found">Ingenting funnet</string>
-	<string name="searching">Søker&#8230;</string>
-	<string name="searching_address">Søker adresse&#8230;</string>
+	<string name="searching">Søker…</string>
+	<string name="searching_address">Søker adresse…</string>
 	<string name="hint_search_online">Husnummer, gate, by</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="search_online_address">Internett</string>
@@ -512,9 +512,9 @@
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Nedlasting vellykket</string>
 	<string name="error_io_error">I/O feil oppstod</string>
-	<string name="downloading_file">Laster ned fil&#8230;</string>
-	<string name="downloading">Laster ned&#8230;</string>
-	<string name="downloading_list_indexes">Laster ned liste over tilgjengelige regioner&#8230;</string>
+	<string name="downloading_file">Laster ned fil…</string>
+	<string name="downloading">Laster ned…</string>
+	<string name="downloading_list_indexes">Laster ned liste over tilgjengelige regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listen over regioner ble ikke hentet fra osmand.net.</string>
 	<string name="show_poi_on_map">Vis på kart</string>
 	<string name="fav_points_edited">Favorittpunkt ble redigert</string>
