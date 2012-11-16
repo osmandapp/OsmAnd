@@ -610,7 +610,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_intermediate_distance">Mellanliggande punkt</string>
     <string name="ending_point_too_far">Utgångspunkt för långt från närmaste väg.</string>
     <string name="btn_add_tag">Lägg till tagg</string>
-    <string name="btn_advanced_mode">Avancerat läge...</string>
+    <string name="btn_advanced_mode">Avancerat läge…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Akut</string>
     <string name="poi_filter_public_transport">Kollektivtrafik</string>
