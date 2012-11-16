@@ -700,6 +700,7 @@
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Select display language</string>
 	<string name="preferred_locale">Display language</string>
+	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
 		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online and tile maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
