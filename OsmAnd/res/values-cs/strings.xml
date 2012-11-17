@@ -1109,4 +1109,5 @@
     <string name="download_roads_only_maps">Pouze mapy silnic</string>
     <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat jen mapy silnic:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapy silnic</string>
-    </resources>
+    <string name="incomplete_locale">neúplný</string>
+	</resources>
