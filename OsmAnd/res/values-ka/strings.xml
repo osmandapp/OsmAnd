@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -203,7 +203,7 @@
   <string name="use_transparent_map_theme_descr">რუკის კონტროლის გამჭირვალეობა</string>
   <string name="use_transparent_map_theme">გამჭირვალე თემა</string>
   <string name="native_library_not_supported">ადგილობრივი ბიბლიოთეკა მოცემულ მოწყობილობაზე მხარდაჭერილი არაა.</string>
-  <string name="init_native_library">ადგილობრივი ბიბლიოთეკის ინიციალიზაცია...</string>
+  <string name="init_native_library">ადგილობრივი ბიბლიოთეკის ინიციალიზაცია…</string>
   <string name="choose_auto_follow_route">რუკის ხედვის ცენტრისაკენ ავტომატური გასწორება</string>
   <string name="choose_auto_follow_route_descr">დრო, რომელიც გავა სანამ რუკა იქნება მიმდინარე პოზიციის შესაბამისი იქნება</string>
   <string name="auto_follow_route_never">არასოდეს</string>
@@ -238,13 +238,13 @@
   <string name="show_gpx_route">რუკაზე ჩვენება</string>
   <string name="poi_filter_nominatim">მიმდინარე POI-ს ძებნა სახელით</string>
   <string name="search_select_point">არჩევა</string>
-  <string name="search_position_current_location_search">მდებარეობის ძებნა..</string>
+  <string name="search_position_current_location_search">მდებარეობის ძებნა…</string>
   <string name="search_position_current_location_found">მდებარეობა (ნაპოვნია)</string>
-  <string name="search_position_address">მისამართი...</string>
-  <string name="search_position_favorites">რჩეულები...</string>
+  <string name="search_position_address">მისამართი…</string>
+  <string name="search_position_favorites">რჩეულები…</string>
   <string name="search_position_undefined">არააღწერილი</string>
   <string name="search_position_fixed">დამაგრებული</string>
-  <string name="search_position_current_location">მიმდინარე მდებარეობა...</string>
+  <string name="search_position_current_location">მიმდინარე მდებარეობა…</string>
   <string name="search_position_map_view">უკანასკნელად ნანახი რუკის ხედი</string>
   <string name="select_search_position">ძებნა ახლოს :</string>
   <string name="context_menu_item_search">ახლოს ძებნა</string>
@@ -286,7 +286,7 @@
   <string name="local_index_mi_backup">დეაქტივაცია</string>
   <string name="local_index_mi_delete">წაშლა</string>
   <string name="local_index_mi_reload">განახლება SDCard-დან</string>
-  <string name="local_index_download">ჩამოტვირთვა...</string>
+  <string name="local_index_download">ჩამოტვირთვა…</string>
   <string name="local_index_tile_data">ნაწილოვანი მონაცემები: %1$s \nმინიმალური გადიდება : %2$d\nმაქსიმალური გადიდება : %3$d\nგადმოსაწერი : %4$s \nგადმოწერილი : %5$s</string>
   <string name="local_index_poi_data">POI მონაცემები</string>
   <string name="local_index_address_data">მისამართის მონაცემები</string>
@@ -308,7 +308,7 @@
   <string name="tip_recent_changes_0_6_6_t">"ცვლილებები 0.6.6-ში : \n\t- ტექსტის ხმაში გადამყვანი ძრავი ხმით ნავიგაციისათვის\n\t- რუკის რენდერერი უფრო დეტალურია\n\t- ბაზური რუკა მოყვება აპლიკაციას\n\t- შეიცვალა გათიშული ნავიგაცია(საცდელი ვარიანტი)\n\t- GPX ნავიგაციის პარამეტრები\n\t- შეიცვალა მომხმარებლის ინტერფეისი და გასწორდა ბევრი შეცდომა"</string>
   <string name="voice_not_use">არ გამოიყენოთ</string>
   <string name="voice_not_specified">არა</string>
-  <string name="installing_new_resources">ახალი მონაცემების განშლა...</string>
+  <string name="installing_new_resources">ახალი მონაცემების განშლა…</string>
   <string name="internet_connection_required_for_online_route">არჩეულია მიმდინარე ნავიგაციის სერვისი მაგრამ ინტერნეტთან შეერთება წვდომადი არაა.</string>
   <string name="tts_language_not_supported_title">ენა მხარდაჭერილი არაა</string>
   <string name="tts_language_not_supported">არჩეული ენა არაა მხარდაჭერილი ანდროიდის მიმდინარე ვერსიის TTS ძრავის მიერ. გნებავთ მოვძებნოთ სხვა ძრავი market-ში? წინააღმდეგ შემთხვევაში გამოყენებულ იქნება მიმდინარე TTS ენა.</string>
@@ -328,7 +328,7 @@
   <string name="overlay_transparency">გამჭირვალობა</string>
   <string name="map_transparency_descr">ბაზური რუკის გამჭირვალობის შეცვლა</string>
   <string name="map_transparency">ბაზური რუკის გამჭირვალობა</string>
-  <string name="layer_underlay">ქვედა რუკა...</string>
+  <string name="layer_underlay">ქვედა რუკა…</string>
   <string name="map_underlay">ქვედა რუკა</string>
   <string name="map_underlay_descr">ქვედა რუკის არჩევა</string>
   <string name="layer_overlay">ზედა რუკა</string>
@@ -338,7 +338,7 @@
   <string name="tile_source_already_installed">რუკა უკვე დაყენებულია. მიმდინარეობს პარამეტრების განახლება</string>
   <string name="select_tile_source_to_install">აირჩიეთ რუკა დასაყენებლად ან განსანახლებლად</string>
   <string name="internet_not_available">ოპერაციისათვის საჭიროა ინტერნეტი, რომელთანაც წვდომა არ არსებობს</string>
-  <string name="install_more">მეტის ჩაყენება...</string>
+  <string name="install_more">მეტის ჩაყენება…</string>
   <string name="tip_update_index">გათიშული მონაცემების განახლება</string>
   <string name="tip_update_index_t">\tგანახლებული რუკის ქონა ძალიან მნიშვნელოვანია. OsmAnd შეიცავს ჩამოტვირთვების მმართველს, რომელიც პერიოდულად ამოწმებს გათიშული მონაცემების განახლებებს.\n\tგანახლების შესამოწმებლად იხილეთ \'პარამეტრები\' -&gt;გათიშული მონაცემები\' -&gt; \'გათიშული მონაცემების ჩამოტვირთვა\'. რაიონების სიის ჩამოტვიღტვის შემდეგ შეგიძლიათ აირჩიოთ \'მენიუ\' -&gt; \'ჩამოტვირთვების ფილტრი\' რომ იხილოთ მონაცემები, რომლებიც უკვე იმყოფება თქვენს მოწყობილობაზე.\n\tგანახლებების მნიშვნელობა დაყოფილია შემდეგ ფერებად:\n\t\'მწვანე\' - ნიშნავს რომ ფაილები თქვენს მოწყობილობაზე და სერვერზე ერთნაირია.\n\t\'ლურჯი\' - ნიშნავს რომ სერვერზე ხელმისაწვდომია განახლებები</string>
   <string name="level_to_switch_vector_raster_descr">მინიმალური გადიდება ვექტორული რუკების ჩვენებისათვის</string>
@@ -519,7 +519,7 @@
   <string name="layer_osm_bugs">OSM-ის ხოჭოები</string>
   <string name="layer_transport">ტრანსპორტის გაჩერება</string>
   <string name="layer_poi">POI…</string>
-  <string name="layer_map">რუკის წყარო...</string>
+  <string name="layer_map">რუკის წყარო…</string>
   <string name="menu_layers">ხედის აღწერა</string>
   <string name="context_menu_item_search_poi">POI-ის ძებნა</string>
   <string name="context_menu_item_show_route">გზების ჩვენება მოცემული წერტილიდან</string>
@@ -566,7 +566,7 @@
   <string name="route_head">მიმართულება</string>
   <string name="first_time_continue">გვიან</string>
   <string name="first_time_download">რაიონების გადმოწერა</string>
-  <string name="search_poi_location">სიგნალის ძებნა...</string>
+  <string name="search_poi_location">სიგნალის ძებნა…</string>
   <string name="search_near_map">რუკაზე უკანასკნელი მდებარეობის მოძიება</string>
   <string name="search_nearby">ახლო ძიება</string>
   <string name="map_orientation_default">იგივე როგორც მოწყობილობაზე</string>
@@ -606,11 +606,11 @@
   <string name="favorite">რჩეული</string>
   <string name="clear_all">გასუფთავება</string>
   <string name="history">ისტორია</string>
-  <string name="uploading_data">მონაცემების ატვირთვა...</string>
+  <string name="uploading_data">მონაცემების ატვირთვა…</string>
   <string name="uploading">ატვირთვა…</string>
   <string name="search_nothing_found">არაფერი არ იქნა ნაპოვნი</string>
   <string name="searching">მიმდინარეობს ძებნა</string>
-  <string name="searching_address">მისამართის ძებნა...</string>
+  <string name="searching_address">მისამართის ძებნა…</string>
   <string name="search_osm_nominatim">მისამართის OSM Nominatim -ით ძებნა</string>
   <string name="hint_search_online">სახლის ნომერი, ქუჩა, ქალაქი</string>
   <string name="search_offline_address">გათიშული</string>
@@ -626,9 +626,9 @@
   <string name="address">მისამართი</string>
   <string name="download_index_success">ჩამოტვირთვა წარმატებულად დამთავრდა</string>
   <string name="error_io_error">მოხდა I/O შეცდომა</string>
-  <string name="downloading_file">ფაილის ჩამოტვირთვა...</string>
-  <string name="downloading">ჩამოტვირთვა...</string>
-  <string name="downloading_list_indexes">წვდომადი რაიონების სიის ჩამოტვირთვა..</string>
+  <string name="downloading_file">ფაილის ჩამოტვირთვა…</string>
+  <string name="downloading">ჩამოტვირთვა…</string>
+  <string name="downloading_list_indexes">წვდომადი რაიონების სიის ჩამოტვირთვა…</string>
   <string name="list_index_files_was_not_loaded">რაიონების ლისტი არ მიღებული არაა osmand.net-იდან.</string>
   <string name="show_poi_on_map">რუკაზე ჩვენება</string>
   <string name="fav_points_edited">რჩეული წერტილი ჩასწორებულია</string>
@@ -641,18 +641,18 @@
   <string name="get_directions">მიმართულებები</string>
   <string name="show_gps_status">GPS-ის მდგომარეობის ჩვენება</string>
   <string name="opening_hours">საათების გახსნა</string>
-  <string name="opening_changeset">ცვლილებების გახსნა...</string>
-  <string name="closing_changeset">ცვლილებების დახურვა...</string>
-  <string name="commiting_node">უჯრედის ატვირთვა...</string>
+  <string name="opening_changeset">ცვლილებების გახსნა…</string>
+  <string name="closing_changeset">ცვლილებების დახურვა…</string>
+  <string name="commiting_node">უჯრედის ატვირთვა…</string>
   <string name="loading_poi_obj">POI-ის ჩატვირთვა…</string>
   <string name="auth_failed">ავტორიზაცია წარუმატებელია</string>
   <string name="failed_op">შეცდომა</string>
-  <string name="converting_names">მიმდინარეობს გადაყვანა ადგილობრივსა და ინგლისურს შორის..</string>
-  <string name="loading_streets_buildings">ქუჩებისა და შენობების ჩატვირთვა...</string>
-  <string name="loading_postcodes">საფოსტო კოდების ჩატვირთვა...</string>
-  <string name="loading_streets">ქუჩების ჩატვირთვა...</string>
-  <string name="loading_cities">ქალაქების ჩატვირთვა...</string>
-  <string name="loading">ჩატვირთვა...</string>
+  <string name="converting_names">მიმდინარეობს გადაყვანა ადგილობრივსა და ინგლისურს შორის…</string>
+  <string name="loading_streets_buildings">ქუჩებისა და შენობების ჩატვირთვა…</string>
+  <string name="loading_postcodes">საფოსტო კოდების ჩატვირთვა…</string>
+  <string name="loading_streets">ქუჩების ჩატვირთვა…</string>
+  <string name="loading_cities">ქალაქების ჩატვირთვა…</string>
+  <string name="loading">ჩატვირთვა…</string>
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">შეცდომნა GPX-ის შენახვისას</string>
   <string name="error_calculating_route">შეცდომა გზის დათვლისას</string>
@@ -663,8 +663,8 @@
   <string name="invalid_locations">კოორდინატები არასწორია!</string>
   <string name="go_back_to_osmand">OsmAnd-ის რუკაზე დაბრუნება</string>
   <string name="close">დახურვა</string>
-  <string name="loading_data">მონაცემების კითხვა...</string>
-  <string name="reading_indexes">ლოკალური მონაცემების კითხვა...</string>
+  <string name="loading_data">მონაცემების კითხვა…</string>
+  <string name="reading_indexes">ლოკალური მონაცემების კითხვა…</string>
   <string name="previous_run_crashed">ბოლოს გაშვებული OsmAnd მოკვდა. ჟურნალის ფაილია {0}. გთხოვთ მოგვწეროთ ჟურნალის ფაილი და როგორ მოხდა ეს.</string>
   <string name="saving_gpx_tracks">GPX ძიების SD-ზე შენახვა…</string>
   <string name="finished_task">დამთავრდა</string>
@@ -924,7 +924,7 @@
 <string name="map_widget_vector_attributes">რენდერის ატრიბუტები:</string>
 <string name="live_monitoring_mode_off">ცოცხალი დევნის რეჟიმის გამორთვა</string>
 <string name="live_monitoring_mode_on">ცოცხალი დევნის რეჟიმის ჩართვა</string>
-<string name="layer_map_appearance">ეკრანის გამართვა...</string>
+<string name="layer_map_appearance">ეკრანის გამართვა…</string>
 <string name="show_lanes">ბილიკების ჩვენება</string>
 <string name="avoid_unpaved">მოუკირწყლავი გზებისათვის თავის არიდება</string>
 <string name="avoid_ferries">ბორნისათვის თავის არიდება</string>
