@@ -1060,9 +1060,9 @@
 \n\t* Pontosabb és sokkal gyorsabb útvonaltervezés, akár 250 km-re
 \n\t* Csak-út térképek bevezetése\n\t* A térkép nem veszti el a pozíciórögzítést megszakítások után
 \n\t* A háttérszolgáltatás bekapcsol navigáció közben "</string>
-    <string name="safe_mode_description">Alkalmazás futtatása biztonsági módban (a lassabb Android kódot használva natív kód helyett).</string>
-    <string name="safe_mode">Biztonsági mód</string>
-    <string name="native_library_not_running">Az alkalmazás biztonsági módban fut (letilthatod a Beállításokban).</string>
+    <string name="safe_mode_description">Alkalmazás futtatása csökkentett módban (a lassabb Android kódot használva natív kód helyett).</string>
+    <string name="safe_mode">Csökkentett mód</string>
+    <string name="native_library_not_running">Az alkalmazás csökkentett módban fut (letilthatod a Beállításokban).</string>
     <string name="rendering_attr_showRoadMaps_description">Válaszd ki, mikor jelenjenek meg a csak-út térképek:</string>
 	<string name="rendering_attr_showRoadMaps_name">Csak-út térképek</string>
     <string name="download_roads_only_item">"Utak "</string>
