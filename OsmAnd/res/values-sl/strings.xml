@@ -530,4 +530,7 @@
 	<string name="favorite">Priljubljena</string>
 	<string name="fav_points_edited">Priljubljena lokacija je bila urejena</string>
 	<string name="fav_points_not_exist">Ni priljubljenih lokacij</string>
-	</resources>
+	<string name="incomplete_locale">nedokončano</string>
+	<string name="download_roads_only_item">"Ceste "</string>
+    <string name="download_regular_maps">Običajni zemljevidi</string>
+    </resources>
