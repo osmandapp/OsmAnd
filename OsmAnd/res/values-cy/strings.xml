@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources><string name="avoid_in_routing_title">Osgoi...</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="avoid_in_routing_title">Osgoi…</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau</string>
 <string name="show_warnings_descr">Dangos cyfyngiad cyflymder, camerâu cyflymder a thwmpathau traffig</string>
@@ -67,7 +67,7 @@
 <string name="global_app_allocated_memory">Cof Dynodedig</string>
 <string name="live_monitoring_mode_off">Cychwyn\n tracio byw</string>
 <string name="live_monitoring_mode_on">Atal\n tracio byw</string>
-<string name="layer_map_appearance">Ffurfweddu\'r sgrin...</string>
+<string name="layer_map_appearance">Ffurfweddu\'r sgrin…</string>
 <string name="show_lanes">Dangos lonydd</string>
 <string name="avoid_unpaved">Osgoi ffyrdd heb wyneb caled</string>
 <string name="avoid_ferries">Osgoi fferïau</string>
