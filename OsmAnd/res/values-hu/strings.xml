@@ -1068,4 +1068,5 @@
     <string name="download_roads_only_item">"Utak "</string>
     <string name="download_regular_maps">Szokásos térképek</string>
     <string name="download_roads_only_maps">Csak-út térképek</string>
-    </resources>
+    <string name="incomplete_locale">hiányos</string>
+	</resources>
