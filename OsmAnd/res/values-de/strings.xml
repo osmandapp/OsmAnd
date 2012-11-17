@@ -280,25 +280,21 @@
 	<string name="osmand_service">Hintergrunddienst</string>
 	<string name="osmand_service_descr">Für Verwendung von OsmAnd bei ausgeschalteter Anzeige</string>
 	<string name="tip_rotation_switching">Kartenrotation</string>
-	<string name="tip_rotation_switching_t_v2">\tSie können mit wiederholtem Klicken auf die Kompassnadel der Landkarte bestimmen, in welche Richtung die Anzeige der Landkarte ausgerichtet werden soll.
-		\n\tZur Wahl stehen:
-		\n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
-		\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
-		\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt
-	</string>
+	<string name="tip_rotation_switching_t_v2">"Die Ausrichtung der Karte kann durch klicken auf die Kompassnadel geändert werden.\n\tZur Wahl stehen:
+\n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
+\n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
+\n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
 	<string name="binary_map_download_success">Download erfolgreich.
 \n\t
 \n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
-	<string name="tip_day_night_mode_t_v2">\tDie Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden.
-		\n\tInsbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-		\n\tDer Umschaltmechanismus kann in der Kartenansicht unter \'Konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
-		\n\tZur Auswahl stehen:
-		\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
-		\n\t\'Tag\' - permanente Tagesansicht
-		\n\t\'Nacht\' - permanente Nachtansicht
-		\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden)
-	</string>
+	<string name="tip_day_night_mode_t_v2">"Die Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
+\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → Darstellung → \'Anzeige konfigurieren...\' → \'Tag/Nacht-Modus\' geändert werden.
+\nZur Auswahl stehen:
+\n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
+\n\t\'Tag\' - permanente Tagesansicht
+\n\t\'Nacht\' - permanente Nachtansicht
+\n\t\'Umgebungslicht-Sensor\' - automatischer Modus gemäß Umgebungslichtsensor des Gerätes (nur wenn Sensor vorhanden) "</string>
 	<string name="tip_osm_improve">OSM Bearbeitung</string>
 	<string name="tip_osm_improve_t">\tOsmAnd verwendet Daten basierend auf OpenStreetMap.org (OSM) und kann (neben Kartenanzeige und Navigation) auch zur Verbesserung der OSM-Daten verwendet werden. Sie können mit nur wenigen Klicks neue POIs und OSM-Fehlerberichte einsenden.
 		\n\tDazu müssen Sie zunächst unter \'Einstellungen\' → \'Allgemein\' unter dem Menüpunkt \'OSM-Bearbeitung\' Ihre OSM-Login-Daten hinterlegen.
@@ -489,10 +485,8 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren …</string>
 	<string name="tip_update_index">Update der Offline-Daten</string>
-	<string name="tip_update_index_t">"Aktuelle Kartendaten sind natürlich wichtig. OsmAnd bietet einen Download-Manager, mit dem Sie die Verfügbarkeit neuerer Offline-Daten prüfen können.
-\n\nUpdates finden Sie via \'Einstellungen\' → \'Offline-Daten\'.
-\nNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.
-\n\nAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
+	<string name="tip_update_index_t">"Updates finden Sie via \'Einstellungen\' → \'Offline-Daten\'.
+\nNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.\nAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
 \n \'Grün\' - Daten sind aktuell
 \n \'Blau\' - neuere Version vorhanden
 \n \'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten "</string>
@@ -505,11 +499,8 @@
 \n * SMS
 \n * Kopieren der Koordinaten in die Zwischenablage (Clipboard)</string>
 	<string name="tip_favorites">Favoriten</string>
-	<string name="tip_favorites_t">\tOrte, die Sie sich merken möchten, können Sie als Favoriten speichern.
-		\n\tEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar.
-		\n\t Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
-		\n\tSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Darstellung\' einen Haken bei \'Favoriten\' setzen.
-	</string>
+	<string name="tip_favorites_t">"Sie können jeden beliebigen Ort als Favoriten speichern.\n\nEinen Favoriten erstellen Sie im Karten-Kontextmenü via \'Als Favorit speichern\'. Name und Kategorie sind dabei frei wählbar. Gespeicherte Favoriten sind leicht zugänglich direkt im Hauptmenü unter \'Favoriten\'. Mittels Kontextmenü können Sie jeden Favoriten bearbeiten, löschen, als Ziel wählen oder einfach nur auf der Karte anzeigen lassen.
+\n\nSie können sich auch alle Ihre Favoriten gleichzeitig auf der Karte anzeigen lassen. Dazu in der Kartenansicht unter \'Menü\' → \'Darstellung\' einen Haken bei \'Favoriten\' setzen. "</string>
 	<string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offlinesuche aufgetreten</string>
 	<string name="search_offline_geo_error">Konnte geointent nicht verarbeiten: \'%s\'</string>
@@ -518,16 +509,13 @@
 	<string name="preferred_locale_descr">Anzeigesprache wählen</string>
 	<string name="preferred_locale">Anzeigesprache</string>
 	<string name="tip_map_switch">Kartenquelle</string>
-	<string name="tip_map_switch_t_v2">\tDurch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' → \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen.
-		\n\tSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAnd-MapCreator) erstellten Karten wählen.
-		\n\tOsmAnd unterstützt auch selbst definierte Quellen. (Für Online-Karten entsprechendes Plugin aktivieren.)
-	</string>
+	<string name="tip_map_switch_t_v2">"Durch drücken auf den Globus in der Kartenansicht, können Sie schnell zwischen den Kartenquellen wechseln. Alternativ in der Kartenansicht via \'Menü\' → \'Darstellung\' den Punkt \'Kartenquelle...\' auswählen.\nSie können zwischen vordefinierten Quellen für Online- oder Offline-Kacheln, Offline-Vektor-Karten, oder selbst auf dem PC (z.B. via OsmAnd-MapCreator) erstellten Karten wählen.
+\nOsmAnd unterstützt auch selbst definierte Quellen. (Für Online-Karten entsprechendes Plugin aktivieren.) "</string>
 	<string name="tip_app_mode">Nutzerprofile</string>
-	<string name="tip_app_mode_t_v2">\tOsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
-		\n\tDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route.
-	</string>
+	<string name="tip_app_mode_t_v2">"OsmAnd unterstützt verschiedene (individuell anpassbare) Profile für unterschiedliche Einsatzzwecke.
+\n\nDas Profil kann mit dem Profilknopf links unten (Bild Auto, Fahrrad, oder Fußgänger) auf dem Kartenbildschirm gewählt werden, oder auch beim Berechnen einer Route. "</string>
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_navigation_t">\tVor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' → \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
+	<string name="tip_navigation_t">Vor dem Starten der Navigationsfunktion ist ein Ziel zu wählen. Anschließend kann mittels \'Menü\' → \'Navigation\' das Navigations-Menü gestartet werden. Dort können Sie optional noch den Routing-Typ (Auto, Fahrrad, Fußgänger) ändern und schließlich die Route berechnen lassen.</string>
 	<string name="tip_search">Suchen</string>
 	<string name="tip_search_t">Um einen bestimmten Ort zu finden, bietet Ihnen OsmAnd mehrere Möglichkeiten:
 \n + Eingabe der Adresse
