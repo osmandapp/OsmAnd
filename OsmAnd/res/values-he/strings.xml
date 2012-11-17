@@ -1093,4 +1093,5 @@
     <string name="download_roads_only_item">"דרכים "</string>
     <string name="download_regular_maps">מפות רגילות</string>
     <string name="download_roads_only_maps">מפות עם דרכים בלבד</string>
-    </resources>
+    <string name="incomplete_locale">חלקי</string>
+	</resources>
