@@ -16,7 +16,17 @@ turn('right_sl', ['virați ușor la dreapta ']).
 turn('right_keep', ['încadrați-vă pe partea dreaptă']).
 turn('left_keep', ['încadrați-vă pe partea stângă']).
 
-prepare_turn(Turn, Dist) == ['Pregătiți-vă să ', M, ' peste ', D] :- distance(Dist) == D, turn(Turn, M).
+prep2turn('left', ['virați la stânga ']).
+prep2turn('left_sh', ['virați brusc la stânga ']).
+pewp2turn('left_sl', ['virați ușor la stânga ']).
+prep2turn('right', ['virați la dreapta ']).
+prep2turn('right_sh', ['virați brusc la dreapta ']).
+prep2turn('right_sl', ['virați ușor la dreapta ']).
+prep2turn('right_keep', ['vă încadrați pe partea dreaptă']).
+prep2turn('left_keep', ['vă încadrați pe partea stângă']).
+
+
+prepare_turn(Turn, Dist) == ['Pregătiți-vă să ', M, ' peste ', D] :- distance(Dist) == D, prep2turn(Turn, M).
 turn(Turn, Dist) == ['peste ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
@@ -26,7 +36,7 @@ make_ut == ['Întoarceți '].
 make_ut_wp == ['Întoarceți când aveți posibilitatea '].
 
 prepare_roundabout(Dist) == ['Pregătiți-vă să intrați în sensul giratoriu peste ', D] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['Peste ', D, ' intrați în sensul giratoriu și luați-o pe ', E, 'ieșire'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['Peste ', D, ' veți intra în sensul giratoriu și-l veți părăsiți pe la ', E, 'ieșire'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Luați-o pe ', E, 'ieșire'] :- nth(Exit, E).
 
 go_ahead == ['Mergeți înainte '].
@@ -72,11 +82,12 @@ distance(Dist) == D :- measure('mi-f'), distance_mi_f(Dist) == D.
 distance(Dist) == D :- measure('mi-y'), distance_mi_y(Dist) == D.
 
 %%% distance measure km/m
+distance_km(Dist) == [ X, ' metri']               :- Dist < 20,   D is round(Dist/10.0)*10,           num_atom(D, X).
 distance_km(Dist) == [ X, ' de metri']               :- Dist < 100,   D is round(Dist/10.0)*10,           num_atom(D, X).
 distance_km(Dist) == [ X, ' de metri']               :- Dist < 1000,  D is round(2*Dist/100.0)*50,        num_atom(D, X).
 distance_km(Dist) == ['circa un kilometru ']        :- Dist < 1500.
-distance_km(Dist) == ['circa ', X, ' kilometri '] :- Dist < 10000, D is round(Dist/1000.0),            num_atom(D, X).
-distance_km(Dist) == [ X, ' kilometri ']          :-               D is round(Dist/1000.0),            num_atom(D, X).
+distance_km(Dist) == ['circa ', X, ' kilometri '] :- Dist < 20000, D is round(Dist/1000.0),            num_atom(D, X).
+distance_km(Dist) == [ X, ' de kilometri ']          :-               D is round(Dist/1000.0),            num_atom(D, X).
 
 %%% distance measure mi/f
 distance_mi_f(Dist) == [ X, ' de picioare']               :- Dist < 160,   D is round(2*Dist/100.0/0.3048)*50, num_atom(D, X).
@@ -92,7 +103,7 @@ distance_mi_y(Dist) == [ X, ' iarzi']              :- Dist < 1300,  D is round(2
 distance_mi_y(Dist) == ['circa o milă ']           :- Dist < 2414.
 distance_mi_y(Dist) == ['circa ', X, ' mile ']    :- Dist < 16093, D is round(Dist/1609.0),            num_atom(D, X).
 distance_mi_y(Dist) == [ X, ' mile ']             :-               D is round(Dist/1609.0),            num_atom(D, X).
- 
+
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
