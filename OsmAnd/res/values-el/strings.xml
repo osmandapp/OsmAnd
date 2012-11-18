@@ -956,7 +956,7 @@
 	<string name="search_activity">Αναζήτηση</string>
 	<string name="searchpoi_activity">Επιλέξτε ΣΕ</string>
 	<string name="search_POI_level_btn">Βρες περισσότερα</string>
-	<string name="incremental_search_city">Αναζήτηση πόλης σταδιακά. Για να βρείτε πόλεις/ταχυδρομικούς κώδικες, εισαγάγετε τους πρώτους 3 ή περισσότερους χαρακτήρες.</string>
+	<string name="incremental_search_city">Αναζήτηση πόλης αυξητικά.</string>
 	<string name="incremental_search_street">Αναζήτηση οδού σταδιακά</string>
 	<string name="incremental_search_building">Αναζήτηση κτηρίου σταδιακά</string>
 	<string name="choose_available_region">Επιλογή περιοχής από λίστα</string>
