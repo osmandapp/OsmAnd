@@ -1105,6 +1105,6 @@
     <string name="download_regular_maps">Bežné mapy</string>
     <string name="close_changeset">Zavrieť súbor zmien</string>
 	<string name="incomplete_locale">nedokončený</string>
-	<string name="no_buildings_found">Neboli najdené žiadne budovy.</string>
-    <string name="search_villages_and_postcodes">Vyhľadaj dediny/PSČ</string>
+	<string name="no_buildings_found">Neboli nájdené žiadne budovy.</string>
+    <string name="search_villages_and_postcodes">"Vyhľadaj dediny/PSČ "</string>
 	</resources>
