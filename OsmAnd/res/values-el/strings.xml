@@ -957,8 +957,8 @@
 	<string name="searchpoi_activity">Επιλέξτε ΣΕ</string>
 	<string name="search_POI_level_btn">Βρες περισσότερα</string>
 	<string name="incremental_search_city">Αναζήτηση πόλης αυξητικά.</string>
-	<string name="incremental_search_street">Αναζήτηση οδού σταδιακά</string>
-	<string name="incremental_search_building">Αναζήτηση κτηρίου σταδιακά</string>
+	<string name="incremental_search_street">Αναζήτηση οδού αυξητικά</string>
+	<string name="incremental_search_building">Αναζήτηση κτηρίου αυξητικά</string>
 	<string name="choose_available_region">Επιλογή περιοχής από λίστα</string>
 	<string name="choose_intersected_street">Επιλογή διασταυρούμενης οδού</string>
 	<string name="Closest_Amenities">Πλησιέστερες παροχές</string>
