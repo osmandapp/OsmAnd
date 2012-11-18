@@ -51,7 +51,7 @@ public interface RegionAddressRepository {
 	
 	void addCityToPreloadedList(City city);
 	
-	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, LatLon currentLocation);
+	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, boolean searchVillagesMode, LatLon currentLocation);
 	
 	public List<MapObject> searchMapObjectsByName(String name, ResultMatcher<MapObject> resultMatcher);
 	

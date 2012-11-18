@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="incremental_search_city">Search city incrementally.</string>
+    <string name="search_villages_and_postcodes">Search villages/postcode </string>
 	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
 	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
     <string name="download_roads_only_item">Roads </string>
@@ -1082,7 +1084,6 @@
 	<string name="search_activity">Search</string>
 	<string name="searchpoi_activity">Choose POI</string>
 	<string name="search_POI_level_btn">Find more</string>
-	<string name="incremental_search_city">Search city incrementally. To find towns/postcodes, enter the first 3 or more characters.</string>
 	<string name="incremental_search_street">Search street incrementally</string>
 	<string name="incremental_search_building">Search building incrementally</string>
 	<string name="choose_available_region">Choose region from list</string>

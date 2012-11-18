@@ -36,6 +36,7 @@ import android.widget.Toast;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = LogUtil.getLog(DownloadOsmandIndexesHelper.class);
+	public static final String INDEX_DOWNLOAD_DOMAIN = "new.osmand.net";
 
 	public static IndexFileList getIndexesList(Context ctx) {
 		PackageManager pm =ctx.getPackageManager();
@@ -118,8 +119,8 @@ public class DownloadOsmandIndexesHelper {
 			IndexFileList result = new IndexFileList();
 			log.debug("Start loading list of index files"); //$NON-NLS-1$
 			try {
-				log.info("http://download.osmand.net/get_indexes?" + versionAsUrl);
-				URL url = new URL("http://download.osmand.net/get_indexes?" + versionAsUrl ); //$NON-NLS-1$
+				log.info("http://"+INDEX_DOWNLOAD_DOMAIN+"/get_indexes?" + versionAsUrl);
+				URL url = new URL("http://"+INDEX_DOWNLOAD_DOMAIN+"/get_indexes?" + versionAsUrl ); //$NON-NLS-1$
 				XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 				parser.setInput(url.openStream(), "UTF-8"); //$NON-NLS-1$
 				int next;

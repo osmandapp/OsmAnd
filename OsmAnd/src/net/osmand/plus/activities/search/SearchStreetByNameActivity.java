@@ -18,7 +18,6 @@ import net.osmand.plus.RegionAddressRepository;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.view.View;
-import android.widget.TextView;
 
 public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;
@@ -71,7 +70,6 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			}
 		};
 	}
-	
 	
 	@Override
 	protected void filterLoop(String query, Collection<Street> list) {

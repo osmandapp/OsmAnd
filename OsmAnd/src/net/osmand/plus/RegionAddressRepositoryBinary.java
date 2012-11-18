@@ -123,7 +123,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 
 
 	@Override
-	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, LatLon currentLocation) {
+	public List<City> fillWithSuggestedCities(String name, ResultMatcher<City> resultMatcher, boolean searchVillages, LatLon currentLocation) {
 		List<City> citiesToFill = new ArrayList<City>();
 		if (cities.isEmpty()) {
 			preloadCities(resultMatcher);
@@ -138,7 +138,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		}
 		try {
 			// essentially index is created that cities towns are first in cities map
-			if (name.length() >= 2 && Algoritms.containsDigit(name)) {
+			if (/*name.length() >= 2 && Algoritms.containsDigit(name) && */searchVillages) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
 				for (City code : file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 
@@ -165,7 +165,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 			}
 
 			int initialsize = citiesToFill.size();
-			if (name.length() >= 3) {
+			if (/*name.length() >= 3 && */searchVillages) {
 				for (City c : file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher),
 						new CollatorStringMatcher(collator, name,StringMatcherMode.CHECK_STARTS_FROM_SPACE), useEnglishNames, 
 						BinaryMapAddressReaderAdapter.VILLAGES_TYPE)) {

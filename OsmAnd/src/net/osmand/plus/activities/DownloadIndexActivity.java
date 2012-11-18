@@ -155,7 +155,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 		}
 		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, downloadListIndexThread.getCachedIndexFiles());
+			DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, getFilteredByType());
 			setListAdapter(adapter);
 		} else {
 			downloadIndexList();
@@ -257,18 +257,21 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	public void changeType(final DownloadActivityType tp) {
 		if (downloadListIndexThread != null) {
-			final List<IndexItem> filtered = getFilteredByType(tp);
-			entriesToDownload.clear();
-			((DownloadIndexAdapter) getExpandableListAdapter()).setIndexFiles(filtered);
 			type = tp;
+			final List<IndexItem> filtered = getFilteredByType();
+			entriesToDownload.clear();
+			DownloadIndexAdapter a = ((DownloadIndexAdapter) getExpandableListAdapter());
+			a.setIndexFiles(filtered);
+			a.getFilter().filter(filterText.getText());
+			
 		}
 	}
 
 
-	private List<IndexItem> getFilteredByType(final DownloadActivityType tp) {
+	public List<IndexItem> getFilteredByType() {
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
 		for (IndexItem file : downloadListIndexThread.getCachedIndexFiles()) {
-			if (file.getType() == tp) {
+			if (file.getType() == type) {
 				filtered.add(file);
 			}
 		}

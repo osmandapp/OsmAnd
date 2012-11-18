@@ -29,6 +29,8 @@ import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -363,5 +365,20 @@ public class MainMenuActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 	
+    
+    @Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+    	menu.add(0, 0, 0, R.string.exit_Button);
+    	return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == 0) {
+			getMyApplication().closeApplication(this);
+			return true;
+		}
+		return false;
+	}
 	
 }

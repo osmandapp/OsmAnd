@@ -14,7 +14,6 @@ import net.osmand.binary.RouteDataBorderLinePoint;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.MapUtils;
-import net.osmand.router.RoutingContext.RouteDataBorderLine;
 
 import org.apache.commons.logging.Log;
 
@@ -144,14 +143,14 @@ public class BinaryRoutePlanner {
 			}
 			ctx.visitedSegments++;
 			if (!inverse) {
-				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, ctx.targetX, ctx.targetY,
+				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, 
 						segment, visitedOppositeSegments, true);
-				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, ctx.targetX, ctx.targetY,
+				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments, 
 						segment, visitedOppositeSegments, false);
 			} else {
-				processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, ctx.startX, ctx.startY, segment,
+				processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, segment,
 						visitedDirectSegments, true);
-				processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments, ctx.startX, ctx.startY, segment,
+				processRouteSegment(ctx, true, graphReverseSegments, visitedOppositeSegments,segment,
 						visitedDirectSegments, false);
 			}
 			updateCalculationProgress(ctx, graphDirectSegments, graphReverseSegments);
@@ -364,7 +363,7 @@ public class BinaryRoutePlanner {
 	
 	
 	private void processRouteSegment(final RoutingContext ctx, boolean reverseWaySearch,
-			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, int targetEndX, int targetEndY,
+			PriorityQueue<RouteSegment> graphSegments, TLongObjectHashMap<RouteSegment> visitedSegments, 
             RouteSegment segment, TLongObjectHashMap<RouteSegment> oppositeSegments, boolean direction) throws IOException {
 		final RouteDataObject road = segment.road;
 		boolean initDirectionAllowed = checkIfInitialMovementAllowedOnSegment(ctx, reverseWaySearch, visitedSegments, segment, direction, road);
@@ -467,7 +466,7 @@ public class BinaryRoutePlanner {
 				
 				float distStartObstacles = segment.distanceFromStart + calculateTimeWithObstacles(ctx, road, segmentDist , obstaclesTime);
 				processIntersections(ctx, graphSegments, visitedSegments, 
-						distStartObstacles, segment, segmentEnd, targetEndX, targetEndY, 
+						distStartObstacles, segment, segmentEnd, 
 						roadNext, reverseWaySearch, outgoingConnections);
 			}
 		}
@@ -635,7 +634,7 @@ public class BinaryRoutePlanner {
 
 	private void processIntersections(RoutingContext ctx, PriorityQueue<RouteSegment> graphSegments,
 			TLongObjectHashMap<RouteSegment> visitedSegments,  float  distFromStart,  
-			RouteSegment segment, int segmentEnd, int targetEndX, int targetEndY, 
+			RouteSegment segment, int segmentEnd,  
 			RouteSegment inputNext, boolean reverseWaySearch, 
 			boolean addSameRoadFutureDirection) {
 		byte searchDirection = reverseWaySearch ? (byte)-1 : (byte)1;
@@ -663,6 +662,8 @@ public class BinaryRoutePlanner {
 			boolean alreadyVisited = nextPlusNotAllowed && nextMinusNotAllowed;
 			boolean skipRoad = sameRoadFutureDirection && !addSameRoadFutureDirection;
 			if (!alreadyVisited && !skipRoad) {
+				int targetEndX = reverseWaySearch? ctx.startX : ctx.targetX;
+				int targetEndY = reverseWaySearch? ctx.startY : ctx.targetY;
 				float distanceToEnd = h(ctx, segment.getRoad().getPoint31XTile(segmentEnd),
 						segment.getRoad().getPoint31YTile(segmentEnd), targetEndX, targetEndY, next);
 				// assigned to wrong direction

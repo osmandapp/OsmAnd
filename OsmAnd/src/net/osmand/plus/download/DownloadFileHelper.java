@@ -136,7 +136,7 @@ public class DownloadFileHelper {
 
 			out = new FileOutputStream(de.fileToSave);
 			try {
-				String urlPrefix = "http://download.osmand.net/download?event=2&file="; 
+				String urlPrefix = "http://"+DownloadOsmandIndexesHelper.INDEX_DOWNLOAD_DOMAIN+"/download?event=2&file="; 
 				String urlSuffix = "&" + Version.getVersionAsURLParam(ctx);
 				if(de.isRoadMap) {
 					urlSuffix += "&road=yes";

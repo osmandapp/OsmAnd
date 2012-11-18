@@ -205,7 +205,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			view.refreshMap();
 			return true;
 		}
-		
+		LatLon pressedLoc = view.getLatLonFromScreenPoint(point.x, point.y);
 		selectedObjects.clear();
 		List<Object> s = new ArrayList<Object>();
 		LatLon latLon = null;
@@ -222,7 +222,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 		if(latLon == null) {
-			latLon = view.getLatLonFromScreenPoint(point.x, point.y);
+			latLon = pressedLoc;
 		}
 		String description = getSelectedObjectDescription();
 		setLocation(latLon, description);

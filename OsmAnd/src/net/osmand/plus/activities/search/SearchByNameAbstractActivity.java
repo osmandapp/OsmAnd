@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
+import java.util.Map;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -71,7 +71,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private StyleSpan previousSpan;
 	private CustomTitleBar titleBar;
 	private static final Log log = LogUtil.getLog(SearchByNameAbstractActivity.class);
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,6 +83,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		initializeTask = getInitializeTask();
 		uiHandler = new UIUpdateHandler();
 		namesFilter = new NamesFilter();
+		addFooterViews();
 		final NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
@@ -98,6 +99,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			@Override
 			public void afterTextChanged(Editable s) {
 				querySearch(s.toString());
+				updateSpan(currentFilter, endingText);
 			}
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,6 +147,9 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		}
 	}
 	
+	protected void addFooterViews() {
+	}
+	
 	public void setLabelText(int res) {
 		titleBar.getTitleView().setText(getString(res));
 	}
@@ -180,13 +185,16 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		return currentFilter;
 	}
 
+	public void research() {
+		String s = getCurrentFilter();
+		currentFilter = "";
+		querySearch(s);
+	}
 	public void querySearch(final String filter) {
 		String f = filter;
-		boolean change = false;
 		if (endingText.length() > 0) {
 			while(!f.endsWith(endingText) && endingText.length() > 0) {
 				endingText = endingText.substring(1);
-				change = true;
 			}
 			f = f.substring(0, f.length() - endingText.length());
 		}
@@ -197,15 +205,16 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			namesFilter.cancelPreviousFilter(f);
 			namesFilter.filter(f);
 		}
-		if(change) {
-			if(previousSpan != null) {
-				searchText.getText().removeSpan(previousSpan);
-			}
-			if (endingText.length() > 0) {
-				previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
-				searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + endingText.length(),
-						Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			}
+	}
+
+	private void updateSpan(String currentFilter, String endingText) {
+		if(previousSpan != null) {
+			searchText.getText().removeSpan(previousSpan);
+		}
+		if (endingText.length() > 0) {
+			previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+			searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + endingText.length(),
+					Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		}
 	}
 	
@@ -226,7 +235,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 			Collections.sort(list,cmp);
 			initialListToFilter = list;
 		}
-		querySearch(searchText.getText().toString());
+		research();
 	}
 	
 	protected abstract Comparator<? super T> createComparator();
@@ -238,24 +247,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	public void itemSelectedBase(final T obj, View v) {
 		itemSelected(obj);
-//		LatLon loc = getLocation(obj);
-//		if (obj != null && loc != null) {
-//			QuickAction qa = new QuickAction(v);
-//			ActionItem ai = new ActionItem();
-//			ai.setTitle("Default");
-//			ai.setOnClickListener(new OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					itemSelected(obj);
-//				}
-//			});
-//			qa.addActionItem(ai);
-//			// TODO more granular description and text message!
-//			MapActivityActions.createDirectionsActions(qa, loc,
-//					obj, getText(obj), getZoomToDisplay(endingObject),
-//					SearchByNameAbstractActivity.this, true, null);
-//			qa.show();
-//		}
 	}
 	public abstract void itemSelected(T obj);
 	
@@ -315,18 +306,21 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	
 	
 	class UIUpdateHandler extends Handler {
-		private Set<String> endingSet = new HashSet<String>();
-		private boolean add = true;
+		private Map<String, Integer> endingMap = new HashMap<String, Integer>();
+		private int minimalIndex = Integer.MAX_VALUE;
+		private String minimalText = null;
 		
 		@SuppressWarnings("unchecked")
 		@Override
 		public void handleMessage(Message msg) {
+			String currentFilter = SearchByNameAbstractActivity.this.currentFilter;
 			if(msg.what == MESSAGE_CLEAR_LIST){
-				add = true;
+				minimalIndex = Integer.MAX_VALUE;
+				minimalText = null;
 				getListAdapter().clear();
 				endingObject = null;
 				if(currentFilter.length() == 0) {
-					endingSet.clear();
+					endingMap.clear();
 				}
 				String etext = endingText;
 				endingText = "";
@@ -337,32 +331,39 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				// searchText.setSelection(currentFilter.length());
 			} else if(msg.what == MESSAGE_ADD_ENTITY){
 				getListAdapter().add((T) msg.obj);
-				if (add && currentFilter.length() > 0) {
+				if (currentFilter.length() > 0) {
 					String text = getShortText((T) msg.obj);
-					boolean newEntry = endingSet.add(text);
-					if(text.toLowerCase().startsWith(currentFilter.toLowerCase())){
-						text = text.substring(currentFilter.length());
-					} else {
-						text = " - " + text;
+					int entries = !endingMap.containsKey(text) ? 0 : endingMap.get(text);
+					if (entries < minimalIndex) {
+						if(minimalText != null) {
+							endingMap.put(minimalText, endingMap.get(minimalText) - 1);
+						}
+						minimalIndex = entries;
+						minimalText = text;
+						endingMap.put(text, entries + 1);
+						if (text.toLowerCase().startsWith(currentFilter.toLowerCase())) {
+							text = text.substring(currentFilter.length());
+						} else {
+							text = " - " + text;
+						}
+						if (text.length() > MAX_VISIBLE_NAME) {
+							text = text.substring(0, MAX_VISIBLE_NAME) + "..";
+						}
+						String etext = endingText;
+						endingText = text;
+						searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), text);
+						if (previousSpan != null) {
+							searchText.getText().removeSpan(previousSpan);
+						}
+						previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
+						searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + text.length(),
+								Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+						if (searchText.getSelectionEnd() > currentFilter.length()) {
+							searchText.setSelection(currentFilter.length());
+						}
+						// endingButton.setText(text + "..");
+						endingObject = (T) msg.obj;
 					}
-					if (text.length() > MAX_VISIBLE_NAME) {
-						text = text.substring(0, MAX_VISIBLE_NAME) + "..";
-					}
-					String etext = endingText;
-					endingText = text;
-					searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), text);
-					if(previousSpan != null) {
-						searchText.getText().removeSpan(previousSpan);
-					}
-					previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
-					searchText.getText().setSpan(previousSpan, currentFilter.length(),
-							currentFilter.length() + text.length() , Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-					if(searchText.getSelectionEnd() > currentFilter.length()) {
-						searchText.setSelection(currentFilter.length());
-					}
-					add = !newEntry;
-					//endingButton.setText(text + "..");
-					endingObject = (T) msg.obj;
 				}
 			}
 		}

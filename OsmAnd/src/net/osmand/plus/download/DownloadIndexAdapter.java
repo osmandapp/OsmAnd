@@ -116,7 +116,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					boolean add = true;
 					for (String var : vars) {
 						if (var.length() > 0) {
-							if (!item.getVisibleName().toLowerCase().contains(var) && !item.getDescription().toLowerCase().contains(var)) {
+							if (!item.getVisibleName().toLowerCase().contains(var) 
+									/*&& !item.getDescription().toLowerCase().contains(var)*/) {
 								add = false;
 							}
 						}

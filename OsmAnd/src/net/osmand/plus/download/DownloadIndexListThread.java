@@ -52,7 +52,7 @@ public class DownloadIndexListThread extends Thread {
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download, Toast.LENGTH_LONG).show();
 							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 						}
-						uiActivity.setListAdapter(new DownloadIndexAdapter(uiActivity, indexFiles.getIndexFiles()));
+						uiActivity.setListAdapter(new DownloadIndexAdapter(uiActivity, uiActivity.getFilteredByType()));
 						if (indexFiles.isIncreasedMapVersion()) {
 							uiActivity.showDialog(DownloadIndexActivity.DIALOG_MAP_VERSION_UPDATE);
 						}

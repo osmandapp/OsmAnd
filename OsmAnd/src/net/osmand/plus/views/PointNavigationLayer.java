@@ -197,7 +197,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				int ey = (int) point.y;
 				int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
 				int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
-				if (Math.abs(x - ex) <= 12 && Math.abs(y - ey) <= 12) {
+				int r = getRadiusPoi(view.getZoom());
+				if (Math.abs(x - ex) <= r && Math.abs(y - ey) <= r) {
 					TargetPoint tp = new TargetPoint();
 					tp.location = latLon;
 					tp.intermediate = !target;
@@ -213,6 +214,20 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		}
 		
 		
+	}
+	
+	public int getRadiusPoi(int zoom){
+		int r = 0;
+		if(zoom <= 15){
+			r = 10;
+		} else if(zoom == 16){
+			r = 14;
+		} else if(zoom == 17){
+			r = 16;
+		} else {
+			r = 18;
+		}
+		return (int) (r * dm.density);
 	}
 
 	@Override
@@ -253,6 +268,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 							map.navigateToPoint(null, true, -1);
 						}
 					}
+					map.getMapLayers().getContextMenuLayer().setLocation(null, "");
 				}
 			};
 			

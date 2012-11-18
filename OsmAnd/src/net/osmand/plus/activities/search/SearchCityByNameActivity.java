@@ -18,12 +18,39 @@ import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import android.os.AsyncTask;
 import android.os.Message;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City> {
 
 	private RegionAddressRepository region;
+	private int searchVillagesMode = -1;
+	private Button searchVillages;
+	
+
+	@Override
+	protected void addFooterViews() {
+		final FrameLayout ll = new FrameLayout(this);
+		searchVillages = new Button(this);
+		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		lp.gravity = Gravity.CENTER_HORIZONTAL;
+		searchVillages.setLayoutParams(lp);
+		searchVillages.setText(R.string.search_villages_and_postcodes);
+		ll.addView(searchVillages);
+		searchVillages.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				searchVillagesMode = 1;
+				research();
+				searchVillages.setVisibility(View.GONE);
+			}
+		});
+		getListView().addFooterView(ll);
+	}
+	
 	
 	@Override
 	protected Comparator<? super City> createComparator() {
@@ -77,7 +104,8 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	
 	@Override
 	protected void filterLoop(String query, Collection<City> list) {
-		if(!initializeTaskIsFinished() || query.length() <= 2){
+		redefineSearchVillagesMode(query.length());
+		if(!initializeTaskIsFinished() || (query.length() <= 3  && !searchVillages())){
 			super.filterLoop(query, list);
 		} else {
 			region.fillWithSuggestedCities(query, new ResultMatcher<City>() {
@@ -92,7 +120,26 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 					msg.sendToTarget();
 					return true;
 				}
-			}, locationToSearch);
+			}, searchVillages(), locationToSearch);
+		}
+	}
+
+
+	private boolean searchVillages() {
+		return searchVillagesMode >= 0;
+	}
+
+	private void redefineSearchVillagesMode(int queryLen) {
+		if(searchVillagesMode == 1) {
+			searchVillagesMode = 0;
+		} else if(searchVillagesMode == 0 && queryLen <=  3) {
+			searchVillagesMode = -1;
+			uiHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					searchVillages.setVisibility(View.VISIBLE);
+				}
+			});
 		}
 	}
 
