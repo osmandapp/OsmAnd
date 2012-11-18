@@ -1110,4 +1110,6 @@
     <string name="rendering_attr_showRoadMaps_description">Zvolte, kdy zobrazovat jen mapy silnic:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mapy silnic</string>
     <string name="incomplete_locale">neúplný</string>
+	<string name="no_buildings_found">Nebyly nalezeny žádné budovy.</string>
+    <string name="search_villages_and_postcodes">"Hledat obec/PSČ "</string>
 	</resources>
