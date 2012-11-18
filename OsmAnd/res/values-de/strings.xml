@@ -2,7 +2,7 @@
 <resources>
 	<string name="incremental_search_city">Inkrementelle Stadtsuche</string>
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
-	<string name="rendering_attr_showRoadMaps_description">Wann sollen reine Straßenkarten angezeigt werden:</string>
+	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
 	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
 	<string name="download_roads_only_item">Straßen </string>
 	<string name="download_regular_maps">Reguläre Karten</string>
@@ -14,7 +14,7 @@
 	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er beendet werden?</string>
 	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0 :
 		\n\t* Verbessertes Routing, schneller und präzise, bis 250km
-		\n\t* Strassenkartenoption
+		\n\t* Option reiner Straßenkarten
 		\n\t* Karte behält nach Unterbrechungen Positionsbindung
 		\n\t* Hintergrunddienst wird bei Navigation aktiviert
 	</string>
