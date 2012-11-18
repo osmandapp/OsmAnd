@@ -151,7 +151,7 @@
 	<string name="show_ruler_level_descr">Zeige Maßstab auf der Karte an</string>
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
-	<string name="back_to_location">Zurück zum Ort</string>
+	<string name="back_to_location">Zurück zur Position</string>
 	<string name="help">Hilfe</string>
 	<string name="show_details">Zeige Details</string>
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
@@ -748,7 +748,7 @@
 	<string name="first_time_download">Offline-Daten herunterladen</string>
 	<string name="first_time_msg">Danke, dass Sie OsmAnd verwenden. \nFür viele Funktionen sind Offline-Karten erforderlich, die Sie in den Einstellungen unter Offline-Daten herunterladen oder selbst erstellen können. Danach können Sie Landkarten ansehen, Adressen, POI und ÖPNV finden.</string>
 	<string name="search_poi_location">Suche Signal …</string>
-	<string name="search_near_map">Suche um Lokation</string>
+	<string name="search_near_map">Suche in der Nähe</string>
 	<string name="search_nearby">Suche um Aufenthaltsort</string>
 	<string name="map_orientation_default">Lagesensor</string>
 	<string name="map_orientation_portrait">Hochformat</string>
@@ -1004,7 +1004,7 @@
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
 	<string name="download_link_and_local_description">Hier klicken um Offline-Daten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
-	<string name="context_menu_item_directions">Hierher navigieren</string>
+	<string name="context_menu_item_directions">Hierhin navigieren</string>
 	<string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Applikation benötigt und ist für den Download vorselektiert.</string>
 	<string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>
@@ -1027,7 +1027,7 @@
 	</string>
 	<string name="update_downlod_list">Liste neu laden</string>
 	<string name="starting_point_too_far">Startpunkt zu weit von nächster Straße entfernt.</string>
-	<string name="shared_location">Gemeinsamer Standort</string>
+	<string name="shared_location">Mitgeteilter Standort</string>
 	<string name="osmand_parking_event">Fahrzeug vom Parkplatz abholen</string>
 	<string name="osmand_parking_warning">Warnung</string>
 	<string name="osmand_parking_warning_text">Hinweis zum Abholen des Fahrzeugs wurde vormals zum Kalender hinzugefügt. Hinweis besteht solange, bis dieser manuell gelöscht wird.</string>
