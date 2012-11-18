@@ -10,12 +10,11 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 	<string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l închideți?</string>
-    <string name="tip_recent_changes_1_0_0_t">Modificări în versiunea 1.0 :
-	\n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
-	\n\t* Harta drumurilor
-	\n\t* Harta nu mai pierde poziția după întreruperi
-	\n\t* Activarea serviciului în background în timpul navigării
-    </string>
+    <string name="tip_recent_changes_1_0_0_t">"Modificări în versiunea 1.0.0 :
+\n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
+\n\t* Harta drumurilor
+\n\t* Harta nu mai pierde poziția după întreruperi
+\n\t* Activarea serviciului în background în timpul navigării "</string>
 	<string name="tip_recent_changes_0_8_4_t">Ce este nou în 0.8.4 :
 	\n\t* Au fost corectate câteva erori
 	\n\t* Nu se mai pierde poziția pe hartă dupa întreruperi
@@ -1168,5 +1167,5 @@
     <string name="download_regular_maps">Hărți complete</string>
     <string name="download_roads_only_maps">Hărți exclusiv cu drumuri</string>
     <string name="incomplete_locale">incomplet</string>
-	<string name="search_villages_and_postcodes">Caută sate/cod poștal</string>
+	<string name="search_villages_and_postcodes">"Caută sate/cod poștal "</string>
 	</resources>
