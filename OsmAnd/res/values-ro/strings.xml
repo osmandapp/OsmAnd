@@ -1168,4 +1168,5 @@
     <string name="download_roads_only_maps">Hărți exclusiv cu drumuri</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="search_villages_and_postcodes">"Caută sate/cod poștal "</string>
-	</resources>
+	<string name="no_buildings_found">Număr negăsit.</string>
+    </resources>
