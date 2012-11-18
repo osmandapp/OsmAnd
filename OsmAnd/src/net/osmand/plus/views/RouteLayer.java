@@ -99,27 +99,27 @@ public class RouteLayer extends OsmandMapLayer {
 			double rightLongitude = latlonRect.right;
 			double lat = topLatitude - bottomLatitude + 0.1;
 			double lon = rightLongitude - leftLongitude + 0.1;
-			fillLocationsToShow(topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
-			
-			if (points.size() > 0) {
-				int px = view.getMapXForPoint(points.get(0).getLongitude());
-				int py = view.getMapYForPoint(points.get(0).getLatitude());
-				path.moveTo(px, py);
-				for (int i = 1; i < points.size(); i++) {
-					Location o = points.get(i);
-					int x = view.getMapXForPoint(o.getLongitude());
-					int y = view.getMapYForPoint(o.getLatitude());
-//					if (i == 1) {
-//						pathBearing = (float) (Math.atan2(y - py, x - px) / Math.PI * 180);
-//					}
-					path.lineTo(x, y);
-				}
-				canvas.drawPath(path, paint);
+			drawLocations(canvas, topLatitude + lat, leftLongitude - lon, bottomLatitude - lat, rightLongitude + lon);
+		}
+	}
+
+
+	private void drawSegment(Canvas canvas) {
+		if (points.size() > 0) {
+			int px = view.getMapXForPoint(points.get(0).getLongitude());
+			int py = view.getMapYForPoint(points.get(0).getLatitude());
+			path.moveTo(px, py);
+			for (int i = 1; i < points.size(); i++) {
+				Location o = points.get(i);
+				int x = view.getMapXForPoint(o.getLongitude());
+				int y = view.getMapYForPoint(o.getLatitude());
+				path.lineTo(x, y);
 			}
+			canvas.drawPath(path, paint);
 		}
 	}
 	
-	public synchronized void fillLocationsToShow(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
+	public void drawLocations(Canvas canvas, double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude) {
 		points.clear();
 		boolean previousVisible = false;
 		Location lastProjection = helper.getLastProjection();
@@ -146,12 +146,13 @@ public class RouteLayer extends OsmandMapLayer {
 				previousVisible = true;
 			} else if (previousVisible) {
 				points.add(ls);
+				
+				drawSegment(canvas);
 				previousVisible = false;
-				// do not continue make method more efficient (because it calls in UI thread)
-				// this break also has logical sense !
-				break;
+				points.clear();
 			}
 		}
+		drawSegment(canvas);
 	}
 	
 	public RoutingHelper getHelper() {

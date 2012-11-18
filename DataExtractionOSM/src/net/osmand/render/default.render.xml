@@ -53,7 +53,7 @@
 
 	<renderingAttribute name="gpxColor">
 		<!-- filter roadColors="Road atlas style" attrColorValue="#B400FFFF"/ -->
-		<filter nightMode="false" attrColorValue="#B400FFFF"/>
+		<filter nightMode="false" attrColorValue="#B4B319FF"/>
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
