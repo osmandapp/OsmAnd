@@ -1,9 +1,17 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="incremental_search_city">Inkrementelle Stadtsuche</string>
+	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
+	<string name="rendering_attr_showRoadMaps_description">Wann sollen reine Straßenkarten angezeigt werden:</string>
+	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
+	<string name="download_roads_only_item">Straßen </string>
+	<string name="download_regular_maps">Reguläre Karten</string>
+	<string name="download_roads_only_maps">Reine Straßenkarten</string>
+
 	<string name="safe_mode_description">Applikation läuft im abgesicherten Modus (verwendet langsameren Android statt nativem Code).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Applikation läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
-	<string name="background_service_is_enabled_question">Der Hintergrunddiesnt läuft noch, soll er beendet werden?</string>
+	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er beendet werden?</string>
 	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0 :
 		\n\t* Verbessertes Routing, schneller und präzise, bis 250km
 		\n\t* Strassenkartenoption
