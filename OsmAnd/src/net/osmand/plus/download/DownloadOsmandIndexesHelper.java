@@ -36,7 +36,7 @@ import android.widget.Toast;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = LogUtil.getLog(DownloadOsmandIndexesHelper.class);
-	public static final String INDEX_DOWNLOAD_DOMAIN = "new.osmand.net";
+	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
 
 	public static IndexFileList getIndexesList(Context ctx) {
 		PackageManager pm =ctx.getPackageManager();

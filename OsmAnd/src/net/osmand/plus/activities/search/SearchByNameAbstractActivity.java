@@ -98,8 +98,17 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				querySearch(s.toString());
-				updateSpan(currentFilter, endingText);
+				String newFilter = s.toString();
+				String newEndingText = endingText;
+				if (newEndingText.length() > 0) {
+					while(!newFilter.endsWith(newEndingText) && newEndingText.length() > 0) {
+						newEndingText = newEndingText.substring(1);
+					}
+					newFilter = newFilter.substring(0, newFilter.length() - newEndingText.length());
+				}
+				updateTextBox(newFilter, newEndingText, endingObject, false);
+				querySearch(newFilter);
+				
 			}
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -110,13 +119,6 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		});
 		// Not perfect
 //		searchText.setOnClickListener(new OnClickListener() {
-//			String previousSelect = "";
-//			@Override
-//			public void onClick(View v) {
-//				if(!previousSelect.equals(endingText) && endingText.length() > 0) {
-//					previousSelect = endingText;
-//					itemSelectedBase(endingObject, v);
-//				}
 //			}
 //		});
 		searchText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -186,35 +188,38 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 
 	public void research() {
-		String s = getCurrentFilter();
-		currentFilter = "";
-		querySearch(s);
+		initFilter = false;
+		querySearch(currentFilter);
 	}
-	public void querySearch(final String filter) {
-		String f = filter;
-		if (endingText.length() > 0) {
-			while(!f.endsWith(endingText) && endingText.length() > 0) {
-				endingText = endingText.substring(1);
-			}
-			f = f.substring(0, f.length() - endingText.length());
-		}
-		if (!currentFilter.equals(f) || !initFilter) {
-			currentFilter = f;
+	
+	private void querySearch(final String filter) {
+		if (!currentFilter.equals(filter) || !initFilter) {
+			currentFilter = filter;
 			initFilter = true;
 			progress.setVisibility(View.VISIBLE);
-			namesFilter.cancelPreviousFilter(f);
-			namesFilter.filter(f);
+			namesFilter.cancelPreviousFilter(filter);
+			namesFilter.filter(filter);
 		}
 	}
 
-	private void updateSpan(String currentFilter, String endingText) {
-		if(previousSpan != null) {
-			searchText.getText().removeSpan(previousSpan);
+	private void updateTextBox(String currentFilter, String locEndingText, T obj, boolean updateText) {
+		String prevEndtext = endingText;
+		endingText = locEndingText;
+		endingObject = obj;
+		if(updateText) {
+			searchText.getText().replace(currentFilter.length(), currentFilter.length() + prevEndtext.length(), locEndingText);
 		}
-		if (endingText.length() > 0) {
+		if (previousSpan != null) {
+			searchText.getText().removeSpan(previousSpan);
+			previousSpan = null;
+		}
+		if (locEndingText.length() > 0) {
 			previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
-			searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + endingText.length(),
+			searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + locEndingText.length(),
 					Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			if (searchText.getSelectionEnd() > currentFilter.length()) {
+				searchText.setSelection(currentFilter.length());
+			}
 		}
 	}
 	
@@ -318,51 +323,33 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				minimalIndex = Integer.MAX_VALUE;
 				minimalText = null;
 				getListAdapter().clear();
-				endingObject = null;
 				if(currentFilter.length() == 0) {
 					endingMap.clear();
 				}
-				String etext = endingText;
-				endingText = "";
-				if(previousSpan != null) {
-					searchText.getText().removeSpan(previousSpan);
-				}
-				searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), "");
-				// searchText.setSelection(currentFilter.length());
+				updateTextBox(currentFilter, "", null, true);
 			} else if(msg.what == MESSAGE_ADD_ENTITY){
 				getListAdapter().add((T) msg.obj);
 				if (currentFilter.length() > 0) {
-					String text = getShortText((T) msg.obj);
-					int entries = !endingMap.containsKey(text) ? 0 : endingMap.get(text);
+					String shortText = getShortText((T) msg.obj);
+					int entries = !endingMap.containsKey(shortText) ? 0 : endingMap.get(shortText);
 					if (entries < minimalIndex) {
 						if(minimalText != null) {
 							endingMap.put(minimalText, endingMap.get(minimalText) - 1);
 						}
 						minimalIndex = entries;
-						minimalText = text;
-						endingMap.put(text, entries + 1);
-						if (text.toLowerCase().startsWith(currentFilter.toLowerCase())) {
-							text = text.substring(currentFilter.length());
+						minimalText = shortText;
+						endingMap.put(shortText, entries + 1);
+						String locEndingText;
+						if (shortText.toLowerCase().startsWith(currentFilter.toLowerCase())) {
+							locEndingText = shortText.substring(currentFilter.length());
 						} else {
-							text = " - " + text;
+							locEndingText = " - " + shortText;
 						}
-						if (text.length() > MAX_VISIBLE_NAME) {
-							text = text.substring(0, MAX_VISIBLE_NAME) + "..";
+						if (locEndingText.length() > MAX_VISIBLE_NAME) {
+							locEndingText = locEndingText.substring(0, MAX_VISIBLE_NAME) + "..";
 						}
-						String etext = endingText;
-						endingText = text;
-						searchText.getText().replace(currentFilter.length(), currentFilter.length() + etext.length(), text);
-						if (previousSpan != null) {
-							searchText.getText().removeSpan(previousSpan);
-						}
-						previousSpan = new StyleSpan(Typeface.BOLD_ITALIC);
-						searchText.getText().setSpan(previousSpan, currentFilter.length(), currentFilter.length() + text.length(),
-								Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-						if (searchText.getSelectionEnd() > currentFilter.length()) {
-							searchText.setSelection(currentFilter.length());
-						}
-						// endingButton.setText(text + "..");
-						endingObject = (T) msg.obj;
+						updateTextBox(currentFilter, locEndingText, (T) msg.obj, true);
+						
 					}
 				}
 			}

@@ -14,6 +14,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import android.os.AsyncTask;
 import android.view.View;
+import android.widget.Toast;
 
 public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<Building> {
 	private RegionAddressRepository region;
@@ -40,6 +41,10 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 				setLabelText(R.string.incremental_search_building);
 				progress.setVisibility(View.INVISIBLE);
 				finishInitializing(result);
+				if (result.isEmpty()) {
+					Toast.makeText(SearchBuildingByNameActivity.this, 
+							R.string.no_buildings_found, Toast.LENGTH_LONG).show();
+				}
 			}
 			
 			@Override

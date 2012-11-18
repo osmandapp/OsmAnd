@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally.</string>
     <string name="search_villages_and_postcodes">Search villages/postcode </string>
 	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
