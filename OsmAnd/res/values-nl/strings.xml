@@ -1050,5 +1050,5 @@
     <string name="download_roads_only_maps">Alleen-wegen kaarten</string>
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
-    <string name="search_villages_and_postcodes">Zoeken dorpen/postcode</string>
+    <string name="search_villages_and_postcodes">"Zoeken dorpen/postcode "</string>
 	</resources>
