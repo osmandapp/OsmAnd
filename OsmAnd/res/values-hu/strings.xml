@@ -1069,4 +1069,6 @@
     <string name="download_regular_maps">Szokásos térképek</string>
     <string name="download_roads_only_maps">Csak-út térképek</string>
     <string name="incomplete_locale">hiányos</string>
+	<string name="no_buildings_found">Nem található épület.</string>
+    <string name="search_villages_and_postcodes">Település/irányítószám keresése</string>
 	</resources>
