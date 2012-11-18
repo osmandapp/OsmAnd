@@ -1089,4 +1089,5 @@
     <string name="download_roads_only_maps">Οδικοί-μόνο χάρτες</string>
     <string name="incomplete_locale">ημιτελές</string>
 	<string name="search_villages_and_postcodes">"Αναζήτηση χωριών/ταχ. κωδικών "</string>
-	</resources>
+	<string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
+    </resources>
