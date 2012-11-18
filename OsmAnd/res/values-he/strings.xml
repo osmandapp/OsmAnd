@@ -1094,4 +1094,5 @@
     <string name="download_regular_maps">מפות רגילות</string>
     <string name="download_roads_only_maps">מפות עם דרכים בלבד</string>
     <string name="incomplete_locale">חלקי</string>
+	<string name="search_villages_and_postcodes">חיפוש כפרים/מיקוד</string>
 	</resources>
