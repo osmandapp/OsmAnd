@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Start Live tracking</string>
-  <string name="live_monitoring_mode_on">Stop Live tracking</string>
+<resources><string name="live_monitoring_mode_off">Start\nLive tracking</string>
+  <string name="live_monitoring_mode_on">Stop\nLive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
   <string name="show_lanes">Toon rijstroken</string>
   <string name="avoid_unpaved">Vermijd onverharde wegen</string>
@@ -14,8 +14,8 @@
   <string name="map_widget_appearance">Overige:</string>
   <string name="map_widget_view_direction">Kijkrichting</string>
   <string name="map_widget_transparent">Transparante skin</string>
-  <string name="monitoring_mode_off">Start trackregistratie</string>
-  <string name="monitoring_mode_on">Stop trackopn.</string>
+  <string name="monitoring_mode_off">Start\ntrackregistratie</string>
+  <string name="monitoring_mode_on">Stop\ntrackregistratie.</string>
   <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
@@ -961,8 +961,8 @@
   <string name="bg_service_interval">Zet ontwaak-interval:</string>
   <string name="screen_is_locked">Voor ontgrendelen scherm, toets het slot icoon</string>
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
-  <string name="bg_service_sleep_mode_off">Slaap modus aanzetten</string>
-  <string name="bg_service_sleep_mode_on">Slaap modus uitzetten</string>
+  <string name="bg_service_sleep_mode_off">Slaap modus\naanzetten</string>
+  <string name="bg_service_sleep_mode_on">Slaap modus\nuitzetten</string>
 <string name="email">email</string>
 <string name="filterpoi_activity">Creëer interessepunt filter</string>
 <string name="select_navigation_mode">Selecteer transportmethode</string>
