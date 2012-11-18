@@ -1,5 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="no_buildings_found">Kein Gebäude gefunden.</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell</string>
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
