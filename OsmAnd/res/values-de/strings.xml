@@ -1,6 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="incremental_search_city">Inkrementelle Stadtsuche</string>
+	<string name="incremental_search_city">Suche Stadt inkrementell</string>
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
 	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
@@ -911,7 +911,6 @@
 	<string name="search_activity">Suche</string>
 	<string name="searchpoi_activity">POI wählen</string>
 	<string name="search_POI_level_btn">Weitere Ergebnisse</string>
-	<string name="incremental_search_city">Suche Stadt inkrementell. Um Städte/Postleitzahlen zu finden mindestens 3 Zeichen eingeben.</string>
 	<string name="incremental_search_street">Suche Straße inkrementell</string>
 	<string name="incremental_search_building">Suche Hausnr. inkrementell</string>
 	<string name="choose_available_region">Wähle Region</string>
