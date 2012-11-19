@@ -145,8 +145,9 @@ public class BidForFixHelper {
 					sb.append(line);
 				}
 				JSONTokener json = new JSONTokener(sb.toString());
-				JSONObject root = (JSONObject) json.nextValue();
-				if (root != null) {
+				Object o =  json.nextValue();
+				if (o instanceof JSONObject) {
+					JSONObject root = (JSONObject) o;
 					JSONArray issues = root.getJSONArray("issues");
 					for (int i = 0; i < issues.length(); i++) {
 						JSONObject jo = (JSONObject) issues.get(i);

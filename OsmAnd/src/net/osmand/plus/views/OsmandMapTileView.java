@@ -196,7 +196,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
 
-	public void addLayer(OsmandMapLayer layer, float zOrder) {
+	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
 		int i = 0;
 		for (i = 0; i < layers.size(); i++) {
 			if (zOrders.get(layers.get(i)) > zOrder) {
@@ -208,7 +208,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		zOrders.put(layer, zOrder);
 	}
 
-	public void removeLayer(OsmandMapLayer layer) {
+	public synchronized void removeLayer(OsmandMapLayer layer) {
 		layers.remove(layer);
 		zOrders.remove(layer);
 		layer.destroyLayer();

@@ -44,10 +44,7 @@ public class RouteResultPreparation {
 			}
 			RouteSegmentResult rr = result.get(i);
 			RouteDataObject road = rr.getObject();
-			BinaryMapIndexReader reader = ctx.reverseMap.get(road.region);
-			if(reader != null) {
-				reader.initRouteRegion(road.region);
-			}
+			checkAndInitRouteRegion(ctx, road);
 			double distOnRoadToPass = 0;
 			double speed = ctx.getRouter().defineSpeed(road);
 			if (speed == 0) {
@@ -113,6 +110,13 @@ public class RouteResultPreparation {
 			rr.setDistance((float) distance);
 
 			
+		}
+	}
+
+	private void checkAndInitRouteRegion(RoutingContext ctx, RouteDataObject road) throws IOException {
+		BinaryMapIndexReader reader = ctx.reverseMap.get(road.region);
+		if(reader != null) {
+			reader.initRouteRegion(road.region);
 		}
 	}
 
@@ -483,7 +487,7 @@ public class RouteResultPreparation {
 	}
 
 	
-	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) {
+	private void attachRoadSegments(RoutingContext ctx, List<RouteSegmentResult> result, int routeInd, int pointInd, boolean plus) throws IOException {
 		RouteSegmentResult rr = result.get(routeInd);
 		RouteDataObject road = rr.getObject();
 		long nextL = pointInd < road.getPointsLength() - 1 ? getPoint(road, pointInd + 1) : 0;
@@ -537,6 +541,7 @@ public class RouteResultPreparation {
 			RouteSegment routeSegment = it.next();
 			if (routeSegment.road.getId() != road.getId() && routeSegment.road.getId() != previousRoadId) {
 				RouteDataObject addRoad = routeSegment.road;
+				checkAndInitRouteRegion(ctx, addRoad);
 				// TODO restrictions can be considered as well
 				int oneWay = ctx.getRouter().isOneWay(addRoad);
 				if (oneWay >= 0 && routeSegment.getSegmentStart() < addRoad.getPointsLength() - 1) {

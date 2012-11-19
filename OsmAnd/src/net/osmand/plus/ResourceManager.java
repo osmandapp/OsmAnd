@@ -508,10 +508,13 @@ public class ResourceManager {
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
 		if (file.exists() && file.canRead()) {
-			for (File f : file.listFiles()) {
-				if (f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
-					String name = f.getName().substring(0, f.getName().length() - IndexConstants.RENDERER_INDEX_EXT.length());
-					externalRenderers.put(name, f);
+			File[] lf = file.listFiles();
+			if (lf != null) {
+				for (File f : lf) {
+					if (f != null && f.getName().endsWith(IndexConstants.RENDERER_INDEX_EXT)) {
+						String name = f.getName().substring(0, f.getName().length() - IndexConstants.RENDERER_INDEX_EXT.length());
+						externalRenderers.put(name, f);
+					}
 				}
 			}
 		}
@@ -926,9 +929,12 @@ public class ResourceManager {
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {
 		File file = context.getSettings().extendOsmandPath(BACKUP_PATH);
 		if (file != null && file.isDirectory()) {
-			for (File f : file.listFiles()) {
-				if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					map.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$		
+			File[] lf = file.listFiles();
+			if (lf != null) {
+				for (File f : lf) {
+					if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+						map.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$		
+					}
 				}
 			}
 		}
