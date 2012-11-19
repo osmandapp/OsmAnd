@@ -1020,7 +1020,7 @@
 <string name="monitoring_mode_off">Enregistrer GPX</string>
 <string name="monitoring_mode_on">Arrêter\n enr. GPX</string>
 <string name="gps_wakeup_interval">Intervalle activation GPS: %s</string>
-<string name="email">email</string>
+<string name="email">courriel</string>
 <string name="map_widget_day_night">Carte Jour/Nuit</string>
 <string name="map_widget_vector_attributes">Attributs de rendu :</string>
 <string name="select_navigation_mode">Sélectionner le mode de transport</string>
@@ -1126,12 +1126,12 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
-    <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher les cartes uniquement routières:</string>
+    <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher les cartes uniquement routières :</string>
 	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">"Routes uniquement "</string>
     <string name="download_regular_maps">Cartes standards</string>
     <string name="download_roads_only_maps">Cartes routières uniquement</string>
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun bâtiment trouvé.</string>
-    <string name="search_villages_and_postcodes">Rechercher villages / code postal</string>
+    <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
 	</resources>
