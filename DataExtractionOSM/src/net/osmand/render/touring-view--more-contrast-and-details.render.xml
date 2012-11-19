@@ -53,8 +53,10 @@
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
-	<!-- TODO: Somehow set hmRendered="true" from here to replace "Show more map detail" setting in UI -->
 	<!-- maximize details: road inclusion as early as possible in low density areas -->
+	<renderingAttribute name="hmRendered">
+		<filter attrBoolValue="true"/>
+	</renderingAttribute>
 
 	<order>
 	</order>

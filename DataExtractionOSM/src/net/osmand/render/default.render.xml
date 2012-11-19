@@ -10,8 +10,8 @@
 	-->
 
 	<!-- Types : string, int, boolean; possibleValues comma separated possible values for int/string -->
-	<renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
-		type="boolean" possibleValues=""/>
+	<!-- renderingProperty attr="hmRendered" name="Show more map detail" description="Increase amount of map detail shown"
+		type="boolean" possibleValues=""/ -->
 	<!-- renderingProperty attr="roadColors" name="Road color scheme" description="Select road color scheme for specific purpose"
 		type="string" possibleValues="Modified Mapnik,Road atlas style,High contrast roads,Experimental"/ -->
 	<renderingProperty attr="contourLines" name="Show contour lines" description="Select minimum zoom level to display in map if available. Separate SRTM-file may be needed."
@@ -22,6 +22,11 @@
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="showRoadMaps" name="Show road maps" description="Select how to show maps that have only road information."
 		type="string" possibleValues="Always - never show regular maps,Where no regular map is available,Never"/>
+
+	<!-- This section instead of UI setting for the "Show more map detail" property, so it can be called from depends rendering styles -->
+	<renderingAttribute name="hmRendered">
+		<filter attrBoolValue="false"/>
+	</renderingAttribute>
 
 	<renderingAttribute name="defaultColor">
 		<filter noPolygons="true" attrColorValue="#00ffffff"/>
