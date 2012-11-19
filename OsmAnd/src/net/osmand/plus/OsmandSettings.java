@@ -996,7 +996,9 @@ public class OsmandSettings {
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_LON = "point_navigate_lon"; //$NON-NLS-1$
 	public final static String POINT_NAVIGATE_ROUTE = "point_navigate_route"; //$NON-NLS-1$
+	public final static String POINT_NAVIGATE_DESCRIPTION = "point_navigate_description"; //$NON-NLS-1$
 	public final static String INTERMEDIATE_POINTS = "intermediate_points"; //$NON-NLS-1$
+	public final static String INTERMEDIATE_POINTS_DESCRIPTION = "intermediate_points_description"; //$NON-NLS-1$
 
 	public LatLon getPointToNavigate() {
 		float lat = globalPreferences.getFloat(POINT_NAVIGATE_LAT, 0);
@@ -1007,6 +1009,11 @@ public class OsmandSettings {
 		return new LatLon(lat, lon);
 	}
 	
+	public String getPointNavigateDescription() {
+		return globalPreferences.getString(POINT_NAVIGATE_DESCRIPTION, "");
+	}
+	
+	
 	public boolean isRouteToPointNavigateAndClear(){
 		boolean t = globalPreferences.contains(POINT_NAVIGATE_ROUTE);
 		globalPreferences.edit().remove(POINT_NAVIGATE_ROUTE).commit();
@@ -1015,6 +1022,22 @@ public class OsmandSettings {
 	
 	public boolean clearIntermediatePoints() {
 		return globalPreferences.edit().remove(INTERMEDIATE_POINTS).commit();
+	}
+	
+	public List<String> getIntermediatePointDescriptions(int sz) {
+		List<String> list = new ArrayList<String>();
+		String ip = globalPreferences.getString(INTERMEDIATE_POINTS_DESCRIPTION, "");
+		if (ip.trim().length() > 0) {
+			StringTokenizer tok = new StringTokenizer(ip, "--");
+			while (tok.hasMoreTokens()) {
+				String d = tok.nextToken();
+				list.add(d);
+			}
+		}
+		while(list.size() < sz) {
+			list.add("");
+		}
+		return list;
 	}
 	
 	public List<LatLon> getIntermediatePoints() {
@@ -1036,19 +1059,23 @@ public class OsmandSettings {
 	
 	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index) {
 		List<LatLon> ps = getIntermediatePoints();
+		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
+		ds.add(index, historyDescription);
 		if (historyDescription != null) {
 			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
 		}
-		return saveIntermediatePoints(ps);
+		return saveIntermediatePoints(ps,ds);
 	}
 	public boolean deleteIntermediatePoint( int index) {
 		List<LatLon> ps = getIntermediatePoints();
+		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.remove(index);
-		return saveIntermediatePoints(ps);
+		ds.remove(index);
+		return saveIntermediatePoints(ps,ds);
 	}
 
-	private boolean saveIntermediatePoints(List<LatLon> ps) {
+	private boolean saveIntermediatePoints(List<LatLon> ps, List<String> ds) {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<ps.size(); i++) {
 			if(i > 0){
@@ -1056,12 +1083,21 @@ public class OsmandSettings {
 			}
 			sb.append(((float)ps.get(i).getLatitude()+"")).append(",").append(((float)ps.get(i).getLongitude()+""));
 		}
-		return globalPreferences.edit().putString(INTERMEDIATE_POINTS, sb.toString()).commit();
+		StringBuilder tb = new StringBuilder();
+		for(int i=0; i<ds.size(); i++) {
+			if(i > 0) {
+				tb.append("--");
+			}
+			tb.append(ds.get(i));
+		}
+		return globalPreferences.edit().putString(INTERMEDIATE_POINTS, sb.toString()).
+				putString(INTERMEDIATE_POINTS_DESCRIPTION, tb.toString()).
+				commit();
 	}
 	
 	public boolean clearPointToNavigate() {
 		return globalPreferences.edit().remove(POINT_NAVIGATE_LAT).remove(POINT_NAVIGATE_LON).
-				remove(POINT_NAVIGATE_ROUTE).commit();
+				remove(POINT_NAVIGATE_DESCRIPTION).remove(POINT_NAVIGATE_ROUTE).commit();
 	}
 	
 	public boolean setPointToNavigate(double latitude, double longitude, String historyDescription) {
@@ -1070,6 +1106,7 @@ public class OsmandSettings {
 
 	public boolean setPointToNavigate(double latitude, double longitude, boolean navigate, String historyDescription) {
 		boolean add = globalPreferences.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
+		globalPreferences.edit().putString(POINT_NAVIGATE_DESCRIPTION, historyDescription);
 		if(navigate) {
 			globalPreferences.edit().putString(POINT_NAVIGATE_ROUTE, "true").commit();
 		}
