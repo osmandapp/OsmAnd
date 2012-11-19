@@ -1,4 +1,4 @@
-<renderingStyle name="touring-atlas-view-and-details" depends="default" defaultColor="#f1eae4" version="1">
+<renderingStyle name="touring-view--more-contrast-and-details" depends="default" defaultColor="#f1eae4" version="1">
 
 	<!--
 		by Hardy Mueller, 2012-10-28 (Advanced version the previous All-Purpose Renderer)
