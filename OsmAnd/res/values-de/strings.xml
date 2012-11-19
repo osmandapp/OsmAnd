@@ -16,7 +16,7 @@
 	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0 :
 		\n\t* Verbessertes Routing, schneller und präzise, bis 250km
 		\n\t* Option reiner Straßenkarten
-		\n\t* Karte behält nach Unterbrechungen Positionsbindung
+		\n\t* Karte behält nach Unterbrechungen Standortbindung
 		\n\t* Hintergrunddienst wird bei Navigation aktiviert
 	</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
@@ -29,9 +29,9 @@
 	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
 	<string name="auto_zoom_map">Automatischer Zoom</string>
 	<string name="tip_recent_changes_0_8_3_t">Änderungen in 0.8.3 :\n\n\t* Wegpunkte setzen\n\t\t\n\t* Verbessertes Navigationsverhalten\n\t\t\n\t* Option \'Vermeide Autobahnen\'\n\t\t\n\t* Anzeige von cycleway=track\n\t\t\n\t* Einige Fehlerbehebungen</string>
-	<string name="snap_to_road_descr">Position während der Navigation auf Straßen einrasten</string>
+	<string name="snap_to_road_descr">Standort während der Navigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Auf Straße einrasten</string>
-	<string name="tip_recent_changes_0_8_2_t">Änderungen in 0.8.2 :\n\t\t\n\t* Verbessertes Routing\n\t\t\n\t* Konfigurierbare Schaltflächen\n\t\t\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen\n\t\t\n\t* Bildschirmsperrtaste mit Logging-Einstellungen\n\t\t\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften</string>
+	<string name="tip_recent_changes_0_8_2_t">Änderungen in 0.8.2 :\n\t\t\n\t* Verbessertes Routing\n\t\t\n\t* Konfigurierbare Schaltflächen\n\t\t\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen\n\t\t\n\t* Bildschirmsperrtaste mit Aufzeichnungs-Einstellungen\n\t\t\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften</string>
 	<string name="osmand_short_description_80_chars">OsmAnd ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
@@ -104,7 +104,7 @@
 	<string name="map_settings">Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterverzeichnis \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterverzeichnis \'tiles\' kopiert werden.</string>
-	<string name="osmand_background_plugin_description">Zeigt Einstellungen für das Positions-Logging oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
+	<string name="osmand_background_plugin_description">Zeigt Einstellungen für die Standort-Aufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Zeigt Einstellungen für spezielle Barrierefreiheits-Erweiterungen.</string>
 	<string name="extra_settings">Erweiterte Einstellungen</string>
 	<string name="osmand_monitoring_description">Ermöglicht das Aufzeichnen zurückgelegter Strecken als GPX-Datei und das Live-Tracking via Web-Service.</string>
@@ -112,11 +112,11 @@
 	<string name="osmand_development_plugin_description">Zeigt Einstellungen für Entwicklungs- und Fehlersuchhilfen wie simulierte Navigation oder die Messung der Render-Leistung.</string>
 	<string name="plugins_screen">Modul-Manager</string>
 	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
-	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste wie Online-Karten, Positions-Logging, Hintergrunddienst, Bedienungshilfen und mehr.</string>
+	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste wie Online-Karten, Standort-Aufzeichnung, Hintergrunddienst, Bedienungshilfen und mehr.</string>
 	<string name="prefs_plugins">Modul-Manager</string>
 	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 :
 		\n\t- *Modul-Funktionalität*
-		\n\t - Viele Funktionalitäten könnnen nun blockweise in einem Modul-Manager aktiviert oder deaktiviert werden. Unter anderem finden Sie dort die Einstellungen für Online Kachel-Kartenquellen, Logging-Einstellungen und vielen anderen existierenden Funktionalitäten.
+		\n\t - Viele Funktionalitäten könnnen nun blockweise in einem Modul-Manager aktiviert oder deaktiviert werden. Unter anderem finden Sie dort die Einstellungen für Online Kachel-Kartenquellen, Aufzeichnungs-Einstellungen und vielen anderen existierenden Funktionalitäten.
 		\n\t- *Unterstützung neuer Offline-Karten*
 		\n\t - Schnellere und präzisere Kartendarstellung (Probleme mit Küstenlinien und \'gefluteten\' Gebieten größtenteils behoben).
 		\n\t - Alle Offline-Karten müssen neu heruntergeladen werden (das alte Format wird nicht mehr unterstützt)
@@ -151,7 +151,7 @@
 	<string name="show_ruler_level_descr">Zeige Maßstab auf der Karte an</string>
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
-	<string name="back_to_location">Zurück zur Position</string>
+	<string name="back_to_location">Zurück zum Standort</string>
 	<string name="help">Hilfe</string>
 	<string name="show_details">Zeige Details</string>
 	<string name="accessibility_extensions_descr">Barrierefreiheit-Erweiterungen für alte Android-Versionen</string>
@@ -241,7 +241,7 @@
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
 	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
-	<string name="gpx_monitoring_disabled_warn">Bitte Logging unter \'Einstellungen\' → \'Navigation\' aktivieren.</string>
+	<string name="gpx_monitoring_disabled_warn">Bitte Aufzeichnung unter \'Einstellungen\' → \'Navigation\' aktivieren.</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
 	<string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 :
 		\n\t- Offline Wikipedia Daten mit Artikeln
@@ -272,8 +272,8 @@
 	<string name="profile_settings">Profilspezifische Einstellungen</string>
 	<string name="settings_preset">Nutzerprofil</string>
 	<string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Verwendungszweck separat gespeichert.</string>
-	<string name="monitor_preferences">Positions-Logging</string>
-	<string name="monitor_preferences_descr">Positions-Logging konfigurieren</string>
+	<string name="monitor_preferences">Standort-Aufzeichnung</string>
+	<string name="monitor_preferences_descr">Standort-Aufzeichnung konfigurieren</string>
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
@@ -353,7 +353,7 @@
 		\n\t- Auto-center Option (Issue 356)
 		\n\t- GPX Navigation verschoben zu \'Route\' und \'Route speichern\' verschoben zu \'Routeninformationen\'
 		\n\t- POI Daten sind nun in .obf-Datei enthalten (alle Indexes ab 01/10/11)
-		\n\t- Sprachansagen verbessert (GPS-Positions-Bestimmung, keine Auslassung des ersten Kommandos)
+		\n\t- Sprachansagen verbessert (GPS-Standort-Bestimmung, keine Auslassung des ersten Kommandos)
 		\n\t- Kleinere Verbesserungen "
 	</string>
 	<string name="file_can_not_be_renamed">Datei kann nicht umbenannt werden.</string>
@@ -370,13 +370,13 @@
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online-Nominatim</string>
 	<string name="search_select_point">Auswählen</string>
-	<string name="search_position_current_location_search">Suche Position …</string>
-	<string name="search_position_current_location_found">Position (gefunden)</string>
+	<string name="search_position_current_location_search">Suche Standort …</string>
+	<string name="search_position_current_location_found">Standort (gefunden)</string>
 	<string name="search_position_address">Adresse …</string>
 	<string name="search_position_favorites">Favoriten …</string>
 	<string name="search_position_undefined">Undefiniert</string>
 	<string name="search_position_fixed">Festgelegt</string>
-	<string name="search_position_current_location">Aktuelle Position …</string>
+	<string name="search_position_current_location">Aktueller Standort …</string>
 	<string name="search_position_map_view">Letzte Kartenposition</string>
 	<string name="select_search_position">Suchen in der Nähe von:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
@@ -386,7 +386,7 @@
 		\n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen)
 		\n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre)
 		\n\t- Abspeichern von Routen als GPX-Tracks zur Offline-Verwendung
-		\n\t- Verbessertes GPX Tracking (Filtern von ungenauen Positionen, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit)
+		\n\t- Verbessertes GPX Tracking (Filtern von ungenauen Standorten, Abspeichern von Genauigkeit, Höhe, Geschwindigkeit)
 		\n\t- Funktion zum Upload von GPX Dateien zur OSM Community (http://download.osmand.net/gpx/)
 		\n\t- Verbessertes Vektor-Rendering
 		\n\t- Verbesserung der TTS-Ansagen (genaue Entfernungsansagen, optional auch in Meilen+Fuß)
@@ -501,8 +501,8 @@
 \n \'Dunkelgrün/-blau\' - kennzeichnen entsprechend auf dem Gerät deaktivierte Karten "</string>
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
-	<string name="tip_location_sharing">Lokation mitteilen</string>
-	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Lokation mitteilen\' auswählen.
+	<string name="tip_location_sharing">Position mitteilen</string>
+	<string name="tip_location_sharing_t">Wollen Sie einen interessanten Ort Freunden oder Familie mitteilen? Mit OsmAnd kann jeder Aufenthaltsort leicht mit Anderen geteilt werden. Dazu einfach im Karten-Kontextmenü die Option \'Position mitteilen\' auswählen.
 \nZur Auswahl stehen mehrere Übertragungswege:
 \n * E-Mail
 \n * SMS
@@ -555,11 +555,11 @@
 	<string name="foot">ft</string>
 	<string name="mile_per_hour">mph</string>
 	<string name="mile">mi</string>
-	<string name="send_location_way_choose_title">Lokation mitteilen mittels</string>
-	<string name="send_location_sms_pattern">Lokation: %1$s, %2$s</string>
-	<string name="send_location_email_pattern">Um die Lokation zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
-	<string name="send_location">Lokation senden</string>
-	<string name="context_menu_item_share_location">Lokation mitteilen</string>
+	<string name="send_location_way_choose_title">Position mitteilen mittels</string>
+	<string name="send_location_sms_pattern">Position: %1$s, %2$s</string>
+	<string name="send_location_email_pattern">Um die Position zu sehen, folge dem Web-Link %1$s oder Android Intent Link %2$s</string>
+	<string name="send_location">Position senden</string>
+	<string name="context_menu_item_share_location">Position mitteilen</string>
 	<string name="add_waypoint_dialog_added">Wegpunkt \'\'{0}\'\' erfolgreich hinzugefügt</string>
 	<string name="add_waypoint_dialog_title">GPX-Wegpunkt an gespeicherten GPX-Track anfügen</string>
 	<string name="context_menu_item_add_waypoint">GPX-Wegpunkt anfügen</string>
@@ -641,7 +641,7 @@
 	<string name="continuous_rendering">Kontin. Kartenaufbau</string>
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal</string>
 	<string name="rendering_exception">Fehler aufgetreten beim Rendern des gewählten Gebietes</string>
-	<string name="show_point_options">Optionen für Lokation</string>
+	<string name="show_point_options">Positionsoptionen</string>
 	<string name="renderer_load_sucess">Renderer erfolgreich geladen</string>
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
 	<string name="renderers">Vektor-Renderer</string>
@@ -653,7 +653,7 @@
 	<string name="download_type_to_filter">Filtern nach Typ</string>
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
 	<string name="use_high_res_maps_descr">Unterdückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
-	<string name="unknown_location">Position noch nicht ermittelt</string>
+	<string name="unknown_location">Standort noch nicht ermittelt</string>
 	<string name="download_files">Laden</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
 	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
@@ -669,7 +669,7 @@
 	<string name="error_reading_gpx">Fehler beim Lesen der GPX-Daten</string>
 	<string name="vector_data">Offline-Vektor-Karten</string>
 	<string name="transport_context_menu">Suche nach Verbindung an Haltestelle</string>
-	<string name="point_on_map">Lokation:\n Lat %1$.5f\n Lon %2$.5f</string>
+	<string name="point_on_map">Position:\n Lat %1$.5f\n Lon %2$.5f</string>
 	<string name="osb_bug_name">OSM-Fehler</string>
 	<string name="poi_context_menu_modify">Bearbeite POI</string>
 	<string name="poi_context_menu_delete">Lösche POI</string>
@@ -704,7 +704,7 @@
 	<string name="context_menu_item_show_route">Zeige Route von hier</string>
 	<string name="use_trackball_descr">Trackball für Kartenbewegung benutzen</string>
 	<string name="use_trackball">Trackball verwenden</string>
-	<string name="background_service_wait_int_descr">Maximale Suchzeit für jede Hintergrund-Positionsbestimmung</string>
+	<string name="background_service_wait_int_descr">Maximale Suchzeit für jede Hintergrund-Standortbestimmung</string>
 	<string name="background_service_wait_int">Maximale Suchzeit</string>
 	<string name="service_stop_background_service">Hintergrund-Navigationsdienst ausschalten</string>
 	<string name="where_am_i">Wo bin ich?</string>
@@ -713,10 +713,10 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">Sekunden</string>
 	<string name="int_min">Min.</string>
-	<string name="background_service_int_descr">Intervall zwischen zwei Hintergrund-Positionsbestimmungen</string>
+	<string name="background_service_int_descr">Intervall zwischen zwei Hintergrund-Standortbestimmungen</string>
 	<string name="background_service_int">Positionierungsintervall</string>
-	<string name="background_service_provider_descr">Art der Hintergrund-Positionsbestimmung</string>
-	<string name="background_service_provider">Positionsbestimmung</string>
+	<string name="background_service_provider_descr">Art der Hintergrund-Standortbestimmung</string>
+	<string name="background_service_provider">Standortbestimmung</string>
 	<string name="background_router_service_descr">Aktiviere OsmAnd-Hintergrunddienst während Anzeige ausgeschaltet ist</string>
 	<string name="background_router_service">Hintergrunddienst</string>
 	<string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktiviertes GPS.</string>
@@ -865,10 +865,10 @@
 	<string name="settings">Einstellungen</string>
 	<string name="save_current_track_descr">Aktuellen Track jetzt auf SD-Karte abspeichern</string>
 	<string name="save_current_track">Track jetzt speichern</string>
-	<string name="save_track_interval_descr">Intervall zwischen zwei Positionsbestimmungen</string>
-	<string name="save_track_interval">Logging-Intervall</string>
+	<string name="save_track_interval_descr">Intervall zwischen zwei Standortbestimmungen</string>
+	<string name="save_track_interval">Aufzeichnungs-Intervall</string>
 	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
-	<string name="save_track_to_gpx">Logging in GPX-Datei aktivieren</string>
+	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei aktivieren</string>
 	<string name="navigate_to">Als Ziel wählen</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
@@ -898,7 +898,7 @@
 	<string name="map_tile_source">Kartenquelle (Kacheln)</string>
 	<string name="map_source">Kartenquelle</string>
 	<string name="use_internet">Internet verwenden</string>
-	<string name="show_location">Position anzeigen</string>
+	<string name="show_location">Standort anzeigen</string>
 	<string name="map_preferences">Karte</string>
 	<string name="settings_activity">Einstellungen</string>
 	<string name="show_gps_coordinates_text">GPS-Koordinaten auf der Karte anzeigen</string>
@@ -938,7 +938,7 @@
 	<string name="search_address_building">Hausnr.</string>
 	<string name="search_address_building_option">Hausnr.</string>
 	<string name="search_address_street_option">Querstraße</string>
-	<string name="search_tabs_location">Lokation</string>
+	<string name="search_tabs_location">Position</string>
 	<string name="context_menu_item_navigate_point">Als Ziel wählen</string>
 	<string name="context_menu_item_add_favorite">Als Favorit speichern</string>
 	<string name="context_menu_item_update_map">Karte aktualisieren</string>
@@ -1032,7 +1032,7 @@
 	<string name="osmand_parking_warning">Warnung</string>
 	<string name="osmand_parking_warning_text">Hinweis zum Abholen des Fahrzeugs wurde vormals zum Kalender hinzugefügt. Hinweis besteht solange, bis dieser manuell gelöscht wird.</string>
 	<string name="osmand_parking_time_limit_title">Zeitlimit für Parken setzen</string>
-	<string name="osmand_parking_delete_confirm">Soll die Position des geparkten Fahrzeugs gelöscht werden?</string>
+	<string name="osmand_parking_delete_confirm">Soll der Standort des geparkten Fahrzeugs gelöscht werden?</string>
 	<string name="osmand_parking_delete">Parkplatz-Marker löschen</string>
 	<string name="osmand_parking_choose_type">Parkplatz-Eigenschaft wählen</string>
 	<string name="osmand_parking_lim_text">zeitlich beschränkt</string>
@@ -1099,7 +1099,7 @@
 	<string name="live_monitoring_mode_off">Live-tracking\n starten</string>
 	<string name="live_monitoring_mode_on">Live-tracking\n stoppen</string>
 	<string name="position_on_map_descr">Position des Markers auf der Karte</string>
-	<string name="position_on_map">Positionsmarker</string>
+	<string name="position_on_map">Standortmarker</string>
 	<string name="layer_map_appearance">Anzeige konfigurieren…</string>
 	<string name="show_lanes">Fahrspuren anzeigen</string>
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
@@ -1136,7 +1136,7 @@
 <string name="intermediate_point_too_far">Wegpunkt %1$s zu weit von der nächsten Straße entfernt.</string>
 <string name="tip_recent_changes_0_8_4_t">Änderungen in 0.8.4 : 
 	\n\t* Einige Fehlerbehebungen
-	\n\t* Karte behält nach Unterbrechungen Positionsbindung
+	\n\t* Karte behält nach Unterbrechungen Standortbindung
 	\n\t* Hintergrunddienst wird bei Navigation aktiviert
 </string>
 <string name="context_menu_item_last_intermediate_point">Als letzten Wegpunkt setzen</string>
@@ -1154,7 +1154,7 @@
     <string name="map_widget_show_destination_arrow">Richtung zum Ziel anzeigen</string>
     <string name="non_optimal_route_calculation">Berechne eventuell nicht optimale Routen über lange Distanzen</string>
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
-    <string name="enable_plugin_monitoring_services">"Positions-Logging-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Live-Tracking) zu verwenden"</string>
+    <string name="enable_plugin_monitoring_services">"Standort-Aufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Live-Tracking) zu verwenden"</string>
     <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Google Play gesucht werden?</string>
 	<string name="close_changeset">Changeset schließen</string>
 <string name="incomplete_locale">unfertig</string>
