@@ -42,6 +42,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
@@ -537,7 +539,15 @@ public class OsmandApplication extends Application {
 				ex.printStackTrace(printStream);
 				StringBuilder msg = new StringBuilder();
 				msg.append("Version  " + Version.getFullVersion(OsmandApplication.this)+"\n"). //$NON-NLS-1$ 
-					append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis())).append("\n"). //$NON-NLS-1$//$NON-NLS-2$
+					append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
+				try {
+					PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+					if (info != null) {
+						msg.append("\nApk Version : ").append(info.versionName).append(" ").append(info.versionCode); //$NON-NLS-1$ //$NON-NLS-2$
+					}
+				} catch (Throwable e) {
+				}
+				msg.append("\n"). //$NON-NLS-1$//$NON-NLS-2$
 					append("Exception occured in thread " + thread.toString() + " : \n"). //$NON-NLS-1$ //$NON-NLS-2$
 					append(new String(out.toByteArray()));
 
