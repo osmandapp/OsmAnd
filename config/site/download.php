@@ -115,11 +115,11 @@ function update_count_of_downloads($file) {
  set_time_limit(0);
  $xml = simplexml_load_file("indexes.xml");
  $res = $xml->xpath('//region[@name="'.$file.'"]');
- if (count($res) > 0) {
- 	$node = $res[0];
-  if(isset($_GET['road'])){
+ if(isset($_GET['road'])){
     downloadFile('road-indexes/'.$file);
-  } else if($node["local"]) {
+ } else if (count($res) > 0) {
+ 	$node = $res[0];
+        if($node["local"]) {
  		downloadFile('indexes/'.$file);
  	}  else {
  		header('HTTP/1.1 302 Found');
