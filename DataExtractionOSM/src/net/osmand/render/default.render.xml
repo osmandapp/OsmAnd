@@ -965,7 +965,6 @@
 			<filter minzoom="7" tag="landuse" value="water"/>	
 			<filter minzoom="10" tag="landuse" value="basin"/>
 			<filter minzoom="15" tag="leisure" value="swimming_pool" color_2="#7479ec" strokeWidth_2="1"/>
-
 			<groupFilter color="#b5d0d0">
 				<filter nightMode="true" color="#330099"/>
 			</groupFilter>
@@ -990,7 +989,6 @@
 
 		<!-- Open nature, night color 004333 -->
 		<group>
-			
 			<filter minzoom="12" color="#ffffc0" tag="natural" value="heath"/>
 			<filter minzoom="12" color="#ead8bd" tag="landuse" value="farm"/>
 			 <!-- field is unofficial -->
@@ -1013,7 +1011,6 @@
 			<filter minzoom="15" color="#ccfff1" tag="leisure" value="playground"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="garden"/>
 			<filter minzoom="12" color="#cfeca8" tag="leisure" value="common"/>
-
 			<groupFilter nightMode="true" color="#004333"/>
 		</group>
 
@@ -1047,7 +1044,6 @@
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="camp_site"/>
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="caravan_site"/>
 			<filter minzoom="13" color="#a0ccff99" tag="tourism" value="picnic_site"/>
-
 			<groupFilter nightMode="true" color="#66004B"/>
 		</group>
 
@@ -1063,7 +1059,6 @@
 			<filter minzoom="14" color="#dfd1d6" tag="landuse" value="garages"/>
 			<filter minzoom="12" color="#ff8f8f" tag="military" value="barracks"/>
 			<filter minzoom="10" color="#a0ffa8a8" tag="landuse" value="military"/>
-
 			<groupFilter nightMode="true" color="#560000"/>
 		</group>
 
@@ -1089,7 +1084,6 @@
 		<filter minzoom="12" shader="zoo" color="#100000" tag="tourism" value="zoo"/>
 		<filter minzoom="12" shader="quarry2" color="#100000" tag="landuse" value="quarry"/>
 		<filter minzoom="10" shader="danger" color="#100000" tag="military" value="danger_area"/>
-	
 	    <groupFilter noPolygons="true" color="#00ffffff" color_2="#00ffffff" shader=""/>
 	    </group>
 	</polygon>
@@ -1236,7 +1230,6 @@
 			<filter tag="highway" value="pedestrian"/>
 			<groupFilter color="#ececec" shadowRadius="1" cap="ROUND">
 				<filter hmRendered="true" minzoom="13" maxzoom="13" strokeWidth="2"/>
-
 				<filter color_0="#000000">
 					<filter hmRendered="true" minzoom="14" maxzoom="14" strokeWidth="3"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="4"/>

@@ -20,9 +20,9 @@
 		 - z17 = Building details, street corner details.
 	--> 
 
+	<!-- road casing contrast higher than in default -->
 	<renderingAttribute name="shadowRendering">
 	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
-	<!-- overall contrast higher than in default -->
 		<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view, bridges would not stand out -->
 		<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/>
 		<filter minzoom="14" attrIntValue="3" shadowColor="#464646"/>
@@ -33,30 +33,31 @@
 		<filter attrIntValue="0"/>
 	</renderingAttribute>
 
+	<!-- road color contrast higher than in default, and all road types clearly distinguished -->
 	<!-- roadColors="Road atlas style" -->
-	<!-- overall contrast higher than in default, and all road types clearly distinguished -->
 		<renderingConstant name="motorwayRoadColor" value="#809bff"/>
 		<renderingConstant name="trunkRoadColor" value="#ed154b"/>
 		<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
 		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
 		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
 
+	<!-- routeColor contrast higher than in default -->
 	<renderingAttribute name="routeColor">
-	<!-- more contrast than in default -->
 		<filter nightMode="false" attrColorValue="#CCFF6600"/>
 		<filter attrColorValue="#CCFF6600"/>
 	</renderingAttribute>
 
+	<!-- gpxColor contrast higher than in default -->
 	<renderingAttribute name="gpxColor">
-	<!-- more contrast than in default -->
 		<filter nightMode="false" attrColorValue="#B400FFFF"/>
 		<filter attrColorValue="#B400FFFF"/>
 	</renderingAttribute>
 
-	<!-- maximize details: road inclusion as early as possible in low density areas -->
+	<!-- maximize map details: road inclusion as early as possible (TODO: at least in low density areas) -->
 	<renderingAttribute name="hmRendered">
 		<filter attrBoolValue="true"/>
 	</renderingAttribute>
+
 
 	<order>
 	</order>
