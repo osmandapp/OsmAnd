@@ -533,4 +533,29 @@
 	<string name="incomplete_locale">nedokončano</string>
 	<string name="download_roads_only_item">"Ceste "</string>
     <string name="download_regular_maps">Običajni zemljevidi</string>
-    </resources>
+    <string name="download_link_and_local_description">Kliknite tu za prenos oz. posodobitev podatkov.\nKliknite na katerokoli element za prikaz podrobnosti, pritisnite in držite za izklop ali brisanje. Količina prostora na napravi (%1$s):</string>
+	<string name="context_menu_item_show_route">Prikaži pot od tu</string>
+	<string name="local_index_mi_restore">Vklopi</string>
+	<string name="local_index_mi_backup">Izklopi</string>
+	<string name="local_index_mi_delete">Briši</string>
+	<string name="local_index_descr_title">Upravljanje podatkov</string>
+	<string name="local_index_items_backuped">%1$d od %2$d elementov uspešno izklopljen.</string>
+	<string name="local_index_items_deleted">%1$d od %2$d elementov uspešno brisan.</string>
+	<string name="local_index_items_restored">%1$d od %2$d elementov uspešno vklopljen.</string>
+	<string name="local_index_no_items_to_do">Ni elementov za %1$s</string>
+	<string name="local_index_action_do">Nameravate %1$s %2$s elementov. Ali nadaljujem?</string>
+	<string name="local_index_mi_reload">Ponovno naloži iz SD kartice</string>
+	<string name="local_index_download">Prenos…</string>
+	<string name="local_index_map_data">Podatki zemljevida</string>
+	<string name="local_indexes_cat_backup">Izklopljen</string>
+	<string name="local_index_transport_data">Podatki javnih prevozov</string>
+	<string name="local_index_address_data">Podatki naslovov</string>
+	<string name="local_index_poi_data">Podatki POI</string>
+	<string name="local_index_tile_data">Vir podatkov: %1$s\nMinimalna povečava: %2$d\nMaximalna povečava: %3$d\nMožno prenesti: %4$s\nprenešene povečave: %5$s</string>
+	<string name="local_indexes_cat_gpx">GPX podatki</string>
+	<string name="local_indexes_cat_poi">Podatki POI</string>
+	<string name="local_index_gpx_info">Poti: %1$d\nVseh točk: %2$d\nVmesnih točk: %3$d\nDolžina: %4$s\nČas začetka: %5$tF, %5$tR\nČas konca: %6$tF, %6$tR</string>
+	<string name="local_index_gpx_info_speed">\nPovprečna hitrost: %1$s
+\nNajvečja hitrost: %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nPovprečna višina: %1$.0f m\nNajmanjša višina: %2$.0f m\nNajvečja višina: %3$.0f m\nDvig: %4$.0f m\nSpust: %5$.0f m</string>
+	</resources>
