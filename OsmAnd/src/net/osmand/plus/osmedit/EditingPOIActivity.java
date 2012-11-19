@@ -286,8 +286,10 @@ public class EditingPOIActivity implements DialogProvider {
         layout.invalidate();
 	}
 	
-	private Dialog createPOIDialog(final int dialogID, final Bundle args) {
+	private Dialog createPOIDialog(final int dialogID, Bundle args) {
 		final Dialog dlg = new Dialog(ctx);
+		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+		final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 		dlg.setContentView(R.layout.editing_poi);
 		nameText = ((EditText)dlg.findViewById(R.id.Name));
 		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
@@ -316,13 +318,13 @@ public class EditingPOIActivity implements DialogProvider {
 		typeText.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showSubCategory(args);
+				showSubCategory(a);
 			}
 		});
 		typeText.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				showSubCategory(args);
+				showSubCategory(a);
 				return true;
 			}
 		});
@@ -336,7 +338,6 @@ public class EditingPOIActivity implements DialogProvider {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 				String str = s.toString();
 				a.setSubType(str);
 				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
@@ -368,7 +369,6 @@ public class EditingPOIActivity implements DialogProvider {
 		advancedModeButton.setOnClickListener(new View.OnClickListener() {	
 			@Override
 			public void onClick(View v) {
-				final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 				final TableLayout layout = ((TableLayout) dlg.findViewById(R.id.advancedModeTable));
 				TableLayout.LayoutParams tlParams = new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT,
 						TableLayout.LayoutParams.WRAP_CONTENT);
@@ -389,7 +389,6 @@ public class EditingPOIActivity implements DialogProvider {
 					layout.removeViewAt(0);
 				}
 				layout.requestLayout();
-				Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
 				for (String tg : n.getTagKeySet()) {
 					if (!tg.equals(OSMTagKey.NAME.getValue()) && !tg.equals(OSMTagKey.OPENING_HOURS.getValue())
 							&& !tg.equals(OSMTagKey.PHONE.getValue()) && !tg.equals(OSMTagKey.WEBSITE.getValue())) {
@@ -411,8 +410,6 @@ public class EditingPOIActivity implements DialogProvider {
 		((Button)dlg.findViewById(R.id.Commit)).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-				final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 				Resources resources = v.getResources();
 				final String msg = n.getId() == -1 ? resources.getString(R.string.poi_action_add) : resources
 						.getString(R.string.poi_action_change);
@@ -473,8 +470,7 @@ public class EditingPOIActivity implements DialogProvider {
 		return dlg;
 	}
 
-	private void showSubCategory(final Bundle args) {
-		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+	private void showSubCategory(Amenity a) {
 		if(typeText.getText().length() == 0 && a.getType() != null){
 			ctx.showDialog(DIALOG_SUB_CATEGORIES);
 		}

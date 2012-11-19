@@ -119,6 +119,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	private boolean sensorRegistered = false;
 	private float previousSensorValue = 0;
+	private boolean quitRouteRestoreDialog = false;
 
 	// Notification status
 	private NotificationManager mNotificationManager;
@@ -389,9 +390,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode();
 		} else {
+			quitRouteRestoreDialog = false;
 			Runnable encapsulate = new Runnable() {
 				int delay = 7;
-				boolean quit = false;
 				Runnable delayDisplay = null;
 
 				@Override
@@ -404,7 +405,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							quit = true;
+							quitRouteRestoreDialog = true;
 							restoreRoutingModeInner();
 
 						}
@@ -412,7 +413,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					builder.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							quit = true;
+							quitRouteRestoreDialog = true;
 							notRestoreRoutingMode();
 						}
 					});
@@ -420,26 +421,26 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					dlg.setOnDismissListener(new OnDismissListener() {
 						@Override
 						public void onDismiss(DialogInterface dialog) {
-							quit = true;
+							quitRouteRestoreDialog = true;
 						}
 					});
 					dlg.setOnCancelListener(new OnCancelListener() {
 						@Override
 						public void onCancel(DialogInterface dialog) {
-							quit = true;
+							quitRouteRestoreDialog = true;
 						}
 					});
 					delayDisplay = new Runnable() {
 						@Override
 						public void run() {
-							if(!quit) {
+							if(!quitRouteRestoreDialog) {
 								delay --;
 								tv.setText(getString(R.string.continue_follow_previous_route_auto, delay + ""));
 								if(delay <= 0) {
-									if(dlg.isShowing()) {
+									if(dlg.isShowing() && !quitRouteRestoreDialog) {
 										dlg.dismiss();
 									}
-									quit = true;
+									quitRouteRestoreDialog = true;
 									restoreRoutingModeInner();
 								} else {
 									uiHandler.postDelayed(delayDisplay, 1000);
@@ -733,6 +734,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
+		quitRouteRestoreDialog = true;
 		OsmandPlugin.onMapActivityDestroy(this);
 		savingTrackHelper.close();
 		cancelNotification();
