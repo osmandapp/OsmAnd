@@ -1239,7 +1239,7 @@ ResultPublisher* searchObjectsForRendering(SearchQuery* q, bool skipDuplicates, 
 			o->objectNames["name"] = msgNothingFound;
 			tempResult.push_back(o);
 		}
-		if (q->zoom <= BASEMAP_ZOOM || emptyData || renderRouteDataFile >= 0) {
+		if (q->zoom <= BASEMAP_ZOOM || emptyData || (renderRouteDataFile >= 0 && q->zoom < 15)) {
 			tempResult.insert(tempResult.end(), basemapResult.begin(), basemapResult.end());
 		} else {
 			deleteObjects(basemapResult);
