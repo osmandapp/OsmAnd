@@ -1,5 +1,9 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
+	<string name="route_descr_current_location">Aktueller Standort</string>
+	<string name="route_descr_from_to">Von  %1$s\nNach  %2$s</string>
+	<string name="route_descr_from_to_via">Von : %1$s\nÜber : %2$s\nNach : %3$s</string>
 	<string name="no_buildings_found">Kein Gebäude gefunden.</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell</string>
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
@@ -8,7 +12,6 @@
 	<string name="download_roads_only_item">Straßen </string>
 	<string name="download_regular_maps">Reguläre Karten</string>
 	<string name="download_roads_only_maps">Reine Straßenkarten</string>
-
 	<string name="safe_mode_description">Applikation läuft im abgesicherten Modus (verwendet langsameren Android statt nativem Code).</string>
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Applikation läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
