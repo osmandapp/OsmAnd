@@ -871,7 +871,8 @@
   <string name="direction_style_clockwise">По циферблату (12 секторов)</string>
   <string name="settings_direction_style">Стиль указания направлений</string>
   <string name="settings_direction_style_descr">Выберите стиль указания относительных направлений во время движения</string>
-  <string name="auto_announce_on">Включить автооповещение</string>
+  <string name="auto_announce_on">Включить
+\nавтооповещение</string>
   <string name="auto_announce_off">Выключить автооповещение</string>
   <string name="scroll_map_by_gestures_descr">Перемещать карту жестами на сенсорном экране</string>
   <string name="scroll_map_by_gestures">Естественное управление картой</string>
@@ -1032,8 +1033,9 @@
   <string name="map_widget_mini_route">Малая карта маршрута</string>
   <string name="bg_service_screen_lock">Заблокировать\nэкран</string>
   <string name="bg_service_screen_unlock">Разблокировать\nэкран</string>
-  <string name="bg_service_sleep_mode_off">Включить фоновый режим</string>
-  <string name="bg_service_sleep_mode_on">Выключить↵\n фоновый режим</string>
+  <string name="bg_service_sleep_mode_off">Включить
+\nфоновый режим</string>
+  <string name="bg_service_sleep_mode_on">Выключить\nфоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
 <string name="layer_map_appearance">Настройка экрана…</string>
@@ -1049,8 +1051,9 @@
 <string name="map_widget_appearance">Разное:</string>
 <string name="map_widget_view_direction">Направление взгляда</string>
 <string name="map_widget_transparent">Прозрачность</string>
-<string name="monitoring_mode_off">Включить запись GPX</string>
-<string name="monitoring_mode_on">Остановить↵\n запись GPX</string>
+<string name="monitoring_mode_off">Включить
+\nзапись GPX</string>
+<string name="monitoring_mode_on">Остановить\nзапись GPX</string>
 <string name="int_continuosly">Непрерывно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
 <string name="map_widget_day_night">Дневной/ночной режим</string>
@@ -1060,7 +1063,8 @@
 \nЗакат : %2$s</string>
 <string name="map_widget_vector_attributes">Настройки отрисовки (векторн.):</string>
 <string name="map_widget_renderer">Стиль отрисовки (векторн.)</string>
-<string name="live_monitoring_mode_off">Включить слежение в реальном времени</string>
+<string name="live_monitoring_mode_off">Включить слежение
+\nв реальном времени</string>
 <string name="live_monitoring_mode_on">Выключить↵\n слежение в реальном времени</string>
 <string name="tip_rotation_switching_t_v2">"\tНажав на значок компаса на экране с картой Вы можете изменить режим вращения карты.
 \n\tДоступные варианты:
