@@ -575,4 +575,17 @@
 	<string name="previous_button">Nazaj</string>
 	<string name="tip_initial">Nasveti in triki</string>
 	<string name="tip_search">Iskanje</string>
+	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>
+	<string name="rotate_map_to_bearing">Usmerjenost zemljevida</string>
+	<string name="tip_rotation_switching_t_v2">\tZ večkratnim klikom na sliki kompasa lahko določite, kako se obrača zemljevid na zaslonu.\n\tMožnosti so:\n\t\'Brez obračanja (sever je gor)\' - Zemljevid ne bo obračan. Sever bo vedno proti sthu zaslona.\n\t\'V smeri gibanja\' - Zemljevid bo stalno usmerjen z smerjo premikanja.\n\t\'Po kompasu\' - Zemljevid bo stalno usmerjen po kompasu naprave torej poravnan z okolico.</string>
+	<string name="tip_update_index_t">\tPosodabljanje zemljevidov je pomembno. OsmAnd nudi upravitelja prenosov, ki lahko preveri razpoložljive podatke.\n\tČe želite preveriti posodobitve podatkov, pojdite na \"Nastavitve\" -&gt; \"Offline data\" -&gt; \"Prenos\". Ko je seznam področij prenešen iz interneta, lahko izberete možnost \"Meni\" -&gt; \"Samo prenešene\", ki omeji posodobitve le na podatke, ki so že na napravi.\n\tRazpoložljivost posodobitev je prikazana z naslednjimi barvami:\n\t\'Zelena\' - datoteke na napravi so usklajene s strežnikom.\n\t\'Modra\' - na strežniku so novejši podatki.\n\t\'Temno zelena / modra\' Podobno, le da so podatki deaktivirani na napravi.</string>
+	<string name="download_files_question">Prenesi {0} datotek(o) ({1} MB)?</string>
+	<string name="download_files">Prenesi</string>
+	<string name="downloading_file">Prenos datoteke…</string>
+	<string name="downloading">Prenos…</string>
+	<string name="installing_new_resources">Rapakiravanje novih podatkov…</string>
+	<string name="tip_navigation_t">\tPred začetkom navigacije morate izbrati cilj. Nato izberite \'Meni\' -&gt; \'Navodila\' in izberite tip navigacije.</string>
+	<string name="rotate_map_compass_opt">Rotacija po kompasu</string>
+	<string name="rotate_map_bearing_opt">Rotacija po smeri gibanja</string>
+	<string name="rotate_map_none_opt">Brez rotacije (sever je gor)</string>
 	</resources>
