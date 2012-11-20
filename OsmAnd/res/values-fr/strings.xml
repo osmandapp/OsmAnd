@@ -1134,4 +1134,8 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="incomplete_locale">incomplet</string>
 	<string name="no_buildings_found">Aucun bâtiment trouvé.</string>
     <string name="search_villages_and_postcodes">Rechercher les villages et les codes postaux</string>
-	</resources>
+	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+    <string name="route_descr_current_location">Position actuelle</string>
+    <string name="route_descr_from_to">De %1$s\nVers %2$s</string>
+    <string name="route_descr_from_to_via">De : %1$s\nVia : %2$s\nVers : %3$s</string>
+    </resources>
