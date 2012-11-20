@@ -564,7 +564,15 @@
 	<string name="only_show">Samo prikaži</string>
 	<string name="update_existing">Zamenjaj</string>
 	<string name="send_location">Pošlji lokacijo</string>
-	<string name="amenity_type_transportation">Transport</string>
+	<string name="amenity_type_transportation">Javni prevoz</string>
 	<string name="old_map_index_is_not_supported">Podatki zemljevida v stari obliki \'\'{0}\'\' niso podprti</string>
 	<string name="no_buildings_found">Ni bilo najdenih zgradb.</string>
-    </resources>
+    <string name="amenity_type_sustenance">Narava</string>
+	<string name="amenity_type_manmade">Zgradbe</string>
+	<string name="send_location_sms_pattern">Lokacija: %1$s\n%2$s</string>
+	<string name="tip_initial_t">"\tOsmAnd je navigacijska aplikacija s številnimi funkcijami.\n\tKot osnovna predstavitev so nekateri nasveti in triki povezani na glavnem zaslonu (glejte ikono \"?\"). "</string>
+	<string name="next_button">Naprej</string>
+	<string name="previous_button">Nazaj</string>
+	<string name="tip_initial">Nasveti in triki</string>
+	<string name="tip_search">Iskanje</string>
+	</resources>
