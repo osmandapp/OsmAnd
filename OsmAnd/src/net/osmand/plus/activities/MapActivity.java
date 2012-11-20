@@ -1021,7 +1021,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if(intermediate < 0) {
 				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
 			} else {
-				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, intermediate);
+				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, 
+						intermediate, false);
 			}
 		} else {
 			settings.clearPointToNavigate();
@@ -1053,6 +1054,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public List<LatLon> getIntermediatePoints(){
 		return mapLayers.getNavigationLayer().getIntermediatePoints();
 	}
+	
 	
 	public LatLon getFirstIntermediatePoint(){
 		List<LatLon> ip = mapLayers.getNavigationLayer().getIntermediatePoints();

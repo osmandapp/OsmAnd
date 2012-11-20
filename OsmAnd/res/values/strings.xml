@@ -9,6 +9,10 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+    <string name="route_descr_current_location">Current location</string>
+    <string name="route_descr_from_to">From  %1$s\nTo  %2$s</string>
+    <string name="route_descr_from_to_via">From : %1$s\nVia : %2$s\nTo : %3$s</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally.</string>
     <string name="search_villages_and_postcodes">Search villages/postcode </string>

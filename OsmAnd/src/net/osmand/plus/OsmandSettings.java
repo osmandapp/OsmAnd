@@ -1057,11 +1057,15 @@ public class OsmandSettings {
 		return list;
 	}
 	
-	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index) {
+	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index,
+			boolean navigate) {
 		List<LatLon> ps = getIntermediatePoints();
 		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, historyDescription);
+		if(navigate) {
+			globalPreferences.edit().putString(POINT_NAVIGATE_ROUTE, "true").commit();
+		}
 		if (historyDescription != null) {
 			SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, ctx);
 		}
@@ -1106,7 +1110,7 @@ public class OsmandSettings {
 
 	public boolean setPointToNavigate(double latitude, double longitude, boolean navigate, String historyDescription) {
 		boolean add = globalPreferences.edit().putFloat(POINT_NAVIGATE_LAT, (float) latitude).putFloat(POINT_NAVIGATE_LON, (float) longitude).commit();
-		globalPreferences.edit().putString(POINT_NAVIGATE_DESCRIPTION, historyDescription);
+		globalPreferences.edit().putString(POINT_NAVIGATE_DESCRIPTION, historyDescription).commit();
 		if(navigate) {
 			globalPreferences.edit().putString(POINT_NAVIGATE_ROUTE, "true").commit();
 		}

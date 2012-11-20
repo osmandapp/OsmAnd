@@ -11,6 +11,7 @@ import java.util.List;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
+import net.osmand.Algoritms;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
@@ -471,6 +472,48 @@ public class MapActivityActions implements DialogProvider {
     	return true;
     }
     
+    public String getRoutePointDescription(double lat, double lon) {
+    	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
+    }
+    
+    public String getRoutePointDescription(LatLon l, String d) {
+    	if(d != null && d.length() > 0) {
+    		return d.replace(':', ' ');
+    	}
+    	if(l != null) {
+    		return mapActivity.getString(R.string.route_descr_lat_lon, l.getLatitude(), l.getLongitude());
+    	}
+    	return "";
+    } 
+    
+	public String generateRouteDescription(Location fromOrCurrent, LatLon to) {
+		String from = mapActivity.getString(R.string.route_descr_current_location);
+		if (fromOrCurrent != null && fromOrCurrent.getProvider().equals("map")) {
+			from = getRoutePointDescription(fromOrCurrent.getLatitude(),
+					fromOrCurrent.getLongitude());
+		}
+		
+		String tos;
+		if(to == null) {
+			tos = getRoutePointDescription(mapActivity.getPointToNavigate(), 
+					settings.getPointNavigateDescription());
+		} else {
+			tos = getRoutePointDescription(to, "");
+		}
+		int sz = mapActivity.getIntermediatePoints().size();
+		if(sz == 0) {
+			return mapActivity.getString(R.string.route_descr_from_to, from, tos);
+		} else {
+			String via = "";
+			List<String> names = settings.getIntermediatePointDescriptions(sz);
+			for (int i = 0; i < sz ; i++) {
+				via += "\n - " + getRoutePointDescription(mapActivity.getIntermediatePoints().get(i),
+						names.get(i));
+			}
+			return mapActivity.getString(R.string.route_descr_from_to_via, from, via, tos);
+		}
+	}
+    
     
 	public void getDirections(final Location fromOrCurrent, final LatLon to, boolean gpxRouteEnabled) {
 
@@ -484,6 +527,9 @@ public class MapActivityActions implements DialogProvider {
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+		
+		TextView tv = ((TextView) view.findViewById(R.id.TextView));
+		tv.setText(generateRouteDescription(fromOrCurrent, to));
 		ApplicationMode appMode = settings.getApplicationMode();
 		if(appMode == ApplicationMode.DEFAULT) {
 			appMode = ApplicationMode.CAR;
@@ -1125,17 +1171,29 @@ public class MapActivityActions implements DialogProvider {
 	public void openIntermediatePointsDialog(){
 		Builder builder = new AlertDialog.Builder(mapActivity);
 		final ArrayList<LatLon> intermediates = new ArrayList<LatLon>(mapActivity.getIntermediatePoints());
+		final ArrayList<String> names = new ArrayList<String>(settings.getIntermediatePointDescriptions(
+				intermediates.size()));
 		final int targetPointInd = mapActivity.getPointToNavigate() == null ? -1 : intermediates.size();
 		if(mapActivity.getPointToNavigate() != null) {
 			intermediates.add(mapActivity.getPointToNavigate());
+			if(settings.getPointNavigateDescription() != null) {
+				names.add(settings.getPointNavigateDescription());
+			} else {
+				names.add("");
+			}
 		}
 		final List<String> intermediateNames = new ArrayList<String>();
 		double lat = mapActivity.getMapView().getLatitude();
 		double lon = mapActivity.getMapView().getLongitude();
 		for (int i = 0; i < intermediates.size(); i++) {
 			double meters = MapUtils.getDistance(intermediates.get(i), lat, lon);
-			intermediateNames.add((i+1)+". " + 
-					mapActivity.getString(R.string.target_point, OsmAndFormatter.getFormattedDistance((float) meters, mapActivity))+ "");
+			String distString = OsmAndFormatter.getFormattedDistance((float) meters, mapActivity);
+			String nm = (i+1)+". " +  mapActivity.getString(R.string.target_point, distString);
+			String descr = names.get(i);
+			if(names.get(i) != null && descr.trim().length() > 0) {
+				nm += "\n" + descr;
+			}
+			intermediateNames.add(nm);
 		}
 		final boolean[] checkedIntermediates = new boolean[intermediateNames.size()];
 		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.layers_list_activity_item, R.id.title,
@@ -1328,12 +1386,13 @@ public class MapActivityActions implements DialogProvider {
 						app.getSettings().setPointToNavigate(lat, lon, true, name);
 					} else if(which == 2) {
 						int sz = app.getSettings().getIntermediatePoints().size();
-						app.getSettings().insertIntermediatePoint(lat, lon, name, sz);
-						//LatLon pt = app.getSettings().getPointToNavigate();
-//						app.getSettings().insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), null, sz);
-						//app.getSettings().setPointToNavigate(lat, lon, true, name);
+//						app.getSettings().insertIntermediatePoint(lat, lon, name, sz);
+						LatLon pt = app.getSettings().getPointToNavigate();
+						app.getSettings().insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
+								app.getSettings().getPointNavigateDescription(), sz, true);
+						app.getSettings().setPointToNavigate(lat, lon, true, name);
 					} else {
-						app.getSettings().insertIntermediatePoint(lat, lon, name, 0);
+						app.getSettings().insertIntermediatePoint(lat, lon, name, 0, true);
 					}
 					MapActivity.launchMapActivityMoveToTop(activity);
 				}
