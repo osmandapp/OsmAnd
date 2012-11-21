@@ -1107,4 +1107,8 @@
 	<string name="incomplete_locale">nedokončený</string>
 	<string name="no_buildings_found">Neboli nájdené žiadne budovy.</string>
     <string name="search_villages_and_postcodes">"Vyhľadaj dediny/PSČ "</string>
-	</resources>
+	<string name="route_descr_lat_lon">Šírka %1$.3f dĺžka %2$.3f</string>
+    <string name="route_descr_current_location">Aktuálna pozícia</string>
+    <string name="route_descr_from_to">Z %1$s\nDo %2$s</string>
+    <string name="route_descr_from_to_via">Z : %1$s\nCez : %2$s\nDo : %3$s</string>
+    </resources>
