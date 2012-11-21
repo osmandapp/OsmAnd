@@ -1112,4 +1112,8 @@
     <string name="incomplete_locale">neúplný</string>
 	<string name="no_buildings_found">Nebyly nalezeny žádné budovy.</string>
     <string name="search_villages_and_postcodes">"Hledat obec/PSČ "</string>
-	</resources>
+	<string name="route_descr_lat_lon">Šířka %1$.3f délka %2$.3f</string>
+    <string name="route_descr_current_location">Současná pozice</string>
+    <string name="route_descr_from_to">Z %1$s\nDo %2$s</string>
+    <string name="route_descr_from_to_via">Z : %1$s\nPřes : %2$s\nDo : %3$s</string>
+    </resources>
