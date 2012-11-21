@@ -646,4 +646,6 @@
 	<string name="tip_map_context_menu">Kontekstni meni zemljevida</string>
 	<string name="tip_map_context_menu_t">"\tKontekstni meni zemljevida je na voljo z daljšim pritiskom na zemljevidu ali s pritiskom na kolešček.\n\tTo naredi okvir z izpisano koordinato. Če želite odpreti kontekstni meni, pritisnite na okvir. (Ali pa pritisnite in držite da se skrije.)\n\tKontekstni meni zemljevida vsebuje vse akcije, ki se nanašajo na točko (lokacijo). "</string>
 	<string name="tip_search_t">"\tIščete lahko direktno na zemljevidu ali pa po naslovu, po lokaciji, kot POI ali priljubljenih lokacijah.\n\tS pritiskom na \'Iskanje\' v glavnem meniju se odpre iskalno okno. Za vse zadetke iskanja ponuja kontekstni meni 2 možnosti: \'Nastavi kot cilj\' in \'Prikaži na zemljevidu\'. "</string>
-	</resources>
+	<string name="route_descr_from_to">Od %1$s\ndo %2$s</string>
+    <string name="route_descr_from_to_via">Od: %1$s\nprek: %2$s\ndo: %3$s</string>
+    </resources>
