@@ -1051,4 +1051,8 @@
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
     <string name="search_villages_and_postcodes">"Zoeken dorpen/postcode "</string>
-	</resources>
+	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
+    <string name="route_descr_current_location">huidige positie</string>
+    <string name="route_descr_from_to">Van %1$s\nNaar %2$s</string>
+    <string name="route_descr_from_to_via">Van : %1$s\nVia : %2$s\nNaar : %3$s</string>
+    </resources>
