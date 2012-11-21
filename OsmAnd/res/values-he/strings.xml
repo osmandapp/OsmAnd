@@ -1096,4 +1096,8 @@
     <string name="incomplete_locale">חלקי</string>
 	<string name="search_villages_and_postcodes">"חיפוש כפרים/מיקוד "</string>
 	<string name="no_buildings_found">לא נמצאו בניינים.</string>
+    <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
+    <string name="route_descr_current_location">המיקום הנוכחי</string>
+    <string name="route_descr_from_to">מ־%1$s\nאל %2$s</string>
+    <string name="route_descr_from_to_via">מהמיקום : %1$s\nדרך : %2$s\nאל : %3$s</string>
     </resources>
