@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
-    <string name="route_descr_current_location">Current location</string>
+    <string name="route_descr_current_location">Current position</string>
     <string name="route_descr_from_to">From  %1$s\nTo  %2$s</string>
     <string name="route_descr_from_to_via">From : %1$s\nVia : %2$s\nTo : %3$s</string>
     <string name="no_buildings_found">No buildings found.</string>
