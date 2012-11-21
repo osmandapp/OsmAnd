@@ -632,4 +632,5 @@
 	<string name="osb_comment_dialog_author">Ime avtorja</string>
 	<string name="osb_add_dialog_success">Napaka uspešno ustvarjena</string>
 	<string name="osb_add_dialog_error">Napaka v programu: Napaka ni bila ustvarjena</string>
+	<string name="osb_comment_dialog_add_button">Dodaj komentar</string>
 	</resources>
