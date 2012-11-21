@@ -38,7 +38,7 @@
   <string name="map_version_changed_info">Na serwerze są mapy, które są niekompatybilne z tą wersją programu. Aby je pobrać i używać, musisz zaktualizować program do nowszej wersji.</string>
   <string name="local_index_mi_rename">Zmień nazwę</string>
   <string name="show_gpx_route">Pokaż na mapie</string>
-  <string name="poi_filter_nominatim">Online Nominatim</string>
+  <string name="poi_filter_nominatim">Nominatim Online</string>
   <string name="search_select_point">Wybierz</string>
   <string name="search_position_current_location_search">Ustal pozycję GPS…</string>
   <string name="search_position_current_location_found">Pozycja [ustalona]</string>
@@ -245,10 +245,10 @@
   <string name="build_installed">Kompilacja {0} zainstalowana pomyślnie ({1}).</string>
   <string name="downloading_build">Pobieram kompilację programu…</string>
   <string name="install_selected_build">Kontynuować instalację OsmAnd - {0} z {1} {2} MB ?</string>
-  <string name="loading_builds_failed">Pobieram listę kompilacji OsmAnd zakończonych niewłaściwie</string>
-  <string name="loading_builds">Ładuję buildy OsmAnd…</string>
+  <string name="loading_builds_failed">Pobieranie listy kompilacji OsmAnd nie powiodło się</string>
+  <string name="loading_builds">Ładuję listę kompilacji OsmAnd…</string>
   <string name="select_build_to_install">Wybierz, którą kompilację OsmAnd zainstalować</string>
-  <string name="contribution_activity">Special activity for contribution version</string>
+  <string name="contribution_activity">Specialne opcje dla wersji \"contribution\"</string>
   <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS Status. Wyszukać ją w Google Play?</string>
   <string name="voice_is_not_available_msg">Głos nawigatora nie jest dostępny. Przejdź do ustawień, wybierz ulubiony zestaw i zainstaluj go.</string>
   <string name="voice_is_not_available_title">Nie wybrano głosu nawigatora</string>
@@ -1028,4 +1028,23 @@
 	<string name="non_optimal_route_calculation">Oblicz (być może nieoptymalną) trasę na długich dystansach</string>
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług logowania (logowanie, śledzenie na bieżąco)</string>
     <string name="local_index_items"/>
-	</resources>
+	<string name="no_buildings_found">Nie znaleziono budynków.</string>
+    <string name="search_villages_and_postcodes">"Szukaj miejscowości/kodów pocztowych "</string>
+	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
+    <string name="route_descr_current_location">Bieżąca pozycja</string>
+    <string name="route_descr_from_to">Z %1$s↵\nDo %2$s</string>
+    <string name="route_descr_from_to_via">Z : %1$s↵\nPrzez : %2$s↵\nDo : %3$s</string>
+    <string name="rendering_attr_showRoadMaps_description">Wybierz kiedy wyświetlać tylko mapy samochodowe:</string>
+	<string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
+    <string name="download_roads_only_item">"Samochodowe "</string>
+    <string name="download_roads_only_maps">Tylko mapy samochodowe</string>
+    <string name="safe_mode_description">Uruchom program w trybie bezpiecznym.</string>
+    <string name="safe_mode">Tryb bezpieczny</string>
+    <string name="native_library_not_running">Program działa w trybie bezpiecznym (zablokuj ten tryb w Preferencjach).</string>
+    <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0 : ↵\n→* Poprawiony routing: szybszy, dokładniejszy, do 250 km ↵\n→* Wprowadzenie map tylko samochodowych ↵\n→* Mapa nie gubi ustalonej pozycji po przerwaniu ↵\n→* Włączenie usługi w tle podczas nawigacji "</string>
+    <string name="close_changeset">Zamknij zestaw zmian</string>
+	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
+	<string name="incomplete_locale">niekompletne</string>
+	<string name="download_regular_maps">Standardowe mapy</string>
+    </resources>
