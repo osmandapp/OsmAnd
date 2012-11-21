@@ -1030,4 +1030,10 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="download_regular_maps">Mapas normales</string>
     <string name="download_roads_only_maps">Mapas sólo de carreteras</string>
     <string name="incomplete_locale">incompleto</string>
+	<string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+    <string name="route_descr_current_location">Posición actual</string>
+    <string name="route_descr_from_to">De %1$s\nA %2$s</string>
+    <string name="route_descr_from_to_via">De: %1$s\nVia: %2$s\nA: %3$s</string>
+    <string name="no_buildings_found">No se han encontrado edificios.</string>
+    <string name="search_villages_and_postcodes">"Buscar pueblos/códigos postales "</string>
 	</resources>
