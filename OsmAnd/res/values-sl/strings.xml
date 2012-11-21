@@ -42,7 +42,7 @@
 	<string name="default_buttons_add">Dodaj</string>
 	<string name="default_buttons_apply">Uporabi</string>
 	<string name="context_menu_item_create_poi">Ustvari POI</string>
-	<string name="context_menu_item_open_bug">Odpri OSM napako</string>
+	<string name="context_menu_item_open_bug">Ustvari OSM napako</string>
 	<string name="context_menu_item_update_map">Osveži karto</string>
 	<string name="search_tabs_location">Lokacija</string>
 	<string name="add_favorite_dialog_default_favourite_name">Priljubljena lokacija</string>
@@ -624,4 +624,12 @@
 	<string name="backToMenu">Nazaj v meni</string>
 	<string name="auto_announce_on">Začni s samodejnimi najavami</string>
 	<string name="auto_announce_off">Končaj s samodejnimi najavami</string>
+	<string name="tip_osm_improve">Izboljševanje OSM podatkov</string>
+	<string name="osm_settings">OSM urejanje</string>
+	<string name="website">Spletna stran</string>
+	<string name="osb_add_dialog_title">Vnos OSM napake</string>
+	<string name="osb_comment_dialog_message">Sporočilo</string>
+	<string name="osb_comment_dialog_author">Ime avtorja</string>
+	<string name="osb_add_dialog_success">Napaka uspešno ustvarjena</string>
+	<string name="osb_add_dialog_error">Napaka v programu: Napaka ni bila ustvarjena</string>
 	</resources>
