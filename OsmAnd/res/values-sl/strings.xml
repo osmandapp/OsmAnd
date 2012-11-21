@@ -648,4 +648,30 @@
 	<string name="tip_search_t">"\tIščete lahko direktno na zemljevidu ali pa po naslovu, po lokaciji, kot POI ali priljubljenih lokacijah.\n\tS pritiskom na \'Iskanje\' v glavnem meniju se odpre iskalno okno. Za vse zadetke iskanja ponuja kontekstni meni 2 možnosti: \'Nastavi kot cilj\' in \'Prikaži na zemljevidu\'. "</string>
 	<string name="route_descr_from_to">Od %1$s\ndo %2$s</string>
     <string name="route_descr_from_to_via">Od: %1$s\nprek: %2$s\ndo: %3$s</string>
-    </resources>
+    <string name="route_descr_lat_lon">Dol %1$.3f šir %2$.3f</string>
+    <string name="route_descr_current_location">Trenutno mesto</string>
+    <string name="first_time_msg">Hvala, ker uporabljate OsmAnd. Za uporabo veliko zmožnosti tega programa, boste potrebovali krajevne podatke, ki jih lahko prejmete preko \'Nastavitve\'-&gt;\'Krajevni podatki\'. Potem boste lahko videli zemljevide, našli naslove, našli točke POI in našli javni prevoz.</string>    
+	<string name="local_indexes_cat_tile">Spletni zemljevidi in ploščice zemljevidov</string>
+	<string name="map_online_data">Spletni zemljevidi in ploščice zemljevidov</string>
+	<string name="default_buttons_reset">Ponastavi</string>
+	<string name="scroll_map_by_gestures_descr">Drsanje po zemljevidi s kretnjami na zaslonu na dotik</string>
+	<string name="scroll_map_by_gestures">Naravno drsenje zemljevida</string>
+	<string name="zoom_by_trackball_descr">Spremeni povečavo zemljevida z vodoravnimi premiki sledilne žogice</string>
+	<string name="zoom_by_trackball">Uporabi sledilno žogico za nadzor povečave</string>
+	<string name="use_short_object_names_descr">Uporabi kratka imena predmetov v načinu raziskovanja dotika</string>
+	<string name="use_short_object_names">Uporabi imena predmetov</string>
+	<string name="accessibility_preferences_descr">Z dostopnostjo povezane možnosti</string>
+	<string name="accessibility_preferences">Dostopnost</string>
+	<string name="rendering_out_of_memory">Ni dovolj pomnilnika za prikaz izbranega področja</string>
+	<string name="use_fluorescent_overlays">Fluorescentno prekrivanje</string>
+	<string name="use_fluorescent_overlays_descr">Uporabi fluorescentne barve za prikaz poti</string>
+	<string name="offline_edition">Krajevno urejanje</string>
+	<string name="offline_edition_descr">Vedno uporabi krajevno urejanje</string>
+	<string name="update_poi_does_not_change_indexes">Spremembe POI v programu ne vplivajo na prejete datoteke zemljevidov, spremembe so namesto tega shranjene v krajevno datoteko.</string>
+	<string name="local_openstreetmap_uploading">Pošiljanje ...</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/hroščev je bilo poslanih</string>
+	<string name="local_openstreetmap_uploadall">Pošlji vse</string>
+	<string name="local_openstreetmap_show">Pokaži na zemljevidu</string>
+	<string name="local_openstreetmap_upload">Pošlji spremembo na OSM</string>
+	<string name="local_openstreetmap_delete">Izbriši spremembo</string>
+	</resources>
