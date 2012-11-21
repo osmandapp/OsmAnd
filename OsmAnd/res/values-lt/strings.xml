@@ -1136,4 +1136,16 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="native_library_not_running">Programa veikia saugiu eržimu (išjunkite jį Nustatymuose).</string>
     <string name="background_service_is_enabled_question">Foninis režimas vis dar veikia. Ar norite jį nutraukti?</string>
     <string name="tip_recent_changes_1_0_0_t">"Pakeitimai 1.0 versijoje :\n\t* Patobulintas maršruto skaičiavimas dabar greitesnis ir tikslesnis (iki 250 km)\n\t* Kelių žemėlapis\n\t* Žemėlapis nepraranda pozicijos įvykus trikdžiams\n\t* Foninio režimo įjungimas navigacijos metu "</string>
-    </resources>
+    <string name="route_descr_lat_lon">Plat. %1$.3f ilg. %2$.3f</string>
+    <string name="route_descr_current_location">Dabartinė buvimo vieta</string>
+    <string name="route_descr_from_to">Nuo %1$s\nIki %2$s</string>
+    <string name="route_descr_from_to_via">Nuo : %1$s\nPer : %2$s\nIki : %3$s</string>
+    <string name="no_buildings_found">Pastatų nerasta.</string>
+    <string name="search_villages_and_postcodes">"Ieškoti kaimų/pašto kodų "</string>
+	<string name="rendering_attr_showRoadMaps_description">Pasirinkti kada rodyti tik kelių žemėlapius:</string>
+	<string name="rendering_attr_showRoadMaps_name">Tik kelių žemėlapiai</string>
+    <string name="download_roads_only_item">"Keliai "</string>
+    <string name="download_regular_maps">Įprastiniai žemėlapiai</string>
+    <string name="download_roads_only_maps">Tik kelių žemėlapiai</string>
+    <string name="incomplete_locale">nebaigta</string>
+	</resources>
