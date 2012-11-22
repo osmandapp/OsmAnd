@@ -1091,7 +1091,7 @@
 	<string name="search_villages_and_postcodes">"Αναζήτηση χωριών/ταχ. κωδικών "</string>
 	<string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
     <string name="route_descr_lat_lon">Πλ %1$.3f μήκ %2$.3f</string>
-    <string name="route_descr_current_location">Τρέχουσα τοποθεσία</string>
+    <string name="route_descr_current_location">Τρέχουσα θέση</string>
     <string name="route_descr_from_to">Από %1$s\nΠρος %2$s</string>
     <string name="route_descr_from_to_via">Από : %1$s\nΜέσω : %2$s\nΠρος : %3$s</string>
     </resources>
