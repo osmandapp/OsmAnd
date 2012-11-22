@@ -692,4 +692,11 @@
 	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
 	<string name="binary_map_download_success">Prejem je uspešen.\n\t\n\tZa uporabo omogočite \'Meni\'-&gt;\'Določi pogled\'-&gt;\'Vir zemljevidov ...\'-&gt;Nepovezani vektorski zemljevidi\'.</string>
 	<string name="tip_day_night_mode">Način dneva/noči</string>
+	<string name="daynight_mode_auto">Sončni vzhod / zahod</string>
+	<string name="daynight_mode_day">Dnevni</string>
+	<string name="daynight_mode_night">Nočni</string>
+	<string name="daynight_mode_sensor">Svetlobni senzor</string>
+	<string name="daynight">Dnevni / nočni način</string>
+	<string name="daynight_descr">Izberi način preklopa za Dnevni / Nočni način</string>
+	<string name="tip_day_night_mode_t_v2">"\tIzgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom.\n\tNočne barve so varnejše za nočno vožnjo.\n\tPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' -&gt; \'Nastavitev zaslona ...\' -&gt; \'zemljevid dan / noč\'.\n\tMožnosti so:\n\t\'Sončni vzhod / zahod\' - avtomatski način glede na položaj sonca (privzeto)\n\t\'Dnevni\' - vedno se uporablja dnevni način\n\t\'Nočni\' - vedno se uporablja nočni način\n\t\'Svetlobni senzor\' - izgled zemljevida nadzoruje svetlobni senzor naprave (če je na voljo) "</string>	
 	</resources>
