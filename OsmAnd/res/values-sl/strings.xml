@@ -674,4 +674,22 @@
 	<string name="local_openstreetmap_show">Pokaži na zemljevidu</string>
 	<string name="local_openstreetmap_upload">Pošlji spremembo na OSM</string>
 	<string name="local_openstreetmap_delete">Izbriši spremembo</string>
+	<string name="local_openstreetmap_descr_title">Asinhrono urejanje OSM:</string>
+	<string name="local_openstreetmap_settings">Krajevno shranjene točke POI/hrošči OSM</string>
+	<string name="local_openstreetmap_settings_descr">Pokaži in upravljaj točke POI/hrošče OSM, ki so zabeleženi v krajevni podatkovni zbirki</string>
+	<string name="live_monitoring_descr">Pošlji sledenje na določeno spletno storitev</string>
+	<string name="live_monitoring">Spletno sledenje v živo</string>
+	<string name="live_monitoring_interval_descr">Določi interval sledenja v živo</string>
+	<string name="live_monitoring_interval">Interval sledenja v živo</string>
+	<string name="live_monitoring_url_descr">Določite spletne naslove s skladnjo parametrov: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Sledenje spletnih naslovov v živo</string>
+	<string name="gpx_monitoring_disabled_warn">Omogočite nastavitev \'Beleži sled v datoteko GPX\'.</string>
+	<string name="profile_settings">Za profil določene nastavitve</string>
+	<string name="settings_preset">Uporabniški profil</string>
+	<string name="global_settings">Splošne nastavitve</string>
+	<string name="index_settings">Krajevni podatki (prejem)</string>
+	<string name="osmand_service">Zmožnost načina spanja</string>
+	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
+	<string name="binary_map_download_success">Prejem je uspešen.\n\t\n\tZa uporabo omogočite \'Meni\'-&gt;\'Določi pogled\'-&gt;\'Vir zemljevidov ...\'-&gt;Nepovezani vektorski zemljevidi\'.</string>
+	<string name="tip_day_night_mode">Način dneva/noči</string>
 	</resources>
