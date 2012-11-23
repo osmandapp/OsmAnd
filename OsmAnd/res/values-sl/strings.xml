@@ -725,4 +725,20 @@
 	<string name="button_upgrade_osmandplus">Nadgradi OsmAnd+</string>
 	<string name="map_version_changed_info">Strežnik vsebuje datoteke zemljevida, ki niso združljive z vašo različico programa. Za njihov prejem in uporabo nadgradite program na novo različico.</string>
 	<string name="local_index_mi_rename">Preimenuj</string>
+	<string name="show_gpx_route">Pokaži na zemljevidu</string>
+	<string name="poi_filter_nominatim">Spletni Nominatim</string>
+	<string name="search_position_current_location_search">Iskanje položaja ...</string>
+	<string name="search_position_current_location_found">Položaj (najden)</string>
+	<string name="save_route_dialog_title">Shrani pot kot sled GPX</string>
+	<string name="route_successfully_saved_at">Pot je bila uspešno shranjena kot \'%1$s\'.</string>
+	<string name="filename_input">Ime datoteke:</string>
+	<string name="file_with_name_already_exist">Datoteka z enakim imenom že obstaja.</string>
+	<string name="default_buttons_save">Shrani</string>
+	<string name="menu_save_directions">Shrani navodila</string>
+	<string name="local_index_upload_gpx_description">Pošlji datoteke GPX za skupnost OSM. Uporabljene bodo za izboljšavo zemljevidov.</string>
+	<string name="local_index_items_uploaded">%1$d od %2$d predmet(ov) je bilo uspešno poslanih.</string>
+	<string name="local_index_mi_upload_gpx">Pošlji na OSM</string>
+	<string name="show_more_map_detail">Pokaži več podrobnosti zemljevida</string>
+	<string name="show_more_map_detail_descr">Pokaži nekaj podrobnosti vektorskih zemljevidov (ceste, itd.) že pri manjših povečavah</string>
+	<string name="vector_map_not_needed">Ne, hvala</string>
 	</resources>
