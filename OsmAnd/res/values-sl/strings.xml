@@ -704,7 +704,7 @@
 	<string name="tip_select_destination_point">Izberi cilj</string>
 	<string name="tip_select_destination_point_t">"\tCilj lahko izberete neposredno v zemljevidu (meni vsebina nato \'Nastavi kot cilj\'), v vseh dejavnostih iskanja ali z dolgim pritiskom na vnos na vašem \'Seznamu priljubljenih točk\'.\n\tCilj je označen kot oranžen disk na zemljevidu. OsmAnd prikaže razdaljo in smer do cilja (oranžen trikotnik). "</string> 
 	<string name="native_library_not_supported">Nativna knjižnica ni podprta na tej napravi.</string>
-	<string name="init_native_library">Začenjanje nativne knjižnice…</string>
+	<string name="init_native_library">Začenjanje nativne knjižnice …</string>
 	<string name="auto_follow_route_navigation">Samodejno centriraj le med navigacijo</string>
 	<string name="auto_follow_route_navigation_descr">Samodejno centriraj zemljevid le med navigiranjem.</string>
 	<string name="auto_follow_location_enabled">Samodejno centriranje pogleda zemljevida, ki je v uporabi.</string>
