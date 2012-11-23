@@ -264,7 +264,7 @@
 	<string name="voice_data_unavailable">Valittu äänidata ei ole saatavilla</string>
 	<string name="stop_routing">Lopeta nav.</string>
 	<string name="sd_unmounted">Muistikortti ei ole saatavilla.\nEt voi nähdä karttoja tai löytää asioita.</string>
-	<string name="sd_mounted_ro">"Muistikortti on kirjoitussuojattu.\nVoit käyttää vain ennalta ladattuja karttoja etkä voi ladata niitä netistä. "</string>
+	<string name="sd_mounted_ro">Muistikortti on kirjoitussuojattu.\nVoit käyttää vain ennalta ladattuja karttoja etkä voi ladata niitä netistä.</string>
 	<string name="unzipping_file">Puretaan tiedostoa…</string>
 	<string name="route_tr">Käänny oikealle ja mene</string>
 	<string name="route_tshr">Käänny jyrkästi oikealle ja mene</string>
@@ -437,7 +437,7 @@
 	<string name="poi_remove_success">KP poistettiin onnistuneesti</string>
 	<string name="poi_action_add">lisää</string>
 	<string name="poi_action_change">muuta</string>
-	<string name="poi_action_succeded_template">Toiminto {0} suoritettiin onnistuneesti</string>
+	<string name="poi_action_succeded_template">Toiminto {0} suoritettiin onnistuneesti.</string>
 	<string name="poi_error_unexpected_template">Tapahtui odottamaton virhe suoritettaessa toimintoa {0}.</string>
 	<string name="poi_dialog_name">Nimi</string>
 	<string name="poi_dialog_opening_hours">Avoinna</string>
@@ -454,7 +454,7 @@
 \n\t* Lisätty kartalle yksi tietyyppi lisää polkupyörille  (Pyörätie=track)
 \n\t* Bugi korjauksia "</string>
 	<string name="poi_filter_car_aid">Autotuki</string>
-	<string name="layer_map_appearance">Muokkaa näyttöä...</string>
+	<string name="layer_map_appearance">Muokkaa näyttöä…</string>
 	<string name="screen_is_locked">Poistaaksesi näytön lukituksen paina lukitus kuvaketta</string>
 	<string name="map_widget_map_select">Kartan lähde</string>
 	<string name="map_widget_config">Muokkaa näyttöä</string>
@@ -462,7 +462,7 @@
 	<string name="map_widget_left_stack">Vasen panelli:</string>
 	<string name="map_widget_time">Aikaa jäljellä</string>
 	<string name="bg_service_screen_unlock">Poista näytön lukitus</string>
-	<string name="continue_follow_previous_route_auto">Edellinen navigointi keskeytyi,haluatko jatkaa? (%1$s seconds)</string>
+	<string name="continue_follow_previous_route_auto">Edellinen navigointi keskeytyi,haluatko jatkaa? (%1$s sekuntia)</string>
 	<string name="starting_point_too_far">Aloituspiste liian kaukana lähimmästä tiestä.</string>
 	<string name="osmand_parking_event">Nouda auto pysäköinnistä</string>
 	<string name="osmand_parking_warning_text">Muistutus edellisestä auton noudosta lisättin kalenteriin. Se muistuttaa siellä niin kauan että poistat sen manuaalisesti.</string>    
@@ -518,9 +518,9 @@
 	<string name="amenity_type_transportation">Liikenne</string>
 	<string name="km">Kilometri</string>
 	<string name="km_h">kilometriä tunnissa</string>
-	<string name="m">metri</string>
+	<string name="m">m</string>
 	<string name="poi_dialog_comment">Kommentti</string>
-	<string name="add_favorite_dialog_favourite_added_template">Suosikki \"{0}\" lisättiin onnistuneesti</string>
+	<string name="add_favorite_dialog_favourite_added_template">Suosikki \"{0}\" lisättiin onnistuneesti.</string>
 	<string name="favourites_remove_dialog_success">Suosikki {0} poistettu onnistuneesti.</string>
 	<string name="context_menu_item_create_poi">Luo KP</string>
 	<string name="incremental_search_city">Etsi kaupunki listasta. Löytääksesi pienempiä paikkoja/postnumeroita kirjoita 3 tai enemmän merkkejä.</string>
@@ -533,7 +533,7 @@
 	<string name="empty_route_calculated">Virhe: Laskettu reitti on tyhjä</string>					
 	<string name="route_general_information">Välimatka %1$s,matka-aika %2$d h %3$d m.</string>
 	<string name="gps_provider">GPS</string>
-	<string name="int_seconds">sekuntit</string>
+	<string name="int_seconds">sekuntia</string>
 	<string name="int_min">min.</string>
 	<string name="where_am_i">Missä olen?</string>
 	<string name="context_menu_item_show_route">Näytä reitti täältä</string>
@@ -591,4 +591,7 @@
 	<string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>
 	<string name="osb_close_dialog_error">Tapahtui virhe: bugia ei suljettu</string>
 	<string name="osb_comment_dialog_author">Tekijän nimi</string>
-	</resources>
+	<string name="route_descr_current_location">Nykyinen sijainti</string>
+    <string name="download_roads_only_item">"Tiet "</string>
+    <string name="download_regular_maps">Tavalliset kartat</string>
+    </resources>
