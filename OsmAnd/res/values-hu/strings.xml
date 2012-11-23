@@ -1071,4 +1071,8 @@
     <string name="incomplete_locale">hiányos</string>
 	<string name="no_buildings_found">Nem található épület.</string>
     <string name="search_villages_and_postcodes">"Település/irányítószám keresése "</string>
-	</resources>
+	<string name="route_descr_lat_lon">szél. %1$.3f hossz. %2$.3f</string>
+    <string name="route_descr_current_location">Jelenlegi pozíció</string>
+    <string name="route_descr_from_to">Innen: %1$s\nIde: %2$s</string>
+    <string name="route_descr_from_to_via">Innen : %1$s\nErre : %2$s\nIde : %3$s</string>
+    </resources>
