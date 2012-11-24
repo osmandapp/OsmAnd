@@ -1169,4 +1169,7 @@
     <string name="incomplete_locale">incomplet</string>
 	<string name="search_villages_and_postcodes">"Caută sate/cod poștal "</string>
 	<string name="no_buildings_found">Număr negăsit.</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+    <string name="route_descr_current_location">Poziția actuală</string>
+    <string name="route_descr_from_to">De la %1$s↵\nLa %2$s</string>
     </resources>
