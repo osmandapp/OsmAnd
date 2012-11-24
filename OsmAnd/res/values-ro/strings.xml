@@ -1172,4 +1172,5 @@
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Poziția actuală</string>
     <string name="route_descr_from_to">De la %1$s↵\nLa %2$s</string>
+    <string name="route_descr_from_to_via">De la: %1$s↵\nVia: %2$s↵\nLa: %3$s</string>
     </resources>
