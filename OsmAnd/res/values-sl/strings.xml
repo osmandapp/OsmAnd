@@ -491,7 +491,7 @@
 	<string name="tts_language_not_supported">Izbrani jezik ni podprt z vgrajenim Android TTS engine (text-to-speech)-(besedilo v govor). Ali želite na trgu poiskati drug sintetizator govora? Sicer bo uporabljen sistemski TTS jezik.</string>
 	<string name="tts_missing_language_data">Ni nameščenih podatkov za izbrani jezik. Ali jih želite namestiti iz tržnice?</string>
 	<string name="system_locale">Sistemski</string>
-	<string name="support_new_features">Podpri nanaljnji razvoj</string>
+	<string name="support_new_features">Podpri nadaljnji razvoj</string>
 	<string name="map_screen_orientation">Usmerjenost zaslona</string>
 	<string name="map_screen_orientation_descr">Pokončno, ležeče ali sistemsko</string>
 	<string name="map_orientation_default">Glede na nastavitve naprave</string>
