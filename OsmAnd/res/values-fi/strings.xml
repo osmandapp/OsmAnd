@@ -594,4 +594,7 @@
 	<string name="route_descr_current_location">Nykyinen sijainti</string>
     <string name="download_roads_only_item">"Tiet "</string>
     <string name="download_regular_maps">Tavalliset kartat</string>
-    </resources>
+    <string name="route_descr_from_to_via">Mistä:%1$s\nKautta:%2$s\nMihin:%3$s</string>
+    <string name="no_buildings_found">Rakennuksia ei löytynyt.</string>
+    <string name="search_villages_and_postcodes">Etsi pienempiä paikkakuntia/postinumeroita</string>
+	</resources>
