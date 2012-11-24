@@ -690,7 +690,7 @@
 	<string name="index_settings">Krajevni podatki (prejem)</string>
 	<string name="osmand_service">Zmožnost načina spanja</string>
 	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
-	<string name="binary_map_download_success">Prejem je uspešen.\n\t\n\tZa uporabo omogočite \'Meni\'-&gt;\'Določi pogled\'-&gt;\'Vir zemljevidov ...\'-&gt;Nepovezani vektorski zemljevidi\'.</string>
+	<string name="binary_map_download_success">Prejem je uspešen.\n\t\n\tZa uporabo omogočite \'Meni\'-&gt;\'Nastavitve prikaza\'-&gt;\'Vir zemljevidov ...\'-&gt;Nepovezani vektorski zemljevidi\'.</string>
 	<string name="tip_day_night_mode">Način dneva/noči</string>
 	<string name="daynight_mode_auto">Sončni vzhod / zahod</string>
 	<string name="daynight_mode_day">Dnevni</string>
@@ -755,7 +755,7 @@
 	<string name="gpx_option_reverse_route">Obratna smer GPX</string>
 	<string name="gpx_option_destination_point">Uporabi trenuten cilj</string>
 	<string name="gpx_option_from_start_point">Podaj celotno sled</string>
-	<string name="switch_to_vector_map_to_see">Za to mesto so na voljo nepovezani vektorski zemljevidi.\n\t\n\tZa njihovo uporabi omogočite \'Meni\'-&gt;\'Določi pogled\'-&gt;\'Vir zemljevida ...\'-&gt;\'Nepovezani vektorski zemljevidi\'.</string>
+	<string name="switch_to_vector_map_to_see">Za to mesto so na voljo nepovezani vektorski zemljevidi.\n\t\n\tZa njihovo uporabi omogočite \'Meni\'-&gt;\'Nastavitve prikaza\'-&gt;\'Vir zemljevida ...\'-&gt;\'Nepovezani vektorski zemljevidi\'.</string>
 	<string name="voice_stream_notification">Obvestilni zvok</string>
 	<string name="voice_stream_music">Zvok predstavnosti/glasbe</string>
 	<string name="warning_tile_layer_not_downloadable">Program ne more prejeti plasti zemljevida %1$s, poskusite jo ponovno namestiti.</string>
@@ -785,4 +785,5 @@
 	<string name="add_waypoint_dialog_added">Navigacijska točka \"{0}\" je bila uspešno dodana</string>
 	<string name="add_waypoint_dialog_title">Dodaj navigacijsko točko posneti sledi GPX</string>
 	<string name="context_menu_item_add_waypoint">Dodaj navigacijsko točko sledi GPX</string>
+	<string name="tip_favorites_t">"\tPogosto uporabljene točke si lahko shranite kot Priljubljene.\n\tČe želite shraniti točko kot priljubljeno, pojdite v kontekstni meni zemljevida in izberite \'Dodaj med priljubljene\' in vnesite ime. Po shranjevanju priljubljene točke je ta dostopna preko \'Glavnega zaslona\' -&gt; \'Priljubljene\'.\n\tDolg pritisk na priljubljeni točki v meniju \'Priljubljene\' nam ponudi možnost, da jo določimo kot cilj, uredimo ali brišemo.\n\tZa prikaz vseh priljubljenih točk na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' -&gt; \'Nastavitve prikaza\'. "</string>
 	</resources>
