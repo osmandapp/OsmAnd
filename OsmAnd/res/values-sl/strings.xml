@@ -564,7 +564,7 @@
 	<string name="only_show">Samo prikaži</string>
 	<string name="update_existing">Zamenjaj</string>
 	<string name="send_location">Pošlji lokacijo</string>
-	<string name="amenity_type_transportation">Javni prevoz</string>
+	<string name="amenity_type_transportation">Prevoz</string>
 	<string name="old_map_index_is_not_supported">Podatki zemljevida v stari obliki \'\'{0}\'\' niso podprti</string>
 	<string name="no_buildings_found">Ni bilo najdenih zgradb.</string>
     <string name="amenity_type_sustenance">Prehrana</string>
@@ -786,4 +786,19 @@
 	<string name="add_waypoint_dialog_title">Dodaj navigacijsko točko posneti sledi GPX</string>
 	<string name="context_menu_item_add_waypoint">Dodaj navigacijsko točko sledi GPX</string>
 	<string name="tip_favorites_t">"\tPogosto uporabljene točke si lahko shranite kot Priljubljene.\n\tČe želite shraniti točko kot priljubljeno, pojdite v kontekstni meni zemljevida in izberite \'Dodaj med priljubljene\' in vnesite ime. Po shranjevanju priljubljene točke je ta dostopna preko \'Glavnega zaslona\' -&gt; \'Priljubljene\'.\n\tDolg pritisk na priljubljeni točki v meniju \'Priljubljene\' nam ponudi možnost, da jo določimo kot cilj, uredimo ali brišemo.\n\tZa prikaz vseh priljubljenih točk na zemljevidu, omogočite sloj \'Priljubljene\' v \'Meni\' -&gt; \'Nastavitve prikaza\'. "</string>
+	<string name="transport">Prevoz</string>
+	<string name="additional_settings">Dodatne nastavitve</string>
+	<string name="settings">Nastavitve</string>
+	<string name="save_current_track">Shrani trenutno GPX pot</string>
+	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
+	<string name="save_track_interval">Frekvenca logiranja</string>
+	<string name="save_track_interval_descr">Izberite frekvenco logiranja položaja za sledi</string>
+	<string name="save_track_to_gpx">Shrani sled v GPX datoteko</string>
+	<string name="save_track_to_gpx_descrp">Sledi se shranjujejo v podmape mape \'tracks\' po dnevih</string>
+	<string name="mark_point">Cilj</string>
+	<string name="show_osm_bugs_descr">Pokaži OpenStreetBugs na zemljevidu</string>
+	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
+	<string name="int_seconds">sekund</string>
+	<string name="int_min">minit</string>
+	<string name="gps_provider">GPS</string>
 	</resources>
