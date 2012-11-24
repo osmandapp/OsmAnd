@@ -1137,4 +1137,16 @@
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitare nelle Impostazioni).</string>
     <string name="background_service_is_enabled_question">Il servizio in background è ancora in esecuzione. Si desidera fermarlo?</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambiamenti nella versione 1.0:\n\t*Migliorata la naviazione più veloce e precisa (fino a 250 km)\n\t*Mappa delle strade\n\t*La mappa non perde la posizione dopo le interruzzioni\n\t*Abilita il servizio in background durante la navigazione "</string>
-    </resources>
+    <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
+    <string name="route_descr_current_location">Posizione corrente</string>
+    <string name="route_descr_from_to">Da %1$s a %2$s</string>
+    <string name="route_descr_from_to_via">Da: %1$s↵\nper: %2$s↵\na: %3$s</string>
+    <string name="no_buildings_found">Nessun edificio trovato.</string>
+    <string name="search_villages_and_postcodes">"Ricerca villaggi/codice postale "</string>
+	<string name="rendering_attr_showRoadMaps_description">Selezionare quando visualizzare mappe solo-strade:</string>
+	<string name="rendering_attr_showRoadMaps_name">Mappe solo-strade</string>
+    <string name="download_roads_only_item">"Strade "</string>
+    <string name="download_regular_maps">Mappe normali</string>
+    <string name="download_roads_only_maps">Mappe solo-strade</string>
+    <string name="incomplete_locale">incompleto</string>
+	</resources>
