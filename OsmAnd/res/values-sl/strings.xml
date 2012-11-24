@@ -188,7 +188,7 @@
 \n\t* Informacije o omejitvah hitrosti, radarjih in ležečih policajih
 \n\t* Izboljšano glasovno vodenje na cestah
 \n\t* Vtičnik za parkiranje (\'Kje je moj avto parkiran?\')
-\n\t* Omogoči/onemogoči logiranje "</string>
+\n\t* Gradnik za omogočenje/onemogočenje beleženja "</string>
 	<string name="global_app_allocated_memory_descr">Uporabljen pomnilnik %1$s MB (Android %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
 	<string name="starting_point_too_far">Izhodišče predaleč od najbližje ceste.</string>
@@ -791,14 +791,15 @@
 	<string name="settings">Nastavitve</string>
 	<string name="save_current_track">Shrani trenutno GPX pot</string>
 	<string name="save_current_track_descr">Shrani trenutno GPX pot na SD kartico</string>
-	<string name="save_track_interval">Frekvenca logiranja</string>
-	<string name="save_track_interval_descr">Izberite frekvenco logiranja položaja za sledi</string>
-	<string name="save_track_to_gpx">Shrani sled v GPX datoteko</string>
+	<string name="save_track_interval">Interval beleženja</string>
+	<string name="save_track_interval_descr">Izberite interval beleženja položaja za sledi</string>
+	<string name="save_track_to_gpx">Shrani sled v datoteko GPX</string>
 	<string name="save_track_to_gpx_descrp">Sledi se shranjujejo v podmape mape \'tracks\' po dnevih</string>
 	<string name="mark_point">Cilj</string>
 	<string name="show_osm_bugs_descr">Pokaži OpenStreetBugs na zemljevidu</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
 	<string name="int_seconds">sekund</string>
-	<string name="int_min">minit</string>
+	<string name="int_min">minut</string>
 	<string name="gps_provider">GPS</string>
+	<string name="previous_run_crashed">Pri prejšnji uporabi programa OsmAnd je prišlo do sesutja. Dnevniška datoteka se nahaja na {0}. Prosim, da prijavite težavo in priložite to datoteko.</string>
 	</resources>
