@@ -1122,6 +1122,5 @@
     <string name="route_descr_from_to">Из %1$s↵\nДо %2$s</string>
     <string name="route_descr_from_to_via">Из : %1$s↵\nЧерез : %2$s↵\nДо : %3$s</string>
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
-    <string name="incomplete_locale"/>
 	<string name="incomplete_locale">незавершенное</string>
 	</resources>
