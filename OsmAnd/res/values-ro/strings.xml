@@ -9,10 +9,10 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l închideți?</string>
+	<string name="background_service_is_enabled_question">Serviciul încă rulează în background. Doriți să-l opriți?</string>
     <string name="tip_recent_changes_1_0_0_t">"Modificări în versiunea 1.0.0 :
 \n\t* Rutare îmbunătățită, mai rapidă și mai exactă (până la 250 km)
-\n\t* Harta drumurilor
+\n\t* Posibilitate afișare hartă exclusiv pentru drumuri
 \n\t* Harta nu mai pierde poziția după întreruperi
 \n\t* Activarea serviciului în background în timpul navigării "</string>
 	<string name="tip_recent_changes_0_8_4_t">Ce este nou în 0.8.4 :
@@ -24,7 +24,7 @@
 	<string name="zxing_barcode_scanner_not_found">Aplicația ZXing Barcode Scanner nu este instalată. Doriți să o descărcați din Market?</string>
 	<string name="rendering_attr_roadColors_description">Selectați o schemă de culori pentru drumuri:</string>
 	<string name="rendering_attr_roadColors_name">Schema de culori drumuri</string>
-    <string name="map_widget_show_destination_arrow">Afișează săgeata ce indică direcția spre destinație</string>
+    <string name="map_widget_show_destination_arrow">Arată direcția spre destinație</string>
     <string name="enable_plugin_monitoring_services">Activează plugin pentru înregistrare trasee (logging, live tracking) pentru a putea folosi serviciile online de înregistrare a traseelor și a pozitiei curente</string>
     <string name="non_optimal_route_calculation">Calculeaza rute mai puțin optime pentru distanțe foarte mari</string>
     <string name="gps_not_available">Vă rog să activați GPS-ul în setările dispozitivului</string>
@@ -37,8 +37,8 @@
 	</string>
 	<string name="map_widget_monitoring_services">Servicii de Logging</string>
 	<string name="no_route">Nu există rută</string>
-	<string name="delete_target_point">Îndepărtează punctul intermediar</string>
-	<string name="target_point">Punctul intermediar %1$s</string>
+	<string name="delete_target_point">Șterge punctul intermediar</string>
+	<string name="target_point">Destinația %1$s</string>
     <string name="intermediate_point">Punct intermedar %1$s</string>
     <string name="navigate_to">Alege ca destinație</string>
     <string name="context_menu_item_last_intermediate_point">Adaugă ca ultim punct intermediar</string>
@@ -66,8 +66,8 @@
 	<string name="poi_filter_food_shop">Produse alimentare</string>
 	<string name="poi_filter_for_tourists">Pentru turiști</string>
 	<string name="poi_filter_fuel">Stații de carburanți</string>
-	<string name="show_warnings_title">Afișează alarmele…</string>
-	<string name="show_warnings_descr">Configurare alarme de trafic (limite de viteză, opriri obligatorii, limitatoare de viteză), atenționări camere radar și info benzi de circulație</string>
+	<string name="show_warnings_title">Atenționări trafic…</string>
+	<string name="show_warnings_descr">Configurare atenționări de trafic (limite de viteză, opriri obligatorii, limitatoare de viteză), atenționări camere radar și info benzi de circulație</string>
 	<string name="use_compass_navigation_descr">Folosește busola integrată când nu se poate determina direcția în alt mod</string>
 	<string name="use_compass_navigation">Folosește busola</string>
 	<string name="avoid_motorway">Evită autostrăzile</string>
@@ -152,12 +152,12 @@
 	<string name="show_lanes">Arată benzile de circulație</string>
 	<string name="avoid_unpaved">Evită drumurile nepavate</string>
 	<string name="avoid_ferries">Evită ferry</string>
-	<string name="avoid_in_routing_title">Evitare…</string>
+	<string name="avoid_in_routing_title">Evitare drumuri…</string>
 	<string name="avoid_in_routing_descr">Evită drumuri cu taxă, nepavate, ferry</string>
 	<string name="map_widget_fluorescent">Rute fluorescente</string>
-	<string name="map_widget_show_ruler">Riglă</string>
+	<string name="map_widget_show_ruler">Scara hărții</string>
 	<string name="map_widget_appearance">Diverse:</string>
-	<string name="map_widget_view_direction">Direcția de privire</string>
+	<string name="map_widget_view_direction">Direcția de deplasare</string>
 	<string name="map_widget_transparent">Skin transparent</string>
 	<string name="monitoring_mode_off">Înregistrează GPX</string>
 	<string name="monitoring_mode_on">Stop\n înreg. GPX</string>
@@ -169,7 +169,7 @@
 	<string name="map_widget_top_text">Numele străzii</string>
 	<string name="map_widget_config">Configurare ecran</string>
 	<string name="map_widget_map_select">Sursa hărții</string>
-	<string name="map_widget_back_to_loc">Unde sunt</string>
+	<string name="map_widget_back_to_loc">Unde sunt?</string>
 	<string name="map_widget_lock_screen">Blochează ecran</string>
 	<string name="map_widget_compass">Busolă</string>
 	<string name="map_widget_top_stack">Bara de stare:</string>
@@ -179,7 +179,7 @@
 	<string name="map_widget_parking">Parcare</string>
 	<string name="map_widget_monitoring">Inregistrare GPX</string>
 	<string name="map_widget_speed">Viteză</string>
-	<string name="map_widget_distance">Destinație</string>
+	<string name="map_widget_distance">Distanța până la destinație</string>
 	<string name="map_widget_altitude">Altitudine</string>
 	<string name="map_widget_time">Timp rămas</string>
 	<string name="map_widget_next_turn">Următoarea manevră</string>
@@ -193,7 +193,7 @@
 	<string name="show_cameras">Arată camere radar</string>
 	<string name="show_speed_limits">Arată atenționări de trafic</string>
 	<string name="avoid_toll_roads">Evită drumuri cu taxă</string>
-	<string name="continue_follow_previous_route_auto">Navigarea anterioară nu s-a încheiat. Doriți s-o continuați? (%1$s seconds)</string>
+	<string name="continue_follow_previous_route_auto">"Navigarea anterioară nu s-a încheiat. Doriți s-o continuați (implicit \'Da\')?  (%1$s seconds)"</string>
 	<string name="route_updated_loc_found">Ruta va fi recalculată când se va stabili poziția curentă</string>
 	<string name="osmand_parking_hours">Ore</string>
 	<string name="osmand_parking_minutes">Minute</string>
@@ -253,7 +253,7 @@
 	<string name="rendering_attr_contourLines_description">Afișează începând de la nivelul de zoom (necesită fișier SRTM):</string>
 	<string name="rendering_attr_contourLines_name">Afișează liniile de contur</string>
 	<string name="rendering_attr_hmRendered_description">Crește nivelul de detalii ale harții</string>
-	<string name="rendering_attr_hmRendered_name">Arată mai multe detalii ale harții</string>
+	<string name="rendering_attr_hmRendered_name">Mai multe detalii pe hartă</string>
 	<string name="local_index_routing_data">Date despre rutare</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="poi_search_desc">Caută POI (Puncte de Interes)</string>
@@ -268,7 +268,7 @@
 	<string name="download_link_and_local_description">Click aici pentru a descărca date offline. \nClick pe orice element existent pentru a vedea mai multe detalii, tineți apăsat pentru dezactivare sau ștergere. Date aflate pe dispozitiv (%1$s free):</string>
 	<string name="unknown_from_location">Punctul de plecare nu este incă determinat</string>
 	<string name="unknown_location">Poziția nu este încă cunoscută</string>
-	<string name="context_menu_item_directions">Indicații către aces loc</string>
+	<string name="context_menu_item_directions">Navigare către acest loc</string>
 	<string name="modify_transparency">Grad de transparență (0 - transparent, 255 - opac)</string>
 	<string name="confirm_interrupt_download">Doriți să întrerupeți descărcarea fișirului?</string>
 	<string name="first_time_msg">Mulțumim pentru că folosiți OsmAnd. Pentru a beneficia de toate funcționalitățile acestei aplicații aveți nevoie de un set de date regionale pe care le puteți descărca via \'Setări\' -&gt;  \'Date offline\'. După aceea veți putea să vizualizați harți, să găsiți adrese, să localizați puncte de interes (POI) să căutați date despre transportul public.</string>    
@@ -450,8 +450,8 @@
 	<string name="profile_settings">Setări ale profilelor</string>
 	<string name="settings_preset">Profil utilizator</string>
 	<string name="settings_preset_descr">Selectează un profil de utilizator cu setări specifice de hartă și navigare.</string>
-	<string name="routing_settings">Navigare</string>
-	<string name="routing_settings_descr">Opțiuni de navigare</string>
+	<string name="routing_settings">Navigare (funcție de profil)</string>
+	<string name="routing_settings_descr">Configurarea unor opțiuni de navigare funcție de profilul selectat (auto, bicicletă, pieton)</string>
 	<string name="global_settings">Setări globale</string>
 	<string name="index_settings">Date offline (Download)</string>
 	<string name="general_settings">Setări generale</string>
@@ -698,7 +698,7 @@
 		\n\tProfilurile se pot schimba via butonul de profiluri din colțutl din stânga jos al modului Hartă (You can change profiles via the profile button in the lower left corner of the map screen (icoane ce reprezintă o mașină, o bicicletă sau un pieton) sau când se crează o rută.
 	</string>
 	<string name="tip_navigation">Navigare</string>
-	<string name="tip_navigation_t">\tÎnainte de a porni navigarea trebuie aleasă o destinație. După aceea apăsați \'Meniu\' -&gt; \'Indicații\' și selectați tipul navigării.</string>
+	<string name="tip_navigation_t">\tÎnainte de a porni navigarea trebuie aleasă o destinație. După aceea apăsați \'Meniu\' -&gt; \'Navigare\' și selectați tipul navigării.</string>
 	<string name="tip_search">Căutare</string>
 	<string name="tip_search_t">\tPuteți căuta locuri direct pe hartă, după adresă, poziție, POI (punct de interes) sau ca punct favorit predefinit.
 		\n\t\'Căutare\' în meniul principal oferă accesul la modulul de căutare. Pentru toate rezultatele căutării meniul oferă două opțiuni: \'Setează ca destinație\' sau \'Arată pe hartă\'.
@@ -715,7 +715,7 @@
 	<string name="next_button">Următor</string>
 	<string name="previous_button">Precedent</string>
 	<string name="unit_of_length_descr">Schimbă unitățile de măsură ale distanței și vitezei</string>
-	<string name="unit_of_length">Unitatea de măsură</string>
+	<string name="unit_of_length">Unități de măsură</string>
 	<string name="si_mi_foots">Mile/picioare</string>
 	<string name="si_mi_yard">Mile/yarzi</string>
 	<string name="si_km_m">Kilometri/metri</string>
@@ -796,8 +796,8 @@
 	<string name="deselect_all">Deselectează tot</string>
 	<string name="select_all">Selectează tot</string>
 	<string name="reload">Reîmprospătează</string>
-	<string name="fast_route_mode">cea mai rapidă rută</string>
-	<string name="fast_route_mode_descr">"Activați pentru a calcula routa cea mai rapidă sau dezactivați pentru ruta cea mai scurtă "</string>
+	<string name="fast_route_mode">Cea mai rapidă rută</string>
+	<string name="fast_route_mode_descr">"Activați pentru a calcula ruta cea mai rapidă sau dezactivați pentru ruta cea mai scurtă "</string>
 	<string name="tiles_to_download_estimated_size">La nivelul de zoom {0} se descarcă {1} porțiuni ({2} MB)</string>
 	<string name="context_menu_item_download_map">Descarcă harta</string>
 	<string name="select_max_zoom_preload_area">Selectați nivelul de zoom maxim pentru preîncărcare</string>
@@ -976,10 +976,10 @@
 	<string name="fav_points_edited">Punctul favorit a fost editat</string>
 	<string name="fav_points_not_exist">Nu există puncte favorite</string>
 	<string name="update_existing">Înlocuiește</string>
-	<string name="only_show">Doar arată</string>
+	<string name="only_show">Arată ruta</string>
 	<string name="follow">Navighează</string>
 	<string name="mark_final_location_first">Selectați mai întâi o destinație</string>
-	<string name="get_directions">Indicații</string>
+	<string name="get_directions">Navigare</string>
 	<string name="show_gps_status">Arată starea GPS</string>
 	<string name="opening_hours">Orar</string>
 	<string name="opening_changeset">Se deschide modificarea…</string>
@@ -1036,7 +1036,7 @@
 	<string name="favourites_activity">Favorite</string>
 	<string name="add_to_favourite">Adaugă la Favorite</string>
 	<string name="use_english_names_descr">Alege între folosirea pe hartă a denumirilor în limba nativă sau în engleză</string>
-	<string name="use_english_names">Folosește denumiri pe hartă în engleză</string>
+	<string name="use_english_names">Denumiri pe hartă în engleză</string>
 	<string name="app_settings">Setări aplicație</string>
 	<string name="search_address">Cautare adresă</string>
 	<string name="choose_building">Alegeți numărul</string>
@@ -1044,7 +1044,7 @@
 	<string name="choose_city">Alegeți orașul</string>
 	<string name="ChooseCountry">Alegeți țara</string>
 	<string name="map_specify_point">Setează ca destinație</string>
-	<string name="show_view_angle">Afișează direcția de privire a hărții</string>
+	<string name="show_view_angle">Afișează harta în concordanță cu direcția de deplasare</string>
 	<string name="stop_navigation">Șterge destin.</string>
 	<string name="navigate_to_point">Setează ca destin.</string>
 	<string name="map_view_3d_descr">Activați afișarea în 3D a hărții</string>
@@ -1065,7 +1065,7 @@
 	<string name="map_Button">Hartă</string>
 	<string name="settings_Button">Setări</string>
 	<string name="favorites_Button">Favorite</string>
-	<string name="search_button">Caută</string>
+	<string name="search_button">Căutare</string>
 	<string name="search_activity">Căutare</string>
 	<string name="searchpoi_activity">Alege POI</string>
 	<string name="search_POI_level_btn">Găsește mai multe</string>
@@ -1169,8 +1169,8 @@
     <string name="incomplete_locale">incomplet</string>
 	<string name="search_villages_and_postcodes">"Caută sate/cod poștal "</string>
 	<string name="no_buildings_found">Număr negăsit.</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
-    <string name="route_descr_current_location">Poziția actuală</string>
-    <string name="route_descr_from_to">De la %1$s↵\nLa %2$s</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f Long %2$.3f</string>
+    <string name="route_descr_current_location">Poziția curentă</string>
+    <string name="route_descr_from_to">De la: %1$s↵\nLa: %2$s</string>
     <string name="route_descr_from_to_via">De la: %1$s↵\nVia: %2$s↵\nLa: %3$s</string>
     </resources>
