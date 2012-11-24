@@ -770,7 +770,7 @@
 	<string name="default_none">Brez</string>
 	<string name="map_overlay">Prekrivni zemljevid</string>
 	<string name="map_overlay_descr">Izberi prekrivni zemljevid</string>
-	<string name="tile_source_already_installed">Map je že nameščen. Nastavitve bodo posodobljene.</string>
+	<string name="tile_source_already_installed">Zemljevid je že nameščen. Nastavitve bodo posodobljene.</string>
 	<string name="select_tile_source_to_install">Izberite zemljevide za namestitev ali posodobitev</string>
 	<string name="internet_not_available">Internetna povezava, ki je zahtevana za opravilo, ni na voljo</string>
 	<string name="install_more">Namesti več ...</string>
