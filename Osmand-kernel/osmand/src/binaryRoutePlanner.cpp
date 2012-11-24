@@ -239,7 +239,8 @@ bool processRouteSegment(RoutingContext* ctx, bool reverseWaySearch, SEGMENTS_QU
 		} else if(ctx->firstRoadDirection > 0) {
 			obstacleMinusTime += 500;
 		}
-	} else if (!reverseWaySearch) {
+	}
+	if (!reverseWaySearch) {
 		minusAllowed = oneway <= 0;
 		plusAllowed = oneway >= 0;
 	} else {

@@ -425,8 +425,8 @@ struct RoutingContext {
 	MAP_SUBREGION_TILES subregionTiles;
 	UNORDERED(map)<int64_t, std::vector<SHARED_PTR<RoutingSubregionTile> > > indexedSubregions;
 
-	RoutingContext(RoutingConfiguration& config) : finalRouteSegment(), firstRoadDirection(0), loadedTiles(0), visitedSegments(0),
-			config(config){
+	RoutingContext(RoutingConfiguration& config) : finalRouteSegment(), firstRoadDirection(0),firstRoadId(0),
+	loadedTiles(0), visitedSegments(0), config(config){
 	}
 
 	bool acceptLine(SHARED_PTR<RouteDataObject> r) {
