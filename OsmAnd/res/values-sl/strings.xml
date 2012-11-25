@@ -916,7 +916,7 @@
 	<string name="transport_stops">postaje</string>
 	<string name="transport_search_after">Naslednja pot</string>	
 	<string name="transport_search_before">Prejšnja pot</string>
-	<string name="transport_stop_to_go_out">Izberite postajo kjer boste izstopili</string>
+	<string name="transport_stop_to_go_out">Izberite izstopno postajo</string>
 	<string name="transport_to_go_after">prejšnja razdalja</string>
 	<string name="transport_to_go_before">naslednja razdalja</string>
 	<string name="transport_stops_to_pass">postaje do izstopa</string>
