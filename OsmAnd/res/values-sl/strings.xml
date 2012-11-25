@@ -801,7 +801,7 @@
 	<string name="int_seconds">sekund</string>
 	<string name="int_min">minut</string>
 	<string name="gps_provider">GPS</string>
-	<string name="previous_run_crashed">Pri prejšnji uporabi programa OsmAnd je prišlo do sesutja. Dnevniška datoteka se nahaja na {0}. Prosim, da prijavite težavo in priložite to datoteko.</string>
+	<string name="previous_run_crashed">Pri prejšnji uporabi programa OsmAnd je prišlo do sesutja. Datoteke z dnevnikom se nahaja v {0}. Prosim, prijavite težavo in priložite to datoteko.</string>
 	<string name="amenity_type_emergency">Nujna medicinska pomoč</string>
 	<string name="amenity_type_geocache">Zaklad Geocache</string>
 	<string name="poi_filter_namefinder">Spletni iskalnik imenov</string>
