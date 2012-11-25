@@ -984,4 +984,18 @@
 	<string name="finished_task">Končano</string>
 	<string name="reload_indexes_descr">Ponovno branje krajevnih vektorskih zemljevidov in podatkov iz SD kartice</string>
 	<string name="reload_indexes">Ponovno branje krajevnih podatkov</string>
+	<string name="download_indexes_descr">Prejmi ali posodobi podatke za uporabo brez internetne povezave</string>
+	<string name="use_online_routing_descr">Uporabi internet za izračun poti</string>
+	<string name="use_online_routing">Uporabi spletno navigacijo</string>
+	<string name="osm_settings_descr">Določi nastavitve Openstreetmap.org (OSM), ki so zahtevane za pošiljanje na OSM</string>
+	<string name="data_settings_descr">Določi jezik, prejmi/ponovno naloži podatke</string>
+	<string name="data_settings">Podatki</string>
+	<string name="map_preferences_descr">Določi nastavitve zemljevida: viri zemljevida, vrtenja, položaj označevalcev, usmerjenost zaslona</string>
+	<string name="update_tile">Posodobi zemljevid</string>
+	<string name="reload_tile">Ponovno naloži košček zemljevida</string>
+	<string name="map_view_3d_descr">Omogoči 3D pogled zemljevida</string>
+	<string name="map_view_3d">3D pogled zemljevida</string>
+	<string name="map_tile_source_descr">Izberite vir spletnih ali predpomnjenih delčkov zemljevida</string>
+	<string name="map_tile_source">Vir koščkov zemljevida</string>
+	<string name="map_source">Vir zemljevida</string>
 	</resources>
