@@ -80,7 +80,7 @@
 	<string name="edit_filter_create_message">Filter {0} je bil ustvarjen</string>
 	<string name="default_buttons_selectall">Izberi vse</string>
 	<string name="email">E-pošta</string>
-<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:\n\t* Odpravljene nekatere napake\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju "</string>
+<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:\n\t* Odpravljene nekatere napake\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočeno izvajanje storitev v ozadju "</string>
     <string name="tip_recent_changes_0_8_3_t">"Spremembe v 0.8.3 :
 \n\t* Vmesne točke
 \n\t* Izboljšano vodenje po poti
@@ -861,20 +861,20 @@
 \n\nOsmAnd je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn).\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n - Prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše poti (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n  * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n  * nastavljivo povečavo zemljevida glede na hitrost gibanja\n  * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n  * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).\n\nBrezplačna različica programa OsmAnd ima naslednje omejitve:\n - omejeno je število prenosov zemljevidov\n - brez povezave ni dostopa do točk iz Wikipedije.\n\nOsmAnd je v aktivnem razvoju. Napredek projekta je odvisen od finančnih prispevkov s katerimi se financira razvoj in testiranje novih funkcionalnosti. Prosimo, razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti, ali nenamensko donacijo na spletni strani osmand.net. "</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)
 \n\nOsmAnd+ je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd+ omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn).
-\n\nOsmAnd+ je plačljiva različica aplikacije. Z nakupom financirate nadaljnji razvoj in testiranje novih funkcionalnosti ter pridobite zadnje posodobitve.\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n - Neomejen prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Wikipedia brez povezave (prenos točk iz Wikipedie), odlično za oglede znamenitosti\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše poti (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n  * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n  * nastavljivo povečavo zemljevida glede na hitrost gibanja\n  * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n  * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS)"</string>
+\n\nOsmAnd+ je plačljiva različica aplikacije. Z nakupom financirate nadaljnji razvoj in testiranje novih funkcionalnosti ter pridobite zadnje posodobitve.\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n - Neomejen prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Wikipedia brez povezave (prenos točk iz Wikipedie), odlično za oglede znamenitosti\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše poti (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n  * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n  * nastavljivo povečavo zemljevida glede na hitrost gibanja\n  * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n  * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS) "</string>
 	<string name="error_occurred_loading_gpx">Napaka pri nalaganju GPX-a</string>
 	<string name="send_report">Pošlji poročilo</string>
 	<string name="none_region_found">Na SD kartici ni podatkov območij za uporabo brez povezave. Prenesite želena območja iz interneta.</string>
 	<string name="poi_namefinder_query_empty">Za iskanje POI morate vpisati poizvedbo</string>
 	<string name="any_poi">Katerikoli</string>
-	<string name="layer_transport_route">Poti prevoza</string>
+	<string name="layer_transport_route">Pot javnega prevoza</string>
 	<string name="thanks_yandex_traffic">Zahvala gre Yandex-u za prometne informacije.</string>
 	<string name="layer_yandex_traffic">Yandex promet</string>
 	<string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
 	<string name="layer_route">Pot</string>
 	<string name="layer_favorites">Priljubljeni</string>
 	<string name="layer_osm_bugs">OSM hrošči</string>
-	<string name="layer_transport">Postaje transporta</string>
+	<string name="layer_transport">Postaje javnega prevoza</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Vir zemljevida…</string>
 	<string name="context_menu_item_search_poi">Iskanje POI</string>
@@ -885,7 +885,7 @@
 	<string name="network_provider">Omrežje</string>
 	<string name="background_service_int_descr">"Nastavitev intervala prebujanja v ozadju "</string>
 	<string name="background_service_int">Interval prebujanja</string>
-	<string name="background_service_provider_descr">Izberite ponudnika lokacije, medtem ko se izvaja v ozadju</string>
+	<string name="background_service_provider_descr">Izberite ponudnika lokacije med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik lokacije</string>
 	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju, da omogoča spremljanje položaja, ko je zaslon izklopljen</string>
 	<string name="background_router_service">Izvajaj v ozadju</string>
