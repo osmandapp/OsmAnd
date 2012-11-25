@@ -172,7 +172,7 @@
 	<string name="bg_service_screen_lock">Zakleni ekran</string>
 	<string name="bg_service_screen_unlock">Odkleni ekran</string>
 	<string name="bg_service_screen_lock_toast">Ekran je zaklenjen</string>
-	<string name="bg_service_interval">Nastavite interval prebujanja:</string>
+	<string name="bg_service_interval">Nastavitev intervala prebujanja:</string>
 	<string name="show_cameras">Pokaži hitrostne kamere</string>
 	<string name="show_speed_limits">Prikaži omejitve hitrosti</string>
 	<string name="avoid_toll_roads">Izogibanje cestninskih cest</string>
@@ -365,7 +365,7 @@
 	<string name="use_transparent_map_theme">Prosojna tema</string>
 	<string name="bg_service_sleep_mode_off">Omogoči\n spalni način</string>
 	<string name="bg_service_sleep_mode_on">Prekini\n spalni način</string>
-	<string name="gps_wakeup_interval">Interval prebujanja GPSa: %s</string>
+	<string name="gps_wakeup_interval">Interval prebujanja GPS-a: %s</string>
 	<string name="int_continuosly">Neprekinjeno</string>
 	<string name="screen_is_locked">Za odklepanje zaslona pritisnite ikono ključavnice</string>
 	<string name="map_widget_top_text">Ime ceste</string>
@@ -418,7 +418,7 @@
 	<string name="level_to_switch_vector_raster_descr">Najnižja povečava za uporabo vektorskih zemljevidov</string>
 	<string name="level_to_switch_vector_raster">Min. povečava za vektorske zemljevide</string>
 	<string name="tip_location_sharing">Deljenje lokacije</string>
-	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: E-pošta, SMS(besedilo), ali pa samo kopiranje koordinate lokacij za odlagališče. "</string>
+	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: e-pošta, SMS (besedilo), ali pa samo kopiranje koordinat lokacije v odlagališče. "</string>
 	<string name="tip_favorites">Priljubljene lokacije</string>
 	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0:\n\t* Izboljšano, hitrejše in bolj natančno usmerjanje (do 250 km)\n\t* Zemljevid cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju "</string>
     <string name="close_changeset">Zapri paket sprememb</string>
@@ -533,7 +533,7 @@
 	<string name="incomplete_locale">nedokončano</string>
 	<string name="download_roads_only_item">"Ceste "</string>
     <string name="download_regular_maps">Običajni zemljevidi</string>
-    <string name="download_link_and_local_description">Kliknite tu za prenos oz. posodobitev podatkov.\nKliknite na katerokoli element za prikaz podrobnosti, pritisnite in držite za izklop ali brisanje. Količina prostora na napravi (%1$s):</string>
+    <string name="download_link_and_local_description">Kliknite tu za prenos oz. posodobitev podatkov.\nKliknite na katerokoli element za prikaz podrobnosti, pritisnite in držite za izklop ali brisanje. Količina prostora na napravi (%1$s prosto):</string>
 	<string name="context_menu_item_show_route">Prikaži pot od tu</string>
 	<string name="local_index_mi_restore">Vklopi</string>
 	<string name="local_index_mi_backup">Izklopi</string>
@@ -657,7 +657,7 @@
 	<string name="scroll_map_by_gestures_descr">Drsanje po zemljevidi s kretnjami na zaslonu na dotik</string>
 	<string name="scroll_map_by_gestures">Naravno drsenje zemljevida</string>
 	<string name="zoom_by_trackball_descr">Spremeni povečavo zemljevida z vodoravnimi premiki sledilne žogice</string>
-	<string name="zoom_by_trackball">Uporabi sledilno žogico za nadzor povečave</string>
+	<string name="zoom_by_trackball">Uporabite sledilno kroglico za nadzor povečave</string>
 	<string name="use_short_object_names_descr">Uporabi kratka imena predmetov v načinu raziskovanja dotika</string>
 	<string name="use_short_object_names">Uporabi imena predmetov</string>
 	<string name="accessibility_preferences_descr">Z dostopnostjo povezane možnosti</string>
@@ -687,7 +687,7 @@
 	<string name="profile_settings">Za profil določene nastavitve</string>
 	<string name="settings_preset">Uporabniški profil</string>
 	<string name="global_settings">Splošne nastavitve</string>
-	<string name="index_settings">Krajevni podatki (prejem)</string>
+	<string name="index_settings">Podatki brez povezave (prenos)</string>
 	<string name="osmand_service">Zmožnost načina spanja</string>
 	<string name="osmand_service_descr">Uporabi za izvajanje OsmAnd, ko je zaslon izklopljen</string>
 	<string name="binary_map_download_success">Prejem je uspešen.\n\t\n\tZa uporabo omogočite \'Meni\'-&gt;\'Nastavitve prikaza\'-&gt;\'Vir zemljevidov ...\'-&gt;Nepovezani vektorski zemljevidi\'.</string>
@@ -824,7 +824,7 @@
 	<string name="select_all">Izberi vse</string>
 	<string name="reload">Osveži</string>
 	<string name="tiles_to_download_estimated_size">Pri povečavi {0} prejmi {1} ploščic ({2} MB)</string>
-	<string name="context_menu_item_download_map">Prejmi zemljevid</string>
+	<string name="context_menu_item_download_map">Prenos zemljevida</string>
 	<string name="select_max_zoom_preload_area">Izberite največjo povečavo za predhodno nalaganje</string>
 	<string name="maps_could_not_be_downloaded">Tega zemljevida ni bilo mogoče prejeti</string>
 	<string name="continuous_rendering">Stalno izrisovanje</string>
@@ -858,9 +858,73 @@
 	<string name="fav_imported_sucessfully">Priljubljene točke so bile uspešno uvožene</string>
 	<string name="fav_file_to_load_not_found">Datoteke GPX, ki vsebuje priljubljene, ni bilo mogoče najti na {0}</string>
 	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions)
-\n\nOsmAnd je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za celoten svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn).\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za celoten svet\n - Prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše pot (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n - nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n - nastavljivo povečavo zemljevida glede na hitrost gibanja\n - nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n - nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS)\n\nZastonj različica programa OsmAnd ima naslednje omejitve:\n - Omejeno je število prenosov zemljevidov\n - Ni dostopa do točk iz Wikipedije brez povezave
-\n\nOsmAnd je v aktivnem razvoju. Napredek projekt je odvisen na finančnih prispevkov s katerimi se financira razvoj in testiranje novih funkcionalnosti. Prosimo, razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti, ali nenamensko donacijo na spletni strani osmand.net. "</string>
+\n\nOsmAnd je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn).\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n - Prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše poti (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n  * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n  * nastavljivo povečavo zemljevida glede na hitrost gibanja\n  * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n  * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS).\n\nBrezplačna različica programa OsmAnd ima naslednje omejitve:\n - omejeno je število prenosov zemljevidov\n - brez povezave ni dostopa do točk iz Wikipedije.\n\nOsmAnd je v aktivnem razvoju. Napredek projekta je odvisen od finančnih prispevkov s katerimi se financira razvoj in testiranje novih funkcionalnosti. Prosimo, razmislite o nakupu aplikacije OsmAnd+, ali financiranju posamezne funkcionalnosti, ali nenamensko donacijo na spletni strani osmand.net. "</string>
 	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)
-\n\nOsmAnd+ je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za celoten svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd+ omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn).
-\n\nOsmAnd+ je plačljiva različica aplikacije. Z nakupom financirate nadaljni razvoj in testiranje novih funkcionalnosti ter pridobite zadnje posodovitve.\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za celoten svet\n - Neomejen prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Wikipedia brez povezave (prenos točk iz Wikipedie), odlično za oglede znamenitosti\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše pot (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n - nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n - nastavljivo povečavo zemljevida glede na hitrost gibanja\n - nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n - nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS)"</string>
+\n\nOsmAnd+ je odprtokodna aplikacija za navigacijo, ki uporablja širok nabor zemljevidov OpenStreetMap (OSM) za cel svet. Vse podatke zemljevidov (vektorske in ploščice) lahko shranite v pomnilnik naprave (telefona ali tablice) za uporabo brez povezave. OsmAnd+ omogoča tudi izračun poti in glasovno vodenje od zavoja do zavoja (turn-by-turn).
+\n\nOsmAnd+ je plačljiva različica aplikacije. Z nakupom financirate nadaljnji razvoj in testiranje novih funkcionalnosti ter pridobite zadnje posodobitve.\n\nPomembnejše lastnosti:\n - Popolnoma uporaben brez povezave (shrani prenesene vektorske podatke ali ploščice zemljevida v mapo po izbiri)\n - Na voljo so stisnjeni vektorski podatki zemljevida za cel svet\n - Neomejen prenos podatkov zemljevida posameznih držav ali področij znotraj aplikacije\n - Wikipedia brez povezave (prenos točk iz Wikipedie), odlično za oglede znamenitosti\n - Prekrivanje več plasti zemljevidov, npr. sled GPX, načrt poti, zanimive in priljubljene točke, plastnice, postajališča javnega prometa, dodatni zemljevidi z nastavljivo prosojnostjo\n - Iskanje naslovov in krajev (POI) brez povezave do interneta\n - Izdelava načrta najkrajše poti (poskusno)\n - Način za avtomobiliste, kolesarje in pešce z:\n  * nastavljivim samodejnim preklopom med dnevnim in nočnim prikazom\n  * nastavljivo povečavo zemljevida glede na hitrost gibanja\n  * nastavljivo usmerjenostjo zemljevida glede na kompas ali glede na smer gibanja\n  * nastavljivo vodenje po voznih pasovih, prikaz omejitev hitrosti, vodenje s posnetim ali sintetiziranim govorom (TTS)"</string>
+	<string name="error_occurred_loading_gpx">Napaka pri nalaganju GPX-a</string>
+	<string name="send_report">Pošlji poročilo</string>
+	<string name="none_region_found">Na SD kartici ni podatkov območij za uporabo brez povezave. Prenesite želena območja iz interneta.</string>
+	<string name="poi_namefinder_query_empty">Za iskanje POI morate vpisati poizvedbo</string>
+	<string name="any_poi">Katerikoli</string>
+	<string name="layer_transport_route">Poti prevoza</string>
+	<string name="thanks_yandex_traffic">Zahvala gre Yandex-u za prometne informacije.</string>
+	<string name="layer_yandex_traffic">Yandex promet</string>
+	<string name="no_fav_to_save">Ni priljubljenih točk za shranjevanje</string>
+	<string name="layer_route">Pot</string>
+	<string name="layer_favorites">Priljubljeni</string>
+	<string name="layer_osm_bugs">OSM hrošči</string>
+	<string name="layer_transport">Postaje transporta</string>
+	<string name="layer_poi">POI…</string>
+	<string name="layer_map">Vir zemljevida…</string>
+	<string name="context_menu_item_search_poi">Iskanje POI</string>
+	<string name="use_trackball_descr">Uporabite sledilno kroglico za premikanje zemljevida</string>
+	<string name="use_trackball">Uporabite sledilno kroglico</string>
+	<string name="background_service_wait_int_descr">Nastavitev največje čakalne dobe za vsak fix položaja v ozadju</string>
+	<string name="background_service_wait_int">Največje čakanje za fix</string>
+	<string name="network_provider">Omrežje</string>
+	<string name="background_service_int_descr">"Nastavitev intervala prebujanja v ozadju "</string>
+	<string name="background_service_int">Interval prebujanja</string>
+	<string name="background_service_provider_descr">Izberite ponudnika lokacije, medtem ko se izvaja v ozadju</string>
+	<string name="background_service_provider">Ponudnik lokacije</string>
+	<string name="background_router_service_descr">Izvaja OsmAnd v ozadju, da omogoča spremljanje položaja, ko je zaslon izklopljen</string>
+	<string name="background_router_service">Izvajaj v ozadju</string>
+	<string name="off_router_service_no_gps_available">Storitev navigacije v ozadju zahteva, da je vsaj en ponudnik lokacije vklopljen.</string>
+	<string name="search_poi_filter">Filter</string>
+	<string name="stop_routing">Ustavi navigac.</string>
+	<string name="sd_unmounted">SD kartica ni dosegljiva.\nNe boste mogli gledati zemljevidov ali najti stvari.</string>
+	<string name="sd_mounted_ro">SD kartica je samo za branje.\nVidite lahko samo prednaloženi zemljevid in ne more prenesti z interneta.</string>
+	<string name="unzipping_file">Odzipanje datoteke …</string>
+	<string name="route_tr">Zavijte desno in odidite</string>
+	<string name="route_tshr">Zavijte ostro desno in odidite</string>
+	<string name="route_tslr">Zavijte rahlo desno in odidite</string>
+	<string name="route_tl">Zavijte levo in odidite</string>
+	<string name="route_tshl">Zavijte ostro levo in odidite</string>
+	<string name="route_tsll">Zavijte rahlo levo in odidite</string>
+	<string name="route_tu">Naredite polkrožno obračanje in odidite</string>
+	<string name="route_head">Glava</string>
+	<string name="first_time_continue">Kasneje</string>
+	<string name="first_time_download">Prenos območij</string>
+	<string name="search_poi_location">Iskanje znaka …</string>
+	<string name="search_near_map">Iskanje v bližini lokacije zadnjega zemljevida</string>
+	<string name="tip_map_switch_t_v2">"\tVir zemljevida in prikazane plasti lahko spreminjate preko \'Meni\' -&gt; \'Določitev pogleda\' v pogledu zemljevida.\n\tPod \'Vir zemljevida …\' lahko izberete med uporabo prednaloženih vektorskih zemljevidov za delo brez povezave, vnaprej določenih spletnih zemljevidov (za to aktivirajte vtičnik \'Spletni zemljevidi\'), ali ročno ustvarjenih zemljevidov z uporabo npr. OsmAndMapCreator-ja na računalniku.\n\tOsmAnd podpira tudi vire po meri. "</string>
+	<string name="fav_saved_sucessfully">Priljubljeni uspešno shranjeni v {0}</string>
+	<string name="opening_hours_not_supported">Oblika delovnega časa ni podprta za urejanje</string>
+	<string name="add_new_rule">Dodajanje novega pravila</string>
+	<string name="transport_Routes">Poti</string>
+	<string name="transport_Stop">Postaja</string>
+	<string name="transport_stops">postaje</string>
+	<string name="transport_search_after">Naslednja pot</string>	
+	<string name="transport_search_before">Prejšnja pot</string>
+	<string name="transport_stop_to_go_out">Izberite postajo kjer boste izstopili</string>
+	<string name="transport_to_go_after">prejšnja razdalja</string>
+	<string name="transport_to_go_before">naslednja razdalja</string>
+	<string name="transport_stops_to_pass">postaje do izstopa</string>
+	<string name="transport_route_distance">razdalja poti</string>
+	<string name="default_buttons_ok">V redu</string>
+	<string name="show_transport_over_map_description">Prikaz postaj javnega prevoza na zemljevidu</string>
+	<string name="show_transport_over_map">Prikaz postaj prevoza</string>
+	<string name="update_poi_success">POI podatki so bili uspešno posodobljeni ({0} naloženih)</string>
+	<string name="update_poi_error_local">Napaka pri posodabljanju lokalnega seznama POI</string>
+	<string name="update_poi_error_loading">Napaka pri nalaganju podatkov iz strežnika</string>
 	</resources>
