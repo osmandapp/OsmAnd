@@ -998,4 +998,67 @@
 	<string name="map_tile_source_descr">Izberite vir spletnih ali predpomnjenih delčkov zemljevida</string>
 	<string name="map_tile_source">Vir koščkov zemljevida</string>
 	<string name="map_source">Vir zemljevida</string>
+	<string name="download_indexes">Prenos krajevnih podatkov</string>
+	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0 :
+\n\t- *Plugin functionality*
+\n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
+\n\t- *New offline map data support*
+\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
+\n\t - You need to download completely new offline data (old data will not be supported anymore)
+\n\t- *Offline Routing*
+\n\t - Offline routing becomes more robust
+\n\t *Usability and UI experience*
+\n\t - Improved in many areas "</string>
+	<string name="tip_recent_changes_0_7_2_t">"Spremembe v 0.7.2 :
+\n\t- Native rendering for all devices
+\n\t- Offline POI editing
+\n\t- Accessibility
+\n\t- Lots of bug fixes "</string>
+	<string name="tip_recent_changes_0_7_1_t">"Spremembe v 0.7.1 :
+\n\t- Offline POI editing
+\n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
+\n\t- Show currently recorded track on map
+\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
+\n\t- New voice prompt \'Route recalculated\'
+\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
+\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
+\n\t- Other changes "</string>
+	<string name="tip_recent_changes_0_7_0_t">"Spremembe v 0.7.0 :
+\n\t- Offline wikipedia data with articles
+\n\t- Updated maps
+\n\t- Other small features "</string>    
+	<string name="tip_recent_changes_0_6_9_t">"Spremembe v 0.6.9 :
+\n\t- Improved offline map rendering
+\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
+\n\t- Massive look and feel changes
+\n\t- Altitude info
+\n\t- New translations (Vienamese, Polish)
+\n\t- Other small features "</string>
+	<string name="tip_recent_changes_0_6_8_t">"Spremembe v 0.6.8 :
+\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
+\n\t- Implement POI search by name in big areas (countries)
+\n\t- Fix flickering map screen for tablets (Issue 641)
+\n\t- Auto-center map view option (Issue 356)
+\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
+\n\t- POI data included in .obf file (all download indexes after 01/10/11)
+\n\t- Voice prompt fixes (GPS position fix, omitting first command)
+\n\t- Small improvements "</string>
+	<string name="tip_recent_changes_0_6_7_t">"Nedavne spremembe za 0.6.7 :
+\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
+\n\t- Favorite points and groups (categorize, delete, manage favorites)
+\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
+\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
+\n\t- Function to save route as GPX track for offline use
+\n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed)
+\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
+\n\t- Improve vector rendering
+\n\t- Improvement of TTS engine (announce exact distance, enable miles)
+\n\t- Bug fixes "</string>
+	<string name="tip_recent_changes_0_6_6_t">"Nedavne spremembe za 0.6.6 :
+\n\t- Text To Speech engine for voice navigation
+\n\t- Make map renderer more detailed
+\n\t- Basemap for whole world packaged with app
+\n\t- Tweak offline navigation (still experimental)
+\n\t- GPX navigation options
+\n\t- UI update and large bug fixing "</string>
 	</resources>
