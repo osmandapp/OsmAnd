@@ -20,7 +20,7 @@
     </string>
     <string name="close_changeset">Закрыть changeset</string>
 	<string name="zxing_barcode_scanner_not_found">Приложение \'Сканнер штрих-кодов\' не найдено. Искать на Маркете?</string>
-    <string name="non_optimal_route_calculation">Рассчитать неоптимальный (возможно) маршрут на длинные дистанции</string>
+    <string name="non_optimal_route_calculation">Быстрое построение маршрута (возможно неоптимально)</string>
     <string name="download_link_and_local_description">Загрузите или обновите локальные данные.
 \nЧтобы получить дополнительную информацию о карте, выделите её в списке. Удерживайте карту, если вы хотите удалить или деактивировать.
 \nДанные на устройстве (%1$s свободно):</string>
