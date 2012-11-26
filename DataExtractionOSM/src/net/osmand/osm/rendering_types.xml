@@ -93,6 +93,17 @@
 		<type tag="tracktype" value="grade5" minzoom="12" additional="true"/>
 	</category>
 
+	<category name="smoothness">
+		<type tag="smoothness" value="excelent" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="good" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="intermediate" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="bad" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="very_bad" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="horrible" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="very_horrible" minzoom="12" additional="true"/>
+		<type tag="smoothness" value="impassable" minzoom="12" additional="true"/>
+	</category>
+
 	<category name="sac_scale">
 		<type tag="sac_scale" value="hiking" minzoom="12" additional="true"/>
 		<type tag="sac_scale" value="mountain_hiking" minzoom="12" additional="true"/>
