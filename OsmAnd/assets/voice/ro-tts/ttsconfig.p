@@ -36,7 +36,7 @@ make_ut == ['Întoarceți '].
 make_ut_wp == ['Întoarceți când aveți posibilitatea '].
 
 prepare_roundabout(Dist) == ['Pregătiți-vă să intrați în sensul giratoriu peste ', D] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['Peste ', D, ' veți intra în sensul giratoriu și-l veți părăsiți pe la ', E, 'ieșire'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['Peste ', D, ' veți intra în sensul giratoriu pe care-l veți părăsi pe la ', E, 'ieșire'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['Luați-o pe ', E, 'ieșire'] :- nth(Exit, E).
 
 go_ahead == ['Mergeți înainte '].
