@@ -330,7 +330,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				"German", "Greek", "Hebrew", "Hindi" + incompleteSuffix, "Hungarian", "Indonesian" + incompleteSuffix,
 				"Italian", "Japanese" + incompleteSuffix, "Korean" + incompleteSuffix, "Latvian", "Lithuanian", "Marathi",
 				"Norwegian" + incompleteSuffix, "Polish", "Portuguese", "Romanian", "Russian", "Slovak",
-				"Slovenian" + incompleteSuffix, "Spanish", "Swedish" + incompleteSuffix, "Turkish" + incompleteSuffix, "Ukrainian" + incompleteSuffix, "Vietnamese",
+				"Slovenian", "Spanish", "Swedish" + incompleteSuffix, "Turkish" + incompleteSuffix, "Ukrainian" + incompleteSuffix, "Vietnamese",
 				"Welsh" + incompleteSuffix };
 		registerListPreference(osmandSettings.PREFERRED_LOCALE, screen, entries, entrieValues);
 
