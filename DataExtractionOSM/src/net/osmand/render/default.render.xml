@@ -660,6 +660,7 @@
 			<filter minzoom="16" tag="sport" value="skiing"/>
 			<filter minzoom="16" tag="sport" value="swimming"/>
 			<filter minzoom="17" tag="sport" value="diving"/>
+			<filter minzoom="17" tag="sport" value="scuba_diving"/>
 			<filter minzoom="17" tag="leisure" value="fishing"/> 
 			<filter minzoom="16" tag="leisure" value="sports_centre"/> 
 			<filter minzoom="15" tag="leisure" value=""/>
@@ -863,6 +864,7 @@
 		<filter minzoom="15" icon="leisure_water_park" tag="sport" value="swimming"/>
 		<filter minzoom="15" icon="sport_ski" tag="sport" value="skiing"/>
 		<filter minzoom="16" icon="sport_diving" tag="sport" value="diving"/>
+		<filter minzoom="16" icon="sport_scuba_diving" tag="sport" value="scuba_diving"/>
 		<filter minzoom="15" icon="theme_park" tag="tourism" value="theme_park"/>
 		<filter minzoom="17" icon="amenity_bench" tag="amenity" value="bench"/>
 		<filter minzoom="15" icon="leisure_sports_centre" tag="leisure" value="sports_centre"/>
