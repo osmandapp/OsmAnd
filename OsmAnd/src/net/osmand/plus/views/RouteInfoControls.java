@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.Arrays;
 
 import net.osmand.Algoritms;
+import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -269,15 +270,21 @@ public class RouteInfoControls {
 	}
 	
 	protected TextInfoControl createAltitudeControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final GeoidAltitudeCorrection geo = map.getMyApplication().getResourceManager().getGeoidAltitudeCorrection();
 		final TextInfoControl altitudeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
 			private int cachedAlt = 0;
 
 			@Override
 			public boolean updateInfo() {
 				// draw speed
-				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasAltitude()) {
-					if (cachedAlt != (int) map.getLastKnownLocation().getAltitude()) {
-						cachedAlt = (int) map.getLastKnownLocation().getAltitude();
+				Location loc = map.getLastKnownLocation();
+				if (loc != null && loc.hasAltitude()) {
+					double compAlt = loc.getAltitude();
+					if(geo != null){
+						compAlt -= geo.getGeoidHeight(loc.getLatitude(), loc.getLongitude()); 
+					}
+					if (cachedAlt != (int) compAlt) {
+						cachedAlt = (int) compAlt;
 						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {

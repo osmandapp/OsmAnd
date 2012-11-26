@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.Algoritms;
+import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
@@ -260,6 +261,7 @@ public class ResourceManager {
 	
 	protected StringBuilder builder = new StringBuilder(40);
 	protected char[] tileId = new char[120];
+	private GeoidAltitudeCorrection geoidAltitudeCorrection;
 
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
 		builder.setLength(0);
@@ -383,6 +385,7 @@ public class ResourceManager {
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress));
 		initRenderers(progress);
+		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getSettings().extendOsmandPath(APP_DIR));
 		// do it lazy
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingMaps(progress));
@@ -958,7 +961,11 @@ public class ResourceManager {
 		renderer.clearCache();
 		
 		System.gc();
-	}	
+	}
+	
+	public GeoidAltitudeCorrection getGeoidAltitudeCorrection() {
+		return geoidAltitudeCorrection;
+	}
 	
 	
 	protected synchronized void clearTiles() {
