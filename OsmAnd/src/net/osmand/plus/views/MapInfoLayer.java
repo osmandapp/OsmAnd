@@ -443,7 +443,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// 3. put into frame parent layout controls
 		FrameLayout parent = (FrameLayout) view.getParent();
 		// status bar hides own top part 
-		int topMargin = statusBar.getMeasuredHeight()  - statusBarPadding.top - statusBarPadding.bottom;
+		int topMargin = statusBar.getMeasuredHeight()  - statusBarPadding.top - statusBarPadding.bottom ;
 		// we want that status bar lays over map stack controls
 		topMargin -= topRectPadding.top;
 

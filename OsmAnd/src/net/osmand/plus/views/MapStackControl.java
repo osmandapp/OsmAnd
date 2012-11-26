@@ -152,8 +152,9 @@ public class MapStackControl extends ViewGroup {
 					c.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED);
 					w = Math.max(w, c.getMeasuredWidth());
 					if (h > 0) {
-						h -= c.getPaddingTop();
 						h -= prevBot; 
+					} else {
+						h += c.getPaddingTop();
 					}
 					h += c.getMeasuredHeight();
 					prevBot = c.getPaddingBottom();
@@ -171,7 +172,6 @@ public class MapStackControl extends ViewGroup {
 						w = Math.max(w, c.getMeasuredWidth());
 						h -= c.getPaddingBottom();
 						if (h > 0) {
-							h -= c.getPaddingTop();
 							h -= prevBot; 
 						}
 						h += c.getMeasuredHeight();
@@ -187,7 +187,6 @@ public class MapStackControl extends ViewGroup {
 				}
 			}
 			if (isCollapsible) {
-//				h -= prevBot;
 				h += expandView.getDrawable().getMinimumHeight();
 				w = Math.max(w, expandView.getDrawable().getMinimumWidth());
 			}
@@ -195,14 +194,18 @@ public class MapStackControl extends ViewGroup {
 		setMeasuredDimension(w, h);
 	}
 
+	private final static int MAGIC_CONSTANT_STACK = 3;
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		int y = 0;
 		int cw = right - left;
 		for (View c : stackViews) {
 			if (c.getVisibility() != View.GONE) {
-				if (y > 0) {
-					y -= c.getPaddingTop();
+				if (y == 0) {
+					y += c.getPaddingTop();
+				} else {
+					// magic constant (should be removed when image will be recropped)
+					y -= MAGIC_CONSTANT_STACK;
 				}
 				c.layout(0, y, cw, y + c.getMeasuredHeight());
 				y += c.getMeasuredHeight();
@@ -213,8 +216,11 @@ public class MapStackControl extends ViewGroup {
 		for (View c : collapsedViews) {
 			if (!isCollapsed) {
 				if (c.getVisibility() != View.GONE) {
-					if (y > 0) {
-						y -= c.getPaddingTop();
+					if (y == 0) {
+						y += c.getPaddingTop();
+					} else {
+						// magic constant (should be removed when image will be recropped)
+						y -= MAGIC_CONSTANT_STACK;
 					}
 					c.layout(0, y, cw, y + c.getMeasuredHeight());
 					y += c.getMeasuredHeight();
