@@ -1,10 +1,12 @@
 package net.osmand.plus;
 
 import java.io.File;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
@@ -258,7 +260,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	
 	private void checkFavoritePoints(){
 		if(favoriteGroups == null){
-			favoriteGroups = new LinkedHashMap<String, List<FavouritePoint>>();
+			favoriteGroups = new TreeMap<String, List<FavouritePoint>>(Collator.getInstance());
 			SQLiteDatabase db = getWritableDatabase();
 			if (db != null) {
 				Cursor query = db.rawQuery("SELECT " + FAVOURITE_COL_NAME + ", " + FAVOURITE_COL_CATEGORY + ", " + FAVOURITE_COL_LAT + "," + FAVOURITE_COL_LON + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
