@@ -11,7 +11,6 @@ import java.util.List;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.Algoritms;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
@@ -1255,6 +1254,7 @@ public class MapActivityActions implements DialogProvider {
 							}
 						}
 					}
+					mapActivity.getMapLayers().getContextMenuLayer().setLocation(null, "");
 				}
 
 			}
