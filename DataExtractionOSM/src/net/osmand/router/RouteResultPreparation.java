@@ -457,7 +457,7 @@ public class RouteResultPreparation {
 		if (current <= 0) {
 			current = 1;
 		}
-		if(ls >= 0 /*&& current + left + right >= ls*/){
+//		if(ls >= 0 /*&& current + left + right >= ls*/){
 			lanes = new int[current + left + right];
 			ls = current + left + right;
 			for(int it=0; it< ls; it++) {
@@ -471,12 +471,13 @@ public class RouteResultPreparation {
 			if ((current <= left + right) && (left > 1 || right > 1)) {
 				speak = true;
 			}
-		}
+//		}
 		
 		if (kl) {
 			t = TurnType.valueOf(TurnType.KL, leftSide);
 			t.setSkipToSpeak(!speak);
-		} else if(kr){
+		} 
+		if(kr){
 			t = TurnType.valueOf(TurnType.KR, leftSide);
 			t.setSkipToSpeak(!speak);
 		}
