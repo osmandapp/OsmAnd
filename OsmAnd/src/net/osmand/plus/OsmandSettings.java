@@ -1088,11 +1088,15 @@ public class OsmandSettings {
 			sb.append(((float)ps.get(i).getLatitude()+"")).append(",").append(((float)ps.get(i).getLongitude()+""));
 		}
 		StringBuilder tb = new StringBuilder();
-		for(int i=0; i<ds.size(); i++) {
-			if(i > 0) {
+		for (int i = 0; i < ds.size(); i++) {
+			if (i > 0) {
 				tb.append("--");
 			}
-			tb.append(ds.get(i));
+			if (ds.get(i) == null) {
+				tb.append("");
+			} else {
+				tb.append(ds.get(i));
+			}
 		}
 		return globalPreferences.edit().putString(INTERMEDIATE_POINTS, sb.toString()).
 				putString(INTERMEDIATE_POINTS_DESCRIPTION, tb.toString()).
