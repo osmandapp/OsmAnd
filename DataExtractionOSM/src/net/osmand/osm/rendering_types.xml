@@ -674,6 +674,7 @@
 		<type tag="sport" value="croquet" minzoom="15" />
 		<type tag="sport" value="cycling" minzoom="15" />
 		<type tag="sport" value="diving" minzoom="15" />
+		<type tag="sport" value="scuba_diving" minzoom="15" />
 		<type tag="sport" value="dog_racing" minzoom="15" />
 		<type tag="sport" value="equestrian" minzoom="15" />
 		<type tag="sport" value="football" minzoom="15" />
