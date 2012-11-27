@@ -734,7 +734,7 @@
   <string name="search_activity">Zoeken</string>
   <string name="searchpoi_activity">Selecteer interessepunt</string>
   <string name="search_POI_level_btn">Zoek meer</string>
-  <string name="incremental_search_city">Zoek meer steden.</string>
+  <string name="incremental_search_city">Zoek meer steden</string>
   <string name="incremental_search_street">Zoek meer straten</string>
   <string name="incremental_search_building">Zoek meer gebouwen</string>
   <string name="choose_available_region">Selecteer een regio van de lijst</string>
@@ -1050,7 +1050,7 @@
     <string name="download_roads_only_maps">Alleen-wegen kaarten</string>
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
-    <string name="search_villages_and_postcodes">"Zoeken dorpen/postcode "</string>
+    <string name="search_villages_and_postcodes">Zoeken dorpen/postcode</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
     <string name="route_descr_current_location">huidige positie</string>
     <string name="route_descr_from_to">Van %1$s\nNaar %2$s</string>
