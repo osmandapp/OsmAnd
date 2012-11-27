@@ -1149,4 +1149,5 @@
     <string name="download_regular_maps">Mappe normali</string>
     <string name="download_roads_only_maps">Mappe solo-strade</string>
     <string name="incomplete_locale">incompleto</string>
-	</resources>
+	<string name="map_widget_max_speed">Velocità consentita</string>
+    </resources>
