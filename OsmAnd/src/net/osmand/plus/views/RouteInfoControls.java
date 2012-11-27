@@ -307,6 +307,37 @@ public class RouteInfoControls {
 		return altitudeControl;
 	}
 	
+	protected TextInfoControl createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final RoutingHelper rh = map.getRoutingHelper();
+		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
+			private float cachedSpeed = 0;
+
+			@Override
+			public boolean updateInfo() {
+				float mx = rh == null ? 0 : rh.getCurrentMaxSpeed();
+				if (cachedSpeed != mx) {
+					cachedSpeed = mx;
+					if (cachedSpeed == 0) {
+						setText(null, null);
+					} else {
+						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
+						int ls = ds.lastIndexOf(' ');
+						if (ls == -1) {
+							setText(ds, null);
+						} else {
+							setText(ds.substring(0, ls), ds.substring(ls + 1));
+						}
+					}
+					return true;
+				}
+				return false;
+			}
+		};
+		speedControl.setImageDrawable(map.getResources().getDrawable(R.drawable.info_max_speed));
+		speedControl.setText(null, null);
+		return speedControl;
+	}
+	
 	protected TextInfoControl createSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;

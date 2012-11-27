@@ -513,6 +513,10 @@ public class RoutingHelper {
 		return i;
 	}
 	
+	public synchronized float getCurrentMaxSpeed() {
+		return route.getCurrentMaxSpeed();
+	}
+	
 	public synchronized AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras){
 		float mxspeed = route.getCurrentMaxSpeed();
 		AlarmInfo speedAlarm = null;
@@ -574,7 +578,6 @@ public class RoutingHelper {
 	
 	private class RouteRecalculationThread extends Thread {
 		
-		private boolean interrupted = false;
 		private final RouteCalculationParams params;
 
 		public RouteRecalculationThread(String name, RouteCalculationParams params) {
