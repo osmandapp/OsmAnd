@@ -1075,4 +1075,5 @@
     <string name="route_descr_current_location">Jelenlegi pozíció</string>
     <string name="route_descr_from_to">Innen: %1$s\nIde: %2$s</string>
     <string name="route_descr_from_to_via">Innen : %1$s\nErre : %2$s\nIde : %3$s</string>
+    <string name="map_widget_max_speed">Megengedett sebesség</string>
     </resources>
