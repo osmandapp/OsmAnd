@@ -1109,7 +1109,7 @@
 	<string name="default_buttons_no">Nu</string>
 	<string name="add_favorite_dialog_top_text">Introduceți numele punctului favorit</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
-	<string name="add_favorite_dialog_favourite_added_template">Punctul favorite  \'\'{0}\'\' a fost adăugat cu succes.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Punctul favorit \'\'{0}\'\' a fost adăugat cu succes.</string>
 	<string name="favourites_context_menu_navigate">Destinație</string>
 	<string name="favourites_context_menu_edit">Editează punctul favorit</string>
 	<string name="favourites_context_menu_delete">Șterge punctul favorit</string>
