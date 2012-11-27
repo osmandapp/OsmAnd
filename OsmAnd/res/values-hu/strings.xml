@@ -700,7 +700,7 @@
   <string name="search_activity">Keresés</string>
   <string name="searchpoi_activity">POI kiválasztás</string>
   <string name="search_POI_level_btn">További találat</string>
-  <string name="incremental_search_city">Település keresése. A település vagy irányítószám kereséshez írjon be 3 vagy több karaktert.</string>
+  <string name="incremental_search_city">Település keresése lépésenként</string>
   <string name="incremental_search_street">Utca keresése</string>
   <string name="incremental_search_building">Épület keresése</string>
   <string name="choose_available_region">Régió kiválasztása listából</string>
@@ -1070,8 +1070,8 @@
     <string name="download_roads_only_maps">Csak-út térképek</string>
     <string name="incomplete_locale">hiányos</string>
 	<string name="no_buildings_found">Nem található épület.</string>
-    <string name="search_villages_and_postcodes">"Település/irányítószám keresése "</string>
-	<string name="route_descr_lat_lon">szél. %1$.3f hossz. %2$.3f</string>
+    <string name="search_villages_and_postcodes">Település/irányítószám keresése</string>
+	<string name="route_descr_lat_lon">szél. %1$.3f, hossz. %2$.3f</string>
     <string name="route_descr_current_location">Jelenlegi pozíció</string>
     <string name="route_descr_from_to">Innen: %1$s\nIde: %2$s</string>
     <string name="route_descr_from_to_via">Innen : %1$s\nErre : %2$s\nIde : %3$s</string>
