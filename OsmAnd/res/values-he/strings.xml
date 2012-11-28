@@ -990,7 +990,7 @@
 	<string name="search_activity">חיפוש</string>
 	<string name="searchpoi_activity">נא לבחור נ״ע</string>
 	<string name="search_POI_level_btn">חיפוש נוספות</string>
-	<string name="incremental_search_city">חיפוש עיר באופן מצטבר. כדי לחפש, ערים קטנות/מיקודים, יש להזין 3 תווים ראשונים או יותר.</string>
+	<string name="incremental_search_city">חיפוש עיר באופן מצטבר</string>
 	<string name="incremental_search_street">חיפוש רחובות באופן מצטבר</string>
 	<string name="incremental_search_building">חיפוש בניינים באופן מצטבר</string>
 	<string name="choose_available_region">נא לבחור באזור מהרשימה</string>
@@ -1094,10 +1094,11 @@
     <string name="download_regular_maps">מפות רגילות</string>
     <string name="download_roads_only_maps">מפות עם דרכים בלבד</string>
     <string name="incomplete_locale">חלקי</string>
-	<string name="search_villages_and_postcodes">"חיפוש כפרים/מיקוד "</string>
+	<string name="search_villages_and_postcodes">חיפוש כפרים/מיקוד</string>
 	<string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
     <string name="route_descr_current_location">המיקום הנוכחי</string>
     <string name="route_descr_from_to">מ־%1$s\nאל %2$s</string>
     <string name="route_descr_from_to_via">מהמיקום : %1$s\nדרך : %2$s\nאל : %3$s</string>
+    <string name="map_widget_max_speed">מהירות מותרת</string>
     </resources>
