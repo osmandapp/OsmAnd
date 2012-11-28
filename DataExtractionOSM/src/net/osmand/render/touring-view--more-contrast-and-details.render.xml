@@ -46,7 +46,7 @@
 		- Tracks are rendered as thick brown lines:
 			solid line (tracktype = grade1)
 			long dashed line (tracktype = grade2)
-			short dashed line (tracktype = grade3, tracktype not specified)
+			short dashed line (dashes dense:tracktype = grade3, dashes sparse:tracktype not specified)
 			dashed-dotted line (tracktype = grade4)
 			dotted line (tracktype = grade5)
 
@@ -375,8 +375,8 @@
 					<filter minzoom="14" pathEffect="3_4.5"/>
 				</filter>
 				<filter>
-					<filter minzoom="12" maxzoom="13" pathEffect="5_3"/>
-					<filter minzoom="14" pathEffect="7.5_4.5"/>
+					<filter minzoom="12" maxzoom="13" pathEffect="5_5"/>
+					<filter minzoom="14" pathEffect="7.5_7.5"/>
 				</filter>
 				<groupFilter>
 					<filter appMode="pedestrian">
