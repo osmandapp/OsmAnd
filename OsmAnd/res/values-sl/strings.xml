@@ -6,7 +6,7 @@
 	<string name="favorites_Button">Priljubljene</string>
 	<string name="map_Button">Zemljevid</string>
 	<string name="choose_available_region">Izberi regijo iz seznama</string>
-	<string name="incremental_search_city">Sprotno iskanje. Vnesite vsaj prve 3 znake imena mesta ali poštne številke.</string>
+	<string name="incremental_search_city">Sprotno iskanje mest</string>
 	<string name="searchpoi_activity">Izberi POI</string>
 	<string name="search_POI_level_btn">Več zadetkov</string>
 	<string name="incremental_search_street">Sprotno iskanje ulice</string>
@@ -588,7 +588,7 @@
 	<string name="rotate_map_compass_opt">Rotacija po kompasu</string>
 	<string name="rotate_map_bearing_opt">Rotacija po smeri gibanja</string>
 	<string name="rotate_map_none_opt">Brez rotacije (sever je gor)</string>
-	<string name="search_villages_and_postcodes">"Išči vasi/poštno številko "</string>
+	<string name="search_villages_and_postcodes">Išči vasi/poštno številko</string>
 	<string name="rendering_attr_showRoadMaps_description">Izberite kdaj naj bodo prikazani zemljevidi le s cestami:</string>
 	<string name="rendering_attr_showRoadMaps_name">Zemljevidi le s cestami</string>
     <string name="download_roads_only_maps">Zemljevidi le s cestami</string>
