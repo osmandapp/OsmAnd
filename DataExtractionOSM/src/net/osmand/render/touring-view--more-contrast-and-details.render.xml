@@ -206,9 +206,6 @@
 			<filter tag="highway" value="primary_link" color="#ff80a0"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter minzoom="7" maxzoom="9" strokeWidth="2"/>
-				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
-				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
-				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
 				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
 					<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
 					<filter minzoom="11" maxzoom="11" strokeWidth="6"/>
@@ -219,6 +216,9 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="23"/>
 					<filter minzoom="17" strokeWidth="27"/>
 				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
 				<filter minzoom="13" maxzoom="13" strokeWidth="7"/>
 				<filter minzoom="14" maxzoom="14" strokeWidth="9"/>
 				<filter minzoom="15" maxzoom="15" strokeWidth="12"/>
@@ -261,9 +261,6 @@
 			<filter tag="highway" value="secondary_link" color="#ffd080"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
 				<filter minzoom="9" maxzoom="9" strokeWidth="2"/>
-				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
-				<filter minzoom="11" maxzoom="11" strokeWidth="3"/>
-				<filter minzoom="12" maxzoom="12" strokeWidth="4"/>
 				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
 					<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
 					<filter minzoom="11" maxzoom="11" strokeWidth="5"/>
@@ -274,6 +271,9 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="22"/>
 					<filter minzoom="17" strokeWidth="26"/>
 				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="3"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="4"/>
 				<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
 				<filter minzoom="14" maxzoom="14" strokeWidth="8"/>
 				<filter minzoom="15" maxzoom="15" strokeWidth="10"/>
@@ -315,9 +315,6 @@
 			<filter tag="highway" value="tertiary" color="#ffff80"/>
 			<filter tag="highway" value="tertiary_link" color="#ffff80"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
-				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
-				<filter minzoom="11" maxzoom="11" strokeWidth="2"/>
-				<filter minzoom="12" maxzoom="12" strokeWidth="3"/>
 				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
 					<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
 					<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
@@ -328,6 +325,9 @@
 					<filter minzoom="16" maxzoom="16" strokeWidth="22"/>
 					<filter minzoom="17" strokeWidth="26"/>
 				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="2"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="3"/>
 				<filter minzoom="13" maxzoom="13" strokeWidth="4"/>
 				<filter minzoom="14" maxzoom="14" strokeWidth="6"/>
 				<filter minzoom="15" maxzoom="15" strokeWidth="8"/>
