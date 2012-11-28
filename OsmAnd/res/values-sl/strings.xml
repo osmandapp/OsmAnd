@@ -1061,4 +1061,5 @@
 \n\t- Tweak offline navigation (still experimental)
 \n\t- GPX navigation options
 \n\t- UI update and large bug fixing "</string>
-	</resources>
+	<string name="map_widget_max_speed">Dovoljena hitrost</string>
+    </resources>
