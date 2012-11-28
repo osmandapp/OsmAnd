@@ -1,4 +1,4 @@
-<renderingStyle name="winter+ski" depends="default" defaultColor="#F5FFFF" version="1">
+<renderingStyle name="Winter-and-ski" depends="default" defaultColor="#F5FFFF" version="1">
 
 	<!--
 		Depends on All-Purpose Renderer (by Hardy Mueller), v023
