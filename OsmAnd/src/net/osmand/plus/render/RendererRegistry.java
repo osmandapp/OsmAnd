@@ -39,10 +39,10 @@ public class RendererRegistry {
 	private Map<String, RenderingRulesStorage> renderers = new LinkedHashMap<String, RenderingRulesStorage>();
 	
 	public RendererRegistry(){
-		internalRenderers.put(DEFAULT_RENDER, "default.render.xml");
-		internalRenderers.put("touring-view--more-contrast-and-details", "touring-view--more-contrast-and-details" +".render.xml");
-		internalRenderers.put("high-contrast-roads", "high-contrast-roads" + ".render.xml");
-		internalRenderers.put("winter+ski", "winter+ski" + ".render.xml");
+		internalRenderers.put(DEFAULT_RENDER, "Default.render.xml");
+		internalRenderers.put("Touring-view_(more-contrast-and-details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
+		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
+		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
