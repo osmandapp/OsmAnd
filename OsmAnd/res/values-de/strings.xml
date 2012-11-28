@@ -22,7 +22,7 @@
 		\n\t* Option reiner Straßenkarten
 		\n\t* Karte behält nach Unterbrechungen Standortbindung
 		\n\t* Hintergrunddienst wird bei Navigation aktiviert
-		\n\t* Verbesserter 'Touring View' mit neuer Straßendarstellung, mehr Kartendetails und Bergwanderoption (SAC scale)
+		\n\t* Verbesserter \'Touring View\' mit neuer Straßendarstellung, mehr Kartendetails und Bergwanderoption (SAC scale)
 	</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
