@@ -1055,4 +1055,5 @@
     <string name="route_descr_current_location">huidige positie</string>
     <string name="route_descr_from_to">Van %1$s\nNaar %2$s</string>
     <string name="route_descr_from_to_via">Van : %1$s\nVia : %2$s\nNaar : %3$s</string>
+    <string name="map_widget_max_speed">Snelheidslimiet</string>
     </resources>
