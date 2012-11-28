@@ -28,6 +28,7 @@ public class TipsAndTricksActivity {
 			{R.string.tip_select_destination_point,R.string.tip_select_destination_point_t},
 			{R.string.tip_navigation,R.string.tip_navigation_t},
 			{R.string.tip_app_mode,R.string.tip_app_mode_t_v2},
+			{R.string.tip_altitude_offset,R.string.tip_altitude_offset_t},
 			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_3_t},
 			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_2_t},
 			{R.string.tip_map_switch,R.string.tip_map_switch_t_v2},
