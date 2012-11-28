@@ -10,11 +10,11 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
 	<string name="tip_altitude_offset">Altitude Display - Offset Correction</string>
-	<string name="tip_altitude_offset_t">\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used reference systems requires a position-dependent correction.
+	<string name="tip_altitude_offset_t">\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\tA better approximation to these local systems is the EGM96 reference. OsmAnd now also supports the automatic display of altitudes in the EGM96 system.
 		\n\tIn order to achieve this, simply download this file:
 		\n\thttp://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC
-		\n\tand place it in the osmand folder (usually on your SD card)
+		\n\tand place it in the osmand folder (usually on your SD card).
 	</string>
     <string name="map_widget_max_speed">Speed limit</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
@@ -39,6 +39,7 @@
 	\n\t* Map does not lose position lock after interruptions
 	\n\t* Enable background service during navigation
 	\n\t* Improved \'touring view\' with new road styles, more map details, and Alpine hiking (SAC scale) option
+	\n\t* EGM96 offset correction for GPS altitude readings
     </string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
 	\n\t* Some bug fixes

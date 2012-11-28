@@ -5,7 +5,7 @@
 		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System. Osmand unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
 		\n\tDafür muss die folgende Datei
 		\n\thttp://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC
-		\n\theruntergeladen und im osmand-Verzeichnins (meist auf der SD-Karte) gespeichert werden.
+		\n\theruntergeladen und im osmand-Verzeichnis (meist auf der SD-Karte) gespeichert werden.
 	</string>
 	<string name="map_widget_max_speed">Geschwindigkeitsbegrenzung</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -30,6 +30,7 @@
 		\n\t* Karte behält nach Unterbrechungen Standortbindung
 		\n\t* Hintergrunddienst wird bei Navigation aktiviert
 		\n\t* Verbesserter \'Touring View\' mit neuer Straßendarstellung, mehr Kartendetails und Bergwanderoption (SAC scale)
+		\n\t* Höhenangaben nun auch im praktischeren EGM96 System
 	</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
