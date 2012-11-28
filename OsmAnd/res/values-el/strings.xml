@@ -1094,4 +1094,5 @@
     <string name="route_descr_current_location">Τρέχουσα θέση</string>
     <string name="route_descr_from_to">Από %1$s\nΠρος %2$s</string>
     <string name="route_descr_from_to_via">Από : %1$s\nΜέσω : %2$s\nΠρος : %3$s</string>
+    <string name="map_widget_max_speed">Επιτρεπόμενη ταχύτητα</string>
     </resources>
