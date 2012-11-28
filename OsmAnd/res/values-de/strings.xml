@@ -1,5 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="map_widget_max_speed">Geschwindigkeitsbegrenzung</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
 	<string name="route_descr_current_location">Aktueller Standort</string>
 	<string name="route_descr_from_to">Von : %1$s\nNach : %2$s</string>
