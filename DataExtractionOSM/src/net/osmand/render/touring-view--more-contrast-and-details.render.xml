@@ -210,7 +210,10 @@
 				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
 				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
-					<filter minzoom="13" maxzoom="13" strokeWidth="9"/>
+					<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="6"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="7"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="8"/>
 					<filter minzoom="14" maxzoom="14" strokeWidth="14"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="18"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="23"/>
@@ -262,6 +265,9 @@
 				<filter minzoom="11" maxzoom="11" strokeWidth="3"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="4"/>
 				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
+					<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="5"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="6"/>
 					<filter minzoom="13" maxzoom="13" strokeWidth="7"/>
 					<filter minzoom="14" maxzoom="14" strokeWidth="12"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="17"/>
@@ -312,9 +318,11 @@
 				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="2"/>
 				<filter minzoom="12" maxzoom="12" strokeWidth="3"/>
-
 				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
-					<filter minzoom="13" maxzoom="13" strokeWidth="4"/>
+					<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
 					<filter minzoom="14" maxzoom="14" strokeWidth="8"/>
 					<filter minzoom="15" maxzoom="15" strokeWidth="16"/>
 					<filter minzoom="16" maxzoom="16" strokeWidth="22"/>
