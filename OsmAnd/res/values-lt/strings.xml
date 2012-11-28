@@ -879,7 +879,7 @@
   <string name="search_activity">Ieškoti</string>
   <string name="searchpoi_activity">Pasirinkti LV</string>
   <string name="search_POI_level_btn">Rasti daugiau</string>
-  <string name="incremental_search_city">Ieškoti miesto didėjančia tvarka. Miestų/pašto kodų paieškai, įveskite pirmus 3 arba daugiau ženklų.</string>
+  <string name="incremental_search_city">Ieškoti miesto didėjančia tvarka</string>
   <string name="incremental_search_street">Ieškoti gatvės didėjimo tvarka</string>
   <string name="incremental_search_building">Ieškoti pastatų didėjimo tvarka</string>
   <string name="choose_available_region">Pasirinkti regioną iš sąrašo</string>
@@ -1148,4 +1148,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="download_regular_maps">Įprastiniai žemėlapiai</string>
     <string name="download_roads_only_maps">Tik kelių žemėlapiai</string>
     <string name="incomplete_locale">nebaigta</string>
-	</resources>
+	<string name="map_widget_max_speed">Leidžiamas greitis</string>
+    </resources>
