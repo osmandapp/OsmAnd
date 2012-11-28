@@ -993,10 +993,10 @@
 		<!-- Open nature, night color 004333 -->
 		<group>
 			<filter minzoom="12" color="#ffffc0" tag="natural" value="heath"/>
-			<filter minzoom="12" color="#ead8bd" tag="landuse" value="farm"/>
+			<filter minzoom="12" color="#f6e3c7" tag="landuse" value="farm"/>
 			 <!-- field is unofficial -->
-			 <filter minzoom="12" color="#ead8bd" tag="landuse" value="field"/>
-			<filter minzoom="12" color="#ead8bd" tag="landuse" value="farmland"/>
+			 <filter minzoom="12" color="#f6e3c7" tag="landuse" value="field"/>
+			<filter minzoom="12" color="#f6e3c7" tag="landuse" value="farmland"/>
 			<filter minzoom="12" color="#ddbf92" tag="landuse" value="farmyard"/>
 			<filter minzoom="12" color="#9d9d6c" tag="landuse" value="greenfield"/>
 			<filter minzoom="12" color="#cfeca8" tag="landuse" value="grass"/>
