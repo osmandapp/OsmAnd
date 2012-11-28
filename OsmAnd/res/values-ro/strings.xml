@@ -1173,4 +1173,5 @@
     <string name="route_descr_current_location">Poziția curentă</string>
     <string name="route_descr_from_to">De la: %1$s↵\nLa: %2$s</string>
     <string name="route_descr_from_to_via">De la: %1$s↵\nVia: %2$s↵\nLa: %3$s</string>
+    <string name="map_widget_max_speed">Limita de viteză</string>
     </resources>
