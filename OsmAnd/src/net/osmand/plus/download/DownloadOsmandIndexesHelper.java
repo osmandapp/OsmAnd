@@ -188,13 +188,13 @@ public class DownloadOsmandIndexesHelper {
 	}
 	
 	public static class IndexItem {
-		private String description;
-		private String date;
-		private String parts;
-		private String fileName;
-		private String size;
-		private IndexItem attachedItem;
-		private DownloadActivityType type;
+		String description;
+		String date;
+		String parts;
+		String fileName;
+		String size;
+		IndexItem attachedItem;
+		DownloadActivityType type;
 		
 		public IndexItem(String fileName, String description, String date, String size, String parts) {
 			this.fileName = fileName;
@@ -214,10 +214,6 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		
-		public IndexItem getAttachedItem() {
-			return attachedItem;
-		}
-		
 		public String getVisibleDescription(Context ctx, DownloadActivityType type){
 			String s = ""; //$NON-NLS-1$
 			if(type == DownloadActivityType.ROADS_FILE){
@@ -234,9 +230,18 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		public String getVisibleName(){
-			int l = fileName.lastIndexOf('_');
-			String name = fileName.substring(0, l < 0 ? fileName.length() : l).replace('_', ' ');
-			return name;
+			return getBasename().replace('_', ' ');
+		}
+		
+		private String getBasename(){
+			if(fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
+				return fileName.substring(0, fileName.length() - IndexConstants.EXTRA_ZIP_EXT.length());
+			}
+			int ls = fileName.lastIndexOf('_');
+			if(ls >= 0) {
+				return fileName.substring(0, ls);
+			}
+			return fileName;
 		}
 		
 		public boolean isAccepted(){
@@ -244,6 +249,7 @@ public class DownloadOsmandIndexesHelper {
 			if (fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP,IndexConstants.BINARY_MAP_VERSION)) //
 				|| fileName.endsWith(addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION))
+				|| fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)
 				//|| fileName.endsWith(addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION)) drop support for downloading tts files from inet
 				) {
 				return true;
@@ -269,13 +275,8 @@ public class DownloadOsmandIndexesHelper {
 			return size;
 		}
 		
-		public String getParts() {
-			return parts;
-		}
-		
 		public DownloadEntry createDownloadEntry(Context ctx, DownloadActivityType type) {
-			IndexItem item = this;
-			String fileName = item.getFileName();
+			String fileName = this.fileName;
 			File parent = null;
 			String toSavePostfix = null;
 			String toCheckPostfix = null;
@@ -290,6 +291,11 @@ public class DownloadOsmandIndexesHelper {
 				parent = settings.extendOsmandPath(ResourceManager.APP_DIR);
 				toSavePostfix = BINARY_MAP_INDEX_EXT_ZIP;
 				toCheckPostfix = BINARY_MAP_INDEX_EXT;
+			} else if(fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)){
+				parent = settings.extendOsmandPath(ResourceManager.APP_DIR);
+				//unzipDir = true;
+				toSavePostfix = IndexConstants.EXTRA_ZIP_EXT;
+				toCheckPostfix = IndexConstants.EXTRA_EXT;
 			} else if(fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)){
 				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
 				toSavePostfix = VOICE_INDEX_EXT_ZIP;
@@ -324,26 +330,25 @@ public class DownloadOsmandIndexesHelper {
 				entry = null;
 			} else {
 				entry = new DownloadEntry();
-				int ls = fileName.lastIndexOf('_');
 				entry.isRoadMap = type == DownloadActivityType.ROADS_FILE;
-				entry.baseName = fileName.substring(0, ls);
+				entry.baseName = getBasename();
 				entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
 				entry.unzip = unzipDir;
 				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
 				try {
-					Date d = format.parse(item.getDate());
+					Date d = format.parse(date);
 					entry.dateModified = d.getTime();
 				} catch (ParseException e1) {
 					log.error("ParseException" ,e1);
 				}
 				try {
-					entry.sizeMB = Double.parseDouble(item.getSize());
+					entry.sizeMB = Double.parseDouble(size);
 				} catch (NumberFormatException e1) {
 					log.error("ParseException" ,e1);
 				}
 				entry.parts = 1;
-				if (item.getParts() != null) {
-					entry.parts = Integer.parseInt(item.getParts());
+				if (parts != null) {
+					entry.parts = Integer.parseInt(parts);
 				}
 				entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
 				File backup = settings.extendOsmandPath(ResourceManager.BACKUP_PATH + entry.fileToUnzip.getName());
@@ -373,4 +378,55 @@ public class DownloadOsmandIndexesHelper {
 		}
 	}
 	
+	
+	/*public static class SrtmIndexItem extends IndexItem {
+
+		public SrtmIndexItem(String fileName, String description, String date, String size) {
+			super(fileName, description, date, size, null);
+			type = DownloadActivityType.SRTM_FILE;
+		}
+		
+		@Override
+		public boolean isAccepted() {
+			return true;
+		}
+		
+		public DownloadEntry createDownloadEntry(Context ctx, DownloadActivityType type) {
+			OsmandSettings settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+			File parent = settings.extendOsmandPath(ResourceManager.APP_DIR);
+			final DownloadEntry entry;
+			if(parent == null || !parent.exists()){
+				AccessibleToast.makeText(ctx, ctx.getString(R.string.sd_dir_not_accessible), Toast.LENGTH_LONG).show();
+				entry = null;
+			} else {
+				entry = new DownloadEntry();
+				entry.isRoadMap = type == DownloadActivityType.ROADS_FILE;
+				entry.baseName = getBasename();
+				entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
+				entry.unzip = unzipDir;
+				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
+				try {
+					Date d = format.parse(date);
+					entry.dateModified = d.getTime();
+				} catch (ParseException e1) {
+					log.error("ParseException" ,e1);
+				}
+				try {
+					entry.sizeMB = Double.parseDouble(size);
+				} catch (NumberFormatException e1) {
+					log.error("ParseException" ,e1);
+				}
+				entry.parts = 1;
+				if (parts != null) {
+					entry.parts = Integer.parseInt(parts);
+				}
+				entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
+				File backup = settings.extendOsmandPath(ResourceManager.BACKUP_PATH + entry.fileToUnzip.getName());
+				if (backup.exists()) {
+					entry.existingBackupFile = backup;
+				}		
+				return entry;
+			}
+		}
+	}*/
 }

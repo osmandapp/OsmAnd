@@ -195,7 +195,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			@Override
 			public boolean updateInfo() {
 				boolean visible = true;
-				String txt = "start";
+				String txt = map.getString(R.string.monitoring_control_start);
 				String subtxt = null;
 				Drawable d = monitoringInactive;
 				long last = lastUpdateTime;

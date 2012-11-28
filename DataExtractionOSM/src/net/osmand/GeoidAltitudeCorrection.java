@@ -1,7 +1,5 @@
 package net.osmand;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -14,20 +12,32 @@ public class GeoidAltitudeCorrection {
 	private final Log log = LogUtil.getLog(GeoidAltitudeCorrection.class);
 	private File f;
 	private RandomAccessFile rf;
-	private final static String fileName = "WW15MGH.DAC";
 	
 	private int cachedPointer = -1;
 	private short cachedValue = 0;
 
 	public GeoidAltitudeCorrection(File dir) {
-		this.f = new File(dir, fileName);
-		if(f.exists()){
-			try {
-				rf = new RandomAccessFile(f, "r");
-			} catch (FileNotFoundException e) {
-				log.error("Error", e);
+		String[] fnames = dir.list();
+		if(fnames != null) {
+			String fn = null;
+			for(String f : fnames) {
+				if(f.contains("WW15MGH")) {
+					fn = f;
+					break;
+				}
+			}
+			if (fn != null) {
+				this.f = new File(dir, fn);
+				if (f.exists()) {
+					try {
+						rf = new RandomAccessFile(f, "r");
+					} catch (FileNotFoundException e) {
+						log.error("Error", e);
+					}
+				}
 			}
 		}
+		
 	}
 	
 	public boolean isGeoidInformationAvailable(){

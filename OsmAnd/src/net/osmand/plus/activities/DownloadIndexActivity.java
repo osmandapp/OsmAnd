@@ -1,12 +1,6 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
-import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
-import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.VOICE_VERSION;
+import static net.osmand.data.IndexConstants.*;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -417,13 +411,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		File externalStorageDirectory = settings.getExternalStorageDirectory();
 		// files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
+		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),EXTRA_EXT, EXTRA_ZIP_EXT,0));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
 		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",TTSVOICE_INDEX_EXT_ZIP, TTSVOICE_VERSION));
 		return files;
 	}
 	
-	private Collection<? extends String> listWithAlternatives(File file, final String ext, final String secondaryExt, final int version) {
+	private Collection<? extends String> listWithAlternatives(File file, final String ext, final String downloadExt, final int version) {
 		final List<String> files = new ArrayList<String>();
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
@@ -431,9 +426,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
 						files.add(filename);
-						files.add(filename.substring(0, filename.length() - ext.length())  + ext);
-						if (secondaryExt != null) {
-							files.add(filename.substring(0, filename.length() - ext.length()) + secondaryExt);
+						if (downloadExt != null) {
+							files.add(filename.substring(0, filename.length() - ext.length()) + downloadExt);
 						}
 						return true;
 					} else {

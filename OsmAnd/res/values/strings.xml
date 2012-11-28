@@ -15,6 +15,7 @@
 		\n\tIn order to achieve this, simply download the file WW15MGH.DAC via Offline Data Manager (original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="map_widget_max_speed">Speed limit</string>
+    <string name="monitoring_control_start">start</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
     <string name="route_descr_from_to">From : %1$s\nTo : %2$s</string>

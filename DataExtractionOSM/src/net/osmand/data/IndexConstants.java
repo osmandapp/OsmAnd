@@ -25,6 +25,9 @@ public class IndexConstants {
 	public static final String ANYVOICE_INDEX_EXT_ZIP = "voice.zip"; //$NON-NLS-1$ //to cactch both voices, .voice.zip and .ttsvoice.zip
 	public static final String BINARY_MAP_INDEX_EXT_ZIP = ".obf.zip"; //$NON-NLS-1$
 	
+	public static final String EXTRA_ZIP_EXT = ".extra.zip";
+	public static final String EXTRA_EXT = ".extra";
+	
 	public static final String RENDERER_INDEX_EXT = ".render.xml"; //$NON-NLS-1$
 	
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
