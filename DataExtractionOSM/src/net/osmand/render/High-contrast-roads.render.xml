@@ -1,0 +1,39 @@
+<renderingStyle name="High-contrast-roads" depends="default" defaultColor="#f1eae4" version="1">
+
+	<!--
+		Depends on All-Purpose Renderer (by Hardy Mueller), based on production version 2012-01-04
+	--> 
+
+	<!--
+		Try high contrast roads, suggested by Dirk Sommer: primary = #C00828, secondary = #FF8000, tertiary = #F0C810
+		2012-10-07 Simplify using Constants
+	--> 
+
+	<!-- roadColors="High contrast roads" -->
+		<renderingConstant name="motorwayRoadColor" value="#3838B0"/>
+		<renderingConstant name="trunkRoadColor" value="#A01060"/>
+		<renderingConstant name="primaryRoadColor" value="#C00828"/>
+		<renderingConstant name="secondaryRoadColor" value="#FF8000"/>
+		<renderingConstant name="tertiaryRoadColor" value="#F0C810"/>
+
+
+	<order>
+	</order>
+
+
+	<text>
+	</text>
+
+
+	<point>
+	</point>
+
+
+	<polygon>
+	</polygon>
+
+
+	<line>
+	</line>
+
+</renderingStyle>

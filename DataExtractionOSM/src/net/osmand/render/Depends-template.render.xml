@@ -1,0 +1,35 @@
+<renderingStyle name="Depends-template" depends="default" defaultColor="#f1eae4" version="1">
+	<!-- In a dependent renderer, just specify what should change vs. the master/default renderer -->
+
+
+	<!-- Example: modify route and gpx overlay colors -->
+	<renderingAttribute name="routeColor">
+		<filter nightMode="false" attrColorValue="#CCFF6600"/>
+		<filter attrColorValue="#CCFF6600"/>
+	</renderingAttribute>
+
+	<renderingAttribute name="gpxColor">
+		<filter nightMode="false" attrColorValue="#B400FFFF"/>
+		<filter attrColorValue="#B400FFFF"/>
+	</renderingAttribute>
+
+
+	<order>
+	</order>
+
+
+	<text>
+	</text>
+
+
+	<point>
+	</point>
+
+
+	<polygon>
+	</polygon>
+
+
+	<line>
+	</line>
+</renderingStyle>
