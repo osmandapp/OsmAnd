@@ -43,7 +43,6 @@ public class RendererRegistry {
 		internalRenderers.put("touring-view--more-contrast-and-details", "touring-view--more-contrast-and-details" +".render.xml");
 		internalRenderers.put("high-contrast-roads", "high-contrast-roads" + ".render.xml");
 		internalRenderers.put("winter+ski", "winter+ski" + ".render.xml");
-		internalRenderers.put("contours-plus", "contours-plus"+ ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
