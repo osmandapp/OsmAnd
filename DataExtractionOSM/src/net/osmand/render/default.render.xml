@@ -74,6 +74,9 @@
 	
 	<!-- Number of roads to display per tile -->
 	<renderingAttribute name="roadsDensityLimitPerTile">
+		<filter appMode="pedestrian" attrIntValue="24"/>
+		<filter appMode="bicycle" attrIntValue="24"/>
+		<filter hmRendered="true" attrIntValue="100"/>
 		<filter attrIntValue="12"/>
 	</renderingAttribute>
 	
