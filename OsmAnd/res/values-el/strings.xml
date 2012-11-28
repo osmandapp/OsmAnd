@@ -956,7 +956,7 @@
 	<string name="search_activity">Αναζήτηση</string>
 	<string name="searchpoi_activity">Επιλέξτε ΣΕ</string>
 	<string name="search_POI_level_btn">Βρες περισσότερα</string>
-	<string name="incremental_search_city">Αναζήτηση πόλης αυξητικά.</string>
+	<string name="incremental_search_city">Αναζήτηση πόλης αυξητικά</string>
 	<string name="incremental_search_street">Αναζήτηση οδού αυξητικά</string>
 	<string name="incremental_search_building">Αναζήτηση κτηρίου αυξητικά</string>
 	<string name="choose_available_region">Επιλογή περιοχής από λίστα</string>
@@ -1088,7 +1088,7 @@
     <string name="download_regular_maps">Κανονικοί χάρτες</string>
     <string name="download_roads_only_maps">Οδικοί-μόνο χάρτες</string>
     <string name="incomplete_locale">ημιτελές</string>
-	<string name="search_villages_and_postcodes">"Αναζήτηση χωριών/ταχ. κωδικών "</string>
+	<string name="search_villages_and_postcodes">Αναζήτηση χωριών/ταχ. κωδικών</string>
 	<string name="no_buildings_found">Δεν βρέθηκαν κτήρια.</string>
     <string name="route_descr_lat_lon">Πλ %1$.3f μήκ %2$.3f</string>
     <string name="route_descr_current_location">Τρέχουσα θέση</string>
