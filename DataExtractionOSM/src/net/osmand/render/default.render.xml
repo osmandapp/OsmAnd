@@ -1260,19 +1260,19 @@
 
 		<!-- Next segment: Highways without grade distinction (cycleway, bridleway, black path): pathEffect 4_2. Base setting for highways with possible grade distinction but none specified (track, byway, red footway): 5_5 -->
 		<group>
-			<filter tag="highway" value="track" color="#996600" pathEffect="5_5">
+			<filter tag="highway" value="track" color="#996600" pathEffect="4_2">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
 				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
-					<!-- Path coverage for grades: 100%, 77%, 71%, 54%, 50%(short dash). None specified: 50%(long dash) -->
+					<!-- Dash pattern: solid(100%), long-dashed(77%), short-dashed(63%), dash-dotted(50%), dotted(50%), dotted2(40%), short-dashed-narrow-spaced(66%) for not-specified -->
 					<filter additional="tracktype=grade1" pathEffect=""/>
 					<filter additional="tracktype=grade2" pathEffect="10_3"/>
-					<filter additional="tracktype=grade3" pathEffect="5_2"/>
-					<filter additional="tracktype=grade4" pathEffect="5_3_2_3"/>
-					<filter additional="tracktype=grade5" pathEffect="3_3"/>
+					<filter additional="tracktype=grade3" pathEffect="5_3"/>
+					<filter additional="tracktype=grade4" pathEffect="4_3_2_3"/>
+					<filter additional="tracktype=grade5" pathEffect="2_3"/>
 				</groupFilter>
 			</filter>
 
@@ -1293,12 +1293,12 @@
 				<filter hmRendered="true" minzoom="13" strokeWidth="1"/>
 				<filter minzoom="14" strokeWidth="1"/>
 				<groupFilter>
-					<!-- Path coverage for sac_scale in analogy with 'track-grade': 100%, 77%, 71%, 54%, 50%(short dash), 40%. None specified: 50%(long dash) -->
+					<!-- Dash pattern: solid(100%), long-dashed(77%), short-dashed(63%), dash-dotted(50%), dotted(50%), dotted2(40%), short-dashed-narrow-spaced(66%) for not-specified -->
 					<!-- Also: switch color to 'pedestrian-red' to better indicate these special ratings in line with many alpine maps -->
 					<filter additional="sac_scale=hiking" color="#fa5073" pathEffect=""/>
 					<filter additional="sac_scale=mountain_hiking" color="#fa5073" pathEffect="10_3"/>
-					<filter additional="sac_scale=demanding_mountain_hiking" color="#fa5073" pathEffect="5_2"/>
-					<filter additional="sac_scale=alpine_hiking" color="#fa5073" pathEffect="5_3_2_3"/>
+					<filter additional="sac_scale=demanding_mountain_hiking" color="#fa5073" pathEffect="5_3"/>
+					<filter additional="sac_scale=alpine_hiking" color="#fa5073" pathEffect="4_3_2_3"/>
 					<filter additional="sac_scale=demanding_alpine_hiking" color="#fa5073" pathEffect="3_3"/>
 					<filter additional="sac_scale=difficult_alpine_hiking" color="#fa5073" pathEffect="2_3"/>
 					<filter nightMode="true" color="#787878"/> 
