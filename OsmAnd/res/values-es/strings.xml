@@ -1038,7 +1038,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_villages_and_postcodes">"Buscar pueblos/códigos postales "</string>
 	<string name="tip_altitude_offset_t">\tLa mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
 \n\tUna mejor aproximación a estos sistemas locales es la referencia EGM96. OsmAnd también soporta ahora la visualización automática de altitud en el sistema EGM96.
-\n\tPara lograr esto, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
+\n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">Empezar</string>
     <string name="tip_altitude_offset">Mostrar Altitud - Corrección</string>
