@@ -1062,4 +1062,9 @@
 \n\t- GPX navigation options
 \n\t- UI update and large bug fixing "</string>
 	<string name="map_widget_max_speed">Dovoljena hitrost</string>
+    <string name="tip_altitude_offset">Prikaz nadmorske višine - popravek zamika</string>
+	<string name="tip_altitude_offset_t">"\tVečina GPS sprejemnikov sporoča meritve nadmorske višine glede na WGS84 referenčni elipsoid, ki za pretvorbo v lokalen sistem zahteva lokalne popravke.
+\n\tBoljši približek tem lokalnim sistemom je referenčni sistem EGM96. OsmAnd sedaj podpira prikaz nadmorske višine tudi v sistemu EGM96.
+\n\tTo dosežete tako, da le prenesete datoteko WW15MGH.DAC prek Upravitelja podatkov (vir je na naslovu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="monitoring_control_start">začetek</string>
     </resources>
