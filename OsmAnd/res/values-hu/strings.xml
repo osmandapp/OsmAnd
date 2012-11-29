@@ -1076,4 +1076,7 @@
     <string name="route_descr_from_to">Innen: %1$s\nIde: %2$s</string>
     <string name="route_descr_from_to_via">Innen : %1$s\nErre : %2$s\nIde : %3$s</string>
     <string name="map_widget_max_speed">Megengedett sebesség</string>
+    <string name="tip_altitude_offset">Magasság kijelzés - eltérés korrekció</string>
+	<string name="monitoring_control_start">indít</string>
+    <string name="tip_altitude_offset_t">"\tA legtöbb GPS vevő a tengerszint feletti magasságot a WGS84 referencia ellipszoid szerint határozza meg, ami a helyi rendszernek megfelelően pozíciófüggő korrekcióra szorul.\n\tA helyi rendszereket jobban megközelíti az EGM96 referencia. Az OsmAnd már támogatja a magassági érték megjelenítését automatikusan EGM96 szerint.\n\tA használatához csak töltsd le a World altutude correction fájlt az offline adatkezelőben (az eredeti fájl innen származik: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     </resources>
