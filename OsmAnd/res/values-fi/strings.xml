@@ -597,4 +597,10 @@
     <string name="route_descr_from_to_via">Mistä:%1$s\nKautta:%2$s\nMihin:%3$s</string>
     <string name="no_buildings_found">Rakennuksia ei löytynyt.</string>
     <string name="search_villages_and_postcodes">Etsi pienempiä paikkakuntia/postinumeroita</string>
+	<string name="map_widget_max_speed">Nopeusrajoitus</string>
+    <string name="monitoring_control_start">aloita</string>
+    <string name="osmand_parking_position_name">Pysäköintipaikka</string>
+	<string name="osmand_parking_plugin_description">Tällä lisäosalla voit tallentaa pysäköidyn auton sijainnin.</string>
+	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
+	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
 	</resources>
