@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">\tDie meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
@@ -1169,4 +1169,5 @@
     <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Google Play gesucht werden?</string>
 	<string name="close_changeset">Changeset schließen</string>
 <string name="incomplete_locale">unfertig</string>
-	</resources>
+	<string name="monitoring_control_start">Start</string>
+    </resources>
