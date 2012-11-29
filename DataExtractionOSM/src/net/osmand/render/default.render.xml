@@ -1313,7 +1313,7 @@
 				<filter minzoom="14" strokeWidth="1"/>
 			</filter>
 
-			<filter tag="highway" value="footway" color="#fa5073" pathEffect="5_5">
+			<filter tag="highway" value="footway" color="#fa5073" pathEffect="4_2">
 				<filter appMode="pedestrian" hmRendered="true" minzoom="14" strokeWidth="2"/>
 				<filter appMode="pedestrian" minzoom="15" strokeWidth="2"/>
 				<filter hmRendered="true" minzoom="12" maxzoom="12" strokeWidth="0.5"/>
