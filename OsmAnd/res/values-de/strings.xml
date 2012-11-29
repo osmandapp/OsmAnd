@@ -304,9 +304,7 @@
 \n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
-	<string name="binary_map_download_success">Download erfolgreich.
-\n\t
-\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'</string>
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">"Die Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
 \nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → Darstellung → \'Anzeige konfigurieren...\' → \'Tag/Nacht-Modus\' geändert werden.
@@ -1061,8 +1059,8 @@
 	<string name="context_menu_item_add_parking_point">Parkplatz-Standort festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
 	<string name="gpxup_public">Öffentlich</string>
-	<string name="gpxup_identifiable">Identifiable</string>
-	<string name="gpxup_trackable">Trackable</string>
+	<string name="gpxup_identifiable">Erkennbar</string>
+	<string name="gpxup_trackable">Verfolgbar</string>
 	<string name="gpxup_private">Privat</string>
 	<string name="global_app_allocated_memory_descr">Belegter Speicher %1$s MB (Android Limit %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Belegter Speicher</string>
