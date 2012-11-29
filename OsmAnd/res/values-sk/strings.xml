@@ -878,7 +878,7 @@
   <string name="search_activity">Hľadať</string>
   <string name="searchpoi_activity">Vybrať POI</string>
   <string name="search_POI_level_btn">Nájsť viac</string>
-  <string name="incremental_search_city">Hľadať mestá vzostupne. Pre nájdenie miest/PSČ, zadajte prvých 3 alebo viac znakov.</string>
+  <string name="incremental_search_city">Hľadať mestá postupne</string>
   <string name="incremental_search_street">Hľadať ulicu vzostupne</string>
   <string name="incremental_search_building">Hľadať budovu vzostupne</string>
   <string name="choose_available_region">Vybrať oblasť zo zoznamu</string>
@@ -1106,9 +1106,10 @@
     <string name="close_changeset">Zavrieť súbor zmien</string>
 	<string name="incomplete_locale">nedokončený</string>
 	<string name="no_buildings_found">Neboli nájdené žiadne budovy.</string>
-    <string name="search_villages_and_postcodes">"Vyhľadaj dediny/PSČ "</string>
+    <string name="search_villages_and_postcodes">Vyhľadať obce/PSČ</string>
 	<string name="route_descr_lat_lon">Šírka %1$.3f dĺžka %2$.3f</string>
     <string name="route_descr_current_location">Aktuálna pozícia</string>
     <string name="route_descr_from_to">Z %1$s\nDo %2$s</string>
     <string name="route_descr_from_to_via">Z : %1$s\nCez : %2$s\nDo : %3$s</string>
+    <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     </resources>
