@@ -1176,6 +1176,7 @@
     <string name="map_widget_max_speed">Limita de viteză</string>
     <string name="monitoring_control_start">Start</string>
     <string name="tip_altitude_offset">Afișare altitudine - Corecție offset</string>
-	<string name="tip_altitude_offset_t">\tCele mai multe receptoare GPS raportează altitudinea în sistemul de referință elipsoidal WGS84 care, pentru conversia la alte sisteme de referință locale, necesită o corecție care depinde de poziția pe glob.\n\tSistemul de referință EGM96 oferă o mai bună aproximare a sistemelor locale. Acum OsmAnd este capabil să afișeze altitudinea și în sistem EGM96.
-\n\tPentru aceasta, descărcați fișierul WW15MGH.DAC din meniul Setări &gt; Date offline (Download). Sursa se găsește la http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC</string>
+	<string name="tip_altitude_offset_t">"\tCele mai multe receptoare GPS raportează altitudinea în sistemul de referință elipsoidal WGS84 care, pentru conversia la alte sisteme de referință locale, necesită o corecție care depinde de poziția pe glob.
+\n\tSistemul de referință EGM96 oferă o mai bună aproximare a sistemelor locale. Acum OsmAnd este capabil să afișeze altitudinea și în sistem EGM96.
+\n\tPentru aceasta, descărcați fișierul WW15MGH.DAC din meniul Setări &gt; Date offline (Download). Sursa se găsește la http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC . "</string>
     </resources>
