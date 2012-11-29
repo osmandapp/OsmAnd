@@ -1149,4 +1149,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="download_roads_only_maps">Tik kelių žemėlapiai</string>
     <string name="incomplete_locale">nebaigta</string>
 	<string name="map_widget_max_speed">Leidžiamas greitis</string>
-    </resources>
+    <string name="tip_altitude_offset">Aukščio informacija - paklaidos įvedimas</string>
+	</resources>
