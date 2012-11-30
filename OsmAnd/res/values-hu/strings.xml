@@ -1079,4 +1079,6 @@
     <string name="tip_altitude_offset">Magasság kijelzés - eltérés korrekció</string>
 	<string name="monitoring_control_start">indít</string>
     <string name="tip_altitude_offset_t">"\tA legtöbb GPS vevő a tengerszint feletti magasságot a WGS84 referencia ellipszoid szerint határozza meg, ami a helyi rendszernek megfelelően pozíciófüggő korrekcióra szorul.\n\tA helyi rendszereket jobban megközelíti az EGM96 referencia. Az OsmAnd már támogatja a magassági érték megjelenítését automatikusan EGM96 szerint.\n\tA használatához csak töltsd le a World altutude correction fájlt az offline adatkezelőben (az eredeti fájl innen származik: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    </resources>
+    <string name="rendering_attr_noAdminboundaries_name">Határvonalak alerejtése</string>
+	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg az adminisztratív határokat 5-9 szinten</string>
+	</resources>
