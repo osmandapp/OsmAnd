@@ -677,7 +677,7 @@
   <string name="search_activity">Ricerca</string>
   <string name="searchpoi_activity">Scegli PDI</string>
   <string name="search_POI_level_btn">Trovarne altri</string>
-  <string name="incremental_search_city">Ricerca della città in modo incrementale. Per cercare paesi/CAP inserire più di tre caratteri.</string>
+  <string name="incremental_search_city">Cerca la città in modo incrementale</string>
   <string name="incremental_search_street">Ricerca strada in modo incrementale</string>
   <string name="incremental_search_building">Ricerca civico in modo incrementale</string>
   <string name="choose_available_region">Scegli il Paese dalla lista</string>
@@ -1142,7 +1142,7 @@
     <string name="route_descr_from_to">Da %1$s a %2$s</string>
     <string name="route_descr_from_to_via">Da: %1$s↵\nper: %2$s↵\na: %3$s</string>
     <string name="no_buildings_found">Nessun edificio trovato.</string>
-    <string name="search_villages_and_postcodes">"Ricerca villaggi/codice postale "</string>
+    <string name="search_villages_and_postcodes">Ricerca villaggi/codice postale</string>
 	<string name="rendering_attr_showRoadMaps_description">Selezionare quando visualizzare mappe solo-strade:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mappe solo-strade</string>
     <string name="download_roads_only_item">"Strade "</string>
@@ -1150,8 +1150,8 @@
     <string name="download_roads_only_maps">Mappe solo-strade</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="map_widget_max_speed">Velocità consentita</string>
-    <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, da cui una conversione nel sistema di riferimento richiede una correzione dipendente-dalla-poszione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\'altritudine inel sistema EGM96.
-\n\tPer avere questo, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\\\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, da cui una conversione nel sistema di riferimento richiede una correzione dipendente-dalla-poszione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\\\'altritudine inel sistema EGM96.
+\n\tPer avere questo, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="tip_altitude_offset">Visualizza Altitudine - Correzione Offset</string>
 	<string name="monitoring_control_start">avvia</string>
     </resources>
