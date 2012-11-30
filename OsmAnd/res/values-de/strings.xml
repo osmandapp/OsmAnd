@@ -102,7 +102,7 @@
 	<string name="route_kl">Links halten, dann</string>
 	<string name="route_kr">Rechts halten, dann</string>
 	<string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte</string>
-	<string name="rendering_attr_noPolygons_name">Transparente Flächen</string>
+	<string name="rendering_attr_noPolygons_name">Keine Flächen anzeigen</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
 	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt SRTM-Datei):</string>

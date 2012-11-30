@@ -275,7 +275,7 @@
 	<string name="route_kl">Keep left and go</string>
 	<string name="route_kr">Keep right and go</string>
 	<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
-	<string name="rendering_attr_noPolygons_name">No polygons</string>
+	<string name="rendering_attr_noPolygons_name">Hide polygons</string>
 	<string name="rendering_attr_appMode_name">Rendering mode</string>
 	<string name="rendering_attr_appMode_description">Optimize map for</string>
 	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string -->
