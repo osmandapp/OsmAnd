@@ -39,7 +39,7 @@
 	<string name="osmand_short_description_80_chars">OsmAnd on avoimen lähdekoodin navigointisovellus offline ja online kartoille</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd on avoimen lähdekoodin navigointisovellus offline ja online kartoille</string>
 	<string name="recalculate_route_to_your_location">Liikennemuoto:</string>
-	<string name="select_navigation_mode">Valitse liikennemuoto:</string>
+	<string name="select_navigation_mode">Valitse liikennemuoto</string>
 	<string name="monitor_preferences">Seuranta</string>
 	<string name="day_night_info_description">Auringon nousu : %1$s
 \nAuringon lasku : %2$s</string>
@@ -458,7 +458,7 @@
 	<string name="screen_is_locked">Poistaaksesi näytön lukituksen paina lukitus kuvaketta</string>
 	<string name="map_widget_map_select">Kartan lähde</string>
 	<string name="map_widget_config">Muokkaa näyttöä</string>
-	<string name="map_widget_top_stack">tilan näyttö</string>
+	<string name="map_widget_top_stack">Tilan näyttö:</string>
 	<string name="map_widget_left_stack">Vasen panelli:</string>
 	<string name="map_widget_time">Aikaa jäljellä</string>
 	<string name="bg_service_screen_unlock">Poista näytön lukitus</string>
@@ -491,7 +491,7 @@
 	<string name="offline_navigation_not_available">OsmAnd offline navigointi ei ole saatavilla tilapäisesti.</string>
 	<string name="left_side_navigation">Vasemman kaistan ajo</string>
 	<string name="left_side_navigation_descr">Valitse maissa joissa on käytössä vasen kaista</string>
-	<string name="download_link_and_local_description">Paina tästä ladataksesi tai päivittääksesi offline dataa.\nPaina mitä tahansa \"tuotetta\" nähdäksesi lisätietoja, paina ja pidä laittaaksesi pois käytöstä tai poistaaksesi. Nykyinen tieto järjestelmässä (%1$s free)</string>
+	<string name="download_link_and_local_description">Paina tästä ladataksesi tai päivittääksesi offline dataa.\nPaina mitä tahansa \"tuotetta\" nähdäksesi lisätietoja, paina ja pidä laittaaksesi pois käytöstä tai poistaaksesi. Vapaata muistia laitteessa (%1$s vapaata)</string>
 	<string name="unknown_location">Sijaintia ei tiedetä vielä</string>
 	<string name="context_menu_item_directions">Reittiohjeet tänne</string>
 	<string name="local_indexes_cat_tile">Online ja muut karttasijainnit</string>
@@ -603,4 +603,8 @@
 	<string name="osmand_parking_plugin_description">Tällä lisäosalla voit tallentaa pysäköidyn auton sijainnin.</string>
 	<string name="context_menu_item_add_parking_point">Merkitse pysäköintipaikaksi</string>
 	<string name="context_menu_item_delete_parking_point">Poista pysäköintimerkki</string>
+	<string name="default_buttons_reset">Nollaa</string>
+	<string name="use_osmand_routing_service">OsmAnd navigointi &gt;20km</string>
+	<string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
+	<string name="voice_is_not_available_title">Ei ääniohjausta valittuna</string>
 	</resources>
