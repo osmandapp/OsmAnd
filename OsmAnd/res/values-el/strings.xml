@@ -1099,4 +1099,7 @@
     <string name="tip_altitude_offset_t">"\tΟι περισσότερες συσκευές GPS εμφανίζουν το υψόμετρο σε σύστημα αναφοράς βασισμένο στο ελλειψοειδές WGS84, στο οποίο η μετατροπή στα συστήματα που χρησιμοποιούνται τοπικά απαιτεί διόρθωση εξαρτούμενη από τη θέση.
 \n\tΜια καλύτερη προσέγγιση σε αυτά τα τοπικά συστήματα είναι το σύστημα αναφοράς EGM96. Ο OsmAnd πλέον υποστηρίζει την αυτόματη εμφάνιση των υψομέτρων στο σύστημα EGM96.
 \n\tΓια να το πετύχετε αυτό, απλά κάντε λήψη του αρχείου WW15MGH.DAC μέσω του διαχειριστή Offline δεδομένων (το αυθεντικό είναι στο http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    </resources>
+    <string name="rendering_attr_noAdminboundaries_name">Απόκρυψη ορίων</string>
+	<string name="rendering_attr_noAdminboundaries_description">Αναστολή εμφάνισης διοικητικών ορίων 5-9</string>
+	<string name="tip_altitude_offset">Ένδειξη Υψομέτρου - Διόρθωση Λάθους</string>
+	</resources>
