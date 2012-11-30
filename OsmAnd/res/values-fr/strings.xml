@@ -1139,4 +1139,6 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="route_descr_from_to">De %1$s\nVers %2$s</string>
     <string name="route_descr_from_to_via">De : %1$s\nVia : %2$s\nVers : %3$s</string>
     <string name="map_widget_max_speed">Limite de vitesse</string>
+    <string name="tip_altitude_offset">Affichage de l\'altitude - Écart de correction</string>
+	<string name="monitoring_control_start">Démarrage</string>
     </resources>
