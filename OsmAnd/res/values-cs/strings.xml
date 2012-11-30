@@ -1117,4 +1117,8 @@
     <string name="route_descr_from_to">Z %1$s\nDo %2$s</string>
     <string name="route_descr_from_to_via">Z : %1$s\nPřes : %2$s\nDo : %3$s</string>
     <string name="map_widget_max_speed">Rychlostní omezení</string>
+    <string name="rendering_attr_noAdminboundaries_name">Skrýt hranice</string>
+	<string name="rendering_attr_noAdminboundaries_description">Potlačit zobrazení správních hranic 5-9</string>
+	<string name="tip_altitude_offset">Korekce nadmořské výšky</string>
+	<string name="monitoring_control_start">začít</string>
     </resources>
