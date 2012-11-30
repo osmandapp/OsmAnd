@@ -20,7 +20,7 @@
 		type="string" possibleValues="default,car,bicycle,pedestrian"/>
 	<renderingProperty attr="noPolygons" name="Hide polygons" description="Make all areal land features on map transparent"
 		type="boolean" possibleValues=""/>
-	<renderingProperty attr="noAdminlevels" name="Hide admin levels" description="Suppress display of admin levels 5-9"
+	<renderingProperty attr="noAdminboundaries" name="Hide boundaries" description="Suppress display of admin levels 5-9"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="showRoadMaps" name="Show road maps" description="Select how to show maps that have only road information."
 		type="string" possibleValues="Always - never show regular maps,Where no regular map is available,Never"/>
@@ -1593,15 +1593,15 @@
 			<filter minzoom="11" strokeWidth="3"/>
 		</filter>
 
-		<filter noAdminlevels="false" tag="admin_level" value="5" minzoom="11" color="#2A800080" strokeWidth="3" pathEffect="6_3_2_3_2_3"/>
-		<filter noAdminlevels="false" tag="admin_level" value="6" minzoom="11" color="#2A800080" strokeWidth="3" pathEffect="6_3_2_3"/>
-		<filter noAdminlevels="false" tag="admin_level" value="7" minzoom="12" color="#2A800080" strokeWidth="3" pathEffect="5_1"/>
-		<filter noAdminlevels="false" tag="admin_level" value="8" minzoom="12" color="#2A800080" strokeWidth="3" pathEffect="5_1"/>
-		<filter noAdminlevels="false" tag="admin_level" value="9" minzoom="13" color="#2A800080" strokeWidth="3" pathEffect="4_1"/>
-		<filter noAdminlevels="false" tag="admin_level" value="10" minzoom="13" color="#2A800080" strokeWidth="3" pathEffect="4_1"/>
+		<filter noAdminboundaries="false" tag="admin_level" value="5" minzoom="11" color="#2A800080" strokeWidth="3" pathEffect="6_3_2_3_2_3"/>
+		<filter noAdminboundaries="false" tag="admin_level" value="6" minzoom="11" color="#2A800080" strokeWidth="3" pathEffect="6_3_2_3"/>
+		<filter noAdminboundaries="false" tag="admin_level" value="7" minzoom="12" color="#2A800080" strokeWidth="3" pathEffect="5_1"/>
+		<filter noAdminboundaries="false" tag="admin_level" value="8" minzoom="12" color="#2A800080" strokeWidth="3" pathEffect="5_1"/>
+		<filter noAdminboundaries="false" tag="admin_level" value="9" minzoom="13" color="#2A800080" strokeWidth="3" pathEffect="4_1"/>
+		<filter noAdminboundaries="false" tag="admin_level" value="10" minzoom="13" color="#2A800080" strokeWidth="3" pathEffect="4_1"/>
 
-		<filter noAdminlevels="false" tag="boundary" value="national_park" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_1"/>
-			<filter noAdminlevels="false" tag="boundary" value="national_park" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="4_1"/>
+		<filter noAdminboundaries="false" tag="boundary" value="national_park" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_1"/>
+			<filter noAdminboundaries="false" tag="boundary" value="national_park" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="4_1"/>
 	</line>
 
 </renderingStyle>

@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="rendering_attr_noAdminlevels_name">Keine Grenzen anzeigen</string>
-	<string name="rendering_attr_noAdminlevels_description">Unterdrückt die Anzeige der Grenzverläufe Level 5-9</string>
+	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
+	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige der Grenzverläufe Level 5-9</string>
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">\tDie meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System. Osmand unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
