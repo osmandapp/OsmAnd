@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\nLive tracking</string>
   <string name="live_monitoring_mode_on">Stop\nLive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -1039,7 +1039,7 @@
     <string name="safe_mode">Veilige modus</string>
     <string name="native_library_not_running">Het programma werkt in veilige modus (uitzetten via Instellingen).</string>
     <string name="background_service_is_enabled_question">Achtergrond service staat nog aan. Wil je dat uitzetten?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Wijzigingen in 1.0 :
+    <string name="tip_recent_changes_1_0_0_t">"Wijzigingen in 1.0.0 :
 \n\t* Verbeterde routeberekening, sneller en nauwkeuriger (tot 250 km)
 \n\t* Wegenkaart (toont alleen wegen)\n\t* Kaart houdt de positie vast na onderbrekingen
 \n\t* Zet achtergrond service aan tijdens navigatie "</string>

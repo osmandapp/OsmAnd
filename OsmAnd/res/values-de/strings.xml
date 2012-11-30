@@ -24,7 +24,7 @@
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Applikation läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
 	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er beendet werden?</string>
-	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0 :
+	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0.0 :
 		\n\t* Verbessertes Routing, schneller und präzise, bis 250km
 		\n\t* Option reiner Straßenkarten
 		\n\t* Karte behält nach Unterbrechungen Standortbindung
