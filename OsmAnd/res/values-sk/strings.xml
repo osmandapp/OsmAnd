@@ -1113,4 +1113,10 @@
     <string name="route_descr_from_to_via">Z : %1$s\nCez : %2$s\nDo : %3$s</string>
     <string name="map_widget_max_speed">Obmedzenie rýchlosti</string>
     <string name="monitoring_control_start">spustiť</string>
+    <string name="rendering_attr_noAdminboundaries_name">Skryť hranice</string>
+	<string name="rendering_attr_noAdminboundaries_description">Potlačiť zobrazenie regionálnej hranice (admin úrovne 5-9)</string>
+	<string name="tip_altitude_offset">Zobrazenie nadmorskej výšky - Korekcia ofsetu</string>
+	<string name="tip_altitude_offset_t">"\tVäčšina GPS zariadení meria nadmorskú výšku podľa referenčného systému WGS84, z ktorého prepočet na lokálne používaný systém vyžaduje korekcie voči aktuálnej polohe.
+\n\tNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96. OsmAnd teraz tiež podporuje automatické zobrazovanie nadmorských výškach v systéme EGM96.
+\n\tZa týmto účelom jednoducho stiahnite súbor WW15MGH.DAC cez Offline Data Manager (pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     </resources>
