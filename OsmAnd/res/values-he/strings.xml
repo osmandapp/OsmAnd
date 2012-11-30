@@ -1103,4 +1103,6 @@
     <string name="map_widget_max_speed">מהירות מותרת</string>
     <string name="tip_altitude_offset">תצוגת גובה - תיקון סטייה</string>
 	<string name="monitoring_control_start">התחלה</string>
-    </resources>
+    <string name="rendering_attr_noAdminboundaries_name">הסתרת הגבולות</string>
+	<string name="rendering_attr_noAdminboundaries_description">הסתרת דרגות ניהול 5-9</string>
+	</resources>
