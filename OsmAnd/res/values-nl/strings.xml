@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\nLive tracking</string>
   <string name="live_monitoring_mode_on">Stop\nLive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -1061,4 +1061,6 @@
 \n\tEen nauwkeuriger benadering voor deze systemen is de EGM96 referentie. OsmAnd ondersteunt nu automatische hoogte-weergave in het EGM96 systeem.
 \n\tOm dit te bereiken kan je het bestand WW15MGH.DAC downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">start</string>
-    </resources>
+    <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
+	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
+	</resources>
