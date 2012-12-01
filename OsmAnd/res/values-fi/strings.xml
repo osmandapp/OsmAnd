@@ -607,4 +607,13 @@
 	<string name="use_osmand_routing_service">OsmAnd navigointi &gt;20km</string>
 	<string name="specified_dir_doesnt_exist">Ei löydetty määriteltyä hakemistoa.</string>
 	<string name="voice_is_not_available_title">Ei ääniohjausta valittuna</string>
+	<string name="unknown_from_location">Aloituspistettä ei ole vielä määritelty</string>
+	<string name="modify_transparency">Säädä läpinäkyvyyttä (0 - läpinäkyvä, 255 - läpinäkymätön)</string>
+	<string name="confirm_interrupt_download">Haluatko keskeyttää tiedoston latauksen?</string>
+	<string name="basemap_was_selected_to_download">Peruskartta vaaditaan sovelluksen kunnolliseen toimintaan ja siksi se on valittu ladattavaksi.</string>
+	<string name="select_index_file_to_download">Ei löydetty mitään. Jos et löydä omaa aluettasi voit tehdä sen itse (katso http://osmand.net).</string>
+	<string name="local_indexes_cat_map">Offline kartat (vektori)</string>
+	<string name="gpx_index_settings_descr">" (sisältää GPX analysaattorin)"</string>
+	<string name="index_settings_descr">Lataa, katso lisätietoja ja hallinnoi offline karttoja</string>
+	<string name="online_map_settings">Online kartat</string>
 	</resources>
