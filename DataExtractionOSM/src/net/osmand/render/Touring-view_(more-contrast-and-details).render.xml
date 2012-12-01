@@ -119,6 +119,7 @@
 
 	<line>
 		<group>
+			<!-- (Night mode roads Brightness=80%) -->
 			<filter appMode="car" tag="highway" value="motorway" nightMode="true" color="#c6cc26" color_0="#cc2626"/>
 			<filter appMode="car" tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#cc2626"/>
 			<filter tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
