@@ -652,7 +652,7 @@
 	<string name="continuous_rendering">Kontin. Kartenaufbau</string>
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal</string>
 	<string name="rendering_exception">Fehler aufgetreten beim Rendern des gewählten Gebietes</string>
-	<string name="show_point_options">Positionsoptionen</string>
+	<string name="show_point_options">Verwende Position ...</string>
 	<string name="renderer_load_sucess">Renderer erfolgreich geladen</string>
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
 	<string name="renderers">Vektor-Renderer</string>
