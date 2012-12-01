@@ -119,8 +119,8 @@
 
 	<line>
 		<group>
-			<!-- filter tag="highway" value="motorway" nightMode="true" color="#c7cd25" color_0="#cd2525"/>
-			<filter tag="highway" value="trunk" nightMode="true" color="#9a9a9a" color_0="#cd2525"/ -->
+			<filter appMode="car" tag="highway" value="motorway" nightMode="true" color="#c6cc26" color_0="#cc2626"/>
+			<filter appMode="car" tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#cc2626"/>
 			<filter tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
 			<filter tag="highway" value="motorway" color="#f7fe2e" color_0="#fe2e2e"/>
 			<filter tag="highway" value="trunk" color="#c0c0c0" color_0="#fe2e2e"/>
@@ -170,8 +170,8 @@
 		</group>
 
 		<group>
-			<!-- filter tag="highway" value="motorway_link" nightMode="true" color="#c7cd25" color_0="#cd2525"/>
-			<filter tag="highway" value="trunk_link" nightMode="true" color="#9a9a9a" color_0="#cd2525"/ -->
+			<filter appMode="car" tag="highway" value="motorway_link" nightMode="true" color="#c6cc26" color_0="#cc2626"/>
+			<filter appMode="car" tag="highway" value="trunk_link" nightMode="true" color="#ffffff" color_0="#cc2626"/>
 			<filter tag="highway" value="trunk_link" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
 			<filter tag="highway" value="motorway_link" color="#f7fe2e" color_0="#fe2e2e"/>
 			<filter tag="highway" value="trunk_link" color="#c0c0c0" color_0="#fe2e2e"/>
@@ -200,8 +200,8 @@
 		</group>
 
 		<group>
-			<!-- filter tag="highway" value="primary" nightMode="true" color="#cd6a6a"/>
-			<filter tag="highway" value="primary_link" nightMode="true" color="#cd6a6a"/ -->
+			<filter appMode="car" tag="highway" value="primary" nightMode="true" color="#cc6882"/>
+			<filter appMode="car" tag="highway" value="primary_link" nightMode="true" color="#cc6882"/>
 			<filter tag="highway" value="primary" color="#ff80a0"/>
 			<filter tag="highway" value="primary_link" color="#ff80a0"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
@@ -255,8 +255,8 @@
 		</group>
 
 		<group>
-			<!-- filter tag="highway" value="secondary" nightMode="true" color="#cd9d6a"/>
-			<filter tag="highway" value="secondary_link" nightMode="true" color="#cd9d6a"/ -->
+			<filter appMode="car" tag="highway" value="secondary" nightMode="true" color="#cca568"/>
+			<filter appMode="car" tag="highway" value="secondary_link" nightMode="true" color="#cca568"/>
 			<filter tag="highway" value="secondary" color="#ffd080"/>
 			<filter tag="highway" value="secondary_link" color="#ffd080"/>
 			<groupFilter shadowRadius="1" cap="ROUND">
@@ -310,8 +310,8 @@
 		</group>
 
 		<group>
-			<!-- filter tag="highway" value="tertiary" nightMode="true" color="#cacd6a"/>
-			<filter tag="highway" value="tertiary_link" nightMode="true" color="#cacd6a"/ -->
+			<filter appMode="car" tag="highway" value="tertiary" nightMode="true" color="#cccc68"/>
+			<filter appMode="car" tag="highway" value="tertiary_link" nightMode="true" color="#cccc68"/>
 			<filter tag="highway" value="tertiary" color="#ffff80"/>
 			<filter tag="highway" value="tertiary_link" color="#ffff80"/>
 			<groupFilter  shadowRadius="1" cap="ROUND">
