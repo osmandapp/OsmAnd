@@ -21,10 +21,10 @@
 	<order>
 		<!-- Winter layers -->
 		<group objectType="2">
-			<filter tag="oa_nordic" value="" order="57"/>
-			<filter tag="oa_downhill" value="" order="57"/>
-			<filter tag="oa_skitour" value="" order="57"/>
-			<filter tag="oa_hike" value="" order="57"/>
+			<filter tag="oa_nordic" value="" order="60"/>
+			<filter tag="oa_downhill" value="" order="60"/>
+			<filter tag="oa_skitour" value="" order="60"/>
+			<filter tag="oa_hike" value="" order="60"/>
 		</group>
 	</order>
 
