@@ -415,7 +415,7 @@
 				<filter additional="sac_scale=alpine_hiking" color="#0033ff" pathEffect=""/>
 				<filter additional="sac_scale=demanding_alpine_hiking" color="#0033ff" pathEffect="10_3"/>
 				<filter additional="sac_scale=difficult_alpine_hiking" color="#0033ff" pathEffect="3_3"/>
-				<filter pathEffect="10_3" color="#000000">
+				<filter pathEffect="4_2" color="#000000">
 					<filter nightMode="true" color="#787878"/>
 				</filter>
 				<groupFilter>
@@ -431,7 +431,7 @@
 				<filter additional="sac_scale=alpine_hiking" pathEffect="2_6"/>
 				<filter additional="sac_scale=demanding_alpine_hiking" pathEffect="2_6"/>
 				<filter additional="sac_scale=difficult_alpine_hiking" pathEffect="2_6"/>
-				<filter pathEffect="10_3"/>
+				<filter pathEffect="4_2"/>
 				<groupFilter>
 					<filter appMode="pedestrian">
 						<filter minzoom="12" maxzoom="12"  hmRendered="true" strokeWidth="1.4"/>
