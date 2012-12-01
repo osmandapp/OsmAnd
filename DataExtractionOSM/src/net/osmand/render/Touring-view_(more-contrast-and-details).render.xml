@@ -410,6 +410,7 @@
 			</filter>
 
 			<filter tag="highway" value="path" alpineHiking="true">
+				<filter additional="sac_scale=hiking" color="#000000" pathEffect="10_3"/>
 				<filter additional="sac_scale=mountain_hiking" color="#ff0000" pathEffect=""/>
 				<filter additional="sac_scale=demanding_mountain_hiking" color="#ff0000" pathEffect="10_3"/>
 				<filter additional="sac_scale=alpine_hiking" color="#0033ff" pathEffect=""/>
@@ -426,6 +427,7 @@
 			</filter>
 
 			<filter tag="highway" value="path" color="#000000">
+				<filter additional="sac_scale=hiking" pathEffect="10_3"/>
 				<filter additional="sac_scale=mountain_hiking" pathEffect="5_5"/>
 				<filter additional="sac_scale=demanding_mountain_hiking" pathEffect="2_6"/>
 				<filter additional="sac_scale=alpine_hiking" pathEffect="2_6"/>
