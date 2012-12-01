@@ -420,7 +420,7 @@
 	<string name="tip_location_sharing">Deljenje lokacije</string>
 	<string name="tip_location_sharing_t">"\tDelite lahko lokacije zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev lokacije:\n\tUporabi  \'Kontekstni meni karte\' -&gt; \'Skupna raba lokacije\' meni.\n\tNato izberite način, za deljenje svoje lokacije. Izbire so: e-pošta, SMS (besedilo), ali pa samo kopiranje koordinat lokacije v odlagališče. "</string>
 	<string name="tip_favorites">Priljubljene lokacije</string>
-	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0:\n\t* Izboljšano, hitrejše in bolj natančno usmerjanje (do 250 km)\n\t* Zemljevid cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju "</string>
+	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0.0:\n\t* Izboljšano usmerjanje: hitrejše in natančnejše, do 250 km\n\t* Možnost prikaza le cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju\n\t* Improved \'touring view\' with new road styles, more map details, and Alpine hiking (SAC scale) option\n\t* Uporaba EGM96 za popravek nadmorskih višin izmerjenih s sprejemnikom GPS "</string>
     <string name="close_changeset">Zapri paket sprememb</string>
 	<string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner ni nameščena. Naj jo poiščem v Market-u?</string>
 	<string name="rendering_attr_roadColors_description">Izberite barvno shemo cest:</string>
