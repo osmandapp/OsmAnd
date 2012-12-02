@@ -39,7 +39,7 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains(".ttsvoice.zip")) {
 				nameId = R.string.index_name_tts_voice;
 				order = 2;
-			} else if (lc.startsWith("us")) {
+			} else if (lc.startsWith("us_")) {
 				nameId = R.string.index_name_us;
 				order = 31;
 			} else if (lc.contains("_northamerica_")) {
@@ -63,7 +63,7 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.startsWith("russia_")) {
 				nameId = R.string.index_name_russia;
 				order = 18;
-			} else if (lc.contains("africa")) {
+			} else if (lc.contains("africa_")) {
 				nameId = R.string.index_name_africa;
 				order = 80;
 			} else if (lc.contains("_asia_")) {
