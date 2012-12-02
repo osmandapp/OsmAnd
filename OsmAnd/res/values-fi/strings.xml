@@ -616,4 +616,13 @@
 	<string name="gpx_index_settings_descr">" (sisältää GPX analysaattorin)"</string>
 	<string name="index_settings_descr">Lataa, katso lisätietoja ja hallinnoi offline karttoja</string>
 	<string name="online_map_settings">Online kartat</string>
+	<string name="process_navigation_service">OsmAnd navigointipalvelu</string>
+	<string name="network_provider">Verkko</string>
+	<string name="background_router_service_descr">Suorita OsmAnd sovellusta taustalla seurataksesi sijaintia silloin kun näyttö on pois päältä</string>
+	<string name="background_router_service">Suorita taustalla</string>
+	<string name="hide_poi_filter">Piilota suodatin</string>
+	<string name="show_poi_filter">Näytä suodatin</string>
+	<string name="search_poi_filter">Suodatin</string>
+	<string name="failed_op">epäonnistui</string>
+	<string name="error_calculating_route_occured">Tapahtui virhe laskettaessa reittiä</string>
 	</resources>
