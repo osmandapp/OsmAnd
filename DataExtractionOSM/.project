@@ -20,4 +20,11 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>gen</name>
+			<type>2</type>
+			<locationURI>OSMAND_TRUNK/OsmAnd/gen</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

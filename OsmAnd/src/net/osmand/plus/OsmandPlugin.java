@@ -14,6 +14,7 @@ import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
+import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -23,6 +24,7 @@ import org.apache.commons.logging.Log;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
 import android.preference.PreferenceScreen;
 
@@ -34,6 +36,8 @@ public abstract class OsmandPlugin {
 	
 	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	private static final String PARKING_PLUGIN_ACTIVITY = "net.osmand.parkingPlugin.ParkingPluginActivity"; //$NON-NLS-1$
+	
+	private static final String OSMODROID_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	
 	
 	public abstract String getId();
@@ -64,8 +68,8 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AccessibilityPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
-//		installedPlugins.add(parkingPlugin);
 		installParkingPlugin(app);
+		installOsmodroidPlugin(app);
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
@@ -226,6 +230,21 @@ public abstract class OsmandPlugin {
 			app.getSettings().enablePlugin(parkingPlugin.getId(), true);
 		} else {
 			app.getSettings().enablePlugin(parkingPlugin.getId(), false);
+		}
+	}
+	
+	private static void installOsmodroidPlugin(OsmandApplication app) {
+		Intent parkingIntent = new Intent();
+		boolean installed = false;
+		try{
+			installed = app.getPackageManager().getPackageInfo(OSMODROID_PLUGIN_COMPONENT, 0) != null;
+		} catch ( NameNotFoundException e){
+		}
+		if(installed) {
+			installedPlugins.add(new OsMoDroidPlugin(app));
+			app.getSettings().enablePlugin(OsMoDroidPlugin.ID, true);
+		} else {
+			app.getSettings().enablePlugin(OsMoDroidPlugin.ID, false);
 		}
 	}
 }

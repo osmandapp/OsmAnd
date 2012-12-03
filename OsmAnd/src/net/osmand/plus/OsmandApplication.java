@@ -43,7 +43,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
@@ -62,14 +61,14 @@ public class OsmandApplication extends Application {
 	RoutingHelper routingHelper = null;
 	FavouritesDbHelper favorites = null;
 	CommandPlayer player = null;
-	
+
 	OsmandSettings osmandSettings = null;
-	
+
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
 	BidForFixHelper bidforfix;
-	
+
 	// start variables
 	private ProgressDialogImplementation startDialog;
 	private List<String> startingWarnings;
@@ -80,18 +79,19 @@ public class OsmandApplication extends Application {
 
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
-	
+	private AndroidClientContext clientContext;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
+
 		long timeToStart = System.currentTimeMillis();
 		osmandSettings = createOsmandSettingsInstance();
 		routingHelper = new RoutingHelper(this, player);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
-		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support), getString(R.string.default_buttons_cancel));
+		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support),
+				getString(R.string.default_buttons_cancel));
 		savingTrackHelper = new SavingTrackHelper(this);
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		uiHandler = new Handler();
@@ -103,7 +103,7 @@ public class OsmandApplication extends Application {
 		}
 		timeToStart = System.currentTimeMillis();
 		OsmandPlugin.initPlugins(this);
-		
+
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		}
@@ -116,16 +116,17 @@ public class OsmandApplication extends Application {
 			routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
 		}
 		if (bidforfix != null) {
-    		bidforfix.onDestroy();
-    	}
+			bidforfix.onDestroy();
+		}
 	}
 
 	public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
 	}
-	
+
 	/**
 	 * Creates instance of OsmandSettings
+	 * 
 	 * @return Reference to instance of OsmandSettings
 	 */
 	protected OsmandSettings createOsmandSettingsInstance() {
@@ -134,23 +135,23 @@ public class OsmandApplication extends Application {
 
 	/**
 	 * Application settings
+	 * 
 	 * @return Reference to instance of OsmandSettings
 	 */
 	public OsmandSettings getSettings() {
-		if(osmandSettings == null) {
+		if (osmandSettings == null) {
 			LOG.error("Trying to access settings before they were created");
 		}
 		return osmandSettings;
 	}
-	
+
 	public SavingTrackHelper getSavingTrackHelper() {
 		return savingTrackHelper;
 	}
-	
+
 	public LiveMonitoringHelper getLiveMonitoringHelper() {
 		return liveMonitoringHelper;
 	}
-	
 
 	public PoiFiltersHelper getPoiFilters() {
 		if (poiFilters == null) {
@@ -206,18 +207,16 @@ public class OsmandApplication extends Application {
 		super.onLowMemory();
 		manager.onLowMemory();
 	}
-	
-	
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		if (prefferedLocale != null && !newConfig.locale.getLanguage().equals(prefferedLocale.getLanguage())) {
 			super.onConfigurationChanged(newConfig);
 			// ugly fix ! On devices after 4.0 screen is blinking when you rotate device!
-			if(Build.VERSION.SDK_INT < 14 ){
+			if (Build.VERSION.SDK_INT < 14) {
 				newConfig.locale = prefferedLocale;
 			}
-			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());				
+			getBaseContext().getResources().updateConfiguration(newConfig, getBaseContext().getResources().getDisplayMetrics());
 			Locale.setDefault(prefferedLocale);
 		} else {
 			super.onConfigurationChanged(newConfig);
@@ -240,8 +239,7 @@ public class OsmandApplication extends Application {
 
 	/**
 	 * @param activity
-	 *            that supports onCreateDialog({@link #PROGRESS_DIALOG}) and
-	 *            returns @param progressdialog
+	 *            that supports onCreateDialog({@link #PROGRESS_DIALOG}) and returns @param progressdialog
 	 * @param progressDialog
 	 *            - it should be exactly the same as onCreateDialog
 	 * @return
@@ -255,10 +253,11 @@ public class OsmandApplication extends Application {
 					SpecialPhrases.setLanguage(this, osmandSettings);
 				} catch (IOException e) {
 					LOG.error("I/O exception", e);
-					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible", Toast.LENGTH_LONG);
+					Toast error = Toast.makeText(this, "Error while reading the special phrases. Restart OsmAnd if possible",
+							Toast.LENGTH_LONG);
 					error.show();
 				}
-				
+
 				progressDialog.setTitle(getString(R.string.loading_data));
 				progressDialog.setMessage(getString(R.string.reading_indexes));
 				activity.showDialog(PROGRESS_DIALOG);
@@ -296,20 +295,15 @@ public class OsmandApplication extends Application {
 				Builder builder = new AlertDialog.Builder(uiContext);
 				builder.setCancelable(true);
 				builder.setNegativeButton(R.string.default_buttons_cancel, null);
-				builder.setPositiveButton(R.string.default_buttons_ok,
-						new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								Intent intent = new Intent(uiContext,
-										SettingsActivity.class);
-								intent.putExtra(
-										SettingsActivity.INTENT_KEY_SETTINGS_SCREEN,
-										SettingsActivity.SCREEN_NAVIGATION_SETTINGS);
-								uiContext.startActivity(intent);
-							}
-						});
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(uiContext, SettingsActivity.class);
+						intent.putExtra(SettingsActivity.INTENT_KEY_SETTINGS_SCREEN, SettingsActivity.SCREEN_NAVIGATION_SETTINGS);
+						uiContext.startActivity(intent);
+					}
+				});
 				builder.setTitle(R.string.voice_is_not_available_title);
 				builder.setMessage(R.string.voice_is_not_available_msg);
 				builder.show();
@@ -324,8 +318,7 @@ public class OsmandApplication extends Application {
 	}
 
 	private void initVoiceDataInDifferentThread(final Activity uiContext, final String voiceProvider, final Runnable run) {
-		final ProgressDialog dlg = ProgressDialog.show(uiContext,
-				getString(R.string.loading_data),
+		final ProgressDialog dlg = ProgressDialog.show(uiContext, getString(R.string.loading_data),
 				getString(R.string.voice_data_initializing));
 		new Thread(new Runnable() {
 			@Override
@@ -355,11 +348,10 @@ public class OsmandApplication extends Application {
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
 	}
-	
+
 	public BidForFixHelper getBidForFix() {
 		return bidforfix;
 	}
-	
 
 	public synchronized void closeApplication(final Activity activity) {
 		if (getNavigationService() != null) {
@@ -383,7 +375,7 @@ public class OsmandApplication extends Application {
 			manager.close();
 		}
 		applicationInitializing = false;
-		if(getNavigationService() != null) {
+		if (getNavigationService() != null) {
 			final Intent serviceIntent = new Intent(this, NavigationService.class);
 			stopService(serviceIntent);
 		}
@@ -527,7 +519,7 @@ public class OsmandApplication extends Application {
 		public DefaultExceptionHandler() {
 			defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
 			intent = PendingIntent.getActivity(OsmandApplication.this.getBaseContext(), 0,
-		            new Intent(OsmandApplication.this.getBaseContext(), OsmandIntents.getMainMenuActivity()), 0);
+					new Intent(OsmandApplication.this.getBaseContext(), OsmandIntents.getMainMenuActivity()), 0);
 		}
 
 		@Override
@@ -538,8 +530,8 @@ public class OsmandApplication extends Application {
 				PrintStream printStream = new PrintStream(out);
 				ex.printStackTrace(printStream);
 				StringBuilder msg = new StringBuilder();
-				msg.append("Version  " + Version.getFullVersion(OsmandApplication.this)+"\n"). //$NON-NLS-1$ 
-					append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
+				msg.append("Version  " + Version.getFullVersion(OsmandApplication.this) + "\n"). //$NON-NLS-1$ 
+						append(DateFormat.format("dd.MM.yyyy h:mm:ss", System.currentTimeMillis()));
 				try {
 					PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
 					if (info != null) {
@@ -548,15 +540,15 @@ public class OsmandApplication extends Application {
 				} catch (Throwable e) {
 				}
 				msg.append("\n"). //$NON-NLS-1$//$NON-NLS-2$
-					append("Exception occured in thread " + thread.toString() + " : \n"). //$NON-NLS-1$ //$NON-NLS-2$
-					append(new String(out.toByteArray()));
+						append("Exception occured in thread " + thread.toString() + " : \n"). //$NON-NLS-1$ //$NON-NLS-2$
+						append(new String(out.toByteArray()));
 
 				if (file.getParentFile().canWrite()) {
 					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
 					writer.write(msg.toString());
 					writer.close();
 				}
-				if(routingHelper.isFollowingMode()) {
+				if (routingHelper.isFollowingMode()) {
 					AlarmManager mgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 					mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 2000, intent);
 					System.exit(2);
@@ -569,8 +561,8 @@ public class OsmandApplication extends Application {
 
 		}
 	}
-	
-	public boolean accessibilityExtensions(){
+
+	public boolean accessibilityExtensions() {
 		return osmandSettings.ACCESSIBILITY_EXTENSIONS.get();
 	}
 
@@ -580,7 +572,14 @@ public class OsmandApplication extends Application {
 			return true;
 		else if (mode == AccessibilityMode.OFF)
 			return false;
-		return ((AccessibilityManager)getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
+		return ((AccessibilityManager) getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
+	}
+
+	public ClientContext getClientContext() {
+		if (clientContext == null) {
+			clientContext = new AndroidClientContext(this);
+		}
+		return clientContext;
 	}
 
 }

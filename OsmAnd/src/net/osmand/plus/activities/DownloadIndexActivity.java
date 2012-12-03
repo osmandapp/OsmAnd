@@ -1,6 +1,14 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.data.IndexConstants.*;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
+import static net.osmand.data.IndexConstants.EXTRA_EXT;
+import static net.osmand.data.IndexConstants.EXTRA_ZIP_EXT;
+import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
+import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -19,19 +27,21 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.DownloadIndexAdapter;
 import net.osmand.plus.download.DownloadIndexListThread;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexItem;
 import net.osmand.plus.download.DownloadTracker;
+import net.osmand.plus.download.IndexItem;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -88,14 +98,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private DownloadFileHelper downloadFileHelper = null;
 	private OsmandSettings settings;
 	
-	
-	
-	public enum DownloadActivityType {
-		NORMAL_FILE,
-		ROADS_FILE,
-		SRTM_FILE
-	}
-	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -110,7 +112,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		
 		
 		
-		downloadFileHelper = new DownloadFileHelper(this);
+		downloadFileHelper = new DownloadFileHelper(getClientContext());
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -212,7 +214,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						IndexItem es = listAdapter.getChild(j, i);
 						if (!entriesToDownload.containsKey(es.getFileName())) {
 							selected++;
-							entriesToDownload.put(es.getFileName(), es.createDownloadEntry(DownloadIndexActivity.this, type));
+							entriesToDownload.put(es.getFileName(), es.createDownloadEntry(getClientContext(), type));
 						}
 					}
 				}
@@ -391,7 +393,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			return true;
 		}
 		
-		final DownloadEntry entry = e.createDownloadEntry(DownloadIndexActivity.this, type);
+		final DownloadEntry entry = e.createDownloadEntry(getClientContext(), type);
 		if (entry != null) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
@@ -641,5 +643,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 			return res;
 		}
+	}
+	
+	public ClientContext getClientContext() {
+		return getMyApplication().getClientContext();
 	}
 }

@@ -32,4 +32,6 @@ public class IndexConstants {
 	
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
 	
+	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
+	
 }

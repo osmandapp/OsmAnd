@@ -11,6 +11,9 @@
     -->
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin (TODO description)</string>
+    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="tip_altitude_offset">Altitude Display - Offset Correction</string>
 	<string name="tip_altitude_offset_t">\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 		\n\tA better approximation to these local systems is the EGM96 reference. OsmAnd now also supports the automatic display of altitudes in the EGM96 system.

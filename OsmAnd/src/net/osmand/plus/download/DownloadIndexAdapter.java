@@ -5,13 +5,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.data.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
-import net.osmand.plus.activities.DownloadIndexActivity.DownloadActivityType;
-import net.osmand.plus.download.DownloadOsmandIndexesHelper.IndexItem;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -36,7 +33,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	public DownloadIndexAdapter(DownloadIndexActivity downloadActivity, List<IndexItem> indexFiles) {
 		this.downloadActivity = downloadActivity;
 		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity, indexFiles);
+		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getClientContext(), indexFiles);
 		synchronized (this) {
 			list.clear();
 			list.addAll(cats);
@@ -83,7 +80,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		for (IndexItem i : indexFiles) {
 			this.indexFiles.add(i);
 		}
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity, indexFiles);
+		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getClientContext(), indexFiles);
 		synchronized (this) {
 			list.clear();
 			list.addAll(cats);
@@ -140,7 +137,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				list.clear();
 				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
 				if (items != null && !items.isEmpty()) {
-					list.addAll(IndexItemCategory.categorizeIndexItems(downloadActivity, items));
+					list.addAll(IndexItemCategory.categorizeIndexItems(downloadActivity.getClientContext(), items));
 				} else {
 					list.add(new IndexItemCategory(downloadActivity.getResources().getString(R.string.select_index_file_to_download), 1));
 				}
@@ -212,7 +209,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-		item.setText((e.getVisibleDescription(downloadActivity, downloadActivity.getType()) + "\n" + e.getVisibleName()).trim()); //$NON-NLS-1$
+		item.setText((e.getVisibleDescription(downloadActivity.getClientContext(), downloadActivity.getType()) + "\n" + e.getVisibleName()).trim()); //$NON-NLS-1$
 		description.setText(e.getDate() + "\n" + e.getSize() + " MB");
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);

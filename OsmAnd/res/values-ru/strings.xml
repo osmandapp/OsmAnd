@@ -1119,8 +1119,8 @@
     <string name="rendering_attr_roadColors_description">Выберите цветовую схему дорог:</string>
 	<string name="rendering_attr_roadColors_name">Цветовая схема дорог</string>
     <string name="route_descr_current_location">Текущая позиция</string>
-    <string name="route_descr_from_to">Из %1$s↵\nДо %2$s</string>
-    <string name="route_descr_from_to_via">Из : %1$s↵\nЧерез : %2$s↵\nДо : %3$s</string>
+    <string name="route_descr_from_to">Из %1$s\nДо %2$s</string>
+    <string name="route_descr_from_to_via">Из : %1$s\nЧерез : %2$s\nДо : %3$s</string>
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
 	<string name="incomplete_locale">незавершенное</string>
 	</resources>
