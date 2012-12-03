@@ -1154,4 +1154,6 @@
 \n\tPer avere questo, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="tip_altitude_offset">Visualizza Altitudine - Correzione Offset</string>
 	<string name="monitoring_control_start">avvia</string>
-    </resources>
+    <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
+	<string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
+	</resources>
