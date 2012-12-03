@@ -222,14 +222,14 @@ public class ResourceManager {
 		
 	}
 	
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom){
+	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom, boolean exact){
 		if(!imagesOnFS.containsKey(file)){
 			boolean ex = false;
 			if(map instanceof SQLiteTileSource){
 				if(((SQLiteTileSource) map).isLocked()){
 					return false;
 				}
-				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
+				ex = ((SQLiteTileSource) map).exists(x, y, zoom, exact);
 			} else {
 				if(file == null){
 					file = calculateTileId(map, x, y, zoom);
@@ -306,7 +306,7 @@ public class ResourceManager {
 		
 		if (loadFromFs && cacheOfImages.get(tileId) == null && map != null) {
 			boolean locked = map instanceof SQLiteTileSource && ((SQLiteTileSource) map).isLocked();
-			if(!loadFromInternetIfNeeded && !locked && !tileExistOnFileSystem(tileId, map, x, y, zoom)){
+			if(!loadFromInternetIfNeeded && !locked && !tileExistOnFileSystem(tileId, map, x, y, zoom, false)){
 				return null;
 			}
 			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;

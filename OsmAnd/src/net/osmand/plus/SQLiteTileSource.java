@@ -158,42 +158,39 @@ public class SQLiteTileSource implements ITileSource {
 		return db;
 	}
 	
-	public boolean exists(int zoom) {
+	public boolean exists(int x, int y, int zoom, boolean exact) {
 		SQLiteDatabase db = getDatabase();
 		if(db == null){
 			return false;
 		}
-		return true; // Always true in resampling mode
-//		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE z = ? LIMIT 1", new String[] {(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-//		try {
-//			boolean e = cursor.moveToFirst();
-//			cursor.close();
-//			return e;
-//		} catch (SQLiteDiskIOException e) {
-//			return false;
-//		}
-	}
-	
-	public boolean exists(int x, int y, int zoom) {
-		SQLiteDatabase db = getDatabase();
-		if(db == null){
-			return false;
-		}
-		//return true; // Cheat to test resampling /o modifying ressourceManager
 		long time = System.currentTimeMillis();
-		int n = zoom - baseZoom;
-		int base_xtile = x >> n;
-		int base_ytile = y >> n;
-		Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",(17 - baseZoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
-		try {
-			boolean e = cursor.moveToFirst();
-			cursor.close();
-			if (log.isDebugEnabled()) {
-				log.debug("Checking parent tile existance x = " + base_xtile + " y = " + base_ytile + " z = " + baseZoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+		if (exact || zoom <= baseZoom) {
+			Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			try {
+				boolean e = cursor.moveToFirst();
+				cursor.close();
+				if (log.isDebugEnabled()) {
+					log.debug("Checking tile existance x = " + x + " y = " + y + " z = " + zoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				}
+				return e;
+			} catch (SQLiteDiskIOException e) {
+				return false;
 			}
-			return e;
-		} catch (SQLiteDiskIOException e) {
-			return false;
+		} else {
+			int n = zoom - baseZoom;
+			int base_xtile = x >> n;
+			int base_ytile = y >> n;
+			Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",(17 - baseZoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			try {
+				boolean e = cursor.moveToFirst();
+				cursor.close();
+				if (log.isDebugEnabled()) {
+					log.debug("Checking parent tile existance x = " + base_xtile + " y = " + base_ytile + " z = " + baseZoom + " for " + (System.currentTimeMillis() - time)); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+				}
+				return e;
+			} catch (SQLiteDiskIOException e) {
+				return false;
+			}
 		}
 	}
 	
@@ -260,7 +257,7 @@ public class SQLiteTileSource implements ITileSource {
 		if(db == null){
 			return null;
 		}
-		if ( zoom <= baseZoom) {
+		if (zoom <= baseZoom) {
 			// return the normal tile if exists
 			Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			byte[] blob = null;
@@ -340,7 +337,7 @@ public class SQLiteTileSource implements ITileSource {
 		if (db == null || db.isReadOnly()) {
 			return;
 		}
-		if (exists(x, y, zoom)) {
+		if (exists(x, y, zoom, true)) {
 			return;
 		}
 		ByteBuffer buf = ByteBuffer.allocate((int) fileToSave.length());
