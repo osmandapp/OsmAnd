@@ -401,7 +401,7 @@
   <string name="continuous_rendering_descr">Mostra un rendering continuo invece di una immagine-istantanea</string>
   <string name="rendering_exception">Errore nella visualizzazione dell\'area selezionata</string>
   <string name="rendering_out_of_memory">Memoria insufficiente per visualizzare l\'area selezionata</string>
-  <string name="show_point_options">Opzioni punto</string>
+  <string name="show_point_options">Utilizza la posizione...</string>
   <string name="renderer_load_sucess">Renderer caricato</string>
   <string name="renderer_load_exception">Errore: renderer non caricato</string>
   <string name="renderers">Aspetto dei vettori</string>
