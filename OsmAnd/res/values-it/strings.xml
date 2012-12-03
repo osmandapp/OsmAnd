@@ -1156,4 +1156,7 @@
 	<string name="monitoring_control_start">avvia</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin ha una vecchia versione e deve essere aggiornato.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin (descrizione TODO)</string>
+    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	</resources>
