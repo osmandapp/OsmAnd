@@ -487,7 +487,9 @@ public class OsmandSettings {
 				serialization.append(",");
 			}
 		}
-		ENABLED_PLUGINS.set(serialization.toString());
+		if(!serialization.toString().equals(ENABLED_PLUGINS.get())) {
+			ENABLED_PLUGINS.set(serialization.toString());
+		}
 	}
 	
 	/////////////// PREFERENCES classes ////////////////

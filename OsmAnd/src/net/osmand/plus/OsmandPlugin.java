@@ -35,9 +35,8 @@ public abstract class OsmandPlugin {
 	private static final Log LOG = LogUtil.getLog(OsmandPlugin.class);
 	
 	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
-	private static final String PARKING_PLUGIN_ACTIVITY = "net.osmand.parkingPlugin.ParkingPluginActivity"; //$NON-NLS-1$
 	
-	private static final String OSMODROID_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
+	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
 	
 	
 	public abstract String getId();
@@ -220,21 +219,22 @@ public abstract class OsmandPlugin {
 	}
 
 	private static void installParkingPlugin(OsmandApplication app) {
-		Intent parkingIntent = new Intent();
-		parkingIntent.setComponent(new ComponentName(PARKING_PLUGIN_COMPONENT, PARKING_PLUGIN_ACTIVITY));
-		parkingIntent.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-		ResolveInfo resolved = app.getPackageManager().resolveActivity(parkingIntent, PackageManager.MATCH_DEFAULT_ONLY);
-		ParkingPositionPlugin parkingPlugin = new ParkingPositionPlugin(app);
-		if(resolved != null) {
+		boolean installed = false;
+		try{
+			installed = app.getPackageManager().getPackageInfo(PARKING_PLUGIN_COMPONENT, 0) != null;
+		} catch ( NameNotFoundException e){
+		}
+		
+		if(installed) {
+			ParkingPositionPlugin parkingPlugin = new ParkingPositionPlugin(app);
 			installedPlugins.add(parkingPlugin);
 			app.getSettings().enablePlugin(parkingPlugin.getId(), true);
 		} else {
-			app.getSettings().enablePlugin(parkingPlugin.getId(), false);
+			app.getSettings().enablePlugin(ParkingPositionPlugin.ID, false);
 		}
 	}
 	
 	private static void installOsmodroidPlugin(OsmandApplication app) {
-		Intent parkingIntent = new Intent();
 		boolean installed = false;
 		try{
 			installed = app.getPackageManager().getPackageInfo(OSMODROID_PLUGIN_COMPONENT, 0) != null;

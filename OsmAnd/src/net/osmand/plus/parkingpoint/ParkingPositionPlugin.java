@@ -44,7 +44,7 @@ import android.widget.TimePicker;
  */
 public class ParkingPositionPlugin extends OsmandPlugin {
 
-	private static final String ID = "osmand.parking.position";
+	public static final String ID = "osmand.parking.position";
 	private OsmandApplication app;
 
 	private ParkingPositionLayer parkingLayer;

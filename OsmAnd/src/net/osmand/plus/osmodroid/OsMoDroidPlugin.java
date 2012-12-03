@@ -56,8 +56,6 @@ public class OsMoDroidPlugin extends OsmandPlugin {
 					if(mIRemoteService.getVersion() < OSMODROID_SUPPORTED_VERSION_MIN) {
 						app.getClientContext().showToastMessage(R.string.osmodroid_plugin_old_ver_not_supported);
 						shutdown(app);
-					} else {
-						app.getClientContext().showToastMessage(R.string.osmodroid_plugin_description);
 					}
 				} catch (RemoteException e) {
 					log.error(e.getMessage(), e);

@@ -56,13 +56,16 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<javac srcdir="${src.absolute.dir}"
+		<javac  srcdir="${src.absolute.dir}"
+			
 		 destdir="${bin.absolute.dir}"
 		 encoding="${java.encoding}"
 		 classpathref="build.path"
 		 debug="on"
 		 source="1.6"
-	  />
+	  >
+			<exclude name="net/osmand/plus/**"/>
+		</javac>
 		<javac srcdir="${srctests.dir}"
 		 destdir="${bintests.dir}"
 		 encoding="${java.encoding}"
