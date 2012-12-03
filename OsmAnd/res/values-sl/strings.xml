@@ -440,7 +440,7 @@
 	<string name="search_offline_clear_search">Novo iskanje</string>
 	<string name="poi_filter_custom_filter">Filter po meri</string>
 	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Ali jo želite poiskati v Marketu?</string>
-	<string name="show_point_options">Možnosti lokacije</string>
+	<string name="show_point_options">Uporabi lokacijo...</string>
 	<string name="menu_layers">Nastavitve prikaza</string>
 	<string name="where_am_i">Kje sem?</string>
 	<string name="hide_poi_filter">Skrij filter</string>
