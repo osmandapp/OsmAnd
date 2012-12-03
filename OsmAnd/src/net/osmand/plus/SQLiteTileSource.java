@@ -23,6 +23,9 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.RectF;
+import android.graphics.Matrix;
+import android.graphics.Matrix.ScaleToFit;
 
 
 public class SQLiteTileSource implements ITileSource {
@@ -299,16 +302,13 @@ public class SQLiteTileSource implements ITileSource {
 				int delta_px = scaledSize * offset_x;
 				int delta_py = scaledSize * offset_y;
 				
-				Bitmap xn = Bitmap.createBitmap(metaTile,
-						delta_px,
-						delta_py,
-						scaledSize + 2 * margin,
-						scaledSize + 2 * margin);
-				metaTile.recycle();
-				int scaleto = tileSize + ((2 * margin) << n);
-				Bitmap scaled = Bitmap.createScaledBitmap(xn,scaleto,scaleto,true);
-				xn.recycle();
-				return Bitmap.createBitmap(scaled, (margin << n), (margin << n), tileSize, tileSize);
+				RectF src = new RectF(0.5f, 0.5f,
+						scaledSize + 2 * margin - 0.5f, scaledSize + 2 * margin - 0.5f);
+				RectF dest = new RectF(0, 0, tileSize, tileSize);
+				Matrix m = new Matrix();
+				m.setRectToRect(src, dest, Matrix.ScaleToFit.FILL);
+				return Bitmap.createBitmap(metaTile, delta_px, delta_py,
+						scaledSize + 2*margin-1, scaledSize + 2*margin-1, m, true);
 			}
 			return null;
 		}
