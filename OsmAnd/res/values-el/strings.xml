@@ -1102,4 +1102,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Απόκρυψη ορίων</string>
 	<string name="rendering_attr_noAdminboundaries_description">Περιορισμός εμφάνισης διοικητικών ορίων (επίπεδα 5-9)</string>
 	<string name="tip_altitude_offset">Ένδειξη Υψομέτρου - Διόρθωση Λάθους</string>
-	</resources>
+	<string name="osmodroid_plugin_name">Πρόσθετο OsMoDroid</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">Το πρόσθετο OsMoDroid είναι μια παλιά έκδοση και πρέπει να ενημερωθεί.</string>
+    <string name="osmodroid_plugin_description">Πρόσθετο OsMoDroid (σε αναμονή περιγραφής)</string>
+    </resources>
