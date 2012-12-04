@@ -1063,4 +1063,7 @@
     <string name="monitoring_control_start">start</string>
     <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">De OsMoDroid plugin is een oude versie en moet ge-update worden.</string>
+    <string name="osmodroid_plugin_description">De OsMoDroid plugin (wat-te-doen beschrijving)</string>
+    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	</resources>
