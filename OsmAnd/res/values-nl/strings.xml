@@ -460,7 +460,7 @@
   <string name="continuous_rendering">Continue kaartgeneratie</string>
   <string name="continuous_rendering_descr">Continue kaartgeneratie inplaats van eenmalige generatie van de hele kaart</string>
   <string name="rendering_exception">Fout opgetreden bij kaartgeneratie van het geselecteerde gebied</string>
-  <string name="show_point_options">Locatie-opties</string>
+  <string name="show_point_options">Locatie-opties...</string>
   <string name="renderer_load_sucess">Kaartgenerator sucesvol geladen</string>
   <string name="renderer_load_exception">Fout opgetreden: kaartgenerator niet geladen</string>
   <string name="renderers">Vector kaartgenerator</string>
