@@ -691,7 +691,7 @@
 	<string name="continuous_rendering">Συνεχής απεικόνιση</string>
 	<string name="continuous_rendering_descr">Εμφάνιση συνεχούς απεικόνισης αντί για εικόνα με τη μία</string>
 	<string name="rendering_exception">Προέκυψε σφάλμα κατά την απεικόνιση της επιλεγμένης περιοχής</string>
-	<string name="show_point_options">Επιλογές τοποθεσίας</string>
+	<string name="show_point_options">Χρήση τοποθεσίας...</string>
 	<string name="renderer_load_sucess">Ο απεικονιστής φορτώθηκε με επιτυχία</string>
 	<string name="renderer_load_exception">Παρουσιάστηκε εξαίρεση: ο απεικονιστής δεν ήταν φορτωμένος</string>
 	<string name="renderers">Απεικονιστής διανυσμάτων</string>
