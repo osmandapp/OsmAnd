@@ -45,6 +45,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	final int margin = 1;
 	final int tileSize = 256;
+	final int minScaledSize = 8;
 	
 	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
 		this.file = f;
@@ -153,7 +154,10 @@ public class SQLiteTileSource implements ITileSource {
 				z = db.compileStatement("SELECT minzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
 				if (z < 17 && z >= 0)
 					baseZoom = 17 - (int)z; // sqlite base zoom, =11 for SRTM hillshade
-				maxZoom = 17; // Cheat to have tiles request even if zoom level not in sqlite	
+				maxZoom = 17; // Cheat to have tiles request even if zoom level not in sqlite
+				// decrease maxZoom if too much scaling would be required
+				while ((tileSize >> (maxZoom - baseZoom)) < minScaledSize)
+					maxZoom--;
 				z = db.compileStatement("SELECT maxzoom FROM info").simpleQueryForLong(); //$NON-NLS-1$
 				if (z < 17)
 					minZoom = 17 - (int)z;
@@ -285,7 +289,7 @@ public class SQLiteTileSource implements ITileSource {
 			int offset_y=  y - (base_ytile << n);
 			int flags = 0x020;
 
-			if (scaledSize < 8)
+			if (scaledSize < minScaledSize)
 				return null;
 
 			if (offset_x == 0)
