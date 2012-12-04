@@ -608,7 +608,7 @@
   <string name="continuous_rendering">Nenutrūkstamas vaizdavimas</string>
   <string name="continuous_rendering_descr">Naudoti nenutrūkstamą vaizdavimą vietoje momentinio paveikslėlio</string>
   <string name="rendering_exception">Įvyko klaida bandant atvaizduoti pasirinktą vietą</string>
-  <string name="show_point_options">Vietos parinktys</string>
+  <string name="show_point_options">Naudoti vietą...</string>
   <string name="renderer_load_sucess">Vaizdavimo posistemė sėkmingai įkelta</string>
   <string name="renderer_load_exception">Įvyko klaida: vaizdavimo posistemė nebuvo įkelta</string>
   <string name="renderers">Vektorinė vaizdavimo posistemė</string>
@@ -1141,7 +1141,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="route_descr_from_to">Nuo %1$s\nIki %2$s</string>
     <string name="route_descr_from_to_via">Nuo : %1$s\nPer : %2$s\nIki : %3$s</string>
     <string name="no_buildings_found">Pastatų nerasta.</string>
-    <string name="search_villages_and_postcodes">"Ieškoti kaimų/pašto kodų "</string>
+    <string name="search_villages_and_postcodes">Ieškoti kaimų/pašto kodų</string>
 	<string name="rendering_attr_showRoadMaps_description">Pasirinkti kada rodyti tik kelių žemėlapius:</string>
 	<string name="rendering_attr_showRoadMaps_name">Tik kelių žemėlapiai</string>
     <string name="download_roads_only_item">"Keliai "</string>
@@ -1154,9 +1154,9 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid įskiepio versija yra pasenusi ir turi būti atnaujinta.</string>
     <string name="osmodroid_plugin_name">OsMoDroid įskiepis</string>
-	<string name="tip_altitude_offset_t">"\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
-\n\tA better approximation to these local systems is the EGM96 reference. OsmAnd now also supports the automatic display of altitudes in the EGM96 system.
-\n\tIn order to achieve this, simply download the file WW15MGH.DAC via Offline Data Manager (original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+	<string name="tip_altitude_offset_t">"\tDaugelis GPS įrenginių apskaičiuoja aukštį virš jūros lygio naudodami WGS84 elipsiodo atskaitos sistemą iš kurios vėlesnis konvertavimui į vietinę sistemą reikia nuo pozicijos priklausančios aukščio pataisos.
+\n\tGeresniam vietinio aukščio apskaičiavimui labiau tinka EGM96 atskaitos sistema. OsmAnd dabar jau gali automatiškai apskaičiuoti ir atvaizduoti aukčius pagal EGM96 sistemą.
+\n\tJei norite tai įgyvendinti, tiesiog parsisiųskite failą WW15MGH.DAC naudodami Parsiųstų Duomenų Valdymą (orginalas yra čia http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">pradėti</string>
     <string name="osmodroid_plugin_description">OsMoDroid plugin (TODO description)</string>
     </resources>
