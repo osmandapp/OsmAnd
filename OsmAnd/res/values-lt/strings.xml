@@ -1150,4 +1150,14 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="incomplete_locale">nebaigta</string>
 	<string name="map_widget_max_speed">Leidžiamas greitis</string>
     <string name="tip_altitude_offset">Aukščio informacija - paklaidos įvedimas</string>
-	</resources>
+	<string name="rendering_attr_noAdminboundaries_name">Paslėpti ribas</string>
+	<string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid įskiepio versija yra pasenusi ir turi būti atnaujinta.</string>
+    <string name="osmodroid_plugin_description"/>
+    <string name="osmodroid_plugin_name">OsMoDroid įskiepis</string>
+	<string name="tip_altitude_offset_t">"\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
+\n\tA better approximation to these local systems is the EGM96 reference. OsmAnd now also supports the automatic display of altitudes in the EGM96 system.
+\n\tIn order to achieve this, simply download the file WW15MGH.DAC via Offline Data Manager (original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="monitoring_control_start">pradėti</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin (TODO description)</string>
+    </resources>
