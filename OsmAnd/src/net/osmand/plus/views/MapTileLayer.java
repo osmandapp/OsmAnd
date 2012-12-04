@@ -158,7 +158,7 @@ public class MapTileLayer extends BaseMapLayer {
 				float y1 = (top + j - tileY) * ftileSize + h;
 				String ordImgTile = mgr.calculateTileId(map, leftPlusI, topPlusJ, nzoom);
 				// asking tile image async
-				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, leftPlusI, topPlusJ, nzoom);
+				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, leftPlusI, topPlusJ, nzoom, false);
 				Bitmap bmp = null;
 				boolean originalBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalBeLoaded) {
@@ -178,11 +178,11 @@ public class MapTileLayer extends BaseMapLayer {
 						}
 					}
 					if (!originalBeLoaded && !imgExist) {
-						if (mgr.tileExistOnFileSystem(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1)
+						if (mgr.tileExistOnFileSystem(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1, false)
 								|| (useInternet && nzoom - 1 <= maxLevel)) {
 							bmp = mgr.getTileImageForMapAsync(imgTile2, map, leftPlusI / 2, topPlusJ / 2, nzoom - 1, useInternet);
 							div = 2;
-						} else if (mgr.tileExistOnFileSystem(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2)
+						} else if (mgr.tileExistOnFileSystem(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2, false)
 								|| (useInternet && nzoom - 2 <= maxLevel)) {
 							bmp = mgr.getTileImageForMapAsync(imgTile4, map, leftPlusI / 4, topPlusJ / 4, nzoom - 2, useInternet);
 							div = 4;
