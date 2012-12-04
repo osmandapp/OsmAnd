@@ -124,7 +124,7 @@
 			<filter appMode="car" tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#cc2626"/>
 			<filter tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
 			<filter tag="highway" value="motorway" color="#f7fe2e" color_0="#fe2e2e"/>
-			<filter tag="highway" value="trunk" color="#c0c0c0" color_0="#fe2e2e"/>
+			<filter tag="highway" value="trunk" color="#dcdcdc" color_0="#fe2e2e"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="5" maxzoom="8" strokeWidth="1.6" strokeWidth_0="5"/>
 				<filter minzoom="9" maxzoom="9" strokeWidth="2" strokeWidth_0="6"/>
@@ -175,7 +175,7 @@
 			<filter appMode="car" tag="highway" value="trunk_link" nightMode="true" color="#ffffff" color_0="#cc2626"/>
 			<filter tag="highway" value="trunk_link" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
 			<filter tag="highway" value="motorway_link" color="#f7fe2e" color_0="#fe2e2e"/>
-			<filter tag="highway" value="trunk_link" color="#c0c0c0" color_0="#fe2e2e"/>
+			<filter tag="highway" value="trunk_link" color="#dcdcdc" color_0="#fe2e2e"/>
 			<groupFilter cap="ROUND">
 				<filter minzoom="10" maxzoom="10" strokeWidth="1.5" strokeWidth_0="3"/>
 				<filter minzoom="11" maxzoom="11" strokeWidth="2" strokeWidth_0="4"/>
