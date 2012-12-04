@@ -17,7 +17,7 @@
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
 	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
-	<string name="download_roads_only_item">Straßen </string>
+	<string name="download_roads_only_item">"Straßen "</string>
 	<string name="download_regular_maps">Reguläre Karten</string>
 	<string name="download_roads_only_maps">Reine Straßenkarten</string>
 	<string name="safe_mode_description">Applikation läuft im abgesicherten Modus (verwendet langsameren Android statt nativem Code).</string>
