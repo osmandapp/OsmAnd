@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla…</string>
@@ -1045,7 +1045,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El extra OsMoDroid tiene una versión antigua y necesita ser actualizado.</string>
-    <string name="osmodroid_plugin_description"/>
     <string name="osmodroid_plugin_description">Extra OsMoDroid (HACER descripción)</string>
     <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
 	</resources>

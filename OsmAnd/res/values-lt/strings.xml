@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1153,7 +1153,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="rendering_attr_noAdminboundaries_name">Paslėpti ribas</string>
 	<string name="rendering_attr_noAdminboundaries_description">Neberodyti regionų ribų (administratoriaus 5-9 lygiai)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid įskiepio versija yra pasenusi ir turi būti atnaujinta.</string>
-    <string name="osmodroid_plugin_description"/>
     <string name="osmodroid_plugin_name">OsMoDroid įskiepis</string>
 	<string name="tip_altitude_offset_t">"\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
 \n\tA better approximation to these local systems is the EGM96 reference. OsmAnd now also supports the automatic display of altitudes in the EGM96 system.
