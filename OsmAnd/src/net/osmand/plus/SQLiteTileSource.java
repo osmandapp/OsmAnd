@@ -98,6 +98,8 @@ public class SQLiteTileSource implements ITileSource {
 
 	@Override
 	public String getUrlToLoad(int x, int y, int zoom) {
+		if (zoom > baseZoom)
+			return null;
 		SQLiteDatabase db = getDatabase();
 		if(db == null || db.isReadOnly() || urlTemplate == null){
 			return null;
