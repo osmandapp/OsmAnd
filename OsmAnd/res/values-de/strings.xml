@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -1170,4 +1170,7 @@
 	<string name="close_changeset">Changeset schließen</string>
 <string name="incomplete_locale">unfertig</string>
 	<string name="monitoring_control_start">Start</string>
-    </resources>
+    <string name="osmodroid_plugin_old_ver_not_supported">Das OsMoDroid-Plugin liegt in einer alten Version vor und muss aktualisiert werden.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid-Plugin (Beschreibung: Noch zu tun)</string>
+    <string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
+	</resources>
