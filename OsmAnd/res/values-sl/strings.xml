@@ -1069,4 +1069,7 @@
     <string name="monitoring_control_start">začetek</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne prikazuj upravnih mej nivojev 5-9</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">Vtičnik OsMoDroid je stare različice in je potreben posodobitve.</string>
+    <string name="osmodroid_plugin_description">Vtičnik OsMoDroid (TODO opis)</string>
+    <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
 	</resources>
