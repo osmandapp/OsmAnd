@@ -805,7 +805,7 @@
 	<string name="continuous_rendering">Randare continuă</string>
 	<string name="continuous_rendering_descr">Afișează randarea continuă în loc de câte o porțiune odată</string>
 	<string name="rendering_exception">A intervenit o eroare în timpul randării ariei selectate</string>
-	<string name="show_point_options">Opțiuni pentru puntul curent</string>
+	<string name="show_point_options">Opțiuni pentru punctul curent…</string>
 	<string name="renderer_load_sucess">Modulul de randare încărcat cu succes</string>
 	<string name="renderer_load_exception">A intervenit o eroare, modulul de randare nu s-a putu încărca</string>
 	<string name="renderers">Modul de randare vectorială</string>
@@ -1181,4 +1181,7 @@
 \n\tPentru aceasta, descărcați fișierul WW15MGH.DAC din meniul Setări &gt; Date offline (Download). Sursa se găsește la http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC . "</string>
     <string name="rendering_attr_noAdminboundaries_name">Ascunde limitele administrative</string>
 	<string name="rendering_attr_noAdminboundaries_description">Dezactivează afișarea limitelor administrative 5-9</string>
+	<string name="osmodroid_plugin_old_ver_not_supported">Plugin-ul OsMoDroid plugin trebuie adus la zi.</string>
+    <string name="osmodroid_plugin_description">Plugin OsMoDroid</string>
+    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
 	</resources>
