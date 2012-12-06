@@ -1104,5 +1104,5 @@
 	<string name="tip_altitude_offset">Ένδειξη Υψομέτρου - Διόρθωση Λάθους</string>
 	<string name="osmodroid_plugin_name">Πρόσθετο OsMoDroid</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Το πρόσθετο OsMoDroid είναι μια παλιά έκδοση και πρέπει να ενημερωθεί.</string>
-    <string name="osmodroid_plugin_description">Πρόσθετο OsMoDroid (σε αναμονή περιγραφής)</string>
+    <string name="osmodroid_plugin_description">Πρόσθετο OsMoDroid</string>
     </resources>
