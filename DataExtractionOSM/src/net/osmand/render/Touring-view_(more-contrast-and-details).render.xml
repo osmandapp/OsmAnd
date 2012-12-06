@@ -366,6 +366,9 @@
 
 		<group>
 			<filter tag="highway" value="track" color="#996600">
+				<!-- In ped mode with Alpine Hiking, make tracks solid to more clearly distinguish them from paths (forum feedback of 2012-12-06) -->
+				<filter alpineHiking="true" appMode="pedestrian" pathEffect=""/>
+
 				<filter additional="tracktype=grade1" pathEffect=""/>
 				<filter additional="tracktype=grade2">
 					<filter minzoom="12" maxzoom="13" pathEffect="10_3"/>
