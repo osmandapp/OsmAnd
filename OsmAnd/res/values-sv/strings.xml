@@ -241,7 +241,6 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad karta konfiguration (som ökar karta detaljer) och vissa enhetsspecifika detaljerna.</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
 <string name="plugins_screen">Plugin Manager</string>
-<string name="edit_filter_create_message"/>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
 <string name="live_monitoring_mode_on">Stopp\n live-spårning</string>
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
