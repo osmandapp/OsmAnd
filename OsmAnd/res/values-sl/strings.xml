@@ -1066,7 +1066,7 @@
 	<string name="tip_altitude_offset_t">"\tVečina GPS sprejemnikov sporoča meritve nadmorske višine glede na WGS84 referenčni elipsoid, ki za pretvorbo v lokalen sistem zahteva lokalne popravke.
 \n\tBoljši približek tem lokalnim sistemom je referenčni sistem EGM96. OsmAnd sedaj podpira prikaz nadmorske višine tudi v sistemu EGM96.
 \n\tTo dosežete tako, da le prenesete datoteko WW15MGH.DAC prek Upravitelja podatkov (vir je na naslovu http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="monitoring_control_start">začetek</string>
+    <string name="monitoring_control_start">začni</string>
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne prikazuj upravnih mej nivojev 5-9</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Vtičnik OsMoDroid je stare različice in je potreben posodobitve.</string>
