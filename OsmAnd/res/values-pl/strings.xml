@@ -280,7 +280,7 @@
   <string name="continuous_rendering_descr">Używaj ciągłego renderowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
   <string name="rendering_exception">Wystąpił błąd podczas renderowania wybranej powierzchni</string>
   <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, by wyświetlić wybrany obszar</string>
-  <string name="show_point_options">Opcje punktu</string>
+  <string name="show_point_options">Opcje punktu...</string>
   <string name="renderer_load_sucess">Render uruchomiony</string>
   <string name="renderer_load_exception">Wystąpił błąd, render nie został uruchomiony</string>
   <string name="renderers">Render wektorowy</string>
@@ -457,8 +457,8 @@
   <string name="fav_points_not_exist">Brak ulubionych</string>
   <string name="update_existing">Zamień</string>
   <string name="only_show">Tylko pokaż</string>
-  <string name="follow">Prowadź</string>
-  <string name="recalculate_route_to_your_location">Wybierz rodzaj pojazdu (opcjonalnie) oraz tryb naprowadzania:</string>
+  <string name="follow">Nawiguj</string>
+  <string name="recalculate_route_to_your_location">Rodzaj pojazdu:</string>
   <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
   <string name="get_directions">Nawigacja</string>
   <string name="show_gps_status">Pokaż status GPS</string>
@@ -504,13 +504,13 @@
   <string name="data_settings">Dane</string>
   <string name="map_preferences_descr">Zmień ustawienia mapy: źródło mapy, obracanie, pozycję markera, orientację ekranu</string>
   <string name="osm_settings">Edycja OSM</string>
-  <string name="auto_zoom_map_descr">Dostosuj zoom mapy do Twojej prędkości</string>
+  <string name="auto_zoom_map_descr">Dostosuj przybliżenie mapy do aktualnej prędkości</string>
   <string name="auto_zoom_map">Autozoom mapy</string>
   <string name="additional_settings">Ustawienia dodatkowe</string>
   <string name="settings_preset_descr">Wybierz profil użytkownika zawierający niestandardowe mapy oraz ustawienia nawigacji.</string>
   <string name="settings_preset">Tryb programu</string>
   <string name="settings">Ustawienia</string>
-  <string name="save_current_track_descr">Zapisz bieżący ślad do karty SD</string>
+  <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
   <string name="save_current_track">Zapisz bieżący ślad</string>
   <string name="save_track_interval_descr">Wybierz czas pomiędzy sprawdzaniem pozycji dla ścieżek</string>
   <string name="save_track_interval">Czas pomiędzy sprawdzaniem pozycji</string>
@@ -564,7 +564,7 @@
   <string name="search_activity">Szukaj</string>
   <string name="searchpoi_activity">Wybierz POI</string>
   <string name="search_POI_level_btn">Znajdź więcej</string>
-  <string name="incremental_search_city">Znajdź miejscowość. Aby wyszukać kod pocztowy wprowadź pierwsze 3 (lub więcej) cyfry.</string>
+  <string name="incremental_search_city">Znajdź miejscowość lub kod pocztowy wpisując początkowe litery/cyfry</string>
   <string name="incremental_search_street">Znajdź ulicę</string>
   <string name="incremental_search_building">Znajdź numer domu</string>
   <string name="choose_available_region">Wybierz region z listy</string>
@@ -889,9 +889,9 @@
   <string name="show_cameras_descr">Pokaż fotoradary (może to być zabronione w niektórych krajach)</string>
   <string name="show_speed_limits_descr">"Pokaż ograniczenia prędkości i traffic bumps "</string>
   <string name="avoid_toll_roads_descr">Unikaj płatnych dróg przy wyliczaniu trasy</string>
-  <string name="show_cameras">Pokaż fotoradary</string>
-  <string name="show_speed_limits">Pokaż ograniczenia prędkości</string>
-  <string name="avoid_toll_roads">Unikaj dróg płatnych</string>
+  <string name="show_cameras">Fotoradary</string>
+  <string name="show_speed_limits">Ograniczenia prędkości</string>
+  <string name="avoid_toll_roads">Dróg płatnych</string>
   <string name="tip_recent_changes_0_8_2_t">Zmiany w 0.8.2 :
      \n\t* Poprawiony routing
      \n\t* Dynamic map widgets
@@ -927,12 +927,12 @@
   <string name="day_night_info_description">Wschód : %1$s \nZachód : %2$s</string>
   <string name="map_widget_renderer">Styl renderowania</string>
   <string name="layer_map_appearance">Konfiguruj ekran…</string>
-  <string name="avoid_unpaved">Unikaj dróg gruntowych</string>
-  <string name="avoid_ferries">Unikaj promów</string>
+  <string name="avoid_unpaved">Dróg gruntowych</string>
+  <string name="avoid_ferries">Promów</string>
   <string name="avoid_in_routing_title">Unikaj…</string>
   <string name="avoid_in_routing_descr">Unikaj dróg płatnych, gruntowych, promów</string>
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
-  <string name="show_warnings_descr">Pokaż ograniczenia prędkości, fotoradary i traffic bumps</string>
+  <string name="show_warnings_descr">Pokaż ograniczenia prędkości, fotoradary i pasy ruchu</string>
   <string name="monitoring_mode_off">Zapisuj GPX</string>
   <string name="tip_rotation_switching_t_v2">\tMożesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
 	\n\tMasz do wyboru:
@@ -962,8 +962,8 @@
 		OsmAnd jest stale ulepszany i wymaga wsparcia opartego na "donacjach" aby móc się rozwijać.
 	</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
-<string name="avoid_motorway">Unikaj autostrad</string>
-<string name="snap_to_road_descr">Przyciągaj pozycję do drogi podczas nawigacji</string>
+<string name="avoid_motorway">Autostrad</string>
+<string name="snap_to_road_descr">Przyciągaj wskaźnik pozycji do drogi podczas nawigacji</string>
 <string name="snap_to_road">Przyciąganie do drogi</string>
 <string name="tip_recent_changes_0_8_3_t">Zmiany w 0.8.3 :
 		\n\t* Poprawione route guidance
@@ -975,7 +975,7 @@
 <string name="day_night_info">Informacja od dniu/nocy</string>
 <string name="map_widget_day_night">Mapa dzień/noc</string>
 <string name="map_widget_vector_attributes">Atrybuty renderowania:</string>
-<string name="show_lanes">Pokazuj alejki</string>
+<string name="show_lanes">Pasy ruchu</string>
 <string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4:\n* Kilka drobnych poprawek "</string>
     <string name="gps_not_available">Proszę włączyć odbiornik GPS</string>
     <string name="map_widget_monitoring_services">Usługi monitorowania</string>
@@ -1025,11 +1025,11 @@
 <string name="rendering_attr_roadColors_name">Zestaw kolorów dróg</string>
     <string name="map_widget_show_destination_arrow">Pokaż kierunek do celu</string>
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
-	<string name="non_optimal_route_calculation">Oblicz (być może nieoptymalną) trasę na długich dystansach</string>
+	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług logowania (logowanie, śledzenie na bieżąco)</string>
     <string name="local_index_items"/>
 	<string name="no_buildings_found">Nie znaleziono budynków.</string>
-    <string name="search_villages_and_postcodes">"Szukaj miejscowości/kodów pocztowych "</string>
+    <string name="search_villages_and_postcodes">Szukaj miejscowości/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
     <string name="route_descr_current_location">Bieżąca pozycja</string>
     <string name="route_descr_from_to">Z %1$s↵\nDo %2$s</string>
@@ -1038,7 +1038,7 @@
 	<string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
     <string name="download_roads_only_item">"Samochodowe "</string>
     <string name="download_roads_only_maps">Tylko mapy samochodowe</string>
-    <string name="safe_mode_description">Uruchom program w trybie bezpiecznym.</string>
+    <string name="safe_mode_description">Uruchom program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego).</string>
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (zablokuj ten tryb w Preferencjach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
@@ -1047,4 +1047,13 @@
 	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
 	<string name="incomplete_locale">niekompletne</string>
 	<string name="download_regular_maps">Standardowe mapy</string>
+    <string name="rendering_attr_noAdminboundaries_name">Ukryj granice</string>
+	<string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">Wykryto starą wersję pluginu OsMoDroid, która musi zostać zaktualizowana.</string>
+    <string name="osmodroid_plugin_description">Plugin OsMoDroid (TODO opis)</string>
+    <string name="map_widget_max_speed">Ograniczenie prędkości</string>
+    <string name="monitoring_control_start"/>
+    <string name="osmodroid_plugin_name">OsMoDroid</string>
+	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
+	<string name="monitoring_control_start">start</string>
     </resources>
