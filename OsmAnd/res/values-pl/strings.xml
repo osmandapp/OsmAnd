@@ -568,7 +568,7 @@
   <string name="incremental_search_street">Znajdź ulicę</string>
   <string name="incremental_search_building">Znajdź numer domu</string>
   <string name="choose_available_region">Wybierz region z listy</string>
-  <string name="choose_intersected_street">Wybierz przecinającą ulicę (przecznicę)</string>
+  <string name="choose_intersected_street">Wybierz przecznicę</string>
   <string name="Closest_Amenities">Najbliższe usługi</string>
   <string name="app_mode_default">Domyślnie</string>
   <string name="app_mode_car">Samochód</string>
@@ -590,7 +590,7 @@
   <string name="search_address_street">Ulica</string>
   <string name="search_address_building">Budynek</string>
   <string name="search_address_building_option">Budynek</string>
-  <string name="search_address_street_option">Przecinająca ulica (przecznica)</string>
+  <string name="search_address_street_option">Przecznica</string>
   <string name="search_tabs_location">Pozycja GPS</string>
   <string name="context_menu_item_navigate_point">Nawiguj do punktu</string>
   <string name="context_menu_item_add_favorite">Dodaj do ulubionych</string>
@@ -1006,7 +1006,7 @@
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (Open Street Maps Android) OsmAnd to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map rastrowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej. OsmAnd+ jest aplikacją płatną - kupując ją wspierasz projekt, fundujesz rozwój nowych funkcji, oraz otrzymujesz najnowsze aktualizacje. Niektóre z podstawowych funkcji to: - pełną funkcjonalność offline (konfigurowalny folder, w którym zapisywane są pobierane mapy wektorowe i rastrowe) - dostępne do pobrania skrócone mapy wektorowe całego świata - brak limitu ilości map pobranych bezpośrednio w aplikacji - funkcje Wikipedii offline (pobieranie z Wikipedii informacji o ciekawych miejscach), idealne przy zwiedzaniu - możliwość nakładania wielu warstw map, np. ścieżek GPX lub tras nawigacji, ciekawych miejsc, Ulubionych, linii konturowych, przystanków komunikacji miejskiej z możliwością określenia przezroczystości poszczególnych warstw - wyszukiwanie adresów i miejsc bez konieczności łączenia się z Internetem - obliczanie krótkich tras bez połączenia z Internetem (eksperymentalnie) - tryby samochodowy, rowerowy i pieszy wraz z automatycznym przełączanie widoków dzień/noc - opcjonalne powiększanie mapy w zależności od prędkości poruszania się - opcjonalne dopasowywanie mapy do kompasu lub kierunku poruszania się - opcjonalne wskazywanie pasa jazdy oraz ograniczeń prędkości - głosy zarejestrowane i generowane automatycznie "</string>
 	<string name="select_navigation_mode">Wybierz tryb poruszania się</string>
-	<string name="live_monitoring_mode_off">Uruchom\nzapisywanie na bieżąco ścieżki</string>
+	<string name="live_monitoring_mode_off">Uruchom\nśledzenie online</string>
 	<string name="live_monitoring_mode_on">Zatrzymaj\nzapisywanie na bieżąco ścieżki</string>
 	<string name="map_widget_fluorescent">Odblaskowe trasy</string>
 	<string name="map_widget_show_ruler">Linijka</string>
@@ -1056,4 +1056,5 @@
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>
+    <string name="tip_altitude_offset_t">\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Zarządzanie danymi offline\' (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
     </resources>
