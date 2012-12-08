@@ -1,29 +1,33 @@
 package net.osmand.plus.download;
 
 import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-import net.osmand.LogUtil;
+import net.osmand.map.RegionCountry;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
 
-import org.apache.commons.logging.Log;
-
 public class SrtmIndexItem extends IndexItem {
-	private static final Log log = LogUtil.getLog(SrtmIndexItem.class);
-
-	public SrtmIndexItem(String fileName, String description, String date, String size) {
-		super(fileName, description, date, size, null);
+	
+	private RegionCountry item;
+	public SrtmIndexItem(RegionCountry item) {
+		super(fileName(item), "Elevation lines", "",  item.tiles.size()+"", null);
+		this.item = item;
 		type = DownloadActivityType.SRTM_FILE;
+	}
+	
+	private static String fileName(RegionCountry r) {
+		if(r.parent == null) {
+			return r.continentName + " " + r.name;
+		} else {
+			return r.parent.continentName + " " + r.parent.name + " " + r.name;
+		}
 	}
 
 	@Override
 	public boolean isAccepted() {
 		return true;
 	}
-
+	
 	@Override
 	public DownloadEntry createDownloadEntry(ClientContext ctx, DownloadActivityType type) {
 		File parent = ctx.getAppDir();
@@ -37,24 +41,34 @@ public class SrtmIndexItem extends IndexItem {
 			entry.baseName = getBasename();
 //			entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
 //			entry.unzip = unzipDir;
-			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
-			try {
-				Date d = format.parse(date);
-				entry.dateModified = d.getTime();
-			} catch (ParseException e1) {
-				log.error("ParseException", e1);
-			}
-			try {
-				entry.sizeMB = Double.parseDouble(size);
-			} catch (NumberFormatException e1) {
-				log.error("ParseException", e1);
-			}
-			entry.parts = 1;
-			if (parts != null) {
-				entry.parts = Integer.parseInt(parts);
-			}
+			entry.dateModified = System.currentTimeMillis();
+			entry.parts = Integer.parseInt(size);
 //			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
 		}
 		return entry;
+	}
+	
+	@Override
+	public String convertServerFileNameToLocal() {
+		return fileName+".nonexistent";
+	}
+	
+	@Override
+	public String getBasename() {
+		return fileName;
+	}
+	
+	@Override
+	public String getSizeDescription() {
+		return size + " parts";
+	}
+	
+	@Override
+	public String getVisibleName() {
+		if(item.parent == null) {
+			return item.name + "\n";
+		} else {
+			return item.parent.name +"\n"+item.name;
+		}
 	}
 }

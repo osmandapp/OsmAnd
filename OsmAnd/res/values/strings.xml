@@ -9,6 +9,14 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="srtm_plugin_description">SRTM plugin (TODO description)</string>
+    <string name="srtm_plugin_name">SRTM plugin</string>
+    <string name="download_select_map_types">Other maps</string>
+    <string name="download_roads_only_item">Roads </string>
+    <string name="download_srtm_maps">SRTM maps</string>
+    <string name="download_regular_maps">Regular maps</string>
+    <string name="download_roads_only_maps">Roads-only maps</string>
+    
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
@@ -30,9 +38,6 @@
     <string name="search_villages_and_postcodes">Search villages/postcode</string>
 	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
 	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
-    <string name="download_roads_only_item">Roads </string>
-    <string name="download_regular_maps">Regular maps</string>
-    <string name="download_roads_only_maps">Roads-only maps</string>
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>

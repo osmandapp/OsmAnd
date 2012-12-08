@@ -4,8 +4,11 @@ package net.osmand.plus.download;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
+import net.osmand.map.RegionRegistry;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
@@ -36,6 +39,10 @@ public class DownloadIndexListThread extends Thread {
 	@Override
 	public void run() {
 		indexFiles = DownloadOsmandIndexesHelper.getIndexesList(ctx);
+		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
+			// init
+			RegionRegistry.getRegionRegistry();
+		}
 		if (uiActivity != null) {
 			uiActivity.removeDialog(DownloadIndexActivity.DIALOG_PROGRESS_LIST);
 			uiActivity.runOnUiThread(new Runnable() {

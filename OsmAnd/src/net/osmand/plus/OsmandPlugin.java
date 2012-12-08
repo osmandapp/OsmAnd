@@ -17,6 +17,7 @@ import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -67,6 +68,7 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AccessibilityPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
+		installedPlugins.add(new SRTMPlugin(app));
 		installParkingPlugin(app);
 		installOsmodroidPlugin(app);
 		

@@ -209,8 +209,10 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-		item.setText((e.getVisibleDescription(downloadActivity.getClientContext(), downloadActivity.getType()) + "\n" + e.getVisibleName()).trim()); //$NON-NLS-1$
-		description.setText(e.getDate() + "\n" + e.getSize() + " MB");
+		String eName = e.getVisibleDescription(downloadActivity.getClientContext()) + "\n" + e.getVisibleName();
+		item.setText(eName.trim()); //$NON-NLS-1$
+		String d = e.getDate() + "\n" + e.getSizeDescription();
+		description.setText(d.trim());
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
 		ch.setChecked(downloadActivity.getEntriesToDownload().containsKey(e.getFileName()));

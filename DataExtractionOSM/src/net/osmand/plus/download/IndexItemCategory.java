@@ -38,37 +38,39 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains(".ttsvoice.zip")) {
 				nameId = R.string.index_name_tts_voice;
 				order = 2;
-			} else if (lc.startsWith("us")) {
+			} else if (lc.startsWith("us") || 
+					(lc.contains("united states") && lc.startsWith("north-america")) ) {
 				nameId = R.string.index_name_us;
 				order = 31;
-			} else if (lc.contains("_northamerica_")) {
+			} else if (lc.contains("northamerica") || lc.contains("north-america")) {
 				nameId = R.string.index_name_north_america;
 				order = 30;
-			} else if (lc.contains("_centralamerica_") || lc.contains("central-america")) {
+			} else if (lc.contains("centralamerica") || lc.contains("central-america")
+					|| lc.contains("caribbean")) {
 				nameId = R.string.index_name_central_america;
 				order = 40;
-			} else if (lc.contains("_southamerica_") || lc.contains("south-america")) {
+			} else if (lc.contains("southamerica") || lc.contains("south-america")) {
 				nameId = R.string.index_name_south_america;
 				order = 45;
 			} else if (lc.startsWith("france_")) {
 				nameId = R.string.index_name_france;
 				order = 17;
-			} else if (lc.startsWith("germany_")) {
+			} else if (lc.startsWith("germany_") || lc.contains("germany")) {
 				nameId = R.string.index_name_germany;
 				order = 16;
-			} else if (lc.contains("_europe_")) {
+			} else if (lc.contains("_europe_") || lc.startsWith("europe")) {
 				nameId = R.string.index_name_europe;
 				order = 15;
-			} else if (lc.startsWith("russia_")) {
+			} else if (lc.startsWith("russia")) {
 				nameId = R.string.index_name_russia;
 				order = 18;
 			} else if (lc.contains("africa")) {
 				nameId = R.string.index_name_africa;
 				order = 80;
-			} else if (lc.contains("_asia_")) {
+			} else if (lc.contains("_asia_")|| lc.startsWith("asia")) {
 				nameId = R.string.index_name_asia;
 				order = 50;
-			} else if (lc.contains("_oceania_") || lc.contains("australia")) {
+			} else if (lc.contains("oceania") || lc.contains("australia")) {
 				nameId = R.string.index_name_oceania;
 				order = 70;
 			} else if (lc.contains("_wiki_")) {

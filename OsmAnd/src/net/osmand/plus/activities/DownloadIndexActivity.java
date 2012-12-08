@@ -27,8 +27,11 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
+import net.osmand.map.RegionCountry;
+import net.osmand.map.RegionRegistry;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
@@ -42,6 +45,8 @@ import net.osmand.plus.download.DownloadIndexAdapter;
 import net.osmand.plus.download.DownloadIndexListThread;
 import net.osmand.plus.download.DownloadTracker;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.SrtmIndexItem;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -185,8 +190,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 			menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 			menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
-			menu.add(0, DOWNLOAD_FILES_TYPE, 0, getType() == DownloadActivityType.NORMAL_FILE ? 
-						R.string.download_roads_only_maps : R.string.download_regular_maps );
+			menu.add(0, DOWNLOAD_FILES_TYPE, 0, R.string.download_select_map_types);
 		}
 		return true;
 	}
@@ -233,12 +237,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 				listAdapter.setIndexFiles(filtered);
 			} else if (item.getItemId() == DOWNLOAD_FILES_TYPE) {
-				if(type == DownloadActivityType.ROADS_FILE){
-					changeType(DownloadActivityType.NORMAL_FILE);
-				} else {
-					changeType(DownloadActivityType.ROADS_FILE);
-				}
-				
+				selectDownloadType();
 			} else if(item.getItemId() == DESELECT_ALL_ID){
 				entriesToDownload.clear();
 				listAdapter.notifyDataSetInvalidated();
@@ -248,6 +247,35 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 		}
 		return true;
+	}
+
+
+	private void selectDownloadType() {
+		Builder bld = new AlertDialog.Builder(this);
+		String[] items;
+		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
+			items = new String[]{
+					getString(R.string.download_regular_maps),
+					getString(R.string.download_roads_only_maps),
+					getString(R.string.download_srtm_maps)}; 
+		} else {
+			items = new String[]{
+					getString(R.string.download_regular_maps),
+					getString(R.string.download_roads_only_maps)};
+		}
+		bld.setItems(items, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if(which == 0){
+					changeType(DownloadActivityType.NORMAL_FILE);
+				} else if(which == 1){
+					changeType(DownloadActivityType.ROADS_FILE);
+				} else if(which == 2){
+					changeType(DownloadActivityType.SRTM_FILE);
+				}
+			}
+		});
+		bld.show();
 	}
 
 
@@ -266,6 +294,18 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	public List<IndexItem> getFilteredByType() {
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
+		if(type == DownloadActivityType.SRTM_FILE){
+			List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
+			for(RegionCountry rc : countries){
+				if(rc.tiles.size() > 50){
+					for(RegionCountry ch : rc.getSubRegions()) {
+						filtered.add(new SrtmIndexItem(ch));
+					}
+				} else {
+					filtered.add(new SrtmIndexItem(rc));
+				}
+			}
+		}
 		for (IndexItem file : downloadListIndexThread.getCachedIndexFiles()) {
 			if (file.getType() == type) {
 				filtered.add(file);

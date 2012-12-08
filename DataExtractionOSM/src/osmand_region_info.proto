@@ -1,0 +1,24 @@
+// Highly coupled with protobuf 2.3.0
+option java_package = "net.osmand.map";
+//protoc --java_out=DataExtractionOSM/src DataExtractionOSM/src/osmand_region_info.proto
+
+// C++ # cd OsmAnd-Kernel
+// # protoc --proto_path=../DataExtractionOSM/src --cpp_out=osmand/src/proto ../DataExtractionOSM/src/osmand_region_info.proto
+
+option optimize_for = LITE_RUNTIME;
+message OsmAndRegionInfo {
+
+   optional OsmAndRegions regionInfo = 1;
+}
+
+message OsmAndRegions {
+
+	repeated OsmAndRegion regions = 3;
+}
+message OsmAndRegion {
+	optional string continentName = 1;
+	required string name = 2;
+	repeated int32 degX = 4 [packed = true];
+	repeated int32 degY = 5 [packed = true];
+	repeated OsmAndRegion subregions = 8;
+}  

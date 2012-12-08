@@ -42,7 +42,7 @@ public class IndexItem {
 		this.type = type;
 	}
 
-	public String getVisibleDescription(ClientContext ctx, DownloadActivityType type) {
+	public String getVisibleDescription(ClientContext ctx) {
 		String s = ""; //$NON-NLS-1$
 		if (type == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
@@ -99,6 +99,10 @@ public class IndexItem {
 
 	public String getDate() {
 		return date;
+	}
+	
+	public String getSizeDescription() {
+		return size + " MB";
 	}
 
 	public String getSize() {
@@ -202,6 +206,9 @@ public class IndexItem {
 		}
 		if (getType() == DownloadActivityType.ROADS_FILE) {
 			s = "-roads" + s;
+		}
+		if(l == -1) {
+			l = e.length();
 		}
 		return e.substring(0, l) + s;
 	}
