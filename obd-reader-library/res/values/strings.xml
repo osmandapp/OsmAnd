@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OBD II Reader</string>
+    <string name="command_list">Choose a command</string>
+    <string name="service_started">OBD connection has started.</string>
+    <string name="service_stopped">OBD connection has stopped.</string>
+    <string name="notification_label">Tap to open OBD-Reader.</string>
+</resources>

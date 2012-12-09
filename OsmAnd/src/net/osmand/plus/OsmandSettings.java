@@ -567,7 +567,6 @@ public class OsmandSettings {
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.BICYCLE, DayNightMode.AUTO);
 		DAYNIGHT_MODE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, DayNightMode.DAY);
 	}
-		
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// make cloudmade by default why osmand is not stable enough
@@ -602,6 +601,19 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> AVOID_UNPAVED_ROADS = new BooleanPreference("avoid_unpaved_roads", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> AVOID_FERRIES = new BooleanPreference("avoid_ferries", false).makeGlobal().cache();
 	
+        // this value string is synchronized with settings_pref.xml preference name
+        public final OsmandPreference<String> ENGINE_DISPLACEMENT = new StringPreference("engine_displacement_preference", "1.0").makeGlobal();
+        // this value string is synchronized with settings_pref.xml preference name
+        public final OsmandPreference<String> VOLUMETRIC_EFFICIENCY = new StringPreference("volumetric_efficiency_preference", "1.0").makeGlobal();
+        // this value string is synchronized with settings_pref.xml preference name
+        public final OsmandPreference<String> UPDATE_PERIOD = new StringPreference("update_period_preference", "1.0").makeGlobal();
+        // this value string is synchronized with settings_pref.xml preference name
+        public final OsmandPreference<String> MAX_FUEL_ECONOMY = new StringPreference("max_fuel_econ_preference", "1.0").makeGlobal();
+        // this value string is synchronized with settings_pref.xml preference name
+        public final OsmandPreference<String> VEHICLE_ID = new StringPreference("vehicle_id_preference", "1.0").makeGlobal();
+        // this value string is synchronized with settings_pref.xml preference name
+        public final OsmandPreference<String> BLUETOOTH_LIST = new StringPreference("bluetooth_list_preference", null).makeGlobal();
+
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5).makeProfile();
 	{

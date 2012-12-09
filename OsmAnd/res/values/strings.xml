@@ -416,6 +416,8 @@
 	<string name="user_password_descr">Needed for openstreetmap.org submissions</string>
 	<string name="osmand_service">Sleep Mode Functionality</string>
 	<string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
+	<string name="diagnostics_settings">Driving Diagnostics</string>
+	<string name="diagnostics_settings_descr">Settings for diagnosing your driving style</string>
 	<string name="tip_rotation_switching">Map Orientation</string>
 	<string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
 		\n\tThe choices are:
@@ -953,6 +955,7 @@
 	<string name="loading">Loading&#8230;</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
+	<string name="error_occurred_saving_diagnostic_data">Error while saving diagnostics data</string>
 	<string name="error_calculating_route">Error calculating route</string>
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
 	<string name="empty_route_calculated">Error: Calculated route is empty</string>					
@@ -1130,12 +1133,12 @@
 	<string name="follow_mode_bearing">Bearing</string>
 	<string name="follow_mode_free_scroll">Free Scroll</string>
 	<string name="enter_address">Enter address</string>
-	<string name="overall_driving_stats">Driving Quality</string>
+	<string name="overall_driving_stats">OBD Stats</string>
 	<string name="fuel_economy">Fuel Economy</string>
 	<string name="current_driving_stats">Current Readings</string>
 	<string name="speed">Speed</string>
 	<string name="fuel_level">Fuel Level</string>
-	<string name="coolant_level">Coolant Level</string>
+	<string name="coolant_temp">Coolant Temp</string>
 	<string name="tire_pressure">Tire Pressure</string>
 	<string name="driving_score">Driving Score</string>
 	<string name="braking_score">Braking</string>
@@ -1144,4 +1147,9 @@
 	<string name="tick_content_desc">Image indicates good or bad status</string>
 	<string name="curr_mileage">Curr mileage</string>
 	<string name="avg_mileage">Avg mileage</string>
+	<string name="save_diagnostic_data_interval">Data Collection Interval</string>
+	<string name="save_diagnostic_data_interval_descr">Choose interval for querying vehicle data in seconds</string>	
+	<string name="save_current_diagnostic_data">Save current diagnostics data</string>
+	<string name="save_current_diagnostic_data_descr">Save diagnostics data to storage now</string>
+	<string name="saving_diagnostic_data">Saving diagnostics data to storage&#8230;</string>
 </resources>

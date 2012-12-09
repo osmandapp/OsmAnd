@@ -1,1 +1,4 @@
 .metadata
+bin/
+target/
+gen/

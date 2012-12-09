@@ -8,6 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.DiagnosticsUtilities;
+import net.osmand.DiagnosticsUtilities.DiagnosticsData;
+import net.osmand.DiagnosticsUtilities.DiagnosticsFile;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Track;
@@ -30,7 +33,7 @@ import android.text.format.DateFormat;
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public final static String DATABASE_NAME = "tracks"; //$NON-NLS-1$
-	public final static int DATABASE_VERSION = 3;
+	public final static int DATABASE_VERSION = 4;
 	
 	public final static String TRACK_NAME = "track"; //$NON-NLS-1$
 	public final static String TRACK_COL_DATE = "date"; //$NON-NLS-1$
@@ -39,17 +42,23 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String TRACK_COL_ALTITUDE = "altitude"; //$NON-NLS-1$
 	public final static String TRACK_COL_SPEED = "speed"; //$NON-NLS-1$
 	public final static String TRACK_COL_HDOP = "hdop"; //$NON-NLS-1$
-	
+
 	public final static String POINT_NAME = "point"; //$NON-NLS-1$
 	public final static String POINT_COL_DATE = "date"; //$NON-NLS-1$
 	public final static String POINT_COL_LAT = "lat"; //$NON-NLS-1$
 	public final static String POINT_COL_LON = "lon"; //$NON-NLS-1$
 	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
 	
+        public final static String DIAGNOSTICS_TABLE_NAME = "diagnosticData"; //$NON-NLS-1$
+        public final static String DIAGNOSTICS_COL_COMMAND = "command"; //$NON-NLS-1$
+        public final static String DIAGNOSTICS_COL_VALUE = "value"; //$NON-NLS-1$
+        public final static String DIAGNOSTICS_COL_TIME = "time"; //$NON-NLS-1$
+        
 	public final static Log log = LogUtil.getLog(SavingTrackHelper.class);
 
 	private String updateScript;
 	private String updatePointsScript;
+        private String updateDiagnosticsScript;
 	
 	private long lastTimeUpdated = 0;
 	private final OsmandApplication ctx;
@@ -65,12 +74,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			 +", " +TRACK_COL_HDOP+", " +TRACK_COL_DATE+ ")" +
 		" VALUES (?, ?, ?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 		updatePointsScript = "INSERT INTO " + POINT_NAME + " VALUES (?, ?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
+
+		updateDiagnosticsScript = "INSERT INTO " + DIAGNOSTICS_TABLE_NAME + 
+                " (" + DIAGNOSTICS_COL_COMMAND + ", " + DIAGNOSTICS_COL_VALUE + ", " + DIAGNOSTICS_COL_TIME + ")" +
+                " VALUES (?, ?, ?)"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		createTableForTrack(db);
 		createTableForPoints(db);
+		createTableForDiagnostics(db);
 	}
 	
 	private void createTableForTrack(SQLiteDatabase db){
@@ -88,6 +102,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 	}
 
+        private void createTableForDiagnostics(SQLiteDatabase db){
+            db.execSQL("CREATE TABLE " + DIAGNOSTICS_TABLE_NAME + " (" + DIAGNOSTICS_COL_COMMAND + " text, " + DIAGNOSTICS_COL_VALUE + " text, " + DIAGNOSTICS_COL_TIME + " long)"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+        }
+    
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if(oldVersion < 2){
@@ -95,6 +113,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		if(oldVersion < 3){
 			db.execSQL("ALTER TABLE " + TRACK_NAME +  " ADD " + TRACK_COL_HDOP + " double");
+		}
+		if (oldVersion < 4) {
+		    createTableForDiagnostics(db);
 		}
 	}
 	
@@ -167,6 +188,52 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		}
 		return warnings;
 	}
+
+        public boolean hasDiagnosticDataToSave() {
+            SQLiteDatabase db = getWritableDatabase();
+            if (db != null) {
+                    Cursor q = db.query(false, DIAGNOSTICS_TABLE_NAME, new String[0], null, null, null, null, null, null);
+                    boolean has = q.moveToFirst();
+                    q.close();
+                    if (has) {
+                            return true;
+                    }
+            }
+            return false;
+        }
+    
+        /**
+         * @return warnings
+         */
+        public List<String> saveDiagnosticData() {
+                List<String> warnings = new ArrayList<String>();
+                File dir = ((OsmandApplication) ctx.getApplicationContext()).getSettings().getExternalStorageDirectory();
+                if (dir.canWrite()) {
+                        dir = new File(dir, ResourceManager.DIAGNOSTICS_DATA_PATH);
+                        dir.mkdirs();
+                        if (dir.exists()) {
+    
+                                Map<String, DiagnosticsFile> data = collectRecordedDiagnosticsData();
+    
+                                // save file
+                                for (final String f : data.keySet()) {
+                                        File fout = new File(dir, f + ".xml"); //$NON-NLS-1$
+                                        String warn = DiagnosticsUtilities.writeDiagnosticsFile(fout, data.get(f), ctx);
+                                        if (warn != null) {
+                                                warnings.add(warn);
+                                                return warnings;
+                                        }
+                                }
+                        }
+                }
+    
+                SQLiteDatabase db = getWritableDatabase();
+                if (db != null && warnings.isEmpty()) {
+                    // remove all from db
+                    db.execSQL("DELETE FROM " + DIAGNOSTICS_TABLE_NAME + " WHERE " + DIAGNOSTICS_COL_TIME + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                }
+                return warnings;
+        }
 
 	public Map<String, GPXFile> collectRecordedData() {
 		Map<String, GPXFile> data = new LinkedHashMap<String, GPXFile>();
@@ -260,11 +327,50 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		query.close();
 	}
 	
+        public Map<String, DiagnosticsFile> collectRecordedDiagnosticsData() {
+            Map<String, DiagnosticsFile> data = new LinkedHashMap<String, DiagnosticsFile>();
+            SQLiteDatabase db = getReadableDatabase();
+            if(db != null) {
+                collectDBDiagnostics(db, data);
+            }
+            return data;
+        }
+
+        private void collectDBDiagnostics(SQLiteDatabase db, Map<String, DiagnosticsFile> diagnosticsDataMap) {
+            Cursor query = db.rawQuery("SELECT " + DIAGNOSTICS_COL_COMMAND + "," + DIAGNOSTICS_COL_VALUE + "," + DIAGNOSTICS_COL_TIME //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                            + " FROM " + DIAGNOSTICS_TABLE_NAME +" ORDER BY " + DIAGNOSTICS_COL_TIME +" ASC", null); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ 
+            if (query.moveToFirst()) {
+                    do {
+                            DiagnosticsData data = new DiagnosticsData();
+                            data.command = query.getString(0);
+                            data.value = query.getString(1);
+                            long time = query.getLong(2);
+                            data.time = time;
+                            
+                            String date = DateFormat.format("yyyy-MM-dd", time).toString(); //$NON-NLS-1$
+                            DiagnosticsFile diagnosticsData;
+                            if (diagnosticsDataMap.containsKey(date)) {
+                                diagnosticsData = diagnosticsDataMap.get(date);
+                            } else {
+                                diagnosticsData  = new DiagnosticsFile();
+                                diagnosticsDataMap.put(date, diagnosticsData);
+                            }
+                            diagnosticsData.data.add(data);
+
+                    } while (query.moveToNext());
+            }
+            query.close();
+    }
+    
 	public void startNewSegment() {
 		lastTimeUpdated = 0;
 		lastPoint = null;
 		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis()});
 		addTrackPoint(null, true);
+	}
+	
+	public void insertDiagnosticData(String commandName, String value, long time, OsmandSettings settings) {
+            execWithClose(updateDiagnosticsScript, new Object[] { commandName, value, time });
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){

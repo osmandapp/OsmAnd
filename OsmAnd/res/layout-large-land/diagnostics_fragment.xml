@@ -90,6 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
                     android:text="@string/speed"
                     android:textColor="@color/color_black"
                     android:textSize="24dp" />
@@ -99,29 +100,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
+                    android:paddingLeft="10dp"
                     android:textColor="@color/color_black"
                     android:textSize="24dp" />
 
                 <TextView
-                    android:id="@+id/tirePressureLabel"
+                    android:id="@+id/coolantTempLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="80dp"
                     android:paddingTop="10dp"
-                    android:text="@string/tire_pressure"
+                    android:text="@string/coolant_temp"
                     android:textColor="@color/color_black"
                     android:textSize="24dp" />
 
-                <ProgressBar
-                    android:id="@+id/tirePressureProgressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
+                <TextView
+                    android:id="@+id/coolantTempText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:max="100"
-                    android:minWidth="150dp"
-                    android:paddingLeft="10dp"
                     android:paddingTop="10dp"
-                    android:progressDrawable="@drawable/progress" />
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
             </TableRow>
 
             <TableRow
@@ -148,27 +149,26 @@
                     android:paddingLeft="10dp"
                     android:paddingTop="10dp"
                     android:progressDrawable="@drawable/progress" />
-
+
                 <TextView
-                    android:id="@+id/coolantLevelLabel"
+                    android:id="@+id/currFuelEconomyLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="80dp"
                     android:paddingTop="10dp"
-                    android:text="@string/coolant_level"
+                    android:text="Engine RPM"
+                    android:textColor="@color/color_black"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/currFuelEconomyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
                     android:textColor="@color/color_black"
                     android:textSize="24dp" />
 
-                <ProgressBar
-                    android:id="@+id/coolantLevelProgressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:max="100"
-                    android:minWidth="150dp"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="10dp"
-                    android:progressDrawable="@drawable/progress" />
             </TableRow>
         </TableLayout>
     </RelativeLayout>
@@ -201,121 +201,27 @@
                 android:textSize="32dp" >
             </TextView>
 
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ScrollView
+                android:id="@+id/obdStatsScrollview"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:layout_alignLeft="@+id/TextView1"
-                android:layout_below="@id/TextView1"
-                android:layout_marginLeft="24dp" >
+                android:layout_below="@+id/TextView1" >
 
-                <TableRow
-                    android:id="@+id/drivingStatsTableRow1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
 
                     <TextView
-                        android:id="@+id/brakingScoreLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="@string/braking_score"
+                        android:id="@+id/obdStatsText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:textColor="@color/color_black"
                         android:textSize="24dp" />
 
-                    <ProgressBar
-                        android:id="@+id/brakingScoreProgressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:max="100"
-                        android:minWidth="150dp"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:progressDrawable="@drawable/progress" />
+                </LinearLayout>
+            </ScrollView>
 
-                    <ImageButton
-                        android:id="@+id/brakingTickButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/color_transparent"
-                        android:contentDescription="@string/tick_content_desc"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/check_icon" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/drivingStatsTableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/accelerationScoreLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="@string/acceleration_score"
-                        android:textColor="@color/color_black"
-                        android:textSize="24dp" />
-
-                    <ProgressBar
-                        android:id="@+id/accelerationScoreProgressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:max="100"
-                        android:minWidth="150dp"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:progressDrawable="@drawable/progress" />
-
-                    <ImageButton
-                        android:id="@+id/accelerationTickButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/color_transparent"
-                        android:contentDescription="@string/tick_content_desc"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/check_icon" />
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/speedScoreLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/speedScoreLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:text="@string/speed_score"
-                        android:textColor="@color/color_black"
-                        android:textSize="24dp" />
-
-                    <ProgressBar
-                        android:id="@+id/speedScoreProgressBar"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:max="100"
-                        android:minWidth="150dp"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:progressDrawable="@drawable/progress" />
-
-                    <ImageButton
-                        android:id="@+id/speedTickButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@color/color_transparent"
-                        android:contentDescription="@string/tick_content_desc"
-                        android:paddingLeft="25dp"
-                        android:paddingTop="10dp"
-                        android:src="@drawable/check_icon" />
-                </TableRow>
-            </TableLayout>
         </RelativeLayout>
 
         <RelativeLayout

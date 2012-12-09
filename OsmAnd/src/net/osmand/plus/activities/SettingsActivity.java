@@ -10,6 +10,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import eu.lighthouselabs.obd.commands.ObdCommand;
+import eu.lighthouselabs.obd.reader.config.ObdConfig;
+
 import net.osmand.ResultMatcher;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
@@ -33,6 +36,8 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -61,15 +66,18 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public static final String INTENT_KEY_SETTINGS_SCREEN = "INTENT_KEY_SETTINGS_SCREEN";
 	public static final int SCREEN_GENERAL_SETTINGS = 1;
 	public static final int SCREEN_NAVIGATION_SETTINGS = 2;
+	public static final int SCREEN_DIAGNOSTICS_SETTINGS = 3;
 
 	public static final String SCREEN_ID_GENERAL_SETTINGS = "general_settings";
 	public static final String SCREEN_ID_NAVIGATION_SETTINGS = "routing_settings";
+	public static final String SCREEN_ID_DIAGNOSTICS_SETTINGS = "diagnostics_settings";
 	public static final String MORE_VALUE = "MORE_VALUE";
 
 	private Preference bidforfix;
 	private Preference plugins;
 	private Preference avoidRouting;
 	private Preference showAlarms;
+        private Preference saveDiagnosticsData;
 
 	private EditTextPreference applicationDir;
 //	private ListPreference applicationModePreference;
@@ -294,6 +302,11 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		registerBooleanPreference(osmandSettings.USE_COMPASS_IN_NAVIGATION, screen);
 		registerBooleanPreference(osmandSettings.LEFT_SIDE_NAVIGATION, screen);
 
+		registerEditTextPreference(osmandSettings.ENGINE_DISPLACEMENT, screen);
+		registerEditTextPreference(osmandSettings.VOLUMETRIC_EFFICIENCY, screen);
+		registerEditTextPreference(osmandSettings.UPDATE_PERIOD, screen);
+		registerEditTextPreference(osmandSettings.MAX_FUEL_ECONOMY, screen);
+		registerEditTextPreference(osmandSettings.VEHICLE_ID, screen);
 		
 		// List preferences
 //		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
@@ -341,7 +354,13 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			entries[i] = RouteService.values()[i].getName();
 		}
 		registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
-		
+
+               entries = new String[RouteService.values().length];
+                for(int i=0; i<entries.length; i++){
+                        entries[i] = RouteService.values()[i].getName();
+                }
+                registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
+
 //		entries = new String[ApplicationMode.values().length];
 //		for(int i=0; i<entries.length; i++){
 //			entries[i] = ApplicationMode.values()[i].toHumanString(this);
@@ -365,7 +384,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		avoidRouting.setOnPreferenceClickListener(this);
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
-		
+		saveDiagnosticsData = (Preference) screen.findPreference("save_current_diagnostics_data");
+		saveDiagnosticsData.setOnPreferenceClickListener(this);		
 		
 		Intent intent = getIntent();
 		if(intent != null && intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0) != 0){
@@ -375,7 +395,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 				pref = SCREEN_ID_GENERAL_SETTINGS;
 			} else if(s == SCREEN_NAVIGATION_SETTINGS){
 				pref = SCREEN_ID_NAVIGATION_SETTINGS;
-			} 
+			} else if (s == SCREEN_DIAGNOSTICS_SETTINGS) {
+			    pref = SCREEN_ID_DIAGNOSTICS_SETTINGS;
+			}
 			if(pref != null){
 				Preference toOpen = screen.findPreference(pref);
 				if(toOpen instanceof PreferenceScreen){
@@ -384,7 +406,6 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			}
 		}
     }
-
 
 	private void reloadVoiceListPreference(PreferenceScreen screen) {
 		String[] entries;
@@ -405,6 +426,55 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		entries[k] = getString(R.string.install_more);
 		registerListPreference(osmandSettings.VOICE_PROVIDER, screen, entries, entrieValues);
 	}
+	
+        private void reloadBluetoothDeviceListPreference(PreferenceScreen screen) {
+            String[] entries;
+            String[] values;
+            /*
+             * Let's use this device Bluetooth adapter to select which paired OBD-II
+             * compliant device we'll use.
+             */
+            final BluetoothAdapter mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+            if (mBtAdapter == null || !mBtAdapter.isEnabled()) {
+                entries = new String[] { };
+                values = new String[] { };
+                // we shouldn't get here, warn user
+                Toast.makeText(this, "This device does not support Bluetooth.",
+                                Toast.LENGTH_LONG);
+                return;
+            }
+            /*
+             * Get paired devices and populate preference list.
+             */
+            Set<BluetoothDevice> pairedDevices = mBtAdapter.getBondedDevices();
+            entries = new String[pairedDevices.size()];
+            values = new String[pairedDevices.size()];
+            int k = 0;
+            if (pairedDevices.size() > 0) {
+                    for (BluetoothDevice device : pairedDevices) {
+                            entries[k] = device.getName() + "\n" + device.getAddress();
+                            values[k] = device.getAddress();
+                            k++;
+                    }
+            }
+            registerListPreference(osmandSettings.BLUETOOTH_LIST, screen, entries, values);
+        }
+
+        /*
+	private void reloadAvailableObdCommands(PreferenceScreen screen) {
+             // TODO This should be read from preferences database
+            ArrayList<ObdCommand> cmds = ObdConfig.getCommands();
+            PreferenceScreen cmdScr = (PreferenceScreen) getPreferenceScreen()
+                            .findPreference(COMMANDS_SCREEN_KEY);
+            for (ObdCommand cmd : cmds) {
+                    CheckBoxPreference cpref = new CheckBoxPreference(this);
+                    cpref.setTitle(cmd.getName());
+                    cpref.setKey(cmd.getName());
+                    cpref.setChecked(true);
+                    cmdScr.addPreference(cpref);
+            }
+	}
+	*/
 
 	private void updateApplicationDirTextAndSummary() {
 		if(applicationDir != null) {
@@ -438,6 +508,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 
 		reloadVoiceListPreference(getPreferenceScreen());
+		reloadBluetoothDeviceListPreference(getPreferenceScreen());
 
 		for (OsmandPreference<?> p : listPreferences.values()) {
 			ListPreference listPref = (ListPreference) screenPreferences.get(p.getId());
@@ -518,6 +589,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					Intent intent = getIntent();
 					finish();
 					startActivity(intent);
+				} else if (listPref.getId().equals(osmandSettings.BLUETOOTH_LIST)) {
+				    // TODO(natashaj)
 				}
 			}
 		} else if (preference == applicationDir) {
@@ -755,9 +828,38 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					getString(R.string.show_lanes) }, new OsmandPreference[] { osmandSettings.SHOW_CAMERAS,
 					osmandSettings.SHOW_SPEED_LIMITS, osmandSettings.SHOW_LANES });
 			return true;
+		} else if (preference == saveDiagnosticsData) {
+                    SavingTrackHelper helper = getMyApplication().getSavingTrackHelper();
+                    if (helper.hasDiagnosticDataToSave()) {
+                        saveCurrentDiagnosticsData(helper, this);
+                    } else {
+                        helper.close();
+                    }
+                    return true;
 		}
 		return false;
 	}
+
+        private void saveCurrentDiagnosticsData(final SavingTrackHelper helper, final SettingsActivity activity) {
+            activity.progressDlg = ProgressDialog.show(activity, activity.getString(R.string.saving_diagnostic_data),
+                            activity.getString(R.string.saving_diagnostic_data), true);
+            final ProgressDialogImplementation impl = new ProgressDialogImplementation(activity.progressDlg);
+            impl.setRunnable("SavingDiagnosticsData", new Runnable() { //$NON-NLS-1$
+                @Override
+                public void run() {
+                    try {
+                        helper.saveDiagnosticData();
+                        helper.close();
+                    } finally {
+                        if (activity.progressDlg != null) {
+                            activity.progressDlg.dismiss();
+                            activity.progressDlg = null;
+                        }
+                    }
+                }
+            });
+            impl.run();
+        }
 
 	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs) {
 		Builder bld = new AlertDialog.Builder(this);

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.lighthouselabs.obd.enums.AvailableCommandNames;
+
 import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.OsmAndFormatter;
@@ -75,6 +77,7 @@ import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -832,13 +835,21 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				}
 
 			}
-
 		}
 		
 		if(location != null && isRunningOnEmulator()) {
 			// only for emulator
 			updateSpeedBearingEmulator(location);
 		}
+		
+		// 1b. Log OBD data 
+		// TODO(natashaj): Move this to a background service that logs OBD data periodically
+                long currentTime = System.currentTimeMillis();
+                savingTrackHelper.insertDiagnosticData(AvailableCommandNames.SPEED.getValue(), "50 km/hr", currentTime, settings);
+                savingTrackHelper.insertDiagnosticData(AvailableCommandNames.FUEL_LEVEL.getValue(), "60%", currentTime, settings);
+                savingTrackHelper.insertDiagnosticData(AvailableCommandNames.ENGINE_COOLANT_TEMP.getValue(), "32C", currentTime, settings);
+                savingTrackHelper.insertDiagnosticData(AvailableCommandNames.FUEL_ECONOMY.getValue(), "1140km/100l", currentTime, settings);
+		
 		// 2. accessibility routing
 		navigationInfo.setLocation(location);
 

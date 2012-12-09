@@ -36,7 +36,65 @@
 			<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
 				android:key="use_compass_navigation"></CheckBoxPreference>
 		</PreferenceScreen>
- 
+
+		<PreferenceScreen android:key="diagnostics_settings" android:title="@string/diagnostics_settings" android:summary="@string/diagnostics_settings_descr">
+		    <PreferenceCategory android:title="OBD Preferences">
+		        <ListPreference
+		            android:key="bluetooth_list_preference"
+		            android:title="Bluetooth Devices"
+		            android:summary="List of paired bluetooth devices."
+		            android:dialogTitle="Bluetooth Devices" />
+				<EditTextPreference
+					android:key="update_period_preference"
+		            android:defaultValue="4"
+		            android:title="@string/save_diagnostic_data_interval"
+		            android:summary="@string/save_diagnostic_data_interval_descr"
+		            android:dialogTitle="Update Period in Seconds" />
+				<Preference
+				    android:key="save_current_diagnostics_data"
+				    android:title="@string/save_current_diagnostic_data" 
+				    android:summary="@string/save_current_diagnostic_data_descr" />
+				<EditTextPreference
+		            android:key="vehicle_id_preference"
+		            android:defaultValue=""
+		            android:title="Vehicle ID"
+		            android:summary="Optional unique id of this vehicle, used with uploaded data"
+		            android:dialogTitle="Vehicle ID" />
+				<EditTextPreference
+					android:key="max_fuel_econ_preference"
+		            android:defaultValue="70"
+		            android:title="Maximum Fuel Economy Value"
+		            android:summary="Any fuel economy values larger than this will be thrown out"
+		            android:dialogTitle="Maximum Fuel Economy Value" />
+		        <EditTextPreference
+					android:key="volumetric_efficiency_preference"
+		            android:defaultValue=".85"
+		            android:title="Volumetric Efficiency"
+		            android:summary="Used for fuel economy on vehicles without MAF sensor"
+		            android:dialogTitle="Volumetric Efficiency (eg 0.85)" />
+		        <EditTextPreference
+					android:key="engine_displacement_preference"
+		            android:defaultValue="1.6"
+		            android:title="Engine Displacement (liters)"
+		            android:summary="Used for fuel economy on vehicles without MAF sensor"
+		            android:dialogTitle="Engine Displacement (liters)" />
+		        <EditTextPreference
+					android:key="reader_config_preference"
+		            android:defaultValue="atsp0\natz"
+		            android:title="Reader Config Commands"
+		            android:summary="Commands to configure bluetooth reader, separate with new line"
+		            android:dialogTitle="Reader Config Commands" />
+		    </PreferenceCategory>
+		    <PreferenceCategory
+			  android:title="OBD Commands">
+				<PreferenceScreen
+				    android:key="obd_commands_screen"
+					android:title="OBD Commands"
+					android:summary="Select the commands you would like to see in real-time.">
+				</PreferenceScreen>
+			</PreferenceCategory>
+		</PreferenceScreen>
+		
 		<Preference android:title="@string/prefs_plugins" android:summary="@string/prefs_plugins_descr" android:key="plugins"/>
 
 	<Preference android:title="@string/support_new_features" android:key="bidforfix"/>

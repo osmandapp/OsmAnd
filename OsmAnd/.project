@@ -3,6 +3,7 @@
 	<name>OsmAnd</name>
 	<comment></comment>
 	<projects>
+		<project>obd-reader-library</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -108,13 +109,17 @@
 		<link>
 			<name>use</name>
 			<type>2</type>
-			<locationURI>OSMAND_TRUNK/DataExtractionOSM/src</locationURI>
+			<locationURI>OSMAND_TRUNK1/DataExtractionOSM/src</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
 			<name>OSMAND_TRUNK</name>
 			<value>$%7BPARENT-1-PROJECT_LOC%7D</value>
+		</variable>
+		<variable>
+			<name>OSMAND_TRUNK1</name>
+			<value>$%7BPARENT-2-OSMAND_TRUNK%7D/Osmand</value>
 		</variable>
 	</variableList>
 </projectDescription>

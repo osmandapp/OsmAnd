@@ -425,6 +425,12 @@ public class OsmandApplication extends Application {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
 				warnings.addAll(savingTrackHelper.saveDataToGpx());
 			}
+			if (savingTrackHelper.hasDiagnosticDataToSave()) {
+			    startDialog.startTask(getString(R.string.saving_diagnostic_data), -1);
+			    // TODO(natashaj): Re-enable once you solve performance issue
+			    //warnings.addAll(savingTrackHelper.saveDiagnosticData());
+			}
+			savingTrackHelper.sendData();
 			savingTrackHelper.close();
 
 			// restore backuped favorites to normal file
