@@ -46,7 +46,7 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 	private OpenstreetmapRemoteUtil remotepoi;
 	private OsmBugsRemoteUtil remotebug;
 
-	protected OsmPoint[] toUpload;
+	protected OsmPoint[] toUpload = new OsmPoint[0];
 	private ArrayList<OsmPoint> dataPoints;
 	
 	
