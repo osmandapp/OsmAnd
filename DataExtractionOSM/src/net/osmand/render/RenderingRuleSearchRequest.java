@@ -30,6 +30,7 @@ public class RenderingRuleSearchRequest {
 			}
 		}
 		fvalues = new float[props.length];
+		setBooleanFilter(storage.PROPS.R_TEST, true);
 		saveState();
 	}
 

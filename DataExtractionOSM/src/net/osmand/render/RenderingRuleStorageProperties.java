@@ -13,6 +13,7 @@ public class RenderingRuleStorageProperties {
 	public static final String ATTR_BOOL_VALUE = "attrBoolValue";
 	public static final String ATTR_COLOR_VALUE = "attrColorValue";
 	public static final String ATTR_STRING_VALUE = "attrStringValue";
+	public static final String TEST = "test";
 	
 	public static final String TEXT_LENGTH = "textLength";
 	public static final String NAME_TAG = "nameTag";
@@ -65,6 +66,7 @@ public class RenderingRuleStorageProperties {
 	public static final String SHADOW_LEVEL = "shadowLevel";
 
 	
+	public RenderingRuleProperty R_TEST;
 	public RenderingRuleProperty R_ATTR_INT_VALUE;
 	public RenderingRuleProperty R_ATTR_BOOL_VALUE;
 	public RenderingRuleProperty R_ATTR_COLOR_VALUE;
@@ -139,6 +141,7 @@ public class RenderingRuleStorageProperties {
 	}
 
 	public void createDefaultRenderingRuleProperties() {
+		R_TEST = registerRuleInternal(RenderingRuleProperty.createInputBooleanProperty(TEST));
 		R_TAG = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(TAG));
 		R_VALUE = registerRuleInternal(RenderingRuleProperty.createInputStringProperty(VALUE));
 		R_ADDITIONAL = registerRuleInternal(RenderingRuleProperty.createAdditionalStringProperty(ADDITIONAL));

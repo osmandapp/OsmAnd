@@ -456,6 +456,7 @@ RenderingRuleSearchRequest::RenderingRuleSearchRequest(RenderingRulesStorage* st
 			values[it->second->id] = -1;
 		}
 	}
+	setBooleanFilter(PROPS->R_TEST, true);
 	saveState();
 }
 
