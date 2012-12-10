@@ -1,27 +1,17 @@
 package net.osmand.plus.activities;
 
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.BINARY_MAP_VERSION;
 import static net.osmand.data.IndexConstants.EXTRA_EXT;
-import static net.osmand.data.IndexConstants.EXTRA_ZIP_EXT;
-import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.TTSVOICE_VERSION;
-import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
-import static net.osmand.data.IndexConstants.VOICE_VERSION;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -29,8 +19,6 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
-import net.osmand.map.RegionCountry;
-import net.osmand.map.RegionRegistry;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -174,11 +162,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	public void updateLoadedFiles() {
 		if (type == DownloadActivityType.SRTM_FILE) {
-			List<IndexItem> srtms = downloadListIndexThread.getCachedIndexFiles();
-			for (IndexItem i : srtms) {
-				if (i instanceof SrtmIndexItem) {
-					((SrtmIndexItem) i).updateExistingTiles(getMyApplication().getResourceManager().getIndexFileNames());
-				}
+			List<SrtmIndexItem> srtms = downloadListIndexThread.getCachedSRTMFiles();
+			for (SrtmIndexItem i : srtms) {
+				((SrtmIndexItem) i).updateExistingTiles(getMyApplication().getResourceManager().getIndexFileNames());
 			}
 			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 		}
@@ -316,16 +302,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public List<IndexItem> getFilteredByType() {
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
 		if(type == DownloadActivityType.SRTM_FILE){
+			List<SrtmIndexItem> cached = downloadListIndexThread.getCachedSRTMFiles();
 			Map<String, String> indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
-			List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
-			for(RegionCountry rc : countries){
-				if(rc.tiles.size() > 50){
-					for(RegionCountry ch : rc.getSubRegions()) {
-						filtered.add(new SrtmIndexItem(ch, indexFileNames));
-					}
-				} else {
-					filtered.add(new SrtmIndexItem(rc, indexFileNames));
-				}
+			for(SrtmIndexItem s : cached){
+				s.updateExistingTiles(indexFileNames);
 			}
 		}
 		for (IndexItem file : downloadListIndexThread.getCachedIndexFiles()) {
@@ -488,7 +468,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					if (filename.endsWith(ext)) {
 						String date = MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(new File(dir, filename).lastModified()));
 						files.put(filename, date);
-//						files.put(filename.substring(0, filename.length() - ext.length()) + downloadExt, date);
 						return true;
 					} else {
 						return false;
@@ -629,22 +608,38 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				adapter.notifyDataSetInvalidated();
 			}
 		}
+		
+		private int countAllDownloadEntry(IndexItem... filesToDownload){
+			int t = 0;
+			for(IndexItem  i : filesToDownload){
+				List<DownloadEntry> list = DownloadIndexActivity.this.entriesToDownload.get(i);
+				if(list != null){
+					t += list.size();
+				}
+			}
+			return t;
+		}
 
 		@Override
 		protected String doInBackground(IndexItem... filesToDownload) {
 			try {
 				List<File> filesToReindex = new ArrayList<File>();
 				boolean forceWifi = DownloadIndexActivity.this.downloadFileHelper.isWifiConnected();
+				int counter = 1;
+				int all = countAllDownloadEntry(filesToDownload);
 				for (int i = 0; i < filesToDownload.length; i++) {
 					IndexItem filename = filesToDownload[i];
 					List<DownloadEntry> list = DownloadIndexActivity.this.entriesToDownload.get(filename);
 					if (list != null) {
-						String indexOfAllFiles = filesToDownload.length <= 1 ? "" : (" [" + (i + 1) + "/" + filesToDownload.length + "]");
+						String indexOfAllFiles = filesToDownload.length <= 1 ? "" : (" [" + counter + "/" + all + "]");
+						counter++;
 						for (DownloadEntry entry : list) {
 							boolean result = downloadFile(entry, filesToReindex, indexOfAllFiles, forceWifi);
 							if (result) {
 								DownloadIndexActivity.this.entriesToDownload.remove(filename);
-								downloads.set(downloads.get() + 1);
+								if (entry.type != DownloadActivityType.SRTM_FILE) {
+									downloads.set(downloads.get() + 1);
+								}
 								if (entry.existingBackupFile != null) {
 									Algoritms.removeAllFiles(entry.existingBackupFile);
 								}
