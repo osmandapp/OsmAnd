@@ -22,11 +22,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.ResolveInfo;
 import android.preference.PreferenceScreen;
 
 public abstract class OsmandPlugin {
@@ -36,6 +32,7 @@ public abstract class OsmandPlugin {
 	private static final Log LOG = LogUtil.getLog(OsmandPlugin.class);
 	
 	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
+	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin"; //$NON-NLS-1$
 	
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
 	
@@ -66,9 +63,10 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
 		installedPlugins.add(new OsmandExtraSettings(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
-		installedPlugins.add(new SRTMPlugin(app));
-		installParkingPlugin(app);
-		installOsmodroidPlugin(app);
+		installPlugin(SRTM_PLUGIN_COMPONENT, SRTMPlugin.ID, app,
+				new SRTMPlugin(app));
+		installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, new ParkingPositionPlugin(app));
+		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
@@ -220,33 +218,20 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void installParkingPlugin(OsmandApplication app) {
+	private static void installPlugin(String packageInfo, 
+			String pluginId, OsmandApplication app, OsmandPlugin plugin) {
 		boolean installed = false;
 		try{
-			installed = app.getPackageManager().getPackageInfo(PARKING_PLUGIN_COMPONENT, 0) != null;
+			installed = app.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch ( NameNotFoundException e){
 		}
 		
 		if(installed) {
-			ParkingPositionPlugin parkingPlugin = new ParkingPositionPlugin(app);
-			installedPlugins.add(parkingPlugin);
-			app.getSettings().enablePlugin(parkingPlugin.getId(), true);
+			installedPlugins.add(plugin);
+			app.getSettings().enablePlugin(plugin.getId(), true);
 		} else {
-			app.getSettings().enablePlugin(ParkingPositionPlugin.ID, false);
+			app.getSettings().enablePlugin(pluginId, false);
 		}
 	}
 	
-	private static void installOsmodroidPlugin(OsmandApplication app) {
-		boolean installed = false;
-		try{
-			installed = app.getPackageManager().getPackageInfo(OSMODROID_PLUGIN_COMPONENT, 0) != null;
-		} catch ( NameNotFoundException e){
-		}
-		if(installed) {
-			installedPlugins.add(new OsMoDroidPlugin(app));
-			app.getSettings().enablePlugin(OsMoDroidPlugin.ID, true);
-		} else {
-			app.getSettings().enablePlugin(OsMoDroidPlugin.ID, false);
-		}
-	}
 }
