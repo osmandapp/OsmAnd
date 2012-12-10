@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="index_srtm_parts">parts</string>
+    <string name="index_srtm_ele">Elevation lines</string>
     <string name="srtm_plugin_description">SRTM plugin (TODO description)</string>
     <string name="srtm_plugin_name">SRTM plugin</string>
     <string name="download_select_map_types">Other maps</string>

@@ -40,7 +40,6 @@ import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 
 public class LocalIndexHelper {
@@ -69,9 +68,6 @@ public class LocalIndexHelper {
 		File f = new File(info.getPathToData());
 		if(info.getType() == LocalIndexType.MAP_DATA){
 			updateObfFileInformation(info, f);
-		} else if(info.getType() == LocalIndexType.POI_DATA){
-			checkPoiFileVersion(info, f);
-			info.setDescription(getInstalledDate(f));
 		} else if(info.getType() == LocalIndexType.GPX_DATA){
 			updateGpxInfo(info, f);
 		} else if(info.getType() == LocalIndexType.VOICE_DATA){
@@ -214,8 +210,6 @@ public class LocalIndexHelper {
 		loadObfData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask, loadedMaps);
 		loadTilesData(settings.extendOsmandPath(ResourceManager.TILES_PATH), result, false, loadTask);
 		loadTilesData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, false, loadTask);
-		loadPoiData(settings.extendOsmandPath(ResourceManager.POI_PATH), result, false, loadTask);
-		loadPoiData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
 		loadVoiceData(settings.extendOsmandPath(ResourceManager.VOICE_PATH), result, false, loadTask);
 		loadVoiceData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
 		loadGPXData(settings.extendOsmandPath(ResourceManager.GPX_PATH), result, false, loadTask);
@@ -312,34 +306,7 @@ public class LocalIndexHelper {
 		return listFiles;
 	}
 	
-	private void loadPoiData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
-		if (mapPath.canRead()) {
-			for (File poiFile : listFilesSorted(mapPath)) {
-				if (poiFile.isFile() && poiFile.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.POI_DATA, poiFile, backup);
-					if (!backup) {
-						checkPoiFileVersion(info, poiFile);
-					}
-					result.add(info);
-					loadTask.loadFile(info);
-				}
-			}
-		}
-	}
 	
-
-
-	private void checkPoiFileVersion(LocalIndexInfo info, File poiFile) {
-		try {
-			SQLiteDatabase db = SQLiteDatabase.openDatabase(poiFile.getPath(), null, SQLiteDatabase.OPEN_READONLY);
-			int version = db.getVersion();
-			info.setNotSupported(version != IndexConstants.POI_TABLE_VERSION);
-			db.close();
-		} catch(RuntimeException e){
-			info.setCorrupted(true);
-		}
-		
-	}
 	
 	private MessageFormat format = new MessageFormat("\t {0}, {1} NE \n\t {2}, {3} NE", Locale.US);
 
@@ -414,7 +381,6 @@ public class LocalIndexHelper {
 	public enum LocalIndexType {
 		MAP_DATA(R.string.local_indexes_cat_map),
 		TILES_DATA(R.string.local_indexes_cat_tile),
-		POI_DATA(R.string.local_indexes_cat_poi),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
 		GPX_DATA(R.string.local_indexes_cat_gpx);

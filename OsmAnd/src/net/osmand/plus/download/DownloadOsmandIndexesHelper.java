@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.Version;
@@ -174,8 +175,9 @@ public class DownloadOsmandIndexesHelper {
 		}
 		
 		@Override
-		public DownloadEntry createDownloadEntry(ClientContext ctx, DownloadActivityType type) {
-			return new DownloadEntry(assetName, destFile, dateModified);
+		public List<DownloadEntry> createDownloadEntry(ClientContext ctx, DownloadActivityType type, List<DownloadEntry> res) {
+			res.add(new DownloadEntry(assetName, destFile, dateModified));
+			return res;
 		}
 	}
 	

@@ -112,6 +112,9 @@ public class RegionsRegistryConverter {
 		InputStream in = RegionsRegistryConverter.class.getResourceAsStream(RegionRegistry.fileName);
 		OsmAndRegionInfo regInfo = OsmAndRegionInfo.newBuilder().mergeFrom(in).build();
 		t += System.currentTimeMillis();
+		for(int j = 0; j < regInfo.getRegionInfo().getRegionsCount(); j++) {
+			RegionCountry.construct(regInfo.getRegionInfo().getRegions(j));
+		}
 		System.out.println("Read countries " + regInfo.getRegionInfo().getRegionsCount() +  " " + countries.size() );
 		System.out.println("Timing " + t);
 		

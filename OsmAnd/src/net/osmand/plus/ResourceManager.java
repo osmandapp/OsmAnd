@@ -69,12 +69,12 @@ public class ResourceManager {
 
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String ROUTING_XML = APP_DIR + "routing.xml";
-	public static final String POI_PATH = APP_DIR + IndexConstants.POI_INDEX_DIR; 
+	public static final String SRTM_PATH = APP_DIR + IndexConstants.SRTM_INDEX_DIR;
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String GPX_PATH = APP_DIR + "tracks";
 	public static final String MAPS_PATH = APP_DIR;
 	public static final String INDEXES_CACHE = APP_DIR + "ind.cache";
-	public static final String BACKUP_PATH = APP_DIR + "backup/";
+	public static final String BACKUP_PATH = APP_DIR + IndexConstants.BACKUP_INDEX_DIR;
 	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
 	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
@@ -535,106 +535,112 @@ public class ResourceManager {
 			}
 		}
 	}
+	
+	private List<File> collectFiles(File dir, String ext, List<File> files) {
+		if(dir.exists() && dir.canRead()) {
+			File[] lf = dir.listFiles();
+			if(lf == null) {
+				lf = new File[0];
+			}
+			for (File f : lf) {
+				if (f.getName().endsWith(ext)) {
+					files.add(f);
+				}
+			}
+		}
+		return files;
+	}
 
 	public List<String> indexingMaps(final IProgress progress) {
-		File file = context.getSettings().extendOsmandPath(MAPS_PATH);
-		file.mkdirs();
+		long val = System.currentTimeMillis();
+		ArrayList<File> files = new ArrayList<File>();
+		collectFiles(context.getSettings().extendOsmandPath(MAPS_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		collectFiles(context.getSettings().extendOsmandPath(SRTM_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
 		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();
 		File indCache = context.getSettings().extendOsmandPath(INDEXES_CACHE);
-		if(indCache.exists()) {
+		if (indCache.exists()) {
 			try {
 				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
 				NativeOsmandLibrary nativeLib = NativeOsmandLibrary.getLoadedLibrary();
-				if(nativeLib != null) {
+				if (nativeLib != null) {
 					nativeLib.initCacheMapFile(indCache.getAbsolutePath());
 				}
 			} catch (Exception e) {
 				log.error(e.getMessage(), e);
 			}
 		}
-		if (file.exists() && file.canRead() ) {
-			long val = System.currentTimeMillis();
-			File[] lf = file.listFiles();
-			if(lf == null) {
-				lf = new File[0];
-			}
-			for (File f : lf) {
-				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-					progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
-					try {
-						BinaryMapIndexReader index = null;
-						try {
-							index = cachedOsmandIndexes.getReader(f);
-							if (index.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
-								index = null;
-							}
-							if (index != null) {
-								renderer.initializeNewResource(progress, f, index);
-							}
-						} catch (IOException e) {
-							log.error(String.format("File %s could not be read", f.getName()), e);
-						}
-						if (index == null || (Version.isFreeVersion(context) && f.getName().contains("_wiki"))) {
-							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-						} else {
-							if(index.isBasemap()) {
-								basemapFileNames.add(f.getName());
-							} 
-							long dateCreated = index.getDateCreated();
-							if(dateCreated == 0) {
-								dateCreated = f.lastModified();
-							}
-							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(dateCreated))); //$NON-NLS-1$
-							for(String rName : index.getRegionNames()) {
-								// skip duplicate names (don't make collision between getName() and name in the map)
-								// it can be dangerous to use one file to different indexes if it is multithreaded
-								RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
-								addressMap.put(rName, rarb);
-							}
-							if (index.hasTransportData()) {
-								try {
-									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-									transportRepositories.add(new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf, index)));
-								} catch (IOException e) {
-									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-								}
-							}
-							if(index.containsRouteData()) {
-								try {
-									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-									routingMapFiles.put(f.getAbsolutePath(), new BinaryMapIndexReader(raf, index));
-								} catch (IOException e) {
-									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-								}
-							}
-							if(index.containsPoiData()) {
-								try {
-									RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
-									amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf, index)));
-								} catch (IOException e) {
-									log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-									warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-								}
-							}
-						}
-					} catch (SQLiteException e) {
-						log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-						warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-					} catch (OutOfMemoryError oome) {
-						log.error("Exception reading " + f.getAbsolutePath(), oome); //$NON-NLS-1$
-						warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
+		for (File f : files) {
+			progress.startTask(context.getString(R.string.indexing_map) + " " + f.getName(), -1); //$NON-NLS-1$
+			try {
+				BinaryMapIndexReader index = null;
+				try {
+					index = cachedOsmandIndexes.getReader(f);
+					if (index.getVersion() != IndexConstants.BINARY_MAP_VERSION) {
+						index = null;
 					}
-				} else if(f.getName().endsWith(".map.odb")){ //$NON-NLS-1$
-					warnings.add(MessageFormat.format(context.getString(R.string.old_map_index_is_not_supported), f.getName())); //$NON-NLS-1$
+					if (index != null) {
+						renderer.initializeNewResource(progress, f, index);
+					}
+				} catch (IOException e) {
+					log.error(String.format("File %s could not be read", f.getName()), e);
 				}
+				if (index == null || (Version.isFreeVersion(context) && f.getName().contains("_wiki"))) {
+					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+				} else {
+					if (index.isBasemap()) {
+						basemapFileNames.add(f.getName());
+					}
+					long dateCreated = index.getDateCreated();
+					if (dateCreated == 0) {
+						dateCreated = f.lastModified();
+					}
+					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(dateCreated))); //$NON-NLS-1$
+					for (String rName : index.getRegionNames()) {
+						// skip duplicate names (don't make collision between getName() and name in the map)
+						// it can be dangerous to use one file to different indexes if it is multithreaded
+						RegionAddressRepositoryBinary rarb = new RegionAddressRepositoryBinary(index, rName);
+						addressMap.put(rName, rarb);
+					}
+					if (index.hasTransportData()) {
+						try {
+							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+							transportRepositories.add(new TransportIndexRepositoryBinary(new BinaryMapIndexReader(raf, index)));
+						} catch (IOException e) {
+							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+						}
+					}
+					if (index.containsRouteData()) {
+						try {
+							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+							routingMapFiles.put(f.getAbsolutePath(), new BinaryMapIndexReader(raf, index));
+						} catch (IOException e) {
+							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+						}
+					}
+					if (index.containsPoiData()) {
+						try {
+							RandomAccessFile raf = new RandomAccessFile(f, "r"); //$NON-NLS-1$
+							amenityRepositories.add(new AmenityIndexRepositoryBinary(new BinaryMapIndexReader(raf, index)));
+						} catch (IOException e) {
+							log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+							warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+						}
+					}
+				}
+			} catch (SQLiteException e) {
+				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
+			} catch (OutOfMemoryError oome) {
+				log.error("Exception reading " + f.getAbsolutePath(), oome); //$NON-NLS-1$
+				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_big_for_memory), f.getName()));
 			}
-			log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
 		}
-		if(!indCache.exists() || indCache.canWrite()){
+		log.debug("All map files initialized " + (System.currentTimeMillis() - val) + " ms");
+		if (files.size() > 0 && (!indCache.exists() || indCache.canWrite())) {
 			try {
 				cachedOsmandIndexes.writeToFile(indCache);
 			} catch (Exception e) {
@@ -646,22 +652,11 @@ public class ResourceManager {
 	
 	// POI INDEX //
 	private List<String> indexingPoi(final IProgress progress) {
-		File file = context.getSettings().extendOsmandPath(POI_PATH);
-		file.mkdirs();
-		List<String> warnings = new ArrayList<String>();
-		if (file.exists() && file.canRead()) {
-			File[] listFiles = file.listFiles();
-			if (listFiles != null) {
-				for (File f : listFiles) {
-					indexingPoi(progress, warnings, f);
-				}
-			}
-		}
 		File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
 		if(updatablePoiDbFile.exists() && updatablePoiDbFile.canRead()){
 			tryToOpenUpdatablePoiDb(updatablePoiDbFile);
 		}
-		return warnings;
+		return new ArrayList<String>();
 	}
 	
 	public AmenityIndexRepositoryOdb getUpdatablePoiDb() {
@@ -692,19 +687,6 @@ public class ResourceManager {
 		return false;
 	}
 
-	// POI not supported any more
-	public void indexingPoi(final IProgress progress, List<String> warnings, File f) {
-		if (f.getName().endsWith(IndexConstants.POI_INDEX_EXT)) {
-			progress.startTask(context.getString(R.string.indexing_poi) + " " +  f.getName(), -1); //$NON-NLS-1$
-			try {
-				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-			} catch (SQLiteException e) {
-				log.error("Exception reading " + f.getAbsolutePath(), e); //$NON-NLS-1$
-				warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
-			}
-		}
-	}
-	
 	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<Amenity> searchAmenities(PoiFilter filter,

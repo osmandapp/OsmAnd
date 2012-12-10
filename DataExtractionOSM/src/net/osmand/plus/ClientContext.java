@@ -16,9 +16,7 @@ public interface ClientContext {
 	
 	public File getAppDir();
 	
-	public File getVoiceDir();
-	
-	public File getBackupDir();
+	public File getAppDir(String extend);
 	
 	public void showToastMessage(int msgId);
 	

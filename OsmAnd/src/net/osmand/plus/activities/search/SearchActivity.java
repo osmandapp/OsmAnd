@@ -135,7 +135,7 @@ public class SearchActivity extends TabActivity {
 		
 		TabWidget tabs = (TabWidget) findViewById(android.R.id.tabs);
 		tabs.setBackgroundResource(R.drawable.tab_icon_background);
-		TabHost host = getTabHost(); 
+		TabHost host = getTabHost();
 		host.addTab(host.newTabSpec(SEARCH_POI).setIndicator(getTabIndicator(R.drawable.tab_search_poi_icon, R.string.poi)).
 				setContent(new Intent(this, SearchPoiFilterActivity.class))); //$NON-NLS-1$
 		

@@ -1,20 +1,26 @@
 package net.osmand.plus.download;
 
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
+import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
+import static net.osmand.data.IndexConstants.VOICE_INDEX_EXT_ZIP;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-
-import org.apache.commons.logging.Log;
+import java.util.List;
 
 import net.osmand.LogUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
-import static net.osmand.data.IndexConstants.*;
 
-public class IndexItem {
+import org.apache.commons.logging.Log;
+
+public class IndexItem implements Comparable<IndexItem> {
 	private static final Log log = LogUtil.getLog(IndexItem.class);
 	
 	String description;
@@ -56,7 +62,7 @@ public class IndexItem {
 		return s;
 	}
 
-	public String getVisibleName() {
+	public String getVisibleName(ClientContext ctx) {
 		return getBasename().replace('_', ' ');
 	}
 
@@ -101,7 +107,7 @@ public class IndexItem {
 		return date;
 	}
 	
-	public String getSizeDescription() {
+	public String getSizeDescription(ClientContext ctx) {
 		return size + " MB";
 	}
 
@@ -109,7 +115,8 @@ public class IndexItem {
 		return size;
 	}
 
-	public DownloadEntry createDownloadEntry(ClientContext ctx, DownloadActivityType type) {
+	public List<DownloadEntry> createDownloadEntry(ClientContext ctx, DownloadActivityType type, 
+			List<DownloadEntry> downloadEntries) {
 		String fileName = this.fileName;
 		File parent = null;
 		String toSavePostfix = null;
@@ -130,13 +137,13 @@ public class IndexItem {
 			toSavePostfix = IndexConstants.EXTRA_ZIP_EXT;
 			toCheckPostfix = IndexConstants.EXTRA_EXT;
 		} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-			parent = ctx.getVoiceDir();
+			parent = ctx.getAppDir(IndexConstants.VOICE_INDEX_DIR);
 			toSavePostfix = VOICE_INDEX_EXT_ZIP;
 			toCheckPostfix = ""; //$NON-NLS-1$
 			unzipDir = true;
 			preventMediaIndexing = true;
 		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			parent = ctx.getVoiceDir();
+			parent = ctx.getAppDir(IndexConstants.VOICE_INDEX_DIR);
 			toSavePostfix = TTSVOICE_INDEX_EXT_ZIP;
 			toCheckPostfix = ""; //$NON-NLS-1$
 			unzipDir = true;
@@ -160,11 +167,16 @@ public class IndexItem {
 		final DownloadEntry entry;
 		if (parent == null || !parent.exists()) {
 			ctx.showToastMessage(R.string.sd_dir_not_accessible);
-			entry = null;
 		} else {
 			entry = new DownloadEntry();
 			entry.type = type;
 			entry.baseName = getBasename();
+			String url = "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&";
+			url += ctx.getVersionAsURLParam() + "&";
+			if (type == DownloadActivityType.ROADS_FILE) {
+				url += "road=yes&";
+			}
+			entry.urlToDownload = url + "file=" + fileName;
 			entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
 			entry.unzip = unzipDir;
 			SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
@@ -184,32 +196,49 @@ public class IndexItem {
 				entry.parts = Integer.parseInt(parts);
 			}
 			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
-			File backup = new File(ctx.getBackupDir(), entry.fileToUnzip.getName());
+			File backup = new File(ctx.getAppDir(IndexConstants.BACKUP_INDEX_DIR), entry.fileToUnzip.getName());
 			if (backup.exists()) {
 				entry.existingBackupFile = backup;
 			}
+			if (attachedItem != null) {
+				ArrayList<DownloadEntry> sz = new ArrayList<DownloadEntry>();
+				attachedItem.createDownloadEntry(ctx, type, sz);
+				if(sz.size() > 0) {
+					entry.attachedEntry = sz.get(0);
+				}
+			}
+			downloadEntries.add(entry);
 		}
-		if (attachedItem != null) {
-			entry.attachedEntry = attachedItem.createDownloadEntry(ctx, type);
+		return downloadEntries;
+	}
+	
+	public String getTargetFileName(){
+		String e = getFileName();
+		
+		if (e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
+			int l = e.lastIndexOf('_');
+			if(l == -1) {
+				l = e.length();
+			}
+			String s = e.substring(0, l);
+			if (getType() == DownloadActivityType.ROADS_FILE) {
+				s = "-roads" + s;
+			}	
+			s += IndexConstants.BINARY_MAP_INDEX_EXT;
+			return s;
+		} else if(e.endsWith(IndexConstants.EXTRA_ZIP_EXT)){
+			return e.substring(0, e.length() - IndexConstants.EXTRA_ZIP_EXT.length()) + IndexConstants.EXTRA_EXT; 
 		}
-		return entry;
+			
+		return e;
 	}
 
-	public String convertServerFileNameToLocal() {
-		String e = getFileName();
-		int l = e.lastIndexOf('_');
-		String s;
-		if (e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || e.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-			s = IndexConstants.BINARY_MAP_INDEX_EXT;
-		} else {
-			s = ""; //$NON-NLS-1$
+	@Override
+	public int compareTo(IndexItem another) {
+		if(another == null) {
+			return -1;
 		}
-		if (getType() == DownloadActivityType.ROADS_FILE) {
-			s = "-roads" + s;
-		}
-		if(l == -1) {
-			l = e.length();
-		}
-		return e.substring(0, l) + s;
+		return getFileName().compareTo(another.getFileName());
 	}
+
 }

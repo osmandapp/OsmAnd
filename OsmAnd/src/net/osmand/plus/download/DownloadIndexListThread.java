@@ -1,6 +1,7 @@
 package net.osmand.plus.download;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
@@ -50,9 +51,11 @@ public class DownloadIndexListThread extends Thread {
 				public void run() {
 					if (indexFiles != null) {
 						boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
-						if (!basemapExists && indexFiles.getBasemap() != null) {
-							uiActivity.getEntriesToDownload().put(indexFiles.getBasemap().getFileName(), indexFiles.getBasemap()
-									.createDownloadEntry(uiActivity.getClientContext(), uiActivity.getType()));
+						IndexItem basemap = indexFiles.getBasemap();
+						if (!basemapExists && basemap != null) {
+							List<DownloadEntry> downloadEntry = basemap
+									.createDownloadEntry(uiActivity.getClientContext(), uiActivity.getType(), new ArrayList<DownloadEntry>());
+							uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
 							AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download, Toast.LENGTH_LONG).show();
 							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 						}

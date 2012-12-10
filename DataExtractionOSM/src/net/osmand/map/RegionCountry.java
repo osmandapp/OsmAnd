@@ -1,5 +1,6 @@
 package net.osmand.map;
 
+import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.set.hash.TLongHashSet;
 
@@ -12,13 +13,12 @@ import net.osmand.osm.MapUtils;
 
 public class RegionCountry {
 	public String continentName;
-	public TLongArrayList tiles = new TLongArrayList();
+	public TIntArrayList tiles = new TIntArrayList();
 	public int left, right, top, bottom;
 	public String name;
 	public RegionCountry parent;
 	
 	private List<RegionCountry> regions = new ArrayList<RegionCountry>();
-	private final static int SHIFT = 5;
 
 	public void add(int xdeg, int ydeg) {
 		if (tiles.size() == 0) {
@@ -29,15 +29,20 @@ public class RegionCountry {
 		right = Math.max(xdeg, right);
 		bottom = Math.min(ydeg, bottom);
 		top = Math.max(ydeg, top);
-		tiles.add((xdeg << SHIFT) + ydeg);
+		tiles.add(xdeg);
+		tiles.add(ydeg);
+	}
+	
+	public int getTileSize() {
+		return tiles.size()/2;
 	}
 
 	public int getLon(int i) {
-		return (int) (tiles.get(i) >> SHIFT);
+		return tiles.get(i*2);
 	}
 
 	public int getLat(int i) {
-		return (int) (tiles.get(i) - ((tiles.get(i) >> SHIFT) << SHIFT));
+		return tiles.get(i*2 + 1);
 	}
 	
 	public void addSubregion(RegionCountry c) {
@@ -49,7 +54,7 @@ public class RegionCountry {
 		return regions;
 	}
 
-	public TLongHashSet calculateTileSet(TLongHashSet t, int z) {
+	/*public TLongHashSet calculateTileSet(TLongHashSet t, int z) {
 		for (int j = 0; j < tiles.size(); j++) {
 			int kx = (int) MapUtils.getTileNumberX(z, getLon(j));
 			int ex = (int) MapUtils.getTileNumberX(z, getLon(j) + 0.9999f);
@@ -63,7 +68,7 @@ public class RegionCountry {
 			}
 		}
 		return t;
-	}
+	}*/
 	
 	public static RegionCountry construct(OsmAndRegion reg) {
 		RegionCountry rc = new RegionCountry();
@@ -71,8 +76,12 @@ public class RegionCountry {
 			rc.continentName = reg.getContinentName();
 		}
 		rc.name = reg.getName();
+		int px = 0;
+		int py = 0;
 		for (int i = 0; i < reg.getDegXCount(); i++) {
-			rc.add(reg.getDegX(i), reg.getDegY(i));
+			px = reg.getDegX(i) + px;
+			py = reg.getDegY(i) + py;
+			rc.add(px, py);
 		}
 		for (int i = 0; i < reg.getSubregionsCount(); i++) {
 			rc.addSubregion(construct(reg.getSubregions(i)));
@@ -85,7 +94,7 @@ public class RegionCountry {
 		// System.out.println(r.name + " " + r.tiles.size() + " ?= " + r.calculateTileSet(new TLongHashSet(), 8).size());
 		int px = 0;
 		int py = 0;
-		for (int i = 0; i < this.tiles.size(); i++) {
+		for (int i = 0; i < this.getTileSize(); i++) {
 			reg.addDegX(this.getLon(i) - px);
 			reg.addDegY(this.getLat(i) - py);
 			px = this.getLon(i);

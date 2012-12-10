@@ -187,7 +187,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(info);
 		}
-		if(info.getType() == LocalIndexType.MAP_DATA || info.getType() == LocalIndexType.POI_DATA){
+		if(info.getType() == LocalIndexType.MAP_DATA){
 			if(!info.isBackupedData()){
 				menu.add(R.string.local_index_mi_backup);
 			}
@@ -331,8 +331,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				parent = settings.extendOsmandPath(ResourceManager.GPX_PATH);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
 				parent = settings.extendOsmandPath(ResourceManager.MAPS_PATH);
-			} else if(i.getType() == LocalIndexType.POI_DATA){
-				parent = settings.extendOsmandPath(ResourceManager.POI_PATH);
 			} else if(i.getType() == LocalIndexType.TILES_DATA){
 				parent = settings.extendOsmandPath(ResourceManager.TILES_PATH);
 			} else if(i.getType() == LocalIndexType.VOICE_DATA){
@@ -750,7 +748,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			openSelectionMode(R.string.local_index_mi_delete);
 		} else if(item.getItemId() == R.string.local_index_mi_backup){
 			listAdapter.filterCategories(false);
-			listAdapter.filterCategories(LocalIndexType.MAP_DATA, LocalIndexType.POI_DATA);
+			listAdapter.filterCategories(LocalIndexType.MAP_DATA);
 			openSelectionMode(R.string.local_index_mi_backup);
 		} else if(item.getItemId() == R.string.local_index_mi_restore){
 			listAdapter.filterCategories(true);

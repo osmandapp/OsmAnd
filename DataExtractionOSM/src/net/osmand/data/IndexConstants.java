@@ -10,7 +10,7 @@ public class IndexConstants {
 	public final static int VOICE_VERSION = 0; //supported download versions
 	public final static int TTSVOICE_VERSION = 1; //supported download versions
 	
-	public static final String POI_INDEX_DIR = "POI/"; //$NON-NLS-1$
+	public static final String SRTM_INDEX_DIR = "srtm/"; //$NON-NLS-1$
 	public static final String VOICE_INDEX_DIR = "voice/"; //$NON-NLS-1$
 	public static final String RENDERERS_DIR = "rendering/"; //$NON-NLS-1$
 	
@@ -33,5 +33,6 @@ public class IndexConstants {
 	public final static String POI_TABLE = "poi"; //$NON-NLS-1$
 	
 	public static final String INDEX_DOWNLOAD_DOMAIN = "download.osmand.net";
+	public static final String BACKUP_INDEX_DIR= "backup/";
 	
 }

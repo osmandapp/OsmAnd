@@ -66,11 +66,11 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
 		installedPlugins.add(new OsmandExtraSettings(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
-		installedPlugins.add(new OsmEditingPlugin(app));
-		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		installedPlugins.add(new SRTMPlugin(app));
 		installParkingPlugin(app);
 		installOsmodroidPlugin(app);
+		installedPlugins.add(new OsmEditingPlugin(app));
+		installedPlugins.add(new OsmandDevelopmentPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {

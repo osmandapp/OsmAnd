@@ -45,16 +45,12 @@ public class AndroidClientContext implements ClientContext {
 	public File getAppDir() {
 		return app.getSettings().extendOsmandPath(ResourceManager.APP_DIR);
 	}
-
+	
 	@Override
-	public File getVoiceDir() {
-		return app.getSettings().extendOsmandPath(ResourceManager.VOICE_PATH);
+	public File getAppDir(String extend) {
+		return app.getSettings().extendOsmandPath(ResourceManager.APP_DIR + extend);
 	}
 
-	@Override
-	public File getBackupDir() {
-		return app.getSettings().extendOsmandPath(ResourceManager.BACKUP_PATH);
-	}
 
 	@Override
 	public void showToastMessage(int msgId) {

@@ -3,7 +3,6 @@ package net.osmand.plus.download;
 import java.io.File;
 import java.util.List;
 
-
 public class DownloadEntry {
 	public File fileToSave;
 	public File fileToUnzip;
@@ -11,13 +10,14 @@ public class DownloadEntry {
 	public Long dateModified;
 	public double sizeMB;
 	public String baseName;
+	public String urlToDownload;
 	public int parts;
 	public File existingBackupFile;
-	public DownloadEntry attachedEntry;
 	public boolean isAsset;
 	public DownloadActivityType type;
 	
 	public List<String> srtmFilesToDownload;
+	public DownloadEntry attachedEntry;
 
 	public DownloadEntry() {
 		// default

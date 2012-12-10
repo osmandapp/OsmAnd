@@ -39,7 +39,7 @@ public class DownloadFileHelper {
 		public void showWarning(String warning);
 	}
 	
-	protected void downloadFile(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
+	private void downloadFileInternal(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
 			IProgress progress, boolean forceWifi) throws IOException, InterruptedException {
 		InputStream is = null;
 		byte[] buffer = new byte[BUFFER_SIZE];
@@ -47,6 +47,7 @@ public class DownloadFileHelper {
 		int length = 0;
 		int fileread = 0;
 		int triesDownload = TRIES_TO_DOWNLOAD;
+		boolean notFound = false;
 		boolean first = true;
 		try {
 			while (triesDownload > 0) {
@@ -68,6 +69,10 @@ public class DownloadFileHelper {
 					conn.setConnectTimeout(30000);
 					log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
 					boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
+					if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
+						notFound = true;
+						break;
+					}
 					if ((conn.getResponseCode() != HttpURLConnection.HTTP_PARTIAL  && 
 							conn.getResponseCode() != HttpURLConnection.HTTP_OK ) || wifiConnectionBroken) {
 						conn.disconnect();
@@ -75,10 +80,6 @@ public class DownloadFileHelper {
 						continue;
 					}
 					is = conn.getInputStream();
-//					long skipped = 0;
-//					while (skipped < fileread) {
-//						skipped += is.skip(fileread - skipped);
-//					}
 					if (first) {
 						length = conn.getContentLength();
 						String taskName = ctx.getString(R.string.downloading_file) + indexOfAllFiles +" " + fileName;
@@ -111,7 +112,9 @@ public class DownloadFileHelper {
 				is.close();
 			}
 		}
-		if(length != fileread || length == 0){
+		if(notFound) {
+			throw new IOException("File not found " + fileName); //$NON-NLS-1$
+		} else if(length != fileread || length == 0){
 			throw new IOException("File was not fully read"); //$NON-NLS-1$
 		}
 		
@@ -121,53 +124,31 @@ public class DownloadFileHelper {
 		return ctx.isWifiConnected();
 	}
 	
-	public boolean downloadFile(final String fileName, DownloadEntry de, IProgress progress, 
+	public boolean downloadFile(DownloadEntry de, IProgress progress, 
 			List<File> toReIndex, String indexOfAllFiles, 
 			DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
-			String urlSuffix = "&" + ctx.getVersionAsURLParam();
-			if(de.type == DownloadActivityType.SRTM_FILE) {
-				String urlPrefix = "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download_srtm?event=2&file=";
-				List<String> list = de.srtmFilesToDownload;
-				if(list != null) {
-					int i = 1;
-					for(String fname : list) {
-						URL url = new URL(urlPrefix + fname + urlSuffix); //$NON-NLS-1$
-						FileOutputStream out = new FileOutputStream(new File(de.fileToSave, fname));
-						try {
-							downloadFile(fname, out, url, null, " [" + i + "/" + list.size() + "]", progress, forceWifi);
-						} finally {
-							out.close();
-						}
+			FileOutputStream out = new FileOutputStream(de.fileToSave);
+			try {
+				log.info("Download " + de.urlToDownload);
+				if (de.parts == 1) {
+					URL url = new URL(de.urlToDownload); //$NON-NLS-1$
+					downloadFileInternal(de.baseName, out, url, null, indexOfAllFiles, progress, forceWifi);
+				} else {
+					for (int i = 1; i <= de.parts; i++) {
+						URL url = new URL(de.urlToDownload); //$NON-NLS-1$
+						downloadFileInternal(de.baseName, out, url, " [" + i + "/" + de.parts + "]", indexOfAllFiles, progress, forceWifi);
 					}
 				}
-			} else {
-				FileOutputStream out = new FileOutputStream(de.fileToSave);
-				try {
-					String urlPrefix = "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN + "/download?event=2&file=";
-					
-					if (de.type == DownloadActivityType.ROADS_FILE) {
-						urlSuffix += "&road=yes";
-					}
-					if (de.parts == 1) {
-						URL url = new URL(urlPrefix + fileName + urlSuffix); //$NON-NLS-1$
-						downloadFile(fileName, out, url, null, indexOfAllFiles, progress, forceWifi);
-					} else {
-						for (int i = 1; i <= de.parts; i++) {
-							URL url = new URL(urlPrefix + fileName + "-" + i + urlSuffix); //$NON-NLS-1$
-							downloadFile(fileName, out, url, " [" + i + "/" + de.parts + "]", indexOfAllFiles, progress, forceWifi);
-						}
-					}
-				} finally {
-					out.close();
-				}
-				unzipFile(de, progress, toReIndex);
+			} finally {
+				out.close();
 			}
+			unzipFile(de, progress, toReIndex);
 			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
-			showWarningCallback.showWarning(ctx.getString(R.string.error_io_error));
+			showWarningCallback.showWarning(ctx.getString(R.string.error_io_error) + " : " + e.getMessage());
 			// Possibly file is corrupted
 			de.fileToSave.delete();
 			return false;

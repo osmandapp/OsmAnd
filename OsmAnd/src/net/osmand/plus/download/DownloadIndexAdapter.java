@@ -1,12 +1,17 @@
 package net.osmand.plus.download;
 
+import static net.osmand.data.IndexConstants.EXTRA_EXT;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import android.graphics.Color;
@@ -42,8 +47,13 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 
 	public void updateLoadedFiles() {
+		OsmandSettings settings = getMyApplication().getSettings();
 		indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		DownloadIndexActivity.listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),
+				EXTRA_EXT, indexActivatedFileNames);
 		indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
+		DownloadIndexActivity.listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),
+				EXTRA_EXT, indexFileNames);
 		getMyApplication().getResourceManager().getBackupIndexes(indexFileNames);
 	}
 
@@ -74,6 +84,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	public List<IndexItem> getIndexFiles() {
 		return indexFiles;
 	}
+	
 	
 	public void setIndexFiles(List<IndexItem> indexFiles) {
 		this.indexFiles.clear();
@@ -109,11 +120,12 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					vars[i] = vars[i].trim().toLowerCase();
 				}
 				List<IndexItem> filter = new ArrayList<IndexItem>();
+				ClientContext c = downloadActivity.getClientContext();
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
 					for (String var : vars) {
 						if (var.length() > 0) {
-							if (!item.getVisibleName().toLowerCase().contains(var) 
+							if (!item.getVisibleName(c).toLowerCase().contains(var) 
 									/*&& !item.getDescription().toLowerCase().contains(var)*/) {
 								add = false;
 							}
@@ -209,13 +221,14 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-		String eName = e.getVisibleDescription(downloadActivity.getClientContext()) + "\n" + e.getVisibleName();
+		ClientContext clctx = downloadActivity.getClientContext();
+		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx);
 		item.setText(eName.trim()); //$NON-NLS-1$
-		String d = e.getDate() + "\n" + e.getSizeDescription();
+		String d = e.getDate() + "\n" + e.getSizeDescription(clctx);
 		description.setText(d.trim());
 
 		CheckBox ch = (CheckBox) row.findViewById(R.id.check_download_item);
-		ch.setChecked(downloadActivity.getEntriesToDownload().containsKey(e.getFileName()));
+		ch.setChecked(downloadActivity.getEntriesToDownload().containsKey(e));
 		ch.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -226,7 +239,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		});
 
 		if (indexFileNames != null) {
-			String sfName = e.convertServerFileNameToLocal();
+			String sfName = e.getTargetFileName();
 			if (!indexFileNames.containsKey(sfName)) {
 				item.setTextColor(downloadActivity.getResources().getColor(R.color.index_unknown));
 				item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);

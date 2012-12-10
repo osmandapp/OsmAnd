@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -92,7 +94,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	private ProgressDialog progressFileDlg = null;
 	
-	private TreeMap<String, DownloadEntry> entriesToDownload = new TreeMap<String, DownloadEntry>();
+	private TreeMap<IndexItem, List<DownloadEntry>> entriesToDownload = new TreeMap<IndexItem, List<DownloadEntry>>();
 	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 
 	private int MAXIMUM_AVAILABLE_FREE_DOWNLOADS = 10;
@@ -122,7 +124,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 			@Override
 			public void onClick(View v) {
-				downloadFilesCheckFreeVersion();
+				downloadFilesCheckFreeVersion(flattenDownloadEntries());
 			}
 			
 		});
@@ -171,6 +173,15 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 
 	public void updateLoadedFiles() {
+		if (type == DownloadActivityType.SRTM_FILE) {
+			List<IndexItem> srtms = downloadListIndexThread.getCachedIndexFiles();
+			for (IndexItem i : srtms) {
+				if (i instanceof SrtmIndexItem) {
+					((SrtmIndexItem) i).updateExistingTiles(getMyApplication().getResourceManager().getIndexFileNames());
+				}
+			}
+			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
+		}
 		if(getExpandableListAdapter() != null) {
 			((DownloadIndexAdapter)getExpandableListAdapter()).updateLoadedFiles();
 		}
@@ -199,7 +210,17 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		return type;
 	}
 	
-	public TreeMap<String, DownloadEntry> getEntriesToDownload() {
+	public List<DownloadEntry> flattenDownloadEntries() {
+		List<DownloadEntry> res = new ArrayList<DownloadEntry>();
+		for(List<DownloadEntry> ens : entriesToDownload.values()) {
+			if(ens != null) {
+				res.addAll(ens);
+			}
+		}
+		return res;
+	}
+	
+	public TreeMap<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
 		return entriesToDownload;
 	}
 
@@ -218,7 +239,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						IndexItem es = listAdapter.getChild(j, i);
 						if (!entriesToDownload.containsKey(es.getFileName())) {
 							selected++;
-							entriesToDownload.put(es.getFileName(), es.createDownloadEntry(getClientContext(), type));
+							entriesToDownload.put(es, es.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>(1)));
 						}
 					}
 				}
@@ -228,10 +249,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 				}
 			} else if (item.getItemId() == FILTER_EXISTING_REGIONS) {
-				final Set<String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
+				final Map<String, String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
 				final List<IndexItem> filtered = new ArrayList<IndexItem>();
 				for (IndexItem fileItem : listAdapter.getIndexFiles()) {
-					if (listAlreadyDownloaded.contains(fileItem.convertServerFileNameToLocal())) {
+					if (listAlreadyDownloaded.containsKey(fileItem.getTargetFileName())) {
 						filtered.add(fileItem);
 					}
 				}
@@ -295,14 +316,15 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public List<IndexItem> getFilteredByType() {
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
 		if(type == DownloadActivityType.SRTM_FILE){
+			Map<String, String> indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
 			List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
 			for(RegionCountry rc : countries){
 				if(rc.tiles.size() > 50){
 					for(RegionCountry ch : rc.getSubRegions()) {
-						filtered.add(new SrtmIndexItem(ch));
+						filtered.add(new SrtmIndexItem(ch, indexFileNames));
 					}
 				} else {
-					filtered.add(new SrtmIndexItem(rc));
+					filtered.add(new SrtmIndexItem(rc, indexFileNames));
 				}
 			}
 		}
@@ -375,7 +397,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		switch (id) {
 			case DIALOG_PROGRESS_FILE:
 				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
-				String[] indexes = entriesToDownload.keySet().toArray(new String[0]);
+				IndexItem[] indexes = entriesToDownload.keySet().toArray(new IndexItem[0]);
 				task.execute(indexes);
 				break;
 			case DIALOG_PROGRESS_LIST:
@@ -418,12 +440,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 		final IndexItem e = (IndexItem) ((DownloadIndexAdapter)getListAdapter()).getChild(groupPosition, childPosition);
-		String key = e.getFileName();
 		final CheckBox ch = (CheckBox) v.findViewById(R.id.check_download_item);
 		
 		if(ch.isChecked()){
 			ch.setChecked(!ch.isChecked());
-			entriesToDownload.remove(key);
+			entriesToDownload.remove(e);
 			if(entriesToDownload.isEmpty()){
 				int x = getListView().getScrollX();
 				int y = getListView().getScrollY();
@@ -433,11 +454,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			return true;
 		}
 		
-		final DownloadEntry entry = e.createDownloadEntry(getClientContext(), type);
-		if (entry != null) {
+		List<DownloadEntry> download = e.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>());
+		if (download.size() > 0) {
 			// if(!fileToUnzip.exists()){
 			// builder.setMessage(MessageFormat.format(getString(R.string.download_question), baseName, extractDateAndSize(e.getValue())));
-			entriesToDownload.put(e.getFileName(), entry);
+			entriesToDownload.put(e, download);
 			int x = getListView().getScrollX();
 			int y = getListView().getScrollY();
 			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
@@ -448,29 +469,26 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	
-	private Set<String> listAlreadyDownloadedWithAlternatives() {
-		Set<String> files = new TreeSet<String>();
-		File externalStorageDirectory = settings.getExternalStorageDirectory();
-		// files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.POI_PATH),POI_INDEX_EXT,POI_INDEX_EXT_ZIP,POI_TABLE_VERSION));
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.APP_DIR),EXTRA_EXT, EXTRA_ZIP_EXT,0));
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT,BINARY_MAP_INDEX_EXT_ZIP,BINARY_MAP_VERSION));
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",VOICE_INDEX_EXT_ZIP, VOICE_VERSION));
-		files.addAll(listWithAlternatives(new File(externalStorageDirectory, ResourceManager.VOICE_PATH),"",TTSVOICE_INDEX_EXT_ZIP, TTSVOICE_VERSION));
+	private Map<String, String> listAlreadyDownloadedWithAlternatives() {
+		Map<String, String> files = new TreeMap<String, String>();
+		listWithAlternatives(settings.extendOsmandPath(ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),EXTRA_EXT, files);
+		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
+		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
 		return files;
 	}
 	
-	private Collection<? extends String> listWithAlternatives(File file, final String ext, final String downloadExt, final int version) {
-		final List<String> files = new ArrayList<String>();
+	public static Map<String, String> listWithAlternatives(File file, final String ext, 
+			final Map<String, String> files) {
 		if (file.isDirectory()) {
 			file.list(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						files.add(filename);
-						if (downloadExt != null) {
-							files.add(filename.substring(0, filename.length() - ext.length()) + downloadExt);
-						}
+						String date = MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(new File(dir, filename).lastModified()));
+						files.put(filename, date);
+//						files.put(filename.substring(0, filename.length() - ext.length()) + downloadExt, date);
 						return true;
 					} else {
 						return false;
@@ -482,14 +500,16 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		return files;
 	}
 
-	protected void downloadFilesCheckFreeVersion() {
-		if (Version.isFreeVersion(this)) {
-			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get() + entriesToDownload.size();
+	protected void downloadFilesCheckFreeVersion(List<DownloadEntry> list) {
+		if (Version.isFreeVersion(this) ) {
+			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			boolean wiki = false;
-			for (DownloadEntry es : entriesToDownload.values()) {
+			for (DownloadEntry es : list) {
 				if (es.baseName != null && es.baseName.contains("_wiki")) {
 					wiki = true;
 					break;
+				} else if (es.type != DownloadActivityType.SRTM_FILE) {
+					total++;
 				}
 			}
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
@@ -499,16 +519,16 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				msg.setPositiveButton(R.string.default_buttons_ok, null);
 				msg.show();
 			} else {
-				downloadFilesPreCheckSpace();
+				downloadFilesPreCheckSpace( list);
 			}
 		} else {
-			downloadFilesPreCheckSpace();
+			downloadFilesPreCheckSpace( list);
 		}
 	}
 	
-	protected void downloadFilesPreCheckSpace() {
+	protected void downloadFilesPreCheckSpace(List<DownloadEntry> list) {
 		double sz = 0;
-		for(DownloadEntry es : entriesToDownload.values()){
+		for(DownloadEntry es : list){
 			sz += es.sizeMB;
 		}
 		// get availabile space 
@@ -518,15 +538,15 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
 		}
-		if(asz != -1 && asz < sz ){
+		if(asz != -1 && asz < sz * 2 ){
 			AccessibleToast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
 		} else {
 			Builder builder = new AlertDialog.Builder(this);
-			if (asz > 0 && sz/asz > 0.8) {
-				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), entriesToDownload.size(), sz,
+			if (asz > 0 && sz/asz > 0.4) {
+				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question_space), list.size(), sz,
 						asz));
 			} else {
-				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), entriesToDownload.size(), sz));
+				builder.setMessage(MessageFormat.format(getString(R.string.download_files_question), list.size(), sz));
 			}
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
@@ -552,7 +572,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		downloadListIndexThread.setUiActivity(null);
 	}
 	
-	public class DownloadIndexesAsyncTask extends AsyncTask<String, Object, String> implements DownloadFileShowWarning {
+	public class DownloadIndexesAsyncTask extends AsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 
 		private IProgress progress;
 		private OsmandPreference<Integer> downloads;
@@ -611,23 +631,25 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 
 		@Override
-		protected String doInBackground(String... filesToDownload) {
+		protected String doInBackground(IndexItem... filesToDownload) {
 			try {
 				List<File> filesToReindex = new ArrayList<File>();
 				boolean forceWifi = DownloadIndexActivity.this.downloadFileHelper.isWifiConnected();
 				for (int i = 0; i < filesToDownload.length; i++) {
-					String filename = filesToDownload[i];
-					DownloadEntry entry = DownloadIndexActivity.this.entriesToDownload.get(filename);
-					if (entry != null) {
+					IndexItem filename = filesToDownload[i];
+					List<DownloadEntry> list = DownloadIndexActivity.this.entriesToDownload.get(filename);
+					if (list != null) {
 						String indexOfAllFiles = filesToDownload.length <= 1 ? "" : (" [" + (i + 1) + "/" + filesToDownload.length + "]");
-						boolean result = downloadFile(entry, filename, filesToReindex, indexOfAllFiles, forceWifi);
-						if (result) {
-							DownloadIndexActivity.this.entriesToDownload.remove(filename);
-							downloads.set(downloads.get() + 1);
-							if (entry.existingBackupFile != null) {
-								Algoritms.removeAllFiles(entry.existingBackupFile);
+						for (DownloadEntry entry : list) {
+							boolean result = downloadFile(entry, filesToReindex, indexOfAllFiles, forceWifi);
+							if (result) {
+								DownloadIndexActivity.this.entriesToDownload.remove(filename);
+								downloads.set(downloads.get() + 1);
+								if (entry.existingBackupFile != null) {
+									Algoritms.removeAllFiles(entry.existingBackupFile);
+								}
+								publishProgress(entry);
 							}
-							publishProgress(entry);
 						}
 					}
 				}
@@ -664,7 +686,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 		}
 
-		public boolean downloadFile(DownloadEntry de, String filename, List<File> filesToReindex, String indexOfAllFiles, boolean forceWifi)
+		public boolean downloadFile(DownloadEntry de, List<File> filesToReindex, String indexOfAllFiles, boolean forceWifi)
 				throws InterruptedException {
 			boolean res = false;
 			if (de.isAsset) {
@@ -676,10 +698,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					log.error("Copy exception", e);
 				}
 			} else {
-				res = downloadFileHelper.downloadFile(filename, de, progress, filesToReindex, indexOfAllFiles, this, forceWifi);
+				res = downloadFileHelper.downloadFile(de, progress, filesToReindex, indexOfAllFiles, this, forceWifi);
 			}
 			if (res && de.attachedEntry != null) {
-				return downloadFile(de.attachedEntry, filename, filesToReindex, indexOfAllFiles, forceWifi);
+				return downloadFile(de.attachedEntry, filesToReindex, indexOfAllFiles, forceWifi);
 			}
 			return res;
 		}
