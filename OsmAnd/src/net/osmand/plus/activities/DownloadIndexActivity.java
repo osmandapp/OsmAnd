@@ -306,6 +306,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			Map<String, String> indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
 			for(SrtmIndexItem s : cached){
 				s.updateExistingTiles(indexFileNames);
+				filtered.add(s);
 			}
 		}
 		for (IndexItem file : downloadListIndexThread.getCachedIndexFiles()) {

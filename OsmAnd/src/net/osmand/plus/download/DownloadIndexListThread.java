@@ -49,6 +49,7 @@ public class DownloadIndexListThread extends Thread {
 	public void run() {
 		indexFiles = DownloadOsmandIndexesHelper.getIndexesList(ctx);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
+			cachedSRTMFiles.clear();
 			Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
 			List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
 			for(RegionCountry rc : countries){

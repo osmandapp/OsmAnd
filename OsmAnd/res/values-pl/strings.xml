@@ -1052,7 +1052,6 @@
     <string name="osmodroid_plugin_old_ver_not_supported">Wykryto starą wersję pluginu OsMoDroid, która musi zostać zaktualizowana.</string>
     <string name="osmodroid_plugin_description">Plugin OsMoDroid (TODO opis)</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
-    <string name="monitoring_control_start"/>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>

@@ -115,7 +115,9 @@ function update_count_of_downloads($file) {
  set_time_limit(0);
  $xml = simplexml_load_file("indexes.xml");
  $res = $xml->xpath('//region[@name="'.$file.'"]');
- if(isset($_GET['road'])){
+ if(isset($_GET['srtm'])){
+    downloadFile('srtm/'.$file);
+ } else if(isset($_GET['road'])){
     downloadFile('road-indexes/'.$file);
  } else if (count($res) > 0) {
  	$node = $res[0];

@@ -1,12 +1,10 @@
 package net.osmand.plus.download;
 
-import gnu.trove.list.array.TIntArrayList;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import net.osmand.data.IndexConstants;
 import net.osmand.map.RegionCountry;
@@ -25,6 +23,7 @@ public class SrtmIndexItem extends IndexItem {
 	}
 	
 	public void updateExistingTiles(Map<String, String> existingFileNames) {
+		tilesToDownload.clear();
 		for(int i = 0; i<item.getTileSize() ; i++) {
 			int lat = item.getLat(i);
 			int lon = item.getLon(i);
@@ -78,9 +77,8 @@ public class SrtmIndexItem extends IndexItem {
 				entry.type = type;
 				entry.baseName = fileToDownload;
 				String url = "http://" + IndexConstants.INDEX_DOWNLOAD_DOMAIN;
-				//FIXME
-//				url += "/download?event=2&";
-//				url += ctx.getVersionAsURLParam() + "&";
+				url += "/download?event=2&srtm=yes&";
+				url += ctx.getVersionAsURLParam() + "&";
 				String fullName = fileToDownload + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 				entry.urlToDownload = url +"/srtm/" + fullName;
 				// url + "file=" + fileName;
