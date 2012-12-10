@@ -80,12 +80,12 @@ public class SrtmIndexItem extends IndexItem {
 				url += "/download?event=2&srtm=yes&";
 				url += ctx.getVersionAsURLParam() + "&";
 				String fullName = fileToDownload + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-				entry.urlToDownload = url +"/srtm/" + fullName;
+				entry.urlToDownload = url +"file=" + fullName;
 				// url + "file=" + fileName;
 				entry.fileToSave = new File(parent, fullName);
 				entry.unzip = false;
 				entry.dateModified = System.currentTimeMillis();
-				entry.sizeMB = 20;
+				entry.sizeMB = 10;
 				entry.parts = 1;
 				entry.fileToUnzip = new File(parent, entry.baseName + IndexConstants.BINARY_MAP_INDEX_EXT);
 				downloadEntries.add(entry);

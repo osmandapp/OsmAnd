@@ -222,7 +222,7 @@ public class IndexItem implements Comparable<IndexItem> {
 			}
 			String s = e.substring(0, l);
 			if (getType() == DownloadActivityType.ROADS_FILE) {
-				s = "-roads" + s;
+				s += "-roads" ;
 			}	
 			s += IndexConstants.BINARY_MAP_INDEX_EXT;
 			return s;

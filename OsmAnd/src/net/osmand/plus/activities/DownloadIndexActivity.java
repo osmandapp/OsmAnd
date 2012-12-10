@@ -566,16 +566,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		protected void onProgressUpdate(Object... values) {
 			for (Object o : values) {
 				if (o instanceof DownloadEntry) {
-					String v = Version.getAppName(DownloadIndexActivity.this);
-					if (Version.isProductionVersion(DownloadIndexActivity.this)) {
-						v = Version.getFullVersion(DownloadIndexActivity.this);
-					} else {
-						v += " test";
-					}
-
-					new DownloadTracker().trackEvent(DownloadIndexActivity.this, v, Version.getAppName(DownloadIndexActivity.this),
-							((DownloadEntry) o).baseName, 1, DownloadIndexActivity.this.getString(R.string.ga_api_key));
-					DownloadIndexActivity.this.updateLoadedFiles();
 					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 					findViewById(R.id.DownloadButton).setVisibility(entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
 				} else if (o instanceof String) {
@@ -632,9 +622,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					IndexItem filename = filesToDownload[i];
 					List<DownloadEntry> list = DownloadIndexActivity.this.entriesToDownload.get(filename);
 					if (list != null) {
-						String indexOfAllFiles = filesToDownload.length <= 1 ? "" : (" [" + counter + "/" + all + "]");
-						counter++;
 						for (DownloadEntry entry : list) {
+							String indexOfAllFiles = all <= 1 ? "" : (" [" + counter + "/" + all + "]");
+							counter++;
 							boolean result = downloadFile(entry, filesToReindex, indexOfAllFiles, forceWifi);
 							if (result) {
 								DownloadIndexActivity.this.entriesToDownload.remove(filename);
@@ -644,6 +634,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 								if (entry.existingBackupFile != null) {
 									Algoritms.removeAllFiles(entry.existingBackupFile);
 								}
+								trackEvent(entry);
 								publishProgress(entry);
 							}
 						}
@@ -674,6 +665,17 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 			}
 			return null;
+		}
+
+		private void trackEvent(DownloadEntry entry) {
+			String v = Version.getAppName(DownloadIndexActivity.this);
+			if (Version.isProductionVersion(DownloadIndexActivity.this)) {
+				v = Version.getFullVersion(DownloadIndexActivity.this);
+			} else {
+				v += " test";
+			}
+			new DownloadTracker().trackEvent(DownloadIndexActivity.this, v, Version.getAppName(DownloadIndexActivity.this),
+					entry.baseName, 1, DownloadIndexActivity.this.getString(R.string.ga_api_key));
 		}
 
 		@Override
