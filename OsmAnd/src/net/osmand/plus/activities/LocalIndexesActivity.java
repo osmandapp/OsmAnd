@@ -14,6 +14,7 @@ import net.osmand.Algoritms;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -21,6 +22,7 @@ import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.osmedit.OpenstreetmapRemoteUtil;
+import net.osmand.plus.osmedit.OsmEditingPlugin;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -589,9 +591,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		menu.add(0, R.string.local_index_mi_restore, 1, getString(R.string.local_index_mi_restore)+"...");
 		menu.add(0, R.string.local_index_mi_delete, 2, getString(R.string.local_index_mi_delete)+"...");
 		menu.add(0, R.string.local_index_mi_reload, 3, R.string.local_index_mi_reload);
-//		if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
+		if(OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
 			menu.add(0, R.string.local_index_mi_upload_gpx, 4, getString(R.string.local_index_mi_upload_gpx)+"...");
-//		}
+		}
 		return true;
 	}
 	
