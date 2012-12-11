@@ -426,7 +426,7 @@
   <string name="continuous_rendering">Folyamatos megjelenítés</string>
   <string name="continuous_rendering_descr">Renderelés folyamatos megjelenítése, vagy csak a kész térképé</string>
   <string name="rendering_exception">Hiba történt a kiválasztott terület megjelenítésekor</string>
-  <string name="show_point_options">Pont beállítások</string>
+  <string name="show_point_options">Hely használata…</string>
   <string name="renderer_load_sucess">Megjelenítő stílus betöltve</string>
   <string name="renderer_load_exception">Hiba: nem tölthető be a megjelenítő stílus</string>
   <string name="renderers">Vektoros megjelenítés</string>
@@ -1081,4 +1081,9 @@
     <string name="tip_altitude_offset_t">"\tA legtöbb GPS vevő a tengerszint feletti magasságot a WGS84 referencia ellipszoid szerint határozza meg, ami a helyi rendszernek megfelelően pozíciófüggő korrekcióra szorul.\n\tA helyi rendszereket jobban megközelíti az EGM96 referencia. Az OsmAnd már támogatja a magassági érték megjelenítését automatikusan EGM96 szerint.\n\tA használatához csak töltsd le a World altutude correction fájlt az offline adatkezelőben (az eredeti fájl innen származik: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="rendering_attr_noAdminboundaries_name">Határvonalak alerejtése</string>
 	<string name="rendering_attr_noAdminboundaries_description">Nem jeleníti meg az adminisztratív határokat 5-9 szinten</string>
-	</resources>
+	<string name="download_srtm_maps">Szintvonal térképek</string>
+    <string name="srtm_plugin_name">Szintvonal bővítmény</string>
+    <string name="index_srtm_ele">Szintvonalak</string>
+    <string name="index_srtm_parts">darab</string>
+    <string name="download_select_map_types">Egyéb térképek</string>
+    </resources>
