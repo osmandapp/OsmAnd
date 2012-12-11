@@ -43,14 +43,26 @@ public abstract class MapObject implements Comparable<MapObject>, Serializable {
 		if(this.location == null){
 			this.location = MapUtils.getCenter(e);
 		}
-		this.setNameFromOperator(e);
+		if(this.name == null) {
+			this.setNameFromOperator(e);
+		}
+		if(this.name == null) {
+			this.setNameFromRef(e);
+		}
 	}
 
-	public void setNameFromOperator(Entity e){
-		if (this.name != null) return;
-		String op = e.getTag(OSMTagKey.OPERATOR);
+	public void setNameFromRef(Entity e) {
 		String ref = e.getTag(OSMTagKey.REF);
-		if (op == null) return;
+		if(ref != null){
+			this.name = ref;
+		}
+	}
+
+	public void setNameFromOperator(Entity e) {
+		String op = e.getTag(OSMTagKey.OPERATOR);
+		if (op == null)
+			return;
+		String ref = e.getTag(OSMTagKey.REF);
 		if (ref != null)
 			op += " [" + ref + "]";
 		this.name = op;
