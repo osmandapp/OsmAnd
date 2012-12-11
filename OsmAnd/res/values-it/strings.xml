@@ -1159,4 +1159,10 @@
 	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin è in versione superata e deve essere aggiornato.</string>
     <string name="osmodroid_plugin_description">OsMoDroid plugin (descrizione TODO)</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
-	</resources>
+	<string name="index_srtm_parts">parti</string>
+    <string name="download_select_map_types">Altre mappe</string>
+    <string name="download_srtm_maps">mappe SRTM</string>
+    <string name="srtm_plugin_name">plugin SRTM</string>
+    <string name="srtm_plugin_description">plugin SRTM (descrizione TODO)</string>
+    <string name="index_srtm_ele">Linee di elevazione</string>
+    </resources>
