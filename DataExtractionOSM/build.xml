@@ -5,6 +5,8 @@
 
 	<property name="file.to.upload" value="OsmAndMapCreator-nightbuild.zip"/>
 	<property name="src.dir" value="src"/>
+	<property name="osmand-core.dir" location="../OsmAnd-java/"/>
+	<property name="osmand-core.jar" value="OsmAnd-core.jar"/>
 	<property name="src.absolute.dir" location="${src.dir}" />
 	<property name="icons.dir" value="icons/resources"/>
 	<property name="icons.absolute.dir" location="${icons.dir}" />
@@ -17,11 +19,10 @@
 	<property name="srctests.dir" value="src-tests"/>
 	<property name="reports.tests" value="${basedir}/test-results" />
 
-	<path id="ant.lib.path">
-		<fileset dir="ant-lib" includes="*.jar" />
-	</path>
-
 	<path id="build.path">
+		<fileset dir="${osmand-core.dir}">
+			<include name="${osmand-core.jar}"/>
+		</fileset> 
 		<fileset dir="${lib.absolute.dir}">
 			<include name="*.jar"/>
 		</fileset>
@@ -40,6 +41,8 @@
 				<include name="g_*.png"/>
 			</fileset>
 		</copy>
+		<ant antfile="${osmand-core.dir}/build.xml" target="jar" >
+		</ant>
 	</target>
 
 	<target name="-version" if="build.version">
@@ -63,9 +66,7 @@
 		 classpathref="build.path"
 		 debug="on"
 		 source="1.6"
-	  >
-			<exclude name="net/osmand/plus/**"/>
-		</javac>
+	  />
 		<javac srcdir="${srctests.dir}"
 		 destdir="${bintests.dir}"
 		 encoding="${java.encoding}"
@@ -79,6 +80,9 @@
 		<pathelement location="${bin.absolute.dir}" />
 		<pathelement location="${bintests.dir}" />
 		<pathelement location="${srctests.dir}" />
+		<fileset dir="${osmand-core.dir}">
+			<include name="${osmand-core.jar}"/>
+		</fileset>
 		<fileset dir="${lib.absolute.dir}">
 			<include name="*.jar" />
 		</fileset>
@@ -101,7 +105,7 @@
 		</junit>
 	</target>
 
-	<target name="jar" depends="-copy-resources, -dirs">
+	<target name="jar" depends="-copy-resources, -dirs, compile">
 		<manifestclasspath property="lib.list" jarfile="OsmAndMapCreator.jar">
 			<classpath refid="build.path"/>
 		</manifestclasspath>
@@ -144,11 +148,17 @@
 			<fileset dir="src/net/osmand/osm/">
 				<include name="rendering_types.xml"/>
 			</fileset>
+			
 			<fileset dir=".">
 				<include name="../build-scripts/regions/indexes.xml" />
 			</fileset>
 			<fileset dir="src/net/osmand/data/index">
 				<include name="batch.xml" />
+			</fileset>
+		</copy>
+		<copy todir="build/lib">
+			<fileset dir="${osmand-core.dir}">
+				<include name="${osmand-core.jar}" />
 			</fileset>
 		</copy>
 		<zip destfile="build.zip">
@@ -158,13 +168,4 @@
 		<delete file="OsmAndMapCreator.jar" />
 	</target>
 
-	<taskdef name="cpd" classname="net.sourceforge.pmd.cpd.CPDTask" classpathref="ant.lib.path"/>
-
-	<target name="cpd" description="Search for cut-and-pasted code">
-		<property name="cpd.report.xml" location="cpd.xml"/>
-		<cpd minimumTokenCount="100" format="xml" outputFile="${cpd.report.xml}"
-	      ignoreLiterals="true" ignoreIdentifiers="true">
-			<fileset dir="${src.absolute.dir}" includes="**/*.java"/>
-		</cpd>
-	</target>
 </project>

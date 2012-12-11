@@ -103,13 +103,13 @@ public class RegionsRegistryConverter {
 			regions.addRegions(c.convert());
 		}
 		
-		String filePath = "src/net/osmand/map/"+RegionRegistry.fileName;
+		String filePath = "../OsmAnd-java/src/net/osmand/map/"+RegionRegistry.fileName;
 		long t = -System.currentTimeMillis();
 		FileOutputStream out = new FileOutputStream(filePath);
 		OsmAndRegionInfo.newBuilder().setRegionInfo(regions)
 		.build().writeTo(out);
 		out.close();
-		InputStream in = RegionsRegistryConverter.class.getResourceAsStream(RegionRegistry.fileName);
+		InputStream in = RegionRegistry.class.getResourceAsStream(RegionRegistry.fileName);
 		OsmAndRegionInfo regInfo = OsmAndRegionInfo.newBuilder().mergeFrom(in).build();
 		t += System.currentTimeMillis();
 		for(int j = 0; j < regInfo.getRegionInfo().getRegionsCount(); j++) {

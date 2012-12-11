@@ -22,7 +22,7 @@ public class RegionRegistry {
 			try {
 				long t = -System.currentTimeMillis();
 				r = new RegionRegistry();
-				InputStream in = RegionsRegistryConverter.class.getResourceAsStream(RegionRegistry.fileName);
+				InputStream in = RegionRegistry.class.getResourceAsStream(RegionRegistry.fileName);
 				OsmAndRegionInfo regInfo = OsmAndRegionInfo.newBuilder().mergeFrom(in).build();
 				for(int j = 0; j < regInfo.getRegionInfo().getRegionsCount(); j++) {
 					r.countries.add(RegionCountry.construct(regInfo.getRegionInfo().getRegions(j)));
