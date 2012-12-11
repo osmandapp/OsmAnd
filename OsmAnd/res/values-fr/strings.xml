@@ -1149,4 +1149,9 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="osmodroid_plugin_old_ver_not_supported">Le greffon OsMoDroid est obsolète et doit être mis à jour.</string>
     <string name="osmodroid_plugin_description">Greffon OsMoDroid (description à faire)</string>
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
-	</resources>
+	<string name="index_srtm_ele">Courbes de niveau</string>
+    <string name="srtm_plugin_description">Greffon SRTM (description à faire)</string>
+    <string name="srtm_plugin_name">Greffon SRTM</string>
+    <string name="download_select_map_types">Autres cartes</string>
+    <string name="download_srtm_maps">Cartes SRTM</string>
+    </resources>
