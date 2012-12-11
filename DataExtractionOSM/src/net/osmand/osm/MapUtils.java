@@ -375,22 +375,28 @@ public class MapUtils {
 //	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
 //	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // http://osm.org/go/TelHTB--
 	public static String buildShortOsmUrl(double latitude, double longitude, int zoom){
-		long lat = (long) (((latitude + 90d)/180d)*(1l << 32));
-		long lon = (long) (((longitude + 180d)/360d)*(1l << 32));
-		long code = interleaveBits(lon, lat);
 		StringBuilder str = new StringBuilder(10);
 		str.append(BASE_SHORT_OSM_URL);
-	    // add eight to the zoom level, which approximates an accuracy of one pixel in a tile.
-		for(int i=0; i< Math.ceil((zoom+8)/3d); i++){
-		    str.append(intToBase64[(int) ((code >> (58 - 6 * i)) & 0x3f)]);
-		}
-			    // append characters onto the end of the string to represent
-			    // partial zoom levels (characters themselves have a granularity of 3 zoom levels).
-		for(int j=0; j< (zoom + 8) % 3 ; j++){
-			str.append('-');
-		}
+		long lat = (long) (((latitude + 90d)/180d)*(1l << 32));
+		long lon = (long) (((longitude + 180d)/360d)*(1l << 32));
+		str.append(createShortLocString(lat, lon, zoom));
 		str.append("?m");
 		return str.toString();
+	}
+
+	private static String createShortLocString(long lat, long lon, int zoom) {
+		long code = interleaveBits(lon, lat);
+		String str = "";
+	    // add eight to the zoom level, which approximates an accuracy of one pixel in a tile.
+		for (int i = 0; i < Math.ceil((zoom + 8) / 3d); i++) {
+		    str += intToBase64[(int) ((code >> (58 - 6 * i)) & 0x3f)];
+		}
+		// append characters onto the end of the string to represent
+		// partial zoom levels (characters themselves have a granularity of 3 zoom levels).
+		for (int j = 0; j < (zoom + 8) % 3; j++) {
+			str += '-';
+		}
+		return str;
 	}
 	
 	/**	

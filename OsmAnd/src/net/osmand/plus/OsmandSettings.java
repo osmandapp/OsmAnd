@@ -167,11 +167,6 @@ public class OsmandSettings {
 	}
 
 	protected void switchApplicationMode(ApplicationMode oldMode){
-		// change some global settings/ for car
-		if(currentMode == ApplicationMode.CAR){
-			SHOW_TRANSPORT_OVER_MAP.set(false);
-			SHOW_OSM_BUGS.set(false);
-		}
 		// update vector renderer 
 		RendererRegistry registry = ctx.getRendererRegistry();
 		RenderingRulesStorage newRenderer = registry.getRenderer(RENDERER.get());
