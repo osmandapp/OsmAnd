@@ -1130,4 +1130,10 @@
 	<string name="osmodroid_plugin_old_ver_not_supported">Plugin-ul OsMoDroid plugin trebuie adus la zi.</string>
     <string name="osmodroid_plugin_description">Plugin OsMoDroid pentru comunicarea online a poziției curente</string>
     <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
-	</resources>
+	<string name="index_srtm_ele">Curbe de nivel</string>
+    <string name="index_srtm_parts">părți</string>
+    <string name="srtm_plugin_description">Plugin SRTM</string>
+    <string name="srtm_plugin_name">Plugin SRTM</string>
+    <string name="download_select_map_types">Alte hărți</string>
+    <string name="download_srtm_maps">Hărți SRTM</string>
+    </resources>
