@@ -1105,4 +1105,9 @@
 	<string name="osmodroid_plugin_name">Πρόσθετο OsMoDroid</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Το πρόσθετο OsMoDroid είναι μια παλιά έκδοση και πρέπει να ενημερωθεί.</string>
     <string name="osmodroid_plugin_description">Πρόσθετο OsMoDroid</string>
+    <string name="download_select_map_types">Άλλοι χάρτες</string>
+    <string name="index_srtm_ele">Ισοϋψείς γραμμές</string>
+    <string name="srtm_plugin_description">Πρόσθετο SRTM</string>
+    <string name="srtm_plugin_name">Πρόσθετο SRTM</string>
+    <string name="download_srtm_maps">Χάρτες SRTM</string>
     </resources>
