@@ -25,6 +25,7 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.Relation;
 import net.osmand.osm.io.IOsmStorageFilter;
 import net.osmand.osm.io.OsmBaseStorage;
+import net.osmand.osm.io.OsmBaseStoragePbf;
 import net.osmand.swing.DataExtractionSettings;
 import net.osmand.swing.Messages;
 
@@ -253,7 +254,7 @@ public class IndexCreator {
 			pbfFile = true;
 		}
 
-		OsmBaseStorage storage = new OsmBaseStorage();
+		OsmBaseStorage storage = pbfFile? new OsmBaseStoragePbf() : new OsmBaseStorage();
 		storage.setSupressWarnings(DataExtractionSettings.getSettings().isSupressWarningsForDuplicatedId());
 		if (addFilter != null) {
 			storage.getFilters().add(addFilter);
@@ -280,7 +281,7 @@ public class IndexCreator {
 			dbCreator.initDatabase(osmDBdialect, dbConn);
 			storage.getFilters().add(dbCreator);
 			if (pbfFile) {
-				storage.parseOSMPbf(stream, progress, false);
+				((OsmBaseStoragePbf) storage).parseOSMPbf(stream, progress, false);
 			} else {
 				storage.parseOSM(stream, progress, streamFile, false);
 			}

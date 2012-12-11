@@ -108,7 +108,7 @@
 		<link>
 			<name>use</name>
 			<type>2</type>
-			<locationURI>OSMAND_TRUNK/DataExtractionOSM/src</locationURI>
+			<locationURI>OSMAND_TRUNK/OsmAnd-java/src</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
