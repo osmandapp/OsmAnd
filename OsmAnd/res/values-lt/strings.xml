@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1158,5 +1158,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 \n\tGeresniam vietinio aukščio apskaičiavimui labiau tinka EGM96 atskaitos sistema. OsmAnd dabar jau gali automatiškai apskaičiuoti ir atvaizduoti aukčius pagal EGM96 sistemą.
 \n\tJei norite tai įgyvendinti, tiesiog parsisiųskite failą WW15MGH.DAC naudodami Parsiųstų Duomenų Valdymą (orginalas yra čia http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">pradėti</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin (TODO description)</string>
+    <string name="osmodroid_plugin_description">OsMoDroid įskiepis (TODO description)</string>
     </resources>
