@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -1173,4 +1173,12 @@
     <string name="osmodroid_plugin_old_ver_not_supported">Das OsMoDroid-Plugin liegt in einer alten Version vor und muss aktualisiert werden.</string>
     <string name="osmodroid_plugin_description">OsMoDroid-Plugin (Beschreibung: Noch zu tun)</string>
     <string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
-	</resources>
+	<string name="index_srtm_parts">Teile</string>
+    <string name="index_srtm_ele">Höhenlinien</string>
+    <string name="srtm_plugin_description">SRTM-Plugin (Noch zu Tun: Beschreibung)</string>
+    <string name="srtm_plugin_name">SRTM-Plugin</string>
+    <string name="download_select_map_types">Andere Karten</string>
+    <string name="download_srtm_maps">SRTM-Karten</string>
+    <string name="osmand_distance_plugin_description">Entfernung zwischen zwei Punkten messen. Start/Ziel antippen und löschen durch lang drücken.</string>
+	<string name="osmand_distance_plugin_name">Entfernungsmesser</string>
+</resources>
