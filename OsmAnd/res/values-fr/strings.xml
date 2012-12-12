@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">Changements en 0.7.1 :
@@ -1154,4 +1154,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="srtm_plugin_name">Greffon SRTM</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Cartes SRTM</string>
-    </resources>
+    <string name="index_srtm_parts">parties</string>
+    <string name="osmand_distance_plugin_description">Mesurer une distance entre deux points. Spécifier l\'origine et la destionation. Effacer la mesure par un appui long.</string>
+	<string name="osmand_distance_plugin_name">Calculateur de distances</string>
+</resources>
