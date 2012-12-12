@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1110,4 +1110,7 @@
     <string name="srtm_plugin_description">Πρόσθετο SRTM</string>
     <string name="srtm_plugin_name">Πρόσθετο SRTM</string>
     <string name="download_srtm_maps">Χάρτες SRTM</string>
+    <string name="osmand_distance_plugin_description">Μέτρηση απόστασης μεταξύ δύο σημείων. Καθορίστε την αφετηρία / τον προορισμό / καθαρισμός της μέτρησης μέσω παρατεταμένου πατήματος.</string>
+	<string name="osmand_distance_plugin_name">Υπολογιστής Απόστασης</string>
+<string name="index_srtm_parts">μέρη</string>
     </resources>
