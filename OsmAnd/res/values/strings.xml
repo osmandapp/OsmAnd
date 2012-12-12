@@ -1198,4 +1198,6 @@
 	<string name="edit_filter_create_message">Filter {0} has been created</string>
 	<string name="default_buttons_selectall">Select All</string>
 	<string name="email">email</string>
+	<string name="osmand_distance_plugin_description">Measure a distance between two points. Specify the origin / the destination / clear the measurement by a long press.</string>
+	<string name="osmand_distance_plugin_name">Distance Calculator</string>
 </resources>
