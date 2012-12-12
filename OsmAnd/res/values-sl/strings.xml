@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
@@ -1072,4 +1072,8 @@
 	<string name="osmodroid_plugin_old_ver_not_supported">Vtičnik OsMoDroid je stare različice in je potreben posodobitve.</string>
     <string name="osmodroid_plugin_description">Vtičnik OsMoDroid (TODO opis)</string>
     <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
-	</resources>
+	<string name="index_srtm_ele">Izohipse</string>
+    <string name="srtm_plugin_description">Vtičnik SRTM (TODO opis)</string>
+    <string name="srtm_plugin_name">Vtičnik SRTM</string>
+    <string name="download_select_map_types">Drugi zemljevidi</string>
+    </resources>
