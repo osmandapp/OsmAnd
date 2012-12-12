@@ -378,13 +378,13 @@
   <string name="fast_route_mode_descr">Marca para calcular la ruta más rápida o desmarca para la más corta </string>
   <string name="tiles_to_download_estimated_size">En zoom {0} descarga {1} teselas ({2} MB)</string>
   <string name="context_menu_item_download_map">Descargar mapa</string>
-  <string name="select_max_zoom_preload_area">Seleccione el zooom máximo para precargar</string>
+  <string name="select_max_zoom_preload_area">Selecciona el zoom máximo para precargar</string>
   <string name="maps_could_not_be_downloaded">Este mapa no se pudo descargar</string>
   <string name="continuous_rendering">Visualización continua</string>
   <string name="continuous_rendering_descr">Mostrar visualización de forma continua en vez de todo de una vez</string>
   <string name="rendering_exception">Ocurrió un error al visualizar el área seleccionada</string>
   <string name="rendering_out_of_memory">No hay suficiente memoria para mostrar el área seleccionada</string>
-  <string name="show_point_options">Opciones de localización</string>
+  <string name="show_point_options">Usar localización...</string>
   <string name="renderer_load_sucess">Se cargó la visualización</string>
   <string name="renderer_load_exception">Error: No se cargó la visualización</string>
   <string name="renderers">Visualización de vectores</string>
@@ -658,7 +658,7 @@
   <string name="search_activity">Buscar</string>
   <string name="searchpoi_activity">Elegir PDI</string>
   <string name="search_POI_level_btn">Encontrar más</string>
-  <string name="incremental_search_city">Buscar ciudades incrementalmente. Para encontrar poblaciones/códigos postales, introduzca los primeros 3 o más caracteres.</string>
+  <string name="incremental_search_city">Buscar ciudades incrementalmente</string>
   <string name="incremental_search_street">Buscar calle incrementalmente</string>
   <string name="incremental_search_building">Buscar edificios incrementalmente</string>
   <string name="choose_available_region">Elegir región de la lista</string>
@@ -1035,10 +1035,10 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="route_descr_from_to">De %1$s\nA %2$s</string>
     <string name="route_descr_from_to_via">De: %1$s\nVia: %2$s\nA: %3$s</string>
     <string name="no_buildings_found">No se han encontrado edificios.</string>
-    <string name="search_villages_and_postcodes">"Buscar pueblos/códigos postales "</string>
-	<string name="tip_altitude_offset_t">\tLa mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
+    <string name="search_villages_and_postcodes">Buscar pueblos/códigos postales</string>
+	<string name="tip_altitude_offset_t">"\tLa mayoría de dispositivos GPS informan de las medidas de altitud en el sistema de referencia WGS84 basado en elipsoide, que requiere de una corrección dependiente de la posición para su conversión a sistemas utilizados localmente.
 \n\tUna mejor aproximación a estos sistemas locales es la referencia EGM96. OsmAnd también soporta ahora la visualización automática de altitud en el sistema EGM96.
-\n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
+\n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
     <string name="monitoring_control_start">Empezar</string>
     <string name="tip_altitude_offset">Mostrar Altitud - Corrección</string>
