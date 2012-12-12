@@ -11,6 +11,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -69,6 +70,7 @@ public abstract class OsmandPlugin {
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
+		installedPlugins.add(new DistanceCalculatorPlugin(app));
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
