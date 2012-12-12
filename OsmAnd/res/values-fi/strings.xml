@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>

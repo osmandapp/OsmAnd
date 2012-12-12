@@ -108,13 +108,13 @@
 		<link>
 			<name>use</name>
 			<type>2</type>
-			<locationURI>OSMAND_TRUNK/OsmAnd-java/src</locationURI>
+			<locationURI>OSMAND_TRUNK/core/OsmAnd-java/src</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
 		<variable>
 			<name>OSMAND_TRUNK</name>
-			<value>$%7BPARENT-1-PROJECT_LOC%7D</value>
+			<value>$%7BPARENT-3-PROJECT_LOC%7D</value>
 		</variable>
 	</variableList>
 </projectDescription>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_buildings_found">Здания не найдены.</string>
     <string name="incremental_search_city">Выберите город.</string>
