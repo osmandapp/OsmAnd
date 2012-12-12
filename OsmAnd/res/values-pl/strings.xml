@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_select_destination_point">Wybierz punkt docelowy</string>
   <string name="tip_select_destination_point_t">"\tMożesz wybrać punk docelowy bezpośrednio na mapie (menu kontekstowe -&gt; \'Nawiguj do punktu\'), podczas wyszukiwania lub przez naciśnięcie i długie przytrzymanie na wpisie w swojej \'Liście ulubionych punktów\'.\n\tPunkt docelowy jest oznaczony pomarańczowym dyskiem na mapie i OsmAnd wyświetla odległość oraz kierunek do niego (pomarańczowy trójkąt). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
@@ -1056,4 +1056,12 @@
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>
     <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Zarządzanie danymi offline\' (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    </resources>
+    <string name="download_srtm_maps">Mapy SRTM</string>
+    <string name="download_select_map_types">Inne mapy</string>
+    <string name="srtm_plugin_name">SRTM</string>
+    <string name="srtm_plugin_description">Plugin SRTM (TODO opis)</string>
+    <string name="index_srtm_ele">Poziomice</string>
+    <string name="index_srtm_parts">części</string>
+    <string name="osmand_distance_plugin_description">Umożliwia pomiar odległości pomiędzy dwoma punktami. Zaznacz początek / cel / wyczyść pomiar poprzez długie naciśnięcie.</string>
+	<string name="osmand_distance_plugin_name">Kalkulator odległości</string>
+</resources>
