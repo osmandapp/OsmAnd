@@ -775,9 +775,9 @@
   <string name="add_favorite_dialog_top_text">Geef naam van favoriet in</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
   <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>
-  <string name="favourites_context_menu_navigate">Zet als bestemming</string>
-  <string name="favourites_context_menu_edit">Bewerk favoriet</string>
-  <string name="favourites_context_menu_delete">Verwijder favoriet</string>
+  <string name="favourites_context_menu_navigate">Zet als\nbestemming</string>
+  <string name="favourites_context_menu_edit">Bewerk\nfavoriet</string>
+  <string name="favourites_context_menu_delete">Verwijder\nfavoriet</string>
   <string name="favourites_remove_dialog_msg">Verwijder favoriet \'%s\'?</string>
   <string name="favourites_remove_dialog_success">Favoriet {0} is verwijderd.</string>
   <string name="osb_add_dialog_title">Geef bug tekst in</string>
