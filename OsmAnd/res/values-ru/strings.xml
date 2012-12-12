@@ -1126,4 +1126,6 @@
 	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
 	<string name="map_widget_max_speed">Ограничение скорости</string>
     <string name="monitoring_control_start">старт</string>
+    <string name="download_select_map_types">Прочие карты</string>
+    <string name="download_srtm_maps">Карты SRTM</string>
     </resources>
