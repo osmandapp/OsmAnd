@@ -9,20 +9,22 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="audionotes_plugin_description">Audio notes plugin description</string>
+    <string name="audionotes_plugin_name">Audio notes plugin</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Elevation lines</string>
-    <string name="srtm_plugin_description">SRTM plugin (TODO description)</string>
-    <string name="srtm_plugin_name">SRTM plugin</string>
+    <string name="srtm_plugin_description">This plugin allows to download eleveation lines (Download maps -> Menu -> "Other maps") for specific region and use them with offline maps.</string>
+    <string name="srtm_plugin_name">Elevation lines plugin</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads </string>
-    <string name="download_srtm_maps">SRTM maps</string>
+    <string name="download_srtm_maps">Elevation maps</string>
     <string name="download_regular_maps">Regular maps</string>
     <string name="download_roads_only_maps">Roads-only maps</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin (TODO description)</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for live tracking features. Information about the service is available on http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="tip_altitude_offset">Altitude Display - Offset Correction</string>
 	<string name="tip_altitude_offset_t">\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
