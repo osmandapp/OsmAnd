@@ -238,6 +238,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				final Map<String, String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
 				final List<IndexItem> filtered = new ArrayList<IndexItem>();
 				for (IndexItem fileItem : listAdapter.getIndexFiles()) {
+					if(fileItem.isAlreadyDownloaded(listAlreadyDownloaded)){
+						filtered.add(fileItem);
+					}
 					if (listAlreadyDownloaded.containsKey(fileItem.getTargetFileName())) {
 						filtered.add(fileItem);
 					}
@@ -455,6 +458,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT, files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT, files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),EXTRA_EXT, files);
+		listWithAlternatives(settings.extendOsmandPath(ResourceManager.SRTM_PATH),BINARY_MAP_INDEX_EXT, files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
 		return files;

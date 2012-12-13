@@ -239,12 +239,16 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		});
 
 		if (indexFileNames != null) {
-			String sfName = e.getTargetFileName();
-			if (!indexFileNames.containsKey(sfName)) {
+			
+			if (!e.isAlreadyDownloaded(indexFileNames)) {
 				item.setTextColor(downloadActivity.getResources().getColor(R.color.index_unknown));
 				item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else {
-				if (e.getDate() != null) {
+				if(e.getType() == DownloadActivityType.SRTM_FILE){
+					item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_uptodate)); // GREEN
+					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
+				} else if (e.getDate() != null) {
+					String sfName = e.getTargetFileName();
 					if (e.getDate().equals(indexActivatedFileNames.get(sfName))) {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
