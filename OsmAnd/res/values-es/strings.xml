@@ -1055,4 +1055,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="download_srtm_maps">Mapas SRTM</string>
     <string name="osmand_distance_plugin_description">Mide una distancia entre dos puntos. Tienes que especificar el origen / destino / borra la medida con una pulsación larga.</string>
 	<string name="osmand_distance_plugin_name">Calculadora de distancia</string>
-</resources>
+<string name="audionotes_plugin_description">Descripción del extra de notas de audio</string>
+    <string name="audionotes_plugin_name">Extra de notas de audio</string>
+    </resources>
