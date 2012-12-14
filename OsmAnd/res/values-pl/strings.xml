@@ -1064,4 +1064,6 @@
     <string name="index_srtm_parts">części</string>
     <string name="osmand_distance_plugin_description">Umożliwia pomiar odległości pomiędzy dwoma punktami. Zaznacz początek / cel / wyczyść pomiar poprzez długie naciśnięcie.</string>
 	<string name="osmand_distance_plugin_name">Kalkulator odległości</string>
-</resources>
+<string name="audionotes_plugin_description">Opis wtyczki notatek audio</string>
+    <string name="audionotes_plugin_name">Notatki głosowe</string>
+    </resources>
