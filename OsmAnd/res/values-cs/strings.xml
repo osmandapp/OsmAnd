@@ -1130,4 +1130,8 @@
     <string name="osmodroid_plugin_name">Modul OsMoDroid</string>
 	<string name="osmand_distance_plugin_name">Měření vzdálenosti</string>
 <string name="osmand_distance_plugin_description">Měří vzdálenost mezi dvěma body. Určete počáteční bod a koncový bod. Měření se vymaže dlouhým stisknutím.</string>
-	</resources>
+	<string name="audionotes_plugin_name">Modul zvukové poznámky</string>
+    <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Stáhnout mapy -&gt; Menu -&gt; Ostatní mapy) pro určitou oblast a použít je s offline mapami.</string>
+    <string name="srtm_plugin_name">Modul vrstevnice</string>
+    <string name="download_srtm_maps">Mapy vrstevnic</string>
+    </resources>
