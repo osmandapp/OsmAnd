@@ -1045,11 +1045,11 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El extra OsMoDroid tiene una versión antigua y necesita ser actualizado.</string>
-    <string name="osmodroid_plugin_description">Extra OsMoDroid (HACER descripción)</string>
+    <string name="osmodroid_plugin_description">El extra de OsMoDroid es una extensión de OsmAnd para la aplicación OsModroid para funciones de seguimiento en directo. Información sobre el servicio está disponible en http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Extra SRTM (HACER Descripción)</string>
+    <string name="srtm_plugin_description">Este extra permite descargar las curvas de nivel (Descargar mapas -&gt; Menú -&gt; Otros mapas) para la región específica y usarlas con los mapas descargados.</string>
     <string name="srtm_plugin_name">Extra SRTM</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Mapas SRTM</string>
