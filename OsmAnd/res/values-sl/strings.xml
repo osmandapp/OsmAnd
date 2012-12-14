@@ -1073,7 +1073,7 @@
     <string name="osmodroid_plugin_description">Vtičnik OsMoDroid (TODO opis)</string>
     <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
 	<string name="index_srtm_ele">Izohipse</string>
-    <string name="srtm_plugin_description">Vtičnik SRTM (TODO opis)</string>
+    <string name="srtm_plugin_description">Ta vtičnik omogoča prenos izohips za posamezna področja in uporabo brez povezave (Podatki brez povrzave (prenos) -&gt; meni -&gt; Drugi zemljevidi).</string>
     <string name="srtm_plugin_name">Vtičnik SRTM</string>
     <string name="download_select_map_types">Drugi zemljevidi</string>
     </resources>
