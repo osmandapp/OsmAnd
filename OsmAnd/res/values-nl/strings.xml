@@ -1068,7 +1068,7 @@
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">hoogtelijnen</string>
-    <string name="srtm_plugin_description">Met de plugin kan je hoogtelijnen en reliëf op de kaart weergeven</string>
+    <string name="srtm_plugin_description">Met de plugin kan je hoogtelijnen en reliëf op de kaart weergeven.</string>
     <string name="srtm_plugin_name">SRTM plugin</string>
     <string name="download_select_map_types">Andere kaarten</string>
     <string name="download_srtm_maps">SRTM kaarten</string>
