@@ -976,7 +976,9 @@
 <string name="map_widget_day_night">Mapa dzień/noc</string>
 <string name="map_widget_vector_attributes">Atrybuty renderowania:</string>
 <string name="show_lanes">Pasy ruchu</string>
-<string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4:\n* Kilka drobnych poprawek "</string>
+<string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4:\n\t* Kilka drobnych poprawek
+\n\t* Mapa nie traci pozycji po przerwaniach
+\n\t* Usługa w tle podczas nawigacji "</string>
     <string name="gps_not_available">Proszę włączyć odbiornik GPS</string>
     <string name="map_widget_monitoring_services">Usługi monitorowania</string>
 	<string name="no_route">Brak trasy</string>
@@ -1040,9 +1042,10 @@
     <string name="download_roads_only_maps">Tylko mapy samochodowe</string>
     <string name="safe_mode_description">Uruchom program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego).</string>
     <string name="safe_mode">Tryb bezpieczny</string>
-    <string name="native_library_not_running">Program działa w trybie bezpiecznym (zablokuj ten tryb w Preferencjach).</string>
+    <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0 : ↵\n→* Poprawiony routing: szybszy, dokładniejszy, do 250 km ↵\n→* Wprowadzenie map tylko samochodowych ↵\n→* Mapa nie gubi ustalonej pozycji po przerwaniu ↵\n→* Włączenie usługi w tle podczas nawigacji "</string>
+    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0 : ↵\n→* Poprawiony routing: szybszy, dokładniejszy, do 250 km ↵\n→* Wprowadzenie map tylko samochodowych ↵\n→* Mapa nie gubi ustalonej pozycji po przerwaniu ↵\n→* Włączenie usługi w tle podczas nawigacji
+\n→* Ulepszony \\\'widok turystyczny\\\' z nowymi stylami dróg, większą ilością szczegółów oraz opcją dla wspinaczek alpejskich (skala SAC) ↵\n→* Korekcja przesunięcia EGM96 dla odczytów wysokości "</string>
     <string name="close_changeset">Zamknij zestaw zmian</string>
 	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
 	<string name="incomplete_locale">niekompletne</string>
@@ -1050,7 +1053,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Ukryj granice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Wykryto starą wersję pluginu OsMoDroid, która musi zostać zaktualizowana.</string>
-    <string name="osmodroid_plugin_description">Plugin OsMoDroid (TODO opis)</string>
+    <string name="osmodroid_plugin_description">OsMoDroid jest wtyczką dodającą do programu OsmAnd funkcje śledzenia na żywo. Informacje na temat usługi dostępne są pod adresem http://esya.ru.</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
@@ -1058,12 +1061,12 @@
     <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Zarządzanie danymi offline\' (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="download_srtm_maps">Mapy SRTM</string>
     <string name="download_select_map_types">Inne mapy</string>
-    <string name="srtm_plugin_name">SRTM</string>
-    <string name="srtm_plugin_description">Plugin SRTM (TODO opis)</string>
+    <string name="srtm_plugin_name">Poziomice</string>
+    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Pobierz mapy -&gt; Manu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     <string name="osmand_distance_plugin_description">Umożliwia pomiar odległości pomiędzy dwoma punktami. Zaznacz początek / cel / wyczyść pomiar poprzez długie naciśnięcie.</string>
 	<string name="osmand_distance_plugin_name">Kalkulator odległości</string>
-<string name="audionotes_plugin_description">Opis wtyczki notatek audio</string>
+<string name="audionotes_plugin_description">Opis wtyczki notatek głosowych</string>
     <string name="audionotes_plugin_name">Notatki głosowe</string>
     </resources>
