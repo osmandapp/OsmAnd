@@ -1158,10 +1158,10 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 \n\tGeresniam vietinio aukščio apskaičiavimui labiau tinka EGM96 atskaitos sistema. OsmAnd dabar jau gali automatiškai apskaičiuoti ir atvaizduoti aukčius pagal EGM96 sistemą.
 \n\tJei norite tai įgyvendinti, tiesiog parsisiųskite failą WW15MGH.DAC naudodami Parsiųstų Duomenų Valdymą (orginalas yra čia http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">pradėti</string>
-    <string name="osmodroid_plugin_description">OsMoDroid įskiepis (TODO description)</string>
+    <string name="osmodroid_plugin_description">OsMoDroid įskiepis yra yra skirtas tiesioginiam sekimui. Daugiau informacijos apie paslaugą rasite http://esya.ru.</string>
     <string name="index_srtm_parts">dalys</string>
     <string name="index_srtm_ele">Aukščio kontūrų linijos</string>
-    <string name="srtm_plugin_description">SRTM įskiepis (TODO description)</string>
+    <string name="srtm_plugin_description">Šis įskiepis leidžia parsisiųsti aukščio kontūrus (Parsiųsti žemėlapius -&gt; Meniu - &gt; Kiti žemėlapiai) pasirinktam regionui ir naudoti juos su parsiųstais žemėlapiais.</string>
     <string name="srtm_plugin_name">SRTM įskiepis</string>
     <string name="download_select_map_types">Kiti žemėlapiai</string>
     <string name="download_srtm_maps">SRTM žemėlapiai</string>
