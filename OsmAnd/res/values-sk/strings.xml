@@ -1122,6 +1122,6 @@
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin má starú verziu a je potrebné ju aktualizovať.</string>
     <string name="osmodroid_plugin_description">OsMoDroid plugin</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
-	<string name="index_srtm_parts">častí</string>
+	<string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
     </resources>
