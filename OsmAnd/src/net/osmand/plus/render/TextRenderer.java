@@ -10,6 +10,8 @@ import java.util.List;
 
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
+import net.osmand.data.QuadTree;
+import net.osmand.data.QuadTree.QuadRect;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -42,7 +44,7 @@ public class TextRenderer {
 
 		String text = null;
 		Path drawOnPath = null;
-		RectF bounds = null;
+		QuadRect bounds = null;
 		float vOffset = 0;
 		float centerX = 0;
 		float pathRotate = 0;
@@ -99,9 +101,9 @@ public class TextRenderer {
 		return a * a;
 	}
 
-	boolean intersects(RectF tRect, float tRot, RectF sRect, float sRot) {
+	boolean intersects(QuadRect tRect, float tRot, QuadRect sRect, float sRot) {
 		if (Math.abs(tRot) < Math.PI / 15 && Math.abs(sRot) < Math.PI / 15) {
-			return RectF.intersects(tRect, sRect);
+			return QuadRect.intersects(tRect, sRect);
 		}
 		float dist = FloatMath.sqrt(sqr(tRect.centerX() - sRect.centerX()) + sqr(tRect.centerY() - sRect.centerY()));
 		if (dist < 3) {
@@ -114,7 +116,7 @@ public class TextRenderer {
 			tRot += Math.PI / 2;
 			float l = tRect.centerX() - tRect.height() / 2;
 			float t = tRect.centerY() - tRect.width() / 2;
-			tRect = new RectF(l, t, l + tRect.height(), t + tRect.width());
+			tRect = new QuadRect(l, t, l + tRect.height(), t + tRect.width());
 		}
 
 		// determine difference close to 180/0 degrees
@@ -125,12 +127,12 @@ public class TextRenderer {
 			diff -= sRot;
 			float left = sRect.centerX() + dist * FloatMath.cos(diff) - tRect.width() / 2;
 			float top = sRect.centerY() - dist * FloatMath.sin(diff) - tRect.height() / 2;
-			RectF nRect = new RectF(left, top, left + tRect.width(), top + tRect.height());
-			return RectF.intersects(nRect, sRect);
+			QuadRect nRect = new QuadRect(left, top, left + tRect.width(), top + tRect.height());
+			return QuadRect.intersects(nRect, sRect);
 		}
 
 		// TODO other cases not covered
-		return RectF.intersects(tRect, sRect);
+		return QuadRect.intersects(tRect, sRect);
 	}
 
 	void drawTestBox(Canvas cv, RectF r, float rot, String text) {
@@ -160,7 +162,7 @@ public class TextRenderer {
 			}
 		}
 		if (text.minDistance > 0) {
-			RectF boundsSearch = new RectF(text.bounds);
+			QuadRect boundsSearch = new QuadRect(text.bounds);
 			boundsSearch.inset(-rc.getDensityValue(Math.max(5.0f, text.minDistance)), -rc.getDensityValue(15));
 			boundIntersections.queryInBox(boundsSearch, tempSearch);
 			// drawTestBox(cv, &boundsSearch, text.pathRotate, paintIcon, text.text, NULL/*paintText*/);
@@ -201,7 +203,7 @@ public class TextRenderer {
 				return object1.textOrder - object2.textOrder;
 			}
 		});
-		RectF r = new RectF(0, 0, rc.width, rc.height);
+		QuadRect r = new QuadRect(0, 0, rc.width, rc.height);
 		r.inset(-100, -100);
 		QuadTree<TextDrawInfo> nonIntersectedBounds = new QuadTree<TextDrawInfo>(r, 4, 0.6f);
 
@@ -313,7 +315,7 @@ public class TextRenderer {
 				paintText.setTextSize(rc.getDensityValue(text.textSize));
 				Rect bs = new Rect();
 				paintText.getTextBounds(name, 0, name.length(), bs);
-				text.bounds = new RectF(bs);
+				text.bounds = new QuadRect(bs.left, bs.top, bs.right, bs.bottom);
 				text.bounds.inset(-rc.getDensityValue(3), -rc.getDensityValue(10));
 				boolean display = true;
 				if(path != null) {

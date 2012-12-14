@@ -69,6 +69,7 @@ public class ResourceManager {
 
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
 	public static final String ROUTING_XML = APP_DIR + "routing.xml";
+	public static final String AV_PATH = APP_DIR + IndexConstants.AV_INDEX_DIR;
 	public static final String SRTM_PATH = APP_DIR + IndexConstants.SRTM_INDEX_DIR;
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
 	public static final String GPX_PATH = APP_DIR + "tracks";

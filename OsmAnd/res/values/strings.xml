@@ -9,6 +9,9 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="audionotes_location_not_defined">Location is not defined yet to take with audio notes</string>
+    <string name="monitoring_control_stop">stop</string>
+    <string name="map_widget_audionotes">Audio notes</string>
     <string name="audionotes_plugin_description">Audio notes plugin description</string>
     <string name="audionotes_plugin_name">Audio notes plugin</string>
     <string name="index_srtm_parts">parts</string>
