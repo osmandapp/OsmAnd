@@ -1138,4 +1138,6 @@
     <string name="download_srtm_maps">Hărți SRTM</string>
     <string name="osmand_distance_plugin_name">Calculator distanță</string>
 <string name="osmand_distance_plugin_description">Determinarea distanței între două puncte. Specificați originea și destinația prin apăsare prelungă.</string>
-	</resources>
+	<string name="audionotes_plugin_name">Plugin note audio</string>
+    <string name="audionotes_plugin_description">Plugin ce permite înregistrarea unor note audio</string>
+    </resources>
