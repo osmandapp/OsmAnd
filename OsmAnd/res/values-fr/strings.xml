@@ -1157,4 +1157,10 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="index_srtm_parts">parties</string>
     <string name="osmand_distance_plugin_description">Mesurer une distance entre deux points. Spécifier l\'origine et la destionation. Effacer la mesure par un appui long.</string>
 	<string name="osmand_distance_plugin_name">Calculateur de distances</string>
-</resources>
+<string name="audionotes_location_not_defined">La position courante n\'est pas encore connue pour permettre de prendre les notes audio</string>
+    <string name="monitoring_control_stop">Arrêter</string>
+    <string name="map_widget_audionotes">Notes audio</string>
+    <string name="audionotes_plugin_description">Description du greffon de notes audio</string>
+    <string name="audionotes_plugin_name">Greffon de notes audio</string>
+    <string name="srtm_plugin_attribution">ASTER est un produit du METI et la NASA.</string>
+    </resources>
