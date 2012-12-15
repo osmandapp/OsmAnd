@@ -1027,9 +1027,9 @@
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
 <string name="map_widget_show_ruler">Scala grafica</string>
 <string name="map_widget_appearance">Varie:</string>
-<string name="map_widget_view_direction">﻿Direzione di orientamento</string>
+<string name="map_widget_view_direction">﻿Direzione della visuale</string>
 <string name="map_widget_transparent">Aspetto trasparente</string>
-<string name="monitoring_mode_off">Salva GPX</string>
+<string name="monitoring_mode_off">Registra GPX</string>
 <string name="monitoring_mode_on">Ferma\n reg. GPX</string>
 <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
 <string name="int_continuosly">Continuo</string>
@@ -1157,20 +1157,20 @@
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin è in versione superata e deve essere aggiornato.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin (descrizione TODO)</string>
+    <string name="osmodroid_plugin_description">Il plugin OsMoDroid è un\'estensione OsmAnd per l\'applicazione OsModroid per le funzioni di monitoraggio in tempo reale. Informazioni sul servizio sono disponibili sul http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">mappe SRTM</string>
     <string name="srtm_plugin_name">plugin SRTM</string>
-    <string name="srtm_plugin_description">plugin SRTM (descrizione TODO)</string>
+    <string name="srtm_plugin_description">Questo plugin permette di scaricare le linee di elevazione (Download mappe -&gt; Menu -&gt; Altre mappe) per regioni specifiche e li usa con le mappe offline.</string>
     <string name="index_srtm_ele">Linee di elevazione</string>
     <string name="audionotes_plugin_description">Descrizione del plugin Appunti Audio</string>
     <string name="audionotes_plugin_name">Plugin Appunti Audio</string>
     <string name="osmand_distance_plugin_description">Misurare una distanza tra due punti. Specificare l\'origine / la destinazione / cancellare la misurazione con una pressione prolungata.</string>
 	<string name="osmand_distance_plugin_name">Calcolatore della distanza</string>
 <string name="audionotes_location_not_defined">La posizione non è ancora definita per poter prendere note audio</string>
-    <string name="monitoring_control_stop">interrompere</string>
+    <string name="monitoring_control_stop">ferma</string>
     <string name="map_widget_audionotes"/>
     <string name="map_widget_audionotes">Note audio</string>
     </resources>
