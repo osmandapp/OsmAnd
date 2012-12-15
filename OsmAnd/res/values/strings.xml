@@ -18,6 +18,7 @@
     <string name="index_srtm_ele">Elevation lines</string>
     <string name="srtm_plugin_description">This plugin allows to download eleveation lines (Download maps -> Menu -> "Other maps") for specific region and use them with offline maps.</string>
     <string name="srtm_plugin_name">Elevation lines plugin</string>
+    <string name="srtm_plugin_attribution">ASTER is a product of METIS and NASA</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads </string>
     <string name="download_srtm_maps">Elevation maps</string>
