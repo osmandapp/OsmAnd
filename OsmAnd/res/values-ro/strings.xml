@@ -1128,11 +1128,11 @@
     <string name="rendering_attr_noAdminboundaries_name">Ascunde limitele administrative</string>
 	<string name="rendering_attr_noAdminboundaries_description">Dezactivează afișarea limitelor administrative 5-9</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Plugin-ul OsMoDroid plugin trebuie adus la zi.</string>
-    <string name="osmodroid_plugin_description">Plugin OsMoDroid pentru comunicarea online a poziției curente</string>
+    <string name="osmodroid_plugin_description">Plugin pentru comunicarea online a poziției curente. Mai multe informații la http://esya.ru</string>
     <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
 	<string name="index_srtm_ele">Curbe de nivel</string>
     <string name="index_srtm_parts">părți</string>
-    <string name="srtm_plugin_description">Plugin SRTM</string>
+    <string name="srtm_plugin_description">Acest plugin permite descărcarea curbelor de nivel (Descărcare hărți &gt; Meniu &gt; Alte hărți) pentru anumite regiuni și afișarea lor împreună cu hărțile offline.</string>
     <string name="srtm_plugin_name">Plugin SRTM</string>
     <string name="download_select_map_types">Alte hărți</string>
     <string name="download_srtm_maps">Hărți SRTM</string>
@@ -1140,4 +1140,7 @@
 <string name="osmand_distance_plugin_description">Determinarea distanței între două puncte. Specificați originea și destinația prin apăsare prelungă.</string>
 	<string name="audionotes_plugin_name">Plugin note audio</string>
     <string name="audionotes_plugin_description">Plugin ce permite înregistrarea unor note audio</string>
+    <string name="audionotes_location_not_defined">Poziția nu este încă definită pentru înregistrarea de note audio</string>
+    <string name="monitoring_control_stop">Stop</string>
+    <string name="map_widget_audionotes">Note audio</string>
     </resources>
