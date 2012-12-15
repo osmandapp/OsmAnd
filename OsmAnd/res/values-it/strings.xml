@@ -1111,7 +1111,7 @@
 <string name="poi_filter_restaurants">Ristoranti</string>
 <string name="poi_filter_sightseeing">Attrazione turistica</string>
 <string name="tip_recent_changes_0_8_4_t">"Cambiamenti nella 0.8.4:
-\n\t* aggiornamento "</string>
+\n\t*Alcuni correzioni di errori\n\t*La mappa no perde la posizione dopo le interruzioni\n\t*Abilita il servizio in background durante la navigazione "</string>
     <string name="context_menu_item_last_intermediate_point">Imposta il punto dell\'ultima destinazione</string>
     <string name="context_menu_item_first_intermediate_point">Imposta il primo punto da raggiungere</string>
     <string name="add_as_last_destination_point">Aggiungi come ultimo punto intermedio</string>
@@ -1131,12 +1131,12 @@
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colori per le strade</string>
     <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla sul Market?</string>
-	<string name="close_changeset">Chiudi changeset</string>
+	<string name="close_changeset">Chiudi le modifiche</string>
 	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il codice Android invece del nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitare nelle Impostazioni).</string>
     <string name="background_service_is_enabled_question">Il servizio in background è ancora in esecuzione. Si desidera fermarlo?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Cambiamenti nella versione 1.0:\n\t*Migliorata la naviazione più veloce e precisa (fino a 250 km)\n\t*Mappa delle strade\n\t*La mappa non perde la posizione dopo le interruzzioni\n\t*Abilita il servizio in background durante la navigazione "</string>
+    <string name="tip_recent_changes_1_0_0_t">"Cambiamenti nella versione 1.0.0:\n\t*Migliorata la navigazione: più veloce e precisa (fino a 250 km)\n\t*Aggiunta le mappe solo-strade\n\t*La mappa non perde la posizione dopo le interruzioni\n\t*Abilita il servizio in background durante la navigazione\n\t*Migliorata \'vista touring\' con i nuovi stili delle strade, mappe più dettagliate, e l\'opzione Alpine hiking (SAC scale)\n\t*EGM96 correzione dello scostamento per le letture dell\'altitudine del GPS "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posizione corrente</string>
     <string name="route_descr_from_to">Da %1$s a %2$s</string>
@@ -1161,7 +1161,7 @@
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
-    <string name="download_srtm_maps">mappe SRTM</string>
+    <string name="download_srtm_maps">Mappe altimetriche</string>
     <string name="srtm_plugin_name">plugin SRTM</string>
     <string name="srtm_plugin_description">Questo plugin permette di scaricare le linee di elevazione (Download mappe -&gt; Menu -&gt; Altre mappe) per regioni specifiche e li usa con le mappe offline.</string>
     <string name="index_srtm_ele">Linee di elevazione</string>
