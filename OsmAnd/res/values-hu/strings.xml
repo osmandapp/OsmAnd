@@ -1090,4 +1090,8 @@
 <string name="osmand_distance_plugin_description">Távolság mérése két pont között. A mérés kezdetének és céljának meghatározása, törlése hosszú kattintással.</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Az OsMoDroid bővítmény verziója elavult és frissítésre szorul.</string>
     <string name="osmodroid_plugin_name">OsMoDroid bővítmény</string>
-	</resources>
+	<string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez</string>
+    <string name="map_widget_audionotes">Hangjegyzetek</string>
+    <string name="audionotes_plugin_name">Hangjegyzet bővítmény</string>
+    <string name="monitoring_control_stop">stop</string>
+    </resources>
