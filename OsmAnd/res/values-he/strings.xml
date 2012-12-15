@@ -1119,4 +1119,10 @@
     <string name="download_srtm_maps">מפות SRTM</string>
     <string name="osmand_distance_plugin_description">מדידת המרחק בין שתי נקודות. יש להגדיר את המקור / יעד / להתעלם מהמדידות על ידי לחיצה ארוכה.</string>
 	<string name="osmand_distance_plugin_name">מחשבון מרחק</string>
-</resources>
+<string name="audionotes_location_not_defined">המיקום לא מוגדר עדיין לצורכי שמירת הערות קוליות</string>
+    <string name="monitoring_control_stop">עצירה</string>
+    <string name="map_widget_audionotes">הערות קוליות</string>
+    <string name="audionotes_plugin_description">תיאור תוסף ההערות הקוליות</string>
+    <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
+    <string name="srtm_plugin_attribution">ASTER הוא מוצר מבית METIS ו־NASA</string>
+    </resources>
