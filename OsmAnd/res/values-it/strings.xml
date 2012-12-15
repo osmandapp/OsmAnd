@@ -1171,6 +1171,4 @@
 	<string name="osmand_distance_plugin_name">Calcolatore della distanza</string>
 <string name="audionotes_location_not_defined">La posizione non è ancora definita per poter prendere note audio</string>
     <string name="monitoring_control_stop">ferma</string>
-    <string name="map_widget_audionotes"/>
-    <string name="map_widget_audionotes">Note audio</string>
     </resources>
