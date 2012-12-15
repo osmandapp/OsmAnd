@@ -4,7 +4,7 @@
   android:layout_width="fill_parent"
   android:layout_height="fill_parent" android:orientation="vertical" >
 
-<TextView android:layout_width="fill_parent" android:textSize="18dp" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:text="@string/recalculate_route_to_your_location"></TextView>
+<!--   <TextView android:layout_width="fill_parent" android:textSize="18dp" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:text="@string/recalculate_route_to_your_location"></TextView> -->
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:gravity="center" android:layout_height="wrap_content" android:orientation="horizontal">
 <ToggleButton android:contentDescription="@string/app_mode_car" android:textOn="" android:textOff=""  android:id="@+id/CarButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:background="@drawable/car_icon" android:layout_marginLeft="10dp" />
 <ToggleButton android:contentDescription="@string/app_mode_bicycle" android:textOn="" android:textOff="" android:id="@+id/BicycleButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/bicycle_icon"/>
@@ -13,12 +13,12 @@
 
 <ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent"  
     android:layout_marginTop="5dp" android:layout_marginBottom="5dp" android:layout_marginLeft="10dp">
+<LinearLayout android:layout_height="wrap_content" android:layout_width="fill_parent" android:orientation="vertical">
 <TextView android:id="@+id/TextView" android:gravity="left" android:textSize="18dp" 
     android:layout_height="wrap_content" android:layout_width="fill_parent"  
     />
-</ScrollView>
 <CheckBox android:id="@+id/OptimalCheckox" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/non_optimal_route_calculation"/>
-
-
+</LinearLayout>
+</ScrollView>
 
 </LinearLayout>
