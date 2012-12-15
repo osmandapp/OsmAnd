@@ -1134,4 +1134,7 @@
     <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Stáhnout mapy -&gt; Menu -&gt; Ostatní mapy) pro určitou oblast a použít je s offline mapami.</string>
     <string name="srtm_plugin_name">Modul vrstevnice</string>
     <string name="download_srtm_maps">Mapy vrstevnic</string>
+    <string name="audionotes_location_not_defined">Pozice pro zvukové poznámky ještě není známa</string>
+    <string name="monitoring_control_stop">zastavit</string>
+    <string name="map_widget_audionotes">Audio poznámky</string>
     </resources>
