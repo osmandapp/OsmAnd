@@ -1094,4 +1094,7 @@
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hangjegyzet bővítmény</string>
     <string name="monitoring_control_stop">stop</string>
+    <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Térkép letöltése -&gt; menü - Egyéb térképek) a megadott régiókhoz és használatukat offline térképekkel.</string>
+    <string name="srtm_plugin_attribution">Az ASTER a METIS és a NASA terméke</string>
+    <string name="osmodroid_plugin_description">Élő útvonalrögzítési szolgáltatást tesz lehetővé. Az OsMoDroid bővítmény használatához telepített OsModroid alkalmazásra van szükség. További információk: http://esya.ru</string>
     </resources>
