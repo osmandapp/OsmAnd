@@ -1169,4 +1169,8 @@
     <string name="audionotes_plugin_name">Plugin Appunti Audio</string>
     <string name="osmand_distance_plugin_description">Misurare una distanza tra due punti. Specificare l\'origine / la destinazione / cancellare la misurazione con una pressione prolungata.</string>
 	<string name="osmand_distance_plugin_name">Calcolatore della distanza</string>
-</resources>
+<string name="audionotes_location_not_defined">La posizione non è ancora definita per poter prendere note audio</string>
+    <string name="monitoring_control_stop">interrompere</string>
+    <string name="map_widget_audionotes"/>
+    <string name="map_widget_audionotes">Note audio</string>
+    </resources>
