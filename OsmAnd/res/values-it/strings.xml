@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per mostrare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1165,4 +1165,8 @@
     <string name="srtm_plugin_name">plugin SRTM</string>
     <string name="srtm_plugin_description">plugin SRTM (descrizione TODO)</string>
     <string name="index_srtm_ele">Linee di elevazione</string>
-    </resources>
+    <string name="audionotes_plugin_description">Descrizione del plugin Appunti Audio</string>
+    <string name="audionotes_plugin_name">Plugin Appunti Audio</string>
+    <string name="osmand_distance_plugin_description">Misurare una distanza tra due punti. Specificare l\'origine / la destinazione / cancellare la misurazione con una pressione prolungata.</string>
+	<string name="osmand_distance_plugin_name">Calcolatore della distanza</string>
+</resources>
