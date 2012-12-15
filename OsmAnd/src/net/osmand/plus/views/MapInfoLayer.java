@@ -642,7 +642,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
 
 			paintText.setColor(textColor);
-			topText.setTextColor(textColor);
+			topText.getPaint().setColor(textColor);
 			paintSubText.setColor(textColor);
 			paintSmallText.setColor(textColor);
 			paintSmallSubText.setColor(textColor);
