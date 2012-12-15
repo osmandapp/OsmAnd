@@ -174,43 +174,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		createControls();
 	}
 	
-	private void applyTheme() {
-		int boxTop = R.drawable.box_top_stack;
-		int boxTopR = R.drawable.box_top_r;
-		int boxTopL = R.drawable.box_top_l;
-		int expand = R.drawable.box_expand;
-		if(view.getSettings().TRANSPARENT_MAP_THEME.get()){
-			boxTop = R.drawable.box_top_t_stack;
-			boxTopR = R.drawable.box_top_rt;
-			boxTopL = R.drawable.box_top_lt;
-			expand = R.drawable.box_expand_t;
-		}
-		rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
-		rightStack.setStackDrawable(boxTop);
-		
-		leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
-		leftStack.setStackDrawable(boxTop);
-		
-		leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
-		rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
-		statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
-		
-		int color = Color.BLACK;
-		int shadowColor = !view.getSettings().TRANSPARENT_MAP_THEME.get() ? Color.TRANSPARENT :  Color.WHITE;
-		if(paintText.getColor() != color) {
-			paintText.setColor(color);
-			topText.setTextColor(color);
-			paintSubText.setColor(color);
-			paintSmallText.setColor(color);
-			paintSmallSubText.setColor(color);
-		}
-		if(topText.getShadowColor() != shadowColor) {
-			topText.setShadowColor(shadowColor);
-			leftStack.setShadowColor(shadowColor);
-			rightStack.setShadowColor(shadowColor);
-		}
-	}
-	
 	public void registerAllControls(){
 		statusBar = new LinearLayout(view.getContext());
 		statusBar.setOrientation(LinearLayout.HORIZONTAL);
@@ -424,7 +387,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		statusBar.removeAllViews();
 		mapInfoControls.populateStatusBar(statusBar);
-		applyTheme();
+		updateColorShadowsOfText(null);
 	}
 	
 	public void createControls() {
@@ -633,19 +596,77 @@ public class MapInfoLayer extends OsmandMapLayer {
 		dlg.show();
 	}
 	
+	private int themeId = -1;
+	public void updateColorShadowsOfText(DrawSettings drawSettings) {
+		boolean transparent = view.getSettings().TRANSPARENT_MAP_THEME.get();
+		boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+		boolean following = routeLayer.getHelper().isFollowingMode();
+		int calcThemeId = (transparent ? 4 : 0) | (nightMode ? 2 : 0) | (following ? 1 : 0);
+		if (themeId != calcThemeId) {
+			themeId = calcThemeId;
+			boolean textBold = following;
+			int textColor = !nightMode ? Color.BLACK : 0xffC8C8C8;
+			int textShadowColor = !transparent ? Color.TRANSPARENT : Color.WHITE;
+			int boxTop;
+			int boxTopStack;
+			int boxTopR;
+			int boxTopL;
+			int expand;
+			if (nightMode) {
+				boxTop = R.drawable.box_top_n;
+				boxTopStack = R.drawable.box_top_n_stack;
+				boxTopR = R.drawable.box_top_rn;
+				boxTopL = R.drawable.box_top_ln;
+				expand = R.drawable.box_expand_t;
+			} else if (transparent) {
+				boxTop = R.drawable.box_top_t;
+				boxTopStack = R.drawable.box_top_t_stack;
+				boxTopR = R.drawable.box_top_rt;
+				boxTopL = R.drawable.box_top_lt;
+				expand = R.drawable.box_expand_t;
+			} else {
+				boxTop = R.drawable.box_top;
+				boxTopStack = R.drawable.box_top_stack;
+				boxTopR = R.drawable.box_top_r;
+				boxTopL = R.drawable.box_top_l;
+				expand = R.drawable.box_expand;
+			}
+			rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
+			rightStack.setStackDrawable(boxTopStack);
+
+			leftStack.setTopDrawable(view.getResources().getDrawable(boxTopL));
+			leftStack.setStackDrawable(boxTopStack);
+
+			leftStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+			rightStack.setExpandImageDrawable(view.getResources().getDrawable(expand));
+			statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
+
+			paintText.setColor(textColor);
+			topText.setTextColor(textColor);
+			paintSubText.setColor(textColor);
+			paintSmallText.setColor(textColor);
+			paintSmallSubText.setColor(textColor);
+
+			topText.setShadowColor(textShadowColor);
+			leftStack.setShadowColor(textShadowColor);
+			rightStack.setShadowColor(textShadowColor);
+
+			paintText.setFakeBoldText(textBold);
+			topText.getPaint().setFakeBoldText(textBold);
+			paintSubText.setFakeBoldText(textBold);
+			paintSmallText.setFakeBoldText(textBold);
+			paintSmallSubText.setFakeBoldText(textBold);
+			
+			rightStack.invalidate();
+			leftStack.invalidate();
+			statusBar.invalidate();
+		}
+	}
+	
 	
 	@Override
-	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings nightMode) {
-		boolean bold = routeLayer.getHelper().isFollowingMode();
-		
-		if(paintText.isFakeBoldText() != bold) {
-			paintText.setFakeBoldText(bold);
-			topText.getPaint().setFakeBoldText(bold);
-			paintSubText.setFakeBoldText(bold);
-			paintSmallText.setFakeBoldText(bold);
-			paintSmallSubText.setFakeBoldText(bold);
-		}
-		
+	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings drawSettings) {
+		updateColorShadowsOfText(drawSettings);
 		// update data on draw
 		rightStack.updateInfo();
 		leftStack.updateInfo();
@@ -857,10 +878,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			this.shadowColor = shadowColor;
 		}
 		
-		public int getShadowColor() {
-			return shadowColor;
-		}
-
 		@Override
 		public boolean updateInfo() {
 			String text = null;
