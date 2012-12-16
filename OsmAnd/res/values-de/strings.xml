@@ -105,7 +105,7 @@
 	<string name="rendering_attr_noPolygons_name">Keine Flächen anzeigen</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
-	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt SRTM-Datei):</string>
+	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt Höhenlinien-Datei):</string>
 	<string name="rendering_attr_contourLines_name">Höhenlinien anzeigen</string>
 	<string name="rendering_attr_hmRendered_description">Erhöht den dargestellten Detailgrad der Karte</string>
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>

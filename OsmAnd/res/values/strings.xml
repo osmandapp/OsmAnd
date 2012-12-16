@@ -301,8 +301,8 @@
 	<string name="rendering_attr_noPolygons_name">Hide polygons</string>
 	<string name="rendering_attr_appMode_name">Rendering mode</string>
 	<string name="rendering_attr_appMode_description">Optimize map for</string>
-	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string -->
-	<string name="rendering_attr_contourLines_description">Display from zoom level (needs SRTM file):</string>
+	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string -->
+	<string name="rendering_attr_contourLines_description">Display from zoom level (requires contour data):</string>
 	<string name="rendering_attr_contourLines_name">Show contour lines</string>
 	<string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
 	<string name="rendering_attr_hmRendered_name">Show more map detail</string>
