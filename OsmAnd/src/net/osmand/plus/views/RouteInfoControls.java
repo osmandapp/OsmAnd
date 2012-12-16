@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
@@ -464,12 +465,13 @@ public class RouteInfoControls {
 	
 	protected TextInfoControl createIntermediateDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final OsmandMapTileView view = map.getMapView();
+		final TargetPointsHelper targets = map.getTargetPoints();
 		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
 				.getDrawable(R.drawable.info_intermediate), view) {
 
 			@Override
 			protected void click(OsmandMapTileView view) {
-				if(map.getIntermediatePoints().size() > 1) {
+				if(targets.getIntermediatePoints().size() > 1) {
 					map.getMapActions().openIntermediatePointsDialog();
 				} else {
 					super.click(view);
@@ -478,7 +480,7 @@ public class RouteInfoControls {
 
 			@Override
 			public LatLon getPointToNavigate() {
-				return map.getFirstIntermediatePoint();
+				return targets.getFirstIntermediatePoint();
 			}
 
 			@Override

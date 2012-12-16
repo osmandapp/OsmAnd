@@ -22,6 +22,7 @@ import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Application;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -142,8 +143,8 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 		if (startPoint == null) {
 			startPoint = settings.getLastKnownMapLocation();
 		}
-		
-		LatLon pointToNavigate = settings.getPointToNavigate();
+		OsmandApplication app = (OsmandApplication) getApplication();
+		LatLon pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
 		if(!Algoritms.objectEquals(pointToNavigate, this.destinationLocation) || 
 				!Algoritms.objectEquals(startPoint, this.lastKnownMapLocation)){
 			destinationLocation = pointToNavigate;

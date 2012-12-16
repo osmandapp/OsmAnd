@@ -174,8 +174,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				measurementPoints.add(l);
 				view.refreshMap();
 				updateText();
+				return true;
 			}
-			return true;
+			return false;
 		}
 		
 		@Override
@@ -184,8 +185,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				measurementPoints.remove(measurementPoints.size() - 1);
 				view.refreshMap();
 				updateText();
+				return true;
 			}
-			return true;
+			return false;
 		}
 
 		@Override

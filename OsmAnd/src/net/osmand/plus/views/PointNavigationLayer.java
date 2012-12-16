@@ -1,14 +1,13 @@
 package net.osmand.plus.views;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,8 +30,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	private Paint point;
 	private Paint bitmapPaint;
 	
-	protected LatLon pointToNavigate = null;
-	protected List<LatLon> intermediatePoints = new ArrayList<LatLon>();
 	private OsmandMapTileView view;
 	private float[] calculations = new float[2];
 	
@@ -42,8 +39,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	private Bitmap arrowToDestination;
 
 	private Paint textPaint;
-
-	private RoutingHelper routingHelper;
 
 	private final MapActivity map;
 	
@@ -88,7 +83,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
-		routingHelper = view.getApplication().getRoutingHelper();
 		initUI();
 	}
 
@@ -98,14 +92,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		int index = 0;
 		
-		if(routingHelper != null && routingHelper.isFollowingMode() && routingHelper.isRouteCalculated()) {
-			List<LatLon> ip = routingHelper.getIntermediatePoints();
-			int sz = ip == null ? 0 : ip.size();
-			while(sz > intermediatePoints.size()) {
-				intermediatePoints.remove(0);
-			}
-		}
-		for (LatLon ip : intermediatePoints) {
+		TargetPointsHelper targetPoints = map.getTargetPoints();
+		for (LatLon ip : targetPoints.getIntermediatePoints()) {
 			index ++;
 			if (isLocationVisible(ip)) {
 				int marginX = intermediatePoint.getWidth() / 3;
@@ -118,6 +106,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				canvas.rotate(view.getRotate(), locationX, locationY);
 			}
 		}
+		LatLon pointToNavigate = targetPoints.getPointToNavigate();
 		if (isLocationVisible(pointToNavigate)) {
 			int marginX = targetPoint.getWidth() / 3;
 			int marginY = 2 * targetPoint.getHeight() / 3;
@@ -145,22 +134,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	}
 	
 	
-	public LatLon getPointToNavigate() {
-		return pointToNavigate;
-	}
-	
-	public void setPointToNavigate(LatLon pointToNavigate, List<LatLon> intermediatePoints) {
-		this.pointToNavigate = pointToNavigate;
-		this.intermediatePoints.clear();
-		this.intermediatePoints.addAll(intermediatePoints);
-		view.refreshMap();
-	}
-	
-	public List<LatLon> getIntermediatePoints() {
-		return intermediatePoints;
-	}
-	
-
 	@Override
 	public void destroyLayer() {
 		
@@ -184,15 +157,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, List<Object> o) {
-		for(int i=0; i<=intermediatePoints.size(); i++) {
-			LatLon latLon;
-			boolean target = i == intermediatePoints.size();
-			if(target){
-				latLon = pointToNavigate;
-			} else {
-				latLon =  intermediatePoints.get(i);
-			}
-			if(latLon != null) {
+		List<LatLon> intermediatePoints = map.getTargetPoints().getIntermediatePointsWithTarget();
+		for (int i = 0; i < intermediatePoints.size(); i++) {
+			LatLon latLon = intermediatePoints.get(i);
+			boolean target = i == intermediatePoints.size() - 1;
+			if (latLon != null) {
 				int ex = (int) point.x;
 				int ey = (int) point.y;
 				int x = view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude());
@@ -202,7 +171,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 					TargetPoint tp = new TargetPoint();
 					tp.location = latLon;
 					tp.intermediate = !target;
-					if(target) {
+					if (target) {
 						tp.name = view.getContext().getString(R.string.target_point, "");
 					} else {
 						tp.name = (i + 1) + ". " + view.getContext().getString(R.string.intermediate_point, "");
@@ -262,10 +231,11 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.delete_target_point) {
+						TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
 						if(a.intermediate) {
-							map.removeIntermediatePoint(true, a.index);
+							targetPointsHelper.removeWayPoint(map, true, a.index);
 						} else {
-							map.navigateToPoint(null, true, -1);
+							targetPointsHelper.removeWayPoint(map, true, -1);
 						}
 					}
 					map.getMapLayers().getContextMenuLayer().setLocation(null, "");

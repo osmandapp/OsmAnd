@@ -12,6 +12,7 @@ import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -236,7 +237,8 @@ public class SearchAddressActivity extends Activity {
 			finish();
 		} else {
 			if (navigateTo) {
-				MapActivityActions.navigateToPoint(SearchAddressActivity.this, searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+				OsmandApplication app = (OsmandApplication) getApplication();
+				app.getTargetPointsHelper().navigatePointDialogAndLaunchMap(SearchAddressActivity.this, searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
 			} else {
 				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
 				MapActivity.launchMapActivityMoveToTop(SearchAddressActivity.this);

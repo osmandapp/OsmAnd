@@ -76,6 +76,7 @@ public class OsmandApplication extends Application {
 	private GPXFile gpxFileToDisplay;
 	private SavingTrackHelper savingTrackHelper;
 	private LiveMonitoringHelper liveMonitoringHelper;
+	private TargetPointsHelper targetPointsHelper;
 
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
@@ -96,6 +97,7 @@ public class OsmandApplication extends Application {
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
+		targetPointsHelper = new TargetPointsHelper(osmandSettings, routingHelper);
 		checkPrefferedLocale();
 		startApplication();
 		if (LOG.isDebugEnabled()) {
@@ -573,6 +575,10 @@ public class OsmandApplication extends Application {
 		else if (mode == AccessibilityMode.OFF)
 			return false;
 		return ((AccessibilityManager) getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
+	}
+	
+	public TargetPointsHelper getTargetPointsHelper() {
+		return targetPointsHelper;
 	}
 
 	public ClientContext getClientContext() {

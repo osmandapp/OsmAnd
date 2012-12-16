@@ -28,6 +28,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
@@ -207,7 +208,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
 		if(settings.FOLLOW_THE_ROUTE.get() && !routingHelper.isRouteCalculated()){
-			restoreRoutingMode(settings.getPointToNavigate(), settings.getIntermediatePoints());
+			restoreRoutingMode();
 		}
 		
 		mapView.setMapLocationListener(this);
@@ -285,7 +286,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
-		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate(), settings.getIntermediatePoints());
 		
 		Location loc = getLastKnownLocation();
 		if (loc != null && (System.currentTimeMillis() - loc.getTime()) > 30 * 1000) {
@@ -307,13 +307,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 		mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 
-		// if destination point was changed try to recalculate route 
+		// if destination point was changed try to recalculate route
+		TargetPointsHelper targets = getTargetPoints();
 		if (routingHelper.isFollowingMode() && (
-				!Algoritms.objectEquals(settings.getPointToNavigate(), routingHelper.getFinalLocation() )||
-				!Algoritms.objectEquals(settings.getIntermediatePoints(), routingHelper.getIntermediatePoints())
+				!Algoritms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
+				!Algoritms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
 				)) {
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					settings.getIntermediatePoints(),
+			routingHelper.setFinalAndCurrentLocation(targets.getPointToNavigate(),
+					targets.getIntermediatePoints(),
 					getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
 		}
 
@@ -385,8 +386,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapView.refreshMap(changed);	
 	}
 
-	private void restoreRoutingMode(final LatLon pointToNavigate, final List<LatLon> intermediates) {
+	private void restoreRoutingMode() {
 		final String gpxPath = settings.FOLLOW_THE_GPX_ROUTE.get();
+		final TargetPointsHelper targetPoints = getTargetPoints();
+		final LatLon pointToNavigate = targetPoints.getPointToNavigate();
 		if (pointToNavigate == null && gpxPath == null) {
 			notRestoreRoutingMode();
 		} else {
@@ -475,7 +478,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 							if (endPoint == null) {
 								notRestoreRoutingMode();
 							} else {
-								followRoute(settings.getApplicationMode(), endPoint, intermediates, startPoint, gpxRoute);
+								followRoute(settings.getApplicationMode(), endPoint, targetPoints.getIntermediatePoints(), startPoint, gpxRoute);
 							}
 						}
 					};
@@ -674,7 +677,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
     }
 
     private void emitNavigationHint() {
-        final LatLon point = settings.getPointToNavigate();
+        final LatLon point = getTargetPoints().getPointToNavigate();
         if (point != null) {
             if (routingHelper.isRouteCalculated()) {
                 routingHelper.getVoiceRouter().announceCurrentDirection(getLastKnownLocation());
@@ -985,16 +988,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return zoomDelta;
 	}
 	
-	public void removeIntermediatePoint(boolean updateRoute, int index){
-		mapLayers.getNavigationLayer().getIntermediatePoints().remove(index);
-		settings.deleteIntermediatePoint(index);
-		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
-				routingHelper.isFollowingMode())) {
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					settings.getIntermediatePoints(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
-		}
-		mapView.refreshMap();
-	}
 	
 	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
 		// change global settings
@@ -1016,25 +1009,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		getMyApplication().showDialogInitializingCommandPlayer(MapActivity.this);
 	}
 
-	public void navigateToPoint(LatLon point, boolean updateRoute, int intermediate){
-		if(point != null){
-			if(intermediate < 0) {
-				settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
-			} else {
-				settings.insertIntermediatePoint(point.getLatitude(), point.getLongitude(), null, 
-						intermediate, false);
-			}
-		} else {
-			settings.clearPointToNavigate();
-			settings.clearIntermediatePoints();
-		}
-		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
-				routingHelper.isFollowingMode())) {
-			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
-					settings.getIntermediatePoints(), getLastKnownLocation(), routingHelper.getCurrentGPXRoute());
-		}
-		mapLayers.getNavigationLayer().setPointToNavigate(settings.getPointToNavigate(), settings.getIntermediatePoints());
-	}
 	
 	public Location getLastKnownLocation(){
 		if(mapLayers.getLocationLayer() == null) {
@@ -1047,21 +1021,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}
 	
+	public TargetPointsHelper getTargetPoints(){
+		return getMyApplication().getTargetPointsHelper();
+	}
+	
 	public LatLon getPointToNavigate(){
-		return mapLayers.getNavigationLayer().getPointToNavigate();
-	}
-	
-	public List<LatLon> getIntermediatePoints(){
-		return mapLayers.getNavigationLayer().getIntermediatePoints();
-	}
-	
-	
-	public LatLon getFirstIntermediatePoint(){
-		List<LatLon> ip = mapLayers.getNavigationLayer().getIntermediatePoints();
-		if(ip.size() > 0) {
-			return ip.get(0);
-		}
-		return null;
+		return getTargetPoints().getPointToNavigate();
 	}
 	
 	public RoutingHelper getRoutingHelper() {

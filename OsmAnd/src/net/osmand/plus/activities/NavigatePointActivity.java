@@ -257,9 +257,11 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 			
 			if(navigate){
 				if(activity != null) {
-					MapActivityActions.navigateToPoint(activity, lat, lon, getString(R.string.point_on_map, lat, lon));
+					OsmandApplication app = (OsmandApplication) activity.getApplication();
+					app.getTargetPointsHelper().navigatePointDialogAndLaunchMap(activity, lat, lon, getString(R.string.point_on_map, lat, lon));
 				} else {
-					MapActivityActions.navigateToPoint(this, lat, lon, getString(R.string.point_on_map, lat, lon));
+					OsmandApplication app = (OsmandApplication) getApplication();
+					app.getTargetPointsHelper().navigatePointDialogAndLaunchMap(this, lat, lon, getString(R.string.point_on_map, lat, lon));
 				}
 				if(dlg != null){
 					dlg.dismiss();

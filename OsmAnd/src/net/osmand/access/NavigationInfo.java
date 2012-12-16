@@ -236,8 +236,9 @@ public class NavigationInfo {
 
     public synchronized void setLocation(Location location) {
         currentLocation = location;
-        if (autoAnnounce && ((OsmandApplication)(context.getApplicationContext())).accessibilityEnabled()) {
-            final LatLon point = settings.getPointToNavigate();
+        OsmandApplication app = ((OsmandApplication)(context.getApplicationContext()));
+        if (autoAnnounce && app.accessibilityEnabled()) {
+            final LatLon point = app.getTargetPointsHelper().getPointToNavigate();
             if (point != null) {
                 if ((currentLocation != null) && currentLocation.hasBearing()) {
                     final long now = SystemClock.uptimeMillis();

@@ -1076,7 +1076,7 @@ public class OsmandSettings {
 		return saveIntermediatePoints(ps,ds);
 	}
 
-	private boolean saveIntermediatePoints(List<LatLon> ps, List<String> ds) {
+	public boolean saveIntermediatePoints(List<LatLon> ps, List<String> ds) {
 		StringBuilder sb = new StringBuilder();
 		for(int i=0; i<ps.size(); i++) {
 			if(i > 0){

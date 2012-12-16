@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
@@ -362,9 +363,10 @@ public class RoutingHelper {
 			showMessage(app.getString(R.string.arrived_at_intermediate_point));
 			voiceRouter.arrivedIntermediatePoint();
 			route.passIntermediatePoint();
-			int toDel = settings.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
+			TargetPointsHelper targets = app.getTargetPointsHelper();
+			int toDel = targets.getIntermediatePoints().size() - route.getIntermediatePointsToPass();
 			while(toDel > 0) {
-				settings.deleteIntermediatePoint(0);
+				targets.removeWayPoint(null, false, 0);
 				toDel--;
 			}
 			while(intermediatePoints != null  && route.getIntermediatePointsToPass() < intermediatePoints.size()) {
@@ -378,6 +380,8 @@ public class RoutingHelper {
 			showMessage(app.getString(R.string.arrived_at_destination));
 			voiceRouter.arrivedDestinationPoint();
 			clearCurrentRoute(null, null);
+			TargetPointsHelper targets = app.getTargetPointsHelper();
+			targets.clearPointToNavigate(null, false);
 			return true;
 		}
 		return false;

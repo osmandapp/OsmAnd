@@ -63,7 +63,7 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 			@Override
 			public void prepareOptionsMenu(Menu menu, MenuItem animateMenu) {
 				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
-				animateMenu.setVisible(settings.getPointToNavigate() != null);
+				animateMenu.setVisible(app.getTargetPointsHelper().getPointToNavigate() != null);
 			}
 			
 			@Override

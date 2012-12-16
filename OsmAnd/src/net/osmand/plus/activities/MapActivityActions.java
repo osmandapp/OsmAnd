@@ -15,7 +15,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
-import net.osmand.OsmAndFormatter;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
 import net.osmand.Version;
@@ -36,10 +35,10 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -50,7 +49,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
@@ -77,7 +75,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
@@ -462,15 +459,6 @@ public class MapActivityActions implements DialogProvider {
     }
     
     
-    private boolean checkPointToNavigate(){
-    	MapActivityLayers mapLayers = mapActivity.getMapLayers();
-    	if(mapLayers.getNavigationLayer().getPointToNavigate() == null){
-			AccessibleToast.makeText(mapActivity, R.string.mark_final_location_first, Toast.LENGTH_LONG).show();
-			return false;
-		}
-    	return true;
-    }
-    
     public String getRoutePointDescription(double lat, double lon) {
     	return mapActivity.getString(R.string.route_descr_lat_lon, lat, lon);
     }
@@ -491,22 +479,23 @@ public class MapActivityActions implements DialogProvider {
 			from = getRoutePointDescription(fromOrCurrent.getLatitude(),
 					fromOrCurrent.getLongitude());
 		}
-		
+		TargetPointsHelper targets = mapActivity.getTargetPoints();
 		String tos;
 		if(to == null) {
-			tos = getRoutePointDescription(mapActivity.getPointToNavigate(), 
-					settings.getPointNavigateDescription());
+			tos = getRoutePointDescription(targets.getPointToNavigate(), 
+					targets.getPointNavigateDescription());
 		} else {
 			tos = getRoutePointDescription(to, "");
 		}
-		int sz = mapActivity.getIntermediatePoints().size();
+		
+		int sz = targets.getIntermediatePoints().size();
 		if(sz == 0) {
 			return mapActivity.getString(R.string.route_descr_from_to, from, tos);
 		} else {
 			String via = "";
-			List<String> names = settings.getIntermediatePointDescriptions(sz);
+			List<String> names = targets.getIntermediatePointNames();
 			for (int i = 0; i < sz ; i++) {
-				via += "\n - " + getRoutePointDescription(mapActivity.getIntermediatePoints().get(i),
+				via += "\n - " + getRoutePointDescription(targets.getIntermediatePoints().get(i),
 						names.get(i));
 			}
 			return mapActivity.getString(R.string.route_descr_from_to_via, from, via, tos);
@@ -516,9 +505,8 @@ public class MapActivityActions implements DialogProvider {
     
 	public void getDirections(final Location fromOrCurrent, final LatLon to, boolean gpxRouteEnabled) {
 
-		final RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-
 		Builder builder = new AlertDialog.Builder(mapActivity);
+		final TargetPointsHelper targets = mapActivity.getTargetPoints();
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
@@ -577,14 +565,14 @@ public class MapActivityActions implements DialogProvider {
 		DialogInterface.OnClickListener onlyShowCall = new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(to != null) {
-					mapActivity.navigateToPoint(to, false, -1);
+				if (to != null) {
+					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
-				if (!checkPointToNavigate()) {
+				if (!targets.checkPointToNavigate(mapActivity)) {
 					return;
 				}
 				Location from = fromOrCurrent;
-				if(from == null) {
+				if (from == null) {
 					from = mapActivity.getLastKnownLocation();
 				}
 				if (from == null) {
@@ -592,7 +580,8 @@ public class MapActivityActions implements DialogProvider {
 					return;
 				}
 
-				// PREV_APPLICATION_MODE also needs to be set here to overwrite possibly outdated value from prior follow-navigation in different profile
+				// PREV_APPLICATION_MODE also needs to be set here to overwrite possibly outdated value from prior follow-navigation in
+				// different profile
 				// Do not overwrite PREV_APPLICATION_MODE if already navigating
 				if (!routingHelper.isFollowingMode()) {
 					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
@@ -604,8 +593,7 @@ public class MapActivityActions implements DialogProvider {
 				settings.FOLLOW_THE_ROUTE.set(false);
 				settings.FOLLOW_THE_GPX_ROUTE.set(null);
 				routingHelper.setFollowingMode(false);
-				routingHelper.setFinalAndCurrentLocation(mapActivity.getPointToNavigate(),
-						mapActivity.getIntermediatePoints(),from, null);
+				routingHelper.setFinalAndCurrentLocation(targets.getPointToNavigate(), targets.getIntermediatePoints(), from, null);
 			}
 		};
 
@@ -613,9 +601,9 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(to != null) {
-					mapActivity.navigateToPoint(to, false, -1);
+					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
-				if (!checkPointToNavigate()) {
+				if (!targets.checkPointToNavigate(mapActivity)) {
 					return;
 				}
 				boolean msg = true;
@@ -638,7 +626,7 @@ public class MapActivityActions implements DialogProvider {
 				ApplicationMode mode = getAppMode(buttons, settings);
 				settings.OPTIMAL_ROUTE_MODE.setModeValue(mode, !nonoptimal.isChecked());
 				dialog.dismiss();
-				mapActivity.followRoute(mode, mapActivity.getPointToNavigate(), mapActivity.getIntermediatePoints(), 
+				mapActivity.followRoute(mode, targets.getPointToNavigate(), targets.getIntermediatePoints(), 
 						current, null);
 			}
 		};
@@ -647,7 +635,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(to != null) {
-					mapActivity.navigateToPoint(to, false, -1);
+					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				navigateUsingGPX(mode);
@@ -712,8 +700,8 @@ public class MapActivityActions implements DialogProvider {
 								endPoint = point;
 							}
 							if(endPoint != null) {
-								settings.setPointToNavigate(point.getLatitude(), point.getLongitude(), null);
-								mapLayers.getNavigationLayer().setPointToNavigate(point, new ArrayList<LatLon>());
+								mapActivity.getTargetPoints().navigateToPoint(
+										mapActivity, point, false, -1);
 							}
 						}
 						if(endPoint != null){
@@ -820,8 +808,9 @@ public class MapActivityActions implements DialogProvider {
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
 		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_activities_directions_to_here);
-		if(settings.getPointToNavigate() != null) {
-			if(mapActivity.getIntermediatePoints().size() == 0) {
+		final TargetPointsHelper targets = mapActivity.getTargetPoints();
+		if(targets.getPointToNavigate() != null) {
+			if(targets.getIntermediatePoints().size() == 0) {
 				adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_view_set_intermediate);
 			} else {
 				adapter.registerItem(R.string.context_menu_item_first_intermediate_point, R.drawable.list_view_set_intermediate);
@@ -874,23 +863,27 @@ public class MapActivityActions implements DialogProvider {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, -1);
+					mapActivity.getTargetPoints().navigateToPoint(mapActivity,
+							new LatLon(latitude, longitude), true, -1);
 				} else if (standardId == R.string.context_menu_item_directions) {
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
 					getDirections(null, new LatLon(latitude, longitude), true);
 				} else if (standardId == R.string.context_menu_item_show_route) {
-					if (checkPointToNavigate()) {
+					if (targets.checkPointToNavigate(mapActivity)) {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
 						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, mapActivity.getIntermediatePoints().size());
+					targets.navigateToPoint(mapActivity, 
+							new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
 				} else if (standardId == R.string.context_menu_item_first_intermediate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, 0);
+					targets.navigateToPoint(mapActivity, 
+							new LatLon(latitude, longitude), true, 0);
 				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
-					mapActivity.navigateToPoint(new LatLon(latitude, longitude), true, mapActivity.getIntermediatePoints().size());
+					targets.navigateToPoint(mapActivity,
+							new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
@@ -1038,7 +1031,7 @@ public class MapActivityActions implements DialogProvider {
 				new OnOptionsMenuClick() {
 					@Override
 					public void prepareOptionsMenu(Menu menu, MenuItem navigateToPointMenu) {
-							if (settings.getPointToNavigate() != null) {
+							if (mapActivity.getPointToNavigate() != null) {
 								navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || 
 										routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
 								navigateToPointMenu.setVisible(true);
@@ -1056,7 +1049,7 @@ public class MapActivityActions implements DialogProvider {
 							mapActivity.updateApplicationModeSettings();
 							mapView.refreshMap(changed);
 						} else {
-							mapActivity.navigateToPoint(null, true, -1);
+							mapActivity.getTargetPoints().clearPointToNavigate(mapActivity, true);
 						}
 						mapView.refreshMap();
 						return true;
@@ -1121,7 +1114,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.registerOptionsMenuItem(R.string.target_points, R.string.target_points, new OnOptionsMenuClick() {
 			@Override
 			public void prepareOptionsMenu(Menu menu, MenuItem item) {
-				item.setVisible(mapActivity.getIntermediatePoints().size() > 0);
+				item.setVisible(mapActivity.getTargetPoints().getIntermediatePoints().size() > 0);
 			}
 			@Override
 			public boolean onClick(MenuItem item) {
@@ -1168,99 +1161,10 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void openIntermediatePointsDialog(){
-		Builder builder = new AlertDialog.Builder(mapActivity);
-		final ArrayList<LatLon> intermediates = new ArrayList<LatLon>(mapActivity.getIntermediatePoints());
-		final ArrayList<String> names = new ArrayList<String>(settings.getIntermediatePointDescriptions(
-				intermediates.size()));
-		final int targetPointInd = mapActivity.getPointToNavigate() == null ? -1 : intermediates.size();
-		if(mapActivity.getPointToNavigate() != null) {
-			intermediates.add(mapActivity.getPointToNavigate());
-			if(settings.getPointNavigateDescription() != null) {
-				names.add(settings.getPointNavigateDescription());
-			} else {
-				names.add("");
-			}
-		}
-		final List<String> intermediateNames = new ArrayList<String>();
-		double lat = mapActivity.getMapView().getLatitude();
-		double lon = mapActivity.getMapView().getLongitude();
-		for (int i = 0; i < intermediates.size(); i++) {
-			double meters = MapUtils.getDistance(intermediates.get(i), lat, lon);
-			String distString = OsmAndFormatter.getFormattedDistance((float) meters, mapActivity);
-			String nm = (i+1)+". " +  mapActivity.getString(R.string.target_point, distString);
-			String descr = names.get(i);
-			if(names.get(i) != null && descr.trim().length() > 0) {
-				nm += "\n" + descr;
-			}
-			intermediateNames.add(nm);
-		}
-		final boolean[] checkedIntermediates = new boolean[intermediateNames.size()];
-		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.layers_list_activity_item, R.id.title,
-				intermediateNames) {
-			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = super.getView(position, convertView, parent);
-				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(intermediateNames.get(position));
-
-				checkedIntermediates[position] = true;
-				if(position == targetPointInd) {
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_view_set_destination, 0, 0, 0);
-					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-					ch.setVisibility(View.GONE);
-				} else {
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_view_set_intermediate, 0, 0, 0);
-					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-					ch.setVisibility(View.VISIBLE);
-					ch.setChecked(true);
-					ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-							checkedIntermediates[position] = isChecked;
-						}
-					});
-				}
-				return v;
-			}
-		};
-		builder.setAdapter(listadapter, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
-				LatLon pointToNavigate = intermediates.get(which);
-				float fZoom = mapActivity.getMapView().getFloatZoom() < 15 ? 15 : mapActivity.getMapView().getFloatZoom();
-				thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-			}
-		});
-		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				int cnt = 0;
-				for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
-					if (!checkedIntermediates[i]) {
-						cnt++;
-					}
-				}
-				if (cnt > 0) {
-					for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
-						if (!checkedIntermediates[i]) {
-							cnt--;
-							mapActivity.removeIntermediatePoint(cnt == 0, i);
-							if (cnt == 0) {
-								mapActivity.getMapView().refreshMap();
-							}
-						}
-					}
-					mapActivity.getMapLayers().getContextMenuLayer().setLocation(null, "");
-				}
-
-			}
-		});
-		builder.show();
+		IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity, mapActivity.getMyApplication());
 	}
+	
+	
 
 	private void startGpsStatusIntent() {
 		Intent intent = new Intent();
@@ -1306,7 +1210,7 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.backToLocationImpl();
 					break;
 				case 1:
-					mapActivity.getNavigationInfo().show(settings.getPointToNavigate(),
+					mapActivity.getNavigationInfo().show(mapActivity.getPointToNavigate(),
 							mapActivity.getMapLayers().getLocationLayer().getHeading());
 					break;
 				default:
@@ -1345,9 +1249,8 @@ public class MapActivityActions implements DialogProvider {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
-				navigateToPoint(activity, location.getLatitude(), location.getLongitude(), name);
-//				app.getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), name);
-//				MapActivity.launchMapActivityMoveToTop(activity);
+				app.getTargetPointsHelper().navigatePointDialogAndLaunchMap(activity,
+						location.getLatitude(), location.getLongitude(), name);
 				qa.dismiss();
 			}
 		});
@@ -1369,38 +1272,4 @@ public class MapActivityActions implements DialogProvider {
 //		qa.addActionItem(directionsTo);
 	}
     
-    public static void navigateToPoint(final Context activity, final double lat, final double lon, final String name){
-    	final OsmandApplication app = ((OsmandApplication) activity.getApplicationContext());
-    	if(app.getSettings().getPointToNavigate() != null) {
-    		Builder builder = new AlertDialog.Builder(activity);
-    		builder.setTitle(R.string.new_destination_point_dialog);
-    		builder.setItems(new String[] {
-    				activity.getString(R.string.replace_destination_point),
-    				activity.getString(R.string.add_as_first_destination_point),
-    				activity.getString(R.string.add_as_last_destination_point)
-    		}, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if(which == 0) {
-						app.getSettings().setPointToNavigate(lat, lon, true, name);
-					} else if(which == 2) {
-						int sz = app.getSettings().getIntermediatePoints().size();
-//						app.getSettings().insertIntermediatePoint(lat, lon, name, sz);
-						LatLon pt = app.getSettings().getPointToNavigate();
-						app.getSettings().insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
-								app.getSettings().getPointNavigateDescription(), sz, true);
-						app.getSettings().setPointToNavigate(lat, lon, true, name);
-					} else {
-						app.getSettings().insertIntermediatePoint(lat, lon, name, 0, true);
-					}
-					MapActivity.launchMapActivityMoveToTop(activity);
-				}
-			});
-    		builder.show();
-    	} else {
-    		app.getSettings().setPointToNavigate(lat, lon, true, name);
-    		MapActivity.launchMapActivityMoveToTop(activity);
-    	}
-    }
 }
