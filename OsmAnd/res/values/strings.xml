@@ -25,7 +25,6 @@
     <string name="index_srtm_ele">Contour lines</string>
     <string name="srtm_plugin_description">This plugin facilitates downloading contour lines (Offline data Download -> Menu -> "Other maps") for use with offline maps.</string>
     <string name="srtm_plugin_name">Contour lines plugin</string>
-    <string name="srtm_plugin_attribution">ASTER is a product of METI and NASA</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads </string>
     <string name="download_srtm_maps">Contour line data</string>
