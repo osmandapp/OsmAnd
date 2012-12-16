@@ -1059,7 +1059,7 @@
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>
     <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Zarządzanie danymi offline\' (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="download_srtm_maps">Mapy SRTM</string>
+    <string name="download_srtm_maps">Mapy poziomicowe</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
     <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Pobierz mapy -&gt; Manu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
