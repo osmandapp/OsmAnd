@@ -1169,4 +1169,13 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="audionotes_plugin_name">Audio užrašų įskiepis</string>
     <string name="osmand_distance_plugin_description">Matuoti atstumą tarp dviejų taškų. Nurodykite pradžios / pabaigos / išvalykite matavimus ilgu paspaudimu.</string>
 	<string name="osmand_distance_plugin_name">Atstumo matuoklis</string>
-</resources>
+<string name="osmand_srtm_short_description_80_chars">OsmAnd įskiepis skirtas aukščio kontūrų linijoms</string>
+    <string name="osmand_srtm_long_description_1000_chars">Šis įskiepis įgalina aukščio kontūrų linijas OsmAnd parsiųstuose žemėlapiuose. Pasaulio duomenys (tarp 70 laipsnių šiaurės ir 70 laipsnių pietų) yra paremti SRTM (Shuttle Radar Topography Mission) ir ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), vaizdo fiksavimo instrumentas ant Terra, NASA Earth Observing System palydovo. ASTER yra bendradarbiavimo tarp NASA, Japonijos ekonomikos, prekybos ir industrijos (METI) ministerijos ir Japan Space Systems (J-spacesystems) projektas.</string>
+    <string name="use_clear_distance_measurement">Bakstelkite dar kartą matavimo taškų panaikinimui.</string>
+    <string name="use_distance_measurement">Bakstelkite pridėti tašką, paspauskite ir laikykite ankstesniam taškui panaikinti, bakstelkite matavimo įrankį jei norite išeiti.</string>
+    <string name="map_widget_distancemeasurement">Atstumo matavimas</string>
+    <string name="audionotes_location_not_defined">Audio užrašams vieta dar nenurodyta</string>
+    <string name="map_widget_audionotes">Audio užrašai</string>
+    <string name="srtm_plugin_attribution">ASTER yra METI ir NASA produktas</string>
+    <string name="monitoring_control_stop">stabdyti</string>
+    </resources>
