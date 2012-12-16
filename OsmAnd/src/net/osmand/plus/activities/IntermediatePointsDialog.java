@@ -90,13 +90,10 @@ public class IntermediatePointsDialog {
 							}
 						}
 					});
-				} else if (position == intermediates.size() - 1) {
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_view_set_destination, 0, 0, 0);
-					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-					ch.setVisibility(View.GONE);
 				} else {
-					// list_view_set_intermediate
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_view_set_intermediate, 0, 0, 0);
+					tv.setCompoundDrawablesWithIntrinsicBounds(
+							position == intermediates.size() - 1? R.drawable.list_view_set_destination:
+								R.drawable.list_view_set_intermediate, 0, 0, 0);
 					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 					ch.setVisibility(View.VISIBLE);
 					ch.setChecked(true);
@@ -164,7 +161,8 @@ public class IntermediatePointsDialog {
 			for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
 				if (!checkedIntermediates[i]) {
 					cnt--;
-					app.getTargetPointsHelper().removeWayPoint((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), cnt == 0, i);
+					app.getTargetPointsHelper().removeWayPoint((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), cnt == 0, 
+							i == checkedIntermediates.length - 1? -1 :  i);
 				}
 			}
 			if(mapActivity instanceof MapActivity) {

@@ -83,11 +83,12 @@ public class TargetPointsHelper {
 		if(index < 0){
 			settings.clearPointToNavigate();
 			pointToNavigate = null;
-			if(intermediatePoints.size() > 0) {
-				settings.deleteIntermediatePoint(intermediatePoints.size() - 1);
-				pointToNavigate = intermediatePoints.remove(intermediatePoints.size() - 1);
+			int sz = intermediatePoints.size();
+			if(sz > 0) {
+				settings.deleteIntermediatePoint(sz- 1);
+				pointToNavigate = intermediatePoints.remove(sz - 1);
 				settings.setPointToNavigate(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), 
-						intermediatePointNames.remove(intermediatePoints.size() - 1));
+						intermediatePointNames.remove(sz - 1));
 			}
 		} else {
 			settings.deleteIntermediatePoint(index);
@@ -186,6 +187,7 @@ public class TargetPointsHelper {
     		builder.show();
     	} else {
     		settings.setPointToNavigate(lat, lon, true, name);
+    		readFromSettings(settings);
     		MapActivity.launchMapActivityMoveToTop(ctx);
     	}
     }
