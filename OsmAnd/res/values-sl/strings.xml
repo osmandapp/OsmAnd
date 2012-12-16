@@ -1070,7 +1070,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne prikazuj upravnih mej nivojev 5-9</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Vtičnik OsMoDroid je stare različice in je potreben posodobitve.</string>
-    <string name="osmodroid_plugin_description">Vtičnik OsMoDroid (TODO opis)</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for live tracking features. Information about the service is available on http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
 	<string name="index_srtm_ele">Izohipse</string>
     <string name="srtm_plugin_description">Ta vtičnik omogoča prenos izohips za posamezna področja in uporabo brez povezave (Podatki brez povrzave (prenos) -&gt; meni -&gt; Drugi zemljevidi).</string>
