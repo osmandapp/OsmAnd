@@ -1108,14 +1108,17 @@
     <string name="download_select_map_types">Άλλοι χάρτες</string>
     <string name="index_srtm_ele">Ισοϋψείς γραμμές</string>
     <string name="srtm_plugin_description">Αυτό το πρόσθετο σας επιτρέπει να κάνετε λήψη υψομετρικών γραμμών (Λήψη χαρτών -&gt; Μενού -&gt; Άλλοι χάρτες) για συγκεκριμένη περιοχή και να τους χρησιμοποιήσετε με τους offline χάρτες.</string>
-    <string name="srtm_plugin_name">Πρόσθετο SRTM</string>
-    <string name="download_srtm_maps">Χάρτες SRTM</string>
-    <string name="osmand_distance_plugin_description">Μέτρηση απόστασης μεταξύ δύο σημείων. Καθορίστε την αφετηρία / τον προορισμό / καθαρισμός της μέτρησης μέσω παρατεταμένου πατήματος.</string>
+    <string name="srtm_plugin_name">Πρόσθετο ισοϋψών γραμμών</string>
+    <string name="download_srtm_maps">Δεδομένα ισοϋψών γραμμών</string>
+    <string name="osmand_distance_plugin_description">Μέτρηση απόστασης μεταξύ δύο ή περισσότερων σημείων. Προσθήκη σημείων με γρήγορο κλικ και αφαίρεση μέσω παρατεταμένου πατήματος.</string>
 	<string name="osmand_distance_plugin_name">Υπολογιστής Απόστασης</string>
 <string name="index_srtm_parts">μέρη</string>
     <string name="monitoring_control_stop">Σταμάτημα</string>
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
-    <string name="audionotes_plugin_description">Περιγραφή προσθέτου ηχητικών σημειώσεων</string>
+    <string name="audionotes_plugin_description">Εγγραφή ηχητικών σημειώσεων</string>
     <string name="audionotes_plugin_name">Πρόσθετο ηχητικών σημειώσεων</string>
-    <string name="srtm_plugin_attribution">το ASTER είναι ένα προϊόν των METIS και NASA</string>
+    <string name="srtm_plugin_attribution">το ASTER είναι ένα προϊόν των METI και NASA</string>
+    <string name="osmand_srtm_short_description_80_chars">πρόσθετο του OsmAnd για ισοϋψείς γραμμές χωρίς σύνδεση</string>
+    <string name="use_clear_distance_measurement">Κλικ άλλη μια φορά για καθαρισμό των σημείων μέτρησης.</string>
+    <string name="map_widget_distancemeasurement">Μέτρηση απόστασης</string>
     </resources>
