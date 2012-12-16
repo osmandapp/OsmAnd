@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.OsmAndFormatter;
@@ -10,7 +9,6 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.views.AnimateDraggingMapThread;
 import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
