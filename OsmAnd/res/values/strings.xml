@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmand_srtm_short_description_80_chars">Elevation lines for OsmAnd</string>
+	<string name="osmand_srtm_long_description_1000_chars">The plugin provides elevation maps for OsmAnd using Aster maps. ASTER is a product of METIS and NASA</string>
     <string name="osmand_distance_plugin_description">Measure a distance between two and many points. Add points by a short click and remove by a long press.</string>
 	<string name="osmand_distance_plugin_name">Distance Calculator</string>
     <string name="use_clear_distance_measurement">Click one more time to clear measurement points.</string>
