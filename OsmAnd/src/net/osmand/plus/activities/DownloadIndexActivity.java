@@ -241,9 +241,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					if(fileItem.isAlreadyDownloaded(listAlreadyDownloaded)){
 						filtered.add(fileItem);
 					}
-					if (listAlreadyDownloaded.containsKey(fileItem.getTargetFileName())) {
-						filtered.add(fileItem);
-					}
 				}
 				listAdapter.setIndexFiles(filtered);
 			} else if (item.getItemId() == DOWNLOAD_FILES_TYPE) {

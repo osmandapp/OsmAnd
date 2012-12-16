@@ -85,11 +85,13 @@ public class MapStackControl extends ViewGroup {
 	
 	public void addStackView(MapInfoControl v) {
 		stackViews.add(v);
+		v.setShadowColor(shadowColor);
 		MapStackControl.this.addView(v, getChildCount());
 	}
 
 	public void addCollapsedView(MapInfoControl v) {
 		collapsedViews.add(v);
+		v.setShadowColor(shadowColor);
 		MapStackControl.this.addView(v, getChildCount());
 	}
 	
@@ -195,6 +197,7 @@ public class MapStackControl extends ViewGroup {
 	}
 
 	private final static int MAGIC_CONSTANT_STACK = 3;
+	private int shadowColor;
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
 		int y = 0;
@@ -245,6 +248,7 @@ public class MapStackControl extends ViewGroup {
 	}
 
 	public void setShadowColor(int shadowColor) {
+		this.shadowColor = shadowColor;
 		for(MapInfoControl c : stackViews) {
 			c.setShadowColor(shadowColor);
 		}

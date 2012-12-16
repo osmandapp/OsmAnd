@@ -91,7 +91,7 @@ public class TextInfoControl extends MapInfoControl {
 	
 
 	public boolean isVisible() {
-		return text != null && text.length() > 0;
+		return text != null && (text.length() > 0 || subtext != null);
 	}
 
 	@Override

@@ -9,6 +9,11 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osmand_distance_plugin_description">Measure a distance between two and many points. Add points by a short click and remove by a long press.</string>
+	<string name="osmand_distance_plugin_name">Distance Calculator</string>
+    <string name="use_clear_distance_measurement">Click one more time to clear measurement points.</string>
+    <string name="use_distance_measurement">Tap to make a point, press and hold to delete previous point, click on measurement widget to exit.</string>
+    <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Location is not defined yet to take with audio notes</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
@@ -1204,6 +1209,4 @@
 	<string name="edit_filter_create_message">Filter {0} has been created</string>
 	<string name="default_buttons_selectall">Select All</string>
 	<string name="email">email</string>
-	<string name="osmand_distance_plugin_description">Measure a distance between two points. Specify the origin / the destination / clear the measurement by a long press.</string>
-	<string name="osmand_distance_plugin_name">Distance Calculator</string>
 </resources>
