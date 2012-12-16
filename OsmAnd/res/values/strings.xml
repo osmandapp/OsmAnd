@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
-    <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd/'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA's Earth Observing System. ASTER is a cooperative effort between NASA, Japan's Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA's Earth Observing System. ASTER is a cooperative effort between NASA, Japan's Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="osmand_distance_plugin_description">Measure a distance between two and many points. Add points by a short click and remove by a long press.</string>
     <string name="osmand_distance_plugin_name">Distance calculator</string>
     <string name="use_clear_distance_measurement">Click one more time to clear measurement points.</string>
@@ -62,8 +62,8 @@
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
 	\n\t* Enable background service during navigation
-	\n\t* Improved \'touring view\' with new road styles, more map details, and Alpine hiking (SAC scale) option
-	\n\t* EGM96 offset correction for GPS altitude readings
+	\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
+	\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
 	\n\t* Some bug fixes
@@ -194,7 +194,7 @@
 	<string name="day_night_info">Day/night info</string>
 	<string name="map_widget_day_night">Day/night map</string>
 	<string name="map_widget_vector_attributes">Rendering attributes:</string>
-	<string name="map_widget_renderer">Rendering style</string>
+	<string name="map_widget_renderer">Map style</string>
 	<string name="live_monitoring_mode_off">Start\n live tracking</string>
 	<string name="live_monitoring_mode_on">Stop\n live tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
