@@ -42,6 +42,7 @@ import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -556,7 +557,9 @@ public class ResourceManager {
 		long val = System.currentTimeMillis();
 		ArrayList<File> files = new ArrayList<File>();
 		collectFiles(context.getSettings().extendOsmandPath(MAPS_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
-		collectFiles(context.getSettings().extendOsmandPath(SRTM_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+			collectFiles(context.getSettings().extendOsmandPath(SRTM_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		}
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
 		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();

@@ -455,7 +455,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT, files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT, files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),EXTRA_EXT, files);
-		listWithAlternatives(settings.extendOsmandPath(ResourceManager.SRTM_PATH),BINARY_MAP_INDEX_EXT, files);
+		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+			listWithAlternatives(settings.extendOsmandPath(ResourceManager.SRTM_PATH),BINARY_MAP_INDEX_EXT, files);
+		}
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
 		return files;

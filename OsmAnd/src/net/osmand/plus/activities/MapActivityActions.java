@@ -807,15 +807,9 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
-		adapter.registerItem(R.string.context_menu_item_directions, R.drawable.list_activities_directions_to_here);
 		final TargetPointsHelper targets = mapActivity.getTargetPoints();
 		if(targets.getPointToNavigate() != null) {
-			if(targets.getIntermediatePoints().size() == 0) {
-				adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_view_set_intermediate);
-			} else {
-				adapter.registerItem(R.string.context_menu_item_first_intermediate_point, R.drawable.list_view_set_intermediate);
-				adapter.registerItem(R.string.context_menu_item_last_intermediate_point, R.drawable.list_view_set_intermediate);
-			}
+			adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_view_set_intermediate);
 		}
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
@@ -865,9 +859,10 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					mapActivity.getTargetPoints().navigateToPoint(mapActivity,
 							new LatLon(latitude, longitude), true, -1);
-				} else if (standardId == R.string.context_menu_item_directions) {
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
-					getDirections(null, new LatLon(latitude, longitude), true);
+					if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
+						getDirections(null, new LatLon(latitude, longitude), true);
+					}
 				} else if (standardId == R.string.context_menu_item_show_route) {
 					if (targets.checkPointToNavigate(mapActivity)) {
 						Location loc = new Location("map");
@@ -878,12 +873,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					targets.navigateToPoint(mapActivity, 
 							new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
-				} else if (standardId == R.string.context_menu_item_first_intermediate_point) {
-					targets.navigateToPoint(mapActivity, 
-							new LatLon(latitude, longitude), true, 0);
-				} else if (standardId == R.string.context_menu_item_last_intermediate_point) {
-					targets.navigateToPoint(mapActivity,
-							new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
+					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
