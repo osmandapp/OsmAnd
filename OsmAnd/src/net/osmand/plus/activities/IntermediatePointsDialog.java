@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import android.app.Activity;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -29,11 +30,11 @@ import android.widget.TextView;
 public class IntermediatePointsDialog {
 
 	
-	public static void openIntermediatePointsDialog(MapActivity mapActivity, OsmandApplication app){
-		openIntermediatePointsDialog(mapActivity, app, false);
+	public static void openIntermediatePointsDialog(Activity mapActivity){
+		openIntermediatePointsDialog(mapActivity, (OsmandApplication) mapActivity.getApplication(), false);
 	}
 	
-	public static void openIntermediatePointsDialog(final MapActivity mapActivity,
+	public static void openIntermediatePointsDialog(final Activity activity,
 			final OsmandApplication app, final boolean changeOrder){
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		final List<LatLon> intermediates = targets.getIntermediatePointsWithTarget();
@@ -50,11 +51,11 @@ public class IntermediatePointsDialog {
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				String nm = (position + 1) + ". ";
 				String distString = "";
-				if(mapActivity != null) {
-					double lat = mapActivity.getMapView().getLatitude();
-					double lon = mapActivity.getMapView().getLongitude();
+				if(activity instanceof MapActivity) {
+					double lat = ((MapActivity) activity).getMapView().getLatitude();
+					double lon = ((MapActivity) activity).getMapView().getLongitude();
 					double meters = MapUtils.getDistance(intermediates.get(position), lat, lon);
-					distString = OsmAndFormatter.getFormattedDistance((float) meters, mapActivity);
+					distString = OsmAndFormatter.getFormattedDistance((float) meters, activity);
 				}
 				
 				nm += app.getString(R.string.target_point, distString);
@@ -109,34 +110,34 @@ public class IntermediatePointsDialog {
 				return v;
 			}
 		};
-		ListView lv = new ListView(app);
+		ListView lv = new ListView(activity);
 		lv.setAdapter(listadapter);
 		lv.setBackgroundColor(Color.WHITE);
 		lv.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				if (mapActivity != null) {
+				if (activity instanceof MapActivity) {
 					// AnimateDraggingMapThread thread = mapActivity.getMapView().getAnimatedDraggingThread();
 					LatLon pointToNavigate = intermediates.get(position);
-					float fZoom = mapActivity.getMapView().getFloatZoom() < 15 ? 15 : mapActivity.getMapView().getFloatZoom();
+					float fZoom = ((MapActivity) activity).getMapView().getFloatZoom() < 15 ? 15 : ((MapActivity) activity).getMapView().getFloatZoom();
 					// thread.startMoving(pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), fZoom, true);
-					mapActivity.getMapView().setZoom(fZoom);
-					mapActivity.getMapView().setLatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
+					((MapActivity) activity).getMapView().setZoom(fZoom);
+					((MapActivity) activity).getMapView().setLatLon(pointToNavigate.getLatitude(), pointToNavigate.getLongitude());
 					listadapter.notifyDataSetInvalidated();
 				}
 			}
 		});
 		
-		Builder builder = new AccessibleAlertBuilder(app);
+		Builder builder = new AccessibleAlertBuilder(activity);
 		builder.setView(lv);
 		builder.setInverseBackgroundForced(true);
 		builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(changeOrder) {
-					commitChangePointsOrder(app, mapActivity, intermediates, names);
+					commitChangePointsOrder(app, activity, intermediates, names);
 				} else {
-					commitPointsRemoval(app, mapActivity, checkedIntermediates);
+					commitPointsRemoval(app, activity, checkedIntermediates);
 				}
 
 			}
@@ -145,14 +146,14 @@ public class IntermediatePointsDialog {
 			builder.setNeutralButton("Change order", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					openIntermediatePointsDialog(mapActivity, app, true);
+					openIntermediatePointsDialog(activity, app, true);
 				}
 			});
 		}
 		builder.show();
 	}
 
-	private static void commitPointsRemoval(OsmandApplication app, final MapActivity mapActivity, final boolean[] checkedIntermediates) {
+	private static void commitPointsRemoval(OsmandApplication app, final Activity mapActivity, final boolean[] checkedIntermediates) {
 		int cnt = 0;
 		for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
 			if (!checkedIntermediates[i]) {
@@ -163,16 +164,16 @@ public class IntermediatePointsDialog {
 			for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
 				if (!checkedIntermediates[i]) {
 					cnt--;
-					app.getTargetPointsHelper().removeWayPoint(mapActivity, cnt == 0, i);
+					app.getTargetPointsHelper().removeWayPoint((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), cnt == 0, i);
 				}
 			}
-			if(mapActivity != null) {
-				mapActivity.getMapLayers().getContextMenuLayer().setLocation(null, "");
+			if(mapActivity instanceof MapActivity) {
+				((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
 			}
 		}
 	}
 	
-	private static void commitChangePointsOrder(OsmandApplication app, final MapActivity mapActivity, List<LatLon> target, List<String> names) {
+	private static void commitChangePointsOrder(OsmandApplication app, final Activity mapActivity, List<LatLon> target, List<String> names) {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		List<LatLon> cur = targets.getIntermediatePointsWithTarget();
 		boolean eq = true;
@@ -183,7 +184,7 @@ public class IntermediatePointsDialog {
 			}
 		}
 		if(!eq) {
-			targets.reorderAllTargetPoints(mapActivity, target, names, true);
+			targets.reorderAllTargetPoints((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), target, names, true);
 		}
 	}
 }

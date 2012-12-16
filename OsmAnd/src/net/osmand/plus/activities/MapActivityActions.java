@@ -1161,7 +1161,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	public void openIntermediatePointsDialog(){
-		IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity, mapActivity.getMyApplication());
+		IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 	}
 	
 	
