@@ -1126,7 +1126,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
-    <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher les cartes uniquement routières :</string>
+    <string name="rendering_attr_showRoadMaps_description">Sélectionner pour afficher uniquement les cartes routières :</string>
 	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">"Routes uniquement "</string>
     <string name="download_regular_maps">Cartes standards</string>
@@ -1141,7 +1141,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="map_widget_max_speed">Limite de vitesse</string>
     <string name="tip_altitude_offset">Affichage de l\'altitude - Écart de correction</string>
 	<string name="monitoring_control_start">Démarrage</string>
-    <string name="rendering_attr_noAdminboundaries_name">Cacher les limites</string>
+    <string name="rendering_attr_noAdminboundaries_name">Cacher les limites administratives</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne pas afficher les limites administratives régionales (niveaux 5 à 9)</string>
 	<string name="tip_altitude_offset_t">"\tLa plupart des périphériques GPS donnent des mesures d\'altitude dans le référentiel ellipsoïdal WGS84, depuis lequel une conversion vers le système local nécessite une correction fonction de la position courante.
 \n\tUne meilleure approximation des systèmes locaux est le référentiel EGM96. OsmAnd supporte désormais l\'affichage de l\'altitude dans ce référentiel.
@@ -1163,9 +1163,9 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="audionotes_plugin_description">Description du greffon de notes audio</string>
     <string name="audionotes_plugin_name">Greffon de notes audio</string>
     <string name="srtm_plugin_attribution">ASTER est un produit du METI et la NASA.</string>
-    <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveaux hors-lignes</string>
+    <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-lignes</string>
     <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des lignes de niveau qui peuvent être affichées sur les cartes hors ligne de OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
     <string name="use_clear_distance_measurement">Cliquez une nouvelle fois pour effacer les points de mesure.</string>
-    <string name="use_distance_measurement">Appuyez pour créer un point, appuyez et maintenez enfoncé pour supprimer le point précédent, cliquez sur le widget de mesure pour quitter.</string>
+    <string name="use_distance_measurement">Appuyez pour créer un point, appuyez et maintenez enfoncé pour supprimer le point précédent, cliquez sur le gadget de mesure pour quitter.</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
     </resources>
