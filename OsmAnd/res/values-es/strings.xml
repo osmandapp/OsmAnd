@@ -1058,4 +1058,12 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="audionotes_plugin_description">Descripción del extra de notas de audio</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
     <string name="osmand_srtm_short_description_80_chars">Extra de OsmAnd para curvas de nivel sin conexión</string>
+    <string name="osmand_srtm_long_description_1000_chars">Este extra proporciona curvas de nivel que se pueden visualizar en mapas descargados de OsmAnd. Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
+    <string name="use_clear_distance_measurement">Pulsa una vez más para borrar puntos de medición.</string>
+    <string name="use_distance_measurement">Toca para hacer un punto, mantén presionado para eliminar el punto anterior, pulsa en el widget de medición para salir.</string>
+    <string name="map_widget_distancemeasurement">Medición de distancia</string>
+    <string name="audionotes_location_not_defined">La localización no está definida aún para tomar notas de audio</string>
+    <string name="monitoring_control_stop">parar</string>
+    <string name="map_widget_audionotes">Notas de audio</string>
+    <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
     </resources>
