@@ -1057,4 +1057,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="osmand_distance_plugin_name">Calculadora de distancia</string>
 <string name="audionotes_plugin_description">Descripción del extra de notas de audio</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
+    <string name="osmand_srtm_short_description_80_chars">Extra de OsmAnd para curvas de nivel sin conexión</string>
     </resources>
