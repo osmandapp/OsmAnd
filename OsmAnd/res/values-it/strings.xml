@@ -1171,4 +1171,11 @@
 	<string name="osmand_distance_plugin_name">Calcolatore della distanza</string>
 <string name="audionotes_location_not_defined">La posizione non è ancora definita per poter prendere note audio</string>
     <string name="monitoring_control_stop">ferma</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
+    <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce le linee di livello che possono essere visualizzate nelle mappe offline di OsmAnd. I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di Terra a bordo, il satellite della NASA del Sistema di Osservazione della Terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e Sistema Spaziale giapponese (J-spacesystems).</string>
+    <string name="use_clear_distance_measurement">Fare clic ancora per cancellare i punti di misurazione.</string>
+    <string name="use_distance_measurement">Toccare per fare un punto, premere e tenere premuto per cancellare un punto precedente, fai clic sul widget di misura per uscire.</string>
+    <string name="map_widget_distancemeasurement">Misura della distanza</string>
+    <string name="map_widget_audionotes">Note audio</string>
+    <string name="srtm_plugin_attribution">ASTER è un prodotto di METI e NASA</string>
     </resources>
