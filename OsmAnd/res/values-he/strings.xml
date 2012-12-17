@@ -1125,4 +1125,8 @@
     <string name="audionotes_plugin_description">תיאור תוסף ההערות הקוליות</string>
     <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
     <string name="srtm_plugin_attribution">ASTER הוא מוצר מבית METIS ו־NASA</string>
+    <string name="osmand_srtm_short_description_80_chars">תוסף ל־OsmAnd לקווי מתאר בלתי מקוונים</string>
+    <string name="use_clear_distance_measurement">יש ללחוץ פעם נוספת כדי למחוק את נקודות המדידה.</string>
+    <string name="map_widget_distancemeasurement">מדידת מרחק</string>
+    <string name="use_distance_measurement">יש לגעת כדי להציב נקודה, ללחוץ ולהחזיק כדי למחוק את הנקודה הקודמת, ללחוץ על וידג׳ט המדידה כדי לצאת.</string>
     </resources>
