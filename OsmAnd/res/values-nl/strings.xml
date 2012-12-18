@@ -1085,4 +1085,26 @@
     <string name="map_widget_audionotes">Audio notities</string>
     <string name="srtm_plugin_attribution">ASTER is een product van METI en NASA</string>
     <string name="monitoring_control_stop">stoppen</string>
+    <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, druk op de stop knop van de widget.</string>
+    <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>
+    <string name="recording_open_external_player">Open externe player</string>
+    <string name="recording_delete_confirm">Wil je deze opname verwijderen?</string>
+    <string name="tip_recent_changes_1_1_0_t">"Wijzigingen in 1.1.0 :
+\n\t* Afstandsmeter plugin
+\n\t* Audio notities plugin
+\n\t* Hoogtelijnen plugin
+\n\t* Bugs opgelost
+\n\t* \'Touring view\' kaartstijl optie met meer kaartdetails, nieuwe wegenstijles, meer contrast en Alpine wandelen optie(SAC schaal)\n\t* EGM96 geoïde hoogtecorrectie voor GPS hoogte-uitlezingen "</string>
+    <string name="recording_unavailable">niet beschikbaar</string>
+    <string name="recording_context_menu_arecord">Maak een audio-notitie</string>
+    <string name="recording_context_menu_vrecord">Maak een video-notitie</string>
+    <string name="layer_recordings">Opnamelaag</string>
+    <string name="recording_can_not_be_played">Opname kan niet worden afgespeeld</string>
+    <string name="recording_context_menu_delete">Wis opname</string>
+    <string name="recording_context_menu_play">Afspelen</string>
+    <string name="recording_description">Opname %1$s %2$s op %3$s</string>
+    <string name="recording_default_name">opname</string>
+    <string name="av_control_stop">stop</string>
+    <string name="av_control_start">opnemen</string>
+    <string name="map_widget_av_notes">Audio-notities</string>
     </resources>
