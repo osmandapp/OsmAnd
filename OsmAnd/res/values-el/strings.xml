@@ -1121,4 +1121,24 @@
     <string name="osmand_srtm_short_description_80_chars">πρόσθετο του OsmAnd για ισοϋψείς γραμμές χωρίς σύνδεση</string>
     <string name="use_clear_distance_measurement">Κλικ άλλη μια φορά για καθαρισμό των σημείων μέτρησης.</string>
     <string name="map_widget_distancemeasurement">Μέτρηση απόστασης</string>
+    <string name="recording_is_recorded">Εγγραφή Ήχου/Εικόνας σε εξέλιξη. Για σταμάτημα πατήστε στο κουμπί stop στο γραφικό στοιχείο.</string>
+    <string name="recording_playing">Ένας ήχος από την συγκεκριμένη εγγραφή αναπαράγεται.\n%1$s</string>
+    <string name="recording_open_external_player">Άνοιγμα εξωτερικού αναπαραγωγέα</string>
+    <string name="recording_delete_confirm">Θέλετε να αφαιρέσετε αυτή την εγγραφή;</string>
+    <string name="tip_recent_changes_1_1_0_t">"Changes in 1.1.0 :
+\n\t* Πρόσθετο υπολογιστή απόστασης
+\n\t* Πρόσθετο ηχητικών σημειώσεων
+\n\t* Πρόσθετο ισοϋψών γραμμών
+\n\t* Διορθώσεις σφαλμάτων
+\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
+\n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
+    <string name="recording_unavailable">μη διαθέσιμο</string>
+    <string name="recording_context_menu_arecord">Κάντε ηχητική σημείωση</string>
+    <string name="recording_context_menu_vrecord">Κάντε σημείωση video</string>
+    <string name="recording_can_not_be_played">Η εγγραφή δεν μπορεί να αναπαραχθεί</string>
+    <string name="recording_context_menu_delete">Διαγραφή εγγραφής</string>
+    <string name="recording_context_menu_play">Αναπαραγωγή</string>
+    <string name="recording_description">Εγγραφή %1$s %2$s at %3$s</string>
+    <string name="recording_default_name">εγγραφή</string>
+    <string name="map_widget_av_notes">Ηχητικές σημειώσεις</string>
     </resources>
