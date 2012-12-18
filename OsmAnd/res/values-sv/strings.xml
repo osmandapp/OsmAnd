@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -911,4 +911,49 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
 	<string name="default_buttons_delete">Ta bort</string>
+	<string name="recording_is_recorded">Audio/video spelas in. För att stoppa den trycker stoppknappen på widgeten.</string>
+    <string name="recording_playing">En ljud från den angivna inspelningen spelas.\n%1$s</string>
+    <string name="recording_open_external_player">Öppna extern spelare</string>
+    <string name="recording_delete_confirm">Vill du ta bort den här inspelningen?</string>
+    <string name="recording_unavailable">otillgänglig</string>
+    <string name="recording_context_menu_arecord">Ta en ljudanteckning</string>
+    <string name="recording_context_menu_vrecord">Ta en video anteckning</string>
+    <string name="layer_recordings">Uppteckningsskiktet</string>
+    <string name="recording_can_not_be_played">Inspelningen kan inte spelas</string>
+    <string name="recording_context_menu_delete">Ta bort inspelning</string>
+    <string name="recording_context_menu_play">Spela</string>
+    <string name="recording_description">Inspelning %1$s %2$s på %3$s</string>
+    <string name="recording_default_name">inspelning</string>
+    <string name="av_control_stop">stopp</string>
+    <string name="map_widget_av_notes">Ljudanteckningar</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin för offline konturlinjer</string>
+    <string name="osmand_distance_plugin_name">Avståndsberäknaren</string>
+    <string name="map_widget_distancemeasurement">Avståndsmätning</string>
+    <string name="monitoring_control_stop">stopp</string>
+    <string name="map_widget_audionotes">Ljudanteckningar</string>
+    <string name="audionotes_plugin_description">Ta ljudanteckningar under resan</string>
+    <string name="audionotes_plugin_name">Ljudanteckningar plugin</string>
+    <string name="index_srtm_parts">delar</string>
+    <string name="index_srtm_ele">Konturlinjer</string>
+    <string name="download_select_map_types">Andra kartor</string>
+    <string name="srtm_plugin_name">Konturlinjer plugin</string>
+    <string name="download_srtm_maps">Konturlinje uppgifter</string>
+    <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
+\n→ * Avstånd kalkylator plugin
+\n→ * ljudanteckningar plugin
+\n→ * Höjdkurvor plugin
+\n→ * Buggfixar
+\n→ * \'Touring View\' kartan stil alternativet med mer karta detaljer, nya stilar väg, mer kontrast och fjällvandring (SAC skala) alternativet
+\n→ * EGM96 geoid offset korrigering för GPS höjdavläsningarna</string>
+    <string name="osmand_distance_plugin_description">Mäta ett avstånd mellan två och många punkter. Lägg punkter med en kort klick och ta med en lång tryckning.</string>
+    <string name="use_clear_distance_measurement">Klicka en gång för att rensa mätpunkter.</string>
+    <string name="use_distance_measurement">Tryck här för att göra en punkt, tryck och håll för att radera föregående punkt, klicka på mätning widget för att avsluta.</string>
+    <string name="audionotes_location_not_defined">Plats att associera med anmärkning är inte definierad ännu. \"Använd plats ...\" att tilldela en not till den angivna platsen</string>
+    <string name="route_descr_current_location">Aktuell position</string>
+    <string name="route_descr_from_to">Från : %1$s\nTill : %2$s</string>
+    <string name="route_descr_from_to_via">Från : %1$s\nVia : %2$s\nTill : %3$s</string>
+    <string name="close_changeset">Stäng changeset</string>
+	<string name="map_widget_show_destination_arrow">Visa destination riktning</string>
+    <string name="gps_not_available">Aktivera GPS i inställningarna</string>
+    <string name="map_widget_monitoring_services">Logging tjänster</string>
 	</resources>
