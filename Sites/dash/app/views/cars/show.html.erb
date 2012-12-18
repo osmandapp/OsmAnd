@@ -1,0 +1,56 @@
+<h1>
+  <b>My Car</b>
+</h1>
+
+<p id="notice"><%= notice %></p>
+
+<table>
+  <tr>
+    <td>
+      <b>Make</b>  <%= @car.make %><br/>
+      <b>Model</b>  <%= @car.model %><br/>
+      <b>Plate</b>  <%= @car.plate_num %><br/>
+    <br/>
+      <b>Distance Traveled</b>  12,374 km<br/>
+      <b>Mileage (2 weeks)</b>  11.9 km/litre<br/>
+    <br/>
+    </td>
+    <td>
+      <%= image_tag("vw-vento.jpg", :alt => "Volkswagen Vento") %>
+    </td>
+  </tr>
+</table>
+
+<hr />
+
+<p>
+  <b>Locations</b>
+</p>
+
+<table>
+  <tr>
+    <td>
+      <b>Current</b>    Besant Avenue (40 km/hr)
+      <br/>
+      <br/>
+      <b>Favorites</b><br/>
+      Home<br/>
+      Office<br/>
+      School<br/>
+      <br/>
+      <b>Frequently visited</b><br/>
+      C.P.Ramaswami Road, Alwarpet, Chennai<br/>
+      Ranjith Road, Kotturpuram, Chennai<br/>
+      <br/>
+      <a href="/">View location history</a>
+    </td>
+    <td>
+      <%= gmaps4rails(@json) %>
+    </td>
+  </tr>
+</table>
+
+<hr />
+
+<%= link_to 'Edit', edit_car_path(@car) %> |
+<%= link_to 'Back', cars_path %>

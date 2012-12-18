@@ -1,0 +1,25 @@
+<%= form_for([@user, @user.cars.build]) do |f| %>
+  <div class="field">
+    <%= f.label :car_id %><br />
+    <%= f.number_field :car_id %>
+  </div>
+  <div class="field">
+    <%= f.label :make %><br />
+    <%= f.text_field :make %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br />
+    <%= f.text_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :plate_num %><br />
+    <%= f.text_field :plate_num %>
+  </div>
+  <div class="field">
+    <%= f.label :vin %><br />
+    <%= f.text_field :vin %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

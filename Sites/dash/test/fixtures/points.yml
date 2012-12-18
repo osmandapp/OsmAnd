@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  lat: 9.99
+  lon: 9.99
+  name: MyString
+  time: 1
+  elevation: 9.99
+  speed: 9.99
+  hdop: 9.99
+  car: 
+
+two:
+  lat: 9.99
+  lon: 9.99
+  name: MyString
+  time: 1
+  elevation: 9.99
+  speed: 9.99
+  hdop: 9.99
+  car: 

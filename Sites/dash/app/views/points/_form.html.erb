@@ -1,0 +1,13 @@
+<%= form_for([@user.car, car.points.build]) do |f| %>
+  <div class="field">
+    <%= f.label :lat %><br />
+    <%= f.number_field :lat %>
+  </div>
+  <div class="field">
+    <%= f.label :lon %><br />
+    <%= f.number_field :lon %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

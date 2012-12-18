@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Username:</b>
+  <%= @user.username %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @user.password %>
+</p>
+
+<h2>Cars</h2>
+<table>
+  <tr>
+    <th>Car ID</th>
+    <th>User</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Plate number</th>
+    <th>VIN</th>
+    <th>Points</th>
+  </tr>
+
+<%= render @user.cars { @user } %>
+</table>
+
+<h2>Add a car:</h2>
+<%= render "cars/form" %>
+
+<br />
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

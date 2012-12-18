@@ -1,0 +1,23 @@
+<tr>
+    <td><%= car.car_id %></td>
+    <td><%= car.user %></td>
+    <td><%= car.make %></td>
+    <td><%= car.model %></td>
+    <td><%= car.plate_num %></td>
+    <td><%= car.vin %></td>
+
+    <td>
+        <%= render car.points %>
+		<%= form_for([@user, car, car.points.build]) do |f| %>
+   			<%= f.label :lat %>
+   			<%= f.text_field :lat, :size => 10 %>
+		    <%= f.label :lon%>
+		    <%= f.text_field :lon, :size => 10 %>
+		    <%= f.submit %>
+		<% end %>
+    </td>
+
+	<td><%= link_to "Track car", user_car_points_path(car.user, car) %></td>
+    <td><%= link_to 'Edit Car', edit_car_path(car.user, car) %></td>
+    <td><%= link_to 'Delete Car', [car.user, car], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+</tr>
