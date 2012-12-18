@@ -705,7 +705,6 @@ public class OsmandSettings {
 		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.CAR, BOTTOM_CONSTANT);
 		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.BICYCLE, BOTTOM_CONSTANT);
 		POSITION_ON_MAP.setModeDefaultValue(ApplicationMode.PEDESTRIAN, CENTER_CONSTANT);
-		
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1420,6 +1419,12 @@ public class OsmandSettings {
 	
 	public final CommonPreference<Boolean> SHOW_RULER = 
 			new BooleanPreference("show_ruler", true).makeProfile().cache();
+	
+	public final CommonPreference<Boolean> AV_EXTERNAL_RECORDER = new BooleanPreference("av_external_recorder", false).makeGlobal();
+	
+	public static final int VIDEO_OUTPUT_MP4 = 0;
+	public static final int VIDEO_OUTPUT_3GP = 1;
+	public final CommonPreference<Integer> AV_VIDEO_FORMAT = new IntPreference("av_video_format", 0).makeGlobal();
 	
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v1", 0).makeGlobal();

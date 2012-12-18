@@ -9,6 +9,14 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="av_video_format_descr">Select video output format</string>
+    <string name="av_video_format">Video output format</string>
+    <string name="av_use_external_recorder_descr">Use system recorder for video</string>
+    <string name="av_use_external_recorder">Use external recorder</string>
+    <string name="av_settings_descr">Configure audio and video settings</string>
+    <string name="av_settings">Audio/video settings </string>
+    <string name="recording_error">Error ocurred while recording </string>
+    <string name="recording_camera_not_available">Camera is not available</string>
     <string name="recording_is_recorded">Audio/video is being recorded. To stop it press stop button on the widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>

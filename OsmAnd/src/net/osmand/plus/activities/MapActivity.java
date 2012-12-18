@@ -156,7 +156,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		System.out.println("DELETE On create");
 		settings = getMyApplication().getSettings();	
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
@@ -239,7 +238,6 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
-		System.out.println("On create finish");
 	}
 
 	private void createProgressBarForRouting() {
