@@ -28,8 +28,8 @@ public class NativeOsmandLibrary extends NativeLibrary {
 			synchronized (NativeOsmandLibrary.class) {
 				if (!isLoaded()) {
 					try {
-						log.debug("Loading native stlport_shared..."); //$NON-NLS-1$
-						System.loadLibrary("stlport_shared");
+						log.debug("Loading native gnustl_shared..."); //$NON-NLS-1$
+						System.loadLibrary("gnustl_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
 						if(android.os.Build.VERSION.SDK_INT >= 8) {
