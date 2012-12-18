@@ -14,10 +14,12 @@
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Do you want to remove this recording?</string>
     <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0 :
-        \n\t* Distance calculator plugin
+		\n\t* Distance calculator plugin
 		\n\t* Audio notes plugin
-		\n\t* Elevation lines plugin
+		\n\t* Contour lines plugin
 		\n\t* Bug fixes
+		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
+		\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
     <string name="recording_unavailable">unavailable</string>
     <string name="recording_context_menu_arecord">Take an audio note</string>
@@ -83,8 +85,6 @@
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
 	\n\t* Enable background service during navigation
-	\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
-	\n\t* EGM96 geoid offset correction for GPS altitude readings
     </string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4 :
 	\n\t* Some bug fixes
