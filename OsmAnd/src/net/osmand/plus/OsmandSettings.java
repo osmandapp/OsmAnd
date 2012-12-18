@@ -644,6 +644,8 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
 	
+	public final OsmandPreference<Boolean> SHOW_RECORDINGS = new BooleanPreference("show_recordings", true).makeGlobal();
+	
 	public final OsmandPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name

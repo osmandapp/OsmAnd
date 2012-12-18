@@ -13,15 +13,21 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.srtm";
 	private static final Log log = LogUtil.getLog(SRTMPlugin.class);
 	private OsmandApplication app;
+	private boolean paid;
 	
 	@Override
 	public String getId() {
 		return ID;
 	}
 
-	public SRTMPlugin(OsmandApplication app) {
+	public SRTMPlugin(OsmandApplication app, boolean paid) {
 		this.app = app;
+		this.paid = paid;
 
+	}
+	
+	public boolean isPaid() {
+		return paid;
 	}
 
 	@Override

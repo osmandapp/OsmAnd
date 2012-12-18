@@ -398,6 +398,7 @@ public class ResourceManager {
 		warnings.addAll(indexingMaps(progress));
 		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexVoiceFiles(progress));
+		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
 		
 		return warnings;
 	}

@@ -9,6 +9,28 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="recording_is_recorded">Audio/video is being recorded. To stop it press stop button on the widget.</string>
+    <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
+    <string name="recording_open_external_player">Open external player</string>
+    <string name="recording_delete_confirm">Do you want to remove this recording?</string>
+    <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0 :
+        \n\t* Distance calculator plugin
+		\n\t* Audio notes plugin
+		\n\t* Elevation lines plugin
+		\n\t* Bug fixes
+    </string>
+    <string name="recording_unavailable">unavailable</string>
+    <string name="recording_context_menu_arecord">Take an audio note</string>
+    <string name="recording_context_menu_vrecord">Take a video note</string>
+    <string name="layer_recordings">Recording layer</string>
+    <string name="recording_can_not_be_played">Recording can not be played</string>
+    <string name="recording_context_menu_delete">Delete recording</string>
+    <string name="recording_context_menu_play">Play</string>
+    <string name="recording_description">Recording %1$s %2$s at %3$s</string>
+    <string name="recording_default_name">recording</string>
+    <string name="av_control_stop">stop</string>
+    <string name="av_control_start">rec</string>
+    <string name="map_widget_av_notes">Audio notes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="osmand_distance_plugin_description">Measure a distance between two and many points. Add points by a short click and remove by a long press.</string>
@@ -16,10 +38,10 @@
     <string name="use_clear_distance_measurement">Click one more time to clear measurement points.</string>
     <string name="use_distance_measurement">Tap to make a point, press and hold to delete previous point, click on measurement widget to exit.</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
-    <string name="audionotes_location_not_defined">Location is not defined yet to take with audio notes</string>
+    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location...\" to assign a note to the specified location</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
-    <string name="audionotes_plugin_description">Take audio notes</string>
+    <string name="audionotes_plugin_description">Take audio notes during the trip</string>
     <string name="audionotes_plugin_name">Audio notes plugin</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>

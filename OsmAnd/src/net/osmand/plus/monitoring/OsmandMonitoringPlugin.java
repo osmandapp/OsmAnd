@@ -138,6 +138,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 		cat = new PreferenceCategory(activity);
 		cat.setTitle(R.string.monitor_preferences);
+		
+		PreferenceScreen generalSection = ((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS));
+		generalSection.addPreference(cat);
+		cat.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
+			R.string.live_monitoring_url_descr));
 
 		Preference pref = new Preference(activity);
 		pref.setTitle(R.string.save_current_track);
@@ -156,9 +161,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		});
 		cat.addPreference(pref);
 
-		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS)).addPreference(cat);
-		cat.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
-				R.string.live_monitoring_url_descr));
 
 	}
 

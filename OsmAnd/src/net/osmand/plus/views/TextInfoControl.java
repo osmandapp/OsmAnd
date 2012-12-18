@@ -98,4 +98,5 @@ public class TextInfoControl extends MapInfoControl {
 	public boolean updateInfo() {
 		return false;
 	}
+	
 }
