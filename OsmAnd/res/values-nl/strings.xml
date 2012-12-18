@@ -1064,7 +1064,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">De OsMoDroid plugin is een oude versie en moet ge-update worden.</string>
-    <string name="osmodroid_plugin_description">De OsMoDroid plugin (wat-te-doen beschrijving)</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin is een OsmAnd extensie voor de OsModroid applicatie voor live tracking functies. Informatie over de service is beschikbaar op http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">gedeelten</string>
     <string name="index_srtm_ele">hoogtelijnen</string>
@@ -1076,4 +1076,13 @@
 	<string name="osmand_distance_plugin_name">Afstandsmeter</string>
 <string name="audionotes_plugin_description">Audionotities plugin beschrijving</string>
     <string name="audionotes_plugin_name">Audionotities plugin</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin voor offline contourlijnen</string>
+    <string name="osmand_srtm_long_description_1000_chars">Deze plugin biedt contourlijnen die kunnen worden weergegeven in OsmAnd\'s offline kaarten. De globale gegevens (tussen 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormende instrument aan boord van Terra, het vlaggenschip satelliet van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
+    <string name="use_clear_distance_measurement">Klik nog een keer om meetpunten te wissen.</string>
+    <string name="use_distance_measurement">Druk om een ​​punt te maken, druk en houdt vast om het vorige punt te wissen, klikt op het meting-widget om af te sluiten.</string>
+    <string name="map_widget_distancemeasurement">Afstandmeting</string>
+    <string name="audionotes_location_not_defined">Locatie is nog niet gedefinieerd om audio notities te nemen</string>
+    <string name="map_widget_audionotes">Audio notities</string>
+    <string name="srtm_plugin_attribution">ASTER is een product van METI en NASA</string>
+    <string name="monitoring_control_stop">stoppen</string>
     </resources>
