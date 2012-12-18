@@ -1129,4 +1129,26 @@
     <string name="use_clear_distance_measurement">יש ללחוץ פעם נוספת כדי למחוק את נקודות המדידה.</string>
     <string name="map_widget_distancemeasurement">מדידת מרחק</string>
     <string name="use_distance_measurement">יש לגעת כדי להציב נקודה, ללחוץ ולהחזיק כדי למחוק את הנקודה הקודמת, ללחוץ על וידג׳ט המדידה כדי לצאת.</string>
+    <string name="recording_is_recorded">השמע/וידאו מוקלטים. כדי להפסיק זאת יש ללחוץ על לחצן העצירה בווידג׳ט.</string>
+    <string name="recording_playing">השמע מההקלטה שצוינה מושמע.\n%1$s</string>
+    <string name="recording_open_external_player">פתיחת נגן חיצוני</string>
+    <string name="recording_delete_confirm">האם ברצונך להסיר הקלטה זו?</string>
+    <string name="tip_recent_changes_1_1_0_t">"שינויים ב־1.1.0 :
+\n\t* תוסף מחשבון מרחק
+\n\t* תוסף הערות קוליות
+\n\t* תוסף קווי מתאר
+\n\t* תיקוני תקלות
+\n\t* סגנון מפה \'תצוגת טיול\' עם יותר פרטים במפה, סגנונות דרכים חדשים, יותר ניגודיות ואפשרות טיול באלפים (אמות מידה SAC)\n\t* תיקון סטיית מזהה גאוגרפי EGM96 עבור קריאת גובה דרך התקן האיכון "</string>
+    <string name="recording_unavailable">לא זמין</string>
+    <string name="recording_context_menu_arecord">הקלטת הערה קולית</string>
+    <string name="recording_context_menu_vrecord">צילום הערת וידאו</string>
+    <string name="layer_recordings">שכבת ההקלטה</string>
+    <string name="recording_can_not_be_played">לא ניתן לנגן את ההקלטה</string>
+    <string name="recording_context_menu_delete">מחיקת הקלטה</string>
+    <string name="recording_context_menu_play">נגינה</string>
+    <string name="recording_description">%1$s %2$s מוקלטים ב־%3$s</string>
+    <string name="recording_default_name">בהקלטה</string>
+    <string name="av_control_stop">עצירה</string>
+    <string name="av_control_start">הקלטה</string>
+    <string name="map_widget_av_notes">הערות קוליות</string>
     </resources>
