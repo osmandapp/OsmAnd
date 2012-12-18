@@ -1137,4 +1137,16 @@
     <string name="audionotes_location_not_defined">Pozice pro zvukové poznámky ještě není známa</string>
     <string name="monitoring_control_stop">zastavit</string>
     <string name="map_widget_audionotes">Audio poznámky</string>
+    <string name="recording_is_recorded">Nahrávám audio/video. Stiskněte tlačítko \"stop\" pro zastavení.</string>
+    <string name="recording_open_external_player">Otevřít externí přehrávač</string>
+    <string name="recording_delete_confirm">Chcete smazat tuto nahrávku?</string>
+    <string name="recording_context_menu_arecord">Nahrát zvukovou poznámku</string>
+    <string name="recording_context_menu_vrecord">Nahrát video poznámku</string>
+    <string name="recording_can_not_be_played">Záznam nelze přehrát</string>
+    <string name="recording_context_menu_delete">Smazat nahrávku</string>
+    <string name="recording_context_menu_play">Přehrát</string>
+    <string name="map_widget_av_notes">Autio poznámky</string>
+    <string name="map_widget_distancemeasurement">Měření vzdálenosti</string>
+    <string name="audionotes_plugin_description">Zaznamenat zvukové poznámky během cesty</string>
+    <string name="index_srtm_parts">části</string>
     </resources>
