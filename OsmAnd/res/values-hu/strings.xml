@@ -1090,11 +1090,33 @@
 <string name="osmand_distance_plugin_description">Távolság mérése két pont között. A mérés kezdetének és céljának meghatározása, törlése hosszú kattintással.</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Az OsMoDroid bővítmény verziója elavult és frissítésre szorul.</string>
     <string name="osmodroid_plugin_name">OsMoDroid bővítmény</string>
-	<string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez</string>
+	<string name="audionotes_location_not_defined">Még nem található pozíció hangjegyzet készítéséhez. A \"Hely használata…\" gombbal helyezhetsz el jegyzetet az adott helyen</string>
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hangjegyzet bővítmény</string>
     <string name="monitoring_control_stop">stop</string>
-    <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Térkép letöltése -&gt; menü - Egyéb térképek) a megadott régiókhoz és használatukat offline térképekkel.</string>
+    <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Offline adat letöltése -&gt; menü - Egyéb térképek) a megadott régiókhoz és használatukat offline térképekkel.</string>
     <string name="srtm_plugin_attribution">Az ASTER a METIS és a NASA terméke</string>
     <string name="osmodroid_plugin_description">Élő útvonalrögzítési szolgáltatást tesz lehetővé. Az OsMoDroid bővítmény használatához telepített OsModroid alkalmazásra van szükség. További információk: http://esya.ru</string>
+    <string name="recording_is_recorded">Hang/kép felvétel elindult. Leállításhoz nyomd meg a stop gombot.</string>
+    <string name="recording_playing">A megadott hangfelvétel lejátszása elindult.\n%1$s</string>
+    <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
+    <string name="recording_delete_confirm">Szeretnéd törölni a felvételt?</string>
+    <string name="tip_recent_changes_1_1_0_t">"Az 1.1.0 kiadás újdonságai:
+\n\t* Távolságkalkulátor bővítmény\n\t* Hangjegyzet bővítmény\n\t* Szintvonal bővítmény\n\t* Hibajavítások
+\n\t* \'Touring view\' térképstílus: több térképrészlet, új útszínezés, kontrasztosabb megjelenés és alpesi túraút (SAC skála) opció\n\t* EGM96 geoid eltéréskorrekció a pontosabb GPS magassági adatokhoz "</string>
+    <string name="recording_unavailable">nem elérhető</string>
+    <string name="recording_context_menu_arecord">Hangjegyzet készítése</string>
+    <string name="recording_context_menu_vrecord">Videójegyzet készítése</string>
+    <string name="layer_recordings">Felvétel réteg</string>
+    <string name="recording_can_not_be_played">A felvételt nem lehet lejátszani</string>
+    <string name="recording_context_menu_delete">Felvétel törlése</string>
+    <string name="recording_context_menu_play">Lejátszás</string>
+    <string name="recording_default_name">felvétel</string>
+    <string name="av_control_start">felv.</string>
+    <string name="map_widget_av_notes">Hangjegyzetek</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd bővítmény offline szintvonalakhoz</string>
+    <string name="use_clear_distance_measurement">Kattints még egyszer a mérési pontok törléséhez.</string>
+    <string name="use_distance_measurement">Pont készítéséhez kattints hosszan és törlődik az előző pont. Kilépés a mérés gombra kattintva.</string>
+    <string name="map_widget_distancemeasurement">Távolságmérés</string>
+    <string name="audionotes_plugin_description">Hangjegyzetek készítése utazás közben</string>
     </resources>
