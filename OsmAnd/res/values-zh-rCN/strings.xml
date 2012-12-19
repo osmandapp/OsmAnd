@@ -1,3 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-</resources>
+<string name="email">電子郵件</string>
+<string name="poi_dialog_name">名稱</string>
+	<string name="poi_dialog_opening_hours">打開</string>
+	<string name="poi_dialog_comment">評論</string>
+	<string name="poi_dialog_comment_default">改變POI</string>
+	<string name="default_buttons_commit">承諾</string>
+	<string name="default_buttons_reset">復位</string>
+	<string name="filter_current_poiButton">過濾器</string>
+	<string name="edit_filter_delete_menu_item">刪除</string>
+	<string name="edit_filter_save_as_menu_item">“另存為”</string>
+	<string name="default_buttons_selectall">全選</string>
+	<string name="recording_unavailable">無法使用</string>
+    <string name="recording_context_menu_play">玩</string>
+    <string name="recording_default_name">記錄</string>
+    <string name="av_control_stop">停止</string>
+    <string name="monitoring_control_stop">停止</string>
+    <string name="index_srtm_parts">部分</string>
+    <string name="download_select_map_types">其他地圖</string>
+    <string name="map_widget_max_speed">速度極限</string>
+    <string name="monitoring_control_start">開始</string>
+    <string name="route_descr_current_location">您現在的位置</string>
+    <string name="safe_mode">“安全模式”</string>
+    <string name="no_route">沒有路由</string>
+	<string name="delete_target_point">刪除航點</string>
+	<string name="navigate_to">設為目的地</string>
+    <string name="target_points">航點</string>
+    <string name="map_widget_intermediate_distance">航點</string>
+    <string name="poi_filter_parking">停車</string>
+    <string name="poi_filter_emergency">急</string>
+    <string name="poi_filter_public_transport">公共交通</string>
+    <string name="poi_filter_entertainment">娛樂</string>
+    <string name="poi_filter_accomodation">住宿</string>
+    <string name="poi_filter_restaurants">餐廳</string>
+    <string name="poi_filter_sightseeing">遊覽</string>
+    <string name="poi_filter_car_aid">汽車援助</string>
+	<string name="poi_filter_food_shop">快餐店</string>
+	<string name="poi_filter_for_tourists">對於遊客</string>
+	<string name="poi_filter_fuel">燃料</string>
+	<string name="use_compass_navigation">使用指南針</string>
+	<string name="avoid_motorway">避開高速路</string>
+	<string name="auto_zoom_map">自動縮放地圖</string>
+	<string name="tip_update_index">離線數據的更新</string>
+	<string name="recalculate_route_to_your_location">運輸方式：</string>
+	<string name="select_navigation_mode">選擇傳輸模式</string>
+	<string name="monitor_preferences">跟踪</string>
+	<string name="map_widget_renderer">地圖風格</string>
+	<string name="position_on_map">位置標記</string>
+	<string name="avoid_in_routing_descr">避開收費公路，土路，渡輪</string>
+	<string name="map_widget_fluorescent">熒光路線</string>
+	<string name="map_widget_show_ruler">統治者</string>
+	<string name="monitoring_mode_off">記錄GPX</string>
+	<string name="map_widget_view_direction">觀察方向</string>
+	<string name="map_widget_top_text">街道名稱</string>
+	</resources>
