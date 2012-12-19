@@ -9,6 +9,10 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="av_def_action_video">Record video</string>
+    <string name="av_def_action_audio">Record audio</string>
+    <string name="av_widget_action_descr">Select default widget action</string>
+    <string name="av_widget_action">Default widget action</string>
     <string name="av_video_format_descr">Select video output format</string>
     <string name="av_video_format">Video output format</string>
     <string name="av_use_external_recorder_descr">Use system recorder for video</string>

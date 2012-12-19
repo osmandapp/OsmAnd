@@ -80,7 +80,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if (mapInfoLayer != null ) {
 			distanceControl = createDistanceControl(activity, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			mapInfoLayer.getMapInfoControls().registerSideWidget(distanceControl,
-					0/*R.drawable.widget_parking*/, R.string.map_widget_distancemeasurement, "distance.measurement", false,
+					R.drawable.widget_distance, R.string.map_widget_distancemeasurement, "distance.measurement", false,
 					EnumSet.of(ApplicationMode.DEFAULT, ApplicationMode.PEDESTRIAN),
 					EnumSet.noneOf(ApplicationMode.class), 21);
 			mapInfoLayer.recreateControls();

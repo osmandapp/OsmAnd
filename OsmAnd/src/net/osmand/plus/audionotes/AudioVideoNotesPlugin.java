@@ -44,14 +44,12 @@ import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
 import android.text.format.DateFormat;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -233,7 +231,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					AccessibleToast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
 					return;
 				}
-				recordAudio(loc.getLatitude(), loc.getLongitude(), mapActivity);
+				if(app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_VIDEO) {
+					recordVideo(loc.getLatitude(), loc.getLongitude(), mapActivity);
+				} else {
+					recordAudio(loc.getLatitude(), loc.getLongitude(), mapActivity);
+				}
 			}
 		});
 	}
@@ -288,7 +290,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 	
 	public void recordVideoCamera(final double lat, final double lon, final MapActivity mapActivity) {
-		Dialog dlg = new Dialog(mapActivity);
+		final Dialog dlg = new Dialog(mapActivity);
 		SurfaceView view = new SurfaceView(dlg.getContext());
 		view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 		view.getHolder().addCallback(new Callback() {
@@ -315,7 +317,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 				
 				giveMediaRecorderHintRotatedScreen(mapActivity, mr);
-//				mr.setPreviewDisplay(holder.getSurface());
+				mr.setPreviewDisplay(holder.getSurface());
 				mr.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 				mr.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
 				mr.setOutputFile(f.getAbsolutePath());
@@ -324,6 +326,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					mr.start();
 					mediaRec = mr;
 					AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
+					dlg.dismiss();
 					recordControl.setText(app.getString(R.string.av_control_stop), "");
 					recordControl.setOnClickListener(new View.OnClickListener() {
 						@Override
@@ -343,19 +346,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 			}
 		});
-//		FrameLayout p = (FrameLayout) mapActivity.getMapView().getParent();
-//		android.widget.FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(50, 50);
-//		lp.gravity = Gravity.CENTER;
-//		p.addView(view, lp);
 		dlg.setContentView(view);
 		dlg.show();
-//		((MapStackControl) view.getParent()).addView(view);
 	}
 	
 	private void giveMediaRecorderHintRotatedScreen(final MapActivity mapActivity, final MediaRecorder mr) {
 		if(Build.VERSION.SDK_INT >= 9) {
 			try {
-				Method m = mr.getClass().getDeclaredMethod("setOrientationHint", Integer.class);
+				Method m = mr.getClass().getDeclaredMethod("setOrientationHint", Integer.TYPE);
 				Display display = ((WindowManager)mapActivity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 				if(display.getRotation() == Surface.ROTATION_0) {
 					m.invoke(mr, 90);
@@ -450,6 +448,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public List<String> indexingFiles(IProgress progress) {
 		File avPath = app.getSettings().extendOsmandPath(ResourceManager.AV_PATH);
 		if (avPath.canRead()) {
+			recordings.clear();
 			File[] files = avPath.listFiles();
 			if (files != null) {
 				for (File f : files) {
@@ -494,6 +493,19 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				entries, intValues, R.string.av_video_format, R.string.av_video_format_descr);
 		grp.addPreference(lp);
 		
+		entries = new String[] {app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video)};
+		intValues = new Integer[] {OsmandSettings.AV_DEFAULT_ACTION_AUDIO, OsmandSettings.AV_DEFAULT_ACTION_VIDEO};
+		ListPreference defAct = activity.createListPreference(settings.AV_DEFAULT_ACTION, 
+				entries, intValues, R.string.av_widget_action, R.string.av_widget_action_descr);
+		grp.addPreference(defAct);
+		
+	}
+	
+	@Override
+	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == 205) {
+			indexingFiles(null);
+		}
 	}
 
 }

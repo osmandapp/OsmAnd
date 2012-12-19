@@ -1407,5 +1407,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public NavigationInfo getNavigationInfo() {
 		return navigationInfo;
 	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
+	}
 
 }

@@ -1424,7 +1424,11 @@ public class OsmandSettings {
 	
 	public static final int VIDEO_OUTPUT_MP4 = 0;
 	public static final int VIDEO_OUTPUT_3GP = 1;
-	public final CommonPreference<Integer> AV_VIDEO_FORMAT = new IntPreference("av_video_format", 0).makeGlobal();
+	public final CommonPreference<Integer> AV_VIDEO_FORMAT = new IntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
+	
+	public static final int AV_DEFAULT_ACTION_AUDIO = 0;
+	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
+	public final CommonPreference<Integer> AV_DEFAULT_ACTION = new IntPreference("av_default_action", AV_DEFAULT_ACTION_AUDIO).makeGlobal();
 	
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference("free_downloads_v1", 0).makeGlobal();

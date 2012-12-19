@@ -25,6 +25,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.preference.PreferenceScreen;
 
@@ -138,6 +139,9 @@ public abstract class OsmandPlugin {
 	
 	public List<String> indexingFiles(IProgress progress) {	return null;}
 	
+	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
+	}
+	
 	public static void refreshLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.updateLayers(mapView, activity);
@@ -199,7 +203,13 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
+	public static void onMapActivityResult(int requestCode, int resultCode, Intent data) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.onMapActivityExternalResult(requestCode, resultCode, data);
+		}
+	}
 	
+
 	public static void onSettingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.settingsActivityCreate(activity, screen);
@@ -260,6 +270,7 @@ public abstract class OsmandPlugin {
 			return false;
 		}
 	}
+
 
 	
 }
