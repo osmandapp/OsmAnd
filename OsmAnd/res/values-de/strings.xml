@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -1175,10 +1175,26 @@
     <string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
 	<string name="index_srtm_parts">Teile</string>
     <string name="index_srtm_ele">Höhenlinien</string>
-    <string name="srtm_plugin_description">Dieses Plugin ermöglicht das Laden von Höhenlinien (Offline Daten laden -> Menu -> "Andere Karten") zur Verwendung mit den Offline-Karten.</string>
+    <string name="srtm_plugin_description">Dieses Plugin ermöglicht das Laden von Höhenlinien (Offline Daten laden -&gt; Menu -&gt; "Andere Karten") zur Verwendung mit den Offline-Karten.</string>
     <string name="srtm_plugin_name">Höhenlinien-Plugin</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
     <string name="osmand_distance_plugin_description">Entfernung zwischen zwei Punkten messen. Start/Ziel antippen und löschen durch lang drücken.</string>
 	<string name="osmand_distance_plugin_name">Entfernungsmesser</string>
-</resources>
+<string name="av_def_action_video">Video aufzeichnen</string>
+    <string name="av_def_action_audio">Audio aufnehmen</string>
+    <string name="av_widget_action_descr">Wählen Sie Standard-Widget Aktion</string>
+    <string name="av_widget_action">Standard Widget Aktion</string>
+    <string name="av_video_format_descr">Wählen Sie Video-Ausgabeformat</string>
+    <string name="av_video_format">Video-Ausgabeformat</string>
+    <string name="av_use_external_recorder_descr">Verwenden Sie System-Recorder für Video</string>
+    <string name="av_use_external_recorder">Verwenden externen Recorder</string>
+    <string name="av_settings_descr">Konfigurieren von Audio-und Video-Einstellungen</string>
+    <string name="recording_camera_not_available">Die Kamera ist nicht verfügbar</string>
+    <string name="recording_open_external_player">Öffnen externen Player</string>
+    <string name="recording_delete_confirm">Wollen Sie diese Aufnahme zu entfernen?</string>
+    <string name="recording_unavailable">nicht verfügbar</string>
+    <string name="recording_context_menu_play">Spielen</string>
+    <string name="recording_default_name">aufnahme</string>
+    <string name="av_control_stop">stoppen</string>
+    </resources>
