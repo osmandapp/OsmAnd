@@ -167,8 +167,8 @@
   <string name="select_search_position">Recherche autour de :</string>
   <string name="context_menu_item_search">Rechercher autour du point</string>
   <string name="tip_recent_changes_0_6_7_t">Changement pour 0.6.7 :
-\n\t- Gestionaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans OsmAnd)
-\n\t- Favoris et groupes (categorisation, suppression, gestion)
+\n\t- Gestionnaire de données hors ligne (téléchargement, suppression, sauvegarde des données hors ligne directement dans OsmAnd)
+\n\t- Favoris et groupes (catégorisation, suppression, gestion)
 \n\t- Explorateur GPX dans l\'application (voir les itinéraires, distance, vitesse moyenne, altitude, etc.)
 \n\t- Navigation GPX (options utiles, continuer un itinéraire après plantage, identification des rond-points)
 \n\t- Fonction d\'enregistrement des itinéraires au format GPX pour utilisation ultérieure hors ligne
@@ -240,7 +240,7 @@
 \n\t- Moteur de synthèse vocale pour le guidage vocal
 \n\t- Ajout de détail dans le rendu de la carte
 \n\t- Carte mondiale de base incluse dans l\'application
-\n\t- Amélioration du calcul d\'itinéraire hors-ligne (toujours experimental)
+\n\t- Amélioration du calcul d\'itinéraire hors-ligne (toujours expérimental)
 \n\t- Options d\'itinéraire GPX
 \n\t- Améliorations de l\'interface et correction de défauts</string>
   <string name="voice_not_use">Non utilisé</string>
@@ -257,7 +257,7 @@
   <string name="switch_to_vector_map_to_see">Vous pouvez basculer sur les cartes vectorielles locales en utilisant le menu (Couches -&gt; Source de la carte… -&gt; Cartes vectorielles OSM) pour voir la carte.</string>
   <string name="choose_audio_stream">Sélectionner le flux audio</string>
   <string name="choose_audio_stream_descr">Sélectionner le canal pour le guidage vocal (dépend de la configuration système)</string>
-  <string name="voice_stream_voice_call">Canal appel vocal</string>
+  <string name="voice_stream_voice_call">Canal d\'appels vocaux</string>
   <string name="voice_stream_notification">Canal de notification</string>
   <string name="voice_stream_music">Canal musique</string>
   <string name="warning_tile_layer_not_downloadable">L\'application ne peut télécharger la couche de carte %1$s, veuillez tenter de la réinstaller.</string>
@@ -1168,4 +1168,39 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="use_clear_distance_measurement">Cliquez une nouvelle fois pour effacer les points de mesure.</string>
     <string name="use_distance_measurement">Appuyez pour créer un point, appuyez et maintenez enfoncé pour supprimer le point précédent, cliquez sur le gadget de mesure pour quitter.</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
+    <string name="av_def_action_video">Enregistrer une vidéo</string>
+    <string name="av_def_action_audio">Enregistrer une note audio</string>
+    <string name="av_widget_action_descr">Sélectionner l\'action par défaut du gadget</string>
+    <string name="av_widget_action">Action par défaut du gadget</string>
+    <string name="av_video_format_descr">Sélectionner le format vidéo</string>
+    <string name="av_video_format">Format d\'enregistrement vidéo</string>
+    <string name="av_use_external_recorder_descr">Utiliser l\'enregistreur système pour la vidéo</string>
+    <string name="av_use_external_recorder">Utiliser un enregistreur externe</string>
+    <string name="av_settings_descr">Configurer les paramètres audio et vidéo</string>
+    <string name="av_settings">Paramètres audio/vidéo</string>
+    <string name="recording_error">"Une erreur s\'est produite lors de l\'enregistrement "</string>
+    <string name="recording_camera_not_available">Caméra non disponible</string>
+    <string name="recording_is_recorded">Audio/vidéo en cours d\'enregistrement. Pour l\'arrêter, appuyez sur le bouton Arrêter du gadget.</string>
+    <string name="recording_playing">La note audio de l\'enregistrement spécifié est en cours de lecture.\n%1$s</string>
+    <string name="recording_open_external_player">Ouvrir un lecteur externe</string>
+    <string name="recording_delete_confirm">Voulez-vous supprimer cet enregistrement ?</string>
+    <string name="recording_unavailable">non disponible</string>
+    <string name="recording_context_menu_arecord">Prendre une note audio</string>
+    <string name="recording_context_menu_vrecord">Prendre une note vidéo</string>
+    <string name="layer_recordings">Couche d\'enregistrement</string>
+    <string name="recording_can_not_be_played">L\'enregistrement ne peut pas être lu</string>
+    <string name="recording_context_menu_delete">Supprimer l\'enregistrement</string>
+    <string name="recording_context_menu_play">Lire</string>
+    <string name="recording_description">Enregistrement %1$s %2$s à %3$s</string>
+    <string name="recording_default_name">enregistrement</string>
+    <string name="av_control_stop">Arrêter</string>
+    <string name="map_widget_av_notes">Notes audio</string>
+    <string name="tip_recent_changes_1_1_0_t">"Changement pour 1.1.0 :
+\n\t* Greffon de calcul de distance
+\n\t* Greffon de prise de notes audio/vidéo
+\n\t* Greffon pour les courbes de niveau
+\n\t* Corrections d\'erreurs
+\n\t* Option \'Touring view\' avec plus de détails\n\t* Nouveaux styles de routes, plus de contrast\n\t* Option pour la randonnée (classification SAC)
+\n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS "</string>
+    <string name="av_control_start">Enreg.</string>
     </resources>
