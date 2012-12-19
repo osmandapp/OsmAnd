@@ -186,19 +186,20 @@ public class MapInfoLayer extends OsmandMapLayer {
 		// register right stack
 		EnumSet<ApplicationMode> all = EnumSet.allOf(ApplicationMode.class);
 		EnumSet<ApplicationMode> carDefault = EnumSet.of(ApplicationMode.CAR, ApplicationMode.DEFAULT);
-		EnumSet<ApplicationMode> bicyclePedestrian = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN);
+		EnumSet<ApplicationMode> carBicycleDefault = EnumSet.of(ApplicationMode.CAR, ApplicationMode.DEFAULT, ApplicationMode.BICYCLE);
 		EnumSet<ApplicationMode> exceptCar = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
 		EnumSet<ApplicationMode> none = EnumSet.noneOf(ApplicationMode.class);
 		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
 		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
 				paintSubText, false);
-		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, carDefault, none, 5);
+		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, carBicycleDefault, none, 5);
 		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true, bicyclePedestrian, none, 10);
+		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
+				EnumSet.of(ApplicationMode.PEDESTRIAN), none, 10);
 		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
-		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, carDefault, none, 15);
+		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, carBicycleDefault, none, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
@@ -232,7 +233,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
 		
 		topText = new TopTextView(routingHelper, map);
-		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text, "street_name", MapInfoControls.MAIN_CONTROL, carDefault, 100);
+		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
+				"street_name", MapInfoControls.MAIN_CONTROL, carBicycleDefault, 100);
 		
 		// Register appearance widgets
 		registerAppearanceWidgets();
