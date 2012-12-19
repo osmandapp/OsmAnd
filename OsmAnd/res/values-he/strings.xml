@@ -1151,4 +1151,17 @@
     <string name="av_control_stop">עצירה</string>
     <string name="av_control_start">הקלטה</string>
     <string name="map_widget_av_notes">הערות קוליות</string>
+    <string name="av_def_action_video">הקלטת וידאו</string>
+    <string name="av_def_action_audio">הקלטת שמע</string>
+    <string name="av_widget_action_descr">בחירת פעולת הווידג׳ט כבררת המחדל</string>
+    <string name="av_widget_action">פעולת הווידג׳ט כבררת המחדל</string>
+    <string name="av_video_format_descr">נא לבחור תבנית פלט וידאו</string>
+    <string name="av_video_format">תבנית פלט וידאו</string>
+    <string name="av_use_external_recorder_descr">להשתמש במקליט המערכת עבור וידאו</string>
+    <string name="av_use_external_recorder">להשתמש במקליט חיצוני</string>
+    <string name="av_settings_descr">הגדרת תצורת השמע והווידאו</string>
+    <string name="av_settings">"הגדרות שמע/וידאו "</string>
+    <string name="recording_error">"אירעה שגיאה בזמן ההקלטה "</string>
+    <string name="recording_camera_not_available">המצלמה אינה זמינה</string>
+    <string name="osmand_srtm_long_description_1000_chars">תוסף זה מספק קווי מתאר שניתן להציג על המפות הבלתי מקוונות של OsmAnd. הנתונים הגלובליים (בין 70 מעלות צפון ל־70 מעלות דרום) מבוססת על מדידות שבוצעו על ידי ה־SRTM (משימת הטופוגרפיה של מעבורת המכ״ם) ו־ASTER (רדיומטר חלל מתקדם לגילוי פליטה תרמית והשתקפות), התקן דימות על סיפונה של Terra, לוויין הדגל של מערכת ההשפעה על כדור הארץ של NASA.‏ ASTER הנו שיתוף פעולה בין NASA, משרד התמ״ת היפני (METI) ומערכות החלל היפניות (J-spacesystems).</string>
     </resources>
