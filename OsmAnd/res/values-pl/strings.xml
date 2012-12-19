@@ -1044,8 +1044,7 @@
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0 : ↵\n→* Poprawiony routing: szybszy, dokładniejszy, do 250 km ↵\n→* Wprowadzenie map tylko samochodowych ↵\n→* Mapa nie gubi ustalonej pozycji po przerwaniu ↵\n→* Włączenie usługi w tle podczas nawigacji
-\n→* Ulepszony \\\'widok turystyczny\\\' z nowymi stylami dróg, większą ilością szczegółów oraz opcją dla wspinaczek alpejskich (skala SAC) ↵\n→* Korekcja przesunięcia EGM96 dla odczytów wysokości "</string>
+    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0 : ↵\n→* Poprawiony routing: szybszy, dokładniejszy, do 250 km ↵\n→* Wprowadzenie map tylko samochodowych ↵\n→* Mapa nie gubi ustalonej pozycji po przerwaniu ↵\n→* Włączenie usługi w tle podczas nawigacji "</string>
     <string name="close_changeset">Zamknij zestaw zmian</string>
 	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
 	<string name="incomplete_locale">niekompletne</string>
@@ -1073,4 +1072,39 @@
     <string name="monitoring_control_stop">zatrzymaj</string>
     <string name="map_widget_audionotes">Notatki głosowe</string>
     <string name="srtm_plugin_attribution">ASTER jest produktem METIS i NASA</string>
+    <string name="av_def_action_video">Nagraj film</string>
+    <string name="av_def_action_audio">Nagraj dźwięk</string>
+    <string name="av_widget_action_descr">Wybierz domyślną akcję widgetu</string>
+    <string name="av_widget_action">Domyślna akcja widżetu</string>
+    <string name="av_video_format_descr">Wybierz format video</string>
+    <string name="av_video_format">Format video</string>
+    <string name="av_use_external_recorder_descr">Użyj kamery systemowej</string>
+    <string name="av_use_external_recorder">Użyj zewnętrznej kamery</string>
+    <string name="av_settings_descr">Konfiguruj ustawienia dźwięku i obrazu</string>
+    <string name="av_settings">"Ustawienia obrazu/dźwięku "</string>
+    <string name="recording_error">"Wystąpił błąd podczas nagrywania "</string>
+    <string name="recording_camera_not_available">Kamera jest niedostępna</string>
+    <string name="recording_is_recorded">Dźwięk/obraz jest nagrywany. Aby zatrzymać naciśnij przycisk stop na widżecie.</string>
+    <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
+    <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
+    <string name="recording_delete_confirm">Czy chcesz usunąć to nagranie?</string>
+    <string name="tip_recent_changes_1_1_0_t">"Zmiany w 1.1.0 :
+\n\t* Plugin kalkulatora odległości
+\n\t* Plugin notatek dźwiękowych
+\n\t* Plugin wyświetlający poziomice
+\n\t* Poprawki błędów
+\n\t* Opcja \\\'widok turystyczny\\\' z większą ilością szczegółów, nowymi stylami dróg, większym kontrastem oraz opcją dla wspinaczek alpejskich (skala SAC)
+\n\t* Korekcja przesunięcia EGM96 dla odczytów wysokości "</string>
+    <string name="recording_unavailable">niedostępne</string>
+    <string name="layer_recordings">Warstwa nagrywania</string>
+    <string name="recording_can_not_be_played">Nagranie nie może zostać odtworzone</string>
+    <string name="recording_context_menu_delete">Usuń nagranie</string>
+    <string name="recording_context_menu_play">Odtwórz</string>
+    <string name="recording_description">Nagranie %1$s %2$s w %3$s</string>
+    <string name="recording_default_name">nagranie</string>
+    <string name="av_control_stop">zatrzymaj</string>
+    <string name="av_control_start">nagrywaj</string>
+    <string name="map_widget_av_notes">Notatki audio</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd dla konturów offline</string>
+    <string name="use_clear_distance_measurement">Kliknij ponownie aby wyczyścić punkty pomiarów.</string>
     </resources>
