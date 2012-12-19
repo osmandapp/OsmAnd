@@ -1107,4 +1107,16 @@
     <string name="av_control_stop">stop</string>
     <string name="av_control_start">opnemen</string>
     <string name="map_widget_av_notes">Audio-notities</string>
+    <string name="av_def_action_video">Video opnemen</string>
+    <string name="av_def_action_audio">Audio opnemen</string>
+    <string name="av_widget_action_descr">Selecteer standaard widget-actie</string>
+    <string name="av_widget_action">Standaard widget-actie</string>
+    <string name="av_video_format_descr">Selecteer video bestandsformaat</string>
+    <string name="av_video_format">Video bestandsformaat</string>
+    <string name="av_use_external_recorder_descr">Gebruik de systeem recorder voor video</string>
+    <string name="av_use_external_recorder">Gebruik een externe recorder</string>
+    <string name="av_settings_descr">Configureer audio- en video-instellingen</string>
+    <string name="av_settings">"Audio/video instellingen "</string>
+    <string name="recording_error">"Fout opgetreden bij opnemen "</string>
+    <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
     </resources>
