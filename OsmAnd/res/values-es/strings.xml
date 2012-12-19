@@ -1068,7 +1068,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
-    <string name="recording_delete_confirm">¿Desea eliminar esta grabación?</string>
+    <string name="recording_delete_confirm">¿Quieres eliminar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
     <string name="recording_context_menu_arecord">Tomar una nota de audio</string>
     <string name="recording_context_menu_vrecord">Tomar una nota de vídeo</string>
