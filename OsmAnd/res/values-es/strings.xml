@@ -1060,13 +1060,13 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_srtm_short_description_80_chars">Extra de OsmAnd para curvas de nivel sin conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">Este extra proporciona curvas de nivel que se pueden visualizar en mapas descargados de OsmAnd. Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
     <string name="use_clear_distance_measurement">Pulsa una vez más para borrar puntos de medición.</string>
-    <string name="use_distance_measurement">Toca para hacer un punto, mantén presionado para eliminar el punto anterior, pulsa en el widget de medición para salir.</string>
+    <string name="use_distance_measurement">Toca para hacer un punto, mantén presionado para eliminar el punto anterior, pulsa en el mecanismo de medición para salir.</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">La localización no está definida aún para tomar notas de audio</string>
     <string name="monitoring_control_stop">parar</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
-    <string name="recording_is_recorded">Se está grabando audio/vídeo. Para detenerlo, pulse el botón Stop en el widget.</string>
+    <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Desea eliminar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
@@ -1080,4 +1080,19 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="av_control_stop">Parar</string>
     <string name="av_control_start">Grabar</string>
     <string name="map_widget_av_notes">Notas de audio</string>
+    <string name="av_def_action_video">Grabar vídeo</string>
+    <string name="av_def_action_audio">Grabar audio</string>
+    <string name="av_widget_action">Acción predeterminada</string>
+    <string name="av_widget_action_descr">Selecciona la acción predeterminada</string>
+    <string name="av_video_format_descr">Selecciona el formato de salida de vídeo</string>
+    <string name="av_video_format">Formato de salida de vídeo</string>
+    <string name="av_use_external_recorder_descr">Utiliza la grabadora de vídeo del sistema</string>
+    <string name="av_use_external_recorder">Usa grabadora externa</string>
+    <string name="av_settings_descr">Configura las opciones de audio y vídeo</string>
+    <string name="av_settings">"Opciones de audio/video "</string>
+    <string name="recording_error">"Error durante la grabación "</string>
+    <string name="recording_camera_not_available">La cámara no está disponible</string>
+    <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
+    <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 : ↵\n→* Extra de cálculo de distancia ↵\n→* Extra de notas de audio↵\n→* Extra de curvas de nivel↵\n→* Corrección de errores↵\n→* Opción de estilo de mapas \'Vista de tour\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)↵\n→* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
+    <string name="recording_description">Grabando %1$s %2$s en %3$s</string>
     </resources>
