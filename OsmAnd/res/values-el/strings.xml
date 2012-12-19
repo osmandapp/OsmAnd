@@ -1141,4 +1141,17 @@
     <string name="recording_description">Εγγραφή %1$s %2$s at %3$s</string>
     <string name="recording_default_name">εγγραφή</string>
     <string name="map_widget_av_notes">Ηχητικές σημειώσεις</string>
+    <string name="av_def_action_video">Εγγραφή εικόνας</string>
+    <string name="av_def_action_audio">Εγγραφή ήχου</string>
+    <string name="av_widget_action_descr">Επιλέξτε προκαθορισμένη ενέργεια γραφικού στοιχείου</string>
+    <string name="av_widget_action">Προκαθορισμένη ενέργεια γραφικού στοιχείου</string>
+    <string name="av_use_external_recorder">Χρήση εξωτερικού εγγραφέα</string>
+    <string name="av_settings">"Ρυθμίσεις εικόνας/ήχου "</string>
+    <string name="recording_error">"Προέκυψε σφάλμα κατά την εγγραφή "</string>
+    <string name="recording_camera_not_available">Κάμερα μη διαθέσιμη</string>
+    <string name="av_control_stop">σταμάτημα</string>
+    <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου εικόνας</string>
+    <string name="av_video_format">Μορφή εξόδου εικόνας</string>
+    <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για την εικόνα</string>
+    <string name="use_distance_measurement">Αγγίξτε για δημιουργία σημείου, πιέστε και κρατήστε για διαγραφή προηγούμενου σημείου, κλικ στο γραφικό στοιχείο μέτρησης για έξοδο.</string>
     </resources>
