@@ -1074,7 +1074,7 @@
     <string name="download_srtm_maps">SRTM kaarten</string>
     <string name="osmand_distance_plugin_description">Meet de afstand tussen twee punten. Specificeer het uitgangspunt / de bestemming / wis de meting door een lange druk.</string>
 	<string name="osmand_distance_plugin_name">Afstandsmeter</string>
-<string name="audionotes_plugin_description">Audionotities plugin beschrijving</string>
+<string name="audionotes_plugin_description">Audionotities maken tijdens de reis</string>
     <string name="audionotes_plugin_name">Audionotities plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin voor offline contourlijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">Deze plugin biedt contourlijnen die kunnen worden weergegeven in OsmAnd\'s offline kaarten. De globale gegevens (tussen 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormende instrument aan boord van Terra, het vlaggenschip satelliet van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
