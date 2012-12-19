@@ -1094,7 +1094,7 @@
 \n\t* Audio notities plugin
 \n\t* Hoogtelijnen plugin
 \n\t* Bugs opgelost
-\n\t* \'Touring view\' kaartstijl optie met meer kaartdetails, nieuwe wegenstijles, meer contrast en Alpine wandelen optie(SAC schaal)\n\t* EGM96 geoïde hoogtecorrectie voor GPS hoogte-uitlezingen "</string>
+\n\t* \'Touring view\' kaartstijl optie met meer kaartdetails, nieuwe wegenstijles, meer contrast en Alpine wandelen optie(SAC schaal)\n\n\t* EGM96 geoïde hoogtecorrectie voor GPS hoogte-uitlezingen "</string>
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Maak een audio-notitie</string>
     <string name="recording_context_menu_vrecord">Maak een video-notitie</string>
