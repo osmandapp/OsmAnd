@@ -1094,7 +1094,7 @@
     <string name="recording_playing">Predvajanje zvoka iz izbranega posnetka.\n%1$s</string>
     <string name="recording_open_external_player">Odpri zunanji predvajalnik</string>
     <string name="recording_delete_confirm">Ali želite odstraniti ta posnetek?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Spremembe v 1.1.0:↵\n\t* Vtičnik Računanje razdalj↵\n\t* Vtičnik Zvočni zapisi↵\n\t* Vtičnik Izohipse↵\n\t* Odpravljene nekatere napake↵\n\t* \'Touring pogled\' slog zemljevida z več podrobnostmi, novimi slogi za ceste, več kontrasta in možnostjo za alpsko pohodništvo (SAC lestvico)↵\n\t* popravek za EGM96 geoid pri GPS nadmorski višini "</string>
+    <string name="tip_recent_changes_1_1_0_t">"Spremembe v 1.1.0:\n\t* Vtičnik Računanje razdalj\n\t* Vtičnik Zvočni zapisi\n\t* Vtičnik Izohipse\n\t* Odpravljene nekatere napake\n\t* \'Touring pogled\' slog zemljevida z več podrobnostmi, novimi slogi za ceste, več kontrasta in možnostjo za alpsko pohodništvo (SAC lestvico)\n\t* popravek za EGM96 geoid pri GPS nadmorski višini "</string>
     <string name="recording_unavailable">ni na voljo</string>
     <string name="recording_context_menu_arecord">Posnemi zvočni zapis</string>
     <string name="recording_context_menu_vrecord">Posnemi video zapis</string>
