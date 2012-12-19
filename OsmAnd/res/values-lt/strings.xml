@@ -1178,4 +1178,39 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="map_widget_audionotes">Audio užrašai</string>
     <string name="srtm_plugin_attribution">ASTER yra METI ir NASA produktas</string>
     <string name="monitoring_control_stop">stabdyti</string>
+    <string name="av_def_action_video">Įrašyti vaizdą</string>
+    <string name="av_def_action_audio">Įrašyti garsą</string>
+    <string name="av_widget_action_descr">Pasirinkti numatytą įrankio veiksmą</string>
+    <string name="av_widget_action">Numatytas įrankio veiksmas</string>
+    <string name="av_video_format_descr">Pasirinkti vaizdo įrašo formatą</string>
+    <string name="av_video_format">Vaizdo įrašo formatas</string>
+    <string name="av_use_external_recorder_descr">Naudoti sistemos vaizdo įrašymo įrankį</string>
+    <string name="av_use_external_recorder">Nuadoti kitą įrašymo įrankį</string>
+    <string name="av_settings_descr">Konfigūruoti vaizdo ir garso parametrus</string>
+    <string name="av_settings">"Garso/vaizdo nustatymai "</string>
+    <string name="recording_error">"Įrašinėjant vaizdą įvyko klaida "</string>
+    <string name="recording_camera_not_available">Kamera neprieinama</string>
+    <string name="recording_is_recorded">Įrašinėjamas garsas/vaizdas. Norėdami sustabdyti paspauskite įrankio mygtuką.</string>
+    <string name="recording_playing">Grojamas pasirinktas garso įrašas.\n%1$s</string>
+    <string name="recording_open_external_player">Atverti kitą grotuvą</string>
+    <string name="recording_delete_confirm">Ar norite ištrinti šį įrašą?</string>
+    <string name="tip_recent_changes_1_1_0_t">"Pakeitimai 1.1.0 versijoje :
+\n\t* Atstumo matuoklio įskiepis
+\n\t* Audio užrašų įskiepis
+\n\t* Aukščio kontūrų linijos
+\n\t* Klaidų ištaisymai
+\n\t* \'Turistinio vaizdo\' žemėlapio rodymo stilius su daugiau žemėlapio detalių, naujais kelio stiliais, didesniu kontrastu ir klanų turizmo (Alpine hiking, SAC scale) galimybe
+\n\t* EGM96 geoido nuokrypio korektūra GPS rodomai aukščio informacijai "</string>
+    <string name="recording_unavailable">neprieinama</string>
+    <string name="recording_context_menu_arecord">Įrašyti audio žinutę</string>
+    <string name="recording_context_menu_vrecord">Įrašyti vaizdo žinutę</string>
+    <string name="layer_recordings">Įrašų sluoksnis</string>
+    <string name="recording_can_not_be_played">Įrašo neina pagroti</string>
+    <string name="recording_context_menu_delete">Ištrinti įrašą</string>
+    <string name="recording_context_menu_play">Groti</string>
+    <string name="recording_description">Įrašas %1$s %2$s prie %3$s</string>
+    <string name="recording_default_name">įrašas</string>
+    <string name="av_control_start">įraš</string>
+    <string name="map_widget_av_notes">Audio užrašai</string>
+    <string name="av_control_stop">stabd</string>
     </resources>
