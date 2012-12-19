@@ -459,7 +459,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			listWithAlternatives(settings.extendOsmandPath(ResourceManager.SRTM_PATH),BINARY_MAP_INDEX_EXT, files);
 		}
 		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
-		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
 		return files;
 	}
 	
@@ -507,6 +506,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadFilesPreCheckSpace( list);
 		}
+	}
+	
+	protected void downloadFilesPreCheckSRTM(List<DownloadEntry> list) {
+		
 	}
 	
 	protected void downloadFilesPreCheckSpace(List<DownloadEntry> list) {

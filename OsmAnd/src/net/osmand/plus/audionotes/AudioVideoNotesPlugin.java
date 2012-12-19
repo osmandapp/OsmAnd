@@ -1,6 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
 import java.util.List;
@@ -23,6 +24,7 @@ import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.MapStackControl;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
 
@@ -322,20 +324,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				mr.setVideoEncoder(MediaRecorder.VideoEncoder.DEFAULT);
 				mr.setOutputFile(f.getAbsolutePath());
 				try {
-					mr.prepare();
-					mr.start();
-					mediaRec = mr;
-					AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
-					dlg.dismiss();
-					recordControl.setText(app.getString(R.string.av_control_stop), "");
-					recordControl.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							stopRecording(mapActivity);
-							indexFile(f);
-							mapActivity.getMapView().refreshMap();
-						}
-					});
+					runMediaRecorder(mapActivity, mr, f);
 				} catch (Exception e) {
 					logErr(e);
 					return;
@@ -401,25 +390,38 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
 		mr.setOutputFile(f.getAbsolutePath());
 		try {
-			mr.prepare();
-			mr.start();
-			mediaRec = mr;
-			recordControl.setText(app.getString(R.string.av_control_stop), "");
-			AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
-			recordControl.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					stopRecording(mapActivity);
-					indexFile(f);
-					mapActivity.getMapView().refreshMap();
-				}
-
-			});
+			runMediaRecorder(mapActivity, mr, f);
 		} catch (Exception e) {
 			log.error("Error starting audio recorder ", e);
 			AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 		
+	}
+
+	private void runMediaRecorder(final MapActivity mapActivity, MediaRecorder mr, final File f) throws IOException {
+		mr.prepare();
+		mr.start();
+		mediaRec = mr;
+		recordControl.setText(app.getString(R.string.av_control_stop), "");
+		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+		final MapStackControl par = mil.getRightStack();
+		final boolean contains = par.getAllViews().contains(recordControl);
+		if(!contains) {
+			par.addStackView(recordControl);
+		}
+		AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
+		recordControl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(!contains) {
+					par.removeView(recordControl);
+				}
+				stopRecording(mapActivity);
+				indexFile(f);
+				mapActivity.getMapView().refreshMap();
+			}
+
+		});
 	}
 	
 	public void indexFile(File f){

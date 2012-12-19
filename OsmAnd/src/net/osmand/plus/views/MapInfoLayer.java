@@ -679,6 +679,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		}
 	}
+	
+	public MapStackControl getRightStack() {
+		return rightStack;
+	}
+	
+	public MapStackControl getLeftStack() {
+		return leftStack;
+	}
 
 	
 	@Override
