@@ -246,12 +246,12 @@
   <string name="layer_underlay">Mappa di sfondo…</string>
   <string name="map_underlay">Mappa di sfondo</string>
   <string name="map_underlay_descr">Scegli mappa di sfondo</string>
-  <string name="layer_overlay">Mappa di overlay…</string>
+  <string name="layer_overlay">Mappa sovrapposta…</string>
   <string name="default_none">Nessuna</string>
-  <string name="map_overlay">Mappa di overlay</string>
-  <string name="map_overlay_descr">Scegli mappa di overlay</string>
+  <string name="map_overlay">Mappa sovrapposta</string>
+  <string name="map_overlay_descr">Scegli mappa di sovrapposizione</string>
   <string name="tile_source_already_installed">La mappa è già installata, verrà aggiornata</string>
-  <string name="select_tile_source_to_install">Seleziona le mappe (tile) da installare o aggiornare</string>
+  <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare</string>
   <string name="internet_not_available">Connessione internet richiesta ma non disponibile</string>
   <string name="install_more">Installa altro…</string>
   <string name="tip_update_index">Aggiornamento Dati Offline</string>
@@ -1148,7 +1148,7 @@
     <string name="download_regular_maps">Mappe normali</string>
     <string name="download_roads_only_maps">Mappe solo-strade</string>
     <string name="incomplete_locale">incompleto</string>
-	<string name="map_widget_max_speed">Velocità consentita</string>
+	<string name="map_widget_max_speed">Limite di velocità</string>
     <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\\\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\\\'altritudine nel sistema EGM96.
 \n\tPer avere questo, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="tip_altitude_offset">Visualizza Altitudine - Correzione scostamento</string>
@@ -1160,10 +1160,10 @@
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">parti</string>
     <string name="download_select_map_types">Altre mappe</string>
-    <string name="download_srtm_maps">Mappe altimetriche</string>
-    <string name="srtm_plugin_name">plugin SRTM</string>
+    <string name="download_srtm_maps">Dati linee di livello</string>
+    <string name="srtm_plugin_name">Plugin linee di livello</string>
     <string name="srtm_plugin_description">Questo plugin facilita lo scarico delle linee di elevazione (Download mappe -&gt; Menu -&gt; Altre mappe) per regioni specifiche e li usa con le mappe offline.</string>
-    <string name="index_srtm_ele">Linee di elevazione</string>
+    <string name="index_srtm_ele">Linee di livello</string>
     <string name="audionotes_plugin_description">Prende note audio durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin Appunti Audio</string>
     <string name="osmand_distance_plugin_description">Misurare una distanza tra due punti. Specificare l\'origine / la destinazione / cancellare la misurazione con una pressione prolungata.</string>
@@ -1181,10 +1181,10 @@
     <string name="av_def_action_audio">Registra audio</string>
     <string name="av_widget_action_descr">Selezionare azione di default del widget</string>
     <string name="av_widget_action">Azione predefinita del widget</string>
-    <string name="av_video_format_descr">Seleziona formato di uscita video</string>
-    <string name="av_video_format">Formato uscita video</string>
+    <string name="av_video_format_descr">Seleziona il formato di uscita video</string>
+    <string name="av_video_format">Formato di uscita video</string>
     <string name="av_use_external_recorder_descr">Utilizzare sistema di registrazione per il video</string>
-    <string name="av_use_external_recorder">Utilizzare registratore esterno</string>
+    <string name="av_use_external_recorder">Utilizzare un registratore esterno</string>
     <string name="av_settings_descr">Configurare le impostazioni audio e video</string>
     <string name="av_settings">"Impostazioni audio/video "</string>
     <string name="recording_error">"Errore durante la registrazione "</string>
