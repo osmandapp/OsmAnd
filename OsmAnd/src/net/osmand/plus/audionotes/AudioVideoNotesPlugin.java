@@ -112,7 +112,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String additional = "";
 			if(duration > 0) {
 				int d = (int) (duration / 1000);
-				String min = (String) ((d % 60) < 10 ? "0"+(d % 60) : (d % 60));
+				
+				String min;
+				if(d % 60 < 10 ) {
+					min = "0" + (d % 60);
+				} else {
+					min = (d % 60) +"";
+				}
 				additional +=  (d / 60) + ":" + min ;
 			}
 			if(!available) {
