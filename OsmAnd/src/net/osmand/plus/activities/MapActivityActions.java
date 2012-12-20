@@ -2,6 +2,8 @@ package net.osmand.plus.activities;
 
 
 import java.io.File;
+
+import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +13,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import com.ibm.icu.text.Collator;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -204,7 +205,7 @@ public class MapActivityActions implements DialogProvider {
 	protected Dialog createReplaceFavouriteDialog(final Bundle args) {
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
-		final Collator ci = Collator.getInstance();
+		final Collator ci = java.text.Collator.getInstance();
 		Collections.sort(points, new Comparator<FavouritePoint>() {
 
 			@Override
