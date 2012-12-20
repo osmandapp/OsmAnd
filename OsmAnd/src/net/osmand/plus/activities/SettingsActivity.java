@@ -72,7 +72,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference showAlarms;
 
 	private EditTextPreference applicationDir;
-//	private ListPreference applicationModePreference;
+	private ListPreference applicationModePreference;
 
 	private ListPreference routerServicePreference;
 
@@ -298,9 +298,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 		
 		// List preferences
-//		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
-//				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)},
-//				new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+		registerListPreference(osmandSettings.ROTATE_MAP, screen, 
+				new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)},
+				new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 		
 		registerListPreference(osmandSettings.MAP_SCREEN_ORIENTATION, screen, 
 				new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)},
@@ -351,14 +351,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		}
 		registerListPreference(osmandSettings.ROUTER_SERVICE, screen, entries, RouteService.values());
 		
-//		entries = new String[ApplicationMode.values().length];
-//		for(int i=0; i<entries.length; i++){
-//			entries[i] = ApplicationMode.values()[i].toHumanString(this);
-//		}
-//		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
-//		
-//		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
-//		applicationModePreference.setOnPreferenceChangeListener(this);
+		entries = new String[ApplicationMode.values().length];
+		for(int i=0; i<entries.length; i++){
+			entries[i] = ApplicationMode.values()[i].toHumanString(this);
+		}
+		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
+		
+		applicationModePreference = (ListPreference) screen.findPreference(osmandSettings.APPLICATION_MODE.getId());
+		applicationModePreference.setOnPreferenceChangeListener(this);
 
 		
 		routerServicePreference = (ListPreference) screen.findPreference(osmandSettings.ROUTER_SERVICE.getId());
@@ -473,8 +473,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 		updateApplicationDirTextAndSummary();
 
-//		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
-//				+ osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
+				+ osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 	}
 
