@@ -86,16 +86,11 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 	
 	
-	public void setIndexFiles(List<IndexItem> indexFiles) {
+	public synchronized void setIndexFiles(List<IndexItem> indexFiles, Collection<? extends IndexItemCategory> cats) {
 		this.indexFiles.clear();
-		for (IndexItem i : indexFiles) {
-			this.indexFiles.add(i);
-		}
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getClientContext(), indexFiles);
-		synchronized (this) {
+		this.indexFiles.addAll(indexFiles);
 			list.clear();
 			list.addAll(cats);
-		}
 		notifyDataSetChanged();
 	}
 

@@ -2,17 +2,11 @@ package net.osmand.plus.download;
 
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.map.RegionCountry;
-import net.osmand.map.RegionRegistry;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
-import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
@@ -20,7 +14,6 @@ import android.widget.Toast;
 public class DownloadIndexListThread extends Thread {
 	private DownloadIndexActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
-	private List<SrtmIndexItem> cachedSRTMFiles = new ArrayList<SrtmIndexItem>();
 	private final Context ctx;
 
 	public DownloadIndexListThread(Context ctx) {
@@ -37,9 +30,7 @@ public class DownloadIndexListThread extends Thread {
 		return indexFiles != null ? indexFiles.getIndexFiles() : null;
 	}
 	
-	public List<SrtmIndexItem> getCachedSRTMFiles() {
-		return cachedSRTMFiles;
-	}
+	
 
 	public boolean isDownloadedFromInternet() {
 		return indexFiles != null && indexFiles.isDownloadedFromInternet();
@@ -48,20 +39,6 @@ public class DownloadIndexListThread extends Thread {
 	@Override
 	public void run() {
 		indexFiles = DownloadOsmandIndexesHelper.getIndexesList(ctx);
-		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
-			cachedSRTMFiles.clear();
-			Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
-			List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
-			for(RegionCountry rc : countries){
-				if(rc.tiles.size() > 35){
-					for(RegionCountry ch : rc.getSubRegions()) {
-						cachedSRTMFiles.add(new SrtmIndexItem(ch, indexFileNames));
-					}
-				} else {
-					cachedSRTMFiles.add(new SrtmIndexItem(rc, indexFileNames));
-				}
-			}
-		}
 		if (uiActivity != null) {
 			uiActivity.removeDialog(DownloadIndexActivity.DIALOG_PROGRESS_LIST);
 			uiActivity.runOnUiThread(new Runnable() {

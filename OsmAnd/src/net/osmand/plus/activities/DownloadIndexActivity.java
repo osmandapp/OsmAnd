@@ -19,6 +19,8 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
+import net.osmand.map.RegionCountry;
+import net.osmand.map.RegionRegistry;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -35,6 +37,7 @@ import net.osmand.plus.download.DownloadIndexAdapter;
 import net.osmand.plus.download.DownloadIndexListThread;
 import net.osmand.plus.download.DownloadTracker;
 import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.download.IndexItemCategory;
 import net.osmand.plus.download.SrtmIndexItem;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import android.app.AlertDialog;
@@ -92,6 +95,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
 	private OsmandSettings settings;
+
+	private List<SrtmIndexItem> cachedSRTMFiles;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -162,9 +167,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	public void updateLoadedFiles() {
 		if (type == DownloadActivityType.SRTM_FILE) {
-			List<SrtmIndexItem> srtms = downloadListIndexThread.getCachedSRTMFiles();
-			for (SrtmIndexItem i : srtms) {
-				((SrtmIndexItem) i).updateExistingTiles(getMyApplication().getResourceManager().getIndexFileNames());
+			if (cachedSRTMFiles != null) {
+				for (SrtmIndexItem i : cachedSRTMFiles) {
+					((SrtmIndexItem) i).updateExistingTiles(getMyApplication().getResourceManager().getIndexFileNames());
+				}
 			}
 			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
 		}
@@ -242,7 +248,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 						filtered.add(fileItem);
 					}
 				}
-				listAdapter.setIndexFiles(filtered);
+				listAdapter.setIndexFiles(filtered, IndexItemCategory.categorizeIndexItems(getClientContext(), filtered));
+				listAdapter.notifyDataSetChanged();
 			} else if (item.getItemId() == DOWNLOAD_FILES_TYPE) {
 				selectDownloadType();
 			} else if(item.getItemId() == DESELECT_ALL_ID){
@@ -289,24 +296,62 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	public void changeType(final DownloadActivityType tp) {
 		if (downloadListIndexThread != null) {
 			type = tp;
-			final List<IndexItem> filtered = getFilteredByType();
-			entriesToDownload.clear();
-			DownloadIndexAdapter a = ((DownloadIndexAdapter) getExpandableListAdapter());
-			a.setIndexFiles(filtered);
-			a.getFilter().filter(filterText.getText());
-			
+			AsyncTask<Void, Void, List<IndexItem>> t = new AsyncTask<Void, Void, List<IndexItem>>(){
+				
+				private List<IndexItemCategory> cats;
+				private ProgressDialog progressDialog;
+
+				@Override
+				protected void onPreExecute() {
+					super.onPreExecute();
+					progressDialog = ProgressDialog.show(DownloadIndexActivity.this,
+							getString(R.string.downloading), getString(R.string.downloading_list_indexes));
+				}
+				@Override
+				protected List<IndexItem> doInBackground(Void... params) {
+					final List<IndexItem> filtered = getFilteredByType();
+					cats = IndexItemCategory.categorizeIndexItems(getClientContext(), filtered);
+					return filtered;
+				}
+				
+				@Override
+				protected void onPostExecute(List<IndexItem> filtered) {
+					entriesToDownload.clear();
+					DownloadIndexAdapter a = ((DownloadIndexAdapter) getExpandableListAdapter());
+					a.setIndexFiles(filtered, cats);
+					a.notifyDataSetChanged();
+					a.getFilter().filter(filterText.getText());
+					progressDialog.dismiss();					
+				}
+				
+			};
+			t.execute();
 		}
 	}
 
 
 	public List<IndexItem> getFilteredByType() {
 		final List<IndexItem> filtered = new ArrayList<IndexItem>();
-		if(type == DownloadActivityType.SRTM_FILE){
-			List<SrtmIndexItem> cached = downloadListIndexThread.getCachedSRTMFiles();
+		if (type == DownloadActivityType.SRTM_FILE) {
 			Map<String, String> indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
-			for(SrtmIndexItem s : cached){
-				s.updateExistingTiles(indexFileNames);
-				filtered.add(s);
+			if (cachedSRTMFiles == null) {
+				cachedSRTMFiles = new ArrayList<SrtmIndexItem>();
+				List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
+				for (RegionCountry rc : countries) {
+					if (rc.tiles.size() > 35) {
+						for (RegionCountry ch : rc.getSubRegions()) {
+							cachedSRTMFiles.add(new SrtmIndexItem(ch, indexFileNames));
+						}
+					} else {
+						cachedSRTMFiles.add(new SrtmIndexItem(rc, indexFileNames));
+					}
+				}
+				filtered.addAll(cachedSRTMFiles);
+			} else {
+				for (SrtmIndexItem s : cachedSRTMFiles) {
+					s.updateExistingTiles(indexFileNames);
+					filtered.add(s);
+				}
 			}
 		}
 		for (IndexItem file : downloadListIndexThread.getCachedIndexFiles()) {
