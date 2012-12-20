@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
@@ -1070,7 +1070,7 @@
     <string name="rendering_attr_noAdminboundaries_name">Skrij upravne meje</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne prikazuj upravnih mej nivojev 5-9</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">Vtičnik OsMoDroid je stare različice in je potreben posodobitve.</string>
-    <string name="osmodroid_plugin_description"/>
+    <string name="osmodroid_plugin_description">Vtičnik OsMoDroid je OsmAnd razširitev za OsModroid aplikacijo za funkcije živega sledenja. Informacije o storitvi dobite na http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Vtičnik OsMoDroid</string>
 	<string name="index_srtm_ele">Izohipse</string>
     <string name="srtm_plugin_description">Ta vtičnik omogoča prenos izohips za posamezna področja in uporabo brez povezave (Podatki brez povezave (prenos) -&gt; meni -&gt; Drugi zemljevidi).</string>
@@ -1117,7 +1117,6 @@
     <string name="av_settings">"Nastavitve za zvok/video "</string>
     <string name="recording_error">"Med snemanjem je prišlo do napake "</string>
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
-    <string name="osmodroid_plugin_description">Vtičnik OsMoDroid je OsmAnd razširitev za OsModroid aplikacijo za funkcije živega sledenja. Informacije o storitvi dobite na http://esya.ru.</string>
     <string name="osmand_srtm_long_description_1000_chars">Ta vtičnik ponuja izohipse, ki jih lahko prikažete v OsmAnd offline zemljevidih. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med Naso, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).</string>
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
     </resources>
