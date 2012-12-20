@@ -1097,8 +1097,8 @@
     <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Offline adat letöltése -&gt; menü - Egyéb térképek) a megadott régiókhoz és használatukat offline térképekkel.</string>
     <string name="srtm_plugin_attribution">Az ASTER a METIS és a NASA terméke</string>
     <string name="osmodroid_plugin_description">Élő útvonalrögzítési szolgáltatást tesz lehetővé. Az OsMoDroid bővítmény használatához telepített OsModroid alkalmazásra van szükség. További információk: http://esya.ru</string>
-    <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg a stop gombot.</string>
-    <string name="recording_playing">A megadott hangfelvétel lejátszása elindult.\n%1$s</string>
+    <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg a vezérlő stop gombját.</string>
+    <string name="recording_playing">A hangfelvétel lejátszása elindult…\n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
     <string name="recording_delete_confirm">Szeretnéd törölni a felvételt?</string>
     <string name="tip_recent_changes_1_1_0_t">"Az 1.1.0 kiadás újdonságai:
@@ -1116,7 +1116,7 @@
     <string name="map_widget_av_notes">Hangjegyzetek</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd bővítmény offline szintvonalakhoz</string>
     <string name="use_clear_distance_measurement">Kattints még egyszer a mérési pontok törléséhez.</string>
-    <string name="use_distance_measurement">Pont készítéséhez kattints hosszan és törlődik az előző pont. Kilépés a mérés gombra kattintva.</string>
+    <string name="use_distance_measurement">Pont készítéséhez kattints hosszan és törlődik az előző pont. Kilépés a vezérlő mérés gombjára kattintva.</string>
     <string name="map_widget_distancemeasurement">Távolságmérés</string>
     <string name="audionotes_plugin_description">Hangjegyzetek készítése utazás közben</string>
     <string name="av_def_action_video">Videofelvétel</string>
@@ -1131,7 +1131,7 @@
     <string name="recording_camera_not_available">A kamera nem elérhető</string>
     <string name="av_control_stop">stop</string>
     <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény szintvonalakat szolgáltat, amik az OsmAndban offline térképként megjeleníthetőek. A globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, ami a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági Minisztérium, a Trade and Industry (METI) és a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
-    <string name="av_widget_action_descr">Válassz alapértelmezett modulműködési módot</string>
-    <string name="av_widget_action">Alapértelmezett modulműködési mód</string>
+    <string name="av_widget_action_descr">Válassz alapértelmezett vezérlőműködési módot</string>
+    <string name="av_widget_action">Alapértelmezett vezérlőműködési mód</string>
     <string name="recording_description">Felvétel %1$s %2$s dátum: %3$s</string>
     </resources>
