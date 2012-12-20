@@ -72,6 +72,7 @@ public class RoutingHelper {
 	private Handler uiHandler;
 	private boolean makeUturnWhenPossible = false;
 	private long makeUTwpDetected = 0;
+	//private long wrongMovementDetected = 0;
 
 	private ProgressBar progress;
 	private Handler progressHandler;
@@ -225,7 +226,7 @@ public class RoutingHelper {
 						calculateRoute = true;
 					}
 				}
-				// 3. Identify wrong movement direction (very similar to 2?)
+				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
 				if (wrongMovementDirection && currentLocation.distanceTo(routeNodes.get(currentRoute)) >  2 * posTolerance) {
@@ -236,7 +237,7 @@ public class RoutingHelper {
 				boolean uTurnIsNeeded = identifyUTurnIsNeeded(currentLocation, posTolerance);
 				// 5. Update Voice router
 				boolean inRecalc = calculateRoute || isRouteBeingCalculated();
-				if (!inRecalc && !uTurnIsNeeded) {
+				if (!inRecalc && !uTurnIsNeeded && !wrongMovementDirection) {
 					voiceRouter.updateStatus(currentLocation);
 				} else if (uTurnIsNeeded) {
 					voiceRouter.makeUTStatus();
@@ -399,14 +400,14 @@ public class RoutingHelper {
 			Location nextRoutePosition = route.getNextRouteLocation();
 			float bearingToRoute = currentLocation.bearingTo(nextRoutePosition);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
-			// 7. Check necessity for unscheduled U-turn, Issue 863
+			// 7. Check if you left the route and an unscheduled U-turn would bring you back (also Issue 863)
 			if (Math.abs(diff) > 135f) {
 				float d = currentLocation.distanceTo(nextRoutePosition);
 				// 60m tolerance to allow for GPS inaccuracy
 				if (d > posTolerance) {
+					// require 5 sec since first detection, to avoid false positive announcements
 					if (makeUTwpDetected == 0) {
 						makeUTwpDetected = System.currentTimeMillis();
-						// require 5 sec since first detection, to avoid false positive announcements
 					} else if ((System.currentTimeMillis() - makeUTwpDetected > 5000)) {
 						makeUturnWhenPossible = true;
 						//log.info("bearingMotion is opposite to bearingRoute"); //$NON-NLS-1$
@@ -424,7 +425,7 @@ public class RoutingHelper {
 	 * Wrong movement direction is considered when between 
 	 * current location bearing (determines by 2 last fixed position or provided)
 	 * and bearing from currentLocation to next (current) point
-	 * the difference is more than 90 degrees
+	 * the difference is more than 60 degrees
 	 */
 	public boolean checkWrongMovementDirection(Location currentLocation, Location nextRouteLocation) {
 		// measuring without bearing could be really error prone (with last fixed location)
@@ -434,9 +435,19 @@ public class RoutingHelper {
 			float bearingToRoute = currentLocation.bearingTo(nextRouteLocation);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
 			if (Math.abs(diff) > 60f) {
-				return true;
+				// require delay interval since first detection, to avoid false positive
+				//but leave out for now, as late detection is worse than false positive (it may reset voice router then cause bogus turn and u-turn prompting)
+				//if (wrongMovementDetected == 0) {
+				//	wrongMovementDetected = System.currentTimeMillis();
+				//} else if ((System.currentTimeMillis() - wrongMovementDetected > 500)) {
+					return true;
+				//}
+			} else {
+				//wrongMovementDetected = 0;
+				return false;
 			}
 		}
+		//wrongMovementDetected = 0;
 		return false;
 	}
 
@@ -466,8 +477,7 @@ public class RoutingHelper {
 			}
 
 			
-			// trigger voice prompt only if new route is in forward direction (but see also additional 60sec timer for this message in
-			// voiceRouter)
+			// trigger voice prompt only if new route is in forward direction
 			// If route is in wrong direction after one more setLocation it will be recalculated
 			if (!wrongMovementDirection || newRoute) {
 				voiceRouter.newRouteIsCalculated(newRoute);
