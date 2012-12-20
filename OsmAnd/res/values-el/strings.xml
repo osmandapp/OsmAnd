@@ -1154,4 +1154,5 @@
     <string name="av_video_format">Μορφή εξόδου εικόνας</string>
     <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για την εικόνα</string>
     <string name="use_distance_measurement">Αγγίξτε για δημιουργία σημείου, πιέστε και κρατήστε για διαγραφή προηγούμενου σημείου, κλικ στο γραφικό στοιχείο μέτρησης για έξοδο.</string>
+    <string name="av_settings_descr">Διαμόρφωση ρυθμίσεων ήχου και εικόνας</string>
     </resources>
