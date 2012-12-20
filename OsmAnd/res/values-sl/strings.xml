@@ -188,7 +188,7 @@
 \n\t* Informacije o omejitvah hitrosti, radarjih in ležečih policajih
 \n\t* Izboljšano glasovno vodenje na cestah
 \n\t* Vtičnik za parkiranje (\'Kje je moj avto parkiran?\')
-\n\t* Gradnik za omogočenje/onemogočenje beleženja "</string>
+\n\t* Pripomoček za vklop/izklop beleženja "</string>
 	<string name="global_app_allocated_memory_descr">Uporabljen pomnilnik %1$s MB (Android %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
 	<string name="starting_point_too_far">Izhodišče predaleč od najbližje ceste.</string>
@@ -353,8 +353,8 @@
 	<string name="avoid_in_routing_descr">Izogibanje cestnin, makadama, trajektov</string>
 	<string name="tip_recent_changes_0_8_2_t">"Spremembe v 0.8.2:
 \n\t* Izboljšano usmerjanje
-\n\t* Dinamičnen zemljevid (widget)
-\n\t* Nastavitve karte prestavljene v karto
+\n\t* Pripomoček za dinamični zemljevid
+\n\t* Nastavitve zemljevida prestavljene v okno zemljevida
 \n\t* Zaklepanje zaslona s storitvijo sledenja lokacije
 \n\t* Popravljeni jeziki arabščina, Kannada skripte in RTL jeziki "</string>
 	<string name="map_widget_fluorescent">Fluorescentne poti</string>
@@ -1100,9 +1100,24 @@
     <string name="recording_context_menu_vrecord">Posnemi video zapis</string>
     <string name="recording_can_not_be_played">Posnetka ni mogoče predvajati</string>
     <string name="recording_context_menu_delete">Zbriši posnetek</string>
-    <string name="recording_is_recorded">Zvok/video se snema. Za ustavitev pritisnite gumb ustavi na gradniku.</string>
+    <string name="recording_is_recorded">Zvok/video se snema. Za ustavitev pritisnite gumb ustavi na pripomočku.</string>
     <string name="layer_recordings">Plast posnetkov</string>
     <string name="av_control_start">snemaj</string>
     <string name="osmand_distance_plugin_description">Merjenje razdalje med dvema ali več točkami. Dodajte točke s kratkim klikom in odstranite jih z dolgim pritiskom.</string>
-    <string name="use_distance_measurement">Pritisnite za dodati točko, pritisnite in držite za izbrisati prejšnjo točko, kliknite na gradnik za merjenje za izhod.</string>
+    <string name="use_distance_measurement">Pritisnite za dodati točko, pritisnite in držite za izbrisati prejšnjo točko, kliknite na pripomoček za merjenje za izhod.</string>
+    <string name="av_def_action_video">Snemanje videa</string>
+    <string name="av_def_action_audio">Snemanje zvoka</string>
+    <string name="av_widget_action_descr">Izberite privzeto dejanje za pripomoček</string>
+    <string name="av_widget_action">Privzeto dejanje za pripomoček</string>
+    <string name="av_video_format_descr">Izberite format za video</string>
+    <string name="av_video_format">Format za video</string>
+    <string name="av_use_external_recorder_descr">Uporabi sistemski snemalnik za video</string>
+    <string name="av_use_external_recorder">Uporabi zunanji snemalnik</string>
+    <string name="av_settings_descr">Konfiguracija nastavitev za zvok in video</string>
+    <string name="av_settings">"Nastavitve za zvok/video "</string>
+    <string name="recording_error">"Med snemanjem je prišlo do napake "</string>
+    <string name="recording_camera_not_available">Kamera ni na voljo</string>
+    <string name="osmodroid_plugin_description">Vtičnik OsMoDroid je OsmAnd razširitev za OsModroid aplikacijo za funkcije živega sledenja. Informacije o storitvi dobite na http://esya.ru.</string>
+    <string name="osmand_srtm_long_description_1000_chars">Ta vtičnik ponuja izohipse, ki jih lahko prikažete v OsmAnd offline zemljevidih. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med Naso, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).</string>
+    <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
     </resources>
