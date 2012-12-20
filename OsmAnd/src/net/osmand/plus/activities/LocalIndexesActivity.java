@@ -183,9 +183,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		final List<Integer> menu = new ArrayList<Integer>();
 		if(info.getType() == LocalIndexType.GPX_DATA){
 			menu.add(R.string.show_gpx_route);
-//			if(OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) instanceof OsmandDevelopmentPlugin) {
+			if(OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
 				menu.add(R.string.local_index_mi_upload_gpx);
-//			}
+			}
 			descriptionLoader = new LoadLocalIndexDescriptionTask();
 			descriptionLoader.execute(info);
 		}
