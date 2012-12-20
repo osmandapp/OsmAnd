@@ -546,15 +546,29 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				msg.setPositiveButton(R.string.default_buttons_ok, null);
 				msg.show();
 			} else {
-				downloadFilesPreCheckSpace( list);
+				downloadFilesPreCheckSRTM( list);
 			}
 		} else {
-			downloadFilesPreCheckSpace( list);
+			downloadFilesPreCheckSRTM( list);
 		}
 	}
 	
-	protected void downloadFilesPreCheckSRTM(List<DownloadEntry> list) {
-		
+	protected void downloadFilesPreCheckSRTM(final List<DownloadEntry> list) {
+		if (type == DownloadActivityType.SRTM_FILE) {
+			Builder msg = new AlertDialog.Builder(this);
+			msg.setTitle(R.string.srtm_paid_version_title);
+			msg.setMessage(getString(R.string.srtm_paid_version_msg));
+			msg.setPositiveButton(R.string.default_buttons_ok, new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					downloadFilesPreCheckSpace(list);
+				}
+			});
+			msg.show();
+		} else {
+			downloadFilesPreCheckSpace(list);
+		}
 	}
 	
 	protected void downloadFilesPreCheckSpace(List<DownloadEntry> list) {

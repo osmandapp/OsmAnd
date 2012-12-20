@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin on the Market to support file hosting and further development.</string>
+    <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Select default widget action</string>
