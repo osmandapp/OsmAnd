@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="no_buildings_found">Здания не найдены.</string>
     <string name="incremental_search_city">Выберите город.</string>
@@ -1128,4 +1128,5 @@
     <string name="monitoring_control_start">старт</string>
     <string name="download_select_map_types">Прочие карты</string>
     <string name="download_srtm_maps">Карты SRTM</string>
+    <string name="av_settings">Настройки аудио и видео</string>
     </resources>
