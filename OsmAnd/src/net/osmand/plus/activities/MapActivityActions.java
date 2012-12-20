@@ -5,9 +5,13 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import com.ibm.icu.text.Collator;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -199,7 +203,15 @@ public class MapActivityActions implements DialogProvider {
 
 	protected Dialog createReplaceFavouriteDialog(final Bundle args) {
 		final FavouritesDbHelper helper = getMyApplication().getFavorites();
-		final Collection<FavouritePoint> points = helper.getFavouritePoints();
+		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
+		final Collator ci = Collator.getInstance();
+		Collections.sort(points, new Comparator<FavouritePoint>() {
+
+			@Override
+			public int compare(FavouritePoint object1, FavouritePoint object2) {
+				return ci.compare(object1.getName(), object2.getName());
+			}
+		});
 		final String[] names = new String[points.size()];
 		if(names.length == 0){
 			AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
