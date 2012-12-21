@@ -229,7 +229,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				for (int j = 0; j < listAdapter.getGroupCount(); j++) {
 					for (int i = 0; i < listAdapter.getChildrenCount(j); i++) {
 						IndexItem es = listAdapter.getChild(j, i);
-						if (!entriesToDownload.containsKey(es.getFileName())) {
+						if (!entriesToDownload.containsKey(es)) {
 							selected++;
 							entriesToDownload.put(es, es.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>(1)));
 						}
