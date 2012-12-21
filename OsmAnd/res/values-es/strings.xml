@@ -1040,7 +1040,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\tUna mejor aproximación a estos sistemas locales es la referencia EGM96. OsmAnd también soporta ahora la visualización automática de altitud en el sistema EGM96.
 \n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
-    <string name="monitoring_control_start">Empezar</string>
+    <string name="monitoring_control_start">Traza</string>
     <string name="tip_altitude_offset">Mostrar Altitud - Corrección</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
@@ -1049,13 +1049,13 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmodroid_plugin_name">Extra OsMoDroid</string>
 	<string name="index_srtm_parts">piezas</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
-    <string name="srtm_plugin_description">Este extra permite descargar las curvas de nivel (Descargar mapas -&gt; Menú -&gt; Otros mapas) para la región específica y usarlas con los mapas descargados.</string>
+    <string name="srtm_plugin_description">Este extra permite descargar las curvas de nivel (Datos descargados -&gt; Descargar... -&gt; Menú -&gt; Otros mapas) para la región específica y usarlas con los mapas descargados.</string>
     <string name="srtm_plugin_name">Extra SRTM</string>
     <string name="download_select_map_types">Otros mapas</string>
     <string name="download_srtm_maps">Mapas SRTM</string>
     <string name="osmand_distance_plugin_description">Mide una distancia entre dos puntos. Tienes que especificar el origen / destino / borra la medida con una pulsación larga.</string>
 	<string name="osmand_distance_plugin_name">Calculadora de distancia</string>
-<string name="audionotes_plugin_description">Descripción del extra de notas de audio</string>
+<string name="audionotes_plugin_description">Toma notas de audio durante el viaje</string>
     <string name="audionotes_plugin_name">Extra de notas de audio</string>
     <string name="osmand_srtm_short_description_80_chars">Extra de OsmAnd para curvas de nivel sin conexión</string>
     <string name="osmand_srtm_long_description_1000_chars">Este extra proporciona curvas de nivel que se pueden visualizar en mapas descargados de OsmAnd. Los datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones realizadas por SRTM (Shuttle Radar Topography Mission, Misión de Topografía por Radar desde Transbordador) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
@@ -1066,7 +1066,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="monitoring_control_stop">parar</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
-    <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Parar del mecanismo.</string>
+    <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Quieres eliminar esta grabación?</string>
     <string name="recording_unavailable">no disponible</string>
@@ -1077,8 +1077,8 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_context_menu_delete">Eliminar grabación</string>
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_default_name">grabación</string>
-    <string name="av_control_stop">Parar</string>
-    <string name="av_control_start">Grabar</string>
+    <string name="av_control_stop">Para</string>
+    <string name="av_control_start">A/V</string>
     <string name="map_widget_av_notes">Notas de audio</string>
     <string name="av_def_action_video">Grabar vídeo</string>
     <string name="av_def_action_audio">Grabar audio</string>
@@ -1094,7 +1094,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_camera_not_available">La cámara no está disponible</string>
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de tour\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
-    <string name="recording_description">Grabando %1$s %2$s en %3$s</string>
+    <string name="recording_description">Grabado %1$s %2$s en %3$s</string>
     <string name="srtm_paid_version_msg">Por favor, considera la compra del extra de curvas de nivel en el Market para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Extra de curvas de nivel</string>
     </resources>
