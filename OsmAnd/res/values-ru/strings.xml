@@ -1,5 +1,69 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+    <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -> Меню -> "Другие карты") для использование в оффлайн режиме.</string>
+    <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
+    <string name="srtm_paid_version_title">Линии высот</string>
+    <string name="av_def_action_video">Запись видео</string>
+    <string name="av_def_action_audio">Запись аудио</string>
+    <string name="av_widget_action_descr">Действие для виджета по умолчанию</string>
+    <string name="av_widget_action">Действие для виджета</string>
+    <string name="av_video_format_descr">Выберите видео формат</string>
+    <string name="av_video_format">Видео формат</string>
+    <string name="av_use_external_recorder_descr">Использовать системную программу для записи видео</string>
+    <string name="av_use_external_recorder">Использовать внешнюю программу</string>
+    <string name="av_settings_descr">Настройки аудио-видео записи</string>
+    <string name="recording_error">Ошибка во время записи </string>
+    <string name="recording_camera_not_available">Камера не доступна</string>
+    <string name="recording_is_recorded">Аудио-видео записывается. Для остановки нажмите \"стоп\".</string>
+    <string name="recording_playing">Проигрывается аудио.\n%1$s</string>
+    <string name="recording_open_external_player">Открыть внешний плеер</string>
+    <string name="recording_delete_confirm">Вы хотите удалить данную запись?</string>
+    <string name="tip_recent_changes_1_1_0_t">Изменения в 1.1.0 :
+		\n\t* Калькулятор расстояний (плагин)
+		\n\t* Аудио-видео заметки (плагин)
+		\n\t* Линии высот (плагин)
+		\n\t* Исправление ошибок
+		\n\t* EGM96 коррекция для GPS высот
+    </string>
+    <string name="recording_unavailable">недоступно</string>
+    <string name="recording_context_menu_arecord">Сделать аудио заметку</string>
+    <string name="recording_context_menu_vrecord">Сделать видео заметку</string>
+    <string name="layer_recordings">Слой аудио записей</string>
+    <string name="recording_can_not_be_played">Запись не может быть проиграна</string>
+    <string name="recording_context_menu_delete">Удалить запись</string>
+    <string name="recording_context_menu_play">Проиграть</string>
+    <string name="recording_description">Запись %1$s %2$s at %3$s</string>
+    <string name="recording_default_name">запись</string>
+    <string name="av_control_stop">стоп</string>
+    <string name="av_control_start">запись</string>
+    <string name="map_widget_av_notes">Аудио заметки</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd плагин для линий высот</string>
+    
+    <string name="osmand_distance_plugin_description">Вычисляет расстояние на карте для 2 и более точек. Добавляйте точки коротким нажатием и удаляйте долгим.</string>
+    <string name="osmand_distance_plugin_name">Калькулятор растоянний</string>
+    <string name="use_clear_distance_measurement">Нажмите еще раз, чтобы очистить карту от точек.</string>
+    <string name="use_distance_measurement">Добавляйте точки коротким нажатием и удаляйте долгим, нажмите на виджет, чтобы выйти из режима редактирования точек.</string>
+    <string name="map_widget_distancemeasurement">Измерение расстояний</string>
+    <string name="audionotes_location_not_defined">Текущее местоположение для заметки еще не определено. Используйте контекстное меню для привязки заметки к определенной точке.</string>
+    <string name="monitoring_control_stop">стоп</string>
+    <string name="map_widget_audionotes">Аудио заметки</string>
+    <string name="audionotes_plugin_description">Делайте аудио-видео заметки во время путешествия</string>
+    <string name="audionotes_plugin_name">Аудио-видео заметки</string>
+    <string name="index_srtm_parts">частей</string>
+    <string name="index_srtm_ele">Линии высот</string>
+    
+    <string name="srtm_plugin_name">Плагин линий высот</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
+	<string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid плагин имеет устаревшую версию и должен быть обновлен.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid плагин - это расширение для OsmAnd используещее OsModroid приложение для слежения. Информация о сервисе доступна на сайте http://esya.ru.</string>
+    <string name="osmodroid_plugin_name">OsMoDroid плагин</string>
+	<string name="tip_altitude_offset">Показ высоты - коррекция</string>
+	<string name="tip_altitude_offset_t">\tБольшинство GPS устройств показывает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
+		\n\tЧтобы получить достоверные данные необходимо загрузить WW15MGH.DAC через менеджер загрузок (оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+	</string>
+    
     <string name="no_buildings_found">Здания не найдены.</string>
     <string name="incremental_search_city">Выберите город.</string>
     <string name="search_villages_and_postcodes">Поиск по деревням и почт. индексу</string>
@@ -1036,7 +1100,6 @@
     <string name="route_descr_from_to_via">Из : %1$s Через : %2$s До : %3$s</string>
     <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
 	<string name="incomplete_locale">незавершенное</string>
-	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
 	<string name="map_widget_max_speed">Ограничение скорости</string>
     <string name="monitoring_control_start">старт</string>
     <string name="download_select_map_types">Прочие карты</string>
