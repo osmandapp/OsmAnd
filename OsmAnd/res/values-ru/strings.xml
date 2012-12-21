@@ -1128,5 +1128,8 @@
     <string name="monitoring_control_start">старт</string>
     <string name="download_select_map_types">Прочие карты</string>
     <string name="download_srtm_maps">Карты SRTM</string>
-    <string name="av_settings">Настройки аудио и видео</string>
+    <string name="av_settings">"Настройки аудио и видео "</string>
+    <string name="av_settings_descr">Настройки аудио-видео записи</string>
+    <string name="av_use_external_recorder">Использовать внешнюю программу</string>
+    <string name="av_video_format">Видео формат</string>
     </resources>
