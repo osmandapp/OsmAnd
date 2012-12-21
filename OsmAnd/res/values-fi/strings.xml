@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
@@ -625,4 +625,21 @@
 	<string name="search_poi_filter">Suodatin</string>
 	<string name="failed_op">epäonnistui</string>
 	<string name="error_calculating_route_occured">Tapahtui virhe laskettaessa reittiä</string>
-	</resources>
+	<string name="osmand_distance_plugin_description">Mittaa etäisyyden kahden tai useamman pisteen välillä. Lisää pisteitä lyhyellä painalluksella, poista pitkällä.</string>
+    <string name="osmand_distance_plugin_name">Etäisyyslaskuri</string>
+    <string name="use_clear_distance_measurement">Paina vielä kerran nollataksesi mittauspisteet.</string>
+    <string name="map_widget_distancemeasurement">Etäisyyden mittaus</string>
+    <string name="download_select_map_types">Muut kartat</string>
+    <string name="map_settings_descr">Karttanäytön asetukset</string>
+	<string name="av_def_action_video">Tallenna videota</string>
+    <string name="av_def_action_audio">Tallenna ääntä</string>
+    <string name="av_video_format_descr">Valitse videon tallennusformaatti</string>
+    <string name="av_video_format">Videon tallennusformaatti</string>
+    <string name="av_use_external_recorder">Käytä ulkoista nauhoitinta</string>
+    <string name="av_settings_descr">Muuta ääni- ja videoasetuksia</string>
+    <string name="av_settings">"Ääni/video asetukset "</string>
+    <string name="recording_error">"Tapahtui virhe nauhoituksen aikana "</string>
+    <string name="recording_camera_not_available">Kamera ei ole saatavilla</string>
+    <string name="recording_open_external_player">Avaa ulkoinen soitin</string>
+    <string name="recording_delete_confirm">Haluatko poistaa tämän nauhoituksen?</string>
+    </resources>
