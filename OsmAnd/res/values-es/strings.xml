@@ -1095,4 +1095,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_playing">Reproduciendo audio de la grabación especificada.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Cambios en versión 1.1.0 :\n\t* Extra de cálculo de distancia\n\t* Extra de notas de audio\n\t* Extra de curvas de nivel\n\t* Corrección de errores\n\t* Opción de estilo de mapas \'Vista de tour\' con más detalles de mapa, nuevos estilos de carreteras, más contraste y opción para travesías alpinas (escala SAC)\n\t* Correción de desplazamiento del geoide EGM96 para lecturas GPS de altitud "</string>
     <string name="recording_description">Grabando %1$s %2$s en %3$s</string>
+    <string name="srtm_paid_version_msg">Por favor, considera la compra del extra de curvas de nivel en el Market para apoyar desarrollos adicionales.</string>
+    <string name="srtm_paid_version_title">Extra de curvas de nivel</string>
     </resources>
