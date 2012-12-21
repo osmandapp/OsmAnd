@@ -1134,4 +1134,6 @@
     <string name="av_widget_action_descr">Válassz alapértelmezett vezérlőműködési módot</string>
     <string name="av_widget_action">Alapértelmezett vezérlőműködési mód</string>
     <string name="recording_description">Felvétel %1$s %2$s dátum: %3$s</string>
+    <string name="srtm_paid_version_msg">Kérlek fontold meg a Szintvonalak bővítmény megvásárlását a Play Store-ban, ezzel támogatva a további fejlesztéseket.</string>
+    <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
     </resources>
