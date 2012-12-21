@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="bidforfix_loading">Ladataan</string>
-    <string name="bidforfix_supporters">%1$d Tukijat</string>
+    <string name="bidforfix_supporters">%1$d Tukijaa</string>
 	<string name="bidforfix_funded">rahoitettu: %d%%</string>    
 </resources>
