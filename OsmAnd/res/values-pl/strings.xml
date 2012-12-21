@@ -1107,4 +1107,6 @@
     <string name="map_widget_av_notes">Notatki audio</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd dla konturów offline</string>
     <string name="use_clear_distance_measurement">Kliknij ponownie aby wyczyścić punkty pomiarów.</string>
+    <string name="use_distance_measurement">Kliknij aby zaznaczyć punkt, naciśnij i przytrzymaj aby usunąć poprzedni punkt, kliknij na widżecie pomiarów aby wyjść.</string>
+    <string name="map_widget_distancemeasurement">Pomiar odległości</string>
     </resources>
