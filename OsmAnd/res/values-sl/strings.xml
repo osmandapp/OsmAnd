@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
@@ -1119,4 +1119,6 @@
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
     <string name="osmand_srtm_long_description_1000_chars">Ta vtičnik ponuja izohipse, ki jih lahko prikažete v OsmAnd offline zemljevidih. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med Naso, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).</string>
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
+    <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse na Marketu, da podprete nadaljnji razvoj.</string>
+    <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
     </resources>
