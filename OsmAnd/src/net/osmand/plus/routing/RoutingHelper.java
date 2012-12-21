@@ -401,14 +401,15 @@ public class RoutingHelper {
 			float bearingToRoute = currentLocation.bearingTo(nextRoutePosition);
 			double diff = MapUtils.degreesDiff(bearingMotion, bearingToRoute);
 			// 7. Check if you left the route and an unscheduled U-turn would bring you back (also Issue 863)
+			// This prompt is an interim advice and does only sound if a new route in forward direction could not be found in x seconds
 			if (Math.abs(diff) > 135f) {
 				float d = currentLocation.distanceTo(nextRoutePosition);
 				// 60m tolerance to allow for GPS inaccuracy
 				if (d > posTolerance) {
-					// require 5 sec since first detection, to avoid false positive announcements
+					// require x sec continuous since first detection
 					if (makeUTwpDetected == 0) {
 						makeUTwpDetected = System.currentTimeMillis();
-					} else if ((System.currentTimeMillis() - makeUTwpDetected > 5000)) {
+					} else if ((System.currentTimeMillis() - makeUTwpDetected > 10000)) {
 						makeUturnWhenPossible = true;
 						//log.info("bearingMotion is opposite to bearingRoute"); //$NON-NLS-1$
 					}
