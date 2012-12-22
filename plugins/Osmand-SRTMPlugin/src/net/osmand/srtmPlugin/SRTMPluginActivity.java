@@ -1,5 +1,6 @@
 package net.osmand.srtmPlugin;
 
+import net.osmand.srtmPlugin.paid.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
