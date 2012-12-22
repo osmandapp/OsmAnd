@@ -1105,20 +1105,4 @@
     <string name="download_select_map_types">Прочие карты</string>
     <string name="download_srtm_maps">Карты SRTM</string>
     <string name="av_settings">Настройки аудио и видео</string>
-    <string name="av_settings_descr">Настройки аудио-видео записи</string>
-    <string name="av_use_external_recorder">Использовать внешнюю программу</string>
-    <string name="av_video_format">Выходной формат видео</string>
-    <string name="av_def_action_video">Запись видео</string>
-    <string name="av_video_format_descr">Выбрать выходной формат видео</string>
-    <string name="av_use_external_recorder_descr">Использовать системное приложение для записи видео</string>
-    <string name="recording_camera_not_available">Камера недоступна</string>
-    <string name="tip_recent_changes_1_1_0_t">"Изменения в версии 1.1.0 :
-\n\t* Плагин измерения расстояний
-\n\t* Плагин аудиозаметок
-\n\t* Плагин горизонталей
-\n\t* Bug fixes
-\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
-\n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
-    <string name="recording_context_menu_delete">Удалить запись</string>
-    <string name="av_control_stop">стоп</string>
     </resources>
