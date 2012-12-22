@@ -1170,4 +1170,18 @@
     <string name="use_distance_measurement">Click pentru a stabili un punct, apăsați prelung pentru șterge punctul anterior, click pe icoana de măsurare a distanței pentru ieșire.</string>
     <string name="map_widget_distancemeasurement">Măsurarea distanței</string>
     <string name="recording_context_menu_play">Play</string>
+    <string name="srtm_paid_version_msg">Vă rugăm să aveți în vedere achiziționarea plugin-ului pentru liniile de nivel de la Market pentru susținerea dezvoltării acestuia.</string>
+    <string name="srtm_paid_version_title">Plugin linii de nivel</string>
+    <string name="av_def_action_video">Înregistrare video</string>
+    <string name="av_def_action_audio">Înregistrare audio</string>
+    <string name="av_widget_action_descr">Selectați acțiunea implicită a iconiței</string>
+    <string name="av_widget_action">Acțiune implicită iconiță</string>
+    <string name="av_video_format_descr">Selectați formatul video</string>
+    <string name="av_video_format">Format video</string>
+    <string name="av_use_external_recorder_descr">Folosește aplicația sistemului pt înregistrare video</string>
+    <string name="av_use_external_recorder">Folosește aplicație externă pentru înregistrare</string>
+    <string name="av_settings_descr">Configurarea setărilor audio și video</string>
+    <string name="av_settings">Setări audio/video</string>
+    <string name="recording_error">Eroare la înregistrare</string>
+    <string name="recording_camera_not_available">Camera video nu este disponibilă</string>
     </resources>
