@@ -1040,7 +1040,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 \n\tUna mejor aproximación a estos sistemas locales es la referencia EGM96. OsmAnd también soporta ahora la visualización automática de altitud en el sistema EGM96.
 \n\tPara ello, simplemente descarga el archivo WW15MGH.DAC mediante el Gestor de datos (el original está en http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="map_widget_max_speed">Límite de velocidad</string>
-    <string name="monitoring_control_start">Traza</string>
+    <string name="monitoring_control_start">Inicio</string>
     <string name="tip_altitude_offset">Mostrar Altitud - Corrección</string>
 	<string name="rendering_attr_noAdminboundaries_name">Ocultar fronteras</string>
 	<string name="rendering_attr_noAdminboundaries_description">Evita mostrar las fronteras regionales (niveles administrativos 5-9)</string>
