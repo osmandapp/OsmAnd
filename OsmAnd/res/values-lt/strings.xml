@@ -1213,4 +1213,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="av_control_start">įraš</string>
     <string name="map_widget_av_notes">Audio užrašai</string>
     <string name="av_control_stop">stabd</string>
+    <string name="srtm_paid_version_msg">Prašome pirkti kontūrinių linijų įskiepį Android Play parduotuvėje. Taip paremsite tolesnį programos vystymą.</string>
+    <string name="srtm_paid_version_title">Kontūrinių linijų įskiepis</string>
     </resources>
