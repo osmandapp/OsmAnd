@@ -1206,6 +1206,6 @@
     <string name="av_control_stop">ferma</string>
     <string name="av_control_start">registra</string>
     <string name="map_widget_av_notes">Note audio</string>
-    <string name="srtm_paid_version_msg">Per favore valutate l\'acquisto sul Market del Plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
+    <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del Plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee di livello</string>
     </resources>
