@@ -614,12 +614,15 @@ public class MapInfoLayer extends OsmandMapLayer {
 			int boxTopR;
 			int boxTopL;
 			int expand;
+			Drawable boxFree = view.getResources().getDrawable(R.drawable.box_free_simple);
+			
 			if (nightMode) {
 				boxTop = R.drawable.box_top_n;
 				boxTopStack = R.drawable.box_top_n_stack;
 				boxTopR = R.drawable.box_top_rn;
 				boxTopL = R.drawable.box_top_ln;
 				expand = R.drawable.box_expand_t;
+				boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
 			} else if (transparent) {
 				boxTop = R.drawable.box_top_t;
 				boxTopStack = R.drawable.box_top_t_stack;
@@ -633,6 +636,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boxTopL = R.drawable.box_top_l;
 				expand = R.drawable.box_expand;
 			}
+			alarmControl.setBackgroundDrawable(boxFree);
 			rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
 			rightStack.setStackDrawable(boxTopStack);
 

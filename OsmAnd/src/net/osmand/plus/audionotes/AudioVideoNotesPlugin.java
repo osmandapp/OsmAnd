@@ -46,6 +46,7 @@ import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
 import android.text.format.DateFormat;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -514,6 +515,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if(requestCode == 205) {
 			indexingFiles(null);
 		}
+	}
+	
+	public boolean onMapActivityKeyEvent(KeyEvent key){
+		if(KeyEvent.KEYCODE_CAMERA == key.getKeyCode()) {
+			// TODO;
+			return true;
+		}
+		return false;
 	}
 
 }

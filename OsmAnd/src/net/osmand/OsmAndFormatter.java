@@ -102,7 +102,7 @@ public class OsmAndFormatter {
 		float kmh = metersperseconds * 3.6f;
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
 			if (kmh >= 15 || (am == ApplicationMode.CAR)) {
-				return ((int) kmh) + " " + ctx.getString(R.string.km_h);
+				return ((int) Math.round(kmh)) + " " + ctx.getString(R.string.km_h);
 			}
 			int kmh10 = (int) (kmh * 10f);
 			if (kmh10 % 10 == 0) {
@@ -113,7 +113,7 @@ public class OsmAndFormatter {
 		} else {
 			float mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE;
 			if (mph >= 10) {
-				return ((int) (mph)) + " " + ctx.getString(R.string.mile_per_hour);
+				return ((int) Math.round(mph)) + " " + ctx.getString(R.string.mile_per_hour);
 			} else {
 				int mph10 = (int) (mph * 10f);
 				if(mph10 % 10 == 0) {
