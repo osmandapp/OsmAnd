@@ -677,7 +677,7 @@
   <string name="search_activity">Ricerca</string>
   <string name="searchpoi_activity">Scegli PDI</string>
   <string name="search_POI_level_btn">Trovarne altri</string>
-  <string name="incremental_search_city">Cerca la città in modo incrementale</string>
+  <string name="incremental_search_city">Ricerca incrementale della città</string>
   <string name="incremental_search_street">Ricerca strada in modo incrementale</string>
   <string name="incremental_search_building">Ricerca civico in modo incrementale</string>
   <string name="choose_available_region">Scegli il Paese dalla lista</string>
@@ -1088,15 +1088,15 @@
 \n\t- allineamento della mappa in base alla direzione o alla bussola
 \n\t- opzionali indicazione di corsia, indicazione del limite di velocità, voci registrate e TTS "</string>
 <string name="tip_recent_changes_0_8_3_t">"Cambiamenti nella 0.8.3:
-\n\t* Waypoints\n\t* Migliorata la guida dell\'itinerario
+\n\t* Punti intermedi\n\t* Migliorata la guida dell\'itinerario
 \n\t* Aggiunto un\'impostazione che nelle pianificazione dell\'itinerario permette di evitare le autostrade
-\n\t* Aggiunto alla mappa un ulteriore tipo di strada per le bicilette (Cycleway=track)
+\n\t* Aggiunto alla mappa un ulteriore tipo di strada per le biciclette (Cycleway=track)
 \n\t* Alcune correzioni di errori "</string>
 <string name="snap_to_road_descr">Blocca la posizione sulle strade durante la navigazione</string>
 <string name="snap_to_road">Blocca sulle strade</string>
 <string name="avoid_motorway">Evita le autostrade</string>
-<string name="intermediate_point_too_far">Punto intermedio %1$s è troppo lontano dalla strada più vicina.</string>
-<string name="arrived_at_intermediate_point">Sei arrivato al punto intermedio</string>
+<string name="intermediate_point_too_far">Il punto intermedio %1$s è troppo lontano dalla strada più vicina.</string>
+<string name="arrived_at_intermediate_point">Sei arrivato al tuo punto intermedio</string>
 <string name="context_menu_item_intermediate_point">Aggiungi come punto intermedio</string>
 <string name="map_widget_intermediate_distance">Punto intermedio</string>
 <string name="ending_point_too_far">Punto finale troppo distante dalla strada più vicina.</string>
@@ -1110,39 +1110,39 @@
 <string name="poi_filter_restaurants">Ristoranti</string>
 <string name="poi_filter_sightseeing">Attrazione turistica</string>
 <string name="tip_recent_changes_0_8_4_t">"Cambiamenti nella 0.8.4:
-\n\t*Alcuni correzioni di errori\n\t*La mappa no perde la posizione dopo le interruzioni\n\t*Abilita il servizio in background durante la navigazione "</string>
+\n\t*Correzione di alcuni errori\n\t*La mappa non perde la posizione dopo le interruzioni\n\t*Abilitazione del servizio in background durante la navigazione "</string>
     <string name="context_menu_item_last_intermediate_point">Aggiungi come ultimo punto intermedio</string>
     <string name="context_menu_item_first_intermediate_point">Aggiungi come primo punto intermedio</string>
     <string name="add_as_last_destination_point">Aggiungi come ultimo punto intermedio</string>
     <string name="add_as_first_destination_point">Aggiungi come primo punto intermedio</string>
     <string name="replace_destination_point">Sostituisci la destinazione</string>
-    <string name="new_destination_point_dialog">C\'è già una destinazione impostata.</string>
+    <string name="new_destination_point_dialog">Hai già una destinazione impostata.</string>
     <string name="target_point">Punto intermedio %1$s</string>
     <string name="target_points">Punti intermedi</string>
-    <string name="map_widget_monitoring_services">Servizi di monitoraggio</string>
+    <string name="map_widget_monitoring_services">Servizi di registrazione</string>
 	<string name="no_route">Nessun percorso</string>
-	<string name="delete_target_point">Rimuovi destinazione</string>
+	<string name="delete_target_point">Rimuovi punto intemedio</string>
 	<string name="intermediate_point">Punto intermedio %1$s</string>
     <string name="gps_not_available">Si prega di attivare il GPS nelle impostazioni</string>
     <string name="map_widget_show_destination_arrow">Mostra la direzione della destinazione</string>
-    <string name="non_optimal_route_calculation">Calcola un percorso non necessariamente ottimale su lunghe distanze</string>
-    <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio (tracking, tracking in tempo reale) per utilizzare i servizi di monitoraggio</string>
+    <string name="non_optimal_route_calculation">Calcola un eventuale percorso non necessariamente ottimale su lunghe distanze</string>
+    <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio per utilizzare i servizi di registrazione della posizione (tracking, tracking in tempo reale)</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
-	<string name="rendering_attr_roadColors_name">Schema di colori per le strade</string>
+	<string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
     <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla sul Market?</string>
 	<string name="close_changeset">Chiudi le modifiche</string>
-	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il codice Android invece del nativo).</string>
+	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il più lento Android invece del codice nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
-    <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitare nelle Impostazioni).</string>
-    <string name="background_service_is_enabled_question">Il servizio in background è ancora in esecuzione. Si desidera fermarlo?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Cambiamenti nella versione 1.0.0:\n\t*Migliorata la navigazione: più veloce e precisa (fino a 250 km)\n\t*Aggiunta le mappe solo-strade\n\t*La mappa non perde la posizione dopo le interruzioni\n\t*Abilita il servizio in background durante la navigazione\n\t*Migliorata \'vista touring\' con i nuovi stili delle strade, mappe più dettagliate, e l\'opzione Alpine hiking (SAC scale)\n\t*EGM96 correzione dello scostamento per le letture dell\'altitudine del GPS "</string>
+    <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle Impostazioni).</string>
+    <string name="background_service_is_enabled_question">Il servizio in background è ancora in esecuzione. Si desidera eliminarlo?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Cambiamenti nella versione 1.0.0:\n\t*Migliorata la navigazione: più veloce e precisa, fino a 250 km\n\t*Aggiunte le mappe solo-strade\n\t*La mappa non perde il posizionamento dopo le interruzioni\n\t*Abilitazione del servizio in background durante la navigazione "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posizione corrente</string>
     <string name="route_descr_from_to">Da %1$s a %2$s</string>
     <string name="route_descr_from_to_via">Da: %1$s↵\nper: %2$s↵\na: %3$s</string>
     <string name="no_buildings_found">Nessun edificio trovato.</string>
-    <string name="search_villages_and_postcodes">Ricerca villaggi/codice postale</string>
-	<string name="rendering_attr_showRoadMaps_description">Selezionare quando visualizzare mappe solo-strade:</string>
+    <string name="search_villages_and_postcodes">Ricerca comuni/codice postale</string>
+	<string name="rendering_attr_showRoadMaps_description">Selezionare per visualizzare mappe solo-strade:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mappe solo-strade</string>
     <string name="download_roads_only_item">"Strade "</string>
     <string name="download_regular_maps">Mappe normali</string>
@@ -1150,7 +1150,7 @@
     <string name="incomplete_locale">incompleto</string>
 	<string name="map_widget_max_speed">Limite di velocità</string>
     <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\\\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\\\'altritudine nel sistema EGM96.
-\n\tPer avere questo, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+\n\tPer attivarla, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="tip_altitude_offset">Visualizza Altitudine - Correzione scostamento</string>
 	<string name="monitoring_control_start">avvia</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
