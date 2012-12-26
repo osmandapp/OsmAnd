@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís…</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -968,4 +968,11 @@
     <string name="non_optimal_route_calculation">Calcula possibles rutes no optimes per a llargues distancies</string>
     <string name="rendering_attr_roadColors_description">Seleccioneu un esquema de color per a les carreteres:</string>
 	<string name="map_widget_monitoring_services">Serveis de registre</string>
-	</resources>
+	<string name="av_def_action_video">Enregistrar video</string>
+    <string name="av_def_action_audio">Enregistrar so</string>
+    <string name="av_video_format_descr">Seleccionar el format de sortida de video</string>
+    <string name="av_settings_descr">Configurar prefèrencies so i video</string>
+    <string name="av_settings">Preferències de so\\/video</string>
+    <string name="recording_error">"Ha ocorregut un error durant l\'enregistrament "</string>
+    <string name="recording_camera_not_available">La càmera no esta disponible</string>
+    </resources>
