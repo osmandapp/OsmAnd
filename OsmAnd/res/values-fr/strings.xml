@@ -1203,4 +1203,6 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
 \n\t* Option \'Touring view\' avec plus de détails\n\t* Nouveaux styles de routes, plus de contrast\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS "</string>
     <string name="av_control_start">Enreg.</string>
+    <string name="srtm_paid_version_msg">Pensez à acheter le greffon \"Lignes de contour\" sur Google Play pour soutenir le développement.</string>
+    <string name="srtm_paid_version_title">Greffon Lignes de contour</string>
     </resources>
