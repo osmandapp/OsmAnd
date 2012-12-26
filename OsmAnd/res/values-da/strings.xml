@@ -1,3 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-</resources>
+<string name="srtm_paid_version_msg">Du bør overveje at købe Hæjdekurve plugin\'et på Google Play for at støtte den videre udvikling.</string>
+    <string name="av_def_action_video">optag video</string>
+    <string name="av_def_action_audio">Optag lyd</string>
+    <string name="av_widget_action_descr">Vælg standard widget handling</string>
+    <string name="av_widget_action">Standard widget handling</string>
+    <string name="av_video_format_descr">Vælg video output format</string>
+    <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
+    <string name="av_use_external_recorder">Brug ekstern optager</string>
+    <string name="av_settings_descr">Konfigurer lyd-og videoindstillinger</string>
+    <string name="av_settings">Lyd/video indstillinger</string>
+    <string name="recording_error">Fejl opstod under optagelse</string>
+    <string name="recording_camera_not_available">Kameraet er ikke tilgængelig</string>
+    <string name="recording_is_recorded">Audio/video bliver optaget. For at stoppe den trykker stop-knappen på widget.</string>
+    <string name="recording_playing">En lyd fra den angivne optagelsen bliver afspillet. %1$s</string>
+    <string name="recording_open_external_player">Åbn ekstern afspiller</string>
+    <string name="recording_delete_confirm">Ønsker du at fjerne denne optagelse?</string>
+    <string name="tip_recent_changes_1_1_0_t">Ændringer i 1.1.0:\n\t*Afstand regnemaskine plugin
+\n\t*Audio notater plugin
+\n\t*Contour linjer plugin
+\n\t*Fejlrettelser
+\n\t*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
+\n\t*EGM96 geoid offset korrektion for GPS højdeaflæsningerne</string>
+    <string name="recording_unavailable">utilgængelig</string>
+    <string name="recording_context_menu_arecord">Tag en lyd note</string>
+    <string name="srtm_paid_version_title">Højdekurver plugin</string>
+    </resources>
