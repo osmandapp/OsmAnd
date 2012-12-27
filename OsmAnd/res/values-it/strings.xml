@@ -1195,4 +1195,6 @@
     <string name="map_widget_av_notes">Note audio</string>
     <string name="srtm_paid_version_msg">Per favore valuta l\'acquisto sul Market del Plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee di livello</string>
+    <string name="animate_routing_using_gpx">Si desidera utilizzare il file GPX esistente?</string>
+    <string name="intermediate_points_change_order">Cambia l\'ordine</string>
     </resources>
