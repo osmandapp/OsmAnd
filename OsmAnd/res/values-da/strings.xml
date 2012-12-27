@@ -9,20 +9,52 @@
     <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
     <string name="av_use_external_recorder">Brug ekstern optager</string>
     <string name="av_settings_descr">Konfigurer lyd-og videoindstillinger</string>
-    <string name="av_settings">Lyd/video indstillinger</string>
+    <string name="av_settings">"Lyd/video indstillinger "</string>
     <string name="recording_error">Fejl opstod under optagelse</string>
     <string name="recording_camera_not_available">Kameraet er ikke tilgængelig</string>
     <string name="recording_is_recorded">Audio/video bliver optaget. For at stoppe den trykker stop-knappen på widget.</string>
     <string name="recording_playing">En lyd fra den angivne optagelsen bliver afspillet. %1$s</string>
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
     <string name="recording_delete_confirm">Ønsker du at fjerne denne optagelse?</string>
-    <string name="tip_recent_changes_1_1_0_t">Ændringer i 1.1.0:\n\t*Afstand regnemaskine plugin
-\n\t*Audio notater plugin
+    <string name="tip_recent_changes_1_1_0_t">"Ændringer i 1.1.0:\n\t*Afstand regnemaskine plugin\n\t*Audio notater plugin
 \n\t*Contour linjer plugin
 \n\t*Fejlrettelser
 \n\t*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
-\n\t*EGM96 geoid offset korrektion for GPS højdeaflæsningerne</string>
+\n\t*EGM96 geoid offset korrektion for GPS højdeaflæsningerne "</string>
     <string name="recording_unavailable">utilgængelig</string>
-    <string name="recording_context_menu_arecord">Tag en lyd note</string>
+    <string name="recording_context_menu_arecord">Tag en lydnote</string>
     <string name="srtm_paid_version_title">Højdekurver plugin</string>
-    </resources>
+    <string name="recording_context_menu_vrecord">Tag en videonote</string>
+    <string name="layer_recordings">Optagelses laget</string>
+    <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
+    <string name="recording_context_menu_delete">Slet optagelse</string>
+    <string name="recording_context_menu_play">Afspil</string>
+    <string name="recording_description">Optagelse %1$s %2$s på %3$s</string>
+    <string name="recording_default_name">indspilning</string>
+    <string name="av_control_start">optag</string>
+    <string name="map_widget_av_notes">Lydnoter</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline højdekurver</string>
+    <string name="osmand_srtm_long_description_1000_chars">Dette plugin giver højdekurver, der kan vises i OsmAnd\'s offline maps. Det globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, en flagskibet satellit fra NASAs Earth Observing systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_distance_plugin_description">Måle en afstand mellem to og mange punkter. Tilføj point ved en kort klik og fjern ved et langt tryk.</string>
+    <string name="osmand_distance_plugin_name">Afstandsberegner</string>
+    <string name="use_clear_distance_measurement">Klikke en gang til for at fjerne målepunkter.</string>
+    <string name="use_distance_measurement">Tryk for at lave et punkt, tryk og hold for at slette tidligere punkt, klik på målings widget for at afslutte.</string>
+    <string name="av_control_stop">stop</string>
+    <string name="map_widget_distancemeasurement">Afstandsmåling</string>
+    <string name="audionotes_location_not_defined">Placering til at associere med noten er ikke defineret endnu. \"Brug placering ...\" at tildele en note til den angivne placering</string>
+    <string name="monitoring_control_stop">stop</string>
+    <string name="map_widget_audionotes">Lydnoter</string>
+    <string name="audionotes_plugin_description">Tage lydnoter under turen</string>
+    <string name="audionotes_plugin_name">Audionotes plugin</string>
+    <string name="index_srtm_parts">dele</string>
+    <string name="index_srtm_ele">Højdekurver</string>
+    <string name="srtm_plugin_description">Dette plugin gør det muligt at downloade højdekurver (Offline data Download -&gt; Menu -&gt; Andre kort) til brug sammen med offline maps.</string>
+    <string name="srtm_plugin_name">Højdekurver plugin</string>
+    <string name="download_select_map_types">Andre kort</string>
+    <string name="download_roads_only_item">"Veje "</string>
+    <string name="download_srtm_maps">Højdekurve data</string>
+    <string name="download_regular_maps">Almindelige kort</string>
+    <string name="download_roads_only_maps">Kort kun med veje</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Skjul grænser</string>
+	</resources>
