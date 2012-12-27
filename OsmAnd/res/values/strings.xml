@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="animate_routing_using_gpx">Do you want to use existing GPX file?</string>
+    <string name="intermediate_points_change_order">Change order</string>
     <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin on the Market to support further development.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="av_def_action_video">Record video</string>

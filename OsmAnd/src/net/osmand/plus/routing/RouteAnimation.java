@@ -29,7 +29,7 @@ public class RouteAnimation {
 			final MapActivity ma) {
 		if (!isRouteAnimating()) {
 			Builder builder = new AlertDialog.Builder(ma);
-			builder.setTitle("Do you want to use existing GPX file?");
+			builder.setTitle(R.string.animate_routing_using_gpx);
 			final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
 			((TextView)view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
 			((TextView)view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$

@@ -138,7 +138,7 @@ public class IntermediatePointsDialog {
 			}
 		});
 		if (!changeOrder) {
-			builder.setNeutralButton("Change order", new DialogInterface.OnClickListener() {
+			builder.setNeutralButton(R.string.intermediate_points_change_order, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					openIntermediatePointsDialog(activity, app, true);
