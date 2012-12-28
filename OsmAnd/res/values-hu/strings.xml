@@ -1138,4 +1138,6 @@
     <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
     <string name="animate_routing_using_gpx">Meglévő GPX fájlt szeretnél használni?</string>
     <string name="intermediate_points_change_order">Más sorrend</string>
+    <string name="dropbox_plugin_description">A Dropbox bővítmény lehetővé teszi a rögzített útvonalak és hang/videojegyzetek szinkronizálását a Dropbox fiókoddal.</string>
+    <string name="dropbox_plugin_name">Dropbox bővítmény</string>
     </resources>
