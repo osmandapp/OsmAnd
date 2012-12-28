@@ -1168,4 +1168,6 @@
     <string name="srtm_paid_version_title">תוסף קווי מתאר</string>
     <string name="animate_routing_using_gpx">האם ברצונך להשתמש בקובץ GPX קיים?</string>
     <string name="intermediate_points_change_order">שינוי הסדר</string>
+    <string name="dropbox_plugin_description">תוסף Dropbox מאפשר לסנכרן מסלולים והערות שמע/וידאו עם חשבון ה־dropbox שלך.</string>
+    <string name="dropbox_plugin_name">תוסף Dropbox</string>
     </resources>
