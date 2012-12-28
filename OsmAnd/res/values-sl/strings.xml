@@ -1121,4 +1121,6 @@
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
     <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse na Marketu, da bi tako podprli nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
+    <string name="animate_routing_using_gpx">Ali želite uporabiti obstoječo GPX datoteko?</string>
+    <string name="intermediate_points_change_order">Spremeni vrstni red</string>
     </resources>
