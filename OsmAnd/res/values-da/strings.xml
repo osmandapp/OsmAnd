@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-<string name="srtm_paid_version_msg">Du bør overveje at købe Hæjdekurve plugin\'et på Google Play for at støtte den videre udvikling.</string>
+<string name="srtm_paid_version_msg">Du bør overveje at købe Højdekurve plugin\'et på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">optag video</string>
     <string name="av_def_action_audio">Optag lyd</string>
     <string name="av_widget_action_descr">Vælg standard widget handling</string>
@@ -10,7 +10,7 @@
     <string name="av_use_external_recorder">Brug ekstern optager</string>
     <string name="av_settings_descr">Konfigurer lyd-og videoindstillinger</string>
     <string name="av_settings">"Lyd/video indstillinger "</string>
-    <string name="recording_error">Fejl opstod under optagelse</string>
+    <string name="recording_error">"Fejl opstod under optagelse "</string>
     <string name="recording_camera_not_available">Kameraet er ikke tilgængelig</string>
     <string name="recording_is_recorded">Audio/video bliver optaget. For at stoppe den trykker stop-knappen på widget.</string>
     <string name="recording_playing">En lyd fra den angivne optagelsen bliver afspillet. %1$s</string>
@@ -57,4 +57,21 @@
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Skjul grænser</string>
+	<string name="animate_routing_using_gpx">Vil du bruge eksisterende GPX-fil?</string>
+    <string name="intermediate_points_change_order">Ændre rækkefølge</string>
+    <string name="av_video_format">Videooutput format</string>
+    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale grænser (admin niveau 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin har en gammel version og skal opdateres.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin er OsmAnd udvidelse til OsModroid app for live sporings funktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
+    <string name="tip_altitude_offset">Højde Display - Offset korrektion</string>
+	<string name="tip_altitude_offset_t">"\tDe fleste GPS-enheder gengiver højdemålinger i det ellipsoid-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
+\n\tEn bedre tilnærmelse til disse lokale systemer er EGM96 reference. OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
+\n\tFor at opnå dette, skal du blot downloade filen WW15MGH.DAC via Offline Data Manager (oprindelig er på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="map_widget_max_speed">Hastighedsgrænse</string>
+    <string name="route_descr_current_location">Aktuel position</string>
+    <string name="route_descr_from_to">Fra : %1$s\nTil : %2$s</string>
+    <string name="route_descr_from_to_via">Fra : %1$s\nVia : %2$s\nTil : %3$s</string>
+    <string name="no_buildings_found">Ingen bygninger blev fundet.</string>
+    <string name="incremental_search_city">Søge by trinvist</string>
+    <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
 	</resources>
