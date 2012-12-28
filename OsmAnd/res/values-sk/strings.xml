@@ -60,7 +60,7 @@
   <string name="gps_wakeup_interval">Interval prebúdzania GPS: %s</string>
   <string name="int_continuosly">Priebežne</string>
   <string name="monitoring_mode_off">GPX zázn.</string>
-  <string name="monitoring_mode_on">Zastavit\n GPX záznam</string>
+  <string name="monitoring_mode_on">Zastaviť\n GPX záznam</string>
   <string name="bg_service_sleep_mode_off">Zapnúť\n režim spánku</string>
   <string name="bg_service_sleep_mode_on">Vypnúť\n režim spánku</string>  
   <string name="map_widget_top_text">Názov ulice</string>
@@ -1126,14 +1126,14 @@
     <string name="index_srtm_ele">Vrstevnice</string>
     <string name="av_def_action_video">Nahraj video</string>
     <string name="av_def_action_audio">Nahraj zvuk</string>
-    <string name="av_widget_action_descr">Vyberte predvolenú akciu widget</string>
+    <string name="av_widget_action_descr">Výber predvolenej akcie pre widget</string>
     <string name="av_widget_action">Predvolená akcia pre widget</string>
-    <string name="av_video_format_descr">Vyberte formát výstupu videa</string>
+    <string name="av_video_format_descr">Výber formátu výstupného videa</string>
     <string name="av_video_format">Výstupný formát videa</string>
     <string name="av_use_external_recorder_descr">Použiť systémový rekordér videa</string>
     <string name="av_use_external_recorder">Použiť externý rekordér</string>
-    <string name="av_settings_descr">Konfigurácia nastavenia zvuku a videa</string>
-    <string name="av_settings">"Zvuk/video nastavenia "</string>
+    <string name="av_settings_descr">Konfigurácia nastavení zvuku a videa</string>
+    <string name="av_settings">"Nastavenia zvuku a videa "</string>
     <string name="recording_error">"Vyskytla sa chyba pri nahrávaní "</string>
     <string name="recording_camera_not_available">Fotoaparát nie je k dispozícii</string>
     <string name="recording_is_recorded">Zvuk/video sa zaznamenáva. Záznam môžete zastaviť stlačením stop tlačidla na widgete.</string>
@@ -1151,7 +1151,7 @@
     <string name="recording_description">Záznam %1$s %2$s v %3$s</string>
     <string name="recording_default_name">nahrávka</string>
     <string name="av_control_stop">zastaviť</string>
-    <string name="av_control_start">nahrávaj</string>
+    <string name="av_control_start">nahrať</string>
     <string name="map_widget_av_notes">Zvukové poznámky</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd modul pre vrstevnice</string>
     <string name="osmand_srtm_long_description_1000_chars">Tento module poskytuje vrstevnice, ktoré môžu byť zobrazené v OsmAnd\'s offline mapách. Globálne údaje (medzi 70 stupňov sever a juh 70 stupňov) je založený na meraní SRTM (Shuttle Radar Topographz Mission) a ASTER (Advanced Spaceborne tepelné vyžarovanie a reflexie rádiometre), zobrazovanie nástroj na palube Terra, vlajkový satelit NASA Earth Observing System. ASTER je kooperatívne úsilie medzi NASA, Japonským ministerstvom hospodárstva, obchodu a priemyslu (METI) a Japonským vesmírnych systémov (J-spacesystems).</string>
@@ -1163,7 +1163,7 @@
     <string name="audionotes_location_not_defined">Umiestnenie spojené s poznámkou, ešte nie je definované. Ak chcete použiť špecifické umiestnenie, použite: \"Použiť umiestnenie...\"</string>
     <string name="monitoring_control_stop">zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
-    <string name="audionotes_plugin_description">Robiť zvukové poznámky počas cesty</string>
+    <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
     <string name="audionotes_plugin_name">Modul zvukové poznámky</string>
     <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie vrstevníc (údaje v režime Offline údaje -&gt; Stiahnuť -&gt; ďalšie mapy) pre použitie s offline mapami.</string>
     <string name="srtm_plugin_name">Modul vrstevníc</string>
