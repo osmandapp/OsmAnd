@@ -169,21 +169,21 @@
   <string name="favorite_friends_category">Amici</string>
   <string name="favorite_places_category">Luoghi</string>
   <string name="favorite_default_category">Altro</string>
-  <string name="vector_map_not_needed">Non necessario</string>
-  <string name="basemap_missing">la mappa di base del mondo (che ricopre il mondo per zoom piccoli) è mancante. Puoi scaricare World_basemap_x.obf per ottenerla.</string>
+  <string name="vector_map_not_needed">No, grazie</string>
+  <string name="basemap_missing">La mappa di base del mondo (ricopre l\'intero mondo per zoom bassi) è mancante. Puoi scaricare World_basemap_x.obf per un sistema completo.</string>
   <string name="vector_data_missing">Mancano i dati (\'offline\') nella scheda SD. Ti consigliamo di scaricarli per poter usare le mappe offline.</string>
   <string name="local_index_gpx_info_show">\n\nClick lungo per mostrare opzioni</string>
   <string name="local_index_gpx_info_speed">\nVelocità media: %1$s
 \nVelocità massima: %2$s</string>
   <string name="local_index_gpx_info_elevation">\nAltitudine media: %1$.0f m\nAltitudine minima: %2$.0f m\nAltitudine massima: %3$.0f m\nSalite: %4$.0f m\nDiscese: %5$.0f m</string>
-  <string name="local_index_gpx_info">Sottotraccia: %1$d\nPunti totali: %2$d\nWay points: %3$d\nDistanza totale: %4$s\nOra partenza: %5$tF, %5$tR\nOra arrivo: %6$tF, %6$tR</string>
+  <string name="local_index_gpx_info">Sottotraccia: %1$d\nPunti totali: %2$d\nPunti intermedi: %3$d\nDistanza totale: %4$s\nOra inizio: %5$tF, %5$tR\nOra fine: %6$tF, %6$tR</string>
   <string name="local_index_installed">Edizione</string>
-  <string name="local_index_items_backuped">%1$d su %2$d oggetto/i backuppato/i.</string>
-  <string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i.</string>
+  <string name="local_index_items_backuped">%1$d su %2$d oggetto/i disattivati con successo.</string>
+  <string name="local_index_items_deleted">%1$d su %2$d oggetto/i eliminato/i con successo.</string>
   <string name="local_index_items_restored">%1$d su %2$d oggetto/i ripristinato/i.</string>
   <string name="local_index_no_items_to_do">Nessun oggetto da %1$s</string>
   <string name="local_index_action_do">Stai per %1$s %2$s oggetti/i. Continuare?</string>
-  <string name="local_index_descr_title">Manager Dati Offline</string>
+  <string name="local_index_descr_title">Gestore Dati Offline</string>
   <string name="local_index_mi_restore">Attiva</string>
   <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
@@ -199,7 +199,7 @@
   <string name="local_index_items">" "</string>
   <string name="local_indexes_cat_backup">Disattivato</string>
   <string name="local_indexes_cat_tts">Dati voce (TTS)</string>
-  <string name="local_indexes_cat_voice">Dati voce (media)</string>
+  <string name="local_indexes_cat_voice">Dati voce (registrata)</string>
   <string name="local_indexes_cat_gpx">Dati GPX</string>
   <string name="local_indexes_cat_tile">Mappe online (tasselli)</string>
   <string name="local_indexes_cat_map">Mappe offline (vettori)</string>
@@ -207,17 +207,17 @@
   <string name="ttsvoice">Voce TTS</string>
   <string name="search_offline_clear_search">Nuova Ricerca</string>
   <string name="map_text_size_descr">Seleziona la dimensione del testo per i nomi sulla mappa</string>
-  <string name="map_text_size">Dimensione testo mappa</string>
+  <string name="map_text_size">Dimensione carattere mappa</string>
   <string name="trace_rendering">Informazioni diagnostiche disegno</string>
-  <string name="trace_rendering_descr">Visualizza le performance del disegno a scopo di debug</string>
+  <string name="trace_rendering_descr">Visualizza le performance del disegno</string>
   <string name="tip_recent_changes">Modifiche recenti</string>
-  <string name="tip_recent_changes_0_6_6_t">"Modifiche alla 0.6.6:
+  <string name="tip_recent_changes_0_6_6_t">"Modifiche recenti alla 0.6.6:
 \n\t- motore Text To Speech per la navigazione vocale
-\n\t- Renderer mappa più dettagliato
-\n\t- Mappa mondiale base con il pacchetto app
-\n\t- Migliorie routing offline (sempre sperimentale)
+\n\t- Reso più dettagliato il disegno della mappa
+\n\t- Mappa mondiale di base impacchettata con l\'applicazione 
+\n\t- Migliorie alla navigazione offline (ancora sperimentale)
 \n\t- Opzioni navigazione GPX
-\n\t- UI aggiornamento e correzione errori "</string>
+\n\t- IU aggiornamento e correzione errori "</string>
   <string name="voice_not_use">Non usare</string>
   <string name="voice_not_specified">Nessuna</string>
   <string name="installing_new_resources">Scompattando nuovi dati…</string>
@@ -228,29 +228,29 @@
   <string name="tts_missing_language_data">Nessun dato per la lingua selezionata è stato installato. Vuoi installarlo tramite il Market?</string>
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
-  <string name="gpx_option_from_start_point">Passa lungo tutto il percorso</string>
-  <string name="switch_to_vector_map_to_see">Puoi selezionare le mappe vettoriali offline (Definisci vista -&gt; Fonte Mappa… -&gt; Mappe vettoriali offline) per visualizzare la mappa.</string>
-  <string name="choose_audio_stream">Output per la guida vocale</string>
+  <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
+  <string name="switch_to_vector_map_to_see">Mappa vettoriali offline presenti per quest\'area.\n\t\n\tPer usarla \'Menu\'-&gt;\'Definisci vista\'-&gt;\'Fonte Mappa…\'-&gt;\'Mappe vettoriali offline\'.</string>
+  <string name="choose_audio_stream">Voce guida di uscita</string>
   <string name="choose_audio_stream_descr">Scegli il canale per la guida vocale (dipendente dal sistema)</string>
-  <string name="voice_stream_voice_call">Stream chiamate vocali</string>
+  <string name="voice_stream_voice_call">Audio chiamate vocali</string>
   <string name="voice_stream_notification">Stream notifiche</string>
-  <string name="voice_stream_music">Stream media/musica</string>
-  <string name="warning_tile_layer_not_downloadable">Impossibile scaricare il livello %1$s, prova a riinstallarlo.</string>
-  <string name="overlay_transparency_descr">Modifica trasparenza overlay</string>
-  <string name="overlay_transparency">Trasparenza overlay</string>
-  <string name="map_transparency_descr">Modifica trasparenza mappa di sfondo</string>
-  <string name="map_transparency">Trasparenza mappa di sfondo</string>
+  <string name="voice_stream_music">Audio media/musica</string>
+  <string name="warning_tile_layer_not_downloadable">"L\'applicazione non riesce a scaricare lo strato della mappa  %1$s, prova a reinstallarlo."</string>
+  <string name="overlay_transparency_descr">Modifica trasparenza sovrapposizione</string>
+  <string name="overlay_transparency">Trasparenza sovrapposizione</string>
+  <string name="map_transparency_descr">Modifica trasparenza della mappa di base</string>
+  <string name="map_transparency">Trasparenza mappa di base</string>
   <string name="modify_transparency">Modica la trasparenza (0 - trasparente, 255 - opaco)</string>
   <string name="layer_underlay">Mappa di sfondo…</string>
   <string name="map_underlay">Mappa di sfondo</string>
-  <string name="map_underlay_descr">Scegli mappa di sfondo</string>
+  <string name="map_underlay_descr">Scegli la mappa di sfondo</string>
   <string name="layer_overlay">Mappa sovrapposta…</string>
-  <string name="default_none">Nessuna</string>
+  <string name="default_none">Nessuno</string>
   <string name="map_overlay">Mappa sovrapposta</string>
   <string name="map_overlay_descr">Scegli mappa di sovrapposizione</string>
-  <string name="tile_source_already_installed">La mappa è già installata, verrà aggiornata</string>
+  <string name="tile_source_already_installed">La mappa è già installata, le impostazioni verranno aggiornate</string>
   <string name="select_tile_source_to_install">Seleziona le mappe (mattonella) da installare o aggiornare</string>
-  <string name="internet_not_available">Connessione internet richiesta ma non disponibile</string>
+  <string name="internet_not_available">La connessione internet è richiesta per questa operazione ma non è disponibile</string>
   <string name="install_more">Installa altro…</string>
   <string name="tip_update_index">Aggiornamento Dati Offline</string>
   <string name="tip_update_index_t">\tAvere dati aggiornati è essenziale. OsmAnd fornisce un download manager che può controllare la disponibilità di aggiornamenti offline.
@@ -258,23 +258,18 @@
 \n\tLa disponibilità degli aggiornamenti viene indicata dai colori seguenti:
 \n\t\'Verde\' - indica file identici su server e dispositivo
 \n\t\'Blu\' - indica aggiornamenti disponibile sul server\n\t\'Verde scuro/blu\' - analogamente indica dati disattivati sul dispositivo</string>
-  <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare il rendering vettoriale al posto dei tile mappa</string>
-  <string name="level_to_switch_vector_raster">Min. livello zoom</string>
+  <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare le mappe vettoriali</string>
+  <string name="level_to_switch_vector_raster">Min. livello zoom vettoriale</string>
   <string name="tip_location_sharing">Condivisione Posizione</string>
-  <string name="tip_location_sharing_t">\tPuoi condividere posizione di posti interessanti con familiari e amici.
-\n\tPer farlo devi:
-\n\tUsare il \'Menu contestuale mappa\' -&gt; \'Condividi Posizione\'.
-\n\tSeleziona una modo per condividere la posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sugli appunti.
-</string>
+  <string name="tip_location_sharing_t">"\tPuoi condividere la posizione di posti interessanti dei tuoi viaggi con familiari e amici.
+\n\tPer condividere le posizioni devi:
+\n\tUsare il \'Menu contestuale mappa\' -&gt; menu \'Condividi Posizione\'.
+\n\tQuindi seleziona un modo per condividere la tua posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sugli appunti. "</string>
   <string name="tip_favorites">Punti Preferiti</string>
-  <string name="tip_favorites_t">\tI punti usati di frequente possono essere salvati come Preferiti.
-
+  <string name="tip_favorites_t">"\tI punti usati di frequente possono essere salvati come Preferiti.
 \n\tPer salvare un punto come Preferito vai nel menu contestuale, seleziona \'Aggiungi ai preferiti\' e inserisci il nome desiderato. Dopo il salvataggio sarà accessibile nel \'Menu Principale\' -&gt; \'Preferiti\'.
-
-\n\tPremendo a lungo su un Preferito nel menu \'Preferiti\' aprirà le opzioni Naviga verso, modifica, elimina.
-
-\n\tPer visualizzare i preferiti direttamente sulla mappa attiva il livello \'Preferiti\' su \'Menu contestuale mappa\' -&gt;\'Definisci vista\'.
-</string>
+\n\tPremendo a lungo su un Preferito nel menu \'Preferiti\' appariranno le opzioni per impostarlo come destinazione, modificarlo o eliminarlo.
+\n\tPer visualizzare tutti i punti Preferiti direttamente sulla mappa, attiva nella schermata della mappa il livello \'Preferiti\' dal \'Menu\' -&gt;\'Definisci vista\'. "</string>
   <string name="create_poi_link_to_osm_doc">"Classificazione mappa "<u>OSM Online</u> con immagini</string>
   <string name="error_doing_search">Errore nella ricerca offline</string>
   <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'</string>
@@ -284,7 +279,7 @@
   <string name="preferred_locale">Linguaggio display</string>
   <string name="tip_map_switch">Fonte Mappa</string>
   <string name="tip_map_switch_t">suggerimento_cambia_mappa_t</string>
-  <string name="tip_app_mode">Modo Applicazione</string>
+  <string name="tip_app_mode">Profilo utente</string>
   <string name="tip_app_mode_t">suggerimento_modo_app_t</string>
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata premi \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
@@ -292,15 +287,13 @@
   <string name="tip_search_t">\tPuoi cercare i posti direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
 \n\tPremendo \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'.
 </string>
-  <string name="tip_map_context_menu">Menu contestuale</string>
-  <string name="tip_map_context_menu_t">\tIl menu contestuale viene visualizzato premendo a lungo sulla mappa o premendo il pulsante trackball.
-\n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci sopra. (O premi a lungo per nascondere il menù.)
-\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione).
-</string>
-  <string name="tip_initial">Consigli</string>
-  <string name="tip_initial_t">\tOsmAnd è una applicazione di navigazione con molte funzioni.
-\n\tPer una introduzione base, alcuni consigli d\'uso sono linkati nel menù principale.
-</string>
+  <string name="tip_map_context_menu">Menu contestuale mappa</string>
+  <string name="tip_map_context_menu_t">"\tIl menu contestuale viene visualizzato premendo a lungo sulla mappa o premendo il pulsante trackball.
+\n\tQuesto visualizza un box con le coordinate del punto. Per aprire il menu, cliccaci sopra. (O premi a lungo per nascondere nuovamente il menù.)
+\n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione). "</string>
+  <string name="tip_initial">Consigli e trucchi</string>
+  <string name="tip_initial_t">"\tOsmAnd è una applicazione di navigazione con molte funzioni.
+\n\tPer un\'introduzione base, alcuni consigli d\'uso sono collegati nel menù principale. "</string>
   <string name="next_button">Prossimo</string>
   <string name="previous_button">Precedente</string>
   <string name="unit_of_length_descr">Cambia le unità di misura per spazio e velocità</string>
@@ -317,9 +310,9 @@
   <string name="send_location_email_pattern">Per vedere la posizione segui il link web %1$s o il link %2$s</string>
   <string name="send_location">Invia posizione</string>
   <string name="context_menu_item_share_location">Condividi posizione</string>
-  <string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' aggiunto</string>
-  <string name="add_waypoint_dialog_title">Aggiungi waypoint al percorso GPX</string>
-  <string name="context_menu_item_add_waypoint">Aggiungi waypoint GPX</string>
+  <string name="add_waypoint_dialog_added">Punto intermedio \'\'{0}\'\' aggiunto</string>
+  <string name="add_waypoint_dialog_title">Aggiungi un punto intermedio al percorso GPX registrato</string>
+  <string name="context_menu_item_add_waypoint">Aggiungi un punto intermedio GPX</string>
   <string name="amenity_type_administrative">Amministrativo</string>
   <string name="amenity_type_barrier">Barriera</string>
   <string name="amenity_type_education">Istruzione</string>
@@ -329,7 +322,7 @@
   <string name="amenity_type_geocache">Geocache</string>
   <string name="amenity_type_healthcare">Sanità</string>
   <string name="amenity_type_historic">Storia</string>
-  <string name="amenity_type_landuse">Terreno</string>
+  <string name="amenity_type_landuse">Uso del terreno</string>
   <string name="amenity_type_leisure">Tempo Libero</string>
   <string name="amenity_type_manmade">Artificiale</string>
   <string name="amenity_type_military">Militare</string>
@@ -1034,10 +1027,9 @@
 \n\t\'Day\' - usa sempre il modo diurno
 \n\t\'Night\' - usa sempre il modo notturno
 \n\t\'Sensore di luminosità\' - l\'aspetto della mappa è controllato dal sensore di luminosità del dispositivo (solo se presente) "</string>
-<string name="tip_map_switch_t_v2">\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\' in visualizzazione mappa.
-\n\tSotto \'Sorgente mappa…\'tu puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questo), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
-\n\tOsmAnd supporta anche sorgenti su misura.
-</string>
+<string name="tip_map_switch_t_v2">"\tLa sorgente della mappa e i livelli visualizzati sono cambiati attraverso \'Menu\'-&gt;\'Imposta visualizzazione\' in visualizzazione mappa.
+\n\tSotto \'Sorgente mappa…\' puoi scegliere di usare le mappe vettoriali offline precaricate, predefinito (online) sorgenti di tasselli (attiva il \'Mappe online\' plugin per questi), o mappe create manualmente usando per esempio OsmAndMapCreator sul PC.
+\n\tOsmAnd supporta anche sorgenti su misura. "</string>
 <string name="tip_app_mode_t_v2">"\tOsmAnd supporta differenti (e personalizzabili) profili dell\'applicazione per differenti tipi di utilizzo.
 \n\tPuoi cambiare profilo attraverso il pulsante profilo nell\'angolo inferiore sinistro dello schermata della mappa (icona automobile, bicicletta, o pedone), oppure quando crei un itinerario. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione a sorgente aperto di navigazione per mappe offline e online</string>
