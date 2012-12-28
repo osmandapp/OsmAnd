@@ -1173,4 +1173,6 @@
     <string name="intermediate_points_change_order">Zmeniť poradie</string>
     <string name="srtm_paid_version_msg">Prosím, zvážte zakúpenie zásuvného modulu pre vrstevnice z obchodu, aby ste podporili ďalší vývoj.</string>
     <string name="srtm_paid_version_title">Zásuvný modul pre vrstevnice</string>
+    <string name="dropbox_plugin_description">Zásuvný modul pre Dropbox vám umožňuje synchronizovať stopy a video/zvukové poznámky s vaším účtom na službe Dropbox.</string>
+    <string name="dropbox_plugin_name">Zásuvný modul pre Dropbox</string>
     </resources>
