@@ -33,8 +33,8 @@ go_ahead == ['Jedź prosto '].
 go_ahead(Dist) == ['Jedź prosto ', D]:- distance(Dist) == D.
 
 and_arrive_destination == ['następnie dojedź do celu '].
-and_arrive_intermediate == ['and arrive at your via point '].
-reached_intermediate == ['you have reached your via point'].
+and_arrive_intermediate == ['następnie dojedź do punktu pośredniego '].
+reached_intermediate == ['punkt pośredni został osiągnięty'].
 
 then == ['następnie '].
 reached_destination == ['Cel został osiągnięty! '].
@@ -44,7 +44,7 @@ bear_left == ['trzymaj się lewej '].
 route_new_calc(Dist) == ['Długość trasy to ', D] :- distance(Dist) == D.
 route_recalc(Dist) == ['Wyznaczam nową trasę , długość trasy to ', D] :- distance(Dist) == D.
 
-location_lost == ['Utracono sygnał g p s '].
+location_lost == ['Utracono sygnał GPS '].
 
 
 %% 
