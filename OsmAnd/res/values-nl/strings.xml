@@ -1098,7 +1098,7 @@
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Maak een audio-notitie</string>
     <string name="recording_context_menu_vrecord">Maak een video-notitie</string>
-    <string name="layer_recordings">Opnamelaag</string>
+    <string name="layer_recordings">Audio-opnamen</string>
     <string name="recording_can_not_be_played">Opname kan niet worden afgespeeld</string>
     <string name="recording_context_menu_delete">Wis opname</string>
     <string name="recording_context_menu_play">Afspelen</string>
@@ -1123,4 +1123,6 @@
     <string name="srtm_paid_version_title">Hoogtelijnen / contourlijnen plugin</string>
     <string name="animate_routing_using_gpx">Wil je een bestaand GPX-bestand gebruiken?</string>
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>
+    <string name="dropbox_plugin_description">Met deze plugin kan je tracks en video/audio-notities synchroniseren met je Dropbox account.</string>
+    <string name="dropbox_plugin_name">Dropbox plugin</string>
     </resources>
