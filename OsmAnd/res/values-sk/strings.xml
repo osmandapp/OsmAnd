@@ -1169,4 +1169,8 @@
     <string name="srtm_plugin_name">Modul vrstevníc</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
     <string name="download_srtm_maps">Údaje vrstevníc</string>
+    <string name="animate_routing_using_gpx">Chcete použiť existujúci súbor GPX?</string>
+    <string name="intermediate_points_change_order">Zmeniť poradie</string>
+    <string name="srtm_paid_version_msg">Prosím, zvážte zakúpenie zásuvného modulu pre vrstevnice z obchodu, aby ste podporili ďalší vývoj.</string>
+    <string name="srtm_paid_version_title">Zásuvný modul pre vrstevnice</string>
     </resources>
