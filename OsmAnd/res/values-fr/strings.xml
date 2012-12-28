@@ -1205,4 +1205,6 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="av_control_start">Enreg.</string>
     <string name="srtm_paid_version_msg">Pensez à acheter le greffon \"Courbes de niveau\" sur Google Play pour soutenir le développement.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
+    <string name="animate_routing_using_gpx">Voulez-vous utiliser le fichier GPX existant ?</string>
+    <string name="intermediate_points_change_order">Changer l\'ordre</string>
     </resources>
