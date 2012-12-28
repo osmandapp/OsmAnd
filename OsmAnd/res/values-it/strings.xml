@@ -499,7 +499,7 @@
   <string name="first_time_continue">Dopo</string>
   <string name="first_time_download">Scarica le regioni</string>
   <string name="first_time_msg">Grazie di utilizzare OsmAnd. Per utilizzare molte delle caratteristiche dell\'applicazione, hai bisogno dei dati offline locali, che possono essere scaricati da \'Impostazioni\'-&gt;\'Dati Offline\'. Sarà poi possibile visualizzare mappe, cercare indirizzi, PDI, e trovare trasporti pubblici.</string>
-  <string name="search_poi_location">Ricerca di segnale ...</string>
+  <string name="search_poi_location">Ricerca del segnale…</string>
   <string name="search_near_map">Ricerca vicino all\'ultima posizione sulla mappa</string>
   <string name="search_nearby">Ricerca vicino</string>
   <string name="map_orientation_default">Stessa del dispositivo</string>
