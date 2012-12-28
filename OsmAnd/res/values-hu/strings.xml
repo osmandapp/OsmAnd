@@ -1136,4 +1136,6 @@
     <string name="recording_description">Felvétel %1$s %2$s dátum: %3$s</string>
     <string name="srtm_paid_version_msg">Kérlek fontold meg a Szintvonal bővítmény megvásárlását a Play Store-ban, ezzel támogatva a további fejlesztéseket.</string>
     <string name="srtm_paid_version_title">Szintvonal bővítmény</string>
+    <string name="animate_routing_using_gpx">Meglévő GPX fájlt szeretnél használni?</string>
+    <string name="intermediate_points_change_order">Más sorrend</string>
     </resources>
