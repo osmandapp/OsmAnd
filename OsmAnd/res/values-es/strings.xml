@@ -1097,7 +1097,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_description">Grabado %1$s %2$s en %3$s</string>
     <string name="srtm_paid_version_msg">Por favor, considera la compra del extra de curvas de nivel en el Market para apoyar desarrollos adicionales.</string>
     <string name="srtm_paid_version_title">Extra de curvas de nivel</string>
-    <string name="dropbox_plugin_description">El extra de Dropbox permite sincronizar pistas y notas de audio/vídeo con tu cuenta de dropbox.</string>
+    <string name="dropbox_plugin_description">El extra de Dropbox permite sincronizar trazas y notas de audio/vídeo con tu cuenta de dropbox.</string>
     <string name="dropbox_plugin_name">Extra de Dropbox</string>
     <string name="animate_routing_using_gpx">¿Desea utilizar un archivo GPX existente?</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
