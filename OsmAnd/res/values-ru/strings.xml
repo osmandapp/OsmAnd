@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -> Меню -> "Другие карты") для использование в оффлайн режиме.</string>
+    <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -44,7 +44,7 @@
     <string name="use_clear_distance_measurement">Нажмите еще раз, чтобы очистить карту от точек.</string>
     <string name="use_distance_measurement">Добавляйте точки коротким нажатием и удаляйте долгим, нажмите на виджет, чтобы выйти из режима редактирования точек.</string>
     <string name="map_widget_distancemeasurement">Измерение расстояний</string>
-    <string name="audionotes_location_not_defined">Текущее местоположение для заметки еще не определено. Используйте контекстное меню для привязки заметки к определенной точке.</string>
+    <string name="audionotes_location_not_defined">Текущее местоположение для заметки ещё не определено. Используйте контекстное меню для привязки заметки к определённой точке.</string>
     <string name="monitoring_control_stop">стоп</string>
     <string name="map_widget_audionotes">Аудио заметки</string>
     <string name="audionotes_plugin_description">Делайте аудио-видео заметки во время путешествия</string>
@@ -65,22 +65,18 @@
 	</string>
     
     <string name="no_buildings_found">Здания не найдены.</string>
-    <string name="incremental_search_city">Выберите город.</string>
+    <string name="incremental_search_city">Выберите город</string>
     <string name="search_villages_and_postcodes">Поиск по деревням и почт. индексу</string>
 	<string name="rendering_attr_showRoadMaps_description">Выберите как отображать только дорожные карты:</string>
 	<string name="rendering_attr_showRoadMaps_name">Карты только дорог</string>
-    <string name="download_roads_only_item">Дороги</string>
+    <string name="download_roads_only_item">"Дороги "</string>
     <string name="download_regular_maps">Полные карты</string>
     <string name="download_roads_only_maps">Карты только дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только Android функции).</string>
     <string name="safe_mode">Безопасный режим</string>
     <string name="native_library_not_running">Приложение запущено в безопасном режиме (отключите в Настройках).</string>
     <string name="background_service_is_enabled_question">Фоновый режим все еще запущен. Вы хотите отменить его?</string>
-    <string name="tip_recent_changes_1_0_0_t">Изменения в 1.0.0 :
-\n\t* Улучшенная навигация: быстрее и рассчет до 250 км
-\n\t* Новые компактные карты (исключительно дороги)
-\n\t* Карта не теряет позицию после прерываний в работе
-\n\t* Включенный фоновый режим в навигации</string>
+    <string name="tip_recent_changes_1_0_0_t">"Изменения в 1.0.0 : ↵\n\t* Улучшенная навигация: быстрее и расчёт до 250 км ↵\n\t* Новые компактные карты (исключительно дороги) ↵\n\t* Карта не теряет позицию после прерываний в работе ↵\n\t* Включённый фоновый режим в навигации "</string>
     <string name="close_changeset">Закрыть changeset</string>
 	<string name="zxing_barcode_scanner_not_found">Приложение \'Сканнер штрих-кодов\' не найдено. Искать на Маркете?</string>
     <string name="non_optimal_route_calculation">Быстрое построение маршрута (возможно неоптимально)</string>
@@ -455,7 +451,7 @@
   <string name="continuous_rendering_descr">Выберите способ отрисовки карты</string>
   <string name="rendering_exception">Во время отображения карты произошла непредвиденная ошибка</string>
   <string name="rendering_out_of_memory">Ошибка : недостаточно памяти процесса, чтобы отобразить карту</string>
-  <string name="show_point_options">Контекстное меню</string>
+  <string name="show_point_options">Контекстное меню...</string>
   <string name="renderer_load_sucess">Стиль успешно загружен</string>
   <string name="renderer_load_exception">Произошла ошибка во время загрузки данного стиля</string>
   <string name="renderers">Стиль отрисовки векторной карты</string>
@@ -1104,5 +1100,7 @@
     <string name="monitoring_control_start">старт</string>
     <string name="download_select_map_types">Прочие карты</string>
     <string name="download_srtm_maps">Карты SRTM</string>
-    <string name="av_settings">Настройки аудио и видео</string>
+    <string name="av_settings">"Настройки аудио и видео "</string>
+    <string name="intermediate_points_change_order">Изменить порядок</string>
+    <string name="animate_routing_using_gpx">Использовать существующий файл GPX?</string>
     </resources>
