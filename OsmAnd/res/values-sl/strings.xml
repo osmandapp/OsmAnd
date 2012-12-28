@@ -1123,4 +1123,6 @@
     <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
     <string name="animate_routing_using_gpx">Ali želite uporabiti obstoječo GPX datoteko?</string>
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
+    <string name="dropbox_plugin_description">Vtičnik Dropbox omogoča sinhronizacijo datotek sledi in video/zvočnih posnetkov z vašim dropbox uporabniškim računom.</string>
+    <string name="dropbox_plugin_name">Vtičnik Dropbox</string>
     </resources>
