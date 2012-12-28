@@ -1121,4 +1121,6 @@
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
     <string name="srtm_paid_version_msg">Overweeg alsjeblieft om de \"Contour lines\" plugin te kopen bij Google Play om de verdere ontwikkeling te ondersteunen.</string>
     <string name="srtm_paid_version_title">Hoogtelijnen / contourlijnen plugin</string>
+    <string name="animate_routing_using_gpx">Wilt u een bestaand GPX-bestand gebruiken?</string>
+    <string name="intermediate_points_change_order">Volgorde wijzigen</string>
     </resources>
