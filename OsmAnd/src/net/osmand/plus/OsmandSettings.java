@@ -104,8 +104,12 @@ public class OsmandSettings {
 		}
 	}
 	
-	private SharedPreferences getProfilePreferences(ApplicationMode mode){
+	public SharedPreferences getProfilePreferences(ApplicationMode mode){
 		return ctx.getSharedPreferences(getSharedPreferencesName(mode), Context.MODE_WORLD_READABLE);
+	}
+	
+	public SharedPreferences getGlobalPreferences(){
+		return ctx.getSharedPreferences(getSharedPreferencesName(null), Context.MODE_WORLD_READABLE);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
