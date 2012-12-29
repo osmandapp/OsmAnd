@@ -1184,4 +1184,5 @@
     <string name="av_settings">Setări audio/video</string>
     <string name="recording_error">Eroare la înregistrare</string>
     <string name="recording_camera_not_available">Camera video nu este disponibilă</string>
+    <string name="dropbox_plugin_description">Plugin-ul Dropbox permite sincronizarea track-urilor și fișierelor audio/video cu contul dvs. de la dropbox.com.</string>
     </resources>
