@@ -1207,4 +1207,6 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     <string name="animate_routing_using_gpx">Voulez-vous utiliser le fichier GPX existant ?</string>
     <string name="intermediate_points_change_order">Changer l\'ordre</string>
+    <string name="dropbox_plugin_name">Greffon Dropbox</string>
+    <string name="dropbox_plugin_description">Le greffon Dropbox permet de synchroniser des pistes et des notes audio / vidéo avec votre compte Dropbox.</string>
     </resources>
