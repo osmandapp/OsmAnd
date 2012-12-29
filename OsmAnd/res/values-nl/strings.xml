@@ -282,7 +282,7 @@
   <string name="search_offline_clear_search">Nieuwe Zoekactie</string>
   <string name="map_text_size_descr">Selecteer tekstgrootte voor namen op de kaart</string>
   <string name="map_text_size">Tekstgrootte</string>
-  <string name="trace_rendering">Spoor-oplevering debug info</string>
+  <string name="trace_rendering">Rendering debug info</string>
   <string name="trace_rendering_descr">Weergavesnelheid</string>
   <string name="tip_recent_changes">Recente wijzigingen</string>
   <string name="tip_recent_changes_0_6_6_t">"Recente wijzigingen for 0.6.6 : \n\t- Text To Speech engine for stem navigation \n\t- Make kaart renderer more detailed \n\t- Basemap for whole world packaged with app \n\t- Tweak offline routing (still experimental) \n\t- GPX routing options \n\t- UI actualisatie and large bug fixing "</string>
@@ -1114,7 +1114,7 @@
     <string name="av_video_format_descr">Selecteer video bestandsformaat</string>
     <string name="av_video_format">Video bestandsformaat</string>
     <string name="av_use_external_recorder_descr">Gebruik de systeem recorder voor video</string>
-    <string name="av_use_external_recorder">Gebruik een externe recorder</string>
+    <string name="av_use_external_recorder">Externe recorder</string>
     <string name="av_settings_descr">Configureer audio- en video-instellingen</string>
     <string name="av_settings">"Audio/video instellingen "</string>
     <string name="recording_error">"Fout opgetreden bij opnemen "</string>
