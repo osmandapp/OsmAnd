@@ -308,7 +308,7 @@
   <string name="search_position_current_location_search">Hľadám umiestnenie…</string>
   <string name="search_position_current_location_found">Umiestnenie [Nájdené]</string>
   <string name="search_position_address">Adresa…</string>
-  <string name="search_position_favorites">Obľúbené body…</string>
+  <string name="search_position_favorites">Obľúbené miesta…</string>
   <string name="search_position_undefined">Neurčené</string>
   <string name="search_position_fixed">Súradnice</string>
   <string name="search_position_current_location">Aktuálne umiestnenie…</string>
@@ -337,7 +337,7 @@
   <string name="local_index_mi_upload_gpx">Poskytnúť pre OSM</string>
   <string name="show_more_map_detail">Zobraziť podrobnejšiu mapu</string>
   <string name="show_more_map_detail_descr">Zobrazí viac detailov offline vektorovej mapy (cesty, atď.) už pri nižších priblíženiach</string>
-  <string name="favourites_delete_multiple_succesful">Obľúbené body úspešne zmazané.</string>
+  <string name="favourites_delete_multiple_succesful">Obľúbené miesta boli úspešne odstránené.</string>
   <string name="favorite_delete_multiple">Idete zmazať %1$d obľúbených bodov a %2$d skupín obľúbených. Ste si istý?</string>
   <string name="favorite_home_category">Domov</string>
   <string name="favorite_friends_category">Priatelia</string>
@@ -458,7 +458,7 @@
 \nOsmAnd Vám umožňuje jednoducho zdieľať hodcijaké umiestnenie chcete.
 \nMôžete to urobiť cez \'Kontextové menu mapy\' -&gt; \'Zdieľať umiestnenie\'.
 \nPotom vyberiete spôsob ako zdieľať Vaše umiestnenie. Na výber je: E-Mail, SMS alebo len skopírovanie súradníc umiestnenia do schránky. "</string>
-  <string name="tip_favorites">Obľúbené body</string>
+  <string name="tip_favorites">Obľúbené miesta</string>
   <string name="tip_favorites_t">"Ak Vás unavuje hľadať miesta, ktoré často navštevujete, môžete si tieto miesta jednoducho pridať medzi Obľúbené a potom ich používať iba pár kliknutiami.
 \n\tNa vytvorenie Obľúbeného bodu musíte ísť do Kontextového menu mapy, vybrať možnosť \'Pridať do obľúbených\' a zadať preň vhodné meno. Po uložení potom môžte k nemu jednoducho pristupovať cez \'Hlavné Menu\'-&gt;\'Obľúbené\'.
 \n\tDlhým kliknutím na obľúbený bod v ponuke \'Obľúbené\', sa môžete navigovať k tomuto bodu, upraviť alebo zmazať ho.
@@ -633,10 +633,10 @@
   <string name="rotate_map_to_bearing_descr">Výber spôsobu otáčania mapy</string>
   <string name="rotate_map_to_bearing">Otáčanie mapy</string>
   <string name="show_route">Zobraziť cestu</string>
-  <string name="fav_imported_sucessfully">Obľúbené body úspešne importované</string>
-  <string name="fav_file_to_load_not_found">GPX súbor obsahujúci obľúbené sa nenachádza v {0}</string>
-  <string name="fav_saved_sucessfully">Obľúbené úspešne uložené do {0}</string>
-  <string name="no_fav_to_save">Žiadne obľúbené body na uloženie</string>
+  <string name="fav_imported_sucessfully">Obľúbené miesta boli úspešne importované</string>
+  <string name="fav_file_to_load_not_found">GPX súbor obsahujúci obľúbené miesta sa nenachádza v {0}</string>
+  <string name="fav_saved_sucessfully">Obľúbené miesta boli úspešne uložené do {0}</string>
+  <string name="no_fav_to_save">Žiadne obľúbené miesta na uloženie</string>
   <string name="import_fav">Importovať</string>
   <string name="export_fav">Exportovať</string>
   <string name="error_occurred_loading_gpx">Chyba pri načítavaní GPX</string>
@@ -648,7 +648,7 @@
   <string name="thanks_yandex_traffic">Vďaka Yandex-u za dopravné informácie.</string>
   <string name="layer_yandex_traffic">Doprava Yandex</string>
   <string name="layer_route">Cesta</string>
-  <string name="layer_favorites">Obľúbené body</string>
+  <string name="layer_favorites">Obľúbené miesta</string>
   <string name="layer_osm_bugs">Chyby OSM</string>
   <string name="layer_transport">Dopravné zastávky</string>
   <string name="layer_poi">Body záujmu (POI)…</string>
@@ -739,7 +739,7 @@
   <string name="search_history_street">Ulica:\n {0}, {1}</string>
   <string name="search_history_int_streets">Pretínajúce ulice: {0} x {1} v {2}</string>
   <string name="search_history_building">Budova: {0}, {1}, {2}</string>
-  <string name="favorite">Obľúbené</string>
+  <string name="favorite">Obľúbené miesto</string>
   <string name="clear_all">Zmazať všetko</string>
   <string name="history">História</string>
   <string name="uploading_data">Nahrávajú sa údaje…</string>
@@ -769,7 +769,7 @@
   <string name="select_index_file_to_download">Nič sa nenašlo. Ak nemôžete ručne nájsť Vašu oblasť, môžete si ju vlastnoručne vytvoriť (viď osmand.net).</string>
   <string name="show_poi_on_map">Zobraziť na mape</string>
   <string name="fav_points_edited">Obľúbený bod bol upravený</string>
-  <string name="fav_points_not_exist">Neexistujú žiadne obľúbené body</string>
+  <string name="fav_points_not_exist">Neexistujú žiadne obľúbené miesta</string>
   <string name="update_existing">Nahradiť</string>
   <string name="only_show">Iba zobraziť</string>
   <string name="follow">Nasledovať</string>
@@ -839,7 +839,7 @@
   <string name="mark_point">Cieľ</string>
   <string name="show_osm_bugs_descr">Zobrazenie OpenStreetBugs na mape</string>
   <string name="show_osm_bugs">Zobraziť OpenStreetBugs</string>
-  <string name="favourites_activity">Obľúbené body</string>
+  <string name="favourites_activity">Obľúbené miesta</string>
   <string name="add_to_favourite">Pridať do Obľúbených</string>
   <string name="use_english_names_descr">Výber medzi domácimi a anglickými názvami</string>
   <string name="use_english_names">Použiť anglické názvy v mapách</string>
@@ -873,7 +873,7 @@
   <string name="exit_Button">Skončiť</string>
   <string name="map_Button">Mapa</string>
   <string name="settings_Button">Nastavenia</string>
-  <string name="favorites_Button">Obľúbené body</string>
+  <string name="favorites_Button">Obľúbené</string>
   <string name="search_button">Hľadať</string>
   <string name="search_activity">Hľadať</string>
   <string name="searchpoi_activity">Vybrať POI</string>
@@ -904,7 +904,7 @@
   <string name="search_address_street_option">Pretínajúca ulica</string>
   <string name="search_tabs_location">Pozícia</string>
   <string name="context_menu_item_navigate_point">Určiť ako cieľ</string>
-  <string name="context_menu_item_add_favorite">Pridať medzi Obľúbené body</string>
+  <string name="context_menu_item_add_favorite">Pridať medzi Obľúbené miesta</string>
   <string name="context_menu_item_update_map">Aktualizovať mapu</string>
   <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
   <string name="context_menu_item_create_poi">Vytvoriť POI</string>
