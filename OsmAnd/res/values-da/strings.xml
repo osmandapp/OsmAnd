@@ -74,4 +74,5 @@
     <string name="no_buildings_found">Ingen bygninger blev fundet.</string>
     <string name="incremental_search_city">Søge by trinvist</string>
     <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
-	</resources>
+	<string name="dropbox_plugin_description">Dropbox plugin gør det muligt at synkronisere spor og video/audio noter med din dropbox-konto.</string>
+    </resources>
