@@ -159,9 +159,12 @@ public class MapInfoControls {
 			if(set != null) {
 				if (set.contains(key)) {
 					def = true;
+					collapse = false;
 				} else if (set.contains("-" + key)) {
 					def = false;
+					collapse = false;
 				} else if(set.contains("+"+key)){
+					def = false;
 					collapse = true;	
 				}
 			}
