@@ -50,6 +50,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -120,6 +121,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	private boolean sensorRegistered = false;
 	private float previousSensorValue = 0;
+	private float previousCorrectionValue = 360;
 	private boolean quitRouteRestoreDialog = false;
 
 	// Notification status
@@ -1292,6 +1294,16 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(currentScreenOrientation == 1){
 			val += 90;
 		}
+		Location l = getLastKnownLocation();
+		if(l != null && previousCorrectionValue == 360) {
+			GeomagneticField gf = new GeomagneticField((float)l.getLatitude(), (float)l.getLongitude(), 
+					(float)l.getAltitude(), System.currentTimeMillis());
+			previousCorrectionValue = gf.getDeclination();
+		}
+		if(previousCorrectionValue != 360 ){
+			val += previousCorrectionValue;
+		}
+		
 		previousSensorValue = val;
 		if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
 			if(Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 15) {
