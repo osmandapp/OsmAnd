@@ -1157,7 +1157,7 @@
     <string name="av_settings_descr">Διαμόρφωση ρυθμίσεων ήχου και εικόνας</string>
     <string name="dropbox_plugin_description">Το πρόσθετο dropbox επιτρέπει τον συγχρονισμό ιχνών και σημειώσεων εικόνας/ήχου με τον dropbox λογαριασμό σας.</string>
     <string name="dropbox_plugin_name">Πρόσθετο dropbox</string>
-    <string name="animate_routing_using_gpx">Θέλετε να χρησιμοποιήσετε υπάρχων αρχείο GPX;</string>
+    <string name="animate_routing_using_gpx">Θέλετε να χρησιμοποιήσετε υπάρχον αρχείο GPX;</string>
     <string name="intermediate_points_change_order">Αλλαγή σειράς</string>
     <string name="srtm_paid_version_msg">Παρακαλώ σκεφτείτε την αγορά του πρόσθετου ισοϋψών γραμμών από το Market για να υποστηρίξετε την περεταίρω ανάπτυξη.</string>
     <string name="srtm_paid_version_title">Πρόσθετο ισοϋψών γραμμών</string>
