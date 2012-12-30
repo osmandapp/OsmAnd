@@ -554,7 +554,9 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	protected void downloadFilesPreCheckSRTM(final List<DownloadEntry> list) {
-		if (type == DownloadActivityType.SRTM_FILE) {
+		if (type == DownloadActivityType.SRTM_FILE && 
+				OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin && 
+				!OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.srtm_paid_version_title);
 			msg.setMessage(getString(R.string.srtm_paid_version_msg));
