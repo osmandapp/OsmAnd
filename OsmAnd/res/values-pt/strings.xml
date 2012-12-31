@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -1017,4 +1017,11 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="route_descr_from_to">De %1$s↵\nAté %2$s</string>
     <string name="route_descr_from_to_via">De : %1$s↵\nVia : %2$s↵\nAté : %3$s</string>
     <string name="search_villages_and_postcodes">Pesquisa por CEP</string>
-	</resources>
+	<string name="dropbox_plugin_description">O plugin Dropbox permite sincronizar trilhos e notas de video/audio com a sua conta Dropbox.</string>
+    <string name="animate_routing_using_gpx">Quer usar o ficheiro GPX actual?</string>
+    <string name="av_def_action_video">Gravar video</string>
+    <string name="av_def_action_audio">Gravar audio</string>
+    <string name="av_widget_action_descr">Escolha a acção widget padrão</string>
+    <string name="av_widget_action">Ação widget padrão</string>
+    <string name="av_video_format">Formato de saída de vídeo</string>
+    </resources>
