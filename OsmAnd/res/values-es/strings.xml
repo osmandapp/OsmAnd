@@ -200,8 +200,8 @@
   <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
   <string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
   <string name="local_indexes_cat_gpx">Datos GPX</string>
-  <string name="local_indexes_cat_tile">Datos de mapa (teselas)</string>
-  <string name="local_indexes_cat_map">Datos de mapa (vectores)</string>
+  <string name="local_indexes_cat_tile">Mapas en línea y teselas</string>
+  <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
   <string name="local_indexes_cat_poi">Datos de PDI</string>
   <string name="ttsvoice">Voz sintetizada</string>
   <string name="search_offline_clear_search">Nueva búsqueda</string>
@@ -488,7 +488,8 @@
   <string name="route_head">Cabecera</string>
   <string name="first_time_continue">Después</string>
   <string name="first_time_download">Descargar regiones</string>
-  <string name="first_time_msg">Gracias por elegir OsmAnd. \nPara poder usar todas las características de la aplicación necesitas algunos datos regionales, que puedes descargar (Opciones / Datos) o preparar tú mismo. Después, podrás buscar por dirección, por PDI y por transporte público.</string>
+  <string name="first_time_msg">Gracias por elegir OsmAnd.
+\nPara poder usar todas las características de la aplicación necesitas algunos datos regionales, que puedes descargar (Opciones / Datos) o preparar tú mismo. Después, podrás ver mapas, localizar direcciones, buscar PDIs y transporte público.</string>
   <string name="search_poi_location">Buscando señal…</string>
   <string name="search_near_map">Buscar cerca de la última localización</string>
   <string name="search_nearby">Buscar cercanos</string>
@@ -553,7 +554,7 @@
   <string name="downloading">Descargando…</string>
   <string name="downloading_list_indexes">Descargando lista de regiones disponibles…</string>
   <string name="list_index_files_was_not_loaded">La lista de regiones no se ha descargado de osmand.net.</string>
-  <string name="select_index_file_to_download">Nada fue encontrado. Si no puede encontrar su región, puede hacerla usted (Visite http://osmand.net).</string>
+  <string name="select_index_file_to_download">No se encontró nada. Si no puedes encontrar tu región, puedes hacerla por ti mismo (Visita http://osmand.net).</string>
   <string name="show_poi_on_map">Mostrar en mapa</string>
   <string name="fav_points_edited">Se editó el punto favorito</string>
   <string name="fav_points_not_exist">No hay puntos favoritos</string>
@@ -752,8 +753,8 @@
   <string name="download_link_and_local_description">Pulsa aquí para descargar o actualizar datos para su uso posterior sin conexión.\nPulsa cualquier ítem para ver más detalles, mantén pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
   <string name="unknown_from_location">El punto de inicio no ha sido determinado</string>
   <string name="context_menu_item_directions">Indicaciones hasta aquí</string>
-  <string name="confirm_interrupt_download">¿Quiere interrumpir la descarga de fichero?</string>
-  <string name="basemap_was_selected_to_download">El MapaBase es necesario para el correcto funcionamiento de la aplicación y ha sido seleccionado para descargar.</string>
+  <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
+  <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
   <string name="gpx_index_settings_descr">" (incluye analizador GPX)"</string>
   <string name="map_online_plugin_is_not_installed">Activa el extra de mapas online para seleccionar diferentes fuentes de mapas</string>
   <string name="map_online_data">Mapas Online (teselas)</string>
@@ -1099,6 +1100,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="srtm_paid_version_title">Extra de curvas de nivel</string>
     <string name="dropbox_plugin_description">El extra de Dropbox permite sincronizar trazas y notas de audio/vídeo con tu cuenta de dropbox.</string>
     <string name="dropbox_plugin_name">Extra de Dropbox</string>
-    <string name="animate_routing_using_gpx">¿Desea utilizar un archivo GPX existente?</string>
+    <string name="animate_routing_using_gpx">¿Quieres usar un archivo GPX existente?</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
     </resources>
