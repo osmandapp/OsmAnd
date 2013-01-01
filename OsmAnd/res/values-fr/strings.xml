@@ -233,8 +233,8 @@
   <string name="search_offline_clear_search">Nouvelle recherche</string>
   <string name="map_text_size_descr">Choisir taille du texte pour les noms sur la carte</string>
   <string name="map_text_size">Taille du texte</string>
-  <string name="trace_rendering">Infos de déboggage du rendu</string>
-  <string name="trace_rendering_descr">Afficher les performances du rendu pour le déboggage</string>
+  <string name="trace_rendering">Infos de débogage du rendu</string>
+  <string name="trace_rendering_descr">Afficher les performances du rendu</string>
   <string name="tip_recent_changes">Changements récents</string>
   <string name="tip_recent_changes_0_6_6_t">Changements en 0.6.6 :
 \n\t- Moteur de synthèse vocale pour le guidage vocal
@@ -808,7 +808,7 @@
   <string name="extra_settings">Paramètres avancés</string>
   <string name="osmand_monitoring_description">Ce greffon permet l\'enregistrement de vos itinéraires en fichiers GPX et le suivi en direct utilisant un service web.</string>
   <string name="osmand_extra_settings_description">Ce greffon permet de gérer des paramètres de configuration avancés et propres à certains appareils.</string>
-  <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de déboggage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
+  <string name="osmand_development_plugin_description">Ce greffon permet la gestion de paramètres de développement et de débogage tels que la navigation animée ou l\'affichage des temps de rendu.</string>
   <string name="plugins_screen">Gestionnaire des greffons</string>
   <string name="select_plugin_to_activate">Toucher un greffon pour l\'activer ou le désactiver (Redémarrage d\'OsmAnd peut être nécessaire)</string>
   <string name="prefs_plugins_descr">Les greffons fournissent des fonctionnalités supplémentaires à l\'application telles que l\'enregistrement des traces, les cartes image, le mode sans affichage, le mode accessibilité et autres.</string>
@@ -819,7 +819,7 @@
   <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
   <string name="simulate_route_progression_manually">Simule la progression sur un itinéraire manuellement</string>
   <string name="play_commands_of_currently_selected_voice">Diffuse les commandes sonores disponibles pour la voix sélectionnée</string>
-  <string name="debugging_and_development">Déboggage et développement OsmAnd</string>
+  <string name="debugging_and_development">Débogage et développement OsmAnd</string>
   <string name="native_rendering">Rendu pré-compilé</string>
   <string name="animate_routing">Navigation animée</string>
   <string name="test_voice_prompts">Tester les commandes vocales</string>
@@ -1054,30 +1054,8 @@
 \n* Nombreuses corrections de bugs "</string>
 <string name="snap_to_road_descr">Coller à la route pendant la navigation</string>
 <string name="snap_to_road">Coller à la route</string>
-<string name="osmand_long_description_1000_chars">
-OsmAnd (OSM Automated Navigation Directions)
-
-OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas.
-
-Fonctionnalités principales :
-- Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable)
-- Cartes hors lignes compactes disponibles pour le monde entier
-- Téléchargement des cartes pour un pays ou une région directement depuis l\'application
-- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des contours, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable
-- Recherche hors ligne d\'adresses et de lieux (PI)
-- Navigation hors ligne pour de courtes distances (expérimentale)
-- Mode voiture, vélo et piéton avec :
-- Option de vue jour/nuit automatique
-- Option de zoom automatique lors des déplacements
-- Orientation automatique de la carte (fixe, boussole, cap)
-
-Limitations de la version gratuite de OsmAnd :
-- Nombre de téléchargement de cartes limité
-- Pas d\'accès aux PI Wikipedia hors ligne.
-
-OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net.
-</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors lignes compactes disponibles pour le monde entier - Téléchargement ilimités des cartes pour un pays ou une région directement depuis l\'application - Points d\'Intérêt (PI) Wikipédia hors ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des contours, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors ligne d\'adresses et de lieux (PI) - Navigation hors ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap)"</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors ligne d\'adresses et de lieux (PI) - Navigation hors ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux PI Wikipedia hors ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique, ou un donation sur osmand.net. "</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors ligne. OsmAnd permet également le routage en ligne et hors ligne avec des instructions vocales pas à pas. OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour. Fonctionnalités principales : - Fonctionne complètement hors ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans un répertoire paramétrable) - Cartes hors lignes compactes disponibles pour le monde entier - Téléchargement ilimités des cartes pour un pays ou une région directement depuis l\'application - Points d\'Intérêt (PI) Wikipédia hors ligne, parfait pour le tourisme - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt, des favoris, des courbes de niveau, les arrêts de transport en commun, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors ligne d\'adresses et de lieux (PI) - Navigation hors ligne pour de courtes distances (expérimentale) - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap)"</string>
 <string name="tip_map_switch_t_v2">\tLes sources des cartes et des couches affichées sont modifiables via \'Menu\' -&gt; \'Couches\'.
 \n\tDans \'Source de la carte…\' vous pouvez choisir entre les cartes vectorielles préchargées, des tuiles en ligne prédéfinies (activer le greffon \'Cartes en ligne\' pour cela), ou des cartes créées manuellement sur un PC grâce à OsmAndMapCreator.
 \n\tOsmAnd supporte également des sources personnalisées.
@@ -1164,7 +1142,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
     <string name="audionotes_plugin_name">Greffon de notes audio</string>
     <string name="srtm_plugin_attribution">ASTER est un produit du METI et la NASA.</string>
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-lignes</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des lignes de niveau qui peuvent être affichées sur les cartes hors ligne de OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des courbes de niveau qui peuvent être affichées sur les cartes hors ligne de OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
     <string name="use_clear_distance_measurement">Cliquez une nouvelle fois pour effacer les points de mesure.</string>
     <string name="use_distance_measurement">Appuyez pour créer un point, appuyez et maintenez enfoncé pour supprimer le point précédent, cliquez sur le gadget de mesure pour quitter.</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1200,7 +1178,7 @@ OsmAnd est activement développé et notre projet et ses progrès futurs dépend
 \n\t* Greffon de prise de notes audio/vidéo
 \n\t* Greffon pour les courbes de niveau
 \n\t* Corrections d\'erreurs
-\n\t* Option \'Touring view\' avec plus de détails\n\t* Nouveaux styles de routes, plus de contrast\n\t* Option pour la randonnée (classification SAC)
+\n\t* Option \'Touring view\' avec plus de détails\n\t* Nouveaux styles de routes, plus de contraste\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS "</string>
     <string name="av_control_start">Enreg.</string>
     <string name="srtm_paid_version_msg">Pensez à acheter le greffon \"Courbes de niveau\" sur Google Play pour soutenir le développement.</string>
