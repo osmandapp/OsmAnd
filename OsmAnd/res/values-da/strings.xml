@@ -75,4 +75,13 @@
     <string name="incremental_search_city">Søge by trinvist</string>
     <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
 	<string name="dropbox_plugin_description">Dropbox plugin gør det muligt at synkronisere spor og video/audio noter med din dropbox-konto.</string>
+    <string name="osmodroid_plugin_name"/>
+	<string name="monitoring_control_start"/>
+    <string name="route_descr_lat_lon"/>
+    <string name="rendering_attr_showRoadMaps_description">Vælg, for at vise kun-vejkort:</string>
+	<string name="rendering_attr_showRoadMaps_name">Kun vejkort</string>
+    <string name="safe_mode_description">Kør program i fejlsikret tilstand (med langsommere Android i stedet for native kode).</string>
+    <string name="safe_mode">Fejlsikret tilstand</string>
+    <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktivere det i indstillinger).</string>
+    <string name="background_service_is_enabled_question">Baggrund tjeneste kører stadig. Ønsker du at annullere det?</string>
     </resources>
