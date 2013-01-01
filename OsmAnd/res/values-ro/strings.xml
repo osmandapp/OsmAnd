@@ -1185,4 +1185,7 @@
     <string name="recording_error">Eroare la înregistrare</string>
     <string name="recording_camera_not_available">Camera video nu este disponibilă</string>
     <string name="dropbox_plugin_description">Plugin-ul Dropbox permite sincronizarea track-urilor și fișierelor audio/video cu contul dvs. de la dropbox.com.</string>
+    <string name="dropbox_plugin_name">Plugin Dropbox</string>
+    <string name="animate_routing_using_gpx">Doriți să folosiți fișierul GPX existent?</string>
+    <string name="intermediate_points_change_order">Schimbare ordine</string>
     </resources>
