@@ -10,6 +10,7 @@ import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
+import net.osmand.ReflectionUtils;
 import net.osmand.Version;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
@@ -69,11 +70,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -1291,8 +1294,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
 		float val = event.values[0];
+		
 		if(currentScreenOrientation == 1){
 			val += 90;
+		} else if(currentScreenOrientation == 2){
+			val += 180;
+		} else if(currentScreenOrientation == 3){
+			val += 270;
 		}
 		Location l = getLastKnownLocation();
 		if(l != null && previousCorrectionValue == 360) {
