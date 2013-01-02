@@ -1192,7 +1192,7 @@
     <string name="av_settings_descr">Konfigurieren von Audio-und Video-Einstellungen</string>
     <string name="recording_camera_not_available">Die Kamera ist nicht verfügbar</string>
     <string name="recording_open_external_player">Öffnen externen Player</string>
-    <string name="recording_delete_confirm">Wollen Sie diese Aufnahme zu entfernen?</string>
+    <string name="recording_delete_confirm">Wollen Sie diese Aufnahme entfernen?</string>
     <string name="recording_unavailable">nicht verfügbar</string>
     <string name="recording_context_menu_play">Spielen</string>
     <string name="recording_default_name">aufnahme</string>
