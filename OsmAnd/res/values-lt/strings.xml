@@ -1215,4 +1215,8 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="av_control_stop">stabd</string>
     <string name="srtm_paid_version_msg">Prašome pirkti kontūrinių linijų įskiepį Android Play parduotuvėje. Taip paremsite tolesnį programos vystymą.</string>
     <string name="srtm_paid_version_title">Kontūrinių linijų įskiepis</string>
+    <string name="dropbox_plugin_description">Dropbox įskeipis leidžia sinchronizuoti išsaugotus kelionių maršrutus ir video/audio užrašus su jūsų Dropbox sąskaita.</string>
+    <string name="dropbox_plugin_name">Dropbox įskiepis</string>
+    <string name="animate_routing_using_gpx">Ar norite naudoti jau egzistuojantį GPX failą?</string>
+    <string name="intermediate_points_change_order">Pakeisti tvarką</string>
     </resources>
