@@ -15,6 +15,7 @@ import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -267,7 +268,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		osmandSettings = getMyApplication().getSettings();
 		
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("global_app_settings");
-		if (!Version.isBlackberry(this)) {
+		if (!Version.isBlackberry(getMyApplication())) {
 			CheckBoxPreference nativeCheckbox = createCheckBoxPreference(osmandSettings.SAFE_MODE, R.string.safe_mode,
 					R.string.safe_mode_description);
 			// disable the checkbox if the library cannot be used
@@ -310,7 +311,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		MetricsConstants[] mvls  = new MetricsConstants[] {MetricsConstants.KILOMETERS_AND_METERS, MetricsConstants.MILES_AND_FOOTS, MetricsConstants.MILES_AND_YARDS}; //MetricsConstants.values();
 		entries = new String[mvls.length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = mvls[i].toHumanString(this);
+			entries[i] = mvls[i].toHumanString(getMyApplication());
 		}
 		registerListPreference(osmandSettings.METRIC_SYSTEM, screen, entries, mvls);
 		
@@ -353,7 +354,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		
 		entries = new String[ApplicationMode.values().length];
 		for(int i=0; i<entries.length; i++){
-			entries[i] = ApplicationMode.values()[i].toHumanString(this);
+			entries[i] = ApplicationMode.values()[i].toHumanString(getMyApplication());
 		}
 		registerListPreference(osmandSettings.APPLICATION_MODE, screen, entries, ApplicationMode.values());
 		
@@ -474,7 +475,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		updateApplicationDirTextAndSummary();
 
 		applicationModePreference.setTitle(getString(R.string.settings_preset) + "  ["
-				+ osmandSettings.APPLICATION_MODE.get().toHumanString(this) + "]");
+				+ osmandSettings.APPLICATION_MODE.get().toHumanString(getMyApplication()) + "]");
 		routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  [" + osmandSettings.ROUTER_SERVICE.get() + "]");
 	}
 
@@ -676,7 +677,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 							ApplicationMode selected = ApplicationMode.values()[ind];
 							osmandSettings.APPLICATION_MODE.set(selected);
 							updateAllSettings();
-							scrDialog.setTitle(tlt + " [" + selected.toHumanString(SettingsActivity.this) + "]");
+							scrDialog.setTitle(tlt + " [" + selected.toHumanString(getMyApplication()) + "]");
 							dlg.dismiss();
 						}
 					});
@@ -786,13 +787,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	}
 
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
-		final OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries();
 		if (!settings.isInternetConnectionAvailable(true)) {
 			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(activity));
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app));
 		if (downloaded == null || downloaded.isEmpty()) {
 			AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
 			return;

@@ -33,7 +33,7 @@ public class DownloadOsmandIndexesHelper {
 	public static IndexFileList getIndexesList(Context ctx) {
 		PackageManager pm =ctx.getPackageManager();
 		AssetManager amanager = ctx.getAssets();
-		String versionUrlParam = Version.getVersionAsURLParam(ctx);
+		String versionUrlParam = Version.getVersionAsURLParam(((OsmandApplication) ctx.getApplicationContext()));
 		IndexFileList result = downloadIndexesListFromInternet(versionUrlParam);
 		if (result == null) {
 			result = new IndexFileList();

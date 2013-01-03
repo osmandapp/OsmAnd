@@ -56,6 +56,12 @@ import android.widget.Toast;
 
 public class MapRenderRepositories {
 
+	// TimeLoadingMap = Rendering (%25) + Searching(%40) + Other 
+	// It is needed to not draw object twice if user have map index that intersects by boundaries
+	// Takes 25% TimeLoadingMap (?) - Long.valueOf - 12, add - 10, contains - 3.
+	public static boolean checkForDuplicateObjectIds = true;
+	
+
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
 	private final static int BASEMAP_ZOOM = 11;
@@ -63,6 +69,7 @@ public class MapRenderRepositories {
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
+	
 
 
 	// lat/lon box of requested vector data
@@ -240,7 +247,7 @@ public class MapRenderRepositories {
 		}
 		
 		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
-				PerformanceFlags.checkForDuplicateObjectIds, this, context.getString(R.string.switch_to_raster_map_to_see));
+				checkForDuplicateObjectIds, this, context.getString(R.string.switch_to_raster_map_to_see));
 		if (checkWhetherInterrupted()) {
 			resultHandler.deleteNativeResult();
 			return false;
@@ -315,7 +322,7 @@ public class MapRenderRepositories {
 				searchRequest.clearSearchResults();
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
 				for (BinaryMapDataObject r : res) {
-					if (PerformanceFlags.checkForDuplicateObjectIds) {
+					if (checkForDuplicateObjectIds) {
 						if (ids.contains(r.getId()) && r.getId() > 0) {
 							// do not add object twice
 							continue;

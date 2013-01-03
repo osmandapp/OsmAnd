@@ -6,17 +6,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import net.osmand.OsmAndFormatter;
-import net.osmand.access.AccessibleToast;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.osm.Node;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -142,7 +142,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				int dist = (int) (MapUtils.getDistance(location, model
 						.getLocation().getLatitude(), model.getLocation()
 						.getLongitude()));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist,getContext()));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist,(ClientContext) getApplication()));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

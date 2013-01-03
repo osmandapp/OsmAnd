@@ -193,7 +193,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
+		return application.getInternalAPI().accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
 
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -820,13 +820,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			setZoom(Math.round(calcZoom));
 			final int newZoom = getZoom();
 			zoomPositionChanged(newZoom);
-			if (application.accessibilityEnabled()) {
+			if (application.getInternalAPI().accessibilityEnabled()) {
 				if (newZoom != initialMultiTouchZoom) {
 					showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
 				} else {
 					final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
 					final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
-					showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+					showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
 				}
 			}
 		}

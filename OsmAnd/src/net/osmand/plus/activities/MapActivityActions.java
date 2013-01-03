@@ -1,18 +1,16 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
 
+import java.io.File;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
@@ -21,6 +19,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.Location;
 import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -30,6 +29,7 @@ import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
@@ -62,7 +62,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -73,8 +72,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -443,7 +442,7 @@ public class MapActivityActions implements DialogProvider {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isGooglePlayEnabled(mapActivity)) {
+			if (Version.isGooglePlayEnabled(mapActivity.getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(getString(R.string.zxing_barcode_scanner_not_found));
 				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
@@ -999,7 +998,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 					@Override
 					public boolean onClick(MenuItem item) {
-						if (getMyApplication().accessibilityEnabled()) {
+						if (getMyApplication().getInternalAPI().accessibilityEnabled()) {
 							whereAmIDialog();
 						} else {
 							mapActivity.backToLocationImpl();
@@ -1125,7 +1124,7 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		});
-		if (Version.isGpsStatusEnabled(mapActivity) && !Version.isBlackberry(mapActivity)) {
+		if (Version.isGpsStatusEnabled(mapActivity.getMyApplication()) && !Version.isBlackberry(mapActivity.getMyApplication())) {
 			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
 					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
 						@Override
@@ -1178,7 +1177,7 @@ public class MapActivityActions implements DialogProvider {
 		if (resolved != null) {
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isGooglePlayEnabled(mapActivity)) {
+			if (Version.isGooglePlayEnabled(mapActivity.getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(getString(R.string.gps_status_app_not_found));
 				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {

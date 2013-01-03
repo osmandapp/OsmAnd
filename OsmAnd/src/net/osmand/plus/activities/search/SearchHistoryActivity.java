@@ -6,6 +6,7 @@ import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -14,7 +15,6 @@ import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.activities.search.SearchHistoryHelper.HistoryEntry;
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
@@ -133,7 +133,7 @@ public class SearchHistoryActivity extends ListActivity  implements SearchActivi
 			final HistoryEntry model = getItem(position);
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distance = OsmAndFormatter.getFormattedDistance(dist, SearchHistoryActivity.this) + "  ";
+				distance = OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getApplication()) + "  ";
 			}
 			label.setText(distance + model.name, BufferType.SPANNABLE);
 			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length(), 0);

@@ -11,7 +11,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.Algoritms;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;

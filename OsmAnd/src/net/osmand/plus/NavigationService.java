@@ -5,6 +5,7 @@ import net.osmand.LogUtil;
 import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.LiveMonitoringHelper;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlarmManager;
@@ -96,7 +97,8 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		handler = new Handler();
-		settings = ((OsmandApplication) getApplication()).getSettings();
+		ClientContext cl = ((OsmandApplication) getApplication());
+		settings = cl.getSettings();
 		
 		startedForNavigation = intent.getBooleanExtra(NAVIGATION_START_SERVICE_PARAM, false);
 		if (startedForNavigation) {
@@ -152,7 +154,7 @@ public class NavigationService extends Service implements LocationListener {
 			Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
 					System.currentTimeMillis());
 			notification.flags = Notification.FLAG_NO_CLEAR;
-			notification.setLatestEventInfo(this, Version.getAppName(this), getString(R.string.service_stop_background_service),
+			notification.setLatestEventInfo(this, Version.getAppName(cl), getString(R.string.service_stop_background_service),
 					PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
 			NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 			mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
@@ -238,7 +240,7 @@ public class NavigationService extends Service implements LocationListener {
 						location.getSpeed(), location.getAccuracy(), locationTime, settings);
 			}
 			if(routingHelper.isFollowingMode()){
-				routingHelper.setCurrentLocation(location, false);
+				routingHelper.setCurrentLocation(MapActivity.convertLocation(location), false);
 			}
 		}
 		

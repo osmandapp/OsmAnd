@@ -5,14 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
+
+import org.apache.commons.logging.Log;
+
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
 import android.app.Activity;

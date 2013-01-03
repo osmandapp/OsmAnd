@@ -5,6 +5,7 @@ import java.util.EnumSet;
 
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OptionsMenuHelper;
@@ -13,7 +14,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoControl;
@@ -385,7 +385,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 							cachedMeters = 0;
 							setText(null, null);
 						} else {
-							String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map);
+							String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map.getMyApplication());
 							int ls = ds.lastIndexOf(' ');
 							if (ls == -1) {
 								setText(ds, null);

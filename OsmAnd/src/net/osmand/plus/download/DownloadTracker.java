@@ -9,15 +9,17 @@ import java.text.MessageFormat;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.Map.Entry;
-
-import org.apache.commons.logging.Log;
+import java.util.Random;
 
 import net.osmand.LogUtil;
 import net.osmand.Version;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ResourceManager;
+
+import org.apache.commons.logging.Log;
+
 import android.app.Activity;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -28,7 +30,7 @@ public class DownloadTracker {
 
 	private Map<String, String> getCustomVars(Activity a) {
 		Map<String, String> map = new LinkedHashMap<String, String>();
-		map.put("App", Version.getFullVersion(a));
+		map.put("App", Version.getFullVersion((ClientContext) a.getApplication()));
 		map.put("Device", Build.DEVICE);
 		map.put("Brand", Build.BRAND);
 		map.put("Model", Build.MODEL);

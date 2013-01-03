@@ -429,7 +429,7 @@ public class MapActivityLayers {
 						new Thread(new Runnable() {
 							@Override
 							public void run() {
-								final GPXFile res = GPXUtilities.loadGPXFile(activity, f, convertCloudmade);
+								final GPXFile res = GPXUtilities.loadGPXFile(activity.getMyApplication(), f, convertCloudmade);
 								dlg.dismiss();
 								activity.runOnUiThread(new Runnable() {
 									@Override
@@ -471,7 +471,7 @@ public class MapActivityLayers {
 			}
 		}
 		for(AmenityType t : AmenityType.values()){
-			list.add(OsmAndFormatter.toPublicString(t, activity));
+			list.add(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
 		}
 		Builder builder = new AlertDialog.Builder(activity);
 		builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener(){

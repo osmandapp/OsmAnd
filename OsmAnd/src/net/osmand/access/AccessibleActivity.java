@@ -1,7 +1,5 @@
 package net.osmand.access;
 
-import net.osmand.access.AccessibleContent;
-
 import android.app.Activity;
 import android.view.MotionEvent;
 

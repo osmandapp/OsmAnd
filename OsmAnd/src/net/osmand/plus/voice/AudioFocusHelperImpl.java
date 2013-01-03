@@ -1,9 +1,10 @@
 package net.osmand.plus.voice;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.LogUtil;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer.AudioFocusHelper;
+
+import org.apache.commons.logging.Log;
+
 import android.content.Context;
 import android.media.AudioManager;
 

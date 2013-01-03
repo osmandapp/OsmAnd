@@ -4,9 +4,9 @@ import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -420,10 +420,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 			double dist = MapUtils.getDistance(latitude, leftLon, latitude, rightLon);
 			double pixDensity = view.getWidth() / dist; 
 			
-			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getContext());
+			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
 			
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
-			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getContext()));
+			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
 			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText.getText());
 			
 			Rect bounds = rulerDrawable.getBounds();

@@ -156,7 +156,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(Version.isFreeVersion(this) && settings.checkFreeDownloadsNumberZero()){
+		if(Version.isFreeVersion(getMyApplication()) && settings.checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
@@ -528,7 +528,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 
 	protected void downloadFilesCheckFreeVersion(List<DownloadEntry> list) {
-		if (Version.isFreeVersion(this) ) {
+		if (Version.isFreeVersion(getMyApplication()) ) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			boolean wiki = false;
 			for (DownloadEntry es : list) {
@@ -735,13 +735,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 
 		private void trackEvent(DownloadEntry entry) {
-			String v = Version.getAppName(DownloadIndexActivity.this);
-			if (Version.isProductionVersion(DownloadIndexActivity.this)) {
-				v = Version.getFullVersion(DownloadIndexActivity.this);
+			String v = Version.getAppName(getMyApplication());
+			if (Version.isProductionVersion(getMyApplication())) {
+				v = Version.getFullVersion(getMyApplication());
 			} else {
 				v += " test";
 			}
-			new DownloadTracker().trackEvent(DownloadIndexActivity.this, v, Version.getAppName(DownloadIndexActivity.this),
+			new DownloadTracker().trackEvent(DownloadIndexActivity.this, v, Version.getAppName(getMyApplication()),
 					entry.baseName, 1, DownloadIndexActivity.this.getString(R.string.ga_api_key));
 		}
 
@@ -773,6 +773,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	public ClientContext getClientContext() {
-		return getMyApplication().getClientContext();
+		return getMyApplication();
 	}
 }

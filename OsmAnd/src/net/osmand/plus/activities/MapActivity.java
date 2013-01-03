@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -10,7 +11,6 @@ import net.osmand.Algoritms;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.LogUtil;
-import net.osmand.ReflectionUtils;
 import net.osmand.Version;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
@@ -22,11 +22,13 @@ import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.TargetPointsHelper;
@@ -70,13 +72,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.Surface;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -151,7 +151,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		Notification notification = new Notification(R.drawable.icon, "", //$NON-NLS-1$
 				System.currentTimeMillis());
 		notification.flags |= Notification.FLAG_AUTO_CANCEL;
-		notification.setLatestEventInfo(this, Version.getAppName(this),
+		notification.setLatestEventInfo(this, Version.getAppName(getMyApplication()),
 				getString(R.string.go_back_to_osmand), PendingIntent.getActivity(
 						this, 0, notificationIndent,
 						PendingIntent.FLAG_UPDATE_CURRENT));
@@ -292,7 +292,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// can't return from this method we are not sure if activity will be recreated or not
 		}
 		
-		Location loc = getLastKnownLocation();
+		net.osmand.Location loc = getLastKnownLocation();
 		if (loc != null && (System.currentTimeMillis() - loc.getTime()) > 30 * 1000) {
 			setLocation(null);
 		}
@@ -307,8 +307,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 
 		updateApplicationModeSettings();
+		
+		String filterId = settings.getPoiFilterForMap();
+		PoiFilter poiFilter = getMyApplication().getPoiFilters().getFilterById(filterId);
+		if (poiFilter == null) {
+			poiFilter = new PoiFilter(null, getMyApplication());
+		}
 
-		mapLayers.getPoiMapLayer().setFilter(settings.getPoiFilterForMap((OsmandApplication) getApplication()));
+		mapLayers.getPoiMapLayer().setFilter(poiFilter);
 
 		mapLayers.getMapInfoLayer().getBackToLocation().setEnabled(false);
 
@@ -465,7 +471,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 						protected GPXFile doInBackground(String... params) {
 							if (gpxPath != null) {
 								// Reverse also should be stored ?
-								GPXFile f = GPXUtilities.loadGPXFile(MapActivity.this, new File(gpxPath), false);
+								GPXFile f = GPXUtilities.loadGPXFile(getMyApplication(), new File(gpxPath), false);
 								if (f.warning != null) {
 									return null;
 								}
@@ -479,7 +485,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 						protected void onPostExecute(GPXFile result) {
 							final GPXRouteParams gpxRoute = result == null ? null : new GPXRouteParams(result, false, settings);
 							LatLon endPoint = pointToNavigate != null ? pointToNavigate : gpxRoute.getLastPoint();
-							Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
+							net.osmand.Location startPoint = gpxRoute == null ? null : gpxRoute.getStartPointForRoute();
 							if (endPoint == null) {
 								notRestoreRoutingMode();
 							} else {
@@ -531,7 +537,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		newZoom = Math.round(newZoom * OsmandMapTileView.ZOOM_DELTA) * OsmandMapTileView.ZOOM_DELTA_1;
 		boolean changeLocation = settings.AUTO_ZOOM_MAP.get();
 		mapView.getAnimatedDraggingThread().startZooming(newZoom, changeLocation);
-		if (getMyApplication().accessibilityEnabled())
+		if (getMyApplication().getInternalAPI().accessibilityEnabled())
 			AccessibleToast.makeText(this, getString(R.string.zoomIs) + " " + String.valueOf(newZoom), Toast.LENGTH_SHORT).show(); //$NON-NLS-1$
 		showAndHideMapPosition();
 	}
@@ -636,7 +642,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			//that they could do some key combinations with it...
 			// Victor : doing in that way doesn't close dialog properly!
 			//return true;
-		} else if (getMyApplication().accessibilityEnabled() && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER)) {
+		} else if (getMyApplication().getInternalAPI().accessibilityEnabled() && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER)) {
 			if (!uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				Message msg = Message.obtain(uiHandler, new Runnable() {
 						@Override
@@ -760,7 +766,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 
 
 
-	private void registerUnregisterSensor(Location location, boolean overruleRegister){
+	private void registerUnregisterSensor(net.osmand.Location location, boolean overruleRegister){
 		boolean currentShowingAngle = settings.SHOW_VIEW_ANGLE.get(); 
 		int currentMapRotation = settings.ROTATE_MAP.get();
 		boolean show = overruleRegister || (currentShowingAngle && location != null) || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
@@ -790,7 +796,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(!isMapLinkedToLocation()){
 			setMapLinkedToLocation(true);
 			if(locationLayer.getLastKnownLocation() != null){
-				Location lastKnownLocation = locationLayer.getLastKnownLocation();
+				net.osmand.Location lastKnownLocation = locationLayer.getLastKnownLocation();
 				AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 				float fZoom = mapView.getFloatZoom() < 13 ? 13 : mapView.getFloatZoom();
 				thread.startMoving( lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), fZoom, false);
@@ -802,7 +808,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	// location not null!
-	private void updateSpeedBearingEmulator(Location location) {
+	private void updateSpeedBearingEmulator(net.osmand.Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
 		// possibly keep using only for emulator case
 		PointLocationLayer locationLayer = mapLayers.getLocationLayer();
@@ -831,11 +837,11 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	}
 	
-	public boolean isPointAccurateForRouting(Location loc) {
+	public boolean isPointAccurateForRouting(net.osmand.Location loc) {
 		return loc != null && loc.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING * 3 /2;
 	}
 
-	public void setLocation(Location location) {
+	public void setLocation(net.osmand.Location location) {
 		if (Log.isLoggable(LogUtil.TAG, Log.DEBUG)) {
 			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
@@ -870,7 +876,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		boolean enableSensorNavigation = routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get() ? location == null
 				|| !location.hasBearing() : false;
 		registerUnregisterSensor(location, enableSensorNavigation);
-		Location updatedLocation = location;
+		net.osmand.Location updatedLocation = location;
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || !location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
 				// Update routing position and get location for sticking mode
@@ -892,7 +898,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 					Message msg = Message.obtain(uiHandler, new Runnable() {
 						@Override
 						public void run() {
-							Location lastKnown = getLastKnownLocation();
+							net.osmand.Location lastKnown = getLastKnownLocation();
 							if (lastKnown != null && lastKnown.getTime() - fixTime < LOST_LOCATION_CHECK_DELAY / 2) {
 								// false positive case, still strange how we got here with removeMessages
 								return;
@@ -924,7 +930,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		mapView.refreshMap();
 	}
 
-	private void updateAutoMapViewConfiguration(Location location) {
+	private void updateAutoMapViewConfiguration(net.osmand.Location location) {
 		long now = System.currentTimeMillis();
 		if (isMapLinkedToLocation()) {
 			if (settings.AUTO_ZOOM_MAP.get() && location.hasSpeed()) {
@@ -994,7 +1000,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 	
 	
-	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation, GPXRouteParams gpxRoute){
+	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, net.osmand.Location currentLocation, GPXRouteParams gpxRoute){
 		// change global settings
 		// Do not overwrite PREV_APPLICATION_MODE if already navigating
 		if (!routingHelper.isFollowingMode()) {
@@ -1015,7 +1021,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	
-	public Location getLastKnownLocation(){
+	public net.osmand.Location getLastKnownLocation(){
 		if(mapLayers.getLocationLayer() == null) {
 			return null;
 		}
@@ -1059,7 +1065,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// double check about use only gps
 			// that strange situation but it could happen?
 			if(!useOnlyGPS()){
-				setLocation(location);
+				setLocation(convertLocation(location));
 			}
 		}
 
@@ -1080,7 +1086,28 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				setLocation(null);
 			}
 		}
+		
 	};
+	
+	public static net.osmand.Location convertLocation(Location l) {
+		net.osmand.Location r = new net.osmand.Location(l.getProvider());
+		r.setLatitude(l.getLatitude());
+		r.setLongitude(l.getLongitude());
+		r.setTime(l.getTime());
+		if(l.hasAccuracy()) {
+			r.setAccuracy(l.getAccuracy());
+		}
+		if(l.hasSpeed()) {
+			r.setSpeed(l.getSpeed());
+		}
+		if(l.hasAltitude()) {
+			r.setAltitude(l.getAltitude());
+		}
+		if(l.hasBearing()) {
+			r.setBearing(l.getBearing());
+		}
+		return r;
+	}
 	
 	
 	private LocationListener gpsListener = new LocationListener(){
@@ -1089,7 +1116,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (location != null) {
 				lastTimeGPSLocationFixed = location.getTime();
 			}
-			setLocation(location);
+			setLocation(convertLocation(location));
 		}
 
 		@Override
@@ -1098,7 +1125,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (!useOnlyGPS() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 				Location loc = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 				if(loc != null && (System.currentTimeMillis() - loc.getTime()) < USE_ONLY_GPS_INTERVAL){
-					setLocation(loc);
+					setLocation(convertLocation(loc));
 				}
 			} else {
 				setLocation(null);
@@ -1211,7 +1238,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
    			//onBackPressed();
 			//return true;
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
-			if (!getMyApplication().accessibilityEnabled()) {
+			if (!getMyApplication().getInternalAPI().accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			} else if (uiHandler.hasMessages(LONG_KEYPRESS_MSG_ID)) {
 				uiHandler.removeMessages(LONG_KEYPRESS_MSG_ID);
@@ -1302,7 +1329,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else if(currentScreenOrientation == 3){
 			val += 270;
 		}
-		Location l = getLastKnownLocation();
+		net.osmand.Location l = getLastKnownLocation();
 		if(l != null && previousCorrectionValue == 360) {
 			GeomagneticField gf = new GeomagneticField((float)l.getLatitude(), (float)l.getLongitude(), 
 					(float)l.getAltitude(), System.currentTimeMillis());

@@ -315,7 +315,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			check.setChecked(filter.isTypeAccepted(model));
 
 			TextView text = (TextView) row.findViewById(R.id.filter_poi_label);
-			text.setText(OsmAndFormatter.toPublicString(model, EditPOIFilterActivity.this));
+			text.setText(OsmAndFormatter.toPublicString(model, getMyApplication()));
 			addRowListener(model, text, check);
 			return (row);
 		}

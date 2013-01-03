@@ -53,7 +53,7 @@ public class IntermediatePointsDialog {
 					double lat = ((MapActivity) activity).getMapView().getLatitude();
 					double lon = ((MapActivity) activity).getMapView().getLongitude();
 					double meters = MapUtils.getDistance(intermediates.get(position), lat, lon);
-					distString = OsmAndFormatter.getFormattedDistance((float) meters, activity);
+					distString = OsmAndFormatter.getFormattedDistance((float) meters, app);
 				}
 				
 				nm += app.getString(R.string.target_point, distString);

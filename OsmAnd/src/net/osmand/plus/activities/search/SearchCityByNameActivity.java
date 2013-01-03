@@ -150,10 +150,10 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		if (getFilter().length() > 2 && locationToSearch != null && l != null) {
 			String name = obj.getName(region.useEnglishNames());
 			if (obj.getType() != null) {
-				name += " [" + OsmAndFormatter.toPublicString(obj.getType(), this) + "]";
+				name += " [" + OsmAndFormatter.toPublicString(obj.getType(), getMyApplication()) + "]";
 			}
 			return name + " - " + //$NON-NLS-1$
-					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), this);
+					OsmAndFormatter.getFormattedDistance((int) MapUtils.getDistance(l, locationToSearch), getMyApplication());
 		} else {
 			return obj.getName(region.useEnglishNames());
 		}

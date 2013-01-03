@@ -112,7 +112,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private View searchFilterLayout;
 	
 	private boolean searchNearBy = false;
-	private Location location = null; 
+	private net.osmand.Location location = null; 
 	private Float heading = null;
 	
 	private String currentLocationProvider = null;
@@ -266,7 +266,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		super.onResume();
 		Bundle bundle = this.getIntent().getExtras();
 		if(bundle.containsKey(SEARCH_LAT) && bundle.containsKey(SEARCH_LON)){
-			location = new Location("internal"); //$NON-NLS-1$
+			location = new net.osmand.Location("internal"); //$NON-NLS-1$
 			location.setLatitude(bundle.getDouble(SEARCH_LAT));
 			location.setLongitude(bundle.getDouble(SEARCH_LON));
 			searchNearBy = false;
@@ -325,7 +325,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		}
 	}
 	
-	private void showPoiCategoriesByNameFilter(String query, Location loc){
+	private void showPoiCategoriesByNameFilter(String query, net.osmand.Location loc){
 		OsmandApplication app = (OsmandApplication) getApplication();
 		if(loc != null){
 			Map<AmenityType, List<String>> map = app.getResourceManager().searchAmenityCategoriesByName(query, loc.getLatitude(), loc.getLongitude());
@@ -348,7 +348,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		Iterator<Entry<AmenityType, List<String>>> iterator = map.entrySet().iterator();
 		while(iterator.hasNext() && count < 4){
 			Entry<AmenityType, List<String>> e = iterator.next();
-			b.append("\n").append(OsmAndFormatter.toPublicString(e.getKey(), this)).append(" - ");
+			b.append("\n").append(OsmAndFormatter.toPublicString(e.getKey(), getMyApplication())).append(" - ");
 			if(e.getValue() == null){
 				b.append("...");
 			} else {
@@ -381,12 +381,12 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		}
 	}
 	
-	public void setLocation(Location l){
+	public void setLocation(net.osmand.Location l){
 		registerUnregisterSensor(l);
 		navigationInfo.setLocation(l);
 		boolean handled = false;
 		if (l != null && filter != null) {
-			Location searchedLocation = getSearchedLocation();
+			net.osmand.Location searchedLocation = getSearchedLocation();
 			if (searchedLocation == null) {
   				searchedLocation = l;
 				if (!isNameFinderFilter() && !isSearchByNameFilter()) {
@@ -412,7 +412,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		
 	}
 	
-	private Location getSearchedLocation(){
+	private net.osmand.Location getSearchedLocation(){
 		return currentSearchTask.getSearchedLocation();
 	}
 	
@@ -476,7 +476,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	
 	
 	
-	private void registerUnregisterSensor(Location location){
+	private void registerUnregisterSensor(net.osmand.Location location){
     	// show point view only if gps enabled
     	if(location == null){
     		if(sensorRegistered) {
@@ -519,7 +519,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	public void onListItemClick(ListView parent, View v, int position, long id) {
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		final QuickAction qa = new QuickAction(v);
-		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, settings.usingEnglishNames());
+		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.usingEnglishNames());
 		String name = getString(R.string.poi)+" : " + poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 		MapActivityActions.createDirectionsActions(qa, amenity.getLocation(), amenity, name, z, this, true , null);
@@ -531,7 +531,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			@Override
 			public void onClick(View v) {
 				Builder bs = new AlertDialog.Builder(v.getContext());
-				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, v.getContext(), settings.USE_ENGLISH_NAMES.get()));
+				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.USE_ENGLISH_NAMES.get()));
 				StringBuilder d = new StringBuilder();
 				if(amenity.getOpeningHours() != null) {
 					d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
@@ -550,7 +550,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			}
 		});
 		qa.addActionItem(poiDescription);
-		if (((OsmandApplication)getApplication()).accessibilityEnabled()) {
+		if (((OsmandApplication)getApplication()).getInternalAPI().accessibilityEnabled()) {
 			ActionItem showDetails = new ActionItem();
 			showDetails.setTitle(getString(R.string.show_details));
 			showDetails.setOnClickListener(new OnClickListener() {
@@ -573,9 +573,9 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		private static final int NEW_SEARCH_INIT = 2;
 		private static final int SEARCH_FURTHER = 3;
 		private int type;
-		private Location location;
+		private net.osmand.Location location;
 		
-		public static SearchAmenityRequest buildRequest(Location l, int type){
+		public static SearchAmenityRequest buildRequest(net.osmand.Location l, int type){
 			SearchAmenityRequest req = new SearchAmenityRequest();
 			req.type = type;
 			req.location = l;
@@ -595,7 +595,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			
 		}
 		
-		Location getSearchedLocation(){
+		net.osmand.Location getSearchedLocation(){
 			return request != null ? request.location : null; 
 		}
 
@@ -713,7 +713,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
-			Location loc = location;
+			net.osmand.Location loc = location;
 			if(loc != null){
 				mes = new float[2];
 				LatLon l = amenity.getLocation();
@@ -753,7 +753,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 
 			String distance = "  ";
 			if(mes != null){
-				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], SearchPOIActivity.this) + "  "; //$NON-NLS-1$
+				distance = " " + OsmAndFormatter.getFormattedDistance((int) mes[0], getMyApplication()) + "  "; //$NON-NLS-1$
 			}
 			String poiType = OsmAndFormatter.getPoiStringWithoutType(amenity, settings.usingEnglishNames());
 			label.setText(distance + poiType, TextView.BufferType.SPANNABLE);
@@ -807,7 +807,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 
 	private void showPOIDetails(final Amenity amenity, boolean en) {
 		AlertDialog.Builder b = new AlertDialog.Builder(SearchPOIActivity.this);
-		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, SearchPOIActivity.this, en));
+		b.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), en));
 		b.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
@@ -837,7 +837,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private LocationListener networkListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(location);
+			setLocation(MapActivity.convertLocation(location));
 		}
 
 		@Override
@@ -859,7 +859,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private LocationListener gpsListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(location);
+			setLocation(MapActivity.convertLocation(location));
 		}
 
 		@Override

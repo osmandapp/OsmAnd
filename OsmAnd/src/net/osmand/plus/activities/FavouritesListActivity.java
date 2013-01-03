@@ -11,6 +11,7 @@ import net.osmand.FavouritePoint;
 import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -170,7 +171,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			if (location != null) {
 				int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), location.getLatitude(), location
 						.getLongitude()));
-				distance = OsmAndFormatter.getFormattedDistance(dist, FavouritesListActivity.this) + "  " ;
+				distance = OsmAndFormatter.getFormattedDistance(dist, (ClientContext) getApplication()) + "  " ;
 			}
 			
 			label.setText(distance + getName(model), BufferType.SPANNABLE);

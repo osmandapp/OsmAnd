@@ -69,7 +69,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 					directionInfo--;
 					if(routingHelper.getRouteDirections().size() > directionInfo){
 						RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
-						Location l = routingHelper.getLocationFromRouteDirection(info);
+						net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
 						if(info.getDescriptionRoute() != null) {
 							contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
 						}
@@ -87,7 +87,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 				if(routingHelper.getRouteDirections() != null && directionInfo < routingHelper.getRouteDirections().size() - 1){
 					directionInfo++;
 					RouteDirectionInfo info = routingHelper.getRouteDirections().get(directionInfo);
-					Location l = routingHelper.getLocationFromRouteDirection(info);
+					net.osmand.Location l = routingHelper.getLocationFromRouteDirection(info);
 					if(info.getDescriptionRoute() != null){
 						contextMenu.setLocation(new LatLon(l.getLatitude(), l.getLongitude()), info.getDescriptionRoute());
 					}

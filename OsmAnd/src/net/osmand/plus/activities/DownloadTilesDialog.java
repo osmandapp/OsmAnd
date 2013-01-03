@@ -138,7 +138,7 @@ public class DownloadTilesDialog {
 			}
 		});
 		
-		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(ctx));
+		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(app));
 		
 		final ArrayList<IMapDownloaderCallback> previousCallbacks = 
 			new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());

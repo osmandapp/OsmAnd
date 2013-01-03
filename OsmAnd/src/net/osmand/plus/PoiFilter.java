@@ -43,7 +43,8 @@ public class PoiFilter {
 		this.application = application;
 		isStandardFilter = true;
 		filterId = STD_PREFIX + type;
-		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : OsmAndFormatter.toPublicString(type, application); //$NON-NLS-1$
+		name = type == null ? application.getString(R.string.poi_filter_closest_poi) : OsmAndFormatter.toPublicString(type, 
+				application); //$NON-NLS-1$
 		if(type == null){
 			initSearchAll();
 		} else {

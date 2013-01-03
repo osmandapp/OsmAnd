@@ -3,7 +3,6 @@ package net.osmand.plus;
 import java.io.File;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -76,7 +75,8 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 	}
 	
 	public String exportFavorites(String fileName) {
-		File f = new File(((OsmandApplication) context.getApplicationContext()).getSettings().extendOsmandPath(ResourceManager.APP_DIR), fileName);
+		ClientContext cl = ((OsmandApplication) context.getApplicationContext());
+		File f = new File(cl.getSettings().extendOsmandPath(ResourceManager.APP_DIR), fileName);
 		GPXFile gpx = new GPXFile();
 		for (FavouritePoint p : getFavouritePoints()) {
 			if (p.isStored()) {
@@ -89,7 +89,7 @@ public class FavouritesDbHelper extends SQLiteOpenHelper {
 				gpx.points.add(pt);
 			}
 		}
-		return GPXUtilities.writeGpxFile(f, gpx, context);
+		return GPXUtilities.writeGpxFile(f, gpx, cl);
 	}
 	
 	private void createCategories(SQLiteDatabase db){

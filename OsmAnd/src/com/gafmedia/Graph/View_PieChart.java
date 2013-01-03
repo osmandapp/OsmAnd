@@ -1,14 +1,13 @@
 package com.gafmedia.Graph;
 
-import com.gafmedia.Graph.PieItem;
 import java.util.List;
+
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.graphics.BitmapFactory.Options;
 import android.util.AttributeSet;
 import android.view.View;
 

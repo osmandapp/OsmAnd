@@ -1,7 +1,6 @@
 package net.osmand.access;
 
 import net.osmand.plus.OsmandApplication;
-
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;
@@ -74,7 +73,7 @@ public class AccessibleLayout extends FrameLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        final boolean swallow = ((OsmandApplication) getContext().getApplicationContext()).accessibilityExtensions();
+        final boolean swallow = ((OsmandApplication) getContext().getApplicationContext()).getInternalAPI().accessibilityExtensions();
         if (swallow) {
             int action = event.getAction();
             View newTouch;

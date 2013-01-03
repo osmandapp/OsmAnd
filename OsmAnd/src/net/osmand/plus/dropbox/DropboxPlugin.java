@@ -1,13 +1,14 @@
 package net.osmand.plus.dropbox;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+
+import org.apache.commons.logging.Log;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -76,7 +77,7 @@ public class DropboxPlugin extends OsmandPlugin {
 	
 	private String[] getKeys() {
 		OsmandSettings set = app.getSettings();
-        SharedPreferences prefs = set.getGlobalPreferences();
+        SharedPreferences prefs = (SharedPreferences) set.getGlobalPreferences();
         String key = prefs.getString(ACCESS_KEY_NAME, null);
         String secret = prefs.getString(ACCESS_SECRET_NAME, null);
         if (key != null && secret != null) {
@@ -92,13 +93,13 @@ public class DropboxPlugin extends OsmandPlugin {
 	public void storeKeys(String key, String secret) {
         // Save the access key for later
 		OsmandSettings set = app.getSettings();
-        SharedPreferences prefs = set.getGlobalPreferences();
+        SharedPreferences prefs = (SharedPreferences) set.getGlobalPreferences();
         prefs.edit().putString(ACCESS_KEY_NAME, key)
         .putString(ACCESS_SECRET_NAME, secret).commit();
     }
 
 	public void clearKeys() {
-        SharedPreferences prefs = app.getSettings().getGlobalPreferences();
+        SharedPreferences prefs = (SharedPreferences) app.getSettings().getGlobalPreferences();
         prefs.edit().remove(ACCESS_KEY_NAME).remove(ACCESS_SECRET_NAME).commit();
     }
 

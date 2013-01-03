@@ -1,5 +1,6 @@
 package net.osmand.plus.views;
 
+import net.osmand.plus.ClientContext;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -81,6 +82,10 @@ public abstract class MapInfoControl extends View implements MapControlUpdateabl
 			return true;
 		}
 		return false;
+	}
+	
+	public ClientContext getClientContext(){
+		return (ClientContext) getContext().getApplicationContext();
 	}
 	
 

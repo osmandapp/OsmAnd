@@ -1,10 +1,12 @@
 package net.osmand.plus.routing;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
+import net.osmand.Location;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -12,7 +14,6 @@ import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.location.Location;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;

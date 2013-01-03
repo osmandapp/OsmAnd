@@ -9,6 +9,7 @@ import java.util.List;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
+import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 
@@ -22,16 +23,15 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.Matrix;
-import android.graphics.Matrix.ScaleToFit;
 
 
 public class SQLiteTileSource implements ITileSource {
 
 	
-	public static final String EXT = ".sqlitedb"; //$NON-NLS-1$
+	public static final String EXT = IndexConstants.SQLITE_EXT;
 	private static final Log log = LogUtil.getLog(SQLiteTileSource.class); 
 	
 	private ITileSource base;

@@ -62,7 +62,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 
 	private static final long NO_CHANGESET_ID = -1;
 	
-	private final Context ctx;
+	private final OsmandApplication ctx;
 	private final View view;
 	private EntityInfo entityInfo;
 	
@@ -75,9 +75,9 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	private OsmandSettings settings;
 
 	public OpenstreetmapRemoteUtil(Context uiContext, View view){
-		this.ctx = uiContext;
+		this.ctx = ((OsmandApplication) uiContext.getApplicationContext());
 		this.view = view;
-		settings = ((OsmandApplication) uiContext.getApplicationContext()).getSettings();
+		settings = ctx.getSettings();
 	}
 
 	@Override
