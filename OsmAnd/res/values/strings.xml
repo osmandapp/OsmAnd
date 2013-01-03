@@ -9,6 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
+    <string name="clear_dest_confirm">Are you sure you want to clear your destination point?</string>
     <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and video/audio notes with your dropbox account.</string>
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="animate_routing_using_gpx">Do you want to use existing GPX file?</string>
