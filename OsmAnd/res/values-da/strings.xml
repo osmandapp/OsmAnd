@@ -96,9 +96,6 @@
     <string name="map_widget_show_destination_arrow">Vis destinations retning</string>
     <string name="enable_plugin_monitoring_services">Aktiver sporings plugin til at bruge position logging tjenester (logning, live tracking)</string>
     <string name="dropbox_plugin_name"/>
-    <string name="osmodroid_plugin_name"/>
-	<string name="monitoring_control_start"/>
-    <string name="route_descr_lat_lon"/>
     <string name="non_optimal_route_calculation">Beregn en mulig ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logføring tjenester</string>
