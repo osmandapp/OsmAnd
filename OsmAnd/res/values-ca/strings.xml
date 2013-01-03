@@ -1003,15 +1003,16 @@
 	<string name="route_descr_from_to">Des : %1$s\nA : %2$s</string>
     <string name="route_descr_from_to_via">De : %1$s\na : %3$s\nper : %2$s</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
-    <string name="intermediate_points_change_order">Canviar ordre</string>
+    <string name="intermediate_points_change_order">Canvia l\'ordre</string>
     <string name="recording_delete_confirm">Vols eliminar aquesta gravació?</string>
     <string name="recording_default_name">enregistrant</string>
     <string name="recording_description">Enregistrant %1$s %2$s at %3$s</string>
     <string name="layer_recordings">Enregistrant capa</string>
     <string name="recording_can_not_be_played">L\'enregistrament no pot ser reproduit</string>
     <string name="av_control_stop">parar</string>
-    <string name="srtm_paid_version_msg">Si us plau valora comprar el connector de les lineas de Contour en el Market per ajudar al desenvolupament futur.</string>
+    <string name="srtm_paid_version_msg">Valora comprar el connector de les línies de Contour al Market per ajudar al desenvolupament futur.</string>
     <string name="srtm_paid_version_title">Connector de linias Contour</string>
     <string name="av_video_format">Format de sortida de video</string>
     <string name="av_use_external_recorder_descr">Usar el enregistrament de video del sistema</string>
+    <string name="osmand_distance_plugin_name">Calculadora de distàncies</string>
     </resources>
