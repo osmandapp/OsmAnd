@@ -1133,7 +1133,7 @@
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Cartes SRTM</string>
     <string name="index_srtm_parts">parties</string>
-    <string name="osmand_distance_plugin_description">Mesurer une distance entre deux points. Spécifier l\'origine et la destination. Effacer la mesure par un appui long.</string>
+    <string name="osmand_distance_plugin_description">Mesurer une distance entre des points. Ajouter des points par des appuis courts. Les effacer par un appui long.</string>
 	<string name="osmand_distance_plugin_name">Calculateur de distances</string>
 <string name="audionotes_location_not_defined">La position courante n\'est pas encore connue pour permettre de prendre les notes audio</string>
     <string name="monitoring_control_stop">Arrêter</string>
