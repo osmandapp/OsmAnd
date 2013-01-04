@@ -1043,4 +1043,25 @@
     <string name="safe_mode_description">Executa l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el punt de ruta</string>
 	<string name="intermediate_point"/>
-    </resources>
+    <string name="download_srtm_maps">Dades de corbes de nivell</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">El connector OsMoDroid és d\'una versió antiga i cal actualitzar-lo.</string>
+    <string name="incomplete_locale">incomplet</string>
+	<string name="use_high_res_maps_descr">No ampliïs (ni difuminis) les tessel·les del mapa en pantalles d\'alta densitat</string>
+	<string name="sd_mounted_ro">La targeta SD és només de lectura.\nNomés podeu visualitzar el mapa precarregat i no podeu baixar-ne des d\'Internet.</string>
+	<string name="map_orientation_portrait">Vertical</string>
+	<string name="map_screen_orientation_descr">Vertical, apaïsat, o dispositiu</string>
+	<string name="opening_changeset">S\'està obrint el conjunt de canvis...</string>
+	<string name="reload_indexes_descr">Torna a llegir els mapes de vectors fora de línia i les dades de la targeta SD</string>
+	<string name="reload_indexes">Torna a llegir les dades fora de línia</string>
+	<string name="map_preferences_descr">Especifiqueu els paràmetres del mapa: font del mapa, rotació, posició del marcador i orientació de la pantalla</string>
+	<string name="use_english_names">Utilitza els noms anglesos als mapes</string>
+	<string name="navigate_point_top_text">Introduïu la latitud i la longitud en el format seleccionat (G - graus, M - minuts, S - segons)</string>
+	<string name="navigate_point_format_D">GGG.GG</string>
+	<string name="navigate_point_format_DM">GGG MM.MM</string>
+	<string name="navigate_point_format_DMS">GGG MM SS.SS</string>
+	<string name="favourites_remove_dialog_msg">Voleu eliminar el punt preferit \'%s\'?</string>
+	<string name="favourites_remove_dialog_success">El punt preferit {0} ha estat eliminat correctament.</string>
+	<string name="poi_action_succeded_template">L\'acció {0} s\'ha completat correctament.</string>
+	<string name="poi_error_info_not_loaded">No s\'ha carregat la informació del node</string>
+	<string name="poi_dialog_other_tags_message">S\'han preservat totes les altres etiquetes</string>
+	</resources>
