@@ -1009,7 +1009,7 @@
     <string name="recording_description">Enregistrament %1$s %2$s a %3$s</string>
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
-    <string name="av_control_stop">Atura</string>
+    <string name="av_control_stop">atura</string>
     <string name="srtm_paid_version_msg">Considereu comprar el connector de les línies de nivell al Google Play per ajudar al desenvolupament futur.</string>
     <string name="srtm_paid_version_title">Connector de corbes de nivell</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
@@ -1019,8 +1019,8 @@
     <string name="map_widget_audionotes">Notes d\'àudio</string>
     <string name="recording_playing">S\'està reproduint l\'àudio de l\'enregistrament especificat.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Canvis a 1.1.0:\n\t* Connector de càlcul de distàncies\n\t* Connector de notes d\'àudio\n\t* Connector de corbes de nivell\n\t* Correccions d\'errors\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option\n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
-    <string name="av_control_start">Enreg.</string>
-    <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell sense connexió</string>
+    <string name="av_control_start">enreg.</string>
+    <string name="osmand_srtm_short_description_80_chars">Connector de l\'OsmAnd per a corbes de nivell fora de línia</string>
     <string name="use_clear_distance_measurement">Feu clic una vegada per netejar els punts de mesura.</string>
     <string name="use_distance_measurement">Feu un toc per crear un punt, i manteniu premut per eleminar el punt anterior, cliqueu al giny de mesura per sortir.</string>
     <string name="map_widget_distancemeasurement">Mesura de distàncies</string>
