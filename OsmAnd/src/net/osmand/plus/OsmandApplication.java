@@ -27,6 +27,8 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.api.ExternalServiceAPI;
 import net.osmand.plus.api.InternalOsmAndAPI;
 import net.osmand.plus.api.InternalToDoAPI;
+import net.osmand.plus.api.SQLiteAPI;
+import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
@@ -87,6 +89,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	ExternalServiceAPI externalServiceAPI;
 	InternalToDoAPI internalToDoAPI;
 	InternalOsmAndAPI internalOsmAndAPI;
+	SQLiteAPI sqliteAPI;
 
 	@Override
 	public void onCreate() {
@@ -96,6 +99,7 @@ public class OsmandApplication extends Application implements ClientContext {
 		externalServiceAPI = new net.osmand.plus.api.ExternalServiceAPIImpl(this);
 		internalToDoAPI = new net.osmand.plus.api.InternalToDoAPIImpl(this);
 		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
+		sqliteAPI = new SQLiteAPIImpl(this);
 
 		
 		osmandSettings = createOsmandSettingsInstance();
@@ -610,6 +614,12 @@ public class OsmandApplication extends Application implements ClientContext {
 	@Override
 	public InternalOsmAndAPI getInternalAPI() {
 		return internalOsmAndAPI;
+	}
+
+	@Override
+	public SQLiteAPI getSQLiteAPI() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

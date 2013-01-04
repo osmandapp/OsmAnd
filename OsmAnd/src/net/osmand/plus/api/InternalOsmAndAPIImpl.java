@@ -3,10 +3,14 @@ package net.osmand.plus.api;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import net.osmand.NativeLibrary;
+import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibilityMode;
+import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.PoiFilter;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.render.NativeOsmandLibrary;
 
@@ -72,6 +76,18 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 		else if (mode == AccessibilityMode.OFF)
 			return false;
 		return ((AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
+	}
+
+	@Override
+	public List<Amenity> searchAmenities(PoiFilter filter, double topLatitude, double leftLongitude, double bottomLatitude,
+			double rightLongitude, double lat, double lon, ResultMatcher<Amenity> matcher) {
+		return app.getResourceManager().searchAmenities(filter, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
+	}
+
+	@Override
+	public List<Amenity> searchAmenitiesByName(String searchQuery, double topLatitude, double leftLongitude, double bottomLatitude,
+			double rightLongitude, double lat, double lon, ResultMatcher<Amenity> matcher) {
+		return app.getResourceManager().searchAmenitiesByName(searchQuery, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
 	}
 
 
