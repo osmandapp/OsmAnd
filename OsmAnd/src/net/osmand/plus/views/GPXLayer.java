@@ -2,8 +2,8 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.render.RenderingRuleSearchRequest;

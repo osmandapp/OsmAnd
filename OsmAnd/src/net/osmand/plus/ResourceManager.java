@@ -24,7 +24,6 @@ import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;

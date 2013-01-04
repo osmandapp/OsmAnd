@@ -2,7 +2,6 @@ package net.osmand.plus;
 
 
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.MapActivity;

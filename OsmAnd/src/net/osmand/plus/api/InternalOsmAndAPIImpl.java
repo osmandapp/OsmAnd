@@ -7,11 +7,11 @@ import java.util.List;
 
 import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
-import net.osmand.access.AccessibilityMode;
 import net.osmand.data.Amenity;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
 
 import org.xmlpull.v1.XmlPullParser;

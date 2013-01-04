@@ -3,10 +3,10 @@ package net.osmand.plus.activities.search;
 import java.util.List;
 
 import net.londatiga.android.QuickAction;
-import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

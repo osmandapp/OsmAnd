@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.WindowManager;

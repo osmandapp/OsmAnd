@@ -3,7 +3,7 @@ package net.osmand.plus.extrasettings;
 
 import java.util.Arrays;
 
-import net.osmand.Version;
+import net.osmand.plus.Version;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;

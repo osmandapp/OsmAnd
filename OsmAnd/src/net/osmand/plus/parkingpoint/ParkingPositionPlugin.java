@@ -3,13 +3,13 @@ package net.osmand.plus.parkingpoint;
 import java.util.Calendar;
 import java.util.EnumSet;
 
-import net.osmand.OsmAndFormatter;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;

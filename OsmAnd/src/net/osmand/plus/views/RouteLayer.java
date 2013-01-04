@@ -1,7 +1,6 @@
 package net.osmand.plus.views;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import net.osmand.Location;

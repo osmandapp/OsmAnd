@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.IndexConstants.EXTRA_EXT;
 
@@ -16,7 +17,6 @@ import java.util.TreeMap;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.RegionCountry;
@@ -29,6 +29,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper;

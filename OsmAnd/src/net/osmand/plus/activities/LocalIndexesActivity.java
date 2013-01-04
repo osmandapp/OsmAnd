@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.Algoritms;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

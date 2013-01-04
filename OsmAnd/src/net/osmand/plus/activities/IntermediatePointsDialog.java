@@ -2,10 +2,10 @@ package net.osmand.plus.activities;
 
 import java.util.List;
 
-import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;

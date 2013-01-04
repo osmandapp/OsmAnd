@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
 import net.osmand.Location;
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;

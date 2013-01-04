@@ -7,7 +7,7 @@ package net.osmand.plus.activities;
 import java.util.List;
 
 import net.osmand.Location;
-import net.osmand.OsmAndFormatter;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

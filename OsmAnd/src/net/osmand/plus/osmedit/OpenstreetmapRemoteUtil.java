@@ -20,7 +20,6 @@ import java.util.Map;
 import net.osmand.Algoritms;
 import net.osmand.Base64;
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.Entity;
@@ -33,6 +32,7 @@ import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;

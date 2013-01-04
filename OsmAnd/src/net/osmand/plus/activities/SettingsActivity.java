@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import net.osmand.ResultMatcher;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -24,6 +23,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.CustomTitleBar.CustomTitleBarView;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteProvider.RouteService;

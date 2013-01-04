@@ -1,10 +1,9 @@
 package net.osmand.plus.api;
 
+import net.osmand.plus.OsmandApplication;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 
 public class SettingsAPIImpl implements SettingsAPI {
 

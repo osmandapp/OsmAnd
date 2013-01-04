@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import net.osmand.LogUtil;
-import net.osmand.Version;
+import net.osmand.plus.Version;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.ResourceManager;

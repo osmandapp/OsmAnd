@@ -8,7 +8,6 @@ import java.util.Stack;
 
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
