@@ -99,4 +99,6 @@
     <string name="non_optimal_route_calculation">Beregn en mulig ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logføring tjenester</string>
+	<string name="no_route">Ingen rute</string>
+	<string name="delete_target_point">Fjern waypoint</string>
 	</resources>
