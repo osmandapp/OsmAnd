@@ -101,4 +101,11 @@
     <string name="map_widget_monitoring_services">Logføring tjenester</string>
 	<string name="no_route">Ingen rute</string>
 	<string name="delete_target_point">Fjern waypoint</string>
-	</resources>
+	<string name="navigate_to">Angiv som destination</string>
+    <string name="context_menu_item_last_intermediate_point">Tilføj som sidste waypoint</string>
+    <string name="context_menu_item_first_intermediate_point">Tilføj som første waypoint</string>
+    <string name="add_as_last_destination_point">Tilføj som sidste waypoint</string>
+    <string name="add_as_first_destination_point">Tilføj som første waypoint</string>
+    <string name="replace_destination_point">Udskift destinationspunktet</string>
+    <string name="new_destination_point_dialog">Du har allerede sat en destination.</string>
+    </resources>
