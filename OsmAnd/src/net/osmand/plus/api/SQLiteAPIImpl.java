@@ -85,6 +85,11 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				public long getInt(int ind) {
 					return c.getInt(ind);
 				}
+
+				@Override
+				public byte[] getBlob(int ind) {
+					return c.getBlob(ind);
+				}
 			};
 		}
 
@@ -127,6 +132,26 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				public void bindNull(int i) {
 					st.bindNull(i);
 				}
+
+				@Override
+				public long simpleQueryForLong() {
+					return st.simpleQueryForLong();
+				}
+
+				@Override
+				public String simpleQueryForString() {
+					return st.simpleQueryForString();
+				}
+
+				@Override
+				public void bindLong(int i, long val) {
+					st.bindLong(i, val);
+				}
+
+				@Override
+				public void bindBlob(int i, byte[] val) {
+					st.bindBlob(i, val);
+				}
 			};
 		}
 
@@ -134,6 +159,32 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 		public void setVersion(int newVersion) {
 			ds.setVersion(newVersion);
 		}
+
+		@Override
+		public boolean isReadOnly() {
+			return ds.isReadOnly();
+		}
+
+		@Override
+		public boolean isDbLockedByOtherThreads() {
+			return ds.isDbLockedByOtherThreads();
+		}
+
+		@Override
+		public boolean isClosed() {
+			return !ds.isOpen();
+		}
 		
+	}
+
+
+	@Override
+	public SQLiteConnection openByAbsolutePath(String path, boolean readOnly) {
+		android.database.sqlite.SQLiteDatabase db = SQLiteDatabase.openDatabase(path, null,
+				readOnly? SQLiteDatabase.OPEN_READONLY : SQLiteDatabase.OPEN_READWRITE);
+		if(db == null) {
+			return null;
+		}
+		return new SQLiteDatabaseWrapper(db) ;
 	}
 }

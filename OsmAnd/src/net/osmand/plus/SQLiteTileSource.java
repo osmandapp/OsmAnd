@@ -12,13 +12,12 @@ import net.osmand.LogUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
+import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
+import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
 import org.apache.commons.logging.Log;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDiskIOException;
-import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
@@ -37,7 +36,7 @@ public class SQLiteTileSource implements ITileSource {
 	private ITileSource base;
 	private String urlTemplate = null;
 	private String name;
-	private SQLiteDatabase db;
+	private SQLiteConnection db;
 	private final File file;
 	private int minZoom = 1;
 	private int maxZoom = 17; 
@@ -46,8 +45,10 @@ public class SQLiteTileSource implements ITileSource {
 	final int margin = 1;
 	final int tileSize = 256;
 	final int minScaledSize = 8;
+	private ClientContext ctx;
 	
-	public SQLiteTileSource(File f, List<TileSourceTemplate> toFindUrl){
+	public SQLiteTileSource(ClientContext ctx, File f, List<TileSourceTemplate> toFindUrl){
+		this.ctx = ctx;
 		this.file = f;
 		int i = f.getName().lastIndexOf('.');
 		name = f.getName().substring(0, i);
@@ -101,7 +102,7 @@ public class SQLiteTileSource implements ITileSource {
 	public String getUrlToLoad(int x, int y, int zoom) {
 		if (zoom > baseZoom)
 			return null;
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if(db == null || db.isReadOnly() || urlTemplate == null){
 			return null;
 		}
@@ -139,9 +140,9 @@ public class SQLiteTileSource implements ITileSource {
 		return true;
 	}
 	
-	private SQLiteDatabase getDatabase(){
-		if(db == null && file.exists()){
-			db = SQLiteDatabase.openDatabase(file.getAbsolutePath(), null, 0);
+	private SQLiteConnection getDatabase(){
+		if((db == null || db.isClosed()) && file.exists() ){
+			db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
 			try {
 				String template = db.compileStatement("SELECT url FROM info").simpleQueryForString(); //$NON-NLS-1$
 				if(!Algoritms.isEmpty(template)){
@@ -168,13 +169,13 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public boolean exists(int x, int y, int zoom, boolean exact) {
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if(db == null){
 			return false;
 		}
 		long time = System.currentTimeMillis();
 		if (exact || zoom <= baseZoom) {
-			Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			try {
 				boolean e = cursor.moveToFirst();
 				cursor.close();
@@ -189,7 +190,7 @@ public class SQLiteTileSource implements ITileSource {
 			int n = zoom - baseZoom;
 			int base_xtile = x >> n;
 			int base_ytile = y >> n;
-			Cursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",(17 - baseZoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			SQLiteCursor cursor = db.rawQuery("SELECT 1 FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {base_xtile+"", base_ytile+"",(17 - baseZoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			try {
 				boolean e = cursor.moveToFirst();
 				cursor.close();
@@ -204,7 +205,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public boolean isLocked() {
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if(db == null){
 			return false;
 		}
@@ -216,7 +217,7 @@ public class SQLiteTileSource implements ITileSource {
 		// based on its neighbor. This is needed to have a nice bilinear resampling
 		// on tile edges. Margin of 1 is enough for bilinear resampling.
 
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if(db == null){
 			return null;
 		}
@@ -232,7 +233,7 @@ public class SQLiteTileSource implements ITileSource {
 
 				int xOff, yOff, w, h;
 				int dstx, dsty;
-				Cursor cursor = db.rawQuery(
+				SQLiteCursor cursor = db.rawQuery(
 						"SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?",
 						new String[] {(x + dx) + "", (y + dy) + "", (17 - zoom) + ""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 				byte[] blob = null;
@@ -262,13 +263,13 @@ public class SQLiteTileSource implements ITileSource {
 	}
 	
 	public Bitmap getImage(int x, int y, int zoom) {
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if(db == null){
 			return null;
 		}
 		if (zoom <= baseZoom) {
 			// return the normal tile if exists
-			Cursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
+			SQLiteCursor cursor = db.rawQuery("SELECT image FROM tiles WHERE x = ? AND y = ? AND z = ?", new String[] {x+"", y+"",(17 - zoom)+""});    //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$//$NON-NLS-4$
 			byte[] blob = null;
 			if(cursor.moveToFirst()) {
 				blob = cursor.getBlob(0);
@@ -325,7 +326,7 @@ public class SQLiteTileSource implements ITileSource {
 	}
 
 	public void deleteImage(int x, int y, int zoom) {
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if(db == null || db.isReadOnly()){
 			return;
 		}
@@ -339,7 +340,7 @@ public class SQLiteTileSource implements ITileSource {
 	 * let all writing attempts to wait outside of this method   
 	 */
 	public synchronized void insertImage(int x, int y, int zoom, File fileToSave) throws IOException {
-		SQLiteDatabase db = getDatabase();
+		SQLiteConnection db = getDatabase();
 		if (db == null || db.isReadOnly()) {
 			return;
 		}
@@ -354,7 +355,7 @@ public class SQLiteTileSource implements ITileSource {
 			buf.put(b, 0, i);
 		}
 
-		SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
+		net.osmand.plus.api.SQLiteAPI.SQLiteStatement statement = db.compileStatement("INSERT INTO tiles VALUES(?, ?, ?, ?, ?)"); //$NON-NLS-1$
 		statement.bindLong(1, x);
 		statement.bindLong(2, y);
 		statement.bindLong(3, 17 - zoom);
@@ -362,6 +363,7 @@ public class SQLiteTileSource implements ITileSource {
 		statement.bindBlob(5, buf.array());
 		statement.execute();
 		statement.close();
+		is.close();
 
 	}
 	

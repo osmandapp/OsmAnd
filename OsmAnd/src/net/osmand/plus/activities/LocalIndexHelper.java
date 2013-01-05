@@ -90,7 +90,7 @@ public class LocalIndexHelper {
 					template.getUrlTemplate() != null, zooms.toString());
 				info.setDescription(descr);
 			} else if(f.isFile() && f.getName().endsWith(SQLiteTileSource.EXT)){
-				SQLiteTileSource template = new SQLiteTileSource(f, TileSourceManager.getKnownSourceTemplates());
+				SQLiteTileSource template = new SQLiteTileSource(app, f, TileSourceManager.getKnownSourceTemplates());
 //				Set<Integer> zooms = new TreeSet<Integer>();
 //				for(int i=1; i<22; i++){
 //					if(template.exists(i)){

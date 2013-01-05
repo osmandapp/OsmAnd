@@ -36,7 +36,7 @@ public class InternalToDoAPIImpl implements InternalToDoAPI {
 
 	@Override
 	public ITileSource newSqliteTileSource(File dir, List<TileSourceTemplate> knownTemplates) {
-		return new SQLiteTileSource(dir, knownTemplates);
+		return new SQLiteTileSource(app, dir, knownTemplates);
 	}
 
 }
