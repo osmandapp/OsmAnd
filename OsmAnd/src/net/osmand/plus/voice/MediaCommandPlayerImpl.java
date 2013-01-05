@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.osmand.LogUtil;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
 
 import org.apache.commons.logging.Log;
@@ -33,10 +34,10 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	private List<String> filesToPlay = Collections.synchronizedList(new ArrayList<String>());
 
 	
-	public MediaCommandPlayerImpl(Context ctx, OsmandSettings settings, String voiceProvider)
+	public MediaCommandPlayerImpl(ClientContext ctx, String voiceProvider)
 		throws CommandPlayerException
 	{
-		super(ctx, settings, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
+		super(ctx, voiceProvider, CONFIG_FILE, MEDIA_VOICE_VERSION);
 	}
 	
 	@Override
