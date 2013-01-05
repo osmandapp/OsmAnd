@@ -616,8 +616,7 @@ public class OsmandApplication extends Application implements ClientContext {
 
 	@Override
 	public SQLiteAPI getSQLiteAPI() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqliteAPI;
 	}
 
 }

@@ -7,9 +7,9 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.SearchHistoryHelper;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.SQLiteTileSource;
-import net.osmand.plus.activities.search.SearchHistoryHelper;
 
 public class InternalToDoAPIImpl implements InternalToDoAPI {
 
@@ -17,11 +17,6 @@ public class InternalToDoAPIImpl implements InternalToDoAPI {
 
 	public InternalToDoAPIImpl(OsmandApplication app) {
 		this.app = app;
-	}
-
-	@Override
-	public void addNewItemToHistory(double latitude, double longitude, String historyDescription) {
-		SearchHistoryHelper.getInstance().addNewItemToHistory(latitude, longitude, historyDescription, app);
 	}
 
 	@Override

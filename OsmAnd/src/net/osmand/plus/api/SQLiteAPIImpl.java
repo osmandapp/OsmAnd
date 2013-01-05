@@ -70,6 +70,21 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				public void close() {
 					c.close();
 				}
+
+				@Override
+				public double getDouble(int ind) {
+					return c.getDouble(ind);
+				}
+
+				@Override
+				public long getLong(int ind) {
+					return c.getLong(ind);
+				}
+
+				@Override
+				public long getInt(int ind) {
+					return c.getInt(ind);
+				}
 			};
 		}
 

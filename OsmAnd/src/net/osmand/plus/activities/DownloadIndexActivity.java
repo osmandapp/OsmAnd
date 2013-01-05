@@ -742,7 +742,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			} else {
 				v += " test";
 			}
-			new DownloadTracker().trackEvent(DownloadIndexActivity.this, v, Version.getAppName(getMyApplication()),
+			new DownloadTracker().trackEvent(getMyApplication(), v, Version.getAppName(getMyApplication()),
 					entry.baseName, 1, DownloadIndexActivity.this.getString(R.string.ga_api_key));
 		}
 

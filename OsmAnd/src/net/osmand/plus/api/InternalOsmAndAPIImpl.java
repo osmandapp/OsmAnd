@@ -18,6 +18,9 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Build;
 import android.util.Xml;
 import android.view.accessibility.AccessibilityManager;
 
@@ -88,6 +91,41 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 	public List<Amenity> searchAmenitiesByName(String searchQuery, double topLatitude, double leftLongitude, double bottomLatitude,
 			double rightLongitude, double lat, double lon, ResultMatcher<Amenity> matcher) {
 		return app.getResourceManager().searchAmenitiesByName(searchQuery, topLatitude, leftLongitude, bottomLatitude, rightLongitude, lat, lon, matcher);
+	}
+
+	@Override
+	public String getVersionName() {
+		try {
+			PackageInfo info = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
+			return info.versionName;
+		} catch (NameNotFoundException e) {
+			return "";
+		}
+	}
+
+	@Override
+	public int getVersionCode() {
+		try {
+			PackageInfo info = app.getPackageManager().getPackageInfo(app.getPackageName(), 0);
+			return info.versionCode;
+		} catch (NameNotFoundException e) {
+			return 0;
+		}
+	}
+
+	@Override
+	public String getDeviceName() {
+		return Build.DEVICE;
+	}
+
+	@Override
+	public String getBrandName() {
+		return Build.BRAND;
+	}
+
+	@Override
+	public String getModelName() {
+		return Build.MODEL;
 	}
 
 

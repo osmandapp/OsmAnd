@@ -215,7 +215,6 @@ public class MapActivityActions implements DialogProvider {
 		final String[] names = new String[points.size()];
 		if(names.length == 0){
 			AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-			helper.close();
 			return null;
 		}
 			
