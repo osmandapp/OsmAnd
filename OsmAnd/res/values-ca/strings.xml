@@ -771,7 +771,7 @@
 <string name="daynight_descr">Trieu la regla de commutació del mode dia/nit</string>
 <string name="maps_could_not_be_downloaded">Aquest mapa podria no haver-se baixat</string>
 <string name="rendering_exception">Ha ocorregut un error mentres s\'estava renderitzant l\'àrea seleccionada</string>
-<string name="show_point_options">Opcions de localització</string>
+<string name="show_point_options">Opcions de localització...</string>
 <string name="renderer_load_sucess">El renderitzador s\'ha carregat correctament</string>
 <string name="fav_points_not_exist">No hi ha punts preferits</string>
 <string name="tip_recent_changes_0_8_0_t">"Canvis a la versió 0.8.0:↵
@@ -1080,21 +1080,33 @@
 \n\t* El mapa no perd el bloqueig de la posició després d\'interrupcions
 \n\t* Activa el servei en segon pla durant la navegació "</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
-	<string name="tip_recent_changes_0_7_1_t">Canvis a la 0.7.1 :
+	<string name="tip_recent_changes_0_7_1_t">"Canvis a la 0.7.1 :
 \n\t- Edició de PDI fora línia
 \n\t- Enregistrar en viu - envia coordenades a un servei web periòdicament (llegeix com configurar el servei web als articles ComEsFà)
 \n\t- Mostra el recorregut enregistrat actualment al mapa
 \n\t- Detecció de direcció: «Feu un gir en U» s\'indica i anuncia quan es va en direcció oposada, o després de perdre un gir\n\t- Missatge de veu nou «Ruta re-calculada»
 \n\t- Indicacions òptiques d\'un gir imminent abans de 100 m usant una fletxa amb color canviant
 \n\t- Els fitxers índex desactivats es mostren ara a Baixades en verd fosc o blau fosc
-\n\t- Altres canvis</string>
-	<string name="tip_recent_changes_0_6_8_t">"Canvis a 0.6.8 :
-\n\t- Cerca completament redissenyada  (PDI, Addreçes)! Adreçes mes rapides i mes sensible.Creada una interfície de cerca amb moltes opcions diferents.
-\n\t- Implementada cerca de PDI POI  per nom en grans areas(paisos)
-\n\t- Solucionat el parpelleig de la pantalla en tablets (Problema 641)
-\n\t- Opció d\'auto-centrat de mapa (Problema 356)
-\n\t- Navegació GPX  moguda a \'Direccions\' i \'Guardar direccions\' moguda a \'Sobre ruta\'
+\n\t- Altres canvis "</string>
+	<string name="tip_recent_changes_0_6_8_t">"Canvis a la 0.6.8 :
+\n\t- Cerca completament redissenyada  (PDI, adreces)! Fa les cerques d\'adreces més ràpides i més sensibles. Creada una interfície de cerca amb moltes opcions diferents.
+\n\t- Implementada la cerca de PDI per nom en grans àrees(països)
+\n\t- Solucionat el parpelleig de la pantalla a les tauletes (Problema 641)
+\n\t- Opció d\'autocentrat del mapa (Problema 356)
+\n\t- Navegació GPX  moguda a «Direccions» i «Desa les direccions» moguda a «Sobre la ruta»
 \n\t- Dades de PDI incloses en fitxer .obf (tots els índexs de baixada després de 01/10/11)
-\n\t- Voice prompt fixes (GPS position fix, omitting first command)
-\n\t- Small improvements "</string>
+\n\t- Correcions en els missatges de veu (posició GPS, omissió de la primer comanda)
+\n\t- Petites millores "</string>
+	<string name="tip_favorites_t">"\tEls punts usats de forma freqüent els podeu desar coma a preferits.
+\n\tPer desar un punt com a preferit aneu al menú contextual del mapa, seleccioneu l\'opció «Afegeix als preferits» i introduïu un nom per al punt. Després de desar un preferit, és accessible mitjanl·lant «Pantalla principal» -&gt; «Preferits».
+\n\tFent pressió llarga a un preferit al menú «Preferit» proporciona opcions per establir-ho com a destinació, editar-lo o suprimir-lo.
+\n\tPer mostrar tots els punts preferits directament al mapa, a la pantalla mapa, activeu la capa «Preferits» que es troba a «Menú» -&gt; «Defineix visualització». "</string>
+	<string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
+	<string name="application_dir_change_warning">Canviar el directori d\'emmagatzematge no mourà ni suprimirà les dades. Això s\'ha de realitzar de forma separada fora de l\'OsmAnd. Voleu continuar igualment?</string>
+	<string name="loading_builds_failed">L\'obtenció del llistat de construccions disponibles de l\'OsmAnd ha fallat</string>
+	<string name="contribution_activity">Activitat especial per la versió dels col·laboradors</string>
+	<string name="transport_context_menu">Cerca transport a la parada</string>
+	<string name="background_service_wait_int_descr">Estableix el temps màxim d\'espera per a cada correcció de la posició en segon pla</string>
+	<string name="background_service_wait_int">Espera màxima per corregir</string>
+	<string name="service_stop_background_service">Desactiva el servei de navegació en segon pla</string>
 	</resources>
