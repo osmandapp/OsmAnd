@@ -164,7 +164,7 @@
 <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa</string>
 <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
 <string name="default_buttons_selectall">Selecciona-ho tot</string>
-<string name="email">Correu electrònic</string>
+<string name="email">correu electrònic</string>
 <string name="index_settings_descr">Baixeu, visualitzeu-ne els detalls i gestioneu mapes fora de línia</string>
 <string name="osmand_extra_settings_description">Mostra els paràmetres per a una configuració avançada del mapa (per exemple augmentant-ne els detalls) i alguns d\'específics del dispositiu.</string>
 <string name="vector_maps_may_display_faster_on_some_devices">És probable que es mostrin els mapes de vectors més de pressa. Això pot no funcionar en alguns dispositius.</string>
@@ -1064,4 +1064,37 @@
 	<string name="poi_action_succeded_template">L\'acció {0} s\'ha completat correctament.</string>
 	<string name="poi_error_info_not_loaded">No s\'ha carregat la informació del node</string>
 	<string name="poi_dialog_other_tags_message">S\'han preservat totes les altres etiquetes</string>
+	<string name="osmodroid_plugin_description">El connector OsMoDroid és un connector per a l\'aplicació OsmAnd per a creació de traces i funcions relacionades en temps real. La informació sobre el servei es troba disponible a http://esya.ru.</string>
+    <string name="auto_announce_off">Atura els anuncis automàtics</string>
+	<string name="input_output_error">S\'ha produït un error d\'E/S</string>
+	<string name="poi_namefinder_query_empty">Introduïu una consulta de cerca per trobar el PDI</string>
+	<string name="show_transport_over_map">Mostra les parades del transport</string>
+	<string name="error_io_error">S\'ha produït un error E/S</string>
+	<string name="save_track_to_gpx">Desa la traça en un fitxer GPX</string>
+	<string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
+	<string name="srtm_plugin_description">Aquest connector us facilitat baixar les corbes de nivell (Baixa dades fora de línia -&gt; Menú -&gt; Altres mapes) per usar-les als mapes sense connexió.</string>
+    <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
+	<string name="tip_recent_changes_1_0_0_t">"Canvis a la 1.0.0 :
+\n\t* Encaminament millorat: més ràpid, més precís, fins a 250 km
+\n\t* Introducció dels mapes de només carreteres
+\n\t* El mapa no perd el bloqueig de la posició després d\'interrupcions
+\n\t* Activa el servei en segon pla durant la navegació "</string>
+    <string name="auto_announce_on">Inicia els anuncis automàtics</string>
+	<string name="tip_recent_changes_0_7_1_t">Canvis a la 0.7.1 :
+\n\t- Edició de PDI fora línia
+\n\t- Enregistrar en viu - envia coordenades a un servei web periòdicament (llegeix com configurar el servei web als articles ComEsFà)
+\n\t- Mostra el recorregut enregistrat actualment al mapa
+\n\t- Detecció de direcció: «Feu un gir en U» s\'indica i anuncia quan es va en direcció oposada, o després de perdre un gir\n\t- Missatge de veu nou «Ruta re-calculada»
+\n\t- Indicacions òptiques d\'un gir imminent abans de 100 m usant una fletxa amb color canviant
+\n\t- Els fitxers índex desactivats es mostren ara a Baixades en verd fosc o blau fosc
+\n\t- Altres canvis</string>
+	<string name="tip_recent_changes_0_6_8_t">"Canvis a 0.6.8 :
+\n\t- Cerca completament redissenyada  (PDI, Addreçes)! Adreçes mes rapides i mes sensible.Creada una interfície de cerca amb moltes opcions diferents.
+\n\t- Implementada cerca de PDI POI  per nom en grans areas(paisos)
+\n\t- Solucionat el parpelleig de la pantalla en tablets (Problema 641)
+\n\t- Opció d\'auto-centrat de mapa (Problema 356)
+\n\t- Navegació GPX  moguda a \'Direccions\' i \'Guardar direccions\' moguda a \'Sobre ruta\'
+\n\t- Dades de PDI incloses en fitxer .obf (tots els índexs de baixada després de 01/10/11)
+\n\t- Voice prompt fixes (GPS position fix, omitting first command)
+\n\t- Small improvements "</string>
 	</resources>
