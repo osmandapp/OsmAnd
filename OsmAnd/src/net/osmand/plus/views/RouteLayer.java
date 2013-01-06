@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.osmand.Location;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -16,7 +17,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.location.Location;
 
 public class RouteLayer extends OsmandMapLayer {
 	

@@ -1,7 +1,5 @@
 package net.osmand.access;
 
-import net.osmand.access.AccessibleLayout;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;

@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -20,6 +19,7 @@ import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
 import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -343,7 +343,7 @@ public class EditingPOIActivity implements DialogProvider {
 				AmenityType t = MapRenderingTypes.getDefault().getAmenityNameToType().get(str);
 				if(t != null && a.getType() != t){
 					a.setType(t);
-					typeButton.setText(OsmAndFormatter.toPublicString(t, ctx));
+					typeButton.setText(OsmAndFormatter.toPublicString(t, ctx.getMyApplication()));
 					updateSubTypesAdapter(t);
 				}
 				
@@ -490,7 +490,7 @@ public class EditingPOIActivity implements DialogProvider {
 	
 	private void updateType(Amenity a){
 		typeText.setText(a.getSubType());
-		typeButton.setText(OsmAndFormatter.toPublicString(a.getType(), ctx));
+		typeButton.setText(OsmAndFormatter.toPublicString(a.getType(), ctx.getMyApplication()));
 		updateSubTypesAdapter(a.getType());
 	}
 	
@@ -603,7 +603,7 @@ public class EditingPOIActivity implements DialogProvider {
 				Builder builder = new AlertDialog.Builder(ctx);
 				String[] vals = new String[AmenityType.values().length];
 				for(int i=0; i<vals.length; i++){
-					vals[i] = OsmAndFormatter.toPublicString(AmenityType.values()[i], ctx); 
+					vals[i] = OsmAndFormatter.toPublicString(AmenityType.values()[i], ctx.getMyApplication()); 
 				}
 				builder.setItems(vals, new Dialog.OnClickListener(){
 					@Override

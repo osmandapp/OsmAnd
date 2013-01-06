@@ -1,8 +1,10 @@
 package net.osmand.plus.views;
 
+
+import net.osmand.Location;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,7 +12,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.RectF;
-import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 

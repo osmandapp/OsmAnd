@@ -1,9 +1,12 @@
 package net.osmand.access;
 
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibilityMode;
+import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import android.preference.ListPreference;
@@ -66,7 +69,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 		String[] entries = new String[AccessibilityMode.values().length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = AccessibilityMode.values()[i].toHumanString(activity);
+			entries[i] = AccessibilityMode.values()[i].toHumanString((ClientContext) activity.getApplication());
 		}
 		accessibilityModePreference = activity.createListPreference(settings.ACCESSIBILITY_MODE, entries, AccessibilityMode.values(),
 				R.string.accessibility_mode, R.string.accessibility_mode_descr);
@@ -75,7 +78,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				PreferenceCategory accessibilityOptions = ((PreferenceCategory)(screen.findPreference("accessibility_options")));
 				if (accessibilityOptions != null)
-					accessibilityOptions.setEnabled(app.accessibilityEnabled());
+					accessibilityOptions.setEnabled(app.getInternalAPI().accessibilityEnabled());
 				accessibilityModePreference.setSummary(app.getString(R.string.accessibility_mode_descr) + "  [" + settings.ACCESSIBILITY_MODE.get().toHumanString(app) + "]");
 				return true;
 			}
@@ -88,7 +91,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 		entries = new String[RelativeDirectionStyle.values().length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = RelativeDirectionStyle.values()[i].toHumanString(activity);
+			entries[i] = RelativeDirectionStyle.values()[i].toHumanString((ClientContext) activity.getApplication());
 		}
 		directionStylePreference = activity.createListPreference(settings.DIRECTION_STYLE, entries, RelativeDirectionStyle.values(),
 				R.string.settings_direction_style, R.string.settings_direction_style_descr);

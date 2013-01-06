@@ -1,28 +1,24 @@
 package net.osmand.plus.activities;
 
 
-import java.io.File;
 
+import java.io.File;
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.Location;
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -30,9 +26,12 @@ import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -41,6 +40,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
@@ -50,10 +50,12 @@ import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
@@ -62,7 +64,6 @@ import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -73,8 +74,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -216,7 +217,6 @@ public class MapActivityActions implements DialogProvider {
 		final String[] names = new String[points.size()];
 		if(names.length == 0){
 			AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
-			helper.close();
 			return null;
 		}
 			
@@ -443,7 +443,7 @@ public class MapActivityActions implements DialogProvider {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isGooglePlayEnabled(mapActivity)) {
+			if (Version.isGooglePlayEnabled(mapActivity.getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(getString(R.string.zxing_barcode_scanner_not_found));
 				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
@@ -581,7 +581,7 @@ public class MapActivityActions implements DialogProvider {
 				if (to != null) {
 					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
-				if (!targets.checkPointToNavigate(mapActivity)) {
+				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
 				Location from = fromOrCurrent;
@@ -616,7 +616,7 @@ public class MapActivityActions implements DialogProvider {
 				if(to != null) {
 					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
-				if (!targets.checkPointToNavigate(mapActivity)) {
+				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
 				boolean msg = true;
@@ -877,7 +877,7 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(null, new LatLon(latitude, longitude), true);
 					}
 				} else if (standardId == R.string.context_menu_item_show_route) {
-					if (targets.checkPointToNavigate(mapActivity)) {
+					if (targets.checkPointToNavigate(getMyApplication())) {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
@@ -999,7 +999,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 					@Override
 					public boolean onClick(MenuItem item) {
-						if (getMyApplication().accessibilityEnabled()) {
+						if (getMyApplication().getInternalAPI().accessibilityEnabled()) {
 							whereAmIDialog();
 						} else {
 							mapActivity.backToLocationImpl();
@@ -1147,7 +1147,7 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		});
-		if (Version.isGpsStatusEnabled(mapActivity) && !Version.isBlackberry(mapActivity)) {
+		if (Version.isGpsStatusEnabled(mapActivity.getMyApplication()) && !Version.isBlackberry(mapActivity.getMyApplication())) {
 			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
 					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
 						@Override
@@ -1200,7 +1200,7 @@ public class MapActivityActions implements DialogProvider {
 		if (resolved != null) {
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isGooglePlayEnabled(mapActivity)) {
+			if (Version.isGooglePlayEnabled(mapActivity.getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(getString(R.string.gps_status_app_not_found));
 				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
@@ -1274,7 +1274,7 @@ public class MapActivityActions implements DialogProvider {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
-				app.getTargetPointsHelper().navigatePointDialogAndLaunchMap(activity,
+				navigatePointDialogAndLaunchMap(activity,
 						location.getLatitude(), location.getLongitude(), name);
 				qa.dismiss();
 			}
@@ -1296,5 +1296,43 @@ public class MapActivityActions implements DialogProvider {
 //		});
 //		qa.addActionItem(directionsTo);
 	}
+    
+    
+    public static void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name){
+    	OsmandApplication ctx = (OsmandApplication) act.getApplication();
+    	final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
+    	final OsmandSettings settings = ctx.getSettings();
+    	if(targetPointsHelper.getPointToNavigate() != null) {
+    		Builder builder = new AlertDialog.Builder(act);
+    		builder.setTitle(R.string.new_destination_point_dialog);
+    		builder.setItems(new String[] {
+    				act.getString(R.string.replace_destination_point),
+    				act.getString(R.string.add_as_first_destination_point),
+    				act.getString(R.string.add_as_last_destination_point)
+    		}, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(which == 0) {
+						settings.setPointToNavigate(lat, lon, true, name);
+					} else if(which == 2) {
+						int sz = targetPointsHelper.getIntermediatePoints().size();
+						LatLon pt = targetPointsHelper.getPointToNavigate();
+						settings.insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
+								settings.getPointNavigateDescription(), sz, true);
+						settings.setPointToNavigate(lat, lon, true, name);
+					} else {
+						settings.insertIntermediatePoint(lat, lon, name, 0, true);
+					}
+					targetPointsHelper.updatePointsFromSettings();
+					MapActivity.launchMapActivityMoveToTop(act);
+				}
+			});
+    		builder.show();
+    	} else {
+    		settings.setPointToNavigate(lat, lon, true, name);
+    		targetPointsHelper.updatePointsFromSettings();
+    		MapActivity.launchMapActivityMoveToTop(act);
+    	}
+    }
     
 }

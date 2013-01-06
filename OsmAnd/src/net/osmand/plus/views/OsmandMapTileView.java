@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
-import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -15,6 +14,7 @@ import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -193,7 +193,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		return application.accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
+		return application.getInternalAPI().accessibilityEnabled() ? false : super.onKeyDown(keyCode, event);
 	}
 
 	public synchronized void addLayer(OsmandMapLayer layer, float zOrder) {
@@ -820,13 +820,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			setZoom(Math.round(calcZoom));
 			final int newZoom = getZoom();
 			zoomPositionChanged(newZoom);
-			if (application.accessibilityEnabled()) {
+			if (application.getInternalAPI().accessibilityEnabled()) {
 				if (newZoom != initialMultiTouchZoom) {
 					showMessage(getContext().getString(R.string.zoomIs) + " " + String.valueOf(newZoom)); //$NON-NLS-1$
 				} else {
 					final LatLon p1 = getLatLonFromScreenPoint(x1, y1);
 					final LatLon p2 = getLatLonFromScreenPoint(x2, y2);
-					showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), getContext()));
+					showMessage(OsmAndFormatter.getFormattedDistance((float)MapUtils.getDistance(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude()), application));
 				}
 			}
 		}

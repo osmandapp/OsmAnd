@@ -11,12 +11,12 @@ import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
@@ -290,7 +290,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				bld.setTitle(R.string.daynight);
 				final String[] items = new String[OsmandSettings.DayNightMode.values().length];
 				for (int i = 0; i < items.length; i++) {
-					items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(map);
+					items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(map.getMyApplication());
 				}
 				int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
 				bld.setSingleChoiceItems(items,  i, new OnClickListener() {
@@ -483,7 +483,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final OsmandSettings settings = view.getSettings();
 		
 		final ArrayList<Object> list = new ArrayList<Object>();
-		String appMode = settings.getApplicationMode().toHumanString(view.getContext());
+		String appMode = settings.getApplicationMode().toHumanString(view.getApplication());
 		list.add(map.getString(R.string.map_widget_reset) + " [" + appMode  +"] ");
 		list.add(map.getString(R.string.map_widget_top_stack));
 		list.addAll(mapInfoControls.getTop());

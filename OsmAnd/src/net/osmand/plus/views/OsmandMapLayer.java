@@ -1,6 +1,5 @@
 package net.osmand.plus.views;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import net.osmand.plus.ContextMenuAdapter;

@@ -13,18 +13,21 @@ import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.LogUtil;
-import net.osmand.Version;
-import net.osmand.access.AccessibilityMode;
 import net.osmand.access.AccessibleToast;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.activities.DayNightHelper;
 import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.OsmandIntents;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.api.ExternalServiceAPI;
+import net.osmand.plus.api.InternalOsmAndAPI;
+import net.osmand.plus.api.InternalToDoAPI;
+import net.osmand.plus.api.SQLiteAPI;
+import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RoutingHelper;
@@ -47,12 +50,11 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
 import android.text.format.DateFormat;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.Toast;
 
 import com.bidforfix.andorid.BidForFixHelper;
 
-public class OsmandApplication extends Application {
+public class OsmandApplication extends Application implements ClientContext {
 	public static final String EXCEPTION_PATH = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = LogUtil.getLog(OsmandApplication.class);
 
@@ -80,13 +82,24 @@ public class OsmandApplication extends Application {
 
 	private boolean applicationInitializing = false;
 	private Locale prefferedLocale = null;
-	private AndroidClientContext clientContext;
+	
+	SettingsAPI settingsAPI;
+	ExternalServiceAPI externalServiceAPI;
+	InternalToDoAPI internalToDoAPI;
+	InternalOsmAndAPI internalOsmAndAPI;
+	SQLiteAPI sqliteAPI;
 
 	@Override
 	public void onCreate() {
-		super.onCreate();
-
 		long timeToStart = System.currentTimeMillis();
+		super.onCreate();
+		settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(this);
+		externalServiceAPI = new net.osmand.plus.api.ExternalServiceAPIImpl(this);
+		internalToDoAPI = new net.osmand.plus.api.InternalToDoAPIImpl(this);
+		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
+		sqliteAPI = new SQLiteAPIImpl(this);
+
+		
 		osmandSettings = createOsmandSettingsInstance();
 		routingHelper = new RoutingHelper(this, player);
 		manager = new ResourceManager(this);
@@ -109,13 +122,15 @@ public class OsmandApplication extends Application {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("Time to init plugins " + (System.currentTimeMillis() - timeToStart) + " ms. Should be less < 800 ms");
 		}
+		
+		
 	}
 
 	@Override
 	public void onTerminate() {
 		super.onTerminate();
 		if (routingHelper != null) {
-			routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
+			routingHelper.getVoiceRouter().onApplicationTerminate(this);
 		}
 		if (bidforfix != null) {
 			bidforfix.onDestroy();
@@ -564,28 +579,54 @@ public class OsmandApplication extends Application {
 		}
 	}
 
-	public boolean accessibilityExtensions() {
-		return osmandSettings.ACCESSIBILITY_EXTENSIONS.get();
-	}
-
-	public boolean accessibilityEnabled() {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
-		if (mode == AccessibilityMode.ON)
-			return true;
-		else if (mode == AccessibilityMode.OFF)
-			return false;
-		return ((AccessibilityManager) getSystemService(ACCESSIBILITY_SERVICE)).isEnabled();
-	}
 	
 	public TargetPointsHelper getTargetPointsHelper() {
 		return targetPointsHelper;
 	}
 
-	public ClientContext getClientContext() {
-		if (clientContext == null) {
-			clientContext = new AndroidClientContext(this);
-		}
-		return clientContext;
+	@Override
+	public void showToastMessage(int msgId, Object... args) {
+		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_LONG).show();
+	}
+
+	@Override
+	public void showToastMessage(String msg) {
+		AccessibleToast.makeText(this, msg, Toast.LENGTH_LONG).show();		
+	}
+	
+	@Override
+	public SettingsAPI getSettingsAPI() {
+		return settingsAPI;
+	}
+
+	@Override
+	public ExternalServiceAPI getExternalServiceAPI() {
+		return externalServiceAPI;
+	}
+
+	@Override
+	public InternalToDoAPI getTodoAPI() {
+		return internalToDoAPI;
+	}
+
+	@Override
+	public InternalOsmAndAPI getInternalAPI() {
+		return internalOsmAndAPI;
+	}
+
+	@Override
+	public SQLiteAPI getSQLiteAPI() {
+		return sqliteAPI;
+	}
+
+	@Override
+	public void runInUIThread(Runnable run) {
+		uiHandler.post(run);
+	}
+
+	@Override
+	public void runInUIThread(Runnable run, long delay) {
+		uiHandler.postDelayed(run, delay);
 	}
 
 }

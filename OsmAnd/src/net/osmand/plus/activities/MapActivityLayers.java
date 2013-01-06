@@ -11,10 +11,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.CallbackWithObject;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.OsmAndFormatter;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
@@ -22,6 +18,10 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -429,7 +429,7 @@ public class MapActivityLayers {
 						new Thread(new Runnable() {
 							@Override
 							public void run() {
-								final GPXFile res = GPXUtilities.loadGPXFile(activity, f, convertCloudmade);
+								final GPXFile res = GPXUtilities.loadGPXFile(activity.getMyApplication(), f, convertCloudmade);
 								dlg.dismiss();
 								activity.runOnUiThread(new Runnable() {
 									@Override
@@ -471,7 +471,7 @@ public class MapActivityLayers {
 			}
 		}
 		for(AmenityType t : AmenityType.values()){
-			list.add(OsmAndFormatter.toPublicString(t, activity));
+			list.add(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
 		}
 		Builder builder = new AlertDialog.Builder(activity);
 		builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener(){

@@ -38,7 +38,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	public DownloadIndexAdapter(DownloadIndexActivity downloadActivity, List<IndexItem> indexFiles) {
 		this.downloadActivity = downloadActivity;
 		this.indexFiles = new ArrayList<IndexItem>(indexFiles);
-		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getClientContext(), indexFiles);
+		List<IndexItemCategory> cats = IndexItemCategory.categorizeIndexItems(downloadActivity.getMyApplication(), indexFiles);
 		synchronized (this) {
 			list.clear();
 			list.addAll(cats);
@@ -115,7 +115,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 					vars[i] = vars[i].trim().toLowerCase();
 				}
 				List<IndexItem> filter = new ArrayList<IndexItem>();
-				ClientContext c = downloadActivity.getClientContext();
+				ClientContext c = downloadActivity.getMyApplication();
 				for (IndexItem item : indexFiles) {
 					boolean add = true;
 					for (String var : vars) {
@@ -144,7 +144,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				list.clear();
 				Collection<IndexItem> items = (Collection<IndexItem>) results.values;
 				if (items != null && !items.isEmpty()) {
-					list.addAll(IndexItemCategory.categorizeIndexItems(downloadActivity.getClientContext(), items));
+					list.addAll(IndexItemCategory.categorizeIndexItems(downloadActivity.getMyApplication(), items));
 				} else {
 					list.add(new IndexItemCategory(downloadActivity.getResources().getString(R.string.select_index_file_to_download), 1));
 				}
@@ -216,7 +216,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		TextView item = (TextView) row.findViewById(R.id.download_item);
 		TextView description = (TextView) row.findViewById(R.id.download_descr);
 		IndexItem e = (IndexItem) getChild(groupPosition, childPosition);
-		ClientContext clctx = downloadActivity.getClientContext();
+		ClientContext clctx = downloadActivity.getMyApplication();
 		String eName = e.getVisibleDescription(clctx) + "\n" + e.getVisibleName(clctx);
 		item.setText(eName.trim()); //$NON-NLS-1$
 		String d = e.getDate() + "\n" + e.getSizeDescription(clctx);

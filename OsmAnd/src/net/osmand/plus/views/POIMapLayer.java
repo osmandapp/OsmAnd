@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -111,7 +111,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 
 	private StringBuilder buildPoiInformation(StringBuilder res, Amenity n) {
-		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get());
+		String format = OsmAndFormatter.getPoiSimpleFormat(n, view.getApplication(), view.getSettings().USE_ENGLISH_NAMES.get());
 		res.append(" " + format);
 		if (n.getOpeningHours() != null) {
 			res.append("\n").append(view.getContext().getString(R.string.opening_hours)).append(" : ").append(n.getOpeningHours()); //$NON-NLS-1$ //$NON-NLS-2$
@@ -340,7 +340,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	private void showDescriptionDialog(Amenity a) {
 		Builder bs = new AlertDialog.Builder(view.getContext());
-		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getContext(), view.getSettings().USE_ENGLISH_NAMES.get()));
+		bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(a, view.getApplication(), view.getSettings().USE_ENGLISH_NAMES.get()));
 		bs.setMessage(a.getDescription());
 		bs.show();
 	}

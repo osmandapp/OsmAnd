@@ -18,14 +18,14 @@ import java.util.Set;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.FavouritePoint;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
-import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
@@ -37,11 +37,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
-import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -385,7 +385,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 								existedPoints.add(fp.getName() + "_" + fp.getCategory());
 							}
 						}
-						GPXFile res = GPXUtilities.loadGPXFile(FavouritesActivity.this, tosave, false);
+						GPXFile res = GPXUtilities.loadGPXFile(getMyApplication(), tosave, false);
 						if(res.warning != null){
 							return res.warning;
 						}
@@ -601,7 +601,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(), 
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
-			String distance = OsmAndFormatter.getFormattedDistance(dist, FavouritesActivity.this) + "  ";
+			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
 			label.setText(distance + model.getName(), TextView.BufferType.SPANNABLE);
 			((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0, distance.length() - 1, 0);
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);

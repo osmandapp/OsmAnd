@@ -11,14 +11,14 @@ import java.util.Locale;
 import net.londatiga.android.QuickAction;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
-import net.osmand.OsmAndFormatter;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
@@ -144,7 +144,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 					URL url = new URL(b.toString());
 					URLConnection conn = url.openConnection();
 					conn.setDoInput(true);
-					conn.setRequestProperty("User-Agent", Version.getFullVersion(SearchAddressOnlineActivity.this)); //$NON-NLS-1$
+					conn.setRequestProperty("User-Agent", Version.getFullVersion(getMyApplication())); //$NON-NLS-1$
 					conn.connect();
 					InputStream is = conn.getInputStream();
 					XmlPullParser parser = Xml.newPullParser();
@@ -246,7 +246,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 			TextView distanceLabel = (TextView) row.findViewById(R.id.distance_label);
 			if(location != null){
 				int dist = (int) (MapUtils.getDistance(location, model.lat, model.lon));
-				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, SearchAddressOnlineActivity.this));
+				distanceLabel.setText(OsmAndFormatter.getFormattedDistance(dist, getMyApplication()));
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}

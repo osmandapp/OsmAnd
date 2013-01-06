@@ -2,11 +2,7 @@ package net.osmand;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.graphics.Rect;
-import android.view.MotionEvent;
-import android.view.TouchDelegate;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 
 public class AndroidUtils {

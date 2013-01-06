@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.Version;
+import net.osmand.plus.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
@@ -33,7 +33,7 @@ public class DownloadOsmandIndexesHelper {
 	public static IndexFileList getIndexesList(Context ctx) {
 		PackageManager pm =ctx.getPackageManager();
 		AssetManager amanager = ctx.getAssets();
-		String versionUrlParam = Version.getVersionAsURLParam(ctx);
+		String versionUrlParam = Version.getVersionAsURLParam(((OsmandApplication) ctx.getApplicationContext()));
 		IndexFileList result = downloadIndexesListFromInternet(versionUrlParam);
 		if (result == null) {
 			result = new IndexFileList();

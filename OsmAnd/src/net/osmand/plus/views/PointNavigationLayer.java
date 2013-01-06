@@ -4,8 +4,8 @@ import java.util.List;
 
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.R;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;

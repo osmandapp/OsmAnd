@@ -24,7 +24,6 @@ import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
-import net.osmand.Version;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CachedOsmandIndexes;
 import net.osmand.data.Amenity;
@@ -52,6 +51,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
@@ -69,16 +69,16 @@ import android.view.WindowManager;
 public class ResourceManager {
 
 	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
-	public static final String ROUTING_XML = APP_DIR + "routing.xml";
+	public static final String ROUTING_XML = APP_DIR + IndexConstants.ROUTING_XML_FILE;
 	public static final String AV_PATH = APP_DIR + IndexConstants.AV_INDEX_DIR;
 	public static final String SRTM_PATH = APP_DIR + IndexConstants.SRTM_INDEX_DIR;
 	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
-	public static final String GPX_PATH = APP_DIR + "tracks";
+	public static final String GPX_PATH = APP_DIR + IndexConstants.GPX_INDEX_DIR;
 	public static final String MAPS_PATH = APP_DIR;
 	public static final String INDEXES_CACHE = APP_DIR + "ind.cache";
 	public static final String BACKUP_PATH = APP_DIR + IndexConstants.BACKUP_INDEX_DIR;
-	public static final String TILES_PATH = APP_DIR+"tiles/"; //$NON-NLS-1$
-	public static final String TEMP_SOURCE_TO_LOAD = "temp"; //$NON-NLS-1$
+	public static final String TILES_PATH = APP_DIR + IndexConstants.TILES_INDEX_DIR; //$NON-NLS-1$
+	public static final String TEMP_SOURCE_TO_LOAD = IndexConstants.TEMP_SOURCE_TO_LOAD; //$NON-NLS-1$
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
 	
 	
@@ -425,14 +425,15 @@ public class ResourceManager {
 	}
 	
 	private List<String> checkAssets(IProgress progress) {
-		if (!Version.getFullVersion(context).equalsIgnoreCase(context.getSettings().previousInstalledVesrion().get())) {
+		if (!Version.getFullVersion(context)
+				.equalsIgnoreCase(context.getSettings().previousInstalledVesrion().get())) {
 			File applicationDataDir = context.getSettings().extendOsmandPath(APP_DIR);
 			applicationDataDir.mkdirs();
 			if(applicationDataDir.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
-					boolean isFirstInstall = !context.getSettings().previousInstalledVesrion().getPreferences().
+					boolean isFirstInstall = !((SharedPreferences) context.getSettings().previousInstalledVesrion().getPreferences()).
 							contains(context.getSettings().previousInstalledVesrion().getId()); 
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
 					context.getSettings().previousInstalledVesrion().set(Version.getFullVersion(context));

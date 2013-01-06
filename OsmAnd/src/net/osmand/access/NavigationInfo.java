@@ -1,22 +1,22 @@
 package net.osmand.access;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.OsmAndFormatter;
-import net.osmand.access.AccessibleToast;
-import net.osmand.access.RelativeDirectionStyle;
+import net.osmand.Location;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.ClientContext;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.access.RelativeDirectionStyle;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.location.Location;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.widget.Toast;
 
 public class NavigationInfo {
 
@@ -131,17 +131,19 @@ public class NavigationInfo {
     };
 
     private Handler uiHandler = new Handler();
-    private final Context context;
+    private final ClientContext context;
     private final OsmandSettings settings;
     private Location currentLocation;
     private RelativeDirection lastDirection;
     private long lastNotificationTime;
     private volatile boolean autoAnnounce;
+	private OsmandApplication app;
 
 
     public NavigationInfo(final Context context) {
-        this.context = context;
-        settings = ((OsmandApplication) context.getApplicationContext()).getSettings();
+    	this.app =((OsmandApplication) context.getApplicationContext());
+        this.context = app;
+        settings = this.context.getSettings();
         currentLocation = null;
         lastDirection = new RelativeDirection();
         lastNotificationTime = SystemClock.uptimeMillis();
@@ -150,7 +152,7 @@ public class NavigationInfo {
 
 
     private String getString(int id) {
-        return context.getResources().getString(id);
+        return context.getString(id);
     }
 
     // The argument must be not null as well as the currentLocation
@@ -236,8 +238,7 @@ public class NavigationInfo {
 
     public synchronized void setLocation(Location location) {
         currentLocation = location;
-        OsmandApplication app = ((OsmandApplication)(context.getApplicationContext()));
-        if (autoAnnounce && app.accessibilityEnabled()) {
+        if (autoAnnounce && context.getInternalAPI().accessibilityEnabled()) {
             final LatLon point = app.getTargetPointsHelper().getPointToNavigate();
             if (point != null) {
                 if ((currentLocation != null) && currentLocation.hasBearing()) {
@@ -252,7 +253,7 @@ public class NavigationInfo {
                             uiHandler.post(new Runnable(){
                                     @Override
                                     public void run() {
-                                        AccessibleToast.makeText(context, notification, Toast.LENGTH_LONG).show();
+                                    	context.showToastMessage(notification);
                                     }
                                 });
                         }
@@ -285,7 +286,7 @@ public class NavigationInfo {
 		if (attributes.isEmpty())
 			attributes.add(getString(R.string.no_info));
 
-		AlertDialog.Builder info = new AlertDialog.Builder(context);
+		AlertDialog.Builder info = new AlertDialog.Builder(app);
 		if (point != null)
 			info.setPositiveButton(autoAnnounce ? R.string.auto_announce_off : R.string.auto_announce_on,
 					new DialogInterface.OnClickListener() {

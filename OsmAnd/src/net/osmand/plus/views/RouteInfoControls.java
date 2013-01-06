@@ -1,11 +1,13 @@
 package net.osmand.plus.views;
 
+
 import java.util.Arrays;
 
 import net.osmand.Algoritms;
 import net.osmand.GeoidAltitudeCorrection;
-import net.osmand.OsmAndFormatter;
+import net.osmand.Location;
 import net.osmand.osm.LatLon;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -29,7 +31,6 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.text.format.DateFormat;
 import android.view.View;
 
@@ -286,7 +287,7 @@ public class RouteInfoControls {
 					}
 					if (cachedAlt != (int) compAlt) {
 						cachedAlt = (int) compAlt;
-						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map);
+						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map.getMyApplication());
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
 							setText(ds, null);
@@ -321,7 +322,7 @@ public class RouteInfoControls {
 					if (cachedSpeed == 0) {
 						setText(null, null);
 					} else {
-						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
+						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map.getMyApplication());
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
 							setText(ds, null);
@@ -356,7 +357,7 @@ public class RouteInfoControls {
 					}
 					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > minDelta) {
 						cachedSpeed = map.getLastKnownLocation().getSpeed();
-						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map);
+						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map.getMyApplication());
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
 							setText(ds, null);
@@ -417,7 +418,7 @@ public class RouteInfoControls {
 					cachedMeters = 0;
 					setText(null, null);
 				} else {
-					String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getContext());
+					String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, view.getApplication());
 					int ls = ds.lastIndexOf(' ');
 					if (ls == -1) {
 						setText(ds, null);

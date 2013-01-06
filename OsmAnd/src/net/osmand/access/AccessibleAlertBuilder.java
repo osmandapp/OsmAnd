@@ -1,9 +1,7 @@
 package net.osmand.access;
 
-import net.osmand.access.TextMessage;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 

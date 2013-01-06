@@ -1,12 +1,13 @@
 package net.osmand.plus.osmodroid;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.LogUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+
+import org.apache.commons.logging.Log;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -54,7 +55,7 @@ public class OsMoDroidPlugin extends OsmandPlugin {
 				try {
 					System.out.println(mIRemoteService.getVersion());
 					if(mIRemoteService.getVersion() < OSMODROID_SUPPORTED_VERSION_MIN) {
-						app.getClientContext().showToastMessage(R.string.osmodroid_plugin_old_ver_not_supported);
+						app.showToastMessage(R.string.osmodroid_plugin_old_ver_not_supported);
 						shutdown(app);
 					}
 				} catch (RemoteException e) {

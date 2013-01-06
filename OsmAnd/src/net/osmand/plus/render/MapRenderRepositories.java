@@ -23,6 +23,7 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.NativeLibrary.NativeSearchResult;
+import net.osmand.QuadRect;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -49,12 +50,17 @@ import org.apache.commons.logging.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
-import android.graphics.RectF;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
 public class MapRenderRepositories {
+
+	// TimeLoadingMap = Rendering (%25) + Searching(%40) + Other 
+	// It is needed to not draw object twice if user have map index that intersects by boundaries
+	// Takes 25% TimeLoadingMap (?) - Long.valueOf - 12, add - 10, contains - 3.
+	public static boolean checkForDuplicateObjectIds = true;
+	
 
 	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
@@ -63,10 +69,11 @@ public class MapRenderRepositories {
 	private Map<String, BinaryMapIndexReader> files = new LinkedHashMap<String, BinaryMapIndexReader>();
 	private Set<String> nativeFiles = new HashSet<String>();
 	private OsmandRenderer renderer;
+	
 
 
 	// lat/lon box of requested vector data
-	private RectF cObjectsBox = new RectF();
+	private QuadRect cObjectsBox = new QuadRect();
 	// cached objects in order to render rotation without reloading data from db
 	private List<BinaryMapDataObject> cObjects = new LinkedList<BinaryMapDataObject>();
 	private NativeSearchResult cNativeObjects = null;
@@ -220,7 +227,7 @@ public class MapRenderRepositories {
 	}
 	
 	
-	private boolean loadVectorDataNative(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, 
+	private boolean loadVectorDataNative(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq, 
 			NativeOsmandLibrary library) {
 		int leftX = MapUtils.get31TileNumberX(dataBox.left);
 		int rightX = MapUtils.get31TileNumberX(dataBox.right);
@@ -240,7 +247,7 @@ public class MapRenderRepositories {
 		}
 		
 		NativeSearchResult resultHandler = library.searchObjectsForRendering(leftX, rightX, topY, bottomY, zoom, renderingReq,
-				PerformanceFlags.checkForDuplicateObjectIds, this, context.getString(R.string.switch_to_raster_map_to_see));
+				checkForDuplicateObjectIds, this, context.getString(R.string.switch_to_raster_map_to_see));
 		if (checkWhetherInterrupted()) {
 			resultHandler.deleteNativeResult();
 			return false;
@@ -256,7 +263,7 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	private boolean loadVectorData(RectF dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
+	private boolean loadVectorData(QuadRect dataBox, final int zoom, final RenderingRuleSearchRequest renderingReq) {
 		double cBottomLatitude = dataBox.bottom;
 		double cTopLatitude = dataBox.top;
 		double cLeftLongitude = dataBox.left;
@@ -315,7 +322,7 @@ public class MapRenderRepositories {
 				searchRequest.clearSearchResults();
 				List<BinaryMapDataObject> res = c.searchMapIndex(searchRequest);
 				for (BinaryMapDataObject r : res) {
-					if (PerformanceFlags.checkForDuplicateObjectIds) {
+					if (checkForDuplicateObjectIds) {
 						if (ids.contains(r.getId()) && r.getId() > 0) {
 							// do not add object twice
 							continue;
@@ -419,7 +426,7 @@ public class MapRenderRepositories {
 		return true;
 	}
 
-	private void validateLatLonBox(RectF box) {
+	private void validateLatLonBox(QuadRect box) {
 		if (box.top > 90) {
 			box.top = 85.5f;
 		}
@@ -478,7 +485,7 @@ public class MapRenderRepositories {
 			requestedBox = new RotatedTileBox(tileRect);
 
 			// calculate data box
-			RectF dataBox = requestedBox.calculateLatLonBox(new RectF());
+			QuadRect dataBox = requestedBox.calculateLatLonBox(new QuadRect());
 			long now = System.currentTimeMillis();
 
 			if (cObjectsBox.left > dataBox.left || cObjectsBox.top > dataBox.top || cObjectsBox.right < dataBox.right
@@ -618,7 +625,7 @@ public class MapRenderRepositories {
 		} catch (OutOfMemoryError e) {
 			log.error("Out of memory error", e); //$NON-NLS-1$
 			cObjects = new ArrayList<BinaryMapDataObject>();
-			cObjectsBox = new RectF();
+			cObjectsBox = new QuadRect();
 			handler.post(new Runnable() {
 				@Override
 				public void run() {
@@ -650,7 +657,7 @@ public class MapRenderRepositories {
 
 	public synchronized void clearCache() {
 		cObjects = new ArrayList<BinaryMapDataObject>();
-		cObjectsBox = new RectF();
+		cObjectsBox = new QuadRect();
 
 		requestedBox = prevBmpLocation = null;
 		// Do not clear main bitmap to not cause a screen refresh

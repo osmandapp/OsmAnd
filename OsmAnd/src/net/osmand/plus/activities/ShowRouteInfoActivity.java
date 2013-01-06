@@ -3,9 +3,11 @@
  */
 package net.osmand.plus.activities;
 
+
 import java.util.List;
 
-import net.osmand.OsmAndFormatter;
+import net.osmand.Location;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -14,7 +16,6 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
 import android.app.Dialog;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.TextPaint;
@@ -143,7 +144,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 				icon.setImageDrawable(new TurnPathHelper.RouteDrawable(getResources()));
 			}
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.getTurnType());
-			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, ShowRouteInfoActivity.this));
+			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, getMyApplication()));
 			label.setText(model.getDescriptionRoute());
 			String timeText = getTimeDescription(model);
 			timeLabel.setText(timeText);

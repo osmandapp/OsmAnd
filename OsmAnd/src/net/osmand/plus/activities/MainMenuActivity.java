@@ -4,11 +4,11 @@ import java.io.File;
 import java.text.MessageFormat;
 import java.util.Random;
 
-import net.osmand.Version;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
 import android.app.Activity;
@@ -56,7 +56,8 @@ public class MainMenuActivity extends Activity {
 	
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
-		final File file = ((OsmandApplication) getApplication()).getSettings().extendOsmandPath(OsmandApplication.EXCEPTION_PATH);
+		final OsmandApplication app = ((OsmandApplication) getApplication());
+		final File file = app.getSettings().extendOsmandPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);
@@ -77,7 +78,7 @@ public class MainMenuActivity extends Activity {
 						text.append("\nProduct : ").append(Build.PRODUCT); //$NON-NLS-1$
 						text.append("\nBuild : ").append(Build.DISPLAY); //$NON-NLS-1$
 						text.append("\nVersion : ").append(Build.VERSION.RELEASE); //$NON-NLS-1$
-						text.append("\nApp Version : ").append(Version.getAppName(MainMenuActivity.this)); //$NON-NLS-1$
+						text.append("\nApp Version : ").append(Version.getAppName(app)); //$NON-NLS-1$
 						try {
 							PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
 							if (info != null) {
@@ -130,7 +131,7 @@ public class MainMenuActivity extends Activity {
 		rightview = (View) window.findViewById(R.id.SearchButton);
 		rightview.startAnimation(getAnimation(1, 0));
 		
-		String textVersion = Version.getAppVersion(activity);
+		String textVersion = Version.getAppVersion(((OsmandApplication) activity.getApplication()));
 		final TextView textVersionView = (TextView) window.findViewById(R.id.TextVersion);
 		textVersionView.setText(textVersion);
 		SharedPreferences prefs = activity.getApplicationContext().getSharedPreferences("net.osmand.settings", MODE_WORLD_READABLE);
@@ -242,7 +243,7 @@ public class MainMenuActivity extends Activity {
 		if(!pref.contains(FIRST_TIME_APP_RUN)){
 			firstTime = true;
 			pref.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
-			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(activity)).commit();
+			pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			
 			applicationInstalledFirstTime();
 		} else {
@@ -251,8 +252,8 @@ public class MainMenuActivity extends Activity {
 				pref.edit().putInt(TIPS_SHOW, ++i).commit();
 			}
 			boolean appVersionChanged = false;
-			if(!Version.getFullVersion(activity).equals(pref.getString(VERSION_INSTALLED, ""))){
-				pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(activity)).commit();
+			if(!Version.getFullVersion(app).equals(pref.getString(VERSION_INSTALLED, ""))){
+				pref.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 				appVersionChanged = true;
 			}
 						

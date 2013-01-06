@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import net.osmand.OsmAndFormatter;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.router.TurnType;
 import android.content.Context;
@@ -83,7 +83,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 			h = (int) (8 * scaleCoefficient + Math.max(textPaint.getTextSize(), subtextPaint.getTextSize()));
 		} else {
 			h = (int) (7 * scaleCoefficient);
-			w = (int) textPaint.measureText(OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext()));
+			w = (int) textPaint.measureText(OsmAndFormatter.getFormattedDistance(nextTurnDirection, getClientContext()));
 		}
 		setWDimensions((int) width + w, (int) height + h);
 	}
@@ -107,7 +107,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 				drawShadowText(canvas, exitOut, width / 2 - 7 * scaleCoefficient, 
 						height / 2 + textPaint.getTextSize() / 2 - 3 * scaleCoefficient, textPaint);
 			}
-			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getContext());
+			String text = OsmAndFormatter.getFormattedDistance(nextTurnDirection, getClientContext());
 			String subtext = null;
 
 			if (makeUturnWhenPossible == true) {

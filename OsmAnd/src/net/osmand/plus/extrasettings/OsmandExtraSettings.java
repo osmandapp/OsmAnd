@@ -3,7 +3,8 @@ package net.osmand.plus.extrasettings;
 
 import java.util.Arrays;
 
-import net.osmand.Version;
+import net.osmand.plus.Version;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -160,7 +161,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		cat.addPreference(activity.createCheckBoxPreference(settings.USE_HIGH_RES_MAPS, 
 				R.string.use_high_res_maps, R.string.use_high_res_maps_descr));
 		
-		if (!Version.isBlackberry(activity)) {
+		if (!Version.isBlackberry((ClientContext) activity.getApplication())) {
 			cat.addPreference(activity.createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, 
 					R.string.use_trackball, R.string.use_trackball_descr));
 			

@@ -1,14 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.text.InputType;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -19,6 +10,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
+import android.preference.PreferenceCategory;
+import android.preference.PreferenceScreen;
+import android.text.InputType;
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";

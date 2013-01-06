@@ -5,23 +5,23 @@ import java.util.EnumSet;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.LogUtil;
-import net.osmand.OsmAndFormatter;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.ApplicationMode;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.views.MapInfoControl;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
-import net.osmand.plus.views.MapInfoControl;
-import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
 
@@ -202,7 +202,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				if (settings.SAVE_TRACK_TO_GPX.get()) {
 					float dist = app.getSavingTrackHelper().getDistance();
 					last = app.getSavingTrackHelper().getLastTimeUpdated();
-					String ds = OsmAndFormatter.getFormattedDistance(dist, map);
+					String ds = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
 					int ls = ds.lastIndexOf(' ');
 					if (ls == -1) {
 						txt = ds;

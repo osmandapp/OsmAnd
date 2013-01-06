@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+
 import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
 import static net.osmand.data.IndexConstants.EXTRA_EXT;
 
@@ -16,7 +17,6 @@ import java.util.TreeMap;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.RegionCountry;
@@ -29,6 +29,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper;
@@ -156,7 +157,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(Version.isFreeVersion(this) && settings.checkFreeDownloadsNumberZero()){
+		if(Version.isFreeVersion(getMyApplication()) && settings.checkFreeDownloadsNumberZero()){
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
@@ -528,7 +529,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 
 	protected void downloadFilesCheckFreeVersion(List<DownloadEntry> list) {
-		if (Version.isFreeVersion(this) ) {
+		if (Version.isFreeVersion(getMyApplication()) ) {
 			int total = settings.NUMBER_OF_FREE_DOWNLOADS.get();
 			boolean wiki = false;
 			for (DownloadEntry es : list) {
@@ -735,13 +736,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 
 		private void trackEvent(DownloadEntry entry) {
-			String v = Version.getAppName(DownloadIndexActivity.this);
-			if (Version.isProductionVersion(DownloadIndexActivity.this)) {
-				v = Version.getFullVersion(DownloadIndexActivity.this);
+			String v = Version.getAppName(getMyApplication());
+			if (Version.isProductionVersion(getMyApplication())) {
+				v = Version.getFullVersion(getMyApplication());
 			} else {
 				v += " test";
 			}
-			new DownloadTracker().trackEvent(DownloadIndexActivity.this, v, Version.getAppName(DownloadIndexActivity.this),
+			new DownloadTracker().trackEvent(getMyApplication(), v, Version.getAppName(getMyApplication()),
 					entry.baseName, 1, DownloadIndexActivity.this.getString(R.string.ga_api_key));
 		}
 
@@ -773,6 +774,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 	
 	public ClientContext getClientContext() {
-		return getMyApplication().getClientContext();
+		return getMyApplication();
 	}
 }

@@ -4,7 +4,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import net.osmand.LogUtil;
-import net.osmand.Version;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.MapTileDownloader;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
@@ -14,6 +13,7 @@ import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.Version;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -138,7 +138,7 @@ public class DownloadTilesDialog {
 			}
 		});
 		
-		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(ctx));
+		final MapTileDownloader instance = MapTileDownloader.getInstance(Version.getFullVersion(app));
 		
 		final ArrayList<IMapDownloaderCallback> previousCallbacks = 
 			new ArrayList<IMapDownloaderCallback>(instance.getDownloaderCallbacks());

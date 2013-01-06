@@ -1,6 +1,5 @@
 package net.osmand.plus;
 
-import net.osmand.plus.activities.ApplicationMode;
 import android.app.backup.BackupAgentHelper;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;

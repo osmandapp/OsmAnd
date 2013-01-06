@@ -2,7 +2,6 @@ package net.osmand.plus.osmedit;
 
 import java.util.Map;
 
-
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;

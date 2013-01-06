@@ -11,7 +11,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.TextView;
 
 public class SearchStreet2ByNameActivity extends SearchByNameAbstractActivity<Street> {
 	private RegionAddressRepository region;

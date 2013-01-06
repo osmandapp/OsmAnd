@@ -2,10 +2,10 @@ package net.osmand.plus.activities;
 
 import java.util.List;
 
-import net.osmand.OsmAndFormatter;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -53,7 +53,7 @@ public class IntermediatePointsDialog {
 					double lat = ((MapActivity) activity).getMapView().getLatitude();
 					double lon = ((MapActivity) activity).getMapView().getLongitude();
 					double meters = MapUtils.getDistance(intermediates.get(position), lat, lon);
-					distString = OsmAndFormatter.getFormattedDistance((float) meters, activity);
+					distString = OsmAndFormatter.getFormattedDistance((float) meters, app);
 				}
 				
 				nm += app.getString(R.string.target_point, distString);
