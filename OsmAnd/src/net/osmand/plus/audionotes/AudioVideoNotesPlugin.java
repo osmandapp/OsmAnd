@@ -30,7 +30,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
 
 import org.apache.commons.logging.Log;
-import org.apache.sanselan.formats.jpeg.exifRewrite.ExifRewriter;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -116,6 +115,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		
 		public void updatePhotoInformation(){
+			// FIXME
+//			ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+//			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE, latitude);
+//			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE_REF, "N");
+//	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE, longitude);
+//	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF, "E");
+//	        exif.setAttribute("GPSImgDirectionRef", "Magnetic North");
+//	        exif.setAttribute("GPSImgDirection", ((float) rot)+"");
+//	        exif.saveAttributes();
 		}
 		
 		private int getExifOrientation() {
