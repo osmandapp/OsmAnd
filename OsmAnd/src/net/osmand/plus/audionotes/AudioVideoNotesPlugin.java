@@ -30,12 +30,14 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
 
 import org.apache.commons.logging.Log;
+import org.apache.sanselan.formats.jpeg.exifRewrite.ExifRewriter;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Camera;
+import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -92,23 +94,64 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		
 		private void updateInternalDescription(){
-			if(duration == -1) {
+			if (duration == -1) {
 				duration = 0;
-				MediaPlayer mediaPlayer = new MediaPlayer();
-				try {
-					mediaPlayer.setDataSource(file.getAbsolutePath());
-					mediaPlayer.prepare();
-					duration = mediaPlayer.getDuration();
-					available = true;
-				} catch (Exception e) {
-					log.error("Error reading recording " + file.getAbsolutePath(), e);
-					available = false;
+				if (!isPhoto()) {
+					MediaPlayer mediaPlayer = new MediaPlayer();
+					try {
+						mediaPlayer.setDataSource(file.getAbsolutePath());
+						mediaPlayer.prepare();
+						duration = mediaPlayer.getDuration();
+						available = true;
+					} catch (Exception e) {
+						log.error("Error reading recording " + file.getAbsolutePath(), e);
+						available = false;
+					}
 				}
 			}
+		}
+
+		public boolean isPhoto() {
+			return file.getName().endsWith(IMG_EXTENSION);
+		}
+		
+		public void updatePhotoInformation(){
+		}
+		
+		private int getExifOrientation() {
+			ExifInterface exif;
+			int orientation = 0;
+			try {
+				exif = new ExifInterface(file.getAbsolutePath());
+				orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return orientation;
+		}
+		
+		public int getBitmapRotation() {
+			int rotation = 0;
+			switch (getExifOrientation()) {
+			case 3:
+				rotation = 180;
+				break;
+			case 6:
+				rotation = 90;
+				break;
+			case 8:
+				rotation = 270;
+				break;
+			}
+			return rotation;
 		}
 		
 		public String getDescription(Context ctx){
 			String nm = name == null? "" : name ;
+			if(isPhoto()){
+				return ctx.getString(R.string.recording_photo_description, nm, 
+						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+			}
 			updateInternalDescription();
 			String additional = "";
 			if(duration > 0) {
@@ -199,6 +242,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				recordVideo(latitude, longitude, mapActivity);
 			}
 		}, 7);
+		adapter.registerItem(R.string.recording_context_menu_precord, 0, new OnContextMenuClick() {
+			
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				takePhoto(latitude, longitude, mapActivity);
+			}
+
+		}, 8);
 	}
 	
 	@Override
@@ -233,20 +284,28 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			
 			@Override
 			public void onClick(View v) {
-				final Location loc = mapActivity.getLastKnownLocation();
-//				double lat = mapActivity.getMapView().getLatitude();
-//				double lon = mapActivity.getMapView().getLongitude();
-				if(loc == null) {
-					AccessibleToast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
-					return;
-				}
-				if(app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_VIDEO) {
-					recordVideo(loc.getLatitude(), loc.getLongitude(), mapActivity);
-				} else {
-					recordAudio(loc.getLatitude(), loc.getLongitude(), mapActivity);
-				}
+				defaultAction(mapActivity);
 			}
 		});
+	}
+	
+	private void defaultAction(final MapActivity mapActivity) {
+		final Location loc = mapActivity.getLastKnownLocation();
+		// double lat = mapActivity.getMapView().getLatitude();
+		// double lon = mapActivity.getMapView().getLongitude();
+		if (loc == null) {
+			AccessibleToast.makeText(app, R.string.audionotes_location_not_defined, Toast.LENGTH_LONG).show();
+			return;
+		}
+		double lon = loc.getLongitude();
+		double lat = loc.getLatitude();
+		if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_VIDEO) {
+			recordVideo(lat, lon, mapActivity);
+		} else if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE) {
+			takePhoto(lat, lon, mapActivity);
+		} else {
+			recordAudio(lat, lon, mapActivity);
+		}
 	}
 	
 	
@@ -347,15 +406,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 	
 	private void giveMediaRecorderHintRotatedScreen(final MapActivity mapActivity, final MediaRecorder mr) {
-		if(Build.VERSION.SDK_INT >= 9) {
+		if (Build.VERSION.SDK_INT >= 9) {
 			try {
 				Method m = mr.getClass().getDeclaredMethod("setOrientationHint", Integer.TYPE);
-				Display display = ((WindowManager)mapActivity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-				if(display.getRotation() == Surface.ROTATION_0) {
+				Display display = ((WindowManager) mapActivity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+				if (display.getRotation() == Surface.ROTATION_0) {
 					m.invoke(mr, 90);
-				} else if(display.getRotation() == Surface.ROTATION_270) {
+				} else if (display.getRotation() == Surface.ROTATION_270) {
 					m.invoke(mr, 180);
-				} else if(display.getRotation() == Surface.ROTATION_180) {
+				} else if (display.getRotation() == Surface.ROTATION_180) {
 					m.invoke(mr, 270);
 				}
 			} catch (Exception e) {
@@ -400,6 +459,19 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			runMediaRecorder(mapActivity, mr, f);
 		} catch (Exception e) {
 			log.error("Error starting audio recorder ", e);
+			AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
+		}
+		
+	}
+	
+	public void takePhoto(double lat, double lon, final MapActivity mapActivity) {
+		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
+		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+		try {
+			mapActivity.startActivityForResult(takePictureIntent, 205);
+		} catch (Exception e) {
+			log.error("Error taking a picture ", e);
 			AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 		
@@ -462,7 +534,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if (files != null) {
 				for (File f : files) {
 					if(f.getName().endsWith(THREEGP_EXTENSION)
-							|| f.getName().endsWith(MPEG4_EXTENSION)) {
+							|| f.getName().endsWith(MPEG4_EXTENSION)
+							|| f.getName().endsWith(IMG_EXTENSION)) {
 						indexFile(f);
 					}
 				}
@@ -502,8 +575,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				entries, intValues, R.string.av_video_format, R.string.av_video_format_descr);
 		grp.addPreference(lp);
 		
-		entries = new String[] {app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video)};
-		intValues = new Integer[] {OsmandSettings.AV_DEFAULT_ACTION_AUDIO, OsmandSettings.AV_DEFAULT_ACTION_VIDEO};
+		entries = new String[] {app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
+				app.getString(R.string.av_def_action_picture)};
+		intValues = new Integer[] {OsmandSettings.AV_DEFAULT_ACTION_AUDIO, OsmandSettings.AV_DEFAULT_ACTION_VIDEO,
+				OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE};
 		ListPreference defAct = activity.createListPreference(settings.AV_DEFAULT_ACTION, 
 				entries, intValues, R.string.av_widget_action, R.string.av_widget_action_descr);
 		grp.addPreference(defAct);
@@ -519,7 +594,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	public boolean onMapActivityKeyEvent(KeyEvent key){
 		if(KeyEvent.KEYCODE_CAMERA == key.getKeyCode()) {
-			// TODO;
+			defaultAction(activity);
 			return true;
 		}
 		return false;

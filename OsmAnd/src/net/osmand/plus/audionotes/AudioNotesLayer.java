@@ -21,8 +21,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
@@ -32,6 +34,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {
@@ -114,7 +117,8 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			OnContextMenuClick listener = new ContextMenuAdapter.OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					if (itemId == R.string.recording_context_menu_play) {
+					if (itemId == R.string.recording_context_menu_play ||
+							itemId == R.string.recording_context_menu_show) {
 						playRecording(r);
 					} else if (itemId == R.string.recording_context_menu_delete) {
 						deleteRecording(r);
@@ -123,29 +127,39 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 
 			};
-			adapter.registerItem(R.string.recording_context_menu_play, 0, listener, -1);
+			if(r.isPhoto()) {
+				adapter.registerItem(R.string.recording_context_menu_show, 0, listener, -1);
+			} else {
+				adapter.registerItem(R.string.recording_context_menu_play, 0, listener, -1);
+			}
 			adapter.registerItem(R.string.recording_context_menu_delete, 0, listener, -1);
 		}
 	}
 	
 	private void playRecording(final Recording r) {
-		final MediaPlayer player = new MediaPlayer();
+		final MediaPlayer player = r.isPhoto() ? null : new MediaPlayer();
 		final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(view.getContext());
-		dlg.setMessage(view.getContext().getString(R.string.recording_playing, r.getDescription(view.getContext())));
 		dlg.setPositiveButton(R.string.recording_open_external_player, new OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface v, int w) {
-				if(player.isPlaying()) {
-					player.stop();
-				}
-				Intent vint = new Intent(Intent.ACTION_VIEW);
-		    	vint.setDataAndType(Uri.fromFile(r.file), "video/*");
-		    	vint.setFlags(0x10000000);
-				try {
+				if(player == null) {
+					Intent vint = new Intent(Intent.ACTION_VIEW);
+					vint.setDataAndType(Uri.fromFile(r.file), "image/*");
+					vint.setFlags(0x10000000);
 					view.getContext().startActivity(vint);
-				} catch (Exception e) {
-					e.printStackTrace();
+				} else {
+					if (player.isPlaying()) {
+						player.stop();
+					}
+					Intent vint = new Intent(Intent.ACTION_VIEW);
+					vint.setDataAndType(Uri.fromFile(r.file), "video/*");
+					vint.setFlags(0x10000000);
+					try {
+						view.getContext().startActivity(vint);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -153,7 +167,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(player.isPlaying()) {
+				if(player != null && player.isPlaying()) {
 					player.stop();
 				}				
 				
@@ -161,18 +175,37 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 			
 		});
 		try {
-			player.setDataSource(r.file.getAbsolutePath());
-			player.setOnPreparedListener(new OnPreparedListener() {
-
-				@Override
-				public void onPrepared(MediaPlayer mp) {
-					dlg.show();
-					player.start();
+			if (r.isPhoto()) {
+				ImageView img = new ImageView(view.getContext());
+				Options opts = new Options();
+				opts.inSampleSize = 4;
+				int rot = r.getBitmapRotation();
+				Bitmap bmp = BitmapFactory.decodeFile(r.file.getAbsolutePath(), opts);
+				if (rot != 0) {
+					Matrix matrix = new Matrix();
+					matrix.postRotate(rot);
+					Bitmap resizedBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+					bmp.recycle();
+					bmp = resizedBitmap;
 				}
-			});
-			player.prepareAsync();
+				img.setImageBitmap(bmp);
+				dlg.setView(img);
+				dlg.show();
+			} else {
+				dlg.setMessage(view.getContext().getString(R.string.recording_playing, r.getDescription(view.getContext())));
+				player.setDataSource(r.file.getAbsolutePath());
+				player.setOnPreparedListener(new OnPreparedListener() {
+
+					@Override
+					public void onPrepared(MediaPlayer mp) {
+						dlg.show();
+						player.start();
+					}
+				});
+				player.prepareAsync();
+			}
 		} catch (Exception e) {
-			AccessibleToast.makeText(activity, R.string.recording_can_not_be_played, Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(view.getContext(), R.string.recording_can_not_be_played, Toast.LENGTH_SHORT).show();
 		}
 	}
 	
