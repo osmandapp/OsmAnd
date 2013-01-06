@@ -130,7 +130,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	public void onTerminate() {
 		super.onTerminate();
 		if (routingHelper != null) {
-			routingHelper.getVoiceRouter().onApplicationTerminate(getApplicationContext());
+			routingHelper.getVoiceRouter().onApplicationTerminate(this);
 		}
 		if (bidforfix != null) {
 			bidforfix.onDestroy();
@@ -617,6 +617,16 @@ public class OsmandApplication extends Application implements ClientContext {
 	@Override
 	public SQLiteAPI getSQLiteAPI() {
 		return sqliteAPI;
+	}
+
+	@Override
+	public void runInUIThread(Runnable run) {
+		uiHandler.post(run);
+	}
+
+	@Override
+	public void runInUIThread(Runnable run, long delay) {
+		uiHandler.postDelayed(run, delay);
 	}
 
 }

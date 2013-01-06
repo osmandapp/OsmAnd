@@ -24,6 +24,7 @@ import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.MapScreen;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -35,6 +36,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -89,7 +91,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener {
+public class MapActivity extends AccessibleActivity implements IMapLocationListener, SensorEventListener, MapScreen {
 	
 	// stupid error but anyway hero 2.1 : always lost gps signal (temporarily unavailable) for timeout = 2000
 	private static final int GPS_TIMEOUT_REQUEST = 0;
@@ -251,14 +253,27 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				Gravity.CENTER_HORIZONTAL | Gravity.TOP);
 		DisplayMetrics dm = getResources().getDisplayMetrics();
 		params.topMargin = (int) (60 * dm.density);
-		ProgressBar pb = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
+		final ProgressBar pb = new ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal);
 		pb.setIndeterminate(false);
 		pb.setMax(100);
 		pb.setLayoutParams(params);
 		pb.setVisibility(View.GONE);
 		
 		parent.addView(pb);
-		routingHelper.setProgressBar(pb, new Handler());
+		routingHelper.setProgressBar(new RouteCalculationProgressCallback() {
+			
+			@Override
+			public void updateProgress(int progress) {
+				pb.setVisibility(View.VISIBLE);
+				pb.setProgress(progress);
+				
+			}
+			
+			@Override
+			public void finish() {
+				pb.setVisibility(View.GONE);
+			}
+		});
 	}
 
 	
@@ -1458,6 +1473,12 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		OsmandPlugin.onMapActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	public void refreshMap() {
+		getMapView().refreshMap();
+		
 	}
 
 }

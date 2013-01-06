@@ -50,10 +50,12 @@ import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
@@ -579,7 +581,7 @@ public class MapActivityActions implements DialogProvider {
 				if (to != null) {
 					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
-				if (!targets.checkPointToNavigate(mapActivity)) {
+				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
 				Location from = fromOrCurrent;
@@ -614,7 +616,7 @@ public class MapActivityActions implements DialogProvider {
 				if(to != null) {
 					targets.navigateToPoint(mapActivity, to, false, -1);
 				}
-				if (!targets.checkPointToNavigate(mapActivity)) {
+				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
 				boolean msg = true;
@@ -875,7 +877,7 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(null, new LatLon(latitude, longitude), true);
 					}
 				} else if (standardId == R.string.context_menu_item_show_route) {
-					if (targets.checkPointToNavigate(mapActivity)) {
+					if (targets.checkPointToNavigate(getMyApplication())) {
 						Location loc = new Location("map");
 						loc.setLatitude(latitude);
 						loc.setLongitude(longitude);
@@ -1250,7 +1252,7 @@ public class MapActivityActions implements DialogProvider {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
-				app.getTargetPointsHelper().navigatePointDialogAndLaunchMap(activity,
+				navigatePointDialogAndLaunchMap(activity,
 						location.getLatitude(), location.getLongitude(), name);
 				qa.dismiss();
 			}
@@ -1272,5 +1274,43 @@ public class MapActivityActions implements DialogProvider {
 //		});
 //		qa.addActionItem(directionsTo);
 	}
+    
+    
+    public static void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name){
+    	OsmandApplication ctx = (OsmandApplication) act.getApplication();
+    	final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
+    	final OsmandSettings settings = ctx.getSettings();
+    	if(targetPointsHelper.getPointToNavigate() != null) {
+    		Builder builder = new AlertDialog.Builder(act);
+    		builder.setTitle(R.string.new_destination_point_dialog);
+    		builder.setItems(new String[] {
+    				act.getString(R.string.replace_destination_point),
+    				act.getString(R.string.add_as_first_destination_point),
+    				act.getString(R.string.add_as_last_destination_point)
+    		}, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(which == 0) {
+						settings.setPointToNavigate(lat, lon, true, name);
+					} else if(which == 2) {
+						int sz = targetPointsHelper.getIntermediatePoints().size();
+						LatLon pt = targetPointsHelper.getPointToNavigate();
+						settings.insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
+								settings.getPointNavigateDescription(), sz, true);
+						settings.setPointToNavigate(lat, lon, true, name);
+					} else {
+						settings.insertIntermediatePoint(lat, lon, name, 0, true);
+					}
+					targetPointsHelper.updatePointsFromSettings();
+					MapActivity.launchMapActivityMoveToTop(act);
+				}
+			});
+    		builder.show();
+    	} else {
+    		settings.setPointToNavigate(lat, lon, true, name);
+    		targetPointsHelper.updatePointsFromSettings();
+    		MapActivity.launchMapActivityMoveToTop(act);
+    	}
+    }
     
 }

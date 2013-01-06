@@ -8,9 +8,11 @@ import java.util.List;
 import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.ResourceManager;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.render.NativeOsmandLibrary;
 
@@ -18,6 +20,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlSerializer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
@@ -126,6 +129,38 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 	@Override
 	public String getModelName() {
 		return Build.MODEL;
+	}
+
+	@Override
+	public TargetPointsHelper getTargetPointsHelper() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isNavigationServiceStarted() {
+		return app.getNavigationService() != null;
+	}
+
+	@Override
+	public boolean isNavigationServiceStartedForNavigation() {
+		return app.getNavigationService() != null && app.getNavigationService().startedForNavigation();
+	}
+
+	@Override
+	public void startNavigationService(boolean forNavigation) {
+		Intent serviceIntent = new Intent(app, NavigationService.class);
+		if(forNavigation) {
+			serviceIntent.putExtra(NavigationService.NAVIGATION_START_SERVICE_PARAM, true);
+		}
+		app.startService(serviceIntent);
+	}
+
+	@Override
+	public void stopNavigationService() {
+		Intent serviceIntent = new Intent(app, NavigationService.class);
+		app.stopService(serviceIntent);
+		
 	}
 
 
