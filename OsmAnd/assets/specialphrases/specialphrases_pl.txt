@@ -10,7 +10,7 @@ bicycle_parking,Parking rowerowy
 bicycle_rental,Wypożyczalnia rowerów
 brothel,Burdel
 bureau_de_change,Kantor
-bus_station,Stacja autobusowa
+bus_station,Przystanek autobusowy
 cafe,Kawiarnia
 car_rental,Wynajem samochodów
 car_sharing,Dzielenie się samochodami
@@ -24,11 +24,10 @@ community_centre,Centrum społeczności
 courthouse,Sąd
 crematorium,Krematorium
 dentist,Gabinet dentystyczny
-doctors,Doktorzy
+doctors,Przychodnia
 dormitory,Bursa
 drinking_water,Źródło wody pitnej
 driving_school,Nauka jazdy
-driving_school,Nauka jazdys
 embassy,Ambasada
 emergency_phone,Telefon alarmowy
 fast_food,Fast Food
@@ -43,7 +42,7 @@ hall,Hala
 health_centre,Ośrodek zdrowia
 hospital,Szpital
 hotel,Hotel
-hunting_stand,Stanowisko strzeleckie
+hunting_stand,Ambona myśliwska
 ice_cream,Lodziarnia
 kindergarten,Przedszkole
 library,Biblioteka
@@ -85,10 +84,10 @@ toilets,Toaleta publiczna
 townhall,Urząd miejski
 university,Uniwersytet
 vending_machine,Automat do sprzedaży
-veterinary,Chirurgia weterynaryjna
+veterinary,Weterynarz
 village_hall,Urząd gminy
-waste_basket,Marnowanie koszyka
-wifi,Dostęp do WiFi
+waste_basket,Kosz na śmieci
+wifi,Dostęp do Wi-Fi
 youth_centre,Centrum młodzieżowe
 administrative,Granica administracyjna
 apartments,Blok mieszkalny
@@ -187,7 +186,6 @@ trunk_link,Droga ekspresowa - dojazd obok
 trunk_link,Droga ekspresowa - dojazd koło
 unclassified,Droga gminna
 unsurfaced,Nierówna droga
-unsurfaced,Nierówna drogas
 archaeological_site,Wykopaliska archeologiczne
 battlefield,Miejsce historycznej bitwy
 boundary_stone,Graniczny głaz
@@ -211,7 +209,7 @@ basin,Dorzecze
 brownfield,Grunty poprzemysłowe
 cemetery,Cmentarz
 commercial,Obszar handlowo-usługowy
-conservation,Konserwacja
+conservation,Ochrona przyrody
 construction,Teren budowy
 farm,Farma
 farmland,Grunty rolne
@@ -235,7 +233,7 @@ recreation_ground,Ziemia rekreacyjna
 reservoir,Sztuczny zbiornik wodny
 residential,Zabudowa mieszkaniowa
 retail,Handel detaliczny
-village_green,Park miejski
+village_green,Zieleń wiejska
 vineyard,Winnica
 wetland,Tereny podmokłe
 wood,Puszcza
@@ -246,7 +244,7 @@ garden,Ogród
 golf_course,Pole golfowe
 ice_rink,Lodowisko
 marina,Marina
-miniature_golf,Pole do miniaturowego golfa
+miniature_golf,Pole do minigolfa
 nature_reserve,Rezerwat naturalny
 park,Park
 pitch,Boisko sportowe
@@ -340,7 +338,7 @@ subway_entrance,Wejście na stację metra
 switch,Zwrotnica
 tram,Linia tramwajowa
 tram_stop,Przystanek tramwajowy
-yard,Jard kolejowy
+yard,Bocznica kolejowa
 alcohol,Sklep monopolowy
 apparel,Sklep odzieżowy
 art,Sklep z dziełami sztuki
@@ -354,14 +352,13 @@ car,Sklep samochodowy
 car_dealer,Salon samochodowy
 car_parts,Sklep z częściami samochodowymi
 car_repair,Naprawa samochodów
-car_repair,Naprawa samochodóws
 carpet,Sklep z dywanami
 charity,Sklep miłosny
 chemist,Drogeria
 clothes,Sklep odzieżowy
 computer,Sklep komputerowy
 confectionery,Cukiernia
-convenience,Sklep z rzeczami wygodnymi
+convenience,Sklep osiedlowy
 copyshop,Ksero
 cosmetics,Sklep kosmetyczny
 department_store,Dom towarowy
@@ -424,8 +421,7 @@ guest_house,Pensjonat
 hostel,Hostel
 hotel,Hotel
 information,Informacja turystyczna
-lean_to,Nachylenie
-lean_to,Nachylenies
+lean_to,Wiata
 motel,Motel
 museum,Muzeum
 picnic_site,Miejsce na piknik
