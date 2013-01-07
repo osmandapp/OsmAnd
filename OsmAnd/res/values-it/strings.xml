@@ -1194,4 +1194,5 @@
     <string name="recording_context_menu_show">Mostra</string>
     <string name="av_def_action_picture">Scatta una foto</string>
     <string name="recording_context_menu_precord">Scatta una foto</string>
+    <string name="recording_photo_description">Foto %1$s a %2$s</string>
     </resources>
