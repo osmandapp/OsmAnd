@@ -1191,4 +1191,7 @@
     <string name="intermediate_points_change_order">Cambia l\'ordine</string>
     <string name="dropbox_plugin_description">Il plugin Dropbox permette di sincronizzare le tracce e le note video/audio con il tuo account Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
+    <string name="recording_context_menu_show">Mostra</string>
+    <string name="av_def_action_picture">Scatta una foto</string>
+    <string name="recording_context_menu_precord">Scatta una foto</string>
     </resources>
