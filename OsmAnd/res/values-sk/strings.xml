@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
+  <string name="recording_context_menu_show">Zobraziť</string>
+  <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
+  <string name="av_def_action_picture">Zachytiť fotografiu</string>
+  <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
   <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo)</string>
   <string name="non_optimal_route_calculation">Vypočítať pravdepodobne neoptimálnu cestu s dlhšou vzdialenosťou</string>
   <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
@@ -1124,8 +1128,8 @@
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
-    <string name="av_def_action_video">Nahraj video</string>
-    <string name="av_def_action_audio">Nahraj zvuk</string>
+    <string name="av_def_action_video">Nahrať video</string>
+    <string name="av_def_action_audio">Nahrať zvuk</string>
     <string name="av_widget_action_descr">Výber predvolenej akcie pre widget</string>
     <string name="av_widget_action">Predvolená akcia pre widget</string>
     <string name="av_video_format_descr">Výber formátu výstupného videa</string>
