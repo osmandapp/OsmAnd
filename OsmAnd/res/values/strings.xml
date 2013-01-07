@@ -11,7 +11,7 @@
     -->
     <string name="recording_context_menu_show">Show</string>
     <string name="recording_photo_description">Photo %1$s at %2$s</string>
-    <string name="av_def_action_picture">Take a picture</string>
+    <string name="av_def_action_picture">Take a photo</string>
     <string name="recording_context_menu_precord">Take a photo</string>
     <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and video/audio notes with your dropbox account.</string>
     <string name="dropbox_plugin_name">Dropbox plugin</string>
