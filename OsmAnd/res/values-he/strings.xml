@@ -1124,7 +1124,6 @@
     <string name="map_widget_audionotes">הערות קוליות</string>
     <string name="audionotes_plugin_description">תיאור תוסף ההערות הקוליות</string>
     <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
-    <string name="srtm_plugin_attribution">ASTER הוא מוצר מבית METIS ו־NASA</string>
     <string name="osmand_srtm_short_description_80_chars">תוסף ל־OsmAnd לקווי מתאר בלתי מקוונים</string>
     <string name="use_clear_distance_measurement">יש ללחוץ פעם נוספת כדי למחוק את נקודות המדידה.</string>
     <string name="map_widget_distancemeasurement">מדידת מרחק</string>
@@ -1170,8 +1169,4 @@
     <string name="intermediate_points_change_order">שינוי הסדר</string>
     <string name="dropbox_plugin_description">תוסף Dropbox מאפשר לסנכרן מסלולים והערות שמע/וידאו עם חשבון ה־dropbox שלך.</string>
     <string name="dropbox_plugin_name">תוסף Dropbox</string>
-    <string name="recording_context_menu_show">הצגה</string>
-    <string name="recording_photo_description">תמונה %1$s במיקום %2$s</string>
-    <string name="av_def_action_picture">צילום תמונה</string>
-    <string name="recording_context_menu_precord">צילום תמונה</string>
     </resources>

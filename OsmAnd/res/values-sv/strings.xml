@@ -544,7 +544,7 @@ Proportionell minne %4$s MB (Android gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="yard">yd</string>
 <string name="send_location_way_choose_title">Dela plats med</string>
 <string name="send_location_sms_pattern">Plats: %1$s\n%2$s</string>
-<string name="send_location_email_pattern">Om du vill se platsen följa på webben% webbläsarens länk %1$s eller Android uppsåt länk %2$s</string>
+<string name="send_location_email_pattern">Om du vill se platsen följa på webben webbläsarens länk %1$s eller Android uppsåt länk %2$s</string>
 <string name="send_location">Skicka plats</string>
 <string name="context_menu_item_share_location">Dela plats</string>
 <string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' har lagts till</string>

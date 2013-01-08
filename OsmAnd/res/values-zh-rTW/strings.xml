@@ -38,7 +38,7 @@
     <string name="replace_destination_point">替換目的地</string>
     <string name="new_destination_point_dialog">您已設過目的地</string>
     <string name="target_points">經由地</string>
-    <string name="intermediate_point_too_far">經由地%1$離道路太遠</string>
+    <string name="intermediate_point_too_far">經由地%1$s離道路太遠</string>
     <string name="arrived_at_intermediate_point">已到達經由地</string>
     <string name="context_menu_item_intermediate_point">增為經由地</string>
     <string name="map_widget_intermediate_distance">經由地</string>

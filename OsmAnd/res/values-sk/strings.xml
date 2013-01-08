@@ -1,9 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-  <string name="recording_context_menu_show">Zobraziť</string>
-  <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
-  <string name="av_def_action_picture">Zachytiť fotografiu</string>
-  <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
   <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo)</string>
   <string name="non_optimal_route_calculation">Vypočítať pravdepodobne neoptimálnu cestu s dlhšou vzdialenosťou</string>
   <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
@@ -129,7 +125,6 @@
   <string name="validate_gpx_upload_name_pwd">Prosím, určťe OSM užívateľské meno a heslo pre nahratie GPX súborov.</string>
   <string name="default_buttons_support">Podpora</string>
   <string name="support_new_features">Podporiť nové funkcie</string>
-  <string name="show_ruler_level_descr">Zobrazí pravítko na mape</string>
   <string name="show_ruler_level">Zobraziť pravítko</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Späť na umiestnenie</string>
@@ -263,7 +258,6 @@
 \n\t- Informácie o nadmorskej výške
 \n\t- Nové preklady (Vietnamský, Polský)
 \n\t- Iné malé funkcie "</string>
-  <string name="use_transparent_map_theme_descr">Použije priehľadné ovládače mapy</string>
   <string name="use_transparent_map_theme">Priehľadná téma</string>
   <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
   <string name="init_native_library">Inicializácia natívnej knižnice…</string>
@@ -409,12 +403,6 @@
   <string name="gpx_option_destination_point">Použiť aktuálny cieľový bod</string>
   <string name="gpx_option_from_start_point">Prejsť celú trasu</string>
   <string name="tip_rotation_switching">Otáčanie mapy</string>
-  <string name="tip_rotation_switching_t">Môžete určiť ako bude otáčaná mapa cez \'Hlavné menu\' -&gt; \'Nastavenia\' -&gt; \'Vzhľad mapy\' -&gt; \'Otáčanie mapy\'.
-\nNa výber máte možnosti:
-\n\t\'Neotáčať\' - Mapa nebude otáčaná. Sever bude vždy hore.
-\n\t\'Podľa smeru pohybu\' - Mapa sa bude otáčať podľa toho kam smerujete.
-\n\t\'Podľa kompasu\' - Mapa sa bude otáčať podľa kompasu a Vášho otočenia.
-\nPre rýchle prepnutie medzi otáčaním podľa kompasu a Vami zvoleným v nastaveniach, môžete ťuknúť na strelku kompasu počas zobrazenia mapy.</string>
   <string name="switch_to_vector_map_to_see">Je dostupná offline vektorová mapa pre túto oblasť.
 \n\t\n\tNa jej použitie aktivujte \'Ponuka\' -&gt; \'Zobrazenie\' -&gt; \'Zdroj mapy…\' -&gt; \'Vektorové OSM mapy\'.</string>
   <string name="binary_map_download_success">Sťahovanie úspešné.\n\t\n\tPre jej použitie aktivujte \'Nastavenia\' -&gt; \'Konfigurácia mapy\' -&gt; \'Vektorové mapy\'.</string>
@@ -449,14 +437,6 @@
   <string name="level_to_switch_vector_raster_descr">Max. úroveň priblíženia použitá pri vektorovom vykresľovaní a nie rastrovom</string>
   <string name="level_to_switch_vector_raster">Úroveň vektorového zoomu</string>
   <string name="tip_day_night_mode">Denný/Nočný režim</string>
-  <string name="tip_day_night_mode_t">Môžete zmeniť vzhľad mapy, podľa toho, či používate OsmAnd cez deň(jasné svetelné podmienky) alebo v noci(tmavé svetelné podmienky).
-\nKeď jazdíte v noci, je bezpečnejšie, keď sú farby mapy tmavšie, pretože nie ste tak oslepovaný ako s jasnejšími farbami na displeji.
-\n\tMôžete nastaviť ako meniť režim cez \'Hlavné menu\' -&gt; \'Nastavenia\' -&gt; \'Vzhľad mapy\' -&gt; \'Denný/nočný režim\'.
-\nMožnosti sú:
-\n\t\'Východ/Západ slnka\' - automatický režim, ovládaný polohou slnka(štandardný)
-\n\t\'Deň\' - vždy použiť denný režim
-\n\t\'Noc\' - vždy použiť nočný režim
-\n\t\'Svetelný senzor\' - vzhľad mapy je ovládaný svetelným senzorom Vášho zariadenia(iba ak je dostupný)</string>
   <string name="tip_location_sharing">Zdieľanie umiestnenia</string>
   <string name="tip_location_sharing_t">"Objavili ste nejaké zaujímavé miesto na Vašom výlete a chcete zdieľať jeho pozíciu s Vašimi priateľmi alebo rodinou?
 \nOsmAnd Vám umožňuje jednoducho zdieľať hodcijaké umiestnenie chcete.
@@ -482,12 +462,7 @@
   <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk</string>
   <string name="preferred_locale">Jazyk zobrazenia</string>
   <string name="tip_map_switch">Zdroj mapy</string>
-  <string name="tip_map_switch_t">Najrýchlejšia cesta ako zmeniť zdroj mapy a vrstvy je stlačením \'Menu\' -&gt; \'Zobrazenie\' na mape.
-\n\tPoložkou \'Zdroj mapy…\' možete vybrať predefinovaný zdroj dlaždíc alebo ručne vytvorený s OsmAndMapCreator-om na PC.
-\n\tOsmAnd podporuje užívateľom definované zdroje.</string>
   <string name="tip_app_mode">Režim aplikácie</string>
-  <string name="tip_app_mode_t">OsmAnd podporuje rozličné režimy reprezentujúce mapu pre typické situácie.
-\n\tMôžete zmeniť režim v \'Menu\' -&gt; \'Nastavenia\' -&gt; \'Režim aplikácie\'.</string>
   <string name="tip_navigation">Navigácia</string>
   <string name="tip_navigation_t">Na zapnutie navigácie musíte najskôr vybrať cieľový bod. Potom stlačte \'Menu\'-&gt;\'Pokyny\' na mape a vyberte typ navigovania.</string>
   <string name="tip_search">Vyhľadávanie</string>
@@ -818,7 +793,6 @@
   <string name="user_password_descr">Vaše OSM heslo</string>
   <string name="user_password">Užívateľské heslo</string>
   <string name="osm_settings_descr">Určenie nastavení Openstreetmap.org (OSM) pre OSM nahrávanie</string>
-  <string name="monitor_preferences_descr">Určenie stopovacích nastavení</string>
   <string name="data_settings_descr">Výber jazyka, stiahnutie/znovu načítanie údajov</string>
   <string name="data_settings">Údaje</string>
   <string name="map_preferences_descr">Určenie nastavení mapy: zdroj mapy, otáčanie, stredová pozícia, orientácia obrazovky</string>
@@ -856,7 +830,6 @@
   <string name="position_on_map_descr">Výber umiestnenia ukazovateľa pozície na mape</string>
   <string name="position_on_map">Ukazovateľ pozície</string>
   <string name="map_specify_point">Určiť ako cieľ</string>
-  <string name="show_view_angle_descr">Uhol pohľadu zobrazenia podľa kompasu</string>
   <string name="show_view_angle">Zobraziť uhol pohľadu</string>
   <string name="stop_navigation">Zmazať cieľ</string>
   <string name="navigate_to_point">Označiť bod</string>
@@ -1042,9 +1015,6 @@
   <string name="use_compass_navigation">Použiť kompas</string>
   <string name="route_updated_loc_found">Cesta bude prepočítaná, keď sa nájde umiestnenie</string>
   <string name="continue_follow_previous_route_auto">Predošlá navigácia nebola dokončená. Pokračovať v jej nasledovaní? (%1$s sekúnd)</string>
-  <string name="show_cameras_descr">Zobrazenie radarov (môže byť zakázané v niektorých krajinách)</string>
-  <string name="show_speed_limits_descr">Zobrazenie radarov a spomaľovačov</string>
-  <string name="avoid_toll_roads_descr">Vyvarovanie sa plateným cestám pri kalkulácii trasy</string>
   <string name="show_cameras">Radary</string>
   <string name="show_speed_limits">Rýchlostné obmedzenia</string>
   <string name="avoid_toll_roads">Spoplatneným cestám</string>
@@ -1128,8 +1098,8 @@
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
-    <string name="av_def_action_video">Nahrať video</string>
-    <string name="av_def_action_audio">Nahrať zvuk</string>
+    <string name="av_def_action_video">Nahraj video</string>
+    <string name="av_def_action_audio">Nahraj zvuk</string>
     <string name="av_widget_action_descr">Výber predvolenej akcie pre widget</string>
     <string name="av_widget_action">Predvolená akcia pre widget</string>
     <string name="av_video_format_descr">Výber formátu výstupného videa</string>

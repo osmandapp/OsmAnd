@@ -574,7 +574,7 @@
 \n\tΠαρατεταμένο πάτημα ενός Αγαπημένου στο μενού \'Αγαπημένα\' παρέχει επιλογές να το ορίσετε ως προορισμό, να το Επεξεργαστείτε ή να το διαγράψετε.
 \n\tΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' -&gt; \'Ορισμός εμφάνισης\'. "</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
-	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'% s\'</string>
+	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'%s\'</string>
 	<string name="search_osm_offline">Αναζήτηση διεύθυνσης χρησιμοποιώντας εκτός σύνδεσης χάρτες</string>
 	<string name="system_locale">Σύστημα</string>
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
@@ -1117,7 +1117,6 @@
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
     <string name="audionotes_plugin_description">Εγγραφή ηχητικών σημειώσεων</string>
     <string name="audionotes_plugin_name">Πρόσθετο ηχητικών σημειώσεων</string>
-    <string name="srtm_plugin_attribution">το ASTER είναι ένα προϊόν των METI και NASA</string>
     <string name="osmand_srtm_short_description_80_chars">πρόσθετο του OsmAnd για ισοϋψείς γραμμές χωρίς σύνδεση</string>
     <string name="use_clear_distance_measurement">Κλικ άλλη μια φορά για καθαρισμό των σημείων μέτρησης.</string>
     <string name="map_widget_distancemeasurement">Μέτρηση απόστασης</string>

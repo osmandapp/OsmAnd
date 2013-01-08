@@ -1,11 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
 	<string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 나타납니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
-	<string name="simulate_route_progression_manually">경로 진행을 수동으로 시뮬레이션합니다</string>
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 출력합니다</string>
 	<string name="debugging_and_development">OsmAnd 디버깅 및 개발</string>
 	<string name="native_rendering">네이티브 렌더링</string>
-	<string name="animate_routing">경로 애니메이션</string>
 	<string name="test_voice_prompts">음성 안내 테스트</string>    
 	<string name="switch_to_raster_map_to_see">이 위치에 대한 오프라인 벡터맵이 존재하지 않습니다. 설정(오프라인 데이터) 메뉴에서 다운로드하거나 온라인 맵으로 변경하면 됩니다.</string>
     <string name="tip_recent_changes_0_7_2_t">0.7.2 버전에 대한 변경사항들 :
@@ -23,7 +21,6 @@
 	<string name="default_buttons_support">기능 지원</string>
 	<string name="support_new_features">새로운 기능을 지원합니다</string>
 
-	<string name="show_ruler_level_descr">맵 상에 자(ruler)를 표시합니다</string>
 	<string name="show_ruler_level">자(ruler) 표시</string>
 	
 	<string name="info_button">정보</string>
@@ -145,7 +142,6 @@
 	<string name="index_name_russia">유럽/아시아 - 러시아</string>
 	<string name="index_name_africa">아프리카</string>
 	<string name="index_name_asia">아시아</string>
-	<string name="index_name_australia">오스트레일리아</string>
 	<string name="index_name_other">전세계 및 주제 맵</string>
 	<string name="index_name_wiki">전세계 위키피디아</string>
 	<string name="index_name_voice">음성 팩 (녹음)</string>
@@ -159,7 +155,6 @@
 	<string name="settings_preset">사용자 프로파일</string>
 	<string name="settings_preset_descr">사용자 프로파일을 선택합니다. (각 프로파일의 맵, 트래킹, 네비게이션 설정은 아래처럼 지정할 수 있습니다.)</string>
 	<string name="monitor_preferences">트래킹</string>
-	<string name="monitor_preferences_descr">트래킹 옵션을 설정합니다</string>
 	<string name="routing_settings">네비게이션</string>
 	<string name="routing_settings_descr">경로 옵션을 설정합니다</string>
 	<string name="global_settings">전체 설정</string>
@@ -176,24 +171,10 @@
 	<string name="osmand_service_descr">화면이 꺼져 있는 동안에도 OsmAnd 를 실행하기 위해 사용합니다</string>
 	
 	<string name="tip_rotation_switching">맵 회전</string>
-	<string name="tip_rotation_switching_t">\t여러분은 \'설정\' -> \'맵 모양\' -> \'맵 회전\' 메뉴에서 맵 출력이 회전하는 방식을 선택할 수 있습니다.
-	\n\t선택사항:
-	\n\t\'회전 안함\' - 맵은 회전하지 않습니다. 북쪽이 항상 위쪽입니다
-	\n\t\'이동 방향\' - 여러분의 이동 방향을 따라 맴을 계속 맞춥니다
-	\n\t\'나침반 방향\' - 장치의 나침반 값을 따라 맵을 계속 맞춥니다
-	\n\t힌트: 나침반 방향 회전과 선택한 설정값 사이를 빠르게 바꾸려면, 맵 보기에서 나침반 바늘을 두드리면 됩니다.</string>
 
 	<string name="binary_map_download_success">성공적으로 다운로드하였습니다.\n\t\n\t사용을 위해 \'설정\' -> \'맵 설정\' -> \'오프라인 벡터 맵\' 를 활성화합니다.</string>
 
 	<string name="tip_day_night_mode">낮/밤 모드</string>
-	<string name="tip_day_night_mode_t">\t맵 모양은 벡터 맵에 대해서 낮(더 밝게) 과 밤(더 어둡게) 을 다르게 바꿀 수 있습니다.
-	\n\t밤 색깔은 야간 운전에 더욱 안전합니다.
-	\n\t여러분은\'설정\' -> \'맵 모양\' ->\'낮/밤 모드\'메뉴를 통해 낮/밤 스위칭에 대한 정책을 설정할 수 있습니다.
-	\n\t선택사항:
-	\n\t\'일출/일몰\' - 태양의 위치로 제어되는 자동 모드 (기본)
-	\n\t\'낮\' - 항상 낮 모드 사용
-	\n\t\'밤\' - 항상 밤 모드 사용 
-	\n\t\'광 센서\' - 맵 모양이 장치의 광 센서로 제어됨 (장착된 경우에만)</string>	
 
 	<string name="tip_osm_improve">OSM 데이터 개선하기</string>
 	<string name="tip_osm_improve_t">\tOsmAnd 는 Openstreetmap.org (OSM) 데이터 기반의 맵을 사용하며 -맵 보기 및 경로 외에- OSM 데이터 질을 개선하는 데 사용할 수 있습니다. 여러분은 몇번의 클릭만으로도 새로운 POI 또는 OSM 버그 리포트를 만들고 업로드할 수 있습니다!
@@ -206,8 +187,6 @@
 
 	<string name="download_files_not_enough_space">%1$s MB 를 다운로드할 충분한 공간이 없습니다 (빈 공간: %2$s).</string>
 	<string name="download_files_question_space">빈 공간이 이제  {2} MB 입니다! {0} 개의 파일 ({1} MB) 을 다운로드하시겠습니까?</string>
-	<string name="show_zoom_level_descr">자 대신 줌 레벨을 계속 표시합니다.</string>
-	<string name="show_zoom_level">줌 레벨 표시</string>
 	<string name="tip_select_destination_point">목적지 선택</string>
 	<string name="tip_select_destination_point_t">\t여러분은 맵(컨텍스트 메뉴->\'목적지로 설정\'), 모든 검색 액티비티, 또는 \'등록지점 목록\'에서 항목을 길게 눌러 직접  목적지를 선택할 수 있습니다. 
 \n\t목적지는 맵 상에서 오렌지 원으로 표시되고 OsmAnd 는 거기까지의 거리와 방향 (오렌지 삼각형)을 나타냅니다.</string> 
@@ -221,9 +200,6 @@
 \n\t- 기타 몇몇 기능들
 	</string>
 	
-	<string name="show_altitude_info_descr">맵 상에 현재 고도 정보를 나타냅니다</string>
-	<string name="show_altitude_info">고도 표시</string>
-	<string name="use_transparent_map_theme_descr">투명 맵 제어를 사용합니다</string>
 	<string name="use_transparent_map_theme">투명 테마</string>
 
 	<string name="native_library_not_supported">이 장치는 네이티브 라이브러리를 지원하지 않습니다.</string>
@@ -440,13 +416,8 @@
 	<string name="preferred_locale">표시 언어</string>
 
 	<string name="tip_map_switch">맵 소스</string>
-	<string name="tip_map_switch_t">\t보여줄 맵 소스와 계층을 바꾸는 가장 빠른 방법은 맵 보기에서 \'메뉴\' -> \'뷰 정의\' 를 누르는 것입니다.
-\n\t\'맵 소스&#8230;\' 에서 미리 적재된 오프라인 벡터 맵, 미리 정의된 (온라인) 타일 소스, 또는 수동으로 생성한 맵 (예를 들면 PC 에서 OsmMapCreater 사용)을 선택합니다.
-\n\t또한 OsmAnd 는 커스텀 소스를 지원합니다.</string>
 
 	<string name="tip_app_mode">유저 프로파일</string>
-	<string name="tip_app_mode_t">\tOsmAnd 는 서로 다른 (전용의) 사용 목적을 가지는 여러 앱 프로파일을 지원합니다.
-\n\t\'메뉴\' -> \'설정\' -> \'사용자 프로파일\' 을 선택하거나 경로를 생성할 때 프로파일을 바꿀 수 있습니다.</string>
 
 	<string name="tip_navigation">네비게이션</string>
 	<string name="tip_navigation_t">\t네비게이션 (경로)를 시작하기 전에 목적지를 선택하여야 합니다. 그런 다음 맵 상에서 \'메뉴\' -> \'방향\' 을 누르고 네비게이션 종류를 선택합니다.</string>
@@ -632,7 +603,6 @@
 	<string name="layer_poi">POI...</string>
 	<string name="layer_map">맵 소스...</string>
 	<string name="menu_layers">뷰 정의</string>
-	<string name="continue_follow_previous_route">이전 경로를 끝내지 않았습니다. 계속 따라갈까요?</string>
 	<string name="context_menu_item_search_poi">POI 검색</string>
 	<string name="context_menu_item_show_route">시작지점으로</string>
 	<string name="use_trackball_descr">맵을 이동하는 데 트랙볼을 사용합니다</string>
@@ -823,7 +793,6 @@
     <string name="position_on_map_descr">맵 상의 위치를 선택하세요</string>
     <string name="position_on_map">맵 상의 위치</string>
     <string name="map_specify_point">위치 지정</string>
-    <string name="show_view_angle_descr">나침반을 기준으로 한 시야각을 표시합니다</string>
     <string name="show_view_angle">시야각 표시</string>
     <string name="stop_navigation">경로 중지</string>
     <string name="navigate_to_point">지점 표시</string>
@@ -901,7 +870,6 @@
 <string name="favourites_context_menu_edit">등록지점 편집</string>
 <string name="favourites_context_menu_delete">등록지점 삭제</string>
 
-<string name="favourites_remove_dialog_title">확실합니까?</string>
 <string name="favourites_remove_dialog_success">등록지점 {0} 이 성공적으로 삭제되었습니다.</string>
 
 <string name="osb_add_dialog_title">버그 텍스트 입력</string>

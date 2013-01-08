@@ -36,11 +36,9 @@
   <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 :\n\t- *Plugin functionality*\n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.\n\t- *New offline map data support*\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).\n\t - You need to download completely new offline data (old data will not be supported anymore)\n\t- *Offline Routing*\n\t - Offline routing becomes more robust\n\t *Usability and UI experience*\n\t - Improved in many areas "</string>
   <string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vector maps may display faster. May not work well on some devices.</string>
-  <string name="simulate_route_progression_manually">Simulate route progression manually</string>
   <string name="play_commands_of_currently_selected_voice">सध्या निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
   <string name="debugging_and_development">OsmAnd development</string>
   <string name="native_rendering">Native rendering</string>
-  <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">आवाज तपासा</string>
   <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
   <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Native rendering for all devices \n\t- Offline POI editing \n\t- Accessibility \n\t- Lots of bug fixes "</string>
@@ -51,7 +49,6 @@
   <string name="validate_gpx_upload_name_pwd">जीपीएक्स फाइल्स अपलोड करण्यासाठी ओएसएम युजरनेम आणि पासवर्ड सांगा.</string>
   <string name="default_buttons_support">सहाय्य</string>
   <string name="support_new_features">नविन वैशिठ्यासाठी सहाय्य करा</string>
-  <string name="show_ruler_level_descr">नकाशावर पट्टी दाखवा</string>
   <string name="show_ruler_level">पट्टी दाखवा</string>
   <string name="info_button">माहिती</string>
   <string name="back_to_location">Back to location</string>
@@ -163,7 +160,6 @@
   <string name="settings_preset">User Profile</string>
   <string name="settings_preset_descr">Select a user profile. Each profile contains the set of specific settings.</string>
   <string name="monitor_preferences">ट्रॅकिंग</string>
-  <string name="monitor_preferences_descr">Specify tracking settings</string>
   <string name="routing_settings">दिशादर्शन</string>
   <string name="routing_settings_descr">दिशादर्शनाचे पर्याय ठरवा</string>
   <string name="global_settings">Global Settings</string>
@@ -178,10 +174,8 @@
   <string name="osmand_service">Background Settings</string>
   <string name="osmand_service_descr">Use to run OsmAnd while screen is off</string>
   <string name="tip_rotation_switching">Map Orientation</string>
-  <string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
   <string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
   <string name="tip_day_night_mode">दिवस/रात्र पर्याय</string>
-  <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
   <string name="tip_osm_improve">Improving OSM Data</string>
   <string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks! \n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM\'. \n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it. \n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem. \n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button. \n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
   <string name="download_files_not_enough_space">%1$s एमबी डाउनलोड करण्यसाठी पुरेशी जागा शिल्लक नाही (शिल्लक जागा: %2$s).</string>
@@ -189,7 +183,6 @@
   <string name="tip_select_destination_point">इच्छित स्थळ निवडा</string>
   <string name="tip_select_destination_point_t">"\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'.\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
-  <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Transparent theme</string>
   <string name="native_library_not_supported">Native library is not supported on this device.</string>
   <string name="init_native_library">Initializing native library…</string>
@@ -344,9 +337,7 @@
   <string name="preferred_locale_descr">Select display language</string>
   <string name="preferred_locale">Display language</string>
   <string name="tip_map_switch">Map Source</string>
-  <string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -&gt; \'Define view\' in map view. \n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC. \n\tOsmAnd also supports custom sources.</string>
   <string name="tip_app_mode">User Profile</string>
-  <string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
   <string name="tip_search">Searching</string>
@@ -697,7 +688,6 @@
   <string name="position_on_map_descr">Choose location of position marker on the map</string>
   <string name="position_on_map">Position marker</string>
   <string name="map_specify_point">इच्छित स्थळ म्हणून निवडा</string>
-  <string name="show_view_angle_descr">Display viewing direction on the map</string>
   <string name="show_view_angle">Display viewing direction</string>
   <string name="stop_navigation">इच्छित स्थळ काढून टाका.</string>
   <string name="navigate_to_point">इच्छित स्थळ म्हणून निवडा.</string>
@@ -881,9 +871,6 @@
   <string name="use_compass_navigation">कंपास वापरा</string>
   <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
   <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
-  <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
-  <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
   <string name="show_cameras">Show speed cameras</string>
   <string name="show_speed_limits">Show speed limits</string>
   <string name="avoid_toll_roads">Avoid toll roads</string>

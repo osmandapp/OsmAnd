@@ -1125,8 +1125,4 @@
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
     <string name="dropbox_plugin_description">Vtičnik Dropbox omogoča sinhronizacijo datotek sledi in video/zvočnih posnetkov z vašim dropbox uporabniškim računom.</string>
     <string name="dropbox_plugin_name">Vtičnik Dropbox</string>
-    <string name="recording_context_menu_show">Prikaži</string>
-    <string name="recording_photo_description">Fotografija %1$s ob %2$s</string>
-    <string name="av_def_action_picture">Posnami fotografijo</string>
-    <string name="recording_context_menu_precord">Posnami fotografijo</string>
     </resources>

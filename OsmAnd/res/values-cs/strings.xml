@@ -12,7 +12,6 @@
   <string name="validate_gpx_upload_name_pwd">Prosím zadejte vaše uživatelské jméno a heslo pro přístup do OSM, aby bylo možné nahrát soubory GPX.</string>
   <string name="default_buttons_support">Podpora</string>
   <string name="support_new_features">Sponzoring nových funkcí</string>
-  <string name="show_ruler_level_descr">Zobrazovat měřítko na mapě</string>
   <string name="show_ruler_level">Měřítko</string>
   <string name="info_button">Informace</string>
   <string name="back_to_location">Zpět na zobrazení pozice</string>
@@ -135,7 +134,6 @@
   <string name="settings_preset">Uživatelský profil</string>
   <string name="settings_preset_descr">Vyberte uživatelský profil. V každém profilu je možno upravit vzhled mapy a způsob navigace.</string>
   <string name="monitor_preferences">- Záznam trasy</string>
-  <string name="monitor_preferences_descr">Nastavení záznamu trasy na SD kartu</string>
   <string name="routing_settings">Navigace</string>
   <string name="routing_settings_descr">Nastavení způsobu navigace</string>
   <string name="global_settings">Obecná nastavení</string>
@@ -150,24 +148,8 @@
   <string name="osmand_service">Služba na pozadí</string>
   <string name="osmand_service_descr">Umožní běh aplikace při vypnutém displeji</string>
   <string name="tip_rotation_switching">Natočení mapy</string>
-  <string name="tip_rotation_switching_t">\tMůžete zvolit způsob, jak se mapa bude otáčet, pomocí menu
-\'Nastavení\' -&gt; \'Mapa\' -&gt;
-\'Natočení mapy\'.
-\n\tMožnosti jsou:
-\n\t\'Neotáčet\' - Mapa se nebude otáčet. Sever bude stále nahoře.
-\n\t \'Ve směru pohybu\' - Mapa se bude natáčet podle toho, kterým směrem se pohybujete.
-\n\t \'Podle kompasu\' - Mapa se bude natáčet podle kompasu.
-\n Pro rychlé přepnutí na otáčení podle kompasu a zpět klepněte na střelku kompasu na mapové obrazovce.</string>
   <string name="binary_map_download_success">Stahování dokončeno.\n\t\n\tNa vektorové mapy můžete přepnout v menu (Mapová data -&gt; Zdroj map-&gt; Vektorové mapy OSM).</string>
   <string name="tip_day_night_mode">Denní/noční režim</string>
-  <string name="tip_day_night_mode_t">" \t OsmAnd dokáže ručně nebo automaticky přepínat mezi denním a nočním barevným režimem.
-\n\t Pokud řídíte v noci, tmavší zobrazovací režim je vhodnější, neboť méně oslňuje. Naopak, světlé zobrazení v denním režimu je za denního světla lépe čitelné.
-\n\t Zobrazovací režim lze nastavit v \'Hlavní Menu\'-&gt;\'Nastavení\'-&gt;\'Mapa\'-&gt;\'Denní/noční režim\'.
-\n Volby jsou následující:
-\n\t \'Východ/západ slunce\' - automatický režim, řízený polohou slunce
-\n\t \'Den\' - stále používat denní režim
-\n\t \'Noc\' - stále používat noční režim
-\n\t \'Senzor osvětlení\' - zobrazení mapy se řídí senzorem osvětlení (pouze pokud je dostupný) "</string>
   <string name="tip_osm_improve">Vylepšování Openstreetmap</string>
   <string name="tip_osm_improve_t">\t OsmAnd využívá mapy založené na datech Openstreetmap.org (OSM). Program krom navigace umožňuje také přispívání k projektu Openstreetmap. Několika kliknutími tak můžete snadno vytvářet nové body zájmu (POI) nebo hlášení o chybách OSM.\n\t Pro začátek je pouze potřeba zadat přihlašovací informace v \'Nastavení\'-&gt;\'Obecné\'-&gt;\'OSM editace\'.
 \n\t Nové POI zadáte volbou \'Vytvořit POI\' v kontextovém menu mapy. Pak můžete zadat informace o novém POI a stisknutím tlačítka ho odeslat.
@@ -186,7 +168,6 @@
 \n\t- Zobrazení nadmořské výšky
 \n\t- Nové překlady (Vietnamština, Polština)
 \n\t- Další drobné změny "</string>
-  <string name="use_transparent_map_theme_descr">Použít průhledné ovládání mapy</string>
   <string name="use_transparent_map_theme">Transparentní téma</string>
   <string name="native_library_not_supported">Android native library není podporovaná na tomto zařízení.</string>
   <string name="init_native_library">Inicializuji Android native library…</string>
@@ -422,12 +403,7 @@
   <string name="preferred_locale_descr">Volba jazyka</string>
   <string name="preferred_locale">Jazyk</string>
   <string name="tip_map_switch">Zdroj map</string>
-  <string name="tip_map_switch_t">\tNejrychlejší způsob, jak změnit zdroj mapy, je stisknutím \'Menu\'-&gt;\'Mapová data\' na mapě.
-\n\t V položce \'Zdroj map…\' můžete vybrat offline vektorová data, online rastrové mapy nebo vybrat data vytvořená ručně pomocí OsmAnd Map Creatoru na PC.
-\n\t OsmAnd též podporuje uživatelské mapy.</string>
   <string name="tip_app_mode">Režim aplikace</string>
-  <string name="tip_app_mode_t">\t OsmAnd podporuje několik profilů zobrazení mapy pro různé situace.
-\n\t Režim můžete změnit v \'Menu\'-&gt;\'Nastavení\'-&gt;\'Uživatelský profil\'.</string>
   <string name="tip_navigation">Navigace</string>
   <string name="tip_navigation_t">\t Pro zapnutí navigace musíte nejprve vybrat cílový bod. Poté vyberte \'Menu\'-&gt;\'Navigace\' na mapě a vyberte typ navigování.</string>
   <string name="tip_search">Vyhledávání</string>
@@ -742,7 +718,6 @@
   <string name="position_on_map_descr">Kde na displeji zobrazovat Vaši aktuální polohu</string>
   <string name="position_on_map">Moje poloha na mapě</string>
   <string name="map_specify_point">Zadejte bod</string>
-  <string name="show_view_angle_descr">Zobrazovat zorné pole podle kompasu</string>
   <string name="show_view_angle">Zorné pole</string>
   <string name="stop_navigation">Vymazat bod</string>
   <string name="navigate_to_point">Navigovat do bodu</string>
@@ -884,11 +859,9 @@
 \n\t- *Moduly*\n\t- Většina funkcí je uspořádána do skupin, které mohou být zapnuty/vypnuty ve správci modulů. Skupiny: mapová data (online nebo uložená), sledování pozice a mnoho dalších dřívějších funkcí\n\t- *Podpora nového formátu offline map*\n\t- Rychlejší a přesnější vykreslování mapy (problémy s pobřežím a vodní hladinou z větší části vyřešeny)\n\t- Pokud používáte offline mapy, musíte stahnout kompletně nová data, stará nejsou více podporována\n\t- *Offline navigace*\n\t- Robustnější offline navigace\n\t- *Zlepšeno uživatelské rozhraní*\n\t- Opraveno mnoho chyb "</string>
   <string name="osm_editing_plugin_description">Nastavení pro práci s OSM jako: vytváření a úpravu bodů zájmu (POI), vytváření a komentování OSM chyb a nahrávání zaznamenaných GPX souborů (vyžaduje přihlašovací údaje do OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
-  <string name="simulate_route_progression_manually">Ručně simulovat postup po trase</string>
   <string name="play_commands_of_currently_selected_voice">Přehrát hlasové pokyny v aktuálně nastaveném hlase</string>
   <string name="debugging_and_development">Vývoj a ladění OsmAnd</string>
   <string name="native_rendering">Akcelerace vykreslování</string>
-  <string name="animate_routing">Simulace navigace</string>
   <string name="test_voice_prompts">Test hlasových pokynů</string>
   <string name="global_app_settings">Všeobecná nastavení</string>
   <string name="favourites_edit_dialog_name">Jméno</string>
@@ -960,9 +933,6 @@
   <string name="use_compass_navigation">Použít kompas</string>
   <string name="route_updated_loc_found">Trasa bude přepočítána, jakmile bude nalezena pozice</string>
   <string name="continue_follow_previous_route_auto">Předchozí trasa nebyla dokončena. Chcete pokračovat? (%1$s sekund)</string>
-  <string name="show_cameras_descr">Zobrazovat dopravní radary (v některých zemích může být zakázané)</string>
-  <string name="show_speed_limits_descr">Zobrazovat rychlostní omezení a retardéry</string>
-  <string name="avoid_toll_roads_descr">Vyhnout se placeným silnicím při výpočtu trasy</string>
   <string name="show_cameras">Zobrazovat dopravní radary</string>
   <string name="show_speed_limits">Zobrazovat rychlostní omezení</string>
   <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
