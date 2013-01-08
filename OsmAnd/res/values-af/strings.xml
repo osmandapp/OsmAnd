@@ -105,11 +105,9 @@
   <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlegmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlegmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter "</string>
   <string name="osm_editing_plugin_description">Wys stellings nodig vir OSM terugvoer bv. versamel / aanpas van OSM POI voorwerpe, oopmaak / komentaarlewer op OSM foute, en bydra van opgeneemde GPX dokumente (vereis OSM inlog besonderhede).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektor kaarte vertoon waarskynlik vinniger. Dit mag egter nie goed werk op sommige toestelle nie.</string>
-  <string name="simulate_route_progression_manually">Boots roete vordering met die hand na</string>
   <string name="play_commands_of_currently_selected_voice">Speel opdragte van die huidige gekose stem</string>
   <string name="debugging_and_development">OsmAnd ontwikkeling</string>
   <string name="native_rendering">Inheemse lewering</string>
-  <string name="animate_routing">Bewegende navigasie</string>
   <string name="test_voice_prompts">Toets stemaanwysings</string>
   <string name="switch_to_raster_map_to_see">Geen aflyn vektor kaart teenwoordig vir hierdie ligging. Jy kan dit aflaai in instellings (Aflyn inligting), of skakel oor na internet kaarte.</string>
   <string name="tip_recent_changes_0_7_2_t">"Veranderinge in 0.7.2:\n\t- inheemse lewering vir alle toestelle\n\t- aflyn interessante plek redigering\n\t- Toeganklikheid\n\t- baie foutregstellings "</string>
@@ -120,7 +118,6 @@
   <string name="validate_gpx_upload_name_pwd">Spesifiseer asseblief die OSM gebruiker naam en wagwoord om GPX lêers op te laai.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nuwe funksies</string>
-  <string name="show_ruler_level_descr">Vertoon liniaal op die kaart</string>
   <string name="show_ruler_level">Wys liniaal</string>
   <string name="info_button">Inligting</string>
   <string name="back_to_location">Terug na ligging</string>
@@ -232,7 +229,6 @@
   <string name="settings_preset">Gebruikersprofiel</string>
   <string name="settings_preset_descr">Kies \'n gebruiker profiel met \'n persoonlike kaart en navigasie instellings.</string>
   <string name="monitor_preferences">- Natrekking</string>
-  <string name="monitor_preferences_descr">Spesifiseer natrekking instellings</string>
   <string name="routing_settings">Navigasie</string>
   <string name="routing_settings_descr">Spesifiseer navigasie opsies</string>
   <string name="global_settings">Oorhoofse instellings</string>
@@ -247,15 +243,8 @@
   <string name="osmand_service">Sluimertoestand Funksionaliteit</string>
   <string name="osmand_service_descr">Gebruik om OsmAnd aan te hou terwyl skerm af is</string>
   <string name="tip_rotation_switching">Kaart oriëntasie</string>
-  <string name="tip_rotation_switching_t">"\tJy kan kies hoe die kaart vertoon roteer word in \'Stellings\' -&gt; \'Kaart voorkoms \'-&gt;\'Kaart rotasie\'.
-\n\tDie keuses is:
-\n\t\'moet nie roteer nie\' - Kaart sal nie roteer word nie. Noord sal altyd bo wees
-\n\t\'Met rigting van beweging\'- Kaart sal deurlopend gerig word in jou bewegingsrigting
-\n\t\'Met kompas\' - Kaart sal deurlopend gerig word met toestel kompas lesing
-\n\tWenk: Om vinnig tussen rotasie deur kompas en die een wat jy gekies het in instellings te verander, kan jy net tik op die kompas naald in die kaart vertoon."</string>
   <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Stellings\' -&gt; \'uitleg\' -&gt; \'aflyn vektor kaarte.</string>
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
-  <string name="tip_day_night_mode_t">"\tdie kaart voorkoms kan vir \'n paar vektor kaarte verander word tussen die dag (helder) en nag (donker).\n\tNag kleure is veiliger vir nag bestuur.\n\tJy kan \'n beleid vir die dag / nag opstel in \'Stellings\' -&gt; \'Kaart voorkoms\'-&gt; \'Dag / nag gebruikswyse\'.\n\tKeuses is:\n\t\'Sonsopkoms / Sonsondergang\' - outomatiese gebruikswyse, beheer deur posisie van die son (verstek)\n\t\'Day\' - gebruik altyd dag gebruikswyse\n\t\'Night\' - gebruik altyd nag gebruikswyse\n\t\'Lig sensor\' - kaart voorkoms word beheer deur lig sensor van jou toestel (slegs indien toegerus)\n"</string>
   <string name="tip_osm_improve">Verbetering van OSM data</string>
   <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) data en-behalwe die kaart vir besigtiging en navigasie-kan ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \"Algemene verstellings\" -&gt; \"OSM Redigeer \' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik opsie \'skep interessante plek\' in die kaart konteks kieslys. Gaan voort om die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in te tik en stuur dit uiteindelik in.\n\tverskrikkinge in kaarte kan onmiddellik aangemeld word via OSM fout, en OSM gemeenskap kan dan vinniger kan hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaartinhoud kieslys kaart. Tik dan die gedetailleerde beskrywing van die probleem en pos dit uiteindelik met die \'Voeg by\" knoppie.\n\tLet daarop dat Internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
   <string name="download_files_not_enough_space">Daar is nie genoeg oop spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
@@ -263,7 +252,6 @@
   <string name="tip_select_destination_point">Kies bestemming</string>
   <string name="tip_select_destination_point_t">"\tJy kan \'n ​​bestemming direk op die kaart kies (kaartinhoud kieslys, dan \'as bestemming\')\', in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk .\n\tdie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Veranderinge in 0.6.9:\n\t-Verbeterde aflyn kaart lewering\n\t-Vinnige inheemse aflyn lewering - kyk in eksperimentele eienskappe (mag dalk op sommige toestelle nie werk nie)\n\t-Massiewe voorkoms en gevoel veranderinge\n\t-Hoogte inligting\n\t-nuwe vertalings (Vienamese, Pools)\n\t-ander klein funksies "</string>
-  <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
   <string name="native_library_not_supported">Inheemse biblioteek word nie op hierdie toestel ondersteun nie.</string>
   <string name="init_native_library">Besig om inheemse biblioteek gereed te maak…</string>
@@ -418,9 +406,7 @@
   <string name="preferred_locale_descr">Kies die vertoning taal</string>
   <string name="preferred_locale">vertoon taal</string>
   <string name="tip_map_switch">Kaartbron</string>
-  <string name="tip_map_switch_t">\tDie vinnigste manier om die kaart bron en lae getoon te verander, is deur op \'Kieslys -&gt; \'Definieer vertoon \' in die kaart te druk.\n\tOnder \'Kaartbronne…\' kan jy kies tussen die voorafgelaaide aflyn vektor kaarte , vooraf gedefinieerde (aanlyn) teël bronne, of kaarte met die hand gemaak met behulp van bv. OsmAndMapCreator op `n rekenaar. \n\tOsmAnd ondersteun ook persoonlike bronne.</string>
   <string name="tip_app_mode">Gebruikersprofiel</string>
-  <string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
   <string name="tip_navigation">Navigasie</string>
   <string name="tip_navigation_t">\tVoordat \'n navigasie begin moet jy \'n bestemming kies. Druk daarna \'kieslys\' -&gt; \'aanwysings\' op die kaart en kies die navigasie wyse.</string>
   <string name="tip_search">op soek</string>
@@ -771,7 +757,6 @@
   <string name="position_on_map_descr">Kies die plaasing van die posisie merker op die kaart</string>
   <string name="position_on_map">Posisie merker</string>
   <string name="map_specify_point">Stel as bestemming</string>
-  <string name="show_view_angle_descr">Vertoon die kyk-rigting op die kaart</string>
   <string name="show_view_angle">Wys uitsig rigting</string>
   <string name="stop_navigation">Maak bestemming skoon.</string>
   <string name="navigate_to_point">Stel as bestemming</string>
@@ -886,9 +871,6 @@
   <string name="edit_filter_create_message">Filter {0} is geskep</string>
   <string name="default_buttons_selectall">Kies alles</string>
   <string name="continue_follow_previous_route_auto">Die vorige navigasie was onvoltooid. Wil jy dit nog volg? (%1$s sekondes)</string>
-  <string name="show_cameras_descr">Wys spoedkameras (mag in sommige lande verbied wees)</string>
-  <string name="show_speed_limits_descr">Wys spoedbeperkings en verkeershobbels</string>
-  <string name="avoid_toll_roads_descr">Vermy tolpaaie vir roete berekening</string>
   <string name="show_cameras">Wys spoedkameras</string>
   <string name="show_speed_limits">Wys spoedbeperkings</string>
   <string name="avoid_toll_roads">Vermy tolpaaie</string>

@@ -9,10 +9,8 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="recording_context_menu_show">Show</string>
-    <string name="recording_photo_description">Photo %1$s at %2$s</string>
-    <string name="av_def_action_picture">Take a photo</string>
-    <string name="recording_context_menu_precord">Take a photo</string>
+    <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
+    <string name="clear_dest_confirm">Are you sure you want to clear your destination point?</string>
     <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and video/audio notes with your dropbox account.</string>
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="animate_routing_using_gpx">Do you want to use existing GPX file?</string>
@@ -29,7 +27,7 @@
     <string name="av_use_external_recorder">Use external recorder</string>
     <string name="av_settings_descr">Configure audio and video settings</string>
     <string name="av_settings">Audio/video settings </string>
-    <string name="recording_error">Error ocurred while recording </string>
+    <string name="recording_error">Error occurred while recording </string>
     <string name="recording_camera_not_available">Camera is not available</string>
     <string name="recording_is_recorded">Audio/video is being recorded. To stop it press stop button on the widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
@@ -152,7 +150,7 @@
     <string name="poi_filter_emergency">Emergency</string>
     <string name="poi_filter_public_transport">Public Transport</string>
     <string name="poi_filter_entertainment">Entertainment</string>
-    <string name="poi_filter_accomodation">Accomodation</string>
+    <string name="poi_filter_accomodation">Accommodation</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="poi_filter_sightseeing">Sightseeing</string>
     <string name="poi_filter_car_aid">Car aid</string>
@@ -903,8 +901,8 @@
 	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
 	<string name="show_point_options">Use location...</string>
-	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
-	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
+	<string name="renderer_load_sucess">Renderer successfully loaded</string>
+	<string name="renderer_load_exception">Exception occurred: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
 	<string name="renderers_descr">Choose rendering appearance</string>
 	<string name="poi_context_menu_website">Show POI website</string>
@@ -939,9 +937,9 @@
 	<string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
 	<string name="rotate_map_to_bearing">Map orientation</string>
 	<string name="show_route">Route details</string>
-	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
+	<string name="fav_imported_sucessfully">Favorites successfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
-	<string name="fav_saved_sucessfully">Favorites succesfully saved to {0}</string>
+	<string name="fav_saved_sucessfully">Favorites successfully saved to {0}</string>
 	<string name="no_fav_to_save">No favorite points to save</string>
 	<string name="import_fav">Import</string>
 	<string name="export_fav">Export</string>
@@ -1064,7 +1062,7 @@
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
-	<string name="error_io_error">I/O error occured</string>
+	<string name="error_io_error">I/O error occurred</string>
 	<string name="downloading_file">Downloading file&#8230;</string>
 	<string name="downloading">Downloading&#8230;</string>
 	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
@@ -1210,22 +1208,22 @@
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
-	<string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
+	<string name="favourites_remove_dialog_success">Favorite point {0} was successfully deleted.</string>
 	<string name="osb_add_dialog_title">Enter bug text</string>
 	<string name="osb_add_dialog_success">Bug successfully created</string>
-	<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+	<string name="osb_add_dialog_error">Exception occurred: bug was not created</string>
 	<string name="osb_comment_menu_item">Add comment</string>
 	<string name="osb_comment_dialog_message">Message</string>
 	<string name="osb_comment_dialog_author">Author name</string>
 	<string name="osb_comment_dialog_title">Adding comment to bug</string>
 	<string name="osb_comment_dialog_add_button">Add comment</string>
 	<string name="osb_comment_dialog_success">Comment was successfully added</string>
-	<string name="osb_comment_dialog_error">Exception occured: comment was not added</string>
+	<string name="osb_comment_dialog_error">Exception occurred: comment was not added</string>
 	<string name="osb_close_menu_item">Close bug</string>
 	<string name="osb_close_dialog_title">Closing bug</string>
 	<string name="osb_close_dialog_close_button">Close bug</string>
 	<string name="osb_close_dialog_success">Bug was successfully closed</string>
-	<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
+	<string name="osb_close_dialog_error">Exception occurred: bug was not closed</string>
 	<string name="poi_edit_title">Edit POI</string>
 	<string name="poi_create_title">Create POI</string>
 	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
@@ -1236,8 +1234,8 @@
 	<string name="poi_action_add">add</string>
 	<string name="poi_action_change">change</string>
 	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
-	<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
-	<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
+	<string name="poi_error_unexpected_template">Unexpected error occurred while performing action {0}.</string>
+	<string name="poi_error_io_error_template">I/O error occurred while performing action {0}.</string>
 	<string name="poi_error_info_not_loaded">Info about node was not loaded</string>
 	<string name="poi_dialog_name">Name</string>
 	<string name="poi_dialog_opening_hours">Open</string>

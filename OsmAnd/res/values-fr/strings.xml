@@ -58,7 +58,6 @@
   <string name="settings_preset">Profil d\'utilisation</string>
   <string name="settings_preset_descr">Sélectionner un profil d\'utilisation avec ses réglages de carte et de navigation.</string>
   <string name="monitor_preferences">Traces</string>
-  <string name="monitor_preferences_descr">Configurer les paramètres d\'enregistrement du parcours</string>
   <string name="routing_settings">Navigation</string>
   <string name="routing_settings_descr">Configurer les options de la navigation</string>
   <string name="global_settings">Paramètres globaux</string>
@@ -74,23 +73,9 @@
   <string name="osmand_service">Service de veille</string>
   <string name="osmand_service_descr">Permet d\'utiliser OsmAnd pendant que l\'écran est désactivé</string>
   <string name="tip_rotation_switching">Rotation de la carte</string>
-  <string name="tip_rotation_switching_t">\tVous pouvez choisir quand et comment la carte est tournée dans \'Paramètres\' -&gt; \'Général\' -&gt; \'Rotation de la carte\'.
-\nLes choix sont :
-\n\t\'Aucune\' - La carte ne tourne pas. Le nord est toujours vers le haut
-\n\t\'Sens du chemin\' - La carte s\'aligne en continu pour suivre la direction du déplacement
-\n\t\'Boussole\' - La carte s\'aligne en continu pour suivre la boussole de l\'appareil
-\n\tAstuce : Pour changer rapidement de la rotation par boussole vers celle des paramètres, tapez l\'aiguille de la boussole sur la carte.</string>
   <string name="switch_to_raster_map_to_see">Vous n\'avez pas actuellement de carte vectorielle pour cet emplacement.\n\t\n\tVous pouvez en télécharger dans \'Paramètres\' -&gt; \'Données hors ligne\', ou basculer sur les cartes en ligne via \'Paramètres\' -&gt; \'Sources de carte\'.</string>
   <string name="binary_map_download_success">Téléchargement réussi.\n\t\n\tPour l\'utiliser, activer dans \'Paramètres\' -&gt; \'Sources de carte\' -&gt; \'Cartes vectorielles\'.</string>
   <string name="tip_day_night_mode">Mode Jour/Nuit</string>
-  <string name="tip_day_night_mode_t">\tLe style des cartes vectorielles peut être changé entre jour (plus clair) et nuit (plus sombre).
-\n\tLes couleurs de nuit sont moins dangereuses pour la conduite nocturne.
-\n\tVous pouvez paramétrer une politique pour la bascule jour/nuit dans \'Paramètres\' -&gt; \'Style de la carte\' -&gt;\'Mode Jour/Nuit\'.
-\n\tLes choix sont:
-\n\t\'Lever/coucher du soleil\' - mode automatique, controlé par la position du soleil (défaut)
-\n\t\'Jour\' - toujours utiliser le mode jour
-\n\t\'Nuit\' - toujours utiliser le mode nuit
-\n\t\'Capteur de luminosité\' - le style de la carte est contrôlé par le capteur de luminosité de l\'appareil (seulement si celui-ci existe)</string>
   <string name="tip_osm_improve">Améliorer les données OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd utilise des cartes issues des données Openstreetmap.org (OSM) - en plus de la visualisation des cartes et du calcul d\'itinéraires- peut également être utilisé pour améliorer la qualité des données OSM. Vous pouvez facilement créer et télécharger des nouveaux PI ou rapports de bogues cartographiques en quelques clicks!
 \n\tPour cela il faudra d\'abord fournir vos paramètres de connexion OSM dans \'Paramètres\' -&gt; \'Général\' -&gt; \'Édition OSM\'.
@@ -110,7 +95,6 @@
 \n\t- Infos d\'altitude
 \n\t- Nouvelles traductions (Vietnamien, Polonais)
 \n\t- Améliorations diverses</string>
-  <string name="use_transparent_map_theme_descr">Utiliser les contrôles de transparence de la carte</string>
   <string name="use_transparent_map_theme">Thème de transparence</string>
   <string name="native_library_not_supported">Rendu acceléré non supporté sur cet appareil.</string>
   <string name="init_native_library">Initialisation du rendu acceléré…</string>
@@ -305,12 +289,7 @@
   <string name="preferred_locale_descr">Changer la langue d\'affichage</string>
   <string name="preferred_locale">Langue d\'affichage</string>
   <string name="tip_map_switch">Source de cartes</string>
-  <string name="tip_map_switch_t">Le moyen le plus rapide de changer de source est de passer par \'Menu\'-&gt;\'Couche\' sur la carte.
-\n\tSous \'Source de la carte…\' vous sélectionnez des sources de tuiles prédéfinies ou créées manuellement sur PC avec OsmAndMapCreator.
-\n\tOsmAnd est compatible avec des sources personnelles.</string>
   <string name="tip_app_mode">Mode de fonctionnement</string>
-  <string name="tip_app_mode_t">OsmAnd supporte plusieurs modes de fonctionnement représentant les différentes situations d\'utilisation.
-\n\tChangez de mode dans \'Menu\'-&gt;\'Paramètres\'-&gt;\'Mode d\'application\'.</string>
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">Pour activer la navigation il faut d\'abord sélectionner une destination. Puis aller dans \'Menu\'-&gt;\'Directions\' et sélectionner le mode de déplacement.</string>
   <string name="tip_search">Actions de recherche</string>
@@ -675,7 +654,6 @@
   <string name="position_on_map_descr">Choisir la position des points sur la carte</string>
   <string name="position_on_map">Position des points</string>
   <string name="map_specify_point">Spécifier un lieu</string>
-  <string name="show_view_angle_descr">Afficher un angle de vue basé sur le compas</string>
   <string name="show_view_angle">Afficher l\'angle de vue</string>
   <string name="stop_navigation">Effacer le point</string>
   <string name="navigate_to_point">Marquer le point de destination</string>
@@ -817,11 +795,9 @@
 \n\t- *Fonctionnalité des greffons*\n\t- La majorité des fonctionnalités sont regroupées par familles et peuvent être activées/désactivées dans le Gestionnaire de Greffons. Vous pouvez activer les sources de cartes image (en ligne ou en cache), les paramètres de suivi en ligne et autres nouvelles possibilités.\n\t- *Nouvelles cartes hors ligne*\n\t- Le rendu des cartes devient plus rapide et précis (les côtes et zones d\'eau sont corrigées).\n\t- Vous devez re-télécharger toutes les données de cartes hors-ligne, car les anciennes cartes ne fonctionnent plus.\n\t- *Calcul d\'itinéraire hors-ligne*\n\t- Le calcul d\'itinéraire hors ligne devient beaucoup plus stable\n\t- *Utilisation et ergonomie*\n\t- Améliorée dans de nombreux domaines</string>
   <string name="osm_editing_plugin_description">Ce greffon permet de gérer la contribution à OSM telle que la collection / modification de PI OSM, l\'ouverture / commentaires de bogues OSM et la contribution de traces GPX (nécessite un compte OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
-  <string name="simulate_route_progression_manually">Simule la progression sur un itinéraire manuellement</string>
   <string name="play_commands_of_currently_selected_voice">Diffuse les commandes sonores disponibles pour la voix sélectionnée</string>
   <string name="debugging_and_development">Débogage et développement OsmAnd</string>
   <string name="native_rendering">Rendu pré-compilé</string>
-  <string name="animate_routing">Navigation animée</string>
   <string name="test_voice_prompts">Tester les commandes vocales</string>
   <string name="tip_recent_changes_0_7_2_t">Changements en 0.7.2 :
 \n\t- Rendu pré-compilé pour tous les appareils\n\t- Édition hors ligne des PI\n\t- Accessibilité\n\t- Corrections de bogues</string>
@@ -832,7 +808,6 @@
   <string name="validate_gpx_upload_name_pwd">Veuillez fournir un compte OSM et son mot de passe pour envoyer des fichiers GPX.</string>
   <string name="default_buttons_support">Soutien</string>
   <string name="support_new_features">Soutenir les nouvelles fonctionnalités</string>
-  <string name="show_ruler_level_descr">Afficher l\'échelle sur la carte</string>
   <string name="show_ruler_level">Afficher l\'échelle</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Retour à l\'emplacement</string>
@@ -963,9 +938,6 @@
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera recalculé quand le lieu sera trouvé</string>
   <string name="continue_follow_previous_route_auto">La navigation précédente ne s\'était pas terminée. Continuer à la suivre ? (%1$s secondes)</string>
-  <string name="show_cameras_descr">Montrer les radars (peut être interdit dans certains pays)</string>
-  <string name="show_speed_limits_descr">Montrer les limitations de vitesse et les bosses</string>
-  <string name="avoid_toll_roads_descr">Éviter les péages lors du calcul de l\'itinéraire</string>
   <string name="show_cameras">Montrer les radars</string>
   <string name="show_speed_limits">Montrer les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
@@ -1140,7 +1112,6 @@
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Description du greffon de notes audio</string>
     <string name="audionotes_plugin_name">Greffon de notes audio</string>
-    <string name="srtm_plugin_attribution">ASTER est un produit du METI et la NASA.</string>
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-lignes</string>
     <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des courbes de niveau qui peuvent être affichées sur les cartes hors ligne de OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
     <string name="use_clear_distance_measurement">Cliquez une nouvelle fois pour effacer les points de mesure.</string>

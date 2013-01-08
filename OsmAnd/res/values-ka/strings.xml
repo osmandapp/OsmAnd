@@ -46,11 +46,9 @@
   <string name="tip_recent_changes_0_8_0_t">ცვლილებები 0.8.0-ში : \n\t- დამატების შესაძლებლობები\n\t- რუკის გათიშულ რეჟიმში გამოყენების ახალი ფორმატი\n\t- გამოსწორებულია ბევრი შეცდომა</string>
   <string name="osm_editing_plugin_description">ეს დამატება გაძლევთ საშუალებას გააცნოთ OSM-ს თქვენი აზრი, გახსნა/დახურვა OSM-ის ხოჭოების შესახებ და მიაწოდოთ პროექტს თქვენი ჩაწერილი GPX ფაილები.</string>
   <string name="vector_maps_may_display_faster_on_some_devices">ვექტორული რუკები როგორც წესი ჩანს უფრო სწრაფად. შეიძლება არ იმუშაოს ზოგიერთ მოწყობილობაზე.</string>
-  <string name="simulate_route_progression_manually">გზის გავლის ხელით სიმულირება</string>
   <string name="play_commands_of_currently_selected_voice">ხმით არჩეული ბრძანებების შესრულება</string>
   <string name="debugging_and_development">OsmAnd -ის განვითარება და გამართვა</string>
   <string name="native_rendering">ადგილობრივი რენდერი</string>
-  <string name="animate_routing">ნავიგაციის ანიმირება</string>
   <string name="test_voice_prompts">ხმის ტესტირება</string>
   <string name="switch_to_raster_map_to_see">მოცემული ადგილისათვის ვექტორული რუკები ნაპოვნი არაა. შეგიძლიათ გადმოწეროთ პარამეტრებში (გამორთული მონაცემები), ან გადაერთოთ მიმდინარე მონაცემებზე.</string>
   <string name="tip_recent_changes_0_7_2_t">ცვლილებები 0.7.2-ში : \n\t- ყველა მოწყობილობისათვის პროცესორის მხარდაჭერა\n\t- POI-ს გათიშული გამართვა\n\t- წვდომა\n\t- გასწორებულია ბევრი შეცდომა</string>
@@ -61,7 +59,6 @@
   <string name="validate_gpx_upload_name_pwd">შეიყვანეთ OSM მომხმარებელი და პაროლი GPX ფაილების ასატვირთად.</string>
   <string name="default_buttons_support">მხარდაჭერა</string>
   <string name="support_new_features">ახალი თვისებების მხარდაჭერა</string>
-  <string name="show_ruler_level_descr">რუკაზე სახაზავის ჩვენება</string>
   <string name="show_ruler_level">სახაზავის ჩვენება</string>
   <string name="info_button">ინფორმაცია</string>
   <string name="back_to_location">ადგილზე დაბრუნება</string>
@@ -173,7 +170,6 @@
   <string name="settings_preset">მომხმარებლის პროფილი</string>
   <string name="settings_preset_descr">აირჩიეთ მომხმარებლის პროფილი რუკისა და ნავიგაციის პარამეტრებით.</string>
   <string name="monitor_preferences">- დევნა</string>
-  <string name="monitor_preferences_descr">დევნის პარამეტრების მითითება</string>
   <string name="routing_settings">ნავიგაცია</string>
   <string name="routing_settings_descr">მიუთითეთ ნავიგაციის პარამეტრები</string>
   <string name="global_settings">გლობალური პარამეტრები</string>
@@ -188,10 +184,8 @@
   <string name="osmand_service">ფონური პარამეტრები</string>
   <string name="osmand_service_descr">გამოიყენეთ OsmAnd-ის ეკრანის გათიშულობის დროს გამოსაყენებლად</string>
   <string name="tip_rotation_switching">რუკის ორიენტაცია</string>
-  <string name="tip_rotation_switching_t">\t თქვენ შეგიძლიათ აირჩიოთ თუ როგორ ატრიალოთ რუკის გამოსახულება. \"პარამეტრები -&gt; რუკის გამოსახულება -&gt; რუკის ტრიალი\"\n\t არჩევანი:\n\t ‘არ შემოაბრუნო’ - რუკა არ შეტრიალდება. ჩრდილოეთი ყოველთვის იქნება ზემოთ\n\t ‘მოძრაობის მიმართულებით’ - რუკა გასწორდება თქვენი მოძრაობის მიხედვით\n\t ‘კომპასის მიმართ’ - რუკა გასწორდება მოწყობილობის კომპასის მაჩვენებელზე\n\t ‘რჩევა’ იმისათვის რომ სწრაფად გადართოთ კომპასის მიხედვით ტრიალსა და თქვენს მიერ არჩეული პარამეტრს შორის, თქვენ უბრალოდ შეგიძლიათ დააჭიროთ კომპასის ისარს რუკის გამოსახულებაზე</string>
   <string name="binary_map_download_success">გადმოწერა წარმატებით დასრულდა.\n\t\n\tაქტივაციისათვის შედით \'პარამეტრები\' -&gt; \'რუკის გამართვა\' -&gt; \'გათიშული ვექტორული რუკების გამოყენება\'.</string>
   <string name="tip_day_night_mode">დღე/ღამის არჩევა</string>
-  <string name="tip_day_night_mode_t">\tრუკას შეუძლია გარეგნობის ცვლილება დღისა(ღია) და ღამის(მუქი) დროის მიხედვით.\n\tღამის ფერები უსაფრთხოა ღამით მანქანის მართვის დროს.\n\tპარამეტრი დღე/ღამის რეჟიმის გადასართველად შეგიძლიათ იპოვოთ \'პარამეტრები\' -&gt;\'რუკის გარეგნობა\' -&gt; \'დღე/ღამის რეჟიმი\'.\n\tშეგიძლიათ აირჩიოთ: \n\t\'დილა/საღამო\' - ავტომატურად, მზის მდებარეობის მიხედვით(ნაგულისხმევი)\n\t\'დღე\' - დღის რეჟიმის გამოყენება\n\t\'ღამე\' - ღამის რეჟიმის გამოყენება\n\t\'სინათლის სენსორი\' - რუკის რეჟიმი კონტროლდება სინათლის სენსორის მიერ(თუ მოწყობილობას გააჩნია იგი)</string>
   <string name="tip_osm_improve">OSM-ს მონაცემების გაუმჯობესება</string>
   <string name="tip_osm_improve_t">\tOsmAnd იყენებს რუკებს, რომლებიც ეყრდნობა Openstreetmap.org (OSM)-ის მონაცემებს და ასევე ანახლებს მათ. თქვენ ადვილად შეგიძლიათ შექმნათ POI-ები და ატვირთოთ ისინი. ასევე შესაძლებელია OSM-ის ხოჭოების შესახებ შეტყობინებების შექმნა მხოლოდ რამოდენიმე წკაპით!\n\tამისათვის საჭიროა შეიყვანოთ OSM-ის მომხმარებლის სახელი და პაროლი. \'პარამეტრები\' -&gt; \'მთავარი პარამეტრები\' -&gt; \'OSM-ის გამართვა\'. \n\tახალი POI-ის შესაქმნელად აირჩიეთ ფუნქცია \'POI-ის შექმნა\' კონტექსტურ მენიუში. ინფორმაციის შეყვანის შემდეგ დააჭირეთ \'ახალი POI-ის შექმნა\'.\n\tრუკის შეცდომები შეგიძლიათ მომენტალურად შეატყობინოთ OSM-ს. ეს დაეხმარება მათ ამ შეცდომების ჩასწორებაში.\n\tOSM-ის ხოჭოს დასამატებლად აირჩიეთ \'OSM-ის ხოჭოს რეპორტის გახსნა\' კონტექსტური მენიუდან. მონაცემების შეყვანის შემდეგ დააჭირეთ დამატების ღილაკს.\n\tშენიშვნა: OSM POI-ის დასამატებლად და ხოჭოების რეპორტის გასახსნელად საჭიროა ინტერნეტ-შეერთება.</string>
   <!-- end of string changes for new Preferences structure -->
@@ -200,7 +194,6 @@
   <string name="tip_select_destination_point">აირჩიეთ საბოლოო წერტილი</string>
   <string name="tip_select_destination_point_t">\tთქვენ შეგიძლიათ დანიშნულების წერტილის პირდაპირ რუკაზე მითითება (კონტექსტური მენიუ -&gt; \'დანიშნულების პუნქტად დანიშვნა\'). ან დიდი ხნის დაჭერით თქვენივე სიაში \'რჩეულთა სია\'.\n\tდანიშნულების წერტილი რუკაზე ჩანს როგორც მოყვითალო წრე. OsmAnd გაჩვენებთ დაშორებას და მიმართულებას მისკენ თქვენი მიმდინარე მდებარეობაზე დამოკიდებულებით(მოყვითალო სამკუთხედი).</string>
   <string name="tip_recent_changes_0_6_9_t">"ცვლილებები 0.6.9-ში : \n\t- გაუმჯობესდა გათიშული რუკების რენდერი\n\t- მოყოლილი სწრაფი გათიშული რენდერი - შეიხედეთ ექსპერიმენტალურ მახასიათებლებში(არ მუშაობს ზოგიერთ მოწყობილობაზე)\n\t- მასიურად შეცვლილი ინტერფეისი\n\t- ინფორმაციის ჩვენება სიმაღლის შესახებ\n\t- დაემატა ახალი ენები(ვიეტნამური, პოლონური)\n\t- სხვა პატარა ცვლილებები"</string>
-  <string name="use_transparent_map_theme_descr">რუკის კონტროლის გამჭირვალეობა</string>
   <string name="use_transparent_map_theme">გამჭირვალე თემა</string>
   <string name="native_library_not_supported">ადგილობრივი ბიბლიოთეკა მოცემულ მოწყობილობაზე მხარდაჭერილი არაა.</string>
   <string name="init_native_library">ადგილობრივი ბიბლიოთეკის ინიციალიზაცია…</string>
@@ -355,9 +348,7 @@
   <string name="preferred_locale_descr">ენის არჩევა</string>
   <string name="preferred_locale">ენა</string>
   <string name="tip_map_switch">რუკის წყარო</string>
-  <string name="tip_map_switch_t">\tფენებისა და რუკების წყაროების შეცვლის უსწრაფესი მეთოდია შეხვიდეთ \'მენიუ\' -&gt; \'ხედის განსაზღვრა\'.\n\t\'რუკის წყარო…\' თქვენ შეგიძლიათ აირჩიოთ უკვე დაყენებულ გათიშულ ვექტორულ რუკებსა და მიმდინარე, ან კომპიუტერზე OsmAndMapCreator -ით შექმნილ რუკებს შორის.\n\tOsmAnd-ს ასევე გააჩნია მომხმარებლის მიერ არჩეული წყაროების გამოყენების საშუალება.</string>
   <string name="tip_app_mode">მომხმარებლის პროფილი</string>
-  <string name="tip_app_mode_t">\tOsmAnd-ს გააჩნია მხარდაჭერა მრავალი პროფილისა მომხმარებლის სხვადასხვა სიტუაციისათვის.\n\tთქვენ შეგიძლიათ აირჩიოთ პროფილი \'მენიუ\' -&gt;\'პარამეტრები\' -&gt; \'მომხმარებლის პროფილი\', ან გზის შექმნისას.</string>
   <string name="tip_navigation">- ნავიგაცია</string>
   <string name="tip_navigation_t">\tნავიგაციის დასაწყებად საჭიროა დანიშნულების წერტილის არჩევა. შემდეგ დააჭირეთ \'მენიუ\' -&gt; \'მიმართულებები\' რუკაზე და აირჩიეთ ნავიგაციის ტიპი.</string>
   <string name="tip_search">მიმდინარეობს ძებნა</string>
@@ -708,7 +699,6 @@
   <string name="position_on_map_descr">აირჩიეთ მდებარეობა ან მისი ნიშნული რუკაზე</string>
   <string name="position_on_map">პოზიციის მაჩვენებელი</string>
   <string name="map_specify_point">დანიშნულების წერტილად დაყენება</string>
-  <string name="show_view_angle_descr">ხედვის კუთხის რუკაზე ჩვენება</string>
   <string name="show_view_angle">ხედვის კუთხის ჩვენება</string>
   <string name="stop_navigation">დანიშნ. პუნქტის გასუფთავება</string>
   <string name="navigate_to_point">დანიშნ. პუნქტად მონიშნვა</string>
@@ -884,9 +874,6 @@
   <string name="use_compass_navigation">კომპასის გამოყენება</string>
   <string name="route_updated_loc_found">გზის გადათვლა სასურველი წერტილის პოვნის შემთხვევაში</string>
   <string name="continue_follow_previous_route_auto">წინა გზა არ დასრულებულა. გნებავთ მისი გაყოლა? (%1$s წმ)</string>
-  <string name="show_cameras_descr">სიჩქარის კამერების ჩვენება (ზოგიერთ ქვეყანაში აკრძალულია)</string>
-  <string name="show_speed_limits_descr">სიჩქარის ლიმიტისა და საცობების ჩვენება</string>
-  <string name="avoid_toll_roads_descr">გზის გადათვლისას ფასიანი გზების ამოღება</string>
   <string name="show_cameras">სიჩქარის კამერების ჩვენება</string>
   <string name="show_speed_limits">სიჩქარის ლიმიტების ჩვენება</string>
   <string name="avoid_toll_roads">ფასიანი გზებისათვის გვერდის ავლა</string>
@@ -972,8 +959,8 @@
 	<string name="map_widget_monitoring_services">ჟურნალირების სერვისები</string>
 	<string name="no_route">გზა ვერ მოიძებნა</string>
 	<string name="delete_target_point">გზის სანიშნის მოცილება</string>
-	<string name="target_point">გზის სანიშნი %1$ს</string>
-    <string name="intermediate_point">გზის სანიშნი %1$ს</string>
+	<string name="target_point">გზის სანიშნი %1$s</string>
+    <string name="intermediate_point">გზის სანიშნი %1$s</string>
     <string name="context_menu_item_last_intermediate_point">გზის ბოლო ნიშნის დამატება</string>
     <string name="context_menu_item_first_intermediate_point">გზის პირველი წერტილის დამატება</string>
     <string name="add_as_last_destination_point">გზის ბოლო წერტილის დამატება</string>
@@ -981,7 +968,7 @@
     <string name="replace_destination_point">დანიშნულების წერტილის შეცვლა</string>
     <string name="new_destination_point_dialog">თქვენ უკვე მიუთითეთ დანიშნულების წერტილი.</string>
     <string name="target_points">გზის ნიშნულები</string>
-    <string name="intermediate_point_too_far">გზის ნიშნანი %1$ მეტისმეტად შორსაა უახლოესი გზიდან.</string>
+    <string name="intermediate_point_too_far">გზის ნიშნანი %1$s მეტისმეტად შორსაა უახლოესი გზიდან.</string>
     <string name="arrived_at_intermediate_point">თქვენ მიაღწიეთ თქვენს დანიშნულების წერტილს</string>
     <string name="context_menu_item_intermediate_point">გზის წერტილად დამატება</string>
     <string name="ending_point_too_far">საბოლოო წერტილი მეტისმეტად სორსაა უახლოესი გზიდან.</string>

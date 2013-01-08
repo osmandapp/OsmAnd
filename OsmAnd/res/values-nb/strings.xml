@@ -321,7 +321,7 @@
 	<string name="map_text_size">Skriftstørrelse for kart</string>
 	<string name="voice_not_use">Ikke bruk</string>
 	<string name="voice_not_specified">Ingen</string>
-	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen internett-tilkobling er tilgjengelig.</string>
+	<string name="internet_connection_required_for_online_route">En nettbasert navigeringstjeneste er valgt, men ingen Internett-tilkobling er tilgjengelig.</string>
 	<string name="tts_language_not_supported_title">Språk ikke støttet</string>
 	<string name="tts_language_not_supported">Det valgte språket støttes ikke av den installerte Android TTS(tekst-til-tale)-motoren. Vil du gå til markedet for å se etter en annen TTS-motor? Ellers vil det forhåndsinnstilte TTS-språket brukes.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
@@ -449,7 +449,7 @@
 	<string name="export_fav">Eksporter</string>
 	<string name="error_occurred_loading_gpx">Feil oppstod under lasting av GPX</string>
 	<string name="send_report">Send rapport</string>
-	<string name="none_region_found">Ingen offline-data for regioner funnet på SD-kortet. Last ned regioner fra internett.</string>
+	<string name="none_region_found">Ingen offline-data for regioner funnet på SD-kortet. Last ned regioner fra Internett.</string>
 	<string name="layer_route">Rute</string>
 	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_transport">Stoppesteder</string>
@@ -485,7 +485,7 @@
 	<string name="show_transport_over_map">Vis stoppesteder</string>
 	<string name="hello">Navigeringsprogrammet OsmAnd</string>
 	<string name="context_menu_item_update_poi">Oppdater interessepunkt</string>
-	<string name="context_menu_item_update_map_confirm">Oppdatere lokaldata via internett?</string>
+	<string name="context_menu_item_update_map_confirm">Oppdatere lokaldata via Internett?</string>
 	<string name="search_history_city">By:\n {0}</string>
 	<string name="search_history_street">Gate:\n {0}, {1}</string>
 	<string name="search_history_int_streets">Veikryss: {0} x {1} i {2}</string>
@@ -561,12 +561,12 @@
 	<string name="map_tile_source_descr">Velg kilden til nettbaserte eller hurtigbufrede kartdeler</string>
 	<string name="map_tile_source">Flislegg kartkilde</string>
 	<string name="map_source">Kartkilde</string>
-	<string name="use_internet">Bruk internett</string>
+	<string name="use_internet">Bruk Internett</string>
 	<string name="show_location">Vis sted</string>
 	<string name="map_preferences">Kart</string>
 	<string name="settings_activity">Innstillinger</string>
 	<string name="show_gps_coordinates_text">Vis GPS-koordinater på kartet</string>
-	<string name="use_internet_to_download_tile">Last ned manglende kartdeler fra internett</string>
+	<string name="use_internet_to_download_tile">Last ned manglende kartdeler fra Internett</string>
 	<string name="app_description">Navigeringsprogram</string>
 	<string name="exit_Button">Avslutt</string>
 	<string name="map_Button">Kart</string>

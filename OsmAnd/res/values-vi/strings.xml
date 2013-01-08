@@ -3,8 +3,6 @@
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
 	<string name="tip_select_destination_point">Chọn điểm đến</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
 
 	<string name="choose_auto_follow_route">Auto follow return time</string>
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
@@ -27,16 +25,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="animate_route_off">Dừng mô phỏng</string>
 	<string name="animate_route">Bắt đầu mô phỏng</string>
 	
-	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
-\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-\n\t- Implement POI search by name in big areas (countries)  
-\n\t- Fix flickering map screen for tablets (Issue 641)
-\n\t- Auto follow route option (Issue 356)
-\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
-\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
-\n\t- Small improvements
-	</string>
 	<string name="file_can_not_be_renamed">Không thể đổi tên tập tin.</string>
 	<string name="file_with_name_already_exists">Tên tập tin đã có.</string>
 	<string name="gpx_navigation">Tuyến GPX</string>
@@ -161,12 +149,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="gpx_option_from_start_point">Dọc theo toàn bộ track</string>
 
 	<string name="tip_rotation_switching">Xoay bản đồ</string>
-	<string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -> \'General settings\' -> \'Xoay bản đồ\'.
-	\n\tBao gồm các lựa chọn:
-	\n\t\'Không xoay\' - Bản đồ sẽ không bị xoay và luôn thẳng đứng theo hướng Bắc.
-	\n\t\'Theo hướng di chuyển\'
-	\n\t\'Theo hướng la bàn\'
-	\n\tGợi ý: Bạn có thể chọm vào mũi kim la bàn trên bản đồ để chuyển nhanh giữa chế độ xoay theo la bàn và các chế độ xoay khác.</string>
 
 	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu \'Define view\' -> \'Map Source…\' or need to download additional vector map.</string>
 	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -> Map Source… -> Offline vector maps) to see the map.</string>
@@ -205,14 +187,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="level_to_switch_vector_raster">Tỉ lệ nhỏ nhất để xem bản đồ vector</string>
 
 	<string name="tip_day_night_mode">Chế độ ngày/đêm</string>
-	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
-	\n\tNight colors are safer for night driving.
-	\n\tYou can set a policy for day/night switching in \'Main Menu\' -> \'Settings\' -> \'Map appearance\' ->\'Day/night mode\'.
-	\n\tChoices are:
-	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
-	\n\t\'Ngày\' - always use day mode
-	\n\t\'Đêm\' - always use night mode 
-	\n\t\'Cảm biến ánh sáng\' - hiển thị bản đồ sẽ được kiểm soát bằng cảm biến ánh sáng trên thiết bị của bạn (chỉ họa động nếu được trang bị)</string>	
 	<string name="tip_location_sharing">Chia sẻ vị trí</string>
 	<string name="tip_location_sharing_t">\tBạn có thể chia sẻ vị trí các điểm bạn đã từng đi qua trong chuyến đi với gia đình và bạn bè.
 	\n\tĐể chia sẻ bất kì vị trí nào bạn muốn:
@@ -242,13 +216,8 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="preferred_locale">Ngôn ngữ</string>
 
 	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
-\n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
-\n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">Chế độ Ứng dụng</string>
-	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
-\n\tYou can change profiles in \'Menu\' -> \'Settings\' -> \'User Profile\', or when creating a route.</string>
 
 	<string name="tip_navigation">Dẫn đường</string>
 	<string name="tip_navigation_t">\tĐể tìm đường đi, trước hết bạn phải chọn một điểm đến. Sau đó vào \'Menu\'->\'Hướng đi\' trên bản đồ để chọn kiểu dẫn đường.</string> 
@@ -442,7 +411,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Nguồn bản đồ…</string>
 	<string name="menu_layers">Thiết lập Xem</string>
-	<string name="continue_follow_previous_route">Quá trình tìm được trước đó chưa hoàn thành. Bạn có muốn tiếp tục với nó?</string>
 	<string name="context_menu_item_search_poi">Tìm POI</string>
 	<string name="context_menu_item_show_route">Route from</string>
 	<string name="use_trackball_descr">Dùng trackball để di chuyển bản đồ</string>
@@ -604,7 +572,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="user_password_descr">Mật khẩu tài khoản tại OpenStreetMap.org (OSM)</string>
     <string name="user_password">Mật khẩu OSM</string>
     <string name="osm_settings_descr">Thiết lập Openstreetmap.org (OSM)</string>
-    <string name="monitor_preferences_descr">Thiết lập tracking</string>
     <string name="data_settings_descr">Lựa chọn ngôn ngữ, dữ liệu</string>
     <string name="data_settings">Dữ liệu</string>
     <string name="map_preferences_descr">Thiết lập bản đồ: nguồn bản đồ, xoay, vị trí đánh dấu, hướng màn hình</string>
@@ -643,7 +610,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="position_on_map_descr">Chọn vị trí bạn muốn đánh dấu trên bản đồ</string>
     <string name="position_on_map">Đánh dấu vị trị</string>
     <string name="map_specify_point">Chọn điểm</string>
-    <string name="show_view_angle_descr">Hiển thị hướng xem theo la bàn</string>
     <string name="show_view_angle">Hiển thị hướng xem</string>
     <string name="stop_navigation">Xóa điểm</string>
     <string name="navigate_to_point">Đánh dấu</string>

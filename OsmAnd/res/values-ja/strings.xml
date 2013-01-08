@@ -27,16 +27,6 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="gpx_option_destination_point">現在の目的地点を使用</string>
      <string name="gpx_option_from_start_point">トラック全体をパス</string>
      <string name="tip_rotation_switching">マップ回転</string>
-     <string name="tip_rotation_switching_t">\tマップ表示の回転有無、あるいはその方法を
-選択できます\'設定\' ->
-\'設定全般\' -> \'マップ回転\'。
-     \n選択内容:
-
-     \n\t\'回転しない\' - マップは回転しません。常に北が上
-     \n\t\'移動方向へ\' - あなたの向かっている方向に合わせます
-     \n\t\'コンパスへ\' - マップは読み取ったコンパス装置で合わせます
-     \n\tヒント: マップビューでコンパスの針をタップするだけで、コンパスとそれ以外のあなたが設定で選んだ回転
-方法とを素早く切り替えられます。</string>
 
      <string name="switch_to_raster_map_to_see">現在の位置は
 あなたのオフラインベクターマップではカバーされていません、
@@ -94,16 +84,7 @@ name="internet_connection_required_for_online_route">オンライン経路案内
      <string name="level_to_switch_vector_raster">最小ベクターズームレベル</string>
 
      <string name="tip_day_night_mode">日中/夜間 モード</string>
-     <string name="tip_day_night_mode_t">\tマップの外観を
-ベクターマップによって日中(明るく)と夜間(暗く)で変えることができます。
-     \n\t夜間用の色は夜間の運転用に安全です。
-     \n\t \'メインメニュー\' -> \'設定\' -> \'マップ外観\' ->\'日中/夜間 モード\'で
-日中/夜間 切替用のポリシーをセットできます。
-     \n\t選択肢:
-     \n\t\'日の出/日の入\' - 自動モード、太陽の位置で制御(既定値)
-     \n\t\'日中\' - 常に日中モードを使用
-     \n\t\'夜間\' - 常に夜間モードを使用
-     \n\t\'ライトセンサー\' - マップ外観はあなたの端末装置のライトセンサーで制御(装備されていれば)</string>
+
      <string name="tip_location_sharing">位置をシェア</string>
      <string name="tip_location_sharing_t">\t旅行中の興味深い場所の位置を家族や友人とシェアできます。
      \n\t位置をシェアする場合は:
@@ -149,18 +130,8 @@ OSMコミュニティはこの問題をいち早く修正することができ�
      <string name="preferred_locale">表示言語</string>
 
      <string name="tip_map_switch">マップソース</string>
-     <string name="tip_map_switch_t">\t表示中のマップソース及びレイヤーを変更する
-いちばん早い方法はマップメニューの\'メニュー\' -> \'ビュー定義\'を押すことです。
-\n\t\'マップソース…\'の下で、プリロード済オフラインベクターマップ、
-定義済(オンライン)タイルソース、PC上のOsmAndMapCreatorなどを使って手動作成されたマップ
-などを選択することができます。
-\n\tOsmAndはカスタムソースもサポートします。</string>
 
      <string name="tip_app_mode">アプリケーションモード</string>
-     <string name="tip_app_mode_t">\tOsmAnd は用途に合わせて異なる
-アプリケーションプロファイルをサポートしています。
-\n\t\'メニュー\' -> \'設定\' -> \'アプリケーションモード\'
-で、またはルート作成時にプロファイルを変更できます。</string>
 
      <string name="tip_navigation">ナビゲーション</string>
      <string name="tip_navigation_t">\tナビゲーション(経路案内)を始める前に
@@ -392,7 +363,6 @@ name="maps_could_not_be_downloaded">このマップはダウンロードでき�
      <string name="layer_poi">POI…</string>
      <string name="layer_map">マップソース…</string>
      <string name="menu_layers">ビュー定義</string>
-     <string name="continue_follow_previous_route">以前の経路案内が終わっていません。続けますか？</string>
      <string name="context_menu_item_search_poi">POIを検索</string>
      <string name="context_menu_item_show_route">ルート開始位置</string>
      <string name="use_trackball_descr">トラックボールを使用してマップを動かす</string>
@@ -574,7 +544,6 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="user_password_descr">あなたのOSM パスワード</string>
  <string name="user_password">OSM パスワード</string>
  <string name="osm_settings_descr">OSM登録に必要なOpenstreetmap.org (OSM)設定を指定</string>
- <string name="monitor_preferences_descr">トラッキングの設定を指定</string>
  <string name="data_settings_descr">言語、データのダウンロード/リロードを指定</string>
  <string name="data_settings">データ</string>
  <string name="map_preferences_descr">マップ設定を指定: マップソース、回転、
@@ -615,7 +584,6 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="position_on_map_descr">マップ上の位置マーカの位置を選ぶ</string>
  <string name="position_on_map">位置マーカ</string>
  <string name="map_specify_point">地点を指定</string>
- <string name="show_view_angle_descr">コンパスに従って視線方向を表示</string>
  <string name="show_view_angle">視線方向を表示</string>
  <string name="stop_navigation">地点をクリア</string>
  <string name="navigate_to_point">地点をマーク</string>

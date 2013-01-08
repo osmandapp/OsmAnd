@@ -19,11 +19,9 @@
   <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
-  <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
   <string name="play_commands_of_currently_selected_voice">Speel instructies af met de geselecteerde stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
-  <string name="animate_routing">Animeer navigatie</string>
   <string name="test_voice_prompts">Test stem-instructies</string>
   <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Offline gegevens), of overschakelen naar online kaarten.</string>
   <string name="tip_recent_changes_0_7_2_t">"Wijzigingen in 0.7.2:
@@ -38,7 +36,6 @@
   <string name="validate_gpx_upload_name_pwd">Geef je OSM gebruikersnaam en wachtwoord voor het uploaden van GPX bestanden.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nieuwe functies</string>
-  <string name="show_ruler_level_descr">Schaal-lineaal op de kaart weergeven</string>
   <string name="show_ruler_level">Schaal-lineaal weergeven</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Terug naar locatie</string>
@@ -149,7 +146,6 @@
   <string name="settings_preset">Gebruiksprofiel</string>
   <string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
   <string name="monitor_preferences">Tracking</string>
-  <string name="monitor_preferences_descr">Specifieke tracking instellingen</string>
   <string name="routing_settings">Navigatie</string>
   <string name="routing_settings_descr">Specificeer route-opties</string>
   <string name="global_settings">Algemene instellingen</string>
@@ -165,10 +161,8 @@
   <string name="osmand_service">Achtergrondservice</string>
   <string name="osmand_service_descr">Dit is om OsmAnd te gebruiken als het scherm uit is</string>
   <string name="tip_rotation_switching">kaartrotatie</string>
-  <string name="tip_rotation_switching_t">\tJe kan kiezen of en hoe de kaart geroteerd wordt in \'Instellingen\' -&gt; \'Kaart uiterlijk\' -&gt; \'Kaart rotatie\'. \n\tDe keuzes zijn: \n\t\'Niet roteren - de kaart wordt niet geroteerd. Het noorden is altijd boven \n\t\'In de beweegrichting\' - de kaart wordt permanent aangepast aan de beweegrichting \n\t\'Naar kompas\' - de kaartkanteling wordt permanent aangepast aan de ingebouwde kompas \n\tHint: Om snel te wisslen van rotatie-instelling, toets de kompasnaald in het kaartscherm.</string>
   <string name="binary_map_download_success">Download succesvol.\n\t\n\tOm te gebruiken \'Instellingen\' -&gt; \'Kaart configuratie\' -&gt; \'Offline vector kaarten\'.</string>
   <string name="tip_day_night_mode">Dag/Nacht modus</string>
-  <string name="tip_day_night_mode_t">\tDe kaartweegave kan voor sommige vectorkaarten worden ingesteld op dag (helderder) en nacht (donkerder). \n\tNachtkleuren zijn veiliger voor nachtelijke ritten. \n\tJe kan de dag/nacht-omschakeling instellen bij \'Instellingen\' -&gt; \'Kaart uiterlijk\' -&gt;\'Dag/nacht modus\'. \n\tDe keuzes zijn: \n\t\'Zonsopkomst/Zonsondergang\' - automatische modus, gerelateerd aan de positie van de zon (standaardinstelling) \n\t\'Dag\' - gebruik altijd de dag-modus \n\t\'Nacht\' - gebruik altijd de nacht-modus \n\t\'Lichtsensor\' - de kaartweegave wordt bepaald door de lichtsensor van het apparaat (indien aanwezig)</string>
   <string name="tip_osm_improve">Verbeter openstreetmap gegevens</string>
   <string name="tip_osm_improve_t">\tOsmAnd gebruikt kaarten, gebaseerd op Openstreetmap.org (OSM) gegevens en kan -behalve voor kaartweergave en navigatie- gebruikt worden om de kwaliteit van OSM gegevens te verbeteren. Je kan eenvoudig met een paar klikken interessepunten of OSM foutrapporten uploaden! \n\tHiervoor moet je eerst je OSM login informatie opgeven bij \'Instellingen\' -&gt; \'Algemene instellingen\' -&gt; \'OSM bewerken\'. \n\tOm een nieuw interessepunt toe te voegen, gebruik de optie \'Creëer interessepunt\' in het kaartcontextmenu. Vervolg met het ingeven van de informatie over het interessepunt en bevestig de wijziging. \n\tFouten in de kaarten kunnen direct worden gerapporteerd via OSM bug, de OSM groep kan het probleem dan sneller oplossen. \n\Om een fout te rapporteren, gebruik de optie \'Open OSM bug\' in het kaartcontextmenu. Geef daar een gedetailleerde beschrijving van het probleem en stuur het op met de \'Toevoegen\' knop. \n\tEr is een Internetverbinding nodig voor het aanmelden van bugs en interessepunten.</string>
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
@@ -184,7 +178,6 @@
 \n\t- Nieuwe vertalingen (Vietnamees, Pools)
 \n\t- Andere kleine functies
 	</string>
-  <string name="use_transparent_map_theme_descr">Gebruik transparante kaarttoetsen</string>
   <string name="use_transparent_map_theme">Transparant thema</string>
   <string name="native_library_not_supported">Interne bibliotheek wordt niet ondersteund op dit apparaat.</string>
   <string name="init_native_library">Voorbereiden interne bibliotheek…</string>
@@ -348,9 +341,7 @@
   <string name="preferred_locale_descr">Selecteer taal</string>
   <string name="preferred_locale">Taal</string>
   <string name="tip_map_switch">Kaartbron</string>
-  <string name="tip_map_switch_t">\tDe snelste manier de kaartbron en de lagen te veranderen is via: \'Menu\' -&gt; \'Definieer beeld\'. \n\tBij \'Kaartbron…\'Je kan een selectie maken uit de aanwezige offline vectorkaarten, ingestelde (online) kaartsegmenten, of handmatig vervaardigde kaarten bijvoorbeeld d.m.v OsmAndMapCreator op een PC. \n\tOsmAnd ondersteunt ook eigen kaartbronnen.</string>
   <string name="tip_app_mode">Gebruiksprofiel</string>
-  <string name="tip_app_mode_t">\tOsmAnd ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen. \n\tJe kan het profiel instellen in \'Menu\' -&gt; \'Instellingen\' -&gt; \'Gebruiksprofiel\', of bij het creëren van een route.</string>
   <string name="tip_navigation">Navigatie</string>
   <string name="tip_navigation_t">\tVoordat u een navigatie start (routing), moet u eerst een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en selecteer het type navigatie.</string>
   <string name="tip_search">Zoeken</string>
@@ -708,7 +699,6 @@
   <string name="position_on_map_descr">Selecteer plek van de positiemarkering op de kaart</string>
   <string name="position_on_map">Positiemarkering</string>
   <string name="map_specify_point">Zet als bestemming</string>
-  <string name="show_view_angle_descr">Richtingweergave gebaseerd op het kompas</string>
   <string name="show_view_angle">Richtingweergave</string>
   <string name="stop_navigation">Wis betemming</string>
   <string name="navigate_to_point">Zet als best.</string>
@@ -929,9 +919,6 @@
   <string name="use_compass_navigation">Gebruik kompas</string>
   <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
   <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
-  <string name="show_cameras_descr">Toon snelheidscontrole-camera\'s (is mogelijk verboden in sommige landen)</string>
-  <string name="show_speed_limits_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string>
-  <string name="avoid_toll_roads_descr">Vermijd tolwegen bij routeberekening</string>
   <string name="show_cameras">Toon snelheidscontroles</string>
   <string name="show_speed_limits">Toon maximumsnelheden</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
@@ -1083,7 +1070,6 @@
     <string name="map_widget_distancemeasurement">Afstandmeting</string>
     <string name="audionotes_location_not_defined">Locatie is nog niet gedefinieerd om audio notities te nemen</string>
     <string name="map_widget_audionotes">Audio notities</string>
-    <string name="srtm_plugin_attribution">ASTER is een product van METI en NASA</string>
     <string name="monitoring_control_stop">stoppen</string>
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, druk op de stop knop van de widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>

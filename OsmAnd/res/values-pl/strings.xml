@@ -2,7 +2,6 @@
 <resources><string name="tip_select_destination_point">Wybierz punkt docelowy</string>
   <string name="tip_select_destination_point_t">"\tMożesz wybrać punkt docelowy bezpośrednio na mapie (menu kontekstowe -&gt; \'Nawiguj do punktu\'), podczas wyszukiwania lub przez naciśnięcie i długie przytrzymanie na wpisie w swojej \'Liście ulubionych punktów\'.\n\tPunkt docelowy jest oznaczony pomarańczowym dyskiem na mapie i OsmAnd wyświetla odległość oraz kierunek do niego (pomarańczowy trójkąt). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
-  <string name="use_transparent_map_theme_descr">Użyj przezroczystych kontrolek mapy</string>
   <string name="use_transparent_map_theme">Przezroczysty styl</string>
   <string name="native_library_not_supported">Biblioteka renderowania natywnego nie jest obsługiwana na tym urządzeniu.</string>
   <string name="init_native_library">Inicjalizacja biblioteki renderowania natywnego…</string>
@@ -118,7 +117,6 @@
   <string name="gpx_option_reverse_route">Odwróć kierunek GPX</string>
   <string name="gpx_option_destination_point">Użyj bieżącego celu</string>
   <string name="tip_rotation_switching">Orientacja mapy</string>
-  <string name="tip_rotation_switching_t">\tMożesz ustawić w \'Ustawienia\' -&gt; \'Ustawienia główne\' -&gt; \'Obracanie mapy\'., kiedy i jak obracać mapę. \n\tDo wyboru są opcje: \n\t\'Nie obracaj\' - mapa nie będzie obracana, północ zawsze będzie u góry \n\t\'Względem kierunku ruchu\' - mapa będzie obracana względem kierunku poruszania się \n\t\'Względem kompasu\' - mapa będzie obracana na podstawie odczytu z wbudowanego kompasu \n\tPodpowiedź: Aby szybko przełączyć się między kompasem, a jedną z pozostałych opcji można dotknąć ikonki kompasu na mapie.</string>
   <string name="switch_to_raster_map_to_see">Obecna pozycja nie ma pokrycia w zainstalowanych mapach offline. Możesz pobrać nową w Ustawieniach lub przełączyć się na mapy online.</string>
   <string name="switch_to_vector_map_to_see">Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline) by zobaczyć mapę.</string>
   <string name="binary_map_download_success">Zakończono. Możesz włączyć mapy offline używając menu (Zdefiniuj widok -&gt; Źródło mapy… -&gt; Wektorowe mapy offline).</string>
@@ -149,7 +147,6 @@
   <string name="level_to_switch_vector_raster_descr">Minimalne zbliżenie dla map wektorowych</string>
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
-  <string name="tip_day_night_mode_t">\tWygląd mapy wektorowej może zmieniać się w zależności od pory dnia. \n\tNocne kolory są bezpieczniejsze dla podróży po zmroku. \n\tMożesz zdefiniować kryterium przełączania trybu dzień/noc w \'Ustawienia\' -&gt; \'Wygląd mapy\' -&gt;\'Tryb dzień/noc\'. \n\tDo wyboru jest: \n\t\'Wschód/zachód\' - tryb automatyczny, bazujący na pozycji słońca (domyślny) \n\t\'Dzień\' - zawsze używa trybu dziennego \n\t\'Noc\' - zawsze używa trybu nocnego \n\t\'Czujnik światła \' - wygląd mapy jest ustawiany w zależności od odczytu z czujnika światła w urządzeniu (jeśli występuje)</string>
   <string name="tip_location_sharing">Udostępnianie pozycji</string>
   <string name="tip_location_sharing_t">\tMożesz podzielić się swoją pozycją GPS z rodziną lub znajomymi. \n\tAby to zrobić:: \n\tWybierz z menu kontekstowego mapy \'Opcje punktu\' -&gt; \'Udostępnij pozycję GPS\'. \n\tNastępnie wybierz sposób udostępnienia. Do wyboru jest e-mail, SMS lub zwykłe skopiowanie koordynat do schowka.
 </string>
@@ -165,9 +162,7 @@
   <string name="preferred_locale_descr">Wybierz język interfejsu</string>
   <string name="preferred_locale">Język interfejsu</string>
   <string name="tip_map_switch">Źródło mapy</string>
-  <string name="tip_map_switch_t">\tNajszybszą drogą zmiany źródła mapy oraz wyświetlanych warstw jest naciśnięcie \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tPod pozycją \'Źródło mapy…\' możesz wybrać ściągniętą wcześniej mapę wektorową offline, predefiniowane źródła map kafelkowych lub wcześniej utworzone mapy na PC (np. za pomocą programu OsmAndMapCreator). \n\tOsmAnd wspiera także własne źródła map.</string>
   <string name="tip_app_mode">Profil użytkownika</string>
-  <string name="tip_app_mode_t">\tOsmAnd obsługuje różne (konfigurowalne) profile aplikacji dla różnych przypadków użycia.\n\tMożesz zmienić profil w \'Menu\' -&gt; \'Ustawienia\' -&gt; \'Tryb programu\' lub podczas wyznaczania trasy.</string>
   <string name="tip_navigation">Nawigacja</string>
   <string name="tip_navigation_t">\tPrzed rozpoczęciem nawigacji musisz wybrać punkt docelowy. Potem naciśnij\'Menu\' -&gt; \'Nawigacja\' i wybierz rodzaj nawigacji.</string>
   <string name="tip_search">Wyszukiwanie</string>
@@ -499,7 +494,6 @@
   <string name="user_password_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
   <string name="user_password">Hasło do konta OSM</string>
   <string name="osm_settings_descr">Skonfiguruj ustawienia dotyczące potrzebne do wysyłania danych do Openstreetmap.org (OSM)</string>
-  <string name="monitor_preferences_descr">Skonfiguruj zapisywanie śladów GPX</string>
   <string name="data_settings_descr">Ustaw język, pobierz/przeładuj dane</string>
   <string name="data_settings">Dane</string>
   <string name="map_preferences_descr">Zmień ustawienia mapy: źródło mapy, obracanie, pozycję markera, orientację ekranu</string>
@@ -538,7 +532,6 @@
   <string name="position_on_map_descr">Wybierz lokalizację znacznika pozycji na mapie</string>
   <string name="position_on_map">Znacznik pozycji</string>
   <string name="map_specify_point">Ustaw jako punkt docelowy</string>
-  <string name="show_view_angle_descr">Dostosuj kierunek wyświetlania mapy do wskazań kompasu</string>
   <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
   <string name="stop_navigation">Usuń cel trasy</string>
   <string name="navigate_to_point">Ustaw jako punkt docelowy</string>
@@ -683,11 +676,9 @@
 \n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach "</string>
   <string name="osm_editing_plugin_description">Pokaż ustawienia do konfiguracji poprawiania danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga podania danych uwierzytelniających OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
-  <string name="simulate_route_progression_manually">Simulate route progression manually</string>
   <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
   <string name="debugging_and_development">Rozwój OsmAnd</string>
   <string name="native_rendering">Renderowanie natywne</string>
-  <string name="animate_routing">Nawigacja animowana</string>
   <string name="test_voice_prompts">Przetestuj podpowiedzi głosowe</string>
   <string name="tip_recent_changes_0_7_2_t">"Zmiany w 0.7.2 :
 \n\t- Natywne renderowanie dla wszystkich urządzeń\n\t- Edytowanie POI w trybie offline\n\t- Ułatwienia dostępu\n\t- Wiele poprawek "</string>
@@ -698,7 +689,6 @@
   <string name="validate_gpx_upload_name_pwd">Proszę podać nazwę użytkownika OSM oraz hasło aby wysłać pliki GPX.</string>
   <string name="default_buttons_support">Wsparcie</string>
   <string name="support_new_features">Wesprzyj prace nad nowymi funkcjami</string>
-  <string name="show_ruler_level_descr">Wyświetl linijkę na mapie</string>
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
   <string name="back_to_location">Powróć do lokacji</string>
@@ -886,9 +876,6 @@
   <string name="use_compass_navigation">Użyj kompasu</string>
   <string name="route_updated_loc_found">Trasa będzie przeliczona, kiedy lokalizacja zostanie odnaleziona</string>
   <string name="continue_follow_previous_route_auto">Poprzednia trasa nie została ukończona. Kontynuować ją? (%1$s sekund)</string>
-  <string name="show_cameras_descr">Pokaż fotoradary (może to być zabronione w niektórych krajach)</string>
-  <string name="show_speed_limits_descr">"Pokaż ograniczenia prędkości i progi zwalniające "</string>
-  <string name="avoid_toll_roads_descr">Unikaj płatnych dróg przy wyliczaniu trasy</string>
   <string name="show_cameras">Fotoradary</string>
   <string name="show_speed_limits">Ograniczenia prędkości</string>
   <string name="avoid_toll_roads">Dróg płatnych</string>
@@ -1071,7 +1058,6 @@
     <string name="audionotes_location_not_defined">Lokalizacja dla notatki głosowej nie jest jeszcze ustalona</string>
     <string name="monitoring_control_stop">zatrzymaj</string>
     <string name="map_widget_audionotes">Notatki głosowe</string>
-    <string name="srtm_plugin_attribution">ASTER jest produktem METIS i NASA</string>
     <string name="av_def_action_video">Nagraj film</string>
     <string name="av_def_action_audio">Nagraj dźwięk</string>
     <string name="av_widget_action_descr">Wybierz domyślną akcję widgetu</string>
@@ -1117,5 +1103,4 @@
     <string name="srtm_paid_version_title">Wtyczka Kontury</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ta wtyczka dostarcza kontury, które mogą być wyświetlane na mapach offline w OsmAnd. Światowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
     </resources>

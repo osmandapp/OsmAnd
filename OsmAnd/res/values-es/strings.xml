@@ -74,7 +74,6 @@
   <string name="settings_preset">Perfil de usuario</string>
   <string name="settings_preset_descr">Selecciona un perfil de uso con ajustes de mapa y navegación personalizados.</string>
   <string name="monitor_preferences">Seguimiento</string>
-  <string name="monitor_preferences_descr">Especifica los parámetros de seguimiento</string>
   <string name="routing_settings">Navegación</string>
   <string name="routing_settings_descr">Especifica opciones de navegación</string>
   <string name="global_settings">Opciones Globales</string>
@@ -90,11 +89,9 @@
   <string name="osmand_service">Funcionalidad de bajo consumo</string>
   <string name="osmand_service_descr">Para ejecutar OsmAnd mientras la pantalla está apagada</string>
   <string name="tip_rotation_switching">Rotación del mapa</string>
-  <string name="tip_rotation_switching_t">\tPuedes elegir cómo se rota el mapa en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt; \'Rotación del mapa\'. \n\tLas opciones son: \n\t\- \'No rotar\': no se girará el mapa. El Norte estará siempre arriba \n\t\- \'En la dirección del movimiento\': el mapa estará continuamente alineado con la dirección y sentido de su movimiento \n\t\- \'A la brújula\': el mapa estará continuamente alineado con la lectura de la brújula del dispositivo \n\tNota: Para cambiar rápidamente entre rotación por brújula y la seleccionada en las opciones, basta con pulsar sobre la aguja de la brújula en el mapa.</string>
   <string name="switch_to_raster_map_to_see">No hay mapa vectorial descargado para esta localización. \n\t\n\tPuedes descargarlo en \'Opciones\' -&gt; \'Descarga de datos\', o pasar a mapas en línea vía \'Opciones\' -&gt; \'Mapas\'.</string>
   <string name="binary_map_download_success">Descarga correcta.\n\t\n\tPara usarla, activa \'Opciones\' -&gt; \'Configuración de mapas\' -&gt; \'Mapas descargados\'.</string>
   <string name="tip_day_night_mode">Modo Día/Noche</string>
-  <string name="tip_day_night_mode_t">\tLa apariencia del mapa se puede cambiar, para algunos mapas vectoriales, entre Día (más brillante) y Noche (más oscuro). \n\tLos colores Noche son más seguros para la conducción nocturna. \n\tPuedes definir la política para cambiar entre Día y Noche en \'Opciones\' -&gt; \'Apariencia del mapa\' -&gt;\'Modo Día/Noche\'. \n\tLas opciones son: \n\t\- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto) \n\t\- \'Día\': siempre usa el modo Día \n\t\- \'Noche\': siempre usa el modo Noche \n\t\- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si lo tiene)</string>
   <string name="tip_osm_improve">Mejora de los datos OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd usa mapas basados en datos de Openstreetmap.org (OSM) y, además de para ver mapas y navegar, se puede utilizar para mejorar la calidad de los datos OSM. Puedes crear y enviar fácilmente nuevos PDI o informes de fallos de OSM tan sólo con unos pocos clicks. \n\tPara ello necesitas primero proporcionar tu información de conexión OSM en \'Opciones\' -&gt; \'Opciones Generales\' -&gt; \'Edición OSM\'. \n\tPara añadir un nuevo PDI usa la opción \'Crear PDI\' en el menú contextual del mapa. Introduce la información sobre el nuevo PDI en el formulario \'Crear PDI\' y por último envíala. \n\tLos errores en los mapas pueden ser notificados inmediatamente mediante fallos OSM, y la comunidad OSM puede resolver el problema más rápidamente. \n\tPara añadir un fallo OSM usa la opción \'Abrir fallo OSM\' en el menú contextual del mapa. Luego escribe la descripción detallada del problema y por último envíala pulsando el botón \'Añadir\'. \n\tNecesitas conexión a Internet para enviar tus contribuciones a PDIs y fallos OSM.</string>
   <string name="download_files_not_enough_space">No hay suficente espacio para descargar %1$s MB (disponible: %2$s).</string>
@@ -103,7 +100,6 @@
   <string name="tip_select_destination_point_t">"\tPuedes escoger el destino directamente en el mapa (menú contextual y luego \'Fijar como destino\'), en las búsquedas, o mediante una pulsación larga en tu \'Lista de Puntos Favoritos\'.
 \n\tEl destino está marcado en el mapa como un disco naranja y OsmAnd muestra la distancia al mismo y la dirección a seguir (triángulo naranja). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Cambios en 0.6.9 : \n\t- Mejorado el dibujado de mapas sin conexión \n\t- Dibujado nativo rápido - mira en las funcionalidades experimentales (puede no funcionar en algunos dispositivos) \n\t- Numerosos cambios en el estilo visual \n\t- Información de altitud \n\t- Nuevas traducciones (Vietnamita, Polaco) \n\t- Otras pequeñas funcionalidades "</string>
-  <string name="use_transparent_map_theme_descr">Usa controles de mapa transparentes</string>
   <string name="use_transparent_map_theme">Tema transparente</string>
   <string name="native_library_not_supported">La biblioteca nativa no está soportada en este dispositivo.</string>
   <string name="init_native_library">Inicializando biblioteca nativa…</string>
@@ -271,9 +267,7 @@
   <string name="preferred_locale_descr">Selecciona el idioma de visualización</string>
   <string name="preferred_locale">Idioma de visualización</string>
   <string name="tip_map_switch">Fuente de mapas</string>
-  <string name="tip_map_switch_t">\tEl modo más rápido de cambiar la fuente del mapa y las capas mostradas es pulsando \'Menú\' -&gt; \'Definir vista\' en la vista del mapa. \n\tEn \'Fuente del mapa…\' puede elegir usar los mapas vectoriales descargados, fuentes de teselas predefinidas (con conexión), o mapas creados manualmente, por ejemplo con OsmAndMapCreator en un PC. \n\tOsmAnd también soporta fuentes personalizadas.</string>
   <string name="tip_app_mode">Perfil de usuario</string>
-  <string name="tip_app_mode_t">\tOsmAnd soporta diferentes perfiles de aplicación (configurables) para diferentes usos. \n\tPuedes cambiar los perfiles en \'Menú\' -&gt; \'Opciones\' -&gt; \'Perfil de usuario\', o cuando crees una ruta.</string>
   <string name="tip_navigation">Navegación</string>
   <string name="tip_navigation_t">\tAntes de empezar una navegación necesitas seleccionar un destino. Después, pulsa \'Menú\' -&gt; \'Indicaciones\' en el mapa y selecciona el tipo de navegación.</string>
   <string name="tip_search">Buscando</string>
@@ -633,7 +627,6 @@
   <string name="position_on_map_descr">Elige la ubicación del marcador de posición en el mapa</string>
   <string name="position_on_map">Marcador de posición</string>
   <string name="map_specify_point">Fijar como destino</string>
-  <string name="show_view_angle_descr">Mostrar la dirección de la vista en el mapa</string>
   <string name="show_view_angle">Mostrar dirección de visualización</string>
   <string name="stop_navigation">Borrar dest.</string>
   <string name="navigate_to_point">Fijar dest.</string>
@@ -780,11 +773,9 @@
 \n\t - Mejoras en muchas áreas "</string>
   <string name="osm_editing_plugin_description">Muestra parámetros para la colaboración con OSM como recolectar / modificar objetos PDI de OSM, crear / comentar fallos de OSM, y contribuir con trazas GPX (requiere credenciales OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
-  <string name="simulate_route_progression_manually">Simular la progresión de la ruta manualmente</string>
   <string name="play_commands_of_currently_selected_voice">Reproduce algunas indicaciones de la voz seleccionada actualmente</string>
   <string name="debugging_and_development">Desarrollo de OsmAnd</string>
   <string name="native_rendering">Dibujo nativo</string>
-  <string name="animate_routing">Navegación animada</string>
   <string name="test_voice_prompts">Probar avisos de voz</string>
   <string name="tip_recent_changes_0_7_2_t">"Cambios en 0.7.2 : \n\t- Dibujo nativo para todos los dispositivos \n\t- Edición de PDI sin conexión\n\t- Accessibilidad \n\t- Muchos arreglos de fallos "</string>
   <string name="send_files_to_osm">¿Enviar ficheros GPX a OSM?</string>
@@ -794,7 +785,6 @@
   <string name="validate_gpx_upload_name_pwd">Por favor, especifique usuario y contraseña de OSM para subir ficheros GPX.</string>
   <string name="default_buttons_support">Soporte</string>
   <string name="support_new_features">Soporte de nuevas características</string>
-  <string name="show_ruler_level_descr">Mostrar escala en el mapa</string>
   <string name="show_ruler_level">Mostrar escala</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Volver a localización</string>
@@ -925,9 +915,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="use_compass_navigation">Usar brújula</string>
   <string name="route_updated_loc_found">La ruta será recalculada cuando se encuentre la localización</string>
   <string name="continue_follow_previous_route_auto">La navegación anterior no ha finalizado. ¿Continuar siguiéndola? (%1$s segundos)</string>
-  <string name="show_cameras_descr">Muestra radares (puede estar prohibido en algunos países)</string>
-  <string name="show_speed_limits_descr">Muestra límites de velocidad y puntos negros</string>
-  <string name="avoid_toll_roads_descr">Evita peajes para cálculo de la ruta</string>
   <string name="show_cameras">Mostrar radares</string>
   <string name="show_speed_limits">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
@@ -975,9 +962,9 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="tip_day_night_mode_t_v2">"\tLa apariencia del mapa puede cambiarse para algunos mapas vectoriales entre día (más brillante) y noche (más oscuro).\n\tLos colores del modo noche son más seguros para la conducción nocturna.\n\tPuedes establecer una política para la conmutación día/noche en \'Menú\'-&gt; \'Configurar pantalla…\'-&gt; \'Mapa Día/Noche\'.\n\tLas opciones son:\n\t- \'Alba/Ocaso\': modo automático, controlado por la posición del sol (por defecto)\n\t- \'Día\': utiliza siempre el modo día\n\t- \'Noche\': utiliza siempre el modo noche\n\t- \'Sensor de luz\': la apariencia del mapa está controlada por el sensor de luz del dispositivo (sólo si está equipado) "</string>
 <string name="tip_app_mode_t_v2">"\tOsmAnd admite diferentes perfiles de aplicación (personalizable) para diferentes casos de uso.\n\tPuedes cambiar perfiles mediante el botón de perfil en la esquina inferior izquierda de la pantalla del mapa (icono coche, bicicleta o peatón), o al crear una ruta. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión incluyendo indicaciones giro-a-giro mediante voz. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en una carpeta seleccionable) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapas de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista diurna/nocturna - opción de zoom dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección de movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas Limitaciones de la versión gratuita de OsmAnd: - Limite de número de mapas descargados - Sin acceso a los PDIs de Wikipedia descargados OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión incluyendo indicaciones giro-a-giro mediante voz. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacena los mapas de vectores o teselas descargados en una carpeta seleccionable) - Mapas vectoriales compactos disponibles de todo el planeta - Descarga de mapas de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, líneas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - opción de cambio automático de vista diurna/nocturna - opción de zoom dependiente de la velocidad - opción de alineamiento del mapa opcional según brújula o dirección de movimiento - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y generadas Limitaciones de la versión gratuita de OsmAnd: - Limite de número de mapas descargados - Sin acceso a los PDIs de Wikipedia descargados OsmAnd está siendo desarrollado activamente y nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considere comprar OsmAnd+, financiar nuevas características o hacer una donación en general en osmand.net. "</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd+ es una aplicación de navegación de código abierto para mapas con y sin conexión</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable) - Mapas de vectores compactos disponibles de todo el planeta - Descarga de mapa de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, lineas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista diurna/nocturna - Zoom opcional dependiente de la velocidad - Alineamiento del mapa opcional según brújula o dirección de movimiento "</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos OpenStreetMap (OSM) globales. Todos los datos de mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. OsmAnd+ es la versión de pago de la aplicación, comprándola da soporte al proyecto, financia el desarrollo de nuevas características, y recibe las últimas actualizaciones. Algunas de las características fundamentales: - Completa funcionalidad sin conexión (almacenar los mapas de vectores o teselas descargados en una carpeta seleccionable) - Mapas de vectores compactos disponibles de todo el planeta - Descarga de mapa de país o región directamente desde la app - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, líneas de contorno, paradas de transporte público, mapas adicionales con transparencia personalizable - Búsqueda sin conexión de direcciones y lugares (PDI) - Rutas sin conexión para distancias cortas (experimental) - Modos de coche, bicicleta, y peatón con: - Cambio automático opcional de vista diurna/nocturna - Zoom opcional dependiente de la velocidad - Alineamiento del mapa opcional según brújula o dirección de movimiento "</string>
 <string name="avoid_motorway">Evitar autopistas</string>
 <string name="tip_recent_changes_0_8_3_t">"﻿Cambios en 0.8.3 :
 \n\t* Puntos intermedios\n\t* Mejoras en indicaciones de ruta
@@ -1066,7 +1053,6 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="audionotes_location_not_defined">La localización no está definida aún para tomar notas de audio</string>
     <string name="monitoring_control_stop">parar</string>
     <string name="map_widget_audionotes">Notas de audio</string>
-    <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
     <string name="recording_open_external_player">Abrir reproductor externo</string>
     <string name="recording_delete_confirm">¿Quieres eliminar esta grabación?</string>
@@ -1102,8 +1088,4 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="dropbox_plugin_name">Extra de Dropbox</string>
     <string name="animate_routing_using_gpx">¿Quieres usar un archivo GPX existente?</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
-    <string name="recording_context_menu_show">Mostrar</string>
-    <string name="recording_photo_description">Foto %1$s en %2$s</string>
-    <string name="av_def_action_picture">Hacer una foto</string>
-    <string name="recording_context_menu_precord">Hacer una foto</string>
     </resources>
