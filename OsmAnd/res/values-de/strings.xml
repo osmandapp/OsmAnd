@@ -1226,4 +1226,8 @@
     <string name="tip_recent_changes_1_1_0_t">"Änderungen in 1.1.0:\n\t* Entfernungsmesser-Plugin\n\t* Audio-Notiz-Plugin\n\t* Höhenlinien-Plugin\n\t* Fehlerbeseitigungen\n\t* \'Touren-Ansicht\' der Karte mit mehr Kartendetails, neuer Straßenansicht, mehr Kontrast und alpine Wander-Optionen (SAC-Skalierung)\n\t* EM96 Geoid-Offset-Korrektur für GPS-Höhenwerte "</string>
     <string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. \"Verwende Ort…\" um der Notiz einen bestimmten Ort zuzuweisen</string>
     <string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), welches ein bildgebendes System auf dem Satteliten Terra ist, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
+    <string name="recording_context_menu_show">Anzeigen</string>
+    <string name="recording_photo_description">Foto %1$s bei %2$s</string>
+    <string name="av_def_action_picture">Foto aufnehmen</string>
+    <string name="recording_context_menu_precord">Foto aufnehmen</string>
     </resources>
