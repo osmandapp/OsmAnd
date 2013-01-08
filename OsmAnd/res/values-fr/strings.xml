@@ -1187,4 +1187,8 @@
     <string name="intermediate_points_change_order">Changer l\'ordre</string>
     <string name="dropbox_plugin_name">Greffon Dropbox</string>
     <string name="dropbox_plugin_description">Le greffon Dropbox permet de synchroniser des pistes et des notes audio / vidéo avec votre compte Dropbox.</string>
+    <string name="recording_context_menu_show">Afficher</string>
+    <string name="recording_photo_description">Photo %1$s à %2$s</string>
+    <string name="av_def_action_picture">Prendre une photo</string>
+    <string name="recording_context_menu_precord">Prendre une photo</string>
     </resources>
