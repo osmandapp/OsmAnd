@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.data.IndexConstants;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -47,12 +48,11 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 
 	public void updateLoadedFiles() {
-		OsmandSettings settings = getMyApplication().getSettings();
 		indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),
+		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(""),
 				EXTRA_EXT, indexActivatedFileNames);
 		indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),
+		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(""),
 				EXTRA_EXT, indexFileNames);
 		getMyApplication().getResourceManager().getBackupIndexes(indexFileNames);
 	}

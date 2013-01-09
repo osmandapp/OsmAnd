@@ -7,7 +7,6 @@ import java.util.Random;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.render.MapRenderRepositories;
@@ -45,7 +44,7 @@ public class MainMenuActivity extends Activity {
 	private static final String VECTOR_INDEXES_CHECK = "VECTOR_INDEXES_CHECK"; //$NON-NLS-1$
 	private static final String TIPS_SHOW = "TIPS_SHOW"; //$NON-NLS-1$
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
-	private static final String EXCEPTION_FILE_SIZE = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
+	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 	
 	private static final String CONTRIBUTION_VERSION_FLAG = "CONTRIBUTION_VERSION_FLAG";
 	
@@ -57,7 +56,7 @@ public class MainMenuActivity extends Activity {
 	public void checkPreviousRunsForExceptions(boolean firstTime) {
 		long size = getPreferences(MODE_WORLD_READABLE).getLong(EXCEPTION_FILE_SIZE, 0);
 		final OsmandApplication app = ((OsmandApplication) getApplication());
-		final File file = app.getSettings().extendOsmandPath(OsmandApplication.EXCEPTION_PATH);
+		final File file = app.getAppPath(OsmandApplication.EXCEPTION_PATH);
 		if (file.exists() && file.length() > 0) {
 			if (size != file.length() && !firstTime) {
 				String msg = MessageFormat.format(getString(R.string.previous_run_crashed), OsmandApplication.EXCEPTION_PATH);

@@ -13,11 +13,11 @@ import java.util.Set;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.IndexConstants;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
@@ -330,15 +330,15 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		if(i.isBackupedData()){
 			File parent = new File(i.getPathToData()).getParentFile();
 			if(i.getType() == LocalIndexType.GPX_DATA){
-				parent = settings.extendOsmandPath(ResourceManager.GPX_PATH);
+				parent = getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.MAP_DATA){
-				parent = settings.extendOsmandPath(ResourceManager.MAPS_PATH);
+				parent = getMyApplication().getAppPath(IndexConstants.MAPS_PATH);
 			} else if(i.getType() == LocalIndexType.TILES_DATA){
-				parent = settings.extendOsmandPath(ResourceManager.TILES_PATH);
+				parent = getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.VOICE_DATA){
-				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+				parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			} else if(i.getType() == LocalIndexType.TTS_VOICE_DATA){
-				parent = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+				parent = getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			}
 			return new File(parent, i.getFileName());
 		}
@@ -347,7 +347,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	
 	private File getFileToBackup(LocalIndexInfo i) {
 		if(!i.isBackupedData()){
-			return new File(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), i.getFileName());
+			return new File(getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR), i.getFileName());
 		}
 		return new File(i.getPathToData());
 	}
@@ -694,7 +694,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 	
 	private void updateDescriptionTextWithSize(){
-		File dir = getMyApplication().getSettings().extendOsmandPath("");
+		File dir = getMyApplication().getAppPath("").getParentFile();
 		String size = formatGb.format(new Object[]{0});
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());

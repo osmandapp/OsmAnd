@@ -32,9 +32,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.voice.MediaCommandPlayerImpl;
@@ -202,18 +200,17 @@ public class LocalIndexHelper {
 	}
 	
 	public List<LocalIndexInfo> getLocalIndexData(LocalIndexType type, LoadLocalIndexTask loadTask){
-		OsmandSettings settings = app.getSettings();
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<LocalIndexInfo>();
 		
-		loadObfData(settings.extendOsmandPath(ResourceManager.MAPS_PATH), result, false, loadTask, loadedMaps);
-		loadObfData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask, loadedMaps);
-		loadTilesData(settings.extendOsmandPath(ResourceManager.TILES_PATH), result, false, loadTask);
-		loadTilesData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, false, loadTask);
-		loadVoiceData(settings.extendOsmandPath(ResourceManager.VOICE_PATH), result, false, loadTask);
-		loadVoiceData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
-		loadGPXData(settings.extendOsmandPath(ResourceManager.GPX_PATH), result, false, loadTask);
-		loadGPXData(settings.extendOsmandPath(ResourceManager.BACKUP_PATH), result, true, loadTask);
+		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
+		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
+		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
+		loadTilesData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, false, loadTask);
+		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
+		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
+		loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, false, loadTask);
+		loadGPXData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask);
 		
 		
 		return result;

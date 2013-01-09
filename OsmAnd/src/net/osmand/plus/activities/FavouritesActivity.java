@@ -28,7 +28,6 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -325,12 +324,11 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		final File appDir = getMyApplication().getSettings().extendOsmandPath(ResourceManager.APP_DIR);
-		final File tosave = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
+		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
 		if(item.getItemId() == EXPORT_ID){
 			if(favouritesAdapter.isEmpty()){
 				AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
-			} else if(!appDir.exists()){
+			} else if(!tosave.getParentFile().exists()){
 				AccessibleToast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
 			} else {
 				final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>(){

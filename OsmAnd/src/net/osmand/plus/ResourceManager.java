@@ -68,22 +68,12 @@ import android.view.WindowManager;
  */
 public class ResourceManager {
 
-	public static final String APP_DIR = "osmand/"; //$NON-NLS-1$
-	public static final String ROUTING_XML = APP_DIR + IndexConstants.ROUTING_XML_FILE;
-	public static final String AV_PATH = APP_DIR + IndexConstants.AV_INDEX_DIR;
-	public static final String SRTM_PATH = APP_DIR + IndexConstants.SRTM_INDEX_DIR;
-	public static final String VOICE_PATH = APP_DIR + IndexConstants.VOICE_INDEX_DIR;
-	public static final String GPX_PATH = APP_DIR + IndexConstants.GPX_INDEX_DIR;
-	public static final String MAPS_PATH = APP_DIR;
-	public static final String INDEXES_CACHE = APP_DIR + "ind.cache";
-	public static final String BACKUP_PATH = APP_DIR + IndexConstants.BACKUP_INDEX_DIR;
-	public static final String TILES_PATH = APP_DIR + IndexConstants.TILES_INDEX_DIR; //$NON-NLS-1$
-	public static final String TEMP_SOURCE_TO_LOAD = IndexConstants.TEMP_SOURCE_TO_LOAD; //$NON-NLS-1$
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
+	private static final String INDEXES_CACHE = "ind.cache";
 	
 	
 	private static final Log log = LogUtil.getLog(ResourceManager.class);
-	private static final String MINE_POI_DB = APP_DIR + "mine"+ IndexConstants.POI_INDEX_EXT;
+	private static final String MINE_POI_DB = "mine"+ IndexConstants.POI_INDEX_EXT;
 	
 	
 	protected static ResourceManager manager = null;
@@ -150,11 +140,11 @@ public class ResourceManager {
 
 	
 	public void resetStoreDirectory() {
-		dirWithTiles = context.getSettings().extendOsmandPath(TILES_PATH);
+		dirWithTiles = context.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		dirWithTiles.mkdirs();
 		// ".nomedia" indicates there are no pictures and no music to list in this dir for the Gallery app
 		try {
-			context.getSettings().extendOsmandPath(APP_DIR + ".nomedia").createNewFile(); //$NON-NLS-1$
+			context.getAppPath(".nomedia").createNewFile(); //$NON-NLS-1$
 		} catch( Exception e ) {
 		}
 	}
@@ -268,7 +258,7 @@ public class ResourceManager {
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
 		builder.setLength(0);
 		if (map == null) {
-			builder.append(TEMP_SOURCE_TO_LOAD);
+			builder.append(IndexConstants.TEMP_SOURCE_TO_LOAD);
 		} else {
 			builder.append(map.getName());
 		}
@@ -392,7 +382,7 @@ public class ResourceManager {
 		// check we have some assets to copy to sdcard
 		warnings.addAll(checkAssets(progress));
 		initRenderers(progress);
-		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getSettings().extendOsmandPath(APP_DIR));
+		geoidAltitudeCorrection = new GeoidAltitudeCorrection(context.getAppPath(null));
 		// do it lazy
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingMaps(progress));
@@ -404,7 +394,7 @@ public class ResourceManager {
 	}
 	
 	public List<String> indexVoiceFiles(IProgress progress){
-		File file = context.getSettings().extendOsmandPath(VOICE_PATH);
+		File file = context.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
@@ -427,7 +417,7 @@ public class ResourceManager {
 	private List<String> checkAssets(IProgress progress) {
 		if (!Version.getFullVersion(context)
 				.equalsIgnoreCase(context.getSettings().previousInstalledVesrion().get())) {
-			File applicationDataDir = context.getSettings().extendOsmandPath(APP_DIR);
+			File applicationDataDir = context.getAppPath(null);
 			applicationDataDir.mkdirs();
 			if(applicationDataDir.canWrite()){
 				try {
@@ -516,7 +506,7 @@ public class ResourceManager {
 	}
 
 	private void initRenderers(IProgress progress) {
-		File file = context.getSettings().extendOsmandPath(APP_DIR + IndexConstants.RENDERERS_DIR);
+		File file = context.getAppPath(IndexConstants.RENDERERS_DIR);
 		file.mkdirs();
 		Map<String, File> externalRenderers = new LinkedHashMap<String, File>(); 
 		if (file.exists() && file.canRead()) {
@@ -558,14 +548,15 @@ public class ResourceManager {
 	public List<String> indexingMaps(final IProgress progress) {
 		long val = System.currentTimeMillis();
 		ArrayList<File> files = new ArrayList<File>();
-		collectFiles(context.getSettings().extendOsmandPath(MAPS_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		File appPath = context.getAppPath(null);
+		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			collectFiles(context.getSettings().extendOsmandPath(SRTM_PATH), IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
 		CachedOsmandIndexes cachedOsmandIndexes = new CachedOsmandIndexes();
-		File indCache = context.getSettings().extendOsmandPath(INDEXES_CACHE);
+		File indCache = context.getAppPath(INDEXES_CACHE);
 		if (indCache.exists()) {
 			try {
 				cachedOsmandIndexes.readFromFile(indCache, CachedOsmandIndexes.VERSION);
@@ -658,7 +649,7 @@ public class ResourceManager {
 	
 	// POI INDEX //
 	private List<String> indexingPoi(final IProgress progress) {
-		File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
+		File updatablePoiDbFile = context.getAppPath(MINE_POI_DB);
 		if(updatablePoiDbFile.exists() && updatablePoiDbFile.canRead()){
 			tryToOpenUpdatablePoiDb(updatablePoiDbFile);
 		}
@@ -667,7 +658,7 @@ public class ResourceManager {
 	
 	public AmenityIndexRepositoryOdb getUpdatablePoiDb() {
 		if (updatablePoiDb == null) {
-			File updatablePoiDbFile = context.getSettings().extendOsmandPath(MINE_POI_DB);
+			File updatablePoiDbFile = context.getAppPath(MINE_POI_DB);
 			if (!tryToOpenUpdatablePoiDb(updatablePoiDbFile)) {
 				if (updatablePoiDbFile.exists()) {
 					updatablePoiDbFile.delete();
@@ -923,7 +914,7 @@ public class ResourceManager {
 	}
 	
 	public Map<String, String> getBackupIndexes(Map<String, String> map) {
-		File file = context.getSettings().extendOsmandPath(BACKUP_PATH);
+		File file = context.getAppPath(IndexConstants.BACKUP_INDEX_DIR);
 		if (file != null && file.isDirectory()) {
 			File[] lf = file.listFiles();
 			if (lf != null) {

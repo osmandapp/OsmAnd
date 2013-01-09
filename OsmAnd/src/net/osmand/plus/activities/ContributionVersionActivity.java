@@ -14,7 +14,6 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -58,7 +57,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		pathToDownload = getMyApplication().getSettings().extendOsmandPath(ResourceManager.APP_DIR + "osmandToInstall.apk");
+		pathToDownload = getMyApplication().getAppPath("osmandToInstall.apk");
 		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_download_screen_icon);
 		setContentView(R.layout.download_builds);
 		titleBar.afterSetContentView();

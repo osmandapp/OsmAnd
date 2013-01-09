@@ -12,6 +12,7 @@ import net.osmand.Location;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
+import net.osmand.data.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.ApplicationMode;
@@ -21,7 +22,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
@@ -320,7 +320,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private File getBaseFileName(double lat, double lon, OsmandApplication app, String ext) {
 		String basename = MapUtils.createShortLocString(lat, lon, 15);
 		int k = 1;
-		File f = app.getSettings().extendOsmandPath(ResourceManager.AV_PATH);
+		File f = app.getAppPath(IndexConstants.AV_INDEX_DIR);
 		f.mkdirs();
 		File fl;
 		do {
@@ -535,7 +535,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	@Override
 	public List<String> indexingFiles(IProgress progress) {
-		File avPath = app.getSettings().extendOsmandPath(ResourceManager.AV_PATH);
+		File avPath = app.getAppPath(IndexConstants.AV_INDEX_DIR);
 		if (avPath.canRead()) {
 			recordings.clear();
 			File[] files = avPath.listFiles();

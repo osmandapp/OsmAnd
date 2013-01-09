@@ -15,6 +15,7 @@ import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.IndexConstants;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.activities.DayNightHelper;
@@ -55,7 +56,7 @@ import android.widget.Toast;
 import com.bidforfix.andorid.BidForFixHelper;
 
 public class OsmandApplication extends Application implements ClientContext {
-	public static final String EXCEPTION_PATH = ResourceManager.APP_DIR + "exception.log"; //$NON-NLS-1$
+	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = LogUtil.getLog(OsmandApplication.class);
 
 	ResourceManager manager = null;
@@ -465,7 +466,7 @@ public class OsmandApplication extends Application implements ClientContext {
 			savingTrackHelper.close();
 
 			// restore backuped favorites to normal file
-			final File appDir = getSettings().extendOsmandPath(ResourceManager.APP_DIR);
+			final File appDir = getAppPath(null);
 			File save = new File(appDir, FavouritesDbHelper.FILE_TO_SAVE);
 			File bak = new File(appDir, FavouritesDbHelper.FILE_TO_BACKUP);
 			if (bak.exists() && (!save.exists() || bak.lastModified() > save.lastModified())) {
@@ -541,7 +542,7 @@ public class OsmandApplication extends Application implements ClientContext {
 
 		@Override
 		public void uncaughtException(final Thread thread, final Throwable ex) {
-			File file = osmandSettings.extendOsmandPath(EXCEPTION_PATH);
+			File file = getAppPath(EXCEPTION_PATH);
 			try {
 				ByteArrayOutputStream out = new ByteArrayOutputStream();
 				PrintStream printStream = new PrintStream(out);
@@ -627,6 +628,14 @@ public class OsmandApplication extends Application implements ClientContext {
 	@Override
 	public void runInUIThread(Runnable run, long delay) {
 		uiHandler.postDelayed(run, delay);
+	}
+
+	@Override
+	public File getAppPath(String path) {
+		if(path == null) {
+			path = "";
+		}
+		return new File(getSettings().getExternalStorageDirectory(), IndexConstants.APP_DIR + path);
 	}
 
 }

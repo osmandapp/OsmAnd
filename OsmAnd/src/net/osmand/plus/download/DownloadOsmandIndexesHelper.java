@@ -8,12 +8,11 @@ import java.util.Date;
 import java.util.List;
 
 import net.osmand.LogUtil;
-import net.osmand.plus.Version;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ResourceManager;
+import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -51,7 +50,7 @@ public class DownloadOsmandIndexesHelper {
 		try {
 			String ext = IndexItem.addVersionToExt(IndexConstants.TTSVOICE_INDEX_EXT_ZIP, IndexConstants.TTSVOICE_VERSION);
 			String extvoice = IndexItem.addVersionToExt(IndexConstants.VOICE_INDEX_EXT_ZIP, IndexConstants.VOICE_VERSION);
-			File voicePath = settings.extendOsmandPath(ResourceManager.VOICE_PATH);
+			File voicePath = settings.getContext().getAppPath(IndexConstants.VOICE_INDEX_DIR); 
 			list = amanager.list("voice");
 			String date = "";
 			long dateModified = System.currentTimeMillis();

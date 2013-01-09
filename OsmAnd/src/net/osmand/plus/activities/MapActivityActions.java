@@ -22,6 +22,7 @@ import net.osmand.LogUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -38,7 +39,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -50,12 +50,10 @@ import net.osmand.plus.views.OsmandMapTileView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Application;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
@@ -746,8 +744,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	public static  Dialog createSaveDirections(Activity activity) {
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
-		final File fileDir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
+		final File fileDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final Dialog dlg = new Dialog(activity);
 		dlg.setTitle(R.string.save_route_dialog_title);
 		dlg.setContentView(R.layout.save_directions_dialog);

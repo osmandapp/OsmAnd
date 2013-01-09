@@ -10,9 +10,9 @@ import java.net.URL;
 import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 
 import org.apache.commons.logging.Log;
 
@@ -101,7 +101,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	}
 
 	private void clearCache() {
-		File dir = view.getSettings().extendOsmandPath(ResourceManager.TILES_PATH);
+		File dir = view.getApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
 		for (File ds : dir.listFiles()) {
 			if (ds.isDirectory() && ds.getName().startsWith(YANDEX_PREFFIX)) {
 				Algoritms.removeAllFiles(ds);

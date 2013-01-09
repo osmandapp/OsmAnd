@@ -498,13 +498,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private Map<String, String> listAlreadyDownloadedWithAlternatives() {
 		Map<String, String> files = new TreeMap<String, String>();
-		listWithAlternatives(settings.extendOsmandPath(ResourceManager.BACKUP_PATH),BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(settings.extendOsmandPath(ResourceManager.APP_DIR),EXTRA_EXT, files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR),BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),EXTRA_EXT, files);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			listWithAlternatives(settings.extendOsmandPath(ResourceManager.SRTM_PATH),BINARY_MAP_INDEX_EXT, files);
+			listWithAlternatives(getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR),BINARY_MAP_INDEX_EXT, files);
 		}
-		listWithAlternatives(settings.extendOsmandPath(ResourceManager.VOICE_PATH),"", files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR),"", files);
 		return files;
 	}
 	
@@ -580,7 +580,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			sz += es.sizeMB;
 		}
 		// get availabile space 
-		File dir = settings.extendOsmandPath("");
+		File dir = getMyApplication().getAppPath("").getParentFile();
 		double asz = -1;
 		if(dir.canRead()){
 			StatFs fs = new StatFs(dir.getAbsolutePath());

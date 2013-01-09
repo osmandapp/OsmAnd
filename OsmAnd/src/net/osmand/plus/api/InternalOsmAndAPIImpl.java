@@ -55,15 +55,6 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 		return app.getAssets().open(name);
 	}
 
-	@Override
-	public File getAppDir() {
-		return app.getSettings().extendOsmandPath(ResourceManager.APP_DIR);
-	}
-
-	@Override
-	public File getAppDir(String extend) {
-		return app.getSettings().extendOsmandPath(ResourceManager.APP_DIR + extend);
-	}
 
 	@Override
 	public NativeLibrary getNativeLibrary() {

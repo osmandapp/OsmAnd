@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.LogUtil;
+import net.osmand.data.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -17,7 +18,6 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ResourceManager;
 
 import org.apache.commons.logging.Log;
 
@@ -130,12 +130,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	 */
 	public List<String> saveDataToGpx() {
 		List<String> warnings = new ArrayList<String>();
-		File dir = ((OsmandApplication) ctx.getApplicationContext()).getSettings().getExternalStorageDirectory();
-		if (dir.canWrite()) {
-			dir = new File(dir, ResourceManager.GPX_PATH);
+		File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR);
+		if (dir.getParentFile().canWrite()) {
 			dir.mkdirs();
 			if (dir.exists()) {
-
 				Map<String, GPXFile> data = collectRecordedData();
 
 				// save file

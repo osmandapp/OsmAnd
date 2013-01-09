@@ -14,6 +14,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
+import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
@@ -29,7 +30,6 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
@@ -381,8 +381,7 @@ public class MapActivityLayers {
 	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade,
 			final boolean showCurrentGpx) {
 		final List<String> list = new ArrayList<String>();
-		final OsmandSettings settings = getApplication().getSettings();
-		final File dir = settings.extendOsmandPath(ResourceManager.GPX_PATH);
+		final File dir = getApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
