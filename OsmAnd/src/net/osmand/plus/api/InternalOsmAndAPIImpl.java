@@ -1,6 +1,5 @@
 package net.osmand.plus.api;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -11,7 +10,6 @@ import net.osmand.data.Amenity;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;
-import net.osmand.plus.ResourceManager;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.render.NativeOsmandLibrary;

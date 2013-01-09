@@ -34,6 +34,7 @@ import net.osmand.plus.ResourceManager;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
@@ -866,7 +867,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			long locationTime = System.currentTimeMillis();
 			// write only with 50 meters accuracy
 			if (!location.hasAccuracy() || location.getAccuracy() < ACCURACY_FOR_GPX_AND_ROUTING) {
-				if (settings.SAVE_TRACK_TO_GPX.get()) {
+				if (settings.SAVE_TRACK_TO_GPX.get() && OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
 					savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
 							location.getSpeed(), location.getAccuracy(), locationTime, settings);
 				}
