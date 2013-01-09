@@ -124,8 +124,7 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 
 	@Override
 	public TargetPointsHelper getTargetPointsHelper() {
-		// TODO Auto-generated method stub
-		return null;
+		return app.getTargetPointsHelper();
 	}
 
 	@Override
