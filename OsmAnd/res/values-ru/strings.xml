@@ -1103,4 +1103,11 @@
     <string name="av_settings">"Настройки аудио и видео "</string>
     <string name="intermediate_points_change_order">Изменить порядок</string>
     <string name="animate_routing_using_gpx">Использовать существующий файл GPX?</string>
+    <string name="recording_context_menu_show">Отобразить</string>
+    <string name="av_def_action_picture">Сделать фото</string>
+    <string name="recording_context_menu_precord">Сделать фото</string>
+    <string name="dropbox_plugin_description">Плагин Dropbox позволяет синхронизировать треки и видео/аудио заметки с вашим аккаунтом dropbox.</string>
+    <string name="dropbox_plugin_name">Плагин Dropbox</string>
+    <string name="osmand_srtm_long_description_1000_chars">Этот плагин предоставляет контурные линии, которые могут отображаться в оффлайн картах OsmAnd. Глобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
+    <string name="recording_photo_description">Фото %1$s в %2$s</string>
     </resources>
