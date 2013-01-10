@@ -551,7 +551,7 @@ public class ResourceManager {
 		File appPath = context.getAppPath(null);
 		collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			collectFiles(appPath, IndexConstants.BINARY_MAP_INDEX_EXT, files);
+			collectFiles(context.getAppPath(IndexConstants.SRTM_INDEX_DIR), IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		List<String> warnings = new ArrayList<String>();
 		renderer.clearAllResources();
