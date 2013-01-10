@@ -43,6 +43,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -65,6 +66,7 @@ import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
+import android.opengl.Visibility;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.ClipboardManager;
@@ -534,6 +536,12 @@ public class MapActivityActions implements DialogProvider {
 		if(appMode == ApplicationMode.DEFAULT) {
 			appMode = ApplicationMode.CAR;
 		}
+		
+		RouteService rs = settings.ROUTER_SERVICE.getModeValue(appMode);
+		if (rs != RouteService.OSMAND) {
+			nonoptimal.setVisibility(View.GONE);
+		}
+		
 		for (int i = 0; i < buttons.length; i++) {
 			if (buttons[i] != null) {
 				final int ind = i;
