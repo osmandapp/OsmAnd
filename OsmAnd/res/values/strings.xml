@@ -21,7 +21,7 @@
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="animate_routing_using_gpx">Do you want to use existing GPX file?</string>
     <string name="intermediate_points_change_order">Change order</string>
-    <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin on the Market to support further development.</string>
+    <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Google Play store to support further development.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
@@ -118,7 +118,7 @@
 	\n\t* Enable background service during navigation
     </string>
     <string name="close_changeset">Close changeset</string>
-	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Google Play?</string>
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
@@ -739,9 +739,9 @@
 	<string name="installing_new_resources">Unpacking new data&#8230;</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
-	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to go to the Market to look for another TTS engine? Otherwise the preset TTS language will be used.</string>
+	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to look for another TTS engine in Google Play? Otherwise the preset TTS language will be used.</string>
 	<string name="tts_missing_language_data_title">Missing data</string>
-	<string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to the Market to install?</string>
+	<string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to Google Play to install?</string>
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
@@ -882,7 +882,7 @@
 	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
 	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
 	<string name="contribution_activity">Special activity for contribution version</string>
-	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
+	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Google Play?</string>
 	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
 	<string name="voice_is_not_available_title">No voice guidance selected</string>
 	<string name="daynight_mode_day">Day</string>
