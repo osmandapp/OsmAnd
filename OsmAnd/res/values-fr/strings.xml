@@ -1191,4 +1191,7 @@
     <string name="recording_photo_description">Photo %1$s à %2$s</string>
     <string name="av_def_action_picture">Prendre une photo</string>
     <string name="recording_context_menu_precord">Prendre une photo</string>
+    <string name="stop_routing_confirm">Êtes-vous sûr de vouloir arrêter la navigation ?</string>
+    <string name="clear_dest_confirm">Êtes-vous sûr de vouloir effacer votre point de destination ?</string>
+    <string name="precise_routing_mode">Routage précis (alpha)</string>
     </resources>
