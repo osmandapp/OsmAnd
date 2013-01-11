@@ -37,6 +37,9 @@
 			<Preference android:title="@string/avoid_in_routing_title" android:summary="@string/avoid_in_routing_descr" android:key="avoid_in_routing"/>
 			<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
 				android:key="use_compass_navigation"></CheckBoxPreference>
+			<CheckBoxPreference android:summary="@string/precise_routing_mode_descr" android:title="@string/precise_routing_mode"
+				android:key="precise_routing_mode"></CheckBoxPreference>
+			
 		</PreferenceScreen>
  
 		<Preference android:title="@string/prefs_plugins" android:summary="@string/prefs_plugins_descr" android:key="plugins"/>
