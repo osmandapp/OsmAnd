@@ -1041,17 +1041,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 					@Override
 					public boolean onClick(MenuItem item) {
-						if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
-							routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), mapActivity.getLastKnownLocation(),
-									routingHelper.getCurrentGPXRoute());
-							// restore default mode
-							boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
-							mapActivity.updateApplicationModeSettings();
-							mapView.refreshMap(changed);
-						} else {
-							mapActivity.getTargetPoints().clearPointToNavigate(mapActivity, true);
-						}
-						mapView.refreshMap();
+						stopNavigationActionConfirm(mapView);
 						return true;
 					}
 				});
@@ -1164,6 +1154,55 @@ public class MapActivityActions implements DialogProvider {
 		IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 	}
 	
+	public void stopNavigationAction(final OsmandMapTileView mapView) {
+		if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
+			routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), mapActivity.getLastKnownLocation(),
+					routingHelper.getCurrentGPXRoute());
+			// restore default mode
+			boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
+			mapActivity.updateApplicationModeSettings();
+			mapView.refreshMap(changed);
+		} else {
+			mapActivity.getTargetPoints().clearPointToNavigate(mapActivity, true);
+			mapView.refreshMap();
+		}
+		
+	}
+	
+	public void stopNavigationActionConfirm(final OsmandMapTileView mapView){
+		Builder builder = new AlertDialog.Builder(mapActivity);
+		
+		if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
+			// Stop the navigation
+			builder.setTitle(getString(R.string.stop_routing));
+			builder.setMessage(getString(R.string.stop_routing_confirm));
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), mapActivity.getLastKnownLocation(),
+							routingHelper.getCurrentGPXRoute());
+					// restore default mode
+					boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
+					mapActivity.updateApplicationModeSettings();
+					mapView.refreshMap(changed);
+				}
+			});
+		} else {
+			// Clear the destination point
+			builder.setTitle(getString(R.string.stop_navigation));
+			builder.setMessage(getString(R.string.clear_dest_confirm));
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					mapActivity.getTargetPoints().clearPointToNavigate(mapActivity, true);
+					mapView.refreshMap();
+				}
+			});
+		}
+
+		builder.setNegativeButton(R.string.default_buttons_no, null);
+		builder.show();
+	}
 	
 
 	private void startGpsStatusIntent() {

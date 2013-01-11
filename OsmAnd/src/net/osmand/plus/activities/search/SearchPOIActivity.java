@@ -588,7 +588,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		
 		private SearchAmenityRequest request;
 		private TLongHashSet existingObjects = null;
-		private final static int LIMIT_TO_LIVE_SEARCH = 150;
+		private TLongHashSet updateExisting;
 		
 		public SearchAmenityTask(SearchAmenityRequest request){
 			this.request = request;
@@ -604,17 +604,19 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
 			findViewById(R.id.SearchAreaText).setVisibility(View.GONE);
 			searchPOILevel.setEnabled(false);
+			existingObjects = new TLongHashSet();
+			updateExisting = new TLongHashSet();
 			if(request.type == SearchAmenityRequest.NEW_SEARCH_INIT){
 				amenityAdapter.clear();
 			} else if (request.type == SearchAmenityRequest.SEARCH_FURTHER) {
 				List<Amenity> list = amenityAdapter.getOriginalAmenityList();
-				if (list.size() < LIMIT_TO_LIVE_SEARCH) {
-					existingObjects = new TLongHashSet();
-					for (Amenity a : list) {
-						existingObjects.add(a.getId());
-					}
+				for (Amenity a : list) {
+					updateExisting.add(getAmenityId(a));
 				}
 			}
+		}
+		private long getAmenityId(Amenity a){
+			return (a.getId() << 8) + a.getType().ordinal();
 		}
 		
 		@Override
@@ -662,15 +664,19 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 
 		@Override
 		public boolean publish(Amenity object) {
-			if(request.type == SearchAmenityRequest.NEW_SEARCH_INIT){
-				publishProgress(object);
-			} else if (request.type == SearchAmenityRequest.SEARCH_FURTHER) {
-				if(existingObjects != null && !existingObjects.contains(object.getId())){
+			long id = getAmenityId(object);
+			if (existingObjects != null && !existingObjects.contains(id)) {
+				existingObjects.add(id);
+				if (request.type == SearchAmenityRequest.NEW_SEARCH_INIT) {
 					publishProgress(object);
+				} else if (request.type == SearchAmenityRequest.SEARCH_FURTHER) {
+					if(!updateExisting.contains(id)){
+						publishProgress(object);
+					}
 				}
+				return true;
 			}
-			
-			return true;
+			return false;
 		}
 		
 	}
@@ -685,9 +691,11 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			this.setNotifyOnChange(false);
 		}
 		
+
 		public List<Amenity> getOriginalAmenityList() {
 			return originalAmenityList;
 		}
+
 
 		public void setNewModel(List<Amenity> amenityList, String filter) {
 			setNotifyOnChange(false);
