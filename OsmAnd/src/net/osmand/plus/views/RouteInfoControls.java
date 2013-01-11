@@ -657,7 +657,7 @@ public class RouteInfoControls {
 						} else if(alarm.getType() == AlarmInfo.STOP) {
 							// text = "STOP";
 						}
-						visible = text.length() > 0;
+						visible = text != null &&  text.length() > 0;
 						if (visible) {
 							if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 								visible = cams;
