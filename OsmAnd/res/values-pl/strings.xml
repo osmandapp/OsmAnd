@@ -48,8 +48,8 @@
   <string name="search_position_fixed">Ustalono</string>
   <string name="search_position_current_location">Obecna pozycja…</string>
   <string name="search_position_map_view">Ostatni widok mapy</string>
-  <string name="select_search_position">Szukaj blisko:</string>
-  <string name="context_menu_item_search">Znajdź blisko</string>
+  <string name="select_search_position">Szukaj w pobliżu:</string>
+  <string name="context_menu_item_search">Szukaj w pobliżu</string>
   <string name="tip_recent_changes_0_6_7_t">"Zmiany dla wersji 0.6.7: \n\t- możliwość pobrania map bezpośrednio z poziomu aplikacji (pobierz, usuń, zrób kopię zapasową danych bezpośrednio w OsmAnd) \n\t- ulubione punkty i grupy (kategoryzuj, usuń, zarządzaj ulubionymi) \n\t- GPX Explorer w aplikacji (see tracks, distance, average speed, elevation, etc.) \n\t- nawigacja w oparciu o track GPX (useful options, continue navigation after crash, supports roundabouts) \n\t- możliwość zapisania trasy jako ślad GPX do wykorzystania w trybie offline \n\t- poprawiono monitorowanie GPX (filtruje niektóre nieprecyzyjne położenia i zapisuje precyzję/wysokość/prędkość) \n\t- możliwość wysłania śladu GPX dla społeczności OSM (http://download.osmand.net/gpx/) \n\t- usprawnienie rendera wektorowego \n\t- usprawnienie mechanizmu TTS (dokładny dystans) \n\t- poprawki różnych błędów "</string>
   <string name="save_route_dialog_title">Zapisz trasę jako ślad GPX</string>
   <string name="route_successfully_saved_at">Trasa została zapisana jako \'%1$s\'.</string>
@@ -235,9 +235,9 @@
   <string name="reading_cached_tiles">Wczytywanie zachowanych kafelków…</string>
   <string name="version_index_is_big_for_memory">Index\'\'{0}\'\' nie zmieścił się w pamięci</string>
   <string name="version_index_is_not_supported">Wersja indeksu \'\'{0}\'\' nie jest wspierana</string>
-  <string name="use_osmand_routing_service">Routing OsmAnd &gt;20km</string>
+  <string name="use_osmand_routing_service">Nawigacja OsmAnd &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Użycie routingu offline dla długich tras działa tylko dla tras &gt; 20 km (funkcjonalność eksperymentalna)</string>
-  <string name="osmand_routing_experimental">Routing offline OsmAnd-a jest funkcją eksperymentalną i nie działa dobrze dla odległości większych niż 20km.\n\nUsługa routująca jest tymczasowo przełączana do CloudMade (online).</string>
+  <string name="osmand_routing_experimental">Nawigacja offline w OsmAnd jest funkcją eksperymentalną i nie działa dla odległości większych niż 20 km.\n\nUsługa nawigacji została tymczasowo przełączona na CloudMade (online).</string>
   <string name="specified_dir_doesnt_exist">Nie mogę odnaleźć wskazanego katalogu.</string>
   <string name="application_dir">Katalog danych</string>
   <string name="application_dir_change_warning">Zmiana katalogu danych nie przeniesie ani nie usunie znajdujących się w nim plików. Musisz zrobić do ręcznie poza OsmAnd. Kontynuować mimo to?</string>
@@ -266,7 +266,7 @@
   <string name="reload">Odśwież</string>
   <string name="general_settings_descr">Konfiguruj ogólne ustawienia</string>
   <string name="general_settings">Ogólne ustawienia</string>
-  <string name="index_settings_descr">Pobierz, przeglądaj szczegóły i zarządzaj mapami offline</string>
+  <string name="index_settings_descr">Przeglądaj, pobieraj oraz zarządzaj mapami offline</string>
   <string name="index_settings">Dane offline</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
@@ -359,7 +359,7 @@
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
   <string name="background_router_service">Użyj usługi w tle</string>
   <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
-  <string name="routing_settings_descr">Skonfiguruj opcje routingu</string>
+  <string name="routing_settings_descr">Konfiguruj opcje nawigacji</string>
   <string name="routing_settings">Nawigacja</string>
   <string name="hide_poi_filter">Ukryj filtr</string>
   <string name="show_poi_filter">Pokaż filtr</string>
@@ -568,7 +568,7 @@
   <string name="incremental_search_street">Znajdź ulicę</string>
   <string name="incremental_search_building">Znajdź numer domu</string>
   <string name="choose_available_region">Wybierz region z listy</string>
-  <string name="choose_intersected_street">Wybierz przecznicę</string>
+  <string name="choose_intersected_street">Ulica przecinająca</string>
   <string name="Closest_Amenities">Najbliższe usługi</string>
   <string name="app_mode_default">Domyślnie</string>
   <string name="app_mode_car">Samochód</string>
@@ -677,7 +677,7 @@
   <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości renderowania.</string>
   <string name="plugins_screen">Zarządzanie wtyczkami</string>
   <string name="select_plugin_to_activate">Dotknij wtyczki, aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
-  <string name="prefs_plugins_descr">Wtyczki dostarczają możliwość ustawienia zaawansowanych ustawień oraz dodatkową funkcjonalność do aplikacji taką jak zapisywanie ścieżek, kafelki map, tryb wyłączonego ekranu, ustawienia dostępności i inne.</string>
+  <string name="prefs_plugins_descr">Wtyczki dostarczają dodatkowe ustawienia oraz funkcjonalność taką jak kafelki map, monitorowanie, tryb uśpienia, ułatwienia dostępu i inne.</string>
   <string name="prefs_plugins">Zarządzanie wtyczkami</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 :
 \n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach "</string>
@@ -982,9 +982,9 @@
     <string name="gps_not_available">Włącz w ustawieniach odbiornik GPS</string>
     <string name="map_widget_monitoring_services">Usługi monitorowania</string>
 	<string name="no_route">Brak trasy</string>
-	<string name="delete_target_point">Usuń punkt docelowy</string>
+	<string name="delete_target_point">Usuń punkt pośredni</string>
 	<string name="target_point">Punkt docelowy %1$s</string>
-    <string name="intermediate_point">Punkt drogi %1$s</string>
+    <string name="intermediate_point">Punkt pośredni %1$s</string>
     <string name="context_menu_item_last_intermediate_point">Wybierz ostatni punkt docelowy</string>
     <string name="context_menu_item_first_intermediate_point">Wybierz pierwszy punkt docelowy</string>
     <string name="add_as_last_destination_point">Dodaj jako ostatni punkt drogi</string>
