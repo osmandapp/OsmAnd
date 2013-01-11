@@ -798,7 +798,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 			if (s != null) {
-				if(!sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_NORMAL)) {
+				if(!sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_FASTEST)) {
 					Log.e(LogUtil.TAG, "Sensor could not be enabled");
 				}
 			}
