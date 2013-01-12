@@ -1197,6 +1197,6 @@
     <string name="recording_photo_description">Foto %1$s a %2$s</string>
     <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler cancellare il punto di destinazione?</string>
-    <string name="precise_routing_mode_descr">Abilita il calcolo di precisione del percorso per calcolare percorsi precisi senza intoppi. E\' molto limitata dalla distanza e non utilizza libreria nativa.</string>
+    <string name="precise_routing_mode_descr">Abilita il routing di precisine per calcolare percorsi precisi senza intoppi. E\' molto limitato dalla distanza e non utilizza la libreria nativa.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso(alfa)</string>
     </resources>
