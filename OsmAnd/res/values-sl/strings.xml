@@ -1129,4 +1129,8 @@
     <string name="recording_photo_description">Fotografija %1$s ob %2$s</string>
     <string name="av_def_action_picture">Posnami fotografijo</string>
     <string name="recording_context_menu_precord">Posnami fotografijo</string>
+    <string name="stop_routing_confirm">Ali ste prepričani, da želite prekiniti navigacijo?</string>
+    <string name="clear_dest_confirm">Ali ste prepričani, da želite izbrisati cilj?</string>
+    <string name="precise_routing_mode_descr">Omogočite natančno usmerjanje za izračun natančnih poti brez spodrsljajev. To je zelo omejeno z razdaljo in ne uporablja domače knjižnice.</string>
+    <string name="precise_routing_mode">Natančno usmerjanje (alfa)</string>
     </resources>
