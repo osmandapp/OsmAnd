@@ -1194,4 +1194,5 @@
     <string name="stop_routing_confirm">Êtes-vous sûr de vouloir arrêter la navigation ?</string>
     <string name="clear_dest_confirm">Êtes-vous sûr de vouloir effacer votre point de destination ?</string>
     <string name="precise_routing_mode">Routage précis (alpha)</string>
+    <string name="precise_routing_mode_descr">Activer le routage précis pour calculer des itinéraires précis sans failles. Il est très limité par la distance et n\'utilise pas la bibliothèque native.</string>
     </resources>
