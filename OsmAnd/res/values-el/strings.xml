@@ -535,7 +535,7 @@
 	<string name="tts_language_not_supported_title">Η γλώσσα δεν υποστηρίζεται</string>
 	<string name="tts_language_not_supported">Η επιλεγμένη γλώσσα δεν υποστηρίζεται από την εγκατεστημένη μηχανή TTS (κείμενο σε ομιλία) του Android. Θέλετε να μεταβείτε στο Market για να κοιτάξετε για κάποια άλλη μηχανή TTS? Ειδάλλως θα χρησιμοποιηθεί η προεπιλεγμένη γλώσσα TTS.</string>
 	<string name="tts_missing_language_data_title">Απουσία δεδομένων</string>
-	<string name="tts_missing_language_data">Δεν έχουν εγκατασταθεί δεδομένα για την επιλεγμένη γλώσσα. Θέλετε να μεταβείτε στο Market να τα εγκαταστήσετε;</string>
+	<string name="tts_missing_language_data">Δεν έχουν εγκατασταθεί δεδομένα για την επιλεγμένη γλώσσα. Θέλετε να μεταβείτε στο Google Play να τα εγκαταστήσετε;</string>
 	<string name="gpx_option_reverse_route">Αντιστροφή κατεύθυνσης GPX</string>
 	<string name="gpx_option_destination_point">Χρήση τρέχοντος προορισμού</string>
 	<string name="gpx_option_from_start_point">Πέρασμα κατά μήκος ολόκληρου του ίχνους</string>
@@ -667,7 +667,7 @@
 	<string name="loading_builds">Φόρτωση OsmAnd builds…</string>
 	<string name="select_build_to_install">Επιλέξτε ένα από τα OsmAnd builds προς εγκατάσταση</string>
 	<string name="contribution_activity">Ειδική δράση για την έκδοση συνεισφοράς</string>
-	<string name="gps_status_app_not_found">Η εφαρμογή GPS Status δεν είναι εγκατεστημένη. Αναζήτηση στο Market;</string>
+	<string name="gps_status_app_not_found">Η εφαρμογή GPS Status δεν είναι εγκατεστημένη. Αναζήτηση στο Google Play;</string>
 	<string name="voice_is_not_available_msg">Δεν υπάρχει διαθέσιμη φωνητική καθοδήγηση. Μεταβείτε στις ρυθμίσεις, επιλέξτε το προτιμώμενο πακέτο φωνής, και κατεβάστε το.</string>
 	<string name="voice_is_not_available_title">Δεν επιλέχτηκε φωνητική καθοδήγηση</string>
 	<string name="daynight_mode_day">Ημέρα</string>
@@ -1161,4 +1161,12 @@
     <string name="intermediate_points_change_order">Αλλαγή σειράς</string>
     <string name="srtm_paid_version_msg">Παρακαλώ σκεφτείτε την αγορά του πρόσθετου ισοϋψών γραμμών από το Market για να υποστηρίξετε την περεταίρω ανάπτυξη.</string>
     <string name="srtm_paid_version_title">Πρόσθετο ισοϋψών γραμμών</string>
+    <string name="stop_routing_confirm">Είστε σίγουρος ότι θέλετε να σταματήσετε την πλοήγηση;</string>
+    <string name="clear_dest_confirm">Είστε σίγουρος ότι θέλετε να καθαρίσετε το σημείο προορισμού;</string>
+    <string name="precise_routing_mode">Ακριβής δρομολόγηση (άλφα)</string>
+    <string name="recording_context_menu_show">Εμφάνιση</string>
+    <string name="recording_photo_description">Φωτογραφία %1$s στο %2$s</string>
+    <string name="av_def_action_picture">Πάρτε μια φωτογραφία</string>
+    <string name="recording_context_menu_precord">Πάρτε μια φωτογραφία</string>
+    <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας...\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
     </resources>
