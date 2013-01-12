@@ -1106,4 +1106,8 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_photo_description">Foto %1$s en %2$s</string>
     <string name="av_def_action_picture">Hacer una foto</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
+    <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
+    <string name="clear_dest_confirm">¿Seguro que quieres borrar tu punto de destino?</string>
+    <string name="precise_routing_mode_descr"/>
+    <string name="precise_routing_mode_descr">Activa el enrutamiento preciso para calcular rutas precisas sin fallos. Está muy limitado por la distancia y no utiliza la biblioteca nativa.</string>
     </resources>
