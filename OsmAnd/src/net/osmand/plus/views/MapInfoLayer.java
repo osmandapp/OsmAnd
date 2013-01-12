@@ -636,7 +636,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boxTopL = R.drawable.box_top_l;
 				expand = R.drawable.box_expand;
 			}
-			alarmControl.setBackgroundDrawable(boxFree);
+			lanesControl.setBackgroundDrawable(boxFree);
 			rightStack.setTopDrawable(view.getResources().getDrawable(boxTopR));
 			rightStack.setStackDrawable(boxTopStack);
 
