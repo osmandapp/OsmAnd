@@ -1179,4 +1179,6 @@
     <string name="srtm_paid_version_title">Zásuvný modul pre vrstevnice</string>
     <string name="dropbox_plugin_description">Zásuvný modul pre Dropbox vám umožňuje synchronizovať stopy a video/zvukové poznámky s vaším účtom na službe Dropbox.</string>
     <string name="dropbox_plugin_name">Zásuvný modul pre Dropbox</string>
+    <string name="stop_routing_confirm">Naozaj chcete vypnúť navigáciu?</string>
+    <string name="clear_dest_confirm">Naozaj chcete zmazať váš cieľový bod?</string>
     </resources>
