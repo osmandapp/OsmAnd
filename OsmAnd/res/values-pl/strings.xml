@@ -1122,4 +1122,8 @@
     <string name="recording_photo_description">Zdjęcie %1$s w %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
+    <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
+    <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy?</string>
+    <string name="precise_routing_mode">Precyzyjna nawigacja (alpha)</string>
+    <string name="precise_routing_mode_descr">Włącz precyzyjną nawigację, by obliczać precyzyjne trasy bez błędów. Funkcja jest limitowana przez odległość i nie używa natywnej biblioteki.</string>
     </resources>
