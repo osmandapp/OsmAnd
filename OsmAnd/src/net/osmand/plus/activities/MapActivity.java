@@ -130,6 +130,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	
 	private boolean sensorRegistered = false;
 	private float previousSensorValue = 0;
+	private float[] mGravs;
+	private float[] mGeoMags;
 	private float previousCorrectionValue = 360;
 	private boolean quitRouteRestoreDialog = false;
 
@@ -800,12 +802,18 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else if (!sensorRegistered && show) {
 			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-			if (s != null) {
-				if(!sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_FASTEST)) {
-					Log.e(LogUtil.TAG, "Sensor could not be enabled");
-				}
+			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+			if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
+				Log.e(LogUtil.TAG, "Sensor accelerometer could not be enabled");
 			}
+			s = sensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+			if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
+				Log.e(LogUtil.TAG, "Sensor magnetic field could not be enabled");
+			}
+//			s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+//			if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
+//				Log.e(LogUtil.TAG, "Sensor orientation could not be enabled");
+//			}
 			sensorRegistered = true;
 		}
 	}
@@ -1179,6 +1187,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		}
 	};
 	
+	
 	public LocationListener getGpsListener() {
 		return gpsListener;
 	}
@@ -1344,7 +1353,41 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
-		float val = event.values[0];
+		
+		float val = 0;
+		switch (event.sensor.getType()) {
+		case Sensor.TYPE_ACCELEROMETER:
+			if (mGravs == null) {
+				mGravs = new float[3];
+			}
+			System.arraycopy(event.values, 0, mGravs, 0, 3);
+			break;
+		case Sensor.TYPE_MAGNETIC_FIELD:
+			if (mGeoMags == null) {
+				mGeoMags = new float[3];
+			}
+			System.arraycopy(event.values, 0, mGeoMags, 0, 3);
+			break;
+		case Sensor.TYPE_ORIENTATION:
+			val = event.values[0];
+			if (mGravs != null && mGeoMags != null) {
+				return;
+			}
+			break;
+		default:
+			return;
+		}   
+		if (mGravs != null && mGeoMags != null) {
+			float[] mRotationM = new float[9];
+			boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
+			if(!success) {
+				return;
+			}
+			float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
+			val = (float) Math.toDegrees(orientation[0]);
+		} else if(event.sensor.getType() != Sensor.TYPE_ORIENTATION){
+			return;
+		}
 		
 		if(currentScreenOrientation == 1){
 			val += 90;
@@ -1353,8 +1396,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		} else if(currentScreenOrientation == 3){
 			val += 270;
 		}
-		net.osmand.Location l = getLastKnownLocation();
-		if(l != null && previousCorrectionValue == 360) {
+		if(previousCorrectionValue == 360 && getLastKnownLocation() != null) {
+			net.osmand.Location l = getLastKnownLocation();
 			GeomagneticField gf = new GeomagneticField((float)l.getLatitude(), (float)l.getLongitude(), 
 					(float)l.getAltitude(), System.currentTimeMillis());
 			previousCorrectionValue = gf.getDeclination();
