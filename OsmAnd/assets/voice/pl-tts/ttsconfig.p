@@ -26,8 +26,8 @@ make_ut == ['Zawróć '].
 make_ut_wp == ['Zawróć, jeśli to możliwe '].
 
 prepare_roundabout(Dist) == ['Za ', D, ' wjedź na rondo'] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['Za ', D, ' wjedź na rondo ', E, 'wyjazd'] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == [ E, ' wyjazd'] :- nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['Za ', D, ' wjedź na rondo, ', E, 'zjazd'] :- distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == [ 'Wybierz ', E, ' zjazd'] :- nth(Exit, E).
 
 go_ahead == ['Jedź prosto '].
 go_ahead(Dist) == ['Jedź prosto przez ', D]:- distance(Dist) == D.
@@ -36,7 +36,7 @@ and_arrive_destination == ['następnie dojedź do celu '].
 and_arrive_intermediate == ['następnie dojedź do punktu pośredniego '].
 reached_intermediate == ['punkt pośredni został osiągnięty'].
 
-then == ['następnie '].
+then == [', następnie '].
 reached_destination == ['cel został osiągnięty '].
 bear_right == ['trzymaj się prawej strony '].
 bear_left == ['trzymaj się lewej strony '].
