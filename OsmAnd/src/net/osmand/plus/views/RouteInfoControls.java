@@ -6,6 +6,7 @@ import java.util.Arrays;
 import net.osmand.Algoritms;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.Location;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -316,7 +317,15 @@ public class RouteInfoControls {
 
 			@Override
 			public boolean updateInfo() {
-				float mx = rh == null ? 0 : rh.getCurrentMaxSpeed();
+				float mx = 0; 
+				if ((rh == null || !rh.isFollowingMode()) && map.isMapLinkedToLocation()) {
+					RouteDataObject ro = map.getLastRouteDataObject();
+					if(ro != null) {
+						mx = ro.getMaximumSpeed();
+					}
+				} else {
+					mx = rh.getCurrentMaxSpeed();
+				}
 				if (cachedSpeed != mx) {
 					cachedSpeed = mx;
 					if (cachedSpeed == 0) {

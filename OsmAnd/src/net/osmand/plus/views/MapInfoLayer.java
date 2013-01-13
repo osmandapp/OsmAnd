@@ -11,6 +11,7 @@ import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.access.AccessibleToast;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -902,8 +903,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
 					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						text = routingHelper.formatStreetName(next.getStreetName(), next.getRef());
+						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef());
 					}
+				}
+			} else if(map.isMapLinkedToLocation()) {
+				RouteDataObject rt = map.getLastRouteDataObject(); 
+				if(rt != null) {
+					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef());
 				}
 			}
 			if(text == null) {

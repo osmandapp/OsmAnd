@@ -14,6 +14,7 @@ import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.data.MapTileDownloader.DownloadRequest;
 import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.IMapLocationListener;
@@ -24,6 +25,7 @@ import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.CurrentPositionHelper;
 import net.osmand.plus.MapScreen;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -119,6 +121,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	private OsmandMapTileView mapView;
 	private MapActivityActions mapActions;
 	private MapActivityLayers mapLayers;
+	private CurrentPositionHelper currentPositionHelper;
 	private NavigationInfo navigationInfo;
 	
 	private SavingTrackHelper savingTrackHelper;
@@ -167,6 +170,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		settings = getMyApplication().getSettings();	
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
+		currentPositionHelper = new CurrentPositionHelper(getMyApplication());
 		navigationInfo = new NavigationInfo(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		// Full screen is not used here
@@ -1044,6 +1048,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return mapLayers.getLocationLayer().getLastKnownLocation();
 	}
 	
+	public RouteDataObject getLastRouteDataObject(){
+		return currentPositionHelper.getLastKnownRouteSegment(getLastKnownLocation());
+	}
+	
 	public LatLon getMapLocation(){
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}
@@ -1438,7 +1446,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	
-	private boolean isMapLinkedToLocation(){
+	public boolean isMapLinkedToLocation(){
 		return isMapLinkedToLocation;
 	}
 	
