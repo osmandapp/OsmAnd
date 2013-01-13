@@ -1174,4 +1174,8 @@
     <string name="recording_photo_description">תמונה %1$s במיקום %2$s</string>
     <string name="av_def_action_picture">צילום תמונה</string>
     <string name="recording_context_menu_precord">צילום תמונה</string>
+    <string name="stop_routing_confirm">האם אכן לעצור את הניווט?</string>
+    <string name="clear_dest_confirm">האם אכן למחוק את נקודת היעד?</string>
+    <string name="precise_routing_mode_descr">יש להפעיל ניתוב מדויק כדי לחשב נתיבים מדויקים ללא סטיות. התכונה מוגבלת מאוד במרחק ואין לה ספרייה פנימית.</string>
+    <string name="precise_routing_mode">ניתוב מדויק (אלפא)</string>
     </resources>
