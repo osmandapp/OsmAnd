@@ -32,6 +32,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
@@ -48,10 +49,6 @@ public class LocalIndexHelper {
 
 	public LocalIndexHelper(OsmandApplication app){
 		this.app = app;
-	}
-	
-	public List<LocalIndexInfo> getAllLocalIndexData(LoadLocalIndexTask loadTask){
-		return getLocalIndexData(null, loadTask);
 	}
 	
 	public String getInstalledDate(File f){
@@ -100,8 +97,11 @@ public class LocalIndexHelper {
 						template.couldBeDownloadedFromInternet(), "");
 				info.setDescription(descr);
 			}
+		} else {
+			OsmandPlugin.onUpdateLocalIndexDescription(info);
 		}
 	}
+
 
 	private void updateGpxInfo(LocalIndexInfo info, File f) {
 		if(info.getGpxFile() == null){
@@ -199,7 +199,7 @@ public class LocalIndexHelper {
 		}
 	}
 	
-	public List<LocalIndexInfo> getLocalIndexData(LocalIndexType type, LoadLocalIndexTask loadTask){
+	public List<LocalIndexInfo> getLocalIndexData(LoadLocalIndexTask loadTask){
 		Map<String, String> loadedMaps = app.getResourceManager().getIndexFileNames();
 		List<LocalIndexInfo> result = new ArrayList<LocalIndexInfo>();
 		
@@ -211,11 +211,10 @@ public class LocalIndexHelper {
 		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, false, loadTask);
 		loadGPXData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask);
-		
+		OsmandPlugin.onLoadLocalIndexes(result, loadTask);
 		
 		return result;
 	}
-	
 	
 
 	private void loadVoiceData(File voiceDir, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
@@ -278,7 +277,7 @@ public class LocalIndexHelper {
 	
 	private void loadGPXData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
-			List<LocalIndexInfo> progress = new ArrayList<LocalIndexHelper.LocalIndexInfo>();
+			List<LocalIndexInfo> progress = new ArrayList<LocalIndexInfo>();
 			for (File gpxFile : listFilesSorted(mapPath)) {
 				if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
 					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.GPX_DATA, gpxFile, backup);
@@ -296,6 +295,8 @@ public class LocalIndexHelper {
 			}
 		}
 	}
+	
+	
 	
 	private File[] listFilesSorted(File dir){
 		File[] listFiles = dir.listFiles();
@@ -380,7 +381,8 @@ public class LocalIndexHelper {
 		TILES_DATA(R.string.local_indexes_cat_tile),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
-		GPX_DATA(R.string.local_indexes_cat_gpx);
+		GPX_DATA(R.string.local_indexes_cat_gpx),
+		AV_DATA(R.string.local_indexes_cat_av);;
 		
 		private final int resId;
 
@@ -393,144 +395,7 @@ public class LocalIndexHelper {
 		}
 	}
 	
-	public static class LocalIndexInfo {
-		
-		private LocalIndexType type;
-		private String description = "";
-		private String name;
-		
-		private boolean backupedData;
-		private boolean corrupted = false;
-		private boolean notSupported = false;
-		private boolean loaded;
-		private String pathToData;
-		private String fileName;
-		private boolean singleFile;
-		private int kbSize = -1;
-		
-		// UI state expanded
-		private boolean expanded;
-		
-		private GPXFile gpxFile;
-		
-		public LocalIndexInfo(LocalIndexType type, File f, boolean backuped){
-			pathToData = f.getAbsolutePath();
-			fileName = f.getName();
-			name = formatName(f.getName());
-			this.type = type;
-			singleFile = !f.isDirectory();
-			if(singleFile){
-				kbSize = (int) (f.length() >> 10);
-			}
-			this.backupedData = backuped;
-		}
-		
-		private String formatName(String name) {
-			int ext = name.indexOf('.');
-			if(ext != -1){
-				name = name.substring(0, ext);
-			}
-			return name.replace('_', ' ');
-		}
-
-		// Special domain object represents category
-		public LocalIndexInfo(LocalIndexType type, boolean backup){
-			this.type = type;
-			backupedData = backup;
-		}
-		
-		public void setCorrupted(boolean corrupted) {
-			this.corrupted = corrupted;
-			if(corrupted){
-				this.loaded = false;
-			}
-		}
-		
-		public void setBackupedData(boolean backupedData) {
-			this.backupedData = backupedData;
-		}
-		
-		public void setSize(int size) {
-			this.kbSize = size;
-		}
-		
-		public void setGpxFile(GPXFile gpxFile) {
-			this.gpxFile = gpxFile;
-		}
-		
-		public GPXFile getGpxFile() {
-			return gpxFile;
-		}
-		
-		public boolean isExpanded() {
-			return expanded;
-		}
-		
-		public void setExpanded(boolean expanded) {
-			this.expanded = expanded;
-		}
-		
-		public void setDescription(String description) {
-			this.description = description;
-		}
-		
-		public void setLoaded(boolean loaded) {
-			this.loaded = loaded;
-		}
-		
-		public void setNotSupported(boolean notSupported) {
-			this.notSupported = notSupported;
-			if(notSupported){
-				this.loaded = false;
-			}
-		}
-		
-		public int getSize() {
-			return kbSize;
-		}
-		
-		public boolean isNotSupported() {
-			return notSupported;
-		}
-		
-		
-		public String getName() {
-			return name;
-		}
-		
-		public LocalIndexType getType() {
-			return type;
-		}
-
-		public boolean isSingleFile() {
-			return singleFile;
-		}
-		
-		public boolean isLoaded() {
-			return loaded;
-		}
-		
-		public boolean isCorrupted() {
-			return corrupted;
-		}
-		
-		public boolean isBackupedData() {
-			return backupedData;
-		}
-		
-		public String getPathToData() {
-			return pathToData;
-		}
-		
-		public String getDescription() {
-			return description;
-		}
-		
-		public String getFileName() {
-			return fileName;
-		}
-		
-	}
+	
 
 
 }

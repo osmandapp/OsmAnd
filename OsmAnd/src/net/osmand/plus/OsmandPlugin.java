@@ -8,6 +8,9 @@ import java.util.Set;
 import net.osmand.IProgress;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
+import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -137,6 +140,14 @@ public abstract class OsmandPlugin {
 	
 	public void registerOptionsMenuItems(MapActivity mapActivity, OptionsMenuHelper helper) {}
 	
+	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {};
+	
+	public void contextMenuLocalIndexes(LocalIndexesActivity la, LocalIndexInfo info, ContextMenuAdapter adapter) {};
+	
+	public void updateLocalIndexDescription(LocalIndexInfo info) {}
+	
+	public void optionsMenuLocalIndexes(LocalIndexesActivity localIndexesActivity, ContextMenuAdapter optionsMenuAdapter) {};
+	
 	public List<String> indexingFiles(IProgress progress) {	return null;}
 	
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
@@ -252,6 +263,30 @@ public abstract class OsmandPlugin {
 			plugin.registerOptionsMenuItems(map, helper);
 		}
 	}
+	public static void onUpdateLocalIndexDescription(LocalIndexInfo info) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.updateLocalIndexDescription(info);
+		}
+	}
+	
+	public static void onLoadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.loadLocalIndexes(result, loadTask);
+		}		
+	}
+	
+	public static void onContextMenuLocalIndexes(LocalIndexesActivity la, LocalIndexInfo info, ContextMenuAdapter adapter) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.contextMenuLocalIndexes(la, info, adapter);
+		}
+	}
+	public static void onOptionsMenuLocalIndexes(LocalIndexesActivity localIndexesActivity, ContextMenuAdapter optionsMenuAdapter) {
+		for (OsmandPlugin plugin : activePlugins) {
+			plugin.optionsMenuLocalIndexes(localIndexesActivity, optionsMenuAdapter);
+		}
+		
+	}
+
 
 	private static boolean installPlugin(String packageInfo, 
 			String pluginId, OsmandApplication app, OsmandPlugin plugin) {
@@ -271,6 +306,6 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-
 	
+
 }

@@ -1,5 +1,7 @@
 package net.osmand.plus.osmedit;
 
+import net.osmand.Algoritms;
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -7,9 +9,16 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.EnumAdapter;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.preference.CheckBoxPreference;
@@ -19,6 +28,11 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.text.InputType;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 public class OsmEditingPlugin extends OsmandPlugin {
 	private static final String ID = "osm.editing";
@@ -154,7 +168,6 @@ public class OsmEditingPlugin extends OsmandPlugin {
 						if (itemId == R.string.layer_osm_bugs) {
 							settings.SHOW_OSM_BUGS.set(isChecked);
 						}
-
 					}
 				}, 5);
 
@@ -164,6 +177,67 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public String getDescription() {
 		return app.getString(R.string.osm_editing_plugin_description);
 	}
+	
+	@Override
+	public void contextMenuLocalIndexes(final LocalIndexesActivity la, final LocalIndexInfo info, ContextMenuAdapter adapter) {
+		adapter.registerItem(R.string.local_index_mi_upload_gpx, 0, new OnContextMenuClick() {
+			
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				sendGPXFiles(la, info);
+			}
+		}, 0);
+	}
+	
+	@Override
+	public void optionsMenuLocalIndexes(final LocalIndexesActivity la, ContextMenuAdapter optionsMenuAdapter) {
+		optionsMenuAdapter.registerItem(R.string.local_index_mi_upload_gpx, 0, new OnContextMenuClick() {
+
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				sendGPXFiles(la, la.getSelectedItems().toArray(new LocalIndexInfo[la.getSelectedItems().size()]));
+
+			}
+		}, 5);
+	}
+	
+	public boolean sendGPXFiles(final LocalIndexesActivity la, final LocalIndexInfo... info){
+		String name = settings.USER_NAME.get();
+		String pwd = settings.USER_PASSWORD.get();
+		if(Algoritms.isEmpty(name) || Algoritms.isEmpty(pwd)){
+			AccessibleToast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
+			return false;
+		}
+		Builder bldr = new AlertDialog.Builder(la);
+		LayoutInflater inflater = (LayoutInflater)la.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		final View view = inflater.inflate(R.layout.send_gpx_osm, null);
+		final EditText descr = (EditText) view.findViewById(R.id.DescriptionText);
+		if(info.length > 0 && info[0].getFileName() != null) {
+			int dt = info[0].getFileName().indexOf('.');
+			descr.setText(info[0].getFileName().substring(0, dt));
+		}
+		final EditText tags = (EditText) view.findViewById(R.id.TagsText);		
+		final Spinner visibility = ((Spinner)view.findViewById(R.id.Visibility));
+		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<UploadVisibility>(la, R.layout.my_spinner_text, UploadVisibility.values());
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		visibility.setAdapter(adapter);
+		visibility.setSelection(0);
+		
+		bldr.setView(view);
+		bldr.setNegativeButton(R.string.default_buttons_no, null);
+		bldr.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				new UploadGPXFilesTask(la, descr.getText().toString(), tags.getText().toString(), 
+				 (UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
+					).execute(info);
+			}
+		});
+		bldr.show();
+		return true;
+	}
+	
 
 	@Override
 	public String getName() {

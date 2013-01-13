@@ -3,6 +3,9 @@ package net.osmand.plus.audionotes;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -22,6 +25,10 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.plus.activities.LocalIndexInfo;
+import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
+import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
@@ -161,6 +168,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
 			}
 			updateInternalDescription();
+			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), 
+					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+		}
+		
+		public String getSmallDescription(Context ctx){
+			String nm = name == null? "" : name ;
+			if(isPhoto()){
+				return ctx.getString(R.string.recording_photo_description, nm, 
+						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+			}
+			return ctx.getString(R.string.recording_description, nm, "", 
+					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+		}
+
+		private String getDuration(Context ctx) {
 			String additional = "";
 			if(duration > 0) {
 				int d = (int) (duration / 1000);
@@ -176,9 +198,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if(!available) {
 				additional += "("+ctx.getString(R.string.recording_unavailable)+")";
 			}
-			return ctx.getString(R.string.recording_description, nm, additional, 
-					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+			return additional;
 		}
+		
+		
 	}
 	
 	@Override
@@ -607,5 +630,78 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		return false;
 	}
+	
+	public class RecordingLocalIndexInfo extends LocalIndexInfo {
+
+		private Recording rec;
+
+		public RecordingLocalIndexInfo(Recording r) {
+			super(LocalIndexType.AV_DATA, r.file, false);
+			this.rec = r;
+		}
+		
+		@Override
+		public String getName() {
+			return rec.getSmallDescription(app);
+		}
+		
+	}
+	
+	@Override
+	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
+		List<LocalIndexInfo> progress = new ArrayList<LocalIndexInfo>();
+		for (Recording r : getRecordingsSorted()) {
+			LocalIndexInfo info = new RecordingLocalIndexInfo(r);
+			result.add(info);
+			progress.add(info);
+			if (progress.size() > 7) {
+				loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
+				progress.clear();
+			}
+
+		}
+		if (!progress.isEmpty()) {
+			loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
+		}
+	}
+	
+	@Override
+	public void updateLocalIndexDescription(LocalIndexInfo info) {
+		if (info instanceof RecordingLocalIndexInfo) {
+			info.setDescription(((RecordingLocalIndexInfo) info).rec.getDescription(app));
+		}
+	}
+	
+	@Override
+	public void contextMenuLocalIndexes(final LocalIndexesActivity la, LocalIndexInfo info, ContextMenuAdapter adapter) {
+		if (info.getType() == LocalIndexType.AV_DATA) {
+			final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
+			adapter.registerItem(R.string.show_location, 0, new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					app.getSettings().SHOW_RECORDINGS.set(true);
+					app.getSettings().setMapLocationToShow(ri.rec.lat, ri.rec.lon, app.getSettings().getLastKnownMapZoom());
+					MapActivity.launchMapActivityMoveToTop(la);
+
+				}
+			}, 0);
+		}
+	}
+	
+	private Recording[] getRecordingsSorted() {
+		List<Recording> allObjects = recordings.getAllObjects();
+		Recording[] res = allObjects.toArray(new Recording[allObjects.size()]);
+		Arrays.sort(res, new Comparator<Recording>() {
+
+			@Override
+			public int compare(Recording object1, Recording object2) {
+				long l1 = object1.file.lastModified();
+				long l2 = object1.file.lastModified();
+				return l1 < l2 ? 1 : -1;
+			}
+		});
+		return res;
+	}
+	
 
 }
