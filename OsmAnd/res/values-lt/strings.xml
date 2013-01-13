@@ -1223,4 +1223,8 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="recording_photo_description">Nuotrauka %1$s %2$s</string>
     <string name="av_def_action_picture">Fotografuoti</string>
     <string name="recording_context_menu_precord">Fotografuoti</string>
+    <string name="stop_routing_confirm">Ar tikrai norite sustabdyti navigaciją?</string>
+    <string name="clear_dest_confirm">Ar tikrai norite panaikinti savo kelionės tikslą?</string>
+    <string name="precise_routing_mode_descr">Igalinti tikslų maršruto skaičiavimą be trikdžių. Jis naudotinas labai ribotam atstumui ir nenaudoja aparatinės bibliotekos.</string>
+    <string name="precise_routing_mode">Tikslus maršruto skaičiavias (alpha)</string>
     </resources>
