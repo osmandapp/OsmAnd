@@ -1126,4 +1126,5 @@
     <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy?</string>
     <string name="precise_routing_mode">Precyzyjna nawigacja (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz precyzyjną nawigację, by obliczać precyzyjne trasy bez błędów. Funkcja jest limitowana przez odległość i nie używa natywnej biblioteki.</string>
+    <string name="local_indexes_cat_av">Dane audio/video</string>
     </resources>
