@@ -18,23 +18,16 @@ import net.osmand.plus.views.OsmandMapTileView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
-import android.net.Uri;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvider {

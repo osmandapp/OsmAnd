@@ -150,6 +150,10 @@ public abstract class OsmandPlugin {
 	
 	public List<String> indexingFiles(IProgress progress) {	return null;}
 	
+	public boolean mapActivityKeyUp(MapActivity mapActivity, int keyCode) {
+		return false;
+	}
+	
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
 	}
 	
@@ -306,6 +310,13 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	
+	public static boolean onMapActivityKeyUp(MapActivity mapActivity, int keyCode) {
+		for(OsmandPlugin p : installedPlugins){
+			if(p.mapActivityKeyUp(mapActivity, keyCode))
+				return true;
+		}
+		return false;
+	}
+
 
 }

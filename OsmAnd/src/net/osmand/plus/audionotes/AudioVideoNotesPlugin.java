@@ -691,9 +691,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			};
 			if(ri.rec.isPhoto()) {
-				adapter.registerItem(R.string.recording_context_menu_show, 0, listener, -1);
+				adapter.registerItem(R.string.recording_context_menu_show, 0, listener, 0);
 			} else {
-				adapter.registerItem(R.string.recording_context_menu_play, 0, listener, -1);
+				adapter.registerItem(R.string.recording_context_menu_play, 0, listener, 0);
 			}
 			adapter.registerItem(R.string.show_location, 0, new OnContextMenuClick() {
 				@Override
@@ -794,6 +794,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} catch (Exception e) {
 			AccessibleToast.makeText(ctx, R.string.recording_can_not_be_played, Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	@Override
+	public boolean mapActivityKeyUp(MapActivity mapActivity, int keyCode) {
+		if (keyCode == KeyEvent.KEYCODE_CAMERA) {
+			defaultAction(mapActivity);
+			return true;
+		}
+		return false;
 	}
 
 }

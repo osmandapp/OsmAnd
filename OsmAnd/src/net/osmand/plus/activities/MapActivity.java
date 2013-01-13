@@ -1295,6 +1295,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			LatLon l = mapView.getLatLonFromScreenPoint(mapView.getCenterPointX() + dx, mapView.getCenterPointY() + dy);
 			setMapLocation(l.getLatitude(), l.getLongitude());
 			return true;
+		} else if(OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
+			return true;
 		}
 		return super.onKeyUp(keyCode,event);
 	}
