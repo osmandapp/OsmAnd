@@ -1230,4 +1230,8 @@
     <string name="recording_photo_description">Foto %1$s bei %2$s</string>
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="recording_context_menu_precord">Foto aufnehmen</string>
+    <string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
+    <string name="clear_dest_confirm">Wollen Sie das Ziel wirklich löschen?</string>
+    <string name="precise_routing_mode_descr">Ermöglicht das genaue Berechnen der Route ohne Störungen. Es ist durch die Entfernung begrenzt und verwendet nicht die ursprüngliche Bibliothek.</string>
+    <string name="precise_routing_mode">Präzises Routen (experimentell)</string>
     </resources>
