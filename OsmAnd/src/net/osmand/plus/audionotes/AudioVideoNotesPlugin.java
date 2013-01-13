@@ -40,6 +40,7 @@ import net.osmand.plus.views.TextInfoControl;
 import org.apache.commons.logging.Log;
 
 import android.app.Dialog;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -49,6 +50,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.BitmapFactory.Options;
 import android.hardware.Camera;
+import android.media.AudioManager;
 import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -78,6 +80,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static final String MPEG4_EXTENSION = "mp4";
 	private static final String IMG_EXTENSION = "jpg";
 	private static final Log log = LogUtil.getLog(AudioVideoNotesPlugin.class);
+	private static Method mRegisterMediaButtonEventReceiver;
+	private static Method mUnregisterMediaButtonEventReceiver;
 	private OsmandApplication app;
 	private TextInfoControl recordControl;
 	
@@ -212,6 +216,27 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		
 	}
 	
+	private static void initializeRemoteControlRegistrationMethods() {
+		   try {
+		      if (mRegisterMediaButtonEventReceiver == null) {
+		         mRegisterMediaButtonEventReceiver = AudioManager.class.getMethod(
+		               "registerMediaButtonEventReceiver",
+		               new Class[] { ComponentName.class } );
+		      }
+		      if (mUnregisterMediaButtonEventReceiver == null) {
+		         mUnregisterMediaButtonEventReceiver = AudioManager.class.getMethod(
+		               "unregisterMediaButtonEventReceiver",
+		               new Class[] { ComponentName.class } );
+		      }
+		      /* success, this device will take advantage of better remote */
+		      /* control event handling                                    */
+		   } catch (NoSuchMethodException nsme) {
+		      /* failure, still using the legacy behavior, but this app    */
+		      /* is future-proof!                                          */
+		   }
+		}
+
+	
 	@Override
 	public String getId() {
 		return ID;
@@ -234,8 +259,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(final OsmandApplication app) {
+		initializeRemoteControlRegistrationMethods();
+		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		if(am != null){
+			registerMediaListener(am);
+		}
 		return true;
 	}
+	
+	
+	
 
 	@Override
 	public void registerLayers(MapActivity activity) {
@@ -247,7 +280,35 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		activity.getMapView().addLayer(audioNotesLayer, 3.5f);
 		registerWidget(activity);
 	}
+
+
+	private void registerMediaListener(AudioManager am) {
+		
+		ComponentName receiver = new ComponentName(app.getPackageName(), 
+				MediaRemoteControlReceiver.class.getName());
+		try {
+            if (mRegisterMediaButtonEventReceiver == null) {
+                return;
+            }
+            mRegisterMediaButtonEventReceiver.invoke(am,
+                    receiver);
+        } catch (Exception ite) {
+        	log.error(ite.getMessage(), ite);
+        }
+	}
 	
+	private void unregisterMediaListener(AudioManager am) {
+		ComponentName receiver = new ComponentName(app.getPackageName(), MediaRemoteControlReceiver.class.getName());
+		try {
+			if (mUnregisterMediaButtonEventReceiver == null) {
+				return;
+			}
+			mUnregisterMediaButtonEventReceiver.invoke(am, receiver);
+		} catch (Exception ite) {
+			log.error(ite.getMessage(), ite);
+		}
+	}
+
 	
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
@@ -562,6 +623,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
+		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+		if(am != null){
+			unregisterMediaListener(am);
+		}
 	}
 	
 	@Override

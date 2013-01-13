@@ -40,7 +40,18 @@
     			<category android:name="android.intent.category.DEFAULT"/>
 				<category android:name="android.intent.category.BROWSABLE"/>
 			</intent-filter>
+			<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+		    <intent-filter>
+                <action android:name="android.intent.action.CAMERA_BUTTON" />
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+		 </receiver>
 		</activity>
+		<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
+		    <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+		 </receiver>
 		<activity android:name="net.osmand.plus.activities.SettingsActivity" android:label="@string/settings_activity" android:configChanges="keyboardHidden|orientation"></activity>
 		<activity android:name="net.osmand.plus.activities.search.SearchActivity" android:label="@string/search_activity" ></activity>
         <activity android:name="net.osmand.plus.activities.NavigatePointActivity"></activity>

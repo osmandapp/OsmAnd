@@ -12,10 +12,11 @@
         <activity
             android:name="net.osmand.srtmPlugin.SRTMPluginActivity"
             android:label="@string/app_name" >
+            <!-- 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>  -->
         </activity>
     </application>
 
