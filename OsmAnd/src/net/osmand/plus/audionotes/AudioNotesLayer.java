@@ -119,7 +119,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					if (itemId == R.string.recording_context_menu_play ||
 							itemId == R.string.recording_context_menu_show) {
-						playRecording(r);
+						plugin.playRecording(view.getContext(), r);
 					} else if (itemId == R.string.recording_context_menu_delete) {
 						deleteRecording(r);
 					}
@@ -133,79 +133,6 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 				adapter.registerItem(R.string.recording_context_menu_play, 0, listener, -1);
 			}
 			adapter.registerItem(R.string.recording_context_menu_delete, 0, listener, -1);
-		}
-	}
-	
-	private void playRecording(final Recording r) {
-		final MediaPlayer player = r.isPhoto() ? null : new MediaPlayer();
-		final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(view.getContext());
-		dlg.setPositiveButton(R.string.recording_open_external_player, new OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface v, int w) {
-				if(player == null) {
-					Intent vint = new Intent(Intent.ACTION_VIEW);
-					vint.setDataAndType(Uri.fromFile(r.file), "image/*");
-					vint.setFlags(0x10000000);
-					view.getContext().startActivity(vint);
-				} else {
-					if (player.isPlaying()) {
-						player.stop();
-					}
-					Intent vint = new Intent(Intent.ACTION_VIEW);
-					vint.setDataAndType(Uri.fromFile(r.file), "video/*");
-					vint.setFlags(0x10000000);
-					try {
-						view.getContext().startActivity(vint);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		});
-		dlg.setNegativeButton(R.string.default_buttons_cancel, new OnClickListener(){
-
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if(player != null && player.isPlaying()) {
-					player.stop();
-				}				
-				
-			}
-			
-		});
-		try {
-			if (r.isPhoto()) {
-				ImageView img = new ImageView(view.getContext());
-				Options opts = new Options();
-				opts.inSampleSize = 4;
-				int rot = r.getBitmapRotation();
-				Bitmap bmp = BitmapFactory.decodeFile(r.file.getAbsolutePath(), opts);
-				if (rot != 0) {
-					Matrix matrix = new Matrix();
-					matrix.postRotate(rot);
-					Bitmap resizedBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
-					bmp.recycle();
-					bmp = resizedBitmap;
-				}
-				img.setImageBitmap(bmp);
-				dlg.setView(img);
-				dlg.show();
-			} else {
-				dlg.setMessage(view.getContext().getString(R.string.recording_playing, r.getDescription(view.getContext())));
-				player.setDataSource(r.file.getAbsolutePath());
-				player.setOnPreparedListener(new OnPreparedListener() {
-
-					@Override
-					public void onPrepared(MediaPlayer mp) {
-						dlg.show();
-						player.start();
-					}
-				});
-				player.prepareAsync();
-			}
-		} catch (Exception e) {
-			AccessibleToast.makeText(view.getContext(), R.string.recording_can_not_be_played, Toast.LENGTH_SHORT).show();
 		}
 	}
 	

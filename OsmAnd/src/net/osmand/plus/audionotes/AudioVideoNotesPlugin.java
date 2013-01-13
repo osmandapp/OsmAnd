@@ -13,6 +13,7 @@ import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.LogUtil;
+import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.IndexConstants;
@@ -42,10 +43,16 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.BitmapFactory.Options;
 import android.hardware.Camera;
 import android.media.ExifInterface;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.ListPreference;
@@ -61,6 +68,7 @@ import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {
@@ -676,6 +684,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void contextMenuLocalIndexes(final LocalIndexesActivity la, LocalIndexInfo info, ContextMenuAdapter adapter) {
 		if (info.getType() == LocalIndexType.AV_DATA) {
 			final RecordingLocalIndexInfo ri = (RecordingLocalIndexInfo) info;
+			OnContextMenuClick listener = new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					playRecording(la, ri.rec);
+				}
+			};
+			if(ri.rec.isPhoto()) {
+				adapter.registerItem(R.string.recording_context_menu_show, 0, listener, -1);
+			} else {
+				adapter.registerItem(R.string.recording_context_menu_play, 0, listener, -1);
+			}
 			adapter.registerItem(R.string.show_location, 0, new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -703,5 +722,78 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return res;
 	}
 	
+	
+	public void playRecording(final Context ctx, final Recording r) {
+		final MediaPlayer player = r.isPhoto() ? null : new MediaPlayer();
+		final AccessibleAlertBuilder dlg = new AccessibleAlertBuilder(ctx);
+		dlg.setPositiveButton(R.string.recording_open_external_player, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface v, int w) {
+				if(player == null) {
+					Intent vint = new Intent(Intent.ACTION_VIEW);
+					vint.setDataAndType(Uri.fromFile(r.file), "image/*");
+					vint.setFlags(0x10000000);
+					ctx.startActivity(vint);
+				} else {
+					if (player.isPlaying()) {
+						player.stop();
+					}
+					Intent vint = new Intent(Intent.ACTION_VIEW);
+					vint.setDataAndType(Uri.fromFile(r.file), "video/*");
+					vint.setFlags(0x10000000);
+					try {
+						ctx.startActivity(vint);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		dlg.setNegativeButton(R.string.default_buttons_cancel, new OnClickListener(){
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if(player != null && player.isPlaying()) {
+					player.stop();
+				}				
+				
+			}
+			
+		});
+		try {
+			if (r.isPhoto()) {
+				ImageView img = new ImageView(ctx);
+				Options opts = new Options();
+				opts.inSampleSize = 4;
+				int rot = r.getBitmapRotation();
+				Bitmap bmp = BitmapFactory.decodeFile(r.file.getAbsolutePath(), opts);
+				if (rot != 0) {
+					Matrix matrix = new Matrix();
+					matrix.postRotate(rot);
+					Bitmap resizedBitmap = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, true);
+					bmp.recycle();
+					bmp = resizedBitmap;
+				}
+				img.setImageBitmap(bmp);
+				dlg.setView(img);
+				dlg.show();
+			} else {
+				dlg.setMessage(ctx.getString(R.string.recording_playing, r.getDescription(ctx)));
+				player.setDataSource(r.file.getAbsolutePath());
+				player.setOnPreparedListener(new OnPreparedListener() {
+
+					@Override
+					public void onPrepared(MediaPlayer mp) {
+						dlg.show();
+						player.start();
+					}
+				});
+				player.prepareAsync();
+			}
+		} catch (Exception e) {
+			AccessibleToast.makeText(ctx, R.string.recording_can_not_be_played, Toast.LENGTH_SHORT).show();
+		}
+	}
 
 }
