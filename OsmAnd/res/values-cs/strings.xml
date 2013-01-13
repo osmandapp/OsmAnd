@@ -582,7 +582,7 @@
   <string name="voice_data_initializing">Inicializuji hlasová data…</string>
   <string name="voice_data_not_supported">Nepodporovaná verze hlasových dat</string>
   <string name="voice_data_corrupted">Zvolené hlasové údaje jsou poškozené</string>
-  <string name="voice_data_unavailable">Současné hlasové údaje jsou nejsou dostupné</string>
+  <string name="voice_data_unavailable">Vybraná hlasová data jsou nedostupná</string>
   <string name="stop_routing">Zastavit navigaci</string>
   <string name="sd_unmounted">SD karta není dostupná.\nNeuvidíte mapu a nebudete moci ani nic najít.</string>
   <string name="sd_mounted_ro">SD karta má zakázaný zápis.\nMůžete prohlížet jen přednačtenou mapu a nelze stahovat mapy z internetu.</string>
@@ -1180,4 +1180,10 @@
     <string name="av_control_stop">zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>
     <string name="osmand_srtm_long_description_1000_chars">Tento modul umožňuje zobrazení vrstevnice v offline mapách OsmAnd. Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířk) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).</string>
+    <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
+    <string name="clear_dest_confirm">Opravdu chcete smazat cíl?</string>
+    <string name="recording_context_menu_show">Zobrazit</string>
+    <string name="recording_photo_description">Foto %1$s v %2$s</string>
+    <string name="av_def_action_picture">Vyfotit</string>
+    <string name="recording_context_menu_precord">Vyfotit</string>
     </resources>
