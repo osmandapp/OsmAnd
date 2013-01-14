@@ -1140,4 +1140,13 @@
     <string name="intermediate_points_change_order">Más sorrend</string>
     <string name="dropbox_plugin_description">A Dropbox bővítmény lehetővé teszi a rögzített útvonalak és hang/videojegyzetek szinkronizálását a Dropbox fiókoddal.</string>
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
+    <string name="local_indexes_cat_av">Hang/Videó adat</string>
+    <string name="stop_routing_confirm">Biztosan megállítod a navigációt?</string>
+    <string name="clear_dest_confirm">"Biztosan törlöd  a célpontot?"</string>
+    <string name="precise_routing_mode_descr">Pontos útvonaltervező engedélyezése hibamentes, pontos útvonalak tervezéséhez. Jelenleg lassú, kis távolságokra működik és nem használja a natív könyvárat.</string>
+    <string name="precise_routing_mode">Pontos útvonaltervezés (kísérleti)</string>
+    <string name="recording_context_menu_show">Mutat</string>
+    <string name="recording_photo_description">Fénykép %1$s készült: %2$s</string>
+    <string name="av_def_action_picture">Fénykép készítése</string>
+    <string name="recording_context_menu_precord">Fénykép készítése</string>
     </resources>
