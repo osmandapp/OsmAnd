@@ -1110,4 +1110,8 @@
     <string name="dropbox_plugin_name">Плагин Dropbox</string>
     <string name="osmand_srtm_long_description_1000_chars">Этот плагин предоставляет контурные линии, которые могут отображаться в оффлайн картах OsmAnd. Глобальные данные (между 70 градусов на севере и 70 градусов на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), инструментом визуализации Terra, флагманского спутника Земли системы наблюдения NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), космических систем Японии (J-spacesystems).</string>
     <string name="recording_photo_description">Фото %1$s в %2$s</string>
+    <string name="local_indexes_cat_av">Аудио/Видео данные</string>
+    <string name="stop_routing_confirm">Вы уверены, что хотите остановить навигацию?</string>
+    <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения?</string>
+    <string name="precise_routing_mode">Точный маршрут (alpha)</string>
     </resources>
