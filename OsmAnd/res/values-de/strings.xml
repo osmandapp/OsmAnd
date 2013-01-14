@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
@@ -1196,7 +1196,7 @@
     <string name="recording_unavailable">nicht verfügbar</string>
     <string name="recording_context_menu_play">Abspielen</string>
     <string name="recording_default_name">aufnehmen</string>
-    <string name="av_control_stop">stoppen</string>
+    <string name="av_control_stop">AV</string>
     <string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Video/Audio-Notizen mit Ihrem Dropbox-Zugang.</string>
     <string name="dropbox_plugin_name">Dropbox-Plugin</string>
     <string name="animate_routing_using_gpx">Wollen Sie die bestehende GPX-Datei verwenden?</string>
@@ -1212,13 +1212,13 @@
     <string name="layer_recordings">Aufnahme-Ebene</string>
     <string name="recording_can_not_be_played">Aufnahme kann nicht abgespielt werden</string>
     <string name="recording_context_menu_delete">Aufnahme löschen</string>
-    <string name="av_control_start">aufnehmen</string>
+    <string name="av_control_start">AV</string>
     <string name="map_widget_av_notes">Audio-Notiz</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-Plugin für Offline-Höhenlinien</string>
     <string name="use_clear_distance_measurement">Klicken Sie nochmal zum Löschen der Meßpunkte.</string>
     <string name="use_distance_measurement">Tippen Sie, um einen Punkt zu erstellen, Drücken und Halten Sie, um vorhergehende Punkte zu Löschen, klicken Sie auf das Meß-Widget zum Verlassen.</string>
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
-    <string name="monitoring_control_stop">Stopp</string>
+    <string name="monitoring_control_stop">GPX</string>
     <string name="map_widget_audionotes">Audio-Notiz</string>
     <string name="audionotes_plugin_description">Audio-Notiz unterwegs aufnehmen</string>
     <string name="audionotes_plugin_name">Audio-Notiz-Plugin</string>

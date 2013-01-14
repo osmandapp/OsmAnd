@@ -57,8 +57,8 @@
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %2$s at %3$s</string>
     <string name="recording_default_name">recording</string>
-    <string name="av_control_stop">stop</string>
-    <string name="av_control_start">rec</string>
+    <string name="av_control_stop">AV</string>
+    <string name="av_control_start">AV</string>
     <string name="map_widget_av_notes">Audio notes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
@@ -93,7 +93,7 @@
 		\n\tIn order to achieve this, simply download the file WW15MGH.DAC via Offline Data Manager (original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="map_widget_max_speed">Speed limit</string>
-    <string name="monitoring_control_start">start</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
     <string name="route_descr_from_to">From : %1$s\nTo : %2$s</string>

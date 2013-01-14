@@ -395,6 +395,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void setRecordListener(final TextInfoControl recordPlaceControl, final MapActivity mapActivity) {
 		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
+		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
