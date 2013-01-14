@@ -108,4 +108,17 @@
     <string name="add_as_first_destination_point">Tilføj som første waypoint</string>
     <string name="replace_destination_point">Udskift destinationspunktet</string>
     <string name="new_destination_point_dialog">Du har allerede sat en destination.</string>
+    <string name="local_indexes_cat_av">Lyd/Video data</string>
+    <string name="stop_routing_confirm">Er du sikker på, du vil stoppe navigationen?</string>
+    <string name="clear_dest_confirm">Er du sikker på, du vil rydde dit destinations punkt?</string>
+    <string name="precise_routing_mode_descr">Aktivere nøjagtige rute til at beregne en præcise ruter uden fejl. Det er meget begrænset af afstand og bruger ikke det indbyggede bibliotek.</string>
+    <string name="precise_routing_mode">Nøjagtige rute (alpha)</string>
+    <string name="recording_context_menu_show">Vis</string>
+    <string name="recording_photo_description">Foto %1$s ved %2$s</string>
+    <string name="av_def_action_picture">Tage et foto</string>
+    <string name="recording_context_menu_precord">Tage et foto</string>
+    <string name="target_point">Waypoint %1$s</string>
+    <string name="intermediate_point_too_far">Waypoint %1$s er for langt fra nærmeste vej.</string>
+    <string name="arrived_at_intermediate_point">Du er ankommet til dit waypoint</string>
+    <string name="context_menu_item_intermediate_point">Tilføj som waypoint</string>
     </resources>
