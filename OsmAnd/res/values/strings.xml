@@ -42,7 +42,7 @@
     <string name="recording_delete_confirm">Do you want to remove this recording?</string>
     <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0 :
 		\n\t* Distance calculator plugin
-		\n\t* Audio notes plugin
+		\n\t* Audio/video notes plugin
 		\n\t* Contour lines plugin
 		\n\t* Bug fixes
 		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
