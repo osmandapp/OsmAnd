@@ -598,7 +598,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.start();
 		mediaRec = mr;
 		recordControl.setText(app.getString(R.string.av_control_stop), "");
-		recordControl.setIcon(app.getDrawable(R.drawable.monitoring_rec_big));
+		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_big));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final MapStackControl par = mil.getRightStack();
 		final boolean contains = par.getAllViews().contains(recordControl);
