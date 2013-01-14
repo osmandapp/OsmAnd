@@ -36,7 +36,7 @@
     <string name="av_settings">Audio/video settings </string>
     <string name="recording_error">Error ocurred while recording </string>
     <string name="recording_camera_not_available">Camera is not available</string>
-    <string name="recording_is_recorded">Audio/video is being recorded. To stop it press stop button on the widget.</string>
+    <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Do you want to remove this recording?</string>

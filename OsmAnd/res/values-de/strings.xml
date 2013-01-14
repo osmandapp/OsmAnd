@@ -1205,7 +1205,7 @@
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
     <string name="av_settings">"Audio/Video-Einstellungen "</string>
     <string name="recording_error">"Fehler bei der Aufnahme "</string>
-    <string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie den Button Stopp im Widget.</string>
+    <string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das AV Widget.</string>
     <string name="recording_playing">Aus der angegebenen Aufnahme wird Audio abgespielt.\n%1$s</string>
     <string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
     <string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
