@@ -677,7 +677,7 @@
   <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości renderowania.</string>
   <string name="plugins_screen">Zarządzanie wtyczkami</string>
   <string name="select_plugin_to_activate">Dotknij wtyczki, aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
-  <string name="prefs_plugins_descr">Wtyczki dostarczają dodatkowe ustawienia oraz funkcjonalność taką jak kafelki map, monitorowanie, tryb uśpienia, ułatwienia dostępu i inne.</string>
+  <string name="prefs_plugins_descr">Wtyczki dostarczają dodatkowe opcje oraz funkcje takie jak mapy kafelkowe, monitorowanie, tryb uśpienia, ułatwienia dostępu i inne.</string>
   <string name="prefs_plugins">Zarządzanie wtyczkami</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 :
 \n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach "</string>
@@ -1125,6 +1125,6 @@
     <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
     <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy?</string>
     <string name="precise_routing_mode">Precyzyjna nawigacja (alpha)</string>
-    <string name="precise_routing_mode_descr">Włącz precyzyjną nawigację, by obliczać precyzyjne trasy bez błędów. Funkcja jest limitowana przez odległość i nie używa natywnej biblioteki.</string>
+    <string name="precise_routing_mode_descr">Włącz, by obliczać precyzyjne trasy bez błędów. Funkcja jest ograniczona przez odległość i nie korzysta z natywnej biblioteki.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
     </resources>
