@@ -1097,7 +1097,7 @@
     <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Offline adat letöltése -&gt; menü - Egyéb térképek) a megadott régiókhoz és használatukat offline térképekkel.</string>
     <string name="srtm_plugin_attribution">Az ASTER a METIS és a NASA terméke</string>
     <string name="osmodroid_plugin_description">Élő útvonalrögzítési szolgáltatást tesz lehetővé. Az OsMoDroid bővítmény használatához telepített OsModroid alkalmazásra van szükség. További információk: http://esya.ru</string>
-    <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg a vezérlő stop gombját.</string>
+    <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg az A/V vezérlő stop gombját.</string>
     <string name="recording_playing">A hangfelvétel lejátszása elindult…\n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
     <string name="recording_delete_confirm">Szeretnéd törölni a felvételt?</string>
@@ -1112,7 +1112,7 @@
     <string name="recording_context_menu_delete">Felvétel törlése</string>
     <string name="recording_context_menu_play">Lejátszás</string>
     <string name="recording_default_name">felvétel</string>
-    <string name="av_control_start">felv.</string>
+    <string name="av_control_start">A/V</string>
     <string name="map_widget_av_notes">Hangjegyzetek</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd bővítmény offline szintvonalakhoz</string>
     <string name="use_clear_distance_measurement">Kattints még egyszer a mérési pontok törléséhez.</string>
@@ -1125,7 +1125,7 @@
     <string name="av_video_format">Videó kimeneti formátuma</string>
     <string name="av_use_external_recorder_descr">Rendszerprogram használata videofelvételre</string>
     <string name="av_use_external_recorder">Külső felvevő használata</string>
-    <string name="av_settings_descr">Hang- és videóbeállítások</string>
+    <string name="av_settings_descr">Hang- és videofelvétel beállításai</string>
     <string name="av_settings">"Hang/videóbeállítások "</string>
     <string name="recording_error">"A felvétel közben hiba történt "</string>
     <string name="recording_camera_not_available">A kamera nem elérhető</string>
