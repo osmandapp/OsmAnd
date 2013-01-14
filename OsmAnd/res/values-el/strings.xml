@@ -1169,4 +1169,5 @@
     <string name="av_def_action_picture">Πάρτε μια φωτογραφία</string>
     <string name="recording_context_menu_precord">Πάρτε μια φωτογραφία</string>
     <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας...\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
+    <string name="local_indexes_cat_av">Δεδομένα Ήχου/Εικόνας</string>
     </resources>
