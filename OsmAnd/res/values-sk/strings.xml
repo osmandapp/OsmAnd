@@ -1181,4 +1181,5 @@
     <string name="dropbox_plugin_name">Zásuvný modul pre Dropbox</string>
     <string name="stop_routing_confirm">Naozaj chcete vypnúť navigáciu?</string>
     <string name="clear_dest_confirm">Naozaj chcete zmazať váš cieľový bod?</string>
+    <string name="local_indexes_cat_av">Zvukové/video údaje</string>
     </resources>
