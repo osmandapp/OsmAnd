@@ -1056,6 +1056,10 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		return mapLayers.getLocationLayer().getLastKnownLocation();
 	}
 	
+	public float getLastSensorRotation(){
+		return previousSensorValue;
+	}
+	
 	public RouteDataObject getLastRouteDataObject(){
 		return currentPositionHelper.getLastKnownRouteSegment(getLastKnownLocation());
 	}

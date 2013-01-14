@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
@@ -87,9 +90,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	
 	private DataTileManager<Recording> recordings = new DataTileManager<AudioVideoNotesPlugin.Recording>(14);
+	private Map<String, Recording> recordingByFileName = new LinkedHashMap<String, Recording>();
 	private AudioNotesLayer audioNotesLayer;
 	private MapActivity activity;
 	private MediaRecorder mediaRec;
+	private File lastTakingPhoto;
 	
 	public static class Recording {
 		public Recording(File f) {
@@ -132,17 +137,27 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public boolean isPhoto() {
 			return file.getName().endsWith(IMG_EXTENSION);
 		}
-		
-		public void updatePhotoInformation(){
-			// FIXME
-//			ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-//			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE, latitude);
-//			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE_REF, "N");
-//	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE, longitude);
-//	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF, "E");
-//	        exif.setAttribute("GPSImgDirectionRef", "Magnetic North");
-//	        exif.setAttribute("GPSImgDirection", ((float) rot)+"");
-//	        exif.saveAttributes();
+
+		private String convertDegToExifRational(double l) {
+			if(l < 0){
+				l = -l;
+			}
+			String s = ((int)l)+"/1";
+			int mm = (int) ((l - ((int)l)) * 1000f);
+			s += ","+mm+"/1000";
+			return s +",0/1";
+		}
+		public void updatePhotoInformation(double lat, double lon, double rot) throws IOException{
+			ExifInterface exif = new ExifInterface(file.getAbsolutePath());
+			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE, convertDegToExifRational(lat));
+			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE_REF, lat > 0 ?"N" :"S");
+	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE, convertDegToExifRational(lon));
+	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF, lon > 0?"E" : "W");
+	        if(!Double.isNaN(rot)){
+	        	exif.setAttribute("GPSImgDirectionRef", "Magnetic North");
+	        	exif.setAttribute("GPSImgDirection", ((int) rot)+"");
+	        }
+	        exif.saveAttributes();
 		}
 		
 		private int getExifOrientation() {
@@ -567,6 +582,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void takePhoto(double lat, double lon, final MapActivity mapActivity) {
 		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
+		lastTakingPhoto = f;
 		takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
 		try {
 			mapActivity.startActivityForResult(takePictureIntent, 205);
@@ -604,6 +620,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 	
 	public void indexFile(File f){
+		boolean oldFileExist = recordingByFileName.containsKey(f.getName());
+		if(oldFileExist){
+			return;
+		}
 		Recording r = new Recording(f);
 		String encodeName = f.getName();
 		int i = encodeName.indexOf('-');
@@ -618,7 +638,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		LatLon l = MapUtils.decodeShortLocString(encodeName);
 		r.lat = l.getLatitude();
 		r.lon = l.getLongitude();
+		if(lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName())) {
+			float rot = activity.getLastSensorRotation();
+			try {
+				r.updatePhotoInformation(r.lat, r.lon, rot == 0 ? Double.NaN : rot);
+			} catch (IOException e) {
+				log.error("Error updating EXIF information " + e.getMessage(), e);
+			}
+			lastTakingPhoto = null;
+		}
 		recordings.registerObject(r.lat, r.lon, r);
+		recordingByFileName.put(f.getName(), r);
 	}
 
 	@Override
@@ -631,9 +661,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	@Override
 	public List<String> indexingFiles(IProgress progress) {
+		return indexingFiles(progress, true);
+	}
+		
+	public List<String> indexingFiles(IProgress progress, boolean reIndexAndKeepOld) {
 		File avPath = app.getAppPath(IndexConstants.AV_INDEX_DIR);
 		if (avPath.canRead()) {
-			recordings.clear();
+			if(!reIndexAndKeepOld) {
+				recordings.clear();
+				recordingByFileName.clear();
+			}
 			File[] files = avPath.listFiles();
 			if (files != null) {
 				for (File f : files) {
@@ -652,9 +689,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public DataTileManager<Recording> getRecordings() {
 		return recordings;
 	}
+	
 
 	public void deleteRecording(Recording r) {
 		recordings.unregisterObject(r.lat, r.lon, r);
+		recordingByFileName.remove(r.file.getName());
 		Algoritms.removeAllFiles(r.file);
 		activity.getMapLayers().getContextMenuLayer().setLocation(null, "");
 		activity.getMapView().refreshMap();
@@ -692,7 +731,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {
 		if(requestCode == 205) {
-			indexingFiles(null);
+			indexingFiles(null, true);
 		}
 	}
 	
@@ -772,8 +811,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 	
+	public Collection<Recording> getAllRecordings(){
+		return recordingByFileName.values();
+	}
+	
 	private Recording[] getRecordingsSorted() {
-		List<Recording> allObjects = recordings.getAllObjects();
+		Collection<Recording> allObjects = getAllRecordings();
 		Recording[] res = allObjects.toArray(new Recording[allObjects.size()]);
 		Arrays.sort(res, new Comparator<Recording>() {
 

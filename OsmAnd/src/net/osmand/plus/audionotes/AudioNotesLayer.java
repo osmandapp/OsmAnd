@@ -173,9 +173,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		int ey = (int) point.y;
 		int compare = getRadiusPoi(view.getZoom());
 		int radius = getRadiusPoi(view.getZoom()) * 3 / 2;
-		List<Recording> objects = plugin.getRecordings().getAllObjects();
-		for (int i = 0; i < objects.size(); i++) {
-			Recording n = objects.get(i);
+		for (Recording n : plugin.getAllRecordings()) {
 			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
 			if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
