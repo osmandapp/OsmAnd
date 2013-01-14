@@ -1133,4 +1133,5 @@
     <string name="clear_dest_confirm">Weet je zeker dat je de bestemming wilt wissen?</string>
     <string name="precise_routing_mode_descr">Schakel nauwkeurig routeren in om precieze routes te berekenen zonder fouten. Het is zeer beperkt in afstand en maakt geen gebruik van een native library.</string>
     <string name="precise_routing_mode">Nauwkeurig routeren (alpha)</string>
+    <string name="local_indexes_cat_av">Audio/Video gegevens</string>
     </resources>
