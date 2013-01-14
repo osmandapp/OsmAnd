@@ -383,10 +383,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null ) {
 			recordControl = new TextInfoControl(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
-			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_small));
+			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl,
-					0/*R.drawable.widget_parking*/, R.string.map_widget_av_notes, "audionotes", false,
+					R.drawable.widget_tracking, R.string.map_widget_av_notes, "audionotes", false,
 					EnumSet.allOf(ApplicationMode.class),
 					EnumSet.noneOf(ApplicationMode.class), 22);
 			mapInfoLayer.recreateControls();
@@ -598,6 +598,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.start();
 		mediaRec = mr;
 		recordControl.setText(app.getString(R.string.av_control_stop), "");
+		recordControl.setIcon(app.getDrawable(R.drawable.monitoring_rec_big));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final MapStackControl par = mil.getRightStack();
 		final boolean contains = par.getAllViews().contains(recordControl);
