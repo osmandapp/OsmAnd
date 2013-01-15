@@ -142,10 +142,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			if(l < 0){
 				l = -l;
 			}
-			String s = ((int)l)+"/1";
-			int mm = (int) ((l - ((int)l)) * 1000f);
-			s += ","+mm+"/1000";
-			return s +",0/1";
+			String s = ((int) l) + "/1,"; //degrees
+			l = (l - ((int) l)) * 60.0;
+			s+= (int) l + "/1,"; //minutes
+			l = (l - ((int) l)) * 60000.0;
+			s+= (int) l + "/1000"; //seconds
+			//log.info("deg rational: " + s);
+			return s;
 		}
 		public void updatePhotoInformation(double lat, double lon, double rot) throws IOException{
 			ExifInterface exif = new ExifInterface(file.getAbsolutePath());
@@ -154,8 +157,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE, convertDegToExifRational(lon));
 	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF, lon > 0?"E" : "W");
 	        if(!Double.isNaN(rot)){
-	        	exif.setAttribute("GPSImgDirectionRef", "Magnetic North");
-	        	exif.setAttribute("GPSImgDirection", ((int) rot)+"");
+	        	exif.setAttribute("GPSImgDirectionRef", "T"); //true north
+	        	String rotString = (int) (rot * 100.0) + "/100";
+	        	//log.info("rot rational: " + rotString);
+	        	exif.setAttribute("GPSImgDirection", rotString);
 	        }
 	        exif.saveAttributes();
 		}
