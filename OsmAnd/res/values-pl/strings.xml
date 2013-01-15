@@ -265,7 +265,7 @@
   <string name="select_all">Zaznacz wszystko</string>
   <string name="reload">Odśwież</string>
   <string name="general_settings_descr">Konfiguruj ogólne ustawienia</string>
-  <string name="general_settings">Ogólne ustawienia</string>
+  <string name="general_settings">Ustawienia główne</string>
   <string name="index_settings_descr">Przeglądaj, pobieraj oraz zarządzaj mapami offline</string>
   <string name="index_settings">Dane offline</string>
   <string name="osmand_service">Tryb uśpienia</string>
@@ -507,7 +507,7 @@
   <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Wybierz profil użytkownika zawierający niestandardowe mapy oraz ustawienia nawigacji.</string>
+  <string name="settings_preset_descr">Wybierz profil użytkownika zawierający specyficzne ustawienia nawigacji i mapy.</string>
   <string name="settings_preset">Profil użytkownika</string>
   <string name="settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
@@ -1124,7 +1124,7 @@
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
     <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
     <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy?</string>
-    <string name="precise_routing_mode">Precyzyjna nawigacja (alpha)</string>
-    <string name="precise_routing_mode_descr">Włącz, by obliczać precyzyjne trasy bez błędów. Funkcja jest ograniczona przez odległość i nie korzysta z natywnej biblioteki.</string>
+    <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
+    <string name="precise_routing_mode_descr">Włącz, by obliczać precyzyjne trasy bez błędów. Funkcja ograniczona jest odległością i nie używa natywnej biblioteki.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
     </resources>
