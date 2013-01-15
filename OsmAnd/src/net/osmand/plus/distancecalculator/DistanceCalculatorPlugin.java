@@ -91,7 +91,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private void updateText() {
 		if (distanceControl != null) {
 			if (distanceMeasurementMode == 0) {
-				distanceControl.setText(app.getString(R.string.monitoring_control_start), "");
+				distanceControl.setText(app.getString(R.string.dist_control_start), "");
 			} else {
 				float dist = 0;
 				for (int j = 1; j < measurementPoints.size(); j++) {

@@ -9,6 +9,7 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="dist_control_start">Start</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
     <string name="clear_dest_confirm">Are you sure you want to clear your destination point?</string>
@@ -62,10 +63,10 @@
     <string name="map_widget_av_notes">Audio/video notes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
-    <string name="osmand_distance_plugin_description">Measure a distance between two and many points. Add points by a short click and remove by a long press.</string>
+    <string name="osmand_distance_plugin_description">Measure the distance between two or more points. Add points by a short click and remove by a long press.</string>
     <string name="osmand_distance_plugin_name">Distance calculator</string>
     <string name="use_clear_distance_measurement">Click one more time to clear measurement points.</string>
-    <string name="use_distance_measurement">Tap to make a point, press and hold to delete previous point, click on measurement widget to exit.</string>
+    <string name="use_distance_measurement">Tap to mark a point, press and hold to delete previous points, click on measurement widget to exit.</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
     <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location...\" to assign a note to the specified location</string>
     <string name="monitoring_control_stop">stop</string>

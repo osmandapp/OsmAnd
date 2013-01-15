@@ -1,5 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="dist_control_start">Start</string>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
@@ -1179,7 +1180,7 @@
     <string name="srtm_plugin_name">Höhenlinien-Plugin</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
-    <string name="osmand_distance_plugin_description">Entfernung zwischen zwei und vielen Punkten messen. Start/Ziel antippen und löschen durch lang drücken.</string>
+    <string name="osmand_distance_plugin_description">Entfernung zwischen zwei oder mehr Punkten messen. Start/Ziel antippen und löschen durch langes drücken.</string>
 	<string name="osmand_distance_plugin_name">Entfernungsmesser</string>
 <string name="av_def_action_video">Video aufzeichnen</string>
     <string name="av_def_action_audio">Audio aufnehmen</string>
