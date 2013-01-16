@@ -1060,7 +1060,7 @@
 	<string name="tip_altitude_offset_t">"\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84 systeem. De conversie naar locale systemen vereist een positie-afhankelijke correctie.
 \n\tEen nauwkeuriger benadering voor deze systemen is de EGM96 referentie. OsmAnd ondersteunt nu automatische hoogte-weergave in het EGM96 systeem.
 \n\tOm dit te bereiken kan je het bestand WW15MGH.DAC downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="monitoring_control_start">start</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">De OsMoDroid plugin is een oude versie en moet ge-update worden.</string>
