@@ -1179,4 +1179,5 @@
     <string name="precise_routing_mode_descr">יש להפעיל ניתוב מדויק כדי לחשב נתיבים מדויקים ללא סטיות. התכונה מוגבלת מאוד במרחק ואין לה ספרייה פנימית.</string>
     <string name="precise_routing_mode">ניתוב מדויק (אלפא)</string>
     <string name="local_indexes_cat_av">נתוני שמע/וידאו</string>
+    <string name="dist_control_start">התחלה</string>
     </resources>
