@@ -1134,4 +1134,5 @@
     <string name="precise_routing_mode_descr">Omogočite natančno usmerjanje za izračun natančnih poti brez spodrsljajev. To je zelo omejeno z razdaljo in ne uporablja domače knjižnice.</string>
     <string name="precise_routing_mode">Natančno usmerjanje (alfa)</string>
     <string name="local_indexes_cat_av">Podatki zvoka/videa</string>
+    <string name="dist_control_start">Začni</string>
     </resources>
