@@ -1127,5 +1127,5 @@
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz, by obliczać precyzyjne trasy bez błędów. Funkcja ograniczona jest odległością i nie używa natywnej biblioteki.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
-    <string name="dist_control_start">"Start "</string>
+    <string name="dist_control_start">Start</string>
     </resources>
