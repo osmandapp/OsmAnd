@@ -1134,5 +1134,5 @@
     <string name="precise_routing_mode_descr">Schakel nauwkeurige routeberekening in om precieze routes te berekenen zonder fouten. Het is zeer beperkt in afstand en maakt geen gebruik van een native library.</string>
     <string name="precise_routing_mode">Nauwkeurige routeberekening (alpha)</string>
     <string name="local_indexes_cat_av">Audio/Video gegevens</string>
-    <string name="dist_control_start">Begin</string>
+    <string name="dist_control_start">Start</string>
     </resources>
