@@ -100,7 +100,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean drawInScreenPixels() {
-		return false;
+		return true;
 	}
 	
 	@Override
