@@ -291,7 +291,7 @@
   <string name="installing_new_resources">Распаковываются новые данные…</string>
   <string name="internet_connection_required_for_online_route">Вы собираетесь использовать Интернет-маршрутизацию, но у вас нет активного Интернет-соединения.</string>
   <string name="tts_language_not_supported_title">Язык не поддерживается</string>
-  <string name="tts_language_not_supported">Выбранный язык не поддерживается активным Android TTS (text-to-speech). Будет использован язык по-умолчанию. Хотите найти в Маркете другой TTS?</string>
+  <string name="tts_language_not_supported">Выбранный язык не поддерживается активным Android TTS (text-to-speech). Будет использован язык по-умолчанию. Хотите найти в Маркете другой TTS? Иначе будет использоваться предустановленный язык TTS.</string>
   <string name="tts_missing_language_data_title">Данные отсутствуют</string>
   <string name="tts_missing_language_data">Для данного языка отсутствуют данные TTS. Хотите загрузить их из Маркета?</string>
   <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
@@ -1114,4 +1114,5 @@
     <string name="stop_routing_confirm">Вы уверены, что хотите остановить навигацию?</string>
     <string name="clear_dest_confirm">Вы уверены, что хотите удалить пункт назначения?</string>
     <string name="precise_routing_mode">Точный маршрут (alpha)</string>
+    <string name="dist_control_start">Старт</string>
     </resources>
