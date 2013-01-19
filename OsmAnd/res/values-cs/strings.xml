@@ -1186,4 +1186,8 @@
     <string name="recording_photo_description">Foto %1$s v %2$s</string>
     <string name="av_def_action_picture">Vyfotit</string>
     <string name="recording_context_menu_precord">Vyfotit</string>
+    <string name="local_indexes_cat_av">Zvuková a video data</string>
+    <string name="precise_routing_mode_descr">Umožní výpočet přesné cesty pro navigaci. Velmi omezené vzdáleností a nepoužívá native library.</string>
+    <string name="precise_routing_mode">Přesná navigace (alfa)</string>
+    <string name="dist_control_start">Start</string>
     </resources>
