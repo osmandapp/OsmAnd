@@ -348,21 +348,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
 			Object selectedObj) {
-		adapter.registerItem(R.string.recording_context_menu_arecord, 0, new OnContextMenuClick() {
+		adapter.registerItem(R.string.recording_context_menu_arecord, R.drawable.monitoring_rec_big, new OnContextMenuClick() {
 			
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				recordAudio(latitude, longitude, mapActivity);
 			}
 		}, 6);
-		adapter.registerItem(R.string.recording_context_menu_vrecord, 0, new OnContextMenuClick() {
+		adapter.registerItem(R.string.recording_context_menu_vrecord, R.drawable.monitoring_rec_big, new OnContextMenuClick() {
 			
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				recordVideo(latitude, longitude, mapActivity);
 			}
 		}, 7);
-		adapter.registerItem(R.string.recording_context_menu_precord, 0, new OnContextMenuClick() {
+		adapter.registerItem(R.string.recording_context_menu_precord, R.drawable.list_context_menu_precord, new OnContextMenuClick() {
 			
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -802,11 +802,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			};
 			if(ri.rec.isPhoto()) {
-				adapter.registerItem(R.string.recording_context_menu_show, 0, listener, 0);
+				adapter.registerItem(R.string.recording_context_menu_show, R.drawable.list_context_menu_play, listener, 0);
 			} else {
-				adapter.registerItem(R.string.recording_context_menu_play, 0, listener, 0);
+				adapter.registerItem(R.string.recording_context_menu_play, R.drawable.list_context_menu_play, listener, 0);
 			}
-			adapter.registerItem(R.string.show_location, 0, new OnContextMenuClick() {
+			adapter.registerItem(R.string.show_location, R.drawable.list_activities_show_on_map, new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					app.getSettings().SHOW_RECORDINGS.set(true);
