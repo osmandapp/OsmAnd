@@ -806,7 +806,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			} else {
 				adapter.registerItem(R.string.recording_context_menu_play, R.drawable.list_context_menu_play, listener, 0);
 			}
-			adapter.registerItem(R.string.show_location, R.drawable.list_activities_show_on_map, new OnContextMenuClick() {
+			adapter.registerItem(R.string.show_location, 0, new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					app.getSettings().SHOW_RECORDINGS.set(true);
