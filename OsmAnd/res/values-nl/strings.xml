@@ -7,8 +7,8 @@
   <string name="avoid_ferries">Vermijd veerboten</string>
   <string name="avoid_in_routing_title">Vermijd…</string>
   <string name="avoid_in_routing_descr">Vermijd tolwegen, onverharde wegen, veerboten</string>
-  <string name="show_warnings_title">Toon alarm…</string>
-  <string name="show_warnings_descr">Toon snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
+  <string name="show_warnings_title">Toon waarschuwing…</string>
+  <string name="show_warnings_descr">Toon rijstroken, snelheidslimieten, snelheidscamera\'s en verkeersdrempels</string>
   <string name="map_widget_fluorescent">Fluorescerende routes</string>
   <string name="map_widget_show_ruler">Lineaal</string>
   <string name="map_widget_appearance">Overige:</string>
@@ -320,9 +320,9 @@
   <string name="select_tile_source_to_install">Selecteer (raster) kaarten om te installeren of te actualiseren</string>
   <string name="internet_not_available">De benodigde Internetverbinding voor deze actie is niet beschikbaar</string>
   <string name="install_more">Installeer meer…</string>
-  <string name="tip_update_index">Actualisatie van Offline Gegevens</string>
-  <string name="tip_update_index_t">\tHet is essentieel, dat de kaartgegevens up-to-date zijn. OsmAnd bevat een download manager, die kan controleren of er updates van offline-gegevens beschikbaar zijn.
-\n\tOm te controleren op updates, ga naar \'Instellingen\' -&gt; \'Offline-gegevens\' -&gt; \'Download offline-gegevens\'. Nadat een regiolijst van het Internet is opgehaald, selecteer de optie \'Menu\' -&gt; \'Filter gedownloade gegevens\' om alleen de gegevens te zien, die al op je apparaat aanwezig zijn.
+  <string name="tip_update_index">Bijwerken van offline gegevens</string>
+  <string name="tip_update_index_t">\tHet is belangrijk dat de kaartgegevens up-to-date zijn. OsmAnd heeft een download-manager die kan controleren of er updates beschikbaar zijn.
+\n\tOm te controleren op updates, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'. Tik op de menuknop en kies \'Toon gedownloade\' om de gegevens te zien die al op je apparaat aanwezig zijn.
 \n\tDe beschikbaarheid van updates wordt weergegeven in de volgende kleuren:
 \n\t\'Groen\' - De gegevens op je apparaat en op de server zijn identiek
 \n\t\'Blauw\' - Er is een update beschikbaar op de server
@@ -636,7 +636,7 @@
   <string name="update_existing">Vervang</string>
   <string name="only_show">Alleen tonen</string>
   <string name="follow">Volg</string>
-  <string name="recalculate_route_to_your_location">Selecteer transportmethode (optioneel):</string>
+  <string name="recalculate_route_to_your_location">Soort vervoer:</string>
   <string name="mark_final_location_first">Selecteer eerst een bestemming</string>
   <string name="get_directions">Aanwijzingen</string>
   <string name="show_gps_status">Toon GPS Status</string>
@@ -734,7 +734,7 @@
   <string name="search_activity">Zoeken</string>
   <string name="searchpoi_activity">Selecteer interessepunt</string>
   <string name="search_POI_level_btn">Zoek meer</string>
-  <string name="incremental_search_city">Zoek meer steden</string>
+  <string name="incremental_search_city">Zoek stad</string>
   <string name="incremental_search_street">Zoek meer straten</string>
   <string name="incremental_search_building">Zoek meer gebouwen</string>
   <string name="choose_available_region">Selecteer een regio van de lijst</string>
@@ -925,7 +925,7 @@
   <string name="osmand_parking_hours">Uur</string>
   <string name="osmand_parking_minutes">Minuten</string>
   <string name="osmand_parking_position_description_add_time">De auto werd geparkeerd om:</string>
-  <string name="use_compass_navigation_descr">Gebruik het kompas bij navigatie als de richting niet gedetecteerd is</string>
+  <string name="use_compass_navigation_descr">Gebruik het kompas als de richting niet gedetecteerd is</string>
   <string name="use_compass_navigation">Gebruik kompas</string>
   <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
   <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
@@ -965,7 +965,7 @@
   <string name="bg_service_sleep_mode_on">Slaap modus\nuitzetten</string>
 <string name="email">email</string>
 <string name="filterpoi_activity">Creëer interessepunt filter</string>
-<string name="select_navigation_mode">Selecteer transportmethode</string>
+<string name="select_navigation_mode">Kies soort vervoer::</string>
 <string name="day_night_info_description">Zonsopgang : %1$s \nZonsondergang : %2$s</string>
 <string name="day_night_info">Dag/nacht info</string>
 <string name="map_widget_day_night">Dag/nacht kaart</string>
@@ -990,16 +990,16 @@
 <string name="tip_app_mode_t_v2">"\tOsmAnd ondersteunt verschillende transport-profielen.↵
 \n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of tijdens het creëren een route. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Android)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. Belangrijke eigenschappen: - offline data, configureerbare opslagmap - compacte vectorkaarten voor de hele wereld - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen met instelbare transpantie - offline navigatie voor korte afstanden (experimenteel) Beperkingen van OsmAnd Free: - het aantal kaarten dat je kan downloaden - geen toegang tot Wikipedia offline interessepunten OsmAnd wordt nog actief ontwikkeld en rekent op ondersteuning via donaties voor de verdere ontwikkeling "</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van vele popupaire Open Street Map gegevens. Alle kaartegegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. OsmAnd+ is a donatie app. Door het te kopen ondersteun je het project en ontvang je de laatste updates.↵ ↵ Belangrijke eigenschappen: - nieuwe offline Wikipedia feature (download Wikideia interessepunten)↵ - offline data, configureerbare opslagmap - compacte vectorkaarten voor de hele wereld - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen met instelbare transpantie - offline navigatie voor korte afstanden (experimenteel) "</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten.</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen in de telefoon worden opgeslagen zodat Osmand zonder internetverbinding kan werken. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. Belangrijke eigenschappen: - offline data met configureerbare opslag - compacte vectorkaarten voor de hele wereld - kaartdownload vanuit de app - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen zoals GPX-trecks en afgelegde weg - offline navigatie voor korte afstanden (experimenteel). Beperkingen van deze gratis versie van OsmAnd: - het aantal kaarten dat je kan downloaden - geen offline Wikipedia interessepunten. OsMand wordt actief ontwikkeld. Koop OsmAnd+ om verdere ontwikkeling te ondersteunen of doe een donatie via osmand.net. "</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)↵ OsmAnd is een open-source navigatie- en kaartsysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.↵ ↵ Belangrijke eigenschappen: - complete functionaliteit zonder internetverbinding - onbeperkt downloaden van offline-kaarten - compacte vectorkaarten voor de gehele wereld - download Wikipedia interessepunten voor toerisme) - offline zoeken naar adressen en plaatsen (POI) - navigatie voor auto / fiets / voetganger met stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen - meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten - offline navigatie voor korte afstanden (experimenteel) - automatisch draaien en zoomen van de kaart (instelbaar)"</string>
 <string name="avoid_motorway">Vermijd snelwegen</string>
 <string name="tip_recent_changes_0_8_3_t">"Wijzigingen 0.8.3 :
 \n\t* Routepunten\n\t* Verbeterde routebegeleiding
-\n\t* Optie om snelwegen te vermijden\n\t* Weergave van fietspaden (tracks)
+\n\t* Optie om snelwegen te vermijden\n\t* Weergave van fietspaden (Cycleway=track)
 \n\t* Enige bugs opgelost "</string>
-<string name="snap_to_road_descr">Houd positie op de weg tijdens navigatie</string>
-<string name="snap_to_road">Houd op weg</string>
+<string name="snap_to_road_descr">Positie op de weg uitlijnen tijdens navigatie</string>
+<string name="snap_to_road">Positie op de weg uitlijnen</string>
 <string name="intermediate_point_too_far">routepunt %1$s te ver van dichtstbijzijnde weg.</string>
 <string name="arrived_at_intermediate_point">Je bent aangekomen op je routepunt</string>
 <string name="context_menu_item_intermediate_point">routepunt toevoegen</string>
@@ -1029,37 +1029,37 @@
 	<string name="intermediate_point">Routepunt %1$s</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Toon richting van de bestemming</string>
-    <string name="enable_plugin_monitoring_services">Activeer eerst de plugin track registratie voor deze optie</string>
+    <string name="enable_plugin_monitoring_services">Activeer eerst de plugin registratieservices voor deze optie</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Selecteer kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Market?</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Google Play?</string>
 	<string name="close_changeset">Sluit changeset</string>
-	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt Android code in plaats van eigen code).</string>
+	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (langzamer dan machinecode).</string>
     <string name="safe_mode">Veilige modus</string>
     <string name="native_library_not_running">Het programma werkt in veilige modus (uitzetten via Instellingen).</string>
-    <string name="background_service_is_enabled_question">Achtergrond service staat nog aan. Wil je dat uitzetten?</string>
+    <string name="background_service_is_enabled_question">Achtergrond-service staat nog aan. Wil je dat uitzetten?</string>
     <string name="tip_recent_changes_1_0_0_t">"Wijzigingen in 1.0.0 :
 \n\t* Verbeterde routeberekening, sneller en nauwkeuriger (tot 250 km)
-\n\t* Wegenkaart (toont alleen wegen)\n\t* Kaart houdt de positie vast na onderbrekingen
-\n\t* Zet achtergrond service aan tijdens navigatie "</string>
-    <string name="rendering_attr_showRoadMaps_description">Selecteer wanneer alleen-wegen kaarten moeten worden weergegeven:</string>
-	<string name="rendering_attr_showRoadMaps_name">Alleen-wegen kaarten</string>
+\n\t* Kale wegenkaarten (bevatten alleen de wegen)\n\t* Kaart houdt de positie vast na onderbrekingen
+\n\t* Achtergrond-service gaat aan bij navigatie "</string>
+    <string name="rendering_attr_showRoadMaps_description">Selecteer wanneer kale wegenkaarten moeten worden weergegeven:</string>
+	<string name="rendering_attr_showRoadMaps_name">Kale wegenkaarten</string>
     <string name="download_roads_only_item">"Wegen "</string>
     <string name="download_regular_maps">Normale kaarten</string>
-    <string name="download_roads_only_maps">Alleen-wegen kaarten</string>
+    <string name="download_roads_only_maps">Kale wegenkaarten</string>
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
-    <string name="search_villages_and_postcodes">Zoeken dorpen/postcode</string>
+    <string name="search_villages_and_postcodes">Zoek dorp/postcode</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f Lon %2$.3f</string>
     <string name="route_descr_current_location">huidige positie</string>
     <string name="route_descr_from_to">Van %1$s\nNaar %2$s</string>
     <string name="route_descr_from_to_via">Van : %1$s\nVia : %2$s\nNaar : %3$s</string>
     <string name="map_widget_max_speed">Snelheidslimiet</string>
     <string name="tip_altitude_offset">Hoogte weergave - Locatie correctie</string>
-	<string name="tip_altitude_offset_t">"\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84 systeem. De conversie naar locale systemen vereist een positie-afhankelijke correctie.
-\n\tEen nauwkeuriger benadering voor deze systemen is de EGM96 referentie. OsmAnd ondersteunt nu automatische hoogte-weergave in het EGM96 systeem.
-\n\tOm dit te bereiken kan je het bestand WW15MGH.DAC downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+	<string name="tip_altitude_offset_t">\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
+\n\tEen nauwkeuriger benadering voor deze systemen is het EGM96-systeem. OsmAnd kan de hoogte nu ook weergeven in het EGM96-systeem.
+\n\tHiervoor kan je de World Altitude Correction (WW15MGH.DAC) downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
@@ -1067,22 +1067,22 @@
     <string name="osmodroid_plugin_description">OsMoDroid plugin is een OsmAnd extensie voor de OsModroid applicatie voor live tracking functies. Informatie over de service is beschikbaar op http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">gedeelten</string>
-    <string name="index_srtm_ele">hoogtelijnen</string>
+    <string name="index_srtm_ele">Hoogtelijnen</string>
     <string name="srtm_plugin_description">Met de plugin kan je hoogtelijnen en reliëf op de kaart weergeven.</string>
-    <string name="srtm_plugin_name">SRTM plugin</string>
+    <string name="srtm_plugin_name">Hoogtelijnen-plugin</string>
     <string name="download_select_map_types">Andere kaarten</string>
-    <string name="download_srtm_maps">SRTM kaarten</string>
-    <string name="osmand_distance_plugin_description">Meet de afstand tussen twee punten. Klik op het uitgangspunt en de bestemming. Wis de meting door een lange druk op de widget.</string>
-	<string name="osmand_distance_plugin_name">Afstandsmeter</string>
+    <string name="download_srtm_maps">Hoogtelijnen</string>
+    <string name="osmand_distance_plugin_description">Meet de afstand tussen twee of meer punten. Voeg punten toe met een korte aanraking en verwijder ze door ze lang aan te raken.</string>
+	<string name="osmand_distance_plugin_name">Afstand berekenen</string>
 <string name="audionotes_plugin_description">Audionotities maken tijdens de reis</string>
-    <string name="audionotes_plugin_name">Audionotities plugin</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin voor offline contourlijnen</string>
-    <string name="osmand_srtm_long_description_1000_chars">Met deze plugin kunnen contourlijnen worden weergegeven in OsmAnd\'s offline kaarten. De globale gegevens (tussen 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormende instrument aan boord van Terra, de vlaggenschip-satelliet van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
-    <string name="use_clear_distance_measurement">Klik nog een keer om de meetpunten te wissen.</string>
-    <string name="use_distance_measurement">Klik om een punt te markeren, klik en houd vast om het vorige punt te wissen, klik op de meting-widget om te stoppen.</string>
+    <string name="audionotes_plugin_name">Audionotities-plugin</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin voor offline hoogtelijnen</string>
+    <string name="osmand_srtm_long_description_1000_chars">Met deze plugin kunnen hoogtelijnen worden weergegeven in OsmAnd\'s offline kaarten. De wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
+    <string name="use_clear_distance_measurement">Tik nog een keer om de meetpunten te wissen.</string>
+    <string name="use_distance_measurement">Tik om een punt te markeren, blijf aanraken om het vorige punt te wissen, tik op de meting-widget om te stoppen.</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
     <string name="audionotes_location_not_defined">Locatie is nog niet gedefinieerd om audio notities te nemen</string>
-    <string name="map_widget_audionotes">Audio notities</string>
+    <string name="map_widget_audionotes">Audionotities</string>
     <string name="srtm_plugin_attribution">ASTER is een product van METI en NASA</string>
     <string name="monitoring_control_stop">stoppen</string>
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, druk op de stop knop van de widget.</string>
@@ -1090,11 +1090,11 @@
     <string name="recording_open_external_player">Open externe player</string>
     <string name="recording_delete_confirm">Wil je deze opname verwijderen?</string>
     <string name="tip_recent_changes_1_1_0_t">"Wijzigingen in 1.1.0 :
-\n\t* Afstandsmeter plugin
-\n\t* Audio notities plugin
-\n\t* Hoogtelijnen plugin
+\n\t* Afstandsmeter-plugin
+\n\t* Audionotities-plugin
+\n\t* Hoogtelijnen-plugin
 \n\t* Bugs opgelost
-\n\t* \'Touring view\' kaartstijl optie met meer kaartdetails, nieuwe wegenstijles, meer contrast en Alpine wandelen optie(SAC schaal)\n\n\t* EGM96 geoïde hoogtecorrectie voor GPS hoogte-uitlezingen "</string>
+\n\t* \'Touring view\' kaartstijl optie met meer kaartdetails, nieuwe wegenstijlen, hoger contrast en optie voor Alpine wandelen (SAC schaal)\n\n\t* EGM96 geoïde hoogtecorrectie voor GPS hoogte-uitlezingen "</string>
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Maak een audio-notitie</string>
     <string name="recording_context_menu_vrecord">Maak een video-notitie</string>
