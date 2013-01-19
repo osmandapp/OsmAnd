@@ -342,7 +342,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerSelectedItem(R.string.layer_recordings, app.getSettings().SHOW_RECORDINGS.get()? 1 : 0, 0, listener, 5);
+		adapter.registerSelectedItem(R.string.layer_recordings, app.getSettings().SHOW_RECORDINGS.get()? 1 : 0, R.drawable.list_activities_rec_layer, listener, 5);
 	}
 	
 	@Override
