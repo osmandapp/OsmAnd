@@ -355,7 +355,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				recordAudio(latitude, longitude, mapActivity);
 			}
 		}, 6);
-		adapter.registerItem(R.string.recording_context_menu_vrecord, R.drawable.monitoring_rec_big, new OnContextMenuClick() {
+		adapter.registerItem(R.string.recording_context_menu_vrecord, R.drawable.list_context_menu_rec, new OnContextMenuClick() {
 			
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
