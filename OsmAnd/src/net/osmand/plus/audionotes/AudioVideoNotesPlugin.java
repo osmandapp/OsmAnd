@@ -1,7 +1,9 @@
 package net.osmand.plus.audionotes;
 
+
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,8 +33,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
-import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.activities.LocalIndexesActivity;
+import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
@@ -46,18 +48,17 @@ import android.app.Dialog;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.graphics.BitmapFactory.Options;
+import android.graphics.Matrix;
 import android.hardware.Camera;
 import android.media.AudioManager;
-import android.media.ExifInterface;
 import android.media.MediaPlayer;
-import android.media.MediaRecorder;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.ListPreference;
@@ -150,29 +151,49 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			//log.info("deg rational: " + s);
 			return s;
 		}
-		public void updatePhotoInformation(double lat, double lon, double rot) throws IOException{
-			ExifInterface exif = new ExifInterface(file.getAbsolutePath());
-			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE, convertDegToExifRational(lat));
-			exif.setAttribute(ExifInterface.TAG_GPS_LATITUDE_REF, lat > 0 ?"N" :"S");
-	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE, convertDegToExifRational(lon));
-	        exif.setAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF, lon > 0?"E" : "W");
-	        if(!Double.isNaN(rot)){
-	        	exif.setAttribute("GPSImgDirectionRef", "T"); //true north
-	        	String rotString = (int) (rot * 100.0) + "/100";
-	        	//log.info("rot rational: " + rotString);
-	        	exif.setAttribute("GPSImgDirection", rotString);
-	        }
-	        exif.saveAttributes();
+		
+		@SuppressWarnings("rawtypes")
+		public void updatePhotoInformation(double lat, double lon, double rot) throws IOException {
+			try {
+				Class exClass = Class.forName("android.media.ExifInterface");
+				
+				Constructor c = exClass.getConstructor(new Class[] { String.class });
+				Object exInstance = c.newInstance(file.getAbsolutePath());
+				Method setAttribute = exClass.getMethod("setAttribute",
+				           new Class[] { String.class, String.class } );
+				setAttribute.invoke(exInstance,"GPSLatitude", convertDegToExifRational(lat));
+				setAttribute.invoke(exInstance,"GPSLatitudeRef", lat > 0 ?"N" :"S");
+				setAttribute.invoke(exInstance,"GPSLongitude", convertDegToExifRational(lon));
+				setAttribute.invoke(exInstance,"GPSLongitudeRef", lon > 0?"E" : "W");
+				if(!Double.isNaN(rot)){
+					setAttribute.invoke(exInstance,"GPSImgDirectionRef", "T");
+					String rotString = (int) (rot * 100.0) + "/100";
+					setAttribute.invoke(exInstance,"GPSImgDirection", rotString);
+				}
+				Method saveAttributes = exClass.getMethod("saveAttributes",
+				           new Class[] {} );
+				saveAttributes.invoke(exInstance);
+			} catch (Exception e) {
+				e.printStackTrace();
+				log.error(e);
+			}
 		}
 		
+		@SuppressWarnings("rawtypes")
 		private int getExifOrientation() {
-			ExifInterface exif;
 			int orientation = 0;
 			try {
-				exif = new ExifInterface(file.getAbsolutePath());
-				orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
-			} catch (IOException e) {
+				Class exClass = Class.forName("android.media.ExifInterface");
+
+				Constructor c = exClass.getConstructor(new Class[] { String.class });
+				Object exInstance = c.newInstance(file.getAbsolutePath());
+				Method getAttributeInt = exClass.getMethod("getAttributeInt",
+				           new Class[] { String.class, Integer.TYPE} );
+				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", new Integer(1));
+				orientation = it.intValue();
+			} catch (Exception e) {
 				e.printStackTrace();
+				log.error(e);
 			}
 			return orientation;
 		}
@@ -531,11 +552,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				Method m = mr.getClass().getDeclaredMethod("setOrientationHint", Integer.TYPE);
 				Display display = ((WindowManager) mapActivity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-				if (display.getRotation() == Surface.ROTATION_0) {
+				if (display.getOrientation() == Surface.ROTATION_0) {
 					m.invoke(mr, 90);
-				} else if (display.getRotation() == Surface.ROTATION_270) {
+				} else if (display.getOrientation() == Surface.ROTATION_270) {
 					m.invoke(mr, 180);
-				} else if (display.getRotation() == Surface.ROTATION_180) {
+				} else if (display.getOrientation() == Surface.ROTATION_180) {
 					m.invoke(mr, 270);
 				}
 			} catch (Exception e) {
