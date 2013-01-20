@@ -956,4 +956,16 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="map_widget_show_destination_arrow">Visa destination riktning</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>
     <string name="map_widget_monitoring_services">Logging tjänster</string>
-	</resources>
+	<string name="dist_control_start">Starta</string>
+    <string name="local_indexes_cat_av">Audio-/videodata</string>
+    <string name="stop_routing_confirm">Är det säkert att du vill avbryta navigeringen?</string>
+    <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt?</string>
+    <string name="recording_context_menu_show">Visa</string>
+    <string name="recording_photo_description">Foto %1$s av %2$s</string>
+    <string name="recording_context_menu_precord">Ta en bild</string>
+    <string name="dropbox_plugin_name">Dropbox-plugin</string>
+    <string name="animate_routing_using_gpx">Vill du använda befintlig GPX-fil?</string>
+    <string name="intermediate_points_change_order">Ändra ordning</string>
+    <string name="srtm_paid_version_title">Plugin för konturlinjer</string>
+    <string name="av_def_action_video">Spela in video</string>
+    </resources>
