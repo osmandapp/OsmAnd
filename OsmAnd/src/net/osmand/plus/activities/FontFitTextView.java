@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class FontFitTextView extends LinearLayout {
 
-	private static float MAX_TEXT_SIZE = 28;
+	private static float MAX_TEXT_SIZE = 24;
 	private TextView tv;
 
 	public FontFitTextView(Context context) {
