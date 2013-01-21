@@ -1200,4 +1200,5 @@
     <string name="precise_routing_mode_descr">Abilita il routing di precisine per calcolare percorsi precisi senza intoppi. E\' molto limitato dalla distanza e non utilizza la libreria nativa.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso(alfa)</string>
     <string name="local_indexes_cat_av">Dati Audio/Video</string>
+    <string name="dist_control_start">Avvia</string>
     </resources>
