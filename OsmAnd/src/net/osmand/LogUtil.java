@@ -1,6 +1,9 @@
 package net.osmand;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 /**
  * That class is replacing of standard LogFactory due to 
@@ -151,4 +154,8 @@ public class LogUtil {
 	public static Log getLog(Class<?> cl){
 		return getLog(cl.getName());
 	}
+	
+	public static XmlPullParser newXMLPullParser() throws XmlPullParserException {
+		return XmlPullParserFactory.newInstance().newPullParser();
+	} 
 }
