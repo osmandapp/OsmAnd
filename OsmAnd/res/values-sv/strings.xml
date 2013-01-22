@@ -857,9 +857,9 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
 	<string name="tip_update_index_t">\tAtt ha uppdaterad kartdata är viktigt. OsmAnd tillhandahåller en nerladdningshanterare som kan söka efter tillgänglig offlinedata.\n\tFör att söka efter uppdateringar, gå till \'Inställningar\' -&gt; \'Offline data\' -&gt; \'Ladda ner offline data\'. Efter att regionslistan hämtats från internet, vällj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.\n\tFärgerna visar tillgängligheten för uppdateringarna:\n\t\'Grön\' - indikerar att datan är identisk på enheten och servern\n\t\'Blå\' - indikerar att uppdateringar finns på servern\n\t\'Mörkblå/grön\' - data deaktiverad på enheten</string>
-	<string name="rendering_attr_noAdminboundaries_name">Göm gränser</string>
+	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (admin nivåer 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin har en gammal version och behöver uppdateras.</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
     <string name="tip_altitude_offset">Höjd Display - Offset Korrigering</string>
 	<string name="map_widget_max_speed">Hastighetsbegränsning</string>
     <string name="monitoring_control_start">start</string>
@@ -869,8 +869,8 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="rendering_attr_showRoadMaps_description">Välj när du vill visa vägar som bara kartor:</string>
 	<string name="rendering_attr_showRoadMaps_name">Vägar med enbart kartor</string>
     <string name="download_roads_only_item">"Vägar "</string>
-    <string name="download_regular_maps">Regelbundna kartor</string>
-    <string name="download_roads_only_maps">Vägar med enbart kartor</string>
+    <string name="download_regular_maps">Vanliga kartor</string>
+    <string name="download_roads_only_maps">Kartor med enbart vägar</string>
     <string name="safe_mode_description">Kör program i säkert läge (med långsammare Android istället för ursprunglig kod).</string>
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i säkert läge (inaktivera det i Inställningar).</string>
@@ -911,33 +911,33 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
 	<string name="default_buttons_delete">Ta bort</string>
-	<string name="recording_is_recorded">Audio/video spelas in. För att stoppa den trycker stoppknappen på widgeten.</string>
-    <string name="recording_playing">En ljud från den angivna inspelningen spelas.\n%1$s</string>
+	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa den tryck på stoppknappen på widgeten.</string>
+    <string name="recording_playing">Ljud från den angivna inspelningen spelas upp.↵\n%1$s</string>
     <string name="recording_open_external_player">Öppna extern spelare</string>
     <string name="recording_delete_confirm">Vill du ta bort den här inspelningen?</string>
-    <string name="recording_unavailable">otillgänglig</string>
-    <string name="recording_context_menu_arecord">Ta en ljudanteckning</string>
-    <string name="recording_context_menu_vrecord">Ta en video anteckning</string>
+    <string name="recording_unavailable">inte tillgänglig</string>
+    <string name="recording_context_menu_arecord">Gör en ljudanteckning</string>
+    <string name="recording_context_menu_vrecord">Gör en videoanteckning</string>
     <string name="layer_recordings">Uppteckningsskiktet</string>
-    <string name="recording_can_not_be_played">Inspelningen kan inte spelas</string>
-    <string name="recording_context_menu_delete">Ta bort inspelning</string>
-    <string name="recording_context_menu_play">Spela</string>
-    <string name="recording_description">Inspelning %1$s %2$s på %3$s</string>
+    <string name="recording_can_not_be_played">Inspelningen kan inte spelas upp</string>
+    <string name="recording_context_menu_delete">Ta bort inspelningen</string>
+    <string name="recording_context_menu_play">Spela upp</string>
+    <string name="recording_description">Inspelning %1$s %2$s av %3$s</string>
     <string name="recording_default_name">inspelning</string>
-    <string name="av_control_stop">stopp</string>
-    <string name="map_widget_av_notes">Ljudanteckningar</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin för offline konturlinjer</string>
-    <string name="osmand_distance_plugin_name">Avståndsberäknaren</string>
+    <string name="av_control_stop">AV</string>
+    <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin för konturlinjer offline</string>
+    <string name="osmand_distance_plugin_name">Avståndsberäknare</string>
     <string name="map_widget_distancemeasurement">Avståndsmätning</string>
     <string name="monitoring_control_stop">stopp</string>
     <string name="map_widget_audionotes">Ljudanteckningar</string>
-    <string name="audionotes_plugin_description">Ta ljudanteckningar under resan</string>
-    <string name="audionotes_plugin_name">Ljudanteckningar plugin</string>
+    <string name="audionotes_plugin_description">Göra ljud-/videoanteckningar under resan</string>
+    <string name="audionotes_plugin_name">Ljud-/Videoanteckningar</string>
     <string name="index_srtm_parts">delar</string>
     <string name="index_srtm_ele">Konturlinjer</string>
     <string name="download_select_map_types">Andra kartor</string>
-    <string name="srtm_plugin_name">Konturlinjer plugin</string>
-    <string name="download_srtm_maps">Konturlinje uppgifter</string>
+    <string name="srtm_plugin_name">Konturlinje-plugin</string>
+    <string name="download_srtm_maps">Konturlinjedata</string>
     <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
 \n→ * Avstånd kalkylator plugin
 \n→ * ljudanteckningar plugin
@@ -945,9 +945,9 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 \n→ * Buggfixar
 \n→ * \'Touring View\' kartan stil alternativet med mer karta detaljer, nya stilar väg, mer kontrast och fjällvandring (SAC skala) alternativet
 \n→ * EGM96 geoid offset korrigering för GPS höjdavläsningarna</string>
-    <string name="osmand_distance_plugin_description">Mäta ett avstånd mellan två och många punkter. Lägg punkter med en kort klick och ta med en lång tryckning.</string>
-    <string name="use_clear_distance_measurement">Klicka en gång för att rensa mätpunkter.</string>
-    <string name="use_distance_measurement">Tryck här för att göra en punkt, tryck och håll för att radera föregående punkt, klicka på mätning widget för att avsluta.</string>
+    <string name="osmand_distance_plugin_description">Mäta avståndet mellan två eller fler punkter. Lägg till punkter med en kort klick och ta bort dem med en lång tryckning.</string>
+    <string name="use_clear_distance_measurement">Klicka en gång för att ta bort mätpunkter.</string>
+    <string name="use_distance_measurement">Tryck för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
     <string name="audionotes_location_not_defined">Plats att associera med anmärkning är inte definierad ännu. \"Använd plats ...\" att tilldela en not till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
     <string name="route_descr_from_to">Från : %1$s\nTill : %2$s</string>
@@ -962,10 +962,26 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="clear_dest_confirm">Är det säkert att du vill ta bort din destinationspunkt?</string>
     <string name="recording_context_menu_show">Visa</string>
     <string name="recording_photo_description">Foto %1$s av %2$s</string>
-    <string name="recording_context_menu_precord">Ta en bild</string>
+    <string name="recording_context_menu_precord">Ta ett foto</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
     <string name="animate_routing_using_gpx">Vill du använda befintlig GPX-fil?</string>
     <string name="intermediate_points_change_order">Ändra ordning</string>
     <string name="srtm_paid_version_title">Plugin för konturlinjer</string>
     <string name="av_def_action_video">Spela in video</string>
+    <string name="precise_routing_mode">Exakt ruttning (alpha)</string>
+    <string name="av_def_action_picture">Ta ett foto</string>
+    <string name="dropbox_plugin_description">Dropbox-pluginen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
+    <string name="srtm_paid_version_msg">Köp gärna pluginen konturlinjer på Google Play för att stödja fortsatt utveckling.</string>
+    <string name="av_def_action_audio">Spela in ljud</string>
+    <string name="av_widget_action_descr">Välj standardåtgärd för widget</string>
+    <string name="av_widget_action">Standardåtgärd för widget</string>
+    <string name="av_video_format_descr">Välj videoformat</string>
+    <string name="av_video_format">Videoformat</string>
+    <string name="av_use_external_recorder_descr">Använd systemets inspelare för video</string>
+    <string name="av_use_external_recorder">Använd extern inspelare</string>
+    <string name="av_settings_descr">Konfigurera inställningar för ljud och video</string>
+    <string name="av_settings">Inställningar för ljud och video</string>
+    <string name="recording_error">Ett fel uppstod under inspelningen</string>
+    <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
+    <string name="srtm_plugin_description">Denna plugin gör det lättare att hämta konturlinjer (Hämtning av offline-data -&gt; Meny --&gt; Andra kartor) för användning med offline-kartor.</string>
     </resources>
