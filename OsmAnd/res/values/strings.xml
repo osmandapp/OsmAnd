@@ -97,8 +97,8 @@
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
     <string name="route_descr_current_location">Current position</string>
-    <string name="route_descr_from_to">From : %1$s\nTo : %2$s</string>
-    <string name="route_descr_from_to_via">From : %1$s\nVia : %2$s\nTo : %3$s</string>
+    <string name="route_descr_from_to">From: %1$s\nTo: %2$s</string>
+    <string name="route_descr_from_to_via">From: %1$s\nVia: %2$s\nTo: %3$s</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
     <string name="search_villages_and_postcodes">Search villages/postcode</string>
@@ -378,7 +378,7 @@
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
 	<string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
-	<string name="index_settings_descr">Download, view details, and manage offline maps</string>
+	<string name="index_settings_descr">Manage offline data that is stored on your device</string>
 	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
 	<string name="map_online_data">Online and tile maps</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
@@ -393,10 +393,10 @@
 	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to GPX files or to live track using a web service.</string>
 	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
 	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
-	<string name="plugins_screen">Plugin Manager</string>
+	<string name="plugins_screen">Plugins</string>
 	<string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
-	<string name="prefs_plugins_descr">Plugins enable expert mode settings and provide extra functionality like tile maps, tracking, sleep mode operation, accessibility settings, and others.</string>
-	<string name="prefs_plugins">Plugin Manager</string>
+	<string name="prefs_plugins_descr">Plugins extend the application by additional functions and settings</string>
+	<string name="prefs_plugins">Plugins</string>
 	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
 		\n\t- *Plugin functionality*
 		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager.
@@ -528,7 +528,7 @@
 		\n\t- Updated maps
 		\n\t- Other small features
 	</string>    
-	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
+	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline Wikipedia articles.</string>
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
 	<string name="index_name_north_america">North America</string>
@@ -553,11 +553,11 @@
 	<string name="settings_preset">User Profile</string>
 	<string name="settings_preset_descr">Select a user profile with custom map and navigation settings.</string>
 	<string name="routing_settings">Navigation</string>
-	<string name="routing_settings_descr">Specify navigation options</string>
+	<string name="routing_settings_descr">Specify options for the navigation</string>
 	<string name="global_settings">Global Settings</string>
-	<string name="index_settings">Offline data (Download)</string>
-	<string name="general_settings">General settings</string>
-	<string name="general_settings_descr">Configure global settings</string>
+	<string name="index_settings">Data management</string>
+	<string name="general_settings">General</string>
+	<string name="general_settings_descr">Configure common settings for the application</string>
 	<string name="global_app_settings">Global app settings</string>
 	<string name="user_name">Your OSM user name</string>
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
@@ -658,7 +658,7 @@
 	<string name="search_position_fixed">Fixed</string>
 	<string name="search_position_current_location">Current position&#8230;</string>
 	<string name="search_position_map_view">Last map view</string>
-	<string name="select_search_position">Search near :</string>
+	<string name="select_search_position">Search near:</string>
 	<string name="context_menu_item_search">Search near here</string>
 	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
 		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
@@ -704,7 +704,7 @@
 	<string name="local_index_items_restored">%1$d of %2$d item(s) successfully activated.</string>
 	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">You are about to %1$s %2$s item(s). Continue?</string>
-	<string name="local_index_descr_title">Offline Data Manager</string>
+	<string name="local_index_descr_title">Data management</string>
 	<string name="local_index_mi_restore">Activate</string>
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
