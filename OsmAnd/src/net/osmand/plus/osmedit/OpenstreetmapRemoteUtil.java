@@ -19,6 +19,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.Base64;
+import net.osmand.IOUtils;
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -93,7 +94,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 		additionalData.put("description", description);
 		additionalData.put("tags", tagstring);
 		additionalData.put("visibility", visibility);
-		return Algoritms.uploadFile(url, f, settings.USER_NAME.get()+":"+
+		return IOUtils.uploadFile(url, f, settings.USER_NAME.get()+":"+
 				settings.USER_PASSWORD.get(), "file", true, additionalData);
 	}
 	
