@@ -210,9 +210,6 @@
 		</do-only-if-manifest-hasCode>
 	</target>
 
-	<!--taskdef classname="net.bluecow.googlecode.ant.GoogleCodeUploadTask" 
-        classpath="ant-lib/ant-googlecode-0.0.2.jar" name="gcupload"/-->
-
 	<path id="lib.path">
 		<fileset dir="ant-lib" includes="*.jar" />
 	</path>
