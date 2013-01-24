@@ -10,10 +10,10 @@ import net.osmand.Algoritms;
 import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
-import net.osmand.data.MapTileDownloader.DownloadRequest;
-import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
+import net.osmand.map.MapTileDownloader.DownloadRequest;
+import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 
 import org.apache.commons.logging.Log;
 

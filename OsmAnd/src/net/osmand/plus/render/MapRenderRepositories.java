@@ -31,7 +31,7 @@ import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.MapAlgorithms;
-import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;

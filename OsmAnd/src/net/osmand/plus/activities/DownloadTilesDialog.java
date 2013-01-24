@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 import net.osmand.LogUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.MapTileDownloader;
-import net.osmand.data.MapTileDownloader.DownloadRequest;
-import net.osmand.data.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.map.ITileSource;
+import net.osmand.map.MapTileDownloader;
+import net.osmand.map.MapTileDownloader.DownloadRequest;
+import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
