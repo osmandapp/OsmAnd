@@ -965,7 +965,7 @@
   <string name="bg_service_sleep_mode_on">Slaap modus\nuitzetten</string>
 <string name="email">email</string>
 <string name="filterpoi_activity">Creëer interessepunt filter</string>
-<string name="select_navigation_mode">Kies soort vervoer::</string>
+<string name="select_navigation_mode">Kies soort vervoer</string>
 <string name="day_night_info_description">Zonsopgang : %1$s \nZonsondergang : %2$s</string>
 <string name="day_night_info">Dag/nacht info</string>
 <string name="map_widget_day_night">Dag/nacht kaart</string>
@@ -990,9 +990,9 @@
 <string name="tip_app_mode_t_v2">"\tOsmAnd ondersteunt verschillende transport-profielen.↵
 \n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of tijdens het creëren een route. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten.</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen in de telefoon worden opgeslagen zodat Osmand zonder internetverbinding kan werken. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. Belangrijke eigenschappen: - offline data met configureerbare opslag - compacte vectorkaarten voor de hele wereld - kaartdownload vanuit de app - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen zoals GPX-trecks en afgelegde weg - offline navigatie voor korte afstanden (experimenteel). Beperkingen van deze gratis versie van OsmAnd: - het aantal kaarten dat je kan downloaden - geen offline Wikipedia interessepunten. OsMand wordt actief ontwikkeld. Koop OsmAnd+ om verdere ontwikkeling te ondersteunen of doe een donatie via osmand.net. "</string>
-<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)↵ OsmAnd is een open-source navigatie- en kaartsysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.↵ ↵ Belangrijke eigenschappen: - complete functionaliteit zonder internetverbinding - onbeperkt downloaden van offline-kaarten - compacte vectorkaarten voor de gehele wereld - download Wikipedia interessepunten voor toerisme) - offline zoeken naar adressen en plaatsen (POI) - navigatie voor auto / fiets / voetganger met stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen - meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten - offline navigatie voor korte afstanden (experimenteel) - automatisch draaien en zoomen van de kaart (instelbaar)"</string>
+<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)↵ OsmAnd is een open-source navigatie- en kaartsysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.↵ ↵ Belangrijke eigenschappen: - complete functionaliteit zonder internetverbinding - onbeperkt downloaden van offline-kaarten - compacte vectorkaarten voor de gehele wereld - download Wikipedia interessepunten voor toerisme) - offline zoeken naar adressen en plaatsen (POI) - navigatie voor auto / fiets / voetganger met stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen - meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten - offline navigatie voor korte afstanden (experimenteel) - automatisch draaien en zoomen van de kaart (instelbaar) "</string>
 <string name="avoid_motorway">Vermijd snelwegen</string>
 <string name="tip_recent_changes_0_8_3_t">"Wijzigingen 0.8.3 :
 \n\t* Routepunten\n\t* Verbeterde routebegeleiding
@@ -1057,9 +1057,9 @@
     <string name="route_descr_from_to_via">Van : %1$s\nVia : %2$s\nNaar : %3$s</string>
     <string name="map_widget_max_speed">Snelheidslimiet</string>
     <string name="tip_altitude_offset">Hoogte weergave - Locatie correctie</string>
-	<string name="tip_altitude_offset_t">\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
+	<string name="tip_altitude_offset_t">"\tDe meeste GPS ontvangers geven hoogtemetingen in het WGS84-systeem. De conversie naar lokale systemen vereist een positie-afhankelijke correctie.
 \n\tEen nauwkeuriger benadering voor deze systemen is het EGM96-systeem. OsmAnd kan de hoogte nu ook weergeven in het EGM96-systeem.
-\n\tHiervoor kan je de World Altitude Correction (WW15MGH.DAC) downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
+\n\tHiervoor kan je de World Altitude Correction (WW15MGH.DAC) downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
