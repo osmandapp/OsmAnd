@@ -227,7 +227,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(createLockInfo(map), R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", 
 				MapInfoControls.LEFT_CONTROL, none, 15);
 		backToLocation = createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.list_context_menu_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
 		
 		
 		View globus = createGlobus();
