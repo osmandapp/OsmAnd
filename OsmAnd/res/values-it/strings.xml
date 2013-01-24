@@ -240,7 +240,7 @@
   <string name="overlay_transparency">Trasparenza sovrapposizione</string>
   <string name="map_transparency_descr">Modifica trasparenza della mappa di base</string>
   <string name="map_transparency">Trasparenza mappa di base</string>
-  <string name="modify_transparency">Modica la trasparenza (0 - trasparente, 255 - opaco)</string>
+  <string name="modify_transparency">Modifica la trasparenza (0 - trasparente, 255 - opaco)</string>
   <string name="layer_underlay">Mappa di sfondo…</string>
   <string name="map_underlay">Mappa di sfondo</string>
   <string name="map_underlay_descr">Scegli la mappa di sfondo</string>
@@ -1180,7 +1180,7 @@
     <string name="recording_can_not_be_played">La registrazione non può essere riprodotta</string>
     <string name="recording_context_menu_delete">Cancella la registrazione</string>
     <string name="recording_context_menu_play">Riproduci</string>
-    <string name="recording_description">Registrazione %1$s %2$s a %3$s</string>
+    <string name="recording_description">Registrazione %1$s %2$s di %3$s</string>
     <string name="recording_default_name">registrazione</string>
     <string name="av_control_stop">ferma</string>
     <string name="av_control_start">registra</string>
