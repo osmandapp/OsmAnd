@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="live_monitoring_mode_off">Start\nLive tracking</string>
-  <string name="live_monitoring_mode_on">Stop\nLive tracking</string>
+<resources><string name="live_monitoring_mode_off">Start\nlive tracking</string>
+  <string name="live_monitoring_mode_on">Stop\nlive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
   <string name="show_lanes">Toon rijstroken</string>
   <string name="avoid_unpaved">Vermijd onverharde wegen</string>
@@ -15,7 +15,7 @@
   <string name="map_widget_view_direction">Kijkrichting</string>
   <string name="map_widget_transparent">Transparante skin</string>
   <string name="monitoring_mode_off">Start\ntrackregistratie</string>
-  <string name="monitoring_mode_on">Stop\ntrackregistratie.</string>
+  <string name="monitoring_mode_on">Stop\ntrackregistratie</string>
   <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
@@ -31,11 +31,11 @@
 \n\t- Offline interessepunt-bewerking
 \n\t- Toegankelijkheidsopties
 \n\t- Veel bugs opgelost "</string>
-  <string name="send_files_to_osm">GPX bestanden naar openstreetmap sturen?</string>
+  <string name="send_files_to_osm">GPX-bestanden naar openstreetmap sturen?</string>
   <string name="gpx_visibility_txt">Zichtbaarheid</string>
   <string name="gpx_tags_txt">Tags</string>
   <string name="gpx_description_txt">Beschrijving</string>
-  <string name="validate_gpx_upload_name_pwd">Geef je OSM gebruikersnaam en wachtwoord voor het uploaden van GPX bestanden.</string>
+  <string name="validate_gpx_upload_name_pwd">Geef je OSM gebruikersnaam en wachtwoord voor het uploaden van GPX-bestanden.</string>
   <string name="default_buttons_support">Ondersteuning</string>
   <string name="support_new_features">Ondersteun nieuwe functies</string>
   <string name="show_ruler_level_descr">Schaal-lineaal op de kaart weergeven</string>
@@ -90,9 +90,9 @@
   <string name="auto_announce_on">Start automatische aankondigingen</string>
   <string name="auto_announce_off">Stop automatische aankondigingen</string>
   <string name="scroll_map_by_gestures_descr">Verschuif de kaart door beweging van het scherm</string>
-  <string name="scroll_map_by_gestures">Natuurlijke kaart verschuivingen</string>
+  <string name="scroll_map_by_gestures">Natuurlijke kaartverschuivingen</string>
   <string name="i_am_here">Hier ben ik</string>
-  <string name="zoom_by_trackball_descr">Wijzig kaart zoom door horizontale trackball bewegingen</string>
+  <string name="zoom_by_trackball_descr">Zoom door trackball horizontaal te bewegen</string>
   <string name="zoom_by_trackball">Gebruik trackball voor zoomen van de kaart</string>
   <string name="use_short_object_names_descr">Gebruik korte objectnamen in aanraakmodus</string>
   <string name="use_short_object_names">Gebruik korte objectnamen</string>
@@ -103,7 +103,15 @@
   <string name="use_fluorescent_overlays_descr">Gebruik fluorescerende kleuren voor de weergave van tracks and routes</string>
   <string name="offline_edition">Offline bewerking</string>
   <string name="offline_edition_descr">Gebruik altijd offline bewerking</string>
-  <string name="tip_recent_changes_0_7_1_t">"Wijzigingen in 0.7.1 : \n\t- Offline bewerken van interessepunten \n\t- Live Tracking optie - zend coordinaten naar web service (lees voor het opzetten van je eigen webservice de HowTo Artikelen) \n\t- Toon eerder opgenomen tracks op de kaart \n\t- Richtingdetectie: \'Keer terug\' wordt weergegeven bij een koers in de tegengestelde richting of na het missen van een afslag \n\t- Nieuwe stem-instructie \'Route wordt opnieuw berekend\' \n\t- Optische aanduiding van een afslag binnen 100m door een richtingpijl met veranderende kleur \n\t- Weergave van actuele status van gedeactiveerde kaarten nu op het downloadscherm in donker groen en donker blauw \n\t- Andere wijzigingen "</string>
+  <string name="tip_recent_changes_0_7_1_t">"Wijzigingen in 0.7.1 :
+\n\t- Offline bewerken van interessepunten
+\n\t- Live Tracking optie - zend coordinaten naar web service (lees voor het opzetten van je eigen webservice de HowTo-artikelen)
+\n\t- Toon eerder opgenomen tracks op de kaart
+\n\t- Richtingdetectie: \'Keer terug\' wordt weergegeven bij een koers in de tegengestelde richting of na het missen van een afslag
+\n\t- Nieuwe stem-instructie \'Route wordt opnieuw berekend\'
+\n\t- Optische aanduiding van een afslag binnen 100m door een richtingpijl met veranderende kleur
+\n\t- Weergave van actuele status van gedeactiveerde kaarten nu op het downloadscherm in donkergroen en donkerblauw
+\n\t- Andere wijzigingen "</string>
   <string name="update_poi_does_not_change_indexes">Wijzigingen van interessepunten worden niet bewaard in de gedownloade kaartbestanden, maar in een lokaal bestand.</string>
   <string name="local_openstreetmap_uploading">Wordt ge-upload…</string>
   <string name="local_openstreetmap_were_uploaded">{0} interessepunten/Bugs zijn ge-upload</string>
@@ -113,8 +121,8 @@
   <string name="local_openstreetmap_upload">Upload wijziging naar OSM</string>
   <string name="local_openstreetmap_delete">Wis de wijziging</string>
   <string name="local_openstreetmap_descr_title">Asynchrone Openstreetmap wijziging:</string>
-  <string name="local_openstreetmap_settings">Locale OSM interessepunten/Bugs</string>
-  <string name="local_openstreetmap_settings_descr">Toon en beheer interessepunten/Bugs in locale database</string>
+  <string name="local_openstreetmap_settings">Lokale OSM interessepunten/Bugs</string>
+  <string name="local_openstreetmap_settings_descr">Toon en beheer interessepunten/Bugs in lokale database</string>
   <string name="live_monitoring_descr">Versturen HTTP verzoeken naar een webservice toestaan</string>
   <string name="live_monitoring">Online Live Tracking</string>
   <string name="live_monitoring_interval_descr">Specificeer Live Tracking interval</string>
@@ -124,7 +132,7 @@
   <string name="gpx_monitoring_disabled_warn">Eerst \'Log track to GPX\' toestaan in Tracking instellingen.</string>
   <string name="show_current_gpx_title">Toon huidige track</string>
   <string name="tip_recent_changes_0_7_0_t">"Wijzigingen in 0.7.0 : \n\t- Offline Wikipedia gegevens met artikelen \n\t- Vernieuwde kaarten \n\t- Andere kleine features "</string>
-  <string name="free_version_message">Deze gratis OsmAnd versie is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
+  <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
   <string name="free_version_title">Gratis versie</string>
   <string name="poi_context_menu_showdescription">Toon interessepunt-beschrijvingen</string>
   <string name="index_name_north_america">Noord Amerika</string>
@@ -174,7 +182,7 @@
   <string name="download_files_not_enough_space">Er is niet voldoende vrije ruimte %1$s MB te downloaden (vrij: %2$s).</string>
   <string name="download_files_question_space">Vrije ruimte is nu {2} MB! Download {0} bestand(en) ({1} MB)?</string>
   <string name="tip_select_destination_point">Selecteer bestemming</string>
-  <string name="tip_select_destination_point_t">"\tJe kan een bestemming direct opgeven op de kaart (contextmenu, dan \'Zet als bestemming\'), bij alle zoekactiviteiten, of via lang drukken op een regel in uw lijst van interessepunten.
+  <string name="tip_select_destination_point_t">"\tJe kan een bestemming direct opgeven op de kaart (lang drukken, dan \'Zet als bestemming\'), bij alle zoekactiviteiten, of via lang drukken op een regel in uw lijst van interessepunten.
 \n\tDe bestemming wordt gemarkeerd als een oranje punt op de kaart en OsmAnd toont de afstand en richting hiernaartoe (oranje driehoek). "</string>
   <string name="tip_recent_changes_0_6_9_t">Wijziginen in 0.6.9:
 \n\t- Verbeterde offline kaart weergave
@@ -829,30 +837,30 @@
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
   <string name="context_menu_item_directions">Aanwijzingen naar hier</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
-  <string name="basemap_was_selected_to_download">De basiskaart is nodig voor het werken met OsmAnd en is geselecteerd.</string>
+  <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
   <string name="gpx_index_settings_descr">" (inclusief GPX analysering)"</string>
-  <string name="map_online_plugin_is_not_installed">Activeer de online kaarten plugin om andere kaartbronnen te kunnen selecteren.</string>
+  <string name="map_online_plugin_is_not_installed">Activeer de online kaarten-plugin om andere kaartbronnen te kunnen selecteren.</string>
   <string name="map_online_data">Online (raster-) kaarten</string>
-  <string name="map_online_data_descr">Gebruik online kaarten (download en cache deze op SD kaart)</string>
+  <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart)</string>
   <string name="online_map_settings">Online kaarten</string>
-  <string name="online_map_settings_descr">Configureer online of gecachete kaartbronnen</string>
-  <string name="map_settings">- Kaart instellingen</string>
+  <string name="online_map_settings_descr">Configureer online of bewaarde kaartbronnen</string>
+  <string name="map_settings">- Kaartinstellingen</string>
   <string name="map_settings_descr">Configureer de kaartweergave</string>
-  <string name="osmand_rastermaps_plugin_description">Met deze plugin kan je gebruik maken van een aantal online- of locaal opgeslagen kaarten als basiskaart of als overlay/underlay kaart. De kaarten kunnen ook offline aangemaakt worden en gekopieerd naar de OsmAnd map.</string>
-  <string name="osmand_background_plugin_description">Met deze plugin kan je tracken of navigeren in energie zuinige mode (scherm uit) door slechts periodiek de GPS te activeren om de locatie op te vragen.</string>
-  <string name="osmand_accessibility_description">Met deze plugin kan je speciale toegankelijkheidsopties activeren.</string>
+  <string name="osmand_rastermaps_plugin_description">Toon instellingen om online-kaarten als basiskaart of als overlay/underlay kaart te gebruiken. De kaarten kunnen ook offline gemaakt worden en worden bewaard in de OsmAnd-map.</string>
+  <string name="osmand_background_plugin_description">Toon instellingen om tijdens standby (scherm uit) te navigeren of een spoor vast te leggen (met periodiek gebruik van de GPS).</string>
+  <string name="osmand_accessibility_description">Toon speciale toegankelijkheidsopties.</string>
   <string name="extra_settings">Geavanceerde instellingen</string>
-  <string name="osmand_monitoring_description">Met deze plugin kan je je reizen in GPX bestanden opslaan of live (laten) bekijken via een webservice.</string>
-  <string name="osmand_extra_settings_description">Met deze plugin kan je geavanceerde kaartinstellingen en enkele apparaatspecifieke instellingen wijzigen.</string>
-  <string name="osmand_development_plugin_description">Met deze plugin kan je ontwikkeling en fout-opsporing opties activeren zoals navigatie met animatie of de kaartgeneratie snelheid.</string>
-  <string name="plugins_screen">Plugin manager</string>
+  <string name="osmand_monitoring_description">Toon instellingen om reizen in GPX bestanden vast te leggen, of live, via een webservice, online te bewaren.</string>
+  <string name="osmand_extra_settings_description">Toon geavanceerde kaartinstellingen (zoals meer details tonen) en enkele apparaatspecifieke instellingen.</string>
+  <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met animatie of het meten van de kaartweergavesnelheid.</string>
+  <string name="plugins_screen">Plugin-manager</string>
   <string name="select_plugin_to_activate">Toets een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
-  <string name="prefs_plugins_descr">Plugins geven extra functionaliteit zoals tracking, rasterkaarten, scherm-uit mode, toegankelijkheidsinstellingen en meer.</string>
-  <string name="prefs_plugins">Plugin manager</string>
+  <string name="prefs_plugins_descr">Plugins geven extra instellingen en functies zoals tracking, rasterkaarten, doorwerken in standby mode en toegankelijkheidsinstellingen.</string>
+  <string name="prefs_plugins">Plugin-manager</string>
   <string name="tip_recent_changes_0_8_0_t">"Wijzigingen in 0.8.0 :
-\n\t- *Plugin functionaliteit*
-\n\t- De meeste functionaliteit is gegroepeerd op features en kan worden geactiveerd/gedeactiveerd in de Plugin Manager. Dit omvat rasterkaarten (online of opgeslagen), tracking-instellingen en vele andere nieuwe en al eerder bestaande features)\n\t- *Nieuw offline kaartformaat*\n\t- kaartgeneratie sneller en nauwkeuriger (problemen met kustlijnen en doorlopende vlakken opgelost)\n\t- Alle offline gegevens moeten worden vernieuwd (de oude gegevens werken niet meer)\n\t- *Offline navigatie is sterk verbeterd*\n\t- *gebruiksvriendelijkheid en interface*\n\t- Op vele punten verbeterd "</string>
-  <string name="osm_editing_plugin_description">Met deze plugin kan je OSM bewerken zoals verzamelen of wijzigen van OSM POI, openen of extra informatie geven voor OSM bugs en GPX bestanden versturen (OSM login gegevens vereist).</string>
+\n\t- *Plugin-functionaliteit*
+\n\t- De meeste functionaliteit is gegroepeerd op features en kan worden geactiveerd/gedeactiveerd in de Plugin-manager. Dit omvat rasterkaarten (online of opgeslagen), tracking-instellingen en vele andere nieuwe en al eerder bestaande features)\n\t- *Nieuw offline kaartformaat*\n\t- kaartweergave sneller en nauwkeuriger (problemen met kustlijnen en doorlopende vlakken opgelost)\n\t- Alle offline gegevens moeten worden vernieuwd (de oude gegevens werken niet meer)\n\t- *Offline navigatie is sterk verbeterd*\n\t- *gebruiksvriendelijkheid en interface*\n\t- Op vele punten verbeterd "</string>
+  <string name="osm_editing_plugin_description">Toon instellingen om OpenStreetMap te verbeteren. Verzamel of wijzig POI, maak of wijzig OSM-bugs, en upload GPX-tracks (heeft OSM-account nodig).</string>
   <string name="north_north_west">noordnoordwest</string>
   <string name="search_position_current_location_search">Positie zoeken…</string>
   <string name="search_position_current_location_found">Positie (Gevonden)</string>
@@ -862,7 +870,7 @@
   <string name="search_position_fixed">Gefixed</string>
   <string name="local_index_routing_data">Navigatiedata</string>
   <string name="navigate_point_format">Formaat:</string>
-  <string name="poi_search_desc">Interessepunten of \'Points Of Interest\' (POI)</string>
+  <string name="poi_search_desc">Zoek interessepunt (POI)</string>
   <string name="address_search_desc">Adres zoeken</string>
   <string name="navpoint_search_desc">Navigatie punt</string>
   <string name="transport_search_desc">Openbaar vervoer zoeken</string>
@@ -875,7 +883,7 @@
   <string name="route_kr">Rechts aanhouden en volg</string>
   <string name="rendering_attr_noPolygons_description">Maak alle oppervlaktes op de kaart transparant</string>
   <string name="rendering_attr_noPolygons_name">Geen vlakken</string>
-  <string name="rendering_attr_appMode_name">Weergave modus</string>
+  <string name="rendering_attr_appMode_name">Weergave-modus</string>
   <string name="rendering_attr_appMode_description">Kaartoptimalisatie voor dit gebruiksprofiel</string>
   <string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn:</string>
   <string name="rendering_attr_contourLines_name">Toon hoogtelijnen</string>
@@ -883,11 +891,11 @@
   <string name="rendering_attr_hmRendered_name">Toon meer details</string>
   <string name="tip_recent_changes_0_8_1_t">"Wijzigingen in 0.8.1 :
 \n\n\t* Nauwkeuriger routeberekening (iets trager)
-\n\n\t* Slimme en snelle route-herberekening
-\n\n\t* Rijstrook begeleiding
+\n\t* Slimme en snelle route-herberekening
+\n\t* Rijstrook-begeleiding
 \n\t* Informatie over maximum snelheden, snelheidscamera\'s en verkeersdrempels
 \n\t* Verbeterde stembegeleiding op snelwegen
-\n\n\t* Parkeer plugin (\"Waar staat mijn auto geparkeerd?\")
+\n\t* Parkeer-plugin (\"Waar staat mijn auto geparkeerd?\")
 \n\t* Toon/verberg track-registratie widget "</string>
   <string name="gpxup_public">Openbaar</string>
   <string name="gpxup_identifiable">Identificeerbaar</string>
@@ -898,7 +906,7 @@
   <string name="osmand_parking_warning_text">Notificatie voor het ophalen van je auto is toegevoegd aan je kalender. Dit blijft staan, totdat je het handmatig verwijdert.</string>
   <string name="osmand_parking_time_limit_title">Stel de parkeertijd-limiet in</string>
   <string name="osmand_parking_delete_confirm">Wil je de locatie van de geparkeerde auto verwijderen?</string>
-  <string name="osmand_parking_delete">Verwijder de parkeer markering</string>
+  <string name="osmand_parking_delete">Verwijder de parkeer-markering</string>
   <string name="osmand_parking_choose_type">Kies het type parkeerplaats</string>
   <string name="osmand_parking_lim_text">Met tijdslimiet</string>
   <string name="osmand_parking_no_lim_text">Zonder tijdslimiet</string>
@@ -910,10 +918,10 @@
   <string name="osmand_parking_pm">NM</string>
   <string name="osmand_parking_am">VM</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
-  <string name="osmand_parking_plugin_description">Met deze plugin kan je de locatie van je geparkeerde auto opslaan.</string>
+  <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar je auto geparkeerd staat.</string>
   <string name="osmand_parking_plugin_name">Parkeerpositie</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
-  <string name="context_menu_item_delete_parking_point">Verwijder parkeerpositie markering</string>
+  <string name="context_menu_item_delete_parking_point">Verwijder een parkeerpositie</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
   <string name="shared_location">Gedeelde locatie</string>
   <string name="update_downlod_list">Vernieuw lijst</string>
@@ -947,7 +955,7 @@
   <string name="map_widget_right_stack">Rechterkant:</string>
   <string name="map_widget_left_stack">Linkerkant:</string>
   <string name="map_widget_parking">Parkeren</string>
-  <string name="map_widget_monitoring">Track registratie</string>
+  <string name="map_widget_monitoring">Trackregistratie</string>
   <string name="map_widget_speed">Snelheid</string>
   <string name="map_widget_distance">Afstand tot bestemming</string>
   <string name="map_widget_altitude">Hoogte</string>
@@ -959,19 +967,19 @@
   <string name="bg_service_screen_lock">Vergrendel scherm</string>
   <string name="bg_service_screen_lock_toast">Het scherm is vergrendeld</string>
   <string name="bg_service_interval">Zet ontwaak-interval:</string>
-  <string name="screen_is_locked">Voor ontgrendelen scherm, toets het slot icoon</string>
+  <string name="screen_is_locked">Tik op het slotje om te ontgrendelen</string>
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
-  <string name="bg_service_sleep_mode_off">Slaap modus\naanzetten</string>
-  <string name="bg_service_sleep_mode_on">Slaap modus\nuitzetten</string>
+  <string name="bg_service_sleep_mode_off">Slaapmodus\naanzetten</string>
+  <string name="bg_service_sleep_mode_on">Slaapmodus\nuitzetten</string>
 <string name="email">email</string>
 <string name="filterpoi_activity">Creëer interessepunt filter</string>
 <string name="select_navigation_mode">Kies soort vervoer</string>
 <string name="day_night_info_description">Zonsopgang : %1$s \nZonsondergang : %2$s</string>
 <string name="day_night_info">Dag/nacht info</string>
 <string name="map_widget_day_night">Dag/nacht kaart</string>
-<string name="map_widget_vector_attributes">Kaartoplevering attributen:</string>
-<string name="map_widget_renderer">Kaartoplevering stijl</string>
-<string name="tip_rotation_switching_t_v2">"\tJe kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te klikken op het kompas-icoon.↵
+<string name="map_widget_vector_attributes">Kaartweergave attributen:</string>
+<string name="map_widget_renderer">Kaartweergave stijl</string>
+<string name="tip_rotation_switching_t_v2">"\tJe kan kiezen hoe de kaartweergave geroteerd wordt door herhaaldelijk te tikken op het kompas-icoon.↵
 \n\tDe keuzen zijn:↵
 \n\t\'Niet roteren (het noorden is boven)\' - De kaart wordt niet geroteerd. Het noorden is altijd boven↵
 \n\t\'In beweegrichting\' - De kaartrotatie wordt permanent aangepast aan de beweegrichting↵
