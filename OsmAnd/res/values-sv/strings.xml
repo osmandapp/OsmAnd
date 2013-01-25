@@ -854,7 +854,7 @@
 	<string name="map_widget_max_speed">Hastighetsbegränsning</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Inga byggnader hittades.</string>
-    <string name="incremental_search_city">Sök efter en ort stegvis</string>
+    <string name="incremental_search_city">Sök stad stegvis</string>
     <string name="search_villages_and_postcodes">Sök byar/postnummer</string>
 	<string name="rendering_attr_showRoadMaps_description">Välj när du vill visa kartor som endast har vägar:</string>
 	<string name="rendering_attr_showRoadMaps_name">Kartor med enbart vägar</string>
