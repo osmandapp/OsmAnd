@@ -19,14 +19,14 @@
 <string name="map_widget_next_turn">Nästa sväng</string>
 <string name="show_warnings_title">Visa larm…</string>
 <string name="show_warnings_descr">Konfigurerar trafikvarningar (hastighetsgränser, stopp, vägbulor), varning för hastighetskameror och filinformation</string>
-<string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks</string>
+<string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt</string>
 <string name="use_compass_navigation">Använd kompass</string>
 <string name="avoid_motorway">Undvik motorvägar</string>
 <string name="auto_zoom_map_descr">Autozoom på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk kartzoomning</string>
 <string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Waypoints\n\t* Förbättrad vägvisning\n\t* Inställning för att undvika motorvägar när man bygger en rutt\n\t* Lagt till ytterligare en typ av väg för cyklar till kartan (Cycleway=track)\n\t* Buggfixar "</string>
-<string name="snap_to_road_descr">Tvinga positionen till väg under navigering</string>
-<string name="snap_to_road">Tvinga till väg</string>
+<string name="snap_to_road_descr">Fäst positionen på väg under navigering</string>
+<string name="snap_to_road">Fäst på väg</string>
 <string name="tip_update_index">Uppdatering av offlinedata</string>
 <string name="filterpoi_activity">Skapa POI-filter</string>
 <string name="recalculate_route_to_your_location">Transportsätt:</string>
@@ -36,7 +36,7 @@
 \nSolnedgång: %2$s</string>
 <string name="day_night_info">Dag-/nattinformation</string>
 <string name="map_widget_day_night">Dag-/nattkarta</string>
-<string name="map_widget_vector_attributes">Återgivningsattribut:</string>
+<string name="map_widget_vector_attributes">Renderingsattribut:</string>
 <string name="position_on_map_descr">Välj positionsmarkörens placering på kartan</string>
 <string name="position_on_map">Positionsmarkör</string>
 <string name="layer_map_appearance">Konfigurera skärm…</string>
@@ -50,7 +50,7 @@
 <string name="map_widget_view_direction">Visningsriktning</string>
 <string name="map_widget_transparent">Genomskinligt skal</string>
 <string name="monitoring_mode_off">Spela in GPX</string>
-<string name="monitoring_mode_on">Stopp\n GPX-insp.</string>
+<string name="monitoring_mode_on">Stoppa\n GPX-insp.</string>
 <string name="gps_wakeup_interval">GPS-väckningsintervall: %s</string>
 <string name="int_continuosly">Kontinuerlig</string>
 <string name="map_widget_map_select">Kartkälla</string>
@@ -90,14 +90,14 @@
 <string name="search_tabs_location">Plats</string>
 <string name="context_menu_item_navigate_point">Ange som destination</string>
 <string name="context_menu_item_add_favorite">Lägg till i favoriter</string>
-<string name="context_menu_item_update_map">Uppdatera karta</string>
+<string name="context_menu_item_update_map">Uppdatera kartan</string>
 <string name="context_menu_item_open_bug">Öppna OSM-bugg</string>
 <string name="context_menu_item_create_poi">Skapa POI</string>
 <string name="use_internet">Använd Internet</string>
 <string name="map_widget_config">Konfigurera skärm</string>
 <string name="map_widget_next_turn_small">Nästa sväng (liten)</string>
 <string name="map_widget_next_next_turn">Nästnästa sväng</string>
-<string name="map_widget_mini_route">Mini-resvägskarta</string>
+<string name="map_widget_mini_route">Liten ruttkarta</string>
 <string name="bg_service_screen_lock">Lås skärmen</string>
 <string name="bg_service_screen_unlock">Lås upp skärmen</string>
 <string name="bg_service_screen_lock_toast">Skärmen är låst</string>
@@ -107,16 +107,15 @@
 <string name="avoid_toll_roads">Undvik betalvägar</string>
 <string name="continue_follow_previous_route_auto">Tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
 <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
-<string name="osmand_parking_hours">Timmar</string>
-<string name="osmand_parking_minutes">Minuter</string>
+<string name="osmand_parking_hours">timmar</string>
+<string name="osmand_parking_minutes">minuter</string>
 <string name="osmand_parking_position_description_add_time">Bilen parkerades:</string>
 <string name="tip_recent_changes_0_8_1_t">"Ändringar i 0.8.1 :\n\t* Mer exakt ruttkalkylering (lite långsammare)\n\t* Smart och snabb rekalkylering av rutt\n\t* Navigera med körfält\n\t* Information om hastighetsgränser, fartkameror och vägbulor\n\t* Förbättrat röstnavigering på motorvägar\n\t* Parkeringgplugin (\'Var parkerade jag min bil?\')\n\t* Aktivera/avaktivera logg-widget "</string>
-<string name="select_animate_speedup">Välj animera rutt acceleration</string>
+<string name="select_animate_speedup">Välj animerad ruttacceleration</string>
 <string name="global_app_allocated_memory_descr">Allokerat minne %1$s MB (Android-gräns %2$s MB, Dalvik %3$s MB).</string>
 <string name="global_app_allocated_memory">Allokerat minne</string>
-<string name="native_app_allocated_memory_descr">Totalt infödda minne tilldelas av App %1$s MB (Dalvik %2$s MB, andra %3$s MB).↵
-Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
-<string name="native_app_allocated_memory">Totalt infödda minne</string>
+<string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelas av app %1$s MB (Dalvik %2$s MB, annat %3$s MB).↵ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
+<string name="native_app_allocated_memory">Totalt inbyggt minne</string>
 <string name="update_downlod_list">Ladda om listan</string>
 <string name="starting_point_too_far">Startpunkten för långt från närmaste väg.</string>
 <string name="shared_location">Delad plats</string>
@@ -145,12 +144,12 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
 <string name="download_link_and_local_description">Klicka här för att ladda ner eller uppdatera offlinedata.
-\nKlicka på befintliga objekt för att se fler detaljer; tryck och håll för att inktivera eller ta bort. Aktuella data på enheten (%1$s gratis):</string>
+\nKlicka på ett befintligt objekt för att se fler detaljer; tryck och håll för att inaktivera eller ta bort. Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
 <string name="unknown_location">Position ännu inte känd</string>
 <string name="context_menu_item_directions">Vägbeskrivning hit</string>
 <string name="confirm_interrupt_download">Vill du avbryta filnedladdning?</string>
-<string name="local_indexes_cat_tile">Online kartor (plattor)</string>
+<string name="local_indexes_cat_tile">Onlinekartor och tile maps</string>
 <string name="local_indexes_cat_map">Offline-kartor (vektor)</string>
 <string name="gpx_index_settings_descr">" (inkluderar GPX analysator)"</string>
 <string name="index_settings_descr">Ladda ner, visa detaljer, och hantera offline-kartor</string>
@@ -178,7 +177,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="zoomIn">Zooma in</string>
 <string name="zoomIs">Zoom är</string>
 <string name="north">norr</string>
-<string name="north_north_east">nord-nord-öst</string>
+<string name="north_north_east">nord-nord-ost</string>
 <string name="north_east">nord-ost</string>
 <string name="east_north_east">ost-nord-ost</string>
 <string name="east">öster</string>
@@ -196,15 +195,15 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="front">Främre</string>
 <string name="front_right">Höger fram</string>
 <string name="right">Höger</string>
-<string name="back_right">Tillbaka till höger</string>
-<string name="back">Tillbaka</string>
-<string name="back_left">Tillbaka kvar</string>
+<string name="back_right">Höger bak</string>
+<string name="back">Bak</string>
+<string name="back_left">Vänster bak</string>
 <string name="left">Vänster</string>
-<string name="front_left">Främre vänster</string>
+<string name="front_left">Vänster fram</string>
 <string name="towards">mot</string>
 <string name="altitude">Höjd</string>
-<string name="map_widget_renderer">Återgivningsstil</string>
-<string name="live_monitoring_mode_off">Start\n live-spårning</string>
+<string name="map_widget_renderer">Kartstil</string>
+<string name="live_monitoring_mode_off">Starta\n live-spårning</string>
 <string name="osmand_parking_position_description_add">Att hämta bilen på:</string>
 <string name="osmand_parking_pm">PM</string>
 <string name="osmand_parking_am">AM</string>
@@ -229,21 +228,21 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="history_search_desc">Sökhistorik</string>
 <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
 <string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offlinedata som du kan ladda ner via \'Inställningar\' -&gt; \'Offlinedata\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
-<string name="basemap_was_selected_to_download">Basemap krävs för korrekt tillämpning funktion och valdes för att ladda ner.</string>
+<string name="basemap_was_selected_to_download">En baskarta krävs för att appen ska fungera korrekt och markerades för nedladdning.</string>
 <string name="select_index_file_to_download">Hittade ingenting. Om du inte kan hitta din region, kan du skapa den själv (se http://osmand.net).</string>
 <string name="map_online_plugin_is_not_installed">Aktivera pluginen online-kartor för att välja olika kartkällor</string>
-<string name="map_online_data">Online kartor (plattor)</string>
+<string name="map_online_data">Onlinekartor och tile maps</string>
 <string name="map_online_data_descr">Använd online-kartor (ladda ner och cache plattor på SD-kort)</string>
-<string name="online_map_settings_descr">Konfigurera online eller cachade källor kakel karta</string>
+<string name="online_map_settings_descr">Konfigurera online- eller cachade \'tile map\'-källor</string>
 <string name="map_settings">Kartinställningar</string>
 <string name="map_settings_descr">Konfigurera kartvisning</string>
-<string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online eller cachad kakel kartor som bas karta eller som overlay / underlag kartor. Dessa kartor kan också framställas offline och kopieras till OsmAnd mappen.</string>
+<string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online-kartor eller tile maps som baskarta eller som överläggs-/underläggs-kartor. Dessa kartor kan också förberedas offline och kopieras till OsmAnd-mappen.</string>
 <string name="osmand_background_plugin_description">Visa inställningar för att aktivera spårning och navigering i sömnen (skärm av) läge via periodvis vakna upp GPS-enheten.</string>
 <string name="osmand_extra_settings_description">Visa inställningar för avancerad karta konfiguration (som ökar karta detaljer) och vissa enhetsspecifika detaljerna.</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
 <string name="plugins_screen">Plugin-hanterare</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
-<string name="live_monitoring_mode_on">Stopp\n live-spårning</string>
+<string name="live_monitoring_mode_on">Stoppa\n live-spårning</string>
 <string name="map_widget_fluorescent">Fluorescerande rutter</string>
 <string name="bg_service_sleep_mode_off">Aktivera\n viloläge</string>
 <string name="bg_service_sleep_mode_on">Stoppa\n viloläge</string>
@@ -272,7 +271,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="osmand_long_description_1000_chars">" OsmAnd (OSM automatiserade Navigation Vägbeskrivning) OsmAnd är ett open source navigering ansökan med tillgång till ett brett utbud av globala OpenStreetMap (OSM) data. Alla kartdata (vektor-eller kakel kartor) kan lagras i telefonens minne kort för offline användning. OsmAnd erbjuder även offline och online routing-funktionalitet, inklusive turn-by-turn röstguidning. Några av de viktigaste funktionerna: - Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp) - Kompakta offline vektorkartor för hela världen finns - Nedladdning av land eller region kartor direkt från appen - Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens - Offline söka efter adresser och platser (POIs) - Offline dirigering för korta sträckor (experimentell) - Bil, cykel och fotgängare lägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratis version av OsmAnd: - Antal karta nedladdningar begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväga att köpa OsmAnd + eller finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
-<string name="support_new_features">Föreslå nya funktioner</string>
+<string name="support_new_features">Ge stöd till nya funktioner</string>
 <string name="show_ruler_level">Visa linjal</string>
 <string name="info_button">Info</string>
 <string name="back_to_location">Tillbaka till plats</string>
@@ -283,7 +282,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="direction_style_clockwise">Medurs (12 sektorer)</string>
 <string name="settings_direction_style">Riktningsstil</string>
 <string name="settings_direction_style_descr">Välj sätt att uttrycka relativa riktningar under rörelse</string>
-<string name="auto_announce_on">Börja autoannouncing</string>
+<string name="auto_announce_on">Starta autoannouncing</string>
 <string name="auto_announce_off">Sluta autoannouncing</string>
 <string name="scroll_map_by_gestures_descr">Bläddra i kartan med gester på pekskärmen</string>
 <string name="scroll_map_by_gestures">Naturlig kartrullning</string>
@@ -345,7 +344,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="index_name_asia">Asien</string>
 <string name="index_name_oceania">Oceanien</string>
 <string name="index_name_other">Hela världen och ämneskartor</string>
-<string name="index_name_wiki">Världen Wikipedia</string>
+<string name="index_name_wiki">Världsvid Wikipedia</string>
 <string name="index_name_voice">Röstpaket (inspelat)</string>
 <string name="index_name_tts_voice">Röstpaket (TTS)</string>
 <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -425,7 +424,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="select_search_position">Sök nära:</string>
 <string name="context_menu_item_search">Sök i närheten</string>
 <string name="save_route_dialog_title">Spara rutt som GPX-spår</string>
-<string name="route_successfully_saved_at">Rutten sparades som \"%1$s\'.</string>
+<string name="route_successfully_saved_at">Rutten sparades som \'%1$s\'.</string>
 <string name="filename_input">"Filnamn: "</string>
 <string name="file_with_name_already_exist">En fil med samma namn finns redan.</string>
 <string name="default_buttons_save">Spara</string>
@@ -434,7 +433,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="local_index_items_uploaded">%1$d av %2$d post(er) har överförts utan problem.</string>
 <string name="local_index_mi_upload_gpx">Skicka till OSM</string>
 <string name="show_more_map_detail">Visa mer kartdetaljer</string>
-<string name="show_more_map_detail_descr">Visa några vektor-kartdetaljer (vägar, etc.) vid lägre zooma</string>
+<string name="show_more_map_detail_descr">Visa några vektor-kartdetaljer (vägar, etc.) vid lägre zoom</string>
 <string name="favourites_delete_multiple_succesful">Favoritpunkt(er) har tagits bort utan problem.</string>
 <string name="favorite_delete_multiple">Du håller på att ta bort %1$d favorit(er) och %2$d favoritgrupp(er). Är du säker?</string>
 <string name="favorite_home_category">Hem</string>
@@ -445,13 +444,13 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="favourites_edit_dialog_category">Kategori</string>
 <string name="vector_map_not_needed">Nej, tack</string>
 <string name="basemap_missing">Basvärldskarta (som omfattar hela världen i låg inzoomning) saknas. Hämta gärna World_basemap_x.obf för en komplett miljö.</string>
-<string name="vector_data_missing">Ombord (\'offline\') data saknas på SD-kort. Tänk att ladda ner den för att kunna använda kartor offline.</string>
+<string name="vector_data_missing">Offline-data saknas på SD-kortet. Det kan vara klokt att ladda ner detta för att kunna använda kartor offline.</string>
 <string name="local_index_gpx_info_show">\n\nTryck och håll för alternativ</string>
 <string name="local_index_gpx_info_speed">↵\nSnitthastighet: %1$s↵\nMaxhastighet: %2$s</string>
-<string name="local_index_installed">Edition</string>
+<string name="local_index_installed">Utgåva</string>
 <string name="local_index_items_backuped">%1$d av %2$d post(er) har inaktiveras utan problem.</string>
 <string name="local_index_items_deleted">%1$d av %2$d post(er) har tagits bort utan problem.</string>
-<string name="local_index_items_restored">%1$d av %2$d post(er) aktiveras utan problem.</string>
+<string name="local_index_items_restored">%1$d av %2$d post(er) har aktiverats utan problem.</string>
 <string name="local_index_no_items_to_do">Inga poster till %1$s</string>
 <string name="local_index_action_do">Du håller på att %1$s %2$s post(er). Fortsätta?</string>
 <string name="local_index_mi_restore">Aktivera</string>
@@ -459,7 +458,9 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="local_index_mi_delete">Ta bort</string>
 <string name="local_index_mi_reload">Ladda om från SD-kort</string>
 <string name="local_index_download">Ladda ner…</string>
-<string name="local_index_tile_data">Tile-data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable :%4$s \nZooms ladda ned : %5$s</string>
+<string name="local_index_tile_data">Tile-data: %1$s
+\nMinimal zoom: %2$d\nMaximal zoom: %3$d\nNedladdningsbar: %4$s
+\nNedladdade zoom: %5$s</string>
 <string name="local_index_poi_data">POI-data</string>
 <string name="local_index_address_data">Adressdata</string>
 <string name="local_index_transport_data">Transportdata</string>
@@ -493,21 +494,21 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="choose_audio_stream_descr">Välj kanal för att spela upp röstvägledningen (systemberoende)</string>
 <string name="voice_stream_voice_call">Röstsamtal ljud</string>
 <string name="voice_stream_notification">Ljudnotifiering</string>
-<string name="voice_stream_music">Media/musik ljud</string>
+<string name="voice_stream_music">Media-/musikljud</string>
 <string name="warning_tile_layer_not_downloadable">Appen kan inte hämta kartlager %1$s. Försök installera om det.</string>
 <string name="overlay_transparency_descr">Ändra överläggstransparens</string>
 <string name="overlay_transparency">Överläggstransparens</string>
 <string name="map_transparency_descr">Ändra transparens för baskartan</string>
 <string name="map_transparency">Transparens för baskartan</string>
-<string name="layer_underlay">Underlag karta…</string>
-<string name="map_underlay">Underlag karta</string>
+<string name="layer_underlay">Underläggskarta…</string>
+<string name="map_underlay">Underläggskarta</string>
 <string name="map_underlay_descr">Välj underläggskarta</string>
 <string name="layer_overlay">Överläggskarta…</string>
 <string name="default_none">Inga</string>
 <string name="map_overlay">Överläggskarta</string>
 <string name="map_overlay_descr">Välj överläggskarta</string>
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>
-<string name="select_tile_source_to_install">Välj kartor/kartbitar att installera eller uppdatera</string>
+<string name="select_tile_source_to_install">Välj kartor/kartrutor att installera eller uppdatera</string>
 <string name="internet_not_available">Internetanslutning krävs för åtgärden men är inte tillgänglig</string>
 <string name="install_more">Installera mer…</string>
 <string name="level_to_switch_vector_raster_descr">Minimal zoomnivå för att använda vektorkartor</string>
@@ -556,12 +557,12 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="amenity_type_historic">Historisk</string>
 <string name="amenity_type_landuse">Markanvändning</string>
 <string name="amenity_type_leisure">Fritid</string>
-<string name="amenity_type_manmade">Konstgjorda</string>
+<string name="amenity_type_manmade">Konstgjort</string>
 <string name="amenity_type_military">Militärt</string>
-<string name="amenity_type_natural">Naturlig</string>
+<string name="amenity_type_natural">Naturligt</string>
 <string name="amenity_type_office">Kontor</string>
 <string name="amenity_type_other">Andra</string>
-<string name="amenity_type_shop">Handla</string>
+<string name="amenity_type_shop">Affär</string>
 <string name="amenity_type_sport">Sport</string>
 <string name="amenity_type_sustenance">Näring</string>
 <string name="amenity_type_tourism">Turism</string>
@@ -572,7 +573,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="indexing_transport">Indexerar transport…</string>
 <string name="input_output_error">Ett I/O-fel har inträffat</string>
 <string name="km">km</string>
-<string name="km_h">km/t</string>
+<string name="km_h">km/h</string>
 <string name="m">m</string>
 <string name="old_map_index_is_not_supported">Det föråldrade kartdataformatet \"{0}\" stöds inte</string>
 <string name="poi_filter_car_aid">Bilhjälp</string>
@@ -598,7 +599,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="new_destination_point_dialog">Du har redan en inställd destination.</string>
     <string name="target_point">Waypoint %1$s</string>
     <string name="target_points">Waypoints</string>
-    <string name="intermediate_point_too_far">Waypoint %1$s för långt från närmaste väg.</string>
+    <string name="intermediate_point_too_far">Waypointen %1$s för långt från närmaste väg.</string>
     <string name="arrived_at_intermediate_point">Du har anlänt till din waypoint</string>
     <string name="context_menu_item_intermediate_point">Lägg till som waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
@@ -606,7 +607,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="btn_add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge…</string>
     <string name="poi_filter_parking">Parkering</string>
-    <string name="poi_filter_emergency">Nödläge</string>
+    <string name="poi_filter_emergency">Olycka</string>
     <string name="poi_filter_public_transport">Kollektivtrafik</string>
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
@@ -615,7 +616,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
-	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras i gamla appen och senare importeras av den nya.</string>
+	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
 	<string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
 	<string name="downloading_build">Laddar ner bygge…</string>
 	<string name="install_selected_build">Vill du installera OsmAnd - {0} från {1}{2} MB?</string>
@@ -640,7 +641,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="reload">Uppdatera</string>
 	<string name="fast_route_mode">Snabbaste rutten</string>
 	<string name="fast_route_mode_descr">"Aktivera för att beräkna snabbaste rutten eller inaktivera för kortaste rutten "</string>
-	<string name="tiles_to_download_estimated_size">På zoom {0} download {1} plattor ({2} MB)</string>
+	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartrutor ({2} MB)</string>
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Offline-data (hämta)</string>
@@ -658,7 +659,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="poi_context_menu_website">Visa POI-webbplats</string>
 	<string name="poi_context_menu_call">Visa POI-telefon</string>
 	<string name="local_index_gpx_info_elevation">\nGenomsnittligt höjd: %1$.0f m\nLägsta höjd: %2$.0f m\nHögsta höjd: %3$.0f m\nUppstigning: %4$.0f m\nNedstigning: %5$.0f m</string>
-	<string name="local_index_gpx_info">Subtracks: %1$d\nTotalt antal poäng: %2$d\nEtappmål: %3$d\nTotal sträcka: %4$s\nStarttid: %5$tF, %5$tR\nSluttid: %6$tF, %6$tR</string>
+	<string name="local_index_gpx_info">Subtracks: %1$d\nTotalt antal punkter: %2$d\nWaypoints: %3$d\nTotal sträcka: %4$s\nStarttid: %5$tF, %5$tR\nSluttid: %6$tF, %6$tR</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigering är en experimentell funktion och den fungerar inte för sträckor över c:a 20 km.\n\nNavigeringstjänsten är tillfälligt kopplad till online CloudMade.</string>
 	<string name="website">webbplats</string>
 	<string name="phone">telefon</string>
@@ -680,11 +681,11 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="error_reading_gpx">Fel vid läsning av GPX-data</string>
 	<string name="vector_data">Offline vektorkartor</string>
 	<string name="transport_context_menu">Sök transport vid stopp</string>
-	<string name="point_on_map">Plats:\n Lat %1$.5f\n Lon %2$.5f</string>
+	<string name="point_on_map">Plats:\n Lat %1$.5f\n Long %2$.5f</string>
 	<string name="poi_context_menu_modify">Ändra POI</string>
 	<string name="poi_context_menu_delete">Ta bort POI</string>
 	<string name="rotate_map_compass_opt">Till kompass</string>
-	<string name="rotate_map_bearing_opt">Till rörelseriktning</string>
+	<string name="rotate_map_bearing_opt">Till rörelseriktningen</string>
 	<string name="rotate_map_none_opt">Vrid inte (norr är uppåt)</string>
 	<string name="rotate_map_to_bearing_descr">Välj justering av kartskärmen</string>
 	<string name="rotate_map_to_bearing">Kartorientering</string>
@@ -706,7 +707,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="layer_route">Rutt</string>
 	<string name="layer_favorites">Favoriter</string>
 	<string name="layer_osm_bugs">OSM-buggar</string>
-	<string name="layer_transport">Transport stoppar</string>
+	<string name="layer_transport">Transportstoppar</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Kartkälla…</string>
 	<string name="menu_layers">Definiera vy</string>
@@ -766,20 +767,20 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="opening_hours_not_supported">Öppettider format stöds inte för redigering</string>
 	<string name="add_new_rule">Lägg till en ny regel</string>
 	<string name="transport_Routes">Rutter</string>
-	<string name="transport_Stop">Stopp</string>
-	<string name="transport_stops">stopp</string>
-	<string name="transport_search_after">Följande väg</string>	
-	<string name="transport_search_before">Tidigare väg</string>
+	<string name="transport_Stop">Hållplats</string>
+	<string name="transport_stops">hållplatser</string>
+	<string name="transport_search_after">Följande rutt</string>	
+	<string name="transport_search_before">Tidigare rutt</string>
 	<string name="transport_finish_search">Avsluta sökningen</string>
-	<string name="transport_stop_to_go_out">Välj stopp för att få ut</string>
+	<string name="transport_stop_to_go_out">Välj hållplats att kliva av vid</string>
 	<string name="transport_to_go_after">tidigare sträcka</string>
-	<string name="transport_to_go_before">Följande sträcka</string>
-	<string name="transport_stops_to_pass">Stop att passera</string>
+	<string name="transport_to_go_before">följande sträcka</string>
+	<string name="transport_stops_to_pass">hållplatser att passera</string>
 	<string name="transport_route_distance">Rutt avstånd</string>
 	<string name="transport">Transport</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="show_transport_over_map_description">Visa hållplatser för kollektivtrafik på kartan</string>
-	<string name="show_transport_over_map">Visa transportstoppar</string>
+	<string name="show_transport_over_map">Visa hållplatser</string>
 	<string name="hello">Navigationsappen OsmAnd</string>
 	<string name="update_poi_success">POI-data har uppdaterats ({0} laddades)</string>
 	<string name="update_poi_error_local">Fel vid uppdatering av lokal POI-lista</string>
@@ -810,7 +811,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adress</string>
 	<string name="download_index_success">Nedladdningen gick utan problem</string>
-	<string name="error_io_error">I/O-fel inträffade</string>
+	<string name="error_io_error">Ett I/O-fel inträffade</string>
 	<string name="downloading_file">Laddar ner fil…</string>
 	<string name="downloading">Laddar ner…</string>
 	<string name="downloading_list_indexes">Laddar ner lista över tillgängliga regioner…</string>
@@ -834,7 +835,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="loading_poi_obj">Laddar POI…</string>
 	<string name="loading_streets_buildings">Laddar gator/byggnader…</string>
 	<string name="loading_postcodes">Laddar postnummer…</string>
-	<string name="loading_streets">Laddat gator…</string>
+	<string name="loading_streets">Laddar gator…</string>
 	<string name="loading_cities">Laddar städer…</string>
 	<string name="poi">POI</string>
 	<string name="arrived_at_destination">Du har anlänt till din destination</string>
@@ -847,7 +848,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="no_route">Ingen rutt</string>
 	<string name="tip_update_index_t">\tAtt ha uppdaterad kartdata är viktigt. OsmAnd tillhandahåller en nerladdningshanterare som kan söka efter tillgänglig offlinedata.\n\tFör att söka efter uppdateringar, gå till \'Inställningar\' -&gt; \'Offline data\' -&gt; \'Ladda ner offline data\'. Efter att regionslistan hämtats från internet, vällj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.\n\tFärgerna visar tillgängligheten för uppdateringarna:\n\t\'Grön\' - indikerar att datan är identisk på enheten och servern\n\t\'Blå\' - indikerar att uppdateringar finns på servern\n\t\'Mörkblå/grön\' - data deaktiverad på enheten</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
-	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (admin nivåer 5-9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
     <string name="tip_altitude_offset">Höjdvisning - Offset-korrigering</string>
 	<string name="map_widget_max_speed">Hastighetsbegränsning</string>
@@ -870,11 +871,11 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
 	<string name="poi_action_change">ändra</string>
 	<string name="poi_action_succeded_template">Åtgärden {0} slutfördes utan problem.</string>
-	<string name="poi_error_unexpected_template">Ett oväntat fel uppstod under åtgärden {0}.</string>
+	<string name="poi_error_unexpected_template">Ett oväntat fel uppstod vid åtgärden {0}.</string>
 	<string name="poi_error_io_error_template">Ett I/O-fel inträffade under åtgärden {0}.</string>
 	<string name="poi_remove_success">POI togs bort utan problem</string>
 	<string name="poi_action_add">lägg till</string>
-	<string name="add_favorite_dialog_favourite_added_template">Favoritpunkten \"{0}\" har lagts till utan problem.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favoritpunkten \"{0}\" lades till utan problem.</string>
 	<string name="favourites_context_menu_edit">Redigera favorit</string>
 	<string name="favourites_context_menu_delete">Ta bort favorit</string>
 	<string name="favourites_remove_dialog_msg">Ta bort favoritpunkten \'%s\'?</string>
@@ -907,12 +908,12 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_unavailable">inte tillgänglig</string>
     <string name="recording_context_menu_arecord">Gör en ljudanteckning</string>
     <string name="recording_context_menu_vrecord">Gör en videoanteckning</string>
-    <string name="layer_recordings">Uppteckningsskiktet</string>
+    <string name="layer_recordings">Inspelningsskikt</string>
     <string name="recording_can_not_be_played">Inspelningen kan inte spelas upp</string>
     <string name="recording_context_menu_delete">Ta bort inspelningen</string>
     <string name="recording_context_menu_play">Spela upp</string>
-    <string name="recording_description">Inspelning %1$s %2$s av %3$s</string>
-    <string name="recording_default_name">inspelning</string>
+    <string name="recording_description">Spelar in %1$s %2$s av %3$s</string>
+    <string name="recording_default_name">spelar in</string>
     <string name="av_control_stop">AV</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin för konturlinjer offline</string>
@@ -934,15 +935,15 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 \n→ * Buggfixar
 \n→ * \'Touring View\' kartan stil alternativet med mer karta detaljer, nya stilar väg, mer kontrast och fjällvandring (SAC skala) alternativet
 \n→ * EGM96 geoid offset korrigering för GPS höjdavläsningarna</string>
-    <string name="osmand_distance_plugin_description">Mäta avståndet mellan två eller fler punkter. Lägg till punkter med en kort klick och ta bort dem med en lång tryckning.</string>
+    <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med en kort klick och ta bort dem med en lång tryckning.</string>
     <string name="use_clear_distance_measurement">Klicka en gång för att ta bort mätpunkter.</string>
     <string name="use_distance_measurement">Tryck för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
-    <string name="audionotes_location_not_defined">Plats att associera med anmärkning är inte definierad ännu. \"Använd plats ...\" att tilldela en not till den angivna platsen</string>
+    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte definierad ännu. \"Använd plats ...\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
     <string name="route_descr_from_to">Från: %1$s↵\nTill: %2$s</string>
     <string name="route_descr_from_to_via">Från: %1$s↵\nVia: %2$s↵\nTill: %3$s</string>
     <string name="close_changeset">Stäng changeset</string>
-	<string name="map_widget_show_destination_arrow">Visa destination riktning</string>
+	<string name="map_widget_show_destination_arrow">Visa destinationsriktning</string>
     <string name="gps_not_available">Aktivera GPS i inställningarna</string>
     <string name="map_widget_monitoring_services">Loggningstjänster</string>
 	<string name="dist_control_start">Starta</string>
@@ -960,7 +961,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
     <string name="precise_routing_mode">Exakt ruttning (alpha)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
     <string name="dropbox_plugin_description">Dropbox-pluginen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
-    <string name="srtm_paid_version_msg">Köp gärna pluginen konturlinjer på Google Play för att stödja fortsatt utveckling.</string>
+    <string name="srtm_paid_version_msg">Köp gärna pluginen Konturlinjer på Google Play för att stödja fortsatt utveckling.</string>
     <string name="av_def_action_audio">Spela in ljud</string>
     <string name="av_widget_action_descr">Välj standardåtgärd för widget</string>
     <string name="av_widget_action">Standardåtgärd för widget</string>
@@ -1034,7 +1035,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="show_poi_over_map_description">Visa POI över karta (använd det senast valda filtret)</string>
 	<string name="show_poi_over_map">Visa POI</string>
 	<string name="map_tile_source_descr">Välj källa för onlinekartor eller cachade kartrutor</string>
-	<string name="map_tile_source">Kartrutskälla</string>
+	<string name="map_tile_source">Källa för kartrutor</string>
 	<string name="map_source">Kartkälla</string>
 	<string name="show_location">Visa plats</string>
 	<string name="map_preferences">Karta</string>
@@ -1049,7 +1050,7 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="search_button">Sök</string>
 	<string name="search_activity">Sök</string>
 	<string name="searchpoi_activity">Välj POI</string>
-	<string name="search_POI_level_btn">Sök mer</string>
+	<string name="search_POI_level_btn">Sök efter fler</string>
 	<string name="choose_available_region">Välj region från lista</string>
 	<string name="choose_intersected_street">Välj korsande gata</string>
 	<string name="app_mode_default">Standard</string>
@@ -1065,4 +1066,9 @@ Proportionell minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="get_directions">Vägvisning</string>
+	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för att beräkna exakta rutter utan småfel. Den är mycket begränsad av avstånd och använder inte inbyggt bibliotek.</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, long %2$.3f</string>
+    <string name="non_optimal_route_calculation">Beräkna möjligt icke-optimal rutt över långa sträckor</string>
+	<string name="incremental_search_street">Sök gator stegvis</string>
+	<string name="incremental_search_building">Sök byggnader stegvis</string>
 	</resources>
