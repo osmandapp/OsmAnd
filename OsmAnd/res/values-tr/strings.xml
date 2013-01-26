@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
@@ -106,4 +106,30 @@
 \n\t* Rota hazırlarken otobanlardan kaşınma seçeneği ayarlara eklendi
 \n\t* Bisikletler için bir yol tipi daha eklendi (bisikletyolu)
 \n\t* Hata düzeltmeleri "</string>
-	</resources>
+	<string name="local_indexes_cat_av">Ses/Vidyo verisi</string>
+    <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinize emin misiniz?</string>
+    <string name="clear_dest_confirm">Varış yerini iptal etmek istediğinize emin misiniz?</string>
+    <string name="precise_routing_mode">Hassas rota (alfa)</string>
+    <string name="recording_context_menu_show">Göster</string>
+    <string name="recording_photo_description">%2$ fotoğraf %1$</string>
+    <string name="av_def_action_picture">Fotoğraf çek</string>
+    <string name="recording_context_menu_precord">Fotoğraf çek</string>
+    <string name="dropbox_plugin_description">Dropbox eklentisi, parçaları ve ses/video notlarını dropbox hesabınızla senkronize etmenize olanak verir.</string>
+    <string name="dropbox_plugin_name">Dropbox eklentisi</string>
+    <string name="animate_routing_using_gpx">Varolan bir gpx dosyasını kullanmak istiyor musunuz?</string>
+    <string name="intermediate_points_change_order">Sırayı değiştir</string>
+    <string name="srtm_paid_version_msg">Kontur çizgileri eklentisi daha geliştirme aşamasında, desteklemek için lütfen Google Play mağazasından satın alınır.</string>
+    <string name="srtm_paid_version_title">Kontur çizgileri eklentisi</string>
+    <string name="av_def_action_video">Video kaydet</string>
+    <string name="av_def_action_audio">Ses kaydet</string>
+    <string name="av_widget_action_descr">Varsayılan eklenti eylemini seçin</string>
+    <string name="av_widget_action">Varsayılan eklenti eylemi</string>
+    <string name="av_video_format_descr">Vidyo formatını seçin</string>
+    <string name="av_video_format">Vidyo formatı</string>
+    <string name="av_use_external_recorder_descr">Vidyo için sistem kaydedicisini kullan</string>
+    <string name="av_use_external_recorder">Harici kaydediciyi kullan</string>
+    <string name="av_settings_descr">Ses ve vidyo ayarlarını yapılandır</string>
+    <string name="av_settings">"Ses/Vidyo ayarları "</string>
+    <string name="recording_error">"Kaydedilirken hata oluştu "</string>
+    <string name="recording_camera_not_available">Kamera kullanılabilir değil.</string>
+    </resources>
