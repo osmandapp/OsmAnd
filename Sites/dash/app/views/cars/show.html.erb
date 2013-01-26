@@ -20,37 +20,29 @@
     </td>
   </tr>
 </table>
-
 <hr />
-
 <p>
   <b>Locations</b>
 </p>
-
-<table>
-  <tr>
-    <td>
-      <b>Current</b>    Besant Avenue (40 km/hr)
-      <br/>
-      <br/>
-      <b>Favorites</b><br/>
-      Home<br/>
-      Office<br/>
-      School<br/>
-      <br/>
-      <b>Frequently visited</b><br/>
-      C.P.Ramaswami Road, Alwarpet, Chennai<br/>
-      Ranjith Road, Kotturpuram, Chennai<br/>
-      <br/>
-      <a href="/">View location history</a>
-    </td>
-    <td>
-      <%= gmaps4rails(@json) %>
-    </td>
-  </tr>
-</table>
-
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
+<div id="map"></div>
+<script type="text/javascript">
+  var default_zoom = 13;
+  var points = new Array();
+  <% @points.each_with_index do |point,i| %>
+    points[<%=i%>] = [<%=point.lat%>,<%=point.lon%>];
+  <% end %>
+  var map = L.map('map', {
+    center: [points[0][0],points[0][1]],
+    zoom: 13
+  });
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  add_point_to_map(points);
+  bound_map_to_points(points);
+</script>
 <hr />
-
 <%= link_to 'Edit', edit_car_path(@car) %> |
 <%= link_to 'Back', cars_path %>

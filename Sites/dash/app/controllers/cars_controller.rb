@@ -14,9 +14,7 @@ class CarsController < ApplicationController
   # GET /cars/1.json
   def show
     @car = Car.find(params[:id])
-    @points = @car.points.all
-    @json = @points.to_gmaps4rails
-
+    @points = @car.points.all    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @car }
