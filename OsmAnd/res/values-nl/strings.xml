@@ -831,7 +831,7 @@
   <string name="edit_filter_create_message">Filter {0} is aangemaakt</string>
   <string name="default_buttons_selectall">Selecteer Alle</string>
   <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
-  <string name="left_side_navigation">Links verkeer navigatie</string>
+  <string name="left_side_navigation">Linksrijdend verkeer</string>
   <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt</string>
   <string name="download_link_and_local_description">Download of update offline gegevens.\nKlik op een item om meer details te zien, druk lang om ze te deactiveren, te hernoemen of te verwijderen.\nHuidige data op apparaat (%1$s vrij):</string>
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
@@ -872,7 +872,7 @@
   <string name="navigate_point_format">Formaat:</string>
   <string name="poi_search_desc">Zoek interessepunt (POI)</string>
   <string name="address_search_desc">Adres zoeken</string>
-  <string name="navpoint_search_desc">Navigatie punt</string>
+  <string name="navpoint_search_desc">Coördinaten</string>
   <string name="transport_search_desc">Openbaar vervoer zoeken</string>
   <string name="favourites_search_desc">Favorieten zoeken</string>
   <string name="history_search_desc">Zoekgeschiedenis</string>
@@ -885,7 +885,7 @@
   <string name="rendering_attr_noPolygons_name">Geen vlakken</string>
   <string name="rendering_attr_appMode_name">Weergave-modus</string>
   <string name="rendering_attr_appMode_description">Kaartoptimalisatie voor dit gebruiksprofiel</string>
-  <string name="rendering_attr_contourLines_description">Selecteer minimum zoom-niveau voor weergave in de kaart indien beschikbaar. Een apart SRTM-bestand kan nodig zijn:</string>
+  <string name="rendering_attr_contourLines_description">Toon vanaf schaal (hoogtekaart moet aanwezig zijn)</string>
   <string name="rendering_attr_contourLines_name">Toon hoogtelijnen</string>
   <string name="rendering_attr_hmRendered_description">Toon meer details op de kaart</string>
   <string name="rendering_attr_hmRendered_name">Toon meer details</string>
@@ -903,7 +903,7 @@
   <string name="gpxup_private">Privé</string>
   <string name="osmand_parking_event">Auto ophalen van de parkeerplaats</string>
   <string name="osmand_parking_warning">Waarschuwing</string>
-  <string name="osmand_parking_warning_text">Notificatie voor het ophalen van je auto is toegevoegd aan je kalender. Dit blijft staan, totdat je het handmatig verwijdert.</string>
+  <string name="osmand_parking_warning_text">Er staat nog een notitie voor het ophalen van de auto in de kalender. Deze blijft staan tot je hem zelf verwijdert.</string>
   <string name="osmand_parking_time_limit_title">Stel de parkeertijd-limiet in</string>
   <string name="osmand_parking_delete_confirm">Wil je de locatie van de geparkeerde auto verwijderen?</string>
   <string name="osmand_parking_delete">Verwijder de parkeer-markering</string>
@@ -916,7 +916,7 @@
   <string name="osmand_parking_position_description">De positie van je geparkeerde auto. %1$s</string>
   <string name="osmand_parking_position_description_add">De auto ophalen om:</string>
   <string name="osmand_parking_pm">NM</string>
-  <string name="osmand_parking_am">VM</string>
+  <string name="osmand_parking_am">\\\'s-ochtends</string>
   <string name="osmand_parking_position_name">Parkeerplek</string>
   <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar je auto geparkeerd staat.</string>
   <string name="osmand_parking_plugin_name">Parkeerpositie</string>
