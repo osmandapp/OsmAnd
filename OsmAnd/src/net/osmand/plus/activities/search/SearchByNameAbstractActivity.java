@@ -1,15 +1,15 @@
 package net.osmand.plus.activities.search;
 
-import java.text.Collator;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
+import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.LogUtil;
@@ -87,8 +87,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		final NamesAdapter namesAdapter = new NamesAdapter(new ArrayList<T>(), createComparator()); //$NON-NLS-1$
 		setListAdapter(namesAdapter);
 		
-		collator = Collator.getInstance(Locale.US);
- 	    collator.setStrength(Collator.PRIMARY); //ignores also case
+		collator = LogUtil.primaryCollator();
  	    
 		
 		progress = (ProgressBar) findViewById(R.id.ProgressBar);

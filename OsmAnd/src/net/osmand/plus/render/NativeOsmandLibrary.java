@@ -6,6 +6,7 @@ import net.osmand.NativeLibrary;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.RouteSegmentResult;
 
 import org.apache.commons.logging.Log;
 
@@ -32,6 +33,9 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("gnustl_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
+//						log.debug("Loading load routing test..."); //$NON-NLS-1$
+//						System.loadLibrary("routing_test_jar");
+//						testRoutingPing();
 						if(android.os.Build.VERSION.SDK_INT >= 8) {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
 							System.loadLibrary("jnigraphics");
@@ -100,4 +104,5 @@ public class NativeOsmandLibrary extends NativeLibrary {
 			
 	public static native int getCpuCount();
 	public static native boolean cpuHasNeonSupport();
+	
 }

@@ -1,12 +1,12 @@
 package net.osmand.plus.activities.search;
 
-import java.text.Collator;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
+import net.osmand.LogUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -54,10 +54,9 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	
 	@Override
 	protected Comparator<? super City> createComparator() {
-		final Collator cs = Collator.getInstance();
 		final boolean en = getMyApplication().getSettings().usingEnglishNames();
 		final StringMatcherMode startsWith = CollatorStringMatcher.StringMatcherMode.CHECK_ONLY_STARTS_WITH;
-		return new CityComparator(startsWith, cs,  en);
+		return new CityComparator(startsWith, en);
 	}
 	
 	@Override
@@ -175,13 +174,13 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 	
 	private final class CityComparator implements Comparator<City> {
 		private final StringMatcherMode startsWith;
-		private final Collator cs;
+		private final net.osmand.Collator cs;
 		private final boolean en;
 
-		private CityComparator(StringMatcherMode startsWith, Collator cs,
+		private CityComparator(StringMatcherMode startsWith, 
 				boolean en) {
 			this.startsWith = startsWith;
-			this.cs = cs;
+			this.cs = LogUtil.primaryCollator();
 			this.en = en;
 		}
 
