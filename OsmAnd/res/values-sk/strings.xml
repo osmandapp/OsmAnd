@@ -1182,4 +1182,6 @@
     <string name="stop_routing_confirm">Naozaj chcete vypnúť navigáciu?</string>
     <string name="clear_dest_confirm">Naozaj chcete zmazať váš cieľový bod?</string>
     <string name="local_indexes_cat_av">Zvukové/video údaje</string>
+    <string name="dist_control_start">Začiatok</string>
+    <string name="precise_routing_mode">Precízna navigácia (vo vývoji)</string>
     </resources>
