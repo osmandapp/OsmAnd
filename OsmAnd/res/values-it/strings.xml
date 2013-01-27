@@ -427,7 +427,7 @@
   <string name="rotate_map_compass_opt">Con bussola</string>
   <string name="rotate_map_bearing_opt">Nella direzione del movimento</string>
   <string name="rotate_map_none_opt">Nessuna rotazione (nord in alto)</string>
-  <string name="rotate_map_to_bearing_descr">Selezionare l\'orientamento dello schermo</string>
+  <string name="rotate_map_to_bearing_descr">Selezionare l\'allinemamento della mappa allo schermo</string>
   <string name="rotate_map_to_bearing">Orientamento della mappa</string>
   <string name="show_route">Dettagli percorso</string>
   <string name="fav_imported_sucessfully">Importazione dei preferiti riuscita</string>
@@ -1197,7 +1197,7 @@
     <string name="recording_photo_description">Foto %1$s a %2$s</string>
     <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler cancellare il punto di destinazione?</string>
-    <string name="precise_routing_mode_descr">Abilita il routing di precisine per calcolare percorsi precisi senza intoppi. E\' molto limitato dalla distanza e non utilizza la libreria nativa.</string>
+    <string name="precise_routing_mode_descr">Abilita il routing di precisione per calcolare percorsi precisi senza intoppi. E\' molto limitato in distanza e non utilizza la libreria nativa.</string>
     <string name="precise_routing_mode">Calcolo della rotta preciso(alfa)</string>
     <string name="local_indexes_cat_av">Dati Audio/Video</string>
     <string name="dist_control_start">Avvia</string>
