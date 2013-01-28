@@ -152,7 +152,7 @@
   <string name="index_name_tts_voice">Stembestanden (stemgenerator)</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zelfgedefinieerd</string>
-  <string name="fav_export_confirmation">Favorietenbestand bestaat al, wilt u dit vervangen?</string>
+  <string name="fav_export_confirmation">Favorietenbestand bestaat al, wil je dit vervangen?</string>
   <string name="profile_settings">Profielspecifieke instellingen</string>
   <string name="settings_preset">Gebruiksprofiel</string>
   <string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
@@ -301,9 +301,9 @@
   <string name="installing_new_resources">Installeren nieuwe gegevens…</string>
   <string name="internet_connection_required_for_online_route">Er is een online routeberekening gekozen, maar er is geen verbinding met internet.</string>
   <string name="tts_language_not_supported_title">Taal niet ondersteund</string>
-  <string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wilt u een andere stemgenerator zoeken op Google Play? Anders wordt de huidige stemgenerator gebruikt.</string>
+  <string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wil je een andere stemgenerator zoeken op Google Play? Anders wordt de huidige stemgenerator gebruikt.</string>
   <string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
-  <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wilt u naar Google Play gaan om deze te installeren?</string>
+  <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar Google Play gaan om deze te installeren?</string>
   <string name="gpx_option_reverse_route">Keer richting van GPX-route om</string>
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
   <string name="gpx_option_from_start_point">Toon het gehele spoor</string>
@@ -504,7 +504,7 @@
   <string name="poi_context_menu_delete">Verwijder interessepunt</string>
   <string name="rotate_map_compass_opt">Volgens kompas</string>
   <string name="rotate_map_bearing_opt">In beweegrichting</string>
-  <string name="rotate_map_none_opt">Noord boven</string>
+  <string name="rotate_map_none_opt">Niet roteren (noorden boven)</string>
   <string name="rotate_map_to_bearing_descr">Selecteer hoe de kaart roteert</string>
   <string name="rotate_map_to_bearing">Kaartrotatie</string>
   <string name="show_route">Route-details</string>
@@ -575,7 +575,7 @@
   <string name="first_time_continue">Ga door</string>
   <string name="first_time_download">Download regio\'s</string>
   <string name="first_time_msg">Om alle features van het programma te gebruiken, heb je wat regionale offline gegevens nodig, die je kan downloaden (Instellingen, Offline Gegevens) of zelf aanmaken. Daarna kan je zoeken naar adressen, interessepunten en openbaar vervoer.</string>
-  <string name="search_poi_location">Zoek interessepunt locatie…</string>
+  <string name="search_poi_location">Naar signaal zoeken…</string>
   <string name="search_near_map">Zoek dichtbij de laatste kaartlocatie</string>
   <string name="search_nearby">Zoek dichtbij</string>
   <string name="map_orientation_default">Zelfde als apparaat-instelling</string>
@@ -583,7 +583,7 @@
   <string name="map_orientation_landscape">Landschap</string>
   <string name="map_screen_orientation">Kaartscherm-oriëntatie</string>
   <string name="map_screen_orientation_descr">Scherm-oriëntatie: staand, liggend of apparaatinstelling</string>
-  <string name="opening_hours_not_supported">Openingsuren kunnen niet gewijzigd worden</string>
+  <string name="opening_hours_not_supported">Openingstijden kunnen niet gewijzigd worden</string>
   <string name="add_new_rule">Voeg nieuwe regel toe</string>
   <string name="transport_Routes">Routes</string>
   <string name="transport_Stop">Halte</string>
@@ -615,7 +615,7 @@
   <string name="favorite">Favoriet</string>
   <string name="clear_all">Wis alles</string>
   <string name="history">Geschiedenis</string>
-  <string name="uploading_data">Gegevens worden geupload…</string>
+  <string name="uploading_data">Gegevens worden ge-upload…</string>
   <string name="uploading">Bezig met uploaden…</string>
   <string name="search_nothing_found">Niets gevonden</string>
   <string name="searching">Bezig met zoeken…</string>
@@ -631,7 +631,7 @@
   <string name="router_service">Routeberekening</string>
   <string name="sd_dir_not_accessible">Opslagdirectory op SD kaart niet toegankelijk</string>
   <string name="download_question">Download {0} - {1} ?</string>
-  <string name="download_question_exist">Offline gegevens voor {0} bestaan al ({1}). Wilt u deze bijwerken ({2}) ?</string>
+  <string name="download_question_exist">Offline gegevens voor {0} bestaan al ({1}). Wil je deze bijwerken ({2}) ?</string>
   <string name="address">Adres</string>
   <string name="download_index_success">Download succesvol</string>
   <string name="error_io_error">Lees/schrijffout opgetreden</string>
@@ -782,7 +782,7 @@
   <string name="default_buttons_apply">Toepassen</string>
   <string name="default_buttons_add">Voeg toe</string>
   <string name="default_buttons_no">Nee</string>
-  <string name="add_favorite_dialog_top_text">Geef naam aan deze favoriet</string>
+  <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
   <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>
   <string name="favourites_context_menu_navigate">Zet als\nbestemming</string>
@@ -821,7 +821,7 @@
   <string name="poi_dialog_name">Naam</string>
   <string name="poi_dialog_opening_hours">Openingstijd</string>
   <string name="poi_dialog_comment">Commentaar</string>
-  <string name="poi_dialog_comment_default">POI aangepast</string>
+  <string name="poi_dialog_comment_default">Interessepunt aangepast</string>
   <string name="poi_dialog_other_tags_message">Alle andere tags blijven bewaard</string>
   <string name="default_buttons_commit">Bevestigen</string>
   <string name="default_buttons_reset">Reset</string>
@@ -856,7 +856,7 @@
   <string name="osmand_extra_settings_description">Toon geavanceerde kaartinstellingen (zoals meer details tonen) en enkele apparaatspecifieke instellingen.</string>
   <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met animatie of het meten van de kaartweergavesnelheid.</string>
   <string name="plugins_screen">Plugin-manager</string>
-  <string name="select_plugin_to_activate">Tik op een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
+  <string name="select_plugin_to_activate">Klik op een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
   <string name="prefs_plugins_descr">Plugins geven extra instellingen en functies zoals tracking, rasterkaarten, doorwerken in standby mode en toegankelijkheidsinstellingen.</string>
   <string name="prefs_plugins">Plugin-manager</string>
   <string name="tip_recent_changes_0_8_0_t">"Wijzigingen in 0.8.0 :
@@ -923,7 +923,7 @@
   <string name="osmand_parking_plugin_description">Met deze plugin kan je onthouden waar je auto geparkeerd staat.</string>
   <string name="osmand_parking_plugin_name">Parkeerpositie</string>
   <string name="context_menu_item_add_parking_point">Markeer als parkeerpositie</string>
-  <string name="context_menu_item_delete_parking_point">Verwijder een parkeerpositie</string>
+  <string name="context_menu_item_delete_parking_point">Verwijder de parkeerpositie</string>
   <string name="starting_point_too_far">Startpunt te ver van de dichtstbijzijnde weg.</string>
   <string name="shared_location">Gedeelde locatie</string>
   <string name="update_downlod_list">Vernieuw lijst</string>
@@ -969,7 +969,7 @@
   <string name="bg_service_screen_lock">Vergrendel scherm</string>
   <string name="bg_service_screen_lock_toast">Het scherm is vergrendeld</string>
   <string name="bg_service_interval">Zet ontwaak-interval:</string>
-  <string name="screen_is_locked">Tik op het slotje om te ontgrendelen</string>
+  <string name="screen_is_locked">Klik op het slotje om te ontgrendelen</string>
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
   <string name="bg_service_sleep_mode_off">Slaapmodus\naanzetten</string>
   <string name="bg_service_sleep_mode_on">Slaapmodus\nuitzetten</string>
@@ -1053,11 +1053,11 @@
 \n\t* Verbeterde routeberekening, sneller en nauwkeuriger (tot 250 km)
 \n\t* Wegenkaarten; (bevatten uitsluitend wegen)\n\t* Kaart houdt de positie vast na onderbrekingen
 \n\t* Achtergrond-service gaat aan bij navigatie "</string>
-    <string name="rendering_attr_showRoadMaps_description">Selecteer wanneer kale wegenkaarten moeten worden weergegeven:</string>
-	<string name="rendering_attr_showRoadMaps_name">Kale wegenkaarten</string>
+    <string name="rendering_attr_showRoadMaps_description">Selecteer wanneer wegenkaarten moeten worden weergegeven:</string>
+	<string name="rendering_attr_showRoadMaps_name">Wegenkaarten</string>
     <string name="download_roads_only_item">"Wegen "</string>
     <string name="download_regular_maps">Normale kaarten</string>
-    <string name="download_roads_only_maps">Kale wegenkaarten</string>
+    <string name="download_roads_only_maps">Wegenkaarten</string>
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
     <string name="search_villages_and_postcodes">Zoek dorp/postcode</string>
@@ -1088,8 +1088,8 @@
     <string name="audionotes_plugin_name">Audionotities-plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin voor offline hoogtelijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">Met deze plugin kunnen hoogtelijnen worden weergegeven in OsmAnd\'s offline kaarten. De wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
-    <string name="use_clear_distance_measurement">Tik nog een keer om de meetpunten te wissen.</string>
-    <string name="use_distance_measurement">Tik om een punt te markeren, blijf aanraken om het vorige punt te wissen, tik op de meting-widget om te stoppen.</string>
+    <string name="use_clear_distance_measurement">Klik nog een keer om de meetpunten te wissen.</string>
+    <string name="use_distance_measurement">Klik om een punt te markeren, lang klikken om het vorige punt te wissen, klik op de meting-widget om te stoppen.</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
     <string name="audionotes_location_not_defined">Locatie is nog niet gedefinieerd om audio notities te nemen</string>
     <string name="map_widget_audionotes">Audionotities</string>
