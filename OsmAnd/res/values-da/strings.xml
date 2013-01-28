@@ -121,4 +121,25 @@
     <string name="intermediate_point_too_far">Waypoint %1$s er for langt fra nærmeste vej.</string>
     <string name="arrived_at_intermediate_point">Du er ankommet til dit waypoint</string>
     <string name="context_menu_item_intermediate_point">Tilføj som waypoint</string>
-    </resources>
+    <string name="ending_point_too_far">Slutpunktet for langt fra nærmeste vej.</string>
+    <string name="btn_add_tag">Tilføj Tag</string>
+    <string name="btn_advanced_mode">Avanceret tilstand…</string>
+    <string name="poi_filter_parking">Parkering</string>
+    <string name="poi_filter_emergency">Nødsituation</string>
+    <string name="poi_filter_public_transport">Kollektiv trafik</string>
+    <string name="poi_filter_entertainment">Underholdning</string>
+    <string name="poi_filter_accomodation">Overnatning</string>
+    <string name="poi_filter_restaurants">Restaurant</string>
+    <string name="poi_filter_sightseeing">Seværdiheder</string>
+    <string name="poi_filter_car_aid">Bilhjælp</string>
+	<string name="poi_filter_food_shop">Fødevare butik</string>
+	<string name="poi_filter_for_tourists">For turister</string>
+	<string name="poi_filter_fuel">Brændstof</string>
+	<string name="show_warnings_title">Vis alarmer…</string>
+	<string name="show_warnings_descr">Konfigurer trafik advarsler (hastighedsbegrænsninger, tvungne stop, vejbump), fotofælde advarsler og vej oplysninger</string>
+	<string name="use_compass_navigation_descr">Bruge kompasset, når ingen retninger er registret</string>
+	<string name="use_compass_navigation">Brug kompas</string>
+	<string name="avoid_motorway">Undgå motorveje</string>
+	<string name="auto_zoom_map_descr">Auto zoom kort efter din hastighed (mens kort er synkroniseret med aktuelle position)</string>
+	<string name="auto_zoom_map">Automatisk kortzoom</string>
+	</resources>
