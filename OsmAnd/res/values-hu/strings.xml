@@ -686,7 +686,7 @@
   <string name="map_tile_source">Térképcsempék forrása</string>
   <string name="map_source">Térkép forrása</string>
   <string name="use_internet">Internet használata</string>
-  <string name="show_location">Tartózkodási hely mutatása</string>
+  <string name="show_location">Megjelenítés térképen</string>
   <string name="map_preferences">Térkép</string>
   <string name="settings_activity">Beállítások</string>
   <string name="show_gps_coordinates_text">GPS koordináták mutatása a térképen</string>
@@ -1149,4 +1149,5 @@
     <string name="recording_photo_description">Fénykép %1$s készült: %2$s</string>
     <string name="av_def_action_picture">Fénykép készítése</string>
     <string name="recording_context_menu_precord">Fénykép készítése</string>
+    <string name="dist_control_start">start</string>
     </resources>
