@@ -813,7 +813,7 @@
   <string name="osmand_development_plugin_description">Fejlesztői és hibakeresési eszközök, mint szimulált navigáció vagy teljesítmény kijelzés, beállításainak megjelenítése.</string>
   <string name="plugins_screen">Bővítménykezelő</string>
   <string name="select_plugin_to_activate">Bővítmény be- és kikapcsolása érintésre történik. (Lehet, hogy az OsmAndot újra kell indítanod.)</string>
-  <string name="prefs_plugins_descr">A bővítmények további lehetőségeket biztosítanak, mint útvonal mentés, raszteres térképek, kikapcsolt képernyős használat, akadálymentesítés és mások.</string>
+  <string name="prefs_plugins_descr">A bővítmények további funkciókkal és beállításokkal bővítik az alkalmazást</string>
   <string name="prefs_plugins">Bővítménykezelő</string>
   <string name="tip_recent_changes_0_8_0_t">"A 0.8.0 kiadás változásai:\n\t- *Beépülők*\n\t - Egyes funkciók csoportosítva engedélyezhetők és letilthatók a Bővítménykezelőben. Engedélyezhetsz online térképforrásokat, útvonalrögzítést, sok egyéb új és korábban is meglévő eszközt.\n\t- *Új offline térképadat formátum*\n\t - A térképrenderelés gyorsabb és pontosabb lett (a partvonalak hibája javításra került).\n\t - Az offline térképadatokat újra le kell töltened (a régi adatok nem támogatottak).\n\t- *Offline útvonaltervezés*\n\t - Az offline útvonaltervező sokkal gyorsabb lett\n\t- *Felhasználói élmény*\n\t - A felhasználói felület több helyen is csinosodott "</string>
   <string name="osm_editing_plugin_description">Beállítások kezelése OSM POI objektumok gyűjtéséhez / módosításához, OSM hibajelzések készítéséhez, és felvett GPX fájlok feltöltéséhez. (OSM felhasználói név szükséges.)</string>
@@ -1140,14 +1140,14 @@
     <string name="intermediate_points_change_order">Más sorrend</string>
     <string name="dropbox_plugin_description">A Dropbox bővítmény lehetővé teszi a rögzített útvonalak és hang/videojegyzetek szinkronizálását a Dropbox fiókoddal.</string>
     <string name="dropbox_plugin_name">Dropbox bővítmény</string>
-    <string name="local_indexes_cat_av">Hang/Videó adat</string>
+    <string name="local_indexes_cat_av">Hang- és videofelvétel</string>
     <string name="stop_routing_confirm">Biztosan megállítod a navigációt?</string>
-    <string name="clear_dest_confirm">"Biztosan törlöd  a célpontot?"</string>
+    <string name="clear_dest_confirm">Biztosan törlöd a célpontot?</string>
     <string name="precise_routing_mode_descr">Pontos útvonaltervező engedélyezése hibamentes, pontos útvonalak tervezéséhez. Jelenleg lassú, kis távolságokra működik és nem használja a natív könyvárat.</string>
     <string name="precise_routing_mode">Pontos útvonaltervezés (kísérleti)</string>
     <string name="recording_context_menu_show">Mutat</string>
     <string name="recording_photo_description">Fénykép %1$s készült: %2$s</string>
     <string name="av_def_action_picture">Fénykép készítése</string>
     <string name="recording_context_menu_precord">Fénykép készítése</string>
-    <string name="dist_control_start">start</string>
+    <string name="dist_control_start">Start</string>
     </resources>
