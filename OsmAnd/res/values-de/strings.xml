@@ -11,8 +11,8 @@
 	<string name="map_widget_max_speed">Geschwindigkeitsbegrenzung</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
 	<string name="route_descr_current_location">Aktueller Standort</string>
-	<string name="route_descr_from_to">Von : %1$s\nNach : %2$s</string>
-	<string name="route_descr_from_to_via">Von : %1$s\nÜber : %2$s\nNach : %3$s</string>
+	<string name="route_descr_from_to">Von: %1$s\nNach: %2$s</string>
+	<string name="route_descr_from_to_via">Von: %1$s\nÜber: %2$s\nNach: %3$s</string>
 	<string name="no_buildings_found">Kein Gebäude gefunden.</string>
 	<string name="incremental_search_city">Suche Stadt inkrementell</string>
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
@@ -25,7 +25,7 @@
 	<string name="safe_mode">Abgesicherter Modus</string>
 	<string name="native_library_not_running">Die Applikation läuft im abgesicherten Modus (kann in den Einstellungen deaktiviert werden).</string>
 	<string name="background_service_is_enabled_question">Der Hintergrunddienst läuft noch, soll er beendet werden?</string>
-	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0.0 :
+	<string name="tip_recent_changes_1_0_0_t">Änderungen in 1.0.0:
 		\n\t* Verbessertes Routing, schneller und präzise, bis 250km
 		\n\t* Option reiner Straßenkarten
 		\n\t* Karte behält nach Unterbrechungen Standortbindung
@@ -42,10 +42,10 @@
 	<string name="avoid_motorway">Vermeide Autobahnen</string>
 	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
 	<string name="auto_zoom_map">Automatischer Zoom</string>
-	<string name="tip_recent_changes_0_8_3_t">Änderungen in 0.8.3 :\n\n\t* Wegpunkte setzen\n\t\t\n\t* Verbessertes Navigationsverhalten\n\t\t\n\t* Option \'Vermeide Autobahnen\'\n\t\t\n\t* Anzeige von cycleway=track\n\t\t\n\t* Einige Fehlerbehebungen</string>
+	<string name="tip_recent_changes_0_8_3_t">Änderungen in 0.8.3:\n\n\t* Wegpunkte setzen\n\t\t\n\t* Verbessertes Navigationsverhalten\n\t\t\n\t* Option \'Vermeide Autobahnen\'\n\t\t\n\t* Anzeige von cycleway=track\n\t\t\n\t* Einige Fehlerbehebungen</string>
 	<string name="snap_to_road_descr">Standort während der Navigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Auf Straße einrasten</string>
-	<string name="tip_recent_changes_0_8_2_t">Änderungen in 0.8.2 :\n\t\t\n\t* Verbessertes Routing\n\t\t\n\t* Konfigurierbare Schaltflächen\n\t\t\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen\n\t\t\n\t* Bildschirmsperrtaste mit Aufzeichnungs-Einstellungen\n\t\t\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften</string>
+	<string name="tip_recent_changes_0_8_2_t">Änderungen in 0.8.2:\n\t\t\n\t* Verbessertes Routing\n\t\t\n\t* Konfigurierbare Schaltflächen\n\t\t\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen\n\t\t\n\t* Bildschirmsperrtaste mit Aufzeichnungs-Einstellungen\n\t\t\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften</string>
 	<string name="osmand_short_description_80_chars">OsmAnd ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
@@ -128,7 +128,7 @@
 	<string name="select_plugin_to_activate">Module zum Aktivieren oder Deaktivieren anklicken. (Ein Neustart von OsmAnd könnte nötig sein.)</string>
 	<string name="prefs_plugins_descr">Module aktivieren Experteneinstellungen und Zusatzdienste wie Online-Karten, Standort-Aufzeichnung, Hintergrunddienst, Bedienungshilfen und mehr.</string>
 	<string name="prefs_plugins">Modul-Manager</string>
-	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0 :
+	<string name="tip_recent_changes_0_8_0_t">"Änderungen in 0.8.0:
 		\n\t- *Modul-Funktionalität*
 		\n\t - Viele Funktionalitäten könnnen nun blockweise in einem Modul-Manager aktiviert oder deaktiviert werden. Unter anderem finden Sie dort die Einstellungen für Online Kachel-Kartenquellen, Aufzeichnungs-Einstellungen und vielen anderen existierenden Funktionalitäten.
 		\n\t- *Unterstützung neuer Offline-Karten*
@@ -149,7 +149,7 @@
 	<string name="test_voice_prompts">Sprachansagen testen</string>
 	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Offline-Daten\' laden.
 \n\nAlternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
-	<string name="tip_recent_changes_0_7_2_t">"Änderungen in 0.7.2 :
+	<string name="tip_recent_changes_0_7_2_t">"Änderungen in 0.7.2:
 		\n\t- Native rendering auf allen Geräten
 		\n\t- Editiere POIs offline
 		\n\t- Barrierefreiheit
@@ -228,7 +228,7 @@
 	<string name="use_fluorescent_overlays_descr">Fluoreszierende Anzeige von Tracks und Routen</string>
 	<string name="offline_edition">Offline-Bearbeitung</string>
 	<string name="offline_edition_descr">Immer Offline-Bearbeitung verwenden</string>
-	<string name="tip_recent_changes_0_7_1_t">"Änderungen in 0.7.1 :
+	<string name="tip_recent_changes_0_7_1_t">"Änderungen in 0.7.1:
 		\n\t- Offline POI-Bearbeitung
 		\n\t- Live-Tracking Option: Koordinaten periodisch an einen Web-Service schicken (Setup-Anleitung für eigenen Web-Service in den HowTo-Artikeln)
 		\n\t- Anzeige des gegenwärtig aufgezeichneten Tracks möglich
@@ -253,11 +253,11 @@
 	<string name="live_monitoring">Live-Tracking aktivieren</string>
 	<string name="live_monitoring_interval_descr">Angabe des Live-Tracking Invervalls</string>
 	<string name="live_monitoring_interval">Live-Tracking Intervall</string>
-	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url_descr">Spezifikation der Live-Tracking Web-Adresse mit Datenübergabe: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Live-Tracking Web-Adresse</string>
 	<string name="gpx_monitoring_disabled_warn">Bitte Aufzeichnung unter \'Einstellungen\' → \'Navigation\' aktivieren.</string>
 	<string name="show_current_gpx_title">Aktuellen Track anzeigen</string>
-	<string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0 :
+	<string name="tip_recent_changes_0_7_0_t">"Änderungen in 0.7.0:
 		\n\t- Offline Wikipedia Daten mit Artikeln
 		\n\t- Aktualisierte Karten
 		\n\t- Weitere kleine Verbesserungen "
@@ -327,7 +327,7 @@
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_select_destination_point">Ziel wählen</string>
 	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte über das Kontextmenü → \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.</string>
-	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9 :
+	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
 		\n\t- Schnelles \"Native Rendering\" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
 		\n\t- Massive Änderungen am \"Look and Feel\"
@@ -371,7 +371,7 @@
 	<string name="file_can_not_be_renamed">Datei kann nicht umbenannt werden.</string>
 	<string name="file_with_name_already_exists">Datei mit diesem Namen existiert bereits.</string>
 	<string name="gpx_navigation">GPX-Route wählen</string>
-	<string name="poi_query_by_name_matches_categories">Mehrere passende POI-Kategorien gefunden :</string>
+	<string name="poi_query_by_name_matches_categories">Mehrere passende POI-Kategorien gefunden:</string>
 	<string name="data_to_search_poi_not_available">Lokale Daten für POI-Suche nicht vorhanden.</string>
 	<string name="poi_filter_by_name">Nach Namen suchen</string>
 	<string name="old_poi_file_should_be_deleted">Die POI-Datei \'%1$s\' wird nicht mehr benötigt und kann gelöscht werden.</string>
@@ -460,7 +460,7 @@
 	<string name="map_text_size_descr">Wähle Textgröße für Bezeichnungen in den Landkarten</string>
 	<string name="map_text_size">Karten-Textgröße</string>
 	<string name="tip_recent_changes">Neuerungen</string>
-	<string name="tip_recent_changes_0_6_6_t">"Neuerungen in Version 0.6.6 :
+	<string name="tip_recent_changes_0_6_6_t">"Neuerungen in Version 0.6.6:
 		\n\t- Text-To-Speech (TTS) Sprachansagensupport
 		\n\t- Anzeige von mehr Details in den Landkarten
 		\n\t- World_Basemap für die ganze Welt in der Applikation enthalten
@@ -1021,14 +1021,14 @@
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Applikation benötigt und ist für den Download vorselektiert.</string>
 	<string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>
 	<string name="local_index_routing_data">Routing-Daten</string>
-	<string name="navigate_point_format">Format :</string>
+	<string name="navigate_point_format">Format:</string>
 	<string name="poi_search_desc">POI-(Point of Interest) Suche</string>
 	<string name="address_search_desc">Adress-Suche</string>
 	<string name="navpoint_search_desc">Koordinaten</string>
 	<string name="transport_search_desc">ÖPNV-Suche</string>
 	<string name="favourites_search_desc">Favoriten-Suche</string>
 	<string name="history_search_desc">Suchverlauf</string>
-	<string name="tip_recent_changes_0_8_1_t">"Änderungen in 0.8.1 :
+	<string name="tip_recent_changes_0_8_1_t">"Änderungen in 0.8.1:
 		\n\t* Präzisere Routen (etwas langsamere Berechnung)
 		\n\t* Routenneuberechnung verbessert und beschleunigt
 		\n\t* Anzeige der weiterführenden Fahrspur
@@ -1146,7 +1146,7 @@
 <string name="map_widget_intermediate_distance">Wegpunkt</string>
 <string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
 <string name="intermediate_point_too_far">Wegpunkt %1$s zu weit von der nächsten Straße entfernt.</string>
-<string name="tip_recent_changes_0_8_4_t">Änderungen in 0.8.4 : 
+<string name="tip_recent_changes_0_8_4_t">Änderungen in 0.8.4: 
 	\n\t* Einige Fehlerbehebungen
 	\n\t* Karte behält nach Unterbrechungen Standortbindung
 	\n\t* Hintergrunddienst wird bei Navigation aktiviert
