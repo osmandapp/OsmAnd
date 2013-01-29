@@ -33,9 +33,11 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("gnustl_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
-//						log.debug("Loading load routing test..."); //$NON-NLS-1$
-//						System.loadLibrary("routing_test_jar");
-//						testRoutingPing();
+						if (LogUtil.AVIAN_LIBRARY) {
+							log.debug("Loading load routing test..."); //$NON-NLS-1$
+							System.loadLibrary("routing_test");
+							testRoutingPing();
+						}
 						if(android.os.Build.VERSION.SDK_INT >= 8) {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
 							System.loadLibrary("jnigraphics");
