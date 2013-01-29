@@ -1,9 +1,6 @@
 package net.osmand.plus.activities;
 
 
-import static net.osmand.data.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.data.IndexConstants.EXTRA_EXT;
-
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -15,9 +12,9 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.IndexConstants;
 import net.osmand.map.RegionCountry;
 import net.osmand.map.RegionRegistry;
 import net.osmand.plus.ClientContext;
@@ -498,11 +495,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private Map<String, String> listAlreadyDownloadedWithAlternatives() {
 		Map<String, String> files = new TreeMap<String, String>();
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR),BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),BINARY_MAP_INDEX_EXT, files);
-		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),EXTRA_EXT, files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.BACKUP_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.BINARY_MAP_INDEX_EXT, files);
+		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.MAPS_PATH),IndexConstants.EXTRA_EXT, files);
 		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
-			listWithAlternatives(getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR),BINARY_MAP_INDEX_EXT, files);
+			listWithAlternatives(getMyApplication().getAppPath(IndexConstants.SRTM_INDEX_DIR),IndexConstants.BINARY_MAP_INDEX_EXT, files);
 		}
 		listWithAlternatives(getMyApplication().getAppPath(IndexConstants.VOICE_INDEX_DIR),"", files);
 		return files;

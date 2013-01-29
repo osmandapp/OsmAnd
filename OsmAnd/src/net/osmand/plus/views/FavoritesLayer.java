@@ -3,8 +3,8 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.FavouritePoint;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;

@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ApplicationMode;

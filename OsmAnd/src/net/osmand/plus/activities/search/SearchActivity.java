@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Locale;
 
-import net.osmand.FavouritePoint;
+import net.osmand.data.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;

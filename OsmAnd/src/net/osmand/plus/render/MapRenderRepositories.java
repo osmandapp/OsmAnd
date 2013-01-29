@@ -22,14 +22,13 @@ import java.util.Set;
 import net.osmand.IProgress;
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.PlatformUtil;
-import net.osmand.QuadRect;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
-import net.osmand.data.MapAlgorithms;
+import net.osmand.data.QuadRect;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
@@ -44,6 +43,7 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapAlgorithms;
 
 import org.apache.commons.logging.Log;
 

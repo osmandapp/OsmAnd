@@ -11,10 +11,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import net.osmand.CallbackWithObject;
+import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
-import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;

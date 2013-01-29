@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 import net.osmand.IProgress;
+import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.IndexConstants;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities.WptPt;

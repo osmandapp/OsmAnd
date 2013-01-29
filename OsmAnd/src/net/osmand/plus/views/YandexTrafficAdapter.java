@@ -7,9 +7,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;

@@ -2,7 +2,7 @@ package net.osmand.plus.voice;
 
 import java.io.File;
 
-import net.osmand.data.IndexConstants;
+import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.Activity;

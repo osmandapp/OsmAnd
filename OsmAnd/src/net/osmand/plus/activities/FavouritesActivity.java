@@ -17,8 +17,8 @@ import java.util.Set;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.FavouritePoint;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
