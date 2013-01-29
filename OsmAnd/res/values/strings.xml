@@ -395,11 +395,11 @@
 	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
-	<string name="prefs_plugins_descr">Plugins extend the application by additional functions and settings</string>
+	<string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
 	<string name="prefs_plugins">Plugins</string>
 	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
 		\n\t- *Plugin functionality*
-		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager.
+		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
 		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
 		\n\t- *New offline map data support*
 		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
