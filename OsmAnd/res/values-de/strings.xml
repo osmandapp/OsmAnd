@@ -6,7 +6,7 @@
 	<string name="tip_altitude_offset">Höhenangaben - Offset Korrektur</string>
 	<string name="tip_altitude_offset_t">\tDie meisten GPS-Systeme zeigen Höhenmessungen im ellipsoid-basierten WGS84-System an, die Umrechnung auf lokal übliche Höhenangaben erfordert eine ortsabhängige Korrektur.
 		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System. Osmand unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
-		\n\tDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Offline-Daten Manager (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+		\n\tDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Einstellungen/Daten-Management (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
 	<string name="map_widget_max_speed">Geschwindigkeitsbegrenzung</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
@@ -147,7 +147,7 @@
 	<string name="native_rendering">Natives Rendern</string>
 	<string name="animate_routing">Simuliere Navigation</string>
 	<string name="test_voice_prompts">Sprachansagen testen</string>
-	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Offline-Daten\' laden.
+	<string name="switch_to_raster_map_to_see">Keine Offline-Vektor-Karte für dieses Gebiet vorhanden. Bitte Vektor-Karte via \'Einstellungen\' → \'Daten-Management\' laden.
 \n\nAlternativ auf Online-Karten wechseln (müssen zuvor im Plugin-Manager aktiviert werden).</string>
 	<string name="tip_recent_changes_0_7_2_t">"Änderungen in 0.7.2:
 		\n\t- Native rendering auf allen Geräten
@@ -291,8 +291,8 @@
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_descr">Nutzerprofilspezifische Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
 	<string name="global_settings">Globale Einstellungen</string>
-	<string name="index_settings">Offline-Daten (laden)</string>
-	<string name="index_settings_descr">Laden und Verwalten von Landkarten und Daten</string>
+	<string name="index_settings">Daten-Management</string>
+	<string name="index_settings_descr">Laden und Verwalten von Landkarten und anderen lokalen Daten</string>
 	<string name="general_settings">Allgemein</string>
 	<string name="general_settings_descr">Konfiguration der Anzeige und anderer allgemeiner Einstellungen</string>
 	<string name="global_app_settings">Globale Einstellungen</string>
@@ -436,7 +436,7 @@
 	<string name="local_index_items_restored">%1$d von %2$d Datei(en) erfolgreich aktiviert.</string>
 	<string name="local_index_no_items_to_do">Aktion %1$s: Keine Dateien vorhanden</string>
 	<string name="local_index_action_do">%1$s: %2$s Datei(en). Fortfahren?</string>
-	<string name="local_index_descr_title">Offline-Daten Manager</string>
+	<string name="local_index_descr_title">Daten-Management</string>
 	<string name="local_index_mi_restore">Aktivieren</string>
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
@@ -506,7 +506,7 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren …</string>
 	<string name="tip_update_index">Update der Offline-Daten</string>
-	<string name="tip_update_index_t">"Updates finden Sie via \'Einstellungen\' → \'Offline-Daten\'.
+	<string name="tip_update_index_t">"Updates finden Sie via \'Einstellungen\' → \'Daten-Management\'.
 \nNachdem die Liste verfügbarer Offline-Daten geladen wurde, kann auf Wunsch mit der Option \'Menü\' → \'Filter Gespeicherte\' auf Updates eingegrenzt werden, zu denen auf dem Gerät bereits Vorgänger existieren.\nAngezeigt werden verfügbare Updates nach dem folgenden Farbschema:
 \n \'Grün\' - Daten sind aktuell
 \n \'Blau\' - neuere Version vorhanden
