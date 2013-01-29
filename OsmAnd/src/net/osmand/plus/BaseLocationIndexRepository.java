@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.data.MapObject;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -17,7 +17,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 public class BaseLocationIndexRepository<T extends MapObject> {
-	private static final Log log = LogUtil.getLog(BaseLocationIndexRepository.class);
+	private static final Log log = PlatformUtil.getLog(BaseLocationIndexRepository.class);
 	protected SQLiteDatabase db;
 	protected double dataTopLatitude;
 	protected double dataBottomLatitude;

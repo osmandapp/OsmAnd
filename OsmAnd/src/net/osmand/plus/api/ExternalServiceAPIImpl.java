@@ -2,7 +2,7 @@ package net.osmand.plus.api;
 
 import org.apache.commons.logging.Log;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -14,7 +14,7 @@ import android.os.Environment;
 public class ExternalServiceAPIImpl implements ExternalServiceAPI {
 
 	private OsmandApplication app;
-	private static final Log log = LogUtil.getLog(ExternalServiceAPIImpl.class);
+	private static final Log log = PlatformUtil.getLog(ExternalServiceAPIImpl.class);
 
 	public ExternalServiceAPIImpl(OsmandApplication app) {
 		this.app = app;

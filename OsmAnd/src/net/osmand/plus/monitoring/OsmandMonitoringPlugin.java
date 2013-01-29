@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -42,7 +42,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	private static final Log log = LogUtil.getLog(OsmandMonitoringPlugin.class);
+	private static final Log log = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	private MapInfoControl monitoringControl;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {

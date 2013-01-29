@@ -2,7 +2,7 @@ package net.osmand.plus.osmedit;
 
 import java.util.Map;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -28,7 +28,7 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 	//temporal IDs for not yet uploaded new POIs
 	private long nextid;
 
-	public final static Log log = LogUtil.getLog(OpenstreetmapLocalUtil.class);
+	public final static Log log = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	public OpenstreetmapLocalUtil(Context uiContext) {
 		this.ctx = uiContext;

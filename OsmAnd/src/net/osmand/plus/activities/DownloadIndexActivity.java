@@ -16,7 +16,7 @@ import java.util.TreeMap;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.RegionCountry;
@@ -66,7 +66,7 @@ import android.widget.Toast;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
-	private static final org.apache.commons.logging.Log log = LogUtil.getLog(DownloadIndexActivity.class);
+	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(DownloadIndexActivity.class);
 	
 	/** menus **/
 	private static final int RELOAD_ID = 0;

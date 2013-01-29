@@ -7,13 +7,13 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 
 public class OsmBugsRemoteUtil implements OsmBugsUtil {
 
-	private static final Log log = LogUtil.getLog(OsmBugsRemoteUtil.class);
+	private static final Log log = PlatformUtil.getLog(OsmBugsRemoteUtil.class);
 
 	private final static String SITE_API = "http://openstreetbugs.schokokeks.org/api/0.1/"; //$NON-NLS-1$
 

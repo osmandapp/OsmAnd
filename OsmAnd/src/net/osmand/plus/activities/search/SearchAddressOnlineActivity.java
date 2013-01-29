@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import net.londatiga.android.QuickAction;
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
@@ -45,7 +45,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 	
 	private LatLon location;
 	private ProgressDialog progressDlg;
-	private final static Log log = LogUtil.getLog(SearchAddressOnlineActivity.class);
+	private final static Log log = PlatformUtil.getLog(SearchAddressOnlineActivity.class);
 
 	private static PlacesAdapter lastResult = null;
 	private OsmandSettings settings;

@@ -1,6 +1,6 @@
 package net.osmand.plus.dropbox;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -26,7 +26,7 @@ import com.dropbox.client2.session.Session.AccessType;
 public class DropboxPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.dropbox";
-	private static final Log log = LogUtil.getLog(DropboxPlugin.class);
+	private static final Log log = PlatformUtil.getLog(DropboxPlugin.class);
 	private OsmandApplication app;
 	private DropboxAPI<AndroidAuthSession> mApi;
 	

@@ -7,7 +7,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -29,7 +29,7 @@ public class LiveMonitoringHelper  {
 	protected Context ctx;
 	private OsmandSettings settings;
 	private long lastTimeUpdated;
-	private final static Log log = LogUtil.getLog(LiveMonitoringHelper.class); 
+	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class); 
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;

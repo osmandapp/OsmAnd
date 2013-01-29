@@ -13,7 +13,7 @@ import java.util.Map;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
@@ -35,7 +35,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 
 public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Amenity> implements AmenityIndexRepository {
-	private static final Log log = LogUtil.getLog(AmenityIndexRepositoryOdb.class);
+	private static final Log log = PlatformUtil.getLog(AmenityIndexRepositoryOdb.class);
 	public final static int LIMIT_AMENITIES = 500;
 
 		

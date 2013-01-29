@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.binary.BinaryMapDataObject;
@@ -49,7 +49,7 @@ import android.util.FloatMath;
 import android.view.WindowManager;
 
 public class OsmandRenderer {
-	private static final Log log = LogUtil.getLog(OsmandRenderer.class);
+	private static final Log log = PlatformUtil.getLog(OsmandRenderer.class);
 
 	private Paint paint;
 

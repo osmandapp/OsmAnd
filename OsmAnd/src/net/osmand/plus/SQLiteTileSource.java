@@ -8,7 +8,7 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -31,7 +31,7 @@ public class SQLiteTileSource implements ITileSource {
 
 	
 	public static final String EXT = IndexConstants.SQLITE_EXT;
-	private static final Log log = LogUtil.getLog(SQLiteTileSource.class); 
+	private static final Log log = PlatformUtil.getLog(SQLiteTileSource.class); 
 	
 	private ITileSource base;
 	private String urlTemplate = null;

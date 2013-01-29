@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Stack;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.TransportStop;
@@ -27,7 +27,7 @@ public class AsyncLoadingThread extends Thread {
 	
 	public static final int LIMIT_TRANSPORT = 200;
 	
-	private static final Log log = LogUtil.getLog(AsyncLoadingThread.class); 
+	private static final Log log = PlatformUtil.getLog(AsyncLoadingThread.class); 
 	
 	private Handler asyncLoadingPoi; 
 	private Handler asyncLoadingTransport;

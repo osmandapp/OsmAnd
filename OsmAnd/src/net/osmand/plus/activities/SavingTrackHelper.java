@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -46,7 +46,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String POINT_COL_LON = "lon"; //$NON-NLS-1$
 	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
 	
-	public final static Log log = LogUtil.getLog(SavingTrackHelper.class);
+	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
 	private String updateScript;
 	private String updatePointsScript;

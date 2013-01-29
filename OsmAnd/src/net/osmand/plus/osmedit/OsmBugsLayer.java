@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
@@ -49,7 +49,7 @@ import android.widget.Toast;
 
 public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider, DialogProvider {
 
-	private static final Log log = LogUtil.getLog(OsmBugsLayer.class); 
+	private static final Log log = PlatformUtil.getLog(OsmBugsLayer.class); 
 	private final static int startZoom = 8;
 	private final int SEARCH_LIMIT = 100;
 	

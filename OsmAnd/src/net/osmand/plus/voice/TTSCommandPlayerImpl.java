@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -58,7 +58,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 
 	private static final String CONFIG_FILE = "_ttsconfig.p";
 	private static final int[] TTS_VOICE_VERSION = new int[] { 100, 101 }; // !! MUST BE SORTED
-	private static final Log log = LogUtil.getLog(TTSCommandPlayerImpl.class);
+	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private TextToSpeech mTts;
 	private Context mTtsContext;
 	private String language;

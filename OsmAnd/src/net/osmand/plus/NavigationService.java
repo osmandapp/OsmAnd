@@ -1,7 +1,7 @@
 package net.osmand.plus;
 
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.activities.LiveMonitoringHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -130,7 +130,7 @@ public class NavigationService extends Service implements LocationListener {
 				locationManager.requestLocationUpdates(serviceOffProvider, 0, 0, NavigationService.this);
 			} catch (IllegalArgumentException e) {
 				Toast.makeText(this, R.string.gps_not_available, Toast.LENGTH_LONG).show();
-				Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+				Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 			}
 		} else {
 			AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);

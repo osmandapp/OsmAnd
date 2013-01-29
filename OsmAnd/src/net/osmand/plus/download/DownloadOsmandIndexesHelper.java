@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
@@ -26,7 +26,7 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 
 public class DownloadOsmandIndexesHelper {
-	private final static Log log = LogUtil.getLog(DownloadOsmandIndexesHelper.class);
+	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
 	
 
 	public static IndexFileList getIndexesList(Context ctx) {

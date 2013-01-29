@@ -17,7 +17,7 @@ import java.util.Map;
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.Location;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
@@ -83,7 +83,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static final String THREEGP_EXTENSION = "3gp";
 	private static final String MPEG4_EXTENSION = "mp4";
 	private static final String IMG_EXTENSION = "jpg";
-	private static final Log log = LogUtil.getLog(AudioVideoNotesPlugin.class);
+	private static final Log log = PlatformUtil.getLog(AudioVideoNotesPlugin.class);
 	private static Method mRegisterMediaButtonEventReceiver;
 	private static Method mUnregisterMediaButtonEventReceiver;
 	private OsmandApplication app;

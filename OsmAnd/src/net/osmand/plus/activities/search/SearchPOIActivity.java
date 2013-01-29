@@ -18,7 +18,7 @@ import java.util.Map.Entry;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
@@ -480,14 +480,14 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
     	// show point view only if gps enabled
     	if(location == null){
     		if(sensorRegistered) {
-    			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
+    			Log.d(PlatformUtil.TAG, "Disable sensor"); //$NON-NLS-1$
     			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
     			sensorRegistered = false;
     			heading = null;
     		}
     	} else {
     		if(!sensorRegistered){
-    			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
+    			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
     			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
     			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
     			if (s != null) {

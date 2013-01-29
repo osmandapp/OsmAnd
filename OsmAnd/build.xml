@@ -150,15 +150,7 @@
 				<compilerarg line="${java.compilerargs}" />
 				<!-- osmchange -->
 				<src path="${use.absolute.dir}" />
-				<exclude name="**/LogUtil.java" />
-				<exclude name="**/OsmStorageWriter.java" />
-				<exclude name="**/net/osmand/data/index/" />
-				<exclude name="**/net/osmand/data/preparation/" />
-				<exclude name="**/net/osmand/osm/util/" />
-				<exclude name="**/net/osmand/swing/" />
-				<exclude name="**/net/osmand/router/test/" />
-				<exclude name="**/resources/" />
-				<exclude name="**/rtree/" />
+				<exclude name="**/PlatformUtil.java" />
 				<!-- osmchange -->
 			</javac>
 

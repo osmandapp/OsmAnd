@@ -13,7 +13,7 @@ import java.util.Locale;
 
 import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -57,7 +57,7 @@ import com.bidforfix.andorid.BidForFixHelper;
 
 public class OsmandApplication extends Application implements ClientContext {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
-	private static final org.apache.commons.logging.Log LOG = LogUtil.getLog(OsmandApplication.class);
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
 	ResourceManager manager = null;
 	PoiFiltersHelper poiFilters = null;
@@ -574,7 +574,7 @@ public class OsmandApplication extends Application implements ClientContext {
 				defaultHandler.uncaughtException(thread, ex);
 			} catch (Exception e) {
 				// swallow all exceptions
-				android.util.Log.e(LogUtil.TAG, "Exception while handle other exception", e); //$NON-NLS-1$
+				android.util.Log.e(PlatformUtil.TAG, "Exception while handle other exception", e); //$NON-NLS-1$
 			}
 
 		}

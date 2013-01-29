@@ -1,6 +1,6 @@
 package net.osmand.plus.osmodroid;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -20,7 +20,7 @@ import com.OsMoDroid.IRemoteOsMoDroidService;
 public class OsMoDroidPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.osmodroid";
-	private static final Log log = LogUtil.getLog(OsMoDroidPlugin.class);
+	private static final Log log = PlatformUtil.getLog(OsMoDroidPlugin.class);
 	private OsmandApplication app;
 	IRemoteOsMoDroidService mIRemoteService;
 	private ServiceConnection mConnection;

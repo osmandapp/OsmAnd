@@ -3,7 +3,7 @@ package net.osmand.plus.activities;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
@@ -36,7 +36,7 @@ import android.widget.Toast;
 public class DownloadTilesDialog {
 
 	
-	private final static Log log = LogUtil.getLog(DownloadTilesDialog.class); 
+	private final static Log log = PlatformUtil.getLog(DownloadTilesDialog.class); 
 	private final Context ctx;
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;

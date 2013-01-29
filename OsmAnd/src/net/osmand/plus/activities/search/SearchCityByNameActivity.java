@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
@@ -180,7 +180,7 @@ public class SearchCityByNameActivity extends SearchByNameAbstractActivity<City>
 		private CityComparator(StringMatcherMode startsWith, 
 				boolean en) {
 			this.startsWith = startsWith;
-			this.cs = LogUtil.primaryCollator();
+			this.cs = PlatformUtil.primaryCollator();
 			this.en = en;
 		}
 

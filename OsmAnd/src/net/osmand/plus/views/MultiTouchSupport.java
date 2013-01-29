@@ -2,7 +2,7 @@ package net.osmand.plus.views;
 
 import java.lang.reflect.Method;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 
 import org.apache.commons.logging.Log;
 
@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 
 public class MultiTouchSupport {
 
-	private static final Log log = LogUtil.getLog(MultiTouchSupport.class);
+	private static final Log log = PlatformUtil.getLog(MultiTouchSupport.class);
 	
     public static final int ACTION_MASK = 255;
     public static final int ACTION_POINTER_ID_SHIFT = 8;

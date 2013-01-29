@@ -1,6 +1,6 @@
 package net.osmand.plus.views;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.osm.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -17,7 +17,7 @@ import android.view.animation.LinearInterpolator;
  */
 public class AnimateDraggingMapThread {
 	
-	protected static final Log log = LogUtil.getLog(AnimateDraggingMapThread.class);
+	protected static final Log log = PlatformUtil.getLog(AnimateDraggingMapThread.class);
 	
 	private final static float DRAGGING_ANIMATION_TIME = 1200f;
 	private final static float ZOOM_ANIMATION_TIME = 800f;

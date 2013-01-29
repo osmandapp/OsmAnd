@@ -20,7 +20,7 @@ import java.util.Map;
 import net.osmand.Algoritms;
 import net.osmand.Base64;
 import net.osmand.IOUtils;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.osm.Entity;
@@ -71,7 +71,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 	private long changeSetId = NO_CHANGESET_ID;
 	private long changeSetTimeStamp = NO_CHANGESET_ID;
 
-	public final static Log log = LogUtil.getLog(OpenstreetmapRemoteUtil.class);
+	public final static Log log = PlatformUtil.getLog(OpenstreetmapRemoteUtil.class);
 
 	private OsmandSettings settings;
 

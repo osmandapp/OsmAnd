@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 public class YandexTrafficAdapter  extends MapTileAdapter {
 
-	private final static Log log = LogUtil.getLog(MapTileLayer.class);
+	private final static Log log = PlatformUtil.getLog(MapTileLayer.class);
 	private final static String YANDEX_PREFFIX = ".YandexTraffic_";
 	private static final long DELTA = 10 * 60 * 1000;
 	

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
@@ -23,7 +23,7 @@ import org.apache.commons.logging.Log;
 
 public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 
-	private final static Log log = LogUtil.getLog(AmenityIndexRepositoryBinary.class);
+	private final static Log log = PlatformUtil.getLog(AmenityIndexRepositoryBinary.class);
 	private final BinaryMapIndexReader index;
 
 	public AmenityIndexRepositoryBinary(BinaryMapIndexReader index) {

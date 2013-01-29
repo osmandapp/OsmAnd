@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
 
@@ -26,7 +26,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 	private static final String CONFIG_FILE = "_config.p";
 	private static final int[] MEDIA_VOICE_VERSION = new int[] { 0 }; // MUST BE SORTED, list of supported versions
 
-	private static final Log log = LogUtil.getLog(MediaCommandPlayerImpl.class);
+	private static final Log log = PlatformUtil.getLog(MediaCommandPlayerImpl.class);
 	
 	// playing media
 	private MediaPlayer mediaPlayer;

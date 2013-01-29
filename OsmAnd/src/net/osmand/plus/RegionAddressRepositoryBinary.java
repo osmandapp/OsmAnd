@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -27,7 +27,7 @@ import org.apache.commons.logging.Log;
 
 
 public class RegionAddressRepositoryBinary implements RegionAddressRepository {
-	private static final Log log = LogUtil.getLog(RegionAddressRepositoryBinary.class);
+	private static final Log log = PlatformUtil.getLog(RegionAddressRepositoryBinary.class);
 	private BinaryMapIndexReader file;
 	private String region;
 	
@@ -40,8 +40,8 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 	public RegionAddressRepositoryBinary(BinaryMapIndexReader file, String name) {
 		this.file = file;
 		this.region = name;
- 	    this.collator = LogUtil.primaryCollator();
-		this.postCodes = new TreeMap<String, City>(LogUtil.primaryCollator());
+ 	    this.collator = PlatformUtil.primaryCollator();
+		this.postCodes = new TreeMap<String, City>(PlatformUtil.primaryCollator());
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
@@ -21,7 +21,7 @@ import net.osmand.osm.MapUtils;
 import org.apache.commons.logging.Log;
 
 public class TransportIndexRepositoryBinary implements TransportIndexRepository {
-	private static final Log log = LogUtil.getLog(TransportIndexRepositoryBinary.class);
+	private static final Log log = PlatformUtil.getLog(TransportIndexRepositoryBinary.class);
 	private final BinaryMapIndexReader file;
 	
 	protected List<TransportStop> cachedObjects = new ArrayList<TransportStop>(); 

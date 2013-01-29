@@ -1,7 +1,7 @@
 package net.osmand.plus.render;
 
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
@@ -13,7 +13,7 @@ import org.apache.commons.logging.Log;
 import android.graphics.Bitmap;
 
 public class NativeOsmandLibrary extends NativeLibrary {
-	private static final Log log = LogUtil.getLog(NativeOsmandLibrary.class);
+	private static final Log log = PlatformUtil.getLog(NativeOsmandLibrary.class);
 	
 	private static NativeOsmandLibrary library;
 	private static Boolean isNativeSupported = null;
@@ -33,7 +33,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("gnustl_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
-						if (LogUtil.AVIAN_LIBRARY) {
+						if (PlatformUtil.AVIAN_LIBRARY) {
 							log.debug("Loading load routing test..."); //$NON-NLS-1$
 							System.loadLibrary("routing_test");
 							testRoutingPing();

@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.R.drawable;
 
@@ -18,7 +18,7 @@ import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
 public class RenderingIcons {
-	private static final Log log = LogUtil.getLog(RenderingIcons.class);
+	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
 	
 	private static Map<String, Integer> icons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.Algoritms;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleAlertBuilder;
@@ -241,7 +241,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 						location = loc;
 					}
 				} catch (IllegalArgumentException e) {
-					Log.d(LogUtil.TAG, "Location provider not available"); //$NON-NLS-1$
+					Log.d(PlatformUtil.TAG, "Location provider not available"); //$NON-NLS-1$
 				}
 			}
 			if(location != null){
@@ -402,13 +402,13 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		try {
 			service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
 		} catch (IllegalArgumentException e) {
-			Log.d(LogUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "GPS location provider not available"); //$NON-NLS-1$
 		}
 		// try to always ask for network provide : it is faster way to find location
 		try {
 			service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, networkListener);
 		} catch (IllegalArgumentException e) {
-			Log.d(LogUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Network location provider not available"); //$NON-NLS-1$
 		}
 	}
 
@@ -794,21 +794,21 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		boolean show = overruleRegister || (currentShowingAngle && location != null) || currentMapRotation == OsmandSettings.ROTATE_MAP_COMPASS;
 		// show point view only if gps enabled
 		if (sensorRegistered && !show) {
-			Log.d(LogUtil.TAG, "Disable sensor"); //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Disable sensor"); //$NON-NLS-1$
 			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
 			sensorRegistered = false;
 			previousSensorValue = 0;
 			mapLayers.getLocationLayer().setHeading(null);
 		} else if (!sensorRegistered && show) {
-			Log.d(LogUtil.TAG, "Enable sensor"); //$NON-NLS-1$
+			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
 			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 			if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
-				Log.e(LogUtil.TAG, "Sensor accelerometer could not be enabled");
+				Log.e(PlatformUtil.TAG, "Sensor accelerometer could not be enabled");
 			}
 			s = sensorMgr.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
 			if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
-				Log.e(LogUtil.TAG, "Sensor magnetic field could not be enabled");
+				Log.e(PlatformUtil.TAG, "Sensor magnetic field could not be enabled");
 			}
 //			s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 //			if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
@@ -870,8 +870,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 	}
 
 	public void setLocation(net.osmand.Location location) {
-		if (Log.isLoggable(LogUtil.TAG, Log.DEBUG)) {
-			Log.d(LogUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
+		if (Log.isLoggable(PlatformUtil.TAG, Log.DEBUG)) {
+			Log.d(PlatformUtil.TAG, "Location changed " + location.getProvider()); //$NON-NLS-1$
 		}
 		// 1. Logging services
 		if (location != null) {

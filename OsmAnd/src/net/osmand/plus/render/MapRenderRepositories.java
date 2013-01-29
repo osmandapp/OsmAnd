@@ -21,7 +21,7 @@ import java.util.Set;
 
 import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary.NativeSearchResult;
 import net.osmand.QuadRect;
 import net.osmand.access.AccessibleToast;
@@ -62,7 +62,7 @@ public class MapRenderRepositories {
 	public static boolean checkForDuplicateObjectIds = true;
 	
 
-	private final static Log log = LogUtil.getLog(MapRenderRepositories.class);
+	private final static Log log = PlatformUtil.getLog(MapRenderRepositories.class);
 	private final OsmandApplication context;
 	private final static int BASEMAP_ZOOM = 11;
 	private Handler handler;

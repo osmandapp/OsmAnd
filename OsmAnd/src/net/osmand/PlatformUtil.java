@@ -20,7 +20,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
  * 5. It is impossible to set for all tags debug level (info is default) - android.util.Log#isLoggable(String, int).
  *  
  */
-public class LogUtil {
+public class PlatformUtil {
 	public static String TAG = "net.osmand"; //$NON-NLS-1$
 	public static boolean AVIAN_LIBRARY = false;
 	private static class OsmandLogImplementation implements Log {

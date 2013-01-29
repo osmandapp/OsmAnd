@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
@@ -36,7 +36,7 @@ public abstract class OsmandPlugin {
 	
 	private static List<OsmandPlugin> installedPlugins = new ArrayList<OsmandPlugin>();  
 	private static List<OsmandPlugin> activePlugins = new ArrayList<OsmandPlugin>();
-	private static final Log LOG = LogUtil.getLog(OsmandPlugin.class);
+	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 	
 	private static final String PARKING_PLUGIN_COMPONENT = "net.osmand.parkingPlugin"; //$NON-NLS-1$
 	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid"; //$NON-NLS-1$

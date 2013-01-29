@@ -5,7 +5,7 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
 import net.osmand.plus.OsmandApplication;
@@ -153,7 +153,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 				} catch (RuntimeException e) {
 					((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 					((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
-					Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
+					Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 				}
 				
 			}
@@ -280,7 +280,7 @@ public class NavigatePointActivity extends Activity implements SearchActivityChi
 		} catch (RuntimeException e) {
 			((TextView) findViewById(R.id.ValidateTextView)).setVisibility(View.VISIBLE);
 			((TextView) findViewById(R.id.ValidateTextView)).setText(R.string.invalid_locations);
-			Log.w(LogUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
+			Log.w(PlatformUtil.TAG, "Convertion failed", e); //$NON-NLS-1$
 		}
 	}
 	

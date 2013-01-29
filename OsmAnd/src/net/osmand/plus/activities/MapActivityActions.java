@@ -18,7 +18,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.FavouritePoint;
 import net.osmand.Location;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -331,7 +331,7 @@ public class MapActivityActions implements DialogProvider {
 						mapView.refreshMap();
 					}
 				} catch(Exception e) {
-					Log.e(LogUtil.TAG, "Error updating local data", e); //$NON-NLS-1$
+					Log.e(PlatformUtil.TAG, "Error updating local data", e); //$NON-NLS-1$
 					showToast(getString(R.string.update_poi_error_local));
 				} finally {
 					Dialog prog = mapActivity.getProgressDlg();

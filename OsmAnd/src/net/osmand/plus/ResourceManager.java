@@ -22,7 +22,7 @@ import java.util.TreeMap;
 import net.osmand.Algoritms;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.CachedOsmandIndexes;
@@ -72,7 +72,7 @@ public class ResourceManager {
 	private static final String INDEXES_CACHE = "ind.cache";
 	
 	
-	private static final Log log = LogUtil.getLog(ResourceManager.class);
+	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 	private static final String MINE_POI_DB = "mine"+ IndexConstants.POI_INDEX_EXT;
 	
 	

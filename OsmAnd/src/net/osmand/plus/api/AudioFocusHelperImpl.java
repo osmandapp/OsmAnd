@@ -1,6 +1,6 @@
 package net.osmand.plus.api;
 
-import net.osmand.LogUtil;
+import net.osmand.PlatformUtil;
 
 import net.osmand.plus.ClientContext;
 
@@ -16,7 +16,7 @@ import android.media.AudioManager;
  * @author genly
  */
 public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeListener, net.osmand.plus.api.ExternalServiceAPI.AudioFocusHelper {
-	private static final Log log = LogUtil.getLog(AudioFocusHelperImpl.class);
+	private static final Log log = PlatformUtil.getLog(AudioFocusHelperImpl.class);
 	
 	@Override
 	public boolean requestFocus(ClientContext context, int streamType) {
