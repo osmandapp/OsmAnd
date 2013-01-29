@@ -557,7 +557,7 @@
 	<string name="global_settings">Global Settings</string>
 	<string name="index_settings">Data Management</string>
 	<string name="general_settings">General</string>
-	<string name="general_settings_descr">Configure common settings for the application</string>
+	<string name="general_settings_descr">Configure display and common settings for the application</string>
 	<string name="global_app_settings">Global app settings</string>
 	<string name="user_name">Your OSM user name</string>
 	<string name="user_name_descr">Needed for openstreetmap.org submissions</string>
