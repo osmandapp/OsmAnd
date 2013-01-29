@@ -25,7 +25,15 @@
   <string name="layer_poi_label">Etykiety POI</string>
   <string name="animate_route_off">Wył. animacje</string>
   <string name="animate_route">Wł. animacje</string>
-  <string name="tip_recent_changes_0_6_8_t">"Zmiany w wersji 0.6.8: \n\t- całkowicie przeprojektowano wyszukiwanie (POI, adresy) - teraz jest szybsze i bardziej responsywne \n\t- zaimplementowano wyszukiwanie POI po nazwie na dużych obszarach (krajach) \n\t- naprawiono migotanie ekranu na tabletach (zgłoszenie nr 641) \n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356) \n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\' \n\t- dane POI teraz są w plikach .obf \n\t- poprawiono błędy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy) \n\t- naprawiono inne, drobne błędy "</string>
+  <string name="tip_recent_changes_0_6_8_t">"Zmiany w 0.6.8:
+\n\t- całkowicie przeprojektowano wyszukiwanie (POI, adresy) - teraz jest szybsze i bardziej responsywne
+\n\t- zaimplementowano wyszukiwanie POI po nazwie na dużych obszarach (krajach)
+\n\t- naprawiono migotanie ekranu na tabletach (zgłoszenie nr 641)
+\n\t- dodano opcję autostartu nawigacji (zgłoszenie nr 356)
+\n\t- nawigacja wg śladu GPX przeniesiona została do menu \'Nawigacja\'
+\n\t- dane POI teraz są w plikach .obf
+\n\t- poprawiono błędy komunikatów głosowych (ustalenie pozycji GPS, pomijanie pierwszej komendy)
+\n\t- naprawiono inne, drobne błędy "</string>
   <string name="file_can_not_be_renamed">Nazwa pliku nie może zostać zmieniona.</string>
   <string name="file_with_name_already_exists">Plik o takiej nazwie już istnieje.</string>
   <string name="gpx_navigation">Trasa GPX</string>
@@ -74,14 +82,14 @@
   <string name="local_index_gpx_info_show">\n\nPrzytrzymaj, aby wyświetlić opcje</string>
   <string name="local_index_gpx_info_speed">"\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s"</string>
   <string name="local_index_gpx_info_elevation">"\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m"</string>
-  <string name="local_index_gpx_info">Subtracks : %1$d\nWszystkie punkty: %2$d\nPunkty pośrednie: %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF, %5$tR\nCzas zakończenia: %6$tF, %6$tR</string>
+  <string name="local_index_gpx_info">Podścieżki: %1$d\nWszystkie punkty: %2$d\nPunkty pośrednie: %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF, %5$tR\nCzas zakończenia: %6$tF, %6$tR</string>
   <string name="local_index_installed">Wydanie</string>
   <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>
   <string name="local_index_items_deleted">%1$d z %2$d skasowano.</string>
   <string name="local_index_items_restored">%1$d z %2$d przywrócono.</string>
   <string name="local_index_no_items_to_do">Brak elementów %1$s</string>
   <string name="local_index_action_do">Zamierzasz %1$s %2$s elementów. Kontynuować?</string>
-  <string name="local_index_descr_title">Zarządzanie danymi offline</string>
+  <string name="local_index_descr_title">Zarządzanie danymi</string>
   <string name="local_index_mi_restore">Przywróć</string>
   <string name="local_index_mi_backup">Zarchiwizuj</string>
   <string name="local_index_mi_delete">Skasuj</string>
@@ -103,8 +111,8 @@
   <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
   <string name="map_text_size_descr">Wybierz rozmiar tekstu dla nazw na mapie</string>
   <string name="map_text_size">Rozmiar tekstu</string>
-  <string name="trace_rendering">Debugowanie renderingu</string>
-  <string name="trace_rendering_descr">Pokaż informacje wydajnościowe przydatne dla procesu debugowania</string>
+  <string name="trace_rendering">Informacje o rysowaniu</string>
+  <string name="trace_rendering_descr">Wyświetlaj informacje o wydajności rysowania mapy</string>
   <string name="tip_recent_changes">Ostatnie zmiany</string>
   <string name="tip_recent_changes_0_6_6_t">"Zmiany dla 0.6.6: \n\t- wyszukiwanie głosowe w nawigacji za pomocą TTS \n\t- render mapy pokazuje więcej szczegółów \n\t- mapa podstawowa zawarta w aplikacji \n\t- ulepszenie routingu offline (ciągle eksperymentalny) \n\t- opcje routingu dla GPX \n\t- aktualizacja interfejsu i poprawka wielu błędów "</string>
   <string name="voice_not_use">Nie używaj</string>
@@ -145,7 +153,10 @@
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja danych offline</string>
-  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. OsmAnd posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje. \n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Dane offline\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcje klikając przycisk \'Menu\' -&gt; \'filtruj pobrane\' aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tDostępność aktualizacji jest opisana przez następujące kolory: \n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze \n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
+  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. OsmAnd posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje.
+\n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcje klikając przycisk \'Menu\' -&gt; \'filtruj pobrane\' aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tDostępność aktualizacji jest opisana przez następujące kolory:
+\n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze
+\n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
   <string name="level_to_switch_vector_raster_descr">Minimalne zbliżenie dla map wektorowych</string>
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
@@ -264,10 +275,10 @@
   <string name="deselect_all">Odznacz wszystko</string>
   <string name="select_all">Zaznacz wszystko</string>
   <string name="reload">Odśwież</string>
-  <string name="general_settings_descr">Konfiguruj ogólne ustawienia</string>
-  <string name="general_settings">Ustawienia główne</string>
-  <string name="index_settings_descr">Przeglądaj, pobieraj oraz zarządzaj mapami offline</string>
-  <string name="index_settings">Dane offline</string>
+  <string name="general_settings_descr">Konfiguruj ogólne ustawienia aplikacji</string>
+  <string name="general_settings">Główne</string>
+  <string name="index_settings_descr">Pobieraj mapy i zarządzaj danymi zapisanymi na urządzeniu</string>
+  <string name="index_settings">Zarządzanie danymi</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
   <string name="fast_route_mode">Najszybsza trasa</string>
@@ -276,9 +287,9 @@
   <string name="context_menu_item_download_map">Pobierz mapę</string>
   <string name="select_max_zoom_preload_area">Wybierz maksymalne przybliżenie do pobrania</string>
   <string name="maps_could_not_be_downloaded">Nie udało się pobrać tej mapy</string>
-  <string name="continuous_rendering">Ciągły rendering</string>
-  <string name="continuous_rendering_descr">Używaj ciągłego renderowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
-  <string name="rendering_exception">Wystąpił błąd podczas renderowania wybranej powierzchni</string>
+  <string name="continuous_rendering">Rysowanie ciągłe</string>
+  <string name="continuous_rendering_descr">Używaj ciągłego rysowania podczas wyświetlania zamiast rysować jeden obrazek na raz</string>
+  <string name="rendering_exception">Wystąpił błąd podczas rysowania wybranej powierzchni</string>
   <string name="rendering_out_of_memory">Brak wystarczającej ilości pamięci, by wyświetlić wybrany obszar</string>
   <string name="show_point_options">Opcje punktu...</string>
   <string name="renderer_load_sucess">Render uruchomiony</string>
@@ -674,23 +685,26 @@
   <string name="extra_settings">Ustawienia zaawansowane</string>
   <string name="osmand_monitoring_description">Pokaż ustawienia do konfiguracji zapisywania Twoich wycieczek do plików GPX lub wysyłanie ich na bieżąco do serwera webowego.</string>
   <string name="osmand_extra_settings_description">Pokaż ustawienia do konfiguracji zaawansowanych opcji konfiguracyjnych map (jak zwiększenie detali map) oraz opcji specyficznych dla niektórych urządzeń.</string>
-  <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości renderowania.</string>
+  <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości rysowania.</string>
   <string name="plugins_screen">Wtyczki</string>
   <string name="select_plugin_to_activate">Dotknij wtyczki, aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
-  <string name="prefs_plugins_descr">Wtyczki dostarczają dodatkowe opcje oraz funkcje takie jak mapy kafelkowe, monitorowanie, tryb uśpienia, ułatwienia dostępu i inne.</string>
-  <string name="prefs_plugins">Zarządzanie wtyczkami</string>
-  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0 :
-\n\t- *Obsługa wtyczek*\n\t - Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t - Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t - Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Routing offline*\n\t - Routing offline został poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t - Poprawione w wielu kwestiach "</string>
+  <string name="prefs_plugins_descr">Wtyczki rozszerzają aplikację o dodatkowe funkcje oraz ustawienia</string>
+  <string name="prefs_plugins">Wtyczki</string>
+  <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0:
+\n\t- *Obsługa wtyczek*\n\t- Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t- Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t- Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Nawigacja offline*\n\t- Nawigacja offline została poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t- Poprawione w wielu kwestiach "</string>
   <string name="osm_editing_plugin_description">Pokaż ustawienia do konfiguracji poprawiania danych OSM - zbieranie/modyfikowanie obiektów POI, otwieranie/komentowanie błędów OSM oraz dodawanie zapisanych ścieżek GPX (wymaga podania danych uwierzytelniających OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Mapy wektorowe mogą wyświetlać się szybciej. Może nie działać dobrze na niektórych urządzeniach.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
   <string name="play_commands_of_currently_selected_voice">Odtwórz komendy w aktualnie wybranym głosie</string>
   <string name="debugging_and_development">Rozwój OsmAnd</string>
-  <string name="native_rendering">Renderowanie natywne</string>
+  <string name="native_rendering">Rysowanie natywne</string>
   <string name="animate_routing">Nawigacja animowana</string>
   <string name="test_voice_prompts">Przetestuj podpowiedzi głosowe</string>
-  <string name="tip_recent_changes_0_7_2_t">"Zmiany w 0.7.2 :
-\n\t- Natywne renderowanie dla wszystkich urządzeń\n\t- Edytowanie POI w trybie offline\n\t- Ułatwienia dostępu\n\t- Wiele poprawek "</string>
+  <string name="tip_recent_changes_0_7_2_t">"Zmiany w 0.7.2:
+\n\t- Natywne renderowanie dla wszystkich urządzeń
+\n\t- Edytowanie POI w trybie offline
+\n\t- Ułatwienia dostępu
+\n\t- Wiele poprawek "</string>
   <string name="send_files_to_osm">Wysłać pliki GPX do OSM?</string>
   <string name="gpx_visibility_txt">Widoczność</string>
   <string name="gpx_tags_txt">Tagi</string>
@@ -763,7 +777,7 @@
   <string name="use_fluorescent_overlays_descr">Użyj odblaskowych kolorów do wyświetlania ścieżek i tras</string>
   <string name="offline_edition">Edycja w trybie offline</string>
   <string name="offline_edition_descr">Zawsze edytuj w trybie offline</string>
-  <string name="tip_recent_changes_0_7_1_t">"Zmiany w 0.7.1 :
+  <string name="tip_recent_changes_0_7_1_t">"Zmiany w 0.7.1:
 \n\t- Edycja POI w trybie offline\n\t- Opcja zapisywania ścieżki na bieżąco - cykliczne wysyłanie informacji o pozycji do usługi sieciowej (przeczytaj jak ustawić własną usługę sieciową w artykułach HowTo)\n\t- Pokazywanie aktualnie nagranego śladu na mapie\n\t- Wykrywanie kierunku poruszania: Nakazanie \'Zawróć\' podczas poruszania w przeciwnym kierunku lub po przeoczeniu zakrętu\n\t- Nowa podpowiedź głosowa - \'Trasa przeliczona\'
 \n\t- Optyczne wskazanie bliskości zakrętu w odległości nie większej niż 100m prze zmianę koloru strzałki\n\t- Zdezaktywowane pliki indeksów są teraz pokazywane w ekranie pobrań w kolorze ciemno zielonym i ciemno niebieskim\n\t- Inne zmiany "</string>
   <string name="local_openstreetmap_uploading">Wysyłanie…</string>
@@ -783,8 +797,10 @@
   <string name="live_monitoring_url">Adres sieciowy śledzenia na bierząco</string>
   <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'.</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
-  <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 :
-\n\t- Dane wikipedii z artykułami w trybie offline\n\t- Uaktualnione mapy\n\t- Inne niewielkie funkcjonalności "</string>
+  <string name="tip_recent_changes_0_7_0_t">"Zmiany w 0.7.0:
+\n\t- Dane Wikipedii z artykułami w trybie offline
+\n\t- Uaktualnione mapy
+\n\t- Inne niewielkie funkcjonalności "</string>
   <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań %2$s oraz nie obsługuje artykułów Wikipedii w trybie offline.</string>
   <string name="free_version_title">Wersja darmowa</string>
   <string name="poi_context_menu_showdescription">Pokaż opis POI</string>
@@ -813,7 +829,7 @@
   <string name="tip_osm_improve_t">\tOsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i, poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.\n\tW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'Edycja OSM\'\n\tAby dodać nowe POI, użyj opcji \'Utwórz POI\' w menu kontekstowym mapy. Wpisz informacje na temat nowego POI w oknie dialogowym \'Stwórz POI\' i zatwierdź go.\n\tBłędy w mapach mogą być natychmiast zgłoszone jako błąd OSM, dzięki czemu społeczność OSM może szybciej naprawić problem.\n\tAby dodać błąd OSM użyj opcji \'Zgłoś błąd do OSM\' w menu kontekstowym mapy. Następnie wpisz dokładny opis problemu a następnie wyślij go używając przycisku \'Dodaj\'.\n\tAby dodawać POI OSM lub zgłaszać błędy do OSM, wymagane jest połączenie z Internetem.</string>
   <string name="download_files_not_enough_space">Nie ma wystarczająco miejsca, aby pobrać %1$s MB (dostępne miejsce: %2$s).</string>
   <string name="download_files_question_space">Aktualnie dostępna przestrzeń: {2} MB! Pobrać {0} plik(ów) ({1} MB)?</string>
-  <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii POI odpowiadających zapytaniu :</string>
+  <string name="poi_query_by_name_matches_categories">Znaleziono kilka kategorii POI odpowiadających zapytaniu:</string>
   <string name="favourites_edit_dialog_name">Nazwa</string>
   <string name="favourites_edit_dialog_category">Kategoria</string>
   <string name="gpx_option_from_start_point">Przejdź wzdłuż całej ścieżki</string>
@@ -828,24 +844,24 @@
   <string name="history_search_desc">Historia wyszukiwania</string>
   <string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string>
   <string name="rendering_attr_noPolygons_name">Bez wielokątów</string>
-  <string name="rendering_attr_appMode_name">Tryb renderowania</string>
+  <string name="rendering_attr_appMode_name">Tryb rysowania</string>
   <string name="rendering_attr_appMode_description">Optymalizacja map dla wybranego profilu użytkownika</string>
   <string name="rendering_attr_contourLines_description">Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (może być wymagany plik STRM):</string>
   <string name="rendering_attr_contourLines_name">Pokaż kontury</string>
   <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
   <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
-  <string name="route_roundabout">Rondo: skręć na %1$d wyjeździe</string>
+  <string name="route_roundabout">Rondo: wybierz %1$d zjazd</string>
   <string name="route_kl">Trzymaj się lewej strony</string>
   <string name="route_kr">Trzymaj się prawej strony</string>
   <string name="save_route_as_gpx">Zapisz ścieżkę jako plik GPX</string>
   <string name="asap">ASAP</string>
-  <string name="tip_recent_changes_0_8_1_t">"Zmiany w 0.8.1 :
+  <string name="tip_recent_changes_0_8_1_t">"Zmiany w 0.8.1:
 \n\t* Mądre i szybkie przeliczanie trasy
 \n\t* Bardziej dokładne trasy (nieco wolniejsze)
 \n\t* Direction by lanes
 \n\t* Informacje na temat wyboi, radarów, ograniczeń prędkości
 \n\t* Poprawione wskazówki głosowe na autostradzie
-\n\t* Wtyczka parkingowa (\"Gdzie zaparkowałem samochód?\")\n\t* Włączenie/wyłączenie widgeta logowania "</string>
+\n\t* Wtyczka parkingowa (\"Gdzie zaparkowałem samochód?\")\n\t* Włączenie/wyłączenie widżetu logowania "</string>
   <string name="gpxup_public">Publiczny</string>
   <string name="gpxup_identifiable">Identyfikowalny</string>
   <string name="gpxup_trackable">Z opcją śledzenia</string>
@@ -892,10 +908,10 @@
   <string name="show_cameras">Fotoradary</string>
   <string name="show_speed_limits">Ograniczenia prędkości</string>
   <string name="avoid_toll_roads">Dróg płatnych</string>
-  <string name="tip_recent_changes_0_8_2_t">Zmiany w 0.8.2 :
-     \n\t* Poprawiony routing
-     \n\t* Dynamic map widgets
-    </string>
+  <string name="tip_recent_changes_0_8_2_t">"Zmiany w 0.8.2:
+\n\t* Poprawiony routing
+\n\t* Dynamiczne widżety mapy
+\n\t* Ustawienia mapy przeniesione na ekran mapy "</string>
   <string name="map_widget_top_text">Ulica</string>
   <string name="map_widget_config">Konfiguracja</string>
   <string name="map_widget_map_select">Wybór mapy</string>
@@ -924,7 +940,8 @@
   <string name="bg_service_sleep_mode_off">Wyłącz\n tryb uśpienia</string>
   <string name="bg_service_sleep_mode_on">Włącz\n tryb uśpienia</string>
   <string name="filterpoi_activity">Stwórz filtr POI</string>
-  <string name="day_night_info_description">Wschód : %1$s \nZachód : %2$s</string>
+  <string name="day_night_info_description">Wschód: %1$s
+\nZachód: %2$s</string>
   <string name="map_widget_renderer">Styl renderowania</string>
   <string name="layer_map_appearance">Konfiguruj ekran…</string>
   <string name="avoid_unpaved">Dróg gruntowych</string>
@@ -965,16 +982,15 @@
 <string name="avoid_motorway">Autostrad</string>
 <string name="snap_to_road_descr">Przyciągaj wskaźnik pozycji do drogi podczas nawigacji</string>
 <string name="snap_to_road">Przyciąganie do drogi</string>
-<string name="tip_recent_changes_0_8_3_t">Zmiany w 0.8.3 :
-		\n\t* Poprawione route guidance
-		\n\t* Opcja unikania autostrad
-		\n\t* Wyświetlanie dróg oznaczonych jako Cycleway=track 
-		\n\t* Lepsze wykończenie UI (ikony)
-		\n\t* Usunięcie niektórych błędów
-	</string>
+<string name="tip_recent_changes_0_8_3_t">"Zmiany w 0.8.3:
+\n\t* Poprawione route guidance
+\n\t* Opcja unikania autostrad
+\n\t* Wyświetlanie dróg oznaczonych jako Cycleway=track
+\n\t* Lepsze wykończenie UI (ikony)
+\n\t* Usunięcie niektórych błędów "</string>
 <string name="day_night_info">Informacja od dniu/nocy</string>
 <string name="map_widget_day_night">Mapa dzień/noc</string>
-<string name="map_widget_vector_attributes">Atrybuty renderowania:</string>
+<string name="map_widget_vector_attributes">Atrybuty rysowania:</string>
 <string name="show_lanes">Pasy ruchu</string>
 <string name="tip_recent_changes_0_8_4_t">"Zmiany w 0.8.4:\n\t* Kilka drobnych poprawek
 \n\t* Mapa nie traci pozycji po przerwaniach
@@ -1034,8 +1050,8 @@
     <string name="search_villages_and_postcodes">Szukaj miejscowości/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
     <string name="route_descr_current_location">Bieżąca pozycja</string>
-    <string name="route_descr_from_to">Z %1$s↵\nDo %2$s</string>
-    <string name="route_descr_from_to_via">Z : %1$s↵\nPrzez : %2$s↵\nDo : %3$s</string>
+    <string name="route_descr_from_to">Z: %1$s↵\nDo: %2$s</string>
+    <string name="route_descr_from_to_via">Z: %1$s\nPrzez: %2$s\nDo: %3$s</string>
     <string name="rendering_attr_showRoadMaps_description">Wybierz kiedy wyświetlać tylko mapy samochodowe:</string>
 	<string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
     <string name="download_roads_only_item">"Samochodowe "</string>
@@ -1044,7 +1060,10 @@
     <string name="safe_mode">Tryb bezpieczny</string>
     <string name="native_library_not_running">Program działa w trybie bezpiecznym (wyłącz go w ustawieniach).</string>
     <string name="background_service_is_enabled_question">Usługa w tle jest nadal aktywna. Czy chcesz ją zatrzymać?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0 : ↵\n→* Poprawiony routing: szybszy, dokładniejszy, do 250 km ↵\n→* Wprowadzenie map tylko samochodowych ↵\n→* Mapa nie gubi ustalonej pozycji po przerwaniu ↵\n→* Włączenie usługi w tle podczas nawigacji "</string>
+    <string name="tip_recent_changes_1_0_0_t">"Zmiany w 1.0.0:\n\t* Poprawiony routing: szybszy, dokładniejszy, do 250 km
+\n\t* Wprowadzenie map tylko samochodowych
+\n\t* Mapa nie gubi ustalonej pozycji po przerwaniu
+\n\t* Włączenie usługi w tle podczas nawigacji "</string>
     <string name="close_changeset">Zamknij zestaw zmian</string>
 	<string name="zxing_barcode_scanner_not_found">Skaner kodów kreskowych ZXing nie jest zainstalowany. Poszukać w Google Play?</string>
 	<string name="incomplete_locale">niekompletne</string>
@@ -1057,11 +1076,11 @@
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>
-    <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez \'Zarządzanie danymi offline\' (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez Zarządzanie danymi (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="download_srtm_maps">Mapy poziomicowe</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Pobierz mapy -&gt; Manu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
+    <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Zarządzanie danymi -&gt; Menu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
     <string name="osmand_distance_plugin_description">Umożliwia pomiar odległości pomiędzy dwoma punktami. Zaznacz początek / cel / wyczyść pomiar poprzez długie naciśnięcie.</string>
@@ -1088,7 +1107,7 @@
     <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
     <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
     <string name="recording_delete_confirm">Czy chcesz usunąć to nagranie?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Zmiany w 1.1.0 :
+    <string name="tip_recent_changes_1_1_0_t">"Zmiany w 1.1.0:
 \n\t* Plugin kalkulatora odległości
 \n\t* Plugin notatek dźwiękowych
 \n\t* Plugin wyświetlający poziomice
