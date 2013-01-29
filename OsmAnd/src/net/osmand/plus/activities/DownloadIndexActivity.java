@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -41,6 +40,7 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.IndexItemCategory;
 import net.osmand.plus.download.SrtmIndexItem;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -700,7 +700,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 									downloads.set(downloads.get() + 1);
 								}
 								if (entry.existingBackupFile != null) {
-									Algoritms.removeAllFiles(entry.existingBackupFile);
+									Algorithms.removeAllFiles(entry.existingBackupFile);
 								}
 								trackEvent(entry);
 								publishProgress(entry);

@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import net.osmand.Algoritms;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -44,6 +43,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -495,14 +495,14 @@ public class ResourceManager {
 	//TODO consider some other place for this method?
 	public static void copyAssets(AssetManager assetManager, String assetName, File file) throws IOException {
 		if(file.exists()){
-			Algoritms.removeAllFiles(file);
+			Algorithms.removeAllFiles(file);
 		}
 		file.getParentFile().mkdirs();
 		InputStream is = assetManager.open(assetName, AssetManager.ACCESS_STREAMING);
 		FileOutputStream out = new FileOutputStream(file);
-		Algoritms.streamCopy(is, out);
-		Algoritms.closeStream(out);
-		Algoritms.closeStream(is);
+		Algorithms.streamCopy(is, out);
+		Algorithms.closeStream(out);
+		Algorithms.closeStream(is);
 	}
 
 	private void initRenderers(IProgress progress) {

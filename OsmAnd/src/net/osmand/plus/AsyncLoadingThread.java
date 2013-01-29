@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
@@ -14,6 +13,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -295,7 +295,7 @@ public class AsyncLoadingThread extends Thread {
 			return false;
 		}
 		public boolean recalculateRequest(AmenityLoadRequest req) {
-			if (this.zoom != req.zoom || !Algoritms.objectEquals(this.filter, req.filter) || req.repoHasChange()) {
+			if (this.zoom != req.zoom || !Algorithms.objectEquals(this.filter, req.filter) || req.repoHasChange()) {
 				return true;
 			}
 			return !isContains(req.topLatitude, req.leftLongitude, req.bottomLatitude, req.rightLongitude);

@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import net.osmand.Algoritms;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.util.Algorithms;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -88,7 +88,7 @@ public class MapInfoControls {
 	public void removeApperanceWidgets(String category) {
 		Iterator<MapInfoControlRegInfo> it = appearanceWidgets.iterator();
 		while(it.hasNext()) {
-			if(Algoritms.objectEquals(it.next().category, category)) {
+			if(Algorithms.objectEquals(it.next().category, category)) {
 				it.remove();
 			}
 		}

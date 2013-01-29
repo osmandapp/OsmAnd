@@ -133,7 +133,7 @@ public class RegionAddressRepositoryBinary implements RegionAddressRepository {
 		}
 		try {
 			// essentially index is created that cities towns are first in cities map
-			if (/*name.length() >= 2 && Algoritms.containsDigit(name) && */searchVillages) {
+			if (/*name.length() >= 2 && Algorithms.containsDigit(name) && */searchVillages) {
 				// also try to identify postcodes
 				String uName = name.toUpperCase();
 				List<City> foundCities = file.getCities(region, BinaryMapIndexReader.buildAddressRequest(resultMatcher), 

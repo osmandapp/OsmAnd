@@ -3,7 +3,6 @@ package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
 
-import net.osmand.Algoritms;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -11,6 +10,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -205,24 +205,24 @@ public class SearchAddressActivity extends Activity {
 		String historyName = null;
 		String objectName = "";
 		int zoom = 12;
-		if (!Algoritms.isEmpty(street2) && !Algoritms.isEmpty(street)) {
-			String cityName = !Algoritms.isEmpty(postcode) ? postcode : city;
+		if (!Algorithms.isEmpty(street2) && !Algorithms.isEmpty(street)) {
+			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			objectName = street;
 			historyName = MessageFormat.format(getString(R.string.search_history_int_streets), street, street2,
 					cityName);
 			zoom = 16;
-		} else if (!Algoritms.isEmpty(building)) {
-			String cityName = !Algoritms.isEmpty(postcode) ? postcode : city;
+		} else if (!Algorithms.isEmpty(building)) {
+			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			objectName = street + " " + building;
 			historyName = MessageFormat.format(getString(R.string.search_history_building), building, street,
 					cityName);
 			zoom = 16;
-		} else if (!Algoritms.isEmpty(street)) {
+		} else if (!Algorithms.isEmpty(street)) {
 			String cityName = postcode != null ? postcode : city;
 			objectName = street;
 			historyName = MessageFormat.format(getString(R.string.search_history_street), street, cityName);
 			zoom = 15;
-		} else if (!Algoritms.isEmpty(city)) {
+		} else if (!Algorithms.isEmpty(city)) {
 			historyName = MessageFormat.format(getString(R.string.search_history_city), city);
 			objectName = city;
 			zoom = 13;
@@ -250,20 +250,20 @@ public class SearchAddressActivity extends Activity {
 	protected void updateBuildingSection(){
 		if(radioBuilding){
 			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_building);
-			if(Algoritms.isEmpty(building)){
+			if(Algorithms.isEmpty(building)){
 				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_building);
 			} else {
 				((TextView)findViewById(R.id.BuildingButton)).setText(building);
 			}
 		} else {
 			((TextView)findViewById(R.id.BuildingText)).setText(R.string.search_address_street);
-			if(Algoritms.isEmpty(street2)){
+			if(Algorithms.isEmpty(street2)){
 				((TextView)findViewById(R.id.BuildingButton)).setText(R.string.choose_intersected_street);
 			} else {
 				((TextView)findViewById(R.id.BuildingButton)).setText(street2);
 			}
 		}
-		findViewById(R.id.ResetBuilding).setEnabled(!Algoritms.isEmpty(street2) || !Algoritms.isEmpty(building));
+		findViewById(R.id.ResetBuilding).setEnabled(!Algorithms.isEmpty(street2) || !Algorithms.isEmpty(building));
 	}
 
 	protected void updateUI(){
@@ -278,34 +278,34 @@ public class SearchAddressActivity extends Activity {
 			findViewById(R.id.SearchOnline).setVisibility(View.VISIBLE);
 			showOnMap.setVisibility(View.VISIBLE);
 		}
-		findViewById(R.id.ResetCountry).setEnabled(!Algoritms.isEmpty(region));
-		if(Algoritms.isEmpty(region)){
+		findViewById(R.id.ResetCountry).setEnabled(!Algorithms.isEmpty(region));
+		if(Algorithms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
 		} else {
 			countryButton.setText(region);
 		}
-		findViewById(R.id.ResetCity).setEnabled(!Algoritms.isEmpty(city) || !Algoritms.isEmpty(postcode));
-		if(Algoritms.isEmpty(city) && Algoritms.isEmpty(postcode)){
+		findViewById(R.id.ResetCity).setEnabled(!Algorithms.isEmpty(city) || !Algorithms.isEmpty(postcode));
+		if(Algorithms.isEmpty(city) && Algorithms.isEmpty(postcode)){
 			cityButton.setText(R.string.choose_city);
 		} else {
-			if(!Algoritms.isEmpty(postcode)){
+			if(!Algorithms.isEmpty(postcode)){
 				cityButton.setText(postcode);
 			} else {
 				cityButton.setText(city);
 			}
 		}
-		cityButton.setEnabled(!Algoritms.isEmpty(region));
+		cityButton.setEnabled(!Algorithms.isEmpty(region));
 		
-		findViewById(R.id.ResetStreet).setEnabled(!Algoritms.isEmpty(street));
-		if(Algoritms.isEmpty(street)){
+		findViewById(R.id.ResetStreet).setEnabled(!Algorithms.isEmpty(street));
+		if(Algorithms.isEmpty(street)){
 			streetButton.setText(R.string.choose_street);
 		} else {
 			streetButton.setText(street);
 		}
-		streetButton.setEnabled(!Algoritms.isEmpty(city) || !Algoritms.isEmpty(postcode));
+		streetButton.setEnabled(!Algorithms.isEmpty(city) || !Algorithms.isEmpty(postcode));
 		
-		buildingButton.setEnabled(!Algoritms.isEmpty(street));
-		((RadioGroup)findViewById(R.id.RadioGroup)).setVisibility(Algoritms.isEmpty(street) ? View.GONE : View.VISIBLE);
+		buildingButton.setEnabled(!Algorithms.isEmpty(street));
+		((RadioGroup)findViewById(R.id.RadioGroup)).setVisibility(Algorithms.isEmpty(street) ? View.GONE : View.VISIBLE);
 		
 		if(radioBuilding){
 			((RadioButton)findViewById(R.id.RadioBuilding)).setChecked(true);
@@ -317,19 +317,19 @@ public class SearchAddressActivity extends Activity {
 	}
 	
 	public void loadData() {
-		if (!Algoritms.isEmpty(region)) {
+		if (!Algorithms.isEmpty(region)) {
 			String postcodeStr = osmandSettings.getLastSearchedPostcode();
-			if (!Algoritms.isEmpty(postcodeStr)) {
+			if (!Algorithms.isEmpty(postcodeStr)) {
 				postcode = postcodeStr;
 			} else {
 				city = osmandSettings.getLastSearchedCityName();
 			}
 
-			if (!Algoritms.isEmpty(postcode) || !Algoritms.isEmpty(city)) {
+			if (!Algorithms.isEmpty(postcode) || !Algorithms.isEmpty(city)) {
 				street = osmandSettings.getLastSearchedStreet();
-				if (!Algoritms.isEmpty(street)) {
+				if (!Algorithms.isEmpty(street)) {
 					String str = osmandSettings.getLastSearchedIntersectedStreet();
-					radioBuilding = Algoritms.isEmpty(str);
+					radioBuilding = Algorithms.isEmpty(str);
 					if (!radioBuilding) {
 						street2 = str;
 					} else {

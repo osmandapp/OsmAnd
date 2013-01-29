@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
@@ -36,6 +35,7 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;
 import net.osmand.plus.voice.CommandPlayerFactory;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -328,7 +328,7 @@ public class OsmandApplication extends Application implements ClientContext {
 			}
 
 		} else {
-			if (player == null || !Algoritms.objectEquals(voiceProvider, player.getCurrentVoice())) {
+			if (player == null || !Algorithms.objectEquals(voiceProvider, player.getCurrentVoice())) {
 				initVoiceDataInDifferentThread(uiContext, voiceProvider, run);
 			}
 		}

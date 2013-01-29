@@ -17,7 +17,6 @@ import java.util.Map.Entry;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
@@ -39,6 +38,7 @@ import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -156,12 +156,12 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 					return;
 				}
 				if(isNameFinderFilter() && 
-						!Algoritms.objectEquals(((NameFinderPoiFilter) filter).getQuery(), query)){
+						!Algorithms.objectEquals(((NameFinderPoiFilter) filter).getQuery(), query)){
 					filter.clearPreviousZoom();
 					((NameFinderPoiFilter) filter).setQuery(query);
 					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
 				} else if(isSearchByNameFilter() && 
-						!Algoritms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
+						!Algorithms.objectEquals(((SearchByNameFilter) filter).getQuery(), query)){
 					showFilter.setVisibility(View.INVISIBLE);
 					filter.clearPreviousZoom();
 					showPoiCategoriesByNameFilter(query, location);
@@ -626,7 +626,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			searchPOILevel.setEnabled(filter.isSearchFurtherAvailable());
 			searchPOILevel.setText(R.string.search_POI_level_btn);
 			if (isNameFinderFilter()) {
-				if (!Algoritms.isEmpty(((NameFinderPoiFilter) filter).getLastError())) {
+				if (!Algorithms.isEmpty(((NameFinderPoiFilter) filter).getLastError())) {
 					AccessibleToast.makeText(SearchPOIActivity.this, ((NameFinderPoiFilter) filter).getLastError(), Toast.LENGTH_LONG).show();
 				}
 				amenityAdapter.setNewModel(result, "");
@@ -888,13 +888,13 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 					setLocation(null);
 				}
 				if (!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-					if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
+					if (!Algorithms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
 						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
 						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
 					}
 				}
 			} else if (LocationProvider.AVAILABLE == status) {
-				if (!Algoritms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
+				if (!Algorithms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
 					currentLocationProvider = LocationManager.GPS_PROVIDER;
 					service.removeUpdates(networkListener);
 				}

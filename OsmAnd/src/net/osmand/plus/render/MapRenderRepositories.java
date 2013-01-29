@@ -19,10 +19,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Algoritms;
 import net.osmand.IProgress;
-import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary.NativeSearchResult;
+import net.osmand.PlatformUtil;
 import net.osmand.QuadRect;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.BinaryMapDataObject;
@@ -44,6 +43,7 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -463,7 +463,7 @@ public class MapRenderRepositories {
 				} else {
 					CommonPreference<String> settings = prefs.getCustomRenderProperty(customProp.getAttrName());
 					String res = settings.get();
-					if (!Algoritms.isEmpty(res)) {
+					if (!Algorithms.isEmpty(res)) {
 						if (customProp.isString()) {
 							renderingReq.setStringFilter(customProp, res);
 						} else if (customProp.isBoolean()) {

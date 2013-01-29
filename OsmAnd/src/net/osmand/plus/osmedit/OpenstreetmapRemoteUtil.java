@@ -17,9 +17,6 @@ import java.text.MessageFormat;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import net.osmand.Algoritms;
-import net.osmand.Base64;
-import net.osmand.IOUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
@@ -34,6 +31,8 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.util.Base64;
+import net.osmand.util.IOUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;

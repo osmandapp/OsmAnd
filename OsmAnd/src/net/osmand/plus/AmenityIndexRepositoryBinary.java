@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
@@ -18,6 +17,7 @@ import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapUtils;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -137,8 +137,8 @@ public class AmenityIndexRepositoryBinary implements AmenityIndexRepository {
 			int zoom, String filterId, List<Amenity> toFill, boolean fillFound){
 		boolean inside = cTopLatitude >= topLatitude && cLeftLongitude <= leftLongitude && cRightLongitude >= rightLongitude
 				&& cBottomLatitude <= bottomLatitude && zoom == cZoom;
-		boolean noNeedToSearch = inside &&  Algoritms.objectEquals(filterId, cFilterId);
-		if((inside || fillFound) && toFill != null && Algoritms.objectEquals(filterId, cFilterId)){
+		boolean noNeedToSearch = inside &&  Algorithms.objectEquals(filterId, cFilterId);
+		if((inside || fillFound) && toFill != null && Algorithms.objectEquals(filterId, cFilterId)){
 			for(Amenity a : cachedObjects){
 				LatLon location = a.getLocation();
 				if (location.getLatitude() <= topLatitude && location.getLongitude() >= leftLongitude && location.getLongitude() <= rightLongitude

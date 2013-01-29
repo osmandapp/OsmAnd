@@ -1,9 +1,10 @@
 package net.osmand.plus.api;
 
-import org.apache.commons.logging.Log;
-
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
+
+import org.apache.commons.logging.Log;
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Locale;
 
 import net.londatiga.android.QuickAction;
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
@@ -22,6 +21,7 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -125,7 +125,7 @@ public class SearchAddressOnlineActivity extends OsmandListActivity implements S
 	}
 
 	protected void searchPlaces(final String search) {
-		if(Algoritms.isEmpty(search)){
+		if(Algorithms.isEmpty(search)){
 			return;
 		}
 		

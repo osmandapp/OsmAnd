@@ -8,11 +8,9 @@ import java.util.List;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
-import net.osmand.plus.OsmandSettings;
 
 import org.apache.commons.logging.Log;
 
-import android.content.Context;
 import android.media.MediaPlayer;
 
 

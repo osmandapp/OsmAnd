@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
@@ -22,6 +21,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.EnumAdapter.IEnumWithResource;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -353,7 +353,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 					boolean successfull = false;
 					if(operation == DELETE_OPERATION){
 						File f = new File(info.getPathToData());
-						successfull = Algoritms.removeAllFiles(f);
+						successfull = Algorithms.removeAllFiles(f);
 					} else if(operation == RESTORE_OPERATION){
 						successfull = move(new File(info.getPathToData()), getFileToRestore(info));
 						if(successfull){

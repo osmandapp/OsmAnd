@@ -2,7 +2,6 @@ package net.osmand.plus.development;
 
 import java.text.SimpleDateFormat;
 
-import net.osmand.SunriseSunset;
 import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmandApplication;
@@ -13,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.routing.RouteAnimation;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.util.SunriseSunset;
 import android.content.Intent;
 import android.os.Debug;
 import android.os.Debug.MemoryInfo;

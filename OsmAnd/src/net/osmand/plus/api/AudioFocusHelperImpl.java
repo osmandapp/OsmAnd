@@ -1,7 +1,6 @@
 package net.osmand.plus.api;
 
 import net.osmand.PlatformUtil;
-
 import net.osmand.plus.ClientContext;
 
 import org.apache.commons.logging.Log;

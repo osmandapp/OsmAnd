@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -71,7 +70,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (langVal instanceof Struct) {
 			language = ((Struct) langVal).getName();
 		}
-		if (Algoritms.isEmpty(language)) {
+		if (Algorithms.isEmpty(language)) {
 			throw new CommandPlayerException(
 					ctx.getString(R.string.voice_data_corrupted));
 		}

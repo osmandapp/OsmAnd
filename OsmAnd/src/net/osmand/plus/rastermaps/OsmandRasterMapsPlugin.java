@@ -3,7 +3,6 @@ package net.osmand.plus.rastermaps;
 import java.util.ArrayList;
 import java.util.Map;
 
-import net.osmand.Algoritms;
 import net.osmand.ResultMatcher;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
@@ -22,6 +21,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.SeekBarPreference;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -98,7 +98,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public void updateLayer(OsmandMapTileView mapView, OsmandSettings settings,
 			MapTileLayer layer, CommonPreference<String> preference, float layerOrder, boolean warnWhenSelected) {
 		ITileSource overlay = settings.getTileSourceByName(preference.get(), warnWhenSelected);
-		if(!Algoritms.objectEquals(overlay, layer.getMap())){
+		if(!Algorithms.objectEquals(overlay, layer.getMap())){
 			if(overlay == null){
 				mapView.removeLayer(layer);
 			} else {

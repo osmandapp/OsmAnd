@@ -1,12 +1,11 @@
 package net.osmand.plus.render;
 
 
-import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteSegmentResult;
 
 import org.apache.commons.logging.Log;
 

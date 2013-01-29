@@ -3,7 +3,6 @@ package net.osmand.plus.views;
 
 import java.util.Arrays;
 
-import net.osmand.Algoritms;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -20,6 +19,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -69,7 +69,7 @@ public class RouteInfoControls {
 									turnType = null;
 									invalidate();
 								}
-							} else if (!Algoritms.objectEquals(turnType, showStraight ? straight : r.directionInfo.getTurnType())) {
+							} else if (!Algorithms.objectEquals(turnType, showStraight ? straight : r.directionInfo.getTurnType())) {
 								turnType = showStraight ? straight : r.directionInfo.getTurnType();
 								TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 								if (turnType.getExitOut() > 0) {
@@ -158,7 +158,7 @@ public class RouteInfoControls {
 								turnType = null;
 								invalidate();
 							}
-						} else if (!Algoritms.objectEquals(turnType, r.directionInfo.getTurnType())) {
+						} else if (!Algorithms.objectEquals(turnType, r.directionInfo.getTurnType())) {
 							turnType = r.directionInfo.getTurnType();
 							TurnPathHelper.calcTurnPath(pathForTurn, turnType, pathTransform);
 							invalidate();

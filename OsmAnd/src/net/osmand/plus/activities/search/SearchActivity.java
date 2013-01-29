@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Locale;
 
-import net.osmand.Algoritms;
 import net.osmand.FavouritePoint;
 import net.osmand.osm.LatLon;
 import net.osmand.plus.OsmandApplication;
@@ -14,6 +13,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.FavouritesListActivity;
 import net.osmand.plus.activities.NavigatePointActivity;
+import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
@@ -286,7 +286,7 @@ public class SearchActivity extends TabActivity {
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
 			if (lat != 0 || lon != 0) {
 				LatLon l = new LatLon(lat, lon);
-				if(!Algoritms.objectEquals(reqSearchPoint, l)){
+				if(!Algorithms.objectEquals(reqSearchPoint, l)){
 					reqSearchPoint = l;
 					updateSearchPoint(reqSearchPoint, getString(R.string.search_position_fixed), true);
 				}
@@ -295,7 +295,7 @@ public class SearchActivity extends TabActivity {
 		
 		if(searchPoint == null){
 			LatLon last = settings.getLastKnownMapLocation();
-			if(!Algoritms.objectEquals(reqSearchPoint, last)){
+			if(!Algorithms.objectEquals(reqSearchPoint, last)){
 				reqSearchPoint = last;
 				updateSearchPoint(last, getString(R.string.search_position_fixed), true);
 			}

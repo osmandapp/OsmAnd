@@ -7,7 +7,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.SearchHistoryHelper;
 import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.SQLiteTileSource;
 

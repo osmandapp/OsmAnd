@@ -9,10 +9,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.Algoritms;
-import net.osmand.PlatformUtil;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeSearchResult;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
@@ -21,6 +20,7 @@ import net.osmand.plus.render.TextRenderer.TextDrawInfo;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -534,13 +534,13 @@ public class OsmandRenderer {
 			p.setStyle(Style.STROKE);
 			p.setStrokeWidth(req.getFloatPropertyValue(rStrokeW));
 			String cap = req.getStringPropertyValue(rCap);
-			if(!Algoritms.isEmpty(cap)){
+			if(!Algorithms.isEmpty(cap)){
 				p.setStrokeCap(Cap.valueOf(cap.toUpperCase()));
 			} else {
 				p.setStrokeCap(Cap.BUTT);
 			}
 			String pathEffect = req.getStringPropertyValue(rPathEff);
-			if (!Algoritms.isEmpty(pathEffect)) {
+			if (!Algorithms.isEmpty(pathEffect)) {
 				p.setPathEffect(getDashEffect(pathEffect));
 			} else {
 				p.setPathEffect(null);

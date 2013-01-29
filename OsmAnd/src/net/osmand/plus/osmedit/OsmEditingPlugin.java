@@ -1,6 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import net.osmand.Algoritms;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.plus.ContextMenuAdapter;
@@ -12,10 +11,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexesActivity;
+import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -204,7 +204,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	public boolean sendGPXFiles(final LocalIndexesActivity la, final LocalIndexInfo... info){
 		String name = settings.USER_NAME.get();
 		String pwd = settings.USER_PASSWORD.get();
-		if(Algoritms.isEmpty(name) || Algoritms.isEmpty(pwd)){
+		if(Algorithms.isEmpty(name) || Algorithms.isEmpty(pwd)){
 			AccessibleToast.makeText(la, R.string.validate_gpx_upload_name_pwd, Toast.LENGTH_LONG).show();
 			return false;
 		}

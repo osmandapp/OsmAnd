@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.TimeZone;
 
 import net.osmand.PlatformUtil;
-import net.osmand.SunriseSunset;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.DayNightMode;
+import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
 

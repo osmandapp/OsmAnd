@@ -7,13 +7,13 @@ import java.nio.ByteBuffer;
 import java.text.MessageFormat;
 import java.util.List;
 
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -145,7 +145,7 @@ public class SQLiteTileSource implements ITileSource {
 			db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
 			try {
 				String template = db.compileStatement("SELECT url FROM info").simpleQueryForString(); //$NON-NLS-1$
-				if(!Algoritms.isEmpty(template)){
+				if(!Algorithms.isEmpty(template)){
 					urlTemplate = template;
 				}
 			} catch (RuntimeException e) {

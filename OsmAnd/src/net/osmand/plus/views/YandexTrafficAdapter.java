@@ -7,12 +7,12 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.IndexConstants;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -65,7 +65,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 				BufferedInputStream in = new BufferedInputStream(new URL("http://jgo.maps.yandex.net/trf/stat.js").openStream(), 1024); //$NON-NLS-1$
 				ByteArrayOutputStream dataStream = new ByteArrayOutputStream();
 				BufferedOutputStream out = new BufferedOutputStream(dataStream, 1024);
-				Algoritms.streamCopy(in, out);
+				Algorithms.streamCopy(in, out);
 				out.flush();
 				String str = dataStream.toString();
 				// JSONObject json = new JSONObject(str.replace("YMaps.TrafficLoader.onLoad(\"stat\",", "").replace("});", "}"));
@@ -78,8 +78,8 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 				}
 				String newTimestamp = str.substring(start, end);
 				lastTimestampUpdated = System.currentTimeMillis();
-				Algoritms.closeStream(in);
-				Algoritms.closeStream(out);
+				Algorithms.closeStream(in);
+				Algorithms.closeStream(out);
 				log.info("Timestamp updated"); //$NON-NLS-1$
 				if (!newTimestamp.equals(mTimestamp)) {
 					mTimestamp = newTimestamp;
@@ -104,7 +104,7 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 		File dir = view.getApplication().getAppPath(IndexConstants.TILES_INDEX_DIR);
 		for (File ds : dir.listFiles()) {
 			if (ds.isDirectory() && ds.getName().startsWith(YANDEX_PREFFIX)) {
-				Algoritms.removeAllFiles(ds);
+				Algorithms.removeAllFiles(ds);
 			}
 		}
 

@@ -7,7 +7,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.Algoritms;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.LatLon;
@@ -21,6 +20,7 @@ import net.osmand.plus.TransportIndexRepository;
 import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
 import net.osmand.plus.activities.TransportRouteHelper;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ListActivity;
@@ -145,8 +145,8 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 		}
 		OsmandApplication app = (OsmandApplication) getApplication();
 		LatLon pointToNavigate = app.getTargetPointsHelper().getPointToNavigate();
-		if(!Algoritms.objectEquals(pointToNavigate, this.destinationLocation) || 
-				!Algoritms.objectEquals(startPoint, this.lastKnownMapLocation)){
+		if(!Algorithms.objectEquals(pointToNavigate, this.destinationLocation) || 
+				!Algorithms.objectEquals(startPoint, this.lastKnownMapLocation)){
 			destinationLocation = pointToNavigate;
 			selectedDestinationLocation = destinationLocation;
 			lastKnownMapLocation = startPoint;
@@ -156,7 +156,7 @@ public class SearchTransportActivity extends ListActivity implements SearchActiv
 	
 	@Override
 	public void locationUpdate(LatLon l) {
-		if(!Algoritms.objectEquals(l, this.lastKnownMapLocation)){
+		if(!Algorithms.objectEquals(l, this.lastKnownMapLocation)){
 			lastKnownMapLocation = l;
 			searchTransport();			
 		}

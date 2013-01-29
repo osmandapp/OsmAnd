@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.Algoritms;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
@@ -44,6 +43,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.PointLocationLayer;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -343,8 +343,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		// if destination point was changed try to recalculate route
 		TargetPointsHelper targets = getTargetPoints();
 		if (routingHelper.isFollowingMode() && (
-				!Algoritms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
-				!Algoritms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
+				!Algorithms.objectEquals(targets.getPointToNavigate(), routingHelper.getFinalLocation() )||
+				!Algorithms.objectEquals(targets.getIntermediatePoints(), routingHelper.getIntermediatePoints())
 				)) {
 			routingHelper.setFinalAndCurrentLocation(targets.getPointToNavigate(),
 					targets.getIntermediatePoints(),

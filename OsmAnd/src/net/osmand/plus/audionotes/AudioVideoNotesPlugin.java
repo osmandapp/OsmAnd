@@ -14,7 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.osmand.Algoritms;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -41,6 +40,7 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapStackControl;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -722,7 +722,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void deleteRecording(Recording r) {
 		recordings.unregisterObject(r.lat, r.lon, r);
 		recordingByFileName.remove(r.file.getName());
-		Algoritms.removeAllFiles(r.file);
+		Algorithms.removeAllFiles(r.file);
 		activity.getMapLayers().getContextMenuLayer().setLocation(null, "");
 		activity.getMapView().refreshMap();
 	}

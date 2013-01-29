@@ -9,7 +9,6 @@ import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import net.osmand.Algoritms;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
@@ -26,6 +25,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -474,7 +474,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	public void fillAppearanceWidgets(Set<MapInfoControlRegInfo> widgets, String category, ArrayList<Object> registry) {
 		for(MapInfoControlRegInfo w : widgets ) {
-			if(Algoritms.objectEquals(w.getCategory(), category)) {
+			if(Algorithms.objectEquals(w.getCategory(), category)) {
 				registry.add(w);
 			}
 		}
