@@ -857,7 +857,7 @@
   <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met animatie of het meten van de kaartweergavesnelheid.</string>
   <string name="plugins_screen">Plugin-manager</string>
   <string name="select_plugin_to_activate">Klik op een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
-  <string name="prefs_plugins_descr">Plugins geven extra instellingen en functies zoals tracking, rasterkaarten, doorwerken in standby mode en toegankelijkheidsinstellingen.</string>
+  <string name="prefs_plugins_descr">Plugins geven extra instellingen en functies zoals tracking, rasterkaarten, doorwerken in standby mode en toegankelijkheidsinstellingen</string>
   <string name="prefs_plugins">Plugin-manager</string>
   <string name="tip_recent_changes_0_8_0_t">"Wijzigingen in 0.8.0 :
 \n\t- *Plugin-functionaliteit*
