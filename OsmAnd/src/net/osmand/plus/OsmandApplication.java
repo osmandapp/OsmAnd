@@ -371,6 +371,12 @@ public class OsmandApplication extends Application implements ClientContext {
 		return bidforfix;
 	}
 
+	private void fullExit() {
+		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
+		System.runFinalizersOnExit(true);
+		System.exit(0);
+	}
+
 	public synchronized void closeApplication(final Activity activity) {
 		if (getNavigationService() != null) {
 			Builder bld = new AlertDialog.Builder(activity);
@@ -378,29 +384,51 @@ public class OsmandApplication extends Application implements ClientContext {
 			bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					closeApplicationAnyway(activity);
+					closeApplicationAnyway(activity, true);
 				}
 			});
-			bld.setNegativeButton(R.string.default_buttons_no, null);
+			bld.setNegativeButton(R.string.default_buttons_no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					closeApplicationAnyway(activity, false);
+				}
+			});
 			bld.show();
 		} else {
-			closeApplicationAnyway(activity);
+			closeApplicationAnyway(activity, true);
 		}
 	}
 
-	private void closeApplicationAnyway(final Activity activity) {
+	private void closeApplicationAnyway(final Activity activity, boolean disableService) {
 		if (applicationInitializing) {
 			manager.close();
 		}
 		applicationInitializing = false;
-		if (getNavigationService() != null) {
+
+		activity.finish();
+
+		if (getNavigationService() == null) {
+			fullExit();
+		}
+		else if (disableService) {
 			final Intent serviceIntent = new Intent(this, NavigationService.class);
 			stopService(serviceIntent);
+
+			new Thread(new Runnable() {
+				public void run() {
+					//wait until the service has fully stopped
+					while (getNavigationService() != null) {
+						try {
+							Thread.sleep(100);
+						}
+							catch (InterruptedException e) {
+						}
+					}
+
+					fullExit();
+				}
+			}).start();
 		}
-		// http://stackoverflow.com/questions/2092951/how-to-close-android-application
-		System.runFinalizersOnExit(true);
-		System.exit(0);
-		activity.finish();
 	}
 
 	public synchronized void startApplication() {
