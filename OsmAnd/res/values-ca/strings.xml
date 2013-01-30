@@ -739,7 +739,7 @@
 <string name="snap_to_road_descr">Ajusta la posició a les carreteres durant la navegació</string>
 <string name="snap_to_road">Desplaça a la carretera</string>
 <string name="asap">MCP</string>
-<string name="prefs_plugins_descr">Els connectors activen els paràmatres del mode expert i us proveeixen de funcionalitats extres com els mapes de tessel·les, el seguiment, l\'operació del mode adormit, els paràmetres d\'accessibilitat i altres.</string>
+<string name="prefs_plugins_descr">Els connectors activen els paràmetres del mode expert i us proveeixen de funcionalitats extres</string>
 <string name="fav_export_confirmation">Ja existeix un fitxer anterior amb preferits exportats. Voleu reemplaçar-lo?</string>
 <string name="city_type_suburb">Barri</string>
 <string name="city_type_hamlet">Aldea</string>
@@ -805,7 +805,7 @@
 \n\t«No rotar (el nord es amunt)» - El mapa no rotarà.El nord sempre serà amunt
 \n\t«Cap a la direcció del moviment» - El mapa s\'alinearà contínuament cap a la teva direcció
 \n\t«A la brúixola» - El mapa s\'alinearà contínuament amb la brúixola del dispositiu. "</string>
-<string name="tts_language_not_supported">La llengua seleccionada no esta suportada per el motor de TAV(text a veu) d\'Android insta-lat.Vols anar al Market per veure altres motors TAV? Altrament el s\'usarà la llengua del TAV per defecte.</string>
+<string name="tts_language_not_supported">La llengua seleccionada no està suportada per el motor de TAV (text a veu) d\'Android instal·lat. Voleu anar al Market per veure altres motors TAV? Altrament s\'usarà la llengua del TAV per defecte.</string>
 <string name="tip_map_switch_t_v2">"\tLa font del mapa i les capes mostrades es poden canviar via «Menú» -&gt; «Definir vista» en la vista del mapa.
 \n\tSota «Font del mapa…» pots triar entre usar els mapes vectorials,font de tessel·la predeterminades (activades a «Mapes en línia» plugin per això), o mapes creats manualment usant per exemple OsmAndCreator en el teu PC.
 \n\tOsmAnd també suporta fonts personalitzades. "</string>
@@ -1109,4 +1109,12 @@
 	<string name="background_service_wait_int_descr">Estableix el temps màxim d\'espera per a cada correcció de la posició en segon pla</string>
 	<string name="background_service_wait_int">Espera màxima per corregir</string>
 	<string name="service_stop_background_service">Desactiva el servei de navegació en segon pla</string>
-	</resources>
+	<string name="dist_control_start">Inicia</string>
+    <string name="local_indexes_cat_av">Dades d\'àudio/vídeo</string>
+    <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
+    <string name="clear_dest_confirm">Esteu segurs de què voleu eliminar la vostra destinació?</string>
+    <string name="recording_context_menu_show">Mostra</string>
+    <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
+    <string name="av_def_action_picture">Fes una fotografia</string>
+    <string name="recording_context_menu_precord">Fes una fotografia</string>
+    </resources>
