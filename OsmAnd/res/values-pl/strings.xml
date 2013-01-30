@@ -528,7 +528,7 @@
   <string name="monitor_preferences">Zapisywanie śladów</string>
   <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
   <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
-  <string name="navigate_to">Ustaw jako punkt docelowy</string>
+  <string name="navigate_to">Ustaw cel</string>
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
   <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
