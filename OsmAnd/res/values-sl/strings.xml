@@ -452,7 +452,7 @@
 	<string name="closing_changeset">Zapiranje paketa sprememb…</string>
 	<string name="show_poi_over_map_description">Prikaži POI na zemljevidu (nazadnje izbran filter)</string>
 	<string name="select_plugin_to_activate">Dotaknite se vtičnika za vklop oz. izklop. (Mogoče bo potreben ponovni zagon OsmAnd.)</string>
-	<string name="prefs_plugins_descr">Vtičniki omogočajo napredne nastavitve in dodatne funkcionalnosti, kot so spletni zemljevidi, beleženje in sledenje, način mirovanja, urejanje in druge.</string>
+	<string name="prefs_plugins_descr">Vtičniki omogočajo napredne nastavitve in dodatne funkcionalnosti</string>
 	<string name="osmand_development_plugin_description">Prikaži nastavitve za razvoj in razhroščevanje, kot so animirana navigacija ali prikaz hitrosti izrisa.</string>
 	<string name="osmand_extra_settings_description">Prikaz nastavitev za napredne nastavitve izrisa (količina podrobnosti na zemljevidu) in nekatere posebnosti naprav.</string>
 	<string name="osmand_accessibility_description">Prikaz nastavitve za posebne funkcije dostopnosti.</string>
@@ -578,7 +578,7 @@
 	<string name="tip_rotation_switching">Usmerjenost zemljevida</string>
 	<string name="rotate_map_to_bearing">Usmerjenost zemljevida</string>
 	<string name="tip_rotation_switching_t_v2">\tZ večkratnim klikom na sliki kompasa lahko določite, kako se obrača zemljevid na zaslonu.\n\tMožnosti so:\n\t\'Brez obračanja (sever je gor)\' - Zemljevid ne bo obračan. Sever bo vedno proti sthu zaslona.\n\t\'V smeri gibanja\' - Zemljevid bo stalno usmerjen z smerjo premikanja.\n\t\'Po kompasu\' - Zemljevid bo stalno usmerjen po kompasu naprave torej poravnan z okolico.</string>
-	<string name="tip_update_index_t">\tPosodabljanje zemljevidov je pomembno. OsmAnd nudi upravitelja prenosov, ki lahko preveri razpoložljive podatke.\n\tČe želite preveriti posodobitve podatkov, pojdite na \"Nastavitve\" -&gt; \"Offline data\" -&gt; \"Prenos\". Ko je seznam področij prenešen iz interneta, lahko izberete možnost \"Meni\" -&gt; \"Samo prenešene\", ki omeji posodobitve le na podatke, ki so že na napravi.\n\tRazpoložljivost posodobitev je prikazana z naslednjimi barvami:\n\t\'Zelena\' - datoteke na napravi so usklajene s strežnikom.\n\t\'Modra\' - na strežniku so novejši podatki.\n\t\'Temno zelena / modra\' Podobno, le da so podatki deaktivirani na napravi.</string>
+	<string name="tip_update_index_t">\tPosodabljanje zemljevidov je pomembno. OsmAnd nudi upravitelja prenosov, ki lahko preveri razpoložljive podatke.\n\tČe želite preveriti posodobitve podatkov, pojdite na \"Nastavitve\" -&gt; \"Offline data\" -&gt; \"Prenos\". Ko je seznam področij prenešen iz interneta, lahko izberete možnost \"Meni\" -&gt; \"Samo prenešene\", ki omeji posodobitve le na podatke, ki so že na napravi.\n\tRazpoložljivost posodobitev je prikazana z naslednjimi barvami:\n\t\'Zelena\' - datoteke na napravi so usklajene s strežnikom\n\t\'Modra\' - na strežniku so novejši podatki\n\t\'Temno zelena/modra\' -Podobno, le da so podatki deaktivirani na napravi</string>
 	<string name="download_files_question">Prenesi {0} datotek(o) ({1} MB)?</string>
 	<string name="download_files">Prenesi</string>
 	<string name="downloading_file">Prenos datoteke…</string>
@@ -731,7 +731,7 @@
 	<string name="search_position_current_location_found">Položaj (najden)</string>
 	<string name="save_route_dialog_title">Shrani pot kot sled GPX</string>
 	<string name="route_successfully_saved_at">Pot je bila uspešno shranjena kot \'%1$s\'.</string>
-	<string name="filename_input">Ime datoteke:</string>
+	<string name="filename_input">"Ime datoteke: "</string>
 	<string name="file_with_name_already_exist">Datoteka z enakim imenom že obstaja.</string>
 	<string name="default_buttons_save">Shrani</string>
 	<string name="menu_save_directions">Shrani navodila</string>
