@@ -10,7 +10,8 @@
 	<asset source="voice/en-tts/ttsconfig.p" destination="voice/en-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/es-tts/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/fi-tts/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
-	<asset source="voice/fr-tts/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
+	<asset source="voice/fr-tts/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/he-tts/ttsconfig.p" destination="voice/he-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hu-tts/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/it-tts/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/ko-tts/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
