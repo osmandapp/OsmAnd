@@ -162,6 +162,7 @@
 	<string name="validate_gpx_upload_name_pwd">Bitte trage OSM Benutzername und Passwort ein, um GPX-Dateien hochzuladen.</string>
 	<string name="default_buttons_support">Unterstütze OsmAnd</string>
 	<string name="support_new_features">Unterstütze neue Features</string>
+	<string name="support_new_features_descr">Fördere die Entwicklung neuer Features in der Applikation</string>
 	<string name="show_ruler_level_descr">Zeige Maßstab auf der Karte an</string>
 	<string name="show_ruler_level">Zeige Maßstab an</string>
 	<string name="info_button">Info</string>
