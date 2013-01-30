@@ -11,7 +11,6 @@
 	<asset source="voice/es-tts/ttsconfig.p" destination="voice/es-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/fi-tts/ttsconfig.p" destination="voice/fi-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/fr-tts/ttsconfig.p" destination="voice/fr-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
-	<asset source="voice/he-tts/ttsconfig.p" destination="voice/he-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/hu-tts/ttsconfig.p" destination="voice/hu-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/it-tts/ttsconfig.p" destination="voice/it-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/ko-tts/ttsconfig.p" destination="voice/ko-tts/_ttsconfig.p" mode="overwriteOnlyIfExists" />
@@ -29,6 +28,7 @@
 	<asset source="voice/fr/config.p" destination="voice/fr/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/en/config.p" destination="voice/en/_config.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/es/config.p" destination="voice/es/_config.p" mode="overwriteOnlyIfExists" />
+	<asset source="voice/he/config.p" destination="voice/he/_config.p" mode="overwriteOnlyIfExists" />
 	<asset source="voice/it-Roberto/config.p" destination="voice/it-Roberto/_config.p" mode="overwriteOnlyIfExists" /> 
 	<asset source="voice/it-Chiara/config.p" destination="voice/it-Chiara/_config.p" mode="overwriteOnlyIfExists" />  
 	<asset source="voice/sk-Ruzena/config.p" destination="voice/sk-Ruzena/_config.p" mode="overwriteOnlyIfExists" />
