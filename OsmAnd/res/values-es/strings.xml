@@ -456,7 +456,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Fija el intervalo de activación del servicio de fondo </string>
+  <string name="background_service_int_descr">Fija el intervalo de activación del servicio de fondo</string>
   <string name="background_service_int">Intervalo de activación</string>
   <string name="background_service_provider_descr">Elige el proveedor de localización para la ejecución de fondo</string>
   <string name="background_service_provider">Proveedor de localización</string>
@@ -772,7 +772,7 @@
   <string name="osmand_development_plugin_description">Muestra opciones de características de desarrollo y depuración como navegación animada o mostrar el rendimiento de la visualización.</string>
   <string name="plugins_screen">Gestor de Extras</string>
   <string name="select_plugin_to_activate">Toque un extra para activarlo o desactivarlo. (Puede ser necesario reiniciar OsmAnd.)</string>
-  <string name="prefs_plugins_descr">Los extras permiten configuración en modo experto y proporcionan funcionalidades adicionales, como mapas teselados, seguimiento, modo de pantalla apagada, opciones de accesibilidad, y otros.</string>
+  <string name="prefs_plugins_descr">Los extras activan opciones avanzadas y proporcionan funcionalidades adicionales</string>
   <string name="prefs_plugins">Gestor de Extras</string>
   <string name="tip_recent_changes_0_8_0_t">"Cambios en 0.8.0 :
 \n*Funcionalidad de extras*\n\t - La mayoría de funcionalidades está agrupada por características y pueden ser habilitadas / deshabilitadas en el Gestor de Extras. Puede habilitar fuentes de teselas de mapas (online o cacheadas), opciones de seguimiento, y muchas otras características nuevas y existentes.\n*Soporte para nuevos datos de mapa descargados*\n\t - La visualización de mapa es más rápida y precisa (Los problemas con la línea de la costa y zonas inundadas están mayormente corregidos)\n\t - Necesita descargarse datos completamente nuevos (los datos antiguos no están soportados)\n*Navegación sin conexión*
