@@ -107,17 +107,17 @@
     <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
     <string name="safe_mode">Safe mode</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
-    <string name="background_service_is_enabled_question">Background service is still running. Do you want to cancel it?</string>
+    <string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to turn it off?</string>
     <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
 	\n\t* Improved routing: faster, more precise, up to 250 km
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable background service during navigation
+	\n\t* Enable sleep mode service during navigation
     </string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
 	\n\t* Some bug fixes
 	\n\t* Map does not lose position lock after interruptions
-	\n\t* Enable background service during navigation
+	\n\t* Enable sleep mode service during navigation
     </string>
     <string name="close_changeset">Close changeset</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Google Play?</string>
@@ -973,20 +973,20 @@
 	<string name="use_trackball">Use trackball</string>
 	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
 	<string name="background_service_wait_int">Maximum wait for fix</string>
-	<string name="service_stop_background_service">Switch off background navigation service</string>
+	<string name="service_stop_background_service">Switch off OsmAnd sleep mode navigation service</string>
 	<string name="where_am_i">Where am I?</string>
 	<string name="process_navigation_service">OsmAnd navigation service</string>
 	<string name="network_provider">Network</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">seconds</string>
 	<string name="int_min">min.</string>
-	<string name="background_service_int_descr">Set wake-up interval used by background </string>
+	<string name="background_service_int_descr">Set wake-up interval used by sleep mode service</string>
 	<string name="background_service_int">Wake-up interval</string>
-	<string name="background_service_provider_descr">Choose location provider while running in background mode</string>
+	<string name="background_service_provider_descr">Choose location provider used by sleep mode service</string>
 	<string name="background_service_provider">Location provider</string>
 	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
-	<string name="background_router_service">Run in the background</string>
-	<string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
+	<string name="background_router_service">Run in sleep mode</string>
+	<string name="off_router_service_no_gps_available">The sleep mode navigation service requires a location provider to be turned on.</string>
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>

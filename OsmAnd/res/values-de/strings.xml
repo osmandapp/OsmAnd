@@ -719,7 +719,7 @@
 	<string name="use_trackball">Trackball verwenden</string>
 	<string name="background_service_wait_int_descr">Maximale Suchzeit für jede Hintergrund-Standortbestimmung</string>
 	<string name="background_service_wait_int">Maximale Suchzeit</string>
-	<string name="service_stop_background_service">Hintergrund-Navigationsdienst ausschalten</string>
+	<string name="service_stop_background_service">OsmAnd Hintergrund-Navigationsdienst ausschalten</string>
 	<string name="where_am_i">Wo bin ich?</string>
 	<string name="process_navigation_service">OsmAnd-Navigationsdienst</string>
 	<string name="network_provider">Netzwerk</string>
