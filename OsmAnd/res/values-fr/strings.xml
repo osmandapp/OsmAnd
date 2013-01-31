@@ -30,7 +30,7 @@
   <string name="gpx_monitoring_disabled_warn">Veuillez activer \'Enregistrer l\'itinéraire en GPX\' en paramètre de suivi.</string>
   <string name="show_current_gpx_title">Afficher l\'itinéraire en cours</string>
   <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
-\n\t- Données wikipedia hors ligne avec articles
+\n\t- Données Wikipedia hors ligne avec articles
 \n\t- Cartes mises à jour
 \n\t- Petites amélioration diverses</string>
   <string name="free_version_message">Cette version gratuite de OsmAnd est limitée à %1$s téléchargements (%2$s réalisés) et ne supporte pas les articles Wikipedia hors ligne.</string>
@@ -400,7 +400,7 @@
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
   <string name="gps_status_app_not_found">L\'application pour le statut du GPS n\'est pas installée. La chercher dans le Market ?</string>
-  <string name="voice_is_not_available_msg">Aucune voix n\'est installée. Veuillez aller dans les paramètres et choisir les voix à télécharger.</string>
+  <string name="voice_is_not_available_msg">Guidage vocal indisponible. Veuillez aller dans les paramètres et choisir les voix à télécharger.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
   <string name="daynight_mode_night">Nuit</string>
@@ -922,7 +922,7 @@
   <string name="save_route_as_gpx">Enregistrer l\'itinéraire au format GPX</string>
   <string name="asap">ASAP</string>
   <string name="tip_recent_changes_0_8_1_t">Changements en 0.8.1 :
-\n\t* Routes plus précises (un peu lent)\n\t* Correction de parcours rapide et efficace\n\t* Direction par voies\n\t* Information à propos des limitations de vitesse, radars et des bosses\n\t* Guidage par la voix sur autoroute amélioré\n\t* Greffon parking (\"Où est-ce que ma voiture est garée ?\")\n\t* Activation/désactivation du gadget d\'enregistrement</string>
+\n\t* Routes plus précises (un peu plus lent)\n\t* Correction de parcours rapide et efficace\n\t* Direction par voies\n\t* Information à propos des limitations de vitesse, radars et des ralentisseurs\n\t* Guidage vocal sur autoroute amélioré\n\t* Greffon parking (\"Où ai-je garé ma voiture ?\")\n\t* Activation/désactivation du gadget d\'enregistrement</string>
   <string name="gpxup_public">Public</string>
   <string name="gpxup_identifiable">Identifiable</string>
   <string name="gpxup_trackable">Suivi</string>
