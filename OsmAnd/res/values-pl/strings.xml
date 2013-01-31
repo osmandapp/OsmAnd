@@ -363,7 +363,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Wybierz czas pomiędzy wybudzeniami używany podczas pracy w tle </string>
+  <string name="background_service_int_descr">Ustaw czas pomiędzy wybudzeniami używany przez usługę trybu uśpienia</string>
   <string name="background_service_int">Czas pomiędzy wybydzeniami</string>
   <string name="background_service_provider_descr">Wybierz dostawcę lokalizacji dla trybu w tle</string>
   <string name="background_service_provider">Sposób lokalizacji</string>
@@ -711,7 +711,7 @@
   <string name="gpx_description_txt">Opis</string>
   <string name="validate_gpx_upload_name_pwd">Proszę podać nazwę użytkownika OSM oraz hasło aby wysłać pliki GPX.</string>
   <string name="default_buttons_support">Wsparcie</string>
-  <string name="support_new_features">Wesprzyj prace nad nowymi funkcjami</string>
+  <string name="support_new_features">Wesprzyj prace</string>
   <string name="show_ruler_level_descr">Wyświetl linijkę na mapie</string>
   <string name="show_ruler_level">Wyświetl linijkę</string>
   <string name="info_button">Informacja</string>
