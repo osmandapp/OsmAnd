@@ -392,7 +392,7 @@
   <string name="add_waypoint_dialog_added">Routepunt \'\'{0}\'\' succesvol toegevoegd</string>
   <string name="add_waypoint_dialog_title">Voeg routepunt toe aan de opgenomen GPX-track</string>
   <string name="context_menu_item_add_waypoint">Voeg GPX-routepunt toe</string>
-  <string name="amenity_type_administrative">Diensten</string>
+  <string name="amenity_type_administrative">Overheid</string>
   <string name="amenity_type_barrier">Blokkades</string>
   <string name="amenity_type_education">Onderwijs</string>
   <string name="amenity_type_emergency">Noodgevallen</string>
@@ -481,7 +481,7 @@
   <string name="phone">telefoon</string>
   <string name="download_type_to_filter">type filtering</string>
   <string name="use_high_res_maps">Hoge resolutie beeldscherm</string>
-  <string name="use_high_res_maps_descr">Verbeter de kaartweergave voor hoge resolutie beeldschermen</string>
+  <string name="use_high_res_maps_descr">Rasterkaarten niet rekken op hoge-resolutie beeldschermen</string>
   <string name="unknown_location">Positie nog niet bekend</string>
   <string name="download_files">Download</string>
   <string name="context_menu_item_search_transport">Zoek openbaar vervoer</string>
@@ -542,7 +542,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">seconden</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Stel interval in voor plaatsbepaling door achtergrondservice </string>
+  <string name="background_service_int_descr">Stel interval in voor plaatsbepaling door achtergrondservice</string>
   <string name="background_service_int">Plaatsbepaling-interval</string>
   <string name="background_service_provider_descr">Selecteer achtergrondservice-provider</string>
   <string name="background_service_provider">Achtergrondservice-provider</string>
@@ -606,7 +606,7 @@
   <string name="update_poi_error_loading">Fout bij het laden van gegevens van server</string>
   <string name="update_poi_no_offline_poi_index">Geen offline interessepunten beschikbaar voor dit gebied</string>
   <string name="update_poi_is_not_available_for_zoom">Het vernieuwen van interessepunten is niet beschikbaar bij lage zoomniveaus</string>
-  <string name="context_menu_item_update_poi">Actualisatie interessepunt</string>
+  <string name="context_menu_item_update_poi">Interessepunt vernieuwen?</string>
   <string name="context_menu_item_update_map_confirm">Lokale gegevens via internet verversen?</string>
   <string name="search_history_city">Stad:\n {0}</string>
   <string name="search_history_street">Straat:\n {0}, {1}</string>
@@ -638,7 +638,7 @@
   <string name="downloading_file">Downloaden bestand…</string>
   <string name="downloading">Downloaden…</string>
   <string name="downloading_list_indexes">Lijst van beschikbare regio\'s wordt gedownload…</string>
-  <string name="list_index_files_was_not_loaded">De lijst van regio\'s werd niet geladen van osmand.googlecode.com.</string>
+  <string name="list_index_files_was_not_loaded">De lijst van regio\'s werd niet geladen van osmand.net.</string>
   <string name="select_index_file_to_download">Niets gevonden. Als je je regio niet kan vinden, kan je deze zelf maken (zie http://osmand.net).</string>
   <string name="show_poi_on_map">Toon op kaart</string>
   <string name="fav_points_edited">Favoriet punt is bewerkt</string>
@@ -1001,7 +1001,22 @@
 \n\tJe kan het actieve profiel wijzigen via het profiel-icoon links onderaan in het kaartscherm (iconen auto, fiets of voetganger), of bij het maken van een route. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met raster- en vectorkaarten</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd is een open-source navigatiesysteem met online en offline kaarten</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions)↵ OsmAnd is een open-source navigatiesysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen in de telefoon worden opgeslagen zodat Osmand zonder internetverbinding kan werken. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. Belangrijke eigenschappen: - offline data met configureerbare opslag - compacte vectorkaarten voor de hele wereld - kaartdownload vanuit de app - offline zoeken naar adressen en plaatsen - navigatie voor auto / fiets / voetganger - meerdere kaartlagen zoals GPX-trecks en afgelegde weg - offline navigatie voor korte afstanden (experimenteel). Beperkingen van deze gratis versie van OsmAnd: - het aantal kaarten dat je kan downloaden - geen offline Wikipedia interessepunten. OsMand wordt actief ontwikkeld. Koop OsmAnd+ om verdere ontwikkeling te ondersteunen of doe een donatie via osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) OsmAnd is een open-source navigatie app die toegang geeft tot een uitgebreide variëteit aan wereldwijde OpenStreetMap (OSM) gegevens. Alle kaartgegevens (vector- of rasterkaarten) kunnen in het telefoongeheugen worden opgeslagen voor offline gebruik. OsmAnd biedt zowel offline als online route-aanwijzingen met stembegeleiding. Enkele van de mogelijkheden:
+\n- Volledig offline gebruik (met ge-downloade vector- of rasterkaarten)
+\n– Compacte offline vectorkaarten van de hele wereld zijn beschikbaar
+\n– Kaarten van landen of regio’s direct downloadbaar via de app
+\n– Meerdere kaartlagen mogelijk, zoals GPX- of navigatietracks, interessepunten (points of interest), favorieten, hoogtelijnen, haltes openbaar vervoer, aanvullende kaarten met instelbare transparantie
+\n– Offline zoeken naar adressen en plaatsen
+\n– Offline route-aanwijzingen voor auto, fiets, en voetganger, keuze uit:
+\n- optioneel geautomatiseerde dag/nacht display
+\n– optioneel snelheidsafhankelijk ‘kaartzoomen’
+\n- optionele kaartoriëntatie volgens kompas of bewegingsrichting
+\n– optionele rijbaanbegeleiding, snelheidslimieten, opgenomen en TTS stemmen.
+\nBeperkingen van de gratis versie van OsmAnd:
+\n- Beperkt aantal kaartdownloads
+\n– Geen toegang tot Wikipedia offline POI\'s.
+\nOsmAnd wordt actief ontwikkeld en de verdere vooruitgang van het project is afhankelijk van financiële bijdragen om de ontwikkeling en toetsing van nieuwe functionaliteit te kunnen bekostigen.
+\nWij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via osmand.net.</string>
 <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)↵ OsmAnd is een open-source navigatie- en kaartsysteem dat gebruik maakt van de veelheid van Openstreetmap-gegevens. Alle kaartgegevens kunnen worden opgeslagen in het telefoongeheugen voor offline gebruik. OsmAnd biedt zowel offline als online navigatie met stembegeleiding. OsmAnd+ is de betaalde versie. Door deze te kopen ondersteun je het project, betaal je mee aan nieuwe ontwikkelingen, en ontvang je de laatste updates.↵ ↵ Belangrijke eigenschappen: - complete functionaliteit zonder internetverbinding - onbeperkt downloaden van offline-kaarten - compacte vectorkaarten voor de gehele wereld - download Wikipedia interessepunten voor toerisme) - offline zoeken naar adressen en plaatsen (POI) - navigatie voor auto / fiets / voetganger met stembegeleiding, rijstrookindicatie en snelheidswaarschuwingen - meerdere kaartlagen voor POI, afgelegde weg, favorieten, hoogtelijnen, OV-haltes en extra kaarten - offline navigatie voor korte afstanden (experimenteel) - automatisch draaien en zoomen van de kaart (instelbaar) "</string>
 <string name="avoid_motorway">Vermijd snelwegen</string>
 <string name="tip_recent_changes_0_8_3_t">"Wijzigingen 0.8.3 :
