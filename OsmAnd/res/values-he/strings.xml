@@ -233,7 +233,7 @@
 	<string name="osmand_development_plugin_description">הצגת הגדרות לתכונות פיתוח או ניפוי שגיאות כגון ניווט מונפש או הצגת ביצועי עיבוד התמונה.</string>
 	<string name="plugins_screen">מנהל התוספים</string>
 	<string name="select_plugin_to_activate">יש לגעת בתוסף כדי להפעיל או לנטרל אותו. (נדרש אתחול של OsmAnd.)</string>
-	<string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות כמו מפות אריחים, מעקב, מצב שינה, הגדרות נגישות ועוד.</string>
+	<string name="prefs_plugins_descr">התוספים מאפשרים הגדרות במצב מומחה ומספקים תכונות נוספות</string>
 	<string name="prefs_plugins">מנהל התוספים</string>
 	<string name="tip_recent_changes_0_8_0_t">"שינויים ב־0.8.0 :
 \n\t- *תכונת התוספים*
@@ -814,7 +814,7 @@
 	<string name="gps_provider">רכיב איכון</string>
 	<string name="int_seconds">שניות</string>
 	<string name="int_min">דקות</string>
-	<string name="background_service_int_descr">"הגדרת הפסקות שינה המשמעות ברקע "</string>
+	<string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב השינה</string>
 	<string name="background_service_int">הפרשי התעוררות</string>
 	<string name="update_poi_error_local">אירעה שגיאה בעת עדכון רשימת הנ״ע המקומית</string>
 	<string name="update_poi_error_loading">אירעה שגיאה בעת טעינת הנתונים מהשרת</string>
