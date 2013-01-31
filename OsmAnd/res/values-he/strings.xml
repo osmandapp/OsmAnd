@@ -1180,4 +1180,5 @@
     <string name="precise_routing_mode">ניתוב מדויק (אלפא)</string>
     <string name="local_indexes_cat_av">נתוני שמע/וידאו</string>
     <string name="dist_control_start">התחלה</string>
-    </resources>
+    <string name="support_new_features_descr">ניתן לתרום כדי לגלות תכונות חדשות שהוטמעו ביישום</string>
+	</resources>
