@@ -32,7 +32,7 @@
   <string name="tip_recent_changes_0_7_0_t">Changements en 0.7.0 :
 \n\t- Données Wikipedia hors ligne avec articles
 \n\t- Cartes mises à jour
-\n\t- Petites amélioration diverses</string>
+\n\t- Petites améliorations diverses</string>
   <string name="free_version_message">Cette version gratuite de OsmAnd est limitée à %1$s téléchargements (%2$s réalisés) et ne supporte pas les articles Wikipedia hors ligne.</string>
   <string name="free_version_title">Version gratuite</string>
   <string name="poi_context_menu_showdescription">Afficher description PI</string>
