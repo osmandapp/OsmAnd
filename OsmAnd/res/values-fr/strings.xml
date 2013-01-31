@@ -1197,4 +1197,5 @@
     <string name="precise_routing_mode_descr">Activer le routage précis pour calculer des itinéraires précis sans failles. Il est très limité par la distance et n\'utilise pas la bibliothèque native.</string>
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
     <string name="dist_control_start">Début</string>
-    </resources>
+    <string name="support_new_features_descr">Effectuer un don pour voir de nouvelles fonctionnalités implémentées dans l\'application</string>
+	</resources>
