@@ -1112,4 +1112,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
     <string name="dist_control_start">Inicio</string>
-    </resources>
+    <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
+	</resources>
