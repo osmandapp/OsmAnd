@@ -883,7 +883,7 @@
 	<string name="background_service_wait_int_descr">Nastavitev največje čakalne dobe za vsak fix položaja v ozadju</string>
 	<string name="background_service_wait_int">Največje čakanje za fix</string>
 	<string name="network_provider">Omrežje</string>
-	<string name="background_service_int_descr">"Nastavitev intervala prebujanja v ozadju "</string>
+	<string name="background_service_int_descr">Nastavitev intervala prebujanja v ozadju</string>
 	<string name="background_service_int">Interval prebujanja</string>
 	<string name="background_service_provider_descr">Izberite ponudnika mesta med izvajanjem v ozadju</string>
 	<string name="background_service_provider">Ponudnik mesta</string>
@@ -1135,4 +1135,5 @@
     <string name="precise_routing_mode">Natančno usmerjanje (alfa)</string>
     <string name="local_indexes_cat_av">Podatki zvoka/videa</string>
     <string name="dist_control_start">Začni</string>
-    </resources>
+    <string name="support_new_features_descr">Darujte, tako boste pripomogli k razvoju novih funkcionalnosti</string>
+	</resources>
