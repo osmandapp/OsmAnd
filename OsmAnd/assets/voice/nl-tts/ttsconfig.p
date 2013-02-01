@@ -32,9 +32,9 @@ roundabout(_Angle, Exit) == ['Neem de ', E, 'afslag'] :- nth(Exit, E).
 go_ahead == ['Verder dóorrijden '].
 go_ahead(Dist) == ['De weg', D,'volgen']:- distance(Dist) == D.
 
-and_arrive_destination == ['dan heeft u uw bestemming bereikt '].
-and_arrive_intermediate == ['en dan heeft u uw routepunt bereikt '].
-reached_intermediate == ['u heeft uw routepunt breikt'].
+and_arrive_destination == ['dan heb je je bestemming bereikt '].
+and_arrive_intermediate == ['en dan heb je je routepunt bereikt '].
+reached_intermediate == ['je hebt je routepunt bereikt'].
 
 then == ['dan '].
 reached_destination == ['Bestemming bereikt '].
