@@ -250,9 +250,8 @@
   <string name="basemap_missing">Отсутствует базовая карта, покрывающая весь мир на мелком масштабе. Пожалуйста загрузите World_basemap_x.obf для полноценный работы приложения.</string>
   <string name="vector_data_missing">Локальные данные отсутствуют на SD-носителе. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
   <string name="local_index_gpx_info_show">\n\nДлинное нажатие для просмотра на карте</string>
-  <string name="local_index_gpx_info_speed">Средняя скорость: %1$s
-\nМаксимальная скорость: %2$s</string>
-  <string name="local_index_gpx_info_elevation">Средняя высота: %1$.0f метров Минимальная высота: %2$.0f метров Максимальная высота: %3$.0f метров Подъём вверх: %4$.0f метров Спуск вниз: %5$.0f метров</string>
+  <string name="local_index_gpx_info_speed">\nСредняя скорость: %1$s\nМаксимальная скорость: %2$s</string>
+  <string name="local_index_gpx_info_elevation">\nСредняя высота: %1$.0f метров\nМинимальная высота: %2$.0f метров\nМаксимальная высота: %3$.0f метров\nПодъём вверх: %4$.0f метров\nСпуск вниз: %5$.0f метров</string>
   <string name="local_index_gpx_info">Путей: %1$d Всего точек: %2$d Отмечено точек : %3$d Всего расстояние: %4$s
 \nНачало: %5$tF, %5$tR Окончание: %6$tF, %6$tR</string>
   <string name="local_index_installed">Издание</string>
@@ -934,7 +933,7 @@
   <string name="rendering_attr_noPolygons_name">Без полигонов</string>
   <string name="rendering_attr_appMode_name">Режим рендеринга</string>
   <string name="rendering_attr_appMode_description">Оптимизация карты для соответствующего профиля</string>
-  <string name="rendering_attr_contourLines_description">Выберите минимальный уровень масштаба для отображения горизонталей. Необходимо предварительно загрузить соответствующий SRTM-файл.</string>
+  <string name="rendering_attr_contourLines_description">Выберите минимальный уровень масштаба для отображения горизонталей (необходимо предварительно загрузить соответствующий SRTM-файл):</string>
   <string name="rendering_attr_contourLines_name">Показывать горизонтали</string>
   <string name="rendering_attr_hmRendered_description">На карте отображается больше подробностей</string>
   <string name="rendering_attr_hmRendered_name">Больше деталей</string>
