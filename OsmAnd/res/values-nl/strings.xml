@@ -247,7 +247,7 @@
   <string name="show_more_map_detail">Toon meer kaartdetails</string>
   <string name="show_more_map_detail_descr">Toon sommige vectorkaartdetails (wegen enz.) al op lager zoomniveau</string>
   <string name="favourites_delete_multiple_succesful">Favoriet(en) succesvol verwijderd.</string>
-  <string name="favorite_delete_multiple">U gaat %1$d favorieten en %2$d favorietengroepen verwijderen. Weet u dat zeker?</string>
+  <string name="favorite_delete_multiple">Je gaat %1$d favorieten en %2$d favorietengroepen verwijderen. Weet je dat zeker?</string>
   <string name="favorite_home_category">Basis</string>
   <string name="favorite_friends_category">Vrienden</string>
   <string name="favorite_places_category">Plaatsen</string>
@@ -348,8 +348,8 @@
   <string name="tip_favorites">Favorieten</string>
   <string name="tip_favorites_t">"\tVaak gebruikte punten kunnen worden bewaard als Favorieten.
 \n\tOm een punt als Favoriet te bewaren, ga naar het kaartcontextmenu, selecteer de optie \'Voeg toe aan favorieten\' en geef het dan een naam. Daarna is het toegankelijk via \'Hoofdmenu\' -&gt; \'Favorieten\'.
-\n\tMet een lange druk op een favoriet in het menu \'Favorieten\' kunt u het als bestemming te kiezen, bewerken of verwijderen.
-\n\tU kunt alle Favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten (kaartscherm, -&gt; \'Menu\' -&gt; \'Definieer beeld\'. "</string>
+\n\tMet een lange druk op een favoriet in het menu \'Favorieten\' kan je deze als bestemming kiezen, bewerken of verwijderen.
+\n\tJe kan alle Favorieten tegelijk op de kaart weergeven door de laag \'Favorieten\' aan te zetten (kaartscherm, -&gt; \'Menu\' -&gt; \'Definieer beeld\'. "</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
   <string name="error_doing_search">Fout bij offline zoeken</string>
   <string name="search_offline_geo_error">Kan de geo intent \'%s\' niet verwerken</string>
@@ -362,7 +362,7 @@
   <string name="tip_app_mode">Gebruiksprofiel</string>
   <string name="tip_app_mode_t">\tOsmAnd ondersteunt verschillende (aanpasbare) programmaprofielen voor verschillende toepassingen. \n\tJe kan het profiel instellen in \'Menu\' -&gt; \'Instellingen\' -&gt; \'Gebruiksprofiel\', of bij het creëren van een route.</string>
   <string name="tip_navigation">Navigatie</string>
-  <string name="tip_navigation_t">\tVoor het starten van navigatie moet u een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en selecteer het type navigatie om de route te berekenen.</string>
+  <string name="tip_navigation_t">\tVoor het starten van navigatie moet je een bestemming kiezen. Druk daarna op \'Menu\' -&gt; \'Navigeer\' op de kaart en selecteer het type navigatie om de route te berekenen.</string>
   <string name="tip_search">Zoeken</string>
   <string name="tip_search_t">"\tJe kan direct op de kaart naar plaatsen zoeken of zoeken naar een adres, een locatie, een interessepunt of een favoriet.
 \n\tDoor in het hoofdmenu op \'Zoeken\' te drukken, worden de zoekacties geopend. Voor elk gevonden resultaat biedt het contextmenu 2 opties: \'Selecteer als bestemming\' of \'Toon op kaart\'. "</string>
@@ -437,7 +437,7 @@
   <string name="osmand_routing_experimental">OsmAnd offline routing is een experimentele functie en werkt niet voor afstanden van meer dan ongeveer 20 km.\n\nRouting service is tijdelijk omgeschakeld naar online CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan de opgegeven directory niet vinden.</string>
   <string name="application_dir">Opslagdirectory</string>
-  <string name="application_dir_change_warning">Wijziging van de opslagdirectory verplaatst of verwijdert de gegevens niet. Dit moet u afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
+  <string name="application_dir_change_warning">Wijziging van de opslagdirectory verplaatst of verwijdert de gegevens niet. Dit moet je afzonderlijk en buiten OsmAnd doen. Toch doorgaan?</string>
   <string name="osmand_net_previously_installed">Een oudere OsmAnd versie is al geïnstalleerd. Alle offline gegevens blijven werken in het nieuwe programma, maar Favorieten moeten worden geëxporteerd in de oude versie en dan worden geïmporteerd met de nieuwe.</string>
   <string name="build_installed">Versie {0} succesvol geïnstalleerd ({1}).</string>
   <string name="downloading_build">Downloaden versie…</string>
