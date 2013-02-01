@@ -762,7 +762,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">δευτερόλεπτα</string>
 	<string name="int_min">λεπτ.</string>
-	<string name="background_service_int_descr">"Ορισμός διαστήματος αφύπνισης χρησιμοποιούμενο από το παρασκήνιο "</string>
+	<string name="background_service_int_descr">Ορισμός διαστήματος αφύπνισης χρησιμοποιούμενο από το παρασκήνιο</string>
 	<string name="background_service_int">Διάστημα αφύπνισης</string>
 	<string name="background_service_provider_descr">Επιλέξτε παροχέα τοποθεσίας κατά την εκτέλεση της λειτουργίας παρασκηνίου</string>
 	<string name="background_service_provider">Πάροχος τοποθεσίας</string>
