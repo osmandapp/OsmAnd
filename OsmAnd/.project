@@ -114,7 +114,7 @@
 	<variableList>
 		<variable>
 			<name>OSMAND_TRUNK</name>
-			<value>$%7BPARENT-3-PROJECT_LOC%7D</value>
+			<value>$%7BPARENT-2-PROJECT_LOC%7D</value>
 		</variable>
 	</variableList>
 </projectDescription>
