@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -718,6 +719,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return recordings;
 	}
 	
+	private void checkRecordings(){
+		Iterator<Recording> it = recordingByFileName.values().iterator();
+		while(it.hasNext()){
+			Recording r = it.next();
+			if(!r.file.exists()) {
+				it.remove();
+				recordings.unregisterObject(r.lat, r.lon, r);
+			}
+		}
+	}
+	
 
 	public void deleteRecording(Recording r) {
 		recordings.unregisterObject(r.lat, r.lon, r);
@@ -844,6 +856,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 	
 	private Recording[] getRecordingsSorted() {
+		checkRecordings();
 		Collection<Recording> allObjects = getAllRecordings();
 		Recording[] res = allObjects.toArray(new Recording[allObjects.size()]);
 		Arrays.sort(res, new Comparator<Recording>() {
