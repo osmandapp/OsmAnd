@@ -1,8 +1,11 @@
 package net.osmand.plus.srtmplugin;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
@@ -23,6 +26,15 @@ public class SRTMPlugin extends OsmandPlugin {
 	public SRTMPlugin(OsmandApplication app, boolean paid) {
 		this.app = app;
 		this.paid = paid;
+		OsmandSettings settings = app.getSettings();
+		CommonPreference<String> pref = settings.getCustomRenderProperty("contourLines");
+		if(pref.get().equals("")) {
+			for(ApplicationMode m : ApplicationMode.values()) {
+				if(pref.getModeValue(m).equals("")) {
+					pref.setModeValue(m, "13");
+				}
+			}
+		}
 
 	}
 	
