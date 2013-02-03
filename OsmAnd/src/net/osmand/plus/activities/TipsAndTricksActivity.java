@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 public class TipsAndTricksActivity {
 	private int[][] tipNamesAndDescriptions = new int[][] {
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_1_0_t},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_1_2_t},
 			{R.string.tip_rotation_switching,R.string.tip_rotation_switching_t_v2},
 			{R.string.tip_update_index,R.string.tip_update_index_t},
 			{R.string.tip_day_night_mode,R.string.tip_day_night_mode_t_v2},
@@ -29,8 +29,8 @@ public class TipsAndTricksActivity {
 			{R.string.tip_navigation,R.string.tip_navigation_t},
 			{R.string.tip_app_mode,R.string.tip_app_mode_t_v2},
 			{R.string.tip_altitude_offset,R.string.tip_altitude_offset_t},
+			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_1_0_t},
 			{R.string.tip_recent_changes,R.string.tip_recent_changes_1_0_0_t},
-			{R.string.tip_recent_changes,R.string.tip_recent_changes_0_8_3_t},
 			
 			{R.string.tip_map_switch,R.string.tip_map_switch_t_v2},
 			};
