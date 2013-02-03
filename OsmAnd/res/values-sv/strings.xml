@@ -56,8 +56,8 @@
 <string name="map_widget_map_select">Kartkälla</string>
 <string name="map_widget_reset">Återställ till standard</string>
 <string name="map_widget_time">Tid som gått/Tid som är kvar</string>
-<string name="osmand_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline- och online-kartor</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline- och online-kartor</string>
+<string name="osmand_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline- och onlinekartor</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd är en open source-navigeringsapp för offline- och onlinekartor</string>
 <string name="edit_filter_delete_menu_item">Ta bort</string>
 <string name="edit_filter_save_as_menu_item">Spara som</string>
 <string name="edit_filter_delete_dialog_title">Ta bort markerat filter?</string>
@@ -77,7 +77,7 @@
 <string name="default_buttons_cancel">Avbryt</string>
 <string name="default_buttons_apply">Verkställ</string>
 <string name="default_buttons_add">Lägg till</string>
-<string name="add_favorite_dialog_top_text">Ange favoritnamn</string>
+<string name="add_favorite_dialog_top_text">Ange favorit</string>
 <string name="search_shown_on_map">Visa på karta</string>
 <string name="navigate_point_cancel">Avbryt</string>
 <string name="search_address_top_text">Välj adress</string>
@@ -140,7 +140,7 @@
 <string name="address_search_desc">Adressökning</string>
 <string name="navpoint_search_desc">Koordinater</string>
 <string name="transport_search_desc">Transportsökning</string>
-<string name="offline_navigation_not_available">OsmAnd offline-navigering är inte tillgänglig för tillfället.</string>
+<string name="offline_navigation_not_available">OsmAnd offlinenavigering är inte tillgänglig för tillfället.</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
 <string name="download_link_and_local_description">Klicka här för att ladda ner eller uppdatera offlinedata.
@@ -263,12 +263,12 @@
 \n\t *Användbarhet och UI erfarenhet*↵
 \n\t - Förbättrats på många områden "</string>
 <string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM återkoppling som samlar/modifiera OSM POI-objekt, öppna/kommentera OSM buggar, och bidra inspelade GPX-filer (kräver OSM referenser).</string>
-<string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor visas sannolikt snabbare. Fungerar kanske inte på vissa enheter.</string>
+<string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt snabbare. Fungerar kanske inte på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
 <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Offline-data) eller byta till online-kartor.</string>
 <string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:↵\n→- Inbyggd rendering för alla enheter↵\n→- Offline POI-redigering↵\n→- Tillgänglighet↵\n→- Massor av buggfixar</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (OSM automatiserade Navigation Vägbeskrivning) OsmAnd är ett open source navigering ansökan med tillgång till ett brett utbud av globala OpenStreetMap (OSM) data. Alla kartdata (vektor-eller kakel kartor) kan lagras i telefonens minne kort för offline användning. OsmAnd erbjuder även offline och online routing-funktionalitet, inklusive turn-by-turn röstguidning. Några av de viktigaste funktionerna: - Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp) - Kompakta offline vektorkartor för hela världen finns - Nedladdning av land eller region kartor direkt från appen - Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens - Offline söka efter adresser och platser (POIs) - Offline dirigering för korta sträckor (experimentell) - Bil, cykel och fotgängare lägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratis version av OsmAnd: - Antal karta nedladdningar begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväga att köpa OsmAnd + eller finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även offline och online navigationsfunktion, inklusive turn-by-turn röstguidning. Några av de viktigaste funktionerna: - Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp) - Kompakta offline vektorkartor för hela världen finns - Nedladdning av land eller region kartor direkt från appen - Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens - Offline söka efter adresser och platser (POIs) - Offline dirigering för korta sträckor (experimentell) - Bil, cykel och fotgängare lägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratis version av OsmAnd: - Antal karta nedladdningar begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
 <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -995,10 +995,10 @@
 	<string name="previous_run_crashed">Den senaste körningen av OsmAnd kraschade. Loggfil finns vid {0}. Rapportera felet och bifoga gärna loggfilen.</string>
 	<string name="saving_gpx_tracks">Sparar GPX-spår till SD-kortet…</string>
 	<string name="finished_task">Slutförd</string>
-	<string name="reload_indexes_descr">Läs om offline vektor-kartor och -data från SD-kortet</string>
-	<string name="reload_indexes">Läs om offline-data</string>
+	<string name="reload_indexes_descr">Läs om vektorkartor och data från SD-kortet</string>
+	<string name="reload_indexes">Läs om offlinedata</string>
 	<string name="download_indexes_descr">Hämta eller uppdatera data från Internet för användning offline</string>
-	<string name="download_indexes">Hämta offline-data</string>
+	<string name="download_indexes">Hämta offlinedata</string>
 	<string name="use_online_routing_descr">Använd Internet för att beräkna rutt</string>
 	<string name="use_online_routing">Använd online-navigering</string>
 	<string name="osm_settings_descr">Ange inställningar för Openstreetmap.org (OSM) som behövs för bidrag till OSM</string>
