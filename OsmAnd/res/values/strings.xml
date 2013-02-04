@@ -9,8 +9,11 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="download_hillshade_maps">Hillshade maps</string>
     <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
 		\n\t* Audio/video plugin enhancement (photos with EXIF information)  
+		\n\t* Usability fixed and restructured Contour lines pluign
+		\n\t* Hillshade packages for Contour lines plugin 
 		\n\t* Bug fixes (suboptimal routing)
     </string>
     <string name="dist_control_start">Start</string>

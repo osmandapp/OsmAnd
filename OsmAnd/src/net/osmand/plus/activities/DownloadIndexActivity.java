@@ -6,6 +6,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -55,10 +56,17 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
@@ -93,6 +101,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private EditText filterText;
 	private DownloadFileHelper downloadFileHelper = null;
 	private OsmandSettings settings;
+	private ArrayAdapter<String> spinnerAdapter;
 
 	private List<SrtmIndexItem> cachedSRTMFiles;
 	
@@ -103,13 +112,17 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		if(downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexListThread(this);
 		}
-		// recreation upon rotation is prevented in manifest file
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_download, R.drawable.tab_download_screen_icon);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.download_index);
-		titleBar.afterSetContentView();
-		
-		
-		
+		// recreation upon rotation is prevented in manifest file
+		Button b = (Button) findViewById(R.id.search_back_button);
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();				
+			}
+		});
+				
 		downloadFileHelper = new DownloadFileHelper(getClientContext());
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
@@ -160,6 +173,39 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
 			msg.show();
 		}
+		
+		Spinner spinner = (Spinner) findViewById(R.id.SpinnerLocation);
+		final DownloadActivityType[] downloadTypes = getDownloadTypes();
+		spinnerAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, 
+				new ArrayList<String>(Arrays.asList(toString(downloadTypes)))
+				) {
+			@Override
+			public View getDropDownView(int position, View convertView,
+					ViewGroup parent) {
+				View dropDownView = super.getDropDownView(position,
+						convertView, parent);
+				if (dropDownView instanceof TextView) {
+					((TextView) dropDownView).setTextColor(getResources()
+							.getColor(R.color.color_black));
+				}
+				return dropDownView;
+			}
+		};
+		spinnerAdapter.setDropDownViewResource(R.layout.my_spinner_text);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		
+		spinner.setAdapter(spinnerAdapter);
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				changeType(downloadTypes[position]);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}
+		});
 	}
 
 
@@ -264,35 +310,52 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 	private void selectDownloadType() {
 		Builder bld = new AlertDialog.Builder(this);
-		String[] items;
-		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
-			items = new String[]{
-					getString(R.string.download_regular_maps),
-					getString(R.string.download_roads_only_maps),
-					getString(R.string.download_srtm_maps)}; 
-		} else {
-			items = new String[]{
-					getString(R.string.download_regular_maps),
-					getString(R.string.download_roads_only_maps)};
-		}
-		bld.setItems(items, new DialogInterface.OnClickListener() {
+		final DownloadActivityType[] items = getDownloadTypes();
+		bld.setItems(toString(items), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				if(which == 0){
-					changeType(DownloadActivityType.NORMAL_FILE);
-				} else if(which == 1){
-					changeType(DownloadActivityType.ROADS_FILE);
-				} else if(which == 2){
-					changeType(DownloadActivityType.SRTM_FILE);
-				}
+				changeType(items[which]);
 			}
 		});
 		bld.show();
 	}
 
+	private String[] toString(DownloadActivityType[] t) {
+		String[] items = new String[t.length];
+		for (int i = 0; i < t.length; i++) {
+			if (t[i] == DownloadActivityType.NORMAL_FILE) {
+				items[i] = getString(R.string.download_regular_maps);
+			} else if (t[i] == DownloadActivityType.ROADS_FILE) {
+				items[i] = getString(R.string.download_roads_only_maps);
+			} else if (t[i] == DownloadActivityType.SRTM_FILE) {
+				items[i] = getString(R.string.download_srtm_maps);
+			} else if (t[i] == DownloadActivityType.HILLSHADE_FILE) {
+				items[i] = getString(R.string.download_hillshade_maps);
+			}
+		}
+		return items;
+	}
+
+	private DownloadActivityType[] getDownloadTypes() {
+		DownloadActivityType[] items;
+		if(OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null){
+			items = new DownloadActivityType[]{
+					DownloadActivityType.NORMAL_FILE,
+					DownloadActivityType.ROADS_FILE,
+					DownloadActivityType.SRTM_FILE,
+					DownloadActivityType.HILLSHADE_FILE};
+		} else {
+			items = new DownloadActivityType[]{
+					DownloadActivityType.NORMAL_FILE,
+					DownloadActivityType.ROADS_FILE,
+					};
+		}
+		return items;
+	}
+
 
 	public void changeType(final DownloadActivityType tp) {
-		if (downloadListIndexThread != null) {
+		if (downloadListIndexThread != null && type != tp) {
 			type = tp;
 			AsyncTask<Void, Void, List<IndexItem>> t = new AsyncTask<Void, Void, List<IndexItem>>(){
 				

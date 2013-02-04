@@ -18,7 +18,7 @@
                 android:text="" />
 
    		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:layout_marginLeft = "3dp" android:text="@string/select_search_position" android:layout_gravity="center_vertical|left">
+		  android:layout_marginLeft = "3dp" android:text="@string/local_index_download" android:layout_gravity="center_vertical|left">
    		  </TextView>
    		  <Spinner
                 android:id="@+id/SpinnerLocation"
