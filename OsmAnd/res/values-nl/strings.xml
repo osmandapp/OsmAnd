@@ -1161,4 +1161,7 @@
     <string name="local_indexes_cat_av">Audio/Video gegevens</string>
     <string name="dist_control_start">Start</string>
     <string name="support_new_features_descr">Maak een donatie om nieuwe programma-opties te zien</string>
-	</resources>
+	<string name="download_hillshade_item">"Heuvelschaduw "</string>
+    <string name="download_hillshade_maps">Heuvelschaduwkaarten</string>
+    <string name="tip_recent_changes_1_1_2_t">"Veranderingen in 1.1.2:\n\t* Audio/video-plugin verbetering (foto\'s met EXIF-informatie)\n\t* Bruikbaarheid verbeterd en contourlijnen-plugin geherstructureerd\n\t* Heuvelschaduw-pakketten voor contourlijnen-plugin\n\t* Probleemoplossingen (suboptimale routeberekening) "</string>
+    </resources>
