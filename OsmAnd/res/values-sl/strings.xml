@@ -1136,4 +1136,8 @@
     <string name="local_indexes_cat_av">Podatki zvoka/videa</string>
     <string name="dist_control_start">Začni</string>
     <string name="support_new_features_descr">Darujte, tako boste pripomogli k razvoju novih funkcionalnosti</string>
-	</resources>
+	<string name="tip_recent_changes_1_1_2_t">"Spremembe v 1.1.2:
+\n\t* Audio / Video vtičnik za izboljšavo (fotografije z informacijami EXIF)\n\t* Popravljena uporabnost in struktura vtičnika za izohipse\n\t* Paketi senčenega terena za vtičnik za izohipse\n\t* Popravki napak (izračun neoptimalne poti) "</string>
+    <string name="download_hillshade_item">"Senčen teren "</string>
+    <string name="download_hillshade_maps">Zemljevid senc terena</string>
+    </resources>
