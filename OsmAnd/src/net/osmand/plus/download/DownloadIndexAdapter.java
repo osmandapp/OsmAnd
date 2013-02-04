@@ -50,6 +50,8 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
 		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(""),
 				IndexConstants.EXTRA_EXT, indexFileNames);
+		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR),
+				IndexConstants.SQLITE_EXT, indexFileNames);
 		getMyApplication().getResourceManager().getBackupIndexes(indexFileNames);
 	}
 
@@ -235,7 +237,7 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 				item.setTextColor(downloadActivity.getResources().getColor(R.color.index_unknown));
 				item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else {
-				if(e.getType() == DownloadActivityType.SRTM_FILE){
+				if(e.getType() == DownloadActivityType.SRTM_FILE || e.getType() == DownloadActivityType.HILLSHADE_FILE){
 					item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_uptodate)); // GREEN
 					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				} else if (e.getDate() != null) {
