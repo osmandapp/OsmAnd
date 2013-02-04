@@ -1113,7 +1113,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_indexes_cat_av">Datos de Audio/Vídeo</string>
     <string name="dist_control_start">Inicio</string>
     <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
-	<string name="download_hillshade_item">Sombreado</string>
+	<string name="download_hillshade_item">"Sombreado "</string>
     <string name="download_hillshade_maps">Mapas de sombreado</string>
-    <string name="tip_recent_changes_1_1_2_t">Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y arreglada\n\t* Paquetes de sombreado para el extra de curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo)</string>
+    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y usabilidad arreglada\n\t* Paquetes de sombreado para el extra de curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     </resources>
