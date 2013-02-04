@@ -2,6 +2,8 @@ package net.osmand.plus.osmedit;
 
 
 
+import java.util.List;
+
 import android.content.Context;
 
 public class OsmBugsLocalUtil implements OsmBugsUtil {
@@ -25,6 +27,10 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		p.setAction(OsmPoint.Action.CREATE);
 		p.setAuthor(authorName);
 		return db.addOsmbugs(p);
+	}
+	
+	public List<OsmbugsPoint> getOsmbugsPoints() {
+		return db.getOsmbugsPoints();
 	}
 
 	@Override

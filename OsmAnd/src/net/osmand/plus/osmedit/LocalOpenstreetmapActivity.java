@@ -217,16 +217,20 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 					}
 				} else if (point.getGroup() == OsmPoint.Group.BUG) {
 					OsmbugsPoint p = (OsmbugsPoint) point;
+					boolean success = false;
 					if (p.getAction() == OsmPoint.Action.CREATE) {
-						remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
+						success = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
 					} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-						remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
+						success = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
 					} else if (p.getAction() == OsmPoint.Action.DELETE) {
-						remotebug.closingBug(p.getId(), p.getText(), p.getAuthor());
+						success = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor());
 					}
-					dbbug.deleteAllBugModifications(p);
-					publishProgress(p);
-					uploaded++;
+					if (success) {
+						dbbug.deleteAllBugModifications(p);
+						uploaded++;
+						publishProgress(p);
+					}
+					
 				}
 			}
 

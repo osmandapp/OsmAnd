@@ -22,6 +22,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -53,7 +54,6 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final static int startZoom = 8;
 	private final int SEARCH_LIMIT = 100;
 	
-	private final OsmBugsUtil osmbugsUtil;
 	private OsmandMapTileView view;
 	private Handler handlerToLoop;
 	
@@ -80,15 +80,21 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	private static final int DIALOG_COMMENT_BUG = 301;
 	private static final int DIALOG_CLOSE_BUG = 302;
 	private Bundle dialogBundle = new Bundle();
+	private OsmBugsLocalUtil local;
+	private OsmBugsRemoteUtil remote;
 	
 	public OsmBugsLayer(MapActivity activity){
 		this.activity = activity;
-
+		local = new OsmBugsLocalUtil(activity);
+		remote = new OsmBugsRemoteUtil();
+	}
+	
+	public OsmBugsUtil getOsmbugsUtil(OpenStreetBug bug) {
 		OsmandSettings settings = ((OsmandApplication) activity.getApplication()).getSettings();
-		if (settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
-			this.osmbugsUtil = new OsmBugsLocalUtil(activity);
+		if ((bug != null && bug.isLocal() )|| settings.OFFLINE_EDITION.get() || !settings.isInternetConnectionAvailable(true)){
+			return local;
 		} else {
-			this.osmbugsUtil = new OsmBugsRemoteUtil();
+			return remote;
 		}
 	}
 	
@@ -294,7 +300,18 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		} catch (RuntimeException e) {
 			log.warn("Error loading bugs", e); //$NON-NLS-1$
 		} 
-		
+		for(OsmbugsPoint p : local.getOsmbugsPoints() ) {
+			if(p.getId() < 0 ) {
+				OpenStreetBug bug = new OpenStreetBug();
+				bug.setId(p.getId());
+				bug.setLongitude(p.getLongitude());
+				bug.setLatitude(p.getLatitude());
+				bug.setName(p.getText()); 
+				bug.setOpened(p.getAction() == Action.CREATE || p.getAction() == Action.MODIFY);
+				bug.setLocal(true);
+				bugs.add(bug);
+			}
+		}
 		return bugs;
 	}
 	
@@ -327,7 +344,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				String author = ((EditText)openBug.findViewById(R.id.AuthorName)).getText().toString();
 				// do not set name as author it is ridiculous in that case
 				((OsmandApplication) activity.getApplication()).getSettings().USER_OSM_BUG_NAME.set(author);
-				boolean bug = osmbugsUtil.createNewBug(latitude, longitude, text, author);
+				boolean bug = getOsmbugsUtil(null).createNewBug(latitude, longitude, text, author);
 		    	if (bug) {
 		    		AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_add_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
@@ -366,7 +383,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				String text = ((EditText)view.findViewById(R.id.BugMessage)).getText().toString();
 				String author = ((EditText)view.findViewById(R.id.AuthorName)).getText().toString();
 				((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_OSM_BUG_NAME.set(author);
-				boolean added = osmbugsUtil.addingComment(bug.getId(), text, author);
+				boolean added = getOsmbugsUtil(bug).addingComment(bug.getId(), text, author);
 		    	if (added) {
 		    		AccessibleToast.makeText(activity, activity.getResources().getString(R.string.osb_comment_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
@@ -398,7 +415,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				OpenStreetBug bug = (OpenStreetBug) args.getSerializable(KEY_BUG);
-				boolean closed = osmbugsUtil.closingBug(bug.getId(), "", ((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_OSM_BUG_NAME.get());
+				boolean closed = getOsmbugsUtil(bug).closingBug(bug.getId(), "", ((OsmandApplication) OsmBugsLayer.this.activity.getApplication()).getSettings().USER_OSM_BUG_NAME.get());
 		    	if (closed) {
 		    		AccessibleToast.makeText(activity, activity.getString(R.string.osb_close_dialog_success), Toast.LENGTH_LONG).show();
 					clearCache();
@@ -484,6 +501,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 	
 	public static class OpenStreetBug implements Serializable {
+		private boolean local;
 		private static final long serialVersionUID = -7848941747811172615L;
 		private double latitude;
 		private double longitude;
@@ -519,6 +537,14 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		}
 		public void setOpened(boolean opened) {
 			this.opened = opened;
+		}
+		
+		public boolean isLocal() {
+			return local;
+		}
+		
+		public void setLocal(boolean local) {
+			this.local = local;
 		}
 	}
 
