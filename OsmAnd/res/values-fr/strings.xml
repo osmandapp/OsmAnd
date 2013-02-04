@@ -1198,4 +1198,9 @@
     <string name="local_indexes_cat_av">Données audio/vidéo</string>
     <string name="dist_control_start">Début</string>
     <string name="support_new_features_descr">Effectuer un don pour voir de nouvelles fonctionnalités implémentées dans l\'application</string>
-	</resources>
+	<string name="download_hillshade_item">Ombrage du relief</string>
+    <string name="download_hillshade_maps">Cartes de relief</string>
+    <string name="tip_recent_changes_1_1_2_t">Changements dans 1.1.2:
+\n\t* Amélioration du greffon audio/video plugin (photos avec les informations EXIF)
+\n\t* Correction sur l\'utilisabilité et restructuration du greffon des courbes de niveau\n\t* Ombrage des reliefs pour le greffon des courbes de niveau\n\t* Corrections d\'erreurs (routage sous-optimal)</string>
+    </resources>
