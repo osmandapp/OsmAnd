@@ -87,7 +87,7 @@
   <string name="osmand_development_plugin_description">Rodyti nustatymus kūrimo ir klaidų paieškos funkcionalumui: pavyzdžiui animuotai navigacijai ar atvaizdavimo našumo informacijos rodymui.</string>
   <string name="plugins_screen">Įskiepių valdymas</string>
   <string name="select_plugin_to_activate">Norėdami aktyvuoti ar deaktyvuoti įskiepį - palieskite jį. (Gali reikėti OsmAnd paleisti iš naujo.)</string>
-  <string name="prefs_plugins_descr">Įskiepiai pateikia eksperto režimo nustatymus ir įgalina papildomą funkcionalumą: parsiųstus žemėlapius, sekimą, veikimą miego režime, prieigos nustatymus ir kita.</string>
+  <string name="prefs_plugins_descr">Įskiepiai pateikia eksperto režimo nustatymus ir įgalina papildomą funkcionalumą</string>
   <string name="prefs_plugins">Įskiepių valdymas</string>
   <string name="tip_recent_changes_0_8_0_t">Pakeitimai 0.8.0 versijoje :
 \n\t- *Įskiepių funkcionalumas*
@@ -679,7 +679,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sek.</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Nustatyti pabudimo intervalą fone  </string>
+  <string name="background_service_int_descr">Nustatyti pabudimo intervalą fone</string>
   <string name="background_service_int">Pabudimo intervalas</string>
   <string name="background_service_provider_descr">Pasirinkite vietos nustatymo būdą naudojant foninį režimą</string>
   <string name="background_service_provider">Vietos nustatymo būdas</string>
@@ -1227,4 +1227,14 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="clear_dest_confirm">Ar tikrai norite panaikinti savo kelionės tikslą?</string>
     <string name="precise_routing_mode_descr">Igalinti tikslų maršruto skaičiavimą be trikdžių. Jis naudotinas labai ribotam atstumui ir nenaudoja aparatinės bibliotekos.</string>
     <string name="precise_routing_mode">Tikslus maršruto skaičiavias (alpha)</string>
-    </resources>
+    <string name="download_hillshade_item">"Kalnų šešėliai "</string>
+    <string name="download_hillshade_maps">Kalnų šešėlių žemėlapiai</string>
+    <string name="tip_recent_changes_1_1_2_t">"Pakeitimai 1.1.2 versijoje :
+\n\t* Audio/video įskiepio patobulinimai (nuotraukos su EXIF informacija)
+\n\t* Kontūrų linijų įskiepio naudojamumo patobulinimas ir restruktūrizavimas
+\n\t* Kalnų šešėlių žemėlapių paketai Kontūrų linijų įskiepiui
+\n\t* Klaidų ištaisymai (neoptimalus maršruto skaičiavimas) "</string>
+    <string name="dist_control_start">Pradžia</string>
+    <string name="local_indexes_cat_av">Audio/Video duomenys</string>
+    <string name="support_new_features_descr">Paremkite finansiškai naujo funkcionalumo vystymą</string>
+	</resources>
