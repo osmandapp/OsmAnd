@@ -1150,4 +1150,9 @@
     <string name="av_def_action_picture">Fénykép készítése</string>
     <string name="recording_context_menu_precord">Fénykép készítése</string>
     <string name="dist_control_start">Start</string>
-    </resources>
+    <string name="download_hillshade_item">"Domborzatárnyékolás "</string>
+    <string name="download_hillshade_maps">Domborzatárnyékolás térképek</string>
+    <string name="tip_recent_changes_1_1_2_t">"Változtatások az 1.1.2 verzióban:\n\t* Audio/videó bővítmény fejlesztések (fényképezés EXIF adatokkal)
+\n\t* Jobban használható, átalakított Szintvonal bővítmény\n\t* Domborzatárnyékolás csomagok a Szintvonal bővítményhez\n\t* Hibajavítások (útvonaltervezés optimalizáció) "</string>
+    <string name="support_new_features_descr">Adományozz, hogy új funkciók kerülhessenek az alkalmazásba</string>
+	</resources>
