@@ -902,7 +902,7 @@
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
 	<string name="default_buttons_delete">Ta bort</string>
-	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta tryck på stoppknappen på widgeten.</string>
+	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på stoppknappen på widgeten.</string>
     <string name="recording_playing">Ljud från den angivna inspelningen spelas upp.↵\n%1$s</string>
     <string name="recording_open_external_player">Öppna extern spelare</string>
     <string name="recording_delete_confirm">Vill du ta bort den här inspelningen?</string>
@@ -913,7 +913,7 @@
     <string name="recording_can_not_be_played">Inspelningen kan inte spelas upp</string>
     <string name="recording_context_menu_delete">Ta bort inspelningen</string>
     <string name="recording_context_menu_play">Spela upp</string>
-    <string name="recording_description">Spelar in %1$s %2$s av %3$s</string>
+    <string name="recording_description">Inspelning %1$s %2$s av %3$s</string>
     <string name="recording_default_name">spelar in</string>
     <string name="av_control_stop">AV</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
@@ -933,8 +933,8 @@
 \n→ * Plugin för beräkning av avstånd\n→ * Plugin för ljud-/videoanteckningar\n→ * Plugin för höjdkurvor\n→ * Buggfixar
 \n→ * \'Touring View\' - kartstilsalternativ med mer kartdetaljer, nya vägstilar, mer kontrast och fjällvandringsalternativ (SAC-skala)
 \n→ * EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
-    <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med en kort klick och ta bort dem med en lång tryckning.</string>
-    <string name="use_clear_distance_measurement">Klicka en gång för att ta bort mätpunkter.</string>
+    <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
+    <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkter.</string>
     <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
     <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte definierad ännu. \"Använd plats ...\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
@@ -952,7 +952,7 @@
     <string name="recording_photo_description">Foto %1$s av %2$s</string>
     <string name="recording_context_menu_precord">Ta ett foto</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
-    <string name="animate_routing_using_gpx">Vill du använda befintlig GPX-fil?</string>
+    <string name="animate_routing_using_gpx">Vill du använda en befintlig GPX-fil?</string>
     <string name="intermediate_points_change_order">Ändra ordning</string>
     <string name="srtm_paid_version_title">Plugin för höjdkurvor</string>
     <string name="av_def_action_video">Spela in video</string>
@@ -1064,7 +1064,7 @@
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="get_directions">Vägvisning</string>
-	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för att beräkna exakta rutter utan småfel. Den är mycket begränsad av avstånd och använder inte inbyggt bibliotek.</string>
+	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för att beräkna exakta rutter utan småfel. Den är mycket begränsad av avståndet och använder inte inbyggt bibliotek.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, long %2$.3f</string>
     <string name="non_optimal_route_calculation">Beräkna möjligt icke-optimal rutt över långa sträckor</string>
 	<string name="incremental_search_street">Sök gator stegvis</string>
