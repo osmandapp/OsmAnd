@@ -1,4 +1,4 @@
-OSMAND_MAKEFILES := $(all-subdir-makefiles) $(call all-makefiles-under,$(call my-dir)/../../../../core/targets/android)
+OSMAND_MAKEFILES := $(all-subdir-makefiles) $(call all-makefiles-under,$(call my-dir)/../../../core/targets/android)
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
