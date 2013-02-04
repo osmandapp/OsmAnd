@@ -1201,4 +1201,12 @@
     <string name="precise_routing_mode">Calcolo della rotta preciso(alfa)</string>
     <string name="local_indexes_cat_av">Dati Audio/Video</string>
     <string name="dist_control_start">Avvia</string>
-    </resources>
+    <string name="download_hillshade_item">"Ombreggimento delle colline "</string>
+    <string name="download_hillshade_maps">Mappe ombreggiamento colline</string>
+    <string name="tip_recent_changes_1_1_2_t">"Cambiamenti nella 1.1.2:
+\n\t* miglioramento del plugin Audio/video (foto con le informazioni EXIF)
+\n\t* ripristinato l\'usabilità e ristrutturato il plugin delle linee di contorno
+\n\t* pacchetti di ombreggimento dei rilievi per il plugin per le linee di contorno
+\n\t* correzioni di errori (routing non ottimali) "</string>
+    <string name="support_new_features_descr">Fai una donazione per vedere nuove funzionalità implementate nell\'applicazione</string>
+	</resources>
