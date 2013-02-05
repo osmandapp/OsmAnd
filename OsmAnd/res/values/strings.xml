@@ -10,10 +10,10 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="download_hillshade_item">Hillshade </string>
-    <string name="download_hillshade_maps">Hillshade maps</string>
+    <string name="download_hillshade_maps">Hillshades</string>
     <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
 		\n\t* Audio/video plugin enhancement (photos with EXIF information)  
-		\n\t* Usability fixed and restructured Contour lines pluign
+		\n\t* Usability fixed and restructured Contour lines plugin
 		\n\t* Hillshade packages for Contour lines plugin 
 		\n\t* Bug fixes (suboptimal routing)
     </string>
@@ -87,7 +87,7 @@
     <string name="srtm_plugin_name">Contour lines plugin</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads </string>
-    <string name="download_srtm_maps">Contour line data</string>
+    <string name="download_srtm_maps">Contour lines</string>
     <string name="download_regular_maps">Regular maps</string>
     <string name="download_roads_only_maps">Roads-only maps</string>
     
