@@ -106,7 +106,7 @@
   <string name="osmand_development_plugin_description">Zobrazenie nastavení pre funkcie vývoja a ladenia ako animovanie navigácie alebo zobrazenie výkonu vykreslovania.</string>
   <string name="plugins_screen">Správca zásuvných modulov</string>
   <string name="select_plugin_to_activate">Ťuknutím na zásuvný modul ho aktivujete. (Pre aplikovanie zmien môže byť vyžadovaný reštart.)</string>
-  <string name="prefs_plugins_descr">Zás. moduly povoľujú expertný režim nastavení a poskytujú extra funkcie ako dlaždicové mapy, stopovanie, operácie v režime spánku, nastavenia uľahčenia prístupu a iné.</string>
+  <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie</string>
   <string name="prefs_plugins">Správca zásuvných modulov</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmeny vo verzii 0.8.0 :
 \n\t- *Funkcia zásuvných modulov*\n\t - Väčšina funkčnosti je zoskupená podľa funkcií, ktoré môžu byť zapnuté/vypnuté v Správcovi zásuvných modulov. Môžete povoliť (online alebo uložené) zdroje mapových dlaždíc, nastavenia stopovania a mnoho iných nových a predošle existujúcich funkcií.\n\t- *Podpora nových offline mapových dát*\n\t - Vykresľovanie bolo zrýchlené a oveľa presnejšie (problémy s pobrežiami a zaplavenými plochami boli opravené)\n\t - Musíte stiahnuť kompletne nové offline údaje (staré údaje už nebudú viac podporované)\n\t - *Offline navigácia*\n\t - Offline navigácia bola výrazne vylepšená\n\t *Použiteľnosť a skúsenosti s grafickým rozhraním*\n\t - Vylepšené v mnohých smeroch\n\t- Vylepšená použiteľnosť a zjednodušenie profilového konceptu\n\t- Mnoho opravených chýb "</string>
