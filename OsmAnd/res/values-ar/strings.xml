@@ -1,3 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>    
-</resources>
+<string name="recording_context_menu_show">عرض</string>
+    <string name="av_def_action_picture">التقاط صورة</string>
+    <string name="animate_routing_using_gpx">هل تريد استخدام ملف GPX القائمة؟</string>
+    <string name="av_def_action_video">تسجيل الفيديو</string>
+    <string name="av_def_action_audio">تسجيل الصوت</string>
+    <string name="av_use_external_recorder">استخدام مسجل الخارجية</string>
+    <string name="av_settings">"إعدادات الصوت / الفيديو "</string>
+    <string name="recording_camera_not_available">الكاميرا ليست متاحة</string>
+    </resources>
