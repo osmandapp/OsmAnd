@@ -103,7 +103,7 @@ public class RouteAnimation {
 						current.setSpeed(meters / intervalTime * coeff);	
 					}
 					current.setTime(System.currentTimeMillis());
-					if(!current.hasAccuracy()) {
+					if(!current.hasAccuracy() || Double.isNaN(current.getAccuracy())) {
 						current.setAccuracy(5);
 					}
 					if (prev != null && prev.distanceTo(current) > 3) {
