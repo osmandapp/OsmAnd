@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="download_hillshade_item">Relief-Schattierung </string>
-	<string name="download_hillshade_maps">Relief-Schattierungen</string>
+	<string name="download_hillshade_maps">Relief-Overlays</string>
 	<string name="tip_recent_changes_1_1_2_t">Änderungen in 1.1.2:
 		\n\t* Audio/Video-Modul Verbesserungen (Fotos mit EXIF-Informationen)
 		\n\t* Bedienkomfort und Höhenlinien-Modul verbessert
