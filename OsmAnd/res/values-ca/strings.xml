@@ -1117,4 +1117,16 @@
     <string name="recording_photo_description">Fotografia %1$s de %2$s</string>
     <string name="av_def_action_picture">Fes una fotografia</string>
     <string name="recording_context_menu_precord">Fes una fotografia</string>
-    </resources>
+    <string name="download_hillshade_item">"Ombrejat del relleu "</string>
+    <string name="download_hillshade_maps">Mapes de relleu</string>
+    <string name="tip_recent_changes_1_1_2_t">"Canvis a la 1.1.2:
+\n\t* Millora del connector d\'àudio/vídeo (fotos amb informació EXIF)
+\n\t* Usabilitat millorada i reestructurada del connector de corbes de nivell\n\t* Paquets de relleu per al connector de corbes de nivell\n\t* Correcció d\'errors (encaminador subòptim) "</string>
+    <string name="precise_routing_mode_descr">Activa l\'encaminament precís per calcular els itineraris precisos sense errades. Està molt limitat per la distància i no utilitza la biblioteca nativa.</string>
+    <string name="precise_routing_mode">Encaminament precís (alfa)</string>
+    <string name="intermediate_point">Fita %1$s</string>
+    <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació</string>
+	<string name="direction_style_sidewise">Lateral (8 sectors)</string>
+	<string name="direction_style_clockwise">Sentit horari (12 sectors)</string>
+	<string name="sd_dir_not_accessible">El directori d\'emmagatzematge de la targeta SD no és accessible</string>
+	</resources>
