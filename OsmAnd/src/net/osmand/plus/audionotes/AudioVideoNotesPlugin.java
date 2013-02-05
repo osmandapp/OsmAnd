@@ -397,7 +397,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if(app.getSettings().SHOW_RECORDINGS.get()) {
-			if(audioNotesLayers == null) {
+			if(audioNotesLayer == null) {
 				registerLayers(activity);
 			} else if(!mapView.getLayers().contains(audioNotesLayer)) {
 				mapView.addLayer(audioNotesLayer, 3.5f);
