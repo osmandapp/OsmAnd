@@ -12,17 +12,17 @@
 <string name="map_widget_right_stack">Höger sida:</string>
 <string name="map_widget_left_stack">Vänster sida:</string>
 <string name="map_widget_parking">Parkering</string>
-<string name="map_widget_monitoring">Spårning</string>
+<string name="map_widget_monitoring">GPX-inspelning</string>
 <string name="map_widget_speed">Hastighet</string>
 <string name="map_widget_distance">Destination</string>
 <string name="map_widget_altitude">Höjd</string>
 <string name="map_widget_next_turn">Nästa sväng</string>
 <string name="show_warnings_title">Visa larm…</string>
-<string name="show_warnings_descr">Konfigurerar trafikvarningar (hastighetsgränser, stopp, vägbulor), varning för hastighetskameror och filinformation</string>
+<string name="show_warnings_descr">Konfigurerar trafikvarningar (hastighetsgränser, stopp, vägbulor), varning för hastighetskameror samt körfältsinformation</string>
 <string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt</string>
 <string name="use_compass_navigation">Använd kompass</string>
 <string name="avoid_motorway">Undvik motorvägar</string>
-<string name="auto_zoom_map_descr">Autozoom på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
+<string name="auto_zoom_map_descr">Autozooma på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk kartzoomning</string>
 <string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Waypoints\n\t* Förbättrad vägvisning\n\t* Inställning för att undvika motorvägar när man bygger en rutt\n\t* Lagt till ytterligare en typ av väg för cyklar till kartan (Cycleway=track)\n\t* Buggfixar "</string>
 <string name="snap_to_road_descr">Fäst positionen på vägen under navigering</string>
@@ -105,8 +105,8 @@
 <string name="show_cameras">Visa fartkameror</string>
 <string name="show_speed_limits">Visa hastighetsgränser</string>
 <string name="avoid_toll_roads">Undvik betalvägar</string>
-<string name="continue_follow_previous_route_auto">Tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
-<string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
+<string name="continue_follow_previous_route_auto">En tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
+<string name="route_updated_loc_found">Rutten kommer att beräknas så snart positionen hittas</string>
 <string name="osmand_parking_hours">timmar</string>
 <string name="osmand_parking_minutes">minuter</string>
 <string name="osmand_parking_position_description_add_time">Bilen parkerades:</string>
@@ -117,7 +117,7 @@
 <string name="native_app_allocated_memory_descr">Totalt inbyggt minne tilldelas av app %1$s MB (Dalvik %2$s MB, annat %3$s MB).↵ Proportionellt minne %4$s MB (Android-gräns %5$s MB, Dalvik %6$s MB).</string>
 <string name="native_app_allocated_memory">Totalt inbyggt minne</string>
 <string name="update_downlod_list">Ladda om listan</string>
-<string name="starting_point_too_far">Startpunkten för långt från närmaste väg.</string>
+<string name="starting_point_too_far">Startpunkten ligger för långt från närmaste väg.</string>
 <string name="shared_location">Delad plats</string>
 <string name="osmand_parking_event">Hämta bilen från parkering</string>
 <string name="osmand_parking_warning">Varning</string>
@@ -143,13 +143,13 @@
 <string name="offline_navigation_not_available">OsmAnd offlinenavigering är inte tillgänglig för tillfället.</string>
 <string name="left_side_navigation">Vänstertrafik</string>
 <string name="left_side_navigation_descr">Välj för länder med vänstertrafik</string>
-<string name="download_link_and_local_description">Klicka här för att ladda ner eller uppdatera offlinedata.
-\nKlicka på ett befintligt objekt för att se fler detaljer; tryck och håll för att inaktivera eller ta bort. Aktuella data på enheten (%1$s ledigt):</string>
+<string name="download_link_and_local_description">Klicka här för att ladda ner eller uppdatera offline-data.
+\nKlicka på ett befintligt post för att se fler detaljer; tryck och håll för att inaktivera eller ta bort. Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
-<string name="unknown_location">Positionen ännu inte känd</string>
+<string name="unknown_location">Positionen är ännu inte känd</string>
 <string name="context_menu_item_directions">Vägbeskrivning hit</string>
 <string name="confirm_interrupt_download">Vill du avbryta filnedladdningen?</string>
-<string name="local_indexes_cat_tile">Onlinekartor och kartbitar</string>
+<string name="local_indexes_cat_tile">Online-kartor och kartbitar (tiles)</string>
 <string name="local_indexes_cat_map">Offline-kartor (vektor)</string>
 <string name="gpx_index_settings_descr">" (inkluderar GPX analysator)"</string>
 <string name="index_settings_descr">Ladda ner, visa detaljer, och hantera offline-kartor</string>
@@ -202,7 +202,7 @@
 <string name="front_left">Vänster fram</string>
 <string name="towards">mot</string>
 <string name="altitude">Höjd</string>
-<string name="map_widget_renderer">Kartstil</string>
+<string name="map_widget_renderer">Kartutseende</string>
 <string name="live_monitoring_mode_off">Starta\n live-spårning</string>
 <string name="osmand_parking_position_description_add">Att hämta bilen på:</string>
 <string name="osmand_parking_pm">em</string>
@@ -210,35 +210,35 @@
 <string name="osmand_parking_position_name">Parkeringspunkt</string>
 <string name="osmand_parking_plugin_description">Denna plugin gör det möjligt att spara platsen där du parkerade bilen.</string>
 <string name="osmand_parking_plugin_name">Parkeringsplats-plugin</string>
-<string name="context_menu_item_add_parking_point">Markera som parkeringspunkt</string>
+<string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
 <string name="context_menu_item_delete_parking_point">Ta bort en parkeringsmarkör</string>
 <string name="asap">Snarast</string>
-<string name="route_roundabout">Rondell: ta %1$d utfarten och kör</string>
+<string name="route_roundabout">Rondell: ta %1$d avfarten och kör</string>
 <string name="rendering_attr_noPolygons_description">Gör alla ytor på kartan transparenta</string>
-<string name="rendering_attr_noPolygons_name">Inga ytor</string>
+<string name="rendering_attr_noPolygons_name">Dölj polygoner</string>
 <string name="rendering_attr_appMode_name">Renderingsläge</string>
-<string name="rendering_attr_contourLines_description">Display från zoomnivå (kräver höjdkurvsdata):</string>
+<string name="rendering_attr_contourLines_description">Visning från zoomnivå (kräver höjdkurvsdata):</string>
 <string name="rendering_attr_contourLines_name">Visa höjdkurvor</string>
 <string name="rendering_attr_hmRendered_description">Öka antalet kartdetaljer som visas</string>
 <string name="rendering_attr_hmRendered_name">Visa mer kartdetaljer</string>
 <string name="local_index_routing_data">Ruttdata</string>
 <string name="navigate_point_format">Format:</string>
-<string name="poi_search_desc">POI (Point of Interest)-sökning</string>
+<string name="poi_search_desc">Sökning efter POI (Point of Interest)</string>
 <string name="favourites_search_desc">Favoritsökning</string>
 <string name="history_search_desc">Sökhistorik</string>
 <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
-<string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offlinedata som du kan ladda ner via \'Inställningar\' -&gt; \'Offlinedata\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
-<string name="basemap_was_selected_to_download">En baskarta krävs för att appen ska fungera korrekt och markerades för nedladdning.</string>
+<string name="first_time_msg">Tack för att du använder OsmAnd. För många funktioner i programmet behöver du vissa regionala offline-data som du kan ladda ner via \'Inställningar\' -&gt; \'Offline-data\'. Därefter kommer du att kunna se kartor, hitta adresser, leta efter intressepunkter och hitta kollektivtrafik.</string>
+<string name="basemap_was_selected_to_download">En baskarta krävs för att appen ska fungera korrekt och den har markerats för nedladdning.</string>
 <string name="select_index_file_to_download">Hittade ingenting. Om du inte kan hitta din region, kan du skapa den själv (se http://osmand.net).</string>
 <string name="map_online_plugin_is_not_installed">Aktivera pluginen online-kartor för att välja olika kartkällor</string>
-<string name="map_online_data">Onlinekartor och kartbitar</string>
+<string name="map_online_data">Online-kartor och kartbitar (tiles)</string>
 <string name="map_online_data_descr">Använd online-kartor (ladda ner och cacha kartbitar på SD-kortet)</string>
 <string name="online_map_settings_descr">Konfigurera online- eller cachade källor för kartbitar</string>
 <string name="map_settings">Kartinställningar</string>
 <string name="map_settings_descr">Konfigurera kartvisning</string>
 <string name="osmand_rastermaps_plugin_description">Visa inställningar för att konfigurera en rad olika online-kartor eller tile maps som baskarta eller som överläggs-/underläggs-kartor. Dessa kartor kan också förberedas offline och kopieras till OsmAnd-mappen.</string>
 <string name="osmand_background_plugin_description">Visa inställningar för att aktivera spårning och navigering i sömnen (skärm av) läge via periodvis vakna upp GPS-enheten.</string>
-<string name="osmand_extra_settings_description">Visa inställningar för avancerad karta konfiguration (som ökar karta detaljer) och vissa enhetsspecifika detaljerna.</string>
+<string name="osmand_extra_settings_description">Visa inställningar för avancerad kartkonfiguration (som att öka kartdetaljer) och vissa enhetsspecifika inställningar.</string>
 <string name="osmand_development_plugin_description">Visa inställningar för utveckling och felsökning funktioner som animerade navigering eller rendering prestanda display.</string>
 <string name="plugins_screen">Plugin-hanterare</string>
 <string name="tip_recent_changes_0_8_2_t">"Förändringar i 0.8.2 :\n\t* Förbättrad ruttuträkning\n\t* Widgets för dynamisk karta\n\t* Kartinställningar flyttade till kartskärmen\n\t* Lås skärm knapp med logga tjänster\n\t* Fixat arabiska, Kannada skript och RTL språk "</string>
@@ -250,20 +250,20 @@
 <string name="osmand_parking_time_no_limit">Ej tidsbegränsad parkering</string>
 <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
 <string name="select_plugin_to_activate">Tryck på en plugin för att aktivera eller inaktivera den. (Omstart av OsmAnd kan krävas.)</string>
-<string name="prefs_plugins_descr">Plugins aktivera inställningar expertläge och ger extra funktionalitet som kakel kartor, spårning, viloläge drift, inställningar tillgänglighet och andra.</string>
-<string name="prefs_plugins">Plugin-hanterare</string>
+<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar extra funktionalitet</string>
+<string name="prefs_plugins">Plugin</string>
 <string name="tip_recent_changes_0_8_0_t">"Förändringar i 0.8.0 : ↵
-\n\t- *Pluginfunktionalitet*↵
-\n\t- Flesta funktionaliteter är grupperade efter funktioner och kan aktiveras/avaktiveras i Plugin Manager↵ Du kan aktivera (online eller cachad) källor kakel karta, spårning inställningar och många andra nya och tidigare befintliga funktioner. ↵
-\n\t- *Ny offline kartdata stöd*↵
-\n\t - Kartrendering blir snabbare och mer exakt (kust och översvämmade problem område huvudsakligen är fasta).↵
-\n\t - Du måste ladda ner helt nya offline data (gamla data stöds inte längre)↵
-\n\t- *Offline Routing*↵
-\n\t - Offline routing blir mer robust↵
-\n\t *Användbarhet och UI erfarenhet*↵
+\n\t- *Plugin-funktionalitet*↵
+\n\t- De flesta är grupperade efter funktion och kan aktiveras/inaktiveras i Inställningar &gt; Plugins. Du kan aktivera (online eller cachad) källor till kartbitar, spårningsinställningar och många andra nya och tidigare befintliga funktioner. ↵
+\n\t- *Nytt stöd för offline-kartor*↵
+\n\t - Kartrendering blir snabbare och mer exakt (problem med kustlinje och översvämmade områden är åtgärdade).↵
+\n\t - Du måste ladda ner helt nya offline-data (gamla data stöds inte längre)↵
+\n\t- *Offline-ruttning*↵
+\n\t - Offline-ruttning blir mer robust↵
+\n\t *Användbarhet och UIerfarenhet*↵
 \n\t - Förbättrats på många områden "</string>
-<string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM återkoppling som samlar/modifiera OSM POI-objekt, öppna/kommentera OSM buggar, och bidra inspelade GPX-filer (kräver OSM referenser).</string>
-<string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt snabbare. Fungerar kanske inte på vissa enheter.</string>
+<string name="osm_editing_plugin_description">Visa inställningar som behövs för OSM-återkoppling såsom samlande/modifierade av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer (kräver OSM-referenser).</string>
+<string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
 <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med aktuell röst</string>
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
 <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Offline-data) eller byta till online-kartor.</string>
@@ -329,7 +329,7 @@
 \n\t- Offline Wikipedia-uppgifter med artiklar
 \n\t- Uppdaterade kartor
 \n\t- Andra små funktioner "</string>
-<string name="free_version_message">Denna kostnadsfria OsmAnd-version är begränsad till %1$s nedladdningar %2$s och stöder inte offline Wikipedia-artiklar.</string>
+<string name="free_version_message">Denna gratisversion av OsmAnd är begränsad till %1$s nedladdningar %2$s och stöder inte Wikipedia-artiklar offline.</string>
 <string name="free_version_title">Gratisversion</string>
 <string name="poi_context_menu_showdescription">Visa POI-beskrivning</string>
 <string name="index_name_north_america">Nordamerika</string>
@@ -344,7 +344,7 @@
 <string name="index_name_asia">Asien</string>
 <string name="index_name_oceania">Oceanien</string>
 <string name="index_name_other">Hela världen och ämneskartor</string>
-<string name="index_name_wiki">Världsvid Wikipedia</string>
+<string name="index_name_wiki">Wikipedia</string>
 <string name="index_name_voice">Röstpaket (inspelat)</string>
 <string name="index_name_tts_voice">Röstpaket (TTS)</string>
 <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -358,7 +358,7 @@
 <string name="global_settings">Globala inställningar</string>
 <string name="general_settings">Allmänna inställningar</string>
 <string name="general_settings_descr">Konfigurera globala inställningar</string>
-<string name="global_app_settings">Globala appinställningar</string>
+<string name="global_app_settings">Globala inställningar</string>
 <string name="user_name">Ditt OSM-användarnamn</string>
 <string name="user_name_descr">Behövs för ändringar i openstreetmap.org</string>
 <string name="user_password">Ditt OSM-lösenord</string>
@@ -366,11 +366,10 @@
 <string name="osmand_service">Vilolägesfunktionalitet</string>
 <string name="osmand_service_descr">Används för att köra OsmAnd medan skärmen är avstängd</string>
 <string name="tip_rotation_switching">Kartorientering</string>
-<string name="tip_rotation_switching_t_v2">"\tDu kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
+<string name="tip_rotation_switching_t_v2">\tDu kan växla mellan om och hur kartbilden roteras genom att upprepade gånger klicka på kartskärmens kompassikon.
 \n\tAlternativen är:
-\n\tVrid inte (norr är uppåt)\'- Kartan roteras inte. Norr är alltid uppåt\n\t\'I körriktningen\' - Kartan kommer kontinuerligt att anpassas efter din kurs
-\n\t\'Till kompassen\' - Kartan kommer kontinuerligt att anpassas till enhetens kompassläsning "</string>
-<string name="binary_map_download_success">Hämtades utan problem.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera Visa\' -&gt; \'Kartkälla...\' -&gt; \'Offline vektorkartor\'.</string>
+\n\t\'Norr uppåt (vrid inte kartan)\'- Kartan roteras inte. Norr är alltid uppåt.\n\t\'I körriktningen\' - Kartan kommer att anpassas kontinuerligt efter din kurs.\n\t\'Efter kompassen\' - Kartan kommer att anpassas kontinuerligt till enhetens kompassläsning.</string>
+<string name="binary_map_download_success">Hämtades utan problem.\n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla...\' -&gt; \'Offline vektorkartor\'.</string>
 <string name="tip_day_night_mode">Dag-/nattläge</string>
 <string name="tip_osm_improve">Förbättrar OSM-data</string>
 <string name="download_files_not_enough_space">Det finns inte tillräckligt med ledigt utrymme för att ladda ner %1$s MB (tillgängligt: %2$s).</string>
@@ -388,7 +387,7 @@
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
 <string name="auto_follow_location_enabled">Auto-centrera kartvyn i bruk.</string>
 <string name="pref_vector_rendering">Alternativ specifika för vektorrenderaren</string>
-<string name="pref_overlay">Overlay/underlay</string>
+<string name="pref_overlay">Överlägg/Underlägg</string>
 <string name="pref_raster_map">Inställningar för kartkällor</string>
 <string name="pref_vector_map">Inställningar för vektorkartor</string>
 <string name="delete_confirmation_msg">Ta bort %1$s?</string>
@@ -646,7 +645,7 @@
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Offline-data (hämta)</string>
-	<string name="tip_day_night_mode_t_v2">"Kartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).\nNattfärger är säkrare för mörkerkörning.\nDu kan ange en policy för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\nAlternativen är:\nSoluppgång/Solnedgång- automatläge, styrs av solens position (standard)\nDag - använd alltid dagläge\nNatt - använd alltid nattläge\nLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns) "</string>	
+	<string name="tip_day_night_mode_t_v2">"Kartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).\nNattfärger är säkrare för mörkerkörning.\nDu kan ange en regel för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\nAlternativen är:\nSoluppgång/Solnedgång - automatläge, styrs av solens position (standard)\nDag - använd alltid dagläge\nNatt - använd alltid nattläge\nLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns) "</string>	
 	<string name="select_max_zoom_preload_area">Välj maximal zoom att förladda</string>
 	<string name="maps_could_not_be_downloaded">Denna karta kunde inte laddas ner</string>
 	<string name="continuous_rendering">Kontinuerlig rendering</string>
@@ -847,7 +846,7 @@
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
-	<string name="tip_update_index_t">\tAtt ha uppdaterad kartdata är viktigt. OsmAnd tillhandahåller en nerladdningshanterare som kan söka efter tillgänglig offlinedata.\n\tFör att söka efter uppdateringar, gå till \'Inställningar\' -&gt; \'Offline data\' -&gt; \'Ladda ner offline data\'. Efter att regionslistan hämtats från internet, vällj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.\n\tFärgerna visar tillgängligheten för uppdateringarna:\n\t\'Grön\' - indikerar att datan är identisk på enheten och servern\n\t\'Blå\' - indikerar att uppdateringar finns på servern\n\t\'Mörkblå/grön\' - data är inaktiverade på enheten</string>
+	<string name="tip_update_index_t">\tAtt ha uppdaterade kartdata är viktigt. OsmAnd har en nerladdningshanterare som kan söka efter tillgänglig offlinedata.\n\tFör att söka efter uppdateringar, gå till \'Inställningar\' -&gt; \'Offline-data\' -&gt; \'Ladda ner offline-data\'. Efter att regionslistan hämtats från Internet, välj alternativet \'Meny\' -&gt; \'Filtrera nerladdningar\' för att visa uppdateringar som rör data som du redan har på din enhet.\n\tFärgerna visar tillgängligheten för uppdateringarna:\n\t\'Grön\' - indikerar att data är identiska på enheten och servern\n\t\'Blå\' - indikerar att det finns uppdateringar på servern\n\t\'Mörkblå/grön\' - data är inaktiverade på enheten</string>
 	<string name="rendering_attr_noAdminboundaries_name">Dölj gränser</string>
 	<string name="rendering_attr_noAdminboundaries_description">Undertryck visning av regionala gränser (adminnivåer 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid-pluginen har en gammal version och behöver uppdateras.</string>
@@ -902,7 +901,7 @@
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
 	<string name="default_buttons_delete">Ta bort</string>
-	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på stoppknappen på widgeten.</string>
+	<string name="recording_is_recorded">Ljud/video spelas in. För att stoppa detta, tryck på AV-knappen på widgeten.</string>
     <string name="recording_playing">Ljud från den angivna inspelningen spelas upp.↵\n%1$s</string>
     <string name="recording_open_external_player">Öppna extern spelare</string>
     <string name="recording_delete_confirm">Vill du ta bort den här inspelningen?</string>
@@ -931,12 +930,12 @@
     <string name="download_srtm_maps">Höjdkurvsdata</string>
     <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
 \n→ * Plugin för beräkning av avstånd\n→ * Plugin för ljud-/videoanteckningar\n→ * Plugin för höjdkurvor\n→ * Buggfixar
-\n→ * \'Touring View\' - kartstilsalternativ med mer kartdetaljer, nya vägstilar, mer kontrast och fjällvandringsalternativ (SAC-skala)
+\n→ * \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
 \n→ * EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
     <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
     <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkter.</string>
     <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
-    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte definierad ännu. \"Använd plats ...\" för att knyta en anteckning till den angivna platsen</string>
+    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd plats ...\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
     <string name="route_descr_from_to">Från: %1$s↵\nTill: %2$s</string>
     <string name="route_descr_from_to_via">Från: %1$s↵\nVia: %2$s↵\nTill: %3$s</string>
@@ -956,7 +955,7 @@
     <string name="intermediate_points_change_order">Ändra ordning</string>
     <string name="srtm_paid_version_title">Plugin för höjdkurvor</string>
     <string name="av_def_action_video">Spela in video</string>
-    <string name="precise_routing_mode">Exakt ruttning (alpha)</string>
+    <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
     <string name="dropbox_plugin_description">Dropbox-pluginen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
     <string name="srtm_paid_version_msg">Köp gärna pluginen Höjdkurvor på Google Play för att stödja fortsatt utveckling.</string>
@@ -969,7 +968,7 @@
     <string name="av_use_external_recorder">Använd extern inspelare</string>
     <string name="av_settings_descr">Konfigurera inställningar för ljud och video</string>
     <string name="av_settings">Inställningar för ljud och video</string>
-    <string name="recording_error">"Ett fel uppstod under inspelningen  "</string>
+    <string name="recording_error">"Ett fel uppstod under inspelningen "</string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
     <string name="srtm_plugin_description">Denna plugin gör det lättare att hämta höjdkurvor (Hämtning av offline-data -&gt; Meny --&gt; Andra kartor) för användning med offline-kartor.</string>
     <string name="delete_target_point">Ta bort waypoint</string>
@@ -1071,4 +1070,5 @@
 	<string name="incremental_search_building">Sök byggnader stegvis</string>
 	<string name="show_view_angle">Visa körriktning</string>
 	<string name="Closest_Amenities">Närmaste inrättningar</string>
+	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	</resources>
