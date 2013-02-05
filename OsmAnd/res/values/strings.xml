@@ -12,7 +12,7 @@
     <string name="download_hillshade_item">Hillshade </string>
     <string name="download_hillshade_maps">Hillshades</string>
     <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
-		\n\t* Audio/video plugin enhancement (photos with EXIF information)  
+		\n\t* Audio/video plugin enhancement (photos with EXIF information)
 		\n\t* Usability fixed and restructured Contour lines plugin
 		\n\t* Hillshade packages for Contour lines plugin 
 		\n\t* Bug fixes (suboptimal routing)

@@ -1,5 +1,13 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="download_hillshade_item">Relief-Schattierung </string>
+	<string name="download_hillshade_maps">Relief-Schattierungen</string>
+	<string name="tip_recent_changes_1_1_2_t">Änderungen in 1.1.2:
+		\n\t* Audio/Video-Modul Verbesserungen (Fotos mit EXIF-Informationen)
+		\n\t* Bedienkomfort und Höhenlinien-Modul verbessert
+		\n\t* Höhenlinien-Modul erweitert mit Relief-Schattierungen
+		\n\t* Fehlerbehebungen (Routing-Verbesserungen)
+	</string>
 	<string name="dist_control_start">Start</string>
 	<string name="rendering_attr_noAdminboundaries_name">Keine Grenzen anzeigen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Unterdrückt die Anzeige regionaler Grenzverläufe</string>
