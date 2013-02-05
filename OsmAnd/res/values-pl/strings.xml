@@ -1148,4 +1148,11 @@
     <string name="local_indexes_cat_av">Dane audio/video</string>
     <string name="dist_control_start">Start</string>
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny</string>
-	</resources>
+	<string name="tip_recent_changes_1_1_2_t">"Zmiany w 1.1.2:
+\n\t* Rozszerzenie wtyczki audio/video (zdjęcia z danymi EXIF)
+\n\t* Poprawki w funkcjonalności wtyczki kontur
+\n\t* Paczki cieniowania wzgórz dla wtyczki kontur
+\n\t* Poprawki błędów i nawigacji "</string>
+    <string name="download_hillshade_maps">Mapy cieniowania</string>
+    <string name="download_hillshade_item">"Cieniowanie "</string>
+    </resources>
