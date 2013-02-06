@@ -61,7 +61,7 @@
 <string name="edit_filter_delete_menu_item">Ta bort</string>
 <string name="edit_filter_save_as_menu_item">Spara som</string>
 <string name="edit_filter_delete_dialog_title">Ta bort markerat filter?</string>
-<string name="default_buttons_selectall">Markera allt</string>
+<string name="default_buttons_selectall">Markera alla</string>
 <string name="email">e-post</string>
 <string name="poi_dialog_opening_hours">Öppet</string>
 <string name="poi_dialog_comment">Kommentar</string>
@@ -547,12 +547,12 @@
 <string name="add_waypoint_dialog_title">Lägg till waypoint i inspelade GPX-spår</string>
 <string name="context_menu_item_add_waypoint">Lägg GPX-waypoint</string>
 <string name="amenity_type_administrative">Administrativt</string>
-<string name="amenity_type_barrier">Barriär</string>
+<string name="amenity_type_barrier">Hinder</string>
 <string name="amenity_type_education">Utbildning</string>
-<string name="amenity_type_emergency">Olyckshändelse</string>
+<string name="amenity_type_emergency">Olycksfall</string>
 <string name="amenity_type_entertainment">Underhållning</string>
 <string name="amenity_type_finance">Finans</string>
-<string name="amenity_type_geocache">Geocache</string>
+<string name="amenity_type_geocache">Geocaching</string>
 <string name="amenity_type_healthcare">Sjukvård</string>
 <string name="amenity_type_historic">Historisk</string>
 <string name="amenity_type_landuse">Markanvändning</string>
@@ -607,7 +607,7 @@
     <string name="btn_add_tag">Lägg till tagg</string>
     <string name="btn_advanced_mode">Avancerat läge…</string>
     <string name="poi_filter_parking">Parkering</string>
-    <string name="poi_filter_emergency">Olyckshändelse</string>
+    <string name="poi_filter_emergency">Olycksfall</string>
     <string name="poi_filter_public_transport">Kollektivtrafik</string>
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
@@ -645,7 +645,7 @@
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
     <string name="index_settings">Offline-data (hämta)</string>
-	<string name="tip_day_night_mode_t_v2">"Kartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).\nNattfärger är säkrare för mörkerkörning.\nDu kan ange en regel för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\nAlternativen är:\nSoluppgång/Solnedgång - automatläge, styrs av solens position (standard)\nDag - använd alltid dagläge\nNatt - använd alltid nattläge\nLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns) "</string>	
+	<string name="tip_day_night_mode_t_v2">"Kartans utseende kan för vissa vektorkartor ändras mellan dag (ljusare) och natt (mörkare).\nNattfärgerna är säkrare vid mörkerkörning.\nDu kan ange en regel för dag-/nattomkoppling i Meny -&gt; Konfigurera skärm ... -&gt; Dag-/nattkarta.\nAlternativen är:\nSoluppgång/Solnedgång - automatläge, styrs av solens position (standard)\nDag - använd alltid dagläge\nNatt - använd alltid nattläge\nLjussensor - kartans utseende styrs av ljussensorn på enheten (endast om sådan finns) "</string>	
 	<string name="select_max_zoom_preload_area">Välj maximal zoom att förladda</string>
 	<string name="maps_could_not_be_downloaded">Denna karta kunde inte laddas ner</string>
 	<string name="continuous_rendering">Kontinuerlig rendering</string>
@@ -743,7 +743,7 @@
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
 	<string name="voice_data_corrupted">Specificerade röstdata är skadade</string>
 	<string name="voice_data_unavailable">"Valda röstdata  är inte tillgängliga"</string>
-	<string name="stop_routing">Stoppa navigation.</string>
+	<string name="stop_routing">Stoppa navigeringen.</string>
 	<string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
 	<string name="unzipping_file">Packar upp fil…</string>
@@ -1071,4 +1071,7 @@
 	<string name="show_view_angle">Visa körriktning</string>
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
-	</resources>
+	<string name="download_hillshade_item">"Skuggad relief "</string>
+    <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
+    <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till Höjdkurvs-pluginen\n\t* Skuggad relief-paket för Höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
+    </resources>
