@@ -352,21 +352,23 @@ public class MapActivityLayers {
 			@Override
 			public boolean processResult(GPXFile result) {
 				GPXFile toShow = result;
-				if (toShow == null) {
+				if (toShow == null || toShow.showCurrentTrack) {
 					if(!settings.SAVE_TRACK_TO_GPX.get()){
 						AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
-						return true;
 					}
 					Map<String, GPXFile> data = activity.getSavingTrackHelper().collectRecordedData();
-					if(data.isEmpty()){
-						toShow = new GPXFile();						
-					} else {
-						toShow = data.values().iterator().next();
+					if(toShow == null) {
+						toShow = new GPXFile();
+						toShow.showCurrentTrack = true;
+					}
+					if(!data.isEmpty()) {
+						GPXFile last = data.values().iterator().next();
+						GPXUtilities.mergeGPXFileInto(toShow, last);
 					}
 				}
 				
 				settings.SHOW_FAVORITES.set(true);
-				getApplication().setGpxFileToDisplay(toShow, result == null);
+				getApplication().setGpxFileToDisplay(toShow, toShow.showCurrentTrack);
 				WptPt loc = toShow.findPointToShow();
 				if(loc != null){
 					mapView.getAnimatedDraggingThread().startMoving(loc.lat, loc.lon, 
@@ -405,17 +407,19 @@ public class MapActivityLayers {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
+						GPXFile currentGPX = null;
 						if (showCurrentGpx && selected[0]) {
-							callbackWithObject.processResult(null);
-						} else {
-							List<String> s = new ArrayList<String>();
-							for (int i = 0; i < selected.length; i++) {
-								if (selected[i]) {
-									s.add(list.get(i));
-								}
-							}
-							loadGPXFileInDifferentThread(callbackWithObject, convertCloudmade, dir, s.toArray(new String[s.size()]));
+							currentGPX = new GPXFile();
+							currentGPX.showCurrentTrack = true;
 						}
+						List<String> s = new ArrayList<String>();
+						for (int i = (showCurrentGpx ? 1 : 0); i < selected.length; i++) {
+							if (selected[i]) {
+								s.add(list.get(i));
+							}
+						}
+						loadGPXFileInDifferentThread(callbackWithObject, convertCloudmade, dir, currentGPX,
+								s.toArray(new String[s.size()]));
 					}
 				});
 			} else {
@@ -426,7 +430,7 @@ public class MapActivityLayers {
 						if (showCurrentGpx && which == 0) {
 							callbackWithObject.processResult(null);
 						} else {
-							loadGPXFileInDifferentThread(callbackWithObject, convertCloudmade,  dir, list.get(which));
+							loadGPXFileInDifferentThread(callbackWithObject, convertCloudmade, dir, null, list.get(which));
 						}
 					}
 				});
@@ -471,13 +475,13 @@ public class MapActivityLayers {
 	}
 	
 	private void loadGPXFileInDifferentThread(final CallbackWithObject<GPXFile> callbackWithObject,
-			final boolean convertCloudmade, final File dir, final String... filename) {
+			final boolean convertCloudmade, final File dir, final GPXFile currentFile, final String... filename) {
 		final ProgressDialog dlg = ProgressDialog.show(activity, getString(R.string.loading),
 				getString(R.string.loading_data));
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				GPXFile r = null; 
+				GPXFile r = currentFile; 
 				for(String fname : filename) {
 					final File f = new File(dir, fname);
 					GPXFile res = GPXUtilities.loadGPXFile(activity.getMyApplication(), f, convertCloudmade);
