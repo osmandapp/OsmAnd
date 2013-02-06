@@ -67,7 +67,7 @@
 <string name="poi_dialog_comment">Kommentar</string>
 <string name="poi_dialog_comment_default">Ändring av POI</string>
 <string name="poi_dialog_other_tags_message">Alla andra taggar sparas</string>
-<string name="default_buttons_commit">Verkställ</string>
+<string name="default_buttons_commit">Skicka in</string>
 <string name="default_buttons_reset">Återställ</string>
 <string name="filter_current_poiButton">Filter</string>
 <string name="favourites_context_menu_navigate">Ange som destination</string>
@@ -77,7 +77,7 @@
 <string name="default_buttons_cancel">Avbryt</string>
 <string name="default_buttons_apply">Verkställ</string>
 <string name="default_buttons_add">Lägg till</string>
-<string name="add_favorite_dialog_top_text">Ange favorit</string>
+<string name="add_favorite_dialog_top_text">Ange namn på favorit</string>
 <string name="search_shown_on_map">Visa på karta</string>
 <string name="navigate_point_cancel">Avbryt</string>
 <string name="search_address_top_text">Välj adress</string>
@@ -124,7 +124,7 @@
 <string name="osmand_parking_warning_text">Notifiering om att hämta din bil har tidigare lagts till i din kalender. Den kommer att finnas där tills du tar bort den manuellt.</string>
 <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkering</string>
 <string name="osmand_parking_delete_confirm">Vill du ta bort platsen för den parkerade bilen?</string>
-<string name="osmand_parking_delete">Ta bort en parkeringsmarkör</string>
+<string name="osmand_parking_delete">Ta bort en P-markering</string>
 <string name="osmand_parking_choose_type">Välj typ av parkering</string>
 <string name="osmand_parking_lim_text">Tidsbegränsad</string>
 <string name="osmand_parking_no_lim_text">Ej tidsbegränsad</string>
@@ -211,7 +211,7 @@
 <string name="osmand_parking_plugin_description">Denna plugin gör det möjligt att spara platsen där du parkerade bilen.</string>
 <string name="osmand_parking_plugin_name">Parkeringsplats-plugin</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
-<string name="context_menu_item_delete_parking_point">Ta bort en parkeringsmarkör</string>
+<string name="context_menu_item_delete_parking_point">Ta bort en P-markering</string>
 <string name="asap">Snarast</string>
 <string name="route_roundabout">Rondell: ta %1$d avfarten och kör</string>
 <string name="rendering_attr_noPolygons_description">Gör alla ytor på kartan transparenta</string>
@@ -428,7 +428,7 @@
 <string name="file_with_name_already_exist">En fil med samma namn finns redan.</string>
 <string name="default_buttons_save">Spara</string>
 <string name="menu_save_directions">Spara vägbeskrivningar</string>
-<string name="local_index_upload_gpx_description">Ladda GPX-filer till OSM-gemenskapen. De kommer att användas för att förbättra kartor.</string>
+<string name="local_index_upload_gpx_description">Skicka GPX-filer till OSM-gemenskapen. De kommer att användas för att förbättra kartorna.</string>
 <string name="local_index_items_uploaded">%1$d av %2$d post(er) har överförts utan problem.</string>
 <string name="local_index_mi_upload_gpx">Skicka till OSM</string>
 <string name="show_more_map_detail">Visa mer kartdetaljer</string>
@@ -438,7 +438,7 @@
 <string name="favorite_home_category">Hem</string>
 <string name="favorite_friends_category">Vänner</string>
 <string name="favorite_places_category">Platser</string>
-<string name="favorite_default_category">Andra</string>
+<string name="favorite_default_category">Annat</string>
 <string name="favourites_edit_dialog_name">Namn</string>
 <string name="favourites_edit_dialog_category">Kategori</string>
 <string name="vector_map_not_needed">Nej, tack</string>
@@ -479,7 +479,7 @@
 <string name="tip_recent_changes">Senaste ändringarna</string>
 <string name="voice_not_use">Använd inte</string>
 <string name="voice_not_specified">Ingen</string>
-<string name="installing_new_resources">Packar upp ny data…</string>
+<string name="installing_new_resources">Packar upp nya data…</string>
 <string name="internet_connection_required_for_online_route">En online-navigeringstjänst är vald men ingen internet-anslutning är tillgänglig.</string>
 <string name="tts_language_not_supported_title">Språket stöds inte</string>
 <string name="tts_language_not_supported">Det valda språket stöds inte av den installerade Android TTS (text-till-tal)-motorn. Vill du söka efter en annan TTS-motor på Google Play? Annars kommer det förinställda TTS-språket att användas.</string>
@@ -491,7 +491,7 @@
 <string name="switch_to_vector_map_to_see">En offline vektor-karta finns tillgänglig för den här platsen.
 \n\t\n\tFör användning aktivera \'Meny\' -&gt; \'Definiera vy\' -&gt; \'Kartkälla...\' -&gt; \'Offline vektor-kartor\'.</string>
 <string name="choose_audio_stream">Röstväglednings-output</string>
-<string name="choose_audio_stream_descr">Välj kanal för att spela upp röstvägledningen (systemberoende)</string>
+<string name="choose_audio_stream_descr">Välj kanal för uppspelning av röstvägledning (systemberoende)</string>
 <string name="voice_stream_voice_call">Röstsamtal ljud</string>
 <string name="voice_stream_notification">Ljudnotifiering</string>
 <string name="voice_stream_music">Media-/musikljud</string>
@@ -517,13 +517,13 @@
 <string name="tip_favorites">Favoritpunkter</string>
 <string name="error_doing_search">Ett fel uppstod vid offline-sökning</string>
 <string name="search_offline_geo_error">Det gick inte att tolka geo uppsåt \'%s\'</string>
-<string name="search_osm_offline">Sök adress med hjälp offline-kartor</string>
+<string name="search_osm_offline">Sök adress med hjälp av offline-kartor</string>
 <string name="system_locale">System</string>
 <string name="preferred_locale_descr">Välj visningsspråk</string>
 <string name="preferred_locale">Visningsspråk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
-<string name="tip_app_mode_t_v2">→OsmAnd stöder olika (anpassningsbar) profiler för olika användningar.↵\n→Du kan byta sökprofil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
+<string name="tip_app_mode_t_v2">→OsmAnd stöder olika (anpassningsbara) profiler för olika användningar.↵\n→Du kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
 <string name="tip_navigation">Navigering</string>
 <string name="tip_navigation_t">Innan du påbörjar en navigering måste du välja en destination. Tryck sedan på \'Meny\' -&gt; \'Vägbeskrivning\' på kartan och välj navigationstyp.</string>
 <string name="tip_search">Söker</string>
@@ -546,7 +546,7 @@
 <string name="add_waypoint_dialog_added">Waypointen \"{0}\" har lagts till utan problem</string>
 <string name="add_waypoint_dialog_title">Lägg till waypoint i inspelade GPX-spår</string>
 <string name="context_menu_item_add_waypoint">Lägg GPX-waypoint</string>
-<string name="amenity_type_administrative">Administrativ</string>
+<string name="amenity_type_administrative">Administrativt</string>
 <string name="amenity_type_barrier">Barriär</string>
 <string name="amenity_type_education">Utbildning</string>
 <string name="amenity_type_emergency">Olyckshändelse</string>
@@ -561,7 +561,7 @@
 <string name="amenity_type_military">Militärt</string>
 <string name="amenity_type_natural">Naturligt</string>
 <string name="amenity_type_office">Kontor</string>
-<string name="amenity_type_other">Andra</string>
+<string name="amenity_type_other">Annat</string>
 <string name="amenity_type_shop">Affär</string>
 <string name="amenity_type_sport">Sport</string>
 <string name="amenity_type_sustenance">Näring</string>
@@ -736,8 +736,8 @@
 	<string name="menu_mute_off">Ljudet är på</string>
 	<string name="menu_mute_on">Ljudet är av</string>
 	<string name="voice_provider_descr">Välj röstvägledning för navigering</string>
-	<string name="tip_location_sharing_t">"→ Du kan dela med dig av intressanta platser på resan med familj eller vänner.↵\n→ För att dela dig av en plats behöver du:↵\n→ Använd \'Karta snabbmenyn\'-&gt;\'Dela plats\'-menyn.↵\n→ Välj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
-	<string name="tip_favorites_t">→ Platser som du använder ofta kan sparas som favoriter.↵\n→ Om du vill spara en plats som favorit gå till kartans snabbmenyn, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.↵\n→ Långt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.↵\n→ Om du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
+	<string name="tip_location_sharing_t">"→ Du kan dela med dig av intressanta platser på din resa med familj eller vänner.↵\n→ För att dela med dig av en plats behöver du:↵\n→ Använd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.↵\n→ Välj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
+	<string name="tip_favorites_t">→ Platser som du använder ofta kan sparas som favoriter.↵\n→ Om du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.↵\n→ Långt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.↵\n→ Om du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata…</string>
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
@@ -883,11 +883,11 @@
 	<string name="osb_add_dialog_title">Skriv in buggtext</string>
 	<string name="osb_add_dialog_success">Bugg har skapats</string>
 	<string name="osb_add_dialog_error">Ett undantagsfel inträffade: bugg skapades inte</string>
-	<string name="osb_comment_menu_item">Lägg till kommentar</string>
+	<string name="osb_comment_menu_item">Lägg till en kommentar</string>
 	<string name="osb_comment_dialog_message">Meddelande</string>
 	<string name="osb_comment_dialog_author">Författarnamn</string>
 	<string name="osb_comment_dialog_title">Lägger till kommentar till bugg</string>
-	<string name="osb_comment_dialog_add_button">Lägg till kommentar</string>
+	<string name="osb_comment_dialog_add_button">Lägg till rn kommentar</string>
 	<string name="osb_comment_dialog_success">Kommentaren lades till utan problem</string>
 	<string name="osb_comment_dialog_error">Ett undantagsfel inträffade: kommentaren lades inte till</string>
 	<string name="osb_close_menu_item">Stäng bugg</string>
@@ -897,7 +897,7 @@
 	<string name="osb_close_dialog_error">Ett undantagsfel inträffade: buggen stängdes inte</string>
 	<string name="poi_edit_title">Redigera POI</string>
 	<string name="poi_create_title">Skapa POI</string>
-	<string name="poi_error_poi_not_found">Noden kan inte hittas eller rekreationsområdet är inte en enda nod</string>
+	<string name="poi_error_poi_not_found">Noden kan inte hittas eller bekvämligheten är inte en enda nod</string>
 	<string name="poi_remove_confirm_template">Ta bort {0} (ange kommentar)?</string>
 	<string name="poi_remove_title">Ta bort POI</string>
 	<string name="default_buttons_delete">Ta bort</string>
@@ -974,7 +974,7 @@
     <string name="delete_target_point">Ta bort waypoint</string>
 	<string name="intermediate_point">Waypoint %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="local_index_descr_title">Hantera offline-data</string>
+	<string name="local_index_descr_title">Hantera data</string>
 	<string name="incomplete_locale">ofullständig</string>
 	<string name="search_osm_nominatim">Sök adress med OSM Nominatim</string>
 	<string name="max_level_download_tile">Max. online-zoom</string>
@@ -1069,6 +1069,6 @@
 	<string name="incremental_search_street">Sök gator stegvis</string>
 	<string name="incremental_search_building">Sök byggnader stegvis</string>
 	<string name="show_view_angle">Visa körriktning</string>
-	<string name="Closest_Amenities">Närmaste inrättningar</string>
+	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	</resources>
