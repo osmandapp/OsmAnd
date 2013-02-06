@@ -672,7 +672,7 @@ public class MapActivityActions implements DialogProvider {
     public void navigateUsingGPX(final ApplicationMode appMode) {
 		final LatLon endForRouting = mapActivity.getPointToNavigate();
 		final MapActivityLayers mapLayers = mapActivity.getMapLayers();
-		mapLayers.selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
+		mapLayers.selectGPXFileLayer(false, false, false, new CallbackWithObject<GPXFile>() {
 			
 			@Override
 			public boolean processResult(final GPXFile result) {
@@ -726,7 +726,7 @@ public class MapActivityActions implements DialogProvider {
 				builder.show();
 				return true;
 			}
-		}, false, false);
+		});
 	}
     
     private ApplicationMode getAppMode(ToggleButton[] buttons, OsmandSettings settings){

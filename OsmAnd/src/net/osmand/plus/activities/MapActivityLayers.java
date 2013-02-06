@@ -348,7 +348,7 @@ public class MapActivityLayers {
 	
 	public void showGPXFileLayer(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
-		selectGPXFileLayer(new CallbackWithObject<GPXFile>() {
+		selectGPXFileLayer(true, true, true, new CallbackWithObject<GPXFile>() {
 			@Override
 			public boolean processResult(GPXFile result) {
 				GPXFile toShow = result;
@@ -375,13 +375,75 @@ public class MapActivityLayers {
 				mapView.refreshMap();
 				return true;
 			}
-		}, true, true);
+		});
 	}
 	
-	public void selectGPXFileLayer(final CallbackWithObject<GPXFile> callbackWithObject, final boolean convertCloudmade,
-			final boolean showCurrentGpx) {
-		final List<String> list = new ArrayList<String>();
+	public void selectGPXFileLayer(final boolean convertCloudmade,
+			final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile> callbackWithObject) {
 		final File dir = getApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+		final List<String> list = getSortedGPXFilenames(dir);
+		if(list.isEmpty()){
+			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
+		}
+		if(!list.isEmpty() || showCurrentGpx){
+			Builder builder = new AlertDialog.Builder(activity);
+			if(showCurrentGpx){
+				list.add(0, getString(R.string.show_current_gpx_title));
+			}
+			String[] items = list.toArray(new String[list.size()]);
+			if (multipleChoice) {
+				final boolean[] selected = new boolean[items.length];
+				builder.setMultiChoiceItems(items, selected, new DialogInterface.OnMultiChoiceClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+						selected[which] = isChecked;
+					}
+				});
+				builder.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						if (showCurrentGpx && selected[0]) {
+							callbackWithObject.processResult(null);
+						} else {
+							List<String> s = new ArrayList<String>();
+							for (int i = 0; i < selected.length; i++) {
+								if (selected[i]) {
+									s.add(list.get(i));
+								}
+							}
+							loadGPXFileInDifferentThread(callbackWithObject, convertCloudmade, dir, s.toArray(new String[s.size()]));
+						}
+					}
+				});
+			} else {
+				builder.setItems(items, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						if (showCurrentGpx && which == 0) {
+							callbackWithObject.processResult(null);
+						} else {
+							loadGPXFileInDifferentThread(callbackWithObject, convertCloudmade,  dir, list.get(which));
+						}
+					}
+				});
+			}
+			
+			AlertDialog dlg = builder.show();
+			try {
+				dlg.getListView().setFastScrollEnabled(true);
+			} catch(Exception e) {
+				// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
+				// Unknown reason but on some devices fail
+			}
+		}
+	}
+
+	private List<String> getSortedGPXFilenames(File dir) {
+		final List<String> list = new ArrayList<String>();
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
@@ -405,56 +467,40 @@ public class MapActivityLayers {
 				}
 			}
 		}
-		
-		if(list.isEmpty()){
-			AccessibleToast.makeText(activity, R.string.gpx_files_not_found, Toast.LENGTH_LONG).show();
-		}
-		if(!list.isEmpty() || showCurrentGpx){
-			Builder builder = new AlertDialog.Builder(activity);
-			if(showCurrentGpx){
-				list.add(0, getString(R.string.show_current_gpx_title));
-			}
-			builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-					if(showCurrentGpx && which == 0){
-						callbackWithObject.processResult(null);
-					} else {
-						final ProgressDialog dlg = ProgressDialog.show(activity, getString(R.string.loading),
-								getString(R.string.loading_data));
-						final File f = new File(dir, list.get(which));
-						new Thread(new Runnable() {
-							@Override
-							public void run() {
-								final GPXFile res = GPXUtilities.loadGPXFile(activity.getMyApplication(), f, convertCloudmade);
-								dlg.dismiss();
-								activity.runOnUiThread(new Runnable() {
-									@Override
-									public void run() {
-										if (res.warning != null) {
-											AccessibleToast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
-										} else {
-											callbackWithObject.processResult(res);
-										}
-									}
-								});
-							}
-
-						}, "Loading gpx").start(); //$NON-NLS-1$
-					}
+		return list;
+	}
+	
+	private void loadGPXFileInDifferentThread(final CallbackWithObject<GPXFile> callbackWithObject,
+			final boolean convertCloudmade, final File dir, final String... filename) {
+		final ProgressDialog dlg = ProgressDialog.show(activity, getString(R.string.loading),
+				getString(R.string.loading_data));
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				GPXFile r = null; 
+				for(String fname : filename) {
+					final File f = new File(dir, fname);
+					GPXFile res = GPXUtilities.loadGPXFile(activity.getMyApplication(), f, convertCloudmade);
+					GPXUtilities.mergeGPXFileInto(res, r);
+					r = res;
 				}
-
-			});
-			AlertDialog dlg = builder.show();
-			try {
-				dlg.getListView().setFastScrollEnabled(true);
-			} catch(Exception e) {
-				// java.lang.ClassCastException: com.android.internal.widget.RoundCornerListAdapter
-				// Unknown reason but on some devices fail
+				final GPXFile res = r;
+				if (res != null) {
+					dlg.dismiss();
+					activity.runOnUiThread(new Runnable() {
+						@Override
+						public void run() {
+							if (res.warning != null) {
+								AccessibleToast.makeText(activity, res.warning, Toast.LENGTH_LONG).show();
+							} else {
+								callbackWithObject.processResult(res);
+							}
+						}
+					});
+				}
 			}
-		}
+
+		}, "Loading gpx").start(); //$NON-NLS-1$
 	}
 	
 	private void selectPOIFilterLayer(final OsmandMapTileView mapView){

@@ -41,7 +41,7 @@ public class RouteAnimation {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					ma.getMapLayers().selectGPXFileLayer(new CallbackWithObject<GPXUtilities.GPXFile>() {
+					ma.getMapLayers().selectGPXFileLayer(true, false, false, new CallbackWithObject<GPXUtilities.GPXFile>() {
 						
 						@Override
 						public boolean processResult(GPXUtilities.GPXFile result) {
@@ -50,7 +50,7 @@ public class RouteAnimation {
 							startAnimationThread(routingHelper, ma, prms.points, true, speedup.getProgress() + 1);
 							return true;
 						}
-					}, true, false);
+					});
 					
 				}
 			});

@@ -33,7 +33,6 @@ public class YandexTrafficAdapter  extends MapTileAdapter {
 	
 	@Override
 	public void onInit() {
-		AccessibleToast.makeText(view.getContext(), R.string.thanks_yandex_traffic, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override

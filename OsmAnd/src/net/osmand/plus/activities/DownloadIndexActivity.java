@@ -78,7 +78,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private static final int SELECT_ALL_ID = 1;
 	private static final int DESELECT_ALL_ID = 2;
 	private static final int FILTER_EXISTING_REGIONS = 3;
-	private static final int DOWNLOAD_FILES_TYPE = 4;
 	
 	/** dialogs **/
 	public static final int DIALOG_MAP_VERSION_UPDATE = 0;
@@ -237,7 +236,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 			menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 			menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
-			menu.add(0, DOWNLOAD_FILES_TYPE, 0, R.string.download_select_map_types);
 		}
 		return true;
 	}
@@ -294,8 +292,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 				listAdapter.setIndexFiles(filtered, IndexItemCategory.categorizeIndexItems(getClientContext(), filtered));
 				listAdapter.notifyDataSetChanged();
-			} else if (item.getItemId() == DOWNLOAD_FILES_TYPE) {
-				selectDownloadType();
 			} else if(item.getItemId() == DESELECT_ALL_ID){
 				entriesToDownload.clear();
 				listAdapter.notifyDataSetInvalidated();
@@ -308,7 +304,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 
 
-	private void selectDownloadType() {
+	public void selectDownloadType() {
 		Builder bld = new AlertDialog.Builder(this);
 		final DownloadActivityType[] items = getDownloadTypes();
 		bld.setItems(toString(items), new DialogInterface.OnClickListener() {
