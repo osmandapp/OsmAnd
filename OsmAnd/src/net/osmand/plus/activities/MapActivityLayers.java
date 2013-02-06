@@ -489,8 +489,8 @@ public class MapActivityLayers {
 					r = res;
 				}
 				final GPXFile res = r;
+				dlg.dismiss();
 				if (res != null) {
-					dlg.dismiss();
 					activity.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {

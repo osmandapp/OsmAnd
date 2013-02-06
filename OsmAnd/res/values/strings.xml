@@ -40,7 +40,9 @@
     <string name="av_video_format_descr">Select video output format</string>
     <string name="av_video_format">Video output format</string>
     <string name="av_use_external_recorder_descr">Use system recorder for video</string>
-    <string name="av_use_external_recorder">Use external recorder</string>
+    <string name="av_use_external_recorder">Use system recorder</string>
+    <string name="av_use_external_camera_descr">Use system application for photo</string>
+    <string name="av_use_external_camera">Use camera app</string>
     <string name="av_settings_descr">Configure audio and video settings</string>
     <string name="av_settings">Audio/video settings </string>
     <string name="recording_error">Error ocurred while recording </string>

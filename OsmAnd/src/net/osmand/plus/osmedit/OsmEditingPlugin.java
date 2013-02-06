@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.EnumAdapter;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexesActivity;
+import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
@@ -180,13 +181,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	@Override
 	public void contextMenuLocalIndexes(final LocalIndexesActivity la, final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		adapter.registerItem(R.string.local_index_mi_upload_gpx, 0, new OnContextMenuClick() {
-			
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				sendGPXFiles(la, info);
-			}
-		}, 0);
+		if (info.getType() == LocalIndexType.GPX_DATA) {
+			adapter.registerItem(R.string.local_index_mi_upload_gpx, 0, new OnContextMenuClick() {
+
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					sendGPXFiles(la, info);
+				}
+			}, 0);
+		}
 	}
 	
 	@Override

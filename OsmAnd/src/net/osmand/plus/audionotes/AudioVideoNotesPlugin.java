@@ -2,6 +2,7 @@ package net.osmand.plus.audionotes;
 
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -56,6 +57,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapFactory.Options;
 import android.graphics.Matrix;
 import android.hardware.Camera;
+import android.hardware.Camera.AutoFocusCallback;
+import android.hardware.Camera.Parameters;
+import android.hardware.Camera.PictureCallback;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -590,6 +594,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			mediaRec = null;
 		}
 		setRecordListener(recordControl, mapActivity);
+		app.getSettings().SHOW_RECORDINGS.set(true);
 	}
 	
 	
@@ -609,7 +614,101 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		
 	}
 	
-	public void takePhoto(double lat, double lon, final MapActivity mapActivity) {
+	public void takePhoto(final double lat, final double lon, final MapActivity mapActivity) {
+		if (app.getSettings().AV_EXTERNAL_PHOTO_CAM.get()) {
+			takeIntentPhoto(lat, lon, mapActivity);
+		} else {
+			final Camera cam = openCamera();
+			if (cam != null) {
+				takePhotoWithCamera(lat, lon, mapActivity, cam);
+			} else {
+				takeIntentPhoto(lat, lon, mapActivity);
+			}
+		}
+	}
+
+
+	private void takePhotoWithCamera(final double lat, final double lon, final MapActivity mapActivity, final Camera cam) {
+		try {
+			final Dialog dlg = new Dialog(mapActivity);
+			SurfaceView view = new SurfaceView(dlg.getContext());
+			view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+			view.getHolder().addCallback(new Callback() {
+				
+				@Override
+				public void surfaceDestroyed(SurfaceHolder holder) {
+				}
+				
+				public void setCameraDisplayOrientation(android.hardware.Camera camera) {
+					// android.hardware.Camera.CameraInfo info =
+					// new android.hardware.Camera.CameraInfo();
+					// android.hardware.Camera.getCameraInfo(cameraId, info);
+					int rotation = mapActivity.getWindowManager().getDefaultDisplay().getRotation();
+					int degrees = 0;
+					switch (rotation) {
+					case /*Surface.ROTATION_0*/ 0:
+						degrees = 0;
+						break;
+					case /*Surface.ROTATION_90*/ 1:
+						degrees = 90;
+						break;
+					case /*Surface.ROTATION_180*/ 2:
+						degrees = 180;
+						break;
+					case /*Surface.ROTATION_270*/ 3:
+						degrees = 270;
+						break;
+					}
+
+					// if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+					// result = (info.orientation + degrees) % 360;
+					// result = (360 - result) % 360; // compensate the mirror
+					// } else { // back-facing
+					// result = (info.orientation - degrees + 360) % 360;
+					// }
+					camera.setDisplayOrientation(degrees);
+				}
+				
+				@Override
+				public void surfaceCreated(SurfaceHolder holder) {
+					try {
+						Parameters parameters = cam.getParameters();
+						parameters.setGpsLatitude(lat);
+						parameters.setGpsLongitude(lon);
+						parameters.set("focus-mode", "auto");
+						setCameraDisplayOrientation(cam);
+						cam.setParameters(parameters);
+						cam.setPreviewDisplay(holder);
+						cam.startPreview();
+						cam.autoFocus(new AutoFocusCallback() {
+							
+							@Override
+							public void onAutoFocus(boolean success, Camera camera) {
+								cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, getBaseFileName(lat, lon, app, IMG_EXTENSION)));
+							}
+						});
+						
+					} catch (Exception e) {
+						logErr(e);
+						cam.release();
+						e.printStackTrace();
+					}
+				}
+
+				@Override
+				public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+				}
+			});
+			dlg.setContentView(view);
+			dlg.show();
+		} catch (RuntimeException e) {
+			logErr(e);
+			cam.release();
+		}
+	}
+
+
+	private void takeIntentPhoto(double lat, double lon, final MapActivity mapActivity) {
 		Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 		final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
 		lastTakingPhoto = f;
@@ -620,9 +719,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			log.error("Error taking a picture ", e);
 			AccessibleToast.makeText(app, app.getString(R.string.recording_error) + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
-		
 	}
-
+	
 	private void runMediaRecorder(final MapActivity mapActivity, MediaRecorder mr, final File f) throws IOException {
 		mr.prepare();
 		mr.start();
@@ -744,6 +842,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
+		String[] entries;
+		Integer[] intValues ;
 		PreferenceGroup grp = screen.getPreferenceManager().createPreferenceScreen(activity);
 		grp.setSummary(R.string.av_settings_descr);
 		grp.setTitle(R.string.av_settings);
@@ -751,15 +851,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		screen.addPreference(grp);
 		OsmandSettings settings = app.getSettings();
 		
-		grp.addPreference(activity.createCheckBoxPreference(settings.AV_EXTERNAL_RECORDER, 
-				R.string.av_use_external_recorder, R.string.av_use_external_recorder_descr));
-		
-		String[] entries = new String[] {"3GP", "MP4"};
-		Integer[] intValues = new Integer[] {OsmandSettings.VIDEO_OUTPUT_3GP, OsmandSettings.VIDEO_OUTPUT_MP4};
-		ListPreference lp = activity.createListPreference(settings.AV_VIDEO_FORMAT, 
-				entries, intValues, R.string.av_video_format, R.string.av_video_format_descr);
-		grp.addPreference(lp);
-		
+
 		entries = new String[] {app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
 				app.getString(R.string.av_def_action_picture)};
 		intValues = new Integer[] {OsmandSettings.AV_DEFAULT_ACTION_AUDIO, OsmandSettings.AV_DEFAULT_ACTION_VIDEO,
@@ -768,6 +860,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				entries, intValues, R.string.av_widget_action, R.string.av_widget_action_descr);
 		grp.addPreference(defAct);
 		
+	
+		
+		grp.addPreference(activity.createCheckBoxPreference(settings.AV_EXTERNAL_RECORDER, 
+				R.string.av_use_external_recorder, R.string.av_use_external_recorder_descr));
+		grp.addPreference(activity.createCheckBoxPreference(settings.AV_EXTERNAL_PHOTO_CAM, 
+				R.string.av_use_external_camera, R.string.av_use_external_camera_descr));
+		
+		entries = new String[] {"3GP", "MP4"};
+		intValues = new Integer[] {OsmandSettings.VIDEO_OUTPUT_3GP, OsmandSettings.VIDEO_OUTPUT_MP4};
+		ListPreference lp = activity.createListPreference(settings.AV_VIDEO_FORMAT, 
+				entries, intValues, R.string.av_video_format, R.string.av_video_format_descr);
+		grp.addPreference(lp);
 	}
 	
 	@Override
@@ -955,5 +1059,31 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		return false;
 	}
+	
+	public class AudioVideoPhotoHandler implements PictureCallback {
+		private File pictureFile;
+		private Dialog dlg;
+
+		public AudioVideoPhotoHandler(Dialog dlg, File fileName) {
+			this.dlg = dlg;
+			this.pictureFile = fileName;
+		}
+
+		@Override
+		public void onPictureTaken(byte[] data, Camera camera) {
+			try {
+				FileOutputStream fos = new FileOutputStream(pictureFile);
+				fos.write(data);
+				fos.close();
+				indexingFiles(null, true);
+				dlg.dismiss();
+			} catch (Exception error) {
+				logErr(error);
+			} finally {
+				camera.release();
+			}
+		}
+
+	} 
 
 }
