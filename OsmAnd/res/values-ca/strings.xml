@@ -1042,7 +1042,6 @@
     <string name="incremental_search_city">Cerca progressiva de municipis</string>
     <string name="safe_mode_description">Executa l\'aplicació en mode segur (usant codi d\'Android, més lent que el codi nadiu).</string>
     <string name="delete_target_point">Elimina el punt de ruta</string>
-	<string name="intermediate_point"/>
     <string name="download_srtm_maps">Dades de corbes de nivell</string>
     <string name="osmodroid_plugin_old_ver_not_supported">El connector OsMoDroid és d\'una versió antiga i cal actualitzar-lo.</string>
     <string name="incomplete_locale">incomplet</string>
