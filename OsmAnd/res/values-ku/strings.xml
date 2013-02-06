@@ -1,3 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>    
-	</resources>
+	<string name="dist_control_start">دەستپێکه</string>
+    <string name="local_indexes_cat_av">زانیاری دەنگ/ڤیدیۆ</string>
+    <string name="stop_routing_confirm">دڵنیای له وەی که ئه ته وێت ناڤیگێشن راگریت</string>
+    <string name="recording_context_menu_show">پشاندە</string>
+    <string name="av_def_action_picture">ڕسمه ك بگرە</string>
+    <string name="recording_context_menu_precord">ڕسمه ك بگرە</string>
+    <string name="av_def_action_video">ڤیدیۆ تۆمارکه</string>
+    <string name="av_def_action_audio">دەنگ تۆمارکه</string>
+    <string name="recording_camera_not_available">کامێرا له به رده ست نيه</string>
+    </resources>
