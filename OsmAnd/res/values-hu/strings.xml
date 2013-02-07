@@ -1155,4 +1155,6 @@
     <string name="tip_recent_changes_1_1_2_t">"Változtatások az 1.1.2 verzióban:\n\t* Audio/videó bővítmény fejlesztések (fényképezés EXIF adatokkal)
 \n\t* Jobban használható, átalakított Szintvonal bővítmény\n\t* Domborzatárnyékolás csomagok a Szintvonal bővítményhez\n\t* Hibajavítások (útvonaltervezés optimalizáció) "</string>
     <string name="support_new_features_descr">Adományozz, hogy új funkciók kerülhessenek az alkalmazásba</string>
-	</resources>
+	<string name="av_use_external_camera_descr">Rendszeralkalmazás használata fotózáshoz</string>
+    <string name="av_use_external_camera">Kamera alkalmazás használata</string>
+    </resources>
