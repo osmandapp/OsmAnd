@@ -132,4 +132,5 @@
     <string name="av_settings">"Ses/Vidyo ayarları "</string>
     <string name="recording_error">"Kaydedilirken hata oluştu "</string>
     <string name="recording_camera_not_available">Kamera kullanılabilir değil.</string>
+    <string name="dist_control_start">Başlat</string>
     </resources>
