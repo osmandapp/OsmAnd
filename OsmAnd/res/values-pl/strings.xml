@@ -1097,8 +1097,8 @@
     <string name="av_widget_action">Domyślna akcja widżetu</string>
     <string name="av_video_format_descr">Wybierz format wideo</string>
     <string name="av_video_format">Format wideo</string>
-    <string name="av_use_external_recorder_descr">Użyj kamery systemowej</string>
-    <string name="av_use_external_recorder">Użyj zewnętrznej kamery</string>
+    <string name="av_use_external_recorder_descr">Użyj kamery systemowej do nagrywania filmów</string>
+    <string name="av_use_external_recorder">Użyj systemowej kamery</string>
     <string name="av_settings_descr">Konfiguruj ustawienia dźwięku i obrazu</string>
     <string name="av_settings">"Ustawienia obrazu/dźwięku "</string>
     <string name="recording_error">"Wystąpił błąd podczas nagrywania "</string>
@@ -1155,6 +1155,6 @@
 \n\t* Poprawki błędów i nawigacji "</string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
     <string name="download_hillshade_item">"Cieniowanie "</string>
-    <string name="av_use_external_camera_descr">Używaj aplikacji systemowej do robienia zdjęć</string>
-    <string name="av_use_external_camera">Używaj aplikacji aparatu</string>
+    <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
+    <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
     </resources>
