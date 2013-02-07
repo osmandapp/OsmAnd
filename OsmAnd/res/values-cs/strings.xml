@@ -565,7 +565,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">sekund</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Vyberte interval pro zaměřování polohy pro službu na pozadí </string>
+  <string name="background_service_int_descr">Vyberte interval pro zaměřování polohy pro službu na pozadí</string>
   <string name="background_service_int">Interval zaměřování</string>
   <string name="background_service_provider_descr">Vybrat poskytovatele polohy pro službu na pozadí</string>
   <string name="background_service_provider">Poskytovatel polohy</string>
@@ -878,7 +878,7 @@
   <string name="osmand_development_plugin_description">Pokročilá nastavení vývojových a ladících funkcí jako jsou simulace navigace nebo informace o rychlosti vykreslování.</string>
   <string name="plugins_screen">Správce modulů</string>
   <string name="select_plugin_to_activate">Kliknutím modul zapnete nebo vypnete. (V některých případech je třeba aplikaci restartovat.)</string>
-  <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a poskytnout přídavné funkce jako: záznam trasy, rastrové mapy, běh na pozadí, usnadnění a další.</string>
+  <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a přídavné funkce</string>
   <string name="prefs_plugins">Moduly</string>
   <string name="tip_recent_changes_0_8_0_t">"Změny ve verzi 0.8.0 :
 \n\t- *Moduly*\n\t- Většina funkcí je uspořádána do skupin, které mohou být zapnuty/vypnuty ve správci modulů. Skupiny: mapová data (online nebo uložená), sledování pozice a mnoho dalších dřívějších funkcí\n\t- *Podpora nového formátu offline map*\n\t- Rychlejší a přesnější vykreslování mapy (problémy s pobřežím a vodní hladinou z větší části vyřešeny)\n\t- Pokud používáte offline mapy, musíte stahnout kompletně nová data, stará nejsou více podporována\n\t- *Offline navigace*\n\t- Robustnější offline navigace\n\t- *Zlepšeno uživatelské rozhraní*\n\t- Opraveno mnoho chyb "</string>
@@ -1191,4 +1191,6 @@
     <string name="precise_routing_mode">Přesná navigace (alfa)</string>
     <string name="dist_control_start">Start</string>
     <string name="support_new_features_descr">Prosím sponzorujte vývoj nových funkcí v aplikaci</string>
-	</resources>
+	<string name="av_use_external_camera_descr">Použít externí aplikaci pro fotografování</string>
+    <string name="av_use_external_camera">Externí foto aplikace</string>
+    </resources>
