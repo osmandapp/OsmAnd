@@ -1203,4 +1203,6 @@
     <string name="tip_recent_changes_1_1_2_t">Changements dans 1.1.2:
 \n\t* Amélioration du greffon audio/video plugin (photos avec les informations EXIF)
 \n\t* Correction sur l\'utilisabilité et restructuration du greffon des courbes de niveau\n\t* Ombrage des reliefs pour le greffon des courbes de niveau\n\t* Corrections d\'erreurs (routage sous-optimal)</string>
+    <string name="av_use_external_camera_descr">Utiliser l\'application système pour les photos</string>
+    <string name="av_use_external_camera">Utiliser l\'appareil photo</string>
     </resources>
