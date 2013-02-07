@@ -43,6 +43,7 @@ import net.osmand.plus.views.MapStackControl;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TextInfoControl;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapAlgorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -244,21 +245,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String additional = "";
 			if(duration > 0) {
 				int d = (int) (duration / 1000);
-				
-				String min;
-				if(d % 60 < 10 ) {
-					min = "0" + (d % 60);
-				} else {
-					min = (d % 60) +"";
-				}
-				additional +=  (d / 60) + ":" + min ;
+				additional += Algorithms.formatDuration(d);
 			}
 			if(!available) {
 				additional += "("+ctx.getString(R.string.recording_unavailable)+")";
 			}
 			return additional;
 		}
-		
+
 		
 	}
 	
