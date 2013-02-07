@@ -80,7 +80,7 @@ public class EditingPOIActivity implements DialogProvider {
 	private static final String KEY_AMENITY_NODE = "amenity_node";
 	private static final String KEY_AMENITY = "amenity";
 
-	private Bundle dialogBundle = new Bundle();
+	private static Bundle dialogBundle = new Bundle();
 	private OsmandSettings settings;
 	
 
@@ -173,11 +173,9 @@ public class EditingPOIActivity implements DialogProvider {
 		return builder.create();
 	}
 
-	private void preparePOIDialog(Dialog dlg, Bundle args, int title) {
+	private void preparePOIDialog(int dialogId, Dialog dlg, Bundle args, int title) {
 		Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-		if(a == null){
-			a = new Amenity(); 
-		}
+		Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 		dlg.setTitle(title);
 		EditText nameText = ((EditText)dlg.findViewById(R.id.Name));
 		nameText.setText(a.getName());
@@ -190,6 +188,7 @@ public class EditingPOIActivity implements DialogProvider {
 		final TableLayout layout = ((TableLayout)dlg.findViewById(R.id.advancedModeTable));
 		layout.setVisibility(View.GONE);
 		updateType(a);
+		attachListeners(dialogId, dlg, a, n);
 	}
 	
 	private void addTagValueRow(final Node n, final TableLayout layout, String tg, String vl) {
@@ -313,7 +312,12 @@ public class EditingPOIActivity implements DialogProvider {
 		});
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
 		
+//		attachListeners(dialogID, dlg, a, n);
 		
+		return dlg;
+	}
+
+	private void attachListeners(final int dialogID, final Dialog dlg, final Amenity a, final Node n) {
 		// DO NOT show on focus with empty text predefined list of subcategories - problems when rotating
 		typeText.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -466,8 +470,6 @@ public class EditingPOIActivity implements DialogProvider {
 				});
 			}
 		});
-		
-		return dlg;
 	}
 
 	private void showSubCategory(Amenity a) {
@@ -637,10 +639,10 @@ public class EditingPOIActivity implements DialogProvider {
 		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_CREATE_POI:
-				preparePOIDialog(dialog,args,R.string.poi_create_title);
+				preparePOIDialog(id, dialog,args,R.string.poi_create_title);
 				break;
 			case DIALOG_EDIT_POI:
-				preparePOIDialog(dialog,args,R.string.poi_edit_title);
+				preparePOIDialog(id, dialog,args,R.string.poi_edit_title);
 				break;
 			case DIALOG_DELETE_POI:
 				prepareDeleteDialog(dialog,args);
