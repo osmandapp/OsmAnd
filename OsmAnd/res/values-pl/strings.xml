@@ -1153,6 +1153,6 @@
 \n\t* Poprawki w funkcjonalności wtyczki kontur
 \n\t* Paczki cieniowania wzgórz dla wtyczki kontur
 \n\t* Poprawki błędów i nawigacji "</string>
-    <string name="download_hillshade_maps">Mapy cieniowania</string>
+    <string name="download_hillshade_maps">Warstwy cieniujące</string>
     <string name="download_hillshade_item">"Cieniowanie "</string>
     </resources>
