@@ -1155,4 +1155,6 @@
 \n\t* Poprawki błędów i nawigacji "</string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
     <string name="download_hillshade_item">"Cieniowanie "</string>
+    <string name="av_use_external_camera_descr">Używaj aplikacji systemowej do robienia zdjęć</string>
+    <string name="av_use_external_camera">Używaj aplikacji aparatu</string>
     </resources>
