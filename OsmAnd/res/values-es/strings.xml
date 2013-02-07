@@ -1103,7 +1103,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="animate_routing_using_gpx">¿Quieres usar un archivo GPX existente?</string>
     <string name="intermediate_points_change_order">Cambiar orden</string>
     <string name="recording_context_menu_show">Mostrar</string>
-    <string name="recording_photo_description">Foto %1$s en %2$s</string>
+    <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Hacer una foto</string>
     <string name="recording_context_menu_precord">Hacer una foto</string>
     <string name="stop_routing_confirm">¿Seguro que quieres parar la navegación?</string>
