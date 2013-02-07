@@ -1209,4 +1209,5 @@
 \n\t* pacchetti di ombreggimento dei rilievi per il plugin per le linee di contorno
 \n\t* correzioni di errori (routing non ottimali) "</string>
     <string name="support_new_features_descr">Fai una donazione per vedere nuove funzionalità implementate nell\'applicazione</string>
-	</resources>
+	<string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto</string>
+    </resources>
