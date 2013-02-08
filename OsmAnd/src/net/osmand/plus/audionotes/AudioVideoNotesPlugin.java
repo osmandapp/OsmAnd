@@ -625,6 +625,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void takePhotoWithCamera(final double lat, final double lon, final MapActivity mapActivity, final Camera cam) {
 		try {
 			final Dialog dlg = new Dialog(mapActivity);
+			final File f = getBaseFileName(lat, lon, app, IMG_EXTENSION);
+			lastTakingPhoto = f;
 			SurfaceView view = new SurfaceView(dlg.getContext());
 			view.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 			view.getHolder().addCallback(new Callback() {
@@ -633,7 +635,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				public void surfaceDestroyed(SurfaceHolder holder) {
 				}
 				
-				public void setCameraDisplayOrientation(android.hardware.Camera camera) {
+				public void setCameraDisplayOrientation(android.hardware.Camera camera, Parameters parameters) {
 					// android.hardware.Camera.CameraInfo info =
 					// new android.hardware.Camera.CameraInfo();
 					// android.hardware.Camera.getCameraInfo(cameraId, info);
@@ -660,7 +662,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					// } else { // back-facing
 					// result = (info.orientation - degrees + 360) % 360;
 					// }
-					camera.setDisplayOrientation(degrees);
+					// API 8
+					// camera.setDisplayOrientation((90 + 360 - degrees) % 360);
+					parameters.set("rotation", (90 + 360 - degrees) % 360);
 				}
 				
 				@Override
@@ -670,7 +674,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						parameters.setGpsLatitude(lat);
 						parameters.setGpsLongitude(lon);
 						parameters.set("focus-mode", "auto");
-						setCameraDisplayOrientation(cam);
+						setCameraDisplayOrientation(cam, parameters);
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
 						cam.startPreview();
@@ -678,7 +682,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 							
 							@Override
 							public void onAutoFocus(boolean success, Camera camera) {
-								cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, getBaseFileName(lat, lon, app, IMG_EXTENSION)));
+								cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, f));
 							}
 						});
 						
