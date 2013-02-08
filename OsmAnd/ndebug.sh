@@ -1,4 +1,16 @@
 #!/bin/bash
+THIS_LOCATION="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Get native library path on host
+nativelib=$1
+if [ -z "$nativelib" ]; then
+	echo "Native library was not specified"
+	exit 1
+fi
+if [ ! -f "$nativelib" ]; then
+	echo "Specified '$nativelib' native library can not be found."
+	exit 1
+fi
 
 # Get pid of our process
 pid=`adb shell ps | grep 'net.osmand' | head -n1 | awk '{print $2}'`
@@ -10,4 +22,6 @@ echo "OsmAnd pid: $pid"
 adb shell run-as $package /data/data/$package/lib/gdbserver :5039 --attach $pid &
 
 # Launch gdb on host
-"$ANDROID_NDK/toolchains/arm-linux-androideabi-4.7/prebuilt/windows/bin/arm-linux-androideabi-gdb" 
+echo "Execute in gdb following line manually"
+echo "\ttarget remote :5039"
+"$ANDROID_NDK/toolchains/arm-linux-androideabi-4.7/prebuilt/windows/bin/arm-linux-androideabi-gdb" $nativelib
