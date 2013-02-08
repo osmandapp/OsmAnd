@@ -209,7 +209,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 
 	public synchronized void removeLayer(OsmandMapLayer layer) {
-		layers.remove(layer);
+		while(layers.remove(layer));
 		zOrders.remove(layer);
 		layer.destroyLayer();
 	}

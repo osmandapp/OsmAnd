@@ -398,14 +398,17 @@ public class ResourceManager {
 		file.mkdirs();
 		List<String> warnings = new ArrayList<String>();
 		if (file.exists() && file.canRead()) {
-			for (File f : file.listFiles()) {
-				if(f.isDirectory()) {
-					File conf = new File(f, "_config.p");
-					if(!conf.exists()) {
-						conf = new File(f, "_ttsconfig.p");
-					}
-					if(conf.exists()) {
-						indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(conf.lastModified()))); //$NON-NLS-1$
+			File[] lf = file.listFiles();
+			if (lf != null) {
+				for (File f : lf) {
+					if (f.isDirectory()) {
+						File conf = new File(f, "_config.p");
+						if (!conf.exists()) {
+							conf = new File(f, "_ttsconfig.p");
+						}
+						if (conf.exists()) {
+							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(conf.lastModified()))); //$NON-NLS-1$
+						}
 					}
 				}
 			}

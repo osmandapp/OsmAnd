@@ -411,9 +411,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 			}
 		}
-		for (IndexItem file : downloadListIndexThread.getCachedIndexFiles()) {
-			if (file.getType() == type) {
-				filtered.add(file);
+		List<IndexItem> cachedIndexFiles = downloadListIndexThread.getCachedIndexFiles();
+		if (cachedIndexFiles != null) {
+			for (IndexItem file : cachedIndexFiles) {
+				if (file.getType() == type) {
+					filtered.add(file);
+				}
 			}
 		}
 		return filtered;

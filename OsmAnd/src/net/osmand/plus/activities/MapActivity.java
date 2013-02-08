@@ -1238,7 +1238,9 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				|| settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS ? OsmandSettings.BOTTOM_CONSTANT : 
 			 OsmandSettings.CENTER_CONSTANT);
 		registerUnregisterSensor(getLastKnownLocation(), false);
-		mapLayers.getMapInfoLayer().recreateControls();
+		if (mapLayers.getMapInfoLayer() != null) {
+			mapLayers.getMapInfoLayer().recreateControls();
+		}
 		mapLayers.updateLayers(mapView);
 		
 		getMyApplication().getDaynightHelper().setDayNightMode(settings.DAYNIGHT_MODE.get());

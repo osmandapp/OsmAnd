@@ -587,8 +587,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			mediaRec.release();
 			mediaRec = null;
 		}
-		setRecordListener(recordControl, mapActivity);
-		app.getSettings().SHOW_RECORDINGS.set(true);
+		if (recordControl != null) {
+			setRecordListener(recordControl, mapActivity);
+		}
 	}
 	
 	
@@ -739,6 +740,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					par.removeView(recordControl);
 				}
 				stopRecording(mapActivity);
+				app.getSettings().SHOW_RECORDINGS.set(true);
 				indexFile(f);
 				mapActivity.getMapView().refreshMap();
 			}
