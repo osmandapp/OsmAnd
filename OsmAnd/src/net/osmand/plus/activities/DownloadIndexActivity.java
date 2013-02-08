@@ -170,6 +170,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			Builder msg = new AlertDialog.Builder(this);
 			msg.setTitle(R.string.free_version_title);
 			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
+			msg.setPositiveButton(R.string.default_buttons_ok, null);
 			msg.show();
 		}
 		

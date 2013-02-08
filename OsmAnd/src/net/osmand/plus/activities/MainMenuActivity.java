@@ -280,7 +280,7 @@ public class MainMenuActivity extends Activity {
 		boolean netOsmandWasInstalled = false;
 		try {
 			ApplicationInfo applicationInfo = getPackageManager().getApplicationInfo("net.osmand", PackageManager.GET_META_DATA);
-			netOsmandWasInstalled = applicationInfo != null;
+			netOsmandWasInstalled = applicationInfo != null && !Version.isFreeVersion(getMyApplication());
 		} catch (NameNotFoundException e) {
 			netOsmandWasInstalled = false;
 		}
