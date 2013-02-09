@@ -86,7 +86,7 @@
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="index_srtm_parts">parts</string>
     <string name="index_srtm_ele">Contour lines</string>
-    <string name="srtm_plugin_description">This plugin facilitates downloading contour lines (Data Management -> Menu -> "Other maps") for use with offline maps.</string>
+    <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (Settings -> Data Management -> Download -> Select desired map type).</string>
     <string name="srtm_plugin_name">Contour lines plugin</string>
     <string name="download_select_map_types">Other maps</string>
     <string name="download_roads_only_item">Roads only</string>

@@ -1185,7 +1185,7 @@
     <string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
 	<string name="index_srtm_parts">Teile</string>
     <string name="index_srtm_ele">Höhenlinien</string>
-    <string name="srtm_plugin_description">Dieses Plugin ermöglicht das Laden von Höhenlinien (Offline Daten laden -&gt; Menu -&gt; "Andere Karten") zur Verwendung mit den Offline-Karten.</string>
+    <string name="srtm_plugin_description">Ermöglicht das Laden von Offline Höhenlinien und Relief-Schattierungen (Einstellungen -> Daten-Management -> Herunterladen -> Kartentyp wählen).</string>
     <string name="srtm_plugin_name">Höhenlinien-Plugin</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
