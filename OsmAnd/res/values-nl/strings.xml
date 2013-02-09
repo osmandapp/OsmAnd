@@ -1166,4 +1166,5 @@
     <string name="tip_recent_changes_1_1_2_t">"Veranderingen in 1.1.2:\n\t* Audio/video-plugin verbetering (foto\'s met EXIF-informatie)\n\t* Bruikbaarheid verbeterd en hoogtelijnen-plugin geherstructureerd\n\t* Reliëfschaduw-pakketten voor de hoogtelijnen-plugin\n\t* Probleemoplossingen (sub-optimale routeberekening) "</string>
     <string name="av_use_external_camera_descr">Gebruik de standaardcamera voor fotoos</string>
     <string name="av_use_external_camera">Gebruik de standaardcamera</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
     </resources>
