@@ -1205,4 +1205,5 @@
 \n\t* Correction sur l\'utilisabilité et restructuration du greffon des courbes de niveau\n\t* Ombrage des reliefs pour le greffon des courbes de niveau\n\t* Corrections d\'erreurs (routage sous-optimal)</string>
     <string name="av_use_external_camera_descr">Utiliser l\'application système pour les photos</string>
     <string name="av_use_external_camera">Utiliser l\'appareil photo</string>
+    <string name="index_name_openmaps">OpenMaps.eu</string>
     </resources>
