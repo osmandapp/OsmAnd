@@ -632,7 +632,7 @@
   <string name="close">Fermer</string>
   <string name="loading_data">Chargement des données…</string>
   <string name="reading_indexes">Lecture des index…</string>
-  <string name="previous_run_crashed">la précédente exécution l\'application s\'est arrêtée inopinément. Le fichier log se trouve à {0}. Veuillez faire part du problème et inclure le fichier log.</string>
+  <string name="previous_run_crashed">La précédente exécution de l\'application s\'est arrêtée inopinément. Veuillez faire part du problème en incluant le journal {0}.</string>
   <string name="saving_gpx_tracks">Enregistre les trajets GPX sur la carte SD…</string>
   <string name="finished_task">Terminé</string>
   <string name="reload_indexes_descr">Recharger les index à partir de la carte SD</string>
