@@ -1157,4 +1157,5 @@
     <string name="support_new_features_descr">Adományozz, hogy új funkciók kerülhessenek az alkalmazásba</string>
 	<string name="av_use_external_camera_descr">Rendszeralkalmazás használata fotózáshoz</string>
     <string name="av_use_external_camera">Kamera alkalmazás használata</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
     </resources>
