@@ -1187,4 +1187,5 @@
 \n\t* הרחבת תוסף הווידאו/שמע (תמונות עם נתוני EXIF)\n\t* השימושיות תוקנה ותוסף קווי המתאר הורכב מחדש\n\t* חבילות צל מדומה לתוסף קווי המתאר\n\t* תיקוני תקלות (נתיב תת־מיטבי) "</string>
     <string name="av_use_external_camera_descr">שימוש ביישום המערכת לצילום</string>
     <string name="av_use_external_camera">שימוש ביישום מצלמה</string>
+    <string name="index_name_openmaps">OpenMaps אירופה</string>
     </resources>
