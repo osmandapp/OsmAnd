@@ -554,7 +554,7 @@
 	<string name="index_name_asia">Asia</string>
 	<string name="index_name_oceania">Oceania</string>
 	<string name="index_name_other">Worldwide and topic maps</string>
-	<string name="index_name_wiki">Worldwide Wikipedia</string>
+	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
 	<string name="index_name_voice">Voice packs (recorded)</string>
 	<string name="index_name_tts_voice">Voice packs (TTS)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
