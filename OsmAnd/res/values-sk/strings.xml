@@ -1168,7 +1168,7 @@
     <string name="monitoring_control_stop">zastaviť</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
     <string name="audionotes_plugin_description">Vytváranie zvukových poznámok počas cestovania</string>
-    <string name="audionotes_plugin_name">Modul zvukové poznámky</string>
+    <string name="audionotes_plugin_name">Modul pre audio/video poznámky</string>
     <string name="srtm_plugin_description">Tento modul umožňuje sťahovanie vrstevníc (údaje v režime Offline údaje -&gt; Stiahnuť -&gt; ďalšie mapy) pre použitie s offline mapami.</string>
     <string name="srtm_plugin_name">Modul vrstevníc</string>
     <string name="download_select_map_types">Ďalšie mapy</string>
@@ -1184,4 +1184,12 @@
     <string name="local_indexes_cat_av">Zvukové/video údaje</string>
     <string name="dist_control_start">Začiatok</string>
     <string name="precise_routing_mode">Precízna navigácia (vo vývoji)</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="tip_recent_changes_1_1_2_t">"Zmeny vo verzii 1.1.2:
+\n\t* Vylepšenie zásuvného modulu pre Audio/video (fotografie s informáciami EXIF)
+\n\t* Opravená použiteľnosť a prepracovaný zásuvný modul pre vrstevnice
+\n\t* Hillshade packages for Contour lines plugin
+\n\t* Opravy chýb (suboptimálna navigácia) "</string>
+    <string name="av_use_external_camera_descr">Použiť systémovú aplikáciu na zachytenie fotografie</string>
+    <string name="av_use_external_camera">Použiť aplikáciu Fotoaparát</string>
     </resources>
