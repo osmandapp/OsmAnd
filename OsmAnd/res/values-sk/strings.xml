@@ -1192,4 +1192,7 @@
 \n\t* Opravy chýb (suboptimálna navigácia) "</string>
     <string name="av_use_external_camera_descr">Použiť systémovú aplikáciu na zachytenie fotografie</string>
     <string name="av_use_external_camera">Použiť aplikáciu Fotoaparát</string>
-    </resources>
+    <string name="download_hillshade_item">Tieňovaný reliéf</string>
+    <string name="download_hillshade_maps">Prekrytia tieňovanými reliéfmi</string>
+    <string name="support_new_features_descr">Sponzorujte vývoj nových funkcií v aplikácii</string>
+	</resources>
