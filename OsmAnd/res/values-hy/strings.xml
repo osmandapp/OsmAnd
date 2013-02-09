@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -215,7 +215,8 @@
   <string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
   <string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Select Destination</string>
-  <string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. \n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
+  <string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'.
+\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
   <string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Transparent theme</string>
@@ -751,7 +752,7 @@
   <string name="search_activity">Search</string>
   <string name="searchpoi_activity">Choose POI</string>
   <string name="search_POI_level_btn">Find more</string>
-  <string name="incremental_search_city">Search city incrementally. To find towns/postcodes, enter the first 3 or more characters.</string>
+  <string name="incremental_search_city">"Ընտրել քաղաքը. Քաղաքը կամ փոստային ինդեքսը գտնելու համար մուտքագրեք առաջին 3 կամ ավել տառերը։ "</string>
   <string name="incremental_search_street">Search street incrementally</string>
   <string name="incremental_search_building">Search building incrementally</string>
   <string name="choose_available_region">Choose region from list</string>
@@ -838,7 +839,7 @@
   <string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
   <string name="edit_filter_delete_message">Filter {0} has been deleted</string>
   <string name="edit_filter_create_message">Filter {0} has been created</string>
-  <string name="default_buttons_selectall">Select All</string>
+  <string name="default_buttons_selectall">Ընտրել բոլորը</string>
   <string name="route_roundabout">Roundabout : take %1$d exit</string>
   <string name="route_kl">Keep left</string>
   <string name="route_kr">Keep right</string>
@@ -919,4 +920,35 @@
   <string name="bg_service_screen_unlock">Unlock screen</string>
   <string name="bg_service_sleep_mode_off">Disable Sleep mode</string>
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
+<string name="download_hillshade_item">Տարածքի ռելիեֆ</string>
+    <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ</string>
+    <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
+\n→* Audio/video plugin enhancement (photos with EXIF information)\n→* Usability fixed and restructured Contour lines plugin\n→* Hillshade packages for Contour lines plugin\n\n→* Bug fixes (suboptimal routing)</string>
+    <string name="dist_control_start">Սկիզբ</string>
+    <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
+    <string name="clear_dest_confirm">"Վստահ ե՞ք, որ ցանկանում եք մաքրել ձեր նշանակման կետը․ "</string>
+    <string name="stop_routing_confirm">Վստահ ե՞ք, որ ցանկանում եք դադարեցնել նավարկություն.</string>
+    <string name="precise_routing_mode">Ճշգրիտ ճանապարհ (ալֆա)</string>
+    <string name="recording_context_menu_show">Ցույց տալ</string>
+    <string name="recording_photo_description">Նկար %1$s %2$s-ից</string>
+    <string name="av_def_action_picture">Նկարել</string>
+    <string name="recording_context_menu_precord">Նկարել</string>
+    <string name="dropbox_plugin_description">Dropbox plugin-ը թույլ է տալիս սինխրոնիզացնել թրեքերը և Աուդիո/վիդեո նշումները է ձեր dropbox-ի հետ:</string>
+    <string name="animate_routing_using_gpx">"Օգտագործե՞լ գոյություն ունեցող GPX ֆայլը "</string>
+    <string name="intermediate_points_change_order">Փոխել հերթականությունը</string>
+    <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
+    <string name="srtm_paid_version_title">Բարձրության գծեր փլագին</string>
+    <string name="av_def_action_video">Տեսանյութի ձայնագրում</string>
+    <string name="av_def_action_audio">Աուդիո ձայնագրում</string>
+    <string name="av_video_format_descr">Ընտրեք տեսանյութի ֆորմատը</string>
+    <string name="av_video_format">Տեսանյութի ֆորմատ</string>
+    <string name="av_use_external_recorder_descr">Օգտագործել սիստեմային ծրագիր տեսաձայնագրման համար</string>
+    <string name="av_use_external_recorder">Օգտագործել արտաքին ծրագիր</string>
+    <string name="av_use_external_camera_descr">Օգտագործել սիստեմային ծրագիր լուսանկարելու համար</string>
+    <string name="av_use_external_camera">Օգտագործել Camera ծրագիրը</string>
+    <string name="av_settings_descr">Տեսա/Ձայնա-գրման պարամետրեր</string>
+    <string name="av_settings">"Աուդիո/վիդեո պարամետրեր "</string>
+    <string name="recording_error">"Սխալ ձայնագրման ընթացքում "</string>
+    <string name="recording_camera_not_available">Վիդեո/Ֆոտո-խցիկը անհասանելի է</string>
+    <string name="email">էլ-փոստ</string>
 </resources>
