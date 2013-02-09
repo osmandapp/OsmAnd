@@ -1054,7 +1054,7 @@
     <string name="route_descr_from_to_via">Z: %1$s\nPrzez: %2$s\nDo: %3$s</string>
     <string name="rendering_attr_showRoadMaps_description">Wybierz kiedy wyświetlać tylko mapy samochodowe:</string>
 	<string name="rendering_attr_showRoadMaps_name">Tylko mapy samochodowe</string>
-    <string name="download_roads_only_item">"Samochodowe "</string>
+    <string name="download_roads_only_item">Samochodowe</string>
     <string name="download_roads_only_maps">Tylko mapy samochodowe</string>
     <string name="safe_mode_description">Uruchom program w trybie bezpiecznym (używa wolniejszego kodu Androida zamiast natywnego).</string>
     <string name="safe_mode">Tryb bezpieczny</string>
@@ -1154,7 +1154,8 @@
 \n\t* Paczki cieniowania wzgórz dla wtyczki kontur
 \n\t* Poprawki błędów i nawigacji "</string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
-    <string name="download_hillshade_item">"Cieniowanie "</string>
+    <string name="download_hillshade_item">Cieniowanie wzniesień</string>
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
+    <string name="index_name_openmaps"></string>
     </resources>
