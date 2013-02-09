@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
-	<string name="download_hillshade_item">Relief-Schattierung </string>
+	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
 	<string name="tip_recent_changes_1_1_2_t">Änderungen in 1.1.2:
 		\n\t* Audio/Video-Modul Verbesserungen (Fotos mit EXIF-Informationen)
@@ -26,7 +26,7 @@
 	<string name="search_villages_and_postcodes">Suche Dörfer oder Postleitzahlen</string>
 	<string name="rendering_attr_showRoadMaps_description">Anzeige reiner Straßenkarten:</string>
 	<string name="rendering_attr_showRoadMaps_name">Reine Straßenkarten</string>
-	<string name="download_roads_only_item">"Straßen "</string>
+	<string name="download_roads_only_item">"Nur Straßen"</string>
 	<string name="download_regular_maps">Reguläre Karten</string>
 	<string name="download_roads_only_maps">Reine Straßenkarten</string>
 	<string name="safe_mode_description">Applikation läuft im abgesicherten Modus (verwendet langsameren Android statt nativem Code).</string>
@@ -402,7 +402,7 @@
 	<string name="select_search_position">Suchen in der Nähe von:</string>
 	<string name="context_menu_item_search">In der Nähe suchen</string>
 	<string name="tip_recent_changes_0_6_7_t">"Verbesserungen in 0.6.7:
-		\n\t- Offline-Daten Manager (Herunterladen, Löschen, und Aktivieren / Deaktivieren von Offline-Daten direkt in OsmAnd)
+		\n\t- Daten-Manager (Herunterladen, Löschen, und Aktivieren / Deaktivieren von Offline-Daten direkt in OsmAnd)
 		\n\t- Favoriten und Favoritengruppen (Kategorisieren, Löschen, Managen von Favoriten)
 		\n\t- GPX Explorer innerhalb der Applikation (Tracks und Track-Daten ansehen)
 		\n\t- GPX Navigation (nützliche Optionen, Fortsetzung der Navigation nach Crash, unterstützt jetzt Kreisverkehre)
@@ -515,9 +515,11 @@
 	<string name="internet_not_available">Internet Verbindung erforderlich aber nicht verfügbar</string>
 	<string name="install_more">Weitere installieren …</string>
 	<string name="tip_update_index">Update der Offline-Daten</string>
-	<string name="tip_update_index_t">\tEs ist sehr wichtig, aktuelle Karten zu verwenden. OsmAnd hat einen Download-Manager, der Ihnen verfügbare Offline-Karten anzeigt.\n\tAktualisierungen finden Sie über \'Einstellungen\' → \'Offline-Daten (laden)\' → \'Hier klicken um Offline-Daten...\'. Nachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie über \'Menü\'→ \'Filter gespeicherte\' nur bereits auf Ihrem Gerät gespeicherte Karten anzeigen lassen.\n\tDie verwendeten Farben zeigen dabei an, ob Updates verfügbar sind:\n\t\'Grün\' - Daten sind aktuell
-\n\t\'Blau\' - neuere Version zum Download verfügbar
-\n\t\'Dunkelgrün/-blau\' - kennzeichnen auf dem Gerät deaktivierte Karten</string>
+	<string name="tip_update_index_t">\tEs ist ratsam, aktuelle Karten zu verwenden. OsmAnd hat einen Daten-Manager, der Ihnen verfügbare Offline-Karten anzeigt.
+		\n\tAktualisierungen finden Sie über \'Einstellungen\' → \'Daten-Management\' → \'Hier klicken um Offline-Daten...\'. Nachdem die Liste der verfügbaren Regionen aus dem Internet geladen wurde, können Sie zur Aktualisierung über \'Menü\'→ \'Filter gespeicherte\' nur bereits auf Ihrem Gerät gespeicherte Karten anzeigen lassen.
+		\n\tEinträge in \'grün\': Daten aktuell
+		\n\tEinträge in \'blau\': Neuere Version zum Download verfügbar
+		\n\tKursive Darstellung: Auf dem Gerät deaktivierte Karten</string>
 	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
 	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
 	<string name="tip_location_sharing">Position mitteilen</string>
