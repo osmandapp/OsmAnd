@@ -78,7 +78,8 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 			if (namesFilter.isCancelled) {
 				break;
 			}
-			if (emptyQuery || CollatorStringMatcher.cmatches(collator, getText(obj), query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
+			if (emptyQuery || CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(region.useEnglishNames()), 
+					query, StringMatcherMode.CHECK_ONLY_STARTS_WITH)) {
 				Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 				msg.sendToTarget();
 			}
@@ -88,7 +89,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 				if (namesFilter.isCancelled) {
 					break;
 				}
-				if (CollatorStringMatcher.cmatches(collator, getText(obj), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
+				if (CollatorStringMatcher.cmatches(collator, obj.getNameWithoutCityPart(region.useEnglishNames()), query, StringMatcherMode.CHECK_STARTS_FROM_SPACE_NOT_BEGINNING)) {
 					Message msg = uiHandler.obtainMessage(MESSAGE_ADD_ENTITY, obj);
 					msg.sendToTarget();
 				}
@@ -100,6 +101,7 @@ public class SearchStreetByNameActivity extends SearchByNameAbstractActivity<Str
 	public String getText(Street obj) {
 		return obj.getName(region.useEnglishNames());
 	}
+	
 	
 	@Override
 	public void itemSelected(Street obj) {
