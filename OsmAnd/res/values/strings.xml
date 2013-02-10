@@ -18,7 +18,7 @@
 		\n\t* Hillshade packages for Contour lines plugin
 		\n\t* Bug fixes (suboptimal routing)
     </string>
-    <string name="dist_control_start">Start</string>
+    <string name="dist_control_start">start</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
     <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
     <string name="clear_dest_confirm">Are you sure you want to clear your destination point?</string>
@@ -69,8 +69,8 @@
     <string name="recording_context_menu_play">Play</string>
     <string name="recording_description">Recording %1$s %2$s of %3$s</string>
     <string name="recording_default_name">recording</string>
-    <string name="av_control_stop">AV</string>
-    <string name="av_control_start">AV</string>
+    <string name="av_control_stop">stop</string>
+    <string name="av_control_start">start</string>
     <string name="map_widget_av_notes">Audio/video notes</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>

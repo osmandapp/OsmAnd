@@ -144,6 +144,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public boolean isPhoto() {
 			return file.getName().endsWith(IMG_EXTENSION);
 		}
+		
+		public boolean isVideo() {
+			return file.getName().endsWith(MPEG4_EXTENSION) || file.getName().endsWith(THREEGP_EXTENSION);
+		}
+		
+		public boolean isAudio() {
+			return file.getName().endsWith(MPEG4_EXTENSION) || file.getName().endsWith(THREEGP_EXTENSION);
+		}
 
 		private String convertDegToExifRational(double l) {
 			if(l < 0){
@@ -362,7 +370,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerSelectedItem(R.string.layer_recordings, app.getSettings().SHOW_RECORDINGS.get()? 1 : 0, R.drawable.list_activities_rec_layer, listener, 5);
+		adapter.registerSelectedItem(R.string.layer_recordings, app.getSettings().SHOW_RECORDINGS.get()? 1 : 0, R.drawable.large_menu_recording_layer, listener, 5);
 	}
 	
 	@Override
@@ -413,7 +421,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl,
-					R.drawable.widget_tracking, R.string.map_widget_av_notes, "audionotes", false,
+					R.drawable.small_menu_audio_video_notes, R.string.map_widget_av_notes, "audionotes", false,
 					EnumSet.allOf(ApplicationMode.class),
 					EnumSet.noneOf(ApplicationMode.class), 22);
 			mapInfoLayer.recreateControls();
@@ -422,7 +430,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void setRecordListener(final TextInfoControl recordPlaceControl, final MapActivity mapActivity) {
 		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
-		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
+		updateWidgetIcon(recordPlaceControl);
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -430,6 +438,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				defaultAction(mapActivity);
 			}
 		});
+	}
+
+
+	private void updateWidgetIcon(final TextInfoControl recordPlaceControl) {
+		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_inactive));
+		if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_VIDEO) {
+			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_video));
+		} else if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE) {
+			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_photo));
+		} else if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_AUDIO) {
+			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_audio));
+		}
 	}
 	
 	private void defaultAction(final MapActivity mapActivity) {
@@ -725,7 +745,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		mr.start();
 		mediaRec = mr;
 		recordControl.setText(app.getString(R.string.av_control_stop), "");
-		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_big));
+		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
 		final MapStackControl par = mil.getRightStack();
 		final boolean contains = par.getAllViews().contains(recordControl);
@@ -743,8 +763,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				app.getSettings().SHOW_RECORDINGS.set(true);
 				indexFile(f);
 				mapActivity.getMapView().refreshMap();
+				updateWidgetIcon(recordControl);
 			}
-
 		});
 	}
 	

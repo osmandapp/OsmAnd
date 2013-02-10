@@ -40,7 +40,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Paint paintIcon;
 	private Paint point;
 	private OsmandMapTileView view;
-	private Bitmap bmp;
+	private Bitmap audio;
+	private Bitmap video;
+	private Bitmap photo;
 
 	public AudioNotesLayer(MapActivity activity, AudioVideoNotesPlugin plugin) {
 		this.activity = activity;
@@ -58,7 +60,9 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		pointAltUI.setColor(0xa0FF3344);
 		pointAltUI.setStyle(Style.FILL);
 		
-		bmp = BitmapFactory.decodeResource(view.getResources(), R.drawable.device_access_video);
+		audio = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_audio);
+		video = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_video);
+		photo = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_photo);
 
 		paintIcon = new Paint();
 
@@ -83,13 +87,19 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (view.getZoom() >= startZoom) {
 			DataTileManager<Recording> recs = plugin.getRecordings();
 			List<Recording> objects = recs.getObjects(latlonRect.top, latlonRect.left, latlonRect.bottom, latlonRect.right);
-			int r = getRadiusPoi(view.getZoom());
 			for (Recording o : objects) {
 				int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
 				int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
-				canvas.drawCircle(x, y, r, pointAltUI);
-				canvas.drawCircle(x, y, r, point);
-				canvas.drawBitmap(bmp, x - bmp.getWidth() / 2, y - bmp.getHeight() / 2, paintIcon);
+				Bitmap b;
+				if (o.isPhoto()) {
+					b = photo;
+				} else if (o.isAudio()) {
+					b = audio;
+				} else {
+					b = video;
+
+				}
+				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
 			}
 		}
 	}
