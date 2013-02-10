@@ -1157,5 +1157,6 @@
     <string name="download_hillshade_item">Cieniowanie wzniesień</string>
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
+    <string name="index_name_openmaps"/>
     <string name="index_name_openmaps"></string>
     </resources>
