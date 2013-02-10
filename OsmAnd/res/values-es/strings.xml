@@ -1118,4 +1118,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y usabilidad arreglada\n\t* Paquetes de sombreado para el extra de curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografía</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
+    <string name="index_name_openmaps">OpenMaps UE</string>
     </resources>
