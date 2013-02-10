@@ -24,6 +24,8 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import com.ibm.icu.util.Measure;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -35,7 +37,9 @@ import android.graphics.Paint.Cap;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Path.FillType;
+import android.graphics.PathMeasure;
 import android.graphics.PathEffect;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
@@ -66,15 +70,11 @@ public class OsmandRenderer {
 
 	private TextRenderer textRenderer;
 
-
 	private static class IconDrawInfo {
 		float x = 0;
 		float y = 0;
 		String resId;
 	}
-	
-	
-	
 
 	/* package */static class RenderingContext extends net.osmand.RenderingContext {
 		List<TextDrawInfo> textToDraw = new ArrayList<TextDrawInfo>();
@@ -655,6 +655,10 @@ public class OsmandRenderer {
 			}
 		}
 
+		int icon_distance = render.getIntPropertyValue(render.ALL.R_PATH_ICON_DISTANCE);
+		int icon_offset = render.getIntPropertyValue(render.ALL.R_PATH_ICON_OFFSET);
+		String icon_bitmap = render.getStringPropertyValue(render.ALL.R_PATH_ICON);
+
 		rc.visible++;
 
 		Path path = null;
@@ -735,6 +739,7 @@ public class OsmandRenderer {
 				if (updatePaint(render, paint, 2, false, rc)) {
 					canvas.drawPath(path, paint);
 				}
+				drawPathIcons(rc, path, icon_bitmap, icon_distance, icon_offset);
 			}
 			
 			if(oneway != 0 && !drawOnlyShadow){
@@ -750,6 +755,29 @@ public class OsmandRenderer {
 	}
 
 		
+	private void drawPathIcons(RenderingContext rc, Path path,
+			String icon_bitmap, float icon_distance, float icon_offset) {
+		if (path == null || icon_bitmap == null) {
+			return;
+		}
+		PathMeasure measure = new PathMeasure(path, false);
+		float distance = (icon_offset < 0)? icon_distance / 2:icon_offset;
+		float max_length = measure.getLength();
+		for(; distance < max_length; distance += icon_distance) {
+			float[] position = new float[2];
+			if (!measure.getPosTan(distance, position, null)) {
+				continue;
+			}
+
+			IconDrawInfo ico = new IconDrawInfo();
+			ico.x = position[0];
+			ico.y = position[1];
+			ico.resId = icon_bitmap;
+			rc.iconsToDraw.add(ico);
+		}
+	}
+
+
 	private static Paint[] oneWay = null;
 	private static Paint[] reverseOneWay = null;
 	private static Paint oneWayPaint(){
