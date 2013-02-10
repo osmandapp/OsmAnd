@@ -1084,7 +1084,7 @@
 \n\t* Ενεργοποίηση της υπηρεσίας παρασκηνίου κατά την πλοήγηση "</string>
     <string name="rendering_attr_showRoadMaps_description">Επιλέξτε πότε θα εμφανίζονται οδικοί-μόνο χάρτες:</string>
 	<string name="rendering_attr_showRoadMaps_name">Οδικοί-μόνο χάρτες</string>
-    <string name="download_roads_only_item">"Δρόμοι "</string>
+    <string name="download_roads_only_item">Δρόμοι</string>
     <string name="download_regular_maps">Κανονικοί χάρτες</string>
     <string name="download_roads_only_maps">Οδικοί-μόνο χάρτες</string>
     <string name="incomplete_locale">ημιτελές</string>
@@ -1173,4 +1173,5 @@
     <string name="dist_control_start">Έναρξη</string>
     <string name="precise_routing_mode_descr">Ενεργοποίηση ακριβούς δρομολόγησης για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Είναι πολύ περιορισμένη σε σχέση με την απόσταση και δεν χρησιμοποιεί τη εγγενή βιβλιοθήκη.</string>
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
+    <string name="av_control_start">Έναρξη</string>
     </resources>
