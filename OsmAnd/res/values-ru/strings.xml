@@ -1116,7 +1116,7 @@
     <string name="dist_control_start">Старт</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые опции реализованными в приложении</string>
 	<string name="precise_routing_mode_descr">Включите точный маршрут для вычисления точных маршрутов без незначительных сбоев. Этот режим работает на ограниченном расстоянии и не использует собственную библиотеку.</string>
-    <string name="download_hillshade_item">"Рельеф местности "</string>
+    <string name="download_hillshade_item">Рельеф местности</string>
     <string name="tip_recent_changes_1_1_2_t">"Изменения в 1.1.2:\n\t* улучшен аудио/видео плагин (фотографии с информацией EXIF)\n\t* повышено удобство пользования и реструктурирован плагин контурных линий\n\t* добавлен пакет затемнённого рельефа местности для плагина контурных линий\n\t* исправлены ошибки (неоптимальной маршрутизации) "</string>
     <string name="download_hillshade_maps">Карты с затемнённым рельефом местности</string>
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
