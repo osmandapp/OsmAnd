@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
@@ -822,7 +822,7 @@
 	<string name="route_general_information">%1$s Gesamtentfernung\n%2$d:%3$d Reisezeit</string>
 	<string name="router_service_descr">Online- oder Offline-Dienst zur Routenberechnung wählen</string>
 	<string name="router_service">Navigationsdienst</string>
-	<string name="sd_dir_not_accessible">" Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden"</string>
+	<string name="sd_dir_not_accessible">Auf das Verzeichnis auf der SD-Karte kann nicht zugegriffen werden</string>
 	<string name="download_question">Herunterladen {0} - {1}?</string>
 	<string name="download_question_exist">Offline Daten für {0} existieren schon ({1}). Wollen Sie die überschreiben ({2})?</string>
 	<string name="address">Adresse</string>
@@ -1185,7 +1185,7 @@
     <string name="osmodroid_plugin_name">OsMoDroid-Plugin</string>
 	<string name="index_srtm_parts">Teile</string>
     <string name="index_srtm_ele">Höhenlinien</string>
-    <string name="srtm_plugin_description">Ermöglicht das Laden von Offline Höhenlinien und Relief-Schattierungen (Einstellungen -> Daten-Management -> Herunterladen -> Kartentyp wählen).</string>
+    <string name="srtm_plugin_description">Ermöglicht das Laden von Offline Höhenlinien und Relief-Schattierungen (Einstellungen -&gt; Daten-Management -&gt; Herunterladen -&gt; Kartentyp wählen).</string>
     <string name="srtm_plugin_name">Höhenlinien-Plugin</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
@@ -1245,4 +1245,7 @@
     <string name="precise_routing_mode_descr">Ermöglicht das präzise Berechnen der Route ohne Störungen. Es ist durch die Entfernung begrenzt und verwendet nicht die ursprüngliche Bibliothek.</string>
     <string name="precise_routing_mode">Präzises Routen (experimentell)</string>
     <string name="local_indexes_cat_av">Audio/Video-Daten</string>
+    <string name="av_use_external_camera_descr">System-Anwendung für Foto verwenden</string>
+    <string name="av_use_external_camera">Foto-App verwenden</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
     </resources>
