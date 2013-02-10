@@ -642,4 +642,20 @@
     <string name="recording_camera_not_available">Kamera ei ole saatavilla</string>
     <string name="recording_open_external_player">Avaa ulkoinen soitin</string>
     <string name="recording_delete_confirm">Haluatko poistaa tämän nauhoituksen?</string>
-    </resources>
+    <string name="unit_of_length">Mittayksiköt</string>
+	<string name="unit_of_length_descr">Vaihda pituuden ja nopeuden yksiköitä</string>
+	<string name="si_mi_foots">Mailia/jalkaa</string>
+	<string name="si_mi_yard">Mailia/jaardia</string>
+	<string name="si_km_m">Kilometrejä/metrejä</string>
+	<string name="previous_button">Edellinen</string>
+	<string name="dist_control_start">Aloita</string>
+    <string name="stop_routing_confirm">Oletko varma että haluat lopettaa navigoinnin?</string>
+    <string name="clear_dest_confirm">Haluatko varmasti poistaa päätepisteen?</string>
+    <string name="precise_routing_mode">Tarkka reititys (alpha)</string>
+    <string name="recording_photo_description">Kuva %1$s/%2$s</string>
+    <string name="av_def_action_picture">Ota kuva</string>
+    <string name="recording_context_menu_precord">Ota kuva</string>
+    <string name="recording_context_menu_show">Näytä</string>
+    <string name="use_osmand_routing_service_descr">Käytä OsmAnd offline navigointia. Koskee vain alle 20km pitkiä reittejä (kokeellinen)</string>
+	<string name="application_dir">Tallennushakemisto</string>
+	</resources>
