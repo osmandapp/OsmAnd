@@ -1173,7 +1173,7 @@
     <string name="recording_default_name">enregistrement</string>
     <string name="av_control_stop">Arrêter</string>
     <string name="map_widget_av_notes">Notes audio</string>
-    <string name="tip_recent_changes_1_1_0_t">"Changement pour 1.1.0 :
+    <string name="tip_recent_changes_1_1_0_t">"Changements pour 1.1.0 :
 \n\t* Greffon de calcul de distance
 \n\t* Greffon de prise de notes audio/vidéo
 \n\t* Greffon pour les courbes de niveau
@@ -1206,4 +1206,5 @@
     <string name="av_use_external_camera_descr">Utiliser l\'application système pour les photos</string>
     <string name="av_use_external_camera">Utiliser l\'appareil photo</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
+    <string name="tip_recent_changes_1_2_t">Changements en 1.2:</string>
     </resources>
