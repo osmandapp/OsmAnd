@@ -1188,4 +1188,5 @@
     <string name="av_use_external_camera_descr">שימוש ביישום המערכת לצילום</string>
     <string name="av_use_external_camera">שימוש ביישום מצלמה</string>
     <string name="index_name_openmaps">OpenMaps אירופה</string>
+    <string name="tip_recent_changes_1_2_t">"שינויים ב־1.2: "</string>
     </resources>
