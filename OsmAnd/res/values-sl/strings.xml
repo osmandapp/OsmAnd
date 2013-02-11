@@ -531,7 +531,7 @@
 	<string name="fav_points_edited">Priljubljena lokacija je bila urejena</string>
 	<string name="fav_points_not_exist">Ni priljubljenih lokacij</string>
 	<string name="incomplete_locale">nedokončano</string>
-	<string name="download_roads_only_item">"Ceste "</string>
+	<string name="download_roads_only_item">Le ceste</string>
     <string name="download_regular_maps">Običajni zemljevidi</string>
     <string name="download_link_and_local_description">Kliknite tu za prenos oz. posodobitev podatkov.\nKliknite na katerokoli element za prikaz podrobnosti, pritisnite in držite za izklop ali brisanje. Količina prostora na napravi (%1$s prosto):</string>
 	<string name="context_menu_item_show_route">Prikaži pot od tu</string>
@@ -1138,6 +1138,10 @@
     <string name="support_new_features_descr">Darujte, tako boste pripomogli k razvoju novih funkcionalnosti</string>
 	<string name="tip_recent_changes_1_1_2_t">"Spremembe v 1.1.2:
 \n\t* Audio / Video vtičnik za izboljšavo (fotografije z informacijami EXIF)\n\t* Popravljena uporabnost in struktura vtičnika za izohipse\n\t* Paketi senčenega terena za vtičnik za izohipse\n\t* Popravki napak (izračun neoptimalne poti) "</string>
-    <string name="download_hillshade_item">"Senčen teren "</string>
+    <string name="download_hillshade_item">Senčen teren</string>
     <string name="download_hillshade_maps">Zemljevid senc terena</string>
+    <string name="tip_recent_changes_1_2_t">"Spremembe v 1.2: "</string>
+    <string name="av_use_external_camera_descr">Uporabi sistemsko aplikacijo za fotografijo</string>
+    <string name="av_use_external_camera">Uporabi aplikacijo Kamera</string>
+    <string name="index_name_openmaps">EU OpenMaps</string>
     </resources>
