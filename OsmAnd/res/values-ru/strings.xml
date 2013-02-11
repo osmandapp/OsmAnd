@@ -1121,4 +1121,5 @@
     <string name="download_hillshade_maps">Карты с затемнённым рельефом местности</string>
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
+    <string name="index_name_openmaps">OpenMaps - Европа</string>
     </resources>
