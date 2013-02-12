@@ -4,7 +4,7 @@
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
-    <string name="map_widget_show_destination_arrow">Hedef noktasına onal talimatları göster</string>
+    <string name="map_widget_show_destination_arrow">Hedef yönü göster</string>
     <string name="enable_plugin_monitoring_services">Konum log servislerin kullanmak için yol takip eklentisini aktifleştir (log, canlı yol takip)</string>
     <string name="non_optimal_route_calculation">Uzak hedefler için tahmini rotayı hesapla</string>
     <string name="tip_recent_changes_0_8_4_t">"0.8.4 Değişiklikler:
@@ -61,12 +61,12 @@
 	<string name="monitoring_mode_off">GPX Kaydet</string>
 	<string name="bg_service_sleep_mode_off">Aktifleştir\nuyku modu</string>
 	<string name="bg_service_sleep_mode_on">Durdur\nuyku modu</string>
-	<string name="int_continuosly">Devam eden</string>
+	<string name="int_continuosly">Devam et</string>
 	<string name="screen_is_locked">Ekran kilidini açmak için kilit simgesine basın</string>
 	<string name="map_widget_top_text">Sokak ismi</string>
 	<string name="map_widget_map_select">Harita kaynağı</string>
-	<string name="map_widget_back_to_loc">Ben neredeyim</string>
-	<string name="map_widget_lock_screen">Ekranı kilitle</string>
+	<string name="map_widget_back_to_loc">Neredeyim</string>
+	<string name="map_widget_lock_screen">Ekran kilidi</string>
 	<string name="map_widget_compass">Pusula</string>
 	<string name="map_widget_top_stack">Durum çubuğu:</string>
 	<string name="map_widget_reset">Varsayılanlara geri dön</string>
@@ -75,7 +75,7 @@
 	<string name="map_widget_monitoring">GPX kaydetme</string>
 	<string name="map_widget_speed">Hız</string>
 	<string name="map_widget_distance">Hedef</string>
-	<string name="bg_service_screen_lock">Ekranı kilitle</string>
+	<string name="bg_service_screen_lock">Ekran kilidi</string>
 	<string name="bg_service_screen_unlock">Ekran kilidini kaldır</string>
 	<string name="bg_service_screen_lock_toast">Ekran kilitli</string>
 	<string name="show_cameras">Hız kameralarını göster</string>
@@ -91,7 +91,7 @@
 	<string name="osmand_parking_pm">ÖS</string>
 	<string name="osmand_parking_am">ÖÖ</string>
 	<string name="osmand_parking_position_name">Park noktası</string>
-	<string name="safe_mode_description">Uygulamayı güvenli modda çalıştır (sisteme özgü yerine Android kodu kullanılarak).</string>
+	<string name="safe_mode_description">Uygulamayı güvenli modda çalıştır (sisteme özgü kod yerine yavaş Android kodu kullanılarak).</string>
     <string name="safe_mode">Güvenli mod</string>
     <string name="native_library_not_running">Uygulama güvenli modda çalışıyor (Ayarlar menüsünden kapatabilirsiniz).</string>
     <string name="background_service_is_enabled_question">Arka plan servisi hala çalışıyor. İptal etmek ister misiniz?</string>
@@ -106,7 +106,7 @@
 \n\t* Rota hazırlarken otobanlardan kaşınma seçeneği ayarlara eklendi
 \n\t* Bisikletler için bir yol tipi daha eklendi (bisikletyolu)
 \n\t* Hata düzeltmeleri "</string>
-	<string name="local_indexes_cat_av">Ses/Vidyo verisi</string>
+	<string name="local_indexes_cat_av">Ses/Video verisi</string>
     <string name="stop_routing_confirm">Navigasyonu durdurmak istediğinize emin misiniz?</string>
     <string name="clear_dest_confirm">Varış yerini iptal etmek istediğinize emin misiniz?</string>
     <string name="precise_routing_mode">Hassas rota (alfa)</string>
@@ -124,13 +124,123 @@
     <string name="av_def_action_audio">Ses kaydet</string>
     <string name="av_widget_action_descr">Varsayılan eklenti eylemini seçin</string>
     <string name="av_widget_action">Varsayılan eklenti eylemi</string>
-    <string name="av_video_format_descr">Vidyo formatını seçin</string>
-    <string name="av_video_format">Vidyo formatı</string>
-    <string name="av_use_external_recorder_descr">Vidyo için sistem kaydedicisini kullan</string>
+    <string name="av_video_format_descr">Video formatını seçin</string>
+    <string name="av_video_format">Video formatı</string>
+    <string name="av_use_external_recorder_descr">Video için sistem kaydedicisini kullan</string>
     <string name="av_use_external_recorder">Harici kaydediciyi kullan</string>
     <string name="av_settings_descr">Ses ve vidyo ayarlarını yapılandır</string>
-    <string name="av_settings">"Ses/Vidyo ayarları "</string>
+    <string name="av_settings">"Ses/Video ayarları "</string>
     <string name="recording_error">"Kaydedilirken hata oluştu "</string>
     <string name="recording_camera_not_available">Kamera kullanılabilir değil.</string>
     <string name="dist_control_start">Başlat</string>
-    </resources>
+    <string name="tip_recent_changes_1_2_t">1.2 Değişiklikler:</string>
+    <string name="index_name_openmaps">OpenMaps AB</string>
+    <string name="download_hillshade_item">Tepe gölgelendirme</string>
+    <string name="tip_recent_changes_1_1_2_t">1.1.2 değişiklikler: * Ses / video eklentisi geliştirme (EXIF bilgileri ile fotoğrafları) * Kullanılabilirlik (suboptimal yönlendirme) sabit ve Kontur çizgileri eklenti Kontur hatları için * Hillshade paketleri eklentisi * Hata düzeltmeleri yeniden</string>
+    <string name="precise_routing_mode_descr">Glitches olmadan hassas rotaları hesaplamak için hassas yönlendirme etkinleştirin. Bu çok mesafe ile sınırlıdır ve yerel kitaplık kullanmaz.</string>
+    <string name="av_use_external_camera_descr">Fotoğraf sistemi uygulamasını kullanın</string>
+    <string name="av_use_external_camera">Kamera uygulamasını kullanın</string>
+    <string name="recording_is_recorded">Ses/Video kayıt ediliyor. Durdurmak için bu AV ikonuna basın.</string>
+    <string name="recording_playing">Belirtilen kayıt arasından bir ses çalınıyor. % 1 $ s</string>
+    <string name="recording_open_external_player">Dış sürücü aç</string>
+    <string name="recording_delete_confirm">Bu kaydı kaldırmak istiyor musunuz?</string>
+    <string name="tip_recent_changes_1_1_0_t">1.1.0 değişiklikler: * Uzaklık hesap eklentisi * Ses / video notları eklentisi * Kontur çizgileri eklentisi * Hata düzeltmeleri * &amp;#39;Touring görünümü&amp;#39; haritası stil seçeneği başka harita bilgilerini, yeni yol stilleri, daha fazla kontrast ve Alp yürüyüş (SAC skala) GPS yükseklik okuması için seçeneği * EGM96 jeoit ofset düzeltme</string>
+    <string name="recording_unavailable">kullanılamaz</string>
+    <string name="recording_context_menu_arecord">Bir sesli not al</string>
+    <string name="recording_context_menu_vrecord">Bir video notu al</string>
+    <string name="layer_recordings">Kayıt katmanı</string>
+    <string name="recording_can_not_be_played">Kayıt çalınamaz</string>
+    <string name="recording_context_menu_delete">Kayıt sil</string>
+    <string name="recording_context_menu_play"/>
+    <string name="recording_description">Kayıt % 1% 3 $ s $ s% 2 $ s</string>
+    <string name="recording_default_name">kayıt</string>
+    <string name="av_control_stop">durdur</string>
+    <string name="av_control_start">Başlat</string>
+    <string name="map_widget_av_notes">Ses/video notları</string>
+    <string name="osmand_srtm_short_description_80_chars">Çevrimdışı kontur hatları için OsmAnd eklentisi</string>
+    <string name="osmand_srtm_long_description_1000_chars">Bu eklenti OsmAnd adlı çevrimdışı haritalar gösterilebilir kontür çizgileri sağlar. Global veri (70 derece kuzey ve 70 derece güney arasındaki) SRTM (Mekik Radar Topografi Misyonu) ve ASTER (Gelişmiş Uzay Termal Yayılma ve Yansıma Radyometre), bir görüntüleme aracı onboard Terra, NASA&amp;#39;nın Earth Gözlem amiral gemisi uydudan ölçümleri esas Sistemi. ASTER NASA arasında bir kooperatif çabadır, Ekonomi, Ticaret ve Sanayi Odası (METI) ve Japonya Uzay Sistemleri (J-spacesystems) Japonya Bakanlığı.</string>
+    <string name="osmand_distance_plugin_description">Iki veya daha fazla nokta arasındaki mesafeyi ölçün. Kısa bir tıklama ile puan ekleyin ve uzun süre basarak kaldırabilirsiniz.</string>
+    <string name="osmand_distance_plugin_name">Mesafe hesaplayıcı</string>
+    <string name="use_clear_distance_measurement">Ölçüm noktaları temizlemek için bir kez daha tıklayın.</string>
+    <string name="use_distance_measurement">Bir noktaya işaretlemek için dokunun, tuşuna basın ve önceki noktalarını silmek için basılı tutun, çıkmak için ölçüm gereci tıklayın.</string>
+    <string name="map_widget_distancemeasurement">Mesafe ölçümü</string>
+    <string name="audionotes_location_not_defined">Notu ile ilişkilendirmek Yer henüz tanımlanmamıştır. &amp;quot;Konumu kullan ...&amp;quot; Belirtilen yere not atamak</string>
+    <string name="monitoring_control_stop">Durdur</string>
+    <string name="map_widget_audionotes">Ses notları</string>
+    <string name="audionotes_plugin_description">Yolculuk sırasında ses / video notları alın</string>
+    <string name="audionotes_plugin_name">Ses / video notları</string>
+    <string name="index_srtm_parts">Bölümler</string>
+    <string name="index_srtm_ele">Kontur hatları</string>
+    <string name="srtm_plugin_description">Çevrimdışı kontür hatları ve gölge tepeleri (-&amp;gt; Veri Yönetimi -&amp;gt; Download -&amp;gt; seçin istenen harita türünü Ayarlar) indirmeden kolaylaştırır.</string>
+    <string name="srtm_plugin_name">Kontur çizgileri eklentisi</string>
+    <string name="download_select_map_types">Diğer haritalar</string>
+    <string name="download_roads_only_item">Sadece yollar</string>
+    <string name="download_srtm_maps">Kontur çizgileri</string>
+    <string name="download_regular_maps">Düzenli haritalar</string>
+    <string name="download_roads_only_maps">Yollar-sadece haritalar</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Sınırları gizle</string>
+	<string name="rendering_attr_noAdminboundaries_description">Bölgesel sınırların göstergesine bastır (admin düzeyleri 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid eklenti eski bir sürümünü sahiptir ve güncelleştirilmesi gerekmektedir.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid eklenti canlı izleme özellikleri için OsModroid uygulama için, uzatma OsmAnd edilir. Hizmet hakkında bilgi http://esya.ru mevcuttur.</string>
+    <string name="osmodroid_plugin_name">OsMoDroid eklentisi</string>
+	<string name="tip_altitude_offset">Rakım Ekranı - Ofset Düzeltme</string>
+	<string name="tip_altitude_offset_t">En GPS cihazları lokal olarak kullanılan sistemler için bir dönüşüm bir konuma bağımlı düzeltme gerektiren hangi, elipsoid tabanlı WGS84 referans sisteminde yükseklik ölçümleri rapor.
+\nBu yerel sistemler için daha iyi bir yaklaşım EGM96 referanstır. OsmAnd şimdi de EGM96 sisteminde yüksekliklerde otomatik olarak görüntülenmesini destekler.
+\nBunu başarmak için, basitçe Veri Yönetimi (orijinal http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC altındadır) üzerinden dosya WW15MGH.DAC indirin.</string>
+    <string name="map_widget_max_speed">Hız limiti</string>
+    <string name="route_descr_lat_lon">Enlem % 1 $ .3 f, boylam% 2 $ .3 f</string>
+    <string name="route_descr_current_location">Geçerli konum</string>
+    <string name="route_descr_from_to">Gönderen:%1$s\nKime:%2$s</string>
+    <string name="route_descr_from_to_via">Gönderen:%1$s
+\nVia:2$s için%\nKime:%3$s</string>
+    <string name="no_buildings_found">Bina bulunmadı.</string>
+    <string name="incremental_search_city">Adım adım şehiri arama</string>
+    <string name="search_villages_and_postcodes">Köyleri arama / posta kodu</string>
+	<string name="rendering_attr_showRoadMaps_description">sadece haritalar görüntülemek için seç-sadece haritalar:</string>
+	<string name="rendering_attr_showRoadMaps_name">Yollar-sadece haritalar</string>
+    <string name="show_warnings_descr">Trafik uyarıları (hız limitleri, zorla durdurma, hız tümsekleri), hız kamerası uyarıları ve şerit bilgilerini yapılandırma</string>
+	<string name="use_compass_navigation_descr">Hiçbir başlık Aksi tespit edildiğinde pusula kullanın</string>
+	<string name="snap_to_road_descr">Navigasyon sırasında yollaara ani posizyon</string>
+	<string name="snap_to_road">Yola kırmak</string>
+	<string name="tip_recent_changes_0_8_2_t">0.8.2 değişiklikler:
+\n* Geliştirilmiş Yönlendirme
+\n* Dinamik Haritayı ikonları
+\n* Harita ayarları günlüğü ile harita ekranına
+\n* Kilit ekranı düğmesi taşındı hizmetleri
+\n* Sabit Arapça, Kannada betik ve RTL dilleri</string>
+	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Gezinti Tarifi) OsmAnd küresel OpenStreetMap (OSM) veri çok çeşitli erişimi olan bir açık kaynak navigasyon bir uygulamadır. Tüm harita verisi (vektör veya kiremit harita) çevrimdışı kullanım için telefonun hafıza kartında saklanabilir. OsmAnd zamanda turn-by-turn sesli yönlendirme dahil olmak üzere çevrimiçi ve çevrimdışı yönlendirme işlevselliği sunuyor.Temel özelliklerden bazıları: - Komple çevrimdışı işlevsellik (seçilebilir klasör deposu indirilen vektör veya kiremit harita) - Mevcut tüm dünya için Kompakt çevrimdışı vektör haritaları - doğrudan app ülke veya bölge haritalarını indirin - Mümkünse birkaç harita katmanları Yerleşimi , GPX veya navigasyon parçaları gibi, İlgi Çekici Nokta, sık, kontür çizgileri, toplu taşıma durakları, özelleştirilebilir şeffaflık ek haritalar - adresler ve yerler için Çevrimdışı arama (POI) - kısa mesafelerde (deneysel) için Çevrimdışı yönlendirme - Araba, bisiklet ve OsmAnd bu ücretsiz sürümü isteğe bağlı şerit takibi, hız sınırı göstergesi kaydedilmeli ve TTS sesleri Limitler - isteğe bağlı otomatik gündüz / gece görüntüsüyle anahtarlama - - zoom opsiyonel hız bağımlı haritası - hareket pusula veya yönüne göre opsiyonel harita hizalama: yaya modları ile : - harita indirme sınırlı sayısı - OsmAnd İÇN\'leri çevrimdışı Vikipedi erişim yok aktif olarak geliştirilen ve bizim proje ve ilerlemenin geliştirilmesi ve yeni işlevsellik testdriving fonuna finansal katkılar dayanmaktadır ediliyor. OsmAnd + satın alma, ya da belirli yeni özellikler finansman veya osmand.net üzerinde genel bir bağış yapmayı düşünün lütfen.\n</string>
+	<string name="osmand_plus_short_description_80_chars">OsmAnd çevrimdışı ve çevrimiçi haritalar için açık kaynak kodlu bir navigasyon uygulamasıdır</string>
+	<string name="osmand_plus_long_description_1000_chars">"OsmAnd   (OSM Automated Gezinti Tarifi) OsmAnd   küresel OpenStreetMap (OSM) veri çok çeşitli erişimi olan bir açık kaynak navigasyon bir uygulamadır. Tüm harita verisi (vektör veya kiremit harita) çevrimdışı kullanım için telefonun hafıza kartında saklanabilir. OsmAnd zamanda turn-by-turn sesli yönlendirme dahil olmak üzere çevrimiçi ve çevrimdışı yönlendirme işlevselliği sunuyor. OsmAnd   Eğer, projeyi destekleyen yeni özellikler geliştirme fonu, ve en son güncellemeleri almak onu satın alarak, ücretli uygulama sürümüdür. Temel özelliklerden bazıları: - Komple çevrimdışı işlevsellik (seçilebilir klasör deposu indirilen vektör veya kiremit harita) - Mevcut tüm dünya için Kompakt çevrimdışı vektör haritaları - doğrudan app ülke veya bölge haritaları Sınırsız indirme - Çevrimdışı Vikipedi özelliği (indir İÇN Wikipedia), gezi için büyük - adresleri ve yerleri (POI) için Çevrimdışı arama - GPX veya navigasyon parçaları, İlgi Çekici Nokta, sık, kontür çizgileri, toplu taşıma durakları, özelleştirilebilir şeffaflık ek haritalar gibi olası birçok harita katmanları Yerleşimi, - - İsteğe bağlı otomatik gündüz / gece görüntüsüyle anahtarlama - yakınlaştırma opsiyonel hız bağımlı haritası - hareket pusula veya yönüne göre opsiyonel harita hizalama - İsteğe bağlı şerit takibi, hız: Otomobil, bisiklet ve yaya ile modları - Kısa mesafelerde (deneysel) için Çevrimdışı yönlendirme sınırı göstergesi kaydedilmeli ve TTS sesleri"</string>
+	<string name="tip_update_index_t">Up-to-date harita verisi olması esastır.
+\nOsmAnd çevrimdışı kullanılabilir veri güncellemeleri kontrol edebilir bir veri yöneticisi sağlar.
+\nGüncellemeler &amp;#39;Ayarlar&amp;#39;a gidin kontrol etmek için -&amp;gt;&amp;#39; Veri Yönetimi &amp;#39;-&amp;gt;&amp;#39;
+\nİndir çevrimdışı veri &amp;#39;. Bölge listesi internet alındıktan sonra, seçenek &amp;#39;Menü&amp;#39; seçebilirsiniz -&amp;gt; sadece zaten cihazınızda veri güncellemeleri belirtmek için &amp;#39;Filtre indirilen&amp;#39;. &amp;#39;\nYeşil&amp;#39; in verileri cihaza veri de-aktive işaret italik yazı sunucu verileri kullanılabilir güncelleştirmeleri gösterir &amp;#39;blue&amp;#39;
+\ncihazdan ve sunucudan verileri üzerinde veri dosyalarını aynı işaret</string>
+	<string name="day_night_info_description">Gün doğumu:% 1 $ s
+\nGün batımı:% 2 $ s</string>
+	<string name="map_widget_vector_attributes">Rendering öznitelikleri:</string>
+	<string name="map_widget_renderer">Harita tarzı</string>
+	<string name="live_monitoring_mode_off">Başlat\ncanlı takip</string>
+	<string name="position_on_map_descr">Harita üzerinde pozisyon işaretleyici konumu seçin</string>
+	<string name="layer_map_appearance">Yapılandırma ekranı...</string>
+	<string name="show_lanes">Şeritleri göster</string>
+	<string name="avoid_unpaved">Asfaltsız yollardan kaçının</string>
+	<string name="avoid_ferries">Feribotlardan kaçının</string>
+	<string name="avoid_in_routing_title">Kaçının ...</string>
+	<string name="avoid_in_routing_descr">Paralı yollardan,asfaltsız yollardan,feribotlardan kaçının</string>
+	<string name="map_widget_fluorescent">Floresan rotalar</string>
+	<string name="map_widget_show_ruler">Cetvel</string>
+	<string name="map_widget_appearance">Çeşitli</string>
+	<string name="map_widget_transparent">Şeffaf skin</string>
+	<string name="monitoring_mode_on">Durdur\nGPX kaydı</string>
+	<string name="gps_wakeup_interval">GPS uyandırma aralığı:% s</string>
+	<string name="map_widget_config">Yapılandırma ekranı</string>
+	<string name="map_widget_parking">Park etme</string>
+	<string name="map_widget_altitude">Rakım</string>
+	<string name="map_widget_time">Gitme zamanı</string>
+	<string name="map_widget_next_turn">Sonraki dönüş</string>
+	<string name="map_widget_next_turn_small">Sonraki dönüş (küçük)</string>
+	<string name="map_widget_next_next_turn">İkinci sonraki dönüş</string>
+	<string name="map_widget_mini_route">Mini rota haritası</string>
+	</resources>
