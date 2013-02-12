@@ -1212,4 +1212,5 @@
 	<string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="av_use_external_camera">Usa l\'app fotocamera</string>
+    <string name="tip_recent_changes_1_2_t">Cambiamenti nella 1.2:</string>
     </resources>
