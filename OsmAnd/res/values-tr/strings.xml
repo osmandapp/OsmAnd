@@ -152,7 +152,7 @@
     <string name="recording_can_not_be_played">Kayıt çalınamaz</string>
     <string name="recording_context_menu_delete">Kayıt sil</string>
     <string name="recording_context_menu_play"/>
-    <string name="recording_description">Kayıt % 1% 3 $ s $ s% 2 $ s</string>
+    <string name="recording_description">Kayıt %1$s %2$s of %3$</string>
     <string name="recording_default_name">kayıt</string>
     <string name="av_control_stop">durdur</string>
     <string name="av_control_start">Başlat</string>
@@ -189,11 +189,11 @@
 \nBu yerel sistemler için daha iyi bir yaklaşım EGM96 referanstır. OsmAnd şimdi de EGM96 sisteminde yüksekliklerde otomatik olarak görüntülenmesini destekler.
 \nBunu başarmak için, basitçe Veri Yönetimi (orijinal http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC altındadır) üzerinden dosya WW15MGH.DAC indirin.</string>
     <string name="map_widget_max_speed">Hız limiti</string>
-    <string name="route_descr_lat_lon">Enlem % 1 $ .3 f, boylam% 2 $ .3 f</string>
+    <string name="route_descr_lat_lon">Enlem %1$.3f, boylam %2$.3f</string>
     <string name="route_descr_current_location">Geçerli konum</string>
     <string name="route_descr_from_to">Gönderen:%1$s\nKime:%2$s</string>
     <string name="route_descr_from_to_via">Gönderen:%1$s
-\nVia:2$s için%\nKime:%3$s</string>
+\nVia:%2$s için\nKime:%3$s</string>
     <string name="no_buildings_found">Bina bulunmadı.</string>
     <string name="incremental_search_city">Adım adım şehiri arama</string>
     <string name="search_villages_and_postcodes">Köyleri arama / posta kodu</string>
@@ -217,8 +217,8 @@
 \nGüncellemeler &amp;#39;Ayarlar&amp;#39;a gidin kontrol etmek için -&amp;gt;&amp;#39; Veri Yönetimi &amp;#39;-&amp;gt;&amp;#39;
 \nİndir çevrimdışı veri &amp;#39;. Bölge listesi internet alındıktan sonra, seçenek &amp;#39;Menü&amp;#39; seçebilirsiniz -&amp;gt; sadece zaten cihazınızda veri güncellemeleri belirtmek için &amp;#39;Filtre indirilen&amp;#39;. &amp;#39;\nYeşil&amp;#39; in verileri cihaza veri de-aktive işaret italik yazı sunucu verileri kullanılabilir güncelleştirmeleri gösterir &amp;#39;blue&amp;#39;
 \ncihazdan ve sunucudan verileri üzerinde veri dosyalarını aynı işaret</string>
-	<string name="day_night_info_description">Gün doğumu:% 1 $ s
-\nGün batımı:% 2 $ s</string>
+	<string name="day_night_info_description">Gün doğumu:%1$s
+\nGün batımı:%2$s</string>
 	<string name="map_widget_vector_attributes">Rendering öznitelikleri:</string>
 	<string name="map_widget_renderer">Harita tarzı</string>
 	<string name="live_monitoring_mode_off">Başlat\ncanlı takip</string>
