@@ -145,7 +145,7 @@
     <string name="av_use_external_camera_descr">Fotoğraf sistemi uygulamasını kullanın</string>
     <string name="av_use_external_camera">Kamera uygulamasını kullanın</string>
     <string name="recording_is_recorded">Ses/Video kayıt ediliyor. Durdurmak için bu AV ikonuna basın.</string>
-    <string name="recording_playing">Belirtilen kayıt arasından bir ses çalınıyor. % 1 $ s</string>
+    <string name="recording_playing">Belirtilen kayıt arasından bir ses çalınıyor. %1$s</string>
     <string name="recording_open_external_player">Dış sürücü aç</string>
     <string name="recording_delete_confirm">Bu kaydı kaldırmak istiyor musunuz?</string>
     <string name="tip_recent_changes_1_1_0_t">1.1.0 değişiklikler:
@@ -244,7 +244,7 @@
 	<string name="map_widget_appearance">Çeşitli:</string>
 	<string name="map_widget_transparent">Şeffaf skin</string>
 	<string name="monitoring_mode_on">Durdur\nGPX kaydı.</string>
-	<string name="gps_wakeup_interval">GPS uyandırma aralığı:% s</string>
+	<string name="gps_wakeup_interval">GPS uyandırma aralığı:%1$s</string>
 	<string name="map_widget_config">Ekranı ayarla</string>
 	<string name="map_widget_parking">Park et</string>
 	<string name="map_widget_altitude">Rakım</string>
@@ -501,7 +501,7 @@
 	<string name="asap">ACİL</string>
 	<string name="recording_context_menu_play">Oynat</string>
     <string name="bg_service_interval">Uyandırma aralığı ayarlayın:</string>
-	<string name="continue_follow_previous_route_auto">Önceki navigasyon bitmemiş. Onu izlemeye devam et? (% 1 $ s saniye)</string>
+	<string name="continue_follow_previous_route_auto">Önceki navigasyon bitmemiş. Onu izlemeye devam et? (%1$ s saniye)</string>
 	<string name="route_updated_loc_found">Pozisyon bulundu sonra rota hesaplanacak</string>
 	<string name="tip_recent_changes_0_8_1_t">"0.8.1 deki  Değişiklikler:
 \n\t* Daha kesin rotalar (biraz yavaş) şeritleriyle
@@ -512,8 +512,8 @@
 \n\t* Otopark eklentisi (&amp;#39;nerede Arabamı park etmiş? &amp;#39;)
 \n\t* Etkinleştir / devre dışı oturum butonu&amp;#39;ı"</string>
 	<string name="select_animate_speedup">Rota hızlanma animasyonu seçin</string>
-    	<string name="global_app_allocated_memory_descr">Ayrılan bellek %1$s MB(Android sınırı %2$sMB, Dalvik%3$sMB).</string>
-	<string name="native_app_allocated_memory_descr">Uygulaması tarafından ayrılan toplam yerel bellek % 1 $ s MB (Dalvik% 2 $ s MB, diğer% 3 $ s MB. tarafından tahsis. Orantılı bellek% 4 $ s MB (Android limiti% 5 $ s MB, Dalvik% 6 $ s MB).</string>
+    	<string name="global_app_allocated_memory_descr">Ayrılan bellek %1$s MB(Android sınırı %2$s MB, Dalvik %3$s MB).</string>
+	<string name="native_app_allocated_memory_descr">Uygulaması tarafından ayrılan toplam yerel bellek %1$s MB (Dalvik %2$s MB, diğer %3$s MB. tarafından tahsis. Orantılı bellek %4$s MB (Android limiti %5$s MB, Dalvik %6$s MB).</string>
 	<string name="shared_location">Paylaşılan konum</string>
 	<string name="osmand_parking_event">Park yerinden arabayı almak</string>
 	<string name="osmand_parking_warning_text">Aracını almak için Bildirim önceden takvimine eklendi.Onu elden silinceye kadar orada kalacaktır.</string>    
@@ -529,7 +529,7 @@
 	<string name="gpxup_identifiable">Teşhis edilebilir</string>
 	<string name="gpxup_trackable">Takip edilebilir</string>
 	<string name="gpxup_private">Özel</string>
-	<string name="route_roundabout">Yaklaşık yuvarlak olarak: al% 1 $ d çık ve git</string>
+	<string name="route_roundabout">Yaklaşık yuvarlak olarak: al %1$d çık ve git</string>
 	<string name="rendering_attr_noPolygons_description">Haritadaki tüm alansal arazi özelliklerini şeffaf Yap</string>
 	<string name="rendering_attr_noPolygons_name">Çokgenler gizle</string>
 	<string name="rendering_attr_appMode_name">işleme modu</string>
