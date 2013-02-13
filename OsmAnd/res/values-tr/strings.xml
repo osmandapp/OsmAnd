@@ -625,4 +625,112 @@
 	<string name="accuracy">Doğruluk</string>
 	<string name="altitude">Rakım</string>
 	<string name="no_info">Bilgi yok</string>
+	<string name="direction_style_sidewise">Yandaki akıllı (8 sektör)</string>
+	<string name="direction_style_clockwise">Saat Yönünde (12 sektör)</string>
+	<string name="settings_direction_style">Yön stili</string>
+	<string name="settings_direction_style_descr">Hareket ederken göreceli yönleri ifade etmek için bir stil seçin</string>
+	<string name="auto_announce_on">Otomatik anonsa başla</string>
+	<string name="auto_announce_off">Otomatik anonsu durdur</string>
+	<string name="scroll_map_by_gestures_descr">Dokunmatik ekrandaki hareketler ile ilerleyin haritası</string>
+	<string name="scroll_map_by_gestures">Doğal harita kaydırma</string>
+	<string name="zoom_by_trackball_descr">Yatay topunu hamle ile yakınlaştırarak haritayı değiştirme</string>
+	<string name="zoom_by_trackball">Zoom kontrolü için topunu kullan</string>
+	<string name="use_short_object_names_descr">Dokunarak keşfetme modunda kısa nesne adları kullan</string>
+	<string name="use_short_object_names">Nesne adları kullan</string>
+	<string name="accessibility_preferences_descr">Erişilebilirlik ile ilgili tercihler</string>
+	<string name="accessibility_preferences">Erişilebilirlik</string>
+	<string name="rendering_out_of_memory">Seçilen alanı görüntülemek için işlem belleği yeterli değil</string>
+	<string name="use_fluorescent_overlays">Floresan bindirmeleri</string>
+	<string name="use_fluorescent_overlays_descr">Parkur ve güzergah görüntülemek için floresan renkler kullan</string>
+	<string name="offline_edition">Çevrimdışı düzenleme</string>
+	<string name="offline_edition_descr">Her zaman çevrimdışı düzenlemeyi kullan</string>
+	<string name="tip_recent_changes_0_7_1_t">"0.7.1 deki değişiklikler:\n\t- Çevrimdışı POI düzenleme\n\t- Canlı İzleme seçeneği - periyodik olarak web servisine koordinatları gönderin
+\n\t- haritada anda kaydedilen güzergah göster
+\n\t- Yön tespiti: \'U dönüşü yapın\' gösterilir ve ters yönde veya bir dönüş eksik sonra gittiği sırada duyurulur\n\t- Yeni ses istemi  \'Rota yeniden hesaplanır\'\n\t- diretion ok değişen renk ile 100m mesafede yakın bir dönüş Optik göstergesi
+\n\t- şimdi de koyu yeşil ve koyu mavi İndir ekranda gösterilen devreden indeks dosyaları Güncelliği
+\n\t- Diğer değişiklikler"</string>
+	<string name="update_poi_does_not_change_indexes">Uygulama içinde POI değişiklikleri indirilen harita dosyaları etkilemez, bunun yerine yerel bir dosyaya kaydedilir.</string>
+	<string name="local_openstreetmap_uploading">Yükleme…</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI / Hatalar yüklendi</string>
+	<string name="local_openstreetmap_uploadall">tümünü yükle</string>
+	<string name="local_openstreetmap_upload">OSM modifikasyonu yükle</string>
+	<string name="local_openstreetmap_delete">modifikasyonu sil</string>
+	<string name="local_openstreetmap_descr_title">Asenkron OSM düzenleme:</string>
+	<string name="local_openstreetmap_settings">Yerel olarak kaydedilen OSM POIler/Hatalar</string>
+	<string name="local_openstreetmap_settings_descr">Yerel veritabanında belirtilmiş POIler/Hataları OSMde gösterme ve yönetme</string>
+	<string name="live_monitoring_descr">Belirtilen bir web hizmetine izleme gönder</string>
+	<string name="live_monitoring">Çevrimiçi canlı izleme</string>
+	<string name="live_monitoring_interval_descr">Canlı izleme aralığı belirtin</string>
+	<string name="live_monitoring_interval">Canlı izleme aralığı</string>
+	<string name="live_monitoring_url_descr">"Parametre sözdizimi ile web adresini belirtin: Enlem={0}, Boylam={1}, Damga zamanı={2}, HDOP={3}, Rakım={4}, Hız={5} "</string>
+	<string name="live_monitoring_url">Web adresinden izlemeyi canlı izlemek</string>
+	<string name="gpx_monitoring_disabled_warn">Lütfen \'GPX dosyası yolunda oturum\'ayarlarını etkinleştirin.</string>
+	<string name="show_current_gpx_title">Geçerli izi göster</string>
+	<string name="tip_recent_changes_0_7_0_t">0.7.0 deki değişiklikler:\n\t- Çevrimdışı makaleli wikipedia verisi\n\t- Güncellenmiş haritalar\n\t- Diğer küçük özellikler</string>    
+	<string name="free_version_message">Bu ücretsiz OsmAnd sürüm% 1 ile sınırlı $ s indirmeler% 2 $ s ve çevrimdışı Vikipedi makaleleri desteklemez.</string>
+	<string name="free_version_title">Ücretsiz sürüm</string>
+	<string name="index_name_north_america">Kuzey Amerika</string>
+	<string name="index_name_us">Kuzey Amerika - Amerika Birleşik Devletleri</string>
+	<string name="index_name_central_america">Orta Amerika</string>
+	<string name="index_name_south_america">Güney Amerika</string>
+	<string name="index_name_russia">Avrupa / Asya - Rusya</string>
+	<string name="index_name_oceania">okyanusya</string>
+	<string name="index_name_other">Dünya ve konu haritaları</string>
+	<string name="index_name_wiki">Dünya Wikipedia POIleri</string>
+	<string name="fav_export_confirmation">Daha önce dışarıdan alınan favorili dosya zaten var. Bunu değiştirmek istiyor musunuz?</string>
+	<string name="profile_settings">Profil Özel Ayarlar</string>
+	<string name="settings_preset_descr">Özel harita ve navigasyon ayarları olan bir kullanıcı profili seçin.</string>
+	<string name="routing_settings">Navigasyon</string>
+	<string name="routing_settings_descr">Navigasyon için seçenekleri belirtin</string>
+	<string name="global_settings">Genel ayarlar</string>
+	<string name="index_settings">Veri Yönetimi</string>
+	<string name="general_settings">Genel</string>
+	<string name="general_settings_descr">Uygulama için ekran ve ortak ayarları yapılandırma</string>
+	<string name="global_app_settings">Genel uygulama ayarları</string>
+	<string name="user_name">OSM kullanıcı adınız</string>
+	<string name="user_name_descr">Openstreetmap.org gönderimler için gereklidir</string>
+	<string name="user_password_descr">Openstreetmap.org gönderimler için gereklidir</string>
+	<string name="osmand_service">Uyku modu işlevselliği</string>
+	<string name="osmand_service_descr">Ekran kapalı iken OsmAndı çalıştırmak için kullanın</string>
+	<string name="tip_rotation_switching">Harita Yönlendirme</string>
+	<string name="tip_rotation_switching_t_v2">\tarka arkaya harita ekranı pusulası ikonuna tıklayarak harita görüntüleme döndürülmüş olup olmadığı ve nasıl geçiş yapabilirsiniz.
+\n\tseçenekler şunlardır:
+\n\t\'(kuzey yukarı) döndürmek etmeyin\' - Harita döndürülmüş olmayacak. Kuzey her zaman olacaktır
+\n\t\'Hareketinin yönü için\'- Haritada sürekli başlığı ile uyumlaştırılması
+\n\t\'pusula için\' - Haritada sürekli cihazı pusula okuma ile uyumlu olacak</string>
+	<string name="binary_map_download_success">İndirme başarılı.\n\t\n\n\tactivate \'Menü\' aktif olarak kullanmak için -&gt; \'Tanımlama Görünümü\' -&gt; \'Harita kaynağı ...\' -&gt; \'Çevrimdışı vektör haritaları\'.</string>
+	<string name="tip_day_night_mode_t_v2">"\tharita görünümü bazı vektör haritaları için gün (parlak) ve gece (koyu) arasında değiştirilebilir.
+\n\tGece renkleri gece sürüşü için daha güvenlidir.
+\n\t\'Ekran ... yapılandır\' - -&gt; \'Gündüz / Gece haritası\' → \'Menü\' anahtarlama gündüz / gece için bir ilke ayarlayabilirsiniz.
+\n\tSeçenekler şunlardır:
+\n\t\'Gün Doğumu / Gün Batımı\' - otomatik mod, varsayılan) güneşin pozisyonuna göre kontrol\n\t\'Gün\' - her zaman günlük modunu kullanmak
+\n\t\'Gece\' - Her zaman gece modunu  kullanın\n\t\"Işık sensörü\" - harita görünümü Cihazınızın ışık sensörü (donatılmaları halinde) tarafından kontrol edilir"</string>	
+	<string name="tip_osm_improve">OSM Veri Geliştirilmesi</string>
+	<string name="tip_osm_improve_t">\tOsmAnd harita görüntüleme ve navigasyon-can OSM veri kalitesini iyileştirmek için kullanılır ve üstelik-Openstreetmap.org (OSM) verilerine dayanarak haritaları kullanır. Kolayca sadece birkaç tıklama ile yeni POI veya OSM hata raporları oluşturabilir ve yükleyebilirsiniz!\n\tBunun için önce \'Ayarlar\' daki OSM giriş bilgilerinizi vermeniz gerekir -&gt; \'Genel ayarlar\' -&gt; \'OSM düzenleme\'.\n\tharitası bağlam menüsünde \'POI Oluştur\' yeni POI kullanım seçeneği eklemek için. \'Oluştur POI\' iletişim kutusunda yeni bir POI hakkında bilgiler girerek devam edin ve sonunda taahhüt.\n\tHaritalarda hataları hemen sonra daha hızlı bu sorunu çözebilirsiniz OSM hata ve OSM topluluğu ile rapor edilebilir.
+\n\tHarita bağlam menüsünde bir OSM hata kullanım seçeneği \'Aç OSM hata\' eklemek için. Sonra sorunun ayrıntılı bir açıklama girin ve nihayet \'Ekle\' düğmesini kullanarak gönderebilirsiniz.\n\tInternet bağlantısı OSM POI ve ve OSM hata katılım için gerekli olduğunu lütfen unutmayınız.</string>
+	<string name="download_files_question_space">Boş alan artık {2} MB! İndirme {0} dosya (lar) ({1} MB)?</string>
+	<string name="tip_select_destination_point_t">\tTüm arama faaliyetlerinde, ya da uzun da \'Favori Puan Listesi\' bir giriş presleme yoluyla, doğrudan harita (bağlam menüsünü, ardından \'Hedef olarak ayarla\') bir hedef seçebilirsiniz.
+\n\tHedef harita üzerinde turuncu bir disk olarak işaretlenir ve OsmAnd o ve o (turuncu üçgen) ile yönüne mesafeyi görüntüler.</string> 
+	<string name="tip_recent_changes_0_6_9_t">0.6.9 deki değişiklikler:
+\n\t- Geliştirilmiş çevrimdışı harita oluşturma\n\t- Hızlı Yerli offline render - (bazı cihazlar çalışmayabilir) deneysel özellikler bakmak\n\t- Massive görünüm ve his değişikliği\n\t- Rakım bilgileri
+\n\t- Yeni çeviriler (Vienamese, Lehçe)\n\t- Diğer küçük özellikler</string>
+	<string name="use_transparent_map_theme">Şeffaf tema</string>
+	<string name="native_library_not_supported">Yerli kitaplığı bu cihazda desteklenmiyor.</string>
+	<string name="init_native_library">Yerel kütüphane başlatılıyor…</string>
+	<string name="choose_auto_follow_route">Otomatik merkezi harita görünümü</string>
+	<string name="choose_auto_follow_route_descr">Harita görünümüne kadar zaman mevcut pozisyonu senkronize eder</string>
+	<string name="auto_follow_route_navigation">Otomatik-sadece merkezi nav</string>
+	<string name="auto_follow_route_navigation_descr">Otomatik-navigasyon yaparken sadece merkezi harita görünümü.</string>
+	<string name="auto_follow_location_enabled">Otomatik-kullanılan merkezi harita görünümü.</string>
+	<string name="pref_vector_rendering">Özel seçenekli vektör renderer etme</string>
+	<string name="pref_overlay">Bindirme / altlık</string>
+	<string name="pref_raster_map">Harita kaynağı ayarları</string>
+	<string name="pref_vector_map">Vektör harita ayarları</string>
+	<string name="delete_confirmation_msg">" silinsin mi %1$s?"</string>
+	<string name="city_type_suburb">Banliyö</string>
+	<string name="city_type_hamlet">Küçük köy</string>
+	<string name="city_type_village">Köy</string>
+	<string name="city_type_town">Kasaba</string>
+	<string name="city_type_city">Şehir</string>
+	<string name="layer_poi_label">POI etiketler</string>
 	</resources>
