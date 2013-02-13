@@ -1174,4 +1174,5 @@
     <string name="precise_routing_mode_descr">Ενεργοποίηση ακριβούς δρομολόγησης για υπολογισμό δρομολογίων με ακρίβεια χωρίς προβλήματα. Είναι πολύ περιορισμένη σε σχέση με την απόσταση και δεν χρησιμοποιεί τη εγγενή βιβλιοθήκη.</string>
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
     <string name="av_control_start">Έναρξη</string>
+    <string name="tip_recent_changes_1_2_t">"Αλλαγές στην 1.2: "</string>
     </resources>
