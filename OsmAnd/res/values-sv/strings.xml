@@ -523,7 +523,7 @@
 <string name="preferred_locale">Visningsspråk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
-<string name="tip_app_mode_t_v2">→OsmAnd stöder olika (anpassningsbara) profiler för olika användningar.↵\n→Du kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\tDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
 <string name="tip_navigation">Navigering</string>
 <string name="tip_navigation_t">Innan du påbörjar en navigering måste du välja en destination. Tryck sedan på \'Meny\' -&gt; \'Vägbeskrivning\' på kartan och välj navigationstyp.</string>
 <string name="tip_search">Söker</string>
@@ -929,9 +929,9 @@
     <string name="srtm_plugin_name">Plugin för höjdkurvor</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
     <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
-\n→ * Plugin för beräkning av avstånd\n→ * Plugin för ljud-/videoanteckningar\n→ * Plugin för höjdkurvor\n→ * Buggfixar
-\n→ * \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
-\n→ * EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
+\n\t* Plugin för beräkning av avstånd\n\t* Plugin för ljud-/videoanteckningar\n\t* Plugin för höjdkurvor\n\t* Buggfixar
+\n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
+\n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
     <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
     <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkter.</string>
     <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
