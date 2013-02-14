@@ -585,7 +585,7 @@
 <string name="poi_filter_namefinder">Online namn-sökare</string>
 <string name="reading_cached_tiles">Läser cachade kartbitar…</string>
 <string name="version_index_is_big_for_memory">Index \"{0}\" fick inte plats i minnet</string>
-<string name="version_index_is_not_supported">Den versionen av indexet \"{0}\" stöds inte</string>
+<string name="version_index_is_not_supported">Denna version av indexet \"{0}\" stöds inte</string>
 <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
@@ -612,7 +612,7 @@
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-karta - klassificering med bilder</string><string name="tip_map_context_menu_t">→Snabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.↵\n→Då visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)↵\n→Snabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-karta - klassificering med bilder</string><string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
@@ -736,8 +736,8 @@
 	<string name="menu_mute_off">Ljudet är på</string>
 	<string name="menu_mute_on">Ljudet är av</string>
 	<string name="voice_provider_descr">Välj röstvägledning för navigering</string>
-	<string name="tip_location_sharing_t">"→ Du kan dela med dig av intressanta platser på din resa med familj eller vänner.↵\n→ För att dela med dig av en plats behöver du:↵\n→ Använd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.↵\n→ Välj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
-	<string name="tip_favorites_t">→ Platser som du använder ofta kan sparas som favoriter.↵\n→ Om du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.↵\n→ Långt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.↵\n→ Om du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
+	<string name="tip_location_sharing_t">"\tDu kan dela med dig av intressanta platser på din resa med familj eller vänner.\n\tFör att dela med dig av en plats behöver du:\n\tAnvänd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.\n\tVälj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
+	<string name="tip_favorites_t">\tPlatser som du använder ofta kan sparas som favoriter.\n\tOm du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.\n\tLångt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.\n\tOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata…</string>
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
