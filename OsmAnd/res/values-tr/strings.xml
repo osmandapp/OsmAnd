@@ -667,7 +667,7 @@
 	<string name="gpx_monitoring_disabled_warn">Lütfen \'GPX dosyası yolunda oturum\'ayarlarını etkinleştirin.</string>
 	<string name="show_current_gpx_title">Geçerli izi göster</string>
 	<string name="tip_recent_changes_0_7_0_t">0.7.0 deki değişiklikler:\n\t- Çevrimdışı makaleli wikipedia verisi\n\t- Güncellenmiş haritalar\n\t- Diğer küçük özellikler</string>    
-	<string name="free_version_message">Bu ücretsiz OsmAnd sürüm% 1 ile sınırlı $ s indirmeler% 2 $ s ve çevrimdışı Vikipedi makaleleri desteklemez.</string>
+	<string name="free_version_message">Bu ücretsiz OsmAnd sürüm ile sınırlı %1$s indirmeler %2$s ve çevrimdışı Vikipedi makaleleri desteklemez.</string>
 	<string name="free_version_title">Ücretsiz sürüm</string>
 	<string name="index_name_north_america">Kuzey Amerika</string>
 	<string name="index_name_us">Kuzey Amerika - Amerika Birleşik Devletleri</string>
