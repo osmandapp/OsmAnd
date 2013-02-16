@@ -427,7 +427,7 @@
   <string name="rotate_map_compass_opt">Con bussola</string>
   <string name="rotate_map_bearing_opt">Nella direzione del movimento</string>
   <string name="rotate_map_none_opt">Nessuna rotazione (nord in alto)</string>
-  <string name="rotate_map_to_bearing_descr">Selezionare l\'allinemamento della mappa allo schermo</string>
+  <string name="rotate_map_to_bearing_descr">Selezionare l\'allineamento della mappa allo schermo</string>
   <string name="rotate_map_to_bearing">Orientamento della mappa</string>
   <string name="show_route">Dettagli percorso</string>
   <string name="fav_imported_sucessfully">Importazione dei preferiti riuscita</string>
