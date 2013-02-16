@@ -1072,19 +1072,19 @@
     <string name="non_optimal_route_calculation">Υπολογισμός πιθανόν μη-βέλτιστης διαδρομής σε πολύ μεγάλες αποστάσεις</string>
     <string name="rendering_attr_roadColors_description">Επιλέξτε ένα χρωματικό συνδυασμό οδών:</string>
 	<string name="rendering_attr_roadColors_name">Χρωματικός συνδυασμός οδών</string>
-    <string name="zxing_barcode_scanner_not_found">Η εφαρμογή ZXing Barcode Scanner δεν είναι εγκατεστημένη. Αναζήτηση στο Market?</string>
+    <string name="zxing_barcode_scanner_not_found">Η εφαρμογή ZXing Barcode Scanner δεν είναι εγκατεστημένη. Αναζήτηση στο Google Play?</string>
 	<string name="close_changeset">Κλείσιμο ομάδας αλλαγών</string>
 	<string name="safe_mode_description">Εκτέλεση της εφαρμογής σε ασφαλή λειτουργία (χρησιμοποιώντας πιο αργό Android αντί του εγγενούς κώδικα).</string>
     <string name="safe_mode">Ασφαλής λειτουργία</string>
     <string name="native_library_not_running">Η εφαρμογή εκτελείται σε ασφαλή λειτουργία (απενεργοποίηση από τις Ρυθμίσεις).</string>
-    <string name="background_service_is_enabled_question">Η υπηρεσία παρασκηνίου εκτελείται ακόμη. Θέλετε να την ακυρώσετε;</string>
-    <string name="tip_recent_changes_1_0_0_t">"Αλλαγές στην 1.0 :
+    <string name="background_service_is_enabled_question">Η υπηρεσία κατάστασης νάρκης του OsmAnd εκτελείται ακόμη. Θέλετε να την κλείσετε;</string>
+    <string name="tip_recent_changes_1_0_0_t">"Αλλαγές στην 1.0.0:
 \n\t* Βελτιωμένη δρομολόγηση: γρηγορότερη, με καλύτερη ακρίβεια, μέχρι 250 χλμ
 \n\t* Εισαγωγή οδικών-μόνο χαρτών\n\t* Ο χάρτης δεν χάνει το κλείδωμα θέσης μετά από διακοπές
 \n\t* Ενεργοποίηση της υπηρεσίας παρασκηνίου κατά την πλοήγηση "</string>
     <string name="rendering_attr_showRoadMaps_description">Επιλέξτε πότε θα εμφανίζονται οδικοί-μόνο χάρτες:</string>
 	<string name="rendering_attr_showRoadMaps_name">Οδικοί-μόνο χάρτες</string>
-    <string name="download_roads_only_item">Δρόμοι</string>
+    <string name="download_roads_only_item">Δρόμοι μόνο</string>
     <string name="download_regular_maps">Κανονικοί χάρτες</string>
     <string name="download_roads_only_maps">Οδικοί-μόνο χάρτες</string>
     <string name="incomplete_locale">ημιτελές</string>
@@ -1095,7 +1095,7 @@
     <string name="route_descr_from_to">Από %1$s\nΠρος %2$s</string>
     <string name="route_descr_from_to_via">Από : %1$s\nΜέσω : %2$s\nΠρος : %3$s</string>
     <string name="map_widget_max_speed">Όριο ταχύτητας</string>
-    <string name="monitoring_control_start">έναρξη</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="tip_altitude_offset_t">"\tΟι περισσότερες συσκευές GPS εμφανίζουν το υψόμετρο σε σύστημα αναφοράς βασισμένο στο ελλειψοειδές WGS84, από το οποίο η μετατροπή στα συστήματα που χρησιμοποιούνται τοπικά απαιτεί διόρθωση εξαρτούμενη από τη θέση.
 \n\tΜια καλύτερη προσέγγιση σε αυτά τα τοπικά συστήματα είναι το σύστημα αναφοράς EGM96. Ο OsmAnd πλέον υποστηρίζει την αυτόματη εμφάνιση των υψομέτρων στο σύστημα EGM96.
 \n\tΓια να το πετύχετε αυτό, απλά κάντε λήψη του αρχείου WW15MGH.DAC μέσω του διαχειριστή Offline δεδομένων (το αυθεντικό είναι στο http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
@@ -1109,19 +1109,19 @@
     <string name="index_srtm_ele">Ισοϋψείς γραμμές</string>
     <string name="srtm_plugin_description">Αυτό το πρόσθετο σας επιτρέπει να κάνετε λήψη υψομετρικών γραμμών (Λήψη χαρτών -&gt; Μενού -&gt; Άλλοι χάρτες) για συγκεκριμένη περιοχή και να τους χρησιμοποιήσετε με τους offline χάρτες.</string>
     <string name="srtm_plugin_name">Πρόσθετο ισοϋψών γραμμών</string>
-    <string name="download_srtm_maps">Δεδομένα ισοϋψών γραμμών</string>
+    <string name="download_srtm_maps">Ισοϋψείς γραμμές</string>
     <string name="osmand_distance_plugin_description">Μέτρηση απόστασης μεταξύ δύο ή περισσότερων σημείων. Προσθήκη σημείων με γρήγορο κλικ και αφαίρεση μέσω παρατεταμένου πατήματος.</string>
 	<string name="osmand_distance_plugin_name">Υπολογιστής Απόστασης</string>
 <string name="index_srtm_parts">μέρη</string>
     <string name="monitoring_control_stop">Σταμάτημα</string>
     <string name="map_widget_audionotes">Ηχητικές σημειώσεις</string>
-    <string name="audionotes_plugin_description">Εγγραφή ηχητικών σημειώσεων</string>
-    <string name="audionotes_plugin_name">Πρόσθετο ηχητικών σημειώσεων</string>
+    <string name="audionotes_plugin_description">Κάντε σημειώσεις ήχου/video κατά τη διάρκεια του ταξιδιού</string>
+    <string name="audionotes_plugin_name">Σημειώσεις ήχου/video</string>
     <string name="srtm_plugin_attribution">το ASTER είναι ένα προϊόν των METI και NASA</string>
     <string name="osmand_srtm_short_description_80_chars">πρόσθετο του OsmAnd για ισοϋψείς γραμμές χωρίς σύνδεση</string>
     <string name="use_clear_distance_measurement">Κλικ άλλη μια φορά για καθαρισμό των σημείων μέτρησης.</string>
     <string name="map_widget_distancemeasurement">Μέτρηση απόστασης</string>
-    <string name="recording_is_recorded">Εγγραφή Ήχου/Εικόνας σε εξέλιξη. Για σταμάτημα πατήστε στο κουμπί stop στο γραφικό στοιχείο.</string>
+    <string name="recording_is_recorded">Εγγραφή Ήχου/video σε εξέλιξη. Για σταμάτημα πατήστε το γραφικό στοιχείο AV.</string>
     <string name="recording_playing">Ένας ήχος από την συγκεκριμένη εγγραφή αναπαράγεται.\n%1$s</string>
     <string name="recording_open_external_player">Άνοιγμα εξωτερικού αναπαραγωγέα</string>
     <string name="recording_delete_confirm">Θέλετε να αφαιρέσετε αυτή την εγγραφή;</string>
@@ -1140,34 +1140,34 @@
     <string name="recording_context_menu_play">Αναπαραγωγή</string>
     <string name="recording_description">Εγγραφή %1$s %2$s από %3$s</string>
     <string name="recording_default_name">εγγραφή</string>
-    <string name="map_widget_av_notes">Ηχητικές σημειώσεις</string>
-    <string name="av_def_action_video">Εγγραφή εικόνας</string>
+    <string name="map_widget_av_notes">Σημειώσεις ήχου/video</string>
+    <string name="av_def_action_video">Εγγραφή video</string>
     <string name="av_def_action_audio">Εγγραφή ήχου</string>
     <string name="av_widget_action_descr">Επιλέξτε προκαθορισμένη ενέργεια γραφικού στοιχείου</string>
     <string name="av_widget_action">Προκαθορισμένη ενέργεια γραφικού στοιχείου</string>
-    <string name="av_use_external_recorder">Χρήση εξωτερικού εγγραφέα</string>
-    <string name="av_settings">"Ρυθμίσεις εικόνας/ήχου "</string>
+    <string name="av_use_external_recorder">Χρήση εγγραφέα συστήματος</string>
+    <string name="av_settings">"Ρυθμίσεις ήχου/video "</string>
     <string name="recording_error">"Προέκυψε σφάλμα κατά την εγγραφή "</string>
     <string name="recording_camera_not_available">Κάμερα μη διαθέσιμη</string>
     <string name="av_control_stop">σταμάτημα</string>
-    <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου εικόνας</string>
-    <string name="av_video_format">Μορφή εξόδου εικόνας</string>
-    <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για την εικόνα</string>
+    <string name="av_video_format_descr">Επιλέξτε μορφή εξόδου video</string>
+    <string name="av_video_format">Μορφή εξόδου video</string>
+    <string name="av_use_external_recorder_descr">Χρήση τού εγγραφέα συστήματος για video</string>
     <string name="use_distance_measurement">Αγγίξτε για δημιουργία σημείου, πιέστε και κρατήστε για διαγραφή προηγούμενου σημείου, κλικ στο γραφικό στοιχείο μέτρησης για έξοδο.</string>
-    <string name="av_settings_descr">Διαμόρφωση ρυθμίσεων ήχου και εικόνας</string>
+    <string name="av_settings_descr">Διαμόρφωση ρυθμίσεων ήχου και video</string>
     <string name="dropbox_plugin_description">Το πρόσθετο dropbox επιτρέπει τον συγχρονισμό ιχνών και σημειώσεων εικόνας/ήχου με τον dropbox λογαριασμό σας.</string>
     <string name="dropbox_plugin_name">Πρόσθετο dropbox</string>
     <string name="animate_routing_using_gpx">Θέλετε να χρησιμοποιήσετε υπάρχον αρχείο GPX;</string>
     <string name="intermediate_points_change_order">Αλλαγή σειράς</string>
-    <string name="srtm_paid_version_msg">Παρακαλώ σκεφτείτε την αγορά του πρόσθετου ισοϋψών γραμμών από το Market για να υποστηρίξετε την περεταίρω ανάπτυξη.</string>
+    <string name="srtm_paid_version_msg">Παρακαλώ σκεφτείτε την αγορά του πρόσθετου ισοϋψών γραμμών από το Google Play για να υποστηρίξετε την περεταίρω ανάπτυξη.</string>
     <string name="srtm_paid_version_title">Πρόσθετο ισοϋψών γραμμών</string>
     <string name="stop_routing_confirm">Είστε σίγουρος ότι θέλετε να σταματήσετε την πλοήγηση;</string>
     <string name="clear_dest_confirm">Είστε σίγουρος ότι θέλετε να καθαρίσετε το σημείο προορισμού;</string>
     <string name="precise_routing_mode">Ακριβής δρομολόγηση (άλφα)</string>
     <string name="recording_context_menu_show">Εμφάνιση</string>
     <string name="recording_photo_description">Φωτογραφία %1$s από %2$s</string>
-    <string name="av_def_action_picture">Πάρτε μια φωτογραφία</string>
-    <string name="recording_context_menu_precord">Πάρτε μια φωτογραφία</string>
+    <string name="av_def_action_picture">Λήψη φωτογραφίας</string>
+    <string name="recording_context_menu_precord">Λήψη φωτογραφίας</string>
     <string name="audionotes_location_not_defined">Δεν έχει καθοριστεί ακόμα τοποθεσία για συσχέτιση με την σημείωση. \"Χρήση τοποθεσίας...\" για να συνδέσετε την σημείωση με την καθορισμένη τοποθεσία</string>
     <string name="local_indexes_cat_av">Δεδομένα Ήχου/Εικόνας</string>
     <string name="dist_control_start">Έναρξη</string>
@@ -1175,4 +1175,13 @@
     <string name="layer_recordings">Επίπεδο εγγραφής</string>
     <string name="av_control_start">Έναρξη</string>
     <string name="tip_recent_changes_1_2_t">"Αλλαγές στην 1.2: "</string>
-    </resources>
+    <string name="av_use_external_camera_descr">Χρήση εφαρμογής συστήματος για φωτογραφία</string>
+    <string name="av_use_external_camera">Χρήση εφαρμογής κάμερας</string>
+    <string name="tip_recent_changes_1_1_2_t">"Αλλαγές στην 1.1.2:
+\n\t* Βελτίωση πρόσθετου ήχου/video (φωτογραφίες με πληροφορίες EXIF)
+\n\t* Usability fixed and restructured Contour lines plugin
+\n\t* Hillshade packages for Contour lines plugin
+\n\t* Διορθώσεις σφαλμάτων (suboptimal routing) "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Αυτό το πρόσθετο παρέχει ισοϋψείς γραμμές οι οποίες μπορούν να εμφανιστούν στου εκτός σύνδεσης χάρτες του OsmAnd. Τα παγκόσμια δεδομένα (μεταξύ 70 μοιρών βόρεια και 70 μοιρών νότια) είναι βασισμένα σε μετρήσεις από το SRTM (Shuttle Radar Topography Mission) και το ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ένα όργανο απεικόνισης πάνω στον Terra, τη ναυαρχίδα των δορυφόρων του Συστήματος Παρακολούθησης της Γης της NASA. Το ASTER είναι μια συνεργασία μεταξύ της NASA, Του Υπουργείου οικονομίας. εμπορίου και βιομηχανίας της Ιαπωνίας (METI), και της Japan Space Systems (J-spacesystems).</string>
+    <string name="support_new_features_descr">Δωρίστε ώστε να δείτε νέα χαρακτηριστικά να πραγματοποιούνται στην εφαρμογή</string>
+	</resources>
