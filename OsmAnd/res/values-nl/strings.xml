@@ -159,7 +159,7 @@
   <string name="monitor_preferences">Tracking</string>
   <string name="monitor_preferences_descr">Specifieke tracking instellingen</string>
   <string name="routing_settings">Navigatie</string>
-  <string name="routing_settings_descr">Specificeer route-opties</string>
+  <string name="routing_settings_descr">Specificeer navigatie-opties</string>
   <string name="global_settings">Algemene instellingen</string>
   <string name="index_settings">Offline gegevens</string>
   <string name="index_settings_descr">Download, bekijk details en beheer offline kaarten</string>
@@ -840,7 +840,7 @@
   <string name="context_menu_item_directions">Aanwijzingen naar hier</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
-  <string name="gpx_index_settings_descr">" (inclusief GPX analysering)"</string>
+  <string name="gpx_index_settings_descr">" (met GPX analysator)"</string>
   <string name="map_online_plugin_is_not_installed">Activeer de online kaarten-plugin om andere kaartbronnen te kunnen selecteren.</string>
   <string name="map_online_data">Online (raster-) kaarten</string>
   <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart)</string>
