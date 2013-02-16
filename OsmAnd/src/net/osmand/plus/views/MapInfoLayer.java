@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.osmand.access.AccessibleToast;
@@ -317,14 +318,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		
-		createCustomRenderingProperties(app.getRendererRegistry().getCurrentSelectedRenderer());
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		if(renderer != null) {
+			createCustomRenderingProperties(renderer);
+		}
 	}
 	
 	private void createCustomRenderingProperties(RenderingRulesStorage renderer) {
 		String categoryName = ADDITIONAL_VECTOR_RENDERING_CATEGORY;
 		mapInfoControls.removeApperanceWidgets(categoryName);
 		final OsmandApplication app = view.getApplication();
-		for (final RenderingRuleProperty p : renderer.PROPS.getCustomRules()) {
+		List<RenderingRuleProperty> customRules = renderer.PROPS.getCustomRules();
+		for (final RenderingRuleProperty p : customRules) {
 			String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(), p.getName());
 			//test old descr as title
 			final String propertyDescr = SettingsActivity.getStringPropertyDescription(view.getContext(), p.getAttrName(), p.getName());
