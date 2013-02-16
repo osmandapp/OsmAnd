@@ -1250,7 +1250,7 @@ public class MapActivityActions implements DialogProvider {
 					break;
 				case 1:
 					mapActivity.getNavigationInfo().show(mapActivity.getPointToNavigate(),
-							mapActivity.getMapLayers().getLocationLayer().getHeading());
+							mapActivity.getMapLayers().getLocationLayer().getHeading(), mapActivity);
 					break;
 				default:
 					break;
