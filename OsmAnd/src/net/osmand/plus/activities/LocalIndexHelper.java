@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
+import com.ibm.icu.text.DateFormat;
+
 import net.osmand.IndexConstants;
 import net.osmand.binary.BinaryIndexPart;
 import net.osmand.binary.BinaryMapAddressReaderAdapter.AddressRegion;
@@ -45,10 +47,18 @@ public class LocalIndexHelper {
 		
 	private final OsmandApplication app;
 	
-	private MessageFormat dateformat = new MessageFormat("{0,date,dd.MM.yyyy}", Locale.US);
+
+	private DateFormat dateFormat;
 
 	public LocalIndexHelper(OsmandApplication app){
 		this.app = app;
+	}
+	
+	public String formatDate(long t) {
+		if(dateFormat == null) {
+			dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
+		}
+		return dateFormat.format(new Date(t));
 	}
 	
 	public String getInstalledDate(File f){
@@ -56,7 +66,7 @@ public class LocalIndexHelper {
 	}
 	
 	public String getInstalledDate(long t){
-		return app.getString(R.string.local_index_installed) + " : " + dateformat.format(new Object[]{new Date(t)});
+		return app.getString(R.string.local_index_installed) + " : " + formatDate(t);
 	}
 	
 	public void updateDescription(LocalIndexInfo info){

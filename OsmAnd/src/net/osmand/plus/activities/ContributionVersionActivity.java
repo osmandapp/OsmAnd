@@ -14,6 +14,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -132,8 +133,8 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		if (showMessage) {
 			AccessibleToast.makeText(
 					this,
-					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, dateFormat
-							.format(currentSelectedBuild.date)), Toast.LENGTH_LONG).show();
+					MessageFormat.format(getString(R.string.build_installed), currentSelectedBuild.tag, 
+							Algorithms.formatDate(currentSelectedBuild.date.getTime())), Toast.LENGTH_LONG).show();
 		}
 		getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.set(dateFormat.format(d));
 	}
@@ -196,7 +197,8 @@ public class ContributionVersionActivity extends OsmandListActivity {
 		super.onListItemClick(l, v, position, id);
 		final OsmAndBuild item = (OsmAndBuild) getListAdapter().getItem(position);
 		Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag, dateFormat.format(item.date), item.size));
+		builder.setMessage(MessageFormat.format(getString(R.string.install_selected_build), item.tag, 
+				Algorithms.formatDate(item.date.getTime()), item.size));
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 			
 			@Override
@@ -249,7 +251,7 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			
 			TextView description = (TextView) row.findViewById(R.id.download_descr);
 			StringBuilder format = new StringBuilder();
-			format.append(dateFormat.format(build.date))/*.append(" : ").append(build.size).append(" MB")*/;
+			format.append(Algorithms.formatDate(build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
 			description.setText(format.toString());
 
 			if(currentInstalledDate != null){

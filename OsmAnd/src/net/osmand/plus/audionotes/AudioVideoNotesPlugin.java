@@ -232,21 +232,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String nm = name == null? "" : name ;
 			if(isPhoto()){
 				return ctx.getString(R.string.recording_photo_description, nm, 
-						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+						Algorithms.formatDateTime(file.lastModified())).trim();
 			}
 			updateInternalDescription();
 			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), 
-					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+					Algorithms.formatDateTime(file.lastModified())).trim();
 		}
 		
 		public String getSmallDescription(Context ctx){
 			String nm = name == null? "" : name ;
 			if(isPhoto()){
-				return ctx.getString(R.string.recording_photo_description, nm, 
-						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm,
+						Algorithms.formatDateTime(file.lastModified())).trim();
 			}
 			return ctx.getString(R.string.recording_description, nm, "", 
-					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+					Algorithms.formatDateTime(file.lastModified())).trim();
 		}
 
 		private String getDuration(Context ctx) {
