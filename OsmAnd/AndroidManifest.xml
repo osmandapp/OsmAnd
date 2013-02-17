@@ -76,16 +76,23 @@
         <activity android:name="net.osmand.plus.activities.search.SearchStreet2ByNameActivity"></activity>
         <activity android:name="net.osmand.plus.activities.search.SearchBuildingByNameActivity"></activity>
 		<activity android:name="net.osmand.plus.activities.EditPOIFilterActivity"></activity>
-		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity"><intent-filter><action android:name="android.intent.action.VIEW"></action>
+		<activity android:name="net.osmand.plus.activities.search.GeoIntentActivity">
+		    <intent-filter><action android:name="android.intent.action.VIEW"></action>
 			<category android:name="android.intent.category.DEFAULT"></category>
 			<data android:scheme="geo"></data>
+			</intent-filter>
+			<intent-filter>
+    			<data android:scheme="http" android:host="maps.google.com" />
+    			<action android:name="android.intent.action.VIEW" />
+    			<category android:name="android.intent.category.DEFAULT"/>
+				<category android:name="android.intent.category.BROWSABLE"/>
 			</intent-filter>
 			<!-- requires read permission -->
 			<!-- 
 			<intent-filter android:label="OsmAnd">
 			<action android:name="android.intent.action.VIEW" />
     			<category android:name="android.intent.category.DEFAULT" />
-			<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
+				<data android:mimeType="vnd.android.cursor.item/postal-address_v2" />
 			</intent-filter>
 			 -->
 		</activity>

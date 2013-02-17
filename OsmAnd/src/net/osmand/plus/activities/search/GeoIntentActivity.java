@@ -184,12 +184,43 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 * @return
 	 */
 	private MyService extract(Uri data) {
-		// it is 0,0? that means a search
-		if (data.getSchemeSpecificPart().indexOf("0,0?") != -1) {
+		if ("http".equalsIgnoreCase(data.getScheme()) && "maps.google.com".equals(data.getHost()) && "/go".equals(data.getPath())) {
+			String q = data.getQueryParameter("q");
+			if (q.indexOf(',') != -1) {
+				int i = q.indexOf(',');
+				String lat = q.substring(0, i);
+				String lon = q.substring(i + 1);
+				try {
+					double llat = Double.parseDouble(lat.trim());
+					double llon = Double.parseDouble(lon.trim());
+					return new GeoPointSearch(llat, llon);
+				} catch (NumberFormatException e) {
+					showErrorMessage(q);
+				}
+			} else {
+				showErrorMessage(q);
+			}
+		} else if (data.getSchemeSpecificPart().indexOf("0,0?") != -1) {
+			// it is 0,0? that means a search
 			return new GeoAddressSearch(data.getQuery());
 		} else {
-			return new GeoPointSearch(data.getSchemeSpecificPart());
+			String geo = data.getSchemeSpecificPart();
+			int latIndex = geo.indexOf(',');
+			int lonIndex = geo.indexOf('?');
+			lonIndex = lonIndex > 0 ? lonIndex : geo.length();
+			if (latIndex > 0) {
+				try {
+					double lat = Double.parseDouble(geo.substring(0, latIndex).trim());
+					double lon = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
+					return new GeoPointSearch(lat, lon);
+				} catch (NumberFormatException e) {
+					showErrorMessage(geo);
+				}
+			} else {
+				showErrorMessage(geo);
+			}
 		}
+		return new Empty();
 	}
 
 	private final class GeoAddressSearch implements MyService {
@@ -276,38 +307,40 @@ public class GeoIntentActivity extends OsmandListActivity {
 		return getMyApplication().getResourceManager();
 	}
 
+	
+	private void showErrorMessage(final String geo) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				AccessibleToast.makeText(GeoIntentActivity.this,
+						getString(R.string.search_offline_geo_error, geo),
+						Toast.LENGTH_LONG);
+			}
+		});
+	}
+	
+	private class Empty implements MyService {
+
+		@Override
+		public Collection<MapObject> execute() {
+			return Collections.emptyList();
+		}
+		
+	}
+	
 	private class GeoPointSearch implements MyService {
-
 		private MapObject point;
-
 		/**
 		 * geo:latitude,longitude geo:latitude,longitude?z=zoom
 		 */
-		public GeoPointSearch(final String geo) {
-			int latIndex = geo.indexOf(',');
-			int lonIndex = geo.indexOf('?');
-			lonIndex = lonIndex > 0 ? lonIndex : geo.length();
-			if (latIndex > 0) {
-				try {
-					double latitude = Double.parseDouble(geo.substring(0, latIndex).trim());
-					double longitude = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
-					// TODO zoom is omited for now
-					point = new MapObject(new Node(latitude, longitude, -1)) {
-						private static final long serialVersionUID = -7028586132795853725L;
-					};
-					point.setName("Lat: " + latitude + ",Lon:" + longitude);
-				} catch (NumberFormatException e) {
-					runOnUiThread(new Runnable() {
-						@Override
-						public void run() {
-							AccessibleToast.makeText(GeoIntentActivity.this,
-									getString(R.string.search_offline_geo_error, geo),
-									Toast.LENGTH_LONG);
-						}
-					});
-				}
-			}
+		public GeoPointSearch(double lat , double lon ) {
+			// TODO zoom is omited for now
+			point = new MapObject(new Node(lat, lon, -1)) {
+					private static final long serialVersionUID = -7028586132795853725L;
+			};
+			point.setName("Lat: " + lat + ",Lon:" + lon);
 		}
+
 
 		@Override
 		public Collection<MapObject> execute() {
