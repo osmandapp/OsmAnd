@@ -845,7 +845,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private LocationListener networkListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(MapActivity.convertLocation(location));
+			setLocation(MapActivity.convertLocation(location, getMyApplication()));
 		}
 
 		@Override
@@ -867,7 +867,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private LocationListener gpsListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(MapActivity.convertLocation(location));
+			setLocation(MapActivity.convertLocation(location, getMyApplication()));
 		}
 
 		@Override
