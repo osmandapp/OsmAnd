@@ -32,7 +32,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 import net.osmand.plus.AsyncLoadingThread.AmenityLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;

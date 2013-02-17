@@ -15,7 +15,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 import net.osmand.util.Algorithms;
 

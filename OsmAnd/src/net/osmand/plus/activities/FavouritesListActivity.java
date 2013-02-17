@@ -8,7 +8,7 @@ import java.util.List;
 
 import net.londatiga.android.QuickAction;
 import net.osmand.data.FavouritePoint;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;

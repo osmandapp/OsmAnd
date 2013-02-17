@@ -18,7 +18,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.Entity;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.util.MapUtils;
 import net.osmand.osm.Node;

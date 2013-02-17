@@ -24,7 +24,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.map.ITileSource;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.ApplicationMode;

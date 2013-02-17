@@ -387,11 +387,11 @@ public class OsmandRenderer {
 			boolean renderText, boolean drawOnlyShadow, int type) {
 		rc.allObjects++;
 		TagValuePair pair = obj.getMapIndex().decodeType(obj.getTypes()[l]);
-		if (type == MapRenderingTypes.POINT_TYPE && !drawOnlyShadow) {
+		if (type == RenderingRulesStorage.POINT_RULES && !drawOnlyShadow) {
 			drawPoint(obj, render, canvas, rc, pair, renderText);
-		} else if (type == MapRenderingTypes.POLYLINE_TYPE) {
+		} else if (type == RenderingRulesStorage.LINE_RULES) {
 			drawPolyline(obj, render, canvas, rc, pair, obj.getSimpleLayer(), drawOnlyShadow);
-		} else if (type == MapRenderingTypes.POLYGON_TYPE && !drawOnlyShadow) {
+		} else if (type == RenderingRulesStorage.POLYGON_RULES && !drawOnlyShadow) {
 			drawPolygon(obj, render, canvas, rc, pair);
 		}
 	}

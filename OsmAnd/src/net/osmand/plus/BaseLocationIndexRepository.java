@@ -7,7 +7,7 @@ import java.util.List;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
 import net.osmand.data.MapObject;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;

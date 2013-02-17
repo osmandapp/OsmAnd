@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.PoiFilter;

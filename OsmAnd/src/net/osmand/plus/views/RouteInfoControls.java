@@ -6,7 +6,7 @@ import java.util.Arrays;
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;

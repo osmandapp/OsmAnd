@@ -3,7 +3,7 @@ package net.osmand.plus.parkingpoint;
 import java.util.Calendar;
 import java.util.EnumSet;
 
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;

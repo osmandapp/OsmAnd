@@ -23,7 +23,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.plus.NameFinderPoiFilter;

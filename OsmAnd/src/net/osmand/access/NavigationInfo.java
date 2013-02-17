@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Location;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
