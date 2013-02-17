@@ -250,7 +250,7 @@
 <string name="osmand_parking_time_no_limit">Ej tidsbegränsad parkering</string>
 <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
 <string name="select_plugin_to_activate">Tryck på en plugin för att aktivera eller inaktivera den. (Omstart av OsmAnd kan krävas.)</string>
-<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar extra funktionalitet</string>
+<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar samt ytterligare funktionalitet</string>
 <string name="prefs_plugins">Plugin</string>
 <string name="tip_recent_changes_0_8_0_t">"Förändringar i 0.8.0 : ↵
 \n\t- *Plugin-funktionalitet*↵
@@ -1074,4 +1074,8 @@
 	<string name="download_hillshade_item">"Skuggad relief "</string>
     <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till Höjdkurvs-pluginen\n\t* Skuggad relief-paket för Höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
+    <string name="tip_recent_changes_1_2_t">"Ändringar i 1.2: "</string>
+    <string name="av_use_external_camera_descr">Andvänd systemappen för foton</string>
+    <string name="av_use_external_camera">Använd kamera-app</string>
+    <string name="av_control_start">starta</string>
     </resources>
