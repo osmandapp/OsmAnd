@@ -330,6 +330,8 @@ public class RouteInfoControls {
 					cachedSpeed = mx;
 					if (cachedSpeed == 0) {
 						setText(null, null);
+					} else if(cachedSpeed == RouteDataObject.NONE_MAX_SPEED) {
+						setText(R.string.max_speed_none, "");
 					} else {
 						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map.getMyApplication());
 						int ls = ds.lastIndexOf(' ');

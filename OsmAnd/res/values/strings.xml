@@ -11,6 +11,7 @@
     -->
     <string name="tip_recent_changes_1_2_t">Changes in 1.2:
     </string>
+    <string name="mx_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Hillshade</string>
     <string name="download_hillshade_maps">Hillshade overlays</string>
