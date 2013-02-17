@@ -13,7 +13,7 @@ import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;

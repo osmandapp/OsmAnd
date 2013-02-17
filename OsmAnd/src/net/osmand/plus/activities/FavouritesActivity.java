@@ -20,7 +20,7 @@ import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;

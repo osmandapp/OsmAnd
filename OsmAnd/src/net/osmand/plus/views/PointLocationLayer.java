@@ -2,7 +2,7 @@ package net.osmand.plus.views;
 
 
 import net.osmand.Location;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import android.content.Context;

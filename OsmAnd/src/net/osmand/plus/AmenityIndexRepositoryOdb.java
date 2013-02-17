@@ -20,7 +20,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.osm.Entity;
 import net.osmand.osm.LatLon;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.IOsmStorageFilter;
 import net.osmand.osm.io.OsmBaseStorage;

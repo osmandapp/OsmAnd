@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 import net.osmand.PlatformUtil;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

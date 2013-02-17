@@ -6,7 +6,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

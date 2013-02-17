@@ -11,7 +11,7 @@ import net.osmand.ResultMatcher;
 import net.osmand.data.City;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;

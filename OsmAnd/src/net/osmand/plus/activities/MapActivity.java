@@ -19,7 +19,7 @@ import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.CurrentPositionHelper;

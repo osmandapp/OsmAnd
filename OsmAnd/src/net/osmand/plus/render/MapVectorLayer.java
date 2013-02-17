@@ -1,6 +1,6 @@
 package net.osmand.plus.render;
 
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.views.BaseMapLayer;
