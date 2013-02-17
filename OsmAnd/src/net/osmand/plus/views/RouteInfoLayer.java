@@ -27,7 +27,6 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	private Button next;
 	private Button prev;
 	private Button info;
-	private boolean visible = true;
 	private int directionInfo = -1;
 
 	private DisplayMetrics dm;
@@ -107,11 +106,9 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	}
 
 	public boolean isVisible(){
-		return visible && routingHelper.isRouteCalculated() && !routingHelper.isFollowingMode();
-	}
-	public boolean couldBeVisible(){
 		return routingHelper.isRouteCalculated() && !routingHelper.isFollowingMode();
 	}
+	
 	private void updateVisibility(){
 		int vis = isVisible() ? View.VISIBLE : View.INVISIBLE; 
 		prev.setVisibility(vis);
@@ -142,22 +139,10 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	@Override
 	public void newRouteIsCalculated(boolean newRoute) {
 		directionInfo = -1;
-		if (!routingHelper.isFollowingMode()) {
-			visible = true;
-		}
 		updateVisibility();
 		view.refreshMap();
 	}
 
-	public boolean isUserDefinedVisible() {
-		return visible;
-	}
-	
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-		updateVisibility();
-	}
-	
 	public int getDirectionInfo() {
 		return directionInfo;
 	}
