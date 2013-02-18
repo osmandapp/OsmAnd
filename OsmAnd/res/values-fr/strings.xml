@@ -1207,4 +1207,5 @@
     <string name="av_use_external_camera">Utiliser l\'appareil photo</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
     <string name="tip_recent_changes_1_2_t">"Changements en 1.2 : "</string>
+    <string name="max_speed_none">Aucun(e)</string>
     </resources>

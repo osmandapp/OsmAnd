@@ -159,7 +159,7 @@
   <string name="monitor_preferences">Tracking</string>
   <string name="monitor_preferences_descr">Specifieke tracking instellingen</string>
   <string name="routing_settings">Navigatie</string>
-  <string name="routing_settings_descr">Specificeer navigatie-opties</string>
+  <string name="routing_settings_descr">Opties voor navigatie en tracking</string>
   <string name="global_settings">Algemene instellingen</string>
   <string name="index_settings">Offline gegevens</string>
   <string name="index_settings_descr">Download, bekijk details en beheer offline kaarten</string>
@@ -1168,4 +1168,5 @@
     <string name="av_use_external_camera">Gebruik de standaardcamera</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">Wijzigingen in 1.2:</string>
+    <string name="max_speed_none">geen</string>
     </resources>
