@@ -1,6 +1,6 @@
 OSMAND_MAKEFILES := \
 	$(all-subdir-makefiles) \
-	$(call all-makefiles-under,$(call my-dir)/../../../core) \
+	$(call my-dir)/../../../core/Android.mk \
 	$(call all-makefiles-under,$(call my-dir)/../../../core/externals) 
 
 # Protect from previous builds
