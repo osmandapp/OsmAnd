@@ -1,4 +1,7 @@
-OSMAND_MAKEFILES := $(all-subdir-makefiles) $(call all-makefiles-under,$(call my-dir)/../../../core)
+OSMAND_MAKEFILES := \
+	$(all-subdir-makefiles) \
+	$(call all-makefiles-under,$(call my-dir)/../../../core) \
+	$(call all-makefiles-under,$(call my-dir)/../../../core/externals) 
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
