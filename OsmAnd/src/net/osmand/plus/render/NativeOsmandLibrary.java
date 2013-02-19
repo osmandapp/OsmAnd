@@ -32,20 +32,30 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("gnustl_shared");
 						log.debug("Loading native cpufeatures_proxy..."); //$NON-NLS-1$
 						System.loadLibrary("cpufeatures_proxy");
-						if (PlatformUtil.AVIAN_LIBRARY) {
+						/*(if (PlatformUtil.AVIAN_LIBRARY) {
 							log.debug("Loading load routing test..."); //$NON-NLS-1$
 							System.loadLibrary("routing_test");
 							testRoutingPing();
-						}
+						}*/
 						if(android.os.Build.VERSION.SDK_INT >= 8) {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
 							System.loadLibrary("jnigraphics");
 						}
 						if(!cpuHasNeonSupport()) {
 							log.debug("Loading native osmand..."); //$NON-NLS-1$
+							System.loadLibrary("Qt5Core");
+							System.loadLibrary("Qt5Network");
+							System.loadLibrary("Qt5Concurrent");
+							System.loadLibrary("Qt5Sql");
+							System.loadLibrary("Qt5Xml");
 							System.loadLibrary("osmand");
 						} else {
 							log.debug("Loading native osmand with NEON..."); //$NON-NLS-1$
+							System.loadLibrary("Qt5Core_neon");
+							System.loadLibrary("Qt5Network_neon");
+							System.loadLibrary("Qt5Concurrent_neon");
+							System.loadLibrary("Qt5Sql_neon");
+							System.loadLibrary("Qt5Xml_neon");
 							System.loadLibrary("osmand_neon");
 						}
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
