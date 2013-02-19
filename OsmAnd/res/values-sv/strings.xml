@@ -1072,7 +1072,7 @@
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	<string name="download_hillshade_item">"Skuggad relief "</string>
-    <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
+    <string name="download_hillshade_maps">Skuggat relief-överlägg</string>
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till Höjdkurvs-pluginen\n\t* Skuggad relief-paket för Höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
     <string name="tip_recent_changes_1_2_t">"Ändringar i 1.2: "</string>
     <string name="av_use_external_camera_descr">Andvänd systemappen för foton</string>
