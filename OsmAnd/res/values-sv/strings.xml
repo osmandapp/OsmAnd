@@ -635,7 +635,7 @@
 	<string name="daynight">Dag-/nattläge</string>
 	<string name="download_files_question">Ladda ner {0} fil(er) ({1} MB)?</string>
 	<string name="items_were_selected">{0} post(er) vald(a)</string>
-	<string name="filter_existing_indexes">Filter nerladdade</string>
+	<string name="filter_existing_indexes">Filtrera nerladdade</string>
 	<string name="deselect_all">Avmarkera alla</string>
 	<string name="select_all">Markera alla</string>
 	<string name="reload">Uppdatera</string>
@@ -1078,4 +1078,5 @@
     <string name="av_use_external_camera_descr">Andvänd systemappen för foton</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
     <string name="av_control_start">starta</string>
+    <string name="max_speed_none">Ingen</string>
     </resources>
