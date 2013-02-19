@@ -70,6 +70,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	private Preference bidforfix;
 	private Preference plugins;
 	private Preference avoidRouting;
+	private Preference preferRouting;
 	private Preference showAlarms;
 
 	private EditTextPreference applicationDir;
@@ -374,6 +375,9 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		plugins.setOnPreferenceClickListener(this);
 		avoidRouting = (Preference) screen.findPreference("avoid_in_routing");
 		avoidRouting.setOnPreferenceClickListener(this);
+		preferRouting = (Preference) screen.findPreference("prefer_in_routing");
+		preferRouting.setOnPreferenceClickListener(this);
+		
 		showAlarms = (Preference) screen.findPreference("show_routing_alarms");
 		showAlarms.setOnPreferenceClickListener(this);
 		
@@ -761,6 +765,10 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					getString(R.string.avoid_unpaved), getString(R.string.avoid_motorway)
 					}, new OsmandPreference[] { osmandSettings.AVOID_TOLL_ROADS,
 					osmandSettings.AVOID_FERRIES, osmandSettings.AVOID_UNPAVED_ROADS, osmandSettings.AVOID_MOTORWAY });
+			return true;
+		} else if (preference == preferRouting) {
+			showBooleanSettings(new String[] { getString(R.string.prefer_motorways)}, 
+					new OsmandPreference[] { osmandSettings.PREFER_MOTORWAYS});
 			return true;
 		} else if (preference == showAlarms) {
 			showBooleanSettings(new String[] { getString(R.string.show_speed_limits), getString(R.string.show_cameras), 

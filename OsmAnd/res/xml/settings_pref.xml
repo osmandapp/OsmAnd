@@ -34,6 +34,7 @@
 		<CheckBoxPreference android:title="@string/snap_to_road" android:summary="@string/snap_to_road_descr" android:key="snap_to_road"></CheckBoxPreference>
 		<Preference android:title="@string/show_warnings_title" android:summary="@string/show_warnings_descr" android:key="show_routing_alarms"/>
 		<Preference android:title="@string/avoid_in_routing_title" android:summary="@string/avoid_in_routing_descr" android:key="avoid_in_routing"/>
+		<Preference android:title="@string/prefer_in_routing_title" android:summary="@string/prefer_in_routing_descr" android:key="prefer_in_routing"/>
 		<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
 			android:key="use_compass_navigation"></CheckBoxPreference>
 		<CheckBoxPreference android:summary="@string/precise_routing_mode_descr" android:title="@string/precise_routing_mode"

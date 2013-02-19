@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="prefer_motorways">Prefer motorways</string>
+	<string name="prefer_in_routing_title">Prefer&#8230;</string>
+	<string name="prefer_in_routing_descr">Prefer motorways</string>
     <string name="tip_recent_changes_1_2_t">Changes in 1.2:
     </string>
     <string name="max_speed_none">none</string>
