@@ -1213,4 +1213,5 @@
     <string name="index_name_openmaps">OpenMap UE</string>
     <string name="av_use_external_camera">Usa l\'app fotocamera</string>
     <string name="tip_recent_changes_1_2_t">"Cambiamenti nella 1.2: "</string>
+    <string name="max_speed_none">nessuno</string>
     </resources>
