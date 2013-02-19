@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -200,11 +200,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		
-		if(pressedInTextView(point.x, point.y) > 0){
+		if(view.getSettings().getPlanningMode()) return false;	//skip if in planning mode
+		if(pressedInTextView(point.x, point.y) == 2){	//close button selected
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
 			return true;
 		}
+		if(pressedInTextView(point.x, point.y) == 1) return false;	//text box pressed - do nothing
 		LatLon pressedLoc = view.getLatLonFromScreenPoint(point.x, point.y);
 		selectedObjects.clear();
 		List<Object> s = new ArrayList<Object>();

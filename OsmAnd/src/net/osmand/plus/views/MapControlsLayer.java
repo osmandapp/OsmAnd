@@ -2,7 +2,7 @@ package net.osmand.plus.views;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -99,6 +99,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initRuler(view, parent);
 		
 		initTransparencyBar(view, parent);
+		view.getApplication().getSettings().setDisplayScaleChangedFlag(false);	//clear flag used to indicate display scale has been changed
 		
 	}
 
@@ -410,7 +411,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		if (view.isZooming()) {
 			cacheRulerText = null;
 		} else if(view.getFloatZoom() != cacheRulerZoom || 
-				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1){
+				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1 || view.getApplication().getSettings().getDisplayScaleChangedFlag()){
 			cacheRulerZoom = view.getFloatZoom();
 			cacheRulerTileX = view.getXTile();
 			cacheRulerTileY = view.getYTile();
@@ -420,6 +421,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 			double dist = MapUtils.getDistance(latitude, leftLon, latitude, rightLon);
 			double pixDensity = view.getWidth() / dist; 
 			
+			if (!view.getApplication().getSettings().USE_HIGH_RES_MAPS.get() && view.getApplication().getSettings().getDisplayScaleFactor() > 1.0f) {	//adjust for display scaling
+				dist /= (double)(view.getApplication().getSettings().getDisplayScaleFactor());	//apply user-selected zoom factor - hi-res screens can have tiny text for map tile images
+			}
+			view.getApplication().getSettings().setDisplayScaleChangedFlag(false);
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
 			
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);

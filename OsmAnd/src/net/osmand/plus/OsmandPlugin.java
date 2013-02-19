@@ -24,6 +24,7 @@ import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.planning.PlanningPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -43,6 +44,8 @@ public abstract class OsmandPlugin {
 	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin"; //$NON-NLS-1$
 	
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
+	private static final String PLANNING_PLUGIN_COMPONENT = "net.osmand.planningPlugin";
+	private static final String PLANNING_PLUGIN_ACTIVITY = "net.osmand.planningPlugin.PlanningPluginActivity";
 	
 	
 	public abstract String getId();
@@ -82,6 +85,7 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
+		installedPlugins.add(new PlanningPlugin(app));
 		
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();

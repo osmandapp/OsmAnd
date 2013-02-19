@@ -9,6 +9,50 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_list_activities_planning">Planning/Measurement</string>
+    <string name="map_widget_measurement_on">Measuring On</string>
+    <string name="map_widget_measurement_off">Measuring Off</string>
+    <string name="plan_file_name_prefix">plan_</string>
+    <string name="context_menu_item_load_GPX_plan">Load GPX plan file</string>
+    <string name="warning_saved_OK">Saved as </string>
+    <string name="start_point">Start Point </string>    
+    <string name="warning_save_failed">Failed to save </string>
+    <string name="context_menu_item_save_plan">Save track as GPX file</string>
+    <string name="context_menu_item_planning_help">Measurement/Planning Help</string>
+    <string name="context_menu_item_start_measurement_mode">Start Plan/measure mode</string>
+    <string name="context_menu_item_delete_point">Remove this point</string>
+    <string name="context_menu_item_clear_all_points">Remove all points</string>
+    <string name="context_menu_item_insert_point">Insert point before this</string>
+    <string name="context_menu_item_cancel">Cancel</string>
+    <string name="context_menu_item_display_point_info">Display point lat/lon.</string>
+    <string name="context_menu_item_display_distance_only">Display distance only.</string>
+    <string name="context_menu_item_end_measurement">End plan/measure mode</string>
+    <string name="context_menu_item_edit_point_size">Edit point size</string>
+    <string name="context_menu_item_edit_point_selection_area">Edit selection area</string>
+    <string name="context_menu_item_show_display_zoom_buttons">Show Display Zoom Buttons</string>
+    <string name="context_menu_item_hide_display_zoom_buttons">Hide Display Zoom Buttons</string>
+    <string name="plan_display_size_prompt">Select the desired size of the point display radius (in pixels)</string>
+    <string name="plan_selection_size_prompt">Select the desired size of the point selection area radius (in pixels)</string>
+    <string name="plan_display_size_warning">Point display radius set to </string>
+    <string name="plan_selection_size_warning">Point selection area radius set to </string>
+    <string name="help_Distance_Measurement_t">Planning/Measurement Mode</string>
+    <string name="help_Distance_Measurement">Planning tracks (sequence of points) can be manually created and saved to, or loaded from a GPX file:
+	\n\t- Create a track of new points using long touches at the desired locations.
+	\n\t- Tap on the Planning/Measurement control button at the upper right of the screen to open a menu giving the option to save the track as a plan-specific GPX file. The saved file will be the same as any standard GPX file but will have \"plan_\" added as a prefix to the file name.
+	\n\t- Saved gpx files can be reloaded, edited and saved as often as required.
+	\n\t- GPX Files that do not have the prefix \"plan_\" (e.g. saved GPS tracks) will not load as an editable track.
+	\n\t- Points can be inserted before any existing point by tapping on the point and selecting \"Insert point before this\" option from the pop-up menu. Long touch anywhere on the map to insert the new point.
+	\n\t- Points can be dragged to a new location and the location and distance information will automatically be adjusted.
+	\n\nWhen Planning/Measurement mode is enabled, the cumulative distance between points created on the map is displayed.
+	\n\n Various other display and control functions are available via the menus displayed after tapping a point, its information text box or the Planning/Measurement control button at the upper right of the screen.
+	\n\t- Planning/Measurement mode can be turned on/off using the Measurement control button.
+	\n\t- Other editing options are also available via the various menus.
+	\n\t- Tap on any point to open a menu that provides options, including the amount of information displayed.
+	\n\t- The size of the point displayed and the size of the screen area around the point that can be used to select the point are adjustable.
+	\n\nDisplay zooming can be controlled using the + and - buttons on the left side of the screen. These buttons can be hidden using the Planning/Measurement control button menu.</string>
+	<string name="help_Distance_Measurementq">Planning and Measurement</string>	
+	<string name="osmand_planning_plugin_name">Planning and Measurement</string>
+	<string name="osmand_planning_plugin_description">This plugin provides: \n 1. manual placing/saving/loading and measurement of distances between selected map locations.\n2. Display zooming</string>
     <string name="tip_recent_changes_1_2_t">Changes in 1.2:
     </string>
     <string name="index_name_openmaps">OpenMaps EU</string>

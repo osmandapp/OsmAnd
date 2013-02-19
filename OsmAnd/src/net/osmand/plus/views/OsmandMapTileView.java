@@ -12,8 +12,8 @@ import net.osmand.access.MapExplorer;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.data.LatLon;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -242,6 +242,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			res *= (float) Math.pow(2, zoom - (int) zoom);
 		}
 
+		if (!getSettings().USE_HIGH_RES_MAPS.get() ) {	//Use the high resolution option to enable display zooming
+			res *= settings.getDisplayScaleFactor();	//apply user-selected zoom factor - hi-res screens can have tiny text for map tile images
+		}
 		
 		return res;
 	}
@@ -879,6 +882,12 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			//Provide layers opportunity to move without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onFling(e1, e2, velocityX, velocityY)) {
+					return true;
+				}
+			}
 			animatedDraggingThread.startDragging(velocityX, velocityY, 
 						e1.getX(), e1.getY(), e2.getX(), e2.getY(), true);
 			return true;
@@ -905,6 +914,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 
 		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			//Provide layers opportunity to scroll without dragging map
+			for (int i = layers.size() - 1; i >= 0; i--) {
+				if (layers.get(i).onScroll(e1, e2, distanceX, distanceY)) {
+					return true;
+				}
+			}
+			
 			dragToAnimate(e2.getX() + distanceX, e2.getY() + distanceY, e2.getX(), e2.getY(), true);
 			return true;
 		}
