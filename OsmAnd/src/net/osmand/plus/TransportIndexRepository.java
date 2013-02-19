@@ -5,7 +5,7 @@ import java.util.List;
 import net.osmand.ResultMatcher;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 
 public interface TransportIndexRepository {
 	

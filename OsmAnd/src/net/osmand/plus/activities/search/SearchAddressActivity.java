@@ -3,7 +3,7 @@ package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
 
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

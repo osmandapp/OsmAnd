@@ -55,6 +55,7 @@
 	<string name="osmand_planning_plugin_description">This plugin provides: \n 1. manual placing/saving/loading and measurement of distances between selected map locations.\n2. Display zooming</string>
     <string name="tip_recent_changes_1_2_t">Changes in 1.2:
     </string>
+    <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Hillshade</string>
     <string name="download_hillshade_maps">Hillshade overlays</string>

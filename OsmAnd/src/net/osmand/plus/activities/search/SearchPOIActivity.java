@@ -23,7 +23,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.osm.OpeningHoursParser;
 import net.osmand.osm.OpeningHoursParser.OpeningHours;
 import net.osmand.plus.NameFinderPoiFilter;
@@ -845,7 +845,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private LocationListener networkListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(MapActivity.convertLocation(location));
+			setLocation(MapActivity.convertLocation(location, getMyApplication()));
 		}
 
 		@Override
@@ -867,7 +867,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private LocationListener gpsListener = new LocationListener(){
 		@Override
 		public void onLocationChanged(Location location) {
-			setLocation(MapActivity.convertLocation(location));
+			setLocation(MapActivity.convertLocation(location, getMyApplication()));
 		}
 
 		@Override

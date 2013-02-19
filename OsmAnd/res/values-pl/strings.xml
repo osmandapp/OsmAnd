@@ -1151,7 +1151,7 @@
 	<string name="tip_recent_changes_1_1_2_t">"Zmiany w 1.1.2:
 \n\t* Rozszerzenie wtyczki audio/video (zdjęcia z danymi EXIF)
 \n\t* Poprawki w funkcjonalności wtyczki kontur
-\n\t* Paczki cieniowania wzgórz dla wtyczki kontur
+\n\t* Paczki cieniowania wzniesień dla wtyczki kontur
 \n\t* Poprawki błędów i nawigacji "</string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
     <string name="download_hillshade_item">Cieniowanie wzniesień</string>
@@ -1159,4 +1159,5 @@
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
     <string name="index_name_openmaps">Openmaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2: "</string>
+    <string name="max_speed_none">brak</string>
     </resources>

@@ -12,7 +12,7 @@ import java.util.Set;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;

@@ -252,8 +252,6 @@ public class MapActivityLayers {
 					dialog.dismiss();
 					showGPXFileLayer(mapView);
 				}
-			} else if(itemId == R.string.layer_route){
-				routeInfoLayer.setVisible(isChecked);
 			} else if(itemId == R.string.layer_transport_route){
 				transportInfoLayer.setVisible(isChecked);
 			} else if(itemId == R.string.layer_transport){
@@ -277,15 +275,10 @@ public class MapActivityLayers {
 				R.drawable.list_activities_favorites);
 		adapter.registerSelectedItem(R.string.layer_gpx_layer, 
 				getApplication().getGpxFileToDisplay() != null ? 1 : 0,  R.drawable.list_activities_gpx_tracks);
-		if(routeInfoLayer.couldBeVisible()){
-			adapter.registerSelectedItem(R.string.layer_route, 
-					routeInfoLayer.isUserDefinedVisible() ? 1 : 0,  R.drawable.list_activities_route);
-		}
 		adapter.registerSelectedItem(R.string.layer_transport, settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0, 
 				R.drawable.list_activities_transport_stops);
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
-			adapter.registerSelectedItem(R.string.layer_transport_route, 
-					routeInfoLayer.isUserDefinedVisible() ? 1 : 0, R.drawable.list_activities_transport_stops);
+			adapter.registerSelectedItem(R.string.layer_transport_route, 1 , R.drawable.list_activities_transport_stops);
 		}
 		
 		

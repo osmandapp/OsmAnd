@@ -2,7 +2,7 @@ package net.osmand.plus.views;
 
 import java.util.List;
 
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;

@@ -309,7 +309,7 @@ public class NavigationService extends Service implements LocationListener {
 						location.getSpeed(), location.getAccuracy(), locationTime, settings);
 			}
 			if(routingHelper.isFollowingMode()){
-				routingHelper.setCurrentLocation(MapActivity.convertLocation(location), false);
+				routingHelper.setCurrentLocation(MapActivity.convertLocation(location,(OsmandApplication) getApplication()), false);
 			}
 		}
 		

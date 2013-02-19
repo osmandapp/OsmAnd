@@ -427,7 +427,7 @@
   <string name="rotate_map_compass_opt">Con bussola</string>
   <string name="rotate_map_bearing_opt">Nella direzione del movimento</string>
   <string name="rotate_map_none_opt">Nessuna rotazione (nord in alto)</string>
-  <string name="rotate_map_to_bearing_descr">Selezionare l\'allinemamento della mappa allo schermo</string>
+  <string name="rotate_map_to_bearing_descr">Selezionare l\'allineamento della mappa allo schermo</string>
   <string name="rotate_map_to_bearing">Orientamento della mappa</string>
   <string name="show_route">Dettagli percorso</string>
   <string name="fav_imported_sucessfully">Importazione dei preferiti riuscita</string>
@@ -464,7 +464,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">secondi</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">"Scegliere l\'intervallo di tempo di risveglio usato dal background "</string>
+  <string name="background_service_int_descr">Scegliere l\'intervallo di tempo di risveglio usato dal servizio modo quiesciente</string>
   <string name="background_service_int">Intervallo di risveglio</string>
   <string name="background_service_provider_descr">Scegliere il fornitore di posizione finché si ta usando il modo background</string>
   <string name="background_service_provider">Fornitore di posizionamento</string>
@@ -782,7 +782,7 @@
   <string name="osmand_development_plugin_description">Mostra impostazioni per funzionalità in sviluppo e debug come la navigazione animata o mostrare la performance del rendering.</string>
   <string name="plugins_screen">Gestore Plugin</string>
   <string name="select_plugin_to_activate">Tocca un Plugin per attivarlo o disattivarlo. (Potrebbe essere richiesto il riavvio di OsmAnd.)</string>
-  <string name="prefs_plugins_descr">I plugins abilitano funzionalità extra dell\'applicazione come il live tracking, le mappe a mattonelle, la modalità a schermo spento, impostazioni per l\'accessibilità, e altro.</string>
+  <string name="prefs_plugins_descr">I plugins abilitano funzionalità aggiuntive e impostazioni avanzate</string>
   <string name="prefs_plugins">Gestore Plugin</string>
   <string name="tip_recent_changes_0_8_0_t">"Cambiamenti nella 0.8.0 :\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.\n\t- *Nuovo supporto alle mappe offline*\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)\n\t- *Calcolo dei percorsi offline*\n\t- Il calcolo dei percorsi offline diventa più solido\n\t- *Miglioramento usabilità e UI*\n\t- Miglioramenti in svariate aree "</string>
   <string name="osm_editing_plugin_description">Mostra le impostazioni necessarie per contributi a OSM come la raccolta/modifica dei PDI di OSM, aprire/commentare errori di OSM e inviare file GPX registrati (richiede le credenziali di OSM).</string>
@@ -1108,30 +1108,30 @@
     <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio per utilizzare i servizi di registrazione della posizione (tracking, tracking in tempo reale)</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
-    <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla sul Market?</string>
+    <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla in Google Play?</string>
 	<string name="close_changeset">Chiudi le modifiche</string>
 	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il più lento Android invece del codice nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle Impostazioni).</string>
-    <string name="background_service_is_enabled_question">Il servizio in background è ancora in esecuzione. Si desidera eliminarlo?</string>
+    <string name="background_service_is_enabled_question">Il servizio OsmAnd modalità quiescente è ancora in esecuzione. Si desidera arrestarlo?</string>
     <string name="tip_recent_changes_1_0_0_t">"Cambiamenti nella versione 1.0.0:\n\t*Migliorata la navigazione: più veloce e precisa, fino a 250 km\n\t*Aggiunte le mappe solo-strade\n\t*La mappa non perde il posizionamento dopo le interruzioni\n\t*Abilitazione del servizio in background durante la navigazione "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posizione corrente</string>
-    <string name="route_descr_from_to">Da %1$s a %2$s</string>
+    <string name="route_descr_from_to">Da %1$s A %2$s</string>
     <string name="route_descr_from_to_via">Da: %1$s↵\nper: %2$s↵\na: %3$s</string>
     <string name="no_buildings_found">Nessun edificio trovato.</string>
     <string name="search_villages_and_postcodes">Ricerca comuni/codice postale</string>
 	<string name="rendering_attr_showRoadMaps_description">Selezionare per visualizzare mappe solo-strade:</string>
 	<string name="rendering_attr_showRoadMaps_name">Mappe solo-strade</string>
-    <string name="download_roads_only_item">"Strade "</string>
+    <string name="download_roads_only_item">Solo Strade</string>
     <string name="download_regular_maps">Mappe normali</string>
     <string name="download_roads_only_maps">Mappe solo-strade</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="map_widget_max_speed">Limite di velocità</string>
     <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\\\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\\\'altitudine nel sistema EGM96.
 \n\tPer attivarla, scarica semplicemente il file WW15MGH.DAC tramite il Manager di Dati Offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="tip_altitude_offset">Visualizza Altitudine - Correzione scostamento</string>
-	<string name="monitoring_control_start">avvia</string>
+    <string name="tip_altitude_offset">Visualizzazione Altitudine - Correzione scostamento</string>
+	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
 	<string name="rendering_attr_noAdminboundaries_description">Non visualizzare i confini regionali (livelli amministrativi 5-9)</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin è in versione superata e deve essere aggiornato.</string>
@@ -1141,18 +1141,18 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Dati linee di livello</string>
     <string name="srtm_plugin_name">Plugin linee di livello</string>
-    <string name="srtm_plugin_description">Questo plugin facilita il download delle linee di elevazione (Download mappe -&gt; Menu -&gt; Altre mappe) per regioni specifiche per usarle con le mappe offline.</string>
+    <string name="srtm_plugin_description">Questo plugin facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni-&gt; Dati Offline -&gt; Scarica -&gt; Seleziona il tipo di mappa desiderato).</string>
     <string name="index_srtm_ele">Linee di livello</string>
-    <string name="audionotes_plugin_description">Prende note audio durante il viaggio</string>
+    <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin Appunti Audio</string>
-    <string name="osmand_distance_plugin_description">Misura una distanza tra due punti. Specificare l\'origine / la destinazione / cancellare la misurazione con una pressione prolungata.</string>
+    <string name="osmand_distance_plugin_description">Misura una distanza tra due o più punti. Aggiungi i punti con un breve click e rimuovili con una pressione prolungata.</string>
 	<string name="osmand_distance_plugin_name">Calcolatore della distanza</string>
 <string name="audionotes_location_not_defined">La posizione da associare con la nota non è ancora definita. \"Usa posizione...\" per assegnare una nota alla posizione specificata</string>
     <string name="monitoring_control_stop">ferma</string>
     <string name="osmand_srtm_short_description_80_chars">Plugin Osmand per le curve di livello offline</string>
     <string name="osmand_srtm_long_description_1000_chars">Questo plugin fornisce le linee di livello che possono essere visualizzate nelle mappe offline di OsmAnd. I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), uno strumento misuratore di Terra a bordo, il satellite della NASA del Sistema di Osservazione della Terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e Sistema Spaziale giapponese (J-spacesystems).</string>
     <string name="use_clear_distance_measurement">Fare clic ancora per cancellare i punti di misurazione.</string>
-    <string name="use_distance_measurement">Toccare per fare un punto, premere e tenere premuto per cancellare un punto precedente, fai clic sul widget di misura per uscire.</string>
+    <string name="use_distance_measurement">Toccare per fare un punto, premere e tenere premuto per cancellare i punti precedenti, fai clic sul widget di misurazione per uscire.</string>
     <string name="map_widget_distancemeasurement">Misurazione della distanza</string>
     <string name="map_widget_audionotes">Note audio</string>
     <string name="srtm_plugin_attribution">ASTER è un prodotto di METI e NASA</string>
@@ -1162,13 +1162,13 @@
     <string name="av_widget_action">Azione predefinita del widget</string>
     <string name="av_video_format_descr">Seleziona il formato di uscita video</string>
     <string name="av_video_format">Formato di uscita video</string>
-    <string name="av_use_external_recorder_descr">Utilizzare sistema di registrazione per il video</string>
-    <string name="av_use_external_recorder">Utilizzare un registratore esterno</string>
+    <string name="av_use_external_recorder_descr">Utilizza il registratore di sistema per il video</string>
+    <string name="av_use_external_recorder">Utilizzare il registratore di sistema</string>
     <string name="av_settings_descr">Configurare le impostazioni audio e video</string>
     <string name="av_settings">"Impostazioni audio/video "</string>
     <string name="recording_error">"Errore durante la registrazione "</string>
     <string name="recording_camera_not_available">La fotocamera non è disponibile</string>
-    <string name="recording_is_recorded">Audio/video sta per essere registrato. Per fermarlo premere il tasto di arresto sul widget.</string>
+    <string name="recording_is_recorded">Audio/video sta per essere registrato. Per fermarlo premere il widget AV.</string>
     <string name="recording_playing">L\'audio della registrazione specificata sta per essere riprodotto.\n%1$s</string>
     <string name="recording_open_external_player">Apri riproduttore esterno</string>
     <string name="recording_delete_confirm">Vuoi rimuovere questa registrazione?</string>
@@ -1198,11 +1198,11 @@
     <string name="stop_routing_confirm">Sei sicuro di voler fermare la navigazione?</string>
     <string name="clear_dest_confirm">Sei sicuro di voler cancellare il punto di destinazione?</string>
     <string name="precise_routing_mode_descr">Abilita il routing di precisione per calcolare percorsi precisi senza intoppi. E\' molto limitato in distanza e non utilizza la libreria nativa.</string>
-    <string name="precise_routing_mode">Calcolo della rotta preciso(alfa)</string>
+    <string name="precise_routing_mode">Calcolo della rotta preciso (alfa)</string>
     <string name="local_indexes_cat_av">Dati Audio/Video</string>
     <string name="dist_control_start">Avvia</string>
-    <string name="download_hillshade_item">"Ombreggimento delle colline "</string>
-    <string name="download_hillshade_maps">Mappe ombreggiamento colline</string>
+    <string name="download_hillshade_item">Ombreggiamento dei rilievi</string>
+    <string name="download_hillshade_maps">Sovrapposizioni ombreggiamento rilievi</string>
     <string name="tip_recent_changes_1_1_2_t">"Cambiamenti nella 1.1.2:
 \n\t* miglioramento del plugin Audio/video (foto con le informazioni EXIF)
 \n\t* ripristinato l\'usabilità e ristrutturato il plugin delle linee di contorno
@@ -1210,7 +1210,7 @@
 \n\t* correzioni di errori (routing non ottimali) "</string>
     <string name="support_new_features_descr">Fai una donazione per vedere nuove funzionalità implementate nell\'applicazione</string>
 	<string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto</string>
-    <string name="index_name_openmaps">OpenMaps UE</string>
+    <string name="index_name_openmaps">OpenMap UE</string>
     <string name="av_use_external_camera">Usa l\'app fotocamera</string>
     <string name="tip_recent_changes_1_2_t">"Cambiamenti nella 1.2: "</string>
     </resources>

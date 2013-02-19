@@ -4,11 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import net.osmand.data.City;
+import net.osmand.data.MapObject.MapObjectComparator;
 import net.osmand.data.Street;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.RegionAddressRepository;
-import net.osmand.util.MapObjectComparator;
 import android.os.AsyncTask;
 import android.view.View;
 

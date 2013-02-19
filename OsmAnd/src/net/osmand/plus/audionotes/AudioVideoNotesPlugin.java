@@ -23,8 +23,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.data.LatLon;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -232,21 +232,21 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			String nm = name == null? "" : name ;
 			if(isPhoto()){
 				return ctx.getString(R.string.recording_photo_description, nm, 
-						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+						Algorithms.formatDateTime(file.lastModified())).trim();
 			}
 			updateInternalDescription();
 			return ctx.getString(R.string.recording_description, nm, getDuration(ctx), 
-					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+					Algorithms.formatDateTime(file.lastModified())).trim();
 		}
 		
 		public String getSmallDescription(Context ctx){
 			String nm = name == null? "" : name ;
 			if(isPhoto()){
-				return ctx.getString(R.string.recording_photo_description, nm, 
-						DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+				return ctx.getString(R.string.recording_photo_description, nm,
+						Algorithms.formatDateTime(file.lastModified())).trim();
 			}
 			return ctx.getString(R.string.recording_description, nm, "", 
-					DateFormat.format("dd.MM.yyyy kk:mm", file.lastModified())).trim();
+					Algorithms.formatDateTime(file.lastModified())).trim();
 		}
 
 		private String getDuration(Context ctx) {

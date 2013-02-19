@@ -24,7 +24,7 @@ import net.osmand.osm.Entity;
 import net.osmand.osm.Entity.EntityId;
 import net.osmand.osm.Entity.EntityType;
 import net.osmand.osm.EntityInfo;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
@@ -32,7 +32,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.util.Base64;
-import net.osmand.util.IOUtils;
+import net.osmand.util.NetworkUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
@@ -93,7 +93,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 		additionalData.put("description", description);
 		additionalData.put("tags", tagstring);
 		additionalData.put("visibility", visibility);
-		return IOUtils.uploadFile(url, f, settings.USER_NAME.get()+":"+
+		return NetworkUtils.uploadFile(url, f, settings.USER_NAME.get()+":"+
 				settings.USER_PASSWORD.get(), "file", true, additionalData);
 	}
 	

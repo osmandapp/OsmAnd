@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.Location;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -267,7 +267,7 @@ public class NavigationInfo {
 
 
     // Show all available info
-	public void show(final LatLon point, Float heading) {
+	public void show(final LatLon point, Float heading, Context ctx) {
 		final List<String> attributes = new ArrayList<String>();
 		String item;
 
@@ -286,7 +286,7 @@ public class NavigationInfo {
 		if (attributes.isEmpty())
 			attributes.add(getString(R.string.no_info));
 
-		AlertDialog.Builder info = new AlertDialog.Builder(app);
+		AlertDialog.Builder info = new AlertDialog.Builder(ctx);
 		if (point != null)
 			info.setPositiveButton(autoAnnounce ? R.string.auto_announce_off : R.string.auto_announce_on,
 					new DialogInterface.OnClickListener() {

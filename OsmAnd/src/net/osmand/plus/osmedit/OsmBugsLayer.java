@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;

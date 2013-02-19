@@ -14,7 +14,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
 import net.osmand.data.MapObject;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;

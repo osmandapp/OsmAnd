@@ -32,8 +32,8 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.data.LatLon;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.AsyncLoadingThread.AmenityLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
@@ -407,7 +407,7 @@ public class ResourceManager {
 							conf = new File(f, "_ttsconfig.p");
 						}
 						if (conf.exists()) {
-							indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(conf.lastModified()))); //$NON-NLS-1$
+							indexFileNames.put(f.getName(), Algorithms.formatDate(conf.lastModified())); //$NON-NLS-1$
 						}
 					}
 				}
@@ -596,7 +596,7 @@ public class ResourceManager {
 					if (dateCreated == 0) {
 						dateCreated = f.lastModified();
 					}
-					indexFileNames.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(dateCreated))); //$NON-NLS-1$
+					indexFileNames.put(f.getName(), Algorithms.formatDate(dateCreated)); //$NON-NLS-1$
 					for (String rName : index.getRegionNames()) {
 						// skip duplicate names (don't make collision between getName() and name in the map)
 						// it can be dangerous to use one file to different indexes if it is multithreaded
@@ -923,7 +923,7 @@ public class ResourceManager {
 			if (lf != null) {
 				for (File f : lf) {
 					if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-						map.put(f.getName(), MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(f.lastModified()))); //$NON-NLS-1$		
+						map.put(f.getName(), Algorithms.formatDate(f.lastModified())); //$NON-NLS-1$		
 					}
 				}
 			}

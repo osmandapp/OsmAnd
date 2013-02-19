@@ -575,7 +575,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				@Override
 				public boolean accept(File dir, String filename) {
 					if (filename.endsWith(ext)) {
-						String date = MessageFormat.format("{0,date,dd.MM.yyyy}", new Date(new File(dir, filename).lastModified()));
+						String date = Algorithms.formatDate(new File(dir, filename).lastModified());
 						files.put(filename, date);
 						return true;
 					} else {

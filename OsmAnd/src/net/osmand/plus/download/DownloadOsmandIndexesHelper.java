@@ -3,6 +3,7 @@ package net.osmand.plus.download;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.Version;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -27,6 +29,7 @@ import android.content.res.AssetManager;
 
 public class DownloadOsmandIndexesHelper {
 	private final static Log log = PlatformUtil.getLog(DownloadOsmandIndexesHelper.class);
+	private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 	
 
 	public static IndexFileList getIndexesList(Context ctx) {
@@ -56,10 +59,8 @@ public class DownloadOsmandIndexesHelper {
 			long dateModified = System.currentTimeMillis();
 			try {
 				ApplicationInfo appInfo = pm.getApplicationInfo(OsmandApplication.class.getPackage().getName(), 0);
-				SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
 				dateModified =  new File(appInfo.sourceDir).lastModified();
-				Date installed = new Date(dateModified);
-				date = format.format(installed);
+				date = Algorithms.formatDate(dateModified);
 			} catch (NameNotFoundException e) {
 				//do nothing...
 			}
@@ -74,9 +75,8 @@ public class DownloadOsmandIndexesHelper {
 					IndexItem item = result.getIndexFilesByName(key);
 					if (item != null) {
 						File destFile = new File(voicePath, voice + File.separatorChar + "_config.p");
-						SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy"); //$NON-NLS-1$
 						try {
-							Date d = format.parse(item.getDate());
+							Date d = Algorithms.getDateFormat().parse(item.getDate());
 							if (d.getTime() > dateModified) {
 								continue;
 							}
@@ -127,6 +127,7 @@ public class DownloadOsmandIndexesHelper {
 							String date = parser.getAttributeValue(null, "date"); //$NON-NLS-1$
 							String description = parser.getAttributeValue(null, "description"); //$NON-NLS-1$
 							String parts = parser.getAttributeValue(null, "parts"); //$NON-NLS-1$
+							date = reparseDate(date);
 							IndexItem it = new IndexItem(name, description, date, size, parts);
 							it.setType(tp);
 							result.add(it);
@@ -153,6 +154,15 @@ public class DownloadOsmandIndexesHelper {
 		} catch (RuntimeException e) {
 			log.error("Error while loading indexes from repository", e); //$NON-NLS-1$
 			return null;
+		}
+	}
+
+	private static String reparseDate(String date) {
+		try {
+			Date d = simpleDateFormat.parse(date);
+			return Algorithms.formatDate(d.getTime());
+		} catch (ParseException e) {
+			return date;
 		}
 	}
 

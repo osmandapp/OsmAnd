@@ -250,7 +250,7 @@
 <string name="osmand_parking_time_no_limit">Ej tidsbegränsad parkering</string>
 <string name="osmand_parking_position_description">Din parkerade bils position. %1$s</string>
 <string name="select_plugin_to_activate">Tryck på en plugin för att aktivera eller inaktivera den. (Omstart av OsmAnd kan krävas.)</string>
-<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar extra funktionalitet</string>
+<string name="prefs_plugins_descr">Plugins aktiverar avancerade inställningar samt ytterligare funktionalitet</string>
 <string name="prefs_plugins">Plugin</string>
 <string name="tip_recent_changes_0_8_0_t">"Förändringar i 0.8.0 : ↵
 \n\t- *Plugin-funktionalitet*↵
@@ -523,7 +523,7 @@
 <string name="preferred_locale">Visningsspråk</string>
 <string name="tip_map_switch">Kartkälla</string>
 <string name="tip_app_mode">Användarprofil</string>
-<string name="tip_app_mode_t_v2">→OsmAnd stöder olika (anpassningsbara) profiler för olika användningar.↵\n→Du kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
+<string name="tip_app_mode_t_v2">\tOsmAnd stöder olika (anpassningsbara) profiler för olika användningar.\n\tDu kan byta profil via profilknappen i det nedre vänstra hörnet på kartbilden (bil, cykel eller fotgängare), eller när du skapar en rutt.</string>
 <string name="tip_navigation">Navigering</string>
 <string name="tip_navigation_t">Innan du påbörjar en navigering måste du välja en destination. Tryck sedan på \'Meny\' -&gt; \'Vägbeskrivning\' på kartan och välj navigationstyp.</string>
 <string name="tip_search">Söker</string>
@@ -585,7 +585,7 @@
 <string name="poi_filter_namefinder">Online namn-sökare</string>
 <string name="reading_cached_tiles">Läser cachade kartbitar…</string>
 <string name="version_index_is_big_for_memory">Index \"{0}\" fick inte plats i minnet</string>
-<string name="version_index_is_not_supported">Den versionen av indexet \"{0}\" stöds inte</string>
+<string name="version_index_is_not_supported">Denna version av indexet \"{0}\" stöds inte</string>
 <string name="use_osmand_routing_service">OsmAnd-navigering &gt;20km</string>
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
@@ -612,7 +612,7 @@
     <string name="poi_filter_entertainment">Underhållning</string>
     <string name="poi_filter_accomodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-karta - klassificering med bilder</string><string name="tip_map_context_menu_t">→Snabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.↵\n→Då visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)↵\n→Snabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-karta - klassificering med bilder</string><string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>
 	<string name="application_dir">Lagringskatalog</string>
 	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
@@ -635,7 +635,7 @@
 	<string name="daynight">Dag-/nattläge</string>
 	<string name="download_files_question">Ladda ner {0} fil(er) ({1} MB)?</string>
 	<string name="items_were_selected">{0} post(er) vald(a)</string>
-	<string name="filter_existing_indexes">Filter nerladdade</string>
+	<string name="filter_existing_indexes">Filtrera nerladdade</string>
 	<string name="deselect_all">Avmarkera alla</string>
 	<string name="select_all">Markera alla</string>
 	<string name="reload">Uppdatera</string>
@@ -736,8 +736,8 @@
 	<string name="menu_mute_off">Ljudet är på</string>
 	<string name="menu_mute_on">Ljudet är av</string>
 	<string name="voice_provider_descr">Välj röstvägledning för navigering</string>
-	<string name="tip_location_sharing_t">"→ Du kan dela med dig av intressanta platser på din resa med familj eller vänner.↵\n→ För att dela med dig av en plats behöver du:↵\n→ Använd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.↵\n→ Välj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
-	<string name="tip_favorites_t">→ Platser som du använder ofta kan sparas som favoriter.↵\n→ Om du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.↵\n→ Långt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.↵\n→ Om du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
+	<string name="tip_location_sharing_t">"\tDu kan dela med dig av intressanta platser på din resa med familj eller vänner.\n\tFör att dela med dig av en plats behöver du:\n\tAnvänd \'Kartans snabbmeny\'-&gt;\'Dela plats\'-menyn.\n\tVälj sedan ett sätt att dela med dig av din plats. Alternativen är: e-post, SMS, eller bara kopiera koordinaterna till Urklipp. "</string>
+	<string name="tip_favorites_t">\tPlatser som du använder ofta kan sparas som favoriter.\n\tOm du vill spara en plats som favorit gå till kartans snabbmeny, välj \"Lägg till i favoriter\" och ange sedan ett namn för den. När du har sparat en favorit, är den tillgänglig via \'Huvudfönster\' -&gt; \'Favoriter\'.\n\tLångt tryck på en favorit i menyn \'Favoriter\' innehåller alternativ för att ställa in den som destination, redigera eller ta bort den.\n\tOm du vill visa alla favoritpunkter direkt på kartan, aktivera lagret \'Favoriter\' under \'Meny\' -&gt; \'Definiera vy\' på kartskärmen.</string>
 	<string name="voice_provider">Röstvägledning</string>
 	<string name="voice_data_initializing">Initierar röstdata…</string>
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
@@ -929,9 +929,9 @@
     <string name="srtm_plugin_name">Plugin för höjdkurvor</string>
     <string name="download_srtm_maps">Höjdkurvsdata</string>
     <string name="tip_recent_changes_1_1_0_t">Förändringar i 1.1.0:
-\n→ * Plugin för beräkning av avstånd\n→ * Plugin för ljud-/videoanteckningar\n→ * Plugin för höjdkurvor\n→ * Buggfixar
-\n→ * \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
-\n→ * EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
+\n\t* Plugin för beräkning av avstånd\n\t* Plugin för ljud-/videoanteckningar\n\t* Plugin för höjdkurvor\n\t* Buggfixar
+\n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
+\n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
     <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
     <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkter.</string>
     <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
@@ -1074,4 +1074,9 @@
 	<string name="download_hillshade_item">"Skuggad relief "</string>
     <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till Höjdkurvs-pluginen\n\t* Skuggad relief-paket för Höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
+    <string name="tip_recent_changes_1_2_t">"Ändringar i 1.2: "</string>
+    <string name="av_use_external_camera_descr">Andvänd systemappen för foton</string>
+    <string name="av_use_external_camera">Använd kamera-app</string>
+    <string name="av_control_start">starta</string>
+    <string name="max_speed_none">Ingen</string>
     </resources>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.TransportStop;
-import net.osmand.osm.LatLon;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.R;

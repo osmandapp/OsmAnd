@@ -1,7 +1,7 @@
 package net.osmand.plus.views;
 
 import net.osmand.PlatformUtil;
-import net.osmand.osm.MapUtils;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 

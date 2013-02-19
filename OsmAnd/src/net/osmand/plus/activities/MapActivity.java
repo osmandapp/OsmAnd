@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
@@ -17,8 +18,8 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.map.IMapLocationListener;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.osm.LatLon;
-import net.osmand.osm.MapUtils;
+import net.osmand.data.LatLon;
+import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
 import net.osmand.plus.CurrentPositionHelper;
@@ -1101,7 +1102,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			// double check about use only gps
 			// that strange situation but it could happen?
 			if(!useOnlyGPS()){
-				setLocation(convertLocation(location));
+				setLocation(convertLocation(location, getMyApplication()));
 			}
 		}
 
@@ -1125,7 +1126,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		
 	};
 	
-	public static net.osmand.Location convertLocation(Location l) {
+	public static net.osmand.Location convertLocation(Location l, OsmandApplication app) {
 		net.osmand.Location r = new net.osmand.Location(l.getProvider());
 		r.setLatitude(l.getLatitude());
 		r.setLongitude(l.getLongitude());
@@ -1142,6 +1143,14 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 		if(l.hasBearing()) {
 			r.setBearing(l.getBearing());
 		}
+		if (l.hasAltitude() && app != null) {
+			double alt = l.getAltitude();
+			final GeoidAltitudeCorrection geo = app.getResourceManager().getGeoidAltitudeCorrection();
+			if (geo != null) {
+				alt -= geo.getGeoidHeight(l.getLatitude(), l.getLongitude());
+				l.setAltitude(alt);
+			}
+		}
 		return r;
 	}
 	
@@ -1152,7 +1161,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (location != null) {
 				lastTimeGPSLocationFixed = location.getTime();
 			}
-			setLocation(convertLocation(location));
+			setLocation(convertLocation(location, getMyApplication()));
 		}
 
 		@Override
@@ -1161,7 +1170,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 			if (!useOnlyGPS() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 				Location loc = service.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 				if(loc != null && (System.currentTimeMillis() - loc.getTime()) < USE_ONLY_GPS_INTERVAL){
-					setLocation(convertLocation(loc));
+					setLocation(convertLocation(loc, getMyApplication()));
 				}
 			} else {
 				setLocation(null);
