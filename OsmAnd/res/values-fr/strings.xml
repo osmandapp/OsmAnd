@@ -1208,4 +1208,7 @@
     <string name="index_name_openmaps">OpenMaps.eu</string>
     <string name="tip_recent_changes_1_2_t">"Changements en 1.2 : "</string>
     <string name="max_speed_none">Aucun(e)</string>
+    <string name="prefer_motorways">Autoroutes de préférence</string>
+	<string name="prefer_in_routing_title">Préférences...</string>
+	<string name="prefer_in_routing_descr">Autoroutes de préférence</string>
     </resources>
