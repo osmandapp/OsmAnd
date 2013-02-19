@@ -28,6 +28,22 @@ public abstract class OsmandMapLayer {
 	public boolean onLongPressEvent(PointF point) {
 		return false;
 	}
+
+	/**
+	 * Provide a method for layers to consume scrolling event, stopping map from being dragged
+	 * Any layer should return true to consume event.
+	 */
+	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+		return false;
+	}
+
+	/**
+	 * Provide a method for layers to consume fling event, stopping map from being moved
+	 * Any layer should return true to consume event.
+	 */
+	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+		return false;
+	}
 	
 	public boolean onTouchEvent(MotionEvent event) { return false;}
 	

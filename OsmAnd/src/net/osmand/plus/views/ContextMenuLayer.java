@@ -201,11 +201,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		
-		if(pressedInTextView(point.x, point.y) > 0){
+		if(view.getSettings().getPlanningMode()) return false;	//skip if in planning mode
+		if(pressedInTextView(point.x, point.y) == 2){	//close button selected
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();
 			return true;
 		}
+		if(pressedInTextView(point.x, point.y) == 1) return false;	//text box pressed - do nothing
 		LatLon pressedLoc = view.getLatLonFromScreenPoint(point.x, point.y);
 		selectedObjects.clear();
 		List<Object> s = new ArrayList<Object>();
