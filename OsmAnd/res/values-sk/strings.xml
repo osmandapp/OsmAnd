@@ -1195,4 +1195,5 @@
     <string name="download_hillshade_item">Tieňovaný reliéf</string>
     <string name="download_hillshade_maps">Prekrytia tieňovanými reliéfmi</string>
     <string name="support_new_features_descr">Sponzorujte vývoj nových funkcií v aplikácii</string>
-	</resources>
+	<string name="max_speed_none">žiadna</string>
+    </resources>
