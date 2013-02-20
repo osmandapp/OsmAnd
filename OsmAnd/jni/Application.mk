@@ -9,16 +9,20 @@ else
 ifdef OSMAND_ARM_ONLY
 	APP_ABI := armeabi armeabi-v7a
 else
+
 ifdef OSMAND_ARMv5_ONLY
 	APP_ABI := armeabi
 endif
 ifdef OSMAND_ARMv7a_ONLY
 	APP_ABI := armeabi-v7a
 endif
+
+
+else 
 ifdef OSMAND_MIPS_ONLY
 	APP_ABI := mips
 endif
-endif
+
 
 endif
 
