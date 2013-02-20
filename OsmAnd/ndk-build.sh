@@ -1,8 +1,9 @@
 #!/bin/bash
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo $SCRIPT_LOC
 "$SCRIPT_LOC"/../../core/externals/configure.sh
-
 SRCLOC="$SCRIPT_LOC"/../../core/externals/qtbase-android
+echo $SCRIPT_LOC
 NAME=$(basename $(dirname "${BASH_SOURCE[0]}") )
 
 if [ ! -d "$ANDROID_SDK" ]; then
