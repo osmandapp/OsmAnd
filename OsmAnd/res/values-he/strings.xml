@@ -1190,4 +1190,7 @@
     <string name="index_name_openmaps">OpenMaps אירופה</string>
     <string name="tip_recent_changes_1_2_t">"שינויים ב־1.2: "</string>
     <string name="max_speed_none">אין</string>
+    <string name="prefer_motorways">העדפת כבישים סלולים</string>
+	<string name="prefer_in_routing_title">העדפה…</string>
+	<string name="prefer_in_routing_descr">העדפת כבישים סלולים</string>
     </resources>
