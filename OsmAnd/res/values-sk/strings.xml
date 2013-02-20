@@ -1196,4 +1196,6 @@
     <string name="download_hillshade_maps">Prekrytia tieňovanými reliéfmi</string>
     <string name="support_new_features_descr">Sponzorujte vývoj nových funkcií v aplikácii</string>
 	<string name="max_speed_none">žiadna</string>
-    </resources>
+    <string name="prefer_motorways">Uprednostniť dialnice</string>
+	<string name="prefer_in_routing_title">Uprednostniť...</string>
+	</resources>
