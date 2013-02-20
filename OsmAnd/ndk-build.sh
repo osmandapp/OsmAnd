@@ -1,3 +1,4 @@
+#!/bin/bash
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 "$SCRIPT_LOC"/../../core/externals/configure.sh
 
