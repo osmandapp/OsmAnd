@@ -1169,4 +1169,7 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">Wijzigingen in 1.2:</string>
     <string name="max_speed_none">geen</string>
+    <string name="prefer_motorways">Bij voorkeur snelwegen</string>
+	<string name="prefer_in_routing_title">Bij voorkeur…</string>
+	<string name="prefer_in_routing_descr">Bij voorkeur snelwegen</string>
     </resources>
