@@ -1,9 +1,8 @@
 #!/bin/bash
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $SCRIPT_LOC
+# configure.sh 
 "$SCRIPT_LOC"/../../core/externals/configure.sh
 SRCLOC="$SCRIPT_LOC"/../../core/externals/qtbase-android
-echo $SCRIPT_LOC
 NAME=$(basename $(dirname "${BASH_SOURCE[0]}") )
 
 if [ ! -d "$ANDROID_SDK" ]; then
@@ -20,6 +19,7 @@ export ANDROID_NDK_TOOLCHAIN_VERSION=4.7
 
 if [ -z "$OSMAND_X86_ONLY" ] && [ -z "$OSMAND_ARM_ONLY" ] && [ -z "$OSMAND_ARMv5_ONLY" ] && [ -z "$OSMAND_ARMv7a_ONLY" ] && [ -z "$OSMAND_MIPS_ONLY" ]; then
    BUILD_ALL=1
+   echo "BUILD_ALL set to true"
 fi
 
 QTBASE_CONFIGURATION=\
@@ -76,7 +76,7 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_X86_ONLY" ]; then
 fi
 
 if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_MIPS_ONLY" ]; then
-  if [ ! -d "$SRCLOC/upstream.patched.mips" && ! -d "OSMAND_ARM_ONLY"]; then
+  if [ ! -d "$SRCLOC/upstream.patched.mips" ]; then
 	cp -rf "$SRCLOC/upstream.patched" "$SRCLOC/upstream.patched.mips"
 	export ANDROID_TARGET_ARCH=mips
 	export ANDROID_NDK_PLATFORM=android-9
@@ -86,4 +86,6 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_MIPS_ONLY" ]; then
   (cd "$SRCLOC/upstream.patched.mips" && make -j`nproc`)
 fi
 
+echo $SCRIPT_LOC
+cd $SCRIPT_LOC
 $ANDROID_NDK/ndk-build
