@@ -15,6 +15,9 @@ endif
 ifdef OSMAND_ARMv7a_ONLY
 	APP_ABI := armeabi-v7a
 endif
+ifdef OSMAND_MIPS_ONLY
+	APP_ABI := mips
+endif
 endif
 
 endif
