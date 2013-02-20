@@ -6,6 +6,9 @@ NDK_TOOLCHAIN_VERSION := 4.7
 ifdef OSMAND_X86_ONLY
 	APP_ABI := x86
 else
+ifdef OSMAND_MIPS_ONLY
+	APP_ABI := mips
+else 
 ifdef OSMAND_ARM_ONLY
 	APP_ABI := armeabi armeabi-v7a
 else
@@ -16,13 +19,6 @@ endif
 ifdef OSMAND_ARMv7a_ONLY
 	APP_ABI := armeabi-v7a
 endif
-
-
-else 
-ifdef OSMAND_MIPS_ONLY
-	APP_ABI := mips
-endif
-
 
 endif
 
