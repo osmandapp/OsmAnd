@@ -88,4 +88,4 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_MIPS_ONLY" ]; then
 fi
 
 cd $SCRIPT_LOC
-$ANDROID_NDK/ndk-build
+$ANDROID_NDK/ndk-build -j`nproc`
