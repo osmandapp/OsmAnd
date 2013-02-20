@@ -87,5 +87,5 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_MIPS_ONLY" ]; then
   (cd "$SRCLOC/upstream.patched.mips" && make -j`nproc`)
 fi
 
-#cd $SCRIPT_LOC
-#$ANDROID_NDK/ndk-build
+cd $SCRIPT_LOC
+$ANDROID_NDK/ndk-build
