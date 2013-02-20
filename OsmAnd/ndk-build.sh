@@ -1,4 +1,7 @@
-SRCLOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"/../../core/externals/qtbase-android
+SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+"$SCRIPT_LOC"/../../core/externals/configure.sh
+
+SRCLOC="$SCRIPT_LOC"/../../core/externals/qtbase-android
 NAME=$(basename $(dirname "${BASH_SOURCE[0]}") )
 
 if [ ! -d "$ANDROID_SDK" ]; then
