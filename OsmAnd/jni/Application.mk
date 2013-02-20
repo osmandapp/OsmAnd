@@ -5,10 +5,11 @@ NDK_TOOLCHAIN_VERSION := 4.7
 
 ifdef OSMAND_X86_ONLY
 	APP_ABI := x86
-else
+endif
 ifdef OSMAND_MIPS_ONLY
 	APP_ABI := mips
-else 
+endif
+
 ifdef OSMAND_ARM_ONLY
 	APP_ABI := armeabi armeabi-v7a
 else
