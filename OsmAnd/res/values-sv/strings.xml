@@ -663,7 +663,7 @@
 	<string name="osmand_routing_experimental">OsmAnd offline-navigering är en experimentell funktion och den fungerar inte för sträckor över c:a 20 km.\n\nNavigeringstjänsten är tillfälligt kopplad till online CloudMade.</string>
 	<string name="website">webbplats</string>
 	<string name="phone">telefon</string>
-	<string name="download_type_to_filter">typ att filtrera</string>
+	<string name="download_type_to_filter">Skriv för att filtrera</string>
 	<string name="use_high_res_maps">Skärm med hög upplösning</string>
 	<string name="use_high_res_maps_descr">Sträck inte ut (och gör oskarpa) kartbitar på högupplösta skärmar</string>
 	<string name="download_files">Ladda ner</string>
@@ -1079,4 +1079,7 @@
     <string name="av_use_external_camera">Använd kamera-app</string>
     <string name="av_control_start">starta</string>
     <string name="max_speed_none">Ingen</string>
+    <string name="prefer_motorways">Föredra motorvägar</string>
+	<string name="prefer_in_routing_title">Föredra…</string>
+	<string name="prefer_in_routing_descr">Föredra motorvägar</string>
     </resources>
