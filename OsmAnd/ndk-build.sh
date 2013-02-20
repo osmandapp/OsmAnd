@@ -30,7 +30,7 @@ QTBASE_CONFIGURATION=\
 "-c++11 -shared -release "\
 "-v"
 
-if [ -n "$BUILD_ALL" ] && [ -n "$OSMAND_ARM_ONLY" ] || [ -n "$OSMAND_ARMv5_ONLY" ]; then
+if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_ARM_ONLY" ] || [ -n "$OSMAND_ARMv5_ONLY" ]; then
   if [ ! -d "$SRCLOC/upstream.patched.armeabi"]; then
 	cp -rf "$SRCLOC/upstream.patched" "$SRCLOC/upstream.patched.armeabi"
 	export ANDROID_TARGET_ARCH=armeabi
