@@ -1144,4 +1144,8 @@
     <string name="av_use_external_camera_descr">Uporabi sistemsko aplikacijo za fotografijo</string>
     <string name="av_use_external_camera">Uporabi aplikacijo Kamera</string>
     <string name="index_name_openmaps">EU OpenMaps</string>
+    <string name="prefer_motorways">Raje avtoceste</string>
+	<string name="prefer_in_routing_title">Raje …</string>
+	<string name="prefer_in_routing_descr">Raje avtoceste</string>
+    <string name="max_speed_none">brez</string>
     </resources>
