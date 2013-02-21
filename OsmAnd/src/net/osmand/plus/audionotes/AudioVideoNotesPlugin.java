@@ -370,7 +370,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerSelectedItem(R.string.layer_recordings, app.getSettings().SHOW_RECORDINGS.get()? 1 : 0, R.drawable.large_menu_recording_layer, listener, 5);
+		adapter.registerSelectedItem(R.string.layer_recordings, app.getSettings().SHOW_RECORDINGS.get()? 1 : 0, R.drawable.list_activities_rec_layer, listener, 5);
 	}
 	
 	@Override
@@ -421,7 +421,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl,
-					R.drawable.small_menu_audio_video_notes, R.string.map_widget_av_notes, "audionotes", false,
+					R.drawable.list_activities_rec_layer, R.string.map_widget_av_notes, "audionotes", false,
 					EnumSet.allOf(ApplicationMode.class),
 					EnumSet.noneOf(ApplicationMode.class), 22);
 			mapInfoLayer.recreateControls();
