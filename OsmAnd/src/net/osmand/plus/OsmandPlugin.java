@@ -45,7 +45,6 @@ public abstract class OsmandPlugin {
 	
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
 	private static final String PLANNING_PLUGIN_COMPONENT = "net.osmand.planningPlugin";
-	private static final String PLANNING_PLUGIN_ACTIVITY = "net.osmand.planningPlugin.PlanningPluginActivity";
 	
 	
 	public abstract String getId();
@@ -80,12 +79,12 @@ public abstract class OsmandPlugin {
 					new SRTMPlugin(app, false));
 		}
 		installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, new ParkingPositionPlugin(app));
+		installPlugin(PLANNING_PLUGIN_COMPONENT, PlanningPlugin.ID, app, new PlanningPlugin(app));
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new DistanceCalculatorPlugin(app));
 		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
-		installedPlugins.add(new PlanningPlugin(app));
 		
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();

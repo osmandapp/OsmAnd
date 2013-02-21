@@ -1,0 +1,8 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<resources>
+<string name="default_buttons_no">לא</string>
+    <string name="default_buttons_yes">כן</string>
+    <string name="osmand_app_not_found">התכנית OsmAnd אינה מותקנת</string>
+    <string name="app_name">חנייה עם OsmAnd</string>
+    <string name="planning_plugin_installed">תוסף החנייה של OsmAnd מותקן ומופעל בהגדרות של OsmAnd.</string>
+</resources>

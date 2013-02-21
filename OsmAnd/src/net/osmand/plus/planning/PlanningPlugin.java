@@ -60,7 +60,7 @@ package net.osmand.plus.planning;
 	import android.util.Log;
 
 	public class PlanningPlugin extends OsmandPlugin {
-		private static final String ID = "osmand.planning";
+		public static final String ID = "osmand.planning";
 		private OsmandApplication app;
 		private static PlanningLayer planningLayer;
 		private static OsmandSettings settings;
