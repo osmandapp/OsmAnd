@@ -999,7 +999,7 @@
   <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
   <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
-  <string name="bg_service_sleep_mode_on">Désactiver mode veille</string>
+  <string name="bg_service_sleep_mode_on">Désactiver\nmode veille</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
   <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
 <string name="live_monitoring_mode_off">Démarrer\n suivi en ligne</string>
