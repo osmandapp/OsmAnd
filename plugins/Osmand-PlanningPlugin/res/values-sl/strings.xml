@@ -1,0 +1,8 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<resources>
+<string name="default_buttons_yes">Da</string>
+    <string name="default_buttons_no">Ne</string>
+    <string name="osmand_app_not_found">OsmAnd ni nameščen</string>
+    <string name="app_name">OsmAnd parkiranje</string>
+    <string name="planning_plugin_installed">Vtičnik OsmAnd parkiranje je nameščen in omogočen v nastavitvah OsmAnd.</string>
+</resources>

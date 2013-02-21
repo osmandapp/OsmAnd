@@ -61,11 +61,14 @@ package net.osmand.plus.planning;
 
 	public class PlanningPlugin extends OsmandPlugin {
 		public static final String ID = "osmand.planning";
+<<<<<<< HEAD
 		public final CommonPreference<Boolean> planningMode;
 		public final CommonPreference<Integer> pointDisplayRadius;
 		public final CommonPreference<Integer> pointSelectionRadius;
 		public final CommonPreference<Float> displayScaleFactor;
 				
+=======
+>>>>>>> Add Planning/Measurement plugin installation project code
 		private OsmandApplication app;
 		private static PlanningLayer planningLayer;
 		private static OsmandSettings settings;

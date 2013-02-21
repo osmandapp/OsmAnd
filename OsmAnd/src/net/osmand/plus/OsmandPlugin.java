@@ -45,8 +45,8 @@ public abstract class OsmandPlugin {
 	
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
 	private static final String PLANNING_PLUGIN_COMPONENT = "net.osmand.planningPlugin";
-
         
+
 	public abstract String getId();
 	
 	public abstract String getDescription();
@@ -85,7 +85,6 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
-		installedPlugins.add(new PlanningPlugin(app));
 		
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
