@@ -5,8 +5,6 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -43,7 +41,6 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	
 	private final MapActivity map;
 	private OsmandMapTileView view;
-	private OsmandSettings settings;
 	
 	private Paint bitmapPaint;
 
@@ -52,8 +49,11 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	
 	private boolean timeLimit;
 
-	public ParkingPositionLayer(MapActivity map) {
+	private ParkingPositionPlugin plugin;
+
+	public ParkingPositionLayer(MapActivity map, ParkingPositionPlugin plugin) {
 		this.map = map;
+		this.plugin = plugin;
 	}
 	
 	public LatLon getParkingPoint() {
@@ -63,8 +63,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		this.settings = ((OsmandApplication) map.getApplication()).getSettings();
-		parkingPoint = settings.getParkingPosition();
+		parkingPoint = plugin.getParkingPosition();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -75,8 +74,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setFilterBitmap(true);
 		parkingNoLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_no_limit);
 		parkingLimitIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_parking_pos_limit);
-		parkingPoint = settings.getParkingPosition();
-		timeLimit = settings.getParkingType();
+		parkingPoint = plugin.getParkingPosition();
+		timeLimit = plugin.getParkingType();
 	}
 
 	@Override
@@ -139,8 +138,8 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		if (o instanceof LatLon) {
 			StringBuilder timeLimitDesc = new StringBuilder();
 			timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add_time) + " ");
-			timeLimitDesc.append(getFormattedTime(settings.getStartParkingTime()) + ".");
-			if (settings.getParkingType()) {
+			timeLimitDesc.append(getFormattedTime(plugin.getStartParkingTime()) + ".");
+			if (plugin.getParkingType()) {
 				// long parkingTime = settings.getParkingTime();
 				// long parkingStartTime = settings.getStartParkingTime();
 				// Time time = new Time();
@@ -155,7 +154,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 				// map.getString(R.string.osmand_parking_am));
 				// }
 				timeLimitDesc.append(map.getString(R.string.osmand_parking_position_description_add) + " ");
-				timeLimitDesc.append(getFormattedTime(settings.getParkingTime()));
+				timeLimitDesc.append(getFormattedTime(plugin.getParkingTime()));
 			}
 			return map.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 		}
@@ -215,7 +214,7 @@ public class ParkingPositionLayer extends OsmandMapLayer implements ContextMenuL
 		if (parkingPoint != null && view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			LatLon position = settings.getParkingPosition();
+			LatLon position = plugin.getParkingPosition();
 			int x = view.getRotatedMapXForPoint(position.getLatitude(), position.getLongitude());
 			int y = view.getRotatedMapYForPoint(position.getLatitude(), position.getLongitude());
 			// the width of an image is 40 px, the height is 60 px -> radius = 20,

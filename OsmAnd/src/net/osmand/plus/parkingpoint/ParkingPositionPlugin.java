@@ -13,6 +13,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -45,19 +46,101 @@ import android.widget.TimePicker;
 public class ParkingPositionPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.parking.position";
+	public final static String PARKING_POINT_LAT = "parking_point_lat"; //$NON-NLS-1$
+	public final static String PARKING_POINT_LON = "parking_point_lon"; //$NON-NLS-1$
+	public final static String PARKING_TYPE = "parking_type"; //$NON-NLS-1$
+	public final static String PARKING_TIME = "parking_limit_time"; //$//$NON-NLS-1$
+	public final static String PARKING_START_TIME = "parking_time"; //$//$NON-NLS-1$
+	public final static String PARKING_EVENT_ADDED = "parking_event_added"; //$//$NON-NLS-1$
 	private OsmandApplication app;
 
 	private ParkingPositionLayer parkingLayer;
-	private OsmandSettings settings;
 	private MapInfoControl parkingPlaceControl;
+	private final CommonPreference<Float> parkingLat;
+	private final CommonPreference<Float> parkingLon;
+	private CommonPreference<Boolean> parkingType;
+	private CommonPreference<Boolean> parkingEvent;
+	private CommonPreference<Long> parkingTime;
+	private CommonPreference<Long> parkingStartTime;
 
 	public ParkingPositionPlugin(OsmandApplication app) {
 		this.app = app;
+		OsmandSettings set = app.getSettings();
+		parkingLat = set.registerFloatPreference(PARKING_POINT_LAT, 0f).makeGlobal();
+		parkingLon = set.registerFloatPreference(PARKING_POINT_LON, 0f).makeGlobal();
+		parkingType = set.registerBooleanPreference(PARKING_TYPE, false).makeGlobal();
+		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal();
+		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal();
+		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal();
 	}
+	
+	
+	
+	public LatLon getParkingPosition() {
+		float lat = parkingLat.get();
+		float lon = parkingLon.get();
+		if (lat == 0 && lon == 0) {
+			return null;
+		}
+		return new LatLon(lat, lon);
+	}
+	
+	public boolean getParkingType() {
+		return parkingType.get();
+	}
+	
+	public boolean isParkingEventAdded() {
+		return parkingEvent.get();
+	}
+	
+	public boolean addOrRemoveParkingEvent(boolean added) {
+		return parkingEvent.set(added);
+	}
+	
+	public long getParkingTime() {
+		return parkingTime.get();
+	}
+
+	public long getStartParkingTime() {
+		return parkingStartTime.get();
+	}
+	
+	public boolean clearParkingPosition() {
+		parkingLat.resetToDefault();
+		parkingLon.resetToDefault();
+		parkingType.resetToDefault();
+		parkingTime.resetToDefault();
+		parkingEvent.resetToDefault();
+		parkingStartTime.resetToDefault();
+		return true;
+	}
+
+	public boolean setParkingPosition(double latitude, double longitude) {
+		parkingLat.set((float)latitude);
+		parkingLon.set((float)longitude);
+		return true;
+	}
+	
+	public boolean setParkingType(boolean limited) {
+		if (!limited)
+			parkingTime.set(-1l);
+		parkingType.set(limited);
+		return true;
+	}
+	
+	public boolean setParkingTime(long timeInMillis) {
+		parkingTime.set(timeInMillis);
+		return true;
+	}
+	
+	public boolean setParkingStartTime(long timeInMillis) {		
+		parkingStartTime.set(timeInMillis);
+		return true;
+	}
+
 
 	@Override
 	public boolean init(OsmandApplication app) {
-		settings = app.getSettings();
 		return true;
 	}
 
@@ -82,7 +165,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if(parkingLayer != null) {
 			activity.getMapView().removeLayer(parkingLayer);
 		}
-		parkingLayer = new ParkingPositionLayer(activity);
+		parkingLayer = new ParkingPositionLayer(activity, this);
 		activity.getMapView().addLayer(parkingLayer, 4.5f);
 		registerWidget(activity);
 	}
@@ -113,7 +196,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			final double latitude, final double longitude,
 			ContextMenuAdapter adapter, Object selectedObj) {
 		boolean isParkingSelected = false;
-		LatLon parkingPosition = settings.getParkingPosition();
+		LatLon parkingPosition = getParkingPosition();
 		if (selectedObj instanceof LatLon && parkingLayer != null && parkingPosition != null) {
 			LatLon point = (LatLon)selectedObj;	
 			if ((point.getLatitude() == parkingPosition.getLatitude()) && (point.getLongitude() == parkingPosition.getLongitude()))
@@ -151,7 +234,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * It allows user to choose a type of parking (time-limited or time-unlimited).
 	 */
 	private void showAddParkingDialog(final MapActivity mapActivity, final double latitude, final double longitude) {
-		final boolean wasEventPreviouslyAdded = settings.isParkingEventAdded();
+		final boolean wasEventPreviouslyAdded = isParkingEventAdded();
 		final View addParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_type, null);
 		final Dialog choose = new Dialog(mapActivity);
 		choose.setContentView(addParking);
@@ -179,7 +262,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				if (wasEventPreviouslyAdded) {
 					showDeleteEventWarning(mapActivity);
 				}
-				settings.addOrRemoveParkingEvent(false);
+				addOrRemoveParkingEvent(false);
 				setParkingPosition(mapActivity, latitude, longitude, false);
 				mapActivity.getMapView().refreshMap();
 			}
@@ -204,7 +287,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				if(parkingLayer != null) {
 					parkingLayer.removeParkingPoint();
 				}
-				settings.clearParkingPosition();
+				clearParkingPosition();
 				mapActivity.getMapView().refreshMap();
 			}
 		});
@@ -271,13 +354,13 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				int minute = cal.get(Calendar.MINUTE);
 				cal.set(is24HourFormat ? Calendar.HOUR_OF_DAY : Calendar.HOUR, hour + timePicker.getCurrentHour());
 				cal.set(Calendar.MINUTE, minute + timePicker.getCurrentMinute());
-				settings.setParkingTime(cal.getTimeInMillis());
+				setParkingTime(cal.getTimeInMillis());
 				CheckBox addCalendarEvent = (CheckBox) setTimeParking.findViewById(R.id.check_event_in_calendar);
 				if (addCalendarEvent.isChecked()) {
 					addCalendarEvent(setTimeParking);
-					settings.addOrRemoveParkingEvent(true);
+					addOrRemoveParkingEvent(true);
 				} else {
-					settings.addOrRemoveParkingEvent(false);
+					addOrRemoveParkingEvent(false);
 				}
 			}
 		});
@@ -294,8 +377,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		intent.setType("vnd.android.cursor.item/event"); //$NON-NLS-1$
 		intent.putExtra("calendar_id", 1); //$NON-NLS-1$
 		intent.putExtra("title", view.getContext().getString(R.string.osmand_parking_event)); //$NON-NLS-1$
-		intent.putExtra("beginTime", settings.getParkingTime()); //$NON-NLS-1$
-		intent.putExtra("endTime", settings.getParkingTime()+60*60*1000); //$NON-NLS-1$
+		intent.putExtra("beginTime", getParkingTime()); //$NON-NLS-1$
+		intent.putExtra("endTime", getParkingTime()+60*60*1000); //$NON-NLS-1$
 		view.getContext().startActivity(intent);
 	}
 
@@ -304,7 +387,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param mapActivity
 	 */
 	private void showDeleteEventWarning(final MapActivity mapActivity) {
-		if (settings.isParkingEventAdded()) {
+		if (isParkingEventAdded()) {
 			Builder deleteEventWarning = new AlertDialog.Builder(mapActivity);
 			deleteEventWarning.setTitle(mapActivity.getString(R.string.osmand_parking_warning));
 			deleteEventWarning.setMessage(mapActivity.getString(R.string.osmand_parking_warning_text));
@@ -326,9 +409,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param isLimited
 	 */
 	private void setParkingPosition(final MapActivity mapActivity, final double latitude, final double longitude, boolean isLimited) {
-		settings.setParkingPosition(latitude, longitude);
-		settings.setParkingType(isLimited);
-		settings.setParkingStartTime(Calendar.getInstance().getTimeInMillis());
+		setParkingPosition(latitude, longitude);
+		setParkingType(isLimited);
+		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
 		if (parkingLayer != null) {
 			parkingLayer.setParkingPointOnLayer(new LatLon(latitude, longitude), isLimited);
 		}
@@ -342,7 +425,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 					new OnOptionsMenuClick() {
 						@Override
 						public void prepareOptionsMenu(Menu menu, MenuItem deleteParkingItem) {
-							if (settings.getParkingPosition() != null) {
+							if (getParkingPosition() != null) {
 								deleteParkingItem.setVisible(true);
 							} else {
 								deleteParkingItem.setVisible(false);
@@ -421,7 +504,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			public void onClick(View v) {
 				OsmandMapTileView view = map.getMapView();
 				AnimateDraggingMapThread thread = view.getAnimatedDraggingThread();
-				LatLon parkingPoint = view.getSettings().getParkingPosition();
+				LatLon parkingPoint = getParkingPosition();
 				if (parkingPoint != null) {
 					float fZoom = view.getFloatZoom() < 15 ? 15 : view.getFloatZoom();
 					thread.startMoving(parkingPoint.getLatitude(), parkingPoint.getLongitude(), fZoom, true);
