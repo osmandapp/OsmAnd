@@ -931,7 +931,7 @@
 	<string name="choose_city">Επιλέξτε πόλη</string>
 	<string name="ChooseCountry">Επιλέξτε χώρα</string>
 	<string name="map_specify_point">Ορισμός ως προορισμός</string>
-	<string name="show_view_angle">Display viewing direction</string>
+	<string name="show_view_angle">Εμφάνιση κατεύθυνσης οπτικής</string>
 	<string name="stop_navigation">Καθαρισμός προορ.</string>
 	<string name="navigate_to_point">Ορισμός ως προορ.</string>
 	<string name="map_view_3d_descr">Ενεργοποίηση απεικόνισης 3Δ του χάρτη</string>
@@ -1184,4 +1184,8 @@
 \n\t* Διορθώσεις σφαλμάτων (suboptimal routing) "</string>
     <string name="osmand_srtm_long_description_1000_chars">Αυτό το πρόσθετο παρέχει ισοϋψείς γραμμές οι οποίες μπορούν να εμφανιστούν στου εκτός σύνδεσης χάρτες του OsmAnd. Τα παγκόσμια δεδομένα (μεταξύ 70 μοιρών βόρεια και 70 μοιρών νότια) είναι βασισμένα σε μετρήσεις από το SRTM (Shuttle Radar Topography Mission) και το ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ένα όργανο απεικόνισης πάνω στον Terra, τη ναυαρχίδα των δορυφόρων του Συστήματος Παρακολούθησης της Γης της NASA. Το ASTER είναι μια συνεργασία μεταξύ της NASA, Του Υπουργείου οικονομίας. εμπορίου και βιομηχανίας της Ιαπωνίας (METI), και της Japan Space Systems (J-spacesystems).</string>
     <string name="support_new_features_descr">Δωρίστε ώστε να δείτε νέα χαρακτηριστικά να πραγματοποιούνται στην εφαρμογή</string>
-	</resources>
+	<string name="prefer_motorways">Προτίμηση αυτοκινητοδρόμων</string>
+	<string name="prefer_in_routing_title">Προτίμηση…</string>
+	<string name="prefer_in_routing_descr">Προτίμηση αυτοκινητοδρόμων</string>
+    <string name="max_speed_none">καμία</string>
+    </resources>
