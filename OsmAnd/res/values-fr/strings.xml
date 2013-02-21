@@ -998,7 +998,7 @@
   <string name="map_widget_mini_route">Mini carte de l\'itinéraire</string>
   <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
-  <string name="bg_service_sleep_mode_off">Activer mode veille</string>
+  <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
   <string name="bg_service_sleep_mode_on">Désactiver mode veille</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
   <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
