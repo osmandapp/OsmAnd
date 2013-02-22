@@ -105,6 +105,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_DEFAULT_ACTION_AUDIO = 0;
 	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
 	public static final int AV_DEFAULT_ACTION_TAKEPICTURE = 2;
+	public static final int AV_DEFAULT_ACTION_CHOOSE = -1;
 	public final CommonPreference<Integer> AV_DEFAULT_ACTION;
 	
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS ;
@@ -311,7 +312,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_EXTERNAL_RECORDER = settings.registerBooleanPreference("av_external_recorder", false).makeGlobal();
 		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
 		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
-		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action", AV_DEFAULT_ACTION_AUDIO).makeGlobal();
+		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action", AV_DEFAULT_ACTION_CHOOSE).makeGlobal();
 		SHOW_RECORDINGS = settings.registerBooleanPreference("show_recordings", true).makeGlobal();
 	}
 
@@ -441,7 +442,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl,
-					R.drawable.list_activities_rec_layer, R.string.map_widget_av_notes, "audionotes", false,
+					R.drawable.widget_icon_av_inactive, R.string.map_widget_av_notes, "audionotes", false,
 					EnumSet.allOf(ApplicationMode.class),
 					EnumSet.noneOf(ApplicationMode.class), 22);
 			mapInfoLayer.recreateControls();
@@ -482,11 +483,40 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		double lon = loc.getLongitude();
 		double lat = loc.getLatitude();
-		if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_VIDEO) {
-			recordVideo(lat, lon, mapActivity);
-		} else if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_TAKEPICTURE) {
-			takePhoto(lat, lon, mapActivity);
+		int action = AV_DEFAULT_ACTION.get();
+		if (action == AV_DEFAULT_ACTION_CHOOSE) {
+			chooseDefaultAction(lat, lon, mapActivity);
 		} else {
+			takeAction(mapActivity, lon, lat, action);
+		}
+	}
+
+
+	private void chooseDefaultAction(final double lat, final double lon, final MapActivity mapActivity) {
+		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(mapActivity);
+		ab.setItems(new String[] {
+				mapActivity.getString(R.string.recording_context_menu_arecord),
+				mapActivity.getString(R.string.recording_context_menu_vrecord),
+				mapActivity.getString(R.string.recording_context_menu_precord),
+		}, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				int action = which == 0 ? AV_DEFAULT_ACTION_AUDIO : 
+					(which == 1 ? AV_DEFAULT_ACTION_VIDEO:AV_DEFAULT_ACTION_TAKEPICTURE);
+				takeAction(mapActivity, lon, lat, action);
+				
+			}
+		});
+		ab.show();
+	}
+
+
+	private void takeAction(final MapActivity mapActivity, double lon, double lat, int action) {
+		if (action == AV_DEFAULT_ACTION_VIDEO) {
+			recordVideo(lat, lon, mapActivity);
+		} else if (action == AV_DEFAULT_ACTION_TAKEPICTURE) {
+			takePhoto(lat, lon, mapActivity);
+		} else if (action == AV_DEFAULT_ACTION_AUDIO) {
 			recordAudio(lat, lon, mapActivity);
 		}
 	}
@@ -890,9 +920,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		grp.setKey("av_settings");
 		screen.addPreference(grp);
 
-		entries = new String[] {app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
+		entries = new String[] { app.getString(R.string.av_def_action_choose),
+				app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
 				app.getString(R.string.av_def_action_picture)};
-		intValues = new Integer[] {AV_DEFAULT_ACTION_AUDIO, AV_DEFAULT_ACTION_VIDEO,
+		intValues = new Integer[] {AV_DEFAULT_ACTION_CHOOSE, AV_DEFAULT_ACTION_AUDIO, AV_DEFAULT_ACTION_VIDEO,
 				AV_DEFAULT_ACTION_TAKEPICTURE};
 		ListPreference defAct = activity.createListPreference(AV_DEFAULT_ACTION, 
 				entries, intValues, R.string.av_widget_action, R.string.av_widget_action_descr);

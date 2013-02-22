@@ -40,6 +40,7 @@
     <string name="intermediate_points_change_order">Change order</string>
     <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Google Play store to support further development.</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
+    <string name="av_def_action_choose">Select on request</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
     <string name="av_widget_action_descr">Select default widget action</string>
