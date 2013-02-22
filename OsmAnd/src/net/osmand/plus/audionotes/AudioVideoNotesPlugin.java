@@ -421,7 +421,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl,
-					R.drawable.list_activities_rec_layer, R.string.map_widget_av_notes, "audionotes", false,
+					R.drawable.widget_icon_av_inactive, R.string.map_widget_av_notes, "audionotes", false,
 					EnumSet.allOf(ApplicationMode.class),
 					EnumSet.noneOf(ApplicationMode.class), 22);
 			mapInfoLayer.recreateControls();
@@ -462,9 +462,38 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		double lon = loc.getLongitude();
 		double lat = loc.getLatitude();
-		if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_VIDEO) {
+		Integer action = app.getSettings().AV_DEFAULT_ACTION.get();
+		if (action == OsmandSettings.AV_DEFAULT_ACTION_CHOOSE) {
+			chooseDefaultAction(lat, lon, mapActivity);
+		} else {
+			takeAction(mapActivity, lon, lat, action);
+		}
+	}
+
+
+	private void chooseDefaultAction(final double lat, final double lon, final MapActivity mapActivity) {
+		AccessibleAlertBuilder ab = new AccessibleAlertBuilder(mapActivity);
+		ab.setItems(new String[] {
+				mapActivity.getString(R.string.recording_context_menu_arecord),
+				mapActivity.getString(R.string.recording_context_menu_vrecord),
+				mapActivity.getString(R.string.recording_context_menu_precord),
+		}, new OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				int action = which == 0 ? OsmandSettings.AV_DEFAULT_ACTION_AUDIO : 
+					(which == 1 ? OsmandSettings.AV_DEFAULT_ACTION_VIDEO:OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE);
+				takeAction(mapActivity, lon, lat, action);
+				
+			}
+		});
+		ab.show();
+	}
+
+
+	private void takeAction(final MapActivity mapActivity, double lon, double lat, Integer action) {
+		if (action == OsmandSettings.AV_DEFAULT_ACTION_VIDEO) {
 			recordVideo(lat, lon, mapActivity);
-		} else if (app.getSettings().AV_DEFAULT_ACTION.get() == OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE) {
+		} else if (action == OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE) {
 			takePhoto(lat, lon, mapActivity);
 		} else {
 			recordAudio(lat, lon, mapActivity);
@@ -872,9 +901,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		OsmandSettings settings = app.getSettings();
 		
 
-		entries = new String[] {app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
+		entries = new String[] { app.getString(R.string.av_def_action_choose),
+				app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
 				app.getString(R.string.av_def_action_picture)};
-		intValues = new Integer[] {OsmandSettings.AV_DEFAULT_ACTION_AUDIO, OsmandSettings.AV_DEFAULT_ACTION_VIDEO,
+		intValues = new Integer[] {OsmandSettings.AV_DEFAULT_ACTION_CHOOSE, OsmandSettings.AV_DEFAULT_ACTION_AUDIO, OsmandSettings.AV_DEFAULT_ACTION_VIDEO,
 				OsmandSettings.AV_DEFAULT_ACTION_TAKEPICTURE};
 		ListPreference defAct = activity.createListPreference(settings.AV_DEFAULT_ACTION, 
 				entries, intValues, R.string.av_widget_action, R.string.av_widget_action_descr);
