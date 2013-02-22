@@ -40,7 +40,7 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_ARM_ONLY" ] || [ -n "$OSMAND_ARMv5_ONLY"
 			./configure $QTBASE_CONFIGURATION \
 			-no-neon)
 	fi
-	(cd "$SRCLOC/upstream.patched.armeabi")
+	(cd "$SRCLOC/upstream.patched.armeabi" && make -j`nproc`)
 fi
 
 if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_ARM_ONLY" ] || [ -n "$OSMAND_ARMv7a_ONLY" ]; then
@@ -52,7 +52,7 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_ARM_ONLY" ] || [ -n "$OSMAND_ARMv7a_ONLY
 			./configure $QTBASE_CONFIGURATION \
 			-no-neon)
 	fi
-	(cd "$SRCLOC/upstream.patched.armeabi-v7a")
+	(cd "$SRCLOC/upstream.patched.armeabi-v7a" && make -j`nproc`)
 
 	if [ ! -d "$SRCLOC/upstream.patched.armeabi-v7a-neon" ]; then
 		cp -rf "$SRCLOC/upstream.patched" "$SRCLOC/upstream.patched.armeabi-v7a-neon"
@@ -62,7 +62,7 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_ARM_ONLY" ] || [ -n "$OSMAND_ARMv7a_ONLY
 			./configure $QTBASE_CONFIGURATION \
 			-qtlibinfix _neon)
 	fi
-	(cd "$SRCLOC/upstream.patched.armeabi-v7a-neon")
+	(cd "$SRCLOC/upstream.patched.armeabi-v7a-neon" && make -j`nproc`)
 fi
 
 if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_X86_ONLY" ]; then
@@ -73,7 +73,7 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_X86_ONLY" ]; then
 		(cd "$SRCLOC/upstream.patched.x86" && \
 			./configure $QTBASE_CONFIGURATION)
 	fi
-	(cd "$SRCLOC/upstream.patched.x86")
+	(cd "$SRCLOC/upstream.patched.x86" && make -j`nproc`)
 fi
 
 if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_MIPS_ONLY" ]; then
@@ -84,7 +84,7 @@ if [ -n "$BUILD_ALL" ] || [ -n "$OSMAND_MIPS_ONLY" ]; then
 		(cd "$SRCLOC/upstream.patched.mips" && \
 		./configure $QTBASE_CONFIGURATION)
 	fi
-	(cd "$SRCLOC/upstream.patched.mips")
+	(cd "$SRCLOC/upstream.patched.mips" && make -j`nproc`)
 fi
 
 (cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j`nproc`)
