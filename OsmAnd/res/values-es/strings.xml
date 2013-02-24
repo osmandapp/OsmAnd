@@ -1119,7 +1119,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografía</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
-    <string name="tip_recent_changes_1_2_t">Cambios en 1.2:</string>
+    <string name="tip_recent_changes_1_2_t">"Cambios en 1.2: "</string>
     <string name="prefer_motorways">Prefiero autopistas</string>
 	<string name="prefer_in_routing_title">Prefiero…</string>
 	<string name="prefer_in_routing_descr">Preferencia por autopistas</string>
