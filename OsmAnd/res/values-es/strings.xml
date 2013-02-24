@@ -540,7 +540,7 @@
   <string name="search_offline_address">Sin conexión</string>
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Máx. zoom con conexión</string>
-  <string name="max_level_download_tile_descr">Elige nivel máximo de zoom para descargar teselas de mapas de Internet</string>
+  <string name="max_level_download_tile_descr">Elige nivel de zoom máximo para descargar teselas de mapas de Internet</string>
   <string name="route_general_information">Distancia total %1$s, tiempo de viaje %2$d h %3$d m.</string>
   <string name="router_service_descr">Elige un servicio de navegación con o sin conexión</string>
   <string name="router_service">Servicio de navegación</string>
@@ -1124,4 +1124,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="prefer_in_routing_title">Prefiero…</string>
 	<string name="prefer_in_routing_descr">Preferencia por autopistas</string>
     <string name="max_speed_none">ninguna</string>
+    <string name="av_def_action_choose">Seleccionar a petición</string>
     </resources>
