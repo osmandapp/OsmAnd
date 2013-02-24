@@ -1172,4 +1172,5 @@
     <string name="prefer_motorways">Bij voorkeur snelwegen</string>
 	<string name="prefer_in_routing_title">Bij voorkeur…</string>
 	<string name="prefer_in_routing_descr">Bij voorkeur snelwegen</string>
+    <string name="av_def_action_choose">Altijd vragen</string>
     </resources>
