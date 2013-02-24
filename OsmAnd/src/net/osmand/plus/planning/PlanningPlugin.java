@@ -731,7 +731,10 @@ package net.osmand.plus.planning;
 			}
 		}
 		
-		public void showHelpDialog(){	//Measurement mode help dialog box
+		/**
+		 * Method to open message dialog to display help.
+		 */
+		public void showHelpDialog(){
 	    	Builder builder = new AlertDialog.Builder(mapActivity);
 			builder.setTitle(mapActivity.getResources().getText(R.string.help_Distance_Measurement_t));
 			builder.setMessage(mapActivity.getResources().getString(R.string.help_Distance_Measurement));	
