@@ -422,7 +422,7 @@
 	<string name="tip_favorites">Priljubljene lokacije</string>
 	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0.0:\n\t* Izboljšano usmerjanje: hitrejše in natančnejše, do 250 km\n\t* Možnost prikaza le cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju\n\t* Improved \'touring view\' with new road styles, more map details, and Alpine hiking (SAC scale) option\n\t* Uporaba EGM96 za popravek nadmorskih višin izmerjenih s sprejemnikom GPS "</string>
     <string name="close_changeset">Zapri paket sprememb</string>
-	<string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner ni nameščena. Naj jo poiščem v Market-u?</string>
+	<string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner ni nameščena. Naj jo poiščem v trgovini Google Play?</string>
 	<string name="rendering_attr_roadColors_description">Izberite barvno shemo cest:</string>
 	<string name="rendering_attr_roadColors_name">Barvna shema cest</string>
     <string name="map_settings">Nastavitve zemljevida</string>
@@ -439,7 +439,7 @@
 	<string name="local_index_gpx_info_show">\n\nDolg pritisk za možnosti</string>
 	<string name="search_offline_clear_search">Novo iskanje</string>
 	<string name="poi_filter_custom_filter">Filter po meri</string>
-	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Ali jo želite poiskati v Marketu?</string>
+	<string name="gps_status_app_not_found">Aplikacija GPS Status ni nameščena. Ali jo želite poiskati v trgovini Google Play?</string>
 	<string name="show_point_options">Uporabi mesto …</string>
 	<string name="menu_layers">Nastavitve prikaza</string>
 	<string name="where_am_i">Kje sem?</string>
@@ -488,8 +488,8 @@
 	<string name="menu_mute_off">Zvok je vključen</string>
 	<string name="menu_mute_on">Zvok je izključen</string>
 	<string name="tts_language_not_supported_title">Jezik ni podprt</string>
-	<string name="tts_language_not_supported">Izbrani jezik ni podprt z vgrajenim Android TTS engine (text-to-speech)-(besedilo v govor). Ali želite na trgu poiskati drug sintetizator govora? Sicer bo uporabljen sistemski TTS jezik.</string>
-	<string name="tts_missing_language_data">Ni nameščenih podatkov za izbrani jezik. Ali jih želite namestiti iz tržnice?</string>
+	<string name="tts_language_not_supported">Izbrani jezik ni podprt z vgrajenim Android TTS engine (text-to-speech)-(besedilo v govor). Ali želite v trgovini Google Play poiskati drug sintetizator govora? Sicer bo uporabljen sistemski TTS jezik.</string>
+	<string name="tts_missing_language_data">Ni nameščenih podatkov za izbrani jezik. Ali jih želite namestiti iz trgovine Google Play?</string>
 	<string name="system_locale">Sistemski</string>
 	<string name="support_new_features">Podpri nadaljnji razvoj</string>
 	<string name="map_screen_orientation">Usmerjenost zaslona</string>
@@ -1119,7 +1119,7 @@
     <string name="recording_camera_not_available">Kamera ni na voljo</string>
     <string name="osmand_srtm_long_description_1000_chars">Ta vtičnik ponuja izohipse, ki jih lahko prikažete v OsmAnd offline zemljevidih. Globalni podatki (med 70 stopinj severno in 70 stopinj južno) temeljijo na meritvah SRTM (Shuttle Radar Topography Mission) in ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ki je instrument za slikanje na krovu Terre, vodilnega satelita Nasinega sistema za opazovanje. ASTER je prizadevanje za sodelovanje med Naso, japonskim ministrstvom za gospodarstvo, trgovino in industrijo (METI) in japonskim vesoljskim sistemom (J-spacesystems).</string>
     <string name="audionotes_location_not_defined">Mesto, ki naj bi ga povezali z opombo, še ni določeno. Uporabite \"Uporabi mesto …\" za dodelitev opombe za določeno mesto</string>
-    <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse na Marketu, da bi tako podprli nadaljnji razvoj.</string>
+    <string name="srtm_paid_version_msg">Prosimo, razmislite o nakupu vtičnika Izohipse v trgovini Google Play, da bi tako podprli nadaljnji razvoj.</string>
     <string name="srtm_paid_version_title">Vtičnik Izohipse</string>
     <string name="animate_routing_using_gpx">Ali želite uporabiti obstoječo GPX datoteko?</string>
     <string name="intermediate_points_change_order">Spremeni vrstni red</string>
