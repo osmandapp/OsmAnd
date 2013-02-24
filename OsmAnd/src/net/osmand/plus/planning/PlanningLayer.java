@@ -609,7 +609,6 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, List<Object> o) {
-//		getParkingFromPoint(point, o);
 	}
 
 	@Override
@@ -619,12 +618,12 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	
 	@Override
 	public String getObjectDescription(Object o) {
-		return "blank";
+		return "Planning Plugin";
 	}
 	
 	@Override
 	public String getObjectName(Object o) {
-		return view.getContext().getString(R.string.osmand_parking_position_name);
+		return view.getContext().getString(R.string.osmand_planning_plugin_name);
 	}
 	
 	/**

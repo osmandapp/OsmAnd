@@ -262,7 +262,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		// It makes text bigger but blurry, the settings could be introduced for that
 		if (dm != null && dm.density > 1f && !getSettings().USE_HIGH_RES_MAPS.get()) {
 			return (int) (r * dm.density);
-		}
+			}
 		return r;
 	}
 

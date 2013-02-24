@@ -428,6 +428,11 @@ public class MapControlsLayer extends OsmandMapLayer {
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
 			
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
+			
+			while (cacheRulerDistPix * 1.5 <= (double)view.getWidth() * screenRulerPercent){	//ensure displayed ruler does not get too short
+				cacheRulerDistPix = cacheRulerDistPix *2;
+				roundedDist = roundedDist * 2;				
+			}
 			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
 			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText.getText());
 			
