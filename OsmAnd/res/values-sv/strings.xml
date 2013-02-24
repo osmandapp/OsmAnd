@@ -98,7 +98,7 @@
 <string name="map_widget_next_turn_small">Nästa sväng (liten)</string>
 <string name="map_widget_next_next_turn">Nästnästa sväng</string>
 <string name="map_widget_mini_route">Liten ruttkarta</string>
-<string name="bg_service_screen_lock">Lås skärmen</string>
+<string name="bg_service_screen_lock">Skärmlås</string>
 <string name="bg_service_screen_unlock">Lås upp skärmen</string>
 <string name="bg_service_screen_lock_toast">Skärmen är låst</string>
 <string name="bg_service_interval">Ställ in väckningsintervall:</string>
