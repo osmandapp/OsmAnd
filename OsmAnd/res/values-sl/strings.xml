@@ -1148,4 +1148,5 @@
 	<string name="prefer_in_routing_title">Raje …</string>
 	<string name="prefer_in_routing_descr">Raje avtoceste</string>
     <string name="max_speed_none">brez</string>
+    <string name="av_def_action_choose">Izberite na zahtevo</string>
     </resources>
