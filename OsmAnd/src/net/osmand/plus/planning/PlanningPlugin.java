@@ -178,6 +178,7 @@ package net.osmand.plus.planning;
 		public void disable(OsmandApplication application) {
 			planningLayer.hideDisplayZoomButtons();	//hide display zoom control if plugin has been disabled
 			settings.setPlanningMode(false);	//disable planning mode
+			settings.setDisplayScaleFactor(1.0f);	//reset display zoom
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {	//remove the Options menu item entry for Planning
 				Iterator<MapInfoControlRegInfo> it = mapInfoLayer.getMapInfoControls().getRight().iterator();
