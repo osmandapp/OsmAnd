@@ -12,6 +12,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.EntityInfo;
+import net.osmand.osm.EntityParser;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
@@ -117,7 +118,7 @@ public class EditingPOIActivity implements DialogProvider {
 	}
 
 	private void showPOIDialog(int dialogID, Node n, AmenityType type, String subType) {
-		Amenity a = new Amenity(n, type, subType);
+		Amenity a = EntityParser.parseAmenity(n, type, subType);
 		dialogBundle.putSerializable(KEY_AMENITY, a);
 		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
 		ctx.showDialog(dialogID);

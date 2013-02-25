@@ -11,7 +11,6 @@ import net.osmand.osm.MapRenderingTypes;
 import net.osmand.util.MapUtils;
 import net.osmand.osm.Node;
 import net.osmand.osm.OSMSettings.OSMTagKey;
-import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 

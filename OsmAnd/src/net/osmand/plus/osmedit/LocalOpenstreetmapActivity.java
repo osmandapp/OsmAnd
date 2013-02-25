@@ -7,7 +7,6 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.EntityInfo;
 import net.osmand.osm.Node;
-import net.osmand.plus.AmenityIndexRepositoryOdb;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;

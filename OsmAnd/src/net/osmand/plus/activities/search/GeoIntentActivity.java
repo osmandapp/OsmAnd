@@ -9,12 +9,12 @@ import java.util.List;
 
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
+import net.osmand.data.Amenity;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
 import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
-import net.osmand.osm.Node;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -335,9 +335,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 		 */
 		public GeoPointSearch(double lat , double lon ) {
 			// TODO zoom is omited for now
-			point = new MapObject(new Node(lat, lon, -1)) {
-					private static final long serialVersionUID = -7028586132795853725L;
-			};
+			point = new Amenity();
+			point.setLocation(lat, lon);
 			point.setName("Lat: " + lat + ",Lon:" + lon);
 		}
 
