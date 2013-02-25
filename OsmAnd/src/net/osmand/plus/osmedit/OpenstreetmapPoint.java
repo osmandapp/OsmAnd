@@ -3,8 +3,8 @@ package net.osmand.plus.osmedit;
 import java.io.Serializable;
 
 import net.osmand.data.AmenityType;
-import net.osmand.osm.Node;
-import net.osmand.osm.OSMSettings.OSMTagKey;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 
 public class OpenstreetmapPoint extends OsmPoint implements Serializable {
 	private static final long serialVersionUID = 729654300829771467L;

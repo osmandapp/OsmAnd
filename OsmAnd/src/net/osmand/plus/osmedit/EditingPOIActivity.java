@@ -11,15 +11,11 @@ import java.util.TreeSet;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.EntityInfo;
-import net.osmand.osm.EntityParser;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.osm.Node;
-import net.osmand.osm.OSMSettings.OSMTagKey;
-import net.osmand.osm.OpeningHoursParser;
-import net.osmand.osm.OpeningHoursParser.BasicDayOpeningHourRule;
-import net.osmand.osm.OpeningHoursParser.OpeningHours;
-import net.osmand.osm.OpeningHoursParser.OpeningHoursRule;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.EntityParser;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -27,6 +23,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OpeningHoursView;
+import net.osmand.util.OpeningHoursParser;
+import net.osmand.util.OpeningHoursParser.BasicDayOpeningHourRule;
+import net.osmand.util.OpeningHoursParser.OpeningHours;
+import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -288,8 +288,6 @@ public class EditingPOIActivity implements DialogProvider {
 	
 	private Dialog createPOIDialog(final int dialogID, Bundle args) {
 		final Dialog dlg = new Dialog(ctx);
-		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-		final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 		dlg.setContentView(R.layout.editing_poi);
 		nameText = ((EditText)dlg.findViewById(R.id.Name));
 		openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
@@ -312,7 +310,9 @@ public class EditingPOIActivity implements DialogProvider {
 			}
 		});
 		linkToOsmDoc.setMovementMethod(LinkMovementMethod.getInstance());
-		
+
+//		final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
+//		final Node n = (Node) args.getSerializable(KEY_AMENITY_NODE);
 //		attachListeners(dialogID, dlg, a, n);
 		
 		return dlg;
@@ -481,7 +481,7 @@ public class EditingPOIActivity implements DialogProvider {
 
 	private void updateSubTypesAdapter(AmenityType t){
 		
-		Set<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(t, MapRenderingTypes.getDefault()));
+		Set<String> subCategories = new LinkedHashSet<String>(MapRenderingTypes.getDefault().getAmenitySubCategories(t));
 		for(String s : MapRenderingTypes.getDefault().getAmenityNameToType().keySet()){
 			if(!subCategories.contains(s)){
 				subCategories.add(s);
@@ -584,7 +584,8 @@ public class EditingPOIActivity implements DialogProvider {
 			case DIALOG_SUB_CATEGORIES: {
 				Builder builder = new AlertDialog.Builder(ctx);
 				final Amenity a = (Amenity) args.getSerializable(KEY_AMENITY);
-				final String[] subCats = AmenityType.getSubCategories(a.getType(), MapRenderingTypes.getDefault()).toArray(new String[0]);
+				final String[] subCats = MapRenderingTypes.getDefault().getAmenitySubCategories(a.getType()).
+						toArray(new String[0]);
 				builder.setItems(subCats, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.osm.EntityInfo;
-import net.osmand.osm.Node;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;

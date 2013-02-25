@@ -208,7 +208,7 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		ScrollView scroll = new ScrollView(this);
 		ListView listView = new ListView(this);
 		
-		final LinkedHashSet<String> subCategories = new LinkedHashSet<String>(AmenityType.getSubCategories(amenity, MapRenderingTypes.getDefault()));
+		final LinkedHashSet<String> subCategories = new LinkedHashSet<String>(MapRenderingTypes.getDefault().getAmenitySubCategories(amenity));
 		Set<String> acceptedCategories = filter.getAcceptedSubtypes(amenity);
 		if (acceptedCategories != null) {
 			for (String s : acceptedCategories) {

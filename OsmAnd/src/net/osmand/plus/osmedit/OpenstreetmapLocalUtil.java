@@ -6,13 +6,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.EntityInfo;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.util.MapUtils;
-import net.osmand.osm.Node;
-import net.osmand.osm.OSMSettings.OSMTagKey;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.OSMSettings.OSMTagKey;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
