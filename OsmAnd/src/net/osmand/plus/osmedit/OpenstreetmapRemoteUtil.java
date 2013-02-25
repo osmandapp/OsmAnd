@@ -25,14 +25,14 @@ import net.osmand.osm.edit.Entity.EntityId;
 import net.osmand.osm.edit.Entity.EntityType;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
+import net.osmand.osm.io.Base64;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.osm.io.OsmBaseStorage;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.util.Base64;
 import net.osmand.util.MapUtils;
-import net.osmand.util.NetworkUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
