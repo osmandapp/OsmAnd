@@ -9,16 +9,16 @@ preamble - [].
 %% TURNS 
 turn('left', ['turn.ogg',   'left-e.ogg']).
 turn('left_sh', ['sharp_left-e.ogg']).
-turn('left_sl', ['turn.ogg', 'left-e.ogg']).
+turn('left_sl', ['turn.ogg', 'slight_left-e.ogg']).
 turn('right', ['turn.ogg', 'right-e.ogg']).
 turn('right_sh', ['sharp_right-e.ogg']).
-turn('right_sl', ['turn.ogg', 'right-e.ogg']).
+turn('right_sl', ['turn.ogg', 'slight_right-e.ogg']).
 turn('right_keep', ['keep_right-e.ogg']).
 turn('left_keep', ['keep_left-e.ogg']).
 
-prepare_turn(Turn, Dist) == ['Prepare_to-a.ogg', delay_450, D, delay_450, M] :- 
+prepare_turn(Turn, Dist) == ['Prepare_to-a.ogg', delay_450, D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['after-m.ogg', delay_250, D, delay_250, M] :- 
+turn(Turn, Dist) == ['after.ogg', delay_250, D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
@@ -26,10 +26,10 @@ turn(Turn) == M :- turn(Turn, M).
 prepare_make_ut(Dist) == ['Prepare_to-a.ogg', delay_300, D, delay_300,'turn_back-e.ogg'] :- 
 		distance(Dist) == D.
 
-prepare_roundabout(Dist) == ['prepare_to-enter.ogg', delay_300, D] :- 
+prepare_roundabout(Dist) == ['prepare_to-enter.ogg', 'after.ogg', D] :- 
 		distance(Dist) == D.
 
-make_ut(Dist) == ['after-m.ogg', delay_300, D, delay_300, 'turn_back-e.ogg'] :- 
+make_ut(Dist) == ['after.ogg', delay_300, D, delay_300, 'turn_back-e.ogg'] :- 
 			distance(Dist) == D.
 make_ut == ['turn_back-e.ogg'].
 
@@ -38,8 +38,7 @@ make_ut_wp == ['when_possible_please_make_a_u_turn.ogg'].
 
 
 
-roundabout(Dist, _Angle, Exit) == ['after-m.ogg', delay_300, D, delay_300, 'enter_the_roundabout-e.ogg', delay_250, 'and_take.ogg', 
-		delay_250, 'exit-e.ogg', E] :- distance(Dist) == D, nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['after.ogg', delay_300, D, delay_300, 'enter_the_roundabout-e.ogg', delay_250, 'and_take.ogg', 'exit-e.ogg', E] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['taking.ogg', delay_250, 'exit-e.ogg', E] :- nth(Exit, E).
 
 and_arrive_destination == ['arrive_at_your_destination-e.ogg']. % Miss and?
@@ -51,12 +50,12 @@ then == ['then.ogg', delay_350].
 
 bear_right == ['keep_right-e.ogg'].
 bear_left == ['keep_left-e.ogg'].
-route_recalc(_Dist) == ['recalc.ogg'].  %nothing to said possibly beep?	
+route_recalc(Dist) == ['recalc.ogg', D]:- distance(Dist) == D.   %nothing to said possibly beep?	
 route_new_calc(Dist) == ['the_trip_is_more_than.ogg', delay_150, D] :- distance(Dist) == D. % nothing to said possibly beep?
 
 location_lost == ['gps_signal_lost.ogg'].
 
-go_ahead(Dist) == ['drive_for-h.ogg', delay_250,  D]:- distance(Dist) == D.
+go_ahead(Dist) == ['Follow-the-road-for.ogg', delay_250,  D]:- distance(Dist) == D.
 go_ahead == ['continue_straight-e.ogg'].
 
 %% 
@@ -90,14 +89,46 @@ dist(D, ['60.ogg']) :-  D < 70, !.
 dist(D, ['70.ogg']) :-  D < 80, !.
 dist(D, ['80.ogg']) :-  D < 90, !.
 dist(D, ['90.ogg']) :-  D < 100, !.
-dist(D, ['100.ogg']) :-  D < 150, !.
-dist(D, ['100.ogg', '50.ogg']) :-  D < 200, !.
-dist(D, ['200.ogg']) :-  D < 250, !.
-dist(D, ['200.ogg', '50.ogg']) :-  D < 300, !.
-dist(D, ['300.ogg']) :-  D < 350, !.
-dist(D, ['300.ogg', '50.ogg']) :-  D < 400, !.
-dist(D, ['400.ogg']) :-  D < 450, !.
-dist(D, ['400.ogg', '50.ogg']) :-  D < 500, !.
+dist(D, ['100.ogg']) :-  D < 105, !.
+dist(D, ['100.ogg', '10.ogg']) :-  D < 115, !.
+dist(D, ['100.ogg', '20.ogg']) :-  D < 125, !.
+dist(D, ['100.ogg', '30.ogg']) :-  D < 135, !.
+dist(D, ['100.ogg', '40.ogg']) :-  D < 145, !.
+dist(D, ['100.ogg', '50.ogg']) :-  D < 155, !.
+dist(D, ['100.ogg', '60.ogg']) :-  D < 165, !.
+dist(D, ['100.ogg', '70.ogg']) :-  D < 175, !.
+dist(D, ['100.ogg', '80.ogg']) :-  D < 185, !.
+dist(D, ['100.ogg', '90.ogg']) :-  D < 195, !.
+dist(D, ['200.ogg']) :-  D < 205, !.
+dist(D, ['200.ogg', '10.ogg']) :-  D < 215, !.
+dist(D, ['200.ogg', '20.ogg']) :-  D < 225, !.
+dist(D, ['200.ogg', '30.ogg']) :-  D < 235, !.
+dist(D, ['200.ogg', '40.ogg']) :-  D < 245, !.
+dist(D, ['200.ogg', '50.ogg']) :-  D < 255, !.
+dist(D, ['200.ogg', '60.ogg']) :-  D < 265, !.
+dist(D, ['200.ogg', '70.ogg']) :-  D < 275, !.
+dist(D, ['200.ogg', '80.ogg']) :-  D < 285, !.
+dist(D, ['200.ogg', '90.ogg']) :-  D < 295, !.
+dist(D, ['300.ogg']) :-  D < 305, !.
+dist(D, ['300.ogg', '10.ogg']) :-  D < 315, !.
+dist(D, ['300.ogg', '20.ogg']) :-  D < 325, !.
+dist(D, ['300.ogg', '30.ogg']) :-  D < 335, !.
+dist(D, ['300.ogg', '40.ogg']) :-  D < 345, !.
+dist(D, ['300.ogg', '50.ogg']) :-  D < 355, !.
+dist(D, ['300.ogg', '60.ogg']) :-  D < 365, !.
+dist(D, ['300.ogg', '70.ogg']) :-  D < 375, !.
+dist(D, ['300.ogg', '80.ogg']) :-  D < 385, !.
+dist(D, ['300.ogg', '90.ogg']) :-  D < 395, !.
+dist(D, ['400.ogg']) :-  D < 405, !.
+dist(D, ['400.ogg', '10.ogg']) :-  D < 415, !.
+dist(D, ['400.ogg', '20.ogg']) :-  D < 425, !.
+dist(D, ['400.ogg', '30.ogg']) :-  D < 435, !.
+dist(D, ['400.ogg', '40.ogg']) :-  D < 445, !.
+dist(D, ['400.ogg', '50.ogg']) :-  D < 455, !.
+dist(D, ['400.ogg', '60.ogg']) :-  D < 465, !.
+dist(D, ['400.ogg', '70.ogg']) :-  D < 475, !.
+dist(D, ['400.ogg', '80.ogg']) :-  D < 485, !.
+dist(D, ['400.ogg', '90.ogg']) :-  D < 495, !.
 dist(D, ['500.ogg']) :-  D < 550, !.
 dist(D, ['500.ogg', '50.ogg']) :-  D < 600, !.
 dist(D, ['600.ogg']) :-  D < 650, !.
