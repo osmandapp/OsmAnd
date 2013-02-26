@@ -96,14 +96,14 @@ package net.osmand.plus.planning;
 		 * the measurement map info bar is clicked.
 		 */
 		final int[] mapInfoBarMenuActions = new int[]{
-				R.string.context_menu_item_cancel,
-				R.string.context_menu_item_planning_help,
 				R.string.context_menu_item_end_measurement,
+				R.string.context_menu_item_cancel,
 				R.string.context_menu_item_clear_all_points,
 				R.string.context_menu_item_display_point_info,
 				R.string.context_menu_item_display_distance_only,
 				R.string.context_menu_item_load_GPX_plan,
 				R.string.context_menu_item_save_plan,
+				R.string.context_menu_item_planning_help,
 				R.string.context_menu_item_edit_point_size,
 				R.string.context_menu_item_edit_point_selection_area
 	    	};
