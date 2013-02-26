@@ -41,23 +41,15 @@ public class NativeOsmandLibrary extends NativeLibrary {
 							log.debug("Loading jnigraphics, since Android >= 2.2 ..."); //$NON-NLS-1$
 							System.loadLibrary("jnigraphics");
 						}
-						if(!cpuHasNeonSupport()) {
-							log.debug("Loading native osmand..."); //$NON-NLS-1$
-							System.loadLibrary("Qt5Core");
-							System.loadLibrary("Qt5Network");
-							System.loadLibrary("Qt5Concurrent");
-							System.loadLibrary("Qt5Sql");
-							System.loadLibrary("Qt5Xml");
-							System.loadLibrary("osmand");
-						} else {
-							log.debug("Loading native osmand with NEON..."); //$NON-NLS-1$
-							System.loadLibrary("Qt5Core_neon");
-							System.loadLibrary("Qt5Network_neon");
-							System.loadLibrary("Qt5Concurrent_neon");
-							System.loadLibrary("Qt5Sql_neon");
-							System.loadLibrary("Qt5Xml_neon");
-							System.loadLibrary("osmand_neon");
-						}
+						final String libCpuSuffix = cpuHasNeonSupport() ? "_neon" : "";
+						log.debug("Loading native libraries..."); //$NON-NLS-1$
+						System.loadLibrary("Qt5Core" + libCpuSuffix);
+						System.loadLibrary("Qt5Network" + libCpuSuffix);
+						System.loadLibrary("Qt5Concurrent" + libCpuSuffix);
+						System.loadLibrary("Qt5Sql" + libCpuSuffix);
+						System.loadLibrary("Qt5Xml" + libCpuSuffix);
+						System.loadLibrary("OsmAndCore" + libCpuSuffix);
+						System.loadLibrary("OsmAndJNI" + libCpuSuffix);
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 						library = new NativeOsmandLibrary();
 						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
