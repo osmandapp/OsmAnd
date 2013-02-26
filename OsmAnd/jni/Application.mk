@@ -1,6 +1,6 @@
 APP_STL := gnustl_shared
 APP_ABI := all
-APP_CPPFLAGS := -std=c++11 -fexceptions
+APP_CPPFLAGS := -std=c++11 -fexceptions -frtti
 NDK_TOOLCHAIN_VERSION := 4.7
 
 ifdef OSMAND_X86_ONLY
