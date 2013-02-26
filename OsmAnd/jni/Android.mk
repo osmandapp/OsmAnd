@@ -2,7 +2,8 @@ OSMAND_MAKEFILES := \
 	$(all-subdir-makefiles) \
 	$(call my-dir)/../../../jni/Android.mk \
 	$(call my-dir)/../../../core/Android.mk \
-	$(call all-makefiles-under,$(call my-dir)/../../../core/externals) 
+	$(call all-makefiles-under,$(call my-dir)/../../../core/externals) \
+	$(call my-dir)/../../../core/utils/Android.mk
 
 # Protect from previous builds
 ifneq ($(TARGET_ARCH_ABI),armeabi-v7a)
