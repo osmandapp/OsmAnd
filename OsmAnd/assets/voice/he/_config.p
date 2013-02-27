@@ -80,7 +80,6 @@ nth(17, '17th.ogg').
 
 %%% distance measure
 distance(Dist) == T :- Dist < 1000, dist(Dist, F), append(F, 'meters-e.ogg',T).
-dist(D, ['10.ogg']) :-  D < 20, !.
 dist(D, ['20.ogg']) :-  D < 30, !.
 dist(D, ['30.ogg']) :-  D < 40, !.
 dist(D, ['40.ogg']) :-  D < 50, !.
@@ -89,46 +88,15 @@ dist(D, ['60.ogg']) :-  D < 70, !.
 dist(D, ['70.ogg']) :-  D < 80, !.
 dist(D, ['80.ogg']) :-  D < 90, !.
 dist(D, ['90.ogg']) :-  D < 100, !.
-dist(D, ['100.ogg']) :-  D < 105, !.
-dist(D, ['100.ogg', '10.ogg']) :-  D < 115, !.
-dist(D, ['100.ogg', '20.ogg']) :-  D < 125, !.
-dist(D, ['100.ogg', '30.ogg']) :-  D < 135, !.
-dist(D, ['100.ogg', '40.ogg']) :-  D < 145, !.
-dist(D, ['100.ogg', '50.ogg']) :-  D < 155, !.
-dist(D, ['100.ogg', '60.ogg']) :-  D < 165, !.
-dist(D, ['100.ogg', '70.ogg']) :-  D < 175, !.
-dist(D, ['100.ogg', '80.ogg']) :-  D < 185, !.
-dist(D, ['100.ogg', '90.ogg']) :-  D < 195, !.
-dist(D, ['200.ogg']) :-  D < 205, !.
-dist(D, ['200.ogg', '10.ogg']) :-  D < 215, !.
-dist(D, ['200.ogg', '20.ogg']) :-  D < 225, !.
-dist(D, ['200.ogg', '30.ogg']) :-  D < 235, !.
-dist(D, ['200.ogg', '40.ogg']) :-  D < 245, !.
-dist(D, ['200.ogg', '50.ogg']) :-  D < 255, !.
-dist(D, ['200.ogg', '60.ogg']) :-  D < 265, !.
-dist(D, ['200.ogg', '70.ogg']) :-  D < 275, !.
-dist(D, ['200.ogg', '80.ogg']) :-  D < 285, !.
-dist(D, ['200.ogg', '90.ogg']) :-  D < 295, !.
-dist(D, ['300.ogg']) :-  D < 305, !.
-dist(D, ['300.ogg', '10.ogg']) :-  D < 315, !.
-dist(D, ['300.ogg', '20.ogg']) :-  D < 325, !.
-dist(D, ['300.ogg', '30.ogg']) :-  D < 335, !.
-dist(D, ['300.ogg', '40.ogg']) :-  D < 345, !.
-dist(D, ['300.ogg', '50.ogg']) :-  D < 355, !.
-dist(D, ['300.ogg', '60.ogg']) :-  D < 365, !.
-dist(D, ['300.ogg', '70.ogg']) :-  D < 375, !.
-dist(D, ['300.ogg', '80.ogg']) :-  D < 385, !.
-dist(D, ['300.ogg', '90.ogg']) :-  D < 395, !.
-dist(D, ['400.ogg']) :-  D < 405, !.
-dist(D, ['400.ogg', '10.ogg']) :-  D < 415, !.
-dist(D, ['400.ogg', '20.ogg']) :-  D < 425, !.
-dist(D, ['400.ogg', '30.ogg']) :-  D < 435, !.
-dist(D, ['400.ogg', '40.ogg']) :-  D < 445, !.
-dist(D, ['400.ogg', '50.ogg']) :-  D < 455, !.
-dist(D, ['400.ogg', '60.ogg']) :-  D < 465, !.
-dist(D, ['400.ogg', '70.ogg']) :-  D < 475, !.
-dist(D, ['400.ogg', '80.ogg']) :-  D < 485, !.
-dist(D, ['400.ogg', '90.ogg']) :-  D < 495, !.
+dist(D, ['100.ogg']) :-  D < 110, !.
+dist(D, ['100.ogg', S]) :-  D < 200, T is D - 100, dist(T, [S]), !.
+dist(D, ['200.ogg']) :-  D < 210, !.
+dist(D, ['200.ogg', S]) :-  D < 300, T is D - 200, dist(T, [S]), !.
+dist(D, ['300.ogg']) :-  D < 310, !.
+dist(D, ['300.ogg', S]) :-  D < 400, T is D - 300, dist(T, [S]), !.
+
+dist(D, ['400.ogg']) :-  D < 410, !.
+dist(D, ['400.ogg', S]) :-  D < 500, T is D - 400, dist(T, [S]), !.
 dist(D, ['500.ogg']) :-  D < 550, !.
 dist(D, ['500.ogg', '50.ogg']) :-  D < 600, !.
 dist(D, ['600.ogg']) :-  D < 650, !.
@@ -150,6 +118,18 @@ distance(Dist) == ['more_than.ogg', '6.ogg', 'kilometers-e.ogg'] :- Dist < 7000.
 distance(Dist) == ['more_than.ogg', '7.ogg', 'kilometers-e.ogg'] :- Dist < 8000.
 distance(Dist) == ['more_than.ogg', '8.ogg', 'kilometers-e.ogg'] :- Dist < 9000.
 distance(Dist) == ['more_than.ogg', '9.ogg', 'kilometers-e.ogg'] :- Dist < 10000.
+distance(Dist) == ['more_than.ogg', '10.ogg', 'kilometers-e.ogg'] :- Dist < 11000.
+distance(Dist) == ['more_than.ogg', '11.ogg', 'kilometers-e.ogg'] :- Dist < 12000.
+distance(Dist) == ['more_than.ogg', '12.ogg', 'kilometers-e.ogg'] :- Dist < 13000.
+distance(Dist) == ['more_than.ogg', '13.ogg', 'kilometers-e.ogg'] :- Dist < 14000.
+distance(Dist) == ['more_than.ogg', '14.ogg', 'kilometers-e.ogg'] :- Dist < 15000.
+distance(Dist) == ['more_than.ogg', '15.ogg', 'kilometers-e.ogg'] :- Dist < 16000.
+distance(Dist) == ['more_than.ogg', '16.ogg', 'kilometers-e.ogg'] :- Dist < 17000.
+distance(Dist) == ['more_than.ogg', '17.ogg', 'kilometers-e.ogg'] :- Dist < 18000.
+distance(Dist) == ['more_than.ogg', '18.ogg', 'kilometers-e.ogg'] :- Dist < 19000.
+distance(Dist) == ['more_than.ogg', '19.ogg', 'kilometers-e.ogg'] 
+:- Dist < 20000.
+
 distance(Dist) == ['more_than.ogg', X, 'kilometers-e.ogg'] :- D is Dist/1000, dist(D, X).
 
 
