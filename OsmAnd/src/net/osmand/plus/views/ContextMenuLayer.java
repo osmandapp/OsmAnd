@@ -22,6 +22,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -194,7 +195,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		if (!view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
+		if ((Build.VERSION.SDK_INT < 14) && !view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
 			if (!selectedObjects.isEmpty())
 				view.showMessage(activity.getNavigationHint(latLon));
 			return true;
@@ -289,7 +290,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		boolean nativeMode = view.getSettings().SCROLL_MAP_BY_GESTURES.get();
+		boolean nativeMode = (Build.VERSION.SDK_INT >= 14) || view.getSettings().SCROLL_MAP_BY_GESTURES.get();
 		int val = pressedInTextView(point.x, point.y);
 		if (val == 2) {
 			setLocation(null, ""); //$NON-NLS-1$

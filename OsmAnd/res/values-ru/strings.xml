@@ -1126,4 +1126,7 @@
 	<string name="prefer_in_routing_title">Предпочитать…</string>
 	<string name="prefer_in_routing_descr">Предпочитать автомагистрали</string>
     <string name="tip_recent_changes_1_2_t">"Изменения в 1.2: "</string>
-    </resources>
+    <string name="item_checked">отмечено</string>
+    <string name="item_unchecked">не отмечено</string>
+    <string name="map_view">Карта</string>
+</resources>
