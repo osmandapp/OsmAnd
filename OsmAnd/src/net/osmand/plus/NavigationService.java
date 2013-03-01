@@ -273,8 +273,9 @@ public class NavigationService extends Service implements LocationListener {
 
 
 	@Override
-	public void onLocationChanged(Location location) {
-		if(location != null && !settings.MAP_ACTIVITY_ENABLED.get()){
+	public void onLocationChanged(Location l) {
+		if(l != null && !settings.MAP_ACTIVITY_ENABLED.get()){
+			net.osmand.Location location = MapActivity.convertLocation(l,(OsmandApplication) getApplication());
 			if(!isContinuous()){
 				// unregister listener and wait next time
 				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -309,7 +310,7 @@ public class NavigationService extends Service implements LocationListener {
 						location.getSpeed(), location.getAccuracy(), locationTime, settings);
 			}
 			if(routingHelper.isFollowingMode()){
-				routingHelper.setCurrentLocation(MapActivity.convertLocation(location,(OsmandApplication) getApplication()), false);
+				routingHelper.setCurrentLocation(location, false);
 			}
 		}
 		
