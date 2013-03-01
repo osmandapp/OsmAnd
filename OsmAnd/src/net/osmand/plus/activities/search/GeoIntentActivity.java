@@ -10,6 +10,7 @@ import java.util.List;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
+import net.osmand.data.AmenityType;
 import net.osmand.data.City;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
@@ -336,6 +337,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 		public GeoPointSearch(double lat , double lon ) {
 			// TODO zoom is omited for now
 			point = new Amenity();
+			((Amenity)point).setType(AmenityType.USER_DEFINED);
+			((Amenity)point).setSubType("");
 			point.setLocation(lat, lon);
 			point.setName("Lat: " + lat + ",Lon:" + lon);
 		}
