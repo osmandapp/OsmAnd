@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapExplorer;
 import net.osmand.map.IMapLocationListener;
@@ -95,6 +96,8 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	private OnClickListener onClickListener;
 
 	private OnTrackBallListener trackBallDelegate;
+
+	private AccessibilityActionsProvider accessibilityActions;
 
 	private List<OsmandMapLayer> layers = new ArrayList<OsmandMapLayer>();
 	
@@ -776,6 +779,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		this.onClickListener = l;
 	}
 
+	public void setAccessibilityActions(AccessibilityActionsProvider actions) {
+		accessibilityActions = actions;
+	}
+
 
 	public LatLon getLatLonFromScreenPoint(float x, float y) {
 		float dx = x - getCenterPointX();
@@ -892,6 +899,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (log.isDebugEnabled()) {
 				log.debug("On long click event " + e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
+			if ((accessibilityActions != null) && accessibilityActions.onLongClick()) {
+				return;
+			}
 			PointF point = new PointF(e.getX(), e.getY());
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onLongPressEvent(point)) {
@@ -918,6 +928,9 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			PointF point = new PointF(e.getX(), e.getY());
 			if (log.isDebugEnabled()) {
 				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			if ((accessibilityActions != null) && accessibilityActions.onClick()) {
+				return true;
 			}
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onSingleTap(point)) {
