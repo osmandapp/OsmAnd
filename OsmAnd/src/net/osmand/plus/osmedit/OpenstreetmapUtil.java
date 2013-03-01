@@ -1,8 +1,8 @@
 package net.osmand.plus.osmedit;
 
 import net.osmand.data.Amenity;
-import net.osmand.osm.EntityInfo;
-import net.osmand.osm.Node;
+import net.osmand.osm.edit.EntityInfo;
+import net.osmand.osm.edit.Node;
 import android.app.Activity;
 
 public interface OpenstreetmapUtil {

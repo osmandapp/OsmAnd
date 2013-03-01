@@ -613,8 +613,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		if (themeId != calcThemeId) {
 			themeId = calcThemeId;
 			boolean textBold = following;
-			int textColor = !nightMode ? Color.BLACK : 0xffC8C8C8;
-			int textShadowColor = !transparent ? Color.TRANSPARENT : Color.WHITE;
+			int textColor = nightMode ? 0xffC8C8C8:Color.BLACK ;
+			int textShadowColor = transparent && !nightMode? Color.WHITE : Color.TRANSPARENT ;
 			int boxTop;
 			int boxTopStack;
 			int boxTopR;
@@ -622,19 +622,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 			int expand;
 			Drawable boxFree = view.getResources().getDrawable(R.drawable.box_free_simple);
 			
-			if (nightMode) {
+			if (transparent) {
+				boxTop = R.drawable.box_top_t;
+				boxTopStack = R.drawable.box_top_t_stack;
+				boxTopR = R.drawable.box_top_rt;
+				boxTopL = R.drawable.box_top_lt;
+				expand = R.drawable.box_expand_t;
+				if (nightMode) {
+					boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
+				}
+			} else if (nightMode) {
 				boxTop = R.drawable.box_top_n;
 				boxTopStack = R.drawable.box_top_n_stack;
 				boxTopR = R.drawable.box_top_rn;
 				boxTopL = R.drawable.box_top_ln;
 				expand = R.drawable.box_expand_t;
 				boxFree = view.getResources().getDrawable(R.drawable.box_night_free_simple);
-			} else if (transparent) {
-				boxTop = R.drawable.box_top_t;
-				boxTopStack = R.drawable.box_top_t_stack;
-				boxTopR = R.drawable.box_top_rt;
-				boxTopL = R.drawable.box_top_lt;
-				expand = R.drawable.box_expand_t;
 			} else {
 				boxTop = R.drawable.box_top;
 				boxTopStack = R.drawable.box_top_stack;

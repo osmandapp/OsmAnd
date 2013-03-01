@@ -280,9 +280,9 @@
   <string name="tip_update_index">Mise à jour des cartes locales</string>
   <string name="tip_update_index_t">Il est très important d\'avoir des données cartographiques à jour. OsmAnd a un gestionnaire de téléchargements qui permet de vérifier si les cartes locales peuvent être mises à jour.
 \n\tPour vérifier les mises à jour, aller à \'Menu Principal\'-&gt;\'Paramètres\'-&gt;\'Données hors-ligne\'-&gt;\'Télécharger du contenu\'. Sélectionner l\'option \'Filtrer téléchargé\' dans le menu contextuel.
-\nLà, seules les cartes déjà téléchargées sur votre système sont affichées, avec les couleurs suivantes:
+\nLà, seules les cartes déjà téléchargées sur votre système sont affichées, avec les couleurs ou polices suivantes :
 \n\t\'Vert\' - pour les cartes à jour avec le serveur
-\n\t\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur</string>
+\n\t\'Bleu\' - pour les cartes qui peuvent être mises à jour depuis le serveur\n\t\'Italique\' - pour les cartes désactivées sur l\'appareil</string>
   <string name="level_to_switch_vector_raster_descr">Niveau de zoom maximum pour l\'utilisation du rendu vectoriel au lieu des images</string>
   <string name="level_to_switch_vector_raster">Niveau de zoom vectoriel</string>
   <string name="tip_location_sharing">Partage d\'emplacement</string>
@@ -701,7 +701,7 @@
   <string name="search_activity">Rechercher</string>
   <string name="searchpoi_activity">Choisir PI</string>
   <string name="search_POI_level_btn">Trouver plus</string>
-  <string name="incremental_search_city">Recherche progressive de ville. Afin de trouver les villages/codes postaux, veuillez inscrire au moins les trois premiers caractères.</string>
+  <string name="incremental_search_city">Recherche progressive de ville.</string>
   <string name="incremental_search_street">Recherche progressive des rues</string>
   <string name="incremental_search_building">Recherche progressive des édifices</string>
   <string name="choose_available_region">Choisir une région dans la liste</string>
@@ -783,7 +783,7 @@
   <string name="edit_filter_delete_menu_item">Supprimer</string>
   <string name="edit_filter_save_as_menu_item">Enregistrer Sous</string>
   <string name="edit_filter_delete_dialog_title">Voulez-vous vraiment supprimer le filtre sélectionné ?</string>
-  <string name="edit_filter_delete_message">Filtre {0} effacé</string>
+  <string name="edit_filter_delete_message">Le filtre {0} a été effacé</string>
   <string name="edit_filter_create_message">Le filtre {0} a été créé</string>
   <string name="default_buttons_selectall">Tout sélectionner</string>
   <string name="offline_navigation_not_available">Navigation hors ligne temporairement indisponible.</string>
@@ -959,7 +959,7 @@
   <string name="osmand_parking_hours">Heures</string>
   <string name="osmand_parking_minutes">Minutes</string>
   <string name="osmand_parking_position_description_add_time">La voiture est garée à :</string>
-  <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détecté</string>
+  <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée</string>
   <string name="use_compass_navigation">Utiliser la boussole</string>
   <string name="route_updated_loc_found">L\'itinéraire sera recalculé quand le lieu sera trouvé</string>
   <string name="continue_follow_previous_route_auto">La navigation précédente ne s\'était pas terminée. Continuer à la suivre ? (%1$s secondes)</string>
@@ -998,8 +998,8 @@
   <string name="map_widget_mini_route">Mini carte de l\'itinéraire</string>
   <string name="bg_service_screen_lock">Verrouillage/déverrouillage de l\'écran</string>
   <string name="bg_service_screen_unlock">Déverrouiller écran</string>
-  <string name="bg_service_sleep_mode_off">Désactiver mode veille</string>
-  <string name="bg_service_sleep_mode_on">Activer mode veille</string>
+  <string name="bg_service_sleep_mode_off">Activer\nmode veille</string>
+  <string name="bg_service_sleep_mode_on">Désactiver\nmode veille</string>
   <string name="bg_service_screen_lock_toast">L\'écran est verrouillé</string>
   <string name="bg_service_interval">Positionner l\'intervalle d\'activation :</string>
 <string name="live_monitoring_mode_off">Démarrer\n suivi en ligne</string>
@@ -1011,7 +1011,7 @@
 <string name="avoid_in_routing_title">Éviter…</string>
 <string name="avoid_in_routing_descr">Éviter routes à péage, non carrossables, ferries</string>
 <string name="show_warnings_title">Afficher les alarmes</string>
-<string name="show_warnings_descr">Afficher les limitations de vitesses, radars et ralentisseurs</string>
+<string name="show_warnings_descr">Afficher les limitations de vitesses, stops, ralentisseurs, radars et information sur les voies.</string>
 <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
 <string name="map_widget_show_ruler">Échelle</string>
 <string name="map_widget_appearance">Divers :</string>
@@ -1019,7 +1019,7 @@
 <string name="map_widget_transparent">Couche transparente</string>
 <string name="monitoring_mode_off">Enregistrer GPX</string>
 <string name="monitoring_mode_on">Arrêter\n enr. GPX</string>
-<string name="gps_wakeup_interval">Intervalle activation GPS: %s</string>
+<string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
 <string name="email">courriel</string>
 <string name="map_widget_day_night">Carte Jour/Nuit</string>
 <string name="map_widget_vector_attributes">Attributs de rendu :</string>
@@ -1043,8 +1043,8 @@
 \n\t\'Jour\' - Toujours utiliser le mode jour
 \n\t\'Nuit\' - Toujours utiliser le mode nuit
 \n\t\'Détection de la luminosité\' - L\'affichage est contrôlé par le capteur de luminosité de votre appareil, s\'il existe "</string>
-<string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
-<string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner hors ligne</string>
+<string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors ligne ou en ligne.</string>
+<string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors ligne ou en ligne</string>
 <string name="tip_recent_changes_0_8_3_t">"Changements en 0.8.3 :
 \n* Points intermédiaires
 \n* Amélioration des instructions de navigation
@@ -1077,7 +1077,7 @@
     <string name="arrived_at_intermediate_point">Vous êtes arrivé à votre point intermédiaire</string>
     <string name="context_menu_item_intermediate_point">Ajout d\'un point intermédiaire</string>
     <string name="map_widget_intermediate_distance">Point intermédiaire</string>
-    <string name="ending_point_too_far">Point de départ trop éloigné de la route la plus proche.</string>
+    <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
     <string name="btn_add_tag">Ajouter une étiquette</string>
     <string name="btn_advanced_mode">Mode avancé…</string>
     <string name="poi_filter_parking">Parking</string>
@@ -1091,20 +1091,20 @@
 	<string name="no_route">Pas de route</string>
 	<string name="delete_target_point">Enlever le point de destination</string>
 	<string name="intermediate_point">Point intermédiaire %1$s</string>
-    <string name="gps_not_available">Veuillez activer le GPS</string>
-    <string name="map_widget_show_destination_arrow">Flécher la destination</string>
+    <string name="gps_not_available">Veuillez activer le GPS dans les paramètres</string>
+    <string name="map_widget_show_destination_arrow">Monter la direction de la destination</string>
     <string name="enable_plugin_monitoring_services">Activer les greffons de suivi (tracking, live tracking) pour utiliser les services de surveillance</string>
     <string name="non_optimal_route_calculation">Calculer une route éventuellement non optimale pour les longs trajets</string>
     <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Google Play ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
-	<string name="background_service_is_enabled_question">Le service tourne toujours en tâche de fond. Voulez-vous l\'arrêter ?</string>
+	<string name="background_service_is_enabled_question">Le service OsmAnd tourne toujours en tâche de fond. Voulez-vous l\'arrêter ?</string>
     <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière plan pendant la navigation "</string>
     <string name="safe_mode_description">Exécuter l\'application dans le mode sûr (ne pas utiliser de code natif).</string>
     <string name="safe_mode">Mode sûr</string>
     <string name="native_library_not_running">L\'application s\'exécute en mode sûr (désactiver le dans les paramètres).</string>
-    <string name="rendering_attr_showRoadMaps_description">Sélectionner pour afficher uniquement les cartes routières :</string>
+    <string name="rendering_attr_showRoadMaps_description">Sélectionner quand afficher uniquement les cartes routières :</string>
 	<string name="rendering_attr_showRoadMaps_name">Cartes routières uniquement</string>
     <string name="download_roads_only_item">Routes uniquement</string>
     <string name="download_regular_maps">Cartes standards</string>
@@ -1118,40 +1118,40 @@
     <string name="route_descr_from_to_via">De : %1$s\nVia : %2$s\nVers : %3$s</string>
     <string name="map_widget_max_speed">Limite de vitesse</string>
     <string name="tip_altitude_offset">Affichage de l\'altitude - Écart de correction</string>
-	<string name="monitoring_control_start">Démarrage</string>
+	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Cacher les limites administratives</string>
 	<string name="rendering_attr_noAdminboundaries_description">Ne pas afficher les limites administratives régionales (niveaux 5 à 9)</string>
-	<string name="tip_altitude_offset_t">"\tLa plupart des périphériques GPS donnent des mesures d\'altitude dans le référentiel ellipsoïdal WGS84, depuis lequel une conversion vers le système local nécessite une correction fonction de la position courante.
-\n\tUne meilleure approximation des systèmes locaux est le référentiel EGM96. OsmAnd supporte désormais l\'affichage de l\'altitude dans ce référentiel.
+	<string name="tip_altitude_offset_t">"\tLa plupart des périphériques GPS donnent des mesures d\'altitude dans le référentiel ellipsoïdal WGS84, depuis lequel une conversion vers le système local nécessite une correction en fonction de la position courante.
+\n\tUne meilleure approximation des systèmes locaux est le référentiel EGM96. OsmAnd supporte désormais l\'affichage automatique  de l\'altitude dans ce référentiel.
 \n\tIl suffit pour cela de télécharger le fichier WW15MGH.DAC depuis le gestionnaire de données hors-ligne (l\'original est à l\'adresse http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Le greffon OsMoDroid est obsolète et doit être mis à jour.</string>
     <string name="osmodroid_plugin_description">Le greffon OsMoDroid est une extension OsmAnd pour l\'application OsMoDroid qui permet la création de trace. Pour plus d\'information à propos du service, consulter le site http://esya.ru.</string>
     <string name="osmodroid_plugin_name">Greffon OsMoDroid</string>
 	<string name="index_srtm_ele">Courbes de niveau</string>
     <string name="srtm_plugin_description">Ce greffon permet de télécharger les courbes de niveaux (Téléchargement de cartes -&gt; Menu -&gt; Autres cartes) pour une région spécifique et de les utiliser avec les cartes hors-lignes.</string>
-    <string name="srtm_plugin_name">Greffon SRTM</string>
+    <string name="srtm_plugin_name">Greffon des courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
-    <string name="download_srtm_maps">Cartes SRTM</string>
+    <string name="download_srtm_maps">Courbes de niveau</string>
     <string name="index_srtm_parts">parties</string>
     <string name="osmand_distance_plugin_description">Mesurer une distance entre des points. Ajouter des points par des appuis courts. Les effacer par un appui long.</string>
 	<string name="osmand_distance_plugin_name">Calculateur de distances</string>
-<string name="audionotes_location_not_defined">La position courante n\'est pas encore connue pour permettre de prendre les notes audio</string>
-    <string name="monitoring_control_stop">Arrêter</string>
+<string name="audionotes_location_not_defined">L\'emplacement à associer à la note n\'est pas encore défini. \"Utiliser l\'emplacement ...\" pour attribuer une note à l\'emplacement spécifié</string>
+    <string name="monitoring_control_stop">arrêter</string>
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Description du greffon de notes audio</string>
-    <string name="audionotes_plugin_name">Greffon de notes audio</string>
+    <string name="audionotes_plugin_description">Prendre des notes audio/vidéo durant le voyage</string>
+    <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     <string name="srtm_plugin_attribution">ASTER est un produit du METI et la NASA.</string>
-    <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-lignes</string>
+    <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
     <string name="osmand_srtm_long_description_1000_chars">Ce greffon fournit des courbes de niveau qui peuvent être affichées sur les cartes hors ligne de OsmAnd. Les données globales (entre 70 degrés nord et 70 degrés sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI), et \"Japan Space Systems\" (J-Spacesystems).</string>
     <string name="use_clear_distance_measurement">Cliquez une nouvelle fois pour effacer les points de mesure.</string>
-    <string name="use_distance_measurement">Appuyez pour créer un point, appuyez et maintenez enfoncé pour supprimer le point précédent, cliquez sur le gadget de mesure pour quitter.</string>
+    <string name="use_distance_measurement">Appuyez pour créer un point, appuyez et maintenez enfoncé pour supprimer les points précédents, cliquez sur le gadget de mesure pour quitter.</string>
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
     <string name="av_def_action_video">Enregistrer une vidéo</string>
     <string name="av_def_action_audio">Enregistrer une note audio</string>
     <string name="av_widget_action_descr">Sélectionner l\'action par défaut du gadget</string>
     <string name="av_widget_action">Action par défaut du gadget</string>
-    <string name="av_video_format_descr">Sélectionner le format vidéo</string>
-    <string name="av_video_format">Format d\'enregistrement vidéo</string>
+    <string name="av_video_format_descr">Sélectionner le format vidéo de sortie</string>
+    <string name="av_video_format">Format d\'enregistrement vidéo de sortie</string>
     <string name="av_use_external_recorder_descr">Utiliser l\'enregistreur système pour la vidéo</string>
     <string name="av_use_external_recorder">Utiliser un enregistreur externe</string>
     <string name="av_settings_descr">Configurer les paramètres audio et vidéo</string>
@@ -1172,7 +1172,7 @@
     <string name="recording_description">Enregistrement %1$s %2$s à %3$s</string>
     <string name="recording_default_name">enregistrement</string>
     <string name="av_control_stop">Arrêter</string>
-    <string name="map_widget_av_notes">Notes audio</string>
+    <string name="map_widget_av_notes">Notes audio/vidéo</string>
     <string name="tip_recent_changes_1_1_0_t">"Changements pour 1.1.0 :
 \n\t* Greffon de calcul de distance
 \n\t* Greffon de prise de notes audio/vidéo
@@ -1181,7 +1181,7 @@
 \n\t* Option \'Touring view\' avec plus de détails\n\t* Nouveaux styles de routes, plus de contraste\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS "</string>
     <string name="av_control_start">Enreg.</string>
-    <string name="srtm_paid_version_msg">Pensez à acheter le greffon \"Courbes de niveau\" sur Google Play pour soutenir le développement.</string>
+    <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Google Play pour soutenir le développement futur.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     <string name="animate_routing_using_gpx">Voulez-vous utiliser le fichier GPX existant ?</string>
     <string name="intermediate_points_change_order">Changer l\'ordre</string>
@@ -1208,4 +1208,8 @@
     <string name="index_name_openmaps">OpenMaps.eu</string>
     <string name="tip_recent_changes_1_2_t">"Changements en 1.2 : "</string>
     <string name="max_speed_none">Aucun(e)</string>
+    <string name="prefer_motorways">Autoroutes de préférence</string>
+	<string name="prefer_in_routing_title">Préférences</string>
+	<string name="prefer_in_routing_descr">Autoroutes de préférence</string>
+    <string name="av_def_action_choose">Sélectionner sur demande</string>
     </resources>

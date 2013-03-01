@@ -38,6 +38,7 @@ import net.osmand.plus.AsyncLoadingThread.AmenityLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;
 import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
 import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
+import net.osmand.plus.osmedit.AmenityIndexRepositoryOdb;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.srtmplugin.SRTMPlugin;

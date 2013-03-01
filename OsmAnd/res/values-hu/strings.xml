@@ -1158,4 +1158,8 @@
 	<string name="av_use_external_camera_descr">Rendszeralkalmazás használata fotózáshoz</string>
     <string name="av_use_external_camera">Kamera alkalmazás használata</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="max_speed_none">nincs</string>
+    <string name="prefer_motorways">Autópályák preferálása</string>
+	<string name="prefer_in_routing_title">Preferálás…</string>
+	<string name="prefer_in_routing_descr">Autópályák előnyben részesítése</string>
     </resources>

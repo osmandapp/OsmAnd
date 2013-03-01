@@ -11,7 +11,7 @@
             unless="sdk.dir"
     />
 
-	<property name="use.dir" value="../../core/OsmAnd-java/src/" />
+	<property name="use.dir" value="../../jni/java" />
 	<property name="use.absolute.dir" location="${use.dir}" />
 	<property name="raw.absolute.dir" location="raw" />
 	<property name="base.dir" location="." />
@@ -106,24 +106,6 @@
 			</then>
 		</if>
 
-		<!-- Native section -->
-		<if>
-			<condition>
-				<equals arg1="${nativeoff}" arg2="true"/>
-			</condition>
-			<then>
-				<echo>Not using native, excluding from build</echo>
-				<move file="${native.libs.absolute.dir}/armeabi" tofile="${native.libs.absolute.dir}.skipped/armeabi" failonerror="no"/>
-				<move file="${native.libs.absolute.dir}/armeabi-v7a" tofile="${native.libs.absolute.dir}.skipped/armeabi-v7a" failonerror="no"/>
-				<move file="${native.libs.absolute.dir}/x86" tofile="${native.libs.absolute.dir}.skipped/x86" failonerror="no"/>
-			</then>
-			<else>
-				<fail message="ndk.dir is missing. Make sure to generate local.properties or to inject it through an env var" unless="ndk.dir"/>
-				<echo>Building native code</echo>
-
-				<exec command="sh ${ndk.dir}/ndk-build -j8 V=1" failonerror="true"/>
-			</else>
-		</if>
 	</target>
 
 	<!-- Compiles this project's .java files into .class files. -->
@@ -205,16 +187,6 @@
 	<path id="lib.path">
 		<fileset dir="ant-lib" includes="*.jar" />
 	</path>
-
-	<target name="debug-nondk">
-		<property name="nativeoff" value="true" />
-		<antcall target="debug" />
-	</target>
-
-	<target name="-post-package" if="nativeoff">
-		<echo>Restoring ${native.libs.absolute.dir} to it's place...</echo>
-		<move file="${native.libs.absolute.dir}.skipped" tofile="${native.libs.absolute.dir}" failonerror="no"/>
-	</target>
 
 	<!-- Import the actual build file.
 

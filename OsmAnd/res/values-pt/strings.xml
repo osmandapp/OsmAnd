@@ -1025,9 +1025,19 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="av_widget_action">Ação widget padrão</string>
     <string name="av_video_format">Formato de saída de vídeo</string>
     <string name="av_use_external_recorder">Usar gravador externo</string>
-    <string name="av_settings_descr">Definir configurações de áudio e vídeo</string>
-    <string name="av_settings">"Configurações de áudio/vídeo "</string>
+    <string name="av_settings_descr">Configurar definições de áudio e vídeo</string>
+    <string name="av_settings">Definições Áudio / vídeo</string>
     <string name="recording_error">"Ocorreu um erro durante a gravação "</string>
     <string name="recording_camera_not_available">Câmera não está disponível</string>
     <string name="recording_is_recorded">Áudio/vídeo está a ser gravado. Para parar pressione o botão de stop no widget.</string>
+    <string name="recording_open_external_player">Abrir leitor externo</string>
+    <string name="recording_delete_confirm">Quer remover esta gravação?</string>
+    <string name="tip_recent_changes_1_1_0_t">Mudanças em 1.1.0:
+\n\t* Plugin calculador de distância\n\t* Plugin de notas áudio / vídeo\n\t* Plugin de linhas de contorno\n\t* Correções de bugs\n\t* Opção de estilo de mapa \"Touring view\" com mais detalhes, novos estilos de estradas, mais contraste, e opção de caminhadas Alpinas (escala SAC)\n\t* Opção de correção do geóide EGM96, para corrigir as leituras de altitude GPS</string>
+    <string name="recording_context_menu_arecord">Fazer uma nota de áudio</string>
+    <string name="recording_context_menu_vrecord">Fazer uma nota de vídeo</string>
+    <string name="layer_recordings">Camada de gravação</string>
+    <string name="recording_can_not_be_played">A gravação não pode ser exibida</string>
+    <string name="recording_context_menu_delete">Apagar a gravação</string>
+    <string name="recording_context_menu_play">Tocar</string>
     </resources>

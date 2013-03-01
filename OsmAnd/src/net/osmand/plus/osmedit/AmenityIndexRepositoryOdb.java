@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.osmedit;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,14 +17,18 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
-import net.osmand.osm.Entity;
 import net.osmand.data.LatLon;
 import net.osmand.osm.MapRenderingTypes;
-import net.osmand.util.MapUtils;
-import net.osmand.osm.Node;
+import net.osmand.osm.edit.Entity;
+import net.osmand.osm.edit.EntityParser;
+import net.osmand.osm.edit.Node;
 import net.osmand.osm.io.IOsmStorageFilter;
 import net.osmand.osm.io.OsmBaseStorage;
+import net.osmand.plus.AmenityIndexRepository;
+import net.osmand.plus.BaseLocationIndexRepository;
+import net.osmand.plus.PoiFilter;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
 
 import org.apache.commons.logging.Log;
@@ -274,7 +278,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			st.getFilters().add(new IOsmStorageFilter(){
 				@Override
 				public boolean acceptEntityToLoad(OsmBaseStorage storage, Entity.EntityId id, Entity entity) {
-					Amenity.parseAmenities(def, entity, tempList);
+					EntityParser.parseAmenities(def, entity, tempList);
 					if(!tempList.isEmpty()){
 						for(Amenity a : tempList){
 							amen.put(a, entity);
@@ -289,7 +293,7 @@ public class AmenityIndexRepositoryOdb extends BaseLocationIndexRepository<Ameni
 			st.parseOSM(is, null, null, false);
 			for (Amenity am : amen.keySet()) {
 				// update location (when all nodes of way are loaded)
-				am.setEntity(amen.get(am));
+				EntityParser.parseAmenity(am, amen.get(am));
 				if(am.getEnName().length() == 0){
 					am.setEnName(Junidecode.unidecode(am.getName()));
 				}

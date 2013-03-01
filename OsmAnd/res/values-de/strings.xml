@@ -1249,4 +1249,8 @@
     <string name="av_use_external_camera">Foto-App verwenden</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Änderungen in 1.2: "</string>
+    <string name="prefer_motorways">Autobahnen bevorzugen</string>
+	<string name="prefer_in_routing_title">Bevorzugen…</string>
+	<string name="prefer_in_routing_descr">Autobahnen bevorzugen</string>
+    <string name="max_speed_none">keine</string>
     </resources>

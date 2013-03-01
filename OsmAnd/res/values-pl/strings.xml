@@ -1160,4 +1160,7 @@
     <string name="index_name_openmaps">Openmaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2: "</string>
     <string name="max_speed_none">brak</string>
-    </resources>
+    <string name="prefer_in_routing_descr">Preferuj autostrady</string>
+    <string name="prefer_motorways">Preferuj autostrady</string>
+	<string name="prefer_in_routing_title">Preferuj…</string>
+	</resources>

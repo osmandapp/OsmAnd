@@ -1122,4 +1122,8 @@
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
     <string name="index_name_openmaps">OpenMaps - Европа</string>
+    <string name="prefer_motorways">Предпочитать автомагистрали</string>
+	<string name="prefer_in_routing_title">Предпочитать…</string>
+	<string name="prefer_in_routing_descr">Предпочитать автомагистрали</string>
+    <string name="tip_recent_changes_1_2_t">"Изменения в 1.2: "</string>
     </resources>
