@@ -111,7 +111,7 @@ public class TipsAndTricksActivity {
 		dlg.setContentView(R.layout.tips_and_tricks);
 		dlg.getWindow().setLayout(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
 		final TextView tipDescription = (TextView) dlg.findViewById(R.id.TipDescription);
-		if (!((OsmandApplication)ctx.getApplicationContext()).getSettings().ACCESSIBILITY_EXTENSIONS.get())
+		if (!((OsmandApplication)ctx.getApplicationContext()).getInternalAPI().accessibilityExtensions())
 			tipDescription.setMovementMethod(ScrollingMovementMethod.getInstance());
 		int nextInd = 0;
 		final TIntArrayList toShow = new TIntArrayList();

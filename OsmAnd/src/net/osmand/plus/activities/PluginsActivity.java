@@ -17,7 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class PluginsActivity extends OsmandListActivity {
-	
+
+	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
+
 	private List<OsmandPlugin> availablePlugins;
 	private Set<String> clickedPlugins = new LinkedHashSet<String>();
 	private Set<String> restartPlugins = new LinkedHashSet<String>();
@@ -52,6 +54,7 @@ public class PluginsActivity extends OsmandListActivity {
 			} else {
 				restartPlugins.add(item.getId());
 			}
+			setResult(ACTIVE_PLUGINS_LIST_MODIFIED);
 		}
 		clickedPlugins.add(item.getId());
 		getListAdapter().notifyDataSetChanged();
@@ -83,6 +86,7 @@ public class PluginsActivity extends OsmandListActivity {
 			TextView nameView = (TextView) row.findViewById(R.id.plugin_name);
 			nameView.setText(plugin.getName());
 			nameView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.list_activities_plugin_menu_symbol), null, getResources().getDrawable(resourceId), null);
+			nameView.setContentDescription(plugin.getName() + " " + getString(toBeEnabled ? R.string.item_checked : R.string.item_unchecked));
 			
 			TextView description = (TextView) row.findViewById(R.id.plugin_descr);
 			description.setText(plugin.getDescription());
