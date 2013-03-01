@@ -43,6 +43,13 @@ public class TextInfoControl extends MapInfoControl {
 	public void setText(String text, String subtext) {
 		this.text = text;
 		this.subtext = subtext;
+		if (text != null) {
+			if (subtext != null)
+				setContentDescription(text + " " + subtext); //$NON-NLS-1$
+			else setContentDescription(text);
+		} else {
+			setContentDescription(subtext);
+		}
 		updateVisibility(text != null);
 		requestLayout();
 		invalidate();

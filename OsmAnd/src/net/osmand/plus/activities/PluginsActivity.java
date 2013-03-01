@@ -83,6 +83,7 @@ public class PluginsActivity extends OsmandListActivity {
 			TextView nameView = (TextView) row.findViewById(R.id.plugin_name);
 			nameView.setText(plugin.getName());
 			nameView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.list_activities_plugin_menu_symbol), null, getResources().getDrawable(resourceId), null);
+			nameView.setContentDescription(plugin.getName() + " " + getString(toBeEnabled ? R.string.item_checked : R.string.item_unchecked));
 			
 			TextView description = (TextView) row.findViewById(R.id.plugin_descr);
 			description.setText(plugin.getDescription());

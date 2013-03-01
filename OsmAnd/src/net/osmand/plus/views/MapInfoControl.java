@@ -15,6 +15,8 @@ public abstract class MapInfoControl extends View implements MapControlUpdateabl
 	Rect padding = new Rect();
 	int shadowColor = Color.WHITE;
 
+    private String contentTitle;
+
 	public MapInfoControl(Context ctx) {
 		super(ctx);
 	}
@@ -25,7 +27,18 @@ public abstract class MapInfoControl extends View implements MapControlUpdateabl
 		super.setBackgroundDrawable(d);
 	}
 
-	
+	@Override
+	public void setContentDescription(CharSequence text) {
+		if (contentTitle != null)
+			super.setContentDescription(contentTitle + " " + text); //$NON-NLS-1$
+		else super.setContentDescription(text);
+	}
+
+	public void setContentTitle(String text) {
+		contentTitle = text;
+		super.setContentDescription(text);
+	}
+
 	public void setWDimensions(int w, int h){
 		setMeasuredDimension(w + padding.left + padding.right, h + padding.top + padding.bottom);
 	}
