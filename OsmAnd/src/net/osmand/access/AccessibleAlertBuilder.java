@@ -34,14 +34,14 @@ public class AccessibleAlertBuilder extends Builder {
 
     @Override
     public Builder setMessage(CharSequence msg) {
-        if (((OsmandApplication) context.getApplicationContext()).getSettings().ACCESSIBILITY_EXTENSIONS.get())
+        if (((OsmandApplication) context.getApplicationContext()).getInternalAPI().accessibilityExtensions())
             return setView(TextMessage.makeView(context, msg, R.layout.alert));
         return super.setMessage(msg);
     }
 
     @Override
     public Builder setMessage(int msgid) {
-        if (((OsmandApplication) context.getApplicationContext()).getSettings().ACCESSIBILITY_EXTENSIONS.get())
+        if (((OsmandApplication) context.getApplicationContext()).getInternalAPI().accessibilityExtensions())
             return setView(TextMessage.makeView(context, msgid, R.layout.alert));
         return super.setMessage(msgid);
     }
