@@ -107,13 +107,14 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 		cat.addPreference(activity.createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
-		cat.addPreference(activity.createCheckBoxPreference(settings.SCROLL_MAP_BY_GESTURES, R.string.scroll_map_by_gestures,
-				R.string.scroll_map_by_gestures_descr));
 		cat.addPreference(activity.createCheckBoxPreference(settings.USE_SHORT_OBJECT_NAMES, R.string.use_short_object_names,
 				R.string.use_short_object_names_descr));
-		if (Build.VERSION.SDK_INT < 14) // Build.VERSION_CODES.ICE_CREAM_SANDWICH
+		if (Build.VERSION.SDK_INT < 14) { // Build.VERSION_CODES.ICE_CREAM_SANDWICH
+			cat.addPreference(activity.createCheckBoxPreference(settings.SCROLL_MAP_BY_GESTURES, R.string.scroll_map_by_gestures,
+					R.string.scroll_map_by_gestures_descr));
 			cat.addPreference(activity.createCheckBoxPreference(settings.ACCESSIBILITY_EXTENSIONS, R.string.accessibility_extensions,
 					R.string.accessibility_extensions));
+		}
 	}
 
 
