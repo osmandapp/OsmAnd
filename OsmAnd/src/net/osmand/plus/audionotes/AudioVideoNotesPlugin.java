@@ -744,7 +744,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						Parameters parameters = cam.getParameters();
 						parameters.setGpsLatitude(lat);
 						parameters.setGpsLongitude(lon);
-						parameters.set("focus-mode", "auto");
+						parameters.set("focus-mode", "infinity");
 						setCameraDisplayOrientation(cam, parameters);
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
