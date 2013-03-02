@@ -801,6 +801,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		final boolean contains = par.getAllViews().contains(recordControl);
 		if(!contains) {
 			par.addStackView(recordControl);
+			mapActivity.getMapView().refreshMap(true);
 		}
 		AccessibleToast.makeText(mapActivity, R.string.recording_is_recorded, Toast.LENGTH_LONG).show();
 		recordControl.setOnClickListener(new View.OnClickListener() {
