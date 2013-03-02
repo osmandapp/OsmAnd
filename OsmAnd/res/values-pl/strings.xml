@@ -1163,4 +1163,7 @@
     <string name="prefer_in_routing_descr">Preferuj autostrady</string>
     <string name="prefer_motorways">Preferuj autostrady</string>
 	<string name="prefer_in_routing_title">Preferuj…</string>
-	</resources>
+	<string name="map_view">Mapa</string>
+    <string name="item_checked">zaznaczone</string>
+    <string name="item_unchecked">niezaznaczone</string>
+    </resources>
