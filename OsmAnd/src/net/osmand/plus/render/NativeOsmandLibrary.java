@@ -49,6 +49,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						System.loadLibrary("Qt5Sql" + libCpuSuffix);
 						System.loadLibrary("Qt5Xml" + libCpuSuffix);
 						System.loadLibrary("OsmAndCore" + libCpuSuffix);
+						System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
 						System.loadLibrary("OsmAndJNI" + libCpuSuffix);
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 						library = new NativeOsmandLibrary();
