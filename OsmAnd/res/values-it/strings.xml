@@ -1218,4 +1218,7 @@
     <string name="prefer_motorways">Preferisci le autostrade</string>
 	<string name="prefer_in_routing_title">Preferisci…</string>
 	<string name="av_def_action_choose">Seleziona su richiesta</string>
+    <string name="item_checked">segnato</string>
+    <string name="item_unchecked">non segnato</string>
+    <string name="map_view">Mappa</string>
     </resources>
