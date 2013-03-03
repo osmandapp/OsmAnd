@@ -1,35 +1,36 @@
 :- op('==', xfy, 500).
 version(0).
 
-
+%Provided by VnMedia VnrMedia@gmail.com
+%Speaked by Shai Ben-yaakov
 % before each announcement (beep)
 preamble - [].
 
 
 %% TURNS 
-turn('left', ['turn.ogg',   'left-e.ogg']).
-turn('left_sh', ['sharp_left-e.ogg']).
-turn('left_sl', ['turn.ogg', 'slight_left-e.ogg']).
-turn('right', ['turn.ogg', 'right-e.ogg']).
-turn('right_sh', ['sharp_right-e.ogg']).
-turn('right_sl', ['turn.ogg', 'slight_right-e.ogg']).
+turn('left', ['turn_left-e.ogg']).
+turn('left_sh', ['turn_sharp_left-e.ogg']).
+turn('left_sl', ['turn_slight_left-e.ogg']).
+turn('right', ['turn_right-e.ogg']).
+turn('right_sh', ['turn_sharp_right-e.ogg']).
+turn('right_sl', ['turn_slight_right-e.ogg']).
 turn('right_keep', ['keep_right-e.ogg']).
 turn('left_keep', ['keep_left-e.ogg']).
 
-prepare_turn(Turn, Dist) == ['Prepare_to-a.ogg', delay_450, D, M] :- 
+prepare_turn(Turn, Dist) == ['Prepare_to-a.ogg', D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
-turn(Turn, Dist) == ['after.ogg', delay_250, D, M] :- 
+turn(Turn, Dist) == ['after.ogg', D, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
 
-prepare_make_ut(Dist) == ['Prepare_to-a.ogg', delay_300, D, delay_300,'turn_back-e.ogg'] :- 
+prepare_make_ut(Dist) == ['Prepare_to-a.ogg', D,'turn_back-e.ogg'] :- 
 		distance(Dist) == D.
 
 prepare_roundabout(Dist) == ['prepare_to-enter.ogg', 'after.ogg', D] :- 
 		distance(Dist) == D.
 
-make_ut(Dist) == ['after.ogg', delay_300, D, delay_300, 'turn_back-e.ogg'] :- 
+make_ut(Dist) == ['after.ogg', D, 'turn_back-e.ogg'] :- 
 			distance(Dist) == D.
 make_ut == ['turn_back-e.ogg'].
 
@@ -38,24 +39,24 @@ make_ut_wp == ['when_possible_please_make_a_u_turn.ogg'].
 
 
 
-roundabout(Dist, _Angle, Exit) == ['after.ogg', delay_300, D, delay_300, 'enter_the_roundabout-e.ogg', delay_250, 'and_take.ogg', 'exit-e.ogg', E] :- distance(Dist) == D, nth(Exit, E).
-roundabout(_Angle, Exit) == ['taking.ogg', delay_250, 'exit-e.ogg', E] :- nth(Exit, E).
+roundabout(Dist, _Angle, Exit) == ['after.ogg', D, 'enter_the_roundabout-e.ogg', 'and_take.ogg', 'exit-e.ogg', E] :- distance(Dist) == D, nth(Exit, E).
+roundabout(_Angle, Exit) == ['taking.ogg', 'exit-e.ogg', E] :- nth(Exit, E).
 
 and_arrive_destination == ['arrive_at_your_destination-e.ogg']. % Miss and?
 reached_destination == ['you_have_reached_your_destination.ogg'].
 and_arrive_intermediate == ['arrive_at_viapoint-e.ogg'].
 reached_intermediate == ['you_have_reached_a_viapoint.ogg'].
 
-then == ['then.ogg', delay_350].
+then == ['then.ogg'].
 
 bear_right == ['keep_right-e.ogg'].
 bear_left == ['keep_left-e.ogg'].
 route_recalc(Dist) == ['recalc.ogg', D]:- distance(Dist) == D.   %nothing to said possibly beep?	
-route_new_calc(Dist) == ['the_trip_is_more_than.ogg', delay_150, D] :- distance(Dist) == D. % nothing to said possibly beep?
+route_new_calc(Dist) == ['the_trip_is_about.ogg', D] :- distance(Dist) == D. % nothing to said possibly beep?
 
 location_lost == ['gps_signal_lost.ogg'].
 
-go_ahead(Dist) == ['Follow-the-road-for.ogg', delay_250,  D]:- distance(Dist) == D.
+go_ahead(Dist) == ['Follow-the-road-for.ogg',  D]:- distance(Dist) == D.
 go_ahead == ['continue_straight-e.ogg'].
 
 %% 
@@ -89,25 +90,33 @@ dist(D, ['70.ogg']) :-  D < 80, !.
 dist(D, ['80.ogg']) :-  D < 90, !.
 dist(D, ['90.ogg']) :-  D < 100, !.
 dist(D, ['100.ogg']) :-  D < 110, !.
+dist(D, ['100.ogg','and_10.ogg']) :-  D < 120, !. 
 dist(D, ['100.ogg', S]) :-  D < 200, T is D - 100, dist(T, [S]), !.
 dist(D, ['200.ogg']) :-  D < 210, !.
+dist(D, ['200.ogg','and_10.ogg']) :-  D < 220, !. 
 dist(D, ['200.ogg', S]) :-  D < 300, T is D - 200, dist(T, [S]), !.
 dist(D, ['300.ogg']) :-  D < 310, !.
+dist(D, ['300.ogg','and_10.ogg']) :-  D < 320, !. 
 dist(D, ['300.ogg', S]) :-  D < 400, T is D - 300, dist(T, [S]), !.
 
 dist(D, ['400.ogg']) :-  D < 410, !.
+dist(D, ['400.ogg','and_10.ogg']) :-  D < 420, !. 
 dist(D, ['400.ogg', S]) :-  D < 500, T is D - 400, dist(T, [S]), !.
-dist(D, ['500.ogg']) :-  D < 550, !.
-dist(D, ['500.ogg', '50.ogg']) :-  D < 600, !.
-dist(D, ['600.ogg']) :-  D < 650, !.
-dist(D, ['600.ogg', '50.ogg']) :-  D < 700, !.
-dist(D, ['700.ogg']) :-  D < 750, !.
-dist(D, ['700.ogg', '50.ogg']) :-  D < 800, !.
-dist(D, ['800.ogg']) :-  D < 850, !.
-dist(D, ['800.ogg', '50.ogg']) :-  D < 900, !.
-dist(D, ['900.ogg']) :-  D < 950, !.
-dist(D, ['900.ogg', '50.ogg']) :-  !.
-
+dist(D, ['500.ogg']) :-  D < 510, !.
+dist(D, ['500.ogg','and_10.ogg']) :-  D < 520, !. 
+dist(D, ['500.ogg', S]) :-  D < 600, T is D - 500, dist(T, [S]), !.
+dist(D, ['600.ogg']) :-  D < 610, !.
+dist(D, ['600.ogg','and_10.ogg']) :-  D < 620, !. 
+dist(D, ['600.ogg', S]) :-  D < 700, T is D - 600, dist(T, [S]), !.
+dist(D, ['700.ogg']) :-  D < 710, !.
+dist(D, ['700.ogg','and_10.ogg']) :-  D < 720, !. 
+dist(D, ['700.ogg', S]) :-  D < 800, T is D - 700, dist(T, [S]), !.
+dist(D, ['800.ogg']) :-  D < 810, !.
+dist(D, ['800.ogg','and_10.ogg']) :-  D < 820, !. 
+dist(D, ['800.ogg', S]) :-  D < 900, T is D - 800, dist(T, [S]), !.
+dist(D, ['900.ogg']) :-  D < 910, !.
+dist(D, ['900.ogg','and_10.ogg']) :-  D < 920, !. 
+dist(D, ['900.ogg', S]) :-  D < 1000, T is D - 900, dist(T, [S]), !.
 
 distance(Dist) == ['more_than.ogg', '1.ogg', 'kilometer-e.ogg'] :- Dist < 1500.
 distance(Dist) == ['more_than.ogg', '2.ogg', 'kilometers-e.ogg'] :- Dist < 3000.
