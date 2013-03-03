@@ -9,7 +9,6 @@ package net.osmand.plus.planning;
  * 
  * @author Car Michael
  */
-
 	import java.util.ArrayList;
 	import java.util.Arrays;
 	import java.util.Comparator;
@@ -26,6 +25,7 @@ package net.osmand.plus.planning;
 	import net.osmand.plus.ContextMenuAdapter;
 	import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 	import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
+	import net.osmand.plus.OsmandSettings.CommonPreference;
 	import net.osmand.plus.OptionsMenuHelper;
 	import net.osmand.plus.OsmandApplication;
 	import net.osmand.plus.OsmandPlugin;
@@ -61,6 +61,11 @@ package net.osmand.plus.planning;
 
 	public class PlanningPlugin extends OsmandPlugin {
 		public static final String ID = "osmand.planning";
+		public final CommonPreference<Boolean> planningMode;
+		public final CommonPreference<Integer> pointDisplayRadius;
+		public final CommonPreference<Integer> pointSelectionRadius;
+		public final CommonPreference<Float> displayScaleFactor;
+				
 		private OsmandApplication app;
 		private static PlanningLayer planningLayer;
 		private static OsmandSettings settings;
@@ -79,6 +84,76 @@ package net.osmand.plus.planning;
 	    private int current = 0;
 	    private int type = 1;
 	    
+		public final static String PLANNING_MODE = "planningMode";
+		public final static String POINT_DISPLAY_RADIUS = "pointDisplayRadius";	    
+		public final static String POINT_SELECTION_RADIUS = "pointSelectionRadius";
+		public final static String DISPLAY_SCALE_FACTOR = "displayScaleFactor";
+	    
+		public PlanningPlugin(OsmandApplication app) {
+			this.app = app;
+			OsmandSettings settings = app.getSettings();
+		
+		/**
+		 * Establish Measurement/Planning persistence and global access Data
+		 */
+		planningMode = settings.registerBooleanPreference(PLANNING_MODE, false).makeGlobal();
+		pointDisplayRadius = settings.registerIntPreference(POINT_DISPLAY_RADIUS, 5).makeGlobal();
+		pointSelectionRadius = settings.registerIntPreference(POINT_SELECTION_RADIUS, 7).makeGlobal();
+		displayScaleFactor = settings.registerFloatPreference(DISPLAY_SCALE_FACTOR, 1.0f);
+		}
+			
+		public boolean getPlanningMode() {
+			return  planningMode.get();
+		}
+			
+		public void setPlanningMode(boolean mode) {
+			planningMode.set(mode);
+		}
+		
+		public float getDisplayScaleFactor() {
+			return displayScaleFactor.get();
+		}
+			
+		public void setDisplayScaleFactor(float factor) {
+			displayScaleFactor.set(factor);
+		}
+			
+		public int getMeasurementPointSelectionRadius() {
+			return pointSelectionRadius.get();
+		}
+			
+		public void setMeasurementPointSelectionRadius(int radius) {
+			pointSelectionRadius.set(radius);
+			}
+		
+		public int getMeasurementPointDisplayRadius() {
+			return pointDisplayRadius.get();
+		}
+				
+		public void setMeasurementPointDisplayRadius(int radius) {
+			pointDisplayRadius.set(radius);
+		}
+		
+		private boolean DisplayScaleChangedFlag = false;	//Used to indicate when the map zoom has been changed
+		
+		public boolean getDisplayScaleChangedFlag() {
+			return DisplayScaleChangedFlag;
+		}
+			
+		public void setDisplayScaleChangedFlag(boolean mode) {
+			DisplayScaleChangedFlag = mode;
+		}
+		
+		private boolean MapDisplayZoomButtonsVisibility = false;	//Used to control the visibility of the map display zoom buttons
+
+		public boolean getMapDisplayZoomButtonVisibility() {
+			return MapDisplayZoomButtonsVisibility;
+		}
+			
+		public void setMapDisplayZoomButtonVisibility(boolean visibility) {
+			MapDisplayZoomButtonsVisibility = visibility;
+		}
+		
 	    /**
 		 * Menu items to be provided for the menu opened when
 		 * the a measurement point or info box is tapped.
@@ -123,10 +198,6 @@ package net.osmand.plus.planning;
 	    	};
 		public int originalContextMenuItems;
 		
-		public PlanningPlugin(OsmandApplication app) {
-			this.app = app;
-		}
-		
 		@Override
 		public boolean init(OsmandApplication app) {
 			settings = app.getSettings();
@@ -157,8 +228,8 @@ package net.osmand.plus.planning;
 			}
 			activity.getMapView().addLayer(planningLayer, 4.5f);
 			registerWidget(activity);
-			if(settings.getDisplayScaleFactor() < planningLayer.MIN_DISPLAY_FACTOR || 
-					settings.getDisplayScaleFactor() > planningLayer.MAX_DISPLAY_FACTOR) settings.setDisplayScaleFactor(1.0f);
+			if(getDisplayScaleFactor() < planningLayer.MIN_DISPLAY_FACTOR || 
+					getDisplayScaleFactor() > planningLayer.MAX_DISPLAY_FACTOR) setDisplayScaleFactor(1.0f);
 		}
 
 		@Override
@@ -177,8 +248,8 @@ package net.osmand.plus.planning;
 		@Override
 		public void disable(OsmandApplication application) {
 			planningLayer.hideDisplayZoomButtons();	//hide display zoom control if plugin has been disabled
-			settings.setPlanningMode(false);	//disable planning mode
-			settings.setDisplayScaleFactor(1.0f);	//reset display zoom
+			planningMode.set(false);	//disable planning mode
+			setDisplayScaleFactor(1.0f);	//reset display zoom
 			MapInfoLayer mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null) {	//remove the Options menu item entry for Planning
 				Iterator<MapInfoControlRegInfo> it = mapInfoLayer.getMapInfoControls().getRight().iterator();
@@ -217,7 +288,7 @@ package net.osmand.plus.planning;
 				@Override
 				public boolean updateInfo() {
 					if(settings.getEnabledPlugins().contains("osmand.planning")){	//hide control if plugin has been disabled
-						if(settings.getPlanningMode()){
+						if(planningMode.get()){
 							setImageDrawable(map.getResources().getDrawable(R.drawable.widget_measurement_on));
 							setText(" ", null);
 						}else{
@@ -233,16 +304,16 @@ package net.osmand.plus.planning;
 			measurementControl.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if(settings.getPlanningMode()){
+					if(planningMode.get()){
 						createMapInfoBarMenuDialog();
 					}else{
-						settings.setPlanningMode(true);
+						setPlanningMode(true);
 						map.getMapLayers().getContextMenuLayer().setLocation(null, null);	//remove any point info textbox from ContextMenuLayer 
 					}
 					mapActivity.getMapView().refreshMap();
 				}
 			});
-			if(settings.getPlanningMode()){
+			if(getPlanningMode()){
 				measurementControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_measurement_on));
 			}else{
 				measurementControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_measurement_off));				
@@ -280,7 +351,7 @@ package net.osmand.plus.planning;
 						android.R.drawable.ic_menu_mylocation, new OnOptionsMenuClick() {
 					@Override
 					public void prepareOptionsMenu(Menu menu, MenuItem showZoomButtonItem) {
-						if (!settings.getMapDisplayZoomButtonVisibility() && settings.getEnabledPlugins().contains("osmand.planning")) {
+						if (!getMapDisplayZoomButtonVisibility() && settings.getEnabledPlugins().contains("osmand.planning")) {
 							showZoomButtonItem.setVisible(true);
 						} else {
 							showZoomButtonItem.setVisible(false);
@@ -290,7 +361,7 @@ package net.osmand.plus.planning;
 					@Override
 					public boolean onClick(MenuItem item) {
 						planningLayer.showDisplayZoomButtons();
-						settings.setMapDisplayZoomButtonVisibility(true);
+						setMapDisplayZoomButtonVisibility(true);
 						planningLayer.getPlanningView().refreshMap(true);
 						return true;
 					}
@@ -300,7 +371,7 @@ package net.osmand.plus.planning;
 						android.R.drawable.ic_menu_mylocation, new OnOptionsMenuClick() {
 					@Override
 					public void prepareOptionsMenu(Menu menu, MenuItem hideZoomButtonItem) {
-						if (settings.getMapDisplayZoomButtonVisibility() && settings.getEnabledPlugins().contains("osmand.planning")) {
+						if (getMapDisplayZoomButtonVisibility() && settings.getEnabledPlugins().contains("osmand.planning")) {
 							hideZoomButtonItem.setVisible(true);
 						} else {
 							hideZoomButtonItem.setVisible(false);
@@ -310,7 +381,7 @@ package net.osmand.plus.planning;
 					@Override
 					public boolean onClick(MenuItem item) {
 						planningLayer.hideDisplayZoomButtons();
-						settings.setMapDisplayZoomButtonVisibility(false);
+						setMapDisplayZoomButtonVisibility(false);
 						planningLayer.getPlanningView().refreshMap(true);
 						return true;
 					}
@@ -319,7 +390,7 @@ package net.osmand.plus.planning;
 						android.R.drawable.ic_menu_mylocation, new OnOptionsMenuClick() {
 					@Override
 					public void prepareOptionsMenu(Menu menu, MenuItem showMeasurementModeItem) {
-						if (settings.getPlanningMode() && settings.getEnabledPlugins().contains("osmand.planning")) {
+						if (getPlanningMode() && settings.getEnabledPlugins().contains("osmand.planning")) {
 							showMeasurementModeItem.setVisible(true);
 						} else {
 							showMeasurementModeItem.setVisible(false);
@@ -328,7 +399,7 @@ package net.osmand.plus.planning;
 					
 					@Override
 					public boolean onClick(MenuItem item) {
-						settings.setPlanningMode(false);	//turn on planning measurement mode						
+						planningMode.set(false);	//turn on planning measurement mode						
 						planningLayer.getPlanningView().refreshMap(true);
 						return true;
 					}
@@ -338,7 +409,7 @@ package net.osmand.plus.planning;
 						android.R.drawable.ic_menu_mylocation, new OnOptionsMenuClick() {
 					@Override
 					public void prepareOptionsMenu(Menu menu, MenuItem showMeasurementModeItem) {
-						if (!settings.getPlanningMode() && settings.getEnabledPlugins().contains("osmand.planning")) {
+						if (!planningMode.get() && settings.getEnabledPlugins().contains("osmand.planning")) {
 							showMeasurementModeItem.setVisible(true);
 						} else {
 							showMeasurementModeItem.setVisible(false);
@@ -347,7 +418,7 @@ package net.osmand.plus.planning;
 					
 					@Override
 					public boolean onClick(MenuItem item) {
-						settings.setPlanningMode(true);	//turn on planning measurement mode						
+						planningMode.set(true);	//turn on planning measurement mode						
 						planningLayer.getPlanningView().refreshMap(true);
 						return true;
 					}
@@ -374,14 +445,14 @@ package net.osmand.plus.planning;
 					if(standardId == R.string.context_menu_item_clear_all_points){	//test if all measurement points should be removed
 						planningLayer.selectedMeasurementPointIndex = -1;
 						planningLayer.measurementPoints.clear();	//remove all points from the list
-						planningLayer.setLocation(null, "");	//delete the point info text box
+						planningLayer.setLocation(null);	//delete the point info text box
 					}else if(standardId == R.string.context_menu_item_display_point_info){
 						planningLayer.longInfoFlag = true;
 						if(index >=0){
 							planningLayer.displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
 						}else{
-							planningLayer.setLocation(null, "");	//delete the point info text box
+							planningLayer.setLocation(null);	//delete the point info text box
 						}
 					}else if(standardId == R.string.context_menu_item_display_distance_only){
 						planningLayer.longInfoFlag = false;
@@ -389,7 +460,7 @@ package net.osmand.plus.planning;
 							planningLayer.displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
 						}else{
-							planningLayer.setLocation(null, "");	//delete the point info text box
+							planningLayer.setLocation(null);	//delete the point info text box
 						}
 					}else if(standardId == R.string.context_menu_item_edit_point_size){	//change measurement point display size
 						editMeasurementPointData(1);
@@ -414,7 +485,7 @@ package net.osmand.plus.planning;
 				}
 			};
 			
-			if(settings.getPlanningMode()){	//Add the new menu items
+			if(planningMode.get()){	//Add the new menu items
 				int actionsToUse =  ContextMenuActions.length;	//measurement point selected items;
 				originalContextMenuItems = adapter.length();
 		    	for(int j = 0; j < actionsToUse; j++){
@@ -458,7 +529,7 @@ package net.osmand.plus.planning;
 					}else if(standardId == R.string.context_menu_item_clear_all_points){	//test if all measurement points should be removed
 						planningLayer.selectedMeasurementPointIndex = -1;
 						planningLayer.measurementPoints.clear();	//remove all points from the list
-						planningLayer.setLocation(null, "");	//delete the point info text box
+						planningLayer.setLocation(null);	//delete the point info text box
 					}else if(standardId == R.string.context_menu_item_insert_point){	//test if extra measurement point is to be inserted
 						if(index >= 0){
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
@@ -472,7 +543,7 @@ package net.osmand.plus.planning;
 							planningLayer.displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
 						}else{
-							planningLayer.setLocation(null, "");	//delete the point info text box
+							planningLayer.setLocation(null);	//delete the point info text box
 						}
 					}else if(standardId == R.string.context_menu_item_display_distance_only){
 						planningLayer.longInfoFlag = false;
@@ -480,7 +551,7 @@ package net.osmand.plus.planning;
 							planningLayer.displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
 						}else{
-							planningLayer.setLocation(null, "");	//delete the point info text box
+							planningLayer.setLocation(null);	//delete the point info text box
 						}
 					}
 					planningLayer.getPlanningView().refreshMap(true);
@@ -513,7 +584,7 @@ package net.osmand.plus.planning;
 					if(standardId == R.string.context_menu_item_clear_all_points){	//test if all measurement points should be removed
 						planningLayer.selectedMeasurementPointIndex = -1;
 						planningLayer.measurementPoints.clear();	//remove all points from the list
-						planningLayer.setLocation(null, "");	//delete the point info text box
+						planningLayer.setLocation(null);	//delete the point info text box
 					}else if(standardId == R.string.context_menu_item_cancel){	// close dialog with no action
 					}else if(standardId == R.string.context_menu_item_display_point_info){
 						planningLayer.longInfoFlag = true;
@@ -521,7 +592,7 @@ package net.osmand.plus.planning;
 							planningLayer.displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
 						}else{
-							planningLayer.setLocation(null, "");	//delete the point info text box
+							planningLayer.setLocation(null);	//delete the point info text box
 						}
 					}else if(standardId == R.string.context_menu_item_display_distance_only){
 						planningLayer.longInfoFlag = false;
@@ -529,10 +600,10 @@ package net.osmand.plus.planning;
 							planningLayer.displayIntermediatePointInfo(index);	//use the latLon for the point, not the menu click
 							planningLayer.colourChangeIndex = index;	//point colour should change after this point
 						}else{
-							planningLayer.setLocation(null, "");	//delete the point info text box
+							planningLayer.setLocation(null);	//delete the point info text box
 						}
 					}else if(standardId == R.string.context_menu_item_end_measurement){	// End measurement mode
-						settings.setPlanningMode(false);	//turn off planning measurement mode						
+						setPlanningMode(false);	//turn off planning measurement mode						
 					}else if(standardId == R.string.context_menu_item_edit_point_size){	//change measurement point display size
 						editMeasurementPointData(1);
 					}else if(standardId == R.string.context_menu_item_edit_point_selection_area){	//change measurement point selection area size
@@ -765,13 +836,13 @@ package net.osmand.plus.planning;
 		    	if(type == 1){
 		    		min = planningLayer.minMeasurementPointDisplayRadius;
 		    		max = planningLayer.maxMeasurementPointDisplayRadius;
-		    		current = settings.getMeasurementPointDisplayRadius();
+		    		current = getMeasurementPointDisplayRadius();
 		    		prompt = getString(R.string.plan_display_size_prompt);
 		    		warning = getString(R.string.plan_display_size_warning) + " ";
 			    }else if(type == 2){
 		    		min = planningLayer.minMeasurementPointSelectionRadius;
 		    		max = planningLayer.maxMeasurementPointSelectionRadius;
-		    		current = settings.getMeasurementPointSelectionRadius();
+		    		current = getMeasurementPointSelectionRadius();
 		    		prompt = getString(R.string.plan_selection_size_prompt);
 		    		warning = getString(R.string.plan_selection_size_warning) + " ";			    	
 			    }
@@ -809,11 +880,11 @@ package net.osmand.plus.planning;
 			            if(newValue >= min && newValue <= max){
 			            	// ensure that the selection area radius is at least as big as the display radius
 			            	if(getType() == 1){
-				            	settings.setMeasurementPointDisplayRadius(newValue);
-			            		if(settings.getMeasurementPointSelectionRadius() < newValue) settings.setMeasurementPointSelectionRadius(newValue);
+				            	setMeasurementPointDisplayRadius(newValue);
+			            		if(getMeasurementPointSelectionRadius() < newValue) setMeasurementPointSelectionRadius(newValue);
 			            	}else if(getType() == 2){
-			            		if(newValue < settings.getMeasurementPointDisplayRadius()) newValue = settings.getMeasurementPointDisplayRadius();
-				            	settings.setMeasurementPointSelectionRadius(newValue);	
+			            		if(newValue < getMeasurementPointDisplayRadius()) newValue = getMeasurementPointDisplayRadius();
+				            	setMeasurementPointSelectionRadius(newValue);	
 			            	}
 				            Toast.makeText(context, warning + String.valueOf(newValue),Toast.LENGTH_LONG).show(); 
 							planningLayer.getPlanningView().refreshMap(true);
