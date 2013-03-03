@@ -43,7 +43,7 @@ public class AccessibleContent extends ArrayList<View> {
     }
 
     public boolean dispatchTouchEvent(MotionEvent event, Callback callback) {
-        if (((OsmandApplication) ctx.getApplicationContext()).getSettings().ACCESSIBILITY_EXTENSIONS.get()) {
+        if (((OsmandApplication) ctx.getApplicationContext()).getInternalAPI().accessibilityExtensions()) {
             int action = event.getAction();
             View newTouch;
             switch (action) {

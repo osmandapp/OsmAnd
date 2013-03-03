@@ -9,6 +9,7 @@ import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
+import android.os.Build;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
@@ -110,8 +111,9 @@ public class AccessibilityPlugin extends OsmandPlugin {
 				R.string.scroll_map_by_gestures_descr));
 		cat.addPreference(activity.createCheckBoxPreference(settings.USE_SHORT_OBJECT_NAMES, R.string.use_short_object_names,
 				R.string.use_short_object_names_descr));
-		cat.addPreference(activity.createCheckBoxPreference(settings.ACCESSIBILITY_EXTENSIONS, R.string.accessibility_extensions,
-				R.string.accessibility_extensions));
+		if (Build.VERSION.SDK_INT < 14) // Build.VERSION_CODES.ICE_CREAM_SANDWICH
+			cat.addPreference(activity.createCheckBoxPreference(settings.ACCESSIBILITY_EXTENSIONS, R.string.accessibility_extensions,
+					R.string.accessibility_extensions));
 	}
 
 
