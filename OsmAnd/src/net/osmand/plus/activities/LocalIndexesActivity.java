@@ -88,7 +88,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		});
 		setContentView(R.layout.local_index);
 		titleBar.afterSetContentView();
-		
+		titleBar.setImgDescription(getString(R.string.local_index_download));
 		
 		settings = getMyApplication().getSettings();
 		descriptionLoader = new LoadLocalIndexDescriptionTask();

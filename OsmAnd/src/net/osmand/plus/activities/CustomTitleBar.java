@@ -43,6 +43,10 @@ public class CustomTitleBar {
 		activity.getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, vidw.getTitleBarLayout());
 		vidw.init(activity.getWindow());
 	}
+
+	public void setImgDescription(CharSequence text) {
+		activity.getWindow().getDecorView().findViewById(R.id.title_image).setContentDescription(text);
+	}
 	
 	public static class CustomTitleBarView {
 		protected String titleString;
