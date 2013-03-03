@@ -60,7 +60,7 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 	}
 	
 	public boolean accessibilityExtensions() {
-		return app.getSettings().ACCESSIBILITY_EXTENSIONS.get();
+		return (Build.VERSION.SDK_INT < 14) ? app.getSettings().ACCESSIBILITY_EXTENSIONS.get() : false;
 	}
 
 	@Override
