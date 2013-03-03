@@ -1194,4 +1194,7 @@
 	<string name="prefer_in_routing_title">העדפה…</string>
 	<string name="prefer_in_routing_descr">העדפת כבישים סלולים</string>
     <string name="av_def_action_choose">נא לבחור בקשה</string>
+    <string name="item_checked">לאחר בדיקה</string>
+    <string name="item_unchecked">ללא בדיקה</string>
+    <string name="map_view">מפה</string>
     </resources>
