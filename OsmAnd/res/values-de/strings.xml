@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
@@ -1254,4 +1254,7 @@
 	<string name="prefer_in_routing_descr">Autobahnen bevorzugen</string>
     <string name="max_speed_none">keine</string>
     <string name="av_def_action_choose">Bei Anfrage auswählen</string>
+    <string name="item_checked">ausgewählt</string>
+    <string name="item_unchecked">nicht ausgewählt</string>
+    <string name="map_view">Karte</string>
     </resources>
