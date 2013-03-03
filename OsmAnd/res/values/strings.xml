@@ -107,7 +107,7 @@
 	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
 	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for live tracking features. Information about the service is available on http://esya.ru.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for online tracking features. Information about the service is available on http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="tip_altitude_offset">Altitude Display - Offset Correction</string>
 	<string name="tip_altitude_offset_t">\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
@@ -145,7 +145,7 @@
 	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
-    <string name="enable_plugin_monitoring_services">Enable tracking plugin to use position logging services (logging, live tracking)</string>
+    <string name="enable_plugin_monitoring_services">Enable tracking plugin to use position logging services (GPX recording, online tracking)</string>
     <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
 	<string name="gps_not_available">Please enable GPS in the settings</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
@@ -264,8 +264,8 @@
 	<string name="map_widget_day_night">Day/night map</string>
 	<string name="map_widget_vector_attributes">Rendering attributes:</string>
 	<string name="map_widget_renderer">Map style</string>
-	<string name="live_monitoring_mode_off">Start\n live tracking</string>
-	<string name="live_monitoring_mode_on">Stop\n live tracking</string>
+	<string name="live_monitoring_mode_off">Start\n online tracking</string>
+	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
 	<string name="layer_map_appearance">Configure screen&#8230;</string>
@@ -410,7 +410,7 @@
 	<string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
 	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
 	<string name="extra_settings">Advanced settings</string>
-	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to GPX files or to live track using a web service.</string>
+	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
 	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
 	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
 	<string name="plugins_screen">Plugins</string>
@@ -517,7 +517,7 @@
 	<string name="offline_edition_descr">Always use offline editing</string>
 	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
 		\n\t- Offline POI editing 
-		\n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
+		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
 		\n\t- Show currently recorded track on map
 		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
 		\n\t- New voice prompt \'Route recalculated\'
@@ -537,11 +537,11 @@
 	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
 	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
 	<string name="live_monitoring_descr">Send tracking to a specified web service</string>
-	<string name="live_monitoring">Online live tracking</string>
-	<string name="live_monitoring_interval_descr">Specify live tracking interval</string>
-	<string name="live_monitoring_interval">Live tracking interval</string>
+	<string name="live_monitoring">Online tracking</string>
+	<string name="live_monitoring_interval_descr">Specify online tracking interval</string>
+	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Live tracking web address</string>
+	<string name="live_monitoring_url">Online tracking web address</string>
 	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
 	<string name="show_current_gpx_title">Show current track</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
