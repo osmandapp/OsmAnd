@@ -13,6 +13,7 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.content.Context;
 import android.graphics.PointF;
+import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -89,7 +90,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public boolean onDown(MotionEvent e) {
-        if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
+        if ((Build.VERSION.SDK_INT >= 14) || mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
             return fallback.onDown(e);
         ContextMenuLayer contextMenuLayer = mapView.getLayerByClass(ContextMenuLayer.class);
         if (contextMenuLayer != null)
@@ -101,7 +102,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
+        if ((Build.VERSION.SDK_INT >= 14) || mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
             return fallback.onFling(e1, e2, velocityX, velocityY);
         return true;
     }
@@ -113,7 +114,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
+        if ((Build.VERSION.SDK_INT >= 14) || mapView.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
             return fallback.onScroll(e1, e2, distanceX, distanceY);
         } else {
             describePointedObjects(e2);
@@ -123,7 +124,7 @@ public class MapExplorer implements OnGestureListener, IContextMenuProvider {
 
     @Override
     public void onShowPress(MotionEvent e) {
-        if (mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
+        if ((Build.VERSION.SDK_INT >= 14) || mapView.getSettings().SCROLL_MAP_BY_GESTURES.get())
             fallback.onShowPress(e);
     }
 

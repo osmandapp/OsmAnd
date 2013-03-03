@@ -25,6 +25,7 @@ import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.CustomTitleBar.CustomTitleBarView;
+import net.osmand.plus.activities.PluginsActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.views.SeekBarPreference;
@@ -66,6 +67,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 	public static final String SCREEN_ID_GENERAL_SETTINGS = "general_settings";
 	public static final String SCREEN_ID_NAVIGATION_SETTINGS = "routing_settings";
 	public static final String MORE_VALUE = "MORE_VALUE";
+
+	private static final int PLUGINS_SELECTION_REQUEST = 1;
 
 	private Preference bidforfix;
 	private Preference plugins;
@@ -441,6 +444,15 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 		super.onDestroy();
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if ((requestCode == PLUGINS_SELECTION_REQUEST) && (resultCode == PluginsActivity.ACTIVE_PLUGINS_LIST_MODIFIED)) {
+			finish();
+			startActivity(getIntent());
+		}
+	}
+
 	public void updateAllSettings() {
 		for (OsmandPreference<Boolean> b : booleanPreferences.values()) {
 			CheckBoxPreference pref = (CheckBoxPreference) screenPreferences.get(b.getId());
@@ -758,7 +770,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 			startActivity(new Intent(this, OsmandBidForFixActivity.class));
 			return true;
 		} else if (preference == plugins) {
-			startActivity(new Intent(this, PluginsActivity.class));
+			startActivityForResult(new Intent(this, PluginsActivity.class), PLUGINS_SELECTION_REQUEST);
 			return true;
 		} else if (preference == avoidRouting) {
 			showBooleanSettings(new String[] { getString(R.string.avoid_toll_roads), getString(R.string.avoid_ferries),

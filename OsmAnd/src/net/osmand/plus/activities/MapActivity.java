@@ -12,6 +12,7 @@ import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
+import net.osmand.access.MapAccessibilityActions;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.map.IMapLocationListener;
@@ -191,7 +192,8 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
 				return MapActivity.this.onTrackballEvent(e);
 			}
 		});
-		
+		mapView.setAccessibilityActions(new MapAccessibilityActions(this));
+
 		// Do some action on close
 		startProgressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
@@ -709,7 +711,7 @@ public class MapActivity extends AccessibleActivity implements IMapLocationListe
         return hint;
     }
 
-    private void emitNavigationHint() {
+    public void emitNavigationHint() {
         final LatLon point = getTargetPoints().getPointToNavigate();
         if (point != null) {
             if (routingHelper.isRouteCalculated()) {
