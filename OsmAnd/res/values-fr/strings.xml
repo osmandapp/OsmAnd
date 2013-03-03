@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
-  <string name="tip_recent_changes_0_7_1_t">Changements en 0.7.1 :
+  <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
 \n\t- Modification hors ligne des PI
 \n\t- Option de suivi en ligne - envoyer ses coordonnées à un service web de façon périodique (lire la configuration dans les articles HowTo)
 \n\t- Afficher l\'itinéraire en cours d\'enregistrement sur la carte
-\n\t- Détection de la direction: \'Faîtes demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage
+\n\t- Détection de la direction: \'Faites demi-tour\' est affiché et annoncé lors d\'un déplacement dans la direction opposée, ou après avoir raté un virage
 \n\t- Nouveau message vocal \'Itinéraire recalculé\'
 \n\t- Indication visuelle d\'un tournant imminent dans les 100m en changeant la couleur de la flèche de direction
 \n\t- État des fichiers de cartes désactivés affichés dans l\'écran de téléchargement en vert foncé et bleu foncé
-\n\t- Modifications diverses</string>
+\n\t- Modifications diverses "</string>
   <string name="update_poi_does_not_change_indexes">Les modifications de PI dans l\'application sont sans effet sur les cartes téléchargées, les modifications sont enregistrées dans un fichier.</string>
   <string name="local_openstreetmap_uploading">Envoi…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PI/bogues ont été envoyés</string>
