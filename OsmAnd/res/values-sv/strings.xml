@@ -717,19 +717,19 @@
 	<string name="use_trackball">Använd styrkula</string>
 	<string name="background_service_wait_int_descr">Ange maximal väntetid för varje positionsbestämning i bakgrunden</string>
 	<string name="background_service_wait_int">Maximal väntetid för fix</string>
-	<string name="service_stop_background_service">Stäng av bakgrundsnavigeringstjänsten</string>
+	<string name="service_stop_background_service">Stäng av navigeringstjänsten i viloläge</string>
 	<string name="where_am_i">Var är jag?</string>
 	<string name="process_navigation_service">OsmAnd navigeringstjänst</string>
 	<string name="network_provider">Nätverk</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekunder</string>
-	<string name="background_service_int_descr">"Ange väckningsintervall som används av bakgrunden "</string>
+	<string name="background_service_int_descr">Ange väckningsintervall som används under viloläget</string>
 	<string name="background_service_int">Väckningsintervall</string>
-	<string name="background_service_provider_descr">Välj platsleverantör när du kör i bakgrunden</string>
+	<string name="background_service_provider_descr">Välj platsleverantör när du kör i viloläge</string>
 	<string name="background_service_provider">Platsleverantör</string>
 	<string name="background_router_service_descr">Kör OsmAnd i bakgrunden för att spåra din position medan skärmen är avstängd</string>
-	<string name="background_router_service">Kör i bakgrunden</string>
-	<string name="off_router_service_no_gps_available">Tjänsten bakgrundsnavigering kräver en platsleverantör för att vara påslagen.</string>
+	<string name="background_router_service">Kör i viloläge</string>
+	<string name="off_router_service_no_gps_available">Tjänsten vilolägesnavigering kräver en platsleverantör för att vara påslagen.</string>
 	<string name="hide_poi_filter">Dölj filter</string>
 	<string name="show_poi_filter">Visa filter</string>
 	<string name="search_poi_filter">Filter</string>
@@ -864,7 +864,7 @@
     <string name="safe_mode_description">Kör program i felsäkert läge (för långsammare Android istället för inbyggd kod).</string>
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
-    <string name="background_service_is_enabled_question">Bakgrundstjänsten körs fortfarande. Vill du avbryta den?</string>
+    <string name="background_service_is_enabled_question">Vilolägestjänsten körs fortfarande. Vill du avbryta den?</string>
     <string name="osmodroid_plugin_description"/>
     <string name="osmodroid_plugin_name">OsMoDroid-plugin</string>
 	<string name="edit_filter_create_message">Filter {0} har skapats</string>
@@ -1082,4 +1082,7 @@
     <string name="prefer_motorways">Föredra motorvägar</string>
 	<string name="prefer_in_routing_title">Föredra…</string>
 	<string name="prefer_in_routing_descr">Föredra motorvägar</string>
+    <string name="item_checked">markerad</string>
+    <string name="item_unchecked">ej markerad</string>
+    <string name="map_view">Karta</string>
     </resources>
