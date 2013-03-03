@@ -9,8 +9,10 @@ import java.util.Map.Entry;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.planning.PlanningPlugin;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -201,7 +203,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		}
 		
-		if(view.getSettings().getPlanningMode()) return false;	//skip if in planning mode
+		if(OsmandPlugin.getEnabledPlugin(PlanningPlugin.class) != null){
+			if(OsmandPlugin.getEnabledPlugin(PlanningPlugin.class).getPlanningMode()) return false;	//skip if in planning mode
+		}
 		if(pressedInTextView(point.x, point.y) == 2){	//close button selected
 			setLocation(null, ""); //$NON-NLS-1$
 			view.refreshMap();

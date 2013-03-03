@@ -12,8 +12,6 @@ package net.osmand.plus.planning;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import org.apache.http.client.protocol.ClientContext;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
@@ -24,7 +22,6 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.planning.PlanningPlugin;
-import net.osmand.plus.OsmandSettings;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -71,7 +68,6 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private boolean newPointFlag = true;	//Used to block new distance point creation for menu or text box clicks
 	private boolean scrollingFlag = false;		//For measurement point dragging
 	private OsmandApplication application;
-	private static OsmandSettings settings;
 	private MapActivity activity;
 	private PlanningPlugin planningPlugin;
 	public boolean measureDistanceMode = false;	//Status of distance measurement mode
@@ -92,10 +88,12 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private Button displayZoomOutButton;
 	public final float MAX_DISPLAY_FACTOR = 4.0f;	//display zoom limits
 	public final float MIN_DISPLAY_FACTOR = 1.0f;
+	private final int DEFAULT_TEXT_SIZE = 14;
 	private ImageView closeButton;
 	private String description;
 	private LayoutParams lp;
 	private TextPaint zoomTextPaint;
+	private int baseTextSize = 0;
 	
 	public PlanningLayer(MapActivity activity){
 		this.activity = activity;
@@ -124,7 +122,6 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
-		settings = application.getSettings();
 		dm = new DisplayMetrics();
 		WindowManager wmgr = (WindowManager) view.getContext().getSystemService(Context.WINDOW_SERVICE);
 		wmgr.getDefaultDisplay().getMetrics(dm);
@@ -134,16 +131,16 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			scaleCoefficient *= 1.5f;
 		}
 		
-		if(settings.getMeasurementPointSelectionRadius() < minMeasurementPointSelectionRadius ||
-				settings.getMeasurementPointSelectionRadius() > maxMeasurementPointSelectionRadius){
-			settings.setMeasurementPointSelectionRadius(defaultMeasurementPointSelectionRadius);
+		if(planningPlugin.getMeasurementPointSelectionRadius() < minMeasurementPointSelectionRadius ||
+				planningPlugin.getMeasurementPointSelectionRadius() > maxMeasurementPointSelectionRadius){
+			planningPlugin.setMeasurementPointSelectionRadius(defaultMeasurementPointSelectionRadius);
 		}
-		if(settings.getMeasurementPointDisplayRadius() < minMeasurementPointSelectionRadius ||
-				settings.getMeasurementPointDisplayRadius() > maxMeasurementPointDisplayRadius){
-			settings.setMeasurementPointDisplayRadius(defaultMeasurementPointDisplayRadius);
+		if(planningPlugin.getMeasurementPointDisplayRadius() < minMeasurementPointSelectionRadius ||
+				planningPlugin.getMeasurementPointDisplayRadius() > maxMeasurementPointDisplayRadius){
+			planningPlugin.setMeasurementPointDisplayRadius(defaultMeasurementPointDisplayRadius);
 		}
 			
-		BASE_TEXT_SIZE = (int) (BASE_TEXT_SIZE * scaleCoefficient);
+		baseTextSize = (int) (BASE_TEXT_SIZE * scaleCoefficient);
 		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
 		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);	
 		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
@@ -151,7 +148,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		textView = new TextView(view.getContext());
 		lp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		textView.setLayoutParams(lp);
-		textView.setTextSize(15);
+		textView.setTextSize(DEFAULT_TEXT_SIZE);
 		textView.setTextColor(Color.argb(255, 0, 0, 0));
 		textView.setMinLines(1);
 		textView.setGravity(Gravity.CENTER_HORIZONTAL);		
@@ -172,25 +169,25 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		closeButton.layout(0, 0, minw, minh);
 		
 		if(latLon != null){
-			setLocation(latLon, description);
+			setLocation(latLon);
 		}
 	}
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-		if(!settings.getPlanningMode() || view == null){
+		if(!planningPlugin.getPlanningMode() || view == null){
 			return;
 		}
 		
 		targetIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.info_target);	//bitmap to use in measurement mode
-		float displayScale = settings.getDisplayScaleFactor();	//additional scaling for selected display zoom
+		float displayScale = planningPlugin.getDisplayScaleFactor();	//additional scaling for selected display zoom
 		int size = 0;	
 		int locationX = 0;
 		int locationY = 0;
 		int index = colourChangeIndex;
 		size = measurementPoints.size();
 		if(size > 0){
-			for (int i=0;i< size; i++){
+			for (int i = 0;i< size; i++){
 				locationX = view.getMapXForPoint(measurementPoints.get(i).getLongitude());
 				locationY = view.getMapYForPoint(measurementPoints.get(i).getLatitude());
 				if(i==0){
@@ -208,7 +205,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 					}
 					canvas.drawLine(view.getMapXForPoint(measurementPoints.get(i-1).getLongitude()),
 							view.getMapYForPoint(measurementPoints.get(i-1).getLatitude()), locationX, locationY, tempPaint);
-					canvas.drawCircle(locationX, locationY, settings.getMeasurementPointDisplayRadius() * scaleCoefficient, tempPaint);
+					canvas.drawCircle(locationX, locationY, planningPlugin.getMeasurementPointDisplayRadius() * scaleCoefficient, tempPaint);
 				}
 			}
 		}
@@ -230,16 +227,9 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 					textView.setGravity(Gravity.CENTER_HORIZONTAL);
 				}
 				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
-				int c = textView.getLineCount();				
 				textView.draw(canvas);
-				if (c == 0) {
-					// special case relayout after on draw method
-					layoutText();
-					view.refreshMap();
-				}else{
-					canvas.translate(textView.getWidth() - closeButton.getWidth(), CLOSE_BTN / 2);
-					closeButton.draw(canvas);					
-				}
+				canvas.translate(textView.getWidth() - closeButton.getWidth(), CLOSE_BTN / 2);
+				closeButton.draw(canvas);					
 			}
 		}
 	}
@@ -253,19 +243,22 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		return false;
 	}
 
-	private void layoutText() {
+	private void layoutText(int lines) {
 		Rect padding = new Rect();
-		if (textView.getLineCount() > 0) {
+		if (lines > 0) {
 			textView.getBackground().getPadding(padding);
 		}
+
+		textView.setTextSize(DEFAULT_TEXT_SIZE + (int)(1.5f * planningPlugin.getDisplayScaleFactor()));	//partially scale text size
+
 		int w = 0;
 		if(!longInfoFlag){	//adjust info textbox size depending on message type
 			w = (int)textView.getPaint().measureText((String) textView.getText()) + closeButton.getDrawable().getMinimumWidth() + 10;
 		}else{
-			w = BASE_TEXT_SIZE;
+			w = baseTextSize;
 		}
-		int h = (int) ((textView.getPaint().getTextSize() + 4) * textView.getLineCount());		
-		textView.layout(0, -padding.bottom, w, h + padding.top);
+		int h = (int) ((textView.getPaint().getTextSize() + 4) * lines);
+		textView.layout(0, -padding.bottom, w, h + padding.top + 10);
 	}
 	
 	/**
@@ -273,59 +266,62 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	 * 1. Add new points to measurement track
 	 * 2. Determine information to be displayed for the selected point
 	 */
-	public void setLocation(LatLon loc, String description){
+	public void setLocation(LatLon loc){
 		int index = selectedMeasurementPointIndex;	//For measurement point distance display
+		int lines = 0;
 		latLon = loc;
-		if(latLon != null){
-			if(description == null || description.length() == 0){
-				
-				if(!settings.getPlanningMode()){	//Test for distance measurement mode
-					description = view.getContext().getString(R.string.point_on_map, 
-							latLon.getLatitude(), latLon.getLongitude());
-				}else{	//display cumulative measurement data
-					if(newPointFlag){	//do not add point for menu activity
-						if(measurementPointInsertionIndex < 0) {
-							measurementPoints.add(latLon);
-							index = measurementPoints.size() - 1;
-						}else{
-							measurementPoints.add(measurementPointInsertionIndex, latLon);
-							index = measurementPointInsertionIndex;
-							measurementPointInsertionIndex = -1;		//clear insertion flag
-						}
-						colourChangeIndex = index;	//To assist point display colour coding
-						selectedMeasurementPointIndex = index;
-						newPointFlag = false;
-					}
-					if(index == 0){
-						if(longInfoFlag){
-							description = view.getContext().getString(R.string.point_on_map,
-									measurementPoints.get(0).getLatitude(), measurementPoints.get(0).getLongitude());	
-						}else{
-							description = view.getContext().getString(R.string.start_point);								
-						}
+		if(latLon != null){			
+			if(!planningPlugin.getPlanningMode()){	//Test for distance measurement mode
+				description = view.getContext().getString(R.string.point_on_map, 
+						latLon.getLatitude(), latLon.getLongitude());
+			}else{	//display cumulative measurement data
+				if(newPointFlag){	//do not add point for menu activity
+					if(measurementPointInsertionIndex < 0) {
+						measurementPoints.add(latLon);
+						index = measurementPoints.size() - 1;
 					}else{
-						cumMeasuredDistance = calculatePathDistance(index);
-						String ds = OsmAndFormatter.getFormattedDistance(cumMeasuredDistance, application);
-						if(longInfoFlag){
-							description = "Location:\n Lat: " + String.format("%3.6f",
-									measurementPoints.get(index).getLatitude()) + "\nLon: " + 
-									String.format("%3.6f", measurementPoints.get(index).getLongitude()) + '\n' + "Dist.: " + ds;
-						}else{
-							description = ds;
-						}
+						measurementPoints.add(measurementPointInsertionIndex, latLon);
+						index = measurementPointInsertionIndex;
+						measurementPointInsertionIndex = -1;		//clear insertion flag
+					}
+					colourChangeIndex = index;	//To assist point display colour coding
+					selectedMeasurementPointIndex = index;
+					newPointFlag = false;
+				}
+				if(index == 0){
+					if(longInfoFlag){
+						description = view.getContext().getString(R.string.start_point) +"\n Lat: " + String.format("%3.6f",
+								measurementPoints.get(0).getLatitude()) + "\nLon: " + 
+								String.format("%3.6f", measurementPoints.get(0).getLongitude());;
+						lines = 3;							
+					}else{
+						description = view.getContext().getString(R.string.start_point);								
+						lines = 1;
+					}
+				}else{
+					cumMeasuredDistance = calculatePathDistance(index);
+					String ds = OsmAndFormatter.getFormattedDistance(cumMeasuredDistance, application);
+					if(longInfoFlag){
+						description = view.getContext().getString(R.string.point_on_map,
+								measurementPoints.get(index).getLatitude(),
+								measurementPoints.get(index).getLongitude()) + '\n' + "Dist.: " + ds;
+						lines = 4;
+					}else{
+						description = ds;
+						lines = 1;
 					}
 				}
 			}
 			textView.setText(description);
 		} else {
-			textView.setText(""); //$NON-NLS-1$
+			textView.setText("");
 		}
-		layoutText();
+		layoutText(lines);
 	}
 
 	@Override
 	public boolean onLongPressEvent(PointF point) {
-		if(!settings.getPlanningMode()) return false;		
+		if(!planningPlugin.getPlanningMode()) return false;		
 		if (!view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
 			if (!selectedObjects.isEmpty())
 				view.showMessage(activity.getNavigationHint(latLon));
@@ -333,7 +329,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}		
 		newPointFlag = true;	//Enable new measurement point creation
 		if(pressedInTextView(point.x, point.y) == 2){	//close button pressed
-			setLocation(null, ""); //$NON-NLS-1$
+			setLocation(null);
 			view.refreshMap();
 			return true;
 		}
@@ -354,17 +350,17 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				latLon = l;
 			}
 		}		
-		setLocation(latLon, description.toString());
+		setLocation(latLon);
 		view.refreshMap();
 		return true;
 	}
 
 	@Override
 	public boolean onSingleTap(PointF point) {
-		if (!settings.getPlanningMode()) return false;
+		if (!planningPlugin.getPlanningMode()) return false;
 		if(pressedInTextView(point.x, point.y) > 0){	//Test if a measurement point text box has been clicked
 			if(pressedInTextView(point.x, point.y) == 2){
-				setLocation(null, "");	//close button was selected
+				setLocation(null);	//close button was selected
 				view.refreshMap();
 				return true;
 			}
@@ -389,7 +385,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	
 	@Override
 	public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-		if (!settings.getPlanningMode()) return false;		//Check if in measurement mode
+		if (!planningPlugin.getPlanningMode()) return false;		//Check if in measurement mode
 		if(scrollingFlag) return true;	//delay activity until scrolling has finished
 		PointF point = new PointF(e1.getX(), e1.getY());
 		int pointIndex = isMeasurementPointSelected(point, scaleCoefficient);
@@ -403,7 +399,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	
 	@Override
 	public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-		if (!settings.getPlanningMode()) return false;	//Check if in measurement mode
+		if (!planningPlugin.getPlanningMode()) return false;	//Check if in measurement mode
 		if(scrollingFlag) return true;	//block fling while dragging a point. Note scroll event occurs before fling event
 		return false;
 	}
@@ -432,7 +428,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if(!settings.getPlanningMode())return false;	
+		if(!planningPlugin.getPlanningMode())return false;	
 
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {	//must clear at start of new event, not end of last event to ensure fling is blocked
 			scrollingFlag = false;
@@ -473,27 +469,33 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	 * start point and the point selected.
 	 */
 	public void displayIntermediatePointInfo(int index){	//Display info for intermediate measurement points
+		int lines = 0;
 		String description ="";
 		latLon = measurementPoints.get(index);
 		if (index == 0){
 			if(longInfoFlag){
 				description = view.getContext().getString(R.string.start_point) + ": \nLat: " + String.format("%3.6f",
 						measurementPoints.get(index).getLatitude()) + String.format("\nLon: %3.6f", measurementPoints.get(index).getLongitude());					
+				lines = 3;
 			}else{
 				description = view.getContext().getString(R.string.start_point);								
+				lines = 1;
 			}
 		}else{
 			cumMeasuredDistance = calculatePathDistance(index);
 			if(longInfoFlag){
-				description = "Location:\n Lat: " + String.format("%3.6f", measurementPoints.get(index).getLatitude()) + "\nLon: " + 
-					String.format("%3.6f", measurementPoints.get(index).getLongitude()) + '\n' + "Dist.: " +
-					OsmAndFormatter.getFormattedDistance(cumMeasuredDistance, application);
+				description = view.getContext().getString(R.string.point_on_map,
+						measurementPoints.get(index).getLatitude(),
+						measurementPoints.get(index).getLongitude()) + '\n' + "Dist.: " + 
+						OsmAndFormatter.getFormattedDistance(cumMeasuredDistance, application);
+				lines = 4;
 			}else{
 				description = OsmAndFormatter.getFormattedDistance(cumMeasuredDistance, application);
+				lines = 1;
 			}
 		}
 		textView.setText(description);
-		layoutText();
+		layoutText(lines);
 	}
 	
 	/**
@@ -565,8 +567,8 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			for (int i = 0;i < size; i++){
 				locationX = view.getMapXForPoint(measurementPoints.get(i).getLongitude());
 				locationY = view.getMapYForPoint(measurementPoints.get(i).getLatitude());
-				if(Math.abs(locationX - point.x) < settings.getMeasurementPointSelectionRadius() * scaleCoefficient &&
-						Math.abs(locationY - point.y) < settings.getMeasurementPointSelectionRadius() * scaleCoefficient){
+				if(Math.abs(locationX - point.x) < planningPlugin.getMeasurementPointSelectionRadius() * scaleCoefficient &&
+						Math.abs(locationY - point.y) < planningPlugin.getMeasurementPointSelectionRadius() * scaleCoefficient){
 					index = i;	//a point has been found in the detection area
 					break;
 				}
@@ -659,16 +661,17 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 					Gravity.LEFT);
 		params.setMargins(0, 4*minimumWidth , 0, 0);
 		parent.addView(displayZoomOutButton, params);
-		settings.setMapDisplayZoomButtonVisibility(true);
+		planningPlugin.setMapDisplayZoomButtonVisibility(true);
 		
 		displayZoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				float factor = application.getSettings().getDisplayScaleFactor();
+				float factor = planningPlugin.getDisplayScaleFactor();
 				if(!application.getSettings().USE_HIGH_RES_MAPS.get()){
 					if(factor < MAX_DISPLAY_FACTOR){
-						application.getSettings().setDisplayScaleFactor(factor + 0.5f);
-						application.getSettings().setDisplayScaleChangedFlag(true);
+						planningPlugin.setDisplayScaleFactor(factor + 0.5f);
+						planningPlugin.setDisplayScaleChangedFlag(true);
+						if(textView.getLineCount() > 0) layoutText(textView.getLineCount());
 						view.refreshMap(true);
 					}
 				}
@@ -678,29 +681,30 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		displayZoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				float factor = application.getSettings().getDisplayScaleFactor();
+				float factor = planningPlugin.getDisplayScaleFactor();
 				if(!application.getSettings().USE_HIGH_RES_MAPS.get()){
 					if(factor > MIN_DISPLAY_FACTOR){
-						application.getSettings().setDisplayScaleFactor(factor - 0.5f);
-						application.getSettings().setDisplayScaleChangedFlag(true);
+						planningPlugin.setDisplayScaleFactor(factor - 0.5f);
+						planningPlugin.setDisplayScaleChangedFlag(true);
+						if(textView.getLineCount() > 0) layoutText(textView.getLineCount());
 						view.refreshMap(true);
 					}
 				}
 			}
 		});
-		if(!settings.getMapDisplayZoomButtonVisibility()) hideDisplayZoomButtons();
+		if(!planningPlugin.getMapDisplayZoomButtonVisibility()) hideDisplayZoomButtons();
 	}
 	
 	public void hideDisplayZoomButtons(){
 		displayZoomInButton.setVisibility(View.INVISIBLE);
 		displayZoomOutButton.setVisibility(View.INVISIBLE);
-		settings.setMapDisplayZoomButtonVisibility(false);
+		planningPlugin.setMapDisplayZoomButtonVisibility(false);
 	}
 	
 	public void showDisplayZoomButtons(){
 		displayZoomInButton.setVisibility(View.VISIBLE);
 		displayZoomOutButton.setVisibility(View.VISIBLE);
-		settings.setMapDisplayZoomButtonVisibility(true);		
+		planningPlugin.setMapDisplayZoomButtonVisibility(true);		
 	}
 	
 	public OsmandMapTileView getPlanningView() {

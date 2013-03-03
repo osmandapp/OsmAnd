@@ -17,8 +17,10 @@ import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.planning.PlanningPlugin;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
@@ -246,7 +248,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		}
 
 		if (!getSettings().USE_HIGH_RES_MAPS.get() ) {	//Use the high resolution option to enable display zooming
-			res *= settings.getDisplayScaleFactor();	//apply user-selected zoom factor - hi-res screens can have tiny text for map tile images
+			if(OsmandPlugin.getEnabledPlugin(PlanningPlugin.class) != null){
+			//apply user-selected zoom factor - hi-res screens can have tiny text for map tile images
+				res *= OsmandPlugin.getEnabledPlugin(PlanningPlugin.class).getDisplayScaleFactor();
+			}
 		}
 		
 		return res;
