@@ -133,6 +133,8 @@ public class MapInfoControls {
 				ii.visibleModes.add(ms);
 			}
 		}
+		if (m != null)
+			m.setContentDescription(m.getContext().getString(messageId));
 		ii.drawable = drawable;
 		ii.messageId = messageId;
 		ii.m = m;
@@ -174,6 +176,8 @@ public class MapInfoControls {
 				ii.visibleCollapsible.add(ms);
 			}
 		}
+		if (m != null)
+			m.setContentTitle(m.getContext().getString(messageId));
 		ii.drawable = drawable;
 		ii.messageId = messageId;
 		ii.m = m;

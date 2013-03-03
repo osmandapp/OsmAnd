@@ -1122,4 +1122,7 @@
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
     <string name="index_name_openmaps">OpenMaps - Европа</string>
-    </resources>
+    <string name="item_checked">отмечено</string>
+    <string name="item_unchecked">не отмечено</string>
+    <string name="map_view">Карта</string>
+</resources>

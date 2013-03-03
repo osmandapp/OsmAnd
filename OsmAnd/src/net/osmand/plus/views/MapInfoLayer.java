@@ -729,22 +729,16 @@ public class MapInfoLayer extends OsmandMapLayer {
 		ImageView configuration = new ImageView(map);
 		Drawable drawable = view.getResources().getDrawable(R.drawable.widget_config);
 		configuration.setBackgroundDrawable(drawable);
-		configuration.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				openViewConfigureDialog();
-			}
-		});
 		fl.addView(configuration, fparams);
 		fparams = new FrameLayout.LayoutParams(drawable.getMinimumWidth(), drawable.getMinimumHeight());
 		progressBar = new View(view.getContext());
-		progressBar.setOnClickListener(new View.OnClickListener() {
+		fl.addView(progressBar, fparams);
+		fl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				openViewConfigureDialog();
 			}
 		});
-		fl.addView(progressBar, fparams);
 		return fl;
 	}
 	private View createGlobus(){
@@ -940,8 +934,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 						text += "..";
 					}
 					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
+					setContentDescription(text);
 				} else {
 					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
+					setContentDescription(getResources().getString(R.string.map_widget_top_text));
 				}
 				setText(text);
 				invalidate();
