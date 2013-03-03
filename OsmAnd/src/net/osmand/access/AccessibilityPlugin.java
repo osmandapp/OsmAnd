@@ -75,12 +75,15 @@ public class AccessibilityPlugin extends OsmandPlugin {
 		accessibilityModePreference = activity.createListPreference(settings.ACCESSIBILITY_MODE, entries, AccessibilityMode.values(),
 				R.string.accessibility_mode, R.string.accessibility_mode_descr);
 		accessibilityModePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			private final OnPreferenceChangeListener committer = accessibilityModePreference.getOnPreferenceChangeListener();
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				if (committer != null)
+					committer.onPreferenceChange(preference, newValue);
 				PreferenceCategory accessibilityOptions = ((PreferenceCategory)(screen.findPreference("accessibility_options")));
 				if (accessibilityOptions != null)
 					accessibilityOptions.setEnabled(app.getInternalAPI().accessibilityEnabled());
-				accessibilityModePreference.setSummary(app.getString(R.string.accessibility_mode_descr) + "  [" + settings.ACCESSIBILITY_MODE.get().toHumanString(app) + "]");
+				preference.setSummary(app.getString(R.string.accessibility_mode_descr) + "  [" + settings.ACCESSIBILITY_MODE.get().toHumanString(app) + "]");
 				return true;
 			}
 		});
@@ -97,9 +100,12 @@ public class AccessibilityPlugin extends OsmandPlugin {
 		directionStylePreference = activity.createListPreference(settings.DIRECTION_STYLE, entries, RelativeDirectionStyle.values(),
 				R.string.settings_direction_style, R.string.settings_direction_style_descr);
 		directionStylePreference.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+			private final OnPreferenceChangeListener committer = directionStylePreference.getOnPreferenceChangeListener();
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				directionStylePreference.setSummary(app.getString(R.string.settings_direction_style_descr) + "  [" + settings.DIRECTION_STYLE.get().toHumanString(app) + "]");
+				if (committer != null)
+					committer.onPreferenceChange(preference, newValue);
+				preference.setSummary(app.getString(R.string.settings_direction_style_descr) + "  [" + settings.DIRECTION_STYLE.get().toHumanString(app) + "]");
 				return true;
 			}
 		});
