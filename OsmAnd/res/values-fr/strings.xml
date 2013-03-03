@@ -1212,4 +1212,7 @@
 	<string name="prefer_in_routing_title">Préférences</string>
 	<string name="prefer_in_routing_descr">Autoroutes de préférence</string>
     <string name="av_def_action_choose">Sélectionner sur demande</string>
+    <string name="item_checked">vérifié</string>
+    <string name="item_unchecked">non vérifié</string>
+    <string name="map_view">Carte</string>
     </resources>
