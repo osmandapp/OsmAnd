@@ -17,7 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class PluginsActivity extends OsmandListActivity {
-	
+
+	public static final int ACTIVE_PLUGINS_LIST_MODIFIED = 1;
+
 	private List<OsmandPlugin> availablePlugins;
 	private Set<String> clickedPlugins = new LinkedHashSet<String>();
 	private Set<String> restartPlugins = new LinkedHashSet<String>();
@@ -52,6 +54,7 @@ public class PluginsActivity extends OsmandListActivity {
 			} else {
 				restartPlugins.add(item.getId());
 			}
+			setResult(ACTIVE_PLUGINS_LIST_MODIFIED);
 		}
 		clickedPlugins.add(item.getId());
 		getListAdapter().notifyDataSetChanged();
