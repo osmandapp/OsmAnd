@@ -56,9 +56,9 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private Paint trailingPointsPaint;	//For measurement points following selected point
 	private DisplayMetrics dm;
 	public TextView textView;
-	private int BASE_TEXT_SIZE = 170;
-	private int SHADOW_OF_LEG = 5;
-	private int CLOSE_BTN = 6;
+	private final int BASE_TEXT_SIZE = 170;
+	private final int SHADOW_OF_LEG = 5;
+	private final int CLOSE_BTN = 6;
 	private Drawable boxLeg;
 	private float scaleCoefficient = 1;
 	private Rect textPadding;
@@ -94,6 +94,8 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 	private LayoutParams lp;
 	private TextPaint zoomTextPaint;
 	private int baseTextSize = 0;
+	private int closeBtn = 0;
+	private int shadowOfLeg = 0;
 	
 	public PlanningLayer(MapActivity activity){
 		this.activity = activity;
@@ -141,8 +143,8 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 		}
 			
 		baseTextSize = (int) (BASE_TEXT_SIZE * scaleCoefficient);
-		SHADOW_OF_LEG = (int) (SHADOW_OF_LEG * scaleCoefficient);
-		CLOSE_BTN = (int) (CLOSE_BTN * scaleCoefficient);	
+		shadowOfLeg = (int) (SHADOW_OF_LEG * scaleCoefficient);
+		closeBtn = (int) (CLOSE_BTN * scaleCoefficient);	
 		boxLeg = view.getResources().getDrawable(R.drawable.box_leg);
 		boxLeg.setBounds(0, 0, boxLeg.getMinimumWidth(), boxLeg.getMinimumHeight());	
 		textView = new TextView(view.getContext());
@@ -215,7 +217,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			int y = view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude());
 			
 			int tx = x - boxLeg.getMinimumWidth() / 2;
-			int ty = y - boxLeg.getMinimumHeight() + SHADOW_OF_LEG;
+			int ty = y - boxLeg.getMinimumHeight() + shadowOfLeg;
 			canvas.translate(tx, ty);
 			boxLeg.draw(canvas);
 			canvas.translate(-tx, -ty);
@@ -228,7 +230,7 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				}
 				canvas.translate(x - textView.getWidth() / 2, ty - textView.getBottom() + textPadding.bottom - textPadding.top);
 				textView.draw(canvas);
-				canvas.translate(textView.getWidth() - closeButton.getWidth(), CLOSE_BTN / 2);
+				canvas.translate(textView.getWidth() - closeButton.getWidth(), closeBtn / 2);
 				closeButton.draw(canvas);					
 			}
 		}
@@ -414,10 +416,10 @@ public class PlanningLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 			int x = (int) (px - view.getRotatedMapXForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			int y = (int) (py - view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			x += bs.width() / 2;
-			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
-			int dclosex = x - bs.width() + CLOSE_BTN + closes.width();
-			int dclosey = y + CLOSE_BTN;
-			if(closes.intersects(dclosex - CLOSE_BTN, dclosey - CLOSE_BTN, dclosex + CLOSE_BTN, dclosey + CLOSE_BTN)) {
+			y += bs.height() + boxLeg.getMinimumHeight() - shadowOfLeg;
+			int dclosex = x - bs.width() + closeBtn + closes.width();
+			int dclosey = y + closeBtn;
+			if(closes.intersects(dclosex - closeBtn, dclosey - closeBtn, dclosex + closeBtn, dclosey + closeBtn)) {
 				return 2;
 			} else if (bs.contains(x, y)) {
 				return 1;
