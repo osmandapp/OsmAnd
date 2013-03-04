@@ -865,7 +865,6 @@
     <string name="safe_mode">Felsäkert läge</string>
     <string name="native_library_not_running">Programmet körs i felsäkert läge (inaktivera det i Inställningar).</string>
     <string name="background_service_is_enabled_question">Vilolägestjänsten körs fortfarande. Vill du avbryta den?</string>
-    <string name="osmodroid_plugin_description"/>
     <string name="osmodroid_plugin_name">OsMoDroid-plugin</string>
 	<string name="edit_filter_create_message">Filter {0} har skapats</string>
 	<string name="poi_error_info_not_loaded">Info om noden laddades inte</string>
