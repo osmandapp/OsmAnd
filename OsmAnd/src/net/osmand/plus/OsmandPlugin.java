@@ -85,7 +85,7 @@ public abstract class OsmandPlugin {
 		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
-		
+		installedPlugins.add(new PlanningPlugin(app));		//Comment this out to require use of plugin installer
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
