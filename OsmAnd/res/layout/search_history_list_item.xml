@@ -15,6 +15,7 @@
 
     <ImageButton
         android:id="@+id/remove"
+        android:contentDescription="@string/default_buttons_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/reset"
