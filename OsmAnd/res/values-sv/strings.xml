@@ -22,7 +22,7 @@
 <string name="use_compass_navigation_descr">Använd kompassen när ingen riktning upptäcks på annat sätt</string>
 <string name="use_compass_navigation">Använd kompass</string>
 <string name="avoid_motorway">Undvik motorvägar</string>
-<string name="auto_zoom_map_descr">Autozooma på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
+<string name="auto_zoom_map_descr">Auto-zooma på kartan beroende på din hastighet (när kartan är synkroniserad med aktuell position)</string>
 <string name="auto_zoom_map">Automatisk kartzoomning</string>
 <string name="tip_recent_changes_0_8_3_t">"Förändringar i 0.8.3:\n\t* Waypoints\n\t* Förbättrad vägvisning\n\t* Inställning för att undvika motorvägar när man bygger en rutt\n\t* Lagt till ytterligare en typ av väg för cyklar till kartan (Cycleway=track)\n\t* Buggfixar "</string>
 <string name="snap_to_road_descr">Fäst positionen på vägen under navigering</string>
@@ -106,7 +106,7 @@
 <string name="show_speed_limits">Visa hastighetsgränser</string>
 <string name="avoid_toll_roads">Undvik betalvägar</string>
 <string name="continue_follow_previous_route_auto">En tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
-<string name="route_updated_loc_found">Rutten kommer att beräknas så snart positionen hittas</string>
+<string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>
 <string name="osmand_parking_hours">timmar</string>
 <string name="osmand_parking_minutes">minuter</string>
 <string name="osmand_parking_position_description_add_time">Bilen parkerades:</string>
@@ -385,7 +385,7 @@
 <string name="auto_follow_route_never">Aldrig</string>
 <string name="auto_follow_route_navigation">Auto-centrera nav. endast</string>
 <string name="auto_follow_route_navigation_descr">Auto-centrera kartan endast vid navigering.</string>
-<string name="auto_follow_location_enabled">Auto-centrera kartvyn i bruk.</string>
+<string name="auto_follow_location_enabled">Auto-centrera aktuell kartvy.</string>
 <string name="pref_vector_rendering">Alternativ specifika för vektorrenderaren</string>
 <string name="pref_overlay">Överlägg/Underlägg</string>
 <string name="pref_raster_map">Inställningar för kartkällor</string>
@@ -639,8 +639,8 @@
 	<string name="deselect_all">Avmarkera alla</string>
 	<string name="select_all">Markera alla</string>
 	<string name="reload">Uppdatera</string>
-	<string name="fast_route_mode">Snabbaste rutten</string>
-	<string name="fast_route_mode_descr">"Aktivera för att beräkna snabbaste rutten eller inaktivera för kortaste rutten "</string>
+	<string name="fast_route_mode">Snabbaste vägen</string>
+	<string name="fast_route_mode_descr">Aktivera för att beräkna snabbaste vägen eller inaktivera för kortaste vägen</string>
 	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
@@ -743,7 +743,7 @@
 	<string name="voice_data_not_supported">Version som inte stöds av röstdata</string>
 	<string name="voice_data_corrupted">Specificerade röstdata är skadade</string>
 	<string name="voice_data_unavailable">"Valda röstdata  är inte tillgängliga"</string>
-	<string name="stop_routing">Stoppa navigeringen.</string>
+	<string name="stop_routing">Stoppa navigeringen</string>
 	<string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
 	<string name="unzipping_file">Packar upp fil…</string>
@@ -986,7 +986,7 @@
 	<string name="error_occurred_saving_gpx">Ett fel uppstod när GPX sparades</string>
 	<string name="error_calculating_route">Fel vid ruttberäkningen</string>
 	<string name="error_calculating_route_occured">Ett fel uppstod vid ruttberäkningen</string>
-	<string name="empty_route_calculated">Fel: den beräknade rutten är tom</string>					
+	<string name="empty_route_calculated">Fel: Den beräknade rutten är tom</string>					
 	<string name="new_route_calculated_dist">Ny rutt beräknad, avstånd</string>
 	<string name="invalid_locations">Koordinaterna är ogiltiga!</string>
 	<string name="go_back_to_osmand">Tillbaka till OsmAnd-kartan</string>
@@ -1062,9 +1062,9 @@
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
 	<string name="get_directions">Vägvisning</string>
-	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för att beräkna exakta rutter utan småfel. Den är mycket begränsad av avståndet och använder inte inbyggt bibliotek.</string>
+	<string name="precise_routing_mode_descr">Aktivera exakt ruttning för beräkning utan småfel. Mycket begränsad av avståndet och använder inte inbyggt bibliotek.</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, long %2$.3f</string>
-    <string name="non_optimal_route_calculation">Beräkna möjligt icke-optimal rutt över långa sträckor</string>
+    <string name="non_optimal_route_calculation">Beräkna kanske icke-optimal rutt över långa avstånd</string>
 	<string name="incremental_search_street">Sök gator stegvis</string>
 	<string name="incremental_search_building">Sök byggnader stegvis</string>
 	<string name="show_view_angle">Visa körriktning</string>
