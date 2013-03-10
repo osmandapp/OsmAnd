@@ -1157,7 +1157,7 @@
     <string name="download_hillshade_item">Cieniowanie wzniesień</string>
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
-    <string name="index_name_openmaps">Openmaps EU</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2: "</string>
     <string name="max_speed_none">brak</string>
     <string name="prefer_in_routing_descr">Preferuj autostrady</string>
