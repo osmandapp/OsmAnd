@@ -1071,7 +1071,7 @@
     <string name="rendering_attr_showRoadMaps_description">Selecteer wanneer wegenkaarten moeten worden weergegeven:</string>
 	<string name="rendering_attr_showRoadMaps_name">Wegenkaarten</string>
     <string name="download_roads_only_item">Wegen</string>
-    <string name="download_regular_maps">Normale kaarten</string>
+    <string name="download_regular_maps">Volledige kaarten</string>
     <string name="download_roads_only_maps">Wegenkaarten</string>
     <string name="incomplete_locale">incompleet</string>
 	<string name="no_buildings_found">Geen gebouwen gevonden.</string>
@@ -1086,7 +1086,7 @@
 \n\tEen nauwkeuriger benadering voor deze systemen is het EGM96-systeem. OsmAnd kan de hoogte nu ook weergeven in het EGM96-systeem.
 \n\tHiervoor kan je de World Altitude Correction (WW15MGH.DAC) downloaden via de Offline Data Manager (het origineel staat op http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Toon geen grenzen</string>
+    <string name="rendering_attr_noAdminboundaries_name">Verberg grenzen</string>
 	<string name="rendering_attr_noAdminboundaries_description">Geen weergave van regio- en provinciegrenzen (grensniveaus 5-9)</string>
 	<string name="osmodroid_plugin_old_ver_not_supported">De OsMoDroid plugin is een oude versie en moet ge-update worden.</string>
     <string name="osmodroid_plugin_description">OsMoDroid plugin is een OsmAnd extensie voor de OsModroid applicatie voor live tracking functies. Informatie over de service is beschikbaar op http://esya.ru.</string>
