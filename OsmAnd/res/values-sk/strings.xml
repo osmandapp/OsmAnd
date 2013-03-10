@@ -1124,7 +1124,7 @@
 \n\tNa lepšie aproximácie týchto miestnych systémov sa používa referenčný systém EGM96. OsmAnd teraz tiež podporuje automatické zobrazovanie nadmorských výškach v systéme EGM96.
 \n\tZa týmto účelom jednoducho stiahnite súbor WW15MGH.DAC cez Offline Data Manager (pôvodný je v http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin má starú verziu a je potrebné ju aktualizovať.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid plugin</string>
+    <string name="osmodroid_plugin_description"/>
     <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
 	<string name="index_srtm_parts">časti</string>
     <string name="index_srtm_ele">Vrstevnice</string>
@@ -1199,4 +1199,9 @@
     <string name="prefer_motorways">Uprednostniť diaľnice</string>
 	<string name="prefer_in_routing_title">Uprednostniť...</string>
 	<string name="prefer_in_routing_descr">Uprednostnenie diaľnic</string>
+    <string name="item_checked">označené</string>
+    <string name="item_unchecked">neoznačené</string>
+    <string name="map_view">Mapa</string>
+    <string name="tip_recent_changes_1_2_t">"Zmeny vo verzii 1.2: "</string>
+    <string name="av_def_action_choose">Vybrať pri požiadaní</string>
     </resources>
