@@ -21,7 +21,9 @@ echo "OsmAnd pid: $pid"
 # Launch gdbserver on target
 adb shell run-as $package /data/data/$package/lib/gdbserver :5039 --attach $pid &
 
+# Forward port
+adb forward tcp:5039 tcp:5039
+
 # Launch gdb on host
-echo "Execute in gdb following line manually"
-echo "\ttarget remote :5039"
+echo "Execute manually in gdb: target remote :5039"
 "$ANDROID_NDK/toolchains/arm-linux-androideabi-4.7/prebuilt/windows/bin/arm-linux-androideabi-gdb" $nativelib
