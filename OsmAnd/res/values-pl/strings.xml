@@ -683,7 +683,7 @@
   <string name="osmand_background_plugin_description">Pokaż ustawienia do konfiguracji zapisywanie trasy oraz nawigację w trybie oszczędzania zasilania (wyłączonego ekranu) przez cykliczne budzenie urządzenia GPS.</string>
   <string name="osmand_accessibility_description">Pokaż ustawienia do konfiguracji specjalnych ustawień ułatwiających dostęp.</string>
   <string name="extra_settings">Ustawienia zaawansowane</string>
-  <string name="osmand_monitoring_description">Pokaż ustawienia do konfiguracji zapisywania Twoich wycieczek do plików GPX lub wysyłanie ich na bieżąco do serwera webowego.</string>
+  <string name="osmand_monitoring_description">Pokaż ustawienia ułatwiające zapisywanie swoich wycieczek do plików GPX lub online za pomocą usługi WWW.</string>
   <string name="osmand_extra_settings_description">Pokaż ustawienia do konfiguracji zaawansowanych opcji konfiguracyjnych map (jak zwiększenie detali map) oraz opcji specyficznych dla niektórych urządzeń.</string>
   <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości rysowania.</string>
   <string name="plugins_screen">Wtyczki</string>
@@ -778,7 +778,7 @@
   <string name="offline_edition">Edycja w trybie offline</string>
   <string name="offline_edition_descr">Zawsze edytuj w trybie offline</string>
   <string name="tip_recent_changes_0_7_1_t">"Zmiany w 0.7.1:
-\n\t- Edycja POI w trybie offline\n\t- Opcja zapisywania ścieżki na bieżąco - cykliczne wysyłanie informacji o pozycji do usługi sieciowej (przeczytaj jak ustawić własną usługę sieciową w artykułach HowTo)\n\t- Pokazywanie aktualnie nagranego śladu na mapie\n\t- Wykrywanie kierunku poruszania: Nakazanie \'Zawróć\' podczas poruszania w przeciwnym kierunku lub po przeoczeniu zakrętu\n\t- Nowa podpowiedź głosowa - \'Trasa przeliczona\'
+\n\t- Edycja POI w trybie offline\n\t- Opcja zapisywania ścieżki online - cykliczne wysyłanie informacji o pozycji do usługi sieciowej (przeczytaj jak ustawić własną usługę sieciową w artykułach HowTo)\n\t- Pokazywanie aktualnie nagranego śladu na mapie\n\t- Wykrywanie kierunku poruszania: Nakazanie \'Zawróć\' podczas poruszania w przeciwnym kierunku lub po przeoczeniu zakrętu\n\t- Nowa podpowiedź głosowa - \'Trasa przeliczona\'
 \n\t- Optyczne wskazanie bliskości zakrętu w odległości nie większej niż 100m prze zmianę koloru strzałki\n\t- Zdezaktywowane pliki indeksów są teraz pokazywane w ekranie pobrań w kolorze ciemno zielonym i ciemno niebieskim\n\t- Inne zmiany "</string>
   <string name="local_openstreetmap_uploading">Wysyłanie…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs zostało wysłanych</string>
@@ -790,11 +790,11 @@
   <string name="local_openstreetmap_settings">Lokalnie zapisane POI/Bugs OSM</string>
   <string name="local_openstreetmap_settings_descr">Pokaż i zarządzaj POI/Bugs OSM zapisanymi w lokalnej bazie danych</string>
   <string name="live_monitoring_descr">Wysyłaj informacje o pozycji do wybranej usługi sieciowej</string>
-  <string name="live_monitoring">Śledzenie online na bieżąco</string>
+  <string name="live_monitoring">Śledzenie online</string>
   <string name="live_monitoring_interval_descr">Określ interwał pomiędzy wysyłaniem danych</string>
-  <string name="live_monitoring_interval">Interwał pomiędzy wysyłaniem danych</string>
+  <string name="live_monitoring_interval">Interwał wysyłania danych</string>
   <string name="live_monitoring_url_descr">Określ adres usługi webowej używając następujących parametrów ({n} określa dany parametr): {0}=lat, {1}=lon, {2}=znacznik czasu, {3}=HDOP, {4}=wysokość, {5}=prędkość</string>
-  <string name="live_monitoring_url">Adres sieciowy śledzenia na bieżąco</string>
+  <string name="live_monitoring_url">Adres śledzenia online</string>
   <string name="gpx_monitoring_disabled_warn">Proszę włączyć ustawienia \'Zapisuj ślad GPX\'.</string>
   <string name="show_current_gpx_title">Pokaż aktualną ścieżkę</string>
   <string name="tip_recent_changes_0_7_0_t">"Zmiany w 0.7.0:
@@ -847,7 +847,7 @@
   <string name="rendering_attr_appMode_name">Tryb rysowania</string>
   <string name="rendering_attr_appMode_description">Optymalizacja map dla wybranego profilu użytkownika</string>
   <string name="rendering_attr_contourLines_description">Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (może być wymagany plik STRM):</string>
-  <string name="rendering_attr_contourLines_name">Pokaż kontury</string>
+  <string name="rendering_attr_contourLines_name">Pokaż poziomice</string>
   <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
   <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
   <string name="route_roundabout">Rondo: wybierz %1$d zjazd</string>
@@ -996,7 +996,7 @@
 \n\t* Mapa nie traci pozycji po przerwaniach
 \n\t* Usługa w tle podczas nawigacji "</string>
     <string name="gps_not_available">Włącz w ustawieniach odbiornik GPS</string>
-    <string name="map_widget_monitoring_services">Usługi monitorowania</string>
+    <string name="map_widget_monitoring_services">Usługi rejestrowania</string>
 	<string name="no_route">Brak trasy</string>
 	<string name="delete_target_point">Usuń punkt pośredni</string>
 	<string name="target_point">Punkt pośredni %1$s</string>
@@ -1025,7 +1025,7 @@
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (Open Street Maps Android) OsmAnd to aplikacja open source do nawigacji używająca szerokiej gamy otwartych danych mapowych. Wszystkie dane, zarówno map rastrowych jak i wektorowych, mogą być przechowywane na karcie pamięci telefonu do użytku offline. OsmAnd posiada również obsługę wyznaczania tras, zarówno w trybie offline jak i online, oraz funkcje nawigacji głosowej. OsmAnd+ jest aplikacją płatną - kupując ją wspierasz projekt, fundujesz rozwój nowych funkcji, oraz otrzymujesz najnowsze aktualizacje. Niektóre z podstawowych funkcji to: - pełną funkcjonalność offline (konfigurowalny folder, w którym zapisywane są pobierane mapy wektorowe i rastrowe) - dostępne do pobrania skrócone mapy wektorowe całego świata - brak limitu ilości map pobranych bezpośrednio w aplikacji - funkcje Wikipedii offline (pobieranie z Wikipedii informacji o ciekawych miejscach), idealne przy zwiedzaniu - możliwość nakładania wielu warstw map, np. ścieżek GPX lub tras nawigacji, ciekawych miejsc, Ulubionych, linii konturowych, przystanków komunikacji miejskiej z możliwością określenia przezroczystości poszczególnych warstw - wyszukiwanie adresów i miejsc bez konieczności łączenia się z Internetem - obliczanie krótkich tras bez połączenia z Internetem (eksperymentalnie) - tryby samochodowy, rowerowy i pieszy wraz z automatycznym przełączanie widoków dzień/noc - opcjonalne powiększanie mapy w zależności od prędkości poruszania się - opcjonalne dopasowywanie mapy do kompasu lub kierunku poruszania się - opcjonalne wskazywanie pasa jazdy oraz ograniczeń prędkości - głosy zarejestrowane i generowane automatycznie "</string>
 	<string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 	<string name="live_monitoring_mode_off">Uruchom\nśledzenie online</string>
-	<string name="live_monitoring_mode_on">Zatrzymaj\nzapisywanie na bieżąco ścieżki</string>
+	<string name="live_monitoring_mode_on">Zatrzymaj\nśledzenie online</string>
 	<string name="map_widget_fluorescent">Odblaskowe trasy</string>
 	<string name="map_widget_show_ruler">Linijka</string>
 	<string name="map_widget_appearance">Różne:</string>
@@ -1044,7 +1044,7 @@
     <string name="map_widget_show_destination_arrow">Pokaż kierunek do celu</string>
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
 	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
-    <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług logowania (logowanie, śledzenie na bieżąco)</string>
+    <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
     <string name="local_index_items"/>
 	<string name="no_buildings_found">Nie znaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj miejscowości/kodów pocztowych</string>
@@ -1071,13 +1071,13 @@
     <string name="rendering_attr_noAdminboundaries_name">Ukryj granice</string>
 	<string name="rendering_attr_noAdminboundaries_description">Wyłącz wyświetlanie granic regionalnych (poziomy administracyjne 5-9)</string>
     <string name="osmodroid_plugin_old_ver_not_supported">Wykryto starą wersję pluginu OsMoDroid, która musi zostać zaktualizowana.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid jest wtyczką dodającą do programu OsmAnd funkcje śledzenia na żywo. Informacje na temat usługi dostępne są pod adresem http://esya.ru.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid jest wtyczką dodającą do OsmAnd funkcje śledzenia online. Informacje na temat usługi dostępne są pod adresem http://esya.ru.</string>
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
     <string name="osmodroid_plugin_name">OsMoDroid</string>
 	<string name="tip_altitude_offset">Wyświetlanie wysokości - korygowanie przesunięcia</string>
 	<string name="monitoring_control_start">start</string>
     <string name="tip_altitude_offset_t">"\tWiększość urządzeń GPS określa wysokość na podstawie elipsoidowego systemu odniesień WGS84, z którego konwersja na inne, regionalnie używane systemy, wymaga korekcji na podstawie aktualnej pozycji.\n\tLepszym przybliżeniem dla takich systemów regionalnych jest odniesienie EGM96. OsmAnd obsługuje teraz także automatyczne wyświetlanie wysokości w systemie EGM96.\n\tW celu osiągnięcia tego wystarczy pobrać plik WW15MGH.DAC przez Zarządzanie danymi (oryginał jest tutaj: http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="download_srtm_maps">Mapy poziomicowe</string>
+    <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
     <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Zarządzanie danymi -&gt; Menu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
@@ -1108,9 +1108,9 @@
     <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
     <string name="recording_delete_confirm">Czy chcesz usunąć to nagranie?</string>
     <string name="tip_recent_changes_1_1_0_t">"Zmiany w 1.1.0:
-\n\t* Plugin kalkulatora odległości
-\n\t* Plugin notatek dźwiękowych
-\n\t* Plugin wyświetlający poziomice
+\n\t* Wtyczka kalkulatora odległości
+\n\t* Wtyczka notatek dźwiękowych
+\n\t* Wtyczka wyświetlająca poziomice
 \n\t* Poprawki błędów
 \n\t* Opcja \\\'widok turystyczny\\\' z większą ilością szczegółów, nowymi stylami dróg, większym kontrastem oraz opcją dla wspinaczek alpejskich (skala SAC)
 \n\t* Korekcja przesunięcia EGM96 dla odczytów wysokości "</string>
@@ -1124,7 +1124,7 @@
     <string name="av_control_stop">zatrzymaj</string>
     <string name="av_control_start">nagrywaj</string>
     <string name="map_widget_av_notes">Notatki audio</string>
-    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd dla konturów offline</string>
+    <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     <string name="use_clear_distance_measurement">Kliknij ponownie, aby wyczyścić punkty pomiarów.</string>
     <string name="use_distance_measurement">Kliknij, aby zaznaczyć punkt. Naciśnij i przytrzymaj, by usunąć poprzedni punkt. Kliknij na widżecie pomiarów, aby wyjść.</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
@@ -1132,11 +1132,11 @@
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
     <string name="animate_routing_using_gpx">Czy chcesz użyć istniejącego pliku GPX?</string>
     <string name="intermediate_points_change_order">Zmień kolejność</string>
-    <string name="srtm_paid_version_msg">Rozważ zakup wtyczki Kontury w Markecie, aby wspomóc dalszy rozwój.</string>
-    <string name="srtm_paid_version_title">Wtyczka Kontury</string>
+    <string name="srtm_paid_version_msg">Rozważ zakup wtyczki dodającej poziomice w Google Play, aby wspomóc dalszy rozwój.</string>
+    <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">Ta wtyczka dostarcza kontury, które mogą być wyświetlane na mapach offline w OsmAnd. Światowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Ta wtyczka dostarcza poziomice, które mogą być wyświetlane na mapach offline w OsmAnd. Światowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
     <string name="recording_context_menu_show">Pokaż</string>
     <string name="recording_photo_description">Zdjęcie %1$s w %2$s</string>
     <string name="av_def_action_picture">Zrób zdjęcie</string>
@@ -1151,7 +1151,7 @@
 	<string name="tip_recent_changes_1_1_2_t">"Zmiany w 1.1.2:
 \n\t* Rozszerzenie wtyczki audio/video (zdjęcia z danymi EXIF)
 \n\t* Poprawki w funkcjonalności wtyczki kontur
-\n\t* Paczki cieniowania wzniesień dla wtyczki kontur
+\n\t* Paczki cieniowania wzniesień dla wtyczki dodającej poziomice
 \n\t* Poprawki błędów i nawigacji "</string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
     <string name="download_hillshade_item">Cieniowanie wzniesień</string>
