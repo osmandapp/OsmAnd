@@ -913,7 +913,7 @@
     <string name="recording_context_menu_play">Spela upp</string>
     <string name="recording_description">Inspelning %1$s %2$s av %3$s</string>
     <string name="recording_default_name">spelar in</string>
-    <string name="av_control_stop">AV</string>
+    <string name="av_control_stop">Stoppa</string>
     <string name="map_widget_av_notes">Ljud-/Videoanteckningar</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-plugin för höjdkurvor offline</string>
     <string name="osmand_distance_plugin_name">Avståndsberäknare</string>
@@ -932,7 +932,7 @@
 \n\t* \'Touring View\' - kartutseende med mer kartdetaljer, nytt utseende för vägar, mer kontrast och fjällvandringsalternativ (SAC-skala)
 \n\t* EGM96 geoid offsetkorrigering för GPS-höjdavläsningar</string>
     <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
-    <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkter.</string>
+    <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkterna.</string>
     <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
     <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd plats ...\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
@@ -1087,4 +1087,5 @@
     <string name="av_def_action_choose">Välj vid användning</string>
     <string name="osmodroid_plugin_description">OsMoDroid är ett OsmAnd-tillägg till appen OsModroid för spårningsfunktioner online. Information om tjänsten finns på http://esya.ru.</string>
     <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>
+    <string name="osmand_srtm_long_description_1000_chars">Denna plugin erbjuder höjdkurvor som kan visas på OsmAnds offline-kartor. Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems).</string>
     </resources>
