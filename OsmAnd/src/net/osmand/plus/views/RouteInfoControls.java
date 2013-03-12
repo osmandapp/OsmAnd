@@ -230,6 +230,7 @@ public class RouteInfoControls {
 							long toFindTime = time * 1000 + System.currentTimeMillis();
 							if (Math.abs(toFindTime - cachedLeftTime) > 30000) {
 								cachedLeftTime = toFindTime;
+								setContentTitle(getContext().getString(R.string.access_arrival_time));
 								if (DateFormat.is24HourFormat(ctx)) {
 									setText(DateFormat.format("k:mm", toFindTime).toString(), null); //$NON-NLS-1$
 								} else {
@@ -243,6 +244,7 @@ public class RouteInfoControls {
 								cachedLeftTime = time;
 								int hours = time / (60 * 60);
 								int minutes = (time / 60) % 60;
+								setContentTitle(getContext().getString(R.string.map_widget_time));
 								setText(String.format("%d:%02d", hours, minutes), null); //$NON-NLS-1$
 								return true;
 							}
