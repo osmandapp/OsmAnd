@@ -1245,4 +1245,8 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 	<string name="prefer_in_routing_descr">Teikti pirmenybę greitkeliams</string>
     <string name="max_speed_none">neribojamas</string>
     <string name="tip_recent_changes_1_2_t">"Pakeitimai 1.2 versijoje: "</string>
+    <string name="item_checked">patikrinta</string>
+    <string name="item_unchecked">nepatikrinta</string>
+    <string name="map_view">Žemėlapis</string>
+    <string name="av_def_action_choose">Pasirinkti paprašius</string>
     </resources>
