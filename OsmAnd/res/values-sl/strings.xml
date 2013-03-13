@@ -1152,4 +1152,5 @@
     <string name="item_checked">izbrano</string>
     <string name="item_unchecked">ni izbrano</string>
     <string name="map_view">Zemljevid</string>
+    <string name="access_arrival_time">Čas prihoda</string>
     </resources>
