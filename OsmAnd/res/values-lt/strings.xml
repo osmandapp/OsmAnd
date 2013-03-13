@@ -1249,4 +1249,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="item_unchecked">nepatikrinta</string>
     <string name="map_view">Žemėlapis</string>
     <string name="av_def_action_choose">Pasirinkti paprašius</string>
+    <string name="access_arrival_time">Atvykimo laikas</string>
     </resources>
