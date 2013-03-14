@@ -1095,7 +1095,7 @@
     <string name="map_widget_show_destination_arrow">Monter la direction de la destination</string>
     <string name="enable_plugin_monitoring_services">Activer les greffons de suivi (tracking, live tracking) pour utiliser les services de surveillance</string>
     <string name="non_optimal_route_calculation">Calculer une route éventuellement non optimale pour les longs trajets</string>
-    <string name="rendering_attr_roadColors_description">Sélectionnez un thème de couleurs pour les routes :</string>
+    <string name="rendering_attr_roadColors_description">Sélectionner un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
     <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Google Play ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
@@ -1215,5 +1215,5 @@
     <string name="item_checked">vérifié</string>
     <string name="item_unchecked">non vérifié</string>
     <string name="map_view">Carte</string>
-    <string name="access_arrival_time">heure d\'arrivée</string>
+    <string name="access_arrival_time">Heure d\'arrivée</string>
     </resources>
