@@ -1088,4 +1088,8 @@
     <string name="osmodroid_plugin_description">OsMoDroid är ett OsmAnd-tillägg till appen OsModroid för spårningsfunktioner online. Information om tjänsten finns på http://esya.ru.</string>
     <string name="enable_plugin_monitoring_services">Aktivera spårningsplugin för att använda positionsloggningstjänster (GPX-inspelning, online-spårning)</string>
     <string name="osmand_srtm_long_description_1000_chars">Denna plugin erbjuder höjdkurvor som kan visas på OsmAnds offline-kartor. Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems).</string>
-    </resources>
+    <string name="access_arrival_time">Ankomsttid</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="tip_recent_changes_1_0_0_t">"\t* Förbättrad ruttning: snabbare, mer exakt, upp till 250 km\n\t* Introduktion av kartor med bara vägar\n\t* Kartan tappar inte positionslåsning efter avbrott\n\t* Aktivera bakgrundsläge under navigering "</string>
+    <string name="tip_recent_changes_0_6_6_t">"\t- Text till tal-motor för röstnavigering\n\t- Kartrenderaren mer detaljerad\n\t- Baskarta för hela världen inbyggd i appen\n\t- Finjustering av offline-navigering (fortfarande experimentell)\n\t- Alternativ för GPX-navigering\n\t- Uppdatering av gränssnittet och större buggfixar "</string>
+	</resources>
