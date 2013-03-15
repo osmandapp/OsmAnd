@@ -1221,4 +1221,5 @@
     <string name="item_checked">segnato</string>
     <string name="item_unchecked">non segnato</string>
     <string name="map_view">Mappa</string>
+    <string name="access_arrival_time">Orario arrivo</string>
     </resources>
