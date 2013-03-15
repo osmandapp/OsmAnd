@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -100,7 +100,7 @@
   <string name="osmand_development_plugin_description">Wys stellings vir ontwikkeling en ontfoutingsfunksies bv. bewegende navigasie of beeldvertoon werkverrigting.</string>
   <string name="plugins_screen">Inlegmodule bestuurder</string>
   <string name="select_plugin_to_activate">Druk op `n inlegmodule om dit aan of af te skakel. (Dit mag nodig wees om OsmAnd oor te begin.)</string>
-  <string name="prefs_plugins_descr">Inlegmodule stel die spesialis toestand in werking en voorsien ekstra funksionaliteit soos teël kaarte, natrekking, sluimertoestand werking, toeganklikheidstellings, en andere.</string>
+  <string name="prefs_plugins_descr">Inlasmodule aktiveer die gevorderde instellings en voorsien ekstra funksionaliteit</string>
   <string name="prefs_plugins">Inlegmodule bestuurder</string>
   <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlegmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlegmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter "</string>
   <string name="osm_editing_plugin_description">Wys stellings nodig vir OSM terugvoer bv. versamel / aanpas van OSM POI voorwerpe, oopmaak / komentaarlewer op OSM foute, en bydra van opgeneemde GPX dokumente (vereis OSM inlog besonderhede).</string>
@@ -526,7 +526,7 @@
   <string name="continuous_rendering">deurlopende lewering</string>
   <string name="continuous_rendering_descr">Vertoon deurlopende lewering in plaas van beeld-op-een-slag</string>
   <string name="rendering_exception">Fout het voorgekom tydens die lewering van gekose gebied</string>
-  <string name="show_point_options">Ligging keuses</string>
+  <string name="show_point_options">Gebruik ligging…</string>
   <string name="renderer_load_sucess">verbeelder suksesvol gelaai</string>
   <string name="renderer_load_exception">Uitsondering voorgekom: verbeelder is nie gelaai nie</string>
   <string name="renderers">vektor verbeelder</string>
@@ -797,7 +797,7 @@
   <string name="search_activity">Soek</string>
   <string name="searchpoi_activity">Kies POI</string>
   <string name="search_POI_level_btn">Vind mer</string>
-  <string name="incremental_search_city">Soek stad op toenemende wyse. Om dorpe/poskodes op te spoor, tik 3 of meer karakters in.</string>
+  <string name="incremental_search_city">Soek stad op toenemende wyse</string>
   <string name="incremental_search_street">Soek strate op toenemende wyse</string>
   <string name="incremental_search_building">Soek gebou toenemend</string>
   <string name="choose_available_region">Kies gebied vanaf die lys</string>
@@ -1004,4 +1004,45 @@
 \n\tJy kan profiele verander deur die profiel knoppie in linker onder hoek van die kaart skerm (simbool kar, fiets, of voetganger), of tydens die bou van `n roete. "</string>
 	<string name="email">e-pos</string>
 <string name="close_changeset">Sluit verandering-sessie af</string>
-	</resources>
+	<string name="access_arrival_time">Aankomstyd</string>
+    <string name="item_checked">Gemerk</string>
+    <string name="item_unchecked">Ongemerk</string>
+    <string name="map_view">Kaart</string>
+    <string name="prefer_motorways">Verkies snelweë</string>
+	<string name="prefer_in_routing_title">Verkies…</string>
+	<string name="prefer_in_routing_descr">Verkies snelweë</string>
+    <string name="tip_recent_changes_1_2_t">"Veranderings in 1.2: "</string>
+    <string name="download_hillshade_item">Heuwelskadu</string>
+    <string name="max_speed_none">geen</string>
+    <string name="download_hillshade_maps">Heuwelskadu-oorleggings</string>
+    <string name="tip_recent_changes_1_1_2_t">"Veranderings in 1.1.2:\n\t* Oudio/video inlasmodule verbeterings (fotos met EXIF inligting)
+\n\t* Bruikbaarheid reggemaak en Kontoerlyn-inlasmodule herstruktureer
+\n\t* Foute reggemaak (nie-optimum roetebepaling) "</string>
+    <string name="dist_control_start">begin</string>
+    <string name="local_indexes_cat_av">Oudio/video inligting</string>
+    <string name="stop_routing_confirm">Is jy seker jy wil die navigasie staak?</string>
+    <string name="clear_dest_confirm">Is jy seker jy wil jou bestemmingspunt verwyder?</string>
+    <string name="precise_routing_mode_descr">Aktiveer presiese roetebepaling om presiese roetes te bereken sonder probleme. Dit is baie beperk deur afstand en maak nie gebruik van die inheemse biblioteek nie.</string>
+    <string name="precise_routing_mode">Presiese roetebepaling (alfa)</string>
+    <string name="recording_photo_description">Foto %1$s van %2$s</string>
+    <string name="recording_context_menu_show">Wys</string>
+    <string name="av_def_action_picture">Neem /\'n foto</string>
+    <string name="recording_context_menu_precord">Neem /\'n foto</string>
+    <string name="dropbox_plugin_description">Dropbox inlasmodule laat jou spore en oudio/video notas sinkroniseer met jou Dropbox rekening.</string>
+    <string name="dropbox_plugin_name">Dropbox inlasmodule</string>
+    <string name="animate_routing_using_gpx"/>
+    <string name="intermediate_points_change_order">Verander volgorde</string>
+    <string name="srtm_paid_version_msg">Oorweeg dit asseblief om die kontoerlyn-inlasmodulen in die Google Play winkel te koop om verdere ontwikkeling te ondersteun.</string>
+    <string name="srtm_paid_version_title">Kontoerlyn inlasmodule</string>
+    <string name="av_def_action_choose">Kies op versoek</string>
+    <string name="av_def_action_video">Neem video</string>
+    <string name="av_def_action_audio">Neem oudio op</string>
+    <string name="av_widget_action_descr">Kies verstek ventertjie-aksie</string>
+    <string name="av_widget_action">Verstek ventertjie-aksie</string>
+    <string name="av_video_format_descr">Kies video-uitvoer formaat</string>
+    <string name="av_video_format">Video-uitvoer formaat</string>
+    <string name="av_use_external_recorder_descr">Gebruik stelsel kamera vir video</string>
+    <string name="av_use_external_recorder">Gebruik stelsel opnemer</string>
+    <string name="av_use_external_camera_descr">Gebruik stelsel toepassing vir foto</string>
+    <string name="av_use_external_camera">Gebruik kamera toepassing</string>
+    </resources>
