@@ -153,10 +153,10 @@
   <string name="internet_not_available">Połączenie internetowe, wymagane dla tej operacji, jest niedostępne</string>
   <string name="install_more">Zainstaluj więcej…</string>
   <string name="tip_update_index">Aktualizacja danych offline</string>
-  <string name="tip_update_index_t">\tPosiadanie aktualnych danych to podstawa. OsmAnd posiada menedżera pobierania danych offline, który może sprawdzić i pobrać dostępne aktualizacje.
-\n\tAby sprawdzić aktualizacje: \'Ustawienia\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcje klikając przycisk \'Menu\' -&gt; \'filtruj pobrane\' aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tDostępność aktualizacji jest opisana przez następujące kolory:
-\n\t\'Zielony\' - oznacza dane nieposiadające aktualizacji na serwerze
-\n\t\'Niebieski\' - oznacza dane do ewentualnej aktualizacji</string>
+  <string name="tip_update_index_t">\tPosiadanie aktualnych map to podstawa. OsmAnd zapewnia menedżer danych, który może sprawdzić dostępne aktualizacje.
+\n\tAby sprawdzić aktualizacje przejdź do \'Ustawień\' -&gt; \'Zarządzanie danymi\' -&gt; \'Pobierz\'. Po tym jak zostanie pobrana z Internetu lista regionów, możesz wybrać opcję \'Menu\' -&gt; \'Filtruj pobrane\', aby wybrać uaktualnienia jedynie dla danych znajdujących się już na urządzeniu.\n\tWpisy koloru zielonego oznaczają dane identyczne z tymi na serwerze
+\n\tWpisy koloru niebieskiego oznaczają dostępne aktualizacje
+\n\tWpisy czcionką pochyloną oznaczają wyłączone dane na urządzeniu</string>
   <string name="level_to_switch_vector_raster_descr">Minimalne zbliżenie dla map wektorowych</string>
   <string name="level_to_switch_vector_raster">Min. zoom dla mapy wektorowej</string>
   <string name="tip_day_night_mode">Tryb dzień/noc</string>
@@ -951,12 +951,11 @@
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
   <string name="show_warnings_descr">Pokaż ograniczenia prędkości, fotoradary i pasy ruchu</string>
   <string name="monitoring_mode_off">Zapisuj GPX</string>
-  <string name="tip_rotation_switching_t_v2">\tMożesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
-	\n\tMasz do wyboru:
-	\n\t\'Nie obraca (północ jest na górze)\' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
-	\n\t\'To direction of movement\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem, w którym się poruszasz.
-	\n\t\'To compass\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas.
-	</string>
+  <string name="tip_rotation_switching_t_v2">"\tMożesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
+\n\tMasz do wyboru:
+\n\t\'Nie obraca (północ jest na górze)\' - Mapa nie będzie obracana. Północ zawsze będzie na górze.
+\n\t\'Względem kierunku ruchu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem, w którym się poruszasz.
+\n\t\'Względem kompasu\' - Mapa będzie ciągle ustawiana zgodnie z kierunkiem wskazywanym przez kompas. "</string>
 <string name="osmand_short_description_80_chars">OsmAnd to aplikacja nawigacyjna open source  wspierająca mapy kafelkowe oraz wektorowe</string>
 <string name="osmand_long_description_1000_chars">
 	        OsmAnd (Open Street Maps Android)
@@ -1150,7 +1149,7 @@
     <string name="support_new_features_descr">Wesprzyj prace nad nowymi funkcjami przez przekazanie darowizny</string>
 	<string name="tip_recent_changes_1_1_2_t">"Zmiany w 1.1.2:
 \n\t* Rozszerzenie wtyczki audio/video (zdjęcia z danymi EXIF)
-\n\t* Poprawki w funkcjonalności wtyczki kontur
+\n\t* Poprawki w funkcjonalności wtyczki dodającej poziomice
 \n\t* Paczki cieniowania wzniesień dla wtyczki dodającej poziomice
 \n\t* Poprawki błędów i nawigacji "</string>
     <string name="download_hillshade_maps">Warstwy cieniujące</string>
