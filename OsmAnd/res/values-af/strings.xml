@@ -1045,4 +1045,78 @@
     <string name="av_use_external_recorder">Gebruik stelsel opnemer</string>
     <string name="av_use_external_camera_descr">Gebruik stelsel toepassing vir foto</string>
     <string name="av_use_external_camera">Gebruik kamera toepassing</string>
-    </resources>
+    <string name="animate_routing_using_gpx">Wil jy bestaande GPX lêer gebruik?</string>
+    <string name="av_settings_descr">Maak oudio en video verstellings</string>
+    <string name="av_settings">"Oudio/video verstellings "</string>
+    <string name="recording_error">"`n fout het tydens die opname voorgekom "</string>
+    <string name="recording_camera_not_available">Kamera is nie beskikbaar nie</string>
+    <string name="recording_is_recorded">Oudio/video word opgeneem. Om te stop druk op die OV ventertjie.</string>
+    <string name="recording_playing">Oudio van die gespesifiseerde opname is besig om te speel.\n%1$s</string>
+    <string name="recording_open_external_player">Maak eksterne speler oop</string>
+    <string name="recording_delete_confirm">Wil jy hierdie opname verwyder?</string>
+    <string name="tip_recent_changes_1_1_0_t">"Veranderings in 1.1.0:
+\n\t* Afstandsberekening inlasmodule
+\n\t* Oudio/video notas inlasmodule
+\n\t* Kontoer-lyn inlasmodule
+\n\t* Foute nasorg
+\n\t* \'Toer uitsig\' kaartstyl keuse met meer kaart detail, nuwe pad-style, meer kontras, en Alpe-staproete (SAC skaal) keuse
+\n\t* EGM96 geoid kompensering vir GPS hoogte-lesings "</string>
+    <string name="recording_unavailable">nie beskikbaar nie</string>
+    <string name="recording_context_menu_arecord">Neem `n oudio nota</string>
+    <string name="recording_context_menu_vrecord">Neem `n video nota</string>
+    <string name="layer_recordings">Opname laag</string>
+    <string name="recording_can_not_be_played">opname kan nie truggespeel word nie</string>
+    <string name="recording_context_menu_delete">Vee opname uit</string>
+    <string name="recording_context_menu_play">Speel</string>
+    <string name="recording_description">Opname %1$s %2$s van %3$s</string>
+    <string name="recording_default_name">besig met opname</string>
+    <string name="av_control_start">begin</string>
+    <string name="map_widget_av_notes">Oudio/video notas</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd inlasmodule vir aflyn kontoerlyne</string>
+    <string name="osmand_srtm_long_description_1000_chars">Hierdie inlasmodule verskaf kontoerlyne wat in OsmAnd aflyn kaarte getoon kan word.Die wêreld inligting (van 70 grade noord tot 70 grade suid) is gebaseer op metings deur SRTM (Shuttle Radar Topography Mission)en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer),`n beeld-instrument aanboord Terra, die vlagskip sateliet van NASA se Aarde Observasie Stelsel. ASTER is `n samewerkingsprojek tussen NASA, Japan se Ministerie van Ekonomie, Handel en Industrie (MEHI), en Japan Ruimte Stelsels (J-spacesystems).</string>
+    <string name="osmand_distance_plugin_description">meet die afstand tussen twee of meer punte. Voeg punte by deur kort te kliek en verwyder punte met `n lang druk.</string>
+    <string name="osmand_distance_plugin_name">Afstandsberekening</string>
+    <string name="use_clear_distance_measurement">Kliek nog een keer om metingspunte skoon te maak.</string>
+    <string name="use_distance_measurement">Tik om `n punt te merk, druk en hou om vorige punte te verwyder, kliek op metingsventertjie om uit te gaan.</string>
+    <string name="map_widget_distancemeasurement">Afstandsmeting</string>
+    <string name="index_srtm_parts">dele</string>
+    <string name="audionotes_plugin_name">Oudio/video notas</string>
+    <string name="map_widget_audionotes">Oudio notas</string>
+    <string name="index_srtm_ele">Kontoerlyne</string>
+    <string name="download_select_map_types">Ander kaarte</string>
+    <string name="download_srtm_maps">Kontoerlyne</string>
+    <string name="download_roads_only_item">Slegs paaie</string>
+    <string name="download_roads_only_maps">Paaie-uitsluitlik kaarte</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Versteek grense</string>
+	<string name="audionotes_location_not_defined">Ligging om met die nota te asosieer is nog nie gedefinieer nie. Gebruik liggin… om `n nota aan `n spesifieke ligging toe te ken</string>
+    <string name="audionotes_plugin_description">Neem oudio/video notas tydens die rit</string>
+    <string name="srtm_plugin_name">Kontoerlyn inlasmodule</string>
+    <string name="download_regular_maps">Algemene kaarte</string>
+    <string name="rendering_attr_noAdminboundaries_description">Onderduk streeksgrense (adminvlk 5-9)</string>
+    <string name="map_widget_max_speed">Snelheidsgrens</string>
+    <string name="no_buildings_found">Geen geboue gevind nie.</string>
+    <string name="search_villages_and_postcodes">Soek dorpies/poskode</string>
+	<string name="rendering_attr_showRoadMaps_description">Kies wanneer om paaie-uitsluitlik kaarte te toon:</string>
+	<string name="rendering_attr_showRoadMaps_name">Paaie-uitsluitlik kaarte</string>
+    <string name="safe_mode_description">gebruik die toepassing in beskermde wyse (gebruik stadiger Android in plaas van inheemse kode).</string>
+    <string name="safe_mode">Beskermde wyse</string>
+    <string name="native_library_not_running">Die toepassing werk in beskermde wyse (skakel dit af in Instellings).</string>
+    <string name="srtm_plugin_description">Vergemoontlik dei aflaai van aflyn kontoerlyne en heuwelsakdus (Instellings-&gt; Inligtingsbestuur -&gt; Aflaai -&gt; Kies verlangde kaart-tipe).</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid inlasmodule is `n ou weergawe en het `n opgradering nodig.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid inlasmodule is `n OsmAnd uitbreiding vir die OsModroid toepassing vir aanlyn naspoor funksies. Inligting oor die diens is beskikbaar op http://esya.ru.</string>
+    <string name="osmodroid_plugin_name">OsMoDroid inlasmodule</string>
+	<string name="tip_altitude_offset">Hoogte voorstelling - Kompensering</string>
+	<string name="tip_altitude_offset_t"/>
+    <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
+    <string name="route_descr_current_location">Huidige posisie</string>
+    <string name="route_descr_from_to">Van: %1$s\nTot: %2$s</string>
+    <string name="route_descr_from_to_via">Van: %1$s\nDeur: %2$s\nTot: %3$s</string>
+    <string name="background_service_is_enabled_question">OsmAnd slaapwyse diens is nog aan. Wil jy dit afskakel?</string>
+    <string name="tip_recent_changes_1_0_0_t">"Veranderings in 1.0.0:
+\n\t* Verbeterde roeteberekening: vinniger, meer presiese, tot 250 km
+\n\t* Bekendstelling van paaie-uitsluitlik kaarte
+\n\t* Kaart verloor nie posisie slot na onderbrekings nie.\n\t* Vergemoontlik slaap-wyse diens tydens navigasie "</string>
+    <string name="support_new_features_descr">Maak donasies om die implementering van nuwe funksies in die toepassing moontlik te maak</string>
+	<string name="incomplete_locale">Onvolledig</string>
+	</resources>
