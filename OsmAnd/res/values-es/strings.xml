@@ -1128,4 +1128,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="item_checked">marcado</string>
     <string name="item_unchecked">desmarcado</string>
     <string name="map_view">Mapa</string>
+    <string name="access_arrival_time">Hora de llegada</string>
     </resources>
