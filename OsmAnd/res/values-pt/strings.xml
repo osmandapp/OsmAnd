@@ -1046,7 +1046,6 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
 	<string name="prefer_in_routing_title">Preferir…</string>
 	<string name="prefer_in_routing_descr">Preferir Auto-Estradas</string>
     <string name="tip_recent_changes_1_2_t">Alterações no 1.2:</string>
-    <string name="max_speed_none"/>
     <string name="max_speed_none">Nenhum</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="dist_control_start">Iniciar</string>
@@ -1084,6 +1083,5 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="audionotes_plugin_description">Tomar notas de audio/vídeo durante a viagem</string>
     <string name="audionotes_plugin_name">Notas de Audio/vídeo</string>
     <string name="index_srtm_parts">Partes</string>
-    <string name="index_srtm_ele"/>
     <string name="index_srtm_ele">Curvas de nível</string>
     </resources>
