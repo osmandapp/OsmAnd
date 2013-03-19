@@ -90,11 +90,11 @@
   <string name="local_openstreetmap_settings">Helyileg tárolt OSM pontok/Hibák</string>
   <string name="local_openstreetmap_settings_descr">Helyi adatbázisban tárolt OSM pontok/Hibák megjelenítése, kezelése</string>
   <string name="live_monitoring_descr">Lehetővé teszi HTTP üzenetek küldését a megadott webes szolgáltatásnak</string>
-  <string name="live_monitoring">Élő Útvonalrögzítés</string>
-  <string name="live_monitoring_interval_descr">Élő Útvonalrögzítés intervalluma</string>
-  <string name="live_monitoring_interval">Élő rögzítési sűrűség</string>
-  <string name="live_monitoring_url_descr">Add meg az Élő Útvonalrögzítéshez használni kívánt webcímet az alábbi paraméterekkel: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-  <string name="live_monitoring_url">Élő rögzítés webcíme</string>
+  <string name="live_monitoring">Online útvonalrögzítés</string>
+  <string name="live_monitoring_interval_descr">Online útvonalrögzítés intervalluma</string>
+  <string name="live_monitoring_interval">Online rögzítési sűrűség</string>
+  <string name="live_monitoring_url_descr">Add meg a használni kívánt webcímet az alábbi szintaxissal: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+  <string name="live_monitoring_url">Online rögzítés webcíme</string>
   <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást.</string>
   <string name="show_current_gpx_title">Aktív útvonalrögzítés</string>
   <string name="tip_recent_changes_0_7_0_t">A 0.7.0 verzió változásai: \n\t- Internet nélkül is használható Wikipédia szócikkek \n\t- Frissített térképek \n\t- Egyéb hasznos apró funkciók </string>
@@ -933,8 +933,8 @@
 <string name="monitoring_mode_on">GPX ki.</string>
 <string name="gps_wakeup_interval">GPS helymeghatározási időköz: %s</string>
 <string name="int_continuosly">Folyamatos</string>
-<string name="live_monitoring_mode_off">Élő útvonalrögzítés\n indítása</string>
-<string name="live_monitoring_mode_on">Élő útvonalrögzítés\n megállítása</string>
+<string name="live_monitoring_mode_off">Online útvonalrögzítés\n indítása</string>
+<string name="live_monitoring_mode_on">Online útvonalrögzítés\n megállítása</string>
 <string name="layer_map_appearance">Képernyő beállítása…</string>
 <string name="show_lanes">Sávok megjelenítése</string>
 <string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
@@ -1096,7 +1096,7 @@
     <string name="monitoring_control_stop">stop</string>
     <string name="srtm_plugin_description">A bővítmény lehetővé teszi szintvonalfájlok letöltését (Offline adat letöltése -&gt; menü - Egyéb térképek) a megadott régiókhoz és használatukat offline térképekkel.</string>
     <string name="srtm_plugin_attribution">Az ASTER a METIS és a NASA terméke</string>
-    <string name="osmodroid_plugin_description">Élő útvonalrögzítési szolgáltatást tesz lehetővé. Az OsMoDroid bővítmény használatához telepített OsModroid alkalmazásra van szükség. További információk: http://esya.ru</string>
+    <string name="osmodroid_plugin_description">Az OsMoDroid bővítmény lehetővé teszi az OsMoDroid alkalmazás használatát online útvonalrögzítésre. További információk: http://esya.ru.</string>
     <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg az A/V vezérlő stop gombját.</string>
     <string name="recording_playing">A hangfelvétel lejátszása elindult…\n%1$s</string>
     <string name="recording_open_external_player">Külső lejátszó megnyitása</string>
@@ -1162,4 +1162,9 @@
     <string name="prefer_motorways">Autópályák preferálása</string>
 	<string name="prefer_in_routing_title">Preferálás…</string>
 	<string name="prefer_in_routing_descr">Autópályák előnyben részesítése</string>
+    <string name="access_arrival_time">Érkezési idő</string>
+    <string name="item_checked">kijelölt</string>
+    <string name="item_unchecked">kijelöletlen</string>
+    <string name="map_view">Térkép</string>
+    <string name="av_def_action_choose">Mindig rákérdez</string>
     </resources>
