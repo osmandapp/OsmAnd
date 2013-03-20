@@ -1204,4 +1204,7 @@
     <string name="map_view">Mapa</string>
     <string name="tip_recent_changes_1_2_t">"Zmeny vo verzii 1.2: "</string>
     <string name="av_def_action_choose">Vybrať pri požiadaní</string>
+    <string name="access_arrival_time">Čas príchodu</string>
+    <string name="precise_routing_mode_descr">Zapni presné vyhľadávanie trasy pre výpočet presnej trasy bez závad. Výpočet je veľmi obmedzený na vzdialenosť a je pomalší.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid zásuvný modul je OsmAnd rozšírenie pre aplikáciu OsModroid, ktorá umožnuje on-line sledovanie. Informácie o tejto aplikácií sú k dispozícii na stránke http://esya.ru.</string>
     </resources>
