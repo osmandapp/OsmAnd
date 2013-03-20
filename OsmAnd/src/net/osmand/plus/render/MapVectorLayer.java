@@ -1,11 +1,16 @@
 package net.osmand.plus.render;
 
 import net.osmand.util.MapUtils;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.ResourceManager;
 import net.osmand.plus.RotatedTileBox;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.planning.PlanningPlugin;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -117,7 +122,12 @@ public class MapVectorLayer extends BaseMapLayer {
 			float rot = bmpLoc.getRotate();
 			float mult = (float) MapUtils.getPowZoom(view.getZoom() - bmpLoc.getZoom());
 			float fmult = (float) MapUtils.getPowZoom(view.getFloatZoom() - bmpLoc.getZoom());
-			
+
+			if (!view.getApplication().getSettings().USE_HIGH_RES_MAPS.get()) {	//Use the high resolution option to enable display zooming
+				if(OsmandPlugin.getEnabledPlugin(PlanningPlugin.class) != null){
+					fmult *= OsmandPlugin.getEnabledPlugin(PlanningPlugin.class).getDisplayScaleFactor();	//apply user-selected display zoom factor				
+				}
+			}			
 			float tx = view.getXTile() / mult;
 			float ty = view.getYTile() / mult;
 			float dleftX1 = bmpLoc.getLeftTileX() - tx;

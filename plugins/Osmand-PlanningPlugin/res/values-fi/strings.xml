@@ -1,0 +1,8 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<resources>
+<string name="default_buttons_no">Ei</string>
+    <string name="default_buttons_yes">Kyllä</string>
+    <string name="osmand_app_not_found">OsmAnd ei ole asennettu</string>
+    <string name="app_name">OsmAnd Planning</string>
+    <string name="planning_plugin_installed">OsmAnd Planning lisäosa on asennettu ja aktivoitu OsmAnd:in asetuksista.</string>
+</resources>

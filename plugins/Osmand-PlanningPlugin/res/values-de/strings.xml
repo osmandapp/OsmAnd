@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="default_buttons_no">Nein</string>
+    <string name="default_buttons_yes">Ja</string>
+    <string name="osmand_app_not_found">OsmAnd ist nicht installiert</string>
+    <string name="app_name">OsmAnd Parkplatz-Plugin</string>
+    <string name="planning_plugin_installed">OsmAnd Parkplatz-Plugin wurde in den OsmAnd-Einstellungen installiert und aktiviert.</string>
+</resources>

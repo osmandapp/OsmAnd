@@ -5,9 +5,11 @@ import net.londatiga.android.QuickAction;
 import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.planning.PlanningPlugin;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -99,7 +101,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initRuler(view, parent);
 		
 		initTransparencyBar(view, parent);
-		
+		if(OsmandPlugin.getEnabledPlugin(PlanningPlugin.class) != null){
+			OsmandPlugin.getEnabledPlugin(PlanningPlugin.class).setDisplayScaleChangedFlag(false);	//clear flag used to indicate display scale has been changed
+		}		
 	}
 
 	@Override
@@ -407,10 +411,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void drawRuler(Canvas canvas) {
 		// update cache
+		float displayScaleFactor = 1.0f;
+		boolean displayScaleChangedFlag = false;
+		PlanningPlugin planningPlugin = OsmandPlugin.getEnabledPlugin(PlanningPlugin.class);
+		if(planningPlugin != null){
+			displayScaleFactor = planningPlugin.getDisplayScaleFactor();
+			displayScaleChangedFlag = planningPlugin.getDisplayScaleChangedFlag();
+		}
 		if (view.isZooming()) {
 			cacheRulerText = null;
 		} else if(view.getFloatZoom() != cacheRulerZoom || 
-				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1){
+				Math.abs(view.getXTile() - cacheRulerTileX) +  Math.abs(view.getYTile() - cacheRulerTileY) > 1 || displayScaleChangedFlag){
 			cacheRulerZoom = view.getFloatZoom();
 			cacheRulerTileX = view.getXTile();
 			cacheRulerTileY = view.getYTile();
@@ -420,9 +431,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 			double dist = MapUtils.getDistance(latitude, leftLon, latitude, rightLon);
 			double pixDensity = view.getWidth() / dist; 
 			
+			if(planningPlugin != null){
+				if (!view.getApplication().getSettings().USE_HIGH_RES_MAPS.get() && displayScaleFactor > 1.0f) {	//adjust for display scaling
+					dist /= (double)(displayScaleFactor);	//apply user-selected zoom factor - hi-res screens can have tiny text for map tile images
+				}
+				planningPlugin.setDisplayScaleChangedFlag(false);
+			}
 			double roundedDist = OsmAndFormatter.calculateRoundedDist(dist * screenRulerPercent, view.getApplication());
 			
 			int cacheRulerDistPix = (int) (pixDensity * roundedDist);
+			
+			while (cacheRulerDistPix * 1.5 <= (double)view.getWidth() * screenRulerPercent){	//ensure displayed ruler does not get too short
+				cacheRulerDistPix = cacheRulerDistPix *2;
+				roundedDist = roundedDist * 2;				
+			}
 			cacheRulerText = ShadowText.create(OsmAndFormatter.getFormattedDistance((float) roundedDist, view.getApplication()));
 			cacheRulerTextLen = zoomTextPaint.measureText(cacheRulerText.getText());
 			

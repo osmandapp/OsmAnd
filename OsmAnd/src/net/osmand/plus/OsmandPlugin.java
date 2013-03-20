@@ -24,6 +24,7 @@ import net.osmand.plus.osmodroid.OsMoDroidPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
+import net.osmand.plus.planning.PlanningPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -43,8 +44,9 @@ public abstract class OsmandPlugin {
 	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin"; //$NON-NLS-1$
 	
 	private static final String OSMODROID_PLUGIN_COMPONENT = "com.OsMoDroid"; //$NON-NLS-1$
-	
-	
+	private static final String PLANNING_PLUGIN_COMPONENT = "net.osmand.planningPlugin";
+        
+
 	public abstract String getId();
 	
 	public abstract String getDescription();
@@ -77,12 +79,13 @@ public abstract class OsmandPlugin {
 					new SRTMPlugin(app, false));
 		}
 		installPlugin(PARKING_PLUGIN_COMPONENT, ParkingPositionPlugin.ID, app, new ParkingPositionPlugin(app));
+		installPlugin(PLANNING_PLUGIN_COMPONENT, PlanningPlugin.ID, app, new PlanningPlugin(app));
 		installPlugin(OSMODROID_PLUGIN_COMPONENT, OsMoDroidPlugin.ID, app, new OsMoDroidPlugin(app));
 		installedPlugins.add(new DistanceCalculatorPlugin(app));
 		installedPlugins.add(new AudioVideoNotesPlugin(app));
 		installedPlugins.add(new OsmEditingPlugin(app));
 		installedPlugins.add(new OsmandDevelopmentPlugin(app));
-		
+		installedPlugins.add(new PlanningPlugin(app));		//Comment this out to require use of plugin installer
 		
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
 		for (OsmandPlugin plugin : installedPlugins) {
