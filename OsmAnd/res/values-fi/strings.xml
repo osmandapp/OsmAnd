@@ -288,7 +288,7 @@
 	<string name="transport_Routes">Reitit</string>
 	<string name="transport_Stop">Pysähdys</string>
 	<string name="transport_stops">pysähdykset</string>
-	<string name="transport_search_after">Seuraava reitti</string>	
+	<string name="transport_search_after">Seuraava tie</string>	
 	<string name="transport_search_before">Aiempi reitti</string>
 	<string name="transport_finish_search">Lopeta haku</string>
 	<string name="transport_stop_to_go_out">Valitse pysäkki jossa haluat jäädä pois</string>
@@ -652,10 +652,25 @@
     <string name="stop_routing_confirm">Oletko varma että haluat lopettaa navigoinnin?</string>
     <string name="clear_dest_confirm">Haluatko varmasti poistaa päätepisteen?</string>
     <string name="precise_routing_mode">Tarkka reititys (alpha)</string>
-    <string name="recording_photo_description">Kuva %1$s/%2$s</string>
+    <string name="recording_photo_description">Kuva %1$s %2$sta</string>
     <string name="av_def_action_picture">Ota kuva</string>
     <string name="recording_context_menu_precord">Ota kuva</string>
     <string name="recording_context_menu_show">Näytä</string>
     <string name="use_osmand_routing_service_descr">Käytä OsmAnd offline navigointia. Koskee vain alle 20km pitkiä reittejä (kokeellinen)</string>
 	<string name="application_dir">Tallennushakemisto</string>
+	<string name="access_arrival_time">Saapumisaika</string>
+    <string name="item_checked">valittu</string>
+    <string name="item_unchecked">ei valittu</string>
+    <string name="map_view">Kartta</string>
+    <string name="prefer_motorways">Suosi moottoriteitä</string>
+	<string name="prefer_in_routing_title">Suosi…</string>
+	<string name="prefer_in_routing_descr">Suosi moottoriteitä</string>
+    <string name="tip_recent_changes_1_2_t">"Muutokset versiossa 1.2: "</string>
+    <string name="animate_routing_using_gpx">Haluatko käyttää olemassa olevaa GPX tiedostoa?</string>
+    <string name="intermediate_points_change_order">Vaihda järjestystä</string>
+    <string name="recording_unavailable">ei saatavilla</string>
+    <string name="recording_context_menu_delete"/>
+    <string name="recording_context_menu_play">Toista</string>
+    <string name="recording_description">Nauhoitus %1$s %2$s / %3$s</string>
+    <string name="application_dir_change_warning">Tallennushakemiston muuttaminen ei poista tai siirrä tiedostoja. Tämä pitää suorittaa manuaalisesti OsmAnd ohjelman ulkopuolella. Jatketaanko siitä huolimatta?</string>
 	</resources>
