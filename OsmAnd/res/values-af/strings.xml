@@ -257,18 +257,18 @@
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
   <string name="tip_day_night_mode_t">"\tdie kaart voorkoms kan vir \'n paar vektor kaarte verander word tussen die dag (helder) en nag (donker).\n\tNag kleure is veiliger vir nag bestuur.\n\tJy kan \'n beleid vir die dag / nag opstel in \'Stellings\' -&gt; \'Kaart voorkoms\'-&gt; \'Dag / nag gebruikswyse\'.\n\tKeuses is:\n\t\'Sonsopkoms / Sonsondergang\' - outomatiese gebruikswyse, beheer deur posisie van die son (verstek)\n\t\'Day\' - gebruik altyd dag gebruikswyse\n\t\'Night\' - gebruik altyd nag gebruikswyse\n\t\'Lig sensor\' - kaart voorkoms word beheer deur lig sensor van jou toestel (slegs indien toegerus)\n"</string>
   <string name="tip_osm_improve">Verbetering van OSM data</string>
-  <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) data en-behalwe die kaart vir besigtiging en navigasie-kan ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \"Algemene verstellings\" -&gt; \"OSM Redigeer \' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik opsie \'skep interessante plek\' in die kaart konteks kieslys. Gaan voort om die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in te tik en stuur dit uiteindelik in.\n\tverskrikkinge in kaarte kan onmiddellik aangemeld word via OSM fout, en OSM gemeenskap kan dan vinniger kan hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaartinhoud kieslys kaart. Tik dan die gedetailleerde beskrywing van die probleem en pos dit uiteindelik met die \'Voeg by\" knoppie.\n\tLet daarop dat Internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
-  <string name="download_files_not_enough_space">Daar is nie genoeg oop spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
-  <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer (s) ({1} MB) af ?</string>
+  <string name="tip_osm_improve_t">\tOsmAnd gebruik kaarte gebaseer op Openstreetmap.org (OSM) data en behalwe vir besigtiging en navigasie, kan dit ook gebruik word om die kwaliteit van OSM inligting te verbeter. Jy kan nuwe interessante plekke skep of OSM foutverslae oplaai met net \'n paar klieke!\n\tHiervoor moet jy eers jou OSM login inligting in \'Stellings\' -&gt; \'Algemene verstellings\' -&gt; \'OSM Redigering\' voorsien.\n\tOm \'n nuwe interessante plek by te voeg gebruik opsie \'skep interessante plek\' in die kaart konteks kieslys. Tik die inligting oor die nuwe interessante plek in \'Skep interessante plek\' se dialoog in en stuur dit dan in.\n\tFoute in kaarte kan onmiddellik aangemeld word via OSM fout, en die OSM gemeenskap kan dan vinniger hierdie probleem oplos.\n\tOm `n OSM fout by te voeg gebruik keuse \'Open OSM fout\' in die kaart konteks kieslys. Tik dan die beskrywing van die probleem en pos dit met die \'Voeg by\' knoppie.\n\tLet daarop dat `n internet verbinding nodig is vir die OSM interessante plek en OSM fout bydraes.</string>
+  <string name="download_files_not_enough_space">Daar is nie genoeg spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
+  <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer(s) ({1} MB) af ?</string>
   <string name="tip_select_destination_point">Kies bestemming</string>
-  <string name="tip_select_destination_point_t">"\tJy kan \'n ​​bestemming direk op die kaart kies (kaartinhoud kieslys, dan \'as bestemming\')\', in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk .\n\tdie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek). "</string>
+  <string name="tip_select_destination_point_t">\tJy kan \'n ​​bestemming direk op die kaart kies (kaart konteks kieslys, dan \'as bestemming\'), in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk .\n\tDie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek).</string>
   <string name="tip_recent_changes_0_6_9_t">"Veranderinge in 0.6.9:\n\t-Verbeterde aflyn kaart lewering\n\t-Vinnige inheemse aflyn lewering - kyk in eksperimentele eienskappe (mag dalk op sommige toestelle nie werk nie)\n\t-Massiewe voorkoms en gevoel veranderinge\n\t-Hoogte inligting\n\t-nuwe vertalings (Vienamese, Pools)\n\t-ander klein funksies "</string>
   <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
   <string name="native_library_not_supported">Inheemse biblioteek word nie op hierdie toestel ondersteun nie.</string>
   <string name="init_native_library">Besig om inheemse biblioteek gereed te maak…</string>
   <string name="choose_auto_follow_route">Outo-senter kaart uitsig</string>
-  <string name="choose_auto_follow_route_descr">Tyd tot kaart uitsig ooreenkom met die huidige posisie</string>
+  <string name="choose_auto_follow_route_descr">Tyd tot kaart sal ooreenkom met die huidige posisie</string>
   <string name="auto_follow_route_never">Nooit</string>
   <string name="auto_follow_route_navigation">Outo-senter slegs navigasie</string>
   <string name="auto_follow_route_navigation_descr">Outo-senter kaart uitsig tydens navigasie.</string>
@@ -588,7 +588,7 @@
   <string name="context_menu_item_show_route">Wys roete van hier af</string>
   <string name="use_trackball_descr">Gebruik die trekbal om die kaart te skuif</string>
   <string name="use_trackball">Gebruik die trekbal</string>
-  <string name="background_service_wait_int_descr">Stel maksimum wag tyd vir elke ligging vasstelling in die agtergrond</string>
+  <string name="background_service_wait_int_descr">Stel maksimum wagtyd vir agtergrond ligging-vasstelling</string>
   <string name="background_service_wait_int">Maksimum wagtyd vir vasstelling</string>
   <string name="service_stop_background_service">Skakel agtergrond navigasie diens af</string>
   <string name="where_am_i">Waar is ek?</string>
@@ -1118,4 +1118,7 @@
 \n\t* Kaart verloor nie posisie slot na onderbrekings nie.\n\t* Vergemoontlik slaap-wyse diens tydens navigasie "</string>
     <string name="support_new_features_descr">Maak donasies om die implementering van nuwe funksies in die toepassing moontlik te maak</string>
 	<string name="incomplete_locale">Onvolledig</string>
-	</resources>
+	<string name="index_name_openmaps"/>
+    <string name="tip_altitude_offset_t">"\tMeeste GPS toestelle gee hoogte-metings in die ellipsoide-gebaseerde WGS84 verwysingstelsel, waarvan die omskakeling na plaaslik gebruikte stelsels `n posisie-afhanklike regstelling benodig.\n\t`n Beter benadering na hierdie plaaslike stelsels, is die EGM96 verwysing. OSMAnd ondersteun nou ook die outomatiese aanduiding van hoogtes in die EGM96 stelsel.\n\tOm dit te kan gebruik, laai die lêer WW15MGH.DAC af onder Data Bestuur (of by http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="monitoring_control_start"/>
+    </resources>
