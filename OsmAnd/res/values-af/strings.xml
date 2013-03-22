@@ -1106,7 +1106,6 @@
     <string name="osmodroid_plugin_description">OsMoDroid inlasmodule is `n OsmAnd uitbreiding vir die OsModroid toepassing vir aanlyn naspoor funksies. Inligting oor die diens is beskikbaar op http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid inlasmodule</string>
 	<string name="tip_altitude_offset">Hoogte voorstelling - Kompensering</string>
-	<string name="tip_altitude_offset_t"/>
     <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
     <string name="route_descr_current_location">Huidige posisie</string>
     <string name="route_descr_from_to">Van: %1$s\nTot: %2$s</string>
