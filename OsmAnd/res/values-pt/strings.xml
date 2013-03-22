@@ -945,29 +945,7 @@
 <string name="gps_wakeup_interval">GPS intervalo de despertar: %s</string>
 <string name="int_continuosly">Contínuo</string>
 <string name="email">e-mail</string>
-<string name="osmand_long_description_1000_chars">
-OsmAnd (Direções OSM automatizados de navegação)
-
-OsmAnd é uma aplicação de navegação livre com acesso a uma ampla variedade de globais OpenStreetMap (OSM) de dados. Todos os dados de mapas (mapas vetoriais ou telha) podem ser armazenados no cartão de memória do telefone para uso offline. OsmAnd também oferece offline e online, incluindo a funcionalidade de roteamento turn-by-turn orientação por voz.
-
-Algumas das características principais:
-- Completa funcionalidade offline (mapas baixados da loja vetor ou telha em uma pasta selecionável)
-- Compacto off-line mapas vetoriais para o mundo inteiro disponível
-- Faça o download de mapas de países ou região diretamente do aplicativo
-- Sobreposição de camadas de mapas diversos possíveis, como GPX ou navegação faixas, Pontos de Interesse, favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável
-- Pesquisa offline para endereços e locais (POIs)
-- Encaminhamento offline para distâncias curtas (experimental)
-- Carro, bicicleta, e os modos de pedestres com:
-- Opcional vista de dia/noite automático de comutação
-- Mapa em função da velocidade opcional zoom
-- Alinhamento mapa opcional de acordo com bússola ou direção do movimento
-- Orientação pista opcional, display de limite de velocidade, registradas e vozes TTS
-
-Limitações desta versão gratuita de OsmAnd:
-- Número de downloads de mapa limitado
-- Sem acesso a Wikipedia off-line POIs
-
-OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depende ainda contribuições financeiras para financiar o desenvolvimento e testdriving novas funcionalidades. Por favor, considere a compra de OsmAnd, ou financiar novas funcionalidades específicas ou fazer uma doação geral sobre osmand.net.</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Direções OSM automatizados de navegação) O OsmAnd é uma aplicação de navegação livre com acesso a uma ampla variedade de dados OpenStreetMap (OSM) globais. Todos os dados de mapas (mapas vetoriais ou telha) podem ser armazenados no cartão de memória do telefone para uso offline. O OsmAnd também oferece roteamento offline e online, incluindo a funcionalidade de roteamento curva-a-curva com orientação por voz. Algumas das características principais: - Completa funcionalidade offline (guarda os mapas baixados, sejam eles vetoriais ou imagens, em uma pasta selecionável) - Mapas vetoriais compactados para o mundo inteiro disponíveis - Faça o download de mapas de países ou regiões diretamente do aplicativo - Sobreposição de camadas de mapas diversos, como GPX ou trilhas de navegação, Pontos de Interesse, favoritos, curvas de nível, paragens de transportes públicos, mapas adicionais com transparência personalizável - Pesquisa offline para endereços e locais (POIs) - Encaminhamento offline para distâncias curtas (experimental) - Carro, bicicleta, e os modos de pedestres com: - Opcional vista de dia/noite automático de comutação - Mapa em função da velocidade opcional zoom - Alinhamento mapa opcional de acordo com bússola ou direção do movimento - Orientação pista opcional, display de limite de velocidade, registradas e vozes TTS Limitações desta versão gratuita de OsmAnd: - Número de downloads de mapa limitado - Sem acesso a Wikipedia off-line POIs OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depende ainda contribuições financeiras para financiar o desenvolvimento e testdriving novas funcionalidades. Por favor, considere a compra de OsmAnd, ou ajude a financiar novas funcionalidades específicas ou fazer uma doação no osmand.net."</string>
 <string name="rendering_attr_roadColors_description">Selecione um esquema de cores de estrada:</string>
 	<string name="rendering_attr_roadColors_name">Esquema de cores</string>
     <string name="map_widget_show_destination_arrow">Exibir a direção do destino</string>
@@ -1057,8 +1035,8 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="recording_context_menu_precord">Tire uma foto</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
-    <string name="srtm_paid_version_msg">Por favor, considere comprar o plugin \"Linhas de Contorno\" na loja do Google Play para apoiar o desenvolvimento.</string>
-    <string name="srtm_paid_version_title">Plugin Contorno de Linhas</string>
+    <string name="srtm_paid_version_msg">Por favor, considere comprar o plugin Curvas de Nível (Contour Lines) na loja do Google Play para apoiar o desenvolvimento.</string>
+    <string name="srtm_paid_version_title">Plugin curvas de nível</string>
     <string name="av_def_action_choose">Selecionar na altura</string>
     <string name="av_video_format_descr">Selecione o formato de saída de vídeo</string>
     <string name="av_use_external_recorder_descr">Usar gravador do sistema para vídeo</string>
@@ -1071,7 +1049,7 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="av_control_stop">Parar</string>
     <string name="av_control_start">Iniciar</string>
     <string name="map_widget_av_notes">Notas de Áudio/vídeo</string>
-    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd para linhas de contorno off-line</string>
+    <string name="osmand_srtm_short_description_80_chars">Plugin OsmAnd para curvas de nível off-line</string>
     <string name="osmand_distance_plugin_description">Medir a distância entre dois ou mais pontos. Adicione pontos com um clique curto e remova com um toque longo.</string>
     <string name="osmand_distance_plugin_name">Calculador de distância</string>
     <string name="use_clear_distance_measurement">Clique mais uma vez para eliminar os pontos de medição.</string>
@@ -1084,4 +1062,17 @@ OsmAnd está sendo ativamente desenvolvida e nosso projeto e seu progresso depen
     <string name="audionotes_plugin_name">Notas de Audio/vídeo</string>
     <string name="index_srtm_parts">Partes</string>
     <string name="index_srtm_ele">Curvas de nível</string>
+    <string name="tip_recent_changes_1_1_2_t">"Mudanças no 1.1.2:
+\n\t* Melhorias no plug-in de áudio / vídeo (fotos com informações EXIF)
+\n\t* Usabilidade reparada e reestruturada do plugin de curvas de nível\n\t* Pacotes de relevo sombreado para o plugin de curvas de nível
+\n\t* Correções de bugs (roteamento subótimo) "</string>
+    <string name="recording_photo_description">Foto %1$s de %2$s</string>
+    <string name="av_def_action_picture">Capture uma foto</string>
+    <string name="osmand_srtm_long_description_1000_chars">Esse plugin disponibiliza curvas de nível que podem ser mostradas nos mapas offline do OsmAnd. Os dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no Terra, o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
+    <string name="srtm_plugin_description">Facilita o download de curvas de nível e relevo sombreado (Configurações -&gt; Dados offline -&gt; Baixar -&gt; Select desired map type).</string>
+    <string name="srtm_plugin_name">Plugin de curvas de nível</string>
+    <string name="download_select_map_types">Outros mapas</string>
+    <string name="download_srtm_maps">Curvas de nível</string>
+    <string name="rendering_attr_noAdminboundaries_name">Esconder limites administrativos</string>
+	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis 5 a 9)</string>
     </resources>
