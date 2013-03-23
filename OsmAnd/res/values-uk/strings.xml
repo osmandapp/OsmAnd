@@ -101,10 +101,10 @@
   <string name="zoomIn">Збільшити</string>
   <string name="zoomIs">Масштаб</string>
   <string name="north">північ\n</string>
-  <string name="north_north_east">north-north-east</string>
+  <string name="north_north_east">північ-північ-схід</string>
   <string name="north_east">north-east</string>
-  <string name="east_north_east">east-north-east</string>
-  <string name="east">east</string>
+  <string name="east_north_east">схід-північ-схід</string>
+  <string name="east">схід</string>
   <string name="east_south_east">east-south-east</string>
   <string name="south_east">south-east</string>
   <string name="south_south_east">south-south-east</string>
