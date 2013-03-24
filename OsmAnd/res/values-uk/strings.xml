@@ -34,64 +34,68 @@
   <string name="offline_navigation_not_available">OsmAnd офлайн навігація тимчасово не доступна.</string>
   <string name="left_side_navigation">Лівосторонній рух</string>
   <string name="left_side_navigation_descr">Увімкніть для країн з лівостороннім рухом</string>
-  <string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
+  <string name="download_link_and_local_description">Завантажте або обновіть офлайн дані\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоби вилучити (або деактивувати) карту утримуйте мапу. Дані про пристрій:</string>
   <string name="unknown_from_location">Початкове місцезнаходження не визначено</string>
   <string name="unknown_location">Позиція ще не визначена</string>
   <string name="context_menu_item_directions">Напрямки сюди</string>
-  <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
-  <string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
+  <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
+  <string name="confirm_interrupt_download">Перервати завантаження файлу?</string>
   <string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
-  <string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
+  <string name="basemap_was_selected_to_download">Базова мапа необхідна для коректної роботи аплікації і автоматично була вибрана для завантаження.</string>
   <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити карту самостійно (див. http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Online maps (tiles)</string>
   <string name="local_indexes_cat_map">Офлайн мапи (векторні)</string>
   <string name="gpx_index_settings_descr">" (включаючи GPX аналізатор)"</string>
   <string name="index_settings_descr">Завантаження, перегляд деталей, та управління офлайн мапами</string>
-  <string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
+  <string name="map_online_plugin_is_not_installed">Активуйте плагін онлайн мап, щоб мати можливість вибирати різні джерела для карт</string>
   <string name="map_online_data">Online maps (tiles)</string>
-  <string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
+  <string name="map_online_data_descr">Використовувати онлайн мапи (кешуються на SD картці)</string>
   <string name="online_map_settings">Онлайн мапи</string>
-  <string name="online_map_settings_descr">Configure online or cached tile map sources</string>
+  <string name="online_map_settings_descr">Налаштування онлнай або кешованих джерел (тайлів) мап</string>
   <string name="map_settings">Налаштування мапи</string>
   <string name="map_settings_descr">Налаштування відображення карти</string>
   <string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
   <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
-  <string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
+  <string name="osmand_accessibility_description">Цей плагін містить налаштування для додаткових можливостей.</string>
   <string name="extra_settings">Розширені налаштування</string>
   <string name="osmand_monitoring_description">Show settings facilitating to record your trips to GPX files or to live track using a web service.</string>
   <string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
   <string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
   <string name="plugins_screen">Plugin Manager</string>
-  <string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
+  <string name="select_plugin_to_activate">Виберіть плагін, щоб активувати або деактивувати його (можливо потрібно буде перезавантажити аплікацію)</string>
   <string name="prefs_plugins_descr">Плагіни надають додаткові можливості</string>
   <string name="prefs_plugins">Plugin Manager</string>
   <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 : \n\t- *Plugin functionality* \n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features. \n\t- *New offline map data support* \n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). \n\t - You need to download completely new offline data (old data will not be supported anymore) \n\t- *Offline Routing* \n\t - Offline routing becomes more robust \n\t *Usability and UI experience* \n\t - Improved in many areas "</string>
   <string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
-  <string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
+  <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи відображаються швидше. Підтримуються не всіма пристроями.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
   <string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
-  <string name="debugging_and_development">OsmAnd development</string>
-  <string name="native_rendering">Native rendering</string>
+  <string name="debugging_and_development">Налагодження і розробка OsmAnd</string>
+  <string name="native_rendering">Швидкий рендеринг</string>
   <string name="animate_routing">Animate navigation</string>
-  <string name="test_voice_prompts">Test voice prompts</string>
+  <string name="test_voice_prompts">Тестувати голосові підказки</string>
   <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
-  <string name="tip_recent_changes_0_7_2_t">"Changes in 0.7.2 : \n\t- Native rendering for all devices \n\t- Offline POI editing \n\t- Accessibility \n\t- Lots of bug fixes "</string>
-  <string name="send_files_to_osm">Send GPX files to OSM?</string>
-  <string name="gpx_visibility_txt">Visibility</string>
-  <string name="gpx_tags_txt">Tags</string>
-  <string name="gpx_description_txt">Description</string>
-  <string name="validate_gpx_upload_name_pwd">Please specify OSM user name and password to upload GPX files.</string>
-  <string name="default_buttons_support">Support</string>
-  <string name="support_new_features">Support new features</string>
+  <string name="tip_recent_changes_0_7_2_t">"Зміни 0.7.2 :
+\n\t- Швидкий рендеринг для всіх пристроїв
+\n\t- Редагування POI офлайн
+\n\t- Додаткові можливості
+\n\t- Виправлено багато помилок "</string>
+  <string name="send_files_to_osm">Відправити GPX файли в OSM?</string>
+  <string name="gpx_visibility_txt">Видимість</string>
+  <string name="gpx_tags_txt">Теги</string>
+  <string name="gpx_description_txt">Опис</string>
+  <string name="validate_gpx_upload_name_pwd">Будь-ласка вкажіть ім\'я користувача і пароль в OSM для завантаження GPX файлів в OSM.</string>
+  <string name="default_buttons_support">Підтримка</string>
+  <string name="support_new_features">Підтримати розробку нових функцій</string>
   <string name="show_ruler_level_descr">Display ruler on the map</string>
-  <string name="show_ruler_level">Display ruler</string>
+  <string name="show_ruler_level">Показувати масштаб</string>
   <string name="info_button">Info</string>
   <string name="back_to_location">Повернутись</string>
   <string name="help">Допомога</string>
   <string name="show_details">Показати деталі</string>
   <string name="accessibility_extensions_descr">Додаткові можливості невізуально доступу для старих версій Android</string>
   <string name="accessibility_extensions">Додаткові можливості невізуального доступу</string>
-  <string name="accessibility_mode">Accessibility mode</string>
+  <string name="accessibility_mode">Режим спеціальних можливостей</string>
   <string name="accessibility_mode_descr">Вмикає додаткові можливості для невізуального доступу</string>
   <string name="accessibility_on">Увімкнено</string>
   <string name="accessibility_off">Вимкнено</string>
@@ -138,8 +142,8 @@
   <string name="scroll_map_by_gestures_descr">Сувати карту жестами на сенсорному екрані</string>
   <string name="scroll_map_by_gestures">Звичайне управління картою</string>
   <string name="i_am_here">Я тут</string>
-  <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball moves</string>
-  <string name="zoom_by_trackball">Use trackball for zoom control</string>
+  <string name="zoom_by_trackball_descr">Змінювати масштаб горизонтальних рухом трекбола</string>
+  <string name="zoom_by_trackball">Використовувати трекбол для зміни масштабу</string>
   <string name="use_short_object_names_descr">Use short object names in touch exploration mode</string>
   <string name="use_short_object_names">Use object names</string>
   <string name="accessibility_preferences_descr">Accessibility related preferences</string>
@@ -225,7 +229,7 @@
   <string name="tip_recent_changes_0_6_9_t">"Changes in 0.6.9 : \n\t- Improved offline map rendering \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices) \n\t- Massive look and feel changes \n\t- Altitude info \n\t- New translations (Vienamese, Polish) \n\t- Other small features "</string>
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Прозора тема</string>
-  <string name="native_library_not_supported">Рідна бібліотека не підтримується на цьому пристрої</string>
+  <string name="native_library_not_supported">Рідна бібліотека не підтримується на цьому пристрої.</string>
   <string name="init_native_library">Ініціалізація рідної бібліотеки…</string>
   <string name="choose_auto_follow_route">Налаштування автоорієнтації мапи</string>
   <string name="choose_auto_follow_route_descr">Час, через який мапа повернеться до поточної позиції</string>
@@ -369,7 +373,10 @@
   <string name="tip_location_sharing">Location Sharing</string>
   <string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
   <string name="tip_favorites">Favorite Points</string>
-  <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites. \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'. \n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it. \n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'.</string>
+  <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
+\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'.
+\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
+\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' -&gt;\'Define view\'</string>
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> map classification with images"</string>
   <string name="error_doing_search">Error occurred in offline search</string>
   <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
@@ -384,11 +391,12 @@
   <string name="tip_navigation">Navigation</string>
   <string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
   <string name="tip_search">Searching</string>
-  <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite. \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
+  <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
+\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'</string>
   <string name="tip_map_context_menu">Map Context Menu</string>
   <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
   <string name="tip_initial">Tips and Tricks</string>
-  <string name="tip_initial_t">\tOsmAnd is a navigation application with many features. \n\tAs an basic introduction, some usage tips and tricks are linked on the main menu screen.</string>
+  <string name="tip_initial_t">\tOsmAnd - навігаційна аплікація з великими можливостями.\n\tСлідуйте за підказками за посиланням в меню</string>
   <string name="next_button">Next</string>
   <string name="previous_button">Previous</string>
   <string name="unit_of_length_descr">Change units of length and speed</string>
@@ -478,7 +486,7 @@
   <string name="select_all">Вибрати все</string>
   <string name="reload">Перезавантажити</string>
   <string name="fast_route_mode">Найшвидший маршрут</string>
-  <string name="fast_route_mode_descr">Надавати перевагу найшвидшому маршруту перед найкоротшим</string>
+  <string name="fast_route_mode_descr">"Надавати перевагу найшвидшому маршруту перед найкоротшим "</string>
   <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
   <string name="context_menu_item_download_map">Завантажити мапу</string>
   <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
@@ -486,7 +494,7 @@
   <string name="continuous_rendering">Continuous rendering</string>
   <string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
   <string name="rendering_exception">Error occurred while rendering selected area</string>
-  <string name="show_point_options">Location options</string>
+  <string name="show_point_options">Використовувати місце …</string>
   <string name="renderer_load_sucess">Renderer sucessfully loaded</string>
   <string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
   <string name="renderers">Vector renderer</string>
@@ -567,8 +575,8 @@
   <string name="hide_poi_filter">Сховати фільтр</string>
   <string name="show_poi_filter">Показати фільтр</string>
   <string name="search_poi_filter">Фільтр</string>
-  <string name="menu_mute_off">Звук ув.</string>
-  <string name="menu_mute_on">Звук вимк.</string>
+  <string name="menu_mute_off">Звук увімкнено</string>
+  <string name="menu_mute_on">Звук вимкнено</string>
   <string name="voice_provider_descr">Виберіть голос для навігації</string>
   <string name="voice_provider">Голосові дані</string>
   <string name="voice_data_initializing">Ініціалізуються голосові дані…</string>
@@ -870,7 +878,7 @@
   <string name="osmand_parking_plugin_name">Плагін місця паркування</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце паркування</string>
   <string name="context_menu_item_delete_parking_point">Вилучити маркер місця паркування</string>
-  <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги</string>
+  <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
   <string name="shared_location">Загальні місця</string>
   <string name="update_downlod_list">Перезавантажити список</string>
   <string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, dalvik %3$s MB).</string>
@@ -965,12 +973,12 @@
     <string name="osmand_distance_plugin_name">Калькулятор відстані</string>
     <string name="av_use_external_camera">Використовувати аплікацію Камера</string>
     <string name="av_settings_descr">Налаштування аудіо/відео запису</string>
-    <string name="av_settings">Налаштування аудіо відео</string>
+    <string name="av_settings">"Налаштування аудіо відео "</string>
     <string name="recording_error">"Помилка під час запису "</string>
     <string name="recording_camera_not_available">Камера не доступна</string>
     <string name="recording_default_name">запис</string>
     <string name="av_def_action_choose">Обрати за запитом</string>
-    <string name="recording_is_recorded">Аудіо/відео зараз записується Для зупинки натисність АВ віджет</string>
+    <string name="recording_is_recorded">Аудіо/відео зараз записується Для зупинки натисність АВ віджет.</string>
     <string name="recording_context_menu_arecord">Створити аудіо замітку</string>
     <string name="recording_context_menu_vrecord">Створити відео замітку</string>
     <string name="layer_recordings"/>
@@ -980,4 +988,44 @@
     <string name="monitoring_control_stop">стоп</string>
     <string name="map_widget_intermediate_distance">Проміжна точка</string>
     <string name="recording_can_not_be_played">Запис не може бути відтворений</string>
+    <string name="recording_playing">Відбувається відтворення аудіо\n%1$s</string>
+    <string name="recording_open_external_player">Відкрити зовнішній програвач</string>
+    <string name="recording_delete_confirm">Ви хочете вилучити даний запис?</string>
+    <string name="tip_recent_changes_1_1_0_t">"Зміни в 1.1.0:
+\n\t* Плагін калькулятора відстаней\n\t* Плагін аудіо/відео заміток
+\n\t* Плагін ліній висот\n\t* Виправлені помилки
+\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
+\n\t* EGM96 корекція для GPS висот "</string>
+    <string name="recording_description">Записується %1$s %2$s з %3$s</string>
+    <string name="osmand_srtm_long_description_1000_chars">Цей плагін надає функціонал контурних ліній, які можуть відображатись в офлайн мапах OsmAnd. Глобальні дані (між 70 градусами на півночі і 70 градусами на півдні) базуються нв вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), інструментом візуалізації Terra, флагманського супутника Землі системи спостереження NASA. ASTER - це результат спільних зусиль NASA, міністерства економіки Японії, торгівлі і промисловості (METI), космічних систем Японії (J-spacesystems).</string>
+    <string name="osmand_distance_plugin_description">Обчислює відстань на мапі між 2 і більше точками. Додавайте точки коротким дотиком і вилучайте довгим.</string>
+    <string name="use_distance_measurement">Додавайте точки коротким дотиком і вилучайте довгим, натисніть на віджет, щоб вийте з режиму редагування точок.</string>
+    <string name="map_widget_distancemeasurement">Вимірювання відстаней</string>
+    <string name="map_widget_audionotes">Аудіо замітки</string>
+    <string name="audionotes_plugin_description">Робіть аудіо/відео замітки під час подорожей</string>
+    <string name="audionotes_plugin_name">Аудіо/відео замітки</string>
+    <string name="index_srtm_parts">частин</string>
+    <string name="index_srtm_ele">Лінії висот</string>
+    <string name="srtm_plugin_description">Плагін дозволяє завантажувати лінії висот (Налаштування - Управіння даними - Завантажити - Виберіть потрібний тип карти).</string>
+    <string name="srtm_plugin_name">Плагін ліній висот</string>
+    <string name="download_select_map_types">Інші мапи</string>
+    <string name="download_roads_only_item">Дороги</string>
+    <string name="download_srtm_maps">Горизонталі</string>
+    <string name="download_roads_only_maps">Тільки мапи з дорогами</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Приховати контури</string>
+	<string name="osmodroid_plugin_name">OsMoDroid плагін</string>
+	<string name="tip_altitude_offset">Показувати висоту - корекція</string>
+	<string name="map_widget_max_speed">Обмеження швидкості</string>
+    <string name="route_descr_lat_lon">Ш %1$.3f Д %2$.3f</string>
+    <string name="route_descr_current_location">Поточна позиція</string>
+    <string name="route_descr_from_to">З %1$s\nВ %2$s</string>
+    <string name="route_descr_from_to_via">З: %1$s\nЧерез: %2$s\nВ : %3$s</string>
+    <string name="no_buildings_found">Будівлі не знайдено.</string>
+    <string name="search_villages_and_postcodes">Пошук по селу/індексу</string>
+	<string name="rendering_attr_showRoadMaps_description">Відображати тільки дорожні мапи:</string>
+	<string name="rendering_attr_showRoadMaps_name">Тільки дорожні мапи</string>
+    <string name="safe_mode_description">Запустити аплікацію в безпечному режимі (сповільнює роботу аплікаці, використовуючи тільки Android функції).</string>
+    <string name="safe_mode">Безпечний режим</string>
+    <string name="native_library_not_running">Аплікація запущена в безпечному режимі (можна вимкнути в Налаштуваннях).</string>
     </resources>
