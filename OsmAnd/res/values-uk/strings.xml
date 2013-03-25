@@ -1028,4 +1028,14 @@
     <string name="safe_mode_description">Запустити аплікацію в безпечному режимі (сповільнює роботу аплікаці, використовуючи тільки Android функції).</string>
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Аплікація запущена в безпечному режимі (можна вимкнути в Налаштуваннях).</string>
+    <string name="audionotes_location_not_defined">Поточне місцезнаходження для замітки не визначено. Використовуйте контекстне меню для прив\'язки замітки до даної точки</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid плагін старої версії і потребує оновлення.</string>
+    <string name="tip_altitude_offset_t">\tБільшість GPS пристроїв показують висоту відносно еліпсоїда WGS84, для визначення висоти над рівнем моря необхідно провести корекцію, яка залежить від вашого місцезнаходження.\n\tЩоби отримати справжні дані необхідно завантажити WW15MGH.DAC використовуючи менеджер завантажень (http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
+    <string name="monitoring_control_start">старт</string>
+    <string name="background_service_is_enabled_question">Фоновий режим запущений. Ви хочете його відмінити?</string>
+    <string name="close_changeset">Закрити список змін</string>
+	<string name="zxing_barcode_scanner_not_found">Аплікацію \'Сканер штрих-кодів\' не знайдено. Шукати в Маркеті?</string>
+	<string name="rendering_attr_roadColors_description">Виберіть кольорову схему доріг:</string>
+	<string name="rendering_attr_roadColors_name">Кольорова схема доріг</string>
+    <string name="map_widget_show_destination_arrow">Від ображати напрямок до пункту прибуття</string>
     </resources>
