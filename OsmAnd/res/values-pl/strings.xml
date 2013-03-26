@@ -1046,7 +1046,7 @@
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
     <string name="local_index_items"/>
 	<string name="no_buildings_found">Nie znaleziono budynków.</string>
-    <string name="search_villages_and_postcodes">Szukaj miejscowości/kodów pocztowych</string>
+    <string name="search_villages_and_postcodes">Szukaj wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
     <string name="route_descr_current_location">Bieżąca pozycja</string>
     <string name="route_descr_from_to">Z: %1$s↵\nDo: %2$s</string>
