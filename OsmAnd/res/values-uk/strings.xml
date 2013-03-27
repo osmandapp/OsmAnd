@@ -258,7 +258,7 @@
   <string name="data_to_search_poi_not_available">Локальні дані для пошука POI за іменем не знайдено.</string>
   <string name="poi_filter_by_name">Пошук за назвою</string>
   <string name="old_poi_file_should_be_deleted">Дані POI \'%1$s\' застаріли і можуть бути вилучені.</string>
-  <string name="update_poi_file_not_found">Local file to maintain POI changes not found and could not be created.</string>
+  <string name="update_poi_file_not_found">Файл з POI точками не був знайдений і не може бути створений.</string>
   <string name="button_upgrade_osmandplus">Оновити до OsmAnd+</string>
   <string name="map_version_changed_info">На сервері даних були знайдені файли, не сумісні з даною версією. Для їх використання, будь-ласка, оновіть аплікацію.</string>
   <string name="local_index_mi_rename">Перейменувати</string>
@@ -494,7 +494,7 @@
   <string name="continuous_rendering">Continuous rendering</string>
   <string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
   <string name="rendering_exception">Error occurred while rendering selected area</string>
-  <string name="show_point_options">Використовувати місце…</string>
+  <string name="show_point_options">Використовувати місце …</string>
   <string name="renderer_load_sucess">Renderer sucessfully loaded</string>
   <string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
   <string name="renderers">Vector renderer</string>
@@ -854,7 +854,7 @@
   <string name="edit_filter_create_message">Фільтр {0} створений</string>
   <string name="default_buttons_selectall">Виділити все</string>
   <string name="gpxup_public">Публічний</string>
-  <string name="gpxup_identifiable">Identifiable</string>
+  <string name="gpxup_identifiable">Ідентифікований</string>
   <string name="gpxup_trackable">Відстежуваний</string>
   <string name="gpxup_private">Приватний</string>
   <string name="osmand_parking_event">Забрати автомобіль зі стоянки</string>
@@ -996,7 +996,7 @@
 \n\t* Плагін ліній висот\n\t* Виправлені помилки
 \n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
 \n\t* EGM96 корекція для GPS висот "</string>
-    <string name="recording_description">Записується %1$s %2$s з %3$s</string>
+    <string name="recording_description">Запис %1$s %2$s в %3$s</string>
     <string name="osmand_srtm_long_description_1000_chars">Цей плагін надає функціонал контурних ліній, які можуть відображатись в офлайн мапах OsmAnd. Глобальні дані (між 70 градусами на півночі і 70 градусами на півдні) базуються нв вимірюваннях SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), інструментом візуалізації Terra, флагманського супутника Землі системи спостереження NASA. ASTER - це результат спільних зусиль NASA, міністерства економіки Японії, торгівлі і промисловості (METI), космічних систем Японії (J-spacesystems).</string>
     <string name="osmand_distance_plugin_description">Обчислює відстань на мапі між 2 і більше точками. Додавайте точки коротким дотиком і вилучайте довгим.</string>
     <string name="use_distance_measurement">Додавайте точки коротким дотиком і вилучайте довгим, натисніть на віджет, щоб вийте з режиму редагування точок.</string>
@@ -1030,7 +1030,7 @@
     <string name="native_library_not_running">Аплікація запущена в безпечному режимі (можна вимкнути в Налаштуваннях).</string>
     <string name="audionotes_location_not_defined">Поточне місцезнаходження для замітки не визначено. Використовуйте контекстне меню для прив\'язки замітки до даної точки</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid плагін старої версії і потребує оновлення.</string>
-    <string name="tip_altitude_offset_t">\tБільшість GPS пристроїв показують висоту відносно еліпсоїда WGS84, для визначення висоти над рівнем моря необхідно провести корекцію, яка залежить від вашого місцезнаходження.\n\tЩоби отримати справжні дані необхідно завантажити WW15MGH.DAC використовуючи менеджер завантажень (http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).</string>
+    <string name="tip_altitude_offset_t">\tБільшість GPS пристроїв показують висоту відносно еліпсоїда WGS84, для визначення висоти над рівнем моря необхідно провести корекцію, яка залежить від вашого місцезнаходження.\n\tЩоби отримати справжні дані необхідно завантажити WW15MGH.DAC використовуючи менеджер завантажень (http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).\n</string>
     <string name="monitoring_control_start">старт</string>
     <string name="background_service_is_enabled_question">Фоновий режим запущений. Ви хочете його відмінити?</string>
     <string name="close_changeset">Закрити список змін</string>
@@ -1065,4 +1065,13 @@
     <string name="poi_filter_sightseeing">Туризм</string>
     <string name="show_warnings_title">Показати попередження…</string>
 	<string name="poi_filter_emergency">Надзвичайна ситуація</string>
-    </resources>
+    <string name="osmodroid_plugin_description">OsMoDroid плагін - це розширення для OsmAnd, що використовує OsModroid аплікацію для стеження.. Інформацію про сервіс можна знайти на сайті http://esya.ru.</string>
+    <string name="tip_recent_changes_0_8_4_t">Зміни в 0.8.4:\n\tВиправлення деяких помилок\n\tКарта не втрачає позиції GPS після блокування\n\tУвімкнення сплячого режиму під час навігації</string>
+    <string name="non_optimal_route_calculation">Швидко побудова маршруту (можливо неоптимальна)</string>
+	<string name="show_warnings_descr">Показувати обмеження швидкостей, камери і смуги</string>
+	<string name="avoid_motorway">Уникати автомагістралей</string>
+	<string name="snap_to_road_descr">Прив\'язати поточну позицію до дороги</string>
+	<string name="snap_to_road">Прив\'язати до дороги</string>
+	<string name="osmand_short_description_80_chars">"OsmAnd  - це навігаційна аплікація для подорожей з відкритим кодом для онлайн і офлайн мап"</string>
+	<string name="osmand_plus_short_description_80_chars">"OsmAnd  - це навігаційна аплікація для подорожей з відкритим кодом для онлайн і офлайн мап"</string>
+	</resources>
