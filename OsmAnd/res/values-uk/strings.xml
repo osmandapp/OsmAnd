@@ -368,7 +368,7 @@
   <string name="map_overlay_descr">Choose overlay map</string>
   <string name="tile_source_already_installed">Мапа вже встановлена, налаштування будуть оновлені</string>
   <string name="select_tile_source_to_install">Виберіть мапи для встановлення або оновлення</string>
-  <string name="internet_not_available">З\'єднання з мережею Інтернет недоступне.</string>
+  <string name="internet_not_available">З\'єднання з мережею Інтернет недоступне</string>
   <string name="install_more">Завантажити ще…</string>
   <string name="tip_update_index">Оновлення локальних даних</string>
   <string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
