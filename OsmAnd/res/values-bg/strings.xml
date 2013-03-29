@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -944,4 +944,12 @@
     <string name="poi_filter_restaurants">Ресторанти</string>
     <string name="show_warnings_title">Покази аларми…</string>
 	<string name="show_warnings_descr">Покажи ограничение за скорост, пътни камери, легнали полицаи и други предупреждения</string>
-	</resources>
+	<string name="access_arrival_time">Време на пристигане</string>
+    <string name="item_checked">маркиран</string>
+    <string name="item_unchecked">немаркиран</string>
+    <string name="map_view">Карта</string>
+    <string name="local_indexes_cat_av">Аудио/Видео данни</string>
+    <string name="stop_routing_confirm">Сигурни ли сте, че искате да отмените навигирането?</string>
+    <string name="clear_dest_confirm">Сигурни ли сте, че искате да отмените назначената точка?</string>
+    <string name="precise_routing_mode">Прецизно изчилсяване на маршрут (алфа)</string>
+    </resources>
