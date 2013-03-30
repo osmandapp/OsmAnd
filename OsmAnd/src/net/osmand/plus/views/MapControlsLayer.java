@@ -62,12 +62,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private Drawable rulerDrawable;
 	private TextPaint rulerTextPaint;
 	private final static double screenRulerPercent = 0.25;
-	private CommonPreference<Integer> settingsToTransparency;
-	private BaseMapLayer[] transparencyLayers;
+	
 	private float scaleCoefficient;
 	
 	private SeekBar transparencyBar;
 	private LinearLayout transparencyBarLayout;
+	private static CommonPreference<Integer> settingsToTransparency;
 	
 
 	public MapControlsLayer(MapActivity activity){
@@ -340,11 +340,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 				Gravity.BOTTOM | Gravity.CENTER);
 		params.setMargins(0, 0, 0, minimumHeight + 3);
 		transparencyBarLayout = new LinearLayout(view.getContext());
-		transparencyBarLayout.setVisibility(View.GONE);
+		transparencyBarLayout.setVisibility(settingsToTransparency != null ? View.VISIBLE : View.GONE);
 		parent.addView(transparencyBarLayout, params);
 
 		transparencyBar = new SeekBar(view.getContext());
 		transparencyBar.setMax(255);
+		if(settingsToTransparency != null) {
+			transparencyBar.setProgress(settingsToTransparency.get());
+		}
 		transparencyBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 			@Override
@@ -357,11 +360,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-				if (settingsToTransparency != null && transparencyLayers != null) {
+				if (settingsToTransparency != null) {
 					settingsToTransparency.set(progress);
-					for (BaseMapLayer base : transparencyLayers) {
-						base.setAlpha(progress);
-					}
 					MapControlsLayer.this.view.refreshMap();
 				}
 			}
@@ -376,6 +376,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				transparencyBarLayout.setVisibility(View.GONE);
+				hideTransparencyBar(settingsToTransparency);
 			}
 		});
 		imageButton.setContentDescription(view.getContext().getString(R.string.close));
@@ -383,18 +384,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		transparencyBarLayout.addView(imageButton, prms);
 	}
 	
-	public void showTransparencyBar(CommonPreference<Integer> transparenPreference,
-			BaseMapLayer[] layerToChange) {
+	public void showTransparencyBar(CommonPreference<Integer> transparenPreference) {
+		MapControlsLayer.settingsToTransparency = transparenPreference;
 		transparencyBarLayout.setVisibility(View.VISIBLE);
 		transparencyBar.setProgress(transparenPreference.get());
-		this.transparencyLayers = layerToChange;
-		this.settingsToTransparency = transparenPreference;
 	}
 	
-	public void hideTransparencyBar(CommonPreference<Integer> transparenPreference) {
-		if(this.settingsToTransparency  == transparenPreference) {
+	public void hideTransparencyBar(CommonPreference<Integer> transparentPreference) {
+		if(settingsToTransparency == transparentPreference) {
 			transparencyBarLayout.setVisibility(View.GONE);
-			this.settingsToTransparency = null;
+			settingsToTransparency = null;
 		}
 	}
 	

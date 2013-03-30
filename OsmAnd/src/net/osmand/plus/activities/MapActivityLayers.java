@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.ResultMatcher;
+import net.osmand.StateChangedListener;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
@@ -98,9 +99,10 @@ public class MapActivityLayers {
 	}
 	
 	
-	public void createLayers(OsmandMapTileView mapView){
+	public void createLayers(final OsmandMapTileView mapView){
 		
-		RoutingHelper routingHelper = ((OsmandApplication) getApplication()).getRoutingHelper();
+		OsmandApplication app = (OsmandApplication) getApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
 		
 		// mapView.addLayer(underlayLayer, -0.5f);
 		mapTileLayer = new MapTileLayer(true);
@@ -111,8 +113,6 @@ public class MapActivityLayers {
 		mapVectorLayer = new MapVectorLayer(mapTileLayer);
 		mapView.addLayer(mapVectorLayer, 0.5f);
 		
-		// mapView.addLayer(overlayLayer, 0.7f);
-		
 		// 0.9 gpx layer
 		gpxLayer = new GPXLayer();
 		mapView.addLayer(gpxLayer, 0.9f);
@@ -122,7 +122,6 @@ public class MapActivityLayers {
 		mapView.addLayer(routeLayer, 1);
 		
 		// 2. osm bugs layer
-		
 		// 3. poi layer
 		poiMapLayer = new POIMapLayer(activity);
 		// 4. favorites layer
@@ -150,6 +149,15 @@ public class MapActivityLayers {
 		// 11. route info layer
 		mapControlsLayer = new MapControlsLayer(activity);
 		mapView.addLayer(mapControlsLayer, 11);
+		
+		app.getSettings().MAP_TRANSPARENCY.addListener(new StateChangedListener<Integer>() {
+			@Override
+			public void stateChanged(Integer change) {
+				mapTileLayer.setAlpha(change);
+				mapVectorLayer.setAlpha(change);
+				mapView.refreshMap();
+			}
+		});
 		
 		OsmandPlugin.createLayers(mapView, activity);
 	}
