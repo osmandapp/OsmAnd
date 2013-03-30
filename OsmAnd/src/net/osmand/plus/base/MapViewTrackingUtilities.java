@@ -65,7 +65,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void updateCompassValue(float val) {
 		if (mapView != null) {
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS) {
-				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 15) {
+				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1) {
 					mapView.setRotate(-val);
 				}
 			} else if (settings.SHOW_VIEW_ANGLE.get()) {

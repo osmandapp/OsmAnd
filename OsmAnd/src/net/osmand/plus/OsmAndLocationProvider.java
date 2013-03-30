@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,6 +55,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private float[] mGravs;
 	private float[] mGeoMags;
 	private float previousCorrectionValue = 360;
+	
+	
+	private float previousCompassValuesAvg = 0;
+	private final boolean USE_KALMAN_FILTER = false;
+	private final float KALMAN_COEFFICIENT = 0.02f;
+	
+	private float[] previousCompassValues = new float[50];
+	private int previousCompassInd = 0;
+	
 	private Float heading = null;
 
 	// Current screen orientation
@@ -74,8 +84,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private List<OsmAndCompassListener> compassListeners = new ArrayList<OsmAndLocationProvider.OsmAndCompassListener>();
 	private Listener gpsStatusListener;
 	
-	
-
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
@@ -290,7 +298,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else if (currentScreenOrientation == 3) {
 			val -= 90;
 		}
-		val = MapUtils.unifyRotationTo360(val);
 		if (previousCorrectionValue == 360 && getLastKnownLocation() != null) {
 			net.osmand.Location l = getLastKnownLocation();
 			GeomagneticField gf = new GeomagneticField((float) l.getLatitude(), (float) l.getLongitude(), (float) l.getAltitude(),
@@ -301,8 +308,26 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			val += previousCorrectionValue;
 		}
 
-		heading = val;
-		updateCompassValue(val);
+		val = MapUtils.unifyRotationTo360(val);
+		if(previousCompassValuesAvg == 0 && previousCompassInd == 0) {
+			Arrays.fill(previousCompassValues, val);
+			previousCompassValuesAvg = val;
+		} else {
+			if (USE_KALMAN_FILTER) {
+				previousCompassValuesAvg = KALMAN_COEFFICIENT * val  + 
+						previousCompassValuesAvg * (1 - KALMAN_COEFFICIENT);
+			} else {
+				int l = previousCompassValues.length;
+				previousCompassInd = (previousCompassInd + 1) % l;
+				// update average
+				previousCompassValuesAvg =
+						previousCompassValuesAvg + (-previousCompassValues[previousCompassInd] + val) / l;
+				previousCompassValues[previousCompassInd] = val;
+				previousCompassValuesAvg = MapUtils.unifyRotationTo360(previousCompassValuesAvg);
+			}
+		}
+		heading = previousCompassValuesAvg;
+		updateCompassValue(heading.floatValue());
 
 	}
 
