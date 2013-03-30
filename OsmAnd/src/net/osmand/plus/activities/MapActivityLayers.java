@@ -349,7 +349,7 @@ public class MapActivityLayers {
 					if(!settings.SAVE_TRACK_TO_GPX.get()){
 						AccessibleToast.makeText(activity, R.string.gpx_monitoring_disabled_warn, Toast.LENGTH_SHORT).show();
 					}
-					Map<String, GPXFile> data = activity.getSavingTrackHelper().collectRecordedData();
+					Map<String, GPXFile> data = getApplication().getSavingTrackHelper().collectRecordedData();
 					if(toShow == null) {
 						toShow = new GPXFile();
 						toShow.showCurrentTrack = true;

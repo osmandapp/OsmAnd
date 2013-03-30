@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.Random;
 
 import net.osmand.access.AccessibleAlertBuilder;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -21,6 +22,8 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +38,7 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
+import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 
@@ -364,6 +368,98 @@ public class MainMenuActivity extends Activity {
         }
         return super.onKeyDown(keyCode, event);
     }
+    
+    public static void backToMainMenuDialog(final Activity a, final LatLon searchLocation) {
+		final Dialog dlg = new Dialog(a, R.style.Dialog_Fullscreen);
+		final View menuView = (View) a.getLayoutInflater().inflate(R.layout.menu, null);
+		menuView.setBackgroundColor(Color.argb(200, 150, 150, 150));
+		dlg.setContentView(menuView);
+		MainMenuActivity.onCreateMainMenu(dlg.getWindow(), a);
+		Animation anim = new Animation() {
+			@Override
+			protected void applyTransformation(float interpolatedTime, Transformation t) {
+				ColorDrawable colorDraw = ((ColorDrawable) menuView.getBackground());
+				colorDraw.setAlpha((int) (interpolatedTime * 200));
+			}
+		};
+		anim.setDuration(700);
+		anim.setInterpolator(new AccelerateInterpolator());
+		menuView.setAnimation(anim);
+
+		View showMap = dlg.findViewById(R.id.MapButton);
+		showMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dlg.dismiss();
+			}
+		});
+		View settingsButton = dlg.findViewById(R.id.SettingsButton);
+		settingsButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent settings = new Intent(a, OsmandIntents.getSettingsActivity());
+				a.startActivity(settings);
+				dlg.dismiss();
+			}
+		});
+
+		View favouritesButton = dlg.findViewById(R.id.FavoritesButton);
+		favouritesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent favorites = new Intent(a, OsmandIntents.getFavoritesActivity());
+				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				a.startActivity(favorites);
+				dlg.dismiss();
+			}
+		});
+
+		View closeButton = dlg.findViewById(R.id.CloseButton);
+		closeButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dlg.dismiss();
+				// 1. Work for almost all cases when user open apps from main menu
+				Intent newIntent = new Intent(a, OsmandIntents.getMainMenuActivity());
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
+				a.startActivity(newIntent);
+				// 2. good analogue but user will come back to the current activity onResume()
+				// so application is not reloaded !!!
+				// moveTaskToBack(true);
+				// 3. bad results if user comes from favorites
+				// a.setResult(MainMenuActivity.APP_EXIT_CODE);
+				// a.finish();
+			}
+		});
+
+		View searchButton = dlg.findViewById(R.id.SearchButton);
+		searchButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				final Intent search = new Intent(a, OsmandIntents.getSearchActivity());
+				LatLon loc = searchLocation;
+				search.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+				search.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+				// causes wrong position caching:  search.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				search.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				a.startActivity(search);
+				dlg.dismiss();
+			}
+		});
+		menuView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				dlg.dismiss();
+			}
+		});
+
+		dlg.show();
+		// Intent newIntent = new Intent(a, MainMenuActivity.class);
+		// newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		// startActivity(newIntent);
+	}
 	
     
     @Override

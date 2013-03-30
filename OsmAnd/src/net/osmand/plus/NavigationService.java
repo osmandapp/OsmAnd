@@ -1,12 +1,11 @@
 package net.osmand.plus;
 
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
-import net.osmand.plus.activities.LiveMonitoringHelper;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.routing.RoutingHelper;
 import android.app.AlarmManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -23,15 +22,11 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Toast;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 public class NavigationService extends Service implements LocationListener {
 
@@ -42,8 +37,6 @@ public class NavigationService extends Service implements LocationListener {
 	private final static int NOTIFICATION_SERVICE_ID = 5;
 	public final static String OSMAND_STOP_SERVICE_ACTION  = "OSMAND_STOP_SERVICE_ACTION"; //$NON-NLS-1$
 	public final static String NAVIGATION_START_SERVICE_PARAM = "NAVIGATION_START_SERVICE_PARAM"; 
-	private static final int LOST_LOCATION_MSG_ID = 10;
-	private static final long LOST_LOCATION_CHECK_DELAY = 20000;
 	
 	private NavigationServiceBinder binder = new NavigationServiceBinder();
 
@@ -52,8 +45,6 @@ public class NavigationService extends Service implements LocationListener {
 	private String serviceOffProvider;
 	private int serviceError;
 	
-	private SavingTrackHelper savingTrackHelper;
-	private RoutingHelper routingHelper;
 	private OsmandSettings settings;
 	
 	private Handler handler;
@@ -61,12 +52,12 @@ public class NavigationService extends Service implements LocationListener {
 	private static WakeLock lockStatic;
 	private PendingIntent pendingIntent;
 	private BroadcastReceiver broadcastReceiver;
-	private LiveMonitoringHelper liveMonitoringHelper;
 	private boolean startedForNavigation;
 	
 	private static Method mStartForeground;
 	private static Method mStopForeground;
 	private static Method mSetForeground;
+	private OsmAndLocationProvider locationProvider;
 
 	private void checkForegroundAPI() {
 		// check new API
@@ -125,7 +116,8 @@ public class NavigationService extends Service implements LocationListener {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		handler = new Handler();
-		ClientContext cl = ((OsmandApplication) getApplication());
+		OsmandApplication app = (OsmandApplication) getApplication();
+		ClientContext cl = app;
 		settings = cl.getSettings();
 		
 		startedForNavigation = intent.getBooleanExtra(NAVIGATION_START_SERVICE_PARAM, false);
@@ -145,11 +137,8 @@ public class NavigationService extends Service implements LocationListener {
 		serviceError = Math.min(serviceError, serviceOffInterval);
 		
 		
-		savingTrackHelper = ((OsmandApplication) getApplication()).getSavingTrackHelper();
-		liveMonitoringHelper = ((OsmandApplication) getApplication()).getLiveMonitoringHelper();
-		
-		routingHelper = ((OsmandApplication)getApplication()).getRoutingHelper();
-		((OsmandApplication)getApplication()).setNavigationService(this);
+		locationProvider = app.getLocationProvider();
+		app.setNavigationService(this);
 		
 		// requesting 
 		if(isContinuous()){
@@ -168,46 +157,49 @@ public class NavigationService extends Service implements LocationListener {
 		}
 			
 		// registering icon at top level
-		// Leave icon visible even for navigation for proper testing
+		// Leave icon visible even for navigation for proper display
 //		if (!startedForNavigation) {
-			broadcastReceiver = new BroadcastReceiver() {
-				@Override
-				public void onReceive(Context context, Intent intent) {
-					NavigationService.this.stopSelf();
-				}
-
-			};
-			registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
-			Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
-			Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
-					System.currentTimeMillis());
-			notification.flags = Notification.FLAG_NO_CLEAR;
-			notification.setLatestEventInfo(this, Version.getAppName(cl), getString(R.string.service_stop_background_service),
-					PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
-			NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-			if (mStartForeground != null) {
-				Log.d(PlatformUtil.TAG, "invoke startForeground");
-				try {
-					mStartForeground.invoke(this, NOTIFICATION_SERVICE_ID, notification);
-				} catch (InvocationTargetException e) {
-					Log.d(PlatformUtil.TAG, "invoke startForeground failed");
-				} catch (IllegalAccessException e) {
-					Log.d(PlatformUtil.TAG, "invoke startForeground failed");
-				}
-			}
-			else {
-				Log.d(PlatformUtil.TAG, "invoke setForeground");
-				mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
-				try {
-					mSetForeground.invoke(this, Boolean.TRUE);
-				} catch (InvocationTargetException e) {
-					Log.d(PlatformUtil.TAG, "invoke setForeground failed");
-				} catch (IllegalAccessException e) {
-					Log.d(PlatformUtil.TAG, "invoke setForeground failed");
-				}
-			}
+			showNotificationInStatusBar(cl);
 //		}
 		return START_REDELIVER_INTENT;
+	}
+
+	private void showNotificationInStatusBar(ClientContext cl) {
+		broadcastReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				NavigationService.this.stopSelf();
+			}
+
+		};
+		registerReceiver(broadcastReceiver, new IntentFilter(OSMAND_STOP_SERVICE_ACTION));
+		Intent notificationIntent = new Intent(OSMAND_STOP_SERVICE_ACTION);
+		Notification notification = new Notification(R.drawable.bgs_icon, "", //$NON-NLS-1$
+				System.currentTimeMillis());
+		notification.flags = Notification.FLAG_NO_CLEAR;
+		notification.setLatestEventInfo(this, Version.getAppName(cl), getString(R.string.service_stop_background_service),
+				PendingIntent.getBroadcast(this, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		if (mStartForeground != null) {
+			Log.d(PlatformUtil.TAG, "invoke startForeground");
+			try {
+				mStartForeground.invoke(this, NOTIFICATION_SERVICE_ID, notification);
+			} catch (InvocationTargetException e) {
+				Log.d(PlatformUtil.TAG, "invoke startForeground failed");
+			} catch (IllegalAccessException e) {
+				Log.d(PlatformUtil.TAG, "invoke startForeground failed");
+			}
+		} else {
+			Log.d(PlatformUtil.TAG, "invoke setForeground");
+			mNotificationManager.notify(NOTIFICATION_SERVICE_ID, notification);
+			try {
+				mSetForeground.invoke(this, Boolean.TRUE);
+			} catch (InvocationTargetException e) {
+				Log.d(PlatformUtil.TAG, "invoke setForeground failed");
+			} catch (IllegalAccessException e) {
+				Log.d(PlatformUtil.TAG, "invoke setForeground failed");
+			}
+		}
 	}
 	
 	@Override
@@ -241,6 +233,10 @@ public class NavigationService extends Service implements LocationListener {
 		AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 		alarmManager.cancel(pendingIntent);
 		// remove notification
+		removeNotification();
+	}
+
+	private void removeNotification() {
 		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		mNotificationManager.cancel(NOTIFICATION_SERVICE_ID);
 		if (broadcastReceiver != null) {
@@ -270,12 +266,10 @@ public class NavigationService extends Service implements LocationListener {
 		}
 	}
 
-
-
 	@Override
 	public void onLocationChanged(Location l) {
 		if(l != null && !settings.MAP_ACTIVITY_ENABLED.get()){
-			net.osmand.Location location = MapActivity.convertLocation(l,(OsmandApplication) getApplication());
+			net.osmand.Location location = OsmAndLocationProvider.convertLocation(l,(OsmandApplication) getApplication());
 			if(!isContinuous()){
 				// unregister listener and wait next time
 				LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -284,34 +278,8 @@ public class NavigationService extends Service implements LocationListener {
 				if (lock.isHeld()) {
 					lock.release();
 				}
-			} else {
-				// if continuous notify about lost location
-				if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
-					Message msg = Message.obtain(handler, new Runnable() {
-    					@Override
-    					public void run() {
-							if (routingHelper.getLeftDistance() > 0 && !settings.MAP_ACTIVITY_ENABLED.get() &&
-									!handler.hasMessages(LOST_LOCATION_MSG_ID)) {
-								routingHelper.getVoiceRouter().gpsLocationLost();
-							}
-    					}
-    				});
-    				msg.what = LOST_LOCATION_MSG_ID;
-    				handler.removeMessages(LOST_LOCATION_MSG_ID);
-    				handler.sendMessageDelayed(msg, LOST_LOCATION_CHECK_DELAY);
-				}
 			}
-			// use because there is a bug on some devices with location.getTime()
-			long locationTime = System.currentTimeMillis();
-			savingTrackHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-					location.getSpeed(), location.getAccuracy(), locationTime, settings);
-			if(liveMonitoringHelper.isLiveMonitoringEnabled()) {
-				liveMonitoringHelper.insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
-						location.getSpeed(), location.getAccuracy(), locationTime, settings);
-			}
-			if(routingHelper.isFollowingMode()){
-				routingHelper.setCurrentLocation(location, false);
-			}
+			locationProvider.setLocationFromService(location, isContinuous());
 		}
 		
 	}

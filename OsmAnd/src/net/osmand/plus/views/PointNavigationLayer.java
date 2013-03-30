@@ -92,7 +92,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
 		int index = 0;
 		
-		TargetPointsHelper targetPoints = map.getTargetPoints();
+		TargetPointsHelper targetPoints = map.getMyApplication().getTargetPointsHelper();
 		for (LatLon ip : targetPoints.getIntermediatePoints()) {
 			index ++;
 			if (isLocationVisible(ip)) {
@@ -157,7 +157,8 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, List<Object> o) {
-		List<LatLon> intermediatePoints = map.getTargetPoints().getIntermediatePointsWithTarget();
+		TargetPointsHelper tg = map.getMyApplication().getTargetPointsHelper();
+		List<LatLon> intermediatePoints = tg.getIntermediatePointsWithTarget();
 		for (int i = 0; i < intermediatePoints.size(); i++) {
 			LatLon latLon = intermediatePoints.get(i);
 			boolean target = i == intermediatePoints.size() - 1;
@@ -233,9 +234,9 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 					if (itemId == R.string.delete_target_point) {
 						TargetPointsHelper targetPointsHelper = map.getMyApplication().getTargetPointsHelper();
 						if(a.intermediate) {
-							targetPointsHelper.removeWayPoint(map, true, a.index);
+							targetPointsHelper.removeWayPoint(true, a.index);
 						} else {
-							targetPointsHelper.removeWayPoint(map, true, -1);
+							targetPointsHelper.removeWayPoint(true, -1);
 						}
 					}
 					map.getMapLayers().getContextMenuLayer().setLocation(null, "");

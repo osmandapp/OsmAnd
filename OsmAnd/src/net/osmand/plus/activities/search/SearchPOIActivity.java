@@ -17,7 +17,6 @@ import java.util.Map.Entry;
 
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
-import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.NavigationInfo;
@@ -26,6 +25,8 @@ import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
@@ -51,17 +52,9 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -70,7 +63,6 @@ import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -89,18 +81,13 @@ import android.widget.Toast;
 /**
  * Search poi activity
  */
-public class SearchPOIActivity extends OsmandListActivity implements SensorEventListener {
+public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
-	private static final int GPS_TIMEOUT_REQUEST = 1000;
-	private static final int GPS_DIST_REQUEST = 5;
-	private static final int MIN_DISTANCE_TO_RESEARCH = 70;
-	private static final int MIN_DISTANCE_TO_UPDATE = 6;
-
-	private NavigationInfo navigationInfo;
-
+	private static final float MIN_DISTANCE_TO_RESEARCH = 20;
+	private static final float MIN_DISTANCE_TO_REFRESH = 5;
 
 	private Button searchPOILevel;
 	private ImageButton showOnMap;
@@ -115,8 +102,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	private net.osmand.Location location = null; 
 	private Float heading = null;
 	
-	private String currentLocationProvider = null;
-	private boolean sensorRegistered = false;
 	private Handler uiHandler;
 	private OsmandSettings settings;
 	private Path directionPath = new Path();
@@ -126,15 +111,17 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	// never null represents current running task or last finished
 	private SearchAmenityTask currentSearchTask = new SearchAmenityTask(null);
 	private CustomTitleBar titleBar; 
+	private OsmandApplication app;
 
 	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		navigationInfo = new NavigationInfo(this);
 		titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.searchpoi);
 		titleBar.afterSetContentView();
+		
+		app = (OsmandApplication)getApplication();
 		
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
@@ -276,7 +263,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		}
 		
 		String filterId = bundle.getString(AMENITY_FILTER);
-		PoiFilter filter = ((OsmandApplication)getApplication()).getPoiFilters().getFilterById(filterId);
+		PoiFilter filter = app.getPoiFilters().getFilterById(filterId);
 		if (filter != this.filter) {
 			this.filter = filter;
 			if (filter != null) {
@@ -309,19 +296,13 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		if (filter != null) {
 			searchArea.setText(filter.getSearchArea());
 			updateSearchPoiTextButton();
-			
-			setLocation(location);
 			if (searchNearBy) {
-				LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
-				currentLocationProvider = LocationManager.GPS_PROVIDER;
-				if (!isRunningOnEmulator()) {
-					// try to always ask for network provide it is faster way to find location
-					service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST,
-									networkListener);
-					currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-				}
+				app.getLocationProvider().addCompassListener(this);
+				app.getLocationProvider().addLocationListener(this);
+				location = app.getLocationProvider().getLastKnownLocation();
+				app.getLocationProvider().resumeAllUpdates();
 			}
+			updateLocation(location);
 		}
 	}
 	
@@ -381,36 +362,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		}
 	}
 	
-	public void setLocation(net.osmand.Location l){
-		registerUnregisterSensor(l);
-		navigationInfo.setLocation(l);
-		boolean handled = false;
-		if (l != null && filter != null) {
-			net.osmand.Location searchedLocation = getSearchedLocation();
-			if (searchedLocation == null) {
-  				searchedLocation = l;
-				if (!isNameFinderFilter() && !isSearchByNameFilter()) {
-					runNewSearchQuery(SearchAmenityRequest.buildRequest(l, SearchAmenityRequest.NEW_SEARCH_INIT));
-				}
-				handled = true;
-			} else if (l.distanceTo(searchedLocation) > MIN_DISTANCE_TO_RESEARCH) {
-				runNewSearchQuery(SearchAmenityRequest.buildRequest(l, SearchAmenityRequest.SEARCH_AGAIN));
-				handled = true;
-			} else if(location == null || location.distanceTo(l) > MIN_DISTANCE_TO_UPDATE){
-				handled = true;
-			}
-		} else {
-			if(location != null){
-				handled = true;
-			}
-		}
-		if(handled) {
-			location = l;
-			updateSearchPoiTextButton();
-			amenityAdapter.notifyDataSetInvalidated();
-		}
-		
-	}
 	
 	private net.osmand.Location getSearchedLocation(){
 		return currentSearchTask.getSearchedLocation();
@@ -432,13 +383,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	}
 	
 	
-	private boolean isRunningOnEmulator(){
-		if (Build.DEVICE.equals("generic")) { //$NON-NLS-1$ 
-			return true;
-		}  
-		return false;
-	}
-	
 	public boolean isNameFinderFilter(){
 		return filter instanceof NameFinderPoiFilter; 
 	}
@@ -449,14 +393,48 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 	
 
 	@Override
-	public void onSensorChanged(SensorEvent event) {
-		// Attention : sensor produces a lot of events & can hang the system
-		if(heading != null && Math.abs(heading - event.values[0]) < 4){
-			// this is very small variation
-			return;
+	public void updateLocation(net.osmand.Location location) {
+		app.getLocationProvider().registerOrUnregisterCompassListener(location != null);
+		boolean handled = false;
+		if (location != null && filter != null) {
+			net.osmand.Location searchedLocation = getSearchedLocation();
+			if (searchedLocation == null) {
+  				searchedLocation = location;
+				if (!isNameFinderFilter() && !isSearchByNameFilter()) {
+					runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.NEW_SEARCH_INIT));
+				}
+				handled = true;
+			} else if (location.distanceTo(searchedLocation) > MIN_DISTANCE_TO_RESEARCH) {
+				searchedLocation = location;
+				runNewSearchQuery(SearchAmenityRequest.buildRequest(location, SearchAmenityRequest.SEARCH_AGAIN));
+				handled = true;
+			} else if (location.distanceTo(searchedLocation) > MIN_DISTANCE_TO_REFRESH){
+				handled = true;
+			}
+		} else {
+			if(location != null){
+				handled = true;
+			}
 		}
-		heading = event.values[0];
+		if (handled) {
+			this.location = location;
+			updateSearchPoiTextButton();
+			// Get the top position from the first visible element
+			int idx = getListView().getFirstVisiblePosition();
+			View vfirst = getListView().getChildAt(0);
+			int pos = 0;
+			if (vfirst != null)
+				pos = vfirst.getTop();
+			amenityAdapter.notifyDataSetInvalidated();
+			// Restore the position
+			getListView().setSelectionFromTop(idx, pos);
+		}	
 		
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		heading = value;
 		if(!uiHandler.hasMessages(5)){
 			Message msg = Message.obtain(uiHandler, new Runnable(){
 				@Override
@@ -467,49 +445,16 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			msg.what = 5;
 			uiHandler.sendMessageDelayed(msg, 100);
 		}
-		
 	}
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-	}
-
 	
-	
-	
-	private void registerUnregisterSensor(net.osmand.Location location){
-    	// show point view only if gps enabled
-    	if(location == null){
-    		if(sensorRegistered) {
-    			Log.d(PlatformUtil.TAG, "Disable sensor"); //$NON-NLS-1$
-    			((SensorManager) getSystemService(SENSOR_SERVICE)).unregisterListener(this);
-    			sensorRegistered = false;
-    			heading = null;
-    		}
-    	} else {
-    		if(!sensorRegistered){
-    			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
-    			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-    			Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ORIENTATION);
-    			if (s != null) {
-    				sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI);
-    			}
-    			sensorRegistered = true;
-    		}
-    	}
-    }
 	
 	@Override
 	protected void onPause() {
 		super.onPause();
 		if (searchNearBy) {
-			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			service.removeUpdates(gpsListener);
-			service.removeUpdates(networkListener);
-
-			SensorManager sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
-			sensorMgr.unregisterListener(this);
-			sensorRegistered = false;
-			currentLocationProvider = null;
+			app.getLocationProvider().pauseAllUpdates();
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().removeLocationListener(this);
 		}
 	}
 	
@@ -823,6 +768,7 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			}
 		});
 		List<String> attributes = new ArrayList<String>();
+		NavigationInfo navigationInfo = app.getLocationProvider().getNavigationInfo();
 		String direction = navigationInfo.getDirectionString(amenity.getLocation(), heading);
 		if (direction != null)
 			attributes.add(direction);
@@ -841,66 +787,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 		b.show();
 	}
 
-	// Working with location listeners
-	private LocationListener networkListener = new LocationListener(){
-		@Override
-		public void onLocationChanged(Location location) {
-			setLocation(MapActivity.convertLocation(location, getMyApplication()));
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-			setLocation(null);
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			if(LocationProvider.OUT_OF_SERVICE == status){
-				setLocation(null);
-			}
-		}
-	};
-	private LocationListener gpsListener = new LocationListener(){
-		@Override
-		public void onLocationChanged(Location location) {
-			setLocation(MapActivity.convertLocation(location, getMyApplication()));
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-			setLocation(null);
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			LocationManager service = (LocationManager) getSystemService(LOCATION_SERVICE);
-			// do not change provider for temporarily unavailable (possible bug for htc hero 2.1 ?)
-			if (LocationProvider.OUT_OF_SERVICE == status /*|| LocationProvider.TEMPORARILY_UNAVAILABLE == status*/) {
-				if(LocationProvider.OUT_OF_SERVICE == status){
-					setLocation(null);
-				}
-				if (!isRunningOnEmulator() && service.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-					if (!Algorithms.objectEquals(currentLocationProvider, LocationManager.NETWORK_PROVIDER)) {
-						currentLocationProvider = LocationManager.NETWORK_PROVIDER;
-						service.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, this);
-					}
-				}
-			} else if (LocationProvider.AVAILABLE == status) {
-				if (!Algorithms.objectEquals(currentLocationProvider, LocationManager.GPS_PROVIDER)) {
-					currentLocationProvider = LocationManager.GPS_PROVIDER;
-					service.removeUpdates(networkListener);
-				}
-			}
-		}
-	};
 	
 	class DirectionDrawable extends Drawable {
 		Paint paintRouteDirection;
@@ -953,4 +839,6 @@ public class SearchPOIActivity extends OsmandListActivity implements SensorEvent
 			paintRouteDirection.setColorFilter(cf);
 		}
 	}
+
+
 }

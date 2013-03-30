@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 
 import org.apache.commons.logging.Log;
 import org.apache.http.HttpResponse;
@@ -38,6 +41,16 @@ public class LiveMonitoringHelper  {
 	
 	public boolean isLiveMonitoringEnabled(){
 		return settings.LIVE_MONITORING.get();
+	}
+	
+	public void updateLocation(net.osmand.Location location) {
+		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
+				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			long locationTime = System.currentTimeMillis();
+			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(),
+					location.getSpeed(), location.getAccuracy(), locationTime, settings);
+		}
+		
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){

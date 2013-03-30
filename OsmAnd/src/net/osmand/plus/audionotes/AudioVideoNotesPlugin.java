@@ -474,7 +474,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 	
 	private void defaultAction(final MapActivity mapActivity) {
-		final Location loc = mapActivity.getLastKnownLocation();
+		final Location loc = app.getLocationProvider().getLastKnownLocation();
 		// double lat = mapActivity.getMapView().getLatitude();
 		// double lon = mapActivity.getMapView().getLongitude();
 		if (loc == null) {
@@ -838,8 +838,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		LatLon l = MapUtils.decodeShortLocString(encodeName);
 		r.lat = l.getLatitude();
 		r.lon = l.getLongitude();
-		if(lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName())) {
-			float rot = activity.getLastSensorRotation();
+		Float heading = app.getLocationProvider().getHeading();
+		if(lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName()) && heading != null) {
+			float rot = heading.floatValue();
 			try {
 				r.updatePhotoInformation(r.lat, r.lon, rot == 0 ? Double.NaN : rot);
 			} catch (IOException e) {

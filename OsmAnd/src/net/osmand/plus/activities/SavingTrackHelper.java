@@ -16,7 +16,10 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 
 import org.apache.commons.logging.Log;
@@ -276,6 +279,17 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		lastPoint = null;
 		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis()});
 		addTrackPoint(null, true);
+	}
+	
+	public void updateLocation(net.osmand.Location location) {
+		// use because there is a bug on some devices with location.getTime()
+		long locationTime = System.currentTimeMillis();
+		OsmandSettings settings = ctx.getSettings();
+		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && settings.SAVE_TRACK_TO_GPX.get()
+				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			insertData(location.getLatitude(), location.getLongitude(), location.getAltitude(), location.getSpeed(),
+					location.getAccuracy(), locationTime, settings);
+		}
 	}
 	
 	public void insertData(double lat, double lon, double alt, double speed, double hdop, long time, OsmandSettings settings){

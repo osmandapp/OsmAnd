@@ -17,7 +17,7 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
     @Override
     public boolean onClick() {
         if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().getInternalAPI().accessibilityEnabled()) {
-            activity.emitNavigationHint();
+        	activity.getMyApplication().getLocationProvider().emitNavigationHint();
             return true;
         }
         return false;

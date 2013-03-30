@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
@@ -50,6 +51,7 @@ import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Message;
 import android.text.format.DateFormat;
 import android.widget.Toast;
 
@@ -71,6 +73,7 @@ public class OsmandApplication extends Application implements ClientContext {
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
 	BidForFixHelper bidforfix;
+	OsmAndLocationProvider locationProvider;
 
 	// start variables
 	private ProgressDialogImplementation startDialog;
@@ -100,18 +103,22 @@ public class OsmandApplication extends Application implements ClientContext {
 		internalOsmAndAPI = new net.osmand.plus.api.InternalOsmAndAPIImpl(this);
 		sqliteAPI = new SQLiteAPIImpl(this);
 
-		
+		// settings used everywhere so they need to be created first
 		osmandSettings = createOsmandSettingsInstance();
+		// always update application mode to default
+		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+		
 		routingHelper = new RoutingHelper(this, player);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
+		locationProvider = new OsmAndLocationProvider(this);
 		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support),
 				getString(R.string.default_buttons_cancel));
 		savingTrackHelper = new SavingTrackHelper(this);
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
-		targetPointsHelper = new TargetPointsHelper(osmandSettings, routingHelper);
+		targetPointsHelper = new TargetPointsHelper(this);
 		checkPrefferedLocale();
 		startApplication();
 		if (LOG.isDebugEnabled()) {
@@ -149,6 +156,10 @@ public class OsmandApplication extends Application implements ClientContext {
 	 */
 	protected OsmandSettings createOsmandSettingsInstance() {
 		return new OsmandSettings(this);
+	}
+	
+	public OsmAndLocationProvider getLocationProvider() {
+		return locationProvider;
 	}
 
 	/**
@@ -491,7 +502,6 @@ public class OsmandApplication extends Application implements ClientContext {
 				startDialog.startTask(getString(R.string.saving_gpx_tracks), -1);
 				warnings.addAll(savingTrackHelper.saveDataToGpx());
 			}
-			savingTrackHelper.close();
 
 			// restore backuped favorites to normal file
 			final File appDir = getAppPath(null);
@@ -612,6 +622,11 @@ public class OsmandApplication extends Application implements ClientContext {
 	public TargetPointsHelper getTargetPointsHelper() {
 		return targetPointsHelper;
 	}
+	
+	@Override
+	public void showShortToastMessage(int msgId, Object... args) {
+		AccessibleToast.makeText(this, getString(msgId, args), Toast.LENGTH_SHORT).show();
+	}
 
 	@Override
 	public void showToastMessage(int msgId, Object... args) {
@@ -657,13 +672,33 @@ public class OsmandApplication extends Application implements ClientContext {
 	public void runInUIThread(Runnable run, long delay) {
 		uiHandler.postDelayed(run, delay);
 	}
-
+	
+	public void runMessageInUIThreadAndCancelPrevious(final int messageId, final Runnable run, long delay) {
+		Message msg = Message.obtain(uiHandler, new Runnable() {
+			
+			@Override
+			public void run() {
+				if(!uiHandler.hasMessages(messageId)) {
+					run.run();
+				}
+			}
+		});
+		msg.what = messageId;
+		uiHandler.removeMessages(messageId);
+		uiHandler.sendMessageDelayed(msg, delay);
+	}
+	
 	@Override
 	public File getAppPath(String path) {
 		if(path == null) {
 			path = "";
 		}
 		return new File(getSettings().getExternalStorageDirectory(), IndexConstants.APP_DIR + path);
+	}
+
+	@Override
+	public Location getLastKnownLocation() {
+		return locationProvider.getLastKnownLocation();
 	}
 
 }

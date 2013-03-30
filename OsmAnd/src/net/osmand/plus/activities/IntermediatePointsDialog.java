@@ -130,9 +130,9 @@ public class IntermediatePointsDialog {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(changeOrder) {
-					commitChangePointsOrder(app, activity, intermediates, names);
+					commitChangePointsOrder(app, intermediates, names);
 				} else {
-					commitPointsRemoval(app, activity, checkedIntermediates);
+					commitPointsRemoval(app, checkedIntermediates);
 				}
 
 			}
@@ -148,7 +148,7 @@ public class IntermediatePointsDialog {
 		builder.show();
 	}
 
-	private static void commitPointsRemoval(OsmandApplication app, final Activity mapActivity, final boolean[] checkedIntermediates) {
+	private static void commitPointsRemoval(OsmandApplication app, final boolean[] checkedIntermediates) {
 		int cnt = 0;
 		for (int i = checkedIntermediates.length - 1; i >= 0; i--) {
 			if (!checkedIntermediates[i]) {
@@ -158,25 +158,26 @@ public class IntermediatePointsDialog {
 		if (cnt > 0) {
 			boolean changeDestinationFlag =!checkedIntermediates [checkedIntermediates.length - 1];
 			if(cnt == checkedIntermediates.length){	//there is no alternative destination if all points are to be removed?
-				app.getTargetPointsHelper().removeAllWayPoints((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), true);	
+				app.getTargetPointsHelper().removeAllWayPoints(true);	
 			}else{					
 				for (int i = checkedIntermediates.length - 2; i >= 0; i--) {	//skip the destination until a retained waypoint is found
 					if (checkedIntermediates[i] && changeDestinationFlag) {	//Find a valid replacement for the destination
-						app.getTargetPointsHelper().makeWayPointDestination((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), cnt == 0, i);				
+						app.getTargetPointsHelper().makeWayPointDestination(cnt == 0, i);				
 						changeDestinationFlag = false;
 					}else if(!checkedIntermediates[i]){
 						cnt--;
-						app.getTargetPointsHelper().removeWayPoint((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), cnt == 0, i);
+						app.getTargetPointsHelper().removeWayPoint(cnt == 0, i);
 					}
 				}
-				if(mapActivity instanceof MapActivity) {
-					((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
-				}
+				// FIXME
+//				if(mapActivity instanceof MapActivity) {
+//					((MapActivity) mapActivity).getMapLayers().getContextMenuLayer().setLocation(null, "");
+//				}
 			}
 		}
 	}
 	
-	private static void commitChangePointsOrder(OsmandApplication app, final Activity mapActivity, List<LatLon> target, List<String> names) {
+	private static void commitChangePointsOrder(OsmandApplication app,  List<LatLon> target, List<String> names) {
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		List<LatLon> cur = targets.getIntermediatePointsWithTarget();
 		boolean eq = true;
@@ -187,7 +188,7 @@ public class IntermediatePointsDialog {
 			}
 		}
 		if(!eq) {
-			targets.reorderAllTargetPoints((MapActivity) (mapActivity instanceof MapActivity?mapActivity : null), target, names, true);
+			targets.reorderAllTargetPoints(target, names, true);
 		}
 	}
 }

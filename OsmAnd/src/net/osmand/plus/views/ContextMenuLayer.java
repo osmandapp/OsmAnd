@@ -197,7 +197,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	public boolean onLongPressEvent(PointF point) {
 		if ((Build.VERSION.SDK_INT < 14) && !view.getSettings().SCROLL_MAP_BY_GESTURES.get()) {
 			if (!selectedObjects.isEmpty())
-				view.showMessage(activity.getNavigationHint(latLon));
+				view.showMessage(activity.getMyApplication().getLocationProvider().getNavigationHint(latLon));
 			return true;
 		}
 		

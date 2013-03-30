@@ -3,17 +3,19 @@ package net.osmand.plus.views;
 
 import java.util.Arrays;
 
-import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -281,7 +283,7 @@ public class RouteInfoControls {
 			@Override
 			public boolean updateInfo() {
 				// draw speed
-				Location loc = map.getLastKnownLocation();
+				Location loc = map.getMyApplication().getLastKnownLocation();
 				if (loc != null && loc.hasAltitude()) {
 					double compAlt = loc.getAltitude();
 					if (cachedAlt != (int) compAlt) {
@@ -309,14 +311,15 @@ public class RouteInfoControls {
 	}
 	
 	protected TextInfoControl createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final RoutingHelper rh = map.getRoutingHelper();
+		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
+		final MapViewTrackingUtilities trackingUtilities = map.getMapViewTrackingUtilities();
 		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
 			public boolean updateInfo() {
 				float mx = 0; 
-				if ((rh == null || !rh.isFollowingMode()) && map.isMapLinkedToLocation()) {
+				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()) {
 					RouteDataObject ro = map.getLastRouteDataObject();
 					if(ro != null) {
 						mx = ro.getMaximumSpeed();
@@ -349,14 +352,41 @@ public class RouteInfoControls {
 		return speedControl;
 	}
 	
+	
+	protected TextInfoControl createGPSInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final OsmandApplication app = map.getMyApplication();
+		final OsmAndLocationProvider loc = app.getLocationProvider();
+		final TextInfoControl gpsInfoControl = new TextInfoControl(map, 3, paintText, paintSubText) {
+			private int u = -1;
+			private int f = -1;
+
+			@Override
+			public boolean updateInfo() {
+				GPSInfo gpsInfo = loc.getGPSInfo();
+				if(gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
+					u = gpsInfo.usedSatellites;
+					f = gpsInfo.foundSatellites;
+					setText(gpsInfo.usedSatellites+"/"+gpsInfo.foundSatellites, "");
+					return true;
+				}
+				return false;
+			}
+		};
+		gpsInfoControl.setImageDrawable(app.getResources().getDrawable(R.drawable.info_gps_info));
+		gpsInfoControl.setText(null, null);
+		return gpsInfoControl;
+	}
+	
 	protected TextInfoControl createSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		final OsmandApplication app = map.getMyApplication();
 		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
 			public boolean updateInfo() {
+				Location loc = app.getLastKnownLocation();
 				// draw speed
-				if (map.getLastKnownLocation() != null && map.getLastKnownLocation().hasSpeed()) {
+				if (loc != null && loc.hasSpeed()) {
 					// .1 mps == 0.36 kph
 					float minDelta = .1f;
 					// Update more often at walk/run speeds, since we give higher resolution
@@ -364,9 +394,9 @@ public class RouteInfoControls {
 					if (cachedSpeed < 6) {
 						minDelta = .015f;
 					}
-					if (Math.abs(map.getLastKnownLocation().getSpeed() - cachedSpeed) > minDelta) {
-						cachedSpeed = map.getLastKnownLocation().getSpeed();
-						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, map.getMyApplication());
+					if (Math.abs(loc.getSpeed() - cachedSpeed) > minDelta) {
+						cachedSpeed = loc.getSpeed();
+						String ds = OsmAndFormatter.getFormattedSpeed(cachedSpeed, app);
 						int ls = ds.lastIndexOf(' ');
 						if (ls == -1) {
 							setText(ds, null);
@@ -383,7 +413,7 @@ public class RouteInfoControls {
 				return false;
 			}
 		};
-		speedControl.setImageDrawable(map.getResources().getDrawable(R.drawable.info_speed));
+		speedControl.setImageDrawable(app.getResources().getDrawable(R.drawable.info_speed));
 		speedControl.setText(null, null);
 		return speedControl;
 	}
@@ -475,7 +505,7 @@ public class RouteInfoControls {
 	
 	protected TextInfoControl createIntermediateDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final OsmandMapTileView view = map.getMapView();
-		final TargetPointsHelper targets = map.getTargetPoints();
+		final TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
 		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
 				.getDrawable(R.drawable.info_intermediate), view) {
 

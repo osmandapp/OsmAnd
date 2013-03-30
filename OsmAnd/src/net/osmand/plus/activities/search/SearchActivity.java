@@ -8,6 +8,8 @@ import java.util.Locale;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -17,9 +19,6 @@ import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.TabActivity;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +35,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 
-public class SearchActivity extends TabActivity {
+public class SearchActivity extends TabActivity implements OsmAndLocationListener {
 	private static final String SEARCH_HISTORY = "Search_History";
 	private static final String SEARCH_FAVORITES = "Search_Favorites";
 	private static final String SEARCH_TRANSPORT = "Search_Transport";
@@ -55,10 +54,6 @@ public class SearchActivity extends TabActivity {
 	protected static final int POSITION_FAVORITES = 3;
 	protected static final int POSITION_ADDRESS = 4;
 	
-	private static final int GPS_TIMEOUT_REQUEST = 1000;
-	private static final int GPS_DIST_REQUEST = 5;
-	private static final int GPS_ACCURACY = 50; 
-	
 	private static final int REQUEST_FAVORITE_SELECT = 1;
 	private static final int REQUEST_ADDRESS_SELECT = 2;
 	
@@ -72,7 +67,6 @@ public class SearchActivity extends TabActivity {
 	private boolean searchAroundCurrentLocation = false;
 
 	private static boolean searchOnLine = false;
-	private LocationListener locationListener = null;
 	private ArrayAdapter<String> spinnerAdapter;
 	private Spinner spinner;
 	private OsmandSettings settings;
@@ -178,8 +172,13 @@ public class SearchActivity extends TabActivity {
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				if (position != 0) {
 					if (position == POSITION_CURRENT_LOCATION) {
-						startSearchCurrentLocation();
-						searchAroundCurrentLocation = true;
+						net.osmand.Location loc = getLocationProvider().getLastKnownLocation();
+						if(loc != null && System.currentTimeMillis() - loc.getTime() < 10000) {
+							updateLocation(loc);
+						} else {
+							startSearchCurrentLocation();
+							searchAroundCurrentLocation = true;
+						}
 					} else {
 						searchAroundCurrentLocation = false;
 						endSearchCurrentLocation();
@@ -232,43 +231,29 @@ public class SearchActivity extends TabActivity {
 	}
 	
 	
-	
-	public void startSearchCurrentLocation(){
-		if(locationListener == null){
-			locationListener = new LocationListener() {
-				@Override
-				public void onStatusChanged(String provider, int status, Bundle extras) {}
-				@Override
-				public void onProviderEnabled(String provider) {}
-				@Override
-				public void onProviderDisabled(String provider) {}
-				@Override
-				public void onLocationChanged(Location location) {
-					if(location != null){
-						updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),
-								getString(R.string.search_position_current_location_found), false);
-						if(location.getAccuracy() < GPS_ACCURACY){
-							endSearchCurrentLocation();
-						}
-					}
-					
-				}
-			};
-			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			for(String provider : locationManager.getAllProviders()){
-				locationManager.requestLocationUpdates(provider, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, locationListener);
+	public void updateLocation(net.osmand.Location location){
+		if (location != null) {
+			updateSearchPoint(new LatLon(location.getLatitude(), location.getLongitude()),
+					getString(R.string.search_position_current_location_found), false);
+			if (location.getAccuracy() < 20) {
+				endSearchCurrentLocation();
 			}
 		}
+	}
+	public void startSearchCurrentLocation(){
+		getLocationProvider().resumeAllUpdates();
+		getLocationProvider().addLocationListener(this);
 		updateSearchPoint(null,
 				getString(R.string.search_position_current_location_search), false);
 	}
+
+	private OsmAndLocationProvider getLocationProvider() {
+		return ((OsmandApplication) getApplication()).getLocationProvider();
+	}
 	
 	public void endSearchCurrentLocation(){
-		if (locationListener != null) {
-			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-			locationManager.removeUpdates(locationListener);
-			locationListener = null;
-		}
+		getLocationProvider().pauseAllUpdates();
+		getLocationProvider().removeLocationListener(this);
 	}
 	
 	@Override

@@ -538,6 +538,7 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					routerServicePreference.setSummary(getString(R.string.router_service_descr) + "  ["
 							+ osmandSettings.ROUTER_SERVICE.get() + "]");
 				} else if (listPref.getId().equals(osmandSettings.APPLICATION_MODE.getId())) {
+					osmandSettings.DEFAULT_APPLICATION_MODE.set(osmandSettings.APPLICATION_MODE.get());
 					updateAllSettings();
 				} else if (listPref.getId().equals(osmandSettings.PREFERRED_LOCALE.getId())) {
 					// restart application to update locale

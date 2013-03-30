@@ -3,10 +3,12 @@ package net.osmand.plus.views;
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.util.MapUtils;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MainMenuActivity;
 import net.osmand.plus.activities.MapActivity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -180,8 +182,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				@Override
 				public void onClick(View v) {
 					view.getSettings().APPLICATION_MODE.set(modes[j]);
-					activity.updateApplicationModeSettings();
-					view.refreshMap(true);
 					mQuickAction.dismiss();
 				}
 			});
@@ -253,7 +253,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		backToMenuButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				activity.backToMainMenu();
+				double lat = activity.getMapView().getLatitude();
+				double lon = activity.getMapView().getLongitude();
+				MainMenuActivity.backToMainMenuDialog(activity, new LatLon(lat, lon));
 			}
 		});
 		

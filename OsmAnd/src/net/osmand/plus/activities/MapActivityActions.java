@@ -34,6 +34,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -268,7 +269,8 @@ public class MapActivityActions implements DialogProvider {
 				double latitude = args.getDouble(KEY_LATITUDE);
 				double longitude = args.getDouble(KEY_LONGITUDE);
 				String name = editText.getText().toString();
-				mapActivity.getSavingTrackHelper().insertPointData(latitude, longitude, System.currentTimeMillis(), name);
+				SavingTrackHelper savingTrackHelper = mapActivity.getMyApplication().getSavingTrackHelper();
+				savingTrackHelper.insertPointData(latitude, longitude, System.currentTimeMillis(), name);
 				if(settings.SHOW_CURRENT_GPX_TRACK.get()) {
 					getMyApplication().getFavorites().addFavoritePointToGPXFile(new FavouritePoint(latitude, longitude, name, ""));
 				}
@@ -490,7 +492,7 @@ public class MapActivityActions implements DialogProvider {
 			from = getRoutePointDescription(fromOrCurrent.getLatitude(),
 					fromOrCurrent.getLongitude());
 		}
-		TargetPointsHelper targets = mapActivity.getTargetPoints();
+		TargetPointsHelper targets = getTargets();
 		String tos;
 		if(to == null) {
 			tos = getRoutePointDescription(targets.getPointToNavigate(), 
@@ -517,7 +519,7 @@ public class MapActivityActions implements DialogProvider {
 	public void getDirections(final Location fromOrCurrent, final LatLon to, boolean gpxRouteEnabled) {
 
 		Builder builder = new AlertDialog.Builder(mapActivity);
-		final TargetPointsHelper targets = mapActivity.getTargetPoints();
+		final TargetPointsHelper targets = getTargets();
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
@@ -577,25 +579,18 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (to != null) {
-					targets.navigateToPoint(mapActivity, to, false, -1);
+					targets.navigateToPoint(to, false, -1);
 				}
 				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
 				}
 				Location from = fromOrCurrent;
 				if (from == null) {
-					from = mapActivity.getLastKnownLocation();
+					from = getLastKnownLocation();
 				}
 				if (from == null) {
 					AccessibleToast.makeText(mapActivity, R.string.unknown_from_location, Toast.LENGTH_LONG).show();
 					return;
-				}
-
-				// PREV_APPLICATION_MODE also needs to be set here to overwrite possibly outdated value from prior follow-navigation in
-				// different profile
-				// Do not overwrite PREV_APPLICATION_MODE if already navigating
-				if (!routingHelper.isFollowingMode()) {
-					settings.PREV_APPLICATION_MODE.set(settings.APPLICATION_MODE.get());
 				}
 
 				ApplicationMode mode = getAppMode(buttons, settings);
@@ -612,7 +607,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(to != null) {
-					targets.navigateToPoint(mapActivity, to, false, -1);
+					targets.navigateToPoint(to, false, -1);
 				}
 				if (!targets.checkPointToNavigate(getMyApplication())) {
 					return;
@@ -620,14 +615,14 @@ public class MapActivityActions implements DialogProvider {
 				boolean msg = true;
 				Location current = fromOrCurrent;
 				if(current == null) {
-					current = mapActivity.getLastKnownLocation();
+					current = getLastKnownLocation();
 				}
 				
-				if (!mapActivity.isPointAccurateForRouting(current)) {
+				if (!OsmAndLocationProvider.isPointAccurateForRouting(current)) {
 					current = null;
 				}
-				Location lastKnownLocation = mapActivity.getLastKnownLocation();
-				if (mapActivity.isPointAccurateForRouting(lastKnownLocation)) {
+				Location lastKnownLocation = getLastKnownLocation();
+				if (OsmAndLocationProvider.isPointAccurateForRouting(lastKnownLocation)) {
 					current = lastKnownLocation;
 					msg = false;
 				}
@@ -646,7 +641,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if(to != null) {
-					targets.navigateToPoint(mapActivity, to, false, -1);
+					targets.navigateToPoint(to, false, -1);
 				}
 				ApplicationMode mode = getAppMode(buttons, settings);
 				navigateUsingGPX(mode);
@@ -665,7 +660,11 @@ public class MapActivityActions implements DialogProvider {
 		builder.show();
 	}
     
-    protected OsmandApplication getMyApplication() {
+    protected Location getLastKnownLocation() {
+		return getMyApplication().getLocationProvider().getLastKnownLocation();
+	}
+
+	protected OsmandApplication getMyApplication() {
 		return mapActivity.getMyApplication();
 	}
 
@@ -694,12 +693,12 @@ public class MapActivityActions implements DialogProvider {
 						boolean useDestination = props[1];
 						GPXRouteParams gpxRoute = new GPXRouteParams(result, reverse, settings);
 						
-						Location loc = mapActivity.getLastKnownLocation();
+						Location loc = getLastKnownLocation();
 						if(passWholeWay && loc != null){
 							gpxRoute.setStartPoint(loc);
 						}
 						
-						Location startForRouting = mapActivity.getLastKnownLocation();
+						Location startForRouting = getLastKnownLocation();
 						if(startForRouting == null){
 							startForRouting = gpxRoute.getStartPointForRoute();
 						}
@@ -711,8 +710,7 @@ public class MapActivityActions implements DialogProvider {
 								endPoint = point;
 							}
 							if(endPoint != null) {
-								mapActivity.getTargetPoints().navigateToPoint(
-										mapActivity, point, false, -1);
+								getTargets().navigateToPoint(point, false, -1);
 							}
 						}
 						if(endPoint != null){
@@ -817,7 +815,7 @@ public class MapActivityActions implements DialogProvider {
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
-		final TargetPointsHelper targets = mapActivity.getTargetPoints();
+		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		if(targets.getPointToNavigate() != null) {
 			adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_view_set_intermediate);
 		}
@@ -867,8 +865,7 @@ public class MapActivityActions implements DialogProvider {
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
-					mapActivity.getTargetPoints().navigateToPoint(mapActivity,
-							new LatLon(latitude, longitude), true, -1);
+					getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
 					if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
 						getDirections(null, new LatLon(latitude, longitude), true);
@@ -881,8 +878,8 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					targets.navigateToPoint(mapActivity, 
-							new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
+					targets.navigateToPoint(new LatLon(latitude, longitude), 
+							true, targets.getIntermediatePoints().size());
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
@@ -999,7 +996,7 @@ public class MapActivityActions implements DialogProvider {
 						if (getMyApplication().getInternalAPI().accessibilityEnabled()) {
 							whereAmIDialog();
 						} else {
-							mapActivity.backToLocationImpl();
+							mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 						}
 						return true;
 					}
@@ -1104,7 +1101,7 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.registerOptionsMenuItem(R.string.target_points, R.string.target_points, new OnOptionsMenuClick() {
 			@Override
 			public void prepareOptionsMenu(Menu menu, MenuItem item) {
-				item.setVisible(mapActivity.getTargetPoints().getIntermediatePoints().size() > 0);
+				item.setVisible(getTargets().getIntermediatePoints().size() > 0);
 			}
 			@Override
 			public boolean onClick(MenuItem item) {
@@ -1156,17 +1153,19 @@ public class MapActivityActions implements DialogProvider {
 	
 	public void stopNavigationAction(final OsmandMapTileView mapView) {
 		if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
-			routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), mapActivity.getLastKnownLocation(),
+			routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), getLastKnownLocation(),
 					routingHelper.getCurrentGPXRoute());
 			// restore default mode
-			boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
-			mapActivity.updateApplicationModeSettings();
-			mapView.refreshMap(changed);
+			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 		} else {
-			mapActivity.getTargetPoints().clearPointToNavigate(mapActivity, true);
+			getTargets().clearPointToNavigate(true);
 			mapView.refreshMap();
 		}
 		
+	}
+
+	private TargetPointsHelper getTargets() {
+		return mapActivity.getMyApplication().getTargetPointsHelper();
 	}
 	
 	public void stopNavigationActionConfirm(final OsmandMapTileView mapView){
@@ -1179,12 +1178,9 @@ public class MapActivityActions implements DialogProvider {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), mapActivity.getLastKnownLocation(),
+					routingHelper.setFinalAndCurrentLocation(null, new ArrayList<LatLon>(), getLastKnownLocation(),
 							routingHelper.getCurrentGPXRoute());
-					// restore default mode
-					boolean changed = settings.APPLICATION_MODE.set(settings.PREV_APPLICATION_MODE.get());
-					mapActivity.updateApplicationModeSettings();
-					mapView.refreshMap(changed);
+					settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
 				}
 			});
 		} else {
@@ -1194,7 +1190,7 @@ public class MapActivityActions implements DialogProvider {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					mapActivity.getTargetPoints().clearPointToNavigate(mapActivity, true);
+					getTargets().clearPointToNavigate(true);
 					mapView.refreshMap();
 				}
 			});
@@ -1246,11 +1242,11 @@ public class MapActivityActions implements DialogProvider {
 				dialog.dismiss();
 				switch (item) {
 				case 0:
-					mapActivity.backToLocationImpl();
+					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 					break;
 				case 1:
-					mapActivity.getNavigationInfo().show(mapActivity.getPointToNavigate(),
-							mapActivity.getMapLayers().getLocationLayer().getHeading(), mapActivity);
+					OsmAndLocationProvider locationProvider = getMyApplication().getLocationProvider();
+					locationProvider.showNavigationInfo(mapActivity.getPointToNavigate(), mapActivity);
 					break;
 				default:
 					break;

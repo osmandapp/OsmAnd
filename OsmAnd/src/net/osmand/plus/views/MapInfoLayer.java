@@ -180,26 +180,26 @@ public class MapInfoLayer extends OsmandMapLayer {
 		statusBar = new LinearLayout(view.getContext());
 		statusBar.setOrientation(LinearLayout.HORIZONTAL);
 		RouteInfoControls ric = new RouteInfoControls(scaleCoefficient);
-		lanesControl = ric.createLanesControl(view.getApplication().getRoutingHelper(), view);
+		OsmandApplication app = view.getApplication();
+		lanesControl = ric.createLanesControl(app.getRoutingHelper(), view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		
-		alarmControl = ric.createAlarmInfoControl(view.getApplication().getRoutingHelper(), 
+		alarmControl = ric.createAlarmInfoControl(app.getRoutingHelper(), 
 				view.getContext(), view.getSettings());
 		// register right stack
 		EnumSet<ApplicationMode> all = EnumSet.allOf(ApplicationMode.class);
-		EnumSet<ApplicationMode> carDefault = EnumSet.of(ApplicationMode.CAR, ApplicationMode.DEFAULT);
 		EnumSet<ApplicationMode> carBicycleDefault = EnumSet.of(ApplicationMode.CAR, ApplicationMode.DEFAULT, ApplicationMode.BICYCLE);
 		EnumSet<ApplicationMode> exceptCar = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
 		EnumSet<ApplicationMode> none = EnumSet.noneOf(ApplicationMode.class);
-		RoutingHelper routingHelper = view.getApplication().getRoutingHelper();
-		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(), paintText,
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
 				paintSubText, false);
 		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, carBicycleDefault, none, 5);
-		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
+		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				EnumSet.of(ApplicationMode.PEDESTRIAN), none, 10);
-		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, view.getApplication(), view.getSettings(),
+		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, carBicycleDefault, none, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
@@ -213,6 +213,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, all, none,  10);
 		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
+		TextInfoControl gpsInfo = ric.createGPSInfoControl(map, paintText, paintSubText);
+		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, none, none,  17);
 		TextInfoControl maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false, none, none,  18);
 		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
@@ -314,7 +316,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void run() {
 				view.getSettings().SHOW_VIEW_ANGLE.set(!view.getSettings().SHOW_VIEW_ANGLE.get());
-				map.updateApplicationModeSettings();
+				map.getMapViewTrackingUtilities().updateSettings();
 			}
 		});
 		
@@ -714,10 +716,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	
-	public ImageView getBackToLocation() {
-		return backToLocation;
-	}
-	
 	public View getProgressBar() {
 		return progressBar;
 	}
@@ -759,13 +757,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 	}
 	
 	private ImageView createBackToLocation(final MapActivity map){
-		ImageView backToLocation = new ImageView(view.getContext());
+		ImageView backToLocation = new ImageViewControl(view.getContext()) {
+			
+			@Override
+			public boolean updateInfo() {
+				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
+				enabled = enabled && !map.getMapViewTrackingUtilities().isMapLinkedToLocation();
+				setEnabled(enabled);
+				return true;
+			}
+		};
 		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
 		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
 		backToLocation.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.backToLocationImpl();
+				map.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
 		return backToLocation;
@@ -820,7 +827,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				if (!isScreenLocked) {
 					parent.addView(transparentLockView);
-					map.backToLocationImpl();
+					map.getMapViewTrackingUtilities().backToLocationImpl();
 				} else {
 					parent.removeView(transparentLockView);
 				}
@@ -830,7 +837,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 				} else {
 					lockView.setBackgroundDrawable(lockDisabled);
 				}
-				map.backToLocationImpl();
+				map.getMapViewTrackingUtilities().backToLocationImpl();
 			}
 		});
 		return lockView;
@@ -865,7 +872,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		compassView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				map.switchRotateMapMode();
+				map.getMapViewTrackingUtilities().switchRotateMapMode();
 			}
 		});
 		compassView.setImageDrawable(compass);
@@ -908,7 +915,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef());
 					}
 				}
-			} else if(map.isMapLinkedToLocation()) {
+			} else if(map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 				RouteDataObject rt = map.getLastRouteDataObject(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef());

@@ -4,14 +4,13 @@ import java.text.SimpleDateFormat;
 
 import net.osmand.plus.OptionsMenuHelper;
 import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.routing.RouteAnimation;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.SunriseSunset;
 import android.content.Intent;
 import android.os.Debug;
@@ -28,7 +27,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	private RouteAnimation routeAnimation = new RouteAnimation();
 	
 	public OsmandDevelopmentPlugin(OsmandApplication app) {
 		this.app = app;
@@ -59,18 +57,18 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	
 	@Override
 	public void registerOptionsMenuItems(final MapActivity mapActivity, OptionsMenuHelper helper) {
+		final OsmAndLocationProvider loc = mapActivity.getMyApplication().getLocationProvider();
 		helper.registerOptionsMenuItem(R.string.animate_route, R.string.animate_route, false, new OnOptionsMenuClick() {
 			@Override
 			public void prepareOptionsMenu(Menu menu, MenuItem animateMenu) {
-				animateMenu.setTitle(routeAnimation.isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
+				animateMenu.setTitle(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
 				animateMenu.setVisible(app.getTargetPointsHelper().getPointToNavigate() != null);
 			}
 			
 			@Override
 			public boolean onClick(MenuItem item) {
-				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				// animate moving on route
-				routeAnimation.startStopRouteAnimation(routingHelper, mapActivity);
+				loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
 				return true;
 			}
 		});

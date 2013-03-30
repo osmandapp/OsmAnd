@@ -4,6 +4,7 @@ package net.osmand.plus.views;
 import net.osmand.Location;
 import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,21 +25,20 @@ public class PointLocationLayer extends OsmandMapLayer {
 	private Paint aroundArea;
 	private Paint headingPaint;
 	
-	protected Location lastKnownLocation = null;
 	private DisplayMetrics dm;
 	private OsmandMapTileView view;
-	
-	private Float heading = null;
 	
 	private ApplicationMode appMode;
 	private Bitmap bearingIcon;
 	private Bitmap locationIcon;
+	private OsmAndLocationProvider locationProvider;
 
 	private void initUI() {
 		locationPaint = new Paint();
 		locationPaint.setAntiAlias(true);
 		locationPaint.setFilterBitmap(true);
 		locationPaint.setDither(true);
+		
 		
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
@@ -55,6 +55,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 		headingPaint.setStyle(Style.FILL);
 		
 		checkAppMode(view.getSettings().getApplicationMode());
+		locationProvider = view.getApplication().getLocationProvider();
 		
 	}
 	
@@ -76,7 +77,8 @@ public class PointLocationLayer extends OsmandMapLayer {
 	
 	@Override
 	public void onDraw(Canvas canvas, RectF latLonBounds, RectF tilesRect, DrawSettings nightMode) {
-		// draw 
+		// draw
+		Location lastKnownLocation = locationProvider.getLastKnownLocation();
 		if(lastKnownLocation == null || view == null){
 			return;
 		}
@@ -101,7 +103,7 @@ public class PointLocationLayer extends OsmandMapLayer {
 				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2, locationY - locationIcon.getHeight() / 2,
 						locationPaint);
 			}
-
+			Float heading = locationProvider.getHeading();
 			if (heading != null && view.getSettings().SHOW_VIEW_ANGLE.get()) {
 				canvas.drawArc(getHeadingRect(locationX, locationY), heading - HEADING_ANGLE / 2 - 90, HEADING_ANGLE, true, headingPaint);
 			}
@@ -123,29 +125,6 @@ public class PointLocationLayer extends OsmandMapLayer {
 		return view.isPointOnTheRotatedMap(l.getLatitude(), l.getLongitude());
 	}
 	
-	
-	public Location getLastKnownLocation() {
-		return lastKnownLocation;
-	}
-	
-	public void setHeading(Float heading){
-		this.heading = heading;
-		if(!view.mapIsRefreshing() && isLocationVisible(this.lastKnownLocation)){
-			view.refreshMap();
-		}
-	}
-	
-	public Float getHeading() {
-		return heading;
-	}
-	
-	public void setLastKnownLocation(Location lastKnownLocation) {
-		boolean redraw = isLocationVisible(this.lastKnownLocation) || isLocationVisible(lastKnownLocation);
-		this.lastKnownLocation = lastKnownLocation;
-		if (redraw) {
-			view.refreshMap();
-		}
-	}
 
 	@Override
 	public void destroyLayer() {

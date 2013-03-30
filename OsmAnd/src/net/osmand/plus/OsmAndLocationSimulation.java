@@ -1,4 +1,4 @@
-package net.osmand.plus.routing;
+package net.osmand.plus;
 
 
 import java.util.ArrayList;
@@ -7,9 +7,10 @@ import java.util.List;
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -18,16 +19,22 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class RouteAnimation {
+public class OsmAndLocationSimulation {
 
 	private Thread routeAnimation;
+	private OsmAndLocationProvider provider;
+	private OsmandApplication app;
+	
+	public OsmAndLocationSimulation(OsmandApplication app, OsmAndLocationProvider provider){
+		this.app = app;
+		this.provider = provider;
+	}
 
 	public boolean isRouteAnimating() {
 		return routeAnimation != null;
 	}
 
-	public void startStopRouteAnimation(final RoutingHelper routingHelper,
-			final MapActivity ma) {
+	public void startStopRouteAnimation(final MapActivity ma) {
 		if (!isRouteAnimating()) {
 			Builder builder = new AlertDialog.Builder(ma);
 			builder.setTitle(R.string.animate_routing_using_gpx);
@@ -45,9 +52,9 @@ public class RouteAnimation {
 						
 						@Override
 						public boolean processResult(GPXUtilities.GPXFile result) {
-							GPXRouteParams prms = new RouteProvider.GPXRouteParams(result, false, ((OsmandApplication) ma.getApplication()).getSettings());
-							ma.stopLocationRequests();
-							startAnimationThread(routingHelper, ma, prms.points, true, speedup.getProgress() + 1);
+							GPXRouteParams prms = new RouteProvider.GPXRouteParams(result, false, 
+									app.getSettings());
+							startAnimationThread(app.getRoutingHelper(), ma, prms.getPoints(), true, speedup.getProgress() + 1);
 							return true;
 						}
 					});
@@ -58,19 +65,18 @@ public class RouteAnimation {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					ma.stopLocationRequests();
-					startAnimationThread(routingHelper, ma, new ArrayList<Location>(routingHelper.getCurrentRoute()), false, 1);
-					
+					startAnimationThread(app.getRoutingHelper(), ma, 
+							new ArrayList<Location>(app.getRoutingHelper().getCurrentRoute()), false, 1);
 				}
 			});
 			builder.show();
 		} else {
 			stop();
-			ma.startLocationRequests();
 		}
 	}
 
-	private void startAnimationThread(final RoutingHelper routingHelper, final MapActivity ma, final List<Location> directions, final boolean useLocationTime, final float coeff) {
+	private void startAnimationThread(final RoutingHelper routingHelper,
+			final MapActivity ma, final List<Location> directions, final boolean useLocationTime, final float coeff) {
 		final float time = 1.5f;
 		routeAnimation = new Thread() {
 			@Override
@@ -113,7 +119,7 @@ public class RouteAnimation {
 					ma.runOnUiThread(new Runnable() {
 						@Override
 						public void run() {
-							ma.setLocation(toset);
+							provider.setLocationFromSimulation(toset);
 						}
 					});
 					try {
@@ -123,7 +129,7 @@ public class RouteAnimation {
 					}
 					prev = current;
 				}
-				RouteAnimation.this.stop();
+				OsmAndLocationSimulation.this.stop();
 			}
 
 		};

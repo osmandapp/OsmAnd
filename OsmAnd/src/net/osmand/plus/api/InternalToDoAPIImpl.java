@@ -7,7 +7,6 @@ import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.DayNightMode;
 import net.osmand.plus.SQLiteTileSource;
 
 public class InternalToDoAPIImpl implements InternalToDoAPI {
@@ -19,18 +18,8 @@ public class InternalToDoAPIImpl implements InternalToDoAPI {
 	}
 
 	@Override
-	public void forceMapRendering() {
-		app.getResourceManager().getRenderer().clearCache();
-	}
-
-	@Override
 	public BinaryMapIndexReader[] getRoutingMapFiles() {
 		return app.getResourceManager().getRoutingMapFiles();
-	}
-
-	@Override
-	public void setDayNightMode(DayNightMode val) {
-		app.getDaynightHelper().setDayNightMode(val);
 	}
 
 	@Override
