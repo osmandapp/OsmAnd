@@ -41,21 +41,20 @@ public abstract class OsmandMapLayer {
 	
 	public static class DrawSettings {
 		private final boolean nightMode;
-		private final boolean force;
+		private final boolean updateVectorRendering;
 
 		public DrawSettings(boolean nightMode) {
 			this(nightMode,false);
 		}
 
-		public DrawSettings(boolean nightMode, boolean force) {
+		public DrawSettings(boolean nightMode, boolean updateVectorRendering) {
 			this.nightMode = nightMode;
-			this.force = force;
+			this.updateVectorRendering = updateVectorRendering;
 		}
 		
-		public boolean isForce() {
-			return force;
+		public boolean isUpdateVectorRendering() {
+			return updateVectorRendering;
 		}
-		
 		public boolean isNightMode() {
 			return nightMode;
 		}

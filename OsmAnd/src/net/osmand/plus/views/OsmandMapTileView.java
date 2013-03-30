@@ -487,7 +487,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 		return settings;
 	}
 
-	private void refreshMapInternal(boolean force) {
+	private void refreshMapInternal(boolean updateVectorRendering) {
 		handler.removeMessages(1);
 		
 		// long time = System.currentTimeMillis();
@@ -509,13 +509,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			float h = getCenterPointY();
 			Canvas canvas = holder.lockCanvas();
 			if (canvas != null) {
-				boolean nightMode = false;
-				if (application != null) {
-					Boolean dayNightRenderer = application.getDaynightHelper().getDayNightRenderer();
-					if (dayNightRenderer != null) {
-						nightMode = !dayNightRenderer.booleanValue();
-					}
-				}
+				boolean nightMode = application.getDaynightHelper().isNightMode();
 				try {
 					boundsRect.set(0, 0, getWidth(), getHeight());
 					calculateTileRectangle(boundsRect, w, h, tileX, tileY, tilesRect);
@@ -528,21 +522,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 					} else {
 						canvas.drawARGB(255, 225, 225, 225);
 					}
-					// TODO map
-//					float ftileSize = getTileSize();
-//					int left = (int) FloatMath.floor(tilesRect.left);
-//					int top = (int) FloatMath.floor(tilesRect.top);
-//					int width = (int) FloatMath.ceil(tilesRect.right - left);
-//					int height = (int) FloatMath.ceil(tilesRect.bottom - top);
-//					for (int i = 0; i < width; i++) {
-//						for (int j = 0; j < height; j++) {
-//							float x1 = (i + left - tileX) * ftileSize + w;
-//							float y1 = (j + top - tileY) * ftileSize + h;
-//							drawEmptyTile(canvas, x1, y1, ftileSize, nightMode);
-//						}
-//					}
-					drawOverMap(canvas, latlonRect, tilesRect, new DrawSettings(nightMode,force));
-					
+					drawOverMap(canvas, latlonRect, tilesRect, new DrawSettings(nightMode, updateVectorRendering));
 //					log.info("Draw with layers " + (System.currentTimeMillis() - time));
 				} finally {
 					holder.unlockCanvasAndPost(canvas);

@@ -315,7 +315,6 @@ public class MapActivity extends AccessibleActivity  {
 		}
 
 		OsmandPlugin.onMapActivityResume(this);
-		app.getDaynightHelper().startSensorIfNeeded();
 		mapView.refreshMap(true);
 	}
 
@@ -537,7 +536,14 @@ public class MapActivity extends AccessibleActivity  {
 			mapLayers.getMapInfoLayer().recreateControls();
 		}
 		mapLayers.updateLayers(mapView);
-		app.getDaynightHelper().startSensorIfNeeded();
+		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
+			
+			@Override
+			public void stateChanged(Boolean change) {
+				getMapView().refreshMap(true);
+			}
+		});
+		getMapView().refreshMap(true);
 	}
 	
 	

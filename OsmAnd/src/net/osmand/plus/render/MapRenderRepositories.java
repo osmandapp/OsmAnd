@@ -176,7 +176,7 @@ public class MapRenderRepositories {
 		if (requestedBox == null) {
 			return true;
 		}
-		if (drawSettings.isForce()) {
+		if (drawSettings.isUpdateVectorRendering()) {
 			return true;
 		}
 		if (requestedBox.getZoom() != box.getZoom()) {
@@ -449,9 +449,7 @@ public class MapRenderRepositories {
 		try {
 			// find selected rendering type
 			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
-			Boolean renderDay = app.getDaynightHelper().getDayNightRenderer();
-			boolean nightMode = renderDay != null && !renderDay.booleanValue();
-			
+			boolean nightMode = app.getDaynightHelper().isNightMode();
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			RenderingRuleSearchRequest renderingReq = new RenderingRuleSearchRequest(storage);
