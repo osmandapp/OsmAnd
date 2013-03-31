@@ -1107,4 +1107,5 @@
 	<string name="map_widget_view_direction">Напрямок</string>
 	<string name="support_new_features_descr">Пожертвувати, для реалізації нових можливостей в аплцікації</string>
 	<string name="email">Email</string>
-</resources>
+<string name="map_widget_gps_info">GPS інфо</string>
+    </resources>
