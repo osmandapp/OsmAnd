@@ -985,7 +985,6 @@
     <string name="recording_is_recorded">Аудіо/відео зараз записується Для зупинки натисність АВ віджет.</string>
     <string name="recording_context_menu_arecord">Створити аудіо замітку</string>
     <string name="recording_context_menu_vrecord">Створити відео замітку</string>
-    <string name="layer_recordings"/>
     <string name="recording_context_menu_delete">Вилучити запис</string>
     <string name="recording_context_menu_play">Грати</string>
     <string name="use_clear_distance_measurement">Натисніть ще раз, щоби очистити мапу від точок.</string>
@@ -1109,6 +1108,5 @@
 	<string name="email">Email</string>
 <string name="map_widget_gps_info">GPS дані</string>
     <string name="layer_recordings">Аудіо записи</string>
-    <string name="download_regular_maps"/>
     <string name="live_monitoring_mode_off">Ввімкнути трекінг\nв реальному режимі</string>
 	</resources>
