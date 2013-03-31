@@ -906,7 +906,7 @@
   <string name="show_traffic_warnings_descr">"Pokaż ograniczenia prędkości i progi zwalniające "</string>
   <string name="avoid_toll_roads_descr">Unikaj płatnych dróg przy wyliczaniu trasy</string>
   <string name="show_cameras">Fotoradary</string>
-  <string name="show_traffic_warnings">Ograniczenia prędkości</string>
+  <string name="show_traffic_warnings">Ostrzeżenia</string>
   <string name="avoid_toll_roads">Dróg płatnych</string>
   <string name="tip_recent_changes_0_8_2_t">"Zmiany w 0.8.2:
 \n\t* Poprawiony routing
