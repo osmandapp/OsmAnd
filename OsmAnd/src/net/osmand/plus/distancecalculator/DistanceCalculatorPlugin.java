@@ -16,7 +16,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TextInfoControl;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -34,7 +34,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.distance";
 	private OsmandApplication app;
 	private DistanceCalculatorLayer distanceCalculatorLayer;
-	private TextInfoControl distanceControl;
+	private TextInfoWidget distanceControl;
 	private List<LatLon> measurementPoints = new ArrayList<LatLon>();
 	
 	private int distanceMeasurementMode = 0; 
@@ -108,8 +108,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 	}
 	
-	private TextInfoControl createDistanceControl(final MapActivity activity, Paint paintText, Paint paintSubText) {
-		final TextInfoControl distanceControl = new TextInfoControl(activity, 0, paintText, paintSubText);
+	private TextInfoWidget createDistanceControl(final MapActivity activity, Paint paintText, Paint paintSubText) {
+		final TextInfoWidget distanceControl = new TextInfoWidget(activity, 0, paintText, paintSubText);
 		distanceControl.setOnClickListener(new View.OnClickListener() {
 			
 			@Override

@@ -1,6 +1,8 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.R;
+import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +13,7 @@ import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.view.View;
 
-public class MiniMapControl extends MapInfoControl {
+public class MiniMapWidget extends BaseMapWidget {
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
 	private final float scaleMiniRoute = 0.15f;
 	private final float width = 96 * scaleCoefficient;
@@ -24,7 +26,7 @@ public class MiniMapControl extends MapInfoControl {
 	private Paint fillBlack;
 	protected Path miniMapPath = null;
 
-	public MiniMapControl(Context ctx, OsmandMapTileView view) {
+	public MiniMapWidget(Context ctx, OsmandMapTileView view) {
 		super(ctx);
 		this.view = view;
 
@@ -59,13 +61,9 @@ public class MiniMapControl extends MapInfoControl {
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
-		//to change color immediately when needed
+		// to change color immediately when needed
 		// could be deleted in future
-		if (view.getSettings().FLUORESCENT_OVERLAYS.get() && false) {
-			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track_fluorescent));
-		} else {
-			paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
-		}
+		paintMiniRoute.setColor(getResources().getColor(R.color.nav_track));
 
 		if (miniMapPath != null && !miniMapPath.isEmpty()) {
 			canvas.save();

@@ -1,9 +1,10 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.osmand.plus.R;
+import net.osmand.plus.views.MapInfoLayer;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,9 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public class MapStackControl extends ViewGroup {
-	List<MapInfoControl> stackViews = new ArrayList<MapInfoControl>();
-	List<MapInfoControl> collapsedViews = new ArrayList<MapInfoControl>();
+public class StackWidgetView extends ViewGroup {
+	List<BaseMapWidget> stackViews = new ArrayList<BaseMapWidget>();
+	List<BaseMapWidget> collapsedViews = new ArrayList<BaseMapWidget>();
 	ImageView expandView;
 	// by default opened
 	private boolean isCollapsed = false;
@@ -27,7 +28,7 @@ public class MapStackControl extends ViewGroup {
 	List<Drawable> cacheStackDrawables = new ArrayList<Drawable>();
 	private int stackDrawable;
 
-	public MapStackControl(Context context) {
+	public StackWidgetView(Context context) {
 		super(context);
 		final Bitmap arrowDown = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow_down);
 		final Bitmap arrowUp = BitmapFactory.decodeResource(context.getResources(), R.drawable.arrow_up);
@@ -52,11 +53,11 @@ public class MapStackControl extends ViewGroup {
 			@Override
 			public void onClick(View v) {
 				isCollapsed = !isCollapsed;
-				MapStackControl.this.requestLayout();
-				MapStackControl.this.invalidate();
+				StackWidgetView.this.requestLayout();
+				StackWidgetView.this.invalidate();
 			}
 		});
-		MapStackControl.this.addView(expandView);
+		StackWidgetView.this.addView(expandView);
 	}
 	
 	public void setExpandImageDrawable(Drawable d) {
@@ -73,26 +74,26 @@ public class MapStackControl extends ViewGroup {
 	}
 
 	public void updateInfo() {
-		for (MapInfoControl v : stackViews) {
+		for (BaseMapWidget v : stackViews) {
 			v.updateInfo();
 		}
 		// update even if collapsed to know if view becomes visible
-		for (MapInfoControl v : collapsedViews) {
+		for (BaseMapWidget v : collapsedViews) {
 			v.updateInfo();
 		}
 	}
 	
 	
-	public void addStackView(MapInfoControl v) {
+	public void addStackView(BaseMapWidget v) {
 		stackViews.add(v);
 		v.setShadowColor(shadowColor);
-		MapStackControl.this.addView(v, getChildCount());
+		StackWidgetView.this.addView(v, getChildCount());
 	}
 
-	public void addCollapsedView(MapInfoControl v) {
+	public void addCollapsedView(BaseMapWidget v) {
 		collapsedViews.add(v);
 		v.setShadowColor(shadowColor);
-		MapStackControl.this.addView(v, getChildCount());
+		StackWidgetView.this.addView(v, getChildCount());
 	}
 	
 	public void clearAllViews(){
@@ -103,16 +104,16 @@ public class MapStackControl extends ViewGroup {
 		}
 	}
 	
-	public List<MapInfoControl> getStackViews() {
+	public List<BaseMapWidget> getStackViews() {
 		return stackViews;
 	}
 	
-	public List<MapInfoControl> getCollapsedViews() {
+	public List<BaseMapWidget> getCollapsedViews() {
 		return collapsedViews;
 	}
 	
-	public List<MapInfoControl> getAllViews(){
-		List<MapInfoControl> l = new ArrayList<MapInfoControl>();
+	public List<BaseMapWidget> getAllViews(){
+		List<BaseMapWidget> l = new ArrayList<BaseMapWidget>();
 		l.addAll(stackViews);
 		l.addAll(collapsedViews);
 		return l;
@@ -146,7 +147,7 @@ public class MapStackControl extends ViewGroup {
 		boolean first = true;
 		int cacheStack = 0;
 		if (stackViews != null) {
-			for (MapInfoControl c : stackViews) {
+			for (BaseMapWidget c : stackViews) {
 				cacheStack++;
 				if (c.getVisibility() != View.GONE) {
 					c.setBackgroundDrawable(first ? topDrawable : getStackDrawable(cacheStack));
@@ -163,7 +164,7 @@ public class MapStackControl extends ViewGroup {
 				}
 			}
 			isCollapsible = false;
-			for (MapInfoControl c : collapsedViews) {
+			for (BaseMapWidget c : collapsedViews) {
 				cacheStack++;
 				if (c.getVisibility() != View.GONE) {
 					isCollapsible = true;
@@ -249,10 +250,10 @@ public class MapStackControl extends ViewGroup {
 
 	public void setShadowColor(int shadowColor) {
 		this.shadowColor = shadowColor;
-		for(MapInfoControl c : stackViews) {
+		for(BaseMapWidget c : stackViews) {
 			c.setShadowColor(shadowColor);
 		}
-		for(MapInfoControl c : collapsedViews) {
+		for(BaseMapWidget c : collapsedViews) {
 			c.setShadowColor(shadowColor);
 		}
 		

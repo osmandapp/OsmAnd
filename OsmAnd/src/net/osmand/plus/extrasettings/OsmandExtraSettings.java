@@ -12,8 +12,8 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.views.MapInfoControls;
-import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.voice.CommandPlayer;
@@ -61,10 +61,10 @@ public class OsmandExtraSettings extends OsmandPlugin {
 		registerControls = true;
 		final OsmandMapTileView view = activity.getMapView();
 		final MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
-		final MapInfoControls mapInfoControls = mapInfoLayer.getMapInfoControls();
+		final MapWidgetRegistry mapInfoControls = mapInfoLayer.getMapInfoControls();
 		
 		final OsmandPreference<Float> textSizePref = view.getSettings().MAP_TEXT_SIZE;
-		final MapInfoControlRegInfo textSize = mapInfoControls.registerAppearanceWidget(R.drawable.widget_text_size, R.string.map_text_size, 
+		final MapWidgetRegInfo textSize = mapInfoControls.registerAppearanceWidget(R.drawable.widget_text_size, R.string.map_text_size, 
 				"text_size", textSizePref);
 		textSize.setStateChangeListener(new Runnable() {
 			@Override
@@ -89,7 +89,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 				b.show();
 			}
 		});
-		final MapInfoControlRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler, 
+		final MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler, 
 				"showRuler", view.getSettings().SHOW_RULER);
 		showRuler.setStateChangeListener(new Runnable() {
 			@Override
@@ -99,7 +99,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 		
-		final MapInfoControlRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
+		final MapWidgetRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
 				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
 		transparent.setStateChangeListener(new Runnable() {
 			@Override
@@ -109,7 +109,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 		
-		final MapInfoControlRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destination_arrow,
+		final MapWidgetRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destination_arrow,
 				"show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
 		showDestinationArrow.setStateChangeListener(new Runnable() {
 			@Override

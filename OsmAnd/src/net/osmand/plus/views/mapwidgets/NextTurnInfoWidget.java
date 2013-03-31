@@ -1,7 +1,8 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.router.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -13,7 +14,7 @@ import android.graphics.Path;
 
 
 
-public class NextTurnInfoControl extends MapInfoControl {
+public class NextTurnInfoWidget extends BaseMapWidget {
 
 	private float scaleCoefficient = MapInfoLayer.scaleCoefficient;
 	private float width;
@@ -36,7 +37,7 @@ public class NextTurnInfoControl extends MapInfoControl {
 	protected int turnImminent;
 	protected boolean horisontalMini;
 
-	public NextTurnInfoControl(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
+	public NextTurnInfoWidget(Context ctx, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
 		super(ctx);
 		this.textPaint = textPaint;
 		this.subtextPaint = subtextPaint;

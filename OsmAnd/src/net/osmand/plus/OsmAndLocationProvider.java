@@ -281,6 +281,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		default:
 			return;
 		}
+		
 		if (mGravs != null && mGeoMags != null) {
 			float[] mRotationM = new float[9];
 			boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
@@ -289,6 +290,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 			float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
 			val = (float) Math.toDegrees(orientation[0]);
+		} else if(event.sensor.getType() != Sensor.TYPE_ORIENTATION){
+			return;
 		}
 
 		if (currentScreenOrientation == 1) {

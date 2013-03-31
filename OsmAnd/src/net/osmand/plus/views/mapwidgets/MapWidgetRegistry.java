@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
 import java.util.Comparator;
 import java.util.EnumSet;
@@ -13,6 +13,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
-public class MapInfoControls {
+public class MapWidgetRegistry {
 	
 	public static final int LEFT_CONTROL = -1;
 	public static final int RIGHT_CONTROL = 1;
 	public static final int MAIN_CONTROL = 0;
 	
-	private Set<MapInfoControlRegInfo> appearanceWidgets = new LinkedHashSet<MapInfoControls.MapInfoControlRegInfo>();
-	private Set<MapInfoControlRegInfo> left = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
-	private Set<MapInfoControlRegInfo> right = new TreeSet<MapInfoControls.MapInfoControlRegInfo>();
-	private Set<MapInfoControlRegInfo> top = new TreeSet<MapInfoControls.MapInfoControlRegInfo>(new Comparator<MapInfoControlRegInfo>() {
+	private Set<MapWidgetRegInfo> appearanceWidgets = new LinkedHashSet<MapWidgetRegistry.MapWidgetRegInfo>();
+	private Set<MapWidgetRegInfo> left = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>();
+	private Set<MapWidgetRegInfo> right = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>();
+	private Set<MapWidgetRegInfo> top = new TreeSet<MapWidgetRegistry.MapWidgetRegInfo>(new Comparator<MapWidgetRegInfo>() {
 		@Override
-		public int compare(MapInfoControlRegInfo object1, MapInfoControlRegInfo object2) {
+		public int compare(MapWidgetRegInfo object1, MapWidgetRegInfo object2) {
 			if (object1.position != object2.position) {
 				if(object1.position == LEFT_CONTROL) {
 					return -1;
@@ -52,7 +53,7 @@ public class MapInfoControls {
 	private final OsmandSettings settings;
 			
 	
-	public MapInfoControls(OsmandSettings settings) {
+	public MapWidgetRegistry(OsmandSettings settings) {
 		this.settings = settings;
 		
 		for(ApplicationMode ms : ApplicationMode.values() ) {
@@ -70,9 +71,9 @@ public class MapInfoControls {
 		
 	}
 	
-	public MapInfoControlRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
+	public MapWidgetRegInfo registerAppearanceWidget(int drawable, int messageId, String key, 
 			OsmandPreference<?> pref) {
-		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
 		ii.defaultCollapsible = null;
 		ii.key = key;
@@ -86,7 +87,7 @@ public class MapInfoControls {
 	}
 	
 	public void removeApperanceWidgets(String category) {
-		Iterator<MapInfoControlRegInfo> it = appearanceWidgets.iterator();
+		Iterator<MapWidgetRegInfo> it = appearanceWidgets.iterator();
 		while(it.hasNext()) {
 			if(Algorithms.objectEquals(it.next().category, category)) {
 				it.remove();
@@ -94,9 +95,9 @@ public class MapInfoControls {
 		}
 	}
 	
-	public MapInfoControlRegInfo registerAppearanceWidget(int drawable, String message, String key, 
+	public MapWidgetRegInfo registerAppearanceWidget(int drawable, String message, String key, 
 			CommonPreference<?> pref, String subcategory) {
-		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.defaultModes = EnumSet.noneOf(ApplicationMode.class);
 		ii.defaultCollapsible = null;
 		ii.key = key;
@@ -111,9 +112,9 @@ public class MapInfoControls {
 		return ii;
 	}
 	
-	public MapInfoControlRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
+	public MapWidgetRegInfo registerTopWidget(View m, int drawable, int messageId, String key, int left,
 			EnumSet<ApplicationMode> appDefaultModes, int priorityOrder) {
-		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.defaultModes = appDefaultModes.clone();
 		ii.defaultCollapsible = null;
 		ii.key = key;
@@ -146,9 +147,9 @@ public class MapInfoControls {
 	
 	
 	
-	public void registerSideWidget(MapInfoControl m, int drawable, int messageId, String key, boolean left,
+	public void registerSideWidget(BaseMapWidget m, int drawable, int messageId, String key, boolean left,
 			EnumSet<ApplicationMode> appDefaultModes, EnumSet<ApplicationMode> defaultCollapsible, int priorityOrder) {
-		MapInfoControlRegInfo ii = new MapInfoControlRegInfo();
+		MapWidgetRegInfo ii = new MapWidgetRegInfo();
 		ii.defaultModes = appDefaultModes.clone();
 		ii.defaultCollapsible = defaultCollapsible.clone();
 		ii.key = key;
@@ -189,8 +190,8 @@ public class MapInfoControls {
 		}
 	}
 	
-	private void restoreModes(Set<String> set, Set<MapInfoControlRegInfo> mi, ApplicationMode mode) {
-		for (MapInfoControlRegInfo m : mi) {
+	private void restoreModes(Set<String> set, Set<MapWidgetRegInfo> mi, ApplicationMode mode) {
+		for (MapWidgetRegInfo m : mi) {
 			if (m.preference == null) {
 				if (m.visibleModes.contains(mode)) {
 					set.add(m.key);
@@ -203,7 +204,7 @@ public class MapInfoControls {
 		}
 	}
 	
-	public void changeVisibility(MapInfoControlRegInfo m) {
+	public void changeVisibility(MapWidgetRegInfo m) {
 		boolean selecteable = m.selecteable();
 		if (selecteable) {
 			ApplicationMode mode = settings.APPLICATION_MODE.get();
@@ -247,37 +248,37 @@ public class MapInfoControls {
 		}
 	}
 	
-	public Set<MapInfoControlRegInfo> getLeft() {
+	public Set<MapWidgetRegInfo> getLeft() {
 		return left;
 	}
 	
-	public Set<MapInfoControlRegInfo> getRight() {
+	public Set<MapWidgetRegInfo> getRight() {
 		return right;
 	}
 	
-	public Set<MapInfoControlRegInfo> getTop() {
+	public Set<MapWidgetRegInfo> getTop() {
 		return top;
 	}
 	
-	public Set<MapInfoControlRegInfo> getAppearanceWidgets() {
+	public Set<MapWidgetRegInfo> getAppearanceWidgets() {
 		return appearanceWidgets;
 	}
 	
-	public void populateStackControl(MapStackControl stack, OsmandMapTileView v, boolean left){
+	public void populateStackControl(StackWidgetView stack, OsmandMapTileView v, boolean left){
 		ApplicationMode appMode = settings.getApplicationMode();
-		Set<MapInfoControlRegInfo> st = left ? this.left : this.right;
-		for (MapInfoControlRegInfo r : st) {
+		Set<MapWidgetRegInfo> st = left ? this.left : this.right;
+		for (MapWidgetRegInfo r : st) {
 			if (r.visibleCollapsible != null && r.visibleCollapsible.contains(appMode)) {
-				stack.addCollapsedView((MapInfoControl) r.m);
+				stack.addCollapsedView((BaseMapWidget) r.m);
 			} else if (r.visibleModes.contains(appMode)) {
-				stack.addStackView((MapInfoControl) r.m);
+				stack.addStackView((BaseMapWidget) r.m);
 			}
 		}
 	}
 	
 	public void populateStatusBar(ViewGroup statusBar){
 		ApplicationMode appMode = settings.getApplicationMode();
-		for (MapInfoControlRegInfo r : top) {
+		for (MapWidgetRegInfo r : top) {
 			boolean main = r.position == MAIN_CONTROL;
 			if (r.visibleModes.contains(appMode)) {
 				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, main? 1 : 0);
@@ -289,8 +290,8 @@ public class MapInfoControls {
 		}
 	}
 	
-	private void resetDefault(ApplicationMode mode, Set<MapInfoControlRegInfo> set ){
-		for(MapInfoControlRegInfo ri : set) {
+	private void resetDefault(ApplicationMode mode, Set<MapWidgetRegInfo> set ){
+		for(MapWidgetRegInfo ri : set) {
 			if(ri.preference != null) {
 				ri.preference.resetToDefault();
 			} else {
@@ -326,7 +327,7 @@ public class MapInfoControls {
 	}
 	
 	
-	public static class MapInfoControlRegInfo implements Comparable<MapInfoControlRegInfo>  {
+	public static class MapWidgetRegInfo implements Comparable<MapWidgetRegInfo>  {
 		public View m;
 		public int drawable;
 		public int messageId;
@@ -369,7 +370,7 @@ public class MapInfoControls {
 			return visibleModes.contains(mode);
 		}
 		
-		public MapInfoControlRegInfo required(ApplicationMode... modes){
+		public MapWidgetRegInfo required(ApplicationMode... modes){
 			for(ApplicationMode ms : modes) {
 				visibleModes.add(ms);
 			}
@@ -397,13 +398,13 @@ public class MapInfoControls {
 				return false;
 			if (getClass() != obj.getClass())
 				return false;
-			MapInfoControlRegInfo other = (MapInfoControlRegInfo) obj;
+			MapWidgetRegInfo other = (MapWidgetRegInfo) obj;
 			if (messageId != other.messageId)
 				return false;
 			return true;
 		}
 		@Override
-		public int compareTo(MapInfoControlRegInfo another) {
+		public int compareTo(MapWidgetRegInfo another) {
 			if (messageId == another.messageId) {
 				return 0;
 			}

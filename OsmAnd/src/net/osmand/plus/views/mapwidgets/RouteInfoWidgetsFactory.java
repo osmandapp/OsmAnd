@@ -1,4 +1,4 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
 
 import java.util.Arrays;
@@ -8,7 +8,6 @@ import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
-import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -20,6 +19,10 @@ import net.osmand.plus.routing.AlarmInfo;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RouteInfoLayer;
+import net.osmand.plus.views.TurnPathHelper;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import android.content.Context;
@@ -37,16 +40,16 @@ import android.graphics.drawable.Drawable;
 import android.text.format.DateFormat;
 import android.view.View;
 
-public class RouteInfoControls {
+public class RouteInfoWidgetsFactory {
 	public float scaleCoefficient = 1;
 	
-	public RouteInfoControls(float scaleCoefficient){
+	public RouteInfoWidgetsFactory(float scaleCoefficient){
 		this.scaleCoefficient = scaleCoefficient;
 	}
 	
-	public NextTurnInfoControl createNextInfoControl(final RoutingHelper routingHelper, Context ctx,
+	public NextTurnInfoWidget createNextInfoControl(final RoutingHelper routingHelper, Context ctx,
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
-		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(ctx, textPaint, subtextPaint, horisontalMini) {
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			TurnType straight = TurnType.valueOf(TurnType.C, true);
 
@@ -129,9 +132,9 @@ public class RouteInfoControls {
 		return nextTurnInfo;
 	}
 	
-	public NextTurnInfoControl createNextNextInfoControl(final RoutingHelper routingHelper, Context ctx,
+	public NextTurnInfoWidget createNextNextInfoControl(final RoutingHelper routingHelper, Context ctx,
 			final OsmandSettings settings, Paint textPaint, Paint subtextPaint, boolean horisontalMini) {
-		final NextTurnInfoControl nextTurnInfo = new NextTurnInfoControl(ctx, textPaint, subtextPaint, horisontalMini) {
+		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
 			public boolean updateInfo() {
@@ -212,13 +215,13 @@ public class RouteInfoControls {
 	}
 	
 	
-	protected TextInfoControl createTimeControl(final MapActivity map, Paint paintText, Paint paintSubText){
+	public TextInfoWidget createTimeControl(final MapActivity map, Paint paintText, Paint paintSubText){
 		final RoutingHelper routingHelper = map.getRoutingHelper();
 		final Drawable time = map.getResources().getDrawable(R.drawable.info_time);
 		final Drawable timeToGo = map.getResources().getDrawable(R.drawable.info_time_to_go);
 		final OsmandApplication ctx = map.getMyApplication();
 		final OsmandPreference<Boolean> showArrival = ctx.getSettings().SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME;
-		final TextInfoControl leftTimeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+		final TextInfoWidget leftTimeControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 			private long cachedLeftTime = 0;
 			
 			@Override
@@ -276,45 +279,12 @@ public class RouteInfoControls {
 		return leftTimeControl;
 	}
 	
-	protected TextInfoControl createAltitudeControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final TextInfoControl altitudeControl = new TextInfoControl(map, 0, paintText, paintSubText) {
-			private int cachedAlt = 0;
-
-			@Override
-			public boolean updateInfo() {
-				// draw speed
-				Location loc = map.getMyApplication().getLastKnownLocation();
-				if (loc != null && loc.hasAltitude()) {
-					double compAlt = loc.getAltitude();
-					if (cachedAlt != (int) compAlt) {
-						cachedAlt = (int) compAlt;
-						String ds = OsmAndFormatter.getFormattedAlt(cachedAlt, map.getMyApplication());
-						int ls = ds.lastIndexOf(' ');
-						if (ls == -1) {
-							setText(ds, null);
-						} else {
-							setText(ds.substring(0, ls), ds.substring(ls + 1));
-						}
-						return true;
-					}
-				} else if (cachedAlt != 0) {
-					cachedAlt = 0;
-					setText(null, null);
-					return true;
-				}
-				return false;
-			}
-		};
-		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(map.getResources().getDrawable(R.drawable.info_altitude));
-		return altitudeControl;
-	}
 	
-	protected TextInfoControl createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
 		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
 		final MapViewTrackingUtilities trackingUtilities = map.getMapViewTrackingUtilities();
-		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
+		final TextInfoWidget speedControl = new TextInfoWidget(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -354,33 +324,11 @@ public class RouteInfoControls {
 	}
 	
 	
-	protected TextInfoControl createGPSInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		final OsmandApplication app = map.getMyApplication();
-		final OsmAndLocationProvider loc = app.getLocationProvider();
-		final TextInfoControl gpsInfoControl = new TextInfoControl(map, 3, paintText, paintSubText) {
-			private int u = -1;
-			private int f = -1;
-
-			@Override
-			public boolean updateInfo() {
-				GPSInfo gpsInfo = loc.getGPSInfo();
-				if(gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
-					u = gpsInfo.usedSatellites;
-					f = gpsInfo.foundSatellites;
-					setText(gpsInfo.usedSatellites+"/"+gpsInfo.foundSatellites, "");
-					return true;
-				}
-				return false;
-			}
-		};
-		gpsInfoControl.setImageDrawable(app.getResources().getDrawable(R.drawable.info_gps_info));
-		gpsInfoControl.setText(null, null);
-		return gpsInfoControl;
-	}
 	
-	protected TextInfoControl createSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	
+	public TextInfoWidget createSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final OsmandApplication app = map.getMyApplication();
-		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
+		final TextInfoWidget speedControl = new TextInfoWidget(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
 
 			@Override
@@ -419,7 +367,7 @@ public class RouteInfoControls {
 		return speedControl;
 	}
 	
-	public abstract static class DistanceToPointInfoControl extends TextInfoControl {
+	public abstract static class DistanceToPointInfoControl extends TextInfoWidget {
 
 		private final OsmandMapTileView view;
 		private float[] calculations = new float[1];
@@ -484,7 +432,7 @@ public class RouteInfoControls {
 		}
 	}
 	
-	protected TextInfoControl createDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final OsmandMapTileView view = map.getMapView();
 		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
 				.getDrawable(R.drawable.info_target), view) {
@@ -504,7 +452,7 @@ public class RouteInfoControls {
 		return distanceControl;
 	}
 	
-	protected TextInfoControl createIntermediateDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	public TextInfoWidget createIntermediateDistanceControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final OsmandMapTileView view = map.getMapView();
 		final TargetPointsHelper targets = map.getMyApplication().getTargetPointsHelper();
 		DistanceToPointInfoControl distanceControl = new DistanceToPointInfoControl(map, 0, paintText, paintSubText, map.getResources()
@@ -535,8 +483,8 @@ public class RouteInfoControls {
 		return distanceControl;
 	}
 	
-	protected MiniMapControl createMiniMapControl(final RoutingHelper routingHelper, OsmandMapTileView view) {
-		final MiniMapControl miniMapControl = new MiniMapControl(view.getContext(), view) {
+	public MiniMapWidget createMiniMapControl(final RoutingHelper routingHelper, OsmandMapTileView view) {
+		final MiniMapWidget miniMapControl = new MiniMapWidget(view.getContext(), view) {
 			@Override
 			public boolean updateInfo() {
 				boolean visible = routingHelper.isFollowingMode();
@@ -549,7 +497,7 @@ public class RouteInfoControls {
 	}
 	
 	private static final float miniCoeff = 2f;
-	protected MapInfoControl createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
+	public BaseMapWidget createLanesControl(final RoutingHelper routingHelper, final OsmandMapTileView view) {
 		final Path laneStraight = new Path();
 		Matrix pathTransform = new Matrix();
 		pathTransform.postScale(scaleCoefficient / miniCoeff, scaleCoefficient / miniCoeff);
@@ -567,7 +515,7 @@ public class RouteInfoControls {
 		final float w = 72 * scaleCoefficient / miniCoeff;
 		
 		
-		final MapInfoControl lanesControl = new MapInfoControl(view.getContext()) {
+		final BaseMapWidget lanesControl = new BaseMapWidget(view.getContext()) {
 			int[] lanes = null; 
 			
 			boolean imminent = false;
@@ -649,7 +597,7 @@ public class RouteInfoControls {
 	}
 
 	
-	protected MapInfoControl createAlarmInfoControl(final OsmandApplication app, MapActivity ma) {
+	public BaseMapWidget createAlarmInfoControl(final OsmandApplication app, MapActivity ma) {
 		final RoutingHelper rh = app.getRoutingHelper();
 		final OsmandSettings settings = app.getSettings();
 		final OsmAndLocationProvider locationProvider = app.getLocationProvider();
@@ -670,7 +618,7 @@ public class RouteInfoControls {
 		ptext.setAntiAlias(true);
 		ptext.setTextAlign(Align.CENTER);
 		
-		final MapInfoControl alarm = new MapInfoControl(ma) {
+		final BaseMapWidget alarm = new BaseMapWidget(ma) {
 			private String text = "";
 			private Bitmap img = null;
 			private int imgId;
@@ -688,7 +636,7 @@ public class RouteInfoControls {
 						RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 						Location loc = locationProvider.getLastKnownLocation();
 						if(ro != null && loc != null) {
-							alarm = rh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
+							alarm = RoutingHelper.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
 						} else {
 							alarm = null;
 						}

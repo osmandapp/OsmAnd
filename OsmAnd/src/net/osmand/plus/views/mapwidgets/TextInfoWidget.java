@@ -1,11 +1,12 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
+import net.osmand.plus.views.MapInfoLayer;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 
-public class TextInfoControl extends MapInfoControl {
+public class TextInfoWidget extends BaseMapWidget {
 
 	String text;
 	Paint textPaint;
@@ -15,7 +16,7 @@ public class TextInfoControl extends MapInfoControl {
 	private Drawable imageDrawable;
 	private float scaleCoefficient;
 
-	public TextInfoControl(Context ctx, int leftMargin, Paint textPaint, Paint subtextPaint) {
+	public TextInfoWidget(Context ctx, int leftMargin, Paint textPaint, Paint subtextPaint) {
 		super(ctx);
 		scaleCoefficient = MapInfoLayer.scaleCoefficient;
 		this.leftMargin = leftMargin;

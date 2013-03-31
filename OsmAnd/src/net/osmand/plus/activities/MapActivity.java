@@ -11,13 +11,11 @@ import net.osmand.access.AccessibilityPlugin;
 import net.osmand.access.AccessibleActivity;
 import net.osmand.access.AccessibleToast;
 import net.osmand.access.MapAccessibilityActions;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.BusyIndicator;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -94,6 +92,7 @@ public class MapActivity extends AccessibleActivity  {
 	private ProgressDialog startProgressDialog;
 	private List<DialogProvider> dialogProviders = new ArrayList<DialogProvider>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
+	private FrameLayout lockView;
 	
 	
 	private Notification getNotification() {
@@ -176,9 +175,15 @@ public class MapActivity extends AccessibleActivity  {
 				mapView.setZoom(14);
 			}
 		}
-		
 		addDialogProvider(mapActions);
 		OsmandPlugin.onMapActivityCreate(this);
+		if(lockView != null) {
+			((FrameLayout)mapView.getParent()).addView(lockView);
+		}
+	}
+	
+	public void addLockView(FrameLayout lockView) {
+		this.lockView = lockView;
 	}
 
 	private void createProgressBarForRouting() {
@@ -675,5 +680,6 @@ public class MapActivity extends AccessibleActivity  {
 	public void refreshMap() {
 		getMapView().refreshMap();
 	}
+
 
 }

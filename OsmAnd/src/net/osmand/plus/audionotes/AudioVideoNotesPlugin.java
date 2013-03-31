@@ -41,9 +41,9 @@ import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.MapStackControl;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TextInfoControl;
+import net.osmand.plus.views.mapwidgets.StackWidgetView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -93,7 +93,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static Method mRegisterMediaButtonEventReceiver;
 	private static Method mUnregisterMediaButtonEventReceiver;
 	private OsmandApplication app;
-	private TextInfoControl recordControl;
+	private TextInfoWidget recordControl;
 	
 	public final CommonPreference<Boolean> AV_EXTERNAL_RECORDER ;
 	public final CommonPreference<Boolean> AV_EXTERNAL_PHOTO_CAM ;
@@ -438,7 +438,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private void registerWidget(MapActivity activity) {
 		MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 		if (mapInfoLayer != null ) {
-			recordControl = new TextInfoControl(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
+			recordControl = new TextInfoWidget(activity, 0, mapInfoLayer.getPaintText(), mapInfoLayer.getPaintSubText());
 			recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
 			setRecordListener(recordControl, activity);
 			mapInfoLayer.getMapInfoControls().registerSideWidget(recordControl,
@@ -449,7 +449,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	private void setRecordListener(final TextInfoControl recordPlaceControl, final MapActivity mapActivity) {
+	private void setRecordListener(final TextInfoWidget recordPlaceControl, final MapActivity mapActivity) {
 		recordPlaceControl.setText(app.getString(R.string.av_control_start), "");
 		updateWidgetIcon(recordPlaceControl);
 		recordPlaceControl.setOnClickListener(new View.OnClickListener() {
@@ -462,7 +462,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 
-	private void updateWidgetIcon(final TextInfoControl recordPlaceControl) {
+	private void updateWidgetIcon(final TextInfoWidget recordPlaceControl) {
 		recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_inactive));
 		if (AV_DEFAULT_ACTION.get() == AV_DEFAULT_ACTION_VIDEO) {
 			recordPlaceControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_video));
@@ -797,7 +797,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		recordControl.setText(app.getString(R.string.av_control_stop), "");
 		recordControl.setImageDrawable(activity.getResources().getDrawable(R.drawable.widget_icon_av_active));
 		final MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-		final MapStackControl par = mil.getRightStack();
+		final StackWidgetView par = mil.getRightStack();
 		final boolean contains = par.getAllViews().contains(recordControl);
 		if(!contains) {
 			par.addStackView(recordControl);

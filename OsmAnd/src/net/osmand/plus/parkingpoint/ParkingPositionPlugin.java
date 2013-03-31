@@ -17,10 +17,10 @@ import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapInfoControl;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TextInfoControl;
+import net.osmand.plus.views.mapwidgets.BaseMapWidget;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -55,7 +55,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 
 	private ParkingPositionLayer parkingLayer;
-	private MapInfoControl parkingPlaceControl;
+	private BaseMapWidget parkingPlaceControl;
 	private final CommonPreference<Float> parkingLat;
 	private final CommonPreference<Float> parkingLon;
 	private CommonPreference<Boolean> parkingType;
@@ -447,8 +447,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * the current position on the map 
 	 * and the location of the parked car
 	 */
-	private TextInfoControl createParkingPlaceInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
-		TextInfoControl parkingPlaceControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+	private TextInfoWidget createParkingPlaceInfoControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+		TextInfoWidget parkingPlaceControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 			private float[] calculations = new float[1];
 			private int cachedMeters = 0;			
 			

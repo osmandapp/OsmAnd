@@ -1,6 +1,7 @@
-package net.osmand.plus.views;
+package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.ClientContext;
+import net.osmand.plus.views.ShadowText;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,7 +10,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
-public abstract class MapInfoControl extends View implements MapControlUpdateable {
+public abstract class BaseMapWidget extends View implements UpdateableWidget {
 	int width = 0;
 	int height = 0;
 	Rect padding = new Rect();
@@ -17,7 +18,7 @@ public abstract class MapInfoControl extends View implements MapControlUpdateabl
 
     private String contentTitle;
 
-	public MapInfoControl(Context ctx) {
+	public BaseMapWidget(Context ctx) {
 		super(ctx);
 	}
 	

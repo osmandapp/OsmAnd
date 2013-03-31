@@ -17,13 +17,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.views.MapInfoControl;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
+import net.osmand.plus.views.mapwidgets.BaseMapWidget;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.TextInfoControl;
 
 import org.apache.commons.logging.Log;
 
@@ -43,7 +43,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	private OsmandSettings settings;
 	private OsmandApplication app;
 	private static final Log log = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
-	private MapInfoControl monitoringControl;
+	private BaseMapWidget monitoringControl;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
 		this.app = app;
@@ -186,11 +186,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
 	 */
-	private MapInfoControl createMonitoringControl(final MapActivity map, Paint paintText, Paint paintSubText) {
+	private BaseMapWidget createMonitoringControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final Drawable monitoringBig = map.getResources().getDrawable(R.drawable.monitoring_rec_big);
 		final Drawable monitoringSmall = map.getResources().getDrawable(R.drawable.monitoring_rec_small);
 		final Drawable monitoringInactive = map.getResources().getDrawable(R.drawable.monitoring_rec_inactive);
-		monitoringControl = new TextInfoControl(map, 0, paintText, paintSubText) {
+		monitoringControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 			long lastUpdateTime;
 			@Override
 			public boolean updateInfo() {

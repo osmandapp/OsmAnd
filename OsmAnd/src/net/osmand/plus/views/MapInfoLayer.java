@@ -11,9 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import net.osmand.access.AccessibleToast;
-import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -22,9 +20,18 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
-import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.MapInfoControls.MapInfoControlRegInfo;
+import net.osmand.plus.views.mapwidgets.BaseMapWidget;
+import net.osmand.plus.views.mapwidgets.ImageViewWidget;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.StackWidgetView;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.mapwidgets.UpdateableWidget;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -36,16 +43,12 @@ import android.content.DialogInterface.OnClickListener;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
 import android.util.DisplayMetrics;
-import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
 import android.view.ViewGroup;
@@ -80,20 +83,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private int STATUS_BAR_MARGIN_X = -4;
 	
 	private ImageView backToLocation;
+	private TopTextView topText;
 	private View progressBar;
 	
 	// groups
-	private MapStackControl rightStack;
-	private MapStackControl leftStack;
+	private StackWidgetView rightStack;
+	private StackWidgetView leftStack;
 	private LinearLayout statusBar;
-	private MapInfoControl lanesControl;
-	private MapInfoControl alarmControl;
-	private MapInfoControls mapInfoControls;
-	private TopTextView topText;
+	private BaseMapWidget lanesControl;
+	private BaseMapWidget alarmControl;
+	private MapWidgetRegistry mapInfoControls;
 
 	private MonitoringInfoControl monitoringServices;
 
 	private String ADDITIONAL_VECTOR_RENDERING_CATEGORY;
+
+	
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -141,7 +146,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		paintImg.setAntiAlias(true);
 		
 
-		mapInfoControls = new MapInfoControls(map.getMyApplication().getSettings());
+		mapInfoControls = new MapWidgetRegistry(map.getMyApplication().getSettings());
 		monitoringServices = new MonitoringInfoControl();
 	}
 	
@@ -166,7 +171,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return monitoringServices;
 	}
 	
-	public MapInfoControls getMapInfoControls() {
+	public MapWidgetRegistry getMapInfoControls() {
 		return mapInfoControls;
 	}
 
@@ -180,7 +185,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void registerAllControls(){
 		statusBar = new LinearLayout(view.getContext());
 		statusBar.setOrientation(LinearLayout.HORIZONTAL);
-		RouteInfoControls ric = new RouteInfoControls(scaleCoefficient);
+		RouteInfoWidgetsFactory ric = new RouteInfoWidgetsFactory(scaleCoefficient);
+		MapInfoWidgetsFactory mic = new MapInfoWidgetsFactory(scaleCoefficient);
 		OsmandApplication app = view.getApplication();
 		lanesControl = ric.createLanesControl(app.getRoutingHelper(), view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
@@ -192,53 +198,52 @@ public class MapInfoLayer extends OsmandMapLayer {
 		EnumSet<ApplicationMode> exceptCar = EnumSet.of(ApplicationMode.BICYCLE, ApplicationMode.PEDESTRIAN, ApplicationMode.DEFAULT);
 		EnumSet<ApplicationMode> none = EnumSet.noneOf(ApplicationMode.class);
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		NextTurnInfoControl bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
+		NextTurnInfoWidget bigInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(), paintText,
 				paintSubText, false);
 		mapInfoControls.registerSideWidget(bigInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn,"next_turn", true, carBicycleDefault, none, 5);
-		NextTurnInfoControl smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
+		NextTurnInfoWidget smallInfoControl = ric.createNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(smallInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_turn_small, "next_turn_small", true,
 				EnumSet.of(ApplicationMode.PEDESTRIAN), none, 10);
-		NextTurnInfoControl nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
+		NextTurnInfoWidget nextNextInfoControl = ric.createNextNextInfoControl(routingHelper, app, view.getSettings(),
 				paintSmallText, paintSmallSubText, true);
 		mapInfoControls.registerSideWidget(nextNextInfoControl, R.drawable.widget_next_turn, R.string.map_widget_next_next_turn, "next_next_turn",true, carBicycleDefault, none, 15);
 		//MiniMapControl miniMap = ric.createMiniMapControl(routingHelper, view);
 		//mapInfoControls.registerSideWidget(miniMap, R.drawable.widget_next_turn, R.string.map_widget_mini_route, "mini_route", true, none, none, 20);
 		// right stack
-		TextInfoControl intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
+		TextInfoWidget intermediateDist = ric.createIntermediateDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(intermediateDist, R.drawable.widget_intermediate, R.string.map_widget_intermediate_distance, "intermediate_distance", false, all, none, 3);
-		TextInfoControl dist = ric.createDistanceControl(map, paintText, paintSubText);
+		TextInfoWidget dist = ric.createDistanceControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(dist, R.drawable.widget_target, R.string.map_widget_distance, "distance", false, all, none, 5);
-		TextInfoControl time = ric.createTimeControl(map, paintText, paintSubText);
+		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, all, none,  10);
-		TextInfoControl speed = ric.createSpeedControl(map, paintText, paintSubText);
+		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
-		TextInfoControl gpsInfo = ric.createGPSInfoControl(map, paintText, paintSubText);
+		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, none, none,  17);
-		TextInfoControl maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
+		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false, none, none,  18);
-		TextInfoControl alt = ric.createAltitudeControl(map, paintText, paintSubText);
+		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
 
 		// Top widgets
-		ImageViewControl compassView = createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapInfoControls.LEFT_CONTROL, all, 5);
+		ImageViewWidget compassView = mic.createCompassView(map);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, all, 5);
 		View config = createConfiguration();
-		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapInfoControls.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
+		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
 		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.monitoring, R.string.map_widget_monitoring_services,
-				"monitoring_services", MapInfoControls.LEFT_CONTROL, exceptCar, 12);
-		mapInfoControls.registerTopWidget(createLockInfo(map), R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", 
-				MapInfoControls.LEFT_CONTROL, none, 15);
-		backToLocation = createBackToLocation(map);
-		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapInfoControls.RIGHT_CONTROL, all, 5);
-		
+				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, exceptCar, 12);
+		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", 
+				MapWidgetRegistry.LEFT_CONTROL, none, 15);
+		backToLocation = mic.createBackToLocation(map);
+		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, all, 5);
 		
 		View globus = createGlobus();
-		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
+		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
 		
-		topText = new TopTextView(app, map);
+		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
-				"street_name", MapInfoControls.MAIN_CONTROL, carBicycleDefault, 100);
+				"street_name", MapWidgetRegistry.MAIN_CONTROL, carBicycleDefault, 100);
 		
 		// Register appearance widgets
 		registerAppearanceWidgets();
@@ -246,7 +251,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	
 	
 	private void registerAppearanceWidgets() {
-		final MapInfoControlRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, R.string.map_widget_renderer,
+		final MapWidgetRegInfo vectorRenderer = mapInfoControls.registerAppearanceWidget(R.drawable.widget_rendering_style, R.string.map_widget_renderer,
 				"renderer", view.getSettings().RENDERER);
 		final OsmandApplication app = view.getApplication();
 		vectorRenderer.setStateChangeListener(new Runnable() {
@@ -285,7 +290,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		
-		final MapInfoControlRegInfo dayNight = mapInfoControls.registerAppearanceWidget(R.drawable.widget_day_night_mode, R.string.map_widget_day_night,
+		final MapWidgetRegInfo dayNight = mapInfoControls.registerAppearanceWidget(R.drawable.widget_day_night_mode, R.string.map_widget_day_night,
 				"dayNight", view.getSettings().DAYNIGHT_MODE);
 		dayNight.setStateChangeListener(new Runnable() {
 			@Override
@@ -310,7 +315,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		});
 		
-		final MapInfoControlRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction, 
+		final MapWidgetRegInfo displayViewDirections = mapInfoControls.registerAppearanceWidget(R.drawable.widget_viewing_direction, R.string.map_widget_view_direction, 
 				"viewDirection", view.getSettings().SHOW_VIEW_ANGLE);
 		displayViewDirections.setStateChangeListener(new Runnable() {
 			@Override
@@ -343,7 +348,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					icon = f.getInt(null);
 				} catch(Exception e){
 				}
-				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
+				MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
 				w.setStateChangeListener(new Runnable() {
 					@Override
 					public void run() {
@@ -361,7 +366,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					icon = f.getInt(null);
 				} catch(Exception e){
 				}
-				MapInfoControlRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
+				MapWidgetRegInfo w = mapInfoControls.registerAppearanceWidget(icon, propertyName, "rend_"+p.getAttrName(), pref, categoryName);
 				w.setStateChangeListener(new Runnable() {
 					@Override
 					public void run() {
@@ -403,8 +408,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void createControls() {
 		// 1. Create view groups and controls
 		statusBar.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_top));
-		rightStack = new MapStackControl(view.getContext());
-		leftStack = new MapStackControl(view.getContext());
+		rightStack = new StackWidgetView(view.getContext());
+		leftStack = new StackWidgetView(view.getContext());
 		
 		// 2. Preparations
 		Rect topRectPadding = new Rect();
@@ -466,9 +471,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public Set<String> getSpecificVisibleCategories(Set<MapInfoControlRegInfo> m) {
+	public Set<String> getSpecificVisibleCategories(Set<MapWidgetRegInfo> m) {
 		Set<String> s = new LinkedHashSet<String>();
-		for(MapInfoControlRegInfo ms : m){
+		for(MapWidgetRegInfo ms : m){
 			if(ms.getCategory() != null) {
 				s.add(ms.getCategory());
 			}
@@ -479,8 +484,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return s;
 	}
 	
-	public void fillAppearanceWidgets(Set<MapInfoControlRegInfo> widgets, String category, ArrayList<Object> registry) {
-		for(MapInfoControlRegInfo w : widgets ) {
+	public void fillAppearanceWidgets(Set<MapWidgetRegInfo> widgets, String category, ArrayList<Object> registry) {
+		for(MapWidgetRegInfo w : widgets ) {
 			if(Algorithms.objectEquals(w.getCategory(), category)) {
 				registry.add(w);
 			}
@@ -500,7 +505,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		list.add(map.getString(R.string.map_widget_left_stack));
 		list.addAll(mapInfoControls.getLeft());
 
-		Set<MapInfoControlRegInfo> widgets = mapInfoControls.getAppearanceWidgets();
+		Set<MapWidgetRegInfo> widgets = mapInfoControls.getAppearanceWidgets();
 		Set<String> cats = getSpecificVisibleCategories(widgets);
 		list.add(map.getString(R.string.map_widget_appearance));
 		fillAppearanceWidgets(widgets, null, list);
@@ -523,8 +528,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 				final TextView tv = (TextView) v.findViewById(R.id.title);
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 				Object o = list.get(position);
-				if(o instanceof MapInfoControlRegInfo) {
-					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
+				if(o instanceof MapWidgetRegInfo) {
+					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
 					
 					String s = mi.visibleCollapsed(mode)? " - " : "  ";
 					if(mi.message != null) {
@@ -586,8 +591,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Object o = list.get(which);
-				if (o instanceof MapInfoControlRegInfo) {
-					final MapInfoControlRegInfo mi = (MapInfoControlRegInfo) o;
+				if (o instanceof MapWidgetRegInfo) {
+					final MapWidgetRegInfo mi = (MapWidgetRegInfo) o;
 					final boolean selecteable = mi.selecteable();
 					boolean check = mi.visibleCollapsed(mode) || mi.visible(mode);
 					if (check || selecteable) {
@@ -659,7 +664,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			statusBar.setBackgroundDrawable(view.getResources().getDrawable(boxTop));
 
 			paintText.setColor(textColor);
-			topText.getPaint().setColor(textColor);
 			paintSubText.setColor(textColor);
 			paintSmallText.setColor(textColor);
 			paintSmallSubText.setColor(textColor);
@@ -669,7 +673,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 			rightStack.setShadowColor(textShadowColor);
 
 			paintText.setFakeBoldText(textBold);
-			topText.getPaint().setFakeBoldText(textBold);
 			paintSubText.setFakeBoldText(textBold);
 			paintSmallText.setFakeBoldText(textBold);
 			paintSmallSubText.setFakeBoldText(textBold);
@@ -691,17 +694,17 @@ public class MapInfoLayer extends OsmandMapLayer {
 		alarmControl.updateInfo();
 		for (int i = 0; i < statusBar.getChildCount(); i++) {
 			View v = statusBar.getChildAt(i);
-			if (v instanceof MapControlUpdateable) {
-				((MapControlUpdateable) v).updateInfo();
+			if (v instanceof UpdateableWidget) {
+				((UpdateableWidget) v).updateInfo();
 			}
 		}
 	}
 	
-	public MapStackControl getRightStack() {
+	public StackWidgetView getRightStack() {
 		return rightStack;
 	}
 	
-	public MapStackControl getLeftStack() {
+	public StackWidgetView getLeftStack() {
 		return leftStack;
 	}
 
@@ -756,208 +759,5 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return globus;
 	}
 	
-	private ImageView createBackToLocation(final MapActivity map){
-		ImageView backToLocation = new ImageViewControl(view.getContext()) {
-			
-			@Override
-			public boolean updateInfo() {
-				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-				enabled = enabled && !map.getMapViewTrackingUtilities().isMapLinkedToLocation();
-				setEnabled(enabled);
-				return true;
-			}
-		};
-		backToLocation.setPadding((int) (5 * scaleCoefficient), 0, (int) (5 * scaleCoefficient), 0);
-		backToLocation.setImageDrawable(map.getResources().getDrawable(R.drawable.back_to_loc));
-		backToLocation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().backToLocationImpl();
-			}
-		});
-		return backToLocation;
-	}
-	
-	private ImageView createLockInfo(final MapActivity map) {
-		final ImageView lockView = new ImageView(view.getContext());
-		final Drawable lockEnabled = view.getResources().getDrawable(R.drawable.lock_enabled);
-		final Drawable lockDisabled = view.getResources().getDrawable(R.drawable.lock_disabled);
-		lockView.setBackgroundDrawable(lockDisabled);
-		final FrameLayout transparentLockView = new FrameLayout(view.getContext());
-		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT, Gravity.CENTER);
-		transparentLockView.setLayoutParams(fparams);
-		transparentLockView.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					int[] locs = new int[2];
-					lockView.getLocationOnScreen(locs);
-					int x = (int) event.getX() - locs[0];
-					int y = (int) event.getY() - locs[1];
-					transparentLockView.getLocationOnScreen(locs);
-					x += locs[0];
-					y += locs[1];
-					if (lockView.getWidth() >= x && x >= 0 && lockView.getHeight() >= y && y >= 0) {
-						lockView.performClick();
-						return true;
-					}
-					blinkIcon();
-					AccessibleToast.makeText(transparentLockView.getContext(), R.string.screen_is_locked, Toast.LENGTH_LONG).show();
-					return true;
-				}
-				return true;
-			}
-
-			private void blinkIcon() {
-				lockView.setBackgroundDrawable(lockDisabled);
-				view.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						lockView.setBackgroundDrawable(lockEnabled);
-					}
-				}, 300);
-			}
-
-		});
-		final FrameLayout parent = (FrameLayout) view.getParent();
-		lockView.setOnClickListener(new View.OnClickListener() {
-			protected boolean isScreenLocked;
-
-			@Override
-			public void onClick(View v) {
-				if (!isScreenLocked) {
-					parent.addView(transparentLockView);
-					map.getMapViewTrackingUtilities().backToLocationImpl();
-				} else {
-					parent.removeView(transparentLockView);
-				}
-				isScreenLocked = !isScreenLocked;
-				if (isScreenLocked) {
-					lockView.setBackgroundDrawable(lockEnabled);
-				} else {
-					lockView.setBackgroundDrawable(lockDisabled);
-				}
-				map.getMapViewTrackingUtilities().backToLocationImpl();
-			}
-		});
-		return lockView;
-	}
-	
-	
-	private ImageViewControl createCompassView(final MapActivity map){
-		final Drawable compass = map.getResources().getDrawable(R.drawable.compass);
-		final int mw = (int) compass.getMinimumWidth() ;
-		final int mh = (int) compass.getMinimumHeight() ;
-		final OsmandMapTileView view = map.getMapView();
-		ImageViewControl compassView = new ImageViewControl(map) {
-			private float cachedRotate = 0;
-			@Override
-			protected void onDraw(Canvas canvas) {
-				canvas.save();
-				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
-				compass.draw(canvas);
-				canvas.restore();
-			}
-		
-			@Override
-			public boolean updateInfo() {
-				if(view.getRotate() != cachedRotate) {
-					cachedRotate = view.getRotate();
-					invalidate();
-					return true;
-				}
-				return false;
-			}
-		};
-		compassView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				map.getMapViewTrackingUtilities().switchRotateMapMode();
-			}
-		});
-		compassView.setImageDrawable(compass);
-		return compassView;
-	}
-	
-	private static class TopTextView extends TextView implements MapControlUpdateable {
-		private final RoutingHelper routingHelper;
-		private final MapActivity map;
-		private int shadowColor = Color.WHITE;
-		private OsmAndLocationProvider locationProvider;
-
-		public TopTextView(OsmandApplication app, MapActivity map) {
-			super(map);
-			this.routingHelper = app.getRoutingHelper();
-			locationProvider = app.getLocationProvider();
-			this.map = map;
-			getPaint().setTextAlign(Align.CENTER);
-			setTextColor(Color.BLACK);
-		}
-
-		@Override
-		protected void onDraw(Canvas canvas) {
-			ShadowText.draw(getText().toString(), canvas, getWidth() / 2, getHeight() - 4 * scaleCoefficient,
-					getPaint(), shadowColor);
-		}
-		
-		public void setShadowColor(int shadowColor) {
-			this.shadowColor = shadowColor;
-		}
-		
-		@Override
-		public boolean updateInfo() {
-			String text = null;
-			if (routingHelper != null && routingHelper.isRouteCalculated()) {
-				if (routingHelper.isFollowingMode()) {
-					text = routingHelper.getCurrentName();
-				} else {
-					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
-					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
-						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef());
-					}
-				}
-			} else if(map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
-				if(rt != null) {
-					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef());
-				}
-			}
-			if(text == null) {
-				text = "";
-			}
-			if (!text.equals(getText().toString())) {
-				TextPaint pp = new TextPaint(getPaint());
-				if (!text.equals("")) {
-					pp.setTextSize(20 * scaleCoefficient);
-					float ts = pp.measureText(text);
-					int wth = getWidth();
-					while (ts > wth && pp.getTextSize() > (16 * scaleCoefficient)) {
-						pp.setTextSize(pp.getTextSize() - 1);
-						ts = pp.measureText(text);
-					}
-					boolean dots = false;
-					while (ts > wth) {
-						dots = true;
-						text = text.substring(0, text.length() - 2);
-						ts = pp.measureText(text);
-					}
-					if (dots) {
-						text += "..";
-					}
-					setTextSize(TypedValue.COMPLEX_UNIT_PX, pp.getTextSize());
-					setContentDescription(text);
-				} else {
-					setTextSize(TypedValue.COMPLEX_UNIT_PX, 7);
-					setContentDescription(getResources().getString(R.string.map_widget_top_text));
-				}
-				setText(text);
-				invalidate();
-				return true;
-			}
-			return false;
-		}
-
-	}
 
 }
