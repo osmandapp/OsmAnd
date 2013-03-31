@@ -983,10 +983,10 @@
   <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
   <string name="continue_follow_previous_route_auto">Предыдущий маршрут не был закончен. Продолжить следование по нему? (%1$s секунд)</string>
   <string name="show_cameras_descr">Показать скоростные камеры (может быть запрещено в некоторых странах)</string>
-  <string name="show_speed_limits_descr">Показать ограничения скорости и лежачих полицейских</string>
+  <string name="show_traffic_warnings_descr">Показать ограничения скорости и лежачих полицейских</string>
   <string name="avoid_toll_roads_descr">Избегать платных дорог при прокладке маршрута</string>
   <string name="show_cameras">Показать камеры контроля скорости</string>
-  <string name="show_speed_limits">Показать ограничения скорости</string>
+  <string name="show_traffic_warnings">Показать ограничения скорости</string>
   <string name="avoid_toll_roads">Избегать платных дорог</string>
   <string name="tip_recent_changes_0_8_2_t">"Изменения в 0.8.2 :\n\n\t* Улучшенная прокладка маршрута.\n\n\t* Возможность выбора информационных элементов (виджетов), отображаемых на карте (кнопка Настройки в правом верхнему углу карты).\n\n\t* Изменение стиля отрисовки карты и дневного/ночного режима с экрана карты (кнопка Настройки в правом верхнем углу карты).\n\n\t* Возможность блокировки экрана, запуска записи GPX и Live слежения с экрана карты (кнопка в левом верхнем углу карты). "</string>  
   <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>

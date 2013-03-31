@@ -86,7 +86,7 @@
 	<string name="bg_service_screen_lock_toast">Skjermen er låst</string>
 	<string name="bg_service_interval">Sett oppvåkningsintervall:</string>
 	<string name="show_cameras">Vis fotobokser</string>
-	<string name="show_speed_limits">Vis fartsgrenser</string>
+	<string name="show_traffic_warnings">Vis fartsgrenser</string>
 	<string name="avoid_toll_roads">Unngå bomveier</string>
 	<string name="continue_follow_previous_route_auto">Forrige navigering var ikke ferdig. Fortsette å følge den? (%1$s sekunder)</string>
 	<string name="route_updated_loc_found">Ruten blir beregnet på nytt når sted blir funnet</string>

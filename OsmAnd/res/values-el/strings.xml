@@ -98,7 +98,7 @@
 	<string name="bg_service_screen_lock_toast">Η οθόνη είναι κλειδωμένη</string>
 	<string name="bg_service_interval">Ορισμός διαστήματος αφύπνισης:</string>
 	<string name="show_cameras">Εμφάνιση καμερών ταχύτητας</string>
-	<string name="show_speed_limits">Εμφάνιση προειδοποιήσεων κυκλοφορίας</string>
+	<string name="show_traffic_warnings">Εμφάνιση προειδοποιήσεων κυκλοφορίας</string>
 	<string name="avoid_toll_roads">Αποφυγή διοδίων</string>
 	<string name="continue_follow_previous_route_auto">Το προηγούμενο δρομολόγιο δεν είχε τελειώσει. Να συνεχιστεί;? (%1$s δευτ.)</string>
 	<string name="route_updated_loc_found">Η διαδρομή θα υπολογιστεί όταν βρεθεί η θέση</string>

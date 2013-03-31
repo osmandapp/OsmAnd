@@ -73,7 +73,7 @@
 	<string name="bg_service_screen_lock">Lukitse näyttö</string>
 	<string name="bg_service_screen_lock_toast">Näyttö on lukittu</string>
 	<string name="show_cameras">Näytä nopeuskamerat</string>
-	<string name="show_speed_limits">Näytä liikennevaroitukset</string>
+	<string name="show_traffic_warnings">Näytä liikennevaroitukset</string>
 	<string name="avoid_toll_roads">Vältä tietulleja</string>
 	<string name="route_updated_loc_found">Reitti lasketaan uudelleen kun sijainti löytyy</string>
 	<string name="osmand_parking_hours">Tunteja</string>

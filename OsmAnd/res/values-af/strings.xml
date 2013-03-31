@@ -887,10 +887,10 @@
   <string name="default_buttons_selectall">Kies alles</string>
   <string name="continue_follow_previous_route_auto">Die vorige navigasie was onvoltooid. Wil jy dit nog volg? (%1$s sekondes)</string>
   <string name="show_cameras_descr">Wys spoedkameras (mag in sommige lande verbied wees)</string>
-  <string name="show_speed_limits_descr">Wys spoedbeperkings en verkeershobbels</string>
+  <string name="show_traffic_warnings_descr">Wys spoedbeperkings en verkeershobbels</string>
   <string name="avoid_toll_roads_descr">Vermy tolpaaie vir roete berekening</string>
   <string name="show_cameras">Wys spoedkameras</string>
-  <string name="show_speed_limits">Wys spoedbeperkings</string>
+  <string name="show_traffic_warnings">Wys spoedbeperkings</string>
   <string name="avoid_toll_roads">Vermy tolpaaie</string>
   <string name="tip_recent_changes_0_8_2_t">"Veranderinge in 0.8.2:
  \n\t* Verbeterde Roeteberekening

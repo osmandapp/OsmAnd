@@ -949,10 +949,10 @@
   <string name="route_updated_loc_found">Il percorso verrà calcolato quando sarà individuata la posizione</string>
   <string name="continue_follow_previous_route_auto">La precedente navigazione non è stata terminata. Continuare a seguirla? (%1$s secondi)</string>
   <string name="show_cameras_descr">Mostra gli autovelox (potrebbe essere vietato in qualche nazione)</string>
-  <string name="show_speed_limits_descr">Mostra limiti di velocità descr</string>
+  <string name="show_traffic_warnings_descr">Mostra limiti di velocità descr</string>
   <string name="avoid_toll_roads_descr">Evita strade a pedaggio per il calcolo dell\'itinerario</string>
   <string name="show_cameras">Mostra autovelox</string>
-  <string name="show_speed_limits">Mostra limiti di velocità</string>
+  <string name="show_traffic_warnings">Mostra limiti di velocità</string>
   <string name="avoid_toll_roads">Evita strade a pedaggio</string>
   <string name="tip_recent_changes_0_8_2_t">"Cambiamenti nella versione 0.8.2:
 \n* Migliorato il calcolo dei percorsi

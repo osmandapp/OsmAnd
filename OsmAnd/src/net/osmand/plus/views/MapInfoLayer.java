@@ -13,6 +13,7 @@ import java.util.Set;
 import net.osmand.access.AccessibleToast;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -184,8 +185,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		lanesControl = ric.createLanesControl(app.getRoutingHelper(), view);
 		lanesControl.setBackgroundDrawable(view.getResources().getDrawable(R.drawable.box_free));
 		
-		alarmControl = ric.createAlarmInfoControl(app.getRoutingHelper(), 
-				view.getContext(), view.getSettings());
+		alarmControl = ric.createAlarmInfoControl(app, map);
 		// register right stack
 		EnumSet<ApplicationMode> all = EnumSet.allOf(ApplicationMode.class);
 		EnumSet<ApplicationMode> carBicycleDefault = EnumSet.of(ApplicationMode.CAR, ApplicationMode.DEFAULT, ApplicationMode.BICYCLE);
@@ -236,7 +236,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		View globus = createGlobus();
 		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapInfoControls.RIGHT_CONTROL, none, 15);
 		
-		topText = new TopTextView(routingHelper, map);
+		topText = new TopTextView(app, map);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
 				"street_name", MapInfoControls.MAIN_CONTROL, carBicycleDefault, 100);
 		
@@ -883,10 +883,12 @@ public class MapInfoLayer extends OsmandMapLayer {
 		private final RoutingHelper routingHelper;
 		private final MapActivity map;
 		private int shadowColor = Color.WHITE;
+		private OsmAndLocationProvider locationProvider;
 
-		public TopTextView(RoutingHelper routingHelper, MapActivity map) {
+		public TopTextView(OsmandApplication app, MapActivity map) {
 			super(map);
-			this.routingHelper = routingHelper;
+			this.routingHelper = app.getRoutingHelper();
+			locationProvider = app.getLocationProvider();
 			this.map = map;
 			getPaint().setTextAlign(Align.CENTER);
 			setTextColor(Color.BLACK);
@@ -916,7 +918,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 					}
 				}
 			} else if(map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
-				RouteDataObject rt = map.getLastRouteDataObject(); 
+				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
 					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef());
 				}

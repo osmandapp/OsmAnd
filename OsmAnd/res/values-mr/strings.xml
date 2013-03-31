@@ -882,10 +882,10 @@
   <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
   <string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
   <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
+  <string name="show_traffic_warnings_descr">Show speed limits and traffic bumps</string>
   <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
   <string name="show_cameras">Show speed cameras</string>
-  <string name="show_speed_limits">Show speed limits</string>
+  <string name="show_traffic_warnings">Show speed limits</string>
   <string name="avoid_toll_roads">Avoid toll roads</string>
   <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
  \n\t* Improved Routing

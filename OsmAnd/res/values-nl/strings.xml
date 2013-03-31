@@ -940,10 +940,10 @@
   <string name="route_updated_loc_found">Route wordt herberekend als de locatie gevonden is</string>
   <string name="continue_follow_previous_route_auto">Vorige navigatie was nog niet klaar. Nu daarmee doorgaan? (%1$s seconden)</string>
   <string name="show_cameras_descr">Toon snelheidscontrole-camera\'s (is mogelijk verboden in sommige landen)</string>
-  <string name="show_speed_limits_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string>
+  <string name="show_traffic_warnings_descr">Toon maximaal toegestane snelheden en verkeersdrempels</string>
   <string name="avoid_toll_roads_descr">Vermijd tolwegen bij routeberekening</string>
   <string name="show_cameras">Toon snelheidscontroles</string>
-  <string name="show_speed_limits">Toon maximumsnelheden</string>
+  <string name="show_traffic_warnings">Toon maximumsnelheden</string>
   <string name="avoid_toll_roads">Vermijd tolwegen</string>
   <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2:\n\t* Verbeterde routeberekening\n\t* Dynamische kaartschermwidgets\n\t* Kaart-instellingen verplaatst naar het kaartscherm\n\t* Lockscreen knop met track logging services\n\t* Verbeterde talen: Arabisch, Kannada en RNL talen "</string>
   <string name="map_widget_top_text">Straatnaam</string>

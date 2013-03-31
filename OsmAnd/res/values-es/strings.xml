@@ -926,10 +926,10 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
   <string name="route_updated_loc_found">La ruta será recalculada cuando se encuentre la localización</string>
   <string name="continue_follow_previous_route_auto">La navegación anterior no ha finalizado. ¿Continuar siguiéndola? (%1$s segundos)</string>
   <string name="show_cameras_descr">Muestra radares (puede estar prohibido en algunos países)</string>
-  <string name="show_speed_limits_descr">Muestra límites de velocidad y puntos negros</string>
+  <string name="show_traffic_warnings_descr">Muestra límites de velocidad y puntos negros</string>
   <string name="avoid_toll_roads_descr">Evita peajes para cálculo de la ruta</string>
   <string name="show_cameras">Mostrar radares</string>
-  <string name="show_speed_limits">Mostrar límites de velocidad</string>
+  <string name="show_traffic_warnings">Mostrar límites de velocidad</string>
   <string name="avoid_toll_roads">Evitar peajes</string>
   <string name="tip_recent_changes_0_8_2_t">"Cambios en 0.8.2 :
 \n\t* Mejoras en Navegación\n\t* Widgets de mapas dinámicos\n\t* Configuración de mapa movido a la pantalla de mapa\n\t* Botón de bloqueo de mapa con servicios de registro\n\t* Arreglado Árabe, Kannada y lenguajes RTL "</string>

@@ -178,7 +178,7 @@
 	<string name="bg_service_screen_lock_toast">螢幕已鎖</string>
 	<string name="bg_service_interval">設定喚醒時間：</string>
 	<string name="show_cameras">顯示測速照相</string>
-	<string name="show_speed_limits">顯示交通狀況提醒</string>
+	<string name="show_traffic_warnings">顯示交通狀況提醒</string>
 	<string name="avoid_toll_roads">避開付費道路</string>
 	<string name="continue_follow_previous_route_auto">之前的導航未結束，要繼續嗎？ (%1$s 秒)</string>
 	<string name="route_updated_loc_found">定位時導航路徑將重新規劃</string>

@@ -148,7 +148,7 @@
 	<string name="bg_service_screen_lock_toast">Ecranul este blocat</string>
 	<string name="bg_service_interval">Stabilire interval de activare:</string>
 	<string name="show_cameras">Arată camerele radar</string>
-	<string name="show_speed_limits">Arată atenționări de trafic</string>
+	<string name="show_traffic_warnings">Arată atenționări de trafic</string>
 	<string name="avoid_toll_roads">Evită drumuri cu taxă</string>
 	<string name="continue_follow_previous_route_auto">"Navigarea anterioară nu s-a încheiat. Doriți s-o continuați (implicit \'Da\')?  (%1$s seconds)"</string>
 	<string name="route_updated_loc_found">Ruta va fi calculată când se va stabili poziția curentă</string>

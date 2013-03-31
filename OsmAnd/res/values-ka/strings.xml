@@ -895,10 +895,10 @@
   <string name="route_updated_loc_found">გზის გადათვლა სასურველი წერტილის პოვნის შემთხვევაში</string>
   <string name="continue_follow_previous_route_auto">წინა გზა არ დასრულებულა. გნებავთ მისი გაყოლა? (%1$s წმ)</string>
   <string name="show_cameras_descr">სიჩქარის კამერების ჩვენება (ზოგიერთ ქვეყანაში აკრძალულია)</string>
-  <string name="show_speed_limits_descr">სიჩქარის ლიმიტისა და საცობების ჩვენება</string>
+  <string name="show_traffic_warnings_descr">სიჩქარის ლიმიტისა და საცობების ჩვენება</string>
   <string name="avoid_toll_roads_descr">გზის გადათვლისას ფასიანი გზების ამოღება</string>
   <string name="show_cameras">სიჩქარის კამერების ჩვენება</string>
-  <string name="show_speed_limits">სიჩქარის ლიმიტების ჩვენება</string>
+  <string name="show_traffic_warnings">სიჩქარის ლიმიტების ჩვენება</string>
   <string name="avoid_toll_roads">ფასიანი გზებისათვის გვერდის ავლა</string>
   <string name="tip_recent_changes_0_8_2_t">"ცვლილებები 0.8.2-ში : \n\t* გზის არჩევნის გაუმჯობესება\n\t* რუკის დინამიური ღილაკები "</string>
   <string name="map_widget_top_text">ქუჩის სახელი</string>

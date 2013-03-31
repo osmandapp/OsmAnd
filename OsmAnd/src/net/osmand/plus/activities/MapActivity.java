@@ -479,11 +479,6 @@ public class MapActivity extends AccessibleActivity  {
 	}
 
 	
-	public RouteDataObject getLastRouteDataObject(){
-		OsmAndLocationProvider locationProvider = app.getLocationProvider();
-		return locationProvider.getLastKnownRouteSegment();
-	}
-	
 	public LatLon getMapLocation(){
 		return new LatLon(mapView.getLatitude(), mapView.getLongitude());
 	}

@@ -13,7 +13,7 @@
 <string name="map_widget_altitude">Altitud</string>
 <string name="map_widget_time">Temps per arribar-hi</string>
 <string name="show_cameras">Mostra les càmeres de velocitat</string>
-<string name="show_speed_limits">Mostra els límits de velocitat</string>
+<string name="show_traffic_warnings">Mostra els límits de velocitat</string>
 <string name="route_updated_loc_found">La ruta es tornarà a calcular quan es determini la localització</string>
 <string name="update_downlod_list">Torna a carregar la llista</string>
 <string name="starting_point_too_far">El punt d\'inici és massa lluny de la carretera més propera.</string>

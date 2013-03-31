@@ -784,8 +784,8 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 					new OsmandPreference[] { osmandSettings.PREFER_MOTORWAYS});
 			return true;
 		} else if (preference == showAlarms) {
-			showBooleanSettings(new String[] { getString(R.string.show_speed_limits), getString(R.string.show_cameras), 
-					getString(R.string.show_lanes) }, new OsmandPreference[] { osmandSettings.SHOW_SPEED_LIMITS, 
+			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_cameras), 
+					getString(R.string.show_lanes) }, new OsmandPreference[] { osmandSettings.SHOW_TRAFFIC_WARNINGS, 
 					osmandSettings.SHOW_CAMERAS, osmandSettings.SHOW_LANES });
 			return true;
 		}

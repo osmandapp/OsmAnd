@@ -891,10 +891,10 @@
   <string name="route_updated_loc_found">Tiko tiks noteiktas koordinātes, ceļš tiks pārrēķināts</string>
   <string name="continue_follow_previous_route_auto">Iepriekšējā navigācija netika pabeigta. Atsākt norādes? (%1$s sekundes)</string>
   <string name="show_cameras_descr">Rādīt fotoradarus (var būt aizliegts dažās valstīs)</string>
-  <string name="show_speed_limits_descr">"Rādīt ātruma ierobežojumus un ātruma samazināšanas šķēršļus"</string>
+  <string name="show_traffic_warnings_descr">"Rādīt ātruma ierobežojumus un ātruma samazināšanas šķēršļus"</string>
   <string name="avoid_toll_roads_descr">Izvairīties no maksas ceļiem maršruta aprēķinā</string>
   <string name="show_cameras">Rādīt radarus</string>
-  <string name="show_speed_limits">Rādīt ātruma ierobežojumus</string>
+  <string name="show_traffic_warnings">Rādīt ātruma ierobežojumus</string>
   <string name="avoid_toll_roads">Izvairīties no maksas ceļiem</string>
   <string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
 \n\t* Uzlabota navigācija

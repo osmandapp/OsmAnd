@@ -879,10 +879,10 @@
   <string name="route_updated_loc_found">Route will be recalculated when location will be found</string>
   <string name="continue_follow_previous_route_auto">A navegação anterior nao foi terminada, quer continua-la? (%1$s segundos)</string>
   <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
+  <string name="show_traffic_warnings_descr">Show speed limits and traffic bumps</string>
   <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
   <string name="show_cameras">Mostrar radares</string>
-  <string name="show_speed_limits">Exibir limites de velocidade</string>
+  <string name="show_traffic_warnings">Exibir limites de velocidade</string>
   <string name="avoid_toll_roads">Evitar portagens</string>
   <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
   <string name="map_widget_top_text">Nome da Rua</string>

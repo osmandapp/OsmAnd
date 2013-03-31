@@ -79,7 +79,7 @@
 	<string name="bg_service_screen_unlock">Ekran kilidini kaldır</string>
 	<string name="bg_service_screen_lock_toast">Ekran kilitli</string>
 	<string name="show_cameras">Hız kameralarını göster</string>
-	<string name="show_speed_limits">Trafik uyarılarını göster</string>
+	<string name="show_traffic_warnings">Trafik uyarılarını göster</string>
 	<string name="avoid_toll_roads">Ücretli yollardan sakın</string>
 	<string name="osmand_parking_hours">Saat</string>
 	<string name="osmand_parking_minutes">Dakika</string>

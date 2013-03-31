@@ -147,7 +147,7 @@
 	<string name="bg_service_screen_lock_toast">המסך נעול</string>
 	<string name="bg_service_interval">הגדרת משך התעוררות:</string>
 	<string name="show_cameras">הצגת מכמונות מהירות</string>
-	<string name="show_speed_limits">הצגת אזהרות תנועה</string>
+	<string name="show_traffic_warnings">הצגת אזהרות תנועה</string>
 	<string name="avoid_toll_roads">המנעות מכבישי אגרה</string>
 	<string name="continue_follow_previous_route_auto">הניווט הקודם לא הושלם. האם להמשיך לעקוב אחריו? (%1$s שניות)</string>
 	<string name="route_updated_loc_found">המסלול יחושב מחדש כאשר המיקום יימצא</string>

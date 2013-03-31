@@ -103,7 +103,7 @@
 <string name="bg_service_screen_lock_toast">Skärmen är låst</string>
 <string name="bg_service_interval">Ställ in väckningsintervall:</string>
 <string name="show_cameras">Visa fartkameror</string>
-<string name="show_speed_limits">Visa hastighetsgränser</string>
+<string name="show_traffic_warnings">Visa hastighetsgränser</string>
 <string name="avoid_toll_roads">Undvik betalvägar</string>
 <string name="continue_follow_previous_route_auto">En tidigare navigering avbröts. Fortsätta att följa den? (%1$s sekunder)</string>
 <string name="route_updated_loc_found">Resvägen kommer att beräknas så snart positionen hittas</string>

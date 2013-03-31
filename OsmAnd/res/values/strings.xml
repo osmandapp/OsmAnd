@@ -313,7 +313,7 @@
 	<string name="bg_service_screen_lock_toast">The screen is locked</string>
 	<string name="bg_service_interval">Set wake-up interval:</string>
 	<string name="show_cameras">Show speed cameras</string>
-	<string name="show_speed_limits">Show traffic warnings</string>
+	<string name="show_traffic_warnings">Show traffic warnings</string>
 	<string name="avoid_toll_roads">Avoid toll roads</string>
 	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
 	<string name="route_updated_loc_found">Route will be calculated once position is found</string>

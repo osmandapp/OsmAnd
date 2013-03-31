@@ -1085,10 +1085,10 @@
 	<string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
 	<string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
 	<string name="show_cameras_descr">Radarkontrollen anzeigen (in einigen Ländern illegal!)</string>
-	<string name="show_speed_limits_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
+	<string name="show_traffic_warnings_descr">Geschwindigkeitsbegrenzungen und Verkehrsberuhigungen anzeigen</string>
 	<string name="avoid_toll_roads_descr">Mautpflichtige Straßen vermeiden</string>
 	<string name="show_cameras">Radarfallen anzeigen</string>
-	<string name="show_speed_limits">Verkehrswarnungen anzeigen</string>
+	<string name="show_traffic_warnings">Verkehrswarnungen anzeigen</string>
 	<string name="avoid_toll_roads">Vermeide Mautstraßen</string>
 	<string name="map_widget_top_text">Straßenname</string>
 	<string name="map_widget_config">Konfiguration</string>

@@ -174,7 +174,7 @@
 	<string name="bg_service_screen_lock_toast">Ekran je zaklenjen</string>
 	<string name="bg_service_interval">Nastavitev intervala prebujanja:</string>
 	<string name="show_cameras">Pokaži hitrostne kamere</string>
-	<string name="show_speed_limits">Prikaži omejitve hitrosti</string>
+	<string name="show_traffic_warnings">Prikaži omejitve hitrosti</string>
 	<string name="avoid_toll_roads">Izogibanje cestninskih cest</string>
 	<string name="continue_follow_previous_route_auto">Prejšnje vodenje ni končano. Nadaljujem vodenje? (%1$s sekund)</string>
 	<string name="route_updated_loc_found">Pot bo ponovno izračunana, ko bo določena lokacija</string>

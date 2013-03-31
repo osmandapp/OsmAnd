@@ -964,10 +964,10 @@
   <string name="route_updated_loc_found">L\'itinéraire sera recalculé quand le lieu sera trouvé</string>
   <string name="continue_follow_previous_route_auto">La navigation précédente ne s\'était pas terminée. Continuer à la suivre ? (%1$s secondes)</string>
   <string name="show_cameras_descr">Montrer les radars (peut être interdit dans certains pays)</string>
-  <string name="show_speed_limits_descr">Montrer les limitations de vitesse et les bosses</string>
+  <string name="show_traffic_warnings_descr">Montrer les limitations de vitesse et les bosses</string>
   <string name="avoid_toll_roads_descr">Éviter les péages lors du calcul de l\'itinéraire</string>
   <string name="show_cameras">Montrer les radars</string>
-  <string name="show_speed_limits">Montrer les limitations de vitesse</string>
+  <string name="show_traffic_warnings">Montrer les limitations de vitesse</string>
   <string name="avoid_toll_roads">Éviter les péages</string>
   <string name="tip_recent_changes_0_8_2_t">Changements en 0.8.2 :
 \n\t* Navigation améliorée

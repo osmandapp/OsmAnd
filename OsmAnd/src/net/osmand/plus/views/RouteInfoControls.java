@@ -312,6 +312,7 @@ public class RouteInfoControls {
 	
 	protected TextInfoControl createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
+		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
 		final MapViewTrackingUtilities trackingUtilities = map.getMapViewTrackingUtilities();
 		final TextInfoControl speedControl = new TextInfoControl(map, 3, paintText, paintSubText) {
 			private float cachedSpeed = 0;
@@ -320,7 +321,7 @@ public class RouteInfoControls {
 			public boolean updateInfo() {
 				float mx = 0; 
 				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()) {
-					RouteDataObject ro = map.getLastRouteDataObject();
+					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 					if(ro != null) {
 						mx = ro.getMaximumSpeed();
 					}
@@ -648,8 +649,11 @@ public class RouteInfoControls {
 	}
 
 	
-	protected MapInfoControl createAlarmInfoControl(final RoutingHelper routingHelper, Context ctx,
-			final OsmandSettings settings) {
+	protected MapInfoControl createAlarmInfoControl(final OsmandApplication app, MapActivity ma) {
+		final RoutingHelper rh = app.getRoutingHelper();
+		final OsmandSettings settings = app.getSettings();
+		final OsmAndLocationProvider locationProvider = app.getLocationProvider();
+		final MapViewTrackingUtilities trackingUtilities = ma.getMapViewTrackingUtilities();
 		final Paint paintCircle = new Paint();
 		final float th = 11 * scaleCoefficient;
 		paintCircle.setColor(Color.rgb(225, 15, 15));
@@ -666,17 +670,29 @@ public class RouteInfoControls {
 		ptext.setAntiAlias(true);
 		ptext.setTextAlign(Align.CENTER);
 		
-		final MapInfoControl alarm = new MapInfoControl(ctx) {
+		final MapInfoControl alarm = new MapInfoControl(ma) {
 			private String text = "";
 			private Bitmap img = null;
 			private int imgId;
 			@Override
 			public boolean updateInfo() {
-				boolean limits = settings.SHOW_SPEED_LIMITS.get();
+				boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 				boolean cams = settings.SHOW_CAMERAS.get();
 				boolean visible = false;
-				if ((limits || cams) && routingHelper != null && routingHelper.isFollowingMode()) {
-					AlarmInfo alarm = routingHelper.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
+				boolean eval = rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation();
+				if ((trafficWarnings || cams) && eval) {
+					AlarmInfo alarm ;
+					if(rh.isFollowingMode()) { 
+						alarm = rh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);
+					} else {
+						RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
+						Location loc = locationProvider.getLastKnownLocation();
+						if(ro != null && loc != null) {
+							alarm = rh.calculateMostImportantAlarm(ro, loc, settings.METRIC_SYSTEM.get(), cams);
+						} else {
+							alarm = null;
+						}
+					}
 					if(alarm != null) {
 						int locimgId = 0;
 						String text = null;
@@ -701,7 +717,7 @@ public class RouteInfoControls {
 							if (alarm.getType() == AlarmInfo.SPEED_CAMERA) {
 								visible = cams;
 							} else {
-								visible = limits;
+								visible = trafficWarnings;
 							}
 						}
 						if(visible) {

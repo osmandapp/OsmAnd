@@ -961,10 +961,10 @@
   <string name="route_updated_loc_found">Trasa bude přepočítána, jakmile bude nalezena pozice</string>
   <string name="continue_follow_previous_route_auto">Předchozí trasa nebyla dokončena. Chcete pokračovat? (%1$s sekund)</string>
   <string name="show_cameras_descr">Zobrazovat dopravní radary (v některých zemích může být zakázané)</string>
-  <string name="show_speed_limits_descr">Zobrazovat rychlostní omezení a retardéry</string>
+  <string name="show_traffic_warnings_descr">Zobrazovat rychlostní omezení a retardéry</string>
   <string name="avoid_toll_roads_descr">Vyhnout se placeným silnicím při výpočtu trasy</string>
   <string name="show_cameras">Zobrazovat dopravní radary</string>
-  <string name="show_speed_limits">Zobrazovat rychlostní omezení</string>
+  <string name="show_traffic_warnings">Zobrazovat rychlostní omezení</string>
   <string name="avoid_toll_roads">Vyhnout se placeným silnicím</string>
   <string name="tip_recent_changes_0_8_2_t">"Změny ve verzi 0.8.2:
 \n\t* Vylepšená navigace

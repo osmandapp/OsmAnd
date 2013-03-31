@@ -898,10 +898,10 @@
   <string name="route_updated_loc_found">Маршрут буде перераховано після визначення місцерозташування</string>
   <string name="continue_follow_previous_route_auto">Попередній маршрут не закінчили. Продовжувати рух по ньому, (%1$s секунд)</string>
   <string name="show_cameras_descr">Show speed cameras (may be forbidden in some countries)</string>
-  <string name="show_speed_limits_descr">Show speed limits and traffic bumps</string>
+  <string name="show_traffic_warnings_descr">Show speed limits and traffic bumps</string>
   <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
   <string name="show_cameras">Показувати камери контролю швидкості</string>
-  <string name="show_speed_limits">Show speed limits</string>
+  <string name="show_traffic_warnings">Show speed limits</string>
   <string name="avoid_toll_roads">Уникати платних доріг</string>
   <string name="tip_recent_changes_0_8_2_t">"Changes in 0.8.2 : \n\t* Improved Routing "</string>
   <string name="map_widget_top_text">Назва вулиці</string>

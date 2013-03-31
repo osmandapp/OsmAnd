@@ -982,10 +982,10 @@
   <string name="route_updated_loc_found">Maršrutas bus perskaičiuotas, kai bus gauta dabartinė vieta</string>
   <string name="continue_follow_previous_route_auto">Paskutinis maršrutas nebuvo baigtas. Tęsti jį toliau? (%1$s sekundės)</string>
   <string name="show_cameras_descr">Rodyti greičio radarus (kai kuriose šalyse tai draudžiama)</string>
-  <string name="show_speed_limits_descr">Rodyti leistinus greičius</string>
+  <string name="show_traffic_warnings_descr">Rodyti leistinus greičius</string>
   <string name="avoid_toll_roads_descr">Skaičiuojant maršrutą vengti mokamų kelių</string>
   <string name="show_cameras">Rodyti greičio radarus</string>
-  <string name="show_speed_limits">Rodyti greičio ribojimus</string>
+  <string name="show_traffic_warnings">Rodyti greičio ribojimus</string>
   <string name="avoid_toll_roads">Vengti mokamų kelių</string>
   <string name="tip_recent_changes_0_8_2_t">Pakeitimai 0.8.2 versijoje :
 \n\t* Patobulintas maršruto sudarymas

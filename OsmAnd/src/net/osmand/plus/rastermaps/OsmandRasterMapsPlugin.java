@@ -73,15 +73,15 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 
 	private void createLayers() {
 		underlayLayer = new MapTileLayer(false);
+		// mapView.addLayer(underlayLayer, -0.5f);
+		overlayLayer = new MapTileLayer(false);
+		// mapView.addLayer(overlayLayer, 0.7f);
 		settings.MAP_OVERLAY_TRANSPARENCY.addListener(new StateChangedListener<Integer>() {
 			@Override
 			public void stateChanged(Integer change) {
 				overlayLayer.setAlpha(change);
 			}
 		});
-		// mapView.addLayer(underlayLayer, -0.5f);
-		overlayLayer = new MapTileLayer(false);
-		// mapView.addLayer(overlayLayer, 0.7f);
 	}
 	
 	@Override

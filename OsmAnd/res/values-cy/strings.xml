@@ -39,10 +39,10 @@
 <string name="bg_service_screen_unlock">Sgrin datgloi</string>
 <string name="bg_service_screen_lock_toast">Mae\'r sgrin wedi cloi</string>
 <string name="bg_service_interval">Gosod cyfnod deffro:</string>
-<string name="show_speed_limits_descr">Dangos terfynau cyflymder a thwmpathau traffig</string>
+<string name="show_traffic_warnings_descr">Dangos terfynau cyflymder a thwmpathau traffig</string>
 <string name="avoid_toll_roads_descr">Osgoi tollffyrdd wrth gyfrifo taith</string>
 <string name="show_cameras">Dangos camerâu cyflymder</string>
-<string name="show_speed_limits">Dangos cyfyngiadau cyflymder</string>
+<string name="show_traffic_warnings">Dangos cyfyngiadau cyflymder</string>
 <string name="avoid_toll_roads">Osgoi tollffyrdd</string>
 <string name="tip_recent_changes_0_8_2_t"> 	Newidiadau yn 0.8.2 :↵ 
 \n\t* Gwell Cynllunio Taith↵ 

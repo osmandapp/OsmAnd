@@ -1043,10 +1043,10 @@
   <string name="route_updated_loc_found">Cesta bude prepočítaná, keď sa nájde umiestnenie</string>
   <string name="continue_follow_previous_route_auto">Predošlá navigácia nebola dokončená. Pokračovať v jej nasledovaní? (%1$s sekúnd)</string>
   <string name="show_cameras_descr">Zobrazenie radarov (môže byť zakázané v niektorých krajinách)</string>
-  <string name="show_speed_limits_descr">Zobrazenie radarov a spomaľovačov</string>
+  <string name="show_traffic_warnings_descr">Zobrazenie radarov a spomaľovačov</string>
   <string name="avoid_toll_roads_descr">Vyvarovanie sa plateným cestám pri kalkulácii trasy</string>
   <string name="show_cameras">Radary</string>
-  <string name="show_speed_limits">Rýchlostné obmedzenia</string>
+  <string name="show_traffic_warnings">Rýchlostné obmedzenia</string>
   <string name="avoid_toll_roads">Spoplatneným cestám</string>
   <string name="tip_recent_changes_0_8_2_t">"Zmeny vo verzii 0.8.2:
 \n\t* Vylepšená navigácia
