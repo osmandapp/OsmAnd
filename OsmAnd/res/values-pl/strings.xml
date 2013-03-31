@@ -1167,4 +1167,5 @@
     <string name="item_unchecked">niezaznaczone</string>
     <string name="av_def_action_choose">Wybierz na żądanie</string>
     <string name="access_arrival_time">Czas przybycia</string>
+    <string name="map_widget_gps_info">Info GPS</string>
     </resources>
