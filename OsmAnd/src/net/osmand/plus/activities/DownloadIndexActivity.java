@@ -233,7 +233,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		menu.clear();
 		menu.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
 		if (getExpandableListAdapter() != null) {
-			// item.setIcon(R.drawable.ic_menu_refresh);
 			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
 			menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
 			menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
