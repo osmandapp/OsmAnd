@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
@@ -12,6 +13,8 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
@@ -102,10 +105,25 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			if (ttsRequests++ == 0)
 				requestAudioFocus();
 			log.debug("ttsRequests="+ttsRequests);
+			sendAlertToPebble(bld.toString());
+			
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		}
+	}
+
+	public void sendAlertToPebble(String message) {
+	    final Intent i = new Intent("com.getpebble.action.SEND_NOTIFICATION");
+	    final Map<String, Object> data = new HashMap<String, Object>();
+	    data.put("title", "Voice");
+	    data.put("body", message);
+	    final JSONObject jsonData = new JSONObject(data);
+	    final String notificationData = new JSONArray().put(jsonData).toString();
+	    i.putExtra("messageType", "PEBBLE_ALERT");
+	    i.putExtra("sender", "OsmAnd");
+	    i.putExtra("notificationData", notificationData);
+	    mTtsContext.sendBroadcast(i);
 	}
 
 	private void initializeEngine(final Context ctx, final Activity act)
