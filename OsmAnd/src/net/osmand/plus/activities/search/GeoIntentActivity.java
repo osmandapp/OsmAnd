@@ -185,7 +185,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	 * @return
 	 */
 	private MyService extract(Uri data) {
-		if ("http".equalsIgnoreCase(data.getScheme()) && "maps.google.com".equals(data.getHost()) && "/go".equals(data.getPath())) {
+		if ("http".equalsIgnoreCase(data.getScheme()) && "maps.google.com".equals(data.getHost())) {
 			String q = data.getQueryParameter("q");
 			if (q.indexOf(',') != -1) {
 				int i = q.indexOf(',');
@@ -205,21 +205,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 			// it is 0,0? that means a search
 			return new GeoAddressSearch(data.getQuery());
 		} else {
-			String geo = data.getSchemeSpecificPart();
-			int latIndex = geo.indexOf(',');
-			int lonIndex = geo.indexOf('?');
-			lonIndex = lonIndex > 0 ? lonIndex : geo.length();
-			if (latIndex > 0) {
-				try {
-					double lat = Double.parseDouble(geo.substring(0, latIndex).trim());
-					double lon = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
-					return new GeoPointSearch(lat, lon);
-				} catch (NumberFormatException e) {
-					showErrorMessage(geo);
-				}
-			} else {
-				showErrorMessage(geo);
-			}
+			showErrorMessage(data.getSchemeSpecificPart());
 		}
 		return new Empty();
 	}
