@@ -447,7 +447,7 @@
   <string name="select_build_to_install">Selecteer één van de OsmAnd versies om te installeren</string>
   <string name="contribution_activity">Speciale actie voor contributie-versies</string>
   <string name="gps_status_app_not_found">GPS Status is niet geïnstalleerd. Zoeken op Google Play?</string>
-  <string name="voice_is_not_available_msg">Stem-begeleiding is niet aanwezig. Ga naar instellingen, selecteer een stem-gegevens pakket, en download deze.</string>
+  <string name="voice_is_not_available_msg">Stem-begeleiding is niet aanwezig. Ga naar instellingen, kies een pakket stem-gegevens, en download deze.</string>
   <string name="voice_is_not_available_title">Geen stem-begeleiding geselecteerd</string>
   <string name="daynight_mode_day">Dag</string>
   <string name="daynight_mode_night">Nacht</string>
