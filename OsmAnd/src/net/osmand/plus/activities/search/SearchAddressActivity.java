@@ -204,28 +204,28 @@ public class SearchAddressActivity extends Activity {
 		}
 		String historyName = null;
 		String objectName = "";
-		int zoom = 12;
+		int zoom = 14;
 		if (!Algorithms.isEmpty(street2) && !Algorithms.isEmpty(street)) {
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			objectName = street;
 			historyName = MessageFormat.format(getString(R.string.search_history_int_streets), street, street2,
 					cityName);
-			zoom = 16;
+			zoom = 17;
 		} else if (!Algorithms.isEmpty(building)) {
 			String cityName = !Algorithms.isEmpty(postcode) ? postcode : city;
 			objectName = street + " " + building;
 			historyName = MessageFormat.format(getString(R.string.search_history_building), building, street,
 					cityName);
-			zoom = 16;
+			zoom = 17;
 		} else if (!Algorithms.isEmpty(street)) {
 			String cityName = postcode != null ? postcode : city;
 			objectName = street;
 			historyName = MessageFormat.format(getString(R.string.search_history_street), street, cityName);
-			zoom = 15;
+			zoom = 16;
 		} else if (!Algorithms.isEmpty(city)) {
 			historyName = MessageFormat.format(getString(R.string.search_history_city), city);
 			objectName = city;
-			zoom = 13;
+			zoom = 14;
 		}
 		if(selectAddressMode){
 			Intent intent = getIntent();
