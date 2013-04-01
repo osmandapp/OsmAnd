@@ -742,26 +742,44 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				public void surfaceCreated(SurfaceHolder holder) {
 					try {
 						Parameters parameters = cam.getParameters();
+						boolean autofocus = true;
+//						boolean autofocus = !Boolean.parseBoolean(parameters.get("auto-exposure-lock-supported"));
 						parameters.setGpsLatitude(lat);
 						parameters.setGpsLongitude(lon);
-						parameters.set("focus-mode", "infinity");
+						if(autofocus) {
+							parameters.setFocusMode(Parameters.FOCUS_MODE_AUTO);
+						} else {
+//							parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
+//							parameters.set("auto-exposure-lock", "true");
+						}
+						parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
+						parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
+
 						setCameraDisplayOrientation(cam, parameters);
 						cam.setParameters(parameters);
 						cam.setPreviewDisplay(holder);
 						cam.startPreview();
-						cam.autoFocus(new AutoFocusCallback() {
-							
-							@Override
-							public void onAutoFocus(boolean success, Camera camera) {
-								cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, f));
-							}
-						});
-						
+						if (!autofocus) {
+							printCamParams(parameters, !autofocus);
+							cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, f));
+						} else {
+							cam.autoFocus(new AutoFocusCallback() {
+								@Override
+								public void onAutoFocus(boolean success, Camera camera) {
+									cam.takePicture(null, null, new AudioVideoPhotoHandler(dlg, f));
+								}
+							});
+						}
 					} catch (Exception e) {
 						logErr(e);
 						cam.release();
 						e.printStackTrace();
 					}
+				}
+
+				private void printCamParams(Parameters parameters, boolean autoExposure) {
+					log.info("Cam params auto exposure=" + autoExposure + 
+							" focus_distances="+parameters.get("focus-distances"));
 				}
 
 				@Override
