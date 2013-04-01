@@ -1258,4 +1258,5 @@
     <string name="item_unchecked">nicht ausgewählt</string>
     <string name="map_view">Karte</string>
     <string name="access_arrival_time">Ankunftszeit</string>
+    <string name="map_widget_gps_info">GPS Info</string>
     </resources>
