@@ -147,9 +147,16 @@ public class GeoIntentActivity extends OsmandListActivity {
 			} else {
 				distanceLabel.setText(""); //$NON-NLS-1$
 			}
-			label.setText(model.toString());
+			label.setText(getString(model));
 			return row;
 		}
+	}
+	
+	private String getString(MapObject o){
+		if(o instanceof Amenity) {
+			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, getMyApplication(), false);
+		}
+		return getString(R.string.address) + " : " + o.toString();
 	}
 
 	@Override
@@ -158,7 +165,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 		MapObject item = ((MapObjectAdapter) getListAdapter()).getItem(position);
 		OsmandSettings settings = getMyApplication().getSettings();
 		settings.setMapLocationToShow(item.getLocation().getLatitude(), item.getLocation().getLongitude(), 
-				settings.getLastKnownMapZoom(), getString(R.string.address) + " : " + item.toString()); //$NON-NLS-1$
+				settings.getLastKnownMapZoom(), getString(item)); //$NON-NLS-1$
 		MapActivity.launchMapActivityMoveToTop(this);
 	}
 
