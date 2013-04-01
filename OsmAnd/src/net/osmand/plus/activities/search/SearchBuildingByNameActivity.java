@@ -104,20 +104,12 @@ public class SearchBuildingByNameActivity extends SearchByNameAbstractActivity<B
 	@Override
 	public void itemSelected(Building obj) {
 		String text = getText(obj);
+		String hno = getCurrentFilter();
 		LatLon loc = obj.getLocation();
-		if(obj.getInterpolationInterval() > 0 || obj.getInterpolationType() != null){
-			String hno = getCurrentFilter();
-			float interpolation = obj.interpolation(hno);
-			if (interpolation >= 0) {
-				text = hno;
-				if (interpolation > 0 && obj.getLatLon2() != null) {
-					double lat1 = loc.getLatitude();
-					double lat2 = obj.getLatLon2().getLatitude();
-					double lon1 = loc.getLongitude();
-					double lon2 = obj.getLatLon2().getLongitude();
-					loc = new LatLon(interpolation * (lat2 - lat1) + lat1, interpolation * (lon2 - lon1) + lon1);
-				}
-			}
+		float interpolation = obj.interpolation(hno);
+		if(interpolation >= 0) {
+			loc = obj.getLocation(interpolation);
+			text = hno;
 		}
 		settings.setLastSearchedBuilding(text, loc);
 		finish();
