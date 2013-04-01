@@ -18,6 +18,7 @@
 	<string name="prefer_in_routing_title">Prefer&#8230;</string>
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
     <string name="tip_recent_changes_1_2_t">Changes in 1.2:
+        * New widget (GPS info) 
     </string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
