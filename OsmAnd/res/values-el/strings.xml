@@ -1192,5 +1192,8 @@
     <string name="access_arrival_time">Ώρα άφιξης</string>
     <string name="item_checked">επιλεγμένο</string>
     <string name="item_unchecked">μη επιλεγμένο</string>
-    <string name="index_name_openmaps"></string>
+    <string name="index_name_openmaps"/>
+    <string name="map_widget_gps_info">Πληροφορίες GPS</string>
+    <string name="download_hillshade_item">Ανάγλυφο</string>
+    <string name="download_hillshade_maps">Επικαλύψεις ανάγλυφου</string>
     </resources>
