@@ -46,7 +46,7 @@ public class SearchRegionByNameActivity extends SearchByNameAbstractActivity<Reg
 	
 	@Override
 	public String getText(RegionAddressRepository obj) {
-		return obj.getName();
+		return obj.getName().replace('_', ' ');
 	}
 
 	@Override
