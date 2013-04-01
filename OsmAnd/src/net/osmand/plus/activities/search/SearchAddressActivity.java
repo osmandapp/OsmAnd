@@ -282,7 +282,7 @@ public class SearchAddressActivity extends Activity {
 		if(Algorithms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
 		} else {
-			countryButton.setText(region);
+			countryButton.setText(region.replace('_', ' '));
 		}
 		findViewById(R.id.ResetCity).setEnabled(!Algorithms.isEmpty(city) || !Algorithms.isEmpty(postcode));
 		if(Algorithms.isEmpty(city) && Algorithms.isEmpty(postcode)){
@@ -291,7 +291,7 @@ public class SearchAddressActivity extends Activity {
 			if(!Algorithms.isEmpty(postcode)){
 				cityButton.setText(postcode);
 			} else {
-				cityButton.setText(city);
+				cityButton.setText(city.replace('_', ' '));
 			}
 		}
 		cityButton.setEnabled(!Algorithms.isEmpty(region));
