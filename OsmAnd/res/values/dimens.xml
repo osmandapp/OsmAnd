@@ -1,0 +1,6 @@
+<resources>
+<dimen name="app_defaultsize_w">640dip</dimen>
+  <dimen name="app_defaultsize_h">400dip</dimen>
+  <dimen name="app_minimumsize_w">400dip</dimen>
+  <dimen name="app_minimumsize_h">200dip</dimen>
+</resources>
