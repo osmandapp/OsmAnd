@@ -1198,4 +1198,5 @@
     <string name="item_unchecked">ללא בדיקה</string>
     <string name="map_view">מפה</string>
     <string name="access_arrival_time">זמן ההגעה</string>
+    <string name="map_widget_gps_info">פרטי איכון</string>
     </resources>
