@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-<string name="map_widget_gps_info"/>
     <string name="map_widget_gps_info">GPS status</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
