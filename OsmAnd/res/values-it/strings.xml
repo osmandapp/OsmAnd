@@ -1222,4 +1222,5 @@
     <string name="item_unchecked">non segnato</string>
     <string name="map_view">Mappa</string>
     <string name="access_arrival_time">Orario arrivo</string>
+    <string name="map_widget_gps_info">Informazioni GPS</string>
     </resources>
