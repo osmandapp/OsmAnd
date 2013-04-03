@@ -125,5 +125,5 @@
 	<string name="show_lanes">Prikaži staze</string>
 	<string name="avoid_unpaved">Izbjegavaj neasfaltirane ceste</string>
 	<string name="avoid_ferries">Izbjegavaj trajekte</string>
-	<string name="avoid_in_routing_title">Izbjegavajti...</string>
+	<string name="avoid_in_routing_title">Izbjegavati...</string>
 	</resources>
