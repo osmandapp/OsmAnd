@@ -197,7 +197,7 @@ public class MapActivityLayers {
 		OsmandSettings settings = getApplication().getSettings();
 		
 		// update transparency
-		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 :  settings.MAP_TRANSPARENCY.get();
+		int mapTransparency = /*settings.MAP_UNDERLAY.get() == null ? 255 : */ settings.MAP_TRANSPARENCY.get();
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 		

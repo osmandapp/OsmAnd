@@ -8,6 +8,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
 
@@ -17,6 +18,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	private static final Log log = PlatformUtil.getLog(SRTMPlugin.class);
 	private OsmandApplication app;
 	private boolean paid;
+	private HillshadeLayer hillshadeLayer;
 	
 	@Override
 	public String getId() {
@@ -59,9 +61,21 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
-
+		if (hillshadeLayer != null) {
+			activity.getMapView().removeLayer(hillshadeLayer);
+		}
+		hillshadeLayer = new HillshadeLayer(activity, this);
+		activity.getMapView().addLayer(hillshadeLayer, 0.3f);
+		app.getSettings().MAP_TRANSPARENCY.set(170);
+		// TODO make action to enable/disable
 	}
-	
+
+	@Override
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
+		if (hillshadeLayer == null) {
+			registerLayers(activity);
+		}
+	}
 	@Override
 	public void disable(OsmandApplication app) {
 	}

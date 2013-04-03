@@ -9,11 +9,13 @@ import java.util.List;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.data.QuadRect;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -50,16 +52,18 @@ public class SQLiteTileSource implements ITileSource {
 	public SQLiteTileSource(ClientContext ctx, File f, List<TileSourceTemplate> toFindUrl){
 		this.ctx = ctx;
 		this.file = f;
-		int i = f.getName().lastIndexOf('.');
-		name = f.getName().substring(0, i);
-		i = name.lastIndexOf('.');
-		if(i > 0){
-			String sourceName = name.substring(i+1);
-			for(TileSourceTemplate is : toFindUrl){
-				if(is.getName().equalsIgnoreCase(sourceName)){
-					base = is;
-					urlTemplate = is.getUrlTemplate();
-					break;
+		if (f != null) {
+			int i = f.getName().lastIndexOf('.');
+			name = f.getName().substring(0, i);
+			i = name.lastIndexOf('.');
+			if (i > 0) {
+				String sourceName = name.substring(i + 1);
+				for (TileSourceTemplate is : toFindUrl) {
+					if (is.getName().equalsIgnoreCase(sourceName)) {
+						base = is;
+						urlTemplate = is.getUrlTemplate();
+						break;
+					}
 				}
 			}
 		}
@@ -140,7 +144,7 @@ public class SQLiteTileSource implements ITileSource {
 		return true;
 	}
 	
-	private SQLiteConnection getDatabase(){
+	protected SQLiteConnection getDatabase(){
 		if((db == null || db.isClosed()) && file.exists() ){
 			db = ctx.getSQLiteAPI().openByAbsolutePath(file.getAbsolutePath(), false);
 			try {
@@ -324,6 +328,25 @@ public class SQLiteTileSource implements ITileSource {
 	public ITileSource getBase() {
 		return base;
 	}
+	
+	public QuadRect getRectBoundary(int coordinatesZoom, int minZ){
+		SQLiteConnection db = getDatabase();
+		if(db == null || coordinatesZoom > 25 ){
+			return null;
+		}
+		int minZoom = (17 - minZ) + 1; 
+		// 17 - z = zoom, x << (25 - zoom) = 25th x tile = 8 + z,  
+		
+		SQLiteCursor q = db.rawQuery("SELECT max(x << (8+z)), min(x << (8+z)), max(y << (8+z)), min(y << (8+z))" + " from tiles where z < "
+				+ minZoom,
+				new String[0]);
+		q.moveToFirst();
+		int right = (int) (q.getInt(0) >> (25 - coordinatesZoom));
+		int left = (int) (q.getInt(1) >> (25 - coordinatesZoom));
+		int top = (int) (q.getInt(3) >> (25 - coordinatesZoom));
+		int bottom  = (int) (q.getInt(2) >> (25 - coordinatesZoom));
+		return new QuadRect(left, top, right, bottom);
+	}
 
 	public void deleteImage(int x, int y, int zoom) {
 		SQLiteConnection db = getDatabase();
@@ -386,8 +409,6 @@ public class SQLiteTileSource implements ITileSource {
 	public boolean isEllipticYTile() {
 		return false;
 	}
-	
-	
 
 }
 
