@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
@@ -54,7 +54,7 @@
 	<string name="snap_to_road_descr">Standort während der Navigation auf Straßen einrasten</string>
 	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="tip_recent_changes_0_8_2_t">"Änderungen in 0.8.2:\n\t* Verbessertes Routing\n\t* Konfigurierbare Schaltflächen\n\t* Karteneinstellungen auf Kartenbildschirm umgezogen\n\t* Bildschirmsperrtaste mit Aufzeichnungs-Einstellungen\n\t* Fehlerbehebung für Arabische Schrift, Kannada-Schrift und linksläufige Schriften "</string>
-	<string name="osmand_short_description_80_chars">OsmAnd ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
+	<string name="osmand_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -78,8 +78,81 @@
 		- Kein Zugriff auf Wikipedia Offline-POIs
 
 		OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
-</string>
-	<string name="osmand_plus_short_description_80_chars">OsmAnd+ ist eine Open-Source-Navigationsapplikation für Offline- und Onlinekarten</string>
+	</string>
+	<string name="osmand_long_description_4000_chars">
+OsmAnd ist eine Landkarten- und Navigations-Applikation basierend auf dem kostenlosen, globalen, qualitativ hochwertigen OpenStreetMap (OSM) Kartenmaterial. Alle Karten können zur Offline-Verwendung auf dem Handy oder Tablet PC gespeichert werden. Mittels GPS kann OsmAnd auch navigieren (optische Richtungsanzeige und Sprachansagen), mit Auto-, Fahrrad- oder Fußgängermodus. Alle Grundfunktionen funktionieren sowohl online wie auch offline (ohne Internetzugang).
+
+OsmAnd+ ist die Kaufversion der Applikation. Durch den Kauf unterstützen Sie das Projekt und ermöglichen die Entwicklung neuer Funktionen.
+
+Einige Kernfunktionen:
+
+Navigation
+ - Online (schnell) oder offline (keine Daten-/ Roamingkosten)
+ - Inklusive Sprachnavigation (aufgenommene oder synthetische Stimmen)
+ - Fahrspuranzeige, mitlaufende Straßennamenanzeige, geschätzte Ankunftszeit
+ - Unterstützt die Angabe von Zwischenzielen
+ - Automatische Routenneuberechnung nach Abweichen
+ - Ortssuche nach Adressen, nach Typ (z.B. Restaurant, Hotel, Tankstelle, Museum), oder nach Koordinaten
+
+Landkartenfunktionen
+ - Anzeige der eigenen Position und Blickrichtung
+ - Optionale Kartenausrichtung nach Kompass oder Bewegungsrichtung
+ - Orte können als Favoriten gespeichert werden
+ - Suche und Anzeige von POI (Attraktionen, “Points of Interest”)
+ - Anzeigemöglichkeit auch gängiger Online-Karten
+ - Anzeigemöglichkeit für Satellitenkarten (Bing)
+ - Anzeigemöglichkeit für Overlays, wie GPX-Touren oder -Routen und zusätzlicher Landkarten mit einstellbarer Transparenz
+ - Ortsbezeichnungen in englischer, ortsüblicher oder phonetischer Schreibweise
+
+Nutzung von OpenStreetMap und Wikipedia-Daten:
+ - Qualitativ hochwertige Information aus den weltbesten Kollaborations-Projekten
+ - Global verfügbare Landkarten von OpenStreetMap
+ - Wikipedia POIs, hervorragend für Besichtigungstouren (nicht verfügbar in der kostenlosen OsmAnd-Version)
+ - Unbegrenztes Herunterladen kostenloser Landkarten direkt in der App (Download Limit 16 für kostenlose Version)
+ - Immer aktuelle Karten (oft 1-2 Updates pro Monat)
+ - Kompaktes Vektorkartenformat
+ - Wahl zwischen vollständigen Landkarten oder lediglich Straßenkarten (Beispiel: Japan komplett 700 MB, oder 200 MB nur Straßennetz)
+ - Unterstützt auch Online- oder lokale Kachelkarten
+
+Sicherheitsfunktionen
+ - Optional automatische Tag- / Nachtdarstellung
+ - Optional Anzeige von Geschwindigkeitsbegrenzungen, mit Warnung bei Überschreitung
+ - Optional geschwindigkeitsabhängiger Kartenmaßstab
+ - Unterstützt die Übermittlung der eigenen Position
+
+Fahrrad und Fußgängerfunktionen
+ - Die Landkarten beinhalten Fuß-, Wander- und Fahrradwege, nützlich für Outdoor-Aktivitäten
+ - Spezielle Routing- und Anzeigemodi für Fahrradfahrer und Fußgänger
+ - Optionale Anzeige der ÖPNV-Haltestellen und -Linien (Bus, Straßenbahn, Zug)
+ - Optionale Strecken-Aufzeichnung in lokaler GPX-Datei oder Online
+ - Optionale Anzeige von Geschwindigkeit oder Höhe
+ - Anzeige von Höhenlinien oder Geländerelief möglich (über separates Plugin-Modul)
+
+Direkte Zuarbeit bei OSM möglich
+ - Kartenfehler melden
+ - Versenden von GPX-Dateien an OSM direkt aus der App
+ - Erstellen von POIs und direktes Versenden an OSM (oder später, falls offline)
+ - Optionale Streckenaufzeichnung auch im Hintergrund-Modus, also mit ausgeschaltetem Bildschirm
+
+OsmAnd ist ein Open-Source Projekt und wird aktiv weiterentwickelt. Jeder kann beitragen, entweder durch Meldung von Fehlern, Mithilfe bei Übersetzungen, oder Programmierung neuer Funktionen. Das Projekt entwickelt sich dadurch lebhaft weiter. Durch den Kauf von OsmAnd+ helfen Sie die App weiter zu verbessern! Sie können auch gezielt spezielle neue Funktionen bezuschussen, oder für das Projekt allgemein spenden.
+
+Kartenabdeckung und Qualitätsabschätzung:
+ - Westeuropa: ****
+ - Osteuropa: ***
+ - Russland: ***
+ - Nordamerika: ***
+ - Südamerika: **
+ - Asien: **
+ - Japan & Korea: ***
+ - Mittlerer Osten: **
+ - Afrika: **
+ - Antarktis: *
+
+Es steht eine globale Liste von Landkarten für fast alle Länder weltweit zum Herunterladen bereit, u.a.
+
+Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Argentinien, Armenien, Aruba, Äthiopien, Australien, Aserbaidschan, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodia, Chile, China, Costa Rica, Curacao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, Elfenbeinküste, El Salvador, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch Guyana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Griechenland, Grenada, Grönland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikan, Honduras, Hong Kong, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Kamerun, Kanada, Kapverdische Inseln, Kasachstan, Katar, Kenia, Kirgisistan, Kiribati, Kolumbien, Komoren, Kongo, Nord-Korea und Süd-Korea, Kroatien, Kuba, Kuwait, Laos, Libanon, Lesotho, Lettland, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Mazedonien, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mexiko, Mikronesien, Moldawien, Monaco, Mongolische Republik, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Niederlande, Niederländische Antillen, Neukaledonien, Neuseeland, Nikaragua, Niger, Nigeria, Norwegen, Oman, Österreich, Pakistan, Palau, Palestinian Territory, Panama, Papua-Neuguinea, Paraguay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthelemy, Saint Helena, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint Pierre und Miquelon, Saint Vincent und die Grenadinen, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leone, Simbabwe, Singapur, Slowakei, Slowenien, Somalia, Spanien, Südafrika, Südgeorgien, Süd Sudan, Sri Lanka, Sudan, Surinam, Swasiland, Syrien, Taiwan, Tadschikistan , Tansania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad und Tobago, Tschad, Tschechien, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Vereinigte Arabische Emirate, Vereinigtes Königreich (UK), Vereinigte Staaten von Amerika (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Virgin Islands (Britisch), Weißrussland, Wallis und Futuna, Westsahara, Sambia, Zentralafrikanische Republik, Zypern.
+	</string>
+	<string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigations-Applikation für Offline und Online-Karten</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)
 
@@ -101,6 +174,78 @@
 		-  optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung
 		-  optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS Sprachansagen
 	</string>
+	<string name="osmand_plus_long_description_4000_chars">
+OsmAnd ist eine Landkarten- und Navigations-Applikation basierend auf dem kostenlosen, globalen, qualitativ hochwertigen OpenStreetMap (OSM) Kartenmaterial. Alle Karten können zur Offline-Verwendung auf dem Handy oder Tablet PC gespeichert werden. Mittels GPS kann OsmAnd auch navigieren (optische Richtungsanzeige und Sprachansagen), mit Auto-, Fahrrad- oder Fußgängermodus. Alle Grundfunktionen funktionieren sowohl online wie auch offline (ohne Internetzugang).
+
+OsmAnd+ ist die Kaufversion der Applikation. Durch den Kauf unterstützen Sie das Projekt und ermöglichen die Entwicklung neuer Funktionen.
+
+Einige Kernfunktionen:
+
+Navigation
+ - Online (schnell) oder offline (keine Daten-/ Roamingkosten)
+ - Inklusive Sprachnavigation (aufgenommene oder synthetische Stimmen)
+ - Fahrspuranzeige, mitlaufende Straßennamenanzeige, geschätzte Ankunftszeit
+ - Unterstützt die Angabe von Zwischenzielen
+ - Automatische Routenneuberechnung nach Abweichen
+ - Ortssuche nach Adressen, nach Typ (z.B. Restaurant, Hotel, Tankstelle, Museum), oder nach Koordinaten
+
+Landkartenfunktionen
+ - Anzeige der eigenen Position und Blickrichtung
+ - Optionale Kartenausrichtung nach Kompass oder Bewegungsrichtung
+ - Orte können als Favoriten gespeichert werden
+ - Suche und Anzeige von POI (Attraktionen, “Points of Interest”)
+ - Anzeigemöglichkeit auch gängiger Online-Karten
+ - Anzeigemöglichkeit für Satellitenkarten (Bing)
+ - Anzeigemöglichkeit für Overlays, wie GPX-Touren oder -Routen und zusätzlicher Landkarten mit einstellbarer Transparenz
+ - Ortsbezeichnungen in englischer, ortsüblicher oder phonetischer Schreibweise
+
+Nutzung von OpenStreetMap und Wikipedia-Daten:
+ - Qualitativ hochwertige Information aus den weltbesten Kollaborations-Projekten
+ - Global verfügbare Landkarten von OpenStreetMap
+ - Wikipedia POIs, hervorragend für Besichtigungstouren
+ - Unbegrenztes Herunterladen kostenloser Landkarten direkt in der App
+ - Immer aktuelle Karten (oft 1-2 Updates pro Monat)
+ - Kompaktes Vektorkartenformat
+ - Wahl zwischen vollständigen Landkarten oder lediglich Straßenkarten (Beispiel: Japan komplett 700 MB, oder 200 MB nur Straßennetz)
+ - Unterstützt auch Online- oder lokale Kachelkarten
+
+Sicherheitsfunktionen
+ - Optional automatische Tag- / Nachtdarstellung
+ - Optional Anzeige von Geschwindigkeitsbegrenzungen, mit Warnung bei Überschreitung
+ - Optional geschwindigkeitsabhängiger Kartenmaßstab
+ - Unterstützt die Übermittlung der eigenen Position
+
+Fahrrad und Fußgängerfunktionen
+ - Die Landkarten beinhalten Fuß-, Wander- und Fahrradwege, nützlich für Outdoor-Aktivitäten
+ - Spezielle Routing- und Anzeigemodi für Fahrradfahrer und Fußgänger
+ - Optionale Anzeige der ÖPNV-Haltestellen und -Linien (Bus, Straßenbahn, Zug)
+ - Optionale Strecken-Aufzeichnung in lokaler GPX-Datei oder Online
+ - Optionale Anzeige von Geschwindigkeit oder Höhe
+ - Anzeige von Höhenlinien oder Geländerelief möglich (über separates Plugin-Modul)
+
+Direkte Zuarbeit bei OSM möglich
+ - Kartenfehler melden
+ - Versenden von GPX-Dateien an OSM direkt aus der App
+ - Erstellen von POIs und direktes Versenden an OSM (oder später, falls offline)
+ - Optionale Streckenaufzeichnung auch im Hintergrund-Modus, also mit ausgeschaltetem Bildschirm
+
+OsmAnd ist ein Open-Source Projekt und wird aktiv weiterentwickelt. Jeder kann beitragen, entweder durch Meldung von Fehlern, Mithilfe bei Übersetzungen, oder Programmierung neuer Funktionen. Das Projekt entwickelt sich dadurch lebhaft weiter. Durch den Kauf von OsmAnd+ helfen Sie die App weiter zu verbessern! Sie können auch gezielt spezielle neue Funktionen bezuschussen, oder für das Projekt allgemein spenden.
+
+Kartenabdeckung und Qualitätsabschätzung:
+ - Westeuropa: ****
+ - Osteuropa: ***
+ - Russland: ***
+ - Nordamerika: ***
+ - Südamerika: **
+ - Asien: **
+ - Japan & Korea: ***
+ - Mittlerer Osten: **
+ - Afrika: **
+ - Antarktis: *
+
+Es steht eine globale Liste von Landkarten für fast alle Länder weltweit zum Herunterladen bereit, u.a.
+
+Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua und Barbuda, Äquatorialguinea, Argentinien, Armenien, Aruba, Äthiopien, Australien, Aserbaidschan, Bahamas, Bahrain, Bangladesch, Barbados, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivien, Bonaire, Bosnien und Herzegowina, Botswana, Brasilien, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodia, Chile, China, Costa Rica, Curacao, Dänemark, Deutschland, Dominica, Dominikanische Republik, Dschibuti, Ecuador, Elfenbeinküste, El Salvador, Eritrea, Estland, Fidschi, Finnland, Frankreich, Französisch Guyana, Französisch-Polynesien, Gabun, Gambia, Georgien, Ghana, Gibraltar, Griechenland, Grenada, Grönland, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikan, Honduras, Hong Kong, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaika, Japan, Jemen, Jersey, Jordanien, Kamerun, Kanada, Kapverdische Inseln, Kasachstan, Katar, Kenia, Kirgisistan, Kiribati, Kolumbien, Komoren, Kongo, Nord-Korea und Süd-Korea, Kroatien, Kuba, Kuwait, Laos, Libanon, Lesotho, Lettland, Liberia, Libyen, Liechtenstein, Litauen, Luxemburg, Macao, Mazedonien, Madagaskar, Malawi, Malaysia, Malediven, Mali, Malta, Marokko, Martinique, Mauretanien, Mauritius, Mayotte, Mexiko, Mikronesien, Moldawien, Monaco, Mongolische Republik, Montenegro, Montserrat, Mosambik, Myanmar, Namibia, Nauru, Nepal, Niederlande, Niederländische Antillen, Neukaledonien, Neuseeland, Nikaragua, Niger, Nigeria, Norwegen, Oman, Österreich, Pakistan, Palau, Palestinian Territory, Panama, Papua-Neuguinea, Paraguay, Peru, Philippinen, Polen, Portugal, Puerto Rico, Ruanda, Rumänien, Russland, Saint-Barthelemy, Saint Helena, Saint Kitts und Nevis, Saint Lucia, Saint Martin, Saint Pierre und Miquelon, Saint Vincent und die Grenadinen, Samoa, San Marino, Saudi Arabien, Schweden, Schweiz, Senegal, Serbien, Seychellen, Sierra Leone, Simbabwe, Singapur, Slowakei, Slowenien, Somalia, Spanien, Südafrika, Südgeorgien, Süd Sudan, Sri Lanka, Sudan, Surinam, Swasiland, Syrien, Taiwan, Tadschikistan , Tansania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad und Tobago, Tschad, Tschechien, Tunesien, Türkei, Turkmenistan, Tuvalu, Uganda, Ukraine, Ungarn, Vereinigte Arabische Emirate, Vereinigtes Königreich (UK), Vereinigte Staaten von Amerika (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Virgin Islands (Britisch), Weißrussland, Wallis und Futuna, Westsahara, Sambia, Zentralafrikanische Republik, Zypern.	</string>
 	<string name="select_navigation_mode">Nutzerprofil wählen:</string>
 	<string name="day_night_info_description">Sonnenaufgang: %1$s
 \nSonnenuntergang: %2$s</string>
