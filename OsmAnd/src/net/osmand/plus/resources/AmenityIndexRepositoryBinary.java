@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.resources;
 
 
 import java.io.IOException;
@@ -16,6 +16,7 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.LatLon;
+import net.osmand.plus.PoiFilter;
 import net.osmand.util.MapUtils;
 import net.osmand.util.Algorithms;
 

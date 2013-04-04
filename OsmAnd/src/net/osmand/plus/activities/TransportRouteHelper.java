@@ -3,7 +3,7 @@ package net.osmand.plus.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.osmand.plus.TransportIndexRepository.RouteInfoLocation;
+import net.osmand.plus.resources.TransportIndexRepository.RouteInfoLocation;
 
 
 public class TransportRouteHelper {

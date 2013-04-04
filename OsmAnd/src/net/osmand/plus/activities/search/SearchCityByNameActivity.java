@@ -15,7 +15,7 @@ import net.osmand.util.MapUtils;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.resources.RegionAddressRepository;
 import android.os.AsyncTask;
 import android.os.Message;
 import android.view.Gravity;

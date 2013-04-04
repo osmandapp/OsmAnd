@@ -31,6 +31,7 @@ import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.plus.voice.CommandPlayerException;

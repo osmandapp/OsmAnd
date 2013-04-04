@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.resources;
 
 import java.text.Collator;
 import java.util.Comparator;

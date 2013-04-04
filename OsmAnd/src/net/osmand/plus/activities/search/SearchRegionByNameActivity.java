@@ -8,7 +8,7 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.resources.RegionAddressRepository;
 import android.os.Bundle;
 import android.widget.Toast;
 

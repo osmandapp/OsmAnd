@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.resources;
 
 
 import java.io.File;
@@ -13,6 +13,10 @@ import net.osmand.data.TransportStop;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.PoiFilter;
+import net.osmand.plus.RotatedTileBox;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;

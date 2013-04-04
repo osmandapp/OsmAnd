@@ -17,7 +17,6 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.views.MapTileLayer;
-import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -59,6 +58,7 @@ public class HillshadeLayer extends MapTileLayer {
 				Map<String, SQLiteTileSource> rs = readFiles(app, tilesDir, fileModified);
 				indexCachedResources(fileModified, rs);
 				indexNonCachedResources(fileModified, rs);
+				sqliteDb.close();
 				resources = rs;
 				return null;
 			}
@@ -71,7 +71,7 @@ public class HillshadeLayer extends MapTileLayer {
 						cv.put("filename", filename);
 						cv.put("date_modified", fileModified.get(filename));
 						SQLiteTileSource ts = rs.get(filename);
-						QuadRect rt = ts.getRectBoundary(ZOOM_BOUNDARY);
+						QuadRect rt = ts.getRectBoundary(ZOOM_BOUNDARY, 1);
 						if (rt != null) {
 							indexedResources.insert(filename, rt);
 							cv.put("left", (int)rt.left);
@@ -157,6 +157,12 @@ public class HillshadeLayer extends MapTileLayer {
 			@Override
 			public Bitmap getImage(int x, int y, int zoom) {
 				List<String> ts = getTileSource(x, y, zoom);
+				for (String t : ts) {
+					SQLiteTileSource sqLiteTileSource = resources.get(t);
+					if(sqLiteTileSource.exists(x, y, zoom, true)) {
+						return sqLiteTileSource.getImage(x, y, zoom);
+					}
+				}
 				for (String t : ts) {
 					SQLiteTileSource sqLiteTileSource = resources.get(t);
 					Bitmap img = sqLiteTileSource.getImage(x, y, zoom);

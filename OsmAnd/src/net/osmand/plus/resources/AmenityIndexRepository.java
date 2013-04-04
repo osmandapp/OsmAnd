@@ -1,9 +1,10 @@
-package net.osmand.plus;
+package net.osmand.plus.resources;
 
 import java.util.List;
 
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
+import net.osmand.plus.PoiFilter;
 
 public interface AmenityIndexRepository {
 

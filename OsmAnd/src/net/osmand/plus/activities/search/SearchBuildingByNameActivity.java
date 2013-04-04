@@ -10,7 +10,7 @@ import net.osmand.data.Street;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.RegionAddressRepository;
+import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
 import android.os.AsyncTask;
 import android.view.View;

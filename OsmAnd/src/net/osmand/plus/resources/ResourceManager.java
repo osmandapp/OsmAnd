@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand.plus.resources;
 
 
 import java.io.File;
@@ -11,7 +11,6 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -34,13 +33,23 @@ import net.osmand.map.MapTileDownloader;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
-import net.osmand.plus.AsyncLoadingThread.AmenityLoadRequest;
-import net.osmand.plus.AsyncLoadingThread.MapLoadRequest;
-import net.osmand.plus.AsyncLoadingThread.TileLoadDownloadRequest;
-import net.osmand.plus.AsyncLoadingThread.TransportLoadRequest;
+import net.osmand.plus.BusyIndicator;
+import net.osmand.plus.NameFinderPoiFilter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.PoiFilter;
+import net.osmand.plus.R;
+import net.osmand.plus.RotatedTileBox;
+import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.SearchByNameFilter;
+import net.osmand.plus.Version;
 import net.osmand.plus.osmedit.AmenityIndexRepositoryOdb;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.resources.AsyncLoadingThread.AmenityLoadRequest;
+import net.osmand.plus.resources.AsyncLoadingThread.MapLoadRequest;
+import net.osmand.plus.resources.AsyncLoadingThread.TileLoadDownloadRequest;
+import net.osmand.plus.resources.AsyncLoadingThread.TransportLoadRequest;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRulesStorage;
@@ -52,7 +61,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
@@ -92,6 +100,14 @@ public class ResourceManager {
 	private final OsmandApplication context;
 	
 	private BusyIndicator busyIndicator;
+	
+	public interface ResourceWatcher {
+		
+		
+		public boolean indexResource(File f);
+		
+		public List<String> getWatchWorkspaceFolder();
+	}
 	
 	
 	// Indexes
@@ -420,17 +436,16 @@ public class ResourceManager {
 	
 	private List<String> checkAssets(IProgress progress) {
 		if (!Version.getFullVersion(context)
-				.equalsIgnoreCase(context.getSettings().previousInstalledVesrion().get())) {
+				.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
 			File applicationDataDir = context.getAppPath(null);
 			applicationDataDir.mkdirs();
 			if(applicationDataDir.canWrite()){
 				try {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1); 
 					AssetManager assetManager = context.getAssets();
-					boolean isFirstInstall = !((SharedPreferences) context.getSettings().previousInstalledVesrion().getPreferences()).
-							contains(context.getSettings().previousInstalledVesrion().getId()); 
+					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
-					context.getSettings().previousInstalledVesrion().set(Version.getFullVersion(context));
+					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {
