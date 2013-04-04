@@ -267,13 +267,13 @@ public class MapInfoWidgetsFactory {
 					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
 					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef());
+						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
 					}
 				}
 			} else if(map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment(); 
 				if(rt != null) {
-					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef());
+					text = RoutingHelper.formatStreetName(rt.getName(), rt.getRef(), rt.getDestinationName());
 				}
 			}
 			if(text == null) {
