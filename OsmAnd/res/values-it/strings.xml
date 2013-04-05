@@ -573,7 +573,7 @@
   <string name="recalculate_route_to_your_location">Seleziona il mezzo di trasporto:</string>
   <string name="mark_final_location_first">Selezionare una destinazione prima</string>
   <string name="get_directions">Percorsi</string>
-  <string name="show_gps_status">Visualizzare lo stato del gps</string>
+  <string name="show_gps_status">Visualizza lo stato del gps</string>
   <string name="opening_hours">Orari di apertura</string>
   <string name="opening_changeset">Apertura delle modifiche…</string>
   <string name="closing_changeset">Chiusura delle modifiche…</string>
