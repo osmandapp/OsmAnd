@@ -124,7 +124,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	    i.putExtra("sender", "OsmAnd");
 	    i.putExtra("notificationData", notificationData);
 	    mTtsContext.sendBroadcast(i);
-	    log.info("Send message to pebble " + message)
+	    log.info("Send message to pebble " + message);
 	}
 
 	private void initializeEngine(final Context ctx, final Activity act)
