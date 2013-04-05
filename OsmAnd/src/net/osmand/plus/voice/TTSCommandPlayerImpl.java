@@ -30,7 +30,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 
 public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
-
+	public final static String PEBBLE_ALERT = "PEBBLE_ALERT";
 	private final class IntentStarter implements
 			DialogInterface.OnClickListener {
 		private final Context ctx;
@@ -120,10 +120,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	    data.put("body", message);
 	    final JSONObject jsonData = new JSONObject(data);
 	    final String notificationData = new JSONArray().put(jsonData).toString();
-	    i.putExtra("messageType", "PEBBLE_ALERT");
+	    i.putExtra("messageType", PEBBLE_ALERT);
 	    i.putExtra("sender", "OsmAnd");
 	    i.putExtra("notificationData", notificationData);
 	    mTtsContext.sendBroadcast(i);
+	    log.info("Send message to pebble " + message)
 	}
 
 	private void initializeEngine(final Context ctx, final Activity act)
