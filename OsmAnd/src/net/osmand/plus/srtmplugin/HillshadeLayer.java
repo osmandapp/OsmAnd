@@ -159,7 +159,7 @@ public class HillshadeLayer extends MapTileLayer {
 				List<String> ts = getTileSource(x, y, zoom);
 				for (String t : ts) {
 					SQLiteTileSource sqLiteTileSource = resources.get(t);
-					if(sqLiteTileSource.exists(x, y, zoom, true)) {
+					if(sqLiteTileSource.exists(x, y, zoom, false)) {
 						return sqLiteTileSource.getImage(x, y, zoom);
 					}
 				}
