@@ -1168,4 +1168,6 @@
     <string name="av_def_action_choose">Wybierz na żądanie</string>
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Info GPS</string>
-    </resources>
+    <string name="layer_hillshade">Warstwa cieniująca</string>
+    <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
+	</resources>
