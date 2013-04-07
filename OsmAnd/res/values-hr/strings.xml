@@ -441,4 +441,11 @@
 	<string name="map_orientation_portrait">Portret</string>
 	<string name="map_orientation_landscape">Pejzažno</string>
 	<string name="map_orientation_default">Isto kao i uređaj</string>
+	<string name="route_tr">Skrenite desno i nastavite voziti</string>
+	<string name="route_tshr">Skrenite oštro udesno i nastavite voziti</string>
+	<string name="route_tslr">Skrenite blago udesno i nastavite voziti</string>
+	<string name="route_tl">Skrenite lijevo i nastavite voziti</string>
+	<string name="route_tshl">Skrenite oštro ulijevo i nastavite voziti</string>
+	<string name="route_tsll">Skrenite blago ulijevo i nastavite voziti</string>
+	<string name="route_tu">Polukružno se okrenite i nastavite voziti</string>
 	</resources>
