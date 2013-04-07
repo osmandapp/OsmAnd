@@ -199,10 +199,6 @@ public class MapActivityLayers {
 		
 		// update transparency
 		int mapTransparency = settings.MAP_UNDERLAY.get() == null ? 255 : settings.MAP_TRANSPARENCY.get();
-		//if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null
-		//		&& OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isHillShadeLayerEnabled()) {
-		//	mapTransparency = Math.min(mapTransparency, 170);
-		//}
 		mapTileLayer.setAlpha(mapTransparency);
 		mapVectorLayer.setAlpha(mapTransparency);
 		
