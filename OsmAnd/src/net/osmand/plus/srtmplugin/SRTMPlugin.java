@@ -73,6 +73,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		hillshadeLayer = new HillshadeLayer(activity, this);
 		if (HILLSHADE.get()) {
 			activity.getMapView().addLayer(hillshadeLayer, 0.6f);
+			hillshadeLayer.setAlpha(100);
 		}
 	}
 
