@@ -1,25 +1,20 @@
 package net.osmand.plus.srtmplugin;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
-
-import org.apache.commons.logging.Log;
-
 import android.content.DialogInterface;
 
 public class SRTMPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.srtm";
-	private static final Log log = PlatformUtil.getLog(SRTMPlugin.class);
 	private OsmandApplication app;
 	private boolean paid;
 	private HillshadeLayer hillshadeLayer;
@@ -73,8 +68,6 @@ public class SRTMPlugin extends OsmandPlugin {
 		hillshadeLayer = new HillshadeLayer(activity, this);
 		if (HILLSHADE.get()) {
 			activity.getMapView().addLayer(hillshadeLayer, 0.6f);
-			hillshadeLayer.setAlpha(100);
-			mapView.refreshMap();
 		}
 	}
 
@@ -91,6 +84,7 @@ public class SRTMPlugin extends OsmandPlugin {
 		} else {
 			if (hillshadeLayer != null) {
 				mapView.removeLayer(hillshadeLayer);
+				activity.refreshMap();
 			}
 		}
 	}

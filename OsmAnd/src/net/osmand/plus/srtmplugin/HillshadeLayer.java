@@ -39,6 +39,7 @@ public class HillshadeLayer extends MapTileLayer {
 		super(false);
 		final OsmandApplication app = activity.getMyApplication();
 		indexHillshadeFiles(app);
+		setAlpha(100);
 		setMap(createTileSource(activity));
 	}
 
