@@ -9,6 +9,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -88,7 +89,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		}
 		MonitoringInfoControl lock = activity.getMapLayers().getMapInfoLayer().getMonitoringInfoControl();
 		if(lock != null && !lock.getMonitorActions().contains(this)) {
-			lock.getMonitorActions().add(this);
+			lock.addMonitorActions(this);
 		}
 	}
 
@@ -307,6 +308,34 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 			}
 		});
 		qa.addActionItem(liveAction);
+		
+		final ActionItem saveGPXAction = new ActionItem();
+		String s = view.getResources().getString(R.string.save_current_track);
+		saveGPXAction.setTitle(s.replaceFirst(" ", "\n"));
+		saveGPXAction.setIcon(view.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
+		saveGPXAction.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
+
+					@Override
+					protected Void doInBackground(Void... params) {
+						SavingTrackHelper helper = app.getSavingTrackHelper();
+						helper.saveDataToGpx();
+						helper.close();
+						return null;
+					}
+					
+					@Override
+					protected void onPostExecute(Void result) {
+						qa.dismiss();
+					}
+				}, null);
+				
+			}
+		});
+		qa.addActionItem(saveGPXAction);
+
 
 		
 	}

@@ -73,8 +73,8 @@ public class OsmandApplication extends Application implements ClientContext {
 	DayNightHelper daynightHelper;
 	NavigationService navigationService;
 	RendererRegistry rendererRegistry;
-	BidForFixHelper bidforfix;
 	OsmAndLocationProvider locationProvider;
+	OsmAndTaskManager taskManager;
 
 	// start variables
 	private ProgressDialogImplementation startDialog;
@@ -110,11 +110,10 @@ public class OsmandApplication extends Application implements ClientContext {
 		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		
 		routingHelper = new RoutingHelper(this, player);
+		taskManager = new OsmAndTaskManager(this);
 		manager = new ResourceManager(this);
 		daynightHelper = new DayNightHelper(this);
 		locationProvider = new OsmAndLocationProvider(this);
-		bidforfix = new BidForFixHelper("osmand.net", getString(R.string.default_buttons_support),
-				getString(R.string.default_buttons_cancel));
 		savingTrackHelper = new SavingTrackHelper(this);
 		liveMonitoringHelper = new LiveMonitoringHelper(this);
 		uiHandler = new Handler();
@@ -141,13 +140,14 @@ public class OsmandApplication extends Application implements ClientContext {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate(this);
 		}
-		if (bidforfix != null) {
-			bidforfix.onDestroy();
-		}
 	}
 
 	public RendererRegistry getRendererRegistry() {
 		return rendererRegistry;
+	}
+	
+	public OsmAndTaskManager getTaskManager() {
+		return taskManager;
 	}
 
 	/**
@@ -379,9 +379,6 @@ public class OsmandApplication extends Application implements ClientContext {
 		this.navigationService = navigationService;
 	}
 
-	public BidForFixHelper getBidForFix() {
-		return bidforfix;
-	}
 
 	private void fullExit() {
 		// http://stackoverflow.com/questions/2092951/how-to-close-android-application

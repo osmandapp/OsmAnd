@@ -70,7 +70,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements Monit
 		MapInfoLayer li = activity.getMapLayers().getMapInfoLayer();
 		MonitoringInfoControl lock = li.getMonitoringInfoControl();
 		if(lock != null && !lock.getMonitorActions().contains(this)) {
-			lock.getMonitorActions().add(this);
+			lock.addMonitorActions(this);
 		}
 	}
 	
