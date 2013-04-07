@@ -1216,4 +1216,7 @@
     <string name="map_view">Carte</string>
     <string name="access_arrival_time">Heure d\'arrivée</string>
     <string name="map_widget_gps_info">Infos GPS</string>
-    </resources>
+    <string name="layer_hillshade">Couche relief</string>
+    <string name="osmand_play_title_30_chars">Cartes et navigation OsmAnd</string>
+	<string name="osmand_plus_play_title_30_chars">Cartes et navigation OsmAnd+</string>
+	</resources>
