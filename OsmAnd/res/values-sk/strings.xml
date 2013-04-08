@@ -1209,4 +1209,5 @@
     <string name="osmodroid_plugin_description">OsMoDroid zásuvný modul je OsmAnd rozšírenie pre aplikáciu OsModroid, ktorá umožnuje on-line sledovanie. Informácie o tejto aplikácií sú k dispozícii na stránke http://esya.ru.</string>
     <string name="map_widget_gps_info">Informácie o GPS</string>
     <string name="layer_hillshade">Vrstva s tieňovaným reliéfom</string>
-    </resources>
+    <string name="osmand_play_title_30_chars">OsmAnd mapy a navigácia</string>
+	</resources>
