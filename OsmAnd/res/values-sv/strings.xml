@@ -124,7 +124,7 @@
 <string name="osmand_parking_warning_text">Notifiering om att hämta din bil har tidigare lagts till i din kalender. Den kommer att finnas där tills du tar bort den manuellt.</string>
 <string name="osmand_parking_time_limit_title">Ange tidsgränsen för parkering</string>
 <string name="osmand_parking_delete_confirm">Vill du ta bort platsen för den parkerade bilen?</string>
-<string name="osmand_parking_delete">Ta bort en P-markering</string>
+<string name="osmand_parking_delete">Ta bort P-markering</string>
 <string name="osmand_parking_choose_type">Välj typ av parkering</string>
 <string name="osmand_parking_lim_text">Tidsbegränsad</string>
 <string name="osmand_parking_no_lim_text">Ej tidsbegränsad</string>
@@ -211,7 +211,7 @@
 <string name="osmand_parking_plugin_description">Denna plugin gör det möjligt att spara platsen där du parkerade bilen.</string>
 <string name="osmand_parking_plugin_name">Parkeringsplats-plugin</string>
 <string name="context_menu_item_add_parking_point">Markera som parkeringsplats</string>
-<string name="context_menu_item_delete_parking_point">Ta bort en P-markering</string>
+<string name="context_menu_item_delete_parking_point">Ta bort P-markering</string>
 <string name="asap">Snarast</string>
 <string name="route_roundabout">Rondell: ta %1$d avfarten och kör</string>
 <string name="rendering_attr_noPolygons_description">Gör alla ytor på kartan transparenta</string>
@@ -1092,4 +1092,10 @@
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_0_0_t">"\t* Förbättrad ruttning: snabbare, mer exakt, upp till 250 km\n\t* Introduktion av kartor med bara vägar\n\t* Kartan tappar inte positionslåsning efter avbrott\n\t* Aktivera bakgrundsläge under navigering "</string>
     <string name="tip_recent_changes_0_6_6_t">"\t- Text till tal-motor för röstnavigering\n\t- Kartrenderaren mer detaljerad\n\t- Baskarta för hela världen inbyggd i appen\n\t- Finjustering av offline-navigering (fortfarande experimentell)\n\t- Alternativ för GPX-navigering\n\t- Uppdatering av gränssnittet och större buggfixar "</string>
+	<string name="layer_hillshade">Skuggad relief-lager</string>
+    <string name="map_widget_gps_info">GPS-info</string>
+    <string name="osmand_play_title_30_chars">OsmAnd kartor &amp; navigering</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartor &amp; navigering</string>
+	<string name="opening_changeset">Öppnar changeset…</string>
+	<string name="closing_changeset">Stänger changeset…</string>
 	</resources>
