@@ -11,21 +11,21 @@
     <string name="tip_recent_changes_1_2_t">"Promjene u 1.2: * Novi widget (GPS status) "</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dist_control_start">početak</string>
-    <string name="local_indexes_cat_av">Audio / video podaci</string>
+    <string name="local_indexes_cat_av">Podaci zvuka/videa</string>
     <string name="stop_routing_confirm">Jeste li sigurni da želite zaustaviti navigaciju?</string>
     <string name="clear_dest_confirm">Jeste li sigurni da želite ukloniti odredišnu točku?</string>
     <string name="recording_context_menu_show">Prikaži</string>
     <string name="av_def_action_picture">Fotografiraj</string>
     <string name="recording_context_menu_precord">Fotografiraj</string>
-    <string name="dropbox_plugin_description">Dropbox plugin omogućuje sinkronizaciju staza i audio / video zapisa s vašim računom.</string>
-    <string name="dropbox_plugin_name">Dropbox plugin</string>
+    <string name="dropbox_plugin_description">Dropbox dodatak omogućuje sinkronizaciju staza i audio / video zapisa s vašim računom.</string>
+    <string name="dropbox_plugin_name">Dodatak Dropbox</string>
     <string name="animate_routing_using_gpx">Želite li koristiti postojeću GPX datoteku?</string>
     <string name="intermediate_points_change_order">Promjeni redoslijed</string>
     <string name="av_def_action_video">Snimanje videa</string>
     <string name="av_def_action_audio">Snimanje zvuka</string>
     <string name="av_use_external_camera">Koristite aplikaciju kamere</string>
     <string name="av_settings_descr">Postavke zvuka i videa</string>
-    <string name="av_settings">"Postavke zvuka i videa "</string>
+    <string name="av_settings">"Postavke zvuka/videa "</string>
     <string name="recording_error">"Dogodila se greška tijekom snimanja "</string>
     <string name="recording_camera_not_available">Kamera nije dostupna</string>
     <string name="recording_is_recorded">Zvuk ili video se snima. Za zaustavljanje pritisnite widget.</string>
@@ -49,7 +49,7 @@
     <string name="map_widget_distancemeasurement">Mjerenje udaljenosti</string>
     <string name="monitoring_control_stop">zaustavi</string>
     <string name="map_widget_audionotes">Zvučni zapisi</string>
-    <string name="audionotes_plugin_description">Koristi zvučne i video zapise tijekom putovanja</string>
+    <string name="audionotes_plugin_description">Koristi zvučne/video zapise tijekom putovanja</string>
     <string name="download_select_map_types">Ostale karte</string>
     <string name="download_roads_only_item">Samo ceste</string>
     <string name="download_regular_maps">Regularne karte</string>
@@ -58,8 +58,8 @@
     <string name="av_widget_action">Zadana radnja widgeta</string>
     <string name="av_video_format_descr">Odaberite format videa</string>
     <string name="av_video_format">Video format</string>
-    <string name="av_use_external_recorder_descr">Koristite zadani uređaj za video snimanje</string>
-    <string name="av_use_external_recorder">Koristite zadani uređaj za snimanje</string>
+    <string name="av_use_external_recorder_descr">Koristite sistemsku aplikaciju za video snimanje</string>
+    <string name="av_use_external_recorder">Koristite sistemsku aplikaciju za snimanje</string>
     <string name="index_srtm_parts">dijelovi</string>
     <string name="audionotes_plugin_name">Zvučni i video zapisi</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
@@ -80,7 +80,7 @@
 	<string name="rendering_attr_showRoadMaps_name">Samo cestovne karte</string>
     <string name="safe_mode_description">Pokrenite aplikaciju u sigurnom načinu rada.</string>
     <string name="safe_mode">Siguran način rada</string>
-    <string name="native_library_not_running">Aplikacija je pokrenuta sigurnom načinu rada (onemogućite ga u postavkama).</string>
+    <string name="native_library_not_running">Aplikacija je pokrenuta sigurnom načinu rada (isključite ga u postavkama).</string>
     <string name="background_service_is_enabled_question">OsmAnd je pokrenut, ali je u stanju mirovanja. Želite li ga isključiti?</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikacija nije instalirana. Potraži na Google Play?</string>
 	<string name="rendering_attr_roadColors_description">Odaberite shemu boja za ceste:</string>
@@ -592,4 +592,34 @@
 \nMaksimalna brzina: %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nSrednja visina: %1$.0f m\nMinimalna visina: %2$.0f m\nMaksimaljna visina: %3$.0f m\nUsponi: %4$.0f m\nNizbrdica: %5$.0f m</string>
 	<string name="local_index_installed">Izdanje</string>
-	</resources>
+	<string name="precise_routing_mode">Precizni način navođenja (alfa)</string>
+    <string name="av_def_action_choose">Odaberite na zahtjev</string>
+    <string name="max_speed_none">bez</string>
+    <string name="srtm_paid_version_msg">Molimo vas da razmislite o kupnji dodataka za prikaz Slojnica u Google Play trgovini kako biste podržati daljnji razvoj.</string>
+    <string name="srtm_paid_version_title">Dodatak Slojnice</string>
+    <string name="recording_playing">Audio reprodukcija od odabranog zapisa.\n%1$s</string>
+    <string name="tip_recent_changes_1_1_0_t">"Promjene u 1.1.0:
+\n\t* Dodatak za mjerenje udaljenosti
+\n\t* Dodatak za zvučne/video zapise\n\t* Dodatak za Slojnice
+\n\t* Ispravljene greške
+\n\t* \'Obilazak\' opcija stila karte sa više detalja, novi izgled ceste, više kontrasta, i planinsko hodanje (SAC skala) option
+\n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd dodatak za offline slojnice</string>
+    <string name="srtm_plugin_name">Dodatak za Slojnice</string>
+    <string name="osmodroid_plugin_name">OsMoDroid Dodatak</string>
+	<string name="tip_recent_changes_1_0_0_t">"Promjene u 1.0.0:
+\n\t* Poboljšana navigacija: brža i preciznija, do 250 km
+\n\t* Mogućnost prikaza samo cestovne karte
+\n\t* Map does not lose position lock after interruptions
+\n\t* Enable sleep mode service during navigation "</string>
+    <string name="tip_recent_changes_0_8_3_t">Promjene u 0.8.3:
+\n\t* Među točke\n\t* Poboljšanja navigacija\n\t* Dodana opcija s kojom se omogućuje izbjegavanje autocesta prilikom odabira rute\n\t* Dodane biciklističke staze\n\t* Ispravljene pogreške</string>
+	<string name="delete_target_point">Uklonite ciljnu točku</string>
+	<string name="target_point">Ciljna točka %1$s</string>
+    <string name="intermediate_point">Točka %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Dodaj zadnju međutočku</string>
+    <string name="context_menu_item_first_intermediate_point">Dodaj prvu međutočku</string>
+    <string name="add_as_last_destination_point">Dodaj kao zadnju međutočku</string>
+    <string name="add_as_first_destination_point">Dodaj kao prvu međutočku</string>
+    <string name="target_points">Ciljevi</string>
+    </resources>
