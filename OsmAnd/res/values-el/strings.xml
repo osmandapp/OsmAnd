@@ -1196,4 +1196,6 @@
     <string name="map_widget_gps_info">Πληροφορίες GPS</string>
     <string name="download_hillshade_item">Ανάγλυφο</string>
     <string name="download_hillshade_maps">Επικαλύψεις ανάγλυφου</string>
-    </resources>
+    <string name="osmand_play_title_30_chars">OsmAnd Χάρτες &amp; Δρομολόγηση</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Χάρτες &amp; Δρομολόγηση</string>
+	</resources>
