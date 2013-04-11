@@ -874,4 +874,11 @@
 	<string name="free_version_title">Besplatna inačica</string>
 	<string name="poi_context_menu_showdescription">Pokaži POI opis</string>
 	<string name="free_version_message">Besplatna OsmAnd inačica ograničena je na %1$s preuzimanja %2$s, i ne podržava offline članke s Wikipedie .</string>
+	<string name="show_current_gpx_title">Prikaži trenutni trag</string>
+	<string name="local_openstreetmap_show">Prikaži na karti</string>
+	<string name="offline_edition">Offline uređivanje</string>
+	<string name="accessibility_preferences">Pristupačnost</string>
+	<string name="offline_edition_descr">Uvijek koristi offline uređivanje</string>
+	<string name="update_poi_does_not_change_indexes">POI promjene unutar aplikacije ne utječu na datoteke preuzete karte , promjene se pohranjuju u lokalnu datoteku.</string>
+	<string name="local_openstreetmap_delete">Izbriši promjene</string>
 	</resources>
