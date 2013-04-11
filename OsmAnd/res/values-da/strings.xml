@@ -807,4 +807,8 @@
 	<string name="daynight_descr">Vælg dag/nat tilstandskift regel</string>
 	<string name="daynight">Dag/nat tilstand</string>
 	<string name="download_files_question">Hent {0} fil(er) ({1} MB)?</string>
+	<string name="tip_favorites_t">"\tOfte brugte steder kan gemmes som favoritter.
+\n\tFor at gemme et sted som favorit gå til kort kontekst menu, vælg \'Tilføj til favoritter\' og indtast et navn til den. Efter du har gemt en favorit er den tilgængelig via \'Start skærm\' -&gt; \'Favoritter\'.
+\n\tLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at sætte den som bestemmelsessted, redigere eller slette den.
+\n\tFor at vise alle favorit steder direkte på kortet, aktiver kort overlejringen \'Favoritter under \'Menu\' -&gt; \'Definer visning\'. "</string>
 	</resources>
