@@ -1153,4 +1153,8 @@
     <string name="item_unchecked">ni izbrano</string>
     <string name="map_view">Zemljevid</string>
     <string name="access_arrival_time">Čas prihoda</string>
-    </resources>
+    <string name="layer_hillshade">Plast senčen teren</string>
+    <string name="map_widget_gps_info">GPS informacije</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Zemljevidi in navigacija</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Zemljevidi in navigacija</string>
+	</resources>
