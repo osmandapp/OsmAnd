@@ -816,7 +816,7 @@
   <string name="index_name_asia">Azja</string>
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mapy świata i tematyczne</string>
-  <string name="index_name_wiki">Wikipedia światowa</string>
+  <string name="index_name_wiki">Ogólnoświatowa Wikipedia POI</string>
   <string name="index_name_voice">Zestawy głosów (nagrane)</string>
   <string name="index_name_tts_voice">Zestawy głosów (TTS)</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
