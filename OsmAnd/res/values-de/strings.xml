@@ -1407,6 +1407,4 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="map_view">Karte</string>
     <string name="access_arrival_time">Ankunftszeit</string>
     <string name="map_widget_gps_info">GPS Info</string>
-    <string name="layer_hillshade"/>
-    <string name="layer_hillshade">Relief-Schattierung-Ebene</string>
     </resources>

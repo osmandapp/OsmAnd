@@ -540,7 +540,6 @@
 	<string name="amenity_type_historic">Povijesna mijesta</string>
 	<string name="amenity_type_landuse">Korištenje zemljišta</string>
 	<string name="amenity_type_leisure">Slobodno vrijeme</string>
-	<string name="amenity_type_manmade"/>
 	<string name="amenity_type_military">Vojska</string>
 	<string name="amenity_type_natural">Priroda</string>
 	<string name="amenity_type_office">Uredi</string>
@@ -834,7 +833,7 @@
 	<string name="choose_auto_follow_route">Automatsko centriranje karte</string>
 	<string name="choose_auto_follow_route_descr">Vrijeme dok se prikaz karte sinkronizira s trenutnom pozicijom</string>
 	<string name="use_transparent_map_theme">Prozirna tema</string>
-	<string name="download_files_not_enough_space">Nema dovoljno slobodnog prostora za preuzimanje %1$s MB (slobodno je:% 2 $ s).</string>
+	<string name="download_files_not_enough_space">Nema dovoljno slobodnog prostora za preuzimanje %1$s MB (slobodno je:%2$s).</string>
 	<string name="download_files_question_space">Slobodan prostor je sada {2} MB! Želite li preuzrti {0} datoteku(e) ({1} MB)?</string>
 	<string name="tip_select_destination_point">Odaberite odredište</string>
 	<string name="tip_osm_improve">Poboljšanje OSM podataka</string>
