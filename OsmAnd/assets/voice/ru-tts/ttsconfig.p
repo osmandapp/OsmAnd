@@ -35,9 +35,9 @@ go_ahead(Dist) == ['Продолжайте движение ', D]:- distance(Dis
 and_arrive_destination == ['и вы прибудете в пункт назначения '].
 and_arrive_intermediate == ['и вы прибудете в промежуточный пункт '].
 reached_intermediate == ['вы прибыли в промежуточный пункт'].
+reached_destination == ['вы прибыли в пункт назначения '].
 
 then == ['затем '].
-reached_destination == ['вы прибыли в пункт назначения '].
 bear_right == ['держитесь правее '].
 bear_left == ['держитесь левее '].
 
@@ -78,6 +78,11 @@ plural_km(D, ' километра ') :- Mod is D mod 10, Mod < 5,  Mod > 1.
 plural_km(_D, ' километров ').
 
 distance(Dist) == [ X, ' километров '] :- D is round(Dist/1000.0), num_atom(D, X).
+
+on_street == ['на', X] :- next_street(X).
+off_route == ['Вы отклонились от маршрута'].
+attention == ['Внимание'].
+speed_alarm == ['Вы превысили допустимую скорость'].
 
 
 %% resolve command main method

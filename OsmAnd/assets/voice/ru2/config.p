@@ -16,6 +16,8 @@ turn('right_sl', ['turn_slightly_right-e.ogg']).
 turn('right_keep', ['keep_right-e.ogg']).
 turn('left_keep', ['keep_left-e.ogg']).
 
+off_route(['off_route.ogg']).
+
 prepare_turn(Turn, Dist) == ['Prepare_to.ogg', 'after-m.ogg', delay_300, D, delay_300, M] :- 
 			distance(Dist) == D, turn(Turn, M).
 turn(Turn, Dist) == ['after-m.ogg', delay_300, D, delay_300, M] :- 
