@@ -102,7 +102,7 @@ public class SRTMPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerSelectedItem(R.string.layer_hillshade, HILLSHADE.get()? 1 : 0, R.drawable.list_activities_underlay_map, listener, 5);
+		adapter.registerSelectedItem(R.string.layer_hillshade, HILLSHADE.get()? 1 : 0, R.drawable.list_activities_overlay_map, listener, 5);
 	}
 	
 	@Override
