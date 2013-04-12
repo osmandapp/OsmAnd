@@ -97,19 +97,19 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			index ++;
 			if (isLocationVisible(ip)) {
 				int marginX = intermediatePoint.getWidth() / 3;
-				int marginY = 2 * intermediatePoint.getHeight() / 3;
+				int marginY = intermediatePoint.getHeight();
 				int locationX = view.getMapXForPoint(ip.getLongitude());
 				int locationY = view.getMapYForPoint(ip.getLatitude());
 				canvas.rotate(-view.getRotate(), locationX, locationY);
 				canvas.drawBitmap(intermediatePoint, locationX - marginX, locationY - marginY, bitmapPaint);
-				canvas.drawText(index + "", locationX + marginX, locationY - marginY / 2, textPaint);
+				canvas.drawText(index + "", locationX + marginX, locationY - 2 * marginY / 3, textPaint);
 				canvas.rotate(view.getRotate(), locationX, locationY);
 			}
 		}
 		LatLon pointToNavigate = targetPoints.getPointToNavigate();
 		if (isLocationVisible(pointToNavigate)) {
 			int marginX = targetPoint.getWidth() / 3;
-			int marginY = 2 * targetPoint.getHeight() / 3;
+			int marginY = targetPoint.getHeight();
 			int locationX = view.getMapXForPoint(pointToNavigate.getLongitude());
 			int locationY = view.getMapYForPoint(pointToNavigate.getLatitude());
 			canvas.rotate(-view.getRotate(), locationX, locationY);
