@@ -538,14 +538,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 						tv.setText(s +map.getString(mi.messageId) +s);
 					}
 					// Put the image on the TextView
-					// FIXME!!
-//					if (mi.drawable != 0) {
-//						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
-//						tv.setCompoundDrawablesWithIntrinsicBounds(mi.drawable, 0, 0, 0);
-//					} else {
+					if (mi.drawable != 0) {
+						tv.setPadding((int) (12 *scaleCoefficient), 0, 0, 0);
+						tv.setCompoundDrawablesWithIntrinsicBounds(mi.drawable, 0, 0, 0);
+					} else {
 						tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 						tv.setPadding((int) (30 *scaleCoefficient), 0, 0, 0);
-//					}
+					}
 					final boolean selecteable = mi.selecteable();
 					ch.setOnCheckedChangeListener(null);
 					if(!mi.selecteable()) {

@@ -4,15 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_marginTop="2dip"
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
-    android:weightSum="1" android:background="@color/color_white">
+    android:background="@color/color_white">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dip"
+    	android:layout_marginBottom="4dip"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
         android:textAppearance="?android:attr/textAppearanceMedium"
