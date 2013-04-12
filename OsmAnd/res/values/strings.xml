@@ -9,16 +9,21 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
+	<string name="tip_recent_changes_1_2_t">Changes in 1.2:
 		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
 		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
 		\n\t* Now accepts maps.google.com location links
+		\n\t* New widget (GPS info) 
 		\n\t* Added multi-window support for recent Samsung devices
 		\n\t* Kalman filter for compass
 		\n\t* Pebble watch support
 	</string>
     <string name="layer_hillshade">Hillshade layer</string>
     <string name="map_widget_gps_info">GPS info</string>
+    <string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
+		\n\t* Bug fixes
+		\n\t* Small UI redesign
+    </string>
     <string name="access_arrival_time">Arrival time</string>
     <string name="item_checked">checked</string>
     <string name="item_unchecked">unchecked</string>
@@ -26,9 +31,6 @@
     <string name="prefer_motorways">Prefer motorways</string>
 	<string name="prefer_in_routing_title">Prefer&#8230;</string>
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
-    <string name="tip_recent_changes_1_2_t">Changes in 1.2:
-        * New widget (GPS info) 
-    </string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Hillshade</string>
