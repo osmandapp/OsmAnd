@@ -87,7 +87,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				return collator.compare(object1.getName(), object2.getName());
 			}
 		};
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.favourites_activity, R.drawable.tab_favorites_screen_icon);
+		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.favourites_activity, R.drawable.tab_search_favorites_icon);
 		setContentView(R.layout.favourites_list);
 		titleBar.afterSetContentView();
 		
