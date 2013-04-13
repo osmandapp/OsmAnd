@@ -1178,4 +1178,8 @@
     <string name="map_view">Kaart</string>
     <string name="access_arrival_time">Aankomsttijd</string>
     <string name="map_widget_gps_info">GPS info</string>
-    </resources>
+    <string name="layer_hillshade">Reliëfweergave</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Kaarten &amp; Navigatie</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is een applicatie om te navigeren en de kaart te bekijken dat gebruik maakt van de uitstekende gratis en wereldwijde OpenStreetMap(OSM)-kaarten. Alle kaarten kunnen op het toestel bewaard worden voor offline gebruik. OsmAnd biedt navigatie met stemaanduidingen en beeldweergave voor auto, fiets en voetganger. De belangrijkste functies werken online en offline (geen internet nodig). Eigenschappen: navigatie werkt online (snel) of offline (geen datakosten in het buitenland) - Real-time navigatie met opgenomen stem of spraaksynthese - rijstrookaanduiding, straatnamen en tijd van aankomst - Ondersteunt tussengelegen punten op de route en herberekent automatisch als wordt afgeweken van de route - vind plaatsen op adres, soort (restaurant, hotel, benzinepomp, museum) of coordinaten - "</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Kaarten &amp; Navigatie</string>
+	</resources>
