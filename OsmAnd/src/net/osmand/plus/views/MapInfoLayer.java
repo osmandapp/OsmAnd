@@ -228,18 +228,18 @@ public class MapInfoLayer extends OsmandMapLayer {
 
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
-		mapInfoControls.registerTopWidget(compassView, R.drawable.compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, all, 5);
+		mapInfoControls.registerTopWidget(compassView, R.drawable.widget_compass, R.string.map_widget_compass, "compass", MapWidgetRegistry.LEFT_CONTROL, all, 5);
 		View config = createConfiguration();
 		mapInfoControls.registerTopWidget(config, R.drawable.widget_config, R.string.map_widget_config, "config", MapWidgetRegistry.RIGHT_CONTROL, all, 10).required(ApplicationMode.DEFAULT);
-		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.monitoring, R.string.map_widget_monitoring_services,
+		mapInfoControls.registerTopWidget(monitoringServices.createMonitoringWidget(view, map), R.drawable.widget_monitoring, R.string.map_widget_monitoring_services,
 				"monitoring_services", MapWidgetRegistry.LEFT_CONTROL, exceptCar, 12);
-		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.lock_enabled, R.string.bg_service_screen_lock, "bgService", 
+		mapInfoControls.registerTopWidget(mic.createLockInfo(map), R.drawable.widget_lock_screen, R.string.bg_service_screen_lock, "bgService", 
 				MapWidgetRegistry.LEFT_CONTROL, none, 15);
 		backToLocation = mic.createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, all, 5);
 		
 		View globus = createGlobus();
-		mapInfoControls.registerTopWidget(globus, R.drawable.globus, R.string.map_widget_map_select, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
+		mapInfoControls.registerTopWidget(globus, R.drawable.widget_globus, R.string.map_widget_map_select, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
 		
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
@@ -731,7 +731,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
 		ImageView configuration = new ImageView(map);
-		Drawable drawable = view.getResources().getDrawable(R.drawable.widget_config);
+		Drawable drawable = view.getResources().getDrawable(R.drawable.list_activities_config);
 		configuration.setBackgroundDrawable(drawable);
 		fl.addView(configuration, fparams);
 		fparams = new FrameLayout.LayoutParams(drawable.getMinimumWidth(), drawable.getMinimumHeight());

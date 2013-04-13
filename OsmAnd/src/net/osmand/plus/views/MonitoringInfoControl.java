@@ -39,7 +39,7 @@ public class MonitoringInfoControl {
 	
 	public ImageView createMonitoringWidget(final OsmandMapTileView view, final MapActivity map) {
 		final ImageView monitoringServices = new ImageView(view.getContext());
-		monitoringServices.setImageDrawable(view.getResources().getDrawable(R.drawable.monitoring));
+		monitoringServices.setImageDrawable(view.getResources().getDrawable(R.drawable.list_activities_monitoring));
 		monitoringServices.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
