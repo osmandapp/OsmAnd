@@ -194,6 +194,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		public void onDraw(Canvas canvas, RectF latlonRect, RectF tilesRect, DrawSettings settings) {
 			if (distanceMeasurementMode != 0) {
 				path.reset();
+				int marginY = originIcon.getHeight();
+				int marginX = originIcon.getWidth() / 2;
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					LatLon point = measurementPoints.get(i);
 					double lat = point.getLatitude();
@@ -201,10 +203,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					int locationX = view.getMapXForPoint(lon);
 					int locationY = view.getMapYForPoint(lat);
 					if (view.isPointOnTheRotatedMap(lat, lon)) {
-						int marginY = originIcon.getHeight();
 						canvas.rotate(-view.getRotate(), locationX, locationY);
 						canvas.drawBitmap(distanceMeasurementMode == 1? originIcon : destinationIcon, 
-								locationX, locationY - marginY, bitmapPaint);
+								locationX - marginX, locationY - marginY, bitmapPaint);
 						canvas.rotate(view.getRotate(), locationX, locationY);
 					}
 					if (i == 0) {

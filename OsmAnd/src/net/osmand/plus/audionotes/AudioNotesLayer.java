@@ -99,7 +99,7 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 					b = video;
 
 				}
-				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight() / 2, paintIcon);
+				canvas.drawBitmap(b, x - b.getWidth() / 2, y - b.getHeight(), paintIcon);
 			}
 		}
 	}
@@ -186,11 +186,15 @@ public class AudioNotesLayer extends OsmandMapLayer implements IContextMenuProvi
 		for (Recording n : plugin.getAllRecordings()) {
 			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-			if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
+			if (calculateBelongs(ex, ey, x, y, compare)) {
 				compare = radius;
 				am.add(n);
 			}
 		}
+	}
+
+	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
 	}
 	
 	@Override
