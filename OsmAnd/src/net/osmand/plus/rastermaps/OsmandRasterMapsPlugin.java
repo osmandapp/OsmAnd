@@ -202,7 +202,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerSelectedItem(R.string.layer_map, -1, R.drawable.list_activities_map_src, listener, 0);
+		adapter.registerSelectedItem(R.string.layer_map, -1, R.drawable.list_activities_globus, listener, 0);
 		adapter.registerSelectedItem(R.string.layer_overlay, overlayLayer.getMap() != null ? 1 : 0, 
 				R.drawable.list_activities_overlay_map, listener, -1);
 		adapter.registerSelectedItem(R.string.layer_underlay, underlayLayer.getMap() != null ? 1 : 0, 

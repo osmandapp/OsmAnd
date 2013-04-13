@@ -746,7 +746,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return fl;
 	}
 	private View createGlobus(){
-		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.globus);
+		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.list_activities_globus);
 		ImageView globus = new ImageView(view.getContext());
 		globus.setImageDrawable(globusDrawable);
 		globus.setOnClickListener(new View.OnClickListener() {
