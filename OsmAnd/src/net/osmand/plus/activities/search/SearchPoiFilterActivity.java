@@ -153,7 +153,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
 //				label.setTypeface(Typeface.DEFAULT);
-				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.tab_icon_favourite_menu);
+				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.list_activities_favorites);
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
 			if (model.isStandardFilter()) {

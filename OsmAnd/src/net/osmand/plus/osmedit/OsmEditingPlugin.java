@@ -154,7 +154,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			adapter.registerItem(R.string.poi_context_menu_modify, R.drawable.list_activities_poi_modify, listener, 1);
 			adapter.registerItem(R.string.poi_context_menu_delete, R.drawable.list_activities_poi_remove, listener, 2);
 		} else {
-			adapter.registerItem(R.string.context_menu_item_create_poi, R.drawable.list_view_create_poi, listener, -1);
+			adapter.registerItem(R.string.context_menu_item_create_poi, R.drawable.list_activities_create_poi, listener, -1);
 		}
 		adapter.registerItem(R.string.context_menu_item_open_bug, R.drawable.list_activities_osm_bugs, listener, -1);
 	}

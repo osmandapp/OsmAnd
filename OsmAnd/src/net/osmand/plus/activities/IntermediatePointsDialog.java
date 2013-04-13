@@ -38,8 +38,9 @@ public class IntermediatePointsDialog {
 		final List<LatLon> intermediates = targets.getIntermediatePointsWithTarget();
 		final List<String> names = targets.getIntermediatePointNamesWithTarget();
 		final boolean[] checkedIntermediates = new boolean[intermediates.size()];
+		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
 		final ArrayAdapter<LatLon> listadapter = new ArrayAdapter<LatLon>(app, 
-				changeOrder? R.layout.change_order_item : R.layout.layers_list_activity_item, R.id.title,
+				changeOrder? R.layout.change_order_item : R.layout.list_menu_item, R.id.title,
 				intermediates) {
 			@Override
 			public View getView(final int position, View convertView, ViewGroup parent) {
@@ -90,8 +91,9 @@ public class IntermediatePointsDialog {
 					});
 				} else {
 					tv.setCompoundDrawablesWithIntrinsicBounds(
-							position == intermediates.size() - 1? R.drawable.list_view_set_destination:
-								R.drawable.list_view_set_intermediate, 0, 0, 0);
+							position == intermediates.size() - 1? R.drawable.list_activities_set_destination:
+								R.drawable.list_activities_set_intermediate, 0, 0, 0);
+					tv.setCompoundDrawablePadding(padding);
 					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 					ch.setVisibility(View.VISIBLE);
 					ch.setChecked(true);

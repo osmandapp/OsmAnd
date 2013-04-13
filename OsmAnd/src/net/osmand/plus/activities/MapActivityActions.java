@@ -814,26 +814,29 @@ public class MapActivityActions implements DialogProvider {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 		Builder builder = new AlertDialog.Builder(mapActivity);
 
-		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_view_set_destination);
+		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_activities_set_destination);
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		if(targets.getPointToNavigate() != null) {
-			adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_view_set_intermediate);
+			adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_activities_set_intermediate);
 		}
-		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_view_show_route_from_here);
-		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_view_search_near_here);
-		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_view_share_location);
+		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_activities_show_route_from_here);
+		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_activities_search_near_here);
+		adapter.registerItem(R.string.context_menu_item_share_location, R.drawable.list_activities_share_location);
 		adapter.registerItem(R.string.context_menu_item_add_favorite, R.drawable.list_activities_favorites);
 		
 		
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
-
-		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.layers_list_activity_item, R.id.title,
+		final int padding = (int) (12 * mapActivity.getResources().getDisplayMetrics().density + 0.5f);
+		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.list_menu_item, R.id.title,
 				adapter.getItemNames()) {
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				// User super class to create the View
-				View v = super.getView(position, convertView, parent);
+				View v = convertView;
+				if (v == null) {
+					v = mapActivity.getLayoutInflater().inflate(R.layout.list_menu_item, null);
+				}
 				TextView tv = (TextView) v.findViewById(R.id.title);
 				tv.setText(adapter.getItemName(position));
 
@@ -843,6 +846,7 @@ public class MapActivityActions implements DialogProvider {
 				} else {
 					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
 				}
+				tv.setCompoundDrawablePadding(padding);
 
 				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 				ch.setVisibility(View.GONE);
@@ -1276,7 +1280,7 @@ public class MapActivityActions implements DialogProvider {
 		});
 		qa.addActionItem(showOnMap);
 		ActionItem setAsDestination = new ActionItem();
-		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_view_set_destination));
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
 		setAsDestination.setTitle(activity.getString(R.string.navigate_to));
 		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override

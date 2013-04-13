@@ -296,15 +296,15 @@ public class MapActivityLayers {
 		
 		final LayerMenuListener listener = new LayerMenuListener(adapter, mapView, settings);
 		Builder b = new AlertDialog.Builder(activity);
+		
+		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
 
 		ListAdapter listAdapter = new ArrayAdapter<String>(
-			    activity,
-			    R.layout.layers_list_activity_item,
-			    R.id.title,
-			    adapter.getItemNames()){
+			    activity, R.layout.list_menu_item, R.id.title, adapter.getItemNames()){
 			        @Override
 					public View getView(final int position, View convertView, ViewGroup parent) {
-			        	View v = activity.getLayoutInflater().inflate(R.layout.layers_list_activity_item, null);
+						// User super class to create the View
+						View v = activity.getLayoutInflater().inflate(R.layout.list_menu_item, null);
 			            TextView tv = (TextView)v.findViewById(R.id.title);
 			            tv.setText(adapter.getItemName(position));			            
 
@@ -314,11 +314,13 @@ public class MapActivityLayers {
 			            } else {
 			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
 			            }
+			            tv.setCompoundDrawablePadding(padding);
 
 						final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 						if(adapter.getSelection(position) == -1){
 							ch.setVisibility(View.INVISIBLE);
 						} else {
+							ch.setOnCheckedChangeListener(null);
 							ch.setChecked(adapter.getSelection(position) > 0);
 							ch.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 								@Override
