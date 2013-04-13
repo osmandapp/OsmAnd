@@ -57,7 +57,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	private int BASE_TEXT_SIZE = 170;
 	private int SHADOW_OF_LEG = 5;
-	private int CLOSE_BTN = 6;
+	private int CLOSE_BTN = 8;
 	
 	private final MapActivity activity;
 	private Drawable boxLeg;
@@ -244,9 +244,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			int y = (int) (py - view.getRotatedMapYForPoint(latLon.getLatitude(), latLon.getLongitude()));
 			x += bs.width() / 2;
 			y += bs.height() + boxLeg.getMinimumHeight() - SHADOW_OF_LEG;
-			int dclosex = x - bs.width() + CLOSE_BTN + closes.width();
-			int dclosey = y + CLOSE_BTN;
-			if(closes.intersects(dclosex - CLOSE_BTN, dclosey - CLOSE_BTN, dclosex + CLOSE_BTN, dclosey + CLOSE_BTN)) {
+			int localSize = CLOSE_BTN * 3 / 2;
+			int dclosex = x - bs.width() + closes.width();
+			int dclosey = y - closes.height() / 2;
+			if(closes.intersects(dclosex - localSize, dclosey - localSize, dclosex + localSize, dclosey + localSize)) {
 				return 2;
 			} else if (bs.contains(x, y)) {
 				return 1;
