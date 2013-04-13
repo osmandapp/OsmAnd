@@ -163,7 +163,7 @@ public class FavouritesListActivity extends ListActivity implements SearchActivi
 			ImageView icon = (ImageView) row.findViewById(R.id.favourite_icon);
 			final FavouritePoint model = getItem(position);
 			if (model.isStored()) {
-				icon.setImageResource(R.drawable.favorites);
+				icon.setImageResource(R.drawable.list_activities_favorites);
 			} else {
 				icon.setImageResource(R.drawable.opened_poi);
 			}

@@ -592,7 +592,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			final FavouritePoint model = (FavouritePoint) getChild(groupPosition, childPosition);
 			row.setTag(model);
 			if(model.isStored()){
-				icon.setImageResource(R.drawable.favorites);
+				icon.setImageResource(R.drawable.list_activities_favorites);
 			} else {
 				icon.setImageResource(R.drawable.opened_poi);
 			}
