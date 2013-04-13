@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
+		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
+		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
+		\n\t* Now accepts maps.google.com location links
+		\n\t* Added multi-window support for recent Samsung devices
+		\n\t* Kalman filter for compass
+		\n\t* Pebble watch support
+	</string>
     <string name="layer_hillshade">Hillshade layer</string>
     <string name="map_widget_gps_info">GPS info</string>
     <string name="access_arrival_time">Arrival time</string>
