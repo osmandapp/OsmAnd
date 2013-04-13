@@ -57,6 +57,10 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 		favoriteIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.poi_favourite);
 		
 	}
+	
+	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
+		return Math.abs(objx - ex) <= radius && (ey - objy) <= radius / 2 && (objy - ey) <= 3 * radius ;
+	}
 
 	@Override
 	public void destroyLayer() {
@@ -80,7 +84,7 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 					int x = view.getRotatedMapXForPoint(o.getLatitude(), o.getLongitude());
 					int y = view.getRotatedMapYForPoint(o.getLatitude(), o.getLongitude());
 					canvas.drawBitmap(favoriteIcon, x - favoriteIcon.getWidth() / 2, 
-							y - favoriteIcon.getHeight() / 2, paint);
+							y - favoriteIcon.getHeight(), paint);
 				}
 			}
 		}
@@ -93,19 +97,14 @@ public class FavoritesLayer extends OsmandMapLayer implements ContextMenuLayer.I
 	}
 	
 	public void getFavoriteFromPoint(PointF point, List<? super FavouritePoint> res) {
-		float r = 80;
+		int r = (int) (15* dm.density);
 		int ex = (int) point.x;
 		int ey = (int) point.y;
-		int w = favoriteIcon.getWidth() / 2;
-		int h = favoriteIcon.getHeight() / 2;
 		for (FavouritePoint n : favorites.getFavouritePoints()) {
 			int x = view.getRotatedMapXForPoint(n.getLatitude(), n.getLongitude());
 			int y = view.getRotatedMapYForPoint(n.getLatitude(), n.getLongitude());
-			if (Math.abs(x - ex) <= w && Math.abs(y - ey) <= h) {
-				float newr = Math.max(Math.abs(x - ex), Math.abs(y - ey));
-				if (newr < r) {
-					res.add(n);
-				}
+			if (calculateBelongs(ex, ey, x, y, r)) {
+				res.add(n);
 			}
 		}
 	}
