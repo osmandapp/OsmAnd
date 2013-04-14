@@ -1251,4 +1251,14 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="av_def_action_choose">Pasirinkti paprašius</string>
     <string name="access_arrival_time">Atvykimo laikas</string>
     <string name="map_widget_gps_info">GPS info</string>
-    </resources>
+    <string name="tip_recent_changes_1_1_4_t">"Pakeitimai 1.1.4 versijoje:
+\n\t* Klaidų ištaisymai (patobulintas maršruto skaičiavimas, paieška, garso ir vaizdo įrašymas, balso komandos, keli atvaizdavimo patobulinimai)
+\n\t* Paprastesnis kalnų šešėlių sluoksnis (reikalingas kontūrinių linijų įskiepis)
+\n\t* Dabar priima maps.google.com vietų nuorodas
+\n\t* Palaiko kelių langų funkcionalumą naujuose Samsung įrenginiuose
+\n\t* Kalmano filtras kompasui
+\n\t* Pebble laikrodžio palaikymas "</string>
+    <string name="layer_hillshade">Kalnų šešėlių sluoksnis</string>
+    <string name="osmand_play_title_30_chars">OsmAnd žemėlapiai ir navigacija</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ žemėlapiai ir navigacija</string>
+	</resources>
