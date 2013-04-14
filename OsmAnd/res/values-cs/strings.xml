@@ -1205,7 +1205,6 @@
 \n\t* Opraven modul vrstevnic a změněna jeho struktura\n\t* Balíčky stínování kopců pro modul vrstevnic\n\t* Oprava chyb (neoptimální výpočet trasy) "</string>
     <string name="prefer_in_routing_descr">Preferovat dálnice</string>
     <string name="av_def_action_choose">Vybrat při použití</string>
-    <string name="access_arrival_time"/>
     <string name="access_arrival_time">Čas příjezdu</string>
     <string name="tip_recent_changes_1_1_4_t">"Změny ve verzi 1.1.4:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)
 \n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)
