@@ -6,9 +6,12 @@
 
 <!--   <TextView android:layout_width="fill_parent" android:textSize="18dp" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:text="@string/recalculate_route_to_your_location"></TextView> -->
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:gravity="center" android:layout_height="wrap_content" android:orientation="horizontal">
-<ToggleButton android:contentDescription="@string/app_mode_car" android:textOn="" android:textOff=""  android:id="@+id/CarButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:background="@drawable/car_icon" android:layout_marginLeft="10dp" />
-<ToggleButton android:contentDescription="@string/app_mode_bicycle" android:textOn="" android:textOff="" android:id="@+id/BicycleButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/bicycle_icon"/>
-<ToggleButton android:contentDescription="@string/app_mode_pedestrian" android:textOn="" android:textOff="" android:id="@+id/PedestrianButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/pedestrian_icon"/>
+<ToggleButton android:contentDescription="@string/app_mode_car" android:textOn="" android:textOff=""  android:id="@+id/CarButton" 
+    android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" android:button="@drawable/car" />
+<ToggleButton android:contentDescription="@string/app_mode_bicycle" android:textOn="" android:textOff="" android:id="@+id/BicycleButton" 
+    android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" android:button="@drawable/bicycle"/>
+<ToggleButton android:contentDescription="@string/app_mode_pedestrian" android:textOn="" android:textOff="" android:id="@+id/PedestrianButton" 
+    android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" android:button="@drawable/pedestrian"/>
 </LinearLayout>
 
 <ScrollView android:layout_height="wrap_content" android:layout_width="fill_parent"  

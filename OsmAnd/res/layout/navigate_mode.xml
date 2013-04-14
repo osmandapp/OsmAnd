@@ -8,9 +8,12 @@
      android:layout_marginLeft="5dp" android:layout_marginRight="5dp"
      android:gravity="center" android:layout_marginTop="10dp" android:layout_marginBottom="10dp" android:text="@string/select_navigation_mode"></TextView>
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:gravity="center" android:layout_height="wrap_content" android:orientation="horizontal">
-<Button android:contentDescription="@string/app_mode_car" android:id="@+id/CarButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:background="@drawable/car_icon" android:layout_marginLeft="10dp" />
-<Button android:contentDescription="@string/app_mode_bicycle" android:id="@+id/BicycleButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/bicycle_icon"/>
-<Button android:contentDescription="@string/app_mode_pedestrian" android:id="@+id/PedestrianButton" android:layout_width="wrap_content" android:layout_height="wrap_content"  android:layout_marginLeft="10dp" android:background="@drawable/pedestrian_icon"/>
+<Button android:contentDescription="@string/app_mode_car" android:id="@+id/CarButton" 
+    	android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" android:button="@drawable/car" />
+<Button android:contentDescription="@string/app_mode_bicycle" android:id="@+id/BicycleButton" 
+    	android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" android:button="@drawable/bicycle" />
+<Button android:contentDescription="@string/app_mode_pedestrian" android:id="@+id/PedestrianButton"
+    	android:layout_width="64dp" android:layout_height="64dp"  android:layout_marginLeft="10dp" android:button="@drawable/pedestrian" />
 </LinearLayout>
 
 
