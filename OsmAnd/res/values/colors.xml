@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<color name="titlebar_background">#333333</color>
     <color name="activity_background">#5B5B5B</color>
     <color name="list_separator">#494949</color>
     <color name="activity_text">#FFFFFF</color>
