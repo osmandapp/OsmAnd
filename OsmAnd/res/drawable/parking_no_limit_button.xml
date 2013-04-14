@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item android:drawable="@drawable/poi_parking_pos_no_limit_menu_pushed" android:state_pressed="true"/>
-    <item android:drawable="@drawable/poi_parking_pos_no_limit_menu"/>
-    
-</selector>

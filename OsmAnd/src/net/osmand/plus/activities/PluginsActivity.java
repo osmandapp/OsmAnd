@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,7 +24,6 @@ public class PluginsActivity extends OsmandListActivity {
 	private List<OsmandPlugin> availablePlugins;
 	private Set<String> clickedPlugins = new LinkedHashSet<String>();
 	private Set<String> restartPlugins = new LinkedHashSet<String>();
-	private static int colorGreen = 0xff23CC6C;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,15 @@ public class PluginsActivity extends OsmandListActivity {
 		setListAdapter(new OsmandPluginsAdapter(availablePlugins));
 	}
 	
+	
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
 				
+		click(position);
+	}
+
+	private void click(int position) {
 		OsmandPlugin item = getListAdapter().getItem(position);
 		boolean enable = !restartPlugins.contains(item.getId());
 		boolean ok = OsmandPlugin.enablePlugin(((OsmandApplication) getApplication()), item, enable);
@@ -80,18 +85,27 @@ public class PluginsActivity extends OsmandListActivity {
 			}
 			OsmandPlugin plugin = getItem(position);
 			boolean toBeEnabled = restartPlugins.contains(plugin.getId());
-			int resourceId = toBeEnabled ? R.drawable.marker1_enabled : R.drawable.marker1_disabled;
 			
 			final View row = v;
+			CheckBox ch = (CheckBox) row.findViewById(R.id.check_item);
+			ch.setOnClickListener(null);
+			ch.setChecked(toBeEnabled);
+			ch.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					click(position);
+				}
+			});
 			TextView nameView = (TextView) row.findViewById(R.id.plugin_name);
 			nameView.setText(plugin.getName());
-			nameView.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.list_activities_plugin_menu_symbol), null, getResources().getDrawable(resourceId), null);
 			nameView.setContentDescription(plugin.getName() + " " + getString(toBeEnabled ? R.string.item_checked : R.string.item_unchecked));
+			
 			
 			TextView description = (TextView) row.findViewById(R.id.plugin_descr);
 			description.setText(plugin.getDescription());
-			description.setVisibility(clickedPlugins.contains(plugin.getId()) || !restartPlugins.contains(plugin.getId()) ? View.VISIBLE : View.GONE);
-			description.setTextColor(toBeEnabled? colorGreen : Color.LTGRAY);
+			description.setVisibility(clickedPlugins.contains(plugin.getId()) ||
+					!restartPlugins.contains(plugin.getId()) ? View.VISIBLE : View.GONE);
+			description.setTextColor(Color.LTGRAY);
 
 			return row;
 		}
