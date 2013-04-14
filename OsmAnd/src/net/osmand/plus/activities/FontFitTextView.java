@@ -50,7 +50,6 @@ public class FontFitTextView extends LinearLayout {
 				tp.setTextSize(tp.getTextSize() - 1);
 				tp.getTextBounds(text, 0, text.length(), rect);
 			}
-
 			if (tv.getLineCount() != lines) {
 				if (lines == 1) {
 					setGravity(Gravity.CENTER_VERTICAL);
