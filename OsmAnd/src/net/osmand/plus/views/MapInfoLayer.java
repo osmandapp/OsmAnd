@@ -723,22 +723,34 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
+	private class ConfigLayout extends FrameLayout implements MapControlUpdateable {
+		private ImageViewWidget config;
+
+		private ConfigLayout(Context c, ImageViewWidget config) {
+			super(c);
+			this.config = config;
+		}
+
+		@Override
+		public boolean updateInfo(DrawSettings drawSettings) {
+			return config.updateInfo(drawSettings);
+		}
+	}
 	
 	private View createConfiguration(){
 		final OsmandMapTileView view = map.getMapView();
 		
-		FrameLayout fl = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		final Drawable config = view.getResources().getDrawable(R.drawable.list_activities_config);
 		final Drawable configWhite = view.getResources().getDrawable(R.drawable.list_activities_config_white);
 		ImageViewWidget configuration = new ImageViewWidget(map) {
-			private boolean nightMode;
+			private boolean nm;
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				if(nightMode != this.nightMode) {
-					this.nightMode = nightMode;
+				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+				if(nightMode != this.nm) {
+					this.nm = nightMode;
 					setImageDrawable(nightMode ? configWhite : config);
 					return true;
 				}
@@ -746,6 +758,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 			}
 		};
 		configuration.setBackgroundDrawable(config);
+		FrameLayout fl = new ConfigLayout(view.getContext(), configuration) ;
 		fl.addView(configuration, fparams);
 		fparams = new FrameLayout.LayoutParams(config.getMinimumWidth(), config.getMinimumHeight());
 		progressBar = new View(view.getContext());

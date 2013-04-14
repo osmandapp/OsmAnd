@@ -21,8 +21,8 @@
     <string name="layer_hillshade">Hillshade layer</string>
     <string name="map_widget_gps_info">GPS info</string>
     <string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
+        \n\t* UI redesign
 		\n\t* Bug fixes
-		\n\t* Small UI redesign
     </string>
     <string name="access_arrival_time">Arrival time</string>
     <string name="item_checked">checked</string>

@@ -229,19 +229,24 @@ public class MapInfoWidgetsFactory {
 		final int mw = (int) compass.getMinimumWidth() ;
 		final int mh = (int) compass.getMinimumHeight() ;
 		ImageViewWidget compassView = new ImageViewWidget(map) {
-			Drawable d = compass;
 			private float cachedRotate = 0;
+			private boolean nm;
 			@Override
 			protected void onDraw(Canvas canvas) {
 				canvas.save();
 				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
-				d.draw(canvas);
+				getDrawable().draw(canvas);
 				canvas.restore();
 			}
 		
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				d = drawSettings != null && drawSettings.isNightMode() ? compassWhite : compass;
+				boolean nightMode = drawSettings != null && drawSettings.isNightMode();
+				if(nightMode != this.nm) {
+					this.nm = nightMode;
+					setImageDrawable(nightMode ? compassWhite : compass);
+					return true;
+				}
 				if(view.getRotate() != cachedRotate) {
 					cachedRotate = view.getRotate();
 					invalidate();
