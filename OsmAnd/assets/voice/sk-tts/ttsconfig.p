@@ -56,7 +56,7 @@ location_lost == ['strata satelytného signálu '].
 on_street == ['do ulice ', X] :- next_street(X).
 off_route == ['odchýlili ste sa od trasy'].
 attention == ['pozor'].
-speed_alarm == ['prekročili ste povolenú rýchlosť'].
+speed_alarm == ['prekročili ste maximálnu povolenú rýchlosť'].
 
 %% 
 nth(1, 'prvý ').
