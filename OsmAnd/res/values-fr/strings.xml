@@ -1219,4 +1219,10 @@
     <string name="layer_hillshade">Couche relief</string>
     <string name="osmand_play_title_30_chars">Cartes et navigation OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">Cartes et navigation OsmAnd+</string>
-	</resources>
+	<string name="tip_recent_changes_1_1_4_t">Changements dans 1.1.4:
+\n\t* Corrections d\'erreurs (navigation, recherche, enregistrement A/V, annonces vocales, améliorations de l\'affichage)
+\n\t* Configuration simplifiée des ombres du relief (nécessite le greffon des lignes isométriques)
+\n\t* Accepte les liens de position de maps.google.com
+\n\t* Ajout du support multi-fenêtres pour les périphériques Samsung
+\n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble</string>
+    </resources>
