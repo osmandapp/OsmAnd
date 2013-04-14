@@ -32,8 +32,8 @@ make_ut(Dist) == ['o', D, 'sa otočte naspäť'] :- distance(Dist) == D.
 make_ut == ['otočte sa naspäť'].
 make_ut_wp == ['keď to bude možné, otočte sa naspäť'].
 
-prepare_roundabout(Dist) == ['o ', D, 'buďte pripravený vojsť na kruhový objazd'] :- distance(Dist) == D.
-roundabout(Dist, _Angle, Exit) == ['o ', D, ' vojdite na kruhový objazd ', 'a opustite ho cez ', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).
+prepare_roundabout(Dist) == ['o ', D, 'buďte pripravený vojsť do kruhového objazdu'] :- distance(Dist) == D.
+roundabout(Dist, _Angle, Exit) == ['o ', D, ' vojdite do kruhového objazdu ', 'a opustite ho cez ', E, 'výjazd'] :- distance(Dist) == D, nth(Exit, E).
 roundabout(_Angle, Exit) == ['choďte cez ', E, 'výjazd'] :- nth(Exit, E).
 
 go_ahead == ['pokračujte rovno'].
@@ -53,6 +53,10 @@ route_recalc(Dist) == ['Cesta prepočítaná, vzdialenosť ', D] :- distance(Dis
 
 location_lost == ['strata satelytného signálu '].
 
+on_street == ['do ulice ', X] :- next_street(X).
+off_route == ['odchýlili ste sa od trasy'].
+attention == ['pozor'].
+speed_alarm == ['prekročili ste povolenú rýchlosť'].
 
 %% 
 nth(1, 'prvý ').
