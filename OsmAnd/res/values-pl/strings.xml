@@ -1170,4 +1170,11 @@
     <string name="map_widget_gps_info">Info GPS</string>
     <string name="layer_hillshade">Warstwa cieniująca</string>
     <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
-	</resources>
+	<string name="tip_recent_changes_1_1_4_t">"Zmiany w 1.1.4:
+\n\t* Naprawa błędów (dopieszczona nawigacja, wyszukiwarka, nagrywanie AV, instrukcje głosowe, poprawki w wyświetlaniu)
+\n\t* Łatwiejsza konfiguracja warstwy cieniującej (wymaga wtyczki rysującej poziomice)
+\n\t* Akceptowane są linki lokalizacji z maps.google.com
+\n\t* Dodane wsparcie trybu multi-window dla najnowszych urządzeń Samsunga
+\n\t* Filtr Kalmana dla kompasu
+\n\t* Wsparcie dla Peeble "</string>
+    </resources>
