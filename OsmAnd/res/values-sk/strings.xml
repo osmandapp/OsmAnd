@@ -1188,7 +1188,7 @@
     <string name="tip_recent_changes_1_1_2_t">"Zmeny vo verzii 1.1.2:
 \n\t* Vylepšenie zásuvného modulu pre Audio/video (fotografie s informáciami EXIF)
 \n\t* Opravená použiteľnosť a prepracovaný zásuvný modul pre vrstevnice
-\n\t* Hillshade packages for Contour lines plugin
+\n\t* Balíky s tieňovanými rleiéfmi pre zás. modul s vrstevnicami
 \n\t* Opravy chýb (suboptimálna navigácia) "</string>
     <string name="av_use_external_camera_descr">Použiť systémovú aplikáciu na zachytenie fotografie</string>
     <string name="av_use_external_camera">Použiť aplikáciu Fotoaparát</string>
@@ -1211,4 +1211,11 @@
     <string name="layer_hillshade">Vrstva s tieňovaným reliéfom</string>
     <string name="osmand_play_title_30_chars">OsmAnd mapy a navigácia</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapy a navigácia</string>
-	</resources>
+	<string name="tip_recent_changes_1_1_4_t">"Zmeny vo verzii 1.1.4:
+\n\t* Opravy chýb (doladená navigácia, hľadanie, audio/video záznam, hlasové povely, niekoľko vylepšení zobrazenia)
+\n\t* Jednoduchšia konfigurácia prekrývacej vrstvy s tieňovanými reliéfmi (vyžaduje zás. modul s vrstevnicami)
+\n\t* Prijímanie odkazov umiestnení z maps.google.com
+\n\t* Pridaná podpora viacerých okien pre najnovšie zariadenia Samsung
+\n\t* Kalmanov filter pre kompas
+\n\t* Podpora hodiniek Pebble "</string>
+    </resources>
