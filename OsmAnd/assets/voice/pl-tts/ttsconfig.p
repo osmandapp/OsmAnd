@@ -75,6 +75,10 @@ distance(Dist) == ['około ', X, ' kilometry '] :- Dist < 4500, D is round(Dist/
 distance(Dist) == ['około ', X, ' kilometrów '] :- Dist < 10000, D is round(Dist/1000.0), num_atom(D, X).
 distance(Dist) == [ X, ' kilometrów '] :- D is round(Dist/1000.0), num_atom(D, X).
 
+on_street == ['na', X] :- next_street(X).
+off_route == ['Znajdujesz się poza trasą'].
+attention == ['Uwaga'].
+speed_alarm == ['Przekraczasz dozwoloną prędkość'].
 
 %% resolve command main method
 %% if you are familar with Prolog you can input specific to the whole mechanism,
