@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.osmand.plus.R;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -73,13 +74,13 @@ public class StackWidgetView extends ViewGroup {
 		this.cacheStackDrawables.clear();
 	}
 
-	public void updateInfo() {
+	public void updateInfo(DrawSettings drawSettings) {
 		for (BaseMapWidget v : stackViews) {
-			v.updateInfo();
+			v.updateInfo(drawSettings);
 		}
 		// update even if collapsed to know if view becomes visible
 		for (BaseMapWidget v : collapsedViews) {
-			v.updateInfo();
+			v.updateInfo(drawSettings);
 		}
 	}
 	

@@ -2,6 +2,7 @@ package net.osmand.plus.monitoring;
 
 import java.util.EnumSet;
 
+
 import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
 import net.osmand.PlatformUtil;
@@ -24,6 +25,7 @@ import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices
 import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import org.apache.commons.logging.Log;
@@ -194,7 +196,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		monitoringControl = new TextInfoWidget(map, 0, paintText, paintSubText) {
 			long lastUpdateTime;
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = true;
 				String txt = map.getString(R.string.monitoring_control_start);
 				String subtxt = null;
@@ -235,7 +237,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}, 500);
 			}
 		};
-		monitoringControl.updateInfo();
+		monitoringControl.updateInfo(null);
 
 		// monitoringControl.addView(child);
 		monitoringControl.setOnClickListener(new View.OnClickListener() {
@@ -247,7 +249,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}
 				settings.SAVE_TRACK_TO_GPX.set(!isTrackMonitored);
 				
-				monitoringControl.updateInfo();
+				monitoringControl.updateInfo(null);
 			}
 		});
 		return monitoringControl;

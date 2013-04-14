@@ -1,8 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
+
 import net.osmand.plus.R;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -45,7 +47,7 @@ public class MiniMapWidget extends BaseMapWidget {
 	}
 
 	@Override
-	public boolean updateInfo() {
+	public boolean updateInfo(DrawSettings drawSettings) {
 		if(getVisibility() == View.VISIBLE) {
 			invalidate();
 		}

@@ -1,9 +1,9 @@
-package net.osmand.plus.views.mapwidgets;
+package net.osmand.plus.views;
 
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
 
-public interface UpdateableWidget  {
+public interface MapControlUpdateable  {
 
 	public boolean updateInfo(DrawSettings drawSettings);
 	

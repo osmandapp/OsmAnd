@@ -1,5 +1,6 @@
 package net.osmand.plus.parkingpoint;
 
+
 import java.util.Calendar;
 import java.util.EnumSet;
 
@@ -21,6 +22,7 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -453,7 +455,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			private int cachedMeters = 0;			
 			
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				LatLon parkingPoint = parkingLayer.getParkingPoint();
 				if( parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
 					OsmandMapTileView view = map.getMapView();

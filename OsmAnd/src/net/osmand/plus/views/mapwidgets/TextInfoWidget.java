@@ -1,6 +1,7 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -103,7 +104,7 @@ public class TextInfoWidget extends BaseMapWidget {
 	}
 
 	@Override
-	public boolean updateInfo() {
+	public boolean updateInfo(DrawSettings drawSettings) {
 		return false;
 	}
 	

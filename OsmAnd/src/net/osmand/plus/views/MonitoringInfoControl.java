@@ -6,10 +6,13 @@ import java.util.List;
 import net.londatiga.android.QuickAction;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.mapwidgets.ImageViewWidget;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,9 +40,23 @@ public class MonitoringInfoControl {
 		return monitoringServices;
 	}
 	
-	public ImageView createMonitoringWidget(final OsmandMapTileView view, final MapActivity map) {
-		final ImageView monitoringServices = new ImageView(view.getContext());
-		monitoringServices.setImageDrawable(view.getResources().getDrawable(R.drawable.list_activities_monitoring));
+	public ImageViewWidget createMonitoringWidget(final OsmandMapTileView view, final MapActivity map) {
+		final Drawable m = view.getResources().getDrawable(R.drawable.list_activities_monitoring);
+		final Drawable mWhite = view.getResources().getDrawable(R.drawable.list_activities_monitoring_white);
+		final ImageViewWidget monitoringServices = new ImageViewWidget(view.getContext()) {
+			private boolean nightMode;
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+				if(nightMode != this.nightMode) {
+					this.nightMode = nightMode;
+					setImageDrawable(nightMode ? mWhite : m);
+					return true;
+				}
+				return false;
+			}
+		};
+		monitoringServices.setImageDrawable(m);
 		monitoringServices.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.TurnType;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -141,7 +142,7 @@ public class NextTurnInfoWidget extends BaseMapWidget {
 	}
 
 	@Override
-	public boolean updateInfo() {
+	public boolean updateInfo(DrawSettings drawSettings) {
 		return false;
 	}
 }

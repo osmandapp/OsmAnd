@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 
 import java.util.Arrays;
 
+
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -23,6 +24,7 @@ import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RouteInfoLayer;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import android.content.Context;
@@ -54,7 +56,7 @@ public class RouteInfoWidgetsFactory {
 			TurnType straight = TurnType.valueOf(TurnType.C, true);
 
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = false;
 				if (routingHelper != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()) {
 					makeUturnWhenPossible = routingHelper.makeUturnWhenPossible() ;
@@ -137,7 +139,7 @@ public class RouteInfoWidgetsFactory {
 		final NextTurnInfoWidget nextTurnInfo = new NextTurnInfoWidget(ctx, textPaint, subtextPaint, horisontalMini) {
 			NextDirectionInfo calc1 = new NextDirectionInfo();
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = false;
 				if (routingHelper != null && routingHelper.isRouteCalculated() && routingHelper.isFollowingMode()
 						) {
@@ -225,7 +227,7 @@ public class RouteInfoWidgetsFactory {
 			private long cachedLeftTime = 0;
 			
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				int time = 0;
 				if (routingHelper != null && routingHelper.isRouteCalculated()) {
 					boolean followingMode = routingHelper.isFollowingMode();
@@ -280,7 +282,6 @@ public class RouteInfoWidgetsFactory {
 	}
 	
 	
-	
 	public TextInfoWidget createMaxSpeedControl(final MapActivity map, Paint paintText, Paint paintSubText) {
 		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
 		final OsmAndLocationProvider locationProvider = map.getMyApplication().getLocationProvider();
@@ -289,7 +290,7 @@ public class RouteInfoWidgetsFactory {
 			private float cachedSpeed = 0;
 
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				float mx = 0; 
 				if ((rh == null || !rh.isFollowingMode()) && trackingUtilities.isMapLinkedToLocation()) {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
@@ -333,7 +334,7 @@ public class RouteInfoWidgetsFactory {
 			private float cachedSpeed = 0;
 
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				Location loc = app.getLastKnownLocation();
 				// draw speed
 				if (loc != null && loc.hasSpeed()) {
@@ -399,7 +400,7 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		@Override
-		public boolean updateInfo() {
+		public boolean updateInfo(DrawSettings drawSettings) {
 			int d = getDistance();
 			if (distChanged(cachedMeters, d)) {
 				cachedMeters = d;
@@ -487,10 +488,10 @@ public class RouteInfoWidgetsFactory {
 	public MiniMapWidget createMiniMapControl(final RoutingHelper routingHelper, OsmandMapTileView view) {
 		final MiniMapWidget miniMapControl = new MiniMapWidget(view.getContext(), view) {
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = routingHelper.isFollowingMode();
 				updateVisibility(visible);
-				return super.updateInfo();
+				return super.updateInfo(drawSettings);
 			}
 		};
 		miniMapControl.setVisibility(View.GONE);
@@ -549,7 +550,7 @@ public class RouteInfoWidgetsFactory {
 			}
 			
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean visible = false;
 				int locimminent = -1;
 				int[] loclanes = null;
@@ -624,7 +625,7 @@ public class RouteInfoWidgetsFactory {
 			private Bitmap img = null;
 			private int imgId;
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 				boolean cams = settings.SHOW_CAMERAS.get();
 				boolean visible = false;

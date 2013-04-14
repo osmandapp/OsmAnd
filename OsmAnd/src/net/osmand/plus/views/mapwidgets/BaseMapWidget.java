@@ -2,6 +2,7 @@ package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.views.ShadowText;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -82,7 +83,7 @@ public abstract class BaseMapWidget extends View implements UpdateableWidget {
 	}
 	
 	@Override
-	public boolean updateInfo() { return false; }
+	public boolean updateInfo(DrawSettings drawSettings) { return false; }
 	
 	protected boolean updateVisibility(boolean visible) {
 		if (visible != (getVisibility() == View.VISIBLE)) {

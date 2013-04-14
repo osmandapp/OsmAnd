@@ -688,14 +688,14 @@ public class MapInfoLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RectF latlonBounds, RectF tilesRect, DrawSettings drawSettings) {
 		updateColorShadowsOfText(drawSettings);
 		// update data on draw
-		rightStack.updateInfo();
-		leftStack.updateInfo();
-		lanesControl.updateInfo();
-		alarmControl.updateInfo();
+		rightStack.updateInfo(drawSettings);
+		leftStack.updateInfo(drawSettings);
+		lanesControl.updateInfo(drawSettings);
+		alarmControl.updateInfo(drawSettings);
 		for (int i = 0; i < statusBar.getChildCount(); i++) {
 			View v = statusBar.getChildAt(i);
 			if (v instanceof UpdateableWidget) {
-				((UpdateableWidget) v).updateInfo();
+				((UpdateableWidget) v).updateInfo(drawSettings);
 			}
 		}
 	}
@@ -729,12 +729,25 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		FrameLayout fl = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
-		ImageView configuration = new ImageView(map);
-		Drawable drawable = view.getResources().getDrawable(R.drawable.list_activities_config);
-		configuration.setBackgroundDrawable(drawable);
+		final Drawable config = view.getResources().getDrawable(R.drawable.list_activities_config);
+		final Drawable configWhite = view.getResources().getDrawable(R.drawable.list_activities_config_white);
+		ImageViewWidget configuration = new ImageViewWidget(map) {
+			private boolean nightMode;
+			
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+				if(nightMode != this.nightMode) {
+					this.nightMode = nightMode;
+					setImageDrawable(nightMode ? configWhite : config);
+					return true;
+				}
+				return false;
+			}
+		};
+		configuration.setBackgroundDrawable(config);
 		fl.addView(configuration, fparams);
-		fparams = new FrameLayout.LayoutParams(drawable.getMinimumWidth(), drawable.getMinimumHeight());
+		fparams = new FrameLayout.LayoutParams(config.getMinimumWidth(), config.getMinimumHeight());
 		progressBar = new View(view.getContext());
 		fl.addView(progressBar, fparams);
 		fl.setOnClickListener(new View.OnClickListener() {
@@ -746,8 +759,22 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return fl;
 	}
 	private View createGlobus(){
-		Drawable globusDrawable = view.getResources().getDrawable(R.drawable.list_activities_globus);
-		ImageView globus = new ImageView(view.getContext());
+		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.list_activities_globus);
+		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.list_activities_globus_white);
+		ImageView globus = new ImageViewWidget(view.getContext()) {
+			private boolean nightMode;
+
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+				if(nightMode != this.nightMode) {
+					this.nightMode = nightMode;
+					setImageDrawable(nightMode ? globusDrawableWhite : globusDrawable);
+					return true;
+				}
+				return false;
+			}
+		};;
 		globus.setImageDrawable(globusDrawable);
 		globus.setOnClickListener(new View.OnClickListener() {
 			@Override

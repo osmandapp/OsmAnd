@@ -13,6 +13,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.ShadowText;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -42,7 +43,7 @@ public class MapInfoWidgetsFactory {
 			private int cachedAlt = 0;
 
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings d) {
 				// draw speed
 				Location loc = map.getMyApplication().getLastKnownLocation();
 				if (loc != null && loc.hasAltitude()) {
@@ -67,7 +68,7 @@ public class MapInfoWidgetsFactory {
 			}
 		};
 		altitudeControl.setText(null, null);
-		altitudeControl.setImageDrawable(map.getResources().getDrawable(R.drawable.info_altitude));
+		altitudeControl.setImageDrawable(map.getResources().getDrawable(R.drawable.widget_altitude));
 		return altitudeControl;
 	}
 	
@@ -79,7 +80,7 @@ public class MapInfoWidgetsFactory {
 			private int f = -1;
 
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings d) {
 				GPSInfo gpsInfo = loc.getGPSInfo();
 				if(gpsInfo.usedSatellites != u || gpsInfo.foundSatellites != f) {
 					u = gpsInfo.usedSatellites;
@@ -90,17 +91,27 @@ public class MapInfoWidgetsFactory {
 				return false;
 			}
 		};
-		gpsInfoControl.setImageDrawable(app.getResources().getDrawable(R.drawable.info_gps_info));
+		gpsInfoControl.setImageDrawable(app.getResources().getDrawable(R.drawable.widget_gps_info));
 		gpsInfoControl.setText(null, null);
 		return gpsInfoControl;
 	}
 	
 
+
+
 	public ImageView createBackToLocation(final MapActivity map){
+		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
+		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
 		ImageView backToLocation = new ImageViewWidget(map) {
+			private boolean nightM;
 			
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+				if(nightM != nightMode) {
+					nightM = nightMode;
+					setImageDrawable(nightM ? backToLocWhite : backToLoc);
+				}
 				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
 				enabled = enabled && !map.getMapViewTrackingUtilities().isMapLinkedToLocation();
 				setEnabled(enabled);
@@ -117,12 +128,34 @@ public class MapInfoWidgetsFactory {
 		});
 		return backToLocation;
 	}
+	
 	private static boolean isScreenLocked = false;
+	private Drawable lockEnabled;
+	private Drawable lockDisabled;
 	public ImageView createLockInfo(final MapActivity map) {
 		final OsmandMapTileView view = map.getMapView();
-		final ImageView lockView = new ImageView(view.getContext());
-		final Drawable lockEnabled = view.getResources().getDrawable(R.drawable.lock_enabled);
-		final Drawable lockDisabled = view.getResources().getDrawable(R.drawable.lock_disabled);
+		final Drawable lockEnabledNormal = view.getResources().getDrawable(R.drawable.lock_enabled);
+		final Drawable lockDisabledNormal = view.getResources().getDrawable(R.drawable.lock_disabled);
+		final Drawable lockEnabledWhite = view.getResources().getDrawable(R.drawable.lock_enabled_white);
+		final Drawable lockDisabledWhite = view.getResources().getDrawable(R.drawable.lock_disabled_white);
+		lockDisabled = lockDisabledNormal;
+		lockEnabled = lockEnabledNormal;
+		final ImageViewWidget lockView = new ImageViewWidget(view.getContext()) {
+			private boolean nightMode;
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
+				if(nightMode != this.nightMode) {
+					this.nightMode = nightMode;
+					lockDisabled = drawSettings.isNightMode() ? lockDisabledWhite : lockDisabledNormal;
+					lockEnabled = drawSettings.isNightMode() ? lockEnabledWhite : lockEnabledNormal;
+					setImageDrawable(isScreenLocked ? lockEnabled : lockDisabled);
+					return true;
+				}
+				return false;
+			}
+		};
+		
 		if (isScreenLocked) {
 			map.getMapViewTrackingUtilities().backToLocationImpl();
 			lockView.setBackgroundDrawable(lockEnabled);
@@ -190,22 +223,25 @@ public class MapInfoWidgetsFactory {
 	
 	
 	public ImageViewWidget createCompassView(final MapActivity map){
-		final Drawable compass = map.getResources().getDrawable(R.drawable.compass);
+		final OsmandMapTileView view = map.getMapView();
+		final Drawable compass = map.getResources().getDrawable(R.drawable.list_activities_compass);
+		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.list_activities_compass_white);
 		final int mw = (int) compass.getMinimumWidth() ;
 		final int mh = (int) compass.getMinimumHeight() ;
-		final OsmandMapTileView view = map.getMapView();
 		ImageViewWidget compassView = new ImageViewWidget(map) {
+			Drawable d = compass;
 			private float cachedRotate = 0;
 			@Override
 			protected void onDraw(Canvas canvas) {
 				canvas.save();
 				canvas.rotate(view.getRotate(), mw / 2, mh / 2);
-				compass.draw(canvas);
+				d.draw(canvas);
 				canvas.restore();
 			}
 		
 			@Override
-			public boolean updateInfo() {
+			public boolean updateInfo(DrawSettings drawSettings) {
+				d = drawSettings != null && drawSettings.isNightMode() ? compassWhite : compass;
 				if(view.getRotate() != cachedRotate) {
 					cachedRotate = view.getRotate();
 					invalidate();
@@ -258,7 +294,7 @@ public class MapInfoWidgetsFactory {
 		}
 		
 		@Override
-		public boolean updateInfo() {
+		public boolean updateInfo(DrawSettings d) {
 			String text = null;
 			if (routingHelper != null && routingHelper.isRouteCalculated()) {
 				if (routingHelper.isFollowingMode()) {
