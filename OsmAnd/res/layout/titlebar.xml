@@ -3,31 +3,19 @@
     android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/tab_title_headline_background"
+    android:background="@color/titlebar_background"
     android:orientation="horizontal" >
 
-    <Button
+    <ImageButton
         android:id="@+id/back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="top"
-        android:background="@drawable/tab_back_button"
+        android:src="@drawable/arrow_back"
         android:text="" />
-
-    <!--
-            Button
-            android:id="@+id/extra_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="top"
-            android:background="@drawable/tab_back_button"
-            android:visibility="gone"
-            android:text="" /
-    -->
 
     <net.osmand.plus.activities.FontFitTextView
         android:id="@+id/title_text"

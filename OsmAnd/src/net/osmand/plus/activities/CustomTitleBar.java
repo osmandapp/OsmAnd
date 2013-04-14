@@ -82,7 +82,7 @@ public class CustomTitleBar {
 		public void init(View wnd) {
 			title = (FontFitTextView) wnd.findViewById(R.id.title_text);
 			title.setText(titleString);
-			Button backButton = (Button) wnd.findViewById(R.id.back_button);
+			View backButton = wnd.findViewById(R.id.back_button);
 			backButton.setContentDescription(wnd.getContext().getString(R.string.close));
 			backButton.setOnClickListener(new View.OnClickListener() {
 				@Override

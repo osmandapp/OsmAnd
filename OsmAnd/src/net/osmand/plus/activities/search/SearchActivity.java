@@ -93,7 +93,7 @@ public class SearchActivity extends TabActivity implements OsmAndLocationListene
 		setContentView(R.layout.search_main);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		
-		Button backButton = (Button) findViewById(R.id.search_back_button);
+		View backButton = (View) findViewById(R.id.search_back_button);
 		backButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

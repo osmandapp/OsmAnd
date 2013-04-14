@@ -6,15 +6,16 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" android:orientation="vertical">
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@drawable/tab_title_headline_background">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/titlebar_background">
 
-            <Button
+            <ImageButton
                 android:id="@+id/search_back_button"
 		android:contentDescription="@string/close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="top"
-                android:background="@drawable/tab_back_button"
+                android:layout_marginTop="4dp"
+                android:src="@drawable/arrow_back"
                 android:text="" />
 
    		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

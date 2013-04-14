@@ -114,7 +114,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.download_index);
 		// recreation upon rotation is prevented in manifest file
-		Button b = (Button) findViewById(R.id.search_back_button);
+		View b = findViewById(R.id.search_back_button);
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
