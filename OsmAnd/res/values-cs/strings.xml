@@ -1090,7 +1090,7 @@
 	<string name="delete_target_point">Smazat cílový bod</string>
 	<string name="intermediate_point">Bod trasy %1$s</string>
     <string name="map_widget_show_destination_arrow">Zobrazit směr do cíle</string>
-    <string name="enable_plugin_monitoring_services">"Zapněte modul sledování (záznam trasy, přímý přenos), abyste mohli využívat služeb sledování na pozadí "</string>
+    <string name="enable_plugin_monitoring_services">Zapněte modul \"služba na pozadí\", pro záznam trasy a přímý přenos souřadnic</string>
     <string name="non_optimal_route_calculation">Počítat možná méně výhodnout trasu na dlouhé vzdálenosti</string>
     <string name="gps_not_available">Prosím zapněte GPS přijímač v nastavení</string>
     <string name="rendering_attr_roadColors_description">Vyberte barevné schéma:</string>
@@ -1205,4 +1205,16 @@
 \n\t* Opraven modul vrstevnic a změněna jeho struktura\n\t* Balíčky stínování kopců pro modul vrstevnic\n\t* Oprava chyb (neoptimální výpočet trasy) "</string>
     <string name="prefer_in_routing_descr">Preferovat dálnice</string>
     <string name="av_def_action_choose">Vybrat při použití</string>
+    <string name="access_arrival_time"/>
+    <string name="access_arrival_time">Čas příjezdu</string>
+    <string name="tip_recent_changes_1_1_4_t">"Změny ve verzi 1.1.4:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)
+\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)
+\n\t* Podpora odkazů maps.google.com\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
+    <string name="layer_hillshade">Stínování</string>
+    <string name="map_widget_gps_info">Info o GPS</string>
+    <string name="map_view">Mapa</string>
+    <string name="osmand_play_title_30_chars">OsmAnd mapa a navigace</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapa a navigace</string>
+	<string name="item_checked">zvoleno</string>
+    <string name="item_unchecked">nezvoleno</string>
     </resources>
