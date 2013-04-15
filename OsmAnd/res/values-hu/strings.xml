@@ -1167,4 +1167,14 @@
     <string name="item_unchecked">kijelöletlen</string>
     <string name="map_view">Térkép</string>
     <string name="av_def_action_choose">Mindig rákérdez</string>
-    </resources>
+    <string name="tip_recent_changes_1_1_4_t">"Változások az 1.1.4 verzióban:
+\n\t* Hibajavítások (javított útvonaltervezés, keresés, hang és videofelvétel, hangutasítások, néhány megjelenítési hiba)\n\t* Egyszerűbben bekapcsolható domborzatárnyékolás (Szintvonalak (Contour Lines) bővítmény szükséges hozzá)
+\n\t* Az OsmAnd már elfogadja a maps.google.com helyhivatkozásokat
+\n\t* Többablakos támogatás az újabb Samsung eszközökhöz
+\n\t* Iránytűhöz Kalman-szűrő
+\n\t* Pebble óra támogatás "</string>
+    <string name="layer_hillshade">Domborzatárnyékolás réteg</string>
+    <string name="map_widget_gps_info">GPS infó</string>
+    <string name="osmand_play_title_30_chars">OsmAnd térkép és navigáció</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ térkép és navigáció</string>
+	</resources>
