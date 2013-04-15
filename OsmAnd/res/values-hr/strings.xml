@@ -142,7 +142,7 @@
 	<string name="map_widget_back_to_loc">Gdje sam</string>
 	<string name="map_widget_lock_screen">Zaključaj zaslon</string>
 	<string name="map_widget_compass">Kompas</string>
-	<string name="map_widget_top_stack">Traka stanja</string>
+	<string name="map_widget_top_stack">Statusna traka</string>
 	<string name="map_widget_reset">Resetiraj na zadano</string>
 	<string name="map_widget_right_stack">Desni panel:</string>
 	<string name="map_widget_left_stack">Lijevi panel:</string>
@@ -193,8 +193,8 @@
 	<string name="online_map_settings">Online karte</string>
 	<string name="map_settings">Postavke karte</string>
 	<string name="extra_settings">Napredne postavke</string>
-	<string name="plugins_screen">Plugins</string>
-	<string name="prefs_plugins">Plugins</string>
+	<string name="plugins_screen">Dodaci</string>
+	<string name="prefs_plugins">Dodaci</string>
 	<string name="send_files_to_osm">Poslati GPX datoteke na OSM?</string>
 	<string name="help">Pomoć</string>
 	<string name="back_to_location">Natrag na poziciju</string>
@@ -232,7 +232,7 @@
 	<string name="osmand_parking_delete_confirm">Želite li ukloniti lokaciju parkiranog automobila?</string>
 	<string name="osmand_parking_add_event">Dodaj oznaku u kalendar</string>
 	<string name="osmand_parking_position_name">Parkirno mjesto</string>
-	<string name="osmand_parking_plugin_description">Ovaj plugin omogućuje da pohranite lokaciju svog parkiranog automobila.</string>
+	<string name="osmand_parking_plugin_description">Ovaj dodatak omogućuje da zabilježite lokaciju parkiranog automobila.</string>
 	<string name="context_menu_item_add_parking_point">Označite kao parkirno mjesto</string>
 	<string name="route_kl">Držite se lijevo i vozite</string>
 	<string name="route_kr">Držite se desno i vozite</string>
@@ -243,7 +243,7 @@
 	<string name="transport_search_desc">Potraži prijevoz</string>
 	<string name="unknown_from_location">Polazna točka još nije određena</string>
 	<string name="unknown_location">Pozicija još nije poznata</string>
-	<string name="select_plugin_to_activate">Dodirnite plugin za uključivanje ili isključivanje. (Zahtjeva ponovno pokretanje.)</string>
+	<string name="select_plugin_to_activate">Dodirnite \"dodatak\", za uključivanje ili isključivanje. (Može zahtijevati ponovno pokretanje.)</string>
 	<string name="gpx_visibility_txt">Vidljivost</string>
 	<string name="gpx_tags_txt">Oznake</string>
 	<string name="gpx_description_txt">Opis</string>
@@ -596,12 +596,12 @@
     <string name="max_speed_none">bez</string>
     <string name="srtm_paid_version_msg">Molimo vas da razmislite o kupnji dodataka za prikaz Slojnica u Google Play trgovini kako biste podržati daljnji razvoj.</string>
     <string name="srtm_paid_version_title">Dodatak Slojnice</string>
-    <string name="recording_playing">Audio reprodukcija od odabranog zapisa.\n%1$s</string>
+    <string name="recording_playing">Trenutno se reproducira zvuk od određenog snimanja.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Promjene u 1.1.0:
 \n\t* Dodatak za mjerenje udaljenosti
 \n\t* Dodatak za zvučne/video zapise\n\t* Dodatak za Slojnice
 \n\t* Ispravljene greške
-\n\t* \'Obilazak\' opcija stila karte sa više detalja, novi izgled ceste, više kontrasta, i planinsko hodanje (SAC skala) option
+\n\t* \'Obilazak\' stil karte sa više detalja, novi izgled ceste, više kontrasta, i planinsko hodanje (SAC skala) option
 \n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd dodatak za offline slojnice</string>
     <string name="srtm_plugin_name">Dodatak za Slojnice</string>
@@ -880,4 +880,14 @@
 	<string name="offline_edition_descr">Uvijek koristi offline uređivanje</string>
 	<string name="update_poi_does_not_change_indexes">POI promjene unutar aplikacije ne utječu na datoteke preuzete karte , promjene se pohranjuju u lokalnu datoteku.</string>
 	<string name="local_openstreetmap_delete">Izbriši promjene</string>
-	</resources>
+	<string name="prefs_plugins_descr">Dodaci aktiviraju napredne postavke i dodatne funkcije</string>
+	<string name="debugging_and_development">OsmAnd razvoj</string>
+	<string name="recording_open_external_player">Otvorite vanjski svirač</string>
+    <string name="position_on_map_descr">Odaberite lokaciju pozicije oznake na karti</string>
+	<string name="position_on_map">Oznaka pozicije</string>
+	<string name="enable_plugin_monitoring_services">Omogućite dodatak za bilježenje položaja (GPX snimanje, online praćenje)</string>
+    <string name="intermediate_point_too_far">Međutočka %1$s je predaleko od najbliže ceste.</string>
+    <string name="arrived_at_intermediate_point">Stigli ste na međutočku</string>
+    <string name="context_menu_item_intermediate_point">Dodaj kao međutočku</string>
+    <string name="map_widget_intermediate_distance">Međutočka</string>
+    </resources>
