@@ -651,4 +651,6 @@
     <string name="map_view">Kart</string>
     <string name="prefer_motorways">Foretrekk motorveier</string>
 	<string name="prefer_in_routing_title">Foretrekk …</string>
-	</resources>
+	<string name="prefer_in_routing_descr">Foretrekk motorveier</string>
+    <string name="max_speed_none">ingen</string>
+    </resources>
