@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -646,4 +646,9 @@
 	<string name="edit_filter_create_message">Filter {0} har blitt opprettet</string>
 	<string name="default_buttons_selectall">Velg alle</string>
 	<string name="email">E-post</string>
-</resources>
+<string name="map_widget_gps_info">GPS-info</string>
+    <string name="access_arrival_time">Ankomsttid</string>
+    <string name="map_view">Kart</string>
+    <string name="prefer_motorways">Foretrekk motorveier</string>
+	<string name="prefer_in_routing_title">Foretrekk …</string>
+	</resources>
