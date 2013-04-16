@@ -3,6 +3,7 @@
 SCRIPT_LOC="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 NAME=$(basename $(dirname "${BASH_SOURCE[0]}") )
 
+
 if [ ! -d "$ANDROID_SDK" ]; then
 	echo "ANDROID_SDK is not set"
 	exit
@@ -19,5 +20,6 @@ if [ -z "$OSMAND_X86_ONLY" ] && [ -z "$OSMAND_ARM_ONLY" ] && [ -z "$OSMAND_ARMv5
 	BUILD_ALL=1
 	echo "BUILD_ALL set to true"
 fi
-export BUILD_ONLY_OLD_LIB
+export BUILD_ONLY_OLD_LIB=1
+"$SCRIPT_LOC/../../core/externals/configure.sh"
 (cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j`nproc`)

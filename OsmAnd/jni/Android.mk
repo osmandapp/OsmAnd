@@ -1,11 +1,5 @@
 ifdef BUILD_ONLY_OLD_LIB
-# TODO
-	OSMAND_MAKEFILES := \
-	$(all-subdir-makefiles) \
-	$(call my-dir)/../../../jni/Android.mk \
-	$(call my-dir)/../../../core/Android.mk \
-	$(call all-makefiles-under,$(call my-dir)/../../../core/externals) \
-	$(call my-dir)/../../../core/utils/Android.mk
+OSMAND_MAKEFILES := $(all-subdir-makefiles) $(call all-makefiles-under,$(call my-dir)/../../../core/targets/android)
 else 
 OSMAND_MAKEFILES := \
 	$(all-subdir-makefiles) \
