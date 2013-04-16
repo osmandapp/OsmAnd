@@ -423,7 +423,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="free_version_title">Kostenlose Version</string>
 	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung</string>
 	<string name="index_name_north_america">Nordamerika</string>
-	<string name="index_name_us">Nordamerika - Vereinigte Staaten</string>
+	<string name="index_name_us">Nordamerika - USA</string>
 	<string name="index_name_central_america">Zentralamerika</string>
 	<string name="index_name_south_america">Südamerika</string>
 	<string name="index_name_europe">Europa</string>
@@ -610,7 +610,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="local_indexes_cat_voice">Sprachansagen (Aufnahmen)</string>
 	<string name="local_indexes_cat_gpx">GPX-Daten</string>
 	<string name="local_indexes_cat_tile">Online- und Kachel-Karten</string>
-	<string name="local_indexes_cat_map">Offline-Karten (Vektor)</string>
+	<string name="local_indexes_cat_map">Offline-Karten</string>
 	<string name="local_indexes_cat_poi">POI-Daten</string>
 	<string name="ttsvoice">TTS Sprachansage</string>
 	<string name="search_offline_clear_search">Neue Suche</string>
