@@ -890,4 +890,29 @@
     <string name="arrived_at_intermediate_point">Stigli ste na međutočku</string>
     <string name="context_menu_item_intermediate_point">Dodaj kao međutočku</string>
     <string name="map_widget_intermediate_distance">Međutočka</string>
-    </resources>
+    <string name="tip_recent_changes_1_1_4_t">Promjene u 1.1.4:\n\t* Redizajn korisničkog sučelja
+\n\t* Ispravljeni bugovi</string>
+    <string name="tip_recent_changes_1_1_2_t">Promjene u inačici 1.1.2:
+\n\t* Audio/video plugin enhancement (photos with EXIF information)
+\n\t* Usability fixed and restructured Contour lines plugin
+\n\t* Hillshade packages for Contour lines plugin
+\n\t* Ispravljeni bugovi</string>
+    <string name="tip_recent_changes_0_8_2_t">"Promjene u inačici 0.8.2:
+\n\t* Poboljšana navigacija
+\n\t* Dynamic map widgets
+\n\t* Map settings moved to map screen
+\n\t* Lock screen button with logging services
+\n\t* Fixed Arabic, Kannada scripting and RTL languages "</string>
+	<string name="osmand_play_title_30_chars">OsmAnd Karte &amp; Navigacija</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Karte &amp; Navigacija</string>
+	<string name="tip_update_index">Ažuriranje offline podataka</string>
+	<string name="global_app_allocated_memory_descr">Memorija u uporabi %1$s MB (Android %2$s MB, Dalvik %3$s MB).</string>
+	<string name="global_app_allocated_memory">Memorija u uporabi</string>
+	<string name="native_app_allocated_memory">Ukupna memorija</string>
+	<string name="update_downlod_list">Osviježi popis</string>
+	<string name="osmand_parking_delete">Izbriši oznaku za parking</string>
+	<string name="osmand_parking_position_description_add">Uzmite auto s parkirališta:</string>
+	<string name="osmand_parking_plugin_name">Lokacija parkiranja dodatak</string>
+	<string name="context_menu_item_delete_parking_point">Izbriši oznaku za parking</string>
+	<string name="route_roundabout">Kružni tok: koristite %1$d izlaz i nastavite voziti</string>
+	</resources>
