@@ -477,7 +477,7 @@ public class MapRenderRepositories {
 				}
 			}
 			renderingReq.saveState();
-			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage) : null;
+			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
 
 			// prevent editing
 			requestedBox = new RotatedTileBox(tileRect);

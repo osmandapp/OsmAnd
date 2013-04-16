@@ -612,14 +612,14 @@ public class SettingsActivity extends PreferenceActivity implements OnPreference
 
 				@Override
 				protected Void doInBackground(Void... params) {
-					NativeOsmandLibrary.getLibrary(storage);
+					NativeOsmandLibrary.getLibrary(storage, getMyApplication());
 					return null;
 				}
 
 				@Override
 				protected void onPostExecute(Void result) {
 					progressDlg.dismiss();
-					if (!NativeOsmandLibrary.isNativeSupported(storage)) {
+					if (!NativeOsmandLibrary.isNativeSupported(storage, getMyApplication())) {
 						AccessibleToast.makeText(SettingsActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				};

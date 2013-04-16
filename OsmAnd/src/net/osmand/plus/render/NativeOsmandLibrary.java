@@ -3,6 +3,8 @@ package net.osmand.plus.render;
 
 import net.osmand.NativeLibrary;
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ClientContext;
+import net.osmand.plus.Version;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
@@ -23,7 +25,7 @@ public class NativeOsmandLibrary extends NativeLibrary {
 		}
 	}
 
-	public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage) {
+	public static NativeOsmandLibrary getLibrary(RenderingRulesStorage storage, ClientContext ctx) {
 		if (!isLoaded()) {
 			synchronized (NativeOsmandLibrary.class) {
 				if (!isLoaded()) {
@@ -43,14 +45,18 @@ public class NativeOsmandLibrary extends NativeLibrary {
 						}
 						final String libCpuSuffix = cpuHasNeonSupport() ? "_neon" : "";
 						log.debug("Loading native libraries..."); //$NON-NLS-1$
-						System.loadLibrary("Qt5Core" + libCpuSuffix);
-						System.loadLibrary("Qt5Network" + libCpuSuffix);
-						System.loadLibrary("Qt5Concurrent" + libCpuSuffix);
-						System.loadLibrary("Qt5Sql" + libCpuSuffix);
-						System.loadLibrary("Qt5Xml" + libCpuSuffix);
-						System.loadLibrary("OsmAndCore" + libCpuSuffix);
-						System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
-						System.loadLibrary("OsmAndJNI" + libCpuSuffix);
+						if(Version.isOldCoreVersion(ctx)) {
+							System.loadLibrary("osmand" + libCpuSuffix);
+						} else {
+							System.loadLibrary("Qt5Core" + libCpuSuffix);
+							System.loadLibrary("Qt5Network" + libCpuSuffix);
+							System.loadLibrary("Qt5Concurrent" + libCpuSuffix);
+							System.loadLibrary("Qt5Sql" + libCpuSuffix);
+							System.loadLibrary("Qt5Xml" + libCpuSuffix);
+							System.loadLibrary("OsmAndCore" + libCpuSuffix);
+							System.loadLibrary("OsmAndCoreUtils" + libCpuSuffix);
+							System.loadLibrary("OsmAndJNI" + libCpuSuffix);
+						}
 						log.debug("Creating NativeOsmandLibrary instance..."); //$NON-NLS-1$
 						library = new NativeOsmandLibrary();
 						log.debug("Initializing rendering rules storage..."); //$NON-NLS-1$
@@ -76,9 +82,9 @@ public class NativeOsmandLibrary extends NativeLibrary {
 		return isNativeSupported != null;  
 	}
 	
-	public static boolean isNativeSupported(RenderingRulesStorage storage) {
+	public static boolean isNativeSupported(RenderingRulesStorage storage, ClientContext ctx) {
 		if(storage != null) {
-			getLibrary(storage);
+			getLibrary(storage, ctx);
 		}
 		return isSupported();
 	}

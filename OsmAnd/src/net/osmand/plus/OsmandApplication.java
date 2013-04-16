@@ -56,7 +56,6 @@ import android.os.Message;
 import android.text.format.DateFormat;
 import android.widget.Toast;
 
-import com.bidforfix.andorid.BidForFixHelper;
 
 public class OsmandApplication extends Application implements ClientContext {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
@@ -485,7 +484,7 @@ public class OsmandApplication extends Application implements ClientContext {
 					osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 					startDialog.startTask(getString(R.string.init_native_library), -1);
 					RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
-					boolean initialized = NativeOsmandLibrary.getLibrary(storage) != null;
+					boolean initialized = NativeOsmandLibrary.getLibrary(storage, this) != null;
 					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 					if (!initialized) {
 						LOG.info("Native library could not be loaded!");
