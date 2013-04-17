@@ -1109,4 +1109,7 @@
 <string name="map_widget_gps_info">GPS дані</string>
     <string name="layer_recordings">Аудіо записи</string>
     <string name="live_monitoring_mode_off">Ввімкнути трекінг\nв реальному режимі</string>
+	<string name="tip_recent_changes_1_1_4_t">Зміни в 1.1.4\n\t* Редизайн\n\t* Виправлені помилки</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Мапи і Навігація</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапи і Навігація</string>
 	</resources>
