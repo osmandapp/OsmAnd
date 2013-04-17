@@ -1132,4 +1132,6 @@
     <string name="access_arrival_time">Время прибытия</string>
 	<string name="map_widget_gps_info">Информация GPS</string>
     <string name="max_speed_none">нет</string>
-</resources>
+<string name="tip_recent_changes_1_1_4_t">"Изменения в 1.1.4:\n\t* переработан интерфейс\n\t* исправление ошибок "</string>
+    <string name="layer_hillshade">Слой рельефа местности</string>
+    </resources>
