@@ -1157,7 +1157,14 @@
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2: "</string>
+    <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2:
+\n\t* Naprawa błędów (dopieszczona nawigacja, wyszukiwarka, nagrywanie AV, instrukcje głosowe, poprawki w wyświetlaniu)
+\n\t* Łatwiejsza konfiguracja warstwy cieniującej (wymaga wtyczki rysującej poziomice)
+\n\t* Akceptowane są linki lokalizacji z maps.google.com
+\n\t* Nowy widget (dane GPS)
+\n\t* Dodane wsparcie trybu multi-window dla najnowszych urządzeń Samsunga
+\n\t* Filtr Kalmana dla kompasu
+\n\t* Wsparcie dla Peeble "</string>
     <string name="max_speed_none">brak</string>
     <string name="prefer_in_routing_descr">Preferuj autostrady</string>
     <string name="prefer_motorways">Preferuj autostrady</string>
@@ -1171,10 +1178,6 @@
     <string name="layer_hillshade">Warstwa cieniująca</string>
     <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
 	<string name="tip_recent_changes_1_1_4_t">"Zmiany w 1.1.4:
-\n\t* Naprawa błędów (dopieszczona nawigacja, wyszukiwarka, nagrywanie AV, instrukcje głosowe, poprawki w wyświetlaniu)
-\n\t* Łatwiejsza konfiguracja warstwy cieniującej (wymaga wtyczki rysującej poziomice)
-\n\t* Akceptowane są linki lokalizacji z maps.google.com
-\n\t* Dodane wsparcie trybu multi-window dla najnowszych urządzeń Samsunga
-\n\t* Filtr Kalmana dla kompasu
-\n\t* Wsparcie dla Peeble "</string>
+\n\t* Redesign interfejsu
+\n\t* Naprawa błędów "</string>
     </resources>
