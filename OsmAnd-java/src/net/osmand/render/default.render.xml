@@ -692,6 +692,7 @@
 		<filter minzoom="14" icon="bus_station" tag="amenity" value="bus_station"/>
 		<filter minzoom="16" maxzoom="16" icon="bus_stop_small" tag="highway" value="bus_stop"/>
 			<filter minzoom="17" icon="bus_stop" tag="highway" value="bus_stop"/>
+		<filter minzoom="17" icon="bus_stop" tag="platform" value="public_transport"/>
 		<filter minzoom="15" icon="gate2" tag="highway" value="gate"/>
 		<filter minzoom="15" icon="gate2" tag="barrier" value="gate"/>
 		<filter minzoom="16" icon="liftgate" tag="barrier" value="lift_gate"/>
