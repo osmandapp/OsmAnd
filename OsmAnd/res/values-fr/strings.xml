@@ -1225,4 +1225,6 @@
 \n\t* Accepte les liens de position de maps.google.com
 \n\t* Ajout du support multi-fenêtres pour les appareils Samsung
 \n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble "</string>
-    </resources>
+    <string name="save_current_track_widget">Sauvegarder
+\n la trace GPX courante</string>
+	</resources>
