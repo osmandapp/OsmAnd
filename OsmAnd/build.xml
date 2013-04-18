@@ -11,7 +11,7 @@
             unless="sdk.dir"
     />
 
-	<property name="use.dir" value="../../jni/java" />
+	<property name="use.dir" value="../OsmAnd-java/src" />
 	<property name="use.absolute.dir" location="${use.dir}" />
 	<property name="raw.absolute.dir" location="raw" />
 	<property name="base.dir" location="." />

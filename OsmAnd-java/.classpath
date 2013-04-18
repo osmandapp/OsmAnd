@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="com/OsMoDroid/" kind="src" path="android"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/bsh-core-2.0b4.jar"/>
+	<classpathentry kind="lib" path="libs/bzip2-20090327.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/json-20090211.jar"/>
+	<classpathentry kind="lib" path="libs/junidecode-0.1.jar"/>
+	<classpathentry kind="lib" path="libs/kxml2-2.3.0.jar"/>
+	<classpathentry kind="lib" path="libs/tuprolog.jar"/>
+	<classpathentry kind="lib" path="libs/icu4j-49_1.jar"/>
+	<classpathentry kind="lib" path="libs/gnu-trove-osmand.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

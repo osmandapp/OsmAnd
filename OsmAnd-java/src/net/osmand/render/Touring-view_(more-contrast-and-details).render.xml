@@ -1,0 +1,576 @@
+<renderingStyle name="Touring-view_(more-contrast-and-details).render" depends="default" defaultColor="#f1eae4" version="1">
+
+	<!--
+		by Hardy Mueller, 2012-10-28 (Advanced version of the previous All-Purpose Renderer)
+		- some road and track types already rendered at lower zooms (for travel and orienteering)
+		- road colors allow unambiguous distinction between all highway/road/track types
+		- road colors aligned with conventional road atlas
+		- road visibility increased for better outdoor, driving, and navigation use
+		- route+gpx visibility increased
+		- optional: SAC scale for Alpine hiking
+		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map at smallest possible zoom.
+		  Typical zoom level use (zX) and alignment of features displayed:
+		  - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
+		  - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
+		  - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
+		  - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways. Include all area landuse.
+		  - z14 = "Local Driving, also Hiking Map"
+		  - z15 = "City Driving": Display all details of interest for this.
+		  - z16 = "Walking, City tour": Outline and tag buildings
+		  - z17 = Building details, street corner details.
+	--> 
+
+	<!--
+	Alpine hiking renderer by Christof Knuesel based on default renderer by Hardy Mueller
+	Purpose:
+		- Alpine Hiking option for mountain hiking with "Hike Bike Map (Hills Underlay)" as overlay map:
+		  With "Hike Bike Map (Hills Underlay)" it becomes hard to distinguish between black lines (path) and brown lines (track).
+		  For this reason tracks are rendered with higher strokewidth than paths,
+		  respectively as solid lines (all tracktypes), while paths are rendered as dashed lines (Alpine Hiking Mode).
+		- Roads: German map style
+
+	Legend:
+	1) Alpine Hiking Mode (advanced settings / Alpine Hiking enabled)
+		- Paths are colored by sac_scale:
+			black dashed line: sac_scale not specified or sac_scale = hiking
+			red solid line: sac_scale = mountain_hiking
+			red dashed line: sac_scale = demanding_mountain_hiking
+			blue solid line: sac_scale = alpine_hiking
+			blue dashed line: sac_scale = demanding_alpine_hiking
+			blue dotted line: sac_scale = difficult_alpine_hiking
+		- Tracks (all tracktypes) are rendered as brown solid lines
+
+	2) Other Modes
+		- Tracks are rendered as thick brown lines:
+			solid line (tracktype = grade1)
+			long dashed line (tracktype = grade2)
+			short dashed line (tracktype = grade3, short dashed narrow-spaced: tracktype not specified)
+			dash-dotted line (tracktype = grade4)
+			dotted line (tracktype = grade5)
+		- Paths are rendered as thin black lines:
+			long dashed line: sac_scale not specified or sac_scale = hiking
+			short dashed line: sac_scale = mountain_hiking 
+			dotted line: sac_scale = demanding_mountain_hiking and above
+
+	Christof Knuesel, 18.10.2012
+	email: dingsdale@gmx.de
+	-->
+
+
+	<renderingProperty attr="alpineHiking" name="Alpine hiking view" description="Render paths according to SAC scale"
+		type="boolean" possibleValues=""/>
+	<renderingProperty attr="osmcTraces" name="Hiking symbol overlay" description="Render paths according to OSMC traces"
+		type="boolean" possibleValues=""/>
+	<renderingProperty attr="showCycleRoutes" name="Show cycle routes" description="Show bicycle routes (bicycle mode)"
+		   type="boolean" possibleValues=""/>
+
+	<!-- road casing contrast higher than in default -->
+	<renderingAttribute name="shadowRendering">
+	<!-- 0 - no shadow, 1 - one step, 2 - blur shadow, 3 - solid shadow -->
+		<!-- next line corrects for shadowColor appearing very dark with solid shadow in day view, bridges would not stand out -->
+		<filter minzoom="14" nightMode="false" attrIntValue="3" shadowColor="#969696"/>
+		<filter minzoom="14" attrIntValue="3" shadowColor="#464646"/>
+		<!-- next line avoids melting close-together highways into one another - disadvantage is separator lines between segments and at intersections --> 
+		<filter minzoom="9" maxzoom="13" attrIntValue="1" shadowColor="#464646"/>
+		<!-- appearance equivalents: one-step #464646 equals solid #767676 -->
+		<!-- filter minzoom="9" maxzoom="13" attrIntValue="3" shadowColor="#767676"/ -->
+		<filter attrIntValue="0"/>
+	</renderingAttribute>
+
+	<!-- road color contrast higher than in default, and all road types clearly distinguished -->
+	<!-- next few lines outdated, road colors directly defined in line section below -->
+	<!-- roadColors="Road atlas style" -->
+		<!-- renderingConstant name="motorwayRoadColor" value="#809bff"/>
+		<renderingConstant name="trunkRoadColor" value="#ed154b"/>
+		<renderingConstant name="primaryRoadColor" value="#ff80a0"/>
+		<renderingConstant name="secondaryRoadColor" value="#ffd080"/>
+		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/ -->
+
+	<!-- routeColor contrast higher than in default -->
+	<renderingAttribute name="routeColor">
+		<filter nightMode="false" attrColorValue="#960000ff"/>
+		<filter attrColorValue="#b4007cff"/>
+	</renderingAttribute>
+
+	<!-- gpxColor contrast higher than in default -->
+	<renderingAttribute name="gpxColor">
+		<filter nightMode="false" attrColorValue="#B400FFFF"/>
+		<filter attrColorValue="#B400FFFF"/>
+	</renderingAttribute>
+
+	<!-- Use hmRendered
+		- to maximize map details: road inclusion as early as possible (TODO: include ALL roads in very low density areas)
+		- for better visibility of 'white' roads at small zooms for driving -->
+	<renderingConstant name="hmRendered" value="true"/>
+
+
+	<order>
+		<filter tag="osmc_symbol_red" value="" order="95"/>
+		<filter tag="osmc_symbol_green" value="" order="95"/>
+		<filter tag="osmc_symbol_blue" value="" order="95"/>
+		<filter tag="osmc_symbol_yellow" value="" order="95"/>
+
+		<filter appMode="bicycle" showCycleRoutes="true" tag="lcn_network" value="lcn" order="110"/>
+		<filter appMode="bicycle" showCycleRoutes="true" tag="rcn_network" value="rcn" order="111"/>
+		<filter appMode="bicycle" showCycleRoutes="true" tag="ncn_network" value="ncn" order="112"/>
+	</order>
+
+
+	<text>
+		<filter minzoom="12" tag="osmc_symbol_red" value="" nameTag="osmc_symbol_white_red_bar_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc_white_red_bar"/>
+		<filter minzoom="12" tag="osmc_symbol_red" value="" nameTag="osmc_symbol_red_white_bar_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc_red_white_bar"/>
+
+		<filter minzoom="12" tag="osmc_symbol_yellow" value="" nameTag="osmc_symbol_white_yellow_bar_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc_white_yellow_bar"/>
+		<filter minzoom="12" tag="osmc_symbol_yellow" value="" nameTag="osmc_symbol__yellow_diamond_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc__yellow_diamond"/>
+
+		<filter minzoom="12" tag="osmc_symbol_blue" value="" nameTag="osmc_symbol_white_blue_bar_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc_white_blue_bar"/>
+
+		<filter minzoom="12" tag="osmc_symbol_green" value="" nameTag="osmc_symbol_white_green_bar_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc_white_green_bar"/>
+		<filter minzoom="12" tag="osmc_symbol_green" value="" nameTag="osmc_symbol_white_green_backslash_name" textMinDistance="100" textColor="#ffffff" textSize="12" textBold="true" textOrder="7" textShield="osmc_white_green_backslash"/>
+
+		<group>
+			<filter appMode="bicycle" showCycleRoutes="true" tag="lcn_network" value="lcn" nameTag="lcn_ref" textColor="#0000ff" textOrder="22"/>
+			<filter appMode="bicycle" showCycleRoutes="true" tag="rcn_network" value="rcn" nameTag="rcn_ref" textColor="#ff00ff" textOrder="21"/>
+			<filter appMode="bicycle" showCycleRoutes="true" tag="ncn_network" value="ncn" nameTag="ncn_ref" textColor="#ff4000" textOrder="20"/>
+			<groupFilter appMode="bicycle" textOnPath="true" >
+				<filter minzoom="13" maxzoom="13" textDy="-11" textHaloRadius="1" textSize="10"/>
+				<filter minzoom="14" maxzoom="14" textDy="-12" textHaloRadius="1" textSize="11"/>
+				<filter minzoom="15" maxzoom="15" textDy="-14" textHaloRadius="1" textSize="13"/>
+				<filter minzoom="16" maxzoom="16" textDy="-16" textHaloRadius="1" textSize="15"/>
+				<filter minzoom="17" maxzoom="17" textDy="-20" textHaloRadius="1" textSize="18"/>
+				<filter minzoom="18" textDy="-25" textHaloRadius="1" textSize="21"/>
+			</groupFilter>
+		</group>
+	</text>
+
+
+	<point>
+	</point>
+
+
+	<polygon>
+	</polygon>
+
+
+	<line>
+		<group>
+			<!-- (Car night mode roads Brightness=80% instead of 100%) -->
+			<filter appMode="car" tag="highway" value="motorway" nightMode="true" color="#c6cc26" color_0="#cc2626"/>
+			<filter appMode="car" tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#cc2626"/>
+			<filter tag="highway" value="trunk" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
+			<filter tag="highway" value="motorway" color="#f7fe2e" color_0="#fe2e2e"/>
+			<filter tag="highway" value="trunk" color="#dcdcdc" color_0="#fe2e2e"/>
+			<groupFilter cap="ROUND">
+				<filter minzoom="5" maxzoom="8" strokeWidth="1.6" strokeWidth_0="5"/>
+				<filter minzoom="9" maxzoom="9" strokeWidth="2" strokeWidth_0="6"/>
+				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
+					<filter minzoom="10" maxzoom="10" strokeWidth="2.7" strokeWidth_0="8"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="3.3" strokeWidth_0="10"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="4" strokeWidth_0="12"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="5" strokeWidth_0="15"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="6" strokeWidth_0="18"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="8" strokeWidth_0="24"/>
+					<filter minzoom="16" strokeWidth="10" strokeWidth_0="30"/>
+				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="2.3" strokeWidth_0="7"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="2.7" strokeWidth_0="8"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="3" strokeWidth_0="9"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="3.3" strokeWidth_0="10"/>
+				<filter minzoom="14" maxzoom="14" strokeWidth="4" strokeWidth_0="12"/>
+				<filter minzoom="15" maxzoom="15" strokeWidth="5" strokeWidth_0="15"/>
+				<filter minzoom="16" strokeWidth="6.7" strokeWidth_0="20"/>
+				<!-- Tunnels and Bridges -->
+				<groupFilter layer="-1" minzoom="14" pathEffect="6_6" cap="BUTT" pathEffect_0="6_6" color__1="#000000" pathEffect__1="6_6">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth__1="21"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth__1="28"/>
+						<filter minzoom="16" strokeWidth__1="34"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth__1="15"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth__1="19"/>
+					<filter minzoom="16" strokeWidth__1="24"/>
+					<groupFilter nightMode="true" color__1="#ffffff"/>
+				</groupFilter>
+				<groupFilter layer="1" color__1="#000000" cap_0="BUTT" cap="SQUARE">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth__1="21"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth__1="28"/>
+						<filter minzoom="16" strokeWidth__1="34"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth__1="15"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth__1="19"/>
+					<filter minzoom="16" strokeWidth__1="24"/>
+					<groupFilter nightMode="true" color__1="#ffffff"/>
+				</groupFilter>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter appMode="car" tag="highway" value="motorway_link" nightMode="true" color="#c6cc26" color_0="#cc2626"/>
+			<filter appMode="car" tag="highway" value="trunk_link" nightMode="true" color="#ffffff" color_0="#cc2626"/>
+			<filter tag="highway" value="trunk_link" nightMode="true" color="#ffffff" color_0="#fe2e2e"/>
+			<filter tag="highway" value="motorway_link" color="#f7fe2e" color_0="#fe2e2e"/>
+			<filter tag="highway" value="trunk_link" color="#dcdcdc" color_0="#fe2e2e"/>
+			<groupFilter cap="ROUND">
+				<filter minzoom="10" maxzoom="10" strokeWidth="1.5" strokeWidth_0="3"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="2" strokeWidth_0="4"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="3" strokeWidth_0="6"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="4" strokeWidth_0="8"/>
+				<filter minzoom="14" maxzoom="14" strokeWidth="5" strokeWidth_0="10"/>
+				<filter minzoom="15" maxzoom="15" strokeWidth="6" strokeWidth_0="12"/>
+				<filter minzoom="16" strokeWidth="7" strokeWidth_0="14"/>
+				<!-- Tunnels and Bridges -->
+				<groupFilter layer="-1" minzoom="14" pathEffect="4_4" cap="BUTT" pathEffect_0="4_4" color__1="#000000" pathEffect__1="4_4">
+					<filter minzoom="14" maxzoom="14" strokeWidth__1="13"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth__1="16"/>
+					<filter minzoom="16" strokeWidth__1="18"/>
+					<groupFilter nightMode="true" color__1="#ffffff"/>
+				</groupFilter>
+				<groupFilter layer="1" color__1="#000000" cap_0="BUTT" cap="SQUARE">
+					<filter minzoom="14" maxzoom="14" strokeWidth__1="13"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth__1="16"/>
+					<filter minzoom="16" strokeWidth__1="18"/>
+					<groupFilter nightMode="true" color__1="#ffffff"/>
+				</groupFilter>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter appMode="car" tag="highway" value="primary" nightMode="true" color="#cc6882"/>
+			<filter appMode="car" tag="highway" value="primary_link" nightMode="true" color="#cc6882"/>
+			<filter tag="highway" value="primary" color="#ff80a0"/>
+			<filter tag="highway" value="primary_link" color="#ff80a0"/>
+			<groupFilter shadowRadius="1" cap="ROUND">
+				<filter minzoom="7" maxzoom="9" strokeWidth="2"/>
+				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
+					<filter minzoom="10" maxzoom="10" strokeWidth="5"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="6"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="7"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="8"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="14"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="18"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="23"/>
+					<filter minzoom="17" strokeWidth="27"/>
+				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="7"/>
+				<filter minzoom="14" maxzoom="14" strokeWidth="9"/>
+				<filter minzoom="15" maxzoom="15" strokeWidth="12"/>
+				<filter minzoom="16" maxzoom="16" strokeWidth="15"/>
+				<filter minzoom="17" strokeWidth="20"/>
+				<!-- Tunnels and Bridges -->
+				<groupFilter layer="-1" minzoom="14" pathEffect="4_4" color_0="#000000" pathEffect_0="4_4" shadowRadius="0" cap="BUTT">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="17"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="22"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="27"/>
+						<filter minzoom="17" strokeWidth_0="31"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="12"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="16"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="19"/>
+					<filter minzoom="17" strokeWidth_0="24"/>
+					<groupFilter nightMode="true" color_0="#ffffff"/>
+				</groupFilter>
+				<groupFilter layer="1" color_0="#000000" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="17"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="22"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="27"/>
+						<filter minzoom="17" strokeWidth_0="31"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="12"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="16"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="19"/>
+					<filter minzoom="17" strokeWidth_0="24"/>
+					<groupFilter nightMode="true" color_0="#ffffff"/>
+				</groupFilter>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter appMode="car" tag="highway" value="secondary" nightMode="true" color="#cca568"/>
+			<filter appMode="car" tag="highway" value="secondary_link" nightMode="true" color="#cca568"/>
+			<filter tag="highway" value="secondary" color="#ffd080"/>
+			<filter tag="highway" value="secondary_link" color="#ffd080"/>
+			<groupFilter shadowRadius="1" cap="ROUND">
+				<filter minzoom="9" maxzoom="9" strokeWidth="2"/>
+				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
+					<filter minzoom="10" maxzoom="10" strokeWidth="4"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="5"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="6"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="7"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="12"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="17"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="22"/>
+					<filter minzoom="17" strokeWidth="26"/>
+				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="3"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="4"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
+				<filter minzoom="14" maxzoom="14" strokeWidth="8"/>
+				<filter minzoom="15" maxzoom="15" strokeWidth="10"/>
+				<filter minzoom="16" maxzoom="16" strokeWidth="14"/>
+				<filter minzoom="17" strokeWidth="19"/>
+				<!-- Tunnels and Bridges -->
+				<groupFilter layer="-1" minzoom="14" pathEffect="4_4" color_0="#000000" pathEffect_0="4_4" shadowRadius="0" cap="BUTT">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="15"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="21"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="26"/>
+						<filter minzoom="17" strokeWidth_0="30"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="11"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="14"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="18"/>
+					<filter minzoom="17" strokeWidth_0="23"/>
+					<groupFilter nightMode="true" color_0="#ffffff"/>
+				</groupFilter>
+				<groupFilter layer="1" color_0="#000000" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="15"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="21"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="26"/>
+						<filter minzoom="17" strokeWidth_0="30"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="11"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="14"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="18"/>
+					<filter minzoom="17" strokeWidth_0="23"/>
+					<groupFilter nightMode="true" color_0="#ffffff"/>
+				</groupFilter>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter appMode="car" tag="highway" value="tertiary" nightMode="true" color="#cccc68"/>
+			<filter appMode="car" tag="highway" value="tertiary_link" nightMode="true" color="#cccc68"/>
+			<filter tag="highway" value="tertiary" color="#ffff80"/>
+			<filter tag="highway" value="tertiary_link" color="#ffff80"/>
+			<groupFilter  shadowRadius="1" cap="ROUND">
+				<filter appMode="car"> <!-- bigger strokewidth for better visibility of road type during navigation -->
+					<filter minzoom="10" maxzoom="10" strokeWidth="3"/>
+					<filter minzoom="11" maxzoom="11" strokeWidth="4"/>
+					<filter minzoom="12" maxzoom="12" strokeWidth="5"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="6"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="8"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth="16"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth="22"/>
+					<filter minzoom="17" strokeWidth="26"/>
+				</filter>
+				<filter minzoom="10" maxzoom="10" strokeWidth="2"/>
+				<filter minzoom="11" maxzoom="11" strokeWidth="2"/>
+				<filter minzoom="12" maxzoom="12" strokeWidth="3"/>
+				<filter minzoom="13" maxzoom="13" strokeWidth="4"/>
+				<filter minzoom="14" maxzoom="14" strokeWidth="6"/>
+				<filter minzoom="15" maxzoom="15" strokeWidth="8"/>
+				<filter minzoom="16" maxzoom="16" strokeWidth="13"/>
+				<filter minzoom="17" strokeWidth="18"/>
+				<!-- Tunnels and Bridges -->
+				<groupFilter layer="-1" minzoom="14" pathEffect="4_4" color_0="#000000" pathEffect_0="4_4" shadowRadius="0" cap="BUTT">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="11"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="20"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="26"/>
+						<filter minzoom="17" strokeWidth_0="30"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="9"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="12"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="17"/>
+					<filter minzoom="17" strokeWidth_0="22"/>
+					<groupFilter nightMode="true" color_0="#ffffff"/>
+				</groupFilter>
+				<groupFilter layer="1" color_0="#000000" shadowRadius="0" cap_0="BUTT" cap="SQUARE">
+					<filter appMode="car">
+						<filter minzoom="14" maxzoom="14" strokeWidth_0="11"/>
+						<filter minzoom="15" maxzoom="15" strokeWidth_0="20"/>
+						<filter minzoom="16" maxzoom="16" strokeWidth_0="26"/>
+						<filter minzoom="17" strokeWidth_0="30"/>
+					</filter>
+					<filter minzoom="14" maxzoom="14" strokeWidth_0="9"/>
+					<filter minzoom="15" maxzoom="15" strokeWidth_0="12"/>
+					<filter minzoom="16" maxzoom="16" strokeWidth_0="17"/>
+					<filter minzoom="17" strokeWidth_0="22"/>
+					<groupFilter nightMode="true" color_0="#ffffff"/>
+				</groupFilter>
+			</groupFilter>
+		</group>
+
+		<group>
+			<filter tag="highway" value="track" color="#996600">
+				<!-- In ped mode with Alpine Hiking, make tracks solid to more clearly distinguish them from paths (forum feedback of 2012-12-06) -->
+				<filter alpineHiking="true" appMode="pedestrian" pathEffect=""/>
+
+				<filter additional="tracktype=grade1" pathEffect=""/>
+				<filter additional="tracktype=grade2">
+					<filter minzoom="12" maxzoom="13" pathEffect="10_3"/>
+					<filter minzoom="14" pathEffect="15_4.5"/>
+				</filter>
+				<filter additional="tracktype=grade3">
+					<filter minzoom="12" maxzoom="13" pathEffect="5_3"/>
+					<filter minzoom="14" pathEffect="7.5_4.5"/>
+				</filter>
+				<filter additional="tracktype=grade4">
+					<filter minzoom="12" maxzoom="13" pathEffect="4_3_2_3"/>
+					<filter minzoom="14" pathEffect="6_4.5_3_4.5"/>
+				</filter>
+				<filter additional="tracktype=grade5">
+					<filter minzoom="12" maxzoom="13" pathEffect="2_3"/>
+					<filter minzoom="14" pathEffect="3_4.5"/>
+				</filter>
+				<filter>
+					<filter minzoom="12" maxzoom="13" pathEffect="4_2"/>
+					<filter minzoom="14" pathEffect="6_3"/>
+				</filter>
+				<groupFilter>
+					<filter appMode="pedestrian">
+						<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="1.2"/>
+						<filter minzoom="13" maxzoom="13" strokeWidth="1.8"/>
+						<filter minzoom="14" strokeWidth="2.5"/>
+					</filter>
+					<filter appMode="bicycle">
+						<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="1"/>
+						<filter test="$hmRendered" minzoom="13" maxzoom="13" strokeWidth="2"/>
+						<filter test="$hmRendered" minzoom="14" strokeWidth="2.8"/>
+						<filter minzoom="13" maxzoom="13" strokeWidth="1"/>
+						<filter minzoom="14" maxzoom="14" strokeWidth="2"/>
+						<filter minzoom="15" strokeWidth="2.8"/>
+					</filter>
+					<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="0.7"/>
+					<filter test="$hmRendered" minzoom="13" maxzoom="13" strokeWidth="1"/>
+					<filter test="$hmRendered" minzoom="14" maxzoom="14" strokeWidth="2"/>
+					<filter appMode="car" minzoom="13" maxzoom="13" strokeWidth="0.7"/>
+					<filter minzoom="14" maxzoom="14" strokeWidth="1"/>
+					<filter minzoom="15" strokeWidth="2.5"/>
+				</groupFilter>
+			</filter>
+
+			<filter tag="highway" value="path" alpineHiking="true">
+				<filter additional="sac_scale=hiking" color="#000000" pathEffect="10_3"/>
+				<filter additional="sac_scale=mountain_hiking" color="#ff0000" pathEffect=""/>
+				<filter additional="sac_scale=demanding_mountain_hiking" color="#ff0000" pathEffect="10_3"/>
+				<filter additional="sac_scale=alpine_hiking" color="#0033ff" pathEffect=""/>
+				<filter additional="sac_scale=demanding_alpine_hiking" color="#0033ff" pathEffect="10_3"/>
+				<filter additional="sac_scale=difficult_alpine_hiking" color="#0033ff" pathEffect="3_3"/>
+				<filter pathEffect="4_2" color="#000000">
+					<filter nightMode="true" color="#787878"/>
+				</filter>
+				<groupFilter>
+					<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="1.4"/>
+					<filter minzoom="13" maxzoom="13" strokeWidth="1.8"/>
+					<filter minzoom="14" strokeWidth="2.5"/>
+				</groupFilter>
+			</filter>
+
+			<filter tag="highway" value="path" color="#000000">
+				<filter additional="sac_scale=hiking" pathEffect="10_3"/>
+				<filter additional="sac_scale=mountain_hiking" pathEffect="5_5"/>
+				<filter additional="sac_scale=demanding_mountain_hiking" pathEffect="2_6"/>
+				<filter additional="sac_scale=alpine_hiking" pathEffect="2_6"/>
+				<filter additional="sac_scale=demanding_alpine_hiking" pathEffect="2_6"/>
+				<filter additional="sac_scale=difficult_alpine_hiking" pathEffect="2_6"/>
+				<filter pathEffect="4_2"/>
+				<groupFilter>
+					<filter appMode="pedestrian">
+						<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="1.4"/>
+						<filter minzoom="13" maxzoom="13" strokeWidth="1.8"/>
+						<filter minzoom="14" strokeWidth="2.5"/>
+					</filter>
+					<filter appMode="bicycle">
+						<filter test="$hmRendered" minzoom="13" maxzoom="13" strokeWidth="0.7"/>
+						<filter minzoom="14" strokeWidth="1"/>
+					</filter>
+					<filter appMode="car">
+						<filter test="$hmRendered" minzoom="14" maxzoom="14" strokeWidth="1"/>
+						<filter minzoom="15" strokeWidth="1"/>
+					</filter>
+					<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="0.7"/>
+					<filter test="$hmRendered" minzoom="13" maxzoom="13" strokeWidth="1"/>
+					<filter minzoom="14" strokeWidth="1"/>
+				</groupFilter>
+				<groupFilter nightMode="true" color="#787878"/>
+			</filter>
+
+			<!-- Alpine Hiking Mode: remove conflicting colors -->
+			<filter tag="highway" value="cycleway" alpineHiking="true" color="#000000" pathEffect="4_2">
+				<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="0.7"/>
+				<filter minzoom="13" strokeWidth="1"/>
+				<groupFilter nightMode="true" color="#787878"/>
+			</filter>
+
+			<filter tag="highway" value="footway" alpineHiking="true" color="#000000" pathEffect="5_5">
+				<filter test="$hmRendered" minzoom="12" maxzoom="12" strokeWidth="1.2"/>
+				<filter minzoom="13" strokeWidth="1.2"/>
+				<groupFilter nightMode="true" color="#787878"/>
+			</filter>
+
+			<filter tag="highway" value="steps" alpineHiking="true" color="#000000" pathEffect="2_2">
+				<filter test="$hmRendered" minzoom="14" strokeWidth="4"/>
+				<filter minzoom="15" strokeWidth="4"/>
+				<groupFilter nightMode="true"  color="#787878"/>
+			</filter>
+			<!-- End Alpine Hiking Mode: remove conflicting colors -->
+
+			<!-- Bridges -->
+			<groupFilter layer="1">
+				<filter nightMode="true" minzoom="14" color__1="#ffffff" strokeWidth__1="6.5" color_0="#b0b0b0" strokeWidth_0="5"/>
+				<filter minzoom="14" color__1="#000000" strokeWidth__1="6.5" color_0="#ffffff" strokeWidth_0="5"/>
+			</groupFilter>
+			<!-- Tunnels -->
+			<groupFilter layer="-1">
+				<filter nightMode="true" minzoom="14" color__1="#ffffff" strokeWidth__1="6.5" pathEffect__1="3_3" color_0="#b0b0b0" strokeWidth_0="5"/>
+				<filter minzoom="14" color__1="#000000" strokeWidth__1="6.5" pathEffect__1="3_3" color_0="#ffffff" strokeWidth_0="5"/>
+			</groupFilter>
+		</group>
+
+		<filter tag="osmc_symbol_red" value="" color="#31FF0000" osmcTraces="true">
+			<filter minzoom="12" maxzoom="13" strokeWidth="8"  pathEffect="8_6"   />
+			<filter minzoom="14" maxzoom="14" strokeWidth="10" pathEffect="8_6"   />
+			<filter minzoom="15" maxzoom="15" strokeWidth="12" pathEffect="16_12" />
+			<filter minzoom="16" maxzoom="16" strokeWidth="16" pathEffect="32_24" />
+			<filter minzoom="17"               strokeWidth="20" pathEffect="32_24" />
+		</filter>
+
+		<filter tag="osmc_symbol_green" value="" color="#3100FF00" osmcTraces="true">
+			<filter minzoom="12" maxzoom="13" strokeWidth="8" pathEffect="8_6_2"   />
+			<filter minzoom="14" maxzoom="14" strokeWidth="10" pathEffect="8_6_2"  />
+			<filter minzoom="15" maxzoom="15" strokeWidth="12" pathEffect="16_12_4"/>
+			<filter minzoom="16" maxzoom="16" strokeWidth="16" pathEffect="32_24_8"/>
+			<filter minzoom="17"              strokeWidth="20" pathEffect="32_24_8"/>
+		</filter>
+
+		<filter tag="osmc_symbol_blue" value="" color="#310000FF" osmcTraces="true">
+			<filter minzoom="12" maxzoom="13" strokeWidth="8" pathEffect="8_6_4"    />
+			<filter minzoom="14" maxzoom="14" strokeWidth="10" pathEffect="8_6_4"   />
+			<filter minzoom="15" maxzoom="15" strokeWidth="12" pathEffect="16_12_8" />
+			<filter minzoom="16" maxzoom="16" strokeWidth="16" pathEffect="32_24_16"/>
+			<filter minzoom="17"              strokeWidth="20" pathEffect="32_24_16"/>
+		</filter>
+
+		<filter tag="osmc_symbol_yellow" value="" color="#64ffff5d" osmcTraces="true">
+			<filter minzoom="12" maxzoom="13" strokeWidth="8" pathEffect="8_6_6"    />
+			<filter minzoom="14" maxzoom="14" strokeWidth="10" pathEffect="8_6_6"   />
+			<filter minzoom="15" maxzoom="15" strokeWidth="12" pathEffect="16_12_12"/>
+			<filter minzoom="16" maxzoom="16" strokeWidth="16" pathEffect="32_24_24"/>
+			<filter minzoom="17"              strokeWidth="20" pathEffect="32_24_24"/>
+		</filter>
+
+		<group>
+			<filter appMode="bicycle" showCycleRoutes="true" tag="lcn_network" value="lcn" color="#400000ff"/>
+			<filter appMode="bicycle" showCycleRoutes="true" tag="rcn_network" value="rcn" color="#40ff00ff"/>
+			<filter appMode="bicycle" showCycleRoutes="true" tag="ncn_network" value="ncn" color="#40ff4000"/>
+			<groupFilter cap="BUTT">
+				<filter minzoom="13" maxzoom="13" strokeWidth="9"/>
+				<filter minzoom="14" maxzoom="14" strokeWidth="10"/>
+				<filter minzoom="15" maxzoom="15" strokeWidth="12"/>
+				<filter minzoom="16" maxzoom="16" strokeWidth="15"/>
+				<filter minzoom="17" maxzoom="17" strokeWidth="19"/>
+				<filter minzoom="18" strokeWidth="25"/>
+			</groupFilter>
+		</group>
+	</line>
+
+</renderingStyle>

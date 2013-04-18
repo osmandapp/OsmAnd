@@ -108,7 +108,7 @@
 		<link>
 			<name>use</name>
 			<type>2</type>
-			<locationURI>OSMAND_TRUNK/jni/java</locationURI>
+			<locationURI>OSMAND_TRUNK/android/OsmAnd-java/src</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
