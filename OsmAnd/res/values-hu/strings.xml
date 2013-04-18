@@ -1183,4 +1183,5 @@
 \n\t* Többablakos támogatás az újabb Samsung eszközökhöz
 \n\t* Iránytűhöz Kalman-szűrő
 \n\t* Pebble óra támogatás "</string>
-    </resources>
+    <string name="save_current_track_widget">GPX nyomvonal\n mentése</string>
+	</resources>
