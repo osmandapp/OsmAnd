@@ -666,6 +666,7 @@ public class OsmandSettings {
 	{
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
