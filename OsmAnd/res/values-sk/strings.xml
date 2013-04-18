@@ -1218,4 +1218,6 @@
 \n\t* Pridaná podpora viacerých okien pre najnovšie zariadenia Samsung
 \n\t* Kalmanov filter pre kompas
 \n\t* Podpora hodiniek Pebble "</string>
-    </resources>
+    <string name="save_current_track_widget">Uložiť
+\n aktuálnu stopu GPX</string>
+	</resources>
