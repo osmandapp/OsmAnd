@@ -2,9 +2,6 @@ package net.osmand.plus.monitoring;
 
 import java.util.EnumSet;
 
-
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -23,10 +20,10 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MonitoringInfoControl;
 import net.osmand.plus.views.MonitoringInfoControl.MonitoringInfoControlServices;
 import net.osmand.plus.views.MonitoringInfoControl.ValueHolder;
-import net.osmand.plus.views.mapwidgets.BaseMapWidget;
-import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.BaseMapWidget;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import org.apache.commons.logging.Log;
 
@@ -256,14 +253,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	}
 
 	@Override
-	public void addMonitorActions(final QuickAction qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
-		final ActionItem bgServiceAction = new ActionItem();
+	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
 		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
-		bgServiceAction.setTitle(view.getResources().getString(off? R.string.monitoring_mode_off : R.string.monitoring_mode_on));
-		bgServiceAction.setIcon(view.getResources().getDrawable(off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big));
-		bgServiceAction.setOnClickListener(new View.OnClickListener() {
+		qa.registerItem(off ? R.string.monitoring_mode_off : R.string.monitoring_mode_on, off ? R.drawable.monitoring_rec_inactive
+				: R.drawable.monitoring_rec_big, new OnContextMenuClick() {
+
 			@Override
-			public void onClick(View v) {
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (off) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = view.getSettings().SAVE_TRACK_INTERVAL.get();
@@ -279,18 +275,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				} else {
 					view.getSettings().SAVE_TRACK_TO_GPX.set(false);
 				}
-				qa.dismiss();
 			}
-		});
-		qa.addActionItem(bgServiceAction);
+		}, -1);
 		
-		final ActionItem liveAction = new ActionItem();
 		final boolean liveoff = !view.getSettings().LIVE_MONITORING.get();
-		liveAction.setTitle(view.getResources().getString(liveoff? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on));
-		liveAction.setIcon(view.getResources().getDrawable(liveoff? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big));
-		liveAction.setOnClickListener(new View.OnClickListener() {
+		qa.registerItem(liveoff ? R.string.monitoring_mode_off : R.string.monitoring_mode_on, 
+				liveoff ? R.drawable.monitoring_rec_inactive: R.drawable.monitoring_rec_big, 
+						new OnContextMenuClick() {
 			@Override
-			public void onClick(View v) {
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (liveoff) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = view.getSettings().LIVE_MONITORING_INTERVAL.get();
@@ -306,18 +299,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				} else {
 					view.getSettings().LIVE_MONITORING.set(false);
 				}
-				qa.dismiss();
 			}
-		});
-		qa.addActionItem(liveAction);
+		}, -1);
 		
-		final ActionItem saveGPXAction = new ActionItem();
-		String s = view.getResources().getString(R.string.save_current_track);
-		saveGPXAction.setTitle(s.replaceFirst(" ", "\n"));
-		saveGPXAction.setIcon(view.getResources().getDrawable(R.drawable.monitoring_rec_inactive));
-		saveGPXAction.setOnClickListener(new View.OnClickListener() {
+		qa.registerItem(R.string.save_current_track_widget, 
+				R.drawable.monitoring_rec_inactive, 
+					new OnContextMenuClick() {
 			@Override
-			public void onClick(View v) {
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
 
 					@Override
@@ -327,19 +316,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						helper.close();
 						return null;
 					}
-					
-					@Override
-					protected void onPostExecute(Void result) {
-						qa.dismiss();
-					}
+
 				}, null);
-				
 			}
-		});
-		qa.addActionItem(saveGPXAction);
-
-
-		
+		}, -1);
 	}
 
 }

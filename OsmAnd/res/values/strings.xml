@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="save_current_track_widget">Save
+        \n current GPX track</string>
 	<string name="tip_recent_changes_1_2_t">Changes in 1.2:
 		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
 		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)

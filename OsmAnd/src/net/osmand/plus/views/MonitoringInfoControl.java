@@ -3,7 +3,9 @@ package net.osmand.plus.views;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.londatiga.android.ActionItem;
 import net.londatiga.android.QuickAction;
+import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -28,7 +30,7 @@ public class MonitoringInfoControl {
 	
 	public interface MonitoringInfoControlServices {
 		
-		public void addMonitorActions(QuickAction qa, MonitoringInfoControl li, OsmandMapTileView view);
+		public void addMonitorActions(ContextMenuAdapter ca, MonitoringInfoControl li, OsmandMapTileView view);
 	}
 	
 	public void addMonitorActions(MonitoringInfoControlServices la){
@@ -71,9 +73,27 @@ public class MonitoringInfoControl {
 	}
 
 	private void showBgServiceQAction(final ImageView lockView, final OsmandMapTileView view, final MapActivity map) {	
-		final QuickAction qa = new QuickAction(lockView);
+		final ContextMenuAdapter ca = new ContextMenuAdapter(map);
 		for(MonitoringInfoControlServices la : monitoringServices){
-			la.addMonitorActions(qa, this, view);
+			la.addMonitorActions(ca, this, view);
+		}
+		final QuickAction qa = new QuickAction(lockView);		
+		String[] itemNames = ca.getItemNames();
+		for(int i = 0; i < ca.length(); i++) {
+			final int ij = i;
+			ActionItem ai = new ActionItem();
+			ai.setTitle(itemNames[ij]);
+			if(ca.getImageId(ij) != 0) {
+				ai.setIcon(view.getResources().getDrawable(ca.getImageId(ij)));
+			}
+			ai.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					ca.getClickAdapter(ij).onContextMenuClick(ca.getItemId(ij), ij, false, null);
+					qa.dismiss();
+				}
+			});
+			qa.addActionItem(ai);
 		}
 		qa.show();
 		

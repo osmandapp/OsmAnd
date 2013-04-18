@@ -1,7 +1,7 @@
 package net.osmand.plus.background;
 
-import net.londatiga.android.ActionItem;
-import net.londatiga.android.QuickAction;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -26,7 +26,6 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.view.View;
 
 public class OsmandBackgroundServicePlugin extends OsmandPlugin implements MonitoringInfoControlServices {
 	public static final int[] SECONDS = new int[]{0, 30, 60, 90};
@@ -147,15 +146,13 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements Monit
 	}
 
 	@Override
-	public void addMonitorActions(final QuickAction qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
-		
-		final ActionItem bgServiceAction = new ActionItem();
+	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
 		final boolean off = view.getApplication().getNavigationService() == null;
-		bgServiceAction.setTitle(view.getResources().getString(!off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off));
-		bgServiceAction.setIcon(view.getResources().getDrawable(!off? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive));
-		bgServiceAction.setOnClickListener(new View.OnClickListener() {
+		int msgId = !off? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off;
+		int draw = !off? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
+		qa.registerItem(msgId, draw, new OnContextMenuClick() {
 			@Override
-			public void onClick(View v) {
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
 				if (view.getApplication().getNavigationService() == null) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
@@ -172,10 +169,7 @@ public class OsmandBackgroundServicePlugin extends OsmandPlugin implements Monit
 				} else {
 					view.getContext().stopService(serviceIntent);
 				}
-				qa.dismiss();
 			}
-		});
-		qa.addActionItem(bgServiceAction);
-		
+		}, 0);
 	}
 }
