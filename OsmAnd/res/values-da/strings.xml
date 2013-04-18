@@ -1189,4 +1189,7 @@
 	<string name="osb_close_dialog_success">Fejlregistrering blev lukket</string>
 	<string name="osb_close_dialog_error">Undtagelse opstod: fejl blev ikke lukket</string>
 	<string name="poi_dialog_comment_default">POI ændres</string>
+	<string name="app_mode_default">Standard</string>
+	<string name="poi_error_info_not_loaded">Info om noden blev ikke indlæst</string>
+	<string name="save_current_track_widget">Gem\n aktuel GPX spor</string>
 	</resources>
