@@ -1195,4 +1195,5 @@
 \n\t* Meerdere vensters voor recente Samsung-toestellen
 \n\t* Kalman-filter voor het kompas
 \n\t* Pebble watch support "</string>
-    </resources>
+    <string name="save_current_track_widget">Huidige GPX\ntrack opslaan</string>
+	</resources>
