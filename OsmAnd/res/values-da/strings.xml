@@ -945,9 +945,9 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_min">min.</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="stop_routing">Stop navigationen</string>
-	<string name="sd_unmounted">SD-kort er ikke tilgængelig.\n</string>
-	<string name="sd_mounted_ro">SD-kortet er skrivebeskyttet.\n</string>
+	<string name="stop_routing">Stop navigation.</string>
+	<string name="sd_unmounted">SD-kort er ikke tilgængelig.\nDu vil ikke være i stand til at se kort eller finde noget.</string>
+	<string name="sd_mounted_ro">SD-kortet er skrivebeskyttet.\nDu kan kun se det forudindlæste kort og kan ikke hente fra internettet.</string>
 	<string name="unzipping_file">Udpakker fil…</string>
 	<string name="route_tr">Drej til højre og kør</string>
 	<string name="route_tshr">Drej skarpt til højre og kør</string>
