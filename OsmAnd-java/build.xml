@@ -3,7 +3,7 @@
 
 	<property file="local.properties" />
 
-	<property name="src.dir" value="java"/>
+	<property name="src.dir" value="src"/>
 	<property name="src.absolute.dir" location="${src.dir}" />
 	<property name="bin.dir" value="bin"/>
 	<property name="bin.absolute.dir" location="${bin.dir}"/>
