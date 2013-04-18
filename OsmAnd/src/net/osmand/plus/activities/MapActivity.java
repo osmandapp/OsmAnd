@@ -472,6 +472,7 @@ public class MapActivity extends AccessibleActivity  {
 
 	
 	public void followRoute(ApplicationMode appMode, LatLon finalLocation, List<LatLon> intermediatePoints, net.osmand.Location currentLocation, GPXRouteParams gpxRoute){
+		getMapViewTrackingUtilities().backToLocationImpl();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		settings.APPLICATION_MODE.set(appMode);
 		settings.FOLLOW_THE_ROUTE.set(true);
