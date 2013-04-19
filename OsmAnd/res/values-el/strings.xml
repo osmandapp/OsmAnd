@@ -1201,4 +1201,6 @@
 	<string name="tip_recent_changes_1_1_4_t">"Αλλαγές στην 1.1.4:
 \n\t* Επανασχεδιασμός UI
 \n\t* Διόρθωση σφαλμάτων "</string>
-    </resources>
+    <string name="save_current_track_widget">Αποθήκευση
+\n τρέχοντος ίχνους GPX</string>
+	</resources>
