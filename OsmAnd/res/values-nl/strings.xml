@@ -155,7 +155,7 @@
   <string name="fav_export_confirmation">Favorietenbestand bestaat al, wil je dit vervangen?</string>
   <string name="profile_settings">Profielspecifieke instellingen</string>
   <string name="settings_preset">Gebruiksprofiel</string>
-  <string name="settings_preset_descr">Selecteer een profiel. (Elke profielinstelling, kaart, tracking en navigatie kan hieronder ingesteld worden.)</string>
+  <string name="settings_preset_descr">Kies een profiel met aparte instellingen voor kaart en navigatie.</string>
   <string name="monitor_preferences">Tracking</string>
   <string name="monitor_preferences_descr">Specifieke tracking instellingen</string>
   <string name="routing_settings">Navigatie</string>
@@ -164,7 +164,7 @@
   <string name="index_settings">Offline gegevens</string>
   <string name="index_settings_descr">Download, bekijk details en beheer offline kaarten</string>
   <string name="general_settings">Algemene instellingen</string>
-  <string name="general_settings_descr">Kaartweergave en andere algemene instellingen</string>
+  <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
   <string name="global_app_settings">Algemene app instellingen</string>
   <string name="user_name">OSM gebruikersnaam</string>
   <string name="user_name_descr">Nodig voor openstreetmap.org aanmelding</string>
