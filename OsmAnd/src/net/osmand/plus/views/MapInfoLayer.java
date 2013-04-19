@@ -723,7 +723,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return progressBar;
 	}
 
-	private class ConfigLayout extends FrameLayout implements MapControlUpdateable {
+	private class ConfigLayout extends FrameLayout implements UpdateableWidget {
 		private ImageViewWidget config;
 
 		private ConfigLayout(Context c, ImageViewWidget config) {
