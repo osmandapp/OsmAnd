@@ -55,9 +55,9 @@
 	<string name="map_widget_top_text">街道名稱</string>
 	<string name="map_widget_gps_info">GPS信息</string>
     <string name="access_arrival_time">到达时间</string>
-    <string name="item_checked">检查</string>
-    <string name="item_unchecked">未选中</string>
-    <string name="max_speed_none">没有</string>
+    <string name="item_checked">已查</string>
+    <string name="item_unchecked">未查</string>
+    <string name="max_speed_none">无</string>
     <string name="dist_control_start">开始</string>
     <string name="recording_context_menu_show">显示</string>
     <string name="av_def_action_picture">拍摄照片</string>
@@ -394,4 +394,22 @@
 	<string name="default_buttons_add">加</string>
 	<string name="default_buttons_no">没有</string>
 	<string name="default_buttons_delete">删除</string>
-	</resources>
+	<string name="save_current_track_widget">保存\n当前GPX轨迹</string>
+	<string name="layer_hillshade">山体阴影层</string>
+    <string name="tip_recent_changes_1_1_4_t">在1.1.4的变化：* UI的重新设计* Bug修复</string>
+    <string name="map_view"/>
+    <string name="map_view">地图</string>
+    <string name="prefer_motorways">首选高速公路</string>
+	<string name="prefer_in_routing_title">首选。。。</string>
+	<string name="index_name_openmaps">开放地图属性索引</string>
+    <string name="download_hillshade_item">山体阴影</string>
+    <string name="download_hillshade_maps">山体阴影层</string>
+    <string name="prefer_in_routing_descr">首选高速公路</string>
+    <string name="local_indexes_cat_av">音频/视频数据</string>
+    <string name="stop_routing_confirm">是否确定停止导航？</string>
+    <string name="clear_dest_confirm">是否确定清楚目标点？</string>
+    <string name="precise_routing_mode_descr">启用精确路径计算，受实地距离限制不使用本地库。</string>
+    <string name="recording_photo_description">图片 %1$s of %2$s</string>
+    <string name="dropbox_plugin_description">Dropbox的插件可以让你的Dropbox帐户同步轨道和音频/视频数据。</string>
+    <string name="dropbox_plugin_name">Dropbox插件</string>
+    </resources>
