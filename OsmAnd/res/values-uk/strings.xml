@@ -1114,4 +1114,5 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапи і Навігація</string>
 	<string name="layer_hillshade">Шар рельєфа місцевості</string>
     <string name="tip_app_mode_t_v2">\tOsmAnd підтримує різні профілі для різних режимів.\n\tВи можете змінити поточний профіль, натиснувши кнопку вибору профілів в нжиньому лівому куті екрану мапи (іконка автомобіля, велосипеда або пішохода) або при побудові маршруту.</string>
+	<string name="save_current_track_widget">Зберегти\nпоточний GPX трек</string>
 	</resources>
