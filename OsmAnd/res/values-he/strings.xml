@@ -1202,4 +1202,7 @@
     <string name="layer_hillshade">שכבת הצללת תבליט</string>
     <string name="osmand_play_title_30_chars">מפות וניווט עם OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">מפות וניווט עם OsmAnd+‎</string>
-	</resources>
+	<string name="save_current_track_widget">שמירת\n מסלול האיכון הנוכחי</string>
+	<string name="tip_recent_changes_1_1_4_t">"שינויים ב־1.1.4:
+\n\t* מנשק המשתמש תוכנן מחדש\n\t* תוקנו תקלות "</string>
+    </resources>
