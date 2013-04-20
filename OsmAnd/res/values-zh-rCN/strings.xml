@@ -412,4 +412,7 @@
     <string name="recording_photo_description">图片 %1$s of %2$s</string>
     <string name="dropbox_plugin_description">Dropbox的插件可以让你的Dropbox帐户同步轨道和音频/视频数据。</string>
     <string name="dropbox_plugin_name">Dropbox插件</string>
+    <string name="precise_routing_mode">精确路径（alpha）</string>
+    <string name="srtm_paid_version_msg">请考虑在谷歌Play商店购买插件以支持进一步发展。</string>
+    <string name="srtm_paid_version_title">等高线插件</string>
     </resources>
