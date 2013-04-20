@@ -983,7 +983,7 @@
 	<string name="osb_comment_dialog_author">Forfatternavn</string>
 	<string name="favourites_context_menu_navigate">Angiv som destination</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
-	<string name="add_favorite_dialog_top_text">Indtast navn på favorit</string>
+	<string name="add_favorite_dialog_top_text">Indtast favorit navn</string>
 	<string name="default_buttons_add">Tilføj</string>
 	<string name="default_buttons_apply">Udfør</string>
 	<string name="default_buttons_cancel">Fortryd</string>
@@ -1192,4 +1192,8 @@
 	<string name="app_mode_default">Standard</string>
 	<string name="poi_error_info_not_loaded">Info om noden blev ikke indlæst</string>
 	<string name="save_current_track_widget">Gem\n aktuel GPX spor</string>
+	<string name="default_buttons_commit">Udfør</string>
+	<string name="amenity_type_geocache">geocache</string>
+	<string name="commiting_node">Udfør element…</string>
+	<string name="poi_error_poi_not_found">Element kan ikke findes eller rekreative er ikke et enkelt element</string>
 	</resources>
