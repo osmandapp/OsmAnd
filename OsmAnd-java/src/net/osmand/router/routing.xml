@@ -270,7 +270,7 @@
 		<!-- very bad roads -->
 		<road tag="highway" value="track" speed="15" priority="0.3" >
 			<specialization input="short_way" priority="0.7" speed="45"  />
-			<specialization input="avoid_unpaved" priority="0.1"/>
+			<specialization input="avoid_unpaved" speed="0"/>
 		</road>
 		
 		<!-- too small for cars usually -->
