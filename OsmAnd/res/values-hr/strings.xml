@@ -915,4 +915,5 @@
 	<string name="osmand_parking_plugin_name">Lokacija parkiranja dodatak</string>
 	<string name="context_menu_item_delete_parking_point">Izbriši oznaku za parking</string>
 	<string name="route_roundabout">Kružni tok: koristite %1$d izlaz i nastavite voziti</string>
+	<string name="map_settings_descr">Konfiguracija zaslona</string>
 	</resources>
