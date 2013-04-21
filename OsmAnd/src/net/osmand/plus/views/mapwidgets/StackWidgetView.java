@@ -198,7 +198,8 @@ public class StackWidgetView extends ViewGroup {
 		setMeasuredDimension(w, h);
 	}
 
-	private final static int MAGIC_CONSTANT_STACK = 3;
+	// magic constant (should be removed when image will be recropped)
+	private final static int MAGIC_CONSTANT_STACK = 8;
 	private int shadowColor;
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
@@ -208,10 +209,8 @@ public class StackWidgetView extends ViewGroup {
 			if (c.getVisibility() != View.GONE) {
 				if (y == 0) {
 					y += c.getPaddingTop();
-				} else {
-					// magic constant (should be removed when image will be recropped)
-					y -= MAGIC_CONSTANT_STACK;
 				}
+				y -= MAGIC_CONSTANT_STACK;
 				c.layout(0, y, cw, y + c.getMeasuredHeight());
 				y += c.getMeasuredHeight();
 				y -= c.getPaddingBottom();
@@ -223,10 +222,8 @@ public class StackWidgetView extends ViewGroup {
 				if (c.getVisibility() != View.GONE) {
 					if (y == 0) {
 						y += c.getPaddingTop();
-					} else {
-						// magic constant (should be removed when image will be recropped)
-						y -= MAGIC_CONSTANT_STACK;
 					}
+					y -= MAGIC_CONSTANT_STACK;
 					c.layout(0, y, cw, y + c.getMeasuredHeight());
 					y += c.getMeasuredHeight();
 					y -= c.getPaddingBottom();
@@ -240,6 +237,7 @@ public class StackWidgetView extends ViewGroup {
 		}
 
 		if (isCollapsible) {
+			y -= MAGIC_CONSTANT_STACK;
 			expandView.setVisibility(VISIBLE);
 			int w = expandView.getDrawable().getMinimumWidth();
 			int h = expandView.getDrawable().getMinimumHeight();
