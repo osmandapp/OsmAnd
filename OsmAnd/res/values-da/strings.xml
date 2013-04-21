@@ -1123,7 +1123,6 @@
 	<string name="save_track_to_gpx">Log spor til GPX fil</string>
 	<string name="update_tile">Opdater kort</string>
 	<string name="reload_tile">Genindlæs delkort</string>
-	<string name="amenity_type_geocache"/>
 	<string name="mark_point">Mål</string>
 	<string name="show_osm_bugs_descr">Vis OpenStreetBugs på kort</string>
 	<string name="show_osm_bugs">Vis OpenStreetBugs</string>
