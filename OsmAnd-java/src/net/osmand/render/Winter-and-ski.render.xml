@@ -60,6 +60,7 @@
 			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="farmyard"/>
 			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="greenfield"/>
 			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="grass"/>
+			<filter minzoom="12" color="#F5FFFF" tag="natural" value="grassland"/>
 			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="meadow"/>
 			<filter minzoom="12" color="#F5FFFF" tag="landuse" value="brownfield"/>
 			<filter minzoom="12" maxzoom="13" color="#F5FFFF" tag="natural" value="field"/>
