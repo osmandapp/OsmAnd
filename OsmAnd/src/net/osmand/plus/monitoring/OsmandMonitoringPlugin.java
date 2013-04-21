@@ -279,7 +279,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		}, -1);
 		
 		final boolean liveoff = !view.getSettings().LIVE_MONITORING.get();
-		qa.registerItem(liveoff ? R.string.monitoring_mode_off : R.string.monitoring_mode_on, 
+		qa.registerItem(liveoff ? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on,
 				liveoff ? R.drawable.monitoring_rec_inactive: R.drawable.monitoring_rec_big, 
 						new OnContextMenuClick() {
 			@Override
