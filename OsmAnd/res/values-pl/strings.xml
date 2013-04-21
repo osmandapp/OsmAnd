@@ -104,8 +104,8 @@
   <string name="local_indexes_cat_tts">Komunikaty głosowe (TTS)</string>
   <string name="local_indexes_cat_voice">Dane głosowe (media)</string>
   <string name="local_indexes_cat_gpx">Dane GPX</string>
-  <string name="local_indexes_cat_tile">Dane mapowe (kafelki)</string>
-  <string name="local_indexes_cat_map">Dane mapowe (wektorowe)</string>
+  <string name="local_indexes_cat_tile">Mapy online i kafelki</string>
+  <string name="local_indexes_cat_map">Mapy offline (wektorowe)</string>
   <string name="local_indexes_cat_poi">Dane POI</string>
   <string name="ttsvoice">Głos TTS</string>
   <string name="search_offline_clear_search">Nowe wyszukiwanie</string>
@@ -275,9 +275,9 @@
   <string name="deselect_all">Odznacz wszystko</string>
   <string name="select_all">Zaznacz wszystko</string>
   <string name="reload">Odśwież</string>
-  <string name="general_settings_descr">Konfiguruj ogólne ustawienia aplikacji</string>
+  <string name="general_settings_descr">Konfiguruj wyświetlanie i ogólne ustawienia dotyczące aplikacji</string>
   <string name="general_settings">Główne</string>
-  <string name="index_settings_descr">Pobieraj mapy i zarządzaj danymi zapisanymi na urządzeniu</string>
+  <string name="index_settings_descr">Pobieraj mapy i zarządzaj danymi offline przechowywanymi na urządzeniu</string>
   <string name="index_settings">Zarządzanie danymi</string>
   <string name="osmand_service">Tryb uśpienia</string>
   <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
@@ -303,7 +303,7 @@
   <string name="download_type_to_filter">filtruj wg typu</string>
   <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
   <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości</string>
-  <string name="unknown_location">Pozycja GPS jeszcze nieustalona</string>
+  <string name="unknown_location">Pozycja nie jest jeszcze znana</string>
   <string name="download_files">Pobierz</string>
   <string name="context_menu_item_search_transport">Wyszukaj komunikację</string>
   <string name="transport_searching_transport">Rezultat wyszukiwania komunikacji (brak celu):</string>
@@ -370,7 +370,7 @@
   <string name="background_router_service_descr">Uruchom usługę śledzącą Twoją pozycję w tle podczas kiedy ekran jest wyłączony</string>
   <string name="background_router_service">Użyj usługi w tle</string>
   <string name="off_router_service_no_gps_available">Usługa nawigacji w tle wymaga wybrania dostawcy lokacji zanim zostanie włączona.</string>
-  <string name="routing_settings_descr">Konfiguruj opcje nawigacji</string>
+  <string name="routing_settings_descr">Określ opcje dla nawigacji</string>
   <string name="routing_settings">Nawigacja</string>
   <string name="hide_poi_filter">Ukryj filtr</string>
   <string name="show_poi_filter">Pokaż filtr</string>
@@ -397,7 +397,7 @@
   <string name="route_head">Prosto</string>
   <string name="first_time_continue">Kontynuuj</string>
   <string name="first_time_download">Pobierz region</string>
-  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które możesz pobrać w Ustawieniach. Dzięki temu będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
+  <string name="first_time_msg">Dziękujemy za korzystanie z OsmAnd. Do wykorzystania większości funkcji aplikacji potrzebujesz danych o wybranym regionie, które pobierzesz w Zarządzaniu danymi. Dzięki nim będziesz mógł przeglądać mapy, wyszukiwać adresy, POI i inne obiekty.</string>
   <string name="search_poi_location">Wyszukiwanie sygnału…</string>
   <string name="search_near_map">Szukaj w pobliżu ostatniej pozycji</string>
   <string name="search_nearby">Szukaj w pobliżu</string>
@@ -469,7 +469,7 @@
   <string name="update_existing">Zamień</string>
   <string name="only_show">Tylko pokaż</string>
   <string name="follow">Nawiguj</string>
-  <string name="recalculate_route_to_your_location">Rodzaj pojazdu:</string>
+  <string name="recalculate_route_to_your_location">Środek transportu:</string>
   <string name="mark_final_location_first">Najpierw wybierz cel podróży</string>
   <string name="get_directions">Nawigacja</string>
   <string name="show_gps_status">Pokaż status GPS</string>
@@ -518,7 +518,7 @@
   <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Wybierz profil użytkownika zawierający specyficzne ustawienia nawigacji i mapy.</string>
+  <string name="settings_preset_descr">Wybierz profil użytkownika z ustawieniami nawigacji i niestandardowych map.</string>
   <string name="settings_preset">Profil użytkownika</string>
   <string name="settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
@@ -665,30 +665,31 @@
   <string name="default_buttons_selectall">Zaznacz wszystko</string>
   <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
   <string name="left_side_navigation">Ruch lewostronny</string>
-  <string name="left_side_navigation_descr">Włącz, jeśli używasz nawigacji w krajach z ruchem lewostronnym</string>
-  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować dane offline.\nKliknij na daną pozycję, aby zobaczyć więcej szczegółów. Kliknij i przytrzymaj, aby ją zdezaktywować lub usunąć.\nIstniejące dane offline na urządzeniu (%1$s jest dostępne):</string>
-  <string name="unknown_from_location">Pozycja początkowa nie jest jeszcze wyznaczona</string>
+  <string name="left_side_navigation_descr">Wybierz dla krajów z ruchem lewostronnym</string>
+  <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować dane offline.
+\nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
+  <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
   <string name="context_menu_item_directions">Nawiguj do punktu</string>
-  <string name="confirm_interrupt_download">Na pewno chcesz przerwać pobieranie pliku?</string>
-  <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do poprawnego działania aplikacji i została zaznaczona do pobrania.</string>
-  <string name="gpx_index_settings_descr">"(zawiera analizator GPX)"</string>
+  <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
+  <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
+  <string name="gpx_index_settings_descr">" (zawiera analizator GPX)"</string>
   <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę map online, aby wybrać inne źródła mapy</string>
-  <string name="map_online_data">Mapy online (kafelki)</string>
-  <string name="map_online_data_descr">Użyj map online (pobierz i zachowaj kafelki map na karcie SD do późniejszego użytku)</string>
+  <string name="map_online_data">Mapy online i kafelki</string>
+  <string name="map_online_data_descr">Użyj map online (pobieraj i przechowuj kafelki na karcie SD)</string>
   <string name="online_map_settings">Mapy online</string>
   <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
   <string name="map_settings">Ustawienia map</string>
-  <string name="map_settings_descr">Skonfiguruj wyświetlanie map</string>
-  <string name="osmand_rastermaps_plugin_description">Pokaż ustawienia do konfiguracji różnych źródeł kafelków mapowych online oraz offline do mapy bazowej lub jako podkład/nakładka na mapę. Mapy mogą być również przygotowane offline i skopiowane do katalogu OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Pokaż ustawienia do konfiguracji zapisywanie trasy oraz nawigację w trybie oszczędzania zasilania (wyłączonego ekranu) przez cykliczne budzenie urządzenia GPS.</string>
-  <string name="osmand_accessibility_description">Pokaż ustawienia do konfiguracji specjalnych ustawień ułatwiających dostęp.</string>
+  <string name="map_settings_descr">Skonfiguruj wyświetlanie mapy</string>
+  <string name="osmand_rastermaps_plugin_description">Wyświetl opcje konfiguracji wielu map online lub kafelków z pamięci podręcznej jako mapy bazowe lub nakładki/podkład. Mapy te można także przygotować offline i skopiować do folderu mapy OsmAnd.</string>
+  <string name="osmand_background_plugin_description">Wyświetl ustawienia umożliwiające włączenie śledzenia i nawigacji w trybie uśpienia (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
+  <string name="osmand_accessibility_description">Pokaż ustawienia specjalnych funkcji ułatwień dostępu.</string>
   <string name="extra_settings">Ustawienia zaawansowane</string>
-  <string name="osmand_monitoring_description">Pokaż ustawienia ułatwiające zapisywanie swoich wycieczek do plików GPX lub online za pomocą usługi WWW.</string>
+  <string name="osmand_monitoring_description">Pokaż ustawienia ułatwiające nagrywanie swoich wycieczek do lokalnych plików GPX lub online za pomocą usługi internetowej.</string>
   <string name="osmand_extra_settings_description">Pokaż ustawienia do konfiguracji zaawansowanych opcji konfiguracyjnych map (jak zwiększenie detali map) oraz opcji specyficznych dla niektórych urządzeń.</string>
-  <string name="osmand_development_plugin_description">Pokaż ustawienia do konfiguracji funkcjonalności związanych z rozwojem aplikacji i usuwaniem błędów, takie jak animowana nawigacja czy wyświetlanie informacji o szybkości rysowania.</string>
+  <string name="osmand_development_plugin_description">Pokaż ustawienia dotyczące rozwoju i debugowania funkcji, takich jak animowana nawigacja lub wyświetlanie informacji o wydajności renderowania.</string>
   <string name="plugins_screen">Wtyczki</string>
   <string name="select_plugin_to_activate">Dotknij wtyczki, aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
-  <string name="prefs_plugins_descr">Wtyczki rozszerzają aplikację o dodatkowe funkcje oraz ustawienia</string>
+  <string name="prefs_plugins_descr">Wtyczki aktywują zaawansowane ustawienia i dodatkową funkcjonalność</string>
   <string name="prefs_plugins">Wtyczki</string>
   <string name="tip_recent_changes_0_8_0_t">"Zmiany w 0.8.0:
 \n\t- *Obsługa wtyczek*\n\t- Większość funkcjonalności jest pogrupowana i może być aktywowana/dezaktywowana w Menadżerze Wtyczek. Możesz aktywować źródła map, ustawienia zapisu ścieżek oraz wiele innych wcześniej istniejących i nowych funkcjonalności.\n\t- *Obsługa nowego formatu danych offline*\n\t- Renderowanie map stało się szybsze i bardziej dokładne (problemy z linią brzegową i terenami zalanymi są w większości naprawione).\n\t- Musisz pobrać zupełnie nowe dane offline (stary format danych nie będzie już obsługiwany)\n\t- *Nawigacja offline*\n\t- Nawigacja offline została poprawiony\n\t- *Poprawki użyteczności oraz UI*\n\t- Poprawione w wielu kwestiach "</string>
@@ -822,8 +823,8 @@
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
   <string name="amenity_type_user_defined">Zdefiniowane przez użytkownika</string>
   <string name="fav_export_confirmation">Plik z poprzednio wyeksportowanymi ulubionymi już istnieje. Nadpisać go?</string>
-  <string name="profile_settings">Ustawienia profilu</string>
-  <string name="global_settings">Ustawienia globalne</string>
+  <string name="profile_settings">Ustawienia specyficzne dla profilu</string>
+  <string name="global_settings">Ustawienia ogólne</string>
   <string name="global_app_settings">Ustawienia globalne aplikacji</string>
   <string name="tip_osm_improve">Poprawa danych OSM</string>
   <string name="tip_osm_improve_t">\tOsmAnd używa map pochodzących z danych Openstreetmap.org (OSM) i, poza wyświetlaniem map oraz nawigacji, może być używany do poprawienia jakości danych OSM. Możesz, używając jedynie kilku kliknięć, łatwo stworzyć i wysłać nowe POI lub zgłosić błąd w danych OSM.\n\tW tym celu najpierw musisz ustawić swój login oraz hasło OSM w \'Ustawienia\' -&gt; \'Ustawienia globalne\' -&gt; \'Edycja OSM\'\n\tAby dodać nowe POI, użyj opcji \'Utwórz POI\' w menu kontekstowym mapy. Wpisz informacje na temat nowego POI w oknie dialogowym \'Stwórz POI\' i zatwierdź go.\n\tBłędy w mapach mogą być natychmiast zgłoszone jako błąd OSM, dzięki czemu społeczność OSM może szybciej naprawić problem.\n\tAby dodać błąd OSM użyj opcji \'Zgłoś błąd do OSM\' w menu kontekstowym mapy. Następnie wpisz dokładny opis problemu a następnie wyślij go używając przycisku \'Dodaj\'.\n\tAby dodawać POI OSM lub zgłaszać błędy do OSM, wymagane jest połączenie z Internetem.</string>
@@ -838,15 +839,15 @@
   <string name="navigate_point_format">Format:</string>
   <string name="poi_search_desc">Wyszukaj POI</string>
   <string name="address_search_desc">Wyszukiwanie adresu</string>
-  <string name="navpoint_search_desc">Nawiguj do punktu</string>
+  <string name="navpoint_search_desc">Współrzędne</string>
   <string name="transport_search_desc">Wyszukaj transport</string>
   <string name="favourites_search_desc">Wyszukaj w ulubionych</string>
   <string name="history_search_desc">Historia wyszukiwania</string>
   <string name="rendering_attr_noPolygons_description">"Ukryj wszystkie elementy mapy będące terenami ziemnymi"</string>
   <string name="rendering_attr_noPolygons_name">Bez wielokątów</string>
   <string name="rendering_attr_appMode_name">Tryb rysowania</string>
-  <string name="rendering_attr_appMode_description">Optymalizacja map dla wybranego profilu użytkownika</string>
-  <string name="rendering_attr_contourLines_description">Wybierz minimalny poziom przybliżenia, przy którym będą wyświetlane (może być wymagany plik STRM):</string>
+  <string name="rendering_attr_appMode_description">Optymalizuj mapę dla</string>
+  <string name="rendering_attr_contourLines_description">Wyświetlanie od poziomu powiększenia (wymagane dane poziomicowe):</string>
   <string name="rendering_attr_contourLines_name">Pokaż poziomice</string>
   <string name="rendering_attr_hmRendered_description">Zwiększ ilość detali pokazywanych na mapie</string>
   <string name="rendering_attr_hmRendered_name">Pokaż więcej detali na mapie</string>
@@ -867,9 +868,9 @@
   <string name="gpxup_trackable">Z opcją śledzenia</string>
   <string name="gpxup_private">Prywatny</string>
   <string name="osmand_parking_event">Odbierz samochód z parkingu</string>
-  <string name="osmand_parking_warning">Ostrzeżenie</string>
-  <string name="osmand_parking_warning_text">Powiadomienie o odebraniu samochodu z parkingu zostało już dodane do Twojego kalendarza. Pozostanie tam dopóki nie usuniesz go ręcznie.</string>
-  <string name="osmand_parking_time_limit_title">Ustaw limit czasowy parkowania</string>
+  <string name="osmand_parking_warning">Uwaga</string>
+  <string name="osmand_parking_warning_text">Powiadomienie o odebraniu samochodu zostało wcześniej dodane do kalendarza. Pozostanie ono tam, dopóki nie usuniesz go ręcznie.</string>
+  <string name="osmand_parking_time_limit_title">Ustaw limit czasu parkowania</string>
   <string name="osmand_parking_delete_confirm">Chcesz usunąć lokalizację zaparkowanego samochodu?</string>
   <string name="osmand_parking_delete">Usuń znacznik parkowania</string>
   <string name="osmand_parking_choose_type">Wybierz typ parkingu</string>
@@ -878,16 +879,16 @@
   <string name="osmand_parking_add_event">Dodaj powiadomienie do aplikacji kalendarza</string>
   <string name="osmand_parking_time_limit">Parking ograniczony czasowo</string>
   <string name="osmand_parking_time_no_limit">Parking nielimitowany czasowo</string>
-  <string name="osmand_parking_position_description">Pozycja Twojego zaparkowanego samochodu. %1$s</string>
+  <string name="osmand_parking_position_description">Pozycja zaparkowanego samochodu. %1$s</string>
   <string name="osmand_parking_position_description_add">Odebrać samochód o:</string>
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Miejsce parkowania</string>
-  <string name="osmand_parking_plugin_description">Ta wtyczka pozwala Ci na zapisanie lokalizacji Twojego zaparkowanego samochodu.</string>
+  <string name="osmand_parking_plugin_description">Wtyczka ta pozwala zapisać lokalizację zaparkowanego samochodu.</string>
   <string name="osmand_parking_plugin_name">Wtyczka miejsca parkowania</string>
   <string name="context_menu_item_add_parking_point">Oznacz jako pozycja parkowania</string>
   <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
-  <string name="starting_point_too_far">Punkt startowy zbyt daleko od najbliższej drogi.</string>
+  <string name="starting_point_too_far">Punkt początkowy jest zbyt daleko od najbliższej drogi.</string>
   <string name="shared_location">Lokalizacja współdzielona</string>
   <string name="update_downlod_list">Przeładuj listę</string>
   <string name="global_app_allocated_memory_descr">Użyta pamięć: %1$s MB (limit Androida %2$s MB, dalvika %3$s MB).</string>
@@ -897,10 +898,10 @@
   <string name="select_animate_speedup">Wybierz przyspieszenie animacji trasy</string>
   <string name="osmand_parking_hours">Godziny</string>
   <string name="osmand_parking_minutes">Minuty</string>
-  <string name="osmand_parking_position_description_add_time">Samochód został zaparkowany w:</string>
-  <string name="use_compass_navigation_descr">Użyj kompasu w nawigacji, kiedy kierunek nie jest wykryty</string>
+  <string name="osmand_parking_position_description_add_time">Samochód został zaparkowany o:</string>
+  <string name="use_compass_navigation_descr">Użyj kompasu, gdy nie zostanie wykryty kierunek</string>
   <string name="use_compass_navigation">Użyj kompasu</string>
-  <string name="route_updated_loc_found">Trasa będzie przeliczona, gdy lokalizacja zostanie odnaleziona</string>
+  <string name="route_updated_loc_found">Trasa zostanie obliczona po odnalezieniu pozycji</string>
   <string name="continue_follow_previous_route_auto">Poprzednia trasa nie została ukończona. Kontynuować ją? (%1$s sekund)</string>
   <string name="show_cameras_descr">Pokaż fotoradary (może to być zabronione w niektórych krajach)</string>
   <string name="show_traffic_warnings_descr">"Pokaż ograniczenia prędkości i progi zwalniające "</string>
@@ -944,12 +945,12 @@
 \nZachód: %2$s</string>
   <string name="map_widget_renderer">Styl renderowania</string>
   <string name="layer_map_appearance">Konfiguruj ekran…</string>
-  <string name="avoid_unpaved">Dróg gruntowych</string>
+  <string name="avoid_unpaved">Dróg nieutwardzonych</string>
   <string name="avoid_ferries">Promów</string>
   <string name="avoid_in_routing_title">Unikaj…</string>
-  <string name="avoid_in_routing_descr">Unikaj dróg płatnych, gruntowych, promów</string>
+  <string name="avoid_in_routing_descr">Unikaj dróg płatnych, nieutwardzonych, promów</string>
   <string name="show_warnings_title">Pokaż ostrzeżenia…</string>
-  <string name="show_warnings_descr">Pokaż ograniczenia prędkości, fotoradary i pasy ruchu</string>
+  <string name="show_warnings_descr">Konfiguruj ostrzeżenia ruchu (ograniczenia prędkości, przymusowe przystanki, progi zwalniające), ostrzeżenia o fotoradarach i informacje o pasach</string>
   <string name="monitoring_mode_off">Zapisuj GPX</string>
   <string name="tip_rotation_switching_t_v2">"\tMożesz zmieniać sposób obracania mapy przez klikanie na ikonie kompasu.
 \n\tMasz do wyboru:
@@ -979,8 +980,8 @@
 	</string>
 <string name="osmand_plus_short_description_80_chars">OsmAnd to aplikacja open source do nawigacji obsługująca mapy offline i online</string>
 <string name="avoid_motorway">Autostrad</string>
-<string name="snap_to_road_descr">Przyciągaj wskaźnik pozycji do drogi podczas nawigacji</string>
-<string name="snap_to_road">Przyciąganie do drogi</string>
+<string name="snap_to_road_descr">Przyciągaj pozycję do drogi podczas nawigacji</string>
+<string name="snap_to_road">Przyciągaj do drogi</string>
 <string name="tip_recent_changes_0_8_3_t">"Zmiany w 0.8.3:
 \n\t* Poprawione route guidance
 \n\t* Opcja unikania autostrad
