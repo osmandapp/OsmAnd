@@ -1082,7 +1082,7 @@
     <string name="srtm_plugin_description">Wtyczka ta pozwala na pobranie poziomic (Zarządzanie danymi -&gt; Menu -&gt; Inne mapy) dla określonego regionu i wyświetlenie ich na mapach offline.</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
-    <string name="osmand_distance_plugin_description">Umożliwia pomiar odległości pomiędzy dwoma punktami. Zaznacz początek / cel / wyczyść pomiar poprzez długie naciśnięcie.</string>
+    <string name="osmand_distance_plugin_description">Zmierz odległość między dwoma lub więcej punktów. Dodaj punkty krótkim kliknięciem i usuń przez dłuższe przyciśnięcie.</string>
 	<string name="osmand_distance_plugin_name">Kalkulator odległości</string>
 <string name="audionotes_plugin_description">Twórz notatki dźwiękowe podczas podróży.</string>
     <string name="audionotes_plugin_name">Notatki głosowe</string>
@@ -1125,7 +1125,7 @@
     <string name="map_widget_av_notes">Notatki audio</string>
     <string name="osmand_srtm_short_description_80_chars">Wtyczka OsmAnd do rysowania poziomic offline</string>
     <string name="use_clear_distance_measurement">Kliknij ponownie, aby wyczyścić punkty pomiarów.</string>
-    <string name="use_distance_measurement">Kliknij, aby zaznaczyć punkt. Naciśnij i przytrzymaj, by usunąć poprzedni punkt. Kliknij na widżecie pomiarów, aby wyjść.</string>
+    <string name="use_distance_measurement">Dotknij, aby zaznaczyć punkt. Naciśnij i przytrzymaj, aby usunąć poprzednie punkty. Kliknij widget pomiaru, aby wyjść.</string>
     <string name="map_widget_distancemeasurement">Pomiar odległości</string>
     <string name="dropbox_plugin_description">Wtyczka Dropbox umożliwia synchronizację ścieżek i notatek audio/wideo z twoim kontem Dropbox.</string>
     <string name="dropbox_plugin_name">Wtyczka Dropbox</string>
