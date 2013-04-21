@@ -93,7 +93,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						OsmAndLocationProvider provider = app.getLocationProvider();
 						Float lastSensorRotation = provider.getHeading();
 						if (lastSensorRotation != null && Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -lastSensorRotation)) > 15) {
-							if (now - lastTimeSensorMapRotation > 1500) {
+							if (now - lastTimeSensorMapRotation > 3500) {
 								lastTimeSensorMapRotation = now;
 								mapView.setRotate(-lastSensorRotation);
 							}
@@ -105,7 +105,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				boolean enableSensorNavigation = false;
 				if(routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
-					enableSensorNavigation = !location.hasBearing() ;
+					enableSensorNavigation = !location.hasBearing();
 				}
 				registerUnregisterSensor(location, enableSensorNavigation);
 			}
