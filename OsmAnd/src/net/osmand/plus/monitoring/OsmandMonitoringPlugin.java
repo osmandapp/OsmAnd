@@ -277,7 +277,26 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}
 			}
 		}, -1);
-		
+
+		qa.registerItem(R.string.save_current_track_widget,
+				R.drawable.monitoring_rec_inactive,
+					new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
+
+					@Override
+					protected Void doInBackground(Void... params) {
+						SavingTrackHelper helper = app.getSavingTrackHelper();
+						helper.saveDataToGpx();
+						helper.close();
+						return null;
+					}
+
+				}, null);
+			}
+		}, -1);
+
 		final boolean liveoff = !view.getSettings().LIVE_MONITORING.get();
 		qa.registerItem(liveoff ? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on,
 				liveoff ? R.drawable.monitoring_rec_inactive: R.drawable.monitoring_rec_big, 
@@ -299,25 +318,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				} else {
 					view.getSettings().LIVE_MONITORING.set(false);
 				}
-			}
-		}, -1);
-		
-		qa.registerItem(R.string.save_current_track_widget, 
-				R.drawable.monitoring_rec_inactive, 
-					new OnContextMenuClick() {
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
-
-					@Override
-					protected Void doInBackground(Void... params) {
-						SavingTrackHelper helper = app.getSavingTrackHelper();
-						helper.saveDataToGpx();
-						helper.close();
-						return null;
-					}
-
-				}, null);
 			}
 		}, -1);
 	}
