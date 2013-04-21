@@ -102,19 +102,30 @@ public class MapInfoWidgetsFactory {
 	public ImageView createBackToLocation(final MapActivity map){
 		final Drawable backToLoc = map.getResources().getDrawable(R.drawable.back_to_loc);
 		final Drawable backToLocWhite = map.getResources().getDrawable(R.drawable.back_to_loc_white);
+		final Drawable backToLocDisabled = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled);
+		final Drawable backToLocDisabledWhite = map.getResources().getDrawable(R.drawable.la_backtoloc_disabled_white);
+		final Drawable backToLocTracked = map.getResources().getDrawable(R.drawable.back_to_loc_tracked);
+		final Drawable backToLocTrackedWhite = map.getResources().getDrawable(R.drawable.back_to_loc_tracked_white);
 		ImageView backToLocation = new ImageViewWidget(map) {
-			private boolean nightM;
+			Drawable lastDrawable = null;
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
-				if(nightM != nightMode) {
-					nightM = nightMode;
-					setImageDrawable(nightM ? backToLocWhite : backToLoc);
-				}
 				boolean enabled = map.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
-				enabled = enabled && !map.getMapViewTrackingUtilities().isMapLinkedToLocation();
-				setEnabled(enabled);
+				boolean tracked = map.getMapViewTrackingUtilities().isMapLinkedToLocation();
+				Drawable d;
+				if(!enabled) {
+					d = nightMode ? backToLocDisabledWhite : backToLocDisabled; 
+				} else if(tracked) {
+					d = nightMode ? backToLocTrackedWhite : backToLocTracked;
+				} else {
+					d = nightMode ? backToLocWhite : backToLoc;
+				}
+				if(d != lastDrawable) {
+					lastDrawable = d;
+					setImageDrawable(d);
+				}
 				return true;
 			}
 		};

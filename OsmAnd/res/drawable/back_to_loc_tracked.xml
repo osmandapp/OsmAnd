@@ -3,5 +3,5 @@
 	<item android:state_enabled="false" android:drawable="@drawable/la_backtoloc_disabled" />
     <item android:state_pressed="true" android:drawable="@drawable/la_backtoloc_disabled" />
     <item android:state_focused="true" android:drawable="@drawable/la_backtoloc_disabled" />
-    <item android:drawable="@drawable/la_backtoloc_enabled" />
+    <item android:drawable="@drawable/la_backtoloc_tracked" />
 </selector>
