@@ -481,6 +481,7 @@ public class RouteResultPreparation {
 //		}
 
 		double devation = Math.abs(MapUtils.degreesDiff(prevSegm.getBearingEnd(), currentSegm.getBearingBegin()));
+		boolean makeSlightTurn = devation > 5 && (!isMotorway(prevSegm) || !isMotorway(currentSegm));
 		if (kl) {
 			t = TurnType.valueOf(devation > 5 ? TurnType.TSLL : TurnType.KL, leftSide);
 			t.setSkipToSpeak(!speak);
@@ -493,6 +494,13 @@ public class RouteResultPreparation {
 			t.setLanes(lanes);
 		}
 		return t;
+	}
+	
+	private boolean isMotorway(RouteSegmentResult s){
+		String h = s.getObject().getHighway();
+		return "motorway".equals(h) || "motorway_link".equals(h)  ||
+				"trunk".equals(h) || "trunk_link".equals(h);
+		
 	}
 
 	
