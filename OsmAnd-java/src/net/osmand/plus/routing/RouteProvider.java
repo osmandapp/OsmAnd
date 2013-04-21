@@ -465,7 +465,7 @@ public class RouteProvider {
 		if (ApplicationMode.PEDESTRIAN == params.mode) {
 			uri.append("foot.gpx"); //$NON-NLS-1$
 		} else if (ApplicationMode.BICYCLE == params.mode) {
-			speed = 5.5f;
+			speed = 4.2f;
 			uri.append("bicycle.gpx"); //$NON-NLS-1$
 		} else {
 			speed = 15.3f;
