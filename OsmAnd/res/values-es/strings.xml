@@ -1135,4 +1135,5 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
 	<string name="tip_recent_changes_1_1_4_t">Cambios en 1.1.4:\n\t* Corrección de errores (mejorados enrutamiento, búsqueda, grabación de AV, mensajes de voz, algunas mejoras de visualización)\n\t* Configuración más fácil de superposición de sombreado (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces a ubicaciones de maps.google.com\n\t* Agregado soporte multi-ventana para los dispositivos más recientes de Samsung\n\t* Filtro de Kalman para brújula\n \t* Soporte para reloj Pebble</string>
-    </resources>
+    <string name="save_current_track_widget">Guardar\ntraza GPX actual</string>
+	</resources>
