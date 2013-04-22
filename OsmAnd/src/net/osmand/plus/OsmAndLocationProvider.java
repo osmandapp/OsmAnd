@@ -61,15 +61,18 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	private final boolean USE_KALMAN_FILTER = true;
-	private final float KALMAN_COEFFICIENT = 0.5f;
+	private final float KALMAN_COEFFICIENT = 0.02f;
 	
 	float avgValSin = 0;
 	float avgValCos = 0;
-	private float[] previousCompassValuesA = new float[5];
-	private float[] previousCompassValuesB = new float[5];
+	float lastValSin = 0;
+	float lastValCos = 0;
+	private float[] previousCompassValuesA = new float[50];
+	private float[] previousCompassValuesB = new float[50];
 	private int previousCompassIndA = 0;
 	private int previousCompassIndB = 0;
 	
+	private long lastHeadingCalcTime = 0;
 	private Float heading = null;
 
 	// Current screen orientation
@@ -317,42 +320,55 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			val += previousCorrectionValue;
 		}
 		float valRad = (float) (val / 180f * Math.PI);
-		float valSin = (float) Math.sin(valRad);
-		float valCos = (float) Math.cos(valRad);
+		lastValSin = (float) Math.sin(valRad);
+		lastValCos = (float) Math.cos(valRad);
+		lastHeadingCalcTime = System.currentTimeMillis();
 		if(heading == null && previousCompassIndA == 0) {
-			Arrays.fill(previousCompassValuesA, valSin);
-			Arrays.fill(previousCompassValuesB, valCos);
-			avgValSin = valSin;
-			avgValCos = valCos;
+			Arrays.fill(previousCompassValuesA, lastValSin);
+			Arrays.fill(previousCompassValuesB, lastValCos);
+			avgValSin = lastValSin;
+			avgValCos = lastValCos;
 		} else {
 			if (USE_KALMAN_FILTER) {
-				avgValSin = KALMAN_COEFFICIENT * valSin + avgValSin * (1 - KALMAN_COEFFICIENT);
-				avgValCos = KALMAN_COEFFICIENT * valCos + avgValCos * (1 - KALMAN_COEFFICIENT);
+				avgValSin = KALMAN_COEFFICIENT * lastValSin + avgValSin * (1 - KALMAN_COEFFICIENT);
+				avgValCos = KALMAN_COEFFICIENT * lastValCos + avgValCos * (1 - KALMAN_COEFFICIENT);
 			} else {
 				int l = previousCompassValuesA.length;
 				previousCompassIndA = (previousCompassIndA + 1) % l;
 				previousCompassIndB = (previousCompassIndB + 1) % l;
 				// update average
-				avgValSin = avgValSin + (-previousCompassValuesA[previousCompassIndA] + valSin) / l;
-				previousCompassValuesA[previousCompassIndA] = valSin;
-				avgValCos = avgValCos + (-previousCompassValuesB[previousCompassIndB] + valCos) / l;
-				previousCompassValuesB[previousCompassIndB] = valCos;
+				avgValSin = avgValSin + (-previousCompassValuesA[previousCompassIndA] + lastValSin) / l;
+				previousCompassValuesA[previousCompassIndA] = lastValSin;
+				avgValCos = avgValCos + (-previousCompassValuesB[previousCompassIndB] + lastValCos) / l;
+				previousCompassValuesB[previousCompassIndB] = lastValCos;
 			}
 		}
-//		System.out.println("Log sin/cos = " + valSin + "/" +valCos + " ?= avg " + avgValSin + "/"+avgValCos);
+		updateCompassVal();
+	}	
+
+	private void updateCompassVal() {
 		heading = (float) getAngle(avgValSin, avgValCos);
-		updateCompassValue(heading.floatValue());
+		for(OsmAndCompassListener c : compassListeners){
+			c.updateCompassValue(heading.floatValue());
+		}
+	}
+	
+	public Float getHeading() {
+		if (heading != null && lastValSin != avgValSin && System.currentTimeMillis() - lastHeadingCalcTime > 700) {
+			avgValSin = lastValSin;
+			avgValCos = lastValCos;
+			lastHeadingCalcTime = System.currentTimeMillis();
+			Arrays.fill(previousCompassValuesA, avgValSin);
+			Arrays.fill(previousCompassValuesB, avgValCos);
+			updateCompassVal();
+		}
+		return heading;
 	}
 	
 	private float getAngle(float sinA, float cosA) {
 		return MapUtils.unifyRotationTo360((float) (Math.atan2(sinA, cosA) * 180 / Math.PI));
 	}
 
-	private void updateCompassValue(float val) {
-		for(OsmAndCompassListener c : compassListeners){
-			c.updateCompassValue(val);
-		}
-	}
 	
 	private void updateLocation(net.osmand.Location loc ) {
 		for(OsmAndLocationListener l : locationListeners){
@@ -584,9 +600,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return location;
 	}
 
-	public Float getHeading() {
-		return heading;
-	}
 
 	public void showNavigationInfo(LatLon pointToNavigate, Context uiActivity) {
 		getNavigationInfo().show(pointToNavigate, getHeading(), uiActivity);
