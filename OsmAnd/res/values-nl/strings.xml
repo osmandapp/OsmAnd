@@ -306,7 +306,7 @@
   <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar Google Play gaan om deze te installeren?</string>
   <string name="gpx_option_reverse_route">Keer richting van GPX-route om</string>
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
-  <string name="gpx_option_from_start_point">Toon het gehele spoor</string>
+  <string name="gpx_option_from_start_point">Volg het gehele spoor</string>
   <string name="switch_to_vector_map_to_see">Offline vectorkaart aanwezig voor deze locatie. \n\t\n\tOm deze te gebruiken, activeer \'Menu\' -&gt; \'Definieer beeld\' -&gt; \'Kaartbron…\' -&gt; \'Offline vectorkaarten\'.</string>
   <string name="choose_audio_stream">Stembegeleiding audiokanaal</string>
   <string name="choose_audio_stream_descr">Selecteer kanaal voor de stembegeleiding (systeem-afhankelijk)</string>
