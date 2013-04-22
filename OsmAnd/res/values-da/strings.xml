@@ -91,7 +91,7 @@
 	<string name="rendering_attr_roadColors_description">Vælg et vej farveskema:</string>
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver sporings udvidelse til at bruge position logging tjenester (logning, live tracking)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver sporings udvidelse til at bruge position logning tjenester (logning, live tracking)</string>
     <string name="non_optimal_route_calculation">Beregn en mulig ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
@@ -422,7 +422,7 @@
 	<string name="local_openstreetmap_settings">Lokalt gemt OSM POI/fejl</string>
 	<string name="local_openstreetmap_settings_descr">Vis og håndter OSM POI/fejl registreret i lokal database</string>
 	<string name="live_monitoring_descr">Send sporing til en specifik web service</string>
-	<string name="live_monitoring">Onlune sporing</string>
+	<string name="live_monitoring">Online sporing</string>
 	<string name="live_monitoring_interval_descr">Angiv online sporing interval</string>
 	<string name="live_monitoring_interval">Online sporing interval</string>
 	<string name="live_monitoring_url_descr">Angiv web adressen med parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
@@ -603,7 +603,7 @@
 \n\tFor at kunne dette skal du først angive dine OSM login informationer i \'Indstillinger\' -&gt; \'Generelle indstillinger\' -&gt; \'OSM redigering\'.
 \n\tFor at oprette et nyt POI brug valgmuligheden \'Opret POI\' i kortets kontekst menu. Fortsæt med at indtaste informationer for det nye POI i dialogen \'Opret POI\' and til sidst bekræft den.
 \n\tFejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
-\n\tFor at tilføje en OSM fejl brug valgm,uligheden \'Åben OSM fejl\' i kortet kontekst menu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
+\n\tFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejl\' i kortet kontekst menu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
 \n\tBemærk venligst at internet forbindelse er nødvendig for at sende OSM POI og OSM fejl bidrag.</string>
 	<string name="tip_select_destination_point_t">"\tDu kan vælge et bestemmelsessted direkte på kortet (kontekst menu, og så \'Angiv som bestemmelsessted\'), i alle søge aktiviteter eller via et langt tryk på en post i din \'Liste over favorit steder\'
 \n\tBestemmelsesstedet vises som en orange skive på kortet og OsmAnd viser afstanden og retningen til den (orange trekant). "</string> 
@@ -644,12 +644,12 @@
 	<string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Venligst overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
 	<string name="vector_data_missing">Offline data mangler på SD kort. Venligst overvej at downloade to for at bruge offline kort.</string>
 	<string name="local_index_gpx_info_elevation">\nGennemsnits højde: %1$.0f m\nMinimum højde: %2$.0f m\nMaksimum højde: %3$.0f m\nStigninger: %4$.0f m\nFald: %5$.0f m</string>
-	<string name="local_index_gpx_info">Delsport: %1$d\nTotale punkter: %2$d\nWaypoints: %3$d\nSamlet afstand: %4$s\nStart tid: %5$tF, %5$tR\nSlut tid: %6$tF, %6$tR</string>
+	<string name="local_index_gpx_info">Delspor: %1$d\nTotale punkter: %2$d\nWaypoints: %3$d\nSamlet afstand: %4$s\nStart tid: %5$tF, %5$tR\nSlut tid: %6$tF, %6$tR</string>
 	<string name="local_index_installed">Udgave</string>
 	<string name="local_index_items_backuped">%1$d af %2$d emne(r) korrekt deaktiveret.</string>
 	<string name="local_index_items_deleted">%1$d af %2$d emne(r) korrekt slettet.</string>
 	<string name="local_index_items_restored">%1$d af %2$d emne(r) korrekt aktiveret.</string>
-	<string name="local_index_no_items_to_do">Ingen emne(r) at %1$s</string>
+	<string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
 	<string name="local_index_action_do">Du er ved at %1$s %2$s emne(r). Fortsæt?</string>
 	<string name="local_index_descr_title">Datahåndtering</string>
 	<string name="local_index_mi_restore">Aktiver</string>
@@ -757,14 +757,14 @@
 	<string name="context_menu_item_add_waypoint">Tilføj GPX waypoint</string>
 	<string name="amenity_type_administrative">Administrativ</string>
 	<string name="amenity_type_barrier">Barriere</string>
-	<string name="amenity_type_education">Uddanelse</string>
+	<string name="amenity_type_education">Uddannelse</string>
 	<string name="amenity_type_entertainment">Underholdning</string>
-	<string name="amenity_type_finance">Financiel</string>
+	<string name="amenity_type_finance">Finansiel</string>
 	<string name="amenity_type_healthcare">Sundhed</string>
 	<string name="amenity_type_historic">Historisk</string>
 	<string name="amenity_type_leisure">Fornøjelse</string>
 	<string name="amenity_type_manmade">Menneske skabt</string>
-	<string name="amenity_type_military">Millitært</string>
+	<string name="amenity_type_military">Militær</string>
 	<string name="amenity_type_natural">Naturlig</string>
 	<string name="amenity_type_office">Kontor</string>
 	<string name="amenity_type_other">Andet</string>
@@ -782,14 +782,14 @@
 	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Forældet kort data format \"{0}\" er ikke understøttet</string>
 	<string name="poi_filter_closest_poi">Nærmeste POI</string>
-	<string name="poi_filter_custom_filter">Tilpadset filter</string>
+	<string name="poi_filter_custom_filter">Tilpasset filter</string>
 	<string name="poi_filter_namefinder">Online NavneFinder</string>
-	<string name="reading_cached_tiles">Læser cached delkort…</string>
+	<string name="reading_cached_tiles">Læser cachede delkort…</string>
 	<string name="version_index_is_big_for_memory">Indekset \"{0}\" passede ikke i hukommelsen</string>
 	<string name="version_index_is_not_supported">Versionen af indeks \"{0}\" er ikke understøttet</string>
 	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
 	<string name="use_osmand_routing_service_descr">Brug af OsmAnd offline navigation gælder kun ruter &gt; 20 km (eksperimenterende)</string>
-	<string name="specified_dir_doesnt_exist">Kan ikke finde den angivede mappe.</string>
+	<string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
 	<string name="application_dir">Lagringsmappe</string>
 	<string name="build_installed">Build {0} korrekt installeret ({1}).</string>
 	<string name="downloading_build">Henter build…</string>
@@ -828,7 +828,7 @@
 	<string name="select_max_zoom_preload_area">Vælg den maksimale zoom der skal forhånds indlæses</string>
 	<string name="maps_could_not_be_downloaded">Dette kort kunne ikke hentes</string>
 	<string name="continuous_rendering">Kontinuerlig rendering</string>
-	<string name="continuous_rendering_descr">Vis kontinuerlig rendering istedet for billede-nu</string>
+	<string name="continuous_rendering_descr">Vis kontinuerlig rendering i stedet for billede-nu</string>
 	<string name="rendering_exception">Det skete en fejl under rendering af det valgte område</string>
 	<string name="show_point_options">Brug placeringer…</string>
 	<string name="renderer_load_sucess">Renderingsenhed indlæst</string>
@@ -844,7 +844,7 @@
 	<string name="use_high_res_maps_descr">Stræk (og slør) ikke delkort på skærme med stor tæthed</string>
 	<string name="download_files">Hent</string>
 	<string name="context_menu_item_search_transport">Søg transport</string>
-	<string name="transport_searching_transport">Tansport resultater (ingen mål):</string>
+	<string name="transport_searching_transport">Transport resultater (ingen mål):</string>
 	<string name="transport_searching_route">Transport resultater ({0} til mål):</string>
 	<string name="transport_search_none">ingen</string>
 	<string name="transport_search_again">Nulstil transport søgning</string>
@@ -869,7 +869,7 @@
 	<string name="show_route">Rute detaljer</string>
 	<string name="fav_imported_sucessfully">Favoritter er importeret</string>
 	<string name="fav_file_to_load_not_found">GPX fil med favoritter er ikke fundet i {0}</string>
-	<string name="fav_saved_sucessfully">Favoritter gem i {0}</string>
+	<string name="fav_saved_sucessfully">Favoritter gemt i {0}</string>
 	<string name="no_fav_to_save">Ingen favoritter at gemme</string>
 	<string name="import_fav">Importer</string>
 	<string name="export_fav">Eksporter</string>
@@ -879,8 +879,8 @@
 	<string name="poi_namefinder_query_empty">Indtast søgetekst for at finde POI</string>
 	<string name="any_poi">Enhver</string>
 	<string name="layer_transport_route">Transport rute</string>
-	<string name="thanks_yandex_traffic">Tak til Yandex for traffik information.</string>
-	<string name="layer_yandex_traffic">Yandex traffik</string>
+	<string name="thanks_yandex_traffic">Tak til Yandex for trafik information.</string>
+	<string name="layer_yandex_traffic">Yandex trafik</string>
 	<string name="layer_route">Rute</string>
 	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_osm_bugs">OSM fejl</string>
@@ -955,7 +955,7 @@
 	<string name="route_tl">Drej til venstre og kør</string>
 	<string name="route_tshl">Drej skarpt til venstre og kør</string>
 	<string name="route_tsll">Drej en smule til venstre og kør</string>
-	<string name="route_tu">Foretag u-vending og kør</string>
+	<string name="route_tu">Foretag U-vending og kør</string>
 	<string name="first_time_continue">Senere</string>
 	<string name="first_time_download">Hent regioner</string>
 	<string name="search_poi_location">Søger efter signal…</string>
@@ -1008,7 +1008,7 @@
 	<string name="voice_provider">Stemme vejledning</string>
 	<string name="voice_data_initializing">Initialiserer stemme data…</string>
 	<string name="voice_data_not_supported">Ikke understøttet version af stemme data</string>
-	<string name="voice_data_corrupted">De angivede stemmedata er fejlbehæftet</string>
+	<string name="voice_data_corrupted">De angivne stemmedata er fejlbehæftet</string>
 	<string name="voice_data_unavailable">De valgte stemmedata er ikke tilgængelig</string>
 	<string name="opening_hours_not_supported">Åbningstider format understøtter ikke redigering</string>
 	<string name="transport_stop_to_go_out">Vælg stoppestedet for afstigning</string>
@@ -1019,8 +1019,8 @@
 	<string name="update_poi_success">POI data blev opdateret ({0} blev indlæst)</string>
 	<string name="update_poi_error_local">Fejl under opdatering af lokal POI liste</string>
 	<string name="update_poi_error_loading">Fejl under indlæsning af data fra server</string>
-	<string name="update_poi_no_offline_poi_index">Ingen offline POI data tilrådighed for dette område</string>
-	<string name="update_poi_is_not_available_for_zoom">Opdatering af POIer er ikke tilgængelig ved lave zoomniveauer</string>
+	<string name="update_poi_no_offline_poi_index">Ingen offline POI data til rådighed for dette område</string>
+	<string name="update_poi_is_not_available_for_zoom">Opdatering af POI er ikke tilgængelig ved lave zoomniveauer</string>
 	<string name="context_menu_item_update_poi">Opdater POI</string>
 	<string name="context_menu_item_update_map_confirm">Opdater lokale data via internettet?</string>
 	<string name="search_history_city">By:\n {0}</string>
@@ -1030,8 +1030,8 @@
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ryd alt</string>
 	<string name="history">Historik</string>
-	<string name="uploading_data">Uploader data…</string>
-	<string name="uploading">Uploader…</string>
+	<string name="uploading_data">Overfører data…</string>
+	<string name="uploading">Overfører…</string>
 	<string name="search_nothing_found">Fandt ikke noget</string>
 	<string name="searching">Søger…</string>
 	<string name="searching_address">Søger adresse…</string>
@@ -1180,7 +1180,7 @@
 	<string name="context_menu_item_open_bug">Opret OSM fejlregistrering</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorit punkt \"{0}\" blev tilføjet.</string>
 	<string name="osb_add_dialog_title">Indtast fejl tekst</string>
-	<string name="osb_add_dialog_success">Fejlmeddelese oprettet</string>
+	<string name="osb_add_dialog_success">Fejlmeddelelse oprettet</string>
 	<string name="osb_add_dialog_error">Undtagelse opstod: Fejlmedelelse blev ikke oprettet</string>
 	<string name="osb_comment_dialog_title">Tilføjer kommentar til fejl</string>
 	<string name="osb_close_menu_item">Luk fejl</string>
