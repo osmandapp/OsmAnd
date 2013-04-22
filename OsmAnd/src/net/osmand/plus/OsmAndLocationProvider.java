@@ -61,12 +61,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	private final boolean USE_KALMAN_FILTER = true;
-	private final float KALMAN_COEFFICIENT = 0.015f;
+	private final float KALMAN_COEFFICIENT = 0.5f;
 	
 	float avgValSin = 0;
 	float avgValCos = 0;
-	private float[] previousCompassValuesA = new float[65];
-	private float[] previousCompassValuesB = new float[65];
+	private float[] previousCompassValuesA = new float[5];
+	private float[] previousCompassValuesB = new float[5];
 	private int previousCompassIndA = 0;
 	private int previousCompassIndB = 0;
 	
