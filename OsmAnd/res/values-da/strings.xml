@@ -202,11 +202,11 @@
 	<string name="map_widget_compass">Kompas</string>
 	<string name="map_widget_top_stack">Statuslinje:</string>
 	<string name="download_hillshade_item">Bakkeskygge</string>
-    <string name="download_hillshade_maps">Bakkeskygge lag</string>
+    <string name="download_hillshade_maps">Relief overlejringer</string>
     <string name="tip_recent_changes_1_1_2_t">"Ændringer i 1.1.2:
 \n\t* Audio/video udvidelse forbedring (fotos med EXIF ​​information)
 \n\t* Rettet brugbarhed og omstruktureret højdekurverudvidelse
-\n\t* Bakkeskygge pakke til højdekurverudvidelse
+\n\t* Relief pakke til højdekurverudvidelse
 \n\t* Fejlrettelser (næsten optimal ruteplanlægning) "</string>
     <string name="tip_recent_changes_0_8_4_t">"Ændringer i 0.8.4:\n * Nogle fejlrettelser\n * Kort mister ikke positionslås efter afbrydelser\n * Aktiver dvaletilstand tjeneste under navigation "</string>
     <string name="tip_recent_changes_0_8_3_t">"Ændringer i 0.8.3:\n * Waypoints\n * Forbedret navigation\n * Tilføjet en indstilling, der gør det muligt at undgå motorveje og samtidig bygge en rute\n * Tilføjet en mere vejtype til cykler til kortet (cycleway = track)\n * Fejlrettelser "</string>
@@ -274,7 +274,7 @@
 	<string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
 	<string name="route_kl">Hold til venstre og kør</string>
 	<string name="route_kr">Hold til højre og kør</string>
-	<string name="layer_hillshade">Bakkeskygge lag</string>
+	<string name="layer_hillshade">Bakkeskygge overlejringer</string>
     <string name="target_points">Waypoints</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
@@ -322,7 +322,7 @@
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængeligheds funktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
 	<string name="osmand_monitoring_description">Vis indstillinger til at muliggøre optagelse af dine ture til lokale GPX filer eller online via en web service.</string>
-	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cached delkort som basiskort eller som overlay / underlay kort. Disse kort kan også fremstilles offline og kopieres til OsmAnd mappen.</string>
+	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cached delkort som basiskort eller som overlejringer/ underlejringer kort. Disse kort kan også fremstilles offline og kopieres til OsmAnd mappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kort-konfiguration (som øg kort oplysninger) og nogle enheds-specifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udvikling og debugging funktioner som animerede navigation eller rendering ydeevne display.</string>
 	<string name="plugins_screen">Udvidelser</string>
@@ -484,7 +484,7 @@
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kort visning under navigation.</string>
 	<string name="auto_follow_location_enabled">Autocentrer kort visning aktiv.</string>
 	<string name="pref_vector_rendering">Vektorrenderings specifikke indstillinger</string>
-	<string name="pref_overlay">Overlejring/underlag</string>
+	<string name="pref_overlay">Overlejring/underlejring</string>
 	<string name="pref_raster_map">Kort oprindelse indstillinger</string>
 	<string name="pref_vector_map">Vektor kort indstillinger</string>
 	<string name="delete_confirmation_msg">Slet %1$s?</string>
@@ -553,7 +553,7 @@
 \nKort Viewing\n - Vis din position og retning på kortet\n - Eventuelt justere kortet i henhold til kompas eller din retning af bevægelse\n - Gem dine vigtigste steder som favoritter\n - Vis POI\'er (interessepunkter) omkring dig\n - Kan vise specialiserede online delkort\n - Kan vise satellitvisning (fra Bing)\n - Kan vise forskellige overlejringer som rute/navigation GPX spor og ekstra kort med tilpasselig gennemsigtighed\n - Eventuelt få vist stednavne i engelsk, lokale eller fonetiske stavemåde
 \nBrug OpenStreetMap og Wikipedia Data:\n - Høj kvalitet information fra de bedste samarbejdsprojekter i verden\n - Globale kort fra OpenStreetMap, er til rådighed pr land eller region\n - Wikipedia POI\'er, fantastisk til sightseeing\n - Ubegrænset gratis download direkte fra applicationen\n - Altid opdaterede kort (opdateres mindst en gang om måneden)\n - Kompakte offline vektorkort\n - Vælg mellem komplette kortdata og bare vejnet (Eksempel: Hele Japan er 700 MB men vejnettet er kun 200 MB)\n - Understøtter også online eller cached delkort
 \nSikkerhedsfunktioner\n - Valgfri automatiseret dag/nat visning\n - Valgfri hastighedsgrænse visning, med påmindelse, hvis du overskrider det\n - Valgfri hastighedsafhængig kort zoom\n - Del din placering, så dine venner kan finde dig\nCykel og fodgænger Funktioner:
-\n - Kortene omfatter fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter\n - Special rute og visningstilstande for cykel-og gangstier\n - Valgfri offentlig transport stoppesteder (bus, sporvogn, tog), herunder linjenavne\n - Valgfri tur optagelse til lokal GPX fil eller en online-tjeneste\n - Valgfri hastighed og højde visning\n - Visning af højdekurver og bakkeskygge (via ekstra udvidelse)
+\n - Kortene omfatter fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter\n - Special rute og visningstilstande for cykel-og gangstier\n - Valgfri offentlig transport stoppesteder (bus, sporvogn, tog), herunder linjenavne\n - Valgfri tur optagelse til lokal GPX fil eller en online-tjeneste\n - Valgfri hastighed og højde visning\n - Visning af højdekurver og relief (via ekstra udvidelse)
 \nBidrager direkte til OpenStreetMap\n - Rapportér kort fejl\n - Upload GPX spor til OSM direkte fra applicationen\n - Tilføj POI\'er og uploade dem direkte til OSM (eller senere, hvis offline)\n - Valgfri tur optagelse også i baggrundstilstand (mens enheden er i dvale tilstand)
 \nOsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedre oversættelser eller udvikling af nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for bygherren og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af ny funktionalitet. Ved at købe OsmAnd+ hjælper du programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
 \nAnslået kort dækning og kvalitet:\n - Vesteuropa: ****\n - Østeuropa: ***\n - Rusland: ***\n - Nordamerika: ***\n - Sydamerika: **\n - Asien: **\n - Japan &amp; Korea: ***\n - Mellemøsten: **\n - Afrika: **\n - Antarktis: *\n Liste over understøttede lande (dybest set world wide!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe "</string>
