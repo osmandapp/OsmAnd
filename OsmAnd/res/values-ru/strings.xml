@@ -1125,7 +1125,7 @@
     <string name="prefer_motorways">Предпочитать автомагистрали</string>
 	<string name="prefer_in_routing_title">Предпочитать…</string>
 	<string name="prefer_in_routing_descr">Предпочитать автомагистрали</string>
-    <string name="tip_recent_changes_1_2_t">"Изменения в 1.2: "</string>
+    <string name="tip_recent_changes_1_2_t">"Изменения в 1.2:\n\t* исправление ошибок (доработана маршрутизация, поиск, запись AV, голосовые подсказки, улучшения отображения)\n\t* облегчённая настройка рельефа местности (требуется плагин контурных линий)\n\t* теперь принимаются ссылки на maps.google.com\n\t* новый виджет (GPS info)\n\t* добавлена поддержка multi-window для определённых устройств Samsung\n\t* фильтр Кальмана для компаса\n\t* поддержка часов Pebble watch "</string>
     <string name="item_checked">отмечено</string>
     <string name="item_unchecked">не отмечено</string>
     <string name="map_view">Карта</string>
@@ -1134,4 +1134,5 @@
     <string name="max_speed_none">нет</string>
 <string name="tip_recent_changes_1_1_4_t">"Изменения в 1.1.4:\n\t* переработан интерфейс\n\t* исправление ошибок "</string>
     <string name="layer_hillshade">Слой рельефа местности</string>
-    </resources>
+    <string name="save_current_track_widget">Сохранить\n текущий GPX трэк</string>
+	</resources>
