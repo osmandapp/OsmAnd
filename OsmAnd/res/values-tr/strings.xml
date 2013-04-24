@@ -794,4 +794,5 @@
 	<string name="trace_rendering_descr">Dönüştürme performansını göster</string>
 	<string name="installing_new_resources">Yeni veriler açılıyor…</string>
 	<string name="internet_connection_required_for_online_route">Çevrimiçi navigasyon seçildi ancak İnternet bağlantısı kullanılabilir değil.</string>
-	</resources>
+	<string name="layer_hillshade">Tepe gölge katmanı</string>
+    </resources>
