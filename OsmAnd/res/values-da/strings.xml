@@ -75,23 +75,23 @@
     <string name="incremental_search_city">Søg efter by trinvist</string>
     <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
 	<string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og video/audio noter med din dropbox-konto.</string>
-    <string name="rendering_attr_showRoadMaps_description">Vælg, for at vise kun-vejkort:</string>
-	<string name="rendering_attr_showRoadMaps_name">Kun vejkort</string>
+    <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
+	<string name="rendering_attr_showRoadMaps_name">kort kun med veje</string>
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktivere det i indstillinger).</string>
-    <string name="background_service_is_enabled_question">Baggrund tjeneste kører stadig. Ønsker du at annullere det?</string>
+    <string name="background_service_is_enabled_question">Baggrundtjeneste kører stadig. Ønsker du at afbryde?</string>
     <string name="tip_recent_changes_1_0_0_t">"Ændringer i 1.0.0:
 \n\t* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
 \n\t* Introducere kun vejkort
 \n\t* Kort mister ikke positionlås efter afbrydelser
 \n\t* Aktiver tjeneste i baggrunden under navigation "</string>
-    <string name="close_changeset">Luk changeset</string>
+    <string name="close_changeset">Luk ændringspost</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing stregkodescanner programmet er ikke installeret. Søg i Google Play?</string>
-	<string name="rendering_attr_roadColors_description">Vælg et vej farveskema:</string>
+	<string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
-    <string name="enable_plugin_monitoring_services">Aktiver sporings udvidelse til at bruge position logning tjenester (logning, live tracking)</string>
+    <string name="enable_plugin_monitoring_services">Aktiver sporingsudvidelse til at bruge positionlogning tjenester (GPX logning, Online sporing)</string>
     <string name="non_optimal_route_calculation">Beregn en mulig ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
@@ -118,7 +118,7 @@
     <string name="arrived_at_intermediate_point">Du er ankommet til dit waypoint</string>
     <string name="context_menu_item_intermediate_point">Tilføj som waypoint</string>
     <string name="ending_point_too_far">Slutpunktet for langt fra nærmeste vej.</string>
-    <string name="btn_add_tag">Tilføj Tag</string>
+    <string name="btn_add_tag">Tilføj mærke</string>
     <string name="btn_advanced_mode">Avanceret tilstand…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Nødsituation</string>
@@ -128,12 +128,12 @@
     <string name="poi_filter_restaurants">Restaurant</string>
     <string name="poi_filter_sightseeing">Seværdigheder</string>
     <string name="poi_filter_car_aid">Bilhjælp</string>
-	<string name="poi_filter_food_shop">Fødevare butik</string>
+	<string name="poi_filter_food_shop">Fødevarebutik</string>
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Brændstof</string>
 	<string name="show_warnings_title">Vis alarmer…</string>
-	<string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsbegrænsninger, tvungne stop, vejbump), fotofælde advarsler og vej oplysninger</string>
-	<string name="use_compass_navigation_descr">Bruge kompasset, når ingen retninger er registret</string>
+	<string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsbegrænsninger, tvungne stop, vejbump), fotofælde advarsler og vognbane oplysninger</string>
+	<string name="use_compass_navigation_descr">Bruge kompasset, når ingen retning er registret</string>
 	<string name="use_compass_navigation">Brug kompas</string>
 	<string name="avoid_motorway">Undgå motorveje</string>
 	<string name="auto_zoom_map_descr">Auto zoom kort efter din hastighed (mens kort er synkroniseret med aktuelle position)</string>
@@ -145,8 +145,8 @@
     <string name="prefer_motorways">Foretræk motorveje</string>
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
-    <string name="tip_recent_changes_1_2_t">Ændringer i 1.2:
-\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurve udvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman filter for kompas ↵\n\t* Pebble ur support</string>
+    <string name="tip_recent_changes_1_2_t">"Ændringer i 1.2:
+\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurve udvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman filter for kompas ↵\n\t* Pebble ur support "</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dist_control_start">start</string>
@@ -159,10 +159,10 @@
     <string name="route_descr_lat_lon">BG %1$.3f, LG %2$.3f</string>
     <string name="intermediate_point">Waypoint %1$s</string>
     <string name="snap_to_road_descr">Fastgør position til veje under navigation</string>
-	<string name="snap_to_road">Fastgør til vej</string>
+	<string name="snap_to_road">Fastgør til vejen</string>
 	<string name="osmand_short_description_80_chars">Globale mobilkort &amp; navigation til offline og online OSM kort</string>
-	<string name="osmand_plus_short_description_80_chars">OsmAnd er et open source system til navigation via offline og online kort</string>
-	<string name="tip_update_index">Opdatering af offline data</string>
+	<string name="osmand_plus_short_description_80_chars">Global mobilkort for visning &amp; navigation til offline og online OSM kort</string>
+	<string name="tip_update_index">Opdatering af offlinedata</string>
 	<string name="filterpoi_activity">Opret POI filter</string>
 	<string name="recalculate_route_to_your_location">Transporttilstand:</string>
 	<string name="select_navigation_mode">Vælg transporttilstand</string>
@@ -170,9 +170,9 @@
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/nat info</string>
-	<string name="map_widget_day_night">Dag/nat kort</string>
+	<string name="map_widget_day_night">Dag-/natkort</string>
 	<string name="map_widget_vector_attributes">Rendering attributter:</string>
-	<string name="map_widget_renderer">Kort stil</string>
+	<string name="map_widget_renderer">Kortudseende</string>
 	<string name="live_monitoring_mode_off">Start\n online sporing</string>
 	<string name="live_monitoring_mode_on">Stop\n online sporing</string>
 	<string name="position_on_map_descr">Vælg placering af positionsmarkør på kortet</string>
@@ -192,12 +192,12 @@
 	<string name="monitoring_mode_on">Stop\n GPX opt.</string>
 	<string name="bg_service_sleep_mode_off">Aktiver\n dvaletilstand</string>
 	<string name="bg_service_sleep_mode_on">Stop\n dvaletilstand</string>
-	<string name="gps_wakeup_interval">GPS vågn-op interval:% s</string>
+	<string name="gps_wakeup_interval">GPS opvågningsinterval: %s</string>
 	<string name="int_continuosly">Vedvarende</string>
-	<string name="screen_is_locked">Tryk låse symbol for at låse skærmen op</string>
+	<string name="screen_is_locked">Tryk låseikon for at låse skærmen op</string>
 	<string name="map_widget_top_text">Gadenavn</string>
 	<string name="map_widget_config">Konfigurer skærm</string>
-	<string name="map_widget_map_select">Kort kilde</string>
+	<string name="map_widget_map_select">Kortkilde</string>
 	<string name="map_widget_back_to_loc">Hvor er jeg</string>
 	<string name="map_widget_lock_screen">Lås skærm</string>
 	<string name="map_widget_compass">Kompas</string>
@@ -217,8 +217,8 @@
 	<string name="map_widget_left_stack">Venstre panel:</string>
 	<string name="map_widget_parking">Parkering</string>
 	<string name="map_widget_monitoring">GPX-optagelse</string>
-	<string name="map_widget_speed">Fart</string>
-	<string name="map_widget_distance">Bestemmelsessted</string>
+	<string name="map_widget_speed">Hastighed</string>
+	<string name="map_widget_distance">Destination</string>
 	<string name="map_widget_altitude">Højde</string>
 	<string name="map_widget_time">Resterende tid</string>
 	<string name="map_widget_next_turn">Næste sving</string>
@@ -228,30 +228,30 @@
 	<string name="bg_service_screen_lock">Lås skærm</string>
 	<string name="bg_service_screen_unlock">Lås skærmen op</string>
 	<string name="bg_service_screen_lock_toast">Skærmen er låst</string>
-	<string name="bg_service_interval">Indstil vågn-op interval:</string>
+	<string name="bg_service_interval">Indstil opvågningsinterval:</string>
 	<string name="show_cameras">Vis fartkameraer</string>
 	<string name="show_speed_limits">Vis trafik advarsler</string>
 	<string name="avoid_toll_roads">Undgå betalingsveje</string>
-	<string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (% 1 $ s sekunder)</string>
+	<string name="continue_follow_previous_route_auto">Forrige navigation var ikke færdig. Fortsæt med at følge den? (% 1 $ s sekunder)</string>
 	<string name="route_updated_loc_found">Rute beregnes, når position er fundet</string>
 	<string name="osmand_parking_hours">Timer</string>
 	<string name="osmand_parking_minutes">Minutter</string>
 	<string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Ændringer i 0.8.1:\n * Mere præcise ruter (en smule langsommere)\n * Smart og hurtig Rutegenberegning\n * retning ved banerne\n * Information om hastighedsbegrænsninger, fartkameraer, og vejbump\n * Forbedret stemmestyring på motorveje\n * Parkeringsudvidelse (\\\"Hvor er min bil parkeret?\\\")\n * Aktivere/deaktivere logningsmodul "</string>
-	<string name="select_animate_speedup">Vælg animere rute acceleration</string>
+	<string name="select_animate_speedup">Vælg animeret ruteacceleration</string>
     	<string name="global_app_allocated_memory_descr">Tildelt hukommelse %1$s MB (Android grænse %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Tildelt hukommelse</string>
 	<string name="native_app_allocated_memory_descr">Samlet indbygget hukommelse tildeles af app %1$s MB (Dalvik %2$s MB, andre %3$s MB). Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Samlet indbygget hukommelse</string>
 	<string name="update_downlod_list">Genindlæs liste</string>
-	<string name="starting_point_too_far">Udgangspunkt for langt fra nærmeste vej.</string>
+	<string name="starting_point_too_far">Udgangspunktet er for langt fra nærmeste vej.</string>
 	<string name="shared_location">Delt placering</string>
 	<string name="osmand_parking_event">Afhent bilen fra parkering</string>
 	<string name="osmand_parking_warning">Advarsel</string>
 	<string name="osmand_parking_warning_text">Påmindelse om at afhente din bil blev tidligere tilføjet til din kalender. Den vil forblive der, indtil du sletter den manuelt.</string>    
 	<string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
 	<string name="osmand_parking_delete_confirm">Ønsker du at fjerne placeringen af ​​den parkerede bil?</string>
-	<string name="osmand_parking_delete">Slet en parkeringsplads markør</string>
+	<string name="osmand_parking_delete">Slet P-plads markør</string>
 	<string name="osmand_parking_choose_type">Vælg parkeringstypen</string>
 	<string name="osmand_parking_lim_text">Tidsbegrænset</string>
 	<string name="osmand_parking_no_lim_text">Tidsubegrænset</string>
@@ -261,7 +261,7 @@
 	<string name="osmand_parking_position_description">Placeringen af ​​din parkerede bil. %1$s</string>
 	<string name="osmand_parking_position_description_add">Afhent bilen på:</string>
 	<string name="osmand_parking_am">AM</string>
-	<string name="osmand_parking_position_name">Parkerings sted</string>
+	<string name="osmand_parking_position_name">Parkeringssted</string>
 	<string name="osmand_parking_plugin_description">Denne udvidelse gør det muligt at gemme placeringen af ​​din parkerede bil.</string>
 	<string name="osmand_parking_plugin_name">Parkeringsplads udvidelse</string>
 	<string name="context_menu_item_add_parking_point">Marker som en parkeringsplads</string>
@@ -270,7 +270,7 @@
 	<string name="gpxup_identifiable">Identificerbar</string>
 	<string name="gpxup_trackable">Sporbar</string>
 	<string name="gpxup_private">Privat</string>
-	<string name="asap">ASAP</string>
+	<string name="asap">Så hurtigt som muligt</string>
 	<string name="save_route_as_gpx">Gem rute som GPX fil</string>
 	<string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
 	<string name="route_kl">Hold til venstre og kør</string>
@@ -280,26 +280,26 @@
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
-	<string name="show_traffic_warnings">Vis trafik advarsler</string>
+	<string name="show_traffic_warnings">Vis trafikadvarsler</string>
 	<string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
 	<string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
 	<string name="rendering_attr_appMode_name">Renderingstilstand</string>
 	<string name="rendering_attr_appMode_description">Optimer kort til</string>
-	<string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver kontur data):</string>
+	<string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver konturdata):</string>
 	<string name="rendering_attr_contourLines_name">Vis højdekurver</string>
-	<string name="rendering_attr_hmRendered_description">Øg mængden af ​​kort detaljer, der vises</string>
-	<string name="rendering_attr_hmRendered_name">Vis flere kort detaljer</string>
+	<string name="rendering_attr_hmRendered_description">Øg mængden af ​​kortdetaljer, der vises</string>
+	<string name="rendering_attr_hmRendered_name">Vis flere kortdetaljer</string>
 	<string name="local_index_routing_data">Ruteplanlægningsdata</string>
-	<string name="poi_search_desc">POI (interesse punkter) søgning</string>
-	<string name="address_search_desc">Adresse søgning</string>
+	<string name="poi_search_desc">Søgning efter POI (interessepunkter)</string>
+	<string name="address_search_desc">Adressesøgning</string>
 	<string name="navpoint_search_desc">Koordinater</string>
 	<string name="transport_search_desc">Transportsøgning</string>
-	<string name="favourites_search_desc">Favorit søgning</string>
-	<string name="history_search_desc">Søge historik</string>
+	<string name="favourites_search_desc">Favoritsøgning</string>
+	<string name="history_search_desc">Søgehistorik</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigation er midlertidig utilgængelig.</string>
-	<string name="left_side_navigation">Venstre kørsel</string>
-	<string name="left_side_navigation_descr">Vælg for lande med venstre kørsel</string>
-	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offline data.\nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktivere eller slette. Nuværende data på enheden (%1$s fri):</string>
+	<string name="left_side_navigation">Venstrekørsel</string>
+	<string name="left_side_navigation_descr">Vælg for lande med venstrekørsel</string>
+	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offlinedata.\nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktivere eller slette. Nuværende data på enheden (%1$s fri):</string>
 	<string name="unknown_from_location">Udgangspunktet er endnu ikke fastlagt</string>
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="context_menu_item_directions">Kørselsvejledning hertil</string>
@@ -468,13 +468,13 @@
 	<string name="tip_rotation_switching">Kort retning</string>
 	<string name="binary_map_download_success">Hentning lykkedes.\n\n\tAktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kort oprindelse…\' -&gt; \'Offline vektor kort\'.</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
-	<string name="navigate_point_format">format:</string>
+	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_wikiosm">wikipedia (offline)</string>
 	<string name="routing_settings">Rute indstillinger</string>
 	<string name="tip_osm_improve">Forbedre OSM data</string>
 	<string name="download_files_not_enough_space">Der er ikke fri plads nok til at hente %1$s MB (Fri: %2$s).</string>
 	<string name="download_files_question_space">Nuværende fri plads: {2} MB! Hent {0} fil(er) ({1} MB)?</string>
-	<string name="tip_select_destination_point">Vælg bestemmelsessted</string>
+	<string name="tip_select_destination_point">Vælg destination</string>
 	<string name="use_transparent_map_theme">Gennemsigtig tema</string>
 	<string name="native_library_not_supported">Indbyget bibliotek er ikke understøttet på denne enhed.</string>
 	<string name="init_native_library">Initialiserer indbygget bibliotek…</string>
@@ -606,8 +606,8 @@
 \n\tFejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
 \n\tFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejl\' i kortet kontekst menu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
 \n\tBemærk venligst at internet forbindelse er nødvendig for at sende OSM POI og OSM fejl bidrag.</string>
-	<string name="tip_select_destination_point_t">"\tDu kan vælge et bestemmelsessted direkte på kortet (kontekst menu, og så \'Angiv som bestemmelsessted\'), i alle søge aktiviteter eller via et langt tryk på en post i din \'Liste over favorit steder\'
-\n\tBestemmelsesstedet vises som en orange skive på kortet og OsmAnd viser afstanden og retningen til den (orange trekant). "</string> 
+	<string name="tip_select_destination_point_t">"\tDu kan vælge en destination direkte på kortet (kontekst menu, og så \'Angiv som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i din \'Liste over favorit steder\'
+\n\tDestinationen vises som en orange skive på kortet og OsmAnd viser afstanden og retningen til den (orange trekant). "</string> 
 	<string name="tip_recent_changes_0_6_9_t">"Ændringer i 0.6.9:
 \n\t- Forbedret offline kort rendering
 \n\t- Hurtig indbygget offline rendering - Find det under eksperimentelle funktioner (virker muligvis ikke på alle enheder)
@@ -691,7 +691,7 @@
 	<string name="tts_missing_language_data_title">Manglende data</string>
 	<string name="tts_missing_language_data">Der er ikke installeret data for det valgte sprog. Vil du gå til Google Play for at installere?</string>
 	<string name="gpx_option_reverse_route">Omvendt GPX retning</string>
-	<string name="gpx_option_destination_point">Brug aktuel bestemmelsessted</string>
+	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere ad hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at bruge dem aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kortkilde…\' \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemme vejledning udgang</string>
@@ -813,7 +813,7 @@
 \n\tLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at sætte den som bestemmelsessted, redigere eller slette den.
 \n\tFor at vise alle favorit steder direkte på kortet, aktiver kort overlejringen \'Favoritter under \'Menu\' -&gt; \'Definer visning\'. "</string>
 	<string name="tip_recent_changes_1_1_4_t">"Ændringer i 1.1.4:\n\t* Redesign af brugerflade\n\t* Fejlrettelser "</string>
-    <string name="tip_navigation_t">\tDu skal vælge et bestemmelsessted før du kan starte navigation. Bagefter trykkes \'menu\' -&gt; \'rutning\' på kortet og der vælges navigations type.</string>
+    <string name="tip_navigation_t">\tDu skal vælge et destination før du kan starte navigation. Bagefter trykkes \'menu\' -&gt; \'vejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Landbrug</string>
 	<string name="amenity_type_sustenance">Næring</string>
 	<string name="voice_is_not_available_msg">Stemmevejledning er utilgængelig. Gå til indstillinger, vælg den ønskede stemmepakke og hent den.</string>
@@ -1047,7 +1047,7 @@
 	<string name="tip_app_mode_t_v2">"\tOsmAnd understøtter forskellige (bruger konfigurerbare) program profiler til forskellige brugsscenarier.
 \n\tDu kan skifte profil via profil knappen i nederste venstre hjørne af kort skærmen (bil, cykel eller fodgænger ikon) eller når du opretter en rute. "</string>
 	<string name="tip_search_t">"\tDu kan søge efter steder direkte på kortet efter adresse, efter placering, som POI eller som prædefineret favorit.
-\n\tVed at trykke \'Søg\' på hovedskærmen åbnes søge aktiviteter. For alle fundne elementer tilbyder kontekst menuen 2 valgmuligheder: \'Angiv som bestemmelsessted\' eller \'Vis på kort\'. "</string>
+\n\tVed at trykke \'Søg\' på hovedskærmen åbnes søge aktiviteter. For alle fundne elementer tilbyder kontekst menuen 2 valgmuligheder: \'Angiv som destination\' eller \'Vis på kort\'. "</string>
 	<string name="tip_map_context_menu_t">"\tKortets kontekst menu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
 \n\tDette åbner en boks med koordinater. For at åbne kortets kontekst menu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
 \n\tKortets kontekst menu indeholder alle handlinger der refererer til et punkt (en placering). "</string>
@@ -1073,7 +1073,7 @@
 	<string name="update_existing">Erstat</string>
 	<string name="only_show">Vis kun</string>
 	<string name="follow">Følg</string>
-	<string name="mark_final_location_first">Vælg venligst bestemmelsessted først</string>
+	<string name="mark_final_location_first">Vælg først en destination</string>
 	<string name="get_directions">Instruktioner</string>
 	<string name="show_gps_status">Vis GPS status</string>
 	<string name="opening_hours">Åbningstider</string>
@@ -1094,7 +1094,7 @@
 	<string name="error_calculating_route_occured">Der opstod en fejl under beregning af rute</string>
 	<string name="empty_route_calculated">Fejl: Den beregnede rute er tom</string>					
 	<string name="new_route_calculated_dist">Ny rute beregnet, afstand</string>
-	<string name="arrived_at_destination">Du er ankommet til dit bestemmelsessted</string>
+	<string name="arrived_at_destination">Du er ankommet til destinationen</string>
 	<string name="invalid_locations">Koordinaterne er ugyldige!</string>
 	<string name="go_back_to_osmand">Gå tilbage til OsmAnd kort</string>
 	<string name="close">Luk</string>
@@ -1137,7 +1137,7 @@
 	<string name="choose_street">Vælg gade</string>
 	<string name="choose_city">Vælg by</string>
 	<string name="ChooseCountry">Vælg land</string>
-	<string name="map_specify_point">Angiv som bestemmelsessted</string>
+	<string name="map_specify_point">Angiv som destination</string>
 	<string name="show_view_angle">Vis synsretning</string>
 	<string name="stop_navigation">Ryd bestemmelsessted</string>
 	<string name="navigate_to_point">Angiv som bestemmelsessted</string>
