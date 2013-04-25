@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="bidforfix_loading">Завантаження</string>
-    <string name="bidforfix_supporters">%1$d Підтримало</string>
-	<string name="bidforfix_funded">знайдено: %d%%</string>    
+    <string name="bidforfix_supporters">%1$d підтримало</string>
+	<string name="bidforfix_funded">зібрано: %d%%</string>    
 </resources>
