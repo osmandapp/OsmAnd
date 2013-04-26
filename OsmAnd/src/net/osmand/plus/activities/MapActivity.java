@@ -160,7 +160,8 @@ public class MapActivity extends AccessibleActivity  {
 		createProgressBarForRouting();
 		// This situtation could be when navigation suddenly crashed and after restarting
 		// it tries to continue the last route
-		if(settings.FOLLOW_THE_ROUTE.get() && (!app.getRoutingHelper().isRouteCalculated() || !app.getRoutingHelper().isRouteBeingCalculated())){
+		if(settings.FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated() &&
+				!app.getRoutingHelper().isRouteBeingCalculated()){
 			FailSafeFuntions.restoreRoutingMode(this);
 		}
 		
