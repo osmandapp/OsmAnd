@@ -297,7 +297,7 @@
   <string name="favorite_friends_category">Друзі</string>
   <string name="favorite_places_category">Місця</string>
   <string name="favorite_default_category">Інше</string>
-  <string name="favourites_edit_dialog_name">Name</string>
+  <string name="favourites_edit_dialog_name">Назва</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="vector_map_not_needed">Ні, дякую</string>
   <string name="basemap_missing">Базова карта (яка покриває цілий світ) відсутня. Будь-ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
@@ -843,7 +843,7 @@
   <string name="poi_error_unexpected_template">Неочікувана помилка при виконанні операції {0}.</string>
   <string name="poi_error_io_error_template">Помилка вводу виводу при виконанні операції {0}.</string>
   <string name="poi_error_info_not_loaded">Помилка при завантаженні інформації про POI</string>
-  <string name="poi_dialog_name">Name</string>
+  <string name="poi_dialog_name">Назва</string>
   <string name="poi_dialog_opening_hours">Відкрити</string>
   <string name="poi_dialog_comment">Коментар</string>
   <string name="poi_dialog_comment_default">Зміна POI</string>
@@ -910,8 +910,8 @@
 \n\t* Кнопка блокування екрану в службі моніторингу
 \n\t* Виправлено написання ​​арабською, мовою каннада та мов, що мають писемність з права на ліво "</string>
   <string name="map_widget_top_text">Назва вулиці</string>
-  <string name="map_widget_config">Configuration</string>
-  <string name="map_widget_map_select">Map selection</string>
+  <string name="map_widget_config">Налаштування</string>
+  <string name="map_widget_map_select">Джерело мапи</string>
   <string name="map_widget_back_to_loc">Де я є</string>
   <string name="map_widget_lock_screen">Заблокувати екран</string>
   <string name="map_widget_compass">Компас</string>
@@ -929,7 +929,7 @@
   <string name="map_widget_next_turn_small">Наст. поворот (мал.)</string>
   <string name="map_widget_next_next_turn">Другий наст. поворот</string>
   <string name="map_widget_mini_route">Міні мапа маршрутів</string>
-  <string name="bg_service_screen_lock">Lock/unlock screen</string>
+  <string name="bg_service_screen_lock">Блокування екрану</string>
   <string name="bg_service_screen_lock_toast">Екран заблоковано</string>
   <string name="bg_service_interval">Встановити інтервал пробудження:</string>
   <string name="screen_is_locked">Для розблокування екрану доторкніться до іконки блокування</string>
