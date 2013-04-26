@@ -1140,7 +1140,13 @@
 \n\t* Audio / Video vtičnik za izboljšavo (fotografije z informacijami EXIF)\n\t* Popravljena uporabnost in struktura vtičnika za izohipse\n\t* Paketi senčenega terena za vtičnik za izohipse\n\t* Popravki napak (izračun neoptimalne poti) "</string>
     <string name="download_hillshade_item">Senčen teren</string>
     <string name="download_hillshade_maps">Zemljevid senc terena</string>
-    <string name="tip_recent_changes_1_2_t">"Spremembe v 1.2: "</string>
+    <string name="tip_recent_changes_1_2_t">"Spremembe v 1.2:
+\n\t* Odpravljene napake (boljše usmerjanje, iskanje, zvočno in video snemanje, glasovna navodila, boljši prikaz)
+\n\t* Enostavnejša nastavitev prikaza senčenja terena (potrebuje vtičnik za izohipse \"Contour Lines plugin\")
+\n\t* Podpora povezavam z lokacijo na maps.google.com
+\n\t* Nov pripomoček (GPS info)
+\n\t* Dodana podporam za več oken na novejših napravah Samsung
+\n\t* Kalmanov filter za kompas\n\t* Podpora za Pebble watch "</string>
     <string name="av_use_external_camera_descr">Uporabi sistemsko aplikacijo za fotografijo</string>
     <string name="av_use_external_camera">Uporabi aplikacijo Kamera</string>
     <string name="index_name_openmaps">EU OpenMaps</string>
@@ -1157,4 +1163,9 @@
     <string name="map_widget_gps_info">GPS informacije</string>
     <string name="osmand_play_title_30_chars">OsmAnd Zemljevidi in navigacija</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Zemljevidi in navigacija</string>
+	<string name="tip_recent_changes_1_1_4_t">"Spremembe v 1.1.4:
+\n\t* Prenovljen izgled
+\n\t* Odpravljene napake "</string>
+    <string name="save_current_track_widget">Shrani
+\n trenutno sled GPX</string>
 	</resources>
