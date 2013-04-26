@@ -512,10 +512,10 @@
   <string name="use_high_res_maps_descr">Не розтягувати (із розмиттям) растрові мапи на дисплеях з високою роздільною здатністю</string>
   <string name="download_files">Завантажити</string>
   <string name="context_menu_item_search_transport">Шукати транспорт</string>
-  <string name="transport_searching_transport">Transport results (no target):</string>
-  <string name="transport_searching_route">Transport results ({0} to target):</string>
+  <string name="transport_searching_transport">Пошук транспорту (нема цілі):</string>
+  <string name="transport_searching_route">Пошук транспорту ({0} до точки):</string>
   <string name="transport_search_none">нема</string>
-  <string name="transport_search_again">Reset Transport search</string>
+  <string name="transport_search_again">Шукати транспорт знову</string>
   <string name="map_index">Мапа</string>
   <string name="voice">Голос</string>
   <string name="no_vector_map_loaded">Векторні мапи не були завантажені</string>
