@@ -1407,4 +1407,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="map_view">Karte</string>
     <string name="access_arrival_time">Ankunftszeit</string>
     <string name="map_widget_gps_info">GPS Info</string>
+    <string name="save_current_track_widget">GPX-Track\njetzt speichern</string>
+	<string name="tip_recent_changes_1_1_4_t">Änderungen in Version 1.1.4\n\t* Benutzeroberfläche neu gestaltet\n\t* weitere Fehlerbehebungen</string>
     </resources>
