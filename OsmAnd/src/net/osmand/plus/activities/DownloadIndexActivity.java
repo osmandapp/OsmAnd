@@ -755,7 +755,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 							boolean result = downloadFile(entry, filesToReindex, indexOfAllFiles, forceWifi);
 							if (result) {
 								DownloadIndexActivity.this.entriesToDownload.remove(filename);
-								if (entry.type != DownloadActivityType.SRTM_FILE) {
+								if (entry.type != DownloadActivityType.SRTM_FILE && entry.type != DownloadActivityType.HILLSHADE_FILE) {
 									downloads.set(downloads.get() + 1);
 								}
 								if (entry.existingBackupFile != null) {
