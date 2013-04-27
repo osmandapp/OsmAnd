@@ -500,7 +500,7 @@
 	<string name="asap">ACİL</string>
 	<string name="recording_context_menu_play">Oynat</string>
     <string name="bg_service_interval">Uyandırma aralığı ayarlayın:</string>
-	<string name="continue_follow_previous_route_auto">Önceki navigasyon bitmemiş. Onu izlemeye devam et? (%1$ s saniye)</string>
+	<string name="continue_follow_previous_route_auto">Önceki navigasyon bitmemiş. Onu izlemeye devam et? (%1$s saniye)</string>
 	<string name="route_updated_loc_found">Pozisyon bulundu sonra rota hesaplanacak</string>
 	<string name="tip_recent_changes_0_8_1_t">"0.8.1 deki  Değişiklikler:
 \n\t* Daha kesin rotalar (biraz yavaş) şeritleriyle

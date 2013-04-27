@@ -11,7 +11,11 @@
     -->
     <string name="save_current_track_widget">Save
         \n current GPX track</string>
-	<string name="tip_recent_changes_1_2_t">Changes in 1.2:
+	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
+	    \n\t*Fix Geo Intent (Foursquare, c:geo)
+	    \n\t*Fix screen tremble during navigation
+	    \n\t*Other small fixes
+	    \nChanges in 1.2:
 		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
 		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
 		\n\t* Now accepts maps.google.com location links

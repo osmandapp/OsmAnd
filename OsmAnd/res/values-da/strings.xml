@@ -192,7 +192,7 @@
 	<string name="monitoring_mode_on">Stop\n GPX-opt.</string>
 	<string name="bg_service_sleep_mode_off">Aktiver\n dvaletilstand</string>
 	<string name="bg_service_sleep_mode_on">Stop\n dvaletilstand</string>
-	<string name="gps_wakeup_interval">GPS-opvågningsinterval: %s</string>
+	<string name="gps_wakeup_interval">GPS vågn-op interval:%1$s</string> 
 	<string name="int_continuosly">Vedvarende</string>
 	<string name="screen_is_locked">Tryk låseikon for at låse skærmen op</string>
 	<string name="map_widget_top_text">Gadenavn</string>
@@ -232,7 +232,7 @@
 	<string name="show_cameras">Vis fartkameraer</string>
 	<string name="show_speed_limits">Vis trafik advarsler</string>
 	<string name="avoid_toll_roads">Undgå betalingsveje</string>
-	<string name="continue_follow_previous_route_auto">Forrige navigation var ikke færdig. Fortsæt med at følge den? (% 1 $ s sekunder)</string>
+	<string name="continue_follow_previous_route_auto">Forrige navigation var ufærdig. Fortsæt den? (%1$s sekunder)</string>
 	<string name="route_updated_loc_found">Rute beregnes, når position er fundet</string>
 	<string name="osmand_parking_hours">Timer</string>
 	<string name="osmand_parking_minutes">Minutter</string>
