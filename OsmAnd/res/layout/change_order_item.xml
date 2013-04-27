@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18sp"
         android:textColor="@color/color_black" android:layout_weight="1"/>
     <ImageButton android:src="@drawable/av_upload" android:id="@+id/up" 
         android:layout_width="wrap_content"
