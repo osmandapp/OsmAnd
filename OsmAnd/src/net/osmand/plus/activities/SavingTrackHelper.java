@@ -105,24 +105,28 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 		
 	public boolean hasDataToSave() {
-		SQLiteDatabase db = getWritableDatabase();
-		if (db != null) {
-			try {
-				Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
-				boolean has = q.moveToFirst();
-				q.close();
-				if (has) {
-					return true;
+		try {
+			SQLiteDatabase db = getWritableDatabase();
+			if (db != null) {
+				try {
+					Cursor q = db.query(false, TRACK_NAME, new String[0], null, null, null, null, null, null);
+					boolean has = q.moveToFirst();
+					q.close();
+					if (has) {
+						return true;
+					}
+					q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
+					has = q.moveToFirst();
+					q.close();
+					if (has) {
+						return true;
+					}
+				} finally {
+					db.close();
 				}
-				q = db.query(false, POINT_NAME, new String[0], null, null, null, null, null, null);
-				has = q.moveToFirst();
-				q.close();
-				if (has) {
-					return true;
-				}
-			} finally {
-				db.close();
 			}
+		} catch(RuntimeException e) {
+			return false;
 		}
 
 		return false;
