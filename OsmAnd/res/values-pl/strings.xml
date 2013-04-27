@@ -1183,4 +1183,5 @@
 \n\t* Naprawa błędów "</string>
     <string name="save_current_track_widget">Zapisz
 \n aktualny ślad GPX</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
 	</resources>
