@@ -82,13 +82,19 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					autozoom(location);
 				}
 				int currentMapRotation = settings.ROTATE_MAP.get();
+				boolean enableCompass = false;
 				if (currentMapRotation == OsmandSettings.ROTATE_MAP_BEARING) {
-					if (location.hasBearing()) {
+					boolean smallSpeed = !location.hasSpeed() || location.getSpeed() < 0.5;
+					boolean fMode = app.getRoutingHelper().isFollowingMode();
+					// boolean virtualBearing = fMode && settings.SNAP_TO_ROAD.get();
+					enableCompass = (!location.hasBearing() || smallSpeed)
+							&& fMode && settings.USE_COMPASS_IN_NAVIGATION.get();
+					if (location.hasBearing() && !smallSpeed) {
 						// special case when bearing equals to zero (we don't change anything)
 						if (location.getBearing() != 0f) {
 							mapView.setRotate(-location.getBearing());
 						}
-					} else if (app.getRoutingHelper().isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
+					} else if (enableCompass) {
 						long now = System.currentTimeMillis();
 						OsmAndLocationProvider provider = app.getLocationProvider();
 						Float lastSensorRotation = provider.getHeading();
@@ -100,14 +106,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						}
 					}
 				}
+				registerUnregisterSensor(location, enableCompass);
 				mapView.setLatLon(location.getLatitude(), location.getLongitude());
-				
-				RoutingHelper routingHelper = app.getRoutingHelper();
-				boolean enableSensorNavigation = false;
-				if(routingHelper.isFollowingMode() && settings.USE_COMPASS_IN_NAVIGATION.get()) {
-					enableSensorNavigation = !location.hasBearing();
-				}
-				registerUnregisterSensor(location, enableSensorNavigation);
 			}
 			RoutingHelper routingHelper = app.getRoutingHelper();
 			// we arrived at destination finished
