@@ -545,7 +545,7 @@
 	<string name="left_side_navigation">Sol sürüş</string>
 	<string name="left_side_navigation_descr">Sol taraftan akan trafiğe sahip ülkeler için seçin</string>
 	<string name="download_link_and_local_description">Çevrimdışı veri indirmek ya da güncellemek için buraya tıklayın.
-\nDaha fazla ayrıntı görmek basın ve devre dışı bırakmak veya silmek için tutmak için varolan bir öğeyi tıklatın. Cihazda Mevcut veriler (% 1 $ s ücretsiz):</string>
+\nDaha fazla ayrıntı görmek basın ve devre dışı bırakmak veya silmek için tutmak için varolan bir öğeyi tıklatın. Cihazda Mevcut veriler (%1$s ücretsiz):</string>
 	<string name="context_menu_item_directions">Buraya yol tarifi</string>
 	<string name="modify_transparency">"Şeffaflık değiştir(0 -Şeffaf,255-opak) "</string>
 	<string name="first_time_msg">"OsmAnd kullandığınız için teşekkür ederiz. - Bu uygulama birçok özellikler için &amp;#39;Ayarlar&amp;#39;ı üzerinden  &amp;gt; &amp;#39;Veri Yönetimi&amp;#39; indirebilirsiniz. bazı bölgesel çevrimdışı veri gerekir. Ardından, haritalarına adreslerini bulmak, İÇN aramak, ve toplu taşıma bulmak mümkün olacak."</string>    
