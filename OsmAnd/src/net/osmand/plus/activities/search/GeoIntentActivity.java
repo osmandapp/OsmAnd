@@ -212,7 +212,25 @@ public class GeoIntentActivity extends OsmandListActivity {
 			// it is 0,0? that means a search
 			return new GeoAddressSearch(data.getQuery());
 		} else {
-			showErrorMessage(data.getSchemeSpecificPart());
+			String geo = data.getSchemeSpecificPart();
+			if(geo == null) {
+				showErrorMessage("");
+			} else {
+				int latIndex = geo.indexOf(',');
+				int lonIndex = geo.indexOf('?');
+				lonIndex = lonIndex > 0 ? lonIndex : geo.length();
+				if (latIndex > 0) {
+					try {
+						double lat = Double.parseDouble(geo.substring(0, latIndex).trim());
+						double lon = Double.parseDouble(geo.substring(latIndex + 1, lonIndex).trim());
+						return new GeoPointSearch(lat, lon);
+					} catch (NumberFormatException e) {
+						showErrorMessage(geo);
+					}
+				} else {
+					showErrorMessage(geo);
+				}
+			}
 		}
 		return new Empty();
 	}
