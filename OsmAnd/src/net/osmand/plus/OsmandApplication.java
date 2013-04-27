@@ -185,7 +185,6 @@ public class OsmandApplication extends Application implements ClientContext {
 	public PoiFiltersHelper getPoiFilters() {
 		if (poiFilters == null) {
 			poiFilters = new PoiFiltersHelper(this);
-			poiFilters.updateFilters(false);
 		}
 		return poiFilters;
 	}

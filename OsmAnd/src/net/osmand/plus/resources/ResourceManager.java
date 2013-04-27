@@ -446,6 +446,8 @@ public class ResourceManager {
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
 					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(Version.getFullVersion(context));
+					
+					context.getPoiFilters().updateFilters(false);
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
 				} catch (XmlPullParserException e) {
