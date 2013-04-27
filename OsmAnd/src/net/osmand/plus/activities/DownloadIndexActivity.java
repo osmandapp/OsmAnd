@@ -599,13 +599,15 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					total++;
 				}
 			}
+			String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "( =" + total + ") ");
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
 				Builder msg = new AlertDialog.Builder(this);
 				msg.setTitle(R.string.free_version_title);
-				msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "( =" + total + ") "));
+				msg.setMessage(msgTx);
 				msg.setPositiveButton(R.string.default_buttons_ok, null);
 				msg.show();
 			} else {
+				AccessibleToast.makeText(this, msgTx, Toast.LENGTH_LONG).show();
 				downloadFilesPreCheckSRTM( list);
 			}
 		} else {
