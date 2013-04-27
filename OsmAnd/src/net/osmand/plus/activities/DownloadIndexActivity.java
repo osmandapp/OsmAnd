@@ -375,9 +375,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				protected void onPostExecute(List<IndexItem> filtered) {
 					entriesToDownload.clear();
 					DownloadIndexAdapter a = ((DownloadIndexAdapter) getExpandableListAdapter());
-					a.setIndexFiles(filtered, cats);
-					a.notifyDataSetChanged();
-					a.getFilter().filter(filterText.getText());
+					// Strange null pointer fix (reproduce?)
+					if (a != null) {
+						a.setIndexFiles(filtered, cats);
+						a.notifyDataSetChanged();
+						a.getFilter().filter(filterText.getText());
+					}
 					progressDialog.dismiss();					
 				}
 				
