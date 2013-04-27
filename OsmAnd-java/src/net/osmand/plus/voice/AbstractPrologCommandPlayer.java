@@ -150,6 +150,9 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer {
 		Struct list = new Struct(listCmd.toArray(new Term[listCmd.size()]));
 		Var result = new Var("RESULT"); //$NON-NLS-1$
 		List<String> files = new ArrayList<String>();
+		if(prologSystem == null) {
+			return files;
+		}
 		SolveInfo res = prologSystem.solve(new Struct(P_RESOLVE, list, result));
 		
 		if (res.isSuccess()) {
