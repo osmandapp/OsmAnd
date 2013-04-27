@@ -117,11 +117,11 @@ public class ResourceManager {
 	
 	protected final List<TransportIndexRepository> transportRepositories = new ArrayList<TransportIndexRepository>();
 	
-	protected final Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
+	protected final Map<String, String> indexFileNames = Collections.synchronizedMap(new LinkedHashMap<String, String>());
 	
-	protected final Set<String> basemapFileNames = new LinkedHashSet<String>();
+	protected final Set<String> basemapFileNames = Collections.synchronizedSet(new LinkedHashSet<String>());
 	
-	protected final Map<String, BinaryMapIndexReader> routingMapFiles = new LinkedHashMap<String, BinaryMapIndexReader>();
+	protected final Map<String, BinaryMapIndexReader> routingMapFiles = Collections.synchronizedMap(new LinkedHashMap<String, BinaryMapIndexReader>());
 	
 	protected final MapRenderRepositories renderer;
 	
