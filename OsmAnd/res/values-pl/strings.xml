@@ -939,7 +939,7 @@
   <string name="screen_is_locked">Aby odblokować, naciśnij ikonę kłódki</string>
   <string name="bg_service_screen_unlock">Odblokuj ekran</string>
   <string name="bg_service_sleep_mode_off">Włącz\n tryb uśpienia</string>
-  <string name="bg_service_sleep_mode_on">Włącz\n tryb uśpienia</string>
+  <string name="bg_service_sleep_mode_on">Wyłącz\n tryb uśpienia</string>
   <string name="filterpoi_activity">Stwórz filtr POI</string>
   <string name="day_night_info_description">Wschód: %1$s
 \nZachód: %2$s</string>
