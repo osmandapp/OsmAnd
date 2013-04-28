@@ -43,7 +43,7 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 				order = 31;
 			} else if (lc.contains("openmaps")) {
 				nameId = R.string.index_name_openmaps;
-				order = 10;
+				order = 90;
 			} else if (lc.contains("northamerica") || lc.contains("north-america")) {
 				nameId = R.string.index_name_north_america;
 				order = 30;
