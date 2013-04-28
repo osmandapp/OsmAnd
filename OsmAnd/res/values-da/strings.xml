@@ -1199,4 +1199,5 @@
 	<string name="incremental_search_building">Søg efter bygning trinvist</string>
 	<string name="Closest_Amenities">Nærmeste faciliteter</string>
 	<string name="incremental_search_street">Søg efter gader trinvist</string>
+	<string name="navigate_point_format_DMS">DDD MM SS.S</string>
 	</resources>
