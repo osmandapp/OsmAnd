@@ -48,7 +48,7 @@
     <string name="audionotes_plugin_name">Audio/video noter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Udvidelsen gør det muligt at hente højdekurver (Offline data Hent-&gt; Menu -&gt; Andre kort) til brug sammen med offline kort.</string>
+    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype)</string>
     <string name="srtm_plugin_name">Højdekurve udvidelse</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -164,7 +164,7 @@
 	<string name="osmand_plus_short_description_80_chars">Global mobilkort for visning &amp; navigation til offline og online OSM kort</string>
 	<string name="tip_update_index">Opdatering af offlinedata</string>
 	<string name="filterpoi_activity">Opret POI-filter</string>
-	<string name="recalculate_route_to_your_location">Transporttilstand:</string>
+	<string name="recalculate_route_to_your_location">Transportform:</string>
 	<string name="select_navigation_mode">Vælg transporttilstand</string>
 	<string name="monitor_preferences">Sporing</string>
 	<string name="day_night_info_description">Solopgang: %1$s
@@ -306,7 +306,7 @@
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Vil du afbryde hentning af fil?</string>
 	<string name="first_time_msg">Tak for at du bruger OsmAnd. Til mange af funktionerne i dette program skal du bruge nogle regionale offline data som du kan hente via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan du se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
-	<string name="basemap_was_selected_to_download">Basiskort er krævet for korrekt programfunktion og blev automatisk valgt.</string>
+	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis du ikke kan finde din region kan du lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
 	<string name="local_indexes_cat_map">Offlinekort (vektor)</string>
@@ -459,14 +459,14 @@
 	<string name="general_settings">Generelt</string>
 	<string name="general_settings_descr">Konfigurer visning og generelle indstillinger for programmet</string>
 	<string name="global_app_settings">Globale programindstillinger</string>
-	<string name="user_name">Dit OSM brugernavn</string>
-	<string name="user_name_descr">Krævet for ændringer i openstreetmap.org</string>
-	<string name="user_password">Dit OSM kodeord</string>
-	<string name="user_password_descr">Krævet for ændringer i openstreetmap.org</string>
+	<string name="user_name">OSM-brugernavn</string>
+	<string name="user_name_descr">Nødvendige for ændringer i openstreetmap.org</string>
+	<string name="user_password">OSM-kodeord</string>
+	<string name="user_password_descr">Nødvendig for ændringer i openstreetmap.org</string>
 	<string name="osmand_service">Dvaletilstand funktionalitet</string>
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
-	<string name="binary_map_download_success">Hentning lykkedes.\n\n\tAktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
+	<string name="binary_map_download_success">Hentning lykkedes.\n\n\tAktiver under \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -559,7 +559,7 @@
 \nOsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedre oversættelser eller udvikling af nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for bygherren og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af ny funktionalitet. Ved at købe OsmAnd+ hjælper du programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
 \nAnslået kort dækning og kvalitet:\n - Vesteuropa: ****\n - Østeuropa: ***\n - Rusland: ***\n - Nordamerika: ***\n - Sydamerika: **\n - Asien: **\n - Japan &amp; Korea: ***\n - Mellemøsten: **\n - Afrika: **\n - Antarktis: *\n Liste over understøttede lande (dybest set world wide!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe "</string>
 	<string name="tip_update_index_t">\tAt have opdaterede kortdata er afgørende. OsmAnd har en datahåndtering, som kan søge efter tilgængelige offline data opdateringer.
-\n\tFor at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Download offline data\'. Efter regions liste er hentet fra internettet, kan du vælge \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på din enhed.
+\n\tFor at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Hent offline data\'. Efter regions liste er hentet fra internettet, kan du vælge \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på din enhed.
 \n\tEmner i \"grøn\" indikerer datafiler identiske på enheden og serveren
 \n\tEmner i \'blå\' angiver tilgængelige opdateringer på serveren
 \n\tEmner i kursiv angiver data der er deaktiverede på enheden</string>
@@ -693,7 +693,7 @@
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere ad hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at bruge dem aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kortkilde…\' \'Offline vektor-kort\'.</string>
-	<string name="choose_audio_stream">Stemmevejledning udgang</string>
+	<string name="choose_audio_stream">Stemmevejledning kanal</string>
 	<string name="choose_audio_stream_descr">Vælg kanal til at afspille stemmevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
 	<string name="voice_stream_notification">Notificeringslyd</string>
@@ -938,7 +938,7 @@
 	<string name="favourites_remove_dialog_success">Favoritpunkt {0} blev slettet.</string>
 	<string name="favourites_remove_dialog_msg">Fjern favoritpunkt \'%s\'?</string>
 	<string name="favourites_context_menu_delete">Slet favorit</string>
-	<string name="favourites_context_menu_edit">Rediger favorit</string>
+	<string name="favourites_context_menu_edit">Rediger</string>
 	<string name="amenity_type_emergency">Nødsituation</string>
 	<string name="layer_poi">POI…</string>
 	<string name="process_navigation_service">OsmAnd navigationstjeneste</string>
@@ -981,7 +981,7 @@
 	<string name="osb_close_dialog_close_button">Luk fejlrapport</string>
 	<string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>
 	<string name="osb_comment_dialog_author">Forfatternavn</string>
-	<string name="favourites_context_menu_navigate">Angiv som destination</string>
+	<string name="favourites_context_menu_navigate">Angiv som dest.</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 	<string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
 	<string name="default_buttons_add">Tilføj</string>
