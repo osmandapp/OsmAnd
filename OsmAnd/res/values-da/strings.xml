@@ -402,7 +402,7 @@
 	<string name="scroll_map_by_gestures">Naturlig kortrulning</string>
 	<string name="i_am_here">Jeg er her</string>
 	<string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser</string>
-	<string name="zoom_by_trackball">Brug trackball til zoomstyring</string>
+	<string name="zoom_by_trackball">Brug trackball til zoom</string>
 	<string name="use_short_object_names_descr">Brug korte objektnavne i touch udforskning tilstand</string>
 	<string name="use_short_object_names">Brug objektnavne</string>
 	<string name="accessibility_preferences_descr">Tilgængelighedsrelaterede præferencer</string>
