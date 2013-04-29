@@ -221,7 +221,7 @@
 \n\t- Motore Text To Speech per la navigazione vocale
 \n\t- Reso più dettagliato il disegno della mappa
 \n\t- Mappa mondiale di base impacchettata con l\'applicazione
-\n\n\t- Migliorie alla navigazione offline (ancora sperimentale)
+\n\t- Migliorie alla navigazione offline (ancora sperimentale)
 \n\t- Opzioni navigazione GPX
 \n\t- Aggiornamento e correzione errori interfaccia</string>
   <string name="voice_not_use">Non usare</string>
@@ -786,7 +786,7 @@
   <string name="osmand_extra_settings_description">Visualizza le impostazioni per la configurazione avanzata della mappa (come aumentarne i dettagli) e alcune di specifici dispositivi.</string>
   <string name="osmand_development_plugin_description">Visualizza impostazioni per funzionalità in sviluppo e debug come la navigazione animata o visualizzare la prestazione del rendering.</string>
   <string name="plugins_screen">Gestore Plugin</string>
-  <string name="select_plugin_to_activate">Seelziona un plugin per attivarlo o disattivarlo (potrebbe essere richiesto il riavvio di OsmAnd).</string>
+  <string name="select_plugin_to_activate">Seelziona un plugin per attivarlo o disattivarlo. (potrebbe essere richiesto il riavvio di OsmAnd).</string>
   <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
   <string name="prefs_plugins">Gestore plugin</string>
   <string name="tip_recent_changes_0_8_0_t">"Novità della versione 0.8.0:\n\t- *Funzionalità a plugin*\n\t- Molte delle funzionalità sono raggruppate per caratteristiche e possono essere abilitate/disabilitate nel Plugin Manager. Si possono abilitare sorgenti di mappe a tasselli (online o in cache), impostazioni per il tracking e molte altre funzionalità nuove o preesistenti.\n\t- *Nuovo supporto alle mappe offline*\n\t- Devi scaricare dati offline completamente nuovi (i vecchi non saranno più supportati)\n\t- *Calcolo dei percorsi offline*\n\t- Il calcolo dei percorsi offline diventa più solido\n\t- *Miglioramento usabilità e UI*\n\t- Miglioramenti in svariate aree "</string>
