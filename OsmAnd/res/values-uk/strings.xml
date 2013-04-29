@@ -562,7 +562,7 @@
   <string name="use_trackball">Використовувати трекбол</string>
   <string name="background_service_wait_int_descr">Виберіть максимальний час для пошуку позиції</string>
   <string name="background_service_wait_int">Час очікування</string>
-  <string name="service_stop_background_service">Switch off background navigation service</string>
+  <string name="service_stop_background_service">Вимкнути фоновий сервіс</string>
   <string name="where_am_i">Де я є?</string>
   <string name="process_navigation_service">Сервіс навігації OsmAnd</string>
   <string name="network_provider">Мережа</string>
@@ -571,11 +571,11 @@
   <string name="int_min">хв.</string>
   <string name="background_service_int_descr">Виберіть інтервал позиціонування для сервісу</string>
   <string name="background_service_int">Інтервал позиціонування</string>
-  <string name="background_service_provider_descr">Choose location provider while running in background mode</string>
+  <string name="background_service_provider_descr">Виберіть джерело позиціонування для сервісу</string>
   <string name="background_service_provider">Джерело позиціонування</string>
   <string name="background_router_service_descr">Запускай OsmAnd у фоновому режимі для відслідковування місцерозташування при вимкненому екрані</string>
   <string name="background_router_service">Запускати у фоні</string>
-  <string name="off_router_service_no_gps_available">The background navigation service requires a location provider to be turned on.</string>
+  <string name="off_router_service_no_gps_available">Фоновому сервісу необхідна інформація про місцезнаходження.</string>
   <string name="hide_poi_filter">Сховати фільтр</string>
   <string name="show_poi_filter">Показати фільтр</string>
   <string name="search_poi_filter">Фільтр</string>
@@ -587,7 +587,7 @@
   <string name="voice_data_not_supported">Голосові дані не підтримуються поточною версією програми</string>
   <string name="voice_data_corrupted">Голосові дані неправильного формату або пошкоджені</string>
   <string name="voice_data_unavailable">Вибрані голосові дані недоступні</string>
-  <string name="stop_routing">Відмінити маршрут.</string>
+  <string name="stop_routing">Скасувати маршрут</string>
   <string name="sd_unmounted">SD карта недоступна.\nВи не можете працювати з мапами.</string>
   <string name="sd_mounted_ro">SD карта доступна тільки для читання.\nВи не можете заванатажувати карти з Інтернету.</string>
   <string name="unzipping_file">Файл розпаковується…</string>
@@ -788,7 +788,7 @@
   <string name="navigate_point_format_DM">ГГГ ММ.МММММ</string>
   <string name="navigate_point_format_DMS">ГГГ ММ СС.ССССС</string>
   <string name="search_shown_on_map">Показати</string>
-  <string name="navigate_point_cancel">Відмінити</string>
+  <string name="navigate_point_cancel">Скасувати</string>
   <string name="search_address_top_text">Виберіть адрес</string>
   <string name="search_address_region">Регіон</string>
   <string name="search_address_city">Місто</string>
@@ -803,7 +803,7 @@
   <string name="context_menu_item_open_bug">Повідомити про помилку на мапі</string>
   <string name="context_menu_item_create_poi">Додати POI</string>
   <string name="default_buttons_yes">Так</string>
-  <string name="default_buttons_cancel">Відмінити</string>
+  <string name="default_buttons_cancel">Скасувати</string>
   <string name="default_buttons_apply">Застосувати</string>
   <string name="default_buttons_add">Додати</string>
   <string name="default_buttons_no">Ні</string>
@@ -901,7 +901,7 @@
   <string name="show_traffic_warnings_descr">Show speed limits and traffic bumps</string>
   <string name="avoid_toll_roads_descr">Avoid toll roads for route calculation</string>
   <string name="show_cameras">Показувати камери контролю швидкості</string>
-  <string name="show_traffic_warnings">Show speed limits</string>
+  <string name="show_traffic_warnings">Показувати обмеження швидкості</string>
   <string name="avoid_toll_roads">Уникати платних доріг</string>
   <string name="tip_recent_changes_0_8_2_t">"Зміни в 0.8.2:
 \n\t* Покращена маршрутизація
