@@ -3,10 +3,6 @@
 Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <resources>
 	<string name="tip_select_destination_point">Chọn điểm đến</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).</string>
-
-	<string name="choose_auto_follow_route">Auto follow return time</string>
 	<string name="choose_auto_follow_route_descr">Chọn thời gian chờ hiển thị bản đồ để quay lại vị trí vừa xong</string>
 	<string name="auto_follow_route_never">Không bao giờ</string>
 	<string name="auto_follow_route_navigation">Tự động bám theo trên bản đồ</string>
@@ -26,17 +22,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="layer_poi_label">nhãn POI</string>
 	<string name="animate_route_off">Dừng mô phỏng</string>
 	<string name="animate_route">Bắt đầu mô phỏng</string>
-	
-	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
-\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-\n\t- Implement POI search by name in big areas (countries)  
-\n\t- Fix flickering map screen for tablets (Issue 641)
-\n\t- Auto follow route option (Issue 356)
-\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
-\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
-\n\t- Small improvements
-	</string>
 	<string name="file_can_not_be_renamed">Không thể đổi tên tập tin.</string>
 	<string name="file_with_name_already_exists">Tên tập tin đã có.</string>
 	<string name="gpx_navigation">Tuyến GPX</string>
@@ -65,18 +50,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	
 	<string name="select_search_position">Tìm kiếm gần:</string>
 	<string name="context_menu_item_search">Tìm kiếm</string>
-	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-\n\t- Offline data manager (download, delete, backup offline data directly in OsmAnd)
-\n\t- Favorite points and groups (categorize, delete, manage favorites)
-\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
-\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
-\n\t- Function to save route as GPX track for offline use
-\n\t- Improve GPX monitoring  (filter some inaccurate location and save accuracy/elevation/speed)
-\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
-\n\t- Improve vector rendering
-\n\t- Improvement of TTS engine (announce exact distance, enable miles)
-\n\t- Bug fixes
-	</string>
 	<string name="save_route_dialog_title">Lưu tuyến đường thành tập tin GPX</string>
 	<string name="route_successfully_saved_at">Đã lưu thành công \'%1$s\'.</string>
 	<string name="filename_input">Tên tập tin : </string>
@@ -139,14 +112,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="trace_rendering">Hiển thị thông tin debug</string>
 	<string name="trace_rendering_descr">Display rendering performance</string>
 	<string name="tip_recent_changes">Thay đổi gần đây</string>
-	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
-\n\t- Text To Speech engine for voice navigation
-\n\t- Make map renderer more detailed
-\n\t- Basemap for whole world packaged with app
-\n\t- Tweak offline routing (still experimental)
-\n\t- GPX routing options
-\n\t- UI update and large bug fixing
-	</string>
 	<string name="voice_not_use">Không dùng</string>
 	<string name="voice_not_specified">Không có</string>
 	<string name="installing_new_resources">Đang giải nén dữ liệu mới…</string>
@@ -167,9 +132,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	\n\t\'Theo hướng di chuyển\'
 	\n\t\'Theo hướng la bàn\'
 	\n\tGợi ý: Bạn có thể chọm vào mũi kim la bàn trên bản đồ để chuyển nhanh giữa chế độ xoay theo la bàn và các chế độ xoay khác.</string>
-
-	<string name="switch_to_raster_map_to_see">Current position not covered in your offline vector maps, you can switch map source in menu \'Define view\' -> \'Map Source…\' or need to download additional vector map.</string>
-	<string name="switch_to_vector_map_to_see">You can switch to offline vector maps using menu (Define view -> Map Source… -> Offline vector maps) to see the map.</string>
 	<string name="binary_map_download_success">Thành công. Bạn có thể chuyển sang bản đồ vector offline bằng menu Xem -> Bản đồ…-> Bản đồ vector offline.</string> 
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
@@ -205,14 +167,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="level_to_switch_vector_raster">Tỉ lệ nhỏ nhất để xem bản đồ vector</string>
 
 	<string name="tip_day_night_mode">Chế độ ngày/đêm</string>
-	<string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
-	\n\tNight colors are safer for night driving.
-	\n\tYou can set a policy for day/night switching in \'Main Menu\' -> \'Settings\' -> \'Map appearance\' ->\'Day/night mode\'.
-	\n\tChoices are:
-	\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
-	\n\t\'Ngày\' - always use day mode
-	\n\t\'Đêm\' - always use night mode 
-	\n\t\'Cảm biến ánh sáng\' - hiển thị bản đồ sẽ được kiểm soát bằng cảm biến ánh sáng trên thiết bị của bạn (chỉ họa động nếu được trang bị)</string>	
 	<string name="tip_location_sharing">Chia sẻ vị trí</string>
 	<string name="tip_location_sharing_t">\tBạn có thể chia sẻ vị trí các điểm bạn đã từng đi qua trong chuyến đi với gia đình và bạn bè.
 	\n\tĐể chia sẻ bất kì vị trí nào bạn muốn:
@@ -226,12 +180,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	\n\tTo display all Favorite points directly on the map, enable layer \'Favorites\' in \'Map context menu\' ->\'Define view\'.</string>
 
 	<string name="tip_osm_improve">Cải thiện dữ liệu OSM</string>
-	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and routing- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
-\n\tFor this you need to first provide your OSM login information in \'Main Menu\' -> \'Settings\' -> \'OSM\'.
-\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
-\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
-\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
-\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="create_poi_link_to_osm_doc">Phân loại bản đồ trên <u>Online OSM</u> với ảnh</string>
     <string name="error_doing_search">Có lỗi khi tìm kiếm</string>
     <string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
@@ -240,11 +188,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="system_locale">Hệ thống</string>
 	<string name="preferred_locale_descr">Lựa chọn ngôn ngữ hiển thị</string>
 	<string name="preferred_locale">Ngôn ngữ</string>
-
-	<string name="tip_map_switch">Map Source</string>
-	<string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -> \'Define view\' in map view.
-\n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC.
-\n\tOsmAnd also supports custom sources.</string>
 
 	<string name="tip_app_mode">Chế độ Ứng dụng</string>
 	<string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases.
@@ -257,11 +200,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Navigate to\' or \'Show on map\'.</string>
 
-	<string name="tip_map_context_menu">Map Context Menu</string>
-	<string name="tip_map_context_menu_t">\tThe map context menu is available by long pressing on the map or by pressing the trackball button.
-\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or long press on it to hide the box again.)
-\n\tThe map context menu contains all actions referring to a point (location).</string>
-
 	<string name="tip_initial">Thủ thuật</string>
 	<string name="tip_initial_t">\tOsmAnd là ứng dụng định vị trên Android với nhiều tính năng. 
 \n\tĐMột số thủ thuật và mẹo sử dụng được liên kết với màn hình menu chính.</string>
@@ -270,13 +208,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 
 	<string name="unit_of_length_descr">Đổi đơn vị độ dài và tốc độ</string>
 	<string name="unit_of_length">Đơn vị độ dài</string>
-	<string name="si_mi_foots">Miles/feet</string>
-	<string name="si_mi_yard">Miles/yards</string>
-	<string name="si_km_m">Kilometers/meters</string>
-	<string name="yard">yd</string>
-	<string name="foot">ft</string>
-	<string name="mile_per_hour">mph</string>
-	<string name="mile">mi</string>
 	<string name="send_location_way_choose_title">Chia sẻ vị trí sử dụng</string>
 	<string name="send_location_sms_pattern">Khu vực: %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
@@ -311,9 +242,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="indexing_poi">Đang tạo chỉ mục POI…</string>
 	<string name="indexing_transport">Đang tạo chỉ mục giao thông…</string>
 	<string name="input_output_error">Có lỗi xảy ra với I/O</string>
-	<string name="km">km</string>
-	<string name="km_h">km/h</string>
-	<string name="m">m</string>
 	<string name="old_map_index_is_not_supported">Định dạng dữ liệu \'\'{0}\'\' không được hỗ trợ</string>
 	<string name="poi_filter_car_aid">Sửa Xe</string>
 	<string name="poi_filter_closest_poi">POI gần nhất</string>
@@ -344,8 +272,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="contribution_activity">Special activity for contribution version</string>
 
 	<string name="gps_status_app_not_found">Ứng dụng Tín hiệu GPS chưa được cài đặt. Tìm trong Market?</string>
-
-	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
 	<string name="voice_is_not_available_title">Không có giọng đọc nào được chọn</string>
 	<string name="daynight_mode_day">Ngày</string>
 	<string name="daynight_mode_night">Đêm</string>
@@ -431,20 +357,13 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="none_region_found">Không có dữ liệu Offline cho khu vực này trong thẻ nhớ. Hãy tải về từ Internet.</string>
 	<string name="poi_namefinder_query_empty">Nhập thông tin cần tìm</string>
 	<string name="any_poi">Bất kỳ</string>
-
-	<string name="layer_transport_route">Transport route</string>
-	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
-	<string name="layer_yandex_traffic">Yandex traffic</string>
-	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Ưa thích</string>
-	<string name="layer_osm_bugs">OSM bugs</string>
 	<string name="layer_transport">Điểm dừng giao thông</string>
 	<string name="layer_poi">POI…</string>
 	<string name="layer_map">Nguồn bản đồ…</string>
 	<string name="menu_layers">Thiết lập Xem</string>
 	<string name="continue_follow_previous_route">Quá trình tìm được trước đó chưa hoàn thành. Bạn có muốn tiếp tục với nó?</string>
 	<string name="context_menu_item_search_poi">Tìm POI</string>
-	<string name="context_menu_item_show_route">Route from</string>
 	<string name="use_trackball_descr">Dùng trackball để di chuyển bản đồ</string>
 	<string name="use_trackball">Dùng trackball</string>
 	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
@@ -505,8 +424,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="transport_Stop">Dừng</string>
 	<string name="transport_stops">Dừng</string>
 
-	<string name="transport_search_after">Subsequent route</string>	
-	<string name="transport_search_before">Prior route</string>
 	<string name="transport_finish_search">Kết thúc tìm kiếm</string>
 	<string name="transport_stop_to_go_out">Choose stop to get off</string>
 	<string name="transport_to_go_after">prior distance</string>
@@ -563,7 +480,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="update_existing">Thay đổi</string>
 	<string name="only_show">Chỉ hiện</string>
 	<string name="follow">Đi theo</string>
-	<string name="recalculate_route_to_your_location">Select mode of transportation (optional) and guidance mode</string>
 	<string name="mark_final_location_first">Hãy chọn điểm cần đến</string>
 	<string name="get_directions">Hướng</string>
     <string name="show_gps_status">Hiện tín hiệu GPS</string>
@@ -592,7 +508,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="close">Đóng</string>
 	<string name="loading_data">Đang đọc dữ liệu…</string>
 	<string name="reading_indexes">Đang đọc dữ liệu…</string>
-	<string name="previous_run_crashed">Previous application run crashed. Log file is at {0}. Please report the issue and attach log file.</string>
 	<string name="saving_gpx_tracks">Đang lưu tracks GPX vào thẻ nhớ SD…</string>
 	<string name="finished_task">Đã xong</string>
     <string name="reload_indexes_descr">Đọc lại bản đồ vector và dữ liệu từ thẻ nhớ SD</string>
@@ -619,8 +534,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="save_current_track">Lưu track hiện tại</string>
     <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>
     <string name="save_track_interval">Khoảng thời gian lưu Track</string>
-    <string name="monitor_preferences">Tracking</string>
-    <string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
     <string name="save_track_to_gpx">Lưu track thành GPX</string>
     <string name="navigate_to">Dẫn đường tới</string>
     <string name="update_tile">Cập nhật bản đồ</string>
@@ -752,8 +665,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="poi_action_add">thêm</string>
 <string name="poi_action_change">thay đổi</string>
 <string name="poi_action_succeded_template">Hoàn thành tác vụ {0}.</string>
-<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
-<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
 
 <string name="poi_error_info_not_loaded">Thông tin về node không đọc được</string>
 
