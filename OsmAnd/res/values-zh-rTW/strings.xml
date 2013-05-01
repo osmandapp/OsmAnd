@@ -18,13 +18,6 @@
 	\n\t* 解決一些問題
     </string>
 	<string name="gps_not_available">使用這些設定請啟動GPS</string>
-    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3 :
-	\n\t* Waypoints
-	\n\t* Improved route guidance
-	\n\t* Added a setting which allows to avoid motorways while building a route
-	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
-	\n\t* Bug fixes
-	</string>
 	<string name="map_widget_monitoring_services">記錄服務</string>
 	<string name="no_route">沒有路徑</string>
 	<string name="delete_target_point">刪除經由地</string>
@@ -65,13 +58,6 @@
 	<string name="auto_zoom_map">地圖自動縮放</string>
 	<string name="snap_to_road_descr">導航時車子位置自動粘路</string>
 	<string name="snap_to_road">自動粘路</string>
-	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2 :
-		\n\t* Improved Routing
-		\n\t* Dynamic map widgets
-		\n\t* Map settings moved to map screen
-		\n\t* Lock screen button with logging services
-		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
-	</string>
 	<string name="osmand_short_description_80_chars">OsmAnd為可使用離線與上線地圖的開放程式碼導航軟體</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
@@ -185,20 +171,9 @@
 	<string name="osmand_parking_hours">小時</string>
 	<string name="osmand_parking_minutes">分鐘</string>
 	<string name="osmand_parking_position_description_add_time">你的愛車停在：</string>
-	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1 :
-		\n\t* More precise routes (a bit slower)
-		\n\t* Smart and fast Route recalculation
-		\n\t* Direction by lanes
-		\n\t* Information about speed limits, speed cams, and speed bumps 
-		\n\t* Improved voice guidance on highways
-		\n\t* Parking plugin (\'Where is my car parked at?\')
-		\n\t* Enable/disable logging widget
-	</string>
 	<string name="select_animate_speedup">設定導航模擬速度</string>
     	<string name="global_app_allocated_memory_descr">已配置記憶體%1$s MB (Android限制%2$s MB, Dalvik %3$s MB)</string>
 	<string name="global_app_allocated_memory">已配置記憶</string>
-	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
-		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Native memory大小</string>
 	<string name="update_downlod_list">重載列表</string>
 	<string name="starting_point_too_far">出發位置離道路太遠</string>
@@ -284,18 +259,6 @@
 	<string name="select_plugin_to_activate">觸碰外掛元件以啟用或關閉它(可能需要動啟OsmAnd)。</string>
 	<string name="prefs_plugins_descr">外掛元件啟用專家模式設定並提供額外功能，如網格地圖、追蹤、休眠…等。</string>
 	<string name="prefs_plugins">外掛元件管理</string>
-	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0 :
-		\n\t- *Plugin functionality*
-		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager.
-		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
-		\n\t- *New offline map data support*
-		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
-		\n\t    - You need to download completely new offline data (old data will not be supported anymore)
-		\n\t- *Offline Routing* 
-		\n\t	- Offline routing becomes more robust
-		\n\t  *Usability and UI experience*
-		\n\t	- Improved in many areas		
-	</string>
 	<string name="osm_editing_plugin_description">OSM回報，如收集/修改POI、開啟/評論OSM問題、貢獻GPX (需有OSM帳號)。</string>
 	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示較表，但可能在某些裝置無法使用。</string>
 	<string name="play_commands_of_currently_selected_voice">播放目前選到的聲音指令</string>
@@ -303,12 +266,6 @@
 	<string name="native_rendering">原生繪圖</string>
 	<string name="test_voice_prompts">測試聲音提示</string>    
 	<string name="switch_to_raster_map_to_see">該地區沒有離線地圖，您可在設定功能下載或切換成線上地圖。</string>
-	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2 :
-		\n\t- Native rendering for all devices
-		\n\t- Offline POI editing
-		\n\t- Accessibility
-		\n\t- Lots of bug fixes
-	</string>
 	<string name="send_files_to_osm">將GPX檔傳到OSM？</string>
 	<string name="gpx_visibility_txt">可視</string>
 	<string name="gpx_tags_txt">旗標</string>
@@ -381,16 +338,6 @@
 	<string name="use_fluorescent_overlays_descr">使用螢光色顯示軌跡與導航路徑</string>
 	<string name="offline_edition">離線編輯</string>
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
-	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1 :
-		\n\t- Offline POI editing 
-		\n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
-		\n\t- Show currently recorded track on map
-		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
-		\n\t- New voice prompt \'Route recalculated\'
-		\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
-		\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
-		\n\t- Other changes
-	</string>
 	<string name="update_poi_does_not_change_indexes">在程式中修改景點不會影響到下載的地圖，修改的資料是另存在裝置上的內部檔案。</string>
 	<string name="local_openstreetmap_uploading">上傳中…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} 景點/問題已上傳</string>
@@ -410,11 +357,6 @@
 	<string name="live_monitoring_url">網路實況追蹤位置</string>
 	<string name="gpx_monitoring_disabled_warn">請啟用 \'軌跡記錄成GPX\' 的設定。</string>
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
-	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0 :
-		\n\t- Offline 維基百科 data with articles
-		\n\t- Updated maps
-		\n\t- Other small features
-	</string>    
 	<string name="free_version_message">此免費版 OsmAnd只能下載%1$s個%2$s 且不支援離線維基百科的資料。</string>
 	<string name="free_version_title">免費版</string>
 	<string name="poi_context_menu_showdescription">顯示景點說明</string>
@@ -483,14 +425,6 @@
 	<string name="tip_select_destination_point_t">\t您可以直接在地圖上選定目的地 (在內容選單上選 \'設為目的地\')。 
 		\n\t目的地以橘點標在地圖上，同時OsmAnd會顯示達到目的地的距離與它的方位 (以橘色三角形指示).
 	</string> 
-	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
-		\n\t- Improved offline map rendering
-		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
-		\n\t- Massive look and feel changes
-		\n\t- Altitude info
-		\n\t- New translations (Vienamese, Polish)
-		\n\t- Other small features
-	</string>
 	<string name="use_transparent_map_theme">透明版面</string>
 	<string name="native_library_not_supported">該裝置不支援原生函式庫。</string>
 	<string name="init_native_library">初始化原生函式庫…</string>
@@ -513,16 +447,6 @@
 	<string name="layer_poi_label">景點標簽</string>
 	<string name="animate_route_off">停止模擬</string>
 	<string name="animate_route">開始模擬</string>
-	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8 :
-		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
-		\n\t- Implement POI search by name in big areas (countries)  
-		\n\t- Fix flickering map screen for tablets (Issue 641)
-		\n\t- Auto-center map view option (Issue 356)
-		\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
-		\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
-		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
-		\n\t- Small improvements
-	</string>
 	<string name="file_can_not_be_renamed">檔名不可更改。</string>
 	<string name="file_with_name_already_exists">該檔名已存在。</string>
 	<string name="gpx_navigation">GPX導航路徑</string>
@@ -547,18 +471,6 @@
 	<string name="search_position_map_view">上次瀏覽的地圖</string>
 	<string name="select_search_position">附近查尋：</string>
 	<string name="context_menu_item_search">查尋這附近</string>
-	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7 :
-		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
-		\n\t- Favorite points and groups (categorize, delete, manage favorites)
-		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
-		\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
-		\n\t- Function to save route as GPX track for offline use
-		\n\t- Improve GPX monitoring  (filter some inaccurate position and save accuracy/elevation/speed)
-		\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
-		\n\t- Improve vector rendering
-		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
-		\n\t- Bug fixes
-	</string>
 	<string name="save_route_dialog_title">將導航路徑存成GPX</string>
 	<string name="route_successfully_saved_at">導航路徑成功存成\'%1$s\'。</string>
 	<string name="filename_input">檔名： </string>
@@ -589,7 +501,6 @@
 	<string name="local_index_items_backuped">%2$d項中的%1$d項已解除成功</string>
 	<string name="local_index_items_deleted">%2$d項中的%1$d項已刪除成功</string>
 	<string name="local_index_items_restored">%2$d項中的%1$d項已啟動成功</string>
-	<string name="local_index_no_items_to_do">No items to %1$s</string>
 	<string name="local_index_action_do">您即將%1$s %2$s 項，要繼續嗎？</string>
 	<string name="local_index_descr_title">離線資料管理</string>
 	<string name="local_index_mi_restore">啟用</string>
@@ -615,14 +526,6 @@
 	<string name="trace_rendering">繪圖除錯資訊</string>
 	<string name="trace_rendering_descr">顯示繪圖效能</string>
 	<string name="tip_recent_changes">最近修改</string>
-	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6 : 
-		\n\t- Text To Speech engine for voice navigation
-		\n\t- Make map renderer more detailed
-		\n\t- Basemap for whole world packaged with app
-		\n\t- Tweak offline navigation (still experimental)
-		\n\t- GPX navigation options
-		\n\t- UI update and large bug fixing
-	</string>
 	<string name="voice_not_use">不要使用</string>
 	<string name="voice_not_specified">無</string>
 	<string name="installing_new_resources">安裝新資料…</string>
