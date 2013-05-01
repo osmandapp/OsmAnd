@@ -43,38 +43,7 @@
 	<string name="zoomOut">줌아웃</string>
 	<string name="zoomIn">줌인</string>
 	<string name="zoomIs">줌 </string>
-	
-	<string name="north">north</string>
-	<string name="north_north_east">north-north-east</string>
-	<string name="north_east">north-east</string>
-	<string name="east_north_east">east-north-east</string>
-	<string name="east">east</string>
-	<string name="east_south_east">east-south-east</string>
-	<string name="south_east">south-east</string>
-	<string name="south_south_east">south-south-east</string>
-	<string name="south">south</string>
-	<string name="south_south_west">south-south-west</string>
-	<string name="south_west">south-west</string>
-	<string name="west_south_west">west-south-west</string>
-	<string name="west">west</string>
-	<string name="west_north_west">west-north-west</string>
-	<string name="north_west">north-west</string>
-	<string name="north_north_west">north-north-west</string>
-	<string name="front">Front</string>
-	<string name="front_right">Front right</string>
-	<string name="right">Right</string>
-	<string name="back_right">Back right</string>
-	<string name="back">Back</string>
-	<string name="back_left">Back left</string>
-	<string name="left">Left</string>
-	<string name="front_left">Front left</string>
-	<string name="oclock">o\'clock</string>
-	<string name="towards">towards</string>
-	<string name="accuracy">Accuracy</string>
-	<string name="altitude">Altitude</string>
-	<string name="no_info">No info</string>
-	<string name="direction_style_sidewise">Sidewise (8 sectors)</string>
-	<string name="direction_style_clockwise">Clockwise (12 sectors)</string>
+
 	<string name="settings_direction_style">방향 스타일</string>
 	<string name="settings_direction_style_descr">움직이는 동안 상대적인 방향을 표시할 스타일을 선택합니다</string>
 	<string name="auto_announce_on">자동알림 시작</string>
@@ -240,11 +209,6 @@
 	<string name="pref_raster_map">맵 소스 설정</string>
 	<string name="pref_vector_map">벡터 맵 설정</string>
 	<string name="delete_confirmation_msg">%1$s 를 삭제하시겠습니까?</string>
-	<string name="city_type_suburb">Suburb</string>
-	<string name="city_type_hamlet">Hamlet</string>
-	<string name="city_type_village">Village</string>
-	<string name="city_type_town">Town</string>
-	<string name="city_type_city">City</string>
 	<string name="layer_poi_label">POI 라벨</string>
 	<string name="animate_route_off">애니메이션 종료</string>
 	<string name="animate_route">애니메이션 시작</string>
@@ -329,7 +293,6 @@
 	<string name="local_index_gpx_info_speed">\n평균 속도 : %1$s \n최대 속도 : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\n평균 고도 : %1$.0f m\n최소 고도 : %2$.0f m\n최대 고도 : %3$.0f m\n오르막 : %4$.0f m\n내리막 : %5$.0f m</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\n전체 지점 : %2$d\n경유 지점 : %3$d\n총 거리 : %4$s\n시작 시간 : %5$tD %5$tR\n종료 시간 : %6$tD %6$tR</string>
-	<string name="local_index_installed">Edition</string>
 	<string name="local_index_items_backuped">%2$d 개의 아이템 중 %1$d 가 성공적으로 비활성화되었습니다.</string>
 	<string name="local_index_items_deleted">%2$d 개의 아이템 중 %1$d 가 성공적으로 삭제되었습니다.</string>
 	<string name="local_index_items_restored">%2$d 개의 아이템 중 %1$d 가 성공적으로 활성화되었습니다.</string>
@@ -372,7 +335,6 @@
 \n\t- UI 개선 및 큰 버그 수정
 	</string>
 	<string name="voice_not_use">사용하지 않음</string>
-	<string name="voice_not_specified">None</string>
 	<string name="installing_new_resources">새로운 데이터 설치&#8230;</string>
 	<string name="internet_connection_required_for_online_route">온라인 경로 서비스가 선택되었지만 인터넷 연결이 되지 않습니다.</string>
 	<string name="tts_language_not_supported_title">지원되지 않은 언어</string>
