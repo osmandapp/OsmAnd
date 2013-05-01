@@ -745,8 +745,6 @@
   <string name="map_specify_point">Йти до</string>
   <string name="show_view_angle_descr">Display viewing direction on the map</string>
   <string name="show_view_angle">Показувати напрямок</string>
-  <string name="stop_navigation"/>
-  <string name="navigate_to_point"/>
   <string name="map_view_3d_descr">Увімкнути 3D вигляд для мапи</string>
   <string name="map_view_3d">3D вид</string>
   <string name="show_poi_over_map_description">Показувати POI на мапі</string>
