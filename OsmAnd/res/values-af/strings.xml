@@ -261,7 +261,7 @@
   <string name="download_files_not_enough_space">Daar is nie genoeg spasie om %1$s MB af te laai nie(beskikbaar:%2$s).</string>
   <string name="download_files_question_space">Beskibare geheue nou {2} MB! Laai {0} lêer(s) ({1} MB) af ?</string>
   <string name="tip_select_destination_point">Kies bestemming</string>
-  <string name="tip_select_destination_point_t">\tJy kan \'n ​​bestemming direk op die kaart kies (kaart konteks kieslys, dan \'as bestemming\'), in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk .\n\tDie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek).</string>
+  <string name="tip_select_destination_point_t">"\tJy kan \'n ​​bestemming direk op die kaart kies (kaartinhoud-kieslys, dan \'as bestemming\'), in al die soek aktiwiteite, of deur \'n inskrywing in jou \'Lys van gunsteling punte\' lank te druk.\n\tDie bestemming is gemerk as \'n oranje skyf op die kaart en OsmAnd toon die afstand en die rigting daarna aan (oranje driehoek). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Veranderinge in 0.6.9:\n\t-Verbeterde aflyn kaart lewering\n\t-Vinnige inheemse aflyn lewering - kyk in eksperimentele eienskappe (mag dalk op sommige toestelle nie werk nie)\n\t-Massiewe voorkoms en gevoel veranderinge\n\t-Hoogte inligting\n\t-nuwe vertalings (Vienamese, Pools)\n\t-ander klein funksies "</string>
   <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
@@ -1120,4 +1120,6 @@
 	<string name="index_name_openmaps"/>
     <string name="tip_altitude_offset_t">"\tMeeste GPS toestelle gee hoogte-metings in die ellipsoide-gebaseerde WGS84 verwysingstelsel, waarvan die omskakeling na plaaslik gebruikte stelsels `n posisie-afhanklike regstelling benodig.\n\t`n Beter benadering na hierdie plaaslike stelsels, is die EGM96 verwysing. OSMAnd ondersteun nou ook die outomatiese aanduiding van hoogtes in die EGM96 stelsel.\n\tOm dit te kan gebruik, laai die lêer WW15MGH.DAC af onder Data Bestuur (of by http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="monitoring_control_start"/>
+    <string name="save_current_track_widget">Berg\n huidige GPX spoor</string>
+	<string name="layer_hillshade">Heuwelskadu laag</string>
     </resources>
