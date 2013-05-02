@@ -25,7 +25,7 @@
 	<target name="-package-resources" depends="-crunch">
 		<!-- only package resources if *not* a library project -->
 		<do-only-if-not-library elseText="Library project: do not package resources...">
-			<aapt executable="${aapt}" command="package" versioncode="${version.code}" versionname="${version.name}" debug="${build.is.packaging.debug}" manifest="${out.manifest.abs.file}" assets="${asset.absolute.dir}" androidjar="${project.target.android.jar}" apkfolder="${out.absolute.dir}" nocrunch="${build.packaging.nocrunch}" resourcefilename="${resource.package.file.name}" resourcefilter="${aapt.resource.filter}" libraryResFolderPathRefid="project.library.res.folder.path" libraryPackagesRefid="project.library.packages" previousBuildType="${build.last.target}" buildType="${build.target}" ignoreAssets="${aapt.ignore.assets}">
+			<aapt executable="${aapt}" command="package" versioncode="${version.code}" versionname="${version.name}" debug="${build.is.packaging.debug}" manifest="${out.manifest.abs.file}" assets="${asset.absolute.dir}" androidjar="${project.target.android.jar}" apkfolder="${out.absolute.dir}" nocrunch="${build.packaging.nocrunch}" resourcefilename="${resource.package.file.name}" resourcefilter="${aapt.resource.filter}" libraryResFolderPathRefid="project.library.res.folder.path" libraryPackagesRefid="project.library.packages" previousBuildType="${build.last.target}" buildType="${build.target}" ignoreAssets="${aapt.ignore.assets}" libraryRFileRefid="project.library.bin.r.file.path" >
 				<res path="${out.res.absolute.dir}" />
 				<res path="${resource.absolute.dir}" />
 				<!-- <nocompress /> forces no compression on any files in assets or res/raw -->
