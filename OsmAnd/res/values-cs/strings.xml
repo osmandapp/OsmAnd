@@ -972,7 +972,7 @@
 \n\t* Nastavení mapy přesunuta na mapovou obrazovku\n\t* Opraveno psaní arabštiny, kannadštiny a jazyků psaných zprava "</string>
   <string name="map_widget_top_text">Jméno ulice</string>
   <string name="map_widget_config">Nastavení</string>
-  <string name="map_widget_map_select">Výběr mapy</string>
+  <string name="map_widget_map_select">Mapová data</string>
   <string name="map_widget_back_to_loc">Moje pozice</string>
   <string name="map_widget_lock_screen">Uzamknout obrazovku</string>
   <string name="map_widget_compass">Kompas</string>
@@ -1216,4 +1216,5 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapa a navigace</string>
 	<string name="item_checked">zvoleno</string>
     <string name="item_unchecked">nezvoleno</string>
-    </resources>
+    <string name="save_current_track_widget">Uložit\nsoučasnou GPX trasu</string>
+	</resources>
