@@ -1117,9 +1117,7 @@
 \n\t* Kaart verloor nie posisie slot na onderbrekings nie.\n\t* Vergemoontlik slaap-wyse diens tydens navigasie "</string>
     <string name="support_new_features_descr">Maak donasies om die implementering van nuwe funksies in die toepassing moontlik te maak</string>
 	<string name="incomplete_locale">Onvolledig</string>
-	<string name="index_name_openmaps"/>
     <string name="tip_altitude_offset_t">"\tMeeste GPS toestelle gee hoogte-metings in die ellipsoide-gebaseerde WGS84 verwysingstelsel, waarvan die omskakeling na plaaslik gebruikte stelsels `n posisie-afhanklike regstelling benodig.\n\t`n Beter benadering na hierdie plaaslike stelsels, is die EGM96 verwysing. OSMAnd ondersteun nou ook die outomatiese aanduiding van hoogtes in die EGM96 stelsel.\n\tOm dit te kan gebruik, laai die lêer WW15MGH.DAC af onder Data Bestuur (of by http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
-    <string name="monitoring_control_start"/>
     <string name="save_current_track_widget">Berg\n huidige GPX spoor</string>
 	<string name="layer_hillshade">Heuwelskadu laag</string>
     <string name="map_widget_gps_info">GPS inligting</string>
