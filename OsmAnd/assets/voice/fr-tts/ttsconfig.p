@@ -16,7 +16,17 @@ turn('right_sl', ['tournez légèrement à droite ']).
 turn('right_keep', ['serrez à droite ']).
 turn('left_keep', ['serrez à gauche ']).
 
-prepare_turn(Turn, Dist) == ['Dans ', D, ' préparez vous à ', M] :- distance(Dist) == D, turn(Turn, M).
+prep2turn('left', ['tourner à gauche ']).
+prep2turn('left_sh', ['tourner immédiatement à gauche ']).
+prep2turn('left_sl', ['tourner légèrement à gauche ']).
+prep2turn('right', ['tourner à droite ']).
+prep2turn('right_sh', ['tourner immédiatement à droite ']).
+prep2turn('right_sl', ['tourner légèrement à droite ']).
+prep2turn('right_keep', ['serrer à droite ']).
+prep2turn('left_keep', ['serrer à gauche ']).
+
+
+prepare_turn(Turn, Dist) == ['Dans ', D, ' préparez vous à ', M] :- distance(Dist) == D, prep2turn(Turn, M).
 turn(Turn, Dist) == ['Dans ', D, M] :- distance(Dist) == D, turn(Turn, M).
 turn(Turn) == M :- turn(Turn, M).
 
