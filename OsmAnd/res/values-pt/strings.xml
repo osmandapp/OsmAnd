@@ -46,7 +46,7 @@
   <string name="trace_rendering">Mostrar velocidade de renderização</string>
   <string name="daynight_mode_day">Dia</string>
   <string name="daynight_mode_night">Noite</string>
-  <string name="daynight_mode_auto">Nascer/por do sol</string>
+  <string name="daynight_mode_auto">Nascer/Pôr-do-Sol</string>
   <string name="daynight_mode_sensor">Sensor de luz</string>
   <string name="daynight_descr">Definir regra para mudança entre modos dia e noite</string>
   <string name="daynight">Modo Dia/Noite</string>
@@ -72,7 +72,7 @@
   <string name="continuous_rendering_descr">Mostrar processamento contínuo ao invés de imagem inteira de uma vez</string>
   <string name="rendering_exception">Erro ao exibir a área selecionada</string>
   <string name="rendering_out_of_memory">Não há memória suficiente para exibir a área selecionada</string>
-  <string name="show_point_options">Opções do local</string>
+  <string name="show_point_options">Usar localização...</string>
   <string name="renderer_load_sucess">O motor de renderização foi carregado com sucesso</string>
   <string name="renderer_load_exception">Erro: O motor de renderização não foi carregado</string>
   <string name="renderers">Renderizadores de vetor</string>
@@ -145,7 +145,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">segundos</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Escolha um intervalo de atualização da sua posição no serviço em segundo plano </string>
+  <string name="background_service_int_descr">Escolha um intervalo de atualização da sua posição no serviço em segundo plano</string>
   <string name="background_service_int">Intervalo de posição</string>
   <string name="background_service_provider_descr">Escolha um provedor de localização para o serviço em segundo plano</string>
   <string name="background_service_provider">Provedor de localização</string>
@@ -465,9 +465,9 @@
   <string name="local_indexes_cat_map">Mapas offline (vectoriais)</string>
   <string name="gpx_index_settings_descr">" (Inclui analisador GPX )"</string>
   <string name="map_online_plugin_is_not_installed">Activar plugin de mapas on-line para seleccionar diferentes fontes de mapas</string>
-  <string name="map_online_data">Online maps</string>
+  <string name="map_online_data">Mapas Online e Mosaicos</string>
   <string name="map_online_data_descr">Usar mapas on-line (obter e armazenar mosaicos no cartão SD)</string>
-  <string name="online_map_settings">Online Maps</string>
+  <string name="online_map_settings">Mapas Online</string>
   <string name="online_map_settings_descr">Configurar fontes de mosaicos ou de mapas on-line</string>
   <string name="map_settings">- Map Settings</string>
   <string name="map_settings_descr">Configure a exibição do mapa</string>
@@ -619,10 +619,10 @@
   <string name="download_files_not_enough_space">Espaço livre insuficiente, precisa de %1$s MB (só tem: %2$s disponíveis).</string>
   <string name="download_files_question_space">Agora tem {2} MB de espaço livre! Quer fazer o download de {0} arquivo(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Escolha o destino</string>
-  <string name="tip_select_destination_point_t">\tPode seleccionar um destino directamente no mapa (menu de contexto -&gt; \"Definir como destino\"), em qualquer actividade de pesquisa, ou via pressionando longamente uma entrada na sua \"Lista de Favoritos\".
-\n\tO destino aparece marcado no mapa como um círculo laranja com uma bandeira de xadrês, sendo exibida a distância a que se encontra, e a direção (triângulo laranja).</string>
-  <string name="tip_recent_changes_0_6_9_t">Mudanças em 0.6.9:\n\t- Melhoria da renderização de mapa off-line\n\t- Rápidas prestações da renderização Nativa off-line - ver em recursos experimentais (pode não funcionar em alguns dispositivos)\n\t- Mudanças maciças na aparência e interacção
-\n\t- Informação de Altitude\n\t- Novas traduções (Vienamita, Polaco)\n\t- Outras pequenas características</string>
+  <string name="tip_select_destination_point_t">"\tVocê pode selecionar um destino diretamente no mapa (menu de contexto -&gt; \\\"Definir como destino\\\"), em qualquer atividade de pesquisa, ou pressionando longamente uma entrada na \\\"Lista de Favoritos\\\".
+\n\tO destino aparece marcado no mapa como um círculo laranja com uma bandeira de xadrez, sendo exibida a distância a que se encontra o ponto e sua direção (triângulo laranja). "</string>
+  <string name="tip_recent_changes_0_6_9_t">"Mudanças em 0.6.9:\n\t- Melhoria da renderização de mapa off-line\n\t- Rápidas prestações da renderização Nativa off-line - ver em recursos experimentais (pode não funcionar em alguns dispositivos)\n\t- Mudanças maciças na aparência e interação
+\n\t- Informação de Altitude\n\t- Novas traduções (Vienamita, Polaco)\n\t- Outras pequenas características "</string>
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Tema transparente</string>
   <string name="native_library_not_supported">Biblioteca Nativa não é compatível com este dispositivo.</string>
@@ -634,12 +634,12 @@
   <string name="auto_follow_route_navigation_descr">Auto-centrar a posição no mapa apenas durante a navegação.</string>
   <string name="auto_follow_location_enabled">Mapa automaticamente centrado.</string>
   <string name="pref_vector_rendering">Opções específicas para desenhar vectores</string>
-  <string name="pref_overlay">Overlay / underlay</string>
+  <string name="pref_overlay">Sobreposição / Mapa base</string>
   <string name="pref_raster_map">Definições de mapas de imagens</string>
   <string name="pref_vector_map">Definições de mapas vectoriais</string>
   <string name="delete_confirmation_msg">Apagar %1$s?</string>
   <string name="city_type_suburb">Subúrbio</string>
-  <string name="city_type_hamlet">Hamlet</string>
+  <string name="city_type_hamlet">Aldeia</string>
   <string name="city_type_village">Vila</string>
   <string name="city_type_town">Cidade</string>
   <string name="city_type_city">Cidade</string>
@@ -783,43 +783,43 @@
   <string name="tip_app_mode">Perfil</string>
   <string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
   <string name="tip_navigation">Navegação</string>
-  <string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
-  <string name="tip_search">Searching</string>
+  <string name="tip_navigation_t">\tAntes de iniciar uma navegação você precisa selecionar um destino. Depois pressione \'Menu\' -&gt; \'Navegação\' no mapa e selecione o modo de transporte.</string>
+  <string name="tip_search">Buscando</string>
   <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite. \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.</string>
   <string name="tip_map_context_menu">Map Context Menu</string>
   <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
-  <string name="tip_initial">Tips and Tricks</string>
-  <string name="tip_initial_t">\tOsmAnd é um aplicativo de navegação com muitos recursos.
-\n\tComo uma introdução básica, algumas dicas de uso e truques estão ligados na tela principal.</string>
-  <string name="next_button">Next</string>
-  <string name="previous_button">Previous</string>
-  <string name="unit_of_length_descr">Change units of length and speed</string>
-  <string name="unit_of_length">Unit of measure</string>
-  <string name="si_mi_foots">Miles/feet</string>
-  <string name="si_mi_yard">Miles/yards</string>
-  <string name="si_km_m">Kilometers/meters</string>
+  <string name="tip_initial">Dicas e Truques</string>
+  <string name="tip_initial_t">"\tOsmAnd é um aplicativo de navegação com muitos recursos.
+\n\tComo uma introdução básica, algumas dicas de uso e truques estão acessíveis na tela principal (veja o ícone \'?\'). "</string>
+  <string name="next_button">Próximo</string>
+  <string name="previous_button">Anterior</string>
+  <string name="unit_of_length_descr">Alterar unidades de medida de distância e velocidade</string>
+  <string name="unit_of_length">Unidade de medida</string>
+  <string name="si_mi_foots">Milhas/Pés</string>
+  <string name="si_mi_yard">Milhas/Jardas</string>
+  <string name="si_km_m">Quilômetros/Metros</string>
   <string name="yard">yd</string>
   <string name="foot">ft</string>
   <string name="mile_per_hour">mph</string>
   <string name="mile">mi</string>
-  <string name="send_location_way_choose_title">Share location using</string>
-  <string name="send_location_sms_pattern">Location: %1$s\n%2$s</string>
+  <string name="send_location_way_choose_title">Compartilhar localização usando</string>
+  <string name="send_location_sms_pattern">Localização: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
-  <string name="send_location">Send location</string>
+  <string name="send_location">Enviar localização</string>
   <string name="context_menu_item_share_location">Compartilhar local</string>
-  <string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
+  <string name="add_waypoint_dialog_added">Ponto de passagem \'\'{0}\'\' foi adicionado com sucesso</string>
   <string name="add_waypoint_dialog_title">Acrescentar ponto à trilha GPX gravada</string>
   <string name="context_menu_item_add_waypoint">Acrescentar ponto GPX</string>
   <string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
   <string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
-  <string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
+  <string name="specified_dir_doesnt_exist">Não foi possível encontrar diretório especificado.</string>
   <string name="application_dir">Storage directory</string>
-  <string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
+  <string name="application_dir_change_warning">Alterar o diretório de armazenamento não irá mover os dados para a nova pasta ou apagar os dados atuais. Isto deve ser realizado separadamente e fora do OsmAnd. Continuar mesmo assim?</string>
   <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
   <string name="build_installed">Build {0} successfully installed ({1}).</string>
   <string name="downloading_build">Downloading build…</string>
-  <string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
+  <string name="install_selected_build">Você deseja instalar OsmAnd - {0} de {1} {2} MB ?</string>
   <string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
   <string name="loading_builds">Loading OsmAnd builds…</string>
   <string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
@@ -925,9 +925,10 @@
 <string name="osmand_plus_short_description_80_chars">OsmAnd é uma aplicação de navegação de código aberto para mapas offline e online</string>
 <string name="filterpoi_activity">Criar filtro de POI</string>
 <string name="select_navigation_mode">Selecione o modo de transporte</string>
-<string name="day_night_info_description">Nascer do sol: %1$s \nPôr do sol: %2$s</string>
+<string name="day_night_info_description">Nascer do sol: %1$s
+\nPôr-do-sol: %2$s</string>
 <string name="day_night_info">Dia/noite Informações</string>
-<string name="map_widget_day_night">Dia/noite mapa</string>
+<string name="map_widget_day_night">Modo Dia/noite</string>
 <string name="map_widget_vector_attributes">Atributos de renderização:</string>
 <string name="map_widget_renderer">Estilo de renderização</string>
 <string name="live_monitoring_mode_off">Iniciar\n viver rastreamento</string>
@@ -1007,13 +1008,13 @@
     <string name="av_video_format">Formato de saída de vídeo</string>
     <string name="av_use_external_recorder">Usar gravador externo</string>
     <string name="av_settings_descr">Configurar definições de áudio e vídeo</string>
-    <string name="av_settings">Definições Áudio/vídeo</string>
+    <string name="av_settings">"Definições de áudio e vídeo "</string>
     <string name="recording_error">"Ocorreu um erro durante a gravação "</string>
     <string name="recording_camera_not_available">Câmera não está disponível</string>
     <string name="recording_is_recorded">Áudio/vídeo está a ser gravado. Para parar pressione o botão de stop no widget.</string>
     <string name="recording_open_external_player">Abrir leitor externo</string>
     <string name="recording_delete_confirm">Quer remover esta gravação?</string>
-    <string name="tip_recent_changes_1_1_0_t">Mudanças em 1.1.0:\n\t* Plugin calculador de distância\n\t* Plugin de notas áudio / vídeo\n\t* Plugin de Curvas de Nível\n\t* Correções de bugs\n\t* Opção de estilo de mapa \"Touring view\" com mais detalhes, novos estilos de estradas, mais contraste, e opção de caminhadas Alpinas (escala SAC)\n\t* Opção de correção do geóide EGM96, para corrigir as leituras de altitude GPS</string>
+    <string name="tip_recent_changes_1_1_0_t">"Mudanças em 1.1.0:\n\t* Plugin calculador de distância\n\t* Plugin de notas áudio / vídeo\n\t* Plugin de Curvas de Nível\n\t* Correções de bugs\n\t* Opção de estilo de mapa \"Touring view\" com mais detalhes, novos estilos de estradas, mais contraste, e opção de caminhadas Alpinas (escala SAC)\n\t* Opção de correção do geóide EGM96, para corrigir as leituras de altitude GPS "</string>
     <string name="recording_context_menu_arecord">Fazer uma nota de áudio</string>
     <string name="recording_context_menu_vrecord">Fazer uma nota de vídeo</string>
     <string name="layer_recordings">Camada de gravação</string>
@@ -1079,4 +1080,15 @@
     <string name="rendering_attr_noAdminboundaries_name">Esconder limites administrativos</string>
 	<string name="rendering_attr_noAdminboundaries_description">Esconder limites regionais (níveis 5 a 9)</string>
     <string name="recording_context_menu_show">Ver</string>
-    </resources>
+    <string name="save_current_track_widget">Salvar\nrota GPX atual</string>
+	<string name="item_unchecked">desmarcado</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">Plugin OsMoDroid é antigo e precisa ser atualizado.</string>
+    <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
+	<string name="map_widget_max_speed">Limite de Velocidade</string>
+    <string name="no_buildings_found">Nenhum edifício encontrado.</string>
+    <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Google Play?</string>
+	<string name="support_new_features_descr">Faça uma doação para ver novas funcionalidades implementadas nesta aplicação</string>
+	<string name="tip_rotation_switching_t_v2">"\tVocê pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.\n\tAs opções são:\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima\n\t\'Na direção do movimento\' - Mapa será continuamente alinhado com a sua direção\n\t\'Na direção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "</string>
+	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada por sensor de luz do dispositivo (se equipado) "</string>	
+	<string name="incomplete_locale">incompleto</string>
+	</resources>
