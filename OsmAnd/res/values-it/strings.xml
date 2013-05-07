@@ -1190,7 +1190,7 @@
     <string name="map_widget_av_notes">Note audio</string>
     <string name="srtm_paid_version_msg">Valuta l\'acquisto su Google Play del plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee di livello</string>
-    <string name="animate_routing_using_gpx">Utilizzare il file GPX esistente?</string>
+    <string name="animate_routing_using_gpx">Utilizzare un file GPX esistente?</string>
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>
     <string name="dropbox_plugin_description">Il plugin Dropbox permette di sincronizzare le tracce e le note video/audio con il tuo account Dropbox.</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
