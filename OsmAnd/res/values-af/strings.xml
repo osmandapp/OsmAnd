@@ -39,7 +39,7 @@
   <string name="osmand_parking_am">VM</string>
   <string name="osmand_parking_position_name">Parkeringspunt</string>
   <string name="osmand_parking_plugin_description">Hierdie inlasmodule laat toe dat die ligging van jou geparkeerde motor geberg kan word.</string>
-  <string name="osmand_parking_plugin_name">Parkering Posisie Inlegmodule</string>
+  <string name="osmand_parking_plugin_name">Parkering Posisie Inlasmodule</string>
   <string name="context_menu_item_add_parking_point">Merk as parkeringposisie</string>
   <string name="context_menu_item_delete_parking_point">Vee `n parkeermerker uit</string>
   <string name="gpxup_public">Publieke</string>
@@ -83,7 +83,7 @@
   <string name="local_indexes_cat_map">Aflyn kaarte (Vektor)</string>
   <string name="gpx_index_settings_descr">" (sluit GPX ondersoeker in)"</string>
   <string name="index_settings_descr">Laai kaarte af, beskou inligting en bestuur aflyn kaarte</string>
-  <string name="map_online_plugin_is_not_installed">Skakel die internet kaarte inlegmodule aan om ander kaartbronne te kies</string>
+  <string name="map_online_plugin_is_not_installed">Skakel die internet kaarte inlasmodule aan om ander kaartbronne te kies</string>
   <string name="map_online_data">Internet kaarte (teëls)</string>
   <string name="map_online_data_descr">Gebruik internet kaarte (Laai teëls af en berg dit in kasgeheue op die SD kaart)</string>
   <string name="online_map_settings">Internet kaarte</string>
@@ -97,11 +97,11 @@
   <string name="osmand_monitoring_description">Wys stellings wat jou in staat stel om roetes op te neem in GPX dokumente of om dit lewendig na te trek deur die gebruik van `n web diens.</string>
   <string name="osmand_extra_settings_description">Wys stellings vir gevorderde kaart instellling (bv. vermeerder kaart detail) en `n paar stellings spesifiek vir die toestel.</string>
   <string name="osmand_development_plugin_description">Wys stellings vir ontwikkeling en ontfoutingsfunksies bv. bewegende navigasie of beeldvertoon werkverrigting.</string>
-  <string name="plugins_screen">Inlegmodule bestuurder</string>
-  <string name="select_plugin_to_activate">Druk op `n inlegmodule om dit aan of af te skakel. (Dit mag nodig wees om OsmAnd oor te begin.)</string>
+  <string name="plugins_screen">Inlasmodule bestuurder</string>
+  <string name="select_plugin_to_activate">Druk op `n inlasmodule om dit aan of af te skakel. (Dit mag nodig wees om OsmAnd oor te begin.)</string>
   <string name="prefs_plugins_descr">Inlasmodule aktiveer die gevorderde instellings en voorsien ekstra funksionaliteit</string>
-  <string name="prefs_plugins">Inlegmodule bestuurder</string>
-  <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlegmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlegmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter "</string>
+  <string name="prefs_plugins">Inlasmodule bestuurder</string>
+  <string name="tip_recent_changes_0_8_0_t">"Veranderinge in 0.8.0:\n\t *Inlasmodule funksionaliteit*\n\t- Die meeste funksies is volgens eienskappe gegroepeer en kan aan of af geskakel word in die Inlasmodule Bestuurder. Jy kan (aanlyn of gekaste) teël kaart bronne aanskakel, natrek instel, en baie ander nuwe en reeds bestaande funksies.\n\t- *Nuut aflyn kaart data ondersteuning*\n\t- Kaart lewering is vinniger en meer akkuraat (kuslyn en oorstroomde gebied probleme is grootliks reggemaak).\n\t- Jy moet heeltemal nuwe aflyn data af laai (ou data sal nie meer ondersteun word)\n\t- *Aflyn Roeteberekening*\n\t- Aflyn Roeteberekening stewiger\n\t- *Bruikbaarheid en gebruikerskoppelvlak ervaring*\n\t- In baie areas verbeter "</string>
   <string name="osm_editing_plugin_description">Wys stellings nodig vir OSM terugvoer bv. versamel / aanpas van OSM POI voorwerpe, oopmaak / komentaarlewer op OSM foute, en bydra van opgeneemde GPX dokumente (vereis OSM inlog besonderhede).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vektor kaarte vertoon waarskynlik vinniger. Dit mag egter nie goed werk op sommige toestelle nie.</string>
   <string name="simulate_route_progression_manually">Boots roete vordering met die hand na</string>
@@ -489,7 +489,7 @@
   <string name="version_index_is_not_supported">Die weergawe van indeks \"{0}\'\' word nie ondersteun nie</string>
   <string name="use_osmand_routing_service">OsmAnd navigasie &gt;20km</string>
   <string name="use_osmand_routing_service_descr">Gebruik OsmAnd aflyn navigasie diens van toepassing slegs op roetes &gt; 20 km (eksperimenteel)</string>
-  <string name="osmand_routing_experimental">OsmAnd aflyn navigasie diens is \'n eksperimentele funksie en dit werk nie vir afstande van meer as ongeveer 20 kmnie.\n\nNavigation diens is tydelik oorgeskakel na aanlyn CloudMade.</string>
+  <string name="osmand_routing_experimental">OsmAnd aflyn navigasie diens is \'n eksperimentele funksie en dit werk nie vir afstande van meer as ongeveer 20 km nie.\n\nNavigasie diens is tydelik oorgeskakel na aanlyn CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Kan nie daardie adres vind nie.</string>
   <string name="application_dir">Bergingsadres</string>
   <string name="application_dir_change_warning">Verandering van die bergingsadres sal nie die data beweeg of verwyder nie. Dit moet afsonderlik en buite OsmAnd gedoen word. Nogtans voortgaan?</string>
