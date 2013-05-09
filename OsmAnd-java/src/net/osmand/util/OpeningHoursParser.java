@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
-
 /**
  * Class used to parse opening hours
  * 
@@ -597,6 +596,41 @@ public class OpeningHoursParser {
 		testOpened("12.08.2012 23:00", hours, true);
 		testOpened("08.08.2012 12:00", hours, false);
 		testOpened("08.08.2012 05:00", hours, true);
+
+		// test simple day wrap
+		hours = parseOpenedHours("Mo 20:00-02:00");
+		System.out.println(hours);
+		testOpened("05.05.2013 10:30", hours, false);
+		testOpened("05.05.2013 23:59", hours, false);
+		testOpened("06.05.2013 10:30", hours, false);
+		testOpened("06.05.2013 20:30", hours, true);
+		testOpened("06.05.2013 23:59", hours, true);
+		testOpened("07.05.2013 00:00", hours, true);
+		testOpened("07.05.2013 00:30", hours, true);
+		testOpened("07.05.2013 01:59", hours, true);
+		testOpened("07.05.2013 20:30", hours, false);
+
+		// test maximum day wrap
+		hours = parseOpenedHours("Su 10:00-10:00");
+		System.out.println(hours);
+		testOpened("05.05.2013 09:59", hours, false);
+		testOpened("05.05.2013 10:00", hours, true);
+		testOpened("05.05.2013 23:59", hours, true);
+		testOpened("06.05.2013 00:00", hours, true);
+		testOpened("06.05.2013 09:59", hours, true);
+		testOpened("06.05.2013 10:00", hours, false);
+
+		// test day wrap as seen on OSM
+		hours = parseOpenedHours("Tu-Th 07:00-2:00; Fr 17:00-4:00; Sa 18:00-05:00; Su,Mo off");
+		System.out.println(hours);
+		testOpened("05.05.2013 04:59", hours, true);
+		testOpened("05.05.2013 05:00", hours, false);
+		testOpened("05.05.2013 12:30", hours, false);
+		testOpened("06.05.2013 10:30", hours, false);
+		testOpened("07.05.2013 01:00", hours, false);
+		testOpened("07.05.2013 20:25", hours, true);
+		testOpened("07.05.2013 23:59", hours, true);
+		testOpened("08.05.2013 00:00", hours, true);
+		testOpened("08.05.2013 02:00", hours, false);
 	}
-	
 }
