@@ -275,18 +275,20 @@ public class OpeningHoursParser {
 			for (i = 0; i < startTimes.length; i++) {
 				int startTime = this.startTimes[i];
 				int endTime = this.endTimes[i];
-				// one day working 10 - 20 (not 20 - 04)
 				if (startTime < endTime || endTime == -1) {
+					// one day working like 10:00-20:00 (not 20:00-04:00)
 					if (days[d] && !checkPrevious) {
 						if (time >= startTime && (endTime == -1 || time <= endTime)) {
 							return true;
 						}
 					}
 				} else {
-					if (time >= startTime && days[p] && checkPrevious) {
-						// check in previous day
+					// opening_hours includes day wrap like
+					// "We 20:00-03:00" or "We 07:00-07:00"
+					if (time >= startTime && days[d] && !checkPrevious) {
 						return true;
-					} else if (time <= endTime && days[d] && !checkPrevious) {
+					} else if (time < endTime && days[p] && checkPrevious) {
+						// check in previous day
 						return true;
 					}
 				}
