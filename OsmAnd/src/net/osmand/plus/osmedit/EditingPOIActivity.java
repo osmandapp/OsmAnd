@@ -64,8 +64,8 @@ public class EditingPOIActivity implements DialogProvider {
 	private Button openHoursButton;
 	private EditText openingHours;
 	private EditText commentText;
-	private EditText websiteText;
-	private EditText phoneText;
+	private EditText housenumberText;
+	private EditText streetnameText;
 	private CheckBox closeChange;
 
 //	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
@@ -182,10 +182,10 @@ public class EditingPOIActivity implements DialogProvider {
 		nameText.setText(a.getName());
 		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		openingHours.setText(a.getOpeningHours());
-		EditText phoneText = ((EditText)dlg.findViewById(R.id.Phone));
-		phoneText.setText(a.getPhone());
-		EditText websiteText = ((EditText)dlg.findViewById(R.id.Website));
-		websiteText.setText(a.getSite());
+		EditText streetnameText = ((EditText)dlg.findViewById(R.id.Streetname));
+		streetnameText.setText(a.getStreetname());
+		EditText housenumberText = ((EditText)dlg.findViewById(R.id.Housenumber));
+		housenumberText.setText(a.getHousenumber());
 		final TableLayout layout = ((TableLayout)dlg.findViewById(R.id.advancedModeTable));
 		layout.setVisibility(View.GONE);
 		updateType(a);
@@ -211,8 +211,8 @@ public class EditingPOIActivity implements DialogProvider {
 
         final Set<String> tagKeys = new TreeSet<String>();
 		for (OSMTagKey t : OSMTagKey.values()) {
-			if ((t != OSMTagKey.NAME) && (t != OSMTagKey.OPENING_HOURS) && (t != OSMTagKey.PHONE)
-					&& (t != OSMTagKey.WEBSITE)) {
+			if ((t != OSMTagKey.NAME) && (t != OSMTagKey.OPENING_HOURS) && (t != OSMTagKey.ADDR_STREET)
+					&& (t != OSMTagKey.ADDR_HOUSE_NUMBER)) {
 				tagKeys.add(t.getValue());
 			}
 		}
@@ -297,8 +297,8 @@ public class EditingPOIActivity implements DialogProvider {
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeText.setThreshold(1);
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
-		phoneText = ((EditText)dlg.findViewById(R.id.Phone));
-		websiteText = ((EditText)dlg.findViewById(R.id.Website));
+		streetnameText = ((EditText)dlg.findViewById(R.id.Streetname));
+		housenumberText = ((EditText)dlg.findViewById(R.id.Housenumber));
 		closeChange = ((CheckBox) dlg.findViewById(R.id.CloseChangeset));
 		
 		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);
@@ -396,7 +396,7 @@ public class EditingPOIActivity implements DialogProvider {
 				layout.requestLayout();
 				for (String tg : n.getTagKeySet()) {
 					if (!tg.equals(OSMTagKey.NAME.getValue()) && !tg.equals(OSMTagKey.OPENING_HOURS.getValue())
-							&& !tg.equals(OSMTagKey.PHONE.getValue()) && !tg.equals(OSMTagKey.WEBSITE.getValue())) {
+							&& !tg.equals(OSMTagKey.ADDR_STREET.getValue()) && !tg.equals(OSMTagKey.ADDR_HOUSE_NUMBER.getValue())) {
 						if(a == null || a.getType() == null || !a.getType().getDefaultTag().equals(tg)) {
 							addTagValueRow(n, layout, tg, n.getTag(tg));
 						}
@@ -449,13 +449,13 @@ public class EditingPOIActivity implements DialogProvider {
 				} else {
 					n.putTag(OSMTagKey.OPENING_HOURS.getValue(), openingHours.getText().toString());
 				}
-				String website = websiteText.getText().toString();
-				if (website.length() > 0 ){
-					n.putTag(OSMTagKey.WEBSITE.getValue(),website);
+				String housenumber = housenumberText.getText().toString();
+				if (housenumber.length() > 0 ){
+					n.putTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),housenumber);
 				}
-				String phone = phoneText.getText().toString();
-				if (phone.length() > 0 ){
-					n.putTag(OSMTagKey.PHONE.getValue(),phone);
+				String streetname = streetnameText.getText().toString();
+				if (streetname.length() > 0 ){
+					n.putTag(OSMTagKey.ADDR_STREET.getValue(),streetname);
 				}
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), closeChange.isSelected(), 
 						new Runnable() {
