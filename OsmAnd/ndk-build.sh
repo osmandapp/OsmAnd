@@ -20,6 +20,10 @@ if [ -z "$OSMAND_X86_ONLY" ] && [ -z "$OSMAND_ARM_ONLY" ] && [ -z "$OSMAND_ARMv5
 	echo "BUILD_ALL set to true"
 fi
 
+if [ -d "$SCRIPT_LOC/../../core/avian/" ]; then
+	export BUILD_ONLY_OLD_LIB=1
+fi
+
 "$SCRIPT_LOC/../../core/android-configure.sh"
 
 (cd "$SCRIPT_LOC" && "$ANDROID_NDK/ndk-build" -j`nproc`)
