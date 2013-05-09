@@ -387,7 +387,11 @@ public class RoutingContext {
 				for (RouteDataObject ro : routes) {
 					for (int i = 0; i < ro.pointsX.length; i++) {
 						if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-							excludeDuplications.put(calcRouteId(ro, i), ro);
+							long id = calcRouteId(ro, i);
+							if (excludeDuplications.contains(id)) {
+								continue;
+							}
+							excludeDuplications.put(id, ro);
 							RouteSegment segment = new RouteSegment(ro, i);
 							segment.next = original;
 							original = segment;

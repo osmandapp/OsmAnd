@@ -5,7 +5,7 @@ import android.app.Activity;
 
 public class OsmandIntents {
 	
-	public static Class<SettingsActivity> getSettingsActivity(){
+	public static Class<? extends Activity> getSettingsActivity(){
 		return SettingsActivity.class;
 	}
 	
@@ -27,6 +27,10 @@ public class OsmandIntents {
 	
 	public static Class<? extends Activity> getDownloadIndexActivity() {
 		return DownloadIndexActivity.class;
+	}
+	
+	public static Class<? extends Activity> getPluginsActivity() {
+		return PluginsActivity.class;
 	}
 	
 	public static Class<? extends Activity> getLocalIndexActivity() {

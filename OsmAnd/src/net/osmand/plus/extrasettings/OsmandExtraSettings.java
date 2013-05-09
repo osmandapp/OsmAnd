@@ -3,34 +3,22 @@ package net.osmand.plus.extrasettings;
 
 import java.util.Arrays;
 
-import net.osmand.plus.Version;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.media.AudioManager;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
 
 public class OsmandExtraSettings extends OsmandPlugin {
 	private static final String ID = "osmand.extrasettings";
-	private OsmandSettings settings;
 	private OsmandApplication app;
 	private boolean registerControls;
 	
@@ -40,7 +28,6 @@ public class OsmandExtraSettings extends OsmandPlugin {
 	
 	@Override
 	public boolean init(OsmandApplication app) {
-		settings = app.getSettings();
 		return true;
 	}
 	
@@ -150,51 +137,4 @@ public class OsmandExtraSettings extends OsmandPlugin {
 	}
 	
 
-	@Override
-	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		PreferenceScreen general = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS);
-		
-		PreferenceCategory cat = new PreferenceCategory(app);
-		cat.setTitle(R.string.extra_settings);
-		general.addPreference(cat);
-		
-		cat.addPreference(activity.createCheckBoxPreference(settings.USE_HIGH_RES_MAPS, 
-				R.string.use_high_res_maps, R.string.use_high_res_maps_descr));
-		
-		if (!Version.isBlackberry((ClientContext) activity.getApplication())) {
-			cat.addPreference(activity.createCheckBoxPreference(settings.USE_TRACKBALL_FOR_MOVEMENTS, 
-					R.string.use_trackball, R.string.use_trackball_descr));
-			
-			ListPreference lp = activity.createListPreference(
-					settings.AUDIO_STREAM_GUIDANCE,
-					new String[] { app.getString(R.string.voice_stream_music), app.getString(R.string.voice_stream_notification),
-							app.getString(R.string.voice_stream_voice_call) }, new Integer[] { AudioManager.STREAM_MUSIC,
-							AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL }, R.string.choose_audio_stream,
-					R.string.choose_audio_stream_descr);
-			final OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-			lp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
-
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					prev.onPreferenceChange(preference, newValue);
-					CommandPlayer player = app.getPlayer();
-					if (player != null) {
-						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
-					}
-					return true;
-				}
-			});
-			cat.addPreference(lp);
-		}
-		
-		
-//		cat = new PreferenceCategory(app);
-//		cat.setTitle(R.string.extra_settings);
-//		PreferenceScreen routing = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS);		
-//		routing.addPreference(cat);
-//		cat.addPreference(activity.createListPreference(settings.POSITION_ON_MAP,
-//				new String[] { activity.getString(R.string.position_on_map_center), activity.getString(R.string.position_on_map_bottom) },
-//				new Integer[] { OsmandSettings.CENTER_CONSTANT, OsmandSettings.BOTTOM_CONSTANT }, R.string.position_on_map,
-//				R.string.position_on_map_descr));	
-	}
 }

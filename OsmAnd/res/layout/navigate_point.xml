@@ -21,7 +21,7 @@
 <TextView android:textSize="20sp"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:text="@string/navigate_point_format"></TextView>
 <Spinner android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/Format" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" ></Spinner>
 </TableRow>
-<TextView android:id="@+id/ValidateTextView" android:textSize="16sp"  android:visibility="gone"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:gravity="center" android:textColor="@color/color_red"></TextView>
+<TextView android:id="@+id/ValidateTextView" android:textSize="16sp"  android:visibility="gone"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:gravity="center" android:textColor="@color/color_invalid"></TextView>
 </TableLayout>
 
 <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center">

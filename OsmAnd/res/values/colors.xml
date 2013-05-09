@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<color name="titlebar_background">#444444</color>
-	<color name="group_background">#333333</color>
-    <color name="activity_background">#5B5B5B</color>
-    <color name="list_separator">#494949</color>
-    <color name="activity_text">#FFFFFF</color>
-	<color name="menu_background">#FF9030</color>
-	<color name="color_light_gray">#d7d7d7</color>
+    <color name="color_transparent">#00000000</color>
+    
+    <!-- style colors  -->
+	<color name="group_background">#A5A5A5</color>
+    <!-- <color name="activity_background">#666666</color>  -->
+    
+    <!-- Distance to object suitable for all themes -->
+    <color name="color_distance">#FD9822</color>
+    
+    <!-- Old dialogs colors -->
+    <color name="color_white">#FFFFFF</color>
 	<color name="color_black">#000000</color>
-	<color name="color_transparent">#00000000</color>
-	<color name="color_white">#FFFFFF</color>
-	<color name="color_red">#FF0000</color>
-	<color name="color_orange">#FD9822</color>
 	
-	<color name="color_distance">#FD9822</color>
-
+	<!-- Themed color list items -->
+	<!-- invalid -red, localindex not supported,  -->
+	<color name="color_invalid">#EE3232</color>
+	<!-- warning -red, localindex is corrupted, poi closed, osm_delete -->
+	<color name="color_warning">#EE3232</color>
+	<!-- normal state, localindex unknown, poi unknown, index_unknown  -->
+	<color name="color_unknown">#C8C8C8</color>
+	<!-- good state, localindex loaded, poi_open, osm_create, index_ok   -->
+	<color name="color_ok">#32CD32</color>
+	<!-- update good state, osm_modify, index_update -->
+	<color name="color_update">#0080FF</color>
+	
+	<!-- Map colors -->
 	<!-- LAYER and SPECIAL PURPOSE consistency colors -->
 
 	<color name="gpx_track">#B4B319FF</color>
@@ -33,32 +44,12 @@
 	 <color name="nav_arrow_imminent">#2EFF00</color>
 	<color name="nav_arrow_distant">#C0C0C0</color>
 	<color name="nav_point">#FA5050</color> 
-	
-	<color name="index_unknown">#FFFFFF</color> <!-- standard WHITE -->
-	<color name="act_index_uptodate">#00FF00</color> <!-- standard GREEN -->
-	<color name="act_index_updateable">#0080FF</color> <!-- modified BLUE because of grey background -->
-	<!-- Try fix Issue 1482: Use italic instead of dark colors for deactivated maps -->
-	<!-- color name="deact_index_uptodate">#003C00</color --> <!-- DARK_GREEN -5 shades, related to above! -->
-	<!-- color name="deact_index_updateable">#00008B</color --> <!-- DARK_BLUE, related to above! -->
-
-	<color name="localindex_notsupported">#FF0000</color> <!-- standard RED -->
-	<color name="localindex_iscorrupted">#FF00FF</color> <!-- standard MAGENTA -->
-	<color name="localindex_isloaded">#00FF00</color> <!-- standard GREEN -->
-	<color name="localindex_unknown">#C0C0C0</color> <!-- standard LTGRAY -->
-
 	<color name="poi_background">#A0FF8000</color>
-	<color name="poi_open">#32CD32</color> <!-- GREEN/RED is intuitive for open/closed -->
-	<color name="poi_closed">#EE3232</color>
-	<color name="poi_direction">#6400FF</color>
-	<color name="poi_unknown_arrow">#C8C8C8</color>
 
 	<color name="transport_stop">#960000FF</color>
 	<color name="transport_int">#9632C832</color>
 	<color name="transport_end">#96FF0000</color>
 
-	<color name="osm_create">#00FF00</color> <!-- standard GREEN -->
-	<color name="osm_modify">#FF00FF</color> <!-- standard MAGENTA -->
-	<color name="osm_delete">#FF0000</color> <!-- standard RED -->
 
 	<color name="osmbug_opened">#C8FF0000</color> <!-- standard RED -->
 	<color name="osmbug_closed">#C800FF00</color> <!-- standard GREEN -->

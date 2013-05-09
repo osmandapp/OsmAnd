@@ -7,7 +7,6 @@ import java.util.Set;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,17 +26,16 @@ public class PluginsActivity extends OsmandListActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.plugins_screen, R.drawable.tab_plugin_screen_icon);
 		setContentView(R.layout.plugins);
+		getSupportActionBar().setTitle(R.string.plugins_screen);
 		
 		availablePlugins = OsmandPlugin.getAvailablePlugins();
 		List<OsmandPlugin> enabledPlugins = OsmandPlugin.getEnabledPlugins();
 		for(OsmandPlugin p : enabledPlugins) {
 			restartPlugins.add(p.getId());
 		}
-		
-		titleBar.afterSetContentView();
 		setListAdapter(new OsmandPluginsAdapter(availablePlugins));
 	}
 	
@@ -105,7 +103,6 @@ public class PluginsActivity extends OsmandListActivity {
 			description.setText(plugin.getDescription());
 			description.setVisibility(clickedPlugins.contains(plugin.getId()) ||
 					!restartPlugins.contains(plugin.getId()) ? View.VISIBLE : View.GONE);
-			description.setTextColor(Color.LTGRAY);
 
 			return row;
 		}

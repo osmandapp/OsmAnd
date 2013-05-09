@@ -2,16 +2,15 @@ package net.osmand.plus.monitoring;
 
 import java.util.EnumSet;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
+import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -25,16 +24,14 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
-import org.apache.commons.logging.Log;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.View;
 
@@ -42,7 +39,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	private static final String ID = "osmand.monitoring";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	private static final Log log = PlatformUtil.getLog(OsmandMonitoringPlugin.class);
 	private BaseMapWidget monitoringControl;
 
 	public OsmandMonitoringPlugin(OsmandApplication app) {
@@ -62,12 +58,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 	@Override
 	public String getDescription() {
-		return app.getString(R.string.osmand_monitoring_description);
+		return app.getString(R.string.osmand_monitoring_plugin_description);
 	}
 
 	@Override
 	public String getName() {
-		return app.getString(R.string.map_widget_monitoring_services);
+		return app.getString(R.string.osmand_monitoring_plugin_name);
 	}
 
 	@Override
@@ -111,77 +107,23 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		Preference offlineData = screen.findPreference("local_indexes");
-		if (offlineData == null) {
-			log.error("OsmAndMonitoringPlugin: Index settings preference not found !");
-		} else {
-			offlineData.setSummary(offlineData.getSummary() + " " + app.getString(R.string.gpx_index_settings_descr));
-		}
-
-		PreferenceCategory cat = new PreferenceCategory(activity);
-		cat.setTitle(R.string.save_track_to_gpx);
-		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS)).addPreference(cat);
-
-		cat.addPreference(activity.createCheckBoxPreference(settings.SAVE_TRACK_TO_GPX, R.string.save_track_to_gpx,
-				R.string.save_track_to_gpx_descrp));
-		cat.addPreference(activity.createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
-				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
-
-		cat = new PreferenceCategory(activity);
-		cat.setTitle(R.string.live_monitoring);
-		((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_NAVIGATION_SETTINGS)).addPreference(cat);
-		
-		cat.addPreference(activity.createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring,
-				R.string.live_monitoring_descr));
-		cat.addPreference(activity.createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, SECONDS,
-				MINUTES, 1000, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
-
-		cat = new PreferenceCategory(activity);
-		cat.setTitle(R.string.monitor_preferences);
-
-		PreferenceScreen generalSection = ((PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS));
-		generalSection.addPreference(cat);
-		cat.addPreference(activity.createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
-			R.string.live_monitoring_url_descr));
-
-		Preference pref = new Preference(activity);
-		pref.setTitle(R.string.save_current_track);
-		pref.setSummary(R.string.save_current_track_descr);
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		Preference grp = new Preference(activity);
+		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				SavingTrackHelper helper = app.getSavingTrackHelper();
-				if (helper.hasDataToSave()) {
-					saveCurrentTracks(helper, activity);
-				} else {
-					helper.close();
-				}
+				activity.startActivity(new Intent(activity, SettingsMonitoringActivity.class));
 				return true;
 			}
 		});
-		cat.addPreference(pref);
+		grp.setTitle(R.string.monitoring_settings);
+		grp.setSummary(R.string.monitoring_settings_descr);
+		grp.setKey("monitoring_settings");
+		screen.addPreference(grp);
+		
 	}
 
-	private void saveCurrentTracks(final SavingTrackHelper helper, final SettingsActivity activity) {
-		activity.progressDlg = ProgressDialog.show(activity, activity.getString(R.string.saving_gpx_tracks),
-				activity.getString(R.string.saving_gpx_tracks), true);
-		final ProgressDialogImplementation impl = new ProgressDialogImplementation(activity.progressDlg);
-		impl.setRunnable("SavingGPX", new Runnable() { //$NON-NLS-1$
-					@Override
-					public void run() {
-						try {
-							helper.saveDataToGpx();
-							helper.close();
-						} finally {
-							if (activity.progressDlg != null) {
-								activity.progressDlg.dismiss();
-								activity.progressDlg = null;
-							}
-						}
-					}
-				});
-		impl.run();
-	}
+	
 
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)
@@ -277,6 +219,32 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}
 			}
 		}, -1);
+		
+		final boolean bgoff = view.getApplication().getNavigationService() == null;
+		int msgId = !bgoff? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off;
+		int draw = !bgoff? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
+		qa.registerItem(msgId, draw, new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
+				if (view.getApplication().getNavigationService() == null) {
+					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
+					vs.value = view.getSettings().SERVICE_OFF_INTERVAL.get();
+					li.showIntervalChooseDialog(view, view.getContext().getString(R.string.gps_wakeup_interval), 
+							view.getContext().getString(R.string.background_router_service), SettingsMonitoringActivity.BG_SECONDS, 
+							SettingsMonitoringActivity.BG_MINUTES,
+							vs, new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							view.getSettings().SERVICE_OFF_INTERVAL.set(vs.value);
+							view.getContext().startService(serviceIntent);	
+						}
+					});
+				} else {
+					view.getContext().stopService(serviceIntent);
+				}
+			}
+		}, 0);
 
 		qa.registerItem(R.string.save_current_track_widget,
 				R.drawable.monitoring_rec_inactive,
@@ -293,7 +261,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						return null;
 					}
 
-				}, null);
+				}, (Void) null);
 			}
 		}, -1);
 

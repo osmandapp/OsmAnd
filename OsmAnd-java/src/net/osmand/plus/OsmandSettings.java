@@ -97,7 +97,6 @@ public class OsmandSettings {
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
 	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
-
 	
 	
 	protected OsmandSettings(ClientContext clientContext) {
@@ -659,7 +658,6 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
-	public static final String LOCAL_INDEXES = "local_indexes"; //$NON-NLS-1$
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().cache();
@@ -692,9 +690,9 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5000).makeProfile();
 	{
-		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 5000);
-		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 10000);
-		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 30000);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 3000);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.BICYCLE, 7000);
+		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 10000);
 	}
 	
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1405,6 +1403,17 @@ public class OsmandSettings {
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		TRANSPARENT_MAP_THEME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
 	}
+	
+	public static final int OSMAND_DARK_THEME = 0;
+	public static final int OSMAND_LIGHT_THEME = 1;
+	public static final int OSMAND_LIGHT_DARK_ACTIONBAR_THEME = 2;
+	public final CommonPreference<Integer> OSMAND_THEME = 
+			new IntPreference("osmand_theme", OSMAND_DARK_THEME).makeGlobal().cache();
+	
+	public boolean isLightActionBar(){
+		return OSMAND_THEME.get() == OSMAND_LIGHT_THEME;
+	}
+	
 	
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS = 
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();

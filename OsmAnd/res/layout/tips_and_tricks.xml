@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_height="fill_parent" android:orientation="vertical" android:background="@color/color_light_gray">
+	android:layout_height="fill_parent" android:orientation="vertical" >
 
 	<net.osmand.access.ExplorableTextView android:text="" android:id="@+id/TipDescription" android:layout_marginLeft="4dp" android:scrollbars="vertical"
 		android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginRight="4dp" android:layout_weight="1"
-		android:textColor="@color/color_black" android:textSize="18sp" android:gravity="fill_horizontal"
-		android:background=	"@drawable/textlines" />
+		android:textSize="18sp" android:gravity="fill_horizontal"
+		/>
 
 <!-- 	<TextView android:text="@string/poi_dialog_other_tags_message" android:id="@+id/TextView" android:layout_marginLeft="5dp"
 		android:layout_width="fill_parent" android:layout_height="wrap_content" />  -->

@@ -23,9 +23,8 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
-import net.osmand.map.ITileSource;
 import net.osmand.data.LatLon;
-import net.osmand.util.MapUtils;
+import net.osmand.map.ITileSource;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -48,6 +47,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -989,6 +989,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	public boolean onCreateOptionsMenu(Menu menu) {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
+		final OsmandApplication app = mapActivity.getMyApplication();
 		optionsMenuHelper =  new OptionsMenuHelper();
 		optionsMenuHelper.registerOptionsMenuItem(R.string.where_am_i, R.string.where_am_i, android.R.drawable.ic_menu_mylocation, 
 				new OnOptionsMenuClick() {
@@ -1113,7 +1114,8 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		});
-		if (Version.isGpsStatusEnabled(mapActivity.getMyApplication()) && !Version.isBlackberry(mapActivity.getMyApplication())) {
+		
+		if (Version.isGpsStatusEnabled(app) && !Version.isBlackberry(app)) {
 			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
 					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
 						@Override
@@ -1137,6 +1139,21 @@ public class MapActivityActions implements DialogProvider {
 				return true;
 			}
 		});		
+		final OsmAndLocationProvider loc = app.getLocationProvider();
+		optionsMenuHelper.registerOptionsMenuItem(R.string.animate_route, R.string.animate_route, false, new OnOptionsMenuClick() {
+			@Override
+			public void prepareOptionsMenu(Menu menu, MenuItem animateMenu) {
+				animateMenu.setTitle(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
+				animateMenu.setVisible(app.getTargetPointsHelper().getPointToNavigate() != null);
+			}
+			
+			@Override
+			public boolean onClick(MenuItem item) {
+				// animate moving on route
+				loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
+				return true;
+			}
+		});
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 		
 		optionsMenuHelper.registerOptionsMenu(menu);

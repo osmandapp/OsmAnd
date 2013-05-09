@@ -20,25 +20,25 @@ import net.londatiga.android.QuickAction;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.util.MapUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.util.MapUtils;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -50,6 +50,12 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.Window;
 
 /**
  * 
@@ -64,6 +70,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	public static final int EXPORT_ID = 0;
 	public static final int IMPORT_ID = 1;
 	public static final int DELETE_ID = 2;
+	public static final int DELETE_ACTION_ID = 3;
 	
 
 	private FavouritesAdapter favouritesAdapter;
@@ -73,11 +80,16 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	private Set<FavouritePoint> favoritesToDelete = new LinkedHashSet<FavouritePoint>();
 	private Set<String> groupsToDelete = new LinkedHashSet<String>();
 	private Comparator<FavouritePoint> favoritesComparator;
+	private ActionMode actionMode;
 	
 
 	@Override
 	public void onCreate(Bundle icicle) {
+        //This has to be called before setContentView and you must use the
+        //class in com.actionbarsherlock.view and NOT android.view
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(icicle);
+		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		favoritesComparator = new Comparator<FavouritePoint>(){
@@ -87,56 +99,22 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				return collator.compare(object1.getName(), object2.getName());
 			}
 		};
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.favourites_activity, R.drawable.tab_search_favorites_icon);
+
+
+		
 		setContentView(R.layout.favourites_list);
-		titleBar.afterSetContentView();
+		getSupportActionBar().setTitle(R.string.favourites_activity);
+		setSupportProgressBarIndeterminateVisibility(false);
+		// getSupportActionBar().setIcon(R.drawable.tab_search_favorites_icon);
 		
 		
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter = new FavouritesAdapter();
 		favouritesAdapter.setFavoriteGroups(helper.getFavoriteGroups());
 		getExpandableListView().setAdapter(favouritesAdapter);
-
-		findViewById(R.id.CancelButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				cancelSelectingMode();
-			}
-
-			
-		});
 		
-		findViewById(R.id.ActionButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if(groupsToDelete.size() + favoritesToDelete.size() > 0){
-					
-					Builder b = new AlertDialog.Builder(FavouritesActivity.this);
-					b.setMessage(getString(R.string.favorite_delete_multiple, favoritesToDelete.size(), 
-							groupsToDelete.size()));
-					b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							cancelSelectingMode();
-							deleteFavorites();
-						}
-					});
-					b.setNegativeButton(R.string.default_buttons_cancel, null);
-					b.show();
-				}
-				
-			}
-		});
 	}
 
-	private void cancelSelectingMode() {
-		selectionMode = false;
-		findViewById(R.id.ActionButton).setVisibility(View.GONE);
-		findViewById(R.id.CancelButton).setVisibility(View.GONE);
-		findViewById(R.id.LoadingPanel).setVisibility(View.GONE);
-		favouritesAdapter.notifyDataSetInvalidated();
-	}
-	
 	private void deleteFavorites() {
 		new AsyncTask<Void, Object, String>(){
 
@@ -301,153 +279,218 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		super.onCreateOptionsMenu(menu);
-		MenuItem item = menu.add(0, EXPORT_ID, 0, R.string.export_fav);
-		item.setIcon(android.R.drawable.ic_menu_save);
-		item = menu.add(0, IMPORT_ID, 0, R.string.import_fav);
-		item.setIcon(android.R.drawable.ic_menu_upload);
-		item = menu.add(0, DELETE_ID, 0, getString(R.string.default_buttons_delete)+"...");
-		item.setIcon(android.R.drawable.ic_menu_delete);
-		return true;
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		if (item.getItemId() == EXPORT_ID) {
+			export();
+			return true;
+		} else if (item.getItemId() == IMPORT_ID) {
+			importFile();
+			return true;
+		} else if (item.getItemId() == DELETE_ID) {
+			enterDeleteMode();
+			return true;
+		} else if (item.getItemId() == DELETE_ACTION_ID) {
+			deleteFavoritesAction();
+			return true;
+		} else {
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		createMenuItem(menu, EXPORT_ID, R.string.export_fav, R.drawable.a_5_content_save_light, R.drawable.a_5_content_save_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, IMPORT_ID, R.string.import_fav, R.drawable.a_5_content_import_export_light, R.drawable.a_5_content_import_export_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, DELETE_ID, R.string.default_buttons_delete, R.drawable.a_5_content_discard_light, R.drawable.a_5_content_discard_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT) ;
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	public void showProgressBar(){
-		findViewById(R.id.LoadingPanel).setVisibility(View.VISIBLE);
-		findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+		setSupportProgressBarIndeterminateVisibility(true);
 	}
 	
 	public void hideProgressBar(){
-		findViewById(R.id.LoadingPanel).setVisibility(View.GONE);
-		findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+		setSupportProgressBarIndeterminateVisibility(false);
 	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
-		if(item.getItemId() == EXPORT_ID){
-			if(favouritesAdapter.isEmpty()){
-				AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
-			} else if(!tosave.getParentFile().exists()){
-				AccessibleToast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
-			} else {
-				final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>(){
-					@Override
-					protected String doInBackground(Void... params) {
-						return helper.exportFavorites();
-					}
-					
-					@Override
-					protected void onPreExecute() {
-						showProgressBar();
-					};
-					
-					@Override
-					protected void onPostExecute(String warning) {
-						hideProgressBar();
-						if(warning == null){
-							AccessibleToast.makeText(
-									FavouritesActivity.this,
-									MessageFormat.format(getString(R.string.fav_saved_sucessfully), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
-						} else {
-							AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
-						}
-					};
-				};
-				
-				if(tosave.exists()) {
-					Builder bld = new AlertDialog.Builder(this);
-					bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							exportTask.execute();
-						}
-					});
-					bld.setNegativeButton(R.string.default_buttons_no, null);
-					bld.setMessage(R.string.fav_export_confirmation);
-					bld.show();
-				} else {
-					exportTask.execute();
+
+	private void enterDeleteMode() {
+		actionMode = startActionMode(new Callback() {
+			
+			@Override
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				selectionMode = true;
+				createMenuItem(menu, DELETE_ACTION_ID, R.string.default_buttons_delete, R.drawable.a_5_content_discard_light, R.drawable.a_5_content_discard_dark,
+						MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				favoritesToDelete.clear();
+				groupsToDelete.clear();
+				favouritesAdapter.notifyDataSetInvalidated();
+				return true;
+			}
+			
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+			
+			@Override
+			public void onDestroyActionMode(ActionMode mode) {
+				selectionMode = false;
+				favouritesAdapter.notifyDataSetInvalidated();
+			}
+			
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				if(item.getItemId() == DELETE_ACTION_ID) {
+					deleteFavoritesAction();
 				}
+				return true;
 			}
-		} else if(item.getItemId() == IMPORT_ID){
-			if(!tosave.exists()){
-				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()), Toast.LENGTH_LONG).show();
-			} else {
-				new AsyncTask<Void, FavouritePoint, String>(){
-					@Override
-					protected String doInBackground(Void... params) {
-						Set<String> existedPoints = new LinkedHashSet<String>();
-						if (!favouritesAdapter.isEmpty()) {
-							for (FavouritePoint fp : helper.getFavouritePoints()) {
-								existedPoints.add(fp.getName() + "_" + fp.getCategory());
-							}
-						}
-						GPXFile res = GPXUtilities.loadGPXFile(getMyApplication(), tosave, false);
-						if(res.warning != null){
-							return res.warning;
-						}
-						for(WptPt p : res.points){
-							if(existedPoints.contains(p.name) || existedPoints.contains(p.name + "_" + p.category)){
-								continue;
-							}
-							int c;
-							String name = p.name;
-							String categoryName = p.category != null ? p.category : "";
-							if(name == null){
-								name = "";
-							}
-							//old way to store the category, in name.
-							if("".equals(categoryName.trim()) && (c = p.name.lastIndexOf('_')) != -1) {
-								categoryName = p.name.substring(c + 1);
-								name = p.name.substring(0, c);
-							}
-							FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
-							if (helper.addFavourite(fp)) {
-								publishProgress(fp);
-							}
-						}
-						return null;
+
+			
+		});
+		
+	}
+	
+	private void deleteFavoritesAction() {
+		if (groupsToDelete.size() + favoritesToDelete.size() > 0) {
+
+			Builder b = new AlertDialog.Builder(FavouritesActivity.this);
+			b.setMessage(getString(R.string.favorite_delete_multiple, favoritesToDelete.size(), groupsToDelete.size()));
+			b.setPositiveButton(R.string.default_buttons_delete, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					if(actionMode != null) {
+						actionMode.finish();
 					}
-					
-					@Override
-					protected void onProgressUpdate(FavouritePoint... values) {
-						for(FavouritePoint p : values){
-							favouritesAdapter.addFavoritePoint(p);
-						}
-					};
-					
-					@Override
-					protected void onPreExecute() {
-						showProgressBar();
-					};
-					
-					@Override
-					protected void onPostExecute(String warning) {
-						hideProgressBar();
-						if(warning == null){
-							AccessibleToast.makeText(FavouritesActivity.this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
-						} else {
-							AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
-						}
-						favouritesAdapter.synchronizeGroups();
-						favouritesAdapter.sort(favoritesComparator);
-					};
-					
-				}.execute();
-			}
-		} else if(item.getItemId() == DELETE_ID){
-			selectionMode = true;
-			findViewById(R.id.ActionButton).setVisibility(View.VISIBLE);
-			findViewById(R.id.CancelButton).setVisibility(View.VISIBLE);
-			findViewById(R.id.LoadingPanel).setVisibility(View.VISIBLE);
-			favoritesToDelete.clear();
-			groupsToDelete.clear();
-			favouritesAdapter.notifyDataSetInvalidated();
-		} else {
-			return false;
+					deleteFavorites();
+				}
+			});
+			b.setNegativeButton(R.string.default_buttons_cancel, null);
+			b.show();
 		}
-		return true;
+	}
+
+	private void importFile() {
+		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
+		if (!tosave.exists()) {
+			AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.fav_file_to_load_not_found), tosave.getAbsolutePath()),
+					Toast.LENGTH_LONG).show();
+		} else {
+			new AsyncTask<Void, FavouritePoint, String>() {
+				@Override
+				protected String doInBackground(Void... params) {
+					Set<String> existedPoints = new LinkedHashSet<String>();
+					if (!favouritesAdapter.isEmpty()) {
+						for (FavouritePoint fp : helper.getFavouritePoints()) {
+							existedPoints.add(fp.getName() + "_" + fp.getCategory());
+						}
+					}
+					GPXFile res = GPXUtilities.loadGPXFile(getMyApplication(), tosave, false);
+					if (res.warning != null) {
+						return res.warning;
+					}
+					for (WptPt p : res.points) {
+						if (existedPoints.contains(p.name) || existedPoints.contains(p.name + "_" + p.category)) {
+							continue;
+						}
+						int c;
+						String name = p.name;
+						String categoryName = p.category != null ? p.category : "";
+						if (name == null) {
+							name = "";
+						}
+						// old way to store the category, in name.
+						if ("".equals(categoryName.trim()) && (c = p.name.lastIndexOf('_')) != -1) {
+							categoryName = p.name.substring(c + 1);
+							name = p.name.substring(0, c);
+						}
+						FavouritePoint fp = new FavouritePoint(p.lat, p.lon, name, categoryName);
+						if (helper.addFavourite(fp)) {
+							publishProgress(fp);
+						}
+					}
+					return null;
+				}
+
+				@Override
+				protected void onProgressUpdate(FavouritePoint... values) {
+					for (FavouritePoint p : values) {
+						favouritesAdapter.addFavoritePoint(p);
+					}
+				};
+
+				@Override
+				protected void onPreExecute() {
+					showProgressBar();
+				};
+
+				@Override
+				protected void onPostExecute(String warning) {
+					hideProgressBar();
+					if (warning == null) {
+						AccessibleToast.makeText(FavouritesActivity.this, R.string.fav_imported_sucessfully, Toast.LENGTH_SHORT).show();
+					} else {
+						AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
+					}
+					favouritesAdapter.synchronizeGroups();
+					favouritesAdapter.sort(favoritesComparator);
+				};
+
+			}.execute();
+		}
+	}
+
+	private void export() {
+		final File tosave = getMyApplication().getAppPath(FavouritesDbHelper.FILE_TO_SAVE);
+		if (favouritesAdapter.isEmpty()) {
+			AccessibleToast.makeText(this, R.string.no_fav_to_save, Toast.LENGTH_LONG).show();
+		} else if (!tosave.getParentFile().exists()) {
+			AccessibleToast.makeText(this, R.string.sd_dir_not_accessible, Toast.LENGTH_LONG).show();
+		} else {
+			final AsyncTask<Void, Void, String> exportTask = new AsyncTask<Void, Void, String>() {
+				@Override
+				protected String doInBackground(Void... params) {
+					return helper.exportFavorites();
+				}
+
+				@Override
+				protected void onPreExecute() {
+					showProgressBar();
+				};
+
+				@Override
+				protected void onPostExecute(String warning) {
+					hideProgressBar();
+					if (warning == null) {
+						AccessibleToast.makeText(FavouritesActivity.this,
+								MessageFormat.format(getString(R.string.fav_saved_sucessfully), tosave.getAbsolutePath()),
+								Toast.LENGTH_LONG).show();
+					} else {
+						AccessibleToast.makeText(FavouritesActivity.this, warning, Toast.LENGTH_LONG).show();
+					}
+				};
+			};
+
+			if (tosave.exists()) {
+				Builder bld = new AlertDialog.Builder(this);
+				bld.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						exportTask.execute();
+					}
+				});
+				bld.setNegativeButton(R.string.default_buttons_no, null);
+				bld.setMessage(R.string.fav_export_confirmation);
+				bld.show();
+			} else {
+				exportTask.execute();
+			}
+		}
 	}
 	
 
@@ -546,7 +589,8 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			View row = convertView;
 			if (row == null) {
 				LayoutInflater inflater = getLayoutInflater();
-				row = inflater.inflate(R.layout.favourites_list_category, parent, false);
+				row = inflater.inflate(R.layout.expandable_list_item_category, parent, false);
+				fixBackgroundRepeat(row);
 			}
 			adjustIndicator(groupPosition, isExpanded, row);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
@@ -629,5 +673,6 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 			return row;
 		}
 	}
+
 
 }

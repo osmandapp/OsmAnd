@@ -21,14 +21,11 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -94,33 +91,19 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		PreferenceScreen general = (PreferenceScreen) screen.findPreference(SettingsActivity.SCREEN_ID_GENERAL_SETTINGS);
-		PreferenceCategory cat = new PreferenceCategory(app);
-		cat.setTitle(R.string.osm_settings);
-		general.addPreference(cat);
-		
-		EditTextPreference userName = activity.createEditTextPreference(settings.USER_NAME, R.string.user_name, R.string.user_name_descr);
-		cat.addPreference(userName);
-		EditTextPreference pwd = activity.createEditTextPreference(settings.USER_PASSWORD, R.string.user_password, R.string.user_password_descr);
-		pwd.getEditText().setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-		cat.addPreference(pwd);
-		
-		CheckBoxPreference poiEdit = activity.createCheckBoxPreference(settings.OFFLINE_EDITION,
-				R.string.offline_edition, R.string.offline_edition_descr);
-		cat.addPreference(poiEdit);
-		
-		Preference pref = new Preference(app);
-		pref.setTitle(R.string.local_openstreetmap_settings);
-		pref.setSummary(R.string.local_openstreetmap_settings_descr);
-		pref.setKey("local_openstreetmap_points");
-		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+		Preference grp = new Preference(activity);
+		grp.setTitle(R.string.osm_settings);
+		grp.setSummary(R.string.osm_settings_descr);
+		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				activity.startActivity(new Intent(activity, LocalOpenstreetmapActivity.class));
+				activity.startActivity(new Intent(activity, SettingsOsmEditingActivity.class));
 				return true;
 			}
 		});
-		cat.addPreference(pref);
+		screen.addPreference(grp);
+		
 	}
 	
 	public EditingPOIActivity getPoiActions(MapActivity activity) {
@@ -198,8 +181,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				sendGPXFiles(la, la.getSelectedItems().toArray(new LocalIndexInfo[la.getSelectedItems().size()]));
-
+				la.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.a_9_av_upload_dark, 
+						R.drawable.a_9_av_upload_light, new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								sendGPXFiles(la, la.getSelectedItems().toArray(new LocalIndexInfo[la.getSelectedItems().size()]));								
+							}
+						}, null, LocalIndexType.GPX_DATA);
 			}
 		}, 5);
 	}
@@ -221,7 +209,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 		}
 		final EditText tags = (EditText) view.findViewById(R.id.TagsText);		
 		final Spinner visibility = ((Spinner)view.findViewById(R.id.Visibility));
-		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<UploadVisibility>(la, R.layout.my_spinner_text, UploadVisibility.values());
+		EnumAdapter<UploadVisibility> adapter = new EnumAdapter<UploadVisibility>(la, android.R.layout.simple_spinner_item, UploadVisibility.values());
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		visibility.setAdapter(adapter);
 		visibility.setSelection(0);

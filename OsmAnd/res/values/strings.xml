@@ -9,6 +9,20 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="monitoring_settings">Logging services &amp; Sleep Mode</string>
+    <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
+    <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
+        Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
+    <string name="osmand_monitoring_plugin_name">Logging services &amp; Sleep Mode</string>
+    <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
+    <string name="contribution_activity">Install version</string>
+    <string name="choose_osmand_theme_descr">Choose application theme</string>
+    <string name="choose_osmand_theme">App Theme</string>
+    <string name="accessibility_options">Accessibility options</string>
+    <string name="select_address_activity">Select address</string>
+    <string name="favourites_list_activity">Select favorite</string>
+    <string name="local_openstreetmap_act_title">OSM modificaions</string>
+    <string name="default_buttons_other_actions">Other actions</string>
     <string name="save_current_track_widget">Save
         \n current GPX track</string>
 	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
@@ -424,7 +438,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="filterpoi_activity">Create POI filter</string>
 	<string name="recalculate_route_to_your_location">Transport mode:</string>
 	<string name="select_navigation_mode">Select transport mode</string>
-	<string name="monitor_preferences">Tracking</string>
 	<string name="day_night_info_description">Sunrise: %1$s \nSunset: %2$s</string>
 	<string name="day_night_info">Day/night info</string>
 	<string name="map_widget_day_night">Day/night map</string>
@@ -563,7 +576,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online and tile maps</string>
 	<string name="local_indexes_cat_map">Offline maps (vector)</string>
-	<string name="gpx_index_settings_descr"> (includes GPX analyzer)</string>
 	<string name="index_settings_descr">Download maps and manage offline data stored on your device</string>
 	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
 	<string name="map_online_data">Online and tile maps</string>
@@ -573,7 +585,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="map_settings">Map Settings</string>
 	<string name="map_settings_descr">Configure the map display</string>
 	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
-	<string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
+	
 	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
 	<string name="extra_settings">Advanced settings</string>
 	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
@@ -896,7 +908,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_backup">Deactivate</string>
 	<string name="local_index_mi_delete">Delete</string>
 	<string name="local_index_mi_reload">Reload from sdcard</string>
-	<string name="local_index_download">Download&#8230;</string>
+	<string name="local_index_download">Download</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom: %2$d\nMaximum zoom: %3$d\nDownloadable: %4$s \nZooms downloaded: %5$s</string>
 	<string name="local_index_poi_data">POI data</string>
 	<string name="local_index_address_data">Address data</string>
@@ -973,7 +985,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
 	<string name="error_doing_search">Error occurred in offline search</string>
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
-	<string name="search_osm_offline">Search address using offline maps</string>
+	<string name="search_osm_offline">Search geo location</string>
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Select display language</string>
 	<string name="preferred_locale">Display language</string>
@@ -1069,8 +1081,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
 	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
-	<string name="select_build_to_install">Select one of the OsmAnd builds to install</string>
-	<string name="contribution_activity">Special activity for contribution version</string>
+	<string name="select_build_to_install">Select an OsmAnd build to install</string>
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Google Play?</string>
 	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
 	<string name="voice_is_not_available_title">No voice guidance selected</string>
@@ -1082,7 +1093,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="daynight">Day/night mode</string>
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} item(s) selected</string>
-	<string name="filter_existing_indexes">Filter downloaded</string>
+	<string name="filter_existing_indexes">Downloaded</string>
 	<string name="deselect_all">Deselect all</string>
 	<string name="select_all">Select all</string>
 	<string name="reload">Refresh</string>

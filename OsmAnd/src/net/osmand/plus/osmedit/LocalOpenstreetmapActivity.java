@@ -7,14 +7,13 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -31,11 +30,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LocalOpenstreetmapActivity extends ListActivity {
+import com.actionbarsherlock.view.Menu;
+
+public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
 	/** dialogs **/
 	protected static final int DIALOG_PROGRESS_UPLOAD = 0;
 	protected static final int MENU_GROUP = 0;
+	private static final int UPLOAD_ID = 1;
 
 	private LocalOpenstreetmapAdapter listAdapter;
 
@@ -56,6 +58,7 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.local_openstreetmap);
+		getSupportActionBar().setTitle(R.string.download_files);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
 		getListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -73,15 +76,24 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 		remotepoi = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
 		remotebug = new OsmBugsRemoteUtil();
 
-		findViewById(R.id.UploadAllButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				toUpload = dataPoints.toArray(new OsmPoint[0]);
-				showDialog(DIALOG_PROGRESS_UPLOAD);
-			}
-		});
 	}
-
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.a_9_av_upload_light, R.drawable.a_9_av_upload_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		if (item.getItemId() == UPLOAD_ID) {
+			toUpload = dataPoints.toArray(new OsmPoint[0]);
+			showDialog(DIALOG_PROGRESS_UPLOAD);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -134,10 +146,6 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 		return super.onContextItemSelected(item);
 	}
 	
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) getApplication();
-	}
-
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -309,11 +317,11 @@ public class LocalOpenstreetmapActivity extends ListActivity {
 			else if (child.getGroup() == OsmPoint.Group.BUG)
 				viewName.setText(idPrefix +  " (" + ((OsmbugsPoint) child).getAuthor() + ") " + ((OsmbugsPoint) child).getText());
 			if (child.getAction() == OsmPoint.Action.CREATE) {
-				viewName.setTextColor(getResources().getColor(R.color.osm_create));
+				viewName.setTextColor(getResources().getColor(R.color.color_ok));
 			} else if (child.getAction() == OsmPoint.Action.MODIFY) {
-				viewName.setTextColor(getResources().getColor(R.color.osm_modify));
+				viewName.setTextColor(getResources().getColor(R.color.color_update));
 			} else if (child.getAction() == OsmPoint.Action.DELETE) {
-				viewName.setTextColor(getResources().getColor(R.color.osm_delete));
+				viewName.setTextColor(getResources().getColor(R.color.color_warning));
 			}
 
 			return v;

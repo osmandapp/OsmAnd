@@ -3,6 +3,7 @@
  */
 package net.osmand.plus.activities;
 
+
 import java.text.Collator;
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -28,17 +29,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
@@ -46,112 +42,116 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+
 /**
  * 
  */
 public class EditPOIFilterActivity extends OsmandListActivity {
 	public static final String AMENITY_FILTER = "net.osmand.amenity_filter"; //$NON-NLS-1$
-	private Button filterLevel;
 	private PoiFilter filter;
 	private PoiFiltersHelper helper;
-	private CustomTitleBar titleBar;
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT; //$NON-NLS-1$
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON; //$NON-NLS-1$
+	private static final int FILTER = 2;
+	private static final int DELETE_FILTER = 3;
+	private static final int SAVE_FILTER = 4;
 	
 
 	@Override
 	public void onCreate(final Bundle icicle) {
-		super.onCreate(icicle);
-		titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
-		setContentView(R.layout.editing_poi_filter);
-		titleBar.afterSetContentView();
-		
-
-		filterLevel = (Button) findViewById(R.id.filter_currentButton);
-		filterLevel.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Bundle extras = getIntent().getExtras();
-				boolean searchNearBy = true;
-				LatLon lastKnownMapLocation = ((OsmandApplication) getApplication()).getSettings().getLastKnownMapLocation();
-				double latitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLatitude() : 0;
-				double longitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLongitude() : 0;
-				final Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
-				if(extras != null && extras.containsKey(SEARCH_LAT) && extras.containsKey(SEARCH_LON)){
-					latitude = extras.getDouble(SEARCH_LAT);
-					longitude = extras.getDouble(SEARCH_LON);
-					searchNearBy = false;
-				}
-				final double lat = latitude;
-				final double lon = longitude;
-				newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
-				if (searchNearBy) {
-					AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
-					b.setItems(new String[] { getString(R.string.search_nearby), getString(R.string.search_near_map) },
-							new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									if (which == 1) {
-										newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
-										newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
-									}
-									startActivity(newIntent);
-								}
-							});
-					b.show();
-				} else {
-					newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
-					newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
-					startActivity(newIntent);
-				}
-			}
-		});
-		
-		((ImageButton) findViewById(R.id.SaveButton)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				savePoiFilter();
-			}
-		});
-		
-		((ImageButton) findViewById(R.id.DeleteButton)).setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				removePoiFilter();
-			}
-		});
-		
-		
-
 		Bundle bundle = this.getIntent().getExtras();
 		String filterId = bundle.getString(AMENITY_FILTER);
-		
 		helper = ((OsmandApplication)getApplication()).getPoiFilters();
 		filter = helper.getFilterById(filterId);
-		if(filter.isStandardFilter()){
-			((ImageButton) findViewById(R.id.DeleteButton)).setVisibility(View.GONE);
-		} else {
-			((ImageButton) findViewById(R.id.DeleteButton)).setVisibility(View.VISIBLE);
-		}
-		titleBar.getTitleView().setText(getString(R.string.filterpoi_activity) + " - " + filter.getName());
+		super.onCreate(icicle);
 		
+		
+		setContentView(R.layout.editing_poi_filter);
+		getSupportActionBar().setTitle(R.string.filterpoi_activity);
+		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
+		
+		getSupportActionBar().setSubtitle(filter.getName());
 		setListAdapter(new AmenityAdapter(AmenityType.getCategories()));
 	}
 
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.edit_filter_menu, menu);
-		return true;
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == FILTER) {
+			filterPOI();
+			return true;
+		} else if (item.getItemId() == DELETE_FILTER) {
+			removePoiFilter();
+			return true;
+		} else if (item.getItemId() == SAVE_FILTER) {
+			savePoiFilter();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		createMenuItem(menu, SAVE_FILTER, R.string.edit_filter_save_as_menu_item, 
+				R.drawable.a_5_content_save_light ,R.drawable.a_5_content_save_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		createMenuItem(menu, FILTER, R.string.filter_current_poiButton, 
+				0, 0,
+				// R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark
+				MenuItem.SHOW_AS_ACTION_WITH_TEXT | MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		if(!filter.isStandardFilter()){
+			createMenuItem(menu, DELETE_FILTER, R.string.edit_filter_delete_menu_item, 
+					R.drawable.a_5_content_discard_light ,R.drawable.a_5_content_discard_dark,
+					MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		}
+		return super.onCreateOptionsMenu(menu);
+	}	
+	
+	private void filterPOI() {
+		Bundle extras = getIntent().getExtras();
+		boolean searchNearBy = true;
+		LatLon lastKnownMapLocation = ((OsmandApplication) getApplication()).getSettings().getLastKnownMapLocation();
+		double latitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLatitude() : 0;
+		double longitude = lastKnownMapLocation != null ? lastKnownMapLocation.getLongitude() : 0;
+		final Intent newIntent = new Intent(EditPOIFilterActivity.this, SearchPOIActivity.class);
+		if(extras != null && extras.containsKey(SEARCH_LAT) && extras.containsKey(SEARCH_LON)){
+			latitude = extras.getDouble(SEARCH_LAT);
+			longitude = extras.getDouble(SEARCH_LON);
+			searchNearBy = false;
+		}
+		final double lat = latitude;
+		final double lon = longitude;
+		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
+		if (searchNearBy) {
+			AlertDialog.Builder b = new AlertDialog.Builder(EditPOIFilterActivity.this);
+			b.setItems(new String[] { getString(R.string.search_nearby), getString(R.string.search_near_map) },
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (which == 1) {
+								newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
+								newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
+							}
+							startActivity(newIntent);
+						}
+					});
+			b.show();
+		} else {
+			newIntent.putExtra(SearchPOIActivity.SEARCH_LAT, lat);
+			newIntent.putExtra(SearchPOIActivity.SEARCH_LON, lon);
+			startActivity(newIntent);
+		}
+	}
+	
 	public void savePoiFilter() {
 		Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(R.string.edit_filter_save_as_menu_item);
 		final EditText editText = new EditText(this);
 		LinearLayout ll = new LinearLayout(this);
 		ll.setPadding(5, 3, 5, 0);
-		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		ll.addView(editText, new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		builder.setView(ll);
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
@@ -170,18 +170,8 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 		builder.create().show();
 		
 	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() == R.id.edit_filter_delete) {
-			removePoiFilter();
-			return true;
-		} else if (item.getItemId() == R.id.edit_filter_save_as) {
-			savePoiFilter();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
+	
 
 	private void removePoiFilter() {
 		Builder builder = new AlertDialog.Builder(this);

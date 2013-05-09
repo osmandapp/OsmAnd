@@ -32,7 +32,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.R;
 import net.osmand.plus.SearchByNameFilter;
-import net.osmand.plus.activities.CustomTitleBar;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
@@ -110,16 +109,17 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	
 	// never null represents current running task or last finished
 	private SearchAmenityTask currentSearchTask = new SearchAmenityTask(null);
-	private CustomTitleBar titleBar; 
 	private OsmandApplication app;
 
 	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		titleBar = new CustomTitleBar(this, R.string.searchpoi_activity, R.drawable.tab_search_poi_icon);
 		setContentView(R.layout.searchpoi);
-		titleBar.afterSetContentView();
+		
+		getSupportActionBar().setTitle(R.string.searchpoi_activity);
+		getSupportActionBar().setIcon(R.drawable.tab_search_poi_icon);
+		
 		
 		app = (OsmandApplication)getApplication();
 		
@@ -267,7 +267,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (filter != this.filter) {
 			this.filter = filter;
 			if (filter != null) {
-				titleBar.getTitleView().setText(getString(R.string.searchpoi_activity) + " - " + filter.getName());
+				getSupportActionBar().setSubtitle(filter.getName());
 				filter.clearPreviousZoom();
 			} else {
 				amenityAdapter.setNewModel(Collections.<Amenity> emptyList(), "");
@@ -796,19 +796,17 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		public DirectionDrawable(){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(getResources().getColor(R.color.poi_direction));
+			paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
 			paintRouteDirection.setAntiAlias(true);
-			
-			
 		}
 		
 		public void setOpenedColor(int opened){
 			if(opened == 0){
-				paintRouteDirection.setColor(getResources().getColor(R.color.poi_open));
+				paintRouteDirection.setColor(getResources().getColor(R.color.color_ok));
 			} else if(opened == -1){
-				paintRouteDirection.setColor(getResources().getColor(R.color.poi_unknown_arrow));
+				paintRouteDirection.setColor(getResources().getColor(R.color.color_unknown));
 			} else {
-				paintRouteDirection.setColor(getResources().getColor(R.color.poi_closed));
+				paintRouteDirection.setColor(getResources().getColor(R.color.color_warning));
 			}
 		}
 		

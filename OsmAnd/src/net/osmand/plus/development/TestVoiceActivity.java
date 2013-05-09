@@ -3,12 +3,16 @@
  */
 package net.osmand.plus.development;
 
+import com.actionbarsherlock.app.SherlockActivity;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
-import android.app.Activity;
+import android.app.ActionBar;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +26,20 @@ import android.widget.Toast;
 /**
  * Test Voice activity
  */
-public class TestVoiceActivity extends Activity {
+public class TestVoiceActivity extends SherlockActivity {
 
 
 
 	@Override
 	public void onCreate(Bundle icicle) {
+		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(icicle);
-		
+		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
+		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		final OsmandApplication app = ((OsmandApplication) getApplication());
+		
 		
 		LinearLayout gl = new LinearLayout(this);
 		gl.setOrientation(LinearLayout.VERTICAL);
@@ -51,6 +59,8 @@ public class TestVoiceActivity extends Activity {
 		
 		// add buttons
 		setContentView(gl);
+		getSupportActionBar(). setTitle(R.string.test_voice_prompts);
+		
 		Runnable r = new Runnable(){
 
 			@Override
@@ -120,6 +130,18 @@ public class TestVoiceActivity extends Activity {
 				builder.play();
 			}
 		});
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		int itemId = item.getItemId();
+		switch (itemId) {
+		case android.R.id.home:
+			finish();
+			return true;
+
+		}
+		return false;
 	}
 
 }

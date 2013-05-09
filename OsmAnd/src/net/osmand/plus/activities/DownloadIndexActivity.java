@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -53,27 +52,26 @@ import android.os.Bundle;
 import android.os.StatFs;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.ActionBar.OnNavigationListener;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.SubMenu;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(DownloadIndexActivity.class);
 	
 	/** menus **/
+	private static final int MORE_ID = 10;
 	private static final int RELOAD_ID = 0;
 	private static final int SELECT_ALL_ID = 1;
 	private static final int DESELECT_ALL_ID = 2;
@@ -111,16 +109,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		if(downloadListIndexThread == null) {
 			downloadListIndexThread = new DownloadIndexListThread(this);
 		}
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.download_index);
+		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is prevented in manifest file
-		View b = findViewById(R.id.search_back_button);
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();				
-			}
-		});
 				
 		downloadFileHelper = new DownloadFileHelper(getClientContext());
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
@@ -173,37 +165,17 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			msg.setPositiveButton(R.string.default_buttons_ok, null);
 			msg.show();
 		}
-		
-		Spinner spinner = (Spinner) findViewById(R.id.SpinnerLocation);
 		final DownloadActivityType[] downloadTypes = getDownloadTypes();
-		spinnerAdapter = new ArrayAdapter<String>(this, R.layout.my_spinner_text, 
-				new ArrayList<String>(Arrays.asList(toString(downloadTypes)))
-				) {
+		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
+				new ArrayList<String>(Arrays.asList(toString(downloadTypes)))	
+				);
+		spinnerAdapter.setDropDownViewResource(R.layout.sherlock_spinner_dropdown_item);
+        getSupportActionBar().setListNavigationCallbacks(spinnerAdapter, new OnNavigationListener() {
+			
 			@Override
-			public View getDropDownView(int position, View convertView,
-					ViewGroup parent) {
-				View dropDownView = super.getDropDownView(position,
-						convertView, parent);
-				if (dropDownView instanceof TextView) {
-					((TextView) dropDownView).setTextColor(getResources()
-							.getColor(R.color.color_black));
-				}
-				return dropDownView;
-			}
-		};
-		spinnerAdapter.setDropDownViewResource(R.layout.my_spinner_text);
-		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-		
-		spinner.setAdapter(spinnerAdapter);
-		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				changeType(downloadTypes[position]);
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
+			public boolean onNavigationItemSelected(int itemPosition, long itemId) {
+				changeType(downloadTypes[itemPosition]);
+				return true;
 			}
 		});
 	}
@@ -226,18 +198,37 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private void downloadIndexList() {
 		showDialog(DIALOG_PROGRESS_LIST);
 	}
-	
+
 	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		super.onPrepareOptionsMenu(menu);
-		menu.clear();
-		menu.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
-		if (getExpandableListAdapter() != null) {
-			menu.add(0, SELECT_ALL_ID, 0, R.string.select_all);
-			menu.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
-			menu.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == RELOAD_ID) {
+			// re-create the thread
+			downloadListIndexThread = new DownloadIndexListThread(this);
+			downloadIndexList();
+			return true;
+		} else if (item.getItemId() == SELECT_ALL_ID) {
+			selectAll();
+			return true;
+		} else if (item.getItemId() == FILTER_EXISTING_REGIONS) {
+			filterExisting();
+			return true;
+		} else if (item.getItemId() == DESELECT_ALL_ID) {
+			deselectAll();
+			return true;
 		}
-		return true;
+		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		SubMenu s = menu.addSubMenu(0, MORE_ID, 0, R.string.default_buttons_other_actions);
+		s.add(0, RELOAD_ID, 0, R.string.update_downlod_list);
+		s.add(0, FILTER_EXISTING_REGIONS, 0, R.string.filter_existing_indexes);
+		s.add(0, SELECT_ALL_ID, 0, R.string.select_all);
+		s.add(0, DESELECT_ALL_ID, 0, R.string.deselect_all);
+		
+		s.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light : R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+        s.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	public DownloadActivityType getType() {
@@ -258,49 +249,47 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		return entriesToDownload;
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == RELOAD_ID){
-			//re-create the thread
-			downloadListIndexThread = new DownloadIndexListThread(this);
-			downloadIndexList();
-		} else {
-			final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
-			if(item.getItemId() == SELECT_ALL_ID){
-				int selected = 0;
-				for (int j = 0; j < listAdapter.getGroupCount(); j++) {
-					for (int i = 0; i < listAdapter.getChildrenCount(j); i++) {
-						IndexItem es = listAdapter.getChild(j, i);
-						if (!entriesToDownload.containsKey(es)) {
-							selected++;
-							entriesToDownload.put(es, es.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>(1)));
-						}
-					}
-				}
-				AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
-				listAdapter.notifyDataSetInvalidated();
-				if(selected > 0){
-					findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-				}
-			} else if (item.getItemId() == FILTER_EXISTING_REGIONS) {
-				final Map<String, String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
-				final List<IndexItem> filtered = new ArrayList<IndexItem>();
-				for (IndexItem fileItem : listAdapter.getIndexFiles()) {
-					if(fileItem.isAlreadyDownloaded(listAlreadyDownloaded)){
-						filtered.add(fileItem);
-					}
-				}
-				listAdapter.setIndexFiles(filtered, IndexItemCategory.categorizeIndexItems(getClientContext(), filtered));
-				listAdapter.notifyDataSetChanged();
-			} else if(item.getItemId() == DESELECT_ALL_ID){
-				entriesToDownload.clear();
-				listAdapter.notifyDataSetInvalidated();
-				findViewById(R.id.DownloadButton).setVisibility(View.GONE);
-			} else {
-				return false;
+
+
+	private void deselectAll() {
+		final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
+		entriesToDownload.clear();
+		listAdapter.notifyDataSetInvalidated();
+		findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+	}
+
+
+	private void filterExisting() {
+		final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
+		final Map<String, String> listAlreadyDownloaded = listAlreadyDownloadedWithAlternatives();
+		final List<IndexItem> filtered = new ArrayList<IndexItem>();
+		for (IndexItem fileItem : listAdapter.getIndexFiles()) {
+			if(fileItem.isAlreadyDownloaded(listAlreadyDownloaded)){
+				filtered.add(fileItem);
 			}
 		}
-		return true;
+		listAdapter.setIndexFiles(filtered, IndexItemCategory.categorizeIndexItems(getClientContext(), filtered));
+		listAdapter.notifyDataSetChanged();
+	}
+
+
+	private void selectAll() {
+		final DownloadIndexAdapter listAdapter = (DownloadIndexAdapter)getExpandableListAdapter();
+		int selected = 0;
+		for (int j = 0; j < listAdapter.getGroupCount(); j++) {
+			for (int i = 0; i < listAdapter.getChildrenCount(j); i++) {
+				IndexItem es = listAdapter.getChild(j, i);
+				if (!entriesToDownload.containsKey(es)) {
+					selected++;
+					entriesToDownload.put(es, es.createDownloadEntry(getClientContext(), type, new ArrayList<DownloadEntry>(1)));
+				}
+			}
+		}
+		AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
+		listAdapter.notifyDataSetInvalidated();
+		if(selected > 0){
+			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+		}
 	}
 
 

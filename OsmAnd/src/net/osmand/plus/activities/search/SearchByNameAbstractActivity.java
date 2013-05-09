@@ -13,12 +13,11 @@ import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.PlatformUtil;
-import net.osmand.data.MapObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.MapObject;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.CustomTitleBar;
 import net.osmand.plus.activities.OsmandListActivity;
 
 import org.apache.commons.logging.Log;
@@ -69,16 +68,15 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	private String endingText = "";
 	private T endingObject;
 	private StyleSpan previousSpan;
-	private CustomTitleBar titleBar;
 	private static final Log log = PlatformUtil.getLog(SearchByNameAbstractActivity.class);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();
-		titleBar = new CustomTitleBar(this, R.string.search_activity, R.drawable.tab_search_address_icon);
 		setContentView(R.layout.search_by_name);
-		titleBar.afterSetContentView();
+		getSupportActionBar().setTitle(R.string.search_activity);
+		getSupportActionBar().setIcon(R.drawable.tab_search_address_icon);
 
 		initializeTask = getInitializeTask();
 		uiHandler = new UIUpdateHandler();
@@ -152,7 +150,7 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	public void setLabelText(int res) {
-		titleBar.getTitleView().setText(getString(res));
+		getSupportActionBar().setSubtitle(getString(res));
 	}
 	
 	protected int getZoomToDisplay(T item){

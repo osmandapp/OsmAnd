@@ -30,12 +30,13 @@ import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.data.QuadRect;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
-import net.osmand.util.MapUtils;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.RotatedTileBox;
+import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.render.RenderingRuleProperty;
@@ -44,6 +45,7 @@ import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapAlgorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -598,7 +600,7 @@ public class MapRenderRepositories {
 			// keep cache
 			// this.prevBmp = null;
 			this.prevBmpLocation = null;
-			if (prefs.DEBUG_RENDERING_INFO.get()) {
+			if (prefs.DEBUG_RENDERING_INFO.get() && OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
 				String timeInfo = "Searching: " + searchTime + " ms"; //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 				if (renderingDebugInfo != null) {
 					timeInfo += "\n" + renderingDebugInfo;

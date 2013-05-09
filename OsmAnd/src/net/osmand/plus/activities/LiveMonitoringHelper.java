@@ -40,7 +40,7 @@ public class LiveMonitoringHelper  {
 	}
 	
 	public boolean isLiveMonitoringEnabled(){
-		return settings.LIVE_MONITORING.get();
+		return settings.LIVE_MONITORING.get() ;
 	}
 	
 	public void updateLocation(net.osmand.Location location) {

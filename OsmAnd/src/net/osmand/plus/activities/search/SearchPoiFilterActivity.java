@@ -6,6 +6,9 @@ package net.osmand.plus.activities.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.app.SherlockListFragment;
+
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.NameFinderPoiFilter;
@@ -15,8 +18,8 @@ import net.osmand.plus.PoiFiltersHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
+import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.plus.resources.ResourceManager;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -30,22 +33,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-/**
- * @author Maxim Frolov
- * 
- */
-public class SearchPoiFilterActivity extends ListActivity {
+public class SearchPoiFilterActivity extends SherlockListFragment  implements SearchActivityChild {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 	
-
-	
 	
 	@Override
-	public void onCreate(Bundle icicle) {
-		super.onCreate(icicle);
-		setContentView(R.layout.searchpoilist);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+		
+//		setContentView(R.layout.searchpoilist);
 		
 		// ListActivity has a ListView, which you can get with:
 		ListView lv = getListView();
@@ -62,22 +61,23 @@ public class SearchPoiFilterActivity extends ListActivity {
 				return false;
 			}
 		});
-	}
-	@Override
-	protected void onResume() {
-		super.onResume();
-		PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
+		
+		PoiFiltersHelper poiFilters = getApp().getPoiFilters();
 		List<PoiFilter> filters = new ArrayList<PoiFilter>(poiFilters.getUserDefinedPoiFilters()) ;
 		filters.addAll(poiFilters.getOsmDefinedPoiFilters());
 		filters.add(poiFilters.getNameFinderPOIFilter());
 		setListAdapter(new AmenityAdapter(filters));
 	}
 	
+	public OsmandApplication getApp(){
+		return (OsmandApplication) getSherlockActivity().getApplication();
+	}
+	
 	
 	private void updateIntentToLaunch(Intent intentToLaunch){
 		LatLon loc = null;
 		boolean searchAround = false;
-		Intent intent = getIntent();
+		Intent intent = getSherlockActivity().getIntent();
 		if(intent != null){
 			double lat = intent.getDoubleExtra(SEARCH_LAT, 0);
 			double lon = intent.getDoubleExtra(SEARCH_LON, 0);
@@ -85,13 +85,13 @@ public class SearchPoiFilterActivity extends ListActivity {
 				loc = new LatLon(lat, lon);
 			}
 		}
-		
-		if (loc == null && getParent() instanceof SearchActivity) {
-			loc = ((SearchActivity) getParent()).getSearchPoint();
-			searchAround = ((SearchActivity) getParent()).isSearchAroundCurrentLocation();
+		SherlockFragmentActivity parent = getSherlockActivity();
+		if (loc == null && parent instanceof SearchActivity) {
+			loc = ((SearchActivity) parent).getSearchPoint();
+			searchAround = ((SearchActivity) parent).isSearchAroundCurrentLocation();
 		}
 		if (loc == null && !searchAround) {
-			loc = ((OsmandApplication) getApplication()).getSettings().getLastKnownMapLocation();
+			loc = getApp().getSettings().getLastKnownMapLocation();
 		}
 		if(loc != null && !searchAround) {
 			intentToLaunch.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
@@ -100,7 +100,7 @@ public class SearchPoiFilterActivity extends ListActivity {
 	}
 
 	private void showEditActivity(PoiFilter poi) {
-		Intent newIntent = new Intent(SearchPoiFilterActivity.this, EditPOIFilterActivity.class);
+		Intent newIntent = new Intent(getSherlockActivity(), EditPOIFilterActivity.class);
 		// folder selected
 		newIntent.putExtra(EditPOIFilterActivity.AMENITY_FILTER, poi.getFilterId());
 		updateIntentToLaunch(newIntent);
@@ -116,13 +116,13 @@ public class SearchPoiFilterActivity extends ListActivity {
 			return;
 		}
 		if(!(filter instanceof NameFinderPoiFilter)){
-			ResourceManager rm = ((OsmandApplication) getApplication()).getResourceManager();
+			ResourceManager rm = getApp().getResourceManager();
 			if(!rm.containsAmenityRepositoryToSearch(filter instanceof SearchByNameFilter)){
-				AccessibleToast.makeText(this, R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
+				AccessibleToast.makeText(getSherlockActivity(), R.string.data_to_search_poi_not_available, Toast.LENGTH_LONG);
 				return;
 			}
 		}
-		final Intent newIntent = new Intent(SearchPoiFilterActivity.this, SearchPOIActivity.class);
+		final Intent newIntent = new Intent(getSherlockActivity(), SearchPOIActivity.class);
 		newIntent.putExtra(SearchPOIActivity.AMENITY_FILTER, filter.getFilterId());
 		updateIntentToLaunch(newIntent);
 		startActivityForResult(newIntent, 0);
@@ -132,14 +132,14 @@ public class SearchPoiFilterActivity extends ListActivity {
 
 	class AmenityAdapter extends ArrayAdapter<PoiFilter> {
 		AmenityAdapter(List<PoiFilter> list) {
-			super(SearchPoiFilterActivity.this, R.layout.searchpoifolder_list, list);
+			super(getSherlockActivity(), R.layout.searchpoifolder_list, list);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View row = convertView;
 			if(row == null) {
-				LayoutInflater inflater = getLayoutInflater();
+				LayoutInflater inflater = getSherlockActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.searchpoifolder_list, parent, false);
 			}
 			TextView label = (TextView) row.findViewById(R.id.folder_label);
@@ -173,4 +173,9 @@ public class SearchPoiFilterActivity extends ListActivity {
 		}
 
 	}
+
+	@Override
+	public void locationUpdate(LatLon l) {
+	}
+
 }

@@ -1,49 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<Preference android:title="@string/index_settings" android:key="local_indexes" android:summary="@string/index_settings_descr"></Preference>
-
-	<!-- 
-	<PreferenceCategory android:title="@string/profile_settings" android:key="profile_dep_cat">
-	<ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
-	<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
-	 -->
-
-	<!-- <PreferenceCategory android:title="@string/global_settings" android:key="global_settings" > -->
-	<PreferenceScreen android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr">
-		<PreferenceCategory android:title="@string/global_app_settings" android:key="global_app_settings">
-		    <ListPreference android:summary="@string/settings_preset_descr" android:title="@string/settings_preset" android:key="application_mode"></ListPreference>
-			<ListPreference android:key="rotate_map" android:title="@string/rotate_map_to_bearing" android:summary="@string/rotate_map_to_bearing_descr"></ListPreference>
-			<ListPreference android:key="map_screen_orientation" android:title="@string/map_screen_orientation" android:summary="@string/map_screen_orientation_descr"></ListPreference>
-			<ListPreference android:key="preferred_locale" android:title="@string/preferred_locale" android:summary="@string/preferred_locale_descr"></ListPreference>
-			<CheckBoxPreference android:summary="@string/use_english_names_descr" android:title="@string/use_english_names"
-				android:key="use_english_names"></CheckBoxPreference>
-			<ListPreference android:key="default_metric_system" android:title="@string/unit_of_length" android:summary="@string/unit_of_length_descr"></ListPreference>
-			<CheckBoxPreference android:summary="@string/left_side_navigation_descr" android:title="@string/left_side_navigation"
-				android:key="left_side_navigation"></CheckBoxPreference>
-		</PreferenceCategory>
-	</PreferenceScreen>
-
-	<PreferenceScreen android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr">
-		<ListPreference android:title="@string/router_service" android:key="router_service" android:summary="@string/router_service_descr"></ListPreference>
-		<CheckBoxPreference android:summary="@string/fast_route_mode_descr" android:title="@string/fast_route_mode"
-			android:key="fast_route_mode"></CheckBoxPreference>
-		<ListPreference android:title="@string/voice_provider" android:key="voice_provider" android:summary="@string/voice_provider_descr"></ListPreference>
-		<ListPreference android:key="auto_follow_route" android:title="@string/choose_auto_follow_route"
-			android:summary="@string/choose_auto_follow_route_descr"></ListPreference>
-		<CheckBoxPreference android:title="@string/auto_zoom_map" android:summary="@string/auto_zoom_map_descr" android:key="auto_zoom_map"></CheckBoxPreference>
-		<CheckBoxPreference android:title="@string/snap_to_road" android:summary="@string/snap_to_road_descr" android:key="snap_to_road"></CheckBoxPreference>
-		<Preference android:title="@string/show_warnings_title" android:summary="@string/show_warnings_descr" android:key="show_routing_alarms"/>
-		<Preference android:title="@string/avoid_in_routing_title" android:summary="@string/avoid_in_routing_descr" android:key="avoid_in_routing"/>
-		<Preference android:title="@string/prefer_in_routing_title" android:summary="@string/prefer_in_routing_descr" android:key="prefer_in_routing"/>
-		<CheckBoxPreference android:summary="@string/use_compass_navigation_descr" android:title="@string/use_compass_navigation"
-			android:key="use_compass_navigation"></CheckBoxPreference>
-		<CheckBoxPreference android:summary="@string/precise_routing_mode_descr" android:title="@string/precise_routing_mode"
-			android:key="precise_routing_mode"></CheckBoxPreference>
-
-	</PreferenceScreen>
-
-	<Preference android:title="@string/prefs_plugins" android:summary="@string/prefs_plugins_descr" android:key="plugins"/>
-
-	<Preference android:title="@string/support_new_features" android:summary="@string/support_new_features_descr" android:key="bidforfix"/>
+	<Preference android:key="general_settings" android:title="@string/general_settings" android:summary="@string/general_settings_descr"/>
+	<Preference android:key="routing_settings" android:title="@string/routing_settings" android:summary="@string/routing_settings_descr"/>
+	<Preference android:title="@string/prefs_plugins" android:summary="@string/prefs_plugins_descr" android:key="plugins"
+	    />
+	
+	<!-- <Preference android:title="@string/support_new_features" android:summary="@string/support_new_features_descr" android:key="bidforfix"/>  -->
 
 </PreferenceScreen>

@@ -3,4 +3,7 @@
     <declare-styleable name="ExpandableView">
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
+    <declare-styleable name="OsmAndTheme">
+        <attr name="expandable_category_color" format="reference"/>
+    </declare-styleable>
 </resources>

@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockExpandableListActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
+
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -50,6 +55,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.res.Configuration;
+import android.graphics.Shader.TileMode;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -108,6 +115,8 @@ public class OsmandApplication extends Application implements ClientContext {
 		// always update application mode to default
 		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		
+		applyTheme(this);
+		
 		routingHelper = new RoutingHelper(this, player);
 		taskManager = new OsmAndTaskManager(this);
 		manager = new ResourceManager(this);
@@ -118,6 +127,7 @@ public class OsmandApplication extends Application implements ClientContext {
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		targetPointsHelper = new TargetPointsHelper(this);
+		
 		checkPrefferedLocale();
 		startApplication();
 		if (LOG.isDebugEnabled()) {
@@ -696,5 +706,34 @@ public class OsmandApplication extends Application implements ClientContext {
 	public Location getLastKnownLocation() {
 		return locationProvider.getLastKnownLocation();
 	}
-
+	
+	
+	public void applyTheme(Context c) {
+		int t = R.style.OsmandLightDarkActionBarTheme;
+		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
+			t = R.style.OsmandDarkTheme;
+		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
+			t = R.style.OsmandLightTheme;
+		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME) {
+			t = R.style.OsmandLightDarkActionBarTheme;
+		}
+		c.setTheme(t);
+		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME
+				&& Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+			ActionBar ab = null;
+			if (c instanceof SherlockActivity) {
+				ab = ((SherlockActivity) c).getSupportActionBar();
+			} else if (c instanceof SherlockListActivity) {
+				ab = ((SherlockListActivity) c).getSupportActionBar();
+			} else if (c instanceof SherlockExpandableListActivity) {
+				ab = ((SherlockExpandableListActivity) c).getSupportActionBar();
+			}
+			if (ab != null) {
+				BitmapDrawable bg = (BitmapDrawable) getResources().getDrawable(R.drawable.bg_striped);
+				bg.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
+				ab.setBackgroundDrawable(bg);
+			}
+		}
+	}
+	
 }

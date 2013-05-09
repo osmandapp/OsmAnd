@@ -1,40 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+<TabHost
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/tabhost"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" android:orientation="vertical">
-        <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/titlebar_background">
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/search_back_button"
-		android:contentDescription="@string/close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/arrow_back"
-                android:text="" />
-
-   		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:layout_marginLeft = "3dp" android:text="@string/select_search_position" android:layout_gravity="center_vertical|left">
-   		  </TextView>
-   		  <Spinner
-                android:id="@+id/SpinnerLocation"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="4dp"
-                />
-	</LinearLayout>
         <TabWidget
             android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"/>
-	    <LinearLayout
+            android:layout_weight="0"/>
+        
+        <LinearLayout
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:orientation="vertical"
@@ -48,9 +30,18 @@
 				android:text="@string/poi_search_desc"
 				android:textAppearance="?android:attr/textAppearanceSmall"/>
 		</LinearLayout>
+
         <FrameLayout
             android:id="@android:id/tabcontent"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
     </LinearLayout>
 </TabHost>

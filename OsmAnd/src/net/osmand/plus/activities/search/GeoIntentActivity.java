@@ -12,10 +12,9 @@ import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.data.City;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
-import net.osmand.data.LatLon;
-import net.osmand.util.MapUtils;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -25,6 +24,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.MapUtils;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -50,6 +50,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_address_offline);
+		getSupportActionBar().setTitle(R.string.search_osm_offline);
 		startProgressDialog = new ProgressDialog(this);
 		getMyApplication().checkApplicationIsBeingInitialized(this, startProgressDialog);
 		location = getMyApplication().getSettings().getLastKnownMapLocation();

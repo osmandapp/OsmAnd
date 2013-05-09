@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+@Deprecated
 public class FontFitTextView extends LinearLayout {
 
 	private static float MAX_TEXT_SIZE = 24;
@@ -19,7 +20,6 @@ public class FontFitTextView extends LinearLayout {
 		this(context, null);
 		tv = new TextView(context);
 		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-		tv.setTextColor(Color.WHITE);
 		addView(tv, lp);
 	}
 
@@ -27,7 +27,6 @@ public class FontFitTextView extends LinearLayout {
 		super(context, attrs);
 		tv = new TextView(context);
 		LayoutParams lp = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
-		tv.setTextColor(Color.WHITE);
 		addView(tv, lp);
 	}
 	

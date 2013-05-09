@@ -10,16 +10,17 @@
         <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingLeft="5dp"
             >
         <CheckBox android:id="@+id/check_item" android:focusable="false" android:gravity="top" 
-            		android:layout_width="48dp"
-			        android:layout_height="48dp"/>
+            		android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"/>
         </LinearLayout>
     <TextView
         android:id="@+id/plugin_name"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="20sp" android:text="@string/extra_settings"
-         android:gravity="center_vertical" android:paddingLeft="5dp" android:paddingRight="10dp">
+        android:textColor="?android:textColorPrimary"
+        style="@style/ListText.Small" android:text="@string/extra_settings"
+         android:paddingLeft="5dp" android:paddingRight="10dp">
     </TextView>
 	</LinearLayout>
     <TextView
@@ -29,7 +30,7 @@
         android:visibility="gone"
         android:maxLines="7"
         android:text="@string/osmand_extra_settings_description"
-        android:textColor="@color/color_light_gray"
+        android:textColor="?android:textColorSecondary"
         android:textSize="14sp" android:paddingLeft="10dp" android:paddingRight="10dp">
 
     </TextView>

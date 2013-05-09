@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -31,6 +32,9 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 
 	private Map<String, String> indexFileNames = null;
 	private Map<String, String> indexActivatedFileNames = null;
+	private int okColor;
+	private int defaultColor;
+	private int updateColor;
 
 	public DownloadIndexAdapter(DownloadIndexActivity downloadActivity, List<IndexItem> indexFiles) {
 		this.downloadActivity = downloadActivity;
@@ -41,6 +45,11 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			list.addAll(cats);
 		}
 		updateLoadedFiles();
+		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
+		TypedArray ta = downloadActivity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
+		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
+		ta.recycle();
+		updateColor = downloadActivity.getResources().getColor(R.color.color_update);
 	}
 
 	public void updateLoadedFiles() {
@@ -193,10 +202,10 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		IndexItemCategory group = getGroup(groupPosition);
 		if (v == null) {
 			LayoutInflater inflater = downloadActivity.getLayoutInflater();
-			v = inflater.inflate(net.osmand.plus.R.layout.download_index_list_item_category, parent, false);
+			v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 		}
 		final View row = v;
-		TextView item = (TextView) row.findViewById(R.id.download_index_category_name);
+		TextView item = (TextView) row.findViewById(R.id.category_name);
 		item.setText(group.name);
 		item.setLinkTextColor(Color.YELLOW);
 		adjustIndicator(groupPosition, isExpanded, v);
@@ -234,41 +243,37 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		if (indexFileNames != null) {
 			
 			if (!e.isAlreadyDownloaded(indexFileNames)) {
-				item.setTextColor(downloadActivity.getResources().getColor(R.color.index_unknown));
+				item.setTextColor(defaultColor);
 				item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 			} else {
 				if(e.getType() == DownloadActivityType.SRTM_FILE || e.getType() == DownloadActivityType.HILLSHADE_FILE){
-					item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_uptodate)); // GREEN
+					item.setTextColor(okColor); // GREEN
 					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				} else if (e.getDate() != null) {
 					String sfName = e.getTargetFileName();
 					if (e.getDate().equals(indexActivatedFileNames.get(sfName))) {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
-						item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_uptodate)); // GREEN
+						item.setTextColor(okColor); // GREEN
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else if (e.getDate().equals(indexFileNames.get(sfName))) {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
-						// item.setTextColor(getResources().getColor(R.color.deact_index_uptodate)); //DARK_GREEN
-						// Try fix Issue 1482: Use italic instead of dark colors for deactivated maps
-						item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_uptodate));
+						item.setTextColor(okColor);
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					} else if (indexActivatedFileNames.containsKey(sfName)) {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexActivatedFileNames.get(sfName));
-						item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_updateable)); // LIGHT_BLUE
+						item.setTextColor(updateColor); // LIGHT_BLUE
 						item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 					} else {
 						item.setText(item.getText() + "\n" + downloadActivity.getResources().getString(R.string.local_index_installed) + " : "
 								+ indexFileNames.get(sfName));
-						// item.setTextColor(getResources().getColor(R.color.deact_index_updateable)); //DARK_BLUE
-						// Try fix Issue 1482: Use italic instead of dark colors for deactivated maps
-						item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_updateable));
+						item.setTextColor(updateColor);
 						item.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 					}
 				} else {
-					item.setTextColor(downloadActivity.getResources().getColor(R.color.act_index_uptodate));
+					item.setTextColor(okColor);
 					item.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 				}
 			}

@@ -14,7 +14,6 @@ import net.osmand.plus.activities.LocalIndexesActivity.LoadLocalIndexTask;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
-import net.osmand.plus.background.OsmandBackgroundServicePlugin;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.extrasettings.OsmandExtraSettings;
@@ -68,7 +67,6 @@ public abstract class OsmandPlugin {
 		OsmandRasterMapsPlugin rasterMapsPlugin = new OsmandRasterMapsPlugin(app);
 		installedPlugins.add(rasterMapsPlugin);
 		installedPlugins.add(new OsmandMonitoringPlugin(app));
-		installedPlugins.add(new OsmandBackgroundServicePlugin(app));
 		installedPlugins.add(new OsmandExtraSettings(app));
 		installedPlugins.add(new AccessibilityPlugin(app));
 		if(!installPlugin(SRTM_PLUGIN_COMPONENT_PAID, SRTMPlugin.ID, app,
@@ -129,10 +127,6 @@ public abstract class OsmandPlugin {
 	public void mapActivityDestroy(MapActivity activity) { }
 	
 	public void settingsActivityCreate(SettingsActivity activity, PreferenceScreen screen) {}
-	
-	public void settingsActivityDestroy(final SettingsActivity activity){}
-	
-	public void settingsActivityUpdate(final SettingsActivity activity){}
 	
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {}
 	
@@ -231,19 +225,6 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
-	public static void onSettingsActivityDestroy(SettingsActivity activity) {
-		for (OsmandPlugin plugin : activePlugins) {
-			plugin.settingsActivityDestroy(activity);
-		}
-	}
-	
-	public static void onSettingsActivityUpdate(SettingsActivity activity) {
-		for (OsmandPlugin plugin : activePlugins) {
-			plugin.settingsActivityUpdate(activity);
-		}
-	}
-	
-
 	public static void createLayers(OsmandMapTileView mapView, MapActivity activity) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.registerLayers(activity);

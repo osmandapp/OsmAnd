@@ -617,7 +617,7 @@ public class MapActivityLayers {
 					settings.MAP_ONLINE_DATA.set(false);
 					updateMapSource(mapView, null);
 				} else if (layerKey.equals(layerInstallMore)) {
-					SettingsActivity.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+					OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
 						TileSourceTemplate template = null;
 						int count = 0;
 						@Override

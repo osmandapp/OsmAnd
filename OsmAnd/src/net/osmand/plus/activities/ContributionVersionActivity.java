@@ -57,11 +57,9 @@ public class ContributionVersionActivity extends OsmandListActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		pathToDownload = getMyApplication().getAppPath("osmandToInstall.apk");
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.download_files, R.drawable.tab_download_screen_icon);
-		setContentView(R.layout.download_builds);
-		titleBar.afterSetContentView();
+		setContentView(android.R.layout.list_content);
+		getSupportActionBar().setSubtitle(R.string.select_build_to_install);
 		
 		String installDate = getMyApplication().getSettings().CONTRIBUTION_INSTALL_APP_DATE.get();
 		if(installDate != null){
@@ -254,15 +252,14 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			format.append(Algorithms.formatDate(build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
 			description.setText(format.toString());
 
+			int color = getResources().getColor(R.color.color_unknown);
 			if(currentInstalledDate != null){
 				if(currentInstalledDate.before(build.date)){
-					tagView.setTextColor(getResources().getColor(R.color.color_orange));
-				} else {
-					tagView.setTextColor(Color.WHITE);
+					color = getResources().getColor(R.color.color_update);
 				}
-			} else {
-				tagView.setTextColor(Color.WHITE);
 			}
+			description.setTextColor(color);
+			tagView.setTextColor(color);
 			return row;
 		}
 		

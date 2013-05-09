@@ -25,9 +25,10 @@ import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
@@ -40,18 +41,21 @@ import android.text.style.ClickableSpan;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.ExpandableListContextMenuInfo;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.view.ActionMode;
+import com.actionbarsherlock.view.ActionMode.Callback;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.SubMenu;
+import com.actionbarsherlock.view.Window;
 
 public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
@@ -71,42 +75,30 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	private ContextMenuAdapter optionsMenuAdapter;
+	private ActionMode actionMode;
 
 	
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-
-		CustomTitleBar titleBar = new CustomTitleBar(this, R.string.local_index_descr_title, R.drawable.tab_download_screen_icon, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				asyncLoader.setResult(null);
-				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
-			}
-		});
 		setContentView(R.layout.local_index);
-		titleBar.afterSetContentView();
-		titleBar.setImgDescription(getString(R.string.local_index_download));
-		
+		getSupportActionBar().setTitle(R.string.local_index_descr_title);
+		setSupportProgressBarIndeterminateVisibility(false);
+		// getSupportActionBar().setLogo(R.drawable.tab_download_screen_icon);
+
+
 		settings = getMyApplication().getSettings();
 		descriptionLoader = new LoadLocalIndexDescriptionTask();
-		listAdapter = new LocalIndexesAdapter();
-		
-		
-		/*findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				asyncLoader.setResult(null);
-				startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
-			}
-		});*/
-		
+		listAdapter = new LocalIndexesAdapter(this);
+
+
 		getExpandableListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
 			@Override
 			public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-				long packedPos = ((ExpandableListContextMenuInfo)menuInfo).packedPosition;
+				long packedPos = ((ExpandableListContextMenuInfo) menuInfo).packedPosition;
 				int group = ExpandableListView.getPackedPositionGroup(packedPos);
 				int child = ExpandableListView.getPackedPositionChild(packedPos);
 				if (child >= 0 && group >= 0) {
@@ -115,11 +107,11 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				}
 			}
 		});
-		
+
 		setListAdapter(listAdapter);
 		updateDescriptionTextWithSize();
 		if (asyncLoader == null || asyncLoader.getResult() == null) {
-			// getLastNonConfigurationInstance method should be in onCreate() method 
+			// getLastNonConfigurationInstance method should be in onCreate() method
 			// (onResume() doesn't work)
 			Object indexes = getLastNonConfigurationInstance();
 			asyncLoader = new LoadLocalIndexTask();
@@ -266,7 +258,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 		@Override
 		protected void onPreExecute() {
-			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+			setSupportProgressBarIndeterminateVisibility(true);
 		}
 		
 		@Override
@@ -293,7 +285,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		@Override
 		protected void onPostExecute(List<LocalIndexInfo> result) {
 			this.result = result;
-			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+			setSupportProgressBarIndeterminateVisibility(false);
 		}
 		
 		public List<LocalIndexInfo> getResult() {
@@ -398,12 +390,12 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		
 		@Override
 		protected void onPreExecute() {
-			findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+			setProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+			setProgressBarIndeterminateVisibility(false);
 			AccessibleToast.makeText(LocalIndexesActivity.this, result, Toast.LENGTH_LONG).show();
 			listAdapter.clear();
 			reloadIndexes();
@@ -504,7 +496,6 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		return super.onRetainNonConfigurationInstance();
 	}
 
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		optionsMenuAdapter = new ContextMenuAdapter(this);
@@ -514,13 +505,40 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				localOptionsMenu(itemId);
 			}
 		};
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_backup, 0, listener, 0);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_restore, 0, listener, 1);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_delete, 0, listener, 2);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_reload, 0, listener, 3);
+		optionsMenuAdapter.registerItem(R.string.local_index_download, 
+				isLightActionBar()? R.drawable.a_9_av_download_light :R.drawable.a_9_av_download_dark, listener, 0);
+		optionsMenuAdapter.registerItem(R.string.local_index_mi_reload, 
+				isLightActionBar()? R.drawable.a_1_navigation_refresh_light :R.drawable.a_1_navigation_refresh_dark, listener, 1);
+		optionsMenuAdapter.registerItem(R.string.local_index_mi_backup, isLightActionBar() ? 
+				R.drawable.a_8_images_rotate_left_light : R.drawable.a_8_images_rotate_left_dark, listener, 2);
+		optionsMenuAdapter.registerItem(R.string.local_index_mi_restore, 
+				isLightActionBar()? R.drawable.a_8_images_rotate_right_light : R.drawable.a_8_images_rotate_right_dark, listener, 3);
+		optionsMenuAdapter.registerItem(R.string.local_index_mi_delete, 
+				isLightActionBar()? R.drawable.a_5_content_discard_light : R.drawable.a_5_content_discard_dark, listener, 4);
 		OsmandPlugin.onOptionsMenuLocalIndexes(this, optionsMenuAdapter);
-		for(int j = 0; j<optionsMenuAdapter.length(); j++){
-			menu.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+		// doesn't work correctly
+		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
+		SubMenu split = null;
+		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
+			MenuItem item;
+			if (j + 1 >= max) {
+				if (split == null) {
+					split = menu.addSubMenu(0, 1, 0, R.string.default_buttons_other_actions);
+					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
+							: R.drawable.abs__ic_menu_moreoverflow_holo_dark);
+					split.getItem().setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+				}
+				item = split.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM );
+			} else {
+				item = menu.add(0, optionsMenuAdapter.getItemId(j), j + 1, optionsMenuAdapter.getItemName(j));
+				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM  
+						);
+			}
+			if (optionsMenuAdapter.getImageId(j) != 0) {
+				item.setIcon(optionsMenuAdapter.getImageId(j));
+			}
+			
 		}
 		return true;
 	}
@@ -535,6 +553,17 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		return true;
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int itemId = item.getItemId();
+		for (int i = 0; i < optionsMenuAdapter.length(); i++) {
+			if (itemId == optionsMenuAdapter.getItemId(i)) {
+				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false, null);
+				return true;
+			}
+		}
+		return super.onOptionsItemSelected(item);
+	}
 	public void doAction(int actionResId){
 		if(actionResId == R.string.local_index_mi_backup){
 			operationTask = new LocalIndexOperationTask(BACKUP_OPERATION);
@@ -548,7 +577,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		if(operationTask != null){
 			operationTask.execute(selectedItems.toArray(new LocalIndexInfo[selectedItems.size()]));
 		}
-		closeSelectionMode();
+		if(actionMode != null) {
+			actionMode.finish();
+		}
 	}
 	
 	
@@ -559,7 +590,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 	}
 	
-	private void openSelectionMode(final int actionResId){
+	private void openSelectionMode(final int actionResId, final int actionIconId, 
+			final DialogInterface.OnClickListener listener){
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
@@ -571,50 +603,59 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			return;
 		}
 		collapseAllGroups();
+		
 		selectionMode = true;
 		selectedItems.clear();
-		Button action = (Button) findViewById(R.id.ActionButton);
-		action.setVisibility(View.VISIBLE);
-		action.setText(actionButton);
-		action.setOnClickListener(new OnClickListener() {
-			
+		actionMode = startActionMode(new Callback() {
+
 			@Override
-			public void onClick(View v) {
-				if(selectedItems.isEmpty()){
-					AccessibleToast.makeText(LocalIndexesActivity.this, getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
-					return;
+			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+				selectionMode = true;
+				MenuItem it = menu.add(actionResId);
+				if(actionIconId != 0) {
+					it.setIcon(actionIconId);
 				}
-				
+				it.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_IF_ROOM | 
+						MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+				if (selectedItems.isEmpty()) {
+					AccessibleToast.makeText(LocalIndexesActivity.this,
+							getString(R.string.local_index_no_items_to_do, actionButton.toLowerCase()), Toast.LENGTH_SHORT).show();
+					return true;
+				}
+
 				Builder builder = new AlertDialog.Builder(LocalIndexesActivity.this);
 				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
-				builder.setPositiveButton(actionButton, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						doAction(actionResId);
-					}
-				});
+				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.default_buttons_cancel, null);
 				builder.show();
-				
+				return true;
 			}
-		});
-		Button cancel = (Button) findViewById(R.id.CancelButton);
-		cancel.setVisibility(View.VISIBLE);
-		cancel.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
-			public void onClick(View v) {
-				closeSelectionMode();
+			public void onDestroyActionMode(ActionMode mode) {
+				selectionMode = false;
+				findViewById(R.id.DescriptionText).setVisibility(View.VISIBLE);
+				updateDescriptionTextWithSize();
+				listAdapter.cancelFilter();
+				collapseAllGroups();
+				listAdapter.notifyDataSetChanged();
 			}
+			
 		});
-//		findViewById(R.id.DownloadButton).setVisibility(View.GONE);
-		findViewById(R.id.FillLayoutStart).setVisibility(View.VISIBLE);
-		findViewById(R.id.FillLayoutEnd).setVisibility(View.VISIBLE);
 		findViewById(R.id.DescriptionText).setVisibility(View.GONE);
 		if(R.string.local_index_mi_upload_gpx == actionResId){
-			((TextView) findViewById(R.id.DescriptionTextTop)).setText(R.string.local_index_upload_gpx_description);
-			((TextView) findViewById(R.id.DescriptionTextTop)).setVisibility(View.VISIBLE);
+			((TextView) findViewById(R.id.DescriptionText)).setText(R.string.local_index_upload_gpx_description);
+			((TextView) findViewById(R.id.DescriptionText)).setVisibility(View.VISIBLE);
 		}
 		listAdapter.notifyDataSetChanged();
 	}
@@ -643,58 +684,61 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			public void updateDrawState(TextPaint ds) {
 				super.updateDrawState(ds);
-				ds.setColor(Color.GREEN);
+//				ds.setColor(Color.GREEN);
 			}
 		}, 0, l, 0);
 		ds.setText(content);
 		ds.setMovementMethod(LinkMovementMethod.getInstance());
 	}
 	
-	private void closeSelectionMode(){
-		selectionMode = false;
-//		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
-		findViewById(R.id.DescriptionText).setVisibility(View.VISIBLE);
-		findViewById(R.id.FillLayoutStart).setVisibility(View.GONE);
-		findViewById(R.id.FillLayoutEnd).setVisibility(View.GONE);
-		findViewById(R.id.CancelButton).setVisibility(View.GONE);
-		findViewById(R.id.ActionButton).setVisibility(View.GONE);
-		((TextView) findViewById(R.id.DescriptionTextTop)).setVisibility(View.GONE);
-		
-		
-		;
-		updateDescriptionTextWithSize();
-		listAdapter.cancelFilter();
-		collapseAllGroups();
-		listAdapter.notifyDataSetChanged();
+	
+	
+	public void localOptionsMenu(final int itemId) {
+		if (itemId == R.string.local_index_download) {
+			asyncLoader.setResult(null);
+			startActivity(new Intent(LocalIndexesActivity.this, DownloadIndexActivity.class));
+		} else if (itemId == R.string.local_index_mi_reload) {
+			reloadIndexes();
+		} else if (itemId == R.string.local_index_mi_delete) {
+			openSelectionMode(itemId, R.drawable.a_5_content_discard_dark, R.drawable.a_5_content_discard_light,
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							doAction(itemId);
+						}
+					}, null, null);
+		} else if (itemId == R.string.local_index_mi_backup) {
+			openSelectionMode(itemId, R.drawable.a_8_images_rotate_left_dark, R.drawable.a_8_images_rotate_left_light,
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							doAction(itemId);
+						}
+					}, Boolean.FALSE, LocalIndexType.MAP_DATA);
+		} else if (itemId == R.string.local_index_mi_restore) {
+			openSelectionMode(itemId, R.drawable.a_8_images_rotate_right_dark, R.drawable.a_8_images_rotate_right_light,
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							doAction(itemId);
+						}
+					}, Boolean.TRUE, LocalIndexType.MAP_DATA);
+			listAdapter.filterCategories(true);
+		}
 	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		for(int i =0; i <optionsMenuAdapter.length(); i++){
-			if(itemId == optionsMenuAdapter.getItemId(i)) {
-				optionsMenuAdapter.getClickAdapter(i).onContextMenuClick(itemId, i, false, null);
-				return true;
-			}
+	public void openSelectionMode(int stringRes, int darkIcon, int lightIcon, DialogInterface.OnClickListener listener, Boolean backup,
+			LocalIndexType filter) {
+		if (backup != null) {
+			listAdapter.filterCategories(backup.booleanValue());
 		}
-		return false;
-	}
-	public void localOptionsMenu(int itemId ){
-		if(itemId == R.string.local_index_mi_reload){
-			reloadIndexes();
-		} else if(itemId == R.string.local_index_mi_delete){
-			openSelectionMode(R.string.local_index_mi_delete);
-		} else if(itemId == R.string.local_index_mi_backup){
-			listAdapter.filterCategories(false);
-			listAdapter.filterCategories(LocalIndexType.MAP_DATA);
-			openSelectionMode(R.string.local_index_mi_backup);
-		} else if(itemId == R.string.local_index_mi_restore){
-			listAdapter.filterCategories(true);
-			openSelectionMode(R.string.local_index_mi_restore);
-		} else if(itemId == R.string.local_index_mi_upload_gpx){
-			listAdapter.filterCategories(LocalIndexType.GPX_DATA);
-			openSelectionMode(R.string.local_index_mi_upload_gpx);
+		if (filter != null) {
+			listAdapter.filterCategories(filter);
 		}
+		openSelectionMode(stringRes, !isLightActionBar() ? darkIcon : lightIcon, listener);
 	}
 	
 
@@ -705,7 +749,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 			@Override
 			protected void onPostExecute(List<String> warnings) {
-				findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+				setProgressBarIndeterminateVisibility(false);
 				if (!warnings.isEmpty()) {
 					final StringBuilder b = new StringBuilder();
 					boolean f = true;
@@ -727,7 +771,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			@Override
 			protected void onPreExecute() {
 				super.onPreExecute();
-				findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+				setProgressBarIndeterminateVisibility(true);
 			}
 			@Override
 			protected List<String> doInBackground(Void... params) {
@@ -746,9 +790,19 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		Map<LocalIndexInfo, List<LocalIndexInfo>> data = new LinkedHashMap<LocalIndexInfo, List<LocalIndexInfo>>();
 		List<LocalIndexInfo> category = new ArrayList<LocalIndexInfo>();
 		List<LocalIndexInfo> filterCategory = null;
+		int warningColor;
+		int okColor;
+		int defaultColor;
+		int corruptedColor;
 		
 
-		public LocalIndexesAdapter() {
+		public LocalIndexesAdapter(Context ctx) {
+			warningColor = ctx.getResources().getColor(R.color.color_warning);
+			okColor = ctx.getResources().getColor(R.color.color_ok);
+			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorSecondary});
+			defaultColor = ta.getColor(0, ctx.getResources().getColor(R.color.color_unknown));
+			ta.recycle();
+			corruptedColor = ctx.getResources().getColor(R.color.color_invalid);
 		}
 		
 		public void clear() {
@@ -868,13 +922,13 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			TextView viewName = ((TextView) v.findViewById(R.id.local_index_name));
 			viewName.setText(child.getName());
 			if (child.isNotSupported()) {
-				viewName.setTextColor(getResources().getColor(R.color.localindex_notsupported));
+				viewName.setTextColor(warningColor);
 			} else if (child.isCorrupted()) {
-				viewName.setTextColor(getResources().getColor(R.color.localindex_iscorrupted));
+				viewName.setTextColor(corruptedColor);
 			} else if (child.isLoaded()) {
-				viewName.setTextColor(getResources().getColor(R.color.localindex_isloaded));
+				viewName.setTextColor(okColor);
 			} else {
-				viewName.setTextColor(getResources().getColor(R.color.localindex_unknown));
+				viewName.setTextColor(defaultColor);
 			}
 			if (child.getSize() >= 0) {
 				String size;
@@ -921,14 +975,14 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			LocalIndexInfo group = getGroup(groupPosition);
 			if (v == null) {
 				LayoutInflater inflater = getLayoutInflater();
-				v = inflater.inflate(net.osmand.plus.R.layout.local_index_list_item_category, parent, false);
+				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
 			StringBuilder t = new StringBuilder(group.getType().getHumanString(LocalIndexesActivity.this));
 			if (group.isBackupedData()) {
 				t.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}
 			adjustIndicator(groupPosition, isExpanded, v);
-			TextView nameView = ((TextView) v.findViewById(R.id.local_index_category_name));
+			TextView nameView = ((TextView) v.findViewById(R.id.category_name));
 			List<LocalIndexInfo> list = data.get(group);
 			int size = 0;
 			for(int i=0; i<list.size(); i++){

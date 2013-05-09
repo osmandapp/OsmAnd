@@ -24,15 +24,14 @@ import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.DataTileManager;
 import net.osmand.data.LatLon;
-import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.LocalIndexHelper.LocalIndexType;
 import net.osmand.plus.activities.LocalIndexInfo;
@@ -45,6 +44,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.StackWidgetView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -68,8 +68,8 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
-import android.preference.ListPreference;
-import android.preference.PreferenceGroup;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
 import android.provider.MediaStore;
 import android.view.Display;
@@ -86,9 +86,9 @@ import android.widget.Toast;
 public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.audionotes";
-	private static final String THREEGP_EXTENSION = "3gp";
-	private static final String MPEG4_EXTENSION = "mp4";
-	private static final String IMG_EXTENSION = "jpg";
+	public static final String THREEGP_EXTENSION = "3gp";
+	public  static final String MPEG4_EXTENSION = "mp4";
+	public  static final String IMG_EXTENSION = "jpg";
 	private static final Log log = PlatformUtil.getLog(AudioVideoNotesPlugin.class);
 	private static Method mRegisterMediaButtonEventReceiver;
 	private static Method mUnregisterMediaButtonEventReceiver;
@@ -932,35 +932,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		String[] entries;
-		Integer[] intValues ;
-		PreferenceGroup grp = screen.getPreferenceManager().createPreferenceScreen(activity);
-		grp.setSummary(R.string.av_settings_descr);
+		Preference grp = new Preference(activity);
 		grp.setTitle(R.string.av_settings);
-		grp.setKey("av_settings");
+		grp.setSummary(R.string.av_settings_descr);
+		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				activity.startActivity(new Intent(activity, SettingsAudioVideoActivity.class));
+				return true;
+			}
+		});
 		screen.addPreference(grp);
-
-		entries = new String[] { app.getString(R.string.av_def_action_choose),
-				app.getString(R.string.av_def_action_audio), app.getString(R.string.av_def_action_video),
-				app.getString(R.string.av_def_action_picture)};
-		intValues = new Integer[] {AV_DEFAULT_ACTION_CHOOSE, AV_DEFAULT_ACTION_AUDIO, AV_DEFAULT_ACTION_VIDEO,
-				AV_DEFAULT_ACTION_TAKEPICTURE};
-		ListPreference defAct = activity.createListPreference(AV_DEFAULT_ACTION, 
-				entries, intValues, R.string.av_widget_action, R.string.av_widget_action_descr);
-		grp.addPreference(defAct);
-		
-	
-		
-		grp.addPreference(activity.createCheckBoxPreference(AV_EXTERNAL_RECORDER, 
-				R.string.av_use_external_recorder, R.string.av_use_external_recorder_descr));
-		grp.addPreference(activity.createCheckBoxPreference(AV_EXTERNAL_PHOTO_CAM, 
-				R.string.av_use_external_camera, R.string.av_use_external_camera_descr));
-		
-		entries = new String[] {"3GP", "MP4"};
-		intValues = new Integer[] {VIDEO_OUTPUT_3GP, VIDEO_OUTPUT_MP4};
-		ListPreference lp = activity.createListPreference(AV_VIDEO_FORMAT, 
-				entries, intValues, R.string.av_video_format, R.string.av_video_format_descr);
-		grp.addPreference(lp);
 	}
 	
 	@Override

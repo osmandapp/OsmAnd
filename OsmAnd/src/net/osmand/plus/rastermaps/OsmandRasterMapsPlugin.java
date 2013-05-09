@@ -1,11 +1,14 @@
 package net.osmand.plus.rastermaps;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import net.osmand.ResultMatcher;
 import net.osmand.StateChangedListener;
+import net.osmand.access.AccessibleToast;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
@@ -14,32 +17,28 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.DownloadTilesDialog;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
-import net.osmand.plus.views.SeekBarPreference;
 import net.osmand.util.Algorithms;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.preference.CheckBoxPreference;
-import android.preference.ListPreference;
+import android.content.Intent;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceGroup;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.widget.Toast;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.rastermaps";
 	private OsmandSettings settings;
 	private OsmandApplication app;
-	private ListPreference tileSourcePreference;
-	private ListPreference overlayPreference;
-	private ListPreference underlayPreference;
 	
 	private MapTileLayer overlayLayer;
 	private MapTileLayer underlayLayer;
@@ -134,7 +133,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == items.length - 1){
-					SettingsActivity.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+					installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
 						TileSourceTemplate template = null;
 						int count = 0;
 						@Override
@@ -231,178 +230,81 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 	}
 	
-	@Override
-	public void settingsActivityUpdate(SettingsActivity activity) {
-		updateTileSourceSummary();
-	}
 
 	@Override
 	public void settingsActivityCreate(final SettingsActivity activity, PreferenceScreen screen) {
-		PreferenceGroup grp = screen.getPreferenceManager().createPreferenceScreen(activity);
+		Preference grp = new Preference(activity);
+		grp.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				activity.startActivity(new Intent(activity, SettingsRasterMapsActivity.class));
+				return true;
+			}
+		});
 		grp.setSummary(R.string.online_map_settings_descr);
 		grp.setTitle(R.string.online_map_settings);
 		grp.setKey("map_settings");
 		screen.addPreference(grp);
 		
-
-		OnPreferenceChangeListener listener = createPreferenceListener(activity);
-		
-		PreferenceCategory cat = new PreferenceCategory(activity);
-		cat.setTitle(R.string.pref_raster_map);
-		grp.addPreference(cat);
-		
-		CheckBoxPreference mapVectorData = activity.createCheckBoxPreference(settings.MAP_ONLINE_DATA,
-				R.string.map_online_data, R.string.map_online_data_descr);
-//		final OnPreferenceChangeListener parent = mapVectorData.getOnPreferenceChangeListener();
-//		MapRenderRepositories r = app.getResourceManager().getRenderer();
-//		if(r.isEmpty()){
-//			AccessibleToast.makeText(this, app.getString(R.string.no_vector_map_loaded), Toast.LENGTH_LONG).show();
-//			return false;
-//		}
-		cat.addPreference(mapVectorData);
-		
-		tileSourcePreference = new ListPreference(activity);
-		tileSourcePreference.setSummary(R.string.map_tile_source_descr);
-		tileSourcePreference.setTitle(R.string.map_tile_source);
-		tileSourcePreference.setOnPreferenceChangeListener(listener);
-		cat.addPreference(tileSourcePreference);
-		
-		cat.addPreference(activity.createCheckBoxPreference(settings.USE_INTERNET_TO_DOWNLOAD_TILES, 
-				R.string.use_internet, R.string.use_internet_to_download_tile));
-		
-		int startZoom = 1;
-		int endZoom = 18;
-		String[] entries = new String[endZoom - startZoom + 1];
-		Integer[] intValues = new Integer[endZoom - startZoom + 1];
-		for (int i = startZoom; i <= endZoom; i++) {
-			entries[i - startZoom] = i + ""; //$NON-NLS-1$
-			intValues[i - startZoom] = i ;
-		}
-		ListPreference lp = activity.createListPreference(settings.LEVEL_TO_SWITCH_VECTOR_RASTER, 
-				entries, intValues, R.string.level_to_switch_vector_raster, R.string.level_to_switch_vector_raster_descr);
-		cat.addPreference(lp);
-		
-		// try without, Issue 823:
-//		int startZoom = 12;
-//		int endZoom = 19;
-//		entries = new String[endZoom - startZoom + 1];
-//		Integer[] intValues = new Integer[endZoom - startZoom + 1];
-//		for (int i = startZoom; i <= endZoom; i++) {
-//			entries[i - startZoom] = i + ""; //$NON-NLS-1$
-//			intValues[i - startZoom] = i ;
-//		}
-		// registerListPreference(osmandSettings.MAX_LEVEL_TO_DOWNLOAD_TILE, screen, entries, intValues);
-		
-		
-		cat = new PreferenceCategory(activity);
-		cat.setTitle(R.string.pref_overlay);
-		grp.addPreference(cat);
-		
-		overlayPreference = new ListPreference(activity);
-		overlayPreference.setSummary(R.string.map_overlay_descr);
-		overlayPreference.setTitle(R.string.map_overlay);
-		overlayPreference.setOnPreferenceChangeListener(listener);
-		cat.addPreference(overlayPreference);
-		underlayPreference = new ListPreference(activity);
-		underlayPreference.setSummary(R.string.map_underlay_descr);
-		underlayPreference.setTitle(R.string.map_underlay);
-		underlayPreference.setOnPreferenceChangeListener(listener);
-		cat.addPreference(underlayPreference);
-		
-		SeekBarPreference sp = activity.createSeekBarPreference(settings.MAP_OVERLAY_TRANSPARENCY, R.string.overlay_transparency, R.string.overlay_transparency_descr,
-				R.string.modify_transparency, 0, 255);
-		cat.addPreference(sp);
-		sp = activity.createSeekBarPreference(settings.MAP_TRANSPARENCY, R.string.map_transparency, R.string.map_transparency_descr,
-				R.string.modify_transparency, 0, 255);
-		cat.addPreference(sp);
 	}
 
-	private OnPreferenceChangeListener createPreferenceListener(final SettingsActivity activity) {
-		return new OnPreferenceChangeListener() {
-			@Override
-			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				if (preference == tileSourcePreference  || preference == overlayPreference 
-						|| preference == underlayPreference) {
-					if(SettingsActivity.MORE_VALUE.equals(newValue)){
-						SettingsActivity.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
-							@Override
-							public boolean isCancelled() { return false;}
+	
+	
+	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final OsmandSettings settings = app.getSettings();
+		final Map<String, String> entriesMap = settings.getTileSourceEntries();
+		if (!settings.isInternetConnectionAvailable(true)) {
+			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
+			return;
+		}
+		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app));
+		if (downloaded == null || downloaded.isEmpty()) {
+			AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+			return;
+		}
+		Builder builder = new AlertDialog.Builder(activity);
+		String[] names = new String[downloaded.size()];
+		for (int i = 0; i < names.length; i++) {
+			names[i] = downloaded.get(i).getName();
+		}
+		final boolean[] selected = new boolean[downloaded.size()];
+		builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
 
-							@Override
-							public boolean publish(TileSourceTemplate object) {
-								if(object == null){
-									updateTileSourceSummary();
-								}
-								return true;
-							}
-						});
-					} else if(preference == tileSourcePreference){
-						settings.MAP_TILE_SOURCES.set((String) newValue);
-						updateTileSourceSummary();
-					} else {
-						if(((String) newValue).length() == 0){
-							newValue = null;
-						}
-						if(preference == underlayPreference){
-							settings.MAP_UNDERLAY.set(((String) newValue));
-							underlayPreference.setSummary(app.getString(R.string.map_underlay_descr) + "  [" + settings.MAP_UNDERLAY.get() + "]");
-						} else if(preference == overlayPreference){
-							settings.MAP_OVERLAY.set(((String) newValue));
-							overlayPreference.setSummary(app.getString(R.string.map_overlay_descr) + "  [" + settings.MAP_OVERLAY.get() + "]");
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				selected[which] = isChecked;
+				if (entriesMap.containsKey(downloaded.get(which).getName()) && isChecked) {
+					AccessibleToast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		builder.setNegativeButton(R.string.default_buttons_cancel, null);
+		builder.setTitle(R.string.select_tile_source_to_install);
+		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
+				for (int i = 0; i < selected.length; i++) {
+					if (selected[i]) {
+						toInstall.add(downloaded.get(i));
+					}
+				}
+				for (TileSourceTemplate ts : toInstall) {
+					if (settings.installTileSource(ts)) {
+						if (result != null) {
+							result.publish(ts);
 						}
 					}
 				}
-				return true;
+				// at the end publish null to show end of process
+				if (!toInstall.isEmpty() && result != null) {
+					result.publish(null);
+				}
 			}
-		};
-	}
-	
-	private void updateTileSourceSummary() {
-		if (tileSourcePreference != null) {
-			fillTileSourcesToPreference(tileSourcePreference, settings.MAP_TILE_SOURCES.get(), false);
-			fillTileSourcesToPreference(overlayPreference, settings.MAP_OVERLAY.get(), true);
-			fillTileSourcesToPreference(underlayPreference, settings.MAP_UNDERLAY.get(), true);
+		});
 
-			//		String mapName = " " + settings.MAP_TILE_SOURCES.get(); //$NON-NLS-1$
-			// String summary = tileSourcePreference.getSummary().toString();
-			// if (summary.lastIndexOf(':') != -1) {
-			// summary = summary.substring(0, summary.lastIndexOf(':') + 1);
-			// }
-			// tileSourcePreference.setSummary(summary + mapName);
-			tileSourcePreference.setSummary(app.getString(R.string.map_tile_source_descr) + "  [" + settings.MAP_TILE_SOURCES.get() + "]");
-			overlayPreference.setSummary(app.getString(R.string.map_overlay_descr) + "  [" + settings.MAP_OVERLAY.get() + "]");
-			underlayPreference.setSummary(app.getString(R.string.map_underlay_descr) + "  [" + settings.MAP_UNDERLAY.get() + "]");
-		}
-	}
-	
-	private void fillTileSourcesToPreference(ListPreference tileSourcePreference, String value, boolean addNone) {
-		Map<String, String> entriesMap = settings.getTileSourceEntries();
-		int add = addNone ? 1 : 0;
-		String[] entries = new String[entriesMap.size() + 1 + add];
-		String[] values = new String[entriesMap.size() + 1 + add];
-		int ki = 0;
-		if (addNone) {
-			entries[ki] = app.getString(R.string.default_none);
-			values[ki] = "";
-			ki++;
-		}
-		if (value == null) {
-			value = "";
-		}
-
-		for (Map.Entry<String, String> es : entriesMap.entrySet()) {
-			entries[ki] = es.getValue();
-			values[ki] = es.getKey();
-			ki++;
-		}
-		entries[ki] = app.getString(R.string.install_more);
-		values[ki] = SettingsActivity.MORE_VALUE;
-		fill(tileSourcePreference, entries, values, value);
-	}
-	
-	private void fill(ListPreference component, String[] list, String[] values, String selected) {
-		component.setEntries(list);
-		component.setEntryValues(values);
-		component.setValue(selected);
+		builder.show();
 	}
 }

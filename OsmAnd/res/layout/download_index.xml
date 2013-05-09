@@ -5,30 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <!-- TextView android:id="@+id/Label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center" android:text="@string/select_index_file_to_download"></TextView -->
-    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:background="@color/titlebar_background">
 
-            <ImageButton
-                android:id="@+id/search_back_button"
-		android:contentDescription="@string/close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/arrow_back"
-                android:text="" />
-
-   		  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:layout_marginLeft = "3dp" android:text="@string/local_index_download" android:layout_gravity="center_vertical|left">
-   		  </TextView>
-   		  <Spinner
-                android:id="@+id/SpinnerLocation"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="4dp"
-                />
-   		  </LinearLayout>
     <EditText
         android:id="@+id/search_box"
         android:layout_width="fill_parent"
