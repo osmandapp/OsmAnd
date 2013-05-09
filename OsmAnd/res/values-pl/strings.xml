@@ -94,7 +94,7 @@
   <string name="local_index_mi_backup">Zarchiwizuj</string>
   <string name="local_index_mi_delete">Skasuj</string>
   <string name="local_index_mi_reload">Odśwież</string>
-  <string name="local_index_download">Pobierz…</string>
+  <string name="local_index_download">Pobierz</string>
   <string name="local_index_tile_data">Dane kafelkowe: %1$s \nMinimalny zoom: %2$d\nMaksymalny zoom: %3$d\nMożliwe do pobrania: %4$s \nPobrano poziomy: %5$s</string>
   <string name="local_index_poi_data">Dane POI</string>
   <string name="local_index_address_data">Dane adresowe</string>
@@ -271,7 +271,7 @@
   <string name="daynight">Tryb dzień/noc</string>
   <string name="download_files_question">Pobrać {0} plik(ów) ({1} MB)?</string>
   <string name="items_were_selected">{0} element(ów) zaznaczono</string>
-  <string name="filter_existing_indexes">Filtruj pobrane</string>
+  <string name="filter_existing_indexes">Pobrane</string>
   <string name="deselect_all">Odznacz wszystko</string>
   <string name="select_all">Zaznacz wszystko</string>
   <string name="reload">Odśwież</string>
@@ -1175,7 +1175,7 @@
     <string name="item_unchecked">niezaznaczone</string>
     <string name="av_def_action_choose">Wybierz na żądanie</string>
     <string name="access_arrival_time">Czas przybycia</string>
-    <string name="map_widget_gps_info">Info GPS</string>
+    <string name="map_widget_gps_info">Dane GPS</string>
     <string name="layer_hillshade">Warstwa cieniująca</string>
     <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
 	<string name="tip_recent_changes_1_1_4_t">"Zmiany w 1.1.4:
@@ -1186,4 +1186,17 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
 	<string name="street_name">Ulica</string>
 	<string name="hno">Numer domu</string>
+    <string name="choose_osmand_theme">Motyw aplikacji</string>
+    <string name="accessibility_options">Opcje ułatwień dostępu</string>
+    <string name="choose_osmand_theme_descr">Wybierz motyw aplikacji</string>
+    <string name="osmand_monitoring_plugin_name">Usługi śledzenia i tryb uśpienia</string>
+    <string name="monitoring_settings_descr">Skonfiguruj opcje zapisywania wycieczek oraz włącz tryb uśpienia</string>
+    <string name="osmand_monitoring_plugin_description">Włącz śledzenie i nawigację w trybie uśpienia (zablokowany ekran) poprzez okresowe wybudzanie urządzenia GPS. Wyświetl ustawienia dotyczące nagrywania wycieczek do plików GPX lub usługi sieciowej.</string>
+    <string name="monitoring_settings">Usługi śledzenia i tryb uśpienia</string>
+    <string name="tip_recent_changes_1_5_t">"Zmiany w 1.5:
+\n\t* Motyw Holo (dostosowywanie motywów) "</string>
+    <string name="select_address_activity">Wybierz adres</string>
+    <string name="local_openstreetmap_act_title">Modyfikacje OSM</string>
+    <string name="default_buttons_other_actions">Inne działania</string>
+    <string name="favourites_list_activity">Wybierz ulubione</string>
     </resources>
