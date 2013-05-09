@@ -196,6 +196,7 @@ public class EditingPOIActivity implements DialogProvider {
 		final TableRow newTagRow = new TableRow(ctx);				            
         TableRow.LayoutParams tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);          
         tlp.leftMargin = 5;
+        tlp.gravity = Gravity.CENTER;
         newTagRow.setLayoutParams(tlp);
 
         final AutoCompleteTextView tag = new AutoCompleteTextView(ctx);
@@ -237,8 +238,7 @@ public class EditingPOIActivity implements DialogProvider {
 		});			            
         tlp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.FILL_PARENT);
         tlp.leftMargin = 5;
-        tlp.rightMargin = 5;
-        tlp.width = 80;
+        tlp.gravity = Gravity.CENTER;
         value.setLayoutParams(tlp);
         if(vl != null) {
         	value.setText(vl);

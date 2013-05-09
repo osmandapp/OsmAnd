@@ -3,65 +3,133 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
-<LinearLayout android:layout_width="fill_parent"
-  android:layout_height="wrap_content" android:orientation="vertical">
-<TextView android:text="@string/create_poi_link_to_osm_doc" android:id="@+id/LinkToOsmDoc" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
-<TableLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:stretchColumns="1">
 
+<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+<TextView
+    android:id="@+id/LinkToOsmDoc"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:text="@string/create_poi_link_to_osm_doc" />
+
+<TableLayout  android:layout_width="fill_parent" android:layout_height="wrap_content"
+    android:stretchColumns="1" >
 <TableRow>
-
-<TextView android:text="@string/poi_dialog_name" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-<!--  bug with width set it to 100 -->
-
-<EditText android:text="" android:id="@+id/Name" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_width ="100dp"></EditText>
-
-</TableRow>
-
-<TableRow>
-
-<Button android:text="&lt;Type&gt;" android:id="@+id/TypeButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
- 
-<AutoCompleteTextView 
-    android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"  android:layout_width ="fill_parent"/>    
-<!--  <EditText android:text="" android:id="@+id/Type" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_height="wrap_content" android:layout_width = "fill_parent" /> -->
-
-</TableRow>
-
-<TableRow>
-
-<Button android:text="@string/poi_dialog_opening_hours" android:id="@+id/OpenHoursButton" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
-<EditText android:text="" android:hint="Mo-Su 08:00-20:00" android:id="@+id/OpeningHours" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_width ="100dp"  android:layout_height="wrap_content"></EditText>
-
-</TableRow>
-
-<TableRow>
-
     <TextView
-        android:id="@+id/TextView01"
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="@string/poi_dialog_name" />
+    <!-- bug with width set it to 100 -->
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="" >
+
+        <requestFocus />
+    </EditText>
+</TableRow>
+<TableRow>
+    <Button
+        android:id="@+id/TypeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&lt;Type>" />
+
+    <AutoCompleteTextView
+        android:id="@+id/Type"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="" />
+</TableRow>
+
+<TableRow>
+    <Button
+        android:id="@+id/OpenHoursButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/poi_dialog_opening_hours" />
+
+    <EditText
+        android:id="@+id/OpeningHours"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:hint="Mo-Su 08:00-20:00"
+        android:text="" >
+    </EditText>
+</TableRow>
+
+
+<!-- 
+<TableRow>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="@string/street_name" />
+
+    <EditText
+        android:id="@+id/StreetName"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+    </EditText>
+</TableRow>
+<TableRow>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="@string/hno" />
+
+    <EditText
+        android:id="@+id/HouseNumber"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" >
+    </EditText>
+</TableRow> -->
+
+<TableRow>
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/phone" />
-
     <EditText
         android:id="@+id/Phone"
-        android:layout_width="100dp"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:hint="0123456789"
         android:inputType="phone" >
-
-        <requestFocus />
     </EditText>
-
 </TableRow>
 
 <TableRow>
-
     <TextView
-        android:id="@+id/TextView02"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -69,32 +137,46 @@
 
     <EditText
         android:id="@+id/Website"
-        android:layout_width="100dp"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:hint="http://osmand.net" />
+        android:hint="http://osmand.net" >
+    </EditText>
 </TableRow>
 
 <TableRow>
-<TextView android:text="@string/poi_dialog_comment" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-<EditText android:text="@string/poi_dialog_comment_default" android:id="@+id/Comment" android:layout_marginLeft="5dp" android:layout_width ="100dp" android:layout_marginRight="5dp" android:layout_height="wrap_content"></EditText>
+    <TextView
+        android:id="@+id/TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="@string/poi_dialog_comment" />
+
+    <EditText
+        android:id="@+id/Comment"
+        android:layout_width="250dp"
+        android:minWidth="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:text="@string/poi_dialog_comment_default" >
+    </EditText>
 </TableRow>
 
-<TableRow >
-    <CheckBox android:layout_width="wrap_content" android:layout_marginLeft="5dp" android:layout_span="2"
-        android:layout_marginRight="5dp" android:text="@string/close_changeset" android:id="@+id/CloseChangeset"/>
+<TableRow>
+    <CheckBox
+        android:id="@+id/CloseChangeset"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_span="2"
+        android:text="@string/close_changeset" />
 </TableRow>
-
-
 </TableLayout>
 
-<Button
-        android:id="@+id/advancedMode"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/btn_advanced_mode" />
+
 
 <TableLayout 
     android:id="@+id/advancedModeTable"
@@ -103,13 +185,26 @@
     android:stretchColumns="1"
     android:visibility="gone">
 </TableLayout>
-<Button
-    android:id="@+id/addTag"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center"
-    android:text="@string/btn_add_tag" 
-    android:visibility="gone"/>
+
+<LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/addTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="150dp"
+        android:text="@string/btn_add_tag"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/advancedMode"
+        android:layout_width="wrap_content"
+        android:minWidth="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_advanced_mode" />
+</LinearLayout>
+
 <TextView android:text="@string/poi_dialog_other_tags_message" android:id="@+id/TextView" android:layout_marginLeft="5dp" android:layout_width="fill_parent" android:layout_height="wrap_content"/>
 <LinearLayout android:id="@+id/LinearLayout" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" 
 	android:gravity="bottom|center">

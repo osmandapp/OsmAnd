@@ -88,8 +88,8 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
         //This has to be called before setContentView and you must use the
         //class in com.actionbarsherlock.view and NOT android.view
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		super.onCreate(icicle);
-		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		final Collator collator = Collator.getInstance();
 		collator.setStrength(Collator.SECONDARY);
 		favoritesComparator = new Comparator<FavouritePoint>(){

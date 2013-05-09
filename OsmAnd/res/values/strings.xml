@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="street_name">Street</string>
+	<string name="hno">House number</string>
+    <string name="website">Web site</string>
+	<string name="phone">Phone</string>
     <string name="tip_recent_changes_1_5_t">Change in 1.5:
         \n\t* Holo Theme (theme customization)
     </string>
@@ -1116,8 +1120,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="renderers_descr">Choose rendering appearance</string>
 	<string name="poi_context_menu_website">Show POI website</string>
 	<string name="poi_context_menu_call">Show POI phone</string>
-	<string name="website">web site</string>
-	<string name="phone">phone</string>
 	<string name="download_type_to_filter">type to filter</string>
 	<string name="use_high_res_maps">High resolution display</string>
 	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
