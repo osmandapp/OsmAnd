@@ -182,10 +182,10 @@ public class EditingPOIActivity implements DialogProvider {
 		nameText.setText(a.getName());
 		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		openingHours.setText(a.getOpeningHours());
-		EditText streetnameText = ((EditText)dlg.findViewById(R.id.Phone));
-		streetnameText.setText(a.getPhone());
-		EditText housenumberText = ((EditText)dlg.findViewById(R.id.housenumber));
-		housenumberText.setText(a.getSite());
+		EditText streetnameText = ((EditText)dlg.findViewById(R.id.Streetname));
+		streetnameText.setText(a.getStreetname());
+		EditText housenumberText = ((EditText)dlg.findViewById(R.id.Housenumber));
+		housenumberText.setText(a.getHousenumber());
 		final TableLayout layout = ((TableLayout)dlg.findViewById(R.id.advancedModeTable));
 		layout.setVisibility(View.GONE);
 		updateType(a);
@@ -297,8 +297,8 @@ public class EditingPOIActivity implements DialogProvider {
 		typeText = ((AutoCompleteTextView)dlg.findViewById(R.id.Type));
 		typeText.setThreshold(1);
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
-		streetnameText = ((EditText)dlg.findViewById(R.id.Phone));
-		housenumberText = ((EditText)dlg.findViewById(R.id.housenumber));
+		streetnameText = ((EditText)dlg.findViewById(R.id.Streetname));
+		housenumberText = ((EditText)dlg.findViewById(R.id.Housenumber));
 		closeChange = ((CheckBox) dlg.findViewById(R.id.CloseChangeset));
 		
 		TextView linkToOsmDoc = (TextView) dlg.findViewById(R.id.LinkToOsmDoc);

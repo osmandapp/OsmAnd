@@ -42,16 +42,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="@string/phone" />
+        android:text="@string/streetname" />
 
     <EditText
-        android:id="@+id/Phone"
+        android:id="@+id/Streetname"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:hint="0123456789"
-        android:inputType="phone" >
+        android:hint="New street"
+        android:inputType="streetname" >
 
         <requestFocus />
     </EditText>
@@ -65,15 +65,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="@string/website" />
+        android:text="@string/housenumber" />
 
     <EditText
-        android:id="@+id/Website"
+        android:id="@+id/Housenumber"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:hint="http://osmand.net" />
+        android:hint="123a" />
 </TableRow>
 
 <TableRow>
