@@ -298,8 +298,8 @@
   <string name="renderers_descr">Wybierz wygląd mapy wektorowej offline</string>
   <string name="poi_context_menu_website">Pokaż stronę WWW tego POI</string>
   <string name="poi_context_menu_call">Pokaż nr tel. tego POI</string>
-  <string name="website">strona WWW</string>
-  <string name="phone">telefon</string>
+  <string name="website">Strona WWW</string>
+  <string name="phone">Telefon</string>
   <string name="download_type_to_filter">filtruj wg typu</string>
   <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
   <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości</string>
@@ -1184,4 +1184,6 @@
     <string name="save_current_track_widget">Zapisz
 \n aktualny ślad GPX</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
-	</resources>
+	<string name="street_name">Ulica</string>
+	<string name="hno">Numer domu</string>
+    </resources>
