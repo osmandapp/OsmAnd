@@ -29,7 +29,7 @@
     <string name="recording_error">"Dogodila se greška tijekom snimanja "</string>
     <string name="recording_camera_not_available">Kamera nije dostupna</string>
     <string name="recording_is_recorded">Zvuk ili video se snima. Za zaustavljanje pritisnite widget.</string>
-    <string name="recording_delete_confirm">Želite li ukloniti ovu snimku?</string>
+    <string name="recording_delete_confirm">Želite li izbrisati ovaj zapis?</string>
     <string name="recording_unavailable">nedostupno</string>
     <string name="recording_context_menu_arecord">Snimi zvučni zapis</string>
     <string name="recording_context_menu_vrecord">Snimi video zapis</string>
@@ -40,7 +40,7 @@
     <string name="recording_description">Snimanje %1$s %2$s of %3$s</string>
     <string name="recording_default_name">snimanje</string>
     <string name="av_control_stop">stani</string>
-    <string name="av_control_start">pokreni</string>
+    <string name="av_control_start">započni</string>
     <string name="map_widget_av_notes">Zvučni i video zapisi</string>
     <string name="osmand_distance_plugin_description">Mjerenje udaljenosti između dvije ili više točaka. Dodajte točke kratkim pritiskom, a uklonite dužim pritiskom.</string>
     <string name="osmand_distance_plugin_name">Mjerenje udaljenosti</string>
@@ -305,7 +305,7 @@
 	<string name="favourites_context_menu_navigate">Postavi kao odredište</string>
 	<string name="favourites_context_menu_edit">Uredi favorite</string>
 	<string name="favourites_context_menu_delete">Brisanje favorita</string>
-	<string name="default_buttons_cancel">Poništi</string>
+	<string name="default_buttons_cancel">Zatvori</string>
 	<string name="default_buttons_apply">Primijeni</string>
 	<string name="default_buttons_add">Dodaj</string>
 	<string name="default_buttons_no">Ne</string>
@@ -334,7 +334,7 @@
 	<string name="searchpoi_activity">Odaberi POI</string>
 	<string name="settings_Button">Postavke</string>
 	<string name="favorites_Button">Favoriti</string>
-	<string name="search_button">Pretraži</string>
+	<string name="search_button">Traži</string>
 	<string name="search_activity">Traži</string>
 	<string name="map_Button">Karta</string>
 	<string name="show_gps_coordinates_text">Prikaži GPS koordinate na karti</string>
@@ -362,7 +362,7 @@
 	<string name="reload_tile">Ponovno učitaj</string>
 	<string name="show_osm_bugs_descr">Prikaži OpenStreetBugs na karti</string>
 	<string name="show_osm_bugs">Prikaži OpenStreetBugs</string>
-	<string name="save_current_track">Spremi trenutnu GPX stazu</string>
+	<string name="save_current_track">Spremi trenutni GPX</string>
 	<string name="additional_settings">Dodatne postavke</string>
 	<string name="save_current_track_descr">Spremi trenutnu stazu na memorijsku karticu</string>
 	<string name="settings">Postavke</string>
@@ -882,7 +882,7 @@
 	<string name="local_openstreetmap_delete">Izbriši promjene</string>
 	<string name="prefs_plugins_descr">Dodaci aktiviraju napredne postavke i dodatne funkcije</string>
 	<string name="debugging_and_development">OsmAnd razvoj</string>
-	<string name="recording_open_external_player">Otvorite vanjski svirač</string>
+	<string name="recording_open_external_player">Otvori preglednik</string>
     <string name="position_on_map_descr">Odaberite lokaciju pozicije oznake na karti</string>
 	<string name="position_on_map">Oznaka pozicije</string>
 	<string name="enable_plugin_monitoring_services">Omogućite dodatak za bilježenje položaja (GPX snimanje, online praćenje)</string>
@@ -916,4 +916,8 @@
 	<string name="context_menu_item_delete_parking_point">Izbriši oznaku za parking</string>
 	<string name="route_roundabout">Kružni tok: koristite %1$d izlaz i nastavite voziti</string>
 	<string name="map_settings_descr">Konfiguracija zaslona</string>
+	<string name="hno">Kućni broj</string>
+    <string name="street_name">Ulica</string>
+	<string name="save_current_track_widget">Spremi
+\n trenutni GPX</string>
 	</resources>
