@@ -1227,4 +1227,62 @@
 \n\t* Filtre de Kalman pour la boussole\n\t* Support des montres Pebble "</string>
     <string name="save_current_track_widget">Sauvegarder
 \n la trace GPX courante</string>
+	<string name="street_name">Rue</string>
+	<string name="hno">Numéro de maison</string>
+    <string name="tip_recent_changes_1_5_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "</string>
+    <string name="monitoring_settings">Services de surveillance et service d\' arrière plan</string>
+    <string name="monitoring_settings_descr">Configurer l\'enregistrement des parcours et le service d\'arrière plan</string>
+    <string name="osmand_monitoring_plugin_description">Activer le suivi et la navigation en arrière plan (écran éteint) en réveillant périodiquement le dispositif GPS. Afficher les paramètres facilitant l\' enregistrement de vos parcours vers des fichiers GPX locaux ou en ligne via un service Web.</string>
+    <string name="osmand_monitoring_plugin_name">Services de surveillance et service d\' arrière plan</string>
+    <string name="choose_osmand_theme_descr">Choisir le thème de l\'application</string>
+    <string name="choose_osmand_theme">Thème de l\'appli</string>
+    <string name="accessibility_options">Options d\'accessibilité</string>
+    <string name="select_address_activity">Sélectionner l\'adresse</string>
+    <string name="favourites_list_activity">Sélectionner un favopri</string>
+    <string name="local_openstreetmap_act_title">Modifications OSM</string>
+    <string name="default_buttons_other_actions">Autres actions</string>
+    <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) est une application cartographique et de navigation avec accès aux données libres OpenStreetMap (OSM), à la couverture mondiale de haute qualité. Toutes les données cartographiques peuvent être stockées sur la carte mémoire de votre appareil pour une utilisation hors ligne. OsmAnd fournit un routage GPS, avec guidage visuel et vocal, pour la voiture, le vélo ou le piéton.\nToutes les fonctionnalités principales fonctionnent à la fois en mode en ligne et hors ligne (sans connexion Internet).\n\nPrincipales fonctionnalités:\n\t- Navigation
+\n\t- Fonctionne en ligne (rapide) ou hors ligne (sans frais d\'itinérance lorsque vous êtes à l\'étranger)
+\n\t- Guidage vocal (voix enregistrées ou synthétiques)
+\n\t- Affichage optionnel des voies de circulation, du nom de rue et de l\'estimation de l\'heure d\'arrivée
+\n\t- Prise en charge des différentes étapes de l\'itinéraire
+\n\t- Recalcul automatique de l\'itinéraire en cours de route
+\n\t- Recherche de destinations par adresse, par centre d\'intérêt (ex: restaurant, hôtel, station service, musée, golf), ou par coordonnées géographiques
+\n\nAffichage de la carte
+\n\t- Affichage de votre position et de votre orientation sur la carte
+\n\t- Alignement optionnel de la carte en fonction de la boussole ou du sens de votre mouvement
+\n\t- Sauvegarde de vos lieux importants dans les favoris
+\n\t- Affichage des points d\'intérêt (PI) autour de vous
+\n\t- Affichage des cartes en ligne composées de tuiles spécialisées
+\n\t- Affichage des vues de satellites (Bing)
+\n\t- Affichage de couches supplémentaires comme des routes de navigation GPX et des cartes supplémentaires avec une personnalisation de la transparence
+\n\t- Affichage optionnel des noms de lieux en orthographe anglaise, locale ou phonétique
+\n 
+\nUtilise les données OpenStreetMap et Wikipedia:
+\n\t- Information de haute qualité issue des meilleurs projets collaboratifs mondiaux
+\n\t- Cartes globales d\' OpenStreetMap, disponibles par pays ou par région
+\n\t- Points d\'intérêt Wikipedia, super pour le tourisme (non disponible dans la version gratuite)
+\n\t- Téléchargements gratuits et illimités, directement depuis l\'appli (téléchargement limité à 16 fichiers carte dans la version gratuite)
+\n\t- Cartes toujours actualisées (mise à jour au moins une fois par mois)
+\n\t- Cartes vectorielles compactes
+\n\t- Choix entre la carte complète ou uniquement le réseau routier (Ex: Carte complète du Japon, 700 MB ou 200 MB pour le réseau routier uniquement)
+\n\t- Supporte également les cartes en ligne et la mise en cache des tuiles
+\n\nDispositifs de sécurité optionnels\n\t- Permutation automatique jour/nuit
+\n\t- Affichage des limitations de vitesse avec affichage de l\'excès de vitesse\n\t- Zoom automatique en fonction de la vitesse de déplacement 
+\n\t- Partage de votre position avec vos amis\n
+\nPiétons et cyclistes:
+\n\t- Les cartes comprennent les chemins pour piétons, randonneurs et cyclistes 
+\n\t- Navigation et affichage spécifiques aux piétons et cyclistes
+\n\t- Affichage optionnel des arrêts de transport public (bus, tram, train) y inclus les noms de ligne
+\n\t- Enregistrement optionnel du parcours vers un fichier GPX local ou un service en ligne
+\n\t- Affichage optionnel de la vitesse et de l\'altitude
+\n\t- Affichage optionnel des courbes de niveau et des \"hill-shading\" (via des greffons additionnels)
+\n\nContributeurs OpenStreetMap (OSM)
+\n\t- Rapport des bogues de la carte OSM
+\n\t- Transfert des traces GPX vers OSM directement depuis l\'application 
+\n\t- Ajout des points d\'intérêt et transfert direct vers OSM (ou en différé si mode hors ligne)
+\n\t- Enregistrement optionnel du parcours en arrière plan (quand l\'écran de l\'appareil est éteint)
+\n\nOsmAnd un logiciel libre dont le développement est très actif.
+\n\nChacun peut contribuer à l\'application en rapportant les bogues, en améliorant les traductions ou en programmant de nouvelles fonctionnalités.\n\nLe projet est en état permanent d\'amélioration grâce à toutes ces formes de développement et d\'interaction avec l\'utilisateur. Les progrès du projet reposent également sur les contributions financières pour assurer le développement, la programmation et le test de nouvelles fonctionnalités.\n\nEn achetant OsmAnd+ vous contribuez au devenir d\'une application encore plus géniale. Il est aussi possible de supporter financièrement des nouvelles fonctionnalités spécifiques ou de simplement faire un don sur osmand.net.\n\nCouverture géographique et qualité:
+\n\t- Europe de l\'Ouest: ****\n\t- Europe de l\'Est: ***\n\t- Russie: ***\n\t- Amérique du Nord: ***\n\t- Amérique du Sud: **\n\t- Asie: **\n\t- Le Japon et la Corée: ***\n\t- Proche-Orient: **\n\t- Afrique: **\n\t- Antarctique: *\n\nListe des pays pris en charge (pratiquement le monde entier!):\n\nAfghanistan, Albanie, Algérie, Allemagne, Andorre, Angola, Anguilla, Antigua-et-Barbuda, Argentine, Arménie, Aruba, Australie, Autriche, Azerbaïdjan, Bahamas, Bahreïn, Bangladesh, Barbade, Bélarus, Belgique, Belize, Bénin, Bermudes, Bhoutan, Bolivie, Bonaire, Bosnie-Herzégovine, Botswana, Brésil, Îles Vierges britanniques, Brunei, Bulgarie, Burkina Faso, Burundi, Cambodge, Cameroun, Canada, Cap-Vert, République centrafricaine, Tchad, Chili, Chine, Colombie, Comores, Congo, Costa Rica , Côte d\'Ivoire, Croatie, Cuba, Curaçao, Chypre, République tchèque, Danemark, Djibouti, Dominique, République dominicaine, Équateur, Égypte, El Salvador, la Guinée équatoriale, l\'Erythrée, Estonie, Éthiopie, Fidji, Finlande, France, Guyane française, le français Polynésie, Gabon, Gambie, Géorgie, Ghana, Gibraltar, Grèce, Groenland, Grenade, Guadeloupe, Guam, Guatemala, Guernsey, Guinée, Guinée-Bissau, Guyana, Haïti, Vatican, Honduras, Hong Kong, Hongrie, Islande, Inde , Indonésie, Iran, Irak, Irlande, île de Man, Israël, Italie, Jamaïque, Japon, Jersey, Jordanie, Kazakhstan, Kenya, Kiribati, Corée du Nord et Corée du Sud, Koweït, Kirghizistan, Laos, Lettonie, Liban, Lesotho, Libéria , Libye, Liechtenstein, Lituanie, Luxembourg, Macao, Macédoine, Madagascar, Malaisie, Malawi, Maldives, Mali, Malte, Martinique, Maurice, Mauritanie, Mayotte, Mexique, Micronésie, Moldavie, Monaco, Mongolie, Monténégro, Montserrat, Maroc, Mozambique , Myanmar, Namibie, Nauru, Népal, Pays-Bas, les Antilles néerlandaises, Nouvelle-Calédonie, Nouvelle-Zélande, Nicaragua, Niger, Nigéria, Norvège, Oman, Pakistan, Palau, Territoire palestinien, Panama, Papouasie-Nouvelle-Guinée, Paraguay, Pérou, Philippines, Pologne , Portugal, Puerto Rico, Qatar, Roumanie, Russie, Rwanda, Saint-Barthélemy, Sainte-Hélène, Saint-Kitts-et-Nevis, Sainte-Lucie, Saint-Martin, Saint-Pierre-et-Miquelon, Saint-Vincent-et-les Grenadines, Samoa, Saint-Marin, l\'Arabie saoudite, Sénégal, Serbie, Seychelles, Sierra Leone, Singapour, Slovaquie, Slovénie, Somalie, Afrique du Sud, la Géorgie du Sud, le Soudan du Sud, Espagne, Sri Lanka, Soudan, Suriname, Swaziland, Suède, Suisse, Syrie, Taiwan, Tadjikistan, Tanzanie, Thaïlande , le Timor-Leste, Togo, Tokelau, Tonga, Trinité-et-Tobago, Tunisie, Turkménistan, Turquie, Tuvalu, Ouganda, Ukraine, Émirats arabes unis, Royaume-Uni (UK), États-Unis d\'Amérique (USA), l\'Uruguay, Ouzbékistan, Vanuatu , Venezuela, Vietnam, Wallis et Futuna, au Sahara occidental, Yémen, Zambie, Zimbabwe."</string>
 	</resources>
