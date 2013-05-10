@@ -16,7 +16,7 @@ export ANDROID_NDK_ROOT=$ANDROID_NDK
 export ANDROID_NDK_TOOLCHAIN_VERSION=4.7
 
 if [ -z "$OSMAND_X86_ONLY" ] && [ -z "$OSMAND_ARM_ONLY" ] && [ -z "$OSMAND_ARMv5_ONLY" ] && [ -z "$OSMAND_ARMv7a_ONLY" ] && [ -z "$OSMAND_MIPS_ONLY" ]; then
-	BUILD_ALL=1
+	export BUILD_ALL=1
 	echo "BUILD_ALL set to true"
 fi
 
