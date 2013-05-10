@@ -238,7 +238,7 @@
   <string name="local_index_mi_backup">Deaktiválás</string>
   <string name="local_index_mi_delete">Törlés</string>
   <string name="local_index_mi_reload">Újratöltés SD kártyáról</string>
-  <string name="local_index_download">Letöltés…</string>
+  <string name="local_index_download">Letöltés</string>
   <string name="local_index_tile_data">Csempe adat: %1$s \nMinimális nagyítás : %2$d\nMaximális nagyítás : %3$d\nLetöltendő : %4$s \nNagyítások letöltve : %5$s</string>
   <string name="local_index_poi_data">POI adat</string>
   <string name="local_index_address_data">Cím adat</string>
@@ -401,7 +401,7 @@
   <string name="loading_builds_failed">Az OsmAnd verziók listájának letöltése nem sikerült</string>
   <string name="loading_builds">OsmAnd verziók töltése…</string>
   <string name="select_build_to_install">A telepítéshez válassz egy OsmAnd buildet</string>
-  <string name="contribution_activity">Speciális tevékenység a támogatói változathoz</string>
+  <string name="contribution_activity">Telepítési verzió</string>
   <string name="gps_status_app_not_found">GPS Státusz alkalmazás nincs telepítve. Megkeresed a Marketen?</string>
   <string name="voice_is_not_available_msg">A beszéd alapú navigáció nem érhető el. A Beállításoknál kiválasztható vagy letölthető.</string>
   <string name="voice_is_not_available_title">Nincs kiválasztva hang adat</string>
@@ -1184,4 +1184,17 @@
 \n\t* Iránytűhöz Kalman-szűrő
 \n\t* Pebble óra támogatás "</string>
     <string name="save_current_track_widget">GPX nyomvonal\n mentése</string>
-	</resources>
+	<string name="street_name">Utca</string>
+	<string name="hno">Házszám</string>
+    <string name="monitoring_settings">Rögzítési szolgáltatások &amp; Alvó mód</string>
+    <string name="monitoring_settings_descr">Az útvonalak felvételének és az alvó állapotú használat beállításai</string>
+    <string name="osmand_monitoring_plugin_description">Útvonalrögzítés és navigáció alvó (kikapcsolt képernyős) módban az eszköz GPS vevőjének periodikus felébresztésével. Megjeleníti azokat a beállításokat, amik megkönnyítik az útvonal rögzítését GPX fájlba, vagy online webszolgáltatásra.</string>
+    <string name="osmand_monitoring_plugin_name">Rögzítési szolgáltatások &amp; Alvó mód</string>
+    <string name="choose_osmand_theme_descr">Alkalmazástéma kiválasztása</string>
+    <string name="choose_osmand_theme">Téma</string>
+    <string name="accessibility_options">Kisegítő lehetőségek</string>
+    <string name="select_address_activity">Cím kiválasztása</string>
+    <string name="favourites_list_activity">Kedvenc kiválasztása</string>
+    <string name="local_openstreetmap_act_title">OSM módosítások</string>
+    <string name="default_buttons_other_actions">Egyéb műveletek</string>
+    </resources>
