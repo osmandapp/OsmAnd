@@ -194,7 +194,7 @@
   <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
-  <string name="local_index_download">Downlaod…</string>
+  <string name="local_index_download">Scarica</string>
   <string name="local_index_tile_data">Dati anteprime: %1$s
 \nZoom minimo: %2$d\nZoom massimo: %3$d\nScaricabile: %4$s
 \nZoom scaricati: %5$s</string>
@@ -615,7 +615,7 @@
   <string name="data_settings_descr">Specifica la lingua, scarica/ricarica i dati</string>
   <string name="data_settings">Dati</string>
   <string name="map_preferences_descr">Specifica impostazioni mappa: fonte, rotazione, marcatore di posizione, orientazione schermo</string>
-  <string name="osm_settings">Modifica OSM</string>
+  <string name="osm_settings">Modifiche OSM</string>
   <string name="auto_zoom_map_descr">Zoom mappa automatico relativo alla velocità (fintanto che la mappa è sincronizzata con la posizione corrente)</string>
   <string name="auto_zoom_map">Zoom automatico mappa</string>
   <string name="additional_settings">Impostazioni aggiuntive</string>
