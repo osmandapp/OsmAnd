@@ -1203,4 +1203,19 @@
 \n\t* Διόρθωση σφαλμάτων "</string>
     <string name="save_current_track_widget">Αποθήκευση
 \n τρέχοντος ίχνους GPX</string>
-	</resources>
+	<string name="street_name">Οδός</string>
+	<string name="hno">Αριθμός σπιτιού</string>
+    <string name="tip_recent_changes_1_5_t">"Αλλαγές στην 1.5:
+\n\t* Holo Theme (προσαρμογή θεμάτων) "</string>
+    <string name="monitoring_settings">Υπηρεσίες καταγραφής &amp; Κατάσταση Νάρκης</string>
+    <string name="monitoring_settings_descr">Διαμορφώστε πως θα καταγράφονται τα ταξίδια και ενεργοποίηση της κατάστασης νάρκης</string>
+    <string name="osmand_monitoring_plugin_name">Υπηρεσίες καταγραφής &amp; Κατάσταση Νάρκης</string>
+    <string name="choose_osmand_theme_descr">Επιλογή θέματος εφαρμογής</string>
+    <string name="choose_osmand_theme">Θέμα Εφαρμογής</string>
+    <string name="accessibility_options">Επιλογές προσβασιμότητας</string>
+    <string name="select_address_activity">Επιλογή διεύθυνσης</string>
+    <string name="favourites_list_activity">Επιλογή αγαπημένου</string>
+    <string name="local_openstreetmap_act_title">Τροποποιήσεις OSM</string>
+    <string name="default_buttons_other_actions">Άλλες ενέργειες</string>
+    <string name="av_def_action_choose">Επιλογή κατά την ζήτηση</string>
+    </resources>
