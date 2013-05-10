@@ -391,8 +391,8 @@
   <string name="renderers_descr">Elige apariencia de visualización de mapas vectoriales</string>
   <string name="poi_context_menu_website">Mostrar sitio web del PDI</string>
   <string name="poi_context_menu_call">Mostrar teléfono del PDI</string>
-  <string name="website">sitio web</string>
-  <string name="phone">teléfono</string>
+  <string name="website">Sitio web</string>
+  <string name="phone">Teléfono</string>
   <string name="download_type_to_filter">escriba el filtro</string>
   <string name="use_high_res_maps">Pantalla de alta resolución</string>
   <string name="use_high_res_maps_descr">No estira (ni hace borrosas) las teselas de mapa en pantallas de alta densidad</string>
@@ -764,7 +764,7 @@
   <string name="map_settings">- Configuraciones de Mapa</string>
   <string name="map_settings_descr">Configurar la pantalla del mapa</string>
   <string name="osmand_rastermaps_plugin_description">Muestra opciones para configurar diversos mapas teselados, online o guardados, como mapa base o como mapa superpuesto / subyacente. Estos mapas también se pueden preparar offline y copiarlos en la carpeta de OsmAnd.</string>
-  <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar seguimiento y navegación en modo de bajo consumo (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
+  <string name="osmand_background_plugin_description">Muestra configuraciones para habilitar el seguimiento y la navegación en modo suspensión (pantalla apagada) activando periódicamente el dispositivo GPS.</string>
   <string name="osmand_accessibility_description">Mostrar configuraciones para características especiales de accesibilidad.</string>
   <string name="extra_settings">Configuraciones avanzadas</string>
   <string name="osmand_monitoring_description">Este plugin facilita el registro de sus excursiones a un fichero GPX o monitorizarlo en directo usando un servicio web.</string>
@@ -1064,7 +1064,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="use_distance_measurement">Toca para hacer un punto, mantén presionado para eliminar el punto anterior, pulsa en el mecanismo de medición para salir.</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
     <string name="audionotes_location_not_defined">La localización no está definida aún para tomar notas de audio</string>
-    <string name="monitoring_control_stop">parar</string>
+    <string name="monitoring_control_stop">para</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="srtm_plugin_attribution">ASTER es un producto de METI y NASA</string>
     <string name="recording_is_recorded">Se está grabando audio/vídeo. Para pararlo, pulsa el botón Para del mecanismo.</string>
@@ -1078,7 +1078,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="recording_context_menu_delete">Eliminar grabación</string>
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_default_name">grabación</string>
-    <string name="av_control_stop">Para</string>
+    <string name="av_control_stop">para</string>
     <string name="av_control_start">A/V</string>
     <string name="map_widget_av_notes">Notas de audio</string>
     <string name="av_def_action_video">Grabar vídeo</string>
@@ -1115,11 +1115,11 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="support_new_features_descr">Dona para ver nuevas características implementadas en la aplicación</string>
 	<string name="download_hillshade_item">Sombreado</string>
     <string name="download_hillshade_maps">Mapas de sombreado</string>
-    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y arreglada\n\t* Paquetes de sombreado para el extra de curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
+    <string name="tip_recent_changes_1_1_2_t">"Cambios en 1.1.2:\n\t* Mejoras en extra de Audio/vídeo (fotos con información EXIF)\n\t* Usabilidad del extra de curvas de nivel reestructurada y arreglada\n\t* Paquetes de sombreado para el extra de Curvas de nivel\n\t* Corrección de errores (enrutamiento subóptimo) "</string>
     <string name="av_use_external_camera_descr">Usa la aplicación del sistema para fotografía</string>
     <string name="av_use_external_camera">Usar aplicación de la cámara</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
-    <string name="tip_recent_changes_1_2_t">"Cambios en 1.2: "</string>
+    <string name="tip_recent_changes_1_2_t">"Arreglos en 1.2.1:\n\t* Arreglado Geo Intent (Foursquare, c: geo)\n\t* Arreglado el temblor de pantalla durante la navegación\n\t* Otras pequeñas correcciones\nCambios en 1.2:\n\t* Corrección de errores (enrutamiento afinado, búsqueda, grabación de AV, los mensajes de voz, algunas mejoras de visualización)\n\t* Configuración de superposición de sombreado más fácil (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces de localización de maps.google.com\n\t* Nuevo control (Información GPS)\n\t* Filtro de Kalman para brújula\n\t* Soporte para reloj Pebble\n\t* Añadido soporte multiventana para nuevos dispositivos Samsung "</string>
     <string name="prefer_motorways">Prefiero autopistas</string>
 	<string name="prefer_in_routing_title">Prefiero…</string>
 	<string name="prefer_in_routing_descr">Preferencia por autopistas</string>
@@ -1134,6 +1134,20 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
 	<string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
-	<string name="tip_recent_changes_1_1_4_t">Cambios en 1.1.4:\n\t* Corrección de errores (mejorados enrutamiento, búsqueda, grabación de AV, mensajes de voz, algunas mejoras de visualización)\n\t* Configuración más fácil de superposición de sombreado (requiere extra de Curvas de Nivel)\n\t* Ahora acepta enlaces a ubicaciones de maps.google.com\n\t* Agregado soporte multi-ventana para los dispositivos más recientes de Samsung\n\t* Filtro de Kalman para brújula\n \t* Soporte para reloj Pebble</string>
+	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "</string>
     <string name="save_current_track_widget">Guardar\ntraza GPX actual</string>
-	</resources>
+	<string name="street_name">Calle</string>
+	<string name="hno">Nº</string>
+    <string name="tip_recent_changes_1_5_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "</string>
+    <string name="monitoring_settings">Servicios de registro y Modo de suspensión</string>
+    <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo de suspensión</string>
+    <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>
+    <string name="osmand_monitoring_plugin_name">Servicios de registro y Modo de suspensión</string>
+    <string name="choose_osmand_theme_descr">Elije el tema, el aspecto, de la aplicación</string>
+    <string name="choose_osmand_theme">Tema</string>
+    <string name="accessibility_options">Opciones de accesibilidad</string>
+    <string name="select_address_activity">Selecciona la dirección</string>
+    <string name="favourites_list_activity">Selecciona favorito</string>
+    <string name="local_openstreetmap_act_title">Modificaciones OSM</string>
+    <string name="default_buttons_other_actions">Otras acciones</string>
+    </resources>
