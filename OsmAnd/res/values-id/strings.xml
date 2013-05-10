@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -10,18 +10,64 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
   <string name="address_search_desc">Mencari alamat</string>
-  <string name="navpoint_search_desc">"Kordinat "</string>
+  <string name="navpoint_search_desc">Koordinat</string>
   <string name="transport_search_desc">Mencari transportasi</string>
   <string name="favourites_search_desc">Mencari favorit</string>
   <string name="history_search_desc">Mencari sejarah</string>
   <string name="rendering_attr_noPolygons_name">Tidak ada poligon</string>
   <string name="rendering_attr_appMode_name">Modus render</string>
   <string name="rendering_attr_appMode_description">Peta dioptimisasi untuk Profile yang diharapkan</string>
-  <string name="rendering_attr_contourLines_description">Pilih tingkat pembesaran minimum untuk menampilkan peta jika memungkinkan. Pisahkan file SRTM bilamana diperlukan</string>
+  <string name="rendering_attr_contourLines_description">Tampilan dari tingkatan pembesaran (membutuhkan data kontur):</string>
   <string name="rendering_attr_contourLines_name">Tampilkan garis jejak</string>
-  <string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
+  <string name="rendering_attr_hmRendered_description">Naikkan jumlah detail peta yang ditampilkan</string>
   <string name="rendering_attr_hmRendered_name">Tampilkan peta lebih lengkap</string>
   <string name="route_kl">Tetap dikiri dan jalan</string>
   <string name="save_route_as_gpx">Simpan jejak sebagai file GPX</string>
   <string name="asap">ASAP</string>
-</resources>
+<string name="street_name">Jalan</string>
+	<string name="hno">Nomor rumah</string>
+    <string name="website">Website</string>
+	<string name="phone">Telp</string>
+    <string name="tip_recent_changes_1_5_t">"Perubahan pada 1.5:
+\n\t* Holo Theme (kustomisasi tema) "</string>
+    <string name="monitoring_settings">Layanan pencatatan &amp; Mode Sleep</string>
+    <string name="monitoring_settings_descr">Atur bagaimana ingin mencatat perjalanan dan mengaktifkan mode sleep</string>
+    <string name="osmand_monitoring_plugin_description">Mengaktifkan tracking dan navigasi pada mode sleep (layar mati) dengan secara periodik mengaktifkan GPS. Menampilkan pengaturan yang memfasilitasi pencatatan perjalanan anda ke file GPX lokal atau online lewat web service.</string>
+    <string name="osmand_monitoring_plugin_name">Layanan pencatatan &amp; Mode Sleep</string>
+    <string name="osmand_background_plugin_description">Menampilkan pengaturan untuk mengaktifkan tracking dan navigasi pada mode sleep (layar mati) dengan secara periodik mengaktifkan GPS.</string>
+    <string name="contribution_activity">Instal versi</string>
+    <string name="choose_osmand_theme_descr">Pilih tema aplikasi</string>
+    <string name="choose_osmand_theme">Tema App</string>
+    <string name="accessibility_options">Opsi aksesibilitas</string>
+    <string name="select_address_activity">Pilih alamat</string>
+    <string name="favourites_list_activity">Pilih favorit</string>
+    <string name="local_openstreetmap_act_title">Modifikasi OSM</string>
+    <string name="default_buttons_other_actions">Perintah lain</string>
+    <string name="save_current_track_widget">Simpan
+\n track GPX sekarang</string>
+	<string name="tip_recent_changes_1_2_t">"Perbaikan pada 1.2.1:
+\n\t*Perbaikan Geo Intent (Foursquare, c:geo)
+\n\t*Perbaikan getaran layar saat navigasi
+\n\t*Perbaikan kecil lain
+\nPerubahan pada 1.2:
+\n\t* Perbaikan bug (routing lebih baik, pencarian, AV recording, voice prompts, beberapa perbaikan tampilan)
+\n\t* Konfigurasi overlay hillshade yang lebih mudah (membutuhkan plugin Contour Lines)
+\n\t* Sekarang bsia menerima link lokasi dari maps.google.com
+\n\t* Widget baru (GPS info)
+\n\t* Menambahkan dukungan banyak window untuk Samsung
+\n\t* Filter Kalman untuk kompas
+\n\t* Dukungan Pebble watch "</string>
+    <string name="map_widget_gps_info">Info GPS</string>
+    <string name="tip_recent_changes_1_1_4_t">"Perubahan pada 1.1.4:
+\n\t* redesain UI
+\n\t* Perbaikan bug "</string>
+    <string name="access_arrival_time">Waktu tiba</string>
+    <string name="map_view">Peta</string>
+    <string name="prefer_motorways">Utamakan jalan raya</string>
+	<string name="prefer_in_routing_title">Utamakan…</string>
+	<string name="prefer_in_routing_descr">Utamakan jalan raya</string>
+    <string name="max_speed_none">tidak ada</string>
+    <string name="download_hillshade_maps">Overlay Hillshade</string>
+    <string name="dist_control_start">mulai</string>
+    <string name="local_indexes_cat_av">Data Audio/Video</string>
+    </resources>
