@@ -561,7 +561,7 @@
   <string name="use_short_object_names">Usar nomes de objetos</string>
   <string name="accessibility_preferences_descr">Preferências relacionadas com a acessibilidade</string>
   <string name="accessibility_preferences">Acessibilidade</string>
-  <string name="use_fluorescent_overlays">Fluorescent overlays</string>
+  <string name="use_fluorescent_overlays">Sobreposições Fluorescentes</string>
   <string name="use_fluorescent_overlays_descr">Use cores fluorescentes para exibir faixas e rotas</string>
   <string name="offline_edition">Edição offline</string>
   <string name="offline_edition_descr">Usar sempre edição offline</string>
@@ -710,7 +710,7 @@
   <string name="local_index_mi_backup">Desactivar</string>
   <string name="local_index_mi_delete">Apagar</string>
   <string name="local_index_mi_reload">Refresh</string>
-  <string name="local_index_download">Download…</string>
+  <string name="local_index_download">Download</string>
   <string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nDownloadable : %4$s \nZooms downloaded : %5$s</string>
   <string name="local_index_poi_data">Dados POI</string>
   <string name="local_index_address_data">Dados de Endereço</string>
@@ -742,7 +742,7 @@
   <string name="choose_audio_stream_descr">Escolha o canal para orientação por voz (dependente do sistema)</string>
   <string name="voice_stream_voice_call">Áudio da chamada de voz</string>
   <string name="voice_stream_notification">Áudio de Notificação</string>
-  <string name="voice_stream_music">"Áudio de Media/Música "</string>
+  <string name="voice_stream_music">Áudio de Media/Música</string>
   <string name="warning_tile_layer_not_downloadable">A aplicação não consegue fazer download da camada %1$s do mapa, tente novamente.</string>
   <string name="overlay_transparency_descr">Modificar a transparência da sobreposição</string>
   <string name="overlay_transparency">Transparência da Sobreposição</string>
@@ -1096,4 +1096,13 @@
     <string name="tip_recent_changes_1_0_0_t">Mudanças em 1.0.0:\n\t* Melhorado cálculo de rota: mais rápido, mais preciso e até 250 km
 \n\t* Incluída opção de mapas apenas com estradas\n\t* Mapa não perde posição após interrupções\n\t* Permitido modo de serviço oculto durante a navegação</string>
     <string name="monitoring_settings">Serviços de monitoramento e Serviço em segundo plano</string>
+    <string name="choose_osmand_theme_descr">Escolha o tema da aplicação</string>
+    <string name="choose_osmand_theme">Tema da aplicaçao</string>
+    <string name="accessibility_options">Opções de acessibilidade</string>
+    <string name="select_address_activity">Selecione o endereço</string>
+    <string name="favourites_list_activity">Selecione favorito</string>
+    <string name="local_openstreetmap_act_title">Modificaçoes OSM</string>
+    <string name="default_buttons_other_actions">Outras acções</string>
+    <string name="layer_hillshade">Camada de Sombras de relevo</string>
+    <string name="map_widget_gps_info">Informação de GPS</string>
     </resources>
