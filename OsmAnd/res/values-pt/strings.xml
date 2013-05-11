@@ -931,7 +931,7 @@
 <string name="map_widget_day_night">Modo Dia/noite</string>
 <string name="map_widget_vector_attributes">Atributos de renderização:</string>
 <string name="map_widget_renderer">Estilo de renderização</string>
-<string name="live_monitoring_mode_off">Iniciar\n viver rastreamento</string>
+<string name="live_monitoring_mode_off">Iniciar\n rastreamento online</string>
 <string name="live_monitoring_mode_on">Parar\n viver rastreamento</string>
 <string name="layer_map_appearance">Configurar tela…</string>
 <string name="show_lanes">Mostrar pistas</string>
@@ -1091,4 +1091,9 @@
 	<string name="tip_rotation_switching_t_v2">"\tVocê pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.\n\tAs opções são:\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima\n\t\'Na direção do movimento\' - Mapa será continuamente alinhado com a sua direção\n\t\'Na direção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "</string>
 	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada por sensor de luz do dispositivo (se equipado) "</string>	
 	<string name="incomplete_locale">incompleto</string>
-	</resources>
+	<string name="street_name">Rua</string>
+	<string name="hno">Numero de casa</string>
+    <string name="tip_recent_changes_1_0_0_t">Mudanças em 1.0.0:\n\t* Melhorado cálculo de rota: mais rápido, mais preciso e até 250 km
+\n\t* Incluída opção de mapas apenas com estradas\n\t* Mapa não perde posição após interrupções\n\t* Permitido modo de serviço oculto durante a navegação</string>
+    <string name="monitoring_settings">Serviços de monitoramento e Serviço em segundo plano</string>
+    </resources>
