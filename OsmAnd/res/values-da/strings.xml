@@ -76,7 +76,7 @@
     <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
 	<string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og video/audio noter med din dropbox-konto.</string>
     <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
-	<string name="rendering_attr_showRoadMaps_name">kort kun med veje</string>
+	<string name="rendering_attr_showRoadMaps_name">Kort kun med veje</string>
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktivere det i indstillinger).</string>
@@ -97,7 +97,7 @@
     <string name="map_widget_monitoring_services">Logningstjenester</string>
 	<string name="no_route">Ingen rute</string>
 	<string name="delete_target_point">Fjern waypoint</string>
-	<string name="navigate_to">Angiv som destination</string>
+	<string name="navigate_to">Brug som destination</string>
     <string name="context_menu_item_last_intermediate_point">Tilføj som sidste waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Tilføj som første waypoint</string>
     <string name="add_as_last_destination_point">Tilføj som sidste waypoint</string>
@@ -197,7 +197,7 @@
 	<string name="screen_is_locked">Tryk låseikon for at låse skærmen op</string>
 	<string name="map_widget_top_text">Gadenavn</string>
 	<string name="map_widget_config">Konfigurer skærm</string>
-	<string name="map_widget_map_select">Kortkilde</string>
+	<string name="map_widget_map_select">Vælg kortkilde</string>
 	<string name="map_widget_back_to_loc">Hvor er jeg</string>
 	<string name="map_widget_lock_screen">Lås skærm</string>
 	<string name="map_widget_compass">Kompas</string>
@@ -424,7 +424,7 @@
 	<string name="local_openstreetmap_settings_descr">Vis og håndter OSM POI/fejl registreret i lokal database</string>
 	<string name="live_monitoring_descr">Send sporing til en specifik webservice</string>
 	<string name="live_monitoring">Online sporing</string>
-	<string name="live_monitoring_interval_descr">Angiv online sporingsinterval</string>
+	<string name="live_monitoring_interval_descr">Indstil online sporingsinterval</string>
 	<string name="live_monitoring_interval">Online sporingsinterval</string>
 	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Online sporing webadresse</string>
@@ -453,7 +453,7 @@
 	<string name="profile_settings">Profilspecifikke indstillinger</string>
 	<string name="settings_preset">Brugerprofiler</string>
 	<string name="settings_preset_descr">Vælg en brugerprofil med tilrettede kort og navigationsindstillinger.</string>
-	<string name="routing_settings_descr">Angiv indstillinger for navigation</string>
+	<string name="routing_settings_descr">Indstillinger for navigation</string>
 	<string name="global_settings">Globale indstillinger</string>
 	<string name="index_settings">Datahåndtering</string>
 	<string name="general_settings">Generelt</string>
@@ -466,7 +466,7 @@
 	<string name="osmand_service">Dvaletilstand funktionalitet</string>
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
-	<string name="binary_map_download_success">Hentning lykkedes.\n\n\tAktiver under \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
+	<string name="binary_map_download_success">Hentning lykkedes.\n\n\tAktiver under \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -692,7 +692,7 @@
 	<string name="gpx_option_reverse_route">Omvendt GPX-retning</string>
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere ad hele sporet</string>
-	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at bruge dem aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Kortkilde…\' \'Offline vektor-kort\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at bruge dem aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmevejledning kanal</string>
 	<string name="choose_audio_stream_descr">Vælg kanal til at afspille stemmevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
@@ -885,13 +885,13 @@
 	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_osm_bugs">OSM-fejl</string>
 	<string name="layer_transport">Stoppesteder</string>
-	<string name="layer_map">Kortkilde…</string>
+	<string name="layer_map">Vælg kortkilde…</string>
 	<string name="menu_layers">Definer visninger</string>
 	<string name="context_menu_item_search_poi">Søg POI</string>
 	<string name="context_menu_item_show_route">Vis rute herfra</string>
 	<string name="use_trackball_descr">Brug trackball for at flytte kortet</string>
 	<string name="use_trackball">Brug trackball</string>
-	<string name="background_service_wait_int_descr">Angiv maksimal ventetid mellem hver positionssøgning i baggrunden</string>
+	<string name="background_service_wait_int_descr">Indstil maksimal ventetid i baggrunden mellem hver positionssøgning</string>
 	<string name="background_service_wait_int">Maksimal ventetid på låsning</string>
 	<string name="service_stop_background_service">Sluk for OsmAnd navigationsservice i dvaletilstand</string>
 	<string name="where_am_i">Hvor er jeg?</string>
@@ -899,7 +899,7 @@
 	<string name="int_seconds">sekunder</string>
 	<string name="background_service_int_descr">Indstil vågn-op interval som anvendes af dvale tilstandsservice</string>
 	<string name="background_service_int">Vågn-op interval</string>
-	<string name="background_service_provider_descr">Angiv placeringsudbyder der bruges af dvale tilstandsservice</string>
+	<string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af dvale tilstandsservice</string>
 	<string name="background_service_provider">Placeringsudbyder</string>
 	<string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore din placering, mens skærmen er slukket</string>
 	<string name="background_router_service">Kør i dvaletilstand</string>
@@ -981,7 +981,7 @@
 	<string name="osb_close_dialog_close_button">Luk fejlrapport</string>
 	<string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>
 	<string name="osb_comment_dialog_author">Forfatternavn</string>
-	<string name="favourites_context_menu_navigate">Angiv som dest.</string>
+	<string name="favourites_context_menu_navigate">Brug som dest.</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 	<string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
 	<string name="default_buttons_add">Tilføj</string>
@@ -990,7 +990,7 @@
 	<string name="context_menu_item_create_poi">Opret POI</string>
 	<string name="context_menu_item_update_map">Opdater kort</string>
 	<string name="context_menu_item_add_favorite">Tilføj til favoritter</string>
-	<string name="context_menu_item_navigate_point">Angiv som destination</string>
+	<string name="context_menu_item_navigate_point">Brug som destination</string>
 	<string name="search_tabs_location">Lokation</string>
 	<string name="search_address_street_option">Krydsende vej</string>
 	<string name="search_address_building_option">Bygning</string>
@@ -1108,10 +1108,10 @@
 	<string name="download_indexes">Hent offline-data</string>
 	<string name="use_online_routing_descr">Brug internettet til at beregne rute</string>
 	<string name="use_online_routing">Brug online-navigation</string>
-	<string name="osm_settings_descr">Angiv indstillinger for OpenStreetMap.org (OSM), som kræves for bidrag til OSM</string>
+	<string name="osm_settings_descr">Indstillinger for OpenStreetMap.org (OSM), som kræves for bidrag til OSM</string>
 	<string name="data_settings_descr">Angiv sprog, hent/genindlæs data</string>
 	<string name="data_settings">Data</string>
-	<string name="map_preferences_descr">Angiv kortindstillinger: kortkilde, rotation, markørplacering og skærmorientering</string>
+	<string name="map_preferences_descr">Indstil kortindstillinger: kortkilde, rotation, markørplacering og skærmorientering</string>
 	<string name="osm_settings">OSM redigering</string>
 	<string name="additional_settings">Yderligere indstillinger</string>
 	<string name="settings">Indstillinger</string>
@@ -1136,10 +1136,10 @@
 	<string name="choose_street">Vælg gade</string>
 	<string name="choose_city">Vælg by</string>
 	<string name="ChooseCountry">Vælg land</string>
-	<string name="map_specify_point">Angiv som destination</string>
+	<string name="map_specify_point">Brug som destination</string>
 	<string name="show_view_angle">Vis synsretning</string>
 	<string name="stop_navigation">Ryd dest.</string>
-	<string name="navigate_to_point">Angiv som dest.</string>
+	<string name="navigate_to_point">Brug som dest.</string>
 	<string name="map_view_3d_descr">Aktiver 3D-visning af kortet</string>
 	<string name="map_view_3d">3D-kortvisning</string>
 	<string name="show_poi_over_map_description">Vis POI over kortet (brug det sidst valgte filter)</string>
