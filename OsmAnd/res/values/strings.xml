@@ -28,7 +28,7 @@
     <string name="accessibility_options">Accessibility options</string>
     <string name="select_address_activity">Select address</string>
     <string name="favourites_list_activity">Select favorite</string>
-    <string name="local_openstreetmap_act_title">OSM modificaions</string>
+    <string name="local_openstreetmap_act_title">OSM modifications</string>
     <string name="default_buttons_other_actions">Other actions</string>
     <string name="save_current_track_widget">Save
         \n current GPX track</string>
