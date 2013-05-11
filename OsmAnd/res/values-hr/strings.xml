@@ -142,7 +142,7 @@
 	<string name="map_widget_back_to_loc">Gdje sam</string>
 	<string name="map_widget_lock_screen">Zaključaj zaslon</string>
 	<string name="map_widget_compass">Kompas</string>
-	<string name="map_widget_top_stack">Statusna traka</string>
+	<string name="map_widget_top_stack">Statusna traka:</string>
 	<string name="map_widget_reset">Resetiraj na zadano</string>
 	<string name="map_widget_right_stack">Desni panel:</string>
 	<string name="map_widget_left_stack">Lijevi panel:</string>
@@ -189,7 +189,7 @@
 	<string name="left_side_navigation">Vožnja lijevom stranom</string>
 	<string name="left_side_navigation_descr">Označi za države s vožnjom na lijevoj strani</string>
 	<string name="context_menu_item_directions">Upute do ovdje</string>
-	<string name="local_indexes_cat_map">Offline karate (vektor)</string>
+	<string name="local_indexes_cat_map">Offline karte (vektorske)</string>
 	<string name="online_map_settings">Online karte</string>
 	<string name="map_settings">Postavke karte</string>
 	<string name="extra_settings">Napredne postavke</string>
@@ -920,4 +920,5 @@
     <string name="street_name">Ulica</string>
 	<string name="save_current_track_widget">Spremi
 \n trenutni GPX</string>
-	</resources>
+	<string name="select_address_activity">Odaberite adresu</string>
+    </resources>
