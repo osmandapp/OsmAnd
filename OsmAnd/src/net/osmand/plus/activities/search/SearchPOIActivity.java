@@ -59,8 +59,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.Spannable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ForegroundColorSpan;
+import android.text.util.Linkify;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -475,8 +478,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			
 			@Override
 			public void onClick(View v) {
-				Builder bs = new AlertDialog.Builder(v.getContext());
-				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.USE_ENGLISH_NAMES.get()));
+				// Build text
 				StringBuilder d = new StringBuilder();
 				if(amenity.getOpeningHours() != null) {
 					d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
@@ -490,8 +492,22 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				if(amenity.getDescription() != null) {
 					d.append(amenity.getDescription());
 				}
-				bs.setMessage(d.toString());
-				bs.show();
+
+				// Find and format links
+				SpannableString spannable = new SpannableString(d);
+				Linkify.addLinks(spannable, Linkify.ALL);
+
+				// Create dialog
+				Builder bs = new AlertDialog.Builder(v.getContext());
+				bs.setTitle(OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(),
+						settings.USE_ENGLISH_NAMES.get()));
+				bs.setMessage(spannable);
+				AlertDialog dialog = bs.show();
+
+				// Make links clickable
+				TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+				textView.setMovementMethod(LinkMovementMethod.getInstance());
+				textView.setLinksClickable(true);
 			}
 		});
 		qa.addActionItem(poiDescription);
