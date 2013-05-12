@@ -598,7 +598,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="local_index_mi_backup">Deaktivieren</string>
 	<string name="local_index_mi_delete">Löschen</string>
 	<string name="local_index_mi_reload">Liste aktualisieren</string>
-	<string name="local_index_download">Herunterladen …</string>
+	<string name="local_index_download">Herunterladen</string>
 	<string name="local_index_tile_data">Kacheldaten: %1$s \nMinimale Vergrößerung: %2$d\nMaximale Vergrößerung: %3$d\nHerunterladbar: %4$s \nHeruntegeladene Vergrößerungen: %5$s</string>
 	<string name="local_index_poi_data">POI-Daten</string>
 	<string name="local_index_address_data">Adress-Daten</string>
@@ -1409,4 +1409,18 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="map_widget_gps_info">GPS Info</string>
     <string name="save_current_track_widget">GPX-Track\n speichern</string>
 	<string name="tip_recent_changes_1_1_4_t">Änderungen in Version 1.1.4\n\t* Benutzeroberfläche neu gestaltet\n\t* weitere Fehlerbehebungen</string>
+    <string name="street_name">Straße</string>
+	<string name="hno">Hausnummer</string>
+    <string name="tip_recent_changes_1_5_t">"Änderungen in 1.5:\n\t * Holo-Theme (Anpassung des Theme) "</string>
+    <string name="monitoring_settings">Logging-Dienst &amp; Schlaf-Modus</string>
+    <string name="monitoring_settings_descr">Konfigurieren Sie, wie Tracks aufgezeichnet und der Schlaf-Modus aktiviert werden soll</string>
+    <string name="osmand_monitoring_plugin_description">Aktivieren Sie Tracking und die Navigation im Schlaf-Modus (Bildschirm aus). Das GPS-Gerät wird regelmäßig aktiviert. Zeigt Ihre Einstellungen zum Aufzeichnen Ihrer Wege als lokale GPX-Datei oder online bei einem Web-Service.</string>
+    <string name="osmand_monitoring_plugin_name">Logging-Dienst &amp; Schlaf-Modus</string>
+    <string name="choose_osmand_theme_descr">Theme der Anwendung auswählen</string>
+    <string name="accessibility_options">Zugänglichkeits-Einstellungen</string>
+    <string name="select_address_activity">Adresse auswählen</string>
+    <string name="favourites_list_activity">Favorit auswählen</string>
+    <string name="local_openstreetmap_act_title">OSM-Bearbeitungen</string>
+    <string name="default_buttons_other_actions">Andere Aktionen</string>
+    <string name="choose_osmand_theme">Theme der App</string>
     </resources>
