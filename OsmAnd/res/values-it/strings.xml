@@ -1116,7 +1116,7 @@
 	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il più lento Android invece del codice nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
     <string name="native_library_not_running">L\'applicazione è in esecuzione in modalità sicura (disabilitala nelle Impostazioni).</string>
-    <string name="background_service_is_enabled_question">Il servizio OsmAnd modalità quiescente è ancora in esecuzione. Si desidera arrestarlo?</string>
+    <string name="background_service_is_enabled_question">Il servizio OsmAnd modalità quescente è ancora in esecuzione. Si desidera arrestarlo?</string>
     <string name="tip_recent_changes_1_0_0_t">"Novità della versione 1.0.0:\n\t*Migliorata la navigazione: più veloce e precisa, fino a 250 km\n\t*Aggiunte le mappe solo-strade\n\t*La mappa non perde il posizionamento dopo le interruzioni\n\t*Abilitazione del servizio in background durante la navigazione "</string>
     <string name="route_descr_lat_lon">Lat %1$.3f lon %2$.3f</string>
     <string name="route_descr_current_location">Posizione corrente</string>
@@ -1239,7 +1239,7 @@
     <string name="monitoring_settings">Servizi di registrazione e modalità quiesciente</string>
     <string name="monitoring_settings_descr">Configura come registrare viaggi e attivare la modalità quiesciente</string>
     <string name="osmand_monitoring_plugin_description">Attivare il monitoraggio e la navigazione nella modalità quiescente (schermo spento) attraverso periodici risvegli del dispositivo GPS. Mostra impostazioni che facilitano la registrazione dei vostri viaggi in file GPX locali o online utilizzando un servizio web.</string>
-    <string name="osmand_monitoring_plugin_name">Servizi di registrazione e modalità quiescente</string>
+    <string name="osmand_monitoring_plugin_name">Servizi di registrazione e modalità quescente</string>
     <string name="choose_osmand_theme_descr">Scegli il tema dell\'applicazione</string>
     <string name="choose_osmand_theme">Tema dell\'app</string>
     <string name="accessibility_options">Opzioni di accessibilità</string>
