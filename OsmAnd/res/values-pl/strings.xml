@@ -206,9 +206,9 @@
   <string name="add_waypoint_dialog_added">Punkt pośredni \'\'{0}\'\' został dodany</string>
   <string name="add_waypoint_dialog_title">Dodaj punkt pośredni do śladu GPX</string>
   <string name="context_menu_item_add_waypoint">Dodaj punkt do GPX</string>
-  <string name="amenity_type_administrative">Administracja</string>
-  <string name="amenity_type_barrier">Bariery</string>
-  <string name="amenity_type_education">Szkoły</string>
+  <string name="amenity_type_administrative">Administracyjne</string>
+  <string name="amenity_type_barrier">Przeszkody</string>
+  <string name="amenity_type_education">Edukacja</string>
   <string name="amenity_type_emergency">Służby ratunkowe</string>
   <string name="amenity_type_entertainment">Rozrywka</string>
   <string name="amenity_type_finance">Finanse</string>
@@ -226,11 +226,11 @@
   <string name="amenity_type_sport">Sport</string>
   <string name="amenity_type_sustenance">Jedzenie</string>
   <string name="amenity_type_tourism">Turystyka</string>
-  <string name="amenity_type_transportation">Transport publiczny</string>
+  <string name="amenity_type_transportation">Transport</string>
   <string name="indexing_address">Indeksowanie adresów…</string>
   <string name="indexing_map">Indeksowanie map…</string>
   <string name="indexing_poi">Indeksowanie POI…</string>
-  <string name="indexing_transport">Indeksowanie transportu publicznego…</string>
+  <string name="indexing_transport">Indeksowanie transportu…</string>
   <string name="input_output_error">Wystąpił błąd wejścia/wyjścia</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
@@ -309,7 +309,7 @@
   <string name="transport_searching_transport">Rezultat wyszukiwania komunikacji (brak celu):</string>
   <string name="transport_searching_route">Rezultat wyszukiwania komunikacji ({0} do celu):</string>
   <string name="transport_search_none">Żaden</string>
-  <string name="transport_search_again">Search transport again</string>
+  <string name="transport_search_again">Resetuj wyszukiwanie transportu</string>
   <string name="map_index">Mapa</string>
   <string name="voice">Głos</string>
   <string name="no_vector_map_loaded">Mapy wektorowe nie zostały wczytane</string>
@@ -449,7 +449,7 @@
   <string name="search_online_address">Internet</string>
   <string name="max_level_download_tile">Maks. zoom online</string>
   <string name="max_level_download_tile_descr">Wybierz maksymalny poziom przybliżenia mapy dla pobierania kafelków map online</string>
-  <string name="route_general_information">Dystans całkowity %1$s, czas podróży %2$d h %3$d m.</string>
+  <string name="route_general_information">Całkowity dystans %1$s, czas podróży %2$d h %3$d m.</string>
   <string name="router_service_descr">Wybierz usługę nawigacyjną (online lub offline)</string>
   <string name="router_service">Usługa nawigacyjna</string>
   <string name="sd_dir_not_accessible">Katalog zapisu na karcie SD jest niedostępny</string>
@@ -817,7 +817,7 @@
   <string name="index_name_asia">Azja</string>
   <string name="index_name_oceania">Oceania</string>
   <string name="index_name_other">Mapy świata i tematyczne</string>
-  <string name="index_name_wiki">Ogólnoświatowa Wikipedia POI</string>
+  <string name="index_name_wiki">Wikipedia dla POI</string>
   <string name="index_name_voice">Zestawy głosów (nagrane)</string>
   <string name="index_name_tts_voice">Zestawy głosów (TTS)</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -1158,7 +1158,11 @@
     <string name="av_use_external_camera_descr">Użyj aplikacji systemowej do robienia zdjęć</string>
     <string name="av_use_external_camera">Użyj aplikacji aparatu</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2:
+    <string name="tip_recent_changes_1_2_t">"Zmiany w 1.2.1:
+\n\t* Naprawiony intent Geo (Foursquare, c:geo)
+\n\t* Naprawiono drganie ekranu podczas nawigacji
+\n\t* Mniejsze poprawki
+\n\nZmiany w 1.2:
 \n\t* Naprawa błędów (dopieszczona nawigacja, wyszukiwarka, nagrywanie AV, instrukcje głosowe, poprawki w wyświetlaniu)
 \n\t* Łatwiejsza konfiguracja warstwy cieniującej (wymaga wtyczki rysującej poziomice)
 \n\t* Akceptowane są linki lokalizacji z maps.google.com
