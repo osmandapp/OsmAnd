@@ -1140,4 +1140,12 @@
 	<string name="tip_map_switch_t_v2">"\tМапи і шари можна змінювати вибравши \"Налаштування вигляду\" (іконка глобуса) на екрані мапи\n\tВ \"Джерела мап...\" можна вибрати попередньо завантажені векторі мапи, онлайн мапи з різних джерел (для використання потрібно увімкнути плагін \"Онлайн мапи\") або самостійно створені мапи (наприклад, за допомогою OsmAndMapCreator для ПК) "</string>
 	<string name="navigate_to_point">Йти до</string>
 	<string name="stop_navigation">Очист. п.п</string>
-	</resources>
+	<string name="street_name">Вулиця</string>
+	<string name="hno">Номер будинку</string>
+    <string name="tip_recent_changes_1_5_t">"Зміни в 1.5\n\t* Holo Тема (налаштування теми) "</string>
+    <string name="choose_osmand_theme_descr">Виберіть тему для програми</string>
+    <string name="choose_osmand_theme">Тема</string>
+    <string name="select_address_activity">Виберіть адресу</string>
+    <string name="favourites_list_activity">Виберіть улюблені</string>
+    <string name="default_buttons_other_actions">Інші дії</string>
+    </resources>
