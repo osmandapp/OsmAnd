@@ -1482,8 +1482,8 @@
 
 		<filter tag="railway" value="preserved" minzoom="13" color="#999999" strokeWidth="3" color_2="#ffffff" strokeWidth_2="1" pathEffect_2="0_1_8_1"/>
 
-		<filter layer="-1" tag="railway" value="narrow_gauge" minzoom="15" color="#666666" strokeWidth="5" color_2="#cccccc" strokeWidth_2="3" pathEffect="5_3"/>
-		<filter tag="railway" value="narrow_gauge" minzoom="15" color="#666666" strokeWidth="2"/>
+		<filter layer="-1" tag="railway" value="narrow_gauge" minzoom="13" color="#666666" strokeWidth="5" color_2="#cccccc" strokeWidth_2="3" pathEffect="5_3"/>
+		<filter tag="railway" value="narrow_gauge" minzoom="13" color="#666666" strokeWidth="2"/>
 
 		<filter layer="1" tag="railway" value="construction" minzoom="13" color="#000000" strokeWidth="5" color_2="#999999" strokeWidth_2="4" color_3="#ff6600" strokeWidth_3="1" pathEffect_3="12_8_1_0"/>
 		<filter tag="railway" value="construction" minzoom="13" color="#999999" strokeWidth="3" color_2="#ff6600" strokeWidth_2="1" pathEffect_2="8_12"/>
