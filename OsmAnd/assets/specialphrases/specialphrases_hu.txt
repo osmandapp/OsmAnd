@@ -1,4 +1,3 @@
-
 aerodrome,Repülőtér
 arts_centre,Művészeti központ
 atm,Bankautomata
@@ -29,7 +28,6 @@ dormitory,Kollégium
 drinking_water,Ivóvíz
 driving_school,Autósiskola
 embassy,Nagykövetség
-embassy,Nagykövetségek
 emergency_phone,Segélyhívó
 fast_food,Gyorsétterem
 ferry_terminal,Kompkikötő
@@ -37,21 +35,21 @@ fire_hydrant,Tűzcsap
 fire_station,Tűzoltóság
 fountain,Szökőkút
 fuel,Benzinkút
-grave_yard,Kis temető
+grave_yard,Sírkert
 gym,Fitness- / Tornaterem
 hall,Csarnok
 health_centre,Egészségügyi központ
 hospital,Kórház
 hotel,Szálloda
 hunting_stand,Magasles
-ice_cream,Jégkrém
+ice_cream,Fagyizó
 kindergarten,Óvoda
 library,Könyvtár
 market,Piac
 marketplace,Vásártér
 mountain_rescue,Hegyimentő
 nightclub,Éjszakai bár
-nursery,Óvoda
+nursery,Bölcsőde
 nursing_home,Idősek otthona
 office,Iroda
 park,Park
@@ -70,7 +68,6 @@ reception_area,Recepció
 recycling,Szelektív hulladékgyűjtő
 restaurant,Étterem
 retirement_home,Nyugdíjasotthon
-retirement_home,Nyugdíjasotthonok
 sauna,Szauna
 school,Iskola
 shelter,Esőház
@@ -81,7 +78,6 @@ studio,Stúdió
 supermarket,Szupermarket
 taxi,Taxi
 telephone,Nyilvános telefon
-telephone,Nyilvános telefonok
 theatre,Színház
 toilets,WC
 townhall,Városháza
@@ -101,34 +97,33 @@ church,Templom
 city_hall,Városháza
 commercial,Kereskedelmi épület
 dormitory,Kollégium
-entrance,Épületbejárat
+entrance,Bejárat
 faculty,Egyetemi épület
-farm,Tanyaépület
+farm,Tanya
 flats,Lakások
 garage,Garázs
 hall,Csarnok
 hospital,Kórházépület
 hotel,Szálloda
 house,Ház
-industrial,Ipari épület
-office,Irodaház
+industrial,Iparterület
+office,Iroda
 public,Középület
 residential,Lakóház
-retail,Kereskedelmi épület
-school,Iskolaépület
+retail,Kereskedelem
+school,Iskola
 shop,Bolt
 stadium,Stadion
 store,Áruház
 terrace,Sorház
 tower,Torony
 train_station,Vasútállomás
-university,Egyetemi épület
-&quot;yes&quot;,Épület
+university,Egyetem
 bridleway,Lovaglóút
 bus_guideway,Buszsín
 bus_stop,Buszmegálló
 byway,Kiépítetlen ösvény
-construction,Építés alatt álló közút
+construction,Építés alatt álló út
 cycleway,Kerékpárút
 distance_marker,Távolságjelölő
 emergency_access_point,Vészhelyzeti hozzáférési pont
@@ -147,13 +142,13 @@ primary,Főút
 primary_link,Főút
 raceway,Versenypálya
 residential,Lakóövezeti út
-road,Út
+road,Ismeretlen út
 secondary,Összekötő út
 secondary_link,Összekötő út
 service,Szervizút
 services,Autópálya-pihenőhely
 steps,Lépcső
-stile,Lépcsős átjáró
+stile,Létra
 tertiary,Bekötőút
 track,Földút
 trail,Túraút
@@ -161,6 +156,7 @@ trunk,Autóút
 trunk_link,Autóút
 unclassified,Egyéb út
 unsurfaced,Burkolatlan út
+unpaved, Burkolatlan
 archaeological_site,Régészeti lelőhely
 battlefield,Csatamező
 boundary_stone,Határkő
@@ -179,7 +175,7 @@ tower,Torony
 wayside_cross,Útszéli kereszt
 wayside_shrine,Útszéli kegyhely
 wreck,Hajóroncs
-allotments,Kert
+allotments,Zártkert
 basin,Medence
 brownfield,Barnamező
 cemetery,Temető
@@ -188,7 +184,7 @@ conservation,Védelmi terület
 construction,Építési terület
 farm,Tanya
 farmland,Mezőgazdasági terület
-farmyard,Tanya épületei
+farmyard,Tanyaudvar
 forest,Erdő
 grass,Füves terület
 greenfield,Zöldmező
@@ -206,8 +202,8 @@ quarry,Kőfejtő
 railway,Vasúti terület
 recreation_ground,Szabadidőpark
 reservoir,Víztározó
-residential,Lakóövezet
-retail,Kereskedelmi terület
+residential,Lakó
+retail,Kereskedelem
 village_green,Közös mező
 vineyard,Szőlős
 wetland,Láp
@@ -229,10 +225,10 @@ slipway,Sólya
 sports_centre,Sportközpont
 stadium,Stadion
 swimming_pool,Uszoda
-track,Futópálya
+track,Pálya
 water_park,Vízipark
 bay,Öböl
-beach,Part
+beach,Strand
 cape,Partfok
 cave_entrance,Barlangbejárat
 channel,Csatorna
@@ -270,9 +266,10 @@ wetland,Láp
 wetlands,Láp
 wood,Erdő
 city,Nagyváros
-city,Nagyváross
+city,Város
 country,Ország
 county,Megye
+district,Kerület
 farm,Tanya
 hamlet,Község
 house,Ház
@@ -291,26 +288,25 @@ suburb,Városrész
 town,Város
 unincorporated_area,Jogi személyiséggel nem rendelkező terület
 village,Nagyközség
-village,Nagyközségs
 abandoned,Felhagyott vasút
 construction,Építés alatt álló vasút
 disused,Használaton kívüli vasút
 disused_station,Használaton kívüli vasútállomás
 funicular,Siklóvasút
 halt,Vasúti megállóhely
-historic_station,Történelmi vasútállomás
+historic_station,Megszűnt vasútállomás
 junction,Vasúti csomópont
 level_crossing,Vasúti átjáró
 light_rail,HÉV
 monorail,Egysínű vasút
-narrow_gauge,Keskeny nyomközű vasút
-platform,Vasúti peron
+narrow_gauge,Keskeny nyomtávú vasút
+platform,Peron
 preserved,Megőrzött vasút
 spur,Vasúti szárnyvonal
 station,Vasútállomás
 subway,Metróállomás
 subway_entrance,Metrókijárat
-switch,Vasúti váltó
+switch,Váltó
 tram,Villamos
 tram_stop,Villamosmegálló
 yard,Rendező-pályaudvar
@@ -322,28 +318,28 @@ beauty,Szépészeti bolt
 beverages,Italbolt
 bicycle,Kerékpárbolt
 books,Könyvesbolt
-butcher,Hentesbolt
+butcher,Hentes
 car,Autókereskedés
 car_dealer,Autókereskedés
-car_parts,Autóalkatrészbolt
+car_parts,Autóalkatrész
 car_repair,Autószerviz
 carpet,Szőnyegbolt
 charity,Adománybolt
 chemist,Vegyipari bolt
-clothes,Ruházati bolt
-computer,Számítástechnikai bolt
+clothes,Ruhabolt
+computer,Számítástechnika
 confectionery,Cukrászda
 convenience,Kisbolt
-copyshop,Fénymásoló bolt
-cosmetics,Kozmetikai bolt
+copyshop,Fénymásoló
+cosmetics,Kozmetikus
 department_store,Áruház
 discount,Diszkontárubolt
 doityourself,Barkácsbolt
-drugstore,Illatszerbolt
+drugstore,Dogéria
 dry_cleaning,Ruhatisztító
 electronics,Elektronikai bolt
 estate_agent,Ingatlankereskedés
-farm,Kertészbolt
+farm,Farm
 fashion,Divatbolt
 fish,Halbolt
 florist,Virágárus
@@ -351,7 +347,7 @@ food,Élelmiszerbolt
 funeral_directors,Temetkezési vállalkozó
 furniture,Bútorbolt
 gallery,Galéria
-garden_centre,Cserepes virágbolt
+garden_centre,Kertészet
 general,Vegyeskereskedés
 gift,Ajándékbolt
 greengrocer,Zöldséges
@@ -370,7 +366,7 @@ motorcycle,Motorbolt
 music,Zenebolt
 newsagent,Újságárus
 optician,Látszerész
-organic,Bioélelmiszerbolt
+organic,Biobolt
 outdoor,Túrabolt
 pet,Állatkereskedés
 photo,Fotóbolt
@@ -384,7 +380,7 @@ toys,Játékbolt
 travel_agency,Utazási iroda
 video,Videókölcsönző
 wine,Borárusító italbolt
-alpine_hut,Alpesi kunyhó
+alpine_hut,Hegyi kunyhó
 artwork,Műalkotás
 attraction,Látnivaló
 bed_and_breakfast,Vendégház
@@ -392,7 +388,6 @@ cabin,Kunyhó
 camp_site,Kemping
 caravan_site,Lakókocsitábor
 chalet,Nyaralóház
-chalet,Nyaralóházs
 guest_house,Vendégház
 hostel,Turistaszálló
 hotel,Szálloda
@@ -412,10 +407,10 @@ dam,Gát
 derelict_canal,Felhagyott csatorna
 ditch,Árok
 dock,Kikötõ
-drain,Árok
+drain,Kiépített árok
 lock,Zsilip
 lock_gate,Zsilip
-mineral_spring,Ásványos patak
+mineral_spring,Ásványvízforrás
 mooring,Kikötő
 rapids,Zuhatag
 river,Folyó
