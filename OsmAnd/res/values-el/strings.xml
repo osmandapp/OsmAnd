@@ -313,11 +313,11 @@
 	<string name="local_openstreetmap_settings">Τοπικά αποθηκευμένα ΣΕ/Σφάλματα OSM</string>
 	<string name="local_openstreetmap_settings_descr">Εμφάνιση και διαχείριση των ΣΕ/Σφαλμάτων OSM σημειωμένων στην τοπική βάση δεδομένων</string>
 	<string name="live_monitoring_descr">Αποστολή ιχνηλάτησης σε μια συγκεκριμένη υπηρεσία web</string>
-	<string name="live_monitoring">Online ιχνηλάτηση σε πραγματικό χρόνο</string>
-	<string name="live_monitoring_interval_descr">Καθορίστε το διάστημα της ιχνηλάτησης πραγματικού χρόνου</string>
-	<string name="live_monitoring_interval">Διάστημα ιχνηλάτησης πραγματικού χρόνου</string>
+	<string name="live_monitoring">Online ιχνηλάτηση</string>
+	<string name="live_monitoring_interval_descr">Καθορίστε το διάστημα της online ιχνηλάτησης</string>
+	<string name="live_monitoring_interval">Διάστημα online ιχνηλάτησης</string>
 	<string name="live_monitoring_url_descr">Καθορίστε τη διεύθυνση web με την σύνταξη παραμέτρων : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
-	<string name="live_monitoring_url">Διεύθυνση web ιχνηλάτησης πραγματικού χρόνου</string>
+	<string name="live_monitoring_url">Διαδικτυακή διεύθυνση online ιχνηλάτησης</string>
 	<string name="gpx_monitoring_disabled_warn">Παρακαλώ ενεργοποιήστε τις ρυθμίσεις \'Εγγραφή ίχνους σε αρχείο GPX\'.</string>
 	<string name="show_current_gpx_title">Εμφάνιση τρέχοντος ίχνους</string>
 	<string name="tip_recent_changes_0_7_0_t">"Αλλαγές στην 0.7.0 :
@@ -339,7 +339,7 @@
 	<string name="index_name_asia">Ασία</string>
 	<string name="index_name_oceania">Ωκεανία</string>
 	<string name="index_name_other">Παγκόσμιοι και τοπικοί χάρτες</string>
-	<string name="index_name_wiki">Παγκόσμια Wikipedia</string>
+	<string name="index_name_wiki">ΣΕ Παγκόσμιας Wikipedia</string>
 	<string name="index_name_voice">Πακέτα Γλώσσας (εγγραφή)</string>
 	<string name="index_name_tts_voice">Πακέτα γλώσσας (TTS)</string>
 	<string name="amenity_type_wikiosm">Wikipedia (εκτός σύνδεσης)</string>
@@ -352,8 +352,8 @@
 	<string name="routing_settings_descr">Καθορίστε τις επιλογές πλοήγησης</string>
 	<string name="global_settings">Καθολικές ρυθμίσεις</string>
 	<string name="index_settings">Διαχείριση Δεδομένων</string>
-	<string name="general_settings">Γενικές ρυθμίσεις</string>
-	<string name="general_settings_descr">Διαμόρφωση καθολικών ρυθμίσεων</string>
+	<string name="general_settings">Γενικές</string>
+	<string name="general_settings_descr">Διαμόρφωση οθόνης και κοινές ρυθμίσεις για την εφαρμογή</string>
 	<string name="global_app_settings">Καθολικές ρυθμίσεις εφαρμογής</string>
 	<string name="user_name">Όνομα χρήστη OSM</string>
 	<string name="user_name_descr">Απαιτείται για υποβολές στο openstreetmap.org</string>
