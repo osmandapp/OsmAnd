@@ -1205,7 +1205,9 @@
     <string name="av_use_external_camera_descr">Utiliser l\'application système pour les photos</string>
     <string name="av_use_external_camera">Option appareil photo</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
-    <string name="tip_recent_changes_1_2_t">"Changements en 1.2 : "</string>
+    <string name="tip_recent_changes_1_2_t">"Corrections en 1.2 :
+\n     *Correction Geo Intent (Foursquare, c:geo)\n     *Correction temblements écran pendant la navigation\n     *Corrections mineures\nChangements en 1.2 :
+\n     *Corrections de bugs (navigation, recherche, enregistrement video, instructions vocales, améliorations d\\\'affichage)\n     *Configuration plus facile de la couche d\\\'ombrage de relief (nécessite le greffon des courbes de niveau)\n     *Accepte les liens de positions de maps.google.com\n     *Nouveau widget (GPS info)\n     *Ajout support multi-fenêtre pour les appareils Samsung récents\n     *Filtre Kalman pour la boussole\n     *Support des montres Pebble"</string>
     <string name="max_speed_none">Aucun(e)</string>
     <string name="prefer_motorways">Autoroutes de préférence</string>
 	<string name="prefer_in_routing_title">Préférences</string>
