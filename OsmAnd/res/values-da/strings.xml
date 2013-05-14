@@ -25,7 +25,7 @@
     <string name="recording_context_menu_arecord">Optag lydnote</string>
     <string name="srtm_paid_version_title">Højdekurve udvidelse</string>
     <string name="recording_context_menu_vrecord">Optag videonote</string>
-    <string name="layer_recordings">Optagelseslaget</string>
+    <string name="layer_recordings">Optagelser</string>
     <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
     <string name="recording_context_menu_delete">Slet optagelse</string>
     <string name="recording_context_menu_play">Afspil</string>
@@ -189,7 +189,7 @@
 	<string name="map_widget_show_ruler">Lineal</string>
 	<string name="map_widget_appearance">Diverse:</string>
 	<string name="map_widget_view_direction">Synsretning</string>
-	<string name="map_widget_transparent">Gennemsigtig skin</string>
+	<string name="map_widget_transparent">Gennemsigtig layout</string>
 	<string name="monitoring_mode_off">Optag
 \nGPX</string>
 	<string name="monitoring_mode_on">Stop\n GPX-opt.</string>
@@ -273,7 +273,7 @@
 	<string name="gpxup_identifiable">Identificerbar</string>
 	<string name="gpxup_trackable">Sporbar</string>
 	<string name="gpxup_private">Privat</string>
-	<string name="asap">U-VEND</string>
+	<string name="asap">VEND!</string>
 	<string name="save_route_as_gpx">Gem rute som GPX-fil</string>
 	<string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
 	<string name="route_kl">Hold til venstre og kør</string>
@@ -777,7 +777,7 @@
 	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
 	<string name="use_osmand_routing_service_descr">Brug af OsmAnd offline navigation gælder kun ruter &gt; 20 km (eksperimentel)</string>
 	<string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
-	<string name="application_dir">Lagringsmappe</string>
+	<string name="application_dir">Filmappe</string>
 	<string name="build_installed">Build {0} korrekt installeret ({1}).</string>
 	<string name="downloading_build">Henter build…</string>
 	<string name="install_selected_build">Vil du installere OsmAnd - {0} fra {1} {2} MB ?</string>
@@ -1043,7 +1043,7 @@
 	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
 	<string name="router_service">Navigationstjeneste</string>
-	<string name="sd_dir_not_accessible">Lagringsmappe på SD-kortet kan ikke åbnes</string>
+	<string name="sd_dir_not_accessible">Filmappen på SD-kortet kan ikke åbnes</string>
 	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Vil du opdatere ({2})?</string>
 	<string name="download_question">Hent {0} - {1} ?</string>
 	<string name="address">Adresse</string>
@@ -1106,7 +1106,7 @@
 	<string name="save_current_track">Gem nuværende GPX-spor</string>
 	<string name="save_track_interval">Logningsinterval</string>
 	<string name="save_track_interval_descr">Vælg positioneringsinterval for sporing</string>
-	<string name="save_track_to_gpx_descrp">Spor bliver gemt til track-mappen grupperet efter dage</string>
+	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen grupperet efter dage</string>
 	<string name="save_track_to_gpx">Log spor til GPX-fil</string>
 	<string name="update_tile">Opdater kort</string>
 	<string name="reload_tile">Genindlæs delkort</string>
