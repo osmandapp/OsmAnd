@@ -83,7 +83,7 @@
     <string name="background_service_is_enabled_question">Baggrundtjeneste kører stadig. Ønsker du at afbryde?</string>
     <string name="tip_recent_changes_1_0_0_t">"Ændringer i 1.0.0:
 \n\t* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
-\n\t* Introducere kun vejkort
+\n\t* Introducere kort kun med veje
 \n\t* Kort mister ikke positionlås efter afbrydelser
 \n\t* Aktiver tjeneste i baggrunden under navigation "</string>
     <string name="close_changeset">Luk ændringspost</string>
@@ -97,7 +97,8 @@
     <string name="map_widget_monitoring_services">Logningstjenester</string>
 	<string name="no_route">Ingen rute</string>
 	<string name="delete_target_point">Fjern rutepunkt</string>
-	<string name="navigate_to">Brug som destination1</string>
+	<string name="navigate_to">Brug som
+\ndestination</string>
     <string name="context_menu_item_last_intermediate_point">Tilføj som sidste rutepunkt</string>
     <string name="context_menu_item_first_intermediate_point">Tilføj som første rutepunkt</string>
     <string name="add_as_last_destination_point">Tilføj som sidste rutepunkt</string>
@@ -272,7 +273,7 @@
 	<string name="gpxup_identifiable">Identificerbar</string>
 	<string name="gpxup_trackable">Sporbar</string>
 	<string name="gpxup_private">Privat</string>
-	<string name="asap">Hurtigst muligt</string>
+	<string name="asap">U-VEND</string>
 	<string name="save_route_as_gpx">Gem rute som GPX-fil</string>
 	<string name="route_roundabout">Rundkørsel: tag afkørsel %1$d</string>
 	<string name="route_kl">Hold til venstre og kør</string>
@@ -324,7 +325,7 @@
 	<string name="osmand_background_plugin_description">Vis indstillinger til at aktivere sporing og navigation i dvale (slukket skærm) tilstand via periodisk at vække GPS-enheden.</string>
 	<string name="osmand_accessibility_description">Vis indstillinger for specielle tilgængelighedsfunktioner.</string>
 	<string name="extra_settings">Avancerede indstillinger</string>
-	<string name="osmand_monitoring_description">Vis indstillinger til at muliggøre optagelse af dine ture til lokale GPX-filer eller online via en webservice.</string>
+	<string name="osmand_monitoring_description">Vis indstillinger til at muliggøre optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlagskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd mappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
 	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som animeret navigation eller renderings ydeevne.</string>
@@ -579,7 +580,7 @@
 \n\t- Indbygget rendering på alle enheder\n\t- Offline interessepunkt-redigering\n\t- Tilgængelighed\n\t- Rettet mange fejl "</string>
 	<string name="tip_recent_changes_0_7_1_t">"Ændringer i 0.7.1:
 \n\t- Offline interessepunkt-redigering
-\n\t- Online sporings valgmulighed - send periodisk koordinater til en web service (læs hvordan opsætter din egen web service i HowTo artiklerne)\n\t- Vis den aktuelle optagende sporing på kort
+\n\t- Online sporings valgmulighed - send periodisk koordinater til en webtjeneste (læs hvordan opsætter din egen webtjeneste i HowTo artiklerne)\n\t- Vis den aktuelle optagende sporing på kort
 \n\t- Retnings sensor: \'Lav U-vending\' vises og siges når der køres i modsatte retning eller efter et misset sving
 \n\t- Ny stemme kommando \'Rute genberegnet\'
 \n\t- Visuel visning af et kommende sving inden for 100m ved at svingpilen skifter farve
@@ -670,7 +671,7 @@
 	<string name="voice_not_use">Brug ikke</string>
 	<string name="voice_not_specified">Ingen</string>
 	<string name="installing_new_resources">Udpakker nye data…</string>
-	<string name="internet_connection_required_for_online_route">En online navigationsservice er valgt, men der er ingen tilgængelig internet forbindelse.</string>
+	<string name="internet_connection_required_for_online_route">En online navigationstjeneste er valgt, men der er ingen tilgængelig internet forbindelse.</string>
 	<string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
 	<string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-stemme) motor. Vil du søge i Google Play efter en anden motor? Ellers vil standard TTS-sprog blive brugt.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
@@ -742,19 +743,19 @@
 	<string name="add_waypoint_dialog_title">Tilføj rutepunkt til optaget GPX-spor</string>
 	<string name="context_menu_item_add_waypoint">Tilføj GPX-rutepunkt</string>
 	<string name="amenity_type_administrative">Administrativ</string>
-	<string name="amenity_type_barrier">Barriere</string>
+	<string name="amenity_type_barrier">Forhindringer</string>
 	<string name="amenity_type_education">Uddannelse</string>
 	<string name="amenity_type_entertainment">Underholdning</string>
 	<string name="amenity_type_finance">Finansiel</string>
-	<string name="amenity_type_healthcare">Sundhedsydelser</string>
+	<string name="amenity_type_healthcare">Sundhed</string>
 	<string name="amenity_type_historic">Historisk</string>
 	<string name="amenity_type_leisure">Fritid</string>
 	<string name="amenity_type_manmade">Menneskeskabt</string>
 	<string name="amenity_type_military">Militær</string>
-	<string name="amenity_type_natural">Naturlig</string>
+	<string name="amenity_type_natural">Natur</string>
 	<string name="amenity_type_office">Kontor</string>
 	<string name="amenity_type_other">Andet</string>
-	<string name="amenity_type_shop">Butik</string>
+	<string name="amenity_type_shop">Butikker - Indkøb</string>
 	<string name="amenity_type_sport">Sport</string>
 	<string name="amenity_type_tourism">Turisme</string>
 	<string name="amenity_type_transportation">Transport</string>
@@ -799,8 +800,8 @@
 \n\tFor at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Definer visning\'. "</string>
 	<string name="tip_recent_changes_1_1_4_t">"Ændringer i 1.1.4:\n\t* Redesign af brugerflade\n\t* Fejlrettelser "</string>
     <string name="tip_navigation_t">\tDu skal vælge et destination før du kan starte navigation. Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
-	<string name="amenity_type_landuse">Landbrug</string>
-	<string name="amenity_type_sustenance">Spisesteder</string>
+	<string name="amenity_type_landuse">Brug af landområder</string>
+	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Filter hentet</string>
@@ -877,19 +878,19 @@
 	<string name="context_menu_item_show_route">Vis rute herfra</string>
 	<string name="use_trackball_descr">Brug trackball for at flytte kortet</string>
 	<string name="use_trackball">Brug trackball</string>
-	<string name="background_service_wait_int_descr">Indstil maksimal ventetid i baggrunden mellem hver positionssøgning</string>
+	<string name="background_service_wait_int_descr">Indstil maksimal ventetid mellem hver positionssøgning i baggrunden</string>
 	<string name="background_service_wait_int">Maksimal ventetid på låsning</string>
-	<string name="service_stop_background_service">Sluk for OsmAnd navigationsservice i dvaletilstand</string>
+	<string name="service_stop_background_service">Sluk for OsmAnd navigationstjeneste i dvaletilstand</string>
 	<string name="where_am_i">Hvor er jeg?</string>
 	<string name="network_provider">Netværk</string>
 	<string name="int_seconds">sekunder</string>
-	<string name="background_service_int_descr">Indstil vågn-op interval som anvendes af dvale tilstandsservice</string>
+	<string name="background_service_int_descr">Indstil vågn-op interval som anvendes af dvaletilstand</string>
 	<string name="background_service_int">Vågn-op interval</string>
-	<string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af dvale tilstandsservice</string>
+	<string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af dvaletilstand</string>
 	<string name="background_service_provider">Placeringsudbyder</string>
 	<string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore din placering, mens skærmen er slukket</string>
 	<string name="background_router_service">Kør i dvaletilstand</string>
-	<string name="off_router_service_no_gps_available">Dvaletilstand navigationsservicen kræver en placeringsudbyder for kunne aktiveres.</string>
+	<string name="off_router_service_no_gps_available">Dvaletilstand navigationstjenesten kræver en placeringsudbyder for kunne aktiveres.</string>
 	<string name="hide_poi_filter">Skjul filter</string>
 	<string name="show_poi_filter">Vis filter</string>
 	<string name="menu_mute_off">Lyd er slået til</string>
@@ -976,7 +977,7 @@
 	<string name="context_menu_item_create_poi">Opret interessepunkt</string>
 	<string name="context_menu_item_update_map">Opdater kort</string>
 	<string name="context_menu_item_add_favorite">Tilføj til favoritter</string>
-	<string name="context_menu_item_navigate_point">Brug som destination3</string>
+	<string name="context_menu_item_navigate_point">Brug som destination</string>
 	<string name="search_tabs_location">Placering</string>
 	<string name="search_address_street_option">Krydsende vej</string>
 	<string name="search_address_building_option">Bygning</string>
@@ -992,7 +993,7 @@
 	<string name="application_dir_change_warning">Ændring af mappen der gemmes i medfører ikke flytning eller sletning af data. Det skal gøres separat og udenom OsmAnd. Fortsæt alligevel?</string>
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
 	<string name="voice_provider">Talevejledning</string>
-	<string name="voice_data_initializing">Initialiserer taledata…</string>
+	<string name="voice_data_initializing">Initialisere taledata…</string>
 	<string name="voice_data_not_supported">Ikke understøttet version af taledata</string>
 	<string name="voice_data_corrupted">De angivne taledata er fejlbehæftet</string>
 	<string name="voice_data_unavailable">De valgte taledata er ikke tilgængelig</string>
@@ -1036,12 +1037,12 @@
 	<string name="tip_map_context_menu_t">"\tKortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
 \n\tDette åbner en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
 \n\tKortets genvejsmenu indeholder alle handlinger der refererer til et punkt (en placering). "</string>
-	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentelfunktion og den virker ikke for afstande på mere end ca. 20 km.\n\nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
+	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.\n\nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="default_buttons_ok">OK</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
-	<string name="router_service_descr">Vælg en online eller offline navigationsservice</string>
-	<string name="router_service">Navigationsservice</string>
+	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
+	<string name="router_service">Navigationstjeneste</string>
 	<string name="sd_dir_not_accessible">Lagringsmappe på SD-kortet kan ikke åbnes</string>
 	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Vil du opdatere ({2})?</string>
 	<string name="download_question">Hent {0} - {1} ?</string>
