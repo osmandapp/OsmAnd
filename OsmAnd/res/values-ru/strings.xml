@@ -1135,4 +1135,6 @@
 <string name="tip_recent_changes_1_1_4_t">"Изменения в 1.1.4:\n\t* переработан интерфейс\n\t* исправление ошибок "</string>
     <string name="layer_hillshade">Слой рельефа местности</string>
     <string name="save_current_track_widget">Сохранить\n текущий GPX трэк</string>
-	</resources>
+	<string name="street_name">Улица</string>
+	<string name="hno">Номер дома</string>
+    </resources>
