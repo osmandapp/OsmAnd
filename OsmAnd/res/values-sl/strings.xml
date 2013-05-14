@@ -1170,4 +1170,12 @@
 \n trenutno sled GPX</string>
 	<string name="street_name">Ulica</string>
 	<string name="hno">Hišna številka</string>
+    <string name="tip_recent_changes_1_5_t">"Spremembe v 1.5:
+\n\t* Holo Theme (theme customization) "</string>
+    <string name="monitoring_settings">Stortive beleženja in način spanja</string>
+    <string name="osmand_monitoring_plugin_name">Stortive beleženja in način spanja</string>
+    <string name="select_address_activity">Izberite naslov</string>
+    <string name="favourites_list_activity">Izberite priljubljeno</string>
+    <string name="local_openstreetmap_act_title">Spremembe OSM</string>
+    <string name="default_buttons_other_actions">Druge aktivnosti</string>
     </resources>
