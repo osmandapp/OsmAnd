@@ -213,7 +213,7 @@
   <string name="local_index_mi_backup">Sauvegarder</string>
   <string name="local_index_mi_delete">Supprimer</string>
   <string name="local_index_mi_reload">Recharger depuis la carte SD</string>
-  <string name="local_index_download">Télécharger…</string>
+  <string name="local_index_download">Télécharger</string>
   <string name="local_index_tile_data">Cartes tuiles: %1$s
 \nZoom minimum : %2$d\nZoom maximum : %3$d\nTéléchargeable : %4$s
 \nZooms téléchargés : %5$s</string>
@@ -1238,7 +1238,7 @@
     <string name="choose_osmand_theme">Thème de l\'appli</string>
     <string name="accessibility_options">Options d\'accessibilité</string>
     <string name="select_address_activity">Sélectionner l\'adresse</string>
-    <string name="favourites_list_activity">Sélectionner un favopri</string>
+    <string name="favourites_list_activity">Sélectionner un favori</string>
     <string name="local_openstreetmap_act_title">Modifications OSM</string>
     <string name="default_buttons_other_actions">Autres actions</string>
     <string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) est une application cartographique et de navigation avec accès aux données libres OpenStreetMap (OSM), à la couverture mondiale de haute qualité. Toutes les données cartographiques peuvent être stockées sur la carte mémoire de votre appareil pour une utilisation hors ligne. OsmAnd fournit un routage GPS, avec guidage visuel et vocal, pour la voiture, le vélo ou le piéton.\nToutes les fonctionnalités principales fonctionnent à la fois en mode en ligne et hors ligne (sans connexion Internet).\n\nPrincipales fonctionnalités:\n\t- Navigation
