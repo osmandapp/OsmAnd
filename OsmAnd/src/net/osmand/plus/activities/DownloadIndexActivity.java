@@ -618,10 +618,27 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					downloadFilesPreCheckSpace(list);
+					downloadFilesCheckInternet(list);
 				}
 			});
 			msg.show();
+		} else {
+			downloadFilesCheckInternet(list);
+		}
+	}
+	
+	protected void downloadFilesCheckInternet(final List<DownloadEntry> list) {
+		if(!getMyApplication().getExternalServiceAPI().isWifiConnected()) {
+			Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(getString(R.string.download_using_mobile_internet));
+			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					downloadFilesPreCheckSpace(list);
+				}
+			});
+			builder.setNegativeButton(R.string.default_buttons_no, null);
+			builder.show();
 		} else {
 			downloadFilesPreCheckSpace(list);
 		}
@@ -659,6 +676,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			builder.show();
 		}
 	}
+	
+	
 
 	@Override
 	protected void onDestroy() {
