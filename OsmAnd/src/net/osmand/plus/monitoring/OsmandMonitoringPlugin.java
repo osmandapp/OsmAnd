@@ -182,11 +182,22 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		monitoringControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				boolean isTrackMonitored = settings.SAVE_TRACK_TO_GPX.get();
-				if (!isTrackMonitored) {
+				boolean wasTrackMonitored = settings.SAVE_TRACK_TO_GPX.get();
+				if (!wasTrackMonitored) {
 					app.getSavingTrackHelper().startNewSegment();
 				}
-				settings.SAVE_TRACK_TO_GPX.set(!isTrackMonitored);
+				settings.SAVE_TRACK_TO_GPX.set(!wasTrackMonitored);
+				final Intent serviceIntent = new Intent(map, NavigationService.class);
+				if (wasTrackMonitored) {
+					if (app.getNavigationService() != null && !app.getNavigationService().startedForNavigation()) {
+						app.stopService(serviceIntent);
+					}
+				} else {
+					if (app.getNavigationService() == null) {
+						app.getSettings().SERVICE_OFF_INTERVAL.set(0);
+						app.startService(serviceIntent);
+					}
+				}
 				
 				monitoringControl.updateInfo(null);
 			}
@@ -196,6 +207,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 	@Override
 	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
+		final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
 		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
 		qa.registerItem(off ? R.string.monitoring_mode_off : R.string.monitoring_mode_on, off ? R.drawable.monitoring_rec_inactive
 				: R.drawable.monitoring_rec_big, new OnContextMenuClick() {
@@ -212,10 +224,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 						public void onClick(DialogInterface dialog, int which) {
 							view.getSettings().SAVE_TRACK_INTERVAL.set(vs.value);
 							view.getSettings().SAVE_TRACK_TO_GPX.set(true);
+							if (view.getApplication().getNavigationService() == null) {
+								view.getSettings().SERVICE_OFF_INTERVAL.set(0);
+								view.getContext().startService(serviceIntent);
+							}
 						}
 					});
 				} else {
 					view.getSettings().SAVE_TRACK_TO_GPX.set(false);
+					if (view.getApplication().getNavigationService() != null && !view.getApplication().getNavigationService().startedForNavigation()) {
+						view.getContext().stopService(serviceIntent);
+					}
 				}
 			}
 		}, -1);
@@ -226,7 +245,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 		qa.registerItem(msgId, draw, new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
 				if (view.getApplication().getNavigationService() == null) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = view.getSettings().SERVICE_OFF_INTERVAL.get();
