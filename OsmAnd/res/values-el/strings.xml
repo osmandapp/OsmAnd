@@ -449,7 +449,7 @@
 	<string name="search_position_fixed">Fixed</string>
 	<string name="search_position_current_location">Τρέχουσα θέση…</string>
 	<string name="search_position_map_view">Τελευταία οπτική χάρτη</string>
-	<string name="select_search_position">Αναζήτηση κοντά :</string>
+	<string name="select_search_position">Αναζήτηση κοντά:</string>
 	<string name="context_menu_item_search">Αναζήτηση εδώ κοντά</string>
 	<string name="tip_recent_changes_0_6_7_t">"Πρόσφατες αλλαγές στην 0.6.7 :
 \n\t- Offline data manager (download, διαγραφή, activate / deactivate offline data directly in OsmAnd)
@@ -464,7 +464,7 @@
 \n\t- Bug fixes "</string>
 	<string name="save_route_dialog_title">Αποθήκευση διαδρομής ως ίχνος GPX</string>
 	<string name="route_successfully_saved_at">Η διαδρομή αποθηκεύτηκε με επιτυχία ως \'%1$s\'.</string>
-	<string name="filename_input">"Όνομα αρχείου : "</string>
+	<string name="filename_input">"Όνομα αρχείου: "</string>
 	<string name="file_with_name_already_exist">Υπάρχει ήδη αρχείο με το ίδιο όνομα.</string>
 	<string name="default_buttons_save">Αποθήκευση</string>
 	<string name="menu_save_directions">Αποθήκευση οδηγιών</string>
@@ -484,23 +484,23 @@
 	<string name="vector_map_not_needed">Όχι, ευχαριστώ</string>
 	<string name="basemap_missing">Λείπει ο βασικός παγκόσμιος χάρτης (καλύπτει όλο τον κόσμο στις μικρές κλίμακες). Παρακαλώ κατεβάστε το World_basemap_x.obf για ένα πλήρες περιβάλλον.</string>
 	<string name="vector_data_missing">"Δεν υπάρχουν offline δεδομένα στην κάρτα SD. Παρακαλώ κατεβάστε τα  ώστε να μπορέσετε να χρησιμοποιήσετε χάρτες χωρίς σύνδεση."</string>
-	<string name="local_index_gpx_info_show">\n\nΠατήστε και κρατήστε πατημένο για επιλογές</string>
+	<string name="local_index_gpx_info_show">\n\nΠατήστε και κρατήστε για επιλογές</string>
 	<string name="local_index_gpx_info_speed">\nΜέση ταχύτητα : %1$s
 \nΜέγιστη ταχύτητα : %2$s</string>
 	<string name="local_index_gpx_info_elevation">\nΜέσο υψόμετρο : %1$.0f μ\nΕλάχιστο υψόμετρο : %2$.0f μ\nΜέγιστο υψόμετρο : %3$.0f μ\nΑναβάσεις : %4$.0f μ\nΚαταβάσεις : %5$.0f μ</string>
-	<string name="local_index_gpx_info">Υποΐχνη : %1$d\nΣύνολο σημείων : %2$d\nΣημεία διαδρομής : %3$d\nΣύνολο απόστασης : %4$s\nΏρα έναρξης : %5$tF, %5$tR\nΏρα τερματισμού : %6$tF, %6$tR</string>
+	<string name="local_index_gpx_info">Υποΐχνη : %1$d\nΣύνολο σημείων : %2$d\nΣημεία διαδρομής : %3$d\nΣυνολική απόσταση : %4$s\nΏρα έναρξης : %5$tF, %5$tR\nΏρα τερματισμού : %6$tF, %6$tR</string>
 	<string name="local_index_installed">Έκδοση</string>
 	<string name="local_index_items_backuped">%1$d από %2$d αντικείμενο(α) απενεργοποιήθηκαν επιτυχώς.</string>
 	<string name="local_index_items_deleted">%1$d από %2$d αντικείμενο(α) διαγράφηκαν επιτυχώς.</string>
 	<string name="local_index_items_restored">%1$d από %2$d αντικείμενο(α) ενεργοποιήθηκαν επιτυχώς.</string>
 	<string name="local_index_no_items_to_do">Δεν υπάρχουν στοιχεία προς %1$s</string>
 	<string name="local_index_action_do">Πρόκειται να %1$s %2$s αντικείμενο(α). Συνέχεια?</string>
-	<string name="local_index_descr_title">Διαχειριστής offline δεδομένων</string>
+	<string name="local_index_descr_title">Διαχείριση δεδομένων</string>
 	<string name="local_index_mi_restore">Ενεργοποίηση</string>
 	<string name="local_index_mi_backup">Απενεργοποίηση</string>
 	<string name="local_index_mi_delete">Διαγραφή</string>
 	<string name="local_index_mi_reload">Επαναφόρτωση από την sdcard</string>
-	<string name="local_index_download">Λήψη…</string>
+	<string name="local_index_download">Λήψη</string>
 	<string name="local_index_tile_data">Δεδομένα πλακιδίων: %1$s
 \nΕλάχιστη κλίμακα : %2$d\nΜέγιστη κλίμακα : %3$d\nΜπορούν να ληφθούν : %4$s
 \nΛηφθέντες κλίμακες : %5$s</string>
@@ -510,7 +510,7 @@
 	<string name="local_index_map_data">Δεδομένα χάρτη</string>
 	<string name="local_indexes_cat_backup">Απενεργοποιημένο</string>
 	<string name="local_indexes_cat_tts">Δεδομένα Φωνής (TTS)</string>
-	<string name="local_indexes_cat_voice">Δεδομένα φωνής (εγγραφή)</string>
+	<string name="local_indexes_cat_voice">Δεδομένα φωνής (ηχογραφημένα)</string>
 	<string name="local_indexes_cat_gpx">Δεδομένα GPX</string>
 	<string name="local_indexes_cat_poi">Δεδομένα ΣΕ</string>
 	<string name="ttsvoice">Φωνή TTS</string>
@@ -532,7 +532,7 @@
 	<string name="installing_new_resources">Αποσυμπίεση νέων δεδομένων…</string>
 	<string name="internet_connection_required_for_online_route">Επιλέχτηκε μια online υπηρεσία πλοήγησης αλλά δεν υπάρχει σύνδεση στο διαδίκτυο.</string>
 	<string name="tts_language_not_supported_title">Η γλώσσα δεν υποστηρίζεται</string>
-	<string name="tts_language_not_supported">Η επιλεγμένη γλώσσα δεν υποστηρίζεται από την εγκατεστημένη μηχανή TTS (κείμενο σε ομιλία) του Android. Θέλετε να μεταβείτε στο Market για να κοιτάξετε για κάποια άλλη μηχανή TTS? Ειδάλλως θα χρησιμοποιηθεί η προεπιλεγμένη γλώσσα TTS.</string>
+	<string name="tts_language_not_supported">Η επιλεγμένη γλώσσα δεν υποστηρίζεται από την εγκατεστημένη μηχανή TTS (κείμενο σε ομιλία) του Android. Θέλετε να μεταβείτε στο Google Play για να αναζητήσετε κάποια άλλη μηχανή TTS? Ειδάλλως θα χρησιμοποιηθεί η προεπιλεγμένη γλώσσα TTS.</string>
 	<string name="tts_missing_language_data_title">Απουσία δεδομένων</string>
 	<string name="tts_missing_language_data">Δεν έχουν εγκατασταθεί δεδομένα για την επιλεγμένη γλώσσα. Θέλετε να μεταβείτε στο Google Play να τα εγκαταστήσετε;</string>
 	<string name="gpx_option_reverse_route">Αντιστροφή κατεύθυνσης GPX</string>
@@ -574,7 +574,7 @@
 \n\tΓια να εμφανιστούν όλα τα Αγαπημένα κατευθείαν στο χάρτη, στην οθόνη χάρτη ενεργοποιήστε το επίπεδο \'Αγαπημένα\' στο \'Μενού\' -&gt; \'Ορισμός εμφάνισης\'. "</string>
 	<string name="error_doing_search">Προέκυψε σφάλμα κατά την offline αναζήτηση</string>
 	<string name="search_offline_geo_error">Δεν ήταν δυνατή η ανάλυση της γεωγρ πρόθεσης \'% s\'</string>
-	<string name="search_osm_offline">Αναζήτηση διεύθυνσης χρησιμοποιώντας εκτός σύνδεσης χάρτες</string>
+	<string name="search_osm_offline">Αναζήτηση γεωγραφικής τοποθεσίας</string>
 	<string name="system_locale">Σύστημα</string>
 	<string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης</string>
 	<string name="preferred_locale">Γλώσσα εμφάνισης</string>
@@ -596,7 +596,7 @@
 \n\tΤο μενού περιβάλλοντος χάρτη περιέχει όλες τις ενέργειες που αφορούν το σημείο (τοποθεσία). "</string>
 	<string name="tip_initial">Συμβουλές και Κόλπα</string>
 	<string name="tip_initial_t">"\tΟ OsmAnd είναι μια εφαρμογή πλοήγησης με αρκετά χαρακτηριστικά.
-\n\tΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα στην κύρια οθόνη. "</string>
+\n\tΩς μια μικρή εισαγωγή, μερικές συμβουλές και κόλπα είναι συνδεδεμένα στην κύρια οθόνη (Δείτε το εικονίδιο \'?\'). "</string>
 	<string name="next_button">Επόμενο</string>
 	<string name="previous_button">Προηγούμενο</string>
 	<string name="unit_of_length_descr">Αλλαγή μονάδων μήκους και ταχύτητας</string>
