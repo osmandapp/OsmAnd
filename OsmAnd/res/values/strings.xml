@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     
-    <string name="download_using_mobile_internet">Currently WiFi is not connectted. Do you want to continue downloading with current internet connection?</string>
+    <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
     <string name="street_name">Street</string>
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
