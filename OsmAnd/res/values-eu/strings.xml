@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
   <string name="left_side_navigation">Trafikoa ezkerraldetik</string>
   <string name="left_side_navigation_descr">Trafikoa ezkerraldetik duten herrialdeentzako hautatu</string>
@@ -52,4 +52,46 @@
   <string name="bg_service_screen_unlock">Pantaila desblokeatu</string>
   <string name="bg_service_sleep_mode_off">Gaitu\n lo modua</string>
   <string name="bg_service_sleep_mode_on">Ezgaitu\n lo modua</string>
-</resources>
+<string name="street_name">Kalea</string>
+	<string name="hno">Etxeko zenbakia</string>
+    <string name="website">Web orria</string>
+	<string name="phone">Telefonoa</string>
+    <string name="tip_recent_changes_1_5_t">"Aldaketak 1.5:
+\n\t* Holo Theme (theme customization) "</string>
+    <string name="select_address_activity">Helbidea aukeratu</string>
+    <string name="access_arrival_time">Iristeko denbora</string>
+    <string name="map_view">Mapa</string>
+    <string name="dist_control_start">hasi</string>
+    <string name="av_def_action_picture">Argazkia atera</string>
+    <string name="recording_context_menu_precord">Argazkia atera</string>
+    <string name="av_def_action_video">Bideoa grabatu</string>
+    <string name="av_def_action_audio">Soinua grabatu</string>
+    <string name="av_use_external_camera">Kamera aplikazioa erabili</string>
+    <string name="av_settings">Soinu/bideo konfigurazioa</string>
+    <string name="recording_unavailable">ez erabilgarri</string>
+    <string name="recording_context_menu_arecord">Hartu soinu oharra</string>
+    <string name="recording_context_menu_vrecord">Hartu bideo ahorra</string>
+    <string name="av_control_stop">gelditu</string>
+    <string name="av_control_start">hasi</string>
+    <string name="map_widget_av_notes">Soinu/bideo oharrak</string>
+    <string name="osmand_distance_plugin_name">Distantzia kalkulagailua</string>
+    <string name="map_widget_distancemeasurement">Distantzia neurketa</string>
+    <string name="monitoring_control_stop">gelditu</string>
+    <string name="map_widget_audionotes">Soinu oharrak</string>
+    <string name="audionotes_plugin_name">Soinu/bideo oharrak</string>
+    <string name="download_select_map_types">Beste mapak</string>
+    <string name="download_roads_only_item">Errepideak bakarrik</string>
+    <string name="download_roads_only_maps">Errepideak-bakarrik mapak</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Mugak ezkutatu</string>
+	<string name="map_widget_max_speed">Abiadura muga</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_current_location">Oraingo kokapena</string>
+    <string name="route_descr_from_to">%1$s -tik\n%2$s -ra</string>
+    <string name="route_descr_from_to_via">%1$s -tik\n%2$s -ren bidez\n%3$s -ra</string>
+    <string name="search_villages_and_postcodes">Bilatu herriak/posta-kodeak</string>
+	<string name="rendering_attr_showRoadMaps_name">Errepideak-bakarrik mapak</string>
+    <string name="no_route">Rutarik gabe</string>
+	<string name="default_buttons_no">Ez</string>
+	<string name="default_buttons_yes">Bai</string>
+	</resources>
