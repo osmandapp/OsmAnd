@@ -5,19 +5,19 @@
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
     <string name="av_def_action_audio">Запись аудио</string>
-    <string name="av_widget_action_descr">Действие для виджета по умолчанию</string>
-    <string name="av_widget_action">Действие для виджета</string>
-    <string name="av_video_format_descr">Выберите видео формат</string>
-    <string name="av_video_format">Видео формат</string>
+    <string name="av_widget_action_descr">Выбрать действие по умолчанию для виджета</string>
+    <string name="av_widget_action">Действие по умолчанию для виджета</string>
+    <string name="av_video_format_descr">Выбрать формат видео</string>
+    <string name="av_video_format">Формат видео</string>
     <string name="av_use_external_recorder_descr">Использовать системную программу для записи видео</string>
     <string name="av_use_external_recorder">Использовать внешнюю программу</string>
-    <string name="av_settings_descr">Настройки аудио-видео записи</string>
-    <string name="recording_error">Ошибка во время записи </string>
-    <string name="recording_camera_not_available">Камера не доступна</string>
+    <string name="av_settings_descr">Настройка аудио и видео</string>
+    <string name="recording_error">Произошла ошибка при записи</string>
+    <string name="recording_camera_not_available">Камера недоступна</string>
     <string name="recording_is_recorded">Аудио-видео записывается. Для остановки нажмите \"стоп\".</string>
     <string name="recording_playing">Проигрывается аудио.\n%1$s</string>
-    <string name="recording_open_external_player">Открыть внешний плеер</string>
-    <string name="recording_delete_confirm">Вы хотите удалить данную запись?</string>
+    <string name="recording_open_external_player">Открыть внешний проигрыватель</string>
+    <string name="recording_delete_confirm">Вы хотите удалить эту запись?</string>
     <string name="tip_recent_changes_1_1_0_t">Изменения в 1.1.0 :
 		\n\t* Калькулятор расстояний (плагин)
 		\n\t* Аудио-видео заметки (плагин)
@@ -27,11 +27,11 @@
     </string>
     <string name="recording_unavailable">недоступно</string>
     <string name="recording_context_menu_arecord">Сделать аудио заметку</string>
-    <string name="recording_context_menu_vrecord">Сделать видео заметку</string>
-    <string name="layer_recordings">Слой аудио записей</string>
-    <string name="recording_can_not_be_played">Запись не может быть проиграна</string>
+    <string name="recording_context_menu_vrecord">Создать видео заметку</string>
+    <string name="layer_recordings">Слой аудиозаписей</string>
+    <string name="recording_can_not_be_played">Запись не может быть воспроизведена</string>
     <string name="recording_context_menu_delete">Удалить запись</string>
-    <string name="recording_context_menu_play">Проиграть</string>
+    <string name="recording_context_menu_play">Воспроизвести</string>
     <string name="recording_description">Запись %1$s %2$s at %3$s</string>
     <string name="recording_default_name">запись</string>
     <string name="av_control_stop">стоп</string>
@@ -56,10 +56,10 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">Скрыть границы</string>
 	<string name="rendering_attr_noAdminboundaries_description">Скрыть региональные границы (admin levels 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid плагин имеет устаревшую версию и должен быть обновлен.</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">Плагин OsMoDroid устарел и нуждается в обновлении.</string>
     <string name="osmodroid_plugin_description">OsMoDroid плагин - это расширение для OsmAnd используещее OsModroid приложение для слежения. Информация о сервисе доступна на сайте http://esya.ru.</string>
-    <string name="osmodroid_plugin_name">OsMoDroid плагин</string>
-	<string name="tip_altitude_offset">Показ высоты - коррекция</string>
+    <string name="osmodroid_plugin_name">OsMoDroid</string>
+	<string name="tip_altitude_offset">Отображение высоты - коррекция смещения</string>
 	<string name="tip_altitude_offset_t">\tБольшинство GPS устройств показывает высоту относительно эллипсоида WGS84, для определения высоты над уровнем моря необходимо провести коррекцию, которая зависит от местоположения.
 		\n\tЧтобы получить достоверные данные необходимо загрузить WW15MGH.DAC через менеджер загрузок (оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
@@ -678,7 +678,7 @@
   <string name="additional_settings">Дополнительные настройки</string>
   <string name="settings">Настройки</string>
   <string name="save_current_track_descr">Сохранить текущий трек на SD</string>
-  <string name="save_current_track">Сохранить GPX трек</string>
+  <string name="save_current_track">Сохранить текущий трек GPX</string>
   <string name="save_track_interval_descr">Указать интервал сохранения точек трека</string>
   <string name="save_track_interval">Интервал сохранения</string>
   <string name="monitor_preferences">Мониторинг</string>
@@ -1014,13 +1014,13 @@
   <string name="bg_service_screen_unlock">Разблокировать экран</string>
   <string name="bg_service_sleep_mode_off">Включить
 \nфоновый режим</string>
-  <string name="bg_service_sleep_mode_on">Выключить фоновый режим</string>
+  <string name="bg_service_sleep_mode_on">Выключить\nфоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
 <string name="layer_map_appearance">Настройка экрана…</string>
 <string name="show_lanes">Показывать полосы движения</string>
-<string name="avoid_unpaved">Избегать просёлочные дороги</string>
-<string name="avoid_ferries">Избегать паромы</string>
+<string name="avoid_unpaved">Избегать просёлочных дорог</string>
+<string name="avoid_ferries">Избегать паромов</string>
 <string name="avoid_in_routing_title">Избегать при прокладке маршрута…</string>
 <string name="avoid_in_routing_descr">Избегать платных и просёлочных дорог, паромов</string>
 <string name="show_warnings_descr">Показывать ограничения скорости, камеры и искусственные неровности</string>
@@ -1032,8 +1032,8 @@
 <string name="map_widget_transparent">Прозрачность</string>
 <string name="monitoring_mode_off">Включить
 \nзапись GPX</string>
-<string name="monitoring_mode_on">Остановить запись GPX</string>
-<string name="int_continuosly">Непрерывно</string>
+<string name="monitoring_mode_on">Остановить\nзапись GPX</string>
+<string name="int_continuosly">Постоянно</string>
 <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
 <string name="map_widget_day_night">Дневной/ночной режим</string>
 <string name="filterpoi_activity">Создать фильтр POI</string>
@@ -1044,7 +1044,7 @@
 <string name="map_widget_renderer">Стиль отрисовки (векторн.)</string>
 <string name="live_monitoring_mode_off">Включить слежение
 \nв реальном времени</string>
-<string name="live_monitoring_mode_on">Выключить\n слежение в реальном времени</string>
+<string name="live_monitoring_mode_on">Выключить слежение\nв реальном времени</string>
 <string name="tip_rotation_switching_t_v2">"\tНажав на значок компаса на экране с картой Вы можете изменить режим вращения карты.\n\n\tДоступные варианты:\n\n\t*\'Не вращать\' - Карта не будет вращаться. Север всегда сверху.\n\n\t*\'По направлению движения\' - Карта будет вращаться в соответствии с направлением Вашего движения. Сверху - направление движения.\n\n\t*\'По направлению компаса\' - Карта будет вращаться так, чтобы совместить север карты и северное направление (используются показания компаса в устройстве). "</string>
 
 <string name="tip_map_switch_t_v2">"\tОтображаемые карты и слои можно изменить выбрав \'Настройка вида\' (значок глобуса) на экране карты.\n\n\tВ \'Источник карты…\' можно выбрать предварительно загруженные векторные карты, онлайн-карты от различных источников (для использования включите плагин \'Онлайн карты\'), или самостоятельно созданные карты (при помощи OsmAndMapCreator для ПК, например).\n\n\tOsmAnd также поддерживает пользовательские источники. "</string>
@@ -1115,7 +1115,7 @@
     <string name="precise_routing_mode">Точный маршрут (alpha)</string>
     <string name="dist_control_start">Старт</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые опции реализованными в приложении</string>
-	<string name="precise_routing_mode_descr">Включите точный маршрут для вычисления точных маршрутов без незначительных сбоев. Этот режим работает на ограниченном расстоянии и не использует собственную библиотеку.</string>
+	<string name="precise_routing_mode_descr">Включите режим вычисления точных маршрутов. Этот режим работает на ограниченном расстоянии и не использует собственную библиотеку.</string>
     <string name="download_hillshade_item">Рельеф местности</string>
     <string name="tip_recent_changes_1_1_2_t">"Изменения в 1.1.2:\n\t* улучшен аудио/видео плагин (фотографии с информацией EXIF)\n\t* повышено удобство пользования и реструктурирован плагин контурных линий\n\t* добавлен пакет затемнённого рельефа местности для плагина контурных линий\n\t* исправлены ошибки (неоптимальной маршрутизации) "</string>
     <string name="download_hillshade_maps">Карты с затемнённым рельефом местности</string>
@@ -1134,7 +1134,25 @@
     <string name="max_speed_none">нет</string>
 <string name="tip_recent_changes_1_1_4_t">"Изменения в 1.1.4:\n\t* переработан интерфейс\n\t* исправление ошибок "</string>
     <string name="layer_hillshade">Слой рельефа местности</string>
-    <string name="save_current_track_widget">Сохранить\n текущий GPX трэк</string>
+    <string name="save_current_track_widget">Сохранить\nтекущий трек GPX</string>
 	<string name="street_name">Улица</string>
 	<string name="hno">Номер дома</string>
-    </resources>
+    <string name="download_using_mobile_internet">В настоящее время нет соединения по WiFi. Хотите продолжить загрузку по текущему интернет-соединению?</string>
+    <string name="tip_recent_changes_1_5_t">Изменения в 1.5:\n\t*Тема Holo (настройка тем)</string>
+    <string name="monitoring_settings">Служба логгирования и спящий режим</string>
+    <string name="monitoring_settings_descr">Настроить запись поездок и включение спящего режима</string>
+    <string name="osmand_monitoring_plugin_description">Включение трекинга и навигации во спящем режиме (экран выключен) с помощью периодического пробуждения устройства GPS. Настройка записи поездок в локальные файлы GPX или в Интернете с помощью веб-службы.</string>
+    <string name="osmand_monitoring_plugin_name">Служба логгирования и спящий режим</string>
+    <string name="choose_osmand_theme_descr">Выбор темы приложения</string>
+    <string name="choose_osmand_theme">Тема приложения</string>
+    <string name="accessibility_options">Настройка специальных возможностей</string>
+    <string name="select_address_activity">Выбор адреса</string>
+    <string name="favourites_list_activity">Выберите из избранного</string>
+    <string name="local_openstreetmap_act_title">Модификации OSM</string>
+    <string name="default_buttons_other_actions">Другие действия</string>
+    <string name="av_def_action_choose">Выберите по запросу</string>
+    <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
+	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed). Some of the main features: Navigation - Works online (fast) or offline (no roaming charges when you are abroad) - Turn-by-turn voice guidance (recorded and synthesized voices) - Optional lane guidance, street name display, and estimated time of arrival - Supports intermediate points on your itinerary - Automatic re-routing whenever you deviate from the route - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates Map Viewing - Display your position and orientation on the map - Optionally align the map according to compass or your direction of motion - Save your most important places as Favorites - Display POIs (point of interests) around you - Can display specialized online tile maps - Can display satellite view (from Bing) - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency - Optionally display place names in English, local, or phonetic spelling Use OpenStreetMap and Wikipedia Data: - High quality information from the best collaborative projects of the world - Global maps from OpenStreetMap, available per country or region - Wikipedia POIs, great for sightseeing (not available in free version) - Unlimited free download, directly from the app (download limit 16 map files in free version) - Always up-to-date maps (updated at least once a month) - Compact offline vector maps - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only) - Also supports online or cached tile maps Safety Features - Optional automated day/night view switching - Optional speed limit display, with reminder if you exceed it - Optional speed-dependent map zooming - Share your location so that your friends can find you Bicycle and Pedestrian Features - The maps include foot, hiking, and bike paths, great for outdoor activities - Special routing and display modes for bike and pedestrian - Optional public transport stops (bus, tram, train) including line names - Optional trip recording to local GPX file or online service - Optional speed and altitude display - Display of contour lines and hill-shading (via additional plugin) Directly Contribute to OpenStreetMap - Report map bugs - Upload GPX tracks to OSM directly from the app - Add POIs and directly upload them to OSM (or later if offline) - Optional trip recording also in background mode (while device is in sleep mode) OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net. Approximate map coverage and quality: - Western Europe: **** - Eastern Europe: *** - Russia: *** - North America: *** - South America: ** - Asia: ** - Japan &amp; Korea: *** - Middle East: ** - Africa: ** - Antarctica: * List of countries supported (basically world wide!): Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
+	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed). OsmAnd+ is the paid application version. By buying it you support the project, fund the development of new features, and receive the latest updates. You can test the application before buying by installing the free version called OsmAnd. Some of the main features: Navigation - Works online (fast) or offline (no roaming charges when you are abroad) - Turn-by-turn voice guidance (recorded and synthesized voices) - Optional lane guidance, street name display, and estimated time of arrival - Supports intermediate points on your itinerary - Automatic re-routing whenever you deviate from the route - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates Map Viewing - Display your position and orientation on the map - Optionally align the map according to compass or your direction of motion - Save your most important places as Favorites - Display POIs (point of interests) around you - Can display specialized online tile maps - Can display satellite view (from Bing) - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency - Optionally display place names in English, local, or phonetic spelling Use OpenStreetMap and Wikipedia Data: - High quality information from the best collaborative projects of the world - Global maps from OpenStreetMap, available per country or region - Wikipedia POIs, great for sightseeing - Unlimited free download, directly from the app - Always up-to-date maps (updated at least once a month) - Compact offline vector maps - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only) - Also supports online or cached tile maps Safety Features - Optional automated day/night view switching - Optional speed limit display, with reminder if you exceed it - Optional speed-dependent map zooming - Share your location so that your friends can find you Bicycle and Pedestrian Features - The maps include foot, hiking, and bike paths, great for outdoor activities - Special routing and display modes for bike and pedestrian - Optional public transport stops (bus, tram, train) including line names - Optional trip recording to local GPX file or online service - Optional speed and altitude display - Display of contour lines and hill-shading (via additional plugin) Directly Contribute to OpenStreetMap - Report map bugs - Upload GPX tracks to OSM directly from the app - Add POIs and directly upload them to OSM (or later if offline) - Optional trip recording also in background mode (while device is in sleep mode) OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net. Approximate map coverage and quality: - Western Europe: **** - Eastern Europe: *** - Russia: *** - North America: *** - South America: ** - Asia: ** - Japan &amp; Korea: *** - Middle East: ** - Africa: ** - Antarctica: * List of countries supported (basically world wide!): Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
+	</resources>
