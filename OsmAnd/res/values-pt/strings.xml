@@ -1105,4 +1105,6 @@
     <string name="default_buttons_other_actions">Outras acções</string>
     <string name="layer_hillshade">Camada de Sombras de relevo</string>
     <string name="map_widget_gps_info">Informação de GPS</string>
+    <string name="download_using_mobile_internet">A Wifi está desligada. Quer continuar o download com a ligação internet?</string>
+    <string name="tip_recent_changes_1_5_t">Alterações em 1.5:\n\t* Tema Holo (personalização de tema)</string>
     </resources>
