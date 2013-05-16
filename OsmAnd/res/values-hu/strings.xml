@@ -1197,4 +1197,5 @@
     <string name="favourites_list_activity">Kedvenc kiválasztása</string>
     <string name="local_openstreetmap_act_title">OSM módosítások</string>
     <string name="default_buttons_other_actions">Egyéb műveletek</string>
+    <string name="download_using_mobile_internet">Jelenleg nincs WiFi kapcsolat. Szeretnéd folytatni a letöltést a jelenlegi internetkapcsolattal?</string>
     </resources>
