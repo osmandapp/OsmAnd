@@ -521,7 +521,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		SubMenu split = null;
 		for (int j = 0; j < optionsMenuAdapter.length(); j++) {
 			MenuItem item;
-			if (j + 1 >= max) {
+			if (j + 1 >= max && optionsMenuAdapter.length() > max) {
 				if (split == null) {
 					split = menu.addSubMenu(0, 1, 0, R.string.default_buttons_other_actions);
 					split.setIcon(isLightActionBar() ? R.drawable.abs__ic_menu_moreoverflow_holo_light
