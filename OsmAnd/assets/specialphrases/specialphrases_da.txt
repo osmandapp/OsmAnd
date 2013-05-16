@@ -1,0 +1,437 @@
+abandoned,Forladt jernbane
+aerodrome,Lufthavn
+alcohol,Vinhandel
+allotments,Kolonihave
+alpine_hut,Alpehytte
+apartments,Boligblok
+apparel,Tøjbutik
+archaeological_site,Arkæologiske område
+art,Kunsthandel
+arts_centre,Kunstcenter
+arts_centre,Kunstcenter
+artwork,Kunstværk
+atm,Hæveautomat
+atm,Hæveautomat
+atm,Hæveautomat
+attraction,Attraktion
+auditorium,Auditorium
+bakery,Bager
+bank,Bank
+bar,Bar
+bar,Pub
+basin,Bassin
+battlefield,Slagmark
+bay,Bugt
+beach,Strand
+beach_resort,Strad resort
+beauty,Skønhedssalon
+bed_and_breakfast,Bed and Breakfast
+bench,Bænk
+beverages,Drikkevarebutik
+bicycle,Cykelforretning
+bicycle_parking,Cykelparkering
+bicycle_rental,Cykeludlejning
+block,Byggesten
+boatyard,Værft
+books,Boghandel
+boundary_stone,Grænsesten
+bridleway,Ridesti
+brothel,Bordel
+brownfield,Brakjord
+building,Bygning
+bunker,Bunker
+bureau_de_change,Vekselkontor
+bus_guideway,Busspor
+bus_station,Busstation
+bus_stop,Busstoppested
+butcher,Slagter
+byway,Sidevej
+cabin,Hytte
+cafe,Café
+camp_site,Campingplads
+canal,Kanal
+cape,Kap
+car,Bilforhandler
+car_dealer,Bilforhandler
+car_parts,Autoreservedele
+car_rental,Biludlejning
+car_repair,Autoværksted
+car_sharing,Delebil
+car_sharing,Delebiler
+car_wash,Bilvask
+caravan_site,campingvognsplads
+carpet,Tæppeforretning
+casino,Casino
+castle,Slot
+cave_entrance,Hule indgang
+cemetery,Kirkegård
+chalet,Udlejningshytte
+channel,Kanal
+chapel,Kapel
+charity,Genbrugsbutik
+chemist,Apotek
+church,Kirke
+cinema,Biograf
+city,By
+city_hall,Rådhus
+cliff,Klippe
+clinic,Klinik
+clothes,Tøjbutik
+club,Klub
+coastline,Kystlinje
+college,Gymnasium
+commercial,Kommercielt område
+commercial,Erhvervsbyggeri
+common,Fælles jord
+community_centre,Medborgerhus
+community_centre,Medborgerhus
+computer,Computerbutik
+confectionery,Konfektureforretning
+connector,Vandvejsforbindelse
+conservation,Naturbevarelse
+construction,Byggeri
+construction,Motorvej under opførelse
+construction,Jernbane under opførelsen
+convenience,Nærbutik
+copyshop,Kopicenter
+cosmetics,Kosmetikforretning
+country,Land
+county,Kommune
+courthouse,Retsbygning
+crater,Krater
+crematorium,Krematorium
+cycleway,Cykelsti
+dam,Dam
+dentist,Tandlæge
+department_store,Stormagasin
+derelict_canal,Forladt kanal
+discount,Discountbutik
+distance_marker,Kilometersten
+disused,Nedlagt jernbane
+disused_station,Nedlagt jernbanestation
+ditch,Grøft
+dock,Dok
+doctors,Læge
+doityourself,Gør-det-selv
+dormitory,Sovesal
+drain,Dræn
+drinking_water,Drikkevand
+driving_school,Køreskole
+drugstore,Apotek
+dry_cleaning,Renseri
+electronics,Elektronik butik
+embassy,Ambassade
+emergency_access_point,Nødstilfælde punkt
+emergency_phone,Nødtelefon
+entrance,Indgang
+estate_agent,Ejendomsmægler
+faculty,Fakultetsbygning
+farm,Gård
+farm,Landbrugsbygning
+farm,Gårdbutik
+farmland,Landbrugsjord
+farmyard,Gårdsplads
+fashion,Modebutik
+fast_food,Fast Food
+fast_food,Fødevarer
+feature,Funktion
+fell,Fjeld
+ferry_terminal,Færgeterminal
+fire_hydrant,Brandhane
+fire_station,Brandstation
+fish,Fiskehandler
+fishing,Fiskeriområde
+fjord,Fjord
+flats,Lejligheder
+florist,Blomsterhandler
+food,Købmand
+footway,Gangsti
+ford,Vadested
+forest,Skov
+fountain,Springvand
+fuel,Brændstof
+fuel,Tankstation
+fuel,Brændstof
+fuel,Benzintank
+fuel,Benzin
+fuel,Benzintank
+funeral_directors,Bedemand
+funicular,Kabelbane
+furniture,Møbler
+gallery,Galleri
+garage,Garage
+garden,Have
+garden_centre,Havecenter
+garden_centre,Havecentre
+gate,Port
+general,Supermarked
+geyser,Gejser
+gift,Gavebutik
+glacier,Gletscher
+golf_course,Golfbane
+grass,Græs
+grave_yard,Kirkegård
+greenfield,Byggemodning
+greengrocer,Grønthandler
+grocery,Købmandsbutik
+guest_house,Pensionat
+gym,Trænings-og motionscenter
+gym,Trænings-og motionscentre
+gym,Gymnastiksal
+hackerspace,Hackerspace
+hairdresser,Frisør
+hall,Hal
+halt,Trinbrædt
+hamlet,Landsby
+hardware,Isenkræmmer
+health_centre,Sundhedscenter
+health_centre,Sundhedscentre
+heath,Hede
+hifi,Hi-Fi
+hill,Bakke
+historic_station,Historisk jernbanestation
+hospital,Hospital
+hospital,Hospitalsbygning
+hostel,Vandrerhjem
+hotel,Hotel
+house,Hus
+houses,Huse
+hunting_stand,Jagtstand
+ice_cream,Is
+ice_rink,Skøjtebane
+icon,Ikon
+industrial,Industriområde
+industrial,Industribygning
+information,Turistinformation
+insurance,Forsikring
+island,Ø
+islet,Holm
+jewelry,Smykkeforretning
+junction,Jernbaneknudepunkt
+kindergarten,Børnehave
+kiosk,Kiosk
+land,Jord
+landfill,Losseplads
+laundry,Vaskeri
+lean_to,Åben læ
+level_crossing,Jernbaneoverskæring
+library,Bibliotek
+light_rail,Letbane
+living_street,Vilavej
+locality,Lokalitet
+lock,Lås
+lock_gate,Sluseport
+mall,Butikscenter
+manor,Landsted
+marina,Marina
+market,Marked
+marketplace,Markedsplads
+marsh,Marsk
+meadow,Eng
+memorial,Mindesmærke
+military,Militærområde
+mine,Mine
+mineral_spring,Mineralsk kilde
+miniature_golf,Minigolf
+minor,Mindre vej
+mobile_phone,Mobiltelefon butik
+monorail,Monorail
+monument,Monument
+moor,Hede
+mooring,Fortøjning
+motel,Motel
+motorcycle,Motorcykel butik
+motorway,Motorvej
+motorway_junction,Motorvejskryds
+motorway_link,Motorvej
+mountain,Bjerg
+mountain_rescue,Redningstjeneste
+mud,Mudder
+municipality,Kommune
+museum,Museum
+music,Musik butik
+narrow_gauge,Smalsporet jernbane
+narrow_gauge,Smalsporede jernbaner
+nature_reserve,Naturreservat
+nature_reserve,Naturreservater
+newsagent,Kiosk
+newsagent,Kiosker
+nightclub,Natklub
+nightclub,Natklubber
+nursery,Børnehaver
+nursery,Børnehave
+nursery,Børnehaver
+nursing_home,Plejehjem
+nursing_home,Plejehjem
+office,Kontor
+office,Kontorbygning
+optician,Optiker
+organic,Økologisk fødevarebutik
+outdoor,Fritidsudstyr
+park,Park
+parking,Parkering
+path,Sti
+peak,Bjergtop
+pedestrian,Gågade
+pet,Dyrehandel
+pharmacy,Apotek
+photo,Fotohandler
+picnic_site,Skovtur/rasteplads
+piste,Piste
+pitch,Boldbane
+place_of_worship,Kirke
+place_of_worship,Sted for tilbedelse
+platform,Perron
+platform,Jernbane perron
+playground,Legeplads
+plaza,Plads
+point,Punkt
+police,Politi
+post_box,Postboks
+post_office,Posthus
+postcode,Postnummer
+preschool,Børnehaveklasse
+preserved,Veteranjernbane
+primary,Primær veje
+primary_link,Primær veje
+prison,Fængsel
+pub,Bar
+pub,Pub
+public,Offentlig bygning
+public_building,Offentlig bygning
+public_market,Offentligt marked
+quarry,Stenbrud
+raceway,Vædeløbsbane
+railway,Jernbane
+rapids,Strømfald
+reception_area,Receptionsområde
+recreation_ground,Rekreativt område
+recycling,Genbrugsstation
+reef,Rev
+region,Region
+reservoir,Reservoir
+residential,Boligområde
+residential,Boligområde
+residential,Beboelsesejendom
+residential,Villavej
+rest_area,Rasteplads
+rest_area,Rasteplads
+restaurant,Fødevarer
+restaurant,Restaurant
+retail,Butiksområde
+retail,Butiksbygning
+retirement_home,Alderdomshjem
+ridge,Højderyg
+river,Flod
+riverbank,Flodbred
+road,Vej
+rock,Klippe
+ruins,Ruin
+salon,Salon
+sauna,Sauna
+school,Skole
+school,Skolebygning
+scree,Urer
+scrub,Krat
+sea,Hav
+secondary,Bivej
+secondary_link,Bivej
+service,Servicevej
+services,Motorvejsrasteplads
+services,Motorvejsrasteplads
+shelter,Shelter
+shoal,Sandbanke
+shoes,Skobutik
+shop,Butik
+shopping,Butik
+shopping_centre,Butikscenter
+shopping_centre,Butikscentre
+slipway,Slæbested
+social_club,Social klub
+sports,Sportsforretning
+sports_centre,Sportscenter
+spring,Kilde
+spur,Jernbanespor
+stadium,Stadium
+state,Stat
+station,Banegård
+station,Station
+stationery,Papirvareforretning
+steps,Trappe
+stile,Stente
+store,Butik
+strait,Strædet
+stream,Bæk
+studio,Studio
+subdivision,Inddeling
+suburb,Forstad
+subway,Metrostation
+subway_entrance,Metro indgang
+supermarket,Supermarked
+swimming_pool,Svømmepøl
+switch,5375
+taxi,Taxi
+taxi,Taxaholdeplads
+telephone,Telefonboks
+telephone,Offentlige telefon
+telephone,Telefon
+terrace,Terrasse
+tertiary,Tertiær vej
+theatre,Teater
+theme_park,Forlystelsespark
+toilets,Toilet
+tower,Tårn
+town,By
+townhall,Rådhus
+toys,Legetøjsbutik
+track,Løbebane
+track,Markvej
+trail,Spor
+train_station,Banegård
+train_station,Banegård
+tram,Sporvogn
+tram_stop,Sporvognsstoppestedet
+travel_agency,Rejsebureau
+tree,Træ
+trunk,Motortrafikvej
+trunk_link,Motortrafikvej tilkørsel
+unclassified,Landevej
+unincorporated_area,Personligt område
+university,Universitet
+university,Universitetetsbygning
+unsurfaced,Ikke asfalterede vej
+valley,Dal
+vending_machine,Automat
+veterinary,Dyrlæge
+video,Videobutik
+viewpoint,Udsigtspunkt
+village,Landsby
+village_green,Brønt område
+village_hall,Forsamlingshus
+vineyard,Vingård
+volcano,Vulkan
+wadi,Udtørret flodleje
+waste_basket,Affaldskurv
+waste_basket,Affaldsspand
+waste_basket,Skraldespand
+water,Vand
+water_park,Vandland
+water_point,Vendeplads
+waterfall,Vandfald
+wayside_cross,Vejside kors
+wayside_shrine,Vejkants alter
+weir,Stemmeværk
+wetland,Vådområde
+wetlands,Vådområder
+wifi,WiFi
+wifi,WiFi Adgang
+wifi,WiFi Punkt
+windmill,Vindmølle
+wine,Vinhandel
+wood,Naturlig skov
+wreck,Vrag
+yard,Rangerterræn
+yes,Bygning
+youth_centre,Ungdomcenter
+youth_centre,Ungdomscenter
+zoo,Zoologisk have
