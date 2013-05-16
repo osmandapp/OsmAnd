@@ -261,7 +261,7 @@
 	<string name="osmand_parking_add_event">Tilføj en meddelelse til kalender</string>
 	<string name="osmand_parking_time_limit">Tidsbegrænset parkering</string>
 	<string name="osmand_parking_time_no_limit">Tidsubegrænset parkering</string>
-	<string name="osmand_parking_position_description">Placeringen af ​​din parkerede bil. %1$s</string>
+	<string name="osmand_parking_position_description">Din parkerede bils position. %1$s</string>
 	<string name="osmand_parking_position_description_add">Afhent bilen på:</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
@@ -482,7 +482,7 @@
 	<string name="native_library_not_supported">Indbyget bibliotek er ikke understøttet på denne enhed.</string>
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
-	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med nuværende placering</string>
+	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med nuværende position</string>
 	<string name="auto_follow_route_never">Aldrig</string>
 	<string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
@@ -509,13 +509,13 @@
 	<string name="local_index_mi_rename">Omdøb</string>
 	<string name="show_gpx_route">Vis på kort</string>
 	<string name="search_select_point">Vælg</string>
-	<string name="search_position_current_location_search">Søg placering…</string>
-	<string name="search_position_current_location_found">Placering (fundet)</string>
+	<string name="search_position_current_location_search">Søger position…</string>
+	<string name="search_position_current_location_found">Position (fundet)</string>
 	<string name="search_position_address">Adresse…</string>
 	<string name="search_position_favorites">Favoritter…</string>
 	<string name="search_position_undefined">Ikke defineret</string>
 	<string name="search_position_fixed">Fast</string>
-	<string name="search_position_current_location">Nuværende placering…</string>
+	<string name="search_position_current_location">Nuværende position…</string>
 	<string name="search_position_map_view">Seneste kortvisning</string>
 	<string name="select_search_position">Søg i nærheden af:</string>
 	<string name="context_menu_item_search">Søg i nærheden</string>
@@ -598,7 +598,7 @@
 \n\tNatfarver er mere sikre under natkørsel.
 \n\tDu kan indstille regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm…\' -&gt;\'Dag/nat kort\'.
 \n\tValgmulighederne er:
-\n\t\'Solopgang/solnedgang\' - Automatisk tilstand, styret af solens placering (standard)
+\n\t\'Solopgang/solnedgang\' - Automatisk tilstand, styret af solens position(standard)
 \n\t\'Dag\' - Brug altid dagtilstand
 \n\t\'Nat\' - Brug altid nattilstand
 \n\t\'Lysføler\' - Kortvisning styres af lysføleren i din enhed (kun hvis den har en) "</string>	
@@ -888,7 +888,7 @@
 	<string name="background_service_int">Vågn-op interval</string>
 	<string name="background_service_provider_descr">Vælg placeringsudbyder der bruges af dvaletilstand</string>
 	<string name="background_service_provider">Placeringsudbyder</string>
-	<string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore din placering, mens skærmen er slukket</string>
+	<string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore din position, mens skærmen er slukket</string>
 	<string name="background_router_service">Kør i dvaletilstand</string>
 	<string name="off_router_service_no_gps_available">Dvaletilstand navigationstjenesten kræver en placeringsudbyder for kunne aktiveres.</string>
 	<string name="hide_poi_filter">Skjul filter</string>
@@ -1098,7 +1098,7 @@
 	<string name="osm_settings_descr">Indstillinger for OpenStreetMap.org (OSM), som kræves for bidrag til OSM</string>
 	<string name="data_settings_descr">Angiv sprog, hent/genindlæs data</string>
 	<string name="data_settings">Data</string>
-	<string name="map_preferences_descr">Indstil kortindstillinger: kortkilde, rotation, markørplacering og skærmorientering</string>
+	<string name="map_preferences_descr">Indstil kortindstillinger: kortkilde, rotation, markørposition og skærmorientering</string>
 	<string name="osm_settings">OSM redigering</string>
 	<string name="additional_settings">Yderligere indstillinger</string>
 	<string name="settings">Indstillinger</string>
