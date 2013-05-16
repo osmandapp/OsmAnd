@@ -1,6 +1,5 @@
 package net.osmand.access;
 
-import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.os.Build;

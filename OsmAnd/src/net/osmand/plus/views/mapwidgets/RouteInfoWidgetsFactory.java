@@ -3,7 +3,6 @@ package net.osmand.plus.views.mapwidgets;
 
 import java.util.Arrays;
 
-
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -21,10 +20,10 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RouteInfoLayer;
 import net.osmand.plus.views.TurnPathHelper;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import android.content.Context;

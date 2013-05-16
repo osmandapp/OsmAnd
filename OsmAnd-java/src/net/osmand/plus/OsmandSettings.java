@@ -1414,6 +1414,10 @@ public class OsmandSettings {
 		return OSMAND_THEME.get() == OSMAND_LIGHT_THEME;
 	}
 	
+	public boolean isLightContent(){
+		return OSMAND_THEME.get() != OSMAND_DARK_THEME;
+	}
+	
 	
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS = 
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();

@@ -1,8 +1,5 @@
 package net.osmand.plus.development;
 
-import net.osmand.plus.OptionsMenuHelper;
-import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -12,8 +9,6 @@ import android.content.Intent;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";

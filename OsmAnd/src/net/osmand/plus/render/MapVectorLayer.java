@@ -1,11 +1,11 @@
 package net.osmand.plus.render;
 
-import net.osmand.util.MapUtils;
 import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.MapUtils;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;

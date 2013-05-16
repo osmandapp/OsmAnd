@@ -53,8 +53,6 @@ import android.os.Message;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -108,9 +106,12 @@ public class MapActivity extends AccessibleActivity  {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		app = getMyApplication();
-		settings = app.getSettings();	
+		settings = app.getSettings();
+		app.applyTheme(this);
+		super.onCreate(savedInstanceState);
+		
+			
 		mapActions = new MapActivityActions(this);
 		mapLayers = new MapActivityLayers(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
@@ -380,6 +381,9 @@ public class MapActivity extends AccessibleActivity  {
 				uiHandler.sendMessageDelayed(msg, LONG_KEYPRESS_DELAY);
 			}
 			return true;
+		} else if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
+			mapActions.openOptionsMenuAsList();
+			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_SEARCH && event.getRepeatCount() == 0) {
 			Intent newIntent = new Intent(MapActivity.this, OsmandIntents.getSearchActivity());
 			// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -616,24 +620,6 @@ public class MapActivity extends AccessibleActivity  {
 		return mapViewTrackingUtilities;
 	}
 	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		return mapActions.onCreateOptionsMenu(menu);
-	}
-	
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean val = super.onPrepareOptionsMenu(menu);
-		mapActions.onPrepareOptionsMenu(menu);
-		return val;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		return mapActions.onOptionsItemSelected(item) == true ? true : super.onOptionsItemSelected(item);
-	}
-	
-
 	protected void parseLaunchIntentLocation(){
    	 	Intent intent = getIntent();
 		if (intent != null && intent.getData() != null) {
@@ -682,6 +668,7 @@ public class MapActivity extends AccessibleActivity  {
 	public void refreshMap() {
 		getMapView().refreshMap();
 	}
+	
 
 
 }

@@ -2,10 +2,10 @@ package net.osmand.plus.views;
 
 
 import net.osmand.Location;
-import net.osmand.util.MapUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
+import net.osmand.util.MapUtils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

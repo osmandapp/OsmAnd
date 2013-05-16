@@ -64,7 +64,7 @@
 		\n\tЧтобы получить достоверные данные необходимо загрузить WW15MGH.DAC через менеджер загрузок (оригинал - http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     
-    <string name="no_buildings_found">Здания не найдены.</string>
+    <string name="no_buildings_found">Здания не найдены</string>
     <string name="incremental_search_city">Выберите город</string>
     <string name="search_villages_and_postcodes">Поиск по деревням и почт. индексу</string>
 	<string name="rendering_attr_showRoadMaps_description">Выберите как отображать только дорожные карты:</string>
@@ -707,8 +707,8 @@
   <string name="map_specify_point">Координаты</string>
   <string name="show_view_angle_descr">Показывать угол обзора в соответствии с компасом</string>
   <string name="show_view_angle">Угол обзора</string>
-  <string name="stop_navigation">Снять отметку.</string>
-  <string name="navigate_to_point">Отметить точку.</string>
+  <string name="stop_navigation">Снять отметку</string>
+  <string name="navigate_to_point">Отметить точку</string>
   <string name="map_view_3d_descr">Включить 3D вид для карты</string>
   <string name="map_view_3d">3D вид</string>
   <string name="show_poi_over_map_description">Показывать слой POI</string>

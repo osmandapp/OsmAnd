@@ -3,8 +3,8 @@ package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.R;
 import net.osmand.plus.views.MapInfoLayer;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

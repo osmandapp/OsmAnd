@@ -11,11 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.actionbarsherlock.app.ActionBar;
-import com.actionbarsherlock.app.SherlockActivity;
-import com.actionbarsherlock.app.SherlockExpandableListActivity;
-import com.actionbarsherlock.app.SherlockListActivity;
-
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -62,6 +57,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.format.DateFormat;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockExpandableListActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
 
 
 public class OsmandApplication extends Application implements ClientContext {
@@ -717,6 +717,7 @@ public class OsmandApplication extends Application implements ClientContext {
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME) {
 			t = R.style.OsmandLightDarkActionBarTheme;
 		}
+		setLanguage(c);
 		c.setTheme(t);
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_DARK_ACTIONBAR_THEME
 				&& Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
@@ -732,6 +733,19 @@ public class OsmandApplication extends Application implements ClientContext {
 				BitmapDrawable bg = (BitmapDrawable) getResources().getDrawable(R.drawable.bg_striped);
 				bg.setTileModeXY(TileMode.REPEAT, TileMode.REPEAT);
 				ab.setBackgroundDrawable(bg);
+			}
+		}
+	}
+	
+	public void setLanguage(Context context) {
+		if (prefferedLocale != null) {
+			Configuration config = context.getResources().getConfiguration();
+			String lang = prefferedLocale.getLanguage();
+			if (!"".equals(lang) && !config.locale.getLanguage().equals(lang)) {
+				prefferedLocale = new Locale(lang);
+				Locale.setDefault(prefferedLocale);
+				config.locale = prefferedLocale;
+				context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
 			}
 		}
 	}

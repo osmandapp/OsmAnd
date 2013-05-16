@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -132,7 +133,7 @@ public abstract class OsmandPlugin {
 	
 	public void registerMapContextMenuActions(MapActivity mapActivity, double latitude, double longitude, ContextMenuAdapter adapter, Object selectedObj) {}
 	
-	public void registerOptionsMenuItems(MapActivity mapActivity, OptionsMenuHelper helper) {}
+	public void registerOptionsMenuItems(MapActivity mapActivity, ContextMenuAdapter helper) {}
 	
 	public void loadLocalIndexes(List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {};
 	
@@ -243,7 +244,7 @@ public abstract class OsmandPlugin {
 		}
 	}
 	
-	public static void registerOptionsMenu(MapActivity map, OptionsMenuHelper helper) {
+	public static void registerOptionsMenu(MapActivity map, ContextMenuAdapter helper) {
 		for (OsmandPlugin plugin : activePlugins) {
 			plugin.registerOptionsMenuItems(map, helper);
 		}

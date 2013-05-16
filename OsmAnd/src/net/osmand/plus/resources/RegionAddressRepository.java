@@ -7,9 +7,9 @@ import java.util.List;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Building;
 import net.osmand.data.City;
+import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.Street;
-import net.osmand.data.LatLon;
 import net.osmand.util.MapUtils;
 
 

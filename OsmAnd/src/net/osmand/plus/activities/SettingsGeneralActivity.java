@@ -6,9 +6,9 @@ import java.util.List;
 
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.ClientContext;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -29,8 +29,8 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceScreen;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Window;

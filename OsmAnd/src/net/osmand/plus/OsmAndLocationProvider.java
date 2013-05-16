@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-
 import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
@@ -59,7 +58,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	
-	private final boolean USE_KALMAN_FILTER = true;
+	private final boolean USE_KALMAN_FILTER = false;
 	private final float KALMAN_COEFFICIENT = 0.02f;
 	
 	float avgValSin = 0;
@@ -321,7 +320,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		float valRad = (float) (val / 180f * Math.PI);
 		lastValSin = (float) Math.sin(valRad);
 		lastValCos = (float) Math.cos(valRad);
-		lastHeadingCalcTime = System.currentTimeMillis();
+//		lastHeadingCalcTime = System.currentTimeMillis();
 		if(heading == null && previousCompassIndA == 0) {
 			Arrays.fill(previousCompassValuesA, lastValSin);
 			Arrays.fill(previousCompassValuesB, lastValCos);
@@ -353,14 +352,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 	
 	public Float getHeading() {
-		if (heading != null && lastValSin != avgValSin && System.currentTimeMillis() - lastHeadingCalcTime > 700) {
-			avgValSin = lastValSin;
-			avgValCos = lastValCos;
-			lastHeadingCalcTime = System.currentTimeMillis();
-			Arrays.fill(previousCompassValuesA, avgValSin);
-			Arrays.fill(previousCompassValuesB, avgValCos);
-			updateCompassVal();
-		}
+//		if (heading != null && lastValSin != avgValSin && System.currentTimeMillis() - lastHeadingCalcTime > 700) {
+//			avgValSin = lastValSin;
+//			avgValCos = lastValCos;
+//			Arrays.fill(previousCompassValuesA, avgValSin);
+//			Arrays.fill(previousCompassValuesB, avgValCos);
+//			updateCompassVal();
+//		}
 		return heading;
 	}
 	

@@ -1,7 +1,5 @@
 package net.osmand.plus.base;
 
-import android.content.Context;
-import android.view.WindowManager;
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
 import net.osmand.map.IMapLocationListener;
@@ -15,6 +13,8 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
+import android.content.Context;
+import android.view.WindowManager;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener, OsmAndCompassListener {
 	private static final int AUTO_FOLLOW_MSG_ID = 8; 

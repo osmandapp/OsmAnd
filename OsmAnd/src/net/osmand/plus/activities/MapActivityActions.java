@@ -31,8 +31,6 @@ import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.OptionsMenuHelper;
-import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -70,11 +68,8 @@ import android.text.ClipboardManager;
 import android.text.Html;
 import android.util.FloatMath;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -111,7 +106,6 @@ public class MapActivityActions implements DialogProvider {
 	private final MapActivity mapActivity;
 	private OsmandSettings settings;
 	private RoutingHelper routingHelper;
-	private OptionsMenuHelper optionsMenuHelper;
 	
 
 	public MapActivityActions(MapActivity mapActivity){
@@ -812,7 +806,7 @@ public class MapActivityActions implements DialogProvider {
 	
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
-		Builder builder = new AlertDialog.Builder(mapActivity);
+		
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_activities_set_destination);
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
@@ -827,34 +821,9 @@ public class MapActivityActions implements DialogProvider {
 		
 
 		OsmandPlugin.registerMapContextMenu(mapActivity, latitude, longitude, adapter, selectedObj);
-		final int padding = (int) (12 * mapActivity.getResources().getDisplayMetrics().density + 0.5f);
-		ListAdapter listadapter = new ArrayAdapter<String>(mapActivity, R.layout.list_menu_item, R.id.title,
-				adapter.getItemNames()) {
-			@Override
-			public View getView(int position, View convertView, ViewGroup parent) {
-				// User super class to create the View
-				View v = convertView;
-				if (v == null) {
-					v = mapActivity.getLayoutInflater().inflate(R.layout.list_menu_item, null);
-				}
-				TextView tv = (TextView) v.findViewById(R.id.title);
-				tv.setText(adapter.getItemName(position));
-
-				// Put the image on the TextView
-				if (adapter.getImageId(position) != 0) {
-					tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position), 0, 0, 0);
-				} else {
-					tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
-				}
-				tv.setCompoundDrawablePadding(padding);
-
-				final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
-				ch.setVisibility(View.GONE);
-				return v;
-			}
-		};
-
-		builder.setAdapter(listadapter, new DialogInterface.OnClickListener() {
+		final Builder builder = new AlertDialog.Builder(mapActivity);
+		ListAdapter listAdapter = adapter.createListAdapter(mapActivity, R.layout.list_menu_item);
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -987,112 +956,92 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 	
-	public boolean onCreateOptionsMenu(Menu menu) {
+	
+	public void openOptionsMenuAsList() {
+		final ContextMenuAdapter cm = createOptionsMenu();
+		final Builder bld = new AlertDialog.Builder(mapActivity);
+		ListAdapter listAdapter = cm.createListAdapter(mapActivity, R.layout.list_menu_item_native);
+		bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				OnContextMenuClick click = cm.getClickAdapter(which);
+				if (click != null) {
+					click.onContextMenuClick(cm.getItemId(which), which, false, dialog);
+				}
+			}
+		});
+		bld.show();
+
+	}
+
+	private ContextMenuAdapter createOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
-		optionsMenuHelper =  new OptionsMenuHelper();
-		optionsMenuHelper.registerOptionsMenuItem(R.string.where_am_i, R.string.where_am_i, android.R.drawable.ic_menu_mylocation, 
-				new OnOptionsMenuClick() {
+		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
+		boolean light = app.getSettings().isLightContent();
+		optionsMenuHelper.registerItem(R.string.where_am_i, 
+				light ? R.drawable.a_10_device_access_location_found_light : R.drawable.a_10_device_access_location_found_dark, 
+				new OnContextMenuClick() {
 					@Override
-					public void prepareOptionsMenu(Menu menu, MenuItem item) {
-					}
-					@Override
-					public boolean onClick(MenuItem item) {
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						if (getMyApplication().getInternalAPI().accessibilityEnabled()) {
 							whereAmIDialog();
 						} else {
 							mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
 						}
-						return true;
 					}
 				});
-		optionsMenuHelper.registerOptionsMenuItem(R.string.menu_layers, R.string.menu_layers, android.R.drawable.ic_menu_mapmode, 
-				new OnOptionsMenuClick() {
+		optionsMenuHelper.registerItem(R.string.menu_layers, 
+				light ? R.drawable.a_7_location_map_light : R.drawable.a_7_location_map_dark, 
+				new OnContextMenuClick() {
 					@Override
-					public void prepareOptionsMenu(Menu menu, MenuItem item) {
-					}
-					@Override
-					public boolean onClick(MenuItem item) {
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
-						return true;
 					}
 				});		
-		optionsMenuHelper.registerOptionsMenuItem(R.string.settings_Button, R.string.settings_Button, android.R.drawable.ic_menu_preferences, 
-				new OnOptionsMenuClick() {
-					@Override
-					public void prepareOptionsMenu(Menu menu, MenuItem item) {
-					}
-					@Override
-					public boolean onClick(MenuItem item) {
-						final Intent intentSettings = new Intent(mapActivity, OsmandIntents.getSettingsActivity());
-						mapActivity.startActivity(intentSettings);
-						return true;
-					}
-				});
-		optionsMenuHelper.registerOptionsMenuItem(R.string.stop_navigation, R.string.stop_navigation, android.R.drawable.ic_menu_close_clear_cancel, false, 
-				new OnOptionsMenuClick() {
-					@Override
-					public void prepareOptionsMenu(Menu menu, MenuItem navigateToPointMenu) {
-							if (mapActivity.getPointToNavigate() != null) {
-								navigateToPointMenu.setTitle((routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || 
-										routingHelper.isRouteBeingCalculated()) ? R.string.stop_routing : R.string.stop_navigation);
-								navigateToPointMenu.setVisible(true);
-							} else {
-								navigateToPointMenu.setVisible(false);
-							}
-					}
-					@Override
-					public boolean onClick(MenuItem item) {
-						stopNavigationActionConfirm(mapView);
-						return true;
-					}
-				});
-		optionsMenuHelper.registerOptionsMenuItem(R.string.menu_mute_off, R.string.menu_mute_off, false, new OnOptionsMenuClick() {
-			@Override
-			public void prepareOptionsMenu(Menu menu, MenuItem muteMenu) {
-				if (routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode()) {
-					boolean mute = routingHelper.getVoiceRouter().isMute();
-					muteMenu.setTitle(mute ? R.string.menu_mute_on : R.string.menu_mute_off);
-					muteMenu.setIcon(mute ? R.drawable.ic_menu_soundoff : R.drawable.ic_menu_soundon);
-					muteMenu.setVisible(true);
-				} else {
-					muteMenu.setVisible(false);
+		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
+		if (muteVisible) {
+			boolean mute = routingHelper.getVoiceRouter().isMute();
+			int t = mute ? R.string.menu_mute_on : R.string.menu_mute_off;
+			int icon;
+			if(mute) {
+				icon = light ? R.drawable.a_10_device_access_volume_muted_light: R.drawable.a_10_device_access_volume_muted_dark;
+			} else{
+				icon = light ? R.drawable.a_10_device_access_volume_on_light: R.drawable.a_10_device_access_volume_on_dark;
+			}
+			optionsMenuHelper.registerItem(t, icon, new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
 				}
-			}
-			
-			@Override
-			public boolean onClick(MenuItem item) {
-				routingHelper.getVoiceRouter().setMute(!routingHelper.getVoiceRouter().isMute());
-				return true;
-			}
-		});		
-		optionsMenuHelper.registerOptionsMenuItem(R.string.get_directions, R.string.get_directions, android.R.drawable.ic_menu_directions, 
-				new OnOptionsMenuClick() {
+			});
+		}
+		optionsMenuHelper.registerItem(routingHelper.isRouteCalculated() ? R.string.show_route: R.string.get_directions, 
+				light ? R.drawable.a_7_location_directions_light : R.drawable.a_7_location_directions_dark,
+				new OnContextMenuClick() {
 					@Override
-					public void prepareOptionsMenu(Menu menu, MenuItem directions) {
-						if(routingHelper.isRouteCalculated()){
-							directions.setTitle(R.string.show_route);
-						} else {
-							directions.setTitle(R.string.get_directions);
-						}
-						
-					}
-					@Override
-					public boolean onClick(MenuItem item) {
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						if (routingHelper.isRouteCalculated()) {
 							aboutRoute();
 						} else {
 							getDirections(null, null, true);
-						}
-						return true;
+						}						
 					}
 				});
-		optionsMenuHelper.registerOptionsMenuItem(R.string.search_button, R.string.search_button, android.R.drawable.ic_menu_search, new OnOptionsMenuClick() {
+		optionsMenuHelper.registerItem(R.string.settings_Button, 
+				light ? R.drawable.a_ic_menu_settings_light : R.drawable.a_ic_menu_settings_dark, 
+				new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						final Intent intentSettings = new Intent(mapActivity, OsmandIntents.getSettingsActivity());
+						mapActivity.startActivity(intentSettings);
+					}
+				});
+		optionsMenuHelper.registerItem(R.string.search_button, 
+				light ? R.drawable.a_2_action_search_light : R.drawable.a_2_action_search_dark, 
+				new OnContextMenuClick() {
 			@Override
-			public void prepareOptionsMenu(Menu menu, MenuItem item) {
-			}
-			@Override
-			public boolean onClick(MenuItem item) {
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				Intent newIntent = new Intent(mapActivity, OsmandIntents.getSearchActivity());
 				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				LatLon loc = mapActivity.getMapLocation();
@@ -1100,72 +1049,78 @@ public class MapActivityActions implements DialogProvider {
 				newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				mapActivity.startActivity(newIntent);
-				return true;
-			}
-		});
-		optionsMenuHelper.registerOptionsMenuItem(R.string.target_points, R.string.target_points, new OnOptionsMenuClick() {
-			@Override
-			public void prepareOptionsMenu(Menu menu, MenuItem item) {
-				item.setVisible(getTargets().getIntermediatePoints().size() > 0);
-			}
-			@Override
-			public boolean onClick(MenuItem item) {
-				openIntermediatePointsDialog();				
-				return true;
 			}
 		});
 		
-		if (Version.isGpsStatusEnabled(app) && !Version.isBlackberry(app)) {
-			optionsMenuHelper.registerOptionsMenuItem(R.string.show_gps_status, R.string.show_gps_status,
-					android.R.drawable.ic_menu_compass, new OnOptionsMenuClick() {
-						@Override
-						public void prepareOptionsMenu(Menu menu, MenuItem item) {
-						}
-
-						@Override
-						public boolean onClick(MenuItem item) {
-							startGpsStatusIntent();
-							return false;
-						}
-					});
+		optionsMenuHelper.registerItem(R.string.favorites_Button, 
+				light ? R.drawable.a_3_rating_important_light : R.drawable.a_3_rating_important_dark, 
+				new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				Intent newIntent = new Intent(mapActivity, OsmandIntents.getFavoritesActivity());
+				// causes wrong position caching:  newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(newIntent);
+			}
+		});
+		if (mapActivity.getPointToNavigate() != null) {
+			int nav = (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) ? 
+					R.string.stop_routing : R.string.stop_navigation;
+			optionsMenuHelper.registerItem(nav, 
+					light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark,
+							new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					stopNavigationActionConfirm(mapView);
+				}
+			});
 		}
-		optionsMenuHelper.registerOptionsMenuItem(R.string.show_point_options, R.string.show_point_options, new OnOptionsMenuClick() {
+		if (getTargets().getPointToNavigate() != null) {
+			optionsMenuHelper.registerItem(R.string.target_points,
+					light ? R.drawable.a_9_av_make_available_offline_light : R.drawable.a_9_av_make_available_offline_dark,
+					new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					openIntermediatePointsDialog();
+				}
+			});
+		}
+		
+		optionsMenuHelper.registerItem(R.string.show_point_options,
+				light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark,
+				new OnContextMenuClick() {
 			@Override
-			public void prepareOptionsMenu(Menu menu, MenuItem item) {
-			}
-			@Override
-			public boolean onClick(MenuItem item) {
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
-				return true;
-			}
-		});		
-		final OsmAndLocationProvider loc = app.getLocationProvider();
-		optionsMenuHelper.registerOptionsMenuItem(R.string.animate_route, R.string.animate_route, false, new OnOptionsMenuClick() {
-			@Override
-			public void prepareOptionsMenu(Menu menu, MenuItem animateMenu) {
-				animateMenu.setTitle(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off : R.string.animate_route);
-				animateMenu.setVisible(app.getTargetPointsHelper().getPointToNavigate() != null);
-			}
-			
-			@Override
-			public boolean onClick(MenuItem item) {
-				// animate moving on route
-				loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
-				return true;
 			}
 		});
+		if (Version.isGpsStatusEnabled(app) && !Version.isBlackberry(app)) {
+			optionsMenuHelper.registerItem(R.string.show_gps_status, 
+					light ? R.drawable.a_2_action_about_light : R.drawable.a_2_action_about_dark, 
+					new OnContextMenuClick() {
+
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					startGpsStatusIntent();
+				}
+			});
+		}
+		final OsmAndLocationProvider loc = app.getLocationProvider();
+		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
+			
+			optionsMenuHelper.registerItem(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off
+					: R.string.animate_route, 
+					light ? R.drawable.a_9_av_play_over_video_light : R.drawable.a_9_av_play_over_video_dark,
+							new OnContextMenuClick() {
+
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					// animate moving on route
+					loc.getLocationSimulation().startStopRouteAnimation(mapActivity);
+				}
+			});
+		}
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
-		
-		optionsMenuHelper.registerOptionsMenu(menu);
-		return true;
-	}
-	
-	public void onPrepareOptionsMenu(Menu menu) {
-		optionsMenuHelper.prepareOptionsMenu(menu);
-	}
-	
-	public boolean onOptionsItemSelected(MenuItem item) {
-		return optionsMenuHelper.onClick(item);
+		return optionsMenuHelper;
 	}
 	
 	public void openIntermediatePointsDialog(){

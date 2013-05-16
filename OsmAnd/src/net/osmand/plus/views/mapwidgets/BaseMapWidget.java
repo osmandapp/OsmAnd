@@ -1,8 +1,8 @@
 package net.osmand.plus.views.mapwidgets;
 
 import net.osmand.plus.ClientContext;
-import net.osmand.plus.views.ShadowText;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.ShadowText;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -9,16 +9,13 @@ import java.net.URL;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
-import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
-import android.widget.Toast;
 
 public class YandexTrafficAdapter  extends MapTileAdapter {
 

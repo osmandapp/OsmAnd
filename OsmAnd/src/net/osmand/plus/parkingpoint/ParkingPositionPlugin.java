@@ -8,8 +8,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
-import net.osmand.plus.OptionsMenuHelper;
-import net.osmand.plus.OptionsMenuHelper.OnOptionsMenuClick;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -19,10 +17,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.BaseMapWidget;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -31,8 +29,6 @@ import android.content.Intent;
 import android.graphics.Paint;
 import android.location.Location;
 import android.text.format.DateFormat;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -420,26 +416,19 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 	
 	@Override
-	public void registerOptionsMenuItems(final MapActivity mapActivity, OptionsMenuHelper helper) {
+	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (parkingLayer != null) {
-			//NOTE: R.id.parking_lim_text - is used just as a stub
-			helper.registerOptionsMenuItem(R.string.osmand_parking_delete, R.string.osmand_parking_delete, android.R.drawable.ic_menu_mylocation, 
-					new OnOptionsMenuClick() {
-						@Override
-						public void prepareOptionsMenu(Menu menu, MenuItem deleteParkingItem) {
-							if (getParkingPosition() != null) {
-								deleteParkingItem.setVisible(true);
-							} else {
-								deleteParkingItem.setVisible(false);
-							}
-						}
-						
-						@Override
-						public boolean onClick(MenuItem item) {
-							showDeleteDialog(mapActivity);
-							return true;
-						}
-					});
+			if (getParkingPosition() != null) {
+				boolean l = app.getSettings().isLightContent();
+				helper.registerItem(R.string.osmand_parking_delete, l ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark, 
+						new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						showDeleteDialog(mapActivity);
+					}
+
+				});
+			}
 		}
 	}
 	

@@ -3,8 +3,6 @@
  */
 package net.osmand.plus.development;
 
-import com.actionbarsherlock.app.SherlockActivity;
-
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -22,6 +20,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.actionbarsherlock.app.SherlockActivity;
 
 /**
  * Test Voice activity

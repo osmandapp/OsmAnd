@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.AttributeSet;

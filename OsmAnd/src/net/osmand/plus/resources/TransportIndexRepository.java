@@ -3,9 +3,9 @@ package net.osmand.plus.resources;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
+import net.osmand.data.LatLon;
 import net.osmand.data.TransportRoute;
 import net.osmand.data.TransportStop;
-import net.osmand.data.LatLon;
 
 public interface TransportIndexRepository {
 	
