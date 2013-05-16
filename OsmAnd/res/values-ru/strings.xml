@@ -69,7 +69,7 @@
     <string name="search_villages_and_postcodes">Поиск по деревням и почт. индексу</string>
 	<string name="rendering_attr_showRoadMaps_description">Выберите как отображать только дорожные карты:</string>
 	<string name="rendering_attr_showRoadMaps_name">Карты только дорог</string>
-    <string name="download_roads_only_item">"Дороги "</string>
+    <string name="download_roads_only_item">Только дороги</string>
     <string name="download_regular_maps">Полные карты</string>
     <string name="download_roads_only_maps">Карты только дорог</string>
     <string name="safe_mode_description">Запустить приложение в безопасном режиме (замедляет работу приложения, используя только Android функции).</string>
@@ -265,7 +265,7 @@
   <string name="local_index_mi_backup">Архив</string>
   <string name="local_index_mi_delete">Удалить</string>
   <string name="local_index_mi_reload">Перечитать с SD-накопителя</string>
-  <string name="local_index_download">Загрузить…</string>
+  <string name="local_index_download">Загрузить</string>
   <string name="local_index_tile_data">Тайловые данные: %1$s
 \nМинимальный уровень: %2$d Максимальный уровень: %3$d Загружаемый: %4$s
 \nУровни загружены: %5$s</string>
@@ -1138,7 +1138,7 @@
 	<string name="street_name">Улица</string>
 	<string name="hno">Номер дома</string>
     <string name="download_using_mobile_internet">В настоящее время нет соединения по WiFi. Хотите продолжить загрузку по текущему интернет-соединению?</string>
-    <string name="tip_recent_changes_1_5_t">Изменения в 1.5:\n\t*Тема Holo (настройка тем)</string>
+    <string name="tip_recent_changes_1_5_t">"Изменения в 1.5:\n\t*Тема Holo (настройка тем) "</string>
     <string name="monitoring_settings">Служба логгирования и спящий режим</string>
     <string name="monitoring_settings_descr">Настроить запись поездок и включение спящего режима</string>
     <string name="osmand_monitoring_plugin_description">Включение трекинга и навигации во спящем режиме (экран выключен) с помощью периодического пробуждения устройства GPS. Настройка записи поездок в локальные файлы GPX или в Интернете с помощью веб-службы.</string>
