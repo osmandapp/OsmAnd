@@ -1247,4 +1247,5 @@
     <string name="favourites_list_activity">Seleziona preferito</string>
     <string name="local_openstreetmap_act_title">Modifiche OSM</string>
     <string name="default_buttons_other_actions">Altre azioni</string>
+    <string name="download_using_mobile_internet">Attualmente la connessione WiFi non è attiva. Vuoi continuare a scaricare con la connessione Internet attiva?</string>
     </resources>
