@@ -1211,4 +1211,5 @@
     <string name="favourites_list_activity">Selecteer favoriet</string>
     <string name="local_openstreetmap_act_title">OSM wijzigingen</string>
     <string name="default_buttons_other_actions">Andere acties</string>
+    <string name="download_using_mobile_internet">Er is geen WiFi verbinding. Wil je doorgaan met downloaden via de nu aanwezige Internet verbinding?</string>
     </resources>
