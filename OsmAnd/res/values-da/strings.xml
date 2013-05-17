@@ -92,7 +92,7 @@
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
     <string name="enable_plugin_monitoring_services">Aktiver sporingsudvidelse for at bruge positionlogning tjenester (GPX-logning, 0nline sporing)</string>
-    <string name="non_optimal_route_calculation">Beregn en mulig ikke-optimal rute over lange afstande</string>
+    <string name="non_optimal_route_calculation">Beregn en muligvis ikke-optimal rute over lange afstande</string>
 	<string name="gps_not_available">Aktiver GPS i indstillinger</string>
     <string name="map_widget_monitoring_services">Logningstjenester</string>
 	<string name="no_route">Ingen rute</string>
@@ -305,7 +305,7 @@
 	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offlinedata.\nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktivere eller slette. Nuværende data på enheden (%1$s fri):</string>
 	<string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
 	<string name="unknown_location">Position endnu ikke kendt</string>
-	<string name="context_menu_item_directions">Kørselsvejledning hertil</string>
+	<string name="context_menu_item_directions">Rutevejledning hertil</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Vil du afbryde hentning af fil?</string>
 	<string name="first_time_msg">Tak for at du bruger OsmAnd. Til mange af funktionerne i dette program skal du bruge nogle regionale offline data som du kan hente via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan du se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
@@ -799,7 +799,7 @@
 \n\tLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
 \n\tFor at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Definer visning\'. "</string>
 	<string name="tip_recent_changes_1_1_4_t">"Ændringer i 1.1.4:\n\t* Redesign af brugerflade\n\t* Fejlrettelser "</string>
-    <string name="tip_navigation_t">\tDu skal vælge et destination før du kan starte navigation. Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
+    <string name="tip_navigation_t">\tDu skal vælge et destination før du kan starte navigation. Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1060,7 +1060,7 @@
 	<string name="only_show">Vis kun</string>
 	<string name="follow">Følg</string>
 	<string name="mark_final_location_first">Vælg først en destination</string>
-	<string name="get_directions">Kørselsvejledning</string>
+	<string name="get_directions">Rutevejledning</string>
 	<string name="show_gps_status">Vis GPS-status</string>
 	<string name="opening_hours">Åbningstider</string>
 	<string name="opening_changeset">Åbner ændringssæt…</string>
