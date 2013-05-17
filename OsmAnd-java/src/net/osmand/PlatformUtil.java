@@ -2,6 +2,8 @@ package net.osmand;
 
 
 
+import java.util.Locale;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xmlpull.v1.XmlPullParser;
@@ -55,8 +57,10 @@ public class PlatformUtil {
 		};
 	}*/
 	
-	public static net.osmand.Collator primaryCollator(){
-		final java.text.Collator instance = java.text.Collator.getInstance();
+	public static net.osmand.Collator primaryCollator() {
+		// romanian locale encounters diacritics as differnet symbols
+		final java.text.Collator instance = Locale.getDefault().getLanguage().equals("ro") ? java.text.Collator.getInstance(Locale.US)
+				: java.text.Collator.getInstance();
 		instance.setStrength(java.text.Collator.PRIMARY);
 		return wrapCollator(instance);
 	}
