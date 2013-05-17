@@ -313,18 +313,8 @@ public class RouteProvider {
 		return new RouteCalculationResult(res, null, params.start, params.end, null, null,
 				params.ctx, params.leftSide, true);
 	}
-	protected RouteCalculationResult findNewVectorMapsRoute(RouteCalculationParams params) throws IOException {
-		String path = params.ctx.getAppPath("").getAbsolutePath();
-		NativeLibrary.testNativeRouting(path, params.start.getLatitude(),
-				params.start.getLongitude(), params.end.getLatitude(),
-				params.end.getLongitude());
-		return new RouteCalculationResult("Done ");
-	}
 	
 	protected RouteCalculationResult findVectorMapsRoute(RouteCalculationParams params) throws IOException {
-		if(PlatformUtil.AVIAN_LIBRARY) {
-			return findNewVectorMapsRoute(params);
-		}
 		BinaryMapIndexReader[] files = params.ctx.getTodoAPI().getRoutingMapFiles();
 		RoutePlannerFrontEnd router = new RoutePlannerFrontEnd(!params.preciseRouting);
 		OsmandSettings settings = params.ctx.getSettings();

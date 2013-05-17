@@ -6,7 +6,6 @@ import java.io.File;
 import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -26,12 +25,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 	private Preference localIndexes;
 	private Preference general;
 	private Preference routing;
-	
-	// FIXME
-	public ProgressDialog progressDlg;
-	public static CharSequence SCREEN_ID_GENERAL_SETTINGS;
-	public static CharSequence SCREEN_ID_NAVIGATION_SETTINGS;
-
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,7 +46,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 		Intent intent = getIntent();
 		if(intent != null && intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0) != 0){
 			int s = intent.getIntExtra(INTENT_KEY_SETTINGS_SCREEN, 0);
-			String pref = null;
 			if(s == SCREEN_GENERAL_SETTINGS){
 				startActivity(new Intent(this, SettingsGeneralActivity.class));
 			} else if(s == SCREEN_NAVIGATION_SETTINGS){

@@ -306,7 +306,7 @@ public class MainMenuActivity extends Activity {
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					startActivity(new Intent(MainMenuActivity.this, DownloadIndexActivity.class));
+					startActivity(new Intent(MainMenuActivity.this, OsmandIntents.getDownloadIndexActivity()));
 				}
 
 			});

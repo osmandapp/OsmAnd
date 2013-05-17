@@ -183,9 +183,6 @@ public class NativeLibrary {
 			RenderingRuleSearchRequest request, boolean skipDuplicates, int renderRouteDataFile, Object objectWithInterruptedField,
 			String msgIfNothingFound);
 
-	public static native void testRoutingPing();
-
-	public static native int testNativeRouting(String obfPath, double sLat, double sLon, double eLat, double eLon);
 
 	/**/
 	// Empty native impl

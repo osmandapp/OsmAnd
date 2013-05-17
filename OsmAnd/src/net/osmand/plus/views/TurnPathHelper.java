@@ -238,19 +238,21 @@ public class TurnPathHelper {
 		public RouteDrawable(Resources resources){
 			paintRouteDirection = new Paint();
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
-			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow));
+			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
+			TurnPathHelper.calcTurnPath(dp, TurnType.valueOf(TurnType.KL, false), null);
 		}
 
 		@Override
 		protected void onBoundsChange(Rect bounds) {
 			Matrix m = new Matrix();
-			m.setScale(bounds.width()/72f, bounds.height()/72f);
+			m.setScale(bounds.width() / 72f, bounds.height() / 72f);
 			p.transform(m, dp);
 		}
 		
 		public void setRouteType(TurnType t){
 			TurnPathHelper.calcTurnPath(p, t, null);
+			System.out.println("Draw " + getBounds().toShortString() + " " );
 			onBoundsChange(getBounds());
 		}
 

@@ -216,7 +216,8 @@ public class RouteCalculationResult {
 					info.setDestinationName(next.getObject().getDestinationName());
 				}
 				
-				String description = toString(turn, ctx);
+				String description = toString(turn, ctx) + " " + RoutingHelper.formatStreetName(info.getStreetName(), 
+						info.getRef(), info.getDestinationName());
 				info.setDescriptionRoute(description);
 				info.routePointOffset = prevLocationSize;
 				if(directions.size() > 0 && prevDirectionTime > 0 && prevDirectionDistance > 0) {

@@ -601,6 +601,9 @@ public class RoutingHelper {
 			}
 			return name;
 		} else {
+			if(ref == null) {
+				return "";
+			}
 			return ref;
 		}
 	}

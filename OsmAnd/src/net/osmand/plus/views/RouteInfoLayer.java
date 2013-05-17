@@ -14,9 +14,13 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.LinearLayout;
 
 
@@ -35,12 +39,9 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	
 	
 	public RouteInfoLayer(RoutingHelper routingHelper, MapActivity activity, ContextMenuLayer contextMenu){
-		final LinearLayout layout = (LinearLayout) activity.findViewById(R.id.RouteLayout);
+		createLayout(activity);
 		this.routingHelper = routingHelper;
 		this.contextMenu = contextMenu;
-		prev = (Button) layout.findViewById(R.id.PreviousButton);
-		next = (Button) layout.findViewById(R.id.NextButton);
-		info = (Button) layout.findViewById(R.id.InfoButton);
 		routingHelper.addListener(this);
 		attachListeners();
 		updateVisibility();
@@ -50,6 +51,30 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		activity.accessibleContent.add(info);
 	}
 	
+	private void createLayout(MapActivity activity) {
+		FrameLayout fl = (FrameLayout) activity.getMapView().getParent();
+		LinearLayout ll = new LinearLayout(activity);
+		ll.setOrientation(LinearLayout.HORIZONTAL);
+		DisplayMetrics dm = activity.getResources().getDisplayMetrics();
+		ll.setPadding(0, 0, (int) (dm.density * 15), (int) (dm.density * 50));
+		fl.addView(ll, new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER));
+		prev = new Button(activity);
+		prev.setContentDescription(activity.getString(R.string.previous_button));
+		prev.setCompoundDrawables(activity.getResources().getDrawable(R.drawable.a_1_navigation_previous_item_light), null, null, null);
+		ll.addView(prev);
+		info = new Button(activity);
+		info.setContentDescription(activity.getString(R.string.info_button));
+		info.setPadding((int) (dm.density * 8), 0, 0, 0);
+		info.setCompoundDrawables(activity.getResources().getDrawable(R.drawable.a_2_action_about_light), null, null, null);
+		ll.addView(info);
+		next = new Button(activity);
+		next.setContentDescription(activity.getString(R.string.next_button));
+		next.setPadding((int) (dm.density * 8), 0, 0, 0);
+		next.setBackground(activity.getResources().getDrawable(R.drawable.a_1_navigation_next_item_light));
+		next.setCompoundDrawables(activity.getResources().getDrawable(R.drawable.a_1_navigation_next_item_light), null, null, null);
+		ll.addView(next);
+	}
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;

@@ -1063,8 +1063,14 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		if (mapActivity.getPointToNavigate() != null) {
-			int nav = (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) ? 
-					R.string.stop_routing : R.string.stop_navigation;
+			int nav;
+			if(routingHelper.isFollowingMode()) {
+				nav = R.string.cancel_navigation;
+			} else if(routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
+				nav = R.string.cancel_route;
+			} else {
+				nav = R.string.clear_destination;
+			}
 			optionsMenuHelper.registerItem(nav, 
 					light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark,
 							new OnContextMenuClick() {

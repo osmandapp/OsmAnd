@@ -5,15 +5,5 @@
     android:layout_height="fill_parent" android:keepScreenOn="true" android:clipChildren="false">
 <net.osmand.plus.views.OsmandMapTileView android:id="@+id/MapView" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/map_view"/>
 
-<LinearLayout android:layout_width="wrap_content" android:id="@+id/RouteLayout" android:orientation="horizontal" android:layout_height="wrap_content" 
-				android:layout_marginBottom="12dp" android:layout_gravity="bottom|center" >
-
-<Button android:layout_width="wrap_content" android:id="@+id/PreviousButton"  android:layout_height="wrap_content" android:background="@android:drawable/ic_media_previous" 
-			android:contentDescription="@string/previous_button"/>
-<Button android:layout_width="wrap_content" android:id="@+id/InfoButton" android:layout_height="wrap_content" android:background="@android:drawable/ic_dialog_info" 
-			android:contentDescription="@string/info_button" android:layout_marginLeft="8dp"/>
-<Button android:layout_width="wrap_content" android:id="@+id/NextButton" android:layout_height="wrap_content" android:background="@android:drawable/ic_media_next"
-			android:contentDescription="@string/next_button" android:layout_marginLeft="8dp" android:layout_marginRight="55dp" />
-</LinearLayout>
 
 </FrameLayout>

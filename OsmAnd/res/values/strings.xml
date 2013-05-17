@@ -9,7 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    
+    <string name="cancel_route">Dismiss route</string>
+    <string name="cancel_navigation">Stop navigation</string>
+    <string name="clear_destination">Clear destination</string>
     <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
     <string name="street_name">Street</string>
 	<string name="hno">House number</string>
@@ -1202,7 +1204,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
 	<string name="voice_data_unavailable">Selected voice data is not available</string>
-	<string name="stop_routing">Stop navigtn.</string>
 	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
 	<string name="unzipping_file">Unzipping file&#8230;</string>
@@ -1353,7 +1354,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="ChooseCountry">Choose country</string>
 	<string name="map_specify_point">Set as destination</string>
 	<string name="show_view_angle">Display viewing direction</string>
-	<string name="stop_navigation">Clear destin.</string>
+	
 	<string name="navigate_to_point">Set as dest.</string>
 	<string name="map_view_3d_descr">Enable 3D view of the map</string>
 	<string name="map_view_3d">Map View 3D</string>

@@ -16,12 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.TurnPathHelper;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.TextPaint;
-import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,25 +46,8 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 		ListView lv = new ListView(this);
 		lv.setId(android.R.id.list);
 		header = new TextView(this);
-		TextView linkSaveAs = new TextView(this);
 		helper = ((OsmandApplication)getApplication()).getRoutingHelper();
 		lv.addHeaderView(header);
-		final CharSequence link = getText(R.string.save_route_as_gpx);
-		SpannableString content = new SpannableString(link);
-		content.setSpan(new ClickableSpan() {
-			@Override
-			public void onClick(View widget) {
-				
-			}
-			
-			@Override
-			public void updateDrawState(TextPaint ds) {
-				super.updateDrawState(ds);
-				ds.setColor(Color.GREEN);
-			}
-		}, 0, link.length(), 0);
-		linkSaveAs.setText(content);
-		linkSaveAs.setMovementMethod(LinkMovementMethod.getInstance());
 		setContentView(lv);
 		dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -144,7 +122,8 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 			
 			if(!(icon.getDrawable() instanceof TurnPathHelper.RouteDrawable)){
-				icon.setImageDrawable(new TurnPathHelper.RouteDrawable(getResources()));
+				TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources());
+				icon.setImageDrawable(drawable);
 			}
 			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.getTurnType());
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, getMyApplication()));
