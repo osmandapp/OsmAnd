@@ -76,6 +76,7 @@ public class OsmandExtraSettings extends OsmandPlugin {
 				b.show();
 			}
 		});
+
 		final MapWidgetRegInfo showRuler = mapInfoControls.registerAppearanceWidget(R.drawable.widget_ruler, R.string.map_widget_show_ruler, 
 				"showRuler", view.getSettings().SHOW_RULER);
 		showRuler.setStateChangeListener(new Runnable() {
@@ -86,22 +87,22 @@ public class OsmandExtraSettings extends OsmandPlugin {
 			}
 		});
 		
-		final MapWidgetRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
-				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
-		transparent.setStateChangeListener(new Runnable() {
-			@Override
-			public void run() {
-				view.getSettings().TRANSPARENT_MAP_THEME.set(!view.getSettings().TRANSPARENT_MAP_THEME.get());
-				mapInfoLayer.recreateControls();
-			}
-		});
-		
 		final MapWidgetRegInfo showDestinationArrow = mapInfoControls.registerAppearanceWidget(R.drawable.widget_show_destination_arrow, R.string.map_widget_show_destination_arrow,
 				"show_destination_arrow", view.getSettings().SHOW_DESTINATION_ARROW);
 		showDestinationArrow.setStateChangeListener(new Runnable() {
 			@Override
 			public void run() {
 				view.getSettings().SHOW_DESTINATION_ARROW.set(!view.getSettings().SHOW_DESTINATION_ARROW.get());
+				mapInfoLayer.recreateControls();
+			}
+		});
+
+		final MapWidgetRegInfo transparent = mapInfoControls.registerAppearanceWidget(R.drawable.widget_transparent_skin, R.string.map_widget_transparent,
+				"transparent", view.getSettings().TRANSPARENT_MAP_THEME);
+		transparent.setStateChangeListener(new Runnable() {
+			@Override
+			public void run() {
+				view.getSettings().TRANSPARENT_MAP_THEME.set(!view.getSettings().TRANSPARENT_MAP_THEME.get());
 				mapInfoLayer.recreateControls();
 			}
 		});
