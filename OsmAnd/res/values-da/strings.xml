@@ -435,7 +435,7 @@
 	<string name="show_current_gpx_title">Vis nuværende spor</string>
 	<string name="free_version_message">Denne gratis OsmAnd version er begrænset til hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
 	<string name="free_version_title">Gratis version</string>
-	<string name="poi_context_menu_showdescription">Vis interessepunkt\nbeskrivelse</string>
+	<string name="poi_context_menu_showdescription">Vis IP\nbeskrivelse</string>
 	<string name="index_name_north_america">Nordamerika</string>
 	<string name="index_name_us">Nordamerika - USA</string>
 	<string name="index_name_central_america">Mellemamerika</string>
