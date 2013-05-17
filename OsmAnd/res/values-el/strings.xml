@@ -677,7 +677,7 @@
 	<string name="daynight">Λειτουργία ημέρας/νύχτας</string>
 	<string name="download_files_question">Λήψη {0} αρχείου(ων) ({1} MB)?</string>
 	<string name="items_were_selected">{0} αντικείμενο(α) επιλέχτηκαν</string>
-	<string name="filter_existing_indexes">Φιλτράρισμα ληφθέντων</string>
+	<string name="filter_existing_indexes">Κατεβασμένα</string>
 	<string name="deselect_all">Αποεπιλογή όλων</string>
 	<string name="select_all">Επιλογή όλων</string>
 	<string name="reload">Ανανέωση</string>
@@ -797,10 +797,10 @@
 	<string name="search_near_map">Αναζήτηση κοντά στην τελευταία τοποθεσία του χάρτη</string>
 	<string name="search_nearby">Αναζήτηση στη γύρω περιοχή</string>
 	<string name="map_orientation_default">Το ίδιο με τη συσκευή</string>
-	<string name="map_orientation_portrait">Κατακόρυφο</string>
-	<string name="map_orientation_landscape">Οριζόντιο</string>
+	<string name="map_orientation_portrait">Πορτραίτο</string>
+	<string name="map_orientation_landscape">Τοπίο</string>
 	<string name="map_screen_orientation">Προσανατολισμός οθόνης</string>
-	<string name="map_screen_orientation_descr">Κατακόρυφο, οριζόντιο, ή συσκευή</string>
+	<string name="map_screen_orientation_descr">Πορτραίτο, τοπίο, ή συσκευή</string>
 	<string name="opening_hours_not_supported">Η μορφή των ωρών λειτουργίας δεν υποστηρίζεται για επεξεργασία</string>
 	<string name="add_new_rule">Προσθήκη νέου κανόνα</string>
 	<string name="transport_Routes">Δρομολόγια</string>
@@ -894,8 +894,8 @@
 	<string name="previous_run_crashed">Η τελευταία εκτέλεση του OsmAnd κατέρρευσε. Το αρχείο καταγραφής είναι στο {0}. Παρακαλώ αναφέρετε το συμβάν και επισυνάψτε το αρχείο καταγραφής.</string>
 	<string name="saving_gpx_tracks">Αποθήκευση ιχνών GPX στην SD…</string>
 	<string name="finished_task">Ολοκληρώθηκε</string>
-	<string name="reload_indexes_descr">Ξαναδιάβασε τους offline διανυσματικούς χάρτες και τα δεδομένα από την κάρτα SD</string>
-	<string name="reload_indexes">Επανανάγνωση offline δεδομένων</string>
+	<string name="reload_indexes_descr">Επανανάγνωση των offline διανυσματικών χαρτών και των δεδομένων από την κάρτα SD</string>
+	<string name="reload_indexes">Επανανάγνωση των offline δεδομένων</string>
 	<string name="download_indexes_descr">Λήψη ή ενημέρωση δεδομένων για χρήση χωρίς σύνδεση από το Διαδίκτυο</string>
 	<string name="download_indexes">Λήψη offline δεδομένων</string>
 	<string name="use_online_routing_descr">Χρήση Διαδικτύου για υπολογισμό διαδρομής</string>
@@ -920,7 +920,7 @@
 	<string name="show_osm_bugs_descr">Εμφάνιση OpenStreetBugs στο χάρτη</string>
 	<string name="show_osm_bugs">Εμφάνιση OpenStreetBugs</string>
 	<string name="favourites_activity">Αγαπημένα</string>
-	<string name="add_to_favourite">Προσθήκη στα αγαπημένα</string>
+	<string name="add_to_favourite">Προσθήκη στα Αγαπημένα</string>
 	<string name="use_english_names_descr">Επέλεξε μεταξύ ντόπιων και Αγγλικών ονομάτων</string>
 	<string name="use_english_names">Χρήση Αγγλικών ονομάτων στους χάρτες</string>
 	<string name="app_settings">Ρυθμίσεις εφαρμογής</string>
@@ -1218,4 +1218,5 @@
     <string name="default_buttons_other_actions">Άλλες ενέργειες</string>
     <string name="av_def_action_choose">Επιλογή κατά την ζήτηση</string>
     <string name="osmand_monitoring_plugin_description">Ενεργοποίηση ιχνηλάτησης και δρομολόγησης σε κατάσταση νάρκης (οθόνη κλειστή) μέσω περιοδικής αφύπνισης της συσκευής GPS. Εμφάνιση ρυθμίσεων που διευκολύνουν την εγγραφή των ταξιδιών σας σε τοπικά αρχεία GPX ή online χρησιμοποιώντας κάποια web υπηρεσία.</string>
+    <string name="download_using_mobile_internet">Προς το παρόν το WiFi δεν είναι συνδεδεμένο. Θέλετε να συνεχίσετε τη λήψη με την τρέχουσα σύνδεση internet;</string>
     </resources>
