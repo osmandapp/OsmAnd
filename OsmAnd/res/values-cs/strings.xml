@@ -1195,7 +1195,9 @@
     <string name="av_use_external_camera">Externí foto aplikace</string>
     <string name="prefer_motorways">Preferovat dálnice</string>
 	<string name="prefer_in_routing_title">Preferovat…</string>
-	<string name="tip_recent_changes_1_2_t">"Změny ve verzi 1.2: "</string>
+	<string name="tip_recent_changes_1_2_t">"Opravy ve verzi 1.2.1:\n\t* Oprava Geo obsahu (Foursquare, c:geo)\n\t* Oprava nestability obrazovky během navigace\n\t* Další drobné opravy\nZměny ve verzi 1.2:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)
+\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)
+\n\t* Podpora odkazů maps.google.com\n\t* Nový widget (GPS info)\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
     <string name="max_speed_none">žádná</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Stínování kopců</string>
@@ -1206,9 +1208,9 @@
     <string name="prefer_in_routing_descr">Preferovat dálnice</string>
     <string name="av_def_action_choose">Vybrat při použití</string>
     <string name="access_arrival_time">Čas příjezdu</string>
-    <string name="tip_recent_changes_1_1_4_t">"Změny ve verzi 1.1.4:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)
-\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)
-\n\t* Podpora odkazů maps.google.com\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
+    <string name="tip_recent_changes_1_1_4_t">"Změny ve verzi 1.1.4:
+\n\t* Nový vzhled aplikace
+\n\t* Opravy chyb "</string>
     <string name="layer_hillshade">Stínování</string>
     <string name="map_widget_gps_info">Info o GPS</string>
     <string name="map_view">Mapa</string>
@@ -1217,4 +1219,5 @@
 	<string name="item_checked">zvoleno</string>
     <string name="item_unchecked">nezvoleno</string>
     <string name="save_current_track_widget">Uložit\nsoučasnou GPX trasu</string>
-	</resources>
+	<string name="choose_osmand_theme">Vzhled aplikace</string>
+    </resources>
