@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
@@ -864,7 +864,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="layer_yandex_traffic">Yandex Verkehr</string>
 	<string name="layer_route">Route</string>
 	<string name="layer_favorites">Favoriten</string>
-	<string name="layer_osm_bugs">OSM-Fehlerbericht</string>
+	<string name="layer_osm_bugs">OSM-Fehlerbericht (online)</string>
 	<string name="layer_transport">ÖPNV-Haltestellen</string>
 	<string name="layer_poi">POI …</string>
 	<string name="layer_map">Kartenquelle …</string>
