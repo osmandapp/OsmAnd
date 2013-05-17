@@ -345,7 +345,7 @@
   <string name="layer_yandex_traffic">Yandex - informacje o korkach</string>
   <string name="layer_route">Trasa</string>
   <string name="layer_favorites">Ulubione</string>
-  <string name="layer_osm_bugs">Błędy OSM</string>
+  <string name="layer_osm_bugs">Błędy OSM (online)</string>
   <string name="layer_transport">Przystanki</string>
   <string name="layer_poi">POI…</string>
   <string name="layer_map">Źródło mapy…</string>
