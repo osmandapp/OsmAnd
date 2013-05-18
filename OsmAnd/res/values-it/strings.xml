@@ -467,7 +467,7 @@
   <string name="gps_provider">GPS</string>
   <string name="int_seconds">secondi</string>
   <string name="int_min">min.</string>
-  <string name="background_service_int_descr">Scegli l\'intervallo di tempo di risveglio usato dal servizio modo quiesciente</string>
+  <string name="background_service_int_descr">Scegli l\'intervallo di tempo di risveglio usato dal servizio modo quiescente</string>
   <string name="background_service_int">Intervallo di risveglio</string>
   <string name="background_service_provider_descr">Scegli il fornitore di posizione finché si sta usando il modo background</string>
   <string name="background_service_provider">Fornitore di posizionamento</string>
@@ -1237,7 +1237,7 @@
 	<string name="hno">Numero civico</string>
     <string name="tip_recent_changes_1_3_t">"Cambiamenti nella 1.5:\n\t* Tema Holo (personalizzazione tema) "</string>
     <string name="monitoring_settings">Servizi di registrazione e modalità quiescente</string>
-    <string name="monitoring_settings_descr">Configura come registrare viaggi e attivare la modalità quiesciente</string>
+    <string name="monitoring_settings_descr">Configura come registrare viaggi e attivare la modalità quiescente</string>
     <string name="osmand_monitoring_plugin_description">Attivare il monitoraggio e la navigazione nella modalità quiescente (schermo spento) attraverso periodici risvegli del dispositivo GPS. Mostra impostazioni che facilitano la registrazione dei vostri viaggi in file GPX locali o online utilizzando un servizio web.</string>
     <string name="osmand_monitoring_plugin_name">Servizi di registrazione e modalità quescente</string>
     <string name="choose_osmand_theme_descr">Scegli il tema dell\'applicazione</string>
