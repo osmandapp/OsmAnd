@@ -1219,4 +1219,7 @@
     <string name="av_def_action_choose">Επιλογή κατά την ζήτηση</string>
     <string name="osmand_monitoring_plugin_description">Ενεργοποίηση ιχνηλάτησης και δρομολόγησης σε κατάσταση νάρκης (οθόνη κλειστή) μέσω περιοδικής αφύπνισης της συσκευής GPS. Εμφάνιση ρυθμίσεων που διευκολύνουν την εγγραφή των ταξιδιών σας σε τοπικά αρχεία GPX ή online χρησιμοποιώντας κάποια web υπηρεσία.</string>
     <string name="download_using_mobile_internet">Προς το παρόν το WiFi δεν είναι συνδεδεμένο. Θέλετε να συνεχίσετε τη λήψη με την τρέχουσα σύνδεση internet;</string>
+    <string name="cancel_route">Απόρριψη διαδρομής</string>
+    <string name="cancel_navigation">Σταμάτημα πλοήγησης</string>
+    <string name="clear_destination">Καθαρισμός προορισμού</string>
     </resources>
