@@ -89,8 +89,8 @@
 	<!-- routeColor contrast higher than in default -->
 	<renderingAttribute name="routeColor">
 		<filter nightMode="false" attrColorValue="#960000FF"/>
-		<filter attrColorValue="#CCFF6600"/>
-		<!-- (very invisible in some environments:) filter attrColorValue="#b4007cff"/ -->
+		<filter attrColorValue="#b400a0ff"/>
+		<!-- (old was darker and less visible in some environments:) filter attrColorValue="#b4007cff"/ -->
 	</renderingAttribute>
 
 	<!-- gpxColor contrast higher than in default -->
