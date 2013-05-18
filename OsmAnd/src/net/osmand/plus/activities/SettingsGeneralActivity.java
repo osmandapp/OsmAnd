@@ -4,6 +4,7 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.util.List;
 
+import net.osmand.IProgress;
 import net.osmand.access.AccessibleToast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
@@ -280,7 +281,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(new ProgressDialogImplementation(SettingsGeneralActivity.this, null, false));
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS);
 			}
 			
 			protected void onPostExecute(List<String> result) {

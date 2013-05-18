@@ -23,6 +23,7 @@ public class SuggestExternalDirectoryDialog {
 		Builder bld = new AlertDialog.Builder(a);
 		HashSet<String> externalMounts = getExternalMounts();
 		String apath = app.getSettings().getExternalStorageDirectory().getAbsolutePath();
+		externalMounts.add(app.getExternalServiceAPI().getExternalStorageDirectory());
 		externalMounts.add(apath);
 		final String[] extMounts = new String[showOther ?  externalMounts.size()+1 : externalMounts.size()];
 		externalMounts.toArray(extMounts);
