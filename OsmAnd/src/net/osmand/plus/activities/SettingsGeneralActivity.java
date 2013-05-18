@@ -10,7 +10,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
@@ -103,8 +102,9 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 					}, new Runnable() {
 						@Override
 						public void run() {
+							Toast.makeText(SettingsGeneralActivity.this, getString(R.string.application_dir_change_warning), 
+									Toast.LENGTH_LONG).show();
 							reloadIndexes();
-							
 						}
 					});
 					return false;
