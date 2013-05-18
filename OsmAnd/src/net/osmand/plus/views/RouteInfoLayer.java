@@ -17,10 +17,9 @@ import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.FrameLayout.LayoutParams;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 
@@ -28,9 +27,9 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 
 	private OsmandMapTileView view;
 	private final RoutingHelper routingHelper;
-	private Button next;
-	private Button prev;
-	private Button info;
+	private View next;
+	private View prev;
+	private View info;
 	private int directionInfo = -1;
 
 	private DisplayMetrics dm;
@@ -58,20 +57,19 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		DisplayMetrics dm = activity.getResources().getDisplayMetrics();
 		ll.setPadding(0, 0, (int) (dm.density * 15), (int) (dm.density * 50));
 		fl.addView(ll, new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER));
-		prev = new Button(activity);
+		prev = new ImageButton(activity);
 		prev.setContentDescription(activity.getString(R.string.previous_button));
-		prev.setCompoundDrawables(activity.getResources().getDrawable(R.drawable.a_1_navigation_previous_item_light), null, null, null);
+		prev.setBackground(activity.getResources().getDrawable(R.drawable.ax_1_navigation_previous_item_light));
 		ll.addView(prev);
-		info = new Button(activity);
+		info = new ImageButton(activity);
 		info.setContentDescription(activity.getString(R.string.info_button));
 		info.setPadding((int) (dm.density * 8), 0, 0, 0);
-		info.setCompoundDrawables(activity.getResources().getDrawable(R.drawable.a_2_action_about_light), null, null, null);
+		info.setBackground(activity.getResources().getDrawable(R.drawable.ax_2_action_about_light));
 		ll.addView(info);
-		next = new Button(activity);
+		next = new ImageButton(activity);
 		next.setContentDescription(activity.getString(R.string.next_button));
 		next.setPadding((int) (dm.density * 8), 0, 0, 0);
-		next.setBackground(activity.getResources().getDrawable(R.drawable.a_1_navigation_next_item_light));
-		next.setCompoundDrawables(activity.getResources().getDrawable(R.drawable.a_1_navigation_next_item_light), null, null, null);
+		next.setBackground(activity.getResources().getDrawable(R.drawable.ax_1_navigation_next_item_light));
 		ll.addView(next);
 	}
 

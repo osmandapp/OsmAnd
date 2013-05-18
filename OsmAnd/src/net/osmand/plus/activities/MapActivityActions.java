@@ -516,11 +516,15 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targets = getTargets();
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
+		boolean lc = mapActivity.getMyApplication().getSettings().isLightContent();
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
+		buttons[ApplicationMode.CAR.ordinal()].setButtonDrawable(lc ? R.drawable.car_dark : R.drawable.car_light );
 		buttons[ApplicationMode.BICYCLE.ordinal()] = (ToggleButton) view.findViewById(R.id.BicycleButton);
+		buttons[ApplicationMode.BICYCLE.ordinal()].setButtonDrawable(lc ? R.drawable.bicycle_dark : R.drawable.bicycle_light );
 		buttons[ApplicationMode.PEDESTRIAN.ordinal()] = (ToggleButton) view.findViewById(R.id.PedestrianButton);
+		buttons[ApplicationMode.PEDESTRIAN.ordinal()].setButtonDrawable(lc ? R.drawable.pedestrian_dark : R.drawable.pedestrian_light );
 		
 		TextView tv = ((TextView) view.findViewById(R.id.TextView));
 		tv.setText(generateRouteDescription(fromOrCurrent, to));
