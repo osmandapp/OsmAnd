@@ -438,6 +438,7 @@
 		</filter>
 
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="coastline"/>
+		
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="natural" value="land"/>
 		<filter minzoom="3" textSize="14" textColor="#9d6c9d" textWrapWidth="35" tag="ferry_route" value="ferry" nameTag="ferry_route_ref"/>
 		<!-- Location names -->

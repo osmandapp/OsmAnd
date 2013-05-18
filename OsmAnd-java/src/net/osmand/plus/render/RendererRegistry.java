@@ -38,6 +38,8 @@ public class RendererRegistry {
 		internalRenderers.put("Touring-view_(more-contrast-and-details)", "Touring-view_(more-contrast-and-details)" +".render.xml");
 		internalRenderers.put("High-contrast-roads", "High-contrast-roads" + ".render.xml");
 		internalRenderers.put("Winter-and-ski", "Winter-and-ski" + ".render.xml");
+		// internalRenderers.put("High-detail-topo", "High-detail-topo" + ".render.xml");
+		internalRenderers.put("High-detail-topo", "High-detail-topo-v2" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
