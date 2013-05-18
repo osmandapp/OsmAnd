@@ -1195,9 +1195,7 @@
     <string name="av_use_external_camera">Externí foto aplikace</string>
     <string name="prefer_motorways">Preferovat dálnice</string>
 	<string name="prefer_in_routing_title">Preferovat…</string>
-	<string name="tip_recent_changes_1_2_t">"Opravy ve verzi 1.2.1:\n\t* Oprava Geo obsahu (Foursquare, c:geo)\n\t* Oprava nestability obrazovky během navigace\n\t* Další drobné opravy\nZměny ve verzi 1.2:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)
-\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)
-\n\t* Podpora odkazů maps.google.com\n\t* Nový widget (GPS info)\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
+	<string name="tip_recent_changes_1_2_t">"Opravy ve verzi 1.2.1:\n\t* Oprava Geo obsahu (Foursquare, c:geo)\n\t* Oprava nestability obrazovky během navigace\n\t* Další drobné opravy\nZměny ve verzi 1.2:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)\n\t* Podpora odkazů maps.google.com\n\t* Nový widget (GPS info)\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
     <string name="max_speed_none">žádná</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Stínování kopců</string>
@@ -1220,4 +1218,10 @@
     <string name="item_unchecked">nezvoleno</string>
     <string name="save_current_track_widget">Uložit\nsoučasnou GPX trasu</string>
 	<string name="choose_osmand_theme">Vzhled aplikace</string>
+    <string name="choose_osmand_theme_descr">Vybrat téma aplikace</string>
+    <string name="street_name">ulice</string>
+	<string name="hno">číslo domu</string>
+    <string name="download_using_mobile_internet">Momentálně nejste připojeni přes WiFi. Chcete pokračovat ve stahování se současným internetovým připojením?</string>
+    <string name="tip_recent_changes_1_5_t">"Změny ve verzi 1.5:
+\n\t* Holo téma (uživatelské motivy) "</string>
     </resources>
