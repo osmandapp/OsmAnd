@@ -416,7 +416,7 @@
 	<string name="download_question">Preuzmi {0} - {1} ?</string>
 	<string name="download_question_exist">Offline podaci za {0} već postoje ({1}). Želite li ih ažurirali ({2})?</string>
 	<string name="search_offline_address">Offline</string>
-	<string name="route_general_information">Ukupna udaljenost %1$s, vrijeme putovanja %2$d u %3$d m.</string>
+	<string name="route_general_information">Ukupna udaljenost %1$s, vrijeme putovanja %2$d i %3$d m.</string>
 	<string name="search_nothing_found">Nije pronađeno ništa</string>
 	<string name="searching">Tražim...</string>
 	<string name="searching_address">Tražim adresu...</string>
@@ -491,7 +491,7 @@
 	<string name="map_index">Karta</string>
 	<string name="show_point_options">Koristite lokaciju...</string>
 	<string name="fast_route_mode">Najbrži put</string>
-	<string name="fast_route_mode_descr">Omogućite za izračun najbrže rute ili onemogućite za najkraću rutu…</string>
+	<string name="fast_route_mode_descr">Označite za izračun najbrže rute ili odznačite za najkraću rutu…</string>
 	<string name="reload">Osvježi</string>
 	<string name="select_all">Označi sve</string>
 	<string name="deselect_all">Odznači sve</string>
@@ -893,10 +893,7 @@
     <string name="tip_recent_changes_1_1_4_t">Promjene u 1.1.4:\n\t* Redizajn korisničkog sučelja
 \n\t* Ispravljeni bugovi</string>
     <string name="tip_recent_changes_1_1_2_t">Promjene u inačici 1.1.2:
-\n\t* Audio/video plugin enhancement (photos with EXIF information)
-\n\t* Usability fixed and restructured Contour lines plugin
-\n\t* Hillshade packages for Contour lines plugin
-\n\t* Ispravljeni bugovi</string>
+\n\t* Audio/video plugin enhancement (photos with EXIF information)\n\t* Usability fixed and restructured Contour lines plugin\n\t* Hillshade packages for Contour lines plugin\n\t* Ispravljeni bugovi</string>
     <string name="tip_recent_changes_0_8_2_t">"Promjene u inačici 0.8.2:
 \n\t* Poboljšana navigacija
 \n\t* Dynamic map widgets
@@ -921,4 +918,8 @@
 	<string name="save_current_track_widget">Spremi
 \n trenutni GPX</string>
 	<string name="select_address_activity">Odaberite adresu</string>
+    <string name="cancel_navigation">Zaustavi navigaciju</string>
+    <string name="clear_destination">Obriši odredište</string>
+    <string name="cancel_route">Odbaci rutu</string>
+    <string name="download_using_mobile_internet">WiFi trenutno nije spojen. Želite li nastaviti preuzimanje s trenutnom internet vezom?</string>
     </resources>
