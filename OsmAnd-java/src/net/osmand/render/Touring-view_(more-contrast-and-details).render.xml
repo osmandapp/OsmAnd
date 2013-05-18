@@ -62,7 +62,7 @@
 	<renderingProperty attr="osmcTraces" name="Hiking symbol overlay" description="Render paths according to OSMC traces"
 		type="boolean" possibleValues=""/>
 	<renderingProperty attr="showCycleRoutes" name="Show cycle routes" description="Show bicycle routes (bicycle mode)"
-		   type="boolean" possibleValues=""/>
+		type="boolean" possibleValues=""/>
 
 	<!-- road casing contrast higher than in default -->
 	<renderingAttribute name="shadowRendering">
@@ -88,8 +88,9 @@
 
 	<!-- routeColor contrast higher than in default -->
 	<renderingAttribute name="routeColor">
-		<filter nightMode="false" attrColorValue="#960000ff"/>
-		<filter attrColorValue="#b4007cff"/>
+		<filter nightMode="false" attrColorValue="#960000FF"/>
+		<filter attrColorValue="#CCFF6600"/>
+		<!-- (very in visible in some environments:) filter attrColorValue="#b4007cff"/ -->
 	</renderingAttribute>
 
 	<!-- gpxColor contrast higher than in default -->
