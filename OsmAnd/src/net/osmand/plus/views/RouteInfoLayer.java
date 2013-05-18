@@ -59,17 +59,17 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 		fl.addView(ll, new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM | Gravity.CENTER));
 		prev = new ImageButton(activity);
 		prev.setContentDescription(activity.getString(R.string.previous_button));
-		prev.setBackground(activity.getResources().getDrawable(R.drawable.ax_1_navigation_previous_item_light));
+		prev.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_1_navigation_previous_item_light));
 		ll.addView(prev);
 		info = new ImageButton(activity);
 		info.setContentDescription(activity.getString(R.string.info_button));
 		info.setPadding((int) (dm.density * 8), 0, 0, 0);
-		info.setBackground(activity.getResources().getDrawable(R.drawable.ax_2_action_about_light));
+		info.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_2_action_about_light));
 		ll.addView(info);
 		next = new ImageButton(activity);
 		next.setContentDescription(activity.getString(R.string.next_button));
 		next.setPadding((int) (dm.density * 8), 0, 0, 0);
-		next.setBackground(activity.getResources().getDrawable(R.drawable.ax_1_navigation_next_item_light));
+		next.setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.ax_1_navigation_next_item_light));
 		ll.addView(next);
 	}
 

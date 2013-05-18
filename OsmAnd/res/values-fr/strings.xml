@@ -1231,7 +1231,7 @@
 \n la trace GPX courante</string>
 	<string name="street_name">Rue</string>
 	<string name="hno">Numéro de maison</string>
-    <string name="tip_recent_changes_1_5_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "</string>
+    <string name="tip_recent_changes_1_3_t">"Changements en 1.5:\n\t* Thème Holo (personnalisation de thème) "</string>
     <string name="monitoring_settings">Services de surveillance et service d\' arrière plan</string>
     <string name="monitoring_settings_descr">Configurer l\'enregistrement des parcours et le service d\'arrière plan</string>
     <string name="osmand_monitoring_plugin_description">Activer le suivi et la navigation en arrière plan (écran éteint) en réveillant périodiquement le dispositif GPS. Afficher les paramètres facilitant l\' enregistrement de vos parcours vers des fichiers GPX locaux ou en ligne via un service Web.</string>

@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadEntry;
 import net.osmand.plus.download.DownloadFileHelper;
@@ -54,6 +55,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
@@ -158,12 +160,13 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		} else {
 			downloadIndexList();
 		}
-		if(Version.isFreeVersion(getMyApplication()) && settings.checkFreeDownloadsNumberZero()){
-			Builder msg = new AlertDialog.Builder(this);
-			msg.setTitle(R.string.free_version_title);
-			msg.setMessage(getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS+"", ""));
-			msg.setPositiveButton(R.string.default_buttons_ok, null);
-			msg.show();
+		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
+			boolean showedDialog = SuggestExternalDirectoryDialog.showDialog(this, null, null);
+			if(!showedDialog) {
+				showDialogOfFreeDownloadsIfNeeded();
+			}
+		} else {
+			showDialogOfFreeDownloadsIfNeeded();
 		}
 		final DownloadActivityType[] downloadTypes = getDownloadTypes();
 		spinnerAdapter = new ArrayAdapter<String>(getSupportActionBar().getThemedContext(), R.layout.sherlock_spinner_item, 
@@ -178,6 +181,32 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				return true;
 			}
 		});
+        
+	}
+
+
+	private void showDialogOfFreeDownloadsIfNeeded() {
+		if (Version.isFreeVersion(getMyApplication())) {
+			Builder msg = new AlertDialog.Builder(this);
+			msg.setTitle(R.string.free_version_title);
+			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
+			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
+			msg.setMessage(m);
+			if (Version.isGooglePlayEnabled(getMyApplication())) {
+				msg.setNeutralButton(R.string.install_paid, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.plus"));
+						try {
+							startActivity(intent);
+						} catch (ActivityNotFoundException e) {
+						}
+					}
+				});
+			}
+			msg.setPositiveButton(R.string.default_buttons_ok, null);
+			msg.show();
+		}
 	}
 
 
@@ -288,7 +317,22 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		AccessibleToast.makeText(this, MessageFormat.format(getString(R.string.items_were_selected), selected), Toast.LENGTH_SHORT).show();
 		listAdapter.notifyDataSetInvalidated();
 		if(selected > 0){
-			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			makeDownloadVisible();
+		}
+	}
+
+
+	private void makeDownloadVisible() {
+		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+		if(Version.isFreeVersion(getMyApplication())) {
+			int left = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - entriesToDownload.size();
+			boolean excessLimit = left < 0;
+			if(left < 0) left = 0;
+			String t = getString(R.string.download_files);
+			if (getType() != DownloadActivityType.HILLSHADE_FILE || getType() != DownloadActivityType.SRTM_FILE) {
+				t += " (" +(excessLimit?"! ":"") + getString(R.string.files_limit, left).toLowerCase() + ")";
+			}
+			((Button) findViewById(R.id.DownloadButton)).setText(t);
 		}
 	}
 
@@ -528,6 +572,8 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				int y = getListView().getScrollY();
 				findViewById(R.id.DownloadButton).setVisibility(View.GONE);
 				getListView().scrollTo(x, y);
+			} else {
+				makeDownloadVisible();
 			}
 			return true;
 		}
@@ -539,7 +585,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			entriesToDownload.put(e, download);
 			int x = getListView().getScrollX();
 			int y = getListView().getScrollY();
-			findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
+			makeDownloadVisible();
 			getListView().scrollTo(x, y);
 			ch.setChecked(!ch.isChecked());
 		}
@@ -591,15 +637,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 					total++;
 				}
 			}
-			String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "( =" + total + ") ");
 			if (total > MAXIMUM_AVAILABLE_FREE_DOWNLOADS || wiki) {
+				String msgTx = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "(" + total + ") ");
 				Builder msg = new AlertDialog.Builder(this);
 				msg.setTitle(R.string.free_version_title);
 				msg.setMessage(msgTx);
 				msg.setPositiveButton(R.string.default_buttons_ok, null);
 				msg.show();
 			} else {
-				AccessibleToast.makeText(this, msgTx, Toast.LENGTH_LONG).show();
 				downloadFilesPreCheckSRTM( list);
 			}
 		} else {
@@ -707,7 +752,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			for (Object o : values) {
 				if (o instanceof DownloadEntry) {
 					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
-					findViewById(R.id.DownloadButton).setVisibility(entriesToDownload.isEmpty() ? View.GONE : View.VISIBLE);
+					if(entriesToDownload.isEmpty()){
+						findViewById(R.id.DownloadButton).setVisibility(View.GONE);
+					} else {
+						makeDownloadVisible();
+					}
 				} else if (o instanceof String) {
 					AccessibleToast.makeText(DownloadIndexActivity.this, (String) o, Toast.LENGTH_LONG).show();
 				}
@@ -844,6 +893,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			return res;
 		}
 	}
+	
+	
+	
+	
 	
 	public ClientContext getClientContext() {
 		return getMyApplication();

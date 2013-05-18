@@ -1142,7 +1142,7 @@
 	<string name="stop_navigation">Очист. п.п</string>
 	<string name="street_name">Вулиця</string>
 	<string name="hno">Номер будинку</string>
-    <string name="tip_recent_changes_1_5_t">"Зміни в 1.5\n\t* Holo Тема (налаштування теми) "</string>
+    <string name="tip_recent_changes_1_3_t">"Зміни в 1.5\n\t* Holo Тема (налаштування теми) "</string>
     <string name="choose_osmand_theme_descr">Виберіть тему для програми</string>
     <string name="choose_osmand_theme">Тема</string>
     <string name="select_address_activity">Виберіть адресу</string>

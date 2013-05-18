@@ -276,7 +276,7 @@
   <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
   <string name="local_index_gpx_info_speed">\nPrůměrná rychlost : %1$s
 \nMaximální rychlost : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$.0f metrů\nStoupání : %2$.0f metrů\nKlesání : %3$.0f metrů</string>
+  <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$.0f metrů\nStoupání : %2$.0f metrů\nKlesání : %3$.0f metrů  \nAscents: %4$.0f m\nDescents: %5$.0f m</string>
   <string name="local_index_gpx_info">Podtrasy : %1$d\nCelkem bodů : %2$d\nTrasových bodů : %3$d\nCelková vzdálenost : %4$s
 \nPočáteční čas : %5$tF, %5$tR\nKoncový čas : %6$tF, %6$tR</string>
   <string name="local_index_installed">Vydání</string>

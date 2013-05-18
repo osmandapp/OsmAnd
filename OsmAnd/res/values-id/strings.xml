@@ -28,7 +28,7 @@
 	<string name="hno">Nomor rumah</string>
     <string name="website">Website</string>
 	<string name="phone">Telp</string>
-    <string name="tip_recent_changes_1_5_t">"Perubahan pada 1.5:
+    <string name="tip_recent_changes_1_3_t">"Perubahan pada 1.5:
 \n\t* Holo Theme (kustomisasi tema) "</string>
     <string name="monitoring_settings">Layanan pencatatan &amp; Mode Sleep</string>
     <string name="monitoring_settings_descr">Atur bagaimana ingin mencatat perjalanan dan mengaktifkan mode sleep</string>

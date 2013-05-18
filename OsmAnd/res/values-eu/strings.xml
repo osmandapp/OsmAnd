@@ -56,7 +56,7 @@
 	<string name="hno">Etxeko zenbakia</string>
     <string name="website">Web orria</string>
 	<string name="phone">Telefonoa</string>
-    <string name="tip_recent_changes_1_5_t">"Aldaketak 1.5:
+    <string name="tip_recent_changes_1_3_t">"Aldaketak 1.5:
 \n\t* Holo Theme (theme customization) "</string>
     <string name="select_address_activity">Helbidea aukeratu</string>
     <string name="access_arrival_time">Iristeko denbora</string>

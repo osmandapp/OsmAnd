@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="other_location">Other</string>
+    <string name="files_limit">%1$d files left</string>
+    <string name="available_downloads_left">Available %1$d files to download</string>
+    <string name="install_paid">Full version</string>
     <string name="cancel_route">Dismiss route</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="clear_destination">Clear destination</string>
@@ -17,7 +21,7 @@
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
 	<string name="phone">Phone</string>
-    <string name="tip_recent_changes_1_5_t">Change in 1.5:
+    <string name="tip_recent_changes_1_3_t">Change in 1.3:
         \n\t* Holo Theme (theme customization)
     </string>
     <string name="monitoring_settings">Logging services &amp; Sleep Mode</string>
@@ -738,7 +742,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Updated maps
 		\n\t- Other small features
 	</string>    
-	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline Wikipedia articles.</string>
+	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
 	<string name="free_version_title">Free version</string>
 	<string name="poi_context_menu_showdescription">Show POI description</string>
 	<string name="index_name_north_america">North America</string>

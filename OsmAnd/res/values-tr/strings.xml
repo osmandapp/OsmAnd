@@ -111,7 +111,7 @@
     <string name="clear_dest_confirm">Varış yerini iptal etmek istediğinize emin misiniz?</string>
     <string name="precise_routing_mode">Hassas rota (alfa)</string>
     <string name="recording_context_menu_show">Göster</string>
-    <string name="recording_photo_description">%2$ fotoğrafdan %1$ cisi</string>
+    <string name="recording_photo_description">%2$s fotoğrafdan %1$s cisi</string>
     <string name="av_def_action_picture">Fotoğraf çek</string>
     <string name="recording_context_menu_precord">Fotoğraf çek</string>
     <string name="dropbox_plugin_description">Dropbox eklentisi, parçaları ve ses/video notlarını dropbox hesabınızla senkronize etmenize olanak verir.</string>

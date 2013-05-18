@@ -1130,6 +1130,20 @@ public class MapActivityActions implements DialogProvider {
 			});
 		}
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
+		optionsMenuHelper.registerItem(R.string.exit_Button, 
+				light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark,
+						new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				// 1. Work for almost all cases when user open apps from main menu
+				Intent newIntent = new Intent(mapActivity, OsmandIntents.getMainMenuActivity());
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.putExtra(MainMenuActivity.APP_EXIT_KEY, MainMenuActivity.APP_EXIT_CODE);
+				mapActivity.startActivity(newIntent);
+				// In future when map will be main screen this should change
+				// app.closeApplication(mapActivity);
+			}
+		});
 		return optionsMenuHelper;
 	}
 	

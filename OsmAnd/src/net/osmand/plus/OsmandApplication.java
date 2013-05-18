@@ -489,7 +489,8 @@ public class OsmandApplication extends Application implements ClientContext {
 					osmandSettings.SAFE_MODE.set(true);
 					osmandSettings.NATIVE_RENDERING_FAILED.set(false);
 					warnings.add(getString(R.string.native_library_not_supported));
-				} else if (!osmandSettings.SAFE_MODE.get()) {
+				} else {
+					osmandSettings.SAFE_MODE.set(false);
 					osmandSettings.NATIVE_RENDERING_FAILED.set(true);
 					startDialog.startTask(getString(R.string.init_native_library), -1);
 					RenderingRulesStorage storage = rendererRegistry.getCurrentSelectedRenderer();
@@ -498,8 +499,6 @@ public class OsmandApplication extends Application implements ClientContext {
 					if (!initialized) {
 						LOG.info("Native library could not be loaded!");
 					}
-				} else {
-					warnings.add(getString(R.string.native_library_not_running));
 				}
 			}
 			warnings.addAll(manager.reloadIndexes(startDialog));

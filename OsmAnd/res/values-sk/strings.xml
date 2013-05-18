@@ -1233,6 +1233,6 @@
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
     <string name="default_buttons_other_actions">Ostatné akcie</string>
     <string name="download_using_mobile_internet">Momentálne nie ste pripojený cez WiFi. Chcete pokračovať so sťahovaním pomocou aktuálneho internetového pripojenia?</string>
-    <string name="tip_recent_changes_1_5_t">"Zmeny vo verzii 1.5:
+    <string name="tip_recent_changes_1_3_t">"Zmeny vo verzii 1.5:
 \n\t* Téma Holo (prispôsobenie témy) "</string>
     </resources>

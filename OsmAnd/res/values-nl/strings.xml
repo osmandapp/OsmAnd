@@ -1196,9 +1196,8 @@
 \n\t* Kalman-filter voor het kompas
 \n\t* Pebble watch support "</string>
     <string name="save_current_track_widget">Huidige GPX\ntrack opslaan</string>
-	<string name="street_name"/>
 	<string name="hno">huisnummer</string>
-    <string name="tip_recent_changes_1_5_t">"Verandering in 1.5:\n\t*Holo Thema(thema aanpassing) "</string>
+    <string name="tip_recent_changes_1_3_t">"Verandering in 1.5:\n\t*Holo Thema(thema aanpassing) "</string>
     <string name="monitoring_settings">Log diensten &amp; Slaapmodus</string>
     <string name="monitoring_settings_descr">Configureer hoe trips op te nemen en de slaapmodus te activeren</string>
     <string name="osmand_monitoring_plugin_description">Activeren van tracking en navigatie in slaapmodus (scherm uit) met een op periodieke tijden ontwakend GPS-toestel. Toon de instellingen om je trips op te nemen als lokale GPX-bestanden of online via een webdienst.</string>

@@ -1138,7 +1138,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="save_current_track_widget">Guardar\ntraza GPX actual</string>
 	<string name="street_name">Calle</string>
 	<string name="hno">Nº</string>
-    <string name="tip_recent_changes_1_5_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "</string>
+    <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "</string>
     <string name="monitoring_settings">Servicios de registro y Modo de suspensión</string>
     <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo de suspensión</string>
     <string name="osmand_monitoring_plugin_description">Activa el seguimiento y la navegación en modo suspensión (pantalla apagada) despertando periódicamente el dispositivo GPS. Muestra opciones que permiten registrar tus recorridos en archivos GPX locales o en línea mediante un servicio web.</string>

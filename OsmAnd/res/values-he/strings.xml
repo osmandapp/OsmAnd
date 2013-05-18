@@ -1217,7 +1217,7 @@
 \n\t* מנשק המשתמש תוכנן מחדש\n\t* תוקנו תקלות "</string>
     <string name="street_name">רחוב</string>
 	<string name="hno">מספר הבית</string>
-    <string name="tip_recent_changes_1_5_t">"שינויים ב־1.5:
+    <string name="tip_recent_changes_1_3_t">"שינויים ב־1.5:
 \n\t* ערכת עיצוב הולו (התאמת ערכות עיצוב) "</string>
     <string name="monitoring_settings">שירותי רישום ומצב שינה</string>
     <string name="monitoring_settings_descr">ניתן להגדיר כיצד לשמור מסלולים ולאפשר מצב שינה</string>

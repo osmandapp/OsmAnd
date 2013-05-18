@@ -6,8 +6,7 @@
     android:orientation="horizontal"
     android:layout_marginLeft="5dip"
     android:layout_marginRight="5dip"
-    android:background="@color/color_white">
-
+    android:background="@color/color_white">
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"

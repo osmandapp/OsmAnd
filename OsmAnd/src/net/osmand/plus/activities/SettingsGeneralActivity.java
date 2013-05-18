@@ -12,6 +12,7 @@ import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
@@ -26,18 +27,20 @@ import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Window;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity {
 
-	private EditTextPreference applicationDir;
+	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 
 	
@@ -63,11 +66,49 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			}
 			screen.addPreference(nativeCheckbox);
 
-			applicationDir = new EditTextPreference(this);
+			applicationDir = new Preference(this);
 			applicationDir.setTitle(R.string.application_dir);
 			applicationDir.setKey("external_storage_dir");
-			applicationDir.setDialogTitle(R.string.application_dir);
-			applicationDir.setOnPreferenceChangeListener(this);
+			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+				
+				public void showOtherDialog(){
+					AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
+					editalert.setTitle(R.string.application_dir);
+					final EditText input = new EditText(SettingsGeneralActivity.this);
+					input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
+					input.setPadding(3, 3, 3, 3);
+					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+					        LinearLayout.LayoutParams.MATCH_PARENT,
+					        LinearLayout.LayoutParams.MATCH_PARENT);
+					input.setLayoutParams(lp);
+					settings.getExternalStorageDirectory().getAbsolutePath();
+					editalert.setView(input);
+					editalert.setNegativeButton(R.string.default_buttons_cancel, null);
+					editalert.setPositiveButton(R.string.default_buttons_ok, new DialogInterface.OnClickListener() {
+					    public void onClick(DialogInterface dialog, int whichButton) {
+					    	warnAboutChangingStorage(input.getText().toString());
+					    }
+					});
+					editalert.show();
+				}
+				@Override
+				public boolean onPreferenceClick(Preference preference) {
+					SuggestExternalDirectoryDialog.showDialog(SettingsGeneralActivity.this, new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							showOtherDialog();
+						}
+					}, new Runnable() {
+						@Override
+						public void run() {
+							reloadIndexes();
+							
+						}
+					});
+					return false;
+				}
+			});
 			screen.addPreference(applicationDir);
 		}
 		
@@ -165,7 +206,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 	private void updateApplicationDirTextAndSummary() {
 		if(applicationDir != null) {
 			String storageDir = settings.getExternalStorageDirectory().getAbsolutePath();
-			applicationDir.setText(storageDir);
 			applicationDir.setSummary(storageDir);
 		}
 	}

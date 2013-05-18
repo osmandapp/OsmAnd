@@ -1204,7 +1204,7 @@
 \n τρέχοντος ίχνους GPX</string>
 	<string name="street_name">Οδός</string>
 	<string name="hno">Αριθμός σπιτιού</string>
-    <string name="tip_recent_changes_1_5_t">"Αλλαγές στην 1.5:
+    <string name="tip_recent_changes_1_3_t">"Αλλαγές στην 1.5:
 \n\t* Holo Theme (προσαρμογή θεμάτων) "</string>
     <string name="monitoring_settings">Υπηρεσίες καταγραφής &amp; Κατάσταση Νάρκης</string>
     <string name="monitoring_settings_descr">Διαμορφώστε πως θα καταγράφονται τα ταξίδια και ενεργοποίηση της κατάστασης νάρκης</string>
