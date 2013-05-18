@@ -1203,4 +1203,7 @@
     <string name="default_buttons_other_actions">Andre tiltag</string>
     <string name="osmand_monitoring_plugin_description">"Aktiver sporing og navigation i dvaletilstand (skærm slukket), ved periodisk at tænde GPS-enheden. Vis indstillinger der letter optagelse til lokale GPX filer af dine ture  eller online ved hjælp af en webtjeneste."</string>
     <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Ønsker du at fortsætte med at hente med den nuværende internet-forbindelse?</string>
+    <string name="cancel_navigation">Stop navigation</string>
+    <string name="cancel_route">Afvis rute</string>
+    <string name="clear_destination">Slet destinationen</string>
     </resources>
