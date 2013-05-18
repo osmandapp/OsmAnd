@@ -146,6 +146,8 @@ Contact: sniata@o2.pl
 		
 		
 		<filter minzoom="1" tag="natural" value="coastline" color="#b9c7e1" strokeWidth_2="1"/>
+		<filter minzoom="4" tag="natural" value="lake" color="#b9c7e1" />
+		<filter minzoom="10" tag="landuse" value="basin" color="#b9c7e1"/>
 		<filter minzoom="9" color="#b9c7e1" tag="natural" value="water"/>
 		<filter minzoom="9" color="#b9c7e1" tag="natural" value="bay"/>
 		<filter minzoom="9" color="#b9c7e1" tag="landuse" value="reservoir"/>
