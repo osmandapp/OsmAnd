@@ -1201,4 +1201,8 @@
     <string name="cancel_route">Útvonal elvetése</string>
     <string name="cancel_navigation">Navigáció megállítása</string>
     <string name="clear_destination">Cél törlése</string>
+    <string name="other_location">Egyéb</string>
+    <string name="files_limit">%1$d fájl maradt</string>
+    <string name="available_downloads_left">%1$d fájl elérhető letöltésre</string>
+    <string name="install_paid">Teljes verzió</string>
     </resources>
