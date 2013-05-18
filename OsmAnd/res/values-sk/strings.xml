@@ -1235,4 +1235,7 @@
     <string name="download_using_mobile_internet">Momentálne nie ste pripojený cez WiFi. Chcete pokračovať so sťahovaním pomocou aktuálneho internetového pripojenia?</string>
     <string name="tip_recent_changes_1_3_t">"Zmeny vo verzii 1.5:
 \n\t* Téma Holo (prispôsobenie témy) "</string>
+    <string name="cancel_route">Zrušiť cestu</string>
+    <string name="cancel_navigation">Zastaviť navigáciu</string>
+    <string name="clear_destination">Zmazať cieľ</string>
     </resources>
