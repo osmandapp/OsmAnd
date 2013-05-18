@@ -1231,4 +1231,7 @@
     <string name="local_openstreetmap_act_title">שינויים ב־OSM</string>
     <string name="default_buttons_other_actions">פעולות אחרות</string>
     <string name="download_using_mobile_internet">הרשת האלחוטית אינה מחוברת כרגע. האם להמשיך ולהוריד עם חיבור האינטרנט הנוכחי?</string>
+    <string name="cancel_route">התעלמות מהמסלול</string>
+    <string name="cancel_navigation">הפסקת הניווט</string>
+    <string name="clear_destination">מחיקת היעד</string>
     </resources>
