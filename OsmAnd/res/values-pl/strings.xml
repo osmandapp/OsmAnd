@@ -802,7 +802,7 @@
 \n\t- Dane Wikipedii z artykułami w trybie offline
 \n\t- Uaktualnione mapy
 \n\t- Inne niewielkie funkcjonalności "</string>
-  <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań %2$s oraz nie obsługuje artykułów Wikipedii w trybie offline.</string>
+  <string name="free_version_message">Ta darmowa wersja OsmAnd jest ograniczona do %1$s pobrań oraz nie obsługuje artykułów Wikipedii w trybie offline.</string>
   <string name="free_version_title">Wersja darmowa</string>
   <string name="poi_context_menu_showdescription">Pokaż opis POI</string>
   <string name="index_name_north_america">Ameryka Północna</string>
@@ -1204,4 +1204,7 @@
     <string name="default_buttons_other_actions">Inne działania</string>
     <string name="favourites_list_activity">Wybierz ulubione</string>
     <string name="download_using_mobile_internet">Urządzenie nie jest połączone przez Wi-Fi. Czy chcesz kontynuować pobieranie używając obecnego połączenia?</string>
+    <string name="clear_destination">Usuń punkt docelowy</string>
+    <string name="cancel_navigation">Zatrzymaj nawigację</string>
+    <string name="cancel_route">Odrzuć trasę</string>
     </resources>
