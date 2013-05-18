@@ -16,7 +16,7 @@
   <string name="map_widget_transparent">Transparante skin</string>
   <string name="monitoring_mode_off">Start\ntrackregistratie</string>
   <string name="monitoring_mode_on">Stop\ntrackregistratie</string>
-  <string name="gps_wakeup_interval">GPS ontwaak-interval: %s</string>
+  <string name="gps_wakeup_interval">Activeer GPS om de %s</string>
   <string name="int_continuosly">Continue</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
   <string name="simulate_route_progression_manually">Simuleer routeverloop handmatig</string>
@@ -162,7 +162,7 @@
   <string name="routing_settings_descr">Opties voor navigatie en tracking</string>
   <string name="global_settings">Algemene instellingen</string>
   <string name="index_settings">Offline gegevens</string>
-  <string name="index_settings_descr">Download, bekijk details en beheer offline kaarten</string>
+  <string name="index_settings_descr">Download kaarten en stemmen, en beheer en bekijk GPX-tracks</string>
   <string name="general_settings">Algemene instellingen</string>
   <string name="general_settings_descr">Kaartweergave en algemene instellingen</string>
   <string name="global_app_settings">Algemene app instellingen</string>
@@ -705,7 +705,7 @@
   <string name="mark_point">Doel</string>
   <string name="show_osm_bugs_descr">Toon OpenStreetBugs op kaart</string>
   <string name="show_osm_bugs">Toon OpenStreetBugs</string>
-  <string name="favourites_activity">Lijst van favorieten</string>
+  <string name="favourites_activity">Favorieten</string>
   <string name="add_to_favourite">Toevoegen aan Favorieten</string>
   <string name="use_english_names_descr">Gebruik plaatselijke of Engelse namen</string>
   <string name="use_english_names">Gebruik Engelse namen</string>
@@ -1044,11 +1044,11 @@
     <string name="context_menu_item_first_intermediate_point">Zet als eerste routepunt</string>
     <string name="add_as_last_destination_point">Voeg toe als laatste routepunt</string>
     <string name="add_as_first_destination_point">Voeg toe als eerste routepunt</string>
-    <string name="replace_destination_point">Vervang bestemmingspunt</string>
-    <string name="new_destination_point_dialog">Je heb al een bestemmingspunt ingesteld.</string>
+    <string name="replace_destination_point">Vervang het bestemmingspunt</string>
+    <string name="new_destination_point_dialog">Je hebt al een bestemming gekozen</string>
     <string name="target_point">Routepunt %1$s</string>
     <string name="target_points">Routepunten</string>
-    <string name="map_widget_monitoring_services">registratie-services</string>
+    <string name="map_widget_monitoring_services">Registratie-services</string>
 	<string name="no_route">Geen route</string>
 	<string name="delete_target_point">Verwijder routepunt</string>
 	<string name="intermediate_point">Routepunt %1$s</string>
@@ -1100,7 +1100,7 @@
     <string name="osmand_distance_plugin_description">Meet de afstand tussen twee of meer punten. Voeg punten toe met een korte aanraking en verwijder ze door ze lang aan te raken.</string>
 	<string name="osmand_distance_plugin_name">Afstand berekenen</string>
 <string name="audionotes_plugin_description">Audionotities maken tijdens de reis</string>
-    <string name="audionotes_plugin_name">Audionotities-plugin</string>
+    <string name="audionotes_plugin_name">Audio-notities</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin voor offline hoogtelijnen</string>
     <string name="osmand_srtm_long_description_1000_chars">Met deze plugin kunnen hoogtelijnen worden weergegeven in OsmAnd\'s offline kaarten. De wereldwijde gegevens (van 70 graden noorderbreedte en 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en Japan Space Systems (J-spacesystems).</string>
     <string name="use_clear_distance_measurement">Klik nog een keer om de meetpunten te wissen.</string>
