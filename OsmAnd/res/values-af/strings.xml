@@ -1154,4 +1154,7 @@
     <string name="default_buttons_other_actions">Ander aksies</string>
     <string name="av_control_stop">Stop</string>
     <string name="monitoring_control_stop">Stop</string>
+    <string name="cancel_route">Verwerp roete</string>
+    <string name="cancel_navigation">Staak navigasie</string>
+    <string name="clear_destination">Verwyder bestemming</string>
     </resources>
