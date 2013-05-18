@@ -1319,7 +1319,7 @@ public class OsmandSettings {
 	//public final OsmandPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new BooleanPreference("use_compass_navigation", true).makeProfile().cache();
 	public final CommonPreference<Boolean> USE_COMPASS_IN_NAVIGATION = new BooleanPreference("use_compass_navigation", true).makeProfile().cache();
 	{
-		USE_COMPASS_IN_NAVIGATION.setModeDefaultValue(ApplicationMode.CAR, true);
+		USE_COMPASS_IN_NAVIGATION.setModeDefaultValue(ApplicationMode.CAR, false);
 	}
 
 	// this value string is synchronized with settings_pref.xml preference name
