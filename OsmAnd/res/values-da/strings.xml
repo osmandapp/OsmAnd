@@ -433,7 +433,7 @@
 	<string name="live_monitoring_url">Webadresse for online sporing</string>
 	<string name="gpx_monitoring_disabled_warn">Aktiver \'Log spor til GPX-fil\' indstilling.</string>
 	<string name="show_current_gpx_title">Vis nuværende spor</string>
-	<string name="free_version_message">Denne gratis OsmAnd version er begrænset til hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
+	<string name="free_version_message">"Denne gratis version af OsmAnd  er begrænset til at kunne hente %1$s kort og understøtter ikke offline Wikipedia artikler."</string>
 	<string name="free_version_title">Gratis version</string>
 	<string name="poi_context_menu_showdescription">Vis IP\nbeskrivelse</string>
 	<string name="index_name_north_america">Nordamerika</string>
@@ -680,7 +680,7 @@
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at bruge dem aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
-	<string name="choose_audio_stream">Stemmevejledning audiokanal</string>
+	<string name="choose_audio_stream">Stemmevejledning</string>
 	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille stemmevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
 	<string name="voice_stream_notification">Meddelelselyd</string>
@@ -804,7 +804,7 @@
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
-	<string name="filter_existing_indexes">Filter hentet</string>
+	<string name="filter_existing_indexes">Filer hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
 	<string name="select_all">Vælg alle</string>
 	<string name="reload">Genindlæs</string>
