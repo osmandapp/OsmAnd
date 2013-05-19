@@ -1238,4 +1238,8 @@
     <string name="cancel_route">Zrušiť cestu</string>
     <string name="cancel_navigation">Zastaviť navigáciu</string>
     <string name="clear_destination">Zmazať cieľ</string>
+    <string name="other_location">Iné</string>
+    <string name="files_limit">%1$d súborov zostáva</string>
+    <string name="available_downloads_left">Je dostupných %1$d súborov na stiahnutie</string>
+    <string name="install_paid">Úplná verzia</string>
     </resources>
