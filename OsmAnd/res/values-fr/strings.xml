@@ -1291,4 +1291,8 @@
     <string name="cancel_route">Rejeter l\'itinéraire</string>
     <string name="cancel_navigation">Arrêter la navigation</string>
     <string name="clear_destination">Effacer la destination</string>
+    <string name="other_location">Autre</string>
+    <string name="files_limit">Il reste %1$d fichiers</string>
+    <string name="available_downloads_left">Reste %1$d fichiers à télécharger</string>
+    <string name="install_paid">Version complète</string>
     </resources>
