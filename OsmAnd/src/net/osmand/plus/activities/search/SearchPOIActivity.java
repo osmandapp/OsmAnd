@@ -140,7 +140,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		searchPOILevel.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String query = searchFilter.getText().toString();
+				String query = searchFilter.getText().toString().trim();
 				if (query.length() < 2 && (isNameFinderFilter() || isSearchByNameFilter())) {
 					AccessibleToast.makeText(SearchPOIActivity.this, R.string.poi_namefinder_query_empty, Toast.LENGTH_LONG).show();
 					return;
