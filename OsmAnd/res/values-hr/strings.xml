@@ -518,7 +518,7 @@
 	<string name="map_route_by_gpx">Kretanje pomoću GPX datoteka</string>
 	<string name="download_files">Preuzmi</string>
 	<string name="use_high_res_maps">Zaslon visoke razlučivosti</string>
-	<string name="phone">telefon</string>
+	<string name="phone">Telefon</string>
 	<string name="download_type_to_filter">upišite za filtriranje</string>
 	<string name="context_menu_item_download_map">Preuzmi kartu</string>
 	<string name="maps_could_not_be_downloaded">Ova karta se ne može preuzeti</string>
@@ -708,7 +708,7 @@
 	<string name="transport_search_again">Ponovi pretragu prijevoza</string>
 	<string name="poi_context_menu_call">Prikaži POI telefon</string>
 	<string name="poi_context_menu_website">Prikaži POI web stranice</string>
-	<string name="website">web stranica</string>
+	<string name="website">Web stranica</string>
 	<string name="select_max_zoom_preload_area">Izaberite najveći zoom za ponovno učitavanje</string>
 	<string name="filter_existing_indexes">Filtriraj preuzeto</string>
 	<string name="download_files_question">Preuzmi {0} datoteku(e) ({1} MB)?</string>
@@ -922,4 +922,11 @@
     <string name="clear_destination">Obriši odredište</string>
     <string name="cancel_route">Odbaci rutu</string>
     <string name="download_using_mobile_internet">WiFi trenutno nije spojen. Želite li nastaviti preuzimanje s trenutnom internet vezom?</string>
+    <string name="available_downloads_left">Dostupno %1$d datoteka za preuzimanje</string>
+    <string name="files_limit">%1$d datoteka preostalo</string>
+    <string name="install_paid">Puna inačica</string>
+    <string name="choose_osmand_theme_descr">Odaberite temu aplikacije</string>
+    <string name="choose_osmand_theme">Tema aplikacije</string>
+    <string name="default_buttons_other_actions">Ostale aktivnosti</string>
+    <string name="other_location">Ostalo</string>
     </resources>
