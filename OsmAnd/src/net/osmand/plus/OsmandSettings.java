@@ -15,6 +15,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import android.os.Build;
+
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -1415,7 +1417,7 @@ public class OsmandSettings {
 	}
 	
 	public boolean isLightContent(){
-		return OSMAND_THEME.get() != OSMAND_DARK_THEME;
+		return OSMAND_THEME.get() != OSMAND_DARK_THEME  || Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
 	}
 	
 	
