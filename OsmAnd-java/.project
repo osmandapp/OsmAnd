@@ -14,13 +14,6 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>android</name>
-			<type>2</type>
-			<locationURI>OSMAND_TRUNK/OsmAnd/gen</locationURI>
-		</link>
-	</linkedResources>
 	<variableList>
 		<variable>
 			<name>OSMAND_TRUNK</name>

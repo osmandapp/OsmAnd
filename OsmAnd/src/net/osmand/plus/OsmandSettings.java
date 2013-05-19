@@ -84,7 +84,7 @@ public class OsmandSettings {
 	private static final String SHARED_PREFERENCES_NAME = "net.osmand.settings"; //$NON-NLS-1$
 	
 	/// Settings variables
-	private final ClientContext ctx;
+	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
 	private Object globalPreferences;
 	private Object defaultProfilePreferences;
@@ -99,7 +99,7 @@ public class OsmandSettings {
 	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
 	
-	protected OsmandSettings(ClientContext clientContext) {
+	protected OsmandSettings(OsmandApplication clientContext) {
 		ctx = clientContext;
 		settingsAPI = ctx.getSettingsAPI();
 
