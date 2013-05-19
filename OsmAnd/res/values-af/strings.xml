@@ -1157,4 +1157,10 @@
     <string name="cancel_route">Verwerp roete</string>
     <string name="cancel_navigation">Staak navigasie</string>
     <string name="clear_destination">Verwyder bestemming</string>
+    <string name="other_location">Ander</string>
+    <string name="files_limit">%1$d lêers oor</string>
+    <string name="available_downloads_left">%1$d lêers beskikbaar om af te laai</string>
+    <string name="install_paid">Vol weergawe</string>
+    <string name="tip_recent_changes_1_3_t">"Verandering in 1.3:
+\n\t* Holo Tema (tema aanpassing) "</string>
     </resources>
