@@ -1251,7 +1251,7 @@
     <string name="cancel_route">Abbandona il percorso</string>
     <string name="cancel_navigation">Interrompi navigazione</string>
     <string name="clear_destination">Cancella la destinazione</string>
-    <string name="other_location">Altro</string>
+    <string name="other_location">Altra</string>
     <string name="files_limit">%1$d file lasciati</string>
     <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
