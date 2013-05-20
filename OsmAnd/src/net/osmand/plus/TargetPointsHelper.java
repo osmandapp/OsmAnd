@@ -121,7 +121,7 @@ public class TargetPointsHelper {
 	private void updateRouteAndReferesh(boolean updateRoute) {
 		if(updateRoute && ( routingHelper.isRouteBeingCalculated() || routingHelper.isRouteCalculated() ||
 				routingHelper.isFollowingMode())) {
-			Location lastKnownLocation = ctx.getLastKnownLocation();
+			Location lastKnownLocation = routingHelper.getLastProjection();
 			routingHelper.setFinalAndCurrentLocation(settings.getPointToNavigate(),
 					settings.getIntermediatePoints(), lastKnownLocation, routingHelper.getCurrentGPXRoute());
 		}

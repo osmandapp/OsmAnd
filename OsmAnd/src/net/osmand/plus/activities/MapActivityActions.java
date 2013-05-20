@@ -1182,7 +1182,7 @@ public class MapActivityActions implements DialogProvider {
 		
 		if (routingHelper.isRouteCalculated() || routingHelper.isFollowingMode() || routingHelper.isRouteBeingCalculated()) {
 			// Stop the navigation
-			builder.setTitle(getString(R.string.stop_routing));
+			builder.setTitle(getString(R.string.cancel_route));
 			builder.setMessage(getString(R.string.stop_routing_confirm));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
