@@ -983,6 +983,8 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
 		boolean light = app.getSettings().isLightContent();
+		
+		// 1. Where am I
 		optionsMenuHelper.registerItem(R.string.where_am_i, 
 				light ? R.drawable.a_10_device_access_location_found_light : R.drawable.a_10_device_access_location_found_dark, 
 				new OnContextMenuClick() {
@@ -995,6 +997,8 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}
 				});
+		
+		// 2. Layers
 		optionsMenuHelper.registerItem(R.string.menu_layers, 
 				light ? R.drawable.a_7_location_map_light : R.drawable.a_7_location_map_dark, 
 				new OnContextMenuClick() {
@@ -1003,6 +1007,7 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
 					}
 				});		
+		// 3-5. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
 		if (muteVisible) {
 			boolean mute = routingHelper.getVoiceRouter().isMute();
@@ -1032,6 +1037,26 @@ public class MapActivityActions implements DialogProvider {
 						}						
 					}
 				});
+		if (mapActivity.getPointToNavigate() != null) {
+			int nav;
+			if(routingHelper.isFollowingMode()) {
+				nav = R.string.cancel_navigation;
+			} else if(routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
+				nav = R.string.cancel_route;
+			} else {
+				nav = R.string.clear_destination;
+			}
+			optionsMenuHelper.registerItem(nav, 
+					light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark,
+							new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					stopNavigationActionConfirm(mapView);
+				}
+			});
+		}
+		
+		// 6-9. Default actions (Settings, Search, Favorites) 
 		optionsMenuHelper.registerItem(R.string.settings_Button, 
 				light ? R.drawable.a_ic_menu_settings_light : R.drawable.a_ic_menu_settings_dark, 
 				new OnContextMenuClick() {
@@ -1066,24 +1091,8 @@ public class MapActivityActions implements DialogProvider {
 				mapActivity.startActivity(newIntent);
 			}
 		});
-		if (mapActivity.getPointToNavigate() != null) {
-			int nav;
-			if(routingHelper.isFollowingMode()) {
-				nav = R.string.cancel_navigation;
-			} else if(routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated()) {
-				nav = R.string.cancel_route;
-			} else {
-				nav = R.string.clear_destination;
-			}
-			optionsMenuHelper.registerItem(nav, 
-					light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark,
-							new OnContextMenuClick() {
-				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					stopNavigationActionConfirm(mapView);
-				}
-			});
-		}
+		
+		// 10-11 Waypoints, Use location
 		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper.registerItem(R.string.target_points,
 					light ? R.drawable.a_9_av_make_available_offline_light : R.drawable.a_9_av_make_available_offline_dark,
@@ -1094,7 +1103,6 @@ public class MapActivityActions implements DialogProvider {
 				}
 			});
 		}
-		
 		optionsMenuHelper.registerItem(R.string.show_point_options,
 				light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark,
 				new OnContextMenuClick() {
@@ -1103,6 +1111,7 @@ public class MapActivityActions implements DialogProvider {
 				contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
 			}
 		});
+		//////////// Others
 		if (Version.isGpsStatusEnabled(app) && !Version.isBlackberry(app)) {
 			optionsMenuHelper.registerItem(R.string.show_gps_status, 
 					light ? R.drawable.a_2_action_about_light : R.drawable.a_2_action_about_dark, 

@@ -30,7 +30,7 @@ public class RouteInfoLayer extends OsmandMapLayer implements IRouteInformationL
 	private View next;
 	private View prev;
 	private View info;
-	private int directionInfo = -1;
+	public static int directionInfo = -1;
 
 	private DisplayMetrics dm;
 	private final ContextMenuLayer contextMenu;

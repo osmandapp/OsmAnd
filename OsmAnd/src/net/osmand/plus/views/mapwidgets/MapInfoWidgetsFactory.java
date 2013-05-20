@@ -317,7 +317,8 @@ public class MapInfoWidgetsFactory {
 					text = routingHelper.getCurrentName();
 				} else {
 					int di = map.getMapLayers().getRouteInfoLayer().getDirectionInfo();
-					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible()) {
+					if (di >= 0 && map.getMapLayers().getRouteInfoLayer().isVisible() &&
+							di < routingHelper.getRouteDirections().size()) {
 						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
 						text = RoutingHelper.formatStreetName(next.getStreetName(), next.getRef(), next.getDestinationName());
 					}
