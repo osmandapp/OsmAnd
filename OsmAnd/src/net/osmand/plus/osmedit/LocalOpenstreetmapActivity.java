@@ -74,7 +74,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		dbbug = new OsmBugsDbHelper(this);
 
 		remotepoi = new OpenstreetmapRemoteUtil(this, this.getWindow().getDecorView());
-		remotebug = new OsmBugsRemoteUtil();
+		remotebug = new OsmBugsRemoteUtil(getMyApplication());
 
 	}
 	

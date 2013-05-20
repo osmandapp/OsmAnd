@@ -8,6 +8,8 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.Version;
 
 import org.apache.commons.logging.Log;
 
@@ -16,6 +18,12 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 	private static final Log log = PlatformUtil.getLog(OsmBugsRemoteUtil.class);
 
 	private final static String SITE_API = "http://openstreetbugs.schokokeks.org/api/0.1/"; //$NON-NLS-1$
+
+	private OsmandApplication app;
+	
+	public OsmBugsRemoteUtil(OsmandApplication app) {
+		this.app = app;
+	}
 
 	@Override
 	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
@@ -58,6 +66,7 @@ public class OsmBugsRemoteUtil implements OsmBugsUtil {
 			log.debug("Action " + debugAction + " " + urlStr); //$NON-NLS-1$ //$NON-NLS-2$
 			URL url = new URL(urlStr);
 			URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", Version.getFullVersion(app)); //$NON-NLS-1$
 			BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			while(reader.readLine() != null){
 			}

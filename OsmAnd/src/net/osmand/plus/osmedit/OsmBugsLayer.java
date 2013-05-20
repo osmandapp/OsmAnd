@@ -87,7 +87,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	public OsmBugsLayer(MapActivity activity){
 		this.activity = activity;
 		local = new OsmBugsLocalUtil(activity);
-		remote = new OsmBugsRemoteUtil();
+		remote = new OsmBugsRemoteUtil(activity.getMyApplication());
 	}
 	
 	public OsmBugsUtil getOsmbugsUtil(OpenStreetBug bug) {

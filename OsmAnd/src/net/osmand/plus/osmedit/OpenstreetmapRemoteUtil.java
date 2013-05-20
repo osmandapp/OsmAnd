@@ -184,6 +184,7 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 			
 			connection.setConnectTimeout(15000);
 			connection.setRequestMethod(requestMethod);
+			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
 			StringBuilder responseBody = new StringBuilder();
 			if (doAuthenticate) {
 				String token = settings.USER_NAME.get() + ":" + settings.USER_PASSWORD.get(); //$NON-NLS-1$
