@@ -1221,4 +1221,8 @@
     <string name="cancel_route">Απόρριψη διαδρομής</string>
     <string name="cancel_navigation">Σταμάτημα πλοήγησης</string>
     <string name="clear_destination">Καθαρισμός προορισμού</string>
+    <string name="other_location">Άλλη</string>
+    <string name="files_limit">%1$d αρχεία απέμειναν</string>
+    <string name="available_downloads_left">Διαθέσιμα %1$d αρχεία προς λήψη</string>
+    <string name="install_paid">Πλήρης έκδοση</string>
     </resources>
