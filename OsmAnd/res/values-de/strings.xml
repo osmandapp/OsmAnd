@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
@@ -1416,10 +1416,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="default_buttons_other_actions">Andere Aktionen</string>
     <string name="choose_osmand_theme">Theme der Anwendung</string>
     <string name="download_using_mobile_internet">Derzeit besteht keine WLAN-Verbindung. Soll das Herunterladen mit der aktuellen Datenverbindung erfolgen?</string>
-    <string name="clear_destination">Ziel entfernen</string>
+    <string name="clear_destination">Ziel löschen</string>
     <string name="other_location">Andere</string>
     <string name="files_limit">%1$d Dateien fehlen noch</string>
     <string name="available_downloads_left">Es stehen %1$d Dateien zum Herunterladen bereit</string>
     <string name="install_paid">Vollversion</string>
-    <string name="cancel_navigation">Navigation abbrechen</string>
+    <string name="cancel_navigation">Navigation stoppen</string>
+    <string name="cancel_route">Route verwerfen</string>
     </resources>
