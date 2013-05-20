@@ -1287,4 +1287,12 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="favourites_list_activity">Pasirinkti įsimintą vietą</string>
     <string name="local_openstreetmap_act_title">OSM pakeitimai</string>
     <string name="default_buttons_other_actions">Kiti veiksmai</string>
+    <string name="other_location">Kita</string>
+    <string name="files_limit">liko %1$d failų(-ai)</string>
+    <string name="available_downloads_left">Galima parsiųsti %1$d failus(-ų)</string>
+    <string name="install_paid">Pilna versija</string>
+    <string name="cancel_route">Atšaukti maršrutą</string>
+    <string name="cancel_navigation">Stabdyti navigaciją</string>
+    <string name="clear_destination">Išvalyti tikslą</string>
+    <string name="download_using_mobile_internet">Šiuo metu WiFi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
     </resources>
