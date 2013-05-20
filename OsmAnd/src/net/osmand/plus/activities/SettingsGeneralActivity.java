@@ -113,6 +113,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 			screen.addPreference(applicationDir);
 		}
 		
+		screen.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
+		
 		registerBooleanPreference(settings.USE_ENGLISH_NAMES, screen);
 		registerBooleanPreference(settings.LEFT_SIDE_NAVIGATION, screen);
 

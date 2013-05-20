@@ -285,9 +285,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 					break;
 				case Sensor.TYPE_ORIENTATION:
 					val = event.values[0];
-					if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
-						return;
-					}
 					break;
 				default:
 					return;
