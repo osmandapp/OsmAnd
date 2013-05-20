@@ -1204,4 +1204,6 @@
     <string name="files_limit">%1$d fájl maradt</string>
     <string name="available_downloads_left">%1$d fájl elérhető letöltésre</string>
     <string name="install_paid">Teljes verzió</string>
+    <string name="use_magnetic_sensor_descr">A mágnesszenzor használata az iránytű értékének meghatározásához az tájolás szenzor helyett</string>
+    <string name="use_magnetic_sensor">Mágnesszenzor (iránytű) használata</string>
     </resources>
