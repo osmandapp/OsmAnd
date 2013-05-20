@@ -752,7 +752,7 @@
 	<string name="voice_stream_music">Zvuk medija/glazbe</string>
 	<string name="warning_tile_layer_not_downloadable">Program ne može preuzeti sloj karte %1$s, pokušajte ga ponovno instalirati.</string>
 	<string name="tts_language_not_supported">Odabrani jezik nije podržan od strane instaliranog Android TTS (text-to-speech) engina. Želite li tražiti drugi TTS engin u Google Play trgovini? Inače će se koristiti unaprijed odabran TTS jezik.</string>
-	<string name="internet_connection_required_for_online_route">Online navigacija je odabrana, ali veza s internetom nije dostupna.</string>
+	<string name="internet_connection_required_for_online_route">Online navigacija je odabrana, ali internet veza nije dostupna.</string>
 	<string name="tip_recent_changes">Nedavne promjene</string>
 	<string name="map_text_size_descr">Odaberite veličinu teksta za imena na karti</string>
 	<string name="map_text_size">Veličina slova na karti</string>
