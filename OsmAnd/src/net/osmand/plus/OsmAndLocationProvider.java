@@ -10,6 +10,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
 import android.content.Context;
@@ -39,7 +41,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private static final int INTERVAL_TO_CLEAR_SET_LOCATION = 30 * 1000;
-	private static final boolean USE_MAGNETIC_FIELD_SENSOR = true;
 	private static final int LOST_LOCATION_MSG_ID = 10;
 	private static final long LOST_LOCATION_CHECK_DELAY = 18000;
 
@@ -52,14 +53,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private long lastTimeGPSLocationFixed = 0;
 
 	private boolean sensorRegistered = false;
-	private float[] mGravs;
-	private float[] mGeoMags;
+	private float[] mGravs = new float[3];
+	private float[] mGeoMags = new float[3];
 	private float previousCorrectionValue = 360;
 	
 	
 	
-	private final boolean USE_KALMAN_FILTER = false;
-	private final float KALMAN_COEFFICIENT = 0.02f;
+	private final boolean USE_KALMAN_FILTER = true;
+	private final float KALMAN_COEFFICIENT = 0.04f;
 	
 	float avgValSin = 0;
 	float avgValCos = 0;
@@ -69,8 +70,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private float[] previousCompassValuesB = new float[50];
 	private int previousCompassIndA = 0;
 	private int previousCompassIndB = 0;
+	private boolean inUpdateValue = false;
 	
-	private long lastHeadingCalcTime = 0;
 	private Float heading = null;
 
 	// Current screen orientation
@@ -90,11 +91,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private List<OsmAndLocationListener> locationListeners = new ArrayList<OsmAndLocationProvider.OsmAndLocationListener>();
 	private List<OsmAndCompassListener> compassListeners = new ArrayList<OsmAndLocationProvider.OsmAndCompassListener>();
 	private Listener gpsStatusListener;
+	private float[] mRotationM =  new float[9];
+	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 	
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
 		settings = app.getSettings();
+		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
@@ -205,7 +209,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else if (!sensorRegistered && register) {
 			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
 			SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-			if (USE_MAGNETIC_FIELD_SENSOR) {
+			if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
 					Log.e(PlatformUtil.TAG, "Sensor accelerometer could not be enabled");
@@ -265,49 +269,64 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	@Override
 	public void onSensorChanged(SensorEvent event) {
 		// Attention : sensor produces a lot of events & can hang the system
-		float val = 0;
-		switch (event.sensor.getType()) {
-		case Sensor.TYPE_ACCELEROMETER:
-			if (mGravs == null) {
-				mGravs = new float[3];
-			}
-			System.arraycopy(event.values, 0, mGravs, 0, 3);
-			break;
-		case Sensor.TYPE_MAGNETIC_FIELD:
-			if (mGeoMags == null) {
-				mGeoMags = new float[3];
-			}
-			System.arraycopy(event.values, 0, mGeoMags, 0, 3);
-			break;
-		case Sensor.TYPE_ORIENTATION:
-			val = event.values[0];
-			if (mGravs != null && mGeoMags != null) {
-				return;
-			}
-			break;
-		default:
+		if(inUpdateValue) {
 			return;
 		}
-		
-		if (mGravs != null && mGeoMags != null) {
-			float[] mRotationM = new float[9];
-			boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
-			if (!success) {
-				return;
-			}
-			float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
-			val = (float) Math.toDegrees(orientation[0]);
-		} else if(event.sensor.getType() != Sensor.TYPE_ORIENTATION){
-			return;
-		}
+		synchronized (this) {
+			inUpdateValue = true;
+			try {
+				float val = 0;
+				switch (event.sensor.getType()) {
+				case Sensor.TYPE_ACCELEROMETER:
+					System.arraycopy(event.values, 0, mGravs, 0, 3);
+					break;
+				case Sensor.TYPE_MAGNETIC_FIELD:
+					System.arraycopy(event.values, 0, mGeoMags, 0, 3);
+					break;
+				case Sensor.TYPE_ORIENTATION:
+					val = event.values[0];
+					if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+						return;
+					}
+					break;
+				default:
+					return;
+				}
+				if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+					if (mGravs != null && mGeoMags != null) {
+						boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
+						if (!success) {
+							return;
+						}
+						float[] orientation = SensorManager.getOrientation(mRotationM, new float[3]);
+						val = (float) Math.toDegrees(orientation[0]);
+					} else {
+						return;
+					}
+				}
+				val = calcScreenOrientationCorrection(val);
+				val = calcGeoMagneticCorrection(val);
 
-		if (currentScreenOrientation == 1) {
-			val += 90;
-		} else if (currentScreenOrientation == 2) {
-			val += 180;
-		} else if (currentScreenOrientation == 3) {
-			val -= 90;
+				float valRad = (float) (val / 180f * Math.PI);
+				lastValSin = (float) Math.sin(valRad);
+				lastValCos = (float) Math.cos(valRad);
+				// lastHeadingCalcTime = System.currentTimeMillis();
+				boolean filter = true; //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
+				if (filter) {
+					filterCompassValue();
+				} else {
+					avgValSin = lastValSin;
+					avgValCos = lastValCos;
+				}
+
+				updateCompassVal();
+			} finally {
+				inUpdateValue = false;
+			}
 		}
+	}
+
+	private float calcGeoMagneticCorrection(float val) {
 		if (previousCorrectionValue == 360 && getLastKnownLocation() != null) {
 			net.osmand.Location l = getLastKnownLocation();
 			GeomagneticField gf = new GeomagneticField((float) l.getLatitude(), (float) l.getLongitude(), (float) l.getAltitude(),
@@ -317,10 +336,21 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (previousCorrectionValue != 360) {
 			val += previousCorrectionValue;
 		}
-		float valRad = (float) (val / 180f * Math.PI);
-		lastValSin = (float) Math.sin(valRad);
-		lastValCos = (float) Math.cos(valRad);
-//		lastHeadingCalcTime = System.currentTimeMillis();
+		return val;
+	}
+
+	private float calcScreenOrientationCorrection(float val) {
+		if (currentScreenOrientation == 1) {
+			val += 90;
+		} else if (currentScreenOrientation == 2) {
+			val += 180;
+		} else if (currentScreenOrientation == 3) {
+			val -= 90;
+		}
+		return val;
+	}
+
+	private void filterCompassValue() {
 		if(heading == null && previousCompassIndA == 0) {
 			Arrays.fill(previousCompassValuesA, lastValSin);
 			Arrays.fill(previousCompassValuesB, lastValCos);
@@ -341,7 +371,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				previousCompassValuesB[previousCompassIndB] = lastValCos;
 			}
 		}
-		updateCompassVal();
 	}	
 
 	private void updateCompassVal() {
@@ -548,7 +577,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		this.location = updatedLocation;
 		
 		// Update information
-		updateLocation(location);
+		updateLocation(this.location);
 	}
 
 	private void enhanceLocation(net.osmand.Location location) {
