@@ -249,7 +249,7 @@ public class MapActivityLayers {
 				settings.SHOW_POI_OVER_MAP.set(isChecked);
 			} else if(itemId == R.string.layer_poi_label){
 				settings.SHOW_POI_LABEL.set(isChecked);
-			} else if(itemId.StartsWith(R.string.layer_map_appearance)){
+			} else if(itemId == R.string.layer_map_appearance){
 				getMapInfoLayer().openViewConfigureDialog();
 			} else if(itemId == R.string.layer_favorites){
 				settings.SHOW_FAVORITES.set(isChecked);
@@ -273,8 +273,8 @@ public class MapActivityLayers {
 	public void openLayerSelectionDialog(final OsmandMapTileView mapView){
 		final OsmandSettings settings = getApplication().getSettings();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
-		String layer_map_appearance_appmode = R.string.layer_map_appearance + " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
-		adapter.registerItem(layer_map_appearance_appmode,
+		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
+		adapter.registerItem(R.string.layer_map_appearance,
 				R.drawable.list_activities_config);
 		adapter.registerSelectedItem(R.string.layer_poi, settings.SHOW_POI_OVER_MAP.get() ? 1 : 0, 
 				R.drawable.list_activities_poi);
