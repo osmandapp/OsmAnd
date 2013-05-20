@@ -1235,4 +1235,6 @@
     <string name="local_openstreetmap_act_title">Editace OSM</string>
     <string name="default_buttons_other_actions">Další akce</string>
     <string name="monitoring_settings_descr">Konfigurace záznamu cest a spouštění služeb na pozadí</string>
+    <string name="install_paid">Instalovat plnou verzi</string>
+    <string name="cancel_navigation">Zastavit navigaci</string>
     </resources>
