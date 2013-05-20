@@ -113,7 +113,9 @@ public class OsmandApplication extends Application implements ClientContext {
 		// settings used everywhere so they need to be created first
 		osmandSettings = createOsmandSettingsInstance();
 		// always update application mode to default
-		osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+		if(!osmandSettings.FOLLOW_THE_ROUTE.get()){
+			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
+		}
 		
 		applyTheme(this);
 		
