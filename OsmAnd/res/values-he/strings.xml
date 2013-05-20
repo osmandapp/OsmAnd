@@ -966,7 +966,6 @@
 	<string name="ChooseCountry">נא לבחור במדינה</string>
 	<string name="map_specify_point">הגדרה כיעד</string>
 	<string name="show_view_angle">הצגת כיוון הצפייה</string>
-	<string name="stop_navigation">מחיקת היעד</string>
 	<string name="navigate_to_point">הגדרה כיעד</string>
 	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה</string>
 	<string name="map_view_3d">הצגת המפה בתלת־ממד</string>

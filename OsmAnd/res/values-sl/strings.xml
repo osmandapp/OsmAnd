@@ -124,7 +124,6 @@
 	<string name="use_internet">Uporabi internet</string>
 	<string name="show_poi_over_map">Prikaži POI</string>
 	<string name="navigate_to_point">Nastavi cilj</string>
-	<string name="stop_navigation">Odstrani cilj</string>
 	<string name="choose_city">Izberi mesto</string>
 	<string name="choose_building">Izberi hišno številko</string>
 	<string name="choose_street">Izberi ulico</string>

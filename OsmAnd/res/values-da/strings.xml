@@ -1125,7 +1125,6 @@
 	<string name="ChooseCountry">Vælg land</string>
 	<string name="map_specify_point">Brug som destination2</string>
 	<string name="show_view_angle">Vis synsretning</string>
-	<string name="stop_navigation">Ryd destination</string>
 	<string name="navigate_to_point">Brug som dest.</string>
 	<string name="map_view_3d_descr">Aktiver 3D-visning af kortet</string>
 	<string name="map_view_3d">3D-kortvisning</string>

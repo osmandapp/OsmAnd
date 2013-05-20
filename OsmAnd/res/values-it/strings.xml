@@ -647,7 +647,6 @@
   <string name="map_specify_point">Imposta come destinazione</string>
   <string name="show_view_angle_descr">Visualizza aspetto della vista basato sulla bussola</string>
   <string name="show_view_angle">Visualizza direzione di osservazione</string>
-  <string name="stop_navigation">Ferma navigazione.</string>
   <string name="navigate_to_point">Imposta come destinazione</string>
   <string name="map_view_3d_descr">Abilita la vista 3D della mappa</string>
   <string name="map_view_3d">Vista mappa 3D</string>

@@ -335,7 +335,6 @@
   <string name="map_specify_point">Especifique um local</string>
   <string name="show_view_angle_descr">Mostrar ângulo de visão baseado na bússola</string>
   <string name="show_view_angle">Mostrar ângulo de visão</string>
-  <string name="stop_navigation">Apagar o ponto.</string>
   <string name="navigate_to_point">Marcar posição.</string>
   <string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
   <string name="map_view_3d">Visualização em 3D</string>

@@ -787,7 +787,6 @@
     <string name="map_specify_point">위치 지정</string>
     <string name="show_view_angle_descr">나침반을 기준으로 한 시야각을 표시합니다</string>
     <string name="show_view_angle">시야각 표시</string>
-    <string name="stop_navigation">경로 중지</string>
     <string name="navigate_to_point">지점 표시</string>
     <string name="map_view_3d_descr">맵의 3D 뷰 활성화</string>
     <string name="map_view_3d">맵 3D 뷰</string>

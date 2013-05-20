@@ -720,7 +720,6 @@
   <string name="map_specify_point">Zet als bestemming</string>
   <string name="show_view_angle_descr">Richtingweergave gebaseerd op het kompas</string>
   <string name="show_view_angle">Toon kijkrichting</string>
-  <string name="stop_navigation">Wis bestemming</string>
   <string name="navigate_to_point">Zet als best.</string>
   <string name="map_view_3d_descr">Activeer 3D kaartbeeld</string>
   <string name="map_view_3d">Kaartbeeld 3D</string>

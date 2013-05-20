@@ -931,7 +931,6 @@
 	<string name="ChooseCountry">Επιλέξτε χώρα</string>
 	<string name="map_specify_point">Ορισμός ως προορισμός</string>
 	<string name="show_view_angle">Εμφάνιση κατεύθυνσης οπτικής</string>
-	<string name="stop_navigation">Καθαρισμός προορ.</string>
 	<string name="navigate_to_point">Ορισμός ως προορ.</string>
 	<string name="map_view_3d_descr">Ενεργοποίηση απεικόνισης 3Δ του χάρτη</string>
 	<string name="map_view_3d">Εμφάνιση χάρτη 3Δ</string>

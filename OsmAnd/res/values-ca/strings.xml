@@ -690,7 +690,6 @@
 <string name="map_specify_point">Marcar com a desti</string>
 <string name="choose_street">Escull carrer</string>
 <string name="choose_city">Escull ciutat</string>
-<string name="stop_navigation">Neteja desti</string>
 <string name="show_poi_over_map">Mostrar PDI</string>
 <string name="show_location">Mostrar ubicació</string>
 <string name="searchpoi_activity">Escull un PDI</string>

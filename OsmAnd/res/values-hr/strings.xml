@@ -374,7 +374,6 @@
 	<string name="finished_task">Gotovo</string>
 	<string name="search_address_building_option">Zgrada</string>
 	<string name="navigate_to_point">Postavi kao odredište.</string>
-	<string name="stop_navigation">Ukloni destinaciju.</string>
 	<string name="map_preferences_descr">Odredite postavke karte: izvor karte, rotacija, položaj markera, orijentacija zaslona</string>
 	<string name="osm_settings">OSM uređivanje</string>
 	<string name="data_settings_descr">Odredite jezik, preuzmite ili ponovno učitajte podatke</string>

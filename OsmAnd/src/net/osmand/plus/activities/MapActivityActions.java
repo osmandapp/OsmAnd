@@ -1185,7 +1185,7 @@ public class MapActivityActions implements DialogProvider {
 			});
 		} else {
 			// Clear the destination point
-			builder.setTitle(getString(R.string.stop_navigation));
+			builder.setTitle(getString(R.string.cancel_navigation));
 			builder.setMessage(getString(R.string.clear_dest_confirm));
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override

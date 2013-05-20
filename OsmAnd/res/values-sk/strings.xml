@@ -858,7 +858,6 @@
   <string name="map_specify_point">Určiť ako cieľ</string>
   <string name="show_view_angle_descr">Uhol pohľadu zobrazenia podľa kompasu</string>
   <string name="show_view_angle">Zobraziť uhol pohľadu</string>
-  <string name="stop_navigation">Zmazať cieľ</string>
   <string name="navigate_to_point">Označiť bod</string>
   <string name="map_view_3d_descr">Zapnutie 3D zobrazenia mapy</string>
   <string name="map_view_3d">3D zobrazenie mapy</string>

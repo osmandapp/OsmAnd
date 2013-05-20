@@ -552,7 +552,6 @@
 	<string name="ChooseCountry">Velg land</string>
 	<string name="map_specify_point">Sett som reisemål</string>
 	<string name="show_view_angle">Vis synsretningen</string>
-	<string name="stop_navigation">Fjern mål</string>
 	<string name="navigate_to_point">Sett som mål</string>
 	<string name="map_view_3d_descr">Aktiver 3D-visning av kartet</string>
 	<string name="map_view_3d">3D-kartvisning</string>

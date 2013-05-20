@@ -744,7 +744,6 @@
   <string name="map_specify_point">Zadejte bod</string>
   <string name="show_view_angle_descr">Zobrazovat zorné pole podle kompasu</string>
   <string name="show_view_angle">Zorné pole</string>
-  <string name="stop_navigation">Vymazat bod</string>
   <string name="navigate_to_point">Navigovat do bodu</string>
   <string name="map_view_3d_descr">Zapnout 3D pohled na mapu</string>
   <string name="map_view_3d">3D Mapa</string>

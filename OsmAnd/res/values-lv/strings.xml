@@ -687,7 +687,6 @@
   <string name="map_specify_point">Uzstādīt kā galapunktu</string>
   <string name="show_view_angle_descr">Rādīt redzamības virzienu uz kartes</string>
   <string name="show_view_angle">Rādīt redzamības virzienu</string>
-  <string name="stop_navigation">Noņemt mērķi</string>
   <string name="navigate_to_point">Uzstādīt kā mērķi.</string>
   <string name="map_view_3d_descr">Ieslēgt kartes 3D skatu</string>
   <string name="map_view_3d">Kartes 3D skats</string>

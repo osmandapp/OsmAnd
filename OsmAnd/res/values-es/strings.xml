@@ -635,7 +635,6 @@
   <string name="map_specify_point">Fijar como destino</string>
   <string name="show_view_angle_descr">Mostrar la dirección de la vista en el mapa</string>
   <string name="show_view_angle">Mostrar dirección de visualización</string>
-  <string name="stop_navigation">Borrar dest.</string>
   <string name="navigate_to_point">Fijar dest.</string>
   <string name="map_view_3d_descr">Habilita visión 3D del mapa</string>
   <string name="map_view_3d">Visión 3D del mapa</string>

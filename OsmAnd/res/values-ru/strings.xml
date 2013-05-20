@@ -707,7 +707,6 @@
   <string name="map_specify_point">Координаты</string>
   <string name="show_view_angle_descr">Показывать угол обзора в соответствии с компасом</string>
   <string name="show_view_angle">Угол обзора</string>
-  <string name="stop_navigation">Снять отметку</string>
   <string name="navigate_to_point">Отметить точку</string>
   <string name="map_view_3d_descr">Включить 3D вид для карты</string>
   <string name="map_view_3d">3D вид</string>

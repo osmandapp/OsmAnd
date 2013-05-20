@@ -617,7 +617,6 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="map_specify_point">地点を指定</string>
  <string name="show_view_angle_descr">コンパスに従って視線方向を表示</string>
  <string name="show_view_angle">視線方向を表示</string>
- <string name="stop_navigation">地点をクリア</string>
  <string name="navigate_to_point">地点をマーク</string>
  <string name="map_view_3d_descr">マップの3Dビューを有効化</string>
  <string name="map_view_3d">マップビュー3D</string>

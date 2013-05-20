@@ -676,7 +676,6 @@
   <string name="map_specify_point">Beállítás célpontnak</string>
   <string name="show_view_angle_descr">Látómező megjelenítése iránytű alapján</string>
   <string name="show_view_angle">Látómező megjelenítése</string>
-  <string name="stop_navigation">Cél törlése</string>
   <string name="navigate_to_point">Célnak jelöl</string>
   <string name="map_view_3d_descr">A térkép 3D megjelenítésének engedélyezése</string>
   <string name="map_view_3d">3D térkép</string>

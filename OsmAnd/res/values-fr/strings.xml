@@ -676,7 +676,6 @@
   <string name="map_specify_point">Spécifier un lieu</string>
   <string name="show_view_angle_descr">Afficher un angle de vue basé sur le compas</string>
   <string name="show_view_angle">Afficher l\'angle de vue</string>
-  <string name="stop_navigation">Effacer le point</string>
   <string name="navigate_to_point">Marquer comme destination</string>
   <string name="map_view_3d_descr">Activer vue 3D de la carte</string>
   <string name="map_view_3d">Vue 3D</string>

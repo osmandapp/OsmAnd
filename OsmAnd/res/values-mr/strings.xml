@@ -281,7 +281,6 @@
   <string name="choose_city">शहर निवडा</string>
   <string name="ChooseCountry">देश निवडा</string>
   <string name="map_specify_point">इच्छित स्थळ म्हणून निवडा</string>
-  <string name="stop_navigation">इच्छित स्थळ काढून टाका.</string>
   <string name="navigate_to_point">इच्छित स्थळ म्हणून निवडा.</string>
   <string name="map_source">नकाशाचा स्त्रोत</string>
   <string name="use_internet">इंटरनेट वापरा</string>

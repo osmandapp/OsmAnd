@@ -855,7 +855,6 @@
   <string name="map_specify_point">Nustatyti kaip kelionės tikslą</string>
   <string name="show_view_angle_descr">Rodyti vaizdo krypties aprašymą</string>
   <string name="show_view_angle">Rodyti vaizdo kryptį</string>
-  <string name="stop_navigation">Išval. kelionės tiksl.</string>
   <string name="navigate_to_point">Pasirinkti kaip tiksl.</string>
   <string name="map_view_3d_descr">Įjungti žemėlapio 3D rodinį</string>
   <string name="map_view_3d">Žemėlapio 3D rodinys</string>

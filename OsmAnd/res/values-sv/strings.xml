@@ -1024,7 +1024,6 @@
 	<string name="app_settings">Appinställningar</string>
 	<string name="search_address">Sök adress</string>
 	<string name="map_specify_point">Ange som destination</string>
-	<string name="stop_navigation">Ta bort dest.</string>
 	<string name="navigate_to_point">Ange som dest.</string>
 	<string name="map_view_3d_descr">Aktivera 3D-vy på kartan</string>
 	<string name="map_view_3d">3D-vy på kartan</string>

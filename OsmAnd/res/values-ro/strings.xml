@@ -991,7 +991,6 @@
 	<string name="ChooseCountry">Alegeți țara</string>
 	<string name="map_specify_point">Setează ca destinație</string>
 	<string name="show_view_angle">Afișează harta în concordanță cu direcția de deplasare</string>
-	<string name="stop_navigation">Șterge destin.</string>
 	<string name="navigate_to_point">Setează ca destin.</string>
 	<string name="map_view_3d_descr">Activați afișarea în 3D a hărții</string>
 	<string name="map_view_3d">Vedere hartă în 3D</string>

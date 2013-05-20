@@ -937,7 +937,6 @@
 	<string name="ChooseCountry">選擇國家</string>
 	<string name="map_specify_point">設為目的地</string>
 	<string name="show_view_angle">顯示目視方向</string>
-	<string name="stop_navigation">清除目的地</string>
 	<string name="navigate_to_point">設為目的地</string>
 	<string name="map_view_3d_descr">啟用3D地圖</string>
 	<string name="map_view_3d">3D地圖</string>
