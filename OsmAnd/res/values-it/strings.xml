@@ -324,7 +324,7 @@
   <string name="amenity_type_finance">Finanza</string>
   <string name="amenity_type_geocache">Geocache</string>
   <string name="amenity_type_healthcare">Sanità</string>
-  <string name="amenity_type_historic">Storia</string>
+  <string name="amenity_type_historic">Storico</string>
   <string name="amenity_type_landuse">Uso del terreno</string>
   <string name="amenity_type_leisure">Tempo Libero</string>
   <string name="amenity_type_manmade">Artificiale</string>
