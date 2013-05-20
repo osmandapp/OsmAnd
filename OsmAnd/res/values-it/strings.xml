@@ -1254,4 +1254,6 @@
     <string name="files_limit">%1$d file lasciati</string>
     <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
+    <string name="use_magnetic_sensor_descr">Utilizzare il sensore magnetico per determinare il valore della bussola invece di sensore di orientamento</string>
+    <string name="use_magnetic_sensor">Utilizzare il sensore magnetico (bussola)</string>
     </resources>
