@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
@@ -779,7 +779,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="loading_builds">Lade OsmAnd-Builds …</string>
 	<string name="select_build_to_install">Auswählen eines OsmAnd-Builds für die Installation</string>
 	<string name="contribution_activity">Aktion speziell für die Contribution Version</string>
-	<string name="gps_status_app_not_found">Anwendung für die Darstellung des GPS-Status nicht installiert. Soll diese installiert werden?</string>
+	<string name="gps_status_app_not_found">Anwendung \'GPS Status\' ist nicht installiert. Soll diese installiert werden?</string>
 	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter Einstellungen ein Sprachpaket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
 	<string name="daynight_mode_day">Tag</string>
