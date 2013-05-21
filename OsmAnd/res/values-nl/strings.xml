@@ -1217,4 +1217,6 @@
     <string name="cancel_route">Annuleer route</string>
     <string name="cancel_navigation">Stop navigatie</string>
     <string name="clear_destination">Wis bestemmingspunt</string>
+    <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor om kompas te bepalen.</string>
+    <string name="use_magnetic_sensor">Gebruik magnetische sensor(kompas)</string>
     </resources>
