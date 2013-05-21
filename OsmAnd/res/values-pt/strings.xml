@@ -1031,7 +1031,7 @@
     <string name="index_name_openmaps">OpenMaps UE</string>
     <string name="dist_control_start">Iniciar</string>
     <string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
-    <string name="stop_routing_confirm">Confirma que quer parar a navegação?</string>
+    <string name="stop_routing_confirm">Quer parar a navegação?</string>
     <string name="clear_dest_confirm">Confirma que deseja apagar o seu ponto de destino?</string>
     <string name="precise_routing_mode_descr">Ativar o roteamento preciso para calcular rotas precisas sem falhas. É muito limitado pela distância e não usa a biblioteca nativa.</string>
     <string name="precise_routing_mode">Roteamento preciso (alfa)</string>
@@ -1065,7 +1065,7 @@
     <string name="audionotes_plugin_name">Notas de Audio/vídeo</string>
     <string name="index_srtm_parts">Partes</string>
     <string name="index_srtm_ele">Curvas de nível</string>
-    <string name="tip_recent_changes_1_1_2_t">Mudanças no 1.1.2:\n * melhorias no plug-in de áudio / vídeo (fotos com informações EXIF)\n * Usabilidade reparada e reestruturada do plugin de Contorno de linhas\n * Pacotes de Sombras de Colinas para o plugin das linhas de contorno\n * correções de bugs (roteamento suboptimal)</string>
+    <string name="tip_recent_changes_1_1_2_t">Mudanças em 1.1.2:\n\t* melhorias no plug-in de áudio / vídeo (fotos com informações EXIF)\n\t* Usabilidade reparada e reestruturação do plugin de Contorno de linhas\n\t* Pacotes de Sombras de Colinas para o plugin das Curvas de nível\n\t* Correções de bugs (roteamento suboptimal)</string>
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Capture uma foto</string>
     <string name="osmand_srtm_long_description_1000_chars">Esse plugin disponibiliza curvas de nível que podem ser mostradas nos mapas offline do OsmAnd. Os dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no Terra, o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
