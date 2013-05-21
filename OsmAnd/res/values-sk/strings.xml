@@ -1241,4 +1241,6 @@
     <string name="files_limit">%1$d súborov zostáva</string>
     <string name="available_downloads_left">Je dostupných %1$d súborov na stiahnutie</string>
     <string name="install_paid">Úplná verzia</string>
+    <string name="use_magnetic_sensor_descr">Použiť magnetický senzor namiesto orientačného na zistenie hodnôt kompasu</string>
+    <string name="use_magnetic_sensor">Použiť magnetický senzor (kompas)</string>
     </resources>
