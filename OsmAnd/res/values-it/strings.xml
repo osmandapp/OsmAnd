@@ -1266,4 +1266,5 @@
     <string name="install_paid">Versione completa</string>
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
+    <string name="local_indexes_cat_srtm">Dati isocline</string>
     </resources>
