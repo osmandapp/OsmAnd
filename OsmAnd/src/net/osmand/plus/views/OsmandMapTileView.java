@@ -879,10 +879,10 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (log.isDebugEnabled()) {
 				log.debug("On long click event " + e.getX() + " " + e.getY()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			if ((accessibilityActions != null) && accessibilityActions.onLongClick()) {
+			PointF point = new PointF(e.getX(), e.getY());
+			if ((accessibilityActions != null) && accessibilityActions.onLongClick(point)) {
 				return;
 			}
-			PointF point = new PointF(e.getX(), e.getY());
 			for (int i = layers.size() - 1; i >= 0; i--) {
 				if (layers.get(i).onLongPressEvent(point)) {
 					return;
@@ -909,7 +909,7 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			if (log.isDebugEnabled()) {
 				log.debug("On click event " + point.x + " " + point.y); //$NON-NLS-1$ //$NON-NLS-2$
 			}
-			if ((accessibilityActions != null) && accessibilityActions.onClick()) {
+			if ((accessibilityActions != null) && accessibilityActions.onClick(point)) {
 				return true;
 			}
 			for (int i = layers.size() - 1; i >= 0; i--) {

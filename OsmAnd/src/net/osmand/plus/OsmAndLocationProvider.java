@@ -10,7 +10,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.access.NavigationInfo;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
-import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.MapUtils;
@@ -602,7 +601,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		return hint;
 	}
 
-	public void emitNavigationHint() {
+	public boolean emitNavigationHint() {
 		final LatLon point = app.getTargetPointsHelper().getPointToNavigate();
 		if (point != null) {
 			if (app.getRoutingHelper().isRouteCalculated()) {
@@ -610,8 +609,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			} else {
 				app.showToastMessage(getNavigationHint(point));
 			}
+			return true;
 		} else {
-			app.showToastMessage(R.string.mark_final_location_first);
+			app.showToastMessage(R.string.access_mark_final_location_first);
+			return false;
 		}
 	}
 

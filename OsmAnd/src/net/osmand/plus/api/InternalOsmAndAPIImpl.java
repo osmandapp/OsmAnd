@@ -6,9 +6,11 @@ import java.util.List;
 
 import net.osmand.NativeLibrary;
 import net.osmand.ResultMatcher;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.data.Amenity;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.PoiFilter;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.access.AccessibilityMode;
@@ -66,10 +68,14 @@ public class InternalOsmAndAPIImpl implements InternalOsmAndAPI {
 	@Override
 	public boolean accessibilityEnabled() {
 		final AccessibilityMode mode = app.getSettings().ACCESSIBILITY_MODE.get();
-		if (mode == AccessibilityMode.ON)
-			return true;
-		else if (mode == AccessibilityMode.OFF)
+		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
 			return false;
+		}
+		if (mode == AccessibilityMode.ON) {
+			return true;
+		} else if (mode == AccessibilityMode.OFF) {
+			return false;
+		}
 		return ((AccessibilityManager) app.getSystemService(Context.ACCESSIBILITY_SERVICE)).isEnabled();
 	}
 
