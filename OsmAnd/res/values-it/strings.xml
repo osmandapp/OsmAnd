@@ -509,7 +509,7 @@
   <string name="map_orientation_portrait">Verticale</string>
   <string name="map_orientation_landscape">Orizzontale</string>
   <string name="map_screen_orientation">Orientamento dello schermo</string>
-  <string name="map_screen_orientation_descr">Verticale, porizzontale, o predefinito (dispositivo)</string>
+  <string name="map_screen_orientation_descr">Verticale, orizzontale, o predefinito (dispositivo)</string>
   <string name="opening_hours_not_supported">Il formato dell\'ora di apertura non è supportato per la modifica</string>
   <string name="add_new_rule">Aggiungi una nuova regola</string>
   <string name="transport_Routes">Percorsi</string>
@@ -1206,10 +1206,10 @@
     <string name="download_hillshade_item">Ombreggiamento dei rilievi</string>
     <string name="download_hillshade_maps">Sovrapposizioni ombreggiamento rilievi</string>
     <string name="tip_recent_changes_1_1_2_t">"Novità della versione 1.1.2:
-\n\t* miglioramento del plugin Audio/video (foto con le informazioni EXIF)
-\n\t* ripristinato l\'usabilità e ristrutturato il plugin delle linee di contorno
-\n\t* pacchetti di ombreggimento dei rilievi per il plugin per le linee di contorno
-\n\t* correzioni di errori (routing non ottimali) "</string>
+\n\t* Miglioramento del plugin Audio/video (foto con le informazioni EXIF)
+\n\t* Ripristinato l\'usabilità e ristrutturato il plugin delle linee di contorno
+\n\t* Pacchetti di ombreggimento dei rilievi per il plugin per le linee di contorno
+\n\t* Correzioni di errori (routing non ottimali) "</string>
     <string name="support_new_features_descr">Fai una donazione per avere nuove funzionalità implementate nell\'applicazione</string>
 	<string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
@@ -1254,6 +1254,6 @@
     <string name="files_limit">%1$d file lasciati</string>
     <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
-    <string name="use_magnetic_sensor_descr">Utilizzare il sensore magnetico per determinare il valore della bussola invece di sensore di orientamento</string>
+    <string name="use_magnetic_sensor_descr">Utilizzare il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizzare il sensore magnetico (bussola)</string>
     </resources>
