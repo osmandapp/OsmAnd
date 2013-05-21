@@ -1212,4 +1212,5 @@
     <string name="available_downloads_left">%1$d dostępnych plików do pobrania</string>
     <string name="use_magnetic_sensor_descr">Użyj czujnika pola magnetycznego, aby określić kierunek kompasu</string>
     <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
+    <string name="local_indexes_cat_srtm">Dane poziomic</string>
     </resources>
