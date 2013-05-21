@@ -1237,4 +1237,6 @@
     <string name="files_limit">נותרו %1$d קבצים</string>
     <string name="available_downloads_left">%1$d קבצים זמינים להורדה</string>
     <string name="install_paid">גרסה מלאה</string>
+    <string name="use_magnetic_sensor_descr">שימוש בחיישן מגנטי כדי לזהות את ערך המצפן במקום חיישן הכיוון</string>
+    <string name="use_magnetic_sensor">שימוש בחיישן מגנטי (מצפן)</string>
     </resources>
