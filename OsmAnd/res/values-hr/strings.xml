@@ -88,7 +88,7 @@
     <string name="map_widget_show_destination_arrow">Prikaži smjer odredišta</string>
     <string name="gps_not_available">Uključite GPS u postavkama</string>
     <string name="non_optimal_route_calculation">Izračunajte moguću, neoptimalnu rutu na velike udaljenosti</string>
-	<string name="map_widget_monitoring_services">Učitavanje usluge</string>
+	<string name="map_widget_monitoring_services">Bilježenje položaja</string>
 	<string name="no_route">Nema rute</string>
 	<string name="navigate_to">Postavi kao odredište</string>
     <string name="poi_filter_parking">Parkiralište</string>
@@ -928,4 +928,6 @@
     <string name="choose_osmand_theme">Tema aplikacije</string>
     <string name="default_buttons_other_actions">Ostale aktivnosti</string>
     <string name="other_location">Ostalo</string>
+    <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
+    <string name="use_magnetic_sensor">Koristite magnetski senzor (kompas)</string>
     </resources>
