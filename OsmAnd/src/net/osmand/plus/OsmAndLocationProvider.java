@@ -92,12 +92,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private Listener gpsStatusListener;
 	private float[] mRotationM =  new float[9];
 	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
+	private OsmandPreference<Boolean> uSE_FILTER_FOR_COMPASS;
 	
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
 		settings = app.getSettings();
 		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
+		uSE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 	}
@@ -307,7 +309,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				lastValSin = (float) Math.sin(valRad);
 				lastValCos = (float) Math.cos(valRad);
 				// lastHeadingCalcTime = System.currentTimeMillis();
-				boolean filter = true; //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
+				boolean filter = uSE_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
 				if (filter) {
 					filterCompassValue();
 				} else {
