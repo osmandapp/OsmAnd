@@ -252,7 +252,6 @@ public class TurnPathHelper {
 		
 		public void setRouteType(TurnType t){
 			TurnPathHelper.calcTurnPath(p, t, null);
-			System.out.println("Draw " + getBounds().toShortString() + " " );
 			onBoundsChange(getBounds());
 		}
 

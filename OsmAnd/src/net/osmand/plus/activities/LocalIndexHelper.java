@@ -216,11 +216,10 @@ public class LocalIndexHelper {
 		loadObfData(app.getAppPath(IndexConstants.MAPS_PATH), result, false, loadTask, loadedMaps);
 		loadObfData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask, loadedMaps);
 		loadTilesData(app.getAppPath(IndexConstants.TILES_INDEX_DIR), result, false, loadTask);
-		loadTilesData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, false, loadTask);
+		loadSrtmData(app.getAppPath(IndexConstants.SRTM_INDEX_DIR), result, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.VOICE_INDEX_DIR), result, false, loadTask);
 		loadVoiceData(app.getAppPath(IndexConstants.TTSVOICE_INDEX_EXT_ZIP), result, true, loadTask);
 		loadGPXData(app.getAppPath(IndexConstants.GPX_INDEX_DIR), result, false, loadTask);
-		loadGPXData(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR), result, true, loadTask);
 		OsmandPlugin.onLoadLocalIndexes(result, loadTask);
 		
 		return result;
@@ -270,6 +269,18 @@ public class LocalIndexHelper {
 	}
 
 	
+	private void loadSrtmData(File mapPath, List<LocalIndexInfo> result, LoadLocalIndexTask loadTask) {
+		if (mapPath.canRead()) {
+			for (File mapFile : listFilesSorted(mapPath)) {
+				if (mapFile.isFile() && mapFile.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.SRTM_DATA, mapFile, false);
+					result.add(info);
+					loadTask.loadFile(info);
+				}
+			}
+		}
+	}
+	
 	private void loadObfData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask, Map<String, String> loadedMaps) {
 		if (mapPath.canRead()) {
 			for (File mapFile : listFilesSorted(mapPath)) {
@@ -288,20 +299,29 @@ public class LocalIndexHelper {
 	private void loadGPXData(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask) {
 		if (mapPath.canRead()) {
 			List<LocalIndexInfo> progress = new ArrayList<LocalIndexInfo>();
-			for (File gpxFile : listFilesSorted(mapPath)) {
-				if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
-					LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.GPX_DATA, gpxFile, backup);
-					result.add(info);
-					progress.add(info);
-					if (progress.size() > 7) {
-						loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
-						progress.clear();
-					}
-
-				}
-			}
+			loadGPXFolder(mapPath, result, backup, loadTask, progress, null);
 			if (!progress.isEmpty()) {
 				loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
+			}
+		}
+	}
+
+	private void loadGPXFolder(File mapPath, List<LocalIndexInfo> result, boolean backup, LoadLocalIndexTask loadTask,
+			List<LocalIndexInfo> progress, String gpxSubfolder) {
+		for (File gpxFile : listFilesSorted(mapPath)) {
+			if (gpxFile.isDirectory()) {
+				String sub = gpxSubfolder == null ? gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
+				loadGPXFolder(gpxFile, result, backup, loadTask, progress, sub);
+			} else if (gpxFile.isFile() && gpxFile.getName().endsWith(".gpx")) {
+				LocalIndexInfo info = new LocalIndexInfo(LocalIndexType.GPX_DATA, gpxFile, backup);
+				info.setSubfolder(gpxSubfolder);
+				result.add(info);
+				progress.add(info);
+				if (progress.size() > 7) {
+					loadTask.loadFile(progress.toArray(new LocalIndexInfo[progress.size()]));
+					progress.clear();
+				}
+
 			}
 		}
 	}
@@ -310,6 +330,9 @@ public class LocalIndexHelper {
 	
 	private File[] listFilesSorted(File dir){
 		File[] listFiles = dir.listFiles();
+		if(listFiles == null) {
+			return new File[0];
+		}
 		Arrays.sort(listFiles);
 		return listFiles;
 	}
@@ -389,6 +412,7 @@ public class LocalIndexHelper {
 	public enum LocalIndexType {
 		MAP_DATA(R.string.local_indexes_cat_map),
 		TILES_DATA(R.string.local_indexes_cat_tile),
+		SRTM_DATA(R.string.local_indexes_cat_srtm),
 		VOICE_DATA(R.string.local_indexes_cat_voice),
 		TTS_VOICE_DATA(R.string.local_indexes_cat_tts),
 		GPX_DATA(R.string.local_indexes_cat_gpx),

@@ -123,11 +123,11 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 			TextView timeLabel = (TextView) row.findViewById(R.id.time);
 			ImageView icon = (ImageView) row.findViewById(R.id.direction);
 			
-			if(!(icon.getDrawable() instanceof TurnPathHelper.RouteDrawable)){
-				TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources());
-				icon.setImageDrawable(drawable);
-			}
-			((TurnPathHelper.RouteDrawable) icon.getDrawable()).setRouteType(model.getTurnType());
+			TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(getResources());
+			drawable.setRouteType(model.getTurnType());
+			icon.setImageDrawable(drawable);
+			
+			
 			distanceLabel.setText(OsmAndFormatter.getFormattedDistance(model.distance, getMyApplication()));
 			label.setText(model.getDescriptionRoute());
 			String timeText = getTimeDescription(model);

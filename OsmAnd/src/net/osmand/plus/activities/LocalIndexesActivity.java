@@ -814,11 +814,12 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 
 		public LocalIndexInfo findCategory(LocalIndexInfo val, boolean backuped){
 			for(LocalIndexInfo i : category){
-				if(i.isBackupedData() == backuped && val.getType() == i.getType() ){
+				if(i.isBackupedData() == backuped && val.getType() == i.getType() && 
+						Algorithms.objectEquals(i.getSubfolder(), val.getSubfolder())){
 					return i;
 				}
 			}
-			LocalIndexInfo newCat = new LocalIndexInfo(val.getType(), backuped);
+			LocalIndexInfo newCat = new LocalIndexInfo(val.getType(), backuped, val.getSubfolder());
 			category.add(newCat);
 			data.put(newCat, new ArrayList<LocalIndexInfo>());
 			return newCat;
@@ -884,14 +885,15 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			// search from end
 			for (int i = category.size() - 1; i >= 0; i--) {
 				LocalIndexInfo cat = category.get(i);
-				if (cat.getType() == info.getType() && info.isBackupedData() == cat.isBackupedData()) {
+				if (cat.getType() == info.getType() && info.isBackupedData() == cat.isBackupedData() &&
+						Algorithms.objectEquals(info.getSubfolder(), cat.getSubfolder())) {
 					found = i;
 					break;
 				}
 			}
 			if (found == -1) {
 				found = category.size();
-				category.add(new LocalIndexInfo(info.getType(), info.isBackupedData()));
+				category.add(new LocalIndexInfo(info.getType(), info.isBackupedData(), info.getSubfolder()));
 			}
 			if (!data.containsKey(category.get(found))) {
 				data.put(category.get(found), new ArrayList<LocalIndexInfo>());
@@ -978,6 +980,9 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				v = inflater.inflate(net.osmand.plus.R.layout.expandable_list_item_category, parent, false);
 			}
 			StringBuilder t = new StringBuilder(group.getType().getHumanString(LocalIndexesActivity.this));
+			if(group.getSubfolder() != null) {
+				t.append(" ").append(group.getSubfolder());
+			}
 			if (group.isBackupedData()) {
 				t.append(" - ").append(getString(R.string.local_indexes_cat_backup));
 			}

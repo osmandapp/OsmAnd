@@ -4,6 +4,7 @@ package net.osmand.plus.activities;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -450,32 +451,40 @@ public class MapActivityLayers {
 		}
 	}
 
-	private List<String> getSortedGPXFilenames(File dir) {
+	private List<String> getSortedGPXFilenames(File dir,String sub) {
 		final List<String> list = new ArrayList<String>();
+		readGpxDirectory(dir, list, "");
+		Collections.sort(list, new Comparator<String>() {
+			@Override
+			public int compare(String object1, String object2) {
+				if (object1.compareTo(object2) > 0) {
+					return -1;
+				} else if (object1.equals(object2)) {
+					return 0;
+				}
+				return 1;
+			}
+
+		});
+		return list;
+	}
+
+	private void readGpxDirectory(File dir, final List<String> list, String parent) {
 		if (dir != null && dir.canRead()) {
 			File[] files = dir.listFiles();
 			if (files != null) {
-				Arrays.sort(files, new Comparator<File>() {
-					@Override
-					public int compare(File object1, File object2) {
-						if (object1.getName().compareTo(object2.getName()) > 0) {
-							return -1;
-						} else if (object1.getName().equals(object2.getName())) {
-							return 0;
-						}
-						return 1;
-					}
-
-				});
-
 				for (File f : files) {
 					if (f.getName().endsWith(".gpx")) { //$NON-NLS-1$
-						list.add(f.getName());
+						list.add(parent + f.getName());
+					} else if (f.isDirectory()) {
+						readGpxDirectory(f, list, parent + f.getName() + "/");
 					}
 				}
 			}
 		}
-		return list;
+	}
+	private List<String> getSortedGPXFilenames(File dir) {
+		return getSortedGPXFilenames(dir, null);
 	}
 	
 	private void loadGPXFileInDifferentThread(final CallbackWithObject<GPXFile> callbackWithObject,

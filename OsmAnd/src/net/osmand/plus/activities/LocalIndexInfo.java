@@ -15,6 +15,7 @@ public class LocalIndexInfo {
 	private boolean corrupted = false;
 	private boolean notSupported = false;
 	private boolean loaded;
+	private String subfolder;
 	private String pathToData;
 	private String fileName;
 	private boolean singleFile;
@@ -46,9 +47,10 @@ public class LocalIndexInfo {
 	}
 
 	// Special domain object represents category
-	public LocalIndexInfo(LocalIndexType type, boolean backup) {
+	public LocalIndexInfo(LocalIndexType type, boolean backup, String subfolder) {
 		this.type = type;
 		backupedData = backup;
+		this.subfolder = subfolder;
 	}
 
 	public void setCorrupted(boolean corrupted) {
@@ -95,6 +97,14 @@ public class LocalIndexInfo {
 		if (notSupported) {
 			this.loaded = false;
 		}
+	}
+	
+	public void setSubfolder(String subfolder) {
+		this.subfolder = subfolder;
+	}
+	
+	public String getSubfolder() {
+		return subfolder;
 	}
 
 	public int getSize() {
