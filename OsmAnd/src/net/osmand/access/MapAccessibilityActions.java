@@ -2,6 +2,7 @@ package net.osmand.access;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import android.graphics.PointF;
 import android.os.Build;
@@ -29,7 +30,14 @@ public class MapAccessibilityActions implements AccessibilityActionsProvider {
         if ((Build.VERSION.SDK_INT >= 14) && activity.getMyApplication().getInternalAPI().accessibilityEnabled()) {
             final OsmandMapTileView mapView = activity.getMapView();
             LatLon pressedLoc = mapView.getLatLonFromScreenPoint(point.x, point.y);
-            activity.getMapActions().contextMenuPoint(pressedLoc.getLatitude(), pressedLoc.getLongitude());
+            ContextMenuLayer cm = activity.getMapLayers().getContextMenuLayer();
+            LatLon loc = cm.selectObjectsForContextMenu(point);
+            if (cm.getSelectedObjectName() != null) {
+            	cm.showContextMenuForSelectedObjects(loc);
+			} else {
+				activity.getMapActions().contextMenuPoint(pressedLoc.getLatitude(), pressedLoc.getLongitude());
+			}
+            
 //            activity.getMapActions().contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
             return true;
         }

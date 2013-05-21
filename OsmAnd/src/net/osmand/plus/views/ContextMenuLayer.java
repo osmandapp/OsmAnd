@@ -206,6 +206,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			view.refreshMap();
 			return true;
 		}
+		LatLon latLon = selectObjectsForContextMenu(point);
+		String description = getSelectedObjectDescription();
+		setLocation(latLon, description);
+		view.refreshMap();
+		return true;
+	}
+
+	public LatLon selectObjectsForContextMenu(PointF point) {
 		LatLon pressedLoc = view.getLatLonFromScreenPoint(point.x, point.y);
 		selectedObjects.clear();
 		List<Object> s = new ArrayList<Object>();
@@ -225,10 +233,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		if(latLon == null) {
 			latLon = pressedLoc;
 		}
-		String description = getSelectedObjectDescription();
-		setLocation(latLon, description);
-		view.refreshMap();
-		return true;
+		return latLon;
 	}
 	
 	@Override
@@ -299,7 +304,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			return true;
 		} else if (val == 1 || !nativeMode) {
 			if (!selectedObjects.isEmpty()) {
-				showContextMenuForSelectedObjects();
+				showContextMenuForSelectedObjects(latLon);
 			} else if (nativeMode) {
 				activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude());
 			}
@@ -308,7 +313,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return false;
 	}
 
-	private void showContextMenuForSelectedObjects() {
+	public void showContextMenuForSelectedObjects(final LatLon l) {
 		final ContextMenuAdapter menuAdapter = new ContextMenuAdapter(activity);
 		if (selectedObjects.size() > 1) {
 			Builder builder = new AlertDialog.Builder(view.getContext());
@@ -328,7 +333,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					for (OsmandMapLayer layer : view.getLayers()) {
 						layer.populateObjectContextMenu(selectedObj, menuAdapter);
 					}
-					activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
+					activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
 				}
 			});
 			builder.show();
@@ -337,7 +342,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			for (OsmandMapLayer layer : view.getLayers()) {
 				layer.populateObjectContextMenu(selectedObj, menuAdapter);
 			}
-			activity.getMapActions().contextMenuPoint(latLon.getLatitude(), latLon.getLongitude(), menuAdapter, selectedObj);
+			activity.getMapActions().contextMenuPoint(l.getLatitude(), l.getLongitude(), menuAdapter, selectedObj);
 		}
 	}
 	

@@ -611,7 +611,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 			return true;
 		} else {
-			app.showToastMessage(R.string.access_mark_final_location_first);
+			app.showShortToastMessage(R.string.access_mark_final_location_first);
 			return false;
 		}
 	}
