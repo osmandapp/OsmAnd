@@ -1225,4 +1225,6 @@
     <string name="files_limit">%1$d αρχεία απέμειναν</string>
     <string name="available_downloads_left">Διαθέσιμα %1$d αρχεία προς λήψη</string>
     <string name="install_paid">Πλήρης έκδοση</string>
+    <string name="use_magnetic_sensor">Χρήση του μαγνητικού αισθητήρα (πυξίδα)</string>
+    <string name="use_magnetic_sensor_descr">Χρήση του μαγνητικού αισθητήρα για τον προσδιορισμό της ένδειξης της πυξίδας, αντί του αισθητήρα προσανατολισμού</string>
     </resources>
