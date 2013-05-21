@@ -1209,4 +1209,5 @@
     <string name="other_location">Andre</string>
     <string name="files_limit">%1$d filer tilbage</string>
     <string name="available_downloads_left">%1$d filer kan hentes</string>
+    <string name="use_magnetic_sensor">Brug magnetisksensor</string>
     </resources>
