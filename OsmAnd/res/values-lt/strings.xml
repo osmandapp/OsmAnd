@@ -1294,4 +1294,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="cancel_navigation">Stabdyti navigaciją</string>
     <string name="clear_destination">Išvalyti tikslą</string>
     <string name="download_using_mobile_internet">Šiuo metu WiFi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
+    <string name="use_magnetic_sensor_descr">Maudoti magnetinį sensorių naudoti vietoje pokrypio sensoriaus kompaso reikšmei nustatyti</string>
+    <string name="use_magnetic_sensor">Naudoti magnetinį sensorių (kompasą)</string>
     </resources>
