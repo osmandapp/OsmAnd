@@ -52,7 +52,7 @@
     <string name="srtm_plugin_name">Højdekurve udvidelse</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
-    <string name="download_srtm_maps">Højdekurvedata</string>
+    <string name="download_srtm_maps">Højdekurver</string>
     <string name="download_regular_maps">Almindelige kort</string>
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
@@ -1210,4 +1210,6 @@
     <string name="files_limit">%1$d filer tilbage</string>
     <string name="available_downloads_left">%1$d filer kan hentes</string>
     <string name="use_magnetic_sensor">Brug magnetisksensor</string>
+    <string name="local_indexes_cat_srtm">Højdekurvedata</string>
+    <string name="use_magnetic_sensor_descr">"Brug magnetisk sensor i stedet for retnings sensor til at bestemme kompas værdi "</string>
     </resources>
