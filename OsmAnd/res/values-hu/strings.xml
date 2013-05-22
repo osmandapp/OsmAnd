@@ -1206,4 +1206,10 @@
     <string name="install_paid">Teljes verzió</string>
     <string name="use_magnetic_sensor_descr">A mágnesszenzor használata az iránytű értékének meghatározásához az tájolás szenzor helyett</string>
     <string name="use_magnetic_sensor">Mágnesszenzor (iránytű) használata</string>
+    <string name="use_kalman_filter_compass_descr">Kálmán-szűrő használata az iránytű stabilizálására</string>
+    <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
+    <string name="access_mark_final_location_first">Kisegítő mód: előbb válassz célpontot</string> 
+    <string name="tip_recent_changes_1_3_t">"Az 1.3 kiadás újdonságai:
+\n\t* Holo téma (személyre szabható témák) "</string>
+    <string name="local_indexes_cat_srtm">Szintvonal adat</string>
     </resources>
