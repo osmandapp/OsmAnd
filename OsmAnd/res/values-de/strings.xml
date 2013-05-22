@@ -270,7 +270,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="map_online_data">Online- und Kachel-Karten</string>
 	<string name="map_online_data_descr">Online-Karten verwenden (lädt Kacheln aus dem Internet und speichert diese auf der SD-Karte)</string>
 	<string name="online_map_settings">Online-Karten</string>
-	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen</string>
+	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen, sowie Over&amp;Underlay Einstellungen</string>
 	<string name="map_settings">Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterverzeichnis \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterverzeichnis \'tiles\' kopiert werden.</string>
@@ -1333,12 +1333,12 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmand_distance_plugin_name">Entfernungsmesser</string>
 <string name="av_def_action_video">Video aufzeichnen</string>
     <string name="av_def_action_audio">Audio aufnehmen</string>
-    <string name="av_widget_action_descr">Wählen Sie Standard-Widget Aktion</string>
+    <string name="av_widget_action_descr">Legt fest, welche Aktion vom Widget beim Auswählen ausgeführt wird</string>
     <string name="av_widget_action">Standard Widget Aktion</string>
-    <string name="av_video_format_descr">Wählen Sie Video-Ausgabeformat</string>
+    <string name="av_video_format_descr">Wählen Sie ein Video-Ausgabeformat\n(3GP oder MP4)</string>
     <string name="av_video_format">Video-Ausgabeformat</string>
-    <string name="av_use_external_recorder_descr">Verwenden Sie System-Recorder für Video</string>
-    <string name="av_use_external_recorder">Verwenden externen Recorder</string>
+    <string name="av_use_external_recorder_descr">Externen System-Recorder für Video-Aufnahmen verwenden</string>
+    <string name="av_use_external_recorder">System-Recorder</string>
     <string name="av_settings_descr">Konfigurieren von Audio-und Video-Einstellungen</string>
     <string name="recording_camera_not_available">Die Kamera ist nicht verfügbar</string>
     <string name="recording_open_external_player">Externen Player öffnen</string>
@@ -1385,8 +1385,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="precise_routing_mode_descr">Ermöglicht das präzise Berechnen der Route ohne Störungen. Es ist durch die Entfernung begrenzt und verwendet nicht die ursprüngliche Bibliothek.</string>
     <string name="precise_routing_mode">Präzises Routen (experimentell)</string>
     <string name="local_indexes_cat_av">Audio/Video-Daten</string>
-    <string name="av_use_external_camera_descr">System-Anwendung für Foto verwenden</string>
-    <string name="av_use_external_camera">Kamera benutzen</string>
+    <string name="av_use_external_camera_descr">Externe System-Kamera für Foto-Aufnahme verwenden</string>
+    <string name="av_use_external_camera">System-Kamera</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Änderungen in 1.2.1:\n→* Fehlerbehebung für Geo Intent (Foursquare, c:geo)\n→* Fehlerbehebung für zitterndes Bild bei Navigation\n→* Andere kleine Fehlerbehebungen\nÄnderungen in 1.2:\n→* Fehlerbehebungen (Navigation, Suche, AV-Aufzeichnung, Sprachansagen, einige Anzeigeverbesserungen)\n→* Einfachere Konfiguration des Bergkontur-Overlay (nur mit Kontur-Linien-Plugin)\n→* Verarbeitet maps.google.com-Links auf Orte\n→* Neues Widget (GPS info)\n→* Hinzugefügt: Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten\n→* Kalman-Filter für Kompass\n→* Unterstützung für Pebble-Uhr "</string>
     <string name="prefer_motorways">Autobahnen bevorzugen</string>
@@ -1404,7 +1404,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="street_name">Straße</string>
 	<string name="hno">Hausnummer</string>
     <string name="tip_recent_changes_1_3_t">"Änderungen in 1.3:\n\t * Holo-Theme (Anpassung des Theme) "</string>
-    <string name="monitoring_settings">Logging-Dienst &amp; Schlaf-Modus</string>
+    <string name="monitoring_settings">Tracking &amp; Schlaf-Modus</string>
     <string name="monitoring_settings_descr">Konfigurieren Sie, wie Tracks aufgezeichnet und der Schlaf-Modus aktiviert werden soll</string>
     <string name="osmand_monitoring_plugin_description">Aktivieren Sie Tracking und die Navigation im Schlaf-Modus (Bildschirm aus). Das GPS-Gerät wird regelmäßig aktiviert. Zeigt Ihre Einstellungen zum Aufzeichnen Ihrer Wege als lokale GPX-Datei oder online bei einem Web-Service.</string>
     <string name="osmand_monitoring_plugin_name">Logging-Dienst &amp; Schlaf-Modus</string>
