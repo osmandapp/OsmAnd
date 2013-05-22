@@ -1052,7 +1052,7 @@
     <string name="map_widget_show_destination_arrow">Показувати напрямок до пункту прибуття</string>
     <string name="gps_not_available">Ввімкнути GPS в налаштуваннях</string>
     <string name="map_widget_monitoring_services">Служби моніторингу</string>
-	<string name="no_route">Немає маршруту</string>
+	<string name="no_route">Відмінити</string>
 	<string name="delete_target_point">Вилучити пункт призначення</string>
 	<string name="target_point">Пункт призначення %1$s</string>
     <string name="intermediate_point">Точка %1$s</string>
@@ -1147,4 +1147,17 @@
     <string name="select_address_activity">Виберіть адресу</string>
     <string name="favourites_list_activity">Виберіть улюблені</string>
     <string name="default_buttons_other_actions">Інші дії</string>
+    <string name="use_kalman_filter_compass_descr">Використовувати фільтр Калмана для даних GPS</string>
+    <string name="use_kalman_filter_compass">Використовувати фільтр Калмана</string>
+    <string name="other_location">Інше</string>
+    <string name="files_limit">%1$d файлів залишилось</string>
+    <string name="available_downloads_left">Доступно %1$d файлів для завантаження</string>
+    <string name="install_paid">Повна версія</string>
+    <string name="cancel_navigation">Зупинити навігацію</string>
+    <string name="clear_destination">Очистити точку прибуття</string>
+    <string name="download_using_mobile_internet">На даний час нема з\'єднання з Wi-Fi. Продовжувати завантаження з поточним інтернет-з\'єднанням ?</string>
+    <string name="monitoring_settings">Служба логування і сплячий режим</string>
+    <string name="osmand_monitoring_plugin_name">Служба логування і сплячий режим</string>
+    <string name="accessibility_options">Налаштування особливих можливостей</string>
+    <string name="local_openstreetmap_act_title">Модифікації OSM</string>
     </resources>
