@@ -1213,4 +1213,7 @@
     <string name="use_magnetic_sensor_descr">Użyj czujnika pola magnetycznego, aby określić kierunek kompasu</string>
     <string name="use_magnetic_sensor">Użyj czujnika magnetycznego (kompas)</string>
     <string name="local_indexes_cat_srtm">Dane poziomic</string>
+    <string name="use_kalman_filter_compass_descr">Użyj filtru Kalmana, aby uniknąć odchyleń kompasu</string>
+    <string name="use_kalman_filter_compass">Użyj filtru Kalmana</string>
+    <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     </resources>
