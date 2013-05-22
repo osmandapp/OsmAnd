@@ -1239,4 +1239,9 @@
     <string name="install_paid">גרסה מלאה</string>
     <string name="use_magnetic_sensor_descr">שימוש בחיישן מגנטי כדי לזהות את ערך המצפן במקום חיישן הכיוון</string>
     <string name="use_magnetic_sensor">שימוש בחיישן מגנטי (מצפן)</string>
+    <string name="use_kalman_filter_compass_descr"/>
+    <string name="use_kalman_filter_compass">שימוש במסנן קלמן</string>
+    <string name="access_mark_final_location_first">מצב נגישות : נא לבחור ביעד תחילה</string> 
+    <string name="use_kalman_filter_compass_descr">ניתן להשתמש במסנן קלמן למניעת סטיות מצפן</string>
+    <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
     </resources>
