@@ -218,13 +218,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget time = ric.createTimeControl(map, paintText, paintSubText);
 		mapInfoControls.registerSideWidget(time, R.drawable.widget_time, R.string.map_widget_time, "time",false, all, none,  10);
 		TextInfoWidget speed = ric.createSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, all, none,  15);
+		mapInfoControls.registerSideWidget(speed, R.drawable.widget_speed, R.string.map_widget_speed, "speed", false, carBicycleDefault, none,  15);
 		TextInfoWidget gpsInfo = mic.createGPSInfoControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, none, none,  17);
+		mapInfoControls.registerSideWidget(gpsInfo, R.drawable.widget_gps_info, R.string.map_widget_gps_info, "gps_info", false, exceptCar, none,  17);
 		TextInfoWidget maxspeed = ric.createMaxSpeedControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false, none, none,  18);
+		mapInfoControls.registerSideWidget(maxspeed, R.drawable.widget_max_speed, R.string.map_widget_max_speed, "max_speed", false, carBicycleDefault, none,  18);
 		TextInfoWidget alt = mic.createAltitudeControl(map, paintText, paintSubText);
-		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, EnumSet.of(ApplicationMode.PEDESTRIAN), none, 20);
+		mapInfoControls.registerSideWidget(alt, R.drawable.widget_altitude, R.string.map_widget_altitude, "altitude", false, exceptCar, none, 20);
 
 		// Top widgets
 		ImageViewWidget compassView = mic.createCompassView(map);
@@ -243,7 +243,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
-				"street_name", MapWidgetRegistry.MAIN_CONTROL, carBicycleDefault, 100);
+				"street_name", MapWidgetRegistry.MAIN_CONTROL, all, 100);
 		
 		// Register appearance widgets
 		registerAppearanceWidgets();
