@@ -352,7 +352,7 @@
 <string name="fav_export_confirmation">En fil med tidigare exporterade favoriter finns redan. Vill du ersätta den?</string>
 <string name="profile_settings">Profilspecifika inställningar</string>
 <string name="settings_preset">Användarprofil</string>
-<string name="settings_preset_descr">Välj en användarprofil med anpassade kart- och navigeringsinställningar.</string>
+<string name="settings_preset_descr">Välj en användarprofil med anpassade kart- och navigeringsinställningar</string>
 <string name="routing_settings">Navigering</string>
 <string name="routing_settings_descr">Ange navigeringsalternativ</string>
 <string name="global_settings">Globala inställningar</string>
@@ -1019,8 +1019,8 @@
 	<string name="show_osm_bugs">Visa OpenStreetBuggar</string>
 	<string name="favourites_activity">Favoriter</string>
 	<string name="add_to_favourite">Lägg till i favoriter</string>
-	<string name="use_english_names_descr">Välj mellan inhemska och engelska namn</string>
-	<string name="use_english_names">Använd engelska namn på kartorna</string>
+	<string name="use_english_names_descr">Välj mellan inhemska och engelska namn på kartorna</string>
+	<string name="use_english_names">Namn på engelska</string>
 	<string name="app_settings">Appinställningar</string>
 	<string name="search_address">Sök adress</string>
 	<string name="map_specify_point">Ange som destination</string>
@@ -1113,4 +1113,18 @@
     <string name="monitoring_settings">Loggningstjänster och viloläge</string>
     <string name="tip_recent_changes_1_3_t">"Ändring i 1.3:
 \n\t* Holo-tema (egna teman) "</string>
+    <string name="use_kalman_filter_compass_descr">Använd Kalman-filter för att undvika kompassmissvisning</string>
+    <string name="use_kalman_filter_compass">Använd Kalman-filter</string>
+    <string name="choose_osmand_theme">App-tema</string>
+    <string name="choose_osmand_theme_descr">Välj tema för applikationen</string>
+    <string name="use_magnetic_sensor_descr">Använd magnetisk sensor för att bestämma kompassvärde i stället för orienteringssensor</string>
+    <string name="access_mark_final_location_first">Tillgänglighetsläge: välj destination först</string> 
+    <string name="accessibility_options">Tillgänglighetsalternativ</string>
+    <string name="select_address_activity">Välj adress</string>
+    <string name="favourites_list_activity">Välj favorit</string>
+    <string name="local_openstreetmap_act_title">OSM-modifieringar</string>
+    <string name="default_buttons_other_actions">Andra åtgärder</string>
+    <string name="save_current_track_widget">Spara
+\n aktuellt GPX-spår</string>
+	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4: ↵\n→* Nytt gränssnitt↵\n→* Buggfixar  "</string>
     </resources>
