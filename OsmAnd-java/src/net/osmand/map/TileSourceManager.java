@@ -317,33 +317,35 @@ public class TileSourceManager {
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
-		try {
-			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php?" + versionAsUrl).openConnection();
-			XmlPullParser parser = PlatformUtil.newXMLPullParser();
-			parser.setInput(connection.getInputStream(), "UTF-8");
-			int tok;
-			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
-				if (tok == XmlPullParser.START_TAG) {
-					String name = parser.getName();
-					if (name.equals("tile_source")) {
-						Map<String, String> attrs = new LinkedHashMap<String, String>();
-						for(int i=0; i< parser.getAttributeCount(); i++) {
-							attrs.put(parser.getAttributeName(i), parser.getAttributeValue(i));
-						}
-						TileSourceTemplate template = createTileSourceTemplate(attrs);
-						if (template != null) {
-							templates.add(template);
-						}
-					}
-				}
-			}
-		} catch (IOException e) {
-			log.error("Exception while downloading tile sources", e);
-			return null;
-		} catch (XmlPullParserException e) {
-			log.error("Exception while downloading tile sources", e);
-			return null;
-		}
+		// FIXME android.os.NetworkOnMainThreadException
+//		at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1118)
+//		try {
+//			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php?" + versionAsUrl).openConnection();
+//			XmlPullParser parser = PlatformUtil.newXMLPullParser();
+//			parser.setInput(connection.getInputStream(), "UTF-8");
+//			int tok;
+//			while ((tok = parser.next()) != XmlPullParser.END_DOCUMENT) {
+//				if (tok == XmlPullParser.START_TAG) {
+//					String name = parser.getName();
+//					if (name.equals("tile_source")) {
+//						Map<String, String> attrs = new LinkedHashMap<String, String>();
+//						for(int i=0; i< parser.getAttributeCount(); i++) {
+//							attrs.put(parser.getAttributeName(i), parser.getAttributeValue(i));
+//						}
+//						TileSourceTemplate template = createTileSourceTemplate(attrs);
+//						if (template != null) {
+//							templates.add(template);
+//						}
+//					}
+//				}
+//			}
+//		} catch (IOException e) {
+//			log.error("Exception while downloading tile sources", e);
+//			return null;
+//		} catch (XmlPullParserException e) {
+//			log.error("Exception while downloading tile sources", e);
+//			return null;
+//		}
 		return templates;
 	}
 	

@@ -48,7 +48,9 @@ public class SuggestExternalDirectoryDialog {
 						dialog.dismiss();
 						app.getSettings().setExternalStorageDirectory(extMounts[which]);
 						app.getResourceManager().resetStoreDirectory();
-						reloadListener.run();
+						if(reloadListener != null) {
+							reloadListener.run();
+						}
 					}
 				}
 			});
