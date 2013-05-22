@@ -1266,4 +1266,7 @@
     <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Dati isocline</string>
+    <string name="use_kalman_filter_compass_descr">Usare il filtro di Kalman per evitare aberrazioni della bussola</string>
+    <string name="use_kalman_filter_compass">Uso del Filtro di Kalman</string>
+    <string name="access_mark_final_location_first">Modalità di accesso facilitato: si prega di selezionare la destinazione prima</string> 
     </resources>
