@@ -193,7 +193,7 @@
   <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
-  <string name="local_index_download">Download</string>
+  <string name="local_index_download">Scarica</string>
   <string name="local_index_tile_data">Dati anteprime: %1$s
 \nZoom minimo: %2$d\nZoom massimo: %3$d\nScaricabile: %4$s
 \nZoom scaricati: %5$s</string>
@@ -407,7 +407,7 @@
   <string name="use_high_res_maps">Schermo ad alta risoluzione</string>
   <string name="use_high_res_maps_descr">Non stira (né offusca) le mattonelle della mappa nei dispositivi con display ad alta densità</string>
   <string name="unknown_location">Posizione non ancora conosciuta</string>
-  <string name="download_files">Download</string>
+  <string name="download_files">Scarica</string>
   <string name="context_menu_item_search_transport">Ricerca trasporti pubblici</string>
   <string name="transport_searching_transport">Risultati trasporti pubblici (nessun obiettivo):</string>
   <string name="transport_searching_route">Risultati trasporti pubblici ({0} a obiettivo):</string>
