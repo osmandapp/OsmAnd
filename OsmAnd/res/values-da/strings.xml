@@ -1212,4 +1212,7 @@
     <string name="use_magnetic_sensor">Brug magnetisksensor</string>
     <string name="local_indexes_cat_srtm">Højdekurvedata</string>
     <string name="use_magnetic_sensor_descr">"Brug magnetisk sensor i stedet for retnings sensor til at bestemme kompas værdi "</string>
+    <string name="use_kalman_filter_compass_descr">Brug Kalman filter for at undgå kompas afvigelser</string>
+    <string name="use_kalman_filter_compass">Brug Kalman filter</string>
+    <string name="access_mark_final_location_first">Tilgængelighed tilstand: Vælg destination først</string> 
     </resources>
