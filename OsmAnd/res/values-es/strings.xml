@@ -1136,7 +1136,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
 	<string name="tip_recent_changes_1_1_4_t">"Cambios en 1.1.4:\n\t* Rediseño de interfaz de usuario\n\t* Corrección de errores "</string>
     <string name="save_current_track_widget">Guardar\ntraza GPX actual</string>
 	<string name="street_name">Calle</string>
-	<string name="hno">Nº</string>
+	<string name="hno">Número</string>
     <string name="tip_recent_changes_1_3_t">"Cambio en 1.5:\n\t* Tema Holo (personalización de tema) "</string>
     <string name="monitoring_settings">Servicios de registro y Modo de suspensión</string>
     <string name="monitoring_settings_descr">Configura la forma de registrar los recorridos y activar el modo de suspensión</string>
@@ -1149,4 +1149,18 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="favourites_list_activity">Selecciona favorito</string>
     <string name="local_openstreetmap_act_title">Modificaciones OSM</string>
     <string name="default_buttons_other_actions">Otras acciones</string>
+    <string name="use_kalman_filter_compass_descr">Utiliza el filtro Kalman para evitar aberraciones de la brújula</string>
+    <string name="use_kalman_filter_compass">Usar filtro Kalman</string>
+    <string name="access_mark_final_location_first">Modo Accesibilidad: selecciona el destino primero</string> 
+    <string name="use_magnetic_sensor_descr">Utiliza el sensor magnético para determinar el valor de la brújula en vez del sensor de orientación</string>
+    <string name="use_magnetic_sensor">Usar el sensor magnético</string>
+    <string name="other_location">Otra</string>
+    <string name="files_limit">Quedan %1$d archivos</string>
+    <string name="available_downloads_left">Disponibles %1$d archivos para descargar</string>
+    <string name="install_paid">Versión completa</string>
+    <string name="cancel_route">Descartar ruta</string>
+    <string name="cancel_navigation">Parar navegación</string>
+    <string name="clear_destination">Borrar destino</string>
+    <string name="download_using_mobile_internet">Actualmente WiFi no está conectado. ¿Desea continuar la descarga con la conexión actual a Internet?</string>
+    <string name="local_indexes_cat_srtm">Datos de curvas de nivel</string>
     </resources>
