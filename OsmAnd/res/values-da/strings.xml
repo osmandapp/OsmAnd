@@ -135,7 +135,7 @@
 	<string name="show_warnings_title">Vis alarmer…</string>
 	<string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsbegrænsninger, tvungne stop, vejbump), fotofælde advarsler og vognbane oplysninger</string>
 	<string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret</string>
-	<string name="use_compass_navigation">Brug kompas</string>
+	<string name="use_compass_navigation">Kompas</string>
 	<string name="avoid_motorway">Undgå motorveje</string>
 	<string name="auto_zoom_map_descr">Auto zoom kort efter din hastighed (mens kort er synkroniseret med aktuelle position)</string>
 	<string name="auto_zoom_map">Automatisk kortzoom</string>
@@ -352,7 +352,7 @@
 	<string name="show_details">Vis detaljer</string>
 	<string name="accessibility_extensions_descr">Tilgængelighedsudvidelser for gamle Android versioner</string>
 	<string name="accessibility_extensions">Tilgængelighedsudvidelser</string>
-	<string name="accessibility_mode">Tilgængelighedstilstand</string>
+	<string name="accessibility_mode">Tilgængelighedsmodus</string>
 	<string name="osmand_parking_pm">PM</string>
 	<string name="default_buttons_support">Støt</string>
 	<string name="info_button">Information</string>
@@ -407,7 +407,7 @@
 	<string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser</string>
 	<string name="zoom_by_trackball">Brug trackball til zoom</string>
 	<string name="use_short_object_names_descr">Brug korte objektnavne i touch udforskning tilstand</string>
-	<string name="use_short_object_names">Brug objektnavne</string>
+	<string name="use_short_object_names">Objektnavne</string>
 	<string name="accessibility_preferences_descr">Tilgængelighedsrelaterede indstillinger</string>
 	<string name="accessibility_preferences">Tilgængelighed</string>
 	<string name="rendering_out_of_memory">Ikke nok proceshukommelse til at vise det valgte område</string>
@@ -1116,7 +1116,7 @@
 	<string name="favourites_activity">Favoritter</string>
 	<string name="add_to_favourite">Tilføj til favoritter</string>
 	<string name="use_english_names_descr">Vælg mellem oprindelige eller engelske navne</string>
-	<string name="use_english_names">Brug engelske navne</string>
+	<string name="use_english_names">Engelske navne</string>
 	<string name="app_settings">Programindstillinger</string>
 	<string name="search_address">Søg adresse</string>
 	<string name="choose_building">Vælg bygning</string>
@@ -1209,10 +1209,10 @@
     <string name="other_location">Andre</string>
     <string name="files_limit">%1$d filer tilbage</string>
     <string name="available_downloads_left">%1$d filer kan hentes</string>
-    <string name="use_magnetic_sensor">Brug magnetisksensor</string>
+    <string name="use_magnetic_sensor">Magnetisk sensor</string>
     <string name="local_indexes_cat_srtm">Højdekurvedata</string>
-    <string name="use_magnetic_sensor_descr">"Brug magnetisk sensor i stedet for retnings sensor til at bestemme kompas værdi "</string>
+    <string name="use_magnetic_sensor_descr">Brug magnetisk sensor i stedet for retnings sensor til at bestemme kompas værdi</string>
     <string name="use_kalman_filter_compass_descr">Brug Kalman filter for at undgå kompas afvigelser</string>
-    <string name="use_kalman_filter_compass">Brug Kalman filter</string>
-    <string name="access_mark_final_location_first">Tilgængelighed tilstand: Vælg destination først</string> 
+    <string name="use_kalman_filter_compass">Kalman filter</string>
+    <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
     </resources>
