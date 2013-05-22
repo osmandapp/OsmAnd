@@ -272,7 +272,7 @@
   <string name="local_index_mi_backup">Deactiveer</string>
   <string name="local_index_mi_delete">Verwijder</string>
   <string name="local_index_mi_reload">Verversen van SD-kaart</string>
-  <string name="local_index_download">Download…</string>
+  <string name="local_index_download">Download</string>
   <string name="local_index_tile_data">Kaartsegmentgegevens: %1$s
 \nMinimum zoom : %2$d\nMaximum zoom : %3$d\nTe downloaden : %4$s
 \nZooms gedownloaded : %5$s</string>
@@ -1217,7 +1217,7 @@
     <string name="cancel_route">Annuleer route</string>
     <string name="cancel_navigation">Stop navigatie</string>
     <string name="clear_destination">Wis bestemmingspunt</string>
-    <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor om kompas te bepalen.</string>
+    <string name="use_magnetic_sensor_descr">Gebruik magnetische sensor in plaats van oriëntatiesensor voor het kompas</string>
     <string name="use_magnetic_sensor">Gebruik magnetische sensor(kompas)</string>
     <string name="use_kalman_filter_compass_descr">Gebruik Kalman filter om kompas-afwijkingen te vermijden</string>
     <string name="use_kalman_filter_compass">Gebruik Kalman filter</string>
