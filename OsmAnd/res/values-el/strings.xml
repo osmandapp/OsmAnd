@@ -1219,7 +1219,7 @@
     <string name="osmand_monitoring_plugin_description">Ενεργοποίηση ιχνηλάτησης και δρομολόγησης σε κατάσταση νάρκης (οθόνη κλειστή) μέσω περιοδικής αφύπνισης της συσκευής GPS. Εμφάνιση ρυθμίσεων που διευκολύνουν την εγγραφή των ταξιδιών σας σε τοπικά αρχεία GPX ή online χρησιμοποιώντας κάποια web υπηρεσία.</string>
     <string name="download_using_mobile_internet">Προς το παρόν το WiFi δεν είναι συνδεδεμένο. Θέλετε να συνεχίσετε τη λήψη με την τρέχουσα σύνδεση internet;</string>
     <string name="cancel_route">Απόρριψη διαδρομής</string>
-    <string name="cancel_navigation">Σταμάτημα πλοήγησης</string>
+    <string name="cancel_navigation">Διακοπή πλοήγησης</string>
     <string name="clear_destination">Καθαρισμός προορισμού</string>
     <string name="other_location">Άλλη</string>
     <string name="files_limit">%1$d αρχεία απέμειναν</string>
@@ -1227,4 +1227,7 @@
     <string name="install_paid">Πλήρης έκδοση</string>
     <string name="use_magnetic_sensor">Χρήση του μαγνητικού αισθητήρα (πυξίδα)</string>
     <string name="use_magnetic_sensor_descr">Χρήση του μαγνητικού αισθητήρα για τον προσδιορισμό της ένδειξης της πυξίδας, αντί του αισθητήρα προσανατολισμού</string>
+    <string name="use_kalman_filter_compass_descr">Χρήση φίλτρου Kalman για αποφυγή απόκλισης της πυξίδας</string>
+    <string name="use_kalman_filter_compass">Χρήση φίλτρου Kalman</string>
+    <string name="access_mark_final_location_first">Λειτουργία προσβασιμότητας: παρακαλώ επιλέξτε πρώτα προορισμό</string> 
     </resources>
