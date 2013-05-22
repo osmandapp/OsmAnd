@@ -1296,4 +1296,8 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="download_using_mobile_internet">Šiuo metu WiFi neprijungta. Ar norite tęsti siuntimąsį dabartiniu interneto ryšiu?</string>
     <string name="use_magnetic_sensor_descr">Maudoti magnetinį sensorių naudoti vietoje pokrypio sensoriaus kompaso reikšmei nustatyti</string>
     <string name="use_magnetic_sensor">Naudoti magnetinį sensorių (kompasą)</string>
+    <string name="use_kalman_filter_compass_descr">Naudoti Kalmano fltrą kompaso parodymų išlyginimui</string>
+    <string name="use_kalman_filter_compass">Naudoti Kalmano filtrą</string>
+    <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string> 
+    <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
     </resources>
