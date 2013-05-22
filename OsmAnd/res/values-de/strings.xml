@@ -1423,4 +1423,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="install_paid">Vollversion</string>
     <string name="cancel_navigation">Navigation stoppen</string>
     <string name="cancel_route">Route verwerfen</string>
+    <string name="use_kalman_filter_compass_descr">Kalman-Filter verwenden, um Kompass-Ungenauigkeiten auszublenden</string>
+    <string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
+    <string name="access_mark_final_location_first">Zugänglichkeitsmodus : Bitte zuerst Ziel auswählen</string> 
+    <string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
+    <string name="use_magnetic_sensor">Magnetsensor verwenden</string>
+    <string name="local_indexes_cat_srtm">Konturlinien-Daten</string>
     </resources>
