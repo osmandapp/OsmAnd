@@ -29,6 +29,7 @@ import net.osmand.plus.api.InternalToDoAPI;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
+import net.osmand.plus.api.ExternalServiceAPI.AudioFocusHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
@@ -105,10 +106,13 @@ public class OsmandApplication extends Application implements ClientContext {
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
 		if (Version.getAppName(this).equals("OsmAnd~")) {
-			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskWrites().detectNetwork().detectCustomSlowCalls().
-					detectDiskReads().
-					penaltyLog()./*penaltyDeath().*/build());
-			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog()./*penaltyDeath().*/build());
+			if (android.os.Build.VERSION.SDK_INT >= 9) {
+				try {
+					Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		super.onCreate();
 		 
