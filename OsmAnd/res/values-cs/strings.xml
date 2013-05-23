@@ -1215,7 +1215,7 @@
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapa a navigace</string>
 	<string name="item_checked">zvoleno</string>
     <string name="item_unchecked">nezvoleno</string>
-    <string name="save_current_track_widget">Uložit\nsoučasnou\nGPX trasu</string>
+    <string name="save_current_track_widget">Uložit\nGPX trasu</string>
 	<string name="choose_osmand_theme">Vzhled aplikace</string>
     <string name="choose_osmand_theme_descr">Vybrat téma aplikace</string>
     <string name="street_name">ulice</string>
