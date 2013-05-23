@@ -29,7 +29,6 @@ import net.osmand.plus.api.InternalToDoAPI;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.api.SettingsAPI;
-import net.osmand.plus.api.ExternalServiceAPI.AudioFocusHelper;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
