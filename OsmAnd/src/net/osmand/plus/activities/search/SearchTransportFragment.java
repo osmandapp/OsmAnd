@@ -34,6 +34,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -44,7 +46,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
-public class SearchTransportFragment extends SherlockFragment implements SearchActivityChild {
+public class SearchTransportFragment extends SherlockFragment implements SearchActivityChild, OnItemClickListener {
 
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
@@ -105,6 +107,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 		
 		ListView intermediateList = (ListView) view.findViewById(R.id.listView);
 		intermediateListAdapater = new TransportRouteAdapter(TransportRouteHelper.getInstance().getRoute());
+		intermediateList.setOnItemClickListener(this);
 		intermediateList.setAdapter(intermediateListAdapater);
 		if(intermediateList.getCount() == 0){
 			intermediateListAdapater.add(null);
@@ -277,9 +280,10 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 		return text.toString();
 	}
 	
-
-	// @Override
-	public void onListItemClick(ListView parent, View v, int position, long id) {
+	
+	
+	 @Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		final RouteInfoLocation item = stopsAdapter.getItem(position);
 		Builder builder = new AlertDialog.Builder(getActivity());
 		List<String> items = new ArrayList<String>();
@@ -613,5 +617,7 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 
 
 	}
+
+
 
 }
