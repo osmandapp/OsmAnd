@@ -30,6 +30,7 @@ import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceScreen;
@@ -252,59 +253,67 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	
 	
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
-		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries();
 		if (!settings.isInternetConnectionAvailable(true)) {
 			AccessibleToast.makeText(activity, R.string.internet_not_available, Toast.LENGTH_LONG).show();
 			return;
 		}
-		final List<TileSourceTemplate> downloaded = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app));
-		if (downloaded == null || downloaded.isEmpty()) {
-			AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
-			return;
-		}
-		Builder builder = new AlertDialog.Builder(activity);
-		String[] names = new String[downloaded.size()];
-		for (int i = 0; i < names.length; i++) {
-			names[i] = downloaded.get(i).getName();
-		}
-		final boolean[] selected = new boolean[downloaded.size()];
-		builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
-
+		AsyncTask<Void, Void, List<TileSourceTemplate>> t = new AsyncTask<Void, Void, List<TileSourceTemplate>>() {
 			@Override
-			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				selected[which] = isChecked;
-				if (entriesMap.containsKey(downloaded.get(which).getName()) && isChecked) {
-					AccessibleToast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
-				}
+			protected List<TileSourceTemplate> doInBackground(Void... params) {
+				return TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(app));
 			}
-		});
-		builder.setNegativeButton(R.string.default_buttons_cancel, null);
-		builder.setTitle(R.string.select_tile_source_to_install);
-		builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
-				for (int i = 0; i < selected.length; i++) {
-					if (selected[i]) {
-						toInstall.add(downloaded.get(i));
-					}
+			protected void onPostExecute(final java.util.List<TileSourceTemplate> downloaded) {
+				if (downloaded == null || downloaded.isEmpty()) {
+					AccessibleToast.makeText(activity, R.string.error_io_error, Toast.LENGTH_SHORT).show();
+					return;
 				}
-				for (TileSourceTemplate ts : toInstall) {
-					if (settings.installTileSource(ts)) {
-						if (result != null) {
-							result.publish(ts);
+				Builder builder = new AlertDialog.Builder(activity);
+				String[] names = new String[downloaded.size()];
+				for (int i = 0; i < names.length; i++) {
+					names[i] = downloaded.get(i).getName();
+				}
+				final boolean[] selected = new boolean[downloaded.size()];
+				builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+						selected[which] = isChecked;
+						if (entriesMap.containsKey(downloaded.get(which).getName()) && isChecked) {
+							AccessibleToast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
 						}
 					}
-				}
-				// at the end publish null to show end of process
-				if (!toInstall.isEmpty() && result != null) {
-					result.publish(null);
-				}
-			}
-		});
+				});
+				builder.setNegativeButton(R.string.default_buttons_cancel, null);
+				builder.setTitle(R.string.select_tile_source_to_install);
+				builder.setPositiveButton(R.string.default_buttons_apply, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						List<TileSourceTemplate> toInstall = new ArrayList<TileSourceTemplate>();
+						for (int i = 0; i < selected.length; i++) {
+							if (selected[i]) {
+								toInstall.add(downloaded.get(i));
+							}
+						}
+						for (TileSourceTemplate ts : toInstall) {
+							if (settings.installTileSource(ts)) {
+								if (result != null) {
+									result.publish(ts);
+								}
+							}
+						}
+						// at the end publish null to show end of process
+						if (!toInstall.isEmpty() && result != null) {
+							result.publish(null);
+						}
+					}
+				});
 
-		builder.show();
+				builder.show();
+			}
+		};
+		t.execute(new Void[0]);
 	}
 }
