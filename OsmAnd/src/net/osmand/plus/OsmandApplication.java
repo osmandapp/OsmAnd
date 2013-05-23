@@ -55,6 +55,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.text.format.DateFormat;
 import android.widget.Toast;
 
@@ -103,7 +104,13 @@ public class OsmandApplication extends Application implements ClientContext {
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
+		if (Version.getAppName(this).equals("OsmAnd~")) {
+			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskWrites().detectNetwork().detectCustomSlowCalls().
+					penaltyLog().penaltyDeath().build());
+			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+		}
 		super.onCreate();
+		 
 		settingsAPI = new net.osmand.plus.api.SettingsAPIImpl(this);
 		externalServiceAPI = new net.osmand.plus.api.ExternalServiceAPIImpl(this);
 		internalToDoAPI = new net.osmand.plus.api.InternalToDoAPIImpl(this);

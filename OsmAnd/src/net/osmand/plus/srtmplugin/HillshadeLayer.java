@@ -105,6 +105,7 @@ public class HillshadeLayer extends MapTileLayer {
 						}
 						
 					} while(cursor.moveToNext());
+					cursor.close();
 				}
 			}
 

@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import android.os.Build;
-
 import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.data.LatLon;
@@ -30,6 +28,7 @@ import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
+import android.os.Build;
 
 public class OsmandSettings {
 	
@@ -98,7 +97,6 @@ public class OsmandSettings {
 	// cache variables
 	private long lastTimeInternetConnectionChecked = 0;
 	private boolean internetConnectionAvailable = true;
-	private List<TileSourceTemplate> internetAvailableSourceTemplates = null;
 	
 	
 	protected OsmandSettings(OsmandApplication clientContext) {
@@ -816,12 +814,6 @@ public class OsmandSettings {
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
 			TileSourceManager.getMapnikSource().getName()).makeGlobal();
 	
-	public List<TileSourceTemplate> getInternetAvailableSourceTemplates(){
-		if(internetAvailableSourceTemplates == null && isInternetConnectionAvailable()){
-			internetAvailableSourceTemplates = TileSourceManager.downloadTileSourceTemplates(Version.getVersionAsURLParam(ctx));
-		}
-		return internetAvailableSourceTemplates;
-	}
 	
 	public CommonPreference<String> PREVIOUS_INSTALLED_VERSION = new StringPreference("previous_installed_version", "").makeGlobal();
 
@@ -868,8 +860,6 @@ public class OsmandSettings {
 			if (ret != null) {
 				return ret;
 			}
-			// try to find among other templates
-			ret = checkAmongAvailableTileSources(dir, getInternetAvailableSourceTemplates());
 			if (ret != null) {
 				return ret;
 			}
@@ -884,16 +874,8 @@ public class OsmandSettings {
 				TileSourceTemplate ret = checkAmongAvailableTileSources(dir, knownTemplates);
 				if (ret != null) {
 					t = ret;
-				} else {
-					// try to find among other templates
-					ret = checkAmongAvailableTileSources(dir, getInternetAvailableSourceTemplates());
-					if (ret != null) {
-						t = ret;
-					}
 				}
-
 			}
-
 			return t;
 		}
 		return null;
