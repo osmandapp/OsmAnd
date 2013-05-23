@@ -154,12 +154,14 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				filterText.setText(filter);
 			}
 		}
+		List<IndexItem> list = new ArrayList<IndexItem>();
 		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
-			DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, getFilteredByType());
-			setListAdapter(adapter);
+			list = getFilteredByType();
 		} else {
 			downloadIndexList();
 		}
+		DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, list);
+		setListAdapter(adapter);
 		if(getMyApplication().getResourceManager().getIndexFileNames().isEmpty()) {
 			boolean showedDialog = SuggestExternalDirectoryDialog.showDialog(this, null, null);
 			if(!showedDialog) {
@@ -218,9 +220,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 				}
 			}
 			((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
-		}
-		if(getExpandableListAdapter() != null) {
-			((DownloadIndexAdapter)getExpandableListAdapter()).updateLoadedFiles();
 		}
 	}
 
