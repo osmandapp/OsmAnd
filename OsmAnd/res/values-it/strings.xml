@@ -193,7 +193,7 @@
   <string name="local_index_mi_backup">Disattiva</string>
   <string name="local_index_mi_delete">Elimina</string>
   <string name="local_index_mi_reload">Ricarica dalla scheda SD</string>
-  <string name="local_index_download">Scarica</string>
+  <string name="local_index_download">Download</string>
   <string name="local_index_tile_data">Dati anteprime: %1$s
 \nZoom minimo: %2$d\nZoom massimo: %3$d\nScaricabile: %4$s
 \nZoom scaricati: %5$s</string>
@@ -407,7 +407,7 @@
   <string name="use_high_res_maps">Schermo ad alta risoluzione</string>
   <string name="use_high_res_maps_descr">Non stira (né offusca) le mattonelle della mappa nei dispositivi con display ad alta densità</string>
   <string name="unknown_location">Posizione non ancora conosciuta</string>
-  <string name="download_files">Scarica</string>
+  <string name="download_files">Download</string>
   <string name="context_menu_item_search_transport">Ricerca trasporti pubblici</string>
   <string name="transport_searching_transport">Risultati trasporti pubblici (nessun obiettivo):</string>
   <string name="transport_searching_route">Risultati trasporti pubblici ({0} a obiettivo):</string>
@@ -1142,7 +1142,7 @@
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Isocline</string>
     <string name="srtm_plugin_name">Plugin isocline</string>
-    <string name="srtm_plugin_description">Questo plugin facilita il download delle isocline offline e l\'ombreggiamento dei rilievi (Impostazioni-&gt; Dati Offline -&gt; Scarica -&gt; Seleziona il tipo di mappa desiderato).</string>
+    <string name="srtm_plugin_description">Questo plugin facilita il download delle isocline offline e l\'ombreggiamento dei rilievi (Impostazioni-&gt; Dati Offline -&gt; Download -&gt; Seleziona il tipo di mappa desiderato).</string>
     <string name="index_srtm_ele">Isocline</string>
     <string name="audionotes_plugin_description">Prendi note audio/video durante il viaggio</string>
     <string name="audionotes_plugin_name">Plugin appunti audio</string>
@@ -1267,6 +1267,6 @@
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Dati isocline</string>
     <string name="use_kalman_filter_compass_descr">Usare il filtro di Kalman per evitare aberrazioni della bussola</string>
-    <string name="use_kalman_filter_compass">Uso del Filtro di Kalman</string>
-    <string name="access_mark_final_location_first">Modalità di accesso facilitato: si prega di selezionare la destinazione prima</string> 
+    <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
+    <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     </resources>
