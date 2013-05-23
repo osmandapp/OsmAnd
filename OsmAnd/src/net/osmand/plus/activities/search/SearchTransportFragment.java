@@ -104,11 +104,12 @@ public class SearchTransportFragment extends SherlockFragment implements SearchA
 		progress.setVisibility(View.INVISIBLE);
 		stopsAdapter = new TransportStopAdapter(new ArrayList<RouteInfoLocation>());
 		((ListView) view.findViewById(android.R.id.list)).setAdapter(stopsAdapter);
+		((ListView) view.findViewById(android.R.id.list)).setOnItemClickListener(this);
 		
 		ListView intermediateList = (ListView) view.findViewById(R.id.listView);
 		intermediateListAdapater = new TransportRouteAdapter(TransportRouteHelper.getInstance().getRoute());
-		intermediateList.setOnItemClickListener(this);
 		intermediateList.setAdapter(intermediateListAdapater);
+		
 		if(intermediateList.getCount() == 0){
 			intermediateListAdapater.add(null);
 		}	
