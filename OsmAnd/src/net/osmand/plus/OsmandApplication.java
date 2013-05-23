@@ -106,8 +106,9 @@ public class OsmandApplication extends Application implements ClientContext {
 		long timeToStart = System.currentTimeMillis();
 		if (Version.getAppName(this).equals("OsmAnd~")) {
 			StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().detectDiskWrites().detectNetwork().detectCustomSlowCalls().
-					penaltyLog().penaltyDeath().build());
-			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog().penaltyDeath().build());
+					detectDiskReads().
+					penaltyLog()./*penaltyDeath().*/build());
+			StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder().detectAll().penaltyLog()./*penaltyDeath().*/build());
 		}
 		super.onCreate();
 		 

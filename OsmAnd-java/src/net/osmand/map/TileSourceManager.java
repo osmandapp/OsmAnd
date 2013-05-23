@@ -317,8 +317,6 @@ public class TileSourceManager {
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
-		// FIXME android.os.NetworkOnMainThreadException
-//		at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1118)
 		try {
 			URLConnection connection = new URL("http://download.osmand.net//tile_sources.php?" + versionAsUrl).openConnection();
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
