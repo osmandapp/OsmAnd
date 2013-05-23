@@ -584,7 +584,7 @@
   <string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX\' Tracking settings.</string>
   <string name="show_current_gpx_title">Mostrar rota atual</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
-  <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
+  <string name="free_version_message">Esta versão gratuita do OsmAnd é limitada a %1$s downloads e não suporta artigos off-line da Wikipedia.</string>
   <string name="free_version_title">Versão gratuita</string>
   <string name="poi_context_menu_showdescription">Ver descritivo do POI</string>
   <string name="index_name_north_america">América do Norte</string>
@@ -1109,4 +1109,10 @@
     <string name="osmand_monitoring_plugin_name">Serviços de Registro e Modo de Suspenção</string>
     <string name="download_hillshade_item">Sombras de colinas</string>
     <string name="download_hillshade_maps">Sobreposições de Sombras de Colinas</string>
+    <string name="files_limit">Restando %1$d arquivos</string>
+    <string name="available_downloads_left">Disponível %1$d arquivos para download</string>
+    <string name="install_paid">Versão completa</string>
+    <string name="cancel_route">Descartar rota</string>
+    <string name="cancel_navigation">Parar navegação</string>
+    <string name="tip_recent_changes_1_1_4_t">"Mudanças em 1.1.4: ↵\n→* Interface do usuário redesenhada ↵\n→* Correções de erros "</string>
     </resources>
