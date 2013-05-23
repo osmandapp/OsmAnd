@@ -8,7 +8,6 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.LocalIndexesActivity;
 import net.osmand.plus.activities.LocalIndexesActivity.UploadVisibility;
 import android.os.AsyncTask;
-import android.view.View;
 import android.widget.Toast;
 
 public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String> {
@@ -64,12 +63,12 @@ public class UploadGPXFilesTask extends AsyncTask<LocalIndexInfo, String, String
 
 	@Override
 	protected void onPreExecute() {
-		la.findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
+		la.setProgressBarIndeterminateVisibility(true);
 	}
 
 	@Override
 	protected void onPostExecute(String result) {
-		la.findViewById(R.id.ProgressBar).setVisibility(View.GONE);
+		la.setProgressBarIndeterminateVisibility(false);
 		AccessibleToast.makeText(la, result, Toast.LENGTH_LONG).show();
 	}
 
