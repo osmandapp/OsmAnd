@@ -223,7 +223,7 @@
 <string name="rendering_attr_hmRendered_name">Visa mer kartdetaljer</string>
 <string name="local_index_routing_data">Ruttdata</string>
 <string name="navigate_point_format">Format:</string>
-<string name="poi_search_desc">Sökning efter POI (Point of Interest)</string>
+<string name="poi_search_desc">Sökning efter POI (Intressepunkter)</string>
 <string name="favourites_search_desc">Favoritsökning</string>
 <string name="history_search_desc">Sökhistorik</string>
 <string name="modify_transparency">Ändra transparens (0 - transparent, 255 - ogenomskinlig)</string>
@@ -465,7 +465,7 @@
 <string name="local_index_address_data">Adressdata</string>
 <string name="local_index_transport_data">Transportdata</string>
 <string name="local_index_map_data">Kartdata</string>
-<string name="local_indexes_cat_backup">Inaktiverad</string>
+<string name="local_indexes_cat_backup">Inaktiverade</string>
 <string name="local_indexes_cat_tts">Röstdata (TTS)</string>
 <string name="local_indexes_cat_voice">Röstdata (inspelat)</string>
 <string name="local_indexes_cat_gpx">GPX-data</string>
@@ -538,14 +538,14 @@
 <string name="si_mi_yard">Miles/yards</string>
 <string name="si_km_m">Kilometer/meter</string>
 <string name="yard">yd</string>
-<string name="send_location_way_choose_title">Dela plats med</string>
+<string name="send_location_way_choose_title">Dela platsen med</string>
 <string name="send_location_sms_pattern">Plats: %1$s\n%2$s</string>
 <string name="send_location_email_pattern">Om du vill se platsen följa på webben% webbläsarens länk %1$s eller Android uppsåt länk %2$s</string>
 <string name="send_location">Skicka plats</string>
-<string name="context_menu_item_share_location">Dela ut plats</string>
+<string name="context_menu_item_share_location">Dela ut platsen</string>
 <string name="add_waypoint_dialog_added">Waypointen \"{0}\" har lagts till utan problem</string>
 <string name="add_waypoint_dialog_title">Lägg till waypoint i inspelade GPX-spår</string>
-<string name="context_menu_item_add_waypoint">Lägg GPX-waypoint</string>
+<string name="context_menu_item_add_waypoint">Lägg till GPX-waypoint</string>
 <string name="amenity_type_administrative">Administrativt</string>
 <string name="amenity_type_barrier">Hinder</string>
 <string name="amenity_type_education">Utbildning</string>
@@ -567,10 +567,10 @@
 <string name="amenity_type_sustenance">Näring</string>
 <string name="amenity_type_tourism">Turism</string>
 <string name="amenity_type_transportation">Transport</string>
-<string name="indexing_address">Indexerar adress…</string>
-<string name="indexing_map">Indexerar karta…</string>
-<string name="indexing_poi">Indexerar POI…</string>
-<string name="indexing_transport">Indexerar transport…</string>
+<string name="indexing_address">Indexerar adress …</string>
+<string name="indexing_map">Indexerar kartan …</string>
+<string name="indexing_poi">Indexerar POI …</string>
+<string name="indexing_transport">Indexerar transport …</string>
 <string name="input_output_error">Ett I/O-fel har inträffat</string>
 <string name="km">km</string>
 <string name="km_h">km/h</string>
@@ -618,7 +618,7 @@
 	<string name="application_dir_change_warning">Ändring av lagringskatalogen flyttar inte eller tar bort data. Detta måste utföras separat och utanför OsmAnd. Fortsätta ändå?</string>
 	<string name="osmand_net_previously_installed">En tidigare OsmAnd-version är installerad. Alla offline-data kommer att stödjas av den nya appen. Men favoritpunkter bör exporteras från den gamla appen och senare importeras i den nya.</string>
 	<string name="build_installed">Bygge {0} installerades korrekt ({1}).</string>
-	<string name="downloading_build">Laddar ner bygge…</string>
+	<string name="downloading_build">Laddar ner bygge …</string>
 	<string name="install_selected_build">Vill du installera OsmAnd - {0} från {1}{2} MB?</string>
 	<string name="loading_builds_failed">Hämtar en lista över misslyckade OsmAnd-byggen</string>
 	<string name="loading_builds">Laddar OsmAnd-byggen…</string>
@@ -651,7 +651,7 @@
 	<string name="continuous_rendering">Kontinuerlig rendering</string>
 	<string name="continuous_rendering_descr">Visa kontinuerlig rendering istället för bild-direkt</string>
 	<string name="rendering_exception">Ett fel uppstod vid rendering av valt område</string>
-	<string name="show_point_options">Använd plats...</string>
+	<string name="show_point_options">Använd platsen...</string>
 	<string name="renderer_load_sucess">Renderaren laddades utan problem</string>
 	<string name="renderer_load_exception">Ett undantagsfel inträffade: renderaren laddades inte</string>
 	<string name="renderers">Vektorrenderare</string>
@@ -746,7 +746,7 @@
 	<string name="stop_routing">Stoppa navigeringen</string>
 	<string name="sd_unmounted">SD-kortet är inte tillgängligt.\nDu kommer inte att kunna se kartor eller hitta saker.</string>
 	<string name="sd_mounted_ro">SD-kortet är skrivskyddat.\nDu kan bara se den förinstallerade kartan och kan inte ladda ner från Internet.</string>
-	<string name="unzipping_file">Packar upp fil…</string>
+	<string name="unzipping_file">Packar upp filen …</string>
 	<string name="route_tr">Sväng höger och kör</string>
 	<string name="route_tshr">Sväng skarpt höger och kör</string>
 	<string name="route_tslr">Sväng lite åt höger och kör</string>
@@ -812,8 +812,8 @@
 	<string name="address">Adress</string>
 	<string name="download_index_success">Nedladdningen gick utan problem</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
-	<string name="downloading_file">Laddar ner fil…</string>
-	<string name="downloading">Laddar ner…</string>
+	<string name="downloading_file">Laddar ner filen …</string>
+	<string name="downloading">Laddar ner …</string>
 	<string name="downloading_list_indexes">Laddar ner lista över tillgängliga regioner…</string>
 	<string name="list_index_files_was_not_loaded">Listan över regioner hämtades inte från osmand.net.</string>
 	<string name="show_poi_on_map">Visa på kartan</string>
@@ -934,7 +934,7 @@
     <string name="osmand_distance_plugin_description">Mät avståndet mellan två eller fler punkter. Lägg till punkter med ett kort klick och ta bort dem med en lång tryckning.</string>
     <string name="use_clear_distance_measurement">Klicka en gång till för att ta bort mätpunkterna.</string>
     <string name="use_distance_measurement">Knacka för att skapa en punkt, tryck och håll för att ta bort tidigare punkter, klicka på mätwidgeten för att avsluta.</string>
-    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd plats ...\" för att knyta en anteckning till den angivna platsen</string>
+    <string name="audionotes_location_not_defined">Platsen att associera med anteckningen är inte angiven än. \"Använd platsen ...\" för att knyta en anteckning till den angivna platsen</string>
     <string name="route_descr_current_location">Aktuell position</string>
     <string name="route_descr_from_to">Från: %1$s↵\nTill: %2$s</string>
     <string name="route_descr_from_to_via">Från: %1$s↵\nVia: %2$s↵\nTill: %3$s</string>
@@ -1100,7 +1100,7 @@
 	<string name="use_magnetic_sensor">Använd magnetisk sensor (kompass)</string>
     <string name="other_location">Annan</string>
     <string name="files_limit">%1$d filer kvar</string>
-    <string name="available_downloads_left">%1$d filer tillgängliga för nedladdning</string>
+    <string name="available_downloads_left">%1$d filer tillgängliga för nedladdning.</string>
     <string name="install_paid">Fullversion</string>
     <string name="cancel_route">Avbryt rutten</string>
     <string name="cancel_navigation">Stoppa navigeringen</string>
@@ -1127,4 +1127,6 @@
     <string name="save_current_track_widget">Spara
 \n aktuellt GPX-spår</string>
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4: ↵\n→* Nytt gränssnitt↵\n→* Buggfixar  "</string>
-    </resources>
+    <string name="local_indexes_cat_srtm">Konturlinjedata</string>
+    <string name="route_head">Riktning</string>
+	</resources>
