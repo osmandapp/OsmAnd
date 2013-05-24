@@ -908,7 +908,7 @@
 	<string name="update_downlod_list">Osviježi popis</string>
 	<string name="osmand_parking_delete">Izbriši oznaku za parking</string>
 	<string name="osmand_parking_position_description_add">Uzmite auto s parkirališta:</string>
-	<string name="osmand_parking_plugin_name">Lokacija parkiranja dodatak</string>
+	<string name="osmand_parking_plugin_name">Lokacija parkiranog automobila</string>
 	<string name="context_menu_item_delete_parking_point">Izbriši oznaku za parking</string>
 	<string name="route_roundabout">Kružni tok: koristite %1$d izlaz i nastavite voziti</string>
 	<string name="map_settings_descr">Konfiguracija zaslona</string>
@@ -930,4 +930,6 @@
     <string name="other_location">Ostalo</string>
     <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
     <string name="use_magnetic_sensor">Koristite magnetski senzor (kompas)</string>
-    </resources>
+    <string name="download_link_and_local_description">Kliknite ovdje za preuzimanje ili ažuriranje offline podataka.\nKliknite na bilo koju postojeću stavku da biste vidjeli više detalja, pritisnite i držite za deaktivirati ili obrisati. Trenutni podaci na uređaju (%1$s slobodno):</string>
+	<string name="index_settings_descr">Preuzmite karte i upravljajte offline podacima pohranjenim na uređaju</string>
+	</resources>
