@@ -1047,7 +1047,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="choose_street">Straße wählen</string>
 	<string name="choose_city">Ort wählen</string>
 	<string name="ChooseCountry">Land wählen</string>
-	<string name="map_specify_point">Als Ziel\nwählen</string>
+	<string name="map_specify_point">Als Ziel wählen</string>
 	<string name="show_view_angle_descr">Blickrichtung gemäß Kompass anzeigen</string>
 	<string name="show_view_angle">Blickrichtung einblenden</string>
 	<string name="navigate_to_point">Als Ziel wählen</string>
