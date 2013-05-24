@@ -17,7 +17,7 @@
 		\n\tEine bessere Näherung an lokale Systeme ist das EGM96-System. Osmand unterstützt nun die automatische Anzeige aller Höhenangaben im EGM96-System.
 		\n\tDies erfolgt sobald die Offline-Datei WW15MGH.DAC vorhanden ist, verfügbar via Einstellungen/Daten-Management (das Original ist http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
-	<string name="map_widget_max_speed">Geschwindigkeitsbegrenzung</string>
+	<string name="map_widget_max_speed">Tempolimit</string>
 	<string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
 	<string name="route_descr_current_location">Aktueller Standort</string>
 	<string name="route_descr_from_to">Von: %1$s\nNach: %2$s</string>
@@ -270,7 +270,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="map_online_data">Online- und Kachel-Karten</string>
 	<string name="map_online_data_descr">Online-Karten verwenden (lädt Kacheln aus dem Internet und speichert diese auf der SD-Karte)</string>
 	<string name="online_map_settings">Online-Karten</string>
-	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen, sowie Over&amp;Underlay Einstellungen</string>
+	<string name="online_map_settings_descr">Konfiguration von Kachel-Kartenquellen, sowie Over- &amp; Underlay Einstellungen</string>
 	<string name="map_settings">Karten-Einstellungen</string>
 	<string name="map_settings_descr">Konfigurieren der Karten-Anzeige</string>
 	<string name="osmand_rastermaps_plugin_description">Ermöglicht die Verwendung zahlreicher Online Kachel-Kartenquellen (auch als Over- oder Underlay). Online-Karten werden im Unterverzeichnis \'tiles\' zwischengespeichert. Karten-Kacheln können auch offline erstellt und in das Unterverzeichnis \'tiles\' kopiert werden.</string>
@@ -957,7 +957,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="search_osm_nominatim">Adresse suchen mit OSM Nominatim</string>
 	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline</string>
-	<string name="search_online_address">Internet</string>
+	<string name="search_online_address">Internet\nverwenden</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
 	<string name="route_general_information">%1$s Gesamtentfernung\n%2$d:%3$d Reisezeit</string>
@@ -1047,7 +1047,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="choose_street">Straße wählen</string>
 	<string name="choose_city">Ort wählen</string>
 	<string name="ChooseCountry">Land wählen</string>
-	<string name="map_specify_point">Als Ziel wählen</string>
+	<string name="map_specify_point">Als Ziel\nwählen</string>
 	<string name="show_view_angle_descr">Blickrichtung gemäß Kompass anzeigen</string>
 	<string name="show_view_angle">Blickrichtung einblenden</string>
 	<string name="navigate_to_point">Als Ziel wählen</string>
@@ -1090,7 +1090,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="navigate_point_format_D">DDD.DDDDD</string>
 	<string name="navigate_point_format_DM">DDD MM.MMMMM</string>
 	<string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
-	<string name="search_shown_on_map">Auf Karte zeigen</string>
+	<string name="search_shown_on_map">Auf Karte\nzeigen</string>
 	<string name="navigate_point_cancel">Abbrechen</string>
 	<string name="search_address_top_text">Adresseingabe</string>
 	<string name="search_address_region">Region</string>
@@ -1333,7 +1333,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmand_distance_plugin_name">Entfernungsmesser</string>
 <string name="av_def_action_video">Video aufzeichnen</string>
     <string name="av_def_action_audio">Audio aufnehmen</string>
-    <string name="av_widget_action_descr">Legt fest, welche Aktion vom Widget beim Auswählen ausgeführt wird</string>
+    <string name="av_widget_action_descr">Legt fest, welche Aktion das Widget standardmäßig ausführt</string>
     <string name="av_widget_action">Standard Widget Aktion</string>
     <string name="av_video_format_descr">Wählen Sie ein Video-Ausgabeformat\n(3GP oder MP4)</string>
     <string name="av_video_format">Video-Ausgabeformat</string>
@@ -1385,7 +1385,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="precise_routing_mode_descr">Ermöglicht das präzise Berechnen der Route ohne Störungen. Es ist durch die Entfernung begrenzt und verwendet nicht die ursprüngliche Bibliothek.</string>
     <string name="precise_routing_mode">Präzises Routen (experimentell)</string>
     <string name="local_indexes_cat_av">Audio/Video-Daten</string>
-    <string name="av_use_external_camera_descr">Externe System-Kamera für Foto-Aufnahme verwenden</string>
+    <string name="av_use_external_camera_descr">Externe System-Kamera für Foto-Aufnahmen verwenden</string>
     <string name="av_use_external_camera">System-Kamera</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Änderungen in 1.2.1:\n→* Fehlerbehebung für Geo Intent (Foursquare, c:geo)\n→* Fehlerbehebung für zitterndes Bild bei Navigation\n→* Andere kleine Fehlerbehebungen\nÄnderungen in 1.2:\n→* Fehlerbehebungen (Navigation, Suche, AV-Aufzeichnung, Sprachansagen, einige Anzeigeverbesserungen)\n→* Einfachere Konfiguration des Bergkontur-Overlay (nur mit Kontur-Linien-Plugin)\n→* Verarbeitet maps.google.com-Links auf Orte\n→* Neues Widget (GPS info)\n→* Hinzugefügt: Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten\n→* Kalman-Filter für Kompass\n→* Unterstützung für Pebble-Uhr "</string>
@@ -1405,9 +1405,9 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="hno">Hausnummer</string>
     <string name="tip_recent_changes_1_3_t">"Änderungen in 1.3:\n\t * Holo-Theme (Anpassung des Theme) "</string>
     <string name="monitoring_settings">Tracking &amp; Schlaf-Modus</string>
-    <string name="monitoring_settings_descr">Konfigurieren Sie, wie Tracks aufgezeichnet und der Schlaf-Modus aktiviert werden soll</string>
+    <string name="monitoring_settings_descr">Tracking-Einstellungen und Konfiguration des Hintergrundmodus</string>
     <string name="osmand_monitoring_plugin_description">Aktivieren Sie Tracking und die Navigation im Schlaf-Modus (Bildschirm aus). Das GPS-Gerät wird regelmäßig aktiviert. Zeigt Ihre Einstellungen zum Aufzeichnen Ihrer Wege als lokale GPX-Datei oder online bei einem Web-Service.</string>
-    <string name="osmand_monitoring_plugin_name">Logging-Dienst &amp; Schlaf-Modus</string>
+    <string name="osmand_monitoring_plugin_name">Tracking &amp; Schlaf-Modus</string>
     <string name="choose_osmand_theme_descr">Theme der Anwendung auswählen</string>
     <string name="accessibility_options">Zugänglichkeits-Einstellungen</string>
     <string name="select_address_activity">Adresse auswählen</string>
