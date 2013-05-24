@@ -17,8 +17,7 @@
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
     <string name="recording_delete_confirm">Vil du at fjerne optagelsen?</string>
     <string name="tip_recent_changes_1_1_0_t">"Ændringer i 1.1.0:\n\t*Afstand regnemaskine plugin\n\t*Audio notater plugin
-\n\t*Contour linjer plugin
-\n\t*Fejlrettelser
+\n\t*Højdekurve udvidelse\n\t*Fejlrettelser
 \n\t*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
 \n\t*EGM96 geoid offset korrektion for GPS højdeaflæsningerne "</string>
     <string name="recording_unavailable">ikke tilgængelig</string>
@@ -147,7 +146,7 @@
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
     <string name="tip_recent_changes_1_2_t">"Ændringer i 1.2:
-\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurve udvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman filter for kompas ↵\n\t* Pebble ur support "</string>
+\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurve udvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman-filter for kompas ↵\n\t* Pebble-ur support "</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dist_control_start">start</string>
@@ -288,7 +287,7 @@
 	<string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
 	<string name="rendering_attr_appMode_name">Renderings måde</string>
 	<string name="rendering_attr_appMode_description">Optimer kort til</string>
-	<string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver konturdata):</string>
+	<string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver højdekurvedata):</string>
 	<string name="rendering_attr_contourLines_name">Vis højdekurver</string>
 	<string name="rendering_attr_hmRendered_description">Øg mængden af ​​kortdetaljer, der vises</string>
 	<string name="rendering_attr_hmRendered_name">Vis flere kortdetaljer</string>
