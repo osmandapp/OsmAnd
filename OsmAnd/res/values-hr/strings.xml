@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="map_widget_gps_info">GPS status</string>
+    <string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
@@ -17,7 +17,7 @@
     <string name="recording_context_menu_show">Prikaži</string>
     <string name="av_def_action_picture">Fotografiraj</string>
     <string name="recording_context_menu_precord">Fotografiraj</string>
-    <string name="dropbox_plugin_description">Dropbox dodatak omogućuje sinkronizaciju staza i audio / video zapisa s vašim računom.</string>
+    <string name="dropbox_plugin_description">Dropbox dodatak omogućuje sinkronizaciju staza i audio/video zapisa s vašim računom.</string>
     <string name="dropbox_plugin_name">Dodatak Dropbox</string>
     <string name="animate_routing_using_gpx">Želite li koristiti postojeću GPX datoteku?</string>
     <string name="intermediate_points_change_order">Promjeni redoslijed</string>
@@ -67,7 +67,7 @@
     
 	<string name="download_srtm_maps">Obrisi linija</string>
     <string name="rendering_attr_noAdminboundaries_description">Prikrivanje prikaza regionalnih granica (admin razine 5-9)</string>
-    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin ima zastarjelu verziju potrebno je ažurirati.</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid dodatak ima zastarjelu verziju potrebno je ažurirati.</string>
     <string name="map_widget_max_speed">Ograničenje brzine</string>
     <string name="route_descr_lat_lon">Z. širina %1$.3f, z. dužina %2$.3f</string>
     <string name="route_descr_current_location">Trenutna pozicija</string>
@@ -440,13 +440,13 @@
 	<string name="map_orientation_portrait">Portret</string>
 	<string name="map_orientation_landscape">Pejzažno</string>
 	<string name="map_orientation_default">Po postavkama uređaja</string>
-	<string name="route_tr">Skrenite desno i nastavite voziti</string>
-	<string name="route_tshr">Skrenite oštro udesno i nastavite voziti</string>
-	<string name="route_tslr">Skrenite blago udesno i nastavite voziti</string>
-	<string name="route_tl">Skrenite lijevo i nastavite voziti</string>
-	<string name="route_tshl">Skrenite oštro ulijevo i nastavite voziti</string>
-	<string name="route_tsll">Skrenite blago ulijevo i nastavite voziti</string>
-	<string name="route_tu">Polukružno se okrenite i nastavite voziti</string>
+	<string name="route_tr">Skrenite desno i nastavite voziti po</string>
+	<string name="route_tshr">Skrenite oštro udesno i nastavite voziti po</string>
+	<string name="route_tslr">Skrenite blago udesno i nastavite voziti po</string>
+	<string name="route_tl">Skrenite lijevo i nastavite voziti po</string>
+	<string name="route_tshl">Skrenite oštro ulijevo i nastavite voziti po</string>
+	<string name="route_tsll">Skrenite blago ulijevo i nastavite voziti po</string>
+	<string name="route_tu">Polukružno se okrenite i nastavite voziti po</string>
 	<string name="stop_routing">Zaustavite naviga.</string>
 	<string name="menu_mute_off">Zvuk je uključen</string>
 	<string name="menu_mute_on">Zvuk je isključen</string>
@@ -604,7 +604,7 @@
 \n\t* EGM96 geoid offset correction for GPS altitude readings "</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd dodatak za offline slojnice</string>
     <string name="srtm_plugin_name">Dodatak za Slojnice</string>
-    <string name="osmodroid_plugin_name">OsMoDroid Dodatak</string>
+    <string name="osmodroid_plugin_name">OsMoDroid dodatak</string>
 	<string name="tip_recent_changes_1_0_0_t">"Promjene u 1.0.0:
 \n\t* Poboljšana navigacija: brža i preciznija, do 250 km
 \n\t* Mogućnost prikaza samo cestovne karte
@@ -624,7 +624,7 @@
 	<string name="transport_Stop">Postaja</string>
 	<string name="transport_stops">Postaje</string>
 	<string name="add_new_rule">Dodaj novo pravilo</string>
-	<string name="map_screen_orientation_descr">Portretno, pejzažno ili uređaj po postavkama uređaja</string>
+	<string name="map_screen_orientation_descr">Portretno, pejzažno ili po postavkama uređaja</string>
 	<string name="transport_Routes">Rute</string>
 	<string name="transport_search_after">Sljedeća ruta</string>	
 	<string name="transport_search_before">Prijašnja ruta</string>
@@ -714,7 +714,7 @@
 	<string name="loading_builds_failed">Preuzimamje popisa OsmAnd nadogradnji nije uspjelo</string>
 	<string name="loading_builds">Učitavanje OsmAnd nadogradnji...</string>
 	<string name="select_build_to_install">Odaberite jednu od OsmAnd nadogradnji za instalaciju</string>
-	<string name="contribution_activity">Posebna aktivnost za doprinos verziji</string>
+	<string name="contribution_activity">Instalirajte verziju</string>
 	<string name="application_dir">Mapa za pohranu</string>
 	<string name="osmand_net_previously_installed">Instalirana je prethodna inačica OsmAnd aplikacije. Svi offline podaci će biti podržani od strane nove inačice aplikacije. Ali Favorite treba izvesti iz stare aplikacije i kasnije uvesti u novu.</string>
 	<string name="application_dir_change_warning">Promjena mape za pohranu neće premjestiti ili izbrisati podatke. To mora biti izvedeno zasebno i izvan OsmAnd-a. Nastavi svejedno?</string>
@@ -774,7 +774,7 @@
 	<string name="local_index_mi_backup">Isključi</string>
 	<string name="local_index_mi_restore">Uključi</string>
 	<string name="local_index_mi_delete">Izbriši</string>
-	<string name="local_index_mi_reload">Ponovno učitaj s memorijske kartice</string>
+	<string name="local_index_mi_reload">Ponovno učitaj</string>
 	<string name="local_index_descr_title">Upravljanje podacima</string>
 	<string name="local_index_items_backuped">%1$d od %2$d stavke uspješno su isključene.</string>
 	<string name="local_index_items_deleted">%1$d od %2$d stavke uspješno su izbrisane.</string>
@@ -871,7 +871,7 @@
 	<string name="index_name_oceania">Oceanija</string>
 	<string name="free_version_title">Besplatna inačica</string>
 	<string name="poi_context_menu_showdescription">Pokaži POI opis</string>
-	<string name="free_version_message">Besplatna OsmAnd inačica ograničena je na %1$s preuzimanja %2$s, i ne podržava offline članke s Wikipedie .</string>
+	<string name="free_version_message">Besplatna OsmAnd inačica ograničena je na %1$s preuzimanja %2$s, te ne podržava offline članke s Wikipedie.</string>
 	<string name="show_current_gpx_title">Prikaži trenutni trag</string>
 	<string name="local_openstreetmap_show">Prikaži na karti</string>
 	<string name="offline_edition">Offline uređivanje</string>
@@ -910,7 +910,7 @@
 	<string name="osmand_parking_position_description_add">Uzmite auto s parkirališta:</string>
 	<string name="osmand_parking_plugin_name">Lokacija parkiranog automobila</string>
 	<string name="context_menu_item_delete_parking_point">Izbriši oznaku za parking</string>
-	<string name="route_roundabout">Kružni tok: koristite %1$d izlaz i nastavite voziti</string>
+	<string name="route_roundabout">Kružni tok: koristite %1$d. izlaz i nastavite voziti po</string>
 	<string name="map_settings_descr">Konfiguracija zaslona</string>
 	<string name="hno">Kućni broj</string>
     <string name="street_name">Ulica</string>
@@ -921,7 +921,7 @@
     <string name="clear_destination">Obriši odredište</string>
     <string name="cancel_route">Odbaci rutu</string>
     <string name="download_using_mobile_internet">WiFi trenutno nije spojen. Želite li nastaviti preuzimanje s trenutnom internet vezom?</string>
-    <string name="available_downloads_left">Dostupno %1$d datoteka za preuzimanje</string>
+    <string name="available_downloads_left">Dostupno je još %1$d preuzimanja</string>
     <string name="files_limit">%1$d datoteka preostalo</string>
     <string name="install_paid">Puna inačica</string>
     <string name="choose_osmand_theme_descr">Odaberite temu aplikacije</string>
@@ -929,7 +929,7 @@
     <string name="default_buttons_other_actions">Ostale aktivnosti</string>
     <string name="other_location">Ostalo</string>
     <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
-    <string name="use_magnetic_sensor">Koristite magnetski senzor (kompas)</string>
+    <string name="use_magnetic_sensor">Koristite magnetski senzor</string>
     <string name="download_link_and_local_description">Kliknite ovdje za preuzimanje ili ažuriranje offline podataka.\nKliknite na bilo koju postojeću stavku da biste vidjeli više detalja, pritisnite i držite za deaktivirati ili obrisati. Trenutni podaci na uređaju (%1$s slobodno):</string>
 	<string name="index_settings_descr">Preuzmite karte i upravljajte offline podacima pohranjenim na uređaju</string>
 	</resources>
