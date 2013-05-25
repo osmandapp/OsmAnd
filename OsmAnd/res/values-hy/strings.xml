@@ -14,7 +14,7 @@
     <string name="dist_control_start">Սկիզբ</string>
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
     <string name="clear_dest_confirm">"Վստահ ե՞ք, որ ցանկանում եք մաքրել ձեր նշանակման կետը․ "</string>
-    <string name="stop_routing_confirm">Վստահ ե՞ք, որ ցանկանում եք դադարեցնել նավարկություն.</string>
+    <string name="stop_routing_confirm">Վստահ ե՞ք որ ցանկանում եք դադարեցնել նավիգացիան.</string>
     <string name="precise_routing_mode">Ճշգրիտ ճանապարհ (ալֆա)</string>
     <string name="recording_context_menu_show">Ցույց տալ</string>
     <string name="recording_photo_description">Նկար %1$s %2$s-ից</string>
@@ -38,4 +38,32 @@
     <string name="recording_error">"Սխալ ձայնագրման ընթացքում "</string>
     <string name="recording_camera_not_available">Վիդեո/Ֆոտո-խցիկը անհասանելի է</string>
     <string name="email">էլ-փոստ</string>
-</resources>
+<string name="use_kalman_filter_compass_descr">Օգտագործել Կալմանի ֆիլտրը կողմնացույցի սխելներից խուսափելու համար</string>
+    <string name="use_kalman_filter_compass">Օգտագործել Կալմանի ֆիլտրը</string>
+    <string name="access_mark_final_location_first">Մատչելիության ռեժիմ: խնդրում ենք ընտրել ուղղություն</string> 
+    <string name="use_magnetic_sensor_descr">Օգտագործեք մագնիսական սենսորը որոշելու կողմնացույցի ուղղությունը</string>
+    <string name="use_magnetic_sensor">Օգտագործել մագնիսական սենսորը</string>
+    <string name="other_location">Այլ</string>
+    <string name="files_limit">Մնացել է %1$d ֆայլ</string>
+    <string name="available_downloads_left">"Բեռնոլու համար հասանելի էն %1$d ֆայլեր "</string>
+    <string name="install_paid">Լրիվ տարբերակ</string>
+    <string name="cancel_navigation">Վերջացնել նավիգացիան</string>
+    <string name="clear_destination">Մաքրել նպատակակետը</string>
+    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել բեռնելիս գործող ինտերնետային կապով.</string>
+    <string name="street_name">Փողոց</string>
+	<string name="hno">Տան համարը</string>
+    <string name="website">Վեբ կայք</string>
+	<string name="phone">Հեռախոս</string>
+    <string name="tip_recent_changes_1_3_t">Փոխել է 1.3 * Holo Theme (թեման customization)</string>
+    <string name="monitoring_settings">Գրանցման ծառայություն և քնած ռեժիմ</string>
+    <string name="osmand_monitoring_plugin_name">Գրանցման ծառայություն և քնած ռեժիմ</string>
+    <string name="choose_osmand_theme_descr">Ընտրեք ծրագրի դիզայնի թեման</string>
+    <string name="choose_osmand_theme"/>
+    <string name="select_address_activity">Ընտրել հասցեն</string>
+    <string name="favourites_list_activity">Ընտրել նախնտրածներից</string>
+    <string name="local_openstreetmap_act_title">OSM փոփոխություններ</string>
+    <string name="default_buttons_other_actions">Այլ գործողություններ</string>
+    <string name="save_current_track_widget">Հիշել↵\nընթացիկ GPX տրեկը</string>
+	<string name="default_buttons_selectall">Ընտրել բոլորը</string>
+	<string name="cancel_route">Դադարեցնել երթուղին</string>
+    </resources>
