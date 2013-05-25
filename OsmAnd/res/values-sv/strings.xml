@@ -457,7 +457,7 @@
 <string name="local_index_mi_backup">Inaktivera</string>
 <string name="local_index_mi_delete">Ta bort</string>
 <string name="local_index_mi_reload">Ladda om från SD-kort</string>
-<string name="local_index_download">Ladda ner …</string>
+<string name="local_index_download">Ladda ner</string>
 <string name="local_index_tile_data">Tile-data: %1$s
 \nMinimal zoom: %2$d\nMaximal zoom: %3$d\nNedladdningsbar: %4$s
 \nNedladdade zoom: %5$s</string>
@@ -810,7 +810,7 @@
 	<string name="download_question">Ladda ner {0} - {1}?</string>
 	<string name="download_question_exist">Offline-data för {0} finns redan ({1}). Vill du uppdatera den ({2})?</string>
 	<string name="address">Adress</string>
-	<string name="download_index_success">Nedladdningen gick utan problem</string>
+	<string name="download_index_success">Nedladdningen slutfördes utan problem</string>
 	<string name="error_io_error">Ett I/O-fel inträffade</string>
 	<string name="downloading_file">Laddar ner filen …</string>
 	<string name="downloading">Laddar ner …</string>
