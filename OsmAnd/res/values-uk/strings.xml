@@ -34,7 +34,7 @@
   <string name="offline_navigation_not_available">OsmAnd офлайн навігація тимчасово не доступна.</string>
   <string name="left_side_navigation">Лівосторонній рух</string>
   <string name="left_side_navigation_descr">Увімкніть для країн з лівостороннім рухом</string>
-  <string name="download_link_and_local_description">Завантажте або обновіть офлайн дані\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоби вилучити (або деактивувати) карту утримуйте мапу. Дані про пристрій:</string>
+  <string name="download_link_and_local_description">Завантажте або оновіть офлайн дані\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоби вилучити (або деактивувати) мапу - утримуйте мапу.\nДані про пристрій(%1$s вільно):</string>
   <string name="unknown_from_location">Початкове місцезнаходження не визначено</string>
   <string name="unknown_location">Позиція ще не визначена</string>
   <string name="context_menu_item_directions">Напрямки сюди</string>
@@ -174,7 +174,7 @@
   <string name="gpx_monitoring_disabled_warn">Будь-ласка ввімкніть \"Записувати шлях в GPX\" в Нашаштуваннях.</string>
   <string name="show_current_gpx_title">Показувати поточний шлях</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
-  <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads %2$s and does not support offline wikipedia articles.</string>
+  <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями %2$s і не підтримує геостатті з Вікіпедії.</string>
   <string name="free_version_title">Безкоштовна версія</string>
   <string name="poi_context_menu_showdescription">Деталі POI</string>
   <string name="index_name_north_america">Північна Америка</string>
