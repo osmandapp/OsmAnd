@@ -1204,7 +1204,7 @@
     <string name="cancel_navigation">Stop navigation</string>
     <string name="cancel_route">Annuller rute</string>
     <string name="clear_destination">Slet destinationen</string>
-    <string name="install_paid">Fuld version</string>
+    <string name="install_paid">Fuldversion</string>
     <string name="other_location">Andre</string>
     <string name="files_limit">%1$d filer tilbage</string>
     <string name="available_downloads_left">%1$d filer kan hentes</string>
