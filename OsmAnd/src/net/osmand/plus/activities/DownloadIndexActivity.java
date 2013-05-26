@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,9 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
 import net.osmand.map.RegionCountry;
 import net.osmand.map.RegionRegistry;
@@ -21,27 +18,21 @@ import net.osmand.plus.ClientContext;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
-import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.base.SuggestExternalDirectoryDialog;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadEntry;
-import net.osmand.plus.download.DownloadFileHelper;
-import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.download.DownloadIndexAdapter;
-import net.osmand.plus.download.DownloadIndexListThread;
-import net.osmand.plus.download.DownloadTracker;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.download.IndexItemCategory;
 import net.osmand.plus.download.SrtmIndexItem;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
@@ -49,6 +40,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
 import android.os.Bundle;
 import android.os.StatFs;
 import android.text.Editable;
@@ -60,6 +52,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -70,8 +64,6 @@ import com.actionbarsherlock.view.SubMenu;
 
 public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
-	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(DownloadIndexActivity.class);
-	
 	/** menus **/
 	private static final int MORE_ID = 10;
 	private static final int RELOAD_ID = 0;
@@ -79,17 +71,10 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	private static final int DESELECT_ALL_ID = 2;
 	private static final int FILTER_EXISTING_REGIONS = 3;
 	
-	/** dialogs **/
-	public static final int DIALOG_MAP_VERSION_UPDATE = 0;
-	public static final int DIALOG_PROGRESS_FILE = 1;
-	public static final int DIALOG_PROGRESS_LIST = 2;
-	
     public static final String FILTER_KEY = "filter";
 	
-	private static DownloadIndexListThread downloadListIndexThread;
+	private static DownloadIndexesThread downloadListIndexThread;
 
-	private ProgressDialog progressFileDlg = null;
-	
 	private TreeMap<IndexItem, List<DownloadEntry>> entriesToDownload = new TreeMap<IndexItem, List<DownloadEntry>>();
 	private DownloadActivityType type = DownloadActivityType.NORMAL_FILE;
 
@@ -98,25 +83,35 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
     private TextWatcher textWatcher ;
 	private EditText filterText;
-	private DownloadFileHelper downloadFileHelper = null;
+	
 	private OsmandSettings settings;
 	private ArrayAdapter<String> spinnerAdapter;
 
 	private List<SrtmIndexItem> cachedSRTMFiles;
+
+
+	private View progressView;
+	private ProgressBar indeterminateProgressBar;
+	private ProgressBar determinateProgressBar;
+	private TextView progressMessage;
+	private TextView progressPercent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		settings = ((OsmandApplication) getApplication()).getSettings();
 		if(downloadListIndexThread == null) {
-			downloadListIndexThread = new DownloadIndexListThread(this);
+			downloadListIndexThread = new DownloadIndexesThread(this);
 		}
 		setContentView(R.layout.download_index);
+		indeterminateProgressBar = (ProgressBar) findViewById(R.id.IndeterminateProgressBar);
+		determinateProgressBar = (ProgressBar) findViewById(R.id.DeterminateProgressBar);
+		progressView = findViewById(R.id.ProgressView);
+		progressMessage = (TextView) findViewById(R.id.ProgressMessage);
+		progressPercent = (TextView) findViewById(R.id.ProgressPercent);
 		getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		getSupportActionBar().setTitle(R.string.local_index_download);
 		// recreation upon rotation is prevented in manifest file
-				
-		downloadFileHelper = new DownloadFileHelper(getClientContext());
 		findViewById(R.id.DownloadButton).setOnClickListener(new View.OnClickListener(){
 
 			@Override
@@ -155,10 +150,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 		}
 		List<IndexItem> list = new ArrayList<IndexItem>();
+		downloadListIndexThread.setUiActivity(this);
 		if (downloadListIndexThread.getCachedIndexFiles() != null && downloadListIndexThread.isDownloadedFromInternet()) {
 			list = getFilteredByType();
 		} else {
-			downloadIndexList();
+			downloadListIndexThread.runReloadIndexFiles();
 		}
 		DownloadIndexAdapter adapter = new DownloadIndexAdapter(this, list);
 		setListAdapter(adapter);
@@ -184,6 +180,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			}
 		});
         
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		updateProgress(false, downloadListIndexThread.getCurrentRunningTask());
 	}
 
 
@@ -223,16 +225,12 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		}
 	}
 
-	private void downloadIndexList() {
-		showDialog(DIALOG_PROGRESS_LIST);
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (item.getItemId() == RELOAD_ID) {
 			// re-create the thread
-			downloadListIndexThread = new DownloadIndexListThread(this);
-			downloadIndexList();
+			downloadListIndexThread.runReloadIndexFiles();
 			return true;
 		} else if (item.getItemId() == SELECT_ALL_ID) {
 			selectAll();
@@ -321,7 +319,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	}
 
 
-	private void makeDownloadVisible() {
+	public void makeDownloadVisible() {
 		findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 		if(Version.isFreeVersion(getMyApplication())) {
 			int left = MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get() - entriesToDownload.size();
@@ -459,81 +457,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	
 	
 	
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-			case DIALOG_MAP_VERSION_UPDATE:
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setMessage(R.string.map_version_changed_info);
-				builder.setPositiveButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.plus"));
-						try {
-							startActivity(intent);
-						} catch (ActivityNotFoundException e) {
-							log.error("Exception", e);
-						}
-					}
-				});
-				builder.setNegativeButton(R.string.default_buttons_cancel, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						removeDialog(DIALOG_MAP_VERSION_UPDATE); 
-					}
-				});
-				return builder.create();
-			case DIALOG_PROGRESS_LIST:
-				ProgressDialog dialog = new ProgressDialog(this);
-				dialog.setTitle(R.string.downloading);
-				dialog.setMessage(getString(R.string.downloading_list_indexes));
-				dialog.setCancelable(true);
-				return dialog;
-			case DIALOG_PROGRESS_FILE:
-				ProgressDialogImplementation progress = ProgressDialogImplementation.createProgressDialog(
-						DownloadIndexActivity.this,
-						getString(R.string.downloading),
-						getString(R.string.downloading_file),
-						ProgressDialog.STYLE_HORIZONTAL,
-						new DialogInterface.OnCancelListener() {
-							@Override
-							public void onCancel(DialogInterface dialog) {
-								makeSureUserCancelDownload(dialog);
-							}
-						});
-				progressFileDlg = progress.getDialog();
-				progressFileDlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						downloadFileHelper.setInterruptDownloading(true);
-					}
-				});
-				return progress.getDialog();
-		}
-		return null;
-	}
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		switch (id) {
-			case DIALOG_PROGRESS_FILE:
-				DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(new ProgressDialogImplementation(progressFileDlg,true));
-				IndexItem[] indexes = entriesToDownload.keySet().toArray(new IndexItem[0]);
-				task.execute(indexes);
-				break;
-			case DIALOG_PROGRESS_LIST:
-				downloadListIndexThread.setUiActivity(this);
-				if(downloadListIndexThread.getState() == Thread.State.NEW){
-					downloadListIndexThread.start();
-				} else if(downloadListIndexThread.getState() == Thread.State.TERMINATED){
-					// possibly exception occurred we don't have cache of files
-					downloadListIndexThread = new DownloadIndexListThread(this);
-					downloadListIndexThread.setUiActivity(this);
-					downloadListIndexThread.start();
-				}
-				break;
-		}
-	}
 	
 	public ExpandableListView getListView() {
 		return super.getExpandableListView();
@@ -543,6 +466,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		return super.getExpandableListAdapter();
 	}
 	
+	// TODO 
 	private void makeSureUserCancelDownload(final DialogInterface dlg) {
 		Builder bld = new AlertDialog.Builder(this);
 		bld.setTitle(getString(R.string.default_buttons_cancel));
@@ -700,7 +624,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
 		}
-		if(asz != -1 && asz < sz * 2 ){
+		if(asz != -1 && asz < sz  ){
 			AccessibleToast.makeText(this, getString(R.string.download_files_not_enough_space, sz, asz), Toast.LENGTH_LONG).show();
 		} else {
 			Builder builder = new AlertDialog.Builder(this);
@@ -713,7 +637,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			builder.setPositiveButton(R.string.default_buttons_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					showDialog(DIALOG_PROGRESS_FILE);
+					downloadListIndexThread.runDownloadFiles(entriesToDownload);
 				}
 			});
 			builder.setNegativeButton(R.string.default_buttons_no, null);
@@ -726,9 +650,6 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if(isFinishing()){
-			downloadFileHelper.setInterruptDownloading(true);
-		}
 	    if (textWatcher != null) {
 	    	EditText filterText = (EditText) findViewById(R.id.search_box);
 	    	filterText.removeTextChangedListener(textWatcher);
@@ -736,168 +657,34 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 		downloadListIndexThread.setUiActivity(null);
 	}
 	
-	public class DownloadIndexesAsyncTask extends AsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
-
-		private IProgress progress;
-		private OsmandPreference<Integer> downloads;
-
-		public DownloadIndexesAsyncTask(ProgressDialogImplementation progressDialogImplementation) {
-			this.progress = progressDialogImplementation;
-			downloads = DownloadIndexActivity.this.getMyApplication().getSettings().NUMBER_OF_FREE_DOWNLOADS;
-		}
-
-		@Override
-		protected void onProgressUpdate(Object... values) {
-			for (Object o : values) {
-				if (o instanceof DownloadEntry) {
-					((DownloadIndexAdapter) getExpandableListAdapter()).notifyDataSetInvalidated();
-					if(entriesToDownload.isEmpty()){
-						findViewById(R.id.DownloadButton).setVisibility(View.GONE);
-					} else {
-						makeDownloadVisible();
-					}
-				} else if (o instanceof String) {
-					AccessibleToast.makeText(DownloadIndexActivity.this, (String) o, Toast.LENGTH_LONG).show();
-				}
-			}
-			super.onProgressUpdate(values);
-		}
-
-		@Override
-		protected void onPreExecute() {
-			downloadFileHelper.setInterruptDownloading(false);
-			View mainView = findViewById(R.id.MainLayout);
-			if (mainView != null) {
-				mainView.setKeepScreenOn(true);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(String result) {
-			if (result != null) {
-				AccessibleToast.makeText(DownloadIndexActivity.this, result, Toast.LENGTH_LONG).show();
-			}
-			View mainView = DownloadIndexActivity.this.findViewById(R.id.MainLayout);
-			if (mainView != null) {
-				mainView.setKeepScreenOn(false);
-			}
-			DownloadIndexActivity.this.updateLoadedFiles();
-			DownloadIndexAdapter adapter = ((DownloadIndexAdapter) getExpandableListAdapter());
-			if (adapter != null) {
-				adapter.notifyDataSetInvalidated();
-			}
-		}
-		
-		private int countAllDownloadEntry(IndexItem... filesToDownload){
-			int t = 0;
-			for(IndexItem  i : filesToDownload){
-				List<DownloadEntry> list = DownloadIndexActivity.this.entriesToDownload.get(i);
-				if(list != null){
-					t += list.size();
-				}
-			}
-			return t;
-		}
-
-		@Override
-		protected String doInBackground(IndexItem... filesToDownload) {
-			try {
-				List<File> filesToReindex = new ArrayList<File>();
-				boolean forceWifi = DownloadIndexActivity.this.downloadFileHelper.isWifiConnected();
-				int counter = 1;
-				int all = countAllDownloadEntry(filesToDownload);
-				for (int i = 0; i < filesToDownload.length; i++) {
-					IndexItem filename = filesToDownload[i];
-					List<DownloadEntry> list = DownloadIndexActivity.this.entriesToDownload.get(filename);
-					if (list != null) {
-						for (DownloadEntry entry : list) {
-							String indexOfAllFiles = all <= 1 ? "" : (" [" + counter + "/" + all + "]");
-							counter++;
-							boolean result = downloadFile(entry, filesToReindex, indexOfAllFiles, forceWifi);
-							if (result) {
-								DownloadIndexActivity.this.entriesToDownload.remove(filename);
-								if (entry.type != DownloadActivityType.SRTM_FILE && entry.type != DownloadActivityType.HILLSHADE_FILE) {
-									downloads.set(downloads.get() + 1);
-								}
-								if (entry.existingBackupFile != null) {
-									Algorithms.removeAllFiles(entry.existingBackupFile);
-								}
-								trackEvent(entry);
-								publishProgress(entry);
-							}
-						}
-					}
-				}
-				boolean vectorMapsToReindex = false;
-				for (File f : filesToReindex) {
-					if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-						vectorMapsToReindex = true;
-						break;
-					}
-				}
-				// reindex vector maps all at one time
-				ResourceManager manager = getMyApplication().getResourceManager();
-				manager.indexVoiceFiles(progress);
-				if (vectorMapsToReindex) {
-					List<String> warnings = manager.indexingMaps(progress);
-					if (!warnings.isEmpty()) {
-						return warnings.get(0);
-					}
-				}
-			} catch (InterruptedException e) {
-				// do not dismiss dialog
-			} finally {
-				if (DownloadIndexActivity.this.progressFileDlg != null) {
-					removeDialog(DownloadIndexActivity.DIALOG_PROGRESS_FILE);
-					DownloadIndexActivity.this.progressFileDlg = null;
-				}
-			}
-			return null;
-		}
-
-		private void trackEvent(DownloadEntry entry) {
-			String v = Version.getAppName(getMyApplication());
-			if (Version.isProductionVersion(getMyApplication())) {
-				v = Version.getFullVersion(getMyApplication());
-			} else {
-				v += " test";
-			}
-			new DownloadTracker().trackEvent(getMyApplication(), v, Version.getAppName(getMyApplication()),
-					entry.baseName, 1, DownloadIndexActivity.this.getString(R.string.ga_api_key));
-		}
-
-		@Override
-		public void showWarning(String warning) {
-			publishProgress(warning);
-
-		}
-
-		public boolean downloadFile(DownloadEntry de, List<File> filesToReindex, String indexOfAllFiles, boolean forceWifi)
-				throws InterruptedException {
-			boolean res = false;
-			if (de.isAsset) {
-				try {
-					ResourceManager.copyAssets(getAssets(), de.fileToSave.getPath(), de.fileToUnzip);
-					de.fileToUnzip.setLastModified(de.dateModified);
-					res = true;
-				} catch (IOException e) {
-					log.error("Copy exception", e);
-				}
-			} else {
-				res = downloadFileHelper.downloadFile(de, progress, filesToReindex, indexOfAllFiles, this, forceWifi);
-			}
-			if (res && de.attachedEntry != null) {
-				return downloadFile(de.attachedEntry, filesToReindex, indexOfAllFiles, forceWifi);
-			}
-			return res;
-		}
-	}
-	
-	
-	
 	
 	
 	public ClientContext getClientContext() {
 		return getMyApplication();
+	}
+
+
+	public void updateProgress(boolean updateOnlyProgress, BasicProgressAsyncTask<?, ?, ?> basicProgressAsyncTask) {
+		if(updateOnlyProgress) {
+			if(!basicProgressAsyncTask.isIndeterminate()) {
+				progressPercent.setText(basicProgressAsyncTask.getProgressPercentage() +"%");
+				determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
+			}
+		} else {
+			boolean visible = basicProgressAsyncTask != null && basicProgressAsyncTask.getStatus() != Status.FINISHED;
+			progressView.setVisibility(visible ? View.VISIBLE : View.GONE);
+			if (visible) {
+				boolean indeterminate = basicProgressAsyncTask.isIndeterminate();
+				indeterminateProgressBar.setVisibility(!indeterminate ? View.GONE : View.VISIBLE);
+				determinateProgressBar.setVisibility(indeterminate ? View.GONE : View.VISIBLE);
+				progressPercent.setVisibility(indeterminate ? View.GONE : View.VISIBLE);
+
+				progressMessage.setText(basicProgressAsyncTask.getDescription());
+				if (!indeterminate) {
+					progressPercent.setText(basicProgressAsyncTask.getProgressPercentage() + "%");
+					determinateProgressBar.setProgress(basicProgressAsyncTask.getProgressPercentage());
+				}
+			}
+		}
 	}
 }

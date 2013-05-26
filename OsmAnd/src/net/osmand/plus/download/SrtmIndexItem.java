@@ -83,12 +83,11 @@ public class SrtmIndexItem extends IndexItem {
 				String fullName = fileToDownload + "_" + IndexConstants.BINARY_MAP_VERSION + IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
 				entry.urlToDownload = url +"file=" + fullName;
 				// url + "file=" + fileName;
-				entry.fileToSave = new File(parent, fullName);
-				entry.unzip = false;
+				entry.unzipFolder = false;
 				entry.dateModified = System.currentTimeMillis();
 				entry.sizeMB = 10;
 				entry.parts = 1;
-				entry.fileToUnzip = new File(parent, entry.baseName + IndexConstants.BINARY_MAP_INDEX_EXT);
+				entry.targetFile = new File(parent, entry.baseName + IndexConstants.BINARY_MAP_INDEX_EXT);
 				downloadEntries.add(entry);
 				toDownload.size();
 			}

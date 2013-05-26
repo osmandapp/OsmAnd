@@ -1,13 +1,12 @@
 package net.osmand.plus.download;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -18,6 +17,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ClientContext;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -40,85 +40,156 @@ public class DownloadFileHelper {
 		public void showWarning(String warning);
 	}
 	
-	private void downloadFileInternal(String fileName, FileOutputStream out, URL url, String part, String indexOfAllFiles, 
-			IProgress progress, boolean forceWifi) throws IOException, InterruptedException {
-		InputStream is = null;
-		byte[] buffer = new byte[BUFFER_SIZE];
-		int read = 0;
-		int length = 0;
-		int fileread = 0;
-		int triesDownload = TRIES_TO_DOWNLOAD;
-		boolean notFound = false;
-		boolean first = true;
-		try {
-			while (triesDownload > 0) {
-				try {
-					if (!first) {
-						log.info("Reconnecting"); //$NON-NLS-1$
-						try {
-							Thread.sleep(TIMEOUT_BETWEEN_DOWNLOADS);
-						} catch (InterruptedException e) {
+	private InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
+		InputStream cis = new InputStream() {
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bufLen = 0;
+			int bufRead = 0;
+			int length = 0;
+			int fileread = 0;
+			int triesDownload = TRIES_TO_DOWNLOAD;
+			boolean notFound = false;
+			boolean first = true;
+			private InputStream is;
+			
+			private void reconnect() throws IOException {
+				while (triesDownload > 0) {
+					try {
+						if (!first) {
+							log.info("Reconnecting"); //$NON-NLS-1$
+							try {
+								Thread.sleep(TIMEOUT_BETWEEN_DOWNLOADS);
+							} catch (InterruptedException e) {
+							}
 						}
-					}
-					HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-					conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
-					conn.setReadTimeout(30000);
-					if (fileread > 0) {
-						String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
-						conn.setRequestProperty("Range", range);  //$NON-NLS-1$
-					}
-					conn.setConnectTimeout(30000);
-					log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
-					boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
-					if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
-						notFound = true;
-						break;
-					}
-					if ((conn.getResponseCode() != HttpURLConnection.HTTP_PARTIAL  && 
-							conn.getResponseCode() != HttpURLConnection.HTTP_OK ) || wifiConnectionBroken) {
-						conn.disconnect();
+						HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+						conn.setRequestProperty("User-Agent", Version.getFullVersion(ctx)); //$NON-NLS-1$
+						conn.setReadTimeout(30000);
+						if (fileread > 0) {
+							String range = "bytes="+fileread + "-" + (length -1); //$NON-NLS-1$ //$NON-NLS-2$
+							conn.setRequestProperty("Range", range);  //$NON-NLS-1$
+						}
+						conn.setConnectTimeout(30000);
+						log.info(conn.getResponseMessage() + " " + conn.getResponseCode()); //$NON-NLS-1$
+						boolean wifiConnectionBroken = forceWifi && !isWifiConnected();
+						if(conn.getResponseCode() == HttpURLConnection.HTTP_NOT_FOUND){
+							notFound = true;
+							break;
+						}
+						if ((conn.getResponseCode() != HttpURLConnection.HTTP_PARTIAL  && 
+								conn.getResponseCode() != HttpURLConnection.HTTP_OK ) || wifiConnectionBroken) {
+							conn.disconnect();
+							triesDownload--;
+							continue;
+						}
+						is = conn.getInputStream();
+						if (first) {
+							length = conn.getContentLength();
+						}
+
+						first = false;
+						return;
+					} catch (IOException e) {
+						log.error("IOException", e); //$NON-NLS-1$
 						triesDownload--;
-						continue;
 					}
-					is = conn.getInputStream();
-					if (first) {
-						length = conn.getContentLength();
-						String taskName = ctx.getString(R.string.downloading_file) + indexOfAllFiles +" " + fileName;
-						if(part != null){
-							taskName += part;
-						}
-						progress.startTask(taskName, length / 1024); //$NON-NLS-1$
-					}
-
-					first = false;
-					while ((read = is.read(buffer)) != -1) {
-						 if(interruptDownloading){
-						 	throw new InterruptedException();
-						 }
-						out.write(buffer, 0, read);
-						fileread += read;
-						progress.remaining((length - fileread) / 1024);
-					}
-					if(length <= fileread){
-						triesDownload = 0;
-					}
-				} catch (IOException e) {
-					log.error("IOException", e); //$NON-NLS-1$
-					triesDownload--;
 				}
-
+				if(notFound) {
+					throw new IOException("File not found "); //$NON-NLS-1$
+				} else if(length == 0){
+					throw new IOException("File was not fully read"); //$NON-NLS-1$
+				} else if(triesDownload == 0 && length != fileread) {
+					throw new IOException("File was not fully read"); //$NON-NLS-1$
+				}
 			}
-		} finally {
-			if (is != null) {
-				is.close();
+			// use as prepare
+			@Override
+			public synchronized void reset() throws IOException {
+				reconnect();
 			}
-		}
-		if(notFound) {
-			throw new IOException("File not found " + fileName); //$NON-NLS-1$
-		} else if(length != fileread || length == 0){
-			throw new IOException("File was not fully read"); //$NON-NLS-1$
-		}
-		
+			
+			@Override
+			public int read(byte[] buffer, int offset, int len) throws IOException {
+				int r = 0;
+				while(len > 0) {
+					if(bufLen == -1) {
+						return -1;
+					}	
+					int av = bufLen - bufRead;
+					if(len > av){
+						System.arraycopy(this.buffer, bufRead, buffer, offset, av);
+						len -= av;
+						offset += av;
+						bufRead += av;
+						r += av;
+						refillBuffer();
+					} else {
+						System.arraycopy(this.buffer, bufRead, buffer, offset, len);
+						bufRead += len;
+						r += len;
+						return r; 
+					}
+				}
+				return r;
+			}
+			
+			@Override
+			public int read() throws IOException {
+				int r = -1;
+				if(bufLen == -1) {
+					return -1;
+				}
+				refillBuffer();
+				if(bufRead < bufLen) {
+					byte b = buffer[bufRead++];
+					return b >= 0 ? b : b + 256;
+				}
+				if (length <= fileread) {
+					throw new IOException("File was not fully read"); //$NON-NLS-1$
+				}
+				return r;
+			}
+			private void refillBuffer() throws IOException {
+				boolean readAgain = bufRead >= bufLen;
+				while (readAgain) {
+					if (is == null) {
+						reconnect();
+					}
+					try {
+						readAgain = false;
+						bufRead = 0;
+						if ((bufLen = is.read(buffer)) != -1) {
+							if (interruptDownloading) {
+								throw new IOException("Interrupted");
+							}
+							fileread += bufLen;
+						}
+					} catch (IOException e) {
+						log.error("IOException", e); //$NON-NLS-1$
+						triesDownload--;
+						reconnect();
+						readAgain = true;
+					}
+				}
+			}
+			
+			@Override
+			public void close() throws IOException {
+				if (is != null) {
+					is.close();
+				}
+			}
+			
+			@Override
+			public int available() throws IOException {
+				if (is == null) {
+					reconnect();
+				}
+				return length - fileread;
+			}
+		};
+		cis.reset();
+		return cis;
 	}
 	
 	public boolean isWifiConnected(){
@@ -126,62 +197,65 @@ public class DownloadFileHelper {
 	}
 	
 	public boolean downloadFile(DownloadEntry de, IProgress progress, 
-			List<File> toReIndex, String indexOfAllFiles, 
-			DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
+			List<File> toReIndex, DownloadFileShowWarning showWarningCallback, boolean forceWifi) throws InterruptedException {
 		try {
-			FileOutputStream out = new FileOutputStream(de.fileToSave);
-			try {
-				
-				if (de.parts == 1) {
-					URL url = new URL(de.urlToDownload); //$NON-NLS-1$
-					log.info("Download " + de.urlToDownload);
-					downloadFileInternal(de.baseName, out, url, null, indexOfAllFiles, progress, forceWifi);
-				} else {
-					for (int i = 1; i <= de.parts; i++) {
-						URL url = new URL(de.urlToDownload + "-" + i); //$NON-NLS-1$
-						log.info("Download " + de.urlToDownload + "-" + i);
-						downloadFileInternal(de.baseName, out, url, " [" + i + "/" + de.parts + "]", indexOfAllFiles, progress, forceWifi);
-					}
+			final List<InputStream> downloadInputStreams = new ArrayList<InputStream>();
+			if (de.parts == 1) {
+				URL url = new URL(de.urlToDownload); //$NON-NLS-1$
+				downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
+			} else {
+				for (int i = 1; i <= de.parts; i++) {
+					URL url = new URL(de.urlToDownload + "-" + i); //$NON-NLS-1$
+					downloadInputStreams.add(getInputStreamToDownload(url, forceWifi));
 				}
-			} finally {
-				out.close();
 			}
-			unzipFile(de, progress, toReIndex);
+			de.fileToDownload = de.targetFile;
+			if(de.targetFile.exists() && !de.unzipFolder) {
+				de.fileToDownload = new File(de.targetFile.getParentFile(), de.targetFile.getName() +".download");
+			}
+			unzipFile(de, progress, downloadInputStreams);
+			if(!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())){
+				Algorithms.removeAllFiles(de.targetFile);
+				boolean renamed = de.fileToDownload.renameTo(de.targetFile);
+				if(!renamed) {
+					showWarningCallback.showWarning(ctx.getString(R.string.error_io_error) + " : old file can't be deleted");
+					return false;
+				}
+			}
+			toReIndex.add(de.targetFile);
 			showWarningCallback.showWarning(ctx.getString(R.string.download_index_success));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
 			showWarningCallback.showWarning(ctx.getString(R.string.error_io_error) + " : " + e.getMessage());
 			// Possibly file is corrupted
-			de.fileToSave.delete();
+			Algorithms.removeAllFiles(de.fileToDownload);
 			return false;
-		} catch (InterruptedException e) {
-			// Possibly file is corrupted
-			de.fileToSave.delete();
-			throw e;
 		}
 	}
 
-	private void unzipFile(DownloadEntry de, IProgress progress, List<File> toReIndex)
-			throws FileNotFoundException, IOException {
-		if (de.fileToSave.getName().endsWith(".zip")) { //$NON-NLS-1$
-			if (de.unzip) {
-				de.fileToUnzip.mkdirs();
+	private void unzipFile(DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
+		String taskName = ctx.getString(R.string.downloading_file_new) + " " + de.baseName;
+		CountingMultiInputStream fin = new CountingMultiInputStream(is);
+		int len = (int) fin.available();
+		progress.startTask(taskName, len / 1024);
+		if (!de.zipStream) {
+			copyFile(de, progress, fin, len, fin, de.fileToDownload);
+		} else {
+			if (de.unzipFolder) {
+				de.fileToDownload.mkdirs();
 			}
-			CountingInputStream fin = new CountingInputStream(new FileInputStream(de.fileToSave));
 			ZipInputStream zipIn = new ZipInputStream(fin);
 			ZipEntry entry = null;
 			boolean first = true;
-			int len = (int) de.fileToSave.length();
-			progress.startTask(ctx.getString(R.string.unzipping_file), len / 1024);
 			while ((entry = zipIn.getNextEntry()) != null) {
 				if (entry.isDirectory() || entry.getName().endsWith(IndexConstants.GEN_LOG_EXT)) {
 					continue;
 				}
 				File fs;
-				if (!de.unzip) {
+				if (!de.unzipFolder) {
 					if (first) {
-						fs = de.fileToUnzip;
+						fs = de.fileToDownload;
 						first = false;
 					} else {
 						String name = entry.getName();
@@ -194,29 +268,33 @@ public class DownloadFileHelper {
 								name = name.substring(0, ind) + name.substring(i, name.length());
 							}
 						}
-						fs = new File(de.fileToUnzip.getParent(), name);
+						fs = new File(de.fileToDownload.getParent(), name);
 					}
 				} else {
-					fs = new File(de.fileToUnzip, entry.getName());
+					fs = new File(de.fileToDownload, entry.getName());
 				}
-				FileOutputStream out = new FileOutputStream(fs);
-				int read;
-				byte[] buffer = new byte[BUFFER_SIZE];
-				int remaining = len;
-				while ((read = zipIn.read(buffer)) != -1) {
-					out.write(buffer, 0, read);
-					remaining -= fin.lastReadCount();
-					progress.remaining(remaining / 1024);
-				}
-				out.close();
-
-				if (de.dateModified != null) {
-					fs.setLastModified(de.dateModified);
-				}
-				toReIndex.add(fs);
+				copyFile(de, progress, fin, len, zipIn, fs);
 			}
 			zipIn.close();
-			de.fileToSave.delete(); // zip is no needed more
+		}
+		fin.close();
+	}
+
+	private void copyFile(DownloadEntry de, IProgress progress, CountingMultiInputStream countIS, int length, InputStream toRead, File targetFile)
+			throws IOException {
+		FileOutputStream out = new FileOutputStream(targetFile);
+		int read;
+		byte[] buffer = new byte[BUFFER_SIZE];
+		int remaining = length;
+		while ((read = toRead.read(buffer)) != -1) {
+			out.write(buffer, 0, read);
+			remaining -= countIS.getAndClearReadCount();
+			progress.remaining(remaining / 1024);
+		}
+		out.close();
+
+		if (de.dateModified != null) {
+			targetFile.setLastModified(de.dateModified);
 		}
 	}
 	
@@ -229,92 +307,67 @@ public class DownloadFileHelper {
 		return interruptDownloading;
 	}
 	
-	private static class CountingInputStream extends InputStream {
+	private static class CountingMultiInputStream extends InputStream {
 
-		private final InputStream delegate;
+		private final InputStream[] delegate;
 		private int count;
+		private int currentRead = 0;
 
-		public CountingInputStream(InputStream delegate) {
-			this.delegate = delegate;
+		public CountingMultiInputStream(List<InputStream> streams) {
+			this.delegate = streams.toArray(new InputStream[streams.size()]);
 		}
 		
-		public int lastReadCount() {
+		@Override
+		public int read(byte[] buffer, int offset, int length)
+				throws IOException {
+			int r = -1;
+			while (r == -1 && currentRead < delegate.length) {
+				r = delegate[currentRead].read(buffer, offset, length);
+				if (r == -1) {
+					delegate[currentRead].close();
+					currentRead++;
+				}
+			}
+			if (r > 0) {
+				this.count += r;
+			}
+			return r;
+		}
+		
+		@Override
+		public int read() throws IOException {
+			if (currentRead >= delegate.length) {
+				return -1;
+			}
+			int r = -1;
+			while (r == -1 && currentRead < delegate.length) {
+				r = delegate[currentRead].read();
+				if (r == -1) {
+					delegate[currentRead].close();
+					currentRead++;
+				} else {
+					this.count++;
+				}
+			}
+			return r;
+		}
+		
+		@Override
+		public int available() throws IOException {
+			int av = 0;
+			for(int i = currentRead; i < delegate.length; i++) {
+				av += delegate[i].available();
+			}
+			return av;
+		}
+		
+		public int getAndClearReadCount() {
 			int last = count;
 			count = 0;
 			return last;
 		}
 		
-		@Override
-		public int available() throws IOException {
-			return delegate.available();
-		}
+		
 
-		@Override
-		public void close() throws IOException {
-			delegate.close();
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			return delegate.equals(o);
-		}
-
-		@Override
-		public int hashCode() {
-			return delegate.hashCode();
-		}
-
-		@Override
-		public void mark(int readlimit) {
-			delegate.mark(readlimit);
-		}
-
-		@Override
-		public boolean markSupported() {
-			return delegate.markSupported();
-		}
-
-		@Override
-		public int read() throws IOException {
-			int read = delegate.read();
-			if (read > 0) {
-				this.count++;;
-			}
-			return read;
-		}
-
-		@Override
-		public int read(byte[] buffer, int offset, int length)
-				throws IOException {
-			int read = delegate.read(buffer, offset, length);
-			if (read > 0) {
-				this.count += read;
-			}
-			return read;
-		}
-
-		@Override
-		public int read(byte[] buffer) throws IOException {
-			int read = delegate.read(buffer);
-			if (read > 0) {
-				this.count += read;
-			}
-			return read;
-		}
-
-		@Override
-		public void reset() throws IOException {
-			delegate.reset();
-		}
-
-		@Override
-		public long skip(long byteCount) throws IOException {
-			return delegate.skip(byteCount);
-		}
-
-		@Override
-		public String toString() {
-			return delegate.toString();
-		}
 	}
 }

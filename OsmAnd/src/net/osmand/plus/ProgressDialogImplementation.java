@@ -199,9 +199,4 @@ public class ProgressDialogImplementation implements IProgress {
 		deltaProgress = 0;
 	}
 
-	@Override
-	public void setGeneralProgress(String genProgress) {
-		// not implemented yet
-	}
-
 }

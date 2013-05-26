@@ -19,8 +19,6 @@ public interface IProgress {
 	
 	public void remaining(int remainingWork);
 	
-	public void setGeneralProgress(String genProgress);
-	
 	public void finishTask();
 	
 	public boolean isIndeterminate();
@@ -34,9 +32,6 @@ public interface IProgress {
 		
 		@Override
 		public void startTask(String taskName, int work) {}
-		
-		@Override
-		public void setGeneralProgress(String genProgress) {}
 		
 		@Override
 		public void remaining(int remainingWork) {}

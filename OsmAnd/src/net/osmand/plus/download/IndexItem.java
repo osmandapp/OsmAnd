@@ -1,14 +1,10 @@
 package net.osmand.plus.download;
 
 import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT;
-import static net.osmand.IndexConstants.BINARY_MAP_INDEX_EXT_ZIP;
-import static net.osmand.IndexConstants.TTSVOICE_INDEX_EXT_ZIP;
-import static net.osmand.IndexConstants.VOICE_INDEX_EXT_ZIP;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -128,42 +124,39 @@ public class IndexItem implements Comparable<IndexItem> {
 			List<DownloadEntry> downloadEntries) {
 		String fileName = this.fileName;
 		File parent = null;
-		String toSavePostfix = null;
-		String toCheckPostfix = null;
+		String extension = null;
 		boolean unzipDir = false;
+		boolean zipStream = false;
 		boolean preventMediaIndexing = false;
 		if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
 			parent = ctx.getAppPath(IndexConstants.MAPS_PATH);
-			toSavePostfix = BINARY_MAP_INDEX_EXT;
-			toCheckPostfix = BINARY_MAP_INDEX_EXT;
+			extension = BINARY_MAP_INDEX_EXT;
 		} else if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
 			parent = ctx.getAppPath(IndexConstants.MAPS_PATH);
-			toSavePostfix = BINARY_MAP_INDEX_EXT_ZIP;
-			toCheckPostfix = BINARY_MAP_INDEX_EXT;
+			zipStream = true;
+			extension = BINARY_MAP_INDEX_EXT;
 		} else if (fileName.endsWith(IndexConstants.EXTRA_ZIP_EXT)) {
 			parent = ctx.getAppPath("");
 			// unzipDir = true;
-			toSavePostfix = IndexConstants.EXTRA_ZIP_EXT;
-			toCheckPostfix = IndexConstants.EXTRA_EXT;
+			zipStream = true;
+			extension = IndexConstants.EXTRA_EXT;
 		} else if (fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			parent = ctx.getAppPath(IndexConstants.TILES_INDEX_DIR);
-			toSavePostfix = IndexConstants.SQLITE_EXT;
-			toCheckPostfix = IndexConstants.SQLITE_EXT;
+			extension = IndexConstants.SQLITE_EXT;
 		} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
 			parent = ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			toSavePostfix = VOICE_INDEX_EXT_ZIP;
-			toCheckPostfix = ""; //$NON-NLS-1$
+			zipStream = true;
+			extension = ""; //$NON-NLS-1$
 			unzipDir = true;
 			preventMediaIndexing = true;
 		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
 			parent = ctx.getAppPath(IndexConstants.VOICE_INDEX_DIR);
-			toSavePostfix = TTSVOICE_INDEX_EXT_ZIP;
-			toCheckPostfix = ""; //$NON-NLS-1$
+			zipStream = true;
+			extension = ""; //$NON-NLS-1$
 			unzipDir = true;
 		}
 		if (type == DownloadActivityType.ROADS_FILE) {
-			toSavePostfix = "-roads" + toSavePostfix;
-			toCheckPostfix = "-roads" + toCheckPostfix;
+			extension = "-roads" + extension;
 		}
 		if (parent != null) {
 			parent.mkdirs();
@@ -193,8 +186,8 @@ public class IndexItem implements Comparable<IndexItem> {
 				url += "hillshade=yes&";
 			}
 			entry.urlToDownload = url + "file=" + fileName;
-			entry.fileToSave = new File(parent, entry.baseName + toSavePostfix);
-			entry.unzip = unzipDir;
+			entry.zipStream = zipStream;
+			entry.unzipFolder = unzipDir;
 			try {
 				Date d = Algorithms.getDateFormat().parse(date);
 				entry.dateModified = d.getTime();
@@ -210,8 +203,8 @@ public class IndexItem implements Comparable<IndexItem> {
 			if (parts != null) {
 				entry.parts = Integer.parseInt(parts);
 			}
-			entry.fileToUnzip = new File(parent, entry.baseName + toCheckPostfix);
-			File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), entry.fileToUnzip.getName());
+			entry.targetFile = new File(parent, entry.baseName + extension);
+			File backup = new File(ctx.getAppPath(IndexConstants.BACKUP_INDEX_DIR), entry.targetFile.getName());
 			if (backup.exists()) {
 				entry.existingBackupFile = backup;
 			}

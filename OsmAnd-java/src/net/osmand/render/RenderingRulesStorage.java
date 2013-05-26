@@ -449,7 +449,7 @@ public class RenderingRulesStorage {
 				return depends;
 			}
 		};
-		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("winter+ski.render.xml"), resolver);
+		storage.parseRulesFromXmlInputStream(RenderingRulesStorage.class.getResourceAsStream("default.render.xml"), resolver);
 //		storage.printDebug(TEXT_RULES, System.out);
 //		long tm = System.nanoTime();
 //		int count = 100000;

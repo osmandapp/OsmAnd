@@ -5,6 +5,70 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+    <LinearLayout
+        android:id="@+id/ProgressView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
+            android:gravity="center_vertical|left"
+            android:orientation="horizontal" >
+
+            <ProgressBar
+                android:id="@+id/IndeterminateProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateOnly="true"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/ProgressMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginLeft="3dp"
+                android:ellipsize="marquee"
+                android:gravity="left|center_vertical"
+                android:singleLine="true"
+                android:text=""
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/ProgressPercent"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:gravity="right|center_vertical"
+                android:text=""
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ProgressBar
+                android:id="@+id/DeterminateProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/Cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/a_1_navigation_cancel_small_dark" />
+        </LinearLayout>
+    </LinearLayout>
 
     <EditText
         android:id="@+id/search_box"
@@ -18,14 +82,14 @@
 
     <ExpandableListView
         android:id="@android:id/list"
+        style="@style/OsmandListView"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="0dp"
         android:layout_weight="1"
-        android:groupIndicator="@android:color/transparent"
-    	style="@style/OsmandListView" />
+        android:groupIndicator="@android:color/transparent" />
 
     <Button
         android:id="@+id/DownloadButton"

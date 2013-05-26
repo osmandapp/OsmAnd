@@ -66,6 +66,9 @@
 		<filter attrIntValue="3"/>
 	</renderingAttribute>
 	
+	<!-- Use hmRendered for more map detail and better visibility of small roads -->
+	<renderingConstant name="hmRendered" value="false"/>
+	
 	<renderingAttribute name="roadsDensityLimitPerTile">
 	<!-- Number of roads to display per tile -->
 		<filter appMode="pedestrian" attrIntValue="24"/>
@@ -76,8 +79,7 @@
 	
 	<!-- filter does not work for renderingConstant - the last one will be used, but better use separate depends Rendering style -->
 
-	<!-- Use hmRendered for more map detail and better visibility of small roads -->
-	<renderingConstant name="hmRendered" value="false"/>
+
 
 	<!-- roadColors="Modified Mapnik" -->
 	<renderingConstant name="motorwayRoadColor" value="#809bff"/>
