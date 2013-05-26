@@ -1244,4 +1244,6 @@
     <string name="access_mark_final_location_first">מצב נגישות : נא לבחור ביעד תחילה</string> 
     <string name="use_kalman_filter_compass_descr">ניתן להשתמש במסנן קלמן למניעת סטיות מצפן</string>
     <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
-    </resources>
+    <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
+    <string name="downloading_file_new">"בהורדה "</string>
+	</resources>
