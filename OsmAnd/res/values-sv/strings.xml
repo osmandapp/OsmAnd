@@ -964,7 +964,7 @@
     <string name="av_video_format_descr">Välj videoformat</string>
     <string name="av_video_format">Videoformat</string>
     <string name="av_use_external_recorder_descr">Använd systemets inspelare för video</string>
-    <string name="av_use_external_recorder">Använd extern inspelare</string>
+    <string name="av_use_external_recorder">Använd systemets inspelare</string>
     <string name="av_settings_descr">Konfigurera inställningar för ljud och video</string>
     <string name="av_settings">Inställningar för ljud och video</string>
     <string name="recording_error">"Ett fel uppstod under inspelningen "</string>
@@ -1073,7 +1073,7 @@
     <string name="download_hillshade_maps">Skuggat relief-överlägg</string>
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till höjdkurvs-pluginen\n\t* Skuggad relief-paket för höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
     <string name="tip_recent_changes_1_2_t">"Ändringar i 1.2: "</string>
-    <string name="av_use_external_camera_descr">Andvänd systemappen för foton</string>
+    <string name="av_use_external_camera_descr">Andvänd systemets app för foton</string>
     <string name="av_use_external_camera">Använd kamera-app</string>
     <string name="av_control_start">Starta</string>
     <string name="max_speed_none">Ingen</string>
