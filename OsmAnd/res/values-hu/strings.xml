@@ -1212,4 +1212,6 @@
     <string name="tip_recent_changes_1_3_t">"Az 1.3 kiadás újdonságai:
 \n\t* Holo téma (személyre szabható témák) "</string>
     <string name="local_indexes_cat_srtm">Szintvonal adat</string>
-    </resources>
+    <string name="wait_current_task_finished">Kérlek várd meg, amíg a jelenlegi befejeződik</string>
+    <string name="downloading_file_new">"Letöltés "</string>
+	</resources>
