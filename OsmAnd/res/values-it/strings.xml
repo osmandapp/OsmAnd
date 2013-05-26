@@ -1271,4 +1271,6 @@
     <string name="use_kalman_filter_compass_descr">Usare il filtro di Kalman per evitare aberrazioni della bussola</string>
     <string name="use_kalman_filter_compass">Uso del filtro di Kalman</string>
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
-    </resources>
+    <string name="wait_current_task_finished">Prego attendere, il presente lavoro sarà finito</string>
+    <string name="downloading_file_new">"In download "</string>
+	</resources>
