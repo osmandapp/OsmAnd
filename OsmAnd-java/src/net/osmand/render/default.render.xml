@@ -458,8 +458,8 @@
 			<filter minzoom="11" textSize="14" tag="place" value="suburb" textOrder="12"/>
 			<filter minzoom="11" textSize="13" tag="place" value="locality" textOrder="15"/>
 			<filter minzoom="11" textSize="14" tag="place" value="island" textOrder="10"/>
-			<filter minzoom="10" textSize="14" textColor="#99cc99" textBold="true" textWrapWidth="14" tag="boundary" value="national_park" textOrder="10"/>
-			<!-- filter minzoom="10" textSize="14" textColor="#99cc99" textBold="true" textWrapWidth="14" tag="boundary" value="protected_area" textOrder="10"/ -->
+			<filter minzoom="10" textSize="14" textColor="#99cc99" textHaloRadius="1" textWrapWidth="20" tag="boundary" value="national_park" textOrder="10"/>
+			<!-- filter minzoom="10" textSize="14" textColor="#99cc99" textHaloRadius="1" textWrapWidth="20" tag="boundary" value="protected_area" textOrder="10"/ -->
 			<groupFilter nightMode="true" textColor="#D7D7D7"/>
 		</group>
 
