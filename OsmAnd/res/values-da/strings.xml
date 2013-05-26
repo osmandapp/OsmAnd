@@ -17,12 +17,12 @@
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
     <string name="recording_delete_confirm">Vil du at fjerne optagelsen?</string>
     <string name="tip_recent_changes_1_1_0_t">"Ændringer i 1.1.0:\n\t*Afstand regnemaskine plugin\n\t*Audio notater plugin
-\n\t*Højdekurve udvidelse\n\t*Fejlrettelser
+\n\t*Højdekurveudvidelse\n\t*Fejlrettelser
 \n\t*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
 \n\t*EGM96 geoid offset korrektion for GPS højdeaflæsningerne "</string>
     <string name="recording_unavailable">ikke tilgængelig</string>
     <string name="recording_context_menu_arecord">Optag lydnote</string>
-    <string name="srtm_paid_version_title">Højdekurve udvidelse</string>
+    <string name="srtm_paid_version_title">Højdekurver</string>
     <string name="recording_context_menu_vrecord">Optag videonote</string>
     <string name="layer_recordings">Optagelser</string>
     <string name="recording_can_not_be_played">Optagelse kan ikke afspilles</string>
@@ -48,7 +48,7 @@
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
     <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype)</string>
-    <string name="srtm_plugin_name">Højdekurve udvidelse</string>
+    <string name="srtm_plugin_name">Højdekurveudvidelse</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
     <string name="download_srtm_maps">Højdekurver</string>
@@ -146,7 +146,7 @@
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
     <string name="tip_recent_changes_1_2_t">"Ændringer i 1.2:
-\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurve udvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman-filter for kompas ↵\n\t* Pebble-ur support "</string>
+\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman-filter for kompas ↵\n\t* Pebble-ur support "</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dist_control_start">start</string>
@@ -248,7 +248,7 @@
 	<string name="update_downlod_list">Genindlæs liste</string>
 	<string name="starting_point_too_far">Udgangspunktet er for langt fra nærmeste vej.</string>
 	<string name="shared_location">Delt placering</string>
-	<string name="osmand_parking_event">Afhent bilen fra parkering</string>
+	<string name="osmand_parking_event">Hent bilen fra parkering</string>
 	<string name="osmand_parking_warning">Advarsel</string>
 	<string name="osmand_parking_warning_text">Påmindelse om at afhente din bil blev tidligere tilføjet til din kalender. Den vil forblive der, indtil du sletter den manuelt.</string>    
 	<string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
@@ -265,7 +265,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkeringssted</string>
 	<string name="osmand_parking_plugin_description">Denne udvidelse gør det muligt at gemme placeringen af ​​din parkerede bil.</string>
-	<string name="osmand_parking_plugin_name">Parkeringsplads udvidelse</string>
+	<string name="osmand_parking_plugin_name">Parkeringsplads</string>
 	<string name="context_menu_item_add_parking_point">Marker som en parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
 	<string name="gpxup_public">Offentligt</string>
@@ -285,7 +285,7 @@
 	<string name="show_traffic_warnings">Vis trafikadvarsler</string>
 	<string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
 	<string name="rendering_attr_noPolygons_name">Skjul polygoner</string>
-	<string name="rendering_attr_appMode_name">Renderings måde</string>
+	<string name="rendering_attr_appMode_name">Renderingsmåde</string>
 	<string name="rendering_attr_appMode_description">Optimer kort til</string>
 	<string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver højdekurvedata):</string>
 	<string name="rendering_attr_contourLines_name">Vis højdekurver</string>
