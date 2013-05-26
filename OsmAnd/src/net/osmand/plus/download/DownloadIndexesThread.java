@@ -4,13 +4,23 @@ package net.osmand.plus.download;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.TreeMap;
 
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleToast;
+import net.osmand.map.RegionCountry;
+import net.osmand.map.RegionRegistry;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -18,28 +28,36 @@ import net.osmand.plus.activities.DownloadIndexActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
 import net.osmand.plus.download.DownloadFileHelper.DownloadFileShowWarning;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
+import android.os.Build;
+import android.os.StatFs;
 import android.view.View;
 import android.widget.Toast;
 
 public class DownloadIndexesThread {
 	private DownloadIndexActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
+	private List<SrtmIndexItem> cachedSRTMFiles;
+	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = Collections.synchronizedMap(new TreeMap<IndexItem, List<DownloadEntry>>());
+	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
 	private final Context ctx;
 	private OsmandApplication app;
 	private final static Log log = PlatformUtil.getLog(DownloadIndexesThread.class);
 	private DownloadFileHelper downloadFileHelper;
-	private BasicProgressAsyncTask<?, ?, ?> currentRunningTask;
+	private List<BasicProgressAsyncTask<?, ?, ?> > currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?>>());
 
 	public DownloadIndexesThread(Context ctx) {
 		this.ctx = ctx;
@@ -49,6 +67,16 @@ public class DownloadIndexesThread {
 	
 	public void setUiActivity(DownloadIndexActivity uiActivity) {
 		this.uiActivity = uiActivity;
+	}
+	
+	public List<DownloadEntry> flattenDownloadEntries() {
+		List<DownloadEntry> res = new ArrayList<DownloadEntry>();
+		for(List<DownloadEntry> ens : getEntriesToDownload().values()) {
+			if(ens != null) {
+				res.addAll(ens);
+			}
+		}
+		return res;
 	}
 
 	public List<IndexItem> getCachedIndexFiles() {
@@ -62,12 +90,18 @@ public class DownloadIndexesThread {
 	public class DownloadIndexesAsyncTask extends BasicProgressAsyncTask<IndexItem, Object, String> implements DownloadFileShowWarning {
 
 		private OsmandPreference<Integer> downloads;
-		private TreeMap<IndexItem, List<DownloadEntry>> entriesToDownload;
 
-		public DownloadIndexesAsyncTask(Context ctx, TreeMap<IndexItem, List<DownloadEntry>> entriesToDownload) {
+		public DownloadIndexesAsyncTask(Context ctx) {
 			super(ctx);
-			this.entriesToDownload = entriesToDownload;
 			downloads = app.getSettings().NUMBER_OF_FREE_DOWNLOADS;
+		}
+		
+		@Override
+		public void setInterrupted(boolean interrupted) {
+			super.setInterrupted(interrupted);
+			if(interrupted) {
+				downloadFileHelper.setInterruptDownloading(true);
+			}
 		}
 
 		@Override
@@ -76,11 +110,13 @@ public class DownloadIndexesThread {
 				if (o instanceof DownloadEntry) {
 					if (uiActivity != null) {
 						((DownloadIndexAdapter) uiActivity.getExpandableListAdapter()).notifyDataSetInvalidated();
-						if (entriesToDownload.isEmpty()) {
-							uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.GONE);
-						} else {
-							uiActivity.makeDownloadVisible();
-						}
+						uiActivity.updateDownloadButton(false);
+					}
+				} else if (o instanceof IndexItem) {
+					entriesToDownload.remove(o);
+					if (uiActivity != null) {
+						((DownloadIndexAdapter) uiActivity.getExpandableListAdapter()).notifyDataSetInvalidated();
+						uiActivity.updateDownloadButton(false);
 					}
 				} else if (o instanceof String) {
 					AccessibleToast.makeText(ctx, (String) o, Toast.LENGTH_LONG).show();
@@ -91,7 +127,7 @@ public class DownloadIndexesThread {
 
 		@Override
 		protected void onPreExecute() {
-			currentRunningTask = this;
+			currentRunningTask.add( this);
 			super.onPreExecute();
 			if (uiActivity != null) {
 				downloadFileHelper.setInterruptDownloading(false);
@@ -99,39 +135,39 @@ public class DownloadIndexesThread {
 				if (mainView != null) {
 					mainView.setKeepScreenOn(true);
 				}
+				startTask(ctx.getString(R.string.downloading), -1);
 			}
 		}
 
 		@Override
 		protected void onPostExecute(String result) {
-			if (result != null) {
+			if (result != null && result.length() > 0) {
 				AccessibleToast.makeText(ctx, result, Toast.LENGTH_LONG).show();
 			}
+			currentDownloads.clear();
 			if (uiActivity != null) {
 				View mainView = uiActivity.findViewById(R.id.MainLayout);
 				if (mainView != null) {
 					mainView.setKeepScreenOn(false);
 				}
-				uiActivity.updateLoadedFiles();
+				updateLoadedFiles();
 				DownloadIndexAdapter adapter = ((DownloadIndexAdapter) uiActivity.getExpandableListAdapter());
 				if (adapter != null) {
 					adapter.notifyDataSetInvalidated();
 				}
 			}
+			currentRunningTask.remove(this);
 			if(uiActivity != null) { 
-				uiActivity.updateProgress(false, null);
+				uiActivity.updateProgress(false);
 			}
 		}
 		
-		private int countAllDownloadEntry(IndexItem... filesToDownload){
-			int t = 0;
-			for(IndexItem  i : filesToDownload){
-				List<DownloadEntry> list = entriesToDownload.get(i);
-				if(list != null){
-					t += list.size();
-				}
+
+		private void updateLoadedFiles() {
+			if (uiActivity != null) {
+				((DownloadIndexAdapter) uiActivity.getExpandableListAdapter()).notifyDataSetInvalidated();
+				((DownloadIndexAdapter) uiActivity.getExpandableListAdapter()).updateLoadedFiles();
 			}
-			return t;
 		}
 
 		@Override
@@ -139,18 +175,49 @@ public class DownloadIndexesThread {
 			try {
 				List<File> filesToReindex = new ArrayList<File>();
 				boolean forceWifi = downloadFileHelper.isWifiConnected();
-				int counter = 1;
-				int all = countAllDownloadEntry(filesToDownload);
-				for (int i = 0; i < filesToDownload.length; i++) {
-					IndexItem filename = filesToDownload[i];
-					List<DownloadEntry> list = entriesToDownload.get(filename);
+				currentDownloads = new HashSet<DownloadEntry>();
+				String breakDownloadMessage = null;
+				downloadCycle : while(!entriesToDownload.isEmpty() ) {
+					
+					Iterator<Entry<IndexItem, List<DownloadEntry>>> it = entriesToDownload.entrySet().iterator();
+					IndexItem file = null;
+					List<DownloadEntry> list = null;
+					while(it.hasNext()) {
+						Entry<IndexItem, List<DownloadEntry>> n = it.next();
+						if(!currentDownloads.containsAll(n.getValue())) {
+							file = n.getKey();
+							list = n.getValue();
+							break;
+						}
+					}
+					if(file == null) {
+						break downloadCycle;
+					}
 					if (list != null) {
+						boolean success = false;
 						for (DownloadEntry entry : list) {
-							String indexOfAllFiles = all <= 1 ? "" : (" [" + counter + "/" + all + "]");
-							counter++;
-							boolean result = downloadFile(entry, filesToReindex, indexOfAllFiles, forceWifi);
+							if(currentDownloads.contains(entry)) {
+								continue;
+							}
+							currentDownloads.add(entry);
+							double asz = getAvailableSpace();
+							// validate interrupted
+							if(downloadFileHelper.isInterruptDownloading()) {
+								break downloadCycle;
+							}
+							// validate enough space
+							if (asz != -1 && entry.sizeMB > asz) {
+								breakDownloadMessage =  app.getString(R.string.download_files_not_enough_space, entry.sizeMB, asz);
+								break downloadCycle;
+							} 
+							if (exceedsFreelimit(entry)) {
+								breakDownloadMessage = app.getString(R.string.free_version_message, DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS
+										+ "");
+								break downloadCycle;
+							}
+							boolean result = downloadFile(entry, filesToReindex, forceWifi);
+							success = result || success;
 							if (result) {
-								entriesToDownload.remove(filename);
 								if (entry.type != DownloadActivityType.SRTM_FILE && entry.type != DownloadActivityType.HILLSHADE_FILE) {
 									downloads.set(downloads.get() + 1);
 								}
@@ -161,26 +228,56 @@ public class DownloadIndexesThread {
 								publishProgress(entry);
 							}
 						}
+						if(success) {
+							entriesToDownload.remove(file);
+						}
+					}
+					
+				}
+				String warn = reindexFiles(filesToReindex);
+				if(breakDownloadMessage != null) {
+					if(warn != null) {
+						warn = breakDownloadMessage + "\n" + warn;
+					} else {
+						warn = breakDownloadMessage;
 					}
 				}
-				boolean vectorMapsToReindex = false;
-				for (File f : filesToReindex) {
-					if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-						vectorMapsToReindex = true;
-						break;
-					}
-				}
-				// reindex vector maps all at one time
-				ResourceManager manager = app.getResourceManager();
-				manager.indexVoiceFiles(this);
-				if (vectorMapsToReindex) {
-					List<String> warnings = manager.indexingMaps(this);
-					if (!warnings.isEmpty()) {
-						return warnings.get(0);
-					}
-				}
+				return warn;
 			} catch (InterruptedException e) {
+				log.info("Download Interrupted");
 				// do not dismiss dialog
+			}
+			return null;
+		}
+
+		private boolean exceedsFreelimit(DownloadEntry entry) {
+			return Version.isFreeVersion(app) &&
+					entry.type != DownloadActivityType.SRTM_FILE && entry.type != DownloadActivityType.HILLSHADE_FILE
+					&& downloads.get() >= DownloadIndexActivity.MAXIMUM_AVAILABLE_FREE_DOWNLOADS;
+		}
+
+		private String reindexFiles(List<File> filesToReindex) {
+			boolean vectorMapsToReindex = false;
+			for (File f : filesToReindex) {
+				if (f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
+					vectorMapsToReindex = true;
+					break;
+				}
+			}
+			// reindex vector maps all at one time
+			ResourceManager manager = app.getResourceManager();
+			manager.indexVoiceFiles(this);
+			List<String> warnings = new ArrayList<String>();
+			if (vectorMapsToReindex) {
+				warnings = manager.indexingMaps(this);
+			}
+			if (cachedSRTMFiles != null) {
+				for (SrtmIndexItem i : cachedSRTMFiles) {
+					((SrtmIndexItem) i).updateExistingTiles(app.getResourceManager().getIndexFileNames());
+				}
+			}
+			if (!warnings.isEmpty()) {
+				return warnings.get(0);
 			}
 			return null;
 		}
@@ -202,14 +299,16 @@ public class DownloadIndexesThread {
 
 		}
 
-		public boolean downloadFile(DownloadEntry de, List<File> filesToReindex, String indexOfAllFiles, boolean forceWifi)
+		public boolean downloadFile(DownloadEntry de, List<File> filesToReindex, boolean forceWifi)
 				throws InterruptedException {
 			boolean res = false;
 			if (de.isAsset) {
 				try {
-					ResourceManager.copyAssets(app.getAssets(), de.targetFile.getPath(), de.targetFile);
-					de.targetFile.setLastModified(de.dateModified);
-					res = true;
+					if (uiActivity != null) {
+						ResourceManager.copyAssets(uiActivity.getAssets(), de.assetName, de.targetFile);
+						de.targetFile.setLastModified(de.dateModified);
+						res = true;
+					}
 				} catch (IOException e) {
 					log.error("Copy exception", e);
 				}
@@ -217,7 +316,7 @@ public class DownloadIndexesThread {
 				res = downloadFileHelper.downloadFile(de, this, filesToReindex, this, forceWifi);
 			}
 			if (res && de.attachedEntry != null) {
-				return downloadFile(de.attachedEntry, filesToReindex, indexOfAllFiles, forceWifi);
+				return downloadFile(de.attachedEntry, filesToReindex, forceWifi);
 			}
 			return res;
 		}
@@ -225,7 +324,7 @@ public class DownloadIndexesThread {
 		@Override
 		protected void updateProgress(boolean updateOnlyProgress) {
 			if(uiActivity != null) {
-				uiActivity.updateProgress(updateOnlyProgress, this);
+				uiActivity.updateProgress(updateOnlyProgress);
 			}
 		}
 	}
@@ -238,59 +337,46 @@ public class DownloadIndexesThread {
 		return false;
 	}
 	
-	public void runDownloadFiles(TreeMap<IndexItem, List<DownloadEntry>> entriesToDownload){
-		if(checkRunning()) {
-			return;
-		}
-		IndexItem[] indexes = entriesToDownload.keySet().toArray(new IndexItem[0]);
-		DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(ctx, entriesToDownload);
-		task.execute(indexes);
-	}
-
 	public void runReloadIndexFiles() {
-		if(checkRunning()) {
-			return;
-		}
+		checkRunning();
 		final BasicProgressAsyncTask<Void, Void, IndexFileList> inst = new BasicProgressAsyncTask<Void, Void, IndexFileList>(ctx) {
-			
+
 			@Override
 			protected IndexFileList doInBackground(Void... params) {
 				return DownloadOsmandIndexesHelper.getIndexesList(ctx);
 			};
-			
+
 			@Override
 			protected void onPreExecute() {
-				currentRunningTask = this;
+				currentRunningTask.add(this);
 				super.onPreExecute();
 				this.message = ctx.getString(R.string.downloading_list_indexes);
-				if(uiActivity != null) { 
-					uiActivity.updateProgress(false, this);
-				}
 			}
-			
+
 			protected void onPostExecute(IndexFileList result) {
 				indexFiles = result;
 				if (indexFiles != null && uiActivity != null) {
 					boolean basemapExists = uiActivity.getMyApplication().getResourceManager().containsBasemap();
 					IndexItem basemap = indexFiles.getBasemap();
 					if (!basemapExists && basemap != null) {
-						List<DownloadEntry> downloadEntry = basemap
-								.createDownloadEntry(uiActivity.getClientContext(), uiActivity.getType(), new ArrayList<DownloadEntry>());
+						List<DownloadEntry> downloadEntry = basemap.createDownloadEntry(uiActivity.getClientContext(),
+								uiActivity.getType(), new ArrayList<DownloadEntry>());
 						uiActivity.getEntriesToDownload().put(basemap, downloadEntry);
 						AccessibleToast.makeText(uiActivity, R.string.basemap_was_selected_to_download, Toast.LENGTH_LONG).show();
 						uiActivity.findViewById(R.id.DownloadButton).setVisibility(View.VISIBLE);
 					}
-					uiActivity.setListAdapter(new DownloadIndexAdapter(uiActivity, uiActivity.getFilteredByType()));
 					if (indexFiles.isIncreasedMapVersion()) {
 						showWarnDialog();
 					}
 				} else {
 					AccessibleToast.makeText(ctx, R.string.list_index_files_was_not_loaded, Toast.LENGTH_LONG).show();
 				}
-				if(uiActivity != null) { 
-					uiActivity.updateProgress(false, null);
+				currentRunningTask.remove(this);
+				if (uiActivity != null) {
+					uiActivity.updateProgress(false);
 				}
-			
+				runCategorization(uiActivity.getType());
+
 			}
 
 			private void showWarnDialog() {
@@ -318,22 +404,191 @@ public class DownloadIndexesThread {
 
 			@Override
 			protected void updateProgress(boolean updateOnlyProgress) {
+				if (uiActivity != null) {
+					uiActivity.updateProgress(updateOnlyProgress);
+				}
+
+			};
+
+		};
+		execute(inst, new Void[0]);
+
+	}
+	
+	public void runDownloadFiles(){
+		if(checkRunning()) {
+			return;
+		}
+		DownloadIndexesAsyncTask task = new DownloadIndexesAsyncTask(ctx);
+		execute(task, new IndexItem[0]);
+	}
+	
+	private <P>void execute(BasicProgressAsyncTask<P, ?, ?> task, P... indexItems) {
+		if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB ) {
+			// TODO check
+		    task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
+		} else {
+			task.execute(indexItems);
+		}
+	}
+
+	public Map<IndexItem, List<DownloadEntry>> getEntriesToDownload() {
+		return entriesToDownload;
+	}
+
+	public void runCategorization(final DownloadActivityType type) {
+		final BasicProgressAsyncTask<Void, Void, List<IndexItem>> inst = new BasicProgressAsyncTask<Void, Void, List<IndexItem>>(ctx) {
+			private List<IndexItemCategory> cats;
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+				currentRunningTask.add(this);
+				this.message = ctx.getString(R.string.downloading_list_indexes);
+				if(uiActivity != null) { 
+					uiActivity.updateProgress(false);
+				}
+			}
+			
+			@Override
+			protected List<IndexItem> doInBackground(Void... params) {
+				final List<IndexItem> filtered = getFilteredByType();
+				cats = IndexItemCategory.categorizeIndexItems(app, filtered);
+				return filtered;
+			};
+			
+			public List<IndexItem> getFilteredByType() {
+				final List<IndexItem> filtered = new ArrayList<IndexItem>();
+				if (type == DownloadActivityType.SRTM_FILE) {
+					Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
+					if (cachedSRTMFiles == null) {
+						cachedSRTMFiles = new ArrayList<SrtmIndexItem>();
+						synchronized (cachedSRTMFiles) {
+							List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
+							for (RegionCountry rc : countries) {
+								if (rc.tiles.size() > 35 && rc.getSubRegions().size() > 0) {
+									for (RegionCountry ch : rc.getSubRegions()) {
+										cachedSRTMFiles.add(new SrtmIndexItem(ch, indexFileNames));
+									}
+								} else {
+									cachedSRTMFiles.add(new SrtmIndexItem(rc, indexFileNames));
+								}
+							}
+							filtered.addAll(cachedSRTMFiles);
+						}
+					} else {
+						synchronized (cachedSRTMFiles) {
+							for (SrtmIndexItem s : cachedSRTMFiles) {
+								s.updateExistingTiles(indexFileNames);
+								filtered.add(s);
+							}
+						}
+					}
+				}
+				List<IndexItem> cachedIndexFiles = getCachedIndexFiles();
+				if (cachedIndexFiles != null) {
+					for (IndexItem file : cachedIndexFiles) {
+						if (file.getType() == type) {
+							filtered.add(file);
+						}
+					}
+				}
+				return filtered;
+			}
+			
+
+			@Override
+			protected void onPostExecute(List<IndexItem> filtered) {
+				if (uiActivity != null) {
+					DownloadIndexAdapter a = ((DownloadIndexAdapter) uiActivity.getExpandableListAdapter());
+					a.setIndexFiles(filtered, cats);
+					a.notifyDataSetChanged();
+					a.getFilter().filter(uiActivity.getFilterText());
+					if (type == DownloadActivityType.SRTM_FILE && OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) instanceof SRTMPlugin
+							&& !OsmandPlugin.getEnabledPlugin(SRTMPlugin.class).isPaid()) {
+						Builder msg = new AlertDialog.Builder(uiActivity);
+						msg.setTitle(R.string.srtm_paid_version_title);
+						msg.setMessage(R.string.srtm_paid_version_msg);
+						msg.setNegativeButton(R.string.button_upgrade_osmandplus, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.srtmPlugin.paid"));
+								try {
+									ctx.startActivity(intent);
+								} catch (ActivityNotFoundException e) {
+								}
+							}
+						});
+						msg.setPositiveButton(R.string.default_buttons_ok, null);
+						msg.show();
+					}
+				}
+				currentRunningTask.remove(this);
+				if(uiActivity != null) { 
+					uiActivity.updateProgress(false);
+				}
+			}
+
+			@Override
+			protected void updateProgress(boolean updateOnlyProgress) {
 				if(uiActivity != null) {
-					uiActivity.updateProgress(updateOnlyProgress, this);
+					uiActivity.updateProgress(updateOnlyProgress);
 				}
 				
 			};
 			
 		};
-		inst.execute(new Void[0]);
+		execute(inst, new Void[0]);
 	}
 
 	
-	public BasicProgressAsyncTask<?, ?, ?> getCurrentRunningTask() {
-		if(currentRunningTask != null && currentRunningTask.getStatus() == Status.FINISHED) {
-			currentRunningTask = null;
+	public boolean isDownloadRunning(){
+		for(int i =0; i<currentRunningTask.size(); i++) {
+			if (currentRunningTask.get(i) instanceof DownloadIndexesAsyncTask) {
+				return true;
+				
+			}
 		}
-		return currentRunningTask;
+		return false;
+	}
+	
+	public BasicProgressAsyncTask<?, ?, ?> getCurrentRunningTask() {
+		for(int i = 0; i< currentRunningTask.size(); ) {
+			if(currentRunningTask.get(i).getStatus() == Status.FINISHED) {
+				currentRunningTask.remove(i);
+			} else {
+				i++;
+			}
+		}
+		if(currentRunningTask.size() > 0) {
+			return currentRunningTask.get(0);
+		}
+		return null;
+	}
+
+	public double getAvailableSpace() {
+		File dir = app.getAppPath("").getParentFile();
+		double asz = -1;
+		if (dir.canRead()) {
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			asz = (((long) fs.getAvailableBlocks()) * fs.getBlockSize()) / (1 << 20);
+		}
+		return asz;
+	}
+
+	public int getDownloads() {
+		int i = 0;
+		Collection<List<DownloadEntry>> vs = getEntriesToDownload().values();
+		for (List<DownloadEntry> v : vs) {
+			for(DownloadEntry e : v) {
+				if(!currentDownloads.contains(e)) {
+					i++;
+				}
+			}
+		}
+		if(!currentDownloads.isEmpty()) {
+			i++;
+		}
+		return i;
 	}
 	
 	

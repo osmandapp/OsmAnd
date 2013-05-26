@@ -84,6 +84,7 @@ public class SrtmIndexItem extends IndexItem {
 				entry.urlToDownload = url +"file=" + fullName;
 				// url + "file=" + fileName;
 				entry.unzipFolder = false;
+				entry.zipStream = true;
 				entry.dateModified = System.currentTimeMillis();
 				entry.sizeMB = 10;
 				entry.parts = 1;

@@ -1401,9 +1401,17 @@ public class OsmandSettings {
 		return OSMAND_THEME.get() == OSMAND_LIGHT_THEME;
 	}
 	
-	public boolean isLightContent(){
+	public boolean isLightContentMenu(){
 		return OSMAND_THEME.get() != OSMAND_DARK_THEME  || Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB;
 	}
+	
+	public boolean isLightContent(){
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			return false;
+		}
+		return OSMAND_THEME.get() != OSMAND_DARK_THEME ;
+	}
+	
 	
 	
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS = 

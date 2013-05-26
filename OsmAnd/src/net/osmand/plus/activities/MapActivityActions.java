@@ -516,7 +516,7 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targets = getTargets();
 
 		View view = mapActivity.getLayoutInflater().inflate(R.layout.calculate_route, null);
-		boolean lc = mapActivity.getMyApplication().getSettings().isLightContent();
+		boolean lc = mapActivity.getMyApplication().getSettings().isLightContentMenu();
 		final CheckBox nonoptimal = (CheckBox) view.findViewById(R.id.OptimalCheckox);
 		final ToggleButton[] buttons = new ToggleButton[ApplicationMode.values().length];
 		buttons[ApplicationMode.CAR.ordinal()] = (ToggleButton) view.findViewById(R.id.CarButton);
@@ -982,7 +982,7 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter(app);
-		boolean light = app.getSettings().isLightContent();
+		boolean light = app.getSettings().isLightContentMenu();
 		
 		// 1. Where am I
 		optionsMenuHelper.registerItem(R.string.where_am_i, 

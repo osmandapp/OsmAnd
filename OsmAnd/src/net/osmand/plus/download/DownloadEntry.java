@@ -18,6 +18,7 @@ public class DownloadEntry {
 	public int parts;
 	public File existingBackupFile;
 	public boolean isAsset;
+	public String assetName;
 	public DownloadActivityType type;
 	
 	public List<String> srtmFilesToDownload;
@@ -30,6 +31,7 @@ public class DownloadEntry {
 	public DownloadEntry(String assetName, String fileName, long dateModified) {
 		this.dateModified = dateModified;
 		targetFile = new File(fileName);
+		this.assetName = assetName;
 		isAsset = true;
 	}
 

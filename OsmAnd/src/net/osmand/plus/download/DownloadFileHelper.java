@@ -40,6 +40,10 @@ public class DownloadFileHelper {
 		public void showWarning(String warning);
 	}
 	
+	public static boolean isInterruptedException(IOException e) {
+		return e != null && e.getMessage().equals("Interrupted");
+	}
+	
 	private InputStream getInputStreamToDownload(final URL url, final boolean forceWifi) throws IOException {
 		InputStream cis = new InputStream() {
 			byte[] buffer = new byte[BUFFER_SIZE];
@@ -110,27 +114,20 @@ public class DownloadFileHelper {
 			
 			@Override
 			public int read(byte[] buffer, int offset, int len) throws IOException {
-				int r = 0;
-				while(len > 0) {
-					if(bufLen == -1) {
-						return -1;
-					}	
-					int av = bufLen - bufRead;
-					if(len > av){
-						System.arraycopy(this.buffer, bufRead, buffer, offset, av);
-						len -= av;
-						offset += av;
-						bufRead += av;
-						r += av;
-						refillBuffer();
-					} else {
-						System.arraycopy(this.buffer, bufRead, buffer, offset, len);
-						bufRead += len;
-						r += len;
-						return r; 
-					}
+				if (bufLen == -1) {
+					return -1;
 				}
-				return r;
+				if (bufRead >= bufLen) {
+					refillBuffer();
+				}
+				if (bufLen == -1) {
+					return -1;
+				}
+				int av = bufLen - bufRead;
+				int min = Math.min(len, av);
+				System.arraycopy(this.buffer, bufRead, buffer, offset, min);
+				bufRead += min;
+				return min;
 			}
 			
 			@Override
@@ -159,17 +156,21 @@ public class DownloadFileHelper {
 						readAgain = false;
 						bufRead = 0;
 						if ((bufLen = is.read(buffer)) != -1) {
-							if (interruptDownloading) {
-								throw new IOException("Interrupted");
-							}
 							fileread += bufLen;
+							if (interruptDownloading) {
+								break;
+							}
 						}
 					} catch (IOException e) {
+						if(interruptDownloading) 
 						log.error("IOException", e); //$NON-NLS-1$
 						triesDownload--;
 						reconnect();
 						readAgain = true;
 					}
+				}
+				if (interruptDownloading) {
+					throw new IOException("Interrupted");
 				}
 			}
 			
@@ -210,7 +211,7 @@ public class DownloadFileHelper {
 				}
 			}
 			de.fileToDownload = de.targetFile;
-			if(de.targetFile.exists() && !de.unzipFolder) {
+			if(!de.unzipFolder) {
 				de.fileToDownload = new File(de.targetFile.getParentFile(), de.targetFile.getName() +".download");
 			}
 			unzipFile(de, progress, downloadInputStreams);
@@ -235,9 +236,14 @@ public class DownloadFileHelper {
 	}
 
 	private void unzipFile(DownloadEntry de, IProgress progress,  List<InputStream> is) throws IOException {
-		String taskName = ctx.getString(R.string.downloading_file_new) + " " + de.baseName;
 		CountingMultiInputStream fin = new CountingMultiInputStream(is);
 		int len = (int) fin.available();
+		int mb = (int) (len / (1024f*1024f));
+		if(mb == 0) {
+			mb = 1;
+		}
+		String taskName = ctx.getString(R.string.downloading_file_new) + " " + de.baseName /*+ " " + mb + " MB"*/;
+		
 		progress.startTask(taskName, len / 1024);
 		if (!de.zipStream) {
 			copyFile(de, progress, fin, len, fin, de.fileToDownload);

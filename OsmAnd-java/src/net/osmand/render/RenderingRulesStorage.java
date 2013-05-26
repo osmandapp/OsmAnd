@@ -43,7 +43,7 @@ public class RenderingRulesStorage {
 	public RenderingRuleStorageProperties PROPS = new RenderingRuleStorageProperties();
 
 	@SuppressWarnings("unchecked")
-	protected TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
+	public TIntObjectHashMap<RenderingRule>[] tagValueGlobalRules = new TIntObjectHashMap[LENGTH_RULES];
 	
 	protected Map<String, RenderingRule> renderingAttributes = new LinkedHashMap<String, RenderingRule>();
 	protected Map<String, String> renderingConstants= new LinkedHashMap<String, String>();

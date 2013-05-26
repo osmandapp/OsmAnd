@@ -419,7 +419,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (parkingLayer != null) {
 			if (getParkingPosition() != null) {
-				boolean l = app.getSettings().isLightContent();
+				boolean l = app.getSettings().isLightContentMenu();
 				helper.registerItem(R.string.osmand_parking_delete, l ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark, 
 						new OnContextMenuClick() {
 					@Override

@@ -12,10 +12,11 @@
         android:orientation="vertical"
         android:visibility="gone" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="5dp"
             android:gravity="center_vertical|left"
             android:orientation="horizontal" >
 
@@ -23,46 +24,52 @@
                 android:id="@+id/IndeterminateProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
                 android:indeterminate="true"
                 android:indeterminateOnly="true"
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/ProgressMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginLeft="3dp"
-                android:ellipsize="marquee"
-                android:gravity="left|center_vertical"
-                android:singleLine="true"
+                android:id="@+id/ProgressPercent"
+                android:layout_width="48dp"
+                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="right|center_vertical"
                 android:text=""
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/ProgressPercent"
+                android:id="@+id/ProgressMessage"
                 android:layout_width="fill_parent"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:gravity="right|center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="3dp"
+                android:layout_toLeftOf="@id/ProgressPercent"
+                android:layout_toRightOf="@id/IndeterminateProgressBar"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"
+                android:singleLine="true"
                 android:text=""
                 android:textSize="14sp" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <ProgressBar
                 android:id="@+id/DeterminateProgressBar"
                 style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/Cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
