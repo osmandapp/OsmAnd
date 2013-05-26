@@ -650,7 +650,7 @@
 	<string name="maps_could_not_be_downloaded">Denna karta kunde inte laddas ner</string>
 	<string name="continuous_rendering">Kontinuerlig rendering</string>
 	<string name="continuous_rendering_descr">Visa kontinuerlig rendering istället för bild-direkt</string>
-	<string name="rendering_exception">Ett fel uppstod vid rendering av valt område</string>
+	<string name="rendering_exception">Ett fel uppstod vid renderingen av valt område</string>
 	<string name="show_point_options">Använd platsen...</string>
 	<string name="renderer_load_sucess">Renderaren laddades utan problem</string>
 	<string name="renderer_load_exception">Ett undantagsfel inträffade: renderaren laddades inte</string>
