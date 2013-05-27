@@ -1214,4 +1214,6 @@
     <string name="use_kalman_filter_compass_descr">Brug Kalman-filter for at undgå kompasmisvisning</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
-    </resources>
+    <string name="wait_current_task_finished">Vent aktuelle opgave vil være færdig</string>
+    <string name="downloading_file_new">Henter</string>
+	</resources>
