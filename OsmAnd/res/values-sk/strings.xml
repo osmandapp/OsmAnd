@@ -1244,4 +1244,7 @@
     <string name="use_magnetic_sensor_descr">Použiť magnetický senzor namiesto orientačného na zistenie hodnôt kompasu</string>
     <string name="use_magnetic_sensor">Použiť magnetický senzor (kompas)</string>
     <string name="wait_current_task_finished">Prosím, čakajte, kým sa dokončí aktuálna úloha</string>
+    <string name="use_kalman_filter_compass_descr">Použiť Kalmanov filter na zabránenie odchýliek kompasu</string>
+    <string name="use_kalman_filter_compass">Upožiť Kalmanov filter</string>
+    <string name="access_mark_final_location_first">Režim zjednodušeného obládania: prosím, najskôr vyberte cieľ</string> 
     </resources>
