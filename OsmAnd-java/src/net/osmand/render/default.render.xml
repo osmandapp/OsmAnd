@@ -460,8 +460,6 @@
 			<filter minzoom="11" textSize="14" tag="place" value="island" textOrder="10"/>
 			<groupFilter nightMode="true" textColor="#D7D7D7"/>
 		</group>
-		<filter minzoom="10" textSize="14" textColor="#729972" textHaloRadius="1" textWrapWidth="20" tag="boundary" value="national_park" textOrder="10"/>
-		<!-- filter minzoom="10" textSize="14" textColor="#729972" textHaloRadius="1" textWrapWidth="20" tag="boundary" value="protected_area" textOrder="10"/ -->
 
 		<!-- Natural -->
 		<group>
@@ -535,6 +533,13 @@
 				<groupFilter nightMode="true" textColor="#ffffff"/>
 			</groupFilter>
 		</group>
+		<filter minzoom="12" textSize="12" textColor="#990d2a" textHaloRadius="1" textWrapWidth="20" tag="landuse" value="military" textOrder="10"/>
+
+		<!-- National Forest, Wilderness, National Park: (http://wiki.openstreetmap.org/wiki/US_Forest_Service_Data)
+		all have boundary=national_park: National forests with landuse=forest, Wilderness with leisure=nature_reserve, NatPark just boundary=national_park (protected_areas need not be rendered for this) -->
+		<filter minzoom="10" textSize="12" textColor="#729972" textHaloRadius="1" textWrapWidth="20" tag="landuse" value="forest" textOrder="10"/>
+		<filter minzoom="10" textSize="12" textColor="#729972" textHaloRadius="1" textWrapWidth="20" tag="leisure" value="nature_reserve" textOrder="10"/>
+		<filter minzoom="10" textSize="12" textColor="#729972" textHaloRadius="1" textWrapWidth="20" tag="boundary" value="national_park" textOrder="11"/>
 
 		<!-- Buildings -->
 		<filter minzoom="16" maxzoom="17" textSize="13" textColor="#444444" textWrapWidth="16" textMinDistance="40" tag="building" value="" textOrder="100"/>
@@ -641,6 +646,7 @@
 		</group>
 
 		<!-- Leisure + Sport -->
+		<filter minzoom="14" textSize="12" textColor="#0000ff" textWrapWidth="30" tag="leisure" value="marina"/>
 		<group>
 			<filter minzoom="16" tag="leisure" value="water_park"/>
 			<filter minzoom="16" tag="sport" value="horse_racing"/>
@@ -661,7 +667,6 @@
 			<filter minzoom="15" tag="leisure" value=""/>
 			<groupFilter textSize="12" textColor="#000033" textHaloRadius="1" textDy="7" textWrapWidth="16"/>
 		</group>
-		<filter minzoom="14" textSize="12" textColor="#0000ff" textWrapWidth="30" tag="leisure" value="marina"/>
 
 		<!-- Tourism -->
 		<group>
@@ -1585,7 +1590,7 @@
 
 		<filter noAdminboundaries="false" tag="boundary" value="national_park" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_1"/>
 			<filter noAdminboundaries="false" tag="boundary" value="national_park" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="4_1"/>
-		<!-- protected_areas at this point only for testing with Wilderness areas and National Forests. But tagging should be boundary:national_park, see http://wiki.openstreetmap.org/wiki/US_Forest_Service_Data
+		<!-- protected_areas should not be needed, see e.g. remark on National Forest/Park
 		<filter noAdminboundaries="false" tag="boundary" value="protected_area" minzoom="7" maxzoom="9" color="#a009dd09" strokeWidth="1.5" pathEffect="4_1"/>
 			<filter noAdminboundaries="false" tag="boundary" value="protected_area" minzoom="10" color="#a009dd09" strokeWidth="3" pathEffect="4_1"/>
 		-->
