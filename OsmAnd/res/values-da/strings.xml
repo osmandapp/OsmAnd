@@ -48,7 +48,7 @@
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
     <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype)</string>
-    <string name="srtm_plugin_name">Højdekurveudvidelse</string>
+    <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
     <string name="download_srtm_maps">Højdekurver</string>
@@ -788,7 +788,7 @@
 	<string name="voice_is_not_available_title">Ingen stemmevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>
-	<string name="daynight_mode_auto">Solop/solned</string>
+	<string name="daynight_mode_auto">Solopgang/-nedgang</string>
 	<string name="daynight_mode_sensor">Lysføler</string>
 	<string name="daynight_descr">Vælg regel for dag/nat skift</string>
 	<string name="daynight">Dag-/nattilstand</string>
