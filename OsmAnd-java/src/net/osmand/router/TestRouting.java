@@ -30,10 +30,10 @@ import com.ibm.icu.text.DateFormat;
 public class TestRouting {
 	
 	public static int MEMORY_TEST_LIMIT = 800;
-	public static boolean TEST_WO_HEURISTIC = true; 
-	public static boolean TEST_BOTH_DIRECTION = true;
+	public static boolean TEST_WO_HEURISTIC = false; 
+	public static boolean TEST_BOTH_DIRECTION = false;
 	public static NativeLibrary lib = null;
-	public static boolean oldRouting = true;
+	public static boolean oldRouting = false;
 	
 	
 	public static Iterator getIterator(Iterable it){
