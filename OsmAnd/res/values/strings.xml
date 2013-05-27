@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="wait_current_task_finished">Please wait current task will be finished</string>
+    <string name="wait_current_task_finished">Please wait until current task is finished</string>
     <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
     <string name="use_kalman_filter_compass">Use Kalman filter</string>
     <string name="access_mark_final_location_first">Accessibility mode : please select destination first</string> 
