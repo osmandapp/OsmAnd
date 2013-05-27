@@ -1243,4 +1243,5 @@
     <string name="install_paid">Úplná verzia</string>
     <string name="use_magnetic_sensor_descr">Použiť magnetický senzor namiesto orientačného na zistenie hodnôt kompasu</string>
     <string name="use_magnetic_sensor">Použiť magnetický senzor (kompas)</string>
+    <string name="wait_current_task_finished">Prosím, čakajte, kým sa dokončí aktuálna úloha</string>
     </resources>
