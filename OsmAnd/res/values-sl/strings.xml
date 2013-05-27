@@ -1177,4 +1177,12 @@
     <string name="favourites_list_activity">Izberite priljubljeno</string>
     <string name="local_openstreetmap_act_title">Spremembe OSM</string>
     <string name="default_buttons_other_actions">Druge aktivnosti</string>
+    <string name="use_magnetic_sensor">Uporabi magnetni senzor</string>
+    <string name="other_location">Ostalo</string>
+    <string name="files_limit">Preostalo še %1$d datotek</string>
+    <string name="available_downloads_left">Na voljo za prenos je še %1$d datotek</string>
+    <string name="install_paid">Polna različica</string>
+    <string name="cancel_navigation">Prekini navigacijo</string>
+    <string name="clear_destination">Izbriši cilj</string>
+    <string name="download_using_mobile_internet">Trenutno WiFi ni povezan. Ali želite nadaljevati prenos prek obstoječe internetne povezave?</string>
     </resources>
