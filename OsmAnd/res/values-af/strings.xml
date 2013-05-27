@@ -1162,4 +1162,6 @@
     <string name="install_paid">Vol weergawe</string>
     <string name="tip_recent_changes_1_3_t">"Verandering in 1.3:
 \n\t* Holo Tema (tema aanpassing) "</string>
+    <string name="wait_current_task_finished">Wag asseblief terwyl huidige taak afhandel</string>
+    <string name="use_kalman_filter_compass_descr">Gebruik Kalman filter om kompas afwykings te vermy</string>
     </resources>
