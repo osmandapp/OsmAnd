@@ -1429,5 +1429,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
     <string name="use_magnetic_sensor">Magnetsensor verwenden</string>
     <string name="local_indexes_cat_srtm">Konturlinien-Daten</string>
-    <string name="wait_current_task_finished">Bitte warten Sie... der gerade laufende Task wird beendet.</string>
-    </resources>
+    <string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
+    <string name="downloading_file_new">"Herunterladen "</string>
+	</resources>
