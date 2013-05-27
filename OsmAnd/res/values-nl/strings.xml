@@ -1223,4 +1223,6 @@
     <string name="use_kalman_filter_compass">Gebruik Kalman filter</string>
     <string name="access_mark_final_location_first">Toegankelijkheidsmodus : Selecteer eerst een bestemmingspunt</string> 
     <string name="local_indexes_cat_srtm">Hoogtelijnen</string>
+    <string name="downloading_file_new">"Bezig met downloaden "</string>
+	<string name="wait_current_task_finished">Wacht alsjeblieft tot de huige taak klaar is</string>
     </resources>
