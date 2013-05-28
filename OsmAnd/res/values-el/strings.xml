@@ -1230,4 +1230,7 @@
     <string name="use_kalman_filter_compass_descr">Χρήση φίλτρου Kalman για αποφυγή απόκλισης της πυξίδας</string>
     <string name="use_kalman_filter_compass">Χρήση φίλτρου Kalman</string>
     <string name="access_mark_final_location_first">Λειτουργία προσβασιμότητας: παρακαλώ επιλέξτε πρώτα προορισμό</string> 
-    </resources>
+    <string name="wait_current_task_finished">Παρακαλώ περιμένετε μέχρι να τελειώσει η τρέχουσα διεργασία</string>
+    <string name="local_indexes_cat_srtm">Δεδομένα ισοϋψών γραμμών</string>
+    <string name="downloading_file_new">"Λήψη "</string>
+	</resources>
