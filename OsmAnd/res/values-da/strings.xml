@@ -136,7 +136,7 @@
 	<string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret</string>
 	<string name="use_compass_navigation">Kompas</string>
 	<string name="avoid_motorway">Undgå motorveje</string>
-	<string name="auto_zoom_map_descr">Auto zoom kort efter din hastighed (mens kort er synkroniseret med aktuelle position)</string>
+	<string name="auto_zoom_map_descr">Auto-zoom kort efter hastighed (mens kort er synkroniseret med aktuelle position)</string>
 	<string name="auto_zoom_map">Automatisk kortzoom</string>
 	<string name="access_arrival_time">Ankomsttid</string>
     <string name="item_checked">Valgt</string>
@@ -240,7 +240,7 @@
 	<string name="osmand_parking_minutes">Minutter</string>
 	<string name="osmand_parking_position_description_add_time">Bilen blev parkeret kl.:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Ændringer i 0.8.1:\n * Mere præcise ruter (en smule langsommere)\n * Smart og hurtig Rutegenberegning\n * retning ved banerne\n * Information om hastighedsbegrænsninger, fartkameraer, og vejbump\n * Forbedret stemmestyring på motorveje\n * Parkeringsudvidelse (\\\"Hvor er min bil parkeret?\\\")\n * Aktivere/deaktivere logningsmodul "</string>
-	<string name="select_animate_speedup">Vælg hastighed for rute-animation</string>
+	<string name="select_animate_speedup">Vælg acceleration for ruteanimation</string>
     	<string name="global_app_allocated_memory_descr">Tildelt hukommelse %1$s MB (Android grænse %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Tildelt hukommelse</string>
 	<string name="native_app_allocated_memory_descr">Samlet indbygget hukommelse tildeles af app %1$s MB (Dalvik %2$s MB, andre %3$s MB). Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</string>
