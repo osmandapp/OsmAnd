@@ -564,7 +564,7 @@
 			<filter appMode="bicycle" showCycleRoutes="true" tag="rcn_network" value="rcn" color="#40ff00ff"/>
 			<filter appMode="bicycle" showCycleRoutes="true" tag="ncn_network" value="ncn" color="#40ff4000"/>
 			<groupFilter cap="BUTT">
-				<filter minzoom="13" maxzoom="13" strokeWidth="9"/>
+				<filter minzoom="12" maxzoom="13" strokeWidth="9"/>
 				<filter minzoom="14" maxzoom="14" strokeWidth="10"/>
 				<filter minzoom="15" maxzoom="15" strokeWidth="12"/>
 				<filter minzoom="16" maxzoom="16" strokeWidth="15"/>
