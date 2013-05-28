@@ -49,7 +49,7 @@
     <string name="map_widget_distancemeasurement">Mjerenje udaljenosti</string>
     <string name="monitoring_control_stop">zaustavi</string>
     <string name="map_widget_audionotes">Zvučni zapisi</string>
-    <string name="audionotes_plugin_description">Koristi zvučne/video zapise tijekom putovanja</string>
+    <string name="audionotes_plugin_description">Zabilježi zvučne/video zapise tijekom putovanja</string>
     <string name="download_select_map_types">Ostale karte</string>
     <string name="download_roads_only_item">Samo ceste</string>
     <string name="download_regular_maps">Regularne karte</string>
@@ -929,7 +929,7 @@
     <string name="default_buttons_other_actions">Ostale aktivnosti</string>
     <string name="other_location">Ostalo</string>
     <string name="use_magnetic_sensor_descr">Koristite magnetski senzor za određivanje vrijednosti kompasa umjesto orijentacijskog senzora</string>
-    <string name="use_magnetic_sensor">Koristite magnetski senzor</string>
+    <string name="use_magnetic_sensor">Koristi magnetski senzor</string>
     <string name="download_link_and_local_description">Kliknite ovdje za preuzimanje ili ažuriranje offline podataka.\nKliknite na bilo koju postojeću stavku da biste vidjeli više detalja, pritisnite i držite za deaktivirati ili obrisati. Trenutni podaci na uređaju (%1$s slobodno):</string>
 	<string name="index_settings_descr">Preuzmite karte i upravljajte offline podacima pohranjenim na uređaju</string>
 	</resources>
