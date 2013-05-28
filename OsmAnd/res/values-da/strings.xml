@@ -485,7 +485,7 @@
 	<string name="auto_follow_route_never">Aldrig</string>
 	<string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
 	<string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
-	<string name="auto_follow_location_enabled">Autocentrer aktuelle kortvisning.</string>
+	<string name="auto_follow_location_enabled">Autocentrer kort.</string>
 	<string name="pref_vector_rendering">Vektorrenderings specifikke indstillinger</string>
 	<string name="pref_overlay">Over-/underlejring</string>
 	<string name="pref_raster_map">Indstillinger for kortkilde</string>
@@ -679,8 +679,8 @@
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
-	<string name="choose_audio_stream">Stemmevejledning</string>
-	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille stemmevejledning (system afhængig)</string>
+	<string name="choose_audio_stream">Stemmeindstillinger</string>
+	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
 	<string name="voice_stream_notification">Meddelelselyd</string>
 	<string name="voice_stream_music">Medie-/musiklyd</string>
@@ -785,7 +785,7 @@
 	<string name="select_build_to_install">Vælg en af OsmAnd builds at installere</string>
 	<string name="contribution_activity">Installer versionen</string>
 	<string name="gps_status_app_not_found">GPS-Status applikation ikke installeret. Søg i Google Play?</string>
-	<string name="voice_is_not_available_title">Ingen stemmevejledning er valgt</string>
+	<string name="voice_is_not_available_title">Ingen talevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>
 	<string name="daynight_mode_auto">Solopgang/-nedgang</string>
@@ -801,7 +801,7 @@
     <string name="tip_navigation_t">\tDu skal vælge et destination før du kan starte navigation. Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
-	<string name="voice_is_not_available_msg">Stemmevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
+	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Filer hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
@@ -984,7 +984,7 @@
 	<string name="search_address_street">Gade</string>
 	<string name="search_address_city">By</string>
 	<string name="search_address_top_text">Vælg adresse</string>
-	<string name="voice_provider_descr">Vælg talevejledning til navigation</string>
+	<string name="voice_provider_descr">Vælg stemme til navigation</string>
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">"\tOsmAnd er et navigationsprogram med mange funktioner.
