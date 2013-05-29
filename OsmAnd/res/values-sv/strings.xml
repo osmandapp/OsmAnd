@@ -268,7 +268,7 @@
 <string name="test_voice_prompts">Test av röstmeddelanden</string>
 <string name="switch_to_raster_map_to_see">Det finns ingen offline vektorkarta för den här platsen. Du kan ladda ner en i Inställningar (Datahantering) eller byta till online-kartor.</string>
 <string name="tip_recent_changes_0_7_2_t">Förändringar i 0.7.2:↵\n→- Inbyggd rendering för alla enheter↵\n→- Offline POI-redigering↵\n→- Tillgänglighet↵\n→- Massor av buggfixar</string>
-<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även offline och online navigationsfunktion, inklusive turn-by-turn röstguidning. Några av de viktigaste funktionerna: - Komplett offline funktionalitet (lagra nedladdade vektor-eller kakel kartor i en valbar mapp) - Kompakta offline vektorkartor för hela världen finns - Nedladdning av land eller region kartor direkt från appen - Overlay av flera kartlager möjligt, som GPX eller navigation spår, sevärdheter, favoriter, linjer kontur, offentliga stopp transport, extra kartor med anpassningsbara transparens - Offline söka efter adresser och platser (POIs) - Offline dirigering för korta sträckor (experimentell) - Bil, cykel och fotgängare lägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratis version av OsmAnd: - Antal karta nedladdningar begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
+<string name="osmand_long_description_1000_chars">" OsmAnd (Open Street Maps Automated Navigation Directions) är ett öpen källkodsprogram med tillgång till ett brett utbud av global OpenStreetMap-data. All kartdata (vektor- eller rasterkartor) kan lagras i telefonens minneskort för offlineanvändning. OsmAnd erbjuder även navigering offline och online, inklusive röstguidning. Några av de viktigaste funktionerna: - Komplett offline-funktionalitet (lagra nedladdade vektorkartor eller kartbitar i valfri mapp) - Kompakta offline-vektorkartor för hela världen finns - Nedladdning av land- eller regionkartor direkt från appen - Överlägg av flera kartlager möjligt, som GPX- eller navigationsspår, sevärdheter, favoriter, höjddata, offentliga hållplatser, extra kartor med anpassningsbara transparens - Sökning offline efter adresser och platser (POIs) - Offline-dirigering för korta sträckor (experimentell) - Bil-, cykel- och fotgängalägen med: - Tillval automatisk dag/nattvisning växling - Tillval hastighetsberoende karta zoomning - Valfri karta inställningen enligt kompass eller rörelseriktningen - Frivillig körfältsvägledning, hastighetsgräns display, registreras och TTS röster Begränsningar av denna gratisversion av OsmAnd: - Antal nedladdningar av kartor är begränsad - Ingen tillgång till Wikipedia offline POIs OsmAnd aktivt utvecklas och vårt projekt och dess fortsatta framsteg bygger på ekonomiska bidrag för att finansiera utveckling och testdriving ny funktionalitet. Vänligen överväg att köpa OsmAnd+, finansiera specifika nya funktioner eller göra en allmän donation på osmand.net. "</string>
 <string name="native_rendering">Inbyggd rendering</string>
 <string name="default_buttons_support">Support</string>
 <string name="support_new_features">Ge stöd till nya funktioner</string>
@@ -1070,7 +1070,7 @@
 	<string name="Closest_Amenities">Närmaste bekvämligheter</string>
 	<string name="support_new_features_descr">Skänk lite pengar så att nya funktioner kan läggas till i appen</string>
 	<string name="download_hillshade_item">"Skuggad relief "</string>
-    <string name="download_hillshade_maps">Skuggat relief-överlägg</string>
+    <string name="download_hillshade_maps">Skuggad relief-överlägg</string>
     <string name="tip_recent_changes_1_1_2_t">"Ändringar i 1.1.2\n\t* Förbättring av ljud-/video-plugin (foton med EXIF-information)\n\t* Fixat till höjdkurvs-pluginen\n\t* Skuggad relief-paket för höjdkurvs-pluginen\n\t* Buggfixar (suboptimal ruttning) "</string>
     <string name="tip_recent_changes_1_2_t">"Ändringar i 1.2: "</string>
     <string name="av_use_external_camera_descr">Andvänd systemets app för foton</string>
@@ -1127,6 +1127,8 @@
     <string name="save_current_track_widget">Spara
 \n aktuellt GPX-spår</string>
 	<string name="tip_recent_changes_1_1_4_t">"Förändringar i 1.1.4: ↵\n→* Nytt gränssnitt↵\n→* Buggfixar  "</string>
-    <string name="local_indexes_cat_srtm">Konturlinjedata</string>
+    <string name="local_indexes_cat_srtm">Höjdkurvsdata</string>
     <string name="route_head">Riktning</string>
+	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
+    <string name="downloading_file_new">"Laddar ner "</string>
 	</resources>
