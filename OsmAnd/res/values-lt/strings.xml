@@ -1300,4 +1300,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="use_kalman_filter_compass">Naudoti Kalmano filtrą</string>
     <string name="access_mark_final_location_first">Prieigos režimas: pirmiausia pasirinkite kelionės tikslą</string> 
     <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
-    </resources>
+    <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
+    <string name="downloading_file_new">Parsiunčiama</string>
+	</resources>
