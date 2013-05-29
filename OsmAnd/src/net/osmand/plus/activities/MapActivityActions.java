@@ -63,6 +63,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.text.Html;
@@ -964,7 +965,14 @@ public class MapActivityActions implements DialogProvider {
 	public void openOptionsMenuAsList() {
 		final ContextMenuAdapter cm = createOptionsMenu();
 		final Builder bld = new AlertDialog.Builder(mapActivity);
-		ListAdapter listAdapter = cm.createListAdapter(mapActivity, R.layout.list_menu_item_native);
+		ListAdapter listAdapter ;
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			listAdapter =
+				cm.createListAdapter(mapActivity, R.layout.list_menu_item);
+		} else {
+			listAdapter =
+					cm.createListAdapter(mapActivity, R.layout.list_menu_item_native);
+		}
 		bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
