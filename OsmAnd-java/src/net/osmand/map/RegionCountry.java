@@ -11,6 +11,7 @@ import net.osmand.util.Algorithms;
 public class RegionCountry {
 	public String continentName;
 	public int left, right, top, bottom;
+	public boolean subregionsVerified = true;
 	public String name;
 	public RegionCountry parent;
 	
