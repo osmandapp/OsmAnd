@@ -961,7 +961,7 @@
 \n\tLlavors selecciona una via per compartir la teva ubicació.Les opcions son: Correu electrònic,SMS(text),o només copiar l\'ubicació en el porta retalls. "</string>
 	<string name="enable_plugin_monitoring_services">Habilita els connectors de monitorització (enregistrament, enregistrament en viu) per poder utilitzar els serveis de monitorització</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
-    <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar al Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar al Market?</string>
 	<string name="rendering_attr_roadColors_name">Esquema de color de carreteres</string>
     <string name="map_widget_show_destination_arrow">Mostra la direcció de destinació</string>
     <string name="non_optimal_route_calculation">Calcula possibles rutes no òptimes per a llargues distàncies</string>
@@ -1009,7 +1009,7 @@
     <string name="layer_recordings">Capa d\'enregistraments</string>
     <string name="recording_can_not_be_played">No es pot reproduir l\'enregistrament</string>
     <string name="av_control_stop">atura</string>
-    <string name="srtm_paid_version_msg">Considereu comprar el connector de les línies de nivell al Google Play per ajudar al desenvolupament futur.</string>
+    <string name="srtm_paid_version_msg">Considereu comprar el connector de les línies de nivell al Market per ajudar al desenvolupament futur.</string>
     <string name="srtm_paid_version_title">Connector de corbes de nivell</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
     <string name="av_use_external_recorder_descr">Usa l\'enregistrament de vídeo del sistema</string>

@@ -1095,7 +1095,7 @@
     <string name="map_widget_show_destination_arrow">Zobraziť smer k cieľu</string>
     <string name="rendering_attr_roadColors_description">Vyberte farebnú schému pre cesty:</string>
 	<string name="rendering_attr_roadColors_name">Farebná schéma ciest</string>
-    <string name="zxing_barcode_scanner_not_found">Aplikácia na čítanie čiarových kódov ZXing Barcode Scanner nie je nainštalovaná. Chcete ju nájsť v Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">Aplikácia na čítanie čiarových kódov ZXing Barcode Scanner nie je nainštalovaná. Chcete ju nájsť v Market?</string>
 	<string name="rendering_attr_showRoadMaps_description">Vyberte, kedy zobraziť mapy ciest:</string>
 	<string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>

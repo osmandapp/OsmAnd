@@ -1025,7 +1025,7 @@
     <string name="dropbox_plugin_name">Dropbox-ის დამატება</string>
     <string name="animate_routing_using_gpx">გნებავთ არსებული GPX ფაილის გამოყენება?</string>
     <string name="intermediate_points_change_order">წყობის შეცვლა</string>
-    <string name="srtm_paid_version_msg">პროგრამის განვითარების მხარდასაჭერად გთხოვთ შეიძინოთ Contour lines დამატება Google Play-დან.</string>
+    <string name="srtm_paid_version_msg">პროგრამის განვითარების მხარდასაჭერად გთხოვთ შეიძინოთ Contour lines დამატება Market-დან.</string>
     <string name="srtm_paid_version_title">დამატება Contour lines</string>
     <string name="av_def_action_video">ვიდეოს ჩაწერა</string>
     <string name="av_def_action_audio">ხმის ჩაწერა</string>

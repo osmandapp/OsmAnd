@@ -12,11 +12,28 @@ public class Version {
 	
 	
 	public static boolean isGpsStatusEnabled(ClientContext ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+gps_status");
+		return ctx.getString(R.string.versionFeatures).contains("+gps_status") & isBlackberry(ctx);
 	}
 	
 	public static boolean isBlackberry(ClientContext ctx) {
 		return ctx.getString(R.string.versionFeatures).contains("+blackberry");
+	}
+	
+	public static boolean isMarketEnabled(ClientContext ctx) {
+		return isGooglePlayEnabled(ctx) || isAmazonEnabled(ctx);
+	}
+	
+	public static String marketPrefix(ClientContext ctx) {
+		if (isAmazonEnabled(ctx)) {
+			return "amzn://apps/android?p=";
+		} else if (isGooglePlayEnabled(ctx)) {
+			return "market://search?q=pname:";
+		} 
+		return "http://osmand.net/apps?"; 
+	}
+	
+	public static boolean isAmazonEnabled(ClientContext ctx) {
+		return ctx.getString(R.string.versionFeatures).contains("+amazon");
 	}
 	
 	public static boolean isGooglePlayEnabled(ClientContext ctx) {

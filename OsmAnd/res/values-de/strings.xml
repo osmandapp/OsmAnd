@@ -1316,7 +1316,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="non_optimal_route_calculation">Berechne eventuell nicht optimale Routen über lange Distanzen</string>
     <string name="gps_not_available">Bitte GPS-Ortung in den Einstellungen aktivieren</string>
     <string name="enable_plugin_monitoring_services">"Standort-Aufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufnahme, Online-Tracking) zu verwenden"</string>
-    <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Google Play gesucht werden?</string>
+    <string name="zxing_barcode_scanner_not_found">Barcode Scanner Anwendung nicht installiert. Soll in Market gesucht werden?</string>
 	<string name="close_changeset">Änderungssatz schließen</string>
 <string name="incomplete_locale">unfertig</string>
 	<string name="monitoring_control_start">Start</string>

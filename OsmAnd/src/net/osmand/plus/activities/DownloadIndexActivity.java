@@ -206,11 +206,11 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 			String m = getString(R.string.free_version_message, MAXIMUM_AVAILABLE_FREE_DOWNLOADS + "", "") + "\n";
 			m += getString(R.string.available_downloads_left, MAXIMUM_AVAILABLE_FREE_DOWNLOADS - settings.NUMBER_OF_FREE_DOWNLOADS.get());
 			msg.setMessage(m);
-			if (Version.isGooglePlayEnabled(getMyApplication())) {
+			if (Version.isMarketEnabled(getMyApplication())) {
 				msg.setNeutralButton(R.string.install_paid, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:net.osmand.plus"));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) +  "net.osmand.plus"));
 						try {
 							startActivity(intent);
 						} catch (ActivityNotFoundException e) {

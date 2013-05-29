@@ -301,9 +301,9 @@
   <string name="installing_new_resources">Installeren nieuwe gegevens…</string>
   <string name="internet_connection_required_for_online_route">Er is een online routeberekening gekozen, maar er is geen verbinding met internet.</string>
   <string name="tts_language_not_supported_title">Taal niet ondersteund</string>
-  <string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wil je een andere stemgenerator zoeken op Google Play? Anders wordt de huidige stemgenerator gebruikt.</string>
+  <string name="tts_language_not_supported">De geselecteerde taal is niet ondersteund door de geïnstalleerde Android stemgenerator. Wil je een andere stemgenerator zoeken op Market? Anders wordt de huidige stemgenerator gebruikt.</string>
   <string name="tts_missing_language_data_title">Ontbrekende gegevens</string>
-  <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar Google Play gaan om deze te installeren?</string>
+  <string name="tts_missing_language_data">Geen gegevens voor de geselecteerde taal geïnstalleerd. Wil je naar Market gaan om deze te installeren?</string>
   <string name="gpx_option_reverse_route">Keer richting van GPX-route om</string>
   <string name="gpx_option_destination_point">Gebruik huidige bestemming</string>
   <string name="gpx_option_from_start_point">Volg het gehele spoor</string>
@@ -446,7 +446,7 @@
   <string name="loading_builds">OsmAnd versies worden geladen…</string>
   <string name="select_build_to_install">Selecteer één van de OsmAnd versies om te installeren</string>
   <string name="contribution_activity">Speciale actie voor contributie-versies</string>
-  <string name="gps_status_app_not_found">GPS Status is niet geïnstalleerd. Zoeken op Google Play?</string>
+  <string name="gps_status_app_not_found">GPS Status is niet geïnstalleerd. Zoeken op Market?</string>
   <string name="voice_is_not_available_msg">Stem-begeleiding is niet aanwezig. Ga naar instellingen, kies een pakket stem-gegevens, en download deze.</string>
   <string name="voice_is_not_available_title">Geen stem-begeleiding geselecteerd</string>
   <string name="daynight_mode_day">Dag</string>
@@ -1057,7 +1057,7 @@
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Selecteer kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Market?</string>
 	<string name="close_changeset">Sluit changeset</string>
 	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (langzamer dan machinecode).</string>
     <string name="safe_mode">Veilige modus</string>
@@ -1143,7 +1143,7 @@
     <string name="av_settings">"Audio/video instellingen "</string>
     <string name="recording_error">"Fout opgetreden bij opnemen "</string>
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
-    <string name="srtm_paid_version_msg">Overweeg alsjeblieft om de Hoogtelijnen plugin (\"Contour lines\") te kopen bij Google Play om de verdere ontwikkeling te ondersteunen.</string>
+    <string name="srtm_paid_version_msg">Overweeg alsjeblieft om de Hoogtelijnen plugin (\"Contour lines\") te kopen bij Market om de verdere ontwikkeling te ondersteunen.</string>
     <string name="srtm_paid_version_title">Hoogtelijnen / contourlijnen plugin</string>
     <string name="animate_routing_using_gpx">Wil je een bestaand GPX-bestand gebruiken?</string>
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>

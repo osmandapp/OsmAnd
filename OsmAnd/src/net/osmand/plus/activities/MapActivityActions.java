@@ -437,13 +437,13 @@ public class MapActivityActions implements DialogProvider {
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isGooglePlayEnabled(mapActivity.getMyApplication())) {
+			if (Version.isMarketEnabled(mapActivity.getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(getString(R.string.zxing_barcode_scanner_not_found));
 				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:"
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(mapActivity.getMyApplication()) 
 								+ ZXING_BARCODE_SCANNER_COMPONENT));
 						try {
 							mapActivity.startActivity(intent);
@@ -1112,7 +1112,7 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		//////////// Others
-		if (Version.isGpsStatusEnabled(app) && !Version.isBlackberry(app)) {
+		if (Version.isGpsStatusEnabled(app)) {
 			optionsMenuHelper.registerItem(R.string.show_gps_status, 
 					light ? R.drawable.a_2_action_about_light : R.drawable.a_2_action_about_dark, 
 					new OnContextMenuClick() {
@@ -1219,13 +1219,13 @@ public class MapActivityActions implements DialogProvider {
 		if (resolved != null) {
 			mapActivity.startActivity(intent);
 		} else {
-			if (Version.isGooglePlayEnabled(mapActivity.getMyApplication())) {
+			if (Version.isMarketEnabled(getMyApplication())) {
 				AlertDialog.Builder builder = new AccessibleAlertBuilder(mapActivity);
 				builder.setMessage(getString(R.string.gps_status_app_not_found));
 				builder.setPositiveButton(getString(R.string.default_buttons_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + GPS_STATUS_COMPONENT));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + GPS_STATUS_COMPONENT));
 						try {
 							mapActivity.startActivity(intent);
 						} catch (ActivityNotFoundException e) {

@@ -1094,7 +1094,7 @@
     <string name="gps_not_available">Prosím zapněte GPS přijímač v nastavení</string>
     <string name="rendering_attr_roadColors_description">Vyberte barevné schéma:</string>
 	<string name="rendering_attr_roadColors_name">Barevné schéma</string>
-    <string name="zxing_barcode_scanner_not_found">Aplikace pro čtení čárových kódů ZXing není nainstalována. Chcete ji vyhledat v Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">Aplikace pro čtení čárových kódů ZXing není nainstalována. Chcete ji vyhledat v Market?</string>
 	<string name="close_changeset">Zavřít změny</string>
 	<string name="background_service_is_enabled_question">Služba na pozadí stále běží. Chcete ji zastavit?</string>
     <string name="tip_recent_changes_1_0_0_t">"Změny ve verzi 1.0 :
@@ -1174,7 +1174,7 @@
     <string name="dropbox_plugin_name">Modul Dropbox</string>
     <string name="animate_routing_using_gpx">Chcete použít stávající soubor GPX?</string>
     <string name="intermediate_points_change_order">Změnit pořadí</string>
-    <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu Vrstevnice v Google Play pro podporu dalšího vývoje.</string>
+    <string name="srtm_paid_version_msg">Prosím zvažte zakoupení modulu Vrstevnice v Market pro podporu dalšího vývoje.</string>
     <string name="srtm_paid_version_title">Modul Vrstevnice</string>
     <string name="av_control_stop">zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>

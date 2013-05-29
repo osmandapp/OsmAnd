@@ -965,7 +965,7 @@
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
     <string name="animate_routing_using_gpx">Використовувати існуючий файл GPX?</string>
     <string name="intermediate_points_change_order">Змінити порядок</string>
-    <string name="srtm_paid_version_msg">Розгляньте будь-ласка можливість купівлі втулку \"Лінії висот\" на Google Play, щоби підтримати подальшу розробку.</string>
+    <string name="srtm_paid_version_msg">Розгляньте будь-ласка можливість купівлі втулку \"Лінії висот\" на Market, щоби підтримати подальшу розробку.</string>
     <string name="srtm_paid_version_title">Лінії висот</string>
     <string name="av_def_action_video">Запис відео</string>
     <string name="av_def_action_audio">Запис аудіо</string>
@@ -1046,7 +1046,7 @@
     <string name="monitoring_control_start">старт</string>
     <string name="background_service_is_enabled_question">Фоновий режим запущений. Ви хочете його відключити?</string>
     <string name="close_changeset">Закрити набір змін</string>
-	<string name="zxing_barcode_scanner_not_found">Програму \'Сканер штрих-кодів\' не знайдено. Шукати в Google Play?</string>
+	<string name="zxing_barcode_scanner_not_found">Програму \'Сканер штрих-кодів\' не знайдено. Шукати в Market?</string>
 	<string name="rendering_attr_roadColors_description">Виберіть кольорову схему доріг:</string>
 	<string name="rendering_attr_roadColors_name">Кольорова схема доріг</string>
     <string name="map_widget_show_destination_arrow">Показувати напрямок до пункту прибуття</string>

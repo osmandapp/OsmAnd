@@ -248,7 +248,7 @@
   <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
   <string name="internet_connection_required_for_online_route">Vous vous apprêtez à utiliser le calcul d\'itinéraire en ligne mais vous n\'avez pas de connexion internet.</string>
   <string name="tts_language_not_supported_title">Langue non disponible</string>
-  <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Google Play et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
+  <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous allez sur le Market et chercher d\'autres moteurs de synthèse vocale ? Sinon la langue par défaut sera utilisée.</string>
   <string name="tts_missing_language_data_title">Données manquantes</string>
   <string name="tts_missing_language_data">Les données pour la langue sélectionnée ne sont pas installées. Voulez-vous les obtenir sur le Market ?</string>
   <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
@@ -398,7 +398,7 @@
   <string name="loading_builds">Chargement des versions disponibles…</string>
   <string name="select_build_to_install">Sélectionnez la version d\'OsmAnd à installer</string>
   <string name="contribution_activity">Fonction spéciale pour la version des contributeurs</string>
-  <string name="gps_status_app_not_found">L\'application \'GPS Status\' n\'est pas installée. La chercher dans Google Play ?</string>
+  <string name="gps_status_app_not_found">L\'application \'GPS Status\' n\'est pas installée. La chercher dans Market ?</string>
   <string name="voice_is_not_available_msg">Guidage vocal indisponible. Veuillez aller dans les paramètres et choisir les voix à télécharger.</string>
   <string name="voice_is_not_available_title">Aucune donnée vocale n\'est spécifiée</string>
   <string name="daynight_mode_day">Jour</string>
@@ -1095,7 +1095,7 @@
     <string name="non_optimal_route_calculation">Calculer un itinéraire éventuellement non optimal pour les longs trajets</string>
     <string name="rendering_attr_roadColors_description">Sélectionner un thème de couleurs pour les routes :</string>
 	<string name="rendering_attr_roadColors_name">Thème de couleurs pour les routes</string>
-    <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Google Play ?</string>
+    <string name="zxing_barcode_scanner_not_found">L\'appplication ZXing Barcode Scanner n\'est pas installée. La chercher dans Market ?</string>
 	<string name="close_changeset">Clôturer les modifications</string>
 	<string name="background_service_is_enabled_question">Le service OsmAnd tourne toujours en tâche de fond. Voulez-vous l\'arrêter ?</string>
     <string name="tip_recent_changes_1_0_0_t">"Changements en 1.0 :\n\t* Amélioration de la navigation, plus rapide et plus précise (jusqu\'à 250 km)\n\t* Cartographie des routes\n\t* La carte ne perd plus la position courante après les interruptions\n\t* Active le service d\'arrière plan pendant la navigation "</string>
@@ -1179,7 +1179,7 @@
 \n\t* Option \'Touring view\' avec plus de détails\n\t* Nouveaux styles de routes, plus de contraste\n\t* Option pour la randonnée (classification SAC)
 \n\t* Correction pour le référentiel EGM96 lors de la lecture de l\'altitude avec le GPS "</string>
     <string name="av_control_start">Enreg.</string>
-    <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Google Play pour soutenir le développement futur.</string>
+    <string name="srtm_paid_version_msg">Veuillez acheter le greffon \"Courbes de niveau\" sur Market pour soutenir le développement futur.</string>
     <string name="srtm_paid_version_title">Greffon \"Courbes de niveau\"</string>
     <string name="animate_routing_using_gpx">Voulez-vous utiliser le fichier GPX existant ?</string>
     <string name="intermediate_points_change_order">Changer l\'ordre</string>

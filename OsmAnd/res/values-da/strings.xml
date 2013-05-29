@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-<string name="srtm_paid_version_msg">Du bør overveje at købe Højdekurve udvidelsen på Google Play for at støtte den videre udvikling.</string>
+<string name="srtm_paid_version_msg">Du bør overveje at købe Højdekurve udvidelsen på Market for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -87,7 +87,7 @@
 \n\t* Kort mister ikke positionlås efter afbrydelser
 \n\t* Aktiver tjeneste i baggrunden under navigation "</string>
     <string name="close_changeset">Luk ændringspost</string>
-	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Google Play?</string>
+	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Market?</string>
 	<string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
@@ -674,9 +674,9 @@
 	<string name="installing_new_resources">Udpakker nye data…</string>
 	<string name="internet_connection_required_for_online_route">En online navigationstjeneste er valgt, men der er ingen tilgængelig internet forbindelse.</string>
 	<string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
-	<string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-stemme) motor. Vil du søge i Google Play efter en anden motor? Ellers vil standard TTS-sprog blive brugt.</string>
+	<string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-stemme) motor. Vil du søge i Market efter en anden motor? Ellers vil standard TTS-sprog blive brugt.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
-	<string name="tts_missing_language_data">Der er ikke installeret data for det valgte sprog. Vil du gå til Google Play for at installere?</string>
+	<string name="tts_missing_language_data">Der er ikke installeret data for det valgte sprog. Vil du gå til Market for at installere?</string>
 	<string name="gpx_option_reverse_route">Omvendt GPX-retning</string>
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
@@ -786,7 +786,7 @@
 	<string name="loading_builds">Indlæser OsmAnd versioner…</string>
 	<string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
 	<string name="contribution_activity">Installer versionen</string>
-	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Google Play?</string>
+	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Market?</string>
 	<string name="voice_is_not_available_title">Ingen talevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>

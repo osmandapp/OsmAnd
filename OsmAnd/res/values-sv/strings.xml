@@ -482,9 +482,9 @@
 <string name="installing_new_resources">Packar upp nya data…</string>
 <string name="internet_connection_required_for_online_route">En online-navigeringstjänst är vald men ingen internet-anslutning är tillgänglig.</string>
 <string name="tts_language_not_supported_title">Språket stöds inte</string>
-<string name="tts_language_not_supported">Det valda språket stöds inte av den installerade Android TTS (text-till-tal)-motorn. Vill du söka efter en annan TTS-motor på Google Play? Annars kommer det förinställda TTS-språket att användas.</string>
+<string name="tts_language_not_supported">Det valda språket stöds inte av den installerade Android TTS (text-till-tal)-motorn. Vill du söka efter en annan TTS-motor på Market? Annars kommer det förinställda TTS-språket att användas.</string>
 <string name="tts_missing_language_data_title">Data saknas</string>
-<string name="tts_missing_language_data">Inga data för det valda språket är installerade. Vill du gå till Google Play för att installera?</string>
+<string name="tts_missing_language_data">Inga data för det valda språket är installerade. Vill du gå till Market för att installera?</string>
 <string name="gpx_option_reverse_route">Omvänd GPX-riktning</string>
 <string name="gpx_option_destination_point">Använd aktuell destination</string>
 <string name="gpx_option_from_start_point">Passera längs hela spåret</string>
@@ -624,7 +624,7 @@
 	<string name="loading_builds">Laddar OsmAnd-byggen…</string>
 	<string name="select_build_to_install">Välj ett OsmAnd-bygge att installera</string>
 	<string name="contribution_activity">Särskild aktivitet för bidragsversionen</string>
-	<string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Söka på Google Play?</string>
+	<string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Söka på Market?</string>
 	<string name="voice_is_not_available_msg">Röstvägledning är inte tillgänglig. Gå till inställningar, välj önskat röstdatapaket och hämta det.</string>
 	<string name="voice_is_not_available_title">Ingen röstvägledning vald</string>
 	<string name="daynight_mode_day">Dag</string>
@@ -842,7 +842,7 @@
 	<string name="close">Stäng</string>
 	<string name="loading_data">Laddar data…</string>
 	<string name="reading_indexes">Läser lokala data…</string>
-	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Söka på Google Play?</string>
+	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Söka på Market?</string>
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
@@ -957,7 +957,7 @@
     <string name="precise_routing_mode">Exakt ruttning (alfa)</string>
     <string name="av_def_action_picture">Ta ett foto</string>
     <string name="dropbox_plugin_description">Dropbox-pluginen låter dig synkronisera spår och ljud-/videoanteckningar med ditt Dropbox-konto.</string>
-    <string name="srtm_paid_version_msg">Köp gärna pluginen Höjdkurvor på Google Play för att stödja fortsatt utveckling.</string>
+    <string name="srtm_paid_version_msg">Köp gärna pluginen Höjdkurvor på Market för att stödja fortsatt utveckling.</string>
     <string name="av_def_action_audio">Spela in ljud</string>
     <string name="av_widget_action_descr">Välj standardåtgärd för widget</string>
     <string name="av_widget_action">Standardåtgärd för widget</string>

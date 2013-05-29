@@ -1038,7 +1038,7 @@
     <string name="recording_context_menu_precord">Tire uma foto</string>
     <string name="dropbox_plugin_name">Plugin Dropbox</string>
     <string name="intermediate_points_change_order">Alterar ordem</string>
-    <string name="srtm_paid_version_msg">Por favor, considere comprar o plugin Curvas de Nível (Contour Lines) na loja do Google Play para apoiar o desenvolvimento.</string>
+    <string name="srtm_paid_version_msg">Por favor, considere comprar o plugin Curvas de Nível (Contour Lines) na loja do Market para apoiar o desenvolvimento.</string>
     <string name="srtm_paid_version_title">Plugin curvas de nível</string>
     <string name="av_def_action_choose">Selecionar na altura</string>
     <string name="av_video_format_descr">Selecione o formato de saída de vídeo</string>
@@ -1082,7 +1082,7 @@
     <string name="osmodroid_plugin_name">Plugin OsMoDroid</string>
 	<string name="map_widget_max_speed">Limite de Velocidade</string>
     <string name="no_buildings_found">Nenhum edifício encontrado.</string>
-    <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">Aplicação ZXing Barcode Scanner não está instalada. Procurar no Market?</string>
 	<string name="support_new_features_descr">Faça uma doação para ver novas funcionalidades implementadas nesta aplicação</string>
 	<string name="tip_rotation_switching_t_v2">"\tVocê pode definir se, e como, o mapa será rotacionado clicando repetidamente no ícone da bússola na tela do mapa.\n\tAs opções são:\n\t\'Não girar\' - Mapa ficará fixo sempre com o norte para cima\n\t\'Na direção do movimento\' - Mapa será continuamente alinhado com a sua direção\n\t\'Na direção da bússola\' - Mapa será continuamente alinhado com a leitura da bússola do dispositivo "</string>
 	<string name="tip_day_night_mode_t_v2">"\tA aparência do mapa pode mudar em alguns mapas vetoriais entre os modos Dia (mais claro) e Noite (mais escuro).\n\tCores noturnas são mais seguras para dirigir à noite.\n\tVocê pode definir uma política para a mudança entre os modos Dia/Noite em \'Menu\' -&gt; \'Diversos\' -&gt; \'Modo Dia/Noite\'.\n\n\tAs opções são:\n\t\'Nascer/Pôr-do-Sol\' - modo automático, controlado pela posição do sol (padrão)\n\t\'Dia\' - sempre usar o modo diurno\n\t\'Noite\' - sempre usar o modo noturno\n\t\'Sensor de luz\' - aparência do mapa é controlada por sensor de luz do dispositivo (se equipado) "</string>	

@@ -227,9 +227,9 @@
   <string name="installing_new_resources">Scompattazione nuovi dati…</string>
   <string name="internet_connection_required_for_online_route">E\' selezionato un servizio di navigazione online ma la connessione a internet non è disponibile.</string>
   <string name="tts_language_not_supported_title">Lingua non supportata</string>
-  <string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere in Google Play un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS preimpostata.</string>
+  <string name="tts_language_not_supported">La lingua selezionata non è supportata nel motore TTS (text-to-speech) Android installato. Vuoi vedere in Market un altro motore TTS? Altrimenti verrà utilizzata la lingua TTS preimpostata.</string>
   <string name="tts_missing_language_data_title">Dati mancanti</string>
-  <string name="tts_missing_language_data">Nessun dato per la lingua selezionata è stato installato. Vuoi andare su Google Play per installarlo?</string>
+  <string name="tts_missing_language_data">Nessun dato per la lingua selezionata è stato installato. Vuoi andare su Market per installarlo?</string>
   <string name="gpx_option_reverse_route">Inverti direzione GPX</string>
   <string name="gpx_option_destination_point">Usa il punto di destinazione attuale</string>
   <string name="gpx_option_from_start_point">Percorri tutta la traccia</string>
@@ -370,7 +370,7 @@
   <string name="loading_builds">Caricamento delle versioni di OsmAnd…</string>
   <string name="select_build_to_install">Seleziona una versione OsmAnd da installare</string>
   <string name="contribution_activity">Attività speciale per la versione a pagamento</string>
-  <string name="gps_status_app_not_found">Applicazione stato GPS non installata. Cercarla in Google Play?</string>
+  <string name="gps_status_app_not_found">Applicazione stato GPS non installata. Cercarla in Market?</string>
   <string name="voice_is_not_available_msg">Voce guida non disponibile. Vai nelle impostazioni, scegli il pacchetto voce preferito e scaricarlo.</string>
   <string name="voice_is_not_available_title">Nessuna voce guida selezionata</string>
   <string name="daynight_mode_day">Giorno</string>
@@ -1110,7 +1110,7 @@
     <string name="enable_plugin_monitoring_services">Abilita il plugin di monitoraggio per utilizzare i servizi di registrazione della posizione (tracking, tracking in tempo reale)</string>
     <string name="rendering_attr_roadColors_description">Seleziona una combinazione di colori per le strade:</string>
 	<string name="rendering_attr_roadColors_name">Schema di colorazioni per le strade</string>
-    <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla in Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">L\'applicazione ZXing Barcode Scanner non è installata. Cercarla in Market?</string>
 	<string name="close_changeset">Chiudi le modifiche</string>
 	<string name="safe_mode_description">Avvia l\'applicazione in modalità sicura (usando il più lento Android invece del codice nativo).</string>
     <string name="safe_mode">Modalità sicura</string>
@@ -1187,7 +1187,7 @@
     <string name="av_control_stop">ferma</string>
     <string name="av_control_start">registra</string>
     <string name="map_widget_av_notes">Note audio</string>
-    <string name="srtm_paid_version_msg">Valuta l\'acquisto su Google Play del plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
+    <string name="srtm_paid_version_msg">Valuta l\'acquisto su Market del plugin per le linee di elevazione per sostenere il futuro sviluppo.</string>
     <string name="srtm_paid_version_title">Plugin linee di livello</string>
     <string name="animate_routing_using_gpx">Utilizzare un file GPX esistente?</string>
     <string name="intermediate_points_change_order">Modifica l\'ordine</string>

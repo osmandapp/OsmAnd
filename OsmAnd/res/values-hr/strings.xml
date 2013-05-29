@@ -82,7 +82,7 @@
     <string name="safe_mode">Siguran način rada</string>
     <string name="native_library_not_running">Aplikacija je pokrenuta sigurnom načinu rada (isključite ga u postavkama).</string>
     <string name="background_service_is_enabled_question">OsmAnd je pokrenut, ali je u stanju mirovanja. Želite li ga isključiti?</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikacija nije instalirana. Potraži na Google Play?</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner aplikacija nije instalirana. Potraži na Market?</string>
 	<string name="rendering_attr_roadColors_description">Odaberite shemu boja za ceste:</string>
 	<string name="rendering_attr_roadColors_name">Sheme boja za ceste</string>
     <string name="map_widget_show_destination_arrow">Prikaži smjer odredišta</string>
@@ -499,7 +499,7 @@
 	<string name="daynight_mode_night">Noć</string>
 	<string name="daynight_mode_auto">Izlazak/zalazak sunca</string>
 	<string name="items_were_selected">{0} stavka(e) je izabrana(e)</string>
-	<string name="gps_status_app_not_found">GPS Status aplikacija nije instalirana. Potraži na Google Play?</string>
+	<string name="gps_status_app_not_found">GPS Status aplikacija nije instalirana. Potraži na Market?</string>
 	<string name="voice_is_not_available_msg">Glasovno navođenje nije dostupno. Molimo otiđite na postavke i odaberite željeni paket glasovnih podataka, ili ga preuzmite sa interneta.</string>
 	<string name="voice_is_not_available_title">Glasovno navođenje nije odabrano</string>
 	<string name="downloading_build">Preuzimam nadogradnju...</string>
@@ -593,7 +593,7 @@
 	<string name="precise_routing_mode">Precizni način navođenja (alfa)</string>
     <string name="av_def_action_choose">Odaberite na zahtjev</string>
     <string name="max_speed_none">bez</string>
-    <string name="srtm_paid_version_msg">Molimo vas da razmislite o kupnji dodataka za prikaz Slojnica u Google Play trgovini kako biste podržati daljnji razvoj.</string>
+    <string name="srtm_paid_version_msg">Molimo vas da razmislite o kupnji dodataka za prikaz Slojnica u Market trgovini kako biste podržati daljnji razvoj.</string>
     <string name="srtm_paid_version_title">Dodatak Slojnice</string>
     <string name="recording_playing">Trenutno se reproducira zvuk od određenog snimanja.\n%1$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Promjene u 1.1.0:
@@ -745,13 +745,13 @@
 	<string name="map_underlay_descr">Odaberite temeljnu kartu</string>
 	<string name="choose_audio_stream">Izlaz za glasovno navođenje</string>
 	<string name="gpx_option_from_start_point">Dovrši cijelu stazu</string>
-	<string name="tts_missing_language_data">Nema instaliranih podataka za odabrani jezik. Želite li instalirati iz trgovine Google Play ?</string>
+	<string name="tts_missing_language_data">Nema instaliranih podataka za odabrani jezik. Želite li instalirati iz trgovine Market ?</string>
 	<string name="choose_audio_stream_descr">Odaberite kanal za reprodukciju glasovnih uputa</string>
 	<string name="voice_stream_voice_call">Zvuk glasovnog poziva</string>
 	<string name="voice_stream_notification">Zvuk obavijesti</string>
 	<string name="voice_stream_music">Zvuk medija/glazbe</string>
 	<string name="warning_tile_layer_not_downloadable">Program ne može preuzeti sloj karte %1$s, pokušajte ga ponovno instalirati.</string>
-	<string name="tts_language_not_supported">Odabrani jezik nije podržan od strane instaliranog Android TTS (text-to-speech) engina. Želite li tražiti drugi TTS engin u Google Play trgovini? Inače će se koristiti unaprijed odabran TTS jezik.</string>
+	<string name="tts_language_not_supported">Odabrani jezik nije podržan od strane instaliranog Android TTS (text-to-speech) engina. Želite li tražiti drugi TTS engin u Market trgovini? Inače će se koristiti unaprijed odabran TTS jezik.</string>
 	<string name="internet_connection_required_for_online_route">Online navigacija je odabrana, ali internet veza nije dostupna.</string>
 	<string name="tip_recent_changes">Nedavne promjene</string>
 	<string name="map_text_size_descr">Odaberite veličinu teksta za imena na karti</string>

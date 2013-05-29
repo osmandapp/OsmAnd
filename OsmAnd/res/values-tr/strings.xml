@@ -118,7 +118,7 @@
     <string name="dropbox_plugin_name">Dropbox eklentisi</string>
     <string name="animate_routing_using_gpx">Varolan bir gpx dosyasını kullanmak istiyor musunuz?</string>
     <string name="intermediate_points_change_order">Sırayı değiştir</string>
-    <string name="srtm_paid_version_msg">Kontur çizgileri eklentisi daha geliştirme aşamasında, desteklemek için lütfen Google Play mağazasından satın alın.</string>
+    <string name="srtm_paid_version_msg">Kontur çizgileri eklentisi daha geliştirme aşamasında, desteklemek için lütfen Market mağazasından satın alın.</string>
     <string name="srtm_paid_version_title">Kontur çizgileri eklentisi</string>
     <string name="av_def_action_video">Video kaydet</string>
     <string name="av_def_action_audio">Ses kaydet</string>
