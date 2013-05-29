@@ -962,7 +962,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 	
 	
-	public void openOptionsMenuAsList() {
+	public AlertDialog openOptionsMenuAsList() {
 		final ContextMenuAdapter cm = createOptionsMenu();
 		final Builder bld = new AlertDialog.Builder(mapActivity);
 		ListAdapter listAdapter ;
@@ -982,7 +982,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}
 		});
-		bld.show();
+		return bld.show();
 
 	}
 

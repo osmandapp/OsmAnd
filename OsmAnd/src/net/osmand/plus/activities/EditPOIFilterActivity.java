@@ -252,7 +252,12 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 					filter.selectSubTypesToAccept(amenity, accepted);
 				}
 				helper.editPoiFilter(filter);
-				((AmenityAdapter) EditPOIFilterActivity.this.getListAdapter()).notifyDataSetInvalidated();
+				ListView lv = EditPOIFilterActivity.this.getListView();
+				int x = lv.getScrollX();
+				int y = lv.getScrollY();
+				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
+				la.notifyDataSetInvalidated();
+				lv.scrollTo(x, y);
 			}
 		});
 	
@@ -261,7 +266,12 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				filter.selectSubTypesToAccept(amenity, null);
 				helper.editPoiFilter(filter);
-				((AmenityAdapter) EditPOIFilterActivity.this.getListAdapter()).notifyDataSetInvalidated();
+				ListView lv = EditPOIFilterActivity.this.getListView();
+				int x = lv.getScrollX();
+				int y = lv.getScrollY();
+				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
+				la.notifyDataSetInvalidated();
+				lv.scrollTo(x, y);
 			}
 		});
 
