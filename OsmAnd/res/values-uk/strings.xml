@@ -1160,4 +1160,9 @@
     <string name="osmand_monitoring_plugin_name">Служба логування і сплячий режим</string>
     <string name="accessibility_options">Налаштування особливих можливостей</string>
     <string name="local_openstreetmap_act_title">Модифікації OSM</string>
-    </resources>
+    <string name="wait_current_task_finished">Будь-ласка, зачекайте, поки виконається поточна задача</string>
+    <string name="use_magnetic_sensor">Використовувати сенсор магнітного поля</string>
+    <string name="monitoring_settings_descr">Налаштування запису треків і вмикання сплячого режиму</string>
+    <string name="osmand_monitoring_plugin_description">Активація запису трека і навігації в сплячому режимі (екран вимкнений) з допомогою періодичного \"пробудження\" GPS. Налаштування запису треку в локальні файли або в Інтернет з допомогою веб-служби.</string>
+    <string name="downloading_file_new">"Завантаження "</string>
+	</resources>
