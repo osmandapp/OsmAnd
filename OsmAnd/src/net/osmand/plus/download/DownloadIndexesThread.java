@@ -465,7 +465,7 @@ public class DownloadIndexesThread {
 						synchronized (cachedSRTMFiles) {
 							List<RegionCountry> countries = RegionRegistry.getRegionRegistry().getCountries();
 							for (RegionCountry rc : countries) {
-								if (rc.tiles.size() > 35 && rc.getSubRegions().size() > 0) {
+								if (rc.getTileSize() > 35 && rc.getSubRegions().size() > 0) {
 									for (RegionCountry ch : rc.getSubRegions()) {
 										cachedSRTMFiles.add(new SrtmIndexItem(ch, indexFileNames));
 									}

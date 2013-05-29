@@ -10,15 +10,57 @@ import net.osmand.util.Algorithms;
 
 public class RegionCountry {
 	public String continentName;
-	public TIntArrayList tiles = new TIntArrayList();
 	public int left, right, top, bottom;
 	public String name;
 	public RegionCountry parent;
 	
+	private TIntArrayList singleTiles = new TIntArrayList();
+	private TIntArrayList boxTiles = new TIntArrayList();
+	
+	private TIntArrayList allTiles;
+	
 	private List<RegionCountry> regions = new ArrayList<RegionCountry>();
+	
+	public TIntArrayList getSingleTiles() {
+		return singleTiles;
+	}
+	public TIntArrayList getBoxTiles() {
+		return boxTiles;
+	}
+	
+	public String serializeTilesArray(){
+		StringBuilder bld = new StringBuilder();
+		for(int j = 0; j<boxTiles.size(); j+=4) {
+			if (j > 0) {
+				bld.append(";");
+			}
+			bld.append(boxTiles.get(j)).append(" ").append(boxTiles.get(j + 1));
+			bld.append(" x ");
+			bld.append(boxTiles.get(j + 2)).append(" ").append(boxTiles.get(j + 3));
+		}
+		for (int i = 0; i < singleTiles.size(); i += 2) {
+			if (i > 0 || boxTiles.size() > 0) {
+				bld.append(";");
+			}
+			bld.append(singleTiles.get(i)).append(" ").append(singleTiles.get(i + 1));
+		}
+		
+		return bld.toString();
+	}
 
+	
+	public void removeSingle(int x, int y) {
+		for (int i = 0; i < singleTiles.size(); i += 2) {
+			if (singleTiles.get(i) == x && singleTiles.get(i + 1) == y) {
+				singleTiles.removeAt(i);
+				singleTiles.removeAt(i);
+				break;
+			}
+		}
+	}
+	
 	public void add(int xdeg, int ydeg) {
-		if (tiles.size() == 0) {
+		if (isEmpty()) {
 			left = right = xdeg;
 			top = bottom = ydeg;
 		}
@@ -26,20 +68,59 @@ public class RegionCountry {
 		right = Math.max(xdeg, right);
 		bottom = Math.min(ydeg, bottom);
 		top = Math.max(ydeg, top);
-		tiles.add(xdeg);
-		tiles.add(ydeg);
+		singleTiles.add(xdeg);
+		singleTiles.add(ydeg);
+		allTiles = null;
+	}
+	
+	public void add(int xleft, int ytop, int xright, int ybottom) {
+		if (isEmpty()) {
+			left = xleft;
+			right = xright;
+			top = ytop;
+			bottom = ybottom;
+		}
+		left = Math.min(xleft, left);
+		right = Math.max(xright, right);
+		bottom = Math.min(ybottom, bottom);
+		top = Math.max(ytop, top);
+		boxTiles.add(xleft);
+		boxTiles.add(ytop);
+		boxTiles.add(xright);
+		boxTiles.add(ybottom);
+		allTiles = null;
+	}
+
+	public boolean isEmpty() {
+		return singleTiles.size() == 0 && boxTiles.isEmpty();
 	}
 	
 	public int getTileSize() {
-		return tiles.size()/2;
+		calcAllTiles();
+		return allTiles.size() / 2;
+	}
+
+	protected TIntArrayList calcAllTiles() {
+		if (allTiles == null) {
+			allTiles = new TIntArrayList(singleTiles);
+			for (int k = 0; k < boxTiles.size(); k += 4) {
+				for (int x = boxTiles.get(k); x <= boxTiles.get(k + 2); x++) {
+					for (int y = boxTiles.get(k + 1); y >= boxTiles.get(k + 3); y--) {
+						allTiles.add(x);
+						allTiles.add(y);
+					}
+				}
+			}
+		}
+		return allTiles;
 	}
 
 	public int getLon(int i) {
-		return tiles.get(i*2);
+		return calcAllTiles().get(i * 2);
 	}
 
 	public int getLat(int i) {
-		return tiles.get(i*2 + 1);
+		return calcAllTiles().get(i * 2 + 1);
 	}
 	
 	public void addSubregion(RegionCountry c) {
@@ -51,22 +132,6 @@ public class RegionCountry {
 		return regions;
 	}
 
-	/*public TLongHashSet calculateTileSet(TLongHashSet t, int z) {
-		for (int j = 0; j < tiles.size(); j++) {
-			int kx = (int) MapUtils.getTileNumberX(z, getLon(j));
-			int ex = (int) MapUtils.getTileNumberX(z, getLon(j) + 0.9999f);
-			int ky = (int) MapUtils.getTileNumberY(z, getLat(j));
-			int ey = (int) MapUtils.getTileNumberY(z, getLat(j) - 0.9999f);
-			for (int x = kx; x <= ex; x++) {
-				for (int y = ky; y <= ey; y++) {
-					long v = (((long) y) << 31) + x;
-					t.add(v);
-				}
-			}
-		}
-		return t;
-	}*/
-	
 	public static RegionCountry construct(OsmAndRegion reg) {
 		RegionCountry rc = new RegionCountry();
 		if (reg.hasContinentName()) {
@@ -107,4 +172,5 @@ public class RegionCountry {
 		}
 		return reg.build();
 	}
+	
 }
