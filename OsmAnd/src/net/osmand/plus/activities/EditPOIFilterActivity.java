@@ -194,6 +194,10 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 	}
 	
 	private void showDialog(final AmenityType amenity) {
+		ListView lv = EditPOIFilterActivity.this.getListView();
+		final int index = lv.getFirstVisiblePosition();
+		View v = lv.getChildAt(0);
+		final int top = (v == null) ? 0 : v.getTop();
 		Builder builder = new AlertDialog.Builder(this);
 		ScrollView scroll = new ScrollView(this);
 		ListView listView = new ListView(this);
@@ -253,11 +257,9 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				}
 				helper.editPoiFilter(filter);
 				ListView lv = EditPOIFilterActivity.this.getListView();
-				int x = lv.getScrollX();
-				int y = lv.getScrollY();
 				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
 				la.notifyDataSetInvalidated();
-				lv.scrollTo(x, y);
+				lv.setSelectionFromTop(index, top);
 			}
 		});
 	
@@ -267,11 +269,9 @@ public class EditPOIFilterActivity extends OsmandListActivity {
 				filter.selectSubTypesToAccept(amenity, null);
 				helper.editPoiFilter(filter);
 				ListView lv = EditPOIFilterActivity.this.getListView();
-				int x = lv.getScrollX();
-				int y = lv.getScrollY();
 				AmenityAdapter la = (AmenityAdapter) EditPOIFilterActivity.this.getListAdapter();
 				la.notifyDataSetInvalidated();
-				lv.scrollTo(x, y);
+				lv.setSelectionFromTop(index, top);
 			}
 		});
 
