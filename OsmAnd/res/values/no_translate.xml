@@ -7,4 +7,10 @@
     <string name="ga_dispatchPeriod">10</string>
     <string name="ga_debug">true</string>
     <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
+    <string name="next_tips_and_tricks_not_translate">
+        * New downlad screen
+        * Planning mode
+        * Delete SRTM files
+        * GPX subfolders structure
+    </string>
 </resources>
