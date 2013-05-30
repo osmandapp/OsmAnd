@@ -82,7 +82,7 @@
   <string name="download_files_not_enough_space">Non c\'è abbastanza spazio per scaricare %1$s MB (liberi: %2$s).</string>
   <string name="download_files_question_space">Lo spazio disponibile è di {2} MB! Scaricare {0} file(s) ({1} MB)?</string>
   <string name="tip_select_destination_point">Seleziona \'Punto destinazione\'</string>
-  <string name="tip_select_destination_point_t">"\tPuoi selezionare una destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o seelzionando a lungo una voce in \'Elenco punti preferiti\'.
+  <string name="tip_select_destination_point_t">"\tPuoi selezionare una destinazione direttamente sulla mappa (menu contestuale, poi \'Imposta come destinazione\'), in qualsiasi ricerca, o selezionando a lungo una voce in \'Elenco punti preferiti\'.
 \n\tLa destinazione è segnata con un disco arancione sulla mappa e OsmAnd ne Visualizza la distanza e la direzione (triangolo arancione). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Novità della v. 0.6.9:
 \n\t- Migliorato il disegno delle mappe offline
@@ -265,7 +265,7 @@
   <string name="level_to_switch_vector_raster_descr">Minimo livello di zoom per usare le mappe vettoriali</string>
   <string name="level_to_switch_vector_raster">Min. livello zoom vettoriale</string>
   <string name="tip_location_sharing">Condivisione posizione</string>
-  <string name="tip_location_sharing_t">"\tPuoi condividere la posizione di posti interessanti dei tuoi viaggi con familiari e amici.
+  <string name="tip_location_sharing_t">"\tPuoi condividere la posizione dei luoghi interessanti dei tuoi viaggi con familiari e amici.
 \n\tPer condividere le posizioni devi:
 \n\tUsare il \'Menu contestuale mappa\' -&gt; menu \'Condividi Posizione\'.
 \n\tQuindi seleziona un modo per condividere la tua posizione. Le scelte sono: E-Mail, SMS(testo), o semplicemente copia le coordinate sugli appunti. "</string>
@@ -288,10 +288,10 @@
   <string name="tip_navigation">Navigazione</string>
   <string name="tip_navigation_t">\tPrima di iniziare la navigazione devi selezionare una destinazione. Dopo averla selezionata seleziona \'Menu\' -&gt; \'Percorsi\' sulla mappa e seleziona il tipo di navigazione.</string>
   <string name="tip_search">Ricerca</string>
-  <string name="tip_search_t">"\tPuoi cercare i posti direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
+  <string name="tip_search_t">"\tPuoi cercare i luoghi direttamente sulla mappa, per indirizzo, posizione, PDI, o come predefinito preferito.
 \n\tSelezionando \'Cerca\' nel menu principale aprirai la ricerca. Ogni elemento ha un menù contestuale con 2 opzioni: \'Naviga verso\' o \'Visualizza sulla mappa\'. "</string>
   <string name="tip_map_context_menu">Menu contestuale mappa</string>
-  <string name="tip_map_context_menu_t">"\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o seelzionando il pulsante trackball.
+  <string name="tip_map_context_menu_t">"\tIl menu contestuale viene visualizzato selezionando a lungo sulla mappa o selezionando il pulsante trackball.
 \n\tQuesto visualizza un riquadro con le coordinate del punto. Per aprire il menu, fai clic sopra. (O seleziona a lungo per nascondere nuovamente il menù.)
 \n\tIl menù contestuale contiene tutte le azioni possibili per quel punto (posizione). "</string>
   <string name="tip_initial">Consigli e trucchi</string>
@@ -1130,8 +1130,8 @@
     <string name="download_roads_only_maps">Mappe solo strade</string>
     <string name="incomplete_locale">incompleto</string>
 	<string name="map_widget_max_speed">Limite di velocità</string>
-    <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\\\'altitudine nel sistema EGM96.
-\n\tPer attivarla, scarica il file WW15MGH.DAC tramite il gestore dati offline (il file originale si trova all\\\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
+    <string name="tip_altitude_offset_t">"\tLa maggior parte dei GPS riportano la misura dell\'altitudine nel sistema di riferimento WGS84 basato su ellissoide, per cui una conversione nei sistemi di riferimento usati localmente richiede una correzione dipendente dalla posizione.\n\tUna migliore approssimazione a questi sistemi di riferimento locali è il EGM96. OsmAnd ora supporta la visualizzazione automatica dell\'altitudine nel sistema EGM96.
+\n\tPer attivarla, scarica il file WW15MGH.DAC tramite il gestore dati offline (il file originale si trova all\'indirizzo http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC). "</string>
     <string name="tip_altitude_offset">Visualizzazione altitudine - Correzione scostamento</string>
 	<string name="monitoring_control_start">GPX</string>
     <string name="rendering_attr_noAdminboundaries_name">Nascondi i confini</string>
