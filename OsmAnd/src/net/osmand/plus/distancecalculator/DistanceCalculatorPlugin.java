@@ -129,7 +129,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 	private void updateText() {
 		if (distanceControl != null) {
 			String ds = distance;
-			if (distance == null) {
+			if (ds == null) {
 				distanceControl.setText(app.getString(R.string.dist_control_start), "");
 			} else {
 				int ls = ds.lastIndexOf(' ');
@@ -389,6 +389,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			}
 			distance = OsmAndFormatter.getFormattedDistance(dist, app);
 		}
+		updateText();
 	}
 
 
@@ -581,10 +582,10 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						if (itemId == R.string.delete_point) {
-							for(int i = 0; i<measurementPoints.size(); i++) {
+							for (int i = 0; i < measurementPoints.size(); i++) {
 								Iterator<WptPt> it = measurementPoints.get(i).iterator();
-								while(it.hasNext()) {
-									if(it.next() == p) {
+								while (it.hasNext()) {
+									if (it.next() == p) {
 										it.remove();
 									}
 								}
@@ -613,8 +614,9 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 				if(((WptPt) o).time != 0) {
 					Date date = new Date(((WptPt) o).time);
-					java.text.DateFormat dateFormat = android.text.format.DateFormat.getTimeFormat(app);
-					l.add(app.getString(R.string.plugin_distance_point_time) + " "+ dateFormat.format(date)); 
+					java.text.DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(app);
+					java.text.DateFormat timeFormat = android.text.format.DateFormat.getTimeFormat(app);
+					l.add(app.getString(R.string.plugin_distance_point_time) + " "+ dateFormat.format(date) + " " + timeFormat.format(date)); 
 				}
 				return desc + " " + l;
 			}
