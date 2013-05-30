@@ -1176,10 +1176,11 @@
     <string name="map_widget_gps_info">GPS infó</string>
     <string name="osmand_play_title_30_chars">OsmAnd térkép és navigáció</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ térkép és navigáció</string>
-	<string name="tip_recent_changes_1_2_t">"Változások az 1.2 verzióban:
+	<string name="tip_recent_changes_1_2_t">"Változások az 1.2.1 verzióban:
+\n\t* Geo Intent javítás (Foursquare, c:geo)\n\t* Térképremegés navigáció közben javítva\n\t* Egyéb apró javítások\nVáltozások az 1.2 verzióban:
 \n\t* Hibajavítások (javított útvonaltervezés, keresés, hang és videofelvétel, hangutasítások, néhány megjelenítési hiba)\n\t* Egyszerűbben bekapcsolható domborzatárnyékolás (Szintvonalak (Contour Lines) bővítmény szükséges hozzá)
 \n\t* Az OsmAnd már elfogadja a maps.google.com helyhivatkozásokat
-\n\t* Többablakos támogatás az újabb Samsung eszközökhöz
+\n\t* Új GPX infó widget\n\t* Többablakos támogatás az újabb Samsung eszközökhöz
 \n\t* Iránytűhöz Kalman-szűrő
 \n\t* Pebble óra támogatás "</string>
     <string name="save_current_track_widget">GPX nyomvonal\n mentése</string>
@@ -1214,4 +1215,21 @@
     <string name="local_indexes_cat_srtm">Szintvonal adat</string>
     <string name="wait_current_task_finished">Kérlek várd meg, amíg a jelenlegi befejeződik</string>
     <string name="downloading_file_new">"Letöltés "</string>
-	</resources>
+	<string name="plugin_distance_point_time">idő</string>
+    <string name="plugin_distance_point_hdop">pontosság</string>
+    <string name="plugin_distance_point_speed">sebesség</string>
+    <string name="plugin_distance_point_ele">magasság</string>
+    <string name="plugin_distance_point">Pont</string>
+    <string name="gpx_file_name">GPX fájlnév</string>
+    <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
+    <string name="osmand_distance_planning_plugin_description">"A pontok közti távolság méréséhez készíts egy útvonalat. Nyiss meg egy meglévő GPX fájlt szerkesztésre és mentsd el. Használhatod GPX alapú útvonaltervezésre is. "</string>
+    <string name="osmand_distance_planning_plugin_name">Távolságkalkulátor &amp; Tervező eszköz</string>
+    <string name="use_distance_measurement_help">* Pont lerakásához kattints.\n * Nyomd meg hosszan a térképet az előző pont törléséhez.\n * Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez.\n * További műveletekért kattints a vezérlőgombra.</string>
+    <string name="default_buttons_do_not_show_again">Ne mutasd újra</string>
+    <string name="distance_measurement_start_editing">Szerkesztés indítása</string>
+    <string name="distance_measurement_finish_editing">Szerkesztés befejezése</string>
+    <string name="distance_measurement_finish_subtrack">Következő alnyomvonal/pont</string>
+    <string name="distance_measurement_clear_route">Pontok törlése</string>
+    <string name="distance_measurement_save_gpx">Mentés GPX-ként</string>
+    <string name="distance_measurement_load_gpx">Meglévő GPX megnyitása</string>
+    </resources>
