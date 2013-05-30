@@ -990,7 +990,7 @@
 	<string name="new_route_calculated_dist">Ny rutt beräknad, avstånd</string>
 	<string name="invalid_locations">Koordinaterna är ogiltiga!</string>
 	<string name="go_back_to_osmand">Tillbaka till OsmAnd-kartan</string>
-	<string name="previous_run_crashed">Den senaste körningen av OsmAnd kraschade. Loggfil finns vid {0}. Rapportera felet och bifoga gärna loggfilen.</string>
+	<string name="previous_run_crashed">Den senaste körningen av OsmAnd kraschade. Loggen finns i {0}. Rapportera felet och bifoga gärna loggfilen.</string>
 	<string name="saving_gpx_tracks">Sparar GPX-spår till SD-kortet…</string>
 	<string name="finished_task">Slutförd</string>
 	<string name="reload_indexes_descr">Läs om vektorkartor och data från SD-kortet</string>
