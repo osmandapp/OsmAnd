@@ -16,6 +16,8 @@ import net.osmand.IndexConstants;
 import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
@@ -106,7 +108,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			activity.getMapView().removeLayer(distanceCalculatorLayer);
 		}
 		distanceCalculatorLayer = new DistanceCalculatorLayer();
-		activity.getMapView().addLayer(distanceCalculatorLayer, 8.5f);
+		activity.getMapView().addLayer(distanceCalculatorLayer, 4.5f);
 		
 		registerWidget(activity);
 	}
@@ -529,11 +531,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		}
 		
 		public void getMPointsFromPoint(PointF point, List<? super WptPt> res) {
-			int r = (int) (12* dm.density);
-			int rs = (int) (7* dm.density);
+			int r = (int) (14 * dm.density);
+			int rs = (int) (10 * dm.density);
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			for(int i = 0; i < measurementPoints.size(); i++) {
+			for (int i = 0; i < measurementPoints.size(); i++) {
 				Iterator<WptPt> it = measurementPoints.get(i).iterator();
 				boolean first = true;
 				while (it.hasNext()) {
@@ -568,6 +570,31 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				return new LatLon(((WptPt) o).lat, ((WptPt) o).lon);
 			}
 			return null;
+		}
+		
+		@Override
+		public void populateObjectContextMenu(Object o, ContextMenuAdapter adapter) {
+			if(o instanceof WptPt) {
+				final WptPt p = (WptPt) o;
+				OnContextMenuClick listener = new OnContextMenuClick() {
+					
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						if (itemId == R.string.delete_point) {
+							for(int i = 0; i<measurementPoints.size(); i++) {
+								Iterator<WptPt> it = measurementPoints.get(i).iterator();
+								while(it.hasNext()) {
+									if(it.next() == p) {
+										it.remove();
+									}
+								}
+							}
+							calculateDistance();
+						}
+					}
+				};
+				adapter.registerItem(R.string.delete_point, R.drawable.list_activities_remove_note, listener, -1);
+			}
 		}
 
 		@Override
