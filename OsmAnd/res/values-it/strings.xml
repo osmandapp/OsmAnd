@@ -22,7 +22,7 @@
   <string name="local_openstreetmap_descr_title">Modifica asincrona di OSM:</string>
   <string name="local_openstreetmap_settings">PDI/Errori OSM salvati in locale</string>
   <string name="local_openstreetmap_settings_descr">Visualizza e gestisci i PDI/errori OSM inseriti nel database locale</string>
-  <string name="live_monitoring_descr">Invia il tracking ad uno servizio web specificato</string>
+  <string name="live_monitoring_descr">Invia il tracking ad un servizio web specificato</string>
   <string name="live_monitoring">﻿Tracking online in diretta</string>
   <string name="live_monitoring_interval_descr">Specifica l\'intervallo del tracking in diretta</string>
   <string name="live_monitoring_interval">Intervallo del Live tracking</string>
@@ -1005,7 +1005,7 @@
 <string name="avoid_in_routing_title">﻿Evita…</string>
 <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti</string>
 <string name="show_warnings_title">Visualizza avvertimenti…</string>
-<string name="show_warnings_descr">Configura gli avvertimenti (limiti di velocità, stop forzati, dossi rallentatori), avvisi autovelox, e informazioni di corsia</string>
+<string name="show_warnings_descr">Configura gli avvertimenti (limiti di velocità, stop forzati, dossi rallentatori), avvisi autovelox, e indicazioni di corsia</string>
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
 <string name="map_widget_show_ruler">Scala grafica</string>
 <string name="map_widget_appearance">Varie:</string>
@@ -1160,7 +1160,7 @@
     <string name="srtm_plugin_attribution">ASTER è un prodotto di METI e NASA</string>
     <string name="av_def_action_video">Registra video</string>
     <string name="av_def_action_audio">Registra audio</string>
-    <string name="av_widget_action_descr">Seleziona azione predefinita del widget</string>
+    <string name="av_widget_action_descr">Seleziona l\'azione predefinita del widget</string>
     <string name="av_widget_action">Azione predefinita del widget</string>
     <string name="av_video_format_descr">Seleziona il formato di uscita video</string>
     <string name="av_video_format">Formato di uscita video</string>
