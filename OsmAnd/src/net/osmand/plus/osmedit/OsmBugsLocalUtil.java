@@ -18,39 +18,36 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 	}
 
 	@Override
-	public boolean createNewBug(double latitude, double longitude, String text, String authorName){
-		OsmbugsPoint p = new OsmbugsPoint();
-		p.setId(-1);
+	public String createNewBug(double latitude, double longitude, String text){
+		OsmNotesPoint p = new OsmNotesPoint();
+		p.setId(Math.min(-2, db.getMinID() -1));
 		p.setText(text);
 		p.setLatitude(latitude);
 		p.setLongitude(longitude);
 		p.setAction(OsmPoint.Action.CREATE);
-		p.setAuthor(authorName);
-		return db.addOsmbugs(p);
+		return db.addOsmbugs(p) ? null : "";
 	}
 	
-	public List<OsmbugsPoint> getOsmbugsPoints() {
+	public List<OsmNotesPoint> getOsmbugsPoints() {
 		return db.getOsmbugsPoints();
 	}
 
 	@Override
-	public boolean addingComment(long id, String text, String authorName){
-		OsmbugsPoint p = new OsmbugsPoint();
+	public String addingComment(long id, String text){
+		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(id);
 		p.setText(text);
 		p.setAction(OsmPoint.Action.MODIFY);
-		p.setAuthor(authorName);
-		return db.addOsmbugs(p);
+		return db.addOsmbugs(p) ? null : "";
 	}
 
 	@Override
-	public boolean closingBug(long id, String text, String authorName){
-		OsmbugsPoint p = new OsmbugsPoint();
+	public String closingBug(long id, String text){
+		OsmNotesPoint p = new OsmNotesPoint();
 		p.setId(id);
-		p.setAuthor(authorName);
 		p.setText(text);
 		p.setAction(OsmPoint.Action.DELETE);
-		return db.addOsmbugs(p);
+		return db.addOsmbugs(p) ? null : "";
 	}
 
 }

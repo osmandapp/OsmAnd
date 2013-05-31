@@ -24,15 +24,12 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 	
 	private final Context ctx;
 	private final OpenstreetmapsDbHelper db;
-	//temporal IDs for not yet uploaded new POIs
-	private long nextid;
 
 	public final static Log log = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
 
 	public OpenstreetmapLocalUtil(Context uiContext) {
 		this.ctx = uiContext;
 		this.db = new OpenstreetmapsDbHelper(ctx);
-		this.nextid = Math.min(-2, db.getMinID());
 	}
 
 	@Override
@@ -44,7 +41,7 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 	public Node commitNodeImpl(OsmPoint.Action action, Node n, EntityInfo info, String comment, boolean closeChangeSet){
 		Node newNode = n;
 		if (n.getId() == -1) {
-			newNode = new Node(n, --nextid); // generate local id for the created node
+			newNode = new Node(n, Math.min(-2, db.getMinID() - 1)); // generate local id for the created node
 		}
 		OpenstreetmapPoint p = new OpenstreetmapPoint();
 		p.setEntity(newNode);

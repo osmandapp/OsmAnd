@@ -2,7 +2,7 @@ package net.osmand.plus.osmedit;
 
 import java.io.Serializable;
 
-public class OsmbugsPoint extends OsmPoint implements Serializable {
+public class OsmNotesPoint extends OsmPoint implements Serializable {
 	private static final long serialVersionUID = 729654300829771468L;
 
 	private long id;
@@ -11,19 +11,12 @@ public class OsmbugsPoint extends OsmPoint implements Serializable {
 	private double longitude;
 	private String author;
 
-	public OsmbugsPoint(){
+	public OsmNotesPoint(){
 	}
 
 	@Override
 	public long getId() {
 		return id;
-	}
-	
-	@Override
-	public void updateID(long newID) {
-		if (id < 0) {
-			this.id = newID;
-		}
 	}
 
 	public String getText() {

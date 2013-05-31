@@ -37,11 +37,11 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 	}
 
-	public List<OsmbugsPoint> getOsmbugsPoints() {
+	public List<OsmNotesPoint> getOsmbugsPoints() {
 		return checkOsmbugsPoints();
 	}
 
-	public boolean addOsmbugs(OsmbugsPoint p) {
+	public boolean addOsmbugs(OsmNotesPoint p) {
 		checkOsmbugsPoints();
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
@@ -53,7 +53,7 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 
-	public boolean deleteAllBugModifications(OsmbugsPoint p) {
+	public boolean deleteAllBugModifications(OsmNotesPoint p) {
 		checkOsmbugsPoints();
 		SQLiteDatabase db = getWritableDatabase();
 		if (db != null) {
@@ -64,16 +64,16 @@ public class OsmBugsDbHelper extends SQLiteOpenHelper {
 		return false;
 	}
 
-	private List<OsmbugsPoint> checkOsmbugsPoints(){
+	private List<OsmNotesPoint> checkOsmbugsPoints(){
 		SQLiteDatabase db = getWritableDatabase();
-		List<OsmbugsPoint> cachedOsmbugsPoints = new ArrayList<OsmbugsPoint>();
+		List<OsmNotesPoint> cachedOsmbugsPoints = new ArrayList<OsmNotesPoint>();
 		if (db != null) {
 			Cursor query = db.rawQuery("SELECT " + OSMBUGS_COL_ID + ", " + OSMBUGS_COL_TEXT + ", " + OSMBUGS_COL_LAT + "," + OSMBUGS_COL_LON + "," + OSMBUGS_COL_ACTION + "," + OSMBUGS_COL_AUTHOR + " FROM " + //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
 					OSMBUGS_TABLE_NAME, null);
 			
 			if (query.moveToFirst()) {
 				do {
-					OsmbugsPoint p = new OsmbugsPoint();
+					OsmNotesPoint p = new OsmNotesPoint();
 
 					p.setId(query.getLong(0));
 					p.setText(query.getString(1));

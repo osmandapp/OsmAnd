@@ -97,88 +97,8 @@ public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
 				settings.USER_PASSWORD.get(), "file", true, additionalData);
 	}
 	
-	
-	protected String sendRequsetThroughHttpClient(String url, String requestMethod, String requestBody, String userOperation, boolean doAuthenticate) {
-		StringBuilder responseBody = new StringBuilder();
-		try {
-
-			HttpParams params = new BasicHttpParams();
-			HttpConnectionParams.setConnectionTimeout(params, 15000);
-			DefaultHttpClient httpclient = new DefaultHttpClient(params);
-			if (doAuthenticate) {
-				UsernamePasswordCredentials credentials = new UsernamePasswordCredentials(settings.USER_NAME.get() + ":" //$NON-NLS-1$
-						+ settings.USER_PASSWORD.get());
-				httpclient.getCredentialsProvider().setCredentials(new AuthScope(AuthScope.ANY_HOST, AuthScope.ANY_PORT), credentials);
-			}
-			HttpRequestBase method = null;
-			if (requestMethod.equals("GET")) { //$NON-NLS-1$
-				method = new HttpGet(url);
-			} else if (requestMethod.equals("POST")) { //$NON-NLS-1$
-				method = new HttpPost(url);
-			} else if (requestMethod.equals("PUT")) { //$NON-NLS-1$
-				method = new HttpPut(url);
-			} else if (requestMethod.equals("DELETE")) { //$NON-NLS-1$
-				method = new HttpDelete(url);
-				
-			} else {
-				throw new IllegalArgumentException(requestMethod + " is invalid method"); //$NON-NLS-1$
-			}
-			if (requestMethod.equals("PUT") || requestMethod.equals("POST") || requestMethod.equals("DELETE")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				// TODO add when needed
-//				connection.setDoOutput(true);
-//				connection.setRequestProperty("Content-type", "text/xml");
-//				OutputStream out = connection.getOutputStream();
-//				if (requestBody != null) {
-//					BufferedWriter bwr = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-//					bwr.write(requestBody);
-//					bwr.flush();
-//				}
-//				out.close();
-			}
-
-			HttpResponse response = httpclient.execute(method);
-			if(response.getStatusLine() == null || 
-					response.getStatusLine().getStatusCode() != 200){
-				
-				String msg;
-				if(response.getStatusLine() != null){
-					msg = userOperation + " " +ctx.getString(R.string.failed_op); //$NON-NLS-1$
-				} else {
-					msg = userOperation + " " + ctx.getString(R.string.failed_op) + response.getStatusLine().getStatusCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
-							response.getStatusLine().getReasonPhrase();
-				}
-				log.error(msg);
-				showWarning(msg);
-			} else {
-				InputStream is = response.getEntity().getContent();
-				if (is != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
-					String s;
-					while ((s = in.readLine()) != null) {
-						responseBody.append(s);
-						responseBody.append("\n"); //$NON-NLS-1$
-					}
-					is.close();
-				}
-				httpclient.getConnectionManager().shutdown();
-				return responseBody.toString();
-			}
-		} catch (MalformedURLException e) {
-			log.error(userOperation + " failed", e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
-		} catch (IOException e) {
-			log.error(userOperation + " failed", e); //$NON-NLS-1$
-			showWarning(MessageFormat.format(ctx.getResources().getString(R.string.poi_error_unexpected_template), userOperation));
-		}
-		return null; 
-		
-	}
 	private String sendRequest(String url, String requestMethod, String requestBody, String userOperation, boolean doAuthenticate) {
 		log.info("Sending request " + url); //$NON-NLS-1$
-//		if(true){
-//			return sendRequsetThroughHttpClient(url, requestMethod, requestBody, userOperation, doAuthenticate);
-//		}
-		
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
 			

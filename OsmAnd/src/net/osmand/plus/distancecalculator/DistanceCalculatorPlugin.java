@@ -378,7 +378,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 
 	private void calculateDistance() {
 		float dist = 0;
-		if (measurementPoints.size() == 0) {
+		if (measurementPoints.size() == 0 && distanceMeasurementMode == 0 ) {
 			distance = null;
 		} else {
 			for (int j = 0; j < measurementPoints.size(); j++) {

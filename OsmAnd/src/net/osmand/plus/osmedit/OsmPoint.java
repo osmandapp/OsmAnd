@@ -26,8 +26,6 @@ public abstract class OsmPoint {
 	public OsmPoint(){
 	}
 
-	public abstract void updateID(long newID);
-	
 	public abstract long getId();
 
 	public abstract double getLatitude();

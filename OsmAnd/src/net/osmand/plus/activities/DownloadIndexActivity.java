@@ -395,6 +395,7 @@ public class DownloadIndexActivity extends OsmandExpandableListActivity {
 
 
 	public void changeType(final DownloadActivityType tp) {
+		invalidateOptionsMenu();
 		if (downloadListIndexThread != null && type != tp) {
 			type = tp;
 			downloadListIndexThread.runCategorization(tp);

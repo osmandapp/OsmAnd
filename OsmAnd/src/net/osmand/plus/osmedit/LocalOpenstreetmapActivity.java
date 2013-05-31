@@ -1,5 +1,8 @@
 package net.osmand.plus.osmedit;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,17 +10,22 @@ import java.util.List;
 import net.osmand.access.AccessibleToast;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressDialogImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+
+import org.xmlpull.v1.XmlSerializer;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Xml;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -25,12 +33,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.Window;
 
 public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
@@ -38,6 +46,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	protected static final int DIALOG_PROGRESS_UPLOAD = 0;
 	protected static final int MENU_GROUP = 0;
 	private static final int UPLOAD_ID = 1;
+	private static final int BACKUP_ID = 2;
 
 	private LocalOpenstreetmapAdapter listAdapter;
 
@@ -55,10 +64,11 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.local_openstreetmap);
 		getSupportActionBar().setTitle(R.string.download_files);
+		setSupportProgressBarIndeterminateVisibility(false);
 		listAdapter = new LocalOpenstreetmapAdapter();
 
 		getListView().setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
@@ -82,6 +92,8 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.a_9_av_upload_light, R.drawable.a_9_av_upload_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.a_5_content_save_light, R.drawable.a_5_content_save_dark,
+				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -90,6 +102,9 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		if (item.getItemId() == UPLOAD_ID) {
 			toUpload = dataPoints.toArray(new OsmPoint[0]);
 			showDialog(DIALOG_PROGRESS_UPLOAD);
+			return true;
+		} else if (item.getItemId() == BACKUP_ID) {
+			new BackupOpenstreetmapPointAsyncTask().execute(dataPoints.toArray(new OsmPoint[0]));
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -100,14 +115,14 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 		
 		dataPoints = new ArrayList<OsmPoint>(); 
 		List<OpenstreetmapPoint> l1 = dbpoi.getOpenstreetmapPoints();
-		List<OsmbugsPoint> l2 = dbbug.getOsmbugsPoints();
+		List<OsmNotesPoint> l2 = dbbug.getOsmbugsPoints();
 		dataPoints.addAll(l1);
 		dataPoints.addAll(l2);
 		listAdapter.clear();
 		for (OpenstreetmapPoint p : l1) {
 			listAdapter.add(p);
 		}
-		for (OsmbugsPoint p : l2) {
+		for (OsmNotesPoint p : l2) {
 			listAdapter.add(p);
 		}
 		listAdapter.notifyDataSetChanged();
@@ -115,7 +130,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		int pos = ((AdapterContextMenuInfo)item.getMenuInfo()).position;
+		int pos = ((android.widget.AdapterView.AdapterContextMenuInfo)item.getMenuInfo()).position;
 		int itemId = item.getItemId();
 		if(itemId == R.id.showmod) {
 			OsmandSettings settings = getMyApplication().getSettings();
@@ -133,7 +148,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 					repo.clearCache();
 				}
 			} else if (info.getGroup() == OsmPoint.Group.BUG) {
-				dbbug.deleteAllBugModifications((OsmbugsPoint) info);
+				dbbug.deleteAllBugModifications((OsmNotesPoint) info);
 			}
 			listAdapter.delete(info);
 			return true;
@@ -180,6 +195,103 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 			break;
 		}
 	}
+	
+	public class BackupOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, String> {
+
+		
+		private File osmchange;
+
+		public BackupOpenstreetmapPointAsyncTask() {
+			OsmandApplication app = LocalOpenstreetmapActivity.this.getMyApplication();
+			osmchange = app.getAppPath("osm.osmchange");
+		}
+		
+
+		@Override
+		protected String doInBackground(OsmPoint... points) {
+			FileOutputStream out = null;
+			try {
+				out = new FileOutputStream(osmchange);
+				XmlSerializer sz = Xml.newSerializer();
+			
+				sz.setOutput(out, "UTF-8");
+				sz.startDocument("UTF-8", true);
+				sz.startTag("", "osmChange");
+				sz.attribute("", "generator", "OsmAnd");
+				sz.attribute("", "version", "0.6");
+				sz.startTag("", "create");
+				writeContent(sz, points, OsmPoint.Action.CREATE);
+				sz.endTag("", "create");
+				sz.startTag("", "modify");
+				writeContent(sz, points, OsmPoint.Action.MODIFY);
+				sz.endTag("", "modify");
+				sz.startTag("", "delete");
+				writeContent(sz, points, OsmPoint.Action.DELETE);
+				sz.endTag("", "delete");
+				sz.endTag("", "osmChange");
+				sz.endDocument();
+			} catch (Exception e) {
+				return e.getMessage();
+			} finally {
+				try {
+					if(out!= null) out.close();
+				} catch (IOException e) {
+				}
+			}
+
+			return null;
+		}
+
+		private void writeContent(XmlSerializer sz, OsmPoint[] points, Action a) throws IllegalArgumentException, IllegalStateException, IOException {
+			for (OsmPoint point : points) {
+				if (point.getGroup() == OsmPoint.Group.POI) {
+					OpenstreetmapPoint p = (OpenstreetmapPoint) point;
+					if (p.getAction() == a) {
+						sz.startTag("", "node");
+						sz.attribute("", "lat", p.getLatitude() + "");
+						sz.attribute("", "lon", p.getLongitude() + "");
+						sz.attribute("", "id", p.getId() + "");
+						for (String tag : p.getEntity().getTagKeySet()) {
+							String val = p.getEntity().getTag(tag);
+							sz.startTag("", "tag");
+							sz.attribute("", "k", tag);
+							sz.attribute("", "v", val);
+							sz.endTag("", "tag");
+						}
+						sz.endTag("", "node");
+					}
+				} else if (point.getGroup() == OsmPoint.Group.BUG) {
+					OsmNotesPoint p = (OsmNotesPoint) point;
+					if (p.getAction() == a) {
+						sz.startTag("", "note");
+						sz.attribute("", "lat", p.getLatitude() + "");
+						sz.attribute("", "lon", p.getLongitude() + "");
+						sz.attribute("", "id", p.getId() + "");
+						sz.startTag("", "comment");
+						sz.attribute("", "text", p.getText() +"");
+						sz.endTag("", "comment");
+						sz.endTag("", "note");
+					}
+				}
+			}			
+		}
+
+
+		@Override
+		protected void onPreExecute() {
+			LocalOpenstreetmapActivity.this.setProgressBarIndeterminateVisibility(true);
+		}
+
+		@Override
+		protected void onPostExecute(String result) {
+			LocalOpenstreetmapActivity.this.setProgressBarIndeterminateVisibility(false);
+			if (result != null) {
+				AccessibleToast.makeText(LocalOpenstreetmapActivity.this, getString(R.string.local_osm_changes_backup_failed) + " " + result, Toast.LENGTH_LONG).show();
+			} else {
+				AccessibleToast.makeText(LocalOpenstreetmapActivity.this, getString(R.string.local_osm_changes_backup_successful, osmchange.getAbsolutePath()), Toast.LENGTH_LONG).show();
+			}
+		}
+	}
 
 	public class UploadOpenstreetmapPointAsyncTask extends AsyncTask<OsmPoint, OsmPoint, Integer> {
 
@@ -223,14 +335,14 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 						uploaded++;
 					}
 				} else if (point.getGroup() == OsmPoint.Group.BUG) {
-					OsmbugsPoint p = (OsmbugsPoint) point;
+					OsmNotesPoint p = (OsmNotesPoint) point;
 					boolean success = false;
 					if (p.getAction() == OsmPoint.Action.CREATE) {
-						success = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText(), p.getAuthor());
+						success = remotebug.createNewBug(p.getLatitude(), p.getLongitude(), p.getText()) == null;
 					} else if (p.getAction() == OsmPoint.Action.MODIFY) {
-						success = remotebug.addingComment(p.getId(), p.getText(), p.getAuthor());
+						success = remotebug.addingComment(p.getId(), p.getText()) == null;
 					} else if (p.getAction() == OsmPoint.Action.DELETE) {
-						success = remotebug.closingBug(p.getId(), p.getText(), p.getAuthor());
+						success = remotebug.closingBug(p.getId(), p.getText()) == null;
 					}
 					if (success) {
 						dbbug.deleteAllBugModifications(p);
@@ -315,7 +427,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 			if (child.getGroup() == OsmPoint.Group.POI)
 				viewName.setText(idPrefix + " (" + ((OpenstreetmapPoint) child).getSubtype() + ") " + ((OpenstreetmapPoint) child).getName());
 			else if (child.getGroup() == OsmPoint.Group.BUG)
-				viewName.setText(idPrefix +  " (" + ((OsmbugsPoint) child).getAuthor() + ") " + ((OsmbugsPoint) child).getText());
+				viewName.setText(idPrefix +  " (" + ((OsmNotesPoint) child).getAuthor() + ") " + ((OsmNotesPoint) child).getText());
 			if (child.getAction() == OsmPoint.Action.CREATE) {
 				viewName.setTextColor(getResources().getColor(R.color.color_ok));
 			} else if (child.getAction() == OsmPoint.Action.MODIFY) {
