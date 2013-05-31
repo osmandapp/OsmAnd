@@ -1225,7 +1225,7 @@
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">Nazwa pliku GPX</string>
     <string name="gpx_saved_sucessfully">Plik GPX został pomyślnie zapisany do {0}</string>
-    <string name="osmand_distance_planning_plugin_description">"Stwórz ścieżkę, aby zmierzyć odległość pomiędzy dwoma punktami, otwórz istniejący plik GPX do edycji i zapisz go. Może zostać użyte do planowania drogi przez GPX. "</string>
+    <string name="osmand_distance_planning_plugin_description">Twórz ścieżki (lub używaj/modyfikuj istniejące pliki GPX) służące pomiarowi odległości pomiędzy punktami. Zapisuj jako GPX. Może zostać użyte do planowania tras przez GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator odległości i narzędzie planowania</string>
     <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt.
 \n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
@@ -1238,4 +1238,5 @@
     <string name="distance_measurement_clear_route">Wyczyść punkty</string>
     <string name="distance_measurement_save_gpx">Zapisz jako GPX</string>
     <string name="distance_measurement_load_gpx">Otwórz istniejący GPX</string>
+    <string name="delete_point">Usuń punkt</string>
     </resources>
