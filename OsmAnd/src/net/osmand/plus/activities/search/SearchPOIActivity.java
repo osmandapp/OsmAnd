@@ -300,13 +300,13 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			searchArea.setText(filter.getSearchArea());
 			updateSearchPoiTextButton();
 			if (searchNearBy) {
-				app.getLocationProvider().addCompassListener(this);
 				app.getLocationProvider().addLocationListener(this);
 				location = app.getLocationProvider().getLastKnownLocation();
 				app.getLocationProvider().resumeAllUpdates();
 			}
 			updateLocation(location);
 		}
+		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().registerOrUnregisterCompassListener(true);
 	}
 	
