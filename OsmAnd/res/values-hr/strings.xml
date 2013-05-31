@@ -180,9 +180,9 @@
 	<string name="gpxup_identifiable">Identificirajući</string>
 	<string name="gpxup_private">Privatni</string>
 	<string name="save_route_as_gpx">Spremi rutu kao GPX datoteku</string>
-	<string name="poi_search_desc">Pretraži POI (točke interesa)</string>
+	<string name="poi_search_desc">Traži POI (točke interesa)</string>
 	<string name="rendering_attr_hmRendered_name">Prikaži više pojedinosti na karti</string>
-	<string name="address_search_desc">Potraži adresu</string>
+	<string name="address_search_desc">Traži adresu</string>
 	<string name="navpoint_search_desc">Zemljopisne kordinate</string>
 	<string name="history_search_desc">Pretraži povijest</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigacija privremeno nije dostupna.</string>
@@ -536,7 +536,7 @@
 	<string name="amenity_type_entertainment">Zabava</string>
 	<string name="amenity_type_finance">Financije</string>
 	<string name="amenity_type_healthcare">Zdravstvena njega</string>
-	<string name="amenity_type_historic">Povijesna mijesta</string>
+	<string name="amenity_type_historic">Povijesna mjesta</string>
 	<string name="amenity_type_landuse">Korištenje zemljišta</string>
 	<string name="amenity_type_leisure">Slobodno vrijeme</string>
 	<string name="amenity_type_military">Vojska</string>
@@ -932,4 +932,14 @@
     <string name="use_magnetic_sensor">Koristi magnetski senzor</string>
     <string name="download_link_and_local_description">Kliknite ovdje za preuzimanje ili ažuriranje offline podataka.\nKliknite na bilo koju postojeću stavku da biste vidjeli više detalja, pritisnite i držite za deaktivirati ili obrisati. Trenutni podaci na uređaju (%1$s slobodno):</string>
 	<string name="index_settings_descr">Preuzmite karte i upravljajte offline podacima pohranjenim na uređaju</string>
-	</resources>
+	<string name="delete_point">Izbriši točku</string>
+    <string name="plugin_distance_point_time">vrijeme</string>
+    <string name="plugin_distance_point_hdop">preciznost</string>
+    <string name="plugin_distance_point_ele">nadmorska visina</string>
+    <string name="plugin_distance_point_speed">brzina</string>
+    <string name="distance_measurement_save_gpx">Spremi kao GPX</string>
+    <string name="distance_measurement_load_gpx">Otvori postojeći GPX</string>
+    <string name="default_buttons_do_not_show_again">Ne prikazuj ponovo</string>
+    <string name="plugin_distance_point">Točka</string>
+    <string name="gpx_saved_sucessfully">GPX datoteka je uspješno spremljena na {0}</string>
+    </resources>
