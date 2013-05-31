@@ -393,7 +393,7 @@
   <string name="tip_app_mode">Профіль</string>
   <string name="tip_app_mode_t">\tOsmAnd supports different (customizable) application profiles for different use cases. \n\tYou can change profiles in \'Menu\' -&gt; \'Settings\' -&gt; \'User Profile\', or when creating a route.</string>
   <string name="tip_navigation">Навігація</string>
-  <string name="tip_navigation_t">Щоби використовувати навігацію потрібно вибрати точку призначення. Після цього натисніть \"Меню\" → \"Навігація\" на мапі і виберіть тип навігації.</string>
+  <string name="tip_navigation_t">"   Щоби використовувати навігацію потрібно вибрати точку призначення. Після цього натисніть \"Меню\" → \"Навігація\" на мапі і виберіть тип навігації."</string>
   <string name="tip_search">Пошук</string>
   <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
 \n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'</string>
@@ -1005,7 +1005,7 @@
     <string name="recording_open_external_player">Відкрити зовнішній програвач</string>
     <string name="recording_delete_confirm">Ви хочете вилучити даний запис?</string>
     <string name="tip_recent_changes_1_1_0_t">"Зміни в 1.1.0:
-\n\t* Втулок Калькулятор відстаней\n\t* Втулок Аудіо/Відео замітки\n\t* Втулок Ліній висот\n\t* Виправлені помилки
+\n\t* Плагін калькулятора відстаней\n\t* Плагін Аудіо/Відео заміток\n\t* Плагін ліній висот\n\t* Виправлені помилки
 \n\t* \'Туризм\' — стиль мапи із більшою кількістю деталей, новими стилями доріг, більш контрастний, з параметрами для гірських походів (шкала SAC)
 \n\t* EGM96 корекція для GPS висот "</string>
     <string name="recording_description">Запис %1$s %2$s в %3$s</string>
@@ -1165,4 +1165,19 @@
     <string name="monitoring_settings_descr">Налаштування запису треків і вмикання сплячого режиму</string>
     <string name="osmand_monitoring_plugin_description">Активація запису трека і навігації в сплячому режимі (екран вимкнений) з допомогою періодичного \"пробудження\" GPS. Налаштування запису треку в локальні файли або в Інтернет з допомогою веб-служби.</string>
     <string name="downloading_file_new">"Завантаження "</string>
-	</resources>
+	<string name="delete_point">Вилучити точку</string>
+    <string name="plugin_distance_point_time">час</string>
+    <string name="plugin_distance_point_hdop">точність</string>
+    <string name="plugin_distance_point_speed">швидкість</string>
+    <string name="plugin_distance_point_ele">висота</string>
+    <string name="plugin_distance_point">Точка</string>
+    <string name="gpx_file_name">Ім\'я GPX файлу</string>
+    <string name="gpx_saved_sucessfully">GPX файл збережено в {0}</string>
+    <string name="default_buttons_do_not_show_again">Більше не показувати</string>
+    <string name="distance_measurement_start_editing">Почати редагування</string>
+    <string name="distance_measurement_finish_editing">Закінчити редагування</string>
+    <string name="distance_measurement_clear_route">Очистити всі точки</string>
+    <string name="distance_measurement_save_gpx">Зберегти в GPX</string>
+    <string name="distance_measurement_load_gpx">Завантажити GPX</string>
+    <string name="cancel_route">Відмінити маршрут</string>
+    </resources>
