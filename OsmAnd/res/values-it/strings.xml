@@ -299,7 +299,7 @@
 \n\tPer un\'introduzione base, alcuni consigli d\'uso sono collegati nel menù principale. "</string>
   <string name="next_button">Prossimo</string>
   <string name="previous_button">Precedente</string>
-  <string name="unit_of_length_descr">Cambia le unità di misura per spazio e velocità</string>
+  <string name="unit_of_length_descr">Cambia le unità di misura per lunghezza e velocità</string>
   <string name="unit_of_length">Unità di misura</string>
   <string name="si_mi_foots">Miglia/piede</string>
   <string name="si_mi_yard">Miglia/iarde</string>
@@ -1280,7 +1280,7 @@
     <string name="plugin_distance_point">Punto</string>
     <string name="gpx_file_name">Nome del file GPX</string>
     <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
-    <string name="osmand_distance_planning_plugin_description">"Creare un percorso per misurare la distanza tra punti, aprire un file GPX esistente per modificarlo e salvarlo. Potrebbe essere utilizzato per pianificare un itinerario su GPX. "</string>
+    <string name="osmand_distance_planning_plugin_description">Creare un percorso per misurare la distanza tra punti, aprire un file GPX esistente per modificarlo e salvarlo. Potrebbe essere utilizzato per pianificare un itinerario su GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento Calcolatore di distanza &amp; Pianificazione</string>
     <string name="use_distance_measurement_help">" * Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni."</string>
     <string name="default_buttons_do_not_show_again">Non mostrare nuovamente</string>
