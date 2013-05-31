@@ -1171,4 +1171,14 @@
     <string name="use_magnetic_sensor">Gebruik magnetiese sensor</string>
     <string name="local_indexes_cat_srtm">Kontoer lyne inligting</string>
     <string name="downloading_file_new">"Aflaai besig "</string>
-	</resources>
+	<string name="delete_point">Vee punt uit</string>
+    <string name="plugin_distance_point_time">Tyd</string>
+    <string name="plugin_distance_point_speed">spoed</string>
+    <string name="plugin_distance_point_hdop">akkuraatheid</string>
+    <string name="plugin_distance_point_ele">hoogte</string>
+    <string name="plugin_distance_point">Punt</string>
+    <string name="gpx_file_name">GPX lêernaam</string>
+    <string name="gpx_saved_sucessfully">GPX lêer suksesvol geberg na {0}</string>
+    <string name="osmand_distance_planning_plugin_description">Skep paaie (of gebruik / pas bestaande GPX lêers aan) om die afstand tussen punte te meet. Berg as GPX, kan gebruik word om GPX roetes te beplan.</string>
+    <string name="osmand_distance_planning_plugin_name">Afstand rekenaar &amp; beplanning gereedskap</string>
+    </resources>
