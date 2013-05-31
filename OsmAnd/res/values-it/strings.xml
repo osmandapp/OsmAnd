@@ -1291,4 +1291,7 @@
     <string name="distance_measurement_save_gpx">Salva come GPX</string>
     <string name="distance_measurement_load_gpx">Apri GPX esistente</string>
     <string name="delete_point">Elimina punto</string>
+    <string name="local_osm_changes_backup_successful">File di modifica OSM generato con successo %1$s</string>
+    <string name="local_osm_changes_backup_failed">Backup modifiche OSM non riuscito</string>
+    <string name="local_osm_changes_backup">Backup come modifica OSM</string>
     </resources>
