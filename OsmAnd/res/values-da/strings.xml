@@ -1224,15 +1224,16 @@
     <string name="gpx_file_name">GPX filnavn</string>
     <string name="default_buttons_do_not_show_again">Vis ikke igen</string>
     <string name="distance_measurement_save_gpx">Gem som GPX</string>
-    <string name="distance_measurement_load_gpx">Åbne eksisterende GPX</string>
+    <string name="distance_measurement_load_gpx">Åben eksisterende GPX</string>
     <string name="plugin_distance_point_time">tid</string>
     <string name="gpx_saved_sucessfully">GPX-fil blev gemt til {0}</string>
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Slut redigering</string>
-    <string name="distance_measurement_finish_subtrack">Næste subtrack/point</string>
+    <string name="distance_measurement_finish_subtrack">Næste subtrack/punkt</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">Opret en sti til at måle afstanden mellem punkter, åbne eksisterende GPX fil for at redigere og gemme. Kan bruges til at planlægge en rute med GPX.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt. ↵\n* Tryk og hold på kortet for at slette tidligere punkt. ↵\n* Tryk og hold på punkt for at se og vedhæfte beskrivelse. ↵\n* Klik på måling widget for at se flere handlinger.</string>
+    <string name="delete_point">Slet punkt</string>
     </resources>
