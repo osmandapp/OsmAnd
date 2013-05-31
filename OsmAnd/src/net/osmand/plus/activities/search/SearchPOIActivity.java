@@ -307,6 +307,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 			updateLocation(location);
 		}
+		app.getLocationProvider().registerOrUnregisterCompassListener(true);
 	}
 	
 	private void showPoiCategoriesByNameFilter(String query, net.osmand.Location loc){
@@ -397,7 +398,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 
 	@Override
 	public void updateLocation(net.osmand.Location location) {
-		app.getLocationProvider().registerOrUnregisterCompassListener(location != null);
 		boolean handled = false;
 		if (location != null && filter != null) {
 			net.osmand.Location searchedLocation = getSearchedLocation();
