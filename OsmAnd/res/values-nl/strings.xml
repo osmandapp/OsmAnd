@@ -1241,6 +1241,6 @@
     <string name="distance_measurement_finish_editing">Klaar met bewerken</string>
     <string name="distance_measurement_finish_subtrack">Volgende subtrack/punt</string>
     <string name="distance_measurement_clear_route">Wis routepunten</string>
-    <string name="distance_measurement_save_gpx">Bewaar als GPX</string>
+    <string name="distance_measurement_save_gpx">Bewaar als GPX-bestand</string>
     <string name="distance_measurement_load_gpx">Open bestaand GPX-bestand</string>
     </resources>
