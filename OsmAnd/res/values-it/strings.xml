@@ -1289,4 +1289,6 @@
     <string name="distance_measurement_finish_subtrack">Sottotraccia/punto successivo</string>
     <string name="distance_measurement_clear_route">Cancella i punti</string>
     <string name="distance_measurement_save_gpx">Salva come GPX</string>
+    <string name="distance_measurement_load_gpx">Apri GPX esistente</string>
+    <string name="delete_point">Elimina punto</string>
     </resources>
