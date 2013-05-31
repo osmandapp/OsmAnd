@@ -1273,4 +1273,20 @@
     <string name="access_mark_final_location_first">Modalità di accesso facilitato: selezionare prima la destinazione</string> 
     <string name="wait_current_task_finished">Prego attendere, il presente lavoro sarà finito</string>
     <string name="downloading_file_new">"In download "</string>
-	</resources>
+	<string name="plugin_distance_point_time">orario</string>
+    <string name="plugin_distance_point_hdop">precisione</string>
+    <string name="plugin_distance_point_speed">velocità</string>
+    <string name="plugin_distance_point_ele">elevazione</string>
+    <string name="plugin_distance_point">Punto</string>
+    <string name="gpx_file_name">Nome del file GPX</string>
+    <string name="gpx_saved_sucessfully">File GPX salvato con successo in {0}</string>
+    <string name="osmand_distance_planning_plugin_description">"Creare un percorso per misurare la distanza tra punti, aprire un file GPX esistente per modificarlo e salvarlo. Potrebbe essere utilizzato per pianificare un itinerario su GPX. "</string>
+    <string name="osmand_distance_planning_plugin_name">Strumento Calcolatore di distanza &amp; Pianificazione</string>
+    <string name="use_distance_measurement_help">" * Toccare per segnare un punto.\n * Premere e tenere premuto sulla mappa per eliminare il punto precedente.\n * Premere e tenere premuto sul punto per vedere e allegare una descrizione.\n * Fare clic sul widget di misura per vedere ulteriori azioni."</string>
+    <string name="default_buttons_do_not_show_again">Non mostrare nuovamente</string>
+    <string name="distance_measurement_start_editing">Iniza a modificare</string>
+    <string name="distance_measurement_finish_editing">Finisci di modificare</string>
+    <string name="distance_measurement_finish_subtrack">Sottotraccia/punto successivo</string>
+    <string name="distance_measurement_clear_route">Cancella i punti</string>
+    <string name="distance_measurement_save_gpx">Salva come GPX</string>
+    </resources>
