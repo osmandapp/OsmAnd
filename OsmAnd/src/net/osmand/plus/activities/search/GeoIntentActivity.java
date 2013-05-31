@@ -283,27 +283,29 @@ public class GeoIntentActivity extends OsmandListActivity {
 			for (RegionAddressRepository rar : countriesToSearch) {
 				final TLongObjectHashMap<City> cityIds = new TLongObjectHashMap<City>();
 				for (String element : elements) {
-					rar.searchMapObjectsByName(element, new ResultMatcher<MapObject>() {
-						@Override
-						public boolean publish(MapObject object) {
-							if (object instanceof City && object.getId() != null) {
-								cityIds.put(object.getId(), (City) object);
-							} else if(object instanceof Street) {
-								City c = ((Street)object).getCity();
-								if(c != null && c.getId() != null && cityIds.containsKey(c.getId().longValue())) {
-									connectedStreets.add((Street) object);
-									return false;
+					if (element != null && element.length() > 0) {
+						rar.searchMapObjectsByName(element, new ResultMatcher<MapObject>() {
+							@Override
+							public boolean publish(MapObject object) {
+								if (object instanceof City && object.getId() != null) {
+									cityIds.put(object.getId(), (City) object);
+								} else if (object instanceof Street) {
+									City c = ((Street) object).getCity();
+									if (c != null && c.getId() != null && cityIds.containsKey(c.getId().longValue())) {
+										connectedStreets.add((Street) object);
+										return false;
+									}
 								}
+								results.add(object);
+								return false;
 							}
-							results.add(object);
-							return false;
-						}
 
-						@Override
-						public boolean isCancelled() {
-							return false;
-						}
-					});
+							@Override
+							public boolean isCancelled() {
+								return false;
+							}
+						});
+					}
 				}
 			}
 			

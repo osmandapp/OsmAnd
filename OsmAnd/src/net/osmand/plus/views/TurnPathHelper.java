@@ -240,7 +240,7 @@ public class TurnPathHelper {
 			paintRouteDirection.setStyle(Style.FILL_AND_STROKE);
 			paintRouteDirection.setColor(resources.getColor(R.color.nav_arrow_distant));
 			paintRouteDirection.setAntiAlias(true);
-			TurnPathHelper.calcTurnPath(dp, TurnType.valueOf(TurnType.KL, false), null);
+			TurnPathHelper.calcTurnPath(dp, TurnType.sraight(), null);
 		}
 
 		@Override

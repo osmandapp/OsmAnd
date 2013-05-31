@@ -122,8 +122,7 @@ public class RouteCalculationResult {
 					if (locationIndex > interLocations[currentIntermediate]
 							&& getDistanceToLocation(intermediates.get(currentIntermediate), locationIndex) > 50) {
 						RouteDirectionInfo toSplit = localDirections.get(currentDirection);
-						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.valueOf(TurnType.C,
-								false));
+						RouteDirectionInfo info = new RouteDirectionInfo(localDirections.get(currentDirection).getAverageSpeed(), TurnType.sraight());
 						info.setRef(toSplit.getRef());
 						info.setStreetName(toSplit.getStreetName());
 						info.setDestinationName(toSplit.getDestinationName());
@@ -268,7 +267,7 @@ public class RouteCalculationResult {
 		
 		int previousLocation = 0;
 		int prevBearingLocation = 0;
-		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.valueOf(TurnType.C, leftSide));
+		RouteDirectionInfo previousInfo = new RouteDirectionInfo(speed, TurnType.sraight());
 		previousInfo.routePointOffset = 0;
 		previousInfo.setDescriptionRoute(ctx.getString( R.string.route_head));
 		computeDirections.add(previousInfo);
@@ -512,7 +511,7 @@ public class RouteCalculationResult {
 					i.routePointOffset++;
 				}
 				RouteDirectionInfo info = new RouteDirectionInfo(directions.get(0).getAverageSpeed(),
-						TurnType.valueOf(TurnType.C, false));
+						TurnType.sraight());
 				info.routePointOffset = 0;
 				// info.setDescriptionRoute(ctx.getString( R.string.route_head));//; //$NON-NLS-1$
 				directions.add(0, info);

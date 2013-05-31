@@ -530,7 +530,7 @@ public class RouteProvider {
 					if (stype != null) {
 						turnType = TurnType.valueOf(stype.toUpperCase(), leftSide);
 					} else {
-						turnType = TurnType.valueOf(TurnType.C, leftSide);
+						turnType = TurnType.sraight();
 					}
 					String sturn = item.getExtensionsToRead().get("turn-angle"); //$NON-NLS-1$
 					if (sturn != null) {

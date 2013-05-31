@@ -62,6 +62,7 @@
     			<action android:name="android.intent.action.VIEW" />
     			<category android:name="android.intent.category.DEFAULT"/>
 				<category android:name="android.intent.category.BROWSABLE"/>
+				<category android:name="android.intent.category.APP_MAPS" />
 			</intent-filter>
 			<receiver android:name="net.osmand.plus.audionotes.MediaRemoteControlReceiver">
 		    <intent-filter>

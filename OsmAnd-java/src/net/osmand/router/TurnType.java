@@ -13,6 +13,10 @@ public class TurnType {
 	public static final String TU = "TU"; // U-turn //$NON-NLS-1$
 	public static final String TRU = "TRU"; // Right U-turn //$NON-NLS-1$
 	public static String[] predefinedTypes = new String[] { C, KL, KR, TL, TSLL, TSHL, TR, TSLR, TSHR, TU, TRU };
+	
+	public static TurnType sraight() {
+		return valueOf(C, false);
+	}
 
 	public static TurnType valueOf(String s, boolean leftSide) {
 		for (String v : predefinedTypes) {
