@@ -308,7 +308,7 @@
 	<string name="context_menu_item_directions">Rutevejledning hertil</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Vil du afbryde hentning af fil?</string>
-	<string name="first_time_msg">Tak for at du bruger OsmAnd. Til mange af funktionerne i dette program skal du bruge nogle regionale offline data som du kan hente via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan du se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
+	<string name="first_time_msg">Tak for at du bruger OsmAnd. Til mange af funktionerne i programmet skal du bruge nogle regionale offline data som du kan hente via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan du se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis du ikke kan finde din region kan du lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
@@ -479,7 +479,7 @@
 	<string name="download_files_question_space">Ledig plads: {2} MB! Hent {0} filer ({1} MB)?</string>
 	<string name="tip_select_destination_point">Vælg destination</string>
 	<string name="use_transparent_map_theme">Gennemsigtigt tema</string>
-	<string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på denne enhed.</string>
+	<string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
@@ -604,7 +604,7 @@
 \n\t\'Nat\' - Brug altid nattilstand
 \n\t\'Lysføler\' - Kortvisning styres af lysføleren i din enhed (kun hvis den har en) "</string>	
 	<string name="tip_osm_improve_t">\tOsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Du kan nemt oprettet og overføre nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk!
-\n\tFor at kunne dette skal du først angive dine OSM logindoplysninger i \'Indstillinger\' -&gt; \'Generelle indstillinger\' -&gt; \'OSM redigering\'.
+\n\tFørst skal du indtaste dine logind-oplysninger til OSM i \'Indstillinger\' -&gt; \'Generelle indstillinger\' -&gt; \'OSM redigering\'.
 \n\tFor at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i kortets genvejsmenu. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
 \n\tFejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
 \n\tFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
@@ -680,7 +680,7 @@
 	<string name="gpx_option_reverse_route">Omvendt GPX-retning</string>
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
-	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.\n\t\n\tFor at anvende aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmeindstillinger</string>
 	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
@@ -1007,7 +1007,7 @@
 	<string name="update_poi_success">Interessepunkt-data blev opdateret ({0} blev indlæst)</string>
 	<string name="update_poi_error_local">Fejl under opdatering af lokal interessepunkt-liste</string>
 	<string name="update_poi_error_loading">Fejl under indlæsning af data fra server</string>
-	<string name="update_poi_no_offline_poi_index">Ingen offline interessepunkt-data til rådighed for dette område</string>
+	<string name="update_poi_no_offline_poi_index">Ingen offline interessepunkt-data til rådighed for området</string>
 	<string name="update_poi_is_not_available_for_zoom">Opdatering af interessepunkter ikke tilgængelig ved lave zoomniveauer</string>
 	<string name="context_menu_item_update_poi">Opdater interessepunkt</string>
 	<string name="context_menu_item_update_map_confirm">Opdater lokale data via internettet?</string>
@@ -1029,14 +1029,14 @@
 	<string name="max_level_download_tile">Maks. online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoom niveau der hentes for online delkort</string>
 	<string name="tip_map_switch_t_v2">"\tKortkilden og lag der vises kan ændres via \'Menu\' -&gt; \'Definer visning\' i kort visning.
-\n\tUnder \'Kortkilde...\' kan du vælge de forhånds indlæste vektorkort, forhånds definerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelse for dette) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
+\n\tUnder \'Kortkilde...\' kan du vælge de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
 \n\tOsmAnd understøtter også brugerdefinerede kilder. "</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd understøtter forskellige brugerprofiler (kan konfigureres) til forskellige brugstilfælde.
 \n\tDu kan skifte profil via profil knappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger ikon) eller når du opretter en rute. "</string>
 	<string name="tip_search_t">"\tDu kan søge efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
 \n\tTryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen 2 valgmuligheder: \'Brug som destination\' eller \'Vis på kort\'. "</string>
 	<string name="tip_map_context_menu_t">"\tKortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
-\n\tDette åbner en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
+\n\tSå åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
 \n\tKortets genvejsmenu indeholder alle handlinger der refererer til et punkt (en placering). "</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.\n\nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="default_buttons_ok">OK</string>
@@ -1234,6 +1234,6 @@
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">Opret et spor til at måle afstanden mellem punkter, åben eksisterende GPX fil for at redigere og gemme. Kan bruges til at planlægge en GPX-rute .</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt. ↵\n* Tryk og hold på kortet for at slette tidligere punkt. ↵\n* Tryk og hold på punkt for at se og vedhæfte beskrivelse. ↵\n* Klik på målemodul for at se flere handlinger.</string>
+    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n* Tryk og hold på kortet for at slette tidligere punkt.\n* Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n* Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     </resources>
