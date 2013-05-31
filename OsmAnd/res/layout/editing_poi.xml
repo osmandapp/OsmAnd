@@ -75,8 +75,6 @@
     </EditText>
 </TableRow>
 
-
-<!-- 
 <TableRow>
     <TextView
         android:layout_width="wrap_content"
@@ -108,7 +106,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp" >
     </EditText>
-</TableRow> -->
+</TableRow> 
 
 <TableRow>
     <TextView

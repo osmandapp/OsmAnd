@@ -66,6 +66,8 @@ public class EditingPOIActivity implements DialogProvider {
 	private EditText commentText;
 	private EditText websiteText;
 	private EditText phoneText;
+	private EditText streetNameText;
+	private EditText hnoText;
 	private CheckBox closeChange;
 
 //	private final static Log log = LogUtil.getLog(EditingPOIActivity.class);
@@ -182,6 +184,10 @@ public class EditingPOIActivity implements DialogProvider {
 		nameText.setText(a.getName());
 		EditText openingHours = ((EditText)dlg.findViewById(R.id.OpeningHours));
 		openingHours.setText(a.getOpeningHours());
+		EditText streetName = ((EditText)dlg.findViewById(R.id.StreetName));
+		streetName.setText(n.getTag(OSMTagKey.ADDR_STREET));
+		EditText houseNumber = ((EditText)dlg.findViewById(R.id.HouseNumber));
+		houseNumber.setText(n.getTag(OSMTagKey.ADDR_HOUSE_NUMBER));
 		EditText phoneText = ((EditText)dlg.findViewById(R.id.Phone));
 		phoneText.setText(a.getPhone());
 		EditText websiteText = ((EditText)dlg.findViewById(R.id.Website));
@@ -298,6 +304,8 @@ public class EditingPOIActivity implements DialogProvider {
 		typeText.setThreshold(1);
 		commentText = ((EditText)dlg.findViewById(R.id.Comment));
 		phoneText = ((EditText)dlg.findViewById(R.id.Phone));
+		hnoText = ((EditText)dlg.findViewById(R.id.HouseNumber));
+		streetNameText = ((EditText)dlg.findViewById(R.id.StreetName));
 		websiteText = ((EditText)dlg.findViewById(R.id.Website));
 		closeChange = ((CheckBox) dlg.findViewById(R.id.CloseChangeset));
 		
@@ -456,6 +464,14 @@ public class EditingPOIActivity implements DialogProvider {
 				String phone = phoneText.getText().toString();
 				if (phone.length() > 0 ){
 					n.putTag(OSMTagKey.PHONE.getValue(),phone);
+				}
+				String str = streetNameText.getText().toString();
+				if (str .length() > 0 ){
+					n.putTag(OSMTagKey.ADDR_STREET.getValue(),str);
+				}
+				String hno = hnoText.getText().toString();
+				if (hno .length() > 0 ){
+					n.putTag(OSMTagKey.ADDR_HOUSE_NUMBER.getValue(),hno);
 				}
 				commitNode(action, n, openstreetmapUtil.getEntityInfo(), commentText.getText().toString(), closeChange.isSelected(), 
 						new Runnable() {
