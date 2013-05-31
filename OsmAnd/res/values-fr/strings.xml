@@ -1300,4 +1300,18 @@
     <string name="use_kalman_filter_compass_descr">Utiliser le filtre Kalman pour éviter les interférences de la boussole</string>
     <string name="use_kalman_filter_compass">Utiliser le filtre Kalman</string>
     <string name="access_mark_final_location_first">Mode accessibilité: veuillez d\'abord saisir la destination</string> 
+    <string name="distance_measurement_start_editing">Commencer à modifier</string>
+    <string name="distance_measurement_finish_editing">Finir de modifier</string>
+    <string name="distance_measurement_save_gpx">Sauvegarder comme GPX</string>
+    <string name="distance_measurement_load_gpx">Ouvrir une fichier GPX existant</string>
+    <string name="wait_current_task_finished">Veuillez attendre jusqu\'à ce que la tâche actuelle soit terminée</string>
+    <string name="plugin_distance_point_time">temps</string>
+    <string name="plugin_distance_point_hdop">précision</string>
+    <string name="plugin_distance_point_speed">vitesse</string>
+    <string name="plugin_distance_point_ele">élévation</string>
+    <string name="gpx_file_name">nom du fichier GPX</string>
+    <string name="gpx_saved_sucessfully">sauvegarde du fichier GPX à {0} réussi</string>
+    <string name="osmand_distance_planning_plugin_description">"Créer un chemin pour mesurer la distance entre des points, ouvrir un fichier GPX existant pour le modifier et le sauvegarder. Peut être utilisé pour préparer un itinéraire avec un fichier GPX. "</string>
+    <string name="osmand_distance_planning_plugin_name">Calculatrice de Distance &amp; Outil de Planification</string>
+    <string name="default_buttons_do_not_show_again">Ne plus montrer</string>
     </resources>
