@@ -1246,4 +1246,22 @@
     <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
     <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
     <string name="downloading_file_new">"בהורדה "</string>
-	</resources>
+	<string name="delete_point">מחיקת נקודה</string>
+    <string name="plugin_distance_point_time">זמן</string>
+    <string name="plugin_distance_point_hdop">דיוק</string>
+    <string name="plugin_distance_point_speed">מהירות</string>
+    <string name="plugin_distance_point_ele">התרוממות</string>
+    <string name="plugin_distance_point">נקודה</string>
+    <string name="gpx_file_name">קובץ שם ה־GPX</string>
+    <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר בהצלחה אל {0}</string>
+    <string name="osmand_distance_planning_plugin_description">"יש ליצור נתיב כדי למדוד את המרחק בין נקודות, יש לפתוח קובץ GPX קיים כדי לערוך אותו ולשמור אותו. ניתן להשתמש בזה כדי לתכנן נתיב לפי GPX. "</string>
+    <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
+    <string name="default_buttons_do_not_show_again">לא להציג שוב</string>
+    <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
+    <string name="distance_measurement_finish_editing">סיום העריכה</string>
+    <string name="distance_measurement_finish_subtrack">תת מסלול/נקודה הבאים</string>
+    <string name="distance_measurement_clear_route">מחיקת הנקודות</string>
+    <string name="distance_measurement_save_gpx">שמירה כ־GPX</string>
+    <string name="distance_measurement_load_gpx">פתיחת GPX קיים</string>
+    <string name="use_distance_measurement_help">* יש לגעת כדי לסמן נקודה.\n * יש ללחוץ ולהחזיק על המפה כדי למחוק נקודה קודמת.\n * יש ללחוץ ולהחזיק על נקודה כדי לצפות ולצרף תיאור.\n * יש ללחוץ על וידג׳ט המדידה כדי לצפות בפעולות נוספות.</string>
+    </resources>
