@@ -1225,4 +1225,22 @@
     <string name="local_indexes_cat_srtm">Hoogtelijnen</string>
     <string name="downloading_file_new">"Bezig met downloaden "</string>
 	<string name="wait_current_task_finished">Wacht alsjeblieft tot de huige taak klaar is</string>
+    <string name="delete_point">Verwijder punt</string>
+    <string name="plugin_distance_point_time">tijd</string>
+    <string name="plugin_distance_point_hdop">nauwkeurigheid</string>
+    <string name="plugin_distance_point_speed">snelheid</string>
+    <string name="plugin_distance_point_ele">hoogte</string>
+    <string name="plugin_distance_point">Punt</string>
+    <string name="gpx_file_name">GPX bestandsnaam</string>
+    <string name="gpx_saved_sucessfully">GPX bestand met succes opgeslagen als {0}</string>
+    <string name="osmand_distance_planning_plugin_description">"Creëer een pad om de afstand tussen punten te meten, open een bestaand GPX bestand om te bewerken en op te slaan. Kan worden gebruikt om een GPX-route te plannen. "</string>
+    <string name="osmand_distance_planning_plugin_name">Afstands-calculator &amp; Planning hulp</string>
+    <string name="use_distance_measurement_help">* Klik om een punt te markeren.\n * Klik lang op de kaart om het vorige punt te verwijderen.\n * Klik lang op een punt om de beschrijving te zien en toe te voegen.\n * Klik op de meet-widget om meer acties te zien.</string>
+    <string name="default_buttons_do_not_show_again">Niet meer tonen</string>
+    <string name="distance_measurement_start_editing">Begin met bewerken</string>
+    <string name="distance_measurement_finish_editing">Klaar met bewerken</string>
+    <string name="distance_measurement_finish_subtrack">Volgende subtrack/punt</string>
+    <string name="distance_measurement_clear_route">Wis routepunten</string>
+    <string name="distance_measurement_save_gpx">Bewaar als GPX</string>
+    <string name="distance_measurement_load_gpx">Open bestaand GPX-bestand</string>
     </resources>
