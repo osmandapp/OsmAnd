@@ -3,24 +3,19 @@ package net.osmand.plus.osmedit;
 import java.util.Map;
 
 import net.osmand.PlatformUtil;
-import net.osmand.access.AccessibleToast;
 import net.osmand.data.Amenity;
 import net.osmand.data.AmenityType;
 import net.osmand.osm.MapRenderingTypes;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.OSMSettings.OSMTagKey;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
-import android.app.Activity;
 import android.content.Context;
-import android.widget.Toast;
 
-public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
+public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	
 	private final Context ctx;
 	private final OpenstreetmapsDbHelper db;
@@ -53,21 +48,6 @@ public class OpenstreetmapLocalUtil extends AbstractOpenstreetmapUtil {
 			db.addOpenstreetmap(p);
 		}
 		return newNode;
-	}
-	
-	@Override
-	protected void showMessageAfterCommit(Activity ctx, final OsmandApplication app, final AmenityIndexRepositoryOdb repo) {
-		ctx.runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				if (repo == null) {
-					AccessibleToast.makeText(app, app.getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
-				} else {
-					AccessibleToast.makeText(app, app.getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
-				}
-			}
-		});
 	}
 	
 	@Override

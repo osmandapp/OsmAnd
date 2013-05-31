@@ -42,7 +42,6 @@ import net.osmand.plus.RotatedTileBox;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.Version;
-import net.osmand.plus.osmedit.AmenityIndexRepositoryOdb;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.plus.resources.AsyncLoadingThread.AmenityLoadRequest;
@@ -82,7 +81,6 @@ public class ResourceManager {
 	
 	
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
-	private static final String MINE_POI_DB = "mine"+ IndexConstants.POI_INDEX_EXT;
 	
 	
 	protected static ResourceManager manager = null;
@@ -130,8 +128,6 @@ public class ResourceManager {
 	public final AsyncLoadingThread asyncLoadingThread = new AsyncLoadingThread(this);
 	
 	protected boolean internetIsNotAccessible = false;
-	
-	protected AmenityIndexRepositoryOdb updatablePoiDb = null;
 	
 	public ResourceManager(OsmandApplication context) {
 		this.context = context;
@@ -403,7 +399,6 @@ public class ResourceManager {
 		// do it lazy
 		// indexingImageTiles(progress);
 		warnings.addAll(indexingMaps(progress));
-		warnings.addAll(indexingPoi(progress));
 		warnings.addAll(indexVoiceFiles(progress));
 		warnings.addAll(OsmandPlugin.onIndexingFiles(progress));
 		
@@ -668,44 +663,6 @@ public class ResourceManager {
 		return warnings;
 	}
 	
-	// POI INDEX //
-	private List<String> indexingPoi(final IProgress progress) {
-		File updatablePoiDbFile = context.getAppPath(MINE_POI_DB);
-		if(updatablePoiDbFile.exists() && updatablePoiDbFile.canRead()){
-			tryToOpenUpdatablePoiDb(updatablePoiDbFile);
-		}
-		return new ArrayList<String>();
-	}
-	
-	public AmenityIndexRepositoryOdb getUpdatablePoiDb() {
-		if (updatablePoiDb == null) {
-			File updatablePoiDbFile = context.getAppPath(MINE_POI_DB);
-			if (!tryToOpenUpdatablePoiDb(updatablePoiDbFile)) {
-				if (updatablePoiDbFile.exists()) {
-					updatablePoiDbFile.delete();
-				}
-				AmenityIndexRepositoryOdb.createAmenityIndexRepository(updatablePoiDbFile);
-				tryToOpenUpdatablePoiDb(updatablePoiDbFile);
-			}
-		}
-		return updatablePoiDb;
-	}
-
-	private boolean tryToOpenUpdatablePoiDb(File updatablePoiDbFile) {
-		try {
-			AmenityIndexRepositoryOdb odb = new AmenityIndexRepositoryOdb();
-			boolean initialize = odb.initialize(IProgress.EMPTY_PROGRESS, updatablePoiDbFile);
-			if (initialize) {
-				amenityRepositories.add(odb);
-				this.updatablePoiDb = odb;
-				return true;
-			}
-		} catch (SQLiteException e) {
-		}
-		return false;
-	}
-
-	
 	////////////////////////////////////////////// Working with amenities ////////////////////////////////////////////////
 	public List<Amenity> searchAmenities(PoiFilter filter,
 			double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, 
@@ -870,7 +827,6 @@ public class ResourceManager {
 			r.close();
 		}
 		amenityRepositories.clear();
-		updatablePoiDb = null;
 	}
 	
 	public void closeAddresses(){

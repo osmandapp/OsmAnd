@@ -142,11 +142,6 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 			OsmPoint info = (OsmPoint) listAdapter.getItem(pos);
 			if (info.getGroup() == OsmPoint.Group.POI) {
 				dbpoi.deletePOI((OpenstreetmapPoint) info);
-				if (info.getAction() == Action.CREATE) {
-					AmenityIndexRepositoryOdb repo = getMyApplication().getResourceManager().getUpdatablePoiDb();
-					repo.deleteAmenities(info.getId() << 1);
-					repo.clearCache();
-				}
 			} else if (info.getGroup() == OsmPoint.Group.BUG) {
 				dbbug.deleteAllBugModifications((OsmNotesPoint) info);
 			}
@@ -327,9 +322,8 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 					if (OsmPoint.Action.CREATE != p.getAction()) {
 						entityInfo = remotepoi.loadNode(p.getEntity());
 					}
-					Node n;
-					if ((n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment(), false)) != null) {
-						remotepoi.updateNodeInIndexes(LocalOpenstreetmapActivity.this, p.getAction(), n, p.getEntity());
+					Node n = remotepoi.commitNodeImpl(p.getAction(), p.getEntity(), entityInfo, p.getComment(), false);
+					if (n != null) {
 						dbpoi.deletePOI(p);
 						publishProgress(p);
 						uploaded++;

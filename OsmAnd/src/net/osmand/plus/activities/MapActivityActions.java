@@ -18,10 +18,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
-import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.access.AccessibleToast;
-import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.map.ITileSource;
@@ -39,7 +37,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.osmedit.AmenityIndexRepositoryOdb;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.BaseMapLayer;
@@ -50,7 +47,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.DialogInterface;
@@ -68,7 +64,6 @@ import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.text.Html;
 import android.util.FloatMath;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -287,59 +282,6 @@ public class MapActivityActions implements DialogProvider {
     
     protected String getString(int res){
     	return mapActivity.getString(res);
-    }
-    
-    protected void updatePoiDb(int zoom, double latitude, double longitude){
-    	if(zoom < 15){
-    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_is_not_available_for_zoom), Toast.LENGTH_SHORT).show();
-    		return;
-    	}
-    	final AmenityIndexRepositoryOdb repo = ((OsmandApplication) mapActivity.getApplication()).
-    								getResourceManager().getUpdatablePoiDb();
-    	if(repo == null){
-    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_no_offline_poi_index), Toast.LENGTH_LONG).show();
-    		return;
-    	} else {
-    		AccessibleToast.makeText(mapActivity, getString(R.string.update_poi_does_not_change_indexes), Toast.LENGTH_LONG).show();
-    	}
-    	final OsmandMapTileView mapView = mapActivity.getMapView();
-    	Rect pixRect = new Rect(-mapView.getWidth()/2, -mapView.getHeight()/2, 3*mapView.getWidth()/2, 3*mapView.getHeight()/2);
-    	RectF tileRect = new RectF();
-    	mapView.calculateTileRectangle(pixRect, mapView.getCenterPointX(), mapView.getCenterPointY(), 
-    			mapView.getXTile(), mapView.getYTile(), tileRect);
-    	final double leftLon = MapUtils.getLongitudeFromTile(zoom, tileRect.left); 
-    	final double topLat = MapUtils.getLatitudeFromTile(zoom, tileRect.top);
-		final double rightLon = MapUtils.getLongitudeFromTile(zoom, tileRect.right);
-		final double bottomLat = MapUtils.getLatitudeFromTile(zoom, tileRect.bottom);
-    	
-		ProgressDialog progressDlg = ProgressDialog.show(mapActivity, getString(R.string.loading), getString(R.string.loading_data));
-		mapActivity.setProgressDlg(progressDlg);
-    	new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					List<Amenity> amenities = new ArrayList<Amenity>();
-					boolean loadingPOIs = AmenityIndexRepositoryOdb.loadingPOIs(amenities, leftLon, topLat, rightLon, bottomLat);
-					if(!loadingPOIs){
-						showToast(getString(R.string.update_poi_error_loading));
-					} else {
-						repo.updateAmenities(amenities, leftLon, topLat, rightLon, bottomLat);
-						showToast(MessageFormat.format(getString(R.string.update_poi_success), amenities.size()));
-						mapView.refreshMap();
-					}
-				} catch(Exception e) {
-					Log.e(PlatformUtil.TAG, "Error updating local data", e); //$NON-NLS-1$
-					showToast(getString(R.string.update_poi_error_local));
-				} finally {
-					Dialog prog = mapActivity.getProgressDlg();
-					if(prog !=null){
-						prog.dismiss();
-						mapActivity.setProgressDlg(prog);
-					}
-				}
-			}
-    	}, "LoadingPOI").start(); //$NON-NLS-1$
-    	
     }
     
     protected void showToast(final String msg){
@@ -909,12 +851,6 @@ public class MapActivityActions implements DialogProvider {
 				
 				
 				mapView.refreshMap();
-			}
-    	});
-    	builder.setNeutralButton(R.string.context_menu_item_update_poi, new DialogInterface.OnClickListener(){
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				updatePoiDb(args.getInt(KEY_ZOOM), args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE));
 			}
     	});
 		return builder.create();

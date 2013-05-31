@@ -35,18 +35,6 @@ import net.osmand.plus.Version;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
-import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
@@ -55,7 +43,7 @@ import android.util.Xml;
 import android.view.View;
 import android.widget.Toast;
 
-public class OpenstreetmapRemoteUtil extends AbstractOpenstreetmapUtil {
+public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 	
 //	private final static String SITE_API = "http://api06.dev.openstreetmap.org/";
 	private final static String SITE_API = "http://api.openstreetmap.org/"; //$NON-NLS-1$

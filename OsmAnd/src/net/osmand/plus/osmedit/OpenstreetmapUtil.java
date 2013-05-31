@@ -3,7 +3,6 @@ package net.osmand.plus.osmedit;
 import net.osmand.data.Amenity;
 import net.osmand.osm.edit.EntityInfo;
 import net.osmand.osm.edit.Node;
-import android.app.Activity;
 
 public interface OpenstreetmapUtil {
 	
@@ -15,5 +14,4 @@ public interface OpenstreetmapUtil {
 	
 	public Node loadNode(Amenity n);
 	
-	public void updateNodeInIndexes(Activity ctx, OsmPoint.Action action, Node n, Node oldNode);
 }

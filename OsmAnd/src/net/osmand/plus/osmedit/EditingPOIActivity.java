@@ -555,10 +555,7 @@ public class EditingPOIActivity implements DialogProvider {
 			}
 			@Override
 			protected Node doInBackground(Void... params) {
-				Node node = null;
-				if ((node = openstreetmapUtil.commitNodeImpl(action, n, info, comment, closeChangeSet)) != null) {
-					openstreetmapUtil.updateNodeInIndexes(ctx, action, node, n);
-				}
+				Node node = openstreetmapUtil.commitNodeImpl(action, n, info, comment, closeChangeSet);
 				return node;
 			}
 			@Override
