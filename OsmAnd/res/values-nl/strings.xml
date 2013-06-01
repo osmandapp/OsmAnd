@@ -1243,4 +1243,7 @@
     <string name="distance_measurement_clear_route">Wis routepunten</string>
     <string name="distance_measurement_save_gpx">Bewaar als GPX-bestand</string>
     <string name="distance_measurement_load_gpx">Open bestaand GPX-bestand</string>
+    <string name="local_osm_changes_backup_successful">OSM bijwerken gelukt voor %1$s</string>
+    <string name="local_osm_changes_backup_failed">Backup OSM veranderingen mislukt</string>
+    <string name="local_osm_changes_backup">Backup als OSM aanpassing</string>
     </resources>
