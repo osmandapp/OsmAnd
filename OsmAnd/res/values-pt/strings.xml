@@ -1115,4 +1115,14 @@
     <string name="cancel_route">Descartar rota</string>
     <string name="cancel_navigation">Parar navegação</string>
     <string name="tip_recent_changes_1_1_4_t">"Mudanças em 1.1.4: ↵\n→* Interface do usuário redesenhada ↵\n→* Correções de erros "</string>
+    <string name="local_osm_changes_backup_successful">Arquivo de mudança OSM gerou com sucesso %1$s</string>
+    <string name="local_osm_changes_backup_failed">Falhou a cópia das mudanças OSM</string>
+    <string name="local_osm_changes_backup">Copiar como alteração OSM</string>
+    <string name="delete_point">Apagar Ponto</string>
+    <string name="plugin_distance_point_time">Tempo</string>
+    <string name="plugin_distance_point_hdop">precisão</string>
+    <string name="plugin_distance_point_speed">Velocidade</string>
+    <string name="plugin_distance_point_ele">Altitude</string>
+    <string name="plugin_distance_point">Ponto</string>
+    <string name="gpx_file_name">Nome do arquivo GPX</string>
     </resources>
