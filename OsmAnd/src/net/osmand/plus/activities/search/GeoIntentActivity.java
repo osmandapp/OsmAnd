@@ -64,6 +64,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 				@Override
 				public void run() {
 					try {
+						while(getMyApplication().isApplicationInitializing()) {
+							Thread.sleep(200);
+						}
 						Collection<? extends MapObject> results = extract(
 								intent.getData()).execute();
 						// show the first result on map, and populate the list!
@@ -351,7 +354,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 					connectedStreets.add(s);
 				} else {
 					boolean tooFar = true;
-					for(City c : cityIds.values()) {
+					for(City c : cityIds.valueCollection()) {
 						if(MapUtils.getDistance(c.getLocation(), s.getLocation()) < 50000) {
 							tooFar = false;
 							break;

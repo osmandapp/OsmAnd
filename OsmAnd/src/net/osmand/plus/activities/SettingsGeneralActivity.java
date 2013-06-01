@@ -143,7 +143,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		//getResources().getAssets().getLocales();
 		entrieValues = new String[] { "",
 				"en", "af", "hy", "eu", "bs", "bg",
-				"ca", "cs", "nl", "fi", "fr", "ka",
+				"ca", "cs",  "da", "nl", "fi", "fr", "ka",
 				"de", "el", "he", "hi", "hu", "id",
 				"it", "ja", "ko", "lv", "lt", "mr",
 				"no", "pl", "pt", "ro", "ru", "sk",
@@ -151,11 +151,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 				"cy" };
 		entries = new String[] { getString(R.string.system_locale), 
 				"English", "Afrikaans", "Armenian" + incompleteSuffix, "Basque" + incompleteSuffix, "Bosnian" + incompleteSuffix, "Bulgarian" + incompleteSuffix,
-				"Catalan", "Czech", "Dutch", "Finnish" + incompleteSuffix, "French", "Georgian",
+				"Catalan", "Czech", "Danish", "Dutch", "Finnish" + incompleteSuffix, "French", "Georgian",
 				"German", "Greek", "Hebrew", "Hindi" + incompleteSuffix, "Hungarian", "Indonesian" + incompleteSuffix,
-				"Italian", "Japanese" + incompleteSuffix, "Korean" + incompleteSuffix, "Latvian", "Lithuanian", "Marathi",
+				"Italian", "Japanese" + incompleteSuffix, "Korean" + incompleteSuffix, "Latvian", "Lithuanian", "Marathi" +incompleteSuffix,
 				"Norwegian" + incompleteSuffix, "Polish", "Portuguese", "Romanian", "Russian", "Slovak",
-				"Slovenian", "Spanish", "Swedish" + incompleteSuffix, "Turkish" + incompleteSuffix, "Ukrainian" + incompleteSuffix, "Vietnamese",
+				"Slovenian", "Spanish", "Swedish", "Turkish" , "Ukrainian" , "Vietnamese",
 				"Welsh" + incompleteSuffix };
 		registerListPreference(settings.PREFERRED_LOCALE, screen, entries, entrieValues);
 
