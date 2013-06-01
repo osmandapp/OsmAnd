@@ -289,8 +289,8 @@
   <string name="local_index_mi_backup">Zálohovat</string>
   <string name="local_index_mi_delete">Smazat</string>
   <string name="local_index_mi_reload">Znovu nahrát z SD karty</string>
-  <string name="local_index_download">Stáhnout…</string>
-  <string name="local_index_tile_data">Zdroj map. dlaždic: %1$s
+  <string name="local_index_download">Stáhnout</string>
+  <string name="local_index_tile_data">Zdroj map. dat: %1$s
 \nMinimální zvětšení : %2$d\nMaximální zvětšení : %3$d\nStahovatelné : %4$s
 \nStažené zvětšení : %5$s</string>
   <string name="local_index_poi_data">Data POI</string>
@@ -485,9 +485,9 @@
   <string name="reload">Načíst znovu</string>
   <string name="fast_route_mode">Nejrychlejší trasa</string>
   <string name="fast_route_mode_descr">Zapněte pro výpočet nejrychlejší trasy, vypněte, pokud chcete hledat tu nejkratší</string>
-  <string name="tiles_to_download_estimated_size">Pro zoom {0} je třeba stáhnout {1} dlaždic, celkem {2} MB</string>
+  <string name="tiles_to_download_estimated_size">Pro zvětšení {0} je třeba stáhnout {1} mapových dlaždic, celkem {2} MB</string>
   <string name="context_menu_item_download_map">Stáhnout mapu</string>
-  <string name="select_max_zoom_preload_area">Vyberte maximální zvětšení stahovaných dlaždic</string>
+  <string name="select_max_zoom_preload_area">Vyberte maximální zvětšení stahovaných map</string>
   <string name="maps_could_not_be_downloaded">Tuto mapu nelze stáhnout</string>
   <string name="continuous_rendering">Průběžné vykreslování</string>
   <string name="continuous_rendering_descr">Při zaškrtnuté volbě se mapa bude vykreslovat postupně</string>
@@ -749,8 +749,8 @@
   <string name="map_view_3d">3D Mapa</string>
   <string name="show_poi_over_map_description">Zobrazit POI na mapě (použít poslední vybraný filtr)</string>
   <string name="show_poi_over_map">Zobrazit POI</string>
-  <string name="map_tile_source_descr">Zvolte zdroj mapových dlaždic</string>
-  <string name="map_tile_source">Zdroj mapových dlaždic</string>
+  <string name="map_tile_source_descr">Zvolte zdroj rastrových map uložených v zařízení nebo online</string>
+  <string name="map_tile_source">Zdroj rastrových map</string>
   <string name="map_source">Zdroj map</string>
   <string name="use_internet">Používat internet</string>
   <string name="show_location">Zobrazit polohu</string>
@@ -1132,7 +1132,7 @@
 	<string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
     <string name="srtm_plugin_description">Tento modul umožňuje stáhnout mapy vrstevnic (Stáhnout mapy -&gt; Menu -&gt; Ostatní mapy) pro určitou oblast a použít je s offline mapami.</string>
     <string name="srtm_plugin_name">Modul vrstevnice</string>
-    <string name="download_srtm_maps">Mapy vrstevnic</string>
+    <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa</string>
     <string name="monitoring_control_stop">zastavit</string>
     <string name="map_widget_audionotes">Audio poznámky</string>
@@ -1146,7 +1146,7 @@
     <string name="recording_context_menu_play">Přehrát</string>
     <string name="map_widget_av_notes">Zvukové/video poznámky</string>
     <string name="map_widget_distancemeasurement">Měření vzdálenosti</string>
-    <string name="audionotes_plugin_description">Zaznamenat zvukové/video poznámky během cesty</string>
+    <string name="audionotes_plugin_description">Záznam zvukových/video poznámek během cesty</string>
     <string name="index_srtm_parts">části</string>
     <string name="av_def_action_video">Nahrát video</string>
     <string name="av_def_action_audio">Nahrát zvuk</string>
@@ -1224,7 +1224,7 @@
     <string name="tip_recent_changes_1_5_t">"Změny ve verzi 1.5:
 \n\t* Holo téma (uživatelské motivy) "</string>
     <string name="available_downloads_left">K dispozici %1$d souborů ke stažení</string>
-    <string name="files_limit">%1$d souborů zbývá</string>
+    <string name="files_limit">Zbývá %1$d souborů</string>
     <string name="tip_recent_changes_1_3_t">"Změny ve verzi 1.3:
 \n\t* Téma Holo (nastavení vzhledů) "</string>
     <string name="monitoring_settings">Záznamy tras a služby na pozadí</string>
@@ -1239,7 +1239,7 @@
     <string name="cancel_navigation">Zastavit navigaci</string>
     <string name="use_kalman_filter_compass_descr">Použít Kalmanův filtr k zabránění odchylek kompasu</string>
     <string name="use_kalman_filter_compass">Použít Kalmanův filtr</string>
-    <string name="use_magnetic_sensor">Použít magnetický senzor</string>
+    <string name="use_magnetic_sensor">Používat magnetický senzor</string>
     <string name="access_mark_final_location_first">Usnadnění: vyberte prosím nejdříve cíl</string> 
     <string name="wait_current_task_finished">Čekejte prosím na dokončení úlohy</string>
     <string name="use_magnetic_sensor_descr">Použít magnetický senzor k určení směru místo senzoru natočení</string>
@@ -1247,4 +1247,27 @@
     <string name="clear_destination">Smazat cíl</string>
     <string name="local_indexes_cat_srtm">Vrstevnice</string>
     <string name="downloading_file_new">"Stahování "</string>
-	</resources>
+	<string name="other_location">Ostatní</string>
+    <string name="local_osm_changes_backup_successful">Soubor se změnami mapy OSM úspěšně vytvořen %1$s</string>
+    <string name="local_osm_changes_backup_failed">Nezdařilo se zálohovat změny mapy OSM</string>
+    <string name="local_osm_changes_backup">Zálohovat změny mapy OSM</string>
+    <string name="delete_point">Smazat bod</string>
+    <string name="plugin_distance_point_time">čas</string>
+    <string name="plugin_distance_point_hdop">přesnost</string>
+    <string name="plugin_distance_point_speed">rychlost</string>
+    <string name="plugin_distance_point_ele">nadmořská výška</string>
+    <string name="plugin_distance_point">bod</string>
+    <string name="gpx_file_name">Jméno GPX souboru</string>
+    <string name="gpx_saved_sucessfully">Soubor GPX úspěšně uložen do {0}</string>
+    <string name="osmand_distance_planning_plugin_name">Výpočet vzdálenosti a plánování</string>
+    <string name="use_distance_measurement_help">* Klikněte pro označení bodu.\n * Stiskněte dlouze na mapě pro smazání předchozího bodu.\n * Stiskněte dlouze bod pro zobrazení a přidání popisky.\n * Klikněte na modul měření pro další možnosti.</string>
+    <string name="default_buttons_do_not_show_again">Již nezobrazovat</string>
+    <string name="distance_measurement_start_editing">Začít editaci</string>
+    <string name="distance_measurement_finish_editing">Ukončit editaci</string>
+    <string name="distance_measurement_finish_subtrack">Začít novou podtrasu</string>
+    <string name="distance_measurement_clear_route">Vymazat všechny body</string>
+    <string name="distance_measurement_save_gpx">Uložit jako GPX</string>
+    <string name="distance_measurement_load_gpx">Otevřít soubor GPX</string>
+    <string name="osmand_monitoring_plugin_description">Umožní záznam a navigaci při vypnuté obrazovce pravidelným zapínáním přijímače GPS. Zobrazí nastavení záznamu tras do souborů GPX nebo poslání v přímém přenosu na webový server.</string>
+    <string name="osmand_distance_planning_plugin_description">Vytvořte spojnice (nebo použijte či změňte stávající soubory GPX) pro měření vzdálenosti mezi body. Uložte je do souboru GPX. Lze též použít pro plánování GPX tras.</string>
+    </resources>
