@@ -665,7 +665,7 @@
 	<string name="search_offline_clear_search">Ny søgning</string>
 	<string name="map_text_size_descr">Vælg tekststørrelse for navne på kortet</string>
 	<string name="map_text_size">Tekststørrelse</string>
-	<string name="trace_rendering">Optegningsfejlfindingsinfo</string>
+	<string name="trace_rendering">Optegningsfejlfinding</string>
 	<string name="trace_rendering_descr">Vis optegningsydeevne</string>
 	<string name="tip_recent_changes">Seneste ændringer</string>
 	<string name="tip_recent_changes_0_6_6_t">Ændringer til 0.6.6:\n\t- Tekst til tale motor for stemmenavigation\n\t- Mere detaljeret kortoptegning\n\t- Basiskort for hele verden indbygget i program\n\t- Finjustering af offline navigation (stadig eksperimentel)\n\t- GPX navigationsmuligheder\n\t- Brugergrænseflade opdatering og store fejlrettelser</string>
