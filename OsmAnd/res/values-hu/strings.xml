@@ -1222,7 +1222,7 @@
     <string name="plugin_distance_point">Pont</string>
     <string name="gpx_file_name">GPX fájlnév</string>
     <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
-    <string name="osmand_distance_planning_plugin_description">"A pontok közti távolság méréséhez készíts egy útvonalat. Nyiss meg egy meglévő GPX fájlt szerkesztésre és mentsd el. Használhatod GPX alapú útvonaltervezésre is. "</string>
+    <string name="osmand_distance_planning_plugin_description">A pontok közti távolság méréséhez készíts egy útvonalat. Nyiss meg egy meglévő GPX fájlt szerkesztésre és mentsd el. Használhatod GPX alapú útvonaltervezésre is.</string>
     <string name="osmand_distance_planning_plugin_name">Távolságkalkulátor &amp; Tervező eszköz</string>
     <string name="use_distance_measurement_help">* Pont lerakásához kattints.\n * Nyomd meg hosszan a térképet az előző pont törléséhez.\n * Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez.\n * További műveletekért kattints a vezérlőgombra.</string>
     <string name="default_buttons_do_not_show_again">Ne mutasd újra</string>
@@ -1232,4 +1232,8 @@
     <string name="distance_measurement_clear_route">Pontok törlése</string>
     <string name="distance_measurement_save_gpx">Mentés GPX-ként</string>
     <string name="distance_measurement_load_gpx">Meglévő GPX megnyitása</string>
+    <string name="local_osm_changes_backup_successful">Az OSM módosításfájl sikeresen létrehozva %1$s</string>
+    <string name="local_osm_changes_backup_failed">OSM módosítófájl biztonsági mentése sikertelen</string>
+    <string name="local_osm_changes_backup">Biztonsági mentés OSM módosítófájlként</string>
+    <string name="delete_point">Pont törlése</string>
     </resources>
