@@ -1254,7 +1254,7 @@
     <string name="plugin_distance_point">נקודה</string>
     <string name="gpx_file_name">קובץ שם ה־GPX</string>
     <string name="gpx_saved_sucessfully">קובץ ה־GPX נשמר בהצלחה אל {0}</string>
-    <string name="osmand_distance_planning_plugin_description">"יש ליצור נתיב כדי למדוד את המרחק בין נקודות, יש לפתוח קובץ GPX קיים כדי לערוך אותו ולשמור אותו. ניתן להשתמש בזה כדי לתכנן נתיב לפי GPX. "</string>
+    <string name="osmand_distance_planning_plugin_description">יש ליצור נתיב (או להשתמש / לשנות קובצי GPX קיימים) כדי למדוד את המרחק בין נקודות. לשמור כ־GPX, ניתן להשתמש בזה כדי לתכנן נתיב לפי GPX.</string>
     <string name="osmand_distance_planning_plugin_name">מחשבון מרחק וכלי תכנון</string>
     <string name="default_buttons_do_not_show_again">לא להציג שוב</string>
     <string name="distance_measurement_start_editing">להתחיל בעריכה</string>
@@ -1264,4 +1264,7 @@
     <string name="distance_measurement_save_gpx">שמירה כ־GPX</string>
     <string name="distance_measurement_load_gpx">פתיחת GPX קיים</string>
     <string name="use_distance_measurement_help">* יש לגעת כדי לסמן נקודה.\n * יש ללחוץ ולהחזיק על המפה כדי למחוק נקודה קודמת.\n * יש ללחוץ ולהחזיק על נקודה כדי לצפות ולצרף תיאור.\n * יש ללחוץ על וידג׳ט המדידה כדי לצפות בפעולות נוספות.</string>
+    <string name="local_osm_changes_backup_successful">קובץ השינוי ב־OSM נוצר בהצלחה %1$s</string>
+    <string name="local_osm_changes_backup_failed">גיבוי השינויים ב־OSM נכשל</string>
+    <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
     </resources>
