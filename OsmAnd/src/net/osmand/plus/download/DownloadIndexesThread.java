@@ -374,9 +374,8 @@ public class DownloadIndexesThread {
 				currentRunningTask.remove(this);
 				if (uiActivity != null) {
 					uiActivity.updateProgress(false);
+					runCategorization(uiActivity.getType());
 				}
-				runCategorization(uiActivity.getType());
-
 			}
 
 			private void showWarnDialog() {
