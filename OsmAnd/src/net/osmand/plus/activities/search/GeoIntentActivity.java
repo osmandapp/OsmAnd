@@ -5,6 +5,7 @@ import gnu.trove.map.hash.TLongObjectHashMap;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import net.osmand.ResultMatcher;
@@ -63,7 +64,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				@Override
 				public void run() {
 					try {
-						Collection<MapObject> results = extract(
+						Collection<? extends MapObject> results = extract(
 								intent.getData()).execute();
 						// show the first result on map, and populate the list!
 						if (!results.isEmpty()) {
@@ -156,6 +157,9 @@ public class GeoIntentActivity extends OsmandListActivity {
 	private String getString(MapObject o){
 		if(o instanceof Amenity) {
 			return OsmAndFormatter.getPoiSimpleFormat((Amenity) o, getMyApplication(), false);
+		}
+		if(o instanceof Street) {
+			return getString(R.string.address) + " " + ((Street) o).getCity().getName() + " " + o.getName();
 		}
 		return getString(R.string.address) + " : " + o.toString();
 	}
@@ -253,50 +257,78 @@ public class GeoIntentActivity extends OsmandListActivity {
 				elements.add(s[i].replace('+', ' ').trim());
 			}
 		}
+		
+		public MapObject checkGeoPoint() {
+			// TODO Auto-generated method stub
+			double lat = Double.NaN;
+			double lon = Double.NaN;
+			for(String e : elements) {
+				if(e.startsWith("S") || e.startsWith("N")) {
+					try {
+						lat = Double.parseDouble(e.substring(1));
+						if(e.startsWith("S")) {
+							lat = -lat;
+						}
+					} catch(NumberFormatException es) {}
+				} else if(e.startsWith("E") || e.startsWith("W")) {
+					try {
+						lon = Double.parseDouble(e.substring(1));
+						if(e.startsWith("W")) {
+							lon = -lon;
+						}
+					} catch(NumberFormatException es) {}
+				} else if(e.contains(".")) {
+					try {
+						double n = Double.parseDouble(e);
+						if(Double.isNaN(lat)) {
+							lat = n;
+						} else {
+							lon =n;
+						}
+					} catch(NumberFormatException es) {}
+				}
+				
+			}
+			if(Double.isNaN(lat) || Double.isNaN(lon)) {
+				return null;
+			}
+			
+			Amenity point = new Amenity();
+			((Amenity)point).setType(AmenityType.USER_DEFINED);
+			((Amenity)point).setSubType("");
+			point.setLocation(lat, lon);
+			point.setName("Lat: " + lat + ",Lon:" + lon);
+			return point;
+		}
 
 		@Override
-		public Collection<MapObject> execute() {
+		public Collection<? extends MapObject> execute() {
 			if (elements.isEmpty()) {
 				return Collections.emptyList();
+			}
+			List<String> q = new ArrayList<String>(elements);
+			MapObject geo = checkGeoPoint();
+			if(geo != null) {
+				return Collections.singleton(geo);
 			}
 
 			// now try to search the City, Street, Etc.. if Street is not found,
 			// try to search POI
-			ResourceManager resourceManager = resourceManager();
-			List<RegionAddressRepository> foundCountries = new ArrayList<RegionAddressRepository>();
-			RegionAddressRepository country;
-			for (String maybeCountry : elements) {
-				country = resourceManager.getRegionRepository(maybeCountry);
-				if (country != null) {
-					foundCountries.add(country);
-				}
-			}
-			Collection<RegionAddressRepository> countriesToSearch = foundCountries;
-			if (foundCountries.isEmpty()) {
-				// there is no country, we have to search each country
-				countriesToSearch = resourceManager.getAddressRepositories();
-			}
-
+			Collection<RegionAddressRepository> countriesToSearch = limitSearchToCountries(q);
 			// search cities for found countries
-			final List<MapObject> results = new ArrayList<MapObject>();
-			final List<MapObject> connectedStreets = new ArrayList<MapObject>();
+			final List<Street> allStreets = new ArrayList<Street>();
+			final TLongObjectHashMap<City> cityIds = new TLongObjectHashMap<City>();
 			for (RegionAddressRepository rar : countriesToSearch) {
-				final TLongObjectHashMap<City> cityIds = new TLongObjectHashMap<City>();
-				for (String element : elements) {
-					if (element != null && element.length() > 0) {
+				for (String element : q) {
+					if (element != null && element.length() > 2) {
 						rar.searchMapObjectsByName(element, new ResultMatcher<MapObject>() {
 							@Override
 							public boolean publish(MapObject object) {
 								if (object instanceof City && object.getId() != null) {
 									cityIds.put(object.getId(), (City) object);
 								} else if (object instanceof Street) {
-									City c = ((Street) object).getCity();
-									if (c != null && c.getId() != null && cityIds.containsKey(c.getId().longValue())) {
-										connectedStreets.add((Street) object);
-										return false;
-									}
+									allStreets.add((Street) object);
 								}
-								results.add(object);
 								return false;
 							}
 
@@ -308,11 +340,59 @@ public class GeoIntentActivity extends OsmandListActivity {
 					}
 				}
 			}
-			
-			
-			// add all other results to connected streets
-			connectedStreets.addAll(results);
-			return connectedStreets;
+			if(cityIds.isEmpty()) {
+				return allStreets;
+			}
+			final List<MapObject> connectedStreets = new ArrayList<MapObject>();
+			Iterator<Street> p = allStreets.iterator();
+			while(p.hasNext()) {
+				Street s = p.next();
+				if(cityIds.contains(s.getCity().getId())) {
+					connectedStreets.add(s);
+				} else {
+					boolean tooFar = true;
+					for(City c : cityIds.values()) {
+						if(MapUtils.getDistance(c.getLocation(), s.getLocation()) < 50000) {
+							tooFar = false;
+							break;
+						}
+					}
+					if(tooFar) {
+						p.remove();
+					}
+				}
+			}
+			if(connectedStreets.isEmpty()) {
+				List<MapObject> all = new ArrayList<MapObject>();
+				all.addAll(cityIds.valueCollection());
+				all.addAll(allStreets);
+				return all;
+			} else {
+				// add all other results to connected streets
+				connectedStreets.addAll(cityIds.valueCollection());
+				return connectedStreets;
+			}
+		}
+
+		private Collection<RegionAddressRepository> limitSearchToCountries(List<String> q) {
+			ResourceManager resourceManager = resourceManager();
+			List<RegionAddressRepository> foundCountries = new ArrayList<RegionAddressRepository>();
+			RegionAddressRepository country;
+			Iterator<String> it = q.iterator();
+			while(it.hasNext()) {
+				String maybeCountry = it.next();
+				country = resourceManager.getRegionRepository(maybeCountry);
+				if (country != null) {
+					foundCountries.add(country);
+					it.remove();
+				}
+			}
+			Collection<RegionAddressRepository> countriesToSearch = foundCountries;
+			if (foundCountries.isEmpty()) {
+				// there is no country, we have to search each country
+				countriesToSearch = resourceManager.getAddressRepositories();
+			}
+			return countriesToSearch;
 		}
 
 
@@ -323,6 +403,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 	}
 
 	
+
 	private void showErrorMessage(final String geo) {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -359,7 +440,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 
 		@Override
-		public Collection<MapObject> execute() {
+		public Collection<? extends MapObject> execute() {
 			if (point != null) {
 				return Collections.singletonList(point);
 			} else {
@@ -371,7 +452,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 	private interface MyService {
 
-		public Collection<MapObject> execute();
+		public Collection<? extends MapObject> execute();
 	}
 
 }
