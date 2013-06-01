@@ -592,7 +592,7 @@
   <string name="download_index_success">Téléchargement de l\'index réussi</string>
   <string name="error_io_error">Une erreur d\'entrée/sortie s\'est produite.</string>
   <string name="downloading_file">Téléchargement du fichier…</string>
-  <string name="downloading">Téléchargement…</string>
+  <string name="downloading">Téléchargement en cours…</string>
   <string name="downloading_list_indexes">Téléchargement de la liste des régions disponibles…</string>
   <string name="list_index_files_was_not_loaded">Les fichiers d\'index ne sont pas de osmand.net.</string>
   <string name="select_index_file_to_download">Si vous ne pouvez trouver votre région, vous pouvez la créer vous-même (voir sur osmand.net).</string>
@@ -632,7 +632,7 @@
   <string name="loading_data">Chargement des données…</string>
   <string name="reading_indexes">Lecture des index…</string>
   <string name="previous_run_crashed">La précédente exécution de l\'application s\'est arrêtée inopinément. Veuillez faire part du problème en incluant le journal {0}.</string>
-  <string name="saving_gpx_tracks">Enregistre les trajets GPX sur la carte SD…</string>
+  <string name="saving_gpx_tracks">Enregistrement des traces GPX sur la carte SD…</string>
   <string name="finished_task">Terminé</string>
   <string name="reload_indexes_descr">Recharger les index à partir de la carte SD</string>
   <string name="reload_indexes">Recharger les index</string>
@@ -649,12 +649,12 @@
   <string name="auto_zoom_map">Zoom auto. sur la carte</string>
   <string name="additional_settings">Paramètres supplémentaires</string>
   <string name="settings">Paramètres</string>
-  <string name="save_current_track_descr">Enregistrer le trajet actuel sur carte SD</string>
-  <string name="save_current_track">Enregistrer le trajet</string>
-  <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement du trajet</string>
+  <string name="save_current_track_descr">Enregistrer la trace actuelle sur carte SD</string>
+  <string name="save_current_track">Enregistrer la trace GPX</string>
+  <string name="save_track_interval_descr">Choisir l\'intervalle d\'enregistrement de la trace</string>
   <string name="save_track_interval">Intervalle d\'enregistrement</string>
   <string name="save_track_to_gpx_descrp">Les trajets seront enregistrés et groupés par jour dans le répertoire de trajets</string>
-  <string name="save_track_to_gpx">Enregistrer le trajet en GPX</string>
+  <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX</string>
   <string name="navigate_to">Définir comme destination</string>
   <string name="update_tile">Mettre à jour la carte</string>
   <string name="reload_tile">Recharger carreau</string>
@@ -1258,8 +1258,8 @@
 \n\t- Affichage des vues de satellites (Bing)
 \n\t- Affichage de couches supplémentaires comme des routes de navigation GPX et des cartes supplémentaires avec une personnalisation de la transparence
 \n\t- Affichage optionnel des noms de lieux en orthographe anglaise, locale ou phonétique
-\n 
-\nUtilise les données OpenStreetMap et Wikipedia:
+\n
+\n\nUtilise les données OpenStreetMap et Wikipedia:
 \n\t- Information de haute qualité issue des meilleurs projets collaboratifs mondiaux
 \n\t- Cartes globales d\' OpenStreetMap, disponibles par pays ou par région
 \n\t- Points d\'intérêt Wikipedia, super pour le tourisme (non disponible dans la version gratuite)
@@ -1269,19 +1269,19 @@
 \n\t- Choix entre la carte complète ou uniquement le réseau routier (Ex: Carte complète du Japon, 700 MB ou 200 MB pour le réseau routier uniquement)
 \n\t- Supporte également les cartes en ligne et la mise en cache des tuiles
 \n\nDispositifs de sécurité optionnels\n\t- Permutation automatique jour/nuit
-\n\t- Affichage des limitations de vitesse avec affichage de l\'excès de vitesse\n\t- Zoom automatique en fonction de la vitesse de déplacement 
-\n\t- Partage de votre position avec vos amis\n
+\n\t- Affichage des limitations de vitesse avec affichage de l\'excès de vitesse\n\t- Zoom automatique en fonction de la vitesse de déplacement
+\n\n\t- Partage de votre position avec vos amis\n
 \nPiétons et cyclistes:
-\n\t- Les cartes comprennent les chemins pour piétons, randonneurs et cyclistes 
-\n\t- Navigation et affichage spécifiques aux piétons et cyclistes
+\n\t- Les cartes comprennent les chemins pour piétons, randonneurs et cyclistes
+\n\n\t- Navigation et affichage spécifiques aux piétons et cyclistes
 \n\t- Affichage optionnel des arrêts de transport public (bus, tram, train) y inclus les noms de ligne
 \n\t- Enregistrement optionnel du parcours vers un fichier GPX local ou un service en ligne
 \n\t- Affichage optionnel de la vitesse et de l\'altitude
-\n\t- Affichage optionnel des courbes de niveau et des \"hill-shading\" (via des greffons additionnels)
+\n\t- Affichage optionnel des courbes de niveau et des ombrages de relief (via des greffons additionnels)
 \n\nContributeurs OpenStreetMap (OSM)
 \n\t- Rapport des bogues de la carte OSM
-\n\t- Transfert des traces GPX vers OSM directement depuis l\'application 
-\n\t- Ajout des points d\'intérêt et transfert direct vers OSM (ou en différé si mode hors ligne)
+\n\t- Transfert des traces GPX vers OSM directement depuis l\'application
+\n\n\t- Ajout des points d\'intérêt et transfert direct vers OSM (ou en différé si mode hors ligne)
 \n\t- Enregistrement optionnel du parcours en arrière plan (quand l\'écran de l\'appareil est éteint)
 \n\nOsmAnd un logiciel libre dont le développement est très actif.
 \n\nChacun peut contribuer à l\'application en rapportant les bogues, en améliorant les traductions ou en programmant de nouvelles fonctionnalités.\n\nLe projet est en état permanent d\'amélioration grâce à toutes ces formes de développement et d\'interaction avec l\'utilisateur. Les progrès du projet reposent également sur les contributions financières pour assurer le développement, la programmation et le test de nouvelles fonctionnalités.\n\nEn achetant OsmAnd+ vous contribuez au devenir d\'une application encore plus géniale. Il est aussi possible de supporter financièrement des nouvelles fonctionnalités spécifiques ou de simplement faire un don sur osmand.net.\n\nCouverture géographique et qualité:
@@ -1315,8 +1315,8 @@
     <string name="osmand_distance_planning_plugin_name">Calculatrice de Distance &amp; Outil de Planification</string>
     <string name="default_buttons_do_not_show_again">Ne plus montrer</string>
     <string name="local_osm_changes_backup_successful">Fichier de modification OSM %1$s généré avec succès</string>
-    <string name="local_osm_changes_backup_failed">Sauvegarde échouée des changements OSM</string>
-    <string name="local_osm_changes_backup">Sauvegarder comme un changement OSM</string>
+    <string name="local_osm_changes_backup_failed">Échec de la sauvegarde des modifications OSM</string>
+    <string name="local_osm_changes_backup">Sauvegarder comme une modification OSM</string>
     <string name="delete_point">Supprimer le point</string>
     <string name="plugin_distance_point">Point</string>
     <string name="use_distance_measurement_help">" * Appui bref pour ajouter un point.\n * Appui long sur la carte pour supprimer le point précédent.\n * Appui long sur un point pour voir et attacher une description.\n * Clic sur le gadget de mesure pour voir plus d\'actions."</string>
