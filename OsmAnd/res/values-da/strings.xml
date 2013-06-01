@@ -170,7 +170,7 @@
 	<string name="monitor_preferences">Sporing</string>
 	<string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
-	<string name="day_night_info">Dag/nat info</string>
+	<string name="day_night_info">Dag/nat information</string>
 	<string name="map_widget_day_night">Dag-/natkort</string>
 	<string name="map_widget_vector_attributes">Optegningsattributter:</string>
 	<string name="map_widget_renderer">Kortudseende</string>
@@ -1176,7 +1176,7 @@
 	<string name="osb_close_dialog_error">Undtagelse opstod: fejl blev ikke lukket</string>
 	<string name="poi_dialog_comment_default">Interessepunkt ændres</string>
 	<string name="app_mode_default">Standard</string>
-	<string name="poi_error_info_not_loaded">Info om knudepunkt blev ikke indlæst</string>
+	<string name="poi_error_info_not_loaded">…Information om knudepunkt blev ikke indlæst</string>
 	<string name="save_current_track_widget">Gem aktuel
 \nGPX-spor</string>
 	<string name="default_buttons_commit">Udfør</string>
