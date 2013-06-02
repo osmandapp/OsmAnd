@@ -300,7 +300,7 @@
   <string name="poi_context_menu_call">Pokaż nr tel. tego POI</string>
   <string name="website">Strona WWW</string>
   <string name="phone">Telefon</string>
-  <string name="download_type_to_filter">filtruj wg typu</string>
+  <string name="download_type_to_filter">wprowadź tekst, aby filtrować dane</string>
   <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
   <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości</string>
   <string name="unknown_location">Pozycja nie jest jeszcze znana</string>
@@ -1234,11 +1234,12 @@
     <string name="default_buttons_do_not_show_again">Nie pokazuj więcej</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
-    <string name="distance_measurement_finish_subtrack">Następna ścieżka/punkt</string>
+    <string name="distance_measurement_finish_subtrack">Rozpocznij nową podścieżkę</string>
     <string name="distance_measurement_clear_route">Wyczyść punkty</string>
     <string name="distance_measurement_save_gpx">Zapisz jako GPX</string>
     <string name="distance_measurement_load_gpx">Otwórz istniejący GPX</string>
     <string name="delete_point">Usuń punkt</string>
     <string name="local_osm_changes_backup_successful">Plik zmian OSM został pomyślnie wygenerowany %1$s</string>
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
+    <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
     </resources>
