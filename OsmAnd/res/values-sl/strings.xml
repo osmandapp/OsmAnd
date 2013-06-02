@@ -694,10 +694,10 @@
 	<string name="daynight_mode_auto">Sončni vzhod / zahod</string>
 	<string name="daynight_mode_day">Dnevni</string>
 	<string name="daynight_mode_night">Nočni</string>
-	<string name="daynight_mode_sensor">Svetlobni senzor</string>
+	<string name="daynight_mode_sensor">Svetlobno tipalo</string>
 	<string name="daynight">Dnevni / nočni način</string>
 	<string name="daynight_descr">Izberi način preklopa za Dnevni / Nočni način</string>
-	<string name="tip_day_night_mode_t_v2">"\tIzgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom.\n\tNočne barve so varnejše za nočno vožnjo.\n\tPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' -&gt; \'Nastavitev zaslona ...\' -&gt; \'zemljevid dan / noč\'.\n\tMožnosti so:\n\t\'Sončni vzhod / zahod\' - avtomatski način glede na položaj sonca (privzeto)\n\t\'Dnevni\' - vedno se uporablja dnevni način\n\t\'Nočni\' - vedno se uporablja nočni način\n\t\'Svetlobni senzor\' - izgled zemljevida nadzoruje svetlobni senzor naprave (če je na voljo) "</string>	
+	<string name="tip_day_night_mode_t_v2">"\tIzgled zemljevida se lahko za vektorske karte menja med dnevnim (svetlejšim) in nočnim (temnejšim) videzom.\n\tNočne barve so varnejše za nočno vožnjo.\n\tPreklop med dnevnim in nočnim načinom lahko nastavljate v \'Meni\' -&gt; \'Nastavitev zaslona ...\' -&gt; \'zemljevid dan / noč\'.\n\tMožnosti so:\n\t\'Sončni vzhod / zahod\' - avtomatski način glede na položaj sonca (privzeto)\n\t\'Dnevni\' - vedno se uporablja dnevni način\n\t\'Nočni\' - vedno se uporablja nočni način\n\t\'Svetlobni senzor\' - izgled zemljevida nadzoruje svetlobno tipalo naprave (če je na voljo) "</string>	
 	<string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB(prosto: %2$s).</string>
 	<string name="download_files_question_space">Razpoložljiv prostor je sedaj {2}MB! Ali želite prejeti {0} datotek(o) ({1}MB)?</string>
 	<string name="tip_select_destination_point">Izberi cilj</string>
@@ -1177,7 +1177,7 @@
     <string name="favourites_list_activity">Izberite priljubljeno</string>
     <string name="local_openstreetmap_act_title">Spremembe OSM</string>
     <string name="default_buttons_other_actions">Druge aktivnosti</string>
-    <string name="use_magnetic_sensor">Uporabi magnetni senzor</string>
+    <string name="use_magnetic_sensor">Uporabi magnetno tipalo</string>
     <string name="other_location">Ostalo</string>
     <string name="files_limit">Preostalo še %1$d datotek</string>
     <string name="available_downloads_left">Na voljo za prenos je še %1$d datotek</string>
@@ -1185,4 +1185,18 @@
     <string name="cancel_navigation">Prekini navigacijo</string>
     <string name="clear_destination">Izbriši cilj</string>
     <string name="download_using_mobile_internet">Trenutno WiFi ni povezan. Ali želite nadaljevati prenos prek obstoječe internetne povezave?</string>
+    <string name="delete_point">Izbriši točko</string>
+    <string name="plugin_distance_point_time">čas</string>
+    <string name="plugin_distance_point_hdop">natančnost</string>
+    <string name="plugin_distance_point_speed">hitrost</string>
+    <string name="plugin_distance_point_ele">nadmorska višina</string>
+    <string name="plugin_distance_point">Točka</string>
+    <string name="gpx_file_name">Ime datoteke GPX</string>
+    <string name="gpx_saved_sucessfully">Datoteka GPX uspešno shranjena v {0}</string>
+    <string name="default_buttons_do_not_show_again">Ne prikaži več</string>
+    <string name="distance_measurement_start_editing">Začni urejati</string>
+    <string name="distance_measurement_finish_editing">Končaj urejanje</string>
+    <string name="distance_measurement_clear_route">Počisti vse točke</string>
+    <string name="distance_measurement_save_gpx">Shrani kot GPX</string>
+    <string name="distance_measurement_load_gpx">Odpri obstoječ GPX</string>
     </resources>
