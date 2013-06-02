@@ -1125,4 +1125,5 @@
     <string name="plugin_distance_point_ele">Altitude</string>
     <string name="plugin_distance_point">Ponto</string>
     <string name="gpx_file_name">Nome do arquivo GPX</string>
+    <string name="gpx_saved_sucessfully">Arquivo GPX guardado com sucesso em {0}</string>
     </resources>
