@@ -12,5 +12,6 @@
         * Planning mode
         * Delete SRTM files
         * GPX subfolders structure
+        * Order waypoints in optimal way (Travel salesman)
     </string>
 </resources>
