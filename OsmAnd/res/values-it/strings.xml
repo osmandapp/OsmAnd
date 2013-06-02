@@ -1005,7 +1005,7 @@
 <string name="avoid_in_routing_title">﻿Evita…</string>
 <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti</string>
 <string name="show_warnings_title">Visualizza avvertimenti…</string>
-<string name="show_warnings_descr">Configura gli avvertimenti (limiti di velocità, stop forzati, dossi rallentatori), avvisi autovelox, e indicazioni di corsia</string>
+<string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, stop forzati, dossi e rallentatori), avvisi autovelox e indicazioni di corsia</string>
 <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
 <string name="map_widget_show_ruler">Scala grafica</string>
 <string name="map_widget_appearance">Varie:</string>
@@ -1291,7 +1291,7 @@
     <string name="distance_measurement_save_gpx">Salva come GPX</string>
     <string name="distance_measurement_load_gpx">Apri GPX esistente</string>
     <string name="delete_point">Elimina punto</string>
-    <string name="local_osm_changes_backup_successful">File di modifica OSM generato con successo %1$s</string>
-    <string name="local_osm_changes_backup_failed">Backup modifiche OSM non riuscito</string>
+    <string name="local_osm_changes_backup_successful">Creazione file di modifica OSM %1$s completata</string>
+    <string name="local_osm_changes_backup_failed">Backup modifiche OSM fallito</string>
     <string name="local_osm_changes_backup">Backup come modifica OSM</string>
     </resources>
