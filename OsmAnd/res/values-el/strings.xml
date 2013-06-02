@@ -1233,4 +1233,19 @@
     <string name="wait_current_task_finished">Παρακαλώ περιμένετε μέχρι να τελειώσει η τρέχουσα διεργασία</string>
     <string name="local_indexes_cat_srtm">Δεδομένα ισοϋψών γραμμών</string>
     <string name="downloading_file_new">"Λήψη "</string>
-	</resources>
+	<string name="delete_point">Διαγραφή σημείου</string>
+    <string name="plugin_distance_point_time">Χρόνος</string>
+    <string name="plugin_distance_point_hdop">ακρίβεια</string>
+    <string name="plugin_distance_point_speed">ταχύτητα</string>
+    <string name="plugin_distance_point_ele">υψόμετρο</string>
+    <string name="plugin_distance_point">Σημείο</string>
+    <string name="gpx_file_name">Όνομα αρχείου GPX</string>
+    <string name="gpx_saved_sucessfully">Το αρχείο GPX αποθηκεύτηκε επιτυχώς στο {0}</string>
+    <string name="default_buttons_do_not_show_again">Να μην εμφανιστεί ξανά</string>
+    <string name="distance_measurement_start_editing">Έναρξη επεξεργασίας</string>
+    <string name="distance_measurement_finish_editing">Τέλος επεξεργασίας</string>
+    <string name="distance_measurement_clear_route">Καθαρισμός όλων των σημείων</string>
+    <string name="distance_measurement_save_gpx">Αποθήκευση ως αρχείο GPX</string>
+    <string name="distance_measurement_load_gpx">Άνοιγμα υπάρχοντος GPX</string>
+    <string name="local_osm_changes_backup_successful">Το αρχείο αλλαγών OSM δημιουργήθηκε με επιτυχία %1$s</string>
+    </resources>
