@@ -908,17 +908,17 @@
 \n/t* Direzione in base alle corsie
 \n/t* Informazioni su dossi rallentatori, autovelox e limiti di velocità
 \n/t* Migliorata la voce guida sulle autostrade
-\n/t* Plugin per i parcheggi (\'Dov\'e\' la mia macchina?\')
+\n/t* Plugin per i parcheggi (\'Dov\'è la mia auto?\')
 \n/t* Abilita/disabilita il widget per i monitoraggio "</string>
   <string name="gpxup_public">Pubblico</string>
   <string name="gpxup_identifiable">Identificabile</string>
   <string name="gpxup_trackable">Tracciabile</string>
   <string name="gpxup_private">Privato</string>
-  <string name="osmand_parking_event">Prendere la macchina dal parcheggio</string>
+  <string name="osmand_parking_event">Prendere l\'auto dal parcheggio</string>
   <string name="osmand_parking_warning">Attenzione</string>
-  <string name="osmand_parking_warning_text">Precedentemente è stata aggiunta al tuo calendario la notifica di recuperare la macchina. Ci rimarrà finchè non la eliminerai manualmente.</string>
+  <string name="osmand_parking_warning_text">Precedentemente è stata aggiunta al tuo calendario la notifica di recuperare l\'auto. Ci rimarrà finché non la eliminerai manualmente.</string>
   <string name="osmand_parking_time_limit_title">Imposta il limite d\'orario del parcheggio</string>
-  <string name="osmand_parking_delete_confirm">Vuoi rimuovere la posizione della macchina parcheggiata?</string>
+  <string name="osmand_parking_delete_confirm">Vuoi rimuovere la posizione dell\'auto parcheggiata?</string>
   <string name="osmand_parking_delete">Elimina un marcatore di parcheggio</string>
   <string name="osmand_parking_choose_type">Scegli il tipo di parcheggio</string>
   <string name="osmand_parking_lim_text">A tempo</string>
@@ -926,12 +926,12 @@
   <string name="osmand_parking_add_event">Aggiungi una notifica all\'applicazione Calendario</string>
   <string name="osmand_parking_time_limit">Parcheggio a tempo</string>
   <string name="osmand_parking_time_no_limit">Parcheggio senza limiti di tempo</string>
-  <string name="osmand_parking_position_description">La posizione della tua macchina parcheggiata. %1$s</string>
-  <string name="osmand_parking_position_description_add">Recupera la macchina a:</string>
+  <string name="osmand_parking_position_description">La posizione della tua auto parcheggiata. %1$s</string>
+  <string name="osmand_parking_position_description_add">Recupera l\'auto a:</string>
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Punto di parcheggio</string>
-  <string name="osmand_parking_plugin_description">Questo plugin aiuta a memorizzare il luogo di parcheggio della tua macchina.</string>
+  <string name="osmand_parking_plugin_description">Questo plugin aiuta a memorizzare il luogo di parcheggio della tua auto.</string>
   <string name="osmand_parking_plugin_name">Plugin posizione parcheggio</string>
   <string name="context_menu_item_add_parking_point">Marca come posizione di parcheggio</string>
   <string name="context_menu_item_delete_parking_point">Elimina un marcatore di parcheggio</string>
@@ -945,7 +945,7 @@
   <string name="select_animate_speedup">Seleziona l\'accelerazione dell\'animazione della rotta</string>
   <string name="osmand_parking_hours">Ore</string>
   <string name="osmand_parking_minutes">Minuti</string>
-  <string name="osmand_parking_position_description_add_time">La macchina è stata parcheggiata alle:</string>
+  <string name="osmand_parking_position_description_add_time">L\'automobile è stata parcheggiata alle:</string>
   <string name="use_compass_navigation_descr">Usa la bussola quando la direzione non è individuata</string>
   <string name="use_compass_navigation">Usa la bussola</string>
   <string name="route_updated_loc_found">Il percorso verrà calcolato quando sarà individuata la posizione</string>
