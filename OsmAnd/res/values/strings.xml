@@ -13,9 +13,10 @@
 		* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
         * Search street by name (in neighborhood) 
         * Planning mode plugin (load/edit/save GPX tracks)
-        * New downlad screen (download in background)
+        * New download screen (download in background)
         * Support GPX subfolders (organize your GPX tracks)
         * Delete SRTM files
+        * Support OSM Notes 
     </string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Positions ordered to form optimal way from map position to the target location</string>
