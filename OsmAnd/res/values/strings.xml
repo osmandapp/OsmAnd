@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="tip_recent_changes_1_4_t">Change in 1.4:
+		* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
+        * Search street by name (in neighborhood) 
+        * Planning mode plugin (load/edit/save GPX tracks)
+        * New downlad screen (download in background)
+        * Support GPX subfolders (organize your GPX tracks)
+        * Delete SRTM files
+    </string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Positions ordered to form optimal way from map position to the target location</string>
     <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
