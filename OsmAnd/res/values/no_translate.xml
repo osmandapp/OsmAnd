@@ -8,10 +8,10 @@
     <string name="ga_debug">true</string>
     <string name="versionFeatures">+play_market +gps_status -parking_plugin -blackberry -free_version -amazon</string>
     <string name="next_tips_and_tricks_not_translate">
+        * Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
         * New downlad screen
         * Planning mode
         * Delete SRTM files
         * GPX subfolders structure
-        * Order waypoints in optimal way (Travel salesman)
     </string>
 </resources>

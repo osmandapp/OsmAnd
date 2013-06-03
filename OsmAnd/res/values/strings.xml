@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Positions ordered to form optimal way from map position to the target location</string>
     <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
     <string name="local_osm_changes_backup_successful">OSM change file succesfully generated %1$s</string>

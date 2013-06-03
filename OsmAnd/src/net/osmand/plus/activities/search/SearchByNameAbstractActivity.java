@@ -32,6 +32,7 @@ import android.os.Message;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.TextWatcher;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,6 +46,7 @@ import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 import android.widget.TextView.OnEditorActionListener;
 
 
@@ -137,13 +139,18 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 		findViewById(R.id.ResetButton).setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
-				searchText.setText("");
+				reset();
 			}
+			
 		});
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		if(initializeTask != null){
 			initializeTask.execute();
 		}
+	}
+	
+	protected void reset() {
+		searchText.setText("");
 	}
 	
 	protected void addFooterViews() {
@@ -187,6 +194,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	public void research() {
 		initFilter = false;
 		querySearch(currentFilter);
+	}
+	
+	protected View getFooterView() {
+		return null;
 	}
 	
 	private void querySearch(final String filter) {
@@ -241,6 +252,10 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 	}
 	
 	protected abstract Comparator<? super T> createComparator();
+	
+	public String getDistanceText(T obj) {
+		return null;
+	}
 
 	public abstract String getText(T obj);
 	
@@ -413,7 +428,15 @@ public abstract class SearchByNameAbstractActivity<T> extends OsmandListActivity
 				row = inflater.inflate(R.layout.searchbyname_list, parent, false);
 			}
 			TextView label = (TextView) row.findViewById(R.id.NameLabel);
-			label.setText(getText(getItem(position)));
+			String distanceText = getDistanceText(getItem(position));
+			String text = getText(getItem(position));
+			if(distanceText == null) {
+				label.setText(text);
+			} else {
+				label.setText(distanceText + " " + text, BufferType.SPANNABLE);
+				((Spannable) label.getText()).setSpan(new ForegroundColorSpan(getResources().getColor(R.color.color_distance)), 0,
+						distanceText.length(), 0);
+			}
 			return row;
 		}
 	}
