@@ -1126,4 +1126,5 @@
     <string name="plugin_distance_point">Ponto</string>
     <string name="gpx_file_name">Nome do arquivo GPX</string>
     <string name="gpx_saved_sucessfully">Arquivo GPX guardado com sucesso em {0}</string>
+    <string name="osmand_distance_planning_plugin_name">Calculadora de Distância e Ferramenta de Planeamento</string>
     </resources>
