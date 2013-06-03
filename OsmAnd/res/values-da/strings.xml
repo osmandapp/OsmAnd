@@ -1236,7 +1236,7 @@
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n* Tryk og hold på kortet for at slette tidligere punkt.\n* Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n* Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
-    <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM ændringer mislykkedes</string>
-    <string name="local_osm_changes_backup_successful">OSM ændringsfilen %1$s genereret</string>
-    <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM ændres</string>
+    <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
+    <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
+    <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
     </resources>
