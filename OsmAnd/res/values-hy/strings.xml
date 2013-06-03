@@ -49,7 +49,7 @@
     <string name="install_paid">Լրիվ տարբերակ</string>
     <string name="cancel_navigation">Վերջացնել նավիգացիան</string>
     <string name="clear_destination">Մաքրել նպատակակետը</string>
-    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել բեռնելիս գործող ինտերնետային կապով.</string>
+    <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել բեռնե գործող ինտերնետային կապով.</string>
     <string name="street_name">Փողոց</string>
 	<string name="hno">Տան համարը</string>
     <string name="website">Վեբ կայք</string>
@@ -66,4 +66,29 @@
     <string name="save_current_track_widget">Հիշել↵\nընթացիկ GPX տրեկը</string>
 	<string name="default_buttons_selectall">Ընտրել բոլորը</string>
 	<string name="cancel_route">Դադարեցնել երթուղին</string>
-    </resources>
+    <string name="local_osm_changes_backup_successful">OSM փոփոխության ֆայլը հաջողությամբ գեներացվել %1$s</string>
+    <string name="delete_point">Ջնջել կետը</string>
+    <string name="plugin_distance_point_time">Ժամանակ</string>
+    <string name="plugin_distance_point_hdop">Ճշգրտություն</string>
+    <string name="plugin_distance_point_speed">արագություն</string>
+    <string name="plugin_distance_point_ele">բարձրություն</string>
+    <string name="plugin_distance_point">Կետ</string>
+    <string name="gpx_file_name">GPX ֆայլի անունը</string>
+    <string name="gpx_saved_sucessfully">GPX ֆայլը հաջողությամբ պահվել է {0}</string>
+    <string name="default_buttons_do_not_show_again">Կրկին ցույց չտալ</string>
+    <string name="distance_measurement_start_editing">Սկսել խմբագրելը</string>
+    <string name="distance_measurement_finish_editing">Ավարտել խմբագրելը</string>
+    <string name="distance_measurement_clear_route">Մաքրել բոլոր կետերը</string>
+    <string name="distance_measurement_save_gpx">Հիշել որպես GPX</string>
+    <string name="distance_measurement_load_gpx">Բացել գոյուցյուն ունեցող GPX ֆայլը</string>
+    <string name="wait_current_task_finished">Խնդրում ենք սպասել մինջև տվյալ պրոցեսը կվերջանա</string>
+    <string name="distance_measurement_finish_subtrack">Սկսել նոր ենթաճանապարհ</string>
+    <string name="osmand_distance_planning_plugin_name">Հեռավորությունը չափող և Պլանավորող Գործիք</string>
+    <string name="edit_filter_create_message">{0} Ֆիլտրը ստեղծված է</string>
+	<string name="edit_filter_delete_message">{0} Ֆիլտրը ջնջված է</string>
+	<string name="edit_filter_delete_dialog_title">Ջնջե՞լ տվյալ ֆիլտրը</string>
+	<string name="edit_filter_save_as_menu_item">Հիշել որպես</string>
+	<string name="edit_filter_delete_menu_item">Ջնջել</string>
+	<string name="poi_action_change">փոփոխություն</string>
+	<string name="poi_action_add">ավելացում</string>
+	</resources>
