@@ -1167,7 +1167,6 @@
     <string name="use_kalman_filter_compass">Gebruik Kalman filter</string>
     <string name="access_mark_final_location_first">Toeganklikheids wyse: kies asseblief eers die bestemming</string> 
     <string name="use_magnetic_sensor_descr">Gebruik die magnetiese sensor om die kompas waarde te bepaal in plaas van die oriëntasie sensor</string>
-    <string name="use_magnetic_sensor"/>
     <string name="use_magnetic_sensor">Gebruik magnetiese sensor</string>
     <string name="local_indexes_cat_srtm">Kontoer lyne inligting</string>
     <string name="downloading_file_new">"Aflaai besig "</string>
