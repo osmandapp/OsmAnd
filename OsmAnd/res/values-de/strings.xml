@@ -1431,4 +1431,15 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="local_indexes_cat_srtm">Konturlinien-Daten</string>
     <string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
     <string name="downloading_file_new">"Herunterladen "</string>
-	</resources>
+	<string name="local_osm_changes_backup_successful">Zwischenspeichern der bearbeiteten OSM-Daten erfolgreich %1$s</string>
+    <string name="local_osm_changes_backup_failed">Fehler beim Zwischenspeichern der bearbeiteten OSM-Daten</string>
+    <string name="local_osm_changes_backup">Als OSM-Daten-Änderung zwischenspeichern</string>
+    <string name="delete_point">Punkt löschen</string>
+    <string name="plugin_distance_point_time">Zeit</string>
+    <string name="plugin_distance_point_hdop">Genauigkeit</string>
+    <string name="plugin_distance_point_speed">Geschwindigkeit</string>
+    <string name="plugin_distance_point_ele">Höhe</string>
+    <string name="gpx_file_name">GPX-Dateiname</string>
+    <string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert in {0}</string>
+    <string name="distance_measurement_clear_route">Alle Punkte löschen</string>
+    </resources>
