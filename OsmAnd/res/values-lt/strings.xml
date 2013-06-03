@@ -1302,4 +1302,25 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="local_indexes_cat_srtm">Kontūrinių linijų duomenys</string>
     <string name="wait_current_task_finished">Palaukite kol dabartinė užduotis bus baigta</string>
     <string name="downloading_file_new">"Parsiunčiama "</string>
-	</resources>
+	<string name="local_osm_changes_backup_successful">OSM pakeitimų failas sėkmingai sugeneruotas %1$s</string>
+    <string name="local_osm_changes_backup_failed">OSM pakeitimų atsarginės kopijos išsaugoti nepavyko</string>
+    <string name="local_osm_changes_backup">Išsaugoti vietinę OSM pakeitimų kopiją</string>
+    <string name="delete_point">Ištrinti tašką</string>
+    <string name="plugin_distance_point_time">laikas</string>
+    <string name="plugin_distance_point_hdop">tikslumas</string>
+    <string name="plugin_distance_point_speed">greitis</string>
+    <string name="plugin_distance_point_ele">aukštis</string>
+    <string name="plugin_distance_point">Taškas</string>
+    <string name="gpx_file_name">GPX failo pavadinimas</string>
+    <string name="gpx_saved_sucessfully">GPX failas sėkmingai išsaugotas {0}</string>
+    <string name="osmand_distance_planning_plugin_description">Kurti maršrutus (arba naudoti / keisti egzistuojančius GPX failus) atstumams tarp taškų matuoti. Išsaugojus GPX failą galima naudoti maršruto planavimui.</string>
+    <string name="osmand_distance_planning_plugin_name">Atstumo skaičiavimo ir planavimo įrankis</string>
+    <string name="use_distance_measurement_help">* Palieskit etaškui pažymėti.\n * Paspauskite ant žemėlapio ir laikykite ankstesnio taško pašalinimui.\n * Paspauskite ant taško ir laikykite aprašymo peržiūrai ar sukūrimui.\n * Paspauskite ant matavimo įrankio kitiems veiksmams.</string>
+    <string name="default_buttons_do_not_show_again">Daugiau neberodyti</string>
+    <string name="distance_measurement_start_editing">Pradėti redagavimą</string>
+    <string name="distance_measurement_finish_editing">Baigti redagavimą</string>
+    <string name="distance_measurement_finish_subtrack">Pradėti naują segmentą</string>
+    <string name="distance_measurement_clear_route">Panaikinti visus taškus</string>
+    <string name="distance_measurement_save_gpx">Išsaugoti GPX failą</string>
+    <string name="distance_measurement_load_gpx">Atidaryti egzistuojantį GPX failą</string>
+    </resources>
