@@ -786,6 +786,11 @@
 		
 		<routing_type tag="maxspeed" mode="amend" base="true"/>
 		<routing_type tag="maxspeed" value="RO:urban" tag2="maxspeed" value2="50" mode="replace" base="true"/>
+		<routing_type tag="maxspeed" value="RO:rural" tag2="maxspeed" value2="90" mode="replace" base="true"/>
+		<routing_type tag="maxspeed" value="RO:trunk" tag2="maxspeed" value2="100" mode="replace" base="true"/>
+		<routing_type tag="maxspeed" value="RO:motorway" tag2="maxspeed" value2="130" mode="replace" base="true"/>
+		<routing_type tag="maxspeed" value="RU:rural" tag2="maxspeed" value2="60" mode="replace" base="true"/>
+		<routing_type tag="maxspeed" value="RU:urban" tag2="maxspeed" value2="60" mode="replace" base="true"/>
 		
 		<routing_type tag="access" mode="amend"/>
 		<!-- tag used as start with -->
