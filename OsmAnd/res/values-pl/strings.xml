@@ -1242,4 +1242,7 @@
     <string name="local_osm_changes_backup_successful">Plik zmian OSM został pomyślnie wygenerowany %1$s</string>
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
     <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
+    <string name="intermediate_items_sort_by_distance">Sortuj (door-to-door)</string>
+    <string name="intermediate_items_sort_return">Pozycje sortowane tak, aby utworzyć optymalną drogę z pozycji mapy do punktu docelowego</string>
+    <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
     </resources>
