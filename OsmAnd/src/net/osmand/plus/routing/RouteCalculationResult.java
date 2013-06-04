@@ -500,7 +500,7 @@ public class RouteCalculationResult {
 	 */
 	private void introduceFirstPointAndLastPoint(List<Location> locations, List<RouteDirectionInfo> directions, List<RouteSegmentResult> segs, Location start, 
 			LatLon end) {
-		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 200) {
+		if (!locations.isEmpty() && locations.get(0).distanceTo(start) > 50) {
 			// add start point
 			locations.add(0, start);
 			if(segs != null) {
