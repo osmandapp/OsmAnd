@@ -555,7 +555,6 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 			// log.debug("Layer time " + (time - prev) + " " + zOrders.get(layers.get(i)));
 			// prev = time;
 		}
-		canvas.restore();
 		if (showMapPosition) {
 			canvas.drawCircle(w, h, 3 * dm.density, paintCenter);
 			canvas.drawCircle(w, h, 7 * dm.density, paintCenter);

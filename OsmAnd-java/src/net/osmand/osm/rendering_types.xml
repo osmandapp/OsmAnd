@@ -783,8 +783,11 @@
 		<routing_type tag="duration" mode="text"/>
 		
 		<routing_type tag="toll" mode="amend" base="true"/>
-		<routing_type tag="maxspeed" mode="amend" base="true"/>
 		
+		<routing_type tag="maxspeed" mode="amend" base="true"/>
+		<routing_type tag="maxspeed" value="RO:urban" tag2="maxspeed" value2="50" mode="replace" base="true"/>
+		
+		<routing_type tag="access" mode="amend"/>
 		<!-- tag used as start with -->
 		<routing_type tag="access" mode="amend"/>
 		<routing_type tag="agricultural" mode="amend"/>
