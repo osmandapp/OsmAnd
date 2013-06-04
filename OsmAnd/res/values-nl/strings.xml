@@ -1233,7 +1233,7 @@
     <string name="plugin_distance_point">Punt</string>
     <string name="gpx_file_name">GPX bestandsnaam</string>
     <string name="gpx_saved_sucessfully">GPX bestand met succes opgeslagen als {0}</string>
-    <string name="osmand_distance_planning_plugin_description">"Creëer een pad om de afstand tussen punten te meten, open een bestaand GPX bestand om te bewerken en op te slaan. Kan worden gebruikt om een GPX-route te plannen. "</string>
+    <string name="osmand_distance_planning_plugin_description">Creëer een pad om de afstand tussen punten te meten, open een bestaand GPX bestand om te bewerken en op te slaan. Kan worden gebruikt om een GPX-route te plannen.</string>
     <string name="osmand_distance_planning_plugin_name">Afstands-calculator &amp; Planning hulp</string>
     <string name="use_distance_measurement_help">* Klik om een punt te markeren.\n * Klik lang op de kaart om het vorige punt te verwijderen.\n * Klik lang op een punt om de beschrijving te zien en toe te voegen.\n * Klik op de meet-widget om meer acties te zien.</string>
     <string name="default_buttons_do_not_show_again">Niet meer tonen</string>
@@ -1244,8 +1244,8 @@
     <string name="distance_measurement_save_gpx">Bewaar als GPX-bestand</string>
     <string name="distance_measurement_load_gpx">Open bestaand GPX-bestand</string>
     <string name="local_osm_changes_backup_successful">OSM bijwerken gelukt voor %1$s</string>
-    <string name="local_osm_changes_backup_failed">Backup OSM aanpassingen is mislukt</string>
-    <string name="local_osm_changes_backup">Backup als OSM aanpassing</string>
+    <string name="local_osm_changes_backup_failed">Backup OSM wijzigingen is mislukt</string>
+    <string name="local_osm_changes_backup">Backup als OSM wijziging</string>
     <string name="tip_recent_changes_1_4_t">"Wijzigingen in 1.4:
 \n* Rangschik routepunten optimaal om alle te bezoeken (vertegenwoordiger, bezorgdienst)
 \n* Zoek straat op naam (in wijk)\n* Planning plugin (laad/bewerk/bewaar GPX sporen)
