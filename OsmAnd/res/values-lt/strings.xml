@@ -1323,4 +1323,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="distance_measurement_clear_route">Panaikinti visus taškus</string>
     <string name="distance_measurement_save_gpx">Išsaugoti GPX failą</string>
     <string name="distance_measurement_load_gpx">Atidaryti egzistuojantį GPX failą</string>
+    <string name="search_street_in_neighborhood_cities">Ieškoti gatvės gretimuose miestuose</string>
+    <string name="intermediate_items_sort_return">Taškai sudėlioti optimaliu maršrutu nuo žemėlapio pozicijos iki tikslo</string>
+    <string name="intermediate_items_sort_by_distance">Rūšiuoti (nuo durų iki durų)</string>
     </resources>
