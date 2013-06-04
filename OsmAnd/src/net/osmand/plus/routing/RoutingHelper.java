@@ -382,8 +382,8 @@ public class RoutingHelper {
 			showMessage(app.getString(R.string.arrived_at_destination));
 			voiceRouter.arrivedDestinationPoint();
 			clearCurrentRoute(null, null);
-			TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
-			targets.clearPointToNavigate(false);
+			// TargetPointsHelper targets = app.getInternalAPI().getTargetPointsHelper();
+			// targets.clearPointToNavigate(false);
 			return true;
 		}
 		return false;

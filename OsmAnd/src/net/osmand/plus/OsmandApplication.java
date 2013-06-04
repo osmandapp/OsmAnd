@@ -140,6 +140,9 @@ public class OsmandApplication extends Application implements ClientContext {
 		uiHandler = new Handler();
 		rendererRegistry = new RendererRegistry();
 		targetPointsHelper = new TargetPointsHelper(this);
+		if(!osmandSettings.FOLLOW_THE_ROUTE.get()) {
+			targetPointsHelper.clearPointToNavigate(false);
+		}
 		
 		checkPrefferedLocale();
 		startApplication();
