@@ -1266,4 +1266,8 @@
     <string name="local_osm_changes_backup_successful">קובץ השינוי ב־OSM נוצר בהצלחה %1$s</string>
     <string name="local_osm_changes_backup_failed">גיבוי השינויים ב־OSM נכשל</string>
     <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
+    <string name="search_street_in_neighborhood_cities">חיפוש רחוב בערים סמוכות</string>
+    <string name="intermediate_items_sort_return">המיקומים סודרו באופן המיטבי בין המיקום במפה אל היעד</string>
+    <string name="intermediate_items_sort_by_distance">סידור (דלת לדלת)</string>
+    <string name="tip_recent_changes_1_4_t">"שינויים ב־1.4: * סידור נקודות הביניים בדרך המיטבית כדי לבקר בכולן (הסוכן הנוסע, דלת לדלת) * חיפוש רחוב לפי שם (בשכונה) * תוסף מצב תכנון (טעינה/עריכה/שמירה של מסלולי GPX) * מסך הורדה חדש (הורדה ברקע) * תמיכה בתת־תיקיות של GPX (ארגון מסלולי ה־GPX שלך) * מחיקת קובצי SRTM * תמיכה בהערות של OSM "</string>
     </resources>
