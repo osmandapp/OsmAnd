@@ -1255,4 +1255,7 @@
     <string name="plugin_distance_point">Bod</string>
     <string name="gpx_file_name">Názov súboru GPX</string>
     <string name="gpx_saved_sucessfully">Súbor GPX bol úspešne uložený do {0}</string>
+    <string name="search_street_in_neighborhood_cities">Vyhľadať ulicu v susednom meste</string>
+    <string name="local_osm_changes_backup_failed">Záloha OSM zmien zlyhala</string>
+    <string name="local_osm_changes_backup">Zálohovať ako OSM zmenu</string>
     </resources>
