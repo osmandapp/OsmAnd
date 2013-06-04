@@ -1246,4 +1246,14 @@
     <string name="local_osm_changes_backup_successful">OSM bijwerken gelukt voor %1$s</string>
     <string name="local_osm_changes_backup_failed">Backup OSM aanpassingen is mislukt</string>
     <string name="local_osm_changes_backup">Backup als OSM aanpassing</string>
+    <string name="tip_recent_changes_1_4_t">"Wijzigingen in 1.4:
+\n* Rangschik routepunten optimaal om alle te bezoeken (vertegenwoordiger, bezorgdienst)
+\n* Zoek straat op naam (in wijk)\n* Planning plugin (laad/bewerk/bewaar GPX sporen)
+\n* Nieuw downloadscherm (download in achtergrond)
+\n* GPX submappen (organiseer je GPX tracks)
+\n* Verwijder SRTM bestanden
+\n* Ondersteuning voor OSM Notities "</string>
+    <string name="search_street_in_neighborhood_cities">Zoek straat in stadswijken</string>
+    <string name="intermediate_items_sort_return">Routepunten gesorteerd voor optimale route van kaartpositie naar bestemming</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
     </resources>
