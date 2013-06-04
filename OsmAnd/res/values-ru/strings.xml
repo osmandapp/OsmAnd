@@ -1170,4 +1170,8 @@
     <string name="distance_measurement_clear_route">Очистить все точки</string>
     <string name="install_paid">Полная версия</string>
     <string name="cancel_route">Отменить маршрут</string>
+    <string name="clear_destination">Удалить точку назначения</string>
+    <string name="search_street_in_neighborhood_cities">Искать в других НП</string>
+    <string name="intermediate_items_sort_by_distance">Упорядочить по расстоянию</string>
+    <string name="tip_recent_changes_1_4_t">"Изменения в версии 1.4: * Расчет задачи комивояджера для промежуточных точек (сортировка по растоянию) * Поиск по названию улицы ближайших городах * Плагин режима планирования  (загрузка / редактировавание / сохранение GPX треков) * Новый экран загрузки данных(загрузка в фоновом режиме) * Поддержка вложенных папок для GPX треков (организовать свой GPX треков) * Удалены файлы SRTM  * Поддержка OSM Примечания"</string>
     </resources>
