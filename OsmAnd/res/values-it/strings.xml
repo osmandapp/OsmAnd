@@ -1294,4 +1294,14 @@
     <string name="local_osm_changes_backup_successful">Creazione file di modifica OSM %1$s completata</string>
     <string name="local_osm_changes_backup_failed">Backup modifiche OSM fallito</string>
     <string name="local_osm_changes_backup">Backup come modifica OSM</string>
+    <string name="tip_recent_changes_1_4_t">Cambiamente nella 1.4:\n\t* Ordina in modo ottimale i waypoint per raggiungerli tutti (Venditore ambulante, porta a porta)
+\n\t* Ricerca vie per nome (nei quartieri)
+\n\t* Plugin Modalità di pianificazione (caricare/modificare/salvare le tracce GPX)
+\n\t* Nuova schermata di download (scaricare in background)
+\n\t* Supporta le sottocartelle dei GPX (per organizzare le vostre tracce GPX)
+\n\t* Possibilità di eliminare i file SRTM
+\n\t* Supporto alle note OSM</string>
+    <string name="search_street_in_neighborhood_cities">Cerca la strada in un quartiere della città</string>
+    <string name="intermediate_items_sort_return">Posizioni ordinate un modo da ottimizzare il percorso dalla posizione sulla mappa al luogo di destinazione</string>
+    <string name="intermediate_items_sort_by_distance">Ordina (porta a porta)</string>
     </resources>
