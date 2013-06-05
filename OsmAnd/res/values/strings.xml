@@ -10,13 +10,13 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="tip_recent_changes_1_4_t">Change in 1.4:
-		* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
-        * Search street by name (in neighborhood) 
-        * Planning mode plugin (load/edit/save GPX tracks)
-        * New download screen (download in background)
-        * Support GPX subfolders (organize your GPX tracks)
-        * Delete SRTM files
-        * Support OSM Notes 
+	\n\t* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
+	\n\t* Search street by name (in neighborhood) 
+	\n\t* Planning mode plugin (load/edit/save GPX tracks)
+	\n\t* New download screen (download in background)
+	\n\t* Support GPX subfolders (organize your GPX tracks)
+	\n\t* Delete SRTM files
+	\n\t* Support OSM Notes 
     </string>
     <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
     <string name="intermediate_items_sort_return">Positions ordered to form optimal way from map position to the target location</string>
