@@ -575,13 +575,13 @@ public class OsmandMapTileView extends SurfaceView implements IMapDownloaderCall
 	}
 	
 	// this method could be called in non UI thread
-	public void refreshMap(final boolean force) {
-		if (!handler.hasMessages(1) || force) {
+	public void refreshMap(final boolean updateVectorRendering) {
+		if (!handler.hasMessages(1) || updateVectorRendering) {
 			handler.removeMessages(1);
 			Message msg = Message.obtain(handler, new Runnable() {
 				@Override
 				public void run() {
-					refreshMapInternal(force);
+					refreshMapInternal(updateVectorRendering);
 				}
 			});
 			msg.what = 1;

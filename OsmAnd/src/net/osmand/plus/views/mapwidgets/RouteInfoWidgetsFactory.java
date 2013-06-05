@@ -272,6 +272,7 @@ public class RouteInfoWidgetsFactory {
 				showArrival.set(!showArrival.get());
 				leftTimeControl.setImageDrawable(showArrival.get()? time : timeToGo);
 				leftTimeControl.requestLayout();
+				map.getMapView().refreshMap();
 			}
 			
 		});
