@@ -1131,4 +1131,34 @@
     <string name="route_head">Riktning</string>
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
     <string name="downloading_file_new">"Laddar ner "</string>
-	</resources>
+	<string name="tip_recent_changes_1_4_t">"Ändringar i 1.4:
+\n\t* Sortera waypoints på bästa möjliga sätt för att besöka dem alla (handelsresande, dörr-till-dörr)
+\n\t* Sök gata efter namn (i närheten)
+\n\t* Plugin för planering (ladda/redigera/spara GPX-spår)
+\n\t* Ny skärm för nedladdning (ladda ned i bakgrunden)
+\n\t* Stöd för GPX-undermappar (organisera dina GPX-spår)
+\n\t* Ta bort SRTM-filer
+\n\t* Stöd för OSM-anteckningar "</string>
+    <string name="search_street_in_neighborhood_cities">Sök gator i grannstäder</string>
+    <string name="intermediate_items_sort_return">Platser ordnade för att bilda en optimal rutt från positionen på kartan till destinationen</string>
+    <string name="intermediate_items_sort_by_distance">Sortera (dörr-till-dörr)</string>
+    <string name="local_osm_changes_backup_failed">Säkerhetskopieringen av OSM-ändringar misslyckades</string>
+    <string name="local_osm_changes_backup">Säkerhetskopiera som OSM-förändring</string>
+    <string name="delete_point">Ta bort punkt</string>
+    <string name="plugin_distance_point_time">tid</string>
+    <string name="plugin_distance_point_speed">hastighet</string>
+    <string name="plugin_distance_point_ele">höjd</string>
+    <string name="plugin_distance_point">Punkt</string>
+    <string name="gpx_file_name">GPX-filnamn</string>
+    <string name="gpx_saved_sucessfully">GPX-filen sparades utan problem till {0}</string>
+    <string name="osmand_distance_planning_plugin_description">Skapa vägar (eller andvänd/modifiera befintliga GPX-filer) för att mäta avståndet mellan punkter. Spara som GPX; kan användas för att planera GPX-rutter.</string>
+    <string name="osmand_distance_planning_plugin_name">Avståndskalkylator &amp; planeringsverktyg</string>
+    <string name="use_distance_measurement_help">* Peta för att markera en punkt\n* Tryck och håll på kartan för att ta bort en tidigare punkt.\n* Tryck och håll på punkt för att visa den och lägga till en beskrivning.\n* Peta på mät-widgeten för att se fler åtgärder.</string>
+    <string name="default_buttons_do_not_show_again">Visa inte nästa gång</string>
+    <string name="distance_measurement_start_editing">Börja redigera</string>
+    <string name="distance_measurement_finish_editing">Avsluta redigeringen</string>
+    <string name="distance_measurement_finish_subtrack">Starta ett nytt underspår</string>
+    <string name="distance_measurement_clear_route">Ta bort alla punkter</string>
+    <string name="distance_measurement_save_gpx">Spara som GPX</string>
+    <string name="distance_measurement_load_gpx">Öppna befintlig GPX</string>
+    </resources>
