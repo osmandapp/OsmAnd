@@ -1326,4 +1326,11 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="search_street_in_neighborhood_cities">Ieškoti gatvės gretimuose miestuose</string>
     <string name="intermediate_items_sort_return">Taškai sudėlioti optimaliu maršrutu nuo žemėlapio pozicijos iki tikslo</string>
     <string name="intermediate_items_sort_by_distance">Rūšiuoti (nuo durų iki durų)</string>
+    <string name="tip_recent_changes_1_4_t">"Pakeitimai 1.4 versijoje:
+\n\t* Optimalus tarpinių kelionės tikslų riiavimas, kad būtų galima aplankyti visus (konsultantams, vadybininkams, siuntinių išvežiotojams)
+\n\t* Ieškoti gatvės pagal pavadinimą (apylinkėse)
+\n\t* Planavimo režimo įskiepis (įkelti/redaguoti/išsaugoti GPX maršrutus)
+\n\t* Naujas įkrovos ekranas (įkrova fone)\n\t* Poaplankių GPX išsaugojimui palaikymas (surūšiuokite savo GPX failus)
+\n\t* SRTM failų ištrynimas
+\n\t* OSM Užrašų palaikymas "</string>
     </resources>
