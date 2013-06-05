@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="tip_recent_changes_1_4_t">Change in 1.4:
+    <string name="tip_recent_changes_1_4_t">Changes in 1.4:
 	\n\t* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
 	\n\t* Search street by name (in neighborhood) 
 	\n\t* Planning mode plugin (load/edit/save GPX tracks)
@@ -63,8 +63,11 @@
 	<string name="hno">House number</string>
     <string name="website">Web site</string>
 	<string name="phone">Phone</string>
-    <string name="tip_recent_changes_1_3_t">Change in 1.3:
-        \n\t* Holo Theme (theme customization)
+    <string name="tip_recent_changes_1_3_t">Changes in 1.3:
+        \n\t* Reimplement Tablets and Large screen support
+        \n\t* Holo Theme (customization)
+        \n\t* Additional settings for stabilizing compass
+        \n\t* Top left button on the map screen replaces Menu button
     </string>
     <string name="monitoring_settings">Logging services &amp; Sleep mode</string>
     <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
@@ -86,7 +89,7 @@
 	    \n\t*Fix Geo Intent (Foursquare, c:geo)
 	    \n\t*Fix screen tremble during navigation
 	    \n\t*Other small fixes
-	    \nChanges in 1.2:
+	    \n\nChanges in 1.2:
 		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
 		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
 		\n\t* Now accepts maps.google.com location links
