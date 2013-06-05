@@ -183,7 +183,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 		
 		@SuppressWarnings("rawtypes")
-		public void updatePhotoInformation(double lat, double lon, double rot) throws IOException {
+		public void updatePhotoInformation(double lat, double lon, Location loc, double rot) throws IOException {
 			try {
 				Class exClass = Class.forName("android.media.ExifInterface");
 				
@@ -197,8 +197,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				setAttribute.invoke(exInstance,"GPSLongitudeRef", lon > 0?"E" : "W");
 				if(!Double.isNaN(rot)){
 					setAttribute.invoke(exInstance,"GPSImgDirectionRef", "T");
-					String rotString = (int) (rot * 100.0) + "/100";
+					while(rot < 0) { rot += 360; }
+					while(rot > 360) { rot -= 360; }
+					int abs = (int) (Math.abs(rot) * 100.0);
+					String rotString = abs/100f+"";
 					setAttribute.invoke(exInstance,"GPSImgDirection", rotString);
+				}
+				if(loc != null && loc.hasAltitude()){
+					double alt = loc.getAltitude();
+					String altString = (int) (Math.abs(alt) * 100.0) + "/100";
+					System.err.println(altString);
+					setAttribute.invoke(exInstance,"GPSAltitude", altString);
+					setAttribute.invoke(exInstance,"GPSAltitudeRef", alt < 0 ? "1" : "0");
 				}
 				Method saveAttributes = exClass.getMethod("saveAttributes",
 				           new Class[] {} );
@@ -857,10 +867,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		r.lat = l.getLatitude();
 		r.lon = l.getLongitude();
 		Float heading = app.getLocationProvider().getHeading();
+		Location loc = app.getLocationProvider().getLastKnownLocation();
 		if(lastTakingPhoto != null && lastTakingPhoto.getName().equals(f.getName()) && heading != null) {
 			float rot = heading.floatValue();
 			try {
-				r.updatePhotoInformation(r.lat, r.lon, rot == 0 ? Double.NaN : rot);
+				r.updatePhotoInformation(r.lat, r.lon, loc, rot == 0 ? Double.NaN : rot);
 			} catch (IOException e) {
 				log.error("Error updating EXIF information " + e.getMessage(), e);
 			}
