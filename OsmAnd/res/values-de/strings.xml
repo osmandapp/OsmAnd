@@ -1442,4 +1442,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="gpx_file_name">GPX-Dateiname</string>
     <string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert in {0}</string>
     <string name="distance_measurement_clear_route">Alle Punkte löschen</string>
+    <string name="intermediate_items_sort_return">Wegpunkte wurden für eine optimale Route neu angeordnet</string>
+    <string name="plugin_distance_point">Punkt</string>
+    <string name="osmand_distance_planning_plugin_description">Erstelle GPX-Routen (oder verwende/modifiziere bereits vorhandene GPX-Routen) um die Entfernung zwischen zwei Orten zu messen.</string>
+    <string name="osmand_distance_planning_plugin_name">Enternungsmesser &amp; Routen-Planer</string>
+    <string name="default_buttons_do_not_show_again">Nicht erneut anzeigen</string>
+    <string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
+    <string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
     </resources>
