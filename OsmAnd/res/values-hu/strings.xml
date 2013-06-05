@@ -1236,4 +1236,11 @@
     <string name="local_osm_changes_backup_failed">OSM módosítófájl biztonsági mentése sikertelen</string>
     <string name="local_osm_changes_backup">Biztonsági mentés OSM módosítófájlként</string>
     <string name="delete_point">Pont törlése</string>
+    <string name="tip_recent_changes_1_4_t">"Az 1.4 kiadás újdonságai:\n\t* Célpontok rendezése optimális sorrendbe (Utazóügynök, házról-házra)
+\n\t* Utca keresése név szerint (városrészen belül)
+\n\t* Tervező mód bővítmény (GPX nyomvonal betöltés/szerkesztés/mentés)
+\n\t* Új letöltőképernyő (letöltés a háttérben)
+\n\t* GPX alkönyvtárak támogatása a nyomvonalak rendezéséhez\n\t* SRTM fájlok törlése\n\t* OSM Jegyzetek támogatás "</string>
+    <string name="intermediate_items_sort_return">Célpontok optimális sorrendbe rendezve a térképpozíciótól a célpont felé</string>
+    <string name="intermediate_items_sort_by_distance">Rendezés (háztól-házig)</string>
     </resources>
