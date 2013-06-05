@@ -1182,4 +1182,5 @@
     <string name="gpx_file_name">Имя файла GPX</string>
     <string name="gpx_saved_sucessfully">Файл GPX успешно сохранён в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчёта дистанции и планирования</string>
+    <string name="intermediate_items_sort_return">Промежуточные точки выстроены в оптимальный маршрут от точки отправления до точки назначения.</string>
     </resources>
