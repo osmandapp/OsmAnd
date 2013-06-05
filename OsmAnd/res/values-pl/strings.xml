@@ -1245,4 +1245,12 @@
     <string name="intermediate_items_sort_by_distance">Sortuj (door-to-door)</string>
     <string name="intermediate_items_sort_return">Pozycje sortowane tak, aby utworzyć optymalną drogę z pozycji mapy do punktu docelowego</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
+    <string name="tip_recent_changes_1_4_t">"Zmiany w 1.4:
+\n\t* Optymalne porządkowanie odwiedzanych punktów (door-to-door)
+\n\t* Wyszukiwanie ulicy po nazwie (w sąsiedztwie)
+\n\t* Wtyczka trybu planowania (wczytywanie/edycja/zapisywanie ścieżek GPX)
+\n\t* Nowy ekran pobierania (pobieranie w tle)
+\n\t* Wsparcie dla podfolderów plików GPX (organizowanie ścieżek GPX)
+\n\t* Usunięcie plików SRTM
+\n\t* Wsparcie dla notatek OSM "</string>
     </resources>
