@@ -1127,4 +1127,5 @@
     <string name="gpx_file_name">Nome do arquivo GPX</string>
     <string name="gpx_saved_sucessfully">Arquivo GPX guardado com sucesso em {0}</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de Distância e Ferramenta de Planeamento</string>
+    <string name="osmand_distance_planning_plugin_description">"Criar caminhos (ou usar / modificar arquivos GPX existentes) para medir a distância entre  pontos. Se guardar como GPX, pode ser usado para planear rotas GPX."</string>
     </resources>
