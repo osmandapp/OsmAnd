@@ -1240,5 +1240,7 @@
     <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
     <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
     <string name="intermediate_items_sort_by_distance">Sortér (dør-til-dør)</string>
-    <string name="search_street_in_neighborhood_cities">Søg gade i nabolaget byer</string>
+    <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
+    <string name="tip_recent_changes_1_4_t">Ændringer i 1.4:\n\t* Sortér rutepunkter optimale måde at besøge alle (rejsende sælger, dør-til-dør)\n\t* Søg gade efter navn (i nabolaget)\n\t* Planlægningsudvidelse (læsse / redigere / gemme GPX spor)\n\t* Ny download-skærmen (hent i baggrunden)\n\t* GPX undermapper (organiser GPX spor)\n\t* Slet SRTM filer\n\t* Support af OSM Noter</string>
+    <string name="intermediate_items_sort_return">Rutepunkter sorteret for optimale rute fra kortposition til destination</string>
     </resources>
