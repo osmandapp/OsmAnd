@@ -1180,4 +1180,9 @@
     <string name="distance_measurement_save_gpx">Зберегти в GPX</string>
     <string name="distance_measurement_load_gpx">Завантажити GPX</string>
     <string name="cancel_route">Відмінити маршрут</string>
+    <string name="search_street_in_neighborhood_cities">Шукати в містах \"сусідах\"</string>
+    <string name="intermediate_items_sort_return">Проміжні точки побудовано в оптимальний маршрут від початкової точки до кінцевої</string>
+    <string name="intermediate_items_sort_by_distance">Впорядкувати за відстанню</string>
+    <string name="local_osm_changes_backup_successful">OSM файл успішно створений в %1$s</string>
+    <string name="osmand_distance_planning_plugin_name">Інструмент обрахунку дистанції і планування</string>
     </resources>
