@@ -175,7 +175,7 @@
 	<string name="unknown_location">موقعبت هنوز مشخص نیست</string>
 	<string name="context_menu_item_directions">مسیرها به این نقطه</string>
 	<string name="modify_transparency">تفییر شفافیت (0-شفاف، 255-کدر)</string>
-	<string name="confirm_interrupt_download">دانلود را متوقف میکنید؟</string>
+	<string name="confirm_interrupt_download">آیا می خواهید دانلود را متوقف کنید؟</string>
 	<string name="local_indexes_cat_map">نقشه های برداری آفلاین</string>
 	<string name="index_settings_descr">نقشه را دانلود کنید و داده های آفلاین را بر روی گوشی خود مدیریت کنید</string>
 	<string name="map_online_plugin_is_not_installed">افزونه نقشه های آنلاین را فعال کنید تا منابع مختلف نقشه را انتخاب کنید</string>
