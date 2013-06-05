@@ -1205,11 +1205,11 @@
     <string name="dist_control_start">avvia</string>
     <string name="download_hillshade_item">Ombreggiamento dei rilievi</string>
     <string name="download_hillshade_maps">Sovrapposizioni ombreggiamento rilievi</string>
-    <string name="tip_recent_changes_1_1_2_t">"Novità della v. 1.1.2:
-\n\t* Miglioramento del plugin Audio/video (foto con le informazioni EXIF)
-\n\t* Ripristinato l\'usabilità e ristrutturato il plugin delle linee di contorno
-\n\t* Pacchetti di ombreggimento dei rilievi per il plugin per le linee di contorno
-\n\t* Correzioni di errori (routing non ottimali) "</string>
+    <string name="tip_recent_changes_1_1_2_t">"Cambiamenti nella 1.1.2:
+\n\t* Miglioramento del plugin audio/video (foto con le informazioni EXIF)
+\n\t* Ripristinata l\'usabilità e ristrutturato il plugin delle linee di livello
+\n\t* Pacchetti di ombreggiamento dei rilievi per il plugin linee di contorno
+\n\t* Correzioni di errori (routing subottimale) "</string>
     <string name="support_new_features_descr">Fai una donazione per avere nuove funzionalità implementate nell\'applicazione</string>
 	<string name="av_use_external_camera_descr">Usa l\'applicazione di sistema per le foto</string>
     <string name="index_name_openmaps">OpenMaps UE</string>
@@ -1294,13 +1294,13 @@
     <string name="local_osm_changes_backup_successful">Creazione file di modifica OSM %1$s completata</string>
     <string name="local_osm_changes_backup_failed">Backup modifiche OSM fallito</string>
     <string name="local_osm_changes_backup">Backup come modifica OSM</string>
-    <string name="tip_recent_changes_1_4_t">Cambiamente nella 1.4:\n\t* Ordina in modo ottimale i waypoint per raggiungerli tutti (Venditore ambulante, porta a porta)
+    <string name="tip_recent_changes_1_4_t">"Cambiamenti nella 1.4:\n\t* Ordina in modo ottimale i waypoint per raggiungerli tutti (venditore ambulante, porta a porta)
 \n\t* Ricerca vie per nome (nei quartieri)
-\n\t* Plugin Modalità di pianificazione (caricare/modificare/salvare le tracce GPX)
-\n\t* Nuova schermata di download (scaricare in background)
+\n\t* Plugin Modalità di pianificazione (carica/modifica/salva le tracce GPX)
+\n\t* Nuova schermata di download (scarica in background)
 \n\t* Supporta le sottocartelle dei GPX (per organizzare le vostre tracce GPX)
 \n\t* Possibilità di eliminare i file SRTM
-\n\t* Supporto alle note OSM</string>
+\n\t* Supporto alle note OSM "</string>
     <string name="search_street_in_neighborhood_cities">Cerca la strada in un quartiere della città</string>
     <string name="intermediate_items_sort_return">Posizioni ordinate un modo da ottimizzare il percorso dalla posizione sulla mappa al luogo di destinazione</string>
     <string name="intermediate_items_sort_by_distance">Ordina (porta a porta)</string>
