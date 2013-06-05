@@ -267,7 +267,7 @@
 	<string name="osmand_parking_position_name">Parkeringssted</string>
 	<string name="osmand_parking_plugin_description">Gør det muligt at gemme placeringen af din parkerede bil.</string>
 	<string name="osmand_parking_plugin_name">Parkeringsplads</string>
-	<string name="context_menu_item_add_parking_point">Marker som en parkeringsplads</string>
+	<string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
 	<string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
 	<string name="gpxup_public">Offentligt</string>
 	<string name="gpxup_identifiable">Identificerbar</string>
