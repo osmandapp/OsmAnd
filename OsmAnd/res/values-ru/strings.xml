@@ -1183,4 +1183,8 @@
     <string name="gpx_saved_sucessfully">Файл GPX успешно сохранён в {0}</string>
     <string name="osmand_distance_planning_plugin_name">Инструмент расчёта дистанции и планирования</string>
     <string name="intermediate_items_sort_return">Промежуточные точки выстроены в оптимальный маршрут от точки отправления до точки назначения.</string>
+    <string name="local_osm_changes_backup_failed">Запись OsmChange-файла не удалась</string>
+    <string name="local_osm_changes_backup">Сохранение POI в OsmChange-файл</string>
+    <string name="plugin_distance_point_ele">высота</string>
+    <string name="local_osm_changes_backup_successful">OsmChange-файл создан в %1$s</string>
     </resources>
