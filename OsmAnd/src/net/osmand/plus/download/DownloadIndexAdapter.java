@@ -44,7 +44,6 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 			list.clear();
 			list.addAll(cats);
 		}
-		updateLoadedFiles();
 		okColor = downloadActivity.getResources().getColor(R.color.color_ok);
 		TypedArray ta = downloadActivity.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
 		defaultColor = ta.getColor(0, downloadActivity.getResources().getColor(R.color.color_unknown));
@@ -52,20 +51,10 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 		updateColor = downloadActivity.getResources().getColor(R.color.color_update);
 	}
 
-	public void updateLoadedFiles() {
-		indexActivatedFileNames = getMyApplication().getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(""),
-				IndexConstants.EXTRA_EXT, indexActivatedFileNames);
-		indexFileNames = getMyApplication().getResourceManager().getIndexFileNames();
-		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(""),
-				IndexConstants.EXTRA_EXT, indexFileNames);
-		DownloadIndexActivity.listWithAlternatives(getMyApplication().getAppPath(IndexConstants.TILES_INDEX_DIR),
-				IndexConstants.SQLITE_EXT, indexFileNames);
-		getMyApplication().getResourceManager().getBackupIndexes(indexFileNames);
-	}
-
-	private OsmandApplication getMyApplication() {
-		return (OsmandApplication) downloadActivity.getApplication();
+	public void setLoadedFiles(Map<String, String> indexActivatedFileNames, Map<String, String> indexFileNames) {
+		this.indexFileNames = indexFileNames;
+		this.indexActivatedFileNames = indexActivatedFileNames;
+		notifyDataSetInvalidated();
 	}
 
 	public void collapseTrees(final CharSequence constraint) {
@@ -93,14 +82,14 @@ public class DownloadIndexAdapter extends OsmandBaseExpandableListAdapter implem
 	}
 	
 	
-	public synchronized void setIndexFiles(List<IndexItem> indexFiles, Collection<? extends IndexItemCategory> cats) {
+	public void setIndexFiles(List<IndexItem> indexFiles, Collection<? extends IndexItemCategory> cats) {
 		this.indexFiles.clear();
 		this.indexFiles.addAll(indexFiles);
-			list.clear();
-			list.addAll(cats);
+		list.clear();
+		list.addAll(cats);
 		notifyDataSetChanged();
 	}
-
+	
 	@Override
 	public Filter getFilter() {
 		if (myFilter == null) {

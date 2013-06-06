@@ -686,7 +686,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if(loc != null){
 				mes = new float[2];
 				LatLon l = amenity.getLocation();
-				Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
+				net.osmand.Location.distanceBetween(l.getLatitude(), l.getLongitude(), loc.getLatitude(), loc.getLongitude(), mes);
 			}
 			int opened = -1;
 			if (amenity.getOpeningHours() != null) {

@@ -20,7 +20,6 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.location.Location;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -115,7 +114,7 @@ public class PointNavigationLayer extends OsmandMapLayer implements IContextMenu
 			canvas.rotate(-view.getRotate(), locationX, locationY);
 			canvas.drawBitmap(targetPoint, locationX - marginX, locationY - marginY, bitmapPaint);
 		} else if (pointToNavigate != null && view.getSettings().SHOW_DESTINATION_ARROW.get()) {
-			Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
+			net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), pointToNavigate.getLatitude(),
 					pointToNavigate.getLongitude(), calculations);
 			float bearing = calculations[1] - 90;
 			float radiusBearing = DIST_TO_SHOW * dm.density;

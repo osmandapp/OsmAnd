@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,6 +59,8 @@ public class DownloadIndexesThread {
 	private final static Log log = PlatformUtil.getLog(DownloadIndexesThread.class);
 	private DownloadFileHelper downloadFileHelper;
 	private List<BasicProgressAsyncTask<?, ?, ?> > currentRunningTask = Collections.synchronizedList(new ArrayList<BasicProgressAsyncTask<?, ?, ?>>());
+	private Map<String, String> indexFileNames = new LinkedHashMap<String, String>();
+	private Map<String, String> indexActivatedFileNames = new LinkedHashMap<String, String>();
 
 	public DownloadIndexesThread(Context ctx) {
 		this.ctx = ctx;
@@ -81,6 +84,20 @@ public class DownloadIndexesThread {
 
 	public List<IndexItem> getCachedIndexFiles() {
 		return indexFiles != null ? indexFiles.getIndexFiles() : null;
+	}
+	
+	public void updateLoadedFiles() {
+		Map<String, String> indexActivatedFileNames = app.getResourceManager().getIndexFileNames();
+		DownloadIndexActivity.listWithAlternatives(app.getAppPath(""),
+				IndexConstants.EXTRA_EXT, indexActivatedFileNames);
+		Map<String, String> indexFileNames = app.getResourceManager().getIndexFileNames();
+		DownloadIndexActivity.listWithAlternatives(app.getAppPath(""),
+				IndexConstants.EXTRA_EXT, indexFileNames);
+		DownloadIndexActivity.listWithAlternatives(app.getAppPath(IndexConstants.TILES_INDEX_DIR),
+				IndexConstants.SQLITE_EXT, indexFileNames);
+		app.getResourceManager().getBackupIndexes(indexFileNames);
+		this.indexFileNames = indexFileNames;
+		this.indexActivatedFileNames = indexActivatedFileNames;
 	}
 
 	public boolean isDownloadedFromInternet() {
@@ -150,10 +167,9 @@ public class DownloadIndexesThread {
 				if (mainView != null) {
 					mainView.setKeepScreenOn(false);
 				}
-				updateLoadedFiles();
 				DownloadIndexAdapter adapter = ((DownloadIndexAdapter) uiActivity.getExpandableListAdapter());
 				if (adapter != null) {
-					adapter.notifyDataSetInvalidated();
+					adapter.setLoadedFiles(indexActivatedFileNames, indexFileNames);
 				}
 			}
 			currentRunningTask.remove(this);
@@ -162,13 +178,6 @@ public class DownloadIndexesThread {
 			}
 		}
 		
-
-		private void updateLoadedFiles() {
-			if (uiActivity != null) {
-				((DownloadIndexAdapter) uiActivity.getExpandableListAdapter()).notifyDataSetInvalidated();
-				((DownloadIndexAdapter) uiActivity.getExpandableListAdapter()).updateLoadedFiles();
-			}
-		}
 
 		@Override
 		protected String doInBackground(IndexItem... filesToDownload) {
@@ -242,6 +251,7 @@ public class DownloadIndexesThread {
 						warn = breakDownloadMessage;
 					}
 				}
+				updateLoadedFiles();
 				return warn;
 			} catch (InterruptedException e) {
 				log.info("Download Interrupted");
@@ -452,6 +462,7 @@ public class DownloadIndexesThread {
 			protected List<IndexItem> doInBackground(Void... params) {
 				final List<IndexItem> filtered = getFilteredByType();
 				cats = IndexItemCategory.categorizeIndexItems(app, filtered);
+				updateLoadedFiles();
 				return filtered;
 			};
 			
@@ -499,6 +510,7 @@ public class DownloadIndexesThread {
 			protected void onPostExecute(List<IndexItem> filtered) {
 				if (uiActivity != null) {
 					DownloadIndexAdapter a = ((DownloadIndexAdapter) uiActivity.getExpandableListAdapter());
+					a.setLoadedFiles(indexActivatedFileNames, indexFileNames);
 					a.setIndexFiles(filtered, cats);
 					a.notifyDataSetChanged();
 					a.getFilter().filter(uiActivity.getFilterText());

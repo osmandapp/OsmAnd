@@ -307,7 +307,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				newSegment = true;
 			} else {
 				float[] lastInterval = new float[1];
-				Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
+				net.osmand.Location.distanceBetween(lat, lon, lastPoint.getLatitude(), lastPoint.getLongitude(), lastInterval);
 				distance += lastInterval[0];
 				lastPoint = new LatLon(lat, lon);
 			}

@@ -450,7 +450,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 					OsmandMapTileView view = map.getMapView();
 					int d = 0;
 					if (d == 0) {
-						Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
+						net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
 						d = (int) calculations[0];
 					}
 					if (distChanged(cachedMeters, d)) {
