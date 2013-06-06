@@ -12,7 +12,7 @@ public class Version {
 	
 	
 	public static boolean isGpsStatusEnabled(ClientContext ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+gps_status") & isBlackberry(ctx);
+		return ctx.getString(R.string.versionFeatures).contains("+gps_status") && !isBlackberry(ctx);
 	}
 	
 	public static boolean isBlackberry(ClientContext ctx) {
