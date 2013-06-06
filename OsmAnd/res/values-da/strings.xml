@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-<string name="srtm_paid_version_msg">Du bør overveje at købe Højdekurve udvidelsen på Market for at støtte den videre udvikling.</string>
+<string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\"Contour lines\") på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -15,7 +15,7 @@
     <string name="recording_is_recorded">Audio/video optages. For at stoppe tryk på AV modulet.</string>
     <string name="recording_playing">Den valgte optagelsen bliver afspillet.\n%1$s</string>
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
-    <string name="recording_delete_confirm">Vil du fjerne optagelsen?</string>
+    <string name="recording_delete_confirm">Skal optagelsen slettes?</string>
     <string name="tip_recent_changes_1_1_0_t">"Ændringer i 1.1.0:\n\t*Udvidelse beregning af afstand\n\t*Udvidelse for Audionoter 
 \n\t*Udvidelse for højdekurver
 \n\t*Fejlrettelser
@@ -57,7 +57,7 @@
     <string name="download_roads_only_maps">Kort kun med veje</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Skjul afgrænsninger</string>
-	<string name="animate_routing_using_gpx">Vil du bruge eksisterende GPX-fil?</string>
+	<string name="animate_routing_using_gpx">Skal eksisterende GPX-fil bruges?</string>
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
     <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale afgrænsninger (admin niveau 5-9)</string>
@@ -80,7 +80,7 @@
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (bruger langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
-    <string name="background_service_is_enabled_question">Baggrundtjeneste kører stadig. Ønsker du at afbryde?</string>
+    <string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
     <string name="tip_recent_changes_1_0_0_t">"Ændringer i 1.0.0:
 \n\t* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
 \n\t* Introducere kort kun med veje
@@ -104,7 +104,7 @@
     <string name="add_as_last_destination_point">Tilføj som sidste rutepunkt</string>
     <string name="add_as_first_destination_point">Tilføj som første rutepunkt</string>
     <string name="replace_destination_point">Udskift destinationspunktet</string>
-    <string name="new_destination_point_dialog">Du har allerede sat en destination.</string>
+    <string name="new_destination_point_dialog">Destination er allerede sat.</string>
     <string name="local_indexes_cat_av">Audio-/Videodata</string>
     <string name="stop_routing_confirm">Er du sikker på, du vil stoppe navigationen?</string>
     <string name="clear_dest_confirm">Er du sikker på, du vil rydde dit destinationspunkt?</string>
@@ -146,8 +146,15 @@
     <string name="prefer_motorways">Foretræk motorveje</string>
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
-    <string name="tip_recent_changes_1_2_t">"Ændringer i 1.2:
-\n\t* Fejlrettelser (tunet ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer) ↵\n\t* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse) ↵\n\t* Accepterer nu maps.google.com placeringslinks ↵\n\t* Nyt modul (GPS info) ↵\n\t* Tilføjet multi-vindue support til de seneste Samsung-enheder ↵\n\t* Kalman-filter for kompas ↵\n\t* Pebble-ur support "</string>
+    <string name="tip_recent_changes_1_2_t">"Rettelser i 1.2.1:
+\n\t* Rettet Geo Intent (Foursquare, c:geo)\n\t* Rettet at skærmbilledet ryster under navigation\n\t* Andre smårettelser\nÆndringer i 1.2:
+\n\t* Fejlrettelser (forbedret ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer)
+\n\t* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse)
+\n\t* Accepterer nu maps.google.com placeringslinks
+\n\t* Nyt modul (GPS info)
+\n\t* Tilføjet multi-vindue understøttelse af de seneste Samsung-enheder
+\n\t* Kalman-filter for kompas
+\n\t* Pebble-ur support "</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dist_control_start">start</string>
@@ -253,7 +260,7 @@
 	<string name="osmand_parking_warning">Advarsel</string>
 	<string name="osmand_parking_warning_text">Påmindelse om at afhente din bil blev tidligere tilføjet til din kalender. Den vil forblive der, indtil du sletter den manuelt.</string>    
 	<string name="osmand_parking_time_limit_title">Indstil tidsgrænsen for parkering</string>
-	<string name="osmand_parking_delete_confirm">Ønsker du at fjerne placeringen af den parkerede bil?</string>
+	<string name="osmand_parking_delete_confirm">Skal placeringen af den parkerede bil slettes?</string>
 	<string name="osmand_parking_delete">Slet P-plads markør</string>
 	<string name="osmand_parking_choose_type">Vælg parkeringstypen</string>
 	<string name="osmand_parking_lim_text">Tidsbegrænset</string>
@@ -307,7 +314,7 @@
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="context_menu_item_directions">Rutevejledning hertil</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
-	<string name="confirm_interrupt_download">Vil du afbryde hentning af fil?</string>
+	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
 	<string name="first_time_msg">Tak for at du bruger OsmAnd. Til mange af funktionerne i programmet skal du bruge nogle regionale offline data som du kan hente via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan du se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis du ikke kan finde din region kan du lave den selv (se http://osmand.net).</string>
@@ -339,7 +346,7 @@
 	<string name="debugging_and_development">OsmAnd udvikling</string>
 	<string name="native_rendering">Indbygget optegning</string>
 	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
-	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Du kan hente et i \'Indstillinger\' -&gt; \'Datahåndtering\' eller skifte til onlinekort.</string>
+	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' -&gt; \'Datahåndtering\' eller skifte til onlinekort.</string>
 	<string name="send_files_to_osm">Send GPX-filer til OSM?</string>
 	<string name="gpx_visibility_txt">Synlighed</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
@@ -452,7 +459,7 @@
 	<string name="index_name_voice">Stemmepakker (optaget)</string>
 	<string name="index_name_tts_voice">Stemmepakker (TTS)</string>
 	<string name="amenity_type_user_defined">Brugerdefineret</string>
-	<string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Vil du overskrive den?</string>
+	<string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv?</string>
 	<string name="profile_settings">Profilspecifikke indstillinger</string>
 	<string name="settings_preset">Brugerprofiler</string>
 	<string name="settings_preset_descr">Vælg en brugerprofil med tilrettede kort og navigationsindstillinger.</string>
@@ -597,7 +604,7 @@
 \n\t\'Efter kompas\' - Kortet vil hele tiden roteres så det passer med enhedens kompas "</string>
 	<string name="tip_day_night_mode_t_v2">"\tKortets udseende kan for nogle vektorkort skiftes mellem dag (lysere) og nat (mørkere).
 \n\tNatfarver er mere sikre under natkørsel.
-\n\tDu kan indstille regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm…\' -&gt;\'Dag/nat kort\'.
+\n\tIndstil regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm…\' -&gt;\'Dag/nat kort\'.
 \n\tValgmulighederne er:
 \n\t\'Solopgang/solnedgang\' - Automatisk tilstand, styret af solens position(standard)
 \n\t\'Dag\' - Brug altid dagtilstand
@@ -634,7 +641,7 @@
 	<string name="tip_recent_changes_0_6_7_t">Ændringer i 0.6.7:\n\t- Offline datamanager (hent, slet, aktiver / deaktiver offline data direkte i Osmand)\n\t- Favoritpunkter og grupper (kategorisere, slette, administrere foretrukne)\n\t- GPX Stifinder (vis detaljeret spor, afstand, gennemsnitlig hastighed, højde, osv.)\n\t- GPX navigation (flere muligheder, navigation fortsætter efter nedbrud, rundkørsler)\n\t- Funktion til at gemme rute som GPX spor til brug offline\n\t- Forbedre opfølgningen GPX (filtrer og gem unøjagtige positionspræcision /højde/hastighed)\n\t- Send GPX til OSM forum (http://download.osmand.net/gpx/)\n\t- Forbedret vektoroptegning\n\t- Forbedring af TTS-motor (annoncere nøjagtige afstand, aktivere miles)\n\t- Fejlrettelser</string>
 	<string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoom</string>
 	<string name="favourites_delete_multiple_succesful">Favoritter er slettet.</string>
-	<string name="favorite_delete_multiple">Du er ved at slette %1$d favoritter og %2$d favoritgrupper. Er du sikker?</string>
+	<string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
 	<string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
 	<string name="local_index_gpx_info_elevation">\nGennemsnits højde: %1$.0f m\nMinimum højde: %2$.0f m\nMaksimum højde: %3$.0f m\nStigninger: %4$.0f m\nFald: %5$.0f m</string>
@@ -644,7 +651,7 @@
 	<string name="local_index_items_deleted">%1$d af %2$d emner slettet.</string>
 	<string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
 	<string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
-	<string name="local_index_action_do">Du er ved at %1$s %2$s emner. Fortsæt?</string>
+	<string name="local_index_action_do">%1$s %2$s emner slettes. Fortsæt?</string>
 	<string name="local_index_descr_title">Datahåndtering</string>
 	<string name="local_index_mi_restore">Aktiver</string>
 	<string name="local_index_mi_backup">Deaktiver</string>
@@ -674,9 +681,9 @@
 	<string name="installing_new_resources">Udpakker nye data…</string>
 	<string name="internet_connection_required_for_online_route">En online navigationstjeneste er valgt, men der er ingen tilgængelig internet forbindelse.</string>
 	<string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
-	<string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-stemme) motor. Vil du søge i Market efter en anden motor? Ellers vil standard TTS-sprog blive brugt.</string>
+	<string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-tale)-motor. Søg på Google Play efter en anden TTS-motor? Ellers vil standard TTS-sprog blive brugt.</string>
 	<string name="tts_missing_language_data_title">Manglende data</string>
-	<string name="tts_missing_language_data">Der er ikke installeret data for det valgte sprog. Vil du gå til Market for at installere?</string>
+	<string name="tts_missing_language_data">Der er ikke installeret data for det valgte sprog. Gå til Google Play for at installere?</string>
 	<string name="gpx_option_reverse_route">Omvendt GPX-retning</string>
 	<string name="gpx_option_destination_point">Brug aktuel destination</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
@@ -705,7 +712,7 @@
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
 	<string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
 	<string name="tip_location_sharing">Placeringsdeling</string>
-	<string name="tip_location_sharing_t">"\tDu kan dele placeringen af interessante steder på din rejse med familie og venner.\n\tFor at dele den placering du ønsker:\n\tBrug \'Menu\' -&gt; \'Brug placeringer\' -&gt; \'Del placering\'.\n\tDerefter vælges en måde at dele din placering. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen. "</string>
+	<string name="tip_location_sharing_t">"\tDel placeringen af interessante steder på din rejse med familie og venner.\n\tFor at dele en placering:\n\tBrug \'Menu\' -&gt; \'Brug placeringer\' -&gt; \'Del placering\'.\n\tDerefter vælges en måde at dele din placering. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen. "</string>
 	<string name="tip_favorites">Favoritsteder</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="local_index_poi_data">Interessepunkt-data</string>
@@ -800,7 +807,7 @@
 \n\tLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
 \n\tFor at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Definer visning\'. "</string>
 	<string name="tip_recent_changes_1_1_4_t">"Ændringer i 1.1.4:\n\t* Redesign af brugerflade\n\t* Fejlrettelser "</string>
-    <string name="tip_navigation_t">\tDu skal vælge et destination før du kan starte navigation. Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
+    <string name="tip_navigation_t">\tDestinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1045,7 +1052,7 @@
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
 	<string name="router_service">Navigationstjeneste</string>
 	<string name="sd_dir_not_accessible">Filmappen på SD-kortet kan ikke åbnes</string>
-	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Vil du opdatere ({2})?</string>
+	<string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Opdater ({2})?</string>
 	<string name="download_question">Hent {0} - {1}?</string>
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Hentet</string>
@@ -1195,14 +1202,14 @@
     <string name="choose_osmand_theme_descr">Vælg tema</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Indstillinger for tilgængelighed</string>
-    <string name="tip_recent_changes_1_3_t">"Ændringer i 1.3:\n\t * Holo-tema (tema tilpasning) "</string>
+    <string name="tip_recent_changes_1_3_t">"Ændringer i 1.3:\n\t* Genimplementere unsderstøttelse af tabletter og store skærme\n\t* Holo tema (tilpasning)\n\t* Yderligere indstillinger for stabilisering af kompas\n\t* Nederste venstre knap på kortskærmen erstatter menuknappen "</string>
     <string name="monitoring_settings">Logningstjenester &amp; dvaletilstand</string>
     <string name="monitoring_settings_descr">Indstil, hvordan ture optages og dvaletilstand aktiveres</string>
     <string name="osmand_monitoring_plugin_name">Logningstjenester &amp; dvaletilstand</string>
     <string name="local_openstreetmap_act_title">OSM modifikationer</string>
     <string name="default_buttons_other_actions">Flere handlinger</string>
     <string name="osmand_monitoring_plugin_description">Aktiver sporing og navigation i dvaletilstand (skærm slukket), ved periodisk at tænde GPS-enheden. Vis indstillinger der letter optagelse til lokale GPX filer af dine ture eller online ved hjælp af en webtjeneste.</string>
-    <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Ønsker du at fortsætte med at hente med den nuværende internet-forbindelse?</string>
+    <string name="download_using_mobile_internet">WiFi er i øjeblikket ikke tilsluttet. Skal der fortsættes med den nuværende internet-forbindelse?</string>
     <string name="cancel_navigation">Stop navigation</string>
     <string name="cancel_route">Annuller rute</string>
     <string name="clear_destination">Slet destinationen</string>
@@ -1232,7 +1239,7 @@
     <string name="distance_measurement_finish_subtrack">Næste underspor/punkt</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
-    <string name="osmand_distance_planning_plugin_description">Opret et spor til at måle afstanden mellem punkter, åben eksisterende GPX fil for at redigere og gemme. Kan bruges til at planlægge en GPX-rute .</string>
+    <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
     <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n* Tryk og hold på kortet for at slette tidligere punkt.\n* Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n* Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
