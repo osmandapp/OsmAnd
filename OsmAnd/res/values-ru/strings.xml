@@ -224,7 +224,7 @@
   <string name="search_position_favorites">Избранные…</string>
   <string name="search_position_undefined">Неопределенно</string>
   <string name="search_position_fixed">Точка</string>
-  <string name="search_position_current_location">Текущая точка…</string>
+  <string name="search_position_current_location">Текущее местоположение…</string>
   <string name="search_position_map_view">Вид карты</string>
   <string name="select_search_position">Искать рядом:</string>
   <string name="context_menu_item_search">Искать</string>
@@ -1153,7 +1153,7 @@
     <string name="osmand_play_title_30_chars">OsmAnd карты и навигация</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ карты и навигация</string>
 	<string name="osmand_extended_description_4000_chars"/>
-	<string name="osmand_plus_extended_description_4000_chars"></string>
+	<string name="osmand_plus_extended_description_4000_chars"/>
 	<string name="use_kalman_filter_compass_descr">Использовать фильтр Калмана для данных GPS</string>
     <string name="use_kalman_filter_compass">Использовать фильтр Калмана</string>
     <string name="cancel_navigation">Прекратить навигацию</string>
@@ -1202,4 +1202,6 @@
     <string name="other_location">Другие</string>
     <string name="local_indexes_cat_srtm">Данные горизонталей</string>
     <string name="downloading_file_new">Загрузка</string>
+	<string name="osmand_distance_planning_plugin_description">Создание путей (или модификация существующего файла GPX) для измерения дистанции между точками. Сохранить как GPX (может использоваться для планирования маршрутов GPX).</string>
+    <string name="osmand_extended_description_4000_chars"/>
 	</resources>
