@@ -89,8 +89,8 @@
 	<string name="poi_filter_food_shop">فروشگاه مواد غذایی</string>
 	<string name="poi_filter_for_tourists">مناسب توریستها</string>
 	<string name="poi_filter_fuel">جایگاه سوخت</string>
-	<string name="avoid_motorway">زوم خودکار براساس سرعت خودرو</string>
-	<string name="auto_zoom_map_descr">زوم خودکار</string>
+	<string name="avoid_motorway"></string>
+	<string name="auto_zoom_map_descr">زوم خودکار بر اساس سرعت خودرو</string>
 	<string name="recalculate_route_to_your_location">شیوه رفت و آمد:</string>
 	<string name="select_navigation_mode">انتخاب شیوه رفت و آمد</string>
 	<string name="day_night_info">اطلاعات روز/شب</string>
@@ -180,4 +180,24 @@
 	<string name="index_settings_descr">نقشه را دانلود کنید و داده های آفلاین را بر روی گوشی خود مدیریت کنید</string>
 	<string name="map_online_plugin_is_not_installed">افزونه نقشه های آنلاین را فعال کنید تا منابع مختلف نقشه را انتخاب کنید</string>
 	<string name="map_settings">تنظیمات نقشه</string>
+	<string name="local_osm_changes_backup">پشتیبان گیری از تغییرات OSM</string>
+    <string name="delete_point">حذف نقطه</string>
+    <string name="use_kalman_filter_compass">استفاده از فیلتر کالمان</string>
+    <string name="access_mark_final_location_first">حالت دسترسی: لطفا مقصد را انتخاب نمایید</string> 
+    <string name="cancel_route">لغو مسیر</string>
+    <string name="max_speed_none">هیچ کدام</string>
+    <string name="dropbox_plugin_name">پلاگین دراپ باکس</string>
+    <string name="animate_routing_using_gpx">آیا می خواهید از فایل GPX موجود استفاده نمایید؟</string>
+    <string name="av_use_external_recorder_descr">استفاده از دوربین سیستم برای ضبط ویدئو</string>
+    <string name="recording_open_external_player">باز کردن پخش کننده خارجی</string>
+    <string name="recording_unavailable">موجود نیست</string>
+    <string name="map_widget_distancemeasurement">اندازه گیری فاصله</string>
+    <string name="index_srtm_parts">بخش ها</string>
+    <string name="map_widget_show_destination_arrow">جهت مسیر را نشان بده</string>
+    <string name="no_route">مسیری وجود ندارد</string>
+	<string name="btn_add_tag">اضافه کردن برچسب</string>
+    <string name="btn_advanced_mode">حالت پیشرفته...</string>
+    <string name="show_warnings_title">نشان داده هشدار...</string>
+	<string name="use_compass_navigation">استفاده از قطب نما</string>
+	<string name="auto_zoom_map">زوم خودکار</string>
 	</resources>
