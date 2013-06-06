@@ -198,7 +198,7 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 
 		public BackupOpenstreetmapPointAsyncTask() {
 			OsmandApplication app = LocalOpenstreetmapActivity.this.getMyApplication();
-			osmchange = app.getAppPath("osm.osmchange");
+			osmchange = app.getAppPath("poi_modification.osc");
 		}
 		
 
