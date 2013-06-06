@@ -1325,6 +1325,6 @@
     <string name="downloading_file_new">Téléchargement en cours</string>
 	<string name="tip_recent_changes_1_4_t">"e \tChangements dans la version 1.4 : ↵\n→* Placer les points de passage dans un ordre optimal afin de tous les visiter  (Démarcheurs, porte-à-porte) ↵\n→* Recherche des rues par nom (dans le voisinage) ↵\n→* Greffon de planification (charger/modifier/sauvegarder les traces GPX) ↵\n→* Nouvel écran de téléchargement(téléchargement en arrière-plan) ↵\n→* Support des sous-dossiers GPX (organiser vos traces GPX) ↵\n→* Suppression des fichiers SRTM ↵\n→* Support des Notes OSM  "</string>
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
-    <string name="intermediate_items_sort_return">Arrangement des points de passage pour former un chemin optimal depuis la position sur la carte jusqu\'à la localisation de la cible</string>
+    <string name="intermediate_items_sort_return">Optimiser l\'ordre des points de passage de la position courante jusqu\'à la destination</string>
     <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
     </resources>
