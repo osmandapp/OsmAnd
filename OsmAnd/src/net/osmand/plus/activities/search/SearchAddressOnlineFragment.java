@@ -17,6 +17,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
@@ -26,6 +27,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -45,6 +47,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class SearchAddressOnlineFragment extends SherlockFragment implements SearchActivityChild, OnItemClickListener {
 	
@@ -54,36 +60,45 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 	private static PlacesAdapter adapter = null;
 	private OsmandSettings settings;
 	private View view;
+	private EditText searchText;
 	
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		MenuItem menuItem;
+		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
+		menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark);
+
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				searchText.setText("");
+				adapter.clear();
+				return true;
+			}
+		});
+		if (getActivity() instanceof SearchActivity) {
+			menuItem = menu.add(0, 0, 0, R.string.search_offline_address).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_next_item_light : R.drawable.a_1_navigation_next_item_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					((SearchActivity) getActivity()).startSearchAddressOffline();
+					return true;
+				}
+			});
+		}
+		
+	}
 	
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.search_address_online, container, false);
 		adapter = new PlacesAdapter(new ArrayList<SearchAddressOnlineFragment.Place>());
-		Button searchOffline = (Button) view.findViewById(R.id.SearchOffline);
-		if (getActivity() instanceof SearchActivity) {
-			searchOffline.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					((SearchActivity) getActivity()).startSearchAddressOffline();
-				}
-			});
-		} else {
-			searchOffline.setVisibility(View.INVISIBLE);
-		}
-
 		settings = ((OsmandApplication) getActivity().getApplication()).getSettings();
 
-		final EditText searchText = (EditText) view.findViewById(R.id.SearchText);
-
-		Button clearSearch = (Button) view.findViewById(R.id.ClearSearch);
-		clearSearch.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				searchText.setText("");
-				adapter.clear();
-			}
-		});
-
+		searchText = (EditText) view.findViewById(R.id.SearchText);
 		Button searchButton = (Button) view.findViewById(R.id.SearchButton);
 		searchButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -94,6 +109,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 				searchPlaces(searchText.getText().toString());
 			}
 		});
+		setHasOptionsMenu(true);
 		location = settings.getLastKnownMapLocation();
 		ListView lv = (ListView) view.findViewById(android.R.id.list);
 		lv.setAdapter(adapter);

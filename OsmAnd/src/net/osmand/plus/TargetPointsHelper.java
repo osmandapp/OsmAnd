@@ -188,6 +188,13 @@ public class TargetPointsHelper {
     }
 	
 	
+	public void setSingleDestination(double lat, double lon, String historyName) {
+		clearPointToNavigate(false);
+		settings.setPointToNavigate(lat, lon, true, historyName);
+		updatePointsFromSettings();
+		
+	}
+	
 
 	public void updatePointsFromSettings() {
 		readFromSettings(settings);		

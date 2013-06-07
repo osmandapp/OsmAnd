@@ -45,41 +45,7 @@
 <RadioButton android:id="@+id/RadioIntersStreet" android:layout_width="wrap_content" android:layout_marginLeft = "5dp" android:layout_height="wrap_content" android:text="@string/search_address_street_option"></RadioButton>
 </RadioGroup>
 
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginTop="5dp" >
 
-    <Button
-        android:id="@+id/SearchOnline"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:text="@string/search_online_address"
-        android:layout_gravity="bottom" 
-        >
-    </Button>
-
-    <Button
-        android:id="@+id/ShowOnMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="@string/search_shown_on_map"
-        android:layout_gravity="bottom" 
-        >
-    </Button>
-
-    <Button
-        android:id="@+id/NavigateTo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.5"
-        android:text="@string/navigate_to" 
-        android:layout_gravity="bottom">
-    </Button>
-</LinearLayout>
 </net.osmand.view.ExpandableLinearLayout >
 </LinearLayout>
 </ScrollView>

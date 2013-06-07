@@ -3,10 +3,12 @@ package net.osmand.plus.activities.search;
 
 import java.text.MessageFormat;
 
+import net.osmand.access.AccessibleToast;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.resources.RegionAddressRepository;
@@ -18,8 +20,13 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class SearchAddressFragment extends SherlockFragment {
 
@@ -27,13 +34,16 @@ public class SearchAddressFragment extends SherlockFragment {
 	public static final int SELECT_ADDRESS_POINT_RESULT_OK = 1;	
 	public static final String SELECT_ADDRESS_POINT_LAT = "SELECT_ADDRESS_POINT_LAT";
 	public static final String SELECT_ADDRESS_POINT_LON = "SELECT_ADDRESS_POINT_LON";
+	private static final int NAVIGATE_TO = 0;
+	private static final int ADD_WAYPOINT = 1;
+	private static final int SHOW_ON_MAP = 2;
+	private static final int ONLINE_SEARCH = 3;
+	private static final int SELECT_POINT = 4;
 	
-	private Button showOnMap;
 	private Button streetButton;
 	private Button cityButton;
 	private Button countryButton;
 	private Button buildingButton;
-	private Button navigateTo;
 	
 	private String region = null;
 	private String city = null;
@@ -42,28 +52,86 @@ public class SearchAddressFragment extends SherlockFragment {
 	private String building = null;
 	private String street2 = null;
 	private boolean radioBuilding = true;
-	private Button searchOnline;
 	
 	private OsmandSettings osmandSettings;
 	private LatLon searchPoint = null;
 
-	private boolean selectAddressMode;
 	private View view;
 	
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.search_address, container, false);
 		
-		showOnMap = (Button) findViewById(R.id.ShowOnMap);
-		navigateTo = (Button) findViewById(R.id.NavigateTo);
 		streetButton = (Button) findViewById(R.id.StreetButton);
 		cityButton = (Button) findViewById(R.id.CityButton);
 		countryButton = (Button) findViewById(R.id.CountryButton);
 		buildingButton = (Button) findViewById(R.id.BuildingButton);
-		searchOnline = (Button) findViewById(R.id.SearchOnline);
 		osmandSettings = ((OsmandApplication) getApplication()).getSettings();
 		attachListeners();
+		setHasOptionsMenu(true);
 		return view;
+	}
+	
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
+		if(getActivity() instanceof SearchAddressActivity) {
+			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, SELECT_POINT, 0, R.string.search_select_point).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_accept_light : R.drawable.a_1_navigation_accept_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					showOnMap(SELECT_POINT);
+					return true;
+				}
+			});
+		} else {
+			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.search_select_point).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS );
+			menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_directions_light : R.drawable.a_7_location_directions_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					showOnMap(NAVIGATE_TO);
+					return true;
+				}
+			});
+			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
+			if (targets.getPointToNavigate() != null) {
+				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
+						MenuItem.SHOW_AS_ACTION_ALWAYS);
+				menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
+						: R.drawable.a_9_av_make_available_offline_dark);
+				menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+						showOnMap(ADD_WAYPOINT);
+						return true;
+					}
+				});
+			}
+			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark);
+
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					showOnMap(SHOW_ON_MAP);
+					return true;
+				}
+			});
+			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_next_item_light : R.drawable.a_1_navigation_next_item_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					((SearchActivity) getActivity()).startSearchAddressOnline();
+					return true;
+				}
+			});
+		} 
 	}
 	
 	private OsmandApplication getApplication() {
@@ -92,16 +160,6 @@ public class SearchAddressFragment extends SherlockFragment {
 	}
 	
 	private void attachListeners() {
-		if (getActivity() instanceof SearchActivity) {
-			searchOnline.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					((SearchActivity) getActivity()).startSearchAddressOnline();
-				}
-			});
-		} else {
-			searchOnline.setVisibility(View.INVISIBLE);
-		}
 		countryButton.setOnClickListener(new View.OnClickListener(){
 			@Override
 			public void onClick(View v) {
@@ -128,18 +186,6 @@ public class SearchAddressFragment extends SherlockFragment {
 				} else {
 					startActivity(createIntent(SearchStreet2ByNameActivity.class));
 				}
-			}
-		});
-		navigateTo.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showOnMap(true);
-			}
-		});
-		showOnMap.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showOnMap(false);
 			}
 		});
 		findViewById(R.id.ResetBuilding).setOnClickListener(new View.OnClickListener(){
@@ -201,8 +247,9 @@ public class SearchAddressFragment extends SherlockFragment {
 			});
 	}
 	
-	public void showOnMap(boolean navigateTo) {
+	public void showOnMap(int mode) {
 		if (searchPoint == null) {
+			AccessibleToast.makeText(getActivity(), R.string.please_select_address, Toast.LENGTH_SHORT).show();
 			return;
 		}
 		String historyName = null;
@@ -230,7 +277,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			objectName = city;
 			zoom = 14;
 		}
-		if(selectAddressMode){
+		if(mode == SELECT_POINT ){
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, objectName);
 			intent.putExtra(SELECT_ADDRESS_POINT_LAT, searchPoint.getLatitude());
@@ -238,9 +285,14 @@ public class SearchAddressFragment extends SherlockFragment {
 			getActivity().setResult(SELECT_ADDRESS_POINT_RESULT_OK, intent);
 			getActivity().finish();
 		} else {
-			if (navigateTo) {
+			OsmandApplication ctx = (OsmandApplication) getActivity().getApplication();
+			final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
+			if (mode == NAVIGATE_TO) {
+		    	targetPointsHelper.setSingleDestination(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
-			} else {
+			} else if (mode == SHOW_ON_MAP) {
 				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
@@ -273,17 +325,7 @@ public class SearchAddressFragment extends SherlockFragment {
 	}
 
 	protected void updateUI(){
-		showOnMap.setEnabled(searchPoint != null);
-		navigateTo.setEnabled(searchPoint != null);
-		if(selectAddressMode) {
-			navigateTo.setText(R.string.search_select_point);
-			showOnMap.setVisibility(View.INVISIBLE);
-			findViewById(R.id.SearchOnline).setVisibility(View.INVISIBLE);
-		} else {
-			navigateTo.setText(R.string.navigate_to);
-			findViewById(R.id.SearchOnline).setVisibility(View.VISIBLE);
-			showOnMap.setVisibility(View.VISIBLE);
-		}
+		
 		findViewById(R.id.ResetCountry).setEnabled(!Algorithms.isEmpty(region));
 		if(Algorithms.isEmpty(region)){
 			countryButton.setText(R.string.ChooseCountry);
@@ -351,14 +393,6 @@ public class SearchAddressFragment extends SherlockFragment {
 	public void onResume() {
 		super.onResume();
 		searchPoint = osmandSettings.getLastSearchedPoint();
-		
-		Intent intent = getActivity().getIntent();
-		if (intent != null) {
-			selectAddressMode = intent.hasExtra(SELECT_ADDRESS_POINT_INTENT_KEY);
-		} else {
-			selectAddressMode = false;
-		}
-
 		region = null;
 		postcode = null;
 		city = null;

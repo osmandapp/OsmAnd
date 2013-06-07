@@ -1211,8 +1211,10 @@ public class MapActivityActions implements DialogProvider {
     
     public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
     		final boolean saveHistory, final OnClickListener onShow){
+    	
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_show_on_map));
 		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
 		showOnMap.setOnClickListener(new OnClickListener() {
@@ -1237,27 +1239,28 @@ public class MapActivityActions implements DialogProvider {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
-				navigatePointDialogAndLaunchMap(activity,
-						location.getLatitude(), location.getLongitude(), name);
+				targetPointsHelper.setSingleDestination(location.getLatitude(), location.getLongitude(), name);
+				MapActivity.launchMapActivityMoveToTop(activity);
 				qa.dismiss();
 			}
 		});
 		qa.addActionItem(setAsDestination);
-		
-//		ActionItem directionsTo = new ActionItem();
-//		directionsTo.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_directions_to_here));
-//		directionsTo.setTitle(activity.getString(R.string.context_menu_item_directions));
-//		directionsTo.setOnClickListener(new OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if(onShow != null) {
-//					onShow.onClick(v);
-//				}
-//				navigateToPoint(activity, location.getLatitude(), location.getLongitude(), name);
-//				qa.dismiss();
-//			}
-//		});
-//		qa.addActionItem(directionsTo);
+		if (targetPointsHelper.getPointToNavigate() != null) {
+			ActionItem intermediate = new ActionItem();
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_intermediate));
+			intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
+			intermediate.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (onShow != null) {
+						onShow.onClick(v);
+					}
+					navigatePointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
+					qa.dismiss();
+				}
+			});
+			qa.addActionItem(intermediate);
+		}
 	}
     
     

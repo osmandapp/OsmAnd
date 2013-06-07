@@ -44,29 +44,4 @@
         style="@style/OsmandListView">
     </ListView>
 
-    <LinearLayout
-        android:id="@+id/LinearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"
-        android:gravity="left|bottom" >
-
-        <Button
-            android:id="@+id/SearchOffline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="120dp"
-            android:text="@string/search_offline_address" >
-        </Button>
-
-        <Button
-            android:id="@+id/ClearSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="150dp"
-            android:text="@string/search_offline_clear_search" >
-        </Button>
-    </LinearLayout>
-
 </LinearLayout>

@@ -9,6 +9,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.util.MapUtils;
@@ -27,6 +28,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockFragment;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuItem.OnMenuItemClickListener;
 
 public class NavigatePointFragment extends SherlockFragment implements SearchActivityChild {
 	int currentFormat = Location.FORMAT_DEGREES;
@@ -34,13 +39,57 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	public static final String SEARCH_LAT = SearchActivity.SEARCH_LAT;
 	public static final String SEARCH_LON = SearchActivity.SEARCH_LON;
 
+	private static final int NAVIGATE_TO = 1;
+	private static final int ADD_WAYPOINT = 2;
+	private static final int SHOW_ON_MAP = 3;
+
 	private View view;
 
 	public View onCreateView(android.view.LayoutInflater inflater, android.view.ViewGroup container, Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.navigate_point, container, false);
-		((Button) view.findViewById(R.id.Cancel)).setText(getString(R.string.navigate_to));
+		setHasOptionsMenu(true);
 		return view;
 	};
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
+		boolean light = app.getSettings().isLightActionBar();
+		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.search_select_point).setShowAsActionFlags(
+				MenuItem.SHOW_AS_ACTION_ALWAYS );
+		menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_directions_light : R.drawable.a_7_location_directions_dark);
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				showOnMap(NAVIGATE_TO);
+				return true;
+			}
+		});
+		TargetPointsHelper targets = app.getTargetPointsHelper();
+		if (targets.getPointToNavigate() != null) {
+			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
+					: R.drawable.a_9_av_make_available_offline_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					showOnMap(ADD_WAYPOINT);
+					return true;
+				}
+			});
+		}
+		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark);
+
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				showOnMap(SHOW_ON_MAP);
+				return true;
+			}
+		});
+	}
 	
 	@Override
 	public void onResume() {
@@ -124,18 +173,6 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
 		});
-		((Button) view.findViewById(R.id.Cancel)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showOnMap(true);
-			}
-		});
-		((Button) view.findViewById(R.id.ShowOnMap)).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				showOnMap(false);
-			}
-		});
 		TextWatcher textWatcher = new TextWatcher() {
 			String pasteString = null;
 			@Override
@@ -208,14 +245,17 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		lonEdit.addTextChangedListener(textWatcher);
 	}
 	
-	public void showOnMap(boolean navigate){
+	public void showOnMap(int mode){
 		try {
 			double lat = convert(((TextView) view.findViewById(R.id.LatitudeEdit)).getText().toString());
 			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
-			
-			if (navigate) {
+			TargetPointsHelper targetPointsHelper = ((OsmandApplication) getActivity().getApplication()).getTargetPointsHelper();
+			if (mode == NAVIGATE_TO) {
+				targetPointsHelper.setSingleDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
-			} else {
+			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),
 						getString(R.string.point_on_map, lat, lon));

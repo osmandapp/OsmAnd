@@ -1,6 +1,7 @@
 package net.osmand.plus.activities.search;
 
 import net.osmand.plus.OsmandApplication;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -11,6 +12,7 @@ public class SearchAddressActivity extends SherlockFragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
+		getSherlock().setUiOptions(ActivityInfo.UIOPTION_SPLIT_ACTION_BAR_WHEN_NARROW);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		if (savedInstanceState == null) {
 			// During initial setup, plug in the details fragment.

@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="please_select_address">Select city or street first</string>
     <string name="tip_recent_changes_1_4_t">Changes in 1.4:
 	\n\t* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
 	\n\t* Search street by name (in neighborhood) 

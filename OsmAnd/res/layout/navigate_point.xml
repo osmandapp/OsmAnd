@@ -24,10 +24,6 @@
 <TextView android:id="@+id/ValidateTextView" android:textSize="16sp"  android:visibility="gone"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="" android:gravity="center" android:textColor="@color/color_invalid"></TextView>
 </TableLayout>
 
-<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:gravity="center">
-    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:id="@+id/ShowOnMap" android:text="@string/search_shown_on_map"></Button>
-    <Button android:layout_width="125dp" android:layout_height="wrap_content" android:id="@+id/Cancel" android:text="@string/navigate_point_cancel" > </Button>
-</LinearLayout>
 </net.osmand.view.ExpandableLinearLayout>
 </LinearLayout>
 </ScrollView>
