@@ -1449,4 +1449,17 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="default_buttons_do_not_show_again">Nicht erneut anzeigen</string>
     <string name="distance_measurement_save_gpx">Als GPX-Datei speichern</string>
     <string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
+    <string name="tip_recent_changes_1_4_t">"Änderungen in Version 1.4:
+\n\t* Sortieren von Wegpunkten für eine optimale Reihenfolge (Travelling salesman, Tür-zu-Tür)
+\n\t* Offline-Suche von Straßennamen nun auch in angrenzenden Orten
+\n\t* PlugIn zum Touren-Planen (Laden, Ändern und Speichern von GPX-Tracks)
+\n\t* Neues Download-Menu (Herunterladen von Karten im Hintergrund)
+\n\t* Für gespeicherte GPX-Spuren können nun Unterordner angelegt werden\n\t* SRTM-Dateien (Höhenlinien) können nun auch gelöscht werden
+\n\t* Nutzung der neuen Notes-Fehlermarker laut osm.org "</string>
+    <string name="search_street_in_neighborhood_cities">Straßenname in weiteren Orten suchen</string>
+    <string name="intermediate_items_sort_by_distance">Sortieren (Tür-zu-Tür)</string>
+    <string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.\n * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
+    <string name="distance_measurement_start_editing">Messung beginnen</string>
+    <string name="distance_measurement_finish_editing">Messung beenden</string>
+    <string name="distance_measurement_finish_subtrack">Weitere Messung anlegen</string>
     </resources>
