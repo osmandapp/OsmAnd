@@ -144,7 +144,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity {
 		entrieValues = new String[] { "",
 				"en", "af", "hy", "eu", "bs", "bg",
 				"ca", "cs",  "da", "nl", "fi", "fr", "ka",
-				"de", "el", "he", "hi", "hu", "id",
+				"de", "el", "iw", "hi", "hu", "id",
 				"it", "ja", "ko", "lv", "lt", "mr",
 				"no", "pl", "pt", "ro", "ru", "sk",
 				"sl", "es", "sv", "tr", "uk", "vi",
