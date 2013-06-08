@@ -1310,7 +1310,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_nothing_found">Nothing found</string>
 	<string name="searching">Searching&#8230;</string>
 	<string name="searching_address">Searching address&#8230;</string>
-	<string name="search_osm_nominatim">Search address using OSM Nominatim</string>
+	<string name="search_osm_nominatim">Online search using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="search_online_address">Internet</string>

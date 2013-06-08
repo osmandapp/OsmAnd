@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
@@ -954,7 +954,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="search_nothing_found">Kein Treffer</string>
 	<string name="searching">Suchen …</string>
 	<string name="searching_address">Adresse suchen …</string>
-	<string name="search_osm_nominatim">Adresse suchen mit OSM Nominatim</string>
+	<string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
 	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
 	<string name="search_offline_address">Offline</string>
 	<string name="search_online_address">Internet verwenden</string>
