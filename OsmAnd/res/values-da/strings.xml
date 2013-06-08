@@ -77,7 +77,7 @@
 	<string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og audio-/videonoter med din dropbox-konto.</string>
     <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
 	<string name="rendering_attr_showRoadMaps_name">Kort kun med veje</string>
-    <string name="safe_mode_description">Kør program i fejlsikret tilstand (bruger langsommere Android i stedet for oprindelige kode).</string>
+    <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
     <string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
