@@ -1257,4 +1257,6 @@
     <string name="search_street_in_neighborhood_cities">Vyhľadať ulicu v susednom meste</string>
     <string name="local_osm_changes_backup_failed">Záloha OSM zmien zlyhala</string>
     <string name="local_osm_changes_backup">Zálohovať ako OSM zmenu</string>
+    <string name="please_select_address">Najskôr vyberte mesto alebo ulicu</string>
+    <string name="local_osm_changes_backup_successful">Zmenový súbor pre OSM bol úspešne vygenerovaný %1$s</string>
     </resources>
