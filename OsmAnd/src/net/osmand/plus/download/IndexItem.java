@@ -54,17 +54,21 @@ public class IndexItem implements Comparable<IndexItem> {
 		} else if (type == DownloadActivityType.ROADS_FILE) {
 			return ctx.getString(R.string.download_roads_only_item);
 		}
-		if (fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) || fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)) {
-		} else if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
-			s = ctx.getString(R.string.voice);
-		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
-			s = ctx.getString(R.string.ttsvoice);
-		}
+//		fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT) 
+//		fileName.endsWith(IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)
+//		fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)
+//		fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)
 		return s;
 	}
 
 	public String getVisibleName(ClientContext ctx) {
-		return getBasename().replace('_', ' ');
+		String s = "";
+		if (fileName.endsWith(IndexConstants.VOICE_INDEX_EXT_ZIP)) {
+			s = ctx.getString(R.string.voice) + "\n";
+		} else if (fileName.endsWith(IndexConstants.TTSVOICE_INDEX_EXT_ZIP)) {
+			s = ctx.getString(R.string.ttsvoice) + "\n";
+		}
+		return s + getBasename().replace('_', ' ');
 	}
 
 	public String getBasename() {
