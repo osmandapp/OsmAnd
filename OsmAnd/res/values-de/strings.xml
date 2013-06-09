@@ -957,7 +957,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="searching_address">Adresse suchen …</string>
 	<string name="search_osm_nominatim">Online-Suche mit OSM Nominatim</string>
 	<string name="hint_search_online">Hausnummer, Straße, Ort</string>
-	<string name="search_offline_address">Offline</string>
+	<string name="search_offline_address">Offline-Suche</string>
 	<string name="search_online_address">Internet verwenden</string>
 	<string name="max_level_download_tile">Max. Online-Zoom</string>
 	<string name="max_level_download_tile_descr">Maximale Vergrößerung bis zu der Online-Karten-Daten (Kacheln) aus dem Internet geladen werden</string>
