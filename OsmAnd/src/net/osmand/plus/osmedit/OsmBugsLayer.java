@@ -345,7 +345,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 				bug.setLongitude(p.getLongitude());
 				bug.setLatitude(p.getLatitude());
 				bug.dates.add("");
-				bug.users.add(view.getSettings().USER_NAME.get());
+				bug.users.add(activity.getMyApplication().getSettings().USER_NAME.get());
 				bug.comments.add(p.getText()); 
 				bug.setOpened(p.getAction() == Action.CREATE || p.getAction() == Action.MODIFY);
 				bug.setLocal(true);
@@ -359,7 +359,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		dialogBundle.putDouble(KEY_LATITUDE, latitude);
 		dialogBundle.putDouble(KEY_LONGITUDE, longitude);
 		dialogBundle.putString(KEY_MESSAGE, message);
-		OsmandSettings settings = view.getSettings();
+		OsmandSettings settings = activity.getMyApplication().getSettings();
 		dialogBundle.putString(KEY_AUTHOR, settings.USER_NAME.get());
 		activity.showDialog(DIALOG_OPEN_BUG);
 	}
