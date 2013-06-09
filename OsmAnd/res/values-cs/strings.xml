@@ -110,7 +110,7 @@
 \n\t- Offline informace o místech z Wikipedie
 \n\t- Aktualizované mapy
 \n\t- Další drobné změny "</string>
-  <string name="free_version_message">Tato bezplatná verze OsmAnd je omezena na %1$s downloady %2$s a nepodporuje offline data z Wikipedie.</string>
+  <string name="free_version_message">Tato bezplatná verze OsmAnd je omezena na %1$s downloady a nepodporuje offline data z Wikipedie.</string>
   <string name="free_version_title">Bezplatná verze</string>
   <string name="poi_context_menu_showdescription">Zobrazit popis POI</string>
   <string name="index_name_north_america">Severní Amerika</string>

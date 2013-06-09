@@ -98,7 +98,7 @@
   <string name="gpx_monitoring_disabled_warn">Kérlek engedélyezd az \'Útvonal rögzítése GPX-be\' beállítást.</string>
   <string name="show_current_gpx_title">Aktív útvonalrögzítés</string>
   <string name="tip_recent_changes_0_7_0_t">A 0.7.0 verzió változásai: \n\t- Internet nélkül is használható Wikipédia szócikkek \n\t- Frissített térképek \n\t- Egyéb hasznos apró funkciók </string>
-  <string name="free_version_message">Az ingyenes verzióval %1$s letöltés engedélyezett %2$s és nem támogatja az offline Wikipédia cikkeket.</string>
+  <string name="free_version_message">Az ingyenes verzióval %1$s letöltés engedélyezett és nem támogatja az offline Wikipédia cikkeket.</string>
   <string name="free_version_title">Ingyenes verzió</string>
   <string name="poi_context_menu_showdescription">POI leírás megjelenítése</string>
   <string name="index_name_us">Észak-Amerika - Egyesült Államok</string>

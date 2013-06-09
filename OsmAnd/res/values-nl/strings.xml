@@ -132,7 +132,7 @@
   <string name="gpx_monitoring_disabled_warn">Zet eerst \'Log track naar GPX\' aan (navigatie-instellingen).</string>
   <string name="show_current_gpx_title">Toon huidige track</string>
   <string name="tip_recent_changes_0_7_0_t">"Wijzigingen in 0.7.0 : \n\t- Offline Wikipedia gegevens met artikelen \n\t- Vernieuwde kaarten \n\t- Andere kleine features "</string>
-  <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads %2$s en ondersteunt geen offline Wikipedia artikelen.</string>
+  <string name="free_version_message">Deze gratis versie van OsmAnd is beperkt tot %1$s downloads en ondersteunt geen offline Wikipedia artikelen.</string>
   <string name="free_version_title">Gratis versie</string>
   <string name="poi_context_menu_showdescription">Toon interessepunt-beschrijvingen</string>
   <string name="index_name_north_america">Noord Amerika</string>

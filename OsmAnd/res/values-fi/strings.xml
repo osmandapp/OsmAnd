@@ -565,7 +565,7 @@
     <string name="map_widget_show_destination_arrow">Näytä kohteen suunta</string>
     <string name="non_optimal_route_calculation">Laske mahdollisesti epäoptimaalinen reitti pitkille matkoille</string>
     <string name="offline_edition_descr">Käytä aina offline editointia</string>
-	<string name="free_version_message">Tämä ilmainen OsmAnd versio on rajoitettu %1$s lataukseen %2$s ja ei tue offline wikipedia artikkeleita.</string>
+	<string name="free_version_message">Tämä ilmainen OsmAnd versio on rajoitettu %1$s lataukseen ja ei tue offline wikipedia artikkeleita.</string>
 	<string name="index_name_voice">Äänipaketit (nauhoitettu)</string>
 	<string name="index_name_tts_voice">Äänipaketit (Teksti Puheeksi)</string>
 	<string name="settings_preset_descr">Valitse käyttäjäprofiili yksilöllisillä kartta- ja navigaatioasetuksilla.</string>

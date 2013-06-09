@@ -153,7 +153,7 @@
   <string name="gpx_monitoring_disabled_warn">გთხოვთ ჩართოთ \'დევნის GPX ჟურნალში ჩაწერა\' დევნის პარამეტრებში.</string>
   <string name="show_current_gpx_title">მიმდინარე დევნის ჩვენება</string>
   <string name="tip_recent_changes_0_7_0_t">"ცვლილებები 0.7.0-ში : \n\t- ვიკიპედიის გათიშული სტატიები\n\t- განახლებული რუკები\n\t- სხვა მცირე ცვლილებები "</string>
-  <string name="free_version_message">OsmAnd-ის უფასო ვერსია ლიმიტირებულია %1$s ჩამოტვირთვით %2$s და არ გააჩნია გათიშული ვიკიპედიის სტატიების მხარდაჭერა.</string>
+  <string name="free_version_message">OsmAnd-ის უფასო ვერსია ლიმიტირებულია %1$s ჩამოტვირთვით და არ გააჩნია გათიშული ვიკიპედიის სტატიების მხარდაჭერა.</string>
   <string name="free_version_title">უფასო ვერსია</string>
   <string name="poi_context_menu_showdescription">POI-ის აღწერის ჩვენება</string>
   <string name="index_name_north_america">ჩრდილო ამერიკა</string>

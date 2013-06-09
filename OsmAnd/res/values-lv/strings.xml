@@ -108,7 +108,7 @@
   <string name="gpx_monitoring_disabled_warn">Lūdzu iespējojat \'Ierakstīt treku GPX failā\' uzstādījumu.</string>
   <string name="show_current_gpx_title">Rādīt tekošo treku</string>
   <string name="tip_recent_changes_0_7_0_t">"Jaunumi 0.7.0 versijā : \n\t- Bezsaistes wikipedia dati \n\t- Atjaunotas kartes \n\t- Citi mazi uzlabojumi "</string>
-  <string name="free_version_message">Šajā bezmaksas OsmAnd versijā ir ierobežojums uz %1$s lejuplādētiem %2$s nu tā neatbalsta bezsaistes wikipedia rakstus.</string>
+  <string name="free_version_message">Šajā bezmaksas OsmAnd versijā ir ierobežojums uz %1$s lejuplādētiem nu tā neatbalsta bezsaistes wikipedia rakstus.</string>
   <string name="free_version_title">Bezmaksas versija</string>
   <string name="poi_context_menu_showdescription">Rādīt POI aprakstu</string>
   <string name="index_name_north_america">Ziemeļ Amerkika</string>

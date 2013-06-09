@@ -191,7 +191,7 @@
 	<string name="offline_edition">Frakoblet redigering</string>
 	<string name="offline_edition_descr">Bruk alltid frakoblet redigering</string>
 	<string name="local_openstreetmap_show">Vis på kart</string>    
-	<string name="free_version_message">Denne gratis OsmAnd-versjonen er begrenset til %1$s nedlastinger %2$s og støtter ikke offline Wikipedia-artikler.</string>
+	<string name="free_version_message">Denne gratis OsmAnd-versjonen er begrenset til %1$s nedlastinger og støtter ikke offline Wikipedia-artikler.</string>
 	<string name="free_version_title">Gratisversjon</string>
 	<string name="poi_context_menu_showdescription">Vis interessepunkt-beskrivelse</string>
 	<string name="index_name_north_america">Nord-Amerika</string>

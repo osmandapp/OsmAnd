@@ -357,7 +357,7 @@
 	<string name="live_monitoring_url">網路實況追蹤位置</string>
 	<string name="gpx_monitoring_disabled_warn">請啟用 \'軌跡記錄成GPX\' 的設定。</string>
 	<string name="show_current_gpx_title">顯示目前軌跡</string>
-	<string name="free_version_message">此免費版 OsmAnd只能下載%1$s個%2$s 且不支援離線維基百科的資料。</string>
+	<string name="free_version_message">此免費版 OsmAnd只能下載%1$s 個 且不支援離線維基百科的資料。</string>
 	<string name="free_version_title">免費版</string>
 	<string name="poi_context_menu_showdescription">顯示景點說明</string>
 	<string name="index_name_north_america">北美洲</string>

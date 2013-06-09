@@ -174,7 +174,7 @@
 <string name="local_openstreetmap_delete">Esborra els canvis</string>
 <string name="local_openstreetmap_uploadall">Penja-ho tot</string>
 <string name="show_current_gpx_title">Mostra la traça actual</string>
-<string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s baixades %2$s i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
+<string name="free_version_message">Aquesta versió gratuïta de l\'OsmAnd està limitada a %1$s baixades i no permet l\'ús fora de línia dels articles de la Viquipèdia.</string>
 <string name="free_version_title">Versió gratuïta</string>
 <string name="poi_context_menu_showdescription">Mostra la descripció del PDI</string>
 <string name="index_name_france">Europa - França</string>

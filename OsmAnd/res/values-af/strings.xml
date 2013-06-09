@@ -206,7 +206,7 @@
   <string name="gpx_monitoring_disabled_warn">Skakel asseblief \'Meld spoor na GPX\' aan in natrekking instellings.</string>
   <string name="show_current_gpx_title">Wys huidige spoor</string>
   <string name="tip_recent_changes_0_7_0_t">"Veranderinge in 0.7.0:\n t-die aflyn wikipedia inligting met artikels\n t-Opgedateerde kaarte\n t-ander klein funksies "</string>
-  <string name="free_version_message">Hierdie gratis OsmAnd weergawe is beperk tot %1$s aflaailêers %2$s en ondersteun nie aflyn Wikipedia artikels nie.</string>
+  <string name="free_version_message">Hierdie gratis OsmAnd weergawe is beperk tot %1$s aflaailêers en ondersteun nie aflyn Wikipedia artikels nie.</string>
   <string name="free_version_title">Gratis weergawe</string>
   <string name="poi_context_menu_showdescription">Wys POI beskrywing</string>
   <string name="index_name_north_america">Noord Amerika</string>

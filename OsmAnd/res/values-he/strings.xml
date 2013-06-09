@@ -359,7 +359,7 @@
 \n\t- נתונים בלתי מקוונים מוויקיפדיה לרבות ערכים
 \n\t- מפות מעודכנות
 \n\t- תכונות קטנות נוספות "</string>    
-	<string name="free_version_message">גרסה חינמית זו של OsmAnd מוגבלת לכדי %1$s הורדות %2$s ואינה תומכת בכתבות בלתי מקוונות של ויקיפדיה.</string>
+	<string name="free_version_message">גרסה חינמית זו של OsmAnd מוגבלת לכדי %1$s הורדות  ואינה תומכת בכתבות בלתי מקוונות של ויקיפדיה.</string>
 	<string name="free_version_title">גרסה בחינם</string>
 	<string name="poi_context_menu_showdescription">הצגת תיאור של נ״ע</string>
 	<string name="index_name_north_america">צפון אמריקה</string>

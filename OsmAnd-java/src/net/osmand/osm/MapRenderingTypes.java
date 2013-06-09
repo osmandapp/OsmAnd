@@ -234,7 +234,13 @@ public class MapRenderingTypes {
 			if (poiCategory.length() == 0) {
 				rtype.poiCategory = null;
 			} else {
-				rtype.poiCategory = AmenityType.valueOf(poiCategory.toUpperCase());
+				rtype.poiCategory = null;
+				for(AmenityType t : AmenityType.values()) {
+					if(AmenityType.valueToString(t).equals(poiCategory)) {
+						rtype.poiCategory = t;
+						break;
+					}
+				}
 			}
 		}
 		String poiPrefix = parser.getAttributeValue("", "poi_prefix");

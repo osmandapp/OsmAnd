@@ -3,6 +3,9 @@ package net.osmand.plus.base;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.apache.commons.logging.Log;
+
+import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibleAlertBuilder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.GPXUtilities;
@@ -24,6 +27,7 @@ import android.widget.TextView;
 
 public class FailSafeFuntions {
 	private static boolean quitRouteRestoreDialog = false;
+	private static Log log = PlatformUtil.getLog(FailSafeFuntions.class);
 	
 	public static void restoreRoutingMode(final MapActivity ma) {
 		final OsmandApplication app = ma.getMyApplication();
@@ -82,11 +86,16 @@ public class FailSafeFuntions {
 								delay --;
 								tv.setText(ma.getString(R.string.continue_follow_previous_route_auto, delay + ""));
 								if(delay <= 0) {
-									if(dlg.isShowing() && !quitRouteRestoreDialog) {
-										dlg.dismiss();
+									try {
+										if (dlg.isShowing() && !quitRouteRestoreDialog) {
+											dlg.dismiss();
+										}
+										quitRouteRestoreDialog = true;
+										restoreRoutingModeInner();
+									} catch(Exception e) {
+										// swalow view not attached exception
+										log.error(e.getMessage()+"", e);
 									}
-									quitRouteRestoreDialog = true;
-									restoreRoutingModeInner();
 								} else {
 									uiHandler.postDelayed(delayDisplay, 1000);
 								}

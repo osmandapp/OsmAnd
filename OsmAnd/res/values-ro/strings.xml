@@ -379,7 +379,7 @@
 \n\t- Acces offline la date Wikipedia inclusiv articole explicative
 \n\t- Hărți actualizate
 \n\t- Alte funcționalități de importanță mai mică "</string>    
-	<string name="free_version_message">Această versiune gratuită de OsmAnd este limitată la %1$s descărcări %2$s și nu suportă articolele Wikipedia în mod offline.</string>
+	<string name="free_version_message">Această versiune gratuită de OsmAnd este limitată la %1$s descărcări și nu suportă articolele Wikipedia în mod offline.</string>
 	<string name="free_version_title">Versiune gratuită</string>
 	<string name="poi_context_menu_showdescription">Descriere POI</string>
 	<string name="index_name_north_america">America de Nord</string>

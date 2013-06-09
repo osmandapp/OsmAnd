@@ -227,7 +227,7 @@
 \n\t- Údaje článkov offline wikipedie
 \n\t- Aktualizované mapy
 \n\t- Iné menšie funkce "</string>
-  <string name="free_version_message">Táto bezplatná verzia OsmAndu je obmedzená na %1$s stiahnutí %2$s a nepodporuje články offline wikipedie.</string>
+  <string name="free_version_message">Táto bezplatná verzia OsmAndu je obmedzená na %1$s stiahnutí a nepodporuje články offline wikipedie.</string>
   <string name="free_version_title">Bezplatná verzia</string>
   <string name="poi_context_menu_showdescription">Zobraziť POI popis</string>
   <string name="index_name_us">Severná Amerika - Spojené Štáty</string>

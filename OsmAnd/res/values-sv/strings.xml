@@ -328,7 +328,7 @@
 \n\t- Offline Wikipedia-uppgifter med artiklar
 \n\t- Uppdaterade kartor
 \n\t- Andra små funktioner "</string>
-<string name="free_version_message">Denna gratisversion av OsmAnd är begränsad till %1$s nedladdningar %2$s och stöder inte Wikipedia-artiklar offline.</string>
+<string name="free_version_message">Denna gratisversion av OsmAnd är begränsad till %1$s nedladdningar och stöder inte Wikipedia-artiklar offline.</string>
 <string name="free_version_title">Gratisversion</string>
 <string name="poi_context_menu_showdescription">Visa POI-beskrivning</string>
 <string name="index_name_north_america">Nordamerika</string>

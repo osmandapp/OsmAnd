@@ -100,7 +100,7 @@
 	\n\t- 업데이트된 맵들
 	\n\t- 기타 몇몇 기능들
 	</string>    
-	<string name="free_version_message">이 무료 OsmAnd 버전은 %1$s 다운로드를  %2$s 번으로 제한되고 오프라인 위키피디아 기사를 제공하지 않습니다.</string>
+	<string name="free_version_message">이 무료 OsmAnd 버전은 %1$s 다운로드를 번으로 제한되고 오프라인 위키피디아 기사를 제공하지 않습니다.</string>
 	<string name="free_version_title">무료 버전</string>
 	<string name="poi_context_menu_showdescription">POI 설명 보여주기</string>
 

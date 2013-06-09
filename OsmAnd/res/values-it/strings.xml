@@ -34,7 +34,7 @@
 \n\t- Articoli di Wikipedia accessibili offline
 \n\t- Aggiornate le mappe
 \n\t- Altre caratteristiche minori "</string>
-  <string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$s download %2$s e non supporta gli articoli offline di Wikipedia.</string>
+  <string name="free_version_message">Questa versione gratuita di OsmAnd è limitata a %1$s download e non supporta gli articoli offline di Wikipedia.</string>
   <string name="free_version_title">Versione gratuita</string>
   <string name="poi_context_menu_showdescription">Visualizza descrizione POI</string>
   <string name="amenity_type_wikiosm">Wikipedia (offline)</string>

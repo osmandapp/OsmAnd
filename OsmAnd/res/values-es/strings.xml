@@ -49,7 +49,7 @@
   <string name="gpx_monitoring_disabled_warn">Por favor, active la opción \'Guardar traza en fichero GPX\'.</string>
   <string name="show_current_gpx_title">Mostrar traza actual</string>
   <string name="tip_recent_changes_0_7_0_t">"Cambios en 0.7.0 : \n\t- Artículos de wikipedia sin conexión de datos \n\t- Mapas actualizados \n\t- Otras pequeñas funcionalidades "</string>
-  <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas %2$s y no soporta artículos de wikipedia sin conexión.</string>
+  <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de wikipedia sin conexión.</string>
   <string name="free_version_title">Versión gratuita</string>
   <string name="poi_context_menu_showdescription">Muestra la descripción del PDI</string>
   <string name="index_name_north_america">Norteamérica</string>

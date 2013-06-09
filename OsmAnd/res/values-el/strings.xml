@@ -324,7 +324,7 @@
 \n\t- Offline wikipedia data with articles
 \n\t- Updated maps
 \n\t- Other small features "</string>    
-	<string name="free_version_message">Αυτή η δωρεάν έκδοση του OsmAnd περιορίζεται σε %1$s λήψεις %2$s και δεν υποστηρίζει εκτός σύνδεσης άρθρα από την wikipedia.</string>
+	<string name="free_version_message">Αυτή η δωρεάν έκδοση του OsmAnd περιορίζεται σε %1$s λήψεις και δεν υποστηρίζει εκτός σύνδεσης άρθρα από την wikipedia.</string>
 	<string name="free_version_title">Ελεύθερη έκδοση</string>
 	<string name="poi_context_menu_showdescription">Εμφάνιση περιγραφής ΣΕ</string>
 	<string name="index_name_north_america">Βόρεια Αμερική</string>

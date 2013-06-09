@@ -164,7 +164,7 @@
   <string name="gpx_monitoring_disabled_warn">Пожалуйста включите \'Записывать путь в GPX\' в Настройках.</string>
   <string name="show_current_gpx_title">Показывать текущий путь</string>
   <string name="tip_recent_changes_0_7_0_t">"Изменения в 0.7.0:\n\n\t- Локальные карты Wikipedia со статьями\n\n\t- Обновление карт\n\n\t- Другие изменения "</string>
-  <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками %2$s и не поддерживает геостатьи из wikipedia.</string>
+  <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками и не поддерживает геостатьи из wikipedia.</string>
   <string name="free_version_title">Бесплатная версия</string>
   <string name="poi_context_menu_showdescription">Показать POI описание</string>
   <string name="index_name_us">Северная Америка - США</string>

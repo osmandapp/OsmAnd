@@ -223,7 +223,7 @@
 \n\t- Atnaujinti žemėlapiai
 \n\t- Kitos smulkios savybės
 </string>
-  <string name="free_version_message">Ši nemokama OsmAnd versija apribota iki %1$s parsiuntimų %2$s ir nepalaiko įrenginyje išsaugotų Wikipedia straipsnių.</string>
+  <string name="free_version_message">Ši nemokama OsmAnd versija apribota iki %1$s parsiuntimų ir nepalaiko įrenginyje išsaugotų Wikipedia straipsnių.</string>
   <string name="free_version_title">Nemokama versija</string>
   <string name="poi_context_menu_showdescription">Rodyti LV aprašymą</string>
   <string name="index_name_north_america">Šiaurės Amerika</string>
