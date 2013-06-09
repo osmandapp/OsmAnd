@@ -1333,4 +1333,5 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 \n\t* Naujas įkrovos ekranas (įkrova fone)\n\t* Poaplankių GPX išsaugojimui palaikymas (surūšiuokite savo GPX failus)
 \n\t* SRTM failų ištrynimas
 \n\t* OSM Užrašų palaikymas "</string>
+    <string name="please_select_address">Pasirinkit pirmiausia miestą ar gatvę</string>
     </resources>
