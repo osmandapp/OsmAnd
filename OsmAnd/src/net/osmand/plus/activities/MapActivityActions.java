@@ -755,13 +755,13 @@ public class MapActivityActions implements DialogProvider {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 		
 
-		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_activities_set_destination);
+		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_activities_navigate_to);
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		if(targets.getPointToNavigate() != null) {
 			adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_activities_set_intermediate);
 		// For button-less search UI
 		} else {
-			adapter.registerItem(R.string.context_menu_item_destination_point, R.drawable.list_activities_set_intermediate);
+			adapter.registerItem(R.string.context_menu_item_destination_point, R.drawable.list_activities_set_destination);
 		}
 		adapter.registerItem(R.string.context_menu_item_show_route, R.drawable.list_activities_show_route_from_here);
 		adapter.registerItem(R.string.context_menu_item_search, R.drawable.list_activities_search_near_here);
@@ -1257,11 +1257,12 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(setAsDestination);
 		//if (targetPointsHelper.getPointToNavigate() != null) {
 			ActionItem intermediate = new ActionItem();
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_intermediate));
 			// For button-less search UI
 			if (targetPointsHelper.getPointToNavigate() != null) {
+				intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_intermediate));
 				intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
 			} else {
+				intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
 				intermediate.setTitle(activity.getString(R.string.context_menu_item_destination_point));
 			}
 			intermediate.setOnClickListener(new OnClickListener() {
