@@ -1,5 +1,6 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
+	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
 	<string name="download_hillshade_item">Relief-Schattierung</string>
 	<string name="download_hillshade_maps">Relief-Overlays</string>
@@ -1289,7 +1290,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Sehenswürdigkeiten</string>
 <string name="arrived_at_intermediate_point">Sie sind an Ihrem Zwischenziel angekommen</string>
-<string name="context_menu_item_intermediate_point">Als Ziel oder\nWegpunkt setzen</string>
+<string name="context_menu_item_intermediate_point">Als Wegpunkt setzen</string>
 <string name="map_widget_intermediate_distance">Wegpunkt</string>
 <string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
 <string name="intermediate_point_too_far">Wegpunkt %1$s zu weit von der nächsten Straße entfernt.</string>
