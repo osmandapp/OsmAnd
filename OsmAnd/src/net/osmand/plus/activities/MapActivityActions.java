@@ -806,11 +806,9 @@ public class MapActivityActions implements DialogProvider {
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
-					getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), true, -1);
-					// always enable and follow and let calculate it (GPS is not accessible in garage)
-					if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
-						getDirections(null, new LatLon(latitude, longitude), true);
-					}
+					targets.navigateToPoint(new LatLon(latitude, longitude), 
+							true, -1);
+					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
