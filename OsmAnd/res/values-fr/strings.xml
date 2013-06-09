@@ -1326,4 +1326,5 @@
     <string name="intermediate_items_sort_return">Optimiser l\'ordre des points de passage de la position courante jusqu\'à la destination</string>
     <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
     <string name="please_select_address">Sélectionner d\'abord une ville ou une rue</string>
+    <string name="context_menu_item_destination_point">Définir comme destination</string>
     </resources>
