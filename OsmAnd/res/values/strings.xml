@@ -253,7 +253,7 @@
 	<string name="delete_target_point">Remove waypoint</string>
 	<string name="target_point">Waypoint %1$s</string>
     <string name="intermediate_point">Waypoint %1$s</string>
-    <string name="navigate_to">Set as destination</string>
+    <string name="navigate_to">Directions</string>
     <string name="context_menu_item_last_intermediate_point">Add as last waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Add as first waypoint</string>
     <string name="add_as_last_destination_point">Add as last waypoint</string>
@@ -850,9 +850,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
-	<string name="tip_select_destination_point">Select Destination</string>
-	<string name="tip_select_destination_point_t">\tYou can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-		\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+	<string name="tip_select_destination_point">Get Directions</string>
+	<string name="tip_select_destination_point_t">\tYou get dierctions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 	</string> 
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
 		\n\t- Improved offline map rendering
@@ -1062,7 +1062,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -> \'Directions\' on map and select the navigation type.</string>
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
-		\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'.
+		\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers the options \'Directions\' or \'Show on map\'.
 	</string>
 	<string name="tip_map_context_menu">Map Context Menu</string>
 	<string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.
@@ -1400,7 +1400,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="choose_street">Choose street</string>
 	<string name="choose_city">Choose city</string>
 	<string name="ChooseCountry">Choose country</string>
-	<string name="map_specify_point">Set as destination</string>
+	<string name="map_specify_point">Directions</string>
 	<string name="show_view_angle">Display viewing direction</string>
 	
 	<string name="navigate_to_point">Set as dest.</string>
@@ -1453,7 +1453,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_address_building_option">Building</string>
 	<string name="search_address_street_option">Intersecting street</string>
 	<string name="search_tabs_location">Location</string>
-	<string name="context_menu_item_navigate_point">Set as destination</string>
+	<string name="context_menu_item_navigate_point">Directions</string>
 	<string name="context_menu_item_add_favorite">Add to favorites</string>
 	<string name="context_menu_item_update_map">Update map</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
@@ -1466,7 +1466,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
-	<string name="favourites_context_menu_navigate">Set as destination</string>
+	<string name="favourites_context_menu_navigate">Directions</string>
 	<string name="favourites_context_menu_edit">Edit favorite</string>
 	<string name="favourites_context_menu_delete">Delete favorite</string>
 	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
