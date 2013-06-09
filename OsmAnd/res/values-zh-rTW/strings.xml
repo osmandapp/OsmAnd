@@ -1000,7 +1000,6 @@
 	<string name="add_favorite_dialog_top_text">輸入我的最愛點的名稱</string>
 	<string name="add_favorite_dialog_default_favourite_name">我的最愛</string>
 	<string name="add_favorite_dialog_favourite_added_template">我的最愛點 \'\'{0}\'\' 新增成功。</string>
-	<string name="favourites_context_menu_navigate">設為目的地</string>
 	<string name="favourites_context_menu_edit">編輯我的最愛</string>
 	<string name="favourites_context_menu_delete">刪除我的最愛</string>
 	<string name="favourites_remove_dialog_msg">移除我的最愛點 \'%s\'？</string>

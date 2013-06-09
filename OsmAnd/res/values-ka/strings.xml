@@ -783,7 +783,6 @@
   <string name="add_favorite_dialog_top_text">რჩეულის სახელი</string>
   <string name="add_favorite_dialog_default_favourite_name">რჩეული</string>
   <string name="add_favorite_dialog_favourite_added_template">რჩეული წერტილი \'\'{0}\'\' წარმატებით დაემატა.</string>
-  <string name="favourites_context_menu_navigate">დანიშნულების ადგილად დამატება</string>
   <string name="favourites_context_menu_edit">რჩეულის ჩასწორება</string>
   <string name="favourites_context_menu_delete">რჩეულის წაშლა</string>
   <string name="favourites_remove_dialog_msg">გნებავთ რჩეული წერტილის \'%s\' წაშლა?</string>

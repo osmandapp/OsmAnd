@@ -614,7 +614,6 @@
   <string name="add_favorite_dialog_top_text">Wprowadź nazwę</string>
   <string name="add_favorite_dialog_default_favourite_name">Ulubione</string>
   <string name="add_favorite_dialog_favourite_added_template">Punkt ulubiony \"{0}\" został pomyślnie dodany.</string>
-  <string name="favourites_context_menu_navigate">Ustaw jako punkt docelowy</string>
   <string name="favourites_context_menu_edit">Edytuj</string>
   <string name="favourites_context_menu_delete">Usuń</string>
   <string name="favourites_remove_dialog_msg">Czy na pewno chcesz usunąć ulubiony punkt \'%s\'?</string>

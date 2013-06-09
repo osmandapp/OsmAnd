@@ -918,7 +918,6 @@
   <string name="add_favorite_dialog_top_text">Zadajte meno obľúbeného bodu</string>
   <string name="add_favorite_dialog_default_favourite_name">Obľúbený bod</string>
   <string name="add_favorite_dialog_favourite_added_template">Obľúbený bod \'\'{0}\'\' bol úspešne pridaný.</string>
-  <string name="favourites_context_menu_navigate">Určiť ako cieľ</string>
   <string name="favourites_context_menu_edit">Upraviť obľúbený bod</string>
   <string name="favourites_context_menu_delete">Vymazať obľúbený bod</string>
   <string name="favourites_remove_dialog_msg">Odstrániť obľúbený bod \'%s\'?</string>

@@ -783,7 +783,6 @@
   <string name="add_favorite_dialog_top_text">Geef de favoriet een naam</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoriet</string>
   <string name="add_favorite_dialog_favourite_added_template">Favoriet \'\'{0}\'\' is toegevoegd.</string>
-  <string name="favourites_context_menu_navigate">Zet als\nbestemming</string>
   <string name="favourites_context_menu_edit">Bewerk\nfavoriet</string>
   <string name="favourites_context_menu_delete">Verwijder\nfavoriet</string>
   <string name="favourites_remove_dialog_msg">Verwijder favoriet \'%s\'?</string>

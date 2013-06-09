@@ -302,7 +302,6 @@
 	<string name="osb_comment_dialog_title">Dodaj komentar na bug</string>
 	<string name="osb_comment_dialog_message">Poruka</string>
 	<string name="osb_comment_menu_item">Dodaj komentar</string>
-	<string name="favourites_context_menu_navigate">Postavi kao odredište</string>
 	<string name="favourites_context_menu_edit">Uredi favorite</string>
 	<string name="favourites_context_menu_delete">Brisanje favorita</string>
 	<string name="default_buttons_cancel">Zatvori</string>

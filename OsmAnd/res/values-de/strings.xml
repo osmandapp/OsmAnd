@@ -1112,7 +1112,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="add_favorite_dialog_top_text">Geben Sie diesem Punkt einen Namen</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorit Punkt \'\'{0}\'\' wurde erfolgreich hinzugefügt.</string>
-	<string name="favourites_context_menu_navigate">Als Ziel wählen</string>
 	<string name="favourites_context_menu_edit">Favorit bearbeiten</string>
 	<string name="favourites_context_menu_delete">Favorit löschen</string>
 	<string name="favourites_remove_dialog_msg">Wollen Sie den Punkt \'%s\' wirklich löschen?</string>

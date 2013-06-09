@@ -918,7 +918,6 @@
   <string name="add_favorite_dialog_top_text">Įveskite įsimintos vietos pavadinimą</string>
   <string name="add_favorite_dialog_default_favourite_name">Įsiminta vieta</string>
   <string name="add_favorite_dialog_favourite_added_template">Įsiminta vieta \'\'{0}\'\' buvo sėkmingai įrašyta.</string>
-  <string name="favourites_context_menu_navigate">Nustatyti kaip kelionės tikslą</string>
   <string name="favourites_context_menu_edit">Redaguoti įsimintas vietas</string>
   <string name="favourites_context_menu_delete">Ištrinti įsimintą vietą</string>
   <string name="favourites_remove_dialog_msg">Pašalinti įsimintą vietą \'%s\'?</string>

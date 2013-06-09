@@ -47,7 +47,6 @@
 	<string name="search_tabs_location">Mesto</string>
 	<string name="add_favorite_dialog_default_favourite_name">Priljubljena lokacija</string>
 	<string name="add_favorite_dialog_top_text">Vnesite ime priljubljene lokacije</string>
-	<string name="favourites_context_menu_navigate">Nastavi cilj</string>
 	<string name="favourites_context_menu_edit">Uredi priljubljeno lokacijo</string>
 	<string name="favourites_context_menu_delete">Briši priljubljeno lokacijo</string>
 	<string name="add_favorite_dialog_favourite_added_template">Priljubljena lokacija \'\'{0}\'\' je bila dodana.</string>

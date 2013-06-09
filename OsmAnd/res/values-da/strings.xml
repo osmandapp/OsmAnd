@@ -969,7 +969,6 @@
 	<string name="osb_close_dialog_close_button">Luk fejlrapport</string>
 	<string name="osb_comment_dialog_error">Undtagelse opstod: kommentar blev ikke tilføjet</string>
 	<string name="osb_comment_dialog_author">Forfatternavn</string>
-	<string name="favourites_context_menu_navigate">Brug som\ndestination</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 	<string name="add_favorite_dialog_top_text">Indtast favoritnavn</string>
 	<string name="default_buttons_add">Tilføj</string>

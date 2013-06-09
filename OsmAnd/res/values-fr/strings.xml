@@ -736,7 +736,6 @@
   <string name="add_favorite_dialog_top_text">Nom du favoris</string>
   <string name="add_favorite_dialog_default_favourite_name">Favoris</string>
   <string name="add_favorite_dialog_favourite_added_template">Le point \'\'{0}\'\' à été ajouté aux favoris.</string>
-  <string name="favourites_context_menu_navigate">Se déplacer vers</string>
   <string name="favourites_context_menu_edit">Modifier favori</string>
   <string name="favourites_context_menu_delete">Supprimer favori</string>
   <string name="favourites_remove_dialog_msg">Voulez-vous vraiment supprimer ce favori \'%s\' ?</string>

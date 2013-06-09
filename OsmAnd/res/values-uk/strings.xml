@@ -807,7 +807,6 @@
   <string name="add_favorite_dialog_top_text">Введіть ім\'я точки</string>
   <string name="add_favorite_dialog_default_favourite_name">Улюблена</string>
   <string name="add_favorite_dialog_favourite_added_template">Точка \'\'{0}\'\' успішно додана в Улюблені.</string>
-  <string name="favourites_context_menu_navigate">Йти до</string>
   <string name="favourites_context_menu_edit">Редагувати точку</string>
   <string name="favourites_context_menu_delete">Вилучити точку</string>
   <string name="favourites_remove_dialog_msg">Ви дійсно хочете вилучити точку \'%s\' з Улюблених?</string>

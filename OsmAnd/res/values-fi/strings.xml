@@ -420,7 +420,6 @@
 	<string name="default_buttons_add">Lisää</string>
 	<string name="add_favorite_dialog_top_text">Anna suosikin nimi</string>
 	<string name="add_favorite_dialog_default_favourite_name">Suosikki</string>
-	<string name="favourites_context_menu_navigate">Aseta päämääräksi</string>
 	<string name="favourites_context_menu_edit">Muokkaa suosikkia</string>
 	<string name="favourites_context_menu_delete">Poista suosikki</string>
 	<string name="favourites_remove_dialog_msg">Poista suosikki \'%s\'?</string>

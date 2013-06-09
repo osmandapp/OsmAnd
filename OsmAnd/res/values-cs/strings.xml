@@ -804,7 +804,6 @@
   <string name="add_favorite_dialog_top_text">Zadejte jméno pro oblíbené</string>
   <string name="add_favorite_dialog_default_favourite_name">Oblíbené</string>
   <string name="add_favorite_dialog_favourite_added_template">Oblíbené místo \'\'{0}\'\' bylo přidáno.</string>
-  <string name="favourites_context_menu_navigate">Nastavit jako cíl</string>
   <string name="favourites_context_menu_edit">Upravit oblíbené</string>
   <string name="favourites_context_menu_delete">Smazat oblíbené</string>
   <string name="favourites_remove_dialog_msg">Opravdu chcete odstranit oblíbené místo \'%s\'?</string>

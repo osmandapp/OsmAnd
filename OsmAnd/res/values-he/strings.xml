@@ -1027,7 +1027,6 @@
 	<string name="add_favorite_dialog_top_text">נא להזין שם למועדף</string>
 	<string name="add_favorite_dialog_default_favourite_name">מועדף</string>
 	<string name="add_favorite_dialog_favourite_added_template">הנקודה המועדפת „{0}“ נוספה בהצלחה.</string>
-	<string name="favourites_context_menu_navigate">הגדרה כיעד</string>
 	<string name="favourites_context_menu_edit">עריכת המועדף</string>
 	<string name="favourites_context_menu_delete">מחיקת המועדף</string>
 	<string name="favourites_remove_dialog_msg">האם להסיר את הנקודה המועדפת ‚%s‘?</string>

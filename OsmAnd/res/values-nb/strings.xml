@@ -615,7 +615,6 @@
 	<string name="add_favorite_dialog_top_text">Oppfør favorittnavn</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favoritt</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorittpunkt \'\'{0}\'\' ble vellykket lagt til.</string>
-	<string name="favourites_context_menu_navigate">Sett som reisemål</string>
 	<string name="favourites_context_menu_edit">Rediger favoritt</string>
 	<string name="favourites_context_menu_delete">Slett favoritt</string>
 	<string name="favourites_remove_dialog_msg">Fjerne favorittpunkt \'%s\'?</string>

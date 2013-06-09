@@ -835,7 +835,6 @@
   <string name="add_favorite_dialog_top_text">Tik gunsteling naam in</string>
   <string name="add_favorite_dialog_default_favourite_name">Gunsteling</string>
   <string name="add_favorite_dialog_favourite_added_template">Gunsteling punt \'{0}\' is bygevoeg.</string>
-  <string name="favourites_context_menu_navigate">Stel as bestemming</string>
   <string name="favourites_context_menu_edit">Verander gunsteling</string>
   <string name="favourites_context_menu_delete">verwyder gunsteling</string>
   <string name="favourites_remove_dialog_msg">Verwyder gunsteling punt \'%s\'?</string>

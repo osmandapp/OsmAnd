@@ -750,7 +750,6 @@
   <string name="add_favorite_dialog_top_text">Ievadiet favorīta nosaukumu</string>
   <string name="add_favorite_dialog_default_favourite_name">Izlase</string>
   <string name="add_favorite_dialog_favourite_added_template">Izlases punkts \'\'{0}\'\' veiksmīgi pievienots.</string>
-  <string name="favourites_context_menu_navigate">Uzstādīt kā galamērķi</string>
   <string name="favourites_context_menu_edit">Labot izlasi</string>
   <string name="favourites_context_menu_delete">Dzēst izlasi</string>
   <string name="favourites_remove_dialog_msg">Dzēst izlases punktu \'%s\'?</string>

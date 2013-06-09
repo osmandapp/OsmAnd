@@ -857,7 +857,6 @@
 <string name="add_favorite_dialog_default_favourite_name">등록지점</string>
 <string name="add_favorite_dialog_favourite_added_template">등록지점 \'\'{0}\'\' 이 성공적으로 추가되었습니다.</string>
 
-<string name="favourites_context_menu_navigate">목적지로</string>
 <string name="favourites_context_menu_edit">등록지점 편집</string>
 <string name="favourites_context_menu_delete">등록지점 삭제</string>
 

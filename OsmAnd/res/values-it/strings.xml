@@ -710,7 +710,6 @@
   <string name="add_favorite_dialog_top_text">Inserisci il nome del preferito</string>
   <string name="add_favorite_dialog_default_favourite_name">Preferito</string>
   <string name="add_favorite_dialog_favourite_added_template">Il punto preferito \'\'{0}\'\' è stato aggiunto.</string>
-  <string name="favourites_context_menu_navigate">Imposta come destinazione</string>
   <string name="favourites_context_menu_edit">Modifica preferito</string>
   <string name="favourites_context_menu_delete">Elimina preferito</string>
   <string name="favourites_remove_dialog_msg">Eliminare il punto preferito \'%s\'?</string>

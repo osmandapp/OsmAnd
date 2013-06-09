@@ -70,7 +70,6 @@
 <string name="default_buttons_commit">Skicka in</string>
 <string name="default_buttons_reset">Återställ</string>
 <string name="filter_current_poiButton">Filter</string>
-<string name="favourites_context_menu_navigate">Ange som destination</string>
 <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
 <string name="default_buttons_no">Nej</string>
 <string name="default_buttons_yes">Ja</string>
