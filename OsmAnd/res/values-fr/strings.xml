@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -1325,4 +1325,5 @@
     <string name="search_street_in_neighborhood_cities">Recherche des rues dans les villes avoisinantes</string>
     <string name="intermediate_items_sort_return">Optimiser l\'ordre des points de passage de la position courante jusqu\'à la destination</string>
     <string name="intermediate_items_sort_by_distance">Tri (porte-à-porte)</string>
+    <string name="please_select_address">Sélectionner d\'abord une ville ou une rue</string>
     </resources>
