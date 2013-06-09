@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -717,7 +717,6 @@
   <string name="ChooseCountry">აირჩიეთ ქვეყანა</string>
   <string name="position_on_map_descr">აირჩიეთ მდებარეობა ან მისი ნიშნული რუკაზე</string>
   <string name="position_on_map">პოზიციის მაჩვენებელი</string>
-  <string name="map_specify_point">დანიშნულების წერტილად დაყენება</string>
   <string name="show_view_angle_descr">ხედვის კუთხის რუკაზე ჩვენება</string>
   <string name="show_view_angle">ხედვის კუთხის ჩვენება</string>
   <string name="navigate_to_point">დანიშნ. პუნქტად მონიშნვა.</string>

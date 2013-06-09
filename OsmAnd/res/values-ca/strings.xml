@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís...</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -687,7 +687,6 @@
 <string name="add_to_favourite">Afegeix a Preferits</string>
 <string name="ChooseCountry">Escull pais</string>
 <string name="navigate_to_point">Marcar com a dest.</string>
-<string name="map_specify_point">Marcar com a desti</string>
 <string name="choose_street">Escull carrer</string>
 <string name="choose_city">Escull ciutat</string>
 <string name="show_poi_over_map">Mostrar PDI</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
@@ -128,7 +128,6 @@
 	<string name="choose_building">Izberi hišno številko</string>
 	<string name="choose_street">Izberi ulico</string>
 	<string name="ChooseCountry">Izberi državo</string>
-	<string name="map_specify_point">Nastavi cilj</string>
 	<string name="show_view_angle">Prikaži smer</string>
 	<string name="favourites_activity">Priljubljene</string>
 	<string name="add_to_favourite">Dodaj med priljubljene</string>

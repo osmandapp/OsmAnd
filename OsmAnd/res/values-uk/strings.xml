@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <!--
     	 Disclaimer : 
@@ -742,7 +742,6 @@
   <string name="ChooseCountry">Виберіть країну</string>
   <string name="position_on_map_descr">Встановити розташування поточної позиції на мапі</string>
   <string name="position_on_map">Поточна позиція</string>
-  <string name="map_specify_point">Йти до</string>
   <string name="show_view_angle_descr">Display viewing direction on the map</string>
   <string name="show_view_angle">Показувати напрямок</string>
   <string name="map_view_3d_descr">Увімкнути 3D вигляд для мапи</string>

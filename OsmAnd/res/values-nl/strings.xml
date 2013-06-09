@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\nlive tracking</string>
   <string name="live_monitoring_mode_on">Stop\nlive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -717,7 +717,6 @@
   <string name="ChooseCountry">Selecteer land</string>
   <string name="position_on_map_descr">Selecteer plek van de positiemarkering op de kaart</string>
   <string name="position_on_map">Positiemarkering</string>
-  <string name="map_specify_point">Zet als bestemming</string>
   <string name="show_view_angle_descr">Richtingweergave gebaseerd op het kompas</string>
   <string name="show_view_angle">Toon kijkrichting</string>
   <string name="navigate_to_point">Zet als best.</string>

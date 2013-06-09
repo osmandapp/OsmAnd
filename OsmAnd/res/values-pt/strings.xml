@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
@@ -332,7 +332,6 @@
   <string name="ChooseCountry">Escolher país</string>
   <string name="position_on_map_descr">Escolha a posição do marcador no mapa</string>
   <string name="position_on_map">Posição do marcador</string>
-  <string name="map_specify_point">Especifique um local</string>
   <string name="show_view_angle_descr">Mostrar ângulo de visão baseado na bússola</string>
   <string name="show_view_angle">Mostrar ângulo de visão</string>
   <string name="navigate_to_point">Marcar posição.</string>

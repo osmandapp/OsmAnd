@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="plugins_screen">Spraudņu menedžeris</string>
   <string name="select_plugin_to_activate">Atzīmējiet spraudni, lai to aktivizētu vai deaktivizētu. (Iespējams ir nepieciešams OsmAnd restarts.)</string>
   <string name="prefs_plugins_descr">Spraudņi iespējo aplikācijas papildus uzstādījumus, tādu kā sekošana, kartes, baterijas saglabāšanas funkcijas, pieejamība un daudzas citas.</string>
@@ -684,7 +684,6 @@
   <string name="ChooseCountry">Izvēlieties valsti</string>
   <string name="position_on_map_descr">Izvēlieties vietu no pozīcija marķiera uz kartes</string>
   <string name="position_on_map">Pozīcijas marķieris</string>
-  <string name="map_specify_point">Uzstādīt kā galapunktu</string>
   <string name="show_view_angle_descr">Rādīt redzamības virzienu uz kartes</string>
   <string name="show_view_angle">Rādīt redzamības virzienu</string>
   <string name="navigate_to_point">Uzstādīt kā mērķi.</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -741,7 +741,6 @@
   <string name="ChooseCountry">Zvolte zemi</string>
   <string name="position_on_map_descr">Kde na displeji zobrazovat Vaši aktuální polohu</string>
   <string name="position_on_map">Moje poloha na mapě</string>
-  <string name="map_specify_point">Zadejte bod</string>
   <string name="show_view_angle_descr">Zobrazovat zorné pole podle kompasu</string>
   <string name="show_view_angle">Zorné pole</string>
   <string name="navigate_to_point">Navigovat do bodu</string>

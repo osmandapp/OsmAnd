@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla…</string>
@@ -632,7 +632,6 @@
   <string name="ChooseCountry">Elige país</string>
   <string name="position_on_map_descr">Elige la ubicación del marcador de posición en el mapa</string>
   <string name="position_on_map">Marcador de posición</string>
-  <string name="map_specify_point">Fijar como destino</string>
   <string name="show_view_angle_descr">Mostrar la dirección de la vista en el mapa</string>
   <string name="show_view_angle">Mostrar dirección de visualización</string>
   <string name="navigate_to_point">Fijar dest.</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -852,7 +852,6 @@
   <string name="ChooseCountry">Pasirinkti šalį</string>
   <string name="position_on_map_descr">Pasirinkite žymeklio vietą žemėlapyje</string>
   <string name="position_on_map">Žymeklio pozicija</string>
-  <string name="map_specify_point">Nustatyti kaip kelionės tikslą</string>
   <string name="show_view_angle_descr">Rodyti vaizdo krypties aprašymą</string>
   <string name="show_view_angle">Rodyti vaizdo kryptį</string>
   <string name="navigate_to_point">Pasirinkti kaip tiksl.</string>

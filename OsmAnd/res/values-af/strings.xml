@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -769,7 +769,6 @@
   <string name="ChooseCountry">Kies land</string>
   <string name="position_on_map_descr">Kies die plaasing van die posisie merker op die kaart</string>
   <string name="position_on_map">Posisie merker</string>
-  <string name="map_specify_point">Stel as bestemming</string>
   <string name="show_view_angle_descr">Vertoon die kyk-rigting op die kaart</string>
   <string name="show_view_angle">Wys uitsig rigting</string>
   <string name="navigate_to_point">Stel as bestemming</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
@@ -704,7 +704,6 @@
   <string name="ChooseCountry">Выберите регион</string>
   <string name="position_on_map_descr">Установить расположение текущей позиции на карте</string>
   <string name="position_on_map">Текущая позиция</string>
-  <string name="map_specify_point">Координаты</string>
   <string name="show_view_angle_descr">Показывать угол обзора в соответствии с компасом</string>
   <string name="show_view_angle">Угол обзора</string>
   <string name="navigate_to_point">Отметить точку</string>

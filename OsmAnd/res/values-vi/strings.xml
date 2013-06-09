@@ -555,7 +555,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="ChooseCountry">Chọn Quốc gia</string>
     <string name="position_on_map_descr">Chọn vị trí bạn muốn đánh dấu trên bản đồ</string>
     <string name="position_on_map">Đánh dấu vị trị</string>
-    <string name="map_specify_point">Chọn điểm</string>
     <string name="show_view_angle_descr">Hiển thị hướng xem theo la bàn</string>
     <string name="show_view_angle">Hiển thị hướng xem</string>
     <string name="navigate_to_point">Đánh dấu</string>

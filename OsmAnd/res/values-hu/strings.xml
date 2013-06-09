@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_7_2_t">"A 0.7.2 kiadás változásai:
 \n\t- Natív renderelő minden eszközre
 \n\t- Offline POI szerkesztés
@@ -673,7 +673,6 @@
   <string name="ChooseCountry">Ország kiválasztása</string>
   <string name="position_on_map_descr">Pozíciójelző helyének kiválasztása a térképen</string>
   <string name="position_on_map">Pozíció a térképen</string>
-  <string name="map_specify_point">Beállítás célpontnak</string>
   <string name="show_view_angle_descr">Látómező megjelenítése iránytű alapján</string>
   <string name="show_view_angle">Látómező megjelenítése</string>
   <string name="navigate_to_point">Célnak jelöl</string>

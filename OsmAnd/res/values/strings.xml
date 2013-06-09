@@ -1400,7 +1400,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="choose_street">Choose street</string>
 	<string name="choose_city">Choose city</string>
 	<string name="ChooseCountry">Choose country</string>
-	<string name="map_specify_point">Directions</string>
 	<string name="show_view_angle">Display viewing direction</string>
 	
 	<string name="navigate_to_point">Set as dest.</string>

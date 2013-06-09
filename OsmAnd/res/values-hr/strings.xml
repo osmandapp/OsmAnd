@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
@@ -351,7 +351,6 @@
 	<string name="choose_street">Odaberite ulicu</string>
 	<string name="choose_city">Odaberite grad</string>
 	<string name="ChooseCountry">Odaberite zemlju</string>
-	<string name="map_specify_point">Postavi kao odredište</string>
 	<string name="use_english_names_descr">Odaberite između domaćih i engleski naziva</string>
 	<string name="use_english_names">Koristite engleske nazive u kartama</string>
 	<string name="app_settings">Postavke aplikacije</string>

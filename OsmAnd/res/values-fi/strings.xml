@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista välietappi</string>
@@ -378,7 +378,6 @@
 	<string name="choose_street">Valitse katu</string>
 	<string name="choose_city">Valitse kaupunki</string>
 	<string name="ChooseCountry">Valitse maa</string>
-	<string name="map_specify_point">Aseta päämääräksi</string>
 	<string name="use_internet">Käytä internettiä</string>
 	<string name="show_location">Näytä sijainti</string>
 	<string name="map_preferences">Kartta</string>

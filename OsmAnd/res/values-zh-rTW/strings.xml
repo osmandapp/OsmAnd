@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
        Disclaimer : 
@@ -935,7 +935,6 @@
 	<string name="choose_street">選擇道路</string>
 	<string name="choose_city">選擇縣市</string>
 	<string name="ChooseCountry">選擇國家</string>
-	<string name="map_specify_point">設為目的地</string>
 	<string name="show_view_angle">顯示目視方向</string>
 	<string name="navigate_to_point">設為目的地</string>
 	<string name="map_view_3d_descr">啟用3D地圖</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_select_destination_point">Wybierz punkt docelowy</string>
   <string name="tip_select_destination_point_t">"\tMożesz wybrać punkt docelowy bezpośrednio na mapie (menu kontekstowe -&gt; \'Nawiguj do punktu\'), podczas wyszukiwania lub przez naciśnięcie i długie przytrzymanie na wpisie w swojej \'Liście ulubionych punktów\'.\n\tPunkt docelowy jest oznaczony pomarańczowym dyskiem na mapie i OsmAnd wyświetla odległość oraz kierunek do niego (pomarańczowy trójkąt). "</string>
   <string name="tip_recent_changes_0_6_9_t">"Zmiany w 0.6.9: \n\t- poprawiono renderowanie map offline \n\t- szybkie renderowanie natywne (wersja eksperymentalna - może nie działać na niektórych urządzeniach) \n\t- poprawki w interfejsie \n\t- dodano wyświetlanie informacji o wysokości (altitude) \n\t- nowe tłumaczenia (polskie, wietnamskie) \n\t- inne, mniejsze poprawki "</string>
@@ -548,7 +548,6 @@
   <string name="ChooseCountry">Wybierz kraj</string>
   <string name="position_on_map_descr">Wybierz lokalizację znacznika pozycji na mapie</string>
   <string name="position_on_map">Znacznik pozycji</string>
-  <string name="map_specify_point">Ustaw jako punkt docelowy</string>
   <string name="show_view_angle_descr">Dostosuj kierunek wyświetlania mapy do wskazań kompasu</string>
   <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
   <string name="navigate_to_point">Ustaw jako punkt docelowy</string>

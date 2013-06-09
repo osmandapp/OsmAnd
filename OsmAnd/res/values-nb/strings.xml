@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
 	<string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -550,7 +550,6 @@
 	<string name="choose_street">Velg gate</string>
 	<string name="choose_city">Velg by</string>
 	<string name="ChooseCountry">Velg land</string>
-	<string name="map_specify_point">Sett som reisemål</string>
 	<string name="show_view_angle">Vis synsretningen</string>
 	<string name="navigate_to_point">Sett som mål</string>
 	<string name="map_view_3d_descr">Aktiver 3D-visning av kartet</string>

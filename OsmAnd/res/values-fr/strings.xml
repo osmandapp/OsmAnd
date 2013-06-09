@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -673,7 +673,6 @@
   <string name="ChooseCountry">Choisir un pays</string>
   <string name="position_on_map_descr">Choisir la position des points sur la carte</string>
   <string name="position_on_map">Position des points</string>
-  <string name="map_specify_point">Spécifier un lieu</string>
   <string name="show_view_angle_descr">Afficher un angle de vue basé sur le compas</string>
   <string name="show_view_angle">Afficher l\'angle de vue</string>
   <string name="navigate_to_point">Marquer comme destination</string>

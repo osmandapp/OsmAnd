@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
@@ -855,7 +855,6 @@
   <string name="ChooseCountry">Vybrať krajinu</string>
   <string name="position_on_map_descr">Výber umiestnenia ukazovateľa pozície na mape</string>
   <string name="position_on_map">Ukazovateľ pozície</string>
-  <string name="map_specify_point">Určiť ako cieľ</string>
   <string name="show_view_angle_descr">Uhol pohľadu zobrazenia podľa kompasu</string>
   <string name="show_view_angle">Zobraziť uhol pohľadu</string>
   <string name="navigate_to_point">Označiť bod</string>

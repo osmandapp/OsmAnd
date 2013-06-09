@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
@@ -441,7 +441,6 @@
 	<string name="favourites_activity">Favoriler</string>
 	<string name="add_to_favourite">Favorilere ekle</string>
 	<string name="use_english_names">Haritalarda ingilizce yer adlarını kullan</string>
-	<string name="map_specify_point">Hedef nokta olarak ayarla</string>
 	<string name="map_view_3d_descr">3D harita görünümünü etkinleştir</string>
 	<string name="show_poi_over_map">POI göster</string>
 	<string name="map_source">Harita kaynağı</string>

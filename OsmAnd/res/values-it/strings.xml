@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -644,7 +644,6 @@
   <string name="ChooseCountry">Scegli la nazione</string>
   <string name="position_on_map_descr">Scegli la localizzazione del marcatore della posizione sulla mappa</string>
   <string name="position_on_map">Marcatore della posizione</string>
-  <string name="map_specify_point">Imposta come destinazione</string>
   <string name="show_view_angle_descr">Visualizza aspetto della vista basato sulla bussola</string>
   <string name="show_view_angle">Visualizza direzione di osservazione</string>
   <string name="navigate_to_point">Imposta come destinazione</string>

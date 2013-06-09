@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="default_buttons_no">לא</string>
 	<string name="default_buttons_yes">כן</string>
@@ -964,7 +964,6 @@
 	<string name="choose_street">נא לבחור ברחוב</string>
 	<string name="choose_city">נא לבחור בעיר</string>
 	<string name="ChooseCountry">נא לבחור במדינה</string>
-	<string name="map_specify_point">הגדרה כיעד</string>
 	<string name="show_view_angle">הצגת כיוון הצפייה</string>
 	<string name="navigate_to_point">הגדרה כיעד</string>
 	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה</string>
