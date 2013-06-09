@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\nlive tracking</string>
   <string name="live_monitoring_mode_on">Stop\nlive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -1254,4 +1254,5 @@
     <string name="search_street_in_neighborhood_cities">Zoek straat in stadswijken</string>
     <string name="intermediate_items_sort_return">Routepunten gesorteerd voor optimale route van kaartpositie naar bestemming</string>
     <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
+    <string name="please_select_address">Selecteer eerst een stad of straat</string>
     </resources>
