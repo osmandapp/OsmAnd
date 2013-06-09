@@ -102,6 +102,11 @@ public class SearchAddressFragment extends SherlockFragment {
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
 						MenuItem.SHOW_AS_ACTION_ALWAYS);
+			// For button-less search UI
+			} else {
+				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
+						MenuItem.SHOW_AS_ACTION_ALWAYS);
+			}
 				menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
 						: R.drawable.a_9_av_make_available_offline_dark);
 				menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -111,7 +116,7 @@ public class SearchAddressFragment extends SherlockFragment {
 						return true;
 					}
 				});
-			}
+			//}
 			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
 			menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark);
 
