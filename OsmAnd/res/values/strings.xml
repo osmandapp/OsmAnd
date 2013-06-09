@@ -263,7 +263,7 @@
     <string name="target_points">Waypoints</string>
     <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
-    <string name="context_menu_item_intermediate_point">Add as waypoint</string>
+    <string name="context_menu_item_intermediate_point">Add as destination\nor waypoint</string>
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="btn_add_tag">Add Tag</string>
