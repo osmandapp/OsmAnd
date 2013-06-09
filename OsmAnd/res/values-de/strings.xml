@@ -538,7 +538,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="local_index_mi_rename">Umbenennen</string>
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online-Nominatim</string>
-	<string name="search_select_point">Auswählen</string>
+	<string name="search_select_point">Navigation</string>
 	<string name="search_position_current_location_search">Suche Standort …</string>
 	<string name="search_position_current_location_found">Standort (gefunden)</string>
 	<string name="search_position_address">Adresse …</string>

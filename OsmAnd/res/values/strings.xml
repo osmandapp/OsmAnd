@@ -907,7 +907,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_rename">Rename</string>
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="search_select_point">Select</string>
+	<string name="search_select_point">Directions</string>
 	<string name="search_position_current_location_search">Searching position&#8230;</string>
 	<string name="search_position_current_location_found">Position (found)</string>
 	<string name="search_position_address">Address&#8230;</string>
@@ -1313,7 +1313,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_osm_nominatim">Online search using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline</string>
-	<string name="search_online_address">Internet</string>
+	<string name="search_online_address">Online search</string>
 	<string name="max_level_download_tile">Max. online zoom</string>
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
