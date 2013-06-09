@@ -277,7 +277,7 @@
   <string name="search_position_fixed">Точка</string>
   <string name="search_position_current_location">Поточна позиція…</string>
   <string name="search_position_map_view">Вигляд мапи</string>
-  <string name="select_search_position">Шукати поруч :</string>
+  <string name="select_search_position">Шукати поруч:</string>
   <string name="context_menu_item_search">Шукати тут</string>
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Зберегти маршрут як GPX трек</string>
@@ -474,7 +474,7 @@
   <string name="loading_builds">Завантажуються збірки OsmAnd…</string>
   <string name="select_build_to_install">Виберіть одну зі збірок OsmAnd для встановлення</string>
   <string name="contribution_activity">Функція для платної версії</string>
-  <string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
+  <string name="gps_status_app_not_found">Програма GPS Status не встановлена. Знайти в Market?</string>
   <string name="voice_is_not_available_msg">Голосова навігація недоступна. Перейдіть в налаштування і вкажіть голосові дані або завантажте їх.</string>
   <string name="voice_is_not_available_title">Голосові дані не знайдено</string>
   <string name="daynight_mode_day">День</string>
@@ -948,7 +948,7 @@
 \n\t* Додано підтримку багатьох вікон для останній моделей Samsung
 \n\t* Фільтр Калмана для компаса
 \n\t* Підтримка Pebble watch "</string>
-    <string name="max_speed_none">нема</string>
+    <string name="max_speed_none">немає</string>
     <string name="index_name_openmaps">OpenMaps - Європа</string>
     <string name="download_hillshade_item">Рельєф місцевості</string>
     <string name="download_hillshade_maps">Шари з рельєфом</string>
@@ -1086,7 +1086,7 @@
 	<string name="osmand_short_description_80_chars">Перегляд та навігація в автономному на онлайн режимах мапами ОСМ</string>
 	<string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному на онлайн режимах мапами ОСМ</string>
 	<string name="incomplete_locale">незавершена</string>
-	<string name="rendering_attr_noAdminboundaries_description">Приховати регіональні границі (рівні 5-9)</string>
+	<string name="rendering_attr_noAdminboundaries_description">Приховати регіональні кордони (рівні 5-9)</string>
     <string name="tip_recent_changes_1_0_0_t">Зміни в 1.0.0:\n\tПокращена маршрутизація: швидша, точніша, відстань до 250 км\n\tНові компактні мапи (дорожні мапи)\n\tМапа не втрачає позиції після переривання роботи\n\tДодано службу фонового режиму під час навігації\n</string>
     <string name="enable_plugin_monitoring_services">Активувати втулки моніторингу (запис GPX, онлайн моніторинг)</string>
     <string name="filterpoi_activity">Створити фільтр POI</string>
@@ -1140,7 +1140,8 @@
 	<string name="navigate_to_point">Йти до</string>
 	<string name="street_name">Вулиця</string>
 	<string name="hno">Номер будинку</string>
-    <string name="tip_recent_changes_1_3_t">"Зміни в 1.5\n\t* Holo Тема (налаштування теми) "</string>
+    <string name="tip_recent_changes_1_3_t">Зміни в 1.3:\n\t* Краща підтримка пристроїв з великим екраном\n\t* Holo Тема (налаштування теми)
+\n\t* Додаткові налаштування компасу</string>
     <string name="choose_osmand_theme_descr">Виберіть тему для програми</string>
     <string name="choose_osmand_theme">Тема</string>
     <string name="select_address_activity">Виберіть адресу</string>
@@ -1184,4 +1185,7 @@
     <string name="intermediate_items_sort_by_distance">Впорядкувати за відстанню</string>
     <string name="local_osm_changes_backup_successful">OSM файл успішно створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Інструмент обрахунку дистанції і планування</string>
+    <string name="please_select_address">Виберіть місто або вулицю</string>
+    <string name="osmand_distance_planning_plugin_description">Створити маршрут(чи використати існуючий GPX-файл) для підрахунку відстані між точками. Зберегти для подальшого використання.</string>
+    <string name="distance_measurement_finish_subtrack">Виміряти нову ділянку</string>
     </resources>
