@@ -301,7 +301,7 @@
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="vector_map_not_needed">Ні, дякую</string>
   <string name="basemap_missing">Базова карта (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
-  <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати без інтернету.</string>
+  <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
   <string name="local_index_gpx_info_speed">"\nAverage speed : %1$s \nMaximum speed : %2$s"</string>
   <string name="local_index_gpx_info_elevation">"\nAverage altitude : %1$.0f m\nMinimum altitude : %2$.0f m\nMaximum altitude : %3$.0f m\nAscents : %4$.0f m\nDescents : %5$.0f m"</string>
@@ -387,7 +387,7 @@
   <string name="search_osm_offline">Пошук адреси в локальних мапах</string>
   <string name="system_locale">Система</string>
   <string name="preferred_locale_descr">Змінити мову</string>
-  <string name="preferred_locale">Мова відображення</string>
+  <string name="preferred_locale">Мова інтерфейсу</string>
   <string name="tip_map_switch">Джерело мапи</string>
   <string name="tip_map_switch_t">\tThe fastest way to change the map source and layers displayed is pressing \'Menu\' -&gt; \'Define view\' in map view. \n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources, or maps manually created using e.g. OsmAndMapCreator on a PC. \n\tOsmAnd also supports custom sources.</string>
   <string name="tip_app_mode">Профіль</string>
@@ -395,8 +395,7 @@
   <string name="tip_navigation">Навігація</string>
   <string name="tip_navigation_t">"   Щоб розпочати навігацію виберіть точку призначення. Після цього натисніть \"Меню\" → \"Навігація\" на мапі і виберіть тип навігації."</string>
   <string name="tip_search">Пошук</string>
-  <string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
-\n\tPressing \'Search\' in the main menu opens the search activities. For all hits a context menu offers 2 options: \'Set as destination\' or \'Show on map\'</string>
+  <string name="tip_search_t"></string>
   <string name="tip_map_context_menu">Контекстне меню мапи</string>
   <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
   <string name="tip_initial">Поради</string>
@@ -498,7 +497,7 @@
   <string name="continuous_rendering">Безперервний рендеринг</string>
   <string name="continuous_rendering_descr">Виберіть спосіб рендеринга мапи</string>
   <string name="rendering_exception">Під час відображення мапи сталась невідома помилка</string>
-  <string name="show_point_options">Використовувати місце…</string>
+  <string name="show_point_options">Використати місце…</string>
   <string name="renderer_load_sucess">Renderer sucessfully loaded</string>
   <string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
   <string name="renderers">Vector renderer</string>
@@ -518,7 +517,7 @@
   <string name="transport_search_again">Шукати транспорт знову</string>
   <string name="map_index">Мапа</string>
   <string name="voice">Голос</string>
-  <string name="no_vector_map_loaded">Векторні мапи не були завантажені</string>
+  <string name="no_vector_map_loaded">Векторні мапи не завантажено</string>
   <string name="map_route_by_gpx">Навігація по GPX</string>
   <string name="gpx_files_not_found">GPX файли не знайдені в папці /tracks</string>
   <string name="layer_gpx_layer">Трек GPX…</string>
@@ -536,7 +535,7 @@
   <string name="rotate_map_to_bearing">Орієнтація мапи</string>
   <string name="show_route">Деталі маршруту</string>
   <string name="fav_imported_sucessfully">Точки успішно імпортовано</string>
-  <string name="fav_file_to_load_not_found">GPX файл, що містить точки не було знайдено в {0}</string>
+  <string name="fav_file_to_load_not_found">GPX файл, що містить точки не знайдено в {0}</string>
   <string name="fav_saved_sucessfully">Улюблені точки збережено в {0}</string>
   <string name="no_fav_to_save">Нема улюблених точок для збереження</string>
   <string name="import_fav">Імпортувати</string>
@@ -627,7 +626,7 @@
   <string name="show_transport_over_map_description">Show public transport stops on map</string>
   <string name="show_transport_over_map">Show transport stops</string>
   <string name="hello">Навігаційна програма OsmAnd</string>
-  <string name="update_poi_success">POI дані були успішно оновлені ({0} об\'єктів завантажено)</string>
+  <string name="update_poi_success">POI дані успішно оновлено ({0} об\'єктів завантажено)</string>
   <string name="update_poi_error_local">Помилка оновлення POI даних</string>
   <string name="update_poi_error_loading">Помилка завантаження даних із сервера</string>
   <string name="update_poi_no_offline_poi_index">В даному регіоні нема локальних POI</string>
@@ -819,7 +818,7 @@
   <string name="osb_comment_dialog_author">Автор</string>
   <string name="osb_comment_dialog_title">Додати коментар в Open Street Bug</string>
   <string name="osb_comment_dialog_add_button">Додати</string>
-  <string name="osb_comment_dialog_success">Коментар було успішно додано</string>
+  <string name="osb_comment_dialog_success">Коментар успішно додано</string>
   <string name="osb_comment_dialog_error">Помилка: коментар не додано</string>
   <string name="osb_close_menu_item">Закрити Open Street Bug</string>
   <string name="osb_close_dialog_title">Закрити баг</string>
@@ -832,7 +831,7 @@
   <string name="poi_remove_confirm_template">Ви дійсно хочете вилучити {0}?</string>
   <string name="poi_remove_title">Вилучення POI</string>
   <string name="default_buttons_delete">Вилучити</string>
-  <string name="poi_remove_success">POI було успішно вилучено</string>
+  <string name="poi_remove_success">POI успішно вилучено</string>
   <string name="poi_action_add">додати</string>
   <string name="poi_action_change">змінити</string>
   <string name="poi_action_succeded_template">Дія {0} успішно закінчена.</string>
