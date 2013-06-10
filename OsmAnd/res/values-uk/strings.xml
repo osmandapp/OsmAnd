@@ -84,7 +84,7 @@
   <string name="gpx_visibility_txt">Видимість</string>
   <string name="gpx_tags_txt">Теги</string>
   <string name="gpx_description_txt">Опис</string>
-  <string name="validate_gpx_upload_name_pwd">Будь-ласка вкажіть ім\'я користувача і пароль в OSM для завантаження GPX файлів в OSM.</string>
+  <string name="validate_gpx_upload_name_pwd">Будь ласка, вкажіть ім\'я користувача і пароль в OSM для завантаження GPX файлів в OSM.</string>
   <string name="default_buttons_support">Підтримка</string>
   <string name="support_new_features">Підтримати розробку нових функцій</string>
   <string name="show_ruler_level_descr">Display ruler on the map</string>
@@ -171,7 +171,7 @@
   <string name="live_monitoring_interval">Live tracking interval</string>
   <string name="live_monitoring_url_descr">Specify the web address with parameter syntax : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
   <string name="live_monitoring_url">Live tracking web address</string>
-  <string name="gpx_monitoring_disabled_warn">Будь-ласка ввімкніть \"Записувати шлях в GPX\" в Нашаштуваннях.</string>
+  <string name="gpx_monitoring_disabled_warn">Будь ласка, ввімкніть \"Записувати шлях в GPX\" в Нашаштуваннях.</string>
   <string name="show_current_gpx_title">Показувати поточний шлях</string>
   <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
   <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями і не підтримує геостатті з Вікіпедії.</string>
@@ -300,7 +300,7 @@
   <string name="favourites_edit_dialog_name">Назва</string>
   <string name="favourites_edit_dialog_category">Категорія</string>
   <string name="vector_map_not_needed">Ні, дякую</string>
-  <string name="basemap_missing">Базова карта (яка покриває цілий світ) відсутня. Будь-ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
+  <string name="basemap_missing">Базова карта (яка покриває цілий світ) відсутня. Будь ласка, завантажте World_basemap_x.obf для повноцінної роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати без інтернету.</string>
   <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
   <string name="local_index_gpx_info_speed">"\nAverage speed : %1$s \nMaximum speed : %2$s"</string>
@@ -700,7 +700,7 @@
   <string name="close">Закрити</string>
   <string name="loading_data">Дані завантажуються…</string>
   <string name="reading_indexes">Зчитування даних…</string>
-  <string name="previous_run_crashed">Помилка у роботі програми. Лог-файл знаходиться тут {0}. Будь-ласка, напишіть розробнику про помилку (з вкладеним лог-файлом).</string>
+  <string name="previous_run_crashed">Помилка у роботі програми. Лог-файл знаходиться тут {0}. Будь ласка, напишіть розробнику про помилку (з вкладеним лог-файлом).</string>
   <string name="saving_gpx_tracks">Збереження GPX треків на SD…</string>
   <string name="finished_task">Закінчено</string>
   <string name="reload_indexes_descr">Заново завантажити локальеі векторні мапи з SD карти</string>
