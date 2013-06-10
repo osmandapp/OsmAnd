@@ -1181,7 +1181,7 @@
     <string name="search_street_in_neighborhood_cities">Шукати в навколишніх містах</string>
     <string name="intermediate_items_sort_return">Проміжні точки впорядковано оптимальним чином від початкової до кінцевої</string>
     <string name="intermediate_items_sort_by_distance">Впорядкувати за відстанню</string>
-    <string name="local_osm_changes_backup_successful">OSM файл успішно створений в %1$s</string>
+    <string name="local_osm_changes_backup_successful">Файл змін OSM успішно створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Інструмент підрахунку відстані і планування</string>
     <string name="please_select_address">Виберіть місто або вулицю</string>
     <string name="osmand_distance_planning_plugin_description">Створити маршрут(чи використати існуючий GPX-файл) для підрахунку відстані між точками. Зберегти для подальшого використання.</string>
@@ -1191,4 +1191,5 @@
 	<string name="local_indexes_cat_srtm"/>
     <string name="local_indexes_cat_srtm"/>
     <string name="local_indexes_cat_srtm">Дані горизонталей</string>
+    <string name="context_menu_item_destination_point">Встановити як місце призначення</string>
     </resources>
