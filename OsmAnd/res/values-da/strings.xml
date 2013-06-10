@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\"Contour lines\") på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
@@ -1241,5 +1241,6 @@
     <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
     <string name="tip_recent_changes_1_4_t">Ændringer i 1.4:\n\t* Sorter rutepunkter på en optimal måde for at besøge alle (repræsentant, fra dør til dør)\n\t* Søg efter gade ved navn (i nabolaget)\n\t* Planlægningsudvidelse (indlæs/rediger/gem GPX spor)\n\t* Ny filhentningsmetode (hent i baggrunden)\n\t* GPX undermapper (organiser GPX spor)\n\t* Slet SRTM filer\n\t* Understøttelse af OSM-Noter</string>
     <string name="intermediate_items_sort_return">Rutepunkter sorteret for optimale rute fra kortposition til destination</string>
-    <string name="please_select_address">Vælg først by eller gade</string>
+    <string name="please_select_address">Vælg først en by eller gade</string>
+    <string name="context_menu_item_destination_point">Vælg som destination</string>
     </resources>
