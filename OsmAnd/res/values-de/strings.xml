@@ -484,7 +484,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="download_files_not_enough_space">Nicht genügend freier Speicher vorhanden zum Laden von %1$s MB (frei: %2$s).</string>
 	<string name="download_files_question_space">{2} MB freier Speicher vorhanden! {0} Datei(en) ({1} MB) herunterladen?</string>
 	<string name="tip_select_destination_point">Ziel wählen</string>
-	<string name="tip_select_destination_point_t">\tEin Ziel kann direkt in der Karte über das Kontextmenü → \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an.</string>
+	<string name="tip_select_destination_point_t">"\tEin Ziel kann direkt in der Karte über das Kontextmenü → \'Als Ziel wählen\', aus der Such-Funktion heraus oder über die Favoritenliste durch langes Drücken gewählt werden.\n\tDer Zielpunkt wird als orangefarbener Punkt auf der Karte markiert. Zu einem gewählten Ziel zeigt OsmAnd auf der Karte die Entfernung und die Richtung (orangefarbenes Dreieck) an. "</string>
 	<string name="tip_recent_changes_0_6_9_t">"Änderungen in 0.6.9:
 		\n\t- Verbesserte Offline-Kartenanzeige 
 		\n\t- Schnelles \"Native Rendering\" - siehe Development-Einstellungen (funktioniert evtl. nicht auf jedem Gerät)
