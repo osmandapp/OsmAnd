@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="use_fluorescent_overlays">Sovrapposizioni fluorescenti</string>
   <string name="use_fluorescent_overlays_descr">Usa colori fluorescenti per visualizzare tracce e percorsi</string>
   <string name="offline_edition">Modifiche offline</string>
@@ -1303,4 +1303,5 @@
     <string name="intermediate_items_sort_return">Posizioni ordinate un modo da ottimizzare il percorso dalla posizione sulla mappa al luogo di destinazione</string>
     <string name="intermediate_items_sort_by_distance">Ordina (porta a porta)</string>
     <string name="please_select_address">Scegli prima la città o la strada</string>
+    <string name="context_menu_item_destination_point">Imposta come destinazione</string>
     </resources>
