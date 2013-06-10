@@ -110,7 +110,7 @@ public class IntermediatePointsDialog {
 					openIntermediatePointsDialog(activity, app, true);
 				}
 			});
-		} else {
+		} else if(intermediates.size()>1) {
 			builder.setNeutralButton(R.string.intermediate_items_sort_by_distance,   new Dialog.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface d, int which) {
