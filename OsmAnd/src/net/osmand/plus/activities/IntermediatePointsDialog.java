@@ -103,7 +103,7 @@ public class IntermediatePointsDialog {
 
 			}
 		});
-		if (!changeOrder) {
+		if (!changeOrder && intermediates.size()>1) {
 			builder.setNeutralButton(R.string.intermediate_points_change_order, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
