@@ -1278,7 +1278,7 @@ public class MapActivityActions implements DialogProvider {
 	}
     
     
-    public static void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name){
+    public void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name){
     	OsmandApplication ctx = (OsmandApplication) act.getApplication();
     	final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
     	final OsmandSettings settings = ctx.getSettings();
