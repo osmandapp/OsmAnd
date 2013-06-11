@@ -31,7 +31,7 @@ public class TargetPointsHelper {
 		intermediatePoints.clear();
 		intermediatePointNames.clear();
 		intermediatePoints.addAll(settings.getIntermediatePoints());
-		intermediatePointNames.addAll(settings.getIntermediatePointDescriptions());
+		intermediatePointNames.addAll(settings.getIntermediatePointDescriptions(intermediatePoints.size()));
 	}
 	
 	public LatLon getPointToNavigate() {

@@ -1063,7 +1063,7 @@ public class OsmandSettings {
 		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).commit();
 	}
 	
-	public List<String> getIntermediatePointDescriptions() {
+	public List<String> getIntermediatePointDescriptions(int sz) {
 		List<String> list = new ArrayList<String>();
 		String ip = settingsAPI.getString(globalPreferences,INTERMEDIATE_POINTS_DESCRIPTION, "");
 		if (ip.trim().length() > 0) {
@@ -1099,7 +1099,7 @@ public class OsmandSettings {
 	public boolean insertIntermediatePoint(double latitude, double longitude, String historyDescription, int index,
 			boolean navigate) {
 		List<LatLon> ps = getIntermediatePoints();
-		List<String> ds = getIntermediatePointDescriptions();
+		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.add(index, new LatLon(latitude, longitude));
 		ds.add(index, historyDescription);
 		if(navigate) {
@@ -1112,7 +1112,7 @@ public class OsmandSettings {
 	}
 	public boolean deleteIntermediatePoint( int index) {
 		List<LatLon> ps = getIntermediatePoints();
-		List<String> ds = getIntermediatePointDescriptions();
+		List<String> ds = getIntermediatePointDescriptions(ps.size());
 		ps.remove(index);
 		ds.remove(index);
 		return saveIntermediatePoints(ps,ds);
