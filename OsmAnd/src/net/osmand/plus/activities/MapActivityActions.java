@@ -1307,14 +1307,16 @@ public class MapActivityActions implements DialogProvider {
 						settings.insertIntermediatePoint(lat, lon, name, 0, true);
 					}
 					targetPointsHelper.updatePointsFromSettings();
-					MapActivity.launchMapActivityMoveToTop(act);
+					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+					//MapActivity.launchMapActivityMoveToTop(act);
 				}
 			});
     		builder.show();
     	} else {
     		settings.setPointToNavigate(lat, lon, true, name);
     		targetPointsHelper.updatePointsFromSettings();
-    		MapActivity.launchMapActivityMoveToTop(act);
+		IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+		//MapActivity.launchMapActivityMoveToTop(act);
     	}
     }
     
