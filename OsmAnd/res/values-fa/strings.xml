@@ -89,7 +89,7 @@
 	<string name="poi_filter_food_shop">فروشگاه مواد غذایی</string>
 	<string name="poi_filter_for_tourists">مناسب توریستها</string>
 	<string name="poi_filter_fuel">جایگاه سوخت</string>
-	<string name="avoid_motorway"></string>
+	<string name="avoid_motorway"/>
 	<string name="auto_zoom_map_descr">زوم خودکار بر اساس سرعت خودرو</string>
 	<string name="recalculate_route_to_your_location">شیوه رفت و آمد:</string>
 	<string name="select_navigation_mode">انتخاب شیوه رفت و آمد</string>
@@ -200,4 +200,15 @@
     <string name="show_warnings_title">نشان داده هشدار...</string>
 	<string name="use_compass_navigation">استفاده از قطب نما</string>
 	<string name="auto_zoom_map">زوم خودکار</string>
-	</resources>
+	<string name="search_street_in_neighborhood_cities">جستجوی خیابان در شهرهای مجاور</string>
+    <string name="intermediate_items_sort_return">موفعیتها مرتب شد تا بهترین مسیر از موقعیت نقشه تا محل هدف را شکل دهد</string>
+    <string name="please_select_address">ابندا شهر یا خیابان را انتخاب کنید</string>
+    <string name="download_using_mobile_internet">درحال حاضر WiFi برقرار نیست. میخواهید با اتصال فعلی اینترنت دانلود را ادامه دهید؟</string>
+    <string name="item_checked">انتخاب شده</string>
+    <string name="item_unchecked">انتخاب نشده</string>
+    <string name="prefer_in_routing_title">ترجیح بده…</string>
+	<string name="local_indexes_cat_av">داده های صوتی/تصویری</string>
+    <string name="precise_routing_mode">مسیریابی دقیق (آلفا)</string>
+    <string name="recording_photo_description">تصویر %1$s از %2$s</string>
+    <string name="av_widget_action">عملکرد پیشفرض ویجت</string>
+    </resources>
