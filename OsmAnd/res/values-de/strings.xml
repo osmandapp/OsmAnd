@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -943,8 +943,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="update_poi_is_not_available_for_zoom">Aktualisierung von POI ist für kleine Zoomeinstellungen nicht verfügbar</string>
 	<string name="context_menu_item_update_poi">POI aktualisieren</string>
 	<string name="context_menu_item_update_map_confirm">Wollen Sie die Daten via Internet aktualisieren?</string>
-	<string name="search_history_city">Ort:\n {0}</string>
-	<string name="search_history_street">Straße:\n {0}, {1}</string>
+	<string name="search_history_city">Ort: {0}</string>
+	<string name="search_history_street">Straße: {0}, {1}</string>
 	<string name="search_history_int_streets">Querstraße: {0} x {1} in {2}</string>
 	<string name="search_history_building">Hausnr.: {0}, {1}, {2}</string>
 	<string name="favorite">Favoriten</string>
