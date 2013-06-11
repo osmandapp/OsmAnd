@@ -201,8 +201,11 @@ public class IntermediatePointsDialog {
 					double meters = MapUtils.getDistance(intermediates.get(position), lat, lon);
 					distString = OsmAndFormatter.getFormattedDistance((float) meters, app);
 				}
-				
-				nm += app.getString(R.string.target_point, distString);
+				if(position < intermediates.size() - 1) {
+					nm += app.getString(R.string.target_point, distString);
+				} else {
+					nm += app.getString(R.string.destination_point, distString);
+				}
 				String descr = names.get(position);
 				if(descr != null && descr.trim().length() > 0) {
 					nm += "\n" + descr;
