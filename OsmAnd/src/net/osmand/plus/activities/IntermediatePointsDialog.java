@@ -45,6 +45,8 @@ public class IntermediatePointsDialog {
 	public static void openIntermediatePointsDialog(final MapActivity activity,
 			final OsmandApplication app, final boolean changeOrder){
 		TargetPointsHelper targets = app.getTargetPointsHelper();
+		// see if this fixes string display issue 1928:
+		targets.updatePointsFromSettings();
 		final List<LatLon> intermediates = targets.getIntermediatePointsWithTarget();
 		final TIntArrayList originalPositions = new TIntArrayList(intermediates.size());
 		for(int j = 1; j <= intermediates.size(); j++) {
