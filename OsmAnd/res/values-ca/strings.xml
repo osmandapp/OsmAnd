@@ -341,8 +341,8 @@
 <string name="system_locale">Sistema</string>
 <string name="tip_navigation">Navegació</string>
 <string name="tip_initial">Consells i trucs</string>
-<string name="next_button">Següent</string>
-<string name="previous_button">Anterior</string>
+<string name="next_button">Endavant</string>
+<string name="previous_button">Enrere</string>
 <string name="unit_of_length_descr">Canvia les unitats de longitud i velocitat</string>
 <string name="unit_of_length">Unitat de mesura</string>
 <string name="si_mi_foots">Milles/peus</string>
@@ -470,7 +470,7 @@
 <string name="search_address">Cerca adreça</string>
 <string name="settings">Configuració</string>
 <string name="data_settings">Dades</string>
-<string name="close">Tancar</string>
+<string name="close">Tanca</string>
 <string name="update_existing">Reemplaçar</string>
 <string name="follow">Seguir</string>
 <string name="address">Adreça</string>
@@ -1192,4 +1192,21 @@
 	<string name="choose_intersected_street">Seleccioneu la intersecció</string>
 	<string name="poi_remove_confirm_template">Voleu suprimir {0}(escriviu un comentari)?</string>
 	<string name="poi_dialog_comment_default">Canvis en el PDI</string>
+	<string name="context_menu_item_destination_point">Estableix com a destinació</string>
+    <string name="tip_recent_changes_1_4_t">Canvis a 1.4:
+\n\t* Ordenació de les fites en un camí òptimper visitar-les totes (ruta del viatger, porta a porta)\n\t* Cerca de carrers per nom (al veïnat)\n\t* Connector de mode de planitifació (càrrega/edició/desat de traces GPX)\n\t* Nova pantalla de baixades (baixades en segon pla)\n\t* Suport de subcarpetes GPX (organitzeu les vostres traces GPX)\n\t* Supressió de fitxers SRTM\n\t* Suport de notes OSM</string>
+    <string name="local_osm_changes_backup_successful">Fitxer de canvis OSM %1$s generat correctament</string>
+    <string name="use_distance_measurement_help">* Toqueu per marcar un punt.\n * Premeu i aguanteu al mapa per suprimir el punt anterior.\n * Premeu i aguanteu un punt per veure\'n i afegir-hi una descripció.\n * Feu clic al giny de mesura per veure més accions.</string>
+    <string name="tip_recent_changes_1_1_4_t">Canvis a 1.1.4:\n\t* Redisseny de la interfície gràfica\n\t* Correccions d\\\'errors</string>
+    <string name="av_def_action_choose">Selecciona sota demanda</string>
+    <string name="background_service_provider">Proveïdor de la ubicació</string>
+	<string name="converting_names">S\\\'estan convertint els noms nadius a l\'anglès...</string>
+	<string name="save_track_interval_descr">Indiqueu l\\\'interval d\\\'enregistrament de traces</string>
+	<string name="incremental_search_street">Cerca de carrers progressiva</string>
+	<string name="incremental_search_building">Cerca d\\\'edificis progressiva</string>
+	<string name="Closest_Amenities">Instal·lacions més properes</string>
+	<string name="position_on_map_bottom">Part inferior</string>
+	<string name="osb_add_dialog_error">S\\\'ha produït un error: no s\'\\ha creat l\\\'error</string>
+	<string name="poi_error_poi_not_found">No s\\\'ha trobat el node o la instal·lació no és un node únic</string>
+	<string name="poi_error_io_error_template">S\\\'ha produït un error d\'E/S durant l\\\'acció {0}.</string>
 	</resources>
