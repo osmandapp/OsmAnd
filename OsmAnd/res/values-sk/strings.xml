@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
@@ -1258,4 +1258,13 @@
     <string name="local_osm_changes_backup">Zálohovať ako OSM zmenu</string>
     <string name="please_select_address">Najskôr vyberte mesto alebo ulicu</string>
     <string name="local_osm_changes_backup_successful">Zmenový súbor pre OSM bol úspešne vygenerovaný %1$s</string>
+    <string name="context_menu_item_destination_point">Určiť ako cieľ</string>
+    <string name="tip_recent_changes_1_4_t">"Zmeny vo verzii 1.4:
+\n\t* Usporiadanie waypointov pre optimálne navštívenie všetkých (Obchdoný cestujúci, od dvier k dverám)
+\n\t* Vyhľadávanie ulíc podľa názvu (v susedstve)
+\n\t* Zásuvný modul Plánovací režim (načítanie/úprava/uloženie stôp GPX)
+\n\t* Nová sťahovacia obrazovka (sťahovanie na pozadí)
+\n\t* Podpora podpriečinkov pre GPX (organizujte vaše GPX stopy)
+\n\t* Odstránenie súborov SRTM
+\n\t* Podpora poznámok OSM "</string>
     </resources>
