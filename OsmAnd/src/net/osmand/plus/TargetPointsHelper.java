@@ -79,12 +79,12 @@ public class TargetPointsHelper {
 	 * Clear the local and persistent waypoints list and destination.
 	 */
 	public void removeAllWayPoints(boolean updateRoute){
-		settings.clearPointToNavigate();
-		pointToNavigate = null;		
 		settings.clearIntermediatePoints();
-		settings.clearPointToNavigate(); 
+		settings.clearPointToNavigate();
+		pointToNavigate = null;
 		intermediatePoints.clear();
-		intermediatePointNames.clear();	
+		intermediatePointNames.clear();
+		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
 	}
 
@@ -142,6 +142,8 @@ public class TargetPointsHelper {
 	public void clearPointToNavigate(boolean updateRoute) {
 		settings.clearPointToNavigate();
 		settings.clearIntermediatePoints();
+		intermediatePoints.clear();
+		intermediatePointNames.clear();
 		readFromSettings(settings);
 		updateRouteAndReferesh(updateRoute);
 	}
