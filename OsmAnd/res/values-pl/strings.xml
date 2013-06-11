@@ -1140,7 +1140,7 @@
     <string name="av_def_action_picture">Zrób zdjęcie</string>
     <string name="recording_context_menu_precord">Zrób zdjęcie</string>
     <string name="stop_routing_confirm">Czy na pewno chcesz zatrzymać nawigację?</string>
-    <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy?</string>
+    <string name="clear_dest_confirm">Czy na pewno chcesz usunąć punkt docelowy (oraz punkty pośrednie)?</string>
     <string name="precise_routing_mode">Precyzyjne trasy (alpha)</string>
     <string name="precise_routing_mode_descr">Włącz, by obliczać precyzyjne trasy bez błędów. Funkcja ograniczona jest odległością i nie używa natywnej biblioteki.</string>
     <string name="local_indexes_cat_av">Dane audio/video</string>
@@ -1245,7 +1245,7 @@
     <string name="local_osm_changes_backup_failed">Wystąpił błąd podczas tworzenia kopii zapasowej zmian OSM</string>
     <string name="local_osm_changes_backup">Stwórz kopię w formacie zmian OSM</string>
     <string name="intermediate_items_sort_by_distance">Sortuj (door-to-door)</string>
-    <string name="intermediate_items_sort_return">Pozycje sortowane tak, aby utworzyć optymalną drogę z pozycji mapy do punktu docelowego</string>
+    <string name="intermediate_items_sort_return">Optymalizacja kolejności punktów pośrednich w drodze do miejsca docelowego.</string>
     <string name="search_street_in_neighborhood_cities">Szukaj ulicy w sąsiadujących miastach</string>
     <string name="tip_recent_changes_1_4_t">"Zmiany w 1.4:
 \n\t* Optymalne porządkowanie odwiedzanych punktów (door-to-door)
@@ -1257,4 +1257,5 @@
 \n\t* Wsparcie dla notatek OSM "</string>
     <string name="context_menu_item_destination_point">Ustaw jako punkt docelowy</string>
     <string name="please_select_address">Wybierz miasto lub ulicę</string>
+    <string name="destination_point">Punkt docelowy %1$s</string>
     </resources>
