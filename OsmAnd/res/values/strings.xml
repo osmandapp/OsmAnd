@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
     <string name="tip_recent_changes_1_4_t">Changes in 1.4:
@@ -852,7 +853,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_not_enough_space">There is not enough free space to download %1$s MB (free: %2$s).</string>
 	<string name="download_files_question_space">Free space now {2} MB! Download {0} file(s) ({1} MB)?</string>
 	<string name="tip_select_destination_point">Get Directions</string>
-	<string name="tip_select_destination_point_t">\tYou get dierctions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+	<string name="tip_select_destination_point_t">\tYou get directions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
 		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 	</string> 
 	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
