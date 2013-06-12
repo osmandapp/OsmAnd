@@ -1243,4 +1243,5 @@
     <string name="intermediate_items_sort_return">Rutepunkter sorteret for optimale rute fra kortposition til destination</string>
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
+    <string name="destination_point">Destinationen %1$s</string>
     </resources>
