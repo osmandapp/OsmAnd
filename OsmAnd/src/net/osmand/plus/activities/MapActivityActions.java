@@ -801,15 +801,17 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					// TODO Issue 1929: insert navigatePointDialog, but without Directions:
+					// Issue 1929 TODO: insert navigatePointDialog, but without Directions:
 					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
+					MapActivity.launchMapActivityMoveToTop(act);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
-					// TODO Issue 1929: insert navigatePointDialog, but without Directions:
+					// Issue 1929 TODO: insert navigatePointDialog, but without Directions:
 					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
+					MapActivity.launchMapActivityMoveToTop(act);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
@@ -1309,7 +1311,7 @@ public class MapActivityActions implements DialogProvider {
 						settings.insertIntermediatePoint(lat, lon, name, 0, true);
 					}
 					targetPointsHelper.updatePointsFromSettings();
-					// TODO Issue 1929: slash next line (no Directions here)
+					// Issue 1929 TODO: do not go to 'Directions' here
 					//MapActivity.launchMapActivityMoveToTop(act);
 				}
 			});
@@ -1317,7 +1319,7 @@ public class MapActivityActions implements DialogProvider {
     	} else {
     		settings.setPointToNavigate(lat, lon, true, name);
     		targetPointsHelper.updatePointsFromSettings();
-		// TODO Issue 1929: slash next line (no Directions here)
+		// Issue 1929 TODO: do not go to 'Directions' here
 		//MapActivity.launchMapActivityMoveToTop(act);
     	}
     }
