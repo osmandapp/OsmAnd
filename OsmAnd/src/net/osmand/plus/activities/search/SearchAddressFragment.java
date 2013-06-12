@@ -297,15 +297,15 @@ public class SearchAddressFragment extends SherlockFragment {
 		    	targetPointsHelper.setSingleDestination(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
-				//MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
 				// Issue 1929 TODO: show IntermediatePointsDialog here instead of navigatePointDialog, without subsequent Directions
-				if (targetPointsHelper.getIntermediatePoints().size() == 0) {
-					targetPointsHelper.navigateToPoint(searchPoint, true, -1);
-				} else {
-					targetPointsHelper.navigateToPoint(searchPoint, true, targetPointsHelper.getIntermediatePoints().size());
-				}
-				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity());
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+				//if (targetPointsHelper.getIntermediatePoints().size() == 0) {
+				//	targetPointsHelper.navigateToPoint(searchPoint, true, -1);
+				//} else {
+				//	targetPointsHelper.navigateToPoint(searchPoint, true, targetPointsHelper.getIntermediatePoints().size());
+				//}
+				//IntermediatePointsDialog.openIntermediatePointsDialog(getActivity());
+				//MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == SHOW_ON_MAP) {
 				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());

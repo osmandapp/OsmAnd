@@ -1269,7 +1269,7 @@ public class MapActivityActions implements DialogProvider {
 					if (onShow != null) {
 						onShow.onClick(v);
 					}
-					// Issue 1929: Check where this dialohue appears and replace by IntermediatePointsDialog
+					// Issue 1929 TODO: Check where this dialogue appears and replace by IntermediatePointsDialog
 					navigatePointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
 					qa.dismiss();
 				}
