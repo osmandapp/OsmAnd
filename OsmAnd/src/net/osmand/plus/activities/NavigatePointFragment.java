@@ -261,7 +261,6 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
 				// Issue 1929 TODO: show IntermediatePointsDialog now, but without subsequent Directions
-				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),
