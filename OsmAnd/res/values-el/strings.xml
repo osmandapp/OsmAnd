@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -1246,4 +1246,11 @@
     <string name="distance_measurement_save_gpx">Αποθήκευση ως αρχείο GPX</string>
     <string name="distance_measurement_load_gpx">Άνοιγμα υπάρχοντος GPX</string>
     <string name="local_osm_changes_backup_successful">Το αρχείο αλλαγών OSM δημιουργήθηκε με επιτυχία %1$s</string>
+    <string name="destination_point">Προορισμός %1$s</string>
+    <string name="context_menu_item_destination_point">Ορισμός ως προορισμός</string>
+    <string name="please_select_address">Επιλέξτε πόλη ή οδό πρώτα</string>
+    <string name="intermediate_items_sort_by_distance">Ταξινόμηση (πόρτα-πόρτα)</string>
+    <string name="local_osm_changes_backup_failed">Η δημιουργία αντιγράφου ασφαλείας αλλαγών OSM απέτυχε</string>
+    <string name="local_osm_changes_backup">Δημιουργία αντιγράφου ασφαλείας αλλαγών OSM</string>
+    <string name="layer_hillshade">Στρώση σκίασης αναγλύφου</string>
     </resources>
