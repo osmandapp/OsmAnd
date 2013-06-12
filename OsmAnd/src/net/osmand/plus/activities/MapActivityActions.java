@@ -801,16 +801,16 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					// Issue 1929 TODO: go to navigatePointDialog, then to IntermediatePointDialog, but without Directions:
-					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
+					// Issue 1929 TODO: show navigatePointDialog, then IntermediatePointDialog, but without Directions:
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
-					// Issue 1929 TODO: go to navigatePointDialog, then to IntermediatePointDialog, but without Directions:
-					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
+					// Issue 1929 TODO: show navigatePointDialog, then IntermediatePointDialog, but without Directions:
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
