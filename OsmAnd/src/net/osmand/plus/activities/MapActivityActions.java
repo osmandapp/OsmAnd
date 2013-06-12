@@ -801,16 +801,16 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					// Issue 1929 TODO: show navigatePointDialog, then IntermediatePointDialog, but without Directions:
+					// Issue 1929 TODO: show navigatePointDialog(if needed), then IntermediatePointDialog, but without subsequent Directions:
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
-					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
+					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
-					// Issue 1929 TODO: show navigatePointDialog, then IntermediatePointDialog, but without Directions:
+					// Issue 1929 TODO: show navigatePointDialog(if needed), then IntermediatePointDialog, but without subsequent Directions:
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
-					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 					navigatePointDialogAndLaunchMap(mapActivity, latitude, longitude, null);
+					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
 				} else if (standardId == R.string.context_menu_item_add_favorite) {
@@ -1309,7 +1309,7 @@ public class MapActivityActions implements DialogProvider {
 						settings.insertIntermediatePoint(lat, lon, name, 0, false);
 					}
 					targetPointsHelper.updatePointsFromSettings();
-					// Issue 1929 TODO: do not go to 'Directions' here
+					// Issue 1929 TODO: call IntermediatePointDialog from here(?)
 					//MapActivity.launchMapActivityMoveToTop(act);
 				}
 			});
@@ -1317,7 +1317,7 @@ public class MapActivityActions implements DialogProvider {
     	} else {
 		settings.setPointToNavigate(lat, lon, false, name);
     		targetPointsHelper.updatePointsFromSettings();
-		// Issue 1929 TODO: do not go to 'Directions' here
+		// Issue 1929 TODO: call IntermediatePointDialog from here(?)
 		//MapActivity.launchMapActivityMoveToTop(act);
     	}
     }
