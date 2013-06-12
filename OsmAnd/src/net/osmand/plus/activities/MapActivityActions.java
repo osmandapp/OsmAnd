@@ -1269,6 +1269,7 @@ public class MapActivityActions implements DialogProvider {
 					if (onShow != null) {
 						onShow.onClick(v);
 					}
+					// Issue 1929: Check where this dialohue appears and replace by IntermediatePointsDialog
 					navigatePointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
 					qa.dismiss();
 				}
@@ -1279,6 +1280,7 @@ public class MapActivityActions implements DialogProvider {
     
     
     public static void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name){
+	// Issue 1929: This dialog not needed anymore
     	OsmandApplication ctx = (OsmandApplication) act.getApplication();
     	final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
     	final OsmandSettings settings = ctx.getSettings();
