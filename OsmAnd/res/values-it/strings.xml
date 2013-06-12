@@ -1304,4 +1304,5 @@
     <string name="intermediate_items_sort_by_distance">Ordina (porta a porta)</string>
     <string name="please_select_address">Scegli prima la città o la strada</string>
     <string name="context_menu_item_destination_point">Imposta come destinazione</string>
+    <string name="destination_point">Destinazione %1$s</string>
     </resources>
