@@ -1,5 +1,6 @@
 package net.osmand.plus.activities.search;
 
+import net.osmand.plus.activities.IntermediatePointsDialog
 
 import java.text.MessageFormat;
 
@@ -303,7 +304,7 @@ public class SearchAddressFragment extends SherlockFragment {
 				} else {
 					targetPointsHelper.navigateToPoint(searchPoint, true, targetPointsHelper.getIntermediatePoints().size());
 				}
-				IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity());
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == SHOW_ON_MAP) {
 				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);

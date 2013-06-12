@@ -266,7 +266,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 				} else {
 					targetPointsHelper.navigateToPoint(new LatLon(lat, lon), true, targetPointsHelper.getIntermediatePoints().size());
 				}
-				IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
+				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity());
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
