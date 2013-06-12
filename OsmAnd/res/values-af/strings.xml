@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -423,7 +423,7 @@
   <string name="tip_navigation">Navigasie</string>
   <string name="tip_navigation_t">\tVoordat \'n navigasie begin moet jy \'n bestemming kies. Druk daarna \'kieslys\' -&gt; \'aanwysings\' op die kaart en kies die navigasie wyse.</string>
   <string name="tip_search">op soek</string>
-  <string name="tip_search_t">\tJy kan soek vir plekke op die kaart, deur adres, deur Ligging, as interessante plek, of as voorafgedefinieerde gunsteling.\n\tDeur \'Soek\' in die hoofkieslys te druk word die soek aktiwiteite begin. Vir al die resultate bied `n kieslys 2 keuses: \'Stel as bestemming \' of \' Wys op die kaart\'.</string>
+  <string name="tip_search_t">"\tJy kan soek vir plekke op die kaart, deur adres, deur Ligging, as interessante plek, of as voorafgedefinieerde gunsteling.\n\tDeur \'Soek\' in die hoofkieslys te druk word die soek aktiwiteite begin. Vir al die resultate bied `n kieslys 2 keuses: \'Stel as bestemming \' of \' Wys op die kaart\'. "</string>
   <string name="tip_map_context_menu">Kaartinhoud kieslys</string>
   <string name="tip_map_context_menu_t">\tDie kaart inhoud kieslys is beskikbaar deur te druk en te hou op die kaart of deur die trekbal-knoppie te druk.\n\tDit lewer \'n boks met punt koördinate. Om die kaart inhoud kieslys venster oop te maak, tik op dit. (Of druk en hou die boks om dit weer te versteek.)\n\tDie kaart inhoud kieslys bevat alle aksies met verwysing na \'n punt (ligging).</string>
   <string name="tip_initial">Wenke en wyses</string>
@@ -904,7 +904,7 @@
 <string name="map_widget_right_stack">Regterkant:</string>
 <string name="map_widget_left_stack">Linkerkant:</string>
 <string name="map_widget_parking">Parkering</string>
-<string name="map_widget_monitoring">Besig om spoor na te volg</string>
+<string name="map_widget_monitoring">GPX opname</string>
 <string name="map_widget_speed">Spoed</string>
 <string name="map_widget_distance">Teiken</string>
 <string name="map_widget_altitude">Hoogte</string>
@@ -1179,4 +1179,20 @@
     <string name="osmand_distance_planning_plugin_description">Skep paaie (of gebruik / pas bestaande GPX lêers aan) om die afstand tussen punte te meet. Berg as GPX, kan gebruik word om GPX roetes te beplan.</string>
     <string name="osmand_distance_planning_plugin_name">Afstand rekenaar &amp; beplanning gereedskap</string>
     <string name="local_osm_changes_backup_successful">OSM veranderingslêer %1$s suskesvol geskep</string>
+    <string name="destination_point">Bestemming %1$s</string>
+    <string name="context_menu_item_destination_point">Stel as bestemming</string>
+    <string name="please_select_address">Kies eers die stad of straat</string>
+    <string name="search_street_in_neighborhood_cities">Soek straat in nabygeleë stede</string>
+    <string name="intermediate_items_sort_return">Tussen-punte is hergesorteer om die volgorde op pad na die bestemming te optimaliseer.</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer (deur-tot-deur)</string>
+    <string name="local_osm_changes_backup_failed">Berg van OSM veranderings het gefaal</string>
+    <string name="local_osm_changes_backup">Berg as OSM verandering</string>
+    <string name="use_distance_measurement_help">* Tik om punt te merk.\n * Tik en hou op die kaart om vorige punt te verwyder.\n * Tik en hou op punt om beskrywing te sien of verander.\n * Tik op meting widget om meer aksies te sien.</string>
+    <string name="default_buttons_do_not_show_again">Moet nie weer wys nie</string>
+    <string name="distance_measurement_start_editing">Begin verandering</string>
+    <string name="distance_measurement_finish_editing">Eindig verandering</string>
+    <string name="distance_measurement_finish_subtrack">Begin `n nuwe sub-spoor</string>
+    <string name="distance_measurement_clear_route">Verwyder all punte</string>
+    <string name="distance_measurement_save_gpx">Berg as GPX</string>
+    <string name="distance_measurement_load_gpx">Maak bestaande GPX oop</string>
     </resources>
