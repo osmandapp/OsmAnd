@@ -1203,4 +1203,5 @@
     <string name="osmand_extended_description_4000_chars"/>
 	<string name="context_menu_item_destination_point">Установить как пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
+    <string name="destination_point">Пункт назначения %1$s</string>
     </resources>
