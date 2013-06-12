@@ -259,8 +259,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 				targetPointsHelper.setSingleDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
+				// Issue 1929 TODO: show IntermediatePointsDialog here instead of navigatePointDialog, without subsequent Directions
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
-				// Issue 1929 TODO: show IntermediatePointsDialog now, but without subsequent Directions
 			} else if (mode == SHOW_ON_MAP){
 				OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 				app.getSettings().setMapLocationToShow(lat, lon, Math.max(12, app.getSettings().getLastKnownMapZoom()),
