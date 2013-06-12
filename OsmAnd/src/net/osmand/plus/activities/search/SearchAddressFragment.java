@@ -1,6 +1,6 @@
 package net.osmand.plus.activities.search;
 
-import net.osmand.plus.activities.IntermediatePointsDialog
+import net.osmand.plus.activities.IntermediatePointsDialog;
 
 import java.text.MessageFormat;
 
