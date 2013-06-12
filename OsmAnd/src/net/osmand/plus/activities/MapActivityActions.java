@@ -801,14 +801,16 @@ public class MapActivityActions implements DialogProvider {
 						getDirections(loc, null, true);
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
-					// Issue 1929: navigatePointDialogAndLaunchMap(activity, latitude, longitude, null);
-					targets.navigateToPoint(new LatLon(latitude, longitude), 
+					// Issue 1929:
+					navigatePointDialogAndLaunchMap(activity, latitude, longitude, null);
+					//targets.navigateToPoint(new LatLon(latitude, longitude), 
 							true, targets.getIntermediatePoints().size());
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
-					// Issue 1929: navigatePointDialogAndLaunchMap(activity, latitude, longitude, null);
-					targets.navigateToPoint(new LatLon(latitude, longitude), 
+					// Issue 1929:
+					navigatePointDialogAndLaunchMap(activity, latitude, longitude, null);
+					//targets.navigateToPoint(new LatLon(latitude, longitude), 
 							true, -1);
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
@@ -1309,16 +1311,16 @@ public class MapActivityActions implements DialogProvider {
 						settings.insertIntermediatePoint(lat, lon, name, 0, true);
 					}
 					targetPointsHelper.updatePointsFromSettings();
-					// Issue 1929: IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
-					MapActivity.launchMapActivityMoveToTop(act);
+					// Issue 1929:
+					//MapActivity.launchMapActivityMoveToTop(act);
 				}
 			});
     		builder.show();
     	} else {
     		settings.setPointToNavigate(lat, lon, true, name);
     		targetPointsHelper.updatePointsFromSettings();
-		// Issue 1929: IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
-		MapActivity.launchMapActivityMoveToTop(act);
+		// Issue 1929:
+		//MapActivity.launchMapActivityMoveToTop(act);
     	}
     }
     
