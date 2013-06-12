@@ -297,6 +297,7 @@ public class SearchAddressFragment extends SherlockFragment {
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+				// TODO Issue 1929: show IntermediatePointsDialog now
 			} else if (mode == SHOW_ON_MAP) {
 				osmandSettings.setMapLocationToShow(searchPoint.getLatitude(), searchPoint.getLongitude(), zoom, historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
