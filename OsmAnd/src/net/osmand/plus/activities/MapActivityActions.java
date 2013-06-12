@@ -1295,18 +1295,18 @@ public class MapActivityActions implements DialogProvider {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					if(which == 0) {
-						settings.setPointToNavigate(lat, lon, true, name);
+						settings.setPointToNavigate(lat, lon, false, name);
 					} else if(which == 2) {
 						int sz = targetPointsHelper.getIntermediatePoints().size();
 						LatLon pt = targetPointsHelper.getPointToNavigate();
-						settings.insertIntermediatePoint(lat, lon, name, sz, true);
-						settings.setPointToNavigate(pt.getLatitude(), pt.getLongitude(), true, settings.getPointNavigateDescription());
+						settings.insertIntermediatePoint(lat, lon, name, sz, false);
+						settings.setPointToNavigate(pt.getLatitude(), pt.getLongitude(), false, settings.getPointNavigateDescription());
 						// I believe the following prior code was buggy, Hardy 2013-06-10:
 						//settings.insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
 						//		settings.getPointNavigateDescription(), sz, true);
 						//settings.setPointToNavigate(lat, lon, true, name);
 					} else {
-						settings.insertIntermediatePoint(lat, lon, name, 0, true);
+						settings.insertIntermediatePoint(lat, lon, name, 0, false);
 					}
 					targetPointsHelper.updatePointsFromSettings();
 					// Issue 1929 TODO: do not go to 'Directions' here
@@ -1315,7 +1315,7 @@ public class MapActivityActions implements DialogProvider {
 			});
     		builder.show();
     	} else {
-    		settings.setPointToNavigate(lat, lon, true, name);
+		settings.setPointToNavigate(lat, lon, false, name);
     		targetPointsHelper.updatePointsFromSettings();
 		// Issue 1929 TODO: do not go to 'Directions' here
 		//MapActivity.launchMapActivityMoveToTop(act);
