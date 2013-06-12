@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -1332,4 +1332,6 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
 \n\t* SRTM failų ištrynimas
 \n\t* OSM Užrašų palaikymas "</string>
     <string name="please_select_address">Pasirinkit pirmiausia miestą ar gatvę</string>
+    <string name="destination_point">Kelionės tikslas %1$s</string>
+    <string name="context_menu_item_destination_point">Nustatyti kelionės tikslu</string>
     </resources>
