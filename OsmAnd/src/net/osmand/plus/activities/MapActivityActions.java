@@ -789,7 +789,7 @@ public class MapActivityActions implements DialogProvider {
 					mapActivity.startActivity(intent);
 				} else if (standardId == R.string.context_menu_item_navigate_point) {
 					//getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), true, -1);
-					settings.setPointToNavigate(latitude, longitude, true, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude));
+					settings.setPointToNavigate(latitude, longitude, false, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude));
 					targets.updatePointsFromSettings();
 					// always enable and follow and let calculate it (GPS is not accessible in garage)
 					if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
