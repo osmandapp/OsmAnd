@@ -753,10 +753,10 @@ public class MapActivityActions implements DialogProvider {
 	
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
-		
 
 		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_activities_navigate_to);
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
+		final OsmandSettings settings = getMyApplication().getSettings();
 		if(targets.getPointToNavigate() != null) {
 			adapter.registerItem(R.string.context_menu_item_intermediate_point, R.drawable.list_activities_set_intermediate);
 		// For button-less search UI
@@ -802,12 +802,15 @@ public class MapActivityActions implements DialogProvider {
 					}
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
+					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
+					int sz = targetPointsHelper.getIntermediatePoints().size();
+					settings.insertIntermediatePoint(latitude, longitude, "x", sz, false); //$NON-NLS-1$
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
-					targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
+					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
+					settings.setPointToNavigate(latitude, longitude, false, "z"); //$NON-NLS-1$
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
