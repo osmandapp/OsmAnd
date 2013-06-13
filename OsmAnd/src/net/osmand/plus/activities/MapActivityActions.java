@@ -1226,7 +1226,7 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
     
-    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
+    public void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
     		final boolean saveHistory, final OnClickListener onShow){
     	
 		ActionItem showOnMap = new ActionItem();
