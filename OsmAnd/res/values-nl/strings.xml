@@ -1252,7 +1252,7 @@
 \n* Verwijder SRTM bestanden
 \n* Ondersteuning voor OSM Notities "</string>
     <string name="search_street_in_neighborhood_cities">Zoek straat in stadswijken</string>
-    <string name="intermediate_items_sort_return">Routepunten gesorteerd voor optimale route van kaartpositie naar bestemming</string>
+    <string name="intermediate_items_sort_return">Volgorde van de tussenpunten is optimaal aangepast voor beste route naar bestemming.</string>
     <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
     <string name="please_select_address">Selecteer eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Zet als bestemming</string>
