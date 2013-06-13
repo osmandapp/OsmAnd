@@ -1257,7 +1257,7 @@ public class MapActivityActions implements DialogProvider {
 					onShow.onClick(v);
 				}
 				//targetPointsHelper.setSingleDestination(location.getLatitude(), location.getLongitude(), name);
-				getMyApplication().getSettings().setPointToNavigate(latitude, longitude, true, name);
+				getMyApplication().getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), true, name);
 				targetPointsHelper.updatePointsFromSettings();
 				// always enable and follow and let calculate it (GPS is not accessible in garage)
 				if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
