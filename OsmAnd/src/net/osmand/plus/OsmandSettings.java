@@ -1060,7 +1060,7 @@ public class OsmandSettings {
 	}
 	
 	public boolean clearIntermediatePoints() {
-		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).commit();
+		return settingsAPI.edit(globalPreferences).remove(INTERMEDIATE_POINTS).remove(INTERMEDIATE_POINTS_DESCRIPTION).commit();
 	}
 	
 	public List<String> getIntermediatePointDescriptions(int sz) {
