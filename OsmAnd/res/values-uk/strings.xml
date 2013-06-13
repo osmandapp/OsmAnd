@@ -474,7 +474,7 @@
   <string name="select_build_to_install">Виберіть одну зі збірок OsmAnd для встановлення</string>
   <string name="contribution_activity">Функція для платної версії</string>
   <string name="gps_status_app_not_found">Програма GPS Status не встановлена. Знайти в Market?</string>
-  <string name="voice_is_not_available_msg">Голосова навігація недоступна. Перейдіть в налаштування і вкажіть голосові дані або завантажте їх.</string>
+  <string name="voice_is_not_available_msg">Озвучення навігації недоступне. Перейдіть в налаштування, виберіть голос для навігації і завантажте їх.</string>
   <string name="voice_is_not_available_title">Голосові дані не знайдено</string>
   <string name="daynight_mode_day">День</string>
   <string name="daynight_mode_night">Ніч</string>
@@ -546,7 +546,7 @@
   <string name="poi_namefinder_query_empty">Введіть запит для пошуку POI</string>
   <string name="any_poi">Всі</string>
   <string name="layer_transport_route">Transport route</string>
-  <string name="thanks_yandex_traffic">Дорожня інформація надається завдяки Яндексу</string>
+  <string name="thanks_yandex_traffic">Дорожня інформація надається завдяки Яндексу.</string>
   <string name="layer_yandex_traffic">Яндекс Пробки</string>
   <string name="layer_route">Маршрут</string>
   <string name="layer_favorites">Улюблені</string>
@@ -562,7 +562,7 @@
   <string name="background_service_wait_int_descr">Виберіть максимальний час для пошуку позиції</string>
   <string name="background_service_wait_int">Час очікування</string>
   <string name="service_stop_background_service">Вимкнути фоновий сервіс</string>
-  <string name="where_am_i">Де я є?</string>
+  <string name="where_am_i">Де я?</string>
   <string name="process_navigation_service">Сервіс навігації OsmAnd</string>
   <string name="network_provider">Мережа</string>
   <string name="gps_provider">GPS</string>
@@ -907,7 +907,7 @@
   <string name="map_widget_top_text">Назва вулиці</string>
   <string name="map_widget_config">Налаштування</string>
   <string name="map_widget_map_select">Джерело мапи</string>
-  <string name="map_widget_back_to_loc">Де я є</string>
+  <string name="map_widget_back_to_loc">Де я</string>
   <string name="map_widget_lock_screen">Заблокувати екран</string>
   <string name="map_widget_compass">Компас</string>
   <string name="map_widget_top_stack">Рядок стану:</string>
@@ -1179,7 +1179,7 @@
     <string name="distance_measurement_load_gpx">Завантажити GPX</string>
     <string name="cancel_route">Відмінити маршрут</string>
     <string name="search_street_in_neighborhood_cities">Шукати в навколишніх містах</string>
-    <string name="intermediate_items_sort_return">Проміжні точки впорядковано оптимальним чином від початкової до кінцевої</string>
+    <string name="intermediate_items_sort_return">Проміжні точки впорядковано оптимальним чином від початкової до кінцевої.</string>
     <string name="intermediate_items_sort_by_distance">Впорядкувати за відстанню</string>
     <string name="local_osm_changes_backup_successful">Файл змін OSM успішно створений в %1$s</string>
     <string name="osmand_distance_planning_plugin_name">Інструмент підрахунку відстані і планування</string>
@@ -1193,8 +1193,10 @@
     <string name="local_indexes_cat_srtm">Дані горизонталей</string>
     <string name="context_menu_item_destination_point">Встановити як місце призначення</string>
     <string name="local_osm_changes_backup_failed">Збій резервного копіювання файлу змін OSM</string>
-    <string name="local_osm_changes_backup">"Резервне копіювання файлу змін OSM "</string>
+    <string name="local_osm_changes_backup">Резервне копіювання файлу змін OSM</string>
     <string name="use_distance_measurement_help">* Натисніть, щоб позначити точку.\n * Натисніть та утримуйте мапу для вилучення попередньої точки.\n * Натисніть та утримуйте точку для перегляду та додавання опису.\n * Натисніть на масштабну лінійку, щоб побачити більше дій.</string>
     <string name="access_mark_final_location_first">Допоміжні можливості: будь ласка, оберіть спочатку місце призначення</string> 
     <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість, датчику орієнтації</string>
+    <string name="tip_search_t">"\tВи можете шукати об’єкти роздивляючись мапу, використовуючи пошук за адресою, координатами, чи пошук POI, або обираючи із збережених точок.\n\tВибір пункту «Пошук» в меню, дозволить перейти до завдання того, що ви бажаєте відшукати. У допомогу до всіх підказок, контекстне меню пропонує два варіанти: \'Встановити як місце призначення\' чи \'Показати на мапі\' "</string>
+	<string name="destination_point">Пункт призначення %1$s</string>
     </resources>
