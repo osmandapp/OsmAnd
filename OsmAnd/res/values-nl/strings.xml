@@ -1256,4 +1256,5 @@
     <string name="intermediate_items_sort_by_distance">Sorteer (kortste afstand)</string>
     <string name="please_select_address">Selecteer eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Zet als bestemming</string>
+    <string name="destination_point">Bestemming %1$s</string>
     </resources>
