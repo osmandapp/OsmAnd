@@ -1262,6 +1262,7 @@ public class MapActivityActions implements DialogProvider {
 				// always enable and follow and let calculate it (GPS is not accessible in garage)
 				if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
 					getDirections(null, new LatLon(latitude, longitude), true);
+				}
 				MapActivity.launchMapActivityMoveToTop(activity);
 				qa.dismiss();
 			}
