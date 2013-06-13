@@ -1305,9 +1305,9 @@ public class MapActivityActions implements DialogProvider {
 						settings.setPointToNavigate(lat, lon, false, name);
 					} else if(which == 2) {
 						int sz = targetPointsHelper.getIntermediatePoints().size();
-						LatLon pt = targetPointsHelper.getPointToNavigate();
+						//LatLon pt = targetPointsHelper.getPointToNavigate();
 						settings.insertIntermediatePoint(lat, lon, name, sz, false);
-						settings.setPointToNavigate(pt.getLatitude(), pt.getLongitude(), false, settings.getPointNavigateDescription());
+						//settings.setPointToNavigate(pt.getLatitude(), pt.getLongitude(), false, settings.getPointNavigateDescription());
 						// I believe the following prior code was buggy, Hardy 2013-06-10:
 						//settings.insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
 						//		settings.getPointNavigateDescription(), sz, true);
