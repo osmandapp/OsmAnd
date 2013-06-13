@@ -1226,7 +1226,7 @@ public class MapActivityActions implements DialogProvider {
 		menu.show();
 	}
     
-    public void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
+    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
     		final boolean saveHistory, final OnClickListener onShow){
     	
 		ActionItem showOnMap = new ActionItem();
@@ -1256,9 +1256,7 @@ public class MapActivityActions implements DialogProvider {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
-				//targetPointsHelper.setSingleDestination(location.getLatitude(), location.getLongitude(), name);
-				getMyApplication().getSettings().setPointToNavigate(location.getLatitude(), location.getLongitude(), true, name);
-				targetPointsHelper.updatePointsFromSettings();
+				targetPointsHelper.setSingleDestination(location.getLatitude(), location.getLongitude(), name);
 				MapActivity.launchMapActivityMoveToTop(activity);
 				qa.dismiss();
 			}
