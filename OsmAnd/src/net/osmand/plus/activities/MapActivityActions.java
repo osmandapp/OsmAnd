@@ -805,12 +805,14 @@ public class MapActivityActions implements DialogProvider {
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
 					int sz = targets.getIntermediatePoints().size();
 					settings.insertIntermediatePoint(latitude, longitude, "x", sz, false); //$NON-NLS-1$
+					targets.updatePointsFromSettings();
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
 				} else if (standardId == R.string.context_menu_item_destination_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					settings.setPointToNavigate(latitude, longitude, false, "z"); //$NON-NLS-1$
+					targets.updatePointsFromSettings();
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
 					shareLocation(latitude, longitude, mapActivity.getMapView().getZoom());
