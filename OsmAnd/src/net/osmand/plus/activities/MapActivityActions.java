@@ -803,7 +803,7 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.context_menu_item_intermediate_point) {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
-					int sz = targetPointsHelper.getIntermediatePoints().size();
+					int sz = targets.getIntermediatePoints().size();
 					settings.insertIntermediatePoint(latitude, longitude, "x", sz, false); //$NON-NLS-1$
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
