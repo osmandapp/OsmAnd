@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
@@ -79,13 +79,11 @@
 	<string name="edit_filter_create_message">Filter {0} je bil ustvarjen</string>
 	<string name="default_buttons_selectall">Izberi vse</string>
 	<string name="email">E-pošta</string>
-<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:\n\t* Odpravljene nekatere napake\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočeno izvajanje storitev v ozadju "</string>
-    <string name="tip_recent_changes_0_8_3_t">"Spremembe v 0.8.3 :
+<string name="tip_recent_changes_0_8_4_t">"Spremembe v 0.8.4:\n\t* Odpravljene nekatere napake\n\t* Zemljevid med prekinitvami ne izgubi pridobljenega položaja\n\t* Med navigacijo je omogočeno izvajanje storitev v pripravljenosti "</string>
+    <string name="tip_recent_changes_0_8_3_t">"Spremembe v 0.8.3:
 \n\t* Vmesne točke
 \n\t* Izboljšano vodenje po poti
-\n\t* Možnost izogibanja avtocest
-\n\t* Kolo=prikaz GPS sledi
-\n\t* Izboljšan izgled (ikone)
+\n\t* Možnost izogibanja avtocest pri pripravi poti\n\t* Dodana še ena zvrst kolesarskih cest na zemljevid (Cycleway=track)
 \n\t* Odpravljeno veliko napak "</string>
     
     <string name="navigate_to">Nastavi cilj</string>
@@ -180,10 +178,10 @@
 	<string name="osmand_parking_position_description_add_time">Avto je bil parkiran na:</string>
 	<string name="tip_recent_changes_0_8_1_t">"Spremembe v 0.8.1:
 \n\t* Natančnejše poti (malo počasneje)
-\n\t* Pameten in hiter izračun poti
+\n\t* Pameten in hiter ponoven izračun poti
 \n\t* Usmerjanje po pasovih
 \n\t* Informacije o omejitvah hitrosti, radarjih in ležečih policajih
-\n\t* Izboljšano glasovno vodenje na cestah
+\n\t* Izboljšano glasovno vodenje na avtocestah
 \n\t* Vtičnik za parkiranje (\'Kje je moj avto parkiran?\')
 \n\t* Pripomoček za vklop/izklop beleženja "</string>
 	<string name="global_app_allocated_memory_descr">Uporabljen pomnilnik %1$s MB (Android %2$s MB, Dalvik %3$s MB).</string>
@@ -417,7 +415,7 @@
 	<string name="tip_location_sharing">Deljenje mesta</string>
 	<string name="tip_location_sharing_t">"\tDelite lahko mesto zanimivih krajev na vašem potovanju z družino ali prijatelji.\n\tZa delitev mesta:\n\tUporabi  \'Kontekstni meni karte\' -&gt; Meni \'Skupna raba mesta\'.\n\tNato izberite način, za deljenje svojega mesta. Izbire so: e-pošta, SMS (besedilo), ali pa samo kopiranje koordinat mesta v odlagališče. "</string>
 	<string name="tip_favorites">Priljubljene lokacije</string>
-	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0.0:\n\t* Izboljšano usmerjanje: hitrejše in natančnejše, do 250 km\n\t* Možnost prikaza le cest\n\t* Zemljevid med prekinitvami ne izgubi zaklenjenega položaja\n\t* Med navigacijo je omogočene izvajanje storitev v ozadju\n\t* Improved \'touring view\' with new road styles, more map details, and Alpine hiking (SAC scale) option\n\t* Uporaba EGM96 za popravek nadmorskih višin izmerjenih s sprejemnikom GPS "</string>
+	<string name="tip_recent_changes_1_0_0_t">"Spremembe v 1.0.0:\n\t* Izboljšano usmerjanje: hitrejše in natančnejše, do 250 km\n\t* Možnost prikaza le cest\n\t* Zemljevid med prekinitvami ne izgubi pridobljenega položaja\n\t* Med navigacijo je omogočeno izvajanje storitev v pripravljenosti "</string>
     <string name="close_changeset">Zapri paket sprememb</string>
 	<string name="zxing_barcode_scanner_not_found">Aplikacija ZXing Barcode Scanner ni nameščena. Naj jo poiščem v trgovini Market?</string>
 	<string name="rendering_attr_roadColors_description">Izberite barvno shemo cest:</string>
@@ -996,22 +994,21 @@
 	<string name="map_tile_source">Vir koščkov zemljevida</string>
 	<string name="map_source">Vir zemljevida</string>
 	<string name="download_indexes">Prenos krajevnih podatkov</string>
-	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0 :
-\n\t- *Plugin functionality*
-\n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
-\n\t- *New offline map data support*
-\n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
-\n\t - You need to download completely new offline data (old data will not be supported anymore)
-\n\t- *Offline Routing*
-\n\t - Offline routing becomes more robust
-\n\t *Usability and UI experience*
-\n\t - Improved in many areas "</string>
-	<string name="tip_recent_changes_0_7_2_t">"Spremembe v 0.7.2 :
+	<string name="tip_recent_changes_0_8_0_t">"Spremembe v 0.8.0:
+\n\t- Plugin functionality
+\n\t- Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.
+\n\t- New offline map data support\n\t- Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed).
+\n\t- You need to download completely new offline data (old data will not be supported anymore)
+\n\t- Offline Routing
+\n\t- Offline routing becomes more robust
+\n\t- Usability and UI experience
+\n\t- Improved in many areas "</string>
+	<string name="tip_recent_changes_0_7_2_t">"Spremembe v 0.7.2:
 \n\t- Native rendering for all devices
 \n\t- Offline POI editing
 \n\t- Accessibility
 \n\t- Lots of bug fixes "</string>
-	<string name="tip_recent_changes_0_7_1_t">"Spremembe v 0.7.1 :
+	<string name="tip_recent_changes_0_7_1_t">"Spremembe v 0.7.1:
 \n\t- Offline POI editing
 \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
 \n\t- Show currently recorded track on map
@@ -1020,18 +1017,18 @@
 \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
 \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
 \n\t- Other changes "</string>
-	<string name="tip_recent_changes_0_7_0_t">"Spremembe v 0.7.0 :
+	<string name="tip_recent_changes_0_7_0_t">"Spremembe v 0.7.0:
 \n\t- Offline wikipedia data with articles
 \n\t- Updated maps
 \n\t- Other small features "</string>    
-	<string name="tip_recent_changes_0_6_9_t">"Spremembe v 0.6.9 :
+	<string name="tip_recent_changes_0_6_9_t">"Spremembe v 0.6.9:
 \n\t- Improved offline map rendering
 \n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
 \n\t- Massive look and feel changes
 \n\t- Altitude info
 \n\t- New translations (Vienamese, Polish)
 \n\t- Other small features "</string>
-	<string name="tip_recent_changes_0_6_8_t">"Spremembe v 0.6.8 :
+	<string name="tip_recent_changes_0_6_8_t">"Spremembe v 0.6.8:
 \n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 \n\t- Implement POI search by name in big areas (countries)
 \n\t- Fix flickering map screen for tablets (Issue 641)
@@ -1091,7 +1088,7 @@
     <string name="recording_playing">Predvajanje zvoka iz izbranega posnetka.\n%1$s</string>
     <string name="recording_open_external_player">Odpri zunanji predvajalnik</string>
     <string name="recording_delete_confirm">Ali želite odstraniti ta posnetek?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Spremembe v 1.1.0:\n\t* Vtičnik Računanje razdalj\n\t* Vtičnik Zvočni zapisi\n\t* Vtičnik Izohipse\n\t* Odpravljene nekatere napake\n\t* \'Touring pogled\' slog zemljevida z več podrobnostmi, novimi slogi za ceste, več kontrasta in možnostjo za alpsko pohodništvo (SAC lestvico)\n\t* popravek za EGM96 geoid pri GPS nadmorski višini "</string>
+    <string name="tip_recent_changes_1_1_0_t">"Spremembe v 1.1.0:\n\t* Vtičnik Računanje razdalj\n\t* Vtičnik Zvočni zapisi\n\t* Vtičnik Izohipse\n\t* Odpravljene nekatere napake\n\t* \'Touring pogled\' slog zemljevida z več podrobnostmi, novimi slogi za ceste, več kontrasta in možnostjo za alpsko pohodništvo (SAC lestvico)\n\t* Popravek izravnave EGM96 geoida za GPS nadmorsko višino "</string>
     <string name="recording_unavailable">ni na voljo</string>
     <string name="recording_context_menu_arecord">Posnemi zvočni zapis</string>
     <string name="recording_context_menu_vrecord">Posnemi video zapis</string>
@@ -1134,10 +1131,10 @@
     <string name="dist_control_start">Začni</string>
     <string name="support_new_features_descr">Darujte, tako boste pripomogli k razvoju novih funkcionalnosti</string>
 	<string name="tip_recent_changes_1_1_2_t">"Spremembe v 1.1.2:
-\n\t* Audio / Video vtičnik za izboljšavo (fotografije z informacijami EXIF)\n\t* Popravljena uporabnost in struktura vtičnika za izohipse\n\t* Paketi senčenega terena za vtičnik za izohipse\n\t* Popravki napak (izračun neoptimalne poti) "</string>
+\n\t* Audio/Video vtičnik za izboljšavo (fotografije z informacijami EXIF)\n\t* Popravljena uporabnost in struktura vtičnika za izohipse\n\t* Paketi senčenega terena za vtičnik za izohipse\n\t* Popravki napak (izračun naj-optimalne poti) "</string>
     <string name="download_hillshade_item">Senčen teren</string>
     <string name="download_hillshade_maps">Zemljevid senc terena</string>
-    <string name="tip_recent_changes_1_2_t">"Spremembe v 1.2:
+    <string name="tip_recent_changes_1_2_t">"Popravki v 1.2.1:↵\n\t* Popravek za Geo Intent (Foursquare, c:geo)↵\n\t* Popravek za tresenje zaslona med navigacijo↵\n\t* Drugi manjši popravki↵\n↵\nSpremembe v 1.2:
 \n\t* Odpravljene napake (boljše usmerjanje, iskanje, zvočno in video snemanje, glasovna navodila, boljši prikaz)
 \n\t* Enostavnejša nastavitev prikaza senčenja terena (potrebuje vtičnik za izohipse \"Contour Lines plugin\")
 \n\t* Podpora povezavam z lokacijo na maps.google.com
@@ -1167,8 +1164,8 @@
 \n trenutno sled GPX</string>
 	<string name="street_name">Ulica</string>
 	<string name="hno">Hišna številka</string>
-    <string name="tip_recent_changes_1_3_t">"Spremembe v 1.5:
-\n\t* Holo Theme (theme customization) "</string>
+    <string name="tip_recent_changes_1_3_t">"Spremembe v 1.3:
+\n\t* Ponovna podpora za tablice in za večje zaslone\n\t* Holo tema (prilagoditev)\n\t* Dodatne nastavitve za stabiliziranje kompasa\n\t* Zgornji levi gumb na zaslonu zemljevida nadomesti gumb Meni "</string>
     <string name="monitoring_settings">Stortive beleženja in način spanja</string>
     <string name="osmand_monitoring_plugin_name">Stortive beleženja in način spanja</string>
     <string name="select_address_activity">Izberite naslov</string>
@@ -1197,4 +1194,35 @@
     <string name="distance_measurement_clear_route">Počisti vse točke</string>
     <string name="distance_measurement_save_gpx">Shrani kot GPX</string>
     <string name="distance_measurement_load_gpx">Odpri obstoječ GPX</string>
+    <string name="context_menu_item_destination_point">Nastavi kot cilj</string>
+    <string name="please_select_address">Najprej morate izbrati kraj ali ulico</string>
+    <string name="search_street_in_neighborhood_cities">Iskanje ulice v sosednjih krajih</string>
+    <string name="intermediate_items_sort_return">Vmesne točke so ravrščene po vrsti na poti do cilja.</string>
+    <string name="local_osm_changes_backup_successful">Uspešno ustvarjena datoteka sprememb za OSM %1$s</string>
+    <string name="local_osm_changes_backup_failed">Varnostna kopija sprememb za OSM ni uspela</string>
+    <string name="local_osm_changes_backup">Varnostna kopija sprememb za OSM</string>
+    <string name="destination_point">Cilj %1$s</string>
+    <string name="tip_recent_changes_1_4_t">"Spremembe v 1.4:
+\n\t* Optimalno razvrščanje točk za obisk vseh (potujoči prodajalec, od vrat do vrat)\n\t* Iskanje ulice po imenu (v okolici)
+\n\t* Vtičnik za načrtovanje (nalaganje/urejanje/shranjevanje GPX sledi)\n\t* Nov zaslon za prenos (prenos v ozadju)\n\t* Podpora za GPX pod-mape (za urejene GPX sledi)
+\n\t* Brisanje SRTM datotek
+\n\t* Podpora OSM opomb "</string>
+    <string name="intermediate_items_sort_by_distance">Razvrščanje (od vrat do vrat)</string>
+    <string name="osmand_distance_planning_plugin_description">Ustvarite poti (ali uporabite/spremenite obstoječe GPX datoteke) za merjenje razdalj med točkami. Shrani kot GPX se lahko uporabi za načrtovanje GPX poti.</string>
+    <string name="osmand_distance_planning_plugin_name">Računanje razdalj in Orodje za načrtovanje</string>
+    <string name="distance_measurement_finish_subtrack">Začni novo pod-sled</string>
+    <string name="wait_current_task_finished">Počakajte, da je trenutna naloga končana</string>
+    <string name="use_kalman_filter_compass_descr">Uporaba Kalmanovega filtra za preprečevanje odstopanj kompasa</string>
+    <string name="use_kalman_filter_compass">Uporabi Kalmanov filter</string>
+    <string name="access_mark_final_location_first">Način dostopnosti: prosim, najprej izberite cilj</string> 
+    <string name="use_magnetic_sensor_descr">Namesto senzorja usmerjenosti, za določanje vrednosti kompasa uporabljaj magnetni senzor</string>
+    <string name="cancel_route">Opusti pot</string>
+    <string name="monitoring_settings_descr">Določite, kako lahko snemate potovanja in omogočite način v pripravljenosti</string>
+    <string name="osmand_monitoring_plugin_description">Omogoči sledenje in navigacijo v načinu pripravljenosti (izklopljen zaslon) preko rednega zbujanja GPS naprave. Pokaže nastavitve, ki omogočajo snemanje potovanj v lokalne GPX datoteke ali na splet z uporabo spletnih storitev.</string>
+    <string name="choose_osmand_theme_descr">Izbira teme programa</string>
+    <string name="choose_osmand_theme">Tema aplikacije</string>
+    <string name="accessibility_options">Možnosti dostopnosti</string>
+    <string name="local_indexes_cat_srtm">Podatki izohips</string>
+    <string name="downloading_file_new">"Prenašanje "</string>
+	<string name="use_distance_measurement_help">* Pritisnite za označitev točke.\n * Pritisnite in držite na zemljevidu za brisanje prejšnje točke.\n * Pritisnite in držite na točki za ogled ali dodajanje opisa.\n * Kliknite na vtičnik za meritve za prikaz več dejanj.</string>
     </resources>
