@@ -805,8 +805,7 @@ public class MapActivityActions implements DialogProvider {
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, targets.getIntermediatePoints().size());
 					int sz = targets.getIntermediatePoints().size();
 					// TODO: enhance next statement to transmit getSelectedObjectName for clicked objects like favorites instead of just coordinates
-					//settings.insertIntermediatePoint(latitude, longitude, getString(R.string.point_on_map, latitude, longitude), sz, false);
-					settings.insertIntermediatePoint(latitude, longitude, "x", sz, false);  //$NON-NLS-1$
+					settings.insertIntermediatePoint(latitude, longitude, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude), sz, false);
 					targets.updatePointsFromSettings();
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				// For button-less search UI
@@ -814,8 +813,7 @@ public class MapActivityActions implements DialogProvider {
 					// Issue 1929: Consistently show IntermediatePointDialog, without subsequent Directions screen
 					//targets.navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					// TODO: enhance next statement to transmit getSelectedObjectName for clicked objects like favorites instead of just coordinates
-					//settings.setPointToNavigate(latitude, longitude, false, getString(R.string.point_on_map, latitude, longitude));
-					settings.setPointToNavigate(latitude, longitude, false, "z"); //$NON-NLS-1$
+					settings.setPointToNavigate(latitude, longitude, false, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude));
 					targets.updatePointsFromSettings();
 					IntermediatePointsDialog.openIntermediatePointsDialog(mapActivity);
 				} else if (standardId == R.string.context_menu_item_share_location) {
