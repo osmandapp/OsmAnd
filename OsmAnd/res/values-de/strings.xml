@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -1462,4 +1462,5 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="distance_measurement_finish_editing">Messung beenden</string>
     <string name="distance_measurement_finish_subtrack">Weitere Messung anlegen</string>
     <string name="please_select_address">Zuerst Stadt oder Straße auswählen</string>
+    <string name="destination_point">Ziel %1$s</string>
     </resources>
