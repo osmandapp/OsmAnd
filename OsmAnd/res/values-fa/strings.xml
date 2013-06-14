@@ -549,8 +549,8 @@
 	<string name="poi_search_desc">جستجوی POI (نقاط مورد علاقه)</string>
 	<string name="poi_dialog_comment_default">تغییر POI</string>
 	<string name="default_buttons_commit">اجرا</string>
-	<string name="download_srtm_maps">خطوط همتراز</string>
-    <string name="srtm_plugin_name">افزونه خطوط همتراز</string>
+	<string name="download_srtm_maps">منحنی های همتراز</string>
+    <string name="srtm_plugin_name">افزونه منحنی های همتراز</string>
     <string name="index_srtm_ele">خطوط همتراز</string>
     <string name="download_roads_only_item">فقط جاده ها</string>
     <string name="rendering_attr_noAdminboundaries_description">عدم نمایش مرزهای محلی (در سطح ۵-۹)</string>
@@ -558,7 +558,7 @@
     <string name="osmodroid_plugin_description">OsMoDroid افزونه ای برای OsmAnd است که قابلیتهای مسیریابی آنلاین دارد.اطلاعات درباره این سرویس در وبسایت http://esya.ru موجود است.</string>
     <string name="osmodroid_plugin_name">افزونه OsMoDroid</string>
 	<string name="tip_altitude_offset">نمایش ارتفاع- تصحیح مقدار جابجایی</string>
-	<string name="tip_altitude_offset_t">\tبیشتر دستگاههای GPS مقدار ارتفاع را براساس سیستم مرجع WGS84 هذلولی نشان میدهند که تبدیل آن به سیستمهای مورد استفاده محلی نیازمند تصحیح موقعیت میباشد.\n\tیک مقدار تقریب بهتر به این سیستم محلی مرجع EGM96 میباشد. OsmAnd نیز از نمایش خودکار ارتفاع در سیستم EGM96 پشتیبانی میکند.\n\tبرای رسیدن به این منظور، فایل WW15MGH.DAC را براحتی از طریق مدیریت داده ها دانلود کنید (منبع اصلی http://earthinfo.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC میباشد).</string>
+	<string name="tip_altitude_offset_t">"\tبیشتر دستگاههای GPS مقدار ارتفاع را براساس سیستم مرجع WGS84 هذلولی نشان میدهند که تبدیل آن به سیستمهای مورد استفاده محلی نیازمند تصحیح موقعیت میباشد.\n\tیک مقدار تقریب بهتر به این سیستم محلی مرجع EGM96 میباشد. OsmAnd نیز از نمایش خودکار ارتفاع در سیستم EGM96 پشتیبانی میکند.\n\tبرای رسیدن به این منظور، فایل WW15MGH.DAC را براحتی از طریق مدیریت داده ها دانلود کنید (منبع اصلی http://earthinfo.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC میباشد). "</string>
     <string name="route_descr_from_to">از: %1$s\nبه: %2$s</string>
     <string name="route_descr_from_to_via">از: %1$s\nاز طریق: %2$s\nبه: %3$s</string>
     <string name="incremental_search_city">جستجوی یک به یک شهر</string>
@@ -587,4 +587,28 @@
 	<string name="tip_update_index">به روز رسانی داده های آفلاین</string>
 	<string name="tip_update_index_t">"\tداشتن نقشه های به روز الزامی است. OsmAnd یک سیستم مدیریت داده دارد که بوسیله آن میتوان در داده های به روز آفلاین جستجو کرد.\n\tبرای بررسی آپدیتها به \'تنظیمات\'-&gt;\'مدیریت داده ها\'-&gt;\'دانلود داده های آفلاین\' بروید. پس از بازیابی لیست نواحی از اینترنت میتوانید با انتخاب \'منو\'-&gt;\'فیلتر دانلود شده ها\' فقط داده هایی که روی دستگاه شما موجود است را ببینید.\n\tمدخل \'سبز\' رنگ نشاندهنده این است که فایلهای داده بر روی سرور و دستگاه شما یکی هستند.\n\tمدخل \'آبی\' رنگ نشاندهنده این است که به روزرسانی بر روی سرور وجود دارد\n\tمدخل با حروف کج نشاندهنده داده های غیرفعال شده برروی  دستگاه شما میباشد"</string>
 	<string name="filterpoi_activity">ایجاد فیلتر POI</string>
-	</resources>
+	<string name="osmand_distance_planning_plugin_name">مسافت سنج و ابزار برنامه ریزی</string>
+    <string name="distance_measurement_finish_subtrack">شروع مسیر جدید</string>
+    <string name="use_kalman_filter_compass_descr">از فیلتر Kalman استفاده کنید تا از اغتشاشات قطب نما پرهیز شود</string>
+    <string name="monitoring_settings">سرویسهای ثبت و حالت Sleep mode</string>
+    <string name="monitoring_settings_descr">تنظیم کنید چگونه مسافرت را ضبط کنید و حالت Sleep mode را فعال کنید</string>
+    <string name="osmand_monitoring_plugin_name">سرویسهای ثبت و حالت Sleep mode</string>
+    <string name="default_buttons_other_actions">کارهای دیگر</string>
+    <string name="save_current_track_widget">ذخیره\nمسیر GPX فعلی</string>
+	<string name="prefer_motorways">ترجیح دادن اتوبانها</string>
+	<string name="prefer_in_routing_descr">ترجیح دادن اتوبانها</string>
+    <string name="local_indexes_cat_srtm">داده های منحنی های همتراز</string>
+    <string name="precise_routing_mode_descr">مسیریابی دقیق را فعال کنید تا مسیرها دقیق و بدون اشکال محاسبه شوند. این حالت به فاصله بستگی دارد و از توابع کتابخانه ای بومی استفاده نمیکند.</string>
+    <string name="recording_context_menu_show">نشان بده</string>
+    <string name="av_def_action_picture">گرفتن عکس</string>
+    <string name="recording_context_menu_precord">گرفتن عکس</string>
+    <string name="dropbox_plugin_description">افزونه DropBox به شما اجازه میدهد تا مسیرها و یادداشتهای صوتی/تصویری با حساب dropbox شما همزمان شود.</string>
+    <string name="srtm_paid_version_msg">درنظر داشته باشید تا افزونه منحنی های همتراز را از مارکت خریداری کنید تا به توسعه بیشتر نرم افزار کمک کنید.</string>
+    <string name="srtm_paid_version_title">افزونه منحنی های همتراز</string>
+    <string name="av_widget_action_descr">انتخاب عملکرد پیشفرض ویجت</string>
+    <string name="recording_is_recorded">صدا/تصویر در حال ضبط میباشد. برای متوقف کردن آن ویجت AV را بزنید.</string>
+    <string name="recording_playing">صدایی از ضبط مورد نظر درحال پخش میباشد.\n%1$s</string>
+    <string name="recording_delete_confirm">آیا میخواهید این مورد ضبط شده را پاک کنید؟</string>
+    <string name="recording_description">ضبط %1$s%2$ s از %3$s</string>
+    <string name="osmand_srtm_short_description_80_chars">افزونه OsmAnd برای منحنی های همتراز آفلاین</string>
+    </resources>
