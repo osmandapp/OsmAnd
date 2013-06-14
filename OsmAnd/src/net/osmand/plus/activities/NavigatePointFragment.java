@@ -12,7 +12,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
-import net.osmand.plus.routing.routingHelper;
 import net.osmand.util.MapUtils;
 import android.content.Intent;
 import android.location.Location;
@@ -257,14 +256,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
 			TargetPointsHelper targetPointsHelper = ((OsmandApplication) getActivity().getApplication()).getTargetPointsHelper();
 			if (mode == NAVIGATE_TO) {
-				//targetPointsHelper.setSingleDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
-				//Do not delete waypoints here
-				app.getSettings().setPointToNavigate(lat, lon, false, getString(R.string.point_on_map, lat, lon));
-				targetPointsHelper.updatePointsFromSettings();
-				// always enable and follow and let calculate it (GPS is not accessible in garage)
-				if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
-					MapActivityActions.getDirections(null, new LatLon(lat, lon), true);
-				}
+				//TODO: Do not delete waypoints here!
+				targetPointsHelper.setSingleDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));

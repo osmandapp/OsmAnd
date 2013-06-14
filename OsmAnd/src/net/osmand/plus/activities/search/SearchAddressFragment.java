@@ -13,7 +13,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.resources.RegionAddressRepository;
-import net.osmand.plus.routing.routingHelper;
 import net.osmand.util.Algorithms;
 import android.content.Intent;
 import android.os.Bundle;
@@ -295,14 +294,8 @@ public class SearchAddressFragment extends SherlockFragment {
 			OsmandApplication ctx = (OsmandApplication) getActivity().getApplication();
 			final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 			if (mode == NAVIGATE_TO) {
-				//targetPointsHelper.setSingleDestination(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
-				//Do not delete waypoints here
-				osmandSettings.setPointToNavigate(searchPoint.getLatitude(), searchPoint.getLongitude(), false, historyName);
-				targetPointsHelper.updatePointsFromSettings();
-				// always enable and follow and let calculate it (GPS is not accessible in garage)
-				if(!routingHelper.isRouteBeingCalculated() && !routingHelper.isRouteCalculated() ) {
-					MapActivityActions.getDirections(null, new LatLon(lat, lon), true);
-				}
+				//TODO: Do not delete waypoints here!
+				targetPointsHelper.setSingleDestination(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
