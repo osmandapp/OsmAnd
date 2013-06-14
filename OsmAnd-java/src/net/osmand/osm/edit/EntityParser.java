@@ -95,7 +95,7 @@ public class EntityParser {
 					siteUrl = entity.getTag(OSMTagKey.CONTACT_WEBSITE);
 				}
 			}
-			if (siteUrl != null && !siteUrl.startsWith("http://")) {
+			if (siteUrl != null && !siteUrl.startsWith("http://") && !siteUrl.startsWith("https://")) {
 				siteUrl = "http://" + siteUrl;
 			}
 		}
