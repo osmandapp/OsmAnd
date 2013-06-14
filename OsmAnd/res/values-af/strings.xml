@@ -1195,4 +1195,11 @@
     <string name="distance_measurement_clear_route">Verwyder all punte</string>
     <string name="distance_measurement_save_gpx">Berg as GPX</string>
     <string name="distance_measurement_load_gpx">Maak bestaande GPX oop</string>
+    <string name="tip_recent_changes_1_4_t">"Veranderings in 1.4:
+\n\t* Sorteer punte optimaal om almal te besoek (Reisende verkoopsman, deur-tot-deur)
+\n\t* Soek straat met naam (in omgewing)
+\n\t* Beplanningsgebruikswyse inlasmodule (laai/redigeer/berg GPX spore)
+\n\t* Nuwe aflaai skerm (aflaai in agtergrond)
+\n\t* Ondersteun GPX sub-lêers (organiseer jou GPX spore)
+\n\t* Verwyder SRTM lêers\n\t* Ondersteun OSM Notas "</string>
     </resources>
