@@ -653,4 +653,5 @@
 	<string name="fast_route_mode_descr">"فعال سازی محاسبه مسیر سریعتر یا غیر فعال سازی آن برای مسیر کوتاه تر "</string>
 	<string name="context_menu_item_download_map">دانلود نقشه</string>
 	<string name="select_max_zoom_preload_area">انتخاب حداکثر میزان بزرگنمایی برای پیش فرض</string>
+	<string name="show_point_options">استفاده از مکان به عنوان…</string>
 	</resources>
