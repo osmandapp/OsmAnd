@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="context_menu_item_destination_point">Als Ziel wählen</string>
 	<string name="layer_hillshade">Relief Overlay</string>
@@ -1273,7 +1273,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="map_widget_transparent">Transparentes Layout</string>
 	<string name="monitoring_mode_off">GPX-Track\n aufnehmen</string>
 	<string name="monitoring_mode_on">GPX-Aufnahme\n  stoppen</string>
-	<string name="bg_service_sleep_mode_off">Schlafmodus\n einchalten</string>
+	<string name="bg_service_sleep_mode_off">Schlafmodus\n einschalten</string>
 	<string name="bg_service_sleep_mode_on">Schlafmodus\n ausschalten</string>
 	<string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
 	<string name="int_continuosly">Kontinuierlich</string>
