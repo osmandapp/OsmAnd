@@ -1,1 +1,3 @@
-.metadata
+*.render.xml
+routing*.xml
+countries.reginfo

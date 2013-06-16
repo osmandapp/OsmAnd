@@ -25,8 +25,28 @@
 		<delete dir="${bin.absolute.dir}"/>
 		<delete file="OsmAnd-core.jar"/>
 	</target>
+	
 
-	<target name="compile" depends="-dirs">
+	<target name="copy_resources">
+		<copy todir="${src.absolute.dir}/net/osmand/router/">
+			<fileset dir="../../resources/routing/" >
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${src.absolute.dir}/net/osmand/render/">
+			<fileset dir="../../resources/rendering_styles/" >
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${src.absolute.dir}/net/osmand/map/">
+			<fileset dir="../../resources/countries-info/" >
+				<include name="countries.reginfo"/>
+			</fileset>
+		</copy>
+	</target>
+
+
+	<target name="compile" depends="-dirs,copy_resources">
 		<copy todir="${bin.absolute.dir}">
 			<fileset dir="${src.absolute.dir}">
 				<exclude name="**/*.java" />

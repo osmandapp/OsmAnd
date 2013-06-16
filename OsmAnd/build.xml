@@ -5,16 +5,6 @@
 	<property file="ant.properties" />
 	<loadproperties srcFile="project.properties" />
 
-	<target name="copy_resources">
-		<copy todir="assets">
-			<fileset dir="../../resources/" >
-				<include name="specialphrases/**"/>
-				<include name="voice/**"/>
-			</fileset>
-		</copy>
-	</target>
-
-
 	<!-- quick check on sdk.dir -->
 	<fail
             message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
@@ -25,6 +15,31 @@
 	<property name="use.absolute.dir" location="${use.dir}" />
 	<property name="raw.absolute.dir" location="raw" />
 	<property name="base.dir" location="." />
+
+
+	<target name="copy_resources">
+		<copy todir="assets">
+			<fileset dir="../../resources/" >
+				<include name="specialphrases/**"/>
+				<include name="voice/**"/>
+			</fileset>
+		</copy>
+		<copy todir="${use.absolute.dir}/net/osmand/router/">
+			<fileset dir="../../resources/routing/" >
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${use.absolute.dir}/net/osmand/render/">
+			<fileset dir="../../resources/rendering_styles/" >
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${use.absolute.dir}/net/osmand/map/">
+			<fileset dir="../../resources/countries-info/" >
+				<include name="countries.reginfo"/>
+			</fileset>
+		</copy>
+	</target>
 
 
 	<!-- Puts the project's resources into the output package file
