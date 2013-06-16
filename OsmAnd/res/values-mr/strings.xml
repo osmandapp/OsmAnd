@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
@@ -59,7 +59,7 @@
   <string name="oclock">o\'clock</string>
   <string name="towards">towards</string>
   <string name="accuracy">अचूकता</string>
-  <string name="altitude">Altitude</string>
+  <string name="altitude">उंची</string>
   <string name="no_info">काहि माहिती नाही</string>
   <string name="direction_style_sidewise">बाजूप्रमाणे (८ भाग)</string>
   <string name="direction_style_clockwise">घड्याळासारखे (१२ भाग)</string>
@@ -133,7 +133,7 @@
   <string name="favourites_edit_dialog_category">वर्गीकरण</string>
   <string name="vector_map_not_needed">नाही, धन्यवाद</string>
   <string name="local_index_descr_title">ऑफलाइन डेटा मॅनेजर</string>
-  <string name="local_index_download">डाउनलोड…</string>
+  <string name="local_index_download">डाउनलोड</string>
   <string name="local_index_poi_data">पिओआय डेटा</string>
   <string name="search_offline_clear_search">नविन शोध</string>
   <string name="map_text_size_descr">नकाशावरील नावांसाठी अक्षरांचा आकार ठरवा</string>
