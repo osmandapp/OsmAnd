@@ -1,5 +1,7 @@
 bin/
 dist/
+assets/specialphrases/*
+assets/voice/*
 gen/
 local.properties
 raw/

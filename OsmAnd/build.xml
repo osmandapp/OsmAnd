@@ -5,6 +5,16 @@
 	<property file="ant.properties" />
 	<loadproperties srcFile="project.properties" />
 
+	<target name="copy_resources">
+		<copy todir="assets">
+			<fileset dir="../../resources/" >
+				<include name="specialphrases"/>
+				<include name="voice"/>
+			</fileset>
+		</copy>
+	</target>
+
+
 	<!-- quick check on sdk.dir -->
 	<fail
             message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
@@ -47,7 +57,7 @@
 	</target>
 
 	<!-- Extra target -->
-	<target name="-pre-build" depends="fix_apostrophe_issues">
+	<target name="-pre-build" depends="fix_apostrophe_issues, copy_resources">
 		<delete dir="${raw.absolute.dir}" verbose="${verbose}" />
 		<mkdir dir="${raw.absolute.dir}/classes" />
 		<copy todir="${raw.absolute.dir}">
@@ -218,7 +228,7 @@
 			<fileset dir="${source.absolute.dir}" includes="**/*.java"/>
 		</cpd>
 	</target>
-	
+
 	<target name="fix_apostrophe_issues">
 		<replace token="version='1.0'" value="version=&quot;1.0&quot;">
 			<fileset dir="res" includes="**/strings.xml"/>
@@ -226,7 +236,7 @@
 		<replace token="encoding='utf-8'" value="encoding=&quot;utf-8&quot;">
 			<fileset dir="res" includes="**/strings.xml"/>
 		</replace>
-		
+
 		<replaceregexp  match="([^\\])'" replace="\1\\\\'" flags="-g" byline="off">
 			<fileset dir="res" includes="**/strings.xml"/>
 		</replaceregexp>

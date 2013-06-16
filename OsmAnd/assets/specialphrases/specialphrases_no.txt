@@ -1,4 +1,0 @@
-
-aerodrome,Flyplass
-arts_centre,Kunstsenter
-atm,Minibank
