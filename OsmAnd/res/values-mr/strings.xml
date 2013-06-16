@@ -29,9 +29,9 @@
   <string name="accessibility_on">चालू</string>
   <string name="accessibility_off">बंद</string>
   <string name="backToMenu">पुन्हा मेनूकडे</string>
-  <string name="zoomOut">Zoom out</string>
-  <string name="zoomIn">Zoom in</string>
-  <string name="zoomIs">Zoom is</string>
+  <string name="zoomOut">झूम कमी करा</string>
+  <string name="zoomIn">झूम वाढवा</string>
+  <string name="zoomIs">झूम आहे</string>
   <string name="north">उत्तर</string>
   <string name="north_north_east">इशान्य-उत्तर</string>
   <string name="north_east">इशान्य</string>
@@ -56,8 +56,8 @@
   <string name="back_left">मागील डावा</string>
   <string name="left">डावा</string>
   <string name="front_left">पुढील डावा</string>
-  <string name="oclock">o\'clock</string>
-  <string name="towards">towards</string>
+  <string name="oclock">वाजता</string>
+  <string name="towards">कडे</string>
   <string name="accuracy">अचूकता</string>
   <string name="altitude">उंची</string>
   <string name="no_info">काहि माहिती नाही</string>
@@ -107,7 +107,7 @@
   <string name="city_type_city">शहर</string>
   <string name="file_can_not_be_renamed">फाइलचे नाव बदलू शकत नाही.</string>
   <string name="file_with_name_already_exists">ह्या नावाची फाइल आधीच अस्तित्वात आहे.</string>
-  <string name="gpx_navigation">GPX route</string>
+  <string name="gpx_navigation">जिपिएक्स राऊट</string>
   <string name="poi_filter_by_name">नावाने शोधा</string>
   <string name="local_index_mi_rename">नाव बदला</string>
   <string name="show_gpx_route">नकाशावर दाखवा</string>
@@ -357,4 +357,19 @@
     <string name="poi_filter_public_transport">सार्वजनिक परिवहन</string>
     <string name="poi_filter_entertainment">करमणूक</string>
     <string name="map_widget_appearance">इतर:</string>
-	</resources>
+	<string name="please_select_address">प्रथम शहर किंवा रस्ता निवडा</string>
+    <string name="plugin_distance_point_time">वेळ</string>
+    <string name="plugin_distance_point_hdop">अचूकपणा</string>
+    <string name="street_name">रस्ता</string>
+	<string name="hno">घर क्रमांक</string>
+    <string name="select_address_activity">पत्ता निवडा</string>
+    <string name="map_widget_gps_info">जिपिएस माहिती</string>
+    <string name="map_view">नकाशा</string>
+    <string name="prefer_in_routing_title">प्राधान्य…</string>
+	<string name="max_speed_none">काही नाही</string>
+    <string name="recording_context_menu_show">दाखवा</string>
+    <string name="av_def_action_picture">फोटो घ्या</string>
+    <string name="recording_context_menu_precord">फोटो घ्या</string>
+    <string name="av_def_action_video">विडिओ रेकॉर्ड करा</string>
+    <string name="av_def_action_audio">आवाज रेकॉर्ड करा</string>
+    </resources>
