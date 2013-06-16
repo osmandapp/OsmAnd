@@ -48,6 +48,19 @@ public class RegionCountry {
 		
 		return bld.toString();
 	}
+	
+	public String serializeFlatTilesArray(){
+		TIntArrayList tiles = calcAllTiles();
+		StringBuilder bld = new StringBuilder();
+		for (int i = 0; i < tiles.size(); i += 2) {
+			if (i > 0) {
+				bld.append(";");
+			}
+			bld.append(tiles.get(i)).append(" ").append(tiles.get(i + 1));
+		}
+		
+		return bld.toString();
+	}
 
 	
 	public void removeSingle(int x, int y) {
