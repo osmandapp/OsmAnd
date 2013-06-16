@@ -80,7 +80,6 @@
 	<!-- filter does not work for renderingConstant - the last one will be used, but better use separate depends Rendering style -->
 
 
-
 	<!-- roadColors="Modified Mapnik" -->
 	<renderingConstant name="motorwayRoadColor" value="#809bff"/>
 	<renderingConstant name="trunkRoadColor" value="#FF8095"/>
@@ -102,9 +101,9 @@
 		<renderingConstant name="tertiaryRoadColor" value="#ffff80"/>
 		-->
 
-
 	
-	<!-- RENDERER CONCEPT: Concept of what is Rendered at what Zoom Level (Dr. Hardy Mueller, 2011-06-26)
+	<!--
+	RENDERER CONCEPT: Concept of what is Rendered at what Zoom Level (Dr. Hardy Mueller, 2011-06-26)
 
 		The map rendering is aligned to "the typical map use" per zoom level (scale), to always produce a complete and dependable map (for travel/orienteering) at the lowest possible zoom, as follows:
 
@@ -124,6 +123,7 @@
 		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue). For best visibility: routeColor="#960000FF, gpxColor="#B400FFFF".
 	
 	-->
+
 	<!--
 	NIGHT VIEW CONCEPT: Main colors for night renderer, by Hardy Mueller, 2011-07-04:
 		Areas:
@@ -169,8 +169,7 @@
 		<!-- default line -->
 		<filter layer="-1" tag="" value="" order="10" objectType="2"/>
 		<filter tag="" value="" order="11" objectType="2"/>
-		
-		
+
 		<group>
 			<filter tag="railway" value="platform"/>
 			<filter tag="railway" value="station"/>
