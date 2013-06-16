@@ -104,32 +104,41 @@
 
 
 	<!--
-		All-Purpose Renderer (with attr="hmRendered" name="Show more map detail") (by Hardy Mueller), v023:
-		- some roads already rendered at lower zooms (travel/orienteering)
+	RENDERER CONCEPT: Concept of what is Rendered at what Zoom Level (Dr. Hardy Mueller, 2011-06-26)
+
+		The map rendering is aligned to "the typical map use" per zoom level (scale), to always produce a complete and dependable map (for travel/orienteering) at the lowest possible zoom, as follows:
+
+                 -----  ---------------------------------  -----------------
+		 Zoom
+		 Level  Typical Use                        Features Rendered
+                 -----  ---------------------------------  -----------------
+		 -  7   "Rough Region Level Overview"      Shows motorways, trunks, primary roads and city names
+		 - 11   "Country Road Atlas"               Secondary roads (already from zoom 9) and tertiary (already from zoom 10). Show large scale landuse like forest and residential areas (already from zoom 10). Also all town names (already from zoom 9) and now all other locality names. Shows mountain peaks for orientation
+		 - 12   "Detailed Country Road Atlas"      Add all other public highways like road, unclassified, residential. Add tracks including track-type, and foot and bike paths. Also tag mountain peaks. Note that from this zoom level on ALL roads/tracks/paths are displayed, so it gives RELIABLE TRAVEL OVERVIEW!
+		 - 13   "Regional Driving. Good Overview"  Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways. Include all area landuse.
+		 - 14   "Local Driving", also "Hiking Map"
+		 - 15   "City Driving"                     Display all details of interest for this
+		 - 16   "Walking", "City Tour"             Outline and tag buildings
+		 - 17   "Immediate orientation"            Building details, street corner details like traffic_signals, post_box, remaining POIs
+
 		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue). For best visibility: routeColor="#960000FF, gpxColor="#B400FFFF".
-		- map rendering is aligned to typical map use for all zoom levels (scales), to always give a complete and reliable map.
-		  Typical zoom level use (zX) and alignment of features displayed:
-		  - z7  = "Rough Region Level Overview": Shows motorways, trunks, primary roads and city names
-		  - z11 = "Country Road Atlas": Secondary roads (already from z9) and tertiary (already from z10). Show large scale landuse like forest and residential areas (already from z10). Also all town names (already from z9) and now all other locality names. Shows mountain peaks for orientation.
-		  - z12 = "Detailed Country Road Atlas": Add all other public highways like road, unclassified, residential. Add foot and bike tracks. Also tag mountain peaks.
-		  - z13 = "Regional Driving. Good Overview": Displays all driving as well as hiking connections. Show service, living street, pedestrian and footway highways. Include all area landuse.
-		  - z14 = "Local Driving, also Hiking Map"
-		  - z15 = "City Driving": Display all details of interest for this.
-		  - z16 = "Walking, City tour": Outline and tag buildings
-		  - z17 = Building details, street corner details.
-	--> 
+	-->
 
 	<!--
-		Main colors for night renderer (road brightness levels aligned with priority), by Hardy Mueller:
+	NIGHT VIEW CONCEPT: Main colors for night renderer, by Hardy Mueller, 2011-07-04:
+		Areas:
 		- default: 003333
 		- forest: 000034
 		- other open (non-forest) nature: 004333 (vegetation shaders replaced by 114433)
 		- water: 330099
 		- built-up areas: 66004B
 		- buildings: 560000
+		Roads:
+		- road brightness levels aligned with road priority
 		- 'white' roads: 9F9F9F to darken high density areas sufficiently
 		- leave other road colors like day, for easy recognition
-	--> 
+		- applied some additional road dimming for car profile night view (as roads are thicker)
+	-->
 
 	<!--
 		Currently available icons : aerodrome, airport, alpine_hut, atm, bank, bar, beach, bollard, bus_station, bus_stop_small, bus_stop,
