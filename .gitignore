@@ -1,3 +1,5 @@
 *.render.xml
 routing*.xml
 countries.reginfo
+h_*.png
+g_*.png
