@@ -8,8 +8,8 @@
 	<target name="copy_resources">
 		<copy todir="assets">
 			<fileset dir="../../resources/" >
-				<include name="specialphrases"/>
-				<include name="voice"/>
+				<include name="specialphrases/**"/>
+				<include name="voice/**"/>
 			</fileset>
 		</copy>
 	</target>
