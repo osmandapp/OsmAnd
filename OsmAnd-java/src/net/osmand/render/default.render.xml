@@ -103,15 +103,15 @@
 		-->
 
 
-	<!--
-	RENDERER CONCEPT: Concept of what is Rendered at what Zoom Level (Dr. Hardy Mueller, 2011-06-26)
+	
+	<!-- RENDERER CONCEPT: Concept of what is Rendered at what Zoom Level (Dr. Hardy Mueller, 2011-06-26)
 
 		The map rendering is aligned to "the typical map use" per zoom level (scale), to always produce a complete and dependable map (for travel/orienteering) at the lowest possible zoom, as follows:
 
-                 -----  ---------------------------------  -----------------
+                 *****  *********************************  *****************
 		 Zoom
 		 Level  Typical Use                        Features Rendered
-                 -----  ---------------------------------  -----------------
+                 *****  *********************************  *****************
 		 -  7   "Rough Region Level Overview"      Shows motorways, trunks, primary roads and city names
 		 - 11   "Country Road Atlas"               Secondary roads (already from zoom 9) and tertiary (already from zoom 10). Show large scale landuse like forest and residential areas (already from zoom 10). Also all town names (already from zoom 9) and now all other locality names. Shows mountain peaks for orientation
 		 - 12   "Detailed Country Road Atlas"      Add all other public highways like road, unclassified, residential. Add tracks including track-type, and foot and bike paths. Also tag mountain peaks. Note that from this zoom level on ALL roads/tracks/paths are displayed, so it gives RELIABLE TRAVEL OVERVIEW!
@@ -122,8 +122,8 @@
 		 - 17   "Immediate orientation"            Building details, street corner details like traffic_signals, post_box, remaining POIs
 
 		- roadColors="Road atlas style" scheme aligned with conventional road atlas, Saturation=50, Brightness=100, except trunk is considered special case of primary (same hue). For best visibility: routeColor="#960000FF, gpxColor="#B400FFFF".
+	
 	-->
-
 	<!--
 	NIGHT VIEW CONCEPT: Main colors for night renderer, by Hardy Mueller, 2011-07-04:
 		Areas:
