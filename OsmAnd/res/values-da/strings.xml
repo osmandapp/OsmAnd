@@ -107,7 +107,7 @@
     <string name="new_destination_point_dialog">Destination er allerede sat.</string>
     <string name="local_indexes_cat_av">Audio-/Videodata</string>
     <string name="stop_routing_confirm">Stop navigationen?</string>
-    <string name="clear_dest_confirm">Slet destinationspunkt?</string>
+    <string name="clear_dest_confirm">Slet destination (og rutepunkter)?</string>
     <string name="precise_routing_mode_descr">Aktiver nøjagtig ruteplanlægning for at beregne præcise ruter uden fejl. Meget begrænset af afstand og bruger ikke det indbyggede bibliotek.</string>
     <string name="precise_routing_mode">Nøjagtig ruteplanlægning (alfa)</string>
     <string name="recording_context_menu_show">Vis</string>
