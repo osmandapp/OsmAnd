@@ -1160,4 +1160,6 @@
     <string name="distance_measurement_save_gpx">Spara som GPX</string>
     <string name="distance_measurement_load_gpx">Öppna befintlig GPX</string>
     <string name="please_select_address">Välj stad eller gata först</string>
+    <string name="destination_point">Destination %1$s</string>
+    <string name="context_menu_item_destination_point">Ange som destination</string>
     </resources>
