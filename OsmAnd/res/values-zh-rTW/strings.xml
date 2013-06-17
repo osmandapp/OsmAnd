@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <!--
        Disclaimer : 
@@ -992,11 +992,11 @@
 	<string name="context_menu_item_update_map">更新地圖</string>
 	<string name="context_menu_item_open_bug">建立一個OSM錯誤</string>
 	<string name="context_menu_item_create_poi">建立一個景點</string>
-	<string name="default_buttons_yes">確定</string>
+	<string name="default_buttons_yes">是的</string>
 	<string name="default_buttons_cancel">取消</string>
 	<string name="default_buttons_apply">套用</string>
 	<string name="default_buttons_add">加入</string>
-	<string name="default_buttons_no">否</string>
+	<string name="default_buttons_no">不要</string>
 	<string name="add_favorite_dialog_top_text">輸入我的最愛點的名稱</string>
 	<string name="add_favorite_dialog_default_favourite_name">我的最愛</string>
 	<string name="add_favorite_dialog_favourite_added_template">我的最愛點 \'\'{0}\'\' 新增成功。</string>
@@ -1047,5 +1047,16 @@
 	<string name="edit_filter_create_message">篩選器{0} 已被建立</string>
 	<string name="default_buttons_selectall">選取全部</string>
 	<string name="email">電子郵件</string>
-<string name="save_current_track_widget"></string>
-	</resources>
+<string name="save_current_track_widget"/>
+	<string name="access_mark_final_location_first"/> 
+    <string name="files_limit"/>
+    <string name="recording_context_menu_vrecord">拍攝視訊記錄</string>
+    <string name="intermediate_items_sort_by_distance">排列(府到府)</string>
+    <string name="plugin_distance_point_time">時間</string>
+    <string name="plugin_distance_point_speed">速度</string>
+    <string name="plugin_distance_point_ele">高度</string>
+    <string name="gpx_file_name">GPX檔案名稱</string>
+    <string name="gpx_saved_sucessfully">GPX檔案已完全成功儲存到{0}</string>
+    <string name="osmand_distance_planning_plugin_description">建立測量點之間的距離路徑（或是利用/修改現有的GPX檔案）。另存為GPX，可以用來規劃GPX路線。</string>
+    <string name="osmand_distance_planning_plugin_name">距離計算器和規劃工具</string>
+    </resources>
