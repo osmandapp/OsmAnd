@@ -589,7 +589,7 @@
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
 <string name="tip_recent_changes_0_8_4_t">"Förändringar i 0.8.4 :\n\t*Några buggfixar\n\t*Kartan tappar inte bort positionslås efter avbrott "</string>
-    <string name="navigate_to">Ange som destination</string>
+    <string name="navigate_to">Navigera</string>
     <string name="context_menu_item_last_intermediate_point">Lägg till som sista waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Lägg till som första waypoint</string>
     <string name="add_as_last_destination_point">Lägg till som sista waypoint</string>
@@ -623,7 +623,7 @@
 	<string name="loading_builds">Laddar OsmAnd-byggen…</string>
 	<string name="select_build_to_install">Välj ett OsmAnd-bygge att installera</string>
 	<string name="contribution_activity">Särskild aktivitet för bidragsversionen</string>
-	<string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Söka på Market?</string>
+	<string name="gps_status_app_not_found">Appen GPS-status är inte installerad. Vill du söka på Play Butik?</string>
 	<string name="voice_is_not_available_msg">Röstvägledning är inte tillgänglig. Gå till inställningar, välj önskat röstdatapaket och hämta det.</string>
 	<string name="voice_is_not_available_title">Ingen röstvägledning vald</string>
 	<string name="daynight_mode_day">Dag</string>
@@ -841,7 +841,7 @@
 	<string name="close">Stäng</string>
 	<string name="loading_data">Laddar data…</string>
 	<string name="reading_indexes">Läser lokala data…</string>
-	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Söka på Market?</string>
+	<string name="zxing_barcode_scanner_not_found">Appen ZXing Barcode Scanner är inte installerad. Vill du söka på Play Butik?</string>
 	<string name="rendering_attr_roadColors_description">Välj färgschema för vägar:</string>
 	<string name="rendering_attr_roadColors_name">Färgschema för vägar</string>
     <string name="no_route">Ingen rutt</string>
