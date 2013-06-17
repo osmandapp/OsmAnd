@@ -376,7 +376,7 @@
 	<string name="index_name_voice">聲音包 (錄音的)</string>
 	<string name="index_name_tts_voice">聲音包 (TTS)</string>
 	<string name="amenity_type_wikiosm">維基百科 (離線)</string>
-	<string name="amenity_type_user_defined">User defined</string>
+	<string name="amenity_type_user_defined">使用者定義</string>
 	<string name="fav_export_confirmation">我的最愛已有上次匯出的檔，要取代它嗎？</string>
 	<string name="profile_settings">外觀詳細設定</string>
 	<string name="settings_preset">個人化設定</string>
@@ -433,7 +433,7 @@
 	<string name="auto_follow_route_never">永不</string>
 	<string name="auto_follow_route_navigation">導航時自動置中</string>
 	<string name="auto_follow_route_navigation_descr">只有在正在導航時，地圖才會自動置中。</string>
-	<string name="auto_follow_location_enabled">地圖自動置中</string>
+	<string name="auto_follow_location_enabled">使用地圖自動置中檢視</string>
 	<string name="pref_vector_rendering">向量圖描繪的特別選項</string>
 	<string name="pref_overlay">上層 / 下層</string>
 	<string name="pref_raster_map">地圖來源設定</string>
@@ -851,7 +851,7 @@
 	<string name="search_online_address">網路</string>
 	<string name="max_level_download_tile">線上最大比例尺</string>
 	<string name="max_level_download_tile_descr">選擇線上下載圖塊最大比例尺</string>
-	<string name="route_general_information">總距離%1$s、旅行時間 %2$d 小時 %3$d 分</string>
+	<string name="route_general_information">總距離%1$s、行駛時間 %2$d 小時 %3$d 分</string>
 	<string name="router_service_descr">選擇線上或離線的導航服務</string>
 	<string name="router_service">導航服務</string>
 	<string name="sd_dir_not_accessible">SD卡的儲存目錄不可使用</string>
@@ -1116,4 +1116,25 @@
     <string name="local_indexes_cat_av">音頻/視訊資料</string>
     <string name="stop_routing_confirm">您確定您要停止導航嗎？</string>
     <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含導航點)？</string>
+    <string name="precise_routing_mode">精確的路徑 (alpha)</string>
+    <string name="precise_routing_mode_descr">啟用精確的路徑去計算無差錯的準確路線。經由距離和不使用本機函式庫這是非常有限的。</string>
+    <string name="recording_context_menu_show">顯示</string>
+    <string name="recording_photo_description">照片 %1$s 的 %2$s</string>
+    <string name="av_def_action_picture">拍攝照片</string>
+    <string name="recording_context_menu_precord">拍攝照片</string>
+    <string name="dropbox_plugin_description">Dropbox 的外掛可以讓航跡和音頻/視訊記錄同步到您的 Dropbox帳戶。</string>
+    <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
+    <string name="animate_routing_using_gpx">您想使用現有的GPX檔案？</string>
+    <string name="intermediate_points_change_order">變動排列</string>
+    <string name="srtm_paid_version_msg">請考慮在商場上購買等高線外掛程式，以支持更進一步的開發。</string>
+    <string name="srtm_paid_version_title">等高線外掛程式</string>
+    <string name="av_def_action_choose">應需求選取</string>
+    <string name="av_def_action_video">錄取視訊</string>
+    <string name="av_def_action_audio">錄取音頻</string>
+    <string name="av_widget_action_descr">選擇預設小工具作用</string>
+    <string name="av_widget_action">預設小工具作用</string>
+    <string name="av_video_format_descr">選擇視訊格式</string>
+    <string name="av_video_format">視訊輸出格式</string>
+    <string name="tip_recent_changes_1_4_t">"在1.4的變更： ↵\n→* 排列導航點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)↵\n→* 按名稱搜尋街道(在附近一帶) ↵\n→* 規劃模式外掛程式(載入/編輯/儲存 GPX 航跡)↵\n→* 新的下載螢幕畫面(在背景下載) ↵\n→* 支援 GPX 子檔案夾(組成您的 GPX 航跡) ↵\n→* 刪除 SRTM 檔案 ↵\n→* 支援 OSM 記錄 "</string>
+    <string name="search_street_in_neighborhood_cities">在附近一帶的城市搜尋街道</string>
     </resources>
