@@ -1,3 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources>
-</resources>
+<string name="default_buttons_no">不要</string>
+    <string name="default_buttons_yes">是的</string>
+    <string name="osmand_app_not_found">OsmAnd 並未安裝</string>
+    <string name="parking_plugin_installed">OsmAnd 停車場外掛已安裝並且已在OsmAnd設定裡啟用。</string>
+<string name="app_name">OsmAnd 停車場</string>
+    </resources>
