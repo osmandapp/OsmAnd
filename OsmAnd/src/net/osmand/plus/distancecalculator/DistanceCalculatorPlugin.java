@@ -176,7 +176,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					case R.string.distance_measurement_finish_subtrack :
 						measurementPoints.add(new LinkedList<GPXUtilities.WptPt>()); break;
 					case R.string.distance_measurement_clear_route : 
-						measurementPoints.clear(); calculateDistance(); break;
+						distanceMeasurementMode = 0; measurementPoints.clear(); calculateDistance(); break;
 					case R.string.distance_measurement_save_gpx :
 						saveGpx(activity); break;
 					case R.string.distance_measurement_load_gpx :
