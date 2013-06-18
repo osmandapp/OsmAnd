@@ -67,7 +67,7 @@ public class OsmAndFormatter {
 			return MessageFormat.format("{0,number,#.##} " + ctx.getString(mainUnitStr), ((float) meters) / mainUnitInMeters); //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-				return ((int) meters + 0.5) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+				return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_FOOTS) {
 				int foots = (int) (meters * FOOTS_IN_ONE_METER + 0.5);
 				return foots + " " + ctx.getString(R.string.foot); //$NON-NLS-1$
@@ -75,7 +75,7 @@ public class OsmAndFormatter {
 				int yards = (int) (meters * YARDS_IN_ONE_METER + 0.5);
 				return yards + " " + ctx.getString(R.string.yard); //$NON-NLS-1$
 			}
-			return ((int) meters + 0.5) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
+			return ((int) (meters + 0.5)) + " " + ctx.getString(R.string.m); //$NON-NLS-1$
 		}
 	}
 
@@ -83,7 +83,7 @@ public class OsmAndFormatter {
 		OsmandSettings settings = ctx.getSettings();
 		MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			return ((int) alt + 0.5) + " " + ctx.getString(R.string.m);
+			return ((int) (alt + 0.5)) + " " + ctx.getString(R.string.m);
 		} else {
 			return ((int) (alt * FOOTS_IN_ONE_METER + 0.5)) + " " + ctx.getString(R.string.foot);
 		}
