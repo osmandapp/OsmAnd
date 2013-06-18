@@ -851,7 +851,6 @@
   <string name="position_on_map">Žymeklio pozicija</string>
   <string name="show_view_angle_descr">Rodyti vaizdo krypties aprašymą</string>
   <string name="show_view_angle">Rodyti vaizdo kryptį</string>
-  <string name="navigate_to_point">Pasirinkti kaip tiksl.</string>
   <string name="map_view_3d_descr">Įjungti žemėlapio 3D rodinį</string>
   <string name="map_view_3d">Žemėlapio 3D rodinys</string>
   <string name="show_poi_over_map_description">Rodyti LV ant žemėlapio (pagal paskutinį naudotą filtrą)</string>

@@ -333,7 +333,6 @@
   <string name="position_on_map">Posição do marcador</string>
   <string name="show_view_angle_descr">Mostrar ângulo de visão baseado na bússola</string>
   <string name="show_view_angle">Mostrar ângulo de visão</string>
-  <string name="navigate_to_point">Marcar posição.</string>
   <string name="map_view_3d_descr">Ativar a visualização em 3D do mapa</string>
   <string name="map_view_3d">Visualização em 3D</string>
   <string name="show_poi_over_map_description">Mostrar POI no mapa (use o último filtro)</string>

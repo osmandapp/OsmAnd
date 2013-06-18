@@ -1119,7 +1119,6 @@
 	<string name="choose_city">Vælg by</string>
 	<string name="ChooseCountry">Vælg land</string>
 	<string name="show_view_angle">Vis synsretning</string>
-	<string name="navigate_to_point">Brug som dest.</string>
 	<string name="map_view_3d_descr">Aktiver 3D-visning af kortet</string>
 	<string name="map_view_3d">3D-kortvisning</string>
 	<string name="show_poi_over_map_description">Vis interessepunkt ovenpå kortet (brug det sidst valgte filter)</string>

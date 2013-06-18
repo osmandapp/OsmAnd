@@ -927,7 +927,6 @@
 	<string name="choose_city">Επιλέξτε πόλη</string>
 	<string name="ChooseCountry">Επιλέξτε χώρα</string>
 	<string name="show_view_angle">Εμφάνιση κατεύθυνσης οπτικής</string>
-	<string name="navigate_to_point">Ορισμός ως προορ.</string>
 	<string name="map_view_3d_descr">Ενεργοποίηση απεικόνισης 3Δ του χάρτη</string>
 	<string name="map_view_3d">Εμφάνιση χάρτη 3Δ</string>
 	<string name="show_poi_over_map_description">Εμφάνιση ΣΕ πάνω στο χάρτη (χρήση τελευταίου επιλεγμένου φίλτρου)</string>

@@ -1018,7 +1018,6 @@
 	<string name="use_english_names">Namn på engelska</string>
 	<string name="app_settings">Appinställningar</string>
 	<string name="search_address">Sök adress</string>
-	<string name="navigate_to_point">Ange som dest.</string>
 	<string name="map_view_3d_descr">Aktivera 3D-vy på kartan</string>
 	<string name="map_view_3d">3D-vy på kartan</string>
 	<string name="show_poi_over_map_description">Visa POI över karta (använd det senast valda filtret)</string>

@@ -549,7 +549,6 @@
   <string name="position_on_map">Znacznik pozycji</string>
   <string name="show_view_angle_descr">Dostosuj kierunek wyświetlania mapy do wskazań kompasu</string>
   <string name="show_view_angle">Pokaż kierunek wyświetlania</string>
-  <string name="navigate_to_point">Ustaw jako punkt docelowy</string>
   <string name="map_view_3d_descr">Włącz widok 3D mapy</string>
   <string name="map_view_3d">Widok 3D mapy</string>
   <string name="show_poi_over_map_description">Pokaż POI na mapie (użyj ostatnio wybranego filtru)</string>

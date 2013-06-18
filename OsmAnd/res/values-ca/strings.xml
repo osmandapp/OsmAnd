@@ -683,7 +683,6 @@
 <string name="save_current_track_descr">Guarda el seguiment actual a la SD ara</string>
 <string name="add_to_favourite">Afegeix a Preferits</string>
 <string name="ChooseCountry">Escull pais</string>
-<string name="navigate_to_point">Marcar com a dest.</string>
 <string name="choose_street">Escull carrer</string>
 <string name="choose_city">Escull ciutat</string>
 <string name="show_poi_over_map">Mostrar PDI</string>

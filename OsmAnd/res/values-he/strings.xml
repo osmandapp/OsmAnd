@@ -962,7 +962,6 @@
 	<string name="choose_city">נא לבחור בעיר</string>
 	<string name="ChooseCountry">נא לבחור במדינה</string>
 	<string name="show_view_angle">הצגת כיוון הצפייה</string>
-	<string name="navigate_to_point">הגדרה כיעד</string>
 	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה</string>
 	<string name="map_view_3d">הצגת המפה בתלת־ממד</string>
 	<string name="show_poi_over_map_description">הצגת נ״ע על גבי המפה (שימוש במסנן האחרון שנבחר)</string>

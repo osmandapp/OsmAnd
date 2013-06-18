@@ -644,7 +644,6 @@
   <string name="position_on_map">Marcatore della posizione</string>
   <string name="show_view_angle_descr">Visualizza aspetto della vista basato sulla bussola</string>
   <string name="show_view_angle">Visualizza direzione di osservazione</string>
-  <string name="navigate_to_point">Imposta come destinazione</string>
   <string name="map_view_3d_descr">Abilita la vista 3D della mappa</string>
   <string name="map_view_3d">Vista mappa 3D</string>
   <string name="show_poi_over_map_description">Visualizza POI sulla mappa (usa l\'ultimo filtro scelto)</string>

@@ -716,7 +716,6 @@
   <string name="position_on_map">პოზიციის მაჩვენებელი</string>
   <string name="show_view_angle_descr">ხედვის კუთხის რუკაზე ჩვენება</string>
   <string name="show_view_angle">ხედვის კუთხის ჩვენება</string>
-  <string name="navigate_to_point">დანიშნ. პუნქტად მონიშნვა.</string>
   <string name="map_view_3d_descr">რუკის 3D ხედვის ჩართვა</string>
   <string name="map_view_3d">რუკის 3D ხედვა</string>
   <string name="show_poi_over_map_description">POI-ის რუკაზე ჩვენება (ბოლოს არჩეული ფილტრის გამოყენებით)</string>
