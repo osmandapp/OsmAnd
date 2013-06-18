@@ -137,7 +137,7 @@ public class LocalIndexHelper {
 			int speedCount = 0;
 			double totalSpeedSum = 0;
 
-			float[] calculations = new float[1];
+			//float[] calculations = new float[1];
 
 			int points = 0;
 			for(int i = 0; i< result.tracks.size() ; i++){
@@ -175,10 +175,10 @@ public class LocalIndexHelper {
 									diffElevationDown -= diff;
 								}
 							}
-							//totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
-							// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) should be more exact, but likely makes no practical difference:
-							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
-							totalDistance += calculations[0];
+							totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+							// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) should be more exact, but makes little practical difference:
+							//net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+							//totalDistance += calculations[0];
 						}
 					}
 				}
