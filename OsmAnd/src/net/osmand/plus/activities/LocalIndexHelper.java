@@ -137,7 +137,7 @@ public class LocalIndexHelper {
 			int speedCount = 0;
 			double totalSpeedSum = 0;
 
-			private float[] calculations = new float[1];
+			float[] calculations = new float[1];
 
 			int points = 0;
 			for(int i = 0; i< result.tracks.size() ; i++){
