@@ -1256,7 +1256,7 @@ public class MapActivityActions implements DialogProvider {
 				if(onShow != null) {
 					onShow.onClick(v);
 				}
-				targetPointsHelper.setSingleDestination(location.getLatitude(), location.getLongitude(), name);
+				targetPointsHelper.setDestination(location.getLatitude(), location.getLongitude(), name);
 				MapActivity.launchMapActivityMoveToTop(activity);
 				qa.dismiss();
 			}

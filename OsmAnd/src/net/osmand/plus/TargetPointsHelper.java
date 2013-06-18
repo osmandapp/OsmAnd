@@ -190,8 +190,10 @@ public class TargetPointsHelper {
     }
 	
 	
-	public void setSingleDestination(double lat, double lon, String historyName) {
-		clearPointToNavigate(false);
+	public void setDestination(double lat, double lon, String historyName) {
+		//clearPointToNavigate(false);
+		// Do not delete waypoints here
+		settings.clearPointToNavigate();
 		settings.setPointToNavigate(lat, lon, true, historyName);
 		updatePointsFromSettings();
 		

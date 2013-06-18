@@ -294,8 +294,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			OsmandApplication ctx = (OsmandApplication) getActivity().getApplication();
 			final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
 			if (mode == NAVIGATE_TO) {
-				//TODO: Do not delete waypoints here!
-				targetPointsHelper.setSingleDestination(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
+				targetPointsHelper.setDestination(searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), searchPoint.getLatitude(), searchPoint.getLongitude(), historyName);

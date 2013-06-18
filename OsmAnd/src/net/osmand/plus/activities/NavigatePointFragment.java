@@ -256,8 +256,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
 			TargetPointsHelper targetPointsHelper = ((OsmandApplication) getActivity().getApplication()).getTargetPointsHelper();
 			if (mode == NAVIGATE_TO) {
-				//TODO: Do not delete waypoints here!
-				targetPointsHelper.setSingleDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
+				targetPointsHelper.setDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {
 				MapActivityActions.navigatePointDialogAndLaunchMap(getActivity(), lat, lon, getString(R.string.point_on_map, lat, lon));
