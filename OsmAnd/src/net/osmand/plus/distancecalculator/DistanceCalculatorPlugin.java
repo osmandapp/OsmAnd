@@ -130,7 +130,11 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 		if (distanceControl != null) {
 			String ds = distance;
 			if (ds == null) {
-				distanceControl.setText(app.getString(R.string.dist_control_start), "");
+				if(distanceMeasurementMode == 0) {
+					distanceControl.setText(app.getString(R.string.dist_control_start), "");
+				} else {
+					distanceControl.setText("0", ""); //$NON-NLS-1$
+				}
 			} else {
 				int ls = ds.lastIndexOf(' ');
 				if (ls == -1) {
