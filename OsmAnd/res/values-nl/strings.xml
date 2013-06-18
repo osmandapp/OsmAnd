@@ -767,6 +767,7 @@
   <string name="search_address_building_option">Gebouwen</string>
   <string name="search_address_street_option">Dwarsstraat</string>
   <string name="search_tabs_location">Locatie</string>
+  <string name="context_menu_item_navigate_point">Aanwijzingen</string>
   <string name="context_menu_item_add_favorite">Voeg toe aan favorieten</string>
   <string name="context_menu_item_update_map">Actualiseer kaart</string>
   <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
