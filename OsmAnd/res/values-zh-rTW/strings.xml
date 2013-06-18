@@ -9,38 +9,38 @@
          1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="rendering_attr_roadColors_description">選擇道路顏色樣式：</string>
-	<string name="rendering_attr_roadColors_name">道路顏色樣式</string>
+	<string name="rendering_attr_roadColors_description">選擇道路的色彩配置：</string>
+	<string name="rendering_attr_roadColors_name">道路的色彩配置</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
-    <string name="enable_plugin_monitoring_services">啟用位置追蹤元件</string>
-    <string name="non_optimal_route_calculation">過長的距離可能計算出非最佳路徑</string>
+    <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX記錄，網上追踪查詢)</string>
+    <string name="non_optimal_route_calculation">過遠的距離計算可能不是最佳的路線</string>
     <string name="tip_recent_changes_0_8_4_t">0.8.4更新 :
 	\n\t* 解決一些問題
     </string>
-	<string name="gps_not_available">使用這些設定請啟動GPS</string>
+	<string name="gps_not_available">請在設定中啟用 GPS</string>
 	<string name="map_widget_monitoring_services">記錄服務</string>
 	<string name="no_route">沒有路徑</string>
-	<string name="delete_target_point">刪除經由地</string>
-	<string name="target_point">經由地 %1$s</string>
-    <string name="intermediate_point">經由地%1$s</string>
+	<string name="delete_target_point">移除導航經過點</string>
+	<string name="target_point">導航經過點 %1$s</string>
+    <string name="intermediate_point">導航經過點 %1$s</string>
     <string name="navigate_to">設為目的地</string>
-    <string name="context_menu_item_last_intermediate_point">增為最後一個經由地</string>
-    <string name="context_menu_item_first_intermediate_point">增為第一個經由地</string>
-    <string name="add_as_last_destination_point">增為最後一個經由地</string>
-    <string name="add_as_first_destination_point">增為第一個經由地</string>
+    <string name="context_menu_item_last_intermediate_point">增為最後一個導航經過點</string>
+    <string name="context_menu_item_first_intermediate_point">增為第一個導航經過點</string>
+    <string name="add_as_last_destination_point">增為最後一個導航經過點</string>
+    <string name="add_as_first_destination_point">增為第一個導航經過點</string>
     <string name="replace_destination_point">替換目的地</string>
     <string name="new_destination_point_dialog">您已設過目的地</string>
-    <string name="target_points">經由地</string>
-    <string name="intermediate_point_too_far">經由地%1$離道路太遠</string>
+    <string name="target_points">導航經過點</string>
+    <string name="intermediate_point_too_far">導航經過點 %1$ 離最近的道路太遠</string>
     <string name="arrived_at_intermediate_point">已到達經由地</string>
-    <string name="context_menu_item_intermediate_point">增為經由地</string>
-    <string name="map_widget_intermediate_distance">經由地</string>
-    <string name="ending_point_too_far">目的地離道路太遠</string>
+    <string name="context_menu_item_intermediate_point">增為導航經過點</string>
+    <string name="map_widget_intermediate_distance">導航經過點</string>
+    <string name="ending_point_too_far">目的地離最近的道路太遠。</string>
     <string name="btn_add_tag">增加旗標</string>
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
     <string name="poi_filter_emergency">救助站</string>
-    <string name="poi_filter_public_transport">交通</string>
+    <string name="poi_filter_public_transport">公共交通</string>
     <string name="poi_filter_entertainment">娛樂</string>
     <string name="poi_filter_accomodation">住宿</string>
     <string name="poi_filter_restaurants">餐廳</string>
@@ -55,33 +55,11 @@
 	<string name="use_compass_navigation">使用電子羅盤</string>
 	<string name="avoid_motorway">避走高速公路</string>
 	<string name="auto_zoom_map_descr">依據車速地圖比例尺自動縮放</string>
-	<string name="auto_zoom_map">地圖自動縮放</string>
-	<string name="snap_to_road_descr">導航時車子位置自動粘路</string>
-	<string name="snap_to_road">自動粘路</string>
+	<string name="auto_zoom_map">自動縮放地圖</string>
+	<string name="snap_to_road_descr">導航過程中對齊道路位置</string>
+	<string name="snap_to_road">對齊道路</string>
 	<string name="osmand_short_description_80_chars">OsmAnd為可使用離線與上線地圖的開放程式碼導航軟體</string>
-	<string name="osmand_long_description_1000_chars">
-		OsmAnd (OSM Automated Navigation Directions)
-
-		OsmAnd為可使用全球的「開放街圖」(OSM)開放程式碼導航軟體。所有圖資(向量圖或網格圖)可存放於手機的記憶卡上，可作離線與上線圖資導航，包含左右轉指示的聲音導引。
-		主要功能：
-		- 完整離線功能 (存放下載的向量圖或網格圖)
-		- 全球離線向量圖資
-		- 直接由手機下載各國或區域圖資
-		- 可疊加多種圖層，如GPX、景點、我的最愛、等高線、車站…等
-		- 離線蒐尋地址、景點(POI)
-		- 離線尋找導航路徑
-		- 汽車、自行車、步行模式有下列選項：
-		-  自動日夜模式切換
-		-  依據速度自動地圖比例尺縮放
-		-  地圖正北朝上或前方朝上
-		-  車道導引、速限顯示、使用錄音或TTS語音
-
-		OsmAnd免費版限制:
-		- 地圖下載數量
-		- 不可使用離線維基百科的景點
-
-		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
-	</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd為可使用全球的「開放街圖」(OSM)開放程式碼導航軟體。所有圖資(向量圖或網格圖)可存放於手機的記憶卡上，可作離線與上線圖資導航，包含左右轉指示的聲音導引。 主要功能： - 完整離線功能 (存放下載的向量圖或網格圖) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加多種圖層，如GPX、景點、我的最愛、等高線、車站…等 - 離線蒐尋地址、景點(POI) - 離線尋找導航路徑 - 汽車、自行車、步行模式有下列選項： - 自動日夜模式切換 - 依據速度自動地圖比例尺縮放 - 地圖正北朝上或前方朝上 - 車道導引、速限顯示、使用錄音或TTS語音 OsmAnd免費版限制: - 地圖下載數量 - 不可使用離線維基百科的景點 ，OsmAnd正在積極開發和我們的專案並且它的更進一步發展依賴於財務的捐助，用以資助發展和實驗駕駛新功能。請考慮購買OsmAnd +，或資助具體的新功能或在 osmand.net 網站上一般捐贈。"</string>
 	<string name="osmand_plus_short_description_80_chars">OsmAnd為可使用離線與上線地圖的開放程式碼導航軟體</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ OsmAnd (OSM Automated Navigation Directions)
@@ -103,12 +81,12 @@
 	</string>
 	<string name="tip_update_index">離線資料更新</string>
 	<string name="tip_update_index_t">\t有最新的圖資是重要的。OsmAnd提供下載管理器可檢查可更新的離線資料。
-		\n\t檢查新版方法： \'設定\' -&gt; \'離線資料\' -&gt; \'下載離線資料\'。由網路取得區域列表後，你可按 \'表單\' -&gt; \'過濾已下載\' 過濾出已在你的裝置上的新版。
-		\n\t可用的新版以下述不同顏色表示：
-		\n\t\'綠色\' - 裝置與伺服器是相同的
-		\n\t\'藍色\' - 有伺服器有新版
-		\n\t\'深綠/深藍\' - 未使用在裝置上</string>
-	<string name="filterpoi_activity">產生景點篩選器</string>
+\n\t檢查新版方法： \'設定\' -&gt; \'資料管理\' -&gt; \'下載離線資料\'。由網路取得區域列表後，你可按 \'表單\' -&gt; \'過濾已下載\' 過濾出已在你的裝置上的新版。
+\n\t可用的新版以下述不同顏色表示：
+\n\t\'綠色\' - 表示裝置與伺服器是相同的
+\n\t\'藍色\' - 表示伺服器有更新的版本
+\n\t\'斜體字\' - 表示未在裝置上使用</string>
+	<string name="filterpoi_activity">產生景點篩選</string>
 	<string name="recalculate_route_to_your_location">交通模式：</string>
 	<string name="select_navigation_mode">選擇交通模式</string>
 	<string name="monitor_preferences">追蹤中</string>
@@ -117,19 +95,19 @@
 	<string name="map_widget_day_night">日/夜地圖</string>
 	<string name="map_widget_vector_attributes">繪圖屬性：</string>
 	<string name="map_widget_renderer">繪圖樣式</string>
-	<string name="live_monitoring_mode_off">啟動\n 活動追蹤</string>
-	<string name="live_monitoring_mode_on">停止\n 活動追蹤</string>
-	<string name="position_on_map_descr">在地圖上選定現在位置標記的位置</string>
-	<string name="position_on_map">現在位置標記</string>
+	<string name="live_monitoring_mode_off">啟動\n 線上追蹤</string>
+	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
+	<string name="position_on_map_descr">在地圖上選取所在地的位置標記</string>
+	<string name="position_on_map">位置標記</string>
 	<string name="layer_map_appearance">畫面設定…</string>
 	<string name="show_lanes">顯示車道數</string>
-	<string name="avoid_unpaved">避開碎石路</string>
+	<string name="avoid_unpaved">避開未鋪設路面</string>
 	<string name="avoid_ferries">避開渡輪</string>
 	<string name="avoid_in_routing_title">避開…</string>
-	<string name="avoid_in_routing_descr">避開收費路、碎石路、渡輪</string>
-	<string name="map_widget_fluorescent">螢光導航路徑</string>
+	<string name="avoid_in_routing_descr">避開收費路、未鋪設路、渡輪</string>
+	<string name="map_widget_fluorescent">螢光導航路線</string>
 	<string name="map_widget_show_ruler">比例尺</string>
-	<string name="map_widget_appearance">其它各項：</string>
+	<string name="map_widget_appearance">雜項：</string>
 	<string name="map_widget_view_direction">目視方向</string>
 	<string name="map_widget_transparent">透明面版</string>
 	<string name="monitoring_mode_off">啟動GPX記錄</string>
@@ -138,8 +116,8 @@
 	<string name="bg_service_sleep_mode_on">關閉\n  休眠模式</string>
 	<string name="gps_wakeup_interval">GPS喚醒間隔：%s</string>
 	<string name="int_continuosly">繼續</string>
-	<string name="screen_is_locked">按下鎖鈕以解開螢幕鎖</string>
-	<string name="map_widget_top_text">道路名</string>
+	<string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
+	<string name="map_widget_top_text">道路名稱</string>
 	<string name="map_widget_config">畫面設定</string>
 	<string name="map_widget_map_select">地圖來源</string>
 	<string name="map_widget_back_to_loc">現在位置</string>
@@ -153,36 +131,36 @@
 	<string name="map_widget_monitoring">GPX記錄中</string>
 	<string name="map_widget_speed">速度</string>
 	<string name="map_widget_distance">目地的</string>
-	<string name="map_widget_altitude">高程</string>
-	<string name="map_widget_time">時間</string>
+	<string name="map_widget_altitude">高度</string>
+	<string name="map_widget_time">剩餘時間</string>
 	<string name="map_widget_next_turn">下個轉彎</string>
-	<string name="map_widget_next_turn_small">下個轉彎 (小l)</string>
+	<string name="map_widget_next_turn_small">下個轉彎 (小)</string>
 	<string name="map_widget_next_next_turn">第二個轉彎</string>
-	<string name="map_widget_mini_route">迷你導航路徑圖</string>
+	<string name="map_widget_mini_route">迷你導航路線圖</string>
 	<string name="bg_service_screen_lock">鎖住螢幕</string>
 	<string name="bg_service_screen_unlock">解開螢幕</string>
 	<string name="bg_service_screen_lock_toast">螢幕已鎖</string>
-	<string name="bg_service_interval">設定喚醒時間：</string>
+	<string name="bg_service_interval">設定喚醒間隔：</string>
 	<string name="show_cameras">顯示測速照相</string>
 	<string name="show_traffic_warnings">顯示交通狀況提醒</string>
 	<string name="avoid_toll_roads">避開付費道路</string>
-	<string name="continue_follow_previous_route_auto">之前的導航未結束，要繼續嗎？ (%1$s 秒)</string>
-	<string name="route_updated_loc_found">定位時導航路徑將重新規劃</string>
+	<string name="continue_follow_previous_route_auto">先前的導航未完成。要按照它繼續嗎？ (%1$s 秒)</string>
+	<string name="route_updated_loc_found">一旦找到定位時導航路線將重新規劃</string>
 	<string name="osmand_parking_hours">小時</string>
 	<string name="osmand_parking_minutes">分鐘</string>
 	<string name="osmand_parking_position_description_add_time">你的愛車停在：</string>
 	<string name="select_animate_speedup">設定導航模擬速度</string>
     	<string name="global_app_allocated_memory_descr">已配置記憶體%1$s MB (Android限制%2$s MB, Dalvik %3$s MB)</string>
 	<string name="global_app_allocated_memory">已配置記憶</string>
-	<string name="native_app_allocated_memory">Native memory大小</string>
-	<string name="update_downlod_list">重載列表</string>
-	<string name="starting_point_too_far">出發位置離道路太遠</string>
+	<string name="native_app_allocated_memory">將Native memory總計</string>
+	<string name="update_downlod_list">重載入列表</string>
+	<string name="starting_point_too_far">出發點離最近的道路太遠</string>
 	<string name="shared_location">分享位置</string>
 	<string name="osmand_parking_event">由停車場取車</string>
-	<string name="osmand_parking_warning">通知</string>
-	<string name="osmand_parking_warning_text">取車通知已加到你的行事曆中，直到你手動刪除它。</string>    
+	<string name="osmand_parking_warning">警示</string>
+	<string name="osmand_parking_warning_text">取車通知先前已加到您的行事曆中。它會留在那裡直到您手動刪除它。</string>    
 	<string name="osmand_parking_time_limit_title">設定停車限時</string>
-	<string name="osmand_parking_delete_confirm">您要刪除停車位置嗎？</string>
+	<string name="osmand_parking_delete_confirm">您要移除停車位置嗎？</string>
 	<string name="osmand_parking_delete">刪除停車位置標記</string>
 	<string name="osmand_parking_choose_type">選擇停車場種類</string>
 	<string name="osmand_parking_lim_text">限時</string>
@@ -190,36 +168,36 @@
 	<string name="osmand_parking_add_event">增加一個通知到行事曆</string>
 	<string name="osmand_parking_time_limit">限時停車場</string>
 	<string name="osmand_parking_time_no_limit">非限時停車場</string>
-	<string name="osmand_parking_position_description">您停車的地點 %1$s</string>
+	<string name="osmand_parking_position_description">您停車的地點。 %1$s</string>
 	<string name="osmand_parking_position_description_add">取車地點：</string>
 	<string name="osmand_parking_pm">下午</string>
 	<string name="osmand_parking_am">上午</string>
 	<string name="osmand_parking_position_name">停車地點</string>
-	<string name="osmand_parking_plugin_description">該外掛元件可儲存您的愛車停車地點</string>
+	<string name="osmand_parking_plugin_description">該外掛元件可儲存您的愛車停車地點。</string>
 	<string name="osmand_parking_plugin_name">停車地點外掛元件</string>
 	<string name="context_menu_item_add_parking_point">標記為停車地點</string>
 	<string name="context_menu_item_delete_parking_point">刪除停車標記</string>
-	<string name="gpxup_public">公開的</string>
+	<string name="gpxup_public">公用的</string>
 	<string name="gpxup_identifiable">可識別的</string>
 	<string name="gpxup_trackable">可追蹤的</string>
 	<string name="gpxup_private">私人的</string>
 	<string name="asap">儘快</string>
-	<string name="save_route_as_gpx">將路徑存成GPX檔</string>
-	<string name="route_roundabout">圓環 在第%1$d出口出去</string>
+	<string name="save_route_as_gpx">將路線存成GPX檔</string>
+	<string name="route_roundabout">迴轉處：在第%1$d出口過去</string>
 	<string name="route_kl">靠左行走</string>
 	<string name="route_kr">靠右行走</string>
-	<string name="rendering_attr_noPolygons_description">使地圖上所有的區域性區塊變具透明性</string>
-	<string name="rendering_attr_noPolygons_name">不畫區塊</string>
-	<string name="rendering_attr_appMode_name">繪圖模式</string>
-	<string name="rendering_attr_appMode_description">地圖最佳化</string>
+	<string name="rendering_attr_noPolygons_description">讓地圖上所有的陸地區域特徵具透明性</string>
+	<string name="rendering_attr_noPolygons_name">隱藏多角形</string>
+	<string name="rendering_attr_appMode_name">繪製模式</string>
+	<string name="rendering_attr_appMode_description">為地圖最佳化</string>
 	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate SRTM-file may be needed.</string -->
-	<string name="rendering_attr_contourLines_description">開始顯示自地圖階層 (需SRTM檔)：</string>
+	<string name="rendering_attr_contourLines_description">顯示縮放階層 (需要輪廓資料)：</string>
 	<string name="rendering_attr_contourLines_name">顯示等高線</string>
 	<string name="rendering_attr_hmRendered_description">增加詳細地圖顯示資訊的量</string>
 	<string name="rendering_attr_hmRendered_name">顯示更多地圖細節</string>
-	<string name="local_index_routing_data">導航路徑資料</string>
+	<string name="local_index_routing_data">導航路線資料</string>
 	<string name="navigate_point_format">格式：</string>
-	<string name="poi_search_desc">景點查尋</string>
+	<string name="poi_search_desc">POI(景點)查尋</string>
 	<string name="address_search_desc">地址查尋</string>
 	<string name="navpoint_search_desc">座標查尋</string>
 	<string name="transport_search_desc">交通設施查尋</string>
@@ -229,14 +207,14 @@
 	<string name="left_side_navigation">左駕</string>
 	<string name="left_side_navigation_descr">選擇左駕的國家</string>
 	<string name="download_link_and_local_description">點選此處下載或更新離線資料\n按任何一項查看細節，按住即可解除或刪除。目前裝置上的資料(%1$s 免費)：</string>
-	<string name="unknown_from_location">出發地尚未確定</string>
+	<string name="unknown_from_location">出發地點尚未決定</string>
 	<string name="unknown_location">未知地理位置</string>
 	<string name="context_menu_item_directions">導航到此處</string>
 	<string name="modify_transparency">調整透明度(0 - 透明, 255 - 不透明)</string>
 	<string name="confirm_interrupt_download">您要中斷檔案下載嗎？</string>
-	<string name="first_time_msg">感謝您使用OsmAnd。一些功能需有一些地區性的離線資料，你可透過\'設定\' -&gt;  \'離線資料\'下載。之後您可瀏覽地圖、以地址定位、查尋景點與尋找共公交通設施。</string>    
-	<string name="basemap_was_selected_to_download">基本地圖是預設下載的，在某些特別的功能是必需的使用到</string>
-	<string name="select_index_file_to_download">找不到任何資料。若找不到你可自行製作(參考http://osmand.net)。</string>
+	<string name="first_time_msg">感謝您使用OsmAnd。對於此應用程式的許多功能，您需要一些區域性的離線資料，您可以透過\'設定\' -&gt; \'資料管理\'來下載。之後您可瀏覽地圖、地址定位、查尋景點以及尋找共公交通設施。</string>    
+	<string name="basemap_was_selected_to_download">基本地圖為某些特別的應用功能必需使用的並且預設為下載。</string>
+	<string name="select_index_file_to_download">找不到任何資料。如果您不能在您的區域找到，您可以自行製作(參考http://osmand.net)。</string>
 	<string name="local_indexes_cat_tile">線上網格地圖</string>
 	<string name="local_indexes_cat_map">離線地圖(向量地圖)</string>
 	<string name="gpx_index_settings_descr"> (包含GPX分析器)</string>
@@ -620,9 +598,9 @@
 	<string name="send_location_email_pattern">以網頁瀏覽器查看%1$s或用Andriod intent查看%2$s</string>
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
-	<string name="add_waypoint_dialog_added">經由地\'\'{0}\'\'已成功加入</string>
-	<string name="add_waypoint_dialog_title">增加一個經由地到GPX軌跡</string>
-	<string name="context_menu_item_add_waypoint">增加GPX經由地</string>
+	<string name="add_waypoint_dialog_added">導航經過點\'\'{0}\'\'已成功加入</string>
+	<string name="add_waypoint_dialog_title">增加一個導航經過點到GPX軌跡</string>
+	<string name="context_menu_item_add_waypoint">增加GPX導航經過點</string>
 	<string name="amenity_type_administrative">行政機關</string>
 	<string name="amenity_type_barrier">路障</string>
 	<string name="amenity_type_education">教育</string>
@@ -672,7 +650,7 @@
 	<string name="loading_builds_failed">檢索OsmAnd版本列表失敗</string>
 	<string name="loading_builds">下載OsmAnd …版</string>
 	<string name="select_build_to_install">選擇一版OsmAnd安裝 </string>
-	<string name="contribution_activity">捐助版的特別畫面</string>
+	<string name="contribution_activity">安裝的版本</string>
 	<string name="gps_status_app_not_found">GPS狀態工具未安裝，在到Play商店找嗎？</string>
 	<string name="voice_is_not_available_msg">語音導引無法使用。請到設定功能選喜歡的聲音資料且下載它。</string>
 	<string name="voice_is_not_available_title">未選定聲音導引</string>
@@ -959,7 +937,7 @@
 	<string name="search_activity">查尋</string>
 	<string name="searchpoi_activity">選擇景點</string>
 	<string name="search_POI_level_btn">查尋更多</string>
-	<string name="incremental_search_city">漸進式都市查尋。找鄉鎮/郵遞區號時輸入前3碼(或更多碼)</string>
+	<string name="incremental_search_city">漸進式城市查尋。</string>
 	<string name="incremental_search_street">漸進式道路查尋</string>
 	<string name="incremental_search_building">漸進式建物查尋</string>
 	<string name="choose_available_region">由列表選區域</string>
@@ -1059,8 +1037,8 @@
     <string name="gpx_saved_sucessfully">GPX檔案已完全成功儲存到{0}</string>
     <string name="osmand_distance_planning_plugin_description">建立測量點之間的距離路徑（或是利用/修改現有的GPX檔案）。另存為GPX，可以用來規劃GPX路線。</string>
     <string name="osmand_distance_planning_plugin_name">距離計算器和規劃工具</string>
-    <string name="local_osm_changes_backup_failed">備份OSM的變更失敗</string>
-    <string name="local_osm_changes_backup">備份OSM的變更</string>
+    <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
+    <string name="local_osm_changes_backup">備份 OSM 的變更</string>
     <string name="plugin_distance_point_hdop">精確度</string>
     <string name="use_distance_measurement_help">* 點選標記一個點。\n * 在地圖上按住去刪除先前的點。\n * 在點上按住以檢視並附加描述。\n * 在測量小工具上點擊可看到更多作用。</string>
     <string name="default_buttons_do_not_show_again">不要再顯示</string>
@@ -1070,9 +1048,9 @@
     <string name="distance_measurement_save_gpx">另存為GPX</string>
     <string name="distance_measurement_load_gpx">開啟現有的GPX</string>
     <string name="wait_current_task_finished">請等待目前的作業完成</string>
-    <string name="use_kalman_filter_compass_descr">使用Kalman過濾器，以避免羅盤的偏差</string>
+    <string name="use_kalman_filter_compass_descr">使用Kalman過濾器，以避免電子羅盤的偏差</string>
     <string name="use_kalman_filter_compass">使用Kalman過濾器</string>
-    <string name="use_magnetic_sensor_descr">使用磁性感測器來判斷羅盤的值，而不是定位感測器</string>
+    <string name="use_magnetic_sensor_descr">使用磁性感測器來判斷電子羅盤的值，而不是定位感測器</string>
     <string name="use_magnetic_sensor">使用磁性感測器</string>
     <string name="other_location">其它</string>
     <string name="install_paid">完整版</string>
@@ -1086,9 +1064,9 @@
     <string name="monitoring_settings_descr">組態如何記錄行駛和啟用休眠模式</string>
     <string name="osmand_monitoring_plugin_description">透過週期性地喚醒 GPS 裝置，在休眠模式(螢幕關閉)啟用追蹤和導航。顯示設定便於去記錄您的行程到當地的 GPX 檔案或在線上使用網路服務。</string>
     <string name="osmand_monitoring_plugin_name">日誌記錄服務及休眠模式</string>
-    <string name="choose_osmand_theme_descr">選擇應用程式主題</string>
+    <string name="choose_osmand_theme_descr">挑選應用程式主題</string>
     <string name="choose_osmand_theme">應用程式主題</string>
-    <string name="accessibility_options">協助工具選項</string>
+    <string name="accessibility_options">協助功能選項</string>
     <string name="select_address_activity">選取地址</string>
     <string name="favourites_list_activity">選取我的最愛</string>
     <string name="local_openstreetmap_act_title">OSM 修改</string>
@@ -1115,19 +1093,19 @@
     <string name="local_indexes_cat_srtm">等高線資料</string>
     <string name="local_indexes_cat_av">音頻/視訊資料</string>
     <string name="stop_routing_confirm">您確定您要停止導航嗎？</string>
-    <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含導航點)？</string>
+    <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含導航經過點)？</string>
     <string name="precise_routing_mode">精確的路徑 (alpha)</string>
     <string name="precise_routing_mode_descr">啟用精確的路徑去計算無差錯的準確路線。經由距離和不使用本機函式庫這是非常有限的。</string>
     <string name="recording_context_menu_show">顯示</string>
-    <string name="recording_photo_description">照片 %1$s 的 %2$s</string>
+    <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
     <string name="recording_context_menu_precord">拍攝照片</string>
     <string name="dropbox_plugin_description">Dropbox 的外掛可以讓航跡和音頻/視訊記錄同步到您的 Dropbox帳戶。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
     <string name="animate_routing_using_gpx">您想使用現有的GPX檔案？</string>
     <string name="intermediate_points_change_order">變動排列</string>
-    <string name="srtm_paid_version_msg">請考慮在商場上購買等高線外掛程式，以支持更進一步的開發。</string>
-    <string name="srtm_paid_version_title">等高線外掛程式</string>
+    <string name="srtm_paid_version_msg">請考慮在商場上購買等高線外掛元件，以支持更進一步的開發。</string>
+    <string name="srtm_paid_version_title">等高線外掛元件</string>
     <string name="av_def_action_choose">應需求選取</string>
     <string name="av_def_action_video">錄取視訊</string>
     <string name="av_def_action_audio">錄取音頻</string>
@@ -1135,6 +1113,75 @@
     <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">選擇視訊格式</string>
     <string name="av_video_format">視訊輸出格式</string>
-    <string name="tip_recent_changes_1_4_t">"在1.4的變更： ↵\n→* 排列導航點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)↵\n→* 按名稱搜尋街道(在附近一帶) ↵\n→* 規劃模式外掛程式(載入/編輯/儲存 GPX 航跡)↵\n→* 新的下載螢幕畫面(在背景下載) ↵\n→* 支援 GPX 子檔案夾(組成您的 GPX 航跡) ↵\n→* 刪除 SRTM 檔案 ↵\n→* 支援 OSM 記錄 "</string>
+    <string name="tip_recent_changes_1_4_t">"在1.4的變更： ↵\n→* 排列導航經過點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)↵\n→* 按名稱搜尋街道(在附近一帶) ↵\n→* 規劃模式外掛程式(載入/編輯/儲存 GPX 航跡)↵\n→* 新的下載螢幕畫面(在背景下載) ↵\n→* 支援 GPX 子檔案夾(組成您的 GPX 航跡) ↵\n→* 刪除 SRTM 檔案 ↵\n→* 支援 OSM 記錄 "</string>
     <string name="search_street_in_neighborhood_cities">在附近一帶的城市搜尋街道</string>
-    </resources>
+    <string name="av_settings_descr">組態音頻和視訊設定</string>
+    <string name="av_settings">"音頻/視訊設定 "</string>
+    <string name="recording_error">錄製途中發生錯誤</string>
+    <string name="recording_camera_not_available">相機失效</string>
+    <string name="recording_playing">從已指定的記錄開始播放音頻。\n%1$s</string>
+    <string name="recording_open_external_player">開啟外部播放</string>
+    <string name="recording_delete_confirm">您想移除此記錄嗎？</string>
+    <string name="recording_unavailable">無法使用</string>
+    <string name="recording_context_menu_arecord">錄取音頻記錄</string>
+    <string name="destination_point">目的地％1 $ S</string>
+    <string name="local_osm_changes_backup_successful">OSM 變更的檔案已成功的生成%1$s</string>
+    <string name="access_mark_final_location_first">協助功能模式：首先請選取目的地</string> 
+    <string name="av_use_external_recorder_descr">使用系統記錄於視訊</string>
+    <string name="av_use_external_recorder">使用系統記錄</string>
+    <string name="av_use_external_camera_descr">使用系統應用程式於照片</string>
+    <string name="av_use_external_camera">使用相機應用程式</string>
+    <string name="recording_is_recorded">音頻/視訊開始錄製。要停止按下AV小工具。</string>
+    <string name="recording_can_not_be_played">不能播放記錄</string>
+    <string name="recording_context_menu_delete">刪除記錄</string>
+    <string name="recording_context_menu_play">播放</string>
+    <string name="recording_description">錄製 %1$s %2$s 中的 %3$s</string>
+    <string name="recording_default_name">錄制中</string>
+    <string name="av_control_stop">停止</string>
+    <string name="av_control_start">開始</string>
+    <string name="map_widget_av_notes">音頻/視訊記錄</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd 外掛元件適用於離線等高線</string>
+    <string name="map_widget_distancemeasurement">測量距離</string>
+    <string name="monitoring_control_stop">停止</string>
+    <string name="map_widget_audionotes">音頻記錄</string>
+    <string name="audionotes_plugin_description">在行駛途中錄取音頻/視訊記錄</string>
+    <string name="audionotes_plugin_name">音頻/視訊記錄</string>
+    <string name="index_srtm_parts">部件</string>
+    <string name="index_srtm_ele">等高線</string>
+    <string name="srtm_plugin_name">等高線外掛元件</string>
+    <string name="download_select_map_types">其它地圖</string>
+    <string name="download_roads_only_item">僅道路</string>
+    <string name="download_srtm_maps">等高線</string>
+    <string name="download_regular_maps">正式地圖</string>
+    <string name="download_roads_only_maps">僅道路地圖</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">隱藏界限</string>
+	<string name="rendering_attr_noAdminboundaries_description">抑制顯示區域界限(管理級別5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid 外掛元件版本過舊並需要進行更新。</string>
+    <string name="osmodroid_plugin_name">OsMoDroid 外掛元件</string>
+	<string name="tip_altitude_offset">高度顯示 - 偏移校正</string>
+	<string name="map_widget_max_speed">速度限制</string>
+    <string name="route_descr_lat_lon">緯度 %1$.3f, 經度 %2$.3f</string>
+    <string name="route_descr_current_location">目前位置</string>
+    <string name="route_descr_from_to">從：%1$s\n到：%2$s</string>
+    <string name="route_descr_from_to_via">從：%1$s\n經：%2$s\n到：%3$s</string>
+    <string name="no_buildings_found">無建築物符合。</string>
+    <string name="search_villages_and_postcodes">搜尋城鎮/郵遞區號</string>
+	<string name="rendering_attr_showRoadMaps_description">選擇何時顯示僅有道路的地圖：</string>
+	<string name="rendering_attr_showRoadMaps_name">僅有道路的地圖</string>
+    <string name="safe_mode_description">應用程式執行在安全模式下(使用較慢的Android而非本機代碼)。</string>
+    <string name="safe_mode">安全模式</string>
+    <string name="native_library_not_running">應用程式在安全模式中執行(在設定裡停用它)。</string>
+    <string name="background_service_is_enabled_question">OsmAnd 睡眠模式服務仍在執行。您想要關閉它嗎？</string>
+    <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖與導航</string>
+	<string name="native_app_allocated_memory_descr">native memory 總計由應用程式 %1$ MB (Dalvik %2$ MB，其它 %3$ MB) 。Proportional memory %4$ MB (Android 限制 %5$ MB，Dalvik %6$ MB)分配佔用。</string>
+	<string name="context_menu_item_destination_point">設定為目的地</string>
+    <string name="please_select_address">首先選擇城市或街道</string>
+    <string name="available_downloads_left">還有 %1$d 檔案可下載</string>
+    <string name="close_changeset">關閉變更</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing 條碼掃描器應用程式未安裝。要在商場中的搜尋嗎？</string>
+	<string name="support_new_features_descr">捐贈後可在應用程式裡看到新的功能實現</string>
+	<string name="local_index_no_items_to_do">在 %1$s 沒有項目</string>
+	<string name="incomplete_locale">未完成</string>
+	</resources>
