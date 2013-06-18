@@ -15,7 +15,6 @@
   <string name="download_link_and_local_description">დააწკაპუნეთ გათიშული რეჟიმის მონაცემების ჩამოტვირთვა/ატვირთვისათვის.\nდააწკაპუნეთ არსებულ მონაცემს მეტი დეტალების მისაღებას. დააჭირეთ და გეჭიროთ მისი დეაქტივაციის ან წაშლისათვის. \nმიმდინარე მონაცემები მოწყობილობაზე (თავისუფალია %1$s):</string>
   <string name="unknown_from_location">საწყისი პოზიცია ნაპოვნი ჯერ არაა</string>
   <string name="unknown_location">პოზიცია უცნობია</string>
-  <string name="context_menu_item_directions">მიმართულება</string>
   <string name="modify_transparency">გამჭირვალობის შეცვლა (0 - გამჭირვალე, 255 - გაუმჭირვალე)</string>
   <string name="confirm_interrupt_download">გნებავთ ჩამოტვირთვის შეწყვეტა?</string>
   <string name="first_time_msg">პროგრამის მთავარი თვისებების გამოსაყენებლად თქვენ გჭირდებათ მონაცემები რომლებიც გამოიყენება გათიშულ რეჟიმში, რომელიც შეგიძლიათ ჩამოტვირთოთ (პარამეტრები-&gt;მონაცემები გათიშვისას). ამის შემდეგ თქვენ შეგეძლებათ ძებნა როგორც მისამართის, ასევე საჯარო ტრანსპორტის მიხედვით.</string>
@@ -243,7 +242,6 @@
   <string name="local_index_mi_rename">სახელის გადარქმევა</string>
   <string name="show_gpx_route">რუკაზე ჩვენება</string>
   <string name="poi_filter_nominatim">მიმდინარე POI-ს ძებნა სახელით</string>
-  <string name="search_select_point">არჩევა</string>
   <string name="search_position_current_location_search">მდებარეობის ძებნა…</string>
   <string name="search_position_current_location_found">მდებარეობა (ნაპოვნია)</string>
   <string name="search_position_address">მისამართი…</string>
@@ -699,7 +697,6 @@
   <string name="save_track_interval_descr">აირჩიეთ პოზიცირების ინტერვალი დევნისათვის</string>
   <string name="save_track_to_gpx_descrp">დევნები ჩაიწერება დევნის დასტაში, დალაგდება დღეების მიხედვით</string>
   <string name="save_track_to_gpx">დევნის GPX-ში ჟურნალირება</string>
-  <string name="navigate_to">დანიშნულების წერტილად დაყენება</string>
   <string name="update_tile">რუკის განახლება</string>
   <string name="reload_tile">ხელახალი ჩატვირთვა</string>
   <string name="mark_point">მიზანი</string>
@@ -770,7 +767,6 @@
   <string name="search_address_building_option">შენობა</string>
   <string name="search_address_street_option">მკვეთი ქუჩა</string>
   <string name="search_tabs_location">მდებარეობა</string>
-  <string name="context_menu_item_navigate_point">დანიშნულების წერტილად დაყენება</string>
   <string name="context_menu_item_add_favorite">რჩეულებში დამატება</string>
   <string name="context_menu_item_update_map">რუკის განახლება</string>
   <string name="context_menu_item_open_bug">OSM-ის შეცდომის რეპორტი</string>

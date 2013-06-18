@@ -1,11 +1,10 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_navigation_not_available">Offline nabigazioa zerbitzuz kanpo dago orain.</string>
   <string name="left_side_navigation">Trafikoa ezkerraldetik</string>
   <string name="left_side_navigation_descr">Trafikoa ezkerraldetik duten herrialdeentzako hautatu</string>
   <string name="download_link_and_local_description">Klikatu hemen offlineko datuak deskargatzeko edo eguneratzeko.\nKlikatu edozein elementu xehetasunak ikusteko, klikatu eta mantendu desaktibatzeko edo ezabatzeko. Oraingo datuak (%1$s libre):</string>
   <string name="unknown_from_location">Hasierako kokapena ez da zehaztu oraindik</string>
   <string name="unknown_location">Kokapen ezezaguna oraindik</string>
-  <string name="context_menu_item_directions">Jarraibideak hona</string>
   <string name="modify_transparency">Gardentasuna aldatu (0 - gardena, 255 - opaku)</string>
   <string name="confirm_interrupt_download">Deskarga bertan behera utzi nahi duzu?</string>
   <string name="first_time_msg">Aplikazioaren ezaugarri nagusiak erabiltzeko, zure herrialdearen lineaz kanpoko datuak behar dituzu, hemendik deskarga ditzakezu (Ezarpenak, Offline datuak). Ondoren, helbidearen arabera, Interes-Puntuak eta garraio publikoak bilatu ahal izango izango dituzu.</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Start\nlive tracking</string>
   <string name="live_monitoring_mode_on">Stop\nlive tracking</string>
   <string name="layer_map_appearance">Configureer scherm…</string>
@@ -229,7 +229,6 @@
   <string name="local_index_mi_rename">Hernoem</string>
   <string name="show_gpx_route">Toon op kaart</string>
   <string name="poi_filter_nominatim">Online (Nominatim)</string>
-  <string name="search_select_point">Selecteer</string>
   <string name="search_position_current_location">Huidige positie…</string>
   <string name="search_position_map_view">Laatste kaartweergave</string>
   <string name="select_search_position">Zoek in de buurt van:</string>
@@ -699,7 +698,6 @@
   <string name="save_track_interval_descr">Selecteer positioneringsinterval voor tracks</string>
   <string name="save_track_to_gpx_descrp">Tracks worden gegroepeerd per dag in de track directory opgeslagen</string>
   <string name="save_track_to_gpx">Log track naar GPX</string>
-  <string name="navigate_to">Zet als bestemming</string>
   <string name="update_tile">Actualiseer kaart</string>
   <string name="reload_tile">Herlaad kaartsegment</string>
   <string name="mark_point">Doel</string>
@@ -770,7 +768,6 @@
   <string name="search_address_building_option">Gebouwen</string>
   <string name="search_address_street_option">Dwarsstraat</string>
   <string name="search_tabs_location">Locatie</string>
-  <string name="context_menu_item_navigate_point">Zet als bestemming</string>
   <string name="context_menu_item_add_favorite">Voeg toe aan favorieten</string>
   <string name="context_menu_item_update_map">Actualiseer kaart</string>
   <string name="context_menu_item_open_bug">Meld fout in OpenStreetMap</string>
@@ -834,7 +831,6 @@
   <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt</string>
   <string name="download_link_and_local_description">Download of update offline gegevens.\nKlik op een item om meer details te zien, druk lang om ze te deactiveren, te hernoemen of te verwijderen.\nHuidige data op apparaat (%1$s vrij):</string>
   <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
-  <string name="context_menu_item_directions">Aanwijzingen naar hier</string>
   <string name="confirm_interrupt_download">Wil je het downloaden afbreken?</string>
   <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
   <string name="gpx_index_settings_descr">" (met GPX analysator)"</string>

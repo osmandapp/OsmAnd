@@ -39,7 +39,6 @@
 	<string name="delete_target_point">Șterge punctul intermediar</string>
 	<string name="target_point">Destinația %1$s</string>
     <string name="intermediate_point">Punct intermediar %1$s</string>
-    <string name="navigate_to">Alege ca destinație</string>
     <string name="context_menu_item_last_intermediate_point">Adaugă ca ultim punct intermediar</string>
     <string name="context_menu_item_first_intermediate_point">Adaugă ca prim punct intermediar</string>
     <string name="add_as_last_destination_point">Adaugă ca ultimă destinație</string>
@@ -226,7 +225,6 @@
 \nClick pe orice element existent pentru a vedea mai multe detalii, țineți apăsat pentru dezactivare sau ștergere. Date aflate pe dispozitiv (%1$s liber):</string>
 	<string name="unknown_from_location">Punctul de plecare nu este încă determinat</string>
 	<string name="unknown_location">Poziția nu este încă cunoscută</string>
-	<string name="context_menu_item_directions">Navigare către acest loc</string>
 	<string name="modify_transparency">Grad de transparență (0 - transparent, 255 - opac)</string>
 	<string name="confirm_interrupt_download">Doriți să întrerupeți descărcarea fișierului?</string>
 	<string name="first_time_msg">Mulțumim pentru că folosiți OsmAnd. Pentru a beneficia de toate funcționalitățile acestei aplicații aveți nevoie de un set de date regionale pe care le puteți descărca via \'Setări\' -&gt; \'Date offline\'. După aceea veți putea să vizualizați hărți, să găsiți adrese, să localizați puncte de interes (POI) să căutați date despre transportul public.</string>    
@@ -496,7 +494,6 @@
 	<string name="local_index_mi_rename">Redenumire</string>
 	<string name="show_gpx_route">Afișare pe hartă</string>
 	<string name="poi_filter_nominatim">Căutare online după nume</string>
-	<string name="search_select_point">OK</string>
 	<string name="search_position_current_location_search">Se caută poziția…</string>
 	<string name="search_position_current_location_found">Poziție curentă (găsită)</string>
 	<string name="search_position_address">Adresă…</string>
@@ -1041,7 +1038,6 @@
 	<string name="search_address_building_option">Număr</string>
 	<string name="search_address_street_option">Intersecție</string>
 	<string name="search_tabs_location">Poziție</string>
-	<string name="context_menu_item_navigate_point">Setează ca destinație</string>
 	<string name="context_menu_item_add_favorite">Adaugă la Favorite</string>
 	<string name="context_menu_item_update_map">Actualizează hartă</string>
 	<string name="context_menu_item_open_bug">Deschide un Bug OSM</string>

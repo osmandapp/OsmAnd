@@ -198,7 +198,6 @@
   <string name="local_index_mi_rename">Pārsaukt</string>
   <string name="show_gpx_route">Parādīt kartē</string>
   <string name="poi_filter_nominatim">Tiešaistes Nominatim</string>
-  <string name="search_select_point">Izvēlēties</string>
   <string name="search_position_current_location_search">Meklē pozīciju…</string>
   <string name="search_position_current_location_found">Pozīcija (Atrasta)</string>
   <string name="search_position_address">Adrese…</string>
@@ -666,7 +665,6 @@
   <string name="save_track_interval_descr">Izvēlieties ceļa pozicionēšanas intervālu</string>
   <string name="save_track_to_gpx_descrp">Ceļi mapē tiks saglabāti sagrupēti pa dienām</string>
   <string name="save_track_to_gpx">Ierakstīt ceļu GPX failā</string>
-  <string name="navigate_to">Uzstādīt kā galamērķi</string>
   <string name="update_tile">Atjaunināt karti</string>
   <string name="reload_tile">Pārlādēt atēlu</string>
   <string name="mark_point">Mērķis</string>
@@ -737,7 +735,6 @@
   <string name="search_address_building_option">Ēka</string>
   <string name="search_address_street_option">Krustojums</string>
   <string name="search_tabs_location">Atrašanās vieta</string>
-  <string name="context_menu_item_navigate_point">Uzstādīt kā galamērķi</string>
   <string name="context_menu_item_add_favorite">Pievienot izlasei</string>
   <string name="context_menu_item_update_map">Atjaunot karti</string>
   <string name="context_menu_item_open_bug">Atvērt OSM bug</string>
@@ -801,7 +798,6 @@
   <string name="left_side_navigation_descr">Ieslēdziet ja jūs atrodaties valstīs ar kreisās puses kustību</string>
   <string name="download_link_and_local_description">Lejuplādēt vai atjaunināt bezsaistes datus.\nLai redzētu detaļas uzklikšķiniet uz ieraksta, lai deaktivizētu vai dzēstu bezsaistes datus uzspiediet un turiet piespiestu. Datu apjoms (%1$s brīvs):</string>
   <string name="unknown_from_location">Starta vieta vēl nav noteikta</string>
-  <string name="context_menu_item_directions">Navigācija</string>
   <string name="confirm_interrupt_download">Tiešām vēlaties pārtraukt faila lejuplādi?</string>
   <string name="basemap_was_selected_to_download">Kartes pamatdati, kas nepieciešami aplikācijas normālai darbībai, ir iezīmēti lejuplādei.</string>
   <string name="gpx_index_settings_descr">"(iekļauj GPX analizatoru)"</string>

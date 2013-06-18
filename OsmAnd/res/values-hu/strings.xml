@@ -189,7 +189,6 @@
   <string name="local_index_mi_rename">Átnevezés</string>
   <string name="show_gpx_route">Mutasd a térképen</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
-  <string name="search_select_point">Választás</string>
   <string name="search_position_current_location_search">Pozíció keresése…</string>
   <string name="search_position_current_location_found">Pozíció [Megtalálva]</string>
   <string name="search_position_address">Cím…</string>
@@ -655,7 +654,6 @@
   <string name="save_track_interval">Rögzítési sűrűség</string>
   <string name="save_track_to_gpx_descrp">Az útvonalak napi csoportosításban kerülnek mentésre a track könyvtárba</string>
   <string name="save_track_to_gpx">Útvonal mentése GPX fájlba</string>
-  <string name="navigate_to">Beállítás célpontnak</string>
   <string name="update_tile">Térkép frissítés</string>
   <string name="reload_tile">Térképcsempe újraolvasása</string>
   <string name="mark_point">Célpont</string>
@@ -726,7 +724,6 @@
   <string name="search_address_building_option">Épület</string>
   <string name="search_address_street_option">Keresztező utca</string>
   <string name="search_tabs_location">Koordináta</string>
-  <string name="context_menu_item_navigate_point">Beállítás célpontnak</string>
   <string name="context_menu_item_add_favorite">Hozzáadás a kedvencekhez</string>
   <string name="context_menu_item_update_map">Térkép frissítése</string>
   <string name="context_menu_item_open_bug">OSM Bug nyitása</string>
@@ -790,7 +787,6 @@
   <string name="left_side_navigation_descr">Kapcsold be, ha baloldali közlekedésű országban navigálsz</string>
   <string name="download_link_and_local_description">Offline adatok letöltése vagy frissítése.\nRészletekért kattints a listaelemre, deaktiváláshoz vagy törléshez nyomd meg hosszan. Adatok jelenleg az eszközön (%1$s szabad):</string>
   <string name="unknown_from_location">Kezdőpozíció még nem meghatározható</string>
-  <string name="context_menu_item_directions">Útvonal ide</string>
   <string name="confirm_interrupt_download">Meg szeretnéd szakítani a fájlletöltést?</string>
   <string name="basemap_was_selected_to_download">Az alaptérképre szükség van az alkalmazás megfelelő működéséhez, ezért ki lett jelölve letöltésre.</string>
   <string name="gpx_index_settings_descr"> (GPX elemzőt tartalmaz)</string>

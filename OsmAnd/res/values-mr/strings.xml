@@ -1,8 +1,7 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
-  <string name="context_menu_item_directions">इथपर्य़ंत दिशा</string>
   <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, 255 - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
   <string name="local_indexes_cat_tile">ऑनलाइन नकाशे (टाइल्स)</string>
@@ -111,7 +110,6 @@
   <string name="poi_filter_by_name">नावाने शोधा</string>
   <string name="local_index_mi_rename">नाव बदला</string>
   <string name="show_gpx_route">नकाशावर दाखवा</string>
-  <string name="search_select_point">निवडा</string>
   <string name="search_position_current_location_search">स्थान शोधत आहे…</string>
   <string name="search_position_current_location_found">स्थान (सापडले)</string>
   <string name="search_position_address">पत्ता…</string>
@@ -268,7 +266,6 @@
   <string name="data_settings">डेटा</string>
   <string name="additional_settings">आधिक सेटिंग्स</string>
   <string name="settings">सेटिंग्स</string>
-  <string name="navigate_to">इच्छित स्थळ म्हणून निवडा</string>
   <string name="update_tile">नकाशा अपडेट करा</string>
   <string name="favourites_activity">आवडती ठिकाणे</string>
   <string name="add_to_favourite">आवडत्या ठिकणात नोंद करा</string>
@@ -311,7 +308,6 @@
   <string name="search_address_building">इमारत</string>
   <string name="search_address_building_option">इमारत</string>
   <string name="search_tabs_location">स्थान</string>
-  <string name="context_menu_item_navigate_point">इच्छित स्थळ म्हणून निवडा</string>
   <string name="context_menu_item_add_favorite">आवडत्या ठिकणात नोंद करा</string>
   <string name="context_menu_item_update_map">नकाशा अपडेट करा</string>
   <string name="context_menu_item_create_poi">पिओआय तयार करा</string>

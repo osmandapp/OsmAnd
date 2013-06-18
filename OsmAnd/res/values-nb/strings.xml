@@ -8,7 +8,6 @@
 	<string name="delete_target_point">Fjern målpunkt</string>
 	<string name="target_point">Målpunkt %1$s</string>
     <string name="intermediate_point">Rutepunkt %1$s</string>
-    <string name="navigate_to">Sett som reisemål</string>
     <string name="context_menu_item_last_intermediate_point">Sett siste målpunkt</string>
     <string name="context_menu_item_first_intermediate_point">Sett første målpunkt</string>
     <string name="add_as_last_destination_point">Legg til som siste rutepunkt</string>
@@ -111,7 +110,6 @@
 	<string name="download_link_and_local_description">Klikk her for å laste ned eller oppdatere offline-data. \nKlikk eksisterende element for å se flere detaljer, trykk og hold for å deaktivere eller slette. Gjeldende data på enheten (%1$s ledig):</string>
 	<string name="unknown_from_location">Startpunkt er ennå ikke bestemt</string>
 	<string name="unknown_location">Posisjon ennå ikke kjent</string>
-	<string name="context_menu_item_directions">Veibeskrivelse til her</string>
 	<string name="local_indexes_cat_tile">Nettbaserte kart (fliser)</string>
 	<string name="local_indexes_cat_map">Offline-kart (vektor)</string>
 	<string name="gpx_index_settings_descr"> (inkluderer GPX-analyse)</string>
@@ -270,7 +268,6 @@
 	<string name="map_version_changed_info">Server inneholder kartfiler som ikke er kompatible med din nåværende versjon av programmet. For å laste ned og bruke dem, oppgrader programmet til nyere versjon.</string>
 	<string name="local_index_mi_rename">Endre navn</string>
 	<string name="show_gpx_route">Vis på kart</string>
-	<string name="search_select_point">Velg</string>
 	<string name="search_position_current_location_search">Søker posisjon…</string>
 	<string name="search_position_current_location_found">Posisjon (funnet)</string>
 	<string name="search_position_address">Adresse…</string>
@@ -602,7 +599,6 @@
 	<string name="search_address_building_option">Bygning</string>
 	<string name="search_address_street_option">Kryssende gate</string>
 	<string name="search_tabs_location">Sted</string>
-	<string name="context_menu_item_navigate_point">Sett som reisemål</string>
 	<string name="context_menu_item_add_favorite">Legg til i favoritter</string>
 	<string name="context_menu_item_update_map">Oppdater kart</string>
 	<string name="context_menu_item_open_bug">Åpne OSM-feil</string>

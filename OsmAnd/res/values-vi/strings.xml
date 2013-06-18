@@ -38,7 +38,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 	<string name="local_index_mi_rename">Đổi tên</string>
 	<string name="show_gpx_route">Hiển thị trên bản đồ</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="search_select_point">Chọn</string>
 	<string name="search_position_current_location_search">Đang tìm vị trí…</string>
 	<string name="search_position_current_location_found">Vị trí (Đã tìm thấy)</string>
 	<string name="search_position_address">Địa chỉ…</string>
@@ -535,7 +534,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
     <string name="save_track_interval_descr">Chọn khoảng thời gian lưu vị trí cho track</string>
     <string name="save_track_interval">Khoảng thời gian lưu Track</string>
     <string name="save_track_to_gpx">Lưu track thành GPX</string>
-    <string name="navigate_to">Dẫn đường tới</string>
     <string name="update_tile">Cập nhật bản đồ</string>
     <string name="reload_tile">Tải lại tile</string>
     <string name="user_name_descr">Tài khoản tại OpenStreetMap.org (OSM)</string>
@@ -610,10 +608,7 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com -->
 <string name="search_address_building">Tòa nhà</string>
 <string name="search_address_building_option">Tòa nhà</string>
 <string name="search_address_street_option">Điểm giao cắt</string>
-
 <string name="search_tabs_location">Khu vực</string>
-
-<string name="context_menu_item_navigate_point">Tìm đến điểm</string>
 <string name="context_menu_item_add_favorite">Thêm vào mục Ưa thích</string>
 <string name="context_menu_item_update_map">Cập nhật bản đồ</string>
 <string name="context_menu_item_open_bug">Mở OSM bug</string>

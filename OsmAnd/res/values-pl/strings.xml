@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
   <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
 \n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
@@ -48,7 +48,6 @@
   <string name="local_index_mi_rename">Zmień nazwę</string>
   <string name="show_gpx_route">Pokaż na mapie</string>
   <string name="poi_filter_nominatim">Nominatim Online</string>
-  <string name="search_select_point">Trasa</string>
   <string name="search_position_current_location_search">Ustalanie pozycji…</string>
   <string name="search_position_current_location_found">Pozycja (ustalona)</string>
   <string name="search_position_address">Adres…</string>
@@ -529,7 +528,6 @@
   <string name="monitor_preferences">Zapisywanie śladów</string>
   <string name="save_track_to_gpx_descrp">Ślady zostaną zapisane do katalogu grupami wg dni</string>
   <string name="save_track_to_gpx">Zapisuj ślad do GPX</string>
-  <string name="navigate_to">Trasa</string>
   <string name="update_tile">Uaktualnij mapę</string>
   <string name="reload_tile">Przeładuj kafelki</string>
   <string name="user_name_descr">Wymagane do wysyłania danych na openstreetmap.org</string>
@@ -602,7 +600,6 @@
   <string name="search_address_building_option">Budynek</string>
   <string name="search_address_street_option">Skrzyżowanie</string>
   <string name="search_tabs_location">Lokalizacja</string>
-  <string name="context_menu_item_navigate_point">Trasa</string>
   <string name="context_menu_item_add_favorite">Dodaj do ulubionych</string>
   <string name="context_menu_item_update_map">Uaktualnij mapę</string>
   <string name="context_menu_item_open_bug">Zgłoś błąd do OSM</string>
@@ -667,7 +664,6 @@
   <string name="download_link_and_local_description">Kliknij tutaj, aby pobrać lub zaktualizować dane offline.
 \nKliknij istniejący element, aby zobaczyć więcej szczegółów. Naciśnij i przytrzymaj, aby go wyłączyć lub usunąć. Obecne dane na urządzeniu (%1$s dostępne):</string>
   <string name="unknown_from_location">Punkt początkowy nie jest jeszcze wyznaczony</string>
-  <string name="context_menu_item_directions">Nawiguj do punktu</string>
   <string name="confirm_interrupt_download">Czy chcesz przerwać pobieranie pliku?</string>
   <string name="basemap_was_selected_to_download">Mapa bazowa jest wymagana do prawidłowego funkcjonowania aplikacji i została wybrana do pobrania.</string>
   <string name="gpx_index_settings_descr">" (zawiera analizator GPX)"</string>

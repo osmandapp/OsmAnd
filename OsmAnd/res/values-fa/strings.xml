@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
@@ -173,7 +173,6 @@
 	<string name="left_side_navigation_descr">برای کشورهای با رانندگی دست چپ انتخاب کنید</string>
 	<string name="unknown_from_location">نقطه شروع هنوز مشخص نشده است</string>
 	<string name="unknown_location">موقعبت هنوز مشخص نیست</string>
-	<string name="context_menu_item_directions">مسیرها به این نقطه</string>
 	<string name="modify_transparency">تفییر شفافیت (0-شفاف، 255-کدر)</string>
 	<string name="confirm_interrupt_download">آیا می خواهید دانلود را متوقف کنید؟</string>
 	<string name="local_indexes_cat_map">نقشه های برداری آفلاین</string>
@@ -257,7 +256,6 @@
 	<string name="search_address_building_option">ساختمان</string>
 	<string name="search_address_street_option">تقاطع</string>
 	<string name="search_tabs_location">محل</string>
-	<string name="context_menu_item_navigate_point">مسیرها</string>
 	<string name="context_menu_item_add_favorite">افزودن به علاقمندیها</string>
 	<string name="context_menu_item_update_map">به روز رسانی نقشه</string>
 	<string name="context_menu_item_open_bug">بازکردن اشکال OSM</string>
@@ -287,8 +285,6 @@
 	<string name="choose_city">انتخاب شهر</string>
 	<string name="ChooseCountry">انتخاب کشور</string>
 	<string name="show_view_angle">جهت نگاه کردن را نشان بده</string>
-	
-	<string name="navigate_to_point">به عنون مقصد</string>
 	<string name="map_view_3d_descr">حالت سه بعدی نقشه را فعال کن</string>
 	<string name="map_view_3d">نمایش سه بعدی نقشه</string>
 	<string name="map_source">منبع نقشه</string>

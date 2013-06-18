@@ -312,7 +312,6 @@
   <string name="monitor_preferences">Registro de trilhas</string>
   <string name="save_track_to_gpx_descrp">As trilhas serão gravadas no diretório tracks agrupadas por dia</string>
   <string name="save_track_to_gpx">salvar trilhas em GPX</string>
-  <string name="navigate_to">Definir como destino</string>
   <string name="update_tile">Atualizar mapa</string>
   <string name="reload_tile">Atualizar imagens</string>
   <string name="user_name_descr">Nome do usuário OpenStreetMap</string>
@@ -382,7 +381,6 @@
   <string name="search_address_building_option">Edifício</string>
   <string name="search_address_street_option">Rua transversal</string>
   <string name="search_tabs_location">Localização</string>
-  <string name="context_menu_item_navigate_point">Definir como destino</string>
   <string name="context_menu_item_add_favorite">Adicionar aos favoritos</string>
   <string name="context_menu_item_update_map">Atualizar mapa</string>
   <string name="context_menu_item_open_bug">Reportar problema OSM</string>
@@ -454,7 +452,6 @@
   <string name="left_side_navigation_descr">Selecione para países com tráfego à esquerda</string>
   <string name="download_link_and_local_description">Clique aqui para obter ou actualizar dados offline. Clique em qualquer item existente para ver mais detalhes, pressione e segure para desactivar ou apagar. Dados actuais no dispositivo (%1$s livre):</string>
   <string name="unknown_from_location">Precisa definir um Ponto de partida</string>
-  <string name="context_menu_item_directions">Direcções para aqui</string>
   <string name="modify_transparency">Modificar a transparência (0 - transparente, 255 - opaco)</string>
   <string name="confirm_interrupt_download">Quer interromper o download de arquivos?</string>
   <string name="basemap_was_selected_to_download">O Mapa-Base é necessário para o funcionamento adequado da aplicação e foi seleccionado para download.</string>
@@ -657,7 +654,6 @@
   <string name="local_index_mi_rename">Mudar o nome</string>
   <string name="show_gpx_route">Mostrar no mapa</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
-  <string name="search_select_point">Escolher</string>
   <string name="search_position_current_location_search">A procurar posição…</string>
   <string name="search_position_current_location_found">Position (Found)</string>
   <string name="search_position_address">Endereço…</string>

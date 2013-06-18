@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>    
 <string name="recording_context_menu_show">عرضإظهار</string>
     <string name="av_def_action_picture">التقاط صورةالتقاط صورة</string>
@@ -79,7 +79,6 @@
     <string name="map_widget_monitoring_services">تسجيل الخدمات</string>
 	<string name="no_route">لا الطريق</string>
 	<string name="delete_target_point">إزالة إحداثية</string>
-	<string name="navigate_to">تعيين وجهة</string>
     <string name="new_destination_point_dialog">لديك مجموعة الوجهة النقطة.</string>
     <string name="target_points">نقاط الطريق</string>
     <string name="btn_advanced_mode">الوضع المتقدم...</string>

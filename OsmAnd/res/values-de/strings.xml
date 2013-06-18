@@ -539,7 +539,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="local_index_mi_rename">Umbenennen</string>
 	<string name="show_gpx_route">Auf Karte anzeigen</string>
 	<string name="poi_filter_nominatim">Online-Nominatim</string>
-	<string name="search_select_point">Navigation</string>
 	<string name="search_position_current_location_search">Suche Standort …</string>
 	<string name="search_position_current_location_found">Standort (gefunden)</string>
 	<string name="search_position_address">Adresse …</string>
@@ -1032,7 +1031,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="save_track_interval">Aufzeichnungs-Intervall</string>
 	<string name="save_track_to_gpx_descrp">Zurückgelegte Strecken werden nach Tagen gruppiert als GPX auf der SD-Karte gespeichert</string>
 	<string name="save_track_to_gpx">Aufzeichnung in GPX-Datei aktivieren</string>
-	<string name="navigate_to">Als Ziel wählen</string>
 	<string name="update_tile">Karte (Kacheln) aktualisieren</string>
 	<string name="reload_tile">Kartenteile (Kacheln) aktualisieren</string>
 	<string name="mark_point">Ziel</string>
@@ -1100,7 +1098,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="search_address_building_option">Hausnr.</string>
 	<string name="search_address_street_option">Querstraße</string>
 	<string name="search_tabs_location">Position</string>
-	<string name="context_menu_item_navigate_point">Als Ziel wählen</string>
 	<string name="context_menu_item_add_favorite">Als Favorit speichern</string>
 	<string name="context_menu_item_update_map">Karte aktualisieren</string>
 	<string name="context_menu_item_open_bug">OSM Fehlerbericht einsenden</string>
@@ -1164,7 +1161,6 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="left_side_navigation_descr">Auswählen für Länder mit Linksverkehr</string>
 	<string name="download_link_and_local_description">Hier klicken um Offline-Daten herunterzuladen oder zu aktualisieren. \nAnklicken bestehender Einträge liefert Details, drücken und halten ermöglicht deaktivieren, umbenennen oder löschen. Aktuelle Daten auf dem Gerät (%1$s frei):</string>
 	<string name="unknown_from_location">Startpunkt ist noch nicht ermittelt</string>
-	<string name="context_menu_item_directions">Hierhin navigieren</string>
 	<string name="confirm_interrupt_download">Möchten Sie den Datei-Download abbrechen?</string>
 	<string name="basemap_was_selected_to_download">Die Basis-Karte wird für die korrekte Benutzung der Anwendungen benötigt und ist für das Herunterladen vorausgewählt.</string>
 	<string name="gpx_index_settings_descr">" (beinhaltet GPX-Analyse)"</string>

@@ -16,7 +16,6 @@
 	<string name="delete_target_point">Ara noktayı kaldır</string>
 	<string name="target_point">Ara nokta %1$s</string>
     <string name="intermediate_point">Ara nokta %1$s</string>
-    <string name="navigate_to">Hedef olarak ayarla</string>
     <string name="context_menu_item_last_intermediate_point">Son ara nokta olarak ekle</string>
     <string name="context_menu_item_first_intermediate_point">İlk ara nokta olarak ekle</string>
     <string name="add_as_last_destination_point">Son ara nokta olarak ekle</string>
@@ -311,7 +310,6 @@
 	<string name="poi_filter_by_name">İsme göre ara</string>
 	<string name="local_index_mi_rename">Yeniden adlandır</string>
 	<string name="show_gpx_route">Haritada göster</string>
-	<string name="search_select_point">Seç</string>
 	<string name="search_position_address">Adres…</string>
 	<string name="search_position_favorites">Favoriler…</string>
 	<string name="search_position_current_location">Şu anki konum…</string>
@@ -544,7 +542,6 @@
 	<string name="left_side_navigation_descr">Sol taraftan akan trafiğe sahip ülkeler için seçin</string>
 	<string name="download_link_and_local_description">Çevrimdışı veri indirmek ya da güncellemek için buraya tıklayın.
 \nDaha fazla ayrıntı görmek basın ve devre dışı bırakmak veya silmek için tutmak için varolan bir öğeyi tıklatın. Cihazda Mevcut veriler (%1$s ücretsiz):</string>
-	<string name="context_menu_item_directions">Buraya yol tarifi</string>
 	<string name="modify_transparency">"Şeffaflık değiştir(0 -Şeffaf,255-opak) "</string>
 	<string name="first_time_msg">"OsmAnd kullandığınız için teşekkür ederiz. - Bu uygulama birçok özellikler için &amp;#39;Ayarlar&amp;#39;ı üzerinden  &amp;gt; &amp;#39;Veri Yönetimi&amp;#39; indirebilirsiniz. bazı bölgesel çevrimdışı veri gerekir. Ardından, haritalarına adreslerini bulmak, İÇN aramak, ve toplu taşıma bulmak mümkün olacak."</string>    
 	<string name="basemap_was_selected_to_download">Baz haritası doğru uygulama çalışması için gereklidir ve indirmek için seçildi.</string>

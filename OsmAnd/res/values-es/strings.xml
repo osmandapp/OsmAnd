@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla…</string>
@@ -140,7 +140,6 @@
   <string name="local_index_mi_rename">Renombrar</string>
   <string name="show_gpx_route">Mostrar en el mapa</string>
   <string name="poi_filter_nominatim">Nominatim en línea</string>
-  <string name="search_select_point">Seleccionar</string>
   <string name="search_position_current_location_search">Buscando posición…</string>
   <string name="search_position_current_location_found">Posición (Encontrado)</string>
   <string name="search_position_address">Dirección…</string>
@@ -614,7 +613,6 @@
   <string name="save_track_interval_descr">Elige el intervalo de posicionamiento para trazas</string>
   <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en el directorio de trazas agrupadas por días</string>
   <string name="save_track_to_gpx">Guardar traza en fichero GPX</string>
-  <string name="navigate_to">Fijar como destino</string>
   <string name="update_tile">Actualizar mapa</string>
   <string name="reload_tile">Recargar tesela</string>
   <string name="mark_point">Objetivo</string>
@@ -685,7 +683,6 @@
   <string name="search_address_building_option">Edificio</string>
   <string name="search_address_street_option">Intersección de calle</string>
   <string name="search_tabs_location">Localización</string>
-  <string name="context_menu_item_navigate_point">Fijar como destino</string>
   <string name="context_menu_item_add_favorite">Añadir a favoritos</string>
   <string name="context_menu_item_update_map">Actualizar mapa</string>
   <string name="context_menu_item_open_bug">Abrir fallo OSM</string>
@@ -749,7 +746,6 @@
   <string name="left_side_navigation_descr">Seleccionalo en países con tráfico por la izquierda</string>
   <string name="download_link_and_local_description">Pulsa aquí para descargar o actualizar datos para su uso posterior sin conexión.\nPulsa cualquier ítem para ver más detalles, mantén pulsado para desactivar o borrar. Datos actuales en el dispositivo (libre %1$s):</string>
   <string name="unknown_from_location">El punto de inicio no ha sido determinado</string>
-  <string name="context_menu_item_directions">Indicaciones hasta aquí</string>
   <string name="confirm_interrupt_download">¿Quieres interrumpir la descarga de archivo?</string>
   <string name="basemap_was_selected_to_download">El Mapa Base (World Basemap) se necesita para el correcto funcionamiento de la aplicación y se seleccionó para su descarga.</string>
   <string name="gpx_index_settings_descr">" (incluye analizador GPX)"</string>

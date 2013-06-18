@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 	<string name="default_buttons_no">לא</string>
 	<string name="default_buttons_yes">כן</string>
@@ -25,7 +25,6 @@
 	<string name="delete_target_point">הסרת נקודת ציון</string>
 	<string name="target_point">נקודת הציון %1$s</string>
     <string name="intermediate_point">נקודת הציון %1$s</string>
-    <string name="navigate_to">הגדרה כיעד</string>
     <string name="context_menu_item_last_intermediate_point">הוספת כנקודת הציון הסופית</string>
     <string name="context_menu_item_first_intermediate_point">הוספה כנקודת הציון ההתחלתית</string>
     <string name="add_as_last_destination_point">הוספה כנקודת הציון הסופית</string>
@@ -130,7 +129,6 @@
 	<string name="download_link_and_local_description">יש ללחוץ כאן כדי להוריד או לעדכן את הנתונים הבלתי מקוונים.\nניתן ללחוץ על כל פריט ברשימה כדי לצפות בפרטים נוספים, יש ללחוץ ולהחזיק כדי לנטרל או למחוק. הנתונים הנוכחיים על ההתקן (%1$s פנויים):</string>
 	<string name="unknown_from_location">נקודת ההתחלה לא נקבעה עדיין</string>
 	<string name="unknown_location">המיקום עדיין לא ידוע</string>
-	<string name="context_menu_item_directions">הנחיות כיוון לכאן</string>
 	<string name="modify_transparency">שינוי השקיפות (0 - שקוף, 255 - אטום)</string>
 	<string name="confirm_interrupt_download">האם להפריע להורדת הקובץ?</string>
 	<string name="tip_update_index_t">"\tחיוני ביותר להתעדכן בנתוני המפה. התכנית OsmAnd מספקת מנהל הורדה שיכול לבדוק האם קיימים עדכוני נתונים בלתי מקוונים.
@@ -469,7 +467,6 @@
 	<string name="local_index_mi_rename">שינוי שם</string>
 	<string name="show_gpx_route">הצגה על המפה</string>
 	<string name="poi_filter_nominatim">חיפוש שם מקוון (Nominatim)</string>
-	<string name="search_select_point">בחירה</string>
 	<string name="search_position_current_location_search">מתבצע חיפוש אחר מיקום…</string>
 	<string name="search_position_current_location_found">מיקום (נמצא)</string>
 	<string name="search_position_address">כתובת…</string>
@@ -1016,7 +1013,6 @@
 	<string name="search_address_building_option">בניין</string>
 	<string name="search_address_street_option">רחוב חוצה</string>
 	<string name="search_tabs_location">מיקום</string>
-	<string name="context_menu_item_navigate_point">הגדרה כיעד</string>
 	<string name="context_menu_item_add_favorite">הוספה למועדפים</string>
 	<string name="context_menu_item_update_map">עדכון המפה</string>
 	<string name="context_menu_item_open_bug">פתיחת תקלה ב־OSM</string>

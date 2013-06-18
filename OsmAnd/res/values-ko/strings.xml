@@ -238,7 +238,6 @@
 	<string name="local_index_mi_rename">이름 수정</string>
 	<string name="show_gpx_route">맵 상에 표시</string>
 	<string name="poi_filter_nominatim">온라인 지명</string>
-	<string name="search_select_point">선택</string>
 	<string name="search_position_current_location_search">위치 검색&#8230;</string>
 	<string name="search_position_current_location_found">위치 (발견)</string>
 	<string name="search_position_address">주소&#8230;</string>
@@ -766,7 +765,6 @@
     <string name="save_track_interval">트랙 저장 주기</string>
     <string name="save_track_to_gpx_descrp">트랙이 날짜 단위로 구분된 디렉토리에 저장됩니다</string>
     <string name="save_track_to_gpx">트랙을 GPX로 저장</string>
-    <string name="navigate_to">목적지로 지정</string>
     <string name="update_tile">맵 갱신</string>
     <string name="reload_tile">타일 재적재</string>
     <string name="mark_point">Target</string>
@@ -839,10 +837,7 @@
 <string name="search_address_building">건물</string>
 <string name="search_address_building_option">건물</string>
 <string name="search_address_street_option">교차로</string>
-
 <string name="search_tabs_location">위치</string>
-
-<string name="context_menu_item_navigate_point">도착지점으로</string>
 <string name="context_menu_item_add_favorite">등록 지점 추가</string>
 <string name="context_menu_item_update_map">맵 갱신</string>
 <string name="context_menu_item_open_bug">OSM 버그 열기</string>

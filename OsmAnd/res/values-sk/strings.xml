@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
   <string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
@@ -16,7 +16,6 @@
   \n\t* Vylepšený vzhľad rozhrania (ikony)
   \n\t* Opravy mnohých chýb
   </string>
-  <string name="navigate_to">Určiť ako cieľ</string>
   <string name="context_menu_item_last_intermediate_point">Určiť ako posledný prechodný bod</string>
   <string name="context_menu_item_first_intermediate_point">Určiť ako prvý prechodný bod</string>
   <string name="add_as_last_destination_point">Pridať ako posledný prechodný bod</string>
@@ -308,7 +307,6 @@
   <string name="local_index_mi_rename">Premenovať</string>
   <string name="show_gpx_route">Zobraziť na mape</string>
   <string name="poi_filter_nominatim">Online Nominatim</string>
-  <string name="search_select_point">Vybrať</string>
   <string name="search_position_current_location_search">Hľadám umiestnenie…</string>
   <string name="search_position_current_location_found">Umiestnenie [Nájdené]</string>
   <string name="search_position_address">Adresa…</string>
@@ -905,7 +903,6 @@
   <string name="search_address_building_option">Popisné číslo</string>
   <string name="search_address_street_option">Pretínajúca ulica</string>
   <string name="search_tabs_location">Pozícia</string>
-  <string name="context_menu_item_navigate_point">Určiť ako cieľ</string>
   <string name="context_menu_item_add_favorite">Pridať medzi Obľúbené miesta</string>
   <string name="context_menu_item_update_map">Aktualizovať mapu</string>
   <string name="context_menu_item_open_bug">Otvoriť OSM chybu</string>
@@ -966,7 +963,6 @@
   <string name="default_buttons_selectall">Vybrať všetko</string>
   <string name="download_link_and_local_description">Kliknite sem na stiahnutie alebo aktualizáciu offline údajov.\nNa zobrazenie podrobností kliknite na položku, na deaktiváciu alebo zmazanie offline údaju kliknite a podržte.\nAktuálne údaje v zariadení (%1$s voľných):</string>
   <string name="unknown_from_location">Štartovací bod nebol zatiaľ zistený</string>
-  <string name="context_menu_item_directions">Pokyny k tomuto miestu</string>
   <string name="confirm_interrupt_download">Chcete prerusiť sťahovanie súboru?</string>
   <string name="basemap_was_selected_to_download">Základná mapa je potrebná pre správne fungovanie aplikácie a bola vybratá na stiahnutie.</string>
   <string name="gpx_index_settings_descr">(zahŕňa GPX analyzéra)</string>

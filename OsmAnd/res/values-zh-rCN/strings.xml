@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="email">電子郵件</string>
 <string name="poi_dialog_name">名稱</string>
@@ -24,7 +24,6 @@
     <string name="safe_mode">“安全模式”</string>
     <string name="no_route">沒有路由</string>
 	<string name="delete_target_point">刪除航點</string>
-	<string name="navigate_to">設為目的地</string>
     <string name="target_points">航點</string>
     <string name="map_widget_intermediate_distance">航點</string>
     <string name="poi_filter_parking">停車</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="offline_edition">Modifications hors ligne</string>
   <string name="offline_edition_descr">Toujours utiliser l\'édition hors ligne</string>
   <string name="tip_recent_changes_0_7_1_t">"Changements en 0.7.1 :
@@ -155,7 +155,6 @@
   <string name="local_index_mi_rename">Renommer</string>
   <string name="show_gpx_route">Afficher sur la carte</string>
   <string name="poi_filter_nominatim">Nominatim en ligne</string>
-  <string name="search_select_point">Sélectionner</string>
   <string name="search_position_current_location_search">Recherche de l\'emplacement…</string>
   <string name="search_position_current_location_found">Emplacement[Trouvé]</string>
   <string name="search_position_address">Adresse…</string>
@@ -655,7 +654,6 @@
   <string name="save_track_interval">Intervalle d\'enregistrement</string>
   <string name="save_track_to_gpx_descrp">Les trajets seront enregistrés et groupés par jour dans le répertoire de trajets</string>
   <string name="save_track_to_gpx">Enregistrer la trace dans un fichier GPX</string>
-  <string name="navigate_to">Définir comme destination</string>
   <string name="update_tile">Mettre à jour la carte</string>
   <string name="reload_tile">Recharger carreau</string>
   <string name="mark_point">Destination</string>
@@ -723,7 +721,6 @@
   <string name="search_address_building_option">Édifice</string>
   <string name="search_address_street_option">Rue transversale</string>
   <string name="search_tabs_location">Emplacement</string>
-  <string name="context_menu_item_navigate_point">Marquer comme destination</string>
   <string name="context_menu_item_add_favorite">Ajouter aux favoris</string>
   <string name="context_menu_item_update_map">Mettre à jour la carte</string>
   <string name="context_menu_item_open_bug">Ouvrir un bogue OSM</string>
@@ -787,7 +784,6 @@
   <string name="left_side_navigation_descr">Activer dans les pays où l\'on conduit à gauche</string>
   <string name="download_link_and_local_description">Télécharger des données hors ligne\nPour plus d\'information, cliquer sur l\'élément. Pour le désactiver ou le supprimer, faire un appui long.\nEspace disponible sur l\'appareil : %1$s</string>
   <string name="unknown_from_location">Point de départ pas encore déterminé</string>
-  <string name="context_menu_item_directions">Se déplacer vers ce point</string>
   <string name="confirm_interrupt_download">Voulez vous interrompre le téléchargement ?</string>
   <string name="basemap_was_selected_to_download">Carte mondiale de base requise pour le bon fonctionnement, sélectionnée pour téléchargement.</string>
   <string name="gpx_index_settings_descr">" (analyseur GPX inclus)"</string>

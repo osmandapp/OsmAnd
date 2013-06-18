@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="starting_point_too_far">Pradžios taškas yra per toli nuo artimiausio kelio.</string>
   <string name="shared_location">Bendrinta vieta</string>
   <string name="osmand_parking_warning">Dėmesio</string>
@@ -61,7 +61,6 @@
   <string name="download_link_and_local_description">Spauskite čia duomenų parsiuntimui į įrenginį arba parsiųstų duomenų atnaujinimui. \nNorėdami pamatyti detalią informaciją paspauskite ant dominančio elemento. Paspauskite ir laikykite elementą norėdami jį deaktyvuoti ar panaikinti. Duomenys įrenginyje (laisva %1$s):</string>
   <string name="unknown_from_location">Pradžios taškas dar nenustatytas</string>
   <string name="unknown_location">Vieta dar nežinoma</string>
-  <string name="context_menu_item_directions">Maršrutas į čia</string>
   <string name="modify_transparency">Pakeisti skaidrumą (0 - permatoma, 255 - nepermatoma)</string>
   <string name="confirm_interrupt_download">Ar norite nutraukti failų parsiuntimą?</string>
   <string name="first_time_msg">Ačiū kad naudojate OsmAnd. Pagrindinių programos funkcijų naudojimui įrenginyje turi būti regiono duomenys, kuriuos galite parsisiųsti \'Nustatymai\' -&gt;  \'Parsiųsti duomenys\'. Tik po to galėsite ieškoti adreso, LV ar viešojo transporto.</string>
@@ -346,7 +345,6 @@
   <string name="local_index_mi_rename">Pakeisti pavadinimą</string>
   <string name="show_gpx_route">Rodyti žemėlapyje</string>
   <string name="poi_filter_nominatim">Nominatim įrankis internete</string>
-  <string name="search_select_point">Pasirinkti</string>
   <string name="search_position_current_location_search">Ieškoma vietos…</string>
   <string name="search_position_current_location_found">Vieta (rasta)</string>
   <string name="search_position_address">Adresas…</string>
@@ -834,7 +832,6 @@
   <string name="save_track_interval_descr">Pasirinkti judėjimo istorijos pozicijos intervalą</string>
   <string name="save_track_to_gpx_descrp">Judėjimo istorija bus išsaugota į tracks segtuvą sugrupavus pagal dienas</string>
   <string name="save_track_to_gpx">Išsaugoti judėjimo istoriją į GPX failą</string>
-  <string name="navigate_to">Nustatyti kelionės tikslu</string>
   <string name="update_tile">Atnaujinti žemėlapį</string>
   <string name="reload_tile">Iš naujo įkelti lakštą</string>
   <string name="mark_point">Tikslas</string>
@@ -905,7 +902,6 @@
   <string name="search_address_building_option">Pastatas</string>
   <string name="search_address_street_option">Susikertanti gatvė</string>
   <string name="search_tabs_location">Vieta</string>
-  <string name="context_menu_item_navigate_point">Nustatyti kaip kelionės tikslą</string>
   <string name="context_menu_item_add_favorite">Pridėti prie įsimintų vietų</string>
   <string name="context_menu_item_update_map">Atnaujinti žemėlapį</string>
   <string name="context_menu_item_open_bug">Atidaryti OSM klaidą</string>

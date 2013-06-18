@@ -231,7 +231,6 @@
   <string name="local_index_mi_rename">Přejmenovat</string>
   <string name="show_gpx_route">Zobrazit na mapě</string>
   <string name="poi_filter_nominatim">Online POI filtr \'Nominatim\'</string>
-  <string name="search_select_point">Vybrat</string>
   <string name="search_position_current_location_search">Hledané polohy…</string>
   <string name="search_position_current_location_found">Poloha [nalezeno]</string>
   <string name="search_position_address">Adresy…</string>
@@ -723,7 +722,6 @@
   <string name="save_track_interval">Interval ukládání trasy</string>
   <string name="save_track_to_gpx_descrp">Trasy budou ukládány do adresáře s trasami, seskupené podle dní</string>
   <string name="save_track_to_gpx">Záznam trasy do GPX</string>
-  <string name="navigate_to">Nastavit jako cíl</string>
   <string name="update_tile">Aktualizovat mapu</string>
   <string name="reload_tile">Načíst znovu dlaždici</string>
   <string name="mark_point">Cíl</string>
@@ -791,7 +789,6 @@
   <string name="search_address_building_option">Budova</string>
   <string name="search_address_street_option">Protínající ulice</string>
   <string name="search_tabs_location">Poloha</string>
-  <string name="context_menu_item_navigate_point">Nastavit jako cíl</string>
   <string name="context_menu_item_add_favorite">Přidat mezi oblíbené</string>
   <string name="context_menu_item_update_map">Aktualizovat mapu</string>
   <string name="context_menu_item_open_bug">Otevřít chybu OSM</string>
@@ -855,7 +852,6 @@
   <string name="left_side_navigation_descr">Zvolte pokud jste v zemi, kde se jezdí vlevo</string>
   <string name="download_link_and_local_description">Klikněte zde pro stažení nebo aktualizaci offline dat.\nKlikněte na položku pro zobrazení více detailů, dlouze stiskněte pro deaktivaci nebo smazání.\nMnožství offline dat v zařízení (%1$s volného místa):</string>
   <string name="unknown_from_location">Startovní bod navigace ještě není zvolen</string>
-  <string name="context_menu_item_directions">Navigace do tohoto místa</string>
   <string name="confirm_interrupt_download">Chcete přerušit stahování souboru?</string>
   <string name="basemap_was_selected_to_download">Pro správnou funkci aplikace je třeba základní mapa. Proto byla automaticky vybrána ke stažení.</string>
   <string name="gpx_index_settings_descr">" (včetně GPX analyzeru)"</string>

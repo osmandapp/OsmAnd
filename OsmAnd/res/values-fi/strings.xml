@@ -4,7 +4,6 @@
 	<string name="delete_target_point">Poista välietappi</string>
 	<string name="target_point">Välietappi %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
-    <string name="navigate_to">Aseta määränpääksi</string>
     <string name="context_menu_item_last_intermediate_point">Lisää viimeiseksi etapiksi</string>
     <string name="context_menu_item_first_intermediate_point">Lisää ensimmäiseksi etapiksi</string>
     <string name="add_as_last_destination_point">Lisää viimeiseksi etapiksi</string>
@@ -205,7 +204,6 @@
 	<string name="poi_filter_by_name">Etsi nimen mukaan</string>
 	<string name="local_index_mi_rename">Nimeä uudelleen</string>
 	<string name="show_gpx_route">Näytä kartalla</string>
-	<string name="search_select_point">Valitse</string>
 	<string name="search_position_current_location_search">Etsitään sijaintia…</string>
 	<string name="search_position_current_location_found">Sijainti(Löydetty)</string>
 	<string name="search_position_address">Osoite…</string>
@@ -412,7 +410,6 @@
 	<string name="search_address_building_option">Rakennus</string>
 	<string name="search_address_street_option">Risteävä katu</string>
 	<string name="search_tabs_location">Sijainti</string>
-	<string name="context_menu_item_navigate_point">Aseta päämääräksi</string>
 	<string name="context_menu_item_add_favorite">Lisää suosikkeihin</string>
 	<string name="context_menu_item_update_map">Päivitä kartta</string>
 	<string name="default_buttons_cancel">Peruuta</string>
@@ -491,7 +488,6 @@
 	<string name="left_side_navigation_descr">Valitse maissa joissa on käytössä vasen kaista</string>
 	<string name="download_link_and_local_description">Paina tästä ladataksesi tai päivittääksesi offline dataa.\nPaina mitä tahansa \"tuotetta\" nähdäksesi lisätietoja, paina ja pidä laittaaksesi pois käytöstä tai poistaaksesi. Vapaata muistia laitteessa (%1$s vapaata)</string>
 	<string name="unknown_location">Sijaintia ei tiedetä vielä</string>
-	<string name="context_menu_item_directions">Reittiohjeet tänne</string>
 	<string name="local_indexes_cat_tile">Online ja muut karttasijainnit</string>
 	<string name="map_settings">Kartan asetukset</string>
 	<string name="amenity_type_finance">Rahoitus</string>

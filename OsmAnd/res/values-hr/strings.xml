@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
@@ -90,7 +90,6 @@
     <string name="non_optimal_route_calculation">Izračunajte moguću, neoptimalnu rutu na velike udaljenosti</string>
 	<string name="map_widget_monitoring_services">Bilježenje položaja</string>
 	<string name="no_route">Nema rute</string>
-	<string name="navigate_to">Postavi kao odredište</string>
     <string name="poi_filter_parking">Parkiralište</string>
     <string name="btn_add_tag">Dodaj oznaku</string>
     <string name="btn_advanced_mode">Napredni način rada...</string>
@@ -188,7 +187,6 @@
 	<string name="offline_navigation_not_available">OsmAnd offline navigacija privremeno nije dostupna.</string>
 	<string name="left_side_navigation">Vožnja lijevom stranom</string>
 	<string name="left_side_navigation_descr">Označi za države s vožnjom na lijevoj strani</string>
-	<string name="context_menu_item_directions">Upute do ovdje</string>
 	<string name="local_indexes_cat_map">Offline karte (vektorske)</string>
 	<string name="online_map_settings">Online karte</string>
 	<string name="map_settings">Postavke karte</string>
@@ -312,7 +310,6 @@
 	<string name="default_buttons_yes">Da</string>
 	<string name="context_menu_item_add_favorite">Dodaj u favorite</string>
 	<string name="context_menu_item_create_poi">Stvori POI</string>
-	<string name="context_menu_item_navigate_point">Postavi kao odredište</string>
 	<string name="context_menu_item_update_map">Ažuriraj karte</string>
 	<string name="search_shown_on_map">Prikaži na karti</string>
 	<string name="navigate_point_cancel">Otkaži</string>
@@ -799,7 +796,6 @@
 	<string name="search_position_current_location">Trenutna pozicija...</string>
 	<string name="search_position_map_view">Posljednje gledano na karti</string>
 	<string name="select_search_position">Traži u blizini:</string>
-	<string name="search_select_point">Odaberi</string>
 	<string name="search_position_current_location_search">Tražim poziciju...</string>
 	<string name="search_position_current_location_found">Pozicija je pronađena</string>
 	<string name="search_position_address">Adresa...</string>

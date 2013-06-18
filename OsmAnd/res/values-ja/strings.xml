@@ -2,8 +2,8 @@
 <resources>
      <string name="tip_select_destination_point">目的地点を選択</string>
      <string name="tip_select_destination_point_t">
-\tNEW VERSION, PLEASE ADAPT TRANSLATION: You can select a destination directly in the map (context menu, then \'Set as destination\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
-\n\tThe destination is marked as an orange disk on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+\tNEW VERSION, PLEASE ADAPT TRANSLATION: \tYou get directions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
 
 \n\t目的地点をマップ
 (コンテキストメニューから \'ナビゲート先\')で直接、あるいは全ての検索画面で
@@ -594,7 +594,6 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
  <string name="save_track_to_gpx_descrp">トラックは日ごとにグループ化されたトラック用ディレクトリに
  保存されます</string>
  <string name="save_track_to_gpx">トラックをGPXにログ</string>
- <string name="navigate_to">ナビゲート先</string>
  <string name="update_tile">マップを更新</string>
  <string name="reload_tile">タイルをリロード</string>
  <string name="user_name_descr">あなたのOSM ユーザ名</string>
@@ -673,10 +672,7 @@ name="recalculate_route_to_your_location">現在地に従ってルートを再�
 <string name="search_address_building">建物</string>
 <string name="search_address_building_option">建物</string>
 <string name="search_address_street_option">交差する通り</string>
-
 <string name="search_tabs_location">位置</string>
-
-<string name="context_menu_item_navigate_point">地点へナビゲート</string>
 <string name="context_menu_item_add_favorite">お気に入りに追加</string>
 <string name="context_menu_item_update_map">マップを更新</string>
 <string name="context_menu_item_open_bug">OSM バグをオープン</string>

@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="srtm_plugin_description">Этот плагин позволяет загружать линии высот (Загрузка данных -&gt; Меню -&gt; "Другие карты") для использование в оффлайн режиме.</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
@@ -90,7 +90,6 @@
   <string name="oclock">ч.</string>
   <string name="unknown_from_location">Начальное местоположение ещё не определено</string>
   <string name="unknown_location">Местоположение ещё не определено</string>
-  <string name="context_menu_item_directions">Маршрут к</string>
   <string name="modify_transparency">Изменить прозрачность (0 - прозрачный, 255 - непрозрачный)</string>
   <string name="confirm_interrupt_download">Вы хотите прервать загрузку файла?</string>
   <string name="first_time_msg">Для работы большинства основных возможностей приложения требуются детальные карты регионов, которые можно загрузить из Интернета с помощью пункта меню Настройки -&gt; Данные. После загрузки этих карт Вы сможете осуществлять поиск адреса, POI и остановок общественного транспорта.</string>
@@ -217,7 +216,6 @@
   <string name="local_index_mi_rename">Переименовать</string>
   <string name="show_gpx_route">Показать на карте</string>
   <string name="poi_filter_nominatim">Nominatim (Интернет)</string>
-  <string name="search_select_point">Выбрать</string>
   <string name="search_position_current_location_search">Поиск позиции…</string>
   <string name="search_position_current_location_found">Точка [Найдена]</string>
   <string name="search_position_address">Адрес…</string>
@@ -684,7 +682,6 @@
   <string name="monitor_preferences">Мониторинг</string>
   <string name="save_track_to_gpx_descrp">Сохранять трек в формате GPX в папку track</string>
   <string name="save_track_to_gpx">Записывать трек в файл GPX</string>
-  <string name="navigate_to">Идти к</string>
   <string name="update_tile">Обновить карту</string>
   <string name="reload_tile">Обновить часть карты</string>
   <string name="user_name_descr">Указать имя пользователя для работы с OSM</string>
@@ -756,7 +753,6 @@
   <string name="search_address_building_option">Дом</string>
   <string name="search_address_street_option">Пересечение улиц</string>
   <string name="search_tabs_location">Координаты</string>
-  <string name="context_menu_item_navigate_point">Идти к точке</string>
   <string name="context_menu_item_add_favorite">Добавить к избранным</string>
   <string name="context_menu_item_update_map">Обновить карту</string>
   <string name="context_menu_item_open_bug">Сообщить об ошибке на карте</string>

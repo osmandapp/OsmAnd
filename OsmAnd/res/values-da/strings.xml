@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\"Contour lines\") på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
@@ -97,8 +97,6 @@
     <string name="map_widget_monitoring_services">Logningstjenester</string>
 	<string name="no_route">Ingen rute</string>
 	<string name="delete_target_point">Fjern rutepunkt</string>
-	<string name="navigate_to">Brug som
-\ndestination</string>
     <string name="context_menu_item_last_intermediate_point">Tilføj som sidste rutepunkt</string>
     <string name="context_menu_item_first_intermediate_point">Tilføj som første rutepunkt</string>
     <string name="add_as_last_destination_point">Tilføj som sidste rutepunkt</string>
@@ -312,7 +310,6 @@
 	<string name="download_link_and_local_description">Tryk her for at hente eller opdatere offlinedata.\nTryk på et eksisterende element for at se flere detaljer, tryk og hold for at deaktiver eller slette. Nuværende data på enheden (%1$s fri):</string>
 	<string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
 	<string name="unknown_location">Position endnu ikke kendt</string>
-	<string name="context_menu_item_directions">Rutevejledning hertil</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
 	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
@@ -515,7 +512,6 @@
 	<string name="button_upgrade_osmandplus">Opgrader OsmAnd+</string>
 	<string name="local_index_mi_rename">Omdøb</string>
 	<string name="show_gpx_route">Vis på kort</string>
-	<string name="search_select_point">Vælg</string>
 	<string name="search_position_current_location_search">Søger position…</string>
 	<string name="search_position_current_location_found">Position (fundet)</string>
 	<string name="search_position_address">Adresse…</string>
@@ -977,7 +973,6 @@
 	<string name="context_menu_item_create_poi">Opret interessepunkt</string>
 	<string name="context_menu_item_update_map">Opdater kort</string>
 	<string name="context_menu_item_add_favorite">Tilføj til favoritter</string>
-	<string name="context_menu_item_navigate_point">Brug som destination</string>
 	<string name="search_tabs_location">Placering</string>
 	<string name="search_address_street_option">Krydsende vej</string>
 	<string name="search_address_building_option">Bygning</string>

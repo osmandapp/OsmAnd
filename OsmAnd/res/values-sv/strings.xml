@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
 <string name="ChooseCountry">Välj land</string>
 <string name="choose_city">Välj stad</string>
@@ -87,7 +87,6 @@
 <string name="search_address_building_option">Byggnad</string>
 <string name="search_address_street_option">Korsande gata</string>
 <string name="search_tabs_location">Plats</string>
-<string name="context_menu_item_navigate_point">Ange som destination</string>
 <string name="context_menu_item_add_favorite">Lägg till i favoriter</string>
 <string name="context_menu_item_update_map">Uppdatera kartan</string>
 <string name="context_menu_item_open_bug">Öppna OSM-bugg</string>
@@ -146,7 +145,6 @@
 \nKlicka på ett befintligt post för att se fler detaljer; tryck och håll för att inaktivera eller ta bort. Aktuella data på enheten (%1$s ledigt):</string>
 <string name="unknown_from_location">Startpunkten är ännu inte bestämd</string>
 <string name="unknown_location">Positionen är ännu inte känd</string>
-<string name="context_menu_item_directions">Vägbeskrivning hit</string>
 <string name="confirm_interrupt_download">Vill du avbryta nedladdningen?</string>
 <string name="local_indexes_cat_tile">Online-kartor och kartbitar (tiles)</string>
 <string name="local_indexes_cat_map">Offline-kartor (vektor)</string>
@@ -410,7 +408,6 @@
 <string name="map_version_changed_info">Servern innehåller kartfiler som inte är kompatibla med din nuvarande version av programmet. För att ladda ner och använda dem bör du uppgradera programmet till en nyare version.</string>
 <string name="local_index_mi_rename">Byt namn</string>
 <string name="show_gpx_route">Visa på karta</string>
-<string name="search_select_point">Välj</string>
 <string name="search_position_current_location_search">Söker plats…</string>
 <string name="search_position_current_location_found">Plats (hittad)</string>
 <string name="search_position_address">Adress…</string>
@@ -589,7 +586,6 @@
 <string name="use_osmand_routing_service_descr">Använd OsmAnd offline navigering gäller endast rutter &gt;20 km (experimentell)</string>
 <string name="specified_dir_doesnt_exist">Kan inte hitta angiven katalog.</string>
 <string name="tip_recent_changes_0_8_4_t">"Förändringar i 0.8.4 :\n\t*Några buggfixar\n\t*Kartan tappar inte bort positionslås efter avbrott "</string>
-    <string name="navigate_to">Navigera</string>
     <string name="context_menu_item_last_intermediate_point">Lägg till som sista waypoint</string>
     <string name="context_menu_item_first_intermediate_point">Lägg till som första waypoint</string>
     <string name="add_as_last_destination_point">Lägg till som sista waypoint</string>

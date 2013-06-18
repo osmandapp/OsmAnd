@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_recent_changes_0_8_1_t">"Promjene u 0.8.1 : "</string>
   <string name="asap">Što prije</string>
   <string name="save_route_as_gpx">Sačuvajte put kao GPX datoteku</string>
@@ -25,7 +25,6 @@
   <string name="download_link_and_local_description">Kliknite ovdje da preuzmete ili nadogradite podatke koji se koriste van mreže.\nKliknite na bilo koju postojeću stavku da vidite više detalja, pritisnite i zadržite da isključite ili obrišete. Trenutni podaci na uređaju (%1$s slobodno):</string>
   <string name="unknown_from_location">Početna tačka još uvijek nije određena</string>
   <string name="unknown_location">Pozicija je još uvijek nepoznata</string>
-  <string name="context_menu_item_directions">Upute do ovdje</string>
   <string name="modify_transparency">Odredite providnost (0 - providno, 255 - vidljivo)</string>
   <string name="confirm_interrupt_download">Da li ste sigurni da želite prekinuti preuzimanje datoteke?</string>
   <string name="first_time_msg">Da bi koristili glavne funkcije ove aplikacije, potrebno je da preuzmete osnovne regionalne podatke za korištenje van mreže, koje možete preuzeti (koristite Podešavanja, Podaci van mreže). Nakon toga, imaćete mogućnost pretrage po adresi, da pogledate zanimljivosti i da nađete javni prevoz.</string>

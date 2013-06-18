@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources><string name="avoid_in_routing_title">Osgoi…</string>
 <string name="avoid_in_routing_descr">Osgoi tollffyrdd, ffyrdd garw, fferïau</string>
 <string name="show_warnings_title">Dangos larymau</string>
@@ -153,7 +153,6 @@ Cyfrannol cof %4$s MB (terfyn Android %5$s MB, Dalvik %6$s MB).</string>
 <string name="download_link_and_local_description">Cliciwch yma i lawrlwytho neu ddiweddaru data all-lein. \nCliciwch unrhyw eitem presennol i weld mwy o fanylion, bwyso a dal i deactivate neu ddileu. Data cyfredol ar y ddyfais (%1$s am ddim):</string>
 <string name="unknown_from_location">Nid yw man cychwyn hwn wedi\'i benderfynu eto</string>
 <string name="unknown_location">Sefyllfa nad yw\'n hysbys eto</string>
-<string name="context_menu_item_directions">Cyfarwyddiadau i fan hyn</string>
 <string name="modify_transparency">Addasu tryloywder (0 - tryloyw, 255 - afloyw)</string>
 <string name="confirm_interrupt_download">Ydych chi eisiau i dorri ar draws llwytho ffeil?</string>
 <string name="basemap_was_selected_to_download">Basemap yn ofynnol ar gyfer gweithredu\'n briodol cais a dewiswyd ef i lawrlwytho.</string>

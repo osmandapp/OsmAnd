@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -172,7 +172,6 @@
 \nΚλικ κάποιο υπάρχον στοιχείο για να δείτε περισσότερες λεπτομέρειες, πατήστε και κρατήστε πατημένο για να το απενεργοποιήσετε ή να το διαγράψετε. Τρέχοντα δεδομένα στη συσκευή (%1$s ελεύθερα):</string>
 	<string name="unknown_from_location">﻿Το αφετηρία δεν έχει ακόμη καθοριστεί</string>
 	<string name="unknown_location">Η Θέση σας δεν είναι ακόμα γνωστή</string>
-	<string name="context_menu_item_directions">﻿Οδηγίες για εδώ</string>
 	<string name="modify_transparency">﻿Τροποποίηση διαφάνειας (0 - διάφανο, 255 - αδιαφανές)</string>
 	<string name="confirm_interrupt_download">﻿Θέλετε να διακόψετε τη λήψη αρχείων;</string>
 	<string name="first_time_msg">Ευχαριστούμε που χρησιμοποιείτε το OsmAnd. Για πολλά χαρακτηριστικά αυτής της εφαρμογής χρειάζεστε μερικά τοπικά offline δεδομένα τα οποία μπορείτε να κατεβάσετε μέσω του \'Ρυθμίσεις\' -&gt; \'Διαχείριση δεδομένων\'. Μετά από αυτό θα μπορείτε να δείτε χάρτες, να εντοπίσετε διευθύνσεις, να ψάξετε Σημ. Ενδ. και να βρείτε δημόσιες μεταφορές.</string>    
@@ -440,7 +439,6 @@
 	<string name="local_index_mi_rename">Μετονομασία</string>
 	<string name="show_gpx_route">Εμφάνιση στο χάρτη</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="search_select_point">Επιλογή</string>
 	<string name="search_position_current_location_search">Αναζήτηση θέσης…</string>
 	<string name="search_position_current_location_found">Θέση (βρέθηκε)</string>
 	<string name="search_position_address">Διεύθυνση…</string>
@@ -913,7 +911,6 @@
 	<string name="save_track_interval_descr">Επιλέξτε διάστημα τοποθέτησης για τα ίχνη</string>
 	<string name="save_track_to_gpx_descrp">Τα ίχνη θα αποθηκεύονται στον κατάλογο ιχνών ομαδοποιημένα κατά ημέρες</string>
 	<string name="save_track_to_gpx">Εγγραφή ίχνους σε αρχείο GPX</string>
-	<string name="navigate_to">Ορισμός ως προορισμός</string>
 	<string name="update_tile">Ενημέρωση χάρτη</string>
 	<string name="reload_tile">Ανανέωση πλακιδίου</string>
 	<string name="mark_point">Στόχος</string>
@@ -981,7 +978,6 @@
 	<string name="search_address_building_option">Κτήριο</string>
 	<string name="search_address_street_option">Διασταυρούμενη οδός</string>
 	<string name="search_tabs_location">Τοποθεσία</string>
-	<string name="context_menu_item_navigate_point">Ορισμός ως προορισμός</string>
 	<string name="context_menu_item_add_favorite">Προσθήκη στα αγαπημένα</string>
 	<string name="context_menu_item_update_map">Ενημέρωση χάρτη</string>
 	<string name="context_menu_item_open_bug">Άνοιγμα σφάλματος OSM</string>

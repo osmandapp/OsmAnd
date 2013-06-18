@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -73,7 +73,6 @@
   <string name="download_link_and_local_description">Druk hier om van-lyn-af inligting af te laai of op datum te bring.\nDruk op enige bestaande item om meer inligting te sien, druk en hou om af te skakel of uit te vee. Huidige inligting op toestel (%1$s beskikbaar):</string>
   <string name="unknown_from_location">Beginpunt is nog nie bepaal nie</string>
   <string name="unknown_location">Posisie is nog nie bekend nie</string>
-  <string name="context_menu_item_directions">Aanwysings hiernatoe</string>
   <string name="modify_transparency">Verander deursigtigheid (0 - Deursigtig, 255 - Solied)</string>
   <string name="confirm_interrupt_download">Wil jy die aflaai van die dokument onderbreek?</string>
   <string name="first_time_msg">Om die belangrikste funksies van hierdie toepassing te gebruik, benodig jy sommige streeksverwante van-lyn-af inligting, wat jy kan aflaai (gebruik Stellings, Aflyn inligting). Daarna sal jy kan soek na adresse, POIs en publieke vervoer.</string>
@@ -299,7 +298,6 @@
   <string name="local_index_mi_rename">Herbenoem</string>
   <string name="show_gpx_route">Wys op kaart</string>
   <string name="poi_filter_nominatim">Internet Nominatim</string>
-  <string name="search_select_point">Kies</string>
   <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>
   <string name="search_position_current_location_found">Ligging (gevind)</string>
   <string name="search_position_address">Adres…</string>
@@ -751,7 +749,6 @@
   <string name="save_track_interval_descr">Kies posisioneringstussenpose vir spore</string>
   <string name="save_track_to_gpx_descrp">Spore sal geberg word in die spoor bergadres in daaglikse groepe</string>
   <string name="save_track_to_gpx">Skryf die spoor in `n GPX dokument</string>
-  <string name="navigate_to">Stel as bestemming</string>
   <string name="update_tile">Opgradeer kaart</string>
   <string name="reload_tile">Laai teël weer af</string>
   <string name="mark_point">Teiken</string>
@@ -822,7 +819,6 @@
   <string name="search_address_building_option">Gebou</string>
   <string name="search_address_street_option">Kruisende straat</string>
   <string name="search_tabs_location">Ligging</string>
-  <string name="context_menu_item_navigate_point">Stel as bestemming</string>
   <string name="context_menu_item_add_favorite">Voeg by gunstelinge</string>
   <string name="context_menu_item_update_map">opgradeer kaart</string>
   <string name="context_menu_item_open_bug">Open OSM fout</string>

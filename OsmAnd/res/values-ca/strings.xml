@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="show_warnings_title">Mostra els missatges d\'avís...</string>
 <string name="map_widget_fluorescent">Rutes amb fluorescència</string>
 <string name="map_widget_show_ruler">Mostra el regle</string>
@@ -82,7 +82,6 @@
 <string name="left_side_navigation_descr">Selecciona per als països amb conducció per l\'esquerra</string>
 <string name="unknown_from_location">El punt d\'inici encara no s\'ha determinat</string>
 <string name="unknown_location">La posició encara no es coneix</string>
-<string name="context_menu_item_directions">Indicacions fins aquí</string>
 <string name="modify_transparency">Modifica l\'opacitat (0 - transparent, 255 - opac)</string>
 <string name="monitoring_mode_off">Enregistra en un GPX</string>
 <string name="bg_service_sleep_mode_off">Activa\'n\n el mode adormit</string>
@@ -249,7 +248,6 @@
 <string name="poi_filter_by_name">Cerca pel nom</string>
 <string name="show_gpx_route">Mostra al mapa</string>
 <string name="poi_filter_nominatim">Nominatim en línia</string>
-<string name="search_select_point">Selecciona</string>
 <string name="search_position_current_location_search">S\'està cercant la posició...</string>
 <string name="search_position_current_location_found">Posició (trobada)</string>
 <string name="search_position_address">Adreça...</string>
@@ -683,7 +681,6 @@
 <string name="data_settings_descr">Especifica llengua,baixa/recarrega dades</string>
 <string name="use_online_routing">Usa navegació en linía</string>
 <string name="save_current_track_descr">Guarda el seguiment actual a la SD ara</string>
-<string name="navigate_to">Defineix com a destinació</string>
 <string name="add_to_favourite">Afegeix a Preferits</string>
 <string name="ChooseCountry">Escull pais</string>
 <string name="navigate_to_point">Marcar com a dest.</string>
@@ -924,7 +921,6 @@
 	<string name="search_shown_on_map">Mostra al mapa</string>
 	<string name="search_address_street_option">Intersecció de carrers</string>
 	<string name="search_tabs_location">Localització</string>
-	<string name="context_menu_item_navigate_point">Defineix com a destinació</string>
 	<string name="add_favorite_dialog_top_text">Entra el nom del preferit</string>
 	<string name="add_favorite_dialog_default_favourite_name">Preferit</string>
 	<string name="add_favorite_dialog_favourite_added_template">El punt preferit «{0}» s\'ha afegit correctament.</string>

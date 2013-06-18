@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources>
 <string name="search_button">Išči</string>
 	<string name="search_activity">Išči</string>
@@ -34,7 +34,6 @@
 	<string name="search_address_building">Hiša</string>
 	<string name="search_address_building_option">Hiša</string>
 	<string name="search_address_street_option">Sekajoča cesta</string>
-	<string name="context_menu_item_navigate_point">Nastavi cilj</string>
 	<string name="context_menu_item_add_favorite">Dodaj med priljubljene</string>
 	<string name="default_buttons_yes">Da</string>
 	<string name="default_buttons_no">Ne</string>
@@ -85,8 +84,6 @@
 \n\t* Izboljšano vodenje po poti
 \n\t* Možnost izogibanja avtocest pri pripravi poti\n\t* Dodana še ena zvrst kolesarskih cest na zemljevid (Cycleway=track)
 \n\t* Odpravljeno veliko napak "</string>
-    
-    <string name="navigate_to">Nastavi cilj</string>
     <string name="context_menu_item_first_intermediate_point">Določi prvo vmesno točko</string>
     <string name="context_menu_item_last_intermediate_point">Določi zadnjo vmesno točko</string>
     <string name="add_as_last_destination_point">Dodaj kot zadnjo vmesno točko</string>
@@ -143,7 +140,6 @@
 	<string name="left_side_navigation_descr">Izberite za države, kjer se vozi po levi strani ceste</string>
 	<string name="unknown_from_location">Izhodišče ni še določeno</string>
 	<string name="unknown_location">Lokacija še ni znana</string>
-	<string name="context_menu_item_directions">Usmerjanje do tu</string>
 	<string name="modify_transparency">Spremeni prosojnost (0 - prosojno, 255 - neprosojno)</string>
 	<string name="confirm_interrupt_download">Ali želite prekiniti nalaganje datoteke?</string>
 	<string name="basemap_was_selected_to_download">Basemap je potrebna za pravilno delovanje programa in je bila izbrana za prenos.</string>
@@ -521,7 +517,6 @@
 	<string name="favorite_delete_multiple">Izbrisali boste %1$d lokacijo in %2$d skupino. Ali ste prepričani?</string>
 	<string name="favourites_delete_multiple_succesful">Priljubljene lokacije so uspešno izbrisane.</string>
 	<string name="show_poi_on_map">Prikaži na zemljevidu</string>
-	<string name="search_select_point">Izberi</string>
 	<string name="favorite">Priljubljena</string>
 	<string name="fav_points_edited">Priljubljena lokacija je bila urejena</string>
 	<string name="fav_points_not_exist">Ni priljubljenih lokacij</string>
