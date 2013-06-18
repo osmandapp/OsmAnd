@@ -136,7 +136,9 @@ public class LocalIndexHelper {
 			float maxSpeed = 0;
 			int speedCount = 0;
 			double totalSpeedSum = 0;
-			
+
+			private float[] calculations = new float[1];
+
 			int points = 0;
 			for(int i = 0; i< result.tracks.size() ; i++){
 				Track subtrack = result.tracks.get(i);
@@ -173,13 +175,13 @@ public class LocalIndexHelper {
 									diffElevationDown -= diff;
 								}
 							}
-							totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+							// fix Issue 1946(5), try using distanceBetween instead of haversine:
+							//totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+							totalDistance += calculations[0];
 						}
 					}
-					
 				}
-				
-				
 			}
 			if(startTime == Long.MAX_VALUE){
 				startTime = f.lastModified();
