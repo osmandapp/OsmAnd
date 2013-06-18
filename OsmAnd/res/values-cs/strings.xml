@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -527,7 +527,7 @@
   <string name="rotate_map_compass_opt">Podle kompasu</string>
   <string name="rotate_map_bearing_opt">Ve směru pohybu</string>
   <string name="rotate_map_none_opt">Neotáčet</string>
-  <string name="rotate_map_to_bearing_descr">Zvolte způsob natočení mapy</string>
+  <string name="rotate_map_to_bearing_descr">Zvolte směr natočení mapy</string>
   <string name="rotate_map_to_bearing">Natočení mapy</string>
   <string name="show_route">Ukázat cestu</string>
   <string name="fav_imported_sucessfully">Oblíbená místa úspěšně importována</string>
@@ -1185,8 +1185,8 @@
     <string name="support_new_features_descr">Prosím sponzorujte vývoj nových funkcí v aplikaci</string>
 	<string name="av_use_external_camera_descr">Použít externí aplikaci pro fotografování</string>
     <string name="av_use_external_camera">Externí foto aplikace</string>
-    <string name="prefer_motorways">Preferovat dálnice</string>
-	<string name="prefer_in_routing_title">Preferovat…</string>
+    <string name="prefer_motorways">Upřednostňovat dálnice</string>
+	<string name="prefer_in_routing_title">Upřednostňovat…</string>
 	<string name="tip_recent_changes_1_2_t">"Opravy ve verzi 1.2.1:\n\t* Oprava Geo obsahu (Foursquare, c:geo)\n\t* Oprava nestability obrazovky během navigace\n\t* Další drobné opravy\nZměny ve verzi 1.2:\n\t* Opravené chyby (doladěná navigace, hledání, nahrávky zvuku a videa, hlasové pokyny, drobné změny zobrazení)\n\t* Snadnější konfigurace stínování (vyžaduje modul vrstevnic)\n\t* Podpora odkazů maps.google.com\n\t* Nový widget (GPS info)\n\t* Podpora více oken na nových zařízeních Samsung\n\t* Kalmanův filtr pro kompas\n\t* Podpora pebble watch "</string>
     <string name="max_speed_none">žádná</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1195,7 +1195,7 @@
     <string name="tip_recent_changes_1_1_2_t">"Změny ve verzi 1.1.2:
 \n\t* Vylepšení modulu audio/video (fotografie obsahují EXIF informace)
 \n\t* Opraven modul vrstevnic a změněna jeho struktura\n\t* Balíčky stínování kopců pro modul vrstevnic\n\t* Oprava chyb (neoptimální výpočet trasy) "</string>
-    <string name="prefer_in_routing_descr">Preferovat dálnice</string>
+    <string name="prefer_in_routing_descr">Upřednostňovat dálnice</string>
     <string name="av_def_action_choose">Vybrat při použití</string>
     <string name="access_arrival_time">Čas příjezdu</string>
     <string name="tip_recent_changes_1_1_4_t">"Změny ve verzi 1.1.4:
@@ -1263,4 +1263,12 @@
     <string name="distance_measurement_load_gpx">Otevřít soubor GPX</string>
     <string name="osmand_monitoring_plugin_description">Umožní záznam a navigaci při vypnuté obrazovce pravidelným zapínáním přijímače GPS. Zobrazí nastavení záznamu tras do souborů GPX nebo poslání v přímém přenosu na webový server.</string>
     <string name="osmand_distance_planning_plugin_description">Vytvořte spojnice (nebo použijte či změňte stávající soubory GPX) pro měření vzdálenosti mezi body. Uložte je do souboru GPX. Lze též použít pro plánování GPX tras.</string>
+    <string name="destination_point">Cíl %1$s</string>
+    <string name="context_menu_item_destination_point">Nastavit jako cíl</string>
+    <string name="please_select_address">Zvolte nejprve město nebo ulici</string>
+    <string name="search_street_in_neighborhood_cities">Hledat ulice v okolních obcích</string>
+    <string name="intermediate_items_sort_return">Průchozí body byly lépe utříděny pro zrychlení cesty do cíle.</string>
+    <string name="intermediate_items_sort_by_distance">Utřídit (ode dveří ke dveřím)</string>
+    <string name="tip_recent_changes_1_4_t">"Změny ve verzi 1.4:
+\n\t* Optimální třídění průchozích bodů (obchodní cestující, ode dveří ke dveřím)\n\t* Hledání ulic podle jména (v okolí)\n\t* Modul plánování (nahrání/úprava/uložení tras GPX)\n\t* Nová obrazovka stahování (stahování na pozadí)\n\t* Organizace GPX do adresářů\n\t* Mazání souborů s vrstevnicemi\n\t* Podpora OSM poznámek "</string>
     </resources>
