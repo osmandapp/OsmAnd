@@ -122,7 +122,7 @@ public class LocalIndexHelper {
 			info.setCorrupted(true);
 			info.setDescription(result.warning);
 		} else {
-			int totalDistance = 0;
+			float totalDistance = 0;
 			int totalTracks = 0;
 			long startTime = Long.MAX_VALUE;
 			long endTime = Long.MIN_VALUE;
@@ -175,8 +175,8 @@ public class LocalIndexHelper {
 									diffElevationDown -= diff;
 								}
 							}
-							// fix Issue 1946(5), try using distanceBetween instead of haversine:
 							//totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
+							// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) should be more exact, but likely makes no practical difference:
 							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 							totalDistance += calculations[0];
 						}
