@@ -754,7 +754,7 @@ public class MapActivityActions implements DialogProvider {
 	public void contextMenuPoint(final double latitude, final double longitude, final ContextMenuAdapter iadapter, Object selectedObj) {
 		final ContextMenuAdapter adapter = iadapter == null ? new ContextMenuAdapter(mapActivity) : iadapter;
 
-		adapter.registerItem(R.string.context_menu_item_navigate_point, R.drawable.list_activities_navigate_to);
+		adapter.registerItem(R.string.get_directions, R.drawable.list_activities_navigate_to);
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		final OsmandSettings settings = getMyApplication().getSettings();
 		if(targets.getPointToNavigate() != null) {
@@ -787,7 +787,7 @@ public class MapActivityActions implements DialogProvider {
 					intent.putExtra(SearchActivity.SEARCH_LON, longitude);
 					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					mapActivity.startActivity(intent);
-				} else if (standardId == R.string.context_menu_item_navigate_point) {
+				} else if (standardId == R.string.get_directions) {
 					//getMyApplication().getTargetPointsHelper().navigateToPoint(new LatLon(latitude, longitude), true, -1);
 					settings.setPointToNavigate(latitude, longitude, false, mapActivity.getResources().getString(R.string.point_on_map, latitude, longitude));
 					targets.updatePointsFromSettings();
@@ -1249,7 +1249,7 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(showOnMap);
 		ActionItem setAsDestination = new ActionItem();
 		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
-		setAsDestination.setTitle(activity.getString(R.string.navigate_to));
+		setAsDestination.setTitle(activity.getString(R.string.get_directions));
 		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
