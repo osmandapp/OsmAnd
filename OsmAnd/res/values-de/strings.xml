@@ -442,7 +442,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="amenity_type_user_defined">Benutzerdefiniert</string>
 	<string name="fav_export_confirmation">Eine Datei mit exportierten Favoriten existiert bereits. Überschreiben?</string>
 	<string name="profile_settings">Profilspezifische Einstellungen</string>
-	<string name="settings_preset">Nutzerprofil</string>
+	<string name="settings_preset">Standardprofil</string>
 	<string name="settings_preset_descr">Karten- und Navigations-Einstellungen werden je Verwendungszweck separat gespeichert.</string>
 	<string name="monitor_preferences">Standort-Aufzeichnung</string>
 	<string name="monitor_preferences_descr">Standort-Aufzeichnung konfigurieren</string>
