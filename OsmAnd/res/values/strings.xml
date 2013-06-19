@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="app_mode_default">Neutral map</string>
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
@@ -1427,7 +1428,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="choose_available_region">Choose region from list</string>
 	<string name="choose_intersected_street">Choose intersecting street</string>
 	<string name="Closest_Amenities">Closest amenities</string>
-	<string name="app_mode_default">Default</string>
 	<string name="app_mode_car">Car</string>
 	<string name="app_mode_bicycle">Bicycle</string>
 	<string name="app_mode_pedestrian">Pedestrian</string>
