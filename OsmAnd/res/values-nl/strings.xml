@@ -23,7 +23,7 @@
   <string name="play_commands_of_currently_selected_voice">Luister naar de commando\\\'s van de gekozen stem</string>
   <string name="debugging_and_development">OsmAnd fout-opsporing en ontwikkeling</string>
   <string name="native_rendering">Interne kaartgeneratie</string>
-  <string name="animate_routing">Animeer navigatie</string>
+  <string name="animate_routing">Simuleer navigatie</string>
   <string name="test_voice_prompts">Test stem-instructies</string>
   <string name="switch_to_raster_map_to_see">Geen offline vectorkaart aanwezig voor deze locatie. Je kan deze downloaden via Instellingen (Offline gegevens), of overschakelen naar online kaarten.</string>
   <string name="tip_recent_changes_0_7_2_t">"Wijzigingen in 0.7.2:
@@ -213,8 +213,8 @@
   <string name="city_type_town">Plaats</string>
   <string name="city_type_city">Stad</string>
   <string name="layer_poi_label">Interessepunt-namen</string>
-  <string name="animate_route_off">Stop animatie</string>
-  <string name="animate_route">Start animatie</string>
+  <string name="animate_route_off">Stop simulatie</string>
+  <string name="animate_route">Start simulatie</string>
   <string name="tip_recent_changes_0_6_8_t">"Wijzigingen in 0.6.8 : \n\t- Completely redesigned zoek (interessepunt, Address)! Make address zoek much faster and more responsive. Create one Zoek interface with many different options. \n\t- Implement interessepunt zoek by name in big areas (countries) \n\t- Fix flickering kaart screen for tablets (Issue 641) \n\t- Auto follow route option (Issue 356) \n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\' \n\t- interessepunt gegevens included in .obf bestand (all download indexes after 01/10/11) \n\t- Stem prompt fixes (GPS position fix, omitting first command) \n\t- Small improvements "</string>
   <string name="file_can_not_be_renamed">Bestandsnaam kan niet worden gewijzigd.</string>
   <string name="file_with_name_already_exists">Er bestaat al een bestand met die naam.</string>
@@ -853,7 +853,7 @@
   <string name="extra_settings">Geavanceerde instellingen</string>
   <string name="osmand_monitoring_description">Toon instellingen om reizen in GPX bestanden vast te leggen, of live, via een webservice, online te bewaren.</string>
   <string name="osmand_extra_settings_description">Toon geavanceerde kaartinstellingen (zoals meer details tonen) en enkele apparaatspecifieke instellingen.</string>
-  <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met animatie of het meten van de kaartweergavesnelheid.</string>
+  <string name="osmand_development_plugin_description">Toon opties voor ontwikkeling en foutopsporing, zoals navigatie met simulatie of het meten van de kaartweergavesnelheid.</string>
   <string name="plugins_screen">Plugin-manager</string>
   <string name="select_plugin_to_activate">Klik op een plugin om deze te (de)activeren. (Het kan nodig zijn om OsmAnd te herstarten.)</string>
   <string name="prefs_plugins_descr">Plugins geven extra instellingen en functies zoals tracking, rasterkaarten, doorwerken in standby mode en toegankelijkheidsinstellingen</string>
@@ -930,7 +930,7 @@
   <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
   <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Totaal werkgeheugen</string>
-  <string name="select_animate_speedup">Selecteer versnelling van de route-animatie</string>
+  <string name="select_animate_speedup">Selecteer versnelling van de route-simulering</string>
   <string name="osmand_parking_hours">Uur</string>
   <string name="osmand_parking_minutes">Minuten</string>
   <string name="osmand_parking_position_description_add_time">De auto werd geparkeerd om:</string>
