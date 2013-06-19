@@ -937,7 +937,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				if (child.getSize() > 100) {
 					size = formatMb.format(new Object[] { (float) child.getSize() / (1 << 10) });
 				} else {
-					size = child.getSize() + " Kb";
+					size = child.getSize() + " kB";
 				}
 				((TextView) v.findViewById(R.id.local_index_size)).setText(size);
 			} else {
