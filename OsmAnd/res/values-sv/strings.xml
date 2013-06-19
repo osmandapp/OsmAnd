@@ -286,7 +286,7 @@
 <string name="i_am_here">Jag är här</string>
 <string name="zoom_by_trackball_descr">Ändra kartzoom med horisontell flyttning av styrkulan</string>
 <string name="zoom_by_trackball">Använd styrkula för zoom-kontroll</string>
-<string name="use_short_object_names_descr">Använd korta objektnamn i kontakt prospektering läge</string>
+<string name="use_short_object_names_descr">Använd korta objektnamn i \"touch exploration mode\"</string>
 <string name="use_short_object_names">Använd objektnamn</string>
 <string name="accessibility_preferences_descr">Tillgänglighetsrelaterade inställningar</string>
 <string name="accessibility_preferences">Tillgänglighet</string>
@@ -506,9 +506,9 @@
 <string name="tile_source_already_installed">Kartan är redan installerad; inställningarna kommer att uppdateras</string>
 <string name="select_tile_source_to_install">Välj kartor/kartrutor att installera eller uppdatera</string>
 <string name="internet_not_available">Internetanslutning krävs för åtgärden men är inte tillgänglig</string>
-<string name="install_more">Installera mer…</string>
-<string name="level_to_switch_vector_raster_descr">Minimal zoomnivå för att använda vektorkartor</string>
-<string name="level_to_switch_vector_raster">Min. vektor-zoomnivå</string>
+<string name="install_more">Installera fler…</string>
+<string name="level_to_switch_vector_raster_descr">Minsta zoomnivå för att använda vektorkartor</string>
+<string name="level_to_switch_vector_raster">Minsta vektor-zoomnivå</string>
 <string name="tip_location_sharing">Platsdelning</string>
 <string name="tip_favorites">Favoritpunkter</string>
 <string name="error_doing_search">Ett fel uppstod vid offline-sökning</string>
@@ -635,7 +635,7 @@
 	<string name="select_all">Markera alla</string>
 	<string name="reload">Uppdatera</string>
 	<string name="fast_route_mode">Snabbaste vägen</string>
-	<string name="fast_route_mode_descr">Aktivera för att beräkna snabbaste vägen eller inaktivera för kortaste vägen</string>
+	<string name="fast_route_mode_descr">Aktivera för att beräkna den snabbaste vägen eller inaktivera för den kortaste vägen</string>
 	<string name="tiles_to_download_estimated_size">Vid zoom {0} hämta {1} kartbitar ({2} MB)</string>
 	<string name="context_menu_item_download_map">Ladda ner karta</string>
 	<string name="poi_filter_sightseeing">Sevärdheter</string>
@@ -797,7 +797,7 @@
 	<string name="searching_address">Söker adress…</string>
 	<string name="hint_search_online">Husnummer, gata, stad</string>
 	<string name="search_offline_address">Offline</string>
-	<string name="max_level_download_tile_descr">Välj maximal zoomnivå att ladda ner för online-kartbitar</string>
+	<string name="max_level_download_tile_descr">Välj högsta zoomnivå att ladda ner för online-kartbitar</string>
 	<string name="route_general_information">Total sträcka %1$s, restid %2$d h %3$d m.</string>
 	<string name="router_service_descr">Välj en online- eller offline-navigeringstjänst</string>
 	<string name="router_service">Navigeringstjänst</string>
@@ -1096,7 +1096,7 @@
     <string name="available_downloads_left">%1$d filer tillgängliga för nedladdning.</string>
     <string name="install_paid">Fullversion</string>
     <string name="cancel_route">Avbryt rutten</string>
-    <string name="cancel_navigation">Stoppa navigeringen</string>
+    <string name="cancel_navigation">Avbryt navigeringen</string>
     <string name="clear_destination">Ta bort destinationen</string>
     <string name="download_using_mobile_internet">Wi-Fi är för tillfället inte anslutet. Vill du fortsätta att ladda ned med nuvarande anslutning till Internet?</string>
     <string name="street_name">Gata</string>
@@ -1125,10 +1125,10 @@
 	<string name="wait_current_task_finished">Vänta tills aktuell uppgift är slutförd</string>
     <string name="downloading_file_new">"Laddar ner "</string>
 	<string name="tip_recent_changes_1_4_t">"Ändringar i 1.4:
-\n\t* Sortera waypoints på bästa möjliga sätt för att besöka dem alla (handelsresande, dörr-till-dörr)
-\n\t* Sök gata efter namn (i närheten)
+\n\t* Sortera waypoints på bästa möjliga sätt för att besöka alla (handelsresande, dörr-till-dörr)
+\n\t* Sök efter gatnamn (i närheten)
 \n\t* Plugin för planering (ladda/redigera/spara GPX-spår)
-\n\t* Ny skärm för nedladdning (ladda ned i bakgrunden)
+\n\t* Ny nedladdningsskärm (ladda ned i bakgrunden)
 \n\t* Stöd för GPX-undermappar (organisera dina GPX-spår)
 \n\t* Ta bort SRTM-filer
 \n\t* Stöd för OSM-anteckningar "</string>
