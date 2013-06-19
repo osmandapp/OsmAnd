@@ -34,7 +34,7 @@
   <string name="offline_navigation_not_available">OsmAnd офлайн навігація тимчасово не доступна.</string>
   <string name="left_side_navigation">Лівосторонній рух</string>
   <string name="left_side_navigation_descr">Увімкніть для країн з лівостороннім рухом</string>
-  <string name="download_link_and_local_description">Завантажте або оновіть уже завантажені дані.\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоби вилучити (або деактивувати) мапу - утримуйте мапу.\nДані про пристрій(%1$s вільно):</string>
+  <string name="download_link_and_local_description">Завантажте або оновіть уже завантажені дані.↵\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоб вилучити або деактивувати мапу - виберіть і утримуйте відповідний пункт меню.↵\nДані про пристрій(%1$s вільно):</string>
   <string name="unknown_from_location">Початкове місцезнаходження не визначено</string>
   <string name="unknown_location">Позиція ще не визначена</string>
   <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
@@ -728,7 +728,7 @@
   <string name="show_osm_bugs">Відображати OpenStreetBugs</string>
   <string name="favourites_activity">Улюблені точки</string>
   <string name="add_to_favourite">Додати в улюблені</string>
-  <string name="use_english_names_descr">Відображати назви об\'єктів латинськими літерами</string>
+  <string name="use_english_names_descr">Зображати назви об\'єктів латинськими літерами</string>
   <string name="use_english_names">Назви латиницею</string>
   <string name="app_settings">Налаштування</string>
   <string name="search_address">Шукати адресу</string>
@@ -964,7 +964,7 @@
     <string name="av_def_action_audio">Запис аудіо</string>
     <string name="av_widget_action_descr">Вибрати типову дію для віджету</string>
     <string name="av_widget_action">Дія для віджета</string>
-    <string name="tip_recent_changes_1_1_2_t">Зміни в 1.1.2:\n\t* покращений аудіо/відео плагін(фотографії з EXIF інформацією)\n\t* покращено зручність користування і реструктуровано втулок Ізолінії висот\n\t* доданий пакет рельєфу місцевості для втулку Ізолінії висот\n\t* виправлено помилки (неоптимальної маршрутизації)</string>
+    <string name="tip_recent_changes_1_1_2_t">"Зміни в 1.1.2:\n\t* покращений аудіо/відео плагін(фотографії з EXIF інформацією)\n\t* покращено зручність користування і реструктуровано втулок Ізолінії висот\n\t* доданий пакет рельєфу місцевості для втулку Ізолінії висот\n\t* виправлено помилки (неоптимальної маршрутизації) "</string>
     <string name="precise_routing_mode_descr">Ввімкнути точний маршрут для обчислення точних маршрутів без незначних збоїв. Цей режим працює на обмеженій відстані і не використовує власну бібліотеку.</string>
     <string name="precise_routing_mode">Точний маршрут (alpha)</string>
     <string name="av_video_format_descr">Виберіть формат відео</string>
