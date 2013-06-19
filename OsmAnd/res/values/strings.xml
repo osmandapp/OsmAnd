@@ -11,7 +11,7 @@
     -->
 	<string name="app_mode_default">Neutral map</string>
 	<string name="settings_preset">Default profile</string>
-	<string name="settings_preset_descr">Map view and navigation settings are customizable per use profile. Set your default profile here.</string>
+	<string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Set as destination</string>
     <string name="please_select_address">Select city or street first</string>
