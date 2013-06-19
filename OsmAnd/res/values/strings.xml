@@ -569,7 +569,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* Parking plugin (\'Where is my car parked at?\')
 		\n\t* Enable/disable logging widget
 	</string>
-	<string name="select_animate_speedup">Select animate route acceleration</string>
+	<string name="select_animate_speedup">Select speed of route simulation</string>
     	<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Allocated memory</string>
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
@@ -652,7 +652,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="extra_settings">Advanced settings</string>
 	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
 	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
-	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
+	<string name="osmand_development_plugin_description">Show settings for development and debugging features like route simulation or rendering performance display.</string>
 	<string name="plugins_screen">Plugins</string>
 	<string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
 	<string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
@@ -883,8 +883,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="city_type_town">Town</string>
 	<string name="city_type_city">City</string>
 	<string name="layer_poi_label">POI labels</string>
-	<string name="animate_route_off">Stop animation</string>
-	<string name="animate_route">Start animation</string>
+	<string name="animate_route_off">Stop simulation</string>
+	<string name="animate_route">Start simulation</string>
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
 		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 		\n\t- Implement POI search by name in big areas (countries)  
