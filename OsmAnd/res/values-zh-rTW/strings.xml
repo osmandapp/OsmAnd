@@ -1053,7 +1053,7 @@
     <string name="default_buttons_other_actions">其它的作用</string>
     <string name="save_current_track_widget">儲存
 \n 現在的 GPX 航跡</string>
-	<string name="layer_hillshade">山體陰影圖層</string>
+	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>
     <string name="access_arrival_time">抵達時間</string>
     <string name="tip_recent_changes_1_1_4_t">"在1.1.4的變更：
@@ -1066,8 +1066,8 @@
     <string name="prefer_in_routing_descr">較偏愛高速公路</string>
     <string name="prefer_in_routing_title">偏愛…</string>
 	<string name="prefer_motorways">較偏愛高速公路</string>
-	<string name="download_hillshade_item">山體陰影</string>
-    <string name="download_hillshade_maps">山體陰影覆疊</string>
+	<string name="download_hillshade_item">地形陰影</string>
+    <string name="download_hillshade_maps">地形陰影層疊</string>
     <string name="dist_control_start">開始</string>
     
     <string name="local_indexes_cat_srtm">等高線資料</string>
@@ -1175,5 +1175,5 @@
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路經過的點已採取了最佳化的排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球資料（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、Japan Space Systems (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">以位置去關聯的記錄尚未定義。\"使用位置......\"，把記錄分配給指定的位置</string>
-    <string name="srtm_plugin_description">便於下載目前離線的等高線和山體陰影（設置 -&gt; 數據管理 -&gt; 下載 -&gt; 選擇所需的地圖類型）。</string>
+    <string name="srtm_plugin_description">便於下載目前離線的等高線和地形陰影（設置 -&gt; 數據管理 -&gt; 下載 -&gt; 選擇所需的地圖類型）。</string>
     </resources>
