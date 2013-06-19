@@ -1324,7 +1324,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
-	<string name="downloading_file_new">Downloading </string>
+	<string name="downloading_file_new">Downloading...</string>
 	<string name="downloading">Downloading&#8230;</string>
 	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>

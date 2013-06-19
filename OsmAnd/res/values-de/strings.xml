@@ -816,7 +816,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="use_high_res_maps">Hochauflösende Anzeige</string>
 	<string name="use_high_res_maps_descr">Unterdückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen</string>
 	<string name="unknown_location">Standort noch nicht ermittelt</string>
-	<string name="download_files">Laden</string>
+	<string name="download_files">Herunterladen</string>
 	<string name="context_menu_item_search_transport">Suche ÖPNV</string>
 	<string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
 	<string name="transport_searching_route">ÖPNV-Ergebnisse (Ziel {0}):</string>
@@ -969,7 +969,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="address">Adresse</string>
 	<string name="download_index_success">Daten erfolgreich heruntergeladen</string>
 	<string name="error_io_error">I/O Fehler aufgetreten.</string>
-	<string name="downloading_file">Herunterladen der Datei …</string>
+	<string name="downloading_file">Lade Datei(en) …</string>
 	<string name="downloading">Herunterladen …</string>
 	<string name="downloading_list_indexes">Eine Liste verfügbarer Regionen wird geladen…</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
