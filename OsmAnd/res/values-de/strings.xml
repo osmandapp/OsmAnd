@@ -514,8 +514,8 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="city_type_town">Stadt</string>
 	<string name="city_type_city">Großstadt</string>
 	<string name="layer_poi_label">POI Namen</string>
-	<string name="animate_route_off">Animation aus</string>
-	<string name="animate_route">Animation an</string>
+	<string name="animate_route_off">Simulation stoppen</string>
+	<string name="animate_route">Simulation starten</string>
 	<string name="tip_recent_changes_0_6_8_t">"Änderungen in v0.6.8:
 		\n\t- Völlig neu entwickelte Suche (POI, Addressen)! Adress-Suche wesentlich beschleunigt. Einheitliche Suche mit vielen Optionen.
 		\n\t- POI namentliche Suche in großen Regionen / Ländern
@@ -1075,7 +1075,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="choose_available_region">Wähle Region</string>
 	<string name="choose_intersected_street">Wähle Querstraße</string>
 	<string name="Closest_Amenities">Umliegende Einrichtungen</string>
-	<string name="app_mode_default">Neutrale Karte</string>
+	<string name="app_mode_default">Karte ansehen</string>
 	<string name="app_mode_car">Auto</string>
 	<string name="app_mode_bicycle">Fahrrad</string>
 	<string name="app_mode_pedestrian">Fußgänger</string>
@@ -1212,7 +1212,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="global_app_allocated_memory">Belegter Speicher</string>
 	<string name="native_app_allocated_memory_descr">Insgesamt durch die Anwendung belegter nativer Speicher %1$s MB (Dalvik %2$s MB, anderer %3$s MB). Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string>
 	<string name="native_app_allocated_memory">Gesamter nativer Speicher</string>
-	<string name="select_animate_speedup">Beschleunigungswert für Routen-Animation wählen</string>
+	<string name="select_animate_speedup">Geschwindigkeit für Routen-Simulation wählen</string>
 	<string name="osmand_parking_hours">Stunde(n)</string>
 	<string name="osmand_parking_minutes">Minuten</string>
 	<string name="osmand_parking_position_description_add_time">Das Auto wurde hier geparkt:</string>
@@ -1343,7 +1343,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="av_control_stop">AV</string>
     <string name="dropbox_plugin_description">Das Dropbox-Plugin ermöglicht Ihnen eine Synchronisation von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Zugang.</string>
     <string name="dropbox_plugin_name">Dropbox-Plugin</string>
-    <string name="animate_routing_using_gpx">Wollen Sie die bestehende GPX-Datei verwenden?</string>
+    <string name="animate_routing_using_gpx">Wollen Sie eine bestehende GPX-Datei verwenden?</string>
     <string name="intermediate_points_change_order">Reihenfolge ändern</string>
     <string name="srtm_paid_version_msg">Bitte überlegen Sie es sich, ob Sie durch das Kaufen des Höhenlinien-Plugin im Play Store die weitere Entwicklung unterstützen wollen.</string>
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>

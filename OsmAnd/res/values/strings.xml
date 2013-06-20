@@ -9,7 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-	<string name="app_mode_default">Neutral map</string>
+	<string name="app_mode_default">Browse map</string>
 	<string name="settings_preset">Default profile</string>
 	<string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
     <string name="destination_point">Destination %1$s</string>
