@@ -1,0 +1,1511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!--
+    	 Disclaimer: 
+         If you are going to translate strings, please make sure: 
+         1. There is no duplicate strings by name
+         2. Every apostrophe (quote) is preceded by a backslash (see others).
+         If you are making/correcting English translations make sure:
+         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
+    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
+    -->
+    <string name="destination_point">Destination %1$s</string>
+    <string name="context_menu_item_destination_point">Ужыць як прызначэньне</string>
+    <string name="please_select_address">Select city or street first</string>
+    <string name="tip_recent_changes_1_4_t">Changes in 1.4:
+	\n\t* Order waypoints in optimal way to visit all (Travelling salesman, door-to-door)
+	\n\t* Search street by name (in neighborhood) 
+	\n\t* Planning mode plugin (load/edit/save GPX tracks)
+	\n\t* New download screen (download in background)
+	\n\t* Support GPX subfolders (organize your GPX tracks)
+	\n\t* Delete SRTM files
+	\n\t* Support OSM Notes 
+    </string>
+    <string name="search_street_in_neighborhood_cities">Search street in neighborhood cities</string>
+    <string name="intermediate_items_sort_return">Intermediate waypoints resorted to optimize their order on the way to the destination.</string>
+    <string name="intermediate_items_sort_by_distance">Sort (door-to-door)</string>
+    <string name="local_osm_changes_backup_successful">OSM change file succesfully generated %1$s</string>
+    <string name="local_osm_changes_backup_failed">Backup OSM changes failed</string>
+    <string name="local_osm_changes_backup">Backup as OSM change</string>
+    <string name="delete_point">Delete Point</string>
+    <string name="plugin_distance_point_time">time</string>
+    <string name="plugin_distance_point_hdop">precision</string>
+    <string name="plugin_distance_point_speed">speed</string>
+    <string name="plugin_distance_point_ele">elevation</string>
+    <string name="plugin_distance_point">Point</string>
+    <string name="gpx_file_name">GPX file name</string>
+    <string name="gpx_saved_sucessfully">GPX file succesfully saved to {0}</string>
+    <string name="osmand_distance_planning_plugin_description">Create paths (or use / modify existing GPX files) to measure the distance between points. Save as GPX, can be used to plan GPX routes.</string>
+    <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; Planning Tool</string>
+    <string name="use_distance_measurement_help">* Tap to mark a point.\n 
+        * Press and hold on the map to delete previous point.\n
+        * Press and hold on point to view and attach description.\n
+        * Click on measurement widget to see more actions.</string>
+    <string name="default_buttons_do_not_show_again">Do not show again</string>
+    <string name="distance_measurement_start_editing">Start editing</string>
+    <string name="distance_measurement_finish_editing">Finish editing</string>
+    <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>
+    <string name="distance_measurement_clear_route">Clear all points</string>
+    <string name="distance_measurement_save_gpx">Save as GPX</string>
+    <string name="distance_measurement_load_gpx">Open existing GPX</string>
+    <string name="wait_current_task_finished">Please wait until current task is finished</string>
+    <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
+    <string name="use_kalman_filter_compass">Use Kalman filter</string>
+    <string name="access_mark_final_location_first">Accessibility mode : please select destination first</string> 
+    <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
+    <string name="use_magnetic_sensor">Use magnetic sensor</string>
+    <string name="other_location">Other</string>
+    <string name="files_limit">%1$d files left</string>
+    <string name="available_downloads_left">Available %1$d files to download</string>
+    <string name="install_paid">Full version</string>
+    <string name="cancel_route">Dismiss route</string>
+    <string name="cancel_navigation">Stop navigation</string>
+    <string name="clear_destination">Clear destination</string>
+    <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
+    <string name="street_name">Вуліца</string>
+	<string name="hno">House number</string>
+    <string name="website">Web site</string>
+	<string name="phone">Phone</string>
+    <string name="tip_recent_changes_1_3_t">Changes in 1.3:
+        \n\t* Reimplement Tablets and Large screen support
+        \n\t* Holo Theme (customization)
+        \n\t* Additional settings for stabilizing compass
+        \n\t* Top left button on the map screen replaces Menu button
+    </string>
+    <string name="monitoring_settings">Logging services &amp; Sleep mode</string>
+    <string name="monitoring_settings_descr">Configure how to record trips and enable sleep mode</string>
+    <string name="osmand_monitoring_plugin_description">Enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.
+        Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
+    <string name="osmand_monitoring_plugin_name">Logging services &amp; Sleep Mode</string>
+    <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
+    <string name="contribution_activity">Install version</string>
+    <string name="choose_osmand_theme_descr">Choose application theme</string>
+    <string name="choose_osmand_theme">App Theme</string>
+    <string name="accessibility_options">Accessibility options</string>
+    <string name="select_address_activity">Абраць адрас</string>
+    <string name="favourites_list_activity">Select favorite</string>
+    <string name="local_openstreetmap_act_title">OSM modifications</string>
+    <string name="default_buttons_other_actions">Other actions</string>
+    <string name="save_current_track_widget">Save
+        \n current GPX track</string>
+	<string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
+	    \n\t*Fix Geo Intent (Foursquare, c:geo)
+	    \n\t*Fix screen tremble during navigation
+	    \n\t*Other small fixes
+	    \n\nChanges in 1.2:
+		\n\t* Bug fixes (tuned routing, search, AV recording, voice prompts, some display improvements)
+		\n\t* Easier hillshade overlay configuration (requires Contour Lines plugin)
+		\n\t* Now accepts maps.google.com location links
+		\n\t* New widget (GPS info) 
+		\n\t* Added multi-window support for recent Samsung devices
+		\n\t* Kalman filter for compass
+		\n\t* Pebble watch support
+	</string>
+    <string name="layer_hillshade">Hillshade layer</string>
+    <string name="map_widget_gps_info">GPS info</string>
+    <string name="tip_recent_changes_1_1_4_t">Changes in 1.1.4:
+        \n\t* UI redesign
+		\n\t* Bug fixes
+    </string>
+    <string name="access_arrival_time">Arrival time</string>
+    <string name="item_checked">checked</string>
+    <string name="item_unchecked">unchecked</string>
+    <string name="map_view">Мапа</string>
+    <string name="prefer_motorways">Prefer motorways</string>
+	<string name="prefer_in_routing_title">Prefer…</string>
+	<string name="prefer_in_routing_descr">Prefer motorways</string>
+    <string name="max_speed_none">none</string>
+    <string name="index_name_openmaps">OpenMaps EU</string>
+    <string name="download_hillshade_item">Hillshade</string>
+    <string name="download_hillshade_maps">Hillshade overlays</string>
+    <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
+		\n\t* Audio/video plugin enhancement (photos with EXIF information)
+		\n\t* Usability fixed and restructured Contour lines plugin
+		\n\t* Hillshade packages for Contour lines plugin
+		\n\t* Bug fixes (suboptimal routing)
+    </string>
+    <string name="dist_control_start">start</string>
+    
+    <string name="local_indexes_cat_srtm">Contour lines data</string>
+    <string name="local_indexes_cat_av">Audio/Video data</string>
+    <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
+    <string name="clear_dest_confirm">Are you sure you want to clear your destination point (and waypoints)?</string>
+    <string name="precise_routing_mode_descr">Enable precise routing to calculate precise routes without glitches. It is very limited by distance and doesn\'t use native library.</string>
+    <string name="precise_routing_mode">Precise routing (alpha)</string>
+    <string name="recording_context_menu_show">Show</string>
+    <string name="recording_photo_description">Photo %1$s of %2$s</string>
+    <string name="av_def_action_picture">Take a photo</string>
+    <string name="recording_context_menu_precord">Take a photo</string>
+    <string name="dropbox_plugin_description">Dropbox plugin allows to synchronize tracks and audio/video notes with your dropbox account.</string>
+    <string name="dropbox_plugin_name">Dropbox plugin</string>
+    <string name="animate_routing_using_gpx">Do you want to use existing GPX file?</string>
+    <string name="intermediate_points_change_order">Change order</string>
+    <string name="srtm_paid_version_msg">Please consider to buy the Contour lines plugin in the Market to support further development.</string>
+    <string name="srtm_paid_version_title">Contour lines plugin</string>
+    <string name="av_def_action_choose">Select on request</string>
+    <string name="av_def_action_video">Record video</string>
+    <string name="av_def_action_audio">Record audio</string>
+    <string name="av_widget_action_descr">Select default widget action</string>
+    <string name="av_widget_action">Default widget action</string>
+    <string name="av_video_format_descr">Select video output format</string>
+    <string name="av_video_format">Video output format</string>
+    <string name="av_use_external_recorder_descr">Use system recorder for video</string>
+    <string name="av_use_external_recorder">Use system recorder</string>
+    <string name="av_use_external_camera_descr">Use system application for photo</string>
+    <string name="av_use_external_camera">Use camera app</string>
+    <string name="av_settings_descr">Configure audio and video settings</string>
+    <string name="av_settings">Audio/video settings </string>
+    <string name="recording_error">Error ocurred while recording </string>
+    <string name="recording_camera_not_available">Camera is not available</string>
+    <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
+    <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
+    <string name="recording_open_external_player">Open external player</string>
+    <string name="recording_delete_confirm">Do you want to remove this recording?</string>
+    <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0:
+		\n\t* Distance calculator plugin
+		\n\t* Audio/video notes plugin
+		\n\t* Contour lines plugin
+		\n\t* Bug fixes
+		\n\t* \'Touring view\' map style option with more map details, new road styles, more contrast, and Alpine hiking (SAC scale) option
+		\n\t* EGM96 geoid offset correction for GPS altitude readings
+    </string>
+    <string name="recording_unavailable">unavailable</string>
+    <string name="recording_context_menu_arecord">Take an audio note</string>
+    <string name="recording_context_menu_vrecord">Take a video note</string>
+    <string name="layer_recordings">Recording layer</string>
+    <string name="recording_can_not_be_played">Recording can not be played</string>
+    <string name="recording_context_menu_delete">Delete recording</string>
+    <string name="recording_context_menu_play">Play</string>
+    <string name="recording_description">Recording %1$s %2$s of %3$s</string>
+    <string name="recording_default_name">recording</string>
+    <string name="av_control_stop">stop</string>
+    <string name="av_control_start">start</string>
+    <string name="map_widget_av_notes">Audio/video notes</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
+    <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
+    <string name="map_widget_distancemeasurement">Distance measurement</string>
+    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \&quot;Use location...\&quot; to assign a note to the specified location</string>
+    <string name="monitoring_control_stop">stop</string>
+    <string name="map_widget_audionotes">Audio notes</string>
+    <string name="audionotes_plugin_description">Take audio/video notes during the trip</string>
+    <string name="audionotes_plugin_name">Audio/video notes</string>
+    <string name="index_srtm_parts">parts</string>
+    <string name="index_srtm_ele">Contour lines</string>
+    <string name="srtm_plugin_description">Facilitates downloading offline contour lines and hillshades (Settings -&gt; Data Management -&gt; Download -&gt; Select desired map type).</string>
+    <string name="srtm_plugin_name">Contour lines plugin</string>
+    <string name="download_select_map_types">Other maps</string>
+    <string name="download_roads_only_item">Roads only</string>
+    <string name="download_srtm_maps">Contour lines</string>
+    <string name="download_regular_maps">Regular maps</string>
+    <string name="download_roads_only_maps">Roads-only maps</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">Hide boundaries</string>
+	<string name="rendering_attr_noAdminboundaries_description">Suppress display of regional boundaries (admin levels 5-9)</string>
+    <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid plugin has an old version and needs to be updated.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid plugin is OsmAnd extension for OsModroid application for online tracking features. Information about the service is available on http://esya.ru.</string>
+    <string name="osmodroid_plugin_name">OsMoDroid plugin</string>
+	<string name="tip_altitude_offset">Altitude Display - Offset Correction</string>
+	<string name="tip_altitude_offset_t">\tMost GPS devices report altitude measurements in the ellipsoid-based WGS84 reference system, from which a conversion to locally used systems requires a position-dependent correction.
+		\n\tA better approximation to these local systems is the EGM96 reference. OsmAnd now also supports the automatic display of altitudes in the EGM96 system.
+		\n\tIn order to achieve this, simply download the file WW15MGH.DAC via Data Management (original is at http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+	</string>
+    <string name="map_widget_max_speed">Абмежаваньне хуткасьці</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
+    <string name="route_descr_current_location">Current position</string>
+    <string name="route_descr_from_to">From: %1$s\nTo: %2$s</string>
+    <string name="route_descr_from_to_via">From: %1$s\nVia: %2$s\nTo: %3$s</string>
+    <string name="no_buildings_found">No buildings found.</string>
+    <string name="incremental_search_city">Search city incrementally</string>
+    <string name="search_villages_and_postcodes">Search villages/postcode</string>
+	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
+	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
+    <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
+    <string name="safe_mode">Safe mode</string>
+    <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
+    <string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to turn it off?</string>
+    <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
+	\n\t* Improved routing: faster, more precise, up to 250 km
+	\n\t* Introduce roads-only maps
+	\n\t* Map does not lose position lock after interruptions
+	\n\t* Enable sleep mode service during navigation
+    </string>
+    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
+	\n\t* Some bug fixes
+	\n\t* Map does not lose position lock after interruptions
+	\n\t* Enable sleep mode service during navigation
+    </string>
+    <string name="close_changeset">Close changeset</string>
+	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner application not installed. Search in Market?</string>
+	<string name="rendering_attr_roadColors_description">Select a road color scheme:</string>
+	<string name="rendering_attr_roadColors_name">Road color scheme</string>
+    <string name="map_widget_show_destination_arrow">Show destination direction</string>
+    <string name="enable_plugin_monitoring_services">Enable tracking plugin to use position logging services (GPX recording, online tracking)</string>
+    <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
+	<string name="gps_not_available">Please enable GPS in the settings</string>
+    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
+	\n\t* Waypoints
+	\n\t* Improved route guidance
+	\n\t* Added a setting which allows to avoid motorways while building a route
+	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
+	\n\t* Bug fixes
+	</string>
+	<string name="map_widget_monitoring_services">Logging services</string>
+	<string name="no_route">No route</string>
+	<string name="delete_target_point">Remove waypoint</string>
+	<string name="target_point">Waypoint %1$s</string>
+    <string name="intermediate_point">Waypoint %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">Add as last waypoint</string>
+    <string name="context_menu_item_first_intermediate_point">Add as first waypoint</string>
+    <string name="add_as_last_destination_point">Add as last waypoint</string>
+    <string name="add_as_first_destination_point">Add as first waypoint</string>
+    <string name="replace_destination_point">Replace destination point</string>
+    <string name="new_destination_point_dialog">You already have destination point set.</string>
+    <string name="target_points">Waypoints</string>
+    <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
+    <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
+    <string name="context_menu_item_intermediate_point">Add as waypoint</string>
+    <string name="map_widget_intermediate_distance">Waypoint</string>
+    <string name="ending_point_too_far">Ending point too far from nearest road.</string>
+    <string name="btn_add_tag">Add Tag</string>
+    <string name="btn_advanced_mode">Advanced Mode…</string>
+    <string name="poi_filter_parking">Parking</string>
+    <string name="poi_filter_emergency">Emergency</string>
+    <string name="poi_filter_public_transport">Public Transport</string>
+    <string name="poi_filter_entertainment">Entertainment</string>
+    <string name="poi_filter_accomodation">Accomodation</string>
+    <string name="poi_filter_restaurants">Restaurants</string>
+    <string name="poi_filter_sightseeing">Sightseeing</string>
+    <string name="poi_filter_car_aid">Car aid</string>
+	<string name="poi_filter_food_shop">Food shop</string>
+	<string name="poi_filter_for_tourists">For tourists</string>
+	<string name="poi_filter_fuel">Fuel</string>
+	<string name="show_warnings_title">Show alarms…</string>
+	<string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information</string>
+	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
+	<string name="use_compass_navigation">Use compass</string>
+	<string name="avoid_motorway">Avoid motorways</string>
+	<string name="auto_zoom_map_descr">Auto zoom map according to your speed (while map is synchronized with current position)</string>
+	<string name="auto_zoom_map">Auto zoom map</string>
+	<string name="snap_to_road_descr">Snap position to roads during navigation</string>
+	<string name="snap_to_road">Snap to road</string>
+	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:
+		\n\t* Improved Routing
+		\n\t* Dynamic map widgets
+		\n\t* Map settings moved to map screen
+		\n\t* Lock screen button with logging services
+		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
+	</string>
+	<string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
+	<string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_long_description_1000_chars">
+		OsmAnd (OSM Automated Navigation Directions)
+
+		OsmAnd is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
+
+		Some of the core features:
+		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
+		- Compact offline vector maps for the whole world available
+		- Download of country or region maps directly from the app 
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
+		- Offline search for addresses and places (POIs)
+		- Offline routing for short distances (experimental)
+		- Car, bicycle, and pedestrian modes with:
+		-  optional automated day/night view switching
+		-  optional speed-dependent map zooming
+		-  optional map alignment according to compass or direction of motion
+		-  optional lane guidance, speed limit display, recorded and TTS voices
+
+		Limitations of this free version of OsmAnd:
+		- Number of map downloads limited
+		- No access to Wikipedia offline POIs
+
+		OsmAnd is actively being developed and our project and its further progress relies on financial contributions to fund the development and testdriving new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on osmand.net.
+	</string>
+	<string name="osmand_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+
+Some of the main features:
+
+Navigation
+ - Works online (fast) or offline (no roaming charges when you are abroad)
+ - Turn-by-turn voice guidance (recorded and synthesized voices)
+ - Optional lane guidance, street name display, and estimated time of arrival
+ - Supports intermediate points on your itinerary
+ - Automatic re-routing whenever you deviate from the route
+ - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+
+Map Viewing
+ - Display your position and orientation on the map
+ - Optionally align the map according to compass or your direction of motion
+ - Save your most important places as Favorites
+ - Display POIs (point of interests) around you
+ - Can display specialized online tile maps
+ - Can display satellite view (from Bing)
+ - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
+ - Optionally display place names in English, local, or phonetic spelling
+
+Use OpenStreetMap and Wikipedia Data:
+ - High quality information from the best collaborative projects of the world
+ - Global maps from OpenStreetMap, available per country or region
+ - Wikipedia POIs, great for sightseeing (not available in free version)
+ - Unlimited free download, directly from the app (download limit 16 map files in free version)
+ - Always up-to-date maps (updated at least once a month)
+ - Compact offline vector maps
+ - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
+ - Also supports online or cached tile maps
+
+Safety Features
+ - Optional automated day/night view switching
+ - Optional speed limit display, with reminder if you exceed it
+ - Optional speed-dependent map zooming
+ - Share your location so that your friends can find you
+
+Bicycle and Pedestrian Features
+ - The maps include foot, hiking, and bike paths, great for outdoor activities
+ - Special routing and display modes for bike and pedestrian
+ - Optional public transport stops (bus, tram, train) including line names
+ - Optional trip recording to local GPX file or online service
+ - Optional speed and altitude display
+ - Display of contour lines and hill-shading (via additional plugin)
+
+Directly Contribute to OpenStreetMap
+ - Report map bugs
+ - Upload GPX tracks to OSM directly from the app
+ - Add POIs and directly upload them to OSM (or later if offline)
+ - Optional trip recording also in background mode (while device is in sleep mode)
+
+OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
+
+
+Approximate map coverage and quality:
+ - Western Europe: ****
+ - Eastern Europe: ***
+ - Russia: ***
+ - North America: ***
+ - South America: **
+ - Asia: **
+ - Japan &amp; Korea: ***
+ - Middle East: **
+ - Africa: **
+ - Antarctica: *
+
+List of countries supported (basically world wide!):
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+	</string>
+	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Maps &amp; Navigation</string>
+	<string name="osmand_plus_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
+	<string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (OSM Automated Navigation Directions)
+
+		OsmAnd+ is an open source navigation application with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. OsmAnd also offers offline and online routing functionality including turn-by-turn voice guidance.
+
+		OsmAnd+ is the paid application version, by buying it you support the project, fund the development of new features, and receive the latest updates.
+
+		Some of the core features:
+		- Complete offline functionality (store downloaded vector or tile maps in a selectable folder)
+		- Compact offline vector maps for the whole world available
+		- Unlimited downloading of country or region maps directly from the app 
+		- Offline Wikipedia feature (download Wikipedia POIs), great for sightseeing
+		- Overlay of several map layers possible, like GPX or navigation tracks, Points of Interest, favorites, contour lines, public transportation stops, additional maps with customizable transparency
+		- Offline search for addresses and places (POIs)
+		- Offline routing for short distances (experimental)
+		- Car, bicycle, and pedestrian modes with:
+		-  optional automated day/night view switching
+		-  optional speed-dependent map zooming
+		-  optional map alignment according to compass or direction of motion
+		-  optional lane guidance, speed limit display, recorded and TTS voices
+	</string>
+	<string name="osmand_plus_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) is a map and navigation application with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data. All map data can be stored on your device\'s memory card for offline use. Via your device\'s GPS, OsmAnd offers routing, with optical and voice guidance, for car, bike, and pedestrian. All the main functionalities work both online and offline (no internet needed).
+
+OsmAnd+ is the paid application version. By buying it you support the project, fund the development of new features, and receive the latest updates. You can test the application before buying by installing the free version called OsmAnd.
+
+Some of the main features:
+
+Navigation
+ - Works online (fast) or offline (no roaming charges when you are abroad)
+ - Turn-by-turn voice guidance (recorded and synthesized voices)
+ - Optional lane guidance, street name display, and estimated time of arrival
+ - Supports intermediate points on your itinerary
+ - Automatic re-routing whenever you deviate from the route
+ - Search for places by address, by type (e.g.: restaurant, hotel, gas station, museum), or by geographical coordinates
+
+Map Viewing
+ - Display your position and orientation on the map
+ - Optionally align the map according to compass or your direction of motion
+ - Save your most important places as Favorites
+ - Display POIs (point of interests) around you
+ - Can display specialized online tile maps
+ - Can display satellite view (from Bing)
+ - Can display different overlays like touring/navigation GPX tracks and additional maps with customizable transparency
+ - Optionally display place names in English, local, or phonetic spelling
+
+Use OpenStreetMap and Wikipedia Data:
+ - High quality information from the best collaborative projects of the world
+ - Global maps from OpenStreetMap, available per country or region
+ - Wikipedia POIs, great for sightseeing
+ - Unlimited free download, directly from the app
+ - Always up-to-date maps (updated at least once a month)
+ - Compact offline vector maps
+ - Select between complete map data and just road network (Example: All of Japan is 700 MB, or 200 MB for the road network only)
+ - Also supports online or cached tile maps
+
+Safety Features
+ - Optional automated day/night view switching
+ - Optional speed limit display, with reminder if you exceed it
+ - Optional speed-dependent map zooming
+ - Share your location so that your friends can find you
+
+Bicycle and Pedestrian Features
+ - The maps include foot, hiking, and bike paths, great for outdoor activities
+ - Special routing and display modes for bike and pedestrian
+ - Optional public transport stops (bus, tram, train) including line names
+ - Optional trip recording to local GPX file or online service
+ - Optional speed and altitude display
+ - Display of contour lines and hill-shading (via additional plugin)
+
+Directly Contribute to OpenStreetMap
+ - Report map bugs
+ - Upload GPX tracks to OSM directly from the app
+ - Add POIs and directly upload them to OSM (or later if offline)
+ - Optional trip recording also in background mode (while device is in sleep mode)
+
+OsmAnd is open source and actively being developed. Everyone can contribute to the application by reporting bugs, improving translations, or coding new features. The project is in a lively state of continuous improvement by all these forms of developer and user interaction. The project progress also relies on financial contributions to fund the development, coding, and testing of new functionalities. By buying OsmAnd+ you help the application to be even more awesome! It is also possible to fund specific new features, or to make a general donation on osmand.net.
+
+
+Approximate map coverage and quality:
+ - Western Europe: ****
+ - Eastern Europe: ***
+ - Russia: ***
+ - North America: ***
+ - South America: **
+ - Asia: **
+ - Japan &amp; Korea: ***
+ - Middle East: **
+ - Africa: **
+ - Antarctica: *
+
+List of countries supported (basically world wide!):
+Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
+	</string>
+	<string name="tip_update_index">Update of Offline Data</string>
+	<string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a data manager which can check for available offline data updates.
+		\n\tTo check for updates go to \'Settings\' -&gt; \'Data Management\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device.
+		\n\tEntries in \'green\' indicate data files identical on device and server
+		\n\tEntries in \'blue\' indicate available updates on server
+		\n\tEntries in italic font indicate data de-activated on the device</string>
+	<string name="filterpoi_activity">Create POI filter</string>
+	<string name="recalculate_route_to_your_location">Transport mode:</string>
+	<string name="select_navigation_mode">Select transport mode</string>
+	<string name="day_night_info_description">Sunrise: %1$s \nSunset: %2$s</string>
+	<string name="day_night_info">Day/night info</string>
+	<string name="map_widget_day_night">Day/night map</string>
+	<string name="map_widget_vector_attributes">Rendering attributes:</string>
+	<string name="map_widget_renderer">Map style</string>
+	<string name="live_monitoring_mode_off">Start\n online tracking</string>
+	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
+	<string name="position_on_map_descr">Choose location of position marker on the map</string>
+	<string name="position_on_map">Position marker</string>
+	<string name="layer_map_appearance">Сканфігураваць экран…</string>
+	<string name="show_lanes">Show lanes</string>
+	<string name="avoid_unpaved">Avoid unpaved roads</string>
+	<string name="avoid_ferries">Avoid ferries</string>
+	<string name="avoid_in_routing_title">Avoid…</string>
+	<string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
+	<string name="map_widget_fluorescent">Fluorescent routes</string>
+	<string name="map_widget_show_ruler">Ruler</string>
+	<string name="map_widget_appearance">Miscellaneous:</string>
+	<string name="map_widget_view_direction">Viewing direction</string>
+	<string name="map_widget_transparent">Transparent skin</string>
+	<string name="monitoring_mode_off">Record GPX</string>
+	<string name="monitoring_mode_on">Stop\n GPX rec.</string>
+	<string name="bg_service_sleep_mode_off">Enable\n sleep mode</string>
+	<string name="bg_service_sleep_mode_on">Stop\n sleep mode</string>
+	<string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
+	<string name="int_continuosly">Continuous</string>
+	<string name="screen_is_locked">To unlock screen press lock icon</string>
+	<string name="map_widget_top_text">Street name</string>
+	<string name="map_widget_config">Сканфігураваць экран</string>
+	<string name="map_widget_map_select">Map source</string>
+	<string name="map_widget_back_to_loc">Я тут</string>
+	<string name="map_widget_lock_screen">Lock screen</string>
+	<string name="map_widget_compass">Compass</string>
+	<string name="map_widget_top_stack">Status bar:</string>
+	<string name="map_widget_reset">Reset to default</string>
+	<string name="map_widget_right_stack">Right panel:</string>
+	<string name="map_widget_left_stack">Left panel:</string>
+	<string name="map_widget_parking">Parking</string>
+	<string name="map_widget_monitoring">GPX recording</string>
+	<string name="map_widget_speed">Speed</string>
+	<string name="map_widget_distance">Месца прызначэньня</string>
+	<string name="map_widget_altitude">Вышыня</string>
+	<string name="map_widget_time">Time to go</string>
+	<string name="map_widget_next_turn">Паварот</string>
+	<string name="map_widget_next_turn_small">Невялікі паварот</string>
+	<string name="map_widget_next_next_turn">Наступны паварот</string>
+	<string name="map_widget_mini_route">Mini route map</string>
+	<string name="bg_service_screen_lock">Lock screen</string>
+	<string name="bg_service_screen_unlock">Unlock screen</string>
+	<string name="bg_service_screen_lock_toast">The screen is locked</string>
+	<string name="bg_service_interval">Set wake-up interval:</string>
+	<string name="show_cameras">Show speed cameras</string>
+	<string name="show_traffic_warnings">Show traffic warnings</string>
+	<string name="avoid_toll_roads">Avoid toll roads</string>
+	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+	<string name="route_updated_loc_found">Route will be calculated once position is found</string>
+	<string name="osmand_parking_hours">Hours</string>
+	<string name="osmand_parking_minutes">Minutes</string>
+	<string name="osmand_parking_position_description_add_time">The car was parked at:</string>
+	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1:
+		\n\t* More precise routes (a bit slower)
+		\n\t* Smart and fast Route recalculation
+		\n\t* Direction by lanes
+		\n\t* Information about speed limits, speed cams, and speed bumps 
+		\n\t* Improved voice guidance on highways
+		\n\t* Parking plugin (\'Where is my car parked at?\')
+		\n\t* Enable/disable logging widget
+	</string>
+	<string name="select_animate_speedup">Select animate route acceleration</string>
+    	<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
+	<string name="global_app_allocated_memory">Allocated memory</string>
+	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
+		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
+	<string name="native_app_allocated_memory">Total native memory</string>
+	<string name="update_downlod_list">Reload list</string>
+	<string name="starting_point_too_far">Starting point too far from nearest road.</string>
+	<string name="shared_location">Shared location</string>
+	<string name="osmand_parking_event">Pick up the car from parking</string>
+	<string name="osmand_parking_warning">Warning</string>
+	<string name="osmand_parking_warning_text">Notification to pick up your car was previously added to your Calendar. It will remain there until you will delete it manually.</string>    
+	<string name="osmand_parking_time_limit_title">Set the time limit of parking</string>
+	<string name="osmand_parking_delete_confirm">Do you want to remove the location of the parked car?</string>
+	<string name="osmand_parking_delete">Delete a parking marker</string>
+	<string name="osmand_parking_choose_type">Choose the type of parking</string>
+	<string name="osmand_parking_lim_text">Time-limited</string>
+	<string name="osmand_parking_no_lim_text">Time-unlimited</string>
+	<string name="osmand_parking_add_event">Add a notification to Calendar application</string>
+	<string name="osmand_parking_time_limit">Time-limited parking</string>
+	<string name="osmand_parking_time_no_limit">Time-unlimited parking</string>
+	<string name="osmand_parking_position_description">The position of your parked car. %1$s</string>
+	<string name="osmand_parking_position_description_add">To pick up the car at:</string>
+	<string name="osmand_parking_pm">PM</string>
+	<string name="osmand_parking_am">AM</string>
+	<string name="osmand_parking_position_name">Parking point</string>
+	<string name="osmand_parking_plugin_description">This plugin allows to store the location of your parked car.</string>
+	<string name="osmand_parking_plugin_name">Parking Position Plugin</string>
+	<string name="context_menu_item_add_parking_point">Mark as a parking position</string>
+	<string name="context_menu_item_delete_parking_point">Delete a parking marker</string>
+	<string name="gpxup_public">Public</string>
+	<string name="gpxup_identifiable">Identifiable</string>
+	<string name="gpxup_trackable">Trackable</string>
+	<string name="gpxup_private">Private</string>
+	<string name="asap">ASAP</string>
+	<string name="save_route_as_gpx">Save route as GPX file</string>
+	<string name="route_roundabout">Roundabout: take %1$d exit and go</string>
+	<string name="route_kl">Keep left and go</string>
+	<string name="route_kr">Keep right and go</string>
+	<string name="rendering_attr_noPolygons_description">Make all areal land features on map transparent</string>
+	<string name="rendering_attr_noPolygons_name">Hide polygons</string>
+	<string name="rendering_attr_appMode_name">Rendering mode</string>
+	<string name="rendering_attr_appMode_description">Optimize map for</string>
+	<!-- string name="rendering_attr_contourLines_description">Select minimum zoom level to display in map if available. Separate contour data needed.</string -->
+	<string name="rendering_attr_contourLines_description">Display from zoom level (requires contour data):</string>
+	<string name="rendering_attr_contourLines_name">Show contour lines</string>
+	<string name="rendering_attr_hmRendered_description">Increase amount of map detail shown</string>
+	<string name="rendering_attr_hmRendered_name">Паказаць больш дэталей мапы</string>
+	<string name="local_index_routing_data">Routing data</string>
+	<string name="navigate_point_format">Format:</string>
+	<string name="poi_search_desc">POI (Point of interest) search</string>
+	<string name="address_search_desc">Address search</string>
+	<string name="navpoint_search_desc">Coordinates</string>
+	<string name="transport_search_desc">Transportation search</string>
+	<string name="favourites_search_desc">Favorites search</string>
+	<string name="history_search_desc">Search history</string>
+	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
+	<string name="left_side_navigation">Left-hand driving</string>
+	<string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
+	<string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
+	<string name="unknown_from_location">Starting point is not yet determined</string>
+	<string name="unknown_location">Месца пакуль ня вызначанае</string>
+	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
+	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
+	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' -&gt;  \'Data Management\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
+	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
+	<string name="local_indexes_cat_tile">Online and tile maps</string>
+	<string name="local_indexes_cat_map">Пазасеціўныя мапы (вэктарныя)</string>
+	<string name="index_settings_descr">Ладаваньне мапаў і кіраваньне пазасеціўнымі зьвесткамі што захоўваюцца ў вашай прыладзе</string>
+	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
+	<string name="map_online_data">Online and tile maps</string>
+	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
+	<string name="online_map_settings">Сеціўныя мапы</string>
+	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
+	<string name="map_settings">Map Settings</string>
+	<string name="map_settings_descr">Configure the map display</string>
+	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
+	
+	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
+	<string name="extra_settings">Advanced settings</string>
+	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
+	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
+	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
+	<string name="plugins_screen">Убудовы</string>
+	<string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
+	<string name="prefs_plugins_descr">Убудовы актывуюць дадатковыя налады й магчымасьці</string>
+	<string name="prefs_plugins">Убудовы</string>
+	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
+		\n\t- *Plugin functionality*
+		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
+		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
+		\n\t- *New offline map data support*
+		\n\t    - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). 
+		\n\t    - You need to download completely new offline data (old data will not be supported anymore)
+		\n\t- *Offline Routing* 
+		\n\t	- Offline routing becomes more robust
+		\n\t  *Usability and UI experience*
+		\n\t	- Improved in many areas		
+	</string>
+	<string name="osm_editing_plugin_description">Show settings needed for OSM feedback like collecting / modifying OSM POI objects, opening / commenting OSM bugs, and contributing recorded GPX files (requires OSM credentials).</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
+	<string name="play_commands_of_currently_selected_voice">Play commands of currently selected voice</string>
+	<string name="debugging_and_development">OsmAnd development</string>
+	<string name="native_rendering">Native rendering</string>
+	<string name="test_voice_prompts">Test voice prompts</string>    
+	<string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Data Management), or switch to online maps.</string>
+	<string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
+		\n\t- Native rendering for all devices
+		\n\t- Offline POI editing
+		\n\t- Accessibility
+		\n\t- Lots of bug fixes
+	</string>
+	<string name="send_files_to_osm">Дасылаць GPX файлы ў OSM?</string>
+	<string name="gpx_visibility_txt">Бачнасьць</string>
+	<string name="gpx_tags_txt">Цэтлікі</string>
+	<string name="gpx_description_txt">Апісаньне</string>
+	<string name="validate_gpx_upload_name_pwd">Калі ласка, пазначце імя й пароль карыстальніка OSM каб заладоўваць файлы GPX.</string>
+    	<string name="default_buttons_support">Падтрымка</string>
+	<string name="support_new_features">Падтрымка новых уласьцівасьцяў</string>
+	<string name="support_new_features_descr">Donate to see new features implemented in the application</string>
+	<string name="show_ruler_level">Паказваць лінейкі</string>	
+	<string name="info_button">Інфармацыя</string>
+	<string name="back_to_location">Back to position</string>
+	<string name="help">Дапамога</string>
+	<string name="show_details">Паказаць дэталі</string>
+	<string name="accessibility_extensions_descr">Пашырэньні даступнасьці для старых вэрсій Android</string>
+	<string name="accessibility_extensions">Пашырэньні даступнасьці</string>
+	<string name="accessibility_mode">Рэжым даступнасьці</string>
+	<string name="accessibility_mode_descr">Уключыць уласьцівасьці даступнасьці</string>
+	<string name="accessibility_on">Укл</string>
+	<string name="accessibility_off">Выкл</string>
+	<string name="accessibility_default">Паводле глябальных наладаў сыстэмы</string>
+	<string name="backToMenu">Назад да мэню</string>
+	<string name="zoomOut">Аддаліць</string>
+	<string name="zoomIn">Наблізіць</string>
+	<string name="zoomIs">Маштаб</string>
+	<string name="north">поўнач</string>
+	<string name="north_north_east">паўночны-паўночны ўсход</string>
+	<string name="north_east">паўночны ўсход</string>
+	<string name="east_north_east">усходне-паўночны усход</string>
+	<string name="east">усход</string>
+	<string name="east_south_east">усходне-паўднёвы ўсход</string>
+	<string name="south_east">паўднёвы ўсход</string>
+	<string name="south_south_east">паўднёвы-паўднёвы ўсход</string>
+	<string name="south">поўдзень</string>
+	<string name="south_south_west">паўднёвы-паўднёвы захад</string>
+	<string name="south_west">паўднёвы захад</string>
+	<string name="west_south_west">заходне-паўднёвы захад</string>
+	<string name="west">захад</string>
+	<string name="west_north_west">паўночны-паўночны захад</string>
+	<string name="north_west">паўночны захад</string>
+	<string name="north_north_west">паўночны-паўночны захад</string>
+	<string name="front">Наперадзе</string>
+	<string name="front_right">Наперадзе справа</string>
+	<string name="right">Справа</string>
+	<string name="back_right">Ззаду справа</string>
+	<string name="back">Ззаду</string>
+	<string name="back_left">Ззаду зьлева</string>
+	<string name="left">Зьлева</string>
+	<string name="front_left">Наперадзе зьлева</string>
+	<string name="oclock">гадзін</string>
+	<string name="towards">да</string>
+	<string name="accuracy">Дакладнасьць</string>
+	<string name="altitude">Вышыня</string>
+	<string name="no_info">Няма зьвестак</string>
+	<string name="direction_style_sidewise">Бокам (8 сэктараў)</string>
+	<string name="direction_style_clockwise">Па стрэлцы гадзіньніка (12 сэктараў)</string>
+	<string name="settings_direction_style">Стыль напрамку</string>
+	<string name="settings_direction_style_descr">Абярыце стыль як паказваць адносныя напрамкі падчас руху</string>
+	<string name="auto_announce_on">Пачаць аўтаматычныя анонсы</string>
+	<string name="auto_announce_off">Спыніць аўтаматычныя анонсы</string>
+	<string name="scroll_map_by_gestures_descr">Пасоўваць мапу рухамі на тачскрыне</string>
+	<string name="scroll_map_by_gestures">Натуральнае пасоўваньне мапы</string>
+	<string name="i_am_here">Я тут</string>
+	<string name="zoom_by_trackball_descr">Зьмяняць маштаб гарызантальнымі рухамі трэкболу</string>
+	<string name="zoom_by_trackball">Карыстацца трэкболам для зьмены маштабу</string>
+	<string name="use_short_object_names_descr">Ужываць кароткія назвы аб\'ектаў у сэнсарным рэжыме</string>
+	<string name="use_short_object_names">Ужываць назвы аб\'ектаў</string>
+	<string name="accessibility_preferences_descr">Налады даступнасьці</string>
+	<string name="accessibility_preferences">Даступнасьць</string>
+	<string name="rendering_out_of_memory">Недастаткова памяці каб паказаць абраную прастору</string>
+	<string name="use_fluorescent_overlays">Флюарэсцэнтныя пласты</string>
+	<string name="use_fluorescent_overlays_descr">Ужываць флюарэсцэнтныя колеры для трэкаў і шляхоў</string>
+	<string name="offline_edition">Offline editing</string>
+	<string name="offline_edition_descr">Always use offline editing</string>
+	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
+		\n\t- Offline POI editing 
+		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
+		\n\t- Show currently recorded track on map
+		\n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn
+		\n\t- New voice prompt \'Route recalculated\'
+		\n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color
+		\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
+		\n\t- Other changes
+	</string>
+	<string name="update_poi_does_not_change_indexes">Зьмены POI у праграме не ўплываюць на зладаваныя файлы мапы, зьмены захоўваюцца толькі ў лякальныя файлы.</string>
+	<string name="local_openstreetmap_uploading">Uploading…</string>
+	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
+	<string name="local_openstreetmap_uploadall">Upload all</string>
+	<string name="local_openstreetmap_items"/>
+	<string name="local_openstreetmap_show">Паказаць на мапе</string>
+	<string name="local_openstreetmap_upload">Заладаваць зьмены ў OSM</string>
+	<string name="local_openstreetmap_delete">Delete modification</string>
+	<string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
+	<string name="local_openstreetmap_settings">Locally saved OSM POIs/Bugs</string>
+	<string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Bugs noted in local database</string>
+	<string name="live_monitoring_descr">Дасылаць трэкінг ў пазначаны вэб-сэрвіс</string>
+	<string name="live_monitoring">Online tracking</string>
+	<string name="live_monitoring_interval_descr">Specify online tracking interval</string>
+	<string name="live_monitoring_interval">Online tracking interval</string>
+	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">Online tracking web address</string>
+	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
+	<string name="show_current_gpx_title">Паказаць бягучы трэк</string>
+	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
+		\n\t- Offline wikipedia data with articles
+		\n\t- Updated maps
+		\n\t- Other small features
+	</string>    
+	<string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>
+	<string name="free_version_title">Свабодная вэрсія</string>
+	<string name="poi_context_menu_showdescription">Паказваць апісаньні POI</string>
+	<string name="index_name_north_america">Паўночная Амэрыка</string>
+	<string name="index_name_us">Паўночная Амэрыка - Злучаныя Штаты</string>
+	<string name="index_name_central_america">Цэнтральная Амэрыка</string>
+	<string name="index_name_south_america">Паўднёвая Амэрыка</string>
+	<string name="index_name_europe">Эўропа</string>
+	<string name="index_name_france">Эўропа - Францыя</string>
+	<string name="index_name_germany">Эўропа - Германія</string>
+	<string name="index_name_russia">Эўразія - Расея</string>
+	<string name="index_name_africa">Афрыка</string>
+	<string name="index_name_asia">Азія</string>
+	<string name="index_name_oceania">Акеанія</string>
+	<string name="index_name_other">Сусьветныя і тэматычныя мапы</string>
+	<string name="index_name_wiki">Worldwide Wikipedia POIs</string>
+	<string name="index_name_voice">Галасавыя пакункі (запісаныя)</string>
+	<string name="index_name_tts_voice">Галасавыя пакункі (TTS)</string>
+	<string name="amenity_type_wikiosm">Вікіпэдыя (пазасеціўная)</string>
+	<string name="amenity_type_user_defined">Вызначанае карыстальнікам</string>
+	<string name="fav_export_confirmation">Файл з экспартаванымі ўпадабанымі ўжо існуе. Ці хочаце замяніць яго ?</string>
+	<string name="profile_settings">Налады профіля</string>
+	<string name="settings_preset">Профіль карыстальніка</string>
+	<string name="settings_preset_descr">Select a user profile with custom map and navigation settings.</string>
+	<string name="routing_settings">Navigation</string>
+	<string name="routing_settings_descr">Вызначыць налады навігацыі</string>
+	<string name="global_settings">Агульныя налады</string>
+	<string name="index_settings">Кіраваньне зьвесткамі</string>
+	<string name="general_settings">Агульныя</string>
+	<string name="general_settings_descr">Налады экрану і агульныя налады праграмы</string>
+	<string name="global_app_settings">Агульныя налады праграмы</string>
+	<string name="user_name">Вашае імя карыстальніка OSM</string>
+	<string name="user_name_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
+	<string name="user_password">Ваш пароль OSM</string>
+	<string name="user_password_descr">Патрэбна для прадстаўленьня ў openstreetmap.org</string>
+	<string name="osmand_service">Sleep mode functionality</string>
+	<string name="osmand_service_descr">Ужываць каб OsmAnd працавала падчас выключанага экрану</string>
+	<string name="tip_rotation_switching">Арыентацыя мапы</string>
+	<string name="tip_rotation_switching_t_v2">\tYou can toggle whether and how the map display is rotated by repeatedly clicking on the map screen\'s compass icon.
+		\n\tThe choices are:
+		\n\t\'Don\'t rotate (north is up)\' - Map will not be rotated. North will be always up
+		\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
+		\n\t\'To compass\' - Map will continuously be aligned with device compass reading
+	</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -&gt; \'Define View\' -&gt; \'Map source…\' -&gt; \'Offline vector maps\'.</string>
+	<string name="tip_day_night_mode">Рэжым дзень/ноч</string>
+	<string name="tip_day_night_mode_t_v2">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
+		\n\tNight colors are safer for night driving.
+		\n\tYou can set a policy for day/night switching in \'Menu\' -&gt; \'Configure screen…\' -&gt;\'Day/night map\'.
+		\n\tChoices are:
+		\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
+		\n\t\'Day\' - always use day mode
+		\n\t\'Night\' - always use night mode 
+		\n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)
+	</string>	
+	<string name="tip_osm_improve">Паляпшэньне зьвестак OSM</string>
+	<string name="tip_osm_improve_t">\tOsmAnd uses maps based on Openstreetmap.org (OSM) data and -besides map viewing and navigation- can be used to improve OSM data quality. You can easily create and upload new POI or OSM bug reports with just a few clicks!
+		\n\tFor this you need to first provide your OSM login information in \'Settings\' -&gt; \'General settings\' -&gt; \'OSM editing\'.
+		\n\tTo add a new POI use option \'Create POI\' in the map context menu. Proceed with entering the information about the new POI in \'Create POI\' dialog and finally commit it.
+		\n\tErrors in maps can immediately be reported via OSM bug, and OSM community can then faster fix this problem.
+		\n\tTo add a OSM bug use option \'Open OSM bug\' in the map context menu. Then enter the detailed description of the problem and finally post it using the \'Add\' button.
+		\n\tPlease note that Internet connectivity is needed for OSM POI and and OSM bug contributions.</string>
+	<string name="download_files_not_enough_space">Няма вольнага месца каб зладаваць %1$s MB (вольна: %2$s).</string>
+	<string name="download_files_question_space">Вольнага месца зараз {2} MB! Зладаваць {0} файлы ({1} MB)?</string>
+	<string name="tip_select_destination_point">Get Directions</string>
+	<string name="tip_select_destination_point_t">\tYou get directions to a place in the map directly (context menu, then \'Directions\'), in all search activities, or via long pressing an entry in your \'List of Favorite Points\'. 
+		\n\tThe destination is marked as an orange target flag marker on the map and OsmAnd displays the distance to it and the direction to it (orange triangle).
+	</string> 
+	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
+		\n\t- Improved offline map rendering
+		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
+		\n\t- Massive look and feel changes
+		\n\t- Altitude info
+		\n\t- New translations (Vienamese, Polish)
+		\n\t- Other small features
+	</string>
+	<string name="use_transparent_map_theme">Празрыстая тэма</string>
+	<string name="native_library_not_supported">Родныя бібліятэкі не падтрымліваюцца гэтай прыладай.</string>
+	<string name="init_native_library">Ініцыалізацыя родных бібліятэк…</string>
+	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
+	<string name="choose_auto_follow_route_descr">Час каб мапа сынхранізавалася з бягучым месцам</string>
+	<string name="auto_follow_route_never">Ніколі</string>
+	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
+	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
+	<string name="auto_follow_location_enabled">Аўтаматычнае цэнтраваньне падчас карыстаньня</string>
+	<string name="pref_vector_rendering">Налады маляваньня вэктарамі</string>
+	<string name="pref_overlay">Overlay / underlay</string>
+	<string name="pref_raster_map">Налады крыніцы мапы</string>
+	<string name="pref_vector_map">Налады вэктарнай мапы</string>
+	<string name="delete_confirmation_msg">Выдаліць %1$s?</string>
+	<string name="city_type_suburb">Прыгарад</string>
+	<string name="city_type_hamlet">Паселішча</string>
+	<string name="city_type_village">Вёска</string>
+	<string name="city_type_town">Мястэчка</string>
+	<string name="city_type_city">Горад</string>
+	<string name="layer_poi_label">Цэтлікі цікавостак</string>
+	<string name="animate_route_off">Спыніць анімацыю</string>
+	<string name="animate_route">Пачаць анімацыю</string>
+	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
+		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
+		\n\t- Implement POI search by name in big areas (countries)  
+		\n\t- Fix flickering map screen for tablets (Issue 641)
+		\n\t- Auto-center map view option (Issue 356)
+		\n\t- GPX navigation moved to \'Directions\' and \'Save Directions\' moved to \'About route\'
+		\n\t- POI data included in .obf file (all download indexes after 01/10/11) 
+		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
+		\n\t- Small improvements
+	</string>
+	<string name="file_can_not_be_renamed">Файл ня можа быць пераназваны.</string>
+	<string name="file_with_name_already_exists">Файл з такой назвай ужо існуе.</string>
+	<string name="gpx_navigation">GPX шлях</string>
+	<string name="poi_query_by_name_matches_categories">Several POI categories found matching the query:</string>
+	<string name="data_to_search_poi_not_available">Лякальных зьвестак для пошуку POI няма.</string>
+	<string name="poi_filter_by_name">Пошук па назьве</string>
+	<string name="old_poi_file_should_be_deleted">Файл POI \'%1$s\' залішні і можа быць выдалены.</string>
+	<string name="update_poi_file_not_found">Лякальны файл для падтрымкі зьменаў у POI ня знойдзены і ня можа быць створаны.</string>
+	<string name="button_upgrade_osmandplus">Upgrade OsmAnd+</string>
+	<string name="map_version_changed_info">Сэрвер утрымлівае файлы мапы якія не сумяшчальныя з вашай вэрсіяй праграмы. Каб зладаваць і карыстацца імі трэба абнавіць праграму да новай вэрсіі.</string>
+	<string name="local_index_mi_rename">Пераназваць</string>
+	<string name="show_gpx_route">Паказаць на мапе</string>
+	<string name="poi_filter_nominatim">Online Nominatim</string>
+	<string name="search_position_current_location_search">Пошук месца…</string>
+	<string name="search_position_current_location_found">Position (found)</string>
+	<string name="search_position_address">Адрас…</string>
+	<string name="search_position_favorites">Упадабаныя…</string>
+	<string name="search_position_undefined">Нявызначаныя</string>
+	<string name="search_position_fixed">Фіксаваны</string>
+	<string name="search_position_current_location">Бягучае месца…</string>
+	<string name="search_position_map_view">Апошні выгляд мапы</string>
+	<string name="select_search_position">Шукаць блізу:</string>
+	<string name="context_menu_item_search">Шукаць навокал</string>
+	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
+		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
+		\n\t- Favorite points and groups (categorize, delete, manage favorites)
+		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
+		\n\t- GPX navigation (more options, continue navigation after crash, support roundabouts)
+		\n\t- Function to save route as GPX track for offline use
+		\n\t- Improve GPX monitoring  (filter some inaccurate position and save accuracy/elevation/speed)
+		\n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/)
+		\n\t- Improve vector rendering
+		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
+		\n\t- Bug fixes
+	</string>
+	<string name="save_route_dialog_title">Захаваць шлях як GPX трэк</string>
+	<string name="route_successfully_saved_at">Шлях пасьпяхова захаваны як \'%1$s\'.</string>
+	<string name="filename_input">File name: </string>
+	<string name="file_with_name_already_exist">Файл з такой самай назвай ужо існуе.</string>
+	<string name="default_buttons_save">Захаваць</string>
+	<string name="menu_save_directions">Захаваць напрамкі</string>
+	<string name="local_index_upload_gpx_description">Заладаваць файлы GPX у суполку OSM. Яны будуць выкарыстаныя для паляпшэньня мапы.</string>
+	<string name="local_index_items_uploaded">%1$d з %2$d рэчаў пасьпяхова заладаваныя.</string>
+	<string name="local_index_mi_upload_gpx">Даслаць у OSM</string>
+	<string name="show_more_map_detail">Паказаць больш дэталей мапы</string>
+	<string name="show_more_map_detail_descr">Паказаць некаторыя дэталі вэктарнай мапы (дарогі й іншыя) на меншым маштабе</string>
+	<string name="favourites_delete_multiple_succesful">Упадабаныя кропкі пасьпяхова выдаленыя.</string>
+	<string name="favorite_delete_multiple">Вы зьбіраецеся выдаліць %1$d упадабаныя %2$d групы. Вы ўпэўненыя ?</string>
+	<string name="favorite_home_category">Дом</string>
+	<string name="favorite_friends_category">Сябры</string>
+	<string name="favorite_places_category">Месцы</string>
+	<string name="favorite_default_category">Іншае</string>
+	<string name="favourites_edit_dialog_name">Назва</string>
+	<string name="favourites_edit_dialog_category">Катэгорыя</string>
+	<string name="vector_map_not_needed">Не, дзякуй</string>
+	<string name="basemap_missing">Няма асноўнай мапы сьвету (якая пакрывае увесь сьвет на малых маштабах). Каб мець поўнае асяродзьдзе трэба зладаваць World_basemap_x.obf.</string>
+	<string name="vector_data_missing">Няма пазасеціўных зьвестак на картке SD. Каб карыстацца мапай па-за сеткай, трэба іх зладаваць.</string>
+	<string name="local_index_gpx_info_show">\n\nНаціснуць і трымаць для наладаў</string>
+	<string name="local_index_gpx_info_speed">\nAverage speed: %1$s \nMaximum speed: %2$s</string>
+	<string name="local_index_gpx_info_elevation">\nAverage altitude: %1$.0f m\nMinimum altitude: %2$.0f m\nMaximum altitude: %3$.0f m\nAscents: %4$.0f m\nDescents: %5$.0f m</string>
+	<string name="local_index_gpx_info">Subtracks: %1$d\nTotal points: %2$d\nWaypoints: %3$d\nTotal distance: %4$s\nStart time: %5$tF,  %5$tR\nEnd time: %6$tF,  %6$tR</string>
+	<string name="local_index_installed">Выданьне</string>
+	<string name="local_index_items_backuped">%1$d з %2$d рэчаў пасьпяхова дэактываваныя.</string>
+	<string name="local_index_items_deleted">%1$d з %2$d рэчаў пасьпяхова выдаленыя.</string>
+	<string name="local_index_items_restored">%1$d з %2$d рэчаў пасьпяхова актываваныя.</string>
+	<string name="local_index_no_items_to_do">Няма рэчаў да %1$s</string>
+	<string name="local_index_action_do">Вы каля %1$s %2$s рэчаў. Працягнуць ?</string>
+	<string name="local_index_descr_title">Кіраваньне зьвесткамі</string>
+	<string name="local_index_mi_restore">Актываваць</string>
+	<string name="local_index_mi_backup">Дэактываваць</string>
+	<string name="local_index_mi_delete">Выдаліць</string>
+	<string name="local_index_mi_reload">Reload from sdcard</string>
+	<string name="local_index_download">Зладаваць</string>
+	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom: %2$d\nMaximum zoom: %3$d\nDownloadable: %4$s \nZooms downloaded: %5$s</string>
+	<string name="local_index_poi_data">POI data</string>
+	<string name="local_index_address_data">Address data</string>
+	<string name="local_index_transport_data">Transportation data</string>
+	<string name="local_index_map_data">Map data</string>
+	<string name="local_index_items"/>
+	<string name="local_indexes_cat_backup">Deactivated</string>
+	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
+	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
+	<string name="local_indexes_cat_gpx">GPX data</string>
+	<string name="local_indexes_cat_poi">POI data</string>
+	<string name="ttsvoice">TTS Voice</string>
+	<string name="search_offline_clear_search">New Search</string>
+	<string name="map_text_size_descr">Select text size for names on the map</string>
+	<string name="map_text_size">Map font size</string>
+	<string name="trace_rendering">Rendering debug info</string>
+	<string name="trace_rendering_descr">Display rendering performance</string>
+	<string name="tip_recent_changes">Recent changes</string>
+	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
+		\n\t- Text To Speech engine for voice navigation
+		\n\t- Make map renderer more detailed
+		\n\t- Basemap for whole world packaged with app
+		\n\t- Tweak offline navigation (still experimental)
+		\n\t- GPX navigation options
+		\n\t- UI update and large bug fixing
+	</string>
+	<string name="voice_not_use">Do not use</string>
+	<string name="voice_not_specified">None</string>
+	<string name="installing_new_resources">Unpacking new data…</string>
+	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
+	<string name="tts_language_not_supported_title">Language not supported</string>
+	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to look for another TTS engine in Market? Otherwise the preset TTS language will be used.</string>
+	<string name="tts_missing_language_data_title">Missing data</string>
+	<string name="tts_missing_language_data">No data for the selected language is installed. Do you want to go to Market to install?</string>
+	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
+	<string name="gpx_option_destination_point">Use current destination</string>
+	<string name="gpx_option_from_start_point">Pass along entire track</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -&gt; \'Define view\' -&gt; \'Map Source…\' -&gt; \'Offline vector maps\'.</string>
+	<string name="choose_audio_stream">Voice guidance output</string>
+	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
+	<string name="voice_stream_voice_call">Voice call audio</string>
+	<string name="voice_stream_notification">Notification audio</string>
+	<string name="voice_stream_music">Media/music audio</string>
+	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
+	<string name="overlay_transparency_descr">Modify overlay transparency</string>
+	<string name="overlay_transparency">Overlay transparency</string>
+	<string name="map_transparency_descr">Modify base map transparency</string>
+	<string name="map_transparency">Base map transparency</string>
+	<string name="layer_underlay">Underlay map…</string>
+	<string name="map_underlay">Underlay map</string>
+	<string name="map_underlay_descr">Choose underlay map</string>
+	<string name="layer_overlay">Overlay map…</string>
+	<string name="default_none">None</string>
+	<string name="map_overlay">Overlay map</string>
+	<string name="map_overlay_descr">Choose overlay map</string>
+	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
+	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
+	<string name="internet_not_available">Internet connection required for operation is not available</string>
+	<string name="install_more">Install more…</string>
+	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
+	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
+	<string name="tip_location_sharing">Location Sharing</string>
+	<string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip  with family or friends.
+		\n\tTo share any location you want:
+		\n\tUse \'Map context menu\' -&gt; \'Share location\' menu.
+		\n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.
+	</string>
+	<string name="tip_favorites">Favorite Points</string>
+	<string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
+		\n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Screen\' -&gt; \'Favorites\'.
+		\n\tLong pressing on a Favorite in the \'Favorites\' menu provides options to set it as desination, Edit or Delete it.
+		\n\tTo display all Favorite points directly on the map, on the map screen enable layer \'Favorites\' under \'Menu\' -&gt; \'Define view\'.
+	</string>
+	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images</string>
+	<string name="error_doing_search">Error occurred in offline search</string>
+	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
+	<string name="search_osm_offline">Search geo location</string>
+	<string name="system_locale">System</string>
+	<string name="preferred_locale_descr">Select display language</string>
+	<string name="preferred_locale">Display language</string>
+	<string name="incomplete_locale">incomplete</string>
+	<string name="tip_map_switch">Map Source</string>
+	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -&gt; \'Define view\' in map view.
+		\n\tUnder \'Map source…\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online and tile maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
+		\n\tOsmAnd also supports custom sources.
+	</string>
+	<string name="tip_app_mode">Профіль карыстальніка</string>
+	<string name="tip_app_mode_t_v2">\tOsmAnd supports different (customizable) application profiles for different use cases.
+		\n\tYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route.
+	</string>
+	<string name="tip_navigation">Navigation</string>
+	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
+	<string name="tip_search">Searching</string>
+	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
+		\n\tPressing \'Search\' on the main screen opens the search activities. For all hits a context menu offers the options \'Directions\' or \'Show on map\'.
+	</string>
+	<string name="tip_map_context_menu">Map Context Menu</string>
+	<string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button.
+		\n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.)
+		\n\tThe map context menu contains all actions referring to a point (location).
+	</string>
+	<string name="tip_initial">Tips and Tricks</string>
+	<string name="tip_initial_t">\tOsmAnd is a navigation application with many features. 
+		\n\tAs a basic introduction, some usage tips and tricks are linked on the main screen (see \'?\' icon).
+	</string>
+	<string name="next_button">Next</string>
+	<string name="previous_button">Previous</string>
+	<string name="unit_of_length_descr">Change units of length and speed</string>
+	<string name="unit_of_length">Unit of measure</string>
+	<string name="si_mi_foots">Miles/feet</string>
+	<string name="si_mi_yard">Miles/yards</string>
+	<string name="si_km_m">Kilometers/meters</string>
+	<string name="yard">yd</string>
+	<string name="foot">ft</string>
+	<string name="mile_per_hour">mph</string>
+	<string name="mile">mi</string>
+	<string name="send_location_way_choose_title">Даслаць каардынаты праз</string>
+	<string name="send_location_sms_pattern">Location: %1$s\n%2$s</string>
+	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
+	<string name="send_location">Даслаць каардынаты</string>
+	<string name="context_menu_item_share_location">Даслаць каардынаты</string>
+	<string name="add_waypoint_dialog_added">Waypoint \'\'{0}\'\' was successfully added</string>
+	<string name="add_waypoint_dialog_title">Add waypoint to recorded GPX track</string>
+	<string name="context_menu_item_add_waypoint">Add GPX waypoint</string>
+	<string name="amenity_type_administrative">Administrative</string>
+	<string name="amenity_type_barrier">Barrier</string>
+	<string name="amenity_type_education">Education</string>
+	<string name="amenity_type_emergency">Emergency</string>
+	<string name="amenity_type_entertainment">Entertainment</string>
+	<string name="amenity_type_finance">Finance</string>
+	<string name="amenity_type_geocache">Geocache</string>
+	<string name="amenity_type_healthcare">Healthcare</string>
+	<string name="amenity_type_historic">Historic</string>
+	<string name="amenity_type_landuse">Landuse</string>
+	<string name="amenity_type_leisure">Leisure</string>
+	<string name="amenity_type_manmade">Man made</string>
+	<string name="amenity_type_military">Military</string>
+	<string name="amenity_type_natural">Natural</string>
+	<string name="amenity_type_office">Office</string>
+	<string name="amenity_type_other">Other</string>
+	<string name="amenity_type_shop">Shop</string>
+	<string name="amenity_type_sport">Sport</string>
+	<string name="amenity_type_sustenance">Sustenance</string>
+	<string name="amenity_type_tourism">Tourism</string>
+	<string name="amenity_type_transportation">Transportation</string>
+	<string name="indexing_address">Indexing address…</string>
+	<string name="indexing_map">Indexing map…</string>
+	<string name="indexing_poi">Indexing POI…</string>
+	<string name="indexing_transport">Indexing transportation…</string>
+	<string name="input_output_error">I/O error occurred</string>
+	<string name="km">km</string>
+	<string name="km_h">km/h</string>
+	<string name="m">m</string>
+	<string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
+	<string name="poi_filter_closest_poi">Closest POI</string>
+	<string name="poi_filter_custom_filter">Custom filter</string>
+	<string name="poi_filter_namefinder">Online NameFinder</string>
+	<string name="reading_cached_tiles">Reading cached tiles…</string>
+	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
+	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
+	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
+	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
+	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
+	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
+	<string name="application_dir">Storage directory</string>
+	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
+	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
+	<string name="build_installed">Build {0} successfully installed ({1}).</string>
+	<string name="downloading_build">Downloading build…</string>
+	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
+	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
+	<string name="loading_builds">Loading OsmAnd builds…</string>
+	<string name="select_build_to_install">Select an OsmAnd build to install</string>
+	<string name="gps_status_app_not_found">Праграма статуса GPS не ўсталяваная. Пашукаць яе ў Краме ?</string>
+	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
+	<string name="voice_is_not_available_title">No voice guidance selected</string>
+	<string name="daynight_mode_day">Дзень</string>
+	<string name="daynight_mode_night">Ноч</string>
+	<string name="daynight_mode_auto">Усход/Захад</string>
+	<string name="daynight_mode_sensor">Сэнсар сьвятла</string>
+	<string name="daynight_descr">Choose day/night mode switching rule</string>
+	<string name="daynight">Рэжым дзень/ноч</string>
+	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
+	<string name="items_were_selected">{0} item(s) selected</string>
+	<string name="filter_existing_indexes">Downloaded</string>
+	<string name="deselect_all">Deselect all</string>
+	<string name="select_all">Select all</string>
+	<string name="reload">Абнавіць</string>
+	<string name="fast_route_mode">Fastest route</string>
+	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
+	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
+	<string name="context_menu_item_download_map">Download map</string>
+	<string name="select_max_zoom_preload_area">Select maximum zoom to preload</string>
+	<string name="maps_could_not_be_downloaded">This map could not be downloaded</string>
+	<string name="continuous_rendering">Continuous rendering</string>
+	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
+	<string name="rendering_exception">Error occurred while rendering selected area</string>
+	<string name="show_point_options">Гэтае месца...</string>
+	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
+	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
+	<string name="renderers">Vector renderer</string>
+	<string name="renderers_descr">Choose rendering appearance</string>
+	<string name="poi_context_menu_website">Show POI website</string>
+	<string name="poi_context_menu_call">Show POI phone</string>
+	<string name="download_type_to_filter">type to filter</string>
+	<string name="use_high_res_maps">High resolution display</string>
+	<string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays</string>
+	<string name="download_files">Зладаваць</string>
+	<string name="context_menu_item_search_transport">Search transportation</string>
+	<string name="transport_searching_transport">Transportation results (no target):</string>
+	<string name="transport_searching_route">Transportation results ({0} to target):</string>
+	<string name="transport_search_none">none</string>
+	<string name="transport_search_again">Reset Transportation search</string>
+	<string name="map_index">Мапа</string>
+	<string name="voice">Voice</string>
+	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
+	<string name="map_route_by_gpx">Navigate using GPX</string>
+	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
+	<string name="layer_gpx_layer">GPX track…</string>
+	<string name="error_reading_gpx">Error reading GPX data</string>
+	<string name="vector_data">Offline vector maps</string>
+	<string name="transport_context_menu">Search transportation at stop</string>
+	<string name="point_on_map">Location:\n Lat %1$.5f\n Lon %2$.5f</string>
+	<string name="osb_bug_name">Bug</string>
+	<string name="poi_context_menu_modify">Modify POI</string>
+	<string name="poi_context_menu_delete">Выдаліць цікавостку</string>
+	<string name="rotate_map_compass_opt">To compass</string>
+	<string name="rotate_map_bearing_opt">To direction of movement</string>
+	<string name="rotate_map_none_opt">Don\'t rotate (north is up)</string>
+	<string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
+	<string name="rotate_map_to_bearing">Map orientation</string>
+	<string name="show_route">Route details</string>
+	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
+	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
+	<string name="fav_saved_sucessfully">Favorites succesfully saved to {0}</string>
+	<string name="no_fav_to_save">No favorite points to save</string>
+	<string name="import_fav">Import</string>
+	<string name="export_fav">Export</string>
+	<string name="error_occurred_loading_gpx">Error occurred while loading GPX</string>
+	<string name="send_report">Send report</string>
+	<string name="none_region_found">No offline data for regions found on SD card. Download regions from the Internet.</string>
+	<string name="poi_namefinder_query_empty">Input search query to find POI</string>
+	<string name="any_poi">Any</string>
+	<string name="layer_transport_route">Transportation route</string>
+	<string name="thanks_yandex_traffic">Thanks to Yandex for traffic information.</string>
+	<string name="layer_yandex_traffic">Yandex traffic</string>
+	<string name="layer_route">Route</string>
+	<string name="layer_favorites">Упадабаныя</string>
+	<string name="layer_osm_bugs">OSM bugs (online)</string>
+	<string name="layer_transport">Прыпынкі транспарту</string>
+	<string name="layer_poi">POI…</string>
+	<string name="layer_map">Крыніца мапы…</string>
+	<string name="menu_layers">Вызначыць выгляд</string>
+	<string name="context_menu_item_search_poi">Search POI</string>
+	<string name="context_menu_item_show_route">Паказаць шлях адсюль</string>
+	<string name="use_trackball_descr">Use trackball to move map</string>
+	<string name="use_trackball">Use trackball</string>
+	<string name="background_service_wait_int_descr">Set maximum waiting time for each background position fix</string>
+	<string name="background_service_wait_int">Maximum wait for fix</string>
+	<string name="service_stop_background_service">Switch off OsmAnd sleep mode navigation service</string>
+	<string name="where_am_i">Дзе я ?</string>
+	<string name="process_navigation_service">OsmAnd navigation service</string>
+	<string name="network_provider">Network</string>
+	<string name="gps_provider">GPS</string>
+	<string name="int_seconds">seconds</string>
+	<string name="int_min">min.</string>
+	<string name="background_service_int_descr">Set wake-up interval used by sleep mode service</string>
+	<string name="background_service_int">Wake-up interval</string>
+	<string name="background_service_provider_descr">Choose location provider used by sleep mode service</string>
+	<string name="background_service_provider">Location provider</string>
+	<string name="background_router_service_descr">Runs OsmAnd in the background to track your position while screen is off</string>
+	<string name="background_router_service">Run in sleep mode</string>
+	<string name="off_router_service_no_gps_available">The sleep mode navigation service requires a location provider to be turned on.</string>
+	<string name="hide_poi_filter">Hide filter</string>
+	<string name="show_poi_filter">Show filter</string>
+	<string name="search_poi_filter">Filter</string>
+	<string name="menu_mute_off">Sound is on</string>
+	<string name="menu_mute_on">Sound is off</string>
+	<string name="voice_provider_descr">Select voice guidance for navigation</string>
+	<string name="voice_provider">Voice guidance</string>
+	<string name="voice_data_initializing">Initializing voice data…</string>
+	<string name="voice_data_not_supported">Unsupported version of voice data</string>
+	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
+	<string name="voice_data_unavailable">Selected voice data is not available</string>
+	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
+	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
+	<string name="unzipping_file">Unzipping file…</string>
+	<string name="route_tr">Turn right and go</string>
+	<string name="route_tshr">Turn sharply right and go</string>
+	<string name="route_tslr">Turn slightly right and go</string>
+	<string name="route_tl">Turn left and go</string>
+	<string name="route_tshl">Turn sharply left and go</string>
+	<string name="route_tsll">Turn slightly left and go</string>
+	<string name="route_tu">Make U-turn and go</string>
+	<string name="route_head">Head</string>
+	<string name="first_time_continue">Пазьней</string>
+	<string name="first_time_download">Download regions</string>
+	<string name="search_poi_location">Searching for signal…</string>
+	<string name="search_near_map">Search near last map location</string>
+	<string name="search_nearby">Search nearby</string>
+	<string name="map_orientation_default">Same as device</string>
+	<string name="map_orientation_portrait">Portrait</string>
+	<string name="map_orientation_landscape">Landscape</string>
+	<string name="map_screen_orientation">Screen orientation</string>
+	<string name="map_screen_orientation_descr">Portrait, landscape, or device</string>
+	<string name="opening_hours_not_supported">Opening hours format is not supported for editing</string>
+	<string name="add_new_rule">Add new rule</string>
+	<string name="transport_Routes">Routes</string>
+	<string name="transport_Stop">Stop</string>
+	<string name="transport_stops">stops</string>
+	<string name="transport_search_after">Subsequent route</string>	
+	<string name="transport_search_before">Prior route</string>
+	<string name="transport_finish_search">Finish search</string>
+	<string name="transport_stop_to_go_out">Choose stop to get off</string>
+	<string name="transport_to_go_after">prior distance</string>
+	<string name="transport_to_go_before">subsequent distance</string>
+	<string name="transport_stops_to_pass">stops to pass</string>
+	<string name="transport_route_distance">Route distance</string>
+	<string name="transport">Transportation</string>
+	<string name="default_buttons_ok">OK</string>
+	<string name="show_transport_over_map_description">Show public transportation stops on map</string>
+	<string name="show_transport_over_map">Паказваць прыпынкі транспарту</string>
+	<string name="hello">Navigation application OsmAnd</string>
+	<string name="update_poi_success">POI data was updated successfully ({0} were loaded)</string>
+	<string name="update_poi_error_local">Error updating local POI list</string>
+	<string name="update_poi_error_loading">Error while loading data from server</string>
+	<string name="update_poi_no_offline_poi_index">No offline POI data available for this area</string>
+	<string name="update_poi_is_not_available_for_zoom">Updating POIs is not available for small zoom levels</string>
+	<string name="context_menu_item_update_poi">Update POI</string>
+	<string name="context_menu_item_update_map_confirm">Update local data via Internet?</string>
+	<string name="search_history_city">City: {0}</string>
+	<string name="search_history_street">Street: {0}, {1}</string>
+	<string name="search_history_int_streets">Intersection: {0} x {1} in {2}</string>
+	<string name="search_history_building">Building: {0}, {1}, {2}</string>
+	<string name="favorite">Favorite</string>
+	<string name="clear_all">Clear all</string>
+	<string name="history">History</string>
+	<string name="uploading_data">Uploading data…</string>
+	<string name="uploading">Uploading…</string>
+	<string name="search_nothing_found">Nothing found</string>
+	<string name="searching">Searching…</string>
+	<string name="searching_address">Searching address…</string>
+	<string name="search_osm_nominatim">Online search using OSM Nominatim</string>
+	<string name="hint_search_online">House number, street, city</string>
+	<string name="search_offline_address">Offline search</string>
+	<string name="search_online_address">Online search</string>
+	<string name="max_level_download_tile">Max. online zoom</string>
+	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
+	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
+	<string name="router_service_descr">Choose an online or offline navigation service</string>
+	<string name="router_service">Navigation service</string>
+	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
+	<string name="download_question">Download {0} - {1} ?</string>
+	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
+	<string name="address">Address</string>
+	<string name="download_index_success">Download successful</string>
+	<string name="error_io_error">I/O error occured</string>
+	<string name="downloading_file_new">Downloading </string>
+	<string name="downloading">Downloading…</string>
+	<string name="downloading_list_indexes">Downloading list of available regions…</string>
+	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
+	<string name="show_poi_on_map">Паказаць на мапе</string>
+	<string name="fav_points_edited">Favorite point was edited</string>
+	<string name="fav_points_not_exist">No favorite points exist</string>
+	<string name="update_existing">Зьмяніць</string>
+	<string name="only_show">Only show</string>
+	<string name="follow">Follow</string>
+	<string name="mark_final_location_first">Please select destination first</string>
+	<string name="get_directions">Навігацыя</string>
+	<string name="show_gps_status">Паказаць статус GPS</string>
+	<string name="opening_hours">Opening hours</string>
+	<string name="opening_changeset">Opening changeset…</string>
+	<string name="closing_changeset">Closing changeset…</string>
+	<string name="commiting_node">Committing node…</string>
+	<string name="loading_poi_obj">Loading POI…</string>
+	<string name="auth_failed">Authorization failed</string>
+	<string name="failed_op">failed</string>
+	<string name="converting_names">Converting native/English names…</string>
+	<string name="loading_streets_buildings">Loading streets/buildings…</string>
+	<string name="loading_postcodes">Loading postcodes…</string>
+	<string name="loading_streets">Loading streets…</string>
+	<string name="loading_cities">Loading cities…</string>
+	<string name="loading">Loading…</string>
+	<string name="poi">POI</string>
+	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
+	<string name="error_calculating_route">Error calculating route</string>
+	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
+	<string name="empty_route_calculated">Error: Calculated route is empty</string>					
+	<string name="new_route_calculated_dist">New route calculated, distance</string>
+	<string name="arrived_at_destination">You have arrived at your destination</string>
+	<string name="invalid_locations">Coordinates are invalid!</string>
+	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
+	<string name="close">Зачыніць</string>
+	<string name="loading_data">Чытаем зьвесткі…</string>
+	<string name="reading_indexes">Reading local data…</string>
+	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
+	<string name="saving_gpx_tracks">Saving GPX tracks to SD…</string>
+	<string name="finished_task">Finished</string>
+	<string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
+	<string name="reload_indexes">Re-read offline data</string>
+	<string name="download_indexes_descr">Download or update data for offline use from the Internet</string>
+	<string name="download_indexes">Download offline data</string>
+	<string name="use_online_routing_descr">Use Internet to calculate route</string>
+	<string name="use_online_routing">Use online navigation</string>
+	<string name="osm_settings_descr">Specify Openstreetmap.org (OSM) settings needed for OSM submissions</string>
+	<string name="data_settings_descr">Specify language, download/reload data</string>
+	<string name="data_settings">Data</string>
+	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
+	<string name="osm_settings">OSM editing</string>
+	<string name="additional_settings">Additional settings</string>
+	<string name="settings">Налады</string>
+	<string name="save_current_track_descr">Save current track to SD now</string>
+	<string name="save_current_track">Save current GPX track</string>
+	<string name="save_track_interval">Logging interval</string>
+	<string name="save_track_interval_descr">Choose positioning interval for tracks</string>
+	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
+	<string name="save_track_to_gpx">Log track to GPX file</string>
+	<string name="update_tile">Update map</string>
+	<string name="reload_tile">Reload tile</string>
+	<string name="mark_point">Target</string>
+	<string name="show_osm_bugs_descr">Show OpenStreetBugs on map</string>
+	<string name="show_osm_bugs">Show OpenStreetBugs</string>
+	<string name="favourites_activity">Упадабаныя</string>
+	<string name="add_to_favourite">Дадаць да ўпадабаных</string>
+	<string name="use_english_names_descr">Select between native and English names</string>
+	<string name="use_english_names">Use English names in maps</string>
+	<string name="app_settings">Application settings</string>
+	<string name="search_address">Search address</string>
+	<string name="choose_building">Абраць будынак</string>
+	<string name="choose_street">Абраць вуліцу</string>
+	<string name="choose_city">Абраць горад</string>
+	<string name="ChooseCountry">Абраць краіну</string>
+	<string name="show_view_angle">Display viewing direction</string>
+	<string name="map_view_3d_descr">Enable 3D view of the map</string>
+	<string name="map_view_3d">Map View 3D</string>
+	<string name="show_poi_over_map_description">Show POI over map (use last chosen filter)</string>
+	<string name="show_poi_over_map">Show POI</string>
+	<string name="map_tile_source_descr">Choose the source of online or cached map tiles</string>
+	<string name="map_tile_source">Tile map source</string>
+	<string name="map_source">Map source</string>
+	<string name="use_internet">Use Internet</string>
+	<string name="show_location">Show location</string>
+	<string name="map_preferences">Мапа</string>
+	<string name="settings_activity">Налады</string>
+	<string name="show_gps_coordinates_text">Show GPS coordinates on map</string>
+	<string name="use_internet_to_download_tile">Use Internet to download missing map tiles</string>
+	<string name="app_description">Navigation application</string>
+	<string name="exit_Button">Выхад</string>
+	<string name="map_Button">Мапа</string>
+	<string name="settings_Button">Налады</string>
+	<string name="favorites_Button">Упадабаныя</string>
+	<string name="search_button">Пошук</string>
+	<string name="search_activity">Пошук</string>
+	<string name="searchpoi_activity">Choose POI</string>
+	<string name="search_POI_level_btn">Find more</string>
+	<string name="incremental_search_street">Search street incrementally</string>
+	<string name="incremental_search_building">Search building incrementally</string>
+	<string name="choose_available_region">Choose region from list</string>
+	<string name="choose_intersected_street">Абраць скрыжаваньне</string>
+	<string name="Closest_Amenities">Closest amenities</string>
+	<string name="app_mode_default">Default</string>
+	<string name="app_mode_car">Car</string>
+	<string name="app_mode_bicycle">Bicycle</string>
+	<string name="app_mode_pedestrian">Pedestrian</string>
+	<string name="position_on_map_center">Center</string>
+	<string name="position_on_map_bottom">Bottom</string>
+	<string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
+	<string name="navigate_point_latitude">Latitude</string>
+	<string name="navigate_point_longitude">Longitude</string>
+	<string name="navigate_point_format_D">DDD.DD</string>
+	<string name="navigate_point_format_DM">DDD MM.MM</string>
+	<string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+	<string name="search_shown_on_map">Паказаць на мапе</string>
+	<string name="navigate_point_cancel">Скасаваць</string>
+	<string name="search_address_top_text">Абраць адрас</string>
+	<string name="search_address_region">Рэгіён</string>
+	<string name="search_address_city">Горад</string>
+	<string name="search_address_street">Вуліца</string>
+	<string name="search_address_building">Будынак</string>
+	<string name="search_address_building_option">Будынак</string>
+	<string name="search_address_street_option">Скрыжаваньне вуліц</string>
+	<string name="search_tabs_location">Location</string>
+	<string name="context_menu_item_add_favorite">Дадаць да ўпадабаных</string>
+	<string name="context_menu_item_update_map">Update map</string>
+	<string name="context_menu_item_open_bug">Open OSM bug</string>
+	<string name="context_menu_item_create_poi">Create POI</string>
+	<string name="default_buttons_yes">Yes</string>
+	<string name="default_buttons_cancel">Скасаваць</string>
+	<string name="default_buttons_apply">Apply</string>
+	<string name="default_buttons_add">Дадаць</string>
+	<string name="default_buttons_no">No</string>
+	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
+	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
+	<string name="favourites_context_menu_edit">Рэдагаваньне ўпадабанага</string>
+	<string name="favourites_context_menu_delete">Выдаліць упадабанае</string>
+	<string name="favourites_remove_dialog_msg">Remove favorite point \'%s\'?</string>
+	<string name="favourites_remove_dialog_success">Favorite point {0} was succesfully deleted.</string>
+	<string name="osb_add_dialog_title">Enter bug text</string>
+	<string name="osb_add_dialog_success">Bug successfully created</string>
+	<string name="osb_add_dialog_error">Exception occured: bug was not created</string>
+	<string name="osb_comment_menu_item">Add comment</string>
+	<string name="osb_comment_dialog_message">Message</string>
+	<string name="osb_comment_dialog_author">Author name</string>
+	<string name="osb_comment_dialog_title">Adding comment to bug</string>
+	<string name="osb_comment_dialog_add_button">Add comment</string>
+	<string name="osb_comment_dialog_success">Comment was successfully added</string>
+	<string name="osb_comment_dialog_error">Exception occured: comment was not added</string>
+	<string name="osb_close_menu_item">Close bug</string>
+	<string name="osb_close_dialog_title">Closing bug</string>
+	<string name="osb_close_dialog_close_button">Close bug</string>
+	<string name="osb_close_dialog_success">Bug was successfully closed</string>
+	<string name="osb_close_dialog_error">Exception occured: bug was not closed</string>
+	<string name="poi_edit_title">Edit POI</string>
+	<string name="poi_create_title">Create POI</string>
+	<string name="poi_error_poi_not_found">Node cannot be found or amenity is not a single node</string>
+	<string name="poi_remove_confirm_template">Delete {0} (enter comment)?</string>
+	<string name="poi_remove_title">Выдаліць цікавостку</string>
+	<string name="default_buttons_delete">Выдаліць</string>
+	<string name="poi_remove_success">Цікавостка выдаленая</string>
+	<string name="poi_action_add">дадаць</string>
+	<string name="poi_action_change">зьмяніць</string>
+	<string name="poi_action_succeded_template">Action {0} completed successfully.</string>
+	<string name="poi_error_unexpected_template">Unexpected error occured while performing action {0}.</string>
+	<string name="poi_error_io_error_template">I/O error occured while performing action {0}.</string>
+	<string name="poi_error_info_not_loaded">Info about node was not loaded</string>
+	<string name="poi_dialog_name">Назва</string>
+	<string name="poi_dialog_opening_hours">Open</string>
+	<string name="poi_dialog_comment">Comment</string>
+	<string name="poi_dialog_comment_default">POI changing</string>
+	<string name="poi_dialog_other_tags_message">All other tags are preserved</string>
+	<string name="default_buttons_commit">Commit</string>
+	<string name="default_buttons_reset">Reset</string>
+	<string name="filter_current_poiButton">Filter</string>
+	<string name="edit_filter_delete_menu_item">Выдаліць</string>
+	<string name="edit_filter_save_as_menu_item">Save As</string>
+	<string name="edit_filter_delete_dialog_title">Delete selected filter?</string>
+	<string name="edit_filter_delete_message">Filter {0} has been deleted</string>
+	<string name="edit_filter_create_message">Filter {0} has been created</string>
+	<string name="default_buttons_selectall">Select All</string>
+	<string name="email">email</string>
+</resources>
