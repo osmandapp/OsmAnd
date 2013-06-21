@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="tip_select_destination_point">Uzyskiwanie informacji o trasie</string>
   <string name="tip_select_destination_point_t">"\tTrasę przejazdu do wybranego punktu możesz zobaczyć bezpośrednio na mapie (menu kontekstowe, następnie \'Trasa\'), podczas wyszukiwania lub po długim naciśnięciu na wpis z listy ulubionych punktów.
 \n\tPunkt docelowy oznaczony jest pomarańczową flagą na mapie. OsmAnd wyświetla odległość i kierunek do niej (pomarańczowy trójkąt). "</string>
@@ -24,8 +24,8 @@
   <string name="city_type_town">Miasteczko</string>
   <string name="city_type_city">Miasto</string>
   <string name="layer_poi_label">Etykiety POI</string>
-  <string name="animate_route_off">Wył. animacje</string>
-  <string name="animate_route">Wł. animacje</string>
+  <string name="animate_route_off">Zatrzymaj symulację</string>
+  <string name="animate_route">Uruchom symulację</string>
   <string name="tip_recent_changes_0_6_8_t">"Zmiany w 0.6.8:
 \n\t- całkowicie przeprojektowano wyszukiwanie (POI, adresy) - teraz jest szybsze i bardziej responsywne
 \n\t- zaimplementowano wyszukiwanie POI po nazwie na dużych obszarach (krajach)
@@ -518,8 +518,8 @@
   <string name="auto_zoom_map_descr">Automatyczne przybliżanie mapy w zależności od prędkości (gdy mapa zsynchronizowana jest z aktualną pozycją)</string>
   <string name="auto_zoom_map">Automatyczne przybliżanie</string>
   <string name="additional_settings">Dodatkowe ustawienia</string>
-  <string name="settings_preset_descr">Wybierz profil użytkownika z ustawieniami nawigacji i niestandardowych map.</string>
-  <string name="settings_preset">Profil użytkownika</string>
+  <string name="settings_preset_descr">Widok mapy i ustawienia nawigacji zapamiętywane są dla każdego profilu użytkownika. Ustaw swój domyślny profil tutaj.</string>
+  <string name="settings_preset">Domyślny profil</string>
   <string name="settings">Ustawienia</string>
   <string name="save_current_track_descr">Zapisz bieżący ślad na karcie SD</string>
   <string name="save_current_track">Zapisz bieżący ślad</string>
@@ -577,7 +577,7 @@
   <string name="choose_available_region">Wybierz region z listy</string>
   <string name="choose_intersected_street">Ulica przecinająca</string>
   <string name="Closest_Amenities">Najbliższe usługi</string>
-  <string name="app_mode_default">Domyślnie</string>
+  <string name="app_mode_default">Przeglądanie mapy</string>
   <string name="app_mode_car">Samochód</string>
   <string name="app_mode_bicycle">Rower</string>
   <string name="app_mode_pedestrian">Pieszo</string>
@@ -679,7 +679,7 @@
   <string name="extra_settings">Ustawienia zaawansowane</string>
   <string name="osmand_monitoring_description">Pokaż ustawienia ułatwiające nagrywanie swoich wycieczek do lokalnych plików GPX lub online za pomocą usługi internetowej.</string>
   <string name="osmand_extra_settings_description">Pokaż ustawienia do konfiguracji zaawansowanych opcji konfiguracyjnych map (jak zwiększenie detali map) oraz opcji specyficznych dla niektórych urządzeń.</string>
-  <string name="osmand_development_plugin_description">Pokaż ustawienia dotyczące rozwoju i debugowania funkcji, takich jak animowana nawigacja lub wyświetlanie informacji o wydajności renderowania.</string>
+  <string name="osmand_development_plugin_description">Pokaż ustawienia dotyczące rozwoju i debugowania funkcji, takich jak symulacja nawigacji i wyświetlanie informacji o wydajności renderowania.</string>
   <string name="plugins_screen">Wtyczki</string>
   <string name="select_plugin_to_activate">Dotknij wtyczki, aby ją aktywować lub dezaktywować. (Może być wymagane ponowne uruchomienie OsmAnd.)</string>
   <string name="prefs_plugins_descr">Wtyczki aktywują zaawansowane ustawienia i dodatkową funkcjonalność</string>
@@ -888,7 +888,7 @@
   <string name="global_app_allocated_memory">Użyta pamięć</string>
   <string name="native_app_allocated_memory_descr">Zużycie pamięci natywnej przez aplikację %1$s MB (dalvik %2$s MB, inna %3$s MB). Proportional memory %4$s MB (limit Androida %5$s MB, dalvika %6$s MB).</string>
   <string name="native_app_allocated_memory">Użycie pamięci głównej</string>
-  <string name="select_animate_speedup">Wybierz przyspieszenie animacji trasy</string>
+  <string name="select_animate_speedup">Wybierz przyspieszenie symulacji trasy</string>
   <string name="osmand_parking_hours">Godziny</string>
   <string name="osmand_parking_minutes">Minuty</string>
   <string name="osmand_parking_position_description_add_time">Samochód został zaparkowany o:</string>
@@ -1027,7 +1027,6 @@
 	<string name="monitoring_mode_on">Zatrzymaj\nrejestrację GPX.</string>
 	<string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
 	<string name="int_continuosly">Ciągły</string>
-	<string name="local_openstreetmap_items"/>
 	<string name="tip_day_night_mode_t_v2">"\tTryb wyświetlania niektórych map wektorowych może być wybierany jako dzienny (jaśniejszy) lub nocny (ciemniejszy).\n\tNocne kolory są bezpieczniejsze podczas jazdy w nocy.\n\tMożesz przełączyć tryb dzienny/nocny wybierając \'Menu\'-&gt;\'Zdefiniuj widok\'-&gt;\'Konfiguruj ekran...\'-&gt;\'mapa dzień/noc\'.\n\tMożliwość wyboru:\n\t\'Wschód/Zachód\' - tryb automatyczny, kontrolowany przez pozycję Słońca (domyślny)\n\t\'Dzień\' - zawsze używaj trybu dziennego\n\t\'Noc\' - Zawsze używaj trybu nocnego\n\t\'Czujnik światła\' - wygląd mapy kontrolowany jest przez czujnik światła w Twoim urządzeni (jeśli taki posiadasz) "</string>	
 	<string name="tip_map_switch_t_v2">"\tŹródło mapy oraz wyświetlane warstwy można zmienić przez \'Menu\' -&gt; \'Zdefiniuj widok\' w widoku mapy.\n\tWskazując \'Źródło mapy\' możesz wybrać wykorzystanie pobranych wcześniej map wektorowych, predefiniowanych map rastrowych (włącz wtyczkę \'Online maps\', lub map utworzonych ręcznie z wykorzystaniem narzędzi takich jak OsmAndMapCreator na PC\n\tOsmAnd wspiera również własne źródła map.
 \n "</string>
@@ -1038,8 +1037,7 @@
     <string name="rendering_attr_roadColors_description">Wybierz zestaw kolorów dróg:</string>
 	<string name="non_optimal_route_calculation">Duża odległość (trasa może być nieoptymalna)</string>
     <string name="enable_plugin_monitoring_services">Włącz wtyczkę śledzenia, aby skorzystać z usług rejestrowania pozycji (zapis GPX, śledzenie online)</string>
-    <string name="local_index_items"/>
-	<string name="no_buildings_found">Nie znaleziono budynków.</string>
+    <string name="no_buildings_found">Nie znaleziono budynków.</string>
     <string name="search_villages_and_postcodes">Szukaj wsi/kodów pocztowych</string>
 	<string name="route_descr_lat_lon">Szer. %1$.3f Dług. %2$.3f</string>
     <string name="route_descr_current_location">Bieżąca pozycja</string>
@@ -1214,7 +1212,7 @@
     <string name="use_kalman_filter_compass">Użyj filtru Kalmana</string>
     <string name="access_mark_final_location_first">Tryb ułatwień dostępu: wybierz najpierw punkt docelowy</string> 
     <string name="wait_current_task_finished">Zaczekaj aż bieżące zadanie zostanie zakończone</string>
-    <string name="downloading_file_new">"Pobieranie "</string>
+    <string name="downloading_file_new">Pobieranie…</string>
 	<string name="plugin_distance_point_time">czas</string>
     <string name="plugin_distance_point_hdop">precyzja</string>
     <string name="plugin_distance_point_speed">prędkość</string>
