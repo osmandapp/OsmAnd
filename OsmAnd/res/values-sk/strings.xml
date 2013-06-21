@@ -1,6 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="recording_context_menu_show">Zobraziť</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
   <string name="recording_context_menu_precord">Zachytiť fotografiu</string>
@@ -1262,4 +1261,7 @@
 \n\t* Podpora podpriečinkov pre GPX (organizujte vaše GPX stopy)
 \n\t* Odstránenie súborov SRTM
 \n\t* Podpora poznámok OSM "</string>
+    <string name="destination_point">Cieľ %1$s</string>
+    <string name="intermediate_items_sort_return">Cesta bola zoptimalizovaná.</string>
+    <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
     </resources>
