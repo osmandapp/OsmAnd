@@ -39,6 +39,11 @@
 				<include name="*.xml"/>
 			</fileset>
 		</copy>
+		<copy todir="${use.absolute.dir}/net/osmand/osm/">
+			<fileset dir="../../resources/obf_creation/" >
+				<include name="rendering_types.xml"/>
+			</fileset>
+		</copy>
 		<copy todir="${use.absolute.dir}/net/osmand/map/">
 			<fileset dir="../../resources/countries-info/" >
 				<include name="countries.reginfo"/>
