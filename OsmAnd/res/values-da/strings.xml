@@ -1,6 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-<string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\"Contour lines\") på Google Play for at støtte den videre udvikling.</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\"Contour lines\") på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -9,18 +8,20 @@
     <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
     <string name="av_use_external_recorder">Brug ekstern optager</string>
     <string name="av_settings_descr">Konfigurer audio- og videoindstillinger</string>
-    <string name="av_settings">Indstillinger for audio og video</string>
-    <string name="recording_error">"Fejl opstod under optagelse "</string>
+    <string name="av_settings">Indstillinger for audio og video </string>
+    <string name="recording_error">Fejl opstod under optagelse </string>
     <string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
     <string name="recording_is_recorded">Audio/video optages. For at stoppe tryk på AV modulet.</string>
     <string name="recording_playing">Den valgte optagelsen bliver afspillet.\n%1$s</string>
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
     <string name="recording_delete_confirm">Skal optagelsen slettes?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Ændringer i 1.1.0:\n\t*Udvidelse beregning af afstand\n\t*Udvidelse for Audionoter 
-\n\t*Udvidelse for højdekurver
-\n\t*Fejlrettelser
-\n\t*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
-\n\t*EGM96 geoide offset korrektion for GPS højdeaflæsningerne "</string>
+    <string name="tip_recent_changes_1_1_0_t">Ændringer i 1.1.0:
+	*Udvidelse beregning af afstand\n\t*Udvidelse for Audionoter 
+	*Udvidelse for højdekurver
+	*Fejlrettelser
+	*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
+	*EGM96 geoide offset korrektion for GPS højdeaflæsningerne
+    </string>
     <string name="recording_unavailable">ikke tilgængelig</string>
     <string name="recording_context_menu_arecord">Optag lydnote</string>
     <string name="srtm_paid_version_title">Højdekurver</string>
@@ -48,7 +49,7 @@
     <string name="audionotes_plugin_name">Audio-/videonoter</string>
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
-    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype)</string>
+    <string name="srtm_plugin_description">Muliggør at hente offline højdekurver og relief (Indstillinger -&gt; Datahåndtering -&gt; Hent-&gt; Vælg den ønskede korttype).</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
     <string name="download_roads_only_item">Kun veje</string>
@@ -81,11 +82,12 @@
     <string name="safe_mode">Fejlsikret tilstand</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
     <string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Ændringer i 1.0.0:
-\n\t* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
-\n\t* Introducere kort kun med veje
-\n\t* Kort mister ikke positionlås efter afbrydelser
-\n\t* Aktiver tjeneste i baggrunden under navigation "</string>
+    <string name="tip_recent_changes_1_0_0_t">Ændringer i 1.0.0:
+	* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
+	* Introducere kort kun med veje
+	* Kort mister ikke positionlås efter afbrydelser
+	* Aktiver tjeneste i baggrunden under navigation
+    </string>
     <string name="close_changeset">Luk ændringspost</string>
 	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Market?</string>
 	<string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
@@ -144,15 +146,19 @@
     <string name="prefer_motorways">Foretræk motorveje</string>
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
-    <string name="tip_recent_changes_1_2_t">"Rettelser i 1.2.1:
-\n\t* Rettet Geo Intent (Foursquare, c:geo)\n\t* Rettet at skærmbilledet ryster under navigation\n\t* Andre smårettelser\nÆndringer i 1.2:
-\n\t* Fejlrettelser (forbedret ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer)
-\n\t* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse)
-\n\t* Accepterer nu maps.google.com placeringslinks
-\n\t* Nyt modul (GPS info)
-\n\t* Tilføjet multi-vindue understøttelse af de seneste Samsung-enheder
-\n\t* Kalman-filter for kompas
-\n\t* Pebble-ur support "</string>
+    <string name="tip_recent_changes_1_2_t">Rettelser i 1.2.1:
+	* Rettet Geo Intent (Foursquare, c:geo)
+	* Rettet at skærmbilledet ryster under navigation
+	* Andre smårettelser
+	Ændringer i 1.2:
+		* Fejlrettelser (forbedret ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer)
+		* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse)
+		* Accepterer nu maps.google.com placeringslinks
+		* Nyt modul (GPS info)
+		* Tilføjet multi-vindue understøttelse af de seneste Samsung-enheder
+		* Kalman-filter for kompas
+		* Pebble-ur support
+	</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="dist_control_start">start</string>
@@ -212,12 +218,17 @@
 	<string name="map_widget_top_stack">Statuslinje:</string>
 	<string name="download_hillshade_item">Relief skygger</string>
     <string name="download_hillshade_maps">Relief overlejringer</string>
-    <string name="tip_recent_changes_1_1_2_t">"Ændringer i 1.1.2:
-\n\t* Audio/video udvidelse forbedring (fotos med EXIF information)
-\n\t* Rettet brugbarhed og omstruktureret højdekurverudvidelse
-\n\t* Relief pakke til højdekurverudvidelse
-\n\t* Fejlrettelser (næsten optimal ruteplanlægning) "</string>
-    <string name="tip_recent_changes_0_8_4_t">"Ændringer i 0.8.4:\n * Nogle fejlrettelser\n * Kort mister ikke positionslås efter afbrydelser\n * Aktiver dvaletilstand tjeneste under navigation "</string>
+    <string name="tip_recent_changes_1_1_2_t">Ændringer i 1.1.2:
+	* Audio/video udvidelse forbedring (fotos med EXIF information)
+	* Rettet brugbarhed og omstruktureret højdekurverudvidelse
+	* Relief pakke til højdekurverudvidelse
+	* Fejlrettelser (næsten optimal ruteplanlægning)
+    </string>
+    <string name="tip_recent_changes_0_8_4_t">Ændringer i 0.8.4:
+	* Nogle fejlrettelser
+	* Kort mister ikke positionslås efter afbrydelser
+	* Aktiver dvaletilstand tjeneste under navigation
+    </string>
     <string name="tip_recent_changes_0_8_3_t">"Ændringer i 0.8.3:\n * Rutepunkter\n * Forbedret navigation\n * Tilføjet en indstilling, der gør det muligt at undgå motorveje og samtidig bygge en rute\n * Tilføjet en mere vejtype til cykler til kortet (cycleway = track)\n * Fejlrettelser "</string>
 	<string name="tip_recent_changes_0_8_2_t">"Ændringer i 0.8.2:\n * Forbedret ruteplanlægning\n * Dynamisk kortmodul\n * Kortindstillinger flyttede til kortskærm\n * låseskærmen knap med logning tjenester\n * Rettet arabisk, Kannada scripting og RTL sprog "</string>
 	<string name="map_widget_reset">Nulstil til standard</string>
@@ -439,7 +450,7 @@
 	<string name="show_current_gpx_title">Vis aktuelt spor</string>
 	<string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
 	<string name="free_version_title">Gratis version</string>
-	<string name="poi_context_menu_showdescription">Vis IP\nbeskrivelse</string>
+	<string name="poi_context_menu_showdescription">Vis IP beskrivelse</string>
 	<string name="index_name_north_america">Nordamerika</string>
 	<string name="index_name_us">Nordamerika - USA</string>
 	<string name="index_name_central_america">Mellemamerika</string>
@@ -524,7 +535,7 @@
 	<string name="context_menu_item_search">Søg i nærheden</string>
 	<string name="save_route_dialog_title">Gem rute som GPX-spor</string>
 	<string name="route_successfully_saved_at">Rute gemt som \'%1$s\'.</string>
-	<string name="filename_input">"Filnavn: "</string>
+	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
 	<string name="default_buttons_save">Gem</string>
 	<string name="menu_save_directions">Gem rute</string>
@@ -541,29 +552,190 @@
 	<string name="vector_map_not_needed">Nej tak</string>
 	<string name="local_index_gpx_info_show">\n\nTryk og hold for valgmuligheder</string>
 	<string name="local_index_gpx_info_speed">\nGennemsnitsfart: %1$s\nTopfart: %2$s</string>
-	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd er en open source navigation applikation med adgang til en lang række af globale OpenStreetMap (OSM) data. Alle kort data (vektor eller delkort) kan blive gemt på telefonens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online rute funktionalitet inklusiv sving-efter-sving stemme vejledning.
-\nNogle af kerne funktionerne:\n - Komplet offline funktionalitet (gemme hentede vektor eller delkort in valgte mapper)\n - Kompakt offline vektor kort for hele verden er tilgængelig\n - Kort for enkelte lande eller regioner kan hentes direkte i applikation\n - Overlejring af flere kort lag er muligt, som f.eks. GPX eller navigations spor, Interessepunkter (IP), favoritter, konturlinjer, Kollektivtrafik stoppesteder og flere kort med modificerebar gennemsigtighed\n - Offline søgning af adresser og steder interessepunkter (IP)\n - Offline ruteplanlægning for kortere distancer (eksperimenterende)\n - Bil, cykel og fodgænger tilstand med:\n    - Valgfri automatisk dag/nat tilstandsskift\n    - Valgfri automatisk zoom efter hastighed\n    - Valgfri automatisk kort rotation efter kompas eller bevægelses retning\n    - Valgfri vognbane assistent\n    - Visning af hastigheds begrænsning\n - Optagede og TTS (Tekst-til-stemme) stemmer\nBegrænsninger i den gratis version af OsmAnd:\n - Antallet af kort der kan hentes er begrænset\n - Ingen adgang Wikipedia offline interessepunkter\nOsmAnd bliver aktivt udviklet og vores projekt og videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Vær så venlig at overveje at købe OsmAnd+, betal for en specifik ny funktion eller lave en generel donation på osmand.net. "</string>
-	<string name="osmand_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) er en kort og navigation applikation med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via din enheds GPS, tilbyder OsmAnd navigation, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (ingen internet behov).
-\nNogle af de vigtigste funktioner:
-\nNavigation\n - Virker online (hurtig) eller offline (ingen roamingtakster i udlandet)\n - Sving-for-sving stemmevejledning (indspillede og syntetiske stemmer)\n - Valgfri vognbaneskift, gadenavn display, og forventet af ankomst\n - Understøtter mellemliggende punkter på din rute\n - Automatisk omdirigering, når der afviges fra ruten\n - Søg efter steder efter adresse, efter type (f.eks.: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
-\nKort visning\n - Vis din position og retning på kortet\n - Eventuelt justere kortet i henhold til kompas eller din retning af bevægelse\n - Gem dine vigtigste steder som favoritter\n - Vis interessepunkter (IP) omkring dig\n - Kan vise specialiserede online delkort\n - Kan vise satellitvisning (fra Bing)\n - Kan vise forskellige overlejringer som rute/navigation GPX-spor og ekstra kort med konfigurerbar gennemsigtighed\n - Eventuelt få vist stednavne i engelsk, lokale eller fonetiske stavemåde
-\nBrug OpenStreetMap og Wikipedia Data:\n - Høj kvalitet information fra de bedste samarbejdsprojekter verden\n - Globale kort fra OpenStreetMap, til rådighed pr land eller region\n - Wikipedia IP\'er, fantastisk til sightseeing (ikke tilgængelig i gratis version)\n - Ubegrænset gratis hentning af kort, direkte fra app\'en (grænse på 16 kortfiler i gratis version)\n - Altid to-date kort (opdateres mindst en gang om måneden)\n - Kompakte offline vektor kort\n - Vælg mellem komplette kortdata og bare vejnet (Eksempel: Hele Japan er 700 MB eller 200 MB til kun vejnet)\n - Understøtter også online eller cachede delkort
-\nSikkerhedsfunktioner:\n - Valgfri automatiseret dag/nat visning\n - Valgfri fartgrænse visning, med påmindelse, hvis den overskrides\n - Valgfri hastighedsafhængig kort zoom\n - Del din placering, så dine venner kan finde dig\nFodgænger Features\n - Kortet indeholder fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter\n - Special rute og visningstilstande for cykel og fodgænger\n - Valgfri Kollektivtrafik stoppesteder (bus, sporvogn, tog), herunder linjenavne\n - Valgfri tur optagelse til lokal GPX-fil eller online-tjenesten\n - Valgfri hastighed og højde visning\n - Visning af højdekurver og bakkeskygger (via ekstra udvidelse)\nBidrager direkte til OpenStreetMap\n - Rapportér kort bugs\n - Send GPX-spor til OSM direkte fra applikationen\n - Tilføj Interessepunkter (IP) og send dem direkte til OSM (eller senere hvis offline)\n - Valgfri tur optagelse også i baggrundstilstand (mens enheden er i dvaletilstand)
-\n\nOsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedre oversættelser eller programmere nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af nye funktionaliteter. Ved at købe OsmAnd+ er man med til at hjælpe programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
-\n\nAnslået kort dækning og kvalitet:\n - Vesteuropa: ****\n - Østeuropa: ***\n - Rusland: ***\n - Nordamerika: ***\n - Sydamerika: **\n - Asien: **\n - Japan &amp; Korea: ***\n - Mellemøsten: **\n - Afrika: **\n - Antarktis: *
-\n\nListe over understøttede lande (dybest set world wide!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe "</string>
-	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automatisk Navigation og Rutevejledning) OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller delkort) kan gemmes på telefonens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving stemmevejledning. OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer.
-\nNogle af de centrale funktioner:\n - Komplet offline funktionalitet (gem hentede vektor eller delkort i en valgbar mappe)\n - Kompakte offline vektorkort for hele verden tilgængelig\n - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen\n - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing - Overlejring af flere kortlag mulige, ligesom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, kollektivtrafik stoppesteder, ekstra kort med brugerdefinerbar gennemsigtighed\n - Offline søgning efter adresser og steder interessepunkter (IP)\n - Offline ruteplanlægning til korte afstande (eksperimentel)\n Bil, cykel, og fodgængere tilstand med:\n - valgfri automatisk dag/nat visning\n - valgfri hastighedsafhængig kort zoom\n - valgfri kort tilpasning i henhold til kompas eller bevægelsesretning\n - valgfri vognbaneskift, hastighedsgrænse visning, optaget eller TTS stemmer "</string>
-	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automatisk Navigation og Rutevejledning) er et kort og navigations program med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via din enheds GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov). OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
-\nNogle af de vigtigste funktioner:
-\nNavigation - virker online (hurtig) eller offline (ingen roamingtakster i udlandet)\n - Sving-for-sving stemmevejledning (indspillede og syntetiske stemmer)\n - Valgfri vognbaneskift, gadenavn og forventet ankomst visning\n - Understøtter mellemliggende punkter på din rute\n - Automatisk omdirigering, når der afviges fra ruten\n - Søg efter steder efter adresse, efter type (f.eks.: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
-\nKort Visning\n - Vis din position og retning på kortet\n - Eventuelt justere kortet i henhold til kompas eller din retning af bevægelse\n - Gem dine vigtigste steder som favoritter\n - Vis interessepunkter (IP) omkring dig\n - Kan vise specialiserede online delkort\n - Kan vise satellitvisning (fra Bing)\n - Kan vise forskellige overlejringer som rute/navigation GPX-spor og ekstra kort med tilpasselig gennemsigtighed\n - Eventuelt få vist stednavne i engelsk, lokale eller fonetiske stavemåde
-\nBrug OpenStreetMap og Wikipedia Data:\n - Høj kvalitet information fra de bedste samarbejdsprojekter i verden\n - Globale kort fra OpenStreetMap, er til rådighed pr land eller region\n - Wikipedia Interessepunkter (IP), fantastisk til sightseeing\n - Ubegrænset gratis hentning af kort direkte fra applikationen\n - Altid opdaterede kort (opdateres mindst en gang om måneden)\n - Kompakte offline vektorkort\n - Vælg mellem komplette kortdata og bare vejnet (Eksempel: Hele Japan er 700 MB men vejnettet er kun 200 MB)\n - Understøtter også online eller cachede delkort
-\nSikkerhedsfunktioner\n - Valgfri automatiseret dag/nat visning\n - Valgfri fartgrænse visning, med påmindelse, hvis den overskrides\n - Valgfri hastighedsafhængig kort zoom\n - Del din placering, så dine venner kan finde dig\nCykel og fodgænger Funktioner:
-\n - Kortene omfatter fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter\n - Special rute og visningstilstande for cykel-og gangstier\n - Valgfri kollektivtrafik stoppesteder (bus, sporvogn, tog), herunder linjenavne\n - Valgfri tur optagelse til lokal GPX-fil eller en online-tjeneste\n - Valgfri hastighed og højde visning\n - Visning af højdekurver og relief (via ekstra udvidelse)
-\nBidrager direkte til OpenStreetMap\n - Rapporter kort fejl\n - Send GPX-spor til OSM direkte fra applikationen\n - Tilføj Interessepunkter (IP) og send dem direkte til OSM (eller senere, hvis offline)\n - Valgfri tur optagelse også i baggrundstilstand (mens enheden er i dvale tilstand)
-\nOsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedre oversættelser eller udvikling af nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for bygherren og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af ny funktionalitet. Ved at købe OsmAnd+ hjælper man programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
-\nAnslået kort dækning og kvalitet:\n - Vesteuropa: ****\n - Østeuropa: ***\n - Rusland: ***\n - Nordamerika: ***\n - Sydamerika: **\n - Asien: **\n - Japan &amp; Korea: ***\n - Mellemøsten: **\n - Afrika: **\n - Antarktis: *\n Liste over understøttede lande (dybest set world wide!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe "</string>
+	<string name="osmand_long_description_1000_chars">
+		OsmAnd (OSM Automated Navigation Directions)
+
+		OsmAnd er en open source navigation applikation med adgang til en lang række af globale OpenStreetMap (OSM) data. Alle kort data (vektor eller delkort) kan blive gemt på telefonens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online rute funktionalitet inklusiv sving-efter-sving stemme vejledning.
+
+		Nogle af kerne funktionerne:
+		- Komplet offline funktionalitet (gemme hentede vektor eller delkort i valgte mapper)
+		- Kompakt offline vektor kort for hele verden er tilgængelig
+		- Kort for enkelte lande eller regioner kan hentes direkte i applikation
+		- Overlejring af flere kort lag er muligt, som f.eks. GPX eller navigations spor, Interessepunkter (IP), favoritter, konturlinjer, Kollektivtrafik stoppesteder og flere kort med modificerebar gennemsigtighed
+		- Offline søgning af adresser og steder interessepunkter (IP)
+		- Offline ruteplanlægning for kortere distancer (eksperimenterende)
+		- Bil, cykel og fodgænger tilstand med:
+		- Valgfri automatisk dag/nat tilstandsskift
+		- Valgfri automatisk zoom efter hastighed
+		- Valgfri automatisk kort rotation efter kompas eller bevægelses retning
+		- Valgfri vognbane assistent
+		- Visning af hastigheds begrænsning
+		- Optagede og TTS (Tekst-til-stemme) stemmer
+
+		Begrænsninger i den gratis version af OsmAnd:
+		- Antallet af kort der kan hentes er begrænset
+		- Ingen adgang Wikipedia offline interessepunkter
+
+		OsmAnd bliver aktivt udviklet og vores projekt og videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Vær så venlig at overveje at købe OsmAnd+, betal for en specifik ny funktion eller lave en generel donation på osmand.net.
+	</string>
+	<string name="osmand_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) er en kort og navigation applikation med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via din enheds GPS, tilbyder OsmAnd navigation, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (ingen internet behov).
+
+Nogle af de vigtigste funktioner:
+
+Navigation
+ - Virker online (hurtig) eller offline (ingen roamingtakster i udlandet)
+ - Sving-for-sving stemmevejledning (indspillede og syntetiske stemmer)
+ - Valgfri vognbaneskift, gadenavn display, og forventet af ankomst
+ - Understøtter mellemliggende punkter på din rute
+ - Automatisk omdirigering, når der afviges fra ruten
+ - Søg efter steder efter adresse, efter type (f.eks.: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
+
+Kort visning
+ - Vis din position og retning på kortet
+ - Eventuelt justere kortet i henhold til kompas eller din retning af bevægelse
+ - Gem dine vigtigste steder som favoritter
+ - Vis interessepunkter (IP) omkring dig
+ - Kan vise specialiserede online delkort
+ - Kan vise satellitvisning (fra Bing)
+ - Kan vise forskellige overlejringer som rute/navigation GPX-spor og ekstra kort med konfigurerbar gennemsigtighed
+ - Eventuelt få vist stednavne i engelsk, lokale eller fonetiske stavemåde
+
+Brug OpenStreetMap og Wikipedia Data:
+ - Høj kvalitet information fra de bedste samarbejdsprojekter verden
+ - Globale kort fra OpenStreetMap, til rådighed pr land eller region
+ - Wikipedia IP\'er, fantastisk til sightseeing (ikke tilgængelig i gratis version)
+ - Ubegrænset gratis hentning af kort, direkte fra app\'en (grænse på 16 kortfiler i gratis version)
+ - Altid to-date kort (opdateres mindst en gang om måneden)
+ - Kompakte offline vektor kort
+ - Vælg mellem komplette kortdata og bare vejnet (Eksempel: Hele Japan er 700 MB eller 200 MB til kun vejnet)
+ - Understøtter også online eller cachede delkort
+
+Sikkerhedsfunktioner:
+ - Valgfri automatiseret dag/nat visning
+ - Valgfri fartgrænse visning, med påmindelse, hvis den overskrides
+ - Valgfri hastighedsafhængig kort zoom
+ - Del din placering, så dine venner kan finde dig
+
+Fodgænger Features
+ - Kortet indeholder fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter
+ - Special rute og visningstilstande for cykel og fodgænger
+ - Valgfri Kollektivtrafik stoppesteder (bus, sporvogn, tog), herunder linjenavne
+ - Valgfri tur optagelse til lokal GPX-fil eller online-tjenesten
+ - Valgfri hastighed og højde visning
+ - Visning af højdekurver og bakkeskygger (via ekstra udvidelse)
+
+Bidrager direkte til OpenStreetMap
+ - Rapportér kort bugs
+ - Send GPX-spor til OSM direkte fra applikationen
+ - Tilføj Interessepunkter (IP) og send dem direkte til OSM (eller senere hvis offline)
+ - Valgfri tur optagelse også i baggrundstilstand (mens enheden er i dvaletilstand)
+
+OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedre oversættelser eller programmere nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for udvikling og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af nye funktionaliteter. Ved at købe OsmAnd+ er man med til at hjælpe programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
+
+Anslået kort dækning og kvalitet:
+ - Vesteuropa: ****
+ - Østeuropa: ***
+ - Rusland: ***
+ - Nordamerika: ***
+ - Sydamerika: **
+ - Asien: **
+ - Japan &amp; Korea: ***
+ - Mellemøsten: **
+ - Afrika: **
+ - Antarktis: *
+
+Liste over understøttede lande (dybest set world wide!): 
+Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
+	</string>
+	<string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (OSM Automatisk Navigation og Rutevejledning) OsmAnd+ er en open source navigations applikation med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller delkort) kan gemmes på telefonens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving stemmevejledning. 
+
+OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer.
+
+Nogle af de centrale funktioner:
+ - Komplet offline funktionalitet (gem hentede vektor eller delkort i en valgbar mappe)
+ - Kompakte offline vektorkort for hele verden tilgængelig
+ - Ubegrænset hentning af lande- eller regionskort direkte fra applikationen
+ - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing - Overlejring af flere kortlag mulige, ligesom GPX eller navigation spor, seværdigheder, favoritter, højdekurver, kollektivtrafik stoppesteder, ekstra kort med brugerdefinerbar gennemsigtighed
+ - Offline søgning efter adresser og steder interessepunkter (IP)
+ - Offline ruteplanlægning til korte afstande (eksperimentel)
+ - Bil, cykel, og fodgængere tilstand med:
+ - valgfri automatisk dag/nat visning
+ - valgfri hastighedsafhængig kort zoom
+ - valgfri kort tilpasning i henhold til kompas eller bevægelsesretning
+ - valgfri vognbaneskift, hastighedsgrænse visning, optaget eller TTS stemmer
+	</string>
+	<string name="osmand_plus_extended_description_4000_chars">
+OsmAnd (OSM Automatisk Navigation og Rutevejledning) er et kort og navigations program med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via din enheds GPS, tilbyder OsmAnd rutevejledning, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (intet internet behov).
+
+OsmAnd+ er den betalte programversion. Ved at købe det støttes projektet, finansierer udviklingen af nye funktioner, og modtager de seneste opdateringer. Test programmet, før det købes ved at installere den gratis version kaldet OsmAnd.
+
+Nogle af de vigtigste funktioner:
+
+Navigation - virker online (hurtig) eller offline (ingen roamingtakster i udlandet)
+ - Sving-for-sving stemmevejledning (indspillede og syntetiske stemmer)
+ - Valgfri vognbaneskift, gadenavn og forventet ankomst visning
+ - Understøtter mellemliggende punkter på din rute
+ - Automatisk omdirigering, når der afviges fra ruten
+ - Søg efter steder efter adresse, efter type (f.eks.: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater
+
+Kort Visning
+ - Vis din position og retning på kortet
+ - Eventuelt justere kortet i henhold til kompas eller din retning af bevægelse
+ - Gem dine vigtigste steder som favoritter
+ - Vis interessepunkter (IP) omkring dig
+ - Kan vise specialiserede online delkort
+ - Kan vise satellitvisning (fra Bing)
+ - Kan vise forskellige overlejringer som rute/navigation GPX-spor og ekstra kort med tilpasselig gennemsigtighed
+ - Eventuelt få vist stednavne i engelsk, lokale eller fonetiske stavemåde
+
+Brug OpenStreetMap og Wikipedia Data:
+ - Høj kvalitet information fra de bedste samarbejdsprojekter i verden
+ - Globale kort fra OpenStreetMap, er til rådighed pr land eller region
+ - Wikipedia Interessepunkter (IP), fantastisk til sightseeing
+ - Ubegrænset gratis hentning af kort direkte fra applikationen
+ - Altid opdaterede kort (opdateres mindst en gang om måneden)
+ - Kompakte offline vektorkort
+ - Vælg mellem komplette kortdata og bare vejnet (Eksempel: Hele Japan er 700 MB men vejnettet er kun 200 MB)
+ - Understøtter også online eller cachede delkort
+
+Sikkerhedsfunktioner
+ - Valgfri automatiseret dag/nat visning
+ - Valgfri fartgrænse visning, med påmindelse, hvis den overskrides
+ - Valgfri hastighedsafhængig kort zoom
+ - Del din placering, så dine venner kan finde dig
+
+Cykel og fodgænger Funktioner:
+ - Kortene omfatter fod, vandreture, og cykelstier, fantastisk til udendørs aktiviteter
+ - Special rute og visningstilstande for cykel-og gangstier
+ - Valgfri kollektivtrafik stoppesteder (bus, sporvogn, tog), herunder linjenavne
+ - Valgfri tur optagelse til lokal GPX-fil eller en online-tjeneste
+ - Valgfri hastighed og højde visning
+ - Visning af højdekurver og relief (via ekstra udvidelse)
+
+Bidrager direkte til OpenStreetMap
+ - Rapporter kort fejl
+ - Send GPX-spor til OSM direkte fra applikationen
+ - Tilføj Interessepunkter (IP) og send dem direkte til OSM (eller senere, hvis offline)
+ - Valgfri tur optagelse også i baggrundstilstand (mens enheden er i dvale tilstand)
+
+OsmAnd er open source og bliver aktivt udviklet. Alle kan bidrage til anvendelsen ved at rapportere fejl, forbedre oversættelser eller udvikling af nye funktioner. Projektet er i en livlig tilstand af kontinuerlig forbedring af alle disse former for bygherren og brugerinteraktion. Projektets fremskridt er også baseret på finansielle bidrag til finansiering af udvikling, kodning, og afprøvning af ny funktionalitet. Ved at købe OsmAnd+ hjælper man programmet til at være endnu mere fantastisk! Det er også muligt at finansiere specifikke nye funktioner, eller at foretage en generel donation på osmand.net.
+
+Anslået kort dækning og kvalitet:
+ - Vesteuropa: ****
+ - Østeuropa: ***
+ - Rusland: ***
+ - Nordamerika: ***
+ - Sydamerika: **
+ - Asien: **
+ - Japan &amp; Korea: ***
+ - Mellemøsten: **
+ - Afrika: **
+ - Antarktis: *
+Liste over understøttede lande (dybest set world wide!): 
+Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
+	</string>
 	<string name="tip_update_index_t">\tAt have opdaterede kortdata er afgørende. OsmAnd har en datahåndtering, som kan søge efter tilgængelige offline data opdateringer.
 \n\tFor at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Hent offline data\'. Efter regions liste er hentet fra internettet, vælg \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på din enhed.
 \n\tEmner i \"grøn\" indikerer datafiler identiske på enheden og serveren
@@ -706,7 +878,6 @@
 	<string name="poi_filter_nominatim">Online Nominatim</string>
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_indexes_cat_gpx">GPX-data</string>
-	<string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassifikation med billeder</string>
 	<string name="error_doing_search">Der skete en fejl under offline søgning</string>
 	<string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'</string>
 	<string name="search_osm_offline">Søg geografisk placering</string>
@@ -795,7 +966,10 @@
 \n\tFor at gemme et sted som favorit gå til genvejsmenu, vælg \'Tilføj til favoritter\' og indtast et navn. Når favoriten er gemt, er den tilgængelig via \'Start skærm\' -&gt; \'Favoritter\'.
 \n\tLangt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
 \n\tFor at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Definer visning\'. "</string>
-	<string name="tip_recent_changes_1_1_4_t">"Ændringer i 1.1.4:\n\t* Redesign af brugerflade\n\t* Fejlrettelser "</string>
+	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
+	* Redesign af brugerflade
+	* Fejlrettelser
+    </string>
     <string name="tip_navigation_t">\tDestinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
@@ -806,7 +980,7 @@
 	<string name="select_all">Vælg alle</string>
 	<string name="reload">Genindlæs</string>
 	<string name="fast_route_mode">Hurtigste rute</string>
-	<string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute "</string>
+	<string name="fast_route_mode_descr">Aktiver for at beregne den hurtigste rute. Deaktiver for at beregne korteste rute </string>
 	<string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} delkort ({2} MB)</string>
 	<string name="context_menu_item_download_map">Hent kort</string>
 	<string name="select_max_zoom_preload_area">Vælg den maksimale zoom der skal indlæses på forhånd</string>
@@ -1005,8 +1179,8 @@
 	<string name="update_poi_is_not_available_for_zoom">Opdatering af interessepunkter ikke tilgængelig ved lave zoomniveauer</string>
 	<string name="context_menu_item_update_poi">Opdater interessepunkt</string>
 	<string name="context_menu_item_update_map_confirm">Opdater lokale data via internettet?</string>
-	<string name="search_history_city">By:\n {0}</string>
-	<string name="search_history_street">Gade:\n {0}, {1}</string>
+	<string name="search_history_city">By: {0}</string>
+	<string name="search_history_street">Gade: {0}, {1}</string>
 	<string name="search_history_int_streets">Kryds: {0} x {1} i {2}</string>
 	<string name="search_history_building">Bygning: {0}, {1}, {2}</string>
 	<string name="favorite">Favorit</string>
@@ -1187,7 +1361,12 @@
     <string name="choose_osmand_theme_descr">Vælg tema</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Indstillinger for tilgængelighed</string>
-    <string name="tip_recent_changes_1_3_t">"Ændringer i 1.3:\n\t* Genimplementere understøttelse af tabletter og store skærme\n\t* Holo tema (tilpasning)\n\t* Yderligere indstillinger for stabilisering af kompas\n\t* Nederste venstre knap på kortskærmen erstatter menuknappen "</string>
+    <string name="tip_recent_changes_1_3_t">Ændringer i 1.3:
+	* Genimplementere understøttelse af tabletter og store skærme
+	* Holo tema (tilpasning)
+	* Yderligere indstillinger for stabilisering af kompas
+	* Nederste venstre knap på kortskærmen erstatter menuknappen
+    </string>
     <string name="monitoring_settings">Logningstjenester &amp; dvaletilstand</string>
     <string name="monitoring_settings_descr">Indstil, hvordan ture optages og dvaletilstand aktiveres</string>
     <string name="osmand_monitoring_plugin_name">Logningstjenester &amp; dvaletilstand</string>
@@ -1209,7 +1388,7 @@
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
-    <string name="downloading_file_new">"Henter "</string>
+    <string name="downloading_file_new">Henter…</string>
 	<string name="plugin_distance_point_hdop">nøjagtighed</string>
     <string name="plugin_distance_point_speed">hastighed</string>
     <string name="plugin_distance_point">Punkt</string>
@@ -1233,7 +1412,15 @@
     <string name="local_osm_changes_backup">Sikkerhedskopiering efterhånden som OSM-data ændres</string>
     <string name="intermediate_items_sort_by_distance">Sorter (fra dør til dør)</string>
     <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
-    <string name="tip_recent_changes_1_4_t">Ændringer i 1.4:\n\t* Sorter rutepunkter på en optimal måde for at besøge alle (repræsentant, fra dør til dør)\n\t* Søg efter gade ved navn (i nabolaget)\n\t* Planlægningsudvidelse (indlæs/rediger/gem GPX spor)\n\t* Ny filhentningsmetode (hent i baggrunden)\n\t* GPX undermapper (organiser GPX spor)\n\t* Slet SRTM filer\n\t* Understøttelse af OSM-Noter</string>
+    <string name="tip_recent_changes_1_4_t">Ændringer i 1.4:
+	* Sorter rutepunkter på en optimal måde for at besøge alle (repræsentant, fra dør til dør)
+	* Søg efter gade ved navn (i nabolaget)
+	* Planlægningsudvidelse (indlæs/rediger/gem GPX spor)
+	* Ny filhentningsmetode (hent i baggrunden)
+	* GPX undermapper (organiser GPX spor)
+	* Slet SRTM filer
+	* Understøttelse af OSM-Noter 
+    </string>
     <string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimal rute fra kortposition til destination.</string>
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
