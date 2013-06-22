@@ -1094,7 +1094,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="osb_comment_dialog_message">Meddelelse</string>
 	<string name="osb_comment_menu_item">Tilføj kommentar</string>
 	<string name="favourites_remove_dialog_success">Favoritpunkt {0} blev slettet.</string>
-	<string name="favourites_remove_dialog_msg">Fjern favoritpunkt \'%s\'?</string>
+	<string name="favourites_remove_dialog_msg">Fjern favoritpunkt '%s'?</string>
 	<string name="favourites_context_menu_delete">Slet</string>
 	<string name="favourites_context_menu_edit">Rediger</string>
 	<string name="amenity_type_emergency">Nødsituation</string>
@@ -1331,7 +1331,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="navigate_point_cancel">Annuller</string>
 	<string name="search_address_region">Region</string>
 	<string name="context_menu_item_open_bug">Åben OSM fejlregistrering</string>
-	<string name="add_favorite_dialog_favourite_added_template">Favoritpunkt \"{0}\" blev tilføjet.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favoritpunkt '{0}' blev tilføjet.</string>
 	<string name="osb_add_dialog_title">Indtast fejltekst</string>
 	<string name="osb_add_dialog_success">Fejlmeddelelse oprettet</string>
 	<string name="osb_add_dialog_error">Undtagelse opstod: Fejlmeddelelse blev ikke oprettet</string>
@@ -1342,7 +1342,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="osb_close_dialog_error">Undtagelse opstod: fejl blev ikke lukket</string>
 	<string name="poi_dialog_comment_default">Interessepunkt ændres</string>
 	<string name="app_mode_default">Standard</string>
-	<string name="poi_error_info_not_loaded">…Information om knudepunkt blev ikke indlæst</string>
+	<string name="poi_error_info_not_loaded">Information om knudepunkt blev ikke indlæst</string>
 	<string name="save_current_track_widget">Gem aktuel
 \nGPX-spor</string>
 	<string name="default_buttons_commit">Udfør</string>
@@ -1405,7 +1405,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n* Tryk og hold på kortet for at slette tidligere punkt.\n* Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n* Klik på målemodul for at se flere handlinger.</string>
+    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.
+* Tryk og hold på kortet for at slette tidligere punkt.
+* Tryk og hold på punkt for at se og vedhæfte beskrivelse.
+* Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
     <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
