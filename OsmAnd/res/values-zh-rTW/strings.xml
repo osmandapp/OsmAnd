@@ -305,7 +305,7 @@
 	<string name="oclock">點</string>
 	<string name="towards">接近</string>
 	<string name="accuracy">精確性</string>
-	<string name="altitude">高程</string>
+	<string name="altitude">高度</string>
 	<string name="no_info">無資訊</string>
 	<string name="direction_style_sidewise">方向方位 (8個方位)</string>
 	<string name="direction_style_clockwise">時鐘方位(12個方位)</string>
