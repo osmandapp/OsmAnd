@@ -842,13 +842,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								}
 							});
 						}
-
 					} catch (Exception e) {
 						logErr(e);
 						cam.release();
 						e.printStackTrace();
 					}
-
 				}
 
 				private void printCamParams(Parameters parameters, boolean autoExposure) {
@@ -862,7 +860,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			});
 			dlg.setContentView(view);
 			dlg.show();
-
 		} catch (RuntimeException e) {
 			logErr(e);
 			cam.release();
