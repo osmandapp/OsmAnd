@@ -66,6 +66,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaRecorder;
+import android.media.SoundPool;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.Preference;
@@ -97,6 +99,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	
 	public final CommonPreference<Boolean> AV_EXTERNAL_RECORDER ;
 	public final CommonPreference<Boolean> AV_EXTERNAL_PHOTO_CAM ;
+	public final CommonPreference<Boolean> AV_PHOTO_PLAY_SOUND ;
 	
 	public static final int VIDEO_OUTPUT_MP4 = 0;
 	public static final int VIDEO_OUTPUT_3GP = 1;
@@ -106,6 +109,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
 	public static final int AV_DEFAULT_ACTION_TAKEPICTURE = 2;
 	public static final int AV_DEFAULT_ACTION_CHOOSE = -1;
+	
+	// camera focus type
+	public static final int AV_CAMERA_FOCUS_AUTO = 0;
+	public static final int AV_CAMERA_FOCUS_HIPERFOCAL = 1; 
+	public static final int AV_CAMERA_FOCUS_EDOF = 2; 
+	public static final int AV_CAMERA_FOCUS_INFINITY = 3; 
+	public static final int AV_CAMERA_FOCUS_MACRO = 4; 
+	public static final int AV_CAMERA_FOCUS_CONTINUOUS = 5; 
+
+	public final CommonPreference<Integer> AV_CAMERA_FOCUS_TYPE;
+	
 	public final CommonPreference<Integer> AV_DEFAULT_ACTION;
 	
 	public final OsmandPreference<Boolean> SHOW_RECORDINGS ;
@@ -322,7 +336,12 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		AV_EXTERNAL_RECORDER = settings.registerBooleanPreference("av_external_recorder", false).makeGlobal();
 		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
 		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
-		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action", AV_DEFAULT_ACTION_CHOOSE).makeGlobal();
+		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action",  AV_DEFAULT_ACTION_CHOOSE).makeGlobal();
+		// camera focus type:
+		AV_CAMERA_FOCUS_TYPE = settings.registerIntPreference("av_camera_focus_type",AV_CAMERA_FOCUS_AUTO).makeGlobal();
+		// camera sound:
+		AV_PHOTO_PLAY_SOUND = settings.registerBooleanPreference("av_photo_play_sound", true).makeGlobal();
+
 		SHOW_RECORDINGS = settings.registerBooleanPreference("show_recordings", true).makeGlobal();
 	}
 
@@ -695,7 +714,44 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else {
 			final Camera cam = openCamera();
 			if (cam != null) {
+				// load sound:
+				int shotId = 0;
+				SoundPool sp = new SoundPool(5, AudioManager.STREAM_NOTIFICATION, 0);
+				if (AV_PHOTO_PLAY_SOUND.get()) {
+					log.info("Play sound on photo");
+					shotId = sp.load("/mnt/sdcard/osmand/shot.ogg", 1);
+					log.error("loaded file sound ID: " + shotId);
+				}
+				// take photo:
 				takePhotoWithCamera(lat, lon, mapActivity, cam);
+				// play sound after photo - sound file must be loaded at this time:
+				if (AV_PHOTO_PLAY_SOUND.get()) {
+					boolean error_play=true;
+					for(int i=0;i<100;i++)
+					{
+						int ret=sp.play(shotId, 1, 1, 0, 0, 1);
+						if(0!=ret)
+						{
+							log.debug("play sound shot success!");
+							log.debug("sp.play()="+ret);
+							error_play=false;
+							break;
+						}
+						else
+						{
+							try{
+							Thread.sleep(10);
+							} catch (Exception e) {
+								logErr(e);
+								e.printStackTrace();
+							}
+						//	log.debug("sp.play()="+ret+"\nwait sp.play...");
+						}
+					}
+					if(error_play)
+						log.error("error play sound!");
+//					sp.release();
+				}
 			} else {
 				takeIntentPhoto(lat, lon, mapActivity);
 			}
@@ -752,16 +808,47 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				public void surfaceCreated(SurfaceHolder holder) {
 					try {
 						Parameters parameters = cam.getParameters();
+
+						// camera focus type:
 						boolean autofocus = true;
 //						boolean autofocus = !Boolean.parseBoolean(parameters.get("auto-exposure-lock-supported"));
 						parameters.setGpsLatitude(lat);
 						parameters.setGpsLongitude(lon);
-						if(autofocus) {
+						switch( AV_CAMERA_FOCUS_TYPE.get() ) {
+						case AV_CAMERA_FOCUS_HIPERFOCAL:
+							parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
+							autofocus = false;
+							log.info("Osmand:AudioNotes set camera FOCUS_MODE_FIXED");
+							break;
+						case AV_CAMERA_FOCUS_EDOF:
+							parameters.setFocusMode(Parameters.FOCUS_MODE_EDOF);
+							autofocus = false;
+							log.info("Osmand:AudioNotes set camera FOCUS_MODE_EDOF");
+							break;
+						case AV_CAMERA_FOCUS_INFINITY:
+							parameters.setFocusMode(Parameters.FOCUS_MODE_INFINITY);
+							autofocus = false;
+							log.info("Osmand:AudioNotes set camera FOCUS_MODE_INFINITY");
+							break;
+						case AV_CAMERA_FOCUS_MACRO:
+							parameters.setFocusMode(Parameters.FOCUS_MODE_MACRO);
+							log.info("Osmand:AudioNotes set camera FOCUS_MODE_MACRO");
+							break;
+						case AV_CAMERA_FOCUS_CONTINUOUS:
+							parameters.setFocusMode(Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
+							log.info("Osmand:AudioNotes set camera FOCUS_MODE_CONTINUOUS_PICTURE");
+							break;
+						default:
 							parameters.setFocusMode(Parameters.FOCUS_MODE_AUTO);
-						} else {
+							log.info("Osmand:AudioNotes set camera FOCUS_MODE_AUTO");
+							break;
+						}
 //							parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
 //							parameters.set("auto-exposure-lock", "true");
-						}
+						//}
+
+
+
 						parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
 						parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
 
@@ -780,11 +867,13 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								}
 							});
 						}
+
 					} catch (Exception e) {
 						logErr(e);
 						cam.release();
 						e.printStackTrace();
 					}
+
 				}
 
 				private void printCamParams(Parameters parameters, boolean autoExposure) {
@@ -798,6 +887,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			});
 			dlg.setContentView(view);
 			dlg.show();
+
 		} catch (RuntimeException e) {
 			logErr(e);
 			cam.release();
