@@ -51,7 +51,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.AsyncTask.Status;
 import android.os.Bundle;
@@ -468,31 +467,19 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		final Amenity amenity = ((AmenityAdapter) getListAdapter()).getItem(position);
 		final QuickAction qa = new QuickAction(v);
 		String poiSimpleFormat = OsmAndFormatter.getPoiSimpleFormat(amenity, getMyApplication(), settings.usingEnglishNames());
-		String name = getString(R.string.poi)+" : " + poiSimpleFormat;
+		String name = poiSimpleFormat;
 		int z = Math.max(16, settings.getLastKnownMapZoom());
 		MapActivityActions.createDirectionsActions(qa, amenity.getLocation(), amenity, name, z, this, true , null);
 		ActionItem poiDescription = new ActionItem();
 		poiDescription.setIcon(getResources().getDrawable(R.drawable.list_activities_show_poi_description));
 		poiDescription.setTitle(getString(R.string.poi_context_menu_showdescription));
+		final StringBuilder d = getDescriptionContent(amenity);
 		poiDescription.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// Build text
-				StringBuilder d = new StringBuilder();
-				if(amenity.getOpeningHours() != null) {
-					d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
-				}
-				if(amenity.getPhone() != null) {
-					d.append(getString(R.string.phone) + " : ").append(amenity.getPhone()).append("\n");
-				}
-				if(amenity.getSite() != null) {
-					d.append(getString(R.string.website) + " : ").append(amenity.getSite()).append("\n");
-				}
-				if(amenity.getDescription() != null) {
-					d.append(amenity.getDescription());
-				}
-
+				
 				// Find and format links
 				SpannableString spannable = new SpannableString(d);
 				Linkify.addLinks(spannable, Linkify.ALL);
@@ -509,8 +496,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				textView.setMovementMethod(LinkMovementMethod.getInstance());
 				textView.setLinksClickable(true);
 			}
+
 		});
-		qa.addActionItem(poiDescription);
+		if(d.toString().trim().length() > 0) { 
+			qa.addActionItem(poiDescription);
+		}
 		if (((OsmandApplication)getApplication()).getInternalAPI().accessibilityEnabled()) {
 			ActionItem showDetails = new ActionItem();
 			showDetails.setTitle(getString(R.string.show_details));
@@ -526,6 +516,23 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		qa.show();
 		
 		
+	}
+	
+	private StringBuilder getDescriptionContent(final Amenity amenity) {
+		StringBuilder d = new StringBuilder();
+		if(amenity.getOpeningHours() != null) {
+			d.append(getString(R.string.opening_hours) + " : ").append(amenity.getOpeningHours()).append("\n");
+		}
+		if(amenity.getPhone() != null) {
+			d.append(getString(R.string.phone) + " : ").append(amenity.getPhone()).append("\n");
+		}
+		if(amenity.getSite() != null) {
+			d.append(getString(R.string.website) + " : ").append(amenity.getSite()).append("\n");
+		}
+		if(amenity.getDescription() != null) {
+			d.append(amenity.getDescription());
+		}
+		return d;
 	}
 	
 	

@@ -193,7 +193,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 				}
 			};
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), this, 
-					true, onshow);
+					true, onshow, false);
 			if (point.isStored()) {
 				ActionItem edit = new ActionItem();
 				edit.setIcon(getResources().getDrawable(R.drawable.list_activities_fav_edit));

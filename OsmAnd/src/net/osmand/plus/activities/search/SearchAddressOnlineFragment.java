@@ -17,7 +17,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
@@ -27,7 +26,6 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -67,7 +65,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		MenuItem menuItem;
 		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
-		menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT );
 		menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -80,7 +78,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 		});
 		if (getActivity() instanceof SearchActivity) {
 			menuItem = menu.add(0, 0, 0, R.string.search_offline_address).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS);
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_next_item_light : R.drawable.a_1_navigation_next_item_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override

@@ -1,7 +1,5 @@
 package net.osmand.plus.activities.search;
 
-import net.osmand.plus.activities.IntermediatePointsDialog;
-
 import java.text.MessageFormat;
 
 import net.osmand.access.AccessibleToast;
@@ -14,6 +12,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.util.Algorithms;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +39,7 @@ public class SearchAddressFragment extends SherlockFragment {
 	private static final int SHOW_ON_MAP = 2;
 	private static final int ONLINE_SEARCH = 3;
 	private static final int SELECT_POINT = 4;
+	private static final int ADD_TO_FAVORITE = 5;
 	
 	private Button streetButton;
 	private Button cityButton;
@@ -84,51 +84,61 @@ public class SearchAddressFragment extends SherlockFragment {
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-					showOnMap(SELECT_POINT);
+					select(SELECT_POINT);
 					return true;
 				}
 			});
 		} else {
 			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS );
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_directions_light : R.drawable.a_7_location_directions_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-					showOnMap(NAVIGATE_TO);
+					select(NAVIGATE_TO);
 					return true;
 				}
 			});
 			TargetPointsHelper targets = ((OsmandApplication) getApplication()).getTargetPointsHelper();
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
-						MenuItem.SHOW_AS_ACTION_ALWAYS);
-			// For button-less search UI
+						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				// For button-less search UI
 			} else {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
-						MenuItem.SHOW_AS_ACTION_ALWAYS);
+						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			}
-				menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
-						: R.drawable.a_9_av_make_available_offline_dark);
-				menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-					@Override
-					public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-						showOnMap(ADD_WAYPOINT);
-						return true;
-					}
-				});
-			//}
-			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
+					: R.drawable.a_9_av_make_available_offline_dark);
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					select(ADD_WAYPOINT);
+					return true;
+				}
+			});
+			menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark);
 
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-					showOnMap(SHOW_ON_MAP);
+					select(SHOW_ON_MAP);
 					return true;
 				}
 			});
-			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+			
+			menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			menuItem = menuItem.setIcon(light ? R.drawable.a_3_rating_important_light : R.drawable.a_3_rating_important_dark);
+
+			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+					select(ADD_TO_FAVORITE);
+					return true;
+				}
+			});
+			menuItem = menu.add(0, ONLINE_SEARCH, 0, R.string.search_online_address).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 			menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_next_item_light : R.drawable.a_1_navigation_next_item_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
@@ -253,7 +263,7 @@ public class SearchAddressFragment extends SherlockFragment {
 			});
 	}
 	
-	public void showOnMap(int mode) {
+	public void select(int mode) {
 		if (searchPoint == null) {
 			AccessibleToast.makeText(getActivity(), R.string.please_select_address, Toast.LENGTH_SHORT).show();
 			return;
@@ -283,7 +293,12 @@ public class SearchAddressFragment extends SherlockFragment {
 			objectName = city;
 			zoom = 14;
 		}
-		if(mode == SELECT_POINT ){
+		if(mode == ADD_TO_FAVORITE) {
+			Bundle b = new Bundle();
+			Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
+			dlg.show();
+			MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, searchPoint.getLatitude(), searchPoint.getLongitude(), objectName);
+		} else if(mode == SELECT_POINT ){
 			Intent intent = getActivity().getIntent();
 			intent.putExtra(SELECT_ADDRESS_POINT_INTENT_KEY, objectName);
 			intent.putExtra(SELECT_ADDRESS_POINT_LAT, searchPoint.getLatitude());

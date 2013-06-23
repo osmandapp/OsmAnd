@@ -130,15 +130,12 @@ public class MapActivityActions implements DialogProvider {
 		return bundle;
 	}
 
-	protected void prepareAddFavouriteDialog(Dialog dialog, Bundle args) {
-		final Resources resources = mapActivity.getResources();
-		final double latitude = args.getDouble(KEY_LATITUDE);
-		final double longitude = args.getDouble(KEY_LONGITUDE);
-		String name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
-		if(args.getString(KEY_NAME) != null) {
-			name = args.getString(KEY_NAME);
+	public static void prepareAddFavouriteDialog(Activity activity, Dialog dialog, Bundle args, double lat, double lon, String name) {
+		final Resources resources = activity.getResources();
+		if(name == null) {
+			name = resources.getString(R.string.add_favorite_dialog_default_favourite_name);
 		}
-		final FavouritePoint point = new FavouritePoint(latitude, longitude, name,
+		final FavouritePoint point = new FavouritePoint(lat, lon, name,
 				resources.getString(R.string.favorite_default_category));
 		args.putSerializable(KEY_FAVORITE, point);
 		final EditText editText =  (EditText) dialog.findViewById(R.id.Name);
@@ -150,15 +147,15 @@ public class MapActivityActions implements DialogProvider {
 		AndroidUtils.softKeyboardDelayed(editText);
 	}
 	
-	protected Dialog createAddFavouriteDialog(final Bundle args) {
-    	Builder builder = new AlertDialog.Builder(mapActivity);
+	public  static Dialog createAddFavouriteDialog(final Activity activity, final Bundle args) {
+    	Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.favourites_context_menu_edit);
-		final View v = mapActivity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
-		final FavouritesDbHelper helper = getMyApplication().getFavorites();
+		final View v = activity.getLayoutInflater().inflate(R.layout.favourite_edit_dialog, null, false);
+		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		builder.setView(v);
 		final EditText editText =  (EditText) v.findViewById(R.id.Name);
 		final AutoCompleteTextView cat =  (AutoCompleteTextView) v.findViewById(R.id.Category);
-		cat.setAdapter(new ArrayAdapter<String>(mapActivity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
+		cat.setAdapter(new ArrayAdapter<String>(activity, R.layout.list_textview, helper.getFavoriteGroups().keySet().toArray(new String[] {})));
 		
 		builder.setNegativeButton(R.string.default_buttons_cancel, null);
 		builder.setNeutralButton(R.string.update_existing, new DialogInterface.OnClickListener(){
@@ -166,7 +163,7 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// Don't use showDialog because it is impossible to refresh favorite items list
-				Dialog dlg = createReplaceFavouriteDialog(args);
+				Dialog dlg = createReplaceFavouriteDialog(activity, args);
 				if(dlg != null) {
 					dlg.show();
 				}
@@ -178,22 +175,25 @@ public class MapActivityActions implements DialogProvider {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
-				final FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
+				final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 				point.setName(editText.getText().toString());
 				point.setCategory(cat.getText().toString());
 				boolean added = helper.addFavourite(point);
 				if (added) {
-					AccessibleToast.makeText(mapActivity, MessageFormat.format(getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
+					AccessibleToast.makeText(activity, MessageFormat.format(
+							activity.getString(R.string.add_favorite_dialog_favourite_added_template), point.getName()), Toast.LENGTH_SHORT)
 							.show();
 				}
-				mapActivity.getMapView().refreshMap(true);
+				if(activity instanceof MapActivity) {
+					((MapActivity) activity).getMapView().refreshMap(true);
+				}
 			}
 		});
 		return builder.create();
     }
 
-	protected Dialog createReplaceFavouriteDialog(final Bundle args) {
-		final FavouritesDbHelper helper = getMyApplication().getFavorites();
+	protected static Dialog createReplaceFavouriteDialog(final Activity activity, final Bundle args) {
+		final FavouritesDbHelper helper = ((OsmandApplication) activity.getApplication()).getFavorites();
 		final List<FavouritePoint> points = new ArrayList<FavouritePoint>(helper.getFavouritePoints());
 		final Collator ci = java.text.Collator.getInstance();
 		Collections.sort(points, new Comparator<FavouritePoint>() {
@@ -205,11 +205,11 @@ public class MapActivityActions implements DialogProvider {
 		});
 		final String[] names = new String[points.size()];
 		if(names.length == 0){
-			AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
+			AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_not_exist), Toast.LENGTH_SHORT).show();
 			return null;
 		}
 			
-		Builder b = new AlertDialog.Builder(mapActivity);
+		Builder b = new AlertDialog.Builder(activity);
 		final FavouritePoint[] favs = new FavouritePoint[points.size()];
 		Iterator<FavouritePoint> it = points.iterator();
 		int i=0;
@@ -228,9 +228,11 @@ public class MapActivityActions implements DialogProvider {
 				FavouritePoint fv = favs[which];
 				FavouritePoint point = (FavouritePoint) args.getSerializable(KEY_FAVORITE);
 				if(helper.editFavourite(fv, point.getLatitude(), point.getLongitude())){
-					AccessibleToast.makeText(mapActivity, getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
+					AccessibleToast.makeText(activity, activity.getString(R.string.fav_points_edited), Toast.LENGTH_SHORT).show();
 				}
-				mapActivity.getMapView().refreshMap();
+				if(activity instanceof MapActivity) {
+					((MapActivity) activity).getMapView().refreshMap();
+				}
 			}
 		});
 		AlertDialog al = b.create();
@@ -880,9 +882,9 @@ public class MapActivityActions implements DialogProvider {
 		Bundle args = dialogBundle;
 		switch (id) {
 			case DIALOG_ADD_FAVORITE:
-				return createAddFavouriteDialog(args);
+				return createAddFavouriteDialog(mapActivity, args);
 			case DIALOG_REPLACE_FAVORITE:
-				return createReplaceFavouriteDialog(args);
+				return createReplaceFavouriteDialog(mapActivity, args);
 			case DIALOG_ADD_WAYPOINT:
 				return createAddWaypointDialog(args);
 			case DIALOG_RELOAD_TITLE:
@@ -900,7 +902,8 @@ public class MapActivityActions implements DialogProvider {
 		Bundle args = dialogBundle;
 		switch (id) {
 		case DIALOG_ADD_FAVORITE:
-			prepareAddFavouriteDialog(dialog, args);
+			prepareAddFavouriteDialog(mapActivity, dialog, args,
+					args.getDouble(KEY_LATITUDE), args.getDouble(KEY_LONGITUDE),args.getString(KEY_NAME));
 			break;
 		case DIALOG_ADD_WAYPOINT:
 			EditText v = (EditText) dialog.getWindow().findViewById(R.id.TextView);
@@ -1225,10 +1228,15 @@ public class MapActivityActions implements DialogProvider {
 		});
 		menu.show();
 	}
+	
+	public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, 
+    		final int z, final Activity activity, final boolean saveHistory, final OnClickListener onShow) {
+		createDirectionsActions(qa, location, obj, name, z, activity, saveHistory, onShow, true);
+	}
     
-    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, final int z, final Activity activity, 
-    		final boolean saveHistory, final OnClickListener onShow){
-    	
+    public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, 
+    		final int z, final Activity activity, final boolean saveHistory, final OnClickListener onShow, boolean favorite) {
+
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
@@ -1237,11 +1245,11 @@ public class MapActivityActions implements DialogProvider {
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(onShow != null) {
+				if (onShow != null) {
 					onShow.onClick(v);
 				}
-				app.getSettings().setMapLocationToShow( location.getLatitude(), location.getLongitude(), 
-						z, saveHistory ? name : null, name, obj); //$NON-NLS-1$
+				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
+						obj); //$NON-NLS-1$
 				MapActivity.launchMapActivityMoveToTop(activity);
 				qa.dismiss();
 			}
@@ -1253,7 +1261,7 @@ public class MapActivityActions implements DialogProvider {
 		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(onShow != null) {
+				if (onShow != null) {
 					onShow.onClick(v);
 				}
 				targetPointsHelper.setDestination(location.getLatitude(), location.getLongitude(), name);
@@ -1262,71 +1270,90 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		qa.addActionItem(setAsDestination);
-		//if (targetPointsHelper.getPointToNavigate() != null) {
-			ActionItem intermediate = new ActionItem();
-			// For button-less search UI
-			if (targetPointsHelper.getPointToNavigate() != null) {
-				intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_intermediate));
-				intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
-			} else {
-				intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
-				intermediate.setTitle(activity.getString(R.string.context_menu_item_destination_point));
+
+		ActionItem intermediate = new ActionItem();
+		// For button-less search UI
+		if (targetPointsHelper.getPointToNavigate() != null) {
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_intermediate));
+			intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
+		} else {
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
+			intermediate.setTitle(activity.getString(R.string.context_menu_item_destination_point));
+		}
+		intermediate.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (onShow != null) {
+					onShow.onClick(v);
+				}
+				// Issue 1929 TODO: Check where this dialogue appears and replace by IntermediatePointsDialog
+				navigatePointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
+				qa.dismiss();
 			}
-			intermediate.setOnClickListener(new OnClickListener() {
+		});
+		qa.addActionItem(intermediate);
+		if (favorite) {
+			ActionItem addToFavorite = new ActionItem();
+			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_favorites));
+			addToFavorite.setTitle(activity.getString(R.string.add_to_favourite));
+			addToFavorite.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					if (onShow != null) {
 						onShow.onClick(v);
 					}
-					// Issue 1929 TODO: Check where this dialogue appears and replace by IntermediatePointsDialog
-					navigatePointDialogAndLaunchMap(activity, location.getLatitude(), location.getLongitude(), name);
 					qa.dismiss();
+					Bundle args = new Bundle();
+					Dialog dlg = createAddFavouriteDialog(activity, args);
+					dlg.show();
+					prepareAddFavouriteDialog(activity, dlg, args, location.getLatitude(), location.getLongitude(), name);
+
 				}
 			});
-			qa.addActionItem(intermediate);
-		//}
+			qa.addActionItem(addToFavorite);
+		}
 	}
     
     
-    public static void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name){
-	// Issue 1929: This dialog not needed anymore
-    	OsmandApplication ctx = (OsmandApplication) act.getApplication();
-    	final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
-    	final OsmandSettings settings = ctx.getSettings();
-    	if(targetPointsHelper.getPointToNavigate() != null) {
-    		Builder builder = new AlertDialog.Builder(act);
-    		builder.setTitle(R.string.new_destination_point_dialog);
-    		builder.setItems(new String[] {
-    				act.getString(R.string.replace_destination_point),
-    				act.getString(R.string.add_as_first_destination_point),
-    				act.getString(R.string.add_as_last_destination_point)
-    		}, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					if(which == 0) {
-						settings.setPointToNavigate(lat, lon, false, name);
-					} else if(which == 2) {
-						int sz = targetPointsHelper.getIntermediatePoints().size();
-						//LatLon pt = targetPointsHelper.getPointToNavigate();
-						settings.insertIntermediatePoint(lat, lon, name, sz, false);
-						//settings.setPointToNavigate(pt.getLatitude(), pt.getLongitude(), false, settings.getPointNavigateDescription());
-						// I believe the following prior code was buggy, Hardy 2013-06-10:
-						//settings.insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(), 
-						//		settings.getPointNavigateDescription(), sz, true);
-						//settings.setPointToNavigate(lat, lon, true, name);
-					} else {
-						settings.insertIntermediatePoint(lat, lon, name, 0, false);
-					}
-					targetPointsHelper.updatePointsFromSettings();
-					MapActivity.launchMapActivityMoveToTop(act);
-				}
-			});
-    		builder.show();
-    	} else {
-		settings.setPointToNavigate(lat, lon, false, name);
-    		targetPointsHelper.updatePointsFromSettings();
-		MapActivity.launchMapActivityMoveToTop(act);
-    	}
-    }
+	public static void navigatePointDialogAndLaunchMap(final Activity act, final double lat, final double lon, final String name) {
+		// Issue 1929: This dialog not needed anymore
+		OsmandApplication ctx = (OsmandApplication) act.getApplication();
+		final TargetPointsHelper targetPointsHelper = ctx.getTargetPointsHelper();
+		final OsmandSettings settings = ctx.getSettings();
+		if (targetPointsHelper.getPointToNavigate() != null) {
+			Builder builder = new AlertDialog.Builder(act);
+			builder.setTitle(R.string.new_destination_point_dialog);
+			builder.setItems(
+					new String[] { act.getString(R.string.replace_destination_point),
+							act.getString(R.string.add_as_first_destination_point), act.getString(R.string.add_as_last_destination_point) },
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (which == 0) {
+								settings.setPointToNavigate(lat, lon, false, name);
+							} else if (which == 2) {
+								int sz = targetPointsHelper.getIntermediatePoints().size();
+								// LatLon pt = targetPointsHelper.getPointToNavigate();
+								settings.insertIntermediatePoint(lat, lon, name, sz, false);
+								// settings.setPointToNavigate(pt.getLatitude(), pt.getLongitude(), false,
+								// settings.getPointNavigateDescription());
+								// I believe the following prior code was buggy, Hardy 2013-06-10:
+								// settings.insertIntermediatePoint(pt.getLatitude(), pt.getLongitude(),
+								// settings.getPointNavigateDescription(), sz, true);
+								// settings.setPointToNavigate(lat, lon, true, name);
+							} else {
+								settings.insertIntermediatePoint(lat, lon, name, 0, false);
+							}
+							targetPointsHelper.updatePointsFromSettings();
+							MapActivity.launchMapActivityMoveToTop(act);
+						}
+					});
+			builder.show();
+		} else {
+			settings.setPointToNavigate(lat, lon, false, name);
+			targetPointsHelper.updatePointsFromSettings();
+			MapActivity.launchMapActivityMoveToTop(act);
+		}
+	}
     
 }

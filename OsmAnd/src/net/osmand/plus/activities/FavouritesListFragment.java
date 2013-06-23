@@ -128,7 +128,7 @@ public class FavouritesListFragment extends SherlockListFragment implements Sear
 				}
 			};
 			MapActivityActions.createDirectionsActions(qa, location, point, name, settings.getLastKnownMapZoom(), getActivity(),
-					true, onshow);
+					true, onshow, false);
 			qa.show();
 		} else {
 			Intent intent = getActivity().getIntent();

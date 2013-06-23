@@ -13,6 +13,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.search.SearchActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
 import net.osmand.util.MapUtils;
+import android.app.Dialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -23,7 +24,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -42,6 +42,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 	private static final int NAVIGATE_TO = 1;
 	private static final int ADD_WAYPOINT = 2;
 	private static final int SHOW_ON_MAP = 3;
+	private static final int ADD_TO_FAVORITE = 4;
 
 	private View view;
 
@@ -61,36 +62,47 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				showOnMap(NAVIGATE_TO);
+				select(NAVIGATE_TO);
 				return true;
 			}
 		});
 		TargetPointsHelper targets = app.getTargetPointsHelper();
 		if (targets.getPointToNavigate() != null) {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS);
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		// For button-less search UI
 		} else {
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS);
+					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		}
 			menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
 					: R.drawable.a_9_av_make_available_offline_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-					showOnMap(ADD_WAYPOINT);
+					select(ADD_WAYPOINT);
 					return true;
 				}
 			});
 		//}
-		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
-				showOnMap(SHOW_ON_MAP);
+				select(SHOW_ON_MAP);
+				return true;
+			}
+		});
+		
+		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+		menuItem = menuItem.setIcon(light ? R.drawable.a_3_rating_important_light : R.drawable.a_3_rating_important_dark);
+
+		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
+				select(ADD_TO_FAVORITE);
 				return true;
 			}
 		});
@@ -250,12 +262,17 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		lonEdit.addTextChangedListener(textWatcher);
 	}
 	
-	public void showOnMap(int mode){
+	public void select(int mode){
 		try {
 			double lat = convert(((TextView) view.findViewById(R.id.LatitudeEdit)).getText().toString());
 			double lon = convert(((TextView) view.findViewById(R.id.LongitudeEdit)).getText().toString());
 			TargetPointsHelper targetPointsHelper = ((OsmandApplication) getActivity().getApplication()).getTargetPointsHelper();
-			if (mode == NAVIGATE_TO) {
+			if(mode == ADD_TO_FAVORITE) {
+				Bundle b = new Bundle();
+				Dialog dlg = MapActivityActions.createAddFavouriteDialog(getActivity(), b);
+				dlg.show();
+				MapActivityActions.prepareAddFavouriteDialog(getActivity(), dlg, b, lat, lon, getString(R.string.point_on_map, lat, lon));
+			} else if (mode == NAVIGATE_TO) {
 				targetPointsHelper.setDestination(lat, lon, getString(R.string.point_on_map, lat, lon));
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else if (mode == ADD_WAYPOINT) {

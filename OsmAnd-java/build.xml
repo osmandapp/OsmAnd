@@ -3,49 +3,49 @@
 
 	<property file="local.properties" />
 
-	<property name="src.dir" value="src"/>
+	<property name="src.dir" value="src" />
 	<property name="src.absolute.dir" location="${src.dir}" />
-	<property name="bin.dir" value="bin"/>
-	<property name="bin.absolute.dir" location="${bin.dir}"/>
-	<property name="lib.dir" value="libs"/>
+	<property name="bin.dir" value="bin" />
+	<property name="bin.absolute.dir" location="${bin.dir}" />
+	<property name="lib.dir" value="libs" />
 	<property name="lib.absolute.dir" location="${lib.dir}" />
 	<property name="java.encoding" value="UTF-8" />
 
 	<path id="build.path">
 		<fileset dir="${lib.absolute.dir}">
-			<include name="*.jar"/>
+			<include name="*.jar" />
 		</fileset>
 	</path>
 
 	<target name="-dirs">
-		<mkdir dir="${bin.absolute.dir}"/>
+		<mkdir dir="${bin.absolute.dir}" />
 	</target>
 
 	<target name="clean">
-		<delete dir="${bin.absolute.dir}"/>
-		<delete file="OsmAnd-core.jar"/>
+		<delete dir="${bin.absolute.dir}" />
+		<delete file="OsmAnd-core.jar" />
 	</target>
-	
+
 
 	<target name="copy_resources">
 		<copy todir="${src.absolute.dir}/net/osmand/router/">
-			<fileset dir="../../resources/routing/" >
-				<include name="*.xml"/>
+			<fileset dir="../../resources/routing/">
+				<include name="*.xml" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/render/">
-			<fileset dir="../../resources/rendering_styles/" >
-				<include name="*.xml"/>
+			<fileset dir="../../resources/rendering_styles/">
+				<include name="*.xml" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/osm/">
-			<fileset dir="../../resources/obf_creation/" >
-				<include name="rendering_types.xml"/>
+			<fileset dir="../../resources/obf_creation/">
+				<include name="rendering_types.xml" />
 			</fileset>
 		</copy>
 		<copy todir="${src.absolute.dir}/net/osmand/map/">
-			<fileset dir="../../resources/countries-info/" >
-				<include name="countries.reginfo"/>
+			<fileset dir="../../resources/countries-info/">
+				<include name="countries.reginfo" />
 			</fileset>
 		</copy>
 	</target>
@@ -57,23 +57,22 @@
 				<exclude name="**/*.java" />
 			</fileset>
 		</copy>
-		<javac  srcdir="${src.absolute.dir}"
-			destdir="${bin.absolute.dir}" encoding="${java.encoding}" classpathref="build.path" debug="on"
-		 source="1.6">
-	  		<include name="**/*.java"/>
-			<exclude name="net/osmand/plus/**"/>
+		<javac srcdir="${src.absolute.dir}" destdir="${bin.absolute.dir}" encoding="${java.encoding}" classpathref="build.path" debug="on" source="1.6">
+			<include name="**/*.java" />
+			<exclude name="net/osmand/plus/**" />
 		</javac>
-		
+
 	</target>
-	
+
 	<target name="native-libs-jar" depends="compile">
-		<exec command="bash collect_libs.sh" failonerror="true"></exec>
-		<antcall target="jar"/>
+		<exec command="bash collect_libs.sh" failonerror="true">
+		</exec>
+		<antcall target="jar" />
 	</target>
 
 	<target name="jar" depends="compile">
 		<manifestclasspath property="lib.list" jarfile="OsmAnd-core.jar">
-			<classpath refid="build.path"/>
+			<classpath refid="build.path" />
 		</manifestclasspath>
 		<echo>list is  ${lib.list}</echo>
 
@@ -82,7 +81,7 @@
 		<manifest file="MANIFEST.MF">
 			<attribute name="Built-By" value="${user.name}" />
 			<attribute name="Main-Class" value="net.osmand.swing.OsmExtractionUI" />
-			<attribute name="Class-Path" value="${lib.list}"/>
+			<attribute name="Class-Path" value="${lib.list}" />
 		</manifest>
 
 		<jar destfile="OsmAnd-core.jar" manifest="MANIFEST.MF">
@@ -93,7 +92,7 @@
 				<include name="**/*.java" />
 			</fileset>
 		</jar>
-		
+
 		<delete file="MANIFEST.MF" />
 	</target>
 
