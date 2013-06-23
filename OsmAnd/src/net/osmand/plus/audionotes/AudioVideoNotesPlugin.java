@@ -109,7 +109,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_DEFAULT_ACTION_VIDEO = 1;
 	public static final int AV_DEFAULT_ACTION_TAKEPICTURE = 2;
 	public static final int AV_DEFAULT_ACTION_CHOOSE = -1;
-	
+
 	// camera focus type
 	public static final int AV_CAMERA_FOCUS_AUTO = 0;
 	public static final int AV_CAMERA_FOCUS_HIPERFOCAL = 1; 
@@ -117,6 +117,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public static final int AV_CAMERA_FOCUS_INFINITY = 3; 
 	public static final int AV_CAMERA_FOCUS_MACRO = 4; 
 	public static final int AV_CAMERA_FOCUS_CONTINUOUS = 5; 
+	// shoto shot:
+	private static int shotId = 0;
+	private SoundPool sp = null;
 
 	public final CommonPreference<Integer> AV_CAMERA_FOCUS_TYPE;
 	
@@ -714,44 +717,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		} else {
 			final Camera cam = openCamera();
 			if (cam != null) {
-				// load sound:
-				int shotId = 0;
-				SoundPool sp = new SoundPool(5, AudioManager.STREAM_NOTIFICATION, 0);
-				if (AV_PHOTO_PLAY_SOUND.get()) {
-					log.info("Play sound on photo");
-					shotId = sp.load("/mnt/sdcard/osmand/shot.ogg", 1);
-					log.error("loaded file sound ID: " + shotId);
-				}
-				// take photo:
 				takePhotoWithCamera(lat, lon, mapActivity, cam);
-				// play sound after photo - sound file must be loaded at this time:
-				if (AV_PHOTO_PLAY_SOUND.get()) {
-					boolean error_play=true;
-					for(int i=0;i<100;i++)
-					{
-						int ret=sp.play(shotId, 1, 1, 0, 0, 1);
-						if(0!=ret)
-						{
-							log.debug("play sound shot success!");
-							log.debug("sp.play()="+ret);
-							error_play=false;
-							break;
-						}
-						else
-						{
-							try{
-							Thread.sleep(10);
-							} catch (Exception e) {
-								logErr(e);
-								e.printStackTrace();
-							}
-						//	log.debug("sp.play()="+ret+"\nwait sp.play...");
-						}
-					}
-					if(error_play)
-						log.error("error play sound!");
-//					sp.release();
-				}
 			} else {
 				takeIntentPhoto(lat, lon, mapActivity);
 			}
@@ -846,8 +812,17 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 //							parameters.setFocusMode(Parameters.FOCUS_MODE_FIXED);
 //							parameters.set("auto-exposure-lock", "true");
 						//}
-
-
+						// load sound befor shot:
+						if (AV_PHOTO_PLAY_SOUND.get()) {
+							if(sp==null)
+								sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+							log.info("Play sound on photo");
+							if(shotId==0)
+							{
+								shotId = sp.load(app.getAssets().openFd("sounds/camera_click.ogg"), 1);
+								log.debug("loaded file sound ID: " + shotId);
+							}
+						}
 
 						parameters.setWhiteBalance(Parameters.WHITE_BALANCE_AUTO);
 						parameters.setFlashMode(Parameters.FLASH_MODE_AUTO);
@@ -1250,6 +1225,23 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				fos.close();
 				indexingFiles(null, true);
 				dlg.dismiss();
+				// play sound after photo - sound file must be loaded at this time:
+				if (AV_PHOTO_PLAY_SOUND.get()) {
+					if(sp!=null && shotId!=0)
+					{
+						int ret=sp.play(shotId, 0.7f, 0.7f, 0, 0, 1);
+						log.debug("play sound shot success!");
+						log.debug("sp.play()="+ret);
+	//					sp.release();
+	//					sp=null;
+	//					shotId=0
+					}
+					else
+					{
+						log.error("can not play sound on shot - not init SoundPool or not loaded sound");
+					}
+				}
+	
 			} catch (Exception error) {
 				logErr(error);
 			} finally {
