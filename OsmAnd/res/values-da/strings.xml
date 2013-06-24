@@ -499,8 +499,8 @@ Tryk på et eksisterende element for at se flere detaljer, tryk og hold for at d
 	<string name="amenity_type_user_defined">Brugerdefineret</string>
 	<string name="fav_export_confirmation">Fil med tidligere eksporterede favoritter eksisterer allerede. Overskriv?</string>
 	<string name="profile_settings">Profilspecifikke indstillinger</string>
-	<string name="settings_preset">Brugerprofiler</string>
-	<string name="settings_preset_descr">Vælg en brugerprofil med tilrettede kort og navigationsindstillinger.</string>
+	<string name="settings_preset">Standardprofil</string>
+	<string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
 	<string name="routing_settings_descr">Indstillinger for navigation</string>
 	<string name="global_settings">Globale indstillinger</string>
 	<string name="index_settings">Datahåndtering</string>
@@ -608,7 +608,7 @@ Begrænsninger i den gratis version af OsmAnd:
  - Antallet af kort der kan hentes er begrænset
  - Ingen adgang Wikipedia offline interessepunkter
 
-OsmAnd bliver aktivt udviklet og vores projekt og videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Vær så venlig at overveje at købe OsmAnd+, betal for en specifik ny funktion eller lave en generel donation på osmand.net.
+OsmAnd bliver aktivt udviklet og vores projekt og videre udvikling afhænger af økonomiske bidrag til at drive udviklingen og test af nye funktioner. Overvej at købe OsmAnd+, betale for en specifik ny funktion eller lave en generel donation på osmand.net.
 	</string>
 	<string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) er en kort og navigation applikation med adgang til gratis høj kvalitets OpenStreetMap (OSM) kortdata over hele verden. Alle kortdata kan gemmes på enhedens hukommelseskort til brug offline. Via din enheds GPS, tilbyder OsmAnd navigation, med visuel og talevejledning til bil, cykel, og fodgænger. Alle de vigtigste funktioner arbejde både online og offline (ingen internet behov).
@@ -792,9 +792,10 @@ Emner i 'kursiv' angiver data der er deaktiverede på enheden</string>
 	</string>
 	<string name="tip_recent_changes_0_7_1_t">Ændringer i 0.7.1:
  - Offline interessepunkt-redigering
- - Online sporings valgmulighed - send periodisk koordinater til en webtjeneste (læs hvordan opsætter din egen webtjeneste i HowTo artiklerne)\n\t- Vis den aktuelle optagende sporing på kort
- - Retnings sensor: \'Lav U-vending\' vises og siges når der køres i modsatte retning eller efter et misset sving
- - Ny stemme kommando \'Rute genberegnet\'
+ - Online sporings valgmulighed - send periodisk koordinater til en webtjeneste (læs hvordan opsætter din egen webtjeneste i HowTo artiklerne)
+ - Vis den aktuelle optagende sporing på kort
+ - Retnings sensor: 'Lav U-vending' vises og siges når der køres i modsatte retning eller efter et misset sving
+ - Ny stemme kommando 'Rute genberegnet'
  - Visuel visning af et kommende sving inden for 100m ved at svingpilen skifter farve
  - Opdateringsinformation vises nu også for deaktiverede index filer på datahåndteringsskærmen i mørkegrøn og mørkeblå
  - Andre ændringer
@@ -989,7 +990,8 @@ For at dele en placering:
 	<string name="mile_per_hour">mi/t</string>
 	<string name="mile">mil</string>
 	<string name="send_location_way_choose_title">Del placering ved hjælp af</string>
-	<string name="send_location_sms_pattern">Placering %1$s\n%2$s</string>
+	<string name="send_location_sms_pattern">Placering: %1$s
+%2$s</string>
 	<string name="send_location_email_pattern">For at se placering følg link %1$s eller android hensigts link %2$s</string>
 	<string name="send_location">Send placering</string>
 	<string name="context_menu_item_share_location">Del placering</string>
@@ -1060,7 +1062,7 @@ For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen 'F
     <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes 'Menu' -&gt; 'Rutevejledning' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
-	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \Indstillinger - Datahåndtering', vælg den ønskede stemmepakke og hent den.</string>
+	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til 'Indstillinger - Datahåndtering', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Filer hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
@@ -1438,7 +1440,7 @@ Navigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="osb_close_dialog_success">Fejlregistrering blev lukket</string>
 	<string name="osb_close_dialog_error">Undtagelse opstod: fejl blev ikke lukket</string>
 	<string name="poi_dialog_comment_default">Interessepunkt ændres</string>
-	<string name="app_mode_default">Standard</string>
+	<string name="app_mode_default">Gennemse kort</string>
 	<string name="poi_error_info_not_loaded">Information om knudepunkt blev ikke indlæst</string>
 	<string name="save_current_track_widget">Gem aktuel
 GPX-spor</string>
