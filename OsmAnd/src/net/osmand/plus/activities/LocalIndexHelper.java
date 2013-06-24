@@ -126,6 +126,7 @@ public class LocalIndexHelper {
 			int totalTracks = 0;
 			long startTime = Long.MAX_VALUE;
 			long endTime = Long.MIN_VALUE;
+			long timeSpan = 0;
 			long timeMoving = 0;
 
 			double diffElevationUp = 0;
@@ -203,10 +204,11 @@ public class LocalIndexHelper {
 			info.setDescription(app.getString(R.string.local_index_gpx_info, totalTracks, points,
 					result.points.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
 					startTime, endTime));
-			info.setDescription(info.getDescription() + app.getString(R.string.local_index_gpx_timespan, endTime - startTime));
+			timeSpan = endTime - startTime;
+			info.setDescription(info.getDescription() + app.getString(R.string.local_index_gpx_timespan, (int) ((timeSpan / 1000) / 3600), (int) (((timeSpan / 1000) / 60) % 60), (int) ((timeSpan / 1000) % 60)));
 			if(timeMoving > 0){
 				info.setDescription(info.getDescription() +
-					app.getString(R.string.local_index_gpx_timemoving, timeMoving));
+					app.getString(R.string.local_index_gpx_timemoving, (int) ((timeMoving / 1000) / 3600), (int) (((timeMoving / 1000) / 60) % 60), (int) ((timeMoving / 1000) % 60)));
 			}
 
 			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
