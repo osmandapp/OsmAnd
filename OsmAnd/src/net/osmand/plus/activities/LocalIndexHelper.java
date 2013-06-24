@@ -126,7 +126,8 @@ public class LocalIndexHelper {
 			int totalTracks = 0;
 			long startTime = Long.MAX_VALUE;
 			long endTime = Long.MIN_VALUE;
-			
+			long timeMoving = 0;
+
 			double diffElevationUp = 0;
 			double diffElevationDown = 0;
 			double totalElevation = 0;
@@ -152,6 +153,14 @@ public class LocalIndexHelper {
 							startTime = Math.min(startTime, time);
 							endTime = Math.max(startTime, time);
 						}
+
+						double elevation = point.ele;
+						if (!Double.isNaN(elevation)) {
+							totalElevation += elevation;
+							minElevation = Math.min(elevation, minElevation);
+							maxElevation = Math.max(elevation, maxElevation);
+						}
+
 						float speed = (float) point.speed;
 						if(speed > 0){
 							totalSpeedSum += speed;
@@ -159,14 +168,9 @@ public class LocalIndexHelper {
 							speedCount ++;
 						}
 						
-						double elevation = point.ele;
-						if (!Double.isNaN(elevation)) {
-							totalElevation += elevation;
-							minElevation = Math.min(elevation, minElevation);
-							maxElevation = Math.max(elevation, maxElevation);
-						}
 						if (j > 0) {
 							WptPt prev = segment.points.get(j - 1);
+
 							if (!Double.isNaN(point.ele) && !Double.isNaN(prev.ele)) {
 								double diff = point.ele - prev.ele;
 								if (diff > 0) {
@@ -175,10 +179,16 @@ public class LocalIndexHelper {
 									diffElevationDown -= diff;
 								}
 							}
+
 							//totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 							// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is a little more exact, also seems slightly faster:
 							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 							totalDistance += calculations[0];
+
+							// Averaging speed values is less exact than totalDistance/timeMoving
+							if(speed > 0 && point.time != 0 && prev.time != 0){
+								timeMoving = timeMoving + (point.time - prev.time);
+							}
 						}
 					}
 				}
@@ -193,19 +203,33 @@ public class LocalIndexHelper {
 			info.setDescription(app.getString(R.string.local_index_gpx_info, totalTracks, points,
 					result.points.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
 					startTime, endTime));
+			info.setDescription(info.getDescription() + app.getString(R.string.local_index_gpx_timespan, endTime - startTime));
+			if(timeMoving > 0){
+				info.setDescription(info.getDescription() +
+					app.getString(R.string.local_index_gpx_timemoving, timeMoving));
+			}
+
 			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
 				info.setDescription(info.getDescription() +  
 						app.getString(R.string.local_index_gpx_info_elevation,
 						totalElevation / points, minElevation, maxElevation, diffElevationUp, diffElevationDown));
 			}
+
 			if(speedCount > 0){
-				info.setDescription(info.getDescription() +  
+				if(timeMoving > 0){
+					info.setDescription(info.getDescription() +
+						app.getString(R.string.local_index_gpx_info_speed,
+						OsmAndFormatter.getFormattedSpeed((float) (totalDistance / timeMoving), app),
+						OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
+				} else {
+					// Averaging speed values is less exact than totalDistance/timeMoving
+					info.setDescription(info.getDescription() +
 						app.getString(R.string.local_index_gpx_info_speed,
 						OsmAndFormatter.getFormattedSpeed((float) (totalSpeedSum / speedCount), app),
 						OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
-				
+				}
 			}
-			
+
 			info.setDescription(info.getDescription() +  
 						app.getString(R.string.local_index_gpx_info_show));
 		}

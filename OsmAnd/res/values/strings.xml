@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="local_index_gpx_timespan">\nTime span: %1$tT</string>
+	<string name="local_index_gpx_timemoving">\nTime moving: %1$tT</string>
 	<string name="app_mode_default">Browse map</string>
 	<string name="settings_preset">Default profile</string>
 	<string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
