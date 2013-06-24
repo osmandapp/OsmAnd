@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩配置：</string>
-	<string name="rendering_attr_roadColors_name">道路的色彩配置</string>
+<resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
+	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
-    <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX記錄，網上追踪查詢)</string>
+    <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
     <string name="non_optimal_route_calculation">過遠的距離計算，可能不是最佳的路線</string>
     <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
 	\n\t* Some bug fixes
@@ -11,7 +11,7 @@
     </string>
 	<string name="gps_not_available">請在設定中啟用 GPS</string>
 	<string name="map_widget_monitoring_services">日誌記錄服務</string>
-	<string name="no_route">沒有路徑</string>
+	<string name="no_route">沒有路線</string>
 	<string name="delete_target_point">移除中途點</string>
 	<string name="target_point">中途點 %1$s</string>
     <string name="intermediate_point">中途點 %1$s</string>
@@ -32,14 +32,14 @@
     <string name="btn_advanced_mode">進階模式…</string>
     <string name="poi_filter_parking">停車場</string>
     <string name="poi_filter_emergency">緊急救助</string>
-    <string name="poi_filter_public_transport">公共交通</string>
+    <string name="poi_filter_public_transport">公共運輸</string>
     <string name="poi_filter_entertainment">娛樂</string>
     <string name="poi_filter_accomodation">住宿</string>
     <string name="poi_filter_restaurants">餐廳</string>
-    <string name="poi_filter_sightseeing">風景區</string>
+    <string name="poi_filter_sightseeing">景區</string>
     <string name="poi_filter_car_aid">汽車維修</string>
 	<string name="poi_filter_food_shop">美食店</string>
-	<string name="poi_filter_for_tourists">旅遊景點</string>
+	<string name="poi_filter_for_tourists">旅遊點</string>
 	<string name="poi_filter_fuel">加油站</string>
 	<string name="show_warnings_title">顯示警示…</string>
 	<string name="show_warnings_descr">組態交通提醒(速限、強制停車、減速)、測速照相提醒、車道資訊</string>
@@ -238,7 +238,7 @@
 	<string name="map_settings">地圖設定</string>
 	<string name="map_settings_descr">設定地圖顯示</string>
 	<string name="osmand_rastermaps_plugin_description">顯示設定來組態多種線上或暫存的網格地圖作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以準備好離線複製到 OsmAnd 資料夾中。</string>
-	<string name="osmand_background_plugin_description">可在休眠模式下經由定期的喚醒 GPS 進行追蹤與導航。</string>
+	<string name="osmand_background_plugin_description">可在休眠(螢幕關閉)模式下經由定期的喚醒 GPS 進行追蹤與導航。</string>
 	<string name="osmand_accessibility_description">協助工具的設定。</string>
 	<string name="extra_settings">進階設定</string>
 	<string name="osmand_monitoring_description">顯示便利設定來記錄您的行程到裝置端 GPX 檔或在線上使用網站的服務...</string>
@@ -1033,24 +1033,27 @@
     <string name="intermediate_items_sort_by_distance">排列(送貨到門)</string>
     <string name="plugin_distance_point_time">時間</string>
     <string name="plugin_distance_point_speed">速度</string>
-    <string name="plugin_distance_point_ele">高度</string>
-    <string name="gpx_file_name">GPX檔案名稱</string>
+    <string name="plugin_distance_point_ele">標高</string>
+    <string name="gpx_file_name">GPX 檔案名稱</string>
     <string name="gpx_saved_sucessfully">GPX檔案已完全成功儲存到{0}</string>
     <string name="osmand_distance_planning_plugin_description">建立測量點之間的距離路徑（或是利用/修改現有的 GPX 檔案）。另存為 GPX，可以用來規劃 GPX 路線。</string>
     <string name="osmand_distance_planning_plugin_name">距離計算器和規劃工具</string>
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
     <string name="plugin_distance_point_hdop">精確度</string>
-    <string name="use_distance_measurement_help">* 點選標記一個點。\n * 在地圖上按住去刪除先前的點。\n * 在點上按住以檢視並附加描述。\n * 在測量小工具上點擊可看到更多作用。</string>
+    <string name="use_distance_measurement_help">* 點選標記一個點。\n 
+        * 在地圖上按住去刪除先前的點。\n
+        * 在點上按住以檢視並附加描述。\n
+        * 在測量小工具上點擊可看到更多作用。</string>
     <string name="default_buttons_do_not_show_again">不要再顯示</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
-    <string name="distance_measurement_finish_editing">完成編輯</string>
+    <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子航跡</string>
-    <string name="distance_measurement_save_gpx">另存為GPX</string>
-    <string name="distance_measurement_load_gpx">開啟現有的GPX</string>
-    <string name="wait_current_task_finished">請等待目前的作業完成</string>
+    <string name="distance_measurement_save_gpx">另存為 GPX</string>
+    <string name="distance_measurement_load_gpx">開啟現有的 GPX</string>
+    <string name="wait_current_task_finished">請等待目前的作業結束</string>
     <string name="use_kalman_filter_compass_descr">使用 Kalman 過濾，以避免電子羅盤的偏差</string>
-    <string name="use_kalman_filter_compass">使用Kalman過濾器</string>
+    <string name="use_kalman_filter_compass">使用 Kalman 過濾</string>
     <string name="use_magnetic_sensor_descr">使用磁性感測器來判斷電子羅盤的值，而不是定位感測器</string>
     <string name="use_magnetic_sensor">使用磁性感測器</string>
     <string name="other_location">其它</string>
@@ -1058,7 +1061,7 @@
     <string name="cancel_route">排除路線</string>
     <string name="cancel_navigation">停止導航</string>
     <string name="clear_destination">清除目的地</string>
-    <string name="download_using_mobile_internet">目前WiFi未連線。您是否想要用現在的網際網路連線繼續下載？</string>
+    <string name="download_using_mobile_internet">目前 WiFi 未連線。您是否想要用現在的網際網路連線繼續下載？</string>
     <string name="street_name">街道</string>
 	<string name="hno">門牌號碼</string>
     <string name="monitoring_settings">日誌記錄服務及休眠模式</string>
@@ -1073,7 +1076,7 @@
     <string name="local_openstreetmap_act_title">OSM 修改</string>
     <string name="default_buttons_other_actions">其它的作用</string>
     <string name="save_current_track_widget">儲存
-\n現在的 GPX 航跡</string>
+        \n現在的 GPX 航跡</string>
 	<string name="layer_hillshade">地形陰影圖層</string>
     <string name="map_widget_gps_info">GPS 資訊</string>
     <string name="access_arrival_time">抵達時間</string>
@@ -1085,24 +1088,24 @@
     <string name="item_unchecked">取消勾選</string>
     <string name="map_view">地圖</string>
     <string name="max_speed_none">無</string>
-    <string name="prefer_in_routing_descr">較偏愛高速公路</string>
-    <string name="prefer_in_routing_title">偏愛…</string>
-	<string name="prefer_motorways">較偏愛高速公路</string>
+    <string name="prefer_in_routing_descr">高速公路優先</string>
+    <string name="prefer_in_routing_title">優先權…</string>
+	<string name="prefer_motorways">高速公路優先</string>
 	<string name="download_hillshade_item">地形陰影</string>
-    <string name="download_hillshade_maps">地形陰影層疊</string>
+    <string name="download_hillshade_maps">地形陰影覆疊</string>
     <string name="dist_control_start">開始</string>
     
     <string name="local_indexes_cat_srtm">等高線資料</string>
     <string name="local_indexes_cat_av">音頻/視訊資料</string>
     <string name="stop_routing_confirm">您確定您要停止導航嗎？</string>
     <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含中途點)？</string>
-    <string name="precise_routing_mode">精確的路徑 (alpha)</string>
-    <string name="precise_routing_mode_descr">啟用精確的路徑，去計算無差錯的準確路線。經由距離和不使用原生函式庫這是非常有限的。</string>
+    <string name="precise_routing_mode">精確的路線 (alpha)</string>
+    <string name="precise_routing_mode_descr">啟用精確的路線，去計算無差錯的準確路線。長距離和不使用原生函式庫這是非常有限的。</string>
     <string name="recording_context_menu_show">顯示</string>
     <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
     <string name="recording_context_menu_precord">拍攝照片</string>
-    <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓航跡和音頻/視訊注解同步到您的 Dropbox帳戶。</string>
+    <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓航跡和音頻/視訊注解同步到您的 Dropbox 帳戶。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
     <string name="animate_routing_using_gpx">您想使用現有的GPX檔案？</string>
     <string name="intermediate_points_change_order">變動排列</string>
@@ -1113,7 +1116,7 @@
     <string name="av_def_action_audio">錄取音頻</string>
     <string name="av_widget_action_descr">選擇預設小工具作用</string>
     <string name="av_widget_action">預設小工具作用</string>
-    <string name="av_video_format_descr">選擇視訊格式</string>
+    <string name="av_video_format_descr">選擇視訊輸出格式</string>
     <string name="av_video_format">視訊輸出格式</string>
     <string name="tip_recent_changes_1_4_t">在1.4的變更：
 	\n\t* 排列中途點以最佳的方式去全部查訪(巡回的推銷員，送貨到門)
@@ -1136,10 +1139,10 @@
     <string name="recording_context_menu_arecord">錄取音頻注解</string>
     <string name="destination_point">目的地 ％1 $ S</string>
     <string name="local_osm_changes_backup_successful">OSM 變更的檔案已成功的產生 %1$s</string>
-    <string name="access_mark_final_location_first">協助功能模式：首先請選取目的地</string> 
-    <string name="av_use_external_recorder_descr">使用系統記錄於視訊</string>
-    <string name="av_use_external_recorder">使用系統記錄</string>
-    <string name="av_use_external_camera_descr">使用系統應用程式於照片</string>
+    <string name="access_mark_final_location_first">協助功能模式：首先請選擇目的地</string> 
+    <string name="av_use_external_recorder_descr">視訊使用系統錄製</string>
+    <string name="av_use_external_recorder">使用系統錄製</string>
+    <string name="av_use_external_camera_descr">相片使用系統應用程式</string>
     <string name="av_use_external_camera">使用相機應用程式</string>
     <string name="recording_is_recorded">音頻/視訊開始錄製。要停止按下AV小工具。</string>
     <string name="recording_can_not_be_played">不能播放記錄</string>
@@ -1150,7 +1153,7 @@
     <string name="av_control_stop">停止</string>
     <string name="av_control_start">開始</string>
     <string name="map_widget_av_notes">音頻/視訊注解</string>
-    <string name="osmand_srtm_short_description_80_chars">OsmAnd 外掛元件適用於離線等高線</string>
+    <string name="osmand_srtm_short_description_80_chars">OsmAnd 外掛元件用於離線等高線</string>
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="monitoring_control_stop">停止</string>
     <string name="map_widget_audionotes">音頻注解</string>
@@ -1162,7 +1165,7 @@
     <string name="download_select_map_types">其它地圖</string>
     <string name="download_roads_only_item">僅道路</string>
     <string name="download_srtm_maps">等高線</string>
-    <string name="download_regular_maps">正式地圖</string>
+    <string name="download_regular_maps">正規地圖</string>
     <string name="download_roads_only_maps">僅道路地圖</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">隱藏界限</string>
@@ -1188,7 +1191,7 @@
 	<string name="native_app_allocated_memory_descr">原生記憶體總計由應用程式 %1$ MB (Dalvik %2$ MB，其它 %3$ MB) 。Proportional memory %4$ MB (Android 限制 %5$ MB，Dalvik %6$ MB)分配佔用。</string>
 	<string name="context_menu_item_destination_point">設定為目的地</string>
     <string name="please_select_address">首先選擇城市或街道</string>
-    <string name="available_downloads_left">還剩 %1$d 檔案可下載</string>
+    <string name="available_downloads_left">還可下載 %1$d 個檔案</string>
     <string name="close_changeset">關閉變更</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing 條碼掃描器應用程式未安裝。要在商場中的搜尋嗎？</string>
 	<string name="support_new_features_descr">捐贈後可在應用程式裡看到新的功能實現</string>
@@ -1338,12 +1341,12 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	<string name="delete_point">刪除點</string>
     <string name="plugin_distance_point">點</string>
     <string name="distance_measurement_clear_route">清除所有的點</string>
-    <string name="files_limit">剩 %1$d 個檔可下載</string>
-    <string name="layer_recordings">錄製層</string>
+    <string name="files_limit">剩餘 %1$d 個檔</string>
+    <string name="layer_recordings">錄製階層</string>
     <string name="downloading_file_new">下載中...</string>
 	<string name="intermediate_items_sort_return">在到達目的地之間路途上，沿路的中途點已採取了最佳化的排列。</string>
-    <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球資料（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、Japan Space Systems (J-spacesystems)之間的通力合作產物。</string>
-    <string name="audionotes_location_not_defined">以位置去關聯的注解尚未定義。\"使用位置......\"，把注解分配給指定的位置</string>
+    <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
+    <string name="audionotes_location_not_defined">以位置去關聯的注解尚未定義。\"使用位置...\"，把注解分配給指定的位置</string>
     <string name="srtm_plugin_description">便於下載目前離線的等高線和地形陰影（設置 -&gt; 資料管理 -&gt; 下載 -&gt; 選擇所需的地圖類型）。</string>
     <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
 		\n\t- Native rendering for all devices
