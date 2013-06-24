@@ -126,15 +126,22 @@ public class EditingPOIActivity implements DialogProvider {
 		ctx.showDialog(dialogID);
 	}
 	
-	public void showDeleteDialog(Amenity a){
-		final Node n = openstreetmapUtil.loadNode(a);
-		if(n == null){
-			AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
-			return;
-		}
-		dialogBundle.putSerializable(KEY_AMENITY, a);
-		dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
-		ctx.showDialog(DIALOG_DELETE_POI); //TODO from android 2.0 use showDialog(id,bundle)
+	public void showDeleteDialog(final Amenity a){
+		new AsyncTask<Void, Void, Node>() {
+			protected Node doInBackground(Void[] params) {
+				return openstreetmapUtil.loadNode(a);
+			};
+			
+			protected void onPostExecute(Node n) {
+				if(n == null){
+					AccessibleToast.makeText(ctx, ctx.getResources().getString(R.string.poi_error_poi_not_found), Toast.LENGTH_LONG).show();
+					return;
+				}
+				dialogBundle.putSerializable(KEY_AMENITY, a);
+				dialogBundle.putSerializable(KEY_AMENITY_NODE, n);
+				ctx.showDialog(DIALOG_DELETE_POI); //TODO from android 2.0 use showDialog(id,bundle)
+			};
+		}.execute(new Void[0]);
 	}
 	
 	private void prepareDeleteDialog(Dialog dlg, Bundle args) {
