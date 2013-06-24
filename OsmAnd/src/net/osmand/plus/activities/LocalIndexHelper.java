@@ -221,7 +221,7 @@ public class LocalIndexHelper {
 				if(timeMoving > 0){
 					info.setDescription(info.getDescription() +
 						app.getString(R.string.local_index_gpx_info_speed,
-						OsmAndFormatter.getFormattedSpeed((float) (totalDistance / timeMoving), app),
+						OsmAndFormatter.getFormattedSpeed((float) (totalDistance / timeMoving * 1000), app),
 						OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
 				} else {
 					// Averaging speed values is less exact than totalDistance/timeMoving
