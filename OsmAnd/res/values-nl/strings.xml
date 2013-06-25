@@ -1470,6 +1470,6 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="please_select_address">Selecteer eerst een stad of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming instellen</string>
     <string name="destination_point">Bestemming %1$s</string>
-    <string name="local_index_gpx_timemoving">\nTijd in beweging: %1$tT</string>
-	<string name="local_index_gpx_timespan">\nTijd spanne: %1$tT</string>
+    <string name="local_index_gpx_timemoving">\nTijd in beweging: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timespan">\nTijdspanne: %1$d:%2$02d:%3$02d</string>
 	</resources>
