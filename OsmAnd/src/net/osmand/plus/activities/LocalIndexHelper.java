@@ -223,11 +223,11 @@ public class LocalIndexHelper {
 			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
 				info.setDescription(info.getDescription() +  
 						app.getString(R.string.local_index_gpx_info_elevation,
-						OsmAndFormatter.getFormattedDistance(totalElevation / points, app),
-						OsmAndFormatter.getFormattedDistance(minElevation, app),
-						OsmAndFormatter.getFormattedDistance(maxElevation, app),
-						OsmAndFormatter.getFormattedDistance(diffElevationUp, app),
-						OsmAndFormatter.getFormattedDistance(diffElevationDown, app)));
+						OsmAndFormatter.getFormattedDistance( (float) (totalElevation / points), app),
+						OsmAndFormatter.getFormattedDistance( (float) minElevation, app),
+						OsmAndFormatter.getFormattedDistance( (float) maxElevation, app),
+						OsmAndFormatter.getFormattedDistance( (float) diffElevationUp, app),
+						OsmAndFormatter.getFormattedDistance( (float) diffElevationDown, app)));
 			}
 
 			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
