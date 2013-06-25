@@ -1202,7 +1202,7 @@
 	<string name="av_camera_focus">Режим фокусировки камеры</string>
 	<string name="av_camera_focus_descr">Режим фокусировки для встроенного приложения фотографирования</string>
 	<string name="av_camera_focus_auto">Автоматический фокус</string>
-	<string name="av_camera_focus_hiperfocal">Гиперфокальное (если поддерживается)</string>
+	<string name="av_camera_focus_hiperfocal">Гиперфокальное или фиксированное</string>
 	<string name="av_camera_focus_edof">Увеличенная глубина резкозти (EDOF)</string>
 	<string name="av_camera_focus_infinity">Фокус на бесконечность</string>
 	<string name="av_camera_focus_macro">Макро-режим</string>

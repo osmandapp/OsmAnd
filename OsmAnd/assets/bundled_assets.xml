@@ -33,5 +33,5 @@
 	<asset source="voice/it-Chiara/config.p" destination="voice/it-Chiara/_config.p" mode="overwriteOnlyIfExists" />  
 	<asset source="voice/sk-Ruzena/config.p" destination="voice/sk-Ruzena/_config.p" mode="overwriteOnlyIfExists" />
 
-	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="overwriteOnlyIfExists" />
+	<asset source="sounds/camera_click.ogg" destination="sounds/camera_click.ogg" mode="copyOnlyIfDoesNotExist" />
 </assets>
