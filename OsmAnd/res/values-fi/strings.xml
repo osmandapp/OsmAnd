@@ -579,7 +579,7 @@
 	<string name="file_with_name_already_exist">Tiedosto samalla nimellä on jo olemassa.</string>
 	<string name="show_more_map_detail">Näytä enemmän karttatietoja</string>
 	<string name="favorite_delete_multiple">Olet poistamassa %1$d suoosikkia ja %2$d suosikkiryhmää. Oletko varma?</string>
-	<string name="local_index_gpx_info_elevation">\nKeskimääräinen korkeus : %1$.0f m\nMinimikorkeus : %2$.0f m\nMaksimikorkeus : %3$.0f m\nNousuja : %4$.0f m\nLaskuja : %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\nKeskimääräinen korkeus : %1$s\nMinimikorkeus : %2$s\nMaksimikorkeus : %3$s\nNousuja : %4$s\nLaskuja : %5$s</string>
 	<string name="local_index_gpx_info">Alireittejä : %1$d\nPisteitä yhteensä : %2$d\nVälietappeja : %3$d\nKokonaismatka : %4$s\nAloitusaika : %5$tF, %5$tR\nLopetusaika : %6$tF, %6$tR</string>
 	<string name="local_index_installed">Versio</string>
 	<string name="poi_remove_confirm_template">Poista {0} (lisää kommentti)?</string>

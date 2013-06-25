@@ -175,7 +175,7 @@
   <string name="vector_data_missing">No hay datos (\'descargados\') en la tarjeta SD. Por favor, considera descargarlos para usar mapas sin conexión.</string>
   <string name="local_index_gpx_info_show">"\n\nPulsación larga para opciones"</string>
   <string name="local_index_gpx_info_speed">"\nVelocidad media: %1$s \nVelocidad máxima: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nAltitud media: %1$.0f m\nAltitud mínima: %2$.0f m\nAltitud máxima: %3$.0f m\nAscensos: %4$.0f m\nDescensos : %5$.0f m"</string>
+  <string name="local_index_gpx_info_elevation">"\nAltitud media: %1$s\nAltitud mínima: %2$s\nAltitud máxima: %3$s\nAscensos: %4$s\nDescensos : %5$s"</string>
   <string name="local_index_gpx_info">Subtrazas: %1$d\nPuntos totales: %2$d\nPuntos de paso: %3$d\nDistancia total: %4$s\nHora de inicio: %5$tF, %5$tR\nHora de fin: %6$tF, %6$tR</string>
   <string name="local_index_installed">Edición</string>
   <string name="local_index_items_backuped">%1$d de %2$d elemento(s) correctamente desactivado(s).</string>

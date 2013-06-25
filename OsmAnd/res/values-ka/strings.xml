@@ -277,7 +277,7 @@
   <string name="vector_data_missing">დასტაში \"offline\" sdcard-ზე არ არსებობს მონაცემები. გთხოვთ გადმოწეროთ რუკებით გათიშულ რეჟიმში სარგებლობისათვის .</string>
   <string name="local_index_gpx_info_show">"\n\nპარამეტრების შესაცვლელად დააჭირეთ და გეჭიროთ"</string>
   <string name="local_index_gpx_info_speed">"\nსაშუალო სიჩქარე : %1$s \nმაქსიმალური სიჩქარე : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nსაშუალო სიმაღლე : %1$.0f მ\nმინიმალური სიმაღლე : %2$.0f მ\nმაქსიმალური სიმაღლე : %3$.0f მ\nასვლა: %4$.0f მ\nჩამოსვლა : %5$.0f მ"</string>
+  <string name="local_index_gpx_info_elevation">"\nსაშუალო სიმაღლე : %1$s\nმინიმალური სიმაღლე : %2$s\nმაქსიმალური სიმაღლე : %3$s\nასვლა: %4$s\nჩამოსვლა : %5$s"</string>
   <string name="local_index_gpx_info">ქვეგზა : %1$d\nჯამური წერტილები : %2$d\nსაგზაო წერტილები : %3$d\nჯამური მანძილი : %4$s\nსაწყისი დრო : %5$tF, %5$tR\nდასასრულის დრო : %6$tF, %6$tR</string>
   <string name="local_index_installed">გამოცემა</string>
   <string name="local_index_items_backuped">%1$d %2$d -დან წარმატებით გაიარა დეაქტივაცია.</string>

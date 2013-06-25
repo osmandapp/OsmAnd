@@ -333,7 +333,7 @@
   <string name="vector_data_missing">Aanboord (\'aflyn\') inligting ontbreek op SD-kaart. Oorweeg dit asseblief om dit af te laai om die kaarte aflyn te gebruik.</string>
   <string name="local_index_gpx_info_show">\n\nDruk en hou vir keuses</string>
   <string name="local_index_gpx_info_speed">\nGemiddelde spoed: %1$s\nMaksimum spoed: %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nGemiddelde hoogte: %1$.0f m\nMinimum hoogte: %2$.0f m\nMaksimum hoogte: %3$.0f m\nOpdraandes: %4$.0f m\nAfdraandes: %5$.0f m</string>
+  <string name="local_index_gpx_info_elevation">\nGemiddelde hoogte: %1$s\nMinimum hoogte: %2$s\nMaksimum hoogte: %3$s\nOpdraandes: %4$s\nAfdraandes: %5$s</string>
   <string name="local_index_gpx_info">Subspore : %1$d\nTotale punte : %2$d\nTussenpunte : %3$d\nTotale afstand : %4$s\nBegin tyd : %5$tF, %5$tR\nEnd tyd : %6$tF, %6$tR</string>
   <string name="local_index_installed">Uitgawe</string>
   <string name="local_index_items_backuped">%1$d van %2$d item(s) suksesvol afgeskakel.</string>

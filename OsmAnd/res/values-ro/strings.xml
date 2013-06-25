@@ -540,7 +540,7 @@
 	<string name="vector_data_missing">Datele locale, (\'offline\'), lipsesc de pe cardul SD. Vă rog să considerați descărcarea acestora pentru a putea folosi hărți offline.</string>
 	<string name="local_index_gpx_info_show">\n\nApăsați prelung pentru afișarea opțiunilor</string>
 	<string name="local_index_gpx_info_speed">\nViteza medie: %1$s \nViteza maximă: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nAltitudinea medie: %1$.0f m\nAltitudinea minimă: %2$.0f m\nAltitudinea maximă: %3$.0f m\nAscensiune: %4$.0f m\nDescendență: %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\nAltitudinea medie: %1$s\nAltitudinea minimă: %2$s\nAltitudinea maximă: %3$s\nAscensiune: %4$s\nDescendență: %5$s</string>
 	<string name="local_index_gpx_info">Subtrasee: %1$d\nTotal puncte: %2$d\nWaypoint-uri: %3$d\nDistanța totală: %4$s\nOra de start: %5$tF,  %5$tR\nOra de finiș: %6$tF,  %6$tR</string>
 	<string name="local_index_installed">Ediție</string>
 	<string name="local_index_items_backuped">%1$d din %2$d element(e) dezactivate cu succes.</string>

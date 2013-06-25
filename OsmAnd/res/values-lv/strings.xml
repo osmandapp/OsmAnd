@@ -233,7 +233,7 @@
   <string name="vector_data_missing">SD kartē nav atrodami bezsaistes dati. Lai lietotu bezsaistes kartes, lūdzu veiciet failu lejuplādi.</string>
   <string name="local_index_gpx_info_show">"\n\nTuriet nospiestu, lai iegūtu opcijas"</string>
   <string name="local_index_gpx_info_speed">"\nVidējais ātrums : %1$s \nMaksimālais ātrums : %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nVidējais augstums : %1$.0f m\nMinimālais augstums : %2$.0f m\nMaksimālais augstums : %3$.0f m\nAugšup : %4$.0f m\nLejup : %5$.0f m"</string>
+  <string name="local_index_gpx_info_elevation">"\nVidējais augstums : %1$s\nMinimālais augstums : %2$s\nMaksimālais augstums : %3$s\nAugšup : %4$s\nLejup : %5$s"</string>
   <string name="local_index_gpx_info">Subtracks : %1$d\nKopā punkti : %2$d\nGalamērķi : %3$d\nKopējais attālums : %4$s\nSākuma laiks : %5$tF, %5$tR\nBeigu laiks : %6$tF, %6$tR</string>
   <string name="local_index_installed">Izmaiņas</string>
   <string name="local_index_items_backuped">%1$d no %2$d vienībām veiksmīgi deaktivizētas.</string>

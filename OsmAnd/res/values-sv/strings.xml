@@ -653,7 +653,7 @@
 	<string name="renderers_descr">Välj renderingsutseende</string>
 	<string name="poi_context_menu_website">Visa POI-webbplats</string>
 	<string name="poi_context_menu_call">Visa POI-telefon</string>
-	<string name="local_index_gpx_info_elevation">\nGenomsnittligt höjd: %1$.0f m\nLägsta höjd: %2$.0f m\nHögsta höjd: %3$.0f m\nUppstigning: %4$.0f m\nNedstigning: %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\nGenomsnittligt höjd: %1$s\nLägsta höjd: %2$s\nHögsta höjd: %3$s\nUppstigning: %4$s\nNedstigning: %5$s</string>
 	<string name="local_index_gpx_info">Subtracks: %1$d\nTotalt antal punkter: %2$d\nWaypoints: %3$d\nTotal sträcka: %4$s\nStarttid: %5$tF, %5$tR\nSluttid: %6$tF, %6$tR</string>
 	<string name="osmand_routing_experimental">OsmAnd offline-navigering är en experimentell funktion och den fungerar inte för sträckor över c:a 20 km.\n\nNavigeringstjänsten är tillfälligt kopplad till online CloudMade.</string>
 	<string name="website">webbplats</string>

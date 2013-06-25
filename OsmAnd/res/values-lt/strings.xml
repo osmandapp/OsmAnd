@@ -391,7 +391,7 @@
   <string name="vector_data_missing">SD kortelėje nėra parsiųstų žemėlapių. Pirmiausia parsisiųskite žemėlapius, kad vėliau galėtumėte jais naudotis be interneto.</string>
   <string name="local_index_gpx_info_show">\n\nPaspauskite ir laikykite nustatymams atidaryti</string>
   <string name="local_index_gpx_info_speed">\nVidutinis greitis : %1$s \nDidžiausias greitis : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nVidutinis aukštis : %1$.0f m\nMažiausias aukštis : %2$.0f m\nDidžiausias aukštis : %3$.0f m\nKopimas : %4$.0f m\nNusileidimas : %5$.0f m</string>
+  <string name="local_index_gpx_info_elevation">\nVidutinis aukštis : %1$s\nMažiausias aukštis : %2$s\nDidžiausias aukštis : %3$s\nKopimas : %4$s\nNusileidimas : %5$s</string>
   <string name="local_index_gpx_info">Sudėtinai maršrutai : %1$d\nIš viso taškų : %2$d\nMaršruto taškų : %3$d\nBendras atstumas : %4$s\nPradžios laikas : %5$tF, %5$tR\nPabaigos laikas : %6$tF, %6$tR</string>
   <string name="local_index_installed">Atnaujinta</string>
   <string name="local_index_items_backuped">Sėkmingai deaktyvuota(-as) %1$d iš %2$d elementų(-o).</string>

@@ -290,7 +290,7 @@
 	<string name="vector_data_missing">탑재된 (\'오프라인\') 데이터가 SD 카드에 없습니다. 맵을 오프라인으로 사용하기 위해 다운로드를 고려하시기 바랍니다.</string>
 	<string name="local_index_gpx_info_show">\n\n긴 클릭 옵션</string>
 	<string name="local_index_gpx_info_speed">\n평균 속도 : %1$s \n최대 속도 : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\n평균 고도 : %1$.0f m\n최소 고도 : %2$.0f m\n최대 고도 : %3$.0f m\n오르막 : %4$.0f m\n내리막 : %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\n평균 고도 : %1$s\n최소 고도 : %2$s\n최대 고도 : %3$s\n오르막 : %4$s\n내리막 : %5$s</string>
 	<string name="local_index_gpx_info">Subtracks : %1$d\n전체 지점 : %2$d\n경유 지점 : %3$d\n총 거리 : %4$s\n시작 시간 : %5$tD %5$tR\n종료 시간 : %6$tD %6$tR</string>
 	<string name="local_index_items_backuped">%2$d 개의 아이템 중 %1$d 가 성공적으로 비활성화되었습니다.</string>
 	<string name="local_index_items_deleted">%2$d 개의 아이템 중 %1$d 가 성공적으로 삭제되었습니다.</string>

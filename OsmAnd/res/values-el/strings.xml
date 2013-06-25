@@ -485,7 +485,7 @@
 	<string name="local_index_gpx_info_show">\n\nΠατήστε και κρατήστε για επιλογές</string>
 	<string name="local_index_gpx_info_speed">\nΜέση ταχύτητα : %1$s
 \nΜέγιστη ταχύτητα : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nΜέσο υψόμετρο : %1$.0f μ\nΕλάχιστο υψόμετρο : %2$.0f μ\nΜέγιστο υψόμετρο : %3$.0f μ\nΑναβάσεις : %4$.0f μ\nΚαταβάσεις : %5$.0f μ</string>
+	<string name="local_index_gpx_info_elevation">\nΜέσο υψόμετρο : %1$s\nΕλάχιστο υψόμετρο : %2$s\nΜέγιστο υψόμετρο : %3$s\nΑναβάσεις : %4$s\nΚαταβάσεις : %5$s</string>
 	<string name="local_index_gpx_info">Υποΐχνη : %1$d\nΣύνολο σημείων : %2$d\nΣημεία διαδρομής : %3$d\nΣυνολική απόσταση : %4$s\nΏρα έναρξης : %5$tF, %5$tR\nΏρα τερματισμού : %6$tF, %6$tR</string>
 	<string name="local_index_installed">Έκδοση</string>
 	<string name="local_index_items_backuped">%1$d από %2$d αντικείμενο(α) απενεργοποιήθηκαν επιτυχώς.</string>

@@ -633,7 +633,7 @@
 	<string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
 	<string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
-	<string name="local_index_gpx_info_elevation">\nGennemsnits højde: %1$.0f m\nMinimum højde: %2$.0f m\nMaksimum højde: %3$.0f m\nStigninger: %4$.0f m\nFald: %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\nGennemsnits højde: %1$s\nMinimum højde: %2$s\nMaksimum højde: %3$s\nStigninger: %4$s\nFald: %5$s</string>
 	<string name="local_index_gpx_info">Delspor: %1$d\nTotale punkter: %2$d\nRutepunkter: %3$d\nSamlet afstand: %4$s\nStarttid: %5$tF, %5$tR\nSluttid: %6$tF, %6$tR</string>
 	<string name="local_index_installed">Udgave</string>
 	<string name="local_index_items_backuped">%1$d af %2$d emner deaktiveret.</string>

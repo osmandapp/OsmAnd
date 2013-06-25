@@ -582,7 +582,7 @@
 	<string name="local_index_gpx_info_show">\n\nPritisnite i držite za opcije</string>
 	<string name="local_index_gpx_info_speed">\nSrednja brzina: %1$s
 \nMaksimalna brzina: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nSrednja visina: %1$.0f m\nMinimalna visina: %2$.0f m\nMaksimaljna visina: %3$.0f m\nUsponi: %4$.0f m\nNizbrdica: %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\nSrednja visina: %1$s\nMinimalna visina: %2$s\nMaksimaljna visina: %3$s\nUsponi: %4$s\nNizbrdica: %5$s</string>
 	<string name="local_index_installed">Izdanje</string>
 	<string name="precise_routing_mode">Precizni način navođenja (alfa)</string>
     <string name="av_def_action_choose">Odaberite na zahtjev</string>

@@ -224,7 +224,7 @@
   <string name="vector_data_missing">Nincsenek offline használható adatok az SD kártyán. A térképek offline használathoz le kell töltened a kívánt területet.</string>
   <string name="local_index_gpx_info_show">\n\nHosszan megnyomva további lehetőségek</string>
   <string name="local_index_gpx_info_speed">\nÁtlagsebesség: %1$s \nLegnagyobb sebesség: %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$.0f m\nLegkisebb magasság: %2$.0f m\nLegnagyobb magasság: %3$.0f m\nEreszkedés: %4$.0f m\nEmelkedés: %5$.0f m</string>
+  <string name="local_index_gpx_info_elevation">\nÁtlagos magasság: %1$s\nLegkisebb magasság: %2$s\nLegnagyobb magasság: %3$s\nEreszkedés: %4$s\nEmelkedés: %5$s</string>
   <string name="local_index_gpx_info">Rész útvonal: %1$d\nÖsszes pont: %2$d\nÚtpontok: %3$d\nTeljes távolság: %4$s\nIndulás: %5$tF, %5$tR\nÉrkezés: %6$tF, %6$tR</string>
   <string name="local_index_installed">Kiadás</string>
   <string name="local_index_items_backuped">%2$d darabból %1$d sikeresen deaktiválva.</string>

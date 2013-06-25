@@ -81,7 +81,7 @@
   <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Musisz je najpierw pobrać, by używać map offline.</string>
   <string name="local_index_gpx_info_show">\n\nPrzytrzymaj, aby wyświetlić opcje</string>
   <string name="local_index_gpx_info_speed">"\nŚrednia prędkość: %1$s \nMaksymalna prędkość: %2$s"</string>
-  <string name="local_index_gpx_info_elevation">"\nŚrednia wysokość: %1$.0f m\nMinimalna wysokość: %2$.0f m\nMaksymalna wysokość: %3$.0f m\nWzniosy: %4$.0f m\nSpadki: %5$.0f m"</string>
+  <string name="local_index_gpx_info_elevation">"\nŚrednia wysokość: %1$s\nMinimalna wysokość: %2$s\nMaksymalna wysokość: %3$s\nWzniosy: %4$s\nSpadki: %5$s"</string>
   <string name="local_index_gpx_info">Podścieżki: %1$d\nWszystkie punkty: %2$d\nPunkty pośrednie: %3$d\nCałkowity dystans: %4$s\nCzas startu: %5$tF, %5$tR\nCzas zakończenia: %6$tF, %6$tR</string>
   <string name="local_index_installed">Wydanie</string>
   <string name="local_index_items_backuped">%1$d z %2$d zarchiwizowano.</string>

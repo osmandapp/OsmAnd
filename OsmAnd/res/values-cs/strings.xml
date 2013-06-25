@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="switch_to_raster_map_to_see">Vektorové mapy toto místo neobsahují. Mapová data můžete stáhnout v Nastaveních (Offline data), nebo se přepněte na online mapy.</string>
   <string name="tip_recent_changes_0_7_2_t">"Změny ve verzi 0.7.2 :
 \n\t- Native rendering pro všechna zařízení
@@ -275,7 +275,7 @@
   <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
   <string name="local_index_gpx_info_speed">\nPrůměrná rychlost : %1$s
 \nMaximální rychlost : %2$s</string>
-  <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$.0f metrů\nStoupání : %2$.0f metrů\nKlesání : %3$.0f metrů  \nAscents: %4$.0f m\nDescents: %5$.0f m</string>
+  <string name="local_index_gpx_info_elevation">\nPrůměrná výška : %1$s\nStoupání : %2$s\nKlesání : %3$s\nAscents: %4$s\nDescents: %5$s</string>
   <string name="local_index_gpx_info">Podtrasy : %1$d\nCelkem bodů : %2$d\nTrasových bodů : %3$d\nCelková vzdálenost : %4$s
 \nPočáteční čas : %5$tF, %5$tR\nKoncový čas : %6$tF, %6$tR</string>
   <string name="local_index_installed">Vydání</string>

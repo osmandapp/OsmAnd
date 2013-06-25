@@ -385,7 +385,7 @@
 <string name="button_upgrade_osmandplus">Actualitza a l\'OsmAnd+</string>
 <string name="favorite_home_category">Casa</string>
 <string name="local_index_gpx_info_show">\n\nPremeu i manteniu per veure les opcions</string>
-<string name="local_index_gpx_info_elevation">\nAltitud mitjana: %1$.0f m\nAltitud mínima: %2$.0f m\nAltitud màxima: %3$.0f m\nAscensió: %4$.0f m\nDescensió: %5$.0f m</string>
+<string name="local_index_gpx_info_elevation">\nAltitud mitjana: %1$s\nAltitud mínima: %2$s\nAltitud màxima: %3$s\nAscensió: %4$s\nDescensió: %5$s</string>
 <string name="local_index_no_items_to_do">No hi ha ítems per %1$s</string>
 <string name="local_index_tile_data">Dades de tessel·les: %1$s
 \nNivell de zomm mínim: %2$d\nNivell de zoom màxim: %3$d\nEs pot baixar: %4$s

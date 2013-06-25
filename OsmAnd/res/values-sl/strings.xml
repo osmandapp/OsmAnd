@@ -546,7 +546,7 @@
 	<string name="local_index_gpx_info">Poti: %1$d\nVseh točk: %2$d\nVmesnih točk: %3$d\nDolžina: %4$s\nČas začetka: %5$tF, %5$tR\nČas konca: %6$tF, %6$tR</string>
 	<string name="local_index_gpx_info_speed">\nPovprečna hitrost: %1$s
 \nNajvečja hitrost: %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nPovprečna višina: %1$.0f m\nNajmanjša višina: %2$.0f m\nNajvečja višina: %3$.0f m\nDvig: %4$.0f m\nSpust: %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">\nPovprečna višina: %1$s\nNajmanjša višina: %2$s\nNajvečja višina: %3$s\nDvig: %4$s\nSpust: %5$s</string>
 	<string name="phone">Telefon</string>
 	<string name="get_directions">Navigacija</string>
 	<string name="follow">Začni</string>
