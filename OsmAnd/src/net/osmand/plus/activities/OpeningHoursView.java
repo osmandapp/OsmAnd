@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import net.osmand.plus.R;
-import net.osmand.util.OpeningHoursParser.BasicDayOpeningHourRule;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -40,7 +40,7 @@ public class OpeningHoursView {
 		this.ctx = ctx;
 	}
 	
-	public View createOpeningHoursEditView(List<BasicDayOpeningHourRule> t){
+	public View createOpeningHoursEditView(List<BasicOpeningHourRule> t){
 		this.time = new TimeAdapter(t);
 		// editing object
 		time.add(null);
@@ -80,15 +80,15 @@ public class OpeningHoursView {
 		return view;
 	}
 	
-	private class TimeAdapter extends ArrayAdapter<BasicDayOpeningHourRule> {
+	private class TimeAdapter extends ArrayAdapter<BasicOpeningHourRule> {
 		
-		public TimeAdapter(List<BasicDayOpeningHourRule> l ){
+		public TimeAdapter(List<BasicOpeningHourRule> l ){
 			super(ctx, R.layout.open_hours_list_item, l);
 		}
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			View row = convertView;
-			final BasicDayOpeningHourRule item = getItem(position);
+			final BasicOpeningHourRule item = getItem(position);
 			if(item == null){
 				TextView text = new TextView(getContext());
 				text.setText(ctx.getString(R.string.add_new_rule));
@@ -98,7 +98,7 @@ public class OpeningHoursView {
 
 					@Override
 					public void onClick(View v) {
-						BasicDayOpeningHourRule r = new BasicDayOpeningHourRule();
+						BasicOpeningHourRule r = new BasicOpeningHourRule();
 						r.setStartTime(timePickerStart.getCurrentHour()*60 + timePickerStart.getCurrentMinute());
 						r.setEndTime(timePickerEnd.getCurrentHour()*60 + timePickerEnd.getCurrentMinute());
 						
@@ -155,7 +155,7 @@ public class OpeningHoursView {
 		}
 	}
 	
-	public void showDaysDialog(final BasicDayOpeningHourRule item, final int positionToAdd) {
+	public void showDaysDialog(final BasicOpeningHourRule item, final int positionToAdd) {
 		Builder b = new AlertDialog.Builder(ctx);
 
 		boolean add = positionToAdd > -1;
@@ -207,7 +207,7 @@ public class OpeningHoursView {
 		
 	public void updateTimePickers() {
 		if (selectedRule > -1) {
-			BasicDayOpeningHourRule item = time.getItem(selectedRule);
+			BasicOpeningHourRule item = time.getItem(selectedRule);
 			if (item != null) {
 				notifyingTime = false;
 				timePickerStart.setCurrentHour(item.getStartTime() / 60);
@@ -222,7 +222,7 @@ public class OpeningHoursView {
 	public List<OpeningHoursRule> getTime() {
 		List<OpeningHoursRule> rules = new ArrayList<OpeningHoursRule>();
 		for (int i = 0; i < time.getCount(); i++) {
-			BasicDayOpeningHourRule r = time.getItem(i);
+			BasicOpeningHourRule r = time.getItem(i);
 			if (r != null) {
 				rules.add(r);
 			}

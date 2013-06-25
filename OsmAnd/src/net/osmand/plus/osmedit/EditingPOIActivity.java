@@ -24,7 +24,7 @@ import net.osmand.plus.activities.DialogProvider;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OpeningHoursView;
 import net.osmand.util.OpeningHoursParser;
-import net.osmand.util.OpeningHoursParser.BasicDayOpeningHourRule;
+import net.osmand.util.OpeningHoursParser.BasicOpeningHourRule;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
 import net.osmand.util.OpeningHoursParser.OpeningHoursRule;
 import android.app.AlertDialog;
@@ -528,12 +528,12 @@ public class EditingPOIActivity implements DialogProvider {
 			return null;
 		}
 		
-		List<BasicDayOpeningHourRule> simple = null;
+		List<BasicOpeningHourRule> simple = null;
 		if(time != null){
-			simple = new ArrayList<BasicDayOpeningHourRule>();
+			simple = new ArrayList<BasicOpeningHourRule>();
 			for(OpeningHoursRule r : time.getRules()){
-				if(r instanceof BasicDayOpeningHourRule){
-					simple.add((BasicDayOpeningHourRule) r);
+				if(r instanceof BasicOpeningHourRule){
+					simple.add((BasicOpeningHourRule) r);
 				} else {
 					time = null;
 					break;
