@@ -541,8 +541,8 @@ Aktiver under 'Menu' -&gt; 'Definer visning' -&gt; 'Vælg kortkilde…' -&gt; 'O
 	<string name="city_type_suburb">Forstad</string>
 	<string name="city_type_village">Landsby</string>
 	<string name="layer_poi_label">Interessepunkt-etiketter</string>
-	<string name="animate_route_off">Stop animation</string>
-	<string name="animate_route">Start animation</string>
+	<string name="animate_route_off">Stop simulering</string>
+	<string name="animate_route">Start simulering</string>
 	<string name="file_can_not_be_renamed">Fil kan ikke omdøbes.</string>
 	<string name="file_with_name_already_exists">Der eksisterer allerede en fil med det navn.</string>
 	<string name="gpx_navigation">GPX-rute</string>
@@ -1064,7 +1064,7 @@ For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen 'F
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til 'Indstillinger - Datahåndtering', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
-	<string name="filter_existing_indexes">Filer hentet</string>
+	<string name="filter_existing_indexes">Hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
 	<string name="select_all">Vælg alle</string>
 	<string name="reload">Genindlæs</string>
@@ -1285,9 +1285,9 @@ Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hove
 	<string name="search_nothing_found">Fandt ikke noget</string>
 	<string name="searching">Søger…</string>
 	<string name="searching_address">Søger adresse…</string>
-	<string name="search_osm_nominatim">Søg adresse ved hjælp af OSM Nominatim</string>
+	<string name="search_osm_nominatim">Online søgning ved hjælp af OSM Nominatim</string>
 	<string name="hint_search_online">Husnummer, gade, by</string>
-	<string name="search_online_address">Internet</string>
+	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks. online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoom niveau der hentes for online delkort</string>
 	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via 'Menu' -&gt; 'Definer visning' i kort visning.
@@ -1298,7 +1298,7 @@ OsmAnd understøtter også brugerdefinerede kilder.
 Skift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger ikon) eller når en rute oprettes.
 	</string>
 	<string name="tip_search_t">Søg efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
-Tryk på 'Søg' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen 2 valgmuligheder: 'Brug som destination' eller 'Vis på kort'.
+Tryk på 'Søg' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen 2 valgmuligheder: 'Kørselsvejledning' eller 'Vis på kort'.
 	</string>
 	<string name="tip_map_context_menu_t">Kortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
 Så åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
@@ -1307,7 +1307,7 @@ Kortets genvejsmenu indeholder alle handlinger der refererer til et punkt (en pl
 	<string name="osmand_routing_experimental">OsmAnd offline-navigation er en eksperimentel funktion og den virker ikke for afstande på mere end ca. 20 km.
 Navigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="default_buttons_ok">OK</string>
-	<string name="search_offline_address">Offline</string>
+	<string name="search_offline_address">Offline søgning</string>
 	<string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
 	<string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
 	<string name="router_service">Navigationstjeneste</string>
@@ -1527,4 +1527,6 @@ GPX-spor</string>
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
     <string name="destination_point">Destinationen %1$s</string>
-    </resources>
+    <string name="local_index_gpx_timespan">Periode: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">Tid i bevægelse: %1$d:%2$02d:%3$02d</string>
+	</resources>
