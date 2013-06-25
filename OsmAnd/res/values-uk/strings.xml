@@ -1121,7 +1121,8 @@
 	<string name="street_name">Вулиця</string>
 	<string name="hno">Номер будинку</string>
     <string name="tip_recent_changes_1_3_t">"Зміни в 1.3:\n\t* Краща підтримка пристроїв з великим екраном\n\t* Holo Тема (налаштування теми)
-\n\t* Додаткові налаштування компасу\n\t* Кнопка вгорі ліворуч на мапі замість кнопки «Меню» "</string>
+\n\t* Додаткові налаштування компасу\n\t* Кнопка вгорі ліворуч на мапі замість кнопки «Меню» "
+    </string>
     <string name="choose_osmand_theme_descr">Виберіть тему програми</string>
     <string name="choose_osmand_theme">Тема</string>
     <string name="select_address_activity">Виберіть адресу</string>
