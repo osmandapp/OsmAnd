@@ -239,27 +239,27 @@
 	<string name="map_settings_descr">設定地圖顯示</string>
 	<string name="osmand_rastermaps_plugin_description">顯示設定來組態多種線上或暫存的網格地圖作為基本地圖或者覆蓋/襯底的地圖，這些地圖還可以準備好離線複製到 OsmAnd 資料夾中。</string>
 	<string name="osmand_background_plugin_description">可在休眠(螢幕關閉)模式下經由定期的喚醒 GPS 進行追蹤與導航。</string>
-	<string name="osmand_accessibility_description">協助工具的設定。</string>
+	<string name="osmand_accessibility_description">顯示特殊協助工具的設定。</string>
 	<string name="extra_settings">進階設定</string>
 	<string name="osmand_monitoring_description">顯示便利設定來記錄您的行程到裝置端 GPX 檔或在線上使用網站的服務...</string>
 	<string name="osmand_extra_settings_description">顯示進階的地圖組態(比如增加地圖細節)和一些裝置的詳情。</string>
-	<string name="osmand_development_plugin_description">開發與除錯功能，如導航模擬或繪圖效能。</string>
+	<string name="osmand_development_plugin_description">顯示開發與除錯功能的設定，如導航模擬或繪圖效能。</string>
 	<string name="plugins_screen">外掛元件管理</string>
-	<string name="select_plugin_to_activate">觸碰外掛元件以啟用或關閉它。(可能需要重新啟動OsmAnd。)</string>
+	<string name="select_plugin_to_activate">觸碰外掛元件以啟用或關閉它。(可能需要重新啟動 OsmAnd。)</string>
 	<string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
 	<string name="prefs_plugins">外掛元件管理</string>
-	<string name="osm_editing_plugin_description">顯示 OSM 回報所需的設定，如收集/修改 OSM POI 物件、開啟/評論OSM錯誤、貢獻 GPX 檔案(需有OSM帳號)。</string>
-	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示較表，但可能在某些裝置無法使用。</string>
+	<string name="osm_editing_plugin_description">顯示 OSM 回報所需的設定，如收集/修改 OSM POI 物件、開啟/評論 OSM 錯誤、提供 GPX 檔案(需有OSM帳號)。</string>
+	<string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
 	<string name="play_commands_of_currently_selected_voice">用目前選擇的語音播放指令</string>
-	<string name="debugging_and_development">OsmAnd開發</string>
+	<string name="debugging_and_development">OsmAnd 開發</string>
 	<string name="native_rendering">原生繪圖</string>
 	<string name="test_voice_prompts">測試語音提示</string>    
 	<string name="switch_to_raster_map_to_see">該地區目前沒有離線向量地圖，您可在設定功能下載(資料管理)或切換成線上地圖。</string>
-	<string name="send_files_to_osm">將GPX檔傳到OSM？</string>
-	<string name="gpx_visibility_txt">可視</string>
+	<string name="send_files_to_osm">傳送 GPX 檔案到 OSM？</string>
+	<string name="gpx_visibility_txt">能見度</string>
 	<string name="gpx_tags_txt">旗標</string>
-	<string name="gpx_description_txt">說明</string>
-	<string name="validate_gpx_upload_name_pwd">請指定OSM的帳號、密碼以上傳GPX。</string>
+	<string name="gpx_description_txt">描述</string>
+	<string name="validate_gpx_upload_name_pwd">請指定 OSM 的帳號、密碼以上傳 GPX 檔案。</string>
     	<string name="default_buttons_support">支援</string>
 	<string name="support_new_features">支援新功能</string>
 	<string name="show_ruler_level">顯示比例尺</string>	
@@ -270,14 +270,14 @@
 	<string name="accessibility_extensions_descr">舊版協助工具</string>
 	<string name="accessibility_extensions">協助工具</string>
 	<string name="accessibility_mode">協助模式</string>
-	<string name="accessibility_mode_descr">啟用協助工具</string>
+	<string name="accessibility_mode_descr">開啟協助工具功能</string>
 	<string name="accessibility_on">開啟</string>
 	<string name="accessibility_off">關閉</string>
 	<string name="accessibility_default">依據全系統設定</string>
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">放大</string>
-	<string name="zoomIs">比例尺為</string>
+	<string name="zoomIs">縮放為</string>
 	<string name="north">北方</string>
 	<string name="north_north_east">北北東</string>
 	<string name="north_east">東北</string>
@@ -310,44 +310,44 @@
 	<string name="direction_style_sidewise">方向方位 (8個方位)</string>
 	<string name="direction_style_clockwise">時鐘方位(12個方位)</string>
 	<string name="settings_direction_style">方位風格</string>
-	<string name="settings_direction_style_descr">選擇移動時顯示相對方位風格</string>
-	<string name="auto_announce_on">啟動自動通知</string>
+	<string name="settings_direction_style_descr">選擇風格來表示移動時顯示的相對方向</string>
+	<string name="auto_announce_on">啟動自動通告</string>
 	<string name="auto_announce_off">關閉自動通知</string>
 	<string name="scroll_map_by_gestures_descr">以觸控式螢幕手勢移動地圖</string>
-	<string name="scroll_map_by_gestures">自然地圖捲動(NUI)</string>
-	<string name="i_am_here">我在這兒</string>
+	<string name="scroll_map_by_gestures">自然的捲動地圖</string>
+	<string name="i_am_here">我的位置</string>
 	<string name="zoom_by_trackball_descr">以軌跡球水平移動改變地圖縮放</string>
 	<string name="zoom_by_trackball">以軌跡球控制地圖縮放</string>
 	<string name="use_short_object_names_descr">用簡短的物件名稱在觸控探索模式上</string>
 	<string name="use_short_object_names">使用物件名稱</string>
-	<string name="accessibility_preferences_descr">協助工具相關偏好</string>
+	<string name="accessibility_preferences_descr">協助工具的相關偏好設定</string>
 	<string name="accessibility_preferences">協助工具</string>
 	<string name="rendering_out_of_memory">無足夠的處理記憶體以顯示選擇的區域</string>
 	<string name="use_fluorescent_overlays">螢光色的覆蓋層</string>
 	<string name="use_fluorescent_overlays_descr">使用螢光色顯示航跡與導航路線</string>
 	<string name="offline_edition">離線編輯</string>
 	<string name="offline_edition_descr">永遠使用離線編輯</string>
-	<string name="update_poi_does_not_change_indexes">在程式中修改興趣景點不會影響到下載的地圖，修改的資料是另存在裝置上的內部檔案。</string>
+	<string name="update_poi_does_not_change_indexes">在程式中修改興趣點不會影響到下載的地圖檔案，修改的資料是另存在裝置上的內部檔案。</string>
 	<string name="local_openstreetmap_uploading">上傳中…</string>
 	<string name="local_openstreetmap_were_uploaded">{0} 興趣點/錯誤已上傳</string>
 	<string name="local_openstreetmap_uploadall">全部上傳</string>
 	<string name="local_openstreetmap_show">在地圖上顯示</string>
 	<string name="local_openstreetmap_upload">上傳修改部份到OSM</string>
 	<string name="local_openstreetmap_delete">刪除修改部份</string>
-	<string name="local_openstreetmap_descr_title">與OSM非同步編輯：</string>
-	<string name="local_openstreetmap_settings">裝置端儲存的OSM景點與問題</string>
-	<string name="local_openstreetmap_settings_descr">顯示/管理裝置端的OSM景點/問題資料庫</string>
+	<string name="local_openstreetmap_descr_title">與 OSM 非同步編輯：</string>
+	<string name="local_openstreetmap_settings">裝置端已儲存的 OSM 興趣點/問題</string>
+	<string name="local_openstreetmap_settings_descr">顯示和管理在裝置端資料庫的 OSM 興趣點/問題注解</string>
 	<string name="live_monitoring_descr">傳送航跡到指定的網路服務</string>
-	<string name="live_monitoring">線上實況追蹤</string>
-	<string name="live_monitoring_interval_descr">指定實況追蹤間隔</string>
-	<string name="live_monitoring_interval">實況追蹤間隔</string>
-	<string name="live_monitoring_url_descr">指定位置的參數語法： 緯度={0}, 經度={1}, 時戳={2}, hdop={3}, 高度={4}, 速度={5}</string>
-	<string name="live_monitoring_url">網路實況追蹤位置</string>
+	<string name="live_monitoring">線上即時追蹤</string>
+	<string name="live_monitoring_interval_descr">指定線上即時追蹤間隔</string>
+	<string name="live_monitoring_interval">線上即時追蹤間隔</string>
+	<string name="live_monitoring_url_descr">指定位置的參數語法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
+	<string name="live_monitoring_url">線上即時追蹤網路地址</string>
 	<string name="gpx_monitoring_disabled_warn">請啟用\'記錄航跡成 GPX 檔案\'設定。</string>
 	<string name="show_current_gpx_title">顯示目前航跡</string>
-	<string name="free_version_message">此免費版 OsmAnd只能下載%1$s 個 且不支援離線維基百科的資料。</string>
+	<string name="free_version_message">此 OsmAnd 免費版，只能下載 %1$s 個，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
-	<string name="poi_context_menu_showdescription">顯示興趣點說明</string>
+	<string name="poi_context_menu_showdescription">顯示興趣點描述</string>
 	<string name="index_name_north_america">北美洲</string>
 	<string name="index_name_us">北美 - 美國</string>
 	<string name="index_name_central_america">中美洲</string>
@@ -360,13 +360,13 @@
 	<string name="index_name_asia">亞洲</string>
 	<string name="index_name_oceania">大洋洲</string>
 	<string name="index_name_other">全世界與主題地圖</string>
-	<string name="index_name_wiki">全世界維基百科</string>
-	<string name="index_name_voice">語音包(錄音的)</string>
-	<string name="index_name_tts_voice">語音包(TTS)</string>
+	<string name="index_name_wiki">全世界維基百科 POI</string>
+	<string name="index_name_voice">語音包 (真人)</string>
+	<string name="index_name_tts_voice">語音包 (TTS)</string>
 	<string name="amenity_type_wikiosm">維基百科 (離線)</string>
 	<string name="amenity_type_user_defined">使用者定義</string>
 	<string name="fav_export_confirmation">我的最愛已有上次匯出的檔，要取代它嗎？</string>
-	<string name="profile_settings">外觀詳細設定</string>
+	<string name="profile_settings">外觀具體的設定</string>
 	<string name="settings_preset">預設設定檔</string>
 	<string name="settings_preset_descr">檢視地圖和導航設定，記住每個使用設定檔。在這裡設定您的預設設定檔。</string>
 	<string name="routing_settings">導航</string>
@@ -374,12 +374,12 @@
 	<string name="global_settings">全區設定</string>
 	<string name="index_settings">資料管理</string>
 	<string name="general_settings">一般設定</string>
-	<string name="general_settings_descr">調整全區設定</string>
-	<string name="global_app_settings">全區軟體設定</string>
-	<string name="user_name">您的OSM帳號</string>
+	<string name="general_settings_descr">組態應用程式顯示和共通設定</string>
+	<string name="global_app_settings">全區程式設定</string>
+	<string name="user_name">您 OSM 的使用者名稱</string>
 	<string name="user_name_descr">需要在openstreetmap.org註冊</string>
-	<string name="user_password">您的OSM密碼</string>
-	<string name="user_password_descr">需要在openstreetmap.org註冊</string>
+	<string name="user_password">您 OSM 的密碼</string>
+	<string name="user_password_descr">需要在 openstreetmap.org 註冊</string>
 	<string name="osmand_service">休眠模式功能</string>
 	<string name="osmand_service_descr">螢幕關閉時執行 OsmAnd</string>
 	<string name="tip_rotation_switching">地圖方向</string>
@@ -389,7 +389,7 @@
 		\n\t\'前方朝上\' - 地圖將以車頭向前旋轉。
 		\n\t\'依羅盤\' - 地圖將參加羅盤旋轉
 	</string>
-	<string name="binary_map_download_success">下載完成。\n\t\n\t透由 \'選項\' -&gt; \'定義畫面\' -&gt; \'地圖來源...\' -&gt; \'離線向量地圖\' 啟用。</string>
+	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源...\' -&gt; \'離線向量地圖\'啟動使用。</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
 	<string name="tip_day_night_mode_t_v2">\t部份的向量地圖的地圖顯示可在日間(較亮)與夜間(較暗)之間切換.
 		\n\t夜間顏色是在夜間行駛比較安全。
@@ -400,7 +400,7 @@
 		\n\t\'夜間\' - 永遠使用夜間模式
 		\n\t\'光線感應器\' - 地圖顯示以裝置上的光線感應器來控制
 	</string>	
-	<string name="tip_osm_improve">改善OSM資料</string>
+	<string name="tip_osm_improve">改善 OSM 資料</string>
 	<string name="tip_osm_improve_t">\tOsmAnd 使用 OSM 資料為底的地圖，可利用它來改善 OSM 的資料品質。只要點幾下您就可增新/上傳新的興趣點或回報 OSM 的問題！
 		\n\t首先您需在\'設定\' -&gt; \'一般設定\' -&gt; \''OSM 編輯\'提供您登入 OSM 的資料 。.
 		\n\t使用地圖內容選單中的\'新增興趣點\'來新增興趣點， 然後在\'新增興趣點\'的對話框輸入興趣點相關資訊，最後按確認。
@@ -413,10 +413,10 @@
 	<string name="tip_select_destination_point_t">\t您可以直接在地圖上選定目的地 (在內容選單上選 \'設為目的地\')，這用於所有的查尋動作或者是長按進入\'我的最愛地點列表\'。
 		\n\t目的地標點以橘色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位 (以橘色三角形指示)。
 	</string> 
-	<string name="use_transparent_map_theme">透明版面</string>
+	<string name="use_transparent_map_theme">透明主題</string>
 	<string name="native_library_not_supported">該裝置不支援原生函式庫。</string>
 	<string name="init_native_library">初始化原生函式庫…</string>
-	<string name="choose_auto_follow_route">地圖自動置中</string>
+	<string name="choose_auto_follow_route">地圖檢視自動置中</string>
 	<string name="choose_auto_follow_route_descr">一段時間後地圖會移到目前位置</string>
 	<string name="auto_follow_route_never">永不</string>
 	<string name="auto_follow_route_navigation">導航時自動置中</string>
