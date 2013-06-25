@@ -1510,4 +1510,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="edit_filter_create_message">Filter {0} has been created</string>
 	<string name="default_buttons_selectall">Select All</string>
 	<string name="email">email</string>
+	<string name="av_camera_focus">Camera focus type</string>
+	<string name="av_camera_focus_descr">Select internal camera focus type</string>
+	<string name="av_camera_focus_auto">Auto focus</string>
+	<string name="av_camera_focus_hiperfocal">Hiperfocal focus</string>
+	<string name="av_camera_focus_edof">Extended depth of field (EDOF)</string>
+	<string name="av_camera_focus_infinity">Focus is set at infinity</string>
+	<string name="av_camera_focus_macro">Macro (close-up) focus mode</string>
+	<string name="av_camera_focus_continuous">The camera continuously tries to focus</string>
+	<string name="av_photo_play_sound">Play sound on photo shot</string>
+	<string name="av_photo_play_sound_descr">When shot photo play sound</string>
 </resources>
