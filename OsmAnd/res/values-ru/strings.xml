@@ -1199,4 +1199,14 @@
 	<string name="context_menu_item_destination_point">Установить как пункт назначения</string>
     <string name="please_select_address">Сначала выберите город или улицу</string>
     <string name="destination_point">Пункт назначения %1$s</string>
+	<string name="av_camera_focus">Режим фокусировки камеры</string>
+	<string name="av_camera_focus_descr">Режим фокусировки для встроенного приложения фотографирования</string>
+	<string name="av_camera_focus_auto">Автоматический фокус</string>
+	<string name="av_camera_focus_hiperfocal">Гиперфокальное или фиксированное</string>
+	<string name="av_camera_focus_edof">Увеличенная глубина резкозти (EDOF)</string>
+	<string name="av_camera_focus_infinity">Фокус на бесконечность</string>
+	<string name="av_camera_focus_macro">Макро-режим</string>
+	<string name="av_camera_focus_continuous">Постоянная фокусировка</string>
+	<string name="av_photo_play_sound">Звук затвора</string>
+	<string name="av_photo_play_sound_descr">Проигрывать звук при фотографировании</string>
     </resources>
