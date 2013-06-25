@@ -512,7 +512,7 @@
 	<string name="local_index_gpx_info_show">\n\nיש ללחוץ ולהחזיק כדי להגיע לאפשרויות</string>
 	<string name="local_index_gpx_info_speed">\nמהירות ממוצעת : %1$s
 \nמהירות מרבית : %2$s</string>
-	<string name="local_index_gpx_info_elevation">\nגובה ממוצע : %1$.0f מ׳\nגובה מזערי : %2$.0f מ׳\nגובה מרבי : %3$.0f מ׳\nעליות : %4$.0f מ׳\nירידות : %5$.0f מ׳</string>
+	<string name="local_index_gpx_info_elevation">\nגובה ממוצע : %1$s\nגובה מזערי : %2$s\nגובה מרבי : %3$s\nעליות : %4$s\nירידות : %5$s</string>
 	<string name="local_index_gpx_info">תת־מסלולים : %1$d\nסך כל הנקודות : %2$d\nנקודות ציון : %3$d\nמרחק כולל : %4$s\nמועד ההתחלה : %5$tF, %5$tR\nמועד הסיום : %6$tF, %6$tR</string>
 	<string name="local_index_installed">מהדורה</string>
 	<string name="local_index_items_backuped">%1$d מתוך %2$d פריטים נוטרלו בהצלחה.</string>
