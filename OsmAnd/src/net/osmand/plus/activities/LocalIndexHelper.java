@@ -202,23 +202,35 @@ public class LocalIndexHelper {
 			if(endTime == Long.MIN_VALUE){
 				endTime = f.lastModified();
 			}
-			
+
+			// OUTPUT:
+			// 1. Total distance, Start time, End time
 			info.setDescription(app.getString(R.string.local_index_gpx_info, totalTracks, points,
 					result.points.size(), OsmAndFormatter.getFormattedDistance(totalDistance, app),
 					startTime, endTime));
+
+			// 2. Time span
 			timeSpan = endTime - startTime;
 			info.setDescription(info.getDescription() + app.getString(R.string.local_index_gpx_timespan, (int) ((timeSpan / 1000) / 3600), (int) (((timeSpan / 1000) / 60) % 60), (int) ((timeSpan / 1000) % 60)));
+
+			// 3. Time moving, if any
 			if(timeMoving > 0){
 				info.setDescription(info.getDescription() +
 					app.getString(R.string.local_index_gpx_timemoving, (int) ((timeMoving / 1000) / 3600), (int) (((timeMoving / 1000) / 60) % 60), (int) ((timeMoving / 1000) % 60)));
 			}
 
+			// 4. Elevation, eleUp, eleDown, if recorded
 			if(totalElevation != 0 || diffElevationUp != 0 || diffElevationDown != 0){
 				info.setDescription(info.getDescription() +  
 						app.getString(R.string.local_index_gpx_info_elevation,
-						totalElevation / points, minElevation, maxElevation, diffElevationUp, diffElevationDown));
+						OsmAndFormatter.getFormattedDistance(totalElevation / points, app),
+						OsmAndFormatter.getFormattedDistance(minElevation, app),
+						OsmAndFormatter.getFormattedDistance(maxElevation, app),
+						OsmAndFormatter.getFormattedDistance(diffElevationUp, app),
+						OsmAndFormatter.getFormattedDistance(diffElevationDown, app)));
 			}
 
+			// 5. Max speed and Average speed, if any. Average speed is NOT overall (effective) speed, but only calculated for "moving" periods.
 			if(speedCount > 0){
 				if(timeMoving > 0){
 					info.setDescription(info.getDescription() +
@@ -235,6 +247,7 @@ public class LocalIndexHelper {
 				}
 			}
 
+			// 6. 'Long-press for options' message
 			info.setDescription(info.getDescription() +  
 						app.getString(R.string.local_index_gpx_info_show));
 		}
