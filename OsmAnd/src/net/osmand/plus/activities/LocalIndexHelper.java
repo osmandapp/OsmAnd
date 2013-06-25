@@ -128,6 +128,7 @@ public class LocalIndexHelper {
 			long endTime = Long.MIN_VALUE;
 			long timeSpan = 0;
 			long timeMoving = 0;
+			float totalDistanceMoving = 0;
 
 			double diffElevationUp = 0;
 			double diffElevationDown = 0;
@@ -189,6 +190,7 @@ public class LocalIndexHelper {
 							// Averaging speed values is less exact than totalDistance/timeMoving
 							if(speed > 0 && point.time != 0 && prev.time != 0){
 								timeMoving = timeMoving + (point.time - prev.time);
+								totalDistanceMoving += calculations[0];
 							}
 						}
 					}
@@ -221,8 +223,9 @@ public class LocalIndexHelper {
 				if(timeMoving > 0){
 					info.setDescription(info.getDescription() +
 						app.getString(R.string.local_index_gpx_info_speed,
-						OsmAndFormatter.getFormattedSpeed((float) (totalDistance / timeMoving * 1000), app),
+						OsmAndFormatter.getFormattedSpeed((float) (totalDistanceMoving / timeMoving * 1000), app),
 						OsmAndFormatter.getFormattedSpeed(maxSpeed, app)));
+						// (Use totalDistanceMoving instead of totalDistance for av-speed to ignore effect of position fluctuations at rest)
 				} else {
 					// Averaging speed values is less exact than totalDistance/timeMoving
 					info.setDescription(info.getDescription() +
