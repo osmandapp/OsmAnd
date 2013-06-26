@@ -50,7 +50,7 @@
 	<string name="auto_zoom_map">自動縮放地圖</string>
 	<string name="snap_to_road_descr">導航過程中對齊道路位置</string>
 	<string name="snap_to_road">對齊道路</string>
-	<string name="osmand_short_description_80_chars">OSM 地圖可在離線和線上為全球手機地圖查看和導航</string>
+	<string name="osmand_short_description_80_chars">可用於離線和線上的 OSM 地圖，為通用的手機地圖查看和導航</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -75,10 +75,10 @@
 
 		OsmAnd 正在積極開發與我們的專案並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助具體的新功能或在 osmand.net 網站上一般捐贈。
 	</string>
-	<string name="osmand_plus_short_description_80_chars">OSM 地圖可在離線和線上為全球手機地圖查看和導航</string>
+	<string name="osmand_plus_short_description_80_chars">可用於離線和線上的 OSM 地圖，為通用的手機地圖查看和導航</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ OsmAnd (OSM Automated Navigation Directions)
-		OsmAnd+ 為可使用全球的「開放街圖」(OSM)開放程式碼導航軟體。所有圖資(向量圖或網格圖)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
+		OsmAnd 是開放源碼導航應用程式訪問到各式各樣的全球 OpenStreetMap （OSM）資料。所有圖資(向量圖或網格圖)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
 
 主要功能：
  - 完整離線功能 (存放下載的向量圖或網格圖)
@@ -258,7 +258,7 @@
 	<string name="send_files_to_osm">傳送 GPX 檔案到 OSM？</string>
 	<string name="gpx_visibility_txt">能見度</string>
 	<string name="gpx_tags_txt">旗標</string>
-	<string name="gpx_description_txt">描述</string>
+	<string name="gpx_description_txt">敘述</string>
 	<string name="validate_gpx_upload_name_pwd">請指定 OSM 的帳號、密碼以上傳 GPX 檔案。</string>
     	<string name="default_buttons_support">支援</string>
 	<string name="support_new_features">支援新功能</string>
@@ -273,7 +273,7 @@
 	<string name="accessibility_mode_descr">開啟協助工具功能</string>
 	<string name="accessibility_on">開啟</string>
 	<string name="accessibility_off">關閉</string>
-	<string name="accessibility_default">依據全系統設定</string>
+	<string name="accessibility_default">配合全系統設定</string>
 	<string name="backToMenu">回主選單</string>
 	<string name="zoomOut">縮小</string>
 	<string name="zoomIn">放大</string>
@@ -347,7 +347,7 @@
 	<string name="show_current_gpx_title">顯示目前航跡</string>
 	<string name="free_version_message">此 OsmAnd 免費版，只能下載 %1$s 個，且不支援離線維基百科的文章資料。</string>
 	<string name="free_version_title">免費版</string>
-	<string name="poi_context_menu_showdescription">顯示興趣點描述</string>
+	<string name="poi_context_menu_showdescription">顯示興趣點敘述</string>
 	<string name="index_name_north_america">北美洲</string>
 	<string name="index_name_us">北美 - 美國</string>
 	<string name="index_name_central_america">中美洲</string>
@@ -639,26 +639,26 @@
 	<string name="m">公尺</string>
 	<string name="old_map_index_is_not_supported">舊地圖格式 \'\'{0}\'\' 已不支援</string>
 	<string name="poi_filter_closest_poi">最近興趣點</string>
-	<string name="poi_filter_custom_filter">設定篩選器</string>
-	<string name="poi_filter_namefinder">線上名稱查尋器</string>
+	<string name="poi_filter_custom_filter">自訂篩選</string>
+	<string name="poi_filter_namefinder">線上名稱尋找</string>
 	<string name="reading_cached_tiles">正在取讀暫存網格地圖 …</string>
-	<string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 不存在did not fit into memory</string>
+	<string name="version_index_is_big_for_memory">索引 \'\'{0}\'\' 不存在</string>
 	<string name="version_index_is_not_supported">這版本的 \'\'{0}\'\' 索引不支援</string>
 	<string name="use_osmand_routing_service">OsmAnd 導航 &gt; 20公里</string>
-	<string name="use_osmand_routing_service_descr">使用OsmAnd離線導航只運用在路線 &gt; 20 公里(實驗性的)</string>
-	<string name="osmand_routing_experimental">OsmAndd 離線導航是個實驗性的功能，它不能運作超過20公里。\n\n導航服務暫時切為線上的 CloudMade。</string>
+	<string name="use_osmand_routing_service_descr">使用 OsmAnd 離線導航僅適用于路線 &gt; 20 公里(實驗性的)</string>
+	<string name="osmand_routing_experimental">OsmAndd 離線導航是個實驗性的功能，它不能運作超過 20 公里的距離。\n\n導航服務暫時切為線上的 CloudMade。</string>
 	<string name="specified_dir_doesnt_exist">指定的目錄不存在。</string>
-	<string name="application_dir">儲存目錄</string>
-	<string name="application_dir_change_warning">更改儲存目錄不會移動或刪除資料。這個動作須與OsmAnd分開操作。要繼續嗎？</string>
+	<string name="application_dir">存儲目錄</string>
+	<string name="application_dir_change_warning">更改存儲目錄不會移動或刪除資料。這個動作須與 OsmAnd 分開操作。要繼續嗎？</string>
 	<string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的離線資料將被新版引用。但我的最愛內的地點須以舊版程式匯出後再用新版程式匯入。</string>
-	<string name="build_installed">組建 {0} 成功安裝({1})。</string>
-	<string name="downloading_build">下載組建…</string>
-	<string name="install_selected_build">您要安裝OsmAnd - {0} 由{1} {2} MB ?</string>
-	<string name="loading_builds_failed">檢索OsmAnd版本列表失敗</string>
-	<string name="loading_builds">下載OsmAnd …</string>
-	<string name="select_build_to_install">選擇 OsmAnd 組建安裝</string>
+	<string name="build_installed">建置 {0} 成功安裝({1})。</string>
+	<string name="downloading_build">下載建置…</string>
+	<string name="install_selected_build">您要安裝 OsmAnd - {0} 由{1} {2} MB ?</string>
+	<string name="loading_builds_failed">檢索 OsmAnd 建置列表失敗</string>
+	<string name="loading_builds">下載 OsmAnd 建置…</string>
+	<string name="select_build_to_install">選擇 OsmAnd 建置安裝</string>
 	<string name="contribution_activity">安裝的版本</string>
-	<string name="gps_status_app_not_found">GPS狀態工具未安裝，在到Play商場找嗎？</string>
+	<string name="gps_status_app_not_found">GPS 狀態工具未安裝，到 Play 商場找嗎？</string>
 	<string name="voice_is_not_available_msg">語音導航無法使用。請到設定功能選喜歡的語音資料且下載它。</string>
 	<string name="voice_is_not_available_title">未選定語音導航</string>
 	<string name="daynight_mode_day">日間</string>
@@ -669,18 +669,18 @@
 	<string name="daynight">日/夜間模式</string>
 	<string name="download_files_question">下載{0}個檔({1} MB)？</string>
 	<string name="items_were_selected">已選{0}項</string>
-	<string name="filter_existing_indexes">過濾已下載的</string>
+	<string name="filter_existing_indexes">篩選已下載的</string>
 	<string name="deselect_all">全不選</string>
 	<string name="select_all">全選</string>
 	<string name="reload">重整</string>
-	<string name="fast_route_mode">最快路徑</string>
-	<string name="fast_route_mode_descr">啟用尋找最快路徑或關閉尋找最短路徑 </string>
+	<string name="fast_route_mode">最快路線</string>
+	<string name="fast_route_mode_descr">啟用要計算的最快路線或停用最短路線 </string>
 	<string name="tiles_to_download_estimated_size">下載第{0}層 {1}張圖塊 ({2} MB)</string>
 	<string name="context_menu_item_download_map">下載地圖</string>
-	<string name="select_max_zoom_preload_area">選擇預載的最上層</string>
+	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放階</string>
 	<string name="maps_could_not_be_downloaded">此地圖無法下載</string>
-	<string name="continuous_rendering">連續渲染</string>
-	<string name="continuous_rendering_descr">以連續渲染顯示取代一次顯示</string>
+	<string name="continuous_rendering">連續繪製</string>
+	<string name="continuous_rendering_descr">顯示連續繪製而不是一次的圖像</string>
 	<string name="rendering_exception">在繪製選擇地區時發生錯誤</string>
 	<string name="show_point_options">使用位置...</string>
 	<string name="renderer_load_sucess">繪製器成功下載</string>
@@ -691,7 +691,7 @@
 	<string name="poi_context_menu_call">顯示興趣點電話</string>
 	<string name="website">網站</string>
 	<string name="phone">電話</string>
-	<string name="download_type_to_filter">類別篩選器</string>
+	<string name="download_type_to_filter">類別篩選</string>
 	<string name="use_high_res_maps">高解析顯示</string>
 	<string name="use_high_res_maps_descr">不要伸展（模糊）在高解析螢幕上的地圖圖塊</string>
 	<string name="download_files">下載</string>
@@ -1044,7 +1044,7 @@
     <string name="plugin_distance_point_hdop">精確度</string>
     <string name="use_distance_measurement_help">* 點選標記一個點。\n 
         * 在地圖上按住去刪除先前的點。\n
-        * 在點上按住以檢視並附加描述。\n
+        * 在點上按住以檢視並附加敘述。\n
         * 在測量小工具上點擊可看到更多作用。</string>
     <string name="default_buttons_do_not_show_again">不要再顯示</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
@@ -1489,4 +1489,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- GPX navigation options
 		\n\t- UI update and large bug fixing
 	</string>
+	<string name="local_index_gpx_timespan">\n時間跨距： %1$d：%2$02d：%3$02d</string>
+	<string name="local_index_gpx_timemoving">\n行駛時間： %1$d：%2$02d：%3$02d</string>
 	</resources>
