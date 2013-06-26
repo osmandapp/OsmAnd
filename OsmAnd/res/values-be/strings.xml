@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <!--
     	 Disclaimer: 
@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+	<string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTime moving: %1$d:%2$02d:%3$02d</string>
+	<string name="app_mode_default">Browse map</string>
+	<string name="settings_preset">Default profile</string>
+	<string name="settings_preset_descr">Map view and navigation settings are remembered per use profile. Set your default profile here.</string>
     <string name="destination_point">Destination %1$s</string>
     <string name="context_menu_item_destination_point">Ужыць як прызначэньне</string>
     <string name="please_select_address">Select city or street first</string>
@@ -49,8 +54,8 @@
     <string name="distance_measurement_save_gpx">Save as GPX</string>
     <string name="distance_measurement_load_gpx">Open existing GPX</string>
     <string name="wait_current_task_finished">Please wait until current task is finished</string>
-    <string name="use_kalman_filter_compass_descr">Use Kalman filter to avoid compass aberrations</string>
-    <string name="use_kalman_filter_compass">Use Kalman filter</string>
+    <string name="use_kalman_filter_compass_descr">Выкарыстоўваць фільтар Калман каб прадухіліць абэрацыю компасу</string>
+    <string name="use_kalman_filter_compass">Выкарыстоўваць фільтар Калман</string>
     <string name="access_mark_final_location_first">Accessibility mode : please select destination first</string> 
     <string name="use_magnetic_sensor_descr">Use magnetic sensor to determine compass value instead of orientation sensor</string>
     <string name="use_magnetic_sensor">Use magnetic sensor</string>
@@ -58,8 +63,8 @@
     <string name="files_limit">%1$d files left</string>
     <string name="available_downloads_left">Available %1$d files to download</string>
     <string name="install_paid">Full version</string>
-    <string name="cancel_route">Dismiss route</string>
-    <string name="cancel_navigation">Stop navigation</string>
+    <string name="cancel_route">Адкінуць шлях</string>
+    <string name="cancel_navigation">Спыніць навігацыю</string>
     <string name="clear_destination">Clear destination</string>
     <string name="download_using_mobile_internet">Currently WiFi is not connected. Do you want to continue downloading with current internet connection?</string>
     <string name="street_name">Вуліца</string>
@@ -80,7 +85,7 @@
     <string name="osmand_background_plugin_description">Show settings to enable tracking and navigation in sleep (screen off) mode via periodically waking up the GPS device.</string>
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose application theme</string>
-    <string name="choose_osmand_theme">App Theme</string>
+    <string name="choose_osmand_theme">App theme</string>
     <string name="accessibility_options">Accessibility options</string>
     <string name="select_address_activity">Абраць адрас</string>
     <string name="favourites_list_activity">Select favorite</string>
@@ -111,9 +116,9 @@
     <string name="item_checked">checked</string>
     <string name="item_unchecked">unchecked</string>
     <string name="map_view">Мапа</string>
-    <string name="prefer_motorways">Prefer motorways</string>
-	<string name="prefer_in_routing_title">Prefer…</string>
-	<string name="prefer_in_routing_descr">Prefer motorways</string>
+    <string name="prefer_motorways">Аўтамагістралі</string>
+	<string name="prefer_in_routing_title">Аддаваць перавагу…</string>
+	<string name="prefer_in_routing_descr">Аўтамагістралі</string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_hillshade_item">Hillshade</string>
@@ -128,7 +133,7 @@
     
     <string name="local_indexes_cat_srtm">Contour lines data</string>
     <string name="local_indexes_cat_av">Audio/Video data</string>
-    <string name="stop_routing_confirm">Are you sure you want to stop the navigation?</string>
+    <string name="stop_routing_confirm">Сапраўды спыніць навігацыю ?</string>
     <string name="clear_dest_confirm">Are you sure you want to clear your destination point (and waypoints)?</string>
     <string name="precise_routing_mode_descr">Enable precise routing to calculate precise routes without glitches. It is very limited by distance and doesn\'t use native library.</string>
     <string name="precise_routing_mode">Precise routing (alpha)</string>
@@ -156,7 +161,7 @@
     <string name="av_settings_descr">Configure audio and video settings</string>
     <string name="av_settings">Audio/video settings </string>
     <string name="recording_error">Error ocurred while recording </string>
-    <string name="recording_camera_not_available">Camera is not available</string>
+    <string name="recording_camera_not_available">Няма камэры</string>
     <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
@@ -212,16 +217,16 @@
     <string name="map_widget_max_speed">Абмежаваньне хуткасьці</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, lon %2$.3f</string>
-    <string name="route_descr_current_location">Current position</string>
-    <string name="route_descr_from_to">From: %1$s\nTo: %2$s</string>
-    <string name="route_descr_from_to_via">From: %1$s\nVia: %2$s\nTo: %3$s</string>
+    <string name="route_descr_current_location">Гэтае месца</string>
+    <string name="route_descr_from_to">Ад: %1$s\nУ: %2$s</string>
+    <string name="route_descr_from_to_via">Ад: %1$s\nПраз: %2$s\nУ: %3$s</string>
     <string name="no_buildings_found">No buildings found.</string>
     <string name="incremental_search_city">Search city incrementally</string>
     <string name="search_villages_and_postcodes">Search villages/postcode</string>
 	<string name="rendering_attr_showRoadMaps_description">Select when to display roads-only maps:</string>
 	<string name="rendering_attr_showRoadMaps_name">Roads-only maps</string>
-    <string name="safe_mode_description">Run the application in safe mode (using slower Android instead of native code).</string>
-    <string name="safe_mode">Safe mode</string>
+    <string name="safe_mode_description">Працаваць у бясьпечным рэжыме (трохі павольней але без родных бібліятэк).</string>
+    <string name="safe_mode">Бясьпечны рэжым</string>
     <string name="native_library_not_running">The application is running in safe mode (disable it in the Settings).</string>
     <string name="background_service_is_enabled_question">OsmAnd sleep mode service is still running. Do you want to turn it off?</string>
     <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
@@ -241,8 +246,8 @@
 	<string name="rendering_attr_roadColors_name">Road color scheme</string>
     <string name="map_widget_show_destination_arrow">Show destination direction</string>
     <string name="enable_plugin_monitoring_services">Enable tracking plugin to use position logging services (GPX recording, online tracking)</string>
-    <string name="non_optimal_route_calculation">Calculate possibly non-optimal route over long distances</string>
-	<string name="gps_not_available">Please enable GPS in the settings</string>
+    <string name="non_optimal_route_calculation">Разьлічыць прыблізны шлях на вялікія адлегласьці</string>
+	<string name="gps_not_available">Калі ласка, дазвольце GPS у наладах</string>
     <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
 	\n\t* Waypoints
 	\n\t* Improved route guidance
@@ -261,7 +266,7 @@
     <string name="add_as_first_destination_point">Add as first waypoint</string>
     <string name="replace_destination_point">Replace destination point</string>
     <string name="new_destination_point_dialog">You already have destination point set.</string>
-    <string name="target_points">Waypoints</string>
+    <string name="target_points">Кропкі шляху</string>
     <string name="intermediate_point_too_far">Waypoint %1$s too far from nearest road.</string>
     <string name="arrived_at_intermediate_point">You have arrived at your waypoint</string>
     <string name="context_menu_item_intermediate_point">Add as waypoint</string>
@@ -280,7 +285,7 @@
 	<string name="poi_filter_food_shop">Food shop</string>
 	<string name="poi_filter_for_tourists">For tourists</string>
 	<string name="poi_filter_fuel">Fuel</string>
-	<string name="show_warnings_title">Show alarms…</string>
+	<string name="show_warnings_title">Папярэджваць…</string>
 	<string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
 	<string name="use_compass_navigation">Use compass</string>
@@ -508,10 +513,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
 	<string name="layer_map_appearance">Сканфігураваць экран…</string>
-	<string name="show_lanes">Show lanes</string>
+	<string name="show_lanes">Паказваць палосы</string>
 	<string name="avoid_unpaved">Avoid unpaved roads</string>
 	<string name="avoid_ferries">Avoid ferries</string>
-	<string name="avoid_in_routing_title">Avoid…</string>
+	<string name="avoid_in_routing_title">Пазьбягаць…</string>
 	<string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
 	<string name="map_widget_fluorescent">Fluorescent routes</string>
 	<string name="map_widget_show_ruler">Ruler</string>
@@ -549,10 +554,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="bg_service_screen_unlock">Unlock screen</string>
 	<string name="bg_service_screen_lock_toast">The screen is locked</string>
 	<string name="bg_service_interval">Set wake-up interval:</string>
-	<string name="show_cameras">Show speed cameras</string>
-	<string name="show_traffic_warnings">Show traffic warnings</string>
+	<string name="show_cameras">Камэры хуткасьці</string>
+	<string name="show_traffic_warnings">Заўвагі руху</string>
 	<string name="avoid_toll_roads">Avoid toll roads</string>
-	<string name="continue_follow_previous_route_auto">Previous navigation was unfinished. Continue following it? (%1$s seconds)</string>
+	<string name="continue_follow_previous_route_auto">Папярэдняя навігацыя не была скончаная. Працягваць кіравацца ёю ? (%1$s сэкундаў)</string>
 	<string name="route_updated_loc_found">Route will be calculated once position is found</string>
 	<string name="osmand_parking_hours">Hours</string>
 	<string name="osmand_parking_minutes">Minutes</string>
@@ -566,7 +571,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t* Parking plugin (\'Where is my car parked at?\')
 		\n\t* Enable/disable logging widget
 	</string>
-	<string name="select_animate_speedup">Select animate route acceleration</string>
+	<string name="select_animate_speedup">Select speed of route simulation</string>
     	<string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Allocated memory</string>
 	<string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
@@ -616,28 +621,28 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="rendering_attr_hmRendered_name">Паказаць больш дэталей мапы</string>
 	<string name="local_index_routing_data">Routing data</string>
 	<string name="navigate_point_format">Format:</string>
-	<string name="poi_search_desc">POI (Point of interest) search</string>
+	<string name="poi_search_desc">Пошук цікавосткаў</string>
 	<string name="address_search_desc">Address search</string>
 	<string name="navpoint_search_desc">Coordinates</string>
 	<string name="transport_search_desc">Transportation search</string>
 	<string name="favourites_search_desc">Favorites search</string>
 	<string name="history_search_desc">Search history</string>
 	<string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
-	<string name="left_side_navigation">Left-hand driving</string>
-	<string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
-	<string name="download_link_and_local_description">Click here to download or update offline data. \nClick any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
+	<string name="left_side_navigation">Леваручны рух</string>
+	<string name="left_side_navigation_descr">Абраць для краін з леваручным рухам</string>
+	<string name="download_link_and_local_description">Націсьніце тут каб зладаваць ці абнавіць пазасеціўныя зьвесткі. \nПстрыкніце на любы існуючы складнік каб бачыць падрабязнасьці, альбо націсьніце і трымайце каб дэактываваць ці выдаліць. Дзейныя зьвесткі на прыладзе (вольна %1$s):</string>
 	<string name="unknown_from_location">Starting point is not yet determined</string>
 	<string name="unknown_location">Месца пакуль ня вызначанае</string>
 	<string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
 	<string name="confirm_interrupt_download">Do you want to interrupt file downloading?</string>
-	<string name="first_time_msg">Thank you for using OsmAnd. For many features of this application you need some regional offline data which you can download via \'Settings\' -&gt;  \'Data Management\'. Afterwards you will be able to view maps, locate addresses, look up POIs, and find public transportation.</string>    
+	<string name="first_time_msg">Дзякуй за карыстаньне OsmAnd. Каб карыстацца ўсімі магчымасьцямі праграмы, вам патрэбныя некаторыя пазасеціўныя зьвесткі для вашага рэгіёну. Іх можна зладаваць праз \'Налады\' -&gt; \'Кіраваньне зьвесткамі\'. Пасьля гэтага вы зможаце глядзець мапу, шукаць адрасы, бачыць цікавосткі і грамадзкі транспарт. </string>    
 	<string name="basemap_was_selected_to_download">Basemap is required for proper application functioning and was selected to download.</string>
 	<string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
-	<string name="local_indexes_cat_tile">Online and tile maps</string>
+	<string name="local_indexes_cat_tile">Сеціўныя і tile мапы</string>
 	<string name="local_indexes_cat_map">Пазасеціўныя мапы (вэктарныя)</string>
 	<string name="index_settings_descr">Ладаваньне мапаў і кіраваньне пазасеціўнымі зьвесткамі што захоўваюцца ў вашай прыладзе</string>
 	<string name="map_online_plugin_is_not_installed">Enable online maps plugin to select different map sources</string>
-	<string name="map_online_data">Online and tile maps</string>
+	<string name="map_online_data">Сеціўныя і tile мапы</string>
 	<string name="map_online_data_descr">Use online maps (download and cache tiles on SD card)</string>
 	<string name="online_map_settings">Сеціўныя мапы</string>
 	<string name="online_map_settings_descr">Configure online or cached tile map sources</string>
@@ -646,10 +651,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osmand_rastermaps_plugin_description">Show settings to configure a variety of online or cached tile maps as base map or as overlay / underlay maps. These maps can also be prepared offline and copied to the OsmAnd folder.</string>
 	
 	<string name="osmand_accessibility_description">Show settings for special accessibility features.</string>
-	<string name="extra_settings">Advanced settings</string>
+	<string name="extra_settings">Пашыраныя налады</string>
 	<string name="osmand_monitoring_description">Show settings facilitating to record your trips to local GPX files or online using a web service.</string>
 	<string name="osmand_extra_settings_description">Display settings for advanced map configuration (like increase map details) and some device-specifics.</string>
-	<string name="osmand_development_plugin_description">Show settings for development and debugging features like animated navigation or rendering performance display.</string>
+	<string name="osmand_development_plugin_description">Show settings for development and debugging features like route simulation or rendering performance display.</string>
 	<string name="plugins_screen">Убудовы</string>
 	<string name="select_plugin_to_activate">Touch a Plugin to activate or deactivate it. (Restarting OsmAnd may be required.)</string>
 	<string name="prefs_plugins_descr">Убудовы актывуюць дадатковыя налады й магчымасьці</string>
@@ -779,8 +784,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_interval">Online tracking interval</string>
 	<string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Online tracking web address</string>
-	<string name="gpx_monitoring_disabled_warn">Please enable \'Log track to GPX file\' settings.</string>
-	<string name="show_current_gpx_title">Паказаць бягучы трэк</string>
+	<string name="gpx_monitoring_disabled_warn">Калі ласка, дазвольце \'Лагаваньне трэкаў у GPX файл\' у наладах трэкінгу</string>
+	<string name="show_current_gpx_title">Паказаць дзейны трэк</string>
 	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
 		\n\t- Offline wikipedia data with articles
 		\n\t- Updated maps
@@ -808,12 +813,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_user_defined">Вызначанае карыстальнікам</string>
 	<string name="fav_export_confirmation">Файл з экспартаванымі ўпадабанымі ўжо існуе. Ці хочаце замяніць яго ?</string>
 	<string name="profile_settings">Налады профіля</string>
-	<string name="settings_preset">Профіль карыстальніка</string>
-	<string name="settings_preset_descr">Select a user profile with custom map and navigation settings.</string>
-	<string name="routing_settings">Navigation</string>
+	<string name="routing_settings">Навігацыя</string>
 	<string name="routing_settings_descr">Вызначыць налады навігацыі</string>
 	<string name="global_settings">Агульныя налады</string>
-	<string name="index_settings">Кіраваньне зьвесткамі</string>
+	<string name="index_settings">Data management</string>
 	<string name="general_settings">Агульныя</string>
 	<string name="general_settings_descr">Налады экрану і агульныя налады праграмы</string>
 	<string name="global_app_settings">Агульныя налады праграмы</string>
@@ -866,7 +869,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="native_library_not_supported">Родныя бібліятэкі не падтрымліваюцца гэтай прыладай.</string>
 	<string name="init_native_library">Ініцыалізацыя родных бібліятэк…</string>
 	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
-	<string name="choose_auto_follow_route_descr">Час каб мапа сынхранізавалася з бягучым месцам</string>
+	<string name="choose_auto_follow_route_descr">Час каб мапа сынхранізавалася з гэтым месцам</string>
 	<string name="auto_follow_route_never">Ніколі</string>
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
 	<string name="auto_follow_route_navigation_descr">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
@@ -882,8 +885,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="city_type_town">Мястэчка</string>
 	<string name="city_type_city">Горад</string>
 	<string name="layer_poi_label">Цэтлікі цікавостак</string>
-	<string name="animate_route_off">Спыніць анімацыю</string>
-	<string name="animate_route">Пачаць анімацыю</string>
+	<string name="animate_route_off">Stop simulation</string>
+	<string name="animate_route">Start simulation</string>
 	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
 		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 		\n\t- Implement POI search by name in big areas (countries)  
@@ -913,7 +916,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_position_favorites">Упадабаныя…</string>
 	<string name="search_position_undefined">Нявызначаныя</string>
 	<string name="search_position_fixed">Фіксаваны</string>
-	<string name="search_position_current_location">Бягучае месца…</string>
+	<string name="search_position_current_location">Гэтае месца…</string>
 	<string name="search_position_map_view">Апошні выгляд мапы</string>
 	<string name="select_search_position">Шукаць блізу:</string>
 	<string name="context_menu_item_search">Шукаць навокал</string>
@@ -968,16 +971,16 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_reload">Reload from sdcard</string>
 	<string name="local_index_download">Зладаваць</string>
 	<string name="local_index_tile_data">Tile data: %1$s \nMinimum zoom: %2$d\nMaximum zoom: %3$d\nDownloadable: %4$s \nZooms downloaded: %5$s</string>
-	<string name="local_index_poi_data">POI data</string>
+	<string name="local_index_poi_data">Зьвесткі цікавосткаў</string>
 	<string name="local_index_address_data">Address data</string>
 	<string name="local_index_transport_data">Transportation data</string>
 	<string name="local_index_map_data">Map data</string>
 	<string name="local_index_items"/>
 	<string name="local_indexes_cat_backup">Deactivated</string>
-	<string name="local_indexes_cat_tts">Voice data (TTS)</string>
-	<string name="local_indexes_cat_voice">Voice data (recorded)</string>
-	<string name="local_indexes_cat_gpx">GPX data</string>
-	<string name="local_indexes_cat_poi">POI data</string>
+	<string name="local_indexes_cat_tts">Галасавыя зьвесткі (TTS)</string>
+	<string name="local_indexes_cat_voice">Галасавыя зьвесткі (запісаныя)</string>
+	<string name="local_indexes_cat_gpx">Зьвесткі GPX</string>
+	<string name="local_indexes_cat_poi">Зьвесткі цікавосткаў</string>
 	<string name="ttsvoice">TTS Voice</string>
 	<string name="search_offline_clear_search">New Search</string>
 	<string name="map_text_size_descr">Select text size for names on the map</string>
@@ -1005,11 +1008,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
 	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -&gt; \'Define view\' -&gt; \'Map Source…\' -&gt; \'Offline vector maps\'.</string>
-	<string name="choose_audio_stream">Voice guidance output</string>
-	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
-	<string name="voice_stream_voice_call">Voice call audio</string>
-	<string name="voice_stream_notification">Notification audio</string>
-	<string name="voice_stream_music">Media/music audio</string>
+	<string name="choose_audio_stream">Дзе казаць кіраваньне голасам</string>
+	<string name="choose_audio_stream_descr">Абярыце канал прайграваньня галасавых каманд</string>
+	<string name="voice_stream_voice_call">Галасавы канал</string>
+	<string name="voice_stream_notification">Канал апавяшчэньня</string>
+	<string name="voice_stream_music">Мэдыя/музычны канал</string>
 	<string name="warning_tile_layer_not_downloadable">Application cannot download map layer %1$s, please try to reinstall it.</string>
 	<string name="overlay_transparency_descr">Modify overlay transparency</string>
 	<string name="overlay_transparency">Overlay transparency</string>
@@ -1045,8 +1048,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="search_offline_geo_error">Could not parse geo intent \'%s\'</string>
 	<string name="search_osm_offline">Search geo location</string>
 	<string name="system_locale">System</string>
-	<string name="preferred_locale_descr">Select display language</string>
-	<string name="preferred_locale">Display language</string>
+	<string name="preferred_locale_descr">Абраць мову інтэрфэйсу</string>
+	<string name="preferred_locale">Мова інтэрфэйсу</string>
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -&gt; \'Define view\' in map view.
@@ -1057,7 +1060,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="tip_app_mode_t_v2">\tOsmAnd supports different (customizable) application profiles for different use cases.
 		\n\tYou can change profiles via the profile button in the lower left corner of the map screen (icon car, bicycle, or pedestrian), or when creating a route.
 	</string>
-	<string name="tip_navigation">Navigation</string>
+	<string name="tip_navigation">Навігацыя</string>
 	<string name="tip_navigation_t">\tBefore starting a navigation you need to select a destination. Afterwards press \'Menu\' -&gt; \'Directions\' on map and select the navigation type.</string>
 	<string name="tip_search">Searching</string>
 	<string name="tip_search_t">\tYou can search for places directly on the map, or by address, by location, as POI, or as predefined favorite.
@@ -1075,14 +1078,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="next_button">Next</string>
 	<string name="previous_button">Previous</string>
 	<string name="unit_of_length_descr">Change units of length and speed</string>
-	<string name="unit_of_length">Unit of measure</string>
-	<string name="si_mi_foots">Miles/feet</string>
-	<string name="si_mi_yard">Miles/yards</string>
-	<string name="si_km_m">Kilometers/meters</string>
-	<string name="yard">yd</string>
-	<string name="foot">ft</string>
-	<string name="mile_per_hour">mph</string>
-	<string name="mile">mi</string>
+	<string name="unit_of_length">Адзінкі вымярэньня</string>
+	<string name="si_mi_foots">Мілі/футы</string>
+	<string name="si_mi_yard">Мілі/ярды</string>
+	<string name="si_km_m">Кілямэтры/мэтры</string>
+	<string name="yard">яр</string>
+	<string name="foot">фт</string>
+	<string name="mile_per_hour">мі/г</string>
+	<string name="mile">мі</string>
 	<string name="send_location_way_choose_title">Даслаць каардынаты праз</string>
 	<string name="send_location_sms_pattern">Location: %1$s\n%2$s</string>
 	<string name="send_location_email_pattern">To see location follow the web browser link %1$s or android intent link %2$s</string>
@@ -1112,14 +1115,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
 	<string name="amenity_type_transportation">Transportation</string>
-	<string name="indexing_address">Indexing address…</string>
-	<string name="indexing_map">Indexing map…</string>
-	<string name="indexing_poi">Indexing POI…</string>
+	<string name="indexing_address">Індэксаваньне адрасоў…</string>
+	<string name="indexing_map">Індэксаваньне мапы…</string>
+	<string name="indexing_poi">Індэксаваньне цікавостак…</string>
 	<string name="indexing_transport">Indexing transportation…</string>
 	<string name="input_output_error">I/O error occurred</string>
-	<string name="km">km</string>
-	<string name="km_h">km/h</string>
-	<string name="m">m</string>
+	<string name="km">км</string>
+	<string name="km_h">км/г</string>
+	<string name="m">м</string>
 	<string name="old_map_index_is_not_supported">Deprecated map data format \'\'{0}\'\' is not supported</string>
 	<string name="poi_filter_closest_poi">Closest POI</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
@@ -1131,7 +1134,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="use_osmand_routing_service_descr">Use OsmAnd offline navigation applies only to routes &gt; 20 km (experimental)</string>
 	<string name="osmand_routing_experimental">OsmAnd offline navigation is an experimental feature and it does not work for distances of more than about 20 km.\n\nNavigation service is temporarily switched to online CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">Can not find specified directory.</string>
-	<string name="application_dir">Storage directory</string>
+	<string name="application_dir">Каталёг захоўваньня</string>
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
@@ -1152,10 +1155,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="download_files_question">Download {0} file(s) ({1} MB)?</string>
 	<string name="items_were_selected">{0} item(s) selected</string>
 	<string name="filter_existing_indexes">Downloaded</string>
-	<string name="deselect_all">Deselect all</string>
-	<string name="select_all">Select all</string>
+	<string name="deselect_all">Прыбраць вылучэньне ўсіх</string>
+	<string name="select_all">Вылучыць усе</string>
 	<string name="reload">Абнавіць</string>
-	<string name="fast_route_mode">Fastest route</string>
+	<string name="fast_route_mode">Найхутчэйшы шлях</string>
 	<string name="fast_route_mode_descr">Enable to calculate fastest route or disable for shortest route </string>
 	<string name="tiles_to_download_estimated_size">At zoom {0} download {1} tiles ({2} MB)</string>
 	<string name="context_menu_item_download_map">Download map</string>
@@ -1185,7 +1188,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">GPX track…</string>
+	<string name="layer_gpx_layer">Трэк GPX…</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transportation at stop</string>
@@ -1193,12 +1196,12 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="osb_bug_name">Bug</string>
 	<string name="poi_context_menu_modify">Modify POI</string>
 	<string name="poi_context_menu_delete">Выдаліць цікавостку</string>
-	<string name="rotate_map_compass_opt">To compass</string>
-	<string name="rotate_map_bearing_opt">To direction of movement</string>
-	<string name="rotate_map_none_opt">Don\'t rotate (north is up)</string>
-	<string name="rotate_map_to_bearing_descr">Select map screen alignment</string>
-	<string name="rotate_map_to_bearing">Map orientation</string>
-	<string name="show_route">Route details</string>
+	<string name="rotate_map_compass_opt">Па компасе</string>
+	<string name="rotate_map_bearing_opt">У напрамку руху</string>
+	<string name="rotate_map_none_opt">Не варочаць (поўнач уверсе)</string>
+	<string name="rotate_map_to_bearing_descr">Абраць раўнаваньне мапы на экране</string>
+	<string name="rotate_map_to_bearing">Арыентацыя мапы</string>
+	<string name="show_route">Падрабязнасьці шляху</string>
 	<string name="fav_imported_sucessfully">Favorites succesfully imported</string>
 	<string name="fav_file_to_load_not_found">GPX file containing favorites is not found at {0}</string>
 	<string name="fav_saved_sucessfully">Favorites succesfully saved to {0}</string>
@@ -1217,7 +1220,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="layer_favorites">Упадабаныя</string>
 	<string name="layer_osm_bugs">OSM bugs (online)</string>
 	<string name="layer_transport">Прыпынкі транспарту</string>
-	<string name="layer_poi">POI…</string>
+	<string name="layer_poi">Цікавосткі…</string>
 	<string name="layer_map">Крыніца мапы…</string>
 	<string name="menu_layers">Вызначыць выгляд</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
@@ -1243,8 +1246,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="hide_poi_filter">Hide filter</string>
 	<string name="show_poi_filter">Show filter</string>
 	<string name="search_poi_filter">Filter</string>
-	<string name="menu_mute_off">Sound is on</string>
-	<string name="menu_mute_on">Sound is off</string>
+	<string name="menu_mute_off">Гук уключаны</string>
+	<string name="menu_mute_on">Гук выключаны</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
 	<string name="voice_data_initializing">Initializing voice data…</string>
@@ -1263,7 +1266,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="route_tu">Make U-turn and go</string>
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Пазьней</string>
-	<string name="first_time_download">Download regions</string>
+	<string name="first_time_download">Зладаваць рэгіёны</string>
 	<string name="search_poi_location">Searching for signal…</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
@@ -1286,7 +1289,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="transport_stops_to_pass">stops to pass</string>
 	<string name="transport_route_distance">Route distance</string>
 	<string name="transport">Transportation</string>
-	<string name="default_buttons_ok">OK</string>
+	<string name="default_buttons_ok">Добра</string>
 	<string name="show_transport_over_map_description">Show public transportation stops on map</string>
 	<string name="show_transport_over_map">Паказваць прыпынкі транспарту</string>
 	<string name="hello">Navigation application OsmAnd</string>
@@ -1317,14 +1320,14 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="max_level_download_tile_descr">Choose maximum zoom level to download for online map tiles</string>
 	<string name="route_general_information">Total distance %1$s, travelling time %2$d h %3$d m.</string>
 	<string name="router_service_descr">Choose an online or offline navigation service</string>
-	<string name="router_service">Navigation service</string>
+	<string name="router_service">Сэрвіс навігацыі</string>
 	<string name="sd_dir_not_accessible">Save directory on SD card not accessible</string>
 	<string name="download_question">Download {0} - {1} ?</string>
 	<string name="download_question_exist">Offline data for {0} already exists ({1}). Do you want to update it ({2}) ?</string>
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
-	<string name="downloading_file_new">Downloading </string>
+	<string name="downloading_file_new">Downloading...</string>
 	<string name="downloading">Downloading…</string>
 	<string name="downloading_list_indexes">Downloading list of available regions…</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
@@ -1332,9 +1335,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="fav_points_edited">Favorite point was edited</string>
 	<string name="fav_points_not_exist">No favorite points exist</string>
 	<string name="update_existing">Зьмяніць</string>
-	<string name="only_show">Only show</string>
-	<string name="follow">Follow</string>
-	<string name="mark_final_location_first">Please select destination first</string>
+	<string name="only_show">Толькі паказаць</string>
+	<string name="follow">Кіравацца</string>
+	<string name="mark_final_location_first">Абярыце спачатку месца прызначэньня</string>
 	<string name="get_directions">Навігацыя</string>
 	<string name="show_gps_status">Паказаць статус GPS</string>
 	<string name="opening_hours">Opening hours</string>
@@ -1355,7 +1358,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="error_calculating_route">Error calculating route</string>
 	<string name="error_calculating_route_occured">Error occurred while calculating route</string>
 	<string name="empty_route_calculated">Error: Calculated route is empty</string>					
-	<string name="new_route_calculated_dist">New route calculated, distance</string>
+	<string name="new_route_calculated_dist">Новы шлях разьлічаны, адлегласьць</string>
 	<string name="arrived_at_destination">You have arrived at your destination</string>
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
@@ -1375,15 +1378,15 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="data_settings_descr">Specify language, download/reload data</string>
 	<string name="data_settings">Data</string>
 	<string name="map_preferences_descr">Specify map settings: map source, rotation, marker position, screen orientation</string>
-	<string name="osm_settings">OSM editing</string>
-	<string name="additional_settings">Additional settings</string>
+	<string name="osm_settings">Рэдагаваньне OSM</string>
+	<string name="additional_settings">Дадатковыя налады</string>
 	<string name="settings">Налады</string>
 	<string name="save_current_track_descr">Save current track to SD now</string>
 	<string name="save_current_track">Save current GPX track</string>
 	<string name="save_track_interval">Logging interval</string>
 	<string name="save_track_interval_descr">Choose positioning interval for tracks</string>
 	<string name="save_track_to_gpx_descrp">Tracks will be saved to track directory grouped by days</string>
-	<string name="save_track_to_gpx">Log track to GPX file</string>
+	<string name="save_track_to_gpx">Лагаваньне трэкаў у GPX файл</string>
 	<string name="update_tile">Update map</string>
 	<string name="reload_tile">Reload tile</string>
 	<string name="mark_point">Target</string>
@@ -1391,8 +1394,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="show_osm_bugs">Show OpenStreetBugs</string>
 	<string name="favourites_activity">Упадабаныя</string>
 	<string name="add_to_favourite">Дадаць да ўпадабаных</string>
-	<string name="use_english_names_descr">Select between native and English names</string>
-	<string name="use_english_names">Use English names in maps</string>
+	<string name="use_english_names_descr">Выбар паміж стандартных і ангельскіх назваў</string>
+	<string name="use_english_names">Ангельскія назвы на мапе</string>
 	<string name="app_settings">Application settings</string>
 	<string name="search_address">Search address</string>
 	<string name="choose_building">Абраць будынак</string>
@@ -1427,7 +1430,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="choose_available_region">Choose region from list</string>
 	<string name="choose_intersected_street">Абраць скрыжаваньне</string>
 	<string name="Closest_Amenities">Closest amenities</string>
-	<string name="app_mode_default">Default</string>
 	<string name="app_mode_car">Car</string>
 	<string name="app_mode_bicycle">Bicycle</string>
 	<string name="app_mode_pedestrian">Pedestrian</string>
@@ -1453,11 +1455,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="context_menu_item_update_map">Update map</string>
 	<string name="context_menu_item_open_bug">Open OSM bug</string>
 	<string name="context_menu_item_create_poi">Create POI</string>
-	<string name="default_buttons_yes">Yes</string>
+	<string name="default_buttons_yes">Так</string>
 	<string name="default_buttons_cancel">Скасаваць</string>
 	<string name="default_buttons_apply">Apply</string>
 	<string name="default_buttons_add">Дадаць</string>
-	<string name="default_buttons_no">No</string>
+	<string name="default_buttons_no">Не</string>
 	<string name="add_favorite_dialog_top_text">Enter favorite name</string>
 	<string name="add_favorite_dialog_default_favourite_name">Favorite</string>
 	<string name="add_favorite_dialog_favourite_added_template">Favorite point \'\'{0}\'\' was added successfully.</string>
