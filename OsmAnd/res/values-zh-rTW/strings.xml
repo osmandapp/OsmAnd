@@ -529,7 +529,7 @@
 	<string name="voice_stream_voice_call">通話聲音</string>
 	<string name="voice_stream_notification">通知聲音</string>
 	<string name="voice_stream_music">多媒體/音樂聲音</string>
-	<string name="warning_tile_layer_not_downloadable">無法下載 %1$s圖，請嘗試重新安裝。</string>
+	<string name="warning_tile_layer_not_downloadable">無法下載 %1$s 圖層，請嘗試重新安裝。</string>
 	<string name="overlay_transparency_descr">修改上層圖的透明度</string>
 	<string name="overlay_transparency">上層圖透明度</string>
 	<string name="map_transparency_descr">修改底圖的透明度</string>
@@ -543,50 +543,51 @@
 	<string name="map_overlay_descr">選擇上層地圖</string>
 	<string name="tile_source_already_installed">地圖已安裝，設定將被更新</string>
 	<string name="select_tile_source_to_install">選擇要安裝或更新的(網格)地圖</string>
-	<string name="internet_not_available">因網路無法連線所以無法操作</string>
+	<string name="internet_not_available">因網際網路無法連線所以無法操作</string>
 	<string name="install_more">安裝更多…</string>
-	<string name="level_to_switch_vector_raster_descr">使用向量圖的最低層</string>
-	<string name="level_to_switch_vector_raster">向量的最低層</string>
+	<string name="level_to_switch_vector_raster_descr">向量地圖使用最小的縮放階層</string>
+	<string name="level_to_switch_vector_raster">最小向量縮放階層</string>
 	<string name="tip_location_sharing">位置分享</string>
 	<string name="tip_location_sharing_t">\t您可以在旅途中分享有趣的地方和位置給您的家人或朋友。
 		\n\t您要分享任何位置時：
 		\n\t使用 \'地圖內容選單\' -&gt; \'分享位置\'選單。
 		\n\t然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
-	<string name="tip_favorites">我的最愛</string>
+	<string name="tip_favorites">我的最愛點</string>
 	<string name="tip_favorites_t">\t常用地點可記錄成"我的最愛"。
 		\n\叫出地圖的內容選單，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可透由\'主畫面\' -&gt;\'我的最愛\'找到它。
 		\n\t選按一個我的最愛會跳出一些選項，可設為目的地、編輯或刪除它。
 		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'畫面設定\'開啟\'我的最愛\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
-	<string name="search_offline_geo_error">無法解析Geo Intent \'%s\'</string>
-	<string name="search_osm_offline">以離線地圖查尋地址</string>
+	<string name="search_offline_geo_error">無法解析地理原意 \'%s\'</string>
+	<string name="search_osm_offline">查尋地理位置</string>
 	<string name="system_locale">系統</string>
 	<string name="preferred_locale_descr">選擇顯示語言</string>
 	<string name="preferred_locale">顯示語言</string>
 	<string name="tip_map_switch">地圖來源</string>
-	<string name="tip_map_switch_t_v2">"\t地圖來源與顯示圖層可透過在地圖畫面下的\'選單\'-&gt;\'畫面設定\'來改變。
-\n\t在\'地圖來源......\'您可以選擇使用預先載入的離線向量圖，預先定義的（線上）網格來源(在此啟動\'線上和網格地圖\'外掛元件)，或手動建立地圖，例如使用PC上的OsmAndMapCreator。
-\n\tOsmAnd也支援自訂來源。 "</string>
-	<string name="tip_app_mode">使用模式設定</string>
-	<string name="tip_app_mode_t_v2">\tOsmAnd支援不同使用式設定。
-		\n\t您可透過地圖畫面左下方的按鈕(汽車、自行車、步行圖標)更改使用模式 ，有汽車、自行車、步行三種模式，或當您作路徑規劃時。
+	<string name="tip_map_switch_t_v2">\t地圖來源與顯示圖層可透過在地圖畫面下的\'選單\'-&gt;\'畫面設定\'來改變。
+		\n\t在\'地圖來源......\'您可以選擇使用預先載入的離線向量圖，預先定義的（線上）網格來源(在此啟動\'線上和網格地圖\'外掛元件)，或手動建立地圖，例如使用 PC 上的 OsmAndMapCreator。
+		\n\tOsmAnd 也支援自訂來源。
+	</string>
+	<string name="tip_app_mode">使用者設定檔</string>
+	<string name="tip_app_mode_t_v2">\tOsmAnd 在不同的使用情況下，支援不同的使用者設定檔 (可自行訂製) 。
+		\n\t您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
 	</string>
 	<string name="tip_navigation">導航</string>
-	<string name="tip_navigation_t">\t在開始導航之前您需先設定目的地， 之後在地圖畫面下按 \'選單\' -&gt; \'導引\' 再選導航模式。</string>
+	<string name="tip_navigation_t">\t在開始導航之前您需先設定目的地，之後在地圖畫面下按 \'選單\' -&gt; \'導航\' 再選導航模式。</string>
 	<string name="tip_search">查尋中</string>
 	<string name="tip_search_t">\t您可以在地圖上直接查尋地點，也可透過地址、興趣點、我的最愛等。
-		\n\t按主選單的 \'查尋\' 進行資料查尋的動作，所有的搜尋結果提供兩個選項：\'設為目的地\'或\'顯示地圖\'。
+		\n\t在主畫面上按\'查尋\'進行查尋的動作。在快顯功能表中，所有被點選中的都提供有\'設為目的地\'或\'在地圖上顯示\'選項。
 	</string>
-	<string name="tip_map_context_menu">地圖內容選單</string>
-	<string name="tip_map_context_menu_t">\t地圖內容選單可在地圖長按叫出來，或是按軌跡球。
-		\n\t首先會產生一個座標方框，然後輕按該方框即可開啟內容選單。若長按該方框則可關閉它。
-		\n\t該地圖內容選單包含了對該地點可作的所有動作。
+	<string name="tip_map_context_menu">地圖快顯功能表</string>
+	<string name="tip_map_context_menu_t">\t地圖快顯功能表可在地圖長按叫出來，或是按軌跡球按鈕。
+		\n\t首先會產生一個座標點對話框，然後輕按該對話框，即可開啟地圖快顯功能表。(若長按則可隱藏對話框。)
+		\n\t該地圖快顯功能表，包含了對該地點能作的所有動作。
 	</string>
-	<string name="tip_initial">小幫手</string>
-	<string name="tip_initial_t">\tOsmAnd含有很多功能。. 
-		\n\t基本功能介紹與使用技巧可透由主畫面的\'?\'查看。
+	<string name="tip_initial">提示和技巧</string>
+	<string name="tip_initial_t">\tOsmAnd 是一個導航應用程式含有很多功能。
+		\n\t基本功能介紹與使用提示和技巧，可透過主畫面的連結(參照\'?\'圖示)。
 	</string>
 	<string name="next_button">下一頁</string>
 	<string name="previous_button">上一頁</string>
@@ -599,9 +600,9 @@
 	<string name="foot">呎</string>
 	<string name="mile_per_hour">哩/小時</string>
 	<string name="mile">哩</string>
-	<string name="send_location_way_choose_title">分享位置方法</string>
-	<string name="send_location_sms_pattern">位置: %1$s\n%2$s</string>
-	<string name="send_location_email_pattern">以網頁瀏覽器查看%1$s或用Andriod intent查看%2$s</string>
+	<string name="send_location_way_choose_title">分享位置方式</string>
+	<string name="send_location_sms_pattern">位置：%1$s\n%2$s</string>
+	<string name="send_location_email_pattern">查看追蹤位置，以網頁瀏覽器連結 %1$s 或用 Andriod intent連結%2$s</string>
 	<string name="send_location">傳送位置</string>
 	<string name="context_menu_item_share_location">分享位置</string>
 	<string name="add_waypoint_dialog_added">中途點\'\'{0}\'\'已成功加入</string>
