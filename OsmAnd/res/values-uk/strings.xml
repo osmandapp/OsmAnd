@@ -268,7 +268,7 @@
   <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Зберегти маршрут як GPX трек</string>
   <string name="route_successfully_saved_at">Маршрут успішно збережено в \'%1$s\'.</string>
-  <string name="filename_input">"Ім\'я файлу: "</string>
+  <string name="filename_input">"Ім\'я файлу: " </string>
   <string name="file_with_name_already_exist">Файл з таким ім\'ям вже існує\nFile with same name already exists.</string>
   <string name="default_buttons_save">Зберегти</string>
   <string name="menu_save_directions">Зберегти маршрут</string>
@@ -473,7 +473,7 @@
   <string name="select_all">Вибрати все</string>
   <string name="reload">Перезавантажити</string>
   <string name="fast_route_mode">Найшвидший маршрут</string>
-  <string name="fast_route_mode_descr">"Надавати перевагу найшвидшому маршруту перед найкоротшим "</string>
+  <string name="fast_route_mode_descr">"Надавати перевагу найшвидшому маршруту перед найкоротшим " </string>
   <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
   <string name="context_menu_item_download_map">Завантажити мапу</string>
   <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
@@ -967,8 +967,8 @@
     <string name="osmand_distance_plugin_name">Калькулятор відстані</string>
     <string name="av_use_external_camera">Використовувати програму Камера</string>
     <string name="av_settings_descr">Налаштування аудіо/відео запису</string>
-    <string name="av_settings">"Налаштування аудіо/відео "</string>
-    <string name="recording_error">"Помилка під час запису "</string>
+    <string name="av_settings">"Налаштування аудіо/відео " </string>
+    <string name="recording_error">"Помилка під час запису " </string>
     <string name="recording_camera_not_available">Камера не доступна</string>
     <string name="recording_default_name">запис</string>
     <string name="av_def_action_choose">Обрати за запитом</string>
