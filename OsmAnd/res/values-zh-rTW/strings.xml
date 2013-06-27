@@ -54,7 +54,7 @@
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
-		OsmAnd 為可使用全球的「開放街圖」(OSM)開放程式碼導航軟體。所有圖資(向量圖或網格圖)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
+		OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap（OSM）資料。所有圖資(向量圖或網格圖)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
 
 		主要功能：
 		- 完整的離線功能(存放下載的向量圖或網格圖)
@@ -310,7 +310,7 @@
 	<string name="direction_style_sidewise">方向方位 (8個方位)</string>
 	<string name="direction_style_clockwise">時鐘方位(12個方位)</string>
 	<string name="settings_direction_style">方位風格</string>
-	<string name="settings_direction_style_descr">選擇風格來表示移動時顯示的相對方向</string>
+	<string name="settings_direction_style_descr">選擇風格來表示在行進中的相對方向</string>
 	<string name="auto_announce_on">啟動自動通告</string>
 	<string name="auto_announce_off">關閉自動通知</string>
 	<string name="scroll_map_by_gestures_descr">以觸控式螢幕手勢移動地圖</string>
@@ -383,13 +383,13 @@
 	<string name="osmand_service">休眠模式功能</string>
 	<string name="osmand_service_descr">螢幕關閉時執行 OsmAnd</string>
 	<string name="tip_rotation_switching">地圖方向</string>
-	<string name="tip_rotation_switching_t_v2">\t您可點選地圖上的羅盤圖標循環切換地圖旋轉顯示方式。
+	<string name="tip_rotation_switching_t_v2">\t在地圖畫面上您可點選羅盤的圖示，可循環切換地圖旋轉顯示方式。
 		\n\t選項有：
-		\n\t\'不旋轉(正北朝上)\' - 地圖不旋轉，正北方永遠向上。
-		\n\t\'前方朝上\' - 地圖將以車頭向前旋轉。
-		\n\t\'依羅盤\' - 地圖將參加羅盤旋轉
+		\n\t\'不旋轉(正北朝上)\' - 地圖不旋轉，正北方永遠向上
+		\n\t\'行進方向\' - 地圖會不斷對準您的車頭方向
+		\n\t\'依羅盤\' - 地圖會不斷對準裝置的羅盤指示
 	</string>
-	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源...\' -&gt; \'離線向量地圖\'啟動使用。</string>
+	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'畫面設定\' -&gt; \'地圖來源...\' -&gt; \'離線向量地圖\'啟動使用。</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
 	<string name="tip_day_night_mode_t_v2">\t部份的向量地圖的地圖顯示可在日間(較亮)與夜間(較暗)之間切換.
 		\n\t夜間顏色是在夜間行駛比較安全。
@@ -402,15 +402,15 @@
 	</string>	
 	<string name="tip_osm_improve">改善 OSM 資料</string>
 	<string name="tip_osm_improve_t">\tOsmAnd 使用 OSM 資料為底的地圖，可利用它來改善 OSM 的資料品質。只要點幾下您就可增新/上傳新的興趣點或回報 OSM 的問題！
-		\n\t首先您需在\'設定\' -&gt; \'一般設定\' -&gt; \''OSM 編輯\'提供您登入 OSM 的資料 。.
-		\n\t使用地圖內容選單中的\'新增興趣點\'來新增興趣點， 然後在\'新增興趣點\'的對話框輸入興趣點相關資訊，最後按確認。
+		\n\t首先您需在\'設定\' -&gt; \'一般設定\' -&gt; \''OSM 編輯\'提供您登入 OSM 的資料 。
+		\n\t若要新增興趣點，使用地圖快顯功能表中\'建立興趣點\'。然後在\'建立興趣點\'的對話框輸入興趣點相關資訊，最後按確認。
 		\n\t地圖上的錯誤可透過 OSM 錯誤立即回報，OSM 社群即可快速修正該問題。
-		\n\t使用地圖內容選單中的\'開 OSM 問題單\'來新增一個問題單，然後輸入問題說明後，按下 \'新增\'按鈕。
+		\n\t若要新增 OSM 錯誤，使用地圖快顯功能表中\'開啟 OSM 錯誤\'。然後輸入詳細的問題敘述，最後按下 \'新增\'按鈕。
 		\n\t請注意網路是否連通，OSM 興趣點與提供錯誤需要上網。</string>
 	<string name="download_files_not_enough_space">空間不足以下載%1$s MB (空間剩餘：%2$s)。</string>
 	<string name="download_files_question_space">目前可用空間剩下 {2} MB！ 要下載 {0} 個檔 ({1} MB)？</string>
-	<string name="tip_select_destination_point">選擇目的地</string>
-	<string name="tip_select_destination_point_t">\t您可以直接在地圖上選定目的地 (在內容選單上選 \'設為目的地\')，這用於所有的查尋動作或者是長按進入\'我的最愛地點列表\'。
+	<string name="tip_select_destination_point">取得指示</string>
+	<string name="tip_select_destination_point_t">\t您可以直接在地圖上選定目的地(在快顯功能表上選 \'指示\')，這用於所有的查尋動作或者是長按進入\'我的最愛地點列表\'。
 		\n\t目的地標點以橘色旗標在地圖上，同時 OsmAnd 會顯示達到目的地的距離與它的方位 (以橘色三角形指示)。
 	</string> 
 	<string name="use_transparent_map_theme">透明主題</string>
@@ -517,18 +517,18 @@
 	<string name="installing_new_resources">安裝新資料…</string>
 	<string name="internet_connection_required_for_online_route">選用線上導航服務，但是沒有可用網路連線。</string>
 	<string name="tts_language_not_supported_title">該語言未支援</string>
-	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商店找其它引擎嗎？否則使用之前設定的語言。</string>
+	<string name="tts_language_not_supported">選用的語言 Android TTS 引擎未支援，您要到 Play 商場找其它引擎嗎？否則使用之前設定的語言。</string>
 	<string name="tts_missing_language_data_title">資料遺失</string>
-	<string name="tts_missing_language_data">您選的語言未安裝，您要到 Play 商店安裝嗎？</string>
+	<string name="tts_missing_language_data">您選的語言未安裝，您要到 Play 商場安裝嗎？</string>
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
 	<string name="gpx_option_from_start_point">沿著整條航跡往前</string>
 	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'畫面設定\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
 	<string name="choose_audio_stream">語音導航輸出</string>
 	<string name="choose_audio_stream_descr">選擇播放語音導航輸出(依靠系統)</string>
-	<string name="voice_stream_voice_call">通話聲音</string>
-	<string name="voice_stream_notification">通知聲音</string>
-	<string name="voice_stream_music">多媒體/音樂聲音</string>
+	<string name="voice_stream_voice_call">通話音訊</string>
+	<string name="voice_stream_notification">通知音訊</string>
+	<string name="voice_stream_music">多媒體/音樂音訊</string>
 	<string name="warning_tile_layer_not_downloadable">無法下載 %1$s 圖層，請嘗試重新安裝。</string>
 	<string name="overlay_transparency_descr">修改上層圖的透明度</string>
 	<string name="overlay_transparency">上層圖透明度</string>
@@ -550,12 +550,12 @@
 	<string name="tip_location_sharing">位置分享</string>
 	<string name="tip_location_sharing_t">\t您可以在旅途中分享有趣的地方和位置給您的家人或朋友。
 		\n\t您要分享任何位置時：
-		\n\t使用 \'地圖內容選單\' -&gt; \'分享位置\'選單。
+		\n\t使用 \'地圖快顯功能表\' -&gt; \'分享位置\'選單。
 		\n\t然後選擇分享位置的方式。選項有：電子郵件、SMS(文字)或複製座標到剪貼簿。
 	</string>
 	<string name="tip_favorites">我的最愛點</string>
-	<string name="tip_favorites_t">\t常用地點可記錄成"我的最愛"。
-		\n\叫出地圖的內容選單，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可透由\'主畫面\' -&gt;\'我的最愛\'找到它。
+	<string name="tip_favorites_t">\t常用地點可記錄成我的最愛。
+		\n\叫出地圖的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可透由\'主畫面\' -&gt;\'我的最愛\'找到它。
 		\n\t選按一個我的最愛會跳出一些選項，可設為目的地、編輯或刪除它。
 		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'畫面設定\'開啟\'我的最愛\'即可。
 	</string>
@@ -575,10 +575,10 @@
 		\n\t您可透過地圖畫面左下角的設定檔按鈕(汽車、自行車、步行三種圖示)更改使用設定檔 ，或是作路線規劃。
 	</string>
 	<string name="tip_navigation">導航</string>
-	<string name="tip_navigation_t">\t在開始導航之前您需先設定目的地，之後在地圖畫面下按 \'選單\' -&gt; \'導航\' 再選導航模式。</string>
+	<string name="tip_navigation_t">\t在開始導航之前您需先設定目的地，之後在地圖畫面下按 \'選單\' -&gt; \'指示\' 再選導航模式。</string>
 	<string name="tip_search">查尋中</string>
 	<string name="tip_search_t">\t您可以在地圖上直接查尋地點，也可透過地址、興趣點、我的最愛等。
-		\n\t在主畫面上按\'查尋\'進行查尋的動作。在快顯功能表中，所有被點選中的都提供有\'設為目的地\'或\'在地圖上顯示\'選項。
+		\n\t在主畫面上按\'查尋\'進行查尋的動作。在快顯功能表中，所有被點選中的都提供有\'指示\'或\'在地圖上顯示\'選項。
 	</string>
 	<string name="tip_map_context_menu">地圖快顯功能表</string>
 	<string name="tip_map_context_menu_t">\t地圖快顯功能表可在地圖長按叫出來，或是按軌跡球按鈕。
@@ -714,7 +714,7 @@
 	<string name="poi_context_menu_modify">修改興趣點</string>
 	<string name="poi_context_menu_delete">刪除興趣點</string>
 	<string name="rotate_map_compass_opt">依羅盤旋轉</string>
-	<string name="rotate_map_bearing_opt">正前朝上</string>
+	<string name="rotate_map_bearing_opt">行進方向</string>
 	<string name="rotate_map_none_opt">不旋轉(正北朝上)</string>
 	<string name="rotate_map_to_bearing_descr">選擇地圖畫方位</string>
 	<string name="rotate_map_to_bearing">地圖方位</string>
@@ -739,7 +739,7 @@
 	<string name="layer_transport">車站、站牌</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
-	<string name="menu_layers">定義畫面</string>
+	<string name="menu_layers">畫面設定</string>
 	<string name="context_menu_item_search_poi">查尋興趣點</string>
 	<string name="context_menu_item_show_route">由此顯示導航路徑</string>
 	<string name="use_trackball_descr">使用軌跡球移動地圖</string>
@@ -1097,7 +1097,7 @@
     <string name="dist_control_start">開始</string>
     
     <string name="local_indexes_cat_srtm">等高線資料</string>
-    <string name="local_indexes_cat_av">音頻/視訊資料</string>
+    <string name="local_indexes_cat_av">音訊/視訊資料</string>
     <string name="stop_routing_confirm">您確定您要停止導航嗎？</string>
     <string name="clear_dest_confirm">您確定您想要清除您的目的地點(含中途點)？</string>
     <string name="precise_routing_mode">精確的路線 (alpha)</string>
@@ -1106,7 +1106,7 @@
     <string name="recording_photo_description">照片 %1$s 中的 %2$s</string>
     <string name="av_def_action_picture">拍攝照片</string>
     <string name="recording_context_menu_precord">拍攝照片</string>
-    <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓航跡和音頻/視訊注解同步到您的 Dropbox 帳戶。</string>
+    <string name="dropbox_plugin_description">Dropbox 的外掛元件可以讓航跡和音訊/視訊注解同步到您的 Dropbox 帳戶。</string>
     <string name="dropbox_plugin_name">Dropbox 外掛程式</string>
     <string name="animate_routing_using_gpx">您想使用現有的GPX檔案？</string>
     <string name="intermediate_points_change_order">變動排列</string>
@@ -1114,7 +1114,7 @@
     <string name="srtm_paid_version_title">等高線外掛元件</string>
     <string name="av_def_action_choose">應需求選取</string>
     <string name="av_def_action_video">錄取視訊</string>
-    <string name="av_def_action_audio">錄取音頻</string>
+    <string name="av_def_action_audio">錄取音訊</string>
     <string name="av_widget_action_descr">選擇預設小工具作用</string>
     <string name="av_widget_action">預設小工具作用</string>
     <string name="av_video_format_descr">選擇視訊輸出格式</string>
@@ -1129,15 +1129,15 @@
 	\n\t* 支援 OSM 注解 
     </string>
     <string name="search_street_in_neighborhood_cities">在附近一帶的城市查尋街道</string>
-    <string name="av_settings_descr">組態音頻和視訊設定</string>
-    <string name="av_settings">音頻/視訊設定 </string>
+    <string name="av_settings_descr">組態音訊和視訊設定</string>
+    <string name="av_settings">音訊/視訊設定 </string>
     <string name="recording_error">錄製途中發生錯誤 </string>
     <string name="recording_camera_not_available">相機失效</string>
-    <string name="recording_playing">從已指定的記錄開始播放音頻。\n%1$s</string>
+    <string name="recording_playing">從已指定的記錄開始播放音訊。\n%1$s</string>
     <string name="recording_open_external_player">開啟外部播放</string>
     <string name="recording_delete_confirm">您想移除此記錄嗎？</string>
     <string name="recording_unavailable">無法使用</string>
-    <string name="recording_context_menu_arecord">錄取音頻注解</string>
+    <string name="recording_context_menu_arecord">錄取音訊注解</string>
     <string name="destination_point">目的地 ％1 $ S</string>
     <string name="local_osm_changes_backup_successful">OSM 變更的檔案已成功的產生 %1$s</string>
     <string name="access_mark_final_location_first">協助功能模式：首先請選擇目的地</string> 
@@ -1145,7 +1145,7 @@
     <string name="av_use_external_recorder">使用系統錄製</string>
     <string name="av_use_external_camera_descr">相片使用系統應用程式</string>
     <string name="av_use_external_camera">使用相機應用程式</string>
-    <string name="recording_is_recorded">音頻/視訊開始錄製。要停止按下AV小工具。</string>
+    <string name="recording_is_recorded">音訊/視訊開始錄製。要停止按下AV小工具。</string>
     <string name="recording_can_not_be_played">不能播放記錄</string>
     <string name="recording_context_menu_delete">刪除記錄</string>
     <string name="recording_context_menu_play">播放</string>
@@ -1153,13 +1153,13 @@
     <string name="recording_default_name">錄制中</string>
     <string name="av_control_stop">停止</string>
     <string name="av_control_start">開始</string>
-    <string name="map_widget_av_notes">音頻/視訊注解</string>
+    <string name="map_widget_av_notes">音訊/視訊注解</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd 外掛元件用於離線等高線</string>
     <string name="map_widget_distancemeasurement">測量距離</string>
     <string name="monitoring_control_stop">停止</string>
-    <string name="map_widget_audionotes">音頻注解</string>
-    <string name="audionotes_plugin_description">在旅途中錄取音頻/視訊注解</string>
-    <string name="audionotes_plugin_name">音頻/視訊注解</string>
+    <string name="map_widget_audionotes">音訊注解</string>
+    <string name="audionotes_plugin_description">在旅途中錄取音訊/視訊注解</string>
+    <string name="audionotes_plugin_name">音訊/視訊注解</string>
     <string name="index_srtm_parts">部件</string>
     <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_name">等高線外掛元件</string>
@@ -1199,7 +1199,7 @@
 	<string name="local_index_no_items_to_do">在 %1$s 沒有項目</string>
 	<string name="incomplete_locale">未完成</string>
 	<string name="osmand_extended_description_4000_chars">
-OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式且近於免費，有世界各地和高品質的OpenStreetMap (OSM) 資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導引。所有的主要功能，工作於兩方面線上和離線（無需網路連線）。
+OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式且近於免費，有世界各地和高品質的OpenStreetMap (OSM) 資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於兩方面線上和離線（無需網路連線）。
 
 一些主要功能：
 
@@ -1267,7 +1267,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
  -南極洲： * 
 
 支援的國家的名單 (基本上世界範圍內!）：
-阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、 英國、美國 、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。
+阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。
 	</string>
 	<string name="osmand_plus_extended_description_4000_chars">
 OsmAnd + 是付費應用程式版本。經由您的購買來支援專案、資金用在開發新的功能，和接收最新的更新。您可以在購買前，先安裝名稱為 OsmAnd 的免費版本去試用該應用程式。
@@ -1337,7 +1337,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
  -南極洲： * 
 
 支援的國家的名單 (基本上世界範圍內!）：
-阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、 英國、美國 、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。
+阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。
 	</string>
 	<string name="delete_point">刪除點</string>
     <string name="plugin_distance_point">點</string>
