@@ -617,7 +617,7 @@
 	<string name="amenity_type_geocache">大地尋寶</string>
 	<string name="amenity_type_healthcare">醫療</string>
 	<string name="amenity_type_historic">文化遺址</string>
-	<string name="amenity_type_landuse">地被</string>
+	<string name="amenity_type_landuse">土地利用</string>
 	<string name="amenity_type_leisure">休閒</string>
 	<string name="amenity_type_manmade">人造設施</string>
 	<string name="amenity_type_military">軍事地</string>
@@ -763,7 +763,7 @@
 	<string name="hide_poi_filter">隱藏篩選器</string>
 	<string name="show_poi_filter">顯示篩選器</string>
 	<string name="search_poi_filter">篩選器</string>
-	<string name="menu_mute_off">語音開啟</string>
+	<string name="menu_mute_off">語音已開啟</string>
 	<string name="menu_mute_on">語音已關閉</string>
 	<string name="voice_provider_descr">選擇導航語音</string>
 	<string name="voice_provider">語音導航</string>
@@ -1375,11 +1375,11 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
 		\n\t- Small improvements
 	</string>
-	<string name="tip_recent_changes_1_3_t">Changes in 1.3:
-        \n\t* Reimplement Tablets and Large screen support
-        \n\t* Holo Theme (customization)
-        \n\t* Additional settings for stabilizing compass
-        \n\t* Top left button on the map screen replaces Menu button
+	<string name="tip_recent_changes_1_3_t">1.3 裡的變動：
+        \n\t* 重新植入了平板電腦和大螢幕的支援
+        \n\t* Holo 主題（客制化）
+        \n\t* 為電子羅盤穩定度追加了設定
+        \n\t* 在地圖螢幕的左上方按鈕替換選單按鈕
     </string>
     <string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
 	    \n\t*Fix Geo Intent (Foursquare, c:geo)
