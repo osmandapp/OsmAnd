@@ -7,10 +7,9 @@
     <string name="tip_recent_changes_0_8_3_t">Промени в 0.8.3:
 	\n\t* Междинни точки
 	\n\t* Подобрени указания за следване на маршрут
-	\n\t* Опция избягвай магистрали
+	\n\t* Опция 'без магистрали'
 	\n\t* Велоалея = показване на път
-	\n\t* по-добър потребителски интерфейс (икони)
-	\n\t* много корекции на грешки
+	\n\t* корекции на грешки в програмата
 	</string>
     
     <string name="context_menu_item_last_intermediate_point">Задай последна крайна цел</string>
@@ -45,4 +44,28 @@
     <string name="precise_routing_mode">Прецизно изчилсяване на маршрут (алфа)</string>
     <string name="settings_preset">Профил по подразбиране</string>
 	<string name="destination_point">Крайна точка %1$s</string>
+    <string name="auto_zoom_map_descr">Автоматичен мащаб на картата съобразно скоростта (при синхронизиране на картата с текущата позиция)</string>
+	<string name="auto_zoom_map">Автоматичен мащаб</string>
+	<string name="osmand_plus_short_description_80_chars">Мобилно приложение за разглеждане на карти и навигация с отворен код</string>
+	<string name="map_widget_day_night">Дневен/нощен режим</string>
+	<string name="map_widget_renderer">Стил на картата</string>
+	<string name="position_on_map_descr">Разположение на текущата позиция върху картата</string>
+	<string name="map_widget_map_select">Източник на карти</string>
+	<string name="map_widget_mini_route">Малка карта за маршрут</string>
+	<string name="rendering_attr_appMode_description">Оптимизация на картата за</string>
+	<string name="rendering_attr_hmRendered_description">Увеличаване на подробностите по картата</string>
+	<string name="rendering_attr_hmRendered_name">Покажи повече детайли по картата</string>
+	<string name="map_settings">Настройки на картата</string>
+	<string name="settings">Настройки</string>
+	<string name="settings_activity">Настройки</string>
+	<string name="settings_Button">Настройки</string>
+	<string name="app_mode_default">Разглеждане на картата</string>
+	<string name="context_menu_item_update_map">Обновяване на картата</string>
+	<string name="validate_gpx_upload_name_pwd">Въведете потребителско име и парола в OSM за качване на GPX файлове.</string>
+    	<string name="live_monitoring_interval_descr">Укажете интервал за следване online</string>
+	<string name="osmand_monitoring_plugin_description">Разрешаване на следенето и навигацията в режим 'заспиване' (изгаснал екран) чрез периодично включване на GPS устройството.
+        Покажи настройките за улесняване на записа на локални GPX файлове или директно в интернет.</string>
+    <string name="av_settings_descr">Аудио и видео настройки</string>
+    <string name="av_settings">Аудио и видео настройки </string>
+    <string name="native_library_not_running">Приложението работи в 'безопасен' режим (можете да го забраните в Настройки).</string>
     </resources>
