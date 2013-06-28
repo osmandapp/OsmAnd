@@ -482,7 +482,7 @@
 	<string name="vector_data_missing">裝置端(\'離線\')的 SD 卡上找不到資料。欲使用離線地圖請去下載。</string>
 	<string name="local_index_gpx_info_show">\n\n按壓不放會出現選項</string>
 	<string name="local_index_gpx_info_speed">\n平均速度： %1$s \n最大速度：%2$s</string>
-	<string name="local_index_gpx_info_elevation">\n平均高度：%1$s\n最低高度：%2$s\n最高高度：%3$s\n上坡：%4$s\n下坡： %5$s</string>
+	<string name="local_index_gpx_info_elevation">\n平均高度：%1$s\n最低高度：%2$s\n最高高度：%3$s\n上坡：%4$s\n下坡：%5$s</string>
 	<string name="local_index_gpx_info">子航跡：%1$d\n總點數：%2$d\n中途點：%3$d\n總距離：%4$s\n出發時間：%5$tF,  %5$tR\n終止時間：%6$tF,  %6$tR</string>
 	<string name="local_index_installed">版本</string>
 	<string name="local_index_items_backuped">%2$d 項中的 %1$d 項已解除成功。</string>
