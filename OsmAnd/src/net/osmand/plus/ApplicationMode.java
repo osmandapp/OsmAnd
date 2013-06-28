@@ -3,7 +3,7 @@ package net.osmand.plus;
 
 public enum ApplicationMode {
 	/*
-	 * DEFAULT("Default"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
+	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian");
 	 */
 	DEFAULT(R.string.app_mode_default), 
 	CAR(R.string.app_mode_car), 
