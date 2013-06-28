@@ -1,16 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <!--
-    	 Disclaimer : 
-         If you are going to translate strings, please make sure : 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting english translations make sure :
-         1. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-<string name="tip_recent_changes_0_8_4_t">Промени в 0.8.4:</string>
-    <string name="tip_recent_changes_0_8_3_t">Промени в 0.8.3:\n\t* Междинни точки\n\t* Подобрени указания за следване на маршрут\n\t* Опция избягвай магистрали\n\t* Велоалея = показване на път\n\t* по-добър потребителски интерфейс (икони)\n\t* много корекции на грешки</string>
+<resources><string name="tip_recent_changes_0_8_4_t">Промени в 0.8.4:
+	\n\t* Коригиране на неточности в програмата
+	\n\t* Картата вече не загубва позиция при прекъсване
+	\n\t* Разрешаване на режим sleep по време на навигация
+    </string>
+    <string name="tip_recent_changes_0_8_3_t">Промени в 0.8.3:
+	\n\t* Междинни точки
+	\n\t* Подобрени указания за следване на маршрут
+	\n\t* Опция избягвай магистрали
+	\n\t* Велоалея = показване на път
+	\n\t* по-добър потребителски интерфейс (икони)
+	\n\t* много корекции на грешки
+	</string>
     
     <string name="context_menu_item_last_intermediate_point">Задай последна крайна цел</string>
     <string name="context_menu_item_first_intermediate_point">Задай първа крайна цел</string>
@@ -42,4 +43,6 @@
     <string name="stop_routing_confirm">Сигурни ли сте, че искате да отмените навигирането?</string>
     <string name="clear_dest_confirm">Сигурни ли сте, че искате да отмените назначената точка?</string>
     <string name="precise_routing_mode">Прецизно изчилсяване на маршрут (алфа)</string>
+    <string name="settings_preset">Профил по подразбиране</string>
+	<string name="destination_point">Крайна точка %1$s</string>
     </resources>
