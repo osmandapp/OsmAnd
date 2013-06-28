@@ -184,7 +184,8 @@
   <string name="use_fluorescent_overlays_descr">Gebruik helder kleure om paaie en roetes te vertoon</string>
   <string name="offline_edition">Aflyn redigering</string>
   <string name="offline_edition_descr">Gebruik altyd aflyn redigering</string>
-  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige natrekking opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nuwe-stem aankondiging \"Roete herbereken \'\n t-Sigbare aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "</string>
+  <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige spoor-natrek opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nuwe-stem aankondiging \"Roete herbereken \'\n t-Sigbare aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "
+	</string>
   <string name="update_poi_does_not_change_indexes">Interessante plek veranderinge binne die toepassing raak nie afgelaaide kaart lêers nie, veranderinge word eerder in `n plaaslike lêer gestoor.</string>
   <string name="local_openstreetmap_uploading">Besig om op te laai…</string>
   <string name="local_openstreetmap_were_uploaded">{0} interessante plek / Foute is opgelaai</string>
@@ -196,12 +197,12 @@
   <string name="local_openstreetmap_descr_title">Uit fase OSM Redigering:</string>
   <string name="local_openstreetmap_settings">Plaaslik gestoorde OSM interessante plekke / Foute</string>
   <string name="local_openstreetmap_settings_descr">Wys en bestuur opgemerkte OSM interessante plekke / Foute in die plaaslike databasis</string>
-  <string name="live_monitoring_descr">Stuur natrek na \'n bepaalde web diens</string>
-  <string name="live_monitoring">Aanlyn lewendige natrekking</string>
-  <string name="live_monitoring_interval_descr">Spesifiseer lewendige natrekking interval</string>
-  <string name="live_monitoring_interval">Lewendige natrekking interval</string>
+  <string name="live_monitoring_descr">Stuur spoor-natrek na \'n bepaalde web diens</string>
+  <string name="live_monitoring">Aanlyn lewendige spoor-natrek</string>
+  <string name="live_monitoring_interval_descr">Spesifiseer lewendige spoor-natrek interval</string>
+  <string name="live_monitoring_interval">Lewendige spoor-natrek interval</string>
   <string name="live_monitoring_url_descr">Spesifiseer die web adres met parameteroordrag sinsbou: lat = {0}, lon = {1}, tyd stempel = {2}, hdop = {3}, hoogte = {4}, spoed = {5}</string>
-  <string name="live_monitoring_url">Lewendige natrekking webadres</string>
+  <string name="live_monitoring_url">Lewendige spoor-natrek webadres</string>
   <string name="gpx_monitoring_disabled_warn">Skakel asseblief \'Meld spoor na GPX\' aan in natrekking instellings.</string>
   <string name="show_current_gpx_title">Wys huidige spoor</string>
   <string name="tip_recent_changes_0_7_0_t">"Veranderinge in 0.7.0:\n t-die aflyn wikipedia inligting met artikels\n t-Opgedateerde kaarte\n t-ander klein funksies "</string>
@@ -899,7 +900,7 @@
 	</string>
 <string name="screen_is_locked">Om die skerm oop te sluit, druk op die slot simbool</string>
 <string name="map_widget_top_text">Straat naam</string>
-<string name="map_widget_config">Instelling</string>
+<string name="map_widget_config">Verstelling</string>
 <string name="map_widget_map_select">Kaart keuse</string>
 <string name="map_widget_back_to_loc">Waar is ek</string>
 <string name="map_widget_lock_screen">Sluit die skerm</string>
@@ -950,7 +951,7 @@
 	<string name="gps_wakeup_interval">GPS opwek tussenpose: %s</string>
 	<string name="int_continuosly">Aaneenlopende</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner toepassing is nie geïnstaleer nie. Wil jy dit in die mark soek?</string>
-	<string name="enable_plugin_monitoring_services">Aktiveer spoorsny inlasmodule om ligging aanteken diens te gebruik(aanntekening, lewende spoorsny)</string>
+	<string name="enable_plugin_monitoring_services">Aktiveer spoorsny inlasmodule om ligging aanteken diens te gebruik (aantekening, lewende spoor-natrek)</string>
     <string name="non_optimal_route_calculation">Bereken moontlike ongunstige roete oor lang afstande</string>
     <string name="tip_recent_changes_0_8_4_t">Veranderings in 0.8.4:
 	\n\t* Fout regstellings 
@@ -997,8 +998,8 @@
 		OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ is `n ope bron navigasie toepassing met toegang tot `n wye verskeidenheid wêreldwye OpenStreetMap (OSM) inligting. Alle kaart inligting (vektor of teëlkaarte) kan op die foon geheuekaart gestoor word vir aflyn gebruik. OsmAnd bied ook aan- en aflyn roete berekening insluitend draai-vir-draai stem leiding. OsmAnd+ is betaalde toepassing weergawe, deur dit te koop ondersteun jy die projek, befonds die ontwikkeling van nuwe funksies, en ontvang die nuutste opgraderings. Sommige van die kern funksies: - volledige aflyn werking (stoor afgelaaide vektor of teëlkaarte in `n leër van jou keuse) - kompakte aflyn vektor vir die hele wereld beskikbaar - Onbeperkte aflaai van land en streek kaarte uit die toepassing - Aflyn Wikipedia funksies (Wikipedia belangepunte kan afgelaai word), goed vir besigtigingstoere - oorlegging van verskeie kaart lae moontlik, bv. GPX of navigasie spore, belangepunte, gunstelinge, kontoerlyne, publieke vervoer haltes, ekstra kaarte met verstelbare deursigtigheid - Aflyn soek vir adresse en belangepunte - Aflyn navigasie roete berekening vir kort roetes (eksperimenteel) - Kar, fiets, en voetganger gebruikerswyses met: - opsionele outomatiese dag/nag skakeling - opsionele spoed-afhankliket kaart vergroting - opsionele kaart rigting volgens kompas of koers - opsionele laan begeleiding, spoedbeperking vertoon, opgeneemde en TTS stemme "
 	</string>
 	<string name="day_night_info_description">Sonopkoms : %1$s ↵\nSonsondergang : %2$s</string>
-	<string name="live_monitoring_mode_off">Begin↵\nlewende spoorsny</string>
-	<string name="live_monitoring_mode_on">Stop↵\nlewende spoorsny</string>
+	<string name="live_monitoring_mode_off">Begin↵\nlewende spoor-natrek</string>
+	<string name="live_monitoring_mode_on">Stop↵\nlewende spoor-natrek</string>
 	<string name="monitoring_mode_on">Stop↵\nGPX opname.</string>
 	<string name="tip_rotation_switching_t_v2">"→Jy kan stel hoe die kaart draai deur die kompasnaald links bo op die skerm te tik. ↵\n→Die keuses is: ↵\n→\'Moet nie draai nie (noord is bo)\' - Kaart sal nie draai nie. Noord sal altyd bo wees ↵\n→\'Koers\' - Kaart sal heeltyd gerig word in jou koers ↵\n→\'Kompas\' -Kaart sal heeltyd gerig word met die kompas lesing "</string>
 	<string name="tip_day_night_mode_t_v2">"\tDie kaart voorkoms kan vir sommige vektor kaarte verander word tussen dag (helder) en nag (dof).
@@ -1131,7 +1132,7 @@
     <string name="native_library_not_running">Die toepassing werk in beskermde wyse (skakel dit af in Instellings).</string>
     <string name="srtm_plugin_description">Vergemoontlik dei aflaai van aflyn kontoerlyne en heuwelsakdus (Instellings-&gt; Inligtingsbestuur -&gt; Aflaai -&gt; Kies verlangde kaart-tipe).</string>
     <string name="osmodroid_plugin_old_ver_not_supported">OsMoDroid inlasmodule is `n ou weergawe en het `n opgradering nodig.</string>
-    <string name="osmodroid_plugin_description">OsMoDroid inlasmodule is `n OsmAnd uitbreiding vir die OsModroid toepassing vir aanlyn naspoor funksies. Inligting oor die diens is beskikbaar op http://esya.ru.</string>
+    <string name="osmodroid_plugin_description">OsMoDroid inlasmodule is `n OsmAnd uitbreiding vir die OsModroid toepassing vir aanlyn spoor-natrek funksies. Inligting oor die diens is beskikbaar op http://esya.ru.</string>
     <string name="osmodroid_plugin_name">OsMoDroid inlasmodule</string>
 	<string name="tip_altitude_offset">Hoogte voorstelling - Kompensering</string>
     <string name="route_descr_lat_lon">Breedtegraad %1$.3f, lengtegraad %2$.3f</string>
@@ -1170,7 +1171,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="tip_recent_changes_1_5_t">"Verandering in 1.5: ↵\n→* Holo Tema (tema aanpassing) "</string>
     <string name="monitoring_settings">Aanteken dienste &amp; Sluimertoestand</string>
     <string name="monitoring_settings_descr">Verstel hoe om roetes op te neem en sluimertoestand aan te skakel</string>
-    <string name="osmand_monitoring_plugin_description">Sakel spoor-natrek en navigasie aan in sluimertoestand deur kort-kort die GPS op te wek. Wys stellings om roete op te neem na plaaslike GPX lêers of deur a web-diensop die internet.</string>
+    <string name="osmand_monitoring_plugin_description">Sakel spoor-natrek en navigasie aan in sluimertoestand deur kort-kort die GPS op te wek. Wys stellings om roete op te neem na plaaslike GPX lêers of deur a web-diens op die internet.</string>
     <string name="osmand_monitoring_plugin_name">Aanteken dienste &amp; Sluimertoestand</string>
     <string name="choose_osmand_theme_descr">Kies toepassing tema</string>
     <string name="choose_osmand_theme">Toepassing tema</string>
