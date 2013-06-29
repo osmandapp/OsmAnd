@@ -1256,7 +1256,7 @@ public class MapActivityActions implements DialogProvider {
 		});
 		qa.addActionItem(showOnMap);
 		ActionItem setAsDestination = new ActionItem();
-		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_navigate_to));
 		setAsDestination.setTitle(activity.getString(R.string.get_directions));
 		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override

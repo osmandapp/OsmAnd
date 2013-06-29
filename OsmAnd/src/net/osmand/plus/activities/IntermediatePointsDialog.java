@@ -243,8 +243,8 @@ public class IntermediatePointsDialog {
 					});
 				} else {
 					tv.setCompoundDrawablesWithIntrinsicBounds(
-							position == intermediates.size() - 1? R.drawable.list_activities_set_destination:
-								R.drawable.list_activities_set_intermediate, 0, 0, 0);
+							position == intermediates.size() - 1? R.drawable.list_destination:
+								R.drawable.list_intermediate, 0, 0, 0);
 					tv.setCompoundDrawablePadding(padding);
 					final CheckBox ch = ((CheckBox) v.findViewById(R.id.check_item));
 					ch.setVisibility(View.VISIBLE);
