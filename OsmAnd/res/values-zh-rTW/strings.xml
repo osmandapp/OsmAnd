@@ -54,7 +54,7 @@
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
-		OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap（OSM）資料。所有圖資(向量圖或網格圖)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
+		OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或網格圖)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
 
 		主要功能：
 		- 完整的離線功能(存放下載的向量圖或網格圖)
@@ -78,7 +78,7 @@
 	<string name="osmand_plus_short_description_80_chars">可用於離線和線上的 OSM 地圖，為通用的手機地圖查看和導航</string>
 	<string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ OsmAnd (OSM Automated Navigation Directions)
-		OsmAnd 是開放源碼導航應用程式訪問到各式各樣的全球 OpenStreetMap （OSM）資料。所有圖資(向量圖或網格圖)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
+		OsmAnd 是開放源碼導航應用程式訪問到各式各樣的全球 OpenStreetMap (簡稱OSM開放街道地圖) 資料。所有圖資(向量圖或網格圖)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
 
 主要功能：
  - 完整離線功能 (存放下載的向量圖或網格圖)
@@ -1199,7 +1199,7 @@
 	<string name="local_index_no_items_to_do">在 %1$s 沒有項目</string>
 	<string name="incomplete_locale">未完成</string>
 	<string name="osmand_extended_description_4000_chars">
-OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式且近於免費，有世界各地和高品質的OpenStreetMap (OSM) 資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於兩方面線上和離線（無需網路連線）。
+OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式且近於免費，有世界各地和高品質的OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於兩方面線上和離線（無需網路連線）。
 
 一些主要功能：
 
