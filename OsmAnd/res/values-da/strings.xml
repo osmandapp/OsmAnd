@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen ('Contour lines') på Google Play for at støtte den videre udvikling.</string>
+<resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
     <string name="av_widget_action_descr">Vælg standard modulhandling</string>
@@ -21,7 +21,7 @@
 	*Udvidelse for Audionoter 
 	*Udvidelse for højdekurver
 	*Fejlrettelser
-	*'Touring view' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
+	*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
 	*EGM96 geoide offset korrektion for GPS højdeaflæsningerne
     </string>
     <string name="recording_unavailable">ikke tilgængelig</string>
@@ -37,14 +37,14 @@
     <string name="av_control_start">start</string>
     <string name="map_widget_av_notes">Audio-/videonoter</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd udvidelse for offline højdekurver</string>
-    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd's offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
+    <string name="osmand_srtm_long_description_1000_chars">Udvidelsen indeholder højdekurver, der kan vises i OsmAnd\'s offline kort. De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced rumbårne Thermal Emission og Reflection Radiometer), en billeddannende instrument ombord Terra, flagskib satellit fra NASAs Earth Observering systemet. ASTER er et samarbejde mellem NASA, Japans ministerium for økonomi, handel og industri (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="osmand_distance_plugin_description">Mål afstanden mellem to eller flere punkter. Tilføj punkt med et kort klik og fjern med et langt tryk.</string>
     <string name="osmand_distance_plugin_name">Afstandsberegner</string>
     <string name="use_clear_distance_measurement">Klik en gang mere for at rydde målepunkter.</string>
     <string name="use_distance_measurement">Tryk for at lave et punkt, tryk og hold for at slette tidligere punkt, klik på målingsmodul for at afslutte.</string>
     <string name="av_control_stop">stop</string>
     <string name="map_widget_distancemeasurement">Afstandsmåling</string>
-    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. 'Brug placering ...' for at tildele en note til den angivne placering</string>
+    <string name="audionotes_location_not_defined">Placering der skal tilknyttes til noten er ikke defineret endnu. \'Brug placering ...\' for at tildele en note til den angivne placering</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Audionoter</string>
     <string name="audionotes_plugin_description">Optag audio-/videonoter under turen</string>
@@ -283,7 +283,7 @@ dvaletilstand</string>
  * retning ved banerne
  * Information om hastighedsbegrænsninger, fartkameraer, og vejbump
  * Forbedret stemmestyring på motorveje
- * Parkeringsudvidelse ('Hvor er min bil parkeret?')
+ * Parkeringsudvidelse (\'Hvor er min bil parkeret?\')
  * Aktiver/deaktiver logningsmodul
 	</string>
 	<string name="select_animate_speedup">Vælg acceleration for ruteanimation</string>
@@ -353,7 +353,7 @@ Tryk på et eksisterende element for at se flere detaljer, tryk og hold for at d
 	<string name="unknown_location">Position endnu ikke kendt</string>
 	<string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
 	<string name="confirm_interrupt_download">Afbryd hentning af fil?</string>
-	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via 'Indstillinger' -&gt; 'Datahåndtering'. Bagefter kan man se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
+	<string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' -&gt; \'Datahåndtering\'. Bagefter kan man se kort, søge adresser, finde interessepunkter og finde offentlig transport.</string>    
 	<string name="basemap_was_selected_to_download">Basiskort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
 	<string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
 	<string name="local_indexes_cat_tile">Online- og delkort</string>
@@ -384,7 +384,7 @@ Tryk på et eksisterende element for at se flere detaljer, tryk og hold for at d
 	<string name="debugging_and_development">OsmAnd udvikling</string>
 	<string name="native_rendering">Indbygget optegning</string>
 	<string name="test_voice_prompts">Test stemmemeddelelser</string>    
-	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i 'Indstillinger' -&gt; 'Datahåndtering' eller skifte til onlinekort.</string>
+	<string name="switch_to_raster_map_to_see">Ingen offline vektorkort til stede for denne placering. Hent et kort i \'Indstillinger\' -&gt; \'Datahåndtering\' eller skifte til onlinekort.</string>
 	<string name="send_files_to_osm">Send GPX-filer til OSM?</string>
 	<string name="gpx_visibility_txt">Synlighed</string>
 	<string name="gpx_description_txt">Beskrivelse</string>
@@ -476,7 +476,7 @@ Tryk på et eksisterende element for at se flere detaljer, tryk og hold for at d
 	<string name="live_monitoring_interval">Interval for online sporing</string>
 	<string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}</string>
 	<string name="live_monitoring_url">Webadresse for online sporing</string>
-	<string name="gpx_monitoring_disabled_warn">Aktiver 'Log spor til GPX-fil' indstilling.</string>
+	<string name="gpx_monitoring_disabled_warn">Aktiver \'Log spor til GPX-fil\' indstilling.</string>
 	<string name="show_current_gpx_title">Vis aktuelt spor</string>
 	<string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
 	<string name="free_version_title">Gratis version</string>
@@ -515,7 +515,7 @@ Tryk på et eksisterende element for at se flere detaljer, tryk og hold for at d
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
 	<string name="binary_map_download_success">Hentning lykkedes.
-Aktiver under 'Menu' -&gt; 'Definer visning' -&gt; 'Vælg kortkilde…' -&gt; 'Offline vektorkort'.</string>
+Aktiver under \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -549,7 +549,7 @@ Aktiver under 'Menu' -&gt; 'Definer visning' -&gt; 'Vælg kortkilde…' -&gt; 'O
 	<string name="poi_query_by_name_matches_categories">Flere kategorier af interessepunkter fundet som matcher forespørgslen:</string>
 	<string name="data_to_search_poi_not_available">Lokale data til at søge interessepunkter findes ikke.</string>
 	<string name="poi_filter_by_name">Søg via navn</string>
-	<string name="old_poi_file_should_be_deleted">Interessepunkt-datafilen '%1$' er overflødig og kan slettes.</string>
+	<string name="old_poi_file_should_be_deleted">Interessepunkt-datafilen \'%1$\' er overflødig og kan slettes.</string>
 	<string name="update_poi_file_not_found">Lokal fil til at vedligeholde interessepunkt ændringer blev ikke fundet og kunne ikke oprettes.</string>
 	<string name="button_upgrade_osmandplus">Opgrader OsmAnd+</string>
 	<string name="local_index_mi_rename">Omdøb</string>
@@ -565,7 +565,7 @@ Aktiver under 'Menu' -&gt; 'Definer visning' -&gt; 'Vælg kortkilde…' -&gt; 'O
 	<string name="select_search_position">Søg i nærheden af:</string>
 	<string name="context_menu_item_search">Søg i nærheden</string>
 	<string name="save_route_dialog_title">Gem rute som GPX-spor</string>
-	<string name="route_successfully_saved_at">Rute gemt som '%1$s'.</string>
+	<string name="route_successfully_saved_at">Rute gemt som \'%1$s\'.</string>
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
 	<string name="default_buttons_save">Gem</string>
@@ -769,10 +769,10 @@ Liste over understøttede lande (dybest set world wide!):
 Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
 	</string>
 	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende. OsmAnd har en datahåndtering, som kan søge efter tilgængelige offline data opdateringer.
-For at søge efter opdateringer gå til 'Indstillinger' -&gt; 'Datahåndtering' -&gt; 'Hent offline data'. Efter regions liste er hentet fra internettet, vælg 'Menu' -&gt; 'Filtrer det hentede' for at angive kun opdateringer til data, der allerede på din enhed.
-Emner i 'grøn' indikerer datafiler identiske på enheden og serveren
-Emner i 'blå' angiver tilgængelige opdateringer på serveren
-Emner i 'kursiv' angiver data der er deaktiverede på enheden</string>
+For at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Hent offline data\'. Efter regions liste er hentet fra internettet, vælg \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på din enhed.
+Emner i \'grøn\' indikerer datafiler identiske på enheden og serveren
+Emner i \'blå\' angiver tilgængelige opdateringer på serveren
+Emner i \'kursiv\' angiver data der er deaktiverede på enheden</string>
 	<string name="tip_recent_changes_0_8_0_t">Ændringer i 0.8.0:
  - * Udvidelser funktionalitet *
  - De fleste funktioner er grupperet efter funktioner og kan aktiveres/deaktiveres i menuen Indstillinger/Udvidelser. Aktiver (online eller cachede) delkort kilder, sporings indstillinger og mange andre nye og tidligere eksisterende funktioner.
@@ -794,8 +794,8 @@ Emner i 'kursiv' angiver data der er deaktiverede på enheden</string>
  - Offline interessepunkt-redigering
  - Online sporings valgmulighed - send periodisk koordinater til en webtjeneste (læs hvordan opsætter din egen webtjeneste i HowTo artiklerne)
  - Vis den aktuelle optagende sporing på kort
- - Retnings sensor: 'Lav U-vending' vises og siges når der køres i modsatte retning eller efter et misset sving
- - Ny stemme kommando 'Rute genberegnet'
+ - Retnings sensor: \'Lav U-vending\' vises og siges når der køres i modsatte retning eller efter et misset sving
+ - Ny stemme kommando \'Rute genberegnet\'
  - Visuel visning af et kommende sving inden for 100m ved at svingpilen skifter farve
  - Opdateringsinformation vises nu også for deaktiverede index filer på datahåndteringsskærmen i mørkegrøn og mørkeblå
  - Andre ændringer
@@ -807,26 +807,26 @@ Emner i 'kursiv' angiver data der er deaktiverede på enheden</string>
 	</string>    
 	<string name="tip_rotation_switching_t_v2">Orienteringen af kortet kan ændres ved at klikke på kompasnålen.
 Valgmulighederne er:
- 'Roter ikke (nord er op)' - Kortet roteres ikke. Nord er altid opad
- 'Efter bevægelsesretning' - Kortet vil hele tiden roteres så din retning er opad
- 'Efter kompas' - Kortet vil hele tiden roteres så det passer med enhedens kompas
+ \'Roter ikke (nord er op)\' - Kortet roteres ikke. Nord er altid opad
+ \'Efter bevægelsesretning\' - Kortet vil hele tiden roteres så din retning er opad
+ \'Efter kompas\' - Kortet vil hele tiden roteres så det passer med enhedens kompas
 	</string>
 	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for nogle vektorkort skiftes mellem dag (lysere) og nat (mørkere).
 Natfarver er mere sikre under natkørsel.
-Indstil regler for dag/nat skift i 'Menu' -&gt; 'Konfigurer skærm…' -&gt;'Dag/nat kort'.
+Indstil regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm…\' -&gt;\'Dag/nat kort\'.
 Valgmulighederne er:
- 'Solopgang/solnedgang' - Automatisk tilstand, styret af solens position(standard)
- 'Dag' - Brug altid dagtilstand
- 'Nat' - Brug altid nattilstand
- 'Lysføler' - Kortvisning styres af lysføleren i din enhed (kun hvis den har en)
+ \'Solopgang/solnedgang\' - Automatisk tilstand, styret af solens position(standard)
+ \'Dag\' - Brug altid dagtilstand
+ \'Nat\' - Brug altid nattilstand
+ \'Lysføler\' - Kortvisning styres af lysføleren i din enhed (kun hvis den har en)
 	</string>	
 	<string name="tip_osm_improve_t">OsmAnd bruger kort baseret på OpenStreetMap.org (OSM) data og ud over kortvisning og navigation, kan den bruges til at forbedre OSM datakvaliteten. Man kan nemt oprettet og sende nye interessepunkter (IP) eller OSM fejlrapporter med blot et par tryk!
-Først skal man indtaste sine logind-oplysninger til OSM i 'Indstillinger' -&gt; 'Generelle indstillinger' -&gt; 'OSM redigering'.
-For at oprette et nyt interessepunkt, brug valgmuligheden 'Opret interessepunkt' i kortets genvejsmenu. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen 'Opret interessepunkt' og til sidst sende det.
+Først skal man indtaste sine logind-oplysninger til OSM i \'Indstillinger\' -&gt; \'Generelle indstillinger\' -&gt; \'OSM redigering\'.
+For at oprette et nyt interessepunkt, brug valgmuligheden \'Opret interessepunkt\' i kortets genvejsmenu. Fortsæt med at indtaste informationer for det nye interessepunkt i dialogen \'Opret interessepunkt\' og til sidst sende det.
 Fejl i kort kan rapporteres med det samme via OSM fejl og OSM netværket kan så løse problemet hurtigere.
-For at tilføje en OSM fejl brug valgmuligheden 'Åben OSM fejlregistrering' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med 'Tilføj' knappen.
+For at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
 Bemærk: at internet forbindelse er nødvendig for at sende OSM interessepunkter og OSM fejlrapporter.</string>
-	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så 'Brug som destination'), i alle søge aktiviteter eller via et langt tryk på en post i 'Favoritter'
+	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så \'Brug som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i \'Favoritter\'
 Destinationen vises som en orange skive på kortet og OsmAnd viser afstanden og retningen til den (orange trekant).
 	</string> 
 	<string name="tip_recent_changes_0_6_9_t">Ændringer i 0.6.9:
@@ -845,7 +845,7 @@ Destinationen vises som en orange skive på kortet og OsmAnd viser afstanden og 
  - Gennemfør interessepunkt (IP) søgning efter navn i store områder (lande)
  - Rettet flimrende kortskærm for tabletter (Issue 641)
  - Auto-center kortvisning valgmulighed (Issue 356)
- - GPX navigation flyttet til 'Kørselsvejledning' og 'Gem Kørselsvejledning' flyttet til 'Om rute'
+ - GPX navigation flyttet til \'Kørselsvejledning\' og \'Gem Kørselsvejledning\' flyttet til \'Om rute\'
  - IP data inkluderet i OBF fil (alle indekser efter 01/10/11).
  - Stemmeprompt rettelser (GPS-position rettelse, undlad første kommando)
  - Små forbedringer
@@ -931,7 +931,7 @@ Zooms hentet: %5$s</string>
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 
-For at anvende aktiver 'Menu' -&gt; 'Definer visning' -&gt; 'Vælg kortkilde…' 'Offline vektor-kort'.</string>
+For at anvende aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmeindstillinger</string>
 	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
@@ -958,7 +958,7 @@ For at anvende aktiver 'Menu' -&gt; 'Definer visning' -&gt; 'Vælg kortkilde…'
 	<string name="tip_location_sharing">Placeringsdeling</string>
 	<string name="tip_location_sharing_t">Del placeringen af interessante steder på din rejse med familie og venner.
 For at dele en placering:
- Brug 'Menu' -&gt; 'Brug placeringer' -&gt; 'Del placering'.
+ Brug \'Menu\' -&gt; \'Brug placeringer\' -&gt; \'Del placering\'.
  Derefter vælges en måde at dele din placering. Valgmulighederne er: E-mail, SMS(tekst) eller bare kopier koordinaterne til udklipsholderen.
 	</string>
 	<string name="tip_favorites">Favoritsteder</string>
@@ -966,7 +966,7 @@ For at dele en placering:
 	<string name="local_index_poi_data">Interessepunkt-data</string>
 	<string name="local_indexes_cat_gpx">GPX-data</string>
 	<string name="error_doing_search">Der skete en fejl under offline søgning</string>
-	<string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt '%s'</string>
+	<string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'</string>
 	<string name="search_osm_offline">Søg geografisk placering</string>
 	<string name="system_locale">System</string>
 	<string name="preferred_locale_descr">Vælg sprog</string>
@@ -995,7 +995,7 @@ For at dele en placering:
 	<string name="send_location_email_pattern">For at se placering følg link %1$s eller android hensigts link %2$s</string>
 	<string name="send_location">Send placering</string>
 	<string name="context_menu_item_share_location">Del placering</string>
-	<string name="add_waypoint_dialog_added">Rutepunkt '{0}' blev korrekt tilføjet</string>
+	<string name="add_waypoint_dialog_added">Rutepunkt \'{0}\' blev korrekt tilføjet</string>
 	<string name="add_waypoint_dialog_title">Tilføj rutepunkt til optaget GPX-spor</string>
 	<string name="context_menu_item_add_waypoint">Tilføj GPX-rutepunkt</string>
 	<string name="amenity_type_administrative">Administrativ</string>
@@ -1023,13 +1023,13 @@ For at dele en placering:
 	<string name="km">km</string>
 	<string name="km_h">km/t</string>
 	<string name="m">m</string>
-	<string name="old_map_index_is_not_supported">Forældet kortdataformat '{0}' er ikke understøttet</string>
+	<string name="old_map_index_is_not_supported">Forældet kortdataformat \'{0}\' er ikke understøttet</string>
 	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
 	<string name="poi_filter_custom_filter">Tilpasset filter</string>
 	<string name="poi_filter_namefinder">Online navne-søger</string>
 	<string name="reading_cached_tiles">Læser cachelagrede delkort…</string>
-	<string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks '{0}'</string>
-	<string name="version_index_is_not_supported">Versionen af indeks '{0}' er ikke understøttet</string>
+	<string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
+	<string name="version_index_is_not_supported">Versionen af indeks \'{0}\' er ikke understøttet</string>
 	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
 	<string name="use_osmand_routing_service_descr">Brug af OsmAnd offline navigation gælder kun ruter &gt; 20 km (eksperimentel)</string>
 	<string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
@@ -1051,18 +1051,18 @@ For at dele en placering:
 	<string name="daynight">Dag-/nattilstand</string>
 	<string name="download_files_question">Hent {0} filer ({1} MB)?</string>
 	<string name="tip_favorites_t">Ofte brugte steder kan gemmes som favoritter.
-For at gemme et sted som favorit gå til genvejsmenu, vælg 'Tilføj til favoritter' og indtast et navn. Når favoriten er gemt, er den tilgængelig via\'Start skær\' -&gt; 'Favoritter'.
-Langt tryk på en favorit i 'Favorit' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
-For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen 'Favoritter' under 'Menu' -&gt; 'Definer visning'.
+For at gemme et sted som favorit gå til genvejsmenu, vælg \'Tilføj til favoritter\' og indtast et navn. Når favoriten er gemt, er den tilgængelig via\'Start skær\' -&gt; \'Favoritter\'.
+Langt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge den som destination, redigere eller slette den.
+For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Definer visning\'.
 	</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
 	* Redesign af brugerflade
 	* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes 'Menu' -&gt; 'Rutevejledning' på kortet og der vælges navigationstype.</string>
+    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
-	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til 'Indstillinger - Datahåndtering', vælg den ønskede stemmepakke og hent den.</string>
+	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
 	<string name="items_were_selected">{0} enheder valgt</string>
 	<string name="filter_existing_indexes">Hentet</string>
 	<string name="deselect_all">Fravælg alle</string>
@@ -1099,7 +1099,7 @@ For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen 'F
 	<string name="voice">Stemme</string>
 	<string name="no_vector_map_loaded">Vektorkort blev ikke indlæst</string>
 	<string name="map_route_by_gpx">Naviger med GPX</string>
-	<string name="gpx_files_not_found">GPX-filer blev ikke fundet i '/tracks' mappen</string>
+	<string name="gpx_files_not_found">GPX-filer blev ikke fundet i \'/tracks\' mappen</string>
 	<string name="layer_gpx_layer">GPX-spor…</string>
 	<string name="error_reading_gpx">Fejl under læsning af GPX-data</string>
 	<string name="vector_data">Offline vektorkort</string>
@@ -1185,7 +1185,7 @@ For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen 'F
 	<string name="osb_comment_dialog_message">Meddelelse</string>
 	<string name="osb_comment_menu_item">Tilføj kommentar</string>
 	<string name="favourites_remove_dialog_success">Favoritpunkt {0} blev slettet.</string>
-	<string name="favourites_remove_dialog_msg">Fjern favoritpunkt '%s'?</string>
+	<string name="favourites_remove_dialog_msg">Fjern favoritpunkt \'%s\'?</string>
 	<string name="favourites_context_menu_delete">Slet</string>
 	<string name="favourites_context_menu_edit">Rediger</string>
 	<string name="amenity_type_emergency">Nødsituation</string>
@@ -1251,7 +1251,7 @@ Kun det forudindlæste kort kan vises og nye kort kan ikke hente fra internettet
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
-Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hovedskærmen (se '?' ikon).
+Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hovedskærmen (se \'?\' ikon).
 	</string>
 	<string name="application_dir_change_warning">Ændring af mappen der gemmes i medfører ikke flytning eller sletning af data. Det skal gøres separat og udenom OsmAnd. Fortsæt alligevel?</string>
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
@@ -1290,15 +1290,15 @@ Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hove
 	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks. online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoom niveau der hentes for online delkort</string>
-	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via 'Menu' -&gt; 'Definer visning' i kort visning.
-Under 'Kortkilde...' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver 'Online og delkort' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
+	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' -&gt; \'Definer visning\' i kort visning.
+Under \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
 OsmAnd understøtter også brugerdefinerede kilder.
 	</string>
 	<string name="tip_app_mode_t_v2">OsmAnd understøtter forskellige brugerprofiler (kan konfigureres) til forskellige brugstilfælde.
 Skift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger ikon) eller når en rute oprettes.
 	</string>
 	<string name="tip_search_t">Søg efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
-Tryk på 'Søg' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen 2 valgmuligheder: 'Kørselsvejledning' eller 'Vis på kort'.
+Tryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen 2 valgmuligheder: \'Kørselsvejledning\' eller \'Vis på kort\'.
 	</string>
 	<string name="tip_map_context_menu_t">Kortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
 Så åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
@@ -1374,7 +1374,7 @@ Navigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="save_current_track">Gem aktuelle GPX-spor</string>
 	<string name="save_track_interval">Logningsinterval</string>
 	<string name="save_track_interval_descr">Vælg positioneringsinterval for sporing</string>
-	<string name="save_track_to_gpx_descrp">Spor bliver gemt i '/track' mappen grupperet efter dage</string>
+	<string name="save_track_to_gpx_descrp">Spor bliver gemt i \'/track\' mappen grupperet efter dage</string>
 	<string name="save_track_to_gpx">Log spor til GPX-fil</string>
 	<string name="update_tile">Opdater kort</string>
 	<string name="reload_tile">Genindlæs delkort</string>
@@ -1430,7 +1430,7 @@ Navigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="navigate_point_cancel">Annuller</string>
 	<string name="search_address_region">Region</string>
 	<string name="context_menu_item_open_bug">Åben OSM fejlregistrering</string>
-	<string name="add_favorite_dialog_favourite_added_template">Favoritpunkt '{0}' blev tilføjet.</string>
+	<string name="add_favorite_dialog_favourite_added_template">Favoritpunkt \'{0}\' blev tilføjet.</string>
 	<string name="osb_add_dialog_title">Indtast fejltekst</string>
 	<string name="osb_add_dialog_success">Fejlmeddelelse oprettet</string>
 	<string name="osb_add_dialog_error">Undtagelse opstod: Fejlmeddelelse blev ikke oprettet</string>

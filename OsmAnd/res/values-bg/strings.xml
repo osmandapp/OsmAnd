@@ -7,7 +7,7 @@
     <string name="tip_recent_changes_0_8_3_t">Промени в 0.8.3:
 	\n\t* Междинни точки
 	\n\t* Подобрени указания за следване на маршрут
-	\n\t* Опция 'без магистрали'
+	\n\t* Опция \'без магистрали\'
 	\n\t* Велоалея = показване на път
 	\n\t* корекции на грешки в програмата
 	</string>
@@ -63,9 +63,9 @@
 	<string name="context_menu_item_update_map">Обновяване на картата</string>
 	<string name="validate_gpx_upload_name_pwd">Въведете потребителско име и парола в OSM за качване на GPX файлове.</string>
     	<string name="live_monitoring_interval_descr">Укажете интервал за следване online</string>
-	<string name="osmand_monitoring_plugin_description">Разрешаване на следенето и навигацията в режим 'заспиване' (изгаснал екран) чрез периодично включване на GPS устройството.
+	<string name="osmand_monitoring_plugin_description">Разрешаване на следенето и навигацията в режим \'заспиване\' (изгаснал екран) чрез периодично включване на GPS устройството.
         Покажи настройките за улесняване на записа на локални GPX файлове или директно в интернет.</string>
     <string name="av_settings_descr">Аудио и видео настройки</string>
     <string name="av_settings">Аудио и видео настройки </string>
-    <string name="native_library_not_running">Приложението работи в 'безопасен' режим (можете да го забраните в Настройки).</string>
+    <string name="native_library_not_running">Приложението работи в \'безопасен\' режим (можете да го забраните в Настройки).</string>
     </resources>

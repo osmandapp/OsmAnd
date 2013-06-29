@@ -1040,7 +1040,7 @@
 		Enkele van de mogelijkheden:
 		- Volledig offline gebruik (met gedownloade vector- of rasterkaarten)
 		- Compacte offline vectorkaarten van de hele wereld zijn beschikbaar
-		- Kaarten van landen of regio's direct downloadbaar via de app
+		- Kaarten van landen of regio\'s direct downloadbaar via de app
 		- Meerdere kaartlagen mogelijk, zoals GPX- of navigatietracks, interessepunten (points of interest), favorieten, hoogtelijnen, haltes openbaar vervoer, aanvullende kaarten met instelbare transparantie
 		- Offline zoeken naar adressen en plaatsen
 		- Offline route-aanwijzingen voor auto, fiets, en voetganger, keuze uit:
@@ -1051,7 +1051,7 @@
 
 		Beperkingen van de gratis versie van OsmAnd:
 		- Beperkt aantal kaartdownloads
-		- Geen toegang tot Wikipedia offline POI's.
+		- Geen toegang tot Wikipedia offline POI\'s.
 
 		OsmAnd wordt actief ontwikkeld en de verdere vooruitgang van het project is afhankelijk van financiële bijdragen om de ontwikkeling en toetsing van nieuwe functionaliteit te kunnen bekostigen. Wij verzoeken je om OsmAnd+ te kopen, of om een donatie over te maken via osmand.net.
 	</string>
@@ -1236,7 +1236,7 @@
 	\n\t* Reliëfschaduwpakketten voor de hoogtelijnen-plugin
 	\n\t* Bugs opgelost (sub-optimale routeberekening)
     </string>
-    <string name="av_use_external_camera_descr">Gebruik de systeemapplicatie voor foto's</string>
+    <string name="av_use_external_camera_descr">Gebruik de systeemapplicatie voor foto\'s</string>
     <string name="av_use_external_camera">Gebruik de camera-applicatie</string>
     <string name="index_name_openmaps">OpenMaps.eu</string>
     <string name="tip_recent_changes_1_2_t">Opgelost in 1.2.1:
