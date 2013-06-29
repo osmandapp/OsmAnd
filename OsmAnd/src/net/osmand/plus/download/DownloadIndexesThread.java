@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -52,7 +53,7 @@ public class DownloadIndexesThread {
 	private DownloadIndexActivity uiActivity = null;
 	private IndexFileList indexFiles = null;
 	private List<SrtmIndexItem> cachedSRTMFiles;
-	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = Collections.synchronizedMap(new TreeMap<IndexItem, List<DownloadEntry>>());
+	private Map<IndexItem, List<DownloadEntry>> entriesToDownload = new ConcurrentHashMap<IndexItem, List<DownloadEntry>>();
 	private Set<DownloadEntry> currentDownloads = new HashSet<DownloadEntry>();
 	private final Context ctx;
 	private OsmandApplication app;
