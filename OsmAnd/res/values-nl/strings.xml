@@ -999,7 +999,7 @@
   <string name="map_widget_mini_route">Mini-routekaart</string>
   <string name="bg_service_screen_lock">Vergrendel scherm</string>
   <string name="bg_service_screen_lock_toast">Het scherm is vergrendeld</string>
-  <string name="bg_service_interval">Zet ontwaak-interval:</string>
+  <string name="bg_service_interval">Kies ontwaakinterval:</string>
   <string name="screen_is_locked">Klik op het slotje om te ontgrendelen</string>
   <string name="bg_service_screen_unlock">Ontgrendel scherm</string>
   <string name="bg_service_sleep_mode_off">Slaapmodus\naanzetten</string>
@@ -1480,4 +1480,5 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
     <string name="destination_point">Bestemming %1$s</string>
     <string name="local_index_gpx_timemoving">\nTijd in beweging: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timespan">\nTijdspanne: %1$d:%2$02d:%3$02d</string>
+	<string name="av_photo_play_sound">Speel geluid af na nemen van foto</string>
 	</resources>
