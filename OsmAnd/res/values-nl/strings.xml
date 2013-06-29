@@ -924,7 +924,7 @@
   <string name="global_app_allocated_memory">Beschikbaar werkgeheugen</string>
   <string name="native_app_allocated_memory_descr">Werkgeheugen, gereserveerd door app %1$s MB (Dalvik %2$s MB, overig %3$s MB). Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</string>
   <string name="native_app_allocated_memory">Totaal werkgeheugen</string>
-  <string name="select_animate_speedup">Selecteer versnelling van de route-simulering</string>
+  <string name="select_animate_speedup">Selecteer versnelling van de route-simulatie</string>
   <string name="osmand_parking_hours">Uur</string>
   <string name="osmand_parking_minutes">Minuten</string>
   <string name="osmand_parking_position_description_add_time">De auto werd geparkeerd om:</string>
