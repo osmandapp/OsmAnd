@@ -153,7 +153,7 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
 //				label.setTypeface(Typeface.DEFAULT);
-				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.list_activities_favorites);
+				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.list_favorite);
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
 			if (model.isStandardFilter()) {
