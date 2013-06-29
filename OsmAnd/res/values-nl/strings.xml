@@ -343,10 +343,10 @@
   <string name="internet_not_available">De benodigde internetverbinding voor deze actie is niet beschikbaar</string>
   <string name="install_more">Installeer meer…</string>
   <string name="tip_update_index">Bijwerken van offline gegevens</string>
-  <string name="tip_update_index_t">\tHet is belangrijk dat de kaartgegevens up-to-date zijn. OsmAnd heeft een downloadmanager die kan controleren of er updates beschikbaar zijn.
-		\n\tOm te controleren op updates, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'. Nadat de regiolijst is opgehaald, tik op de menuknop en kies \'Toon gedownloade\' om de gegevens te zien die al op je apparaat aanwezig zijn.
-		\n\tGroen: gegevens op je apparaat en op de server zijn identiek
-		\n\tBlauwe: er is een update beschikbaar op de server
+  <string name="tip_update_index_t">\tHet is belangrijk dat de kaartgegevens up-to-date zijn. De downloadmanager kan aangeven of er updates beschikbaar zijn.
+		\n\tOm te controleren op updates, ga naar \'Instellingen\' -&gt; \'Offline gegevens\' -&gt; \'Download of update offline gegevens\'. Druk op de menuknop en kies \'Toon gedownloade\' om de gegevens te zien die al op je apparaat aanwezig zijn.
+		\n\tGroen: deze gegevens zijn up-to-date
+		\n\tBlauw: er is een update beschikbaar
 		\n\tSchuingedrukte: gegevens zijn gedeactiveerd</string>
   <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten inplaats van (raster)kaartsegmenten te gebruiken</string>
   <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
@@ -1109,11 +1109,11 @@
 	<string name="intermediate_point">Routepunt %1$s</string>
     <string name="gps_not_available">Schakel GPS in via de instellingen</string>
     <string name="map_widget_show_destination_arrow">Toon richting van de bestemming</string>
-    <string name="enable_plugin_monitoring_services">Activeer de tracking-plugin om positietrackingfuncties te gebruiken (GPX-opname, online tracking)</string>
+    <string name="enable_plugin_monitoring_services">Activeer de tracking-plugin om de afgelegde weg vast te leggen (GPX-spoor, online tracking)</string>
     <string name="non_optimal_route_calculation">Bereken mogelijk niet-optimale route voor lange afstanden</string>
     <string name="rendering_attr_roadColors_description">Selecteer kleurschema voor wegen:</string>
 	<string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
-    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. Zoeken in Market?</string>
+    <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. In Play-store zoeken?</string>
 	<string name="close_changeset">Sluit changeset</string>
 	<string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt langzamere Android-code in plaats van native code).</string>
     <string name="safe_mode">Veilige modus</string>
@@ -1203,11 +1203,11 @@
     <string name="av_settings">Audio/video-instellingen </string>
     <string name="recording_error">Fout opgetreden bij opnemen </string>
     <string name="recording_camera_not_available">Camera is niet beschikbaar</string>
-    <string name="srtm_paid_version_msg">Overweeg alsjeblieft om de hoogtelijnen-plugin (\"Contour lines\") te kopen in de Market om verdere ontwikkeling te ondersteunen.</string>
+    <string name="srtm_paid_version_msg">Overweeg om de hoogtelijnen-plugin (\"Contour lines\") te kopen in de Play-store om verdere ontwikkeling te ondersteunen.</string>
     <string name="srtm_paid_version_title">Hoogtelijnen-plugin</string>
     <string name="animate_routing_using_gpx">Wil je een bestaand GPX-bestand gebruiken?</string>
     <string name="intermediate_points_change_order">Volgorde wijzigen</string>
-    <string name="dropbox_plugin_description">Met de Dropbox-plugin kan je tracks en audio/video-notities synchroniseren met je Dropbox-account.</string>
+    <string name="dropbox_plugin_description">De Dropbox-plugin kan tracks en audio/video-notities synchroniseren met je Dropbox-account.</string>
     <string name="dropbox_plugin_name">Dropbox-plugin</string>
     <string name="recording_context_menu_show">Toon</string>
     <string name="recording_photo_description">Foto %1$s van %2$s</string>
