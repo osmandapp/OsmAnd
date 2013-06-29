@@ -4,7 +4,7 @@
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
     <string name="enable_plugin_monitoring_services">啟用追踪外掛元件，用位置日誌服務(GPX 記錄，網上追踪查詢)</string>
     <string name="non_optimal_route_calculation">過遠的距離計算，可能不是最佳的路線</string>
-    <string name="tip_recent_changes_0_8_4_t">Changes in 0.8.4:
+    <string name="tip_recent_changes_0_8_4_t">在0.8.4的變更：
 	\n\t* Some bug fixes
 	\n\t* Map does not lose position lock after interruptions
 	\n\t* Enable sleep mode service during navigation
@@ -1055,8 +1055,8 @@
     <string name="wait_current_task_finished">請等待目前的作業結束</string>
     <string name="use_kalman_filter_compass_descr">使用 Kalman 過濾，以避免電子羅盤的偏差</string>
     <string name="use_kalman_filter_compass">使用 Kalman 過濾</string>
-    <string name="use_magnetic_sensor_descr">使用磁性感測器來判斷電子羅盤的值，而不是定位感測器</string>
-    <string name="use_magnetic_sensor">使用磁性感測器</string>
+    <string name="use_magnetic_sensor_descr">使用磁性感應器來判斷電子羅盤的值，而不是定位感應器</string>
+    <string name="use_magnetic_sensor">使用磁性感應器</string>
     <string name="other_location">其它</string>
     <string name="install_paid">完整版</string>
     <string name="cancel_route">排除路線</string>
@@ -1349,13 +1349,13 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="osmand_srtm_long_description_1000_chars">這個外掛元件提供了等高線，可以在 OsmAnd 的離線地圖中顯示。全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，遙測儀器安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。</string>
     <string name="audionotes_location_not_defined">以位置去關聯的注解尚未定義。\"使用位置...\"，把注解分配給指定的位置</string>
     <string name="srtm_plugin_description">便於下載目前離線的等高線和地形陰影（設置 -&gt; 資料管理 -&gt; 下載 -&gt; 選擇所需的地圖類型）。</string>
-    <string name="tip_recent_changes_0_7_2_t">Changes in 0.7.2:
+    <string name="tip_recent_changes_0_7_2_t">在0.7.2的變更：
 		\n\t- Native rendering for all devices
 		\n\t- Offline POI editing
 		\n\t- Accessibility
 		\n\t- Lots of bug fixes
 	</string>
-	<string name="tip_recent_changes_0_7_1_t">Changes in 0.7.1:
+	<string name="tip_recent_changes_0_7_1_t">在0.7.1的變更：
 		\n\t- Offline POI editing 
 		\n\t- Online Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles)
 		\n\t- Show currently recorded track on map
@@ -1365,7 +1365,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue
 		\n\t- Other changes
 	</string>
-	<string name="tip_recent_changes_0_6_8_t">Changes in 0.6.8:
+	<string name="tip_recent_changes_0_6_8_t">在0.6.8的變更：
 		\n\t- Completely redesigned search (POI, Address)! Make address search much faster and more responsive. Create one Search interface with many different options.
 		\n\t- Implement POI search by name in big areas (countries)  
 		\n\t- Fix flickering map screen for tablets (Issue 641)
@@ -1381,7 +1381,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
         \n\t* 為電子羅盤穩定度追加了設定
         \n\t* 在地圖螢幕的左上方按鈕替換選單按鈕
     </string>
-    <string name="tip_recent_changes_1_2_t">Fixes in 1.2.1:
+    <string name="tip_recent_changes_1_2_t">在1.2.1的修正：1.2.1:
 	    \n\t*Fix Geo Intent (Foursquare, c:geo)
 	    \n\t*Fix screen tremble during navigation
 	    \n\t*Other small fixes
@@ -1395,13 +1395,13 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t* Pebble watch support
 	</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_1_2_t">Changes in 1.1.2:
+    <string name="tip_recent_changes_1_1_2_t">在1.1.2的變更：
 		\n\t* Audio/video plugin enhancement (photos with EXIF information)
 		\n\t* Usability fixed and restructured Contour lines plugin
 		\n\t* Hillshade packages for Contour lines plugin
 		\n\t* Bug fixes (suboptimal routing)
     </string>
-    <string name="tip_recent_changes_1_1_0_t">Changes in 1.1.0:
+    <string name="tip_recent_changes_1_1_0_t">在1.1.0的變更：
 		\n\t* Distance calculator plugin
 		\n\t* Audio/video notes plugin
 		\n\t* Contour lines plugin
@@ -1415,27 +1415,27 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t為了做到這一點，只需簡易的由資料管理下載 WW15MGH.DAC 這個檔案 (原本是在 http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC)。
 	</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="tip_recent_changes_1_0_0_t">Changes in 1.0.0:
+    <string name="tip_recent_changes_1_0_0_t">在1.0.0的變更：
 	\n\t* Improved routing: faster, more precise, up to 250 km
 	\n\t* Introduce roads-only maps
 	\n\t* Map does not lose position lock after interruptions
 	\n\t* Enable sleep mode service during navigation
     </string>
-    <string name="tip_recent_changes_0_8_3_t">Changes in 0.8.3:
+    <string name="tip_recent_changes_0_8_3_t">在0.8.3的變更：
 	\n\t* Waypoints
 	\n\t* Improved route guidance
 	\n\t* Added a setting which allows to avoid motorways while building a route
 	\n\t* Added one more type of roads for bicycles to the map (Cycleway=track)
 	\n\t* Bug fixes
 	</string>
-	<string name="tip_recent_changes_0_8_2_t">Changes in 0.8.2:
+	<string name="tip_recent_changes_0_8_2_t">在0.8.2的變更：
 		\n\t* Improved Routing
 		\n\t* Dynamic map widgets
 		\n\t* Map settings moved to map screen
 		\n\t* Lock screen button with logging services
 		\n\t* Fixed Arabic, Kannada scripting and RTL languages 
 	</string>
-	<string name="tip_recent_changes_0_8_1_t">Changes in 0.8.1:
+	<string name="tip_recent_changes_0_8_1_t">在0.8.1的變更：
 		\n\t* More precise routes (a bit slower)
 		\n\t* Smart and fast Route recalculation
 		\n\t* Direction by lanes
@@ -1444,7 +1444,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t* Parking plugin (\'Where is my car parked at?\')
 		\n\t* Enable/disable logging widget
 	</string>
-	<string name="tip_recent_changes_0_8_0_t">Changes in 0.8.0:
+	<string name="tip_recent_changes_0_8_0_t">在0.8.0的變更：0.8.0:
 		\n\t- *Plugin functionality*
 		\n\t    - Most functionality is grouped by features and can be enabled/disabled in the Settings/Plugins.
 		You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features.     
@@ -1456,12 +1456,12 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t  *Usability and UI experience*
 		\n\t	- Improved in many areas		
 	</string>
-	<string name="tip_recent_changes_0_7_0_t">Changes in 0.7.0:
+	<string name="tip_recent_changes_0_7_0_t">在0.7.0的變更：
 		\n\t- Offline wikipedia data with articles
 		\n\t- Updated maps
 		\n\t- Other small features
 	</string>    
-	<string name="tip_recent_changes_0_6_9_t">Changes in 0.6.9 :
+	<string name="tip_recent_changes_0_6_9_t">在0.6.9的變更：
 		\n\t- Improved offline map rendering
 		\n\t- Fast Native offline rendering - look in experimental features (may not work on some devices)
 		\n\t- Massive look and feel changes
@@ -1469,7 +1469,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- New translations (Vienamese, Polish)
 		\n\t- Other small features
 	</string>
-	<string name="tip_recent_changes_0_6_7_t">Recent changes for 0.6.7:
+	<string name="tip_recent_changes_0_6_7_t">最近在0.6.7的變更：
 		\n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd)
 		\n\t- Favorite points and groups (categorize, delete, manage favorites)
 		\n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.)
@@ -1481,7 +1481,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- Improvement of TTS engine (announce exact distance, enable miles)
 		\n\t- Bug fixes
 	</string>
-	<string name="tip_recent_changes_0_6_6_t">Recent changes for 0.6.6: 
+	<string name="tip_recent_changes_0_6_6_t">最近在0.6.6的變更： 
 		\n\t- Text To Speech engine for voice navigation
 		\n\t- Make map renderer more detailed
 		\n\t- Basemap for whole world packaged with app
