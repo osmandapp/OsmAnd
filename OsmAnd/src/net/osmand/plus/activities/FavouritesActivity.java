@@ -196,7 +196,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 					true, onshow, false);
 			if (point.isStored()) {
 				ActionItem edit = new ActionItem();
-				edit.setIcon(getResources().getDrawable(R.drawable.list_activities_fav_edit));
+				edit.setIcon(getResources().getDrawable(R.drawable.a_5_content_edit_light));
 				edit.setTitle(getString(R.string.favourites_context_menu_edit));
 				edit.setOnClickListener(new OnClickListener() {
 					@Override
@@ -209,7 +209,7 @@ public class FavouritesActivity extends OsmandExpandableListActivity {
 
 				ActionItem delete = new ActionItem();
 				delete.setTitle(getString(R.string.favourites_context_menu_delete));
-				delete.setIcon(getResources().getDrawable(R.drawable.list_activities_fav_delete));
+				delete.setIcon(getResources().getDrawable(R.drawable.a_5_content_discard_light));
 				delete.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {

@@ -1240,7 +1240,7 @@ public class MapActivityActions implements DialogProvider {
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_show_on_map));
+		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.a_7_location_place_light));
 		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1256,7 +1256,7 @@ public class MapActivityActions implements DialogProvider {
 		});
 		qa.addActionItem(showOnMap);
 		ActionItem setAsDestination = new ActionItem();
-		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_navigate_to));
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.a_7_location_directions_light));
 		setAsDestination.setTitle(activity.getString(R.string.get_directions));
 		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1274,10 +1274,10 @@ public class MapActivityActions implements DialogProvider {
 		ActionItem intermediate = new ActionItem();
 		// For button-less search UI
 		if (targetPointsHelper.getPointToNavigate() != null) {
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_intermediate));
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.a_9_av_make_available_offline_light));
 			intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
 		} else {
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_set_destination));
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.a_9_av_make_available_offline_light));
 			intermediate.setTitle(activity.getString(R.string.context_menu_item_destination_point));
 		}
 		intermediate.setOnClickListener(new OnClickListener() {
@@ -1294,7 +1294,7 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(intermediate);
 		if (favorite) {
 			ActionItem addToFavorite = new ActionItem();
-			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.list_activities_favorites));
+			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.a_3_rating_important_light));
 			addToFavorite.setTitle(activity.getString(R.string.add_to_favourite));
 			addToFavorite.setOnClickListener(new OnClickListener() {
 				@Override
