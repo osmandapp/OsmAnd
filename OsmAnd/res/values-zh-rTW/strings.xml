@@ -422,7 +422,7 @@
 	<string name="auto_follow_route_navigation">只有導航時自動置中</string>
 	<string name="auto_follow_route_navigation_descr">只有在導航中，地圖檢視自動置中。</string>
 	<string name="auto_follow_location_enabled">使用地圖檢視自動置中。</string>
-	<string name="pref_vector_rendering">向量圖描繪的專用選項</string>
+	<string name="pref_vector_rendering">向量繪圖專用選項</string>
 	<string name="pref_overlay">上層 / 下層</string>
 	<string name="pref_raster_map">地圖來源設定</string>
 	<string name="pref_vector_map">向量地圖設定</string>
@@ -683,8 +683,8 @@
 	<string name="continuous_rendering_descr">顯示連續繪製而不是一次的圖像</string>
 	<string name="rendering_exception">在繪製選擇地區時發生錯誤</string>
 	<string name="show_point_options">使用位置...</string>
-	<string name="renderer_load_sucess">繪製器成功下載</string>
-	<string name="renderer_load_exception">發生例外: 繪製器沒有下載</string>
+	<string name="renderer_load_sucess">繪製器已成功載入</string>
+	<string name="renderer_load_exception">發生異常: 繪製器未載入</string>
 	<string name="renderers">向量繪製器</string>
 	<string name="renderers_descr">選擇繪製外觀</string>
 	<string name="poi_context_menu_website">顯示興趣點網站</string>
@@ -1199,7 +1199,7 @@
 	<string name="local_index_no_items_to_do">在 %1$s 沒有項目</string>
 	<string name="incomplete_locale">未完成</string>
 	<string name="osmand_extended_description_4000_chars">
-OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式且近於免費，有世界各地和高品質的OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於兩方面線上和離線（無需網路連線）。
+OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式且免費，有世界各地和高品質的OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有地圖資料都可以存儲在您裝置的儲存卡上離線使用。透過您裝置的 GPS，OsmAnd 為汽車、自行車和行人，提供了路線、視覺和語音導航。所有的主要功能，工作於兩方面線上和離線（無需網路連線）。
 
 一些主要功能：
 
@@ -1491,4 +1491,14 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 	</string>
 	<string name="local_index_gpx_timespan">\n時間跨距： %1$d：%2$02d：%3$02d</string>
 	<string name="local_index_gpx_timemoving">\n行駛時間： %1$d：%2$02d：%3$02d</string>
-	</resources>
+	<string name="av_camera_focus">相機對焦類型</string>
+	<string name="av_camera_focus_descr">選擇內置相機對焦類型</string>
+	<string name="av_camera_focus_auto">自動對焦</string>
+	<string name="av_camera_focus_hiperfocal">超焦距對焦</string>
+	<string name="av_camera_focus_edof">全幅對焦 (EDOF)</string>
+	<string name="av_camera_focus_infinity">焦距設為無限大</string>
+	<string name="av_camera_focus_macro">微距(特寫)對焦模式</string>
+	<string name="av_camera_focus_continuous">相機連續對焦</string>
+	<string name="av_photo_play_sound">快門音效</string>
+	<string name="av_photo_play_sound_descr">在拍照時發出快門音效</string>
+</resources>
