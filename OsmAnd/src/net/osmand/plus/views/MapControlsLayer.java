@@ -145,13 +145,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (20 * scaleCoefficient),
 					backToMenuButton.getRight() - (int) (4 * scaleCoefficient), backToMenuButton.getBottom());
 			if(appMode == ApplicationMode.CAR){
-				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.car_small_white : R.drawable.car_small);
+			//	cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.car_small_white : R.drawable.car_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_car_dark : R.drawable.ic_action_car_light);
 			} else if(appMode == ApplicationMode.BICYCLE){
-				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.bicycle_small_white : R.drawable.bicycle_small);
+//				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.bicycle_small_white : R.drawable.bicycle_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_bicycle_dark : R.drawable.ic_action_bicycle_light);
 			} else if(appMode == ApplicationMode.PEDESTRIAN){
-				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.pedestrian_small_white : R.drawable.pedestrian_small);
+//				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.pedestrian_small_white : R.drawable.pedestrian_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_pedestrian_dark : R.drawable.ic_action_pedestrian_light);
 			} else {
-				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.default_small_white : R.drawable.default_small);
+//				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.default_small_white : R.drawable.default_small);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.a_7_location_map_dark : R.drawable.a_7_location_map_light);
 			}
 			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
 			int t = (int) (modeShadow.getBounds().top + 5 * scaleCoefficient);
@@ -166,7 +170,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	
 	private void onApplicationModePress() {
 		final QuickAction mQuickAction = new QuickAction(backToMenuButton);
-		int[] icons = new int[] { R.drawable.default_small, R.drawable.car_small, R.drawable.bicycle_small, R.drawable.pedestrian_small };
+		//int[] icons = new int[] { R.drawable.default_small, R.drawable.car_small, R.drawable.bicycle_small, R.drawable.pedestrian_small };
+		int[] icons = new int[] { R.drawable.a_7_location_map_light, R.drawable.ic_action_car_light, R.drawable.ic_action_bicycle_light, R.drawable.ic_action_pedestrian_light };
 		int[] values = new int[] { R.string.app_mode_default, R.string.app_mode_car, R.string.app_mode_bicycle,
 				R.string.app_mode_pedestrian };
 		final ApplicationMode[] modes = new ApplicationMode[] { ApplicationMode.DEFAULT, ApplicationMode.CAR, ApplicationMode.BICYCLE,
