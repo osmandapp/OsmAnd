@@ -50,14 +50,12 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		helper = SearchHistoryHelper.getInstance((ClientContext) getActivity().getApplicationContext());
-		historyAdapter = new HistoryAdapter(helper.getHistoryEntries());
-		setListAdapter(historyAdapter);
 	}
-	
 	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		historyAdapter = new HistoryAdapter(helper.getHistoryEntries());
 		clearButton = new Button(getActivity());
 		clearButton.setText(R.string.clear_all);
 		clearButton.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +67,9 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 			}
 		});
 		getListView().addFooterView(clearButton);
+		setListAdapter(historyAdapter);
 	}
+	
 	
 	@Override
 	public void onResume() {
