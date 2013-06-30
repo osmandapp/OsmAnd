@@ -14,28 +14,32 @@
 <TextView android:id="@+id/TextView" android:text="@string/search_address_region">
 </TextView>
 <Button android:id="@+id/CountryButton" android:text="@string/ChooseCountry" />
-<ImageButton android:id="@+id/ResetCountry" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
+<ImageButton android:id="@+id/ResetCountry" android:layout_marginRight = "5dp" android:layout_gravity="center_vertical" 
+    android:background="?attr/reset_image" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp" >
 <TextView android:id="@+id/TextView" android:text="@string/search_address_city">
 </TextView>
 <Button  android:id="@+id/CityButton" android:text="@string/choose_city" />
-<ImageButton android:id="@+id/ResetCity" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
+<ImageButton android:id="@+id/ResetCity" android:layout_marginRight = "5dp" android:layout_gravity="center_vertical" 
+    android:background="?attr/reset_image" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:id="@+id/TextView" android:text="@string/search_address_street">
 </TextView>
 <Button android:id="@+id/StreetButton" android:text="@string/choose_street" />
-<ImageButton android:id="@+id/ResetStreet" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
+<ImageButton android:id="@+id/ResetStreet" android:layout_marginRight = "5dp" android:layout_gravity="center_vertical" 
+    android:background="?attr/reset_image" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 <TableRow android:id="@+id/TableRow" android:layout_marginLeft = "5dp">
 <TextView android:id="@+id/BuildingText" android:text="@string/search_address_building">
 </TextView>
 <Button android:id="@+id/BuildingButton" android:text="@string/choose_building" />
-<ImageButton android:id="@+id/ResetBuilding" android:layout_marginRight = "5dp" android:background="@drawable/reset" android:contentDescription="@string/default_buttons_reset">
+<ImageButton android:id="@+id/ResetBuilding" android:layout_marginRight = "5dp"  android:layout_gravity="center_vertical"
+    android:background="?attr/reset_image" android:contentDescription="@string/default_buttons_reset">
 </ImageButton>
 </TableRow>
 </TableLayout>

@@ -68,9 +68,7 @@ public class SearchHistoryFragment extends SherlockListFragment  implements Sear
 				clearButton.setVisibility(View.GONE);
 			}
 		});
-		if (!historyAdapter.isEmpty()) {
-			getListView().addFooterView(clearButton);
-		}
+		getListView().addFooterView(clearButton);
 	}
 	
 	@Override
