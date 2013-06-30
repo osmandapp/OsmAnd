@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
   <string name="layer_map_appearance">Configura pantalla</string>
@@ -33,7 +33,6 @@
   <string name="local_openstreetmap_uploading">Enviando…</string>
   <string name="local_openstreetmap_were_uploaded">{0} PDIs/Fallos enviados</string>
   <string name="local_openstreetmap_uploadall">Enviar todos</string>
-  <string name="local_openstreetmap_items"/>
   <string name="local_openstreetmap_show">Mostrar en el mapa</string>
   <string name="local_openstreetmap_upload">Enviar modificación a OSM</string>
   <string name="local_openstreetmap_delete">Suprimir modificación</string>
@@ -194,7 +193,6 @@
   <string name="local_index_address_data">Datos de direcciones</string>
   <string name="local_index_transport_data">Datos de transporte</string>
   <string name="local_index_map_data">Datos de mapa</string>
-  <string name="local_index_items"/>
   <string name="local_indexes_cat_backup">Desactivado</string>
   <string name="local_indexes_cat_tts">Datos de voz (sintetizado)</string>
   <string name="local_indexes_cat_voice">Datos de voz (grabado)</string>
@@ -292,10 +290,10 @@
   <string name="si_mi_foots">Millas/pies</string>
   <string name="si_mi_yard">Millas/yardas</string>
   <string name="si_km_m">Kilómetros/metros</string>
-  <string name="yard">yd</string>
+  <string name="yard">yarda</string>
   <string name="foot">ft</string>
   <string name="mile_per_hour">mph</string>
-  <string name="mile">mi</string>
+  <string name="mile">milla</string>
   <string name="send_location_way_choose_title">Compartir localización usando</string>
   <string name="send_location_sms_pattern">Localización: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Para ver la localización siga el enlace del navegador %1$s o el enlace del intent de android %2$s</string>
@@ -796,8 +794,8 @@
   <string name="accessibility_extensions">Extensiones de accesibilidad</string>
   <string name="accessibility_mode">Modo accesibilidad</string>
   <string name="accessibility_mode_descr">Activa las características de accesibilidad</string>
-  <string name="accessibility_on">On</string>
-  <string name="accessibility_off">Off</string>
+  <string name="accessibility_on">activado</string>
+  <string name="accessibility_off">desactivado</string>
   <string name="accessibility_default">Usar configuración global del sistema</string>
   <string name="backToMenu">Volver al Menú</string>
   <string name="zoomOut">Alejar</string>
@@ -993,7 +991,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="ending_point_too_far">Punto final demasiado lejos de la carretera más cercana.</string>
     <string name="btn_add_tag">Añade Etiqueta</string>
     <string name="btn_advanced_mode">Modo Avanzado…</string>
-    <string name="poi_filter_parking">Parking</string>
+    <string name="poi_filter_parking">aparcamiento</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte Público</string>
     <string name="poi_filter_entertainment">Entretenimiento</string>
@@ -1186,4 +1184,16 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="distance_measurement_clear_route">Borrar todos los puntos</string>
     <string name="distance_measurement_save_gpx">Guardar como GPX</string>
     <string name="distance_measurement_load_gpx">Abrir GPX existente</string>
-    </resources>
+    <string name="local_index_gpx_timespan">\nTiempo recorrido: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTiempo moviendo: %1$d:%2$02d:%3$02d</string>
+	<string name="av_camera_focus">método de enfoque</string>
+	<string name="av_camera_focus_descr">elige método de enfoque interno</string>
+	<string name="av_camera_focus_auto">enfoque automático</string>
+	<string name="av_camera_focus_hiperfocal">distancia hiperfocal</string>
+	<string name="av_camera_focus_edof">profundidad de campo extendido (EDOF)</string>
+	<string name="av_camera_focus_infinity">enfocado al infinito</string>
+	<string name="av_camera_focus_macro">modo de enfoque macro (close-up)</string>
+	<string name="av_camera_focus_continuous">la camera intenta enfocar continuamente</string>
+	<string name="av_photo_play_sound">reproducir sonido de disparo</string>
+	<string name="av_photo_play_sound_descr">reproducir sonido de disparo</string>
+</resources>
