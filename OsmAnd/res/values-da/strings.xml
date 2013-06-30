@@ -153,17 +153,17 @@ Til : %3$s</string>
 	<string name="prefer_in_routing_title">Foretræk…</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
     <string name="tip_recent_changes_1_2_t">Rettelser i 1.2.1:
-	* Rettet Geo Intent (Foursquare, c:geo)
-	* Rettet at skærmbilledet ryster under navigation
-	* Andre smårettelser
-	Ændringer i 1.2:
-		* Fejlrettelser (forbedret ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer)
-		* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse)
-		* Accepterer nu maps.google.com placeringslinks
-		* Nyt modul (GPS info)
-		* Tilføjet multi-vindue understøttelse af de seneste Samsung-enheder
-		* Kalman-filter for kompas
-		* Pebble-ur support
+	\n* Rettet Geo Intent (Foursquare, c:geo)
+	\n* Rettet at skærmbilledet ryster under navigation
+	\n* Andre smårettelser
+	\nÆndringer i 1.2:
+		\n* Fejlrettelser (forbedret ruteplanlægning, søgning, AV-optagelse, stemmekommandoer, nogle skærm forbedringer)
+		\n* Nemmere relief overlejring konfiguration (kræver højdekurveudvidelse)
+		\n* Accepterer nu maps.google.com placeringslinks
+		\n* Nyt modul (GPS info)
+		\n* Tilføjet multi-vindue understøttelse af de seneste Samsung-enheder
+		\n* Kalman-filter for kompas
+		\n* Pebble-ur support
 	</string>
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -228,10 +228,10 @@ dvaletilstand</string>
 	<string name="download_hillshade_item">Relief skygger</string>
     <string name="download_hillshade_maps">Relief overlejringer</string>
     <string name="tip_recent_changes_1_1_2_t">Ændringer i 1.1.2:
-	* Audio/video udvidelse forbedring (fotos med EXIF information)
-	* Rettet brugbarhed og omstruktureret højdekurverudvidelse
-	* Relief pakke til højdekurverudvidelse
-	* Fejlrettelser (næsten optimal ruteplanlægning)
+	\n* Audio/video udvidelse forbedring (fotos med EXIF information)
+	\n* Rettet brugbarhed og omstruktureret højdekurverudvidelse
+	\n* Relief pakke til højdekurverudvidelse
+	\n* Fejlrettelser (næsten optimal ruteplanlægning)
     </string>
     <string name="tip_recent_changes_0_8_4_t">Ændringer i 0.8.4:
 	* Nogle fejlrettelser
@@ -868,11 +868,11 @@ Destinationen vises som en orange skive på kortet og OsmAnd viser afstanden og 
 	<string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
 	<string name="basemap_missing">Basis verdenskort (dækker hele verden ved lav zoom) mangler. Overvej at hente World_basemap_x.obf for et komplet kortmiljø.</string>
 	<string name="vector_data_missing">Offline-data mangler på SD-kort. Overvej at hente for at kunne bruge kort offline.</string>
-	<string name="local_index_gpx_info_elevation">Gennemsnits højde: %1$.0f m
-Minimum højde: %2$.0f m
-Maksimum højde: %3$.0f m
-Stigninger: %4$.0f m
-Fald: %5$.0f m</string>
+	<string name="local_index_gpx_info_elevation">Gennemsnits højde: %1$
+Minimum højde: %2$
+Maksimum højde: %3$
+Stigninger: %4$
+Fald: %5$</string>
 	<string name="local_index_gpx_info">Delspor: %1$d
 Totale punkter: %2$d
 Rutepunkter: %3$d
@@ -1056,8 +1056,8 @@ Langt tryk på en favorit i \'Favorit\' menuen åbner muligheder for at bruge de
 For at vise alle favoritsteder direkte på kortet, aktiver kort overlejringen \'Favoritter\' under \'Menu\' -&gt; \'Definer visning\'.
 	</string>
 	<string name="tip_recent_changes_1_1_4_t">Ændringer i 1.1.4:
-	* Redesign af brugerflade
-	* Fejlrettelser
+	\n* Redesign af brugerflade
+	\n* Fejlrettelser
     </string>
     <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
@@ -1251,7 +1251,7 @@ Kun det forudindlæste kort kan vises og nye kort kan ikke hente fra internettet
 	<string name="transport_Stop">Stoppested</string>
 	<string name="transport_stops">Stoppesteder</string>
 	<string name="tip_initial_t">OsmAnd er et navigationsprogram med mange funktioner.
-Som en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hovedskærmen (se \'?\' ikon).
+   \nSom en grundlæggende introduktion, er nogle tip og tricks tilgængelig på hovedskærmen (se \'?\' ikon).
 	</string>
 	<string name="application_dir_change_warning">Ændring af mappen der gemmes i medfører ikke flytning eller sletning af data. Det skal gøres separat og udenom OsmAnd. Fortsæt alligevel?</string>
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
@@ -1443,7 +1443,7 @@ Navigationstjenesten skiftes midlertidig til online CloudMade.</string>
 	<string name="app_mode_default">Gennemse kort</string>
 	<string name="poi_error_info_not_loaded">Information om knudepunkt blev ikke indlæst</string>
 	<string name="save_current_track_widget">Gem aktuel
-GPX-spor</string>
+\nGPX-spor</string>
 	<string name="default_buttons_commit">Udfør</string>
 	<string name="amenity_type_geocache">Geocache</string>
 	<string name="commiting_node">Overfør knudepunkt…</string>
@@ -1461,10 +1461,10 @@ GPX-spor</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Indstillinger for tilgængelighed</string>
     <string name="tip_recent_changes_1_3_t">Ændringer i 1.3:
-	* Genimplementere understøttelse af tabletter og store skærme
-	* Holo tema (tilpasning)
-	* Yderligere indstillinger for stabilisering af kompas
-	* Nederste venstre knap på kortskærmen erstatter menuknappen
+	\n* Genimplementere understøttelse af tabletter og store skærme
+	\n* Holo tema (tilpasning)
+	\n* Yderligere indstillinger for stabilisering af kompas
+	\n* Nederste venstre knap på kortskærmen erstatter menuknappen
     </string>
     <string name="monitoring_settings">Logningstjenester &amp; dvaletilstand</string>
     <string name="monitoring_settings_descr">Indstil, hvordan ture optages og dvaletilstand aktiveres</string>
@@ -1499,14 +1499,14 @@ GPX-spor</string>
     <string name="gpx_saved_sucessfully">GPX-fil blev gemt som {0}</string>
     <string name="distance_measurement_start_editing">Start redigering</string>
     <string name="distance_measurement_finish_editing">Slut redigering</string>
-    <string name="distance_measurement_finish_subtrack">Næste underspor/punkt</string>
+    <string name="distance_measurement_finish_subtrack">Start et nyt underspor</string>
     <string name="distance_measurement_clear_route">Slet punkter</string>
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">Opret et spor (eller brug eksisterende GPX-filer) til at måle afstanden mellem punkter. Gem som GPX, kan bruges til at planlægge GPX-ruter.</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.
-* Tryk og hold på kortet for at slette tidligere punkt.
-* Tryk og hold på punkt for at se og vedhæfte beskrivelse.
+    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.\n
+* Tryk og hold på kortet for at slette tidligere punkt.\n
+* Tryk og hold på punkt for at se og vedhæfte beskrivelse.\n
 * Klik på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
@@ -1515,18 +1515,18 @@ GPX-spor</string>
     <string name="intermediate_items_sort_by_distance">Sorter (fra dør til dør)</string>
     <string name="search_street_in_neighborhood_cities">Søg efter gade i nabolagets byer</string>
     <string name="tip_recent_changes_1_4_t">Ændringer i 1.4:
-	* Sorter rutepunkter på en optimal måde for at besøge alle (repræsentant, fra dør til dør)
-	* Søg efter gade ved navn (i nabolaget)
-	* Planlægningsudvidelse (indlæs/rediger/gem GPX spor)
-	* Ny filhentningsmetode (hent i baggrunden)
-	* GPX undermapper (organiser GPX spor)
-	* Slet SRTM filer
-	* Understøttelse af OSM-Noter 
+	\n* Sorter rutepunkter på en optimal måde for at besøge alle (repræsentant, fra dør til dør)
+	\n* Søg efter gade ved navn (i nabolaget)
+	\n* Planlægningsudvidelse (indlæs/rediger/gem GPX spor)
+	\n* Ny filhentningsmetode (hent i baggrunden)
+	\n* GPX undermapper (organiser GPX spor)
+	\n* Slet SRTM filer
+	\n* Understøttelse af OSM-Noter 
     </string>
     <string name="intermediate_items_sort_return">Mellemliggende rutepunkter gensorteret for optimal rute fra kortposition til destination.</string>
     <string name="please_select_address">Vælg først en by eller gade</string>
     <string name="context_menu_item_destination_point">Vælg som destination</string>
     <string name="destination_point">Destinationen %1$s</string>
-    <string name="local_index_gpx_timespan">Periode: %1$d:%2$02d:%3$02d</string>
-	<string name="local_index_gpx_timemoving">Tid i bevægelse: %1$d:%2$02d:%3$02d</string>
+    <string name="local_index_gpx_timespan">\nPeriode: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nTid i bevægelse: %1$d:%2$02d:%3$02d</string>
 	</resources>
