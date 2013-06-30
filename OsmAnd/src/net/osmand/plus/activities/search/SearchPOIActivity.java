@@ -257,11 +257,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
 			}
 		});
-		if(isNameFinderFilter()){
-			searchFilterLayout.setVisibility(View.VISIBLE);
-		} else if(isSearchByNameFilter() ){
-			searchFilterLayout.setVisibility(View.VISIBLE);
-		}
 		addFooterView();
 		amenityAdapter = new AmenityAdapter(new ArrayList<Amenity>());
 		setListAdapter(amenityAdapter);
@@ -329,6 +324,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			searchNearBy = true;
 		}
 		
+		
 		String filterId = bundle.getString(AMENITY_FILTER);
 		PoiFilter filter = app.getPoiFilters().getFilterById(filterId);
 		if (filter != this.filter) {
@@ -356,6 +352,11 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				app.getLocationProvider().resumeAllUpdates();
 			}
 			updateLocation(location);
+		}
+		if(isNameFinderFilter()){
+			searchFilterLayout.setVisibility(View.VISIBLE);
+		} else if(isSearchByNameFilter() ){
+			searchFilterLayout.setVisibility(View.VISIBLE);
 		}
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().registerOrUnregisterCompassListener(true);
