@@ -4,14 +4,8 @@
 	android:orientation="vertical" android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
-		<ImageButton android:src="@drawable/filter" android:id="@+id/ShowFilter"
-				android:layout_height="wrap_content" android:layout_width="wrap_content" android:contentDescription="@string/search_poi_filter"/>
-		<ImageButton   android:src="@drawable/list_activities_show_on_map" android:contentDescription="@string/search_shown_on_map"
-				android:id="@+id/ShowOnMap" android:layout_height="wrap_content" android:layout_width="wrap_content"/>
 		<Button  android:text="@string/search_POI_level_btn"   
 		android:id="@+id/SearchPOILevelButton" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_weight="1"/>
-		<TextView android:layout_width="wrap_content" android:text="" android:id="@+id/SearchAreaText" android:layout_height="wrap_content"/>
-		<ProgressBar android:layout_width="wrap_content" android:text="" android:id="@+id/ProgressBar" android:layout_height="wrap_content" android:visibility="gone"/>
 	</LinearLayout>
 	
 	<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/SearchFilterLayout" android:visibility="gone">
