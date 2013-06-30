@@ -13,16 +13,16 @@
     <string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
     <string name="recording_is_recorded">Audio/video optages. For at stoppe tryk på AV modulet.</string>
     <string name="recording_playing">Den valgte optagelsen bliver afspillet.
-%1$s</string>
+\n%1$s</string>
     <string name="recording_open_external_player">Åbn ekstern afspiller</string>
     <string name="recording_delete_confirm">Skal optagelsen slettes?</string>
     <string name="tip_recent_changes_1_1_0_t">Ændringer i 1.1.0:
-	*Udvidelse beregning af afstand
-	*Udvidelse for Audionoter 
-	*Udvidelse for højdekurver
-	*Fejlrettelser
-	*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
-	*EGM96 geoide offset korrektion for GPS højdeaflæsningerne
+	\n*Udvidelse beregning af afstand
+	\n*Udvidelse for Audionoter 
+	\n*Udvidelse for højdekurver
+	\n*Fejlrettelser
+	\n*\'Touring view\' kort stil option med flere kort oplysninger, nye veje stilarter, mere kontrast og Alpine vandreture (SAC skala) option
+	\n*EGM96 geoide offset korrektion for GPS højdeaflæsningerne
     </string>
     <string name="recording_unavailable">ikke tilgængelig</string>
     <string name="recording_context_menu_arecord">Optag lydnote</string>
@@ -68,16 +68,16 @@
     <string name="osmodroid_plugin_description">OsMoDroid udvidelse er en OsmAnd udvidelse til OsModroid app for online sporingsfunktioner. Oplysninger om tjenesten er tilgængelig på http://esya.ru.</string>
     <string name="tip_altitude_offset">Højdevisning - Offset korrektion</string>
 	<string name="tip_altitude_offset_t">De fleste GPS-enheder gengiver højdemålinger i det ellipsoide-baserede WGS84 referencesystem, hvorfra en konvertering til lokalt anvendte systemer kræver en positions afhængig korrektion.
-En bedre tilnærmelse til disse lokale systemer er EGM96 reference. OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
-For at opnå dette, hent filen WW15MGH.DAC via Offline Data Manager (oprindelig er på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
+\nEn bedre tilnærmelse til disse lokale systemer er EGM96 reference. OsmAnd nu understøtter også den automatiske visning af højder i EGM96 systemet.
+\nFor at opnå dette, hent filen WW15MGH.DAC via Offline Data Manager (oprindelig er på http://earth-info.nga.mil/GandG/wgs84/gravitymod/egm96/binary/WW15MGH.DAC).
 	</string>
     <string name="map_widget_max_speed">Fartgrænse</string>
     <string name="route_descr_current_location">Aktuel position</string>
     <string name="route_descr_from_to">Fra : %1$s
-Til : %2$s</string>
+\nTil : %2$s</string>
     <string name="route_descr_from_to_via">Fra : %1$s
-Via : %2$s
-Til : %3$s</string>
+\nVia : %2$s
+\nTil : %3$s</string>
     <string name="no_buildings_found">Ingen bygninger fundet.</string>
     <string name="incremental_search_city">Søg efter by trinvist</string>
     <string name="search_villages_and_postcodes">Søg landsbyer/postnummer</string>
@@ -89,10 +89,10 @@ Til : %3$s</string>
     <string name="native_library_not_running">Programmet kører i fejlsikret tilstand (deaktiver i indstillinger).</string>
     <string name="background_service_is_enabled_question">Baggrundstjenesten kører stadig. Skal den afbrydes?</string>
     <string name="tip_recent_changes_1_0_0_t">Ændringer i 1.0.0:
-	* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
-	* Introducere kort kun med veje
-	* Kort mister ikke positionlås efter afbrydelser
-	* Aktiver tjeneste i baggrunden under navigation
+	\n* Forbedret ruteplanlægning: hurtigere, mere præcis, op til 250 km
+	\n* Introducere kort kun med veje
+	\n* Kort mister ikke positionlås efter afbrydelser
+	\n* Aktiver tjeneste i baggrunden under navigation
     </string>
     <string name="close_changeset">Luk ændringspost</string>
 	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Market?</string>
@@ -183,18 +183,18 @@ Til : %3$s</string>
 	<string name="tip_update_index">Opdatering af offlinedata</string>
 	<string name="filterpoi_activity">Opret interessepunkt-filter</string>
 	<string name="recalculate_route_to_your_location">Transportform:</string>
-	<string name="select_navigation_mode">Vælg transport måde</string>
+	<string name="select_navigation_mode">Vælg transportmetode</string>
 	<string name="monitor_preferences">Sporing</string>
 	<string name="day_night_info_description">Solopgang: %1$s
-Solnedgang: %2$s</string>
+\nSolnedgang: %2$s</string>
 	<string name="day_night_info">Dag/nat information</string>
 	<string name="map_widget_day_night">Dag-/natkort</string>
 	<string name="map_widget_vector_attributes">Optegningsattributter:</string>
 	<string name="map_widget_renderer">Kortudseende</string>
 	<string name="live_monitoring_mode_off">Start online 
-sporing</string>
-	<string name="live_monitoring_mode_on">Stop
-online sporing</string>
+\nsporing</string>
+	<string name="live_monitoring_mode_on">Stop online 
+\nsporing</string>
 	<string name="position_on_map_descr">Vælg placering af positionsmarkør på kortet</string>
 	<string name="position_on_map">Positionsmarkør</string>
 	<string name="layer_map_appearance">Konfigurer skærm</string>
@@ -234,23 +234,23 @@ dvaletilstand</string>
 	\n* Fejlrettelser (næsten optimal ruteplanlægning)
     </string>
     <string name="tip_recent_changes_0_8_4_t">Ændringer i 0.8.4:
-	* Nogle fejlrettelser
-	* Kort mister ikke positionslås efter afbrydelser
-	* Aktiver dvaletilstand tjeneste under navigation
+	\n* Nogle fejlrettelser
+	\n* Kort mister ikke positionslås efter afbrydelser
+	\n* Aktiver dvaletilstand tjeneste under navigation
     </string>
     <string name="tip_recent_changes_0_8_3_t">Ændringer i 0.8.3:
- * Rutepunkter
- * Forbedret navigation
- * Tilføjet en indstilling, der gør det muligt at undgå motorveje og samtidig bygge en rute
- * Tilføjet en mere vejtype til cykler til kortet (cycleway = track)
- * Fejlrettelser "
+\n * Rutepunkter
+\n * Forbedret navigation
+\n * Tilføjet en indstilling, der gør det muligt at undgå motorveje og samtidig bygge en rute
+\n * Tilføjet en mere vejtype til cykler til kortet (cycleway = track)
+\n * Fejlrettelser "
 	</string>
 	<string name="tip_recent_changes_0_8_2_t">Ændringer i 0.8.2:
- * Forbedret ruteplanlægning
- * Dynamisk kortmodul
- * Kortindstillinger flyttede til kortskærm
- * låseskærmen knap med logning tjenester
- * Rettet arabisk, Kannada scripting og RTL sprog 
+\n * Forbedret ruteplanlægning
+\n * Dynamisk kortmodul
+\n * Kortindstillinger flyttede til kortskærm
+\n * låseskærmen knap med logning tjenester
+\n * Rettet arabisk, Kannada scripting og RTL sprog 
 	</string>
 	<string name="map_widget_reset">Nulstil til standard</string>
 	<string name="map_widget_right_stack">Højre panel:</string>
@@ -769,10 +769,10 @@ Liste over understøttede lande (dybest set world wide!):
 Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
 	</string>
 	<string name="tip_update_index_t">At have opdaterede kortdata er afgørende. OsmAnd har en datahåndtering, som kan søge efter tilgængelige offline data opdateringer.
-For at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Hent offline data\'. Efter regions liste er hentet fra internettet, vælg \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på din enhed.
-Emner i \'grøn\' indikerer datafiler identiske på enheden og serveren
-Emner i \'blå\' angiver tilgængelige opdateringer på serveren
-Emner i \'kursiv\' angiver data der er deaktiverede på enheden</string>
+\nFor at søge efter opdateringer gå til \'Indstillinger\' -&gt; \'Datahåndtering\' -&gt; \'Hent offline data\'. Efter regions liste er hentet fra internettet, vælg \'Menu\' -&gt; \'Filtrer det hentede\' for at angive kun opdateringer til data, der allerede på din enhed.
+\nEmner i \'grøn\' indikerer datafiler identiske på enheden og serveren
+\nEmner i \'blå\' angiver tilgængelige opdateringer på serveren
+\nEmner i \'kursiv\' angiver data der er deaktiverede på enheden</string>
 	<string name="tip_recent_changes_0_8_0_t">Ændringer i 0.8.0:
  - * Udvidelser funktionalitet *
  - De fleste funktioner er grupperet efter funktioner og kan aktiveres/deaktiveres i menuen Indstillinger/Udvidelser. Aktiver (online eller cachede) delkort kilder, sporings indstillinger og mange andre nye og tidligere eksisterende funktioner.
