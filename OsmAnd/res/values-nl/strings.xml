@@ -1485,7 +1485,7 @@ Afghanistan, Albanie, Algerije, Andorra, Angola, Anguilla, Antigua en Barbuda, A
 	<string name="av_camera_focus_descr">Kies scherpstelmethode van interne camera</string>
 	<string name="av_camera_focus_auto">Automatisch scherpstellen</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfocaal scherpstellen</string>
-	<string name="av_camera_focus_edof">Uitgebreide scherptediepte (EDOF)</string>
+	<string name="av_camera_focus_edof">grote scherptediepte (EDOF)</string>
 	<string name="av_camera_focus_infinity">Scherpstellen op oneindig</string>
 	<string name="av_camera_focus_macro">Macromodus (dichtbij scherpstellen)</string>
 	<string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
