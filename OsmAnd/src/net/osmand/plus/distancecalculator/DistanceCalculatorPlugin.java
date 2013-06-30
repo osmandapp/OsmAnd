@@ -168,19 +168,21 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				int id = list.get(which);
-				switch (id) {
-					case R.string.distance_measurement_start_editing :
-						distanceMeasurementMode = 1; startEditingHelp(activity) ; break;
-					case R.string.distance_measurement_finish_editing : 
-						distanceMeasurementMode = 0; break;
-					case R.string.distance_measurement_finish_subtrack :
-						measurementPoints.add(new LinkedList<GPXUtilities.WptPt>()); break;
-					case R.string.distance_measurement_clear_route : 
-						distanceMeasurementMode = 0; measurementPoints.clear(); calculateDistance(); break;
-					case R.string.distance_measurement_save_gpx :
-						saveGpx(activity); break;
-					case R.string.distance_measurement_load_gpx :
-						loadGpx(activity); break;
+				if (id == R.string.distance_measurement_start_editing) {
+					distanceMeasurementMode = 1;
+					startEditingHelp(activity) ;
+				} else if (id == R.string.distance_measurement_finish_editing) {
+					distanceMeasurementMode = 0;
+				} else if (id == R.string.distance_measurement_finish_subtrack) {
+					measurementPoints.add(new LinkedList<GPXUtilities.WptPt>());
+				} else if (id == R.string.distance_measurement_clear_route) {
+					distanceMeasurementMode = 0;
+					measurementPoints.clear();
+					calculateDistance();
+				} else if (id == R.string.distance_measurement_save_gpx) {
+					saveGpx(activity);
+				} else if (id == R.string.distance_measurement_load_gpx) {
+					loadGpx(activity);
 				}
 				activity.getMapView().refreshMap();
 				updateText();
