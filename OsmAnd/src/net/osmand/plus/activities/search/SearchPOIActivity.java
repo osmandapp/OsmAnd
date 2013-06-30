@@ -95,7 +95,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 	private ImageButton showFilter;
 	private PoiFilter filter;
 	private AmenityAdapter amenityAdapter;
-	private TextView searchArea;
 	private EditText searchFilter;
 	private View searchFilterLayout;
 	
@@ -127,7 +126,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		
 		uiHandler = new Handler();
 		searchPOILevel = (Button) findViewById(R.id.SearchPOILevelButton);
-		searchArea = (TextView) findViewById(R.id.SearchAreaText);
 		searchFilter = (EditText) findViewById(R.id.SearchFilter);
 		searchFilterLayout = findViewById(R.id.SearchFilterLayout);
 		showOnMap = (ImageButton) findViewById(R.id.ShowOnMap);
@@ -269,7 +267,6 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		if (filter != this.filter) {
 			this.filter = filter;
 			if (filter != null) {
-				getSupportActionBar().setSubtitle(filter.getName());
 				filter.clearPreviousZoom();
 			} else {
 				amenityAdapter.setNewModel(Collections.<Amenity> emptyList(), "");
@@ -294,9 +291,8 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			showOnMap.setEnabled(filter != null);
 		}
 		showOnMap.setVisibility(View.VISIBLE);
-		
+		updateSubtitle();
 		if (filter != null) {
-			searchArea.setText(filter.getSearchArea());
 			updateSearchPoiTextButton();
 			if (searchNearBy) {
 				app.getLocationProvider().addLocationListener(this);
@@ -307,6 +303,12 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 		}
 		app.getLocationProvider().addCompassListener(this);
 		app.getLocationProvider().registerOrUnregisterCompassListener(true);
+	}
+
+	private void updateSubtitle() {
+		if(filter != null) {
+			getSupportActionBar().setSubtitle(filter.getName() + " " + filter.getSearchArea());
+		}
 	}
 	
 	private void showPoiCategoriesByNameFilter(String query, net.osmand.Location loc){
@@ -605,7 +607,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			} else {
 				amenityAdapter.setNewModel(result, searchFilter.getText().toString());
 			}
-			searchArea.setText(filter.getSearchArea());
+			updateSubtitle();
 		}
 		
 		@Override
