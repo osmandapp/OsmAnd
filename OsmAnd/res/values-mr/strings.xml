@@ -1,8 +1,7 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-  <string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="left_side_navigation">डाव्या बाजूने ड्रायव्हिंग</string>
   <string name="unknown_location">अजून स्थान माहित नाही</string>
-  <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, 255 - अपारदर्शक)</string>
+  <string name="modify_transparency">पारदर्शकता बदला (० - पारदर्शक, २५५ - अपारदर्शक)</string>
   <string name="confirm_interrupt_download">फाइल डाउनलोड थांबवायचे का?</string>
   <string name="local_indexes_cat_tile">ऑनलाइन नकाशे (टाइल्स)</string>
   <string name="local_indexes_cat_map">ऑफलाइन नकाशे (वेक्टर)</string>
@@ -11,8 +10,8 @@
   <string name="online_map_settings">ऑनलाइन नकाशे</string>
   <string name="online_map_settings_descr">Configure online or cached tile map sources</string>
   <string name="map_settings">- नकाशाच्या सेटिंग्स</string>
-  <string name="plugins_screen">प्लगिन मॅनेजर</string>
-  <string name="prefs_plugins">प्लगिन मॅनेजर</string>
+  <string name="plugins_screen">प्लगिन्स</string>
+  <string name="prefs_plugins">प्लगिन्स</string>
   <string name="play_commands_of_currently_selected_voice">सध्या निवडलेल्या आवाजाची वाक्ये ऐकवा</string>
   <string name="test_voice_prompts">आवाज तपासा</string>
   <string name="send_files_to_osm">जिपीएक्स फाइल्स ओएसएम ला पाठवायच्या का?</string>
@@ -227,8 +226,8 @@
   <string name="default_buttons_ok">ठिक आहे</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
   <string name="show_transport_over_map">परिवहन थांबे नकाशावर दाखवा</string>
-  <string name="search_history_city">शहर:\n {0}</string>
-  <string name="search_history_street">रस्ता:\n {0}, {1}</string>
+  <string name="search_history_city">शहर: {0}</string>
+  <string name="search_history_street">रस्ता: {0}, {1}</string>
   <string name="search_history_int_streets">चौक: {0} x {1} in {2}</string>
   <string name="search_history_building">इमारत: {0}, {1}, {2}</string>
   <string name="clear_all">"सगळे काढून टाका"</string>
@@ -250,7 +249,7 @@
   <string name="show_poi_on_map">नकाशावर दाखवा</string>
   <string name="only_show">फक्त दाखवा</string>
   <string name="follow">पालन करा</string>
-  <string name="recalculate_route_to_your_location">परिवहन साधन निवडा (optional):</string>
+  <string name="recalculate_route_to_your_location">परिवहन माध्यम:</string>
   <string name="mark_final_location_first">क्रुपया आधी इच्छिन स्थळ निवडा</string>
   <string name="show_gps_status">जीपीएस स्थिति दाखवा</string>
   <string name="failed_op">असफल</string>
@@ -332,19 +331,19 @@
   <string name="osmand_parking_hours">तास</string>
   <string name="osmand_parking_minutes">मिनिटे</string>
   <string name="use_compass_navigation">कंपास वापरा</string>
-<string name="select_navigation_mode">परिवहन पर्याय निवडा</string>
+<string name="select_navigation_mode">परिवहन माध्यम निवडा</string>
 <string name="day_night_info_description">सुर्योदय : %1$s \nसूर्यास्त : %2$s</string>
 <string name="day_night_info">दिवस/रात्र माहिती</string>
 <string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
-<string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग चालू करा</string>
-<string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग बंद करा</string>
-<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
+<string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग\n चालू करा</string>
+<string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग\n बंद करा</string>
+<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा…</string>
 <string name="avoid_unpaved">कच्चे रस्ते टाळा</string>
 <string name="avoid_in_routing_title">टाळा…</string>
 <string name="map_widget_show_ruler">पट्टी</string>
 <string name="map_widget_view_direction">बघण्याची दिशा</string>
 <string name="monitoring_mode_off">जिपीएक्स रेकॉर्ड करा</string>
-<string name="monitoring_mode_on">जिपीएक्स रेकॉर्ड थांबवा.</string>
+<string name="monitoring_mode_on">जिपीएक्स रेकॉर्ड\n थांबवा.</string>
 <string name="int_continuosly">सलग</string>
 <string name="email">इमेल</string>
 <string name="poi_filter_parking">पार्किंग</string>
@@ -367,4 +366,55 @@
     <string name="recording_context_menu_precord">फोटो घ्या</string>
     <string name="av_def_action_video">विडिओ रेकॉर्ड करा</string>
     <string name="av_def_action_audio">आवाज रेकॉर्ड करा</string>
-    </resources>
+    <string name="app_mode_default">नकाशा पहा</string>
+	<string name="destination_point">इच्छित स्थळ %1$s</string>
+    <string name="context_menu_item_destination_point">इच्छित स्थळ निवडा</string>
+    <string name="search_street_in_neighborhood_cities">रस्ता जवळपास्च्या शहरात शोधा</string>
+    <string name="plugin_distance_point_speed">वेग</string>
+    <string name="plugin_distance_point_ele">उंची</string>
+    <string name="default_buttons_do_not_show_again">पुन्हा दाखवू नका</string>
+    <string name="other_location">इतर</string>
+    <string name="cancel_navigation">दिशादर्शन थांबवा</string>
+    <string name="clear_destination">इच्छित स्थळ काढून टाका</string>
+    <string name="favourites_list_activity">आवडते ठिकाण निवडा</string>
+    <string name="prefer_motorways">महामार्गांना प्राधान्य द्या</string>
+	<string name="prefer_in_routing_descr">महामार्गांना प्राधान्य द्या</string>
+    <string name="intermediate_points_change_order">क्रम बदला</string>
+    <string name="av_control_start">सुरू करा</string>
+    <string name="av_control_stop">बंद करा</string>
+    <string name="monitoring_control_stop">बंद करा</string>
+    <string name="download_select_map_types">इतर नकाशे</string>
+    <string name="download_roads_only_item">फक्त रस्ते</string>
+    <string name="download_regular_maps">साधारण नकाशे</string>
+    <string name="download_roads_only_maps">फक्त रस्त्याचे नकाशे</string>
+    
+	<string name="rendering_attr_noAdminboundaries_name">सीमा लपवा</string>
+	<string name="map_widget_max_speed">वेग मर्यादा</string>
+    <string name="monitoring_control_start">जिपिएक्स</string>
+    <string name="route_descr_lat_lon">अक्षांश %1$.3f, रेखांश %2$.3f</string>
+    <string name="route_descr_current_location">सध्याची स्थिती</string>
+    <string name="route_descr_from_to">%1$s पासून \n%2$s पर्यंत</string>
+    <string name="route_descr_from_to_via">%1$s पासून\n%2$s मार्गे\n%3$s पर्यंत</string>
+    <string name="no_buildings_found">इमारत सापडली नाही.</string>
+    <string name="map_widget_show_destination_arrow">इच्छित स्थळाची दिशा दाखवा</string>
+    <string name="no_route">मार्ग नाही</string>
+	<string name="poi_filter_accomodation">राहण्याची व्यवस्था</string>
+    <string name="position_on_map">स्थिती दर्षक</string>
+	<string name="position_on_map_descr">स्थिती दर्षकाची नकाशावर जागा निवडा</string>
+	<string name="map_widget_top_text">रस्त्याचे नाव</string>
+	<string name="map_widget_map_select">नकाशाचा स्त्रोत</string>
+	<string name="map_widget_back_to_loc">मी कुठे आहे</string>
+	<string name="map_widget_compass">कंपास</string>
+	<string name="map_widget_parking">वाहनतळ</string>
+	<string name="map_widget_speed">वेग</string>
+	<string name="map_widget_distance">इच्छित स्थळ</string>
+	<string name="map_widget_altitude">उंची</string>
+	<string name="map_widget_next_turn">पुढचे वळण</string>
+	<string name="map_widget_next_turn_small">पुढचे वळण (लहान)</string>
+	<string name="map_widget_next_next_turn">पुढचे दुसरे वळण</string>
+	<string name="starting_point_too_far">सुरूवातीचे ठिकाण रस्त्यापासून खुप दूर आहे.</string>
+	<string name="route_kl">डावीकडे रहा आणि जा</string>
+	<string name="route_kr">उजवीकडे रहा आणि जा</string>
+	<string name="left_side_navigation_descr">डावीकडून ट्राफिक असलेल्या देशांसाठी निवडा</string>
+	<string name="unknown_from_location">सुरूवातीचे स्थळ अजून सापडले नाही</string>
+	</resources>
