@@ -523,7 +523,7 @@
 	<string name="tip_osm_improve">Forbedre OSM data</string>
 	<string name="download_files_not_enough_space">Der er ikke ledig plads nok til at hente %1$s MB (Ledig: %2$s).</string>
 	<string name="download_files_question_space">Ledig plads: {2} MB! Hent {0} filer ({1} MB)?</string>
-	<string name="tip_select_destination_point">Vælg destination</string>
+	<string name="tip_select_destination_point">Kørselsvejledning</string>
 	<string name="use_transparent_map_theme">Gennemsigtigt tema</string>
 	<string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
 	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
@@ -569,7 +569,7 @@
 	<string name="filename_input">Filnavn: </string>
 	<string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
 	<string name="default_buttons_save">Gem</string>
-	<string name="menu_save_directions">Gem rute</string>
+	<string name="menu_save_directions">Gem kørselsvejledning</string>
 	<string name="local_index_upload_gpx_description">Send GPX-filer til OSM netværket. De vil blive brugt til at forbedre kort.</string>
 	<string name="local_index_items_uploaded">%1$d af %2$d poster overført.</string>
 	<string name="local_index_mi_upload_gpx">Send til OSM</string>
@@ -827,7 +827,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \nFor at tilføje en OSM fejl brug valgmuligheden \'Åben OSM fejlregistrering\' i kortet genvejsmenu. Derefter indtastes en detaljeret beskrivelse af problemet og til sidst sendes den med \'Tilføj\' knappen.
 \nBemærk: at internet forbindelse er nødvendig for at sende OSM interessepunkter og OSM fejlrapporter.</string>
 	<string name="tip_select_destination_point_t">En destination kan vælges direkte på kortet (genvejsmenu, og så \'Brug som destination\'), i alle søge aktiviteter eller via et langt tryk på en post i \'Favoritter\'
-\nDestinationen vises som en orange skive på kortet og OsmAnd viser afstanden og retningen til den (orange trekant).
+\nDestinationen vises som en orange flag på kortet og OsmAnd viser afstanden og retningen til den (orange trekant).
 	</string> 
 	<string name="tip_recent_changes_0_6_9_t">Ændringer i 0.6.9:
 \n - Forbedret offline kortoptegning
@@ -1059,7 +1059,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	\n* Redesign af brugerflade
 	\n* Fejlrettelser
     </string>
-    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Rutevejledning\' på kortet og der vælges navigationstype.</string>
+    <string name="tip_navigation_t">Destinationen skal vælges før navigationen kan starte . Bagefter trykkes \'Menu\' -&gt; \'Kørselsvejledning\' på kortet og der vælges navigationstype.</string>
 	<string name="amenity_type_landuse">Brug af landområder</string>
 	<string name="amenity_type_sustenance">Mad og drikke</string>
 	<string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger - Datahåndtering\', vælg den ønskede stemmepakke og hent den.</string>
@@ -1299,7 +1299,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \nSkift profil via profilknappen i nederste venstre hjørne af skærmen (bil, cykel eller fodgænger ikon) eller når en rute oprettes.
 	</string>
 	<string name="tip_search_t">Søg efter steder direkte på kortet, efter adresse, efter placering, som interessepunkt eller som foruddefineret favorit.
-\nTryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen 2 valgmuligheder: \'Kørselsvejledning\' eller \'Vis på kort\'.
+\nTryk på \'Søg\' i hovedskærmen åbner søgeaktiviteter. For alle fundne elementer tilbyder genvejsmenuen: \'Kørselsvejledning\' eller \'Vis på kort\'.
 	</string>
 	<string name="tip_map_context_menu_t">Kortets genvejsmenu er tilgængelig ved at trykke og holde på kortet eller ved at trykke på trackball knappen.
 \nSå åbnes en boks med koordinater. For at åbne kortets genvejsmenu skal der trykkes på den. (Eller tryk og hold på den for at skjule den igen.)
@@ -1329,7 +1329,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="only_show">Vis kun</string>
 	<string name="follow">Følg</string>
 	<string name="mark_final_location_first">Vælg først en destination</string>
-	<string name="get_directions">Rutevejledning</string>
+	<string name="get_directions">Kørselsvejledning</string>
 	<string name="show_gps_status">Vis GPS-status</string>
 	<string name="opening_hours">Åbningstider</string>
 	<string name="opening_changeset">Åbner ændringssæt…</string>
