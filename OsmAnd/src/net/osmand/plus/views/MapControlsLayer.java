@@ -142,7 +142,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private void drawApplicationMode(Canvas canvas, boolean nightMode) {
 		ApplicationMode  appMode = view.getSettings().getApplicationMode();
 		if(appMode != cacheApplicationMode){
-			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (20 * scaleCoefficient),
+			modeShadow.setBounds(backToMenuButton.getLeft() + (int) (2 * scaleCoefficient), backToMenuButton.getTop() - (int) (24 * scaleCoefficient),
 					backToMenuButton.getRight() - (int) (4 * scaleCoefficient), backToMenuButton.getBottom());
 			if(appMode == ApplicationMode.CAR){
 			//	cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.car_small_white : R.drawable.car_small);
@@ -158,7 +158,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.a_7_location_map_dark : R.drawable.a_7_location_map_light);
 			}
 			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
-			int t = (int) (modeShadow.getBounds().top + 5 * scaleCoefficient);
+			int t = (int) (modeShadow.getBounds().top + 2 * scaleCoefficient);
 			cacheAppModeIcon.setBounds(l, t, l + cacheAppModeIcon.getMinimumWidth(), t + cacheAppModeIcon.getMinimumHeight());	
 		}
 		modeShadow.draw(canvas);
