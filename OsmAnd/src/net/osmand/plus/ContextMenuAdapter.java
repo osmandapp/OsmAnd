@@ -96,6 +96,42 @@ public class ContextMenuAdapter {
 		return itemNames.toArray(new String[itemNames.size()]);
 	}
 
+	private void registerSelectedItem(String string, int selected, int icon,OnContextMenuClick listener, int pos) {
+if(pos >= items.size() || pos < 0) {
+pos = items.size();
+}
+items.insert(pos, pos);
+itemNames.add(pos, string);
+selectedList.insert(pos, selected);
+iconList.insert(pos, icon);
+listeners.add(pos, listener);
+
+}
+	
+	public void registerItem(String string) {
+registerSelectedItem(string, -1, 0);
+
+}
+
+private void registerSelectedItem(String string, int selected, int icon) {
+registerSelectedItem(string, selected, icon, null, -1);
+
+
+}
+
+public void registerItem(String name, int id, OnContextMenuClick listener, int pos) {
+if(pos >= items.size() || pos < 0) {
+pos = items.size();
+}
+items.insert(pos, id);
+itemNames.add(pos, name);
+listeners.add(pos, listener);
+
+
+}
+
+
+	
 	public ListAdapter createListAdapter(final Activity activity, final int layoutId) {
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
 		ListAdapter listadapter = new ArrayAdapter<String>(activity, layoutId, R.id.title,
