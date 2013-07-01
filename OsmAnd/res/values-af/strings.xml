@@ -1243,4 +1243,12 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="local_index_gpx_timemoving">\nTyd in beweging: %1$d:%2$02d:%3$02d</string>
 	<string name="av_camera_focus">Kamera fokus tipe</string>
 	<string name="av_camera_focus_descr">Kies interne kamera fokus tipe</string>
-	</resources>
+	<string name="av_camera_focus_auto">Outo fokus</string>
+	<string name="av_camera_focus_hiperfocal">Hiperfokale fokus</string>
+	<string name="av_camera_focus_edof">Uitgebreide velddiepte (EDOF)</string>
+	<string name="av_camera_focus_infinity">Fokus is op oneindig gestel</string>
+	<string name="av_camera_focus_macro">Makro (naby) fokus</string>
+	<string name="av_camera_focus_continuous">Die kamera prbeer heeltyd in fokus bly</string>
+	<string name="av_photo_play_sound">Speel geluid wanneer foto geneem word</string>
+	<string name="av_photo_play_sound_descr">Speel klank wanneer foto geneem word</string>
+</resources>
