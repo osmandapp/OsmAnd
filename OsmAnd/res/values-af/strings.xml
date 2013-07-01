@@ -1241,4 +1241,6 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     </string>
     <string name="local_index_gpx_timespan">\nTydperk: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTyd in beweging: %1$d:%2$02d:%3$02d</string>
+	<string name="av_camera_focus">Kamera fokus tipe</string>
+	<string name="av_camera_focus_descr">Kies interne kamera fokus tipe</string>
 	</resources>
