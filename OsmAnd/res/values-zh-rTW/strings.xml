@@ -50,7 +50,7 @@
 	<string name="auto_zoom_map">自動縮放地圖</string>
 	<string name="snap_to_road_descr">導航過程中對齊道路位置</string>
 	<string name="snap_to_road">對齊道路</string>
-	<string name="osmand_short_description_80_chars">可用於離線和線上的 OSM 地圖，為通用的手機地圖查看和導航</string>
+	<string name="osmand_short_description_80_chars">可用於離線和線上的 OSM 地圖，為完整的手機地圖查看和導航</string>
 	<string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)
 
@@ -73,7 +73,7 @@
 		- 地圖下載數量
 		- 無法使用離線維基百科的 POI
 
-		OsmAnd 正在積極開發與我們的專案並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助具體的新功能或在 osmand.net 網站上一般捐贈。
+		OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助具體的新功能或在 osmand.net 網站上一般捐贈。
 	</string>
 	<string name="osmand_plus_short_description_80_chars">可用於離線和線上的 OSM 地圖，為通用的手機地圖查看和導航</string>
 	<string name="osmand_plus_long_description_1000_chars">
@@ -112,7 +112,7 @@
 	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
 	<string name="position_on_map_descr">在地圖上選取所在地的位置標記</string>
 	<string name="position_on_map">位置標記</string>
-	<string name="layer_map_appearance">畫面設定</string>
+	<string name="layer_map_appearance">組態顯示畫面…</string>
 	<string name="show_lanes">顯示車道數</string>
 	<string name="avoid_unpaved">避開顛頗路面</string>
 	<string name="avoid_ferries">避開渡輪</string>
@@ -131,7 +131,7 @@
 	<string name="int_continuosly">繼續</string>
 	<string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
 	<string name="map_widget_top_text">街道名稱</string>
-	<string name="map_widget_config">畫面設定</string>
+	<string name="map_widget_config">組態顯示畫面</string>
 	<string name="map_widget_map_select">地圖來源</string>
 	<string name="map_widget_back_to_loc">目前位置</string>
 	<string name="map_widget_lock_screen">鎖住螢幕</string>
@@ -389,11 +389,11 @@
 		\n\t\'行進方向\' - 地圖會不斷對準您的車頭方向
 		\n\t\'依羅盤\' - 地圖會不斷對準裝置的羅盤指示
 	</string>
-	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'畫面設定\' -&gt; \'地圖來源...\' -&gt; \'離線向量地圖\'啟動使用。</string>
+	<string name="binary_map_download_success">下載完成。\n\t\n\t透過 \'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源...\' -&gt; \'離線向量地圖\'啟動使用。</string>
 	<string name="tip_day_night_mode">日/夜模式</string>
 	<string name="tip_day_night_mode_t_v2">\t部份的向量地圖的地圖顯示可在日間(較亮)與夜間(較暗)之間切換.
 		\n\t夜間顏色是在夜間行駛比較安全。
-		\n\t您可在\'選項\' -&gt; \'畫面設定...\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
+		\n\t您可在\'選項\' -&gt; \'組態顯示畫面...\' -&gt;\'日/夜地圖\'設定日/夜間切換原則。
 		\n\t選擇有：
 		\n\t\'日出/日落\' - 自動模式，以位置的日出/日落控制
 		\n\t\'日間\' - 永遠使用日間模式
@@ -523,7 +523,7 @@
 	<string name="gpx_option_reverse_route">反轉 GPX 方向</string>
 	<string name="gpx_option_destination_point">使用目前的目的地</string>
 	<string name="gpx_option_from_start_point">沿著整條航跡往前</string>
-	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'畫面設定\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
+	<string name="switch_to_vector_map_to_see">指定以離線向量地圖顯示\n\t\n\t啟用方式\'選單\' -&gt; \'定義檢視\' -&gt; \'地圖來源…\' -&gt; \'離線向量圖\'。</string>
 	<string name="choose_audio_stream">語音導航輸出</string>
 	<string name="choose_audio_stream_descr">選擇播放語音導航輸出(依靠系統)</string>
 	<string name="voice_stream_voice_call">通話音訊</string>
@@ -557,7 +557,7 @@
 	<string name="tip_favorites_t">\t常用地點可記錄成我的最愛。
 		\n\叫出地圖的快顯功能表，選\'加到我的最愛\'，然後輸入名字即可將某一點位置設為我的最愛。事後可透由\'主畫面\' -&gt;\'我的最愛\'找到它。
 		\n\t選按一個我的最愛會跳出一些選項，可設為目的地、編輯或刪除它。
-		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'畫面設定\'開啟\'我的最愛\'即可。
+		\n\t欲將我的最愛顯示在地圖上，只要在地圖畫面模式下由\'選單\' -&gt;\'定義檢視\'開啟\'我的最愛\'即可。
 	</string>
 	<string name="error_doing_search">離線查尋發生錯誤</string>
 	<string name="search_offline_geo_error">無法解析地理原意 \'%s\'</string>
@@ -566,7 +566,7 @@
 	<string name="preferred_locale_descr">選擇顯示語言</string>
 	<string name="preferred_locale">顯示語言</string>
 	<string name="tip_map_switch">地圖來源</string>
-	<string name="tip_map_switch_t_v2">\t地圖來源與顯示圖層可透過在地圖畫面下的\'選單\'-&gt;\'畫面設定\'來改變。
+	<string name="tip_map_switch_t_v2">\t地圖來源與顯示圖層可透過在地圖畫面下的\'選單\'-&gt;\'定義檢視\'來改變。
 		\n\t在\'地圖來源......\'您可以選擇使用預先載入的離線向量圖，預先定義的（線上）圖磚來源(在此啟動\'線上和地圖圖磚\'外掛元件)，或手動建立地圖，例如使用 PC 上的 OsmAndMapCreator。
 		\n\tOsmAnd 也支援自訂來源。
 	</string>
@@ -739,7 +739,7 @@
 	<string name="layer_transport">車站、站牌</string>
 	<string name="layer_poi">興趣點…</string>
 	<string name="layer_map">地圖來源…</string>
-	<string name="menu_layers">畫面設定</string>
+	<string name="menu_layers">定義檢視</string>
 	<string name="context_menu_item_search_poi">查尋興趣點</string>
 	<string name="context_menu_item_show_route">由此顯示導航路徑</string>
 	<string name="use_trackball_descr">使用軌跡球移動地圖</string>
@@ -1251,7 +1251,7 @@ OsmAnd（Automated Navigation Directions)是一個地圖和導航的應用程式
  - 增加興趣點並直接上傳給 OSM （如果離線或在之後上傳）
  - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下）
 
-OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯，或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度，編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。透過您幫助購買 OsmAnd + 應用程式，可以更令人感覺肅然起敬 ！但也有可能資助特殊的新功能，或者在 osmand.net 上做一般捐贈。
+OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。透過您幫助購買 OsmAnd + 應用程式，可以更令人感覺肅然起敬！但也有可能資助特殊的新功能，或者在 osmand.net 上做一般捐贈。
 
 
 大概的地圖覆蓋區域和品質：
@@ -1270,7 +1270,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 阿富汗、阿爾巴尼亞、阿爾及利亞、安道爾、安哥拉、安圭拉、安地卡及巴布達、阿根廷、亞美尼亞、阿路巴、澳大利亞、奧地利、亞塞拜然、巴哈馬、巴林、孟加拉國、巴巴多斯、白俄羅斯、比利時、貝里斯、貝寧、百慕達、不丹、玻利維亞、博內爾、波士尼亞和黑塞哥維那、博茨瓦納、巴西、英屬維爾京群島、汶萊、保加利亞、布吉納法索、蒲隆地、柬埔寨、喀麥隆、加拿大、維德角、中非共和國、查德、智利、中國、哥倫比亞、科摩羅、剛果、哥斯大黎加、象牙海岸、克羅地亞、古巴、庫拉索、賽普勒斯、捷克共和國、丹麥、吉布地、多米尼克、多明尼加共和國、厄瓜多爾、埃及、薩爾瓦多、赤道幾內亞、厄立特里亞、愛沙尼亞、埃塞俄比亞、斐濟、芬蘭、法國、法屬圭亞那、法屬玻里尼西亞、加蓬、岡比亞、格魯吉亞、德國、加納、直布羅陀、希臘、格陵蘭島、格瑞那達、哥德洛普島、關島、瓜地馬拉、根西島、幾內亞、幾內亞比索、蓋亞納、海地、梵蒂岡、宏都拉斯、香港、匈牙利、冰島、印度、印尼、伊朗、伊拉克、愛爾蘭、曼城島、以色列、義大利、牙買加、日本、澤西島、約旦、哈薩克斯坦、肯雅、吉里巴斯、朝鮮和韓國、科威特、吉爾吉斯斯坦、老撾、拉脫維亞、黎巴嫩、賴索托、賴比瑞亞、利比亞、列支敦斯登、立陶宛、盧森堡、澳門、馬其頓、馬達加斯加、馬拉威、馬來西亞、馬爾地夫、馬里、馬爾他、馬丁尼克島、茅利塔尼亞、模里西斯、馬約特、墨西哥、密克羅尼西亞聯邦、摩爾多瓦、摩納哥、蒙古、黑山、蒙特塞拉特、摩洛哥、莫三比克、緬甸、納米比亞、瑙魯、尼泊爾、荷蘭、荷屬安地列斯群島、新赫里多尼亞、紐西蘭、尼加拉瓜、尼日爾、奈及利亞、挪威、阿曼、巴基斯坦、帕勞、巴勒斯坦領土、巴拿馬、巴布亞紐幾內亞、巴拉圭、秘魯、菲律賓、波蘭、葡萄牙、波多黎各、卡塔爾、羅馬尼亞、俄羅斯、盧安達、聖巴泰勒米、聖海倫娜、聖基茨和尼維斯、聖露西亞、聖馬丁島、聖匹島、聖文森及格瑞那丁、薩摩亞、聖馬利諾、沙烏地阿拉伯、塞內加爾、塞爾維亞、塞席爾、塞拉里昂、新加坡、斯洛伐克、斯洛維尼亞、索馬里、南非、格魯吉亞的南、南蘇丹、西班牙、斯里蘭卡、蘇丹、蘇利南、史瓦濟蘭、瑞典、瑞士、敘利亞、臺灣、塔吉克斯坦、坦尚尼亞、泰國、東帝汶、多哥、托克勞、湯加、特立尼達和多巴哥、突尼斯、土耳其、土庫曼斯坦、吐瓦魯、烏干達、烏克蘭、阿拉伯聯合大公國、英國、美國、烏拉圭、烏茲別克斯坦、瓦努阿圖、委內瑞拉、越南、瓦利斯群島和富圖納群島、西撒哈拉、葉門、尚比亞、辛巴威。
 	</string>
 	<string name="osmand_plus_extended_description_4000_chars">
-OsmAnd + 是付費應用程式版本。經由您的購買來支援專案、資金用在開發新的功能，和接收最新的更新。您可以在購買前，先安裝名稱為 OsmAnd 的免費版本去試用該應用程式。
+OsmAnd + 是付費應用程式版本。經由您的購買來支援專案，資金用在開發新的功能和接收最新的更新。您可以在購買前，先安裝名稱為 OsmAnd 的免費版本去試用該應用程式。
 
 一些主要功能：
 導航
@@ -1321,7 +1321,7 @@ OsmAnd + 是付費應用程式版本。經由您的購買來支援專案、資�
  - 增加興趣點並直接上傳給 OSM （如果離線或在之後上傳）
  - 可選旅途中記錄而且在背景模式（當裝置處於休眠模式下）
 
-OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯，或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度，編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。透過您幫助購買 OsmAnd + 應用程式，可以更令人感覺肅然起敬 ！但也有可能資助特殊的新功能，或者在 osmand.net 上做一般捐贈。
+OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。透過您幫助購買 OsmAnd + 應用程式，可以更令人感覺肅然起敬！但也有可能資助特殊的新功能，或者在 osmand.net 上做一般捐贈。
 
 
 大概的地圖覆蓋區域和品質：
