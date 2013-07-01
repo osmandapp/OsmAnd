@@ -680,7 +680,7 @@
 	<string name="select_max_zoom_preload_area">選擇要預載的最大縮放階</string>
 	<string name="maps_could_not_be_downloaded">此地圖無法下載</string>
 	<string name="continuous_rendering">連續繪製</string>
-	<string name="continuous_rendering_descr">顯示連續繪製而不是立即圖像</string>
+	<string name="continuous_rendering_descr">顯示連續繪製代替立即圖像</string>
 	<string name="rendering_exception">在繪製選擇地區時發生錯誤</string>
 	<string name="show_point_options">使用位置...</string>
 	<string name="renderer_load_sucess">繪製器已成功載入</string>
