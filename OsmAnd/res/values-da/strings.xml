@@ -95,7 +95,7 @@
 	\n* Aktiver tjeneste i baggrunden under navigation
     </string>
     <string name="close_changeset">Luk ændringspost</string>
-	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Market?</string>
+	<string name="zxing_barcode_scanner_not_found">Stregkodescanner programmet ZXing er ikke installeret. Søg i Play butik?</string>
 	<string name="rendering_attr_roadColors_description">Vælg et farveskema til veje:</string>
 	<string name="rendering_attr_roadColors_name">Farveskema for veje</string>
     <string name="map_widget_show_destination_arrow">Vis destinationsretning</string>
@@ -286,7 +286,7 @@
 \n * Parkeringsudvidelse (\'Hvor er min bil parkeret?\')
 \n * Aktiver/deaktiver logningsmodul
 	</string>
-	<string name="select_animate_speedup">Vælg acceleration for ruteanimation</string>
+	<string name="select_animate_speedup">Vælg hastighed for rutesimulering</string>
     	<string name="global_app_allocated_memory_descr">Tildelt hukommelse %1$s MB (Android grænse %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">Tildelt hukommelse</string>
 	<string name="native_app_allocated_memory_descr">Samlet indbygget hukommelse tildeles af app %1$s MB (Dalvik %2$s MB, andre %3$s MB). \nProportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</string>
@@ -373,7 +373,7 @@
 	<string name="osmand_monitoring_description">Vis indstillinger til at muliggøre optagelse af dine ture til lokale GPX-filer eller online via en webtjeneste.</string>
 	<string name="osmand_rastermaps_plugin_description">Vis indstillinger til at konfigurere en række online eller cachelagrede delkort som basiskort eller som over-/ underlejringskort. Disse kort kan også fremstilles offline og kopieres til OsmAnd mappen.</string>
 	<string name="osmand_extra_settings_description">Vis indstillinger for avanceret kortkonfiguration (som at øge kortdetaljer) og nogle enhedsspecifikke indstillinger.</string>
-	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som animeret navigation eller optegningsydeevne.</string>
+	<string name="osmand_development_plugin_description">Vis indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne.</string>
 	<string name="plugins_screen">Udvidelser</string>
 	<string name="select_plugin_to_activate">Tryk på en udvidelse for at aktivere eller deaktivere den. (Kan kræve genstart af OsmAnd.)</string>
 	<string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
@@ -1041,7 +1041,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="loading_builds">Indlæser OsmAnd versioner…</string>
 	<string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
 	<string name="contribution_activity">Installer versionen</string>
-	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Market?</string>
+	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Play butik?</string>
 	<string name="voice_is_not_available_title">Ingen talevejledning er valgt</string>
 	<string name="daynight_mode_day">Dag</string>
 	<string name="daynight_mode_night">Nat</string>
@@ -1530,10 +1530,14 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="destination_point">Destinationen %1$s</string>
     <string name="local_index_gpx_timespan">\nPeriode: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTid i bevægelse: %1$d:%2$02d:%3$02d</string>
-	<string name="av_camera_focus">Kamera focustype</string>
+	<string name="av_camera_focus">Kameraets fokustype</string>
 	<string name="av_camera_focus_descr">Vælg fokustype på intern kamera</string>
 	<string name="av_camera_focus_auto">Autofokus</string>
-	<string name="av_camera_focus_hiperfocal">Hiperfocal fokus</string>
+	<string name="av_camera_focus_hiperfocal">Hyperfokalafstand</string>
 	<string name="av_camera_focus_infinity">Uendelig fokus</string>
-	<string name="av_camera_focus_macro">Makro (close-up) fokus</string>
+	<string name="av_camera_focus_macro">Makro (nærbillede) fokusindstilling</string>
+	<string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
+	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
+	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
+<string name="av_photo_play_sound">Afspil lyd ved foto</string>
 	</resources>
