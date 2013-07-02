@@ -78,8 +78,8 @@ public class SearchAddressFragment extends SherlockFragment {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		boolean light = ((OsmandApplication) getApplication()).getSettings().isLightActionBar();
 		if(getActivity() instanceof SearchAddressActivity) {
-			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, SELECT_POINT, 0, R.string.get_directions).setShowAsActionFlags(
-					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+			com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, SELECT_POINT, 0, "").setShowAsActionFlags(
+					MenuItem.SHOW_AS_ACTION_ALWAYS );
 			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_ok_light : R.drawable.ic_action_ok_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
