@@ -973,17 +973,8 @@ public class MapActivityActions implements DialogProvider {
 						}
 					}
 				}).reg();
-		
-		// 2. Layers
-		optionsMenuHelper.item(R.string.menu_layers).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light) 
-				.listen(new OnContextMenuClick() {
-					@Override
-					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
-					}
-				}).reg();		
-		
-		// 3-5. Navigation related (directions, mute, cancel navigation)
+
+		// 2-4. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
 		if (muteVisible) {
 			boolean mute = routingHelper.getVoiceRouter().isMute();
@@ -1035,14 +1026,23 @@ public class MapActivityActions implements DialogProvider {
 			}).reg();
 		}
 		
-		// 6-9. Default actions (Settings, Search, Favorites) 
+		// 5-9. Default actions (Layers, Configure Map screen, Settings, Search, Favorites) 
+		optionsMenuHelper.item(R.string.menu_layers).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light) 
+				.listen(new OnContextMenuClick() {
+					@Override
+					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
+					}
+				}).reg();
+
 		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light) 
-		.listen(new OnContextMenuClick() {
-			@Override
-			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDialog();
-			}
-		}).reg();
+			.listen(new OnContextMenuClick() {
+				@Override
+				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+					mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDialog();
+				}
+			}).reg();
+
 		optionsMenuHelper.item(R.string.settings_Button).icons(R.drawable.ic_action_settings2_dark, R.drawable.ic_action_settings2_light)
 				.listen(new OnContextMenuClick() {
 					@Override
@@ -1051,6 +1051,7 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.startActivity(intentSettings);
 					}
 				}).reg();
+
 		optionsMenuHelper.item(R.string.search_button).icons(R.drawable.ic_action_search_dark, R.drawable.ic_action_search_light)
 				.listen(new OnContextMenuClick() {
 			@Override
