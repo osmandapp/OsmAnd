@@ -66,7 +66,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 		MenuItem menuItem;
 		boolean light = ((OsmandApplication) getActivity().getApplication()).getSettings().isLightActionBar();
 		menuItem = menu.add(0, 1, 0, R.string.search_offline_clear_search).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT );
-		menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gremove_light : R.drawable.ic_action_gremove_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -79,7 +79,7 @@ public class SearchAddressOnlineFragment extends SherlockFragment implements Sea
 		if (getActivity() instanceof SearchActivity) {
 			menuItem = menu.add(0, 0, 0, R.string.search_offline_address).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-			menuItem = menuItem.setIcon(light ? R.drawable.a_1_navigation_next_item_light : R.drawable.a_1_navigation_next_item_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gnext_light : R.drawable.ic_action_gnext_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {

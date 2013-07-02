@@ -97,8 +97,7 @@ public class ShowRouteInfoActivity extends OsmandListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		createMenuItem(menu, SAVE, R.string.save_route_as_gpx, 
-				R.drawable.a_5_content_save_light, R.drawable.a_5_content_save_dark,
-				// R.drawable.a_1_navigation_accept_light, R.drawable.a_1_navigation_accept_dark
+				R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItem.SHOW_AS_ACTION_ALWAYS);
 		return super.onCreateOptionsMenu(menu);
 	}

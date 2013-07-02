@@ -134,13 +134,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			}
 		};
 		if(selectedObj instanceof Amenity) {
-			adapter.item(R.string.poi_context_menu_modify).icons(R.drawable.a_5_content_edit_dark, 
-					R.drawable.a_5_content_edit_light).listen(listener).position(1).reg();
-			adapter.item(R.string.poi_context_menu_delete).icons(R.drawable.a_5_content_remove_dark, 
-					R.drawable.a_5_content_remove_light).listen(listener).position(2).reg();
+			adapter.item(R.string.poi_context_menu_modify).icons(R.drawable.ic_action_edit_dark, 
+					R.drawable.ic_action_edit_light).listen(listener).position(1).reg();
+			adapter.item(R.string.poi_context_menu_delete).icons(R.drawable.ic_action_delete_dark, 
+					R.drawable.ic_action_delete_light).listen(listener).position(2).reg();
 		} else {
-			adapter.item(R.string.context_menu_item_create_poi).icons(R.drawable.a_5_content_new_dark, 
-					R.drawable.a_5_content_new_light).listen(listener).position(-1).reg();
+			adapter.item(R.string.context_menu_item_create_poi).icons(R.drawable.ic_action_plus_dark, 
+					R.drawable.ic_action_plus_light).listen(listener).position(-1).reg();
 		}
 		adapter.item(R.string.context_menu_item_open_bug).icons(R.drawable.ic_action_bug_dark, 
 				R.drawable.ic_action_bug_light).listen(listener).reg();
@@ -169,7 +169,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void contextMenuLocalIndexes(final LocalIndexesActivity la, final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		if (info.getType() == LocalIndexType.GPX_DATA) {
-			adapter.item(R.string.local_index_mi_upload_gpx).icons(R.drawable.a_9_av_upload_dark, R.drawable.a_9_av_upload_light)
+			adapter.item(R.string.local_index_mi_upload_gpx).icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light)
 					.listen(new OnContextMenuClick() {
 
 						@Override
@@ -183,12 +183,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void optionsMenuLocalIndexes(final LocalIndexesActivity la, ContextMenuAdapter optionsMenuAdapter) {
 		optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
-		.icons(R.drawable.a_9_av_upload_dark, R.drawable.a_9_av_upload_light).listen(new OnContextMenuClick() {
+		.icons(R.drawable.ic_action_gup_dark, R.drawable.ic_action_gup_light).listen(new OnContextMenuClick() {
 
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-				la.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.a_9_av_upload_dark, 
-						R.drawable.a_9_av_upload_light, new OnClickListener() {
+				la.openSelectionMode(R.string.local_index_mi_upload_gpx, R.drawable.ic_action_gup_dark, 
+						R.drawable.ic_action_gup_light, new OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
 								sendGPXFiles(la, la.getSelectedItems().toArray(new LocalIndexInfo[la.getSelectedItems().size()]));								

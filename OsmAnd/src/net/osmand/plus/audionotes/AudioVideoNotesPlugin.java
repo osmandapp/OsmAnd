@@ -1095,7 +1095,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				adapter.item(R.string.recording_context_menu_play).icons(
 						R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light).listen(listener).reg();
 			}
-			adapter.item(R.string.show_location).icons(R.drawable.a_7_location_place_dark, R.drawable.a_7_location_place_light).
+			adapter.item(R.string.show_location).icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light).
 				listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {

@@ -90,9 +90,9 @@ public class LocalOpenstreetmapActivity extends OsmandListActivity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.a_9_av_upload_light, R.drawable.a_9_av_upload_dark,
+		createMenuItem(menu, UPLOAD_ID, R.string.local_openstreetmap_uploadall, R.drawable.ic_action_gup_light, R.drawable.ic_action_gup_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.a_5_content_save_light, R.drawable.a_5_content_save_dark,
+		createMenuItem(menu, BACKUP_ID, R.string.local_osm_changes_backup, R.drawable.ic_action_gsave_light, R.drawable.ic_action_gsave_dark,
 				MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		return super.onCreateOptionsMenu(menu);
 	}

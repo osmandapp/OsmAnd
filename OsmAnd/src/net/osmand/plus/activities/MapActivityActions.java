@@ -761,16 +761,16 @@ public class MapActivityActions implements DialogProvider {
 		final TargetPointsHelper targets = getMyApplication().getTargetPointsHelper();
 		final OsmandSettings settings = getMyApplication().getSettings();
 		if(targets.getPointToNavigate() != null) {
-			adapter.item(R.string.context_menu_item_intermediate_point).icons(R.drawable.ic_action_pin_dark,
-					R.drawable.ic_action_pin_light).reg();
+			adapter.item(R.string.context_menu_item_intermediate_point).icons(R.drawable.ic_action_flage_dark,
+					R.drawable.ic_action_flage_light).reg();
 		// For button-less search UI
 		} else {
-			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_pin_dark,
-					R.drawable.ic_action_pin_light).reg();
+			adapter.item(R.string.context_menu_item_destination_point).icons(R.drawable.ic_action_flag_dark,
+					R.drawable.ic_action_flag_light).reg();
 		}
 		adapter.item(R.string.context_menu_item_show_route).icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light).reg();
-		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search, 
-				R.drawable.a_2_action_search_light).reg();
+		adapter.item(R.string.context_menu_item_search).icons(R.drawable.ic_action_search_dark, 
+				R.drawable.ic_action_search_light).reg();
 		adapter.item(R.string.context_menu_item_share_location).icons(
 				R.drawable.ic_action_gshare_dark, R.drawable.ic_action_gshare_light).reg();
 		adapter.item(R.string.context_menu_item_add_favorite).icons(
@@ -962,7 +962,7 @@ public class MapActivityActions implements DialogProvider {
 		
 		// 1. Where am I
 		optionsMenuHelper.item(R.string.where_am_i).
-				icons(R.drawable.a_10_device_access_location_found_dark, R.drawable.a_10_device_access_location_found_light)
+				icons(R.drawable.ic_action_gloc_dark, R.drawable.ic_action_gloc_light)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -975,7 +975,7 @@ public class MapActivityActions implements DialogProvider {
 				}).reg();
 		
 		// 2. Layers
-		optionsMenuHelper.item(R.string.menu_layers).icons(R.drawable.ic_action_globus_dark, R.drawable.ic_action_globus_light) 
+		optionsMenuHelper.item(R.string.menu_layers).icons(R.drawable.ic_action_layers_dark, R.drawable.ic_action_layers_light) 
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1005,7 +1005,7 @@ public class MapActivityActions implements DialogProvider {
 			}).reg();
 		}
 		optionsMenuHelper.item(routingHelper.isRouteCalculated() ? R.string.show_route: R.string.get_directions)
-				.icons(R.drawable.a_7_location_directions_dark, R.drawable.a_7_location_directions_light)
+				.icons(R.drawable.ic_action_gdirections_dark, R.drawable.ic_action_gdirections_light)
 				.listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1025,7 +1025,7 @@ public class MapActivityActions implements DialogProvider {
 			} else {
 				nav = R.string.clear_destination;
 			}
-			optionsMenuHelper.item(nav).icons(R.drawable.a_1_navigation_cancel_dark, R.drawable.a_1_navigation_cancel_light) 
+			optionsMenuHelper.item(nav).icons(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light) 
 				.listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1043,7 +1043,7 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.startActivity(intentSettings);
 					}
 				}).reg();
-		optionsMenuHelper.item(R.string.search_button).icons(R.drawable.a_2_action_search_dark, R.drawable.a_2_action_search_light)
+		optionsMenuHelper.item(R.string.search_button).icons(R.drawable.ic_action_search_dark, R.drawable.ic_action_search_light)
 				.listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1057,7 +1057,7 @@ public class MapActivityActions implements DialogProvider {
 			}
 		}).reg();
 		
-		optionsMenuHelper.item(R.string.favorites_Button).icons( R.drawable.a_3_rating_important_dark, R.drawable.a_3_rating_important_light)
+		optionsMenuHelper.item(R.string.favorites_Button).icons( R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light)
 				.listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1069,8 +1069,8 @@ public class MapActivityActions implements DialogProvider {
 		
 		// 10-11 Waypoints, Use location
 		if (getTargets().getPointToNavigate() != null) {
-			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.a_9_av_make_available_offline_dark,
-					R.drawable.a_9_av_make_available_offline_light)
+			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_pin_dark,
+					R.drawable.ic_action_pin_light)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1078,7 +1078,7 @@ public class MapActivityActions implements DialogProvider {
 				}
 			}).reg();
 		}
-		optionsMenuHelper.item(R.string.show_point_options).icons(R.drawable.a_7_location_place_dark, R.drawable.a_7_location_place_light )
+		optionsMenuHelper.item(R.string.show_point_options).icons(R.drawable.ic_action_marker_dark, R.drawable.ic_action_marker_light )
 				.listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -1087,7 +1087,7 @@ public class MapActivityActions implements DialogProvider {
 		}).reg();
 		//////////// Others
 		if (Version.isGpsStatusEnabled(app)) {
-			optionsMenuHelper.item(R.string.show_gps_status).icons(R.drawable.a_2_action_about_dark, R.drawable.a_2_action_about_light )
+			optionsMenuHelper.item(R.string.show_gps_status).icons(R.drawable.ic_action_gabout_dark, R.drawable.ic_action_gabout_light )
 				.listen(new OnContextMenuClick() {
 
 				@Override
@@ -1100,7 +1100,7 @@ public class MapActivityActions implements DialogProvider {
 		if (app.getTargetPointsHelper().getPointToNavigate() != null) {
 			
 			optionsMenuHelper.item(loc.getLocationSimulation().isRouteAnimating() ? R.string.animate_route_off
-					: R.string.animate_route).icons(R.drawable.a_9_av_play_over_video_dark, R.drawable.a_9_av_play_over_video_light ) 
+					: R.string.animate_route).icons(R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light ) 
 						.listen(	new OnContextMenuClick() {
 
 				@Override
@@ -1247,7 +1247,7 @@ public class MapActivityActions implements DialogProvider {
 		ActionItem showOnMap = new ActionItem();
 		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
 		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.a_7_location_place_light));
+		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_marker_light));
 		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
 		showOnMap.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1263,7 +1263,7 @@ public class MapActivityActions implements DialogProvider {
 		});
 		qa.addActionItem(showOnMap);
 		ActionItem setAsDestination = new ActionItem();
-		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.a_7_location_directions_light));
+		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_gdirections_light));
 		setAsDestination.setTitle(activity.getString(R.string.get_directions));
 		setAsDestination.setOnClickListener(new OnClickListener() {
 			@Override
@@ -1281,10 +1281,10 @@ public class MapActivityActions implements DialogProvider {
 		ActionItem intermediate = new ActionItem();
 		// For button-less search UI
 		if (targetPointsHelper.getPointToNavigate() != null) {
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.a_9_av_make_available_offline_light));
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_flage_light));
 			intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
 		} else {
-			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.a_9_av_make_available_offline_light));
+			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_flag_light));
 			intermediate.setTitle(activity.getString(R.string.context_menu_item_destination_point));
 		}
 		intermediate.setOnClickListener(new OnClickListener() {
@@ -1301,7 +1301,7 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(intermediate);
 		if (favorite) {
 			ActionItem addToFavorite = new ActionItem();
-			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.a_3_rating_important_light));
+			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_fav_light));
 			addToFavorite.setTitle(activity.getString(R.string.add_to_favourite));
 			addToFavorite.setOnClickListener(new OnClickListener() {
 				@Override

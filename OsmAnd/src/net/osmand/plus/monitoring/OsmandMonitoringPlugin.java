@@ -97,7 +97,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}
 			}
 		};
-		adapter.item(R.string.context_menu_item_add_waypoint).icons(R.drawable.a_5_content_new_dark, R.drawable.a_5_content_new_light)
+		adapter.item(R.string.context_menu_item_add_waypoint).icons(R.drawable.ic_action_gnew_label_dark, R.drawable.ic_action_gnew_label_light)
 		.listen(listener).reg();
 	}
 	

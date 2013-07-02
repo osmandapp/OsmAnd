@@ -227,9 +227,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					}
 				}
 			};
-			adapter.item(R.string.context_menu_item_update_map).icons(R.drawable.a_8_images_rotate_left_dark, R.drawable.a_8_images_rotate_left_light)
+			adapter.item(R.string.context_menu_item_update_map).icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)
 					.listen(listener).reg();
-			adapter.item(R.string.context_menu_item_download_map).icons(R.drawable.a_9_av_download_dark, R.drawable.a_9_av_download_light)
+			adapter.item(R.string.context_menu_item_download_map).icons(R.drawable.ic_action_gdown_dark, R.drawable.ic_action_gdown_light)
 					.listen(listener).reg();
 		}
 	}

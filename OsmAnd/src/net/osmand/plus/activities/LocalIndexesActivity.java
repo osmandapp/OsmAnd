@@ -506,19 +506,19 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 			}
 		};
 		optionsMenuAdapter.item(R.string.local_index_download)
-						.icons(R.drawable.a_9_av_download_dark, R.drawable.a_9_av_download_light)
+						.icons(R.drawable.ic_action_gdown_dark, R.drawable.ic_action_gdown_light)
 						.listen(listener).position(0).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_reload)
-						.icons(R.drawable.a_1_navigation_refresh_dark, R.drawable.a_1_navigation_refresh_light)
+						.icons(R.drawable.ic_action_refresh_dark, R.drawable.ic_action_refresh_light)
 						.listen(listener).position(1).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_backup)
-						.icons(R.drawable.a_8_images_rotate_left_dark, R.drawable.a_8_images_rotate_left_light)
+						.icons(R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light)
 						.listen(listener).position(2).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_restore)
-				.icons(R.drawable.a_8_images_rotate_right_dark, R.drawable.a_8_images_rotate_right_light)
+				.icons(R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_dark)
 						.listen(listener).position(3).reg();
 		optionsMenuAdapter.item(R.string.local_index_mi_delete)
-						.icons(R.drawable.a_5_content_discard_dark, R.drawable.a_5_content_discard_light)
+						.icons(R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light)
 						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuLocalIndexes(this, optionsMenuAdapter);
 		// doesn't work correctly
@@ -705,7 +705,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		} else if (itemId == R.string.local_index_mi_reload) {
 			reloadIndexes();
 		} else if (itemId == R.string.local_index_mi_delete) {
-			openSelectionMode(itemId, R.drawable.a_5_content_discard_dark, R.drawable.a_5_content_discard_light,
+			openSelectionMode(itemId, R.drawable.ic_action_delete_dark, R.drawable.ic_action_delete_light,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -714,7 +714,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						}
 					}, null, null);
 		} else if (itemId == R.string.local_index_mi_backup) {
-			openSelectionMode(itemId, R.drawable.a_8_images_rotate_left_dark, R.drawable.a_8_images_rotate_left_light,
+			openSelectionMode(itemId, R.drawable.ic_action_undo_dark, R.drawable.ic_action_undo_light,
 					new DialogInterface.OnClickListener() {
 
 						@Override
@@ -723,7 +723,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 						}
 					}, Boolean.FALSE, LocalIndexType.MAP_DATA);
 		} else if (itemId == R.string.local_index_mi_restore) {
-			openSelectionMode(itemId, R.drawable.a_8_images_rotate_right_dark, R.drawable.a_8_images_rotate_right_light,
+			openSelectionMode(itemId, R.drawable.ic_action_redo_dark, R.drawable.ic_action_redo_light,
 					new DialogInterface.OnClickListener() {
 
 						@Override

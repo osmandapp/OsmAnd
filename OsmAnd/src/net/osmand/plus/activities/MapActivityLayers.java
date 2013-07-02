@@ -3,7 +3,6 @@ package net.osmand.plus.activities;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -282,7 +281,7 @@ public class MapActivityLayers {
 		adapter.item(R.string.layer_poi_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).reg();
 		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
-				.icons(R.drawable.a_3_rating_important_dark, R.drawable.a_3_rating_important_light).reg();
+				.icons(R.drawable.ic_action_fav_dark, R.drawable.ic_action_fav_light).reg();
 		adapter.item(R.string.layer_gpx_layer).selected(
 				getApplication().getGpxFileToDisplay() != null ? 1 : 0)
 //				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)

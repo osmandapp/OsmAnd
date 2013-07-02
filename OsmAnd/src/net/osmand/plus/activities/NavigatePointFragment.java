@@ -58,7 +58,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		boolean light = app.getSettings().isLightActionBar();
 		com.actionbarsherlock.view.MenuItem menuItem = menu.add(0, NAVIGATE_TO, 0, R.string.get_directions).setShowAsActionFlags(
 				MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_directions_light : R.drawable.a_7_location_directions_dark);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_gdirections_light : R.drawable.ic_action_gdirections_dark);
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
@@ -75,8 +75,8 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
 					MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
 		}
-			menuItem = menuItem.setIcon(light ? R.drawable.a_9_av_make_available_offline_light
-					: R.drawable.a_9_av_make_available_offline_dark);
+			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_pin_light
+					: R.drawable.ic_action_marker_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
@@ -86,7 +86,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 			});
 		//}
 		menuItem = menu.add(0, SHOW_ON_MAP, 0, R.string.search_shown_on_map).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.a_7_location_place_light : R.drawable.a_7_location_place_dark);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_marker_light : R.drawable.ic_action_marker_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
@@ -97,7 +97,7 @@ public class NavigatePointFragment extends SherlockFragment implements SearchAct
 		});
 		
 		menuItem = menu.add(0, ADD_TO_FAVORITE, 0, R.string.add_to_favourite).setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-		menuItem = menuItem.setIcon(light ? R.drawable.a_3_rating_important_light : R.drawable.a_3_rating_important_dark);
+		menuItem = menuItem.setIcon(light ? R.drawable.ic_action_fav_light : R.drawable.ic_action_fav_dark);
 
 		menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 			@Override
