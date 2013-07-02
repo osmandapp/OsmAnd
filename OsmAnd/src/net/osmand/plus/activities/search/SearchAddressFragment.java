@@ -103,12 +103,12 @@ public class SearchAddressFragment extends SherlockFragment {
 			if (targets.getPointToNavigate() != null) {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_intermediate_point).setShowAsActionFlags(
 						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-				// For button-less search UI
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flage_light : R.drawable.ic_action_flage_dark);
 			} else {
 				menuItem = menu.add(0, ADD_WAYPOINT, 0, R.string.context_menu_item_destination_point).setShowAsActionFlags(
 						MenuItem.SHOW_AS_ACTION_ALWAYS | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+				menuItem = menuItem.setIcon(light ? R.drawable.ic_action_flag_light : R.drawable.ic_action_flag_dark);
 			}
-			menuItem = menuItem.setIcon(light ? R.drawable.ic_action_pin_light : R.drawable.ic_action_pin_dark);
 			menuItem.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 				@Override
 				public boolean onMenuItemClick(com.actionbarsherlock.view.MenuItem item) {
