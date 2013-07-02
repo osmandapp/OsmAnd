@@ -419,7 +419,7 @@
   <string name="search_osm_offline">Soek adres met behulp van aflyn kaarte</string>
   <string name="system_locale">Stelsel</string>
   <string name="preferred_locale_descr">Kies die taal vir die program</string>
-  <string name="preferred_locale">vertoon taal</string>
+  <string name="preferred_locale">Vertoon taal</string>
   <string name="tip_map_switch">Kaartbron</string>
   <string name="tip_map_switch_t">\tDie vinnigste manier om die kaart bron en lae getoon te verander, is deur op \'Kieslys -&gt; \'Definieer vertoon \' in die kaart te druk.\n\tOnder \'Kaartbronne…\' kan jy kies tussen die voorafgelaaide aflyn vektor kaarte , vooraf gedefinieerde (aanlyn) teël bronne, of kaarte met die hand gemaak met behulp van bv. OsmAndMapCreator op `n rekenaar. \n\tOsmAnd ondersteun ook persoonlike bronne.</string>
   <string name="tip_app_mode">Gebruikersprofiel</string>
@@ -640,7 +640,7 @@
   <string name="map_orientation_default">Dieselfde as toestel</string>
   <string name="map_orientation_portrait">Portret</string>
   <string name="map_orientation_landscape">Landskap</string>
-  <string name="map_screen_orientation">skerm oriëntasie</string>
+  <string name="map_screen_orientation">Skerm oriëntasie</string>
   <string name="map_screen_orientation_descr">Portret, landskap, of toestel</string>
   <string name="opening_hours_not_supported">Openingsure se formaat word nie ondersteun vir wysiging nie</string>
   <string name="add_new_rule">Voeg nuwe reël by</string>
@@ -1250,5 +1250,5 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
 	<string name="av_camera_focus_macro">Makro (naby) fokus</string>
 	<string name="av_camera_focus_continuous">Die kamera prbeer heeltyd in fokus bly</string>
 	<string name="av_photo_play_sound">Speel geluid wanneer foto geneem word</string>
-	<string name="av_photo_play_sound_descr">Speel klank wanneer foto geneem word</string>
+	<string name="av_photo_play_sound_descr">Speel geluid wanneer foto geneem word</string>
 </resources>
