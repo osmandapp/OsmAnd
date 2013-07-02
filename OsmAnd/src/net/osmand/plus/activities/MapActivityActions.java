@@ -1253,24 +1253,6 @@ public class MapActivityActions implements DialogProvider {
     public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, 
     		final int z, final Activity activity, final boolean saveHistory, final OnClickListener onShow, boolean favorite) {
 
-		ActionItem showOnMap = new ActionItem();
-		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
-		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_marker_light));
-		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
-		showOnMap.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (onShow != null) {
-					onShow.onClick(v);
-				}
-				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
-						obj); //$NON-NLS-1$
-				MapActivity.launchMapActivityMoveToTop(activity);
-				qa.dismiss();
-			}
-		});
-		qa.addActionItem(showOnMap);
 		ActionItem setAsDestination = new ActionItem();
 		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_gdirections_light));
 		setAsDestination.setTitle(activity.getString(R.string.get_directions));
@@ -1308,6 +1290,26 @@ public class MapActivityActions implements DialogProvider {
 			}
 		});
 		qa.addActionItem(intermediate);
+
+		ActionItem showOnMap = new ActionItem();
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_marker_light));
+		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
+		showOnMap.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (onShow != null) {
+					onShow.onClick(v);
+				}
+				app.getSettings().setMapLocationToShow(location.getLatitude(), location.getLongitude(), z, saveHistory ? name : null, name,
+						obj); //$NON-NLS-1$
+				MapActivity.launchMapActivityMoveToTop(activity);
+				qa.dismiss();
+			}
+		});
+		qa.addActionItem(showOnMap);
+
 		if (favorite) {
 			ActionItem addToFavorite = new ActionItem();
 			addToFavorite.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_fav_light));
