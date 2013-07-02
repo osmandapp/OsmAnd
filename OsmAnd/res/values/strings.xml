@@ -532,7 +532,6 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="screen_is_locked">To unlock screen press lock icon</string>
 	<string name="map_widget_top_text">Street name</string>
 	<string name="map_widget_config">Configure screen</string>
-	<string name="map_widget_map_select">Map source</string>
 	<string name="map_widget_back_to_loc">Where am I</string>
 	<string name="map_widget_lock_screen">Lock screen</string>
 	<string name="map_widget_compass">Compass</string>

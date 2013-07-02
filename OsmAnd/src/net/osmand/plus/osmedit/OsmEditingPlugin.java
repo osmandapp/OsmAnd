@@ -134,18 +134,22 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			}
 		};
 		if(selectedObj instanceof Amenity) {
-			adapter.registerItem(R.string.poi_context_menu_modify, R.drawable.list_activities_poi_modify, listener, 1);
-			adapter.registerItem(R.string.poi_context_menu_delete, R.drawable.list_activities_poi_remove, listener, 2);
+			adapter.item(R.string.poi_context_menu_modify).icons(R.drawable.a_5_content_edit_dark, 
+					R.drawable.a_5_content_edit_light).listen(listener).position(1).reg();
+			adapter.item(R.string.poi_context_menu_delete).icons(R.drawable.a_5_content_remove_dark, 
+					R.drawable.a_5_content_remove_light).listen(listener).position(2).reg();
 		} else {
-			adapter.registerItem(R.string.context_menu_item_create_poi, R.drawable.list_activities_create_poi, listener, -1);
+			adapter.item(R.string.context_menu_item_create_poi).icons(R.drawable.a_5_content_new_dark, 
+					R.drawable.a_5_content_new_light).listen(listener).position(-1).reg();
 		}
-		adapter.registerItem(R.string.context_menu_item_open_bug, R.drawable.list_activities_osm_bugs, listener, -1);
+		adapter.item(R.string.context_menu_item_open_bug).icons(R.drawable.ic_action_bug_dark, 
+				R.drawable.ic_action_bug_light).listen(listener).reg();
 	}
 
 	@Override
 	public void registerLayerContextMenuActions(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
-		adapter.registerSelectedItem(R.string.layer_osm_bugs, settings.SHOW_OSM_BUGS.get() ? 1 : 0, R.drawable.list_activities_osm_bugs,
-				new OnContextMenuClick() {
+		adapter.item(R.string.layer_osm_bugs).selected(settings.SHOW_OSM_BUGS.get() ? 1 : 0)
+				.icons(R.drawable.ic_action_bug_dark, R.drawable.ic_action_bug_light).listen(new OnContextMenuClick() {
 
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -153,7 +157,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							settings.SHOW_OSM_BUGS.set(isChecked);
 						}
 					}
-				}, 8);
+				}).position(8).reg();
 
 	}
 
@@ -165,19 +169,21 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public void contextMenuLocalIndexes(final LocalIndexesActivity la, final LocalIndexInfo info, ContextMenuAdapter adapter) {
 		if (info.getType() == LocalIndexType.GPX_DATA) {
-			adapter.registerItem(R.string.local_index_mi_upload_gpx, 0, new OnContextMenuClick() {
+			adapter.item(R.string.local_index_mi_upload_gpx).icons(R.drawable.a_9_av_upload_dark, R.drawable.a_9_av_upload_light)
+					.listen(new OnContextMenuClick() {
 
-				@Override
-				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
-					sendGPXFiles(la, info);
-				}
-			}, 0);
+						@Override
+						public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+							sendGPXFiles(la, info);
+						}
+					}).reg();
 		}
 	}
 	
 	@Override
 	public void optionsMenuLocalIndexes(final LocalIndexesActivity la, ContextMenuAdapter optionsMenuAdapter) {
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_upload_gpx, 0, new OnContextMenuClick() {
+		optionsMenuAdapter.item(R.string.local_index_mi_upload_gpx)
+		.icons(R.drawable.a_9_av_upload_dark, R.drawable.a_9_av_upload_light).listen(new OnContextMenuClick() {
 
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -189,7 +195,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							}
 						}, null, LocalIndexType.GPX_DATA);
 			}
-		}, 5);
+		}).position(5).reg();
 	}
 	
 	public boolean sendGPXFiles(final LocalIndexesActivity la, final LocalIndexInfo... info){

@@ -327,13 +327,16 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				}
 			};
 			if(a.getDescription() != null){
-				adapter.registerItem(R.string.poi_context_menu_showdescription, R.drawable.list_activities_show_poi_description, listener, -1);
+				adapter.item(R.string.poi_context_menu_showdescription)
+					.icons(R.drawable.ic_action_note_dark,R.drawable.ic_action_note_light)
+					.listen(listener).reg();
 			}
 			if(a.getPhone() != null){
-				adapter.registerItem(R.string.poi_context_menu_call, R.drawable.list_activities_show_poi_phone, listener, -1);
+				adapter.item(R.string.poi_context_menu_call).icons(R.drawable.ic_action_call_dark, R.drawable.ic_action_call_light).listen(listener).reg();
 			}
 			if(a.getSite() != null){
-				adapter.registerItem(R.string.poi_context_menu_website, R.drawable.list_activities_poi_show_website, listener, -1);
+				adapter.item(R.string.poi_context_menu_website)
+					.icons( R.drawable.ic_action_globus_dark, R.drawable.ic_action_globus_light).listen(listener).reg();
 			}
 		}
 	}

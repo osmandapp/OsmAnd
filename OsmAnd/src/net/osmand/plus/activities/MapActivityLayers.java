@@ -56,6 +56,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -275,20 +276,23 @@ public class MapActivityLayers {
 		final OsmandSettings settings = getApplication().getSettings();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
-		adapter.registerItem(R.string.layer_map_appearance,
-				R.drawable.list_activities_config);
-		adapter.registerSelectedItem(R.string.layer_poi, settings.SHOW_POI_OVER_MAP.get() ? 1 : 0, 
-				R.drawable.list_activities_poi);
-		adapter.registerSelectedItem(R.string.layer_poi_label, settings.SHOW_POI_LABEL.get() ? 1 : 0, 
-				R.drawable.list_activities_poi_labels);
-		adapter.registerSelectedItem(R.string.layer_favorites, settings.SHOW_FAVORITES.get() ? 1 : 0, 
-				R.drawable.list_activities_favorites2);
-		adapter.registerSelectedItem(R.string.layer_gpx_layer, 
-				getApplication().getGpxFileToDisplay() != null ? 1 : 0,  R.drawable.list_activities_gpx_tracks);
-		adapter.registerSelectedItem(R.string.layer_transport, settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0, 
-				R.drawable.list_activities_transport_stops);
+		adapter.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light).reg();
+		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0) 
+				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
+		adapter.item(R.string.layer_poi_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
+				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).reg();
+		adapter.item(R.string.layer_favorites).selected(settings.SHOW_FAVORITES.get() ? 1 : 0) 
+				.icons(R.drawable.a_3_rating_important_dark, R.drawable.a_3_rating_important_light).reg();
+		adapter.item(R.string.layer_gpx_layer).selected(
+				getApplication().getGpxFileToDisplay() != null ? 1 : 0)
+//				.icons(R.drawable.ic_action_foot_dark, R.drawable.ic_action_foot_light)
+				.icons(R.drawable.ic_action_polygom_dark, R.drawable.ic_action_polygom_light)
+				.reg();
+		adapter.item(R.string.layer_transport).selected( settings.SHOW_TRANSPORT_OVER_MAP.get() ? 1 : 0)
+				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).reg(); 
 		if(TransportRouteHelper.getInstance().routeIsCalculated()){
-			adapter.registerSelectedItem(R.string.layer_transport_route, 1 , R.drawable.list_activities_transport_stops);
+			adapter.item(R.string.layer_transport_route).selected(1 )
+				.icons(R.drawable.ic_action_bus_dark, R.drawable.ic_action_bus_light).reg();
 		}
 		
 		
@@ -299,19 +303,26 @@ public class MapActivityLayers {
 		Builder b = new AlertDialog.Builder(activity);
 		
 		final int padding = (int) (12 * activity.getResources().getDisplayMetrics().density + 0.5f);
+		final boolean light = getApplication().getSettings().isLightContentMenu();
+		final int layout;
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			layout = R.layout.list_menu_item;
+		} else {
+			layout = R.layout.list_menu_item_native;
+		}
 
 		ListAdapter listAdapter = new ArrayAdapter<String>(
-			    activity, R.layout.list_menu_item, R.id.title, adapter.getItemNames()){
+			    activity, layout, R.id.title, adapter.getItemNames()){
 			        @Override
 					public View getView(final int position, View convertView, ViewGroup parent) {
 						// User super class to create the View
-						View v = activity.getLayoutInflater().inflate(R.layout.list_menu_item, null);
+						View v = activity.getLayoutInflater().inflate(layout, null);
 			            TextView tv = (TextView)v.findViewById(R.id.title);
 			            tv.setText(adapter.getItemName(position));			            
 
 			            //Put the image on the TextView
-			            if(adapter.getImageId(position) != 0) {
-			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position), 0, 0, 0);
+			            if(adapter.getImageId(position, light) != 0) {
+			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position, light), 0, 0, 0);
 			            } else {
 			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
 			            }

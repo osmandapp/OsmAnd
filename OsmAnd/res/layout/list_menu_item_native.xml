@@ -21,14 +21,13 @@
 
     <LinearLayout android:layout_width="wrap_content"
         android:layout_height="fill_parent">
-
+<!-- android:button="@drawable/ic_btn_wocheckbox" -->
     <CheckBox
         android:id="@+id/check_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dip"
         android:layout_marginRight="2dip"
-        android:button="@drawable/ic_btn_wocheckbox"
         android:focusable="false"
         android:gravity="center_vertical" />
     </LinearLayout>

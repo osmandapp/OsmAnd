@@ -423,34 +423,37 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerSelectedItem(R.string.layer_recordings, SHOW_RECORDINGS.get()? 1 : 0, R.drawable.list_activities_rec_layer2, listener, 7);
+		adapter.item(R.string.layer_recordings).selected(SHOW_RECORDINGS.get()? 1 : 0)
+			.icons(R.drawable.ic_action_audio_dark, R.drawable.ic_action_audio_light).listen(listener).position(7).reg();
 	}
 	
 	@Override
 	public void registerMapContextMenuActions(final MapActivity mapActivity, final double latitude, final double longitude, ContextMenuAdapter adapter,
 			Object selectedObj) {
-		adapter.registerItem(R.string.recording_context_menu_arecord, R.drawable.list_activities_audio_note, new OnContextMenuClick() {
+		adapter.item(R.string.recording_context_menu_arecord).icons(R.drawable.ic_action_micro_dark, R.drawable.ic_action_micro_light) .
+				listen(new OnContextMenuClick() {
 			
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				recordAudio(latitude, longitude, mapActivity);
 			}
-		}, 6);
-		adapter.registerItem(R.string.recording_context_menu_vrecord, R.drawable.list_activities_video_note, new OnContextMenuClick() {
+		}).position(6).reg();
+		adapter.item(R.string.recording_context_menu_vrecord).icons(R.drawable.ic_action_video_dark, R.drawable.ic_action_video_light).
+		listen(new OnContextMenuClick() {
 			
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				recordVideo(latitude, longitude, mapActivity);
 			}
-		}, 7);
-		adapter.registerItem(R.string.recording_context_menu_precord, R.drawable.list_activities_photo, new OnContextMenuClick() {
-			
+		}).position(7).reg();
+		adapter.item(R.string.recording_context_menu_precord).icons(R.drawable.ic_action_photo_dark, R.drawable.ic_action_photo_light).
+		listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				takePhoto(latitude, longitude, mapActivity);
 			}
 
-		}, 8);
+		}).position(8).reg();
 	}
 	
 	@Override
@@ -1086,11 +1089,14 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				}
 			};
 			if(ri.rec.isPhoto()) {
-				adapter.registerItem(R.string.recording_context_menu_show, R.drawable.list_activities_play_note, listener, 0);
+				adapter.item(R.string.recording_context_menu_show).icons(
+						R.drawable.ic_action_eye_dark, R.drawable.ic_action_eye_light).listen(listener).reg();
 			} else {
-				adapter.registerItem(R.string.recording_context_menu_play, R.drawable.list_activities_play_note, listener, 0);
+				adapter.item(R.string.recording_context_menu_play).icons(
+						R.drawable.ic_action_play_dark, R.drawable.ic_action_play_light).listen(listener).reg();
 			}
-			adapter.registerItem(R.string.show_location, 0, new OnContextMenuClick() {
+			adapter.item(R.string.show_location).icons(R.drawable.a_7_location_place_dark, R.drawable.a_7_location_place_light).
+				listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 					SHOW_RECORDINGS.set(true);
@@ -1098,7 +1104,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					MapActivity.launchMapActivityMoveToTop(la);
 
 				}
-			}, 0);
+			}).reg();
 		}
 	}
 	

@@ -521,8 +521,12 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					}
 				}
 			};
-			adapter.registerItem(R.string.osb_comment_menu_item, R.drawable.list_activities_add_comment, listener, -1);
-			adapter.registerItem(R.string.osb_close_menu_item, R.drawable.list_activities_close_bug, listener, -1);
+			adapter.item(R.string.osb_comment_menu_item).icons(
+					R.drawable.ic_action_note_dark,  R.drawable.ic_action_note_light
+					).listen(listener).reg();
+			adapter.item(R.string.osb_close_menu_item).icons(
+					R.drawable.a_5_content_remove_dark,R.drawable.a_5_content_remove_light
+					).listen(listener).reg();
 		}
 	}
 	

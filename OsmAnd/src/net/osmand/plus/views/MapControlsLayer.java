@@ -155,7 +155,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_pedestrian_dark : R.drawable.ic_action_pedestrian_light);
 			} else {
 //				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.default_small_white : R.drawable.default_small);
-				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.a_7_location_map_dark : R.drawable.a_7_location_map_light);
+				cacheAppModeIcon = view.getResources().getDrawable(nightMode? R.drawable.ic_action_globus_dark : R.drawable.ic_action_globus_light);
 			}
 			int l = modeShadow.getBounds().left + (modeShadow.getBounds().width() - cacheAppModeIcon.getMinimumWidth()) / 2;
 			int t = (int) (modeShadow.getBounds().top + 2 * scaleCoefficient);

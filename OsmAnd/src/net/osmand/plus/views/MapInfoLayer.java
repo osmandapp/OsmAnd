@@ -239,7 +239,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, all, 5);
 		
 		View globus = createGlobus();
-		mapInfoControls.registerTopWidget(globus, R.drawable.widget_globus, R.string.map_widget_map_select, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
+		mapInfoControls.registerTopWidget(globus, R.drawable.widget_globus, R.string.menu_layers, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
 		
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,

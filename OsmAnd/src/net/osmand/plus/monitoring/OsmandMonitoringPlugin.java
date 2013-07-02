@@ -97,7 +97,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_add_waypoint, R.drawable.list_activities_gpx_waypoint, listener, -1);
+		adapter.item(R.string.context_menu_item_add_waypoint).icons(R.drawable.a_5_content_new_dark, R.drawable.a_5_content_new_light)
+		.listen(listener).reg();
 	}
 	
 	public static final int[] SECONDS = new int[] {1, 2, 3, 5, 10, 15, 30, 60, 90};
@@ -207,8 +208,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 	public void addMonitorActions(final ContextMenuAdapter qa, final MonitoringInfoControl li, final OsmandMapTileView view) {
 		final Intent serviceIntent = new Intent(view.getContext(), NavigationService.class);
 		final boolean off = !view.getSettings().SAVE_TRACK_TO_GPX.get();
-		qa.registerItem(off ? R.string.monitoring_mode_off : R.string.monitoring_mode_on, off ? R.drawable.monitoring_rec_inactive
-				: R.drawable.monitoring_rec_big, new OnContextMenuClick() {
+		qa.item(off ? R.string.monitoring_mode_off : R.string.monitoring_mode_on
+				).icon(  off ? R.drawable.monitoring_rec_inactive : R.drawable.monitoring_rec_big).listen(new OnContextMenuClick() {
 
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -235,12 +236,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					}
 				}
 			}
-		}, -1);
+		}).reg();
 		
 		final boolean bgoff = view.getApplication().getNavigationService() == null;
 		int msgId = !bgoff? R.string.bg_service_sleep_mode_on : R.string.bg_service_sleep_mode_off;
 		int draw = !bgoff? R.drawable.monitoring_rec_big : R.drawable.monitoring_rec_inactive;
-		qa.registerItem(msgId, draw, new OnContextMenuClick() {
+		qa.item(msgId).icon(draw).listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (view.getApplication().getNavigationService() == null) {
@@ -260,10 +261,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					view.getContext().stopService(serviceIntent);
 				}
 			}
-		}, 0);
+		}).position(0).reg();
 
-		qa.registerItem(R.string.save_current_track_widget,
-				R.drawable.monitoring_rec_inactive,
+		qa.item(R.string.save_current_track_widget).icon(R.drawable.monitoring_rec_inactive).listen(
 					new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -279,11 +279,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 
 				}, (Void) null);
 			}
-		}, -1);
+		}).position(-1).reg();
 
 		final boolean liveoff = !view.getSettings().LIVE_MONITORING.get();
-		qa.registerItem(liveoff ? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on,
-				liveoff ? R.drawable.monitoring_rec_inactive: R.drawable.monitoring_rec_big, 
+		qa.item(liveoff ? R.string.live_monitoring_mode_off : R.string.live_monitoring_mode_on).icon(
+				liveoff ? R.drawable.monitoring_rec_inactive: R.drawable.monitoring_rec_big).listen( 
 						new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
@@ -303,7 +303,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin implements MonitoringIn
 					view.getSettings().LIVE_MONITORING.set(false);
 				}
 			}
-		}, -1);
+		}).reg();
 	}
 
 }

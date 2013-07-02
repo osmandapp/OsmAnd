@@ -211,7 +211,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			};
 			if (parkingPosition != null)
-				adapter.registerItem(R.string.context_menu_item_delete_parking_point, R.drawable.list_activities_parking_poi_remove, removeListener, 0);
+				adapter.item(R.string.context_menu_item_delete_parking_point)
+				.icons( R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(removeListener).position(0).reg();
 		}
 		
 		OnContextMenuClick addListener = new OnContextMenuClick() {
@@ -223,7 +224,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				}
 			}
 		};
-		adapter.registerItem(R.string.context_menu_item_add_parking_point, R.drawable.list_activities_parking_poi_add, addListener, -1);
+		adapter.item(R.string.context_menu_item_add_parking_point)
+		.icons( R.drawable.ic_action_parking_dark, R.drawable.ic_action_parking_light).listen(addListener).reg();
 		
 	}
 
@@ -419,15 +421,14 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public void registerOptionsMenuItems(final MapActivity mapActivity, ContextMenuAdapter helper) {
 		if (parkingLayer != null) {
 			if (getParkingPosition() != null) {
-				boolean l = app.getSettings().isLightContentMenu();
-				helper.registerItem(R.string.osmand_parking_delete, l ? R.drawable.a_1_navigation_cancel_light : R.drawable.a_1_navigation_cancel_dark, 
-						new OnContextMenuClick() {
+				helper.item(R.string.osmand_parking_delete)
+					.icons( R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_light).listen(new OnContextMenuClick() {
 					@Override
 					public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 						showDeleteDialog(mapActivity);
 					}
 
-				});
+				}).reg();
 			}
 		}
 	}

@@ -159,7 +159,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 	}
 
 	private void showGPXRouteAction(final LocalIndexInfo info, ContextMenuAdapter adapter) {
-		adapter.registerItem(R.string.show_gpx_route, 0, new OnContextMenuClick() {
+		adapter.item(R.string.show_gpx_route).listen(new OnContextMenuClick() {
 			@Override
 			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
 				if (info != null && info.getGpxFile() != null) {
@@ -172,7 +172,7 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				}
 				
 			}
-		}, 0);
+		}).reg();
 	}
 	
 	private void basicFileOperation(final LocalIndexInfo info, ContextMenuAdapter adapter) {
@@ -202,14 +202,14 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 		};
 		if(info.getType() == LocalIndexType.MAP_DATA){
 			if(!info.isBackupedData()){
-				adapter.registerItem(R.string.local_index_mi_backup, 0, listener, 1);
+				adapter.item(R.string.local_index_mi_backup).listen(listener).position( 1).reg();
 			}
 		}
 		if(info.isBackupedData()){
-			adapter.registerItem(R.string.local_index_mi_restore, 0, listener, 2);
+			adapter.item(R.string.local_index_mi_restore).listen(listener).position(2).reg();
 		}
-		adapter.registerItem(R.string.local_index_mi_rename, 0, listener, 3);
-		adapter.registerItem(R.string.local_index_mi_delete, 0, listener, 4 );
+		adapter.item(R.string.local_index_mi_rename).listen(listener).position(3).reg();
+		adapter.item(R.string.local_index_mi_delete).listen(listener).position( 4 ).reg();
 	}
 	
 	private void renameFile(LocalIndexInfo info) {
@@ -505,16 +505,21 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				localOptionsMenu(itemId);
 			}
 		};
-		optionsMenuAdapter.registerItem(R.string.local_index_download, 
-				isLightActionBar()? R.drawable.a_9_av_download_light :R.drawable.a_9_av_download_dark, listener, 0);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_reload, 
-				isLightActionBar()? R.drawable.a_1_navigation_refresh_light :R.drawable.a_1_navigation_refresh_dark, listener, 1);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_backup, isLightActionBar() ? 
-				R.drawable.a_8_images_rotate_left_light : R.drawable.a_8_images_rotate_left_dark, listener, 2);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_restore, 
-				isLightActionBar()? R.drawable.a_8_images_rotate_right_light : R.drawable.a_8_images_rotate_right_dark, listener, 3);
-		optionsMenuAdapter.registerItem(R.string.local_index_mi_delete, 
-				isLightActionBar()? R.drawable.a_5_content_discard_light : R.drawable.a_5_content_discard_dark, listener, 4);
+		optionsMenuAdapter.item(R.string.local_index_download)
+						.icons(R.drawable.a_9_av_download_dark, R.drawable.a_9_av_download_light)
+						.listen(listener).position(0).reg();
+		optionsMenuAdapter.item(R.string.local_index_mi_reload)
+						.icons(R.drawable.a_1_navigation_refresh_dark, R.drawable.a_1_navigation_refresh_light)
+						.listen(listener).position(1).reg();
+		optionsMenuAdapter.item(R.string.local_index_mi_backup)
+						.icons(R.drawable.a_8_images_rotate_left_dark, R.drawable.a_8_images_rotate_left_light)
+						.listen(listener).position(2).reg();
+		optionsMenuAdapter.item(R.string.local_index_mi_restore)
+				.icons(R.drawable.a_8_images_rotate_right_dark, R.drawable.a_8_images_rotate_right_light)
+						.listen(listener).position(3).reg();
+		optionsMenuAdapter.item(R.string.local_index_mi_delete)
+						.icons(R.drawable.a_5_content_discard_dark, R.drawable.a_5_content_discard_light)
+						.listen(listener).position(4).reg();
 		OsmandPlugin.onOptionsMenuLocalIndexes(this, optionsMenuAdapter);
 		// doesn't work correctly
 		int max =  getResources().getInteger(R.integer.abs__max_action_buttons);
@@ -535,8 +540,8 @@ public class LocalIndexesActivity extends OsmandExpandableListActivity {
 				item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM  
 						);
 			}
-			if (optionsMenuAdapter.getImageId(j) != 0) {
-				item.setIcon(optionsMenuAdapter.getImageId(j));
+			if (optionsMenuAdapter.getImageId(j, isLightActionBar()) != 0) {
+				item.setIcon(optionsMenuAdapter.getImageId(j, isLightActionBar()));
 			}
 			
 		}

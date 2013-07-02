@@ -600,7 +600,8 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						}
 					}
 				};
-				adapter.registerItem(R.string.delete_point, R.drawable.list_activities_remove_note, listener, -1);
+				adapter.item(R.string.delete_point).icons(R.drawable.a_5_content_remove_dark, 
+						R.drawable.a_5_content_remove_light).listen(listener).reg();
 			}
 		}
 

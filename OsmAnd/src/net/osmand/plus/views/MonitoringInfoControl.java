@@ -83,8 +83,8 @@ public class MonitoringInfoControl {
 			final int ij = i;
 			ActionItem ai = new ActionItem();
 			ai.setTitle(itemNames[ij]);
-			if(ca.getImageId(ij) != 0) {
-				ai.setIcon(view.getResources().getDrawable(ca.getImageId(ij)));
+			if(ca.getImageId(ij, false) != 0) {
+				ai.setIcon(view.getResources().getDrawable(ca.getImageId(ij , false)));
 			}
 			ai.setOnClickListener(new View.OnClickListener() {
 				@Override
