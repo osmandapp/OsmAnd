@@ -982,6 +982,7 @@ public class MapActivityActions implements DialogProvider {
 						mapActivity.getMapLayers().openLayerSelectionDialog(mapView);
 					}
 				}).reg();		
+		
 		// 3-5. Navigation related (directions, mute, cancel navigation)
 		boolean muteVisible = routingHelper.getFinalLocation() != null && routingHelper.isFollowingMode();
 		if (muteVisible) {
@@ -1035,6 +1036,13 @@ public class MapActivityActions implements DialogProvider {
 		}
 		
 		// 6-9. Default actions (Settings, Search, Favorites) 
+		optionsMenuHelper.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light) 
+		.listen(new OnContextMenuClick() {
+			@Override
+			public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
+				mapActivity.getMapLayers().getMapInfoLayer().openViewConfigureDialog();
+			}
+		}).reg();
 		optionsMenuHelper.item(R.string.settings_Button).icons(R.drawable.ic_action_settings2_dark, R.drawable.ic_action_settings2_light)
 				.listen(new OnContextMenuClick() {
 					@Override

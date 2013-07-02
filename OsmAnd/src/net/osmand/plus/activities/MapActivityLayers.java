@@ -250,8 +250,7 @@ public class MapActivityLayers {
 				settings.SHOW_POI_OVER_MAP.set(isChecked);
 			} else if(itemId == R.string.layer_poi_label){
 				settings.SHOW_POI_LABEL.set(isChecked);
-			} else if(itemId == R.string.layer_map_appearance){
-				getMapInfoLayer().openViewConfigureDialog();
+			
 			} else if(itemId == R.string.layer_favorites){
 				settings.SHOW_FAVORITES.set(isChecked);
 			} else if(itemId == R.string.layer_gpx_layer){
@@ -275,8 +274,7 @@ public class MapActivityLayers {
 		final OsmandSettings settings = getApplication().getSettings();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		// String appMode = " [" + settings.getApplicationMode().toHumanString(view.getApplication()) +"] ";
-		adapter.item(R.string.layer_map_appearance).icons(R.drawable.ic_action_settings_dark, R.drawable.ic_action_settings_light).reg();
-		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0) 
+		adapter.item(R.string.layer_poi).selected(settings.SHOW_POI_OVER_MAP.get() ? 1 : 0)
 				.icons(R.drawable.ic_action_info_dark, R.drawable.ic_action_info_light).reg();
 		adapter.item(R.string.layer_poi_label).selected(settings.SHOW_POI_LABEL.get() ? 1 : 0) 
 				.icons(R.drawable.ic_action_text_dark, R.drawable.ic_action_text_light).reg();

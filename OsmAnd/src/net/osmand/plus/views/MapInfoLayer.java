@@ -238,8 +238,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		backToLocation = mic.createBackToLocation(map);
 		mapInfoControls.registerTopWidget(backToLocation, R.drawable.widget_backtolocation, R.string.map_widget_back_to_loc, "back_to_location", MapWidgetRegistry.RIGHT_CONTROL, all, 5);
 		
-		View globus = createGlobus();
-		mapInfoControls.registerTopWidget(globus, R.drawable.widget_globus, R.string.menu_layers, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
+		View globus = createLayer();
+		mapInfoControls.registerTopWidget(globus, R.drawable.widget_layer, R.string.menu_layers, "progress", MapWidgetRegistry.RIGHT_CONTROL, none, 15);
 		
 		topText = mic.createStreetView(app, map, paintText);
 		mapInfoControls.registerTopWidget(topText, R.drawable.street_name, R.string.map_widget_top_text,
@@ -771,10 +771,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 		return fl;
 	}
-	private View createGlobus(){
-		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.list_activities_globus);
-		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.list_activities_globus_white);
-		ImageView globus = new ImageViewWidget(view.getContext()) {
+	private View createLayer(){
+//		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.list_activities_globus);
+//		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.list_activities_globus_white);
+		final Drawable layerDrawable = view.getResources().getDrawable(R.drawable.map_layers_black);
+		final Drawable layerDrawableWhite = view.getResources().getDrawable(R.drawable.map_layers_white);
+		
+		ImageView layers = new ImageViewWidget(view.getContext()) {
 			private boolean nightMode;
 
 			@Override
@@ -782,21 +785,21 @@ public class MapInfoLayer extends OsmandMapLayer {
 				boolean nightMode = drawSettings == null ? false : drawSettings.isNightMode();
 				if(nightMode != this.nightMode) {
 					this.nightMode = nightMode;
-					setImageDrawable(nightMode ? globusDrawableWhite : globusDrawable);
+					setImageDrawable(nightMode ? layerDrawableWhite : layerDrawable);
 					return true;
 				}
 				return false;
 			}
 		};;
-		globus.setImageDrawable(globusDrawable);
-		globus.setOnClickListener(new View.OnClickListener() {
+		layers.setImageDrawable(layerDrawable);
+		layers.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				map.getMapLayers().openLayerSelectionDialog(view);
 				//map.getMapLayers().selectMapLayer(view);
 			}
 		});
-		return globus;
+		return layers;
 	}
 	
 
