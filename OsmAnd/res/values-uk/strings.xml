@@ -1,5 +1,13 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources><string name="tip_recent_changes_0_8_1_t">"Зміни в 0.8.1 : "</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="tip_recent_changes_0_8_1_t">Зміни в 0.8.1:
+		\n\t* Більш точні маршрути (трохи повільніше)
+		\n\t* Розумний і швидкий перерахунок маршруту
+		\n\t* Вказання напрямку руху по смугам
+		\n\t* Інформація про обмеження швидкості, камери відстеження швидкості та про лежачих поліцейських
+		\n\t* Поліпшені голосові підказки на автомобільних дорогах
+		\n\t* Втулок паркування (\'Де припаркований мій автомобіль?\')
+		\n\t* Увімкнення/вимкнення віджету моніторингу
+	</string>
   <string name="asap">Швидко</string>
   <string name="save_route_as_gpx">Зберегти маршрут в GPX файл</string>
   <string name="route_roundabout">Roundabout : take %1$d exit and go</string>
@@ -21,29 +29,30 @@
   <string name="transport_search_desc">Пошук транспорту</string>
   <string name="favourites_search_desc">Пошук серед улюбленого</string>
   <string name="history_search_desc">Пошук в історії</string>
-  <string name="offline_navigation_not_available">OsmAnd офлайн навігація тимчасово не доступна.</string>
+  <string name="offline_navigation_not_available">Автономна навігація OsmAnd тимчасово не доступна.</string>
   <string name="left_side_navigation">Лівосторонній рух</string>
   <string name="left_side_navigation_descr">Увімкніть для країн з лівостороннім рухом</string>
-  <string name="download_link_and_local_description">Завантажте або оновіть уже завантажені дані.↵\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоб вилучити або деактивувати мапу - виберіть і утримуйте відповідний пункт меню.↵\nДані про пристрій(%1$s вільно):</string>
+  <string name="download_link_and_local_description">Завантажте або оновіть уже завантажені дані.
+\nВиділивши мапу, ви можете отримати додаткову інформацію про неї. Щоб вилучити або деактивувати мапу - виберіть і утримуйте відповідний пункт меню. Дані про пристрій(%1$s вільно):</string>
   <string name="unknown_from_location">Початкове місцезнаходження не визначено</string>
   <string name="unknown_location">Позиція ще не визначена</string>
   <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
   <string name="confirm_interrupt_download">Перервати завантаження файлу?</string>
-  <string name="first_time_msg">To use the major features of this application, you need some regional offline data, which you can download (use Settings, Offline Data). Afterwards, you will be able to search by address, look up POIs and find public transportation.</string>
+  <string name="first_time_msg">Дякуємо вам за використання OsmAnd. Для роботи більшості основних можливостей програми потрібні детальні карти регіонів, які можна завантажити з Інтернету за допомогою пункту меню \'Налаштування\' -&gt;  \'Дані\'. Після завантаження цих мап Ви зможете здійснювати пошук за адресою, POI і зупинок громадського транспорту.</string>
   <string name="basemap_was_selected_to_download">Базова мапа необхідна для коректної роботи програми і автоматично була вибрана для завантаження.</string>
   <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити карту самостійно (див. http://osmand.net).</string>
   <string name="local_indexes_cat_tile">Онлайн мапи (растрові)</string>
-  <string name="local_indexes_cat_map">Офлайн мапи (векторні)</string>
+  <string name="local_indexes_cat_map">Оффлайн мапи (векторні)</string>
   <string name="gpx_index_settings_descr">" (включаючи GPX аналізатор)"</string>
-  <string name="index_settings_descr">Завантаження, перегляд деталей, та управління офлайн мапами</string>
-  <string name="map_online_plugin_is_not_installed">Активуйте плагін онлайн мап, щоб мати можливість вибирати різні джерела для карт</string>
+  <string name="index_settings_descr">Завантаження, перегляд деталей, та управління локальними мапами</string>
+  <string name="map_online_plugin_is_not_installed">Активуйте втулок онлайн мап, щоб мати можливість вибирати різні джерела для мап</string>
   <string name="map_online_data">Онлайн мапи (растрові)</string>
   <string name="map_online_data_descr">Використовувати онлайн мапи (кешуються на SD картці)</string>
   <string name="online_map_settings">Онлайн мапи</string>
   <string name="online_map_settings_descr">Налаштування онлнай або кешованих джерел (тайлів) мап</string>
   <string name="map_settings">Налаштування мапи</string>
   <string name="map_settings_descr">Налаштування відображення карти</string>
-  <string name="osmand_rastermaps_plugin_description">Плагін дозволяє використовувати різні джерела онлайн мап, а також підготовлені растрові мапи як базову мапу або підкладку. Мапи можуть бути підготовленими на компютері і повинні бути скопійовані в папку osmand на SD-картку.</string>
+  <string name="osmand_rastermaps_plugin_description">Втулок дозволяє використовувати різні джерела онлайн мап, а також підготовлені растрові мапи як базову мапу або підкладку. Мапи можуть бути підготовленими на комп’ютері і повинні бути скопійовані в теку osmand на SD-картку.</string>
   <string name="osmand_background_plugin_description">Плагін надає навігацію і запис маршрутів в енергозберігаючому режимі. Плагін працює в фоновому режимі і періодично активує GPS для запису маршруту або відтворення голосових команд.</string>
   <string name="osmand_accessibility_description">Плагін містить налаштування для додаткових можливостей.</string>
   <string name="extra_settings">Розширені налаштування</string>
@@ -51,10 +60,21 @@
   <string name="osmand_extra_settings_description">Плагін дозволяє налаштовувати відображення мапи з врахуванням параметрів пристрою.</string>
   <string name="osmand_development_plugin_description">Плагін надає можливості для дебагу і розробки, я к моделювання навігації чи відображення продуктивності рендерингу.</string>
   <string name="plugins_screen">Управління плагінами</string>
-  <string name="select_plugin_to_activate">Виберіть плагін, щоб активувати або деактивувати його (можливо потрібно буде перезавантажити програму)</string>
+  <string name="select_plugin_to_activate">Виберіть втулок, щоб активувати або деактивувати його (можливо потрібно буде перезавантажити програму)</string>
   <string name="prefs_plugins_descr">Плагіни надають додаткові можливості</string>
   <string name="prefs_plugins">Управління плагінами</string>
-  <string name="tip_recent_changes_0_8_0_t">"Changes in 0.8.0 : \n\t- *Plugin functionality* \n\t - Most functionality is grouped by features and can be enabled/disabled in the Plugin Manager. You can enable (online or cached) tile map sources, tracking settings, and many other new and previously existing features. \n\t- *New offline map data support* \n\t - Map rendering becomes faster and more precise (coastline and flooded area problems are mainly fixed). \n\t - You need to download completely new offline data (old data will not be supported anymore) \n\t- *Offline Routing* \n\t - Offline routing becomes more robust \n\t *Usability and UI experience* \n\t - Improved in many areas "</string>
+  <string name="tip_recent_changes_0_8_0_t">Зміни в 0.8.0:
+		\n\t- *Підтримка втулків*
+		\n\t    - Більша частина функцій згуртована за об’єктами і вони можуть бути  увімкнені\вимкнені в меню Налаштування/Втулки.
+		Ви можете ввімкнути (онлайн чи кешовані) джерела квадратів мапи, налаштувати параметри відстежування, а також багато інших нових функцій.     
+		\n\t- *Підтримка нового формату оффлайн мап*
+		\n\t    - Рендеринг мапи тепер відбувається швидше ті більш точніше (проблеми з береговою лінією та затопленими ділянками майже виправлені). 
+		\n\t    - Вам потрібно по новому завантажити дані для автономного використання (старий формат більше не підтримується)
+		\n\t- *Автономне прокладання маршрутів* 
+		\n\t	- Автономне прокладання маршрутів стало значно надійнішим
+		\n\t  *Графічний інтерфейс і взаємодія*
+		\n\t	- Покращено у багатьох напрямках		
+	</string>
   <string name="osm_editing_plugin_description">Плагін для роботи з OSM. Дає можливість створювати і редагувати POI, відпрваляти неточності в OSM, завантажувати треки GPX (потребує облікових даних в OSM).</string>
   <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи відображаються швидше. Підтримуються не всіма пристроями.</string>
   <string name="simulate_route_progression_manually">Simulate route progression manually</string>
@@ -63,12 +83,13 @@
   <string name="native_rendering">Швидкий рендеринг</string>
   <string name="animate_routing">Animate navigation</string>
   <string name="test_voice_prompts">Тестувати голосові підказки</string>
-  <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Offline data), or switch to online maps.</string>
-  <string name="tip_recent_changes_0_7_2_t">"Зміни 0.7.2 :
-\n\t- Швидкий рендеринг для всіх пристроїв
-\n\t- Редагування POI офлайн
-\n\t- Додаткові можливості
-\n\t- Виправлено багато помилок "</string>
+  <string name="switch_to_raster_map_to_see">Для поточної місцевості відсутні векторні оффлайн мапи. Ви можете завантажити їх в меню Налаштування (Дані), або використовувати онлайн мапи.</string>
+  <string name="tip_recent_changes_0_7_2_t">Зміни 0.7.2 :
+		\n\t- Швидкий рендеринг для всіх пристроїв
+		\n\t- Редагування POI оффлайн
+		\n\t- Додаткові можливості
+		\n\t- Виправлено багато помилок
+	</string>
   <string name="send_files_to_osm">Відправити GPX файли в OSM?</string>
   <string name="gpx_visibility_txt">Видимість</string>
   <string name="gpx_tags_txt">Теги</string>
@@ -140,9 +161,8 @@
   <string name="rendering_out_of_memory">Недостатньо пам\'яті процесу для відображення мапи</string>
   <string name="use_fluorescent_overlays">Флуоресцентні кольори</string>
   <string name="use_fluorescent_overlays_descr">Використовувати флуоресцентні кольори для відображення треків</string>
-  <string name="offline_edition">Офлайн редагування</string>
-  <string name="offline_edition_descr">Завжди використовувати офлайн редагування</string>
-  <string name="tip_recent_changes_0_7_1_t">"Changes in 0.7.1 : \n\t- Offline POI editing \n\t- Live Tracking option - send coordinates to web service periodically (read how to setup your own web service in HowTo Articles) \n\t- Show currently recorded track on map \n\t- Direction detection: \'Make U-turn\' is indicated and announced when heading in opposite direction or after missing a turn \n\t- New voice prompt \'Route recalculated\' \n\t- Optical indication of an imminent turn within 100m by diretion arrow changing color \n\t- Actuality also of deactivated index files now shown on Download screen in dark green and dark blue \n\t- Other changes "</string>
+  <string name="offline_edition">Оффлайн редагування</string>
+  <string name="offline_edition_descr">Завжди використовувати оффлайн редагування</string>
   <string name="update_poi_does_not_change_indexes">Зміни POI в аплікаії не мінюять POI завантажені з інтернету, але всі зміни записуються в локальний файл.</string>
   <string name="local_openstreetmap_uploading">Завантаження…</string>
   <string name="local_openstreetmap_were_uploaded">{0} POI/Bugs завантажено в OpenStreetMap</string>
@@ -162,7 +182,6 @@
   <string name="live_monitoring_url">Live tracking web address</string>
   <string name="gpx_monitoring_disabled_warn">Будь ласка, ввімкніть \"Записувати шлях в GPX\" в Нашаштуваннях.</string>
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
-  <string name="tip_recent_changes_0_7_0_t">"Changes in 0.7.0 : \n\t- Offline wikipedia data with articles \n\t- Updated maps \n\t- Other small features "</string>
   <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями і не підтримує геостатті з Вікіпедії.</string>
   <string name="free_version_title">Безкоштовна версія</string>
   <string name="poi_context_menu_showdescription">Деталі POI</string>
@@ -181,7 +200,7 @@
   <string name="index_name_wiki">Worldwide Wikipedia</string>
   <string name="index_name_voice">Голосові дані (запис)</string>
   <string name="index_name_tts_voice">Голосові дані (TTS)</string>
-  <string name="amenity_type_wikiosm">Вікіпедія (офлайн)</string>
+  <string name="amenity_type_wikiosm">Вікіпедія (оффлайн)</string>
   <string name="amenity_type_user_defined">Користувацькі</string>
   <string name="fav_export_confirmation">Файл з Обраним вже існує. Ви хочете його замінити?</string>
   <string name="profile_settings">Налаштування профілю</string>
@@ -204,7 +223,6 @@
   <string name="osmand_service_descr">Запустити OsmAnd у фоновому режимы для запису трека і навігації</string>
   <string name="tip_rotation_switching">Орієнтація мапи</string>
   <string name="tip_rotation_switching_t">\tYou can choose whether and how the map display is rotated in \'Settings\' -&gt; \'Map appearance\' -&gt; \'Map rotation\'. \n\tThe choices are: \n\t\'Don\'t rotate\' - Map will not be rotated. North will be always up \n\t\'To direction of movement\' - Map will continuously be aligned with your heading \n\t\'To compass\' - Map will continuously be aligned with device compass reading \n\tHint: To quickly change between rotation by compass and the one you selected in settings, you can simply tap on the compass needle in map view.</string>
-  <string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Settings\' -&gt; \'Map configuration\' -&gt; \'Offline vector maps\'.</string>
   <string name="tip_day_night_mode">Денний/нічний режим</string>
   <string name="tip_day_night_mode_t">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker). \n\tNight colors are safer for night driving. \n\tYou can set a policy for day/night switching in \'Settings\' -&gt; \'Map appearance\' -&gt;\'Day/night mode\'. \n\tChoices are: \n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default) \n\t\'Day\' - always use day mode \n\t\'Night\' - always use night mode \n\t\'Light sensor\' - map appearance is controlled by light sensor of your device (only if equipped)</string>
   <string name="tip_osm_improve">Покращити Openstreetmap</string>
@@ -212,12 +230,16 @@
   <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
   <string name="download_files_question_space">Вільне місце {2} MB! Завантажити {0} файл(ів) ({1} MB)?</string>
   <string name="tip_select_destination_point">Вибір точки прибуття</string>
-  <string name="tip_select_destination_point_t">\tВи можете обрати пункт призначення на мапі, в результатах пошуку або в списку улюблених точок через пункт \"Йти до\" в контекстному меню.\n\tТочка призначення відображається на мапі, як помаранчевий круг, напрямок до неї відображається помаранчевою стрілкою. Також, в правому верхньому куті відображається відстань по прямій лінії до неї.</string>
-  <string name="tip_recent_changes_0_6_9_t">Зміни в 0.6.9 :\n\t- Покращений рендеринг офлайн мап
-\n\t- Швидкий апаратний рендеринг мап(експериментальні налаштування - може працювати не на всіх пристроях)
-\n\t- Істотні зміни зовнішнього вигляду
-\n\t- Інформація про висоту\n\t- Підтримка нових мов (в\'єтнамська, польська)
-\n\t- Інші дрібні доповнення</string>
+  <string name="tip_select_destination_point_t">\tВи можете обрати пункт призначення на мапі, в результатах пошуку або в списку улюблених точок через пункт \"Йти до\" в контекстному меню.
+		\n\tТочка призначення відображається на мапі, як помаранчевий круг, напрямок до неї відображається помаранчевою стрілкою. Також, в правому верхньому куті відображається відстань по прямій лінії до неї.
+	</string>
+  <string name="tip_recent_changes_0_6_9_t">Зміни в 0.6.9:
+		\n\t- Покращений рендеринг оффлайн мап
+		\n\t- Швидкий апаратний рендеринг мап (експериментальні налаштування - може працювати не на всіх пристроях)
+		\n\t- Істотні зміни зовнішнього вигляду
+		\n\t- Інформація про висоту\n\t- Підтримка нових мов (в’єтнамська, польська)
+		\n\t- Інші дрібні доповнення
+	</string>
   <string name="use_transparent_map_theme_descr">Use transparent map controls</string>
   <string name="use_transparent_map_theme">Прозора тема</string>
   <string name="native_library_not_supported">Рідна бібліотека не підтримується на цьому пристрої.</string>
@@ -265,11 +287,10 @@
   <string name="search_position_map_view">Вигляд мапи</string>
   <string name="select_search_position">Шукати поруч:</string>
   <string name="context_menu_item_search">Шукати поруч</string>
-  <string name="tip_recent_changes_0_6_7_t">"Recent changes for 0.6.7 : \n\t- Offline data manager (download, delete, activate / deactivate offline data directly in OsmAnd) \n\t- Favorite points and groups (categorize, delete, manage favorites) \n\t- GPX Explorer in application (view track detail, distance, average speed, elevation, etc.) \n\t- GPX navigation (more options, continue navigation after crash, support roundabouts) \n\t- Function to save route as GPX track for offline use \n\t- Improve GPX monitoring (filter some inaccurate position and save accuracy/elevation/speed) \n\t- Upload GPX to OSM community (http://download.osmand.net/gpx/) \n\t- Improve vector rendering \n\t- Improvement of TTS engine (announce exact distance, enable miles) \n\t- Bug fixes "</string>
   <string name="save_route_dialog_title">Зберегти маршрут як GPX трек</string>
   <string name="route_successfully_saved_at">Маршрут успішно збережено в \'%1$s\'.</string>
   <string name="filename_input">"Ім\'я файлу: " </string>
-  <string name="file_with_name_already_exist">Файл з таким ім\'ям вже існує\nFile with same name already exists.</string>
+  <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
   <string name="default_buttons_save">Зберегти</string>
   <string name="menu_save_directions">Зберегти маршрут</string>
   <string name="local_index_upload_gpx_description">Відіслати GPX файли на OSM сервер. Вони будуть використані для покращення мап і завантажені на osm.org.</string>
@@ -298,7 +319,7 @@
   <string name="local_index_items_restored">%1$d з %2$d об\'єктів успішно активовано.</string>
   <string name="local_index_no_items_to_do">Нема об\'єктів в %1$s</string>
   <string name="local_index_action_do">Ви дійсно хочете вилучити %1$s %2$s об\'єктів?</string>
-  <string name="local_index_descr_title">Offline Data Manager</string>
+  <string name="local_index_descr_title">Дані</string>
   <string name="local_index_mi_restore">Активувати</string>
   <string name="local_index_mi_backup">Деактивувати</string>
   <string name="local_index_mi_delete">Вилучити</string>
@@ -322,7 +343,6 @@
   <string name="trace_rendering">Налагоджувальна інформація про рендеринг</string>
   <string name="trace_rendering_descr">Відобаражає продуктивність рендерингу</string>
   <string name="tip_recent_changes">Останні зміни</string>
-  <string name="tip_recent_changes_0_6_6_t">"Recent changes for 0.6.6 : \n\t- Text To Speech engine for voice navigation \n\t- Make map renderer more detailed \n\t- Basemap for whole world packaged with app \n\t- Tweak offline navigation (still experimental) \n\t- GPX navigation options \n\t- UI update and large bug fixing "</string>
   <string name="voice_not_use">Не використовувати</string>
   <string name="voice_not_specified">Нема</string>
   <string name="installing_new_resources">Розпаковуються нові дані…</string>
@@ -334,7 +354,7 @@
   <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
   <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
   <string name="gpx_option_from_start_point">Пройти увесь шлях спочатку</string>
-  <string name="switch_to_vector_map_to_see">Для цього регіону доступні офлайн векторні мапи\n\tДля їх використання виберіть пункт меню \"Мапа\" → \"Джерело мапи\" → \"Офлайн векторні мапи\".</string>
+  <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \"Мапа\" → \"Джерело мапи\" → \"Оффлайн векторні мапи\".</string>
   <string name="choose_audio_stream">Голосові інструкції</string>
   <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій (залежить від системи)</string>
   <string name="voice_stream_voice_call">Потік голосових дзвінків</string>
@@ -357,11 +377,19 @@
   <string name="internet_not_available">З\'єднання з мережею Інтернет недоступне</string>
   <string name="install_more">Завантажити ще…</string>
   <string name="tip_update_index">Оновлення локальних даних</string>
-  <string name="tip_update_index_t">\tHaving up-to-date map data is essential. OsmAnd provides a download manager which can check for available offline data updates. \n\tTo check for updates go to \'Settings\' -&gt; \'Offline data\' -&gt; \'Download offline data\'. After region list is retrieved from the internet, you can select option \'Menu\' -&gt; \'Filter downloaded\' to indicate updates only for data already on your device. \n\tThe availability of updates is depicted by the following colors: \n\t\'Green\' - indicates data files identical on device and server \n\t\'Blue\' - indicates available updates on server</string>
+  <string name="tip_update_index_t">\tМати актуальні картографічні дані дуже важливо. OsmAnd має вбудований менеджер даних, який може перевіряти наявність оновлень для автономних мап.
+		\n\tДля того, щоб перевірити наявність оновлень перейдіть до меню \'Налаштування\' -&gt; \'Керування даними\' -&gt; \'Завантаження автономних даних\'. Після завантаження списку регіонів з інтернету, ви можете показати тільки дані наявні на вашому пристрої \'Меню\' -&gt; \'Завантажені\'.
+		\n\t\'Зеленим\' показуються данні, що не потребують оновлення
+		\n\t\'Блакитним\' — наявані оновлення
+		\n\tЕлементи показані курсивом — деактивовані дані на вашому пристрої</string>
   <string name="level_to_switch_vector_raster_descr">Мінімальний масштаб для використання векторних мап</string>
   <string name="level_to_switch_vector_raster">Масштаб векторних мап</string>
   <string name="tip_location_sharing">Поділитись місцерозташуванням</string>
-  <string name="tip_location_sharing_t">\tYou can share the location of interesting places on your trip with family or friends. \n\tTo share any location you want: \n\tUse \'Map context menu\' -&gt; \'Share location\' menu. \n\tThen select a way to share your location. The choices are: E-Mail, SMS(text), or just copy location coordinates to clipboard.</string>
+  <string name="tip_location_sharing_t">\tВи можете поділитися розташуванням цікавих місць з вашої подорожі з сім’єю або друзями.
+		\n\tЩоб поділитись місцем:
+		\n\tСкористайтесь \'Контекстним меню мапи\' -&gt; \'Поділитись місцем\'.
+		\n\tПотім оберіть спосіб поширення. Це може бути: E-Mail, SMS(текст), чи навіть копіювання координат до буферу обміну.
+	</string>
   <string name="tip_favorites">Улюблені точки</string>
   <string name="tip_favorites_t">\tFrequently used points can be saved as Favorites.
 \n\tTo save a point as Favorite go to the map context menu, select option \'Add to favorites\' and then enter a name for it. After saving a Favorite, it is accessible via \'Main Menu\' -&gt; \'Favorites\'.
@@ -381,7 +409,10 @@
   <string name="tip_navigation_t">\tЩоб розпочати навігацію виберіть пункт призначення. Після цього натисніть \"Меню\" → \"Навігація\" на мапі і виберіть тип навігації.</string>
   <string name="tip_search">Пошук</string>
   <string name="tip_map_context_menu">Контекстне меню мапи</string>
-  <string name="tip_map_context_menu_t">\tThe map context menu is available by pressing and holding on the map or by pressing the trackball button. \n\tThis produces a box with point coordinates. To open the map context menu dialog, tap on it. (Or press and hold on it to hide the box again.) \n\tThe map context menu contains all actions referring to a point (location).</string>
+  <string name="tip_map_context_menu_t">\tКонтекстне меню мапи доступне, якщо натиснути та утримувати мапу чи натиснути джойстик.
+		\n\tЦе призведе до появи прямокутника з координатами точки. Для відкриття контекстного меню мапи, натисніть на нього. (Або натисніть та утримуйте його для його приховування.)
+		\n\tКонтекстне меню мапи містить пункти відповідно то вказаної точки (місцевості).
+	</string>
   <string name="tip_initial">Поради</string>
   <string name="tip_initial_t">\tOsmAnd - навігаційна програма з великими можливостями.\n\tСлідуйте за підказками за посиланням в меню</string>
   <string name="next_button">Наступний</string>
@@ -396,7 +427,7 @@
   <string name="mile_per_hour">мл/г</string>
   <string name="mile">мл</string>
   <string name="send_location_way_choose_title">Поділитись, використовуючи</string>
-  <string name="send_location_sms_pattern">Координати: %1$s %2$s</string>
+  <string name="send_location_sms_pattern">Координати: %1$s\n%2$s</string>
   <string name="send_location_email_pattern">Для того, щоб побачити місцерозташування натисніть на посилання %1$s або android посилання %2$s</string>
   <string name="send_location">Відправити місцезнаходження</string>
   <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
@@ -444,12 +475,11 @@
   <string name="version_index_is_big_for_memory">Недостатньо пам\'яті для локальної мапи \'\'{0}\'\'</string>
   <string name="version_index_is_not_supported">Версія локальної мапи \'\'{0}\'\' не підтримується</string>
   <string name="use_osmand_routing_service">Автономна навігація &gt; 20км</string>
-  <string name="use_osmand_routing_service_descr">Використовувати OsmAnd офлайн навігацію на відстані &gt; 20 км (експериментально)</string>
-  <string name="osmand_routing_experimental">OsmAnd офлайн навігація є експериментальною і не працює на відстанях &gt; 20 км\nВ цьому випадку для прокладання маршруту використовуйте онлайн сервіс CloudMade.</string>
+  <string name="use_osmand_routing_service_descr">Використовувати OsmAnd оффлайн навігацію на відстані &gt; 20 км (експериментально)</string>
+  <string name="osmand_routing_experimental">OsmAnd оффлайн навігація є експериментальною і не працює на відстанях &gt; 20 км\n\nВ цьому випадку для прокладання маршруту використовуйте онлайн сервіс CloudMade.</string>
   <string name="specified_dir_doesnt_exist">Неможливо знайти вказану папку.</string>
   <string name="application_dir">Папка програми</string>
   <string name="application_dir_change_warning">Зміна папки не переносить файли автоматично. Ви повинні це зробити самостійно. Продовжити?</string>
-  <string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by new the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
   <string name="build_installed">Збірка {0} успішно встановлена ({1}).</string>
   <string name="downloading_build">Завантажується збірка…</string>
   <string name="install_selected_build">Ви впевнені, що хочете встановити OsmAnd - {0} від {1} {2} MB?</string>
@@ -481,11 +511,11 @@
   <string name="continuous_rendering">Безперервний рендеринг</string>
   <string name="continuous_rendering_descr">Виберіть спосіб рендеринга мапи</string>
   <string name="rendering_exception">Під час відображення мапи сталась невідома помилка</string>
-  <string name="show_point_options">Використати місце…</string>
-  <string name="renderer_load_sucess">Renderer sucessfully loaded</string>
-  <string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
-  <string name="renderers">Vector renderer</string>
-  <string name="renderers_descr">Choose rendering appearance</string>
+  <string name="show_point_options">Контекстне меню…</string>
+  <string name="renderer_load_sucess">Рендер завантажено</string>
+  <string name="renderer_load_exception">Виникла помилка: рендер не завантажено</string>
+  <string name="renderers">Векторний рендер</string>
+  <string name="renderers_descr">Виберіть зовнішній вигляд рендеринга</string>
   <string name="poi_context_menu_website">Показати сайт POI</string>
   <string name="poi_context_menu_call">Показати телефон POI</string>
   <string name="website">веб-сайт</string>
@@ -506,7 +536,7 @@
   <string name="gpx_files_not_found">GPX файли не знайдені в папці /tracks</string>
   <string name="layer_gpx_layer">Трек GPX…</string>
   <string name="error_reading_gpx">Помилка читання GPX даних</string>
-  <string name="vector_data">Офлайн векторні мапи</string>
+  <string name="vector_data">Оффлайн векторні мапи</string>
   <string name="transport_context_menu">Шукати транспорт на зупинці</string>
   <string name="point_on_map">Координати:\n Шир %1$.5f\n Дов %2$.5f</string>
   <string name="osb_bug_name">Помилка</string>
@@ -526,7 +556,7 @@
   <string name="export_fav">Експортувати</string>
   <string name="error_occurred_loading_gpx">Помилка при завантаженні GPX</string>
   <string name="send_report">Відпавити звіт</string>
-  <string name="none_region_found">Не знайдено офлайн мап для даного регіону на SD карті. Завантажити їх з Інтернету.</string>
+  <string name="none_region_found">Не знайдено оффлайн мап для даного регіону на SD карті. Завантажити їх з Інтернету.</string>
   <string name="poi_namefinder_query_empty">Введіть запит для пошуку POI</string>
   <string name="any_poi">Всі</string>
   <string name="layer_transport_route">Transport route</string>
@@ -613,12 +643,12 @@
   <string name="update_poi_success">POI дані успішно оновлено ({0} об\'єктів завантажено)</string>
   <string name="update_poi_error_local">Помилка оновлення POI даних</string>
   <string name="update_poi_error_loading">Помилка завантаження даних із сервера</string>
-  <string name="update_poi_no_offline_poi_index">В даному регіоні нема локальних POI</string>
+  <string name="update_poi_no_offline_poi_index">Для цієїмісцевості відсутні локальні дані про POI</string>
   <string name="update_poi_is_not_available_for_zoom">Оновлення POI не доступне на дрібних масштабах</string>
   <string name="context_menu_item_update_poi">Оновити POI</string>
   <string name="context_menu_item_update_map_confirm">Оновити локальні дані, завантаживши їх з Інтернету?</string>
-  <string name="search_history_city">Місто:\n {0}</string>
-  <string name="search_history_street">Вулиця:\n {0}, {1}</string>
+  <string name="search_history_city">Місто: {0}</string>
+  <string name="search_history_street">Вулиця: {0}, {1}</string>
   <string name="search_history_int_streets">Перехрестя: {0} x {1} в {2}</string>
   <string name="search_history_building">Будівля: {0}, {1}, {2}</string>
   <string name="favorite">Улюблені</string>
@@ -631,16 +661,16 @@
   <string name="searching_address">Пошук адреси…</string>
   <string name="search_osm_nominatim">Пошук адреси в OSM Nominatim</string>
   <string name="hint_search_online">Номер будинку, вулиця, місто</string>
-  <string name="search_offline_address">Офлайн</string>
+  <string name="search_offline_address">Оффлайн пошук</string>
   <string name="search_online_address">Інтернет</string>
   <string name="max_level_download_tile">Макс. рівень деталізації</string>
   <string name="max_level_download_tile_descr">Веберіть максимальний рівень деталізації для завантаження з Інтернету</string>
-  <string name="route_general_information">Загальна відстань %1$s\nЧас в дорозі %2$d г %3$d хв.</string>
+  <string name="route_general_information">Загальна відстань %1$s, Час в дорозі %2$d г %3$d хв.</string>
   <string name="router_service_descr">Виберіть сервіс для прокладання маршруту</string>
   <string name="router_service">Прокладання маршруту</string>
   <string name="sd_dir_not_accessible">Папка на SD-карті не доступна для збереження</string>
   <string name="download_question">Завантажити {0} - {1} ?</string>
-  <string name="download_question_exist">Офлайн мапа для {0} вже існує ({1}). Хочете її оновити ({2}) ?</string>
+  <string name="download_question_exist">Оффлайн мапа для {0} вже існує ({1}). Хочете її оновити ({2}) ?</string>
   <string name="address">Адрес</string>
   <string name="download_index_success">Успішно завантажена</string>
   <string name="error_io_error">Помилка вводу/виводу</string>
@@ -686,10 +716,10 @@
   <string name="previous_run_crashed">Помилка у роботі програми. Лог-файл знаходиться тут {0}. Будь ласка, напишіть розробнику про помилку (з вкладеним лог-файлом).</string>
   <string name="saving_gpx_tracks">Збереження GPX треків на SD…</string>
   <string name="finished_task">Закінчено</string>
-  <string name="reload_indexes_descr">Заново завантажити локальеі векторні мапи з SD карти</string>
+  <string name="reload_indexes_descr">Заново завантажити локальні векторні мапи з SD карти</string>
   <string name="reload_indexes">Заново завантажити локальні дані</string>
   <string name="download_indexes_descr">Завантажити або обновити мапи з Інтернету для локального використання</string>
-  <string name="download_indexes">Завантажити офпайн дані</string>
+  <string name="download_indexes">Завантажити оффлайн дані</string>
   <string name="use_online_routing_descr">Використовувати Інтернет для прокладання маршруту</string>
   <string name="use_online_routing">Онлайн маршрутизація</string>
   <string name="osm_settings_descr">Логін/пароль для Openstreetmap.org (OSM)</string>
@@ -855,8 +885,8 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Місце паркування</string>
-  <string name="osmand_parking_plugin_description">Плагін дозволяє запам\'ятовувати місце паркування вашого автомобіля.</string>
-  <string name="osmand_parking_plugin_name">Плагін місця паркування</string>
+  <string name="osmand_parking_plugin_description">Втулок дозволяє запам’ятати місце, де припарковано ваш автомобіль.</string>
+  <string name="osmand_parking_plugin_name">Втулок місця паркування</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце паркування</string>
   <string name="context_menu_item_delete_parking_point">Вилучити маркер місця паркування</string>
   <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
@@ -925,7 +955,7 @@
 	\n\t*Виправлено Гео сервіси (Foursquare, c:geo)
 	\n\t*Виправлено тремтіння зображення під час навігації
 	\n\t*Інші незначні виправлення
-	"Зміни в 1.2:
+	\n\nЗміни в 1.2:
 		\n\t* Виправлення помилок (маршрутизації, пошуку, запису відео/голосу, аудіо-підказок, деякі поліпшення відображення)
 		\n\t* Просте налаштування шару рельєфу (потрібен втулок Ізолінії висот)
 		\n\t* Можливе використання посилань з maps.google.com
@@ -1012,7 +1042,7 @@
     <string name="audionotes_plugin_name">Аудіо/відео замітки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Ізолінії висот</string>
-    <string name="srtm_plugin_description">Плагін дозволяє завантажувати дані ізоліній висот (Налаштування - Управління даними - Завантажити - Виберіть потрібний тип мапи).</string>
+    <string name="srtm_plugin_description">Втулок дозволяє завантажувати дані ізоліній висот (Налаштування - Управління даними - Завантажити - Виберіть потрібний тип мапи).</string>
     <string name="srtm_plugin_name">Втулок Ізолінії висот</string>
     <string name="download_select_map_types">Інші мапи</string>
     <string name="download_roads_only_item">Тільки дороги</string>
@@ -1072,7 +1102,11 @@
     <string name="show_warnings_title">Показати попередження…</string>
 	<string name="poi_filter_emergency">Аварійні служби</string>
     <string name="osmodroid_plugin_description">Втулок OsMoDroid — розширення для OsmAnd, що використовує OsModroid програму для онлайн моніторингу. Інформацію про сервіс можна знайти на сайті http://esya.ru.</string>
-    <string name="tip_recent_changes_0_8_4_t">"Зміни в 0.8.4:\n\tВиправлення деяких помилок\n\tМапа не втрачає позиції GPS після переривання роботи\n\tУвімкнення служби фонового режиму під час навігації "</string>
+    <string name="tip_recent_changes_0_8_4_t">Зміни в 0.8.4:
+	\n\tВиправлення деяких помилок
+	\n\tМапа не втрачає позиції GPS після переривання роботи
+	\n\tУвімкнення служби фонового режиму під час навігації
+    </string>
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
 	<string name="show_warnings_descr">Відображати обмеження швидкостей, камери і смуги</string>
 	<string name="avoid_motorway">Уникати автомагістралей</string>
@@ -1082,7 +1116,12 @@
 	<string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному на онлайн режимах мапами ОСМ</string>
 	<string name="incomplete_locale">незавершена</string>
 	<string name="rendering_attr_noAdminboundaries_description">Приховати регіональні кордони (рівні 5-9)</string>
-    <string name="tip_recent_changes_1_0_0_t">Зміни в 1.0.0:\n\tПокращена маршрутизація: швидша, точніша, відстань до 250 км\n\tНові компактні мапи (дорожні мапи)\n\tМапа не втрачає позиції після переривання роботи\n\tДодано службу фонового режиму під час навігації\n</string>
+    <string name="tip_recent_changes_1_0_0_t">Зміни в 1.0.0:
+	\n\tПокращена маршрутизація: швидша, точніша, відстань до 250 км
+	\n\tНові компактні мапи (дорожні мапи)
+	\n\tМапа не втрачає позиції після переривання роботи
+	\n\tДодано службу фонового режиму під час навігації
+    </string>
     <string name="enable_plugin_monitoring_services">Активувати втулки моніторингу (запис GPX, онлайн моніторинг)</string>
     <string name="filterpoi_activity">Створити фільтр POI</string>
 	<string name="select_navigation_mode">Виберіть вид транспорту</string>
@@ -1102,7 +1141,7 @@
 	<string name="map_widget_show_ruler">Лінійка</string>
 	<string name="map_widget_appearance">Різне:</string>
 	<string name="map_widget_transparent">Прозорість</string>
-	<string name="monitoring_mode_off">Увімкнути\nзапис GPX</string>
+	<string name="monitoring_mode_off">Увімкнути запис GPX</string>
 	<string name="monitoring_mode_on">Вимкнути\nзапис GPX.</string>
 	<string name="gps_wakeup_interval">Інтервал пробудження GPS: %s</string>
 	<string name="int_continuosly">Неперервно</string>
@@ -1112,11 +1151,16 @@
 <string name="map_widget_gps_info">GPS дані</string>
     <string name="layer_recordings">Аудіо записи</string>
     <string name="live_monitoring_mode_off">Ввімкнути трекінг\nв реальному режимі</string>
-	<string name="tip_recent_changes_1_1_4_t">"Зміни в 1.1.4\n\t* Редизайн\n\t* Виправлені помилки "</string>
+	<string name="tip_recent_changes_1_1_4_t">Зміни в 1.1.4:
+        \n\t* Редизайн
+		\n\t* Виправлені помилки
+    </string>
     <string name="osmand_play_title_30_chars">OsmAnd Мапи і Навігація</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапи і Навігація</string>
 	<string name="layer_hillshade">Шар рельєфа місцевості</string>
-    <string name="tip_app_mode_t_v2">\tOsmAnd підтримує різні профілі для різних режимів.\n\tВи можете змінити поточний профіль, натиснувши кнопку вибору профілів в нжиньому лівому куті екрану мапи (іконка автомобіля, велосипеда або пішохода) або при побудові маршруту.</string>
+    <string name="tip_app_mode_t_v2">\tOsmAnd підтримує різні профілі для різних режимів.
+		\n\tВи можете змінити поточний профіль, натиснувши кнопку вибору профілів в нижньому лівому куті екрану мапи (іконка автомобіля, велосипеда або пішохода) або при побудові маршруту.
+	</string>
 	<string name="save_current_track_widget">Зберегти\nпоточний GPX трек</string>
 	<string name="download_regular_maps">Повні мапи</string>
     <string name="tip_recent_changes_0_8_3_t">"Зміни в 0.8.3:
@@ -1125,7 +1169,30 @@
 \n\t* Додано можливість уникати автомагістралей під час прокладання маршруту
 \n\t* Доданий ще один типів доріг для велосипедів (Cycleway=track)
 \n\t* Виправлені помилки "</string>
-	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd — навігаційне програмне забезпечення  з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті для подальшого автономного використання. OsmAnd також пропонує можливість прокладання маршруту як оффлайн, так і використовуючи онлайн-сервіси з покроковим голосовим супроводженням. Кілька основних можливостей: - Повноцінна робота без інтернет-з\'єднання(просто збережіть векторні чи растрові дані до обраної теки), - Компактна векторна мапа всього світу, - Завантаження мап країн чи регіону безпосередньо в програмі, - Можливість відображення додаткових даних на мапі, наприклад шар для прокладання маршруту чи шар із записом GPX-треку, з POI, закладками, ізолініями висот, громадським транспортом, додатковими мапами з можливістю налаштовування рівня прозорості, - Автономний пошук адрес та POI, - Прокладання маршрутів оффлайн на короткі відстані (експериментальна функція), - Режими для пішохідної, автомобільної та велонавігації: - можливість перемикання на денний/нічний режим відображення мапи, — автомасштабування мапи відповідно до швидкості руху, - можливість орієнтації мапи за компасом чи напрямком руху, - показ руху по смугах та обмежень швидкості, запис та голосове супроводження. Обмеження безкоштовної версії: - кількість завантажених мап є обмеженою, - відсутній оффлайн доступ до інформації з Вікіпедії для POI. OsmAnd активно розвивається, його подальший розвиток забезпечується фінансовими надходженнями від його користувачів, за рахунок якої відбувається подальша розробка та впровадження нових функцій. Якщо вам подобається OsmAnd, розгляньте можливість придбання OsmAnd+ чи підтримайте впровадження нових функцій, або зробіть благодійний внесок на osmand.net. "</string>
+	<string name="osmand_long_description_1000_chars">
+		OsmAnd (OSM Automated Navigation Directions)
+
+		OsmAnd — навігаційне програмне забезпечення  з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті для подальшого автономного використання. OsmAnd також пропонує можливість прокладання маршруту як оффлайн, так і використовуючи онлайн-сервіси з покроковим голосовим супроводженням.
+
+		Кілька основних можливостей:
+		- Повноцінна робота без інтернет-з’єднання(просто збережіть векторні чи растрові дані до обраної теки), 
+		- Компактна векторна мапа всього світу,
+		- Завантаження мап країн чи регіону безпосередньо в програмі, 
+		- Можливість відображення додаткових даних на мапі, наприклад шар для прокладання маршруту чи шар із записом GPX-треку, з POI, закладками, ізолініями висот, громадським транспортом, додатковими мапами з можливістю налаштовування рівня прозорості,
+		- Автономний пошук адрес та POI, 
+		- Прокладання маршрутів оффлайн на короткі відстані (експериментальна функція),
+		- Режими для пішохідної, автомобільної та велонавігації: 
+		- можливість перемикання на денний/нічний режим відображення мапи, 
+		- автомасштабування мапи відповідно до швидкості руху, 
+		- можливість орієнтації мапи за компасом чи напрямком руху, 
+		- показ руху по смугах та обмежень швидкості, запис та голосове супроводження.
+
+		Обмеження безкоштовної версії: 
+		- кількість завантажених мап є обмеженою, 
+		- відсутній оффлайн доступ до інформації з Вікіпедії для POI. 
+
+		OsmAnd активно розвивається, його подальший розвиток забезпечується фінансовими надходженнями від його користувачів, за рахунок якої відбувається подальша розробка та впровадження нових функцій. Якщо вам подобається OsmAnd, розгляньте можливість придбання OsmAnd+ чи підтримайте впровадження нових функцій, або зробіть благодійний внесок на osmand.net.
+	</string>
 	<string name="osmand_extended_description_4000_chars">
 OsmAnd (OSM Automated Navigation Directions) OsmAnd — навігаційне програмне забезпечення з доступом до вільних, доступних по всьому світу та високоякісних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані можуть зберігатися на карті пам’яті для автономного використання. За допомогою GPS, доступному у вашому пристрої, OsmAnd пропонує вам маршрутизацію, з графічними та голосовими підказками, для автомобіля, велосипедів і пішоходів. Всі основні функції працюють як онлайн, так і в автономному режимі (немає потреби в інтернеті).
 
@@ -1195,13 +1262,44 @@ OsmAnd має відкриті сирці і активно розвиваєть
  - Антарктида: *.
 
 Перелік підтримуваних країн (взагалі то увесь світ!):
-Афганістан, Австралія, Австрія,  Азербайджан, Албанія, Алжир, Ангілья, Ангола, Андорра, Антигуа і Барбуда, Аргентина, Аруба, Багамські острови, Бангладеш, Барбадос, Бахрейн, Беліз, Бельгія, Бенін, Бермудські острови, Білорусь, Болгарія, Болівія, Бонайре, Боснія і Герцеговина, Ботсвана, Бразилія, Британські Віргінські острови, Бруней, Буркіна-Фасо, Бурунді, Бутан, В\'єтнам, Вануату, Ватикан, Венесуела, Вірменія, Габон, Гаїті, Гайана, Гамбія, Гана, Гваделупа, Гватемала, Гвінея, Гвінея-Бісау, Гернсі, Гібралтар, Гондурас, Гонконг, Гренада, Гренландія, Греція, Грузія, Гуам, Данія, Джерсі, Джібуті, Домініка, Домініканська Республіка, Еквадор, Екваторіальна Гвінея, Еритрея, Естонія, Ефіопія, Єгипет, Ємен, Замбія, Західна Сахара,, Зімбабве., Ізраїль, Індія , Індонезія, Ірак, Іран, Ірландія, Ісландія, Іспанія, Італія, Йорданія, Кабо-Верде, Казахстан, Камбоджа, Камерун, Канада, Катар, Кенія, Киргизстан, Китай, Кіпр, Кірибаті, Колумбія, Коморські Острови, Конго, Коста-Ріка , Кот-д\'Івуар, Куба, Кувейт, Кюрасао, Лаос, Латвія, Лесото, Литва, Ліберія , Ліван, Лівія, Ліхтенштейн, Люксембург, М\'янма, Маврикій, Мавританія, Мадагаскар, Майотта, Макао, Македонія, Малаві, Малайзія, Малі, Мальдіви, Мальта, Марокко, Мартініка, Мексика, Мікронезія, Мозамбік , Молдова, Монако, Монголія, Монтсеррат, Намібія, Науру, Непал, Нігер, Нігерія, Нідерланди, Нідерландські Антильські острови, Нікарагуа, Німеччина, Нова Зеландія, Нова Каледонія, Норвегія, Об\'єднані Арабські Емірати, Оман, острів Мен, Острів Святої Єлени, Пакистан, Палау, Палестина, Панама, Папуа Нова Гвінея, Парагвай, Перу, Південна Африка, Південна Грузія, Південний Судан, Північна Корея і Південна Корея, Польща , Португалія, Пуерто-Ріко, Росія, Руанда, Румунія, Сальвадор, Самоа, Сан-Марино, Саудівська Аравія, Свазіленд, Сейшельські острови, Сен-Мартен, Сен-П\'єр і Мікелон, Сенегал, Сент-Бартелемі, Сент-Вінсент і Гренадини, Сент-Кітс і Невіс, Сент-Люсія, Сербія, Сирія, Сінгапур, Словаччина, Словенія, Сомалі, Сполучене Королівство (Великобританія), Сполучені Штати Америки (США), Судан, Сурінам, Сьєрра-Леоне, Таджикистан, Таїланд , Тайвань, Танзанія, Тимор-Лешті, Того, Токелау, Тонга, Тринідад і Тобаго, Тувалу, Туніс, Туреччина, Туркменістан, Уганда, Угорщина, Узбекистан, Україна, Уолліс і Футуна, Уругвай, Фіджі, Філіппіни, Фінляндія, Франція, Французька Гвіана, Французька Полінезія, Хорватія, Центрально-Африканська Республіка, Чад, Чеська Республіка, Чилі, Чорногорія, Швейцарія, Швеція, Шрі-Ланка, Ямайка, Японія.
+Афганістан, Австралія, Австрія,  Азербайджан, Албанія, Алжир, Ангілья, Ангола, Андорра, Антигуа і Барбуда, Аргентина, Аруба, Багамські острови, Бангладеш, Барбадос, Бахрейн, Беліз, Бельгія, Бенін, Бермудські острови, Білорусь, Болгарія, Болівія, Бонайре, Боснія і Герцеговина, Ботсвана, Бразилія, Британські Віргінські острови, Бруней, Буркіна-Фасо, Бурунді, Бутан, В’єтнам, Вануату, Ватикан, Венесуела, Вірменія, Габон, Гаїті, Гайана, Гамбія, Гана, Гваделупа, Гватемала, Гвінея, Гвінея-Бісау, Гернсі, Гібралтар, Гондурас, Гонконг, Гренада, Гренландія, Греція, Грузія, Гуам, Данія, Джерсі, Джібуті, Домініка, Домініканська Республіка, Еквадор, Екваторіальна Гвінея, Еритрея, Естонія, Ефіопія, Єгипет, Ємен, Замбія, Західна Сахара,, Зімбабве., Ізраїль, Індія , Індонезія, Ірак, Іран, Ірландія, Ісландія, Іспанія, Італія, Йорданія, Кабо-Верде, Казахстан, Камбоджа, Камерун, Канада, Катар, Кенія, Киргизстан, Китай, Кіпр, Кірибаті, Колумбія, Коморські Острови, Конго, Коста-Ріка , Кот-д’Івуар, Куба, Кувейт, Кюрасао, Лаос, Латвія, Лесото, Литва, Ліберія , Ліван, Лівія, Ліхтенштейн, Люксембург, М’янма, Маврикій, Мавританія, Мадагаскар, Майотта, Макао, Македонія, Малаві, Малайзія, Малі, Мальдіви, Мальта, Марокко, Мартініка, Мексика, Мікронезія, Мозамбік , Молдова, Монако, Монголія, Монтсеррат, Намібія, Науру, Непал, Нігер, Нігерія, Нідерланди, Нідерландські Антильські острови, Нікарагуа, Німеччина, Нова Зеландія, Нова Каледонія, Норвегія, Об’єднані Арабські Емірати, Оман, острів Мен, Острів Святої Єлени, Пакистан, Палау, Палестина, Панама, Папуа Нова Гвінея, Парагвай, Перу, Південна Африка, Південна Грузія, Південний Судан, Північна Корея і Південна Корея, Польща , Португалія, Пуерто-Ріко, Росія, Руанда, Румунія, Сальвадор, Самоа, Сан-Марино, Саудівська Аравія, Свазіленд, Сейшельські острови, Сен-Мартен, Сен-П’єр і Мікелон, Сенегал, Сент-Бартелемі, Сент-Вінсент і Гренадини, Сент-Кітс і Невіс, Сент-Люсія, Сербія, Сирія, Сінгапур, Словаччина, Словенія, Сомалі, Сполучене Королівство (Великобританія), Сполучені Штати Америки (США), Судан, Сурінам, Сьєрра-Леоне, Таджикистан, Таїланд , Тайвань, Танзанія, Тимор-Лешті, Того, Токелау, Тонга, Тринідад і Тобаго, Тувалу, Туніс, Туреччина, Туркменістан, Уганда, Угорщина, Узбекистан, Україна, Уолліс і Футуна, Уругвай, Фіджі, Філіппіни, Фінляндія, Франція, Французька Гвіана, Французька Полінезія, Хорватія, Центрально-Африканська Республіка, Чад, Чеська Республіка, Чилі, Чорногорія, Швейцарія, Швеція, Шрі-Ланка, Ямайка, Японія.
 	</string>
-	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті для подальшого автономного використання. OsmAnd також пропонує можливість прокладання маршруту як оффлайн, так і використовуючи онлайн-сервіси з покроковим голосовим супроводженням. OsmAnd+ — це платна версія, купуючи яку ви підтримуєте проект, фінансуючи розробку нових функцій, одержуючи останні оновлення. Кілька основних можливостей: - Повна оффлайн функціональність (збереження векторних чи растрових мап до обраної теки), - Компактна векторна мапа для всього світу, - Необмежуена кількість завантажень мап окремої країни чи регіону безпосередньо в програмі, - Можливість автономної роботи із даними Вікіпедії (завантажте POI з Вікіпедії) є чудовим для інструментом для мандрівників, - Можливість відображення додаткових даних на мапі, наприклад шар для прокладання маршруту чи шар із записом GPX-треку, з POI, закладками, ізолініями висот, громадським транспортом, додатковими мапами з можливістю налаштовування рівня прозорості, - Автономний пошук адрес та POI, - Прокладання маршрутів оффлайн для коротких відстаней (експериментальна функція), - Режими для пішохідної, автомобільної та велонавігації: - можливість перемикання на денний/нічний режим показу, — автомасштабування мапи відповідно до швидкості руху, - можливість орієнтації мапи за компасом чи напрямком руху, - показ руху по смугах та обмеженнь швидкості, голосове супроводження (записане чи синтезоване). "</string>
+	<string name="osmand_plus_long_description_1000_chars">
+		OsmAnd+ (OSM Automated Navigation Directions)
+
+		OsmAnd+ — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті для подальшого автономного використання. OsmAnd також пропонує можливість прокладання маршруту як оффлайн, так і використовуючи онлайн-сервіси з покроковим голосовим супроводженням. 
+
+		OsmAnd+ — це платна версія, купуючи яку ви підтримуєте проект, фінансуючи розробку нових функцій, одержуючи останні оновлення. 
+
+		Кілька основних можливостей: 
+		- Повна оффлайн функціональність (збереження векторних чи растрових мап до обраної теки), 
+		- Компактна векторна мапа для всього світу, 
+		- Необмежена кількість завантажень мап окремої країни чи регіону безпосередньо в програмі, 
+		- Можливість автономної роботи із даними Вікіпедії (завантажте POI з Вікіпедії) є чудовим для інструментом для мандрівників, 
+		- Можливість відображення додаткових даних на мапі, наприклад шар для прокладання маршруту чи шар із записом GPX-треку, з POI, закладками, ізолініями висот, громадським транспортом, додатковими мапами з можливістю налаштовування рівня прозорості, 
+		- Автономний пошук адрес та POI, 
+		- Прокладання маршрутів оффлайн для коротких відстаней (експериментальна функція), 
+		- Режими для пішохідної, автомобільної та велонавігації: 
+		- можливість перемикання на денний/нічний режим показу, 
+		- мапи відповідно до швидкості руху, 
+		- можливість орієнтації мапи за компасом чи напрямком руху, 
+		- показ руху по смугах та обмежень швидкості, голосове супроводження (записане чи синтезоване).
+	</string>
 	<string name="live_monitoring_mode_on">Вимкнути трекінг\nв реальному режимі</string>
 	<string name="tip_rotation_switching_t_v2">"\tНатиснувши на іконку компаса на екрані з мапою ви можете змінити режим повороту мапи\n\tДоступні варіанти\n\t  \"Не обертати\" - Мапа не буде обертатись. Північ завжди вгорі.\n\t  \"За напрямком руху\" - Мапа буде обертатись у відповідності з напрямком вашого руху. Вгорі - напрямок руху\n\t  \"За напрямком компаса\" - Мапа буде обертатись так, щоб сумістити північ мапи і північний напрямок (використовуються дані компаса з пристрою) "</string>
-	<string name="tip_day_night_mode_t_v2">"\tДля деяких векторних мап можна змінювати вигляд залежно від часу доби\n\tНічний режим безпечніший для використання в темноті\n\tДля зміни денного/нічного режимів натисніть на іконку налаштування на екрані мапи і виберіть \"Денний/нічний режим\"\n\tМожливі варіанти:\n\t  \"Денний\" - завжди використовується денний режим\n\t  \"Нічний\" - завжди використовується нічний режим\n\t  \"Датчик освітленості\" - режим змінюється автоматично в залежності від датчика освітленості (при його наявності) у вашому пристрої "</string>	
-	<string name="tip_map_switch_t_v2">"\tМапи і шари можна змінювати вибравши \"Налаштування вигляду\" (іконка глобуса) на екрані мапи\n\tВ \"Джерела мап...\" можна вибрати попередньо завантажені векторі мапи, онлайн мапи з різних джерел (для використання потрібно увімкнути плагін \"Онлайн мапи\") або самостійно створені мапи (наприклад, за допомогою OsmAndMapCreator для ПК) "</string>
+	<string name="tip_day_night_mode_t_v2">\tДля деяких векторних мап можна змінювати вигляд залежно від часу доби
+		\n\tНічний режим безпечніший для використання в темряві
+		\n\tДля зміни денного/нічного режимів натисніть на іконку налаштування на екрані мапи і виберіть \"Денний/нічний режим\"
+		\n\tМожливі варіанти:
+		\n\t\'Схід/Захід сонця\' - автоматичний режим, що керується даними про положення сонця (типовий)
+		\n\t\"Денний\" - завжди використовується денний режим
+		\n\t\"Нічний\" - завжди використовується нічний режим
+		\n\t\"Датчик освітленості\" - вигляд мапи змінюється автоматично в залежності від датчика освітленості (при його наявності) у вашому пристрої
+	</string>	
+	<string name="tip_map_switch_t_v2">\tМапи і шари можна змінювати вибравши \"Налаштування вигляду\" (іконка глобуса) на екрані мапи
+		\n\tВ \"Джерела мап…\" можна вибрати попередньо завантажені векторі мапи, онлайн мапи з різних джерел (для використання потрібно увімкнути втулок \"Онлайн мапи\") або самостійно створені мапи (наприклад, за допомогою OsmAndMapCreator для ПК).
+		\n\tOsmAnd також підтримує джерела користувача.
+	</string>
 	<string name="street_name">Вулиця</string>
 	<string name="hno">Номер будинку</string>
     <string name="tip_recent_changes_1_3_t">"Зміни в 1.3:\n\t* Краща підтримка пристроїв з великим екраном\n\t* Holo Тема (налаштування теми)
@@ -1229,7 +1327,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="use_magnetic_sensor">Використовувати магнітометр</string>
     <string name="monitoring_settings_descr">Налаштування запису треків і вмикання сплячого режиму</string>
     <string name="osmand_monitoring_plugin_description">Активація запису трека і навігації в сплячому режимі (екран вимкнений) з допомогою періодичного \"пробудження\" GPS. Налаштування запису треку в локальні файли або в Інтернет з допомогою веб-служби.</string>
-    <string name="downloading_file_new">"Завантаження "</string>
+    <string name="downloading_file_new">Завантаження…</string>
 	<string name="delete_point">Вилучити точку</string>
     <string name="plugin_distance_point_time">час</string>
     <string name="plugin_distance_point_hdop">точність</string>
@@ -1262,7 +1360,77 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	\n\t* Вилучено файли SRTM
 	\n\t* Підтримка OSM нотаток 
     </string>
-    <string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions) OsmAnd — навігаційне програмне забезпечення з доступом до вільних, доступних по всьому світу та високоякісних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані можуть зберігатися на карті пам’яті для автономного використання. За допомогою GPS, доступному у вашому пристрої, OsmAnd пропонує вам маршрутизацію, з графічними та голосовими підказками, для автомобіля, велосипедів і пішоходів. Всі основні функції працюють як онлайн, так і в автономному режимі (немає потреби в інтернеті). OsmAnd+ — платна версія програми. Купуючи її ви підтримуєте проект, фінансуючи розробку нових функцій отримуючи найостанніші оновлення. Ви можете ознайомитись з програмою перед купівлею, встановивши безкоштовну версію, що називається OsmAnd. Деякі з основних функцій: Навігація - працює в онлайн (швидко) або в автономному режимі (без плати за роумінг, коли ви перебуваєте за кордоном), - Аудіо-помічник з покроковими голосовими вказівками (записаними чи синтезованим голосами), - Додатковими вказівками руху по смугах, показом назв вулиць, і розрахунком часу прибуття, - Підтримка проміжних точок на вашому маршруті, - Автоматична зміна маршруту при відхиленні від маршруту, - Пошук місця за адресою, чи типом (наприклад: ресторан, готель, АЗС, музей), або за географічними координатами. Перегляд мапи - Показ Вашої позиції і напрямку на мапі, - При бажанні можливо повертати мапу за компасом або напрямом руху, - Збереження найбільш важливих місць, до Закладок, - Показ об’єктів POI (точок інтересу) навколо, - Може показувати спеціалізовані онлайн-мапи - Може показувати супутникові знімки (від Bing), - Може показувати різні шари: туристичний/навігаційний, трек GPX та додаткові мапи з налаштовуваною прозорістю, - Може показувати географічні назви англійською, чи місцевою мовами, або відтворювати фонетичне написання, використовуючи данні OpenStreetMap та Вікіпедії: - високоякісну інформацію від кращих спільних проектів світу, - від  OpenStreetMap глобальні мапи, в залежності від країни чи регіону - POI з Вікіпедії, що відмінно підходить для огляду визначних пам’яток - Необмежене вільне завантаження безпосередньо з програми, - Завжди актуальні мапи (оновлюються принаймні раз на місяць), - Компактні автономні векторні мапи, - Вибір між мапами з повними даними і тільки мапами з мережею доріг (приклад: вся Японія становить 700 МБ або 200 МБ тільки для мап з дорожньою мережею), - Також підтримуються онлайн або кешовані растрові мапи. Безпека - Можливість автоматичного перемикання між денним та нічними варіантом показу мапи, - Можливість показу обмежень швидкості, з нагадуванням, у разі їх перевищення, - Можливість масштабування мапи в залежності від швидкості, - Діліться з друзями вашим місцезнаходженням, щоб вони могли вас знайти.  Функції для велосипедистів та пішоходів - мапи включають пішохідні, туристичні та велосипедні доріжки, відмінно підходять для заходів на свіжому повітрі, - Спеціальні режими маршрутизації і показу для велосипедів і пішоходів, - Показ зупинок громадського транспорту (автобус, трамвай, поїзд), включаючи назви маршрутів, - Можливість запису подорожі у локальний файл GPX чи через інтернет-сервіси моніторингу, - Можливість показу швидкості та висоти, - Показ ізоліній висот та рельєфу (за допомогою окремого втулку). Безпосередня участь в проекті OpenStreetMap, - Повідомлення про помилки  на мапі, - Завантаження GPX-треків на сервер OSM безпосередньо з програми, - Додавання POI та їх безпосереднє надсилання на сервер OSM (або відкладене надсилання, якщо ви не в мережі), - Можливість запису подорожі також у фоновому режимі (у той час як пристрій знаходиться в сплячому режимі). OsmAnd має відкриті сирці і активно розвивається. Кожен може внести вклад в програму, повідомляючи про помилки, покращуючи переклади, додаючи нові можливості. Проект знаходиться в стані активного безперервного поліпшення, використовуючи  всі форми взаємодії розробників з користувачами. Прогрес в розвитку проекту також спирається на фінансові внески для фінансування розробки, програмування та тестування нових функцій. Купуючи OsmAnd + ви допомагаєте зробити програму ще більш вражаючою! Можливо також  профінансувати додавання конкретних нових функцій, або зробити загальний благодійний внесок на osmand.net. Приблизне покриття та його якість: - Західна Європа: **** - Східна Європа: *** - Росія: *** - Північна Америка: *** - Південна Америка: ** - Азія: ** - Японія Корея: *  ** - Ближній Схід: ** - Африка: ** - Антарктида: *. Перелік підтримуваних країн (взагалі то увесь світ!): Афганістан, Австралія, Австрія,  Азербайджан, Албанія, Алжир, Ангілья, Ангола, Андорра, Антигуа і Барбуда, Аргентина, Аруба, Багамські острови, Бангладеш, Барбадос, Бахрейн, Беліз, Бельгія, Бенін, Бермудські острови, Білорусь, Болгарія, Болівія, Бонайре, Боснія і Герцеговина, Ботсвана, Бразилія, Британські Віргінські острови, Бруней, Буркіна-Фасо, Бурунді, Бутан, В\'єтнам, Вануату, Ватикан, Венесуела, Вірменія, Габон, Гаїті, Гайана, Гамбія, Гана, Гваделупа, Гватемала, Гвінея, Гвінея-Бісау, Гернсі, Гібралтар, Гондурас, Гонконг, Гренада, Гренландія, Греція, Грузія, Гуам, Данія, Джерсі, Джібуті, Домініка, Домініканська Республіка, Еквадор, Екваторіальна Гвінея, Еритрея, Естонія, Ефіопія, Єгипет, Ємен, Замбія, Західна Сахара,, Зімбабве., Ізраїль, Індія , Індонезія, Ірак, Іран, Ірландія, Ісландія, Іспанія, Італія, Йорданія, Кабо-Верде, Казахстан, Камбоджа, Камерун, Канада, Катар, Кенія, Киргизстан, Китай, Кіпр, Кірибаті, Колумбія, Коморські Острови, Конго, Коста-Ріка , Кот-д\'Івуар, Куба, Кувейт, Кюрасао, Лаос, Латвія, Лесото, Литва, Ліберія , Ліван, Лівія, Ліхтенштейн, Люксембург, М\'янма, Маврикій, Мавританія, Мадагаскар, Майотта, Макао, Македонія, Малаві, Малайзія, Малі, Мальдіви, Мальта, Марокко, Мартініка, Мексика, Мікронезія, Мозамбік , Молдова, Монако, Монголія, Монтсеррат, Намібія, Науру, Непал, Нігер, Нігерія, Нідерланди, Нідерландські Антильські острови, Нікарагуа, Німеччина, Нова Зеландія, Нова Каледонія, Норвегія, Об\'єднані Арабські Емірати, Оман, острів Мен, Острів Святої Єлени, Пакистан, Палау, Палестина, Панама, Папуа Нова Гвінея, Парагвай, Перу, Південна Африка, Південна Грузія, Південний Судан, Північна Корея і Південна Корея, Польща , Португалія, Пуерто-Ріко, Росія, Руанда, Румунія, Сальвадор, Самоа, Сан-Марино, Саудівська Аравія, Свазіленд, Сейшельські острови, Сен-Мартен, Сен-П\'єр і Мікелон, Сенегал, Сент-Бартелемі, Сент-Вінсент і Гренадини, Сент-Кітс і Невіс, Сент-Люсія, Сербія, Сирія, Сінгапур, Словаччина, Словенія, Сомалі, Сполучене Королівство (Великобританія), Сполучені Штати Америки (США), Судан, Сурінам, Сьєрра-Леоне, Таджикистан, Таїланд , Тайвань, Танзанія, Тимор-Лешті, Того, Токелау, Тонга, Тринідад і Тобаго, Тувалу, Туніс, Туреччина, Туркменістан, Уганда, Угорщина, Узбекистан, Україна, Уолліс і Футуна, Уругвай, Фіджі, Філіппіни, Фінляндія, Франція, Французька Гвіана, Французька Полінезія, Хорватія, Центрально-Африканська Республіка, Чад, Чеська Республіка, Чилі, Чорногорія, Швейцарія, Швеція, Шрі-Ланка, Ямайка, Японія. "</string>
+    <string name="osmand_plus_extended_description_4000_chars">
+OsmAnd (OSM Automated Navigation Directions) OsmAnd — навігаційне програмне забезпечення з доступом до вільних, доступних по всьому світу та високоякісних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані можуть зберігатися на карті пам’яті для автономного використання. За допомогою GPS, доступному у вашому пристрої, OsmAnd пропонує вам маршрутизацію, з графічними та голосовими підказками, для автомобіля, велосипедів і пішоходів. Всі основні функції працюють як онлайн, так і в автономному режимі (немає потреби в інтернеті).
+
+OsmAnd+ — платна версія програми. Купуючи її ви підтримуєте проект, фінансуючи розробку нових функцій отримуючи найостанніші оновлення. Ви можете ознайомитись з програмою перед купівлею, встановивши безкоштовну версію, що називається OsmAnd.
+
+Деякі з основних функцій:
+
+Навігація
+ - Працює в онлайн (швидко) або в автономному режимі (без плати за роумінг, коли ви перебуваєте за кордоном),
+ - Аудіо-помічник з покроковими голосовими вказівками (записаними чи синтезованим голосами),
+ - Додатковими вказівками руху по смугах, показом назв вулиць, і розрахунком часу прибуття,
+ - Підтримка проміжних точок на вашому маршруті,
+ - Автоматична зміна маршруту при відхиленні від маршруту,
+ - Пошук місця за адресою, чи типом (наприклад: ресторан, готель, АЗС, музей), або за географічними координатами.
+
+Перегляд мапи
+ - Показ Вашої позиції і напрямку на мапі,
+ - При бажанні можливо повертати мапу за компасом або напрямом руху,
+ - Збереження найбільш важливих місць, до Закладок,
+ - Показ об’єктів POI (точок інтересу) навколо,
+ - Може показувати спеціалізовані онлайн-мапи,
+ - Може показувати супутникові знімки (від Bing),
+ - Може показувати різні шари: туристичний/навігаційний, трек GPX та додаткові мапи з налаштовуваною прозорістю,
+ - Може показувати географічні назви англійською, чи місцевою мовами, або відтворювати фонетичне написання
+
+Використання даних OpenStreetMap та Вікіпедії:
+ - Високоякісна інформація від кращих спільних проектів світу,
+ - Від  OpenStreetMap глобальні мапи, в залежності від країни чи регіону,
+ - POI з Вікіпедії, що відмінно підходить для огляду визначних пам’яток,
+ - Необмежене вільне завантаження безпосередньо з програми,
+ - Завжди актуальні мапи (оновлюються принаймні раз на місяць),
+ - Компактні автономні векторні мапи, - Вибір між мапами з повними даними і тільки мапами з мережею доріг (приклад: вся Японія становить 700 МБ або 200 МБ тільки для мап з дорожньою мережею),
+ - Також підтримуються онлайн або кешовані растрові мапи.
+
+Безпека
+ - Можливість автоматичного перемикання між денним та нічними варіантом показу мапи,
+ - Можливість показу обмежень швидкості, з нагадуванням, у разі їх перевищення,
+ - Можливість масштабування мапи в залежності від швидкості,
+ - Діліться з друзями вашим місцезнаходженням, щоб вони могли вас знайти.
+
+Функції для велосипедистів та пішоходів
+ - Мапи включають пішохідні, туристичні та велосипедні доріжки, відмінно підходять для заходів на свіжому повітрі,
+ - Спеціальні режими маршрутизації і показу для велосипедів і пішоходів,
+ - Показ зупинок громадського транспорту (автобус, трамвай, поїзд), включаючи назви маршрутів,
+ - Можливість запису подорожі у локальний файл GPX чи через інтернет-сервіси моніторингу,
+ - Можливість показу швидкості та висоти, - Показ ізоліній висот та рельєфу (за допомогою окремого втулку).
+
+Безпосередня участь в проекті OpenStreetMap
+ - Повідомлення про помилки  на мапі,
+ - Завантаження GPX-треків на сервер OSM безпосередньо з програми,
+ - Додавання POI та їх безпосереднє надсилання на сервер OSM (або відкладене надсилання, якщо ви не в мережі),
+ - Можливість запису подорожі також у фоновому режимі (у той час як пристрій знаходиться в сплячому режимі).
+
+OsmAnd має відкриті сирці і активно розвивається. Кожен може внести вклад в програму, повідомляючи про помилки, покращуючи переклади, додаючи нові можливості. Проект знаходиться в стані активного безперервного поліпшення, використовуючи  всі форми взаємодії розробників з користувачами. Прогрес в розвитку проекту також спирається на фінансові внески для фінансування розробки, програмування та тестування нових функцій. Купуючи OsmAnd + ви допомагаєте зробити програму ще більш вражаючою! Можливо також  профінансувати додавання конкретних нових функцій, або зробити загальний благодійний внесок на osmand.net.
+
+
+Приблизне покриття та його якість:
+ - Західна Європа: ****
+ - Східна Європа: ***
+ - Росія: ***
+ - Північна Америка: ***
+ - Південна Америка: **
+ - Азія: **
+ - Японія і Корея: ***
+ - Ближній Схід: **
+ - Африка: **
+ - Антарктида: *.
+
+Перелік підтримуваних країн (взагалі то увесь світ!):
+Афганістан, Австралія, Австрія,  Азербайджан, Албанія, Алжир, Ангілья, Ангола, Андорра, Антигуа і Барбуда, Аргентина, Аруба, Багамські острови, Бангладеш, Барбадос, Бахрейн, Беліз, Бельгія, Бенін, Бермудські острови, Білорусь, Болгарія, Болівія, Бонайре, Боснія і Герцеговина, Ботсвана, Бразилія, Британські Віргінські острови, Бруней, Буркіна-Фасо, Бурунді, Бутан, В’єтнам, Вануату, Ватикан, Венесуела, Вірменія, Габон, Гаїті, Гайана, Гамбія, Гана, Гваделупа, Гватемала, Гвінея, Гвінея-Бісау, Гернсі, Гібралтар, Гондурас, Гонконг, Гренада, Гренландія, Греція, Грузія, Гуам, Данія, Джерсі, Джібуті, Домініка, Домініканська Республіка, Еквадор, Екваторіальна Гвінея, Еритрея, Естонія, Ефіопія, Єгипет, Ємен, Замбія, Західна Сахара,, Зімбабве., Ізраїль, Індія , Індонезія, Ірак, Іран, Ірландія, Ісландія, Іспанія, Італія, Йорданія, Кабо-Верде, Казахстан, Камбоджа, Камерун, Канада, Катар, Кенія, Киргизстан, Китай, Кіпр, Кірибаті, Колумбія, Коморські Острови, Конго, Коста-Ріка , Кот-д’Івуар, Куба, Кувейт, Кюрасао, Лаос, Латвія, Лесото, Литва, Ліберія , Ліван, Лівія, Ліхтенштейн, Люксембург, М’янма, Маврикій, Мавританія, Мадагаскар, Майотта, Макао, Македонія, Малаві, Малайзія, Малі, Мальдіви, Мальта, Марокко, Мартініка, Мексика, Мікронезія, Мозамбік , Молдова, Монако, Монголія, Монтсеррат, Намібія, Науру, Непал, Нігер, Нігерія, Нідерланди, Нідерландські Антильські острови, Нікарагуа, Німеччина, Нова Зеландія, Нова Каледонія, Норвегія, Об’єднані Арабські Емірати, Оман, острів Мен, Острів Святої Єлени, Пакистан, Палау, Палестина, Панама, Папуа Нова Гвінея, Парагвай, Перу, Південна Африка, Південна Грузія, Південний Судан, Північна Корея і Південна Корея, Польща , Португалія, Пуерто-Ріко, Росія, Руанда, Румунія, Сальвадор, Самоа, Сан-Марино, Саудівська Аравія, Свазіленд, Сейшельські острови, Сен-Мартен, Сен-П’єр і Мікелон, Сенегал, Сент-Бартелемі, Сент-Вінсент і Гренадини, Сент-Кітс і Невіс, Сент-Люсія, Сербія, Сирія, Сінгапур, Словаччина, Словенія, Сомалі, Сполучене Королівство (Великобританія), Сполучені Штати Америки (США), Судан, Сурінам, Сьєрра-Леоне, Таджикистан, Таїланд , Тайвань, Танзанія, Тимор-Лешті, Того, Токелау, Тонга, Тринідад і Тобаго, Тувалу, Туніс, Туреччина, Туркменістан, Уганда, Угорщина, Узбекистан, Україна, Уолліс і Футуна, Уругвай, Фіджі, Філіппіни, Фінляндія, Франція, Французька Гвіана, Французька Полінезія, Хорватія, Центрально-Африканська Республіка, Чад, Чеська Республіка, Чилі, Чорногорія, Швейцарія, Швеція, Шрі-Ланка, Ямайка, Японія.
+	</string>
 	<string name="local_indexes_cat_srtm">Дані ізоліній висот</string>
     <string name="context_menu_item_destination_point">Встановити як пункт призначення</string>
     <string name="local_osm_changes_backup_failed">Збій резервного копіювання файлу змін OSM</string>
