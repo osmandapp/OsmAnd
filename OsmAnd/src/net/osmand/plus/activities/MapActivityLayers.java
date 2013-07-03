@@ -321,7 +321,7 @@ public class MapActivityLayers {
 			            if(adapter.getImageId(position, light) != 0) {
 			            	tv.setCompoundDrawablesWithIntrinsicBounds(adapter.getImageId(position, light), 0, 0, 0);
 			            } else {
-			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.list_activities_transparent, 0, 0, 0);
+			            	tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_action_transparent, 0, 0, 0);
 			            }
 			            tv.setCompoundDrawablePadding(padding);
 

@@ -235,8 +235,8 @@ public class MapInfoWidgetsFactory {
 	
 	public ImageViewWidget createCompassView(final MapActivity map){
 		final OsmandMapTileView view = map.getMapView();
-		final Drawable compass = map.getResources().getDrawable(R.drawable.list_activities_compass);
-		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.list_activities_compass_white);
+		final Drawable compass = map.getResources().getDrawable(R.drawable.map_compass);
+		final Drawable compassWhite = map.getResources().getDrawable(R.drawable.map_compass_white);
 		final int mw = (int) compass.getMinimumWidth() ;
 		final int mh = (int) compass.getMinimumHeight() ;
 		ImageViewWidget compassView = new ImageViewWidget(map) {

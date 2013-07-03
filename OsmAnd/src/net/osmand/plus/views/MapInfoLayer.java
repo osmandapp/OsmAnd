@@ -741,8 +741,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		final OsmandMapTileView view = map.getMapView();
 		
 		FrameLayout.LayoutParams fparams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		final Drawable config = view.getResources().getDrawable(R.drawable.list_activities_config);
-		final Drawable configWhite = view.getResources().getDrawable(R.drawable.list_activities_config_white);
+		final Drawable config = view.getResources().getDrawable(R.drawable.map_config);
+		final Drawable configWhite = view.getResources().getDrawable(R.drawable.map_config_white);
 		ImageViewWidget configuration = new ImageViewWidget(map) {
 			private boolean nm;
 			
@@ -772,8 +772,8 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return fl;
 	}
 	private View createLayer(){
-//		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.list_activities_globus);
-//		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.list_activities_globus_white);
+//		final Drawable globusDrawable = view.getResources().getDrawable(R.drawable.map_globus);
+//		final Drawable globusDrawableWhite = view.getResources().getDrawable(R.drawable.map_globus_white);
 		final Drawable layerDrawable = view.getResources().getDrawable(R.drawable.map_layers_black);
 		final Drawable layerDrawableWhite = view.getResources().getDrawable(R.drawable.map_layers_white);
 		

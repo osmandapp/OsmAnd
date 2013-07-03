@@ -43,8 +43,8 @@ public class MonitoringInfoControl {
 	}
 	
 	public ImageViewWidget createMonitoringWidget(final OsmandMapTileView view, final MapActivity map) {
-		final Drawable m = view.getResources().getDrawable(R.drawable.list_activities_monitoring);
-		final Drawable mWhite = view.getResources().getDrawable(R.drawable.list_activities_monitoring_white);
+		final Drawable m = view.getResources().getDrawable(R.drawable.map_monitoring);
+		final Drawable mWhite = view.getResources().getDrawable(R.drawable.map_monitoring_white);
 		final ImageViewWidget monitoringServices = new ImageViewWidget(view.getContext()) {
 			private boolean nightMode;
 			@Override
