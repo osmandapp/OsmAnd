@@ -1061,7 +1061,7 @@
 <string name="poi_filter_emergency">Чрезвычайные обстоятельства</string>
 <string name="poi_filter_public_transport">Общественный транспорт</string>
 <string name="poi_filter_entertainment">Развлечения</string>
-<string name="poi_filter_accomodation">Жильё</string>
+<string name="poi_filter_accommodation">Жильё</string>
 <string name="poi_filter_restaurants">Рестораны</string>
 <string name="poi_filter_sightseeing">Достопримечательности</string>
 	<string name="context_menu_item_last_intermediate_point">Последний пункт назначения</string>

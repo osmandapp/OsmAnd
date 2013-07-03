@@ -996,7 +996,7 @@
     <string name="poi_filter_emergency">სასწრაფო</string>
     <string name="poi_filter_public_transport">საზოგადო ტრანსპორტი</string>
     <string name="poi_filter_entertainment">გასართობი</string>
-    <string name="poi_filter_accomodation">სათავსო</string>
+    <string name="poi_filter_accommodation">სათავსო</string>
     <string name="poi_filter_restaurants">რესტორნები</string>
     <string name="poi_filter_sightseeing">ღირსშესანიშნაობები</string>
     <string name="avoid_motorway">მოტოციკლეტის გზებისათვის თავის არიდება</string>

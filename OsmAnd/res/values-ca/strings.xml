@@ -842,7 +842,7 @@
     <string name="context_menu_item_intermediate_point">Afegeix un punt intermedi</string>
     <string name="map_widget_intermediate_distance">Punt intermedi</string>
     <string name="ending_point_too_far">El punt final és massa lluny de la carretera més propera.</string>
-    <string name="poi_filter_accomodation">Allotjament</string>
+    <string name="poi_filter_accommodation">Allotjament</string>
     <string name="poi_filter_sightseeing">Vistes panoràmiques</string>
     <string name="poi_filter_car_aid">Assistència a vehicles</string>
 	<string name="tip_update_index_t">\tÉs essencial que actualitzeu les dades del mapa. L\'OsmAnd conta amb un gestor de baixades que pot comprovar si hi ha actualitzacions de dades fora de línia disponibles.\n\tPer comprovar si hi ha actualitzacions aneu a «Configuració» -&gt; «Dades fora de línia» -&gt; «Baixa dades fora de línia». Rebreu un llistat de regions d\'internet i podeu seleccionar l\'opció «Menú» -&gt; «Filtre de baixades» perquè us indiqui només les actualitzacions disponibles per les dades del vostre dispositiu.

@@ -997,7 +997,7 @@ Memoria proporcional %4$s MB (Limite Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="poi_filter_emergency">Emergencia</string>
     <string name="poi_filter_public_transport">Transporte Público</string>
     <string name="poi_filter_entertainment">Entretenimiento</string>
-    <string name="poi_filter_accomodation">Alojamiento</string>
+    <string name="poi_filter_accommodation">Alojamiento</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="map_widget_monitoring_services">Servicios de registro</string>

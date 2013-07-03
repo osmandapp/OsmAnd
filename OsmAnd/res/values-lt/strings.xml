@@ -1108,7 +1108,7 @@ OsmAnd yra aktyviai tobulinama ir mūsų projektas bei jo tolesnis progresas pri
     <string name="poi_filter_emergency">Nelaimės atveju</string>
     <string name="poi_filter_public_transport">Viešasis transportas</string>
     <string name="poi_filter_entertainment">Pramogos</string>
-    <string name="poi_filter_accomodation">Nakvynė</string>
+    <string name="poi_filter_accommodation">Nakvynė</string>
     <string name="poi_filter_restaurants">Restoranai</string>
     <string name="poi_filter_sightseeing">Įžymybės</string>
     <string name="map_widget_monitoring_services">Stebėjimo paslaugos</string>

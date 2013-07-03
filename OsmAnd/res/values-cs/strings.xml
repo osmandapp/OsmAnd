@@ -1034,7 +1034,7 @@
 <string name="poi_filter_parking">Parkoviště</string>
 <string name="poi_filter_public_transport">Veřejná doprava</string>
 <string name="poi_filter_entertainment">Zábava</string>
-<string name="poi_filter_accomodation">Ubytování</string>
+<string name="poi_filter_accommodation">Ubytování</string>
 <string name="poi_filter_restaurants">Restaurace</string>
 <string name="poi_filter_sightseeing">Pamětihodnosti</string>
 <string name="snap_to_road">Pohyb po silnicích</string>

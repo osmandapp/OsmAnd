@@ -966,7 +966,7 @@
     <string name="poi_filter_emergency">Emergência</string>
     <string name="poi_filter_public_transport">Transporte público</string>
     <string name="poi_filter_entertainment">Entretenimento</string>
-    <string name="poi_filter_accomodation">Alojamento</string>
+    <string name="poi_filter_accommodation">Alojamento</string>
     <string name="poi_filter_restaurants">Restaurantes</string>
     <string name="poi_filter_sightseeing">Turismo</string>
     <string name="tip_recent_changes_0_8_4_t">"Mudanças no 0.8.4:\n\t* Algumas correções de bugs\n\t* Mapa não perde a posição de bloqueio após interrupções "</string>

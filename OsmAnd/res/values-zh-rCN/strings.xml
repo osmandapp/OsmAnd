@@ -30,7 +30,7 @@
     <string name="poi_filter_emergency">急</string>
     <string name="poi_filter_public_transport">公共交通</string>
     <string name="poi_filter_entertainment">娛樂</string>
-    <string name="poi_filter_accomodation">住宿</string>
+    <string name="poi_filter_accommodation">住宿</string>
     <string name="poi_filter_restaurants">餐廳</string>
     <string name="poi_filter_sightseeing">遊覽</string>
     <string name="poi_filter_car_aid">汽車援助</string>

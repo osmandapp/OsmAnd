@@ -30,7 +30,7 @@ public class PoiFiltersHelper {
 	private static final String UDF_EMERGENCY = "emergency";
 	private static final String UDF_PUBLIC_TRANSPORT = "public_transport";
 	private static final String UDF_ENTERTAINMENT = "entertainment";
-	private static final String UDF_ACCOMODATION = "accomodation";
+	private static final String UDF_ACCOMMODATION = "accommodation";
 	private static final String UDF_RESTAURANTS = "restaurants";
 	private static final String UDF_PARKING = "parking";
 	
@@ -99,8 +99,8 @@ public class PoiFiltersHelper {
 
 		// UDF_EMERGENCY = "emergency";
 		// UDF_ENTERTAINMENT = "entertainment";
-		filters.add(new PoiFilter(application.getString(R.string.poi_filter_accomodation), PoiFilter.USER_PREFIX + UDF_ACCOMODATION,
-				configureDefaultUserDefinedFilter(null, UDF_ACCOMODATION), application));
+		filters.add(new PoiFilter(application.getString(R.string.poi_filter_accommodation), PoiFilter.USER_PREFIX + UDF_ACCOMMODATION,
+				configureDefaultUserDefinedFilter(null, UDF_ACCOMMODATION), application));
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_restaurants), PoiFilter.USER_PREFIX + UDF_RESTAURANTS,
 				configureDefaultUserDefinedFilter(null, UDF_RESTAURANTS), application));
 		filters.add(new PoiFilter(application.getString(R.string.poi_filter_public_transport),
@@ -141,7 +141,7 @@ public class PoiFiltersHelper {
 			putValues(types, AmenityType.TOURISM, "attraction",
 					"artwork","zoo","theme_park", "museum","viewpoint");
 			putValues(types, AmenityType.OTHER, "place_of_worship");
-		} else if (UDF_ACCOMODATION.equals(key)) {
+		} else if (UDF_ACCOMMODATION.equals(key)) {
 			putValues(types, AmenityType.TOURISM, "camp_site",
 					"caravan_site","picnic_site","alpine_hut", "chalet","guest_house",
 					"hostel", "hotel","motel");

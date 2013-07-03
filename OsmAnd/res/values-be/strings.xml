@@ -278,7 +278,7 @@
     <string name="poi_filter_emergency">Emergency</string>
     <string name="poi_filter_public_transport">Public Transport</string>
     <string name="poi_filter_entertainment">Entertainment</string>
-    <string name="poi_filter_accomodation">Accomodation</string>
+    <string name="poi_filter_accommodation">Accommodation</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="poi_filter_sightseeing">Sightseeing</string>
     <string name="poi_filter_car_aid">Car aid</string>

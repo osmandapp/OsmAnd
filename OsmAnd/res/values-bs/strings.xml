@@ -110,7 +110,7 @@
     <string name="btn_add_tag">Dodaj oznaku</string>
     <string name="poi_filter_public_transport">Javni prijevoz</string>
     <string name="poi_filter_entertainment">Zabava</string>
-    <string name="poi_filter_accomodation">Smještaj</string>
+    <string name="poi_filter_accommodation">Smještaj</string>
     <string name="poi_filter_restaurants">Restorani</string>
     <string name="poi_filter_sightseeing">Znamenitosti</string>
     <string name="show_warnings_descr">Konfiguracija saobraćajnih upozorenja (ograničenja brzine, prisilno zaustavljanje, ležeći policajci), kontrola brzine i informacije</string>

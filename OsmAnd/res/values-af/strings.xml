@@ -983,7 +983,7 @@
     <string name="poi_filter_emergency">Noodgeval</string>
     <string name="poi_filter_public_transport">Publieke vervoer</string>
     <string name="poi_filter_entertainment">Vermaak</string>
-    <string name="poi_filter_accomodation">Verblyf</string>
+    <string name="poi_filter_accommodation">Verblyf</string>
     <string name="poi_filter_restaurants">Restourante</string>
     <string name="poi_filter_sightseeing">Besigtigingstoere</string>
     <string name="show_warnings_descr">Verstel verkeer waarskuwings (spoedbeperkings, geforseerde stoppe, spoedhobbels), spoed kameras, en laan inligting</string>

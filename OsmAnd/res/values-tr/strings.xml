@@ -34,7 +34,7 @@
     <string name="poi_filter_emergency">Acil Durum</string>
     <string name="poi_filter_public_transport">Toplu Taşıma</string>
     <string name="poi_filter_entertainment">Eğlence</string>
-    <string name="poi_filter_accomodation">Konaklama</string>
+    <string name="poi_filter_accommodation">Konaklama</string>
     <string name="poi_filter_restaurants">Restorantlar</string>
     <string name="poi_filter_sightseeing">Gezinti</string>
     <string name="poi_filter_car_aid">Araç Yardım</string>
