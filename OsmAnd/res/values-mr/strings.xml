@@ -236,8 +236,8 @@
   <string name="search_nothing_found">काही सापडले नाही</string>
   <string name="searching">शोधत आहे…</string>
   <string name="searching_address">पत्ता शोधत आहे…</string>
-  <string name="search_offline_address">ऑफलाएन</string>
-  <string name="search_online_address">इंटरनेट</string>
+  <string name="search_offline_address">ऑफलाएन शोध</string>
+  <string name="search_online_address">ऑनलाएन शोध</string>
   <string name="route_general_information">एकुण अंतर %1$s, प्रवासाचा वेळ %2$d ता %3$d मि.</string>
   <string name="download_question">डाउनलोड {0} - {1} ?</string>
   <string name="address">पत्ता</string>
