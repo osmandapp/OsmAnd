@@ -1452,4 +1452,5 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="av_camera_focus_infinity">Фокус встановлюється на нескінченність</string>
 	<string name="av_photo_play_sound">Відтворювати звук затвору камери</string>
 	<string name="av_photo_play_sound_descr">Під час знімання відтворювати звук</string>
-</resources>
+<string name="osmand_net_previously_installed">У вас встановлена попередня версія OsmAnd. Всі локальні дані підтримуються новою версією. Але улюблені точки потрібно експортувати з попередньої версії і імпортувати в нову.</string>
+	</resources>
