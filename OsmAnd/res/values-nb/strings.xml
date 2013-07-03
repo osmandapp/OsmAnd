@@ -26,7 +26,7 @@
     <string name="poi_filter_emergency">Nødsituasjon</string>
     <string name="poi_filter_public_transport">Offentlig transport</string>
     <string name="poi_filter_entertainment">Underholdning</string>
-    <string name="poi_filter_accomodation">Overnatting</string>
+    <string name="poi_filter_accommodation">Overnatting</string>
     <string name="poi_filter_restaurants">Restauranter</string>
     <string name="poi_filter_sightseeing">Severdigheter</string>
     <string name="poi_filter_car_aid">Bilhjelp</string>

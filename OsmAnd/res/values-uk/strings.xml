@@ -1052,7 +1052,7 @@
     <string name="poi_filter_parking">Стоянки</string>
     <string name="poi_filter_public_transport">Громадський транспорт</string>
     <string name="poi_filter_entertainment">Розваги</string>
-    <string name="poi_filter_accomodation">Житло</string>
+    <string name="poi_filter_accommodation">Житло</string>
     <string name="poi_filter_restaurants">Ресторани</string>
     <string name="poi_filter_sightseeing">Огляд визначних пам’яток</string>
     <string name="show_warnings_title">Показати попередження…</string>

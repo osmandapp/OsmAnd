@@ -43,7 +43,7 @@
     <string name="poi_filter_emergency">חירום</string>
     <string name="poi_filter_public_transport">תחבורה ציבורית</string>
     <string name="poi_filter_entertainment">בידור</string>
-    <string name="poi_filter_accomodation">הארחה</string>
+    <string name="poi_filter_accommodation">הארחה</string>
     <string name="poi_filter_restaurants">מסעדות</string>
     <string name="poi_filter_sightseeing">נקודות תצפית</string>
     <string name="poi_filter_car_aid">עזרה לרכב</string>

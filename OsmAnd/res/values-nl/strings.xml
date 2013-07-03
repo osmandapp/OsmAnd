@@ -1095,7 +1095,7 @@
 <string name="poi_filter_emergency">Hulpdiensten</string>
 <string name="poi_filter_public_transport">Openbaar vervoer</string>
 <string name="poi_filter_entertainment">Amusement</string>
-<string name="poi_filter_accomodation">Onderkomen</string>
+<string name="poi_filter_accommodation">Onderkomen</string>
 <string name="poi_filter_restaurants">Restaurants</string>
 <string name="poi_filter_sightseeing">Bezienswaardigheden</string>
 <string name="tip_recent_changes_0_8_4_t">Wijzigingen in 0.8.4:

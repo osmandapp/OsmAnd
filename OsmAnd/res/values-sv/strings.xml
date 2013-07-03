@@ -605,7 +605,7 @@
     <string name="poi_filter_emergency">Olycksfall</string>
     <string name="poi_filter_public_transport">Kollektivtrafik</string>
     <string name="poi_filter_entertainment">Underhållning</string>
-    <string name="poi_filter_accomodation">Boende</string>
+    <string name="poi_filter_accommodation">Boende</string>
     <string name="poi_filter_restaurants">Restauranger</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u>-karta - klassificering med bilder</string><string name="tip_map_context_menu_t">\tSnabbmenyn för kartor finns tillgänglig genom att trycka och hålla på kartan eller genom att trycka på styrkulans knapp.\n\tDå visas en ruta med koordinaterna. För att öppna dialogrutan, trycker du på den. (Eller tryck och håll på den för att dölja rutan igen.)\n\tSnabbmenyn för kartor innehåller alla åtgärder som hänför sig till en punkt (plats).</string>
 	<string name="tip_initial_t">"\tOsmAnd är en navigeringsapp med många funktioner.\n\tSom en introduktion finns ett antal tips och tricks länkade på huvudskärmen (se \'?\'-ikonen). "</string>

@@ -86,7 +86,7 @@
     <string name="poi_filter_emergency">حالة طوارئ</string>
     <string name="poi_filter_public_transport">وسائل النقل العام</string>
     <string name="poi_filter_entertainment">تسلية</string>
-    <string name="poi_filter_accomodation">الإقامة</string>
+    <string name="poi_filter_accommodation">الإقامة</string>
     <string name="poi_filter_restaurants">مطاعم</string>
     <string name="poi_filter_sightseeing">زيارة معالم المدينة</string>
     <string name="poi_filter_car_aid">المساعدات السيارة</string>

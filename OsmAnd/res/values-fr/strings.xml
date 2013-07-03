@@ -1077,7 +1077,7 @@
     <string name="poi_filter_entertainment">Divertissements</string>
     <string name="poi_filter_restaurants">Restaurants</string>
     <string name="poi_filter_sightseeing">Point de vue</string>
-    <string name="poi_filter_accomodation">Hébergement</string>
+    <string name="poi_filter_accommodation">Hébergement</string>
     <string name="map_widget_monitoring_services">Services de surveillance</string>
 	<string name="no_route">Pas de route</string>
 	<string name="delete_target_point">Enlever l\'étape</string>

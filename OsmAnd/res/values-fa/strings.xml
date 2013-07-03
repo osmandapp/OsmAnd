@@ -82,7 +82,7 @@
     <string name="poi_filter_emergency">اورژانس</string>
     <string name="poi_filter_public_transport">حمل و نقل عمومی</string>
     <string name="poi_filter_entertainment">مکانهای تفریحی</string>
-    <string name="poi_filter_accomodation">مکانهای اطراق کردن</string>
+    <string name="poi_filter_accommodation">مکانهای اطراق کردن</string>
     <string name="poi_filter_restaurants">رستورانها</string>
     <string name="poi_filter_sightseeing">مکانهای دیدنی</string>
     <string name="poi_filter_car_aid">تعمیرگاه</string>

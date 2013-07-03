@@ -99,7 +99,7 @@
     <string name="btn_advanced_mode">Napreden način…</string>
     <string name="poi_filter_parking">Parkirišče</string>
     <string name="poi_filter_public_transport">Javni prevoz</string>
-    <string name="poi_filter_accomodation">Nastanitev</string>
+    <string name="poi_filter_accommodation">Nastanitev</string>
     <string name="poi_filter_restaurants">Restavracije</string>
     <string name="poi_filter_sightseeing">Turizem</string>
     <string name="poi_filter_entertainment">Zabava</string>

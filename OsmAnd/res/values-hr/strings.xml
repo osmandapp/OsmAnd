@@ -96,7 +96,7 @@
     <string name="poi_filter_emergency">Prva pomoć</string>
     <string name="poi_filter_public_transport">Javni prijevoz</string>
     <string name="poi_filter_entertainment">Zabava</string>
-    <string name="poi_filter_accomodation">Smještaj</string>
+    <string name="poi_filter_accommodation">Smještaj</string>
     <string name="poi_filter_restaurants">Restorani</string>
     <string name="poi_filter_sightseeing">Razgledavanje znamenitosti</string>
     <string name="poi_filter_car_aid">Automehaničar</string>
