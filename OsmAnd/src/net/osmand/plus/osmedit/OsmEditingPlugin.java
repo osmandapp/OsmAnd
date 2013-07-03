@@ -157,7 +157,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							settings.SHOW_OSM_BUGS.set(isChecked);
 						}
 					}
-				}).position(8).reg();
+				}).position(7).reg();
 
 	}
 
