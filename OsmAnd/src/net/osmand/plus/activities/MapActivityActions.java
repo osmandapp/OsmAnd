@@ -1253,6 +1253,9 @@ public class MapActivityActions implements DialogProvider {
     public static void createDirectionsActions(final QuickAction qa , final LatLon location, final Object obj, final String name, 
     		final int z, final Activity activity, final boolean saveHistory, final OnClickListener onShow, boolean favorite) {
 
+		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
+		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+
 		ActionItem setAsDestination = new ActionItem();
 		setAsDestination.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_gdirections_light));
 		setAsDestination.setTitle(activity.getString(R.string.get_directions));
@@ -1270,7 +1273,6 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(setAsDestination);
 
 		ActionItem intermediate = new ActionItem();
-		// For button-less search UI
 		if (targetPointsHelper.getPointToNavigate() != null) {
 			intermediate.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_flage_light));
 			intermediate.setTitle(activity.getString(R.string.context_menu_item_intermediate_point));
@@ -1292,8 +1294,6 @@ public class MapActivityActions implements DialogProvider {
 		qa.addActionItem(intermediate);
 
 		ActionItem showOnMap = new ActionItem();
-		final OsmandApplication app = ((OsmandApplication) activity.getApplication());
-		final TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		showOnMap.setIcon(activity.getResources().getDrawable(R.drawable.ic_action_marker_light));
 		showOnMap.setTitle(activity.getString(R.string.show_poi_on_map));
 		showOnMap.setOnClickListener(new OnClickListener() {
