@@ -1079,7 +1079,7 @@ public class MapActivityActions implements DialogProvider {
 		// 10-11 Waypoints, Use location
 		if (getTargets().getPointToNavigate() != null) {
 			optionsMenuHelper.item(R.string.target_points).icons(R.drawable.ic_action_flage_dark,
-					R.drawable.ic_action_pin_light)
+					R.drawable.ic_action_flage_light)
 					.listen(new OnContextMenuClick() {
 				@Override
 				public void onContextMenuClick(int itemId, int pos, boolean isChecked, DialogInterface dialog) {
