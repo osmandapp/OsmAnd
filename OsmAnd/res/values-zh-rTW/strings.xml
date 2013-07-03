@@ -1375,7 +1375,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 		\n\t- Voice prompt fixes (GPS position fix, omitting first command) 
 		\n\t- Small improvements
 	</string>
-	<string name="tip_recent_changes_1_3_t">1.3 裡的變動：
+	<string name="tip_recent_changes_1_3_t">在1.3的變更：
         \n\t* 重新植入了平板電腦和大螢幕的支援
         \n\t* Holo 主題（客制化）
         \n\t* 為電子羅盤穩定度追加了設定
