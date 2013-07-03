@@ -225,7 +225,7 @@
   <string name="transport">परिवहन</string>
   <string name="default_buttons_ok">ठिक आहे</string>
   <string name="show_transport_over_map_description">सार्वजनिक परिवहन थांबे नकाशावर दाखवा</string>
-  <string name="show_transport_over_map">परिवहन थांबे नकाशावर दाखवा</string>
+  <string name="show_transport_over_map">परिवहन थांबे दाखवा</string>
   <string name="search_history_city">शहर: {0}</string>
   <string name="search_history_street">रस्ता: {0}, {1}</string>
   <string name="search_history_int_streets">चौक: {0} x {1} in {2}</string>
@@ -435,4 +435,28 @@
 	<string name="poi">पिओआय</string>
 	<string name="loading_poi_obj">पिओआय लोड करत आहे…</string>
 	<string name="opening_hours">उघडण्याची वेळ</string>
+	<string name="favorite">आवडते ठिकाण</string>
+	<string name="layer_poi">पिओआय…</string>
+	<string name="layer_transport">परिवहन थांबे</string>
+	<string name="layer_route">मार्ग</string>
+	<string name="layer_transport_route">परिवहन मार्ग</string>
+	<string name="vector_data">ऑफलाएन वेक्टर नकाशे</string>
+	<string name="no_vector_map_loaded">वेक्टर नकाशे लोड झाले नाही</string>
+	<string name="transport_search_none">काहीच नाही</string>
+	<string name="context_menu_item_search_transport">परिवहन शोधा</string>
+	<string name="deselect_all">काहीच निवडू नका</string>
+	<string name="filter_existing_indexes">डाउनलोड केलेले</string>
+	<string name="amenity_type_manmade">मानव निर्मित</string>
+	<string name="amenity_type_administrative">प्रशासकीय</string>
+	<string name="amenity_type_barrier">अडथळे</string>
+	<string name="unit_of_length_descr">लांबी आणि वेगाचे माप बदला</string>
+	<string name="unit_of_length">मोजमापाचे एकक</string>
+	<string name="tip_search">शोध</string>
+	<string name="tip_navigation">दिशादर्शन</string>
+	<string name="tip_map_switch">नकाशाचा स्त्रोत</string>
+	<string name="incomplete_locale">अपूर्ण</string>
+	<string name="preferred_locale">भाषा</string>
+	<string name="preferred_locale_descr">भाषा निवडा</string>
+	<string name="system_locale">सिस्टिम</string>
+	<string name="tip_favorites">आवडती ठिकाणे</string>
 	</resources>
