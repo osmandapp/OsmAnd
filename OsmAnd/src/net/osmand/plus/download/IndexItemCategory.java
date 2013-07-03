@@ -66,7 +66,7 @@ public class IndexItemCategory implements Comparable<IndexItemCategory> {
 			} else if (lc.contains("russia")) {
 				nameId = R.string.index_name_russia;
 				order = 18;
-			} else if (lc.contains("africa")) {
+			} else if (lc.contains("africa") && !lc.contains("_wiki_")) {
 				nameId = R.string.index_name_africa;
 				order = 80;
 			} else if (lc.contains("_asia")|| lc.startsWith("asia")) {
