@@ -144,7 +144,7 @@
   <string name="si_km_m">किमी/मी</string>
   <string name="yard">यार्ड</string>
   <string name="foot">फूट</string>
-  <string name="mile_per_hour">ताशी मैल</string>
+  <string name="mile_per_hour">मैल/तास</string>
   <string name="amenity_type_education">शैक्षणिक</string>
   <string name="amenity_type_emergency">आपात्कालिन</string>
   <string name="amenity_type_entertainment">मनोरंजन</string>
@@ -417,4 +417,5 @@
 	<string name="route_kr">उजवीकडे रहा आणि जा</string>
 	<string name="left_side_navigation_descr">डावीकडून ट्राफिक असलेल्या देशांसाठी निवडा</string>
 	<string name="unknown_from_location">सुरूवातीचे स्थळ अजून सापडले नाही</string>
+	<string name="mile">मैल</string>
 	</resources>
