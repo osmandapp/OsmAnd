@@ -82,7 +82,7 @@
 	<string name="live_monitoring_mode_on">הפסקת\n המעקב החי</string>
 	<string name="position_on_map_descr">יש לבחור את מיקום סמן המיקום במפה</string>
 	<string name="position_on_map">סמן מיקום</string>
-	<string name="layer_map_appearance">הגדרת המסך…</string>
+	<string name="layer_map_appearance">הגדרת המסך</string>
 	<string name="show_lanes">הצגת נתיבים</string>
 	<string name="avoid_unpaved">המנעות מדרכים שאינן סלולות</string>
 	<string name="avoid_ferries">המנעות ממעבורות</string>

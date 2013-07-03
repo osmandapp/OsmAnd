@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
 	<string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -112,7 +112,7 @@
 	<string name="live_monitoring_mode_on">停止\n 線上追蹤</string>
 	<string name="position_on_map_descr">在地圖上選取所在地的位置標記</string>
 	<string name="position_on_map">位置標記</string>
-	<string name="layer_map_appearance">畫面設定…</string>
+	<string name="layer_map_appearance">畫面設定</string>
 	<string name="show_lanes">顯示車道數</string>
 	<string name="avoid_unpaved">避開顛頗路面</string>
 	<string name="avoid_ferries">避開渡輪</string>

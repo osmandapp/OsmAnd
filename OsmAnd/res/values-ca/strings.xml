@@ -40,7 +40,7 @@
 <string name="gpxup_public">Públic</string>
 <string name="gpxup_private">Privat</string>
 <string name="save_route_as_gpx">Desa la ruta en un fitxer GPX</string>
-<string name="layer_map_appearance">Configura l\'aparença…</string>
+<string name="layer_map_appearance">Configura l\'aparença</string>
 <string name="screen_is_locked">Per desbloquejar la pantalla premeu la icona de bloqueig</string>
 <string name="map_widget_lock_screen">Bloqueja la pantalla</string>
 <string name="map_widget_top_stack">Barra d\'estat:</string>

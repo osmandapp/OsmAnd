@@ -117,7 +117,7 @@
     <string name="item_unchecked">unchecked</string>
     <string name="map_view">Map</string>
     <string name="prefer_motorways">Prefer motorways</string>
-	<string name="prefer_in_routing_title">Prefer&#8230;</string>
+	<string name="prefer_in_routing_title">Prefer &#8230;</string>
 	<string name="prefer_in_routing_descr">Prefer motorways</string>
     <string name="max_speed_none">none</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -189,7 +189,7 @@
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
     <string name="osmand_srtm_long_description_1000_chars">This plugin provides contour lines which can be displayed in OsmAnd\'s offline maps. The global data (between 70 degrees north and 70 degrees south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Distance measurement</string>
-    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location...\" to assign a note to the specified location</string>
+    <string name="audionotes_location_not_defined">Location to associate with the note is not defined yet. \"Use location …\" to assign a note to the specified location</string>
     <string name="monitoring_control_stop">stop</string>
     <string name="map_widget_audionotes">Audio notes</string>
     <string name="audionotes_plugin_description">Take audio/video notes during the trip</string>
@@ -273,7 +273,7 @@
     <string name="map_widget_intermediate_distance">Waypoint</string>
     <string name="ending_point_too_far">Ending point too far from nearest road.</string>
     <string name="btn_add_tag">Add Tag</string>
-    <string name="btn_advanced_mode">Advanced Mode&#8230;</string>
+    <string name="btn_advanced_mode">Advanced Mode &#8230;</string>
     <string name="poi_filter_parking">Parking</string>
     <string name="poi_filter_emergency">Emergency</string>
     <string name="poi_filter_public_transport">Public Transport</string>
@@ -285,7 +285,7 @@
 	<string name="poi_filter_food_shop">Food shop</string>
 	<string name="poi_filter_for_tourists">For tourists</string>
 	<string name="poi_filter_fuel">Fuel</string>
-	<string name="show_warnings_title">Show alarms&#8230;</string>
+	<string name="show_warnings_title">Show alarms &#8230;</string>
 	<string name="show_warnings_descr">Configure traffic warnings (speed limits, forced stops, speed bumps), speed camera warnings, and lane information</string>
 	<string name="use_compass_navigation_descr">Use the compass when no heading is detected otherwise</string>
 	<string name="use_compass_navigation">Use compass</string>
@@ -512,11 +512,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
-	<string name="layer_map_appearance">Configure screen&#8230;</string>
+	<string name="layer_map_appearance">Configure screen</string>
 	<string name="show_lanes">Show lanes</string>
 	<string name="avoid_unpaved">Avoid unpaved roads</string>
 	<string name="avoid_ferries">Avoid ferries</string>
-	<string name="avoid_in_routing_title">Avoid&#8230;</string>
+	<string name="avoid_in_routing_title">Avoid &#8230;</string>
 	<string name="avoid_in_routing_descr">Avoid toll roads, unpaved, ferries</string>
 	<string name="map_widget_fluorescent">Fluorescent routes</string>
 	<string name="map_widget_show_ruler">Ruler</string>
@@ -767,7 +767,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t- Other changes
 	</string>
 	<string name="update_poi_does_not_change_indexes">POI changes inside application do not affect downloaded map files, changes are saved to local file instead.</string>
-	<string name="local_openstreetmap_uploading">Uploading…</string>
+	<string name="local_openstreetmap_uploading">Uploading …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs were uploaded</string>
 	<string name="local_openstreetmap_uploadall">Upload all</string>
 	<string name="local_openstreetmap_items"></string>
@@ -832,11 +832,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 		\n\t\'To direction of movement\' - Map will continuously be aligned with your heading
 		\n\t\'To compass\' - Map will continuously be aligned with device compass reading
 	</string>
-	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map source&#8230;\' -> \'Offline vector maps\'.</string>
+	<string name="binary_map_download_success">Download successful.\n\t\n\tTo use activate \'Menu\' -> \'Define View\' -> \'Map source &#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="tip_day_night_mode">Day/Night Mode</string>
 	<string name="tip_day_night_mode_t_v2">\tThe map appearance can for some vector maps be changed between day (brighter) and night (darker).
 		\n\tNight colors are safer for night driving.
-		\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen&#8230;\' ->\'Day/night map\'.
+		\n\tYou can set a policy for day/night switching in \'Menu\' -> \'Configure screen\' ->\'Day/night map\'.
 		\n\tChoices are:
 		\n\t\'Sunrise/Sunset\' - automatic mode, controlled by position of the sun (default)
 		\n\t\'Day\' - always use day mode
@@ -866,7 +866,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="use_transparent_map_theme">Transparent theme</string>
 	<string name="native_library_not_supported">Native library is not supported on this device.</string>
-	<string name="init_native_library">Initializing native library&#8230;</string>
+	<string name="init_native_library">Initializing native library &#8230;</string>
 	<string name="choose_auto_follow_route">Auto-center map view</string>
 	<string name="choose_auto_follow_route_descr">Time until map view synchronizes with current position</string>
 	<string name="auto_follow_route_never">Never</string>
@@ -909,13 +909,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="local_index_mi_rename">Rename</string>
 	<string name="show_gpx_route">Show on map</string>
 	<string name="poi_filter_nominatim">Online Nominatim</string>
-	<string name="search_position_current_location_search">Searching position&#8230;</string>
+	<string name="search_position_current_location_search">Searching position &#8230;</string>
 	<string name="search_position_current_location_found">Position (found)</string>
-	<string name="search_position_address">Address&#8230;</string>
-	<string name="search_position_favorites">Favorites&#8230;</string>
+	<string name="search_position_address">Address &#8230;</string>
+	<string name="search_position_favorites">Favorites &#8230;</string>
 	<string name="search_position_undefined">Undefined</string>
 	<string name="search_position_fixed">Fixed</string>
-	<string name="search_position_current_location">Current position&#8230;</string>
+	<string name="search_position_current_location">Current position &#8230;</string>
 	<string name="search_position_map_view">Last map view</string>
 	<string name="select_search_position">Search near:</string>
 	<string name="context_menu_item_search">Search near here</string>
@@ -997,7 +997,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	</string>
 	<string name="voice_not_use">Do not use</string>
 	<string name="voice_not_specified">None</string>
-	<string name="installing_new_resources">Unpacking new data&#8230;</string>
+	<string name="installing_new_resources">Unpacking new data &#8230;</string>
 	<string name="internet_connection_required_for_online_route">An online navigation service is selected but no internet connection is available.</string>
 	<string name="tts_language_not_supported_title">Language not supported</string>
 	<string name="tts_language_not_supported">The selected language is not supported by the installed Android TTS (text-to-speech) engine. Do you want to look for another TTS engine in Market? Otherwise the preset TTS language will be used.</string>
@@ -1006,7 +1006,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="gpx_option_reverse_route">Reverse GPX direction</string>
 	<string name="gpx_option_destination_point">Use current destination</string>
 	<string name="gpx_option_from_start_point">Pass along entire track</string>
-	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source&#8230;\' -> \'Offline vector maps\'.</string>
+	<string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' -> \'Define view\' -> \'Map Source &#8230;\' -> \'Offline vector maps\'.</string>
 	<string name="choose_audio_stream">Voice guidance output</string>
 	<string name="choose_audio_stream_descr">Choose channel to play voice guidance (system-dependent)</string>
 	<string name="voice_stream_voice_call">Voice call audio</string>
@@ -1017,17 +1017,17 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="overlay_transparency">Overlay transparency</string>
 	<string name="map_transparency_descr">Modify base map transparency</string>
 	<string name="map_transparency">Base map transparency</string>
-	<string name="layer_underlay">Underlay map&#8230;</string>
+	<string name="layer_underlay">Underlay map &#8230;</string>
 	<string name="map_underlay">Underlay map</string>
 	<string name="map_underlay_descr">Choose underlay map</string>
-	<string name="layer_overlay">Overlay map&#8230;</string>
+	<string name="layer_overlay">Overlay map &#8230;</string>
 	<string name="default_none">None</string>
 	<string name="map_overlay">Overlay map</string>
 	<string name="map_overlay_descr">Choose overlay map</string>
 	<string name="tile_source_already_installed">Map is already installed, settings will be updated</string>
 	<string name="select_tile_source_to_install">Select (tile) maps to install or update</string>
 	<string name="internet_not_available">Internet connection required for operation is not available</string>
-	<string name="install_more">Install more&#8230;</string>
+	<string name="install_more">Install more &#8230;</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoom level to use vector maps</string>
 	<string name="level_to_switch_vector_raster">Min. vector zoom level</string>
 	<string name="tip_location_sharing">Location Sharing</string>
@@ -1052,7 +1052,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="incomplete_locale">incomplete</string>
 	<string name="tip_map_switch">Map Source</string>
 	<string name="tip_map_switch_t_v2">\tThe map source and layers displayed are changed via \'Menu\' -> \'Define view\' in map view.
-		\n\tUnder \'Map source&#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online and tile maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
+		\n\tUnder \'Map source &#8230;\' you can choose using the pre-loaded offline vector maps, predefined (online) tile sources (activate the \'Online and tile maps\' plugin for this), or maps manually created using e.g. OsmAndMapCreator on a PC.
 		\n\tOsmAnd also supports custom sources.
 	</string>
 	<string name="tip_app_mode">User Profile</string>
@@ -1114,10 +1114,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="amenity_type_sustenance">Sustenance</string>
 	<string name="amenity_type_tourism">Tourism</string>
 	<string name="amenity_type_transportation">Transportation</string>
-	<string name="indexing_address">Indexing address&#8230;</string>
-	<string name="indexing_map">Indexing map&#8230;</string>
-	<string name="indexing_poi">Indexing POI&#8230;</string>
-	<string name="indexing_transport">Indexing transportation&#8230;</string>
+	<string name="indexing_address">Indexing address &#8230;</string>
+	<string name="indexing_map">Indexing map &#8230;</string>
+	<string name="indexing_poi">Indexing POI &#8230;</string>
+	<string name="indexing_transport">Indexing transportation &#8230;</string>
 	<string name="input_output_error">I/O error occurred</string>
 	<string name="km">km</string>
 	<string name="km_h">km/h</string>
@@ -1126,7 +1126,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="poi_filter_closest_poi">Closest POI</string>
 	<string name="poi_filter_custom_filter">Custom filter</string>
 	<string name="poi_filter_namefinder">Online NameFinder</string>
-	<string name="reading_cached_tiles">Reading cached tiles&#8230;</string>
+	<string name="reading_cached_tiles">Reading cached tiles &#8230;</string>
 	<string name="version_index_is_big_for_memory">The index \'\'{0}\'\' did not fit into memory</string>
 	<string name="version_index_is_not_supported">The version of index \'\'{0}\'\' is not supported</string>
 	<string name="use_osmand_routing_service">OsmAnd navigation >20km</string>
@@ -1137,10 +1137,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="application_dir_change_warning">Changing the storage directory will not move or delete the data. This must be performed separately and outside OsmAnd. Continue anyway?</string>
 	<string name="osmand_net_previously_installed">A previous OsmAnd version is installed. All offline data will be supported by the new application. But Favorite points should be exported in the old application and later imported by the new one.</string>
 	<string name="build_installed">Build {0} successfully installed ({1}).</string>
-	<string name="downloading_build">Downloading build&#8230;</string>
+	<string name="downloading_build">Downloading build &#8230;</string>
 	<string name="install_selected_build">Do you want to install OsmAnd - {0} from {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Retrieving the list of OsmAnd builds failed</string>
-	<string name="loading_builds">Loading OsmAnd builds&#8230;</string>
+	<string name="loading_builds">Loading OsmAnd builds &#8230;</string>
 	<string name="select_build_to_install">Select an OsmAnd build to install</string>
 	<string name="gps_status_app_not_found">GPS Status application not installed. Search in Market?</string>
 	<string name="voice_is_not_available_msg">Voice guidance is not available. Please go to settings, choose preferred voice data package, and download it.</string>
@@ -1166,7 +1166,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="continuous_rendering">Continuous rendering</string>
 	<string name="continuous_rendering_descr">Display continuous rendering instead of image-at-once</string>
 	<string name="rendering_exception">Error occurred while rendering selected area</string>
-	<string name="show_point_options">Use location...</string>
+	<string name="show_point_options">Use location …</string>
 	<string name="renderer_load_sucess">Renderer sucessfully loaded</string>
 	<string name="renderer_load_exception">Exception occured: renderer was not loaded</string>
 	<string name="renderers">Vector renderer</string>
@@ -1187,7 +1187,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="no_vector_map_loaded">Vector maps were not loaded</string>
 	<string name="map_route_by_gpx">Navigate using GPX</string>
 	<string name="gpx_files_not_found">GPX files not found in /tracks directory</string>
-	<string name="layer_gpx_layer">GPX track&#8230;</string>
+	<string name="layer_gpx_layer">GPX track &#8230;</string>
 	<string name="error_reading_gpx">Error reading GPX data</string>
 	<string name="vector_data">Offline vector maps</string>
 	<string name="transport_context_menu">Search transportation at stop</string>
@@ -1219,8 +1219,8 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="layer_favorites">Favorites</string>
 	<string name="layer_osm_bugs">OSM bugs (online)</string>
 	<string name="layer_transport">Transportation stops</string>
-	<string name="layer_poi">POI&#8230;</string>
-	<string name="layer_map">Map source&#8230;</string>
+	<string name="layer_poi">POI &#8230;</string>
+	<string name="layer_map">Map source &#8230;</string>
 	<string name="menu_layers">Define view</string>
 	<string name="context_menu_item_search_poi">Search POI</string>
 	<string name="context_menu_item_show_route">Show route from here</string>
@@ -1249,13 +1249,13 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="menu_mute_on">Sound is off</string>
 	<string name="voice_provider_descr">Select voice guidance for navigation</string>
 	<string name="voice_provider">Voice guidance</string>
-	<string name="voice_data_initializing">Initializing voice data&#8230;</string>
+	<string name="voice_data_initializing">Initializing voice data &#8230;</string>
 	<string name="voice_data_not_supported">Unsupported version of voice data</string>
 	<string name="voice_data_corrupted">Specified voice data is corrupted</string>
 	<string name="voice_data_unavailable">Selected voice data is not available</string>
 	<string name="sd_unmounted">SD card is not accessible.\nYou won\'t be able to see maps or find things.</string>
 	<string name="sd_mounted_ro">SD card is read-only.\nYou can only see the preloaded map and can\'t download from the Internet.</string>
-	<string name="unzipping_file">Unzipping file&#8230;</string>
+	<string name="unzipping_file">Unzipping file &#8230;</string>
 	<string name="route_tr">Turn right and go</string>
 	<string name="route_tshr">Turn sharply right and go</string>
 	<string name="route_tslr">Turn slightly right and go</string>
@@ -1266,7 +1266,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="route_head">Head</string>
 	<string name="first_time_continue">Later</string>
 	<string name="first_time_download">Download regions</string>
-	<string name="search_poi_location">Searching for signal&#8230;</string>
+	<string name="search_poi_location">Searching for signal &#8230;</string>
 	<string name="search_near_map">Search near last map location</string>
 	<string name="search_nearby">Search nearby</string>
 	<string name="map_orientation_default">Same as device</string>
@@ -1306,11 +1306,11 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="favorite">Favorite</string>
 	<string name="clear_all">Clear all</string>
 	<string name="history">History</string>
-	<string name="uploading_data">Uploading data&#8230;</string>
-	<string name="uploading">Uploading&#8230;</string>
+	<string name="uploading_data">Uploading data &#8230;</string>
+	<string name="uploading">Uploading &#8230;</string>
 	<string name="search_nothing_found">Nothing found</string>
-	<string name="searching">Searching&#8230;</string>
-	<string name="searching_address">Searching address&#8230;</string>
+	<string name="searching">Searching &#8230;</string>
+	<string name="searching_address">Searching address &#8230;</string>
 	<string name="search_osm_nominatim">Online search using OSM Nominatim</string>
 	<string name="hint_search_online">House number, street, city</string>
 	<string name="search_offline_address">Offline search</string>
@@ -1326,9 +1326,9 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="address">Address</string>
 	<string name="download_index_success">Download successful</string>
 	<string name="error_io_error">I/O error occured</string>
-	<string name="downloading_file_new">Downloading...</string>
-	<string name="downloading">Downloading&#8230;</string>
-	<string name="downloading_list_indexes">Downloading list of available regions&#8230;</string>
+	<string name="downloading_file_new">Downloading …</string>
+	<string name="downloading">Downloading &#8230;</string>
+	<string name="downloading_list_indexes">Downloading list of available regions &#8230;</string>
 	<string name="list_index_files_was_not_loaded">The list of regions was not retrieved from osmand.net.</string>
 	<string name="show_poi_on_map">Show on map</string>
 	<string name="fav_points_edited">Favorite point was edited</string>
@@ -1340,18 +1340,18 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="get_directions">Directions</string>
 	<string name="show_gps_status">Show GPS Status</string>
 	<string name="opening_hours">Opening hours</string>
-	<string name="opening_changeset">Opening changeset&#8230;</string>
-	<string name="closing_changeset">Closing changeset&#8230;</string>
-	<string name="commiting_node">Committing node&#8230;</string>
-	<string name="loading_poi_obj">Loading POI&#8230;</string>
+	<string name="opening_changeset">Opening changeset &#8230;</string>
+	<string name="closing_changeset">Closing changeset &#8230;</string>
+	<string name="commiting_node">Committing node &#8230;</string>
+	<string name="loading_poi_obj">Loading POI &#8230;</string>
 	<string name="auth_failed">Authorization failed</string>
 	<string name="failed_op">failed</string>
-	<string name="converting_names">Converting native/English names&#8230;</string>
+	<string name="converting_names">Converting native/English names &#8230;</string>
 	<string name="loading_streets_buildings">Loading streets/buildings&#8230;</string>
-	<string name="loading_postcodes">Loading postcodes&#8230;</string>
-	<string name="loading_streets">Loading streets&#8230;</string>
-	<string name="loading_cities">Loading cities&#8230;</string>
-	<string name="loading">Loading&#8230;</string>
+	<string name="loading_postcodes">Loading postcodes &#8230;</string>
+	<string name="loading_streets">Loading streets &#8230;</string>
+	<string name="loading_cities">Loading cities &#8230;</string>
+	<string name="loading">Loading &#8230;</string>
 	<string name="poi">POI</string>
 	<string name="error_occurred_saving_gpx">Error while saving GPX</string>
 	<string name="error_calculating_route">Error calculating route</string>
@@ -1362,10 +1362,10 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="invalid_locations">Coordinates are invalid!</string>
 	<string name="go_back_to_osmand">Go back to OsmAnd map</string>
 	<string name="close">Close</string>
-	<string name="loading_data">Loading data&#8230;</string>
-	<string name="reading_indexes">Reading local data&#8230;</string>
+	<string name="loading_data">Loading data &#8230;</string>
+	<string name="reading_indexes">Reading local data &#8230;</string>
 	<string name="previous_run_crashed">Last OsmAnd run crashed. Log file is at {0}. Please report the issue and attach the log file.</string>
-	<string name="saving_gpx_tracks">Saving GPX tracks to SD&#8230;</string>
+	<string name="saving_gpx_tracks">Saving GPX tracks to SD &#8230;</string>
 	<string name="finished_task">Finished</string>
 	<string name="reload_indexes_descr">Re-read offline vector maps and data from SD card</string>
 	<string name="reload_indexes">Re-read offline data</string>

@@ -1004,7 +1004,7 @@
 <string name="email">E-mail</string>
 <string name="live_monitoring_mode_off">Zapnout\n přímý přenos</string>
 <string name="live_monitoring_mode_on">Vypnout\n přímý přenos</string>
-<string name="layer_map_appearance">Nastavení obrazovky…</string>
+<string name="layer_map_appearance">Nastavení obrazovky</string>
 <string name="int_continuosly">Souvisle</string>
 <string name="gps_wakeup_interval">Interval zaměřování GPS: %s</string>
 <string name="map_widget_fluorescent">Svítivé barvy trasy</string>

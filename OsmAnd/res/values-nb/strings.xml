@@ -51,7 +51,7 @@
 	<string name="map_widget_day_night">Dag/natt-kart</string>
 	<string name="map_widget_vector_attributes">Opptegningsattributter:</string>
 	<string name="map_widget_renderer">Opptegningsstil</string>
-	<string name="layer_map_appearance">Still inn skjerm…</string>
+	<string name="layer_map_appearance">Still inn skjerm</string>
 	<string name="show_lanes">Vis kjørefelt</string>
 	<string name="avoid_unpaved">Unngå uasfalterte veier</string>
 	<string name="avoid_ferries">Unngå ferger</string>

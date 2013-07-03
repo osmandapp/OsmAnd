@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <!--
     	 Disclaimer: 
@@ -512,7 +512,7 @@ Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, A
 	<string name="live_monitoring_mode_on">Stop\n online tracking</string>
 	<string name="position_on_map_descr">Choose location of position marker on the map</string>
 	<string name="position_on_map">Position marker</string>
-	<string name="layer_map_appearance">Сканфігураваць экран…</string>
+	<string name="layer_map_appearance">Сканфігураваць экран</string>
 	<string name="show_lanes">Паказваць палосы</string>
 	<string name="avoid_unpaved">Avoid unpaved roads</string>
 	<string name="avoid_ferries">Avoid ferries</string>

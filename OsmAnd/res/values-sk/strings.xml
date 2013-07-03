@@ -46,7 +46,7 @@
   <string name="avoid_motorway">Diaľniciam</string>
   <string name="live_monitoring_mode_off">Spustiť\n stopovanie naživo</string>
   <string name="live_monitoring_mode_on">Zastaviť\n stopovanie naživo</string>
-  <string name="layer_map_appearance">Konfigurovať obrazovku…</string>
+  <string name="layer_map_appearance">Konfigurovať obrazovku</string>
   <string name="show_lanes">Jazdné pruhy</string>
   <string name="avoid_unpaved">Nespevneným cestám</string>
   <string name="avoid_ferries">Trajektom</string>

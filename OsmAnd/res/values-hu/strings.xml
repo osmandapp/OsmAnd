@@ -927,7 +927,7 @@
 <string name="int_continuosly">Folyamatos</string>
 <string name="live_monitoring_mode_off">Online útvonalrögzítés\n indítása</string>
 <string name="live_monitoring_mode_on">Online útvonalrögzítés\n megállítása</string>
-<string name="layer_map_appearance">Képernyő beállítása…</string>
+<string name="layer_map_appearance">Képernyő beállítása</string>
 <string name="show_lanes">Sávok megjelenítése</string>
 <string name="avoid_unpaved">Burkolat nélküli utak elkerülése</string>
 <string name="avoid_ferries">Komp elkerülése</string>

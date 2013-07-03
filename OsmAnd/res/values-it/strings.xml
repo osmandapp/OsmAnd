@@ -991,7 +991,7 @@
 <string name="map_widget_renderer">Stile del disegno</string>
 <string name="live_monitoring_mode_off">Avvia\n tracciatura live</string>
 <string name="live_monitoring_mode_on">Ferma\n tracciatura live</string>
-<string name="layer_map_appearance">Configura lo schermo…</string>
+<string name="layer_map_appearance">Configura lo schermo</string>
 <string name="show_lanes">Visualizza le corsie</string>
 <string name="avoid_unpaved">Evita le strade non asfaltate</string>
 <string name="avoid_ferries">Evita i traghetti</string>

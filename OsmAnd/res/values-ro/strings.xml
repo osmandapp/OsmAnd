@@ -104,7 +104,7 @@
 	<string name="live_monitoring_mode_on">Oprește\nlive tracking</string>
 	<string name="position_on_map_descr">Alege locația marker-ului de poziție pe hartă</string>
 	<string name="position_on_map">Marker de poziție</string>
-	<string name="layer_map_appearance">Configurare ecran…</string>
+	<string name="layer_map_appearance">Configurare ecran</string>
 	<string name="show_lanes">Arată benzile de circulație</string>
 	<string name="avoid_unpaved">Evită drumurile nepavate</string>
 	<string name="avoid_ferries">Evită ferry</string>

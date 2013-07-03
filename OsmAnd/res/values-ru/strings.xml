@@ -1009,7 +1009,7 @@
   <string name="bg_service_sleep_mode_on">Выключить\nфоновый режим</string>
   <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
   <string name="bg_service_interval">Установить интервал пробуждения:</string>
-<string name="layer_map_appearance">Настройка экрана…</string>
+<string name="layer_map_appearance">Настройка экрана</string>
 <string name="show_lanes">Показывать полосы движения</string>
 <string name="avoid_unpaved">Избегать просёлочных дорог</string>
 <string name="avoid_ferries">Избегать паромов</string>

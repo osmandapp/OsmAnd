@@ -920,7 +920,7 @@
   <string name="bg_service_sleep_mode_on">Enable Sleep mode</string>
 <string name="live_monitoring_mode_off">Sākt\n tiešsaistes sekošanu</string>
 <string name="live_monitoring_mode_on">Pārtraukt\n tiešsaistes sekošanu</string>
-<string name="layer_map_appearance">Konfigurācijas ekrāns…</string>
+<string name="layer_map_appearance">Konfigurācijas ekrāns</string>
 <string name="show_lanes">Rādīt joslas</string>
 <string name="avoid_unpaved">Izvairīties no neasvaltētiem ceļiem</string>
 <string name="avoid_ferries">Izvairīties no prāmjiem</string>

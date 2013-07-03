@@ -925,7 +925,7 @@
 <string name="map_widget_renderer">Estilo de renderização</string>
 <string name="live_monitoring_mode_off">Iniciar\n rastreamento online</string>
 <string name="live_monitoring_mode_on">Parar\n viver rastreamento</string>
-<string name="layer_map_appearance">Configurar tela…</string>
+<string name="layer_map_appearance">Configurar tela</string>
 <string name="show_lanes">Mostrar pistas</string>
 <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
 <string name="avoid_ferries">Evite ferries</string>

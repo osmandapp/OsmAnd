@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="btn_add_tag">Προσθήκη Ετικέτας</string>
     <string name="btn_advanced_mode">Λειτουργία για προχωρημένους…</string>
     <string name="poi_filter_parking">Στάθμευση</string>
@@ -75,7 +75,7 @@
 	<string name="live_monitoring_mode_on">Διακοπή\n online ιχνηλάτησης</string>
 	<string name="position_on_map_descr">Επιλέξτε την τοποθεσία του δείκτη θέσης στο χάρτη</string>
 	<string name="position_on_map">Δείκτης θέσης</string>
-	<string name="layer_map_appearance">Ρύθμιση οθόνης…</string>
+	<string name="layer_map_appearance">Ρύθμιση οθόνης</string>
 	<string name="show_lanes">Εμφάνιση λωρίδων</string>
 	<string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
 	<string name="avoid_ferries">Αποφυγή πορθμείων</string>

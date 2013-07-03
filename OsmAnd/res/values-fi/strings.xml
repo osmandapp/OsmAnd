@@ -449,7 +449,7 @@
 \n\t* Lisätty kartalle yksi tietyyppi lisää polkupyörille  (Pyörätie=track)
 \n\t* Bugi korjauksia "</string>
 	<string name="poi_filter_car_aid">Autotuki</string>
-	<string name="layer_map_appearance">Muokkaa näyttöä…</string>
+	<string name="layer_map_appearance">Muokkaa näyttöä</string>
 	<string name="screen_is_locked">Poistaaksesi näytön lukituksen paina lukitus kuvaketta</string>
 	<string name="map_widget_map_select">Kartan lähde</string>
 	<string name="map_widget_config">Muokkaa näyttöä</string>

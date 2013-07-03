@@ -231,7 +231,7 @@
 	<string name="map_widget_renderer">Harita tarzı</string>
 	<string name="live_monitoring_mode_off">Başlat\ncanlı takip</string>
 	<string name="position_on_map_descr">Harita üzerinde pozisyon işaretleyici konumu seçin</string>
-	<string name="layer_map_appearance">Ekran yapılandırma...</string>
+	<string name="layer_map_appearance">Ekran yapılandırma</string>
 	<string name="show_lanes">Şeritleri göster</string>
 	<string name="avoid_unpaved">Asfaltsız yollardan kaçının</string>
 	<string name="avoid_ferries">Feribotlardan kaçının</string>

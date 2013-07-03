@@ -47,7 +47,7 @@
 	</string>
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
-	<string name="show_warnings_title">Warnungen anzeigen…</string>
+	<string name="show_warnings_title">Warnungen anzeigen …</string>
 	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stopzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige</string>
 	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
@@ -399,7 +399,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 		\n\t- Weitere Verbesserungen "
 	</string>
 	<string name="update_poi_does_not_change_indexes">Das Bearbeiten von POIs innerhalb von OsmAnd beeinflusst nicht die Offline-Karten, sondern wird in einer eigenen Datei gespeichert.</string>
-	<string name="local_openstreetmap_uploading">hochladen…</string>
+	<string name="local_openstreetmap_uploading">hochladen …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} POI/Bugs wurden hochgeladen</string>
 	<string name="local_openstreetmap_uploadall">Alle hochladen</string>
 	<string name="local_openstreetmap_items">" "</string>
@@ -467,10 +467,10 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 \n\t\'Keine Rotation (Norden ist oben)\' - Die Ausrichtung wird nicht nachgeführt, Norden ist immer oben
 \n\t\'Nach Bewegungsrichtung\' - Die Karte wird gemäß Bewegungsrichtung ausgerichtet und nachgeführt
 \n\t\'Nach Kompass\' - Die Karte wird gemäß Kompass ausgerichtet und nachgeführt "</string>
-	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+	<string name="binary_map_download_success">Download erfolgreich.\n\t\n\tAktivieren unter: \'Menü\' → \'Darstellung\' → \'Kartenquelle …\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="tip_day_night_mode">Tag/Nacht-Modus</string>
 	<string name="tip_day_night_mode_t_v2">"Die Anzeige von Offline-Vektor-Karten kann für einige Anzeigemodi zwischen Tag- (heller) und Nachtansicht (dunkler) umgeschaltet werden. Insbesondere bei nächtlichen Autofahrten ist die dunklere Nacht-Anzeige angenehmer und sicherer.
-\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → Darstellung → \'Anzeige konfigurieren...\' → \'Tag/Nacht-Modus\' geändert werden.
+\nDer Umschaltmechanismus kann in der Kartenansicht unter Menü → \'Anzeige konfigurieren\' → \'Tag/Nacht-Modus\' geändert werden.
 \nZur Auswahl stehen:
 \n\t\'Sonnenaufgang/-untergang\' - automatischer Modus (Voreinstellung)
 \n\t\'Tag\' - permanente Tagesansicht
@@ -634,7 +634,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
 	<string name="switch_to_vector_map_to_see">Offline-Vektor-Karte ist für diesen Ort vorhanden.
 		\n\t
-		\n\tZur Verwendung aktivieren: \'Menu\' → \'Darstellung\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
+		\n\tZur Verwendung aktivieren: \'Menu\' → \'Darstellung\' → \'Kartenquelle …\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
 	<string name="choose_audio_stream_descr">Ausgabemodus für Sprachansagen wählen (Systemabhängig)</string>
 	<string name="voice_stream_voice_call">wie Anrufe</string>
@@ -805,7 +805,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="continuous_rendering">Kontin. Kartenaufbau</string>
 	<string name="continuous_rendering_descr">Wähle zwischen kontinuierlichem Kartenaufbau oder Bilddarstellung auf einmal</string>
 	<string name="rendering_exception">Fehler aufgetreten beim Rendern des gewählten Gebietes</string>
-	<string name="show_point_options">Verwende Position ...</string>
+	<string name="show_point_options">Verwende Position...</string>
 	<string name="renderer_load_sucess">Renderer erfolgreich geladen</string>
 	<string name="renderer_load_exception">Fehler aufgetreten: Renderer wurde nicht geladen</string>
 	<string name="renderers">Vektor-Renderer</string>
@@ -973,7 +973,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="error_io_error">I/O Fehler aufgetreten.</string>
 	<string name="downloading_file">Lade Datei(en) …</string>
 	<string name="downloading">Herunterladen …</string>
-	<string name="downloading_list_indexes">Eine Liste verfügbarer Regionen wird geladen…</string>
+	<string name="downloading_list_indexes">Eine Liste verfügbarer Regionen wird geladen …</string>
 	<string name="list_index_files_was_not_loaded">Die Liste der Regionen wurde von osmand.net nicht geladen.</string>
 	<string name="select_index_file_to_download">Nicht gefunden. Nicht vorhandene Regionen können selbst erstellt werden, siehe http://osmand.net.</string>
 	<string name="show_poi_on_map">Auf Karte zeigen</string>
@@ -1012,7 +1012,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="loading_data">Daten werden geladen …</string>
 	<string name="reading_indexes">Verarbeite Indizes …</string>
 	<string name="previous_run_crashed">Die vorherige Programminstanz war abgestürzt. Logdatei unter {0}. Fehler bitte melden und Logdatei anhängen.</string>
-	<string name="saving_gpx_tracks">GPX-Track wird auf der SD-Karte gespeichert…</string>
+	<string name="saving_gpx_tracks">GPX-Track wird auf der SD-Karte gespeichert …</string>
 	<string name="finished_task">Abgeschlossen</string>
 	<string name="reload_indexes_descr">Offline-Vektor-Karten und Adressdaten von SD-Karte neu laden</string>
 	<string name="reload_indexes">Offline-Daten erneut einbinden</string>
@@ -1257,11 +1257,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="live_monitoring_mode_on">Online-Tracking\n stoppen</string>
 	<string name="position_on_map_descr">Position des Markers auf der Karte</string>
 	<string name="position_on_map">Standortmarker</string>
-	<string name="layer_map_appearance">Anzeige konfigurieren…</string>
+	<string name="layer_map_appearance">Anzeige konfigurieren</string>
 	<string name="show_lanes">Fahrspuren anzeigen</string>
 	<string name="avoid_unpaved">Vermeide ungeteerte Straßen</string>
 	<string name="avoid_ferries">Vermeide Fähren</string>
-	<string name="avoid_in_routing_title">Vermeide…</string>
+	<string name="avoid_in_routing_title">Vermeide …</string>
 	<string name="avoid_in_routing_descr">Bestimmte Straßentypen von der Routenberechnung ausschließen</string>
 	<string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
 	<string name="map_widget_show_ruler">Maßstab</string>
@@ -1278,7 +1278,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="filterpoi_activity">POI-Filter erstellen</string>
 	<string name="email">E-Mail</string>
 <string name="btn_add_tag">Eintrag hinzufügen</string>
-<string name="btn_advanced_mode">Ergänzende Angaben…</string>
+<string name="btn_advanced_mode">Ergänzende Angaben …</string>
 <string name="poi_filter_parking">Parkplatz</string>
 <string name="poi_filter_emergency">Notfall</string>
 <string name="poi_filter_public_transport">ÖPNV</string>
@@ -1370,7 +1370,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="audionotes_plugin_name">Audio/Video-Notizen</string>
     <string name="recording_description">Aufnahme %1$s %2$s vom %3$s</string>
     <string name="tip_recent_changes_1_1_0_t">"Änderungen in 1.1.0:\n\t* Entfernungsmesser-Plugin\n\t* Audio/Video-Notiz-Plugin\n\t* Höhenlinien-Plugin\n\t* Fehlerbeseitigungen\n\t* \'Touren-Ansicht\' der Karte mit mehr Kartendetails, neuer Straßenansicht, mehr Kontrast und alpine Wander-Optionen (SAC-Skalierung)\n\t* EM96 Geoid-Offset-Korrektur für GPS-Höhenwerte "</string>
-    <string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. \"Verwende Ort…\" um der Notiz einen bestimmten Ort zuzuweisen</string>
+    <string name="audionotes_location_not_defined">Ein Ort, der mit der Notiz verbunden wird, wurde nicht angegeben. \"Verwende Ort …\" um der Notiz einen bestimmten Ort zuzuweisen</string>
     <string name="osmand_srtm_long_description_1000_chars">Das Plugin beinhaltet Höhenlinien, die in Offline-Karten von OsmAnd angezeigt werden können. Die globalen Daten (zwischen N 70° und S 70°) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), welches ein bildgebendes System auf dem Satteliten Terra ist, dem Flagschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie (METI) und dem japanischen Raumfahrtsprogramm (J-spacesystems).</string>
     <string name="recording_context_menu_show">Anzeigen</string>
     <string name="recording_photo_description">Foto %1$s vom %2$s</string>
@@ -1386,7 +1386,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="tip_recent_changes_1_2_t">"Änderungen in 1.2.1:\n→* Fehlerbehebung für Geo Intent (Foursquare, c:geo)\n→* Fehlerbehebung für zitterndes Bild bei Navigation\n→* Andere kleine Fehlerbehebungen\nÄnderungen in 1.2:\n→* Fehlerbehebungen (Navigation, Suche, AV-Aufzeichnung, Sprachansagen, einige Anzeigeverbesserungen)\n→* Einfachere Konfiguration des Bergkontur-Overlay (nur mit Kontur-Linien-Plugin)\n→* Verarbeitet maps.google.com-Links auf Orte\n→* Neues Widget (GPS info)\n→* Hinzugefügt: Unterstützung von mehreren Fenstern auf aktuellen Samsung-Geräten\n→* Kalman-Filter für Kompass\n→* Unterstützung für Pebble-Uhr "</string>
     <string name="prefer_motorways">Autobahnen bevorzugen</string>
-	<string name="prefer_in_routing_title">Bevorzugen…</string>
+	<string name="prefer_in_routing_title">Bevorzugen …</string>
 	<string name="prefer_in_routing_descr">Autobahnen bevorzugen</string>
     <string name="max_speed_none">keine</string>
     <string name="av_def_action_choose">Bei Anfrage auswählen</string>

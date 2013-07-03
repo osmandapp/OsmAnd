@@ -504,7 +504,7 @@
 	<string name="south_west">جنوب-غرب</string>
 	<string name="use_distance_measurement_help">"برای نشانگذاری یک نقطه.\nبر روی نقشه فشاردهید و نگه دارید تا نقطه قبلی پاک شود.\nبر روی نقطه فشار دهید و نگه دارید تا  توضیحی را ببینید و به آن بچسبانید.\nبر روی ویجت اندازه گیری کلیک کنید تا گزینه های بیشتری را ببینید."</string>
     <string name="menu_layers">نحوه نمایش</string>
-	<string name="layer_map_appearance">چینش صفحه…</string>
+	<string name="layer_map_appearance">چینش صفحه</string>
 	<string name="map_widget_config">چینش صفحه</string>
 	<string name="map_widget_intermediate_distance">نقطه مسیر</string>
     <string name="delete_target_point">حذف نقطه مسیر</string>

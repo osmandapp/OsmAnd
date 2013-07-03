@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -197,7 +197,7 @@ sporing</string>
 online sporing</string>
 	<string name="position_on_map_descr">Vælg placering af positionsmarkør på kortet</string>
 	<string name="position_on_map">Positionsmarkør</string>
-	<string name="layer_map_appearance">Konfigurer skærm…</string>
+	<string name="layer_map_appearance">Konfigurer skærm</string>
 	<string name="show_lanes">Vis vognbaner</string>
 	<string name="avoid_unpaved">Undgå grusveje</string>
 	<string name="avoid_ferries">Undgå færger</string>

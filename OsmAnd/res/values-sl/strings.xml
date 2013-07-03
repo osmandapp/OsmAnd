@@ -335,7 +335,7 @@
 	<string name="live_monitoring_mode_on">Zaustavi\n sledenje v živo</string>
 	<string name="position_on_map_descr">Izberite mesto položaja na zemljevidu</string>
 	<string name="position_on_map">Oznaka položaja</string>
-	<string name="layer_map_appearance">Nastavitve zaslona…</string>
+	<string name="layer_map_appearance">Nastavitve zaslona</string>
 	<string name="show_lanes">Prikaži vozne pasove</string>
 	<string name="avoid_in_routing_title">Izogibanje…</string>
 	<string name="avoid_ferries">Izogibanje trajektov</string>

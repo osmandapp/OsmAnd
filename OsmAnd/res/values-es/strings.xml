@@ -1,7 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="live_monitoring_mode_off">Iniciar\n seguimiento en directo</string>
   <string name="live_monitoring_mode_on">Parar\n seguimiento en directo</string>
-  <string name="layer_map_appearance">Configura pantalla…</string>
+  <string name="layer_map_appearance">Configura pantalla</string>
   <string name="show_lanes">Mostrar carriles</string>
   <string name="avoid_unpaved">Evitar carreteras sin pavimentar</string>
   <string name="avoid_ferries">Evitar transbordadores</string>

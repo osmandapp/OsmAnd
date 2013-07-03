@@ -39,7 +39,7 @@
 <string name="map_widget_vector_attributes">Renderingsattribut:</string>
 <string name="position_on_map_descr">Välj positionsmarkörens placering på kartan</string>
 <string name="position_on_map">Positionsmarkör</string>
-<string name="layer_map_appearance">Konfigurera skärm…</string>
+<string name="layer_map_appearance">Konfigurera skärm</string>
 <string name="show_lanes">Visa körfält</string>
 <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
 <string name="avoid_ferries">Undvik färjor</string>

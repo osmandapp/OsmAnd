@@ -338,7 +338,7 @@
 <string name="map_widget_day_night">दिवस/रात्र नकाशा</string>
 <string name="live_monitoring_mode_off">लाइव्ह ट्रॅकिंग चालू करा</string>
 <string name="live_monitoring_mode_on">लाइव्ह ट्रॅकिंग बंद करा</string>
-<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा…</string>
+<string name="layer_map_appearance">स्क्रिन कॉन्फिगर करा</string>
 <string name="avoid_unpaved">कच्चे रस्ते टाळा</string>
 <string name="avoid_in_routing_title">टाळा…</string>
 <string name="map_widget_show_ruler">पट्टी</string>

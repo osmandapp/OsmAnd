@@ -926,7 +926,7 @@
 <string name="map_widget_vector_attributes">რენდერის ატრიბუტები:</string>
 <string name="live_monitoring_mode_off">ცოცხალი დევნის რეჟიმის გამორთვა</string>
 <string name="live_monitoring_mode_on">ცოცხალი დევნის რეჟიმის ჩართვა</string>
-<string name="layer_map_appearance">ეკრანის გამართვა…</string>
+<string name="layer_map_appearance">ეკრანის გამართვა</string>
 <string name="show_lanes">ბილიკების ჩვენება</string>
 <string name="avoid_unpaved">მოუკირწყლავი გზებისათვის თავის არიდება</string>
 <string name="avoid_ferries">ბორნისათვის თავის არიდება</string>

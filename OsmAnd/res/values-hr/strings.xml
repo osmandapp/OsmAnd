@@ -120,7 +120,7 @@
 	<string name="map_widget_renderer">Stil karte</string>
 	<string name="live_monitoring_mode_off">Pokreni\n online praćenje</string>
 	<string name="live_monitoring_mode_on">Zaustavi\n online praćenje</string>
-	<string name="layer_map_appearance">Konfiguracija zaslona...</string>
+	<string name="layer_map_appearance">Konfiguracija zaslona</string>
 	<string name="show_lanes">Prikaži staze</string>
 	<string name="avoid_unpaved">Izbjegavaj neasfaltirane ceste</string>
 	<string name="avoid_ferries">Izbjegavaj trajekte</string>
