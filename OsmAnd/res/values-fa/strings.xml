@@ -1,6 +1,5 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<resources>
-<string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان گیری از تغییرات OSM ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -89,7 +88,6 @@
 	<string name="poi_filter_food_shop">فروشگاه مواد غذایی</string>
 	<string name="poi_filter_for_tourists">مناسب توریستها</string>
 	<string name="poi_filter_fuel">جایگاه سوخت</string>
-	<string name="avoid_motorway"/>
 	<string name="auto_zoom_map_descr">زوم خودکار بر اساس سرعت خودرو</string>
 	<string name="recalculate_route_to_your_location">شیوه رفت و آمد:</string>
 	<string name="select_navigation_mode">انتخاب شیوه رفت و آمد</string>
@@ -304,7 +302,7 @@
 	<string name="searchpoi_activity">انتخاب POI</string>
 	<string name="search_POI_level_btn">بیشتر یافتن</string>
 	<string name="choose_available_region">انتخاب ناحیه از لیست</string>
-	<string name="app_mode_default">پیش فرض</string>
+	<string name="app_mode_default">پیمایش نقشه</string>
 	<string name="app_mode_car">خودرو</string>
 	<string name="app_mode_bicycle">دوچرخه</string>
 	<string name="app_mode_pedestrian">پیاده</string>
@@ -608,7 +606,6 @@
     <string name="recording_description">ضبط %1$s%2$ s از %3$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونه OsmAnd برای منحنی های همتراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">استفاده از حسگر مغناطیسی به جای سنسور جهت یابی برای استفاده در قطب نما</string>
-    <string name="tip_recent_changes_1_3_t"/>
     <string name="show_poi_over_map">نشان دادن POI</string>
 	<string name="show_poi_over_map_description">نشان دادن POI بر روی نقشه (استفاده از فیلترهای انتخاب شده قبلی)</string>
 	<string name="favourites_activity">علاقه مندی ها</string>
@@ -650,4 +647,17 @@
 	<string name="context_menu_item_download_map">دانلود نقشه</string>
 	<string name="select_max_zoom_preload_area">انتخاب حداکثر میزان بزرگنمایی برای پیش فرض</string>
 	<string name="show_point_options">استفاده از مکان به عنوان…</string>
+	<string name="local_index_gpx_timespan">\nمحدوده زمانی: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nزمان سفر: %1$d:%2$02d:%3$02d</string>
+	<string name="settings_preset">پروفایل پیش فرض</string>
+	<string name="settings_preset_descr">نمای نقشه و تنظیمات مسیریابی برای هر پروفایل ذخیره میشود. پروفیل پیش فرض خود را اینجا تنظیم کنید.</string>
+    <string name="osmand_background_plugin_description">سرویسهای واقعه نگاری و حالت خواب</string>
+    <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
+    <string name="audionotes_location_not_defined">مکان مربوط به این یادداشت هنوز تعریف نشده است. برای اختصاص یادداشت به یک محل \"استفاده از موقعیت...\" را انتخاب کنید</string>
+    <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی تنها نقشه راهها نشان داده شود:</string>
+	<string name="target_points">نقطه مسیر</string>
+    <string name="ending_point_too_far">نقطه پایانی فاصله خیلی زیادی از نزدیکترین جاده دارد.</string>
+    <string name="map_widget_vector_attributes">خصوصیات رندر نقشه:</string>
+	<string name="live_monitoring_mode_off">شروع\n ردگیری آنلاین</string>
+	<string name="live_monitoring_mode_on">توقف\n ردگیری آنلاین</string>
 	</resources>
