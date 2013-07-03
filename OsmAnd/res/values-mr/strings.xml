@@ -418,4 +418,21 @@
 	<string name="left_side_navigation_descr">डावीकडून ट्राफिक असलेल्या देशांसाठी निवडा</string>
 	<string name="unknown_from_location">सुरूवातीचे स्थळ अजून सापडले नाही</string>
 	<string name="mile">मैल</string>
+	<string name="favourites_remove_dialog_msg">आवडते ठिकाण \'%s\' काढायचे का?</string>
+	<string name="favourites_remove_dialog_success">आवडते ठिकाण {0} यशस्वीरित्या काढले.</string>
+	<string name="add_favorite_dialog_top_text">आवडत्या ठिकाणाचे नाव द्या</string>
+	<string name="search_address_street_option">छेदणारा रस्ता</string>
+	<string name="navigate_point_cancel">रद्द करा</string>
+	<string name="choose_intersected_street">छेदणारा रस्ता निवडा</string>
+	<string name="Closest_Amenities">सर्वात जवळच्या सुविधा</string>
+	<string name="searchpoi_activity">पिओआय निवडा</string>
+	<string name="show_view_angle">बघण्याची दिशा दाखवा</string>
+	<string name="download_indexes_descr">ऑफलाइन वापरासाठी डेटा डाउनलोड किंवा अपडेट करा</string>
+	<string name="loading_streets_buildings">रस्ते/इमारती लोड करत आहे…</string>
+	<string name="loading_postcodes">पोस्ट कोड लोड करत आहे…</string>
+	<string name="loading_streets">रस्ते लोड करत आहे…</string>
+	<string name="loading_cities">शहरे लोड करत आहे…</string>
+	<string name="poi">पिओआय</string>
+	<string name="loading_poi_obj">पिओआय लोड करत आहे…</string>
+	<string name="opening_hours">उघडण्याची वेळ</string>
 	</resources>
