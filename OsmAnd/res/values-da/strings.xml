@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -126,7 +126,7 @@
     <string name="context_menu_item_intermediate_point">Tilføj som rutepunkt</string>
     <string name="ending_point_too_far">Slutpunktet er for langt fra nærmeste vej.</string>
     <string name="btn_add_tag">Tilføj mærke</string>
-    <string name="btn_advanced_mode">Avanceret tilstand…</string>
+    <string name="btn_advanced_mode">Avanceret tilstand …</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Nødsituation</string>
     <string name="poi_filter_public_transport">Kollektivtrafik</string>
@@ -138,7 +138,7 @@
 	<string name="poi_filter_food_shop">Fødevarebutik</string>
 	<string name="poi_filter_for_tourists">For turister</string>
 	<string name="poi_filter_fuel">Brændstof</string>
-	<string name="show_warnings_title">Vis alarmer…</string>
+	<string name="show_warnings_title">Vis alarmer …</string>
 	<string name="show_warnings_descr">Konfigurer trafikadvarsler (fartgrænser, tvungne stop, vejbump), fotofælde advarsler og vognbane oplysninger</string>
 	<string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret</string>
 	<string name="use_compass_navigation">Kompas</string>
@@ -150,7 +150,7 @@
     <string name="item_unchecked">Fravalgt</string>
     <string name="map_view">Kort</string>
     <string name="prefer_motorways">Foretræk motorveje</string>
-	<string name="prefer_in_routing_title">Foretræk…</string>
+	<string name="prefer_in_routing_title">Foretræk …</string>
 	<string name="prefer_in_routing_descr">Foretræk motorveje</string>
     <string name="tip_recent_changes_1_2_t">Rettelser i 1.2.1:
 	\n* Rettet Geo Intent (Foursquare, c:geo)
@@ -201,7 +201,7 @@
 	<string name="show_lanes">Vis vognbaner</string>
 	<string name="avoid_unpaved">Undgå grusveje</string>
 	<string name="avoid_ferries">Undgå færger</string>
-	<string name="avoid_in_routing_title">Undgå…</string>
+	<string name="avoid_in_routing_title">Undgå …</string>
 	<string name="avoid_in_routing_descr">Undgå betalingsveje, grusveje, færger</string>
 	<string name="map_widget_fluorescent">Fluorescerende ruter</string>
 	<string name="map_widget_show_ruler">Lineal</string>
@@ -461,7 +461,7 @@
 	<string name="offline_edition">Offline redigering</string>
 	<string name="offline_edition_descr">Brug altid offline redigering</string>
 	<string name="update_poi_does_not_change_indexes">Interessepunkt ændringer lavet i programmet påvirker ikke hentede kort. Ændringer gemmes i lokal fil i stedet.</string>
-	<string name="local_openstreetmap_uploading">Overfører…</string>
+	<string name="local_openstreetmap_uploading">Overfører …</string>
 	<string name="local_openstreetmap_were_uploaded">{0} interessepunkt/fejl blev overført</string>
 	<string name="local_openstreetmap_uploadall">Send alt</string>
 	<string name="local_openstreetmap_show">Vis på kort</string>
@@ -515,7 +515,7 @@
 	<string name="osmand_service_descr">Bruges for at køre OsmAnd mens skærmen er slukket</string>
 	<string name="tip_rotation_switching">Kortretning</string>
 	<string name="binary_map_download_success">Hentning lykkedes.
-\nAktiver under \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' -&gt; \'Offline vektorkort\'.</string>
+\nAktiver under \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde …\' -&gt; \'Offline vektorkort\'.</string>
 	<string name="tip_day_night_mode">Dag/nat tilstand</string>
 	<string name="navigate_point_format">Format:</string>
 	<string name="amenity_type_wikiosm">Wikipedia (offline)</string>
@@ -526,7 +526,7 @@
 	<string name="tip_select_destination_point">Kørselsvejledning</string>
 	<string name="use_transparent_map_theme">Gennemsigtigt tema</string>
 	<string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
-	<string name="init_native_library">Initialisere indbygget bibliotek…</string>
+	<string name="init_native_library">Initialisere indbygget bibliotek …</string>
 	<string name="choose_auto_follow_route">Autocentrer kortvisning</string>
 	<string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
 	<string name="auto_follow_route_never">Aldrig</string>
@@ -554,13 +554,13 @@
 	<string name="button_upgrade_osmandplus">Opgrader OsmAnd+</string>
 	<string name="local_index_mi_rename">Omdøb</string>
 	<string name="show_gpx_route">Vis på kort</string>
-	<string name="search_position_current_location_search">Søger position…</string>
+	<string name="search_position_current_location_search">Søger position …</string>
 	<string name="search_position_current_location_found">Position (fundet)</string>
-	<string name="search_position_address">Adresse…</string>
-	<string name="search_position_favorites">Favoritter…</string>
+	<string name="search_position_address">Adresse …</string>
+	<string name="search_position_favorites">Favoritter …</string>
 	<string name="search_position_undefined">Ikke defineret</string>
 	<string name="search_position_fixed">Fast</string>
-	<string name="search_position_current_location">Aktuel position…</string>
+	<string name="search_position_current_location">Aktuel position …</string>
 	<string name="search_position_map_view">Seneste kortvisning</string>
 	<string name="select_search_position">Søg i nærheden af:</string>
 	<string name="context_menu_item_search">Søg i nærheden</string>
@@ -813,7 +813,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	</string>
 	<string name="tip_day_night_mode_t_v2">Kortets udseende kan for nogle vektorkort skiftes mellem dag (lysere) og nat (mørkere).
 \nNatfarver er mere sikre under natkørsel.
-\nIndstil regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm…\' -&gt;\'Dag/nat kort\'.
+\nIndstil regler for dag/nat skift i \'Menu\' -&gt; \'Konfigurer skærm …\' -&gt;\'Dag/nat kort\'.
 \nValgmulighederne er:
 \n \'Solopgang/solnedgang\' - Automatisk tilstand, styret af solens position(standard)
 \n \'Dag\' - Brug altid dagtilstand
@@ -920,7 +920,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	</string>
 	<string name="voice_not_use">Brug ikke</string>
 	<string name="voice_not_specified">Ingen</string>
-	<string name="installing_new_resources">Udpakker nye data…</string>
+	<string name="installing_new_resources">Udpakker nye data …</string>
 	<string name="internet_connection_required_for_online_route">En online navigationstjeneste er valgt, men der er ingen tilgængelig internet forbindelse.</string>
 	<string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
 	<string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-tale)-motor. Søg på Google Play efter en anden TTS-motor? Ellers vil standard TTS-sprog blive brugt.</string>
@@ -931,7 +931,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="gpx_option_from_start_point">Passere langs hele sporet</string>
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 
-\n\nFor at anvende aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde…\' \'Offline vektor-kort\'.</string>
+\n\nFor at anvende aktiver \'Menu\' -&gt; \'Definer visning\' -&gt; \'Vælg kortkilde …\' -&gt; \'Offline vektor-kort\'.</string>
 	<string name="choose_audio_stream">Stemmeindstillinger</string>
 	<string name="choose_audio_stream_descr">Vælg audiokanal til at afspille talevejledning (system afhængig)</string>
 	<string name="voice_stream_voice_call">Stemmeopkald lyd</string>
@@ -942,17 +942,17 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
 	<string name="map_transparency_descr">Ændre gennemsigtighed for basiskort</string>
 	<string name="map_transparency">Gennemsigtighed for basiskort</string>
-	<string name="layer_underlay">Underlejringskort…</string>
+	<string name="layer_underlay">Underlejringskort …</string>
 	<string name="map_underlay">Underlejringskort</string>
 	<string name="map_underlay_descr">Vælg kort til underlejring</string>
-	<string name="layer_overlay">Overlejringskort…</string>
+	<string name="layer_overlay">Overlejringskort …</string>
 	<string name="default_none">Ingen</string>
 	<string name="map_overlay">Overlejringskort</string>
 	<string name="map_overlay_descr">Vælg kort til overlejring</string>
 	<string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret</string>
 	<string name="select_tile_source_to_install">Vælg (del)kort der skal installeres eller opdateres</string>
 	<string name="internet_not_available">Internetforbindelse krævet for handlingen, men er ikke tilgængelig</string>
-	<string name="install_more">Installer flere…</string>
+	<string name="install_more">Installer flere …</string>
 	<string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
 	<string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
 	<string name="tip_location_sharing">Placeringsdeling</string>
@@ -1015,10 +1015,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="amenity_type_sport">Sport</string>
 	<string name="amenity_type_tourism">Turisme</string>
 	<string name="amenity_type_transportation">Transport</string>
-	<string name="indexing_address">Indekserer adresse…</string>
-	<string name="indexing_map">Indekserer kort…</string>
-	<string name="indexing_poi">Indekserer interessepunkt…</string>
-	<string name="indexing_transport">Indekserer transport…</string>
+	<string name="indexing_address">Indekserer adresse …</string>
+	<string name="indexing_map">Indekserer kort …</string>
+	<string name="indexing_poi">Indekserer interessepunkt …</string>
+	<string name="indexing_transport">Indekserer transport …</string>
 	<string name="input_output_error">I/O fejl</string>
 	<string name="km">km</string>
 	<string name="km_h">km/t</string>
@@ -1027,7 +1027,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="poi_filter_closest_poi">Nærmeste interessepunkt</string>
 	<string name="poi_filter_custom_filter">Tilpasset filter</string>
 	<string name="poi_filter_namefinder">Online navne-søger</string>
-	<string name="reading_cached_tiles">Læser cachelagrede delkort…</string>
+	<string name="reading_cached_tiles">Læser cachelagrede delkort …</string>
 	<string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
 	<string name="version_index_is_not_supported">Versionen af indeks \'{0}\' er ikke understøttet</string>
 	<string name="use_osmand_routing_service">OsmAnd navigation &gt;20km</string>
@@ -1035,10 +1035,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
 	<string name="application_dir">Filmappe</string>
 	<string name="build_installed">Version {0} korrekt installeret ({1}).</string>
-	<string name="downloading_build">Henter versioner…</string>
+	<string name="downloading_build">Henter versioner …</string>
 	<string name="install_selected_build">Installere OsmAnd - {0} fra {1} {2} MB ?</string>
 	<string name="loading_builds_failed">Hentning af OsmAnd versioner fejlede</string>
-	<string name="loading_builds">Indlæser OsmAnd versioner…</string>
+	<string name="loading_builds">Indlæser OsmAnd versioner …</string>
 	<string name="select_build_to_install">Vælg en OsmAnd version til installation</string>
 	<string name="contribution_activity">Installer versionen</string>
 	<string name="gps_status_app_not_found">GPS-Status applikation er ikke installeret. Søg på Play butik?</string>
@@ -1077,7 +1077,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="continuous_rendering">Kontinuerlig kortoptegning</string>
 	<string name="continuous_rendering_descr">Vis kontinuerlig optegning i stedet for hele kortet på en gang</string>
 	<string name="rendering_exception">Det skete en fejl under optegning af det valgte område</string>
-	<string name="show_point_options">Brug placeringer…</string>
+	<string name="show_point_options">Brug placeringer …</string>
 	<string name="renderer_load_sucess">Kortgenerator indlæst</string>
 	<string name="renderer_load_exception">Der opstod en undtagelse: kortgeneratoren blev ikke indlæst</string>
 	<string name="renderers">Vektor-optegning</string>
@@ -1100,7 +1100,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="no_vector_map_loaded">Vektorkort blev ikke indlæst</string>
 	<string name="map_route_by_gpx">Naviger med GPX</string>
 	<string name="gpx_files_not_found">GPX-filer blev ikke fundet i \'/tracks\' mappen</string>
-	<string name="layer_gpx_layer">GPX-spor…</string>
+	<string name="layer_gpx_layer">GPX-spor …</string>
 	<string name="error_reading_gpx">Fejl under læsning af GPX-data</string>
 	<string name="vector_data">Offline vektorkort</string>
 	<string name="transport_context_menu">Søg transport ved stoppested</string>
@@ -1134,7 +1134,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="layer_favorites">Favoritter</string>
 	<string name="layer_osm_bugs">OSM-fejlbeskrivelse (online)</string>
 	<string name="layer_transport">Stoppesteder</string>
-	<string name="layer_map">Vælg kortkilde…</string>
+	<string name="layer_map">Vælg kortkilde …</string>
 	<string name="menu_layers">Definer visning</string>
 	<string name="context_menu_item_search_poi">Søg interessepunkt</string>
 	<string name="context_menu_item_show_route">Vis rute herfra</string>
@@ -1189,7 +1189,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="favourites_context_menu_delete">Slet</string>
 	<string name="favourites_context_menu_edit">Rediger</string>
 	<string name="amenity_type_emergency">Nødsituation</string>
-	<string name="layer_poi">Interessepunkt…</string>
+	<string name="layer_poi">Interessepunkt …</string>
 	<string name="process_navigation_service">OsmAnd navigationstjeneste</string>
 	<string name="gps_provider">GPS</string>
 	<string name="int_min">min.</string>
@@ -1199,7 +1199,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \nKort kan ikke vises.</string>
 	<string name="sd_mounted_ro">SD-kortet er skrivebeskyttet.
 \nKun det forudindlæste kort kan vises og nye kort kan ikke hente fra internettet.</string>
-	<string name="unzipping_file">Udpakker fil…</string>
+	<string name="unzipping_file">Udpakker fil …</string>
 	<string name="route_tr">Drej til højre og kør</string>
 	<string name="route_tshr">Drej skarpt til højre og kør</string>
 	<string name="route_tslr">Drej en smule til højre og kør</string>
@@ -1209,7 +1209,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="route_tu">Foretag U-vending og kør</string>
 	<string name="first_time_continue">Senere</string>
 	<string name="first_time_download">Hent regioner</string>
-	<string name="search_poi_location">Søger efter signal…</string>
+	<string name="search_poi_location">Søger efter signal …</string>
 	<string name="search_near_map">Søg tæt på sidste kortplacering</string>
 	<string name="search_nearby">Søg i nærheden</string>
 	<string name="map_orientation_default">Samme som enhed</string>
@@ -1256,7 +1256,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="application_dir_change_warning">Ændring af mappen der gemmes i medfører ikke flytning eller sletning af data. Det skal gøres separat og udenom OsmAnd. Fortsæt alligevel?</string>
 	<string name="osmand_net_previously_installed">En tidligere OsmAnd version er installeret. Alle offline data er understøttet af det nye program, men favoritter bør eksporteres i den gamle version og senere importeres i den nye.</string>
 	<string name="voice_provider">Talevejledning</string>
-	<string name="voice_data_initializing">Initialisere taledata…</string>
+	<string name="voice_data_initializing">Initialisere taledata …</string>
 	<string name="voice_data_not_supported">Ikke understøttet version af taledata</string>
 	<string name="voice_data_corrupted">De angivne taledata er fejlbehæftet</string>
 	<string name="voice_data_unavailable">De valgte taledata er ikke tilgængelig</string>
@@ -1280,18 +1280,18 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="favorite">Favorit</string>
 	<string name="clear_all">Ryd alt</string>
 	<string name="history">Historik</string>
-	<string name="uploading_data">Overfører data…</string>
-	<string name="uploading">Overfører…</string>
+	<string name="uploading_data">Overfører data …</string>
+	<string name="uploading">Overfører …</string>
 	<string name="search_nothing_found">Fandt ikke noget</string>
-	<string name="searching">Søger…</string>
-	<string name="searching_address">Søger adresse…</string>
+	<string name="searching">Søger …</string>
+	<string name="searching_address">Søger adresse …</string>
 	<string name="search_osm_nominatim">Online søgning ved hjælp af OSM Nominatim</string>
 	<string name="hint_search_online">Husnummer, gade, by</string>
 	<string name="search_online_address">Online søgning</string>
 	<string name="max_level_download_tile">Maks. online zoom</string>
 	<string name="max_level_download_tile_descr">Vælg maksimum zoom niveau der hentes for online delkort</string>
 	<string name="tip_map_switch_t_v2">Kortkilden og lag der vises kan ændres via \'Menu\' -&gt; \'Definer visning\' i kort visning.
-\nUnder \'Kortkilde...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
+\nUnder \'Kortkilde ...\' vælges de forhåndsindlæste vektorkort, forhåndsdefinerede (online) delkortkilder (aktiver \'Online og delkort\' udvidelsen) eller kort der er manuelt oprettet f.eks. ved hjælp af OsmAndMapCreator på en PC.
 \nOsmAnd understøtter også brugerdefinerede kilder.
 \n
 	</string>
@@ -1319,8 +1319,8 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="download_index_success">Hentet</string>
 	<string name="error_io_error">Der skete en I/O fejl</string>
 	<string name="downloading_file">Henter fil…</string>
-	<string name="downloading">Henter…</string>
-	<string name="downloading_list_indexes">Henter liste over tilgængelige regioner…</string>
+	<string name="downloading">Henter …</string>
+	<string name="downloading_list_indexes">Henter liste over tilgængelige regioner …</string>
 	<string name="list_index_files_was_not_loaded">Listen over regioner blev ikke hentet fra osmand.net.</string>
 	<string name="show_poi_on_map">Vis på kort</string>
 	<string name="fav_points_edited">Favoritpunkt blev redigeret</string>
@@ -1332,17 +1332,17 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="get_directions">Kørselsvejledning</string>
 	<string name="show_gps_status">Vis GPS-status</string>
 	<string name="opening_hours">Åbningstider</string>
-	<string name="opening_changeset">Åbner ændringssæt…</string>
-	<string name="closing_changeset">Lukker ændringssæt…</string>
-	<string name="loading_poi_obj">Indlæser interessepunkt…</string>
+	<string name="opening_changeset">Åbner ændringssæt …</string>
+	<string name="closing_changeset">Lukker ændringssæt …</string>
+	<string name="loading_poi_obj">Indlæser interessepunkt …</string>
 	<string name="auth_failed">Autorisation fejlede</string>
 	<string name="failed_op">fejlet</string>
-	<string name="converting_names">Konverterer oprindelige/engelske navne…</string>
+	<string name="converting_names">Konverterer oprindelige/engelske navne …</string>
 	<string name="loading_streets_buildings">Indlæser gader/bygninger…</string>
-	<string name="loading_postcodes">Indlæser postnumre…</string>
-	<string name="loading_streets">Indlæser gader…</string>
-	<string name="loading_cities">Indlæser byer…</string>
-	<string name="loading">Indlæser…</string>
+	<string name="loading_postcodes">Indlæser postnumre …</string>
+	<string name="loading_streets">Indlæser gader …</string>
+	<string name="loading_cities">Indlæser byer …</string>
+	<string name="loading">Indlæser …</string>
 	<string name="poi">Interessepunkt</string>
 	<string name="error_occurred_saving_gpx">Fejl under lagring af GPX</string>
 	<string name="error_calculating_route">Fejl under ruteberegning</string>
@@ -1353,10 +1353,10 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="invalid_locations">Koordinaterne er ugyldige!</string>
 	<string name="go_back_to_osmand">Tilbage til OsmAnd-kort</string>
 	<string name="close">Luk</string>
-	<string name="loading_data">Indlæser data…</string>
-	<string name="reading_indexes">Læser lokale data…</string>
+	<string name="loading_data">Indlæser data …</string>
+	<string name="reading_indexes">Læser lokale data …</string>
 	<string name="previous_run_crashed">Sidste OsmAnd kørsel fejlede. Logfilen er i {0}. Rapporter hændelsen og vedhæft logfilen.</string>
-	<string name="saving_gpx_tracks">Gemmer GPX-spor til SD-kort…</string>
+	<string name="saving_gpx_tracks">Gemmer GPX-spor til SD-kort …</string>
 	<string name="finished_task">Afsluttet</string>
 	<string name="reload_indexes_descr">Genindlæs offline vektorkort og data fra SD-kort</string>
 	<string name="reload_indexes">Genindlæs offline-data</string>
@@ -1447,7 +1447,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 \nGPX-spor</string>
 	<string name="default_buttons_commit">Udfør</string>
 	<string name="amenity_type_geocache">Geocache</string>
-	<string name="commiting_node">Overfør knudepunkt…</string>
+	<string name="commiting_node">Overfør knudepunkt …</string>
 	<string name="poi_error_poi_not_found">Knudepunkt kan ikke findes eller faciliteter er ikke et enkelt knudepunkt</string>
 	<string name="route_head">Lige ud</string>
 	<string name="incremental_search_building">Søg efter bygning trinvist</string>
@@ -1488,7 +1488,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="access_mark_final_location_first">Tilgængelighedmodus: Vælg destination først</string> 
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
-    <string name="downloading_file_new">Henter…</string>
+    <string name="downloading_file_new">Henter …</string>
 	<string name="plugin_distance_point_hdop">nøjagtighed</string>
     <string name="plugin_distance_point_speed">hastighed</string>
     <string name="plugin_distance_point">Punkt</string>
