@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="route_updated_loc_found">Roete sal herbereken word wanneer die ligging bepaal is</string>
   <string name="osmand_parking_hours">Ure</string>
   <string name="osmand_parking_minutes">Minute</string>
@@ -187,7 +187,7 @@
   <string name="tip_recent_changes_0_7_1_t">"Veranderinge in 0.7.1:\n t-aflyn interessante plek redigering\n t-Lewendige spoor-natrek opsie - stuur koördinate na web diens van tyd tot tyd (lees hoe om jou eie web op te stel in Howto Artikels)\n t-Wys opgeneemde spoor op die kaart\n t-rigting waarneming: \"Maak \'n U-draai\" word aangedui en aangekondig wanneer in die teenoorgestelde rigting beweeg word of na `n gemiste draai\n t-Nuwe-stem aankondiging \"Roete herbereken \'\n t-Sigbare aanduiding van \'n dreigende draai binne 100m deur rigting pyl wat kleur verander\n t-aktualiteit van gedeaktiveerde indeks lêers ook nou gewys op Aflaai skerm in donker groen en donker blou\n t-ander veranderinge "
 	</string>
   <string name="update_poi_does_not_change_indexes">Interessante plek veranderinge binne die toepassing raak nie afgelaaide kaart lêers nie, veranderinge word eerder in `n plaaslike lêer gestoor.</string>
-  <string name="local_openstreetmap_uploading">Besig om op te laai…</string>
+  <string name="local_openstreetmap_uploading">Besig om op te laai …</string>
   <string name="local_openstreetmap_were_uploaded">{0} interessante plek / Foute is opgelaai</string>
   <string name="local_openstreetmap_uploadall">Laai alles op</string>
   <string name="local_openstreetmap_items">" "</string>
@@ -267,7 +267,7 @@
   <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
   <string name="native_library_not_supported">Inheemse biblioteek word nie op hierdie toestel ondersteun nie.</string>
-  <string name="init_native_library">Besig om inheemse biblioteek gereed te maak…</string>
+  <string name="init_native_library">Besig om inheemse biblioteek gereed te maak …</string>
   <string name="choose_auto_follow_route">Outo-senter kaart uitsig</string>
   <string name="choose_auto_follow_route_descr">Tyd tot kaart sal ooreenkom met die huidige posisie</string>
   <string name="auto_follow_route_never">Nooit</string>
@@ -301,13 +301,13 @@
   <string name="local_index_mi_rename">Herbenoem</string>
   <string name="show_gpx_route">Wys op kaart</string>
   <string name="poi_filter_nominatim">Internet Nominatim</string>
-  <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>
+  <string name="search_position_current_location_search">Besig om posisie op te spoor …</string>
   <string name="search_position_current_location_found">Ligging (gevind)</string>
-  <string name="search_position_address">Adres…</string>
-  <string name="search_position_favorites">Gunstelinge…</string>
+  <string name="search_position_address">Adres …</string>
+  <string name="search_position_favorites">Gunstelinge …</string>
   <string name="search_position_undefined">ongedefinieerd</string>
   <string name="search_position_fixed">Vasgestel</string>
-  <string name="search_position_current_location">Huidige posisie…</string>
+  <string name="search_position_current_location">Huidige posisie …</string>
   <string name="search_position_map_view">Laaste kaart uitsig</string>
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
@@ -928,7 +928,7 @@
 <string name="rendering_attr_roadColors_description">Kies `n pad kleurskema:</string>
 	<string name="rendering_attr_roadColors_name">Pad kleurskema</string>
     <string name="map_widget_show_destination_arrow">Wys rigting na bestemming</string>
-    <string name="show_warnings_title">Toon alarms…</string>
+    <string name="show_warnings_title">Toon alarms …</string>
 	<string name="osmand_short_description_80_chars">OsmAnd is `n oopbron navigasie toepassing vir aflyn en aanlyn kaarte</string>
 	<string name="filterpoi_activity">Skep PVB filter</string>
 	<string name="select_navigation_mode">Kies vervoertipe</string>
@@ -940,7 +940,7 @@
 	<string name="show_lanes">Toon lane</string>
 	<string name="avoid_unpaved">Vermy ongeteerde paaie</string>
 	<string name="avoid_ferries">Vermy veerbote</string>
-	<string name="avoid_in_routing_title">Vermy…</string>
+	<string name="avoid_in_routing_title">Vermy …</string>
 	<string name="avoid_in_routing_descr">Vermy tolpaaie, grondpaaie, veerbote</string>
 	<string name="map_widget_fluorescent">Helder roetes</string>
 	<string name="map_widget_show_ruler">Liniaal</string>
@@ -978,7 +978,7 @@
     <string name="map_widget_intermediate_distance">Oorgangspunt</string>
     <string name="ending_point_too_far">Eindpunt te ver van naaste pad.</string>
     <string name="btn_add_tag">Voeg naamplaatjie by</string>
-    <string name="btn_advanced_mode">Gevorderde gebruikswyse…</string>
+    <string name="btn_advanced_mode">Gevorderde gebruikswyse …</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Noodgeval</string>
     <string name="poi_filter_public_transport">Publieke vervoer</string>
@@ -1003,12 +1003,13 @@
 	<string name="monitoring_mode_on">Stop↵\nGPX opname.</string>
 	<string name="tip_rotation_switching_t_v2">"→Jy kan stel hoe die kaart draai deur die kompasnaald links bo op die skerm te tik. ↵\n→Die keuses is: ↵\n→\'Moet nie draai nie (noord is bo)\' - Kaart sal nie draai nie. Noord sal altyd bo wees ↵\n→\'Koers\' - Kaart sal heeltyd gerig word in jou koers ↵\n→\'Kompas\' -Kaart sal heeltyd gerig word met die kompas lesing "</string>
 	<string name="tip_day_night_mode_t_v2">"\tDie kaart voorkoms kan vir sommige vektor kaarte verander word tussen dag (helder) en nag (dof).
-\n\tNag kleure is veiliger vir nagbestuur. \t\n\tJy kan `n beleid opstel vir dag/nag oorskakeling in \'Keuselys\' -&gt; \'Verstel skerm ...\' -&gt;\'Dag/nag kaart\'.
+\n\tNag kleure is veiliger vir nagbestuur. \t\n\tJy kan `n beleid opstel vir dag/nag oorskakeling in \'Keuselys\' -&gt; \'Verstel skerm\' -&gt;\'Dag/nag kaart\'.
 \n\tKeuses is:
 \n\t\'Sonopkoms/Sonondergang\' - outomaties, beheer deur die posisie van die son (verstek)
 \n\t\'Dag\' - altyd dag kleure
 \n\t\'Nag\' - altyd nag kleure
-\n\t\'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "</string>	
+\n\t\'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "
+	</string>	
 	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Definieër vertoon\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd ondersteun verskillende (verstelbare) toepassingsprofiele vir verskillende gebruiksgevalle.
 \n\tJy kan profiele verander deur die profiel knoppie in linker onder hoek van die kaart skerm (simbool kar, fiets, of voetganger), of tydens die bou van `n roete. "</string>
@@ -1019,7 +1020,7 @@
     <string name="item_unchecked">Ongemerk</string>
     <string name="map_view">Kaart</string>
     <string name="prefer_motorways">Verkies snelweë</string>
-	<string name="prefer_in_routing_title">Verkies…</string>
+	<string name="prefer_in_routing_title">Verkies …</string>
 	<string name="prefer_in_routing_descr">Verkies snelweë</string>
     <string name="tip_recent_changes_1_2_t">"Herstellings in 1.2.1:
 	\n\t*Herstel Geo Intent (Foursquare, c:geo)
@@ -1117,7 +1118,7 @@
     <string name="download_roads_only_maps">Paaie-uitsluitlik kaarte</string>
     
 	<string name="rendering_attr_noAdminboundaries_name">Versteek grense</string>
-	<string name="audionotes_location_not_defined">Ligging om met die nota te asosieer is nog nie gedefinieer nie. Gebruik liggin… om `n nota aan `n spesifieke ligging toe te ken</string>
+	<string name="audionotes_location_not_defined">Ligging om met die nota te asosieer is nog nie gedefinieer nie. Gebruik ligging … om `n nota aan `n spesifieke ligging toe te ken</string>
     <string name="audionotes_plugin_description">Neem oudio/video notas tydens die rit</string>
     <string name="srtm_plugin_name">Kontoerlyn inlasmodule</string>
     <string name="download_regular_maps">Algemene kaarte</string>
@@ -1202,7 +1203,7 @@ OsmAnd (OSM Automated Navigation Directions) is \\\'n kaart en navigasie toepass
     <string name="use_magnetic_sensor_descr">Gebruik die magnetiese sensor om die kompas waarde te bepaal in plaas van die oriëntasie sensor</string>
     <string name="use_magnetic_sensor">Gebruik magnetiese sensor</string>
     <string name="local_indexes_cat_srtm">Kontoer lyne inligting</string>
-    <string name="downloading_file_new">"Aflaai besig…"</string>
+    <string name="downloading_file_new">Aflaai besig …</string>
 	<string name="delete_point">Vee punt uit</string>
     <string name="plugin_distance_point_time">Tyd</string>
     <string name="plugin_distance_point_speed">spoed</string>
