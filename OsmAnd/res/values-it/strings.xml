@@ -1320,4 +1320,5 @@
 	<string name="av_camera_focus_continuous">La fotocamera prova a mettere a fuoco in continuazione</string>
 	<string name="av_photo_play_sound">Riproduci il suono allo scatto</string>
 	<string name="av_photo_play_sound_descr">Quando scatto una foto riproduci il suono</string>
-</resources>
+<string name="local_index_gpx_timespan">\nTempo trascorso: %1$d:%2$02d:%3$02d</string>
+	</resources>
