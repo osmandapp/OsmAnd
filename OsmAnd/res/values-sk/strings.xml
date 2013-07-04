@@ -1,4 +1,4 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <resources><string name="recording_context_menu_show">Zobraziť</string>
   <string name="recording_photo_description">Fotografia %1$s zachytená dňa %2$s</string>
   <string name="av_def_action_picture">Zachytiť fotografiu</string>
@@ -6,7 +6,7 @@
   <string name="enable_plugin_monitoring_services">Na použitie služieb pre záznam pozície zapnite monitorovacie zásuvné moduly (stopovanie, stopovanie naživo)</string>
   <string name="non_optimal_route_calculation">Vypočítať pravdepodobne neoptimálnu cestu s dlhšou vzdialenosťou</string>
   <string name="tip_recent_changes_0_8_4_t">Zmeny vo verzii 0.8.4 :
-  </string>
+    </string>
   <string name="tip_recent_changes_0_8_3_t">Zmeny vo verzii 0.8.3 :
   \n\t* Prechodné body
   \n\t* Vylepšené hlasové povely pri navigácii
@@ -14,7 +14,7 @@
   \n\t* Zobrazenie Cycleway=track
   \n\t* Vylepšený vzhľad rozhrania (ikony)
   \n\t* Opravy mnohých chýb
-  </string>
+	</string>
   <string name="context_menu_item_last_intermediate_point">Určiť ako posledný prechodný bod</string>
   <string name="context_menu_item_first_intermediate_point">Určiť ako prvý prechodný bod</string>
   <string name="add_as_last_destination_point">Pridať ako posledný prechodný bod</string>
@@ -1092,7 +1092,8 @@
 	<string name="safe_mode">Bezpečný režim</string>
     <string name="safe_mode_description">Spustenie aplikácie v bezpečnom režime (namiesto natívneho kódu sa použije pomalší kód pre Android).</string>
     <string name="background_service_is_enabled_question">Služba na pozadí je stále spustená. Chcete ju zrušiť?</string>
-    <string name="tip_recent_changes_1_0_0_t">"Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie "</string>
+    <string name="tip_recent_changes_1_0_0_t">Zmeny vo verzii 1.0.0 :\n\t* Vylepšená navigácia: rýchlejšia a precíznejšia, až do vzdialenosti 250 km\n\t* Zavedené mapy obsahujúce iba cestnú sieť\n\t* Umiestnenie na mape nie je po prerušeniach stratené\n\t* Zapnutie služby na pozadí počas navigácie
+    </string>
     <string name="native_library_not_running">Aplikácia je spustená v bezpečnom režime (vypnete ho v nastaveniach).</string>
     <string name="download_roads_only_maps">Iba mapy ciest</string>
     <string name="download_roads_only_item">Cesty</string>
@@ -1128,14 +1129,15 @@
     <string name="av_use_external_recorder_descr">Použiť systémový rekordér videa</string>
     <string name="av_use_external_recorder">Použiť externý rekordér</string>
     <string name="av_settings_descr">Konfigurácia nastavení zvuku a videa</string>
-    <string name="av_settings">"Nastavenia zvuku a videa "</string>
-    <string name="recording_error">"Vyskytla sa chyba pri nahrávaní "</string>
+    <string name="av_settings">Nastavenia zvuku a videa </string>
+    <string name="recording_error">Vyskytla sa chyba pri nahrávaní </string>
     <string name="recording_camera_not_available">Fotoaparát nie je k dispozícii</string>
     <string name="recording_is_recorded">Zvuk/video sa zaznamenáva. Záznam môžete zastaviť stlačením stop tlačidla na widgete.</string>
     <string name="recording_playing">Je prehrávaný zvuk zo zadaného záznamu.\n%1$s</string>
     <string name="recording_open_external_player">Otvoriť externý prehrávač</string>
     <string name="recording_delete_confirm">Chcete odstrániť tento záznam?</string>
-    <string name="tip_recent_changes_1_1_0_t">"Zmeny v 1.1.0:\n\t* Modul vzdialenostná kalkulačka\n\t* Modul zvukový záznam\n\t* Modul vrstevníc\n\t* Opravené chyby\n\t* \"Touristický náhľad\" ako štýl mapy s väčšími detailami, nový cestný štýl, viac kontrastu, a štýl Alpská turistika (SAC meradle)\n\t* EGM96 geoid korekcia nadmorskej výšky získanej z GPS "</string>
+    <string name="tip_recent_changes_1_1_0_t">Zmeny v 1.1.0:\n\t* Modul vzdialenostná kalkulačka\n\t* Modul zvukový záznam\n\t* Modul vrstevníc\n\t* Opravené chyby\n\t* \"Touristický náhľad\" ako štýl mapy s väčšími detailami, nový cestný štýl, viac kontrastu, a štýl Alpská turistika (SAC meradle)\n\t* EGM96 geoid korekcia nadmorskej výšky získanej z GPS
+    </string>
     <string name="recording_unavailable">nedostupné</string>
     <string name="recording_context_menu_arecord">Zaznamenať zvukovú poznámku</string>
     <string name="recording_context_menu_vrecord">Zaznamenať video poznámku</string>
@@ -1176,11 +1178,12 @@
     <string name="dist_control_start">Začiatok</string>
     <string name="precise_routing_mode">Precízna navigácia (vo vývoji)</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
-    <string name="tip_recent_changes_1_1_2_t">"Zmeny vo verzii 1.1.2:
+    <string name="tip_recent_changes_1_1_2_t">Zmeny vo verzii 1.1.2:
 \n\t* Vylepšenie zásuvného modulu pre Audio/video (fotografie s informáciami EXIF)
 \n\t* Opravená použiteľnosť a prepracovaný zásuvný modul pre vrstevnice
 \n\t* Balíky s tieňovanými rleiéfmi pre zás. modul s vrstevnicami
-\n\t* Opravy chýb (suboptimálna navigácia) "</string>
+\n\t* Opravy chýb (suboptimálna navigácia)
+    </string>
     <string name="av_use_external_camera_descr">Použiť systémovú aplikáciu na zachytenie fotografie</string>
     <string name="av_use_external_camera">Použiť aplikáciu Fotoaparát</string>
     <string name="download_hillshade_item">Tieňovaný reliéf</string>
@@ -1202,13 +1205,14 @@
     <string name="layer_hillshade">Vrstva s tieňovaným reliéfom</string>
     <string name="osmand_play_title_30_chars">OsmAnd mapy a navigácia</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ mapy a navigácia</string>
-	<string name="tip_recent_changes_1_1_4_t">"Zmeny vo verzii 1.1.4:
+	<string name="tip_recent_changes_1_1_4_t">Zmeny vo verzii 1.1.4:
 \n\t* Opravy chýb (doladená navigácia, hľadanie, audio/video záznam, hlasové povely, niekoľko vylepšení zobrazenia)
 \n\t* Jednoduchšia konfigurácia prekrývacej vrstvy s tieňovanými reliéfmi (vyžaduje zás. modul s vrstevnicami)
 \n\t* Prijímanie odkazov umiestnení z maps.google.com
 \n\t* Pridaná podpora viacerých okien pre najnovšie zariadenia Samsung
 \n\t* Kalmanov filter pre kompas
-\n\t* Podpora hodiniek Pebble "</string>
+\n\t* Podpora hodiniek Pebble
+    </string>
     <string name="save_current_track_widget">Uložiť
 \n aktuálnu stopu GPX</string>
 	<string name="street_name">Ulica</string>
@@ -1224,8 +1228,9 @@
     <string name="local_openstreetmap_act_title">OSM úpravy</string>
     <string name="default_buttons_other_actions">Ostatné akcie</string>
     <string name="download_using_mobile_internet">Momentálne nie ste pripojený cez WiFi. Chcete pokračovať so sťahovaním pomocou aktuálneho internetového pripojenia?</string>
-    <string name="tip_recent_changes_1_3_t">"Zmeny vo verzii 1.5:
-\n\t* Téma Holo (prispôsobenie témy) "</string>
+    <string name="tip_recent_changes_1_3_t">Zmeny vo verzii 1.5:
+\n\t* Téma Holo (prispôsobenie témy)
+    </string>
     <string name="cancel_route">Zrušiť cestu</string>
     <string name="cancel_navigation">Zastaviť navigáciu</string>
     <string name="clear_destination">Zmazať cieľ</string>
@@ -1253,15 +1258,35 @@
     <string name="please_select_address">Najskôr vyberte mesto alebo ulicu</string>
     <string name="local_osm_changes_backup_successful">Zmenový súbor pre OSM bol úspešne vygenerovaný %1$s</string>
     <string name="context_menu_item_destination_point">Určiť ako cieľ</string>
-    <string name="tip_recent_changes_1_4_t">"Zmeny vo verzii 1.4:
+    <string name="tip_recent_changes_1_4_t">Zmeny vo verzii 1.4:
 \n\t* Usporiadanie waypointov pre optimálne navštívenie všetkých (Obchdoný cestujúci, od dvier k dverám)
 \n\t* Vyhľadávanie ulíc podľa názvu (v susedstve)
 \n\t* Zásuvný modul Plánovací režim (načítanie/úprava/uloženie stôp GPX)
 \n\t* Nová sťahovacia obrazovka (sťahovanie na pozadí)
 \n\t* Podpora podpriečinkov pre GPX (organizujte vaše GPX stopy)
 \n\t* Odstránenie súborov SRTM
-\n\t* Podpora poznámok OSM "</string>
+\n\t* Podpora poznámok OSM 
+    </string>
     <string name="destination_point">Cieľ %1$s</string>
     <string name="intermediate_items_sort_return">Cesta bola zoptimalizovaná.</string>
     <string name="intermediate_items_sort_by_distance">Zoptimalizuj</string>
-    </resources>
+    <string name="local_index_gpx_timespan">\nČasové rozpätie: %1$d:%2$02d:%3$02d</string>
+	<string name="local_index_gpx_timemoving">\nČas pohybu: %1$d:%2$02d:%3$02d</string>
+	<string name="osmand_distance_planning_plugin_description">Vytvorenie cesty (alebo použite/upravite existujúce GPX súbory) pre meranie vzdialenosti medzi bodmi. Uložiť ako GPX, možno použiť pre plánovanie GPX trasy.</string>
+    <string name="osmand_distance_planning_plugin_name">Kalkulačka vzdialenosti a plánovač cesty</string>
+    <string name="use_distance_measurement_help">* Kliknutím označiť miesto.\n
+    * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.\n
+    * Stlačte a podržte na bode pre zobrazenie alebo pridanie popisu.\n
+    * Kliknite na iconu merania pre ďaľšie možnosti.</string>
+    <string name="default_buttons_do_not_show_again">Znovu nezobrazovať</string>
+    <string name="distance_measurement_start_editing">Začni úpravy</string>
+    <string name="distance_measurement_finish_editing">Ukonči úpravy</string>
+    <string name="distance_measurement_finish_subtrack">Začnite novú podtrasu</string>
+    <string name="distance_measurement_clear_route">Vymazať všetky body</string>
+    <string name="distance_measurement_save_gpx">Uložiť ako GPX</string>
+    <string name="distance_measurement_load_gpx">Otvoriť existujúci GPX</string>
+    <string name="osmand_monitoring_plugin_description">Povoliť sledovanie a navigáciu na pozadí (obrazovka vypnutá) cez periodické používanie GPS zariadenia.
+    Zobraziť nastavenia pre sledovanie vašej cesty do GPX súboru alebo pomocou on-line webovej služby.</string>
+    <string name="local_indexes_cat_srtm">Dáta s vrstevnicami</string>
+    <string name="downloading_file_new">Sťahovanie…</string>
+	</resources>
