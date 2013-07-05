@@ -1,15 +1,5 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<resources>
-    <!--
-    	 Disclaimer: 
-         If you are going to translate strings, please make sure: 
-         1. There is no duplicate strings by name
-         2. Every apostrophe (quote) is preceded by a backslash (see others).
-         If you are making/correcting English translations make sure:
-         3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
-    PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
-    -->
-	<string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
+<?xml version='1.0' encoding='utf-8'?>
+<resources><string name="local_index_gpx_timespan">\nTime span: %1$d:%2$02d:%3$02d</string>
 	<string name="local_index_gpx_timemoving">\nTime moving: %1$d:%2$02d:%3$02d</string>
 	<string name="app_mode_default">Browse map</string>
 	<string name="settings_preset">Default profile</string>
