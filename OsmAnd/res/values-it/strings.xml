@@ -1313,9 +1313,9 @@
 	<string name="av_camera_focus">Tipo di messa a fuoco</string>
 	<string name="av_camera_focus_descr">Scegli il tipo di messa fuoco della fotocamera integrata</string>
 	<string name="av_camera_focus_auto">Fuoco automatico</string>
-	<string name="av_camera_focus_hiperfocal">Fuoco all'iperfocale</string>
+	<string name="av_camera_focus_hiperfocal">Fuoco all\'iperfocale</string>
 	<string name="av_camera_focus_edof">Profondità di campo estesa (EDOF)</string>
-	<string name="av_camera_focus_infinity">Fuoco impostato all'infinito</string>
+	<string name="av_camera_focus_infinity">Fuoco impostato all\'infinito</string>
 	<string name="av_camera_focus_macro">Modalità di fuoco macro (particolare)</string>
 	<string name="av_camera_focus_continuous">La fotocamera prova a mettere a fuoco in continuazione</string>
 	<string name="av_photo_play_sound">Riproduci il suono allo scatto</string>
