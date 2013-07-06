@@ -135,7 +135,7 @@ public class PoiFiltersHelper {
 			putValues(types, AmenityType.TRANSPORTATION, "fuel");
 		} else if (UDF_FOOD_SHOP.equals(key)) {
 			putValues(types, AmenityType.SHOP, "alcohol", "bakery", "beverages", "butcher", "convenience", "department_store",
-					"convenience", "farm", "general", "ice_cream", "kiosk", "supermarket", "variety_store");
+					"convenience", "farm", "general", "ice_cream", "kiosk", "seafood", "supermarket", "variety_store");
 		} else if (UDF_SIGHTSEEING.equals(key)) {
 			putAll(types, AmenityType.HISTORIC);
 			putValues(types, AmenityType.TOURISM, "attraction",
