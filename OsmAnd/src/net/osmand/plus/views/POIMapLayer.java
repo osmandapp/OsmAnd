@@ -181,11 +181,11 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				canvas.drawCircle(x, y, r, pointAltUI);
 				canvas.drawCircle(x, y, r, point);
 				String id = null;
-				if(RenderingIcons.containsIcon(o.getSubType())){
-					id = o.getSubType();
-				} else if (RenderingIcons.containsIcon(o.getType().getDefaultTag() + "_" + o.getSubType())) {
+				if (RenderingIcons.containsIcon(o.getType().getDefaultTag() + "_" + o.getSubType())) {
 					id = o.getType().getDefaultTag() + "_" + o.getSubType();
-				}
+				} else if(RenderingIcons.containsIcon(o.getSubType())){
+					id = o.getSubType();
+				} 
 				if(id != null){
 					Bitmap bmp = RenderingIcons.getIcon(view.getContext(), id);
 					if(bmp != null){

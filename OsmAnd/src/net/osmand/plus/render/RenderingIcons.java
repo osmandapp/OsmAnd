@@ -84,7 +84,7 @@ public class RenderingIcons {
 		for (Field f : cl.getDeclaredFields()) {
 			if (f.getName().startsWith("h_") || f.getName().startsWith("mm_")) {
 				try {
-					icons.put(f.getName().substring(2), f.getInt(null));
+					icons.put(f.getName().substring(f.getName().startsWith("mm_")? 3 : 2), f.getInt(null));
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
