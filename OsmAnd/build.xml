@@ -24,9 +24,9 @@
 				<include name="voice/**"/>
 			</fileset>
 		</copy>
-		<copy todir="res/drawable-mdpi">
-			<fileset dir="../../resources/rendering_styles/icons-mdpi/" >
-				<include name="*"/>
+		<copy todir="res/">
+			<fileset dir="../../resources/rendering_styles/style-icons/"  >
+				<include name="**/*"/>
 			</fileset>
 		</copy>
 		<copy todir="${use.absolute.dir}/net/osmand/router/">
