@@ -82,7 +82,7 @@ public class RenderingIcons {
 	public static void initIcons() {
 		Class<? extends drawable> cl = R.drawable.class;
 		for (Field f : cl.getDeclaredFields()) {
-			if (f.getName().startsWith("h_") || f.getName().startsWith("g_")) {
+			if (f.getName().startsWith("h_") || f.getName().startsWith("mm_")) {
 				try {
 					icons.put(f.getName().substring(2), f.getInt(null));
 				} catch (IllegalArgumentException e) {
