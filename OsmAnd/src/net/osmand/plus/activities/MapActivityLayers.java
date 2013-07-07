@@ -547,6 +547,8 @@ public class MapActivityLayers {
 				Item it = adapter.item(f.getName());
 				if(RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
 					it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
+				} else {
+					it.icon(RenderingIcons.getBigIconResourceId("user_defined"));
 				}
 				it.reg();
 				userDefined.add(f);
