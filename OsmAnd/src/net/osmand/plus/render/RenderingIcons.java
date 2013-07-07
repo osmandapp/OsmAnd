@@ -62,6 +62,14 @@ public class RenderingIcons {
 		}
 	}
 	
+	public static int getBigIconResourceId(String s) {
+		Integer i = bigIcons.get(s);
+		if (i == null) {
+			return 0;
+		}
+		return i;
+	}
+	
 	public static Drawable getBigIcon(Context ctx, String s) {
 		Integer resId = bigIcons.get(s);
 		if (resId != null) {
