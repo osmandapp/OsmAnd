@@ -876,8 +876,8 @@
 	<string name="error_calculating_route">計算路線時錯誤</string>
 	<string name="error_calculating_route_occured">計算路線時發生錯誤</string>
 	<string name="empty_route_calculated">錯誤：計算路線是空的</string>					
-	<string name="new_route_calculated_dist">新路線計算，距離</string>
-	<string name="arrived_at_destination">您已到達目的地</string>
+	<string name="new_route_calculated_dist">重新計算路程，距離有</string>
+	<string name="arrived_at_destination">您已經抵達目的地</string>
 	<string name="invalid_locations">座標無效！</string>
 	<string name="go_back_to_osmand">返回 OsmAnd 地圖</string>
 	<string name="close">關閉</string>
