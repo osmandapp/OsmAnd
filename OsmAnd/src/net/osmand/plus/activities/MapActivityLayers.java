@@ -19,6 +19,7 @@ import net.osmand.data.AmenityType;
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuAdapter.Item;
 import net.osmand.plus.ContextMenuAdapter.OnContextMenuClick;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -34,6 +35,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.render.MapVectorLayer;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.FavoritesLayer;
@@ -530,21 +532,43 @@ public class MapActivityLayers {
 	
 	private void selectPOIFilterLayer(final OsmandMapTileView mapView){
 		final List<PoiFilter> userDefined = new ArrayList<PoiFilter>();
-		List<String> list = new ArrayList<String>();
-		list.add(getString(R.string.any_poi));
+		OsmandApplication app = (OsmandApplication)getApplication();
+		final PoiFiltersHelper poiFilters = app.getPoiFilters();
+		final ContextMenuAdapter adapter = new ContextMenuAdapter(activity);
 		
-		final PoiFiltersHelper poiFilters = ((OsmandApplication)getApplication()).getPoiFilters();
+		Item is = adapter.item(getString(R.string.any_poi));
+		if(RenderingIcons.containsBigIcon("null")) {
+			is.icon(RenderingIcons.getBigIconResourceId("null"));
+		}
+		is.reg();
+		
 		for (PoiFilter f : poiFilters.getUserDefinedPoiFilters()) {
 			if(!f.getFilterId().equals(PoiFilter.BY_NAME_FILTER_ID)){
+				Item it = adapter.item(f.getName());
+				if(RenderingIcons.containsBigIcon(f.getSimplifiedId())) {
+					it.icon(RenderingIcons.getBigIconResourceId(f.getSimplifiedId()));
+				}
+				it.reg();
 				userDefined.add(f);
-				list.add(f.getName());
 			}
 		}
 		for(AmenityType t : AmenityType.values()){
-			list.add(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
+			Item it = adapter.item(OsmAndFormatter.toPublicString(t, activity.getMyApplication()));
+			if(RenderingIcons.containsBigIcon(t.toString().toLowerCase())) {
+				it.icon(RenderingIcons.getBigIconResourceId(t.toString().toLowerCase()));
+			}
+			it.reg();
 		}
 		Builder builder = new AlertDialog.Builder(activity);
-		builder.setItems(list.toArray(new String[list.size()]), new DialogInterface.OnClickListener(){
+		ListAdapter listAdapter ;
+		if(Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB){
+			listAdapter =
+				adapter.createListAdapter(activity, R.layout.list_menu_item, app.getSettings().isLightContentMenu());
+		} else {
+			listAdapter =
+				adapter.createListAdapter(activity, R.layout.list_menu_item_native, app.getSettings().isLightContentMenu());
+		}
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener(){
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
