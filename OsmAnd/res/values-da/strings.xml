@@ -6,7 +6,7 @@
     <string name="av_widget_action">Standard modulhandling</string>
     <string name="av_video_format_descr">Vælg videoformat</string>
     <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
-    <string name="av_use_external_recorder">Brug ekstern optager</string>
+    <string name="av_use_external_recorder">Indbygget optager</string>
     <string name="av_settings_descr">Konfigurer audio- og videoindstillinger</string>
     <string name="av_settings">Indstillinger for audio og video </string>
     <string name="recording_error">Fejl opstod under optagelse </string>
@@ -975,7 +975,7 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="tip_map_switch">Kortkilde</string>
 	<string name="tip_app_mode">Brugerprofil</string>
 	<string name="tip_navigation">Navigation</string>
-	<string name="tip_search">Søger</string>
+	<string name="tip_search">Søgning</string>
 	<string name="tip_map_context_menu">Genvejsmenu for kort</string>
 	<string name="tip_initial">Tips og tricks</string>
 	<string name="next_button">Næste</string>
@@ -1539,5 +1539,5 @@ Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, 
 	<string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
 	<string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
 	<string name="av_photo_play_sound_descr">Spil lyd når foto tages</string>
-<string name="av_photo_play_sound">Afspil lyd ved foto</string>
+<string name="av_photo_play_sound">Kameralyd</string>
 	</resources>
