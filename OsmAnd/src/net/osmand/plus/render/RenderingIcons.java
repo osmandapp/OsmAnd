@@ -43,13 +43,6 @@ public class RenderingIcons {
 			return null;
 			
 		try {
-//			Bitmap ic = getIcon(ctx, s);
-//			if(ic == null) {
-//				return null;
-//			}
-//			ByteBuffer buf = ByteBuffer.allocate(ic.getByteCount());
-//			ic.copyPixelsToBuffer(buf);
-//			return buf.array();
 			final InputStream inputStream = ctx.getResources().openRawResource(resId.intValue());
 			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
             final byte[] ioBuffer = new byte[1024];
@@ -60,10 +53,10 @@ public class RenderingIcons {
 			inputStream.close();
 			final byte[] bitmapData = proxyOutputStream.toByteArray();
 			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
-			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
-			if(dm != null){
-				System.out.println("IC " + s +" " + dm.getHeight() + "x" + dm.getWidth());
-			}
+//			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
+//			if(dm != null){
+//				System.out.println("IC " + s +" " + dm.getHeight() + "x" + dm.getWidth());
+//			}
 			//if(android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) == null)
 			//	throw new Exception();
             return bitmapData;
