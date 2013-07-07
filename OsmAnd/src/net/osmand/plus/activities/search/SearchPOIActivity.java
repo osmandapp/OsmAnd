@@ -36,6 +36,7 @@ import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.activities.OsmandListActivity;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 import net.osmand.util.OpeningHoursParser.OpeningHours;
@@ -765,6 +766,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			}
 			float[] mes = null;
 			TextView label = (TextView) row.findViewById(R.id.poi_label);
+			ImageView direction = (ImageView) row.findViewById(R.id.poi_direction);
 			ImageView icon = (ImageView) row.findViewById(R.id.poi_icon);
 			Amenity amenity = getItem(position);
 			net.osmand.Location loc = location;
@@ -794,15 +796,21 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 				float a = h != null ? h : 0;
 				draw.setAngle(mes[1] - a + 180);
 				draw.setOpenedColor(opened);
-				icon.setImageDrawable(draw);
+				direction.setImageDrawable(draw);
 			} else {
 				if(opened == -1){
-					icon.setImageResource(R.drawable.poi);
+					direction.setImageResource(R.drawable.poi);
 				} else if(opened == 0){
-					icon.setImageResource(R.drawable.opened_poi);
+					direction.setImageResource(R.drawable.opened_poi);
 				} else {
-					icon.setImageResource(R.drawable.closed_poi);
+					direction.setImageResource(R.drawable.closed_poi);
 				}
+			}
+			String i = amenity.getType().getDefaultTag().toLowerCase() + "_" + amenity.getSubType().toLowerCase();
+			if(RenderingIcons.containsBigIcon(i)) {
+				icon.setImageResource(RenderingIcons.getBigIconResourceId(i));
+			} else {
+				icon.setImageDrawable(null);
 			}
 
 			String distance = "  ";
