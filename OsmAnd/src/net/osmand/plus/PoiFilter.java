@@ -298,6 +298,14 @@ public class PoiFilter {
 		return filterId;
 	}
 	
+	public String getSimplifiedId(){
+		if(filterId.startsWith(STD_PREFIX)) {
+			return filterId.substring(STD_PREFIX.length());
+		} else {
+			return filterId.substring(USER_PREFIX.length());
+		}
+	}
+	
 	
 	public String getFilterByName() {
 		return filterByName;

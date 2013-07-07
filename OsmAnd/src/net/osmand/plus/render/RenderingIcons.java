@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
@@ -21,11 +22,16 @@ public class RenderingIcons {
 	private static final Log log = PlatformUtil.getLog(RenderingIcons.class);
 	
 	private static Map<String, Integer> icons = new LinkedHashMap<String, Integer>();
+	private static Map<String, Integer> bigIcons = new LinkedHashMap<String, Integer>();
 	private static Map<String, Bitmap> iconsBmp = new LinkedHashMap<String, Bitmap>();
 	private static DisplayMetrics dm;
 	
 	public static boolean containsIcon(String s){
 		return icons.containsKey(s);
+	}
+	
+	public static boolean containsBigIcon(String s){
+		return bigIcons.containsKey(s);
 	}
 	
 	public static byte[] getIconRawData(Context ctx, String s) {
@@ -56,11 +62,19 @@ public class RenderingIcons {
 		}
 	}
 	
-	public static Bitmap getIcon(Context ctx, String s){
-		if(!iconsBmp.containsKey(s)){
+	public static Drawable getBigIcon(Context ctx, String s) {
+		Integer resId = bigIcons.get(s);
+		if (resId != null) {
+			return ctx.getResources().getDrawable(resId);
+		}
+		return null;
+	}
+	
+	public static Bitmap getIcon(Context ctx, String s) {
+		if (!iconsBmp.containsKey(s)) {
 			Integer resId = icons.get(s);
-			if(resId != null){
-				if(dm == null) {
+			if (resId != null) {
+				if (dm == null) {
 					dm = new DisplayMetrics();
 					WindowManager wmgr = (WindowManager) ctx.getSystemService(Context.WINDOW_SERVICE);
 					wmgr.getDefaultDisplay().getMetrics(dm);
@@ -85,6 +99,15 @@ public class RenderingIcons {
 			if (f.getName().startsWith("h_") || f.getName().startsWith("mm_")) {
 				try {
 					icons.put(f.getName().substring(f.getName().startsWith("mm_")? 3 : 2), f.getInt(null));
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+			if (f.getName().startsWith("mx_") ) {
+				try {
+					bigIcons.put(f.getName().substring(3), f.getInt(null));
 				} catch (IllegalArgumentException e) {
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {

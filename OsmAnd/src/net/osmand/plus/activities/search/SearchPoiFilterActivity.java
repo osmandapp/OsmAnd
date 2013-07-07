@@ -16,6 +16,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SearchByNameFilter;
 import net.osmand.plus.activities.EditPOIFilterActivity;
 import net.osmand.plus.activities.search.SearchActivity.SearchActivityChild;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.resources.ResourceManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -153,7 +154,11 @@ public class SearchPoiFilterActivity extends SherlockListFragment  implements Se
 				icon.setImageResource(android.R.drawable.ic_search_category_default);
 			} else {
 //				label.setTypeface(Typeface.DEFAULT);
-				icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.list_favorite);
+				if(RenderingIcons.containsBigIcon(model.getSimplifiedId())) {
+					icon.setImageDrawable(RenderingIcons.getBigIcon(getActivity(), model.getSimplifiedId()));
+				} else {
+					icon.setImageResource(model.isStandardFilter() ? R.drawable.folder : R.drawable.list_favorite);
+				}
 			}
 			ImageView editIcon = (ImageView) row.findViewById(R.id.folder_edit_icon);
 			if (model.isStandardFilter()) {
