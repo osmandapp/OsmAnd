@@ -1,7 +1,8 @@
 package net.osmand.plus.render;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.lang.reflect.Field;
-import java.nio.ByteBuffer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -42,30 +43,30 @@ public class RenderingIcons {
 			return null;
 			
 		try {
-			Bitmap ic = getIcon(ctx, s);
-			if(ic == null) {
-				return null;
+//			Bitmap ic = getIcon(ctx, s);
+//			if(ic == null) {
+//				return null;
+//			}
+//			ByteBuffer buf = ByteBuffer.allocate(ic.getByteCount());
+//			ic.copyPixelsToBuffer(buf);
+//			return buf.array();
+			final InputStream inputStream = ctx.getResources().openRawResource(resId.intValue());
+			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
+            final byte[] ioBuffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
+				proxyOutputStream.write(ioBuffer, 0, bytesRead);
 			}
-			ByteBuffer buf = ByteBuffer.allocate(ic.getByteCount());
-			ic.copyPixelsToBuffer(buf);
-			return buf.array();
-//			final InputStream inputStream = ctx.getResources().openRawResource(resId.intValue());
-//			final ByteArrayOutputStream proxyOutputStream = new ByteArrayOutputStream(1024);
-//            final byte[] ioBuffer = new byte[1024];
-//            int bytesRead;
-//            while ((bytesRead = inputStream.read(ioBuffer)) >= 0) {
-//				proxyOutputStream.write(ioBuffer, 0, bytesRead);
-//			}
-//			inputStream.close();
-//			final byte[] bitmapData = proxyOutputStream.toByteArray();
-//			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
-//			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
-//			if(dm != null){
-//				System.out.println("IC " + dm.getHeight() + " " + dm.getWidth());
-//			}
-//			//if(android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) == null)
-//			//	throw new Exception();
-//            return bitmapData;
+			inputStream.close();
+			final byte[] bitmapData = proxyOutputStream.toByteArray();
+			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
+			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
+			if(dm != null){
+				System.out.println("IC " + dm.getHeight() + " " + dm.getWidth());
+			}
+			//if(android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) == null)
+			//	throw new Exception();
+            return bitmapData;
 		} catch(Throwable e) {
 			log.error("Failed to get byte stream from icon", e); //$NON-NLS-1$
 			return null;
