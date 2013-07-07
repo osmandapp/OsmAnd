@@ -62,7 +62,7 @@ public class RenderingIcons {
 			log.info("Icon data length is " + bitmapData.length); //$NON-NLS-1$
 			Bitmap dm = android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) ;
 			if(dm != null){
-				System.out.println("IC " + dm.getHeight() + " " + dm.getWidth());
+				System.out.println("IC " + s +" " + dm.getHeight() + "x" + dm.getWidth());
 			}
 			//if(android.graphics.BitmapFactory.decodeByteArray(bitmapData, 0, bitmapData.length) == null)
 			//	throw new Exception();
