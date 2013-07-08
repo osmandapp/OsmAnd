@@ -252,7 +252,7 @@
 \n\t\'Met rigting van beweging\'- Kaart sal deurlopend gerig word in jou bewegingsrigting
 \n\t\'Met kompas\' - Kaart sal deurlopend gerig word met toestel kompas lesing
 \n\tWenk: Om vinnig tussen rotasie deur kompas en die een wat jy gekies het in instellings te verander, kan jy net tik op die kompas naald in die kaart vertoon."</string>
-  <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Stellings\' -&gt; \'uitleg\' -&gt; \'aflyn vektor kaarte.</string>
+  <string name="binary_map_download_success">Aflaai suksesvol.\n\t\n\tOm te gebruik aktiveer \'Keuselys\' -&gt; \'Definieer uitsig\'-&gt; \'Kaart bron\' -&gt; \'aflyn vektor kaarte.</string>
   <string name="tip_day_night_mode">Dag/nag gebruikswyse</string>
   <string name="tip_day_night_mode_t">"\tdie kaart voorkoms kan vir \'n paar vektor kaarte verander word tussen die dag (helder) en nag (donker).\n\tNag kleure is veiliger vir nag bestuur.\n\tJy kan \'n beleid vir die dag / nag opstel in \'Stellings\' -&gt; \'Kaart voorkoms\'-&gt; \'Dag / nag gebruikswyse\'.\n\tKeuses is:\n\t\'Sonsopkoms / Sonsondergang\' - outomatiese gebruikswyse, beheer deur posisie van die son (verstek)\n\t\'Day\' - gebruik altyd dag gebruikswyse\n\t\'Night\' - gebruik altyd nag gebruikswyse\n\t\'Lig sensor\' - kaart voorkoms word beheer deur lig sensor van jou toestel (slegs indien toegerus)\n"</string>
   <string name="tip_osm_improve">Verbetering van OSM inligting</string>
@@ -267,7 +267,7 @@
   <string name="use_transparent_map_theme_descr">Gebruik deursigtige kaart beheer</string>
   <string name="use_transparent_map_theme">Deursigtige tema</string>
   <string name="native_library_not_supported">Inheemse biblioteek word nie op hierdie toestel ondersteun nie.</string>
-  <string name="init_native_library">Besig om inheemse biblioteek gereed te maak …</string>
+  <string name="init_native_library">Besig om inheemse biblioteek gereed te maak…</string>
   <string name="choose_auto_follow_route">Outo-senter kaart uitsig</string>
   <string name="choose_auto_follow_route_descr">Tyd tot kaart sal ooreenkom met die huidige posisie</string>
   <string name="auto_follow_route_never">Nooit</string>
@@ -301,13 +301,13 @@
   <string name="local_index_mi_rename">Herbenoem</string>
   <string name="show_gpx_route">Wys op kaart</string>
   <string name="poi_filter_nominatim">Internet Nominatim</string>
-  <string name="search_position_current_location_search">Besig om posisie op te spoor …</string>
+  <string name="search_position_current_location_search">Besig om posisie op te spoor…</string>
   <string name="search_position_current_location_found">Ligging (gevind)</string>
-  <string name="search_position_address">Adres …</string>
-  <string name="search_position_favorites">Gunstelinge …</string>
+  <string name="search_position_address">Adres…</string>
+  <string name="search_position_favorites">Gunstelinge…</string>
   <string name="search_position_undefined">ongedefinieerd</string>
   <string name="search_position_fixed">Vasgestel</string>
-  <string name="search_position_current_location">Huidige posisie …</string>
+  <string name="search_position_current_location">Huidige posisie…</string>
   <string name="search_position_map_view">Laaste kaart uitsig</string>
   <string name="select_search_position">Soek naby:</string>
   <string name="context_menu_item_search">Soek hier naby</string>
@@ -381,7 +381,7 @@
   <string name="gpx_option_reverse_route">Keer GPX rigting om</string>
   <string name="gpx_option_destination_point">Gebruik die huidige bestemming</string>
   <string name="gpx_option_from_start_point">Ry oor die hele spoor</string>
-  <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Definieer voorkoms\' -&gt; \'Kaartbron ...\' -&gt; \'Aflyn vektor kaarte\'.</string>
+  <string name="switch_to_vector_map_to_see">Aflyn vektor kaart is teenwoordig vir hierdie ligging.\n\t\n\tOm te gebruik aktiveer \'Kieslys\' -&gt; \'Definieer voorkoms\' -&gt; \'Kaartbron...\' -&gt; \'Aflyn vektor kaarte\'.</string>
   <string name="choose_audio_stream">Stem begeleiding uitset</string>
   <string name="choose_audio_stream_descr">Kies kanaal om stem begeleiding oor te speel (stelsel afhanklik)</string>
   <string name="voice_stream_voice_call">Stem oproep klank</string>
@@ -477,7 +477,7 @@
   <string name="indexing_address">Besig om `n adres indeks te skep…</string>
   <string name="indexing_map">Besig om `n kaartindeks te skep…</string>
   <string name="indexing_poi">Besig om `n interessante plek indeks te skep…</string>
-  <string name="indexing_transport">Skep vervoer indeks …</string>
+  <string name="indexing_transport">Skep vervoer indeks…</string>
   <string name="input_output_error">I/O fout het voorgekom</string>
   <string name="km">km</string>
   <string name="km_h">km/h</string>
@@ -928,7 +928,7 @@
 <string name="rendering_attr_roadColors_description">Kies `n pad kleurskema:</string>
 	<string name="rendering_attr_roadColors_name">Pad kleurskema</string>
     <string name="map_widget_show_destination_arrow">Wys rigting na bestemming</string>
-    <string name="show_warnings_title">Toon alarms …</string>
+    <string name="show_warnings_title">Wys alarms…</string>
 	<string name="osmand_short_description_80_chars">OsmAnd is `n oopbron navigasie toepassing vir aflyn en aanlyn kaarte</string>
 	<string name="filterpoi_activity">Skep PVB filter</string>
 	<string name="select_navigation_mode">Kies vervoertipe</string>
@@ -940,7 +940,7 @@
 	<string name="show_lanes">Toon lane</string>
 	<string name="avoid_unpaved">Vermy ongeteerde paaie</string>
 	<string name="avoid_ferries">Vermy veerbote</string>
-	<string name="avoid_in_routing_title">Vermy …</string>
+	<string name="avoid_in_routing_title">Vermy…</string>
 	<string name="avoid_in_routing_descr">Vermy tolpaaie, grondpaaie, veerbote</string>
 	<string name="map_widget_fluorescent">Helder roetes</string>
 	<string name="map_widget_show_ruler">Liniaal</string>
@@ -978,7 +978,7 @@
     <string name="map_widget_intermediate_distance">Oorgangspunt</string>
     <string name="ending_point_too_far">Eindpunt te ver van naaste pad.</string>
     <string name="btn_add_tag">Voeg naamplaatjie by</string>
-    <string name="btn_advanced_mode">Gevorderde gebruikswyse …</string>
+    <string name="btn_advanced_mode">Gevorderde gebruikswyse…</string>
     <string name="poi_filter_parking">Parkering</string>
     <string name="poi_filter_emergency">Noodgeval</string>
     <string name="poi_filter_public_transport">Publieke vervoer</string>
@@ -1010,7 +1010,8 @@
 \n\t\'Nag\' - altyd nag kleure
 \n\t\'Ligsensor\' - Beheer deur toestel se ligsensor (indien beskikbaar) "
 	</string>	
-	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Definieër vertoon\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "</string>
+	<string name="tip_map_switch_t_v2">"→Die kaart bron en lae vertoon word verander in \'Keuselys\' -&gt; \'Definieër voorkoms\' in kaart vertoon. ↵\n→Onder \'Kaart bron…\' kan jy kies tussen die gebruik van voorafgelaaide aflyn vektor kaarte, voorafgedefinieërde (aanlyn) teël bronne (aktiveer die \'aanlyn en teël kaarte\' inlasmodule hiervoor), of kaarte met die hand geskep met bv. OsmAndMapCreator op `n rekenaar. ↵\n→OsmAnd ondersteun ook persoonlike bronne. "
+	</string>
 	<string name="tip_app_mode_t_v2">"\tOsmAnd ondersteun verskillende (verstelbare) toepassingsprofiele vir verskillende gebruiksgevalle.
 \n\tJy kan profiele verander deur die profiel knoppie in linker onder hoek van die kaart skerm (simbool kar, fiets, of voetganger), of tydens die bou van `n roete. "</string>
 	<string name="email">e-pos</string>
@@ -1020,7 +1021,7 @@
     <string name="item_unchecked">Ongemerk</string>
     <string name="map_view">Kaart</string>
     <string name="prefer_motorways">Verkies snelweë</string>
-	<string name="prefer_in_routing_title">Verkies …</string>
+	<string name="prefer_in_routing_title">Verkies…</string>
 	<string name="prefer_in_routing_descr">Verkies snelweë</string>
     <string name="tip_recent_changes_1_2_t">"Herstellings in 1.2.1:
 	\n\t*Herstel Geo Intent (Foursquare, c:geo)
